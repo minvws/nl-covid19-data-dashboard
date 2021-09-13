@@ -23,3 +23,7 @@ timestamp,action,key,document_id,move_to
 2021-09-10T11:27:45.710Z,delete,vaccinaties.vaccination_coverage.partially,jF33EuwumlGuwav2FD46JQ,__
 2021-09-10T12:10:30.121Z,add,vaccinaties.vaccination_coverage.headers.first_shot,TfQKtohu9HBbEmilvF8j6l,__
 2021-09-10T12:10:30.123Z,delete,vaccinaties.vaccination_coverage.headers.progress,jF33EuwumlGuwav2FD46B2,__
+2021-09-13T13:04:44.360Z,add,vaccinaties.table_labels.vaccination_coverage,qjZwg5QUJcN8JoCoyJ0qPY,__
+2021-09-13T13:04:45.379Z,add,vaccinaties.table_labels.first_shot,iLvivnjMZ7igG7VqAxlp3e,__
+2021-09-13T13:13:43.548Z,delete,vaccinaties.table_labels.first_shot,iLvivnjMZ7igG7VqAxlp3e,__
+2021-09-13T13:13:43.549Z,delete,vaccinaties.table_labels.vaccination_coverage,qjZwg5QUJcN8JoCoyJ0qPY,__

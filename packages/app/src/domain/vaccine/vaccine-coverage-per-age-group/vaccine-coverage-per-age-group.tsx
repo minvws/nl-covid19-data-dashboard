@@ -2,27 +2,17 @@ import {
   assert,
   NlVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { Fragment } from 'react';
-import { Box } from '~/components/base';
-import { InlineTooltip } from '~/components/inline-tooltip';
-import { InlineText } from '~/components/typography';
-import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { CoverageProgressBar } from './coverage-progress-bar';
-import { CoverageRow, HeaderRow } from './coverage-row';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import css from '@styled-system/css';
-import { formatAgeGroupString } from './logic/format-age-group-string';
-import { formatBirthyearRangeString } from './logic/format-birthyear-range-string';
-import { PercentageBar } from '~/components/percentage-bar';
 import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
 import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
-import styled from 'styled-components';
 import { ChartTile } from '~/components/chart-tile';
-
-type Props = {
+import { MetadataProps } from '~/components/metadata';
+interface VaccineCoveragePerAgeGroupProps {
+  title: string;
+  description: string;
+  metadata: MetadataProps;
   values: NlVaccineCoveragePerAgeGroupValue[];
-};
+}
 
 const SORTING_ORDER = [
   '81+',
@@ -43,19 +33,20 @@ function getSortingOrder(ageGroup: string) {
   return index;
 }
 
-export function VaccineCoveragePerAgeGroup(props: Props) {
-  const { values } = props;
+export function VaccineCoveragePerAgeGroup({
+  title,
+  description,
+  metadata,
+  values,
+}: VaccineCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
-  console.log(values);
-
-  const { siteText, formatPercentage, formatNumber } = useIntl();
 
   const sortedValues = values.sort(
     (a, b) =>
       getSortingOrder(a.age_group_range) - getSortingOrder(b.age_group_range)
   );
   return (
-    <ChartTile title={'title'} description={'description'}>
+    <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.md ? (
         <WideCoverageTable values={sortedValues} />
       ) : (

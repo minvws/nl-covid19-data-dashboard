@@ -9,27 +9,32 @@ import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from '../common';
 import { asResponsiveArray } from '~/style/utils';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-
+import { PercentageBar } from '~/components/percentage-bar';
+import { Spacer } from '~/components/base';
 interface NarrowCoverageRow {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 
 export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
   const { siteText, formatNumber } = useIntl();
-  const { headers } = siteText.vaccinaties.vaccination_coverage;
+  const text = siteText.vaccinaties.vaccination_coverage;
   const { templates, age_group_tooltips } =
     siteText.vaccinaties.vaccination_coverage;
 
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="silver" pb={2}>
-        <InlineText fontWeight="bold">{headers.agegroup}</InlineText>
+        <InlineText fontWeight="bold" variant="label1">
+          {text.headers.agegroup}
+        </InlineText>
       </Box>
+
       {values.map((item, index) => (
         <Box
           key={index}
+          pt={2}
+          pb={3}
           spacing={3}
-          py={2}
           borderBottom="1px solid"
           borderColor="silver"
         >
@@ -52,17 +57,39 @@ export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
             )}
           />
 
-          <Percentage
-            label="Opkomst 1e prik"
-            value={item.fully_vaccinated_percentage}
-            color={COLOR_HAS_ONE_SHOT}
-          />
+          <Box maxWidth="25rem">
+            <Box spacing={1}>
+              <Percentage
+                label={text.headers.first_shot}
+                value={item.fully_vaccinated_percentage}
+                color={COLOR_HAS_ONE_SHOT}
+              />
 
-          <Percentage
-            label="Vaccinatiegraad"
-            value={item.fully_vaccinated_percentage}
-            color={COLOR_HAS_ONE_SHOT}
-          />
+              <PercentageBar
+                percentage={item.fully_vaccinated_percentage}
+                height={8}
+                color={COLOR_HAS_ONE_SHOT}
+                hasFullWidthBackground
+              />
+            </Box>
+
+            <Spacer mb={3} />
+
+            <Box spacing={1}>
+              <Percentage
+                label={text.headers.coverage}
+                value={item.fully_vaccinated_percentage}
+                color={COLOR_FULLY_VACCINATED}
+              />
+
+              <PercentageBar
+                percentage={item.fully_vaccinated_percentage}
+                height={8}
+                color={COLOR_FULLY_VACCINATED}
+                hasFullWidthBackground
+              />
+            </Box>
+          </Box>
         </Box>
       ))}
     </Box>
@@ -81,16 +108,14 @@ function Percentage({
   const { formatPercentage } = useIntl();
 
   return (
-    <InlineText
-      variant="body2"
-      textAlign="right"
+    <Box
       css={css({
         display: 'flex',
         alignItems: 'center',
         pr: asResponsiveArray({ _: 3, xl: 4 }),
       })}
     >
-      <Box pr={3}>
+      <Box pr={3} minWidth="8.5rem" textAlign="left">
         <InlineText>{`${label}:`}</InlineText>
       </Box>
       <Box
@@ -100,10 +125,7 @@ function Percentage({
         borderRadius="50%"
         mr={2}
       />
-      {`${formatPercentage(value, {
-        maximumFractionDigits: 0,
-        minimumFractionDigits: 0,
-      })}%`}
-    </InlineText>
+      {`${formatPercentage(value)}%`}
+    </Box>
   );
 }

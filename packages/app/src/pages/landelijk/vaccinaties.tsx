@@ -113,10 +113,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <VaccineCoveragePerAgeGroup
-            values={data.vaccine_coverage_per_age_group.values}
-          />
-
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile
               isFullWidth
@@ -202,13 +198,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          {/* {vaccinationChoroplethFeature.isEnabled && (
+          {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
 
-          {vaccinationPerAgeGroupFeature.isEnabled &&
-          data.vaccine_coverage_per_age_group ? (
-            <ChartTile
+          {vaccinationPerAgeGroupFeature.isEnabled && (
+            <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
               description={
                 siteText.vaccinaties.vaccination_coverage.toelichting
@@ -218,12 +213,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
               }}
-            >
-              <VaccineCoveragePerAgeGroup
-                values={data.vaccine_coverage_per_age_group.values}
-              />
-            </ChartTile>
-          ) : null} */}
+              values={data.vaccine_coverage_per_age_group.values}
+            />
+          )}
 
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}

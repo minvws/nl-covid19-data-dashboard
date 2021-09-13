@@ -18,7 +18,7 @@ interface WideCoverageTable {
 
 export function WideCoverageTable({ values }: WideCoverageTable) {
   const { siteText, formatNumber } = useIntl();
-  const { headers } = siteText.vaccinaties.vaccination_coverage;
+  const text = siteText.vaccinaties.vaccination_coverage;
   const { templates, age_group_tooltips } =
     siteText.vaccinaties.vaccination_coverage;
 
@@ -41,7 +41,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 }),
               })}
             >
-              {headers.agegroup}
+              <InlineText variant="label1">{text.headers.agegroup}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -53,7 +53,9 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 }),
               })}
             >
-              {headers.first_shot}
+              <InlineText variant="label1">
+                {text.headers.first_shot}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -65,7 +67,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText> {headers.coverage}</InlineText>
+              <InlineText variant="label1">{text.headers.coverage}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -160,10 +162,7 @@ function Percentage({ value, color }: { value: number; color: string }) {
         borderRadius="50%"
         mr={2}
       />
-      {`${formatPercentage(value, {
-        maximumFractionDigits: 0,
-        minimumFractionDigits: 0,
-      })}%`}
+      {`${formatPercentage(value)}%`}
     </InlineText>
   );
 }
