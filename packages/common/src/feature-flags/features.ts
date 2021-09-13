@@ -21,17 +21,17 @@ export const features: Feature[] = [
   },
   {
     name: 'inHomePage',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'inPositiveTestsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
   {
     name: 'inVariantsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in'],
     metricName: 'variants',
   },
