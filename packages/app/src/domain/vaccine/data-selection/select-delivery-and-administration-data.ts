@@ -18,12 +18,7 @@ export type DeliveryAndAdministrationData = {
 };
 
 export function selectDeliveryAndAdministrationData(nlData: Nl) {
-  const {
-    vaccine_administered,
-    vaccine_administered_estimate,
-    vaccine_delivery,
-    vaccine_delivery_estimate,
-  } = nlData;
+  const { vaccine_administered, vaccine_delivery } = nlData;
 
   const values: VaccineDeliveryAndAdministrationsValue[] = [];
 

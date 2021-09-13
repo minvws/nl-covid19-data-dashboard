@@ -2,7 +2,7 @@ import {
   NlVaccineDeliveryPerSupplier,
   NlVaccineDeliveryPerSupplierValue,
 } from '@corona-dashboard/common';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -56,20 +56,13 @@ export function VaccineDeliveryBarChart({
 
   const formatTooltip: TooltipFormatter<
     NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
-  > = useCallback(
-    (
-      context: TooltipData<
-        NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
-      >
-    ) => {
-      const data = {
-        ...context,
-      };
-
-      return <TooltipSeriesList data={data} />;
-    },
-    [intl.siteText.vaccinaties.data.vaccination_chart.legend.expected]
-  );
+  > = (
+    context: TooltipData<
+      NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
+    >
+  ) => {
+    return <TooltipSeriesList data={context} />;
+  };
 
   return (
     <ChartTile
