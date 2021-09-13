@@ -9,6 +9,8 @@
     "fully_vaccinated_percentage",
     "birthyear_range",
     "fully_vaccinated_percentage_label",
+    "has_one_shot_percentage_label",
+    "has_one_shot_percentage",
     "date_of_insertion_unix",
     "date_unix"
   ],
@@ -24,11 +26,18 @@
     "fully_vaccinated_percentage": {
       "type": ["integer", "null"]
     },
+    "has_one_shot_percentage": {
+      "type": ["integer", "null"]
+    },
     "birthyear_range": {
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
     },
     "fully_vaccinated_percentage_label": {
+      "type": ["string", "null"],
+      "pattern": "^([><][=][0-9]{1,2})$"
+    },
+    "has_one_shot_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },
