@@ -17,8 +17,8 @@ const NotFound = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
       <Content>
-        <Heading level={1}>{siteText.error_titel.text}</Heading>
-        <Text>{siteText.error_beschrijving.text}</Text>
+        <Heading level={1}>{siteText.notfound_titel.text}</Heading>
+        <Text>{siteText.notfound_beschrijving.text}</Text>
       </Content>
     </Layout>
   );

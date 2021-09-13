@@ -19,3 +19,5 @@ timestamp,action,key,document_id,move_to
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.toename,jF33EuwumlGuwav2FD3uBw,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.vorige_waarde,jF33EuwumlGuwav2FD3uW4,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.zeven_daags_gemiddelde,6QpSQ1LKij6fvuYEHTebU7,__
+2021-09-09T12:10:43.010Z,add,notfound_titel.text,iLvivnjMZ7igG7VqAhIRUg,__
+2021-09-09T12:10:44.159Z,add,notfound_beschrijving.text,qjZwg5QUJcN8JoCoxxlRig,__
