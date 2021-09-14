@@ -1,17 +1,23 @@
 import {
   assert,
+  GmVaccineCoveragePerAgeGroupValue,
   NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
-import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
+import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
+import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+
 interface VaccineCoveragePerAgeGroupProps {
   title: string;
   description: string;
   metadata: MetadataProps;
-  values: NlVaccineCoveragePerAgeGroupValue[];
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
 }
 
 const SORTING_ORDER = [

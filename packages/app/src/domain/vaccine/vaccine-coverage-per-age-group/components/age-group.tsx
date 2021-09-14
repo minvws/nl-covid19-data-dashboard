@@ -1,6 +1,6 @@
-import { InlineText } from '~/components/typography';
-import { InlineTooltip } from '~/components/inline-tooltip';
 import { Box } from '~/components/base';
+import { InlineTooltip } from '~/components/inline-tooltip';
+import { InlineText } from '~/components/typography';
 
 export function AgeGroup({
   range,

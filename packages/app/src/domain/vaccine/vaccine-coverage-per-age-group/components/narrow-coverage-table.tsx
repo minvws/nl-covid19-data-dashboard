@@ -1,18 +1,25 @@
-import { Box } from '~/components/base';
-import { useIntl } from '~/intl';
-import { InlineText } from '~/components/typography';
-import { AgeGroup } from './age-group';
-import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { formatAgeGroupString } from '../logic/format-age-group-string';
-import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from '../common';
-import { asResponsiveArray } from '~/style/utils';
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { Box, Spacer } from '~/components/base';
 import { PercentageBar } from '~/components/percentage-bar';
-import { Spacer } from '~/components/base';
+import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../common';
+import { formatAgeGroupString } from '../logic/format-age-group-string';
+import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
+import { AgeGroup } from './age-group';
+
 interface NarrowCoverageRow {
-  values: NlVaccineCoveragePerAgeGroupValue[];
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
 }
 
 export function NarrowCoverageTable({ values }: NarrowCoverageRow) {

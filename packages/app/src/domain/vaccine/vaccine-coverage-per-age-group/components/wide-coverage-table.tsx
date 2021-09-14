@@ -1,19 +1,26 @@
-import styled from 'styled-components';
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { asResponsiveArray } from '~/style/utils';
-import { useIntl } from '~/intl';
+import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
-import { AgeGroup } from './age-group';
+import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../common';
 import { formatAgeGroupString } from '../logic/format-age-group-string';
 import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { PercentageBar } from '~/components/percentage-bar';
-import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from '../common';
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import { AgeGroup } from './age-group';
 
 interface WideCoverageTable {
-  values: NlVaccineCoveragePerAgeGroupValue[];
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
 }
 
 export function WideCoverageTable({ values }: WideCoverageTable) {
