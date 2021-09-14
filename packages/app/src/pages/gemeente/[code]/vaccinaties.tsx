@@ -2,6 +2,7 @@ import {
   GmCollectionVaccineCoveragePerAgeGroup,
   GmVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -21,7 +22,6 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
@@ -132,17 +132,13 @@ export const VaccinationsGmPage = (
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <VaccinePageIntroductionVrGm
-            title={replaceVariablesInText(text.introductie_sectie.titel, {
+          <PageInformationBlock
+            category={siteText.gemeente_layout.headings.vaccinaties}
+            title={replaceVariablesInText(text.informatie_blok.titel, {
               municipalityName: municipalityName,
             })}
-            description={text.introductie_sectie.beschrijving}
-            kpiTitle={text.introductie_sectie.kpi_titel}
-            data={filteredAgeGroup}
-          />
-
-          <PageInformationBlock
             description={text.informatie_blok.beschrijving}
+            icon={<VaccinatieIcon />}
             metadata={{
               datumsText: text.informatie_blok.datums,
               dateOrRange: filteredAgeGroup.date_unix,
