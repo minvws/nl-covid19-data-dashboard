@@ -65,3 +65,12 @@ timestamp,action,key,document_id,move_to
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.agegroups,xeeXS0RPNTOe6jONlMcToX,__
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.vaccination_coverage,rViLqMuzbcTEh1Hjy1HSNN,__
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.with_one_shot,xeeXS0RPNTOe6jONlMcV3B,__
+2021-09-14T07:45:30.270Z,add,gemeente_vaccinaties.vaccination_coverage.title,qjZwg5QUJcN8JoCoyNaeXi,__
+2021-09-14T07:45:31.278Z,add,gemeente_vaccinaties.vaccination_coverage.description,iLvivnjMZ7igG7VqB1K0t4,__
+2021-09-14T07:45:32.413Z,add,gemeente_vaccinaties.vaccination_coverage.bronnen.rivm.href,qjZwg5QUJcN8JoCoyNakbg,__
+2021-09-14T07:45:33.395Z,add,gemeente_vaccinaties.vaccination_coverage.bronnen.rivm.text,iLvivnjMZ7igG7VqB1K56M,__
+2021-09-14T07:45:34.495Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.title,iLvivnjMZ7igG7VqB1K72Y,__
+2021-09-14T07:45:35.416Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.description,TfQKtohu9HBbEmilvQe80l,__
+2021-09-14T07:45:36.382Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.bronnen.rivm.href,TfQKtohu9HBbEmilvQe9Sl,__
+2021-09-14T07:45:37.422Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.bronnen.rivm.text,iLvivnjMZ7igG7VqB1KDRi,__
+2021-09-14T07:45:37.422Z,delete,vaccinaties.vaccination_coverage.bronnen.rivm.download,hV7FtoXjFTieHrDRGlLXLi,__

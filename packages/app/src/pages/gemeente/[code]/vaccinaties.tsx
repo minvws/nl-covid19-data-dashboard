@@ -43,6 +43,8 @@ import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
+import { useFeature } from '~/lib/features';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
@@ -115,6 +117,8 @@ export const VaccinationsGmPage = (
     }),
   };
 
+  const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
+
   /**
    * Filter out only the the 18 plus value to show in the sidebar
    */
@@ -153,6 +157,18 @@ export const VaccinationsGmPage = (
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
           />
+
+          {vaccinationPerAgeGroupFeature.isEnabled && (
+            <VaccineCoveragePerAgeGroup
+              title={text.vaccination_coverage.title}
+              description={text.vaccination_coverage.description}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: text.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(
