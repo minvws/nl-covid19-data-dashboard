@@ -9,34 +9,15 @@ import { MetadataProps } from '~/components/metadata';
 import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
 import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-
 interface VaccineCoveragePerAgeGroupProps {
   title: string;
   description: string;
   metadata: MetadataProps;
+  sortingOrder: string[];
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
-}
-
-const SORTING_ORDER = [
-  '81+',
-  '71-80',
-  '61-70',
-  '51-60',
-  '41-50',
-  '31-40',
-  '18-30',
-  '12-17',
-];
-
-function getSortingOrder(ageGroup: string) {
-  const index = SORTING_ORDER.findIndex((x) => x === ageGroup);
-
-  assert(index >= 0, `No sorting order defined for age group ${ageGroup}`);
-
-  return index;
 }
 
 export function VaccineCoveragePerAgeGroup({
@@ -44,8 +25,17 @@ export function VaccineCoveragePerAgeGroup({
   description,
   metadata,
   values,
+  sortingOrder,
 }: VaccineCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
+
+  const getSortingOrder = (ageGroup: string) => {
+    const index = sortingOrder.findIndex((x) => x === ageGroup);
+
+    assert(index >= 0, `No sorting order defined for age group ${ageGroup}`);
+
+    return index;
+  };
 
   const sortedValues = values.sort(
     (a, b) =>

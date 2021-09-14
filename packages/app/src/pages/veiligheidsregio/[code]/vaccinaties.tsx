@@ -20,11 +20,11 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
+import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
-import { useFeature } from '~/lib/features';
+import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -44,7 +44,6 @@ import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'vrVaccinationPage',
@@ -173,6 +172,7 @@ export const VaccinationsVrPage = (
             <VaccineCoveragePerAgeGroup
               title={text.vaccination_coverage.title}
               description={text.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
               metadata={{
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: text.vaccination_coverage.bronnen.rivm,

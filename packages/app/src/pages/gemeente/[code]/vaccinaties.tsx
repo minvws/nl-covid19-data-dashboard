@@ -21,9 +21,10 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
+import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -43,8 +44,6 @@ import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { useFeature } from '~/lib/features';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
@@ -162,6 +161,7 @@ export const VaccinationsGmPage = (
             <VaccineCoveragePerAgeGroup
               title={text.vaccination_coverage.title}
               description={text.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
               metadata={{
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: text.vaccination_coverage.bronnen.rivm,

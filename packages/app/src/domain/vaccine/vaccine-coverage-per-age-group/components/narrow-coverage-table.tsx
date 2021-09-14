@@ -53,11 +53,6 @@ export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
             total={replaceVariablesInText(templates.agegroup.total_people, {
               total: formatNumber(item.age_group_total),
             })}
-            tooltipText={
-              (age_group_tooltips as Record<string, string>)[
-                item.age_group_range
-              ]
-            }
             birthyear_range={formatBirthyearRangeString(
               item.birthyear_range,
               templates.birthyears

@@ -15,7 +15,7 @@ import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../common';
 import { formatAgeGroupString } from '../logic/format-age-group-string';
 import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
 import { AgeGroup } from './age-group';
-
+import { parseFullyVaccinatedPercentageLabel } from './logic/parse-fully-vaccinated-percentage-label';
 interface WideCoverageTable {
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
@@ -26,8 +26,7 @@ interface WideCoverageTable {
 export function WideCoverageTable({ values }: WideCoverageTable) {
   const { siteText, formatNumber } = useIntl();
   const text = siteText.vaccinaties.vaccination_coverage;
-  const { templates, age_group_tooltips } =
-    siteText.vaccinaties.vaccination_coverage;
+  const { templates } = siteText.vaccinaties.vaccination_coverage;
 
   return (
     <Box overflow="auto">
@@ -101,11 +100,6 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                       total: formatNumber(item.age_group_total),
                     }
                   )}
-                  tooltipText={
-                    (age_group_tooltips as Record<string, string>)[
-                      item.age_group_range
-                    ]
-                  }
                   birthyear_range={formatBirthyearRangeString(
                     item.birthyear_range,
                     templates.birthyears
@@ -171,6 +165,43 @@ function Percentage({ value, color }: { value: number; color: string }) {
       />
       {`${formatPercentage(value)}%`}
     </InlineText>
+  );
+}
+
+function PercentageBars() {
+  if (isPresent(data.fully_vaccinated_percentage_label)) {
+    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(
+      data.fully_vaccinated_percentage_label
+    );
+  }
+
+  return (
+    <>
+      {isPresent(parsedVaccinatedLabel) ? (
+        <KpiValue
+          text={
+            parsedVaccinatedLabel.sign === '>'
+              ? replaceVariablesInText(
+                  siteText.vaccinaties_common.labels.meer_dan,
+                  {
+                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
+                  }
+                )
+              : replaceVariablesInText(
+                  siteText.vaccinaties_common.labels.minder_dan,
+                  {
+                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
+                  }
+                )
+          }
+        />
+      ) : (
+        <Percentage
+          value={item.fully_vaccinated_percentage}
+          color={COLOR_FULLY_VACCINATED}
+        />
+      )}
+    </>
   );
 }
 
