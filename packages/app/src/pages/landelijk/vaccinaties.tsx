@@ -300,6 +300,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 />
                 <Text>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
               </section>
+
               <TimeSeriesChart
                 accessibility={{
                   key: 'vaccines_support_over_time_chart',

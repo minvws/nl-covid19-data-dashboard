@@ -8,6 +8,8 @@ interface PercentageProps {
   color?: string;
   hasFullWidthBackground?: boolean;
   fullWidthBackgroundColor?: string;
+  hasFullWidthStripedBackground?: boolean;
+  fullWidthStripedBackgroundColor?: string;
 }
 
 export function PercentageBar({
@@ -15,9 +17,12 @@ export function PercentageBar({
   height,
   color,
   hasFullWidthBackground,
-  fullWidthBackgroundColor,
+  fullWidthBackgroundColor = 'data.underReported',
+  hasFullWidthStripedBackground,
+  fullWidthStripedBackgroundColor = '#8fcae7',
 }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
+
   return (
     <Wrapper>
       <Bar
@@ -27,6 +32,21 @@ export function PercentageBar({
         color={color}
       />
 
+      {hasFullWidthStripedBackground && (
+        <Box
+          css={css({
+            // Created by https://stripesgenerator.com/
+            backgroundImage: `linear-gradient(45deg, ${fullWidthStripedBackgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${fullWidthStripedBackgroundColor} 50%, ${fullWidthStripedBackgroundColor} 80%, #ffffff 80%, #ffffff 100%)`,
+            backgroundSize: '7.07px 7.07px',
+          })}
+          width="100%"
+          height="100%"
+          position="absolute"
+          top={0}
+          left={0}
+        />
+      )}
+
       {hasFullWidthBackground && (
         <Box
           width="100%"
@@ -34,11 +54,7 @@ export function PercentageBar({
           position="absolute"
           top={0}
           left={0}
-          backgroundColor={
-            fullWidthBackgroundColor
-              ? fullWidthBackgroundColor
-              : 'data.underReported'
-          }
+          backgroundColor={fullWidthBackgroundColor}
         />
       )}
     </Wrapper>

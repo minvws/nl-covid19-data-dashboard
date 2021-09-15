@@ -6,16 +6,15 @@ import {
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../common';
 import { formatAgeGroupString } from '../logic/format-age-group-string';
 import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
 import { AgeGroup } from './age-group';
-import { parseFullyVaccinatedPercentageLabel } from './logic/parse-fully-vaccinated-percentage-label';
+import { Bar } from './bar';
+import { WidePercentage } from './wide-percentage';
 interface WideCoverageTable {
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
@@ -24,7 +23,7 @@ interface WideCoverageTable {
 }
 
 export function WideCoverageTable({ values }: WideCoverageTable) {
-  const { siteText, formatNumber } = useIntl();
+  const { siteText } = useIntl();
   const text = siteText.vaccinaties.vaccination_coverage;
   const { templates } = siteText.vaccinaties.vaccination_coverage;
 
@@ -94,12 +93,9 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                     item.age_group_range,
                     templates.agegroup
                   )}
-                  total={replaceVariablesInText(
-                    templates.agegroup.total_people,
-                    {
-                      total: formatNumber(item.age_group_total),
-                    }
-                  )}
+                  ageGroupTotal={
+                    'age_group_total' in item ? item.age_group_total : undefined
+                  }
                   birthyear_range={formatBirthyearRangeString(
                     item.birthyear_range,
                     templates.birthyears
@@ -107,30 +103,46 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 />
               </Cell>
               <Cell>
-                <Percentage
-                  value={item.fully_vaccinated_percentage}
+                <WidePercentage
+                  value={item.has_one_shot_percentage}
                   color={COLOR_HAS_ONE_SHOT}
+                  label={
+                    'has_one_shot_percentage_label' in item
+                      ? item.has_one_shot_percentage_label
+                      : undefined
+                  }
                 />
               </Cell>
               <Cell>
-                <Percentage
+                <WidePercentage
                   value={item.fully_vaccinated_percentage}
                   color={COLOR_FULLY_VACCINATED}
+                  label={
+                    'fully_vaccinated_percentage_label' in item
+                      ? item.fully_vaccinated_percentage_label
+                      : undefined
+                  }
                 />
               </Cell>
               <Cell>
                 <Box spacing={1}>
-                  <PercentageBar
-                    percentage={item.fully_vaccinated_percentage}
-                    height={8}
+                  <Bar
+                    value={item.has_one_shot_percentage}
                     color={COLOR_HAS_ONE_SHOT}
-                    hasFullWidthBackground
+                    label={
+                      'has_one_shot_percentage_label' in item
+                        ? item.has_one_shot_percentage_label
+                        : undefined
+                    }
                   />
-                  <PercentageBar
-                    percentage={item.fully_vaccinated_percentage}
-                    height={8}
+                  <Bar
+                    value={item.fully_vaccinated_percentage}
                     color={COLOR_FULLY_VACCINATED}
-                    hasFullWidthBackground
+                    label={
+                      'fully_vaccinated_percentage_label' in item
+                        ? item.fully_vaccinated_percentage_label
+                        : undefined
+                    }
                   />
                 </Box>
               </Cell>
@@ -139,69 +151,6 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
         </tbody>
       </StyledTable>
     </Box>
-  );
-}
-
-function Percentage({ value, color }: { value: number; color: string }) {
-  const { formatPercentage } = useIntl();
-
-  return (
-    <InlineText
-      variant="body2"
-      textAlign="right"
-      css={css({
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        pr: asResponsiveArray({ _: 3, xl: 4 }),
-      })}
-    >
-      <Box
-        width={10}
-        height={10}
-        backgroundColor={color}
-        borderRadius="50%"
-        mr={2}
-      />
-      {`${formatPercentage(value)}%`}
-    </InlineText>
-  );
-}
-
-function PercentageBars() {
-  if (isPresent(data.fully_vaccinated_percentage_label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(
-      data.fully_vaccinated_percentage_label
-    );
-  }
-
-  return (
-    <>
-      {isPresent(parsedVaccinatedLabel) ? (
-        <KpiValue
-          text={
-            parsedVaccinatedLabel.sign === '>'
-              ? replaceVariablesInText(
-                  siteText.vaccinaties_common.labels.meer_dan,
-                  {
-                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
-                  }
-                )
-              : replaceVariablesInText(
-                  siteText.vaccinaties_common.labels.minder_dan,
-                  {
-                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
-                  }
-                )
-          }
-        />
-      ) : (
-        <Percentage
-          value={item.fully_vaccinated_percentage}
-          color={COLOR_FULLY_VACCINATED}
-        />
-      )}
-    </>
   );
 }
 
