@@ -22,6 +22,7 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -140,7 +141,7 @@ type ChoroplethTooltipProps<T extends ChoroplethDataItem> = {
   data: TooltipData<T>;
   getValues?: (
     d: T,
-    text: Record<string, Record<string, Record<string, string>>>,
+    text: SiteText['choropleth_tooltip'],
     map: MapType,
     formatPercentage: (value: number) => string
   ) => Partial<{ [key in keyof T]: string }>;
@@ -156,15 +157,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
 
   const formattedValues = useMemo(() => {
     if (isDefined(getValues)) {
-      return getValues(
-        data.dataItem,
-        text as unknown as Record<
-          string,
-          Record<string, Record<string, string>>
-        >,
-        data.map,
-        formatPercentage
-      );
+      return getValues(data.dataItem, text, data.map, formatPercentage);
     }
 
     const rawValue = data.dataItem[data.dataConfig.metricProperty] || null;
@@ -172,7 +165,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       [data.dataConfig.metricProperty]:
         typeof rawValue === 'number' ? formatPercentage(rawValue) + '%' : '–',
     };
-  }, [data, getValues, formatPercentage]);
+  }, [data, text, getValues, formatPercentage]);
 
   assert(
     (data.dataConfig.metricProperty as string) in formattedValues,

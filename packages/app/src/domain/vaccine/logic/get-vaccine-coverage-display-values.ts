@@ -1,12 +1,13 @@
 import { assert } from '@corona-dashboard/common';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ChoroplethDataItem, MapType } from '~/components/choropleth/logic';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseFullyVaccinatedPercentageLabel } from './parse-fully-vaccinated-percentage-label';
 
 export function getVaccineCoverageDisplayValues(
   d: ChoroplethDataItem,
-  text: Record<string, Record<string, Record<string, string>>>,
+  text: SiteText['choropleth_tooltip'],
   map: MapType,
   formatPercentage: (value: number) => string
 ) {
@@ -41,7 +42,7 @@ export function getVaccineCoverageDisplayValues(
 }
 
 function getLabelOrValueFormatter(
-  text: Record<string, Record<string, Record<string, string>>>,
+  text: SiteText['choropleth_tooltip'],
   map: MapType,
   formatPercentage: (value: number) => string
 ) {
@@ -52,12 +53,17 @@ function getLabelOrValueFormatter(
   ) {
     const parsedValue = isPresent(data[labelKey])
       ? parseFullyVaccinatedPercentageLabel(data[labelKey] as unknown as string)
-      : (data[property] as unknown as undefined | number | null) || null;
+      : (data[property] as unknown as undefined | number | null) ?? null;
 
     if (typeof parsedValue === 'number') {
       return formatPercentage(parsedValue) + '%';
-    } else if (parsedValue !== null && 'sign' in parsedValue) {
-      const content = text[map]?.[property as string]?.[parsedValue.sign];
+    } else if (isPresent(parsedValue) && 'sign' in parsedValue) {
+      const content = (
+        text as unknown as Record<
+          MapType,
+          Record<keyof T, Record<string, string>>
+        >
+      )[map]?.[property]?.[parsedValue.sign];
 
       assert(
         isDefined(content),
