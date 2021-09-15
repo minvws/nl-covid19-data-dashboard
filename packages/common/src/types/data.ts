@@ -18,7 +18,6 @@ export interface Gm {
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
-  vaccine_coverage?: GmVaccineCoverage;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
 }
 export interface GmStaticValues {
@@ -120,18 +119,6 @@ export interface MunicipalSewerPerInstallationInstallation {
 export interface GmSewerPerInstallationValue {
   date_unix: number;
   rna_normalized: number;
-  date_of_insertion_unix: number;
-}
-export interface GmVaccineCoverage {
-  values: GmVaccineCoverageValue[];
-  last_value: GmVaccineCoverageValue;
-}
-export interface GmVaccineCoverageValue {
-  partially_vaccinated: number;
-  fully_vaccinated: number;
-  partially_or_fully_vaccinated: number;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface GmVaccineCoveragePerAgeGroup {
@@ -979,7 +966,6 @@ export interface Vr {
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
-  vaccine_coverage?: VrVaccineCoverage;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
 }
@@ -1227,18 +1213,6 @@ export interface VrHospitalNiceSum {
 }
 export interface VrHospitalNiceSumValue {
   admissions_per_1m: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface VrVaccineCoverage {
-  values: VrVaccineCoverageValue[];
-  last_value: VrVaccineCoverageValue;
-}
-export interface VrVaccineCoverageValue {
-  partially_vaccinated: number;
-  fully_vaccinated: number;
-  partially_or_fully_vaccinated: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
