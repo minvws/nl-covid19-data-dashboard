@@ -58,16 +58,25 @@ export const getStaticProps = withFeatureNotFoundPage(
               null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
           };
         }
+
+        /* TODO: Remove this once data is present */
+        const coverage = isPresent(ctx.params?.code)
+          ? vaccine_coverage_per_age_group.filter((el) =>
+              gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode)
+            )
+          : vaccine_coverage_per_age_group;
+
+        coverage.forEach((c) => {
+          const p = Math.floor(Math.random() * 100);
+
+          const label = p >= 90 ? '>=90%' : p <= 10 ? '<=10%' : null;
+
+          c['has_one_shot_percentage'] = p;
+          c['has_one_shot_percentage_label'] = label;
+        });
+
         return {
-          vaccine_coverage_per_age_group: selectVaccineCoverageData(
-            isPresent(ctx.params?.code)
-              ? vaccine_coverage_per_age_group.filter((el) =>
-                  gmCodesByVrCode[ctx.params?.code as string].includes(
-                    el.gmcode
-                  )
-                )
-              : vaccine_coverage_per_age_group
-          ),
+          vaccine_coverage_per_age_group: selectVaccineCoverageData(coverage),
         };
       },
     }),

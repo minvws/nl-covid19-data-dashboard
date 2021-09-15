@@ -17,11 +17,11 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
@@ -74,12 +74,30 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => {
       if (isDefined(vaccine_coverage_per_age_group)) {
+        /* TODO: Remove this once data is present */
+        vaccine_coverage_per_age_group.forEach((c) => {
+          const p = Math.floor(Math.random() * 100);
+
+          const label = p >= 90 ? '>=90%' : p <= 10 ? '<=10%' : null;
+
+          c['has_one_shot_percentage'] = p;
+          c['has_one_shot_percentage_label'] = label;
+        });
         return selectVaccineCoverageData(vaccine_coverage_per_age_group);
       }
       return vaccine_coverage_per_age_group ?? null;
     },
     vr: ({ vaccine_coverage_per_age_group }) => {
       if (isDefined(vaccine_coverage_per_age_group)) {
+        /* TODO: Remove this once data is present */
+        vaccine_coverage_per_age_group.forEach((c) => {
+          const p = Math.floor(Math.random() * 100);
+
+          const label = p >= 90 ? '>=90%' : p <= 10 ? '<=10%' : null;
+
+          c['has_one_shot_percentage'] = p;
+          c['has_one_shot_percentage_label'] = label;
+        });
         return selectVaccineCoverageData(vaccine_coverage_per_age_group);
       }
       return vaccine_coverage_per_age_group ?? null;
