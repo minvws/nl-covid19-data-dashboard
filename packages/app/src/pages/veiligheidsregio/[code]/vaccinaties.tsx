@@ -115,15 +115,21 @@ export const VaccinationsVrPage = (
     'vrVaccineCoverageEstimated'
   );
 
-  /**
-   * Filter out only the the 18 plus value to show in the sidebar
-   */
-  const filteredAgeGroup = data.vaccine_coverage_per_age_group.values.filter(
-    (item) => item.age_group_range === '18+'
-  )[0] as VrVaccineCoveragePerAgeGroupValue;
-
   const gmCodes = gmCodesByVrCode[data.code];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
+
+  /**
+   * Filter out only the the 12+ and 18+ for the toggle component.
+   */
+  const filteredAgeGroup18Plus =
+    data.vaccine_coverage_per_age_group.values.filter(
+      (item) => item.age_group_range === '18+'
+    )[0] as VrVaccineCoveragePerAgeGroupValue;
+
+  const filteredAgeGroup12Plus =
+    data.vaccine_coverage_per_age_group.values.filter(
+      (item) => item.age_group_range === '12+'
+    )[0] as VrVaccineCoveragePerAgeGroupValue;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -138,8 +144,9 @@ export const VaccinationsVrPage = (
             icon={<VaccinatieIcon />}
             metadata={{
               datumsText: text.informatie_blok.datums,
-              dateOrRange: filteredAgeGroup.date_unix,
-              dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
+              dateOrRange: filteredAgeGroup18Plus.date_unix,
+              dateOfInsertionUnix:
+                filteredAgeGroup18Plus.date_of_insertion_unix,
               dataSources: [],
             }}
             pageLinks={content.page.pageLinks}
@@ -150,15 +157,31 @@ export const VaccinationsVrPage = (
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
-              topLabels={text.vaccination_grade_toggle_tile.top_labels}
               source={text.vaccination_grade_toggle_tile.source}
-              ageGroupText={{
-                age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
-                age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
-              }}
               descriptionFooter={
                 text.vaccination_grade_toggle_tile.description_footer
               }
+              dateUnix={filteredAgeGroup18Plus.date_unix}
+              age18Plus={{
+                fully_vaccinated:
+                  filteredAgeGroup18Plus.fully_vaccinated_percentage,
+                has_one_shot: filteredAgeGroup18Plus.has_one_shot_percentage,
+                birthyear: filteredAgeGroup18Plus.birthyear_range,
+                label_fully_vaccinated:
+                  filteredAgeGroup18Plus.fully_vaccinated_percentage_label,
+                label_has_one_shot:
+                  filteredAgeGroup18Plus.has_one_shot_percentage_label,
+              }}
+              age12Plus={{
+                fully_vaccinated:
+                  filteredAgeGroup12Plus.fully_vaccinated_percentage,
+                has_one_shot: filteredAgeGroup12Plus.has_one_shot_percentage,
+                birthyear: filteredAgeGroup12Plus.birthyear_range,
+                label_fully_vaccinated:
+                  filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
+                label_has_one_shot:
+                  filteredAgeGroup12Plus.has_one_shot_percentage_label,
+              }}
             />
           )}
 

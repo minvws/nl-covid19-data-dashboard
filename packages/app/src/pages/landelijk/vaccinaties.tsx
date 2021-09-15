@@ -123,28 +123,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     date_of_insertion_unix: 12309443,
   };
 
-  const sample12Plus = {
-    age_group_range: '12+',
-    fully_vaccinated_percentage: null,
-    has_one_shot_percentage: null,
-    birthyear_range: '2003-',
-    fully_vaccinated_percentage_label: '>=33',
-    has_one_shot_percentage_label: '>=23',
-    date_unix: 123412342,
-    date_of_insertion_unix: 123412342,
-  };
-
-  const sample18Plus = {
-    age_group_range: '18+',
-    fully_vaccinated_percentage: null,
-    has_one_shot_percentage: null,
-    birthyear_range: '2009-',
-    fully_vaccinated_percentage_label: '<=45',
-    has_one_shot_percentage_label: '<=9',
-    date_unix: 123412342,
-    date_of_insertion_unix: 123412342,
-  };
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
@@ -247,35 +225,19 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text.vaccination_grade_toggle_tile.description_footer
               }
               dateUnix={sampleData.date_unix}
-              // age18Plus={{
-              //   fully_vaccinated: sampleData.age_18_plus_fully_vaccinated,
-              //   has_one_shot: sampleData.age_18_plus_has_one_shot,
-              //   birthyear: sampleData.age_18_plus_birthyear,
-              //   label_fully_vaccinated: null,
-              //   label_has_one_shot: null,
-              // }}
-              // age12Plus={{
-              //   fully_vaccinated: sampleData.age_12_plus_fully_vaccinated,
-              //   has_one_shot: sampleData.age_12_plus_has_one_shot,
-              //   birthyear: sampleData.age_12_plus_birthyear,
-              //   label_fully_vaccinated: null,
-              //   label_has_one_shot: null,
-              // }}
               age18Plus={{
-                fully_vaccinated: sample18Plus.fully_vaccinated_percentage,
-                has_one_shot: sample18Plus.has_one_shot_percentage,
-                birthyear: sample18Plus.birthyear_range,
-                label_fully_vaccinated:
-                  sample18Plus.fully_vaccinated_percentage_label,
-                label_has_one_shot: sample18Plus.has_one_shot_percentage_label,
+                fully_vaccinated: sampleData.age_18_plus_fully_vaccinated,
+                has_one_shot: sampleData.age_18_plus_has_one_shot,
+                birthyear: sampleData.age_18_plus_birthyear,
+                label_fully_vaccinated: null,
+                label_has_one_shot: null,
               }}
               age12Plus={{
-                fully_vaccinated: sample12Plus.fully_vaccinated_percentage,
-                has_one_shot: sample12Plus.has_one_shot_percentage,
-                birthyear: sample12Plus.birthyear_range,
-                label_fully_vaccinated:
-                  sample12Plus.fully_vaccinated_percentage_label,
-                label_has_one_shot: sample12Plus.has_one_shot_percentage_label,
+                fully_vaccinated: sampleData.age_12_plus_fully_vaccinated,
+                has_one_shot: sampleData.age_12_plus_has_one_shot,
+                birthyear: sampleData.age_12_plus_birthyear,
+                label_fully_vaccinated: null,
+                label_has_one_shot: null,
               }}
             />
           )}

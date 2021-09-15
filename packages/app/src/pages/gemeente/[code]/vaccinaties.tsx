@@ -22,8 +22,9 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
+import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -115,11 +116,19 @@ export const VaccinationsGmPage = (
     }),
   };
 
+  const vaccineCoverageEstimatedFeature = useFeature(
+    'gmVaccineCoverageEstimated'
+  );
+
   /**
-   * Filter out only the the 18 plus value to show in the sidebar
+   * Filter out only the the 12+ and 18+ for the toggle component.
    */
-  const filteredAgeGroup = vaccine_coverage_per_age_group.values.filter(
+  const filteredAgeGroup18Plus = vaccine_coverage_per_age_group.values.filter(
     (item) => item.age_group_range === '18+'
+  )[0] as GmVaccineCoveragePerAgeGroupValue;
+
+  const filteredAgeGroup12Plus = vaccine_coverage_per_age_group.values.filter(
+    (item) => item.age_group_range === '12+'
   )[0] as GmVaccineCoveragePerAgeGroupValue;
 
   return (
@@ -141,14 +150,46 @@ export const VaccinationsGmPage = (
             icon={<VaccinatieIcon />}
             metadata={{
               datumsText: text.informatie_blok.datums,
-              dateOrRange: filteredAgeGroup.date_unix,
-              dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
+              dateOrRange: filteredAgeGroup18Plus.date_unix,
+              dateOfInsertionUnix:
+                filteredAgeGroup18Plus.date_of_insertion_unix,
               dataSources: [],
             }}
             pageLinks={content.page.pageLinks}
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
           />
+
+          {vaccineCoverageEstimatedFeature.isEnabled && (
+            <VaccineCoverageToggleTile
+              title={text.vaccination_grade_toggle_tile.title}
+              source={text.vaccination_grade_toggle_tile.source}
+              descriptionFooter={
+                text.vaccination_grade_toggle_tile.description_footer
+              }
+              dateUnix={filteredAgeGroup18Plus.date_unix}
+              age18Plus={{
+                fully_vaccinated:
+                  filteredAgeGroup18Plus.fully_vaccinated_percentage,
+                has_one_shot: filteredAgeGroup18Plus.has_one_shot_percentage,
+                birthyear: filteredAgeGroup18Plus.birthyear_range,
+                label_fully_vaccinated:
+                  filteredAgeGroup18Plus.fully_vaccinated_percentage_label,
+                label_has_one_shot:
+                  filteredAgeGroup18Plus.has_one_shot_percentage_label,
+              }}
+              age12Plus={{
+                fully_vaccinated:
+                  filteredAgeGroup12Plus.fully_vaccinated_percentage,
+                has_one_shot: filteredAgeGroup12Plus.has_one_shot_percentage,
+                birthyear: filteredAgeGroup12Plus.birthyear_range,
+                label_fully_vaccinated:
+                  filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
+                label_has_one_shot:
+                  filteredAgeGroup12Plus.has_one_shot_percentage_label,
+              }}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(

@@ -35,13 +35,13 @@ export const features: Feature[] = [
   },
   {
     name: 'vrVaccinationPage',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['vr', 'vr_collection'],
     metricName: 'vaccine_coverage_per_age_group',
   },
   {
     name: 'gmVaccinationPage',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['gm', 'gm_collection'],
     metricName: 'vaccine_coverage_per_age_group',
   },
@@ -73,6 +73,12 @@ export const features: Feature[] = [
     name: 'vrVaccineCoverageEstimated',
     isEnabled: true,
     dataScopes: ['vr'],
-    metricName: 'vaccine_coverage_per_age_group_estimated',
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'gmVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['gm'],
+    metricName: 'vaccine_coverage_per_age_group',
   },
 ];
