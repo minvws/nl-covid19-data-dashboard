@@ -21,6 +21,7 @@ import { Text } from '@visx/text';
 import { useTooltip } from '@visx/tooltip';
 import { isEmpty } from 'lodash';
 import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
@@ -84,7 +85,7 @@ type StackedChartProps<T extends TimestampedValue> = {
   config: Config<T>[];
   valueAnnotation?: string;
   initialWidth?: number;
-  expectedLabel: string;
+  expectedLabel?: string;
   formatTooltip?: TooltipFormatter<T & StackedBarTooltipData>;
   isPercentage?: boolean;
   formatXAxis?: TickFormatter<Date>;
@@ -216,9 +217,12 @@ export function StackedChart<T extends TimestampedValue>(
    * something more standardized anyway. We could introduce a special property
    * like is_estimate to trigger the hatched pattern in all charts.
    */
-  const hatchedFromIndex = valuesInTimeframe.findIndex(
+  let hatchedFromIndex = valuesInTimeframe.findIndex(
     (v) => (v as unknown as { is_estimate?: boolean }).is_estimate === true
   );
+  if (hatchedFromIndex < 0) {
+    hatchedFromIndex = Infinity;
+  }
 
   /**
    * We generate new legend items based on hover state. This is probably not a
@@ -243,12 +247,14 @@ export function StackedChart<T extends TimestampedValue>(
      */
     return [
       ...barItems,
-      {
-        label: expectedLabel,
-        shape: 'custom' as const,
-        shapeComponent: <HatchedSquare />,
-      },
-    ];
+      expectedLabel
+        ? {
+            label: expectedLabel,
+            shape: 'custom' as const,
+            shapeComponent: <HatchedSquare />,
+          }
+        : undefined,
+    ].filter(isDefined);
   }, [chartConfig, expectedLabel]);
 
   /**

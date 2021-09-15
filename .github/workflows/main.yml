@@ -35,7 +35,7 @@ jobs:
       - name: Get target branch name (pull request)
         if: github.event_name == 'pull_request'
         shell: bash
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_BASE_REF} | tr / -)" >> $GITHUB_ENV
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Lookup cached node_modules
