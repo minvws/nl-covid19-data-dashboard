@@ -159,10 +159,10 @@ export const VaccinationsGmPage = (
               description={text.vaccination_coverage.description}
               sortingOrder={['18+', '12-17', '12+']}
               metadata={{
-                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                date: vaccine_coverage_per_age_group.values[0].date_unix,
                 source: text.vaccination_coverage.bronnen.rivm,
               }}
-              values={data.vaccine_coverage_per_age_group.values}
+              values={vaccine_coverage_per_age_group.values}
             />
           )}
 
