@@ -207,6 +207,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
 
+          {vaccineCoverageEstimatedFeature.isEnabled && (
+            <VaccineCoverageToggleTile
+              title={text.vaccination_grade_toggle_tile.title}
+              topLabels={text.vaccination_grade_toggle_tile.top_labels}
+              source={text.vaccination_grade_toggle_tile.source}
+              ageGroupText={{
+                age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
+                age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
+              }}
+              descriptionFooter={
+                text.vaccination_grade_toggle_tile.description_footer
+              }
+            />
+          )}
+
           {vaccinationPerAgeGroupFeature.isEnabled && (
             <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
@@ -229,21 +244,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
               }}
               values={data.vaccine_coverage_per_age_group.values}
-            />
-          )}
-
-          {vaccineCoverageEstimatedFeature.isEnabled && (
-            <VaccineCoverageToggleTile
-              title={text.vaccination_grade_toggle_tile.title}
-              topLabels={text.vaccination_grade_toggle_tile.top_labels}
-              source={text.vaccination_grade_toggle_tile.source}
-              ageGroupText={{
-                age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
-                age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
-              }}
-              descriptionFooter={
-                text.vaccination_grade_toggle_tile.description_footer
-              }
             />
           )}
 
