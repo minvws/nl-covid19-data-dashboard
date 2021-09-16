@@ -61,9 +61,6 @@
     "sewer_per_installation": {
       "$ref": "sewer_per_installation.json"
     },
-    "vaccine_coverage": {
-      "$ref": "vaccine_coverage.json"
-    },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
     }
