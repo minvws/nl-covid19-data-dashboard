@@ -56,54 +56,52 @@ export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
             )}
           />
 
-          <Box maxWidth="25rem">
-            <Box spacing={1}>
-              <NarrowPercentage
-                value={item.has_one_shot_percentage}
-                color={COLOR_HAS_ONE_SHOT}
-                textLabel={text.headers.first_shot}
-                label={
-                  'has_one_shot_percentage_label' in item
-                    ? item.has_one_shot_percentage_label
-                    : undefined
-                }
-              />
+          <Box spacing={1}>
+            <NarrowPercentage
+              value={item.has_one_shot_percentage}
+              color={COLOR_HAS_ONE_SHOT}
+              textLabel={text.headers.first_shot}
+              label={
+                'has_one_shot_percentage_label' in item
+                  ? item.has_one_shot_percentage_label
+                  : undefined
+              }
+            />
 
-              <Bar
-                value={item.has_one_shot_percentage}
-                color={COLOR_HAS_ONE_SHOT}
-                label={
-                  'has_one_shot_percentage_label' in item
-                    ? item.has_one_shot_percentage_label
-                    : undefined
-                }
-              />
-            </Box>
+            <Bar
+              value={item.has_one_shot_percentage}
+              color={COLOR_HAS_ONE_SHOT}
+              label={
+                'has_one_shot_percentage_label' in item
+                  ? item.has_one_shot_percentage_label
+                  : undefined
+              }
+            />
+          </Box>
 
-            <Spacer mb={3} />
+          <Spacer mb={3} />
 
-            <Box spacing={1}>
-              <NarrowPercentage
-                value={item.fully_vaccinated_percentage}
-                color={COLOR_FULLY_VACCINATED}
-                textLabel={text.headers.coverage}
-                label={
-                  'fully_vaccinated_percentage_label' in item
-                    ? item.fully_vaccinated_percentage_label
-                    : undefined
-                }
-              />
+          <Box spacing={1}>
+            <NarrowPercentage
+              value={item.fully_vaccinated_percentage}
+              color={COLOR_FULLY_VACCINATED}
+              textLabel={text.headers.coverage}
+              label={
+                'fully_vaccinated_percentage_label' in item
+                  ? item.fully_vaccinated_percentage_label
+                  : undefined
+              }
+            />
 
-              <Bar
-                value={item.fully_vaccinated_percentage}
-                color={COLOR_FULLY_VACCINATED}
-                label={
-                  'fully_vaccinated_percentage_label' in item
-                    ? item.fully_vaccinated_percentage_label
-                    : undefined
-                }
-              />
-            </Box>
+            <Bar
+              value={item.fully_vaccinated_percentage}
+              color={COLOR_FULLY_VACCINATED}
+              label={
+                'fully_vaccinated_percentage_label' in item
+                  ? item.fully_vaccinated_percentage_label
+                  : undefined
+              }
+            />
           </Box>
         </Box>
       ))}
