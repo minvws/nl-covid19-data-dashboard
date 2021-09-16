@@ -100,3 +100,7 @@ timestamp,action,key,document_id,move_to
 2021-09-14T07:45:36.382Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.bronnen.rivm.href,TfQKtohu9HBbEmilvQe9Sl,__
 2021-09-14T07:45:37.422Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.bronnen.rivm.text,iLvivnjMZ7igG7VqB1KDRi,__
 2021-09-14T07:45:37.422Z,delete,vaccinaties.vaccination_coverage.bronnen.rivm.download,hV7FtoXjFTieHrDRGlLXLi,__
+2021-09-16T09:38:58.359Z,move,toe_en_afname.dan_waarde_datum,srBRCALrLz9Y3ZpBD68tp7,toe_en_afname.vorige_waarde_datum
+2021-09-16T09:59:12.094Z,add,common_actueel.trend_meer,Q0Ac8gjemD8winez2MsSX5,__
+2021-09-16T09:59:13.110Z,add,common_actueel.trend_minder,4Hn4MB4VRci1fnngMXslwu,__
+2021-09-16T10:23:51.039Z,add,toe_en_afname.vorige_waarde,4Hn4MB4VRci1fnngMXwLNw,__
