@@ -1,69 +1,59 @@
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { KpiTile } from '~/components/kpi-tile';
-import { RadioGroup } from '~/components/radio-group';
-import { useState } from 'react';
-import { Box } from '~/components/base';
 import { css } from '@styled-system/css';
+import { useState } from 'react';
+import { isPresent } from 'ts-is-present';
+import { Box } from '~/components/base';
+import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { RadioGroup } from '~/components/radio-group';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
+import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-type AgeGroupTypes = {
-  description_vaccination_grade: string;
-  description_vaccination_one_shot: string;
-  label: string;
+type AgeTypes = {
+  fully_vaccinated: number | null;
+  has_one_shot: number | null;
+  birthyear: string;
+  label_fully_vaccinated?: string | null;
+  label_has_one_shot?: string | null;
 };
 
 interface VaccineCoverageToggleTileProps {
   title: string;
-  topLabels: {
-    one_shot: string;
-    vaccination_grade: string;
-  };
   source: {
     text: string;
     href: string;
   };
-  ageGroupText: {
-    age_18_plus: AgeGroupTypes;
-    age_12_plus: AgeGroupTypes;
-  };
   descriptionFooter: string;
+  age18Plus: AgeTypes;
+  age12Plus: AgeTypes;
+  dateUnix: number;
+  numFractionDigits?: number;
 }
 
 export function VaccineCoverageToggleTile({
   title,
-  topLabels,
   source,
-  ageGroupText,
   descriptionFooter,
+  dateUnix,
+  age18Plus,
+  age12Plus,
+  numFractionDigits = 0,
 }: VaccineCoverageToggleTileProps) {
-  /**
-   * @TODO: remove mock data
-   */
-  const data = {
-    date_unix: 123456789,
-    age_18_plus_fully_vaccinated: 123456,
-    age_18_plus_has_one_shot: 654312,
-    age_18_plus_birthyear: '-2003',
-    age_12_plus_fully_vaccinated: 654312,
-    age_12_plus_has_one_shot: 123456,
-    age_12_plus_birthyear: '-2009',
-  };
+  const { siteText } = useIntl();
+  const text = siteText.vaccinaties.vaccination_grade_toggle_tile;
 
-  const [selectedTab, setSelectedTab] = useState(
-    ageGroupText.age_18_plus.label
-  );
+  const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
 
   return (
     <KpiTile
       title={title}
       metadata={{
-        date: data.date_unix,
+        date: dateUnix,
         source: source,
       }}
     >
@@ -74,54 +64,54 @@ export function VaccineCoverageToggleTile({
             onChange={(value) => setSelectedTab(value)}
             items={[
               {
-                label: ageGroupText.age_18_plus.label,
-                value: ageGroupText.age_18_plus.label,
+                label: text.age_18_plus.label,
+                value: text.age_18_plus.label,
               },
               {
-                label: ageGroupText.age_12_plus.label,
-                value: ageGroupText.age_12_plus.label,
+                label: text.age_12_plus.label,
+                value: text.age_12_plus.label,
               },
             ]}
           />
         </Box>
         <TwoKpiSection>
-          {selectedTab === ageGroupText.age_18_plus.label && (
+          {selectedTab === text.age_18_plus.label && (
             <>
               <AgeGroupBlock
-                title={topLabels.one_shot}
-                kpiValue={data.age_18_plus_fully_vaccinated}
-                description={
-                  ageGroupText.age_18_plus.description_vaccination_one_shot
-                }
-                birthyear={data.age_18_plus_birthyear}
+                title={text.top_labels.one_shot}
+                kpiValue={age18Plus.has_one_shot}
+                birthyear={age18Plus.birthyear}
+                label={age18Plus.label_has_one_shot}
+                description={text.age_18_plus.description_vaccination_one_shot}
+                numFractionDigits={numFractionDigits}
               />
               <AgeGroupBlock
-                title={topLabels.vaccination_grade}
-                kpiValue={data.age_18_plus_has_one_shot}
-                description={
-                  ageGroupText.age_18_plus.description_vaccination_grade
-                }
-                birthyear={data.age_18_plus_birthyear}
+                title={text.top_labels.one_shot}
+                kpiValue={age18Plus.fully_vaccinated}
+                birthyear={age18Plus.birthyear}
+                label={age18Plus.label_fully_vaccinated}
+                description={text.age_18_plus.description_vaccination_one_shot}
+                numFractionDigits={numFractionDigits}
               />
             </>
           )}
-          {selectedTab === ageGroupText.age_12_plus.label && (
+          {selectedTab === text.age_12_plus.label && (
             <>
               <AgeGroupBlock
-                title={topLabels.one_shot}
-                kpiValue={data.age_12_plus_fully_vaccinated}
-                description={
-                  ageGroupText.age_12_plus.description_vaccination_one_shot
-                }
-                birthyear={data.age_12_plus_birthyear}
+                title={text.top_labels.vaccination_grade}
+                kpiValue={age12Plus.has_one_shot}
+                birthyear={age12Plus.birthyear}
+                label={age12Plus.label_has_one_shot}
+                description={text.age_12_plus.description_vaccination_grade}
+                numFractionDigits={numFractionDigits}
               />
               <AgeGroupBlock
-                title={topLabels.vaccination_grade}
-                kpiValue={data.age_12_plus_has_one_shot}
-                description={
-                  ageGroupText.age_12_plus.description_vaccination_grade
-                }
-                birthyear={data.age_12_plus_birthyear}
+                title={text.top_labels.vaccination_grade}
+                kpiValue={age12Plus.fully_vaccinated}
+                birthyear={age12Plus.birthyear}
+                label={age12Plus.label_fully_vaccinated}
+                description={text.age_12_plus.description_vaccination_grade}
+                numFractionDigits={numFractionDigits}
               />
             </>
           )}
@@ -136,9 +126,11 @@ export function VaccineCoverageToggleTile({
 
 interface AgeGroupBlockProps {
   title: string;
-  kpiValue: number;
+  kpiValue: number | null;
   description: string;
   birthyear: string;
+  label?: string | null;
+  numFractionDigits?: number;
 }
 
 function AgeGroupBlock({
@@ -146,8 +138,10 @@ function AgeGroupBlock({
   kpiValue,
   description,
   birthyear,
+  label,
+  numFractionDigits,
 }: AgeGroupBlockProps) {
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
 
   const parsedBirthyearRange = parseBirthyearRange(birthyear);
 
@@ -155,6 +149,11 @@ function AgeGroupBlock({
     parsedBirthyearRange,
     `Something went wrong with parsing the birthyear: ${birthyear}`
   );
+
+  let parsedVaccinatedLabel;
+  if (isPresent(label)) {
+    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
+  }
 
   return (
     <Box spacing={2}>
@@ -166,7 +165,35 @@ function AgeGroupBlock({
       >
         {title}
       </InlineText>
-      <KpiValue percentage={kpiValue} />
+      {parsedVaccinatedLabel ? (
+        <KpiValue
+          text={
+            parsedVaccinatedLabel.sign === '>'
+              ? replaceVariablesInText(
+                  siteText.vaccinaties_common.labels.meer_dan,
+                  {
+                    value:
+                      formatPercentage(parsedVaccinatedLabel.value, {
+                        minimumFractionDigits: numFractionDigits,
+                        maximumFractionDigits: numFractionDigits,
+                      }) + '%',
+                  }
+                )
+              : replaceVariablesInText(
+                  siteText.vaccinaties_common.labels.minder_dan,
+                  {
+                    value:
+                      formatPercentage(parsedVaccinatedLabel.value, {
+                        minimumFractionDigits: numFractionDigits,
+                        maximumFractionDigits: numFractionDigits,
+                      }) + '%',
+                  }
+                )
+          }
+        />
+      ) : (
+        <KpiValue percentage={kpiValue} numFragmentDigits={numFractionDigits} />
+      )}
       <Markdown
         content={replaceVariablesInText(description, {
           birthyear: replaceVariablesInText(

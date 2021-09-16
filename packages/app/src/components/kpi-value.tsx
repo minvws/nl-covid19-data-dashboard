@@ -18,6 +18,7 @@ interface KpiValueBaseProps {
   color?: string;
   isMovingAverageDifference?: boolean;
   differenceFractionDigits?: number;
+  numFragmentDigits?: number;
 }
 
 type DifferenceProps =
@@ -66,6 +67,7 @@ export function KpiValue({
   isMovingAverageDifference,
   isAmount,
   differenceFractionDigits,
+  numFragmentDigits,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -74,11 +76,17 @@ export function KpiValue({
     <Box mb={3}>
       {isPresent(percentage) && isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
+          {`${formatNumber(absolute)} (${formatPercentage(percentage, {
+            minimumFractionDigits: numFragmentDigits,
+            maximumFractionDigits: numFragmentDigits,
+          })}%)`}
         </StyledValue>
       ) : isPresent(percentage) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatPercentage(percentage)}%`}
+          {`${formatPercentage(percentage, {
+            minimumFractionDigits: numFragmentDigits,
+            maximumFractionDigits: numFragmentDigits,
+          })}%`}
         </StyledValue>
       ) : isDefined(text) ? (
         <StyledValue color={color} {...otherProps}>
