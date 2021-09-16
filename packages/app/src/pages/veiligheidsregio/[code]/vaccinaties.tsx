@@ -21,6 +21,7 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
@@ -114,6 +115,7 @@ export const VaccinationsVrPage = (
   const vaccineCoverageEstimatedFeature = useFeature(
     'vrVaccineCoverageEstimated'
   );
+  const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
 
   const gmCodes = gmCodesByVrCode[data.code];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
@@ -182,6 +184,19 @@ export const VaccinationsVrPage = (
                 label_has_one_shot:
                   filteredAgeGroup12Plus.has_one_shot_percentage_label,
               }}
+            />
+          )}
+
+          {vaccinationPerAgeGroupFeature.isEnabled && (
+            <VaccineCoveragePerAgeGroup
+              title={text.vaccination_coverage.title}
+              description={text.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: text.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
             />
           )}
 

@@ -22,6 +22,7 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
@@ -119,17 +120,18 @@ export const VaccinationsGmPage = (
   const vaccineCoverageEstimatedFeature = useFeature(
     'gmVaccineCoverageEstimated'
   );
+  const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
    */
   const filteredAgeGroup18Plus = vaccine_coverage_per_age_group.values.filter(
-    (item) => item.age_group_range === '18+'
-  )[0] as GmVaccineCoveragePerAgeGroupValue;
+    (item: GmVaccineCoveragePerAgeGroupValue) => item.age_group_range === '18+'
+  )[0];
 
   const filteredAgeGroup12Plus = vaccine_coverage_per_age_group.values.filter(
-    (item) => item.age_group_range === '12+'
-  )[0] as GmVaccineCoveragePerAgeGroupValue;
+    (item: GmVaccineCoveragePerAgeGroupValue) => item.age_group_range === '12+'
+  )[0];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -188,6 +190,19 @@ export const VaccinationsGmPage = (
                 label_has_one_shot:
                   filteredAgeGroup12Plus.has_one_shot_percentage_label,
               }}
+            />
+          )}
+
+          {vaccinationPerAgeGroupFeature.isEnabled && (
+            <VaccineCoveragePerAgeGroup
+              title={text.vaccination_coverage.title}
+              description={text.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: vaccine_coverage_per_age_group.values[0].date_unix,
+                source: text.vaccination_coverage.bronnen.rivm,
+              }}
+              values={vaccine_coverage_per_age_group.values}
             />
           )}
 
