@@ -74,7 +74,7 @@ export function VaccineCoverageToggleTile({
             ]}
           />
         </Box>
-        <TwoKpiSection>
+        <TwoKpiSection spacing={4}>
           {selectedTab === text.age_18_plus.label && (
             <>
               <AgeGroupBlock
