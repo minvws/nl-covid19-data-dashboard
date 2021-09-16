@@ -27,7 +27,7 @@ export function WidePercentage({
 
   return (
     <>
-      {isPresent(parsedVaccinatedLabel) && isPresent(value) ? (
+      {parsedVaccinatedLabel ? (
         <PercentageMarkup
           color={color}
           value={

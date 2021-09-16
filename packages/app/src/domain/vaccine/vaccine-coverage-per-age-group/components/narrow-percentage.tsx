@@ -29,7 +29,7 @@ export function NarrowPercentage({
 
   return (
     <>
-      {isPresent(parsedVaccinatedLabel) && isPresent(value) ? (
+      {parsedVaccinatedLabel ? (
         <PercentageMarkup
           color={color}
           textLabel={textLabel}
