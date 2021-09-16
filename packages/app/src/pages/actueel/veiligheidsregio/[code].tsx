@@ -163,6 +163,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
+                    isAmount
                   />
                 }
                 icon={<Test />}
@@ -184,6 +185,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
+                    isAmount
                   />
                 }
                 icon={<Ziekenhuis />}

@@ -43,6 +43,7 @@ interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   metricProperty: string;
   valueTexts: PluralizationTexts;
   differenceText: string;
+  isAmount: boolean;
 }
 
 export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
@@ -52,6 +53,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   metricProperty,
   valueTexts,
   differenceText: differenceTexts,
+  isAmount,
 }: DataDrivenTextProps<T, K>) {
   const { siteText, formatNumber } = useIntl();
 
@@ -100,7 +102,9 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
         ),
       })}{' '}
       {replaceComponentsInText(differenceTexts, {
-        differenceTrend: <InlineDifference value={differenceValue} />,
+        differenceTrend: (
+          <InlineDifference isAmount={isAmount} value={differenceValue} />
+        ),
         differenceAverage: (
           <InlineText fontWeight="bold">
             {formatNumber(differenceValue.old_value)}

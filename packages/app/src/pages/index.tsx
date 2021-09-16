@@ -187,6 +187,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
+                    isAmount
                   />
                 }
                 icon={<Test />}
@@ -212,6 +213,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
+                    isAmount
                   />
                 }
                 icon={<Ziekenhuis />}
