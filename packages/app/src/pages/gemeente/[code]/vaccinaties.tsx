@@ -120,7 +120,7 @@ export const VaccinationsGmPage = (
   const vaccineCoverageEstimatedFeature = useFeature(
     'gmVaccineCoverageEstimated'
   );
-  const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
+  const vaccinationPerAgeGroupFeature = useFeature('gmVaccinationPerAgeGroup');
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.

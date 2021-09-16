@@ -114,16 +114,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  const sampleData = {
-    age_18_plus_fully_vaccinated: 123,
-    age_18_plus_has_one_shot: 4123411234123,
-    age_18_plus_birthyear: '-2015',
-    age_12_plus_fully_vaccinated: 34,
-    age_12_plus_has_one_shot: 123412341234,
-    age_12_plus_birthyear: '-1990',
-    date_unix: 12341231,
-    date_of_insertion_unix: 12309443,
-  };
+  const vaccineCoverageEstimatedLastValue =
+    data.vaccine_coverage_per_age_group_estimated.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -215,10 +207,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          {vaccinationChoroplethFeature.isEnabled && (
-            <VaccineCoverageChoroplethPerGm data={choropleth} />
-          )}
-
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
@@ -226,21 +214,24 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               descriptionFooter={
                 text.vaccination_grade_toggle_tile.description_footer
               }
-              dateUnix={sampleData.date_unix}
+              dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
               age18Plus={{
-                fully_vaccinated: sampleData.age_18_plus_fully_vaccinated,
-                has_one_shot: sampleData.age_18_plus_has_one_shot,
-                birthyear: sampleData.age_18_plus_birthyear,
-                label_fully_vaccinated: null,
-                label_has_one_shot: null,
+                fully_vaccinated:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
+                has_one_shot:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+                birthyear:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
               }}
               age12Plus={{
-                fully_vaccinated: sampleData.age_12_plus_fully_vaccinated,
-                has_one_shot: sampleData.age_12_plus_has_one_shot,
-                birthyear: sampleData.age_12_plus_birthyear,
-                label_fully_vaccinated: null,
-                label_has_one_shot: null,
+                fully_vaccinated:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
+                has_one_shot:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+                birthyear:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
               }}
+              numFractionDigits={1}
             />
           )}
 
@@ -267,6 +258,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
               values={data.vaccine_coverage_per_age_group.values}
             />
+          )}
+
+          {vaccinationChoroplethFeature.isEnabled && (
+            <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
 
           <VaccineDeliveryAndAdministrationsAreaChart
