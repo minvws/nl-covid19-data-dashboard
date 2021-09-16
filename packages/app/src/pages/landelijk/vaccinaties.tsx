@@ -74,30 +74,12 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => {
       if (isDefined(vaccine_coverage_per_age_group)) {
-        /* TODO: Remove this once data is present */
-        vaccine_coverage_per_age_group.forEach((c) => {
-          const p = Math.floor(Math.random() * 100);
-
-          const label = p >= 90 ? '>=90%' : p <= 10 ? '<=10%' : null;
-
-          c['has_one_shot_percentage'] = p;
-          c['has_one_shot_percentage_label'] = label;
-        });
         return selectVaccineCoverageData(vaccine_coverage_per_age_group);
       }
       return vaccine_coverage_per_age_group ?? null;
     },
     vr: ({ vaccine_coverage_per_age_group }) => {
       if (isDefined(vaccine_coverage_per_age_group)) {
-        /* TODO: Remove this once data is present */
-        vaccine_coverage_per_age_group.forEach((c) => {
-          const p = Math.floor(Math.random() * 100);
-
-          const label = p >= 90 ? '>=90%' : p <= 10 ? '<=10%' : null;
-
-          c['has_one_shot_percentage'] = p;
-          c['has_one_shot_percentage_label'] = label;
-        });
         return selectVaccineCoverageData(vaccine_coverage_per_age_group);
       }
       return vaccine_coverage_per_age_group ?? null;
