@@ -16,20 +16,20 @@
       "additionalProperties": false,
       "properties": {
         "age_18_plus_fully_vaccinated": {
-          "type": "integer"
+          "type": "number"
         },
         "age_18_plus_has_one_shot": {
-          "type": "integer"
+          "type": "number"
         },
         "age_18_plus_birthyear": {
           "type": "string",
           "pattern": "^-[0-9]{4}"
         },
         "age_12_plus_fully_vaccinated": {
-          "type": "integer"
+          "type": "number"
         },
         "age_12_plus_has_one_shot": {
-          "type": "integer"
+          "type": "number"
         },
         "age_12_plus_birthyear": {
           "type": "string",
