@@ -22,8 +22,9 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
+import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -115,6 +116,8 @@ export const VaccinationsGmPage = (
     }),
   };
 
+  const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
+
   /**
    * Filter out only the the 18 plus value to show in the sidebar
    */
@@ -149,6 +152,19 @@ export const VaccinationsGmPage = (
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
           />
+
+          {vaccinationPerAgeGroupFeature.isEnabled && (
+            <VaccineCoveragePerAgeGroup
+              title={text.vaccination_coverage.title}
+              description={text.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: vaccine_coverage_per_age_group.values[0].date_unix,
+                source: text.vaccination_coverage.bronnen.rivm,
+              }}
+              values={vaccine_coverage_per_age_group.values}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(

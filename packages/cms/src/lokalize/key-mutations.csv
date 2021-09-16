@@ -19,6 +19,14 @@ timestamp,action,key,document_id,move_to
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.toename,jF33EuwumlGuwav2FD3uBw,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.vorige_waarde,jF33EuwumlGuwav2FD3uW4,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.zeven_daags_gemiddelde,6QpSQ1LKij6fvuYEHTebU7,__
+2021-09-10T11:27:45.709Z,delete,vaccinaties.vaccination_coverage.fully,jF33EuwumlGuwav2FD46L6,__
+2021-09-10T11:27:45.710Z,delete,vaccinaties.vaccination_coverage.partially,jF33EuwumlGuwav2FD46JQ,__
+2021-09-10T12:10:30.121Z,add,vaccinaties.vaccination_coverage.headers.first_shot,TfQKtohu9HBbEmilvF8j6l,__
+2021-09-10T12:10:30.123Z,delete,vaccinaties.vaccination_coverage.headers.progress,jF33EuwumlGuwav2FD46B2,__
+2021-09-13T13:04:44.360Z,add,vaccinaties.table_labels.vaccination_coverage,qjZwg5QUJcN8JoCoyJ0qPY,__
+2021-09-13T13:04:45.379Z,add,vaccinaties.table_labels.first_shot,iLvivnjMZ7igG7VqAxlp3e,__
+2021-09-13T13:13:43.548Z,delete,vaccinaties.table_labels.first_shot,iLvivnjMZ7igG7VqAxlp3e,__
+2021-09-13T13:13:43.549Z,delete,vaccinaties.table_labels.vaccination_coverage,qjZwg5QUJcN8JoCoyJ0qPY,__
 2021-09-09T10:52:58.373Z,add,vaccinaties.vaccination_grade_toggle_tile.source.text,qjZwg5QUJcN8JoCoxxD8tc,__
 2021-09-09T10:52:59.377Z,add,vaccinaties.vaccination_grade_toggle_tile.source.href,TfQKtohu9HBbEmilvAvRol,__
 2021-09-09T10:53:00.321Z,add,vaccinaties.vaccination_grade_toggle_tile.title,qjZwg5QUJcN8JoCoxxD9f2,__
@@ -63,3 +71,12 @@ timestamp,action,key,document_id,move_to
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.agegroups,xeeXS0RPNTOe6jONlMcToX,__
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.vaccination_coverage,rViLqMuzbcTEh1Hjy1HSNN,__
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.with_one_shot,xeeXS0RPNTOe6jONlMcV3B,__
+2021-09-14T07:45:30.270Z,add,gemeente_vaccinaties.vaccination_coverage.title,qjZwg5QUJcN8JoCoyNaeXi,__
+2021-09-14T07:45:31.278Z,add,gemeente_vaccinaties.vaccination_coverage.description,iLvivnjMZ7igG7VqB1K0t4,__
+2021-09-14T07:45:32.413Z,add,gemeente_vaccinaties.vaccination_coverage.bronnen.rivm.href,qjZwg5QUJcN8JoCoyNakbg,__
+2021-09-14T07:45:33.395Z,add,gemeente_vaccinaties.vaccination_coverage.bronnen.rivm.text,iLvivnjMZ7igG7VqB1K56M,__
+2021-09-14T07:45:34.495Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.title,iLvivnjMZ7igG7VqB1K72Y,__
+2021-09-14T07:45:35.416Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.description,TfQKtohu9HBbEmilvQe80l,__
+2021-09-14T07:45:36.382Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.bronnen.rivm.href,TfQKtohu9HBbEmilvQe9Sl,__
+2021-09-14T07:45:37.422Z,add,veiligheidsregio_vaccinaties.vaccination_coverage.bronnen.rivm.text,iLvivnjMZ7igG7VqB1KDRi,__
+2021-09-14T07:45:37.422Z,delete,vaccinaties.vaccination_coverage.bronnen.rivm.download,hV7FtoXjFTieHrDRGlLXLi,__
