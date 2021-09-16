@@ -1,7 +1,4 @@
-import {
-  GmCollectionVaccineCoveragePerAgeGroup,
-  VrVaccineCoveragePerAgeGroupValue,
-} from '@corona-dashboard/common';
+import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
@@ -41,6 +38,7 @@ import {
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
+import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
@@ -124,14 +122,24 @@ export const VaccinationsVrPage = (
    * Filter out only the the 12+ and 18+ for the toggle component.
    */
   const filteredAgeGroup18Plus =
-    data.vaccine_coverage_per_age_group.values.filter(
+    data.vaccine_coverage_per_age_group.values.find(
       (item) => item.age_group_range === '18+'
-    )[0] as VrVaccineCoveragePerAgeGroupValue;
+    );
 
   const filteredAgeGroup12Plus =
-    data.vaccine_coverage_per_age_group.values.filter(
+    data.vaccine_coverage_per_age_group.values.find(
       (item) => item.age_group_range === '12+'
-    )[0] as VrVaccineCoveragePerAgeGroupValue;
+    );
+
+  assert(
+    filteredAgeGroup18Plus,
+    'Could not find data for the vaccine coverage per age group for the age 18+'
+  );
+
+  assert(
+    filteredAgeGroup12Plus,
+    'Could not find data for the vaccine coverage per age group for the age 12+'
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
