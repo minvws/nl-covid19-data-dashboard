@@ -1,5 +1,4 @@
 import { isPresent } from 'ts-is-present';
-import { PercentageBar } from '~/components/percentage-bar';
 import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
 
 interface BarProps {
@@ -16,7 +15,7 @@ export function Bar({ value, color, label }: BarProps) {
 
   return (
     <>
-      {isPresent(parsedVaccinatedLabel) && isPresent(value) ? (
+      {/* {isPresent(parsedVaccinatedLabel) && isPresent(value) ? (
         <PercentageBar
           percentage={parsedVaccinatedLabel.value}
           height={8}
@@ -30,7 +29,7 @@ export function Bar({ value, color, label }: BarProps) {
           color={color}
           hasFullWidthBackground
         />
-      )}
+      )} */}
     </>
   );
 }

@@ -10,18 +10,25 @@ interface PercentageProps {
   fullWidthBackgroundColor?: string;
   hasFullWidthStripedBackground?: boolean;
   fullWidthStripedBackgroundColor?: string;
+  backgroundStyle?: 'hatched' | 'normal';
+  backgroundColor?: string;
 }
 
 export function PercentageBar({
   percentage,
   height,
   color,
-  hasFullWidthBackground,
-  fullWidthBackgroundColor = 'data.underReported',
-  hasFullWidthStripedBackground,
-  fullWidthStripedBackgroundColor = '#8fcae7',
+  backgroundColor = '8fcae7',
+  backgroundStyle = 'normal',
 }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
+
+  backgroundColor =
+    backgroundStyle === 'normal'
+      ? backgroundColor
+        ? backgroundColor
+        : 'data.underReported'
+      : backgroundColor;
 
   return (
     <Wrapper>
@@ -32,31 +39,24 @@ export function PercentageBar({
         color={color}
       />
 
-      {hasFullWidthStripedBackground && (
-        <Box
-          css={css({
-            // Created by https://stripesgenerator.com/
-            backgroundImage: `linear-gradient(45deg, ${fullWidthStripedBackgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${fullWidthStripedBackgroundColor} 50%, ${fullWidthStripedBackgroundColor} 80%, #ffffff 80%, #ffffff 100%)`,
-            backgroundSize: '7.07px 7.07px',
-          })}
-          width="100%"
-          height="100%"
-          position="absolute"
-          top={0}
-          left={0}
-        />
-      )}
-
-      {hasFullWidthBackground && (
-        <Box
-          width="100%"
-          height="100%"
-          position="absolute"
-          top={0}
-          left={0}
-          backgroundColor={fullWidthBackgroundColor}
-        />
-      )}
+      <Box
+        // Created by https://stripesgenerator.com/
+        css={css(
+          backgroundStyle === 'hatched'
+            ? {
+                backgroundImage: `linear-gradient(45deg, ${backgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${backgroundColor} 50%, ${backgroundColor} 80%, #ffffff 80%, #ffffff 100%)`,
+                backgroundSize: '7.07px 7.07px',
+              }
+            : {
+                backgroundColor,
+              }
+        )}
+        width="100%"
+        height="100%"
+        position="absolute"
+        top={0}
+        left={0}
+      />
     </Wrapper>
   );
 }
