@@ -24,7 +24,7 @@ export function AgeGroup({
     <Box display="flex" flexDirection="column">
       <InlineText fontWeight="bold">{range}</InlineText>
       <InlineText variant="label1">
-        {`${birthyear_range}${totalText ? `: ${totalText}` : ''}`}
+        {`${birthyear_range}${ageGroupTotal ? `: ${totalText}` : ''}`}
       </InlineText>
     </Box>
   );
