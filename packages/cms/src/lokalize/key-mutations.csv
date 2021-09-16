@@ -17,7 +17,6 @@ timestamp,action,key,document_id,move_to
 2021-09-08T10:35:24.013Z,delete,toe_en_afname.hoger,p4JeWnX1BdBjLeRfpOCEGE,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.lager,p4JeWnX1BdBjLeRfpOCJjC,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.toename,jF33EuwumlGuwav2FD3uBw,__
-2021-09-08T10:35:24.014Z,delete,toe_en_afname.vorige_waarde,jF33EuwumlGuwav2FD3uW4,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.zeven_daags_gemiddelde,6QpSQ1LKij6fvuYEHTebU7,__
 2021-09-10T11:27:45.709Z,delete,vaccinaties.vaccination_coverage.fully,jF33EuwumlGuwav2FD46L6,__
 2021-09-10T11:27:45.710Z,delete,vaccinaties.vaccination_coverage.partially,jF33EuwumlGuwav2FD46JQ,__
@@ -103,4 +102,4 @@ timestamp,action,key,document_id,move_to
 2021-09-16T09:38:58.359Z,move,toe_en_afname.dan_waarde_datum,srBRCALrLz9Y3ZpBD68tp7,toe_en_afname.vorige_waarde_datum
 2021-09-16T09:59:12.094Z,add,common_actueel.trend_meer,Q0Ac8gjemD8winez2MsSX5,__
 2021-09-16T09:59:13.110Z,add,common_actueel.trend_minder,4Hn4MB4VRci1fnngMXslwu,__
-2021-09-16T10:23:51.039Z,add,toe_en_afname.vorige_waarde,4Hn4MB4VRci1fnngMXwLNw,__
+2021-09-16T12:57:36.278Z,add,toe_en_afname.vorige_waarde,Ierr3hadoEWr1dYNoMBM1Z,__
