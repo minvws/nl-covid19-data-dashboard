@@ -371,6 +371,7 @@ export const thresholds: Thresholds = {
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
+    has_one_shot_percentage: vaccineCoveragePercentageThresholds,
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,
@@ -389,6 +390,7 @@ export const thresholds: Thresholds = {
     travel: situationsThreshold,
     hospitality: situationsThreshold,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
+    has_one_shot_percentage: vaccineCoveragePercentageThresholds,
     other: situationsThreshold,
     ...(Object.fromEntries(
       behaviorIdentifiers.map((key) => [

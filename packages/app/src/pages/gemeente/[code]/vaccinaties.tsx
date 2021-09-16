@@ -17,7 +17,7 @@ import {
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
+import { getVaccineCoverageDisplayValues } from '~/domain/vaccine/logic/get-vaccine-coverage-display-values';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -64,6 +64,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         const vrCode = isPresent(ctx.params?.code)
           ? vrCodeByGmCode[ctx.params?.code as 'string']
           : undefined;
+
         return {
           vaccine_coverage_per_age_group: selectVaccineCoverageData(
             isDefined(vrCode)
@@ -252,7 +253,7 @@ export const VaccinationsGmPage = (
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'fully_vaccinated_percentage',
+                metricProperty: 'has_one_shot_percentage',
               }}
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,
@@ -265,7 +266,7 @@ export const VaccinationsGmPage = (
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  getSecondaryMetric={getSecondaryMetric}
+                  getValues={getVaccineCoverageDisplayValues}
                 />
               )}
             />

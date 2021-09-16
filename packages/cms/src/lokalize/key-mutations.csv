@@ -71,6 +71,14 @@ timestamp,action,key,document_id,move_to
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.agegroups,xeeXS0RPNTOe6jONlMcToX,__
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.vaccination_coverage,rViLqMuzbcTEh1Hjy1HSNN,__
 2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.with_one_shot,xeeXS0RPNTOe6jONlMcV3B,__
+2021-09-15T11:20:58.291Z,add,choropleth_tooltip.gm.has_one_shot_percentage.<,Q0Ac8gjemD8winez2KVMIo,__
+2021-09-15T11:20:59.402Z,add,choropleth_tooltip.gm.has_one_shot_percentage.>,4Hn4MB4VRci1fnngMV5Hps,__
+2021-09-15T11:21:00.430Z,add,choropleth_tooltip.gm.has_one_shot_percentage.content,Q0Ac8gjemD8winez2KVMsS,__
+2021-09-15T11:21:01.450Z,add,choropleth_tooltip.gm.has_one_shot_percentage.subject,Q0Ac8gjemD8winez2KVN8u,__
+2021-09-15T11:21:02.367Z,add,choropleth_tooltip.vr.has_one_shot_percentage.<,Q0Ac8gjemD8winez2KVNNz,__
+2021-09-15T11:21:03.398Z,add,choropleth_tooltip.vr.has_one_shot_percentage.>,4Hn4MB4VRci1fnngMV5IkK,__
+2021-09-15T11:21:04.423Z,add,choropleth_tooltip.vr.has_one_shot_percentage.content,Ierr3hadoEWr1dYNoEUhXb,__
+2021-09-15T11:21:05.446Z,add,choropleth_tooltip.vr.has_one_shot_percentage.subject,4Hn4MB4VRci1fnngMV5J3g,__
 2021-09-15T14:35:22.211Z,add,gemeente_vaccinaties.vaccination_grade_toggle_tile.description_footer,4Hn4MB4VRci1fnngMVhx1g,__
 2021-09-15T14:35:23.645Z,add,gemeente_vaccinaties.vaccination_grade_toggle_tile.source.href,Q0Ac8gjemD8winez2L1w8U,__
 2021-09-15T14:35:25.283Z,add,gemeente_vaccinaties.vaccination_grade_toggle_tile.source.text,4Hn4MB4VRci1fnngMVhxjE,__
