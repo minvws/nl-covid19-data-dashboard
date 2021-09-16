@@ -1,13 +1,11 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
+import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import { Gelijk } from '@corona-dashboard/icons';
-import { Up } from '@corona-dashboard/icons';
-import { Down } from '@corona-dashboard/icons';
-import { useIntl } from '~/intl';
-import { Container, IconContainer } from './containers';
 import { Markdown } from '~/components/markdown';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Container, IconContainer } from './containers';
 
 export function TileDifference({
   value,
@@ -72,7 +70,7 @@ export function TileDifference({
         }}
         content={replaceVariablesInText(
           `${content} ${
-            showOldDateUnix ? text.dan_waarde_datum : text.waarde_gelijk
+            showOldDateUnix ? text.vorige_waarde_datum : text.vorige_waarde
           }`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
