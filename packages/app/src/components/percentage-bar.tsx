@@ -6,10 +6,6 @@ interface PercentageProps {
   percentage: number;
   height?: number | string;
   color?: string;
-  hasFullWidthBackground?: boolean;
-  fullWidthBackgroundColor?: string;
-  hasFullWidthStripedBackground?: boolean;
-  fullWidthStripedBackgroundColor?: string;
   backgroundStyle?: 'hatched' | 'normal';
   backgroundColor?: string;
 }
