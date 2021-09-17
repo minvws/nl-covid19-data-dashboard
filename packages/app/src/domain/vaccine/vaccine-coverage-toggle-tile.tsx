@@ -90,7 +90,7 @@ export function VaccineCoverageToggleTile({
                 kpiValue={age18Plus.fully_vaccinated}
                 birthyear={age18Plus.birthyear}
                 label={age18Plus.label_fully_vaccinated}
-                description={text.age_18_plus.description_vaccination_one_shot}
+                description={text.age_18_plus.description_vaccination_grade}
                 numFractionDigits={numFractionDigits}
               />
             </>
@@ -102,7 +102,7 @@ export function VaccineCoverageToggleTile({
                 kpiValue={age12Plus.has_one_shot}
                 birthyear={age12Plus.birthyear}
                 label={age12Plus.label_has_one_shot}
-                description={text.age_12_plus.description_vaccination_grade}
+                description={text.age_12_plus.description_vaccination_one_shot}
                 numFractionDigits={numFractionDigits}
               />
               <AgeGroupBlock
