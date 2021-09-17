@@ -18,7 +18,7 @@
     "ts-node": "^10.2.1"
   },
   "scripts": {
-    "release": "ts-node src/release/prepare-release.ts",
+    "prepare-release": "ts-node src/release/prepare-release.ts",
     "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/cli'",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",

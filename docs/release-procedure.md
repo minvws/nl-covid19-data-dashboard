@@ -30,6 +30,25 @@ develop and master could result in conflicts. These conflicts are easier to
 resolve if you start from `master` because then you have the opportunity to
 locally discover and resolve them before you create the pull-request.
 
+## Automated sprint release
+
+Most of the above described steps have been scripted.
+
+To be able to run the script a Github personal access token needs to be generated and put in a `.env.local` file.
+(This is used for automatically creating the pull request and github release. This is a one-time procedure for each new developer).
+Follow the guidelines on this page to generate a token:
+https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+(Make sure to select ALL the access rights, otherwise the Github API calls will end in 404 errors).
+
+Create the `.env.local` file in `src/packages/cli` by copying the existing `.env.local.example`and renaming it to `.env.local`.
+Inside this file copy your access token over the existing value of the `GITHUB_PERSONAL_ACCESS_TOKEN` key.
+
+To run the automated steps, from the root directory, run the command `yarn prepare-release`. The script will ask for a release name, this should typically be the next semver version. The script actually validates for a pattern of `<number>.<number>.<number>`.
+
+The script will halt if any merge conflicts are encountered after develop has been merged into the release branch. These will have to be solved manually after which the script can be continued.
+
+The script creates a pull request as well as a draft release on Github. The description of which will contain a placeholder text, so do be sure to update these before merging and releasing.
+
 ## Intermediate or Hotfix Release
 
 99% of the time when something needs to be quickly changed on production, the
