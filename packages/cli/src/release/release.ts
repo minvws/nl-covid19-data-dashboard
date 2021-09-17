@@ -69,11 +69,11 @@ async function promptForReleaseName(
     onState,
   })) as { releaseName: string };
 
-  if (tags.all.includes(result.releaseName)) {
+  if (tags.all.includes(result.releaseName.trim())) {
     return await promptForReleaseName(tags, true);
   }
 
-  return result.releaseName;
+  return result.releaseName.trim();
 }
 
 function hasChanges(status: StatusResult) {
