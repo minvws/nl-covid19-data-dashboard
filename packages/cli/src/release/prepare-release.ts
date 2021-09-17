@@ -1,3 +1,4 @@
+import { Octokit } from '@octokit/core';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import prompts from 'prompts';
@@ -38,7 +39,12 @@ const git = simpleGit();
   const result = await prepareRelease();
 
   if (result) {
-    console.log(chalk.green('Release finished'));
+    console.log(
+      chalk.green(
+        'A pullrequest and a draft release have been created successfully!'
+      )
+    );
+    console.log(chalk.green('Release preparation finished'));
   } else {
     console.log(chalk.yellow('Release aborted...'));
   }
@@ -76,7 +82,74 @@ async function prepareRelease() {
 
   await checkForConflicts();
 
+  const createPRSuccess = await createPullRequest(branchName);
+  if (!createPRSuccess) {
+    console.error(`Failed to create a pull request for ${branchName}`);
+    process.exit(0);
+  }
+
+  const createDraftReleaseSuccess = await draftRelease(releaseName);
+  if (!createDraftReleaseSuccess) {
+    console.error(`Failed to create a pull request for ${branchName}`);
+    process.exit(0);
+  }
+
   return true;
+}
+
+async function draftRelease(releaseName: string) {
+  const octokit = new Octokit({
+      auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+    }),
+    owner = 'minvws',
+    repo = 'nl-covid19-data-dashboard',
+    target_commitish = 'master',
+    tag_name = releaseName,
+    draft = true;
+
+  const response = await octokit.request(
+    'POST /repos/{owner}/{repo}/releases',
+    {
+      owner,
+      repo,
+      target_commitish,
+      tag_name,
+      draft,
+      body: 'This is an automatically generated draft release, please update this description with a summary of the release.',
+    }
+  );
+
+  if (response.status === 201) {
+    return true;
+  }
+  return false;
+}
+
+async function createPullRequest(branchName: string) {
+  const octokit = new Octokit({
+      auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+    }),
+    owner = 'minvws',
+    repo = 'nl-covid19-data-dashboard',
+    title = branchName,
+    body =
+      'This is an automatically generated PR, please update this description with a summary of the release.',
+    head = branchName,
+    base = 'master';
+
+  const response = await octokit.request(`POST /repos/{owner}/{repo}/pulls`, {
+    owner,
+    repo,
+    title,
+    body,
+    head,
+    base,
+  });
+
+  if (response.status === 201) {
+    return true;
+  }
+  return false;
 }
 
 async function checkForConflicts(): Promise<true> {
@@ -96,6 +169,7 @@ async function checkForConflicts(): Promise<true> {
       console.log('Have a nice day...');
       process.exit(0);
     }
+
     return await checkForConflicts();
   }
   return true;
