@@ -54,7 +54,7 @@ async function prepareRelease() {
   await git.fetch();
   const tags = await git.tags();
 
-  const status = await git.status();
+  let status = await git.status();
   const branches = await git.branchLocal();
 
   if (hasChanges(status)) {
@@ -82,7 +82,11 @@ async function prepareRelease() {
 
   await checkForConflicts();
 
-  await git.push();
+  status = await git.status();
+
+  if (hasChanges(status)) {
+    await git.push();
+  }
 
   const createPRSuccess = await createPullRequest(branchName);
   if (!createPRSuccess) {
@@ -156,13 +160,13 @@ async function createPullRequest(branchName: string) {
 
 async function checkForConflicts(): Promise<true> {
   const status = await git.status();
-  if (hasChanges(status)) {
+  if (hasConficts(status)) {
     const confirmResponse = await prompts([
       {
         type: 'confirm',
         name: 'isConfirmed',
         message:
-          "There seem to be issues with the release branch, fix those manually and choose 'Y', otherwise the process will be aborted.\n(You will have to delete the release branch manually if you want to start this process again)",
+          "There are conflicts in the release branch, fix those manually and choose 'Y', otherwise the process will be aborted.\n(You will have to delete the release branch manually if you want to start this process again)",
         initial: false,
       },
     ]);
@@ -206,6 +210,10 @@ async function promptForReleaseName(
   }
 
   return releaseName;
+}
+
+function hasConficts(status: StatusResult) {
+  return status.conflicted.length > 0;
 }
 
 function hasChanges(status: StatusResult) {
