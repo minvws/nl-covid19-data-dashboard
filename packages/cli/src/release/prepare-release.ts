@@ -82,6 +82,8 @@ async function prepareRelease() {
 
   await checkForConflicts();
 
+  await git.push();
+
   const createPRSuccess = await createPullRequest(branchName);
   if (!createPRSuccess) {
     console.error(`Failed to create a pull request for ${branchName}`);
