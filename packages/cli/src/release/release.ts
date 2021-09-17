@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import prompts from 'prompts';
 import simpleGit, { StatusResult } from 'simple-git';
 
@@ -19,15 +20,18 @@ const git = simpleGit();
     process.exit(0);
   }
 
-  await prepareRelease();
+  const result = await prepareRelease();
 
-  console.log('Release finished');
+  if (result) {
+    console.log(chalk.green('Release finished'));
+  } else {
+    console.log(chalk.yellow('Release aborted...'));
+  }
 })();
 
 async function prepareRelease() {
   await git.fetch();
   const tags = await git.tags();
-  console.log(tags.latest);
 
   const status = await git.status();
   const branches = await git.branchLocal();
@@ -36,13 +40,15 @@ async function prepareRelease() {
     console.log(
       `Current branch '${branches.current}' has local changes, submit them first and start over...`
     );
-    return;
+    return false;
   }
 
   if (branches.current !== 'master') {
     console.log("Current branch isn't master, checking out master now...");
     //await git.checkoutBranch('master', 'origin');
   }
+
+  return true;
 }
 
 function hasChanges(status: StatusResult) {
