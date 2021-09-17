@@ -211,7 +211,7 @@ function useSeriesConfig(
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
-      baseVariantsFiltered.map((variantKey) => {
+      baseVariantsFiltered.reverse().map((variantKey) => {
         const color = (colors.data.variants as Dictionary<string>)[
           variantKey.split('_')[0]
         ];
