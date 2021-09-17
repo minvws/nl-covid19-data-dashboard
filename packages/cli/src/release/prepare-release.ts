@@ -54,7 +54,7 @@ async function prepareRelease() {
   await git.fetch();
   const tags = await git.tags();
 
-  let status = await git.status();
+  const status = await git.status();
   const branches = await git.branchLocal();
 
   if (hasChanges(status)) {
@@ -82,11 +82,8 @@ async function prepareRelease() {
 
   await checkForConflicts();
 
-  status = await git.status();
-
-  if (hasChanges(status)) {
-    await git.push();
-  }
+  console.log(`Pushing branch ${branchName}...`);
+  await git.push();
 
   const createPRSuccess = await createPullRequest(branchName);
   if (!createPRSuccess) {
