@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Stap1HorecaMax = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const Stap1HorecaMax = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Stap1HorecaMax.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Stap1HorecaMax.displayName = 'Stap1HorecaMax';
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Ziektegolf = forwardRef(({ ...rest }, ref) => {
   return (
@@ -15,14 +14,6 @@ const Ziektegolf = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Ziektegolf.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Ziektegolf.displayName = 'Ziektegolf';
 

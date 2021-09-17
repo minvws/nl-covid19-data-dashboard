@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const WinkelenEnBoodschappenOpen = forwardRef(({ ...rest }, ref) => {
   return (
@@ -22,14 +21,6 @@ const WinkelenEnBoodschappenOpen = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-WinkelenEnBoodschappenOpen.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 WinkelenEnBoodschappenOpen.displayName = 'WinkelenEnBoodschappenOpen';
 

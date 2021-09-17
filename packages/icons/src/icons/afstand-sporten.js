@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const AfstandSporten = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const AfstandSporten = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-AfstandSporten.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 AfstandSporten.displayName = 'AfstandSporten';
 

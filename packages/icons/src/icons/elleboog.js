@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Elleboog = forwardRef(({ ...rest }, ref) => {
   return (
@@ -24,14 +23,6 @@ const Elleboog = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Elleboog.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Elleboog.displayName = 'Elleboog';
 

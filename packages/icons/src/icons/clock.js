@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Clock = forwardRef(({ ...rest }, ref) => {
   return (
@@ -30,14 +29,6 @@ const Clock = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Clock.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Clock.displayName = 'Clock';
 

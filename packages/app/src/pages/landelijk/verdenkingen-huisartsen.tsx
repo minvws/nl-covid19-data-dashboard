@@ -3,6 +3,7 @@ import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -88,8 +89,9 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={lastValue.covid_symptoms}
                 data-cy="covid_symptoms"
                 difference={data.difference.doctor__covid_symptoms}
+                isAmount
               />
-              <Text>{text.barscale_toelichting}</Text>
+              <Markdown content={text.barscale_toelichting} />
             </KpiTile>
             <KpiTile
               title={text.normalized_kpi_titel}
@@ -102,6 +104,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={lastValue.covid_symptoms_per_100k}
                 data-cy="covid_symptoms_per_100k"
                 difference={data.difference.doctor__covid_symptoms_per_100k}
+                isAmount
               />
               <Text>{text.normalized_kpi_toelichting}</Text>
             </KpiTile>

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const BasisregelsMondkapje = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const BasisregelsMondkapje = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-BasisregelsMondkapje.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 BasisregelsMondkapje.displayName = 'BasisregelsMondkapje';
 

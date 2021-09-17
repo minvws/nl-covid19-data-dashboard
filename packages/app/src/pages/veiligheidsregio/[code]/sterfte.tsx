@@ -2,6 +2,7 @@ import { Coronavirus } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -97,10 +98,11 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="covid_daily"
                 absolute={dataRivm.last_value.covid_daily}
                 difference={difference.deceased_rivm__covid_daily}
+                isAmount
               />
-              <Text>
-                {text.section_deceased_rivm.kpi_covid_daily_description}
-              </Text>
+              <Markdown
+                content={text.section_deceased_rivm.kpi_covid_daily_description}
+              />
             </KpiTile>
             <KpiTile
               title={text.section_deceased_rivm.kpi_covid_total_title}

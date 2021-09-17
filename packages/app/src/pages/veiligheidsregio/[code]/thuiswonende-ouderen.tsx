@@ -110,6 +110,7 @@ const ElderlyAtHomeRegionalPage = (
                 data-cy="positive_tested_daily"
                 absolute={elderly_at_home.last_value.positive_tested_daily}
                 difference={difference.elderly_at_home__positive_tested_daily}
+                isAmount
               />
               <Text>{text.section_positive_tested.kpi_daily_description}</Text>
             </KpiTile>

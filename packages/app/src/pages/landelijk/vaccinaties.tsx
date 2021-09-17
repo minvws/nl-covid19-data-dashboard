@@ -18,6 +18,7 @@ import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
@@ -58,7 +59,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage',
     'vaccine_delivery_per_supplier',
     'vaccine_stock',
-    'vaccine_vaccinated_or_support'
+    'vaccine_vaccinated_or_support',
+    'vaccine_coverage_per_age_group_estimated'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -96,8 +98,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     deliveryAndAdministration,
   } = props;
 
-  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
   const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
+  const vaccineCoverageEstimatedFeature = useFeature(
+    'nlVaccineCoverageEstimated'
+  );
+  const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
@@ -108,6 +113,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const vaccineCoverageEstimatedLastValue =
+    data.vaccine_coverage_per_age_group_estimated.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -120,6 +128,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
+
           <VaccinePageIntroductionNl data={data} />
 
           <PageInformationBlock
@@ -132,10 +141,67 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            usefulLinks={content.page.usefulLinks}
+            pageLinks={content.page.pageLinks}
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />
+
+          {vaccineCoverageEstimatedFeature.isEnabled && (
+            <VaccineCoverageToggleTile
+              title={text.vaccination_grade_toggle_tile.title}
+              source={text.vaccination_grade_toggle_tile.source}
+              descriptionFooter={
+                text.vaccination_grade_toggle_tile.description_footer
+              }
+              dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
+              age18Plus={{
+                fully_vaccinated:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
+                has_one_shot:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+                birthyear:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
+              }}
+              age12Plus={{
+                fully_vaccinated:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
+                has_one_shot:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+                birthyear:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
+              }}
+              numFractionDigits={1}
+            />
+          )}
+
+          {vaccinationPerAgeGroupFeature.isEnabled && (
+            <VaccineCoveragePerAgeGroup
+              title={siteText.vaccinaties.vaccination_coverage.title}
+              description={
+                siteText.vaccinaties.vaccination_coverage.toelichting
+              }
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+              ]}
+              metadata={{
+                datumsText: text.datums,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+            />
+          )}
+
+          {vaccinationChoroplethFeature.isEnabled && (
+            <VaccineCoverageChoroplethPerGm data={choropleth} />
+          )}
 
           {data.vaccine_coverage && (
             <ChartTile
@@ -198,29 +264,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          {vaccinationChoroplethFeature.isEnabled && (
-            <VaccineCoverageChoroplethPerGm data={choropleth} />
-          )}
-
-          {vaccinationPerAgeGroupFeature.isEnabled &&
-          data.vaccine_coverage_per_age_group ? (
-            <ChartTile
-              title={siteText.vaccinaties.vaccination_coverage.title}
-              description={
-                siteText.vaccinaties.vaccination_coverage.toelichting
-              }
-              metadata={{
-                datumsText: text.datums,
-                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-                source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
-              }}
-            >
-              <VaccineCoveragePerAgeGroup
-                values={data.vaccine_coverage_per_age_group.values}
-              />
-            </ChartTile>
-          ) : null}
-
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
           />
@@ -274,6 +317,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 />
                 <Text>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
               </section>
+
               <TimeSeriesChart
                 accessibility={{
                   key: 'vaccines_support_over_time_chart',

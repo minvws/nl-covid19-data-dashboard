@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const FrisseLucht = forwardRef(({ ...rest }, ref) => {
   return (
@@ -33,14 +32,6 @@ const FrisseLucht = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-FrisseLucht.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 FrisseLucht.displayName = 'FrisseLucht';
 

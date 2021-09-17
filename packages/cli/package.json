@@ -5,7 +5,7 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "@turf/turf": "^6.5.0",
-    "ajv": "^6",
+    "ajv": "^8",
     "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "flat": "^5.0.2",
@@ -15,7 +15,6 @@
     "p-memoize": "^4.0.1",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.1",
-    "ts-morph": "^11.0.0",
     "ts-node": "^10.2.1"
   },
   "scripts": {
@@ -29,16 +28,14 @@
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
     "typecheck": "tsc --pretty --noEmit",
     "calculate-boundingboxes": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/calculate-bounding-box-municipalities.ts",
-    "validate-json": "yarn workspace @corona-dashboard/common build && yarn run validate-json-all",
+    "validate-json": "yarn run validate-json-all",
     "validate-json-all": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-all.ts",
     "validate-json-single": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-last-values.ts",
-    "validate-features": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-features.ts",
-    "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts",
-    "strip-unused-locale-keys": "yarn workspace @corona-dashboard/cms lokalize:export && ts-node src/locale/strip-unused-locale-keys.ts && yarn workspace @corona-dashboard/cms lokalize:export && yarn workspace @corona-dashboard/app compile"
+    "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts"
   },
   "devDependencies": {
-    "@types/meow": "^5.0.0",
+    "@types/meow": "^6.0.0",
     "@types/topojson-client": "^3.1.0",
     "typescript": "^4.4.2"
   }

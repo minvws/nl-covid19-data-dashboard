@@ -2,6 +2,7 @@
   "definitions": {
     "value": {
       "title": "vr_sewer_value",
+      "type": "object",
       "additionalProperties": false,
       "required": [
         "date_start_unix",

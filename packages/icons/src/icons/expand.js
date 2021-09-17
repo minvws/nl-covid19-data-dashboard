@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Expand = forwardRef(({ ...rest }, ref) => {
   return (
@@ -28,14 +27,6 @@ const Expand = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Expand.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Expand.displayName = 'Expand';
 

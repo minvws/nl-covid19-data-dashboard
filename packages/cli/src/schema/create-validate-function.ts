@@ -1,5 +1,5 @@
-import { Feature, features } from '@corona-dashboard/common';
-import Ajv, { ValidateFunction } from 'ajv';
+import { Feature, features, isVerboseFeature } from '@corona-dashboard/common';
+import Ajv, { AnySchemaObject, ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
@@ -30,10 +30,7 @@ export function loadRootSchema(
 function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
   if (isDefined(schema.required)) {
     const required = schema.required as string[];
-    features.forEach((x) => {
-      if (!isDefined(x.dataScopes)) {
-        return;
-      }
+    features.filter(isVerboseFeature).forEach((x) => {
       if (!x.dataScopes.includes(schema.title)) {
         return;
       }
@@ -81,17 +78,16 @@ export function createValidateFunction(
 
 function compileValidator(
   rootSchema: object,
-  loadSchema: (
-    uri: string,
-    cb?: (err: Error, schema: object) => void
-  ) => PromiseLike<object | boolean>
+  loadSchema: (uri: string) => Promise<AnySchemaObject>
 ) {
   const validator = new Ajv({
     loadSchema: loadSchema,
     $data: true,
     allErrors: true,
   });
-  validator.addKeyword('equalsRootProperty', equalsRootProperty);
+
+  validator.addKeyword(equalsRootProperty);
+
   return validator.compileAsync(rootSchema).then((validate) => {
     return validate;
   }) as Promise<ValidateFunction>;

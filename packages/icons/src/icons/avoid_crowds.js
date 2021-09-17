@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const AvoidCrowds = forwardRef(({ ...rest }, ref) => {
   return (
@@ -24,14 +23,6 @@ const AvoidCrowds = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-AvoidCrowds.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 AvoidCrowds.displayName = 'AvoidCrowds';
 

@@ -6,6 +6,7 @@ import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -106,8 +107,11 @@ const ElderlyAtHomeNationalPage = (
                 difference={
                   data.difference.elderly_at_home__positive_tested_daily
                 }
+                isAmount
               />
-              <Text>{text.section_positive_tested.kpi_daily_description}</Text>
+              <Markdown
+                content={text.section_positive_tested.kpi_daily_description}
+              />
             </KpiTile>
             <KpiTile
               title={text.section_positive_tested.kpi_daily_per_100k_title}

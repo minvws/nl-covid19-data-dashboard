@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Menu = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const Menu = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Menu.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Menu.displayName = 'Menu';
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Stap1HorecaPertafel = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const Stap1HorecaPertafel = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Stap1HorecaPertafel.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Stap1HorecaPertafel.displayName = 'Stap1HorecaPertafel';
 

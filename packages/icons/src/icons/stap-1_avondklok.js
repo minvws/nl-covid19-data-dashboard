@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Stap1Avondklok = forwardRef(({ ...rest }, ref) => {
   return (
@@ -24,14 +23,6 @@ const Stap1Avondklok = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Stap1Avondklok.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Stap1Avondklok.displayName = 'Stap1Avondklok';
 

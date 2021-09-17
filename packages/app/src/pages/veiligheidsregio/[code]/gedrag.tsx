@@ -30,6 +30,7 @@ import {
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { Markdown } from '~/components/markdown';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -108,7 +109,9 @@ export default function BehaviorPageVr(
               <Heading level={3}>
                 {regionaal_gedrag.onderzoek_uitleg.titel}
               </Heading>
-              <Text>{regionaal_gedrag.onderzoek_uitleg.toelichting}</Text>
+              <Markdown
+                content={regionaal_gedrag.onderzoek_uitleg.toelichting}
+              />
             </Tile>
             <Tile height="100%">
               <Heading level={3}>{regionaal_gedrag.kpi.titel}</Heading>

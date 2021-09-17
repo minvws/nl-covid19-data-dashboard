@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Dot = forwardRef(({ ...rest }, ref) => {
   return (
@@ -16,14 +15,6 @@ const Dot = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Dot.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Dot.displayName = 'Dot';
 

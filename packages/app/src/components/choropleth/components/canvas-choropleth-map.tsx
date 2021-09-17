@@ -67,7 +67,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     fitExtent
   );
 
-  const highlight = useHighlightedFeature(geoInfo, dataOptions);
+  const highlightedFeature = useHighlightedFeature(geoInfo, dataOptions);
 
   const selectFeature = useCallback(
     (code: string | undefined, isKeyboardAction = false) => {
@@ -146,6 +146,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           minHeight: height,
           maxHeight: '75vh',
           maxWidth: '100%',
+          height: '100%',
           position: 'relative',
         }}
         onMouseOut={featureOutHandler}
@@ -167,7 +168,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           <Outlines geoInfo={outlineGeoInfo} featureProps={featureProps} />
           <Features geoInfo={geoInfo} featureProps={featureProps}>
             <HighlightedFeature
-              feature={highlight}
+              feature={highlightedFeature}
               featureProps={featureProps}
               code={dataOptions.selectedCode}
               hoverCode={hoverCode}

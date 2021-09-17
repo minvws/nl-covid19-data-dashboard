@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Chart = forwardRef(({ ...rest }, ref) => {
   return (
@@ -25,14 +24,6 @@ const Chart = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Chart.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Chart.displayName = 'Chart';
 

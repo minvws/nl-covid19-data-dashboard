@@ -133,6 +133,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.tested_overall__infected_moving_average
                 }
+                isAmount
                 isMovingAverageDifference
               />
               <Text>
@@ -163,6 +164,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   data.difference
                     .tested_overall__infected_per_100k_moving_average
                 }
+                isAmount
                 isMovingAverageDifference
               />
               <Text>{text.barscale_toelichting}</Text>
@@ -242,7 +244,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.map_titel, {
               municipality: municipalityName,
             })}
-            description={text.map_toelichting}
+            description={<Markdown content={text.map_toelichting} />}
             legend={{
               thresholds: thresholds.gm.infected_per_100k,
               title:

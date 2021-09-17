@@ -1,6 +1,6 @@
 import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
-import globby from 'globby';
+import { globby } from 'globby';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
@@ -103,7 +103,7 @@ async function getAllPathsWithPriorities() {
     { path: 'regio', value: 0.8 },
   ];
 
-  const pathsWithPriorities = pathsFromPages.map((path) => {
+  const pathsWithPriorities = pathsFromPages.map((path: string) => {
     const priority = priorities.find((priority) =>
       path.includes(priority.path)
     );

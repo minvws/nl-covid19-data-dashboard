@@ -10,7 +10,7 @@ export function getStaticPaths() {
 
   return {
     paths,
-    // other routes should load on-demand
-    fallback: 'blocking',
+    // other routes should 404
+    fallback: false,
   };
 }

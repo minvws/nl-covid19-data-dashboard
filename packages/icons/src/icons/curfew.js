@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Curfew = forwardRef(({ ...rest }, ref) => {
   return (
@@ -29,14 +28,6 @@ const Curfew = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Curfew.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Curfew.displayName = 'Curfew';
 

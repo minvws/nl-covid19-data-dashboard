@@ -9,7 +9,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -35,17 +34,21 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { IntakeHospitalPageQuery } from '~/types/cms';
+import { getIntakeHospitalPageQuery } from '~/queries/intake-hospital-page-query';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
-    page: PageArticlesQueryResult;
+    page: IntakeHospitalPageQuery;
+    highlight: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
     return `{
-      "page": ${createPageArticlesQuery('intensiveCarePage', locale)},
+      "page": ${getIntakeHospitalPageQuery(context)},
+      "highlight": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
     }`;
   })
@@ -89,7 +92,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            pageLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
 
           <TwoKpiSection>
@@ -107,9 +111,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="admissions_on_date_of_reporting"
                 localeTextKey="ic_opnames_per_dag"
                 differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
+                isAmount
                 isMovingAverageDifference
               />
-              <Text>{text.extra_uitleg}</Text>
+              <Markdown content={text.extra_uitleg} />
             </KpiTile>
 
             <KpiTile
@@ -128,6 +133,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       difference={
                         data.difference.intensive_care_lcps__beds_occupied_covid
                       }
+                      isAmount
                     />
 
                     <Markdown

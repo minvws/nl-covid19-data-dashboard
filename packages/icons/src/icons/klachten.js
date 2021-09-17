@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Klachten = forwardRef(({ ...rest }, ref) => {
   return (
@@ -27,14 +26,6 @@ const Klachten = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Klachten.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Klachten.displayName = 'Klachten';
 
