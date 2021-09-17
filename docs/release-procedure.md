@@ -10,7 +10,7 @@
    correct version number together with some release notes. Keep the release
    notes in English even though in the past they were written in Dutch.
 5. Possibly review the PR, make changes, or push other commits to the release
-   branch.
+   branch. **Definitely consider running a release build locally at this point, this will catch any errors much quicker than first waiting for CI to finish.**
 6. Once ready, merge the release branch to `master` using a **merge commit.
    Never use a squash and merge action, since this will erase/rewrite the commit
    history.**
