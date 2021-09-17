@@ -20,7 +20,7 @@ import {
 } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
@@ -56,12 +56,12 @@ export function VaccineCoverageChoroplethPerGm({
       )}
       description={
         <>
-          <Text>
-            {replaceVariablesInText(
+          <Markdown
+            content={replaceVariablesInText(
               siteText.vaccinaties.nl_choropleth_vaccinatie_graad.description,
               variables
             )}
-          </Text>
+          />
 
           <AgeGroupSelect onChange={setSelectedAgeGroup} />
         </>
