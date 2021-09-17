@@ -46,7 +46,7 @@ const git = simpleGit();
     );
     console.log(chalk.green('Release preparation finished'));
   } else {
-    console.log(chalk.yellow('Release aborted...'));
+    console.warn(chalk.yellow('Release preparation aborted...'));
   }
 })();
 
