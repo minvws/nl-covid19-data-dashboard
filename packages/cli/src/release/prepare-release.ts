@@ -62,22 +62,48 @@ async function prepareRelease() {
     console.log("Current branch isn't master, checking out master now...");
     await git.checkout('master');
   }
+  await git.pull();
 
   const releaseName = await promptForReleaseName(tags);
   const branchName = `release/${releaseName}`;
 
-  console.log(`Creating a release branch called '${branchName}':`);
+  console.log(`Creating a release branch called '${branchName}'...`);
   await git.checkoutLocalBranch(branchName);
 
-  console.log(`Merging the develop branch into ${branchName}:`);
+  console.log(`Merging the develop branch into ${branchName}...`);
   await git.pull('origin', 'develop', { '--no-rebase': null });
+  console.log(`Merge complete`);
 
+  await checkForConflicts();
+
+  return true;
+}
+
+async function checkForConflicts(): Promise<true> {
+  const status = await git.status();
+  if (hasChanges(status)) {
+    const confirmResponse = await prompts([
+      {
+        type: 'confirm',
+        name: 'isConfirmed',
+        message:
+          "There seem to be issues with the release branch, fix those manually and choose 'Y', otherwise the process will be aborted.\n(You will have to delete the release branch manually if you want to start this process again)",
+        initial: false,
+      },
+    ]);
+
+    if (!confirmResponse.isConfirmed) {
+      console.log('Have a nice day...');
+      process.exit(0);
+    }
+    return await checkForConflicts();
+  }
   return true;
 }
 
 async function promptForReleaseName(
   tags: TagResult,
-  message = `Give the version number for this release (previous release: '${tags.latest}'):`
+  message = `Give the version number for this release (previous release: ${tags.latest}):`
 ): Promise<string> {
   const result = (await prompts({
     type: 'text',
