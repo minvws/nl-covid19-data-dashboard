@@ -45,7 +45,7 @@ async function prepareRelease() {
 
   if (branches.current !== 'master') {
     console.log("Current branch isn't master, checking out master now...");
-    //await git.checkoutBranch('master', 'origin');
+    await git.checkout('master');
   }
 
   return true;
