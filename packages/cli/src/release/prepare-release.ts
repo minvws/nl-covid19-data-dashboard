@@ -83,7 +83,7 @@ async function prepareRelease() {
   await checkForConflicts();
 
   console.log(`Pushing branch ${branchName}...`);
-  await git.push();
+  await git.push('origin', branchName);
 
   const createPRSuccess = await createPullRequest(branchName);
   if (!createPRSuccess) {
