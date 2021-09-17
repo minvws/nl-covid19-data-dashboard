@@ -57,11 +57,8 @@ async function prepareRelease() {
 
 async function promptForReleaseName(
   tags: TagResult,
-  retry = false
+  message = `Give the version number for this release (previous release: '${tags.latest}'):`
 ): Promise<string> {
-  const message = retry
-    ? `A tag with that name alreayd exists, try again (previous release: '${tags.latest}'):`
-    : `Give the version number for this release (previous release: '${tags.latest}'):`;
   const result = (await prompts({
     type: 'text',
     name: 'releaseName',
@@ -70,7 +67,18 @@ async function promptForReleaseName(
   })) as { releaseName: string };
 
   if (tags.all.includes(result.releaseName.trim())) {
-    return await promptForReleaseName(tags, true);
+    return await promptForReleaseName(
+      tags,
+      `A tag with that name already exists, try again (previous release: '${tags.latest}'):`
+    );
+  }
+
+  const regExp = /^[0-9]+.[0-9]+.[0-9]+$/;
+  if (!result.releaseName.trim().match(regExp)) {
+    return await promptForReleaseName(
+      tags,
+      `Please enter a valid version number (previous release: '${tags.latest}'):`
+    );
   }
 
   return result.releaseName.trim();
