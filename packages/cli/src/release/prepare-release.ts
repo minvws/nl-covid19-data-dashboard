@@ -64,8 +64,13 @@ async function prepareRelease() {
   }
 
   const releaseName = await promptForReleaseName(tags);
+  const branchName = `release/${releaseName}`;
 
-  console.log(releaseName);
+  console.log(`Creating a release branch called '${branchName}':`);
+  await git.checkoutLocalBranch(branchName);
+
+  console.log(`Merging the develop branch into ${branchName}:`);
+  await git.pull('origin', 'develop', { '--no-rebase': null });
 
   return true;
 }
@@ -81,7 +86,9 @@ async function promptForReleaseName(
     onState,
   })) as { releaseName: string };
 
-  if (tags.all.includes(result.releaseName.trim())) {
+  const releaseName = result.releaseName.trim();
+
+  if (tags.all.includes(releaseName)) {
     return await promptForReleaseName(
       tags,
       `A tag with that name already exists, try again (previous release: '${tags.latest}'):`
@@ -89,14 +96,14 @@ async function promptForReleaseName(
   }
 
   const regExp = /^[0-9]+.[0-9]+.[0-9]+$/;
-  if (!result.releaseName.trim().match(regExp)) {
+  if (!releaseName.match(regExp)) {
     return await promptForReleaseName(
       tags,
       `Please enter a valid version number (previous release: '${tags.latest}'):`
     );
   }
 
-  return result.releaseName.trim();
+  return releaseName;
 }
 
 function hasChanges(status: StatusResult) {
