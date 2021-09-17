@@ -2,7 +2,7 @@ export function getVaccinePageQuery(locale: string) {
   return `
   *[_type=='vaccinationsPage']{
     "pageDescription": pageDescription.${locale},
-    "usefulLinks": [...usefulLinks[]{
+    "pageLinks": [...usefulLinks[]{
       "title": title.${locale},
       "category": category.${locale},
       "href": href,
@@ -20,7 +20,7 @@ export function getVaccinePageQuery(locale: string) {
     }],
     "expectedMilestones": [...expected[]{
       "item": ${locale}
-    }] 
+    }]
   }[0]
 `;
 }

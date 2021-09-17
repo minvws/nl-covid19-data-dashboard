@@ -3,7 +3,7 @@ import path from 'path';
 
 export type Scope = 'nl' | 'gm' | 'vr' | 'in';
 
-const schemaPath = path.join(__dirname, '..\\..\\..\\..\\app\\schema');
+const schemaPath = path.join(__dirname, '..//..//..//..//app//schema');
 
 export function getSchemaMetrics(scope: Scope) {
   const schema = loadJsonFromFile(path.join(schemaPath, scope, '__index.json'));

@@ -28,7 +28,7 @@
     },
     "tested_overall": {
       "type": "array",
-      "//": "@TODO set min/maxItems to the number of countries",
+      "$comment": "@TODO set min/maxItems to the number of countries",
       "minItems": 0,
       "maxItems": 999,
       "items": {

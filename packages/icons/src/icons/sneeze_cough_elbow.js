@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const SneezeCoughElbow = forwardRef(({ ...rest }, ref) => {
   return (
@@ -24,14 +23,6 @@ const SneezeCoughElbow = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-SneezeCoughElbow.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 SneezeCoughElbow.displayName = 'SneezeCoughElbow';
 

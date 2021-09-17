@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const MaxAantalBezoekers = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const MaxAantalBezoekers = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-MaxAantalBezoekers.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 MaxAantalBezoekers.displayName = 'MaxAantalBezoekers';
 

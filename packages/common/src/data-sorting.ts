@@ -17,6 +17,11 @@ export function sortTimeSeriesInDataInPlace<T>(
   for (const propertyName of timeSeriesPropertyNames) {
     try {
       const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
+
+      if (timeSeries.values.length === 0) {
+        continue;
+      }
+
       timeSeries.values = sortTimeSeriesValues(timeSeries.values);
 
       if (setDatesToMiddleOfDay) {

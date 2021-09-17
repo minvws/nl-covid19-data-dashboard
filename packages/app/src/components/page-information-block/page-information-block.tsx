@@ -1,4 +1,6 @@
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
+import { isValidElement } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -9,14 +11,14 @@ import { RichContentBlock } from '~/types/cms';
 import { Articles } from './components/articles';
 import { Header } from './components/header';
 import { Metadata, MetadataProps } from './components/metadata';
-import { UsefulLinks } from './components/useful-links';
+import { PageLinks } from './components/page-links';
 
 interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
-  description?: string | RichContentBlock[];
+  description?: string | RichContentBlock[] | ReactNode;
   articles?: ArticleSummary[];
-  usefulLinks?: {
+  pageLinks?: {
     title: string;
     href: string;
   }[];
@@ -33,7 +35,7 @@ export function PageInformationBlock({
   icon,
   description,
   articles,
-  usefulLinks,
+  pageLinks,
   metadata,
   referenceLink,
   id,
@@ -52,10 +54,12 @@ export function PageInformationBlock({
 
   const DescriptionBlock = description ? (
     <Box maxWidth="maxWidthText">
-      {typeof description === 'string' ? (
+      {isValidElement(description) ? (
+        description
+      ) : typeof description === 'string' ? (
         <Text>{description}</Text>
       ) : (
-        <RichContent blocks={description} />
+        <RichContent blocks={description as RichContentBlock[]} />
       )}
     </Box>
   ) : null;
@@ -79,7 +83,7 @@ export function PageInformationBlock({
               gridTemplateColumns="repeat(2, 1fr)"
               width="100%"
               spacing={{
-                _: usefulLinks && usefulLinks.length > 0 ? 0 : 3,
+                _: pageLinks && pageLinks.length > 0 ? 0 : 3,
                 md: 0,
               }}
               css={css({
@@ -103,10 +107,10 @@ export function PageInformationBlock({
               )}
             </Box>
 
-            {usefulLinks && usefulLinks.length > 0 && (
+            {pageLinks && pageLinks.length > 0 && (
               <>
                 <Box height="1px" bg="border" />
-                <UsefulLinks links={usefulLinks} />
+                <PageLinks links={pageLinks} />
               </>
             )}
           </Box>

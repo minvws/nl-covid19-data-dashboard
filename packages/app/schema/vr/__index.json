@@ -94,9 +94,6 @@
     "hospital_nice_sum": {
       "$ref": "hospital_nice_sum.json"
     },
-    "vaccine_coverage": {
-      "$ref": "vaccine_coverage.json"
-    },
     "situations": {
       "$ref": "situations.json"
     },

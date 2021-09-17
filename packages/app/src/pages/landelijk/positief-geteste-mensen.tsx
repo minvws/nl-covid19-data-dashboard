@@ -1,5 +1,4 @@
 import { GgdTesten, Test } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -15,7 +14,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
@@ -131,6 +130,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataOverallLastValue.infected}
                 difference={difference.tested_overall__infected_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
 
               <Markdown content={text.kpi_toelichting} />
@@ -139,10 +139,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(ggdText.summary_text, {
                     percentage: (
-                      <span css={css({ color: 'data.primary' })}>
-                        {formatPercentage(dataGgdLastValue.infected_percentage)}
-                        %
-                      </span>
+                      <InlineText color="data.primary">{`${formatPercentage(
+                        dataGgdLastValue.infected_percentage
+                      )}%`}</InlineText>
                     ),
                     dateTo: formatDateFromSeconds(
                       dataGgdLastValue.date_unix,
@@ -150,9 +149,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   })}
                 </Text>
-                <Anchor underline="hover" href="#ggd">
-                  {ggdText.summary_link_cta}
-                </Anchor>
+                <Markdown content={ggdText.summary_link_cta} />
               </Box>
             </KpiTile>
 
@@ -172,6 +169,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 localeTextKey="positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
 
               <Text>{text.barscale_toelichting}</Text>
@@ -185,7 +183,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               date: dataOverallLastValue.date_unix,
               source: text.bronnen.rivm,
             }}
-            description={text.map_toelichting}
+            description={<Markdown content={text.map_toelichting} />}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
             legend={{
@@ -343,6 +341,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataGgdLastValue.tested_total}
                 difference={difference.tested_ggd__tested_total_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
@@ -361,6 +360,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   difference.tested_ggd__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
+                isAmount={false}
               />
 
               <Text>{ggdText.positief_getest_week_uitleg}</Text>

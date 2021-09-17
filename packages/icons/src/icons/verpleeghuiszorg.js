@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Verpleeghuiszorg = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const Verpleeghuiszorg = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Verpleeghuiszorg.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Verpleeghuiszorg.displayName = 'Verpleeghuiszorg';
 

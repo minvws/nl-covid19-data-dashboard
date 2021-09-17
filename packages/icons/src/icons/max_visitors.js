@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const MaxVisitors = forwardRef(({ ...rest }, ref) => {
   return (
@@ -20,14 +19,6 @@ const MaxVisitors = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-MaxVisitors.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 MaxVisitors.displayName = 'MaxVisitors';
 

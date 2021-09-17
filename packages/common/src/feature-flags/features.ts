@@ -2,12 +2,6 @@ import { Feature } from '~/types';
 
 export const features: Feature[] = [
   {
-    name: 'vaccinationPerAgeGroup',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'vaccine_coverage_per_age_group',
-  },
-  {
     name: 'situationsPage',
     isEnabled: true,
     dataScopes: ['vr', 'vr_collection'],
@@ -41,20 +35,68 @@ export const features: Feature[] = [
   },
   {
     name: 'vrVaccinationPage',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['vr', 'vr_collection'],
     metricName: 'vaccine_coverage_per_age_group',
   },
   {
     name: 'gmVaccinationPage',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['gm', 'gm_collection'],
     metricName: 'vaccine_coverage_per_age_group',
   },
   {
     name: 'nlVaccinationChoropleth',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['gm_collection', 'vr_collection'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'gmRankingHospital',
+    isEnabled: false,
+    dataScopes: ['gm'],
+    metricName: 'hospital_nice_sum',
+  },
+  {
+    name: 'gmRankingTested',
+    isEnabled: false,
+    dataScopes: ['gm'],
+    metricName: 'tested_overall_sum',
+  },
+  {
+    name: 'nlVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
+  {
+    name: 'vrVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'gmVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['gm'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'nlVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'vrVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'gmVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['gm'],
     metricName: 'vaccine_coverage_per_age_group',
   },
 ];

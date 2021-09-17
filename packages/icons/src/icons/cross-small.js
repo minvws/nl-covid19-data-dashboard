@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const CrossSmall = forwardRef(({ ...rest }, ref) => {
   return (
@@ -26,14 +25,6 @@ const CrossSmall = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-CrossSmall.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 CrossSmall.displayName = 'CrossSmall';
 

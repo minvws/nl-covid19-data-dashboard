@@ -3,6 +3,7 @@ import { isDefined } from 'ts-is-present';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -156,6 +157,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
+                isAmount
               />
               <Text>
                 {replaceComponentsInText(
@@ -169,7 +171,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               </Text>
 
-              <Text>{text.extra_uitleg}</Text>
+              <Markdown content={text.extra_uitleg} />
 
               <CollapsibleContent
                 label={

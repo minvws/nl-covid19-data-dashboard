@@ -21,22 +21,22 @@
       "type": "object",
       "properties": {
         "percentage_average": {
-          "type": "number"
+          "type": "integer"
         },
         "percentage_70_plus": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "percentage_55_69": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "percentage_40_54": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "percentage_25_39": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "percentage_16_24": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "date_start_unix": {
           "type": "integer"

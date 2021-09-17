@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { color } from 'styled-system';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import {
   TileAverageDifference,
@@ -10,15 +10,28 @@ import {
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 
-interface KpiValueProps {
-  absolute?: number;
-  percentage?: number;
+interface KpiValueBaseProps {
+  absolute?: number | null;
+  percentage?: number | null;
   valueAnnotation?: string;
-  difference?: DifferenceDecimal | DifferenceInteger;
   text?: string;
   color?: string;
   isMovingAverageDifference?: boolean;
+  differenceFractionDigits?: number;
+  numFragmentDigits?: number;
 }
+
+type DifferenceProps =
+  | {
+      difference?: never;
+      isAmount?: boolean;
+    }
+  | {
+      difference: DifferenceDecimal | DifferenceInteger;
+      isAmount: boolean;
+    };
+
+type KpiValueProps = KpiValueBaseProps & DifferenceProps;
 
 /**
  * When we need to style something specific there is no real reason to use the
@@ -52,40 +65,58 @@ export function KpiValue({
   text,
   color = 'data.primary',
   isMovingAverageDifference,
+  isAmount,
+  differenceFractionDigits,
+  numFragmentDigits,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
 
   return (
     <Box mb={3}>
-      {isDefined(percentage) && isDefined(absolute) ? (
+      {isPresent(percentage) && isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
+          {`${formatNumber(absolute)} (${formatPercentage(percentage, {
+            minimumFractionDigits: numFragmentDigits,
+            maximumFractionDigits: numFragmentDigits,
+          })}%)`}
         </StyledValue>
-      ) : isDefined(percentage) ? (
+      ) : isPresent(percentage) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatPercentage(percentage)}%`}
+          {`${formatPercentage(percentage, {
+            minimumFractionDigits: numFragmentDigits,
+            maximumFractionDigits: numFragmentDigits,
+          })}%`}
         </StyledValue>
       ) : isDefined(text) ? (
         <StyledValue color={color} {...otherProps}>
           {text}
         </StyledValue>
-      ) : (
+      ) : isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {formatNumber(absolute)}
+        </StyledValue>
+      ) : (
+        <StyledValue color={color} {...otherProps}>
+          –
         </StyledValue>
       )}
 
       {isDefined(difference) &&
+        isDefined(isAmount) &&
         (isMovingAverageDifference ? (
           <TileAverageDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
+            isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
           />
         ) : (
           <TileDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
+            isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

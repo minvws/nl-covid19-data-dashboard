@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Vermijd = forwardRef(({ ...rest }, ref) => {
   return (
@@ -23,14 +22,6 @@ const Vermijd = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Vermijd.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Vermijd.displayName = 'Vermijd';
 

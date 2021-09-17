@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Coronavirus = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const Coronavirus = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Coronavirus.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Coronavirus.displayName = 'Coronavirus';
 
