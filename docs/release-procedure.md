@@ -4,21 +4,23 @@
 
 1. Create a branch called `release/x.xx.0` based on `master`(\*).
 2. Merge the develop branch into the release branch.
-3. Publish the release branch to the `origin`, and create a pull-request on
+3. Do a full build with a Sanity export from production to make sure everything works.
+4. Publish the release branch to the `origin`, and create a pull-request on
    `master`.
-4. Create a Github release draft, pointing to the release branch and setting the
+5. Create a Github release draft, pointing to the release branch and setting the
    correct version number together with some release notes. Keep the release
    notes in English even though in the past they were written in Dutch.
-5. Possibly review the PR, make changes, or push other commits to the release
+6. Possibly review the PR, make changes, or push other commits to the release
    branch.
-6. Once ready, merge the release branch to `master` using a **merge commit.
+7. Once ready, merge the release branch to `master` using a **merge commit.
    Never use a squash and merge action, since this will erase/rewrite the commit
    history.**
-7. Hit the publish button in the Github release draft. This should tag the
+8. Hit the publish button in the Github release draft. This should tag the
    correct commit in `master`
-8. Important before running the next step is building the common package to avoid any typescript errors,
+9. Important before running the next step is building the common package to avoid any typescript errors,
    so run `yarn workspace @corona-dashboard/common build`.
-9. Run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
+10. After we are sure we are moving to production with the release as it is, 
+   run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
    script. This script will perform any necessary text mutations for keys that
    have been moved, and also cleans up any deleted texts from the Sanity
    production dataset. For more information [read
