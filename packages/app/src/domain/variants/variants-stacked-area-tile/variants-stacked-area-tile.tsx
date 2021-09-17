@@ -207,11 +207,12 @@ function useSeriesConfig(
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
       .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
-      .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage');
+      .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage')
+      .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
-      baseVariantsFiltered.reverse().map((variantKey) => {
+      baseVariantsFiltered.map((variantKey) => {
         const color = (colors.data.variants as Dictionary<string>)[
           variantKey.split('_')[0]
         ];
