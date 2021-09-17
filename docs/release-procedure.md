@@ -19,12 +19,12 @@
    correct commit in `master`
 9. Important before running the next step is building the common package to avoid any typescript errors,
    so run `yarn workspace @corona-dashboard/common build`.
-10. After we are sure we are moving to production with the release as it is, 
-   run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
-   script. This script will perform any necessary text mutations for keys that
-   have been moved, and also cleans up any deleted texts from the Sanity
-   production dataset. For more information [read
-   this](/docs/lokalize-texts.md#sync-after-release)
+10. After we are sure we are moving to production with the release as it is,
+    run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
+    script. This script will perform any necessary text mutations for keys that
+    have been moved, and also cleans up any deleted texts from the Sanity
+    production dataset. For more information [read
+    this](/docs/lokalize-texts.md#sync-after-release)
 
 (\*) It should be possible to create a release branch from `develop` but if
 hotfix commits did not flow through develop first (see below) then merging
@@ -32,9 +32,9 @@ develop and master could result in conflicts. These conflicts are easier to
 resolve if you start from `master` because then you have the opportunity to
 locally discover and resolve them before you create the pull-request.
 
-## Automated sprint release
+## Prepare a sprint release automatically
 
-Most of the above described steps have been scripted.
+Most of the steps described in the previous section have been scripted.
 
 To be able to run the script a Github personal access token needs to be generated and put in a `.env.local` file.
 (This is used for automatically creating the pull request and github release. This is a one-time procedure for each new developer).
