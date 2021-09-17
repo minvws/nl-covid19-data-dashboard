@@ -5,9 +5,9 @@ import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
-import { Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -215,13 +215,13 @@ export const VaccinationsVrPage = (
             )}
             description={
               <>
-                <Text>
-                  {replaceVariablesInText(
+                <Markdown
+                  content={replaceVariablesInText(
                     siteText.vaccinaties.vr_choropleth_vaccinatie_graad
                       .description,
                     { safetyRegionName: vrName }
                   )}
-                </Text>
+                />
 
                 <AgeGroupSelect onChange={setSelectedAgeGroup} />
               </>
