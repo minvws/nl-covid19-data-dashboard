@@ -18,7 +18,7 @@
     "ts-node": "^10.2.1"
   },
   "scripts": {
-    "release": "ts-node src/release/release.ts",
+    "release": "ts-node src/release/prepare-release.ts",
     "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/cli'",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",
@@ -36,6 +36,7 @@
     "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts"
   },
   "devDependencies": {
+    "@octokit/core": "^3.5.1",
     "@types/meow": "^6.0.0",
     "@types/topojson-client": "^3.1.0",
     "simple-git": "^2.45.1",

@@ -1,16 +1,31 @@
 import chalk from 'chalk';
+import dotenv from 'dotenv';
 import prompts from 'prompts';
 import simpleGit, { StatusResult, TagResult } from 'simple-git';
+import { isDefined } from 'ts-is-present';
+
+dotenv.config({
+  path: `${process.cwd()}/.env.local`,
+});
 
 const git = simpleGit();
 
 (async function run() {
+  if (!isDefined(process.env.GITHUB_PERSONAL_ACCESS_TOKEN)) {
+    console.group('Missing environment:');
+    console.log(
+      'No GITHUB_PERSONAL_ACCESS_TOKEN env var available, create a .env.local file in the root of the packages/cli directory and add it there.\nFind out how to generate an access token by following this URL:\nhttps://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token'
+    );
+    console.groupEnd();
+    process.exit(0);
+  }
+
   const confirmStartResponse = await prompts([
     {
       type: 'confirm',
       name: 'isConfirmed',
       message:
-        'This will start a new release procedure, do you want to continue?',
+        'This will prepare a new Corona Dashboard release, do you want to continue?',
       initial: false,
     },
   ]);
