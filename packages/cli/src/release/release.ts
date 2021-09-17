@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import prompts from 'prompts';
-import simpleGit, { StatusResult } from 'simple-git';
+import simpleGit, { StatusResult, TagResult } from 'simple-git';
 
 const git = simpleGit();
 
@@ -48,7 +48,32 @@ async function prepareRelease() {
     await git.checkout('master');
   }
 
+  const releaseName = await promptForReleaseName(tags);
+
+  console.log(releaseName);
+
   return true;
+}
+
+async function promptForReleaseName(
+  tags: TagResult,
+  retry = false
+): Promise<string> {
+  const message = retry
+    ? `A tag with that name alreayd exists, try again (previous release: '${tags.latest}'):`
+    : `Give the version number for this release (previous release: '${tags.latest}'):`;
+  const result = (await prompts({
+    type: 'text',
+    name: 'releaseName',
+    message,
+    onState,
+  })) as { releaseName: string };
+
+  if (tags.all.includes(result.releaseName)) {
+    return await promptForReleaseName(tags, true);
+  }
+
+  return result.releaseName;
 }
 
 function hasChanges(status: StatusResult) {
@@ -62,4 +87,12 @@ function hasChanges(status: StatusResult) {
     status.files.length ||
     status.staged.length
   );
+}
+
+function onState(state: { aborted: boolean }) {
+  if (state.aborted) {
+    process.nextTick(() => {
+      process.exit(0);
+    });
+  }
 }
