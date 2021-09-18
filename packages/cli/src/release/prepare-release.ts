@@ -187,15 +187,16 @@ async function promptForReleaseName(
   tags: TagResult,
   message = `Give the version number for this release (previous release: ${tags.latest}):`
 ): Promise<string> {
-  const latest = tags.latest as string;
-  const major = semverMajor(latest);
-  const minor = semverMinor(latest);
-  const patch = semverPatch(latest);
+  const latest = tags.latest ?? '0.0.0';
+  const parts = latest.split('.');
+  const major = `${semverMajor(latest)}.${parts[1]}.${parts[2]}`;
+  const minor = `${parts[0]}.${semverMinor(latest)}.${parts[2]}`;
+  const patch = `${parts[0]}.${parts[1]}.${semverPatch(latest)}`;
 
   const choices = [
-    { title: patch.toString(), value: patch },
-    { title: minor.toString(), value: minor },
-    { title: major.toString(), value: major },
+    { title: patch, value: patch },
+    { title: minor, value: minor },
+    { title: major, value: major },
   ];
 
   const result = await prompts({
@@ -206,24 +207,10 @@ async function promptForReleaseName(
     onState,
   });
 
-  const releaseName = result.releaseName.trim();
+  console.log(result.releaseName);
 
-  if (tags.all.includes(releaseName)) {
-    return await promptForReleaseName(
-      tags,
-      `A tag with that name already exists, try again (previous release: '${tags.latest}'):`
-    );
-  }
-
-  const regExp = /^[0-9]+.[0-9]+.[0-9]+$/;
-  if (!releaseName.match(regExp)) {
-    return await promptForReleaseName(
-      tags,
-      `Please enter a valid version number (previous release: '${tags.latest}'):`
-    );
-  }
-
-  return releaseName;
+  process.exit(0);
+  return result.releaseName;
 }
 
 function hasConficts(status: StatusResult) {
