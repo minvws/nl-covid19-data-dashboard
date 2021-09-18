@@ -42,11 +42,6 @@ const git = simpleGit();
   const result = await prepareRelease();
 
   if (result) {
-    console.log(
-      chalk.green(
-        'A pullrequest and a draft release have been created successfully!'
-      )
-    );
     console.log(chalk.green('Release preparation finished'));
   } else {
     console.warn(chalk.yellow('Release preparation aborted...'));
@@ -126,6 +121,9 @@ async function draftRelease(releaseName: string) {
   );
 
   if (response.status === 201) {
+    console.log(
+      chalk.yellow(`Generated draft release: ${response.data.html_url}`)
+    );
     return true;
   }
   return false;
@@ -153,6 +151,9 @@ async function createPullRequest(branchName: string) {
   });
 
   if (response.status === 201) {
+    console.log(
+      chalk.yellow(`Generated pullrequest: ${response.data.html_url}`)
+    );
     return true;
   }
   return false;
