@@ -2,9 +2,7 @@ import { Octokit } from '@octokit/core';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import prompts from 'prompts';
-import semverMajor from 'semver/functions/major';
-import semverMinor from 'semver/functions/minor';
-import semverPatch from 'semver/functions/patch';
+import semverInc from 'semver/functions/inc';
 import simpleGit, { StatusResult, TagResult } from 'simple-git';
 import { isDefined } from 'ts-is-present';
 
@@ -59,6 +57,9 @@ async function prepareRelease() {
   await git.fetch();
   const tags = await git.tags();
 
+  const releaseName = await promptForReleaseName(tags);
+  const branchName = `release/${releaseName}`;
+
   const status = await git.status();
   const branches = await git.branchLocal();
 
@@ -74,9 +75,6 @@ async function prepareRelease() {
     await git.checkout('master');
   }
   await git.pull();
-
-  const releaseName = await promptForReleaseName(tags);
-  const branchName = `release/${releaseName}`;
 
   console.log(`Creating a release branch called '${branchName}'...`);
   await git.checkoutLocalBranch(branchName);
@@ -185,18 +183,18 @@ async function checkForConflicts(): Promise<true> {
 
 async function promptForReleaseName(
   tags: TagResult,
-  message = `Give the version number for this release (previous release: ${tags.latest}):`
+  message = `Provide the new version number for this release (previous release: ${tags.latest}):`
 ): Promise<string> {
   const latest = tags.latest ?? '0.0.0';
-  const parts = latest.split('.');
-  const major = `${semverMajor(latest)}.${parts[1]}.${parts[2]}`;
-  const minor = `${parts[0]}.${semverMinor(latest)}.${parts[2]}`;
-  const patch = `${parts[0]}.${parts[1]}.${semverPatch(latest)}`;
+
+  const major = semverInc(latest, 'major') ?? '0';
+  const minor = semverInc(latest, 'minor') ?? '0';
+  const patch = semverInc(latest, 'patch') ?? '0';
 
   const choices = [
-    { title: patch, value: patch },
-    { title: minor, value: minor },
-    { title: major, value: major },
+    { title: `Patch: ${patch}`, value: patch },
+    { title: `Minor: ${minor}`, value: minor },
+    { title: `Major: ${major}`, value: major },
   ];
 
   const result = await prompts({
@@ -205,11 +203,9 @@ async function promptForReleaseName(
     choices,
     message,
     onState,
+    initial: 0,
   });
 
-  console.log(result.releaseName);
-
-  process.exit(0);
   return result.releaseName;
 }
 

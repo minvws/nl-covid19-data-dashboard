@@ -45,7 +45,8 @@ https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-
 Create the `.env.local` file in `src/packages/cli` by copying the existing `.env.local.example`and renaming it to `.env.local`.
 Inside this file copy your access token over the existing value of the `GITHUB_PERSONAL_ACCESS_TOKEN` key.
 
-To run the automated steps, from the root directory, run the command `yarn prepare-release`. The script will ask for a release name, this should typically be the next semver version. The script actually validates for a pattern of `<number>.<number>.<number>`.
+To run the automated steps, from the root directory, run the command `yarn prepare-release`. The script will ask for a new release version,
+it will give three semver version names based on the latest tag name. A major, minor or patch version.
 
 The script will halt if any merge conflicts are encountered after develop has been merged into the release branch. These will have to be solved manually after which the script can be continued.
 
