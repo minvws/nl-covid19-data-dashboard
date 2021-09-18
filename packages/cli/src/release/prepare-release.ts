@@ -2,6 +2,9 @@ import { Octokit } from '@octokit/core';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import prompts from 'prompts';
+import semverMajor from 'semver/functions/major';
+import semverMinor from 'semver/functions/minor';
+import semverPatch from 'semver/functions/patch';
 import simpleGit, { StatusResult, TagResult } from 'simple-git';
 import { isDefined } from 'ts-is-present';
 
@@ -184,9 +187,16 @@ async function promptForReleaseName(
   tags: TagResult,
   message = `Give the version number for this release (previous release: ${tags.latest}):`
 ): Promise<string> {
+  const major = semverMajor(tags.latest);
+  const minor = semverMinor(tags.latest);
+  const patch = semverPatch(tags.latest);
+
+  const choices = [patch, minor, major];
+
   const result = (await prompts({
-    type: 'text',
+    type: 'select',
     name: 'releaseName',
+    choices,
     message,
     onState,
   })) as { releaseName: string };
