@@ -187,19 +187,24 @@ async function promptForReleaseName(
   tags: TagResult,
   message = `Give the version number for this release (previous release: ${tags.latest}):`
 ): Promise<string> {
-  const major = semverMajor(tags.latest);
-  const minor = semverMinor(tags.latest);
-  const patch = semverPatch(tags.latest);
+  const latest = tags.latest as string;
+  const major = semverMajor(latest);
+  const minor = semverMinor(latest);
+  const patch = semverPatch(latest);
 
-  const choices = [patch, minor, major];
+  const choices = [
+    { title: patch.toString(), value: patch },
+    { title: minor.toString(), value: minor },
+    { title: major.toString(), value: major },
+  ];
 
-  const result = (await prompts({
+  const result = await prompts({
     type: 'select',
     name: 'releaseName',
     choices,
     message,
     onState,
-  })) as { releaseName: string };
+  });
 
   const releaseName = result.releaseName.trim();
 
