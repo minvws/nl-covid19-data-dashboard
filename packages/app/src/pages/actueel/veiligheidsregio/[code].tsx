@@ -1,36 +1,22 @@
+import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Test, Ziekenhuis } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
-import { some } from 'lodash';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
-import {
-  ChartRegionControls,
-  RegionControlOption,
-} from '~/components/chart-region-controls';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
-import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
-import { Metadata } from '~/components/metadata';
 import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { Anchor } from '~/components/typography';
-import { WarningTile } from '~/components/warning-tile';
-import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
@@ -39,6 +25,7 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
@@ -55,7 +42,6 @@ import {
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -70,11 +56,24 @@ export const getStaticProps = createGetStaticProps(
     'difference'
   ),
   createGetChoroplethData({
-    vr: ({ escalation_levels, tested_overall }) => ({
-      escalation_levels,
-      tested_overall,
-    }),
-    gm: ({ tested_overall }) => ({ tested_overall }),
+    gm: ({ vaccine_coverage_per_age_group }, ctx) => {
+      if (!isDefined(vaccine_coverage_per_age_group)) {
+        return {
+          vaccine_coverage_per_age_group:
+            null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
+        };
+      }
+
+      return {
+        vaccine_coverage_per_age_group: selectVaccineCoverageData(
+          isPresent(ctx.params?.code)
+            ? vaccine_coverage_per_age_group.filter((el) =>
+                gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode)
+              )
+            : vaccine_coverage_per_age_group
+        ),
+      };
+    },
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
@@ -94,21 +93,18 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const { siteText, formatDate } = useIntl();
+  const vrCode = router.query.code as string;
+
+  const { siteText } = useIntl();
 
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
-  const vrCode = router.query.code as string;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-
-  const unknownLevelColor = useEscalationColor(null);
-  const internationalFeature = useFeature('inPositiveTestsPage');
-
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
-
   const dataSitemap = useDataSitemap('vr', vrCode);
+
+  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const metadata = {
     title: replaceVariablesInText(text.metadata.title, {
@@ -265,152 +261,20 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               </TopicalTile>
             )}
 
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.risicokaart.titel}
-                link={siteText.common_actueel.secties.risicokaart.link}
-              />
-
-              <ChoroplethTwoColumnLayout
-                legendComponent={
-                  <EscalationMapLegenda
-                    data={choropleth.vr.escalation_levels}
-                    lastDetermined={
-                      choropleth.vr.escalation_levels[0].last_determined_unix
-                    }
-                  />
-                }
-              >
-                <Box>
-                  <DynamicChoropleth
-                    renderTarget="canvas"
-                    map="vr"
-                    accessibility={{
-                      key: 'topical_escalation_levels_choropleth',
-                    }}
-                    data={choropleth.vr.escalation_levels}
-                    dataConfig={{
-                      metricName: 'escalation_levels',
-                      metricProperty: 'level',
-                      noDataFillColor: unknownLevelColor,
-                    }}
-                    dataOptions={{
-                      getLink: reverseRouter.vr.risiconiveau,
-                    }}
-                    formatTooltip={(context) => (
-                      <VrEscalationTooltip context={context} />
-                    )}
-                  />
-                </Box>
-
-                <Box spacing={3}>
-                  {siteText.nationaal_actueel.risiconiveaus
-                    .belangrijk_bericht && (
-                    <WarningTile
-                      message={
-                        siteText.nationaal_actueel.risiconiveaus
-                          .belangrijk_bericht
-                      }
-                      variant="emphasis"
-                    />
-                  )}
-
-                  <Markdown
-                    content={replaceVariablesInText(
-                      text.risiconiveaus.selecteer_toelichting,
-                      {
-                        last_update: formatDate(
-                          choropleth.vr.escalation_levels[0]
-                            .date_of_insertion_unix,
-                          'day-month'
-                        ),
-                      }
-                    )}
-                  />
-                </Box>
-              </ChoroplethTwoColumnLayout>
-
-              <EscalationLevelExplanations
-                hasUnknownLevel={some(
-                  choropleth.vr.escalation_levels,
-                  (x) => !isPresent(x)
-                )}
-              />
-            </TopicalTile>
-
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={
-                  siteText.common_actueel.secties.positief_getest_kaart.titel
-                }
-              />
-
-              <ChoroplethTwoColumnLayout
-                legendComponent={
-                  <ChoroplethLegenda
-                    thresholds={thresholds.vr.infected_per_100k}
-                    title={
-                      siteText.positief_geteste_personen.chloropleth_legenda
-                        .titel
-                    }
-                  />
-                }
-              >
-                <>
-                  {selectedMap === 'gm' && (
-                    <DynamicChoropleth
-                      renderTarget="canvas"
-                      map="gm"
-                      accessibility={{
-                        key: 'topical_municipal_tested_overall_choropleth',
-                      }}
-                      data={choropleth.gm.tested_overall}
-                      dataConfig={{
-                        metricName: 'tested_overall',
-                        metricProperty: 'infected_per_100k',
-                      }}
-                      dataOptions={{
-                        getLink: reverseRouter.gm.positiefGetesteMensen,
-                      }}
-                    />
-                  )}
-                  {selectedMap === 'vr' && (
-                    <DynamicChoropleth
-                      renderTarget="canvas"
-                      map="vr"
-                      accessibility={{
-                        key: 'topical_region_tested_overall_choropleth',
-                      }}
-                      data={choropleth.vr.tested_overall}
-                      dataConfig={{
-                        metricName: 'tested_overall',
-                        metricProperty: 'infected_per_100k',
-                      }}
-                      dataOptions={{
-                        getLink: reverseRouter.vr.positiefGetesteMensen,
-                      }}
-                    />
-                  )}
-                </>
-                <Box spacing={3}>
-                  <Metadata
-                    date={
-                      choropleth.vr.escalation_levels[0].date_of_insertion_unix
-                    }
-                    source={siteText.positief_geteste_personen.bronnen.rivm}
-                  />
-                  <Markdown
-                    content={siteText.positief_geteste_personen.map_toelichting}
-                  />
-                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
-                    <ChartRegionControls
-                      value={selectedMap}
-                      onChange={setSelectedMap}
-                    />
-                  </Box>
-                </Box>
-              </ChoroplethTwoColumnLayout>
-            </TopicalTile>
+            <VaccinationCoverageChoropleth
+              title={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.vr,
+                { safetyRegion: vrName }
+              )}
+              content={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.vr,
+                { safetyRegion: vrName }
+              )}
+              vrCode={vrCode}
+              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+            />
 
             <TopicalTile>
               <TopicalSectionHeader

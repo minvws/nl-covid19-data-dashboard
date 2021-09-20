@@ -251,6 +251,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             )}
 
             <VaccinationCoverageChoropleth
+              title={
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.nl
+              }
+              content={
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.nl
+              }
               data={{
                 gm: choropleth.gm.vaccine_coverage_per_age_group,
                 vr: choropleth.vr.vaccine_coverage_per_age_group,
