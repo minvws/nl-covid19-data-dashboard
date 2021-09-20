@@ -11,7 +11,7 @@
    correct version number together with some release notes. Keep the release
    notes in English even though in the past they were written in Dutch.
 6. Possibly review the PR, make changes, or push other commits to the release
-   branch.
+   branch. **Definitely consider running a release build locally at this point, this will catch any errors much quicker than first waiting for CI to finish.**
 7. Once ready, merge the release branch to `master` using a **merge commit.
    Never use a squash and merge action, since this will erase/rewrite the commit
    history.**
@@ -19,18 +19,38 @@
    correct commit in `master`
 9. Important before running the next step is building the common package to avoid any typescript errors,
    so run `yarn workspace @corona-dashboard/common build`.
-10. After we are sure we are moving to production with the release as it is, 
-   run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
-   script. This script will perform any necessary text mutations for keys that
-   have been moved, and also cleans up any deleted texts from the Sanity
-   production dataset. For more information [read
-   this](/docs/lokalize-texts.md#sync-after-release)
+10. After we are sure we are moving to production with the release as it is,
+    run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
+    script. This script will perform any necessary text mutations for keys that
+    have been moved, and also cleans up any deleted texts from the Sanity
+    production dataset. For more information [read
+    this](/docs/lokalize-texts.md#sync-after-release)
 
 (\*) It should be possible to create a release branch from `develop` but if
 hotfix commits did not flow through develop first (see below) then merging
 develop and master could result in conflicts. These conflicts are easier to
 resolve if you start from `master` because then you have the opportunity to
 locally discover and resolve them before you create the pull-request.
+
+## Prepare a sprint release automatically
+
+Most of the steps described in the previous section have been scripted.
+
+To be able to run the script a Github personal access token needs to be generated and put in a `.env.local` file.
+(This is used for automatically creating the pull request and github release. This is a one-time procedure for each new developer).
+Follow the guidelines on this page to generate a token:
+https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+(Make sure to select ALL the access rights, otherwise the Github API calls will end in 404 errors).
+
+Create the `.env.local` file in `src/packages/cli` by copying the existing `.env.local.example`and renaming it to `.env.local`.
+Inside this file copy your access token over the existing value of the `GITHUB_PERSONAL_ACCESS_TOKEN` key.
+
+To run the automated steps, from the root directory, run the command `yarn prepare-release`. The script will ask for a new release version,
+it will give three semver version names based on the latest tag name. A major, minor or patch version.
+
+The script will halt if any merge conflicts are encountered after develop has been merged into the release branch. These will have to be solved manually after which the script can be continued.
+
+The script creates a pull request as well as a draft release on Github. The description of which will contain a placeholder text, so do be sure to update these before merging and releasing.
 
 ## Intermediate or Hotfix Release
 
