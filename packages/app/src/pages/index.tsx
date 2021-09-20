@@ -109,7 +109,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const dataHospitalIntake = data.hospital_nice;
   const dataSitemap = useDataSitemap('nl');
 
-  const { siteText, formatDate, formatNumber } = useIntl();
+  const { siteText, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
@@ -290,11 +290,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       vaccineCoverageEstimatedLastValue as unknown as Record<
                         string,
                         number
-                      >
+                      >,
+                      formatters
                     )}
                   />
                 }
-                titleValue={100}
+                titleValue={
+                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
+                }
                 titleValueIsPercentage
                 oneShotPercentage={
                   vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
@@ -401,7 +404,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content={replaceVariablesInText(
                       text.risiconiveaus.selecteer_toelichting,
                       {
-                        last_update: formatDate(
+                        last_update: formatters.formatDate(
                           createDate(
                             choropleth.vr.escalation_levels[0]
                               .last_determined_unix
