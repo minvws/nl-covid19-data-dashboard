@@ -5,12 +5,6 @@ import { KpiValue } from '~/components/kpi-value';
 import { assert } from '~/utils/assert';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
-/**
- * This component originated from SidebarBarScale, but is used on pages and
- * adds the ability to show the difference as well as things like signaalwaarde.
- *
- * I think we can come up with a better name, maybe later.
- */
 interface PageKpieBaseProps<T> {
   data: T;
   metricName: MetricKeys<T>;
@@ -43,11 +37,6 @@ export function PageKpi<T>({
   showOldDateUnix,
   isAmount,
 }: PageKpiProps<T>) {
-  /**
-   * @TODO this is still a bit messy due to improper typing. Not sure how to
-   * fix this easily. The getLastFilledValue function is now strongly typed on
-   * a certain metric but here we don't have that type as input.
-   */
   const lastValue = get(data, [metricName as string, 'last_value']);
 
   const propertyValue = lastValue && lastValue[metricProperty];
