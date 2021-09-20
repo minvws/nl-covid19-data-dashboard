@@ -3,6 +3,7 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "scripts": {
+    "prepare-release": "yarn workspace @corona-dashboard/cli prepare-release",
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
     "bootstrap": "yarn workspaces run bootstrap",

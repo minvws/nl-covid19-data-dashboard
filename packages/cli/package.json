@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "@octokit/core": "^3.5.1",
     "@turf/turf": "^6.5.0",
     "ajv": "^8",
     "chalk": "^4.1.2",
@@ -13,11 +14,14 @@
     "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "p-memoize": "^4.0.1",
+    "semver": "^7.3.5",
+    "simple-git": "^2.45.1",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.1",
     "ts-node": "^10.2.1"
   },
   "scripts": {
+    "prepare-release": "ts-node src/release/prepare-release.ts",
     "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/cli'",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",
@@ -36,7 +40,9 @@
   },
   "devDependencies": {
     "@types/meow": "^6.0.0",
+    "@types/semver": "^7.3.8",
     "@types/topojson-client": "^3.1.0",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.2"
   }
 }
