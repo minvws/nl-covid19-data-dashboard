@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Maatregelen = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const Maatregelen = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Maatregelen.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Maatregelen.displayName = 'Maatregelen';
 

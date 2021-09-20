@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Lopend = forwardRef(({ ...rest }, ref) => {
   return (
@@ -16,14 +15,6 @@ const Lopend = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Lopend.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Lopend.displayName = 'Lopend';
 

@@ -51,26 +51,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
         }}
         dataOptions={{
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
-          timespanAnnotations: [
-            {
-              fill: 'hatched',
-              start: data.estimatedRange[0],
-              end: data.estimatedRange[1],
-              label:
-                siteText.vaccinaties.data.vaccination_chart.legend.expected,
-            },
-          ],
           forcedMaximumValue: (seriesMax) => seriesMax * 1.1,
-          timeAnnotations: [
-            {
-              type: 'divider',
-              position: data.estimatedRange[0],
-              leftLabel:
-                siteText.vaccinaties.data.vaccination_chart.left_divider_label,
-              rightLabel:
-                siteText.vaccinaties.data.vaccination_chart.right_divider_label,
-            },
-          ],
         }}
         initialWidth={400}
         minHeight={breakpoints.md ? 400 : 250}

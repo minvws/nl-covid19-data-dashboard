@@ -14,6 +14,7 @@
   },
   "definitions": {
     "variant": {
+      "type": "object",
       "title": "nl_variants_variant",
       "additionalProperties": false,
       "required": ["name", "values", "last_value"],
@@ -33,6 +34,7 @@
       }
     },
     "value": {
+      "type": "object",
       "title": "nl_variants_variant_value",
       "additionalProperties": false,
       "required": [

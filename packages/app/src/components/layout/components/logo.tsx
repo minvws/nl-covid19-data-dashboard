@@ -1,29 +1,52 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
-
+import { Link } from '~/utils/link';
 import logoRo from './logo-ro.svg';
 import logoRoSmall from './logo-ro-small.svg';
+import { Box } from '~/components/base';
+import { asResponsiveArray } from '~/style/utils';
 
 export function Logo() {
   const { siteText } = useIntl();
 
   return (
     <LogoWrapper>
-      <LogoImage
-        src={logoRo}
-        alt={siteText.header.logo_alt}
-        width={314}
-        height={125}
-        css={css({ display: ['none', 'block'] })}
-      />
-      <LogoImage
-        src={logoRoSmall}
-        alt={siteText.header.logo_alt}
-        width={40}
-        height={76}
-        css={css({ display: ['block', 'none'] })}
-      />
+      <Link href="/" passHref>
+        <Box
+          as="a"
+          display="block"
+          width={{ _: 40, xs: 314 }}
+          height={{ _: 76, xs: 125 }}
+          marginLeft={{ xs: '-50px' }}
+          transform={{ xs: 'translateX(50%)' }}
+          position="relative"
+          css={css({
+            /**
+             * The logo has a bit of empty space on the right, with this clip path we're slicing
+             * of that part so the user can only click on the logo.
+             */
+            clipPath: asResponsiveArray({
+              xs: 'polygon(0 0, 155px 0, 155px 100%, 0% 100%)',
+            }),
+          })}
+        >
+          <LogoImage
+            src={logoRo}
+            alt={siteText.header.logo_alt}
+            css={css({
+              display: asResponsiveArray({ _: 'none', xs: 'block' }),
+            })}
+          />
+          <LogoImage
+            src={logoRoSmall}
+            alt={siteText.header.logo_alt}
+            css={css({
+              display: asResponsiveArray({ _: 'block', xs: 'none' }),
+            })}
+          />
+        </Box>
+      </Link>
     </LogoWrapper>
   );
 }
@@ -41,7 +64,7 @@ const LogoWrapper = styled.div(
 
 const LogoImage = styled.img(
   css({
-    marginLeft: -50,
-    transform: 'translateX(50%)',
+    width: '100%',
+    height: '100%',
   })
 );

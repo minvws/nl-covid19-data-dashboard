@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const GedeeltelijkOpenRugzak = forwardRef(({ ...rest }, ref) => {
   return (
@@ -16,14 +15,6 @@ const GedeeltelijkOpenRugzak = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-GedeeltelijkOpenRugzak.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 GedeeltelijkOpenRugzak.displayName = 'GedeeltelijkOpenRugzak';
 

@@ -1,11 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable prefer-template */
 const path = require('path');
 const fs = require('fs');
 const format = require('prettier-eslint');
 const upperCamelCase = require('uppercamelcase');
 const camelCase = require('camelcase');
 const lodash = require('lodash');
+const prettierOptions = require('../.prettierrc');
+const eslintConfig = require('../.eslintrc');
 
 const { parseSync, stringify } = require('svgson');
 
@@ -38,10 +38,7 @@ if (!fs.existsSync(dir)) {
 const initialTypeDefinitions = `/// <reference types="react" />
 import { FC, SVGAttributes } from 'react';
 
-export interface IconProps extends SVGAttributes<SVGElement> {
-  // color?: string;
-  // size?: string | number;
-}
+export interface IconProps extends SVGAttributes<SVGElement> {}
 
 export type Icon = FC<IconProps>;
 `;
@@ -122,8 +119,6 @@ icons.forEach((i) => {
 
   const element = `
     import React, {forwardRef} from 'react';
-    import PropTypes from 'prop-types';
-
 
     const ${ComponentName} = forwardRef(({ ...rest }, ref) => {
       return (
@@ -133,14 +128,6 @@ icons.forEach((i) => {
       )
     });
 
-    ${ComponentName}.propTypes = {
-      // color: PropTypes.string,
-      // size: PropTypes.oneOfType([
-      //   PropTypes.string,
-      //   PropTypes.number
-      // ]),
-    }
-
     ${ComponentName}.displayName = '${ComponentName}'
 
     export default ${ComponentName}
@@ -148,14 +135,8 @@ icons.forEach((i) => {
 
   const component = format({
     text: element,
-    eslintConfig: {
-      extends: 'airbnb',
-    },
-    prettierOptions: {
-      bracketSpacing: true,
-      singleQuote: true,
-      parser: 'flow',
-    },
+    eslintConfig,
+    prettierOptions,
   });
 
   fs.writeFileSync(location, component, 'utf-8');

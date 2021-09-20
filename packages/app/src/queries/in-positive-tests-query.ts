@@ -5,7 +5,7 @@ export function getInPositiveTestsQuery(context: GetStaticPropsContext) {
 
   return `
   *[_type=='in_positiveTestsPage']{
-    "usefulLinks": [...pageLinks[]{
+    "pageLinks": [...pageLinks[]{
       "title": title.${locale},
       "href": href,
     }]

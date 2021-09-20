@@ -8,6 +8,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withTranspileModules = require('next-transpile-modules')([
   'd3-geo',
   'd3-array',
+  'globby',
   'internmap',
 ]);
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
@@ -61,11 +62,47 @@ const nextConfig = {
     ];
   },
 
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/gemeente/(g|G)(m|M):nr(\\d{4})/:page*',
+          destination: '/gemeente/GM:nr/:page*',
+        },
+        {
+          source: '/veiligheidsregio/(v|V)(r|R):nr(\\d{2})/:page*',
+          destination: '/veiligheidsregio/VR:nr/:page*',
+        },
+      ],
+    };
+  },
+
   async redirects() {
     return [
       {
         source: '/landelijk',
         destination: '/landelijk/vaccinaties',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-120x120-precomposed.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-120x120.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/gemeente/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
+        destination: '/veiligheidsregio/VR:nr',
+        permanent: false,
+      },
+      {
+        source:
+          '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
+        destination: '/gemeente/GM:nr',
         permanent: false,
       },
     ];
@@ -101,14 +138,20 @@ const nextConfig = {
         '@emotion/memoize',
         '../../node_modules/@styled-system/should-forward-prop/node_modules/@emotion/memoize',
       ],
+      [
+        '@sanity/generate-help-url',
+        '../../node_modules/@sanity/generate-help-url',
+      ],
       ['react-is', '../../node_modules/react-is'],
       [
         'unist-util-visit-parents',
         '../../node_modules/unist-util-visit-parents',
       ],
+      ['d3-array', './node_modules/d3-array'],
       ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
+      ['internmap', '../../node_modules/internmap'],
       ['balanced-match', '../../node_modules/balanced-match'],
     ];
 
@@ -122,6 +165,7 @@ const nextConfig = {
         paths: true,
       })
     );
+
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new DuplicatePackageCheckerPlugin({

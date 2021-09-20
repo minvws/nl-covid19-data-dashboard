@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
-import { getClient } from '~/client';
+import { getClient } from '../client';
 import { appendTextMutation } from './logic/mutations';
 
 // These keys aren't directly referenced in the code base, so we add them manually here

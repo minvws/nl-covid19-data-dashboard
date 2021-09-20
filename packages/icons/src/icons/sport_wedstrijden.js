@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const SportWedstrijden = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const SportWedstrijden = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-SportWedstrijden.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 SportWedstrijden.displayName = 'SportWedstrijden';
 

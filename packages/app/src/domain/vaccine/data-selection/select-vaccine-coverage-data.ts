@@ -13,19 +13,32 @@ export function selectVaccineCoverageData<
     | VrVaccineCoveragePerAgeGroupValue
 >(data: T[]) {
   return data.map((el) => {
+    const parsedLabels: {
+      fully_vaccinated_percentage?: number;
+      has_one_shot_percentage?: number;
+    } = {};
+
     if (isPresent(el.fully_vaccinated_percentage_label)) {
       const result = parseFullyVaccinatedPercentageLabel(
         el.fully_vaccinated_percentage_label
       );
 
       if (isPresent(result)) {
-        return {
-          ...el,
-          fully_vaccinated_percentage: result.sign === '>' ? 100 : 0,
-        };
+        parsedLabels.fully_vaccinated_percentage =
+          result.sign === '>' ? 100 : 0;
       }
     }
 
-    return el;
+    if (isPresent(el.has_one_shot_percentage_label)) {
+      const result = parseFullyVaccinatedPercentageLabel(
+        el.has_one_shot_percentage_label
+      );
+
+      if (isPresent(result)) {
+        parsedLabels.has_one_shot_percentage = result.sign === '>' ? 100 : 0;
+      }
+    }
+
+    return { ...el, ...parsedLabels };
   });
 }

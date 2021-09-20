@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const ReproductieGraf = forwardRef(({ ...rest }, ref) => {
   return (
@@ -18,14 +17,6 @@ const ReproductieGraf = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-ReproductieGraf.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 ReproductieGraf.displayName = 'ReproductieGraf';
 

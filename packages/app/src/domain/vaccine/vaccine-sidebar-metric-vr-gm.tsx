@@ -65,9 +65,11 @@ export function VaccineSidebarMetricVrGm({
                     value: formatPercentage(parsedVaccinatedLabel.value) + '%',
                   }
                 )
-            : `${formatPercentage(
+            : isPresent(filteredAgeGroup.fully_vaccinated_percentage)
+            ? `${formatPercentage(
                 filteredAgeGroup.fully_vaccinated_percentage as number
-              )}%`}
+              )}%`
+            : '–'}
         </InlineText>
 
         <Box pt="2px">

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Stopwatch = forwardRef(({ ...rest }, ref) => {
   return (
@@ -29,14 +28,6 @@ const Stopwatch = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Stopwatch.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Stopwatch.displayName = 'Stopwatch';
 

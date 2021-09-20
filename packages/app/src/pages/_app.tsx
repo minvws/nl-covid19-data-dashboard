@@ -15,6 +15,12 @@ import theme from '~/style/theme';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
 import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 
+const pagesWithSmoothScroll = [
+  'landelijk',
+  'veiligheidsregio',
+  'gemeente',
+] as const;
+
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
@@ -36,9 +42,21 @@ export default function App(props: AppProps) {
     const handleRouteChange = (pathname: string) => {
       piwik.pageview();
 
-      if (!pathname.includes('#')) {
-        scrollToTop();
+      if (pathname.includes('#')) {
+        return;
       }
+
+      // For any page that should not smooth scroll after load, we should
+      // disable smooth scroll during the page transition
+      if (
+        !pagesWithSmoothScroll.some((fragment) => pathname.includes(fragment))
+      ) {
+        document.documentElement.style.scrollBehavior = 'auto';
+      }
+
+      scrollToTop();
+
+      document.documentElement.style.scrollBehavior = '';
     };
 
     router.events.on('routeChangeComplete', handleRouteChange);

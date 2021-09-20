@@ -131,6 +131,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
+                isAmount
               />
             </KpiTile>
 

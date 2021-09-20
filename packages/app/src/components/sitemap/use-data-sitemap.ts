@@ -194,10 +194,6 @@ export function useDataSitemap(
           text: siteText.rioolwater_metingen.titel_sidebar,
           href: reverseRouter.nl.rioolwater(),
         },
-        {
-          text: siteText.verdenkingen_huisartsen.titel_sidebar,
-          href: reverseRouter.nl.verdenkingenHuisartsen(),
-        },
       ],
     },
     {
@@ -206,6 +202,19 @@ export function useDataSitemap(
         {
           text: siteText.corona_melder_app.sidebar.titel,
           href: reverseRouter.nl.coronamelder(),
+        },
+      ],
+    },
+    {
+      header: siteText.nationaal_layout.headings.archief,
+      links: [
+        {
+          text: siteText.besmettelijke_personen.titel_sidebar,
+          href: reverseRouter.nl.besmettelijkeMensen(),
+        },
+        {
+          text: siteText.verdenkingen_huisartsen.titel_sidebar,
+          href: reverseRouter.nl.verdenkingenHuisartsen(),
         },
       ],
     },

@@ -36,7 +36,7 @@ export function useScales<T extends TimestampedValue>(args: {
   minimumValue: number;
   bounds: Bounds;
   numTicks: number;
-}) {
+}): UseScalesResult {
   const today = useCurrentDate();
   const { maximumValue, minimumValue, bounds, numTicks, values } = args;
 
