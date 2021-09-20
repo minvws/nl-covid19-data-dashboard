@@ -6,9 +6,10 @@ interface BarProps {
   value: number | null;
   color: string;
   label?: string | null;
+  height?: number;
 }
 
-export function Bar({ value, color, label }: BarProps) {
+export function Bar({ value, color, label, height = 8 }: BarProps) {
   let parsedVaccinatedLabel;
   if (isPresent(label)) {
     parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
@@ -19,7 +20,7 @@ export function Bar({ value, color, label }: BarProps) {
       {parsedVaccinatedLabel ? (
         <PercentageBar
           percentage={parsedVaccinatedLabel.value}
-          height={8}
+          height={height}
           color={color}
           backgroundStyle={
             parsedVaccinatedLabel.sign === '>' ? 'hatched' : 'normal'
@@ -33,7 +34,7 @@ export function Bar({ value, color, label }: BarProps) {
       ) : (
         <PercentageBar
           percentage={value as number}
-          height={8}
+          height={height}
           color={color}
           backgroundColor="data.underReported"
         />

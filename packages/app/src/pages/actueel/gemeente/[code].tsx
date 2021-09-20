@@ -35,8 +35,8 @@ import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
+import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
@@ -163,7 +163,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <MiniTrendTileLayout id="metric-navigation">
+            <MiniTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={
@@ -231,7 +231,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   <Anchor underline>{vrForMunicipality.name}</Anchor>
                 </Link>
               </RiskLevelIndicator>
-            </MiniTrendTileLayout>
+            </MiniTileLayout>
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
