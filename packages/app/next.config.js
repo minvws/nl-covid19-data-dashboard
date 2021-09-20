@@ -107,7 +107,7 @@ const nextConfig = {
       },
       {
         source: '/veiligheidsregio/:code/risiconiveau',
-        destination: '/',
+        destination: '/veiligheidsregio/:code',
         permanent: true,
       },
     ];
