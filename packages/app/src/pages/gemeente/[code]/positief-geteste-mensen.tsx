@@ -227,10 +227,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'

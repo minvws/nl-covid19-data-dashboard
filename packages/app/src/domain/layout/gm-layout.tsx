@@ -194,7 +194,6 @@ export function GmLayout(props: GmLayoutProps) {
                         >
                           <SidebarMetric
                             data={sidebarData}
-                            scope="gm"
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_reporting"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
@@ -215,7 +214,6 @@ export function GmLayout(props: GmLayoutProps) {
                         >
                           <SidebarMetric
                             data={sidebarData}
-                            scope="gm"
                             metricName="tested_overall"
                             metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
@@ -232,7 +230,6 @@ export function GmLayout(props: GmLayoutProps) {
                         >
                           <SidebarMetric
                             data={sidebarData}
-                            scope="gm"
                             metricName="deceased_rivm"
                             metricProperty="covid_daily"
                             localeTextKey="gemeente_sterfte"
@@ -257,7 +254,6 @@ export function GmLayout(props: GmLayoutProps) {
                       {sidebarData?.sewer ? (
                         <SidebarMetric
                           data={sidebarData}
-                          scope="gm"
                           metricName="sewer"
                           metricProperty="average"
                           localeTextKey="gemeente_rioolwater_metingen"
