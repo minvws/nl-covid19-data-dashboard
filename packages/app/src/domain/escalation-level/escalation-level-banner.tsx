@@ -54,14 +54,14 @@ export function EscalationLevelBanner({
           </Box>
         </Box>
       ) : (
-        <Box py={3} pl={4} pr={2} spacingHorizontal={3}>
+        <Box py={3} pl={4} pr={3} spacingHorizontal={3}>
           <Heading level={3}>{text.banner.title}</Heading>
           <Box
             display="flex"
             spacingHorizontal={{ _: 3, xs: 4 }}
             alignItems="center"
           >
-            <Box color={escalationLevel.color}>
+            <Box color={escalationLevel.color} maxWidth="6rem">
               <NederlandGroot />
             </Box>
             <EscalationLevelLabel level={level} date={date} />
