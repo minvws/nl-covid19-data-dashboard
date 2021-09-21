@@ -215,7 +215,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   }
                   titleValue={
-                    renderedAgeGroup18Pluslabels.fully_vaccinated_percentage
+                    renderedAgeGroup18Pluslabels.has_one_shot_percentage
                   }
                   titleValueIsPercentage
                   oneShotPercentage={
