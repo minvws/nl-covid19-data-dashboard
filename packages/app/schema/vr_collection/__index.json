@@ -8,7 +8,6 @@
     "proto_name",
     "name",
     "code",
-    "escalation_levels",
     "tested_overall",
     "nursing_home",
     "behavior",
@@ -52,14 +51,6 @@
       "maxItems": 25,
       "items": {
         "$ref": "tested_overall.json"
-      }
-    },
-    "escalation_levels": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "escalation_levels.json"
       }
     },
     "nursing_home": {

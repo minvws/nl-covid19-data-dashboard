@@ -10,13 +10,12 @@ import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import searchUrl from '~/assets/search.svg';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useThrottle } from '~/utils/use-throttle';
-
-import searchUrl from '~/assets/search.svg';
 
 type TOption = {
   displayName?: string;
@@ -100,9 +99,9 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         <ComboboxPopover>
           {results.length > 0 ? (
             <ComboboxList persistSelection>
-              {results.map((option) => (
+              {results.map((option, index) => (
                 <ComboboxOption
-                  key={option.name}
+                  key={index}
                   value={option.displayName || option.name}
                 />
               ))}
