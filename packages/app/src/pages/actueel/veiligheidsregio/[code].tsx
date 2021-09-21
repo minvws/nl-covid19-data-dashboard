@@ -8,7 +8,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
   ChartRegionControls,
-  RegionControlOption,
+  RegionControlOption
 } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
@@ -25,7 +25,6 @@ import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { Anchor } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
-import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -33,10 +32,11 @@ import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-colum
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
-  WeeklyHighlightProps,
+  WeeklyHighlightProps
 } from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { VrEscalationTooltip } from '~/domain/topical/tooltip/vr-escalation-tooltip';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
@@ -44,13 +44,13 @@ import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrData,
+  selectVrData
 } from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';

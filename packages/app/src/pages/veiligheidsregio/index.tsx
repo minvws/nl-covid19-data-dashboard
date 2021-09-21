@@ -5,10 +5,10 @@ import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { VrComboBox } from '~/domain/layout/components/vr-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
+import { VrEscalationTooltip } from '~/domain/topical/tooltip/vr-escalation-tooltip';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,

@@ -27,11 +27,11 @@ import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
+import { EscalationLevelBanner } from '~/domain/topical/escalation-level-banner';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
@@ -39,6 +39,7 @@ import {
 } from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { VrEscalationTooltip } from '~/domain/topical/tooltip/vr-escalation-tooltip';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
@@ -153,6 +154,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       <Box bg="white" py={4}>
         <MaxWidth id="content">
           <TileList>
+            <EscalationLevelBanner />
             <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
               title={replaceComponentsInText(
