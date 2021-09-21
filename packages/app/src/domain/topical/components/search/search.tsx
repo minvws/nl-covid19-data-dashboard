@@ -2,6 +2,8 @@ import css from '@styled-system/css';
 import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { Heading } from '~/components/typography';
+import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
@@ -22,24 +24,64 @@ export function Search({ initialValue }: { initialValue?: string }) {
       initialValue={initialValue}
     >
       {(context) => (
-        <SearchForm
-          ref={containerRef}
-          height={height}
-          isFloating={isMounted && breakpoints.md}
-        >
-          <Box {...context.comboboxProps}>
-            <Box position="relative" ref={heightRef}>
-              <SearchInput />
+        <Box spacing={3}>
+          {/* TODO: replace w/ siteText */}
+          <Box
+            display="flex"
+            justifyContent={{ _: 'start', md: 'center' }}
+            textAlign={{ md: 'center' }}
+          >
+            <Heading level={3} color={colors.bodyLight}>
+              Bekijk de actuele situatie van een gemeente of veiligheidsregio
+            </Heading>
+          </Box>
+
+          <Box
+            display="flex"
+            justifyContent={{ _: 'start', md: 'center' }}
+            alignItems={{ _: 'start', md: 'center' }}
+            position="relative"
+            width="100%"
+          >
+            <Box
+              width={'65%'}
+              px={{ md: 4 }}
+              bg={colors.white}
+              position="relative"
+              zIndex={1}
+            >
+              <SearchForm
+                ref={containerRef}
+                height={height}
+                isFloating={isMounted && breakpoints.md}
+              >
+                <Box {...context.comboboxProps}>
+                  <Box position="relative" ref={heightRef}>
+                    <SearchInput />
+                  </Box>
+
+                  <Box
+                    boxShadow="tile"
+                    display={context.showResults ? 'block' : 'none'}
+                  >
+                    <SearchResults />
+                  </Box>
+                </Box>
+              </SearchForm>
             </Box>
 
             <Box
-              boxShadow="tile"
-              display={context.showResults ? 'block' : 'none'}
-            >
-              <SearchResults />
-            </Box>
+              display={{ _: 'none', md: 'block' }}
+              position="absolute"
+              top="50%"
+              left="0"
+              height="1px"
+              width="100%"
+              transform="translate(0, -50%)"
+              bg={colors.border}
+            />
           </Box>
-        </SearchForm>
+        </Box>
       )}
     </SearchContextProvider>
   );

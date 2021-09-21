@@ -127,10 +127,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <Box width={{ lg: '65%' }}>
-              <Search />
-            </Box>
-
             <MiniTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.ic_opnames.title}
@@ -316,6 +312,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
+
+            <Search />
 
             {content.weeklyHighlight && content.highlights && (
               <Box pt={3} spacing={4}>
