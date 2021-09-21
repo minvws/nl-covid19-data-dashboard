@@ -19,7 +19,6 @@
     "elderly_at_home",
     "disability_care",
     "behavior",
-    "escalation_level",
     "tested_overall_sum",
     "hospital_nice_sum",
     "g_number",
@@ -84,9 +83,6 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
-    },
-    "escalation_level": {
-      "$ref": "escalation_level.json"
     },
     "tested_overall_sum": {
       "$ref": "tested_overall_sum.json"

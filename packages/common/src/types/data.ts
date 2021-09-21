@@ -963,7 +963,6 @@ export interface Vr {
   deceased_rivm: VrDeceasedRivm;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
-  escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   situations: VrSituations;
@@ -1186,17 +1185,6 @@ export interface VrElderlyAtHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrEscalationLevel {
-  level: null | 1 | 2 | 3 | 4;
-  positive_tested_per_100k: number | null;
-  hospital_admissions_per_million: number | null;
-  based_on_statistics_to_unix: number;
-  based_on_statistics_from_unix: number;
-  next_determined_unix: number;
-  last_determined_unix: number;
-  valid_from_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface VrTestedOverallSum {
   values: VrTestedOverallSumValue[];
   last_value: VrTestedOverallSumValue;
@@ -1260,7 +1248,6 @@ export interface VrCollection {
   code: string;
   hospital_nice: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
-  escalation_levels: EscalationLevels[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];
   behavior: VrCollectionBehavior[];
@@ -1281,18 +1268,6 @@ export interface VrCollectionTestedOverall {
   vrcode: string;
   infected_per_100k: number;
   infected: number;
-  date_of_insertion_unix: number;
-}
-export interface EscalationLevels {
-  vrcode: string;
-  level: null | 1 | 2 | 3 | 4;
-  positive_tested_per_100k: number;
-  hospital_admissions_per_million: number;
-  based_on_statistics_to_unix: number;
-  based_on_statistics_from_unix: number;
-  next_determined_unix: number;
-  last_determined_unix: number;
-  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrCollectionNursingHome {

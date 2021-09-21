@@ -61,12 +61,6 @@ export function ReproductionChartTile({
               color: colors.data.primary,
             },
           ]}
-          dataOptions={{
-            benchmark: {
-              value: 1,
-              label: siteText.common.signaalwaarde,
-            },
-          }}
           numGridLines={timeframe === 'all' ? 4 : 3}
         />
       )}
