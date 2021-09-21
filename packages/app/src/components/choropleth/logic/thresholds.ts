@@ -152,25 +152,6 @@ const vrHospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const escalationThresholds: ChoroplethThresholdsValue<1 | 2 | 3 | 4>[] = [
-  {
-    color: colors.data.scale.magenta[0],
-    threshold: 1,
-  },
-  {
-    color: colors.data.scale.magenta[1],
-    threshold: 2,
-  },
-  {
-    color: colors.data.scale.magenta[2],
-    threshold: 3,
-  },
-  {
-    color: colors.data.scale.magenta[3],
-    threshold: 4,
-  },
-];
-
 const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
@@ -376,7 +357,6 @@ export const thresholds: Thresholds = {
   vr: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_reporting: vrHospitalAdmissionsThresholds,
-    level: escalationThresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
     average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,

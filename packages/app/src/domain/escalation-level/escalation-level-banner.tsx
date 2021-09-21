@@ -2,15 +2,25 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading, InlineText } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
+import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
+import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 interface EscalationLevelBannerProps {
-  level: 1 | 2 | 3 | 4;
+  level: EscalationLevelType;
 }
 
 export function EscalationLevelBanner({
-  level = '1',
+  level = 1,
 }: EscalationLevelBannerProps) {
+  const intl = useIntl();
+
+  const escalationLevel = useEscalationLevel(level);
+
+  console.log(escalationLevel);
+
   return (
     <Tile>
       <Box>Kaart van nederland</Box>
@@ -18,7 +28,13 @@ export function EscalationLevelBanner({
         <Heading level={3}>het risiconiveau van Nederland</Heading>
         <Box display="flex">
           <InlineText>
-            <Indicator>{level}</Indicator>Zorgelijk
+            <EscalationLevelIcon>
+              <VisuallyHidden>
+                {intl.siteText.common.risiconiveau_singular}
+              </VisuallyHidden>{' '}
+              {level}
+            </EscalationLevelIcon>
+            Zorgelijk
           </InlineText>
           geldig sinds 16 september
         </Box>
@@ -51,7 +67,7 @@ const Tile = styled.article(
   })
 );
 
-const Indicator = styled.div(
+const EscalationLevelIcon = styled.div(
   css({
     height: '2.5rem',
     width: '2.5rem',
