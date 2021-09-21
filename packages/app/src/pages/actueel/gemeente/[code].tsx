@@ -21,6 +21,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
+import { InlineText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
@@ -155,7 +156,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             <MiniTileLayout id="metric-navigation">
               <MiniTile
                 title={text.mini_trend_tiles.ic_opnames.title}
-                text={text.mini_trend_tiles.ic_opnames.text}
+                text={
+                  <InlineText color="gray">
+                    {text.mini_trend_tiles.ic_opnames.text}
+                  </InlineText>
+                }
                 icon={<Arts />}
               />
 
