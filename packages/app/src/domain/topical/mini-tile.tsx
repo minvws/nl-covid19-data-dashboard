@@ -2,6 +2,7 @@ import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
@@ -12,13 +13,13 @@ import { useIntl } from '~/intl';
 export type MiniTileProps = {
   icon: JSX.Element;
   title: string;
-  titleValue: number;
+  titleValue?: number | string | null;
   titleValueIsPercentage?: boolean;
   text: ReactNode;
-  href: string;
+  href?: string;
   areas?: { header: string; chart: string };
   warning?: string;
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export function MiniTile(props: MiniTileProps) {
@@ -35,39 +36,55 @@ export function MiniTile(props: MiniTileProps) {
   } = props;
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
+  const renderedTitleValue =
+    typeof titleValue === 'number'
+      ? titleValueIsPercentage
+        ? `${formatPercentage(titleValue)}%`
+        : formatNumber(titleValue)
+      : titleValue;
+
   return (
     <>
       <Box gridArea={areas?.header} position="relative" spacing={2} pb={3}>
         <Heading level={3} as="h2">
           <Box as="span" fontWeight="bold" display="flex" alignItems="center">
             <Icon>{icon}</Icon>
-            <HeadingLinkWithIcon
-              href={href}
-              icon={<ArrowIconRight />}
-              iconPlacement="right"
-            >
-              {title}
-            </HeadingLinkWithIcon>
+            {isDefined(href) && (
+              <HeadingLinkWithIcon
+                href={href}
+                icon={<ArrowIconRight />}
+                iconPlacement="right"
+              >
+                {title}
+              </HeadingLinkWithIcon>
+            )}
+            {!isDefined(href) && (
+              <Box as="span" display="inline-block" position="relative">
+                {title}
+              </Box>
+            )}
           </Box>
         </Heading>
-        <Text variant="h1">
-          {titleValueIsPercentage
-            ? `${formatPercentage(titleValue)}%`
-            : formatNumber(titleValue)}
-          {warning && (
-            <InlineTooltip content={warning}>
-              <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
-                <Warning />
-              </WarningIconWrapper>
-            </InlineTooltip>
-          )}
-        </Text>
+        {isDefined(renderedTitleValue) && (
+          <Text variant="h1">
+            {renderedTitleValue}
+            {warning && (
+              <InlineTooltip content={warning}>
+                <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
+                  <Warning />
+                </WarningIconWrapper>
+              </InlineTooltip>
+            )}
+          </Text>
+        )}
 
         <Box>{text}</Box>
       </Box>
-      <Box gridArea={areas?.chart} pb={{ _: '1.5rem', md: 0 }}>
-        {children}
-      </Box>
+      {isDefined(children) && (
+        <Box gridArea={areas?.chart} pb={{ _: '1.5rem', md: 0 }}>
+          {children}
+        </Box>
+      )}
     </>
   );
 }

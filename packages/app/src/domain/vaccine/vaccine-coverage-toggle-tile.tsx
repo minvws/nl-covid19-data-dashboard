@@ -9,7 +9,7 @@ import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
-import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -152,7 +152,7 @@ function AgeGroupBlock({
 
   let parsedVaccinatedLabel;
   if (isPresent(label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
+    parsedVaccinatedLabel = parseVaccinatedPercentageLabel(label);
   }
 
   return (

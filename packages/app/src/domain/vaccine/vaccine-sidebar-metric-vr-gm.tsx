@@ -7,7 +7,7 @@ import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { parseFullyVaccinatedPercentageLabel } from './logic/parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percentage-label';
 interface VariantsSidebarMetricProps {
   data:
     | VrVaccineCoveragePerAgeGroupValue[]
@@ -35,7 +35,7 @@ export function VaccineSidebarMetricVrGm({
 
   let parsedVaccinatedLabel;
   if (isPresent(filteredAgeGroup.fully_vaccinated_percentage_label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(
+    parsedVaccinatedLabel = parseVaccinatedPercentageLabel(
       filteredAgeGroup.fully_vaccinated_percentage_label
     );
   }

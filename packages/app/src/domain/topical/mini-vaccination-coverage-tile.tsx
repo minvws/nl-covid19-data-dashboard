@@ -8,10 +8,10 @@ import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 import { MiniTile, MiniTileProps } from './mini-tile';
 
 type MiniVaccinationCoverageTileProps = {
-  oneShotPercentage: number;
-  fullyVaccinatedPercentage: number;
-  oneShotPercentageLabel?: string;
-  fullyVaccinatedPercentageLabel?: string;
+  oneShotPercentage: number | null;
+  fullyVaccinatedPercentage: number | null;
+  oneShotPercentageLabel?: string | null;
+  fullyVaccinatedPercentageLabel?: string | null;
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(

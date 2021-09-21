@@ -280,13 +280,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
 
               <MiniVaccinationCoverageTile
-                title="Vaccinatiegraad"
+                title={text.mini_trend_tiles.vaccinatiegraad.title}
                 href={reverseRouter.nl.vaccinaties()}
                 icon={<Vaccinaties />}
                 text={
                   <Markdown
                     content={replaceVariablesInText(
-                      text.mini_trend_tiles.vaccinatiegraad.title,
+                      text.mini_trend_tiles.vaccinatiegraad.text,
                       vaccineCoverageEstimatedLastValue as unknown as Record<
                         string,
                         number

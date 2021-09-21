@@ -2,10 +2,12 @@ import css from '@styled-system/css';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
+import {
+  parseVaccinatedPercentageLabel,
+  renderVaccinatedLabel,
+} from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface PercentageWideNumberProps {
   value: number | null;
@@ -20,32 +22,21 @@ export function WidePercentage({
 }: PercentageWideNumberProps) {
   const { siteText, formatPercentage } = useIntl();
 
-  let parsedVaccinatedLabel;
-  if (isPresent(label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
-  }
+  const parsedVaccinatedLabel = isPresent(label)
+    ? parseVaccinatedPercentageLabel(label)
+    : null;
+
+  const renderedVaccinatedLabel = renderVaccinatedLabel(
+    parsedVaccinatedLabel,
+    siteText.vaccinaties_common.labels.meer_dan,
+    siteText.vaccinaties_common.labels.minder_dan,
+    formatPercentage
+  );
 
   return (
     <>
-      {parsedVaccinatedLabel ? (
-        <PercentageMarkup
-          color={color}
-          value={
-            parsedVaccinatedLabel.sign === '>'
-              ? replaceVariablesInText(
-                  siteText.vaccinaties_common.labels.meer_dan,
-                  {
-                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
-                  }
-                )
-              : replaceVariablesInText(
-                  siteText.vaccinaties_common.labels.minder_dan,
-                  {
-                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
-                  }
-                )
-          }
-        />
+      {isPresent(renderedVaccinatedLabel) ? (
+        <PercentageMarkup color={color} value={renderedVaccinatedLabel} />
       ) : (
         <PercentageMarkup
           value={`${formatPercentage(value as number)}%`}

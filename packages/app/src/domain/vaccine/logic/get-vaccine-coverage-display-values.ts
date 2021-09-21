@@ -3,7 +3,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { ChoroplethDataItem, MapType } from '~/components/choropleth/logic';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { parseFullyVaccinatedPercentageLabel } from './parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from './parse-vaccinated-percentage-label';
 
 export function getVaccineCoverageDisplayValues(
   d: ChoroplethDataItem,
@@ -52,7 +52,7 @@ function getLabelOrValueFormatter(
     labelKey: keyof T
   ) {
     const parsedValue = isPresent(data[labelKey])
-      ? parseFullyVaccinatedPercentageLabel(data[labelKey] as unknown as string)
+      ? parseVaccinatedPercentageLabel(data[labelKey] as unknown as string)
       : (data[property] as unknown as undefined | number | null) ?? null;
 
     if (typeof parsedValue === 'number') {

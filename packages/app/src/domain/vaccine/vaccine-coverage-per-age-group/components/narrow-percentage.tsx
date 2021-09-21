@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -24,7 +24,7 @@ export function NarrowPercentage({
 
   let parsedVaccinatedLabel;
   if (isPresent(label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
+    parsedVaccinatedLabel = parseVaccinatedPercentageLabel(label);
   }
 
   return (
