@@ -241,7 +241,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'gapped-stacked-area',
                     metricProperty: 'beds_occupied_covid',
                     label: text.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,

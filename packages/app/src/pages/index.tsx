@@ -144,7 +144,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       <Box bg="white" py={4}>
         <MaxWidth id="content">
           <TileList>
-            <EscalationLevelBanner />
             <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
               title={replaceComponentsInText(
@@ -247,6 +246,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               />
             </MiniTrendTileLayout>
+
+            <EscalationLevelBanner level={2} date={1632554802} />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}

@@ -5,17 +5,17 @@ import { colors } from '~/style/theme';
  */
 export type EscalationLevelType = 1 | 2 | 3;
 
-export const escalationThresholds = [
+export const escalationColors = [
   {
     color: colors.data.scale.magenta[0],
-    threshold: 1,
+    level: 1,
   },
   {
     color: colors.data.scale.magenta[1],
-    threshold: 2,
+    level: 2,
   },
   {
     color: colors.data.scale.magenta[2],
-    threshold: 3,
+    level: 3,
   },
 ];

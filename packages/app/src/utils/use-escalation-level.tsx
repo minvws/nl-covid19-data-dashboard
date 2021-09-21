@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import {
+  escalationColors,
   EscalationLevelType,
-  escalationThresholds,
 } from '~/domain/escalation-level/common';
-import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/logic/get-escalation-level';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 
@@ -11,8 +11,8 @@ export function useEscalationLevel(level: EscalationLevelType) {
   const { siteText } = useIntl();
 
   return useMemo(() => {
-    const escalationColor = escalationThresholds.find(
-      (threshold) => threshold.threshold === level
+    const escalationColor = escalationColors.find(
+      (x) => x.level === level
     )?.color;
 
     assert(
@@ -22,8 +22,10 @@ export function useEscalationLevel(level: EscalationLevelType) {
 
     return {
       color: escalationColor,
-      text: siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)]
-        .titel,
+      title:
+        siteText.national_escalation_levels.types[
+          getEscalationLevelIndexKey(level)
+        ].title,
     };
   }, [level, siteText]);
 }

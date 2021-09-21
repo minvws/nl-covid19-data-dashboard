@@ -1,57 +1,91 @@
+import { NederlandGroot } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { Heading, InlineText } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { Heading } from '~/components/typography';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
+import { EscalationLevelLabel } from './escalation-level-label';
 
 interface EscalationLevelBannerProps {
   level: EscalationLevelType;
+  date: number;
 }
 
 export function EscalationLevelBanner({
-  level = 1,
+  level,
+  date,
 }: EscalationLevelBannerProps) {
-  const intl = useIntl();
-
+  const { siteText } = useIntl();
+  const text = siteText.national_escalation_levels;
   const escalationLevel = useEscalationLevel(level);
-
-  console.log(escalationLevel);
+  const breakpoints = useBreakpoints(true);
 
   return (
-    <Tile>
-      <Box>Kaart van nederland</Box>
-      <Box display="flex" flexDirection="column">
-        <Heading level={3}>het risiconiveau van Nederland</Heading>
-        <Box display="flex">
-          <InlineText>
-            <EscalationLevelIcon>
-              <VisuallyHidden>
-                {intl.siteText.common.risiconiveau_singular}
-              </VisuallyHidden>{' '}
-              {level}
-            </EscalationLevelIcon>
-            Zorgelijk
-          </InlineText>
-          geldig sinds 16 september
+    <Tile sideColor={escalationLevel.color}>
+      {breakpoints.sm ? (
+        <Box
+          display="flex"
+          spacingHorizontal={4}
+          alignItems="Center"
+          px={4}
+          py={3}
+        >
+          <Box color={escalationLevel.color}>
+            <NederlandGroot />
+          </Box>
+
+          <Box display="flex" flexDirection="column" spacing={3}>
+            <Heading level={3}>{text.banner.title}</Heading>
+            <EscalationLevelLabel level={level} date={date} />
+
+            <LinkWithIcon
+              href={text.banner.link.href}
+              icon={<ArrowIconRight />}
+              iconPlacement="right"
+              fontWeight="bold"
+            >
+              {text.banner.link.label}
+            </LinkWithIcon>
+          </Box>
         </Box>
-        <a> Linkje</a>
-      </Box>
+      ) : (
+        <Box py={3} pl={4} pr={2} spacingHorizontal={3}>
+          <Heading level={3}>{text.banner.title}</Heading>
+          <Box
+            display="flex"
+            spacingHorizontal={{ _: 3, xs: 4 }}
+            alignItems="center"
+          >
+            <Box color={escalationLevel.color}>
+              <NederlandGroot />
+            </Box>
+            <EscalationLevelLabel level={level} date={date} />
+          </Box>
+
+          <LinkWithIcon
+            href={text.banner.link.href}
+            icon={<ArrowIconRight />}
+            iconPlacement="right"
+            fontWeight="bold"
+          >
+            {text.banner.link.label}
+          </LinkWithIcon>
+        </Box>
+      )}
     </Tile>
   );
 }
 
-const Tile = styled.article(
+const Tile = styled.article<{ sideColor: string }>((x) =>
   css({
     position: 'relative',
-    display: 'flex',
-    backgroundColor: 'grey',
-    p: asResponsiveArray({ _: 3, sm: 4 }),
+    backgroundColor: 'page',
     borderRadius: 1,
-    boxShadow: 'tile',
 
     '&:before': {
       content: '""',
@@ -59,23 +93,10 @@ const Tile = styled.article(
       left: 0,
       top: 0,
       height: ' 100%',
-      width: '1rem',
-      backgroundColor: 'blue',
+      width: '0.7rem',
+      backgroundColor: x.sideColor,
       borderTopLeftRadius: 1,
       borderBottomLeftRadius: 1,
     },
-  })
-);
-
-const EscalationLevelIcon = styled.div(
-  css({
-    height: '2.5rem',
-    width: '2.5rem',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red',
-    color: 'white',
   })
 );
