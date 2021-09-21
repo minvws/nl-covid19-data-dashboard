@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "escalation_levels",
+  "additionalProperties": false,
+  "required": [
+    "vrcode",
+    "level",
+    "positive_tested_per_100k",
+    "hospital_admissions_per_million",
+    "based_on_statistics_to_unix",
+    "based_on_statistics_from_unix",
+    "next_determined_unix",
+    "last_determined_unix",
+    "valid_from_unix",
+    "date_of_insertion_unix"
+  ],
+  "properties": {
+    "vrcode": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "level": {
+      "enum": [null, 1, 2, 3, 4]
+    },
+    "positive_tested_per_100k": {
+      "type": "number"
+    },
+    "hospital_admissions_per_million": {
+      "type": "number"
+    },
+    "based_on_statistics_to_unix": {
+      "type": "integer"
+    },
+    "based_on_statistics_from_unix": {
+      "type": "integer"
+    },
+    "next_determined_unix": {
+      "type": "integer"
+    },
+    "last_determined_unix": {
+      "type": "integer"
+    },
+    "valid_from_unix": {
+      "type": "integer"
+    },
+    "date_of_insertion_unix": {
+      "type": "integer"
+    }
+  }
+}
