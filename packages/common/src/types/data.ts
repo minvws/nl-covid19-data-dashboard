@@ -967,7 +967,7 @@ export interface Vr {
   hospital_nice_sum: VrHospitalNiceSum;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
-  escalation_level?: VrEscalationLevel;
+  escalation_level: VrEscalationLevel;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1267,7 +1267,7 @@ export interface VrCollection {
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
   vaccine_coverage_per_age_group: VrCollectionVaccineCoveragePerAgeGroup[];
-  escalation_levels?: EscalationLevels[];
+  escalation_levels: EscalationLevels[];
 }
 export interface VrCollectionHospitalNice {
   date_unix: number;
