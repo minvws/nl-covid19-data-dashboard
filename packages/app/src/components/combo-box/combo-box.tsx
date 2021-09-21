@@ -98,7 +98,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         />
         <ComboboxPopover>
           {results.length > 0 ? (
-            <ComboboxList persistSelection>
+            <ComboboxList>
               {results.map((option, index) => (
                 <ComboboxOption
                   key={index}
