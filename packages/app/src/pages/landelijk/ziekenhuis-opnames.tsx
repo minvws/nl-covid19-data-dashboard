@@ -8,8 +8,8 @@ import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -27,6 +27,7 @@ import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
+import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -38,10 +39,9 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { HospitalAdmissionsPageQuery } from '~/types/cms';
-import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -120,12 +120,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nice,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="nl"
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
-                localeTextKey="ziekenhuisopnames_per_dag"
                 differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                 isMovingAverageDifference
                 isAmount
@@ -243,10 +241,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  benchmark: {
-                    value: 40,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timespanAnnotations: [
                     {
                       start: underReportedRange,
