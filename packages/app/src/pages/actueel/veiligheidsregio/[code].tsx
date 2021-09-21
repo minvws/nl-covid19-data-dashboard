@@ -8,13 +8,10 @@ import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
 import { MaxWidth } from '~/components/max-width';
-import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Anchor } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
@@ -39,7 +36,6 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
-import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -48,13 +44,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData(
-    'tested_overall',
-    'hospital_nice',
-    'code',
-    'escalation_level',
-    'difference'
-  ),
+  selectVrData('tested_overall', 'hospital_nice', 'code', 'difference'),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -98,7 +88,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.veiligheidsregio_actueel;
-  const escalationText = siteText.escalatie_niveau;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -190,25 +179,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
                 accessibility={{ key: 'topical_hospital_nice' }}
               />
-
-              <RiskLevelIndicator
-                title={text.risoconiveau_maatregelen.title}
-                description={text.risoconiveau_maatregelen.description}
-                level={data.escalation_level.level}
-                code={data.code}
-                levelTitle={
-                  escalationText.types[
-                    getEscalationLevelIndexKey(data.escalation_level.level)
-                  ].titel
-                }
-                href={reverseRouter.vr.risiconiveau(vrCode)}
-              >
-                <Link href={reverseRouter.vr.maatregelen(vrCode)} passHref>
-                  <Anchor underline>
-                    {text.risoconiveau_maatregelen.bekijk_href}
-                  </Anchor>
-                </Link>
-              </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
             <CollapsibleButton

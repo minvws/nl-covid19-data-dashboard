@@ -105,6 +105,11 @@ const nextConfig = {
         destination: '/gemeente/GM:nr',
         permanent: false,
       },
+      {
+        source: '/veiligheidsregio/:code/risiconiveau',
+        destination: '/veiligheidsregio/:code',
+        permanent: true,
+      },
     ];
   },
 

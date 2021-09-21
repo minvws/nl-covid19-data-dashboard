@@ -8,14 +8,11 @@ import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
 import { MaxWidth } from '~/components/max-width';
-import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Anchor } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
@@ -42,7 +39,6 @@ import {
 } from '~/static-props/get-data';
 import { assert } from '~/utils/assert';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
-import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -114,20 +110,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const escalationText = siteText.escalatie_niveau;
-
-  const filteredRegion = props.choropleth.vr.escalation_levels.find(
-    (item) => item.vrcode === vrForMunicipality.code
-  );
 
   const internationalFeature = useFeature('inPositiveTestsPage');
 
   const dataSitemap = useDataSitemap('gm', gmCode, data);
-
-  assert(
-    filteredRegion,
-    `Could not find a "vrcode" to match with the region: ${vrForMunicipality.code} to get the the current "level" of it.`
-  );
 
   const metadata = {
     title: replaceVariablesInText(text.metadata.title, {
@@ -210,28 +196,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
                 accessibility={{ key: 'topical_hospital_nice' }}
               />
-
-              <RiskLevelIndicator
-                title={text.risoconiveau_maatregelen.title}
-                description={text.risoconiveau_maatregelen.description}
-                level={filteredRegion.level}
-                code={filteredRegion.vrcode}
-                levelTitle={
-                  escalationText.types[
-                    getEscalationLevelIndexKey(filteredRegion.level)
-                  ].titel
-                }
-                href={reverseRouter.vr.risiconiveau(vrForMunicipality.code)}
-              >
-                {siteText.common.vr_singular}:
-                <br />
-                <Link
-                  href={reverseRouter.actueel.vr(vrForMunicipality.code)}
-                  passHref
-                >
-                  <Anchor underline>{vrForMunicipality.name}</Anchor>
-                </Link>
-              </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
             <CollapsibleButton
