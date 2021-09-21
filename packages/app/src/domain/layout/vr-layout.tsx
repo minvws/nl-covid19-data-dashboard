@@ -21,7 +21,6 @@ import {
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
@@ -30,13 +29,11 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { EscalationLevel } from '../restrictions/types';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
 export const vrPageMetricNames = [
   'code',
-  'escalation_level',
   'tested_overall',
   'deceased_rivm',
   'hospital_nice',
@@ -174,26 +171,10 @@ export function VrLayout(props: VrLayoutProps) {
                       title={
                         siteText.veiligheidsregio_maatregelen.titel_sidebar
                       }
-                      buttonVariant="top"
                       subtitle={
                         siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                       }
                     />
-                    <MetricMenuButtonLink
-                      href={reverseRouter.vr.risiconiveau(code)}
-                      title={
-                        siteText.veiligheidsregio_layout.headings.inschaling
-                      }
-                      buttonVariant="bottom"
-                    >
-                      <Box mt={2}>
-                        <EscalationLevelInfoLabel
-                          level={data.escalation_level.level as EscalationLevel}
-                          size="small"
-                          useLevelColor
-                        />
-                      </Box>
-                    </MetricMenuButtonLink>
                   </Box>
 
                   {vaccinationFeature.isEnabled &&
@@ -235,7 +216,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="hospital_nice"
                         metricProperty="admissions_on_date_of_reporting"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
@@ -259,16 +239,10 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="tested_overall"
                         metricProperty="infected"
-                        altBarScaleMetric={{
-                          metricName: 'tested_overall',
-                          metricProperty: 'infected_per_100k',
-                        }}
                         localeTextKey="veiligheidsregio_positief_geteste_personen"
                         differenceKey="tested_overall__infected_moving_average"
-                        showBarScale={true}
                       />
                     </MetricMenuItemLink>
 
@@ -279,7 +253,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="deceased_rivm"
                         metricProperty="covid_daily"
                         localeTextKey="veiligheidsregio_sterfte"
@@ -313,7 +286,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="behavior"
                         localeTextKey="gedrag_common"
                       />
@@ -336,7 +308,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="nursing_home"
                         metricProperty="newly_infected_people"
                         localeTextKey="verpleeghuis_positief_geteste_personen"
@@ -354,7 +325,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="disability_care"
                         metricProperty="newly_infected_people"
                         localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
@@ -372,7 +342,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="elderly_at_home"
                         metricProperty="positive_tested_daily"
                         localeTextKey="veiligheidsregio_thuiswonende_ouderen"
@@ -395,7 +364,6 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SidebarMetric
                         data={data}
-                        scope="vr"
                         metricName="sewer"
                         metricProperty="average"
                         localeTextKey="veiligheidsregio_rioolwater_metingen"

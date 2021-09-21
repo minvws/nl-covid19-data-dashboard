@@ -4,7 +4,8 @@ import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { Heading, Text } from '~/components/typography';
+import { Markdown } from '~/components/markdown';
+import { Heading } from '~/components/typography';
 import { gmData } from '~/data/gm';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
@@ -58,13 +59,13 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
           <Heading level={2} as="h1">
             {siteText.gemeente_index.selecteer_titel}
           </Heading>
-          <Text>{siteText.gemeente_index.selecteer_toelichting}</Text>
+          <Markdown content={siteText.gemeente_index.selecteer_toelichting} />
 
           <Box
             display="flex"
             flex="1"
             justifyContent="center"
-            height="120vw"
+            height="75vh"
             maxWidth={750}
             maxHeight={960}
             flexDirection="column"
