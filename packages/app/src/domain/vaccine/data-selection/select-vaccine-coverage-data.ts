@@ -4,7 +4,7 @@ import {
   VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
-import { parseFullyVaccinatedPercentageLabel } from '../logic/parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from '../logic/parse-vaccinated-percentage-label';
 
 export function selectVaccineCoverageData<
   T extends
@@ -19,7 +19,7 @@ export function selectVaccineCoverageData<
     } = {};
 
     if (isPresent(el.fully_vaccinated_percentage_label)) {
-      const result = parseFullyVaccinatedPercentageLabel(
+      const result = parseVaccinatedPercentageLabel(
         el.fully_vaccinated_percentage_label
       );
 
@@ -30,7 +30,7 @@ export function selectVaccineCoverageData<
     }
 
     if (isPresent(el.has_one_shot_percentage_label)) {
-      const result = parseFullyVaccinatedPercentageLabel(
+      const result = parseVaccinatedPercentageLabel(
         el.has_one_shot_percentage_label
       );
 

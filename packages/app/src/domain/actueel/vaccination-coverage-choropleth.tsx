@@ -23,7 +23,6 @@ import {
   AgeGroup,
   AgeGroupSelect,
 } from '../vaccine/components/age-group-select';
-import { getVaccineCoverageDisplayValues } from '../vaccine/logic/get-vaccine-coverage-display-values';
 import { ChoroplethTooltip } from '../vaccine/vaccine-coverage-choropleth-per-gm';
 
 type DefaultProps = {
@@ -144,7 +143,10 @@ export function VaccinationCoverageChoropleth(
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  getValues={getVaccineCoverageDisplayValues}
+                  percentageProps={[
+                    'fully_vaccinated_percentage',
+                    'has_one_shot_percentage',
+                  ]}
                 />
               )}
             />
@@ -173,7 +175,10 @@ export function VaccinationCoverageChoropleth(
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  getValues={getVaccineCoverageDisplayValues}
+                  percentageProps={[
+                    'fully_vaccinated_percentage',
+                    'has_one_shot_percentage',
+                  ]}
                 />
               )}
             />
@@ -201,7 +206,10 @@ export function VaccinationCoverageChoropleth(
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  getValues={getVaccineCoverageDisplayValues}
+                  percentageProps={[
+                    'fully_vaccinated_percentage',
+                    'has_one_shot_percentage',
+                  ]}
                 />
               )}
             />

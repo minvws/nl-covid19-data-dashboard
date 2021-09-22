@@ -1,25 +1,25 @@
 import { isPresent } from 'ts-is-present';
 import { PercentageBar } from '~/components/percentage-bar';
-import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { colors } from '~/style/theme';
 interface BarProps {
   value: number | null;
   color: string;
   label?: string | null;
+  height?: number;
 }
 
-export function Bar({ value, color, label }: BarProps) {
-  let parsedVaccinatedLabel;
-  if (isPresent(label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
-  }
+export function Bar({ value, color, label, height = 8 }: BarProps) {
+  const parsedVaccinatedLabel = isPresent(label)
+    ? parseVaccinatedPercentageLabel(label)
+    : undefined;
 
   return (
     <>
-      {parsedVaccinatedLabel ? (
+      {isPresent(parsedVaccinatedLabel) ? (
         <PercentageBar
           percentage={parsedVaccinatedLabel.value}
-          height={8}
+          height={height}
           color={color}
           backgroundStyle={
             parsedVaccinatedLabel.sign === '>' ? 'hatched' : 'normal'
@@ -32,8 +32,8 @@ export function Bar({ value, color, label }: BarProps) {
         />
       ) : (
         <PercentageBar
-          percentage={value as number}
-          height={8}
+          percentage={value ?? 0}
+          height={height}
           color={color}
           backgroundColor="data.underReported"
         />
