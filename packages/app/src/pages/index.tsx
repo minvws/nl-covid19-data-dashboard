@@ -142,6 +142,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<Test />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
+                averageProperty="infected_per_100k_moving_average"
                 href={reverseRouter.nl.positiefGetesteMensen()}
                 accessibility={{ key: 'topical_tested_overall' }}
                 warning={getWarning(
@@ -168,6 +169,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<Ziekenhuis />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
+                averageProperty="admissions_on_date_of_admission_moving_average"
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
                 warning={getWarning(
