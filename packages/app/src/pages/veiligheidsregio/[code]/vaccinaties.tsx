@@ -16,7 +16,6 @@ import {
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { getVaccineCoverageDisplayValues } from '~/domain/vaccine/logic/get-vaccine-coverage-display-values';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -176,9 +175,9 @@ export const VaccinationsVrPage = (
                   filteredAgeGroup18Plus.fully_vaccinated_percentage,
                 has_one_shot: filteredAgeGroup18Plus.has_one_shot_percentage,
                 birthyear: filteredAgeGroup18Plus.birthyear_range,
-                label_fully_vaccinated:
+                fully_vaccinated_label:
                   filteredAgeGroup18Plus.fully_vaccinated_percentage_label,
-                label_has_one_shot:
+                has_one_shot_label:
                   filteredAgeGroup18Plus.has_one_shot_percentage_label,
               }}
               age12Plus={{
@@ -186,9 +185,9 @@ export const VaccinationsVrPage = (
                   filteredAgeGroup12Plus.fully_vaccinated_percentage,
                 has_one_shot: filteredAgeGroup12Plus.has_one_shot_percentage,
                 birthyear: filteredAgeGroup12Plus.birthyear_range,
-                label_fully_vaccinated:
+                fully_vaccinated_label:
                   filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
-                label_has_one_shot:
+                has_one_shot_label:
                   filteredAgeGroup12Plus.has_one_shot_percentage_label,
               }}
             />
@@ -257,7 +256,10 @@ export const VaccinationsVrPage = (
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  getValues={getVaccineCoverageDisplayValues}
+                  percentageProps={[
+                    'fully_vaccinated_percentage',
+                    'has_one_shot_percentage',
+                  ]}
                 />
               )}
             />
