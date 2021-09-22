@@ -9,7 +9,7 @@ import { useIntl } from '~/intl';
 import { ImageBlock } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-export interface TeaserItemProps {
+export interface ContentTeaserProps {
   title: string;
   slug: string;
   cover: ImageBlock;
@@ -17,15 +17,15 @@ export interface TeaserItemProps {
   publicationDate?: string;
   variant?: 'small' | 'normal';
 }
-
-export function TeaserItem({
+// ContentTeaser
+export function ContentTeaser({
   title,
   slug,
   cover,
   category,
   publicationDate,
   variant = 'normal',
-}: TeaserItemProps) {
+}: ContentTeaserProps) {
   const { siteText } = useIntl();
   const breakpoints = useBreakpoints(true);
 
@@ -62,7 +62,7 @@ export function TeaserItem({
             category
           )}
         </InlineText>
-        <Heading level={3} as="h2" color="blue" variant="h5">
+        <Heading level={variant === 'normal' ? 3 : 5} as="h2" color="blue">
           <HeadingLinkWithIcon
             href={slug}
             icon={<ArrowIconRight />}

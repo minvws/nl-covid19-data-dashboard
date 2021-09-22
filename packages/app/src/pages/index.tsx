@@ -7,11 +7,11 @@ import { DataDrivenText } from '~/components/data-driven-text';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
-import { TeaserItemProps } from '~/components/teaser-item';
+import { ContentTeaserProps } from '~/components/teaser-item';
 import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { Layout } from '~/domain/layout/layout';
-import { ArticlesList } from '~/domain/topical/article-list';
+import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
@@ -68,9 +68,9 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
-    articles: TeaserItemProps[];
+    articles: ContentTeaserProps[];
     weeklyHighlight?: WeeklyHighlightProps;
-    highlights: TeaserItemProps[];
+    highlights: ContentTeaserProps[];
     elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
@@ -324,7 +324,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
 
-              <ArticlesList articles={content.articles} />
+              <ArticleList articles={content.articles} />
             </TopicalTile>
           </TileList>
         </MaxWidth>
