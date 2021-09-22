@@ -1,22 +1,21 @@
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
+import { TeaserItemProps } from '~/components/teaser-item';
 import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { Layout } from '~/domain/layout/layout';
-// import { ArticleList } from '~/domain/topical/article-list';
+import { ArticlesList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
-  HighlightTeaserProps,
-  WeeklyHighlightProps,
+  WeeklyHighlightProps
 } from '~/domain/topical/highlights-tile';
 import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
@@ -28,18 +27,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
-  getWarning,
+  getWarning
 } from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -69,9 +68,9 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
-    articles?: ArticleSummary[];
+    articles?: TeaserItemProps[];
     weeklyHighlight?: WeeklyHighlightProps;
-    highlights: HighlightTeaserProps[];
+    highlights: TeaserItemProps[];
     elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
@@ -290,16 +289,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
+            <Box py={4}>
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
+            </Box>
+
             <HighlightsTile
               hiddenTitle={text.highlighted_items.title}
               weeklyHighlight={content.weeklyHighlight}
               highlights={content.highlights}
               showWeeklyHighlight={content.showWeeklyHighlight}
             />
-
-            <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
-            </Box>
 
             <VaccinationCoverageChoropleth
               title={
@@ -325,7 +324,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
 
-              {/* <ArticleList articleSummaries={content.articles} /> */}
+              <ArticlesList articles={content.articles} />
             </TopicalTile>
           </TileList>
         </MaxWidth>
