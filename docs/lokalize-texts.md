@@ -28,6 +28,9 @@ In summary these are the most important things you should be aware of:
   `lokalize:apply-json-edits` script. This will give you a list of changes and
   you can decide which ones to apply. Changes are written in a mutation log
   file, and at the end the JSON is re-exported to reflect all changes.
+  It is recommended to run `lokalize:apply-json-edits` after the feature has
+  been finished, right before merging it to develop since during development
+  changes to the `nl_export.json` file might fluctuate.
 - Merge conflicts in the mutations file are common, but **always** choose to
   **accept both changes**, so that you never remove any mutations. You do not
   have to worry about the order of the timestamps, as these mutations are sorted
