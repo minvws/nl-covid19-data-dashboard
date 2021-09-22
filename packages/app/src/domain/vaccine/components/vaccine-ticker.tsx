@@ -74,6 +74,7 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
           width={CONTAINER_WIDTH}
           height={CONTAINER_HEIGHT}
           position="relative"
+          aria-hidden="true"
         >
           <Clock progress={animationProgress} />
 
