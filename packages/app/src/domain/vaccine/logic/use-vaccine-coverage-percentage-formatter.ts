@@ -5,14 +5,18 @@ import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseFullyVaccinatedPercentageLabel } from './parse-fully-vaccinated-percentage-label';
 
+// All property keys of T that also have a ${property}_label in T
 export type KeyWithLabel<T> = {
   [P in keyof T]: `${string & P}_label` extends keyof T ? P : never;
 }[keyof T];
 
+// All properties that also have a ${property}_label in T
+// Accept other properties as well, but as unknown
 type PropertiesWithLabel<T> = {
   [P in keyof T]: `${string & P}_label` extends keyof T ? T[P] : unknown;
 };
 
+// All ${property}_label in T
 type Labels<T> = {
   [P in keyof T as `${string & P}_label`]?: `${string &
     P}_label` extends keyof T
@@ -20,6 +24,7 @@ type Labels<T> = {
     : never;
 };
 
+// All properties with labels and those labels in T
 type DataWithLabels<T> = PropertiesWithLabel<T> & Labels<T>;
 
 export function useVaccineCoveragePercentageFormatter(numFractionDigits = 0) {
