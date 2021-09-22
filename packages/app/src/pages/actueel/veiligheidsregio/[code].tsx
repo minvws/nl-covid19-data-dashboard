@@ -17,6 +17,7 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
+import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
@@ -319,6 +320,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               <ArticleList articleSummaries={content.articles} />
             </TopicalTile>
           </TileList>
+
+          <Box py={4}>
+            <Search title={siteText.common_actueel.secties.search.title.vr} />
+          </Box>
         </MaxWidth>
       </Box>
     </Layout>
