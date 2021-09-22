@@ -967,6 +967,7 @@ export interface Vr {
   hospital_nice_sum: VrHospitalNiceSum;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
+  escalation_level: VrEscalationLevel;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1240,6 +1241,17 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface VrEscalationLevel {
+  level: null | 1 | 2 | 3 | 4;
+  positive_tested_per_100k: number | null;
+  hospital_admissions_per_million: number | null;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
+  last_determined_unix: number;
+  valid_from_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface VrCollection {
   last_generated: string;
@@ -1255,6 +1267,7 @@ export interface VrCollection {
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
   vaccine_coverage_per_age_group: VrCollectionVaccineCoveragePerAgeGroup[];
+  escalation_levels: EscalationLevels[];
 }
 export interface VrCollectionHospitalNice {
   date_unix: number;
@@ -1369,5 +1382,17 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface EscalationLevels {
+  vrcode: string;
+  level: null | 1 | 2 | 3 | 4;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
+  last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
