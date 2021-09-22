@@ -1,10 +1,15 @@
-import { MetricKeys } from '@corona-dashboard/common';
+import {
+  getLastFilledValue,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { KpiValue } from '~/components/kpi-value';
 import { assert } from '~/utils/assert';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
+
 interface PageKpieBaseProps<T> {
   data: T;
   metricName: MetricKeys<T>;
@@ -27,6 +32,8 @@ type DifferenceProps =
 
 type PageKpiProps<T> = PageKpieBaseProps<T> & DifferenceProps;
 
+const metricNamesHoldingPartialData = ['infectious_people', 'reproduction'];
+
 export function PageKpi<T>({
   data,
   metricName,
@@ -37,9 +44,17 @@ export function PageKpi<T>({
   showOldDateUnix,
   isAmount,
 }: PageKpiProps<T>) {
-  const lastValue = get(data, [metricName as string, 'last_value']);
+  /**
+   * @TODO this is still a bit messy due to improper typing. Not sure how to
+   * fix this easily. The getLastFilledValue function is now strongly typed on
+   * a certain metric but here we don't have that type as input.
+   */
 
-  const propertyValue = lastValue && lastValue[metricProperty];
+  const lastValue = metricNamesHoldingPartialData.includes(metricName as string)
+    ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
+    : get(data, [metricName as string, 'last_value']);
+
+  const propertyValue = lastValue[metricProperty];
 
   assert(
     isDefined(propertyValue),
