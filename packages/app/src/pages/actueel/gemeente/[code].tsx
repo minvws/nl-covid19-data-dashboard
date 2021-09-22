@@ -314,7 +314,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
                   .title.gm,
-                { municipalityName: municipalityName }
+                { municipality: municipalityName }
               )}
               content={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
