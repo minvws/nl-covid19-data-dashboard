@@ -1,10 +1,12 @@
-import { Chart, Test, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
@@ -16,8 +18,9 @@ import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
+import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
@@ -38,7 +41,9 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -70,22 +75,22 @@ export const getStaticProps = createGetStaticProps(
     elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
-    'tested_overall',
+    'intensive_care_nice',
     'hospital_nice',
     'difference',
-    'vaccine_administered_total'
+    'vaccine_administered_total',
+    'vaccine_coverage_per_age_group_estimated'
   )
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const dataInfectedTotal = data.tested_overall;
+  const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
-  const dataVaccines = data.vaccine_administered_total;
   const dataSitemap = useDataSitemap('nl');
 
-  const { siteText, formatNumber } = useIntl();
+  const { siteText, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
@@ -97,6 +102,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  const vaccineCoverageEstimatedLastValue =
+    data.vaccine_coverage_per_age_group_estimated.last_value;
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" py={4}>
@@ -121,33 +128,56 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search />
             </Box>
 
-            <MiniTrendTileLayout id="metric-navigation">
+            <MiniTileLayout id="metric-navigation">
               <MiniTrendTile
-                title={text.mini_trend_tiles.positief_getest.title}
+                title={text.mini_trend_tiles.ic_opnames.title}
                 text={
                   <DataDrivenText
                     data={data}
-                    metricName="tested_overall"
-                    metricProperty="infected"
-                    differenceKey="tested_overall__infected_moving_average"
+                    metricName="intensive_care_nice"
+                    metricProperty="admissions_on_date_of_admission_moving_average"
+                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={
-                      text.data_driven_texts.infected_people_total.value
+                      text.data_driven_texts.intensive_care_nice.value
                     }
                     differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
+                      siteText.common_actueel.secties.kpi
+                        .zeven_daags_gemiddelde_nieuw
                     }
-                    isAmount
+                    isAmount={false}
                   />
                 }
-                icon={<Test />}
-                trendData={dataInfectedTotal.values}
-                metricProperty="infected"
-                averageProperty="infected_per_100k_moving_average"
-                href={reverseRouter.nl.positiefGetesteMensen()}
-                accessibility={{ key: 'topical_tested_overall' }}
+                icon={<Arts />}
+                values={dataICTotal.values}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label:
+                      siteText.ic_opnames_per_dag
+                        .linechart_legend_trend_label_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'area',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label:
+                      siteText.ic_opnames_per_dag.linechart_legend_trend_label,
+                    color: colors.data.primary,
+                    curve: 'step',
+                    strokeWidth: 0,
+                  },
+                ]}
+                titleValue={
+                  last(dataICTotal.values)
+                    ?.admissions_on_date_of_admission_moving_average ?? 0
+                }
+                href={reverseRouter.nl.intensiveCareOpnames()}
+                accessibility={{ key: 'topical_intensive_care_nice' }}
                 warning={getWarning(
                   content.elements.timeSeries,
-                  'tested_overall'
+                  'intensive_care_nice'
                 )}
               />
 
@@ -159,17 +189,43 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
+                    valueTexts={
+                      text.data_driven_texts.intake_hospital_ma_nieuw.value
                     }
-                    isAmount
+                    differenceText={
+                      siteText.common_actueel.secties.kpi
+                        .zeven_daags_gemiddelde_nieuw
+                    }
+                    isAmount={false}
                   />
                 }
                 icon={<Ziekenhuis />}
-                trendData={dataHospitalIntake.values}
-                metricProperty="admissions_on_date_of_reporting"
-                averageProperty="admissions_on_date_of_admission_moving_average"
+                values={dataHospitalIntake.values}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label:
+                      siteText.ziekenhuisopnames_per_dag
+                        .linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'area',
+                    metricProperty: 'admissions_on_date_of_reporting',
+                    label:
+                      siteText.ziekenhuisopnames_per_dag
+                        .linechart_legend_titel_trend_label,
+                    color: colors.data.primary,
+                    curve: 'step',
+                    strokeWidth: 0,
+                  },
+                ]}
+                titleValue={
+                  last(dataHospitalIntake.values)
+                    ?.admissions_on_date_of_admission_moving_average ?? 0
+                }
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
                 warning={getWarning(
@@ -178,34 +234,34 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               />
 
-              <MiniTrendTile
-                title={text.mini_trend_tiles.toegediende_vaccins.title}
-                text={replaceComponentsInText(
-                  text.mini_trend_tiles.toegediende_vaccins.administered_tests,
-                  {
-                    administeredVaccines: (
-                      <strong>
-                        {formatNumber(
-                          data.vaccine_administered_total.last_value.estimated
-                        )}
-                      </strong>
-                    ),
-                  }
-                )}
-                icon={<Vaccinaties />}
-                timeframe="all"
-                trendData={dataVaccines.values}
-                accessibility={{
-                  key: 'topical_vaccine_administrations_over_time',
-                }}
-                metricProperty="estimated"
+              <MiniVaccinationCoverageTile
+                title={text.mini_trend_tiles.vaccinatiegraad.title}
                 href={reverseRouter.nl.vaccinaties()}
-                warning={getWarning(
-                  content.elements.timeSeries,
-                  'vaccine_administered_total'
-                )}
+                icon={<Vaccinaties />}
+                text={
+                  <Markdown
+                    content={replaceVariablesInText(
+                      text.mini_trend_tiles.vaccinatiegraad.text,
+                      vaccineCoverageEstimatedLastValue as unknown as Record<
+                        string,
+                        number
+                      >,
+                      formatters
+                    )}
+                  />
+                }
+                titleValue={
+                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
+                }
+                titleValueIsPercentage
+                oneShotPercentage={
+                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
+                }
+                fullyVaccinatedPercentage={
+                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
+                }
               />
-            </MiniTrendTileLayout>
+            </MiniTileLayout>
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}

@@ -3,7 +3,7 @@ import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { parseFullyVaccinatedPercentageLabel } from './parse-fully-vaccinated-percentage-label';
+import { parseVaccinatedPercentageLabel } from './parse-vaccinated-percentage-label';
 
 // All property keys of T that also have a ${property}_label in T
 export type KeyWithLabel<T> = {
@@ -50,7 +50,7 @@ function getVaccineCoveragePercentageFormatter(
       isPresent(data[labelKey]) &&
       typeof data[labelKey] === 'string'
     ) {
-      const parsedLabel = parseFullyVaccinatedPercentageLabel(
+      const parsedLabel = parseVaccinatedPercentageLabel(
         data[labelKey] as unknown as string
       );
       if (isPresent(parsedLabel)) {
