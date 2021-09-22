@@ -17,7 +17,7 @@ export interface ContentTeaserProps {
   publicationDate?: string;
   variant?: 'small' | 'normal';
 }
-// ContentTeaser
+
 export function ContentTeaser({
   title,
   slug,

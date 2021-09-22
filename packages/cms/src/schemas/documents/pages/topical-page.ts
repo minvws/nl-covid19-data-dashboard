@@ -60,33 +60,19 @@ export const topicalPage = {
           ],
         },
       ],
-      // validation: (Rule: any) => [
-      //   Rule.custom((value: any, context: any) => {
-      //     if (context.document.showWeeklyHighlight) {
-      //       return value.length === 1
-      //         ? true
-      //         : 'Als er een weekbericht geselecteerd is moeten er 1 uitgelichte items toegevoegd zijn.';
-      //     } else {
-      //       return value.length === 2
-      //         ? true
-      //         : 'Als er geen weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
-      //     }
-      //   }).warning(),
-      //   Rule.required().unique().min(1).max(2),
-      // ],
       validation: (Rule: any) => [
         Rule.custom((value: any, context: any) => {
           if (context.document.showWeeklyHighlight) {
+            return value.length === 1
+              ? true
+              : 'Als er een weekbericht geselecteerd is moeten er 1 uitgelichte items toegevoegd zijn.';
+          } else {
             return value.length === 2
               ? true
-              : 'Als er een weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
-          } else {
-            return value.length === 3
-              ? true
-              : 'Als er geen weekbericht geselecteerd is moeten er 3 uitgelichte items toegevoegd zijn.';
+              : 'Als er geen weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
           }
         }).warning(),
-        Rule.required().unique().min(2).max(3),
+        Rule.required().unique().min(1).max(2),
       ],
     },
     {
