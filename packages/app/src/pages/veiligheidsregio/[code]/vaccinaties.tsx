@@ -44,7 +44,6 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'vrVaccinationPage',
-
   createGetStaticProps(
     getLastGeneratedDate,
     selectVrPageMetricData(),

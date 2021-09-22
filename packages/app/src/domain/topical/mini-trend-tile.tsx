@@ -13,6 +13,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { MiniTrendChart } from '~/components/mini-trend-chart';
+import { SparkBars } from '~/components/spark-bars';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
@@ -29,6 +30,7 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   timeframe?: TimeframeOption;
   trendData: T[];
   metricProperty: KeysOfType<T, number | null, true>;
+  averageProperty?: KeysOfType<T, number | null, true>;
   href: string;
   areas?: { header: string; chart: string };
   warning?: string;
@@ -47,6 +49,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
     timeframe = '5weeks',
     trendData,
     metricProperty,
+    averageProperty,
     href,
     areas,
     warning,
@@ -69,8 +72,14 @@ export function MiniTrendTile<T extends TimestampedValue>(
             </HeadingLinkWithIcon>
           </Box>
         </Heading>
+
         <Text variant="h1" data-cy={metricProperty}>
+          {averageProperty && (
+            <SparkBars averageProperty={averageProperty} data={trendData} />
+          )}
+
           {formatNumber(value as unknown as number)}
+
           {warning && (
             <InlineTooltip content={warning}>
               <WarningIconWrapper aria-label={siteText.aria_labels.warning}>

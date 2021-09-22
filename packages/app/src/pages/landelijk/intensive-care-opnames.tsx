@@ -4,8 +4,8 @@ import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -22,6 +22,7 @@ import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
+import { getIntakeHospitalPageQuery } from '~/queries/intake-hospital-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -32,10 +33,9 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { IntakeHospitalPageQuery } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { IntakeHospitalPageQuery } from '~/types/cms';
-import { getIntakeHospitalPageQuery } from '~/queries/intake-hospital-page-query';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -104,12 +104,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nice,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="nl"
                 metricName="intensive_care_nice"
                 metricProperty="admissions_on_date_of_reporting"
-                localeTextKey="ic_opnames_per_dag"
                 differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                 isAmount
                 isMovingAverageDifference
@@ -166,10 +164,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 values={dataIntake.values}
                 timeframe={timeframe}
                 dataOptions={{
-                  benchmark: {
-                    value: 10,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timespanAnnotations: [
                     {
                       start: intakeUnderReportedRange,
