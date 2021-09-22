@@ -9,11 +9,7 @@ import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import {
-  ChoroplethDataItem,
-  MapType,
-  thresholds,
-} from '~/components/choropleth/logic';
+import { thresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -22,12 +18,14 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
-import { getVaccineCoverageDisplayValues } from './logic/get-vaccine-coverage-display-values';
+import {
+  KeyWithLabel,
+  useVaccineCoveragePercentageFormatter,
+} from './logic/use-vaccine-coverage-percentage-formatter';
 
 interface VaccineCoverageChoroplethPerGmProps {
   data: {
@@ -100,7 +98,10 @@ export function VaccineCoverageChoroplethPerGm({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              getValues={getVaccineCoverageDisplayValues}
+              percentageProps={[
+                'fully_vaccinated_percentage',
+                'has_one_shot_percentage',
+              ]}
             />
           )}
         />
@@ -128,7 +129,10 @@ export function VaccineCoverageChoroplethPerGm({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              getValues={getVaccineCoverageDisplayValues}
+              percentageProps={[
+                'fully_vaccinated_percentage',
+                'has_one_shot_percentage',
+              ]}
             />
           )}
         />
@@ -137,39 +141,42 @@ export function VaccineCoverageChoroplethPerGm({
   );
 }
 
-type ChoroplethTooltipProps<T extends ChoroplethDataItem> = {
+type VaccineCoverageData =
+  | GmCollectionVaccineCoveragePerAgeGroup
+  | VrCollectionVaccineCoveragePerAgeGroup;
+
+type ChoroplethTooltipProps<T extends VaccineCoverageData> = {
   data: TooltipData<T>;
-  getValues?: (
-    d: T,
-    text: SiteText['choropleth_tooltip'],
-    map: MapType,
-    formatPercentage: (value: number) => string
-  ) => Partial<{ [key in keyof T]: string }>;
+  percentageProps: KeyWithLabel<VaccineCoverageData>[];
 };
 
-export function ChoroplethTooltip<T extends ChoroplethDataItem>(
+export function ChoroplethTooltip<T extends VaccineCoverageData>(
   props: ChoroplethTooltipProps<T>
 ) {
-  const { data, getValues } = props;
-
-  const { siteText, formatPercentage } = useIntl();
-  const text = siteText.choropleth_tooltip;
-
-  const formattedValues = useMemo(() => {
-    if (isDefined(getValues)) {
-      return getValues(data.dataItem, text, data.map, formatPercentage);
-    }
-
-    const rawValue = data.dataItem[data.dataConfig.metricProperty] || null;
-    return {
-      [data.dataConfig.metricProperty]:
-        typeof rawValue === 'number' ? formatPercentage(rawValue) + '%' : '–',
-    };
-  }, [data, text, getValues, formatPercentage]);
+  const { data, percentageProps } = props;
 
   assert(
-    (data.dataConfig.metricProperty as string) in formattedValues,
-    `No values found for ${data.dataConfig.metricProperty}. Did you provide a 'getValues' function which does not return the metric property this choropleth is about?`
+    percentageProps.indexOf(
+      data.dataConfig
+        .metricProperty as unknown as KeyWithLabel<VaccineCoverageData>
+    ) >= 0,
+    `The given metricProperty ${data.dataConfig.metricProperty} is not found in percentageProps`
+  );
+
+  const { siteText } = useIntl();
+  const text = siteText.choropleth_tooltip;
+  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
+  const coverageData = data.dataItem as VaccineCoverageData;
+
+  const formattedValues = useMemo(
+    () =>
+      Object.fromEntries(
+        percentageProps.map((prop) => [
+          prop,
+          formatCoveragePercentage(coverageData, prop),
+        ])
+      ),
+    [coverageData, percentageProps, formatCoveragePercentage]
   );
 
   const { [data.dataConfig.metricProperty]: mainValue, ...secondaryValues } =
