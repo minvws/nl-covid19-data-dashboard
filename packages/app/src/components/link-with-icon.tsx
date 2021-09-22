@@ -12,6 +12,7 @@ interface LinkWithIconProps {
   icon: ReactNode;
   iconPlacement?: 'left' | 'right';
   underline?: boolean;
+  fontWeight?: 'normal' | 'bold';
 }
 
 interface IconProps {
@@ -26,6 +27,7 @@ export function LinkWithIcon({
   icon,
   children,
   iconPlacement = 'left',
+  fontWeight,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
@@ -33,7 +35,12 @@ export function LinkWithIcon({
   return (
     <Box as="span" display="inline-block" position="relative">
       <Link href={href} passHref locale={false}>
-        <Anchor underline="hover">
+        <Anchor
+          underline="hover"
+          css={css({
+            fontWeight,
+          })}
+        >
           {iconPlacement === 'right' && (
             <>
               {!words.length ? children : firstWords}

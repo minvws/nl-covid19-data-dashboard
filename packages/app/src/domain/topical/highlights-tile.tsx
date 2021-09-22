@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { ContentTeaser, ContentTeaserProps } from '~/components/teaser-item';
+import { ContentTeaser, ContentTeaserProps } from '~/components/content-teaser';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { Block, ImageBlock } from '~/types/cms';
 

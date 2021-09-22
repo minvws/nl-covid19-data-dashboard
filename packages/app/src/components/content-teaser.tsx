@@ -1,10 +1,9 @@
-import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { BackgroundImage } from '~/components/background-image';
 import { Box } from '~/components/base';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { PublicationDate } from '~/components/publication-date';
-import { Heading, InlineText } from '~/components/typography';
+import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { ImageBlock } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -48,11 +47,7 @@ export function ContentTeaser({
         />
       </Box>
       <Box maxWidth="25rem" spacing={publicationDate || category ? 2 : 0}>
-        <InlineText
-          variant="overline2"
-          color="bodyLight"
-          css={css({ display: 'block' })}
-        >
+        <Text variant="overline2" color="bodyLight">
           {publicationDate ? (
             <>
               {`${siteText.common_actueel.secties.meer_lezen.weekly_category} -`}
@@ -61,7 +56,7 @@ export function ContentTeaser({
           ) : (
             category
           )}
-        </InlineText>
+        </Text>
         <Heading level={variant === 'normal' ? 3 : 5} as="h2" color="blue">
           <HeadingLinkWithIcon
             href={slug}

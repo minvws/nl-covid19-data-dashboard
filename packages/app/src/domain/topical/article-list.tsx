@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
-import { ContentTeaser, ContentTeaserProps } from '~/components/teaser-item';
+import { ContentTeaser, ContentTeaserProps } from '~/components/content-teaser';
 import { asResponsiveArray } from '~/style/utils';
 interface ArticleListProps {
   articles: ContentTeaserProps[];

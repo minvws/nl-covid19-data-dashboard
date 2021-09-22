@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
+import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
-import { ContentTeaserProps } from '~/components/teaser-item';
 import { TileList } from '~/components/tile-list';
 import { InlineText } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
@@ -303,10 +303,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             />
 
             <VaccinationCoverageChoropleth
-              title={
+              title={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.gm
-              }
+                  .title.gm,
+                { municipalityName: municipalityName }
+              )}
               content={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
                   .content.gm,
