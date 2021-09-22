@@ -11,7 +11,13 @@ import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
 import { SearchResults } from './search-results';
 
-export function Search({ initialValue }: { initialValue?: string }) {
+export function Search({
+  initialValue,
+  title,
+}: {
+  initialValue?: string;
+  title: string;
+}) {
   const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
 
@@ -25,14 +31,13 @@ export function Search({ initialValue }: { initialValue?: string }) {
     >
       {(context) => (
         <Box spacing={3}>
-          {/* TODO: replace w/ siteText */}
           <Box
             display="flex"
             justifyContent={{ _: 'start', md: 'center' }}
             textAlign={{ md: 'center' }}
           >
             <Heading level={3} color={colors.bodyLight}>
-              Bekijk de actuele situatie van een gemeente of veiligheidsregio
+              {title}
             </Heading>
           </Box>
 
@@ -44,7 +49,11 @@ export function Search({ initialValue }: { initialValue?: string }) {
             width="100%"
           >
             <Box
-              width={'65%'}
+              width={{
+                _: '100%',
+                xs: '20rem',
+                md: context.showResults ? '42rem' : '26rem',
+              }}
               px={{ md: 4 }}
               bg={colors.white}
               position="relative"
@@ -61,8 +70,16 @@ export function Search({ initialValue }: { initialValue?: string }) {
                   </Box>
 
                   <Box
-                    boxShadow="tile"
                     display={context.showResults ? 'block' : 'none'}
+                    borderColor="blue"
+                    borderStyle="solid"
+                    borderWidth="1px"
+                    borderTopColor="border"
+                    borderRadius={1}
+                    borderTopLeftRadius={0}
+                    borderTopRightRadius={0}
+                    // make sure the input and results bottom and top borders overlap
+                    my={'-1px'}
                   >
                     <SearchResults />
                   </Box>
@@ -78,7 +95,7 @@ export function Search({ initialValue }: { initialValue?: string }) {
               height="1px"
               width="100%"
               transform="translate(0, -50%)"
-              bg={colors.border}
+              bg={'border'}
             />
           </Box>
         </Box>
