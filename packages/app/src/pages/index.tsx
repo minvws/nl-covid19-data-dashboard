@@ -18,14 +18,14 @@ import { InferedMapType } from '~/components/choropleth/logic';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { HighlightTeaserProps } from '~/components/highlight-tile';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
+// import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
 import {
@@ -69,7 +69,7 @@ export const getStaticProps = createGetStaticProps(
     showWeeklyHighlight: boolean;
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
-    highlights?: HighlightTeaserProps[];
+    highlights: HighlightTeaserProps[];
     elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
@@ -162,7 +162,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search />
             </Box>
 
-            <MiniTrendTileLayout id="metric-navigation">
+            {/* <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={
@@ -244,7 +244,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   'vaccine_administered_total'
                 )}
               />
-            </MiniTrendTileLayout>
+            </MiniTrendTileLayout> */}
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
@@ -277,19 +277,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.weeklyHighlight && content.highlights && (
-              <Box pt={3} spacing={4}>
-                <TopicalSectionHeader
-                  title={siteText.common_actueel.secties.artikelen.titel}
-                />
-
-                <HighlightsTile
-                  weeklyHighlight={content.weeklyHighlight}
-                  highlights={content.highlights}
-                  showWeeklyHighlight={content.showWeeklyHighlight}
-                />
-              </Box>
-            )}
+            <HighlightsTile
+              hiddenTitle={text.highlighted_items.title}
+              weeklyHighlight={content.weeklyHighlight}
+              highlights={content.highlights}
+              showWeeklyHighlight={content.showWeeklyHighlight}
+            />
 
             <TopicalTile>
               <TopicalSectionHeader
@@ -349,7 +342,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
-              <ArticleList articleSummaries={content.articles} />
+
+              {/* <ArticleList articleSummaries={content.articles} /> */}
             </TopicalTile>
           </TileList>
         </MaxWidth>
