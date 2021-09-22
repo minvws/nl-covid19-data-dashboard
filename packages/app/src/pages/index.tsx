@@ -234,9 +234,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {/* todo: replace w/ siteText */}
             <Box py={4}>
-              <Search title="Bekijk de actuele situatie van een gemeente of veiligheidsregio" />
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
             {content.weeklyHighlight && content.highlights && (
