@@ -30,8 +30,14 @@ export function SparkBars<T extends TimestampedValue>(
   });
 
   return (
-    <Box as="span" mr="3">
-      <svg width={7 * BAR_WIDTH} height={BAR_HEIGHT}>
+    <Box as="span" mr="3" aria-hidden="true">
+      <svg
+        width={7 * BAR_WIDTH}
+        height={BAR_HEIGHT}
+        role="img"
+        aria-hidden="true"
+        focusable="false"
+      >
         {last7Days.map((d, i) => (
           <rect
             key={'date_unix' in d ? d.date_unix : d.date_start_unix}
