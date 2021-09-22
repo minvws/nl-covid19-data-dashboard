@@ -108,7 +108,6 @@ export function VaccinationCoverageChoropleth(
               </Box>
             )}
 
-            {/* TODO: replace with siteText */}
             <ChoroplethLegenda
               thresholds={thresholds.gm.fully_vaccinated_percentage}
               title={
@@ -208,11 +207,9 @@ export function VaccinationCoverageChoropleth(
             />
           )}
         </Box>
+
         <Box spacing={3}>
-          <Markdown
-            /* TODO: replace with siteText */
-            content={`Deze kaart laat zien hoeveel procent van de inwoners van elke gemeente gevaccineerd is.`}
-          />
+          <Markdown content={props.content} />
           <AgeGroupSelect onChange={setSelectedAgeGroup} />
         </Box>
       </ChoroplethTwoColumnLayout>
