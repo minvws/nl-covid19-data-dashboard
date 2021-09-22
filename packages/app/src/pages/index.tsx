@@ -1,33 +1,20 @@
-import {
-  GmCollectionTestedOverall,
-  VrCollectionTestedOverall,
-} from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import { useMemo, useState } from 'react';
 import css from '@styled-system/css';
 import { last } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
-import {
-  ChartRegionControls,
-  RegionControlOption,
-} from '~/components/chart-region-controls';
-import { DynamicChoropleth, OptionalDataConfig } from '~/components/choropleth';
-import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { InferedMapType } from '~/components/choropleth/logic';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
-import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
-import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
+import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
@@ -38,9 +25,9 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
-import { SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getWarning,
@@ -64,10 +51,23 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    vr: ({ tested_overall }) => ({
+    vr: ({
+      escalation_levels,
       tested_overall,
+      vaccine_coverage_per_age_group,
+    }) => ({
+      escalation_levels,
+      tested_overall,
+      vaccine_coverage_per_age_group: isDefined(vaccine_coverage_per_age_group)
+        ? selectVaccineCoverageData(vaccine_coverage_per_age_group)
+        : vaccine_coverage_per_age_group ?? null,
     }),
-    gm: ({ tested_overall }) => ({ tested_overall }),
+    gm: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
+      tested_overall,
+      vaccine_coverage_per_age_group: isDefined(vaccine_coverage_per_age_group)
+        ? selectVaccineCoverageData(vaccine_coverage_per_age_group)
+        : vaccine_coverage_per_age_group ?? null,
+    }),
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
@@ -85,16 +85,6 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
-type ChoroplethConfig<
-  T extends GmCollectionTestedOverall | VrCollectionTestedOverall
-> = {
-  dataConfig: OptionalDataConfig<T>;
-  accessibility: keyof SiteText['accessibility']['charts'];
-  map: InferedMapType<T>;
-  data: T[];
-  getLink: (code: string) => string;
-};
-
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -106,8 +96,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
-
   const internationalFeature = useFeature('inPositiveTestsPage');
 
   const metadata = {
@@ -118,33 +106,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
-
-  const choroplethConfig = useMemo<
-    ChoroplethConfig<GmCollectionTestedOverall | VrCollectionTestedOverall>
-  >(() => {
-    return {
-      dataConfig: {
-        metricName: 'tested_overall',
-        metricProperty: 'infected_per_100k',
-      },
-      accessibility:
-        selectedMap === 'gm'
-          ? 'topical_municipal_tested_overall_choropleth'
-          : 'topical_region_tested_overall_choropleth',
-      map: selectedMap as InferedMapType<
-        GmCollectionTestedOverall | VrCollectionTestedOverall
-      >,
-      data:
-        selectedMap === 'gm'
-          ? choropleth.gm.tested_overall
-          : choropleth.vr.tested_overall,
-      getLink:
-        selectedMap === 'gm'
-          ? reverseRouter.gm.positiefGetesteMensen
-          : reverseRouter.vr.positiefGetesteMensen,
-    };
-  }, [selectedMap, choropleth, reverseRouter]);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" py={4}>
@@ -263,6 +224,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   last(dataHospitalIntake.values)
                     ?.admissions_on_date_of_admission_moving_average ?? 0
                 }
+                averageProperty="admissions_on_date_of_admission_moving_average"
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
                 warning={getWarning(
@@ -332,7 +294,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             </CollapsibleButton>
 
             {content.weeklyHighlight && content.highlights && (
-              <Box pt={3}>
+              <Box pt={3} spacing={4}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
                 />
@@ -345,55 +307,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
             )}
 
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={
-                  siteText.common_actueel.secties.positief_getest_kaart.titel
-                }
-              />
-
-              <ChoroplethTwoColumnLayout
-                legendComponent={
-                  <ChoroplethLegenda
-                    thresholds={thresholds.vr.infected_per_100k}
-                    title={
-                      siteText.positief_geteste_personen.chloropleth_legenda
-                        .titel
-                    }
-                  />
-                }
-              >
-                <DynamicChoropleth
-                  renderTarget="canvas"
-                  accessibility={{
-                    key: choroplethConfig.accessibility,
-                  }}
-                  map={choroplethConfig.map}
-                  data={choroplethConfig.data}
-                  dataConfig={choroplethConfig.dataConfig}
-                  dataOptions={{
-                    getLink: choroplethConfig.getLink,
-                  }}
-                />
-                <Box spacing={3}>
-                  <Metadata
-                    date={
-                      choropleth.vr.tested_overall[0].date_of_insertion_unix
-                    }
-                    source={siteText.positief_geteste_personen.bronnen.rivm}
-                  />
-                  <Markdown
-                    content={siteText.positief_geteste_personen.map_toelichting}
-                  />
-                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
-                    <ChartRegionControls
-                      value={selectedMap}
-                      onChange={setSelectedMap}
-                    />
-                  </Box>
-                </Box>
-              </ChoroplethTwoColumnLayout>
-            </TopicalTile>
+            <VaccinationCoverageChoropleth
+              title={
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.nl
+              }
+              content={
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.nl
+              }
+              data={{
+                gm: choropleth.gm.vaccine_coverage_per_age_group,
+                vr: choropleth.vr.vaccine_coverage_per_age_group,
+              }}
+            />
 
             <TopicalTile>
               <TopicalSectionHeader

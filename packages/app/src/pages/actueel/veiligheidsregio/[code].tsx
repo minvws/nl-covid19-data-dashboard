@@ -1,30 +1,21 @@
+import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Arts, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
 import { last } from 'lodash';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
-import {
-  ChartRegionControls,
-  RegionControlOption,
-} from '~/components/chart-region-controls';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
-import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
-import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { InlineText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
@@ -35,6 +26,7 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -65,10 +57,24 @@ export const getStaticProps = createGetStaticProps(
     'difference'
   ),
   createGetChoroplethData({
-    vr: ({ tested_overall }) => ({
-      tested_overall,
-    }),
-    gm: ({ tested_overall }) => ({ tested_overall }),
+    gm: ({ vaccine_coverage_per_age_group }, ctx) => {
+      if (!isDefined(vaccine_coverage_per_age_group)) {
+        return {
+          vaccine_coverage_per_age_group:
+            null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
+        };
+      }
+
+      return {
+        vaccine_coverage_per_age_group: selectVaccineCoverageData(
+          isPresent(ctx.params?.code)
+            ? vaccine_coverage_per_age_group.filter((el) =>
+                gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode)
+              )
+            : vaccine_coverage_per_age_group
+        ),
+      };
+    },
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
@@ -88,13 +94,12 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
+  const vrCode = router.query.code as string;
   const { siteText, ...formatters } = useIntl();
-
   const text = siteText.veiligheidsregio_actueel;
 
-  const vrCode = router.query.code as string;
-
   const dataHospitalIntake = data.hospital_nice;
+  const dataSitemap = useDataSitemap('vr', vrCode);
 
   const filteredAgeGroup18Plus =
     data.vaccine_coverage_per_age_group.values.find(
@@ -105,10 +110,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
-
-  const dataSitemap = useDataSitemap('vr', vrCode);
 
   const metadata = {
     title: replaceVariablesInText(text.metadata.title, {
@@ -291,79 +292,20 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               </TopicalTile>
             )}
 
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={
-                  siteText.common_actueel.secties.positief_getest_kaart.titel
-                }
-              />
-
-              <ChoroplethTwoColumnLayout
-                legendComponent={
-                  <ChoroplethLegenda
-                    thresholds={thresholds.vr.infected_per_100k}
-                    title={
-                      siteText.positief_geteste_personen.chloropleth_legenda
-                        .titel
-                    }
-                  />
-                }
-              >
-                <>
-                  {selectedMap === 'gm' && (
-                    <DynamicChoropleth
-                      renderTarget="canvas"
-                      map="gm"
-                      accessibility={{
-                        key: 'topical_municipal_tested_overall_choropleth',
-                      }}
-                      data={choropleth.gm.tested_overall}
-                      dataConfig={{
-                        metricName: 'tested_overall',
-                        metricProperty: 'infected_per_100k',
-                      }}
-                      dataOptions={{
-                        getLink: reverseRouter.gm.positiefGetesteMensen,
-                      }}
-                    />
-                  )}
-                  {selectedMap === 'vr' && (
-                    <DynamicChoropleth
-                      renderTarget="canvas"
-                      map="vr"
-                      accessibility={{
-                        key: 'topical_region_tested_overall_choropleth',
-                      }}
-                      data={choropleth.vr.tested_overall}
-                      dataConfig={{
-                        metricName: 'tested_overall',
-                        metricProperty: 'infected_per_100k',
-                      }}
-                      dataOptions={{
-                        getLink: reverseRouter.vr.positiefGetesteMensen,
-                      }}
-                    />
-                  )}
-                </>
-                <Box spacing={3}>
-                  <Metadata
-                    date={
-                      choropleth.vr.tested_overall[0].date_of_insertion_unix
-                    }
-                    source={siteText.positief_geteste_personen.bronnen.rivm}
-                  />
-                  <Markdown
-                    content={siteText.positief_geteste_personen.map_toelichting}
-                  />
-                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
-                    <ChartRegionControls
-                      value={selectedMap}
-                      onChange={setSelectedMap}
-                    />
-                  </Box>
-                </Box>
-              </ChoroplethTwoColumnLayout>
-            </TopicalTile>
+            <VaccinationCoverageChoropleth
+              title={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.vr,
+                { safetyRegion: vrName }
+              )}
+              content={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.vr,
+                { safetyRegion: vrName }
+              )}
+              vrCode={vrCode}
+              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+            />
 
             <TopicalTile>
               <TopicalSectionHeader
