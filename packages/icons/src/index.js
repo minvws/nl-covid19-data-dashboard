@@ -85,6 +85,7 @@ export { default as MeerdaagseEvenementen } from './icons/meerdaagse-evenementen
 export { default as Menu } from './icons/menu';
 export { default as Mondkapje } from './icons/mondkapje';
 export { default as Nederland } from './icons/nederland';
+export { default as NederlandGroot } from './icons/nederland_groot';
 export { default as Notification } from './icons/notification';
 export { default as OnderwijsEnKinderopvangKinderopvang } from './icons/onderwijs-en-kinderopvang_kinderopvang';
 export { default as OnderwijsEnKinderopvangNoodopvang } from './icons/onderwijs-en-kinderopvang_noodopvang';

@@ -9,6 +9,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -204,6 +205,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               />
             </MiniTrendTileLayout>
+
+            <EscalationLevelBanner level={2} date={1632554802} />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}

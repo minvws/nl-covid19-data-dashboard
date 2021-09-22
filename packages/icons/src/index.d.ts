@@ -91,6 +91,7 @@ export const MeerdaagseEvenementen: Icon;
 export const Menu: Icon;
 export const Mondkapje: Icon;
 export const Nederland: Icon;
+export const NederlandGroot: Icon;
 export const Notification: Icon;
 export const OnderwijsEnKinderopvangKinderopvang: Icon;
 export const OnderwijsEnKinderopvangNoodopvang: Icon;
