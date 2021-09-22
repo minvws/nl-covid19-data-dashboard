@@ -15,7 +15,7 @@ import { ArticlesList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
-  WeeklyHighlightProps
+  WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
 import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
@@ -27,18 +27,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
-  getWarning
+  getWarning,
 } from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -68,7 +68,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
-    articles?: TeaserItemProps[];
+    articles: TeaserItemProps[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights: TeaserItemProps[];
     elements: ElementsQueryResult;
