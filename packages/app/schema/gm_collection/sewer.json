@@ -23,10 +23,10 @@
       "pattern": "^GM[0-9]+$"
     },
     "average": {
-      "type": "number"
+      "type": "integer"
     },
     "total_installation_count": {
-      "type": "number"
+      "type": "integer"
     },
     "date_of_insertion_unix": {
       "type": "integer"

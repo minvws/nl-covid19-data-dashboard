@@ -15,7 +15,7 @@
       "additionalProperties": false,
       "properties": {
         "average": {
-          "type": "number"
+          "type": "integer"
         },
         "total_number_of_samples": {
           "type": "integer"
