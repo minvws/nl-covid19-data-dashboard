@@ -1,4 +1,11 @@
 timestamp,action,key,document_id,move_to
+2021-09-21T11:06:52.613Z,add,national_escalation_levels.banner.title,Ierr3hadoEWr1dYNon83Bz,__
+2021-09-21T11:06:53.627Z,add,national_escalation_levels.banner.link.label,4Hn4MB4VRci1fnngMk3k48,__
+2021-09-21T11:06:54.649Z,add,national_escalation_levels.banner.link.href,Ierr3hadoEWr1dYNon83z3,__
+2021-09-21T11:06:56.019Z,add,national_escalation_levels.valid_from,Q0Ac8gjemD8winez2XBR0m,__
+2021-09-21T11:06:57.163Z,add,national_escalation_levels.types.1.title,Ierr3hadoEWr1dYNon858l,__
+2021-09-21T11:06:58.176Z,add,national_escalation_levels.types.2.title,Q0Ac8gjemD8winez2XBS1q,__
+2021-09-21T11:06:59.192Z,add,national_escalation_levels.types.3.title,Q0Ac8gjemD8winez2XBSBR,__
 2021-09-20T12:46:15.487Z,add,common_actueel.secties.vaccination_coverage_choropleth.title.nl,4Hn4MB4VRci1fnngMhDKq4,__
 2021-09-20T12:46:16.511Z,add,common_actueel.secties.vaccination_coverage_choropleth.title.vr,Q0Ac8gjemD8winez2Unwwb,__
 2021-09-20T12:46:17.535Z,add,common_actueel.secties.vaccination_coverage_choropleth.title.gm,4Hn4MB4VRci1fnngMhDL7o,__
