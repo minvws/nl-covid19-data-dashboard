@@ -27,43 +27,31 @@ export function EscalationLevelBanner({
 
   return (
     <Tile sideColor={escalationLevel.color}>
-      {breakpoints.sm ? (
-        <Box
-          display="flex"
-          spacingHorizontal={4}
-          alignItems="Center"
-          px={4}
-          py={3}
-        >
+      <Box
+        display="flex"
+        spacingHorizontal={4}
+        alignItems="Center"
+        px={4}
+        py={3}
+      >
+        {breakpoints.sm && (
           <Box color={escalationLevel.color}>
             <NederlandGroot />
           </Box>
+        )}
 
-          <Box display="flex" flexDirection="column" spacing={3}>
-            <Heading level={3}>{text.banner.title}</Heading>
-            <EscalationLevelLabel level={level} date={date} />
-
-            <LinkWithIcon
-              href={text.banner.link.href}
-              icon={<ArrowIconRight />}
-              iconPlacement="right"
-              fontWeight="bold"
-            >
-              {text.banner.link.label}
-            </LinkWithIcon>
-          </Box>
-        </Box>
-      ) : (
-        <Box py={3} pl={4} pr={3} spacingHorizontal={3}>
+        <Box display="flex" flexDirection="column" spacing={{ sm: 3 }}>
           <Heading level={3}>{text.banner.title}</Heading>
           <Box
-            display="flex"
-            spacingHorizontal={{ _: 3, xs: 4 }}
-            alignItems="center"
+            display={{ _: 'flex', sm: undefined }}
+            alignItems={{ _: 'center', sm: undefined }}
+            spacingHorizontal={{ _: 3, sm: 0 }}
           >
-            <Box color={escalationLevel.color} maxWidth="6rem">
-              <NederlandGroot />
-            </Box>
+            {!breakpoints.sm && (
+              <Box color={escalationLevel.color} maxWidth="6rem">
+                <NederlandGroot />
+              </Box>
+            )}
             <EscalationLevelLabel level={level} date={date} />
           </Box>
 
@@ -76,7 +64,7 @@ export function EscalationLevelBanner({
             {text.banner.link.label}
           </LinkWithIcon>
         </Box>
-      )}
+      </Box>
     </Tile>
   );
 }
