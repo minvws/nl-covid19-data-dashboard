@@ -7,7 +7,6 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
-import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percentage-label';
 interface VariantsSidebarMetricProps {
   data:
     | VrVaccineCoveragePerAgeGroupValue[]
@@ -34,13 +33,6 @@ export function VaccineSidebarMetricVrGm({
   const dateText = replaceVariablesInText(commonText.dateOfReport, {
     dateOfReport: formatDateFromSeconds(filteredAgeGroup.date_unix, 'medium'),
   });
-
-  let parsedVaccinatedLabel;
-  if (isPresent(filteredAgeGroup.fully_vaccinated_percentage_label)) {
-    parsedVaccinatedLabel = parseVaccinatedPercentageLabel(
-      filteredAgeGroup.fully_vaccinated_percentage_label
-    );
-  }
 
   return (
     <Box width="100%" minHeight="4rem" spacing={2}>

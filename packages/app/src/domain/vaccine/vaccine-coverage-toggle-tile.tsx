@@ -8,7 +8,6 @@ import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
-import { parseVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -147,11 +146,6 @@ function AgeGroupBlock({
     parsedBirthyearRange,
     `Something went wrong with parsing the birthyear: ${data.birthyear}`
   );
-
-  let parsedVaccinatedLabel;
-  if (isPresent(label)) {
-    parsedVaccinatedLabel = parseVaccinatedPercentageLabel(label);
-  }
 
   return (
     <Box spacing={2}>

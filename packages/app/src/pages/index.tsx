@@ -1,14 +1,12 @@
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import { useMemo, useState } from 'react';
-import css from '@styled-system/css';
 import { last } from 'lodash';
-import { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
@@ -143,9 +141,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       text.data_driven_texts.intensive_care_nice.value
                     }
                     differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
+                      siteText.common_actueel.secties.kpi
+                        .zeven_daags_gemiddelde_nieuw
                     }
-                    isAmount
+                    isAmount={false}
                   />
                 }
                 icon={<Arts />}
@@ -190,11 +189,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
+                    valueTexts={
+                      text.data_driven_texts.intake_hospital_ma_nieuw.value
                     }
-                    isAmount
+                    differenceText={
+                      siteText.common_actueel.secties.kpi
+                        .zeven_daags_gemiddelde_nieuw
+                    }
+                    isAmount={false}
                   />
                 }
                 icon={<Ziekenhuis />}
@@ -224,7 +226,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   last(dataHospitalIntake.values)
                     ?.admissions_on_date_of_admission_moving_average ?? 0
                 }
-                averageProperty="admissions_on_date_of_admission_moving_average"
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
                 warning={getWarning(

@@ -1,58 +1,14 @@
 import css from '@styled-system/css';
-import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import {
-  parseVaccinatedPercentageLabel,
-  renderVaccinatedLabel,
-} from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
-import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 
 interface PercentageWideNumberProps {
-  value: number | null;
-  color: string;
-  label?: string | null;
-}
-
-export function WidePercentage({
-  value,
-  color,
-  label,
-}: PercentageWideNumberProps) {
-  const { siteText, formatPercentage } = useIntl();
-
-  const parsedVaccinatedLabel = isPresent(label)
-    ? parseVaccinatedPercentageLabel(label)
-    : null;
-
-  const renderedVaccinatedLabel = renderVaccinatedLabel(
-    parsedVaccinatedLabel,
-    siteText.vaccinaties_common.labels.meer_dan,
-    siteText.vaccinaties_common.labels.minder_dan,
-    formatPercentage
-  );
-
-  return (
-    <>
-      {isPresent(renderedVaccinatedLabel) ? (
-        <PercentageMarkup color={color} value={renderedVaccinatedLabel} />
-      ) : (
-        <PercentageMarkup
-          value={`${formatPercentage(value as number)}%`}
-          color={color}
-        />
-      )}
-    </>
-  );
-}
-
-interface PercentageMarkupProps {
   value: string;
   color: string;
 }
 
-function PercentageMarkup({ value, color }: PercentageMarkupProps) {
+export function WidePercentage({ value, color }: PercentageWideNumberProps) {
   return (
     <InlineText
       variant="body2"

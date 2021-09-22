@@ -10,14 +10,13 @@ interface BarProps {
 }
 
 export function Bar({ value, color, label, height = 8 }: BarProps) {
-  let parsedVaccinatedLabel;
-  if (isPresent(label)) {
-    parsedVaccinatedLabel = parseVaccinatedPercentageLabel(label);
-  }
+  const parsedVaccinatedLabel = isPresent(label)
+    ? parseVaccinatedPercentageLabel(label)
+    : undefined;
 
   return (
     <>
-      {parsedVaccinatedLabel ? (
+      {isPresent(parsedVaccinatedLabel) ? (
         <PercentageBar
           percentage={parsedVaccinatedLabel.value}
           height={height}
@@ -33,7 +32,7 @@ export function Bar({ value, color, label, height = 8 }: BarProps) {
         />
       ) : (
         <PercentageBar
-          percentage={value as number}
+          percentage={value ?? 0}
           height={height}
           color={color}
           backgroundColor="data.underReported"

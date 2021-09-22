@@ -30,3 +30,7 @@ timestamp,action,key,document_id,move_to
 2021-09-21T10:44:28.634Z,delete,nationaal_actueel.data_driven_texts.infected_people_total.value.zero,jF33EuwumlGuwav2FD4Cdw,__
 2021-09-21T10:44:28.634Z,delete,nationaal_actueel.mini_trend_tiles.positief_getest.title,jF33EuwumlGuwav2FD4CSC,__
 2021-09-21T10:44:28.634Z,delete,veiligheidsregio_actueel.mini_trend_tiles.positief_getest.title,jF33EuwumlGuwav2FD4DmO,__
+2021-09-22T09:27:36.907Z,add,common_actueel.secties.kpi.zeven_daags_gemiddelde_nieuw,PGwiP4IwXrA0GfLCLDBX5v,__
+2021-09-22T09:27:38.084Z,add,nationaal_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.plural,7nClfXqPlyZyEU7PO2dBcq,__
+2021-09-22T09:27:39.103Z,add,nationaal_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.singular,7nClfXqPlyZyEU7PO2dCLg,__
+2021-09-22T09:27:40.115Z,add,nationaal_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.zero,7nClfXqPlyZyEU7PO2dEIk,__
