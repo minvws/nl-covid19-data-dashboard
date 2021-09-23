@@ -18,7 +18,7 @@ import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
+import { MiniTileSelectorLayout } from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
@@ -124,7 +124,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <MiniTileLayout id="metric-navigation">
+            <MiniTileSelectorLayout
+              menuItems={[
+                'IC Opnames',
+                'Ziekenhuisopnames',
+                'Gevaccineerde mensen',
+              ]}
+            >
               <MiniTrendTile
                 title={text.mini_trend_tiles.ic_opnames.title}
                 text={
@@ -257,7 +263,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                 }
               />
-            </MiniTileLayout>
+            </MiniTileSelectorLayout>
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
