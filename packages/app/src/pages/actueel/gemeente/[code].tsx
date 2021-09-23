@@ -180,7 +180,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   <DataDrivenText
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceText={

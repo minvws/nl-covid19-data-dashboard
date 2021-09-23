@@ -100,15 +100,13 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={text.barscale_titel}
               metadata={{
-                date: dataIntake.last_value.date_unix,
                 source: text.bronnen.nice,
               }}
             >
               <PageKpi
                 data={data}
                 metricName="intensive_care_nice"
-                metricProperty="admissions_on_date_of_reporting"
-                differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
+                metricProperty="admissions_on_date_of_admission_moving_average"
                 isAmount
                 isMovingAverageDifference
               />
