@@ -127,9 +127,33 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <MiniTileSelectorLayout
               menuItems={[
-                'IC Opnames',
-                'Ziekenhuisopnames',
-                'Gevaccineerde mensen',
+                {
+                  label: 'IC Opnames',
+                  data: dataICTotal.values,
+                  dataProperty:
+                    'admissions_on_date_of_admission_moving_average',
+                  value:
+                    last(dataICTotal.values)
+                      ?.admissions_on_date_of_admission_moving_average ?? 0,
+                },
+                {
+                  label: 'Ziekenhuisopnames',
+                  data: dataHospitalIntake.values,
+                  dataProperty:
+                    'admissions_on_date_of_admission_moving_average',
+                  value:
+                    last(dataHospitalIntake.values)
+                      ?.admissions_on_date_of_admission_moving_average ?? 0,
+                },
+                {
+                  label: 'Gevaccineerde mensen',
+                  data: data.vaccine_coverage_per_age_group_estimated.values,
+                  dataProperty: 'age_18_plus_fully_vaccinated',
+                  value:
+                    last(dataHospitalIntake.values)
+                      ?.admissions_on_date_of_admission_moving_average ?? 0,
+                  valueIsPercentage: true,
+                },
               ]}
             >
               <MiniTrendTile
