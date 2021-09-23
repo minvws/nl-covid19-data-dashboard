@@ -116,15 +116,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: lastValueNice.date_unix,
                 source: text.bronnen.nice,
               }}
             >
               <PageKpi
                 data={data}
                 metricName="hospital_nice"
-                metricProperty="admissions_on_date_of_reporting"
-                differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                metricProperty="admissions_on_date_of_admission_moving_average"
                 isMovingAverageDifference
                 isAmount
               />
