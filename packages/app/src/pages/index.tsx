@@ -11,6 +11,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -189,7 +190,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <DataDrivenText
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={
                       text.data_driven_texts.intake_hospital_ma_nieuw.value
@@ -264,6 +265,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               />
             </MiniTileSelectorLayout>
+
+            <EscalationLevelBanner level={2} date={1632554802} />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}

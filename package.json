@@ -12,7 +12,7 @@
     "typecheck": "yarn workspaces run typecheck",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
-    "dev": "yarn workspace @corona-dashboard/common build & yarn workspace @corona-dashboard/app dev",
+    "dev": "yarn workspace @corona-dashboard/icons build & yarn workspace @corona-dashboard/common build & yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json-all": "yarn workspace @corona-dashboard/cli validate-json-all",

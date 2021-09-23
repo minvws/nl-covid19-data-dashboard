@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { UrlObject } from 'url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
-import styled from 'styled-components';
 import { Anchor } from './typography';
 
 interface LinkWithIconProps {
@@ -11,6 +11,7 @@ interface LinkWithIconProps {
   children: string;
   icon: ReactNode;
   iconPlacement?: 'left' | 'right';
+  fontWeight?: 'normal' | 'bold';
 }
 
 interface IconProps {
@@ -25,6 +26,7 @@ export function LinkWithIcon({
   icon,
   children,
   iconPlacement = 'left',
+  fontWeight,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
@@ -32,7 +34,12 @@ export function LinkWithIcon({
   return (
     <Box as="span" display="inline-block" position="relative">
       <Link href={href} passHref locale={false}>
-        <Anchor underline="hover">
+        <Anchor
+          underline="hover"
+          css={css({
+            fontWeight,
+          })}
+        >
           {iconPlacement === 'right' && (
             <>
               {!words.length ? children : firstWords}

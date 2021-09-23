@@ -40,8 +40,6 @@ export const getStaticProps = createGetStaticProps(
            },
         ]
       },
-      "scoreBoardTitle": scoreBoardTitle.${locale},
-      "scoreBoardDescription": scoreBoardDescription.${locale},
       "riskLevelExplanations": {
         "_type": riskLevelExplanations._type,
         "${locale}": [

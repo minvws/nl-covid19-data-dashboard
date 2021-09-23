@@ -181,7 +181,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   <DataDrivenText
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceText={
@@ -311,14 +311,15 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             )}
 
             <VaccinationCoverageChoropleth
-              title={
+              title={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.gm
-              }
+                  .title.gm,
+                { municipalityName: municipalityName }
+              )}
               content={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
                   .content.gm,
-                { municipality: municipalityName }
+                { municipalityName: municipalityName }
               )}
               gmCode={gmCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
