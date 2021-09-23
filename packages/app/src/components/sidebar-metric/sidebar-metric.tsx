@@ -20,6 +20,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   differenceKey?: DifferenceKey;
   annotationKey?: string;
   showDateOfInsertion?: boolean;
+  hideDate?: boolean;
 }
 
 export function SidebarMetric<T extends { difference: unknown }>({
@@ -30,6 +31,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   differenceKey,
   annotationKey,
   showDateOfInsertion,
+  hideDate,
 }: SidebarMetricProps<T>) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -81,7 +83,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
           'medium'
         ),
       });
-    } else {
+    } else if (!hideDate) {
       description =
         'date_unix' in lastValue
           ? replaceVariablesInText(commonText.dateOfReport, {
