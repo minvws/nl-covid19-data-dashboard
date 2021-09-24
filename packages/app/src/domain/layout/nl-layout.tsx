@@ -129,7 +129,7 @@ export function NlLayout(props: NlLayoutProps) {
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
             id="metric-navigation"
-            aria-aria-labelledby="sidebar-title"
+            aria-labelledby="sidebar-title"
             role="navigation"
             pt={4}
             backgroundColor="white"
