@@ -6,7 +6,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
-import { DataDrivenText } from '~/components/data-driven-text';
+import { DataDrivenText } from '~/components/data-driven-text/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
@@ -180,14 +180,16 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 text={
                   <DataDrivenText
                     data={data}
-                    metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
-                    }
-                    isAmount
+                    content={[
+                      {
+                        type: 'metric',
+                        text: text.data_driven_texts.intake_hospital_ma.value,
+                        metricName: 'hospital_nice',
+                        metricProperty: 'admissions_on_date_of_reporting',
+                        differenceKey:
+                          'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                      },
+                    ]}
                   />
                 }
                 icon={<Ziekenhuis />}
@@ -311,10 +313,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             )}
 
             <VaccinationCoverageChoropleth
-              title={
+              title={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.gm
-              }
+                  .title.gm,
+                { municipality: municipalityName }
+              )}
               content={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
                   .content.gm,

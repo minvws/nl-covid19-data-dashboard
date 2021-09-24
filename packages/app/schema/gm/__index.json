@@ -23,16 +23,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "pattern": "^GM[0-9]+$"
+      "$ref": "#/$defs/gm_code"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/gm_code"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/gm_code"
     },
     "static_values": {
       "$ref": "__static_values.json"
@@ -63,6 +60,12 @@
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
+    }
+  },
+  "$defs": {
+    "gm_code": {
+      "type": "string",
+      "pattern": "^GM[0-9]+$"
     }
   }
 }
