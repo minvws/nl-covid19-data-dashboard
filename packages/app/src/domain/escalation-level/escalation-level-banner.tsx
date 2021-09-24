@@ -7,10 +7,10 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading } from '~/components/typography';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { EscalationLevelLabel } from './escalation-level-label';
-
 interface EscalationLevelBannerProps {
   level: EscalationLevelType;
   date: number;
@@ -35,7 +35,7 @@ export function EscalationLevelBanner({
         py={3}
       >
         {breakpoints.sm && (
-          <Box color={escalationLevel.color}>
+          <Box color={escalationLevel.color} maxWidth="6.5rem">
             <NederlandGroot />
           </Box>
         )}
@@ -81,7 +81,7 @@ const Tile = styled.article<{ sideColor: string }>((x) =>
       left: 0,
       top: 0,
       height: ' 100%',
-      width: '0.7rem',
+      width: asResponsiveArray({ _: '0.5rem', sm: '0.7rem' }),
       backgroundColor: x.sideColor,
       borderTopLeftRadius: 1,
       borderBottomLeftRadius: 1,
