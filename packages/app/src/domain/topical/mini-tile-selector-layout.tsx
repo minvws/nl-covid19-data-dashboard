@@ -58,14 +58,11 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
   return (
     <StyledNarrowMenuListItem onClick={collapsible.toggle} key={item.label}>
       <Box
-        css={css({
-          height: '3em',
-          alignItems: 'center',
-          cursor: 'pointer',
-          display: 'flex',
-          flexDirection: 'row',
-          pl: 1,
-        })}
+        height="3em"
+        alignItems="center"
+        display="flex"
+        flexDirection="row"
+        pl={{ _: 0, md: 1 }}
       >
         <SparkBars data={item.data} averageProperty={item.dataProperty} />
         <InlineText>{item.label}</InlineText>
@@ -152,5 +149,6 @@ const StyledNarrowMenuListItem = styled.li((x) =>
     borderTop: '1px',
     borderTopStyle: 'solid',
     borderTopColor: 'border',
+    cursor: 'pointer',
   })
 );
