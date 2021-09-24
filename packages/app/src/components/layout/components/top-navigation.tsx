@@ -109,13 +109,13 @@ function NavItem({
   isActive?: boolean;
 }) {
   const { pathname } = useRouter();
+  isActive = isActive ?? (pathname === href || pathname.startsWith(`${href}/`));
   return (
     <StyledListItem>
       <Link passHref href={href}>
         <NavLink
-          isActive={
-            isActive ?? (pathname === href || pathname.startsWith(`${href}/`))
-          }
+          isActive={isActive}
+          aria-current={isActive ? 'page' : undefined}
         >
           <NavLinkSpan data-text={children}>{children}</NavLinkSpan>
         </NavLink>

@@ -96,7 +96,12 @@ export function MetricMenuItemLink({
   return (
     <MetricMenuItem>
       <Link href={href} passHref>
-        <StyledAnchor isActive={isActive}>{content}</StyledAnchor>
+        <StyledAnchor
+          isActive={isActive}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {content}
+        </StyledAnchor>
       </Link>
     </MetricMenuItem>
   );
@@ -123,7 +128,11 @@ export function MetricMenuButtonLink({
   return (
     <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
       <Link href={href} passHref>
-        <StyledAnchor isButton={true} isActive={isActive}>
+        <StyledAnchor
+          isButton={true}
+          isActive={isActive}
+          aria-current={isActive ? 'page' : undefined}
+        >
           <AsideTitle title={title} subtitle={subtitle} />
           {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
         </StyledAnchor>
