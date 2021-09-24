@@ -15,16 +15,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "enum": ["IN_COLLECTION"]
+      "$ref": "#/$defs/in_collection_id"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/in_collection_id"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/in_collection_id"
     },
     "tested_overall": {
       "type": "array",
@@ -34,6 +31,12 @@
       "items": {
         "$ref": "tested_overall.json"
       }
+    }
+  },
+  "$defs": {
+    "in_collection_id": {
+      "type": "string",
+      "enum": ["IN_COLLECTION"]
     }
   }
 }

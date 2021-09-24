@@ -55,16 +55,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "enum": ["NL"]
+      "$ref": "#/$defs/nl_id"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/nl_id"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/nl_id"
     },
     "difference": {
       "$ref": "__difference.json"
@@ -201,5 +198,8 @@
     "variants": {
       "$ref": "variants.json"
     }
+  },
+  "$defs": {
+    "nl_id": { "type": "string", "enum": ["NL"] }
   }
 }

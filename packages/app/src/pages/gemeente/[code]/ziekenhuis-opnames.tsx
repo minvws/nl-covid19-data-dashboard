@@ -21,6 +21,7 @@ import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
+import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -33,11 +34,10 @@ import {
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
+import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { HospitalAdmissionsPageQuery } from '~/types/cms';
-import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -128,16 +128,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: lastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="admissions_on_date_of_reporting"
-                absolute={lastValue.admissions_on_date_of_reporting}
-                difference={
-                  data.difference
-                    .hospital_nice__admissions_on_date_of_reporting_moving_average
+                absolute={
+                  lastValue.admissions_on_date_of_admission_moving_average
                 }
                 isAmount
                 isMovingAverageDifference
