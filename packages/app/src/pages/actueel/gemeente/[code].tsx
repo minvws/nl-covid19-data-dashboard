@@ -189,14 +189,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         differenceKey:
                           'hospital_nice__admissions_on_date_of_reporting_moving_average',
                       },
-                      {
-                        type: 'difference',
-                        text: siteText.common_actueel.secties.kpi
-                          .zeven_daags_gemiddelde,
-                        differenceKey:
-                          'hospital_nice__admissions_on_date_of_reporting_moving_average',
-                        isAmount: true,
-                      },
                     ]}
                   />
                 }
