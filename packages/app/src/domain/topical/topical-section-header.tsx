@@ -54,6 +54,8 @@ export function TopicalSectionHeader({
           flexDirection={{ _: 'column', lg: 'row' }}
           alignItems="baseline"
           spacing={2}
+          spacingHorizontal={{ _: 0, lg: 4 }}
+          flexWrap="wrap"
         >
           <Heading level={headingLevel} variant="h1">
             {title}
@@ -65,7 +67,7 @@ export function TopicalSectionHeader({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) ? (
-              <Box ml={{ _: 0, lg: 4 }} mb={'2px'} fontWeight="bold">
+              <Box mb={'2px'} fontWeight="bold">
                 <LinkWithIcon
                   href={link.href}
                   icon={<ArrowIconRight />}
