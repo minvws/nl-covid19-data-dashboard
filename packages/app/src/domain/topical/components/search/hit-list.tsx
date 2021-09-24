@@ -29,7 +29,7 @@ export function HitList({ scope }: HitListProps) {
   });
 
   return (
-    <Box spacing={3} flexGrow={1}>
+    <Box spacing={3} flexGrow={1} flexBasis="50%">
       <HitListHeader>{title}</HitListHeader>
 
       {hits.length > 0 ? (
