@@ -23,7 +23,7 @@ import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
-import { Heading, Text } from '~/components/typography';
+import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
