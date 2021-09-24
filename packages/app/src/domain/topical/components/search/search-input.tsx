@@ -67,7 +67,7 @@ const StyledSearchInput = styled.input(
     borderRadius: 1,
     border: `solid`,
     borderWidth: '1px',
-    borderColor: 'border',
+    borderColor: 'lightGray',
     fontSize: 2,
     appearance: 'none',
     m: 0,
@@ -79,13 +79,7 @@ const StyledSearchInput = styled.input(
     },
     '&:placeholder-shown': {
       pr: 2,
-    },
-    '[aria-expanded="true"] &': {
-      borderColor: 'blue',
-      borderBottomColor: 'border',
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
-      outline: 'none !important',
+      boxShadow: 'tile',
     },
   })
 );
