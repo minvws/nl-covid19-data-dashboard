@@ -19,7 +19,8 @@ import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
-import { Text } from '~/components/typography';
+import { Heading, Text } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -140,7 +141,7 @@ export function GmLayout(props: GmLayoutProps) {
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
                 id="metric-navigation"
-                aria-label={siteText.aria_labels.metriek_navigatie}
+                aria-labelledby="sidebar-title"
                 role="navigation"
                 backgroundColor="white"
                 maxWidth={{ _: '38rem', md: undefined }}
@@ -148,7 +149,12 @@ export function GmLayout(props: GmLayoutProps) {
                 spacing={4}
               >
                 <Box px={3} spacing={3}>
-                  <Text variant="h3">{municipalityName}</Text>
+                  <Heading id="sidebar-title" level={2} variant="h3">
+                    <VisuallyHidden as="span">
+                      {siteText.gemeente_layout.headings.sidebar}
+                    </VisuallyHidden>
+                    {municipalityName}
+                  </Heading>
                   {vr && (
                     <Text>
                       {siteText.common.veiligheidsregio_label}{' '}
