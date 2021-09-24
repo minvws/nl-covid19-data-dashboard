@@ -49,7 +49,6 @@ export function PageKpi<T>({
    * fix this easily. The getLastFilledValue function is now strongly typed on
    * a certain metric but here we don't have that type as input.
    */
-
   const lastValue = metricNamesHoldingPartialData.includes(metricName as string)
     ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
