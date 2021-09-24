@@ -4,14 +4,13 @@ import { NextRouter, useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
-import { Anchor, Text } from '~/components/typography';
+import { Anchor, Heading } from '~/components/typography';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { AsideTitle } from './title';
-
-import chevronUrl from '~/assets/chevron.svg';
 
 type Url = UrlObject | string;
 
@@ -40,7 +39,7 @@ export function CategoryMenu({
     <Box as="li" spacing={3}>
       {title && (
         <Box px={3} pt={3}>
-          <Text variant="h3">{title}</Text>
+          <Heading level={3}>{title}</Heading>
         </Box>
       )}
       <Menu>{children}</Menu>
