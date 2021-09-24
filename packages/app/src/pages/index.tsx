@@ -4,7 +4,7 @@ import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
-import { DataDrivenText } from '~/components/data-driven-text';
+import { DataDrivenText } from '~/components/data-driven-text/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
@@ -77,7 +77,9 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery),
   selectNlData(
     'intensive_care_nice',
+    'intensive_care_lcps',
     'hospital_nice',
+    'hospital_lcps',
     'difference',
     'vaccine_administered_total',
     'vaccine_coverage_per_age_group_estimated'
@@ -135,17 +137,25 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 text={
                   <DataDrivenText
                     data={data}
-                    metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={
-                      text.data_driven_texts.intensive_care_nice.value
-                    }
-                    differenceText={
-                      siteText.common_actueel.secties.kpi
-                        .zeven_daags_gemiddelde_nieuw
-                    }
-                    isAmount={false}
+                    content={[
+                      {
+                        type: 'metric',
+                        text: text.data_driven_texts.intensive_care_nice.value,
+                        metricName: 'intensive_care_nice',
+                        metricProperty:
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        differenceKey:
+                          'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                      },
+                      {
+                        type: 'metric',
+                        text: siteText.common_actueel.secties.kpi.ic_admissions,
+                        metricName: 'intensive_care_lcps',
+                        metricProperty: 'beds_occupied_covid',
+                        differenceKey:
+                          'intensive_care_lcps__beds_occupied_covid',
+                      },
+                    ]}
                   />
                 }
                 icon={<Arts />}
@@ -189,17 +199,26 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 text={
                   <DataDrivenText
                     data={data}
-                    metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={
-                      text.data_driven_texts.intake_hospital_ma_nieuw.value
-                    }
-                    differenceText={
-                      siteText.common_actueel.secties.kpi
-                        .zeven_daags_gemiddelde_nieuw
-                    }
-                    isAmount={false}
+                    content={[
+                      {
+                        type: 'metric',
+                        text: text.data_driven_texts.intake_hospital_ma_nieuw
+                          .value,
+                        metricName: 'hospital_nice',
+                        metricProperty:
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        differenceKey:
+                          'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                      },
+                      {
+                        type: 'metric',
+                        text: siteText.common_actueel.secties.kpi
+                          .hospital_admissions,
+                        metricName: 'hospital_lcps',
+                        metricProperty: 'beds_occupied_covid',
+                        differenceKey: 'hospital_lcps__beds_occupied_covid',
+                      },
+                    ]}
                   />
                 }
                 icon={<Ziekenhuis />}
