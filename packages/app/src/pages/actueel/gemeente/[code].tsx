@@ -316,12 +316,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
                   .title.gm,
-                { municipality: municipalityName }
+                { municipalityName: municipalityName }
               )}
               content={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
                   .content.gm,
-                { municipality: municipalityName }
+                { municipalityName: municipalityName }
               )}
               gmCode={gmCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
