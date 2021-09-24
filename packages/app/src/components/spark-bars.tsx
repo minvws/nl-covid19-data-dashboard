@@ -1,4 +1,8 @@
-import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import type {
+  KeysOfType,
+  TimestampedValue,
+  Unpack,
+} from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { colors } from '~/style/theme';
 import { Box } from './base';
@@ -7,7 +11,7 @@ const BAR_WIDTH = 6;
 const BAR_HEIGHT = 24;
 
 type SparkBarsProps<T extends TimestampedValue> = {
-  averageProperty: KeysOfType<T, number | null, true>;
+  averageProperty: KeysOfType<Unpack<T>, number | null, true>;
   data: T[];
 };
 

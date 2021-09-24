@@ -1,11 +1,18 @@
+import {
+  NlHospitalNiceValue,
+  NlIntensiveCareNiceValue,
+  NlVaccineCoveragePerAgeGroupEstimated,
+} from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
@@ -125,7 +132,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <MiniTileSelectorLayout
+            <MiniTileSelectorLayout<
+              | NlIntensiveCareNiceValue
+              | NlHospitalNiceValue
+              | NlVaccineCoveragePerAgeGroupEstimated
+            >
               menuItems={[
                 {
                   label: 'IC Opnames',
@@ -159,20 +170,29 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <MiniTrendTile
                 title={text.mini_trend_tiles.ic_opnames.title}
                 text={
-                  <DataDrivenText
-                    data={data}
-                    metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={
-                      text.data_driven_texts.intensive_care_nice.value
-                    }
-                    differenceText={
-                      siteText.common_actueel.secties.kpi
-                        .zeven_daags_gemiddelde_nieuw
-                    }
-                    isAmount={false}
-                  />
+                  <>
+                    <DataDrivenText
+                      data={data}
+                      metricName="intensive_care_nice"
+                      metricProperty="admissions_on_date_of_admission_moving_average"
+                      differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
+                      valueTexts={
+                        text.data_driven_texts.intensive_care_nice.value
+                      }
+                      differenceText={
+                        siteText.common_actueel.secties.kpi
+                          .zeven_daags_gemiddelde_nieuw
+                      }
+                      isAmount={false}
+                    />
+                    <LinkWithIcon
+                      href={reverseRouter.nl.intensiveCareOpnames()}
+                      icon={<ArrowIconRight />}
+                      iconPlacement="right"
+                    >
+                      {text.mini_trend_tiles.ic_opnames.read_more_link}
+                    </LinkWithIcon>
+                  </>
                 }
                 icon={<Arts />}
                 values={dataICTotal.values}
@@ -196,11 +216,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     strokeWidth: 0,
                   },
                 ]}
-                titleValue={
-                  last(dataICTotal.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
-                }
-                href={reverseRouter.nl.intensiveCareOpnames()}
                 accessibility={{ key: 'topical_intensive_care_nice' }}
                 warning={getWarning(
                   content.elements.timeSeries,
@@ -211,20 +226,29 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <MiniTrendTile
                 title={text.mini_trend_tiles.ziekenhuis_opnames.title}
                 text={
-                  <DataDrivenText
-                    data={data}
-                    metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={
-                      text.data_driven_texts.intake_hospital_ma_nieuw.value
-                    }
-                    differenceText={
-                      siteText.common_actueel.secties.kpi
-                        .zeven_daags_gemiddelde_nieuw
-                    }
-                    isAmount={false}
-                  />
+                  <>
+                    <DataDrivenText
+                      data={data}
+                      metricName="hospital_nice"
+                      metricProperty="admissions_on_date_of_admission_moving_average"
+                      differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                      valueTexts={
+                        text.data_driven_texts.intake_hospital_ma_nieuw.value
+                      }
+                      differenceText={
+                        siteText.common_actueel.secties.kpi
+                          .zeven_daags_gemiddelde_nieuw
+                      }
+                      isAmount={false}
+                    />
+                    <LinkWithIcon
+                      href={reverseRouter.nl.ziekenhuisopnames()}
+                      icon={<ArrowIconRight />}
+                      iconPlacement="right"
+                    >
+                      {text.mini_trend_tiles.ziekenhuis_opnames.read_more_link}
+                    </LinkWithIcon>
+                  </>
                 }
                 icon={<Ziekenhuis />}
                 values={dataHospitalIntake.values}
@@ -249,11 +273,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     strokeWidth: 0,
                   },
                 ]}
-                titleValue={
-                  last(dataHospitalIntake.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
-                }
-                href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
                 warning={getWarning(
                   content.elements.timeSeries,
@@ -263,24 +282,28 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniVaccinationCoverageTile
                 title={text.mini_trend_tiles.vaccinatiegraad.title}
-                href={reverseRouter.nl.vaccinaties()}
                 icon={<Vaccinaties />}
                 text={
-                  <Markdown
-                    content={replaceVariablesInText(
-                      text.mini_trend_tiles.vaccinatiegraad.text,
-                      vaccineCoverageEstimatedLastValue as unknown as Record<
-                        string,
-                        number
-                      >,
-                      formatters
-                    )}
-                  />
+                  <>
+                    <Markdown
+                      content={replaceVariablesInText(
+                        text.mini_trend_tiles.vaccinatiegraad.text,
+                        vaccineCoverageEstimatedLastValue as unknown as Record<
+                          string,
+                          number
+                        >,
+                        formatters
+                      )}
+                    />
+                    <LinkWithIcon
+                      href={reverseRouter.nl.vaccinaties()}
+                      icon={<ArrowIconRight />}
+                      iconPlacement="right"
+                    >
+                      {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
+                    </LinkWithIcon>
+                  </>
                 }
-                titleValue={
-                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
-                }
-                titleValueIsPercentage
                 oneShotPercentage={
                   vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
                 }

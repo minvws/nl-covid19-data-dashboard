@@ -2,37 +2,22 @@ import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
-import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 export type MiniTileProps = {
   icon: JSX.Element;
   title: string;
-  titleValue?: number | string | null;
-  titleValueIsPercentage?: boolean;
   text: ReactNode;
-  href?: string;
   warning?: string;
   children: ReactNode;
 };
 
 export function MiniTile(props: MiniTileProps) {
-  const {
-    icon,
-    text,
-    title,
-    titleValue,
-    titleValueIsPercentage,
-    href,
-    warning,
-    children,
-  } = props;
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { icon, text, title, warning, children } = props;
+  const { siteText } = useIntl();
 
   return (
     <Box>
@@ -40,20 +25,9 @@ export function MiniTile(props: MiniTileProps) {
         <Heading level={3} as="h2">
           <Box as="span" fontWeight="bold" display="flex" alignItems="center">
             <Icon>{icon}</Icon>
-            {isDefined(href) && (
-              <HeadingLinkWithIcon
-                href={href}
-                icon={<ArrowIconRight />}
-                iconPlacement="right"
-              >
-                {title}
-              </HeadingLinkWithIcon>
-            )}
-            {!isDefined(href) && (
-              <Box as="span" display="inline-block" position="relative">
-                {title}
-              </Box>
-            )}
+            <Box as="span" display="inline-block" position="relative">
+              {title}
+            </Box>
           </Box>
         </Heading>
         {warning && (
@@ -64,10 +38,14 @@ export function MiniTile(props: MiniTileProps) {
           </InlineTooltip>
         )}
       </Box>
-      <Box display="grid" gridTemplateColumns="1fr 1fr">
+      <Box
+        display={{ _: 'flex', md: 'grid' }}
+        gridTemplateColumns={{ _: undefined, md: '1fr 1fr' }}
+        flexDirection={{ _: 'column', md: undefined }}
+      >
         <Box>{children}</Box>
-        <Box position="relative" spacing={2} pl={3}>
-          <Box>{text}</Box>
+        <Box position="relative" pl={3}>
+          <Box spacing={3}>{text}</Box>
         </Box>
       </Box>
     </Box>
