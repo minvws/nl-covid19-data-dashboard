@@ -1,4 +1,9 @@
-import { DifferenceKey, MetricKeys } from '@corona-dashboard/common';
+import {
+  DifferenceKey,
+  getLastFilledValue,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -7,7 +12,6 @@ import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SidebarKpiValue } from './sidebar-kpi-value';
-
 interface SidebarMetricProps<T extends { difference: unknown }> {
   data: T;
   metricName: MetricKeys<T>;
@@ -22,6 +26,8 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   showDateOfInsertion?: boolean;
 }
 
+const metricNamesHoldingPartialData = ['infectious_people', 'reproduction'];
+
 export function SidebarMetric<T extends { difference: unknown }>({
   data,
   metricName,
@@ -33,7 +39,14 @@ export function SidebarMetric<T extends { difference: unknown }>({
 }: SidebarMetricProps<T>) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
-  const lastValue = get(data, [metricName as string, 'last_value']);
+  /**
+   * @TODO this is still a bit messy due to improper typing. Not sure how to
+   * fix this easily. The getLastFilledValue function is now strongly typed on
+   * a certain metric but here we don't have that type as input.
+   */
+  const lastValue = metricNamesHoldingPartialData.includes(metricName as string)
+    ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
+    : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = metricProperty && lastValue?.[metricProperty];
 
