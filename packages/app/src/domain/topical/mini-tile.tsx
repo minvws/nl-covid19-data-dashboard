@@ -1,11 +1,9 @@
-import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { InlineTooltip } from '~/components/inline-tooltip';
+import { Message } from '~/components/message';
 import { Heading } from '~/components/typography';
-import { useIntl } from '~/intl';
 
 export type MiniTileProps = {
   icon: JSX.Element;
@@ -17,7 +15,6 @@ export type MiniTileProps = {
 
 export function MiniTile(props: MiniTileProps) {
   const { icon, text, title, warning, children } = props;
-  const { siteText } = useIntl();
 
   return (
     <Box>
@@ -31,11 +28,9 @@ export function MiniTile(props: MiniTileProps) {
           </Box>
         </Heading>
         {warning && (
-          <InlineTooltip content={warning}>
-            <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
-              <Warning />
-            </WarningIconWrapper>
-          </InlineTooltip>
+          <Box pb={2}>
+            <Message variant="warning">{warning}</Message>
+          </Box>
         )}
       </Box>
       <Box
@@ -44,8 +39,10 @@ export function MiniTile(props: MiniTileProps) {
         flexDirection={{ _: 'column', md: undefined }}
       >
         <Box>{children}</Box>
-        <Box position="relative" pl={3}>
-          <Box spacing={3}>{text}</Box>
+        <Box position="relative" pl={{ _: 0, md: 3 }}>
+          <Box spacing={3} py={{ _: 3, md: 0 }}>
+            {text}
+          </Box>
         </Box>
       </Box>
     </Box>

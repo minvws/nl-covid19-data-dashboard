@@ -26,7 +26,10 @@ import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { MiniTileSelectorLayout } from '~/domain/topical/mini-tile-selector-layout';
+import {
+  MiniTileSelectorItem,
+  MiniTileSelectorLayout,
+} from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
@@ -132,11 +135,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <MiniTileSelectorLayout<
-              | NlIntensiveCareNiceValue
-              | NlHospitalNiceValue
-              | NlVaccineCoveragePerAgeGroupEstimated
-            >
+            <MiniTileSelectorLayout
               menuItems={[
                 {
                   label: 'IC Opnames',
@@ -146,7 +145,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   value:
                     last(dataICTotal.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
-                },
+                } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
                 {
                   label: 'Ziekenhuisopnames',
                   data: dataHospitalIntake.values,
@@ -155,7 +154,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   value:
                     last(dataHospitalIntake.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
-                },
+                } as MiniTileSelectorItem<NlHospitalNiceValue>,
                 {
                   label: 'Gevaccineerde mensen',
                   data: data.vaccine_coverage_per_age_group_estimated.values,
@@ -164,7 +163,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     last(dataHospitalIntake.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
                   valueIsPercentage: true,
-                },
+                } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
               ]}
             >
               <MiniTrendTile

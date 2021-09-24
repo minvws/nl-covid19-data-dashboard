@@ -7,6 +7,7 @@ import { SparkBars } from '~/components/spark-bars';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
 
@@ -18,14 +19,12 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
   valueIsPercentage?: boolean;
 };
 
-type MiniTileSelectorLayoutProps<T extends TimestampedValue> = {
-  menuItems: MiniTileSelectorItem<T>[];
+type MiniTileSelectorLayoutProps = {
+  menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
 };
 
-export function MiniTileSelectorLayout<T extends TimestampedValue>(
-  props: MiniTileSelectorLayoutProps<T>
-) {
+export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const breakpoints = useBreakpoints();
 
   if (breakpoints.md) {
@@ -34,46 +33,58 @@ export function MiniTileSelectorLayout<T extends TimestampedValue>(
   return <NarrowMiniTileSelectorLayout {...props} />;
 }
 
-function NarrowMiniTileSelectorLayout<T extends TimestampedValue>(
-  props: MiniTileSelectorLayoutProps<T>
-) {
+function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { menuItems, children } = props;
-  const { formatNumber, formatPercentage } = useIntl();
-  const collapsible = useCollapsible();
 
   return (
     <NarrowMenuList>
       {menuItems.map((x, index) => (
-        <NarrowMenuListItem onClick={collapsible.toggle}>
-          <Box
-            css={css({
-              height: '3em',
-              alignItems: 'center',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'row',
-              pl: 1,
-            })}
-          >
-            <SparkBars data={x.data} averageProperty={x.dataProperty} />
-            {x.label}
-            <InlineText css={css({ ml: 'auto', pr: 3 })} fontWeight="bold">
-              {x.valueIsPercentage
-                ? `${formatPercentage(x.value)}%`
-                : formatNumber(x.value)}
-            </InlineText>
-            {collapsible.button()}
-          </Box>
-          {collapsible.content(children[index])}
-        </NarrowMenuListItem>
+        <NarrowMenuListItem item={x} content={children[index]} />
       ))}
     </NarrowMenuList>
   );
 }
 
-function WideMiniTileSelectorLayout<T extends TimestampedValue>(
-  props: MiniTileSelectorLayoutProps<T>
-) {
+type NarrowMenuListItemProps = {
+  content: ReactNode;
+  item: MiniTileSelectorItem<any>;
+};
+
+function NarrowMenuListItem(props: NarrowMenuListItemProps) {
+  const { content, item } = props;
+  const { formatNumber, formatPercentage } = useIntl();
+  const collapsible = useCollapsible();
+
+  return (
+    <StyledNarrowMenuListItem onClick={collapsible.toggle} key={item.label}>
+      <Box
+        css={css({
+          height: '3em',
+          alignItems: 'center',
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'row',
+          pl: 1,
+        })}
+      >
+        <SparkBars data={item.data} averageProperty={item.dataProperty} />
+        <InlineText>{item.label}</InlineText>
+        <InlineText
+          css={css({ ml: 'auto', pr: asResponsiveArray({ _: 2, md: 3 }) })}
+          fontWeight="bold"
+        >
+          {item.valueIsPercentage
+            ? `${formatPercentage(item.value)}%`
+            : formatNumber(item.value)}
+        </InlineText>
+        {collapsible.button()}
+      </Box>
+      {collapsible.content(content)}
+    </StyledNarrowMenuListItem>
+  );
+}
+
+function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { menuItems, children } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { formatNumber, formatPercentage } = useIntl();
@@ -135,7 +146,7 @@ const WideMenuListItem = styled.li<{ selected: boolean }>((x) =>
   })
 );
 
-const NarrowMenuListItem = styled.li((x) =>
+const StyledNarrowMenuListItem = styled.li((x) =>
   css({
     listStyle: 'none',
     borderTop: '1px',
