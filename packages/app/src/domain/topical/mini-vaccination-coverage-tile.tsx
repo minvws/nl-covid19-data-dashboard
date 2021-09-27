@@ -32,13 +32,13 @@ export function MiniVaccinationCoverageTile(
   return (
     <MiniTile {...tileProps}>
       <Box display="flex" flexDirection="column" spacing={3}>
-        <RichBar
+        <LabeledBar
           value={oneShotPercentage}
           color={COLOR_HAS_ONE_SHOT}
           valueLabel={oneShotPercentageLabel}
           barLabel={oneShotBarLabel}
         />
-        <RichBar
+        <LabeledBar
           value={fullyVaccinatedPercentage}
           color={COLOR_FULLY_VACCINATED}
           valueLabel={fullyVaccinatedPercentageLabel}
@@ -49,14 +49,14 @@ export function MiniVaccinationCoverageTile(
   );
 }
 
-type RichBarProps = {
+type LabeledBarProps = {
   value: number | null;
   valueLabel?: string | null;
   color: string;
   barLabel: string;
 };
 
-function RichBar(props: RichBarProps) {
+function LabeledBar(props: LabeledBarProps) {
   const { value, valueLabel, color, barLabel } = props;
 
   return (
