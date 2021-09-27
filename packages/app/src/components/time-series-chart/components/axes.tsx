@@ -205,7 +205,7 @@ export const Axes = memo(function Axes({
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
   return (
-    <g css={css({ pointerEvents: 'none' })}>
+    <g css={css({ pointerEvents: 'none' })} aria-hidden="true">
       <GridRows
         /**
          * Lighter gray grid lines are used for the lines that have no label on

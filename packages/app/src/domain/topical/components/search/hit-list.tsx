@@ -29,7 +29,7 @@ export function HitList({ scope }: HitListProps) {
   });
 
   return (
-    <Box spacing={3} flexGrow={1}>
+    <Box spacing={3}>
       <HitListHeader>{title}</HitListHeader>
 
       {hits.length > 0 ? (
@@ -111,6 +111,6 @@ const StyledHitList = styled.ol(
     listStyle: 'none',
     p: 0,
     m: 0,
-    width: ['100%', null],
+    width: ['100%', null, null, 320],
   })
 );

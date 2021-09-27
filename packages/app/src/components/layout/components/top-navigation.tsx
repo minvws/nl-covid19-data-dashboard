@@ -1,8 +1,8 @@
+import { CloseThick, Menu } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { CloseThick, Menu } from '@corona-dashboard/icons';
 import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
@@ -48,9 +48,12 @@ export function TopNavigation() {
       <NavWrapper
         key={isWideNav ? 1 : 0}
         role="navigation"
-        aria-label={siteText.aria_labels.pagina_keuze}
+        aria-labelledby="top-nav-title"
         id="main-navigation"
       >
+        <VisuallyHidden id="top-nav-title" as="h2">
+          {siteText.nav.menu.title}
+        </VisuallyHidden>
         {collapsible.content(
           <MaxWidth>
             <NavList>
@@ -106,13 +109,13 @@ function NavItem({
   isActive?: boolean;
 }) {
   const { pathname } = useRouter();
+  isActive = isActive ?? (pathname === href || pathname.startsWith(`${href}/`));
   return (
     <StyledListItem>
       <Link passHref href={href}>
         <NavLink
-          isActive={
-            isActive ?? (pathname === href || pathname.startsWith(`${href}/`))
-          }
+          isActive={isActive}
+          aria-current={isActive ? 'page' : undefined}
         >
           <NavLinkSpan data-text={children}>{children}</NavLinkSpan>
         </NavLink>

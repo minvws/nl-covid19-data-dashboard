@@ -23,7 +23,8 @@ import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
-import { Text } from '~/components/typography';
+import { Heading } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -151,7 +152,7 @@ export function VrLayout(props: VrLayoutProps) {
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
                 id="metric-navigation"
-                aria-label={siteText.aria_labels.metriek_navigatie}
+                aria-labelledby="sidebar-title"
                 role="navigation"
                 spacing={3}
                 backgroundColor="white"
@@ -159,9 +160,12 @@ export function VrLayout(props: VrLayoutProps) {
                 mx="auto"
               >
                 <Box px={3}>
-                  <Text variant={'h3'} fontWeight="bold">
+                  <Heading id="sidebar-title" level={2} variant="h3">
+                    <VisuallyHidden as="span">
+                      {siteText.veiligheidsregio_layout.headings.sidebar}
+                    </VisuallyHidden>
                     {vrName}
-                  </Text>
+                  </Heading>
                 </Box>
 
                 <Menu spacing={4}>

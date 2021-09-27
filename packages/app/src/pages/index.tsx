@@ -196,17 +196,27 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <>
                     <DataDrivenText
                       data={data}
-                      metricName="intensive_care_nice"
-                      metricProperty="admissions_on_date_of_admission_moving_average"
-                      differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
-                      valueTexts={
-                        text.data_driven_texts.intensive_care_nice.value
-                      }
-                      differenceText={
-                        siteText.common_actueel.secties.kpi
-                          .zeven_daags_gemiddelde_nieuw
-                      }
-                      isAmount={false}
+                      content={[
+                        {
+                          type: 'metric',
+                          text: text.data_driven_texts.intensive_care_nice
+                            .value,
+                          metricName: 'intensive_care_nice',
+                          metricProperty:
+                            'admissions_on_date_of_admission_moving_average',
+                          differenceKey:
+                            'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                        },
+                        {
+                          type: 'metric',
+                          text: siteText.common_actueel.secties.kpi
+                            .ic_admissions,
+                          metricName: 'intensive_care_lcps',
+                          metricProperty: 'beds_occupied_covid',
+                          differenceKey:
+                            'intensive_care_lcps__beds_occupied_covid',
+                        },
+                      ]}
                     />
                     <LinkWithIcon
                       href={reverseRouter.nl.intensiveCareOpnames()}
@@ -252,17 +262,25 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <>
                     <DataDrivenText
                       data={data}
-                      metricName="hospital_nice"
-                      metricProperty="admissions_on_date_of_admission_moving_average"
-                      differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                      valueTexts={
-                        text.data_driven_texts.intake_hospital_ma_nieuw.value
-                      }
-                      differenceText={
-                        siteText.common_actueel.secties.kpi
-                          .zeven_daags_gemiddelde_nieuw
-                      }
-                      isAmount={false}
+                      content={[
+                        {
+                          type: 'metric',
+                          text: text.data_driven_texts.intake_hospital_ma_nieuw
+                            .value,
+                          metricName: 'hospital_nice',
+                          metricProperty: 'admissions_on_date_of_reporting',
+                          differenceKey:
+                            'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                        },
+                        {
+                          type: 'metric',
+                          text: siteText.common_actueel.secties.kpi
+                            .hospital_admissions,
+                          metricName: 'hospital_lcps',
+                          metricProperty: 'beds_occupied_covid',
+                          differenceKey: 'hospital_lcps__beds_occupied_covid',
+                        },
+                      ]}
                     />
                     <LinkWithIcon
                       href={reverseRouter.nl.ziekenhuisopnames()}
@@ -378,7 +396,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             </CollapsibleButton>
 
             <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
+              <Search />
             </Box>
 
             {content.weeklyHighlight && content.highlights && (

@@ -94,27 +94,12 @@ export function VaccinationCoverageChoropleth(
 
       <ChoroplethTwoColumnLayout
         legendComponent={
-          <>
-            {isNlCoverage(props) && (
-              <Box
-                display="flex"
-                justifyContent={{ _: 'center', lg: 'flex-start' }}
-              >
-                <ChartRegionControls
-                  value={chartRegion}
-                  onChange={onChartRegionChange}
-                />
-              </Box>
-            )}
-
-            <ChoroplethLegenda
-              thresholds={thresholds.gm.fully_vaccinated_percentage}
-              title={
-                siteText.vaccinaties.nl_choropleth_vaccinatie_graad
-                  .legenda_titel
-              }
-            />
-          </>
+          <ChoroplethLegenda
+            thresholds={thresholds.gm.fully_vaccinated_percentage}
+            title={
+              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel
+            }
+          />
         }
       >
         <Box>
@@ -219,6 +204,18 @@ export function VaccinationCoverageChoropleth(
         <Box spacing={3}>
           <Markdown content={props.content} />
           <AgeGroupSelect onChange={setSelectedAgeGroup} />
+          {isNlCoverage(props) && (
+            <Box
+              display="flex"
+              justifyContent={{ _: 'center', md: 'flex-start' }}
+              mb={2}
+            >
+              <ChartRegionControls
+                value={chartRegion}
+                onChange={onChartRegionChange}
+              />
+            </Box>
+          )}
         </Box>
       </ChoroplethTwoColumnLayout>
     </TopicalTile>

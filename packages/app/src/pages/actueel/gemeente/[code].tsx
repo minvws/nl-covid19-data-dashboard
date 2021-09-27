@@ -221,17 +221,16 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   <>
                     <DataDrivenText
                       data={data}
-                      metricName="hospital_nice"
-                      metricProperty="admissions_on_date_of_admission_moving_average"
-                      differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                      valueTexts={
-                        text.data_driven_texts.intake_hospital_ma_nieuw.value
-                      }
-                      differenceText={
-                        siteText.common_actueel.secties.kpi
-                          .zeven_daags_gemiddelde_nieuw
-                      }
-                      isAmount={false}
+                      content={[
+                        {
+                          type: 'metric',
+                          text: text.data_driven_texts.intake_hospital_ma.value,
+                          metricName: 'hospital_nice',
+                          metricProperty: 'admissions_on_date_of_reporting',
+                          differenceKey:
+                            'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                        },
+                      ]}
                     />
                     <LinkWithIcon
                       href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
@@ -399,7 +398,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
           </TileList>
 
           <Box py={4}>
-            <Search title={siteText.common_actueel.secties.search.title.gm} />
+            <Search />
           </Box>
         </MaxWidth>
       </Box>
