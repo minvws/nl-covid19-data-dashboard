@@ -85,7 +85,7 @@ export default function BehaviorPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.gedrag}

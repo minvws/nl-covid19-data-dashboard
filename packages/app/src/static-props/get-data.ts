@@ -10,6 +10,7 @@ import {
   VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
+import { get, PropertyPath } from 'lodash';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
@@ -19,17 +20,13 @@ import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/multi-select-countries';
 import { GmSideBarData } from '~/domain/layout/gm-layout';
 import {
-  NlPageMetricNames,
-  nlPageMetricNames,
-} from '~/domain/layout/nl-layout';
-import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/vr-layout';
-import {
-  getVariantSidebarValue,
-  VariantSidebarValue,
-} from '~/domain/variants/static-props';
+// import {
+//   getVariantSidebarValue,
+//   VariantSidebarValue,
+// } from '~/domain/variants/static-props';
 import { getClient, localize } from '~/lib/sanity';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
 import {
@@ -38,6 +35,8 @@ import {
 } from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latets-values';
+import { F, O, S, U } from 'ts-toolbelt';
+
 /**
  * Usage:
  *
@@ -141,22 +140,12 @@ async function replaceReferencesInContent(
 }
 
 /**
- * This method returns all the national data that is required by the sidebar,
- * optional extra metric property names can be added as separate arguments which will
- * be added to the output
- *
- */
-export function selectNlPageMetricData<T extends keyof Nl = NlPageMetricNames>(
-  ...additionalMetrics: T[]
-) {
-  return selectNlData(...[...nlPageMetricNames, ...additionalMetrics]);
-}
-
-/**
  * This method selects only the specified metric properties from the national data
  *
  */
-export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
+export function selectNlData<T extends keyof Nl | F.AutoPath<Nl, keyof Nl>>(
+  ...metrics: T[]
+) {
   return () => {
     const { data } = getNlData();
 
@@ -179,17 +168,11 @@ export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
            * convert `undefined` values to `null` because nextjs cannot pass
            * undefined values via initial props.
            */
-          data[p] ?? null
+          get(data, p) ?? null
         ),
-      {
-        variantSidebarValue: getVariantSidebarValue(data.variants),
-        situationsSidebarValue: getSituationsSidebarValue(
-          json.vrCollection.situations
-        ),
-      } as {
-        variantSidebarValue: VariantSidebarValue;
-        situationsSidebarValue: SituationsSidebarValue;
-      } & Pick<Nl, T>
+      {} as U.Merge<
+        T extends keyof Nl ? O.Pick<Nl, T> : O.P.Pick<Nl, S.Split<T, '.'>>
+      >
     );
 
     return { selectedNlData };

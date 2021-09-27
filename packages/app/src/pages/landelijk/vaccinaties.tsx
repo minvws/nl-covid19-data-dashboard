@@ -119,7 +119,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile
