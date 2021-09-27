@@ -93,7 +93,9 @@ export const getStaticProps = createGetStaticProps(
   ),
   selectNlData(
     'intensive_care_nice',
+    'intensive_care_lcps',
     'hospital_nice',
+    'hospital_lcps',
     'difference',
     'vaccine_administered_total',
     'vaccine_coverage_per_age_group_estimated'
