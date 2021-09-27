@@ -28,6 +28,9 @@ export function Bar({
   const barValue = isPresent(parsedVaccinatedLabel)
     ? parsedVaccinatedLabel.value
     : value ?? 0;
+  const barValueSign = isPresent(parsedVaccinatedLabel)
+    ? parsedVaccinatedLabel.sign
+    : '';
 
   const { formatPercentage } = useIntl();
 
@@ -69,6 +72,7 @@ export function Bar({
               width: '60px',
             })}
           >
+            {barValueSign}
             {formatPercentage(barValue)}%
           </InlineText>
           <InlineText css={css({ ml: 'auto' })}>100%</InlineText>

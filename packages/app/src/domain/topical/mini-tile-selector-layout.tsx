@@ -17,7 +17,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
   label: string;
   data: T[];
   dataProperty: KeysOfType<Unpack<T>, number | null, true>;
-  value: number;
+  value: number | string;
   valueIsPercentage?: boolean;
   warning?: string;
 };
@@ -80,8 +80,14 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
             css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}
           >
             {item.valueIsPercentage
-              ? `${formatPercentage(item.value)}%`
-              : formatNumber(item.value)}
+              ? `${
+                  typeof item.value === 'number'
+                    ? formatPercentage(item.value)
+                    : item.value
+                }%`
+              : typeof item.value === 'number'
+              ? formatNumber(item.value)
+              : item.value}
           </InlineText>
           {collapsible.button()}
         </Box>
@@ -159,6 +165,9 @@ const WideMenuListItem = styled.li<{ selected: boolean }>((x) =>
     flexDirection: 'row',
     pr: 3,
     pl: 2,
+    '&:hover': {
+      backgroundColor: colors.lightBlue,
+    },
   })
 );
 

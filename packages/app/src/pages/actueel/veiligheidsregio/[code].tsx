@@ -192,8 +192,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   data: data.vaccine_coverage_per_age_group.values,
                   dataProperty: 'fully_vaccinated_percentage',
                   value:
-                    last(data.vaccine_coverage_per_age_group.values)
-                      ?.fully_vaccinated_percentage ?? 0,
+                    renderedAgeGroup18Pluslabels.fully_vaccinated_percentage,
                   valueIsPercentage: true,
                   warning: getWarning(
                     content.elements.warning,

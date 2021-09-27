@@ -18,7 +18,7 @@ export function MiniTile(props: MiniTileProps) {
 
   return (
     <Box>
-      <Box display="flex" flexDirection="column">
+      <Box>
         <Heading level={3} as="h2">
           <Box as="span" fontWeight="bold" display="flex" alignItems="center">
             <Icon>{icon}</Icon>
@@ -33,13 +33,9 @@ export function MiniTile(props: MiniTileProps) {
           </Box>
         )}
       </Box>
-      <Box
-        display={{ _: 'flex', md: 'grid' }}
-        gridTemplateColumns={{ _: undefined, md: '1fr 1fr' }}
-        flexDirection={{ _: 'column', md: undefined }}
-      >
+      <Box display="grid" gridTemplateColumns={{ _: '1fr', md: '1fr 1fr' }}>
         <Box>{children}</Box>
-        <Box position="relative" pl={{ _: 0, md: 3 }}>
+        <Box position="relative" pl={{ _: 0, md: 4 }}>
           <Box spacing={3} py={{ _: 3, md: 0 }}>
             {text}
           </Box>
