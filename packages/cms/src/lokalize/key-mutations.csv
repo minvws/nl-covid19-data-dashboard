@@ -12,9 +12,6 @@ timestamp,action,key,document_id,move_to
 2021-09-20T12:46:18.559Z,add,common_actueel.secties.vaccination_coverage_choropleth.content.nl,Q0Ac8gjemD8winez2UnxEQ,__
 2021-09-20T12:46:19.579Z,add,common_actueel.secties.vaccination_coverage_choropleth.content.vr,Ierr3hadoEWr1dYNogfXUj,__
 2021-09-20T12:46:20.537Z,add,common_actueel.secties.vaccination_coverage_choropleth.content.gm,4Hn4MB4VRci1fnngMhDLNw,__
-2021-09-22T09:09:05.384Z,add,common_actueel.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
-2021-09-22T09:09:06.407Z,add,common_actueel.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
-2021-09-22T09:09:07.431Z,add,common_actueel.secties.search.title.gm,PGwiP4IwXrA0GfLCLD9UBA,__
 2021-09-21T10:44:10.891Z,add,accessibility.charts.topical_intensive_care_nice.description,4Hn4MB4VRci1fnngMjxWWu,__
 2021-09-21T10:44:11.903Z,add,accessibility.charts.topical_intensive_care_nice.label,4Hn4MB4VRci1fnngMjxXPk,__
 2021-09-21T10:44:12.920Z,add,gemeente_actueel.mini_trend_tiles.ic_opnames.title,4Hn4MB4VRci1fnngMjxXXo,__
