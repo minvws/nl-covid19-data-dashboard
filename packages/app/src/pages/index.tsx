@@ -84,7 +84,13 @@ export const getStaticProps = createGetStaticProps(
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
     elements: ElementsQueryResult;
-  }>(getTopicalPageQuery),
+  }>(
+    getTopicalPageQuery('nl', [
+      'intensive_care_nice',
+      'hospital_nice',
+      'vaccine_coverage_per_age_group_estimated',
+    ])
+  ),
   selectNlData(
     'intensive_care_nice',
     'hospital_nice',
@@ -96,6 +102,8 @@ export const getStaticProps = createGetStaticProps(
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+
+  console.dir(content);
 
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
@@ -148,7 +156,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     last(dataICTotal.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
                   warning: getWarning(
-                    content.elements.timeSeries,
+                    content.elements.warning,
                     'intensive_care_nice'
                   ),
                 } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
@@ -163,7 +171,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     last(dataHospitalIntake.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
                   warning: getWarning(
-                    content.elements.timeSeries,
+                    content.elements.warning,
                     'hospital_nice'
                   ),
                 } as MiniTileSelectorItem<NlHospitalNiceValue>,
@@ -178,8 +186,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       ?.age_18_plus_fully_vaccinated ?? 0,
                   valueIsPercentage: true,
                   warning: getWarning(
-                    content.elements.timeSeries,
-                    'vaccinatiegraad'
+                    content.elements.warning,
+                    'vaccine_coverage_per_age_group_estimated'
                   ),
                 } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
               ]}
@@ -235,7 +243,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
                 accessibility={{ key: 'topical_intensive_care_nice' }}
                 warning={getWarning(
-                  content.elements.timeSeries,
+                  content.elements.warning,
                   'intensive_care_nice'
                 )}
               />
@@ -291,10 +299,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 accessibility={{ key: 'topical_hospital_nice' }}
-                warning={getWarning(
-                  content.elements.timeSeries,
-                  'hospital_nice'
-                )}
+                warning={getWarning(content.elements.warning, 'hospital_nice')}
               />
 
               <MiniVaccinationCoverageTile
@@ -327,6 +332,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 fullyVaccinatedPercentage={
                   vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                 }
+                warning={getWarning(
+                  content.elements.warning,
+                  'vaccine_coverage_per_age_group_estimated'
+                )}
               />
             </MiniTileSelectorLayout>
 

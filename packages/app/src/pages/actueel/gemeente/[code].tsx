@@ -1,7 +1,7 @@
 import {
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
-  GmVaccineCoveragePerAgeGroupValue
+  GmVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
@@ -26,11 +26,11 @@ import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
-  WeeklyHighlightProps
+  WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
 import {
   MiniTileSelectorItem,
-  MiniTileSelectorLayout
+  MiniTileSelectorLayout,
 } from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
@@ -42,18 +42,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
-  getWarning
+  getWarning,
 } from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectGmData
+  selectGmData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -101,7 +101,12 @@ export const getStaticProps = createGetStaticProps(
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
     elements: ElementsQueryResult;
-  }>(getTopicalPageQuery)
+  }>(
+    getTopicalPageQuery('gm', [
+      'hospital_nice',
+      'vaccine_coverage_per_age_group',
+    ])
+  )
 );
 
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
@@ -203,11 +208,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     last(data.vaccine_coverage_per_age_group.values)
                       ?.fully_vaccinated_percentage ?? 0,
                   valueIsPercentage: true,
-                  warning:
-                    getWarning(
-                      content.elements.timeSeries,
-                      'vaccinatiegraad'
-                    ),
+                  warning: getWarning(
+                    content.elements.timeSeries,
+                    'vaccinatiegraad'
+                  ),
                 } as MiniTileSelectorItem<GmVaccineCoveragePerAgeGroupValue>,
               ]}
             >

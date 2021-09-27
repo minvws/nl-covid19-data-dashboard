@@ -16,7 +16,7 @@ type Element = {
   _id: string;
 };
 
-type ElementType = 'choropleth' | 'timeSeries' | 'kpi';
+type ElementType = 'choropleth' | 'timeSeries' | 'kpi' | 'warning';
 
 const devClient = getClient('development');
 const prodClient = getClient('production');
@@ -74,6 +74,7 @@ async function promptForElement(): Promise<Element | undefined> {
     { title: 'Time series', value: 'timeSeries' },
     { title: 'Choropleth', value: 'choropleth' },
     { title: 'KPI', value: 'kpi' },
+    { title: 'Warning', value: 'warning' },
   ];
 
   const typeResponse = (await prompts({

@@ -13,6 +13,7 @@ type MiniVaccinationCoverageTileProps = {
   fullyVaccinatedPercentage: number | null;
   oneShotPercentageLabel?: string | null;
   fullyVaccinatedPercentageLabel?: string | null;
+  warning?: string;
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(

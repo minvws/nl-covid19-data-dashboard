@@ -95,7 +95,12 @@ export const getStaticProps = createGetStaticProps(
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
     elements: ElementsQueryResult;
-  }>(getTopicalPageQuery)
+  }>(
+    getTopicalPageQuery('vr', [
+      'hospital_nice',
+      'vaccine_coverage_per_age_group',
+    ])
+  )
 );
 
 const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
