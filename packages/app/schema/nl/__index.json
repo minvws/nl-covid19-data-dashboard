@@ -46,7 +46,8 @@
     "vaccine_administered_planned",
     "vaccine_stock",
     "vaccine_delivery_per_supplier",
-    "vaccine_coverage_per_age_group"
+    "vaccine_coverage_per_age_group",
+    "vaccine_coverage_per_age_group_estimated"
   ],
   "additionalProperties": false,
   "properties": {
@@ -54,16 +55,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "enum": ["NL"]
+      "$ref": "#/$defs/nl_id"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/nl_id"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/nl_id"
     },
     "difference": {
       "$ref": "__difference.json"
@@ -191,11 +189,17 @@
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
     },
+    "vaccine_coverage_per_age_group_estimated": {
+      "$ref": "vaccine_coverage_per_age_group_estimated.json"
+    },
     "vaccine_stock": {
       "$ref": "vaccine_stock.json"
     },
     "variants": {
       "$ref": "variants.json"
     }
+  },
+  "$defs": {
+    "nl_id": { "type": "string", "enum": ["NL"] }
   }
 }

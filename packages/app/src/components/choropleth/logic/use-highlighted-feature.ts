@@ -10,7 +10,7 @@ export function useHighlightedFeature(
   return useMemo(() => {
     if (dataOptions.highlightSelection && isDefined(dataOptions.selectedCode)) {
       return geoInfo
-        .filter((x, i) => (x.code === dataOptions.selectedCode ? i : undefined))
+        .filter((x) => x.code === dataOptions.selectedCode)
         .map((x) => x.coordinates);
     }
   }, [geoInfo, dataOptions]);

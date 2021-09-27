@@ -152,25 +152,6 @@ const vrHospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const escalationThresholds: ChoroplethThresholdsValue<1 | 2 | 3 | 4>[] = [
-  {
-    color: colors.data.scale.magenta[0],
-    threshold: 1,
-  },
-  {
-    color: colors.data.scale.magenta[1],
-    threshold: 2,
-  },
-  {
-    color: colors.data.scale.magenta[2],
-    threshold: 3,
-  },
-  {
-    color: colors.data.scale.magenta[3],
-    threshold: 4,
-  },
-];
-
 const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
@@ -290,11 +271,11 @@ const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 const vaccineCoveragePercentageThresholds: ChoroplethThresholdsValue[] = [
-  { color: colors.data.scale.blue[0], threshold: 0, label: '0%' },
-  { color: colors.data.scale.blue[1], threshold: 20, label: '20%' },
-  { color: colors.data.scale.blue[2], threshold: 40, label: '40%' },
-  { color: colors.data.scale.blue[3], threshold: 60, label: '60%' },
-  { color: colors.data.scale.blue[4], threshold: 80, label: '80%' },
+  { color: colors.data.scale.blueDetailed[0], threshold: 0, label: '0%' },
+  { color: colors.data.scale.blueDetailed[1], threshold: 20, label: '20%' },
+  { color: colors.data.scale.blueDetailed[3], threshold: 40, label: '40%' },
+  { color: colors.data.scale.blueDetailed[5], threshold: 60, label: '60%' },
+  { color: colors.data.scale.blueDetailed[7], threshold: 80, label: '80%' },
 ];
 
 const situationsThreshold: ChoroplethThresholdsValue[] = [
@@ -371,11 +352,11 @@ export const thresholds: Thresholds = {
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
+    has_one_shot_percentage: vaccineCoveragePercentageThresholds,
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_reporting: vrHospitalAdmissionsThresholds,
-    level: escalationThresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
     average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
@@ -389,6 +370,7 @@ export const thresholds: Thresholds = {
     travel: situationsThreshold,
     hospitality: situationsThreshold,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
+    has_one_shot_percentage: vaccineCoveragePercentageThresholds,
     other: situationsThreshold,
     ...(Object.fromEntries(
       behaviorIdentifiers.map((key) => [

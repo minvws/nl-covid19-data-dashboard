@@ -7,8 +7,8 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -81,7 +81,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+    useIntl();
 
   const reverseRouter = useReverseRouter();
 
@@ -146,6 +147,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     data.difference.tested_overall__infected_moving_average
                   }
                   isMovingAverageDifference
+                  isAmount
                 />
 
                 <Markdown content={text.kpi_toelichting} />
@@ -157,6 +159,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         <InlineText color="data.primary">{`${formatPercentage(
                           dataGgdLastValue.infected_percentage
                         )}%`}</InlineText>
+                      ),
+                      dateTo: formatDateFromSeconds(
+                        dataGgdLastValue.date_unix,
+                        'weekday-medium'
                       ),
                     })}
                   </Text>
@@ -172,14 +178,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.rivm,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="vr"
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                localeTextKey="veiligheidsregio_positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
               <Text>{text.barscale_toelichting}</Text>
             </KpiTile>
@@ -224,10 +229,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'
@@ -303,6 +304,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataGgdLastValue.tested_total}
                 difference={difference.tested_ggd__tested_total_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
@@ -319,6 +321,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   difference.tested_ggd__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
+                isAmount={false}
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
               <Text fontWeight="bold">

@@ -4,11 +4,13 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
+export type GmCode = string;
+
 export interface Gm {
   last_generated: string;
-  proto_name: string;
-  name: string;
-  code: string;
+  proto_name: GmCode;
+  name: GmCode;
+  code: GmCode;
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
@@ -18,7 +20,6 @@ export interface Gm {
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
-  vaccine_coverage?: GmVaccineCoverage;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
 }
 export interface GmStaticValues {
@@ -122,37 +123,27 @@ export interface GmSewerPerInstallationValue {
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCoverage {
-  values: GmVaccineCoverageValue[];
-  last_value: GmVaccineCoverageValue;
-}
-export interface GmVaccineCoverageValue {
-  partially_vaccinated: number;
-  fully_vaccinated: number;
-  partially_or_fully_vaccinated: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
-  has_1_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
-  has_1_shot_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
 
+export type GmCollectionId = "GM_COLLECTION";
+
 export interface GmCollection {
   last_generated: string;
-  proto_name: "GM_COLLECTION";
-  name: string;
-  code: string;
+  proto_name: GmCollectionId;
+  name: GmCollectionId;
+  code: GmCollectionId;
   hospital_nice: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
@@ -184,16 +175,20 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
+  has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
 
+export type InCode = string;
+
 export interface In {
   last_generated: string;
-  proto_name: string;
-  name: string;
+  proto_name: InCode;
+  name: InCode;
   code: string;
   named_difference: InNamedDifference;
   tested_overall: InTestedOverall;
@@ -239,11 +234,13 @@ export interface InVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
+export type InCollectionId = "IN_COLLECTION";
+
 export interface InCollection {
   last_generated: string;
-  proto_name: "IN_COLLECTION";
-  name: string;
-  code: string;
+  proto_name: InCollectionId;
+  name: InCollectionId;
+  code: InCollectionId;
   tested_overall: InCollectionTestedOverall[];
 }
 export interface InCollectionTestedOverall {
@@ -255,11 +252,13 @@ export interface InCollectionTestedOverall {
   date_of_insertion_unix: number;
 }
 
+export type NlId = "NL";
+
 export interface Nl {
   last_generated: string;
-  proto_name: "NL";
-  name: string;
-  code: string;
+  proto_name: NlId;
+  name: NlId;
+  code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
   doctor: NlDoctor;
@@ -302,6 +301,7 @@ export interface Nl {
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
 }
@@ -888,14 +888,27 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
-  partially_vaccinated: number;
+  has_one_shot: number;
   fully_vaccinated_percentage: number;
-  partially_vaccinated_percentage: number;
-  partially_or_fully_vaccinated_percentage: number;
+  has_one_shot_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
   birthyear_range: string;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedValue {
+  values: NlVaccineCoveragePerAgeGroupEstimated[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimated;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimated {
+  age_18_plus_fully_vaccinated: number;
+  age_18_plus_has_one_shot: number;
+  age_18_plus_birthyear: string;
+  age_12_plus_fully_vaccinated: number;
+  age_12_plus_has_one_shot: number;
+  age_12_plus_birthyear: string;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];
@@ -937,11 +950,13 @@ export interface NlVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
+export type VrCode = string;
+
 export interface Vr {
   last_generated: string;
-  proto_name: string;
-  name: string;
-  code: string;
+  proto_name: VrCode;
+  name: VrCode;
+  code: VrCode;
   static_values?: VrStaticValues;
   difference: VrDifference;
   g_number: VrGNumber;
@@ -956,12 +971,11 @@ export interface Vr {
   deceased_rivm: VrDeceasedRivm;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
-  escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
-  vaccine_coverage?: VrVaccineCoverage;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
+  escalation_level: VrEscalationLevel;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1176,17 +1190,6 @@ export interface VrElderlyAtHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrEscalationLevel {
-  level: null | 1 | 2 | 3 | 4;
-  positive_tested_per_100k: number | null;
-  hospital_admissions_per_million: number | null;
-  based_on_statistics_to_unix: number;
-  based_on_statistics_from_unix: number;
-  next_determined_unix: number;
-  last_determined_unix: number;
-  valid_from_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface VrTestedOverallSum {
   values: VrTestedOverallSumValue[];
   last_value: VrTestedOverallSumValue;
@@ -1203,18 +1206,6 @@ export interface VrHospitalNiceSum {
 }
 export interface VrHospitalNiceSumValue {
   admissions_per_1m: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface VrVaccineCoverage {
-  values: VrVaccineCoverageValue[];
-  last_value: VrVaccineCoverageValue;
-}
-export interface VrVaccineCoverageValue {
-  partially_vaccinated: number;
-  fully_vaccinated: number;
-  partially_or_fully_vaccinated: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -1247,22 +1238,34 @@ export interface VrVaccineCoveragePerAgeGroup {
 export interface VrVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
-  has_1_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
-  has_1_shot_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface VrEscalationLevel {
+  level: null | 1 | 2 | 3 | 4;
+  positive_tested_per_100k: number | null;
+  hospital_admissions_per_million: number | null;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
+  last_determined_unix: number;
+  valid_from_unix: number;
+  date_of_insertion_unix: number;
+}
+
+export type VrCollectionId = "VR_COLLECTION";
 
 export interface VrCollection {
   last_generated: string;
-  proto_name: "VR_COLLECTION";
-  name: string;
-  code: string;
+  proto_name: VrCollectionId;
+  name: VrCollectionId;
+  code: VrCollectionId;
   hospital_nice: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
-  escalation_levels: EscalationLevels[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];
   behavior: VrCollectionBehavior[];
@@ -1270,6 +1273,7 @@ export interface VrCollection {
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
   vaccine_coverage_per_age_group: VrCollectionVaccineCoveragePerAgeGroup[];
+  escalation_levels: EscalationLevels[];
 }
 export interface VrCollectionHospitalNice {
   date_unix: number;
@@ -1283,18 +1287,6 @@ export interface VrCollectionTestedOverall {
   vrcode: string;
   infected_per_100k: number;
   infected: number;
-  date_of_insertion_unix: number;
-}
-export interface EscalationLevels {
-  vrcode: string;
-  level: null | 1 | 2 | 3 | 4;
-  positive_tested_per_100k: number;
-  hospital_admissions_per_million: number;
-  based_on_statistics_to_unix: number;
-  based_on_statistics_from_unix: number;
-  next_determined_unix: number;
-  last_determined_unix: number;
-  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrCollectionNursingHome {
@@ -1389,8 +1381,22 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
+  has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface EscalationLevels {
+  vrcode: string;
+  level: null | 1 | 2 | 3 | 4;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
+  last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }

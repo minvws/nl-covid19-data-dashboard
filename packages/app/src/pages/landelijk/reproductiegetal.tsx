@@ -2,8 +2,8 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Layout } from '~/domain/layout/layout';
@@ -81,16 +81,14 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 description: text.extra_uitleg,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="nl"
                 metricName="reproduction"
                 metricProperty="index_average"
-                localeTextKey="reproductiegetal"
                 differenceKey="reproduction__index_average"
                 differenceFractionDigits={2}
                 showOldDateUnix
-                hasHigherLowerText
+                isAmount={false}
               />
               <Markdown content={text.barscale_toelichting} />
             </KpiWithIllustrationTile>

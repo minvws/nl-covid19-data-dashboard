@@ -1,11 +1,13 @@
-import { Coronavirus } from '@corona-dashboard/icons';
-import { Locatie } from '@corona-dashboard/icons';
-import { Verpleeghuiszorg } from '@corona-dashboard/icons';
+import {
+  Coronavirus,
+  Locatie,
+  Verpleeghuiszorg,
+} from '@corona-dashboard/icons';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -114,6 +116,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="newly_infected_people"
                 absolute={nursinghomeLastValue.newly_infected_people}
                 difference={data.difference.nursing_home__newly_infected_people}
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>
@@ -205,6 +208,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.nursing_home__infected_locations_total
                 }
+                isAmount
               />
               <Text>{infectedLocationsText.kpi_toelichting}</Text>
             </KpiTile>
@@ -281,6 +285,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="deceased_daily"
                 absolute={nursinghomeLastValue.deceased_daily}
                 difference={data.difference.nursing_home__deceased_daily}
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>

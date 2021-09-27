@@ -2,12 +2,6 @@ import { Feature } from '~/types';
 
 export const features: Feature[] = [
   {
-    name: 'vaccinationPerAgeGroup',
-    isEnabled: true,
-    dataScopes: ['nl'],
-    metricName: 'vaccine_coverage_per_age_group',
-  },
-  {
     name: 'situationsPage',
     isEnabled: true,
     dataScopes: ['vr', 'vr_collection'],
@@ -21,17 +15,17 @@ export const features: Feature[] = [
   },
   {
     name: 'inHomePage',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'inPositiveTestsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
   {
     name: 'inVariantsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in'],
     metricName: 'variants',
   },
@@ -68,5 +62,41 @@ export const features: Feature[] = [
     isEnabled: false,
     dataScopes: ['gm'],
     metricName: 'tested_overall_sum',
+  },
+  {
+    name: 'nlVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
+  {
+    name: 'vrVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'gmVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['gm'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'nlVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'vrVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'gmVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['gm'],
+    metricName: 'vaccine_coverage_per_age_group',
   },
 ];

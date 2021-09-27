@@ -1,5 +1,4 @@
 import { GgdTesten, Test } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -10,8 +9,8 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -131,6 +130,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataOverallLastValue.infected}
                 difference={difference.tested_overall__infected_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
 
               <Markdown content={text.kpi_toelichting} />
@@ -139,10 +139,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(ggdText.summary_text, {
                     percentage: (
-                      <span css={css({ color: 'data.primary' })}>
-                        {formatPercentage(dataGgdLastValue.infected_percentage)}
-                        %
-                      </span>
+                      <InlineText color="data.primary">{`${formatPercentage(
+                        dataGgdLastValue.infected_percentage
+                      )}%`}</InlineText>
                     ),
                     dateTo: formatDateFromSeconds(
                       dataGgdLastValue.date_unix,
@@ -162,14 +161,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.rivm,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="nl"
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                localeTextKey="positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
 
               <Text>{text.barscale_toelichting}</Text>
@@ -277,10 +275,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'
@@ -341,6 +335,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataGgdLastValue.tested_total}
                 difference={difference.tested_ggd__tested_total_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
@@ -359,6 +354,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   difference.tested_ggd__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
+                isAmount={false}
               />
 
               <Text>{ggdText.positief_getest_week_uitleg}</Text>

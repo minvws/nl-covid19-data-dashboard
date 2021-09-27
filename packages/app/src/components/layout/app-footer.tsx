@@ -1,7 +1,7 @@
+import { External } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { External } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Markdown } from '~/components/markdown';
@@ -40,7 +40,7 @@ export function AppFooter() {
             <Heading as="div" level={3}>
               {text.nav.title}
             </Heading>
-            <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
+            <nav aria-label={text.aria_labels.pagina_keuze} role="navigation">
               <Box as="ul" spacing={2}>
                 <Item href="/">{text.nav.links.actueel}</Item>
                 <Item href={reverseRouter.nl.index()}>

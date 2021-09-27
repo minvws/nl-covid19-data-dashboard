@@ -11,6 +11,7 @@ export const SelectBox = styled(Box)(
   css({
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     borderColor: 'border',
     borderStyle: 'solid',
     borderWidth: 1,

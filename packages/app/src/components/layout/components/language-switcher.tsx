@@ -11,7 +11,7 @@ export function LanguageSwitcher() {
   const [currentPath] = router.asPath.split('?');
 
   return (
-    <Box height={55} mt={-55} textAlign="right">
+    <Box height={55} mt={-55} textAlign="right" position="absolute" right={3}>
       <LanguageLink
         href={`https://coronadashboard.rijksoverheid.nl${currentPath}`}
         lang="nl"

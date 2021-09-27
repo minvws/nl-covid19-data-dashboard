@@ -21,6 +21,7 @@ import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
+import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -33,6 +34,7 @@ import {
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
+import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -48,13 +50,15 @@ export const getStaticProps = createGetStaticProps(
     }),
   }),
   createGetContent<{
-    page: PageArticlesQueryResult;
+    page: HospitalAdmissionsPageQuery;
+    highlight: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
 
     return `{
-      "page": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${getHospitalAdmissionsPageQuery(context)},
+      "highlight": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('gm', ['hospital_nice'], locale)}
     }`;
   })
@@ -115,7 +119,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            pageLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
 
           <TwoKpiSection>
@@ -123,17 +128,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: lastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="admissions_on_date_of_reporting"
-                absolute={lastValue.admissions_on_date_of_reporting}
-                difference={
-                  data.difference
-                    .hospital_nice__admissions_on_date_of_reporting_moving_average
+                absolute={
+                  lastValue.admissions_on_date_of_admission_moving_average
                 }
+                isAmount
                 isMovingAverageDifference
               />
             </KpiTile>

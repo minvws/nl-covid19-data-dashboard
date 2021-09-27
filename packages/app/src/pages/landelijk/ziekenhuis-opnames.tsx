@@ -8,8 +8,8 @@ import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -27,6 +27,7 @@ import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
+import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -38,6 +39,7 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -49,13 +51,15 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    page: PageArticlesQueryResult;
+    page: HospitalAdmissionsPageQuery;
+    highlight: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
 
     return `{
-      "page": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${getHospitalAdmissionsPageQuery(context)},
+      "highlight": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('nl', ['hospital_nice'], locale)}
     }`;
   })
@@ -103,7 +107,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            pageLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
 
           <TwoKpiSection>
@@ -111,18 +116,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: lastValueNice.date_unix,
                 source: text.bronnen.nice,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="nl"
                 metricName="hospital_nice"
-                metricProperty="admissions_on_date_of_reporting"
-                localeTextKey="ziekenhuisopnames_per_dag"
-                differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                metricProperty="admissions_on_date_of_admission_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
             </KpiTile>
 
@@ -141,6 +143,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   difference={
                     data.difference.hospital_lcps__beds_occupied_covid
                   }
+                  isAmount
                 />
               )}
             </KpiTile>
@@ -236,10 +239,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  benchmark: {
-                    value: 40,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timespanAnnotations: [
                     {
                       start: underReportedRange,

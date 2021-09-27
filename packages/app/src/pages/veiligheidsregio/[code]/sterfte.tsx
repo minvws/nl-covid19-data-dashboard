@@ -98,6 +98,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="covid_daily"
                 absolute={dataRivm.last_value.covid_daily}
                 difference={difference.deceased_rivm__covid_daily}
+                isAmount
               />
               <Markdown
                 content={text.section_deceased_rivm.kpi_covid_daily_description}

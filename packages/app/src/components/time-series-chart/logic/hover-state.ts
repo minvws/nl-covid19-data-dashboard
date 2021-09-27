@@ -81,7 +81,7 @@ export function useHoverState<T extends TimestampedValue>({
   const interactiveMetricProperties = useMemo(
     () =>
       seriesConfig
-        .filter((x) => !x.isNonInteractive)
+        .filter((x) => !x.noHover)
         .filter(isVisible)
         .flatMap((x) => {
           switch (x.type) {
@@ -251,7 +251,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.isNonInteractive)
+      .filter((x) => !x.noHover)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -296,7 +296,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.isNonInteractive)
+      .filter((x) => !x.noHover)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -351,7 +351,7 @@ export function useHoverState<T extends TimestampedValue>({
      */
     const rangePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.isNonInteractive)
+      .filter((x) => !x.noHover)
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesDoubleValue
