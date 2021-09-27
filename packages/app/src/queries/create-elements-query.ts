@@ -85,9 +85,9 @@ type CmsTimeSeriesElement = {
   warning: string | null;
 };
 
-type CmsKpiElement = {} & ElementBase;
+type CmsKpiElement = ElementBase;
 
-type CmsChoroplethElement = {} & ElementBase;
+type CmsChoroplethElement = ElementBase;
 
 type CmsWarningElement = {
   warning: string;

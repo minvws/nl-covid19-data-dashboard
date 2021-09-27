@@ -42,7 +42,7 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   return (
     <NarrowMenuList>
       {menuItems.map((x, index) => (
-        <NarrowMenuListItem item={x} content={children[index]} />
+        <NarrowMenuListItem key={x.label} item={x} content={children[index]} />
       ))}
     </NarrowMenuList>
   );
@@ -162,7 +162,7 @@ const WideMenuListItem = styled.li<{ selected: boolean }>((x) =>
   })
 );
 
-const StyledNarrowMenuListItem = styled.li((x) =>
+const StyledNarrowMenuListItem = styled.li(
   css({
     listStyle: 'none',
     borderTop: '1px',

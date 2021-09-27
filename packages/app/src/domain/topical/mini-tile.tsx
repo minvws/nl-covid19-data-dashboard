@@ -58,20 +58,3 @@ const Icon = styled.span(
     },
   })
 );
-
-const WarningIconWrapper = styled.span(
-  css({
-    display: 'inline-flex',
-    width: '1em',
-    height: '1em',
-    marginLeft: 2,
-    backgroundColor: 'warningYellow',
-    borderRadius: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    svg: {
-      fill: 'black',
-    },
-  })
-);
