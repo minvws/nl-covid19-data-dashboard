@@ -99,15 +99,11 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         <ComboboxPopover>
           {results.length > 0 ? (
             <ComboboxList>
-              {results.map((option) => (
-                // Wrapping the option in a div is a workaround for a bug with
-                // reordering the options: https://github.com/reach/reach-ui/issues/840
-                <div>
-                  <ComboboxOption
-                    key={option.name}
-                    value={option.displayName || option.name}
-                  />
-                </div>
+              {results.map((option, index) => (
+                <ComboboxOption
+                  key={`${index}-${option.name}`}
+                  value={option.displayName || option.name}
+                />
               ))}
             </ComboboxList>
           ) : (
