@@ -339,7 +339,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             </TopicalTile>
           </TileList>
 
-          <Box py={4}>
+          <Box pt={4} pb={6}>
             <Search title={siteText.common_actueel.secties.search.title.gm} />
           </Box>
         </MaxWidth>
