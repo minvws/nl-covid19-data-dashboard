@@ -1,15 +1,9 @@
 timestamp,action,key,document_id,move_to
 2021-09-06T09:52:56.741Z,add,nationaal_layout.headings.archief,srBRCALrLz9Y3ZpBCxW7jO,__
-2021-09-07T09:49:13.152Z,delete,rioolwater_metingen.total_measurements_description,jF33EuwumlGuwav2FD3euC,__
-2021-09-07T09:49:13.153Z,delete,rioolwater_metingen.total_measurements_locations,jF33EuwumlGuwav2FD3evs,__
-2021-09-07T09:49:13.153Z,delete,rioolwater_metingen.total_measurements_title,jF33EuwumlGuwav2FD3esW,__
 2021-09-07T09:53:25.467Z,add,rioolwater_metingen.tile_explanation_title,u2w2cmKrEkkhu4TKoJbUOn,__
 2021-09-07T09:53:26.347Z,add,rioolwater_metingen.tile_explanation_description,oFxmVAb3WhH1wXDkdlLrYy,__
 2021-09-07T10:18:59.796Z,add,veiligheidsregio_rioolwater_metingen.tile_explanation_description,u2w2cmKrEkkhu4TKoJgGJv,__
 2021-09-07T10:19:00.807Z,add,veiligheidsregio_rioolwater_metingen.tile_explanation_title,oFxmVAb3WhH1wXDkdlNopS,__
-2021-09-07T10:19:00.808Z,delete,veiligheidsregio_rioolwater_metingen.total_measurements_description,jF33EuwumlGuwav2FD3kVQ,__
-2021-09-07T10:19:00.808Z,delete,veiligheidsregio_rioolwater_metingen.total_measurements_locations,jF33EuwumlGuwav2FD3kX6,__
-2021-09-07T10:19:00.808Z,delete,veiligheidsregio_rioolwater_metingen.total_measurements_title,jF33EuwumlGuwav2FD3kTk,__
 2021-09-21T11:06:52.613Z,add,national_escalation_levels.banner.title,Ierr3hadoEWr1dYNon83Bz,__
 2021-09-21T11:06:53.627Z,add,national_escalation_levels.banner.link.label,4Hn4MB4VRci1fnngMk3k48,__
 2021-09-21T11:06:54.649Z,add,national_escalation_levels.banner.link.href,Ierr3hadoEWr1dYNon83z3,__
