@@ -105,26 +105,32 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   return (
     <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
       <WideMenuList>
-        {menuItems.map((x, index) => (
+        {menuItems.map((item, index) => (
           <WideMenuListItem
-            key={x.label}
+            key={item.label}
             onClick={() => setSelectedIndex(index)}
             selected={selectedIndex === index}
           >
-            <SparkBars data={x.data} averageProperty={x.dataProperty} />
-            <InlineText>{x.label}</InlineText>
+            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+            <InlineText>{item.label}</InlineText>
             <Box ml="auto" display="flex" alignItems="center">
-              {x.warning && (
-                <InlineTooltip content={x.warning}>
+              {item.warning && (
+                <InlineTooltip content={item.warning}>
                   <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
                     <Warning />
                   </WarningIconWrapper>
                 </InlineTooltip>
               )}
               <InlineText fontWeight="bold">
-                {x.valueIsPercentage
-                  ? `${formatPercentage(x.value)}%`
-                  : formatNumber(x.value)}
+                {item.valueIsPercentage
+                  ? `${
+                      typeof item.value === 'number'
+                        ? formatPercentage(item.value)
+                        : item.value
+                    }%`
+                  : typeof item.value === 'number'
+                  ? formatNumber(item.value)
+                  : item.value}
               </InlineText>
             </Box>
           </WideMenuListItem>
