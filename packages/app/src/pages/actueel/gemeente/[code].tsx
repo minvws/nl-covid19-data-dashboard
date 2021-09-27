@@ -261,6 +261,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                     curve: 'step',
                     strokeWidth: 0,
+                    noHover: true,
                   },
                 ]}
                 accessibility={{ key: 'topical_hospital_nice' }}
