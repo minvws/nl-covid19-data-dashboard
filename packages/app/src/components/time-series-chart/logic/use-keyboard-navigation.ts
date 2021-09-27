@@ -9,7 +9,7 @@ export function useKeyboardNavigation(
   const [isEnabled, setIsEnabled] = useState(false);
 
   useHotkey(
-    'right',
+    ['right', 'alt+tab'],
     () => setPosition((x) => wrapAroundLength(x + 1, length)),
     {
       isDisabled: !isEnabled,
@@ -17,10 +17,14 @@ export function useKeyboardNavigation(
     }
   );
 
-  useHotkey('left', () => setPosition((x) => wrapAroundLength(x - 1, length)), {
-    isDisabled: !isEnabled,
-    allowRepeat: true,
-  });
+  useHotkey(
+    ['left', 'shift+alt+tab'],
+    () => setPosition((x) => wrapAroundLength(x - 1, length)),
+    {
+      isDisabled: !isEnabled,
+      allowRepeat: true,
+    }
+  );
 
   useHotkey('home', () => setPosition(0), {
     isDisabled: !isEnabled,

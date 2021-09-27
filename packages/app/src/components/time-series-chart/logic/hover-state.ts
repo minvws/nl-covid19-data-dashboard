@@ -44,6 +44,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   timespanAnnotations?: TimespanAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
   markNearestPointOnly?: boolean;
+  isTabInteractive?: boolean;
 }
 
 interface HoverState<T> {
@@ -68,15 +69,16 @@ export function useHoverState<T extends TimestampedValue>({
   timespanAnnotations,
   timelineEvents,
   markNearestPointOnly,
+  isTabInteractive,
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
-  const [hasFocus, setHasFocus] = useState(false);
+  // const [hasFocus, setHasFocus] = useState(false);
   const [valuesIndex, setValuesIndex] = useState<number>(0);
   const keyboard = useKeyboardNavigation(setValuesIndex, values.length);
 
   useEffect(() => {
-    hasFocus ? keyboard.enable() : keyboard.disable();
-  }, [hasFocus, keyboard]);
+    isTabInteractive ? keyboard.enable() : keyboard.disable();
+  }, [isTabInteractive, keyboard]);
 
   const interactiveMetricProperties = useMemo(
     () =>
@@ -200,9 +202,6 @@ export function useHoverState<T extends TimestampedValue>({
     [bisect, padding.left, padding.top]
   );
 
-  const handleFocus = useCallback(() => setHasFocus(true), []);
-  const handleBlur = useCallback(() => setHasFocus(false), []);
-
   const timeoutRef = useRef<any>();
   useEffect(() => {
     return () => {
@@ -219,7 +218,7 @@ export function useHoverState<T extends TimestampedValue>({
       }
 
       if (event.type === 'mouseleave') {
-        !hasFocus && keyboard.disable();
+        !isTabInteractive && keyboard.disable();
         /**
          * Here a timeout is used on the clear hover state to prevent the
          * tooltip from getting jittery. Individual elements in the chart can
@@ -241,11 +240,11 @@ export function useHoverState<T extends TimestampedValue>({
       setPointThrottled(mousePoint);
       keyboard.enable();
     },
-    [values, setPointThrottled, keyboard, hasFocus]
+    [values, setPointThrottled, keyboard, isTabInteractive]
   );
 
   const hoverState = useMemo(() => {
-    if (!point && !hasFocus) return;
+    if (!point && !isTabInteractive) return;
 
     const pointY = point?.y ?? 0;
 
@@ -460,7 +459,7 @@ export function useHoverState<T extends TimestampedValue>({
     return hoverState;
   }, [
     point,
-    hasFocus,
+    isTabInteractive,
     seriesConfig,
     timespanAnnotations,
     timelineEvents,
@@ -472,7 +471,7 @@ export function useHoverState<T extends TimestampedValue>({
     yScale,
   ]);
 
-  return [hoverState, { handleHover, handleFocus, handleBlur }] as const;
+  return [hoverState, { handleHover }] as const;
 }
 
 function findActiveTimespanAnnotationIndex(
