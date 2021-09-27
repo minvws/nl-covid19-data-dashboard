@@ -1,8 +1,10 @@
 import { KeysOfType, TimestampedValue, Unpack } from '@corona-dashboard/common';
+import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { SparkBars } from '~/components/spark-bars';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -17,6 +19,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
   dataProperty: KeysOfType<Unpack<T>, number | null, true>;
   value: number;
   valueIsPercentage?: boolean;
+  warning?: string;
 };
 
 type MiniTileSelectorLayoutProps = {
@@ -52,7 +55,7 @@ type NarrowMenuListItemProps = {
 
 function NarrowMenuListItem(props: NarrowMenuListItemProps) {
   const { content, item } = props;
-  const { formatNumber, formatPercentage } = useIntl();
+  const { siteText, formatNumber, formatPercentage } = useIntl();
   const collapsible = useCollapsible();
 
   return (
@@ -66,15 +69,22 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
       >
         <SparkBars data={item.data} averageProperty={item.dataProperty} />
         <InlineText>{item.label}</InlineText>
-        <InlineText
-          css={css({ ml: 'auto', pr: asResponsiveArray({ _: 2, md: 3 }) })}
-          fontWeight="bold"
-        >
-          {item.valueIsPercentage
-            ? `${formatPercentage(item.value)}%`
-            : formatNumber(item.value)}
-        </InlineText>
-        {collapsible.button()}
+        <Box ml="auto" display="flex">
+          {item.warning && (
+            <WarningIconWrapper aria-label={siteText.aria_labels.warning} small>
+              <Warning />
+            </WarningIconWrapper>
+          )}
+          <InlineText
+            fontWeight="bold"
+            css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}
+          >
+            {item.valueIsPercentage
+              ? `${formatPercentage(item.value)}%`
+              : formatNumber(item.value)}
+          </InlineText>
+          {collapsible.button()}
+        </Box>
       </Box>
       {collapsible.content(content)}
     </StyledNarrowMenuListItem>
@@ -84,7 +94,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
 function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { menuItems, children } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const { formatNumber, formatPercentage } = useIntl();
+  const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
     <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
@@ -96,12 +106,21 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
             selected={selectedIndex === index}
           >
             <SparkBars data={x.data} averageProperty={x.dataProperty} />
-            {x.label}
-            <InlineText css={css({ ml: 'auto' })} fontWeight="bold">
-              {x.valueIsPercentage
-                ? `${formatPercentage(x.value)}%`
-                : formatNumber(x.value)}
-            </InlineText>
+            <InlineText>{x.label}</InlineText>
+            <Box ml="auto" display="flex" alignItems="center">
+              {x.warning && (
+                <InlineTooltip content={x.warning}>
+                  <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
+                    <Warning />
+                  </WarningIconWrapper>
+                </InlineTooltip>
+              )}
+              <InlineText fontWeight="bold">
+                {x.valueIsPercentage
+                  ? `${formatPercentage(x.value)}%`
+                  : formatNumber(x.value)}
+              </InlineText>
+            </Box>
           </WideMenuListItem>
         ))}
       </WideMenuList>
@@ -150,5 +169,22 @@ const StyledNarrowMenuListItem = styled.li((x) =>
     borderTopStyle: 'solid',
     borderTopColor: 'border',
     cursor: 'pointer',
+  })
+);
+
+const WarningIconWrapper = styled.span<{ small?: boolean }>((x) =>
+  css({
+    width: '1.8em',
+    height: '1.8em',
+    display: 'inline-flex',
+    backgroundColor: 'warningYellow',
+    borderRadius: 1,
+    mr: x.small ? '2px' : '8px',
+    justifyContent: 'center',
+
+    svg: {
+      pt: '2px',
+      fill: 'black',
+    },
   })
 );

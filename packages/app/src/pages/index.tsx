@@ -145,6 +145,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   value:
                     last(dataICTotal.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
+                  warning: getWarning(
+                    content.elements.timeSeries,
+                    'intensive_care_nice'
+                  ),
                 } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
                 {
                   label: 'Ziekenhuisopnames',
@@ -154,6 +158,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   value:
                     last(dataHospitalIntake.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
+                  warning: getWarning(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
                 } as MiniTileSelectorItem<NlHospitalNiceValue>,
                 {
                   label: 'Gevaccineerde mensen',
@@ -163,6 +171,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     last(dataHospitalIntake.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
                   valueIsPercentage: true,
+                  warning:
+                    getWarning(
+                      content.elements.timeSeries,
+                      'vaccinatiegraad'
+                    ) ?? 'warning',
                 } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
               ]}
             >
