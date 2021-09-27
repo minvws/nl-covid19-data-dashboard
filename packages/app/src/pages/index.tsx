@@ -168,8 +168,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   data: data.vaccine_coverage_per_age_group_estimated.values,
                   dataProperty: 'age_18_plus_fully_vaccinated',
                   value:
-                    last(dataHospitalIntake.values)
-                      ?.admissions_on_date_of_admission_moving_average ?? 0,
+                    last(data.vaccine_coverage_per_age_group_estimated.values)
+                      ?.age_18_plus_fully_vaccinated ?? 0,
                   valueIsPercentage: true,
                   warning:
                     getWarning(
