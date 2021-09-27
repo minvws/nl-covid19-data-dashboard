@@ -103,8 +103,6 @@ export const getStaticProps = createGetStaticProps(
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  console.dir(content);
-
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
   const dataSitemap = useDataSitemap('nl');
@@ -304,6 +302,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniVaccinationCoverageTile
                 title={text.mini_trend_tiles.vaccinatiegraad.title}
+                oneShotBarLabel={
+                  text.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
+                }
+                fullyVaccinatedBarLabel={
+                  text.mini_trend_tiles.vaccinatiegraad
+                    .fully_vaccinated_bar_label
+                }
                 icon={<Vaccinaties />}
                 text={
                   <>

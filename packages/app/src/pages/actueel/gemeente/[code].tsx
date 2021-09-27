@@ -194,7 +194,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     last(dataHospitalIntake.values)
                       ?.admissions_on_date_of_admission_moving_average ?? 0,
                   warning: getWarning(
-                    content.elements.timeSeries,
+                    content.elements.warning,
                     'hospital_nice'
                   ),
                 } as MiniTileSelectorItem<GmHospitalNiceValue>,
@@ -209,7 +209,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       ?.fully_vaccinated_percentage ?? 0,
                   valueIsPercentage: true,
                   warning: getWarning(
-                    content.elements.timeSeries,
+                    content.elements.warning,
                     'vaccinatiegraad'
                   ),
                 } as MiniTileSelectorItem<GmVaccineCoveragePerAgeGroupValue>,
@@ -266,15 +266,19 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 accessibility={{ key: 'topical_hospital_nice' }}
-                warning={getWarning(
-                  content.elements.timeSeries,
-                  'hospital_nice'
-                )}
+                warning={getWarning(content.elements.warning, 'hospital_nice')}
               />
 
               {isDefined(filteredAgeGroup18Plus) && (
                 <MiniVaccinationCoverageTile
                   title={text.mini_trend_tiles.vaccinatiegraad.title}
+                  oneShotBarLabel={
+                    text.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
+                  }
+                  fullyVaccinatedBarLabel={
+                    text.mini_trend_tiles.vaccinatiegraad
+                      .fully_vaccinated_bar_label
+                  }
                   icon={<Vaccinaties />}
                   text={
                     <>
@@ -306,6 +310,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   fullyVaccinatedPercentageLabel={
                     filteredAgeGroup18Plus.fully_vaccinated_percentage_label
                   }
+                  warning={getWarning(
+                    content.elements.warning,
+                    'vaccine_coverage_per_age_group'
+                  )}
                 />
               )}
             </MiniTileSelectorLayout>

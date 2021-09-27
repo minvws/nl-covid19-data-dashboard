@@ -1,6 +1,5 @@
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
-import { useIntl } from '~/intl';
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
@@ -13,7 +12,8 @@ type MiniVaccinationCoverageTileProps = {
   fullyVaccinatedPercentage: number | null;
   oneShotPercentageLabel?: string | null;
   fullyVaccinatedPercentageLabel?: string | null;
-  warning?: string;
+  oneShotBarLabel: string;
+  fullyVaccinatedBarLabel: string;
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(
@@ -24,10 +24,10 @@ export function MiniVaccinationCoverageTile(
     fullyVaccinatedPercentage,
     oneShotPercentageLabel,
     fullyVaccinatedPercentageLabel,
+    oneShotBarLabel,
+    fullyVaccinatedBarLabel,
     ...tileProps
   } = props;
-
-  const { siteText } = useIntl();
 
   return (
     <MiniTile {...tileProps}>
@@ -36,13 +36,13 @@ export function MiniVaccinationCoverageTile(
           value={oneShotPercentage}
           color={COLOR_HAS_ONE_SHOT}
           valueLabel={oneShotPercentageLabel}
-          barLabel={'**Opkomst 1e prik** (18 jaar en ouder)'}
+          barLabel={oneShotBarLabel}
         />
         <RichBar
           value={fullyVaccinatedPercentage}
           color={COLOR_FULLY_VACCINATED}
           valueLabel={fullyVaccinatedPercentageLabel}
-          barLabel={'**Vaccinatiegraad** (18 jaar en ouder)'}
+          barLabel={fullyVaccinatedBarLabel}
         />
       </Box>
     </MiniTile>
