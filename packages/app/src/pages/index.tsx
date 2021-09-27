@@ -138,7 +138,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <MiniTileSelectorLayout
               menuItems={[
                 {
-                  label: 'IC Opnames',
+                  label:
+                    siteText.nationaal_actueel.mini_trend_tiles.ic_opnames
+                      .menu_item_label,
                   data: dataICTotal.values,
                   dataProperty:
                     'admissions_on_date_of_admission_moving_average',
@@ -151,7 +153,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   ),
                 } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
                 {
-                  label: 'Ziekenhuisopnames',
+                  label:
+                    siteText.nationaal_actueel.mini_trend_tiles
+                      .ziekenhuis_opnames.menu_item_label,
                   data: dataHospitalIntake.values,
                   dataProperty:
                     'admissions_on_date_of_admission_moving_average',
@@ -164,18 +168,19 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   ),
                 } as MiniTileSelectorItem<NlHospitalNiceValue>,
                 {
-                  label: 'Gevaccineerde mensen',
+                  label:
+                    siteText.nationaal_actueel.mini_trend_tiles.vaccinatiegraad
+                      .menu_item_label,
                   data: data.vaccine_coverage_per_age_group_estimated.values,
                   dataProperty: 'age_18_plus_fully_vaccinated',
                   value:
                     last(data.vaccine_coverage_per_age_group_estimated.values)
                       ?.age_18_plus_fully_vaccinated ?? 0,
                   valueIsPercentage: true,
-                  warning:
-                    getWarning(
-                      content.elements.timeSeries,
-                      'vaccinatiegraad'
-                    ) ?? 'warning',
+                  warning: getWarning(
+                    content.elements.timeSeries,
+                    'vaccinatiegraad'
+                  ),
                 } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
               ]}
             >

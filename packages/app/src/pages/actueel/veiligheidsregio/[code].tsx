@@ -1,18 +1,23 @@
-import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
-import { Arts, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import {
+  GmCollectionVaccineCoveragePerAgeGroup,
+  VrHospitalNiceValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
+import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { InlineText } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { Layout } from '~/domain/layout/layout';
@@ -22,8 +27,10 @@ import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { MiniTile } from '~/domain/topical/mini-tile';
-import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
+import {
+  MiniTileSelectorItem,
+  MiniTileSelectorLayout,
+} from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
@@ -32,6 +39,10 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
+import {
+  ElementsQueryResult,
+  getWarning,
+} from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -83,6 +94,7 @@ export const getStaticProps = createGetStaticProps(
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
+    elements: ElementsQueryResult;
   }>(getTopicalPageQuery)
 );
 
@@ -151,34 +163,69 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <MiniTileLayout id="metric-navigation">
-              <MiniTile
-                title={text.mini_trend_tiles.ic_opnames.title}
-                text={
-                  <InlineText color="gray">
-                    {text.mini_trend_tiles.ic_opnames.text}
-                  </InlineText>
-                }
-                icon={<Arts />}
-              />
-
+            <MiniTileSelectorLayout
+              menuItems={[
+                {
+                  label:
+                    siteText.veiligheidsregio_actueel.mini_trend_tiles
+                      .ziekenhuis_opnames.menu_item_label,
+                  data: dataHospitalIntake.values,
+                  dataProperty:
+                    'admissions_on_date_of_admission_moving_average',
+                  value:
+                    last(dataHospitalIntake.values)
+                      ?.admissions_on_date_of_admission_moving_average ?? 0,
+                  warning: getWarning(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
+                } as MiniTileSelectorItem<VrHospitalNiceValue>,
+                {
+                  label:
+                    siteText.veiligheidsregio_actueel.mini_trend_tiles
+                      .vaccinatiegraad.menu_item_label,
+                  data: data.vaccine_coverage_per_age_group.values,
+                  dataProperty: 'fully_vaccinated_percentage',
+                  value:
+                    last(data.vaccine_coverage_per_age_group.values)
+                      ?.fully_vaccinated_percentage ?? 0,
+                  valueIsPercentage: true,
+                  warning: getWarning(
+                    content.elements.timeSeries,
+                    'vaccinatiegraad'
+                  ),
+                } as MiniTileSelectorItem<VrVaccineCoveragePerAgeGroupValue>,
+              ]}
+            >
               <MiniTrendTile
                 title={text.mini_trend_tiles.ziekenhuis_opnames.title}
                 text={
-                  <DataDrivenText
-                    data={data}
-                    metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
-                    }
-                    isAmount
-                  />
+                  <>
+                    <DataDrivenText
+                      data={data}
+                      metricName="hospital_nice"
+                      metricProperty="admissions_on_date_of_admission_moving_average"
+                      differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                      valueTexts={
+                        text.data_driven_texts.intake_hospital_ma_nieuw.value
+                      }
+                      differenceText={
+                        siteText.common_actueel.secties.kpi
+                          .zeven_daags_gemiddelde_nieuw
+                      }
+                      isAmount={false}
+                    />
+                    <LinkWithIcon
+                      href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
+                      icon={<ArrowIconRight />}
+                      iconPlacement="right"
+                    >
+                      {text.mini_trend_tiles.ziekenhuis_opnames.read_more_link}
+                    </LinkWithIcon>
+                  </>
                 }
                 icon={<Ziekenhuis />}
-                values={data.hospital_nice.values}
+                values={dataHospitalIntake.values}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -200,32 +247,35 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     strokeWidth: 0,
                   },
                 ]}
-                titleValue={
-                  last(dataHospitalIntake.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
-                }
-                href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
                 accessibility={{ key: 'topical_hospital_nice' }}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'hospital_nice'
+                )}
               />
 
-              {isDefined(filteredAgeGroup18Plus) ? (
+              {isDefined(filteredAgeGroup18Plus) && (
                 <MiniVaccinationCoverageTile
                   title={text.mini_trend_tiles.vaccinatiegraad.title}
-                  href={reverseRouter.vr.vaccinaties(vrCode)}
                   icon={<Vaccinaties />}
                   text={
-                    <Markdown
-                      content={replaceVariablesInText(
-                        text.mini_trend_tiles.vaccinatiegraad.text,
-                        renderedAgeGroup18Pluslabels,
-                        formatters
-                      )}
-                    />
+                    <>
+                      <Markdown
+                        content={replaceVariablesInText(
+                          text.mini_trend_tiles.vaccinatiegraad.text,
+                          renderedAgeGroup18Pluslabels,
+                          formatters
+                        )}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.vr.vaccinaties(vrCode)}
+                        icon={<ArrowIconRight />}
+                        iconPlacement="right"
+                      >
+                        {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
+                      </LinkWithIcon>
+                    </>
                   }
-                  titleValue={
-                    renderedAgeGroup18Pluslabels.has_one_shot_percentage
-                  }
-                  titleValueIsPercentage
                   oneShotPercentage={
                     filteredAgeGroup18Plus.has_one_shot_percentage
                   }
@@ -239,10 +289,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     filteredAgeGroup18Plus.fully_vaccinated_percentage_label
                   }
                 />
-              ) : (
-                <Box />
               )}
-            </MiniTileLayout>
+            </MiniTileSelectorLayout>
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
