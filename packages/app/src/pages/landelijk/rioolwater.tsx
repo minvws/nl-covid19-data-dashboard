@@ -79,8 +79,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  console.log(choropleth.gm.sewer[0].date_start_unix);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
