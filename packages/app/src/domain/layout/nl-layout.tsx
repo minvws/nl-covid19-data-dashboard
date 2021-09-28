@@ -1,4 +1,3 @@
-import { Nl } from '@corona-dashboard/common';
 import {
   Arts,
   Coronavirus,

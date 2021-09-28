@@ -5,22 +5,17 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import {
-  getLastGeneratedDate,
-  selectNlPageMetricData,
-} from '~/static-props/get-data';
+import { getLastGeneratedDate } from '~/static-props/get-data';
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  selectNlPageMetricData()
-);
+export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const National = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { selectedNlData: data, lastGenerated } = props;
+  const { lastGenerated } = props;
+
   return (
     <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated} />
+      <NlLayout />
     </Layout>
   );
 };

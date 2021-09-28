@@ -27,7 +27,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -35,7 +35,10 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  selectNlData(
+    'difference.elderly_at_home__positive_tested_daily',
+    'elderly_at_home'
+  ),
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),

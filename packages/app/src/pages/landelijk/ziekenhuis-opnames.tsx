@@ -36,7 +36,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
@@ -45,7 +45,12 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('hospital_lcps'),
+  selectNlData(
+    'difference.hospital_lcps__beds_occupied_covid',
+    'hospital_lcps',
+    'hospital_nice_per_age_group',
+    'hospital_nice'
+  ),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),
@@ -69,6 +74,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('vr');
+
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
   const lastValueNice = data.hospital_nice.last_value;

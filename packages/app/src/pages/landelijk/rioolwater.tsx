@@ -27,7 +27,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -35,22 +35,26 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   () => {
-    const data = selectNlPageMetricData()();
-    data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
-      (x) => ({
-        ...x,
-        average: Math.round(x.average),
-      })
-    );
-    data.selectedNlData.sewer.last_value = {
-      ...data.selectedNlData.sewer.last_value,
-      average: Math.round(data.selectedNlData.sewer.last_value.average),
+    const { selectedNlData: data } = selectNlData(
+      'sewer',
+      'difference.sewer__average'
+    )();
+
+    data.sewer.values = data.sewer.values.map((x) => ({
+      ...x,
+      average: Math.round(x.average),
+    }));
+
+    data.sewer.last_value = {
+      ...data.sewer.last_value,
+      average: Math.round(data.sewer.last_value.average),
     };
-    data.selectedNlData.difference.sewer__average.difference = Math.round(
-      data.selectedNlData.difference.sewer__average.difference
+
+    data.difference.sewer__average.difference = Math.round(
+      data.difference.sewer__average.difference
     );
 
-    return data;
+    return { selectedNlData: data };
   },
   createGetChoroplethData({
     vr: ({ sewer }) => {

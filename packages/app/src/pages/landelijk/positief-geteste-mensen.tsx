@@ -37,7 +37,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -45,7 +45,15 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('tested_ggd', 'tested_per_age_group', 'g_number'),
+  selectNlData(
+    'difference.tested_ggd__infected_percentage_moving_average',
+    'difference.tested_ggd__tested_total_moving_average',
+    'difference.tested_overall__infected_moving_average',
+    'g_number',
+    'tested_ggd',
+    'tested_overall',
+    'tested_per_age_group'
+  ),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
@@ -77,6 +85,7 @@ export const getStaticProps = createGetStaticProps(
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+
   const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
   const reverseRouter = useReverseRouter();
@@ -87,7 +96,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
-  const difference = data.difference;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -128,7 +136,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="infected"
                 absolute={dataOverallLastValue.infected}
-                difference={difference.tested_overall__infected_moving_average}
+                difference={
+                  data.difference.tested_overall__infected_moving_average
+                }
                 isMovingAverageDifference
                 isAmount
               />
@@ -333,7 +343,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="ggd_tested_total"
                 absolute={dataGgdLastValue.tested_total}
-                difference={difference.tested_ggd__tested_total_moving_average}
+                difference={
+                  data.difference.tested_ggd__tested_total_moving_average
+                }
                 isMovingAverageDifference
                 isAmount
               />
@@ -351,7 +363,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="ggd_infected"
                 percentage={dataGgdLastValue.infected_percentage}
                 difference={
-                  difference.tested_ggd__infected_percentage_moving_average
+                  data.difference.tested_ggd__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
                 isAmount={false}

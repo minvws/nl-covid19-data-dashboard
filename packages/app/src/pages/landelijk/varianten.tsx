@@ -6,6 +6,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
+  getVariantSidebarValue,
   getVariantTableData,
 } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
@@ -21,7 +22,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { VariantsPageQuery } from '~/types/cms';
 
@@ -30,12 +31,15 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     () => {
-      const data = selectNlPageMetricData('variants')();
-      const variants = data.selectedNlData.variants;
-      delete data.selectedNlData.variants;
+      const data = selectNlData('variants', 'named_difference')();
+
+      const {
+        selectedNlData: { variants, ...rest },
+      } = data;
 
       return {
-        selectedNlData: data.selectedNlData,
+        selectedNlData: rest,
+        variantSidebarValue: getVariantSidebarValue(variants) ?? null,
         ...getVariantTableData(variants, data.selectedNlData.named_difference),
         ...getVariantChartData(variants),
       };
@@ -59,7 +63,7 @@ export default function CovidVariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
-    selectedNlData,
+    variantSidebarValue,
     lastGenerated,
     content,
     variantTable,
@@ -80,7 +84,7 @@ export default function CovidVariantenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={selectedNlData} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -102,17 +106,19 @@ export default function CovidVariantenPage(
             articles={content.highlight.articles}
           />
 
-          <VariantsTableTile
-            data={variantTable}
-            sampleSize={selectedNlData.variantSidebarValue.sample_size}
-            text={tableText}
-            source={text.bronnen.rivm}
-            dates={{
-              date_end_unix: dates.date_end_unix,
-              date_of_insertion_unix: dates.date_of_insertion_unix,
-              date_start_unix: dates.date_start_unix,
-            }}
-          />
+          {variantSidebarValue?.sample_size && (
+            <VariantsTableTile
+              data={variantTable}
+              sampleSize={variantSidebarValue.sample_size}
+              text={tableText}
+              source={text.bronnen.rivm}
+              dates={{
+                date_end_unix: dates.date_end_unix,
+                date_of_insertion_unix: dates.date_of_insertion_unix,
+                date_start_unix: dates.date_start_unix,
+              }}
+            />
+          )}
 
           <VariantsStackedAreaTile
             text={text.varianten_over_tijd_grafiek}

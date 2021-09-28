@@ -18,15 +18,16 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import {
-  getLastGeneratedDate,
-  selectNlPageMetricData,
-} from '~/static-props/get-data';
+import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData()
+  selectNlData(
+    'difference.doctor__covid_symptoms_per_100k',
+    'difference.doctor__covid_symptoms',
+    'doctor'
+  )
 );
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {

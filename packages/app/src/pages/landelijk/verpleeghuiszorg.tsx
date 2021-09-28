@@ -31,7 +31,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -39,7 +39,11 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  selectNlData(
+    'difference.nursing_home__infected_locations_total',
+    'difference.nursing_home__newly_infected_people',
+    'nursing_home'
+  ),
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
   }),

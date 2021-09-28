@@ -10,7 +10,7 @@ import {
   VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
-import { get, PropertyPath } from 'lodash';
+import { get } from 'lodash';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
@@ -139,13 +139,18 @@ async function replaceReferencesInContent(
     .walk(input);
 }
 
+type UnionDeepMerge<T extends Record<string, unknown>> = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [K in keyof T]: T[K] extends object ? U.Merge<T[K]> : T[K];
+};
+
 /**
  * This method selects only the specified metric properties from the national data
  *
  */
-export function selectNlData<T extends keyof Nl | F.AutoPath<Nl, keyof Nl>>(
-  ...metrics: T[]
-) {
+export function selectNlData<
+  T extends keyof Nl | F.AutoPath<Nl, keyof Nl, '.'>
+>(...metrics: T[]) {
   return () => {
     const { data } = getNlData();
 
@@ -170,9 +175,7 @@ export function selectNlData<T extends keyof Nl | F.AutoPath<Nl, keyof Nl>>(
            */
           get(data, p) ?? null
         ),
-      {} as U.Merge<
-        T extends keyof Nl ? O.Pick<Nl, T> : O.P.Pick<Nl, S.Split<T, '.'>>
-      >
+      {} as UnionDeepMerge<U.Merge<O.P.Pick<Nl, S.Split<T, '.'>>>>
     );
 
     return { selectedNlData };

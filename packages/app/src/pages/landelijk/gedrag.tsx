@@ -29,13 +29,13 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('behavior_per_age_group'),
+  selectNlData('behavior', 'behavior_per_age_group'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
