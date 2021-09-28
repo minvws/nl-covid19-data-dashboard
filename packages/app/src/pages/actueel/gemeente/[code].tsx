@@ -139,7 +139,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
       (item) => item.age_group_range === '18+'
     );
   const renderedAgeGroup18Pluslabels = useAgegroupLabels(
-    filteredAgeGroup18Plus
+    filteredAgeGroup18Plus,
+    true
   );
 
   const internationalFeature = useFeature('inPositiveTestsPage');
