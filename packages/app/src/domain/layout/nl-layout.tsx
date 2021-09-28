@@ -25,15 +25,9 @@ import {
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
-// import { SidebarMetric } from '~/components/sidebar-metric';
-import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { VisuallyHidden } from '~/components/visually-hidden';
-// import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-// import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-// import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
-// import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric'
 
 interface NlLayoutProps {
   children?: React.ReactNode;
@@ -217,11 +211,7 @@ export function NlLayout(props: NlLayoutProps) {
                   href={reverseRouter.nl.besmettelijkeMensen()}
                   icon={<Ziektegolf />}
                   title={siteText.besmettelijke_personen.titel_sidebar}
-                >
-                  <SidebarKpiValue
-                    title={siteText.besmettelijke_personen.kpi_titel}
-                  />
-                </MetricMenuItemLink>
+                />
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.verdenkingenHuisartsen()}

@@ -1,4 +1,3 @@
-import { Gm, GmDifference } from '@corona-dashboard/common';
 import {
   Coronavirus,
   RioolwaterMonitoring,
@@ -8,8 +7,6 @@ import {
 } from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -18,10 +15,8 @@ import {
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
-import { SidebarMetric } from '~/components/sidebar-metric';
 import { Heading, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
@@ -29,25 +24,11 @@ import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { GmComboBox } from './components/gm-combo-box';
 
-export type GmSideBarData = {
-  tested_overall: Pick<Gm['tested_overall'], 'last_value'>;
-  deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
-  hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
-  sewer: Pick<Gm['sewer'], 'last_value'>;
-  vaccine_coverage_per_age_group: Pick<
-    Gm['vaccine_coverage_per_age_group'],
-    'values'
-  >;
-};
-
 type GmLayoutProps = {
-  lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
       code: string;
-      difference: GmDifference;
-      data: GmSideBarData;
       municipalityName: string;
     }
   | {
@@ -56,8 +37,6 @@ type GmLayoutProps = {
        */
       isLandingPage: true;
       code: string;
-      data?: undefined;
-      difference?: undefined;
       municipalityName?: undefined;
     }
 );
@@ -79,21 +58,7 @@ type GmLayoutProps = {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function GmLayout(props: GmLayoutProps) {
-  const { children, data, municipalityName, code, difference } = props;
-  const sidebarData = useMemo(() => {
-    if (isDefined(difference) && isDefined(difference.sewer__average)) {
-      difference.sewer__average.difference = Math.round(
-        difference.sewer__average.difference
-      );
-      difference.sewer__average.old_value = Math.round(
-        difference.sewer__average.old_value
-      );
-    }
-    if (isDefined(data)) {
-      data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
-    }
-    return { ...data, difference };
-  }, [data, difference]);
+  const { children, municipalityName, code } = props;
 
   const { siteText } = useIntl();
   const router = useRouter();
@@ -166,110 +131,59 @@ export function GmLayout(props: GmLayoutProps) {
                 </Box>
 
                 <Menu spacing={4}>
-                  {sidebarData && data?.vaccine_coverage_per_age_group && (
-                    <>
-                      {vaccinationFeature.isEnabled && (
-                        <CategoryMenu
-                          title={siteText.gemeente_layout.headings.vaccinaties}
-                        >
-                          <MetricMenuItemLink
-                            href={reverseRouter.gm.vaccinaties(code)}
-                            icon={<Vaccinaties />}
-                            title={siteText.gemeente_vaccinaties.titel_sidebar}
-                          >
-                            <VaccineSidebarMetricVrGm
-                              data={data.vaccine_coverage_per_age_group.values}
-                              description={
-                                siteText.gemeente_vaccinaties.titel_kpi
-                              }
-                            />
-                          </MetricMenuItemLink>
-                        </CategoryMenu>
-                      )}
-
-                      <CategoryMenu
-                        title={siteText.gemeente_layout.headings.ziekenhuizen}
-                      >
-                        <MetricMenuItemLink
-                          href={reverseRouter.gm.ziekenhuisopnames(code)}
-                          icon={<Ziekenhuis />}
-                          title={
-                            siteText.gemeente_ziekenhuisopnames_per_dag
-                              .titel_sidebar
-                          }
-                        >
-                          <SidebarMetric
-                            data={sidebarData}
-                            metricName="hospital_nice"
-                            metricProperty="admissions_on_date_of_admission_moving_average"
-                            localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            hideDate
-                          />
-                        </MetricMenuItemLink>
-                      </CategoryMenu>
-                      <CategoryMenu
-                        title={siteText.gemeente_layout.headings.besmettingen}
-                      >
-                        <MetricMenuItemLink
-                          href={reverseRouter.gm.positiefGetesteMensen(code)}
-                          icon={<Test />}
-                          title={
-                            siteText.gemeente_positief_geteste_personen
-                              .titel_sidebar
-                          }
-                        >
-                          <SidebarMetric
-                            data={sidebarData}
-                            metricName="tested_overall"
-                            metricProperty="infected"
-                            localeTextKey="gemeente_positief_geteste_personen"
-                            differenceKey="tested_overall__infected_moving_average"
-                          />
-                        </MetricMenuItemLink>
-
-                        <MetricMenuItemLink
-                          href={reverseRouter.gm.sterfte(code)}
-                          icon={<Coronavirus />}
-                          title={
-                            siteText.veiligheidsregio_sterfte.titel_sidebar
-                          }
-                        >
-                          <SidebarMetric
-                            data={sidebarData}
-                            metricName="deceased_rivm"
-                            metricProperty="covid_daily"
-                            localeTextKey="gemeente_sterfte"
-                            differenceKey="deceased_rivm__covid_daily"
-                          />
-                        </MetricMenuItemLink>
-                      </CategoryMenu>
-                    </>
+                  {vaccinationFeature.isEnabled && (
+                    <CategoryMenu
+                      title={siteText.gemeente_layout.headings.vaccinaties}
+                    >
+                      <MetricMenuItemLink
+                        href={reverseRouter.gm.vaccinaties(code)}
+                        icon={<Vaccinaties />}
+                        title={siteText.gemeente_vaccinaties.titel_sidebar}
+                      />
+                    </CategoryMenu>
                   )}
+
+                  <CategoryMenu
+                    title={siteText.gemeente_layout.headings.ziekenhuizen}
+                  >
+                    <MetricMenuItemLink
+                      href={reverseRouter.gm.ziekenhuisopnames(code)}
+                      icon={<Ziekenhuis />}
+                      title={
+                        siteText.gemeente_ziekenhuisopnames_per_dag
+                          .titel_sidebar
+                      }
+                    />
+                  </CategoryMenu>
+                  <CategoryMenu
+                    title={siteText.gemeente_layout.headings.besmettingen}
+                  >
+                    <MetricMenuItemLink
+                      href={reverseRouter.gm.positiefGetesteMensen(code)}
+                      icon={<Test />}
+                      title={
+                        siteText.gemeente_positief_geteste_personen
+                          .titel_sidebar
+                      }
+                    />
+
+                    <MetricMenuItemLink
+                      href={reverseRouter.gm.sterfte(code)}
+                      icon={<Coronavirus />}
+                      title={siteText.veiligheidsregio_sterfte.titel_sidebar}
+                    />
+                  </CategoryMenu>
+
                   <CategoryMenu
                     title={siteText.gemeente_layout.headings.vroege_signalen}
                   >
                     <MetricMenuItemLink
-                      href={
-                        sidebarData?.sewer && reverseRouter.gm.rioolwater(code)
-                      }
+                      href={reverseRouter.gm.rioolwater(code)}
                       icon={<RioolwaterMonitoring />}
                       title={
                         siteText.gemeente_rioolwater_metingen.titel_sidebar
                       }
-                    >
-                      {sidebarData?.sewer ? (
-                        <SidebarMetric
-                          data={sidebarData}
-                          metricName="sewer"
-                          metricProperty="average"
-                          localeTextKey="gemeente_rioolwater_metingen"
-                          differenceKey="sewer__average"
-                          annotationKey="riool_normalized"
-                        />
-                      ) : (
-                        siteText.gemeente_rioolwater_metingen.nodata_sidebar
-                      )}
-                    </MetricMenuItemLink>
+                    />
                   </CategoryMenu>
                 </Menu>
               </Box>

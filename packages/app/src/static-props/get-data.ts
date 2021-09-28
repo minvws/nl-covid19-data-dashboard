@@ -14,28 +14,15 @@ import { get } from 'lodash';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
+import { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/multi-select-countries';
-import { GmSideBarData } from '~/domain/layout/gm-layout';
-// import {
-//   vrPageMetricNames,
-//   VrRegionPageMetricNames,
-// } from '~/domain/layout/vr-layout';
-// import {
-//   getVariantSidebarValue,
-//   VariantSidebarValue,
-// } from '~/domain/variants/static-props';
 import { getClient, localize } from '~/lib/sanity';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
-// import {
-//   getSituationsSidebarValue,
-//   SituationsSidebarValue,
-// } from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
-import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latets-values';
-import { F, O, S, U } from 'ts-toolbelt';
+import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
 
 /**
  * Usage:
@@ -145,7 +132,7 @@ type UnionDeepMerge<T extends Record<string, unknown>> = {
 };
 
 /**
- * This method selects only the specified metric properties from the national data
+ * This method selects the specified metric properties from the national data
  *
  */
 export function selectNlData<
@@ -192,7 +179,7 @@ export function getNlData() {
 }
 
 /**
- * This method selects only the specified metric properties from the region data
+ * This method selects the specified metric properties from the region data
  *
  */
 export function selectVrData<
@@ -244,43 +231,22 @@ export function loadAndSortVrData(vrcode: string) {
 }
 
 /**
- * This method returns all the municipal data that is required by the sidebar,
- * optional extra metric property names can be added as separate arguments which will
- * be added to the output
+ * This method selects the specified metric properties from the municipal data
  *
  */
-export function selectGmPageMetricData<T extends keyof Gm>(
-  ...additionalMetrics: T[]
-) {
-  return selectGmData(...additionalMetrics);
-}
-
-/**
- * This method selects only the specified metric properties from the municipal data
- *
- */
-export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
+export function selectGmData<
+  T extends keyof Gm | F.AutoPath<Gm, keyof Gm, '.'>
+>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const sideBarData: GmSideBarData = {
-      deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
-      hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
-      tested_overall: { last_value: gmData.data.tested_overall.last_value },
-      sewer: { last_value: gmData.data.sewer.last_value },
-      vaccine_coverage_per_age_group: {
-        values: gmData.data.vaccine_coverage_per_age_group?.values ?? null,
-      },
-    };
-
     const selectedGmData = metrics.reduce(
-      (acc, p) => set(acc, p, gmData.data[p]),
-      {} as Pick<Gm, T>
+      (acc, p) => set(acc, p, get(gmData.data, p)),
+      {} as UnionDeepMerge<U.Merge<O.P.Pick<Gm, S.Split<T, '.'>>>>
     );
 
     return {
       selectedGmData,
-      sideBarData,
       municipalityName: gmData.municipalityName,
     };
   };

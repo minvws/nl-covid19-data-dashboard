@@ -20,15 +20,11 @@ import {
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
-// import { SidebarMetric } from '~/components/sidebar-metric';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-// import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
-// import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-// import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
 type VrLayoutProps = {
