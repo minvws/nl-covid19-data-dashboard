@@ -19,20 +19,20 @@ import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/multi-select-countries';
 import { GmSideBarData } from '~/domain/layout/gm-layout';
-import {
-  vrPageMetricNames,
-  VrRegionPageMetricNames,
-} from '~/domain/layout/vr-layout';
+// import {
+//   vrPageMetricNames,
+//   VrRegionPageMetricNames,
+// } from '~/domain/layout/vr-layout';
 // import {
 //   getVariantSidebarValue,
 //   VariantSidebarValue,
 // } from '~/domain/variants/static-props';
 import { getClient, localize } from '~/lib/sanity';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
-import {
-  getSituationsSidebarValue,
-  SituationsSidebarValue,
-} from './situations/get-situations-sidebar-value';
+// import {
+//   getSituationsSidebarValue,
+//   SituationsSidebarValue,
+// } from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latets-values';
 import { F, O, S, U } from 'ts-toolbelt';
@@ -192,37 +192,21 @@ export function getNlData() {
 }
 
 /**
- * This method returns all the region data that is required by the sidebar,
- * optional extra metric property names can be added as separate arguments which will
- * be added to the output
- *
- */
-export function selectVrPageMetricData<
-  T extends keyof Vr = VrRegionPageMetricNames
->(...additionalMetrics: T[]) {
-  return selectVrData(...[...vrPageMetricNames, ...additionalMetrics]);
-}
-
-/**
  * This method selects only the specified metric properties from the region data
  *
  */
-export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
+export function selectVrData<
+  T extends keyof Vr | F.AutoPath<Vr, keyof Vr, '.'>
+>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
-    const vrData = getVrData(context);
+    const { data, vrName } = getVrData(context);
 
     const selectedVrData = metrics.reduce(
-      (acc, p) => set(acc, p, vrData.data[p] ?? null),
-      {
-        situationsSidebarValue: getSituationsSidebarValue(
-          json.vrCollection.situations
-        ),
-      } as {
-        situationsSidebarValue: SituationsSidebarValue;
-      } & Pick<Vr, T>
+      (acc, p) => set(acc, p, get(data, p) ?? null),
+      {} as UnionDeepMerge<U.Merge<O.P.Pick<Vr, S.Split<T, '.'>>>>
     );
 
-    return { selectedVrData, vrName: vrData.vrName };
+    return { selectedVrData, vrName };
   };
 }
 

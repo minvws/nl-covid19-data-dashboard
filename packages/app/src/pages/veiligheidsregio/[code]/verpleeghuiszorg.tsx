@@ -26,7 +26,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -35,7 +35,12 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData(
+    'difference.nursing_home__deceased_daily',
+    'difference.nursing_home__infected_locations_total',
+    'difference.nursing_home__newly_infected_people',
+    'nursing_home'
+  ),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('nursingHomePage', locale);
@@ -74,7 +79,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={

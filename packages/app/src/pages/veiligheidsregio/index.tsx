@@ -46,7 +46,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout isLandingPage lastGenerated={lastGenerated}>
+      <VrLayout isLandingPage>
         {!breakpoints.md && (
           <Box bg="white">
             <VrComboBox />
