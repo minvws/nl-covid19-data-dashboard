@@ -1,5 +1,6 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -53,7 +54,10 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ sewer }) => {
       const roundedSewer = sewer.map((x) => {
-        return { ...x, average: Math.round(x.average) };
+        return {
+          ...x,
+          average: isPresent(x.average) ? Math.round(x.average) : null,
+        };
       });
       return { sewer: roundedSewer };
     },

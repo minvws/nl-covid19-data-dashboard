@@ -1,4 +1,5 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isPresent } from 'ts-is-present';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -33,12 +34,14 @@ export const getStaticProps = createGetStaticProps(
     data.selectedVrData.sewer.values = data.selectedVrData.sewer.values.map(
       (x) => ({
         ...x,
-        average: Math.round(x.average),
+        average: isPresent(x.average) ? Math.round(x.average) : null,
       })
     );
     data.selectedVrData.sewer.last_value = {
       ...data.selectedVrData.sewer.last_value,
-      average: Math.round(data.selectedVrData.sewer.last_value.average),
+      average: isPresent(data.selectedVrData.sewer.last_value.average)
+        ? Math.round(data.selectedVrData.sewer.last_value.average)
+        : null,
     };
     data.selectedVrData.difference.sewer__average.difference = Math.round(
       data.selectedVrData.difference.sewer__average.difference
