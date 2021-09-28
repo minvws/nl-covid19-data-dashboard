@@ -8,6 +8,7 @@ import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineHeaderWithIcon } from './components/vaccine-header-with-icon';
@@ -65,10 +66,17 @@ export function VaccinePageIntroductionNl({
                       accessibility={{
                         key: 'vaccine_introduction_administrations_over_time',
                       }}
-                      metricProperty="estimated"
                       timeframe="all"
                       title={text.grafiek_gezette_prikken.titel}
                       values={data.vaccine_administered_total.values}
+                      seriesConfig={[
+                        {
+                          type: 'line',
+                          metricProperty: 'estimated',
+                          color: colors.data.primary,
+                          label: '',
+                        },
+                      ]}
                     />
                   </ErrorBoundary>
                 </div>

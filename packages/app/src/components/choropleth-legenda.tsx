@@ -21,7 +21,12 @@ export function ChoroplethLegenda({
   const [endLabelRef, endLabelSize] = useResizeObserver<HTMLSpanElement>();
 
   return (
-    <Box width="100%" pr={`${endLabelSize.width ?? 0 / 2}px`} spacing={2}>
+    <Box
+      width="100%"
+      pr={`${endLabelSize.width ?? 0 / 2}px`}
+      spacing={2}
+      aria-hidden="true"
+    >
       {title && <Text variant="subtitle1">{title}</Text>}
       <List>
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {

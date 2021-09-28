@@ -18,20 +18,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "enum": ["GM_COLLECTION"]
+      "$ref": "#/$defs/gm_collection_id"
     },
     "name": {
-      "type": "string",
-      "const": {
-        "$data": "1/proto_name"
-      }
+      "$ref": "#/$defs/gm_collection_id"
     },
     "code": {
-      "type": "string",
-      "const": {
-        "$data": "1/proto_name"
-      }
+      "$ref": "#/$defs/gm_collection_id"
     },
     "hospital_nice": {
       "type": "array",
@@ -60,6 +53,12 @@
       "items": {
         "$ref": "vaccine_coverage_per_age_group.json"
       }
+    }
+  },
+  "$defs": {
+    "gm_collection_id": {
+      "type": "string",
+      "enum": ["GM_COLLECTION"]
     }
   }
 }

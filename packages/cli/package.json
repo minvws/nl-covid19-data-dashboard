@@ -10,7 +10,7 @@
     "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "flat": "^5.0.2",
-    "json-schema-to-typescript": "^9",
+    "json-schema-to-typescript": "^10",
     "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "p-memoize": "^4.0.1",

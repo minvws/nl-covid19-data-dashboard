@@ -1,6 +1,5 @@
 import { css } from '@styled-system/css';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -9,17 +8,20 @@ import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
-import { parseFullyVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-fully-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  KeyWithLabel,
+  useVaccineCoveragePercentageFormatter,
+} from './logic/use-vaccine-coverage-percentage-formatter';
 
 type AgeTypes = {
   fully_vaccinated: number | null;
   has_one_shot: number | null;
   birthyear: string;
-  label_fully_vaccinated?: string | null;
-  label_has_one_shot?: string | null;
+  fully_vaccinated_label?: string | null;
+  has_one_shot_label?: string | null;
 };
 
 interface VaccineCoverageToggleTileProps {
@@ -46,7 +48,6 @@ export function VaccineCoverageToggleTile({
 }: VaccineCoverageToggleTileProps) {
   const { siteText } = useIntl();
   const text = siteText.vaccinaties.vaccination_grade_toggle_tile;
-
   const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
 
   return (
@@ -79,17 +80,15 @@ export function VaccineCoverageToggleTile({
             <>
               <AgeGroupBlock
                 title={text.top_labels.one_shot}
-                kpiValue={age18Plus.has_one_shot}
-                birthyear={age18Plus.birthyear}
-                label={age18Plus.label_has_one_shot}
+                data={age18Plus}
+                property="has_one_shot"
                 description={text.age_18_plus.description_vaccination_one_shot}
                 numFractionDigits={numFractionDigits}
               />
               <AgeGroupBlock
                 title={text.top_labels.vaccination_grade}
-                kpiValue={age18Plus.fully_vaccinated}
-                birthyear={age18Plus.birthyear}
-                label={age18Plus.label_fully_vaccinated}
+                data={age18Plus}
+                property="fully_vaccinated"
                 description={text.age_18_plus.description_vaccination_grade}
                 numFractionDigits={numFractionDigits}
               />
@@ -99,17 +98,15 @@ export function VaccineCoverageToggleTile({
             <>
               <AgeGroupBlock
                 title={text.top_labels.one_shot}
-                kpiValue={age12Plus.has_one_shot}
-                birthyear={age12Plus.birthyear}
-                label={age12Plus.label_has_one_shot}
+                data={age12Plus}
+                property="has_one_shot"
                 description={text.age_12_plus.description_vaccination_one_shot}
                 numFractionDigits={numFractionDigits}
               />
               <AgeGroupBlock
                 title={text.top_labels.vaccination_grade}
-                kpiValue={age12Plus.fully_vaccinated}
-                birthyear={age12Plus.birthyear}
-                label={age12Plus.label_fully_vaccinated}
+                data={age12Plus}
+                property="fully_vaccinated"
                 description={text.age_12_plus.description_vaccination_grade}
                 numFractionDigits={numFractionDigits}
               />
@@ -126,34 +123,29 @@ export function VaccineCoverageToggleTile({
 
 interface AgeGroupBlockProps {
   title: string;
-  kpiValue: number | null;
+  data: AgeTypes;
+  property: KeyWithLabel<AgeTypes>;
   description: string;
-  birthyear: string;
-  label?: string | null;
   numFractionDigits?: number;
 }
 
 function AgeGroupBlock({
   title,
-  kpiValue,
+  data,
+  property,
   description,
-  birthyear,
-  label,
   numFractionDigits,
 }: AgeGroupBlockProps) {
-  const { siteText, formatPercentage } = useIntl();
+  const { siteText } = useIntl();
+  const formatCoveragePercentage =
+    useVaccineCoveragePercentageFormatter(numFractionDigits);
 
-  const parsedBirthyearRange = parseBirthyearRange(birthyear);
+  const parsedBirthyearRange = parseBirthyearRange(data.birthyear);
 
   assert(
     parsedBirthyearRange,
-    `Something went wrong with parsing the birthyear: ${birthyear}`
+    `Something went wrong with parsing the birthyear: ${data.birthyear}`
   );
-
-  let parsedVaccinatedLabel;
-  if (isPresent(label)) {
-    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
-  }
 
   return (
     <Box spacing={2}>
@@ -165,35 +157,7 @@ function AgeGroupBlock({
       >
         {title}
       </InlineText>
-      {parsedVaccinatedLabel ? (
-        <KpiValue
-          text={
-            parsedVaccinatedLabel.sign === '>'
-              ? replaceVariablesInText(
-                  siteText.vaccinaties_common.labels.meer_dan,
-                  {
-                    value:
-                      formatPercentage(parsedVaccinatedLabel.value, {
-                        minimumFractionDigits: numFractionDigits,
-                        maximumFractionDigits: numFractionDigits,
-                      }) + '%',
-                  }
-                )
-              : replaceVariablesInText(
-                  siteText.vaccinaties_common.labels.minder_dan,
-                  {
-                    value:
-                      formatPercentage(parsedVaccinatedLabel.value, {
-                        minimumFractionDigits: numFractionDigits,
-                        maximumFractionDigits: numFractionDigits,
-                      }) + '%',
-                  }
-                )
-          }
-        />
-      ) : (
-        <KpiValue percentage={kpiValue} numFragmentDigits={numFractionDigits} />
-      )}
+      <KpiValue text={formatCoveragePercentage(data, property)} />
       <Markdown
         content={replaceVariablesInText(description, {
           birthyear: replaceVariablesInText(
