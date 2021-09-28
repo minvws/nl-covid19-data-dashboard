@@ -80,10 +80,20 @@ type GmLayoutProps = {
 export function GmLayout(props: GmLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
 
-  const sidebarData = useMemo(
-    () => ({ ...data, difference }),
-    [data, difference]
-  );
+  const sidebarData = useMemo(() => {
+    if (isDefined(difference) && isDefined(difference.sewer__average)) {
+      difference.sewer__average.difference = Math.round(
+        difference.sewer__average.difference
+      );
+      difference.sewer__average.old_value = Math.round(
+        difference.sewer__average.old_value
+      );
+    }
+    if (isDefined(data)) {
+      data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
+    }
+    return { ...data, difference };
+  }, [data, difference]);
 
   const { siteText } = useIntl();
   const router = useRouter();
