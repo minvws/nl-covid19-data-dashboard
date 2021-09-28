@@ -1,5 +1,6 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -37,12 +38,14 @@ export const getStaticProps = createGetStaticProps(
     data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
       (x) => ({
         ...x,
-        average: Math.round(x.average),
+        average: isPresent(x.average) ? Math.round(x.average) : null,
       })
     );
     data.selectedNlData.sewer.last_value = {
       ...data.selectedNlData.sewer.last_value,
-      average: Math.round(data.selectedNlData.sewer.last_value.average),
+      average: isPresent(data.selectedNlData.sewer.last_value.average)
+        ? Math.round(data.selectedNlData.sewer.last_value.average)
+        : null,
     };
     data.selectedNlData.difference.sewer__average.difference = Math.round(
       data.selectedNlData.difference.sewer__average.difference
@@ -75,6 +78,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(choropleth.gm.sewer[0].date_start_unix);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -140,7 +145,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={text.map_titel}
             description={text.map_toelichting}
             metadata={{
-              date: sewerAverages.last_value.date_unix,
+              date:
+                selectedMap === 'gm'
+                  ? [
+                      choropleth.gm.sewer[0].date_start_unix,
+                      choropleth.gm.sewer[0].date_end_unix,
+                    ]
+                  : choropleth.vr.sewer[0].date_unix,
               source: text.bronnen.rivm,
             }}
             onChartRegionChange={setSelectedMap}
