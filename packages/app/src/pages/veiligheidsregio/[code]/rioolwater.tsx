@@ -1,4 +1,5 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isPresent } from 'ts-is-present';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -28,7 +29,33 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData('sewer_per_installation', 'sewer'),
+  (context) => {
+    const data = selectVrPageMetricData('sewer_per_installation')(context);
+    data.selectedVrData.sewer.values = data.selectedVrData.sewer.values.map(
+      (x) => ({
+        ...x,
+        average: isPresent(x.average) ? Math.round(x.average) : null,
+      })
+    );
+    data.selectedVrData.sewer.last_value = {
+      ...data.selectedVrData.sewer.last_value,
+      average: isPresent(data.selectedVrData.sewer.last_value.average)
+        ? Math.round(data.selectedVrData.sewer.last_value.average)
+        : null,
+    };
+    data.selectedVrData.difference.sewer__average.difference = Math.round(
+      data.selectedVrData.difference.sewer__average.difference
+    );
+
+    data.selectedVrData.sewer_per_installation.values.forEach((x) => {
+      x.values = x.values.map((x) => ({
+        ...x,
+        rna_normalized: Math.round(x.rna_normalized),
+      }));
+    });
+
+    return data;
+  },
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
@@ -112,7 +139,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: text.linechart_description,
               selectPlaceholder: text.graph_selected_rwzi_placeholder,
               splitLabels: siteText.rioolwater_metingen.split_labels,
-              averagesDataLabel: siteText.common.weekgemiddelde,
+              averagesDataLabel: siteText.common.daggemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
           />

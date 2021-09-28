@@ -12,6 +12,7 @@ import {
 } from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { isDefined, isPresent } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,

@@ -3,15 +3,11 @@
     "value": {
       "title": "nl_sewer_value",
       "type": "object",
-      "required": [
-        "average",
-        "date_of_insertion_unix",
-        "date_unix"
-      ],
+      "required": ["average", "date_of_insertion_unix", "date_unix"],
       "additionalProperties": false,
       "properties": {
         "average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "date_of_insertion_unix": {
           "type": "integer"

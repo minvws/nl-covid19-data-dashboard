@@ -458,7 +458,7 @@ export interface NlSewer {
   last_value: NlSewerValue;
 }
 export interface NlSewerValue {
-  average: number;
+  average: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
 }
