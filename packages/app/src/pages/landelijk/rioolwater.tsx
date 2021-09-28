@@ -52,21 +52,8 @@ export const getStaticProps = createGetStaticProps(
     return data;
   },
   createGetChoroplethData({
-    vr: ({ sewer }) => {
-      const roundedSewer = sewer.map((x) => {
-        return {
-          ...x,
-          average: isPresent(x.average) ? Math.round(x.average) : null,
-        };
-      });
-      return { sewer: roundedSewer };
-    },
-    gm: ({ sewer }) => {
-      const roundedSewer = sewer.map((x) => {
-        return { ...x, average: Math.round(x.average) };
-      });
-      return { sewer: roundedSewer };
-    },
+    vr: ({ sewer }) => ({ sewer }),
+    gm: ({ sewer }) => ({ sewer }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
@@ -89,6 +76,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(sewerAverages.last_value.average, data.difference.sewer__average);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -123,11 +112,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <KpiValue
-                data-cy="average"
+                data-cy="old_value"
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
-                isAmount
+                // isAmount
               />
             </KpiTile>
 
