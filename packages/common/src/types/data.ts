@@ -1302,7 +1302,7 @@ export interface VrCollectionNursingHome {
 export interface VrCollectionSewer {
   date_unix: number;
   vrcode: string;
-  average: number;
+  average: number | null;
   date_of_insertion_unix: number;
 }
 export interface VrCollectionBehavior {
