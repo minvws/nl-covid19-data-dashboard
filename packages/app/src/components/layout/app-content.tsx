@@ -110,7 +110,6 @@ const AppContentContainer = styled.div(
 
 const StyledAppContent = styled.main(
   css({
-    bg: 'page',
     zIndex: 3,
     width: '100%',
     minWidth: 0,

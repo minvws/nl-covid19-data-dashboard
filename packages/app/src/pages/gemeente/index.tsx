@@ -84,11 +84,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 dataConfig={{
                   metricName: 'gemeente' as any,
                   metricProperty: 'admissions_on_date_of_reporting',
-                  areaStroke: colors.blue,
-                  areaStrokeWidth: 0.5,
-                  hoverFill: colors.blue,
-                  hoverStrokeWidth: 0.5,
-                  noDataFillColor: colors.white,
+                  areaStroke: colors.white,
+                  areaStrokeWidth: 1,
+                  hoverFill: colors.white,
+                  hoverStrokeWidth: 3,
+                  noDataFillColor: colors.lightGray,
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.index,
