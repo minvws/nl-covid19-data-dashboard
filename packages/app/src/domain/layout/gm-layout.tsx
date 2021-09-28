@@ -87,6 +87,7 @@ export function GmLayout(props: GmLayoutProps) {
           title="Nederland"
         />
       </Head>
+
       <AppContent
         hideMenuButton={isMainRoute}
         searchComponent={

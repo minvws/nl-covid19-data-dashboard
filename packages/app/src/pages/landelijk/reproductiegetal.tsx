@@ -26,7 +26,7 @@ import {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlData('reproduction'),
+  selectNlData('reproduction', 'difference.reproduction__index_average'),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('reproductionPage', locale);
