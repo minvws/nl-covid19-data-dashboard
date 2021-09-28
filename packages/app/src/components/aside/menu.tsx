@@ -226,7 +226,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean; isButton?: boolean }>(
         : 'transparent',
 
       '&:hover': {
-        bg: 'page',
+        bg: 'offWhite',
       },
 
       '&:focus': {

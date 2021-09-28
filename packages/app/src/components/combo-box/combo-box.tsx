@@ -191,7 +191,7 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-option]:hover, [data-reach-combobox-option]:focus {
-  background: ${(x) => x.theme.colors.page};
+  background: ${(x) => x.theme.colors.offWhite};
 }
 
 [data-reach-combobox-option] span {

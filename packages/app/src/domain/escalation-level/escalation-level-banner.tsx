@@ -71,7 +71,7 @@ export function EscalationLevelBanner({
 const Tile = styled.article<{ sideColor: string }>((x) =>
   css({
     position: 'relative',
-    backgroundColor: 'page',
+    backgroundColor: 'offWhite',
     borderRadius: 1,
 
     '&:before': {

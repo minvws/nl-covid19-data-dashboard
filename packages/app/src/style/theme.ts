@@ -105,7 +105,7 @@ export const colors = {
   white: '#fff',
   body: '#000000',
   bodyLight: '#555555',
-  page: '#f3f3f3',
+  offWhite: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
