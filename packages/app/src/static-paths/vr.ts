@@ -6,9 +6,12 @@ import { vrData } from '~/data/vr';
  */
 export function getStaticPaths() {
   const filteredRegions = vrData.filter((x) => x.code.startsWith('VR'));
-  const paths = filteredRegions.map((x) => ({
-    params: { code: x.code },
-  }));
+  const paths = filteredRegions.flatMap((x) =>
+    ['nl', 'en'].map((locale) => ({
+      locale,
+      params: { code: x.code },
+    }))
+  );
 
   return {
     paths,
