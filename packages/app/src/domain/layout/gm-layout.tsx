@@ -198,7 +198,6 @@ export function GmLayout(props: GmLayoutProps) {
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_admission_moving_average"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            hideDate
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

@@ -267,14 +267,7 @@ export function VrLayout(props: VrLayoutProps) {
                       icon={<Gedrag />}
                       title={siteText.brononderzoek.titel_sidebar}
                     >
-                      <SituationsSidebarMetric
-                        date_start_unix={
-                          data.situationsSidebarValue.date_start_unix
-                        }
-                        date_end_unix={
-                          data.situationsSidebarValue.date_end_unix
-                        }
-                      />
+                      <SituationsSidebarMetric />
                     </MetricMenuItemLink>
                   </CategoryMenu>
 
