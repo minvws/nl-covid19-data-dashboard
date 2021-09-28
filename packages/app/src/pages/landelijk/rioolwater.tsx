@@ -1,6 +1,5 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -77,8 +76,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  console.log(sewerAverages.last_value.average, data.difference.sewer__average);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
@@ -112,11 +109,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <KpiValue
-                data-cy="old_value"
+                data-cy="average"
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
-                // isAmount
+                isAmount
               />
             </KpiTile>
 

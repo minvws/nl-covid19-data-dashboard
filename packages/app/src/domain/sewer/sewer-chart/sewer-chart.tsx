@@ -87,6 +87,8 @@ export function SewerChart({
     },
   ];
 
+  const isSingleDate = 'date_unix' in dataAverages.last_value;
+
   return (
     <ChartTile
       timeframeOptions={['all', '5weeks']}
@@ -160,7 +162,9 @@ export function SewerChart({
                   {
                     type: 'split-area',
                     metricProperty: 'average',
-                    label: text.averagesDataLabel,
+                    label: isSingleDate
+                      ? 'Daggemiddelde'
+                      : text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
                   },
                 ]}
