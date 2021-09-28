@@ -16,7 +16,6 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { Search } from '~/domain/topical/components/search';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
@@ -166,14 +165,17 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 text={
                   <DataDrivenText
                     data={data}
-                    metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceText={
-                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
-                    }
-                    isAmount
+                    content={[
+                      {
+                        type: 'metric',
+                        text: text.data_driven_texts.intake_hospital_ma.value,
+                        metricName: 'hospital_nice',
+                        metricProperty:
+                          'admissions_on_date_of_admission_moving_average',
+                        differenceKey:
+                          'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                      },
+                    ]}
                   />
                 }
                 icon={<Ziekenhuis />}
@@ -312,10 +314,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               <ArticleList articles={content.articles} />
             </TopicalTile>
           </TileList>
-
-          <Box py={4}>
-            <Search title={siteText.common_actueel.secties.search.title.vr} />
-          </Box>
         </MaxWidth>
       </Box>
     </Layout>

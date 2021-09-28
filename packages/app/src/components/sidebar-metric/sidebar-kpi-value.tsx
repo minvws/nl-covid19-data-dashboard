@@ -13,21 +13,13 @@ type SidebarKpiValueProps = {
    * Currently only `Behavior` is doing that.
    */
   value?: number;
-  description?: string;
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   isPercentage?: boolean;
 };
 
 export function SidebarKpiValue(props: SidebarKpiValueProps) {
-  const {
-    value,
-    isPercentage,
-    title,
-    description,
-    valueAnnotation,
-    difference,
-  } = props;
+  const { value, isPercentage, title, valueAnnotation, difference } = props;
 
   const { formatPercentage, formatNumber } = useIntl();
 
@@ -51,12 +43,6 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
           <Box fontSize={3} display="flex" alignItems="center" marginRight={1}>
             <SidebarDifference value={difference} />
           </Box>
-        )}
-
-        {isDefined(description) && (
-          <InlineText variant="label1" color="annotation">
-            {description}
-          </InlineText>
         )}
       </Box>
 
