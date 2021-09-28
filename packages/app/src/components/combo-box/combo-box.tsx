@@ -101,7 +101,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
             <ComboboxList>
               {results.map((option, index) => (
                 <ComboboxOption
-                  key={index}
+                  key={`${index}-${option.name}`}
                   value={option.displayName || option.name}
                 />
               ))}
