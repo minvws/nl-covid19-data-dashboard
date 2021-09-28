@@ -36,12 +36,38 @@ export function createElementsQuery(
         _id,
         metricName,
         metricProperty
+      },
+      'warning': *[
+        _type == 'warning'
+        && scope == '${scope}'
+        && metricName in ${formatStringArray(metricNames)}
+      ]{
+        _id,
+        metricName,
+        metricProperty,
+        warning
+      },
+      'choropleth': *[
+        _type == 'choropleth'
+        && scope == '${scope}'
+        && metricName in ${formatStringArray(metricNames)}
+      ]{
+        _id,
+        metricName,
+        metricProperty
       }
     }
   `;
 
   return query;
 }
+
+type ElementBase = {
+  _id: string;
+  scope: MetricScope;
+  metricName: string;
+  metricProperty: string | null;
+};
 
 type CmsTimelineEventConfig = {
   title: string;
@@ -59,16 +85,19 @@ type CmsTimeSeriesElement = {
   warning: string | null;
 };
 
-type CmsKpiElement = {
-  _id: string;
-  scope: MetricScope;
-  metricName: string;
-  metricProperty: string | null;
-};
+type CmsKpiElement = ElementBase;
+
+type CmsChoroplethElement = ElementBase;
+
+type CmsWarningElement = {
+  warning: string;
+} & ElementBase;
 
 export type ElementsQueryResult = {
   timeSeries: CmsTimeSeriesElement[];
   kpi: CmsKpiElement[];
+  choropleth: CmsChoroplethElement[];
+  warning: CmsWarningElement[];
 };
 
 /**
@@ -93,10 +122,7 @@ export function getTimelineEvents(
     : undefined;
 }
 
-export function getWarning(
-  elements: CmsTimeSeriesElement[],
-  metricName: string
-) {
+export function getWarning(elements: CmsWarningElement[], metricName: string) {
   return (
     elements.find((x) => x.metricName === metricName)?.warning || undefined
   );
