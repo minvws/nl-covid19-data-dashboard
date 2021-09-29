@@ -47,7 +47,7 @@ export function getTopicalPageQuery(
       'elements': ${createElementsQuery(code, elementNames, locale)},
       'riskLevel': *[_type == 'escalationLevelPage']{
 		    "level": riskLevel[0],
-		    "date_from": date,
+		    "dateFrom": date,
       }[0]
     }`;
   };
