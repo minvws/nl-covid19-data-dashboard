@@ -19,10 +19,12 @@ interface TopicalSectionHeaderProps {
   lastGenerated?: number;
   showBackLink?: boolean;
   headingLevel?: HeadingLevel;
+  headerVariant?: 'h1' | 'h2';
   link?: {
     href: string;
     text: string;
   };
+  hasBorderTop?: boolean;
 }
 
 export function TopicalSectionHeader({
@@ -32,13 +34,15 @@ export function TopicalSectionHeader({
   link,
   description,
   headingLevel = 2,
+  headerVariant = 'h1',
+  hasBorderTop = true,
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
     <Box
       spacing={3}
-      borderTop="1px solid"
+      borderTop={hasBorderTop ? '1px solid' : '0 solid'}
       borderTopColor="border"
       pt={{ _: 3, lg: 4 }}
     >
@@ -59,7 +63,7 @@ export function TopicalSectionHeader({
           spacingHorizontal={{ _: 0, lg: 4 }}
           flexWrap="wrap"
         >
-          <Heading level={headingLevel} variant="h1">
+          <Heading level={headingLevel} variant={headerVariant}>
             {title}
           </Heading>
 
