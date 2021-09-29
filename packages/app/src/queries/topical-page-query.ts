@@ -45,7 +45,7 @@ export function getTopicalPageQuery(
         }
       }[0].articles,
       'elements': ${createElementsQuery(code, elementNames, locale)},
-      'riskLevel': *[_type == 'escalationLevelPage']{
+      'riskLevel': *[_type == 'riskLevelNational']{
 		    "level": riskLevel,
 		    "dateFrom": date,
       }[0]

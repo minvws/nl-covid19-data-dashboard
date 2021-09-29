@@ -1,9 +1,9 @@
 import { Radio } from '@sanity/ui';
 import { Rule } from '~/sanity';
 
-export const escalationLevelPage = {
-  title: 'Inschaling risiconiveau',
-  name: 'escalationLevelPage',
+export const riskLevelNational = {
+  title: 'Inschaling risiconiveau nationaal',
+  name: 'riskLevelNational',
   type: 'document',
   fields: [
     {
