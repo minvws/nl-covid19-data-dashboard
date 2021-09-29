@@ -402,7 +402,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             </CollapsibleButton>
 
             <Box py={4}>
-              <Search />
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
             <HighlightsTile
