@@ -1,11 +1,12 @@
+import { VrCollectionHospitalNice } from '@corona-dashboard/common';
+import { useMemo } from 'react';
 import { Box } from '~/components/base';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
-import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
+import { TooltipContent } from '~/components/choropleth/tooltips';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
-import { TileList } from '~/components/tile-list';
+import { Heading } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
-import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
+import { vrData } from '~/data/vr';
 import { VrComboBox } from '~/domain/layout/components/vr-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -14,36 +15,34 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
-import { createDate } from '~/utils/create-date';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { getLastGeneratedDate } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { DynamicChoropleth } from '../../components/choropleth';
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  createGetChoroplethData({
-    vr: ({ escalation_levels }) => ({ escalation_levels }),
-  })
-);
+export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
-
-  const { siteText, formatDate } = useIntl();
   const reverseRouter = useReverseRouter();
+  const { siteText } = useIntl();
 
-  const { choropleth, lastGenerated } = props;
+  const { lastGenerated } = props;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
   };
 
-  const unknownLevelColor = useEscalationColor(null);
+  const data = useMemo(() => {
+    return vrData.map<VrCollectionHospitalNice>(
+      (x) =>
+        ({
+          vrcode: x.code,
+          admissions_on_date_of_reporting: null,
+        } as unknown as VrCollectionHospitalNice)
+    );
+  }, []);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -54,7 +53,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         )}
 
-        <TileList>
+        <Box as="article" p={4} spacing={3}>
           {siteText.regionaal_index.belangrijk_bericht && (
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
@@ -62,54 +61,55 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
-          <ChoroplethTile
-            title={siteText.veiligheidsregio_index.selecteer_titel}
-            description={
-              <>
-                <Box mb={3}>
-                  <Markdown
-                    content={replaceVariablesInText(
-                      siteText.veiligheidsregio_index.selecteer_toelichting,
-                      {
-                        last_update: formatDate(
-                          createDate(
-                            choropleth.vr.escalation_levels[0]
-                              .last_determined_unix
-                          ),
-                          'day-month'
-                        ),
-                      }
-                    )}
-                  />
-                </Box>
-                <EscalationMapLegenda
-                  data={choropleth.vr.escalation_levels}
-                  lastDetermined={
-                    choropleth.vr.escalation_levels[0].last_determined_unix
-                  }
-                />
-              </>
-            }
+          <Heading level={2} as="h1">
+            {siteText.veiligheidsregio_index.selecteer_titel}
+          </Heading>
+          <Markdown
+            content={siteText.veiligheidsregio_index.selecteer_toelichting}
+          />
+
+          <Box
+            display="flex"
+            flex="1"
+            justifyContent="center"
+            height="75vh"
+            maxWidth={750}
+            maxHeight={960}
+            flexDirection="column"
+            spacing={3}
           >
-            <DynamicChoropleth
-              renderTarget="canvas"
-              map="vr"
-              accessibility={{ key: 'escalation_levels_choropleth' }}
-              data={choropleth.vr.escalation_levels}
-              dataConfig={{
-                metricName: 'escalation_levels',
-                metricProperty: 'level',
-                noDataFillColor: unknownLevelColor,
-              }}
-              dataOptions={{
-                getLink: reverseRouter.vr.index,
-              }}
-              formatTooltip={(context) => (
-                <VrEscalationTooltip context={context} />
-              )}
-            />
-          </ChoroplethTile>
-        </TileList>
+            <ErrorBoundary>
+              <DynamicChoropleth
+                renderTarget="canvas"
+                accessibility={{
+                  key: 'municipality_navigation_map',
+                  features: ['keyboard_choropleth'],
+                }}
+                map="vr"
+                data={data}
+                minHeight={650}
+                dataConfig={{
+                  metricName: 'veiligheidsregio' as any,
+                  metricProperty: 'admissions_on_date_of_reporting',
+                  areaStroke: colors.blue,
+                  areaStrokeWidth: 0.5,
+                  hoverFill: colors.blue,
+                  hoverStrokeWidth: 0.5,
+                  noDataFillColor: colors.white,
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.vr.index,
+                }}
+                formatTooltip={(context) => (
+                  <TooltipContent
+                    title={context.featureName}
+                    link={reverseRouter.vr.index(context.dataItem.vrcode)}
+                  />
+                )}
+              />
+            </ErrorBoundary>
+          </Box>
+        </Box>
       </VrLayout>
     </Layout>
   );
