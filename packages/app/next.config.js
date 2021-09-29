@@ -11,8 +11,8 @@ const withTranspileModules = require('next-transpile-modules')([
   'globby',
   'internmap',
 ]);
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');
+const { DuplicatePlugin } = require('inspectpack/plugin');
 
 const nextConfig = {
   /**
@@ -158,6 +158,7 @@ const nextConfig = {
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
       ['internmap', '../../node_modules/internmap'],
       ['balanced-match', '../../node_modules/balanced-match'],
+      ['is-buffer', '../../node_modules/unified/node_modules/is-buffer'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {
@@ -173,9 +174,8 @@ const nextConfig = {
 
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
-        new DuplicatePackageCheckerPlugin({
+        new DuplicatePlugin({
           verbose: true,
-          showHelp: true,
         })
       );
     }
