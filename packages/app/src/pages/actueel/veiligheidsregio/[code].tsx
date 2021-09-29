@@ -362,16 +362,18 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
             />
 
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.meer_lezen.titel}
-                description={
-                  siteText.common_actueel.secties.meer_lezen.omschrijving
-                }
-                link={siteText.common_actueel.secties.meer_lezen.link}
-              />
-              <ArticleList articles={content.articles} />
-            </TopicalTile>
+            {isPresent(content.articles) && (
+              <TopicalTile>
+                <TopicalSectionHeader
+                  title={siteText.common_actueel.secties.meer_lezen.titel}
+                  description={
+                    siteText.common_actueel.secties.meer_lezen.omschrijving
+                  }
+                  link={siteText.common_actueel.secties.meer_lezen.link}
+                />
+                <ArticleList articles={content.articles} />
+              </TopicalTile>
+            )}
           </TileList>
 
           <Box py={4}>

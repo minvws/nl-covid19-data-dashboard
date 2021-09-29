@@ -31,7 +31,3 @@ export const escalationLevelPage = {
     },
   ],
 };
-
-// 'riskLevel': *[_type == 'escalationLevelPage']{
-//   riskLevel,
-// }[0]

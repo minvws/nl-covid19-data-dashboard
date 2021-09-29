@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
@@ -119,6 +119,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(content);
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
@@ -427,17 +429,19 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.meer_lezen.titel}
-                description={
-                  siteText.common_actueel.secties.meer_lezen.omschrijving
-                }
-                link={siteText.common_actueel.secties.meer_lezen.link}
-              />
+            {isPresent(content.articles) && (
+              <TopicalTile>
+                <TopicalSectionHeader
+                  title={siteText.common_actueel.secties.meer_lezen.titel}
+                  description={
+                    siteText.common_actueel.secties.meer_lezen.omschrijving
+                  }
+                  link={siteText.common_actueel.secties.meer_lezen.link}
+                />
 
-              <ArticleList articles={content.articles} />
-            </TopicalTile>
+                <ArticleList articles={content.articles} />
+              </TopicalTile>
+            )}
           </TileList>
         </MaxWidth>
       </Box>
