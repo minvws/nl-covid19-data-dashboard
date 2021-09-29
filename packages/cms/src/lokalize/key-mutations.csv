@@ -61,6 +61,9 @@ timestamp,action,key,document_id,move_to
 2021-09-22T15:25:26.359Z,add,common_actueel.secties.kpi.hospital_admissions.plural,PGwiP4IwXrA0GfLCLDof1I,__
 2021-09-22T15:25:27.339Z,add,common_actueel.secties.kpi.hospital_admissions.singular,7nClfXqPlyZyEU7PO5eeXg,__
 2021-09-22T15:25:28.358Z,add,common_actueel.secties.kpi.hospital_admissions.zero,PGwiP4IwXrA0GfLCLDofF5,__
+2021-09-22T09:09:05.384Z,add,common_actueel.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
+2021-09-22T09:09:06.407Z,add,common_actueel.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
+2021-09-22T09:09:07.431Z,add,common_actueel.secties.search.title.gm,PGwiP4IwXrA0GfLCLD9UBA,__
 2021-09-28T13:16:46.199Z,add,common.daggemiddelde,qNGd4zPbpj47IuPd89IJPP,__
 2021-09-27T11:05:30.300Z,add,gemeente_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.plural,7nClfXqPlyZyEU7POdpuJ2,__
 2021-09-27T11:05:32.318Z,add,gemeente_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.singular,qNGd4zPbpj47IuPd7zNsMu,__
