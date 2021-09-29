@@ -1,12 +1,16 @@
 import { KeysOfType, TimestampedValue, Unpack } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import { ReactNode, useState } from 'react';
+import { isEmpty } from 'lodash';
+import { cloneElement, ReactNode, useState } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
+import { LinkWithIcon } from '~/components/link-with-icon';
 import { SparkBars } from '~/components/spark-bars';
-import { InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -26,26 +30,64 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
+  link?: {
+    href: string;
+    text: string;
+  };
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const breakpoints = useBreakpoints(true);
 
+  const { siteText } = useIntl();
+
   if (breakpoints.md) {
     return <WideMiniTileSelectorLayout {...props} />;
   }
-  return <NarrowMiniTileSelectorLayout {...props} />;
+  return (
+    <Box spacing={2}>
+      <Text variant="label1">
+        {siteText.common_actueel.tile_selector_uitleg}
+      </Text>
+      <NarrowMiniTileSelectorLayout {...props} />
+    </Box>
+  );
 }
 
 function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const { menuItems, children } = props;
+  const { menuItems, children, link } = props;
 
   return (
-    <NarrowMenuList>
-      {menuItems.map((x, index) => (
-        <NarrowMenuListItem key={x.label} item={x} content={children[index]} />
-      ))}
-    </NarrowMenuList>
+    <>
+      <NarrowMenuList>
+        {menuItems.map((x, index) => (
+          <NarrowMenuListItem
+            key={x.label}
+            hideSparkBar={x.hideSparkBar}
+            item={x}
+            content={children[index]}
+          />
+        ))}
+      </NarrowMenuList>
+
+      {
+        /**
+         * Check also for empty link text, so that clearing it in Lokalize
+         * actually removes the link altogether
+         */
+        isDefined(link) && !isEmpty(link.text) ? (
+          <Box fontWeight="bold" pt={2}>
+            <LinkWithIcon
+              href={link.href}
+              icon={<ArrowIconRight />}
+              iconPlacement="right"
+            >
+              {link.text}
+            </LinkWithIcon>
+          </Box>
+        ) : null
+      }
+    </>
   );
 }
 
@@ -61,13 +103,14 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
   const collapsible = useCollapsible();
 
   return (
-    <StyledNarrowMenuListItem onClick={collapsible.toggle} key={item.label}>
+    <StyledNarrowMenuListItem key={item.label}>
       <Box
         height="3em"
         alignItems="center"
         display="flex"
         flexDirection="row"
         pl={{ _: 0, md: 1 }}
+        onClick={collapsible.toggle}
       >
         <SparkBars
           data={item.data}
@@ -75,10 +118,10 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
           hide={hideSparkBar}
         />
         <InlineText>{item.label}</InlineText>
-        <Box ml="auto" display="flex">
+        <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
             <WarningIconWrapper aria-label={siteText.aria_labels.warning} small>
-              <Warning />
+              <Warning viewBox="0 0 20 20" />
             </WarningIconWrapper>
           )}
           <InlineText
@@ -95,7 +138,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
               ? formatNumber(item.value)
               : item.value}
           </InlineText>
-          {collapsible.button()}
+          {cloneElement(collapsible.button(), { size: 12 })}
         </Box>
       </Box>
       {collapsible.content(content)}
@@ -104,48 +147,71 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
 }
 
 function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const { menuItems, children } = props;
+  const { menuItems, children, link } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
     <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
-      <WideMenuList>
-        {menuItems.map((item, index) => (
-          <WideMenuListItem
-            key={item.label}
-            onClick={() => setSelectedIndex(index)}
-            selected={selectedIndex === index}
-          >
-            <SparkBars
-              data={item.data}
-              averageProperty={item.dataProperty}
-              hide={item.hideSparkBar}
-            />
-            <InlineText>{item.label}</InlineText>
-            <Box ml="auto" display="flex" alignItems="center">
-              {item.warning && (
-                <InlineTooltip content={item.warning}>
-                  <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
-                    <Warning />
-                  </WarningIconWrapper>
-                </InlineTooltip>
-              )}
-              <InlineText fontWeight="bold">
-                {item.valueIsPercentage
-                  ? `${
-                      typeof item.value === 'number'
-                        ? formatPercentage(item.value)
-                        : item.value
-                    }%`
-                  : typeof item.value === 'number'
-                  ? formatNumber(item.value)
-                  : item.value}
-              </InlineText>
-            </Box>
-          </WideMenuListItem>
-        ))}
-      </WideMenuList>
+      <Box>
+        <WideMenuList>
+          {menuItems.map((item, index) => (
+            <WideMenuListItem
+              key={item.label}
+              onClick={() => setSelectedIndex(index)}
+              selected={selectedIndex === index}
+            >
+              <SparkBars
+                data={item.data}
+                averageProperty={item.dataProperty}
+                hide={item.hideSparkBar}
+              />
+              <InlineText>{item.label}</InlineText>
+              <Box ml="auto" display="flex" alignItems="center">
+                {item.warning && (
+                  <InlineTooltip content={item.warning}>
+                    <WarningIconWrapper
+                      aria-label={siteText.aria_labels.warning}
+                    >
+                      <Warning viewBox="0 0 20 20" />
+                    </WarningIconWrapper>
+                  </InlineTooltip>
+                )}
+                <InlineText fontWeight="bold">
+                  {item.valueIsPercentage
+                    ? `${
+                        typeof item.value === 'number'
+                          ? formatPercentage(item.value)
+                          : item.value
+                      }%`
+                    : typeof item.value === 'number'
+                    ? formatNumber(item.value)
+                    : item.value}
+                </InlineText>
+              </Box>
+            </WideMenuListItem>
+          ))}
+        </WideMenuList>
+        <>
+          {
+            /**
+             * Check also for empty link text, so that clearing it in Lokalize
+             * actually removes the link altogether
+             */
+            isDefined(link) && !isEmpty(link.text) ? (
+              <Box fontWeight="bold" pl={2} pt={4}>
+                <LinkWithIcon
+                  href={link.href}
+                  icon={<ArrowIconRight />}
+                  iconPlacement="right"
+                >
+                  {link.text}
+                </LinkWithIcon>
+              </Box>
+            ) : null
+          }
+        </>
+      </Box>
       <Box pl={3}>{children[selectedIndex]}</Box>
     </Box>
   );
@@ -171,7 +237,7 @@ const WideMenuListItem = styled.li<{ selected: boolean }>((x) =>
   css({
     backgroundColor: x.selected ? colors.lightBlue : colors.white,
     borderRightColor: x.selected ? colors.button : colors.white,
-    borderRightWidth: x.selected ? '2px' : 0,
+    borderRightWidth: x.selected ? '5px' : 0,
     borderRightStyle: x.selected ? 'solid' : 'none',
     height: '3em',
     alignItems: 'center',
@@ -199,17 +265,20 @@ const StyledNarrowMenuListItem = styled.li(
 
 const WarningIconWrapper = styled.span<{ small?: boolean }>((x) =>
   css({
-    width: '1.8em',
-    height: '1.8em',
+    width: '1.5em',
+    height: '1.5em',
     display: 'inline-flex',
     backgroundColor: 'warningYellow',
     borderRadius: 1,
-    mr: x.small ? '2px' : '8px',
-    justifyContent: 'center',
+    mr: x.small ? '4px' : '8px',
+    alignItems: 'center',
+    justifyItems: 'center',
 
     svg: {
-      pt: '2px',
       fill: 'black',
+      width: '1.1em',
+      height: '1.1em',
+      pb: '1px',
     },
   })
 );
