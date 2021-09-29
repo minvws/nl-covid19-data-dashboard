@@ -197,7 +197,7 @@ export function VrLayout(props: VrLayoutProps) {
                       href={reverseRouter.vr.brononderzoek(code)}
                       icon={<Gedrag />}
                       title={siteText.brononderzoek.titel_sidebar}
-                    />{' '}
+                    />
                   </CategoryMenu>
 
                   <CategoryMenu
