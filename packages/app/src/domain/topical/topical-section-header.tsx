@@ -19,6 +19,7 @@ interface TopicalSectionHeaderProps {
   lastGenerated?: number;
   showBackLink?: boolean;
   headingLevel?: HeadingLevel;
+  headerVariant?: 'h1' | 'h2';
   link?: {
     href: string;
     text: string;
@@ -32,6 +33,7 @@ export function TopicalSectionHeader({
   link,
   description,
   headingLevel = 2,
+  headerVariant = 'h1',
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
@@ -54,7 +56,7 @@ export function TopicalSectionHeader({
           spacingHorizontal={{ _: 0, lg: 4 }}
           flexWrap="wrap"
         >
-          <Heading level={headingLevel} variant="h1">
+          <Heading level={headingLevel} variant={headerVariant}>
             {title}
           </Heading>
 

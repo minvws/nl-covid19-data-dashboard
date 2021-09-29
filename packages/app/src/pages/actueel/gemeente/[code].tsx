@@ -24,17 +24,12 @@ import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
-  HighlightsTile,
-  WeeklyHighlightProps,
-} from '~/domain/topical/highlights-tile';
-import {
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
 } from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
-import { TopicalTile } from '~/domain/topical/topical-tile';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
@@ -60,6 +55,7 @@ import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -95,10 +91,7 @@ export const getStaticProps = createGetStaticProps(
     },
   }),
   createGetContent<{
-    showWeeklyHighlight: boolean;
     articles: ContentTeaserProps[];
-    weeklyHighlight?: WeeklyHighlightProps;
-    highlights: ContentTeaserProps[];
     elements: ElementsQueryResult;
   }>(
     getTopicalPageQuery('gm', [
@@ -157,7 +150,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" py={4}>
+      <Box bg="white" pt={4}>
         <MaxWidth id="content">
           <TileList>
             <Box spacing={3}>
@@ -370,13 +363,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            <HighlightsTile
-              hiddenTitle={text.highlighted_items.title}
-              weeklyHighlight={content.weeklyHighlight}
-              highlights={content.highlights}
-              showWeeklyHighlight={content.showWeeklyHighlight}
-            />
-
             <VaccinationCoverageChoropleth
               title={replaceVariablesInText(
                 siteText.common_actueel.secties.vaccination_coverage_choropleth
@@ -392,22 +378,28 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
             />
 
-            <TopicalTile>
+            <Box pt={4} pb={5}>
+              <Search title={siteText.common_actueel.secties.search.title.gm} />
+            </Box>
+          </TileList>
+        </MaxWidth>
+
+        <Box width="100%" backgroundColor="page" pb={5}>
+          <MaxWidth>
+            <TileList>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
                 description={
                   siteText.common_actueel.secties.meer_lezen.omschrijving
                 }
                 link={siteText.common_actueel.secties.meer_lezen.link}
+                headerVariant="h2"
               />
-              <ArticleList articles={content.articles} />
-            </TopicalTile>
-          </TileList>
 
-          <Box pt={4} pb={6}>
-            <Search title={siteText.common_actueel.secties.search.title.gm} />
-          </Box>
-        </MaxWidth>
+              <ArticleList articles={content.articles} />
+            </TileList>
+          </MaxWidth>
+        </Box>
       </Box>
     </Layout>
   );
