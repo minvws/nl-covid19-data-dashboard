@@ -71,6 +71,7 @@ export interface GmHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded?: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -379,6 +380,7 @@ export interface NlIntensiveCareNice {
 export interface NlIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded?: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -463,6 +465,7 @@ export interface NlHospitalNice {
 export interface NlHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded?: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1067,6 +1070,7 @@ export interface VrHospitalNice {
 export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded?: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
