@@ -20,6 +20,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
   value: number | string;
   valueIsPercentage?: boolean;
   warning?: string;
+  hideSparkBar?: boolean;
 };
 
 type MiniTileSelectorLayoutProps = {
@@ -28,7 +29,7 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
 
   if (breakpoints.md) {
     return <WideMiniTileSelectorLayout {...props} />;
@@ -51,10 +52,11 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 type NarrowMenuListItemProps = {
   content: ReactNode;
   item: MiniTileSelectorItem<any>;
+  hideSparkBar?: boolean;
 };
 
 function NarrowMenuListItem(props: NarrowMenuListItemProps) {
-  const { content, item } = props;
+  const { content, item, hideSparkBar } = props;
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const collapsible = useCollapsible();
 
@@ -67,7 +69,11 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         flexDirection="row"
         pl={{ _: 0, md: 1 }}
       >
-        <SparkBars data={item.data} averageProperty={item.dataProperty} />
+        <SparkBars
+          data={item.data}
+          averageProperty={item.dataProperty}
+          hide={hideSparkBar}
+        />
         <InlineText>{item.label}</InlineText>
         <Box ml="auto" display="flex">
           {item.warning && (
@@ -111,7 +117,11 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
             onClick={() => setSelectedIndex(index)}
             selected={selectedIndex === index}
           >
-            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+            <SparkBars
+              data={item.data}
+              averageProperty={item.dataProperty}
+              hide={item.hideSparkBar}
+            />
             <InlineText>{item.label}</InlineText>
             <Box ml="auto" display="flex" alignItems="center">
               {item.warning && (

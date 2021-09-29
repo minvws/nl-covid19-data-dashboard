@@ -17,7 +17,7 @@ export function MiniTile(props: MiniTileProps) {
   const { icon, text, title, warning, children } = props;
 
   return (
-    <Box ml={3}>
+    <Box ml={{ _: undefined, md: 3 }}>
       <Box>
         <Heading level={3} as="h2">
           <Box as="span" fontWeight="bold" display="flex" alignItems="center">
