@@ -124,7 +124,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     data.vaccine_coverage_per_age_group_estimated.last_value;
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" py={4}>
+      <Box bg="white" pb={4}>
         <MaxWidth id="content">
           <TileList>
             <Box spacing={3}>
