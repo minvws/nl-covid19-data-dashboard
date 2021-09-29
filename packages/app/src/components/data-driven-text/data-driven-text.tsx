@@ -1,4 +1,5 @@
 import { Gm, Nl, Vr } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import { Text } from '../typography';
 import { Difference } from './components/difference';
@@ -53,7 +54,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   content,
 }: DataDrivenTextProps<T, K>) {
   return (
-    <Text>
+    <Text css={css({ fontSize: 5 })}>
       {React.Children.toArray(
         content.map((x) => renderContent(x, data))
       ).reduce((children: ReactNode[], child: ReactNode, index, arr) => {
