@@ -22,6 +22,16 @@ export function getTopicalPageQuery(
         "asset": cover.asset->
       }
     }[0],
+    'articles': *[_type == 'topicalPage']{
+      articles[]->{
+        "title":title.${locale},
+        "slug": slug.current,
+        "cover": {
+          ...cover,
+          "asset": cover.asset->
+        }
+      }
+    }[0].articles,
     'highlights': *[_type=='topicalPage']{
       showWeeklyMessage,
       highlights[]{
@@ -34,17 +44,7 @@ export function getTopicalPageQuery(
         }
       }
     }[0].highlights,
-    'articles': *[_type == 'topicalPage']{
-      articles[]->{
-        "title":title.${locale},
-        "slug": slug.current,
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
-        }
-      }
-    }[0].articles,
-      'elements': ${createElementsQuery(code, elementNames, locale)}
+    'elements': ${createElementsQuery(code, elementNames, locale)}
     }`;
   };
 }

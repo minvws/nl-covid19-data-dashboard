@@ -120,6 +120,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  console.log(content);
+
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
   return (
@@ -436,7 +438,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
 
-              <ArticleList articles={content.articles} />
+              {content.articles ? (
+                <ArticleList articles={content.articles} />
+              ) : null}
             </TopicalTile>
           </TileList>
         </MaxWidth>
