@@ -150,7 +150,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" pt={4}>
+      <Box bg="white" pb={4}>
         <MaxWidth id="content">
           <TileList>
             <Box spacing={3}>
