@@ -79,6 +79,7 @@ type GmLayoutProps = {
  */
 export function GmLayout(props: GmLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
+
   const sidebarData = useMemo(() => {
     if (isDefined(difference) && isDefined(difference.sewer__average)) {
       difference.sewer__average.difference = Math.round(
