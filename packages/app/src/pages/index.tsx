@@ -32,7 +32,6 @@ import {
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
-import { TopicalTile } from '~/domain/topical/topical-tile';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -124,7 +123,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     data.vaccine_coverage_per_age_group_estimated.last_value;
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" py={4}>
+      <Box bg="white" pt={4}>
         <MaxWidth id="content">
           <TileList>
             <Box spacing={3}>
@@ -441,20 +440,25 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 vr: choropleth.vr.vaccine_coverage_per_age_group,
               }}
             />
+          </TileList>
+        </MaxWidth>
 
-            <TopicalTile>
+        <Box width="100%" backgroundColor="page" pb={5}>
+          <MaxWidth>
+            <TileList>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
                 description={
                   siteText.common_actueel.secties.meer_lezen.omschrijving
                 }
                 link={siteText.common_actueel.secties.meer_lezen.link}
+                headerVariant="h2"
               />
 
               <ArticleList articles={content.articles} />
-            </TopicalTile>
-          </TileList>
-        </MaxWidth>
+            </TileList>
+          </MaxWidth>
+        </Box>
       </Box>
     </Layout>
   );
