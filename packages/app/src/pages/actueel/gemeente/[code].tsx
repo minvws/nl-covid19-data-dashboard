@@ -8,11 +8,10 @@ import { last } from 'lodash';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
+import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { HighlightTeaserProps } from '~/components/highlight-teaser';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
@@ -97,9 +96,9 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
-    articles?: ArticleSummary[];
+    articles: ContentTeaserProps[];
     weeklyHighlight?: WeeklyHighlightProps;
-    highlights?: HighlightTeaserProps[];
+    highlights: ContentTeaserProps[];
     elements: ElementsQueryResult;
   }>(
     getTopicalPageQuery('gm', [
@@ -357,19 +356,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.weeklyHighlight && content.highlights && (
-              <TopicalTile>
-                <TopicalSectionHeader
-                  title={siteText.common_actueel.secties.artikelen.titel}
-                />
-
-                <HighlightsTile
-                  weeklyHighlight={content.weeklyHighlight}
-                  highlights={content.highlights}
-                  showWeeklyHighlight={content.showWeeklyHighlight}
-                />
-              </TopicalTile>
-            )}
+            <HighlightsTile
+              hiddenTitle={text.highlighted_items.title}
+              weeklyHighlight={content.weeklyHighlight}
+              highlights={content.highlights}
+              showWeeklyHighlight={content.showWeeklyHighlight}
+            />
 
             <VaccinationCoverageChoropleth
               title={replaceVariablesInText(
@@ -394,7 +386,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
-              <ArticleList articleSummaries={content.articles} />
+              <ArticleList articles={content.articles} />
             </TopicalTile>
           </TileList>
 

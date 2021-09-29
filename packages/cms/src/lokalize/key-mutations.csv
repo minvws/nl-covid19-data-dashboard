@@ -1,4 +1,7 @@
 timestamp,action,key,document_id,move_to
+2021-09-22T09:50:54.726Z,add,gemeente_actueel.highlighted_items.title,7nClfXqPlyZyEU7PO2yWjG,__
+2021-09-22T09:50:55.742Z,add,nationaal_actueel.highlighted_items.title,qNGd4zPbpj47IuPd7MGZID,__
+2021-09-22T09:50:56.747Z,add,veiligheidsregio_actueel.highlighted_items.title,7nClfXqPlyZyEU7PO2yXoW,__
 2021-09-21T11:06:52.613Z,add,national_escalation_levels.banner.title,Ierr3hadoEWr1dYNon83Bz,__
 2021-09-21T11:06:53.627Z,add,national_escalation_levels.banner.link.label,4Hn4MB4VRci1fnngMk3k48,__
 2021-09-21T11:06:54.649Z,add,national_escalation_levels.banner.link.href,Ierr3hadoEWr1dYNon83z3,__

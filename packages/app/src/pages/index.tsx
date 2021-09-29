@@ -7,11 +7,10 @@ import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
+import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { HighlightTeaserProps } from '~/components/highlight-teaser';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
@@ -80,9 +79,9 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
-    articles?: ArticleSummary[];
+    articles: ContentTeaserProps[];
     weeklyHighlight?: WeeklyHighlightProps;
-    highlights?: HighlightTeaserProps[];
+    highlights: ContentTeaserProps[];
     elements: ElementsQueryResult;
   }>(
     getTopicalPageQuery('nl', [
@@ -403,19 +402,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search />
             </Box>
 
-            {content.weeklyHighlight && content.highlights && (
-              <Box pt={3} spacing={4}>
-                <TopicalSectionHeader
-                  title={siteText.common_actueel.secties.artikelen.titel}
-                />
-
-                <HighlightsTile
-                  weeklyHighlight={content.weeklyHighlight}
-                  highlights={content.highlights}
-                  showWeeklyHighlight={content.showWeeklyHighlight}
-                />
-              </Box>
-            )}
+            <HighlightsTile
+              hiddenTitle={text.highlighted_items.title}
+              weeklyHighlight={content.weeklyHighlight}
+              highlights={content.highlights}
+              showWeeklyHighlight={content.showWeeklyHighlight}
+            />
 
             <VaccinationCoverageChoropleth
               title={
@@ -440,7 +432,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
-              <ArticleList articleSummaries={content.articles} />
+
+              <ArticleList articles={content.articles} />
             </TopicalTile>
           </TileList>
         </MaxWidth>
