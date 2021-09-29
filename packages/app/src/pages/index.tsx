@@ -188,6 +188,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'vaccine_coverage_per_age_group_estimated'
                   ),
+                  hideSparkBar:
+                    data.vaccine_coverage_per_age_group_estimated.values
+                      .length < 7,
                 } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
               ]}
             >
