@@ -6,7 +6,7 @@ import { Heading } from './typography';
 interface KpiTileProps {
   title: string;
   description?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   metadata?: MetadataProps;
 }
 
@@ -24,7 +24,7 @@ export function KpiTile({
     <Tile>
       <Box spacing={3}>
         <Heading level={3}>{title}</Heading>
-        <Box spacing={3}>{children}</Box>
+        {children && <Box spacing={3}>{children}</Box>}
 
         {description && (
           <Box maxWidth="400px" fontSize={2} lineHeight={2}>

@@ -80,6 +80,7 @@ type GmLayoutProps = {
  */
 export function GmLayout(props: GmLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
+
   const sidebarData = useMemo(() => {
     if (isDefined(difference) && isDefined(difference.sewer__average)) {
       difference.sewer__average.difference = Math.round(
@@ -203,7 +204,6 @@ export function GmLayout(props: GmLayoutProps) {
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_admission_moving_average"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            hideDate
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

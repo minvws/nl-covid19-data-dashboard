@@ -36,7 +36,12 @@ export function TopicalSectionHeader({
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box spacing={3}>
+    <Box
+      spacing={3}
+      borderTop="1px solid"
+      borderTopColor="border"
+      pt={{ _: 3, lg: 4 }}
+    >
       {showBackLink && (
         <Box fontSize="1.125rem" fontWeight="bold">
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
@@ -47,9 +52,6 @@ export function TopicalSectionHeader({
 
       <Box spacing={{ _: 2, lg: 3 }}>
         <Box
-          borderBottom="1px solid"
-          borderBottomColor="border"
-          pb={{ _: 2, lg: 3 }}
           display="flex"
           flexDirection={{ _: 'column', lg: 'row' }}
           alignItems="baseline"
