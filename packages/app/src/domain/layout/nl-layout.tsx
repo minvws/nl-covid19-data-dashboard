@@ -93,14 +93,6 @@ export function NlLayout(props: NlLayoutProps) {
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
-  data.difference.sewer__average.difference = Math.round(
-    data.difference.sewer__average.difference
-  );
-  data.difference.sewer__average.old_value = Math.round(
-    data.difference.sewer__average.old_value
-  );
-  data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
-
   const { isEnabled: isGpSuspicionsHistorical } = useFeature(
     'nlGpSuspicionsIsHistorical'
   );
