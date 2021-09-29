@@ -9,10 +9,10 @@ export const escalationLevelPage = {
     {
       title: 'Risiconiveau kiezen',
       name: 'riskLevel',
-      type: 'array',
+      type: 'number',
       of: [{ type: 'number' }],
-      validation: (rule: Rule) => rule.required().length(1),
       options: {
+        layout: 'radio',
         list: [
           { title: 'Waakzaam', value: 1 },
           { title: 'Zorgelijk', value: 2 },
