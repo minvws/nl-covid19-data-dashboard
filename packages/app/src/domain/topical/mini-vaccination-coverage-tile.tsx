@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { Legend } from '~/components/legend';
+import { Markdown } from '~/components/markdown';
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
@@ -12,6 +12,8 @@ type MiniVaccinationCoverageTileProps = {
   fullyVaccinatedPercentage: number | null;
   oneShotPercentageLabel?: string | null;
   fullyVaccinatedPercentageLabel?: string | null;
+  oneShotBarLabel: string;
+  fullyVaccinatedBarLabel: string;
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(
@@ -22,41 +24,51 @@ export function MiniVaccinationCoverageTile(
     fullyVaccinatedPercentage,
     oneShotPercentageLabel,
     fullyVaccinatedPercentageLabel,
+    oneShotBarLabel,
+    fullyVaccinatedBarLabel,
     ...tileProps
   } = props;
 
   return (
     <MiniTile {...tileProps}>
       <Box display="flex" flexDirection="column" spacing={3}>
-        <Bar
+        <LabeledBar
           value={oneShotPercentage}
           color={COLOR_HAS_ONE_SHOT}
-          label={oneShotPercentageLabel}
-          height={20}
+          valueLabel={oneShotPercentageLabel}
+          barLabel={oneShotBarLabel}
         />
-        <Bar
+        <LabeledBar
           value={fullyVaccinatedPercentage}
           color={COLOR_FULLY_VACCINATED}
-          label={fullyVaccinatedPercentageLabel}
-          height={20}
+          valueLabel={fullyVaccinatedPercentageLabel}
+          barLabel={fullyVaccinatedBarLabel}
         />
       </Box>
-      <Box pt={4}>
-        <Legend
-          items={[
-            {
-              color: COLOR_HAS_ONE_SHOT,
-              shape: 'square',
-              label: 'Opkomst eerste prik',
-            },
-            {
-              color: COLOR_FULLY_VACCINATED,
-              shape: 'square',
-              label: 'Volledig gevaccineerd',
-            },
-          ]}
-        ></Legend>
-      </Box>
     </MiniTile>
+  );
+}
+
+type LabeledBarProps = {
+  value: number | null;
+  valueLabel?: string | null;
+  color: string;
+  barLabel: string;
+};
+
+function LabeledBar(props: LabeledBarProps) {
+  const { value, valueLabel, color, barLabel } = props;
+
+  return (
+    <Box>
+      <Markdown content={barLabel} />
+      <Bar
+        value={value}
+        color={color}
+        label={valueLabel}
+        height={20}
+        showAxisValues
+      />
+    </Box>
   );
 }

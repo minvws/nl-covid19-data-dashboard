@@ -2,19 +2,22 @@ import { GetStaticPropsContext } from 'next';
 import { createElementsQuery } from './create-elements-query';
 
 export function getTopicalPageQuery(
-  context: GetStaticPropsContext & { locale: string }
+  code: 'nl' | 'vr' | 'gm',
+  elementNames: string[]
 ) {
-  const { locale } = context;
+  return (context: GetStaticPropsContext & { locale: string }) => {
+    const { locale } = context;
 
-  return /* groq */ `{
+    return /* groq */ `{
+    // Retrieve the latest 3 articles with the highlighted article filtered out:
     'showWeeklyHighlight': *[_type=='topicalPage']{
       showWeeklyHighlight,
     }[0].showWeeklyHighlight,
-    'weeklyHighlight': *[_type == 'editorial'] | order(publicationDate desc) {
-      "title":title.${locale},
-      publicationDate,
-      "slug": slug.current,
-      "cover": {
+      'weeklyHighlight': *[_type == 'editorial'] | order(publicationDate desc) {
+        "title":title.${locale},
+        publicationDate,
+        "slug": slug.current,
+        "cover": {
         ...cover,
         "asset": cover.asset->
       }
@@ -41,10 +44,7 @@ export function getTopicalPageQuery(
         }
       }
     }[0].articles,
-    'elements': ${createElementsQuery(
-      'nl',
-      ['tested_overall', 'hospital_nice', 'vaccine_administered_total'],
-      locale
-    )}
-  }`;
+      'elements': ${createElementsQuery(code, elementNames, locale)}
+    }`;
+  };
 }
