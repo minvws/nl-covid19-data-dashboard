@@ -71,6 +71,7 @@ const Icon = styled.span<{ gridArea: 'topIcon' | 'sideIcon' }>((x) =>
 
     svg: {
       height: '3.5rem',
+      width: 'auto',
     },
   })
 );

@@ -8,7 +8,6 @@
     "proto_name",
     "name",
     "code",
-    "escalation_levels",
     "tested_overall",
     "nursing_home",
     "behavior",
@@ -17,27 +16,21 @@
     "disability_care",
     "sewer",
     "situations",
-    "vaccine_coverage_per_age_group"
+    "vaccine_coverage_per_age_group",
+    "escalation_levels"
   ],
   "properties": {
     "last_generated": {
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "enum": ["VR_COLLECTION"]
+      "$ref": "#/$defs/vr_collection_id"
     },
     "name": {
-      "type": "string",
-      "const": {
-        "$data": "1/proto_name"
-      }
+      "$ref": "#/$defs/vr_collection_id"
     },
     "code": {
-      "type": "string",
-      "const": {
-        "$data": "1/proto_name"
-      }
+      "$ref": "#/$defs/vr_collection_id"
     },
     "hospital_nice": {
       "type": "array",
@@ -52,14 +45,6 @@
       "maxItems": 25,
       "items": {
         "$ref": "tested_overall.json"
-      }
-    },
-    "escalation_levels": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "escalation_levels.json"
       }
     },
     "nursing_home": {
@@ -117,6 +102,20 @@
       "items": {
         "$ref": "vaccine_coverage_per_age_group.json"
       }
+    },
+    "escalation_levels": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "escalation_levels.json"
+      }
+    }
+  },
+  "$defs": {
+    "vr_collection_id": {
+      "type": "string",
+      "enum": ["VR_COLLECTION"]
     }
   }
 }

@@ -9,7 +9,7 @@ export function elementsListItem() {
     .title('Elements')
     .icon(FaChartLine)
     .child(() => {
-      const types = ['timeSeries', 'kpi', 'choropleth'];
+      const types = ['timeSeries', 'kpi', 'choropleth', 'warning'];
 
       return documentStore
         .listenQuery(
