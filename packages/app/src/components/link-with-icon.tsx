@@ -11,6 +11,7 @@ interface LinkWithIconProps {
   children: string;
   icon: ReactNode;
   iconPlacement?: 'left' | 'right';
+  underline?: boolean;
   fontWeight?: 'normal' | 'bold';
 }
 
@@ -65,6 +66,7 @@ export function HeadingLinkWithIcon({
   href,
   icon,
   children,
+  underline,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
@@ -74,7 +76,14 @@ export function HeadingLinkWithIcon({
     <Box as="span" display="inline-block" position="relative">
       <Link href={href} passHref locale={false}>
         <Anchor color="inherit" hoverColor="blue">
-          <Box paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}>
+          <Box
+            paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}
+            css={css({
+              '&:hover': {
+                textDecoration: underline ? 'underline' : undefined,
+              },
+            })}
+          >
             {!words.length ? children : firstWords}
             <IconWrapper>
               {words[words.length - 1]}

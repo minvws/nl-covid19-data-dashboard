@@ -175,7 +175,6 @@ export function NlLayout(props: NlLayoutProps) {
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_admission_moving_average"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    hideDate
                   />
                 </MetricMenuItemLink>
 
@@ -189,7 +188,6 @@ export function NlLayout(props: NlLayoutProps) {
                     metricName="intensive_care_nice"
                     metricProperty="admissions_on_date_of_admission_moving_average"
                     localeTextKey="ic_opnames_per_dag"
-                    hideDate
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -221,7 +219,6 @@ export function NlLayout(props: NlLayoutProps) {
                     metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     differenceKey="reproduction__index_average"
-                    showDateOfInsertion
                   />
                 </MetricMenuItemLink>
 
@@ -254,12 +251,7 @@ export function NlLayout(props: NlLayoutProps) {
                   icon={<Gedrag />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
-                  <SituationsSidebarMetric
-                    date_start_unix={
-                      data.situationsSidebarValue.date_start_unix
-                    }
-                    date_end_unix={data.situationsSidebarValue.date_end_unix}
-                  />
+                  <SituationsSidebarMetric />
                 </MetricMenuItemLink>
               </CategoryMenu>
 
