@@ -12,7 +12,7 @@ const withTranspileModules = require('next-transpile-modules')([
   'internmap',
 ]);
 const path = require('path');
-const { DuplicatePlugin } = require('inspectpack/plugin');
+const { DuplicatesPlugin } = require('inspectpack/plugin');
 
 const nextConfig = {
   /**
@@ -173,8 +173,9 @@ const nextConfig = {
     );
 
     if (process.env.NODE_ENV === 'production') {
+      // See https://github.com/formidablelabs/inspectpack/#plugin
       config.plugins.push(
-        new DuplicatePlugin({
+        new DuplicatesPlugin({
           verbose: true,
         })
       );

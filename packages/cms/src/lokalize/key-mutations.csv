@@ -91,3 +91,4 @@ timestamp,action,key,document_id,move_to
 2021-09-27T11:05:54.667Z,add,veiligheidsregio_actueel.mini_trend_tiles.vaccinatiegraad.fully_vaccinated_bar_label,7nClfXqPlyZyEU7POdqArq,__
 2021-09-27T11:05:55.684Z,add,veiligheidsregio_actueel.mini_trend_tiles.ziekenhuis_opnames.read_more_link,qNGd4zPbpj47IuPd7zOE4z,__
 2021-09-27T11:05:56.707Z,add,veiligheidsregio_actueel.mini_trend_tiles.ziekenhuis_opnames.menu_item_label,PGwiP4IwXrA0GfLCLKlYtR,__
+2021-09-29T12:56:25.317Z,add,common_actueel.tile_selector_uitleg,ZRV6zAYjUdLG013AWX8XcB,__

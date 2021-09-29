@@ -24,7 +24,6 @@ interface TopicalSectionHeaderProps {
     href: string;
     text: string;
   };
-  hasBorderTop?: boolean;
 }
 
 export function TopicalSectionHeader({
@@ -35,17 +34,11 @@ export function TopicalSectionHeader({
   description,
   headingLevel = 2,
   headerVariant = 'h1',
-  hasBorderTop = true,
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box
-      spacing={3}
-      borderTop={hasBorderTop ? '1px solid' : '0 solid'}
-      borderTopColor="border"
-      pt={{ _: 3, lg: 4 }}
-    >
+    <Box pt={{ _: 2, lg: 3 }}>
       {showBackLink && (
         <Box fontSize="1.125rem" fontWeight="bold">
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
@@ -54,7 +47,7 @@ export function TopicalSectionHeader({
         </Box>
       )}
 
-      <Box spacing={{ _: 2, lg: 3 }}>
+      <Box spacing={{ _: 1, lg: 2 }}>
         <Box
           display="flex"
           flexDirection={{ _: 'column', lg: 'row' }}
