@@ -1,3 +1,4 @@
+import { NlSewer } from '@corona-dashboard/common';
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
 import { CollapsibleContent } from '~/components/collapsible';
@@ -225,7 +226,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
           <SewerChart
             accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
-            dataAverages={data.sewer}
+            dataAverages={data.sewer as unknown as NlSewer}
             dataPerInstallation={data.sewer_per_installation}
             text={{
               title: text.linechart_titel,

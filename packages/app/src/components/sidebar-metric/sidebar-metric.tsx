@@ -10,7 +10,6 @@ import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SidebarKpiValue } from './sidebar-kpi-value';
 interface SidebarMetricProps<T extends { difference: unknown }> {
   data: T;
@@ -36,10 +35,8 @@ export function SidebarMetric<T extends { difference: unknown }>({
   localeTextKey,
   differenceKey,
   annotationKey,
-  showDateOfInsertion,
-  hideDate,
 }: SidebarMetricProps<T>) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText } = useIntl();
 
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
@@ -65,8 +62,6 @@ export function SidebarMetric<T extends { difference: unknown }>({
     );
   }
 
-  const commonText = siteText.common.metricKPI;
-
   /**
    * Because the locale files are not consistent in using kpi_titel and titel_kpi
    * we support both but kpi_titel has precedence.
@@ -85,40 +80,6 @@ export function SidebarMetric<T extends { difference: unknown }>({
       localeTextKey
     )}.kpi_titel or ${String(localeTextKey)}.titel_kpi`
   );
-
-  let description = '';
-
-  try {
-    if (showDateOfInsertion) {
-      description = replaceVariablesInText(commonText.dateOfInsertion, {
-        dateOfInsertion: formatDateFromSeconds(
-          lastValue.date_of_insertion_unix,
-          'medium'
-        ),
-      });
-    } else if (!hideDate) {
-      description =
-        'date_unix' in lastValue
-          ? replaceVariablesInText(commonText.dateOfReport, {
-              dateOfReport: formatDateFromSeconds(
-                lastValue.date_unix,
-                'medium'
-              ),
-            })
-          : replaceVariablesInText(commonText.dateRangeOfReport, {
-              startDate: formatDateFromSeconds(
-                lastValue.date_start_unix,
-                'axis'
-              ),
-              endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
-            });
-    }
-  } catch (err) {
-    if (err instanceof Error)
-      throw new Error(
-        `Failed to format description for ${metricName}:${metricProperty}, likely due to a timestamp week/day configuration mismatch. Error: ${err.message}`
-      );
-  }
 
   const differenceValue = differenceKey
     ? get(data, ['difference', differenceKey as unknown as string])
@@ -149,7 +110,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   }
 
   if (!metricProperty) {
-    return <SidebarKpiValue title={title} description={description} />;
+    return <SidebarKpiValue title={title} />;
   }
 
   return (
@@ -157,7 +118,6 @@ export function SidebarMetric<T extends { difference: unknown }>({
       <SidebarKpiValue
         title={title}
         value={propertyValue}
-        description={description}
         difference={differenceValue}
         valueAnnotation={valueAnnotation}
       />

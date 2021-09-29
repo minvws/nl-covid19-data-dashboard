@@ -11,7 +11,8 @@ export function useAgegroupLabels(
   dataValue:
     | VrVaccineCoveragePerAgeGroupValue
     | GmVaccineCoveragePerAgeGroupValue
-    | undefined
+    | undefined,
+  lowerCased?: boolean
 ) {
   const { siteText, formatPercentage } = useIntl();
 
@@ -24,7 +25,7 @@ export function useAgegroupLabels(
           siteText.vaccinaties_common.labels.minder_dan,
           formatPercentage
         )
-      : 0;
+      : '0';
     const oneShotLabel = isDefined(dataValue)
       ? getRenderedVaccinatedLabel(
           dataValue.has_one_shot_percentage_label,
@@ -33,11 +34,15 @@ export function useAgegroupLabels(
           siteText.vaccinaties_common.labels.minder_dan,
           formatPercentage
         )
-      : 0;
+      : '0';
 
     return {
-      fully_vaccinated_percentage: fullyVaccinatedLabel ?? '',
-      has_one_shot_percentage: oneShotLabel ?? '',
+      fully_vaccinated_percentage: lowerCased
+        ? fullyVaccinatedLabel.toLocaleLowerCase()
+        : fullyVaccinatedLabel,
+      has_one_shot_percentage: lowerCased
+        ? oneShotLabel.toLocaleLowerCase()
+        : oneShotLabel,
     };
   }, [dataValue, siteText, formatPercentage]);
 }
