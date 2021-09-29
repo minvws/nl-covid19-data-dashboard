@@ -7,6 +7,7 @@
 import {
   assert,
   GmSewer,
+  NlSewer,
   SewerPerInstallationData,
   VrSewer,
 } from '@corona-dashboard/common';
@@ -29,7 +30,7 @@ export type MergedSewerType = ReturnType<typeof mergeData>[number];
  * need to convert them to format with the same type of timestamps.
  */
 export function mergeData(
-  dataAverages: VrSewer | GmSewer,
+  dataAverages: VrSewer | GmSewer | NlSewer,
   dataPerInstallation: SewerPerInstallationData,
   selectedInstallation: string
 ) {
@@ -59,7 +60,10 @@ export function mergeData(
      * set we'll need to use single dates.
      */
     const date_unix =
-      value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
+      'date_unix' in value
+        ? value.date_unix
+        : value.date_start_unix +
+          (value.date_end_unix - value.date_start_unix) / 2;
 
     const existingValue = mergedValuesByTimestamp[date_unix] as
       | MergedValue

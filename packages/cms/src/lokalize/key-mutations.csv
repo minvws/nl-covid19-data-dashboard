@@ -1,4 +1,9 @@
 timestamp,action,key,document_id,move_to
+2021-09-06T09:52:56.741Z,add,nationaal_layout.headings.archief,srBRCALrLz9Y3ZpBCxW7jO,__
+2021-09-07T09:53:25.467Z,add,rioolwater_metingen.tile_explanation_title,u2w2cmKrEkkhu4TKoJbUOn,__
+2021-09-07T09:53:26.347Z,add,rioolwater_metingen.tile_explanation_description,oFxmVAb3WhH1wXDkdlLrYy,__
+2021-09-07T10:18:59.796Z,add,veiligheidsregio_rioolwater_metingen.tile_explanation_description,u2w2cmKrEkkhu4TKoJgGJv,__
+2021-09-07T10:19:00.807Z,add,veiligheidsregio_rioolwater_metingen.tile_explanation_title,oFxmVAb3WhH1wXDkdlNopS,__
 2021-09-22T09:50:54.726Z,add,gemeente_actueel.highlighted_items.title,7nClfXqPlyZyEU7PO2yWjG,__
 2021-09-22T09:50:55.742Z,add,nationaal_actueel.highlighted_items.title,qNGd4zPbpj47IuPd7MGZID,__
 2021-09-22T09:50:56.747Z,add,veiligheidsregio_actueel.highlighted_items.title,7nClfXqPlyZyEU7PO2yXoW,__
@@ -56,6 +61,7 @@ timestamp,action,key,document_id,move_to
 2021-09-22T15:25:26.359Z,add,common_actueel.secties.kpi.hospital_admissions.plural,PGwiP4IwXrA0GfLCLDof1I,__
 2021-09-22T15:25:27.339Z,add,common_actueel.secties.kpi.hospital_admissions.singular,7nClfXqPlyZyEU7PO5eeXg,__
 2021-09-22T15:25:28.358Z,add,common_actueel.secties.kpi.hospital_admissions.zero,PGwiP4IwXrA0GfLCLDofF5,__
+2021-09-28T13:16:46.199Z,add,common.daggemiddelde,qNGd4zPbpj47IuPd89IJPP,__
 2021-09-27T11:05:30.300Z,add,gemeente_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.plural,7nClfXqPlyZyEU7POdpuJ2,__
 2021-09-27T11:05:32.318Z,add,gemeente_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.singular,qNGd4zPbpj47IuPd7zNsMu,__
 2021-09-27T11:05:33.337Z,add,gemeente_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.zero,PGwiP4IwXrA0GfLCLKlX77,__
