@@ -120,8 +120,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  console.log(content);
-
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
   return (

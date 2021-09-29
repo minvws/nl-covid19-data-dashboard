@@ -370,7 +370,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
-              <ArticleList articles={content.articles} />
+
+              {content.articles ? (
+                <ArticleList articles={content.articles} />
+              ) : null}
             </TopicalTile>
           </TileList>
 
