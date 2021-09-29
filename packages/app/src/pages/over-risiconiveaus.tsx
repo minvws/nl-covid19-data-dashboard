@@ -27,7 +27,7 @@ interface OverRisiconiveausData {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<OverRisiconiveausData>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `*[_type == 'overRisicoNiveaus']{
       "title": title.${locale},
       "description": {
@@ -40,8 +40,6 @@ export const getStaticProps = createGetStaticProps(
            },
         ]
       },
-      "scoreBoardTitle": scoreBoardTitle.${locale},
-      "scoreBoardDescription": scoreBoardDescription.${locale},
       "riskLevelExplanations": {
         "_type": riskLevelExplanations._type,
         "${locale}": [
