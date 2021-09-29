@@ -5,7 +5,6 @@ import { gmData } from '~/data/gm';
  */
 export function getStaticPaths() {
   const paths = gmData.map((x) => ({
-    locale: 'nl',
     params: { code: x.gemcode },
   }));
 
