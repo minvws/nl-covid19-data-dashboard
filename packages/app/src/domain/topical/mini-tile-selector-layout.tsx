@@ -28,7 +28,7 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
 
   if (breakpoints.md) {
     return <WideMiniTileSelectorLayout {...props} />;
