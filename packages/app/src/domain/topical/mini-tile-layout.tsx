@@ -2,15 +2,12 @@ import { Children, cloneElement, ReactElement } from 'react';
 import { Box } from '~/components/base';
 import theme from '~/style/theme';
 
-type MiniTrendTileLayoutProps = {
+type MiniTileLayoutProps = {
   children: ReactElement<{ areas: { header: string; chart: string } }>[];
   id?: string;
 };
 
-export function MiniTrendTileLayout({
-  children,
-  id,
-}: MiniTrendTileLayoutProps) {
+export function MiniTileLayout({ children, id }: MiniTileLayoutProps) {
   return (
     <Box
       id={id}

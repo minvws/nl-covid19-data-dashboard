@@ -32,16 +32,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "$ref": "#/$defs/vr_code"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/vr_code"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/vr_code"
     },
     "static_values": {
       "$ref": "__static_values.json"
@@ -99,6 +96,12 @@
     },
     "escalation_level": {
       "$ref": "escalation_level.json"
+    }
+  },
+  "$defs": {
+    "vr_code": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
     }
   }
 }

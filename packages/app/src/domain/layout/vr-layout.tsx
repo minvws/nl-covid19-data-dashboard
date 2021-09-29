@@ -12,7 +12,7 @@ import {
 } from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -23,7 +23,8 @@ import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
-import { Text } from '~/components/typography';
+import { Heading } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -89,16 +90,6 @@ type VrLayoutProps = {
 export function VrLayout(props: VrLayoutProps) {
   const { children, data, vrName } = props;
 
-  if (isDefined(data)) {
-    data.difference.sewer__average.difference = Math.round(
-      data.difference.sewer__average.difference
-    );
-    data.difference.sewer__average.old_value = Math.round(
-      data.difference.sewer__average.old_value
-    );
-    data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
-  }
-
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
@@ -111,6 +102,18 @@ export function VrLayout(props: VrLayoutProps) {
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
+
+  if (isDefined(data)) {
+    data.difference.sewer__average.difference = Math.round(
+      data.difference.sewer__average.difference
+    );
+    data.difference.sewer__average.old_value = Math.round(
+      data.difference.sewer__average.old_value
+    );
+    data.sewer.last_value.average = isPresent(data.sewer.last_value.average)
+      ? Math.round(data.sewer.last_value.average)
+      : null;
+  }
 
   return (
     <>
@@ -151,7 +154,7 @@ export function VrLayout(props: VrLayoutProps) {
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
                 id="metric-navigation"
-                aria-label={siteText.aria_labels.metriek_navigatie}
+                aria-labelledby="sidebar-title"
                 role="navigation"
                 spacing={3}
                 backgroundColor="white"
@@ -159,9 +162,12 @@ export function VrLayout(props: VrLayoutProps) {
                 mx="auto"
               >
                 <Box px={3}>
-                  <Text variant={'h3'} fontWeight="bold">
+                  <Heading id="sidebar-title" level={2} variant="h3">
+                    <VisuallyHidden as="span">
+                      {siteText.veiligheidsregio_layout.headings.sidebar}
+                    </VisuallyHidden>
                     {vrName}
-                  </Text>
+                  </Heading>
                 </Box>
 
                 <Menu spacing={4}>
@@ -217,9 +223,9 @@ export function VrLayout(props: VrLayoutProps) {
                       <SidebarMetric
                         data={data}
                         metricName="hospital_nice"
-                        metricProperty="admissions_on_date_of_reporting"
+                        metricProperty="admissions_on_date_of_admission_moving_average"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                        hideDate
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
@@ -265,14 +271,7 @@ export function VrLayout(props: VrLayoutProps) {
                       icon={<Gedrag />}
                       title={siteText.brononderzoek.titel_sidebar}
                     >
-                      <SituationsSidebarMetric
-                        date_start_unix={
-                          data.situationsSidebarValue.date_start_unix
-                        }
-                        date_end_unix={
-                          data.situationsSidebarValue.date_end_unix
-                        }
-                      />
+                      <SituationsSidebarMetric />
                     </MetricMenuItemLink>
                   </CategoryMenu>
 

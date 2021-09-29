@@ -3,22 +3,12 @@ import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 interface VariantsSidebarMetricProps {
   data: VariantSidebarValue;
 }
 
 export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
-  const { siteText, formatDateFromSeconds, formatPercentage } = useIntl();
-  const commonText = siteText.common.metricKPI;
-
-  /**
-   * Filter all the keys that end with a _percentage and find the highest value.
-   */
-  const dateText = replaceVariablesInText(commonText.dateRangeOfReport, {
-    startDate: formatDateFromSeconds(data.date_start_unix, 'axis'),
-    endDate: formatDateFromSeconds(data.date_end_unix, 'axis'),
-  });
+  const { siteText, formatPercentage } = useIntl();
 
   const variantName = (
     siteText.covid_varianten.varianten as Record<string, string>
@@ -39,12 +29,6 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
         <InlineText variant="h3">
           {`${formatPercentage(data.percentage)}% ${variantName}`}
         </InlineText>
-
-        <Box pt="2px">
-          <InlineText variant="label1" color="annotation">
-            {dateText}
-          </InlineText>
-        </Box>
       </Box>
     </Box>
   );

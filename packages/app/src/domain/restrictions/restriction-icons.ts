@@ -67,4 +67,10 @@ export const restrictionIcons: Record<string, string | null> = {
   klok_2100: 'klok-2100.svg',
   geen_entertainment: 'geen-entertainment.svg',
   frisse_lucht: 'frisse_lucht.svg',
+  binnen_met_zitplaats: 'binnen-met-zitplaats.svg',
+  binnen_zonder_zitplaats: 'binnen-zonder-zitplaats.svg',
+  geen_max_aantal_bezoekers: 'geen-max-aantal-bezoekers.svg',
+  kunst_cultuur: 'kunst-cultuur.svg',
+  taxi: 'taxi.svg',
+  vliegen: 'vliegen.svg',
 };

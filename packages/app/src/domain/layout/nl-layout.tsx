@@ -28,6 +28,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -93,14 +94,6 @@ export function NlLayout(props: NlLayoutProps) {
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
-  data.difference.sewer__average.difference = Math.round(
-    data.difference.sewer__average.difference
-  );
-  data.difference.sewer__average.old_value = Math.round(
-    data.difference.sewer__average.old_value
-  );
-  data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
-
   const { isEnabled: isGpSuspicionsHistorical } = useFeature(
     'nlGpSuspicionsIsHistorical'
   );
@@ -128,13 +121,16 @@ export function NlLayout(props: NlLayoutProps) {
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
             id="metric-navigation"
-            aria-label={siteText.aria_labels.metriek_navigatie}
+            aria-labelledby="sidebar-title"
             role="navigation"
             pt={4}
             backgroundColor="white"
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
+            <VisuallyHidden as="h2" id="sidebar-title">
+              {siteText.nationaal_layout.headings.sidebar}
+            </VisuallyHidden>
             <Menu spacing={4}>
               <MetricMenuButtonLink
                 title={siteText.nationaal_maatregelen.titel_sidebar}
@@ -177,9 +173,8 @@ export function NlLayout(props: NlLayoutProps) {
                   <SidebarMetric
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                   />
                 </MetricMenuItemLink>
 
@@ -191,9 +186,8 @@ export function NlLayout(props: NlLayoutProps) {
                   <SidebarMetric
                     data={data}
                     metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -225,7 +219,6 @@ export function NlLayout(props: NlLayoutProps) {
                     metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     differenceKey="reproduction__index_average"
-                    showDateOfInsertion
                   />
                 </MetricMenuItemLink>
 
@@ -258,12 +251,7 @@ export function NlLayout(props: NlLayoutProps) {
                   icon={<Gedrag />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
-                  <SituationsSidebarMetric
-                    date_start_unix={
-                      data.situationsSidebarValue.date_start_unix
-                    }
-                    date_end_unix={data.situationsSidebarValue.date_end_unix}
-                  />
+                  <SituationsSidebarMetric />
                 </MetricMenuItemLink>
               </CategoryMenu>
 
