@@ -21,7 +21,6 @@ import {
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
@@ -30,7 +29,6 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { EscalationLevel } from '../restrictions/types';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
@@ -176,26 +174,10 @@ export function VrLayout(props: VrLayoutProps) {
                       title={
                         siteText.veiligheidsregio_maatregelen.titel_sidebar
                       }
-                      buttonVariant="top"
                       subtitle={
                         siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                       }
                     />
-                    <MetricMenuButtonLink
-                      href={reverseRouter.vr.risiconiveau(code)}
-                      title={
-                        siteText.veiligheidsregio_layout.headings.inschaling
-                      }
-                      buttonVariant="bottom"
-                    >
-                      <Box mt={2}>
-                        <EscalationLevelInfoLabel
-                          level={data.escalation_level.level as EscalationLevel}
-                          size="small"
-                          useLevelColor
-                        />
-                      </Box>
-                    </MetricMenuButtonLink>
                   </Box>
 
                   {vaccinationFeature.isEnabled &&
