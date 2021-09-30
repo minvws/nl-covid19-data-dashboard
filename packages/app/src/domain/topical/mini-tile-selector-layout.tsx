@@ -121,7 +121,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
             <WarningIconWrapper aria-label={siteText.aria_labels.warning} small>
-              <Warning viewBox="0 0 20 20" />
+              <Warning viewBox="0 0 25 25" />
             </WarningIconWrapper>
           )}
           <InlineText
