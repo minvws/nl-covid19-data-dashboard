@@ -1,20 +1,14 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import {
-  CategoryMenu,
-  Menu,
-  MetricMenuButtonLink,
-  MetricMenuItemLink,
-} from '~/components/aside/menu';
+import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { VrComboBox } from './components/vr-combo-box';
-import { useSidebar } from './logic/sidebar';
+import { useSidebar } from './logic/use-sidebar';
 
 type VrLayoutProps = {
   children?: React.ReactNode;
@@ -53,7 +47,6 @@ export function VrLayout(props: VrLayoutProps) {
   const { children, vrName, isLandingPage } = props;
 
   const router = useRouter();
-  const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
   const code = router.query.code as string;
@@ -63,6 +56,12 @@ export function VrLayout(props: VrLayoutProps) {
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
+
+  const topItems = useSidebar({
+    layout: 'vr',
+    code: code,
+    map: ['measures'],
+  });
 
   const items = useSidebar({
     layout: 'vr',
@@ -116,15 +115,13 @@ export function VrLayout(props: VrLayoutProps) {
             {!isLandingPage && showMetricLinks && (
               <Box
                 as="nav"
-                /** re-mount when route changes in order to blur anchors */
-                key={router.asPath}
                 id="metric-navigation"
                 aria-labelledby="sidebar-title"
                 role="navigation"
-                spacing={3}
                 backgroundColor="white"
                 maxWidth={{ _: '38rem', md: undefined }}
                 mx="auto"
+                spacing={1}
               >
                 <Box px={3}>
                   <Heading id="sidebar-title" level={2} variant="h3">
@@ -135,35 +132,20 @@ export function VrLayout(props: VrLayoutProps) {
                   </Heading>
                 </Box>
 
-                <Menu spacing={4}>
-                  <Box>
-                    <MetricMenuButtonLink
-                      href={reverseRouter.vr.maatregelen(code)}
-                      title={
-                        siteText.veiligheidsregio_maatregelen.titel_sidebar
-                      }
-                      subtitle={
-                        siteText.veiligheidsregio_maatregelen.subtitel_sidebar
-                      }
-                    />
-                  </Box>
+                <Box pb={4}>
+                  <Menu>
+                    <MenuRenderer items={topItems} />
+                  </Menu>
+                </Box>
 
-                  {items.map((x) =>
-                    'items' in x ? (
-                      <CategoryMenu {...x}>
-                        {x.items.map((y) => (
-                          <MetricMenuItemLink
-                            key={y.key}
-                            title={y.title}
-                            href={y.href}
-                            icon={y.icon}
-                          />
-                        ))}
-                      </CategoryMenu>
-                    ) : (
-                      <MetricMenuItemLink {...x} />
-                    )
-                  )}
+                <Box px={3}>
+                  <Heading level={3}>
+                    {siteText.sidebar.shared.all_metrics}
+                  </Heading>
+                </Box>
+
+                <Menu spacing={2}>
+                  <MenuRenderer items={items} />
                 </Menu>
               </Box>
             )}

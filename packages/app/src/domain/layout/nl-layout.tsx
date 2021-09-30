@@ -1,19 +1,12 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { isPresent } from 'ts-is-present';
-import {
-  CategoryMenu,
-  Menu,
-  MetricMenuButtonLink,
-  MetricMenuItemLink,
-} from '~/components/aside/menu';
+import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
+import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useSidebar } from './logic/sidebar';
+import { useSidebar } from './logic/use-sidebar';
 
 interface NlLayoutProps {
   children?: React.ReactNode;
@@ -38,10 +31,12 @@ interface NlLayoutProps {
 export function NlLayout(props: NlLayoutProps) {
   const { children } = props;
 
-  const router = useRouter();
-  const reverseRouter = useReverseRouter();
-
   const { siteText } = useIntl();
+
+  const topItems = useSidebar({
+    layout: 'nl',
+    map: ['measures'],
+  });
 
   const items = useSidebar({
     layout: 'nl',
@@ -64,6 +59,12 @@ export function NlLayout(props: NlLayoutProps) {
       ],
       ['early_indicators', ['sewage_measurement']],
       ['other', ['coronamelder_app']],
+    ],
+  });
+
+  const archivedItems = useSidebar({
+    layout: 'nl',
+    map: [
       [
         'archived_metrics',
         ['infectious_people', 'general_practitioner_suspicions'],
@@ -91,8 +92,6 @@ export function NlLayout(props: NlLayoutProps) {
         sidebarComponent={
           <Box
             as="nav"
-            /** re-mount when route changes in order to blur anchors */
-            key={router.asPath}
             id="metric-navigation"
             aria-labelledby="sidebar-title"
             role="navigation"
@@ -100,35 +99,44 @@ export function NlLayout(props: NlLayoutProps) {
             backgroundColor="white"
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
+            spacing={1}
           >
             <VisuallyHidden as="h2" id="sidebar-title">
               {siteText.nationaal_layout.headings.sidebar}
             </VisuallyHidden>
 
-            <Menu spacing={4}>
-              <MetricMenuButtonLink
-                title={siteText.nationaal_maatregelen.titel_sidebar}
-                subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-                href={reverseRouter.nl.maatregelen()}
-              />
+            <Box px={3}>
+              <Heading level={2} variant={'h3'}>
+                {siteText.sidebar.nl.title}
+              </Heading>
+            </Box>
 
-              {items.map((x) =>
-                'items' in x ? (
-                  <CategoryMenu {...x}>
-                    {x.items.map((y) => (
-                      <MetricMenuItemLink
-                        key={y.key}
-                        title={y.title}
-                        href={y.href}
-                        icon={y.icon}
-                      />
-                    ))}
-                  </CategoryMenu>
-                ) : (
-                  <MetricMenuItemLink {...x} />
-                )
-              )}
-            </Menu>
+            <Box pb={4}>
+              <Menu>
+                <MenuRenderer items={topItems} />
+              </Menu>
+            </Box>
+
+            <Box px={3}>
+              <Heading level={3}>{siteText.sidebar.shared.all_metrics}</Heading>
+            </Box>
+
+            <Box pb={3}>
+              <Menu spacing={2}>
+                <MenuRenderer items={items} />
+              </Menu>
+            </Box>
+
+            <Box
+              borderTopColor="border"
+              borderTopStyle="solid"
+              borderTopWidth={1}
+              pt={3}
+            >
+              <Menu>
+                <MenuRenderer items={archivedItems} />
+              </Menu>
+            </Box>
           </Box>
         }
       >
