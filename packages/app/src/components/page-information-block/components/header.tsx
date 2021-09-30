@@ -40,7 +40,7 @@ export function Header({
           </Heading>
         </Box>
       )}
-      {isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
+      {icon && isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
       <Heading
         level={1}
         as="h2"
