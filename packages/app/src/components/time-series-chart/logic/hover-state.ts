@@ -11,7 +11,15 @@ import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { isEmpty, pick, throttle } from 'lodash';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { TimelineEventConfig } from '../components/timeline';
 import { Padding, TimespanAnnotationConfig } from './common';
@@ -41,6 +49,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   padding: Padding;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
+  setIsTabInteractive: Dispatch<SetStateAction<boolean>>;
   timespanAnnotations?: TimespanAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
   markNearestPointOnly?: boolean;
@@ -70,11 +79,15 @@ export function useHoverState<T extends TimestampedValue>({
   timelineEvents,
   markNearestPointOnly,
   isTabInteractive,
+  setIsTabInteractive,
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
-  // const [hasFocus, setHasFocus] = useState(false);
   const [valuesIndex, setValuesIndex] = useState<number>(0);
-  const keyboard = useKeyboardNavigation(setValuesIndex, values.length);
+  const keyboard = useKeyboardNavigation(
+    setValuesIndex,
+    values.length,
+    setIsTabInteractive
+  );
 
   useEffect(() => {
     isTabInteractive ? keyboard.enable() : keyboard.disable();

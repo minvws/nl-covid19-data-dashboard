@@ -4,12 +4,13 @@ import { wrapAroundLength } from '~/utils/number';
 
 export function useKeyboardNavigation(
   setPosition: Dispatch<SetStateAction<number>>,
-  length: number
+  length: number,
+  setIsTabInteractive: Dispatch<SetStateAction<boolean>>
 ) {
   const [isEnabled, setIsEnabled] = useState(false);
 
   useHotkey(
-    ['right', 'alt+tab'],
+    ['right', 'shift+>'],
     () => setPosition((x) => wrapAroundLength(x + 1, length)),
     {
       isDisabled: !isEnabled,
@@ -18,7 +19,7 @@ export function useKeyboardNavigation(
   );
 
   useHotkey(
-    ['left', 'shift+alt+tab'],
+    ['left', 'shift+<'],
     () => setPosition((x) => wrapAroundLength(x - 1, length)),
     {
       isDisabled: !isEnabled,
@@ -64,6 +65,11 @@ export function useKeyboardNavigation(
       allowRepeat: true,
     }
   );
+
+  useHotkey(['escape'], () => setIsTabInteractive(false), {
+    isDisabled: !isEnabled,
+    allowRepeat: true,
+  });
 
   return useMemo(
     () => ({

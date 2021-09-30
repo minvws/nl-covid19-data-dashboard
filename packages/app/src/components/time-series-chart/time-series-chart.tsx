@@ -266,8 +266,12 @@ export function TimeSeriesChart<
     [values, today]
   );
 
-  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
-    useTabInteractiveButton(siteText.accessibility.tab_navigatie_button);
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+    setIsTabInteractive,
+  } = useTabInteractiveButton(siteText.accessibility.tab_navigatie_button);
 
   const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
@@ -281,6 +285,7 @@ export function TimeSeriesChart<
     timelineEvents: timelineState.events,
     markNearestPointOnly,
     isTabInteractive,
+    setIsTabInteractive,
   });
 
   const metricPropertyFormatters = useMetricPropertyFormatters(
