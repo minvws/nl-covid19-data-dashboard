@@ -68,6 +68,9 @@ export const preset = {
       fontSize: 0,
       lineHeight: 1,
     },
+    datadriven: {
+      fontSize: 5,
+    },
   },
 } as const;
 
