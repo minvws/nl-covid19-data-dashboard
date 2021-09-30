@@ -183,10 +183,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         .ziekenhuis_opnames.menu_item_label,
                     data: dataHospitalIntake.values,
                     dataProperty:
-                      'admissions_on_date_of_admission_moving_average',
+                      'admissions_on_date_of_admission_moving_average_rounded',
                     value:
                       last(dataHospitalIntake.values)
-                        ?.admissions_on_date_of_admission_moving_average ?? 0,
+                        ?.admissions_on_date_of_admission_moving_average_rounded ??
+                      0,
                     warning: getWarning(
                       content.elements.warning,
                       'hospital_nice'
@@ -205,6 +206,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'vaccinatiegraad'
                     ),
+                    hideSparkBar:
+                      data.vaccine_coverage_per_age_group.values.length < 7,
                   } as MiniTileSelectorItem<GmVaccineCoveragePerAgeGroupValue>,
                 ]}
               >
@@ -221,7 +224,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                               .value,
                             metricName: 'hospital_nice',
                             metricProperty:
-                              'admissions_on_date_of_admission_moving_average',
+                              'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
                           },
@@ -246,7 +249,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average',
+                        'admissions_on_date_of_admission_moving_average_rounded',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,

@@ -150,10 +150,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         .menu_item_label,
                     data: dataICTotal.values,
                     dataProperty:
-                      'admissions_on_date_of_admission_moving_average',
+                      'admissions_on_date_of_admission_moving_average_rounded',
                     value:
                       last(dataICTotal.values)
-                        ?.admissions_on_date_of_admission_moving_average ?? 0,
+                        ?.admissions_on_date_of_admission_moving_average_rounded ??
+                      0,
                     warning: getWarning(
                       content.elements.warning,
                       'intensive_care_nice'
@@ -165,10 +166,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         .ziekenhuis_opnames.menu_item_label,
                     data: dataHospitalIntake.values,
                     dataProperty:
-                      'admissions_on_date_of_admission_moving_average',
+                      'admissions_on_date_of_admission_moving_average_rounded',
                     value:
                       last(dataHospitalIntake.values)
-                        ?.admissions_on_date_of_admission_moving_average ?? 0,
+                        ?.admissions_on_date_of_admission_moving_average_rounded ??
+                      0,
                     warning: getWarning(
                       content.elements.warning,
                       'hospital_nice'
@@ -207,7 +209,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .value,
                             metricName: 'intensive_care_nice',
                             metricProperty:
-                              'admissions_on_date_of_admission_moving_average',
+                              'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
                           },
@@ -238,7 +240,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average',
+                        'admissions_on_date_of_admission_moving_average_rounded',
                       label:
                         siteText.ic_opnames_per_dag
                           .linechart_legend_trend_label_moving_average,
@@ -276,7 +278,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .intake_hospital_ma_nieuw.value,
                             metricName: 'hospital_nice',
                             metricProperty:
-                              'admissions_on_date_of_admission_moving_average',
+                              'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
                           },
@@ -309,7 +311,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average',
+                        'admissions_on_date_of_admission_moving_average_rounded',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,
