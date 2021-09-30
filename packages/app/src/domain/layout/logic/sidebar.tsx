@@ -75,6 +75,13 @@ type UseSidebarArgs<T extends 'nl' | 'vr' | 'gm'> = {
   code?: T extends 'nl' ? never : string;
 };
 
+type Content = {
+  title: string;
+  description?: string;
+};
+
+type K = keyof SiteText['sidebar']['nl' | 'vr' | 'gm'];
+
 export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
   layout,
   map,
@@ -106,10 +113,7 @@ export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
 
       return {
         key,
-        title:
-          siteText.sidebar[layout][
-            key as keyof SiteText['sidebar']['nl' | 'vr' | 'gm']
-          ].title,
+        title: siteText.sidebar[layout][key as K].title,
         icon,
         href: getHref(key),
       };
@@ -118,20 +122,19 @@ export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
     const getCategory = (category: SidebarElement<T>): SidebarCategory<T> => {
       const [key, items] = category;
 
-      const content =
-        siteText.sidebar[layout][
-          key as keyof SiteText['sidebar']['nl' | 'vr' | 'gm']
-        ];
+      const content: Content = siteText.sidebar[layout][key as K];
 
       return {
         key,
         title: content.title,
-        description: 'description' in content ? content.description : undefined,
+        description: isPresent(content.description)
+          ? content.description
+          : undefined,
         items: items.map(getItem),
       };
     };
 
-    const expandMap = (map: SidebarMap<T>) =>
+    const expandMap = (map: SidebarMap<T>): ExpandedSidebarMap<T> =>
       map.map((x) => (typeof x === 'string' ? getItem(x) : getCategory(x)));
 
     return expandMap(map);

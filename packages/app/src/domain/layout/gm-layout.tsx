@@ -1,10 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import {
-  CategoryMenu,
-  Menu,
-  MetricMenuItemLink,
-} from '~/components/aside/menu';
+import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
@@ -115,9 +111,9 @@ export function GmLayout(props: GmLayoutProps) {
                 backgroundColor="white"
                 maxWidth={{ _: '38rem', md: undefined }}
                 mx="auto"
-                spacing={4}
+                spacing={1}
               >
-                <Box px={3} spacing={3}>
+                <Box px={3} pb={4} spacing={1}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">
                       {siteText.gemeente_layout.headings.sidebar}
@@ -134,23 +130,14 @@ export function GmLayout(props: GmLayoutProps) {
                   )}
                 </Box>
 
-                <Menu spacing={4}>
-                  {items.map((x) =>
-                    'items' in x ? (
-                      <CategoryMenu {...x}>
-                        {x.items.map((y) => (
-                          <MetricMenuItemLink
-                            key={y.key}
-                            title={y.title}
-                            href={y.href}
-                            icon={y.icon}
-                          />
-                        ))}
-                      </CategoryMenu>
-                    ) : (
-                      <MetricMenuItemLink {...x} />
-                    )
-                  )}
+                <Box px={3}>
+                  <Heading level={3}>
+                    {siteText.sidebar.shared.all_metrics}
+                  </Heading>
+                </Box>
+
+                <Menu spacing={2}>
+                  <MenuRenderer items={items} />
                 </Menu>
               </Box>
             )}

@@ -7,12 +7,37 @@ import { UrlObject } from 'url';
 import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { Anchor, Heading, Text } from '~/components/typography';
+import { ExpandedSidebarMap } from '~/domain/layout/logic/types';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
+
+export function MenuRenderer({
+  items,
+}: {
+  items: ExpandedSidebarMap<'nl' | 'vr' | 'gm'>;
+}) {
+  return (
+    <>
+      {items.map((x) =>
+        'items' in x ? (
+          <CategoryMenu {...x}>
+            {x.items.map((item) => (
+              // item includes key, ESLint gives a false positive here
+              // eslint-disable-next-line react/jsx-key
+              <MetricMenuItemLink {...item} />
+            ))}
+          </CategoryMenu>
+        ) : (
+          <MetricMenuItemLink {...x} />
+        )
+      )}
+    </>
+  );
+}
 
 export function Menu({
   children,

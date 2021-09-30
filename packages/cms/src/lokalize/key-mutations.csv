@@ -103,3 +103,10 @@ timestamp,action,key,document_id,move_to
 2021-09-30T10:47:44.081Z,add,sidebar.nl.infectious_people.title,M5HlUfbDoLc1TQKnrB9cUz,__
 2021-09-30T10:47:45.066Z,add,sidebar.vr.measures.title,o2vap3Y8UfExR0mnMR32RZ,__
 2021-09-30T11:02:07.334Z,add,sidebar.nl.archived_metrics.description,o2vap3Y8UfExR0mnMR7E7b,__
+2021-09-30T11:29:45.938Z,add,sidebar.gm.all_metrics,o2vap3Y8UfExR0mnMRCygp,__
+2021-09-30T11:29:46.881Z,add,sidebar.nl.all_metrics,ZRV6zAYjUdLG013AWgvTFx,__
+2021-09-30T11:29:47.936Z,add,sidebar.vr.all_metrics,ZRV6zAYjUdLG013AWgvTVL,__
+2021-09-30T11:55:56.604Z,add,sidebar.shared.all_metrics,tdf6s1l0srCSpeM2l97WtS,__
+2021-09-30T11:55:56.605Z,delete,sidebar.gm.all_metrics,o2vap3Y8UfExR0mnMRCygp,__
+2021-09-30T11:55:56.618Z,delete,sidebar.nl.all_metrics,ZRV6zAYjUdLG013AWgvTFx,__
+2021-09-30T11:55:56.623Z,delete,sidebar.vr.all_metrics,ZRV6zAYjUdLG013AWgvTVL,__
