@@ -121,7 +121,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
             <WarningIconWrapper aria-label={siteText.aria_labels.warning} small>
-              <Warning viewBox="0 0 20 20" />
+              <Warning viewBox="0 0 25 25" />
             </WarningIconWrapper>
           )}
           <InlineText
@@ -173,7 +173,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                     <WarningIconWrapper
                       aria-label={siteText.aria_labels.warning}
                     >
-                      <Warning viewBox="0 0 20 20" />
+                      <Warning viewBox="0 0 25 25" />
                     </WarningIconWrapper>
                   </InlineTooltip>
                 )}
@@ -265,20 +265,18 @@ const StyledNarrowMenuListItem = styled.li(
 
 const WarningIconWrapper = styled.span<{ small?: boolean }>((x) =>
   css({
-    width: '1.5em',
-    height: '1.5em',
-    display: 'inline-flex',
+    display: 'inline-block',
     backgroundColor: 'warningYellow',
     borderRadius: 1,
     mr: x.small ? '4px' : '8px',
-    alignItems: 'center',
-    justifyItems: 'center',
+    width: '1.6em',
+    height: '1.6em',
+    padding: '2px',
 
     svg: {
       fill: 'black',
-      width: '1.1em',
-      height: '1.1em',
-      pb: '1px',
+      width: '100%',
+      height: 'auto',
     },
   })
 );
