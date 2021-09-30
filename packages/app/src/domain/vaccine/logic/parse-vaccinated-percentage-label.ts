@@ -3,6 +3,10 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 type ParsedFullyVaccinatedPercentageLabel = { sign: string; value: number };
 
+export function placeholderizeLabel(renderedLabel: string) {
+  return renderedLabel.toLocaleLowerCase();
+}
+
 export function getRenderedVaccinatedLabel(
   unparsedLabel: string | null,
   value: number | null,
@@ -11,9 +15,11 @@ export function getRenderedVaccinatedLabel(
   formatPercentage: (value: number) => string
 ) {
   if (!isPresent(unparsedLabel)) {
-    return value;
+    return value?.toString() ?? '';
   }
+
   const parsedLabel = parseVaccinatedPercentageLabel(unparsedLabel);
+
   return renderVaccinatedLabel(
     parsedLabel,
     higherLabel,
@@ -48,10 +54,10 @@ export function renderVaccinatedLabel(
   return isPresent(parsedVaccinatedLabel)
     ? parsedVaccinatedLabel.sign === '>'
       ? replaceVariablesInText(higherLabel, {
-          value: `${formatPercentage(parsedVaccinatedLabel.value)}%`,
+          value: formatPercentage(parsedVaccinatedLabel.value),
         })
       : replaceVariablesInText(lowerLabel, {
-          value: `${formatPercentage(parsedVaccinatedLabel.value)}%`,
+          value: formatPercentage(parsedVaccinatedLabel.value),
         })
-    : null;
+    : '';
 }

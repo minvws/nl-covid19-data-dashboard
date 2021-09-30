@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { isPresent } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,

@@ -3,36 +3,16 @@
     "value": {
       "title": "nl_sewer_value",
       "type": "object",
-      "required": [
-        "average",
-        "date_of_insertion_unix",
-        "total_number_of_samples",
-        "sampled_installation_count",
-        "total_installation_count",
-        "date_start_unix",
-        "date_end_unix"
-      ],
+      "required": ["average", "date_of_insertion_unix", "date_unix"],
       "additionalProperties": false,
       "properties": {
         "average": {
-          "type": "number"
-        },
-        "total_number_of_samples": {
-          "type": "integer"
-        },
-        "sampled_installation_count": {
-          "type": "integer"
-        },
-        "total_installation_count": {
-          "type": "integer"
+          "type": ["number", "null"]
         },
         "date_of_insertion_unix": {
           "type": "integer"
         },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
+        "date_unix": {
           "type": "integer"
         }
       }

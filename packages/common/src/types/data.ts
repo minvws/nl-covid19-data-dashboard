@@ -73,6 +73,7 @@ export interface GmHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -389,6 +390,7 @@ export interface NlIntensiveCareNice {
 export interface NlIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -458,13 +460,9 @@ export interface NlSewer {
   last_value: NlSewerValue;
 }
 export interface NlSewerValue {
-  average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
+  average: number | null;
   date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
 }
 export interface NlHospitalNice {
   values: NlHospitalNiceValue[];
@@ -473,6 +471,7 @@ export interface NlHospitalNice {
 export interface NlHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1026,12 +1025,8 @@ export interface VrSewer {
   last_value: VrSewerValue;
 }
 export interface VrSewerValue {
-  date_start_unix: number;
-  date_end_unix: number;
-  average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
+  date_unix: number;
+  average: number | null;
   date_of_insertion_unix: number;
 }
 export interface VrSewerPerInstallation {
@@ -1065,6 +1060,7 @@ export interface VrHospitalNice {
 export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1308,11 +1304,9 @@ export interface VrCollectionNursingHome {
   vrcode: string;
 }
 export interface VrCollectionSewer {
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   vrcode: string;
-  average: number;
-  total_installation_count: number;
+  average: number | null;
   date_of_insertion_unix: number;
 }
 export interface VrCollectionBehavior {
