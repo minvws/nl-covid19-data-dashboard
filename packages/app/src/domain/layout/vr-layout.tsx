@@ -8,7 +8,7 @@ import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { VrComboBox } from './components/vr-combo-box';
-import { useSidebar } from './logic/sidebar';
+import { useSidebar } from './logic/use-sidebar';
 
 type VrLayoutProps = {
   children?: React.ReactNode;

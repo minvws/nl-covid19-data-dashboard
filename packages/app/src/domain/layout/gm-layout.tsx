@@ -11,7 +11,7 @@ import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { GmComboBox } from './components/gm-combo-box';
-import { useSidebar } from './logic/sidebar';
+import { useSidebar } from './logic/use-sidebar';
 
 type GmLayoutProps = {
   children?: React.ReactNode;

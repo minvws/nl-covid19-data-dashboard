@@ -6,7 +6,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useSidebar } from './logic/sidebar';
+import { useSidebar } from './logic/use-sidebar';
 
 interface NlLayoutProps {
   children?: React.ReactNode;
