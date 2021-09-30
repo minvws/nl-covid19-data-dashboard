@@ -10,6 +10,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
 import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
@@ -75,6 +76,10 @@ export const getStaticProps = createGetStaticProps(
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
+    riskLevel: {
+      dateFrom: string;
+      level: EscalationLevelType;
+    };
     elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
@@ -326,7 +331,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </MiniTileLayout>
 
-            <EscalationLevelBanner level={2} date={1632554802} />
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
