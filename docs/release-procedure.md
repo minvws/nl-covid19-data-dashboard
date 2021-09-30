@@ -83,6 +83,14 @@ easy to follow.
 10. Hit the publish button in the Github release draft. This should tag the
     correct commit in `master`
 
+**NB:** After cherry picking, the situation might arise where the lokalize mutations file
+`(src/packages/cms/src/lokalize/key-mutations.csv)` contains key deletions that are
+still referenced in the code for the release branch.
+This will result in type checking errors because the lokalize export automatically
+filters out keys that are marked as deleted in the mutations file.
+Should these errors occur, simply remove the specified delete mutation lines from
+the `key-mutations.csv` file and commit this to the release branch.
+
 ## CMS Deploy
 
 Sometimes a release also contains new configurations for the CMS. These are

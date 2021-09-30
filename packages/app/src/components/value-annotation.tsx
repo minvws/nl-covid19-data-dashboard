@@ -6,7 +6,7 @@ import { Text } from '~/components/typography';
  */
 export function ValueAnnotation({ children }: { children: ReactNode }) {
   return (
-    <Text as="div" color="annotation" variant="label2">
+    <Text as="div" color="annotation" variant="label2" aria-hidden={true}>
       {children}
     </Text>
   );

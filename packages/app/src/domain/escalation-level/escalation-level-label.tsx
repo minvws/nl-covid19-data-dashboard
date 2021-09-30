@@ -10,14 +10,14 @@ import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 interface EscalationLevelLabelProps {
   level: EscalationLevelType;
-  date?: number;
+  dateFrom?: string;
 }
 
 export function EscalationLevelLabel({
   level,
-  date,
+  dateFrom,
 }: EscalationLevelLabelProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDate } = useIntl();
   const escalationLevel = useEscalationLevel(level);
 
   return (
@@ -47,13 +47,13 @@ export function EscalationLevelLabel({
         </InlineText>
       </Box>
 
-      {date && (
+      {dateFrom && (
         <Box pt="2px" pl={{ _: 0, sm: 2 }}>
           <InlineText variant="body2">
             {replaceVariablesInText(
               siteText.national_escalation_levels.valid_from,
               {
-                date: formatDateFromSeconds(date, 'weekday-medium'),
+                date: formatDate(new Date(dateFrom)),
               }
             )}
           </InlineText>
