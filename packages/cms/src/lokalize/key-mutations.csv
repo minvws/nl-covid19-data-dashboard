@@ -37,14 +37,6 @@ timestamp,action,key,document_id,move_to
 2021-09-21T10:44:26.604Z,add,veiligheidsregio_actueel.mini_trend_tiles.vaccinatiegraad.title,4Hn4MB4VRci1fnngMjxc1E,__
 2021-09-21T10:44:27.629Z,add,veiligheidsregio_actueel.mini_trend_tiles.vaccinatiegraad.text,Ierr3hadoEWr1dYNomvGJ7,__
 2021-09-21T10:44:28.631Z,add,ziekenhuisopnames_per_dag.linechart_legend_titel_trend_label,Q0Ac8gjemD8winez2X79JE,__
-2021-09-21T10:44:28.632Z,delete,accessibility.charts.topical_tested_overall.description,Z3v1SKYekK4CLDpzUPcFb3,__
-2021-09-21T10:44:28.632Z,delete,accessibility.charts.topical_tested_overall.label,G1DXw0RdifOml06twMk6eI,__
-2021-09-21T10:44:28.633Z,delete,gemeente_actueel.mini_trend_tiles.positief_getest.title,jF33EuwumlGuwav2FD4EmS,__
-2021-09-21T10:44:28.633Z,delete,nationaal_actueel.data_driven_texts.infected_people_total.value.plural,jF33EuwumlGuwav2FD4ChI,__
-2021-09-21T10:44:28.633Z,delete,nationaal_actueel.data_driven_texts.infected_people_total.value.singular,jF33EuwumlGuwav2FD4Cfc,__
-2021-09-21T10:44:28.634Z,delete,nationaal_actueel.data_driven_texts.infected_people_total.value.zero,jF33EuwumlGuwav2FD4Cdw,__
-2021-09-21T10:44:28.634Z,delete,nationaal_actueel.mini_trend_tiles.positief_getest.title,jF33EuwumlGuwav2FD4CSC,__
-2021-09-21T10:44:28.634Z,delete,veiligheidsregio_actueel.mini_trend_tiles.positief_getest.title,jF33EuwumlGuwav2FD4DmO,__
 2021-09-22T09:27:36.907Z,add,common_actueel.secties.kpi.zeven_daags_gemiddelde_nieuw,PGwiP4IwXrA0GfLCLDBX5v,__
 2021-09-22T09:27:38.084Z,add,nationaal_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.plural,7nClfXqPlyZyEU7PO2dBcq,__
 2021-09-22T09:27:39.103Z,add,nationaal_actueel.data_driven_texts.intake_hospital_ma_nieuw.value.singular,7nClfXqPlyZyEU7PO2dCLg,__
@@ -54,7 +46,6 @@ timestamp,action,key,document_id,move_to
 2021-09-24T12:52:28.449Z,add,nationaal_layout.headings.sidebar,qNGd4zPbpj47IuPd7g6nkF,__
 2021-09-24T12:52:29.464Z,add,nav.menu.title,7nClfXqPlyZyEU7POLaIt6,__
 2021-09-24T12:52:30.510Z,add,veiligheidsregio_layout.headings.sidebar,7nClfXqPlyZyEU7POLaJK0,__
-2021-09-24T12:52:30.519Z,delete,aria_labels.metriek_navigatie,jF33EuwumlGuwav2FD3ub6,__
 2021-09-22T15:25:23.286Z,add,common_actueel.secties.kpi.ic_admissions.plural,7nClfXqPlyZyEU7PO5ed1W,__
 2021-09-22T15:25:24.284Z,add,common_actueel.secties.kpi.ic_admissions.singular,7nClfXqPlyZyEU7PO5edxo,__
 2021-09-22T15:25:25.305Z,add,common_actueel.secties.kpi.ic_admissions.zero,PGwiP4IwXrA0GfLCLDoerB,__
