@@ -16,6 +16,7 @@ export type VrItemKeys =
   | 'disabled_care'
   | 'elderly_at_home'
   | 'hospital_admissions'
+  | 'measures'
   | 'mortality'
   | 'nursing_home_care'
   | 'positive_tests'
@@ -91,6 +92,7 @@ export type SidebarElement<T extends 'nl' | 'vr' | 'gm'> = [
 export type SidebarCategory<T extends 'nl' | 'vr' | 'gm'> = {
   key: CategoryKeys<T>;
   title: string;
+  description?: string;
   items: SidebarItem<T>[];
 };
 

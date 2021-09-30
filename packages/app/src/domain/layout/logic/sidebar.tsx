@@ -27,7 +27,7 @@ import {
   SidebarElement,
   SidebarItem,
   SidebarMap,
-} from '../types';
+} from './types';
 
 const mapKeysToIcons = {
   hospital_admissions: <Ziekenhuis />,
@@ -118,12 +118,15 @@ export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
     const getCategory = (category: SidebarElement<T>): SidebarCategory<T> => {
       const [key, items] = category;
 
+      const content =
+        siteText.sidebar[layout][
+          key as keyof SiteText['sidebar']['nl' | 'vr' | 'gm']
+        ];
+
       return {
         key,
-        title:
-          siteText.sidebar[layout][
-            key as keyof SiteText['sidebar']['nl' | 'vr' | 'gm']
-          ].title,
+        title: content.title,
+        description: 'description' in content ? content.description : undefined,
         items: items.map(getItem),
       };
     };

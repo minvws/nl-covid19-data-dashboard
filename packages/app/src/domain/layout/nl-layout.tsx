@@ -9,6 +9,7 @@ import {
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
+import { Heading, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -42,6 +43,11 @@ export function NlLayout(props: NlLayoutProps) {
 
   const { siteText } = useIntl();
 
+  const topItems = useSidebar({
+    layout: 'nl',
+    map: ['measures'],
+  });
+
   const items = useSidebar({
     layout: 'nl',
     map: [
@@ -63,6 +69,12 @@ export function NlLayout(props: NlLayoutProps) {
       ],
       ['early_indicators', ['sewage_measurement']],
       ['other', ['coronamelder_app']],
+    ],
+  });
+
+  const archivedItems = useSidebar({
+    layout: 'nl',
+    map: [
       [
         'archived_metrics',
         ['infectious_people', 'general_practitioner_suspicions'],
@@ -104,30 +116,83 @@ export function NlLayout(props: NlLayoutProps) {
               {siteText.nationaal_layout.headings.sidebar}
             </VisuallyHidden>
 
-            <Menu spacing={4}>
-              <MetricMenuButtonLink
-                title={siteText.nationaal_maatregelen.titel_sidebar}
-                subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-                href={reverseRouter.nl.maatregelen()}
-              />
+            <Box px={3} pb={2}>
+              <Heading level={2} variant={'h3'}>
+                {siteText.sidebar.nl.title}
+              </Heading>
+            </Box>
 
-              {items.map((x) =>
-                'items' in x ? (
-                  <CategoryMenu {...x}>
-                    {x.items.map((y) => (
-                      <MetricMenuItemLink
-                        key={y.key}
-                        title={y.title}
-                        href={y.href}
-                        icon={y.icon}
-                      />
-                    ))}
-                  </CategoryMenu>
-                ) : (
-                  <MetricMenuItemLink {...x} />
-                )
-              )}
-            </Menu>
+            <Box mb={4}>
+              <Menu>
+                {topItems.map((x) =>
+                  'items' in x ? (
+                    <CategoryMenu {...x}>
+                      {x.items.map((y) => (
+                        <MetricMenuItemLink
+                          key={y.key}
+                          title={y.title}
+                          href={y.href}
+                          icon={y.icon}
+                        />
+                      ))}
+                    </CategoryMenu>
+                  ) : (
+                    <MetricMenuItemLink {...x} />
+                  )
+                )}
+              </Menu>
+            </Box>
+
+            <Box px={3}>
+              <Heading level={3}>Alle cijfers</Heading>
+            </Box>
+
+            <Box spacing={3}>
+              <Menu spacing={3}>
+                {items.map((x) =>
+                  'items' in x ? (
+                    <CategoryMenu {...x}>
+                      {x.items.map((y) => (
+                        <MetricMenuItemLink
+                          key={y.key}
+                          title={y.title}
+                          href={y.href}
+                          icon={y.icon}
+                        />
+                      ))}
+                    </CategoryMenu>
+                  ) : (
+                    <MetricMenuItemLink {...x} />
+                  )
+                )}
+              </Menu>
+
+              <Box
+                borderTopColor="border"
+                borderTopStyle="solid"
+                borderTopWidth={1}
+                pt={2}
+              >
+                <Menu>
+                  {archivedItems.map((x) =>
+                    'items' in x ? (
+                      <CategoryMenu {...x}>
+                        {x.items.map((y) => (
+                          <MetricMenuItemLink
+                            key={y.key}
+                            title={y.title}
+                            href={y.href}
+                            icon={y.icon}
+                          />
+                        ))}
+                      </CategoryMenu>
+                    ) : (
+                      <MetricMenuItemLink {...x} />
+                    )
+                  )}
+                </Menu>
+              </Box>
+            </Box>
           </Box>
         }
       >
