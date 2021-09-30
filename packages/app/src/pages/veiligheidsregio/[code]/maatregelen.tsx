@@ -82,16 +82,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
 
-  /**
-   * We will need this again when lockdown is disabled
-   */
-  // const escalationLevel = useEscalationLevel(data.restrictions.values);
-
-  // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-  // Data is determined by the actual escalation level which can be 1, 2, 3, 4, 401, 402, 41
-  // const effectiveEscalationLevel: EscalationLevel =
-  //   escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
-
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {

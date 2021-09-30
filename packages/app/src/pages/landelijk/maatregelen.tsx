@@ -68,13 +68,6 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   const { showLockdown } = lockdown;
 
-  // const escalationLevelData = useEscalationLevel(data.restrictions.values);
-
-  /**
-   * Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-   */
-  // const effectiveEscalationLevel: EscalationLevel = escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
-
   const metadata = {
     ...siteText.nationaal_metadata,
   };
