@@ -17,6 +17,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -81,6 +82,10 @@ export const getStaticProps = createGetStaticProps(
     articles: ContentTeaserProps[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights: ContentTeaserProps[];
+    riskLevel: {
+      dateFrom: string;
+      level: EscalationLevelType;
+    };
     elements: ElementsQueryResult;
   }>(
     getTopicalPageQuery('nl', [
@@ -415,7 +420,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            <EscalationLevelBanner level={2} date={1632554802} />
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
 
             <Box py={4}>
               <Search title={siteText.common_actueel.secties.search.title.nl} />
