@@ -77,9 +77,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={
-              siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
-            }
+            screenReaderCategory={siteText.sidebar.metrics.disabled_care.title}
             title={positiveTestedPeopleText.titel}
             icon={<GehandicaptenZorg />}
             description={positiveTestedPeopleText.pagina_toelichting}

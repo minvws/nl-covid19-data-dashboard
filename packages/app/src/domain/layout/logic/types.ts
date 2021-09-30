@@ -1,3 +1,5 @@
+export type Layout = 'in' | 'nl' | 'vr' | 'gm';
+
 export type GmItemKeys =
   | 'hospital_admissions'
   | 'mortality'
@@ -61,13 +63,21 @@ export type NlCategoryKeys =
   | 'vaccinations'
   | 'vulnerable_groups';
 
-export type CategoryKeys<T extends 'nl' | 'vr' | 'gm'> = T extends 'nl'
+export type InItemKeys = 'positive_tests' | 'variants';
+
+export type InCategoryKeys = 'international_metrics';
+
+export type CategoryKeys<T extends Layout> = T extends 'in'
+  ? InCategoryKeys
+  : T extends 'nl'
   ? NlCategoryKeys
   : T extends 'vr'
   ? VrCategoryKeys
   : GmCategoryKeys;
 
-export type ItemKeys<T extends 'nl' | 'vr' | 'gm'> = T extends 'nl'
+export type ItemKeys<T extends Layout> = T extends 'in'
+  ? InItemKeys
+  : T extends 'nl'
   ? NlItemKeys
   : T extends 'vr'
   ? VrItemKeys
@@ -76,12 +86,9 @@ export type ItemKeys<T extends 'nl' | 'vr' | 'gm'> = T extends 'nl'
 /**
  * The following types are consumed by the useSidebar hook.
  */
-export type SidebarMap<T extends 'nl' | 'vr' | 'gm'> = (
-  | SidebarElement<T>
-  | ItemKeys<T>
-)[];
+export type SidebarMap<T extends Layout> = (SidebarElement<T> | ItemKeys<T>)[];
 
-export type SidebarElement<T extends 'nl' | 'vr' | 'gm'> = [
+export type SidebarElement<T extends Layout> = [
   category: CategoryKeys<T>,
   items: ItemKeys<T>[]
 ];
@@ -89,21 +96,21 @@ export type SidebarElement<T extends 'nl' | 'vr' | 'gm'> = [
 /**
  * The following types are returned by the useSidebar hook.
  */
-export type SidebarCategory<T extends 'nl' | 'vr' | 'gm'> = {
+export type SidebarCategory<T extends Layout> = {
   key: CategoryKeys<T>;
   title: string;
   description?: string;
   items: SidebarItem<T>[];
 };
 
-export type SidebarItem<T extends 'nl' | 'vr' | 'gm'> = {
+export type SidebarItem<T extends Layout> = {
   key: ItemKeys<T>;
   title: string;
   icon: React.ReactElement;
   href: string | undefined;
 };
 
-export type ExpandedSidebarMap<T extends 'nl' | 'vr' | 'gm'> = (
+export type ExpandedSidebarMap<T extends Layout> = (
   | SidebarCategory<T>
   | SidebarItem<T>
 )[];

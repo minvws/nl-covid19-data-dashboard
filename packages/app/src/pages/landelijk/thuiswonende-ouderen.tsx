@@ -81,7 +81,9 @@ const ElderlyAtHomeNationalPage = (
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.elderly_at_home.title
+            }
             title={text.section_positive_tested.title}
             icon={<Elderly />}
             description={text.section_positive_tested.description}

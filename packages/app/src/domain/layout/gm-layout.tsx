@@ -132,7 +132,7 @@ export function GmLayout(props: GmLayoutProps) {
 
                 <Box px={3}>
                   <Heading level={3}>
-                    {siteText.sidebar.shared.all_metrics}
+                    {siteText.sidebar.shared.metrics_title}
                   </Heading>
                 </Box>
 

@@ -54,7 +54,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
             screenReaderCategory={
-              siteText.verdenkingen_huisartsen.titel_sidebar
+              siteText.sidebar.metrics.general_practitioner_suspicions.title
             }
             title={text.titel}
             icon={<Arts />}

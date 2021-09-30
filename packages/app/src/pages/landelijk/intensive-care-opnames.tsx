@@ -86,7 +86,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
-            screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.intensive_care_admissions.title
+            }
             title={text.titel}
             icon={<Arts />}
             description={text.pagina_toelichting}
