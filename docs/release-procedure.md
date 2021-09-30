@@ -83,7 +83,7 @@ easy to follow.
 10. Hit the publish button in the Github release draft. This should tag the
     correct commit in `master`
 
-**NB:** While cherry picking the situation might arise where the lokalize mutations file
+**NB:** While cherry picking, the situation might arise where the lokalize mutations file
 `(src/packages/cms/src/lokalize/key-mutations.csv)` contains key deletions that are
 still referenced in the code for the release branch.
 This will result in type checking errors because the lokalize export automatically
