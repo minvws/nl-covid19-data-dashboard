@@ -81,7 +81,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={
-              siteText.verpleeghuis_besmette_locaties.titel_sidebar
+              siteText.sidebar.metrics.nursing_home_care.title
             }
             title={positiveTestedPeopleText.titel}
             icon={<Verpleeghuiszorg />}

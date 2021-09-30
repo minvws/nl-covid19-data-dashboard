@@ -75,7 +75,7 @@ export default function BrononderzoekPage(
           <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              intl.siteText.positief_geteste_personen.titel_sidebar
+              intl.siteText.sidebar.metrics.source_investigation.title
             }
             title={replaceVariablesInText(
               intl.siteText.common.subject_in_location,

@@ -86,7 +86,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={
-              siteText.verpleeghuis_besmette_locaties.titel_sidebar
+              siteText.sidebar.metrics.nursing_home_care.title
             }
             title={replaceVariablesInText(positiveTestedPeopleText.titel, {
               safetyRegion: vrName,

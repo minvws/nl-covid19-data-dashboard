@@ -53,7 +53,9 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.besmettelijke_personen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.infectious_people.title
+            }
             title={text.title}
             icon={<Ziektegolf />}
             description={text.toelichting_pagina}

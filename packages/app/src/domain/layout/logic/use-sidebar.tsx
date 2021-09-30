@@ -18,11 +18,11 @@ import {
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 import { ReverseRouter, useReverseRouter } from '~/utils/use-reverse-router';
 import {
   ExpandedSidebarMap,
   ItemKeys,
+  Layout,
   SidebarCategory,
   SidebarElement,
   SidebarItem,
@@ -69,7 +69,7 @@ const mapKeysToReverseRouter = {
   reproduction_number: 'reproductiegetal',
 } as const;
 
-type UseSidebarArgs<T extends 'nl' | 'vr' | 'gm'> = {
+type UseSidebarArgs<T extends Layout> = {
   layout: T;
   map: SidebarMap<T>;
   code?: T extends 'nl' ? never : string;
@@ -80,9 +80,7 @@ type Content = {
   description?: string;
 };
 
-type K = keyof SiteText['sidebar']['nl' | 'vr' | 'gm'];
-
-export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
+export function useSidebar<T extends Layout>({
   layout,
   map,
   code,
@@ -92,8 +90,11 @@ export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
 
   return useMemo(() => {
     const getHref = (key: ItemKeys<T>) => {
-      const route =
-        mapKeysToReverseRouter[key as keyof typeof mapKeysToReverseRouter];
+      const route = mapKeysToReverseRouter[key];
+
+      if (layout === 'in') {
+        return reverseRouter.in[route as keyof ReverseRouter['in']]();
+      }
 
       if (layout === 'nl') {
         return reverseRouter.nl[route]();
@@ -109,11 +110,11 @@ export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
     };
 
     const getItem = (key: ItemKeys<T>): SidebarItem<T> => {
-      const icon = mapKeysToIcons[key as keyof typeof mapKeysToIcons];
+      const icon = mapKeysToIcons[key];
 
       return {
         key,
-        title: siteText.sidebar[layout][key as K].title,
+        title: siteText.sidebar.metrics[key].title,
         icon,
         href: getHref(key),
       };
@@ -121,13 +122,12 @@ export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
 
     const getCategory = (category: SidebarElement<T>): SidebarCategory<T> => {
       const [key, items] = category;
-
-      const content: Content = siteText.sidebar[layout][key as K];
+      const content: Content = siteText.sidebar.categories[key];
 
       return {
         key,
         title: content.title,
-        description: isPresent(content.description)
+        description: isPresent(content?.description)
           ? content.description
           : undefined,
         items: items.map(getItem),

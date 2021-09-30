@@ -53,7 +53,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.reproductiegetal.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.reproduction_number.title
+            }
             title={text.titel}
             icon={<Reproductiegetal />}
             description={text.pagina_toelichting}

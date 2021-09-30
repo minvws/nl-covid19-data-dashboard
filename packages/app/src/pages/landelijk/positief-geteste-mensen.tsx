@@ -110,9 +110,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={
-              siteText.positief_geteste_personen.titel_sidebar
-            }
+            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
             title={text.titel}
             icon={<Test />}
             description={text.pagina_toelichting}

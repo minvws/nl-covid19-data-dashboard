@@ -123,9 +123,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
-            screenReaderCategory={
-              siteText.positief_geteste_personen.titel_sidebar
-            }
+            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
             title={replaceVariablesInText(text.titel, {
               safetyRegion: vrName,
             })}

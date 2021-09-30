@@ -107,7 +107,7 @@ export function NlLayout(props: NlLayoutProps) {
 
             <Box px={3}>
               <Heading level={2} variant={'h3'}>
-                {siteText.sidebar.nl.title}
+                {siteText.sidebar.shared.nl_title}
               </Heading>
             </Box>
 
@@ -118,7 +118,9 @@ export function NlLayout(props: NlLayoutProps) {
             </Box>
 
             <Box px={3}>
-              <Heading level={3}>{siteText.sidebar.shared.all_metrics}</Heading>
+              <Heading level={3}>
+                {siteText.sidebar.shared.metrics_title}
+              </Heading>
             </Box>
 
             <Box pb={3}>

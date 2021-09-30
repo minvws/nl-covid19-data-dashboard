@@ -101,7 +101,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={
-              siteText.ziekenhuisopnames_per_dag.titel_sidebar
+              siteText.sidebar.metrics.hospital_admissions.title
             }
             title={text.titel}
             icon={<Ziekenhuis />}

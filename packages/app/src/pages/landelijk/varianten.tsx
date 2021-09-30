@@ -88,7 +88,7 @@ export default function CovidVariantenPage(
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={text.titel_sidebar}
+            screenReaderCategory={siteText.sidebar.metrics.variants.title}
             title={text.titel}
             icon={<Varianten />}
             description={text.pagina_toelichting}

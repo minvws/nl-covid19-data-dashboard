@@ -79,7 +79,9 @@ const ElderlyAtHomeRegionalPage = (
             category={
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
-            screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.elderly_at_home.title
+            }
             title={replaceVariablesInText(text.section_positive_tested.title, {
               safetyRegion: vrName,
             })}
