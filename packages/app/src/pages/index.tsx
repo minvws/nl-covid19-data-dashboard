@@ -7,7 +7,7 @@ import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
@@ -382,8 +382,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
-            <EscalationLevelBanner level={2} date={1632554802} />
-
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
               icon={<Chart />}
@@ -415,6 +413,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
+            <EscalationLevelBanner level={2} date={1632554802} />
+
             <Box py={4}>
               <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
@@ -442,6 +442,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             />
           </TileList>
         </MaxWidth>
+
+        <Spacer mb={5} />
 
         <Box width="100%" backgroundColor="page" pb={5}>
           <MaxWidth>
