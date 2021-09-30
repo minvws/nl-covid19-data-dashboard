@@ -1,10 +1,3 @@
-import {
-  Coronavirus,
-  RioolwaterMonitoring,
-  Test,
-  Vaccinaties,
-  Ziekenhuis,
-} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import {
@@ -18,11 +11,11 @@ import { AppContent } from '~/components/layout/app-content';
 import { Heading, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { GmComboBox } from './components/gm-combo-box';
+import { useSidebar } from './logic/sidebar';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
@@ -63,7 +56,6 @@ export function GmLayout(props: GmLayoutProps) {
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const vaccinationFeature = useFeature('gmVaccinationPage');
 
   const showMetricLinks = router.route !== '/gemeente';
 
@@ -71,6 +63,17 @@ export function GmLayout(props: GmLayoutProps) {
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
   const vr = getVrForMunicipalityCode(code);
+
+  const items = useSidebar({
+    layout: 'gm',
+    code: code,
+    map: [
+      ['vaccinations', ['vaccinations']],
+      ['hospitals', ['hospital_admissions']],
+      ['infections', ['positive_tests', 'mortality']],
+      ['early_indicators', ['sewage_measurement']],
+    ],
+  });
 
   return (
     <>
@@ -132,60 +135,22 @@ export function GmLayout(props: GmLayoutProps) {
                 </Box>
 
                 <Menu spacing={4}>
-                  {vaccinationFeature.isEnabled && (
-                    <CategoryMenu
-                      title={siteText.gemeente_layout.headings.vaccinaties}
-                    >
-                      <MetricMenuItemLink
-                        href={reverseRouter.gm.vaccinaties(code)}
-                        icon={<Vaccinaties />}
-                        title={siteText.gemeente_vaccinaties.titel_sidebar}
-                      />
-                    </CategoryMenu>
+                  {items.map((x) =>
+                    'items' in x ? (
+                      <CategoryMenu {...x}>
+                        {x.items.map((y) => (
+                          <MetricMenuItemLink
+                            key={y.key}
+                            title={y.title}
+                            href={y.href}
+                            icon={y.icon}
+                          />
+                        ))}
+                      </CategoryMenu>
+                    ) : (
+                      <MetricMenuItemLink {...x} />
+                    )
                   )}
-
-                  <CategoryMenu
-                    title={siteText.gemeente_layout.headings.ziekenhuizen}
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.gm.ziekenhuisopnames(code)}
-                      icon={<Ziekenhuis />}
-                      title={
-                        siteText.gemeente_ziekenhuisopnames_per_dag
-                          .titel_sidebar
-                      }
-                    />
-                  </CategoryMenu>
-                  <CategoryMenu
-                    title={siteText.gemeente_layout.headings.besmettingen}
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.gm.positiefGetesteMensen(code)}
-                      icon={<Test />}
-                      title={
-                        siteText.gemeente_positief_geteste_personen
-                          .titel_sidebar
-                      }
-                    />
-
-                    <MetricMenuItemLink
-                      href={reverseRouter.gm.sterfte(code)}
-                      icon={<Coronavirus />}
-                      title={siteText.veiligheidsregio_sterfte.titel_sidebar}
-                    />
-                  </CategoryMenu>
-
-                  <CategoryMenu
-                    title={siteText.gemeente_layout.headings.vroege_signalen}
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.gm.rioolwater(code)}
-                      icon={<RioolwaterMonitoring />}
-                      title={
-                        siteText.gemeente_rioolwater_metingen.titel_sidebar
-                      }
-                    />
-                  </CategoryMenu>
                 </Menu>
               </Box>
             )}

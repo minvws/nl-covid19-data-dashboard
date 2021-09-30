@@ -1,5 +1,3 @@
-import { useReverseRouter } from '~/utils/use-reverse-router';
-
 export type GmItemKeys =
   | 'hospital_admissions'
   | 'mortality'
@@ -41,6 +39,7 @@ export type NlItemKeys =
   | 'general_practitioner_suspicions'
   | 'hospital_admissions'
   | 'intensive_care_admissions'
+  | 'infectious_people'
   | 'measures'
   | 'mortality'
   | 'nursing_home_care'
@@ -61,22 +60,48 @@ export type NlCategoryKeys =
   | 'vaccinations'
   | 'vulnerable_groups';
 
-export type ReverseRouter = ReturnType<typeof useReverseRouter>;
+export type CategoryKeys<T extends 'nl' | 'vr' | 'gm'> = T extends 'nl'
+  ? NlCategoryKeys
+  : T extends 'vr'
+  ? VrCategoryKeys
+  : GmCategoryKeys;
 
-export type SidebarMap<C, I> = (SidebarElement<C, I> | I)[];
-export type SidebarElement<C, I> = [category: C, items: I[]];
+export type ItemKeys<T extends 'nl' | 'vr' | 'gm'> = T extends 'nl'
+  ? NlItemKeys
+  : T extends 'vr'
+  ? VrItemKeys
+  : GmItemKeys;
 
-export type SidebarCategory = {
+/**
+ * The following types are consumed by the useSidebar hook.
+ */
+export type SidebarMap<T extends 'nl' | 'vr' | 'gm'> = (
+  | SidebarElement<T>
+  | ItemKeys<T>
+)[];
+
+export type SidebarElement<T extends 'nl' | 'vr' | 'gm'> = [
+  category: CategoryKeys<T>,
+  items: ItemKeys<T>[]
+];
+
+/**
+ * The following types are returned by the useSidebar hook.
+ */
+export type SidebarCategory<T extends 'nl' | 'vr' | 'gm'> = {
+  key: CategoryKeys<T>;
   title: string;
-  items: SidebarItem[];
-  key: NlCategoryKeys | VrCategoryKeys | GmCategoryKeys;
+  items: SidebarItem<T>[];
 };
 
-export type SidebarItem = {
+export type SidebarItem<T extends 'nl' | 'vr' | 'gm'> = {
+  key: ItemKeys<T>;
   title: string;
   icon: React.ReactElement;
-  href: string;
-  key: NlItemKeys | VrItemKeys | GmItemKeys;
+  href: string | undefined;
 };
 
-export type ExpandedSidebarMap = (SidebarCategory | SidebarItem)[];
+export type ExpandedSidebarMap<T extends 'nl' | 'vr' | 'gm'> = (
+  | SidebarCategory<T>
+  | SidebarItem<T>
+)[];

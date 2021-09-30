@@ -1,14 +1,3 @@
-import {
-  Coronavirus,
-  Elderly,
-  Gedrag,
-  GehandicaptenZorg,
-  RioolwaterMonitoring,
-  Test,
-  Vaccinaties,
-  Verpleeghuiszorg,
-  Ziekenhuis,
-} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import {
@@ -23,9 +12,9 @@ import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { VrComboBox } from './components/vr-combo-box';
+import { useSidebar } from './logic/sidebar';
 
 type VrLayoutProps = {
   children?: React.ReactNode;
@@ -66,7 +55,6 @@ export function VrLayout(props: VrLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
-  const vaccinationFeature = useFeature('vrVaccinationPage');
 
   const code = router.query.code as string;
 
@@ -75,6 +63,22 @@ export function VrLayout(props: VrLayoutProps) {
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
+
+  const items = useSidebar({
+    layout: 'vr',
+    code: code,
+    map: [
+      ['vaccinations', ['vaccinations']],
+      ['hospitals', ['hospital_admissions']],
+      ['infections', ['positive_tests', 'mortality', 'source_investigation']],
+      ['behaviour', ['compliance']],
+      [
+        'vulnerable_groups',
+        ['nursing_home_care', 'disabled_care', 'elderly_at_home'],
+      ],
+      ['early_indicators', ['sewage_measurement']],
+    ],
+  });
 
   return (
     <>
@@ -144,120 +148,22 @@ export function VrLayout(props: VrLayoutProps) {
                     />
                   </Box>
 
-                  {vaccinationFeature.isEnabled && (
-                    <CategoryMenu
-                      title={
-                        siteText.veiligheidsregio_layout.headings.vaccinaties
-                      }
-                    >
-                      <MetricMenuItemLink
-                        href={reverseRouter.vr.vaccinaties(code)}
-                        icon={<Vaccinaties />}
-                        title={
-                          siteText.veiligheidsregio_vaccinaties.titel_sidebar
-                        }
-                      />
-                    </CategoryMenu>
+                  {items.map((x) =>
+                    'items' in x ? (
+                      <CategoryMenu {...x}>
+                        {x.items.map((y) => (
+                          <MetricMenuItemLink
+                            key={y.key}
+                            title={y.title}
+                            href={y.href}
+                            icon={y.icon}
+                          />
+                        ))}
+                      </CategoryMenu>
+                    ) : (
+                      <MetricMenuItemLink {...x} />
+                    )
                   )}
-
-                  <CategoryMenu
-                    title={
-                      siteText.veiligheidsregio_layout.headings.ziekenhuizen
-                    }
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.ziekenhuisopnames(code)}
-                      icon={<Ziekenhuis />}
-                      title={
-                        siteText.veiligheidsregio_ziekenhuisopnames_per_dag
-                          .titel_sidebar
-                      }
-                    />
-                  </CategoryMenu>
-
-                  <CategoryMenu
-                    title={
-                      siteText.veiligheidsregio_layout.headings.besmettingen
-                    }
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.positiefGetesteMensen(code)}
-                      icon={<Test />}
-                      title={
-                        siteText.veiligheidsregio_positief_geteste_personen
-                          .titel_sidebar
-                      }
-                    />
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.sterfte(code)}
-                      icon={<Coronavirus />}
-                      title={siteText.veiligheidsregio_sterfte.titel_sidebar}
-                    />
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.brononderzoek(code)}
-                      icon={<Gedrag />}
-                      title={siteText.brononderzoek.titel_sidebar}
-                    />
-                  </CategoryMenu>
-
-                  <CategoryMenu
-                    title={siteText.veiligheidsregio_layout.headings.gedrag}
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.gedrag(code)}
-                      icon={<Gedrag />}
-                      title={siteText.regionaal_gedrag.sidebar.titel}
-                    />
-                  </CategoryMenu>
-
-                  <CategoryMenu
-                    title={
-                      siteText.veiligheidsregio_layout.headings
-                        .kwetsbare_groepen
-                    }
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.verpleeghuiszorg(code)}
-                      icon={<Verpleeghuiszorg />}
-                      title={
-                        siteText.veiligheidsregio_verpleeghuis_besmette_locaties
-                          .titel_sidebar
-                      }
-                    />
-
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.gehandicaptenzorg(code)}
-                      icon={<GehandicaptenZorg />}
-                      title={
-                        siteText.gehandicaptenzorg_besmette_locaties
-                          .titel_sidebar
-                      }
-                    />
-
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.thuiswonendeOuderen(code)}
-                      icon={<Elderly />}
-                      title={
-                        siteText.veiligheidsregio_thuiswonende_ouderen
-                          .titel_sidebar
-                      }
-                    />
-                  </CategoryMenu>
-
-                  <CategoryMenu
-                    title={
-                      siteText.veiligheidsregio_layout.headings.vroege_signalen
-                    }
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.rioolwater(code)}
-                      icon={<RioolwaterMonitoring />}
-                      title={
-                        siteText.veiligheidsregio_rioolwater_metingen
-                          .titel_sidebar
-                      }
-                    />
-                  </CategoryMenu>
                 </Menu>
               </Box>
             )}

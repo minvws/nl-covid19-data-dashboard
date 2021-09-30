@@ -1,43 +1,35 @@
 import {
-  Coronavirus,
-  Ziekenhuis,
-  Test,
-  RioolwaterMonitoring,
-  Gedrag,
-  Verpleeghuiszorg,
-  GehandicaptenZorg,
-  Elderly,
-  Ziektegolf,
-  Maatregelen,
-  Reproductiegetal,
   Arts,
+  Coronavirus,
+  Elderly,
+  Gedrag,
+  GehandicaptenZorg,
+  Maatregelen,
   Phone,
-  Varianten,
+  Reproductiegetal,
+  RioolwaterMonitoring,
+  Test,
   Vaccinaties,
+  Varianten,
+  Verpleeghuiszorg,
+  Ziekenhuis,
+  Ziektegolf,
 } from '@corona-dashboard/icons';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useMemo } from 'react';
+import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
+import { ReverseRouter, useReverseRouter } from '~/utils/use-reverse-router';
 import {
   ExpandedSidebarMap,
-  GmCategoryKeys,
-  GmItemKeys,
-  NlCategoryKeys,
-  NlItemKeys,
-  ReverseRouter,
+  ItemKeys,
   SidebarCategory,
   SidebarElement,
   SidebarItem,
   SidebarMap,
-  VrCategoryKeys,
-  VrItemKeys,
 } from '../types';
-import { assert } from 'console';
 
-const mapKeysToIcons: Record<
-  NlItemKeys | VrItemKeys | GmItemKeys,
-  React.ReactElement
-> = {
+const mapKeysToIcons = {
   hospital_admissions: <Ziekenhuis />,
   positive_tests: <Test />,
   mortality: <Coronavirus />,
@@ -47,7 +39,7 @@ const mapKeysToIcons: Record<
   compliance: <Gedrag />,
   disabled_care: <GehandicaptenZorg />,
   elderly_at_home: <Elderly />,
-  infected_people: <Ziektegolf />,
+  infectious_people: <Ziektegolf />,
   measures: <Maatregelen />,
   reproduction_number: <Reproductiegetal />,
   general_practitioner_suspicions: <Arts />,
@@ -55,21 +47,16 @@ const mapKeysToIcons: Record<
   variants: <Varianten />,
   intensive_care_admissions: <Arts />,
   vaccinations: <Vaccinaties />,
-};
+} as const;
 
-const mapKeysToReverseRouter: Record<
-  NlItemKeys | VrItemKeys | GmItemKeys,
-  | keyof ReverseRouter['nl']
-  | keyof ReverseRouter['vr']
-  | keyof ReverseRouter['gm']
-> = {
+const mapKeysToReverseRouter = {
   compliance: 'gedrag',
   coronamelder_app: 'coronamelder',
   disabled_care: 'gehandicaptenzorg',
   elderly_at_home: 'thuiswonendeOuderen',
   general_practitioner_suspicions: 'verdenkingenHuisartsen',
   hospital_admissions: 'ziekenhuisopnames',
-  infected_people: 'besmettelijkeMensen',
+  infectious_people: 'besmettelijkeMensen',
   intensive_care_admissions: 'intensiveCareOpnames',
   measures: 'maatregelen',
   mortality: 'sterfte',
@@ -82,76 +69,68 @@ const mapKeysToReverseRouter: Record<
   reproduction_number: 'reproductiegetal',
 } as const;
 
-type UseSidebarArgs =
-  | {
-      layout: 'nl';
-      map: SidebarMap<NlCategoryKeys, NlItemKeys>;
-      code?: never;
-    }
-  | {
-      layout: 'vr';
-      map: SidebarMap<VrCategoryKeys, VrItemKeys>;
-      code: string;
-    }
-  | {
-      layout: 'gm';
-      map: SidebarMap<GmCategoryKeys, GmItemKeys>;
-      code: string;
-    };
+type UseSidebarArgs<T extends 'nl' | 'vr' | 'gm'> = {
+  layout: T;
+  map: SidebarMap<T>;
+  code?: T extends 'nl' ? never : string;
+};
 
-export function useSidebar<
-  C extends NlCategoryKeys | VrCategoryKeys | GmCategoryKeys,
-  I extends NlItemKeys | VrItemKeys | GmItemKeys
->({ layout, map, code }: UseSidebarArgs): ExpandedSidebarMap {
+export function useSidebar<T extends 'nl' | 'vr' | 'gm'>({
+  layout,
+  map,
+  code,
+}: UseSidebarArgs<T>): ExpandedSidebarMap<T> {
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
-  assert(
-    layout && (layout === 'nl' || layout === 'vr' || layout === 'gm'),
-    'layout is required and must be nl, vr or gm'
-  );
-  assert(Array.isArray(map), 'map is required');
-  assert(
-    (layout === 'gm' || layout === 'vr') && code,
-    'code is required for vr and gm'
-  );
+  return useMemo(() => {
+    const getHref = (key: ItemKeys<T>) => {
+      const route =
+        mapKeysToReverseRouter[key as keyof typeof mapKeysToReverseRouter];
 
-  function getHref<K extends NlItemKeys | VrItemKeys | GmItemKeys>(key: K) {
-    switch (layout) {
-      case 'nl':
-        return reverseRouter.nl[mapKeysToReverseRouter[key]];
-      case 'vr':
-        return reverseRouter.vr[mapKeysToReverseRouter[key]](code);
-      case 'gm':
-        return reverseRouter.gm[mapKeysToReverseRouter[key]](code);
-      default:
-        return '';
-    }
-  }
+      if (layout === 'nl') {
+        return reverseRouter.nl[route]();
+      }
 
-  function getItem(key: NlItemKeys | VrItemKeys | GmItemKeys): SidebarItem {
-    const icon = mapKeysToIcons[key];
+      if (layout === 'vr' && isPresent(code)) {
+        return reverseRouter.vr[route as keyof ReverseRouter['vr']](code);
+      }
 
-    return {
-      key,
-      title: siteText.sidebar[layout][key].title,
-      icon,
-      href: getHref(key),
+      if (layout === 'gm' && isPresent(code)) {
+        return reverseRouter.gm[route as keyof ReverseRouter['gm']](code);
+      }
     };
-  }
 
-  function getCategory(category: SidebarElement<C, I>): SidebarCategory {
-    const [key, items] = category;
+    const getItem = (key: ItemKeys<T>): SidebarItem<T> => {
+      const icon = mapKeysToIcons[key as keyof typeof mapKeysToIcons];
 
-    return {
-      key,
-      title: siteText.sidebar[layout][key].title,
-      items: items.map(getItem),
+      return {
+        key,
+        title:
+          siteText.sidebar[layout][
+            key as keyof SiteText['sidebar']['nl' | 'vr' | 'gm']
+          ].title,
+        icon,
+        href: getHref(key),
+      };
     };
-  }
 
-  const expandMap = (map: SidebarMap) =>
-    map.map((x) => (typeof x === 'string' ? getItem(x) : getCategory(x)));
+    const getCategory = (category: SidebarElement<T>): SidebarCategory<T> => {
+      const [key, items] = category;
 
-  return useMemo(() => expandMap(map), [layout]);
+      return {
+        key,
+        title:
+          siteText.sidebar[layout][
+            key as keyof SiteText['sidebar']['nl' | 'vr' | 'gm']
+          ].title,
+        items: items.map(getItem),
+      };
+    };
+
+    const expandMap = (map: SidebarMap<T>) =>
+      map.map((x) => (typeof x === 'string' ? getItem(x) : getCategory(x)));
+
+    return expandMap(map);
+  }, [code, layout, map, reverseRouter, siteText.sidebar]);
 }
