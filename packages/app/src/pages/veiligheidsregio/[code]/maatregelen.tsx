@@ -7,6 +7,7 @@ import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
@@ -28,6 +29,9 @@ export { getStaticPaths } from '~/static-paths/vr';
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
+  riskLevel: {
+    level: EscalationLevelType;
+  };
 };
 
 export const getStaticProps = createGetStaticProps(
@@ -53,6 +57,9 @@ export const getStaticProps = createGetStaticProps(
             ]
           },
         }
+      }[0],
+      'riskLevel': *[_type == 'riskLevelNational']{
+		    "level": riskLevel,
       }[0],
       // We will need the roadmap when lockdown is disabled in the CMS.
       // 'roadmap': *[_type == 'roadmap'][0]
@@ -128,7 +135,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           {showLockdown && (
             <KpiSection display="flex" flexDirection="column">
               <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} />
+              <LockdownTable data={lockdown} level={content.riskLevel.level} />
             </KpiSection>
           )}
 

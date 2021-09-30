@@ -3,29 +3,26 @@ import { Fragment } from 'react';
 import { Box } from '~/components/base';
 import { Cell, Row, Table, TableBody } from '~/components/table';
 import { InlineText } from '~/components/typography';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { LockdownData } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { restrictionIcons } from './restriction-icons';
 
 type LockdownTableProps = {
   data: LockdownData;
+  level: EscalationLevelType;
 };
 
 export function LockdownTable(props: LockdownTableProps) {
-  const { data } = props;
+  const { data, level } = props;
 
   const breakpoints = useBreakpoints(true);
 
-  //@TODO This should come from data or the CMS.
-  const escalationLevel = 4;
-
   if (breakpoints.lg) {
-    return (
-      <DesktopLockdownTable data={data} escalationLevel={escalationLevel} />
-    );
+    return <DesktopLockdownTable data={data} escalationLevel={level} />;
   }
 
-  return <MobileLockdownTable data={data} escalationLevel={escalationLevel} />;
+  return <MobileLockdownTable data={data} escalationLevel={level} />;
 }
 
 /**
@@ -33,7 +30,7 @@ export function LockdownTable(props: LockdownTableProps) {
  * We can't use fill or currentColor because we're loading the SVG's as images to save on bundle size
  * The colors are pre-calculated though this URL: https://codepen.io/sosuke/pen/Pjoqqp
  */
-function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
+function getEscalationFilter(escalationLevel: EscalationLevelType) {
   switch (escalationLevel) {
     // #F291BC
     case 1:
@@ -44,9 +41,6 @@ function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
     // #A11050
     case 3:
       return 'invert(15%) sepia(48%) saturate(4967%) hue-rotate(317deg) brightness(92%) contrast(101%)';
-    // #68032F
-    case 4:
-      return 'invert(9%) sepia(48%) saturate(6614%) hue-rotate(322deg) brightness(85%) contrast(103%)';
     default:
       return;
   }
@@ -54,7 +48,7 @@ function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
 
 type LockdownTableData = {
   data: LockdownData;
-  escalationLevel: 1 | 2 | 3 | 4;
+  escalationLevel: EscalationLevelType;
 };
 
 function MobileLockdownTable(props: LockdownTableData) {
