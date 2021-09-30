@@ -132,20 +132,42 @@ export function createGetStaticProps(
   ...fns: ((...args: unknown[]) => Record<string, unknown>)[]
 ): unknown {
   return async (context: GetStaticPropsContext) => {
-    const promisedProps = await Promise.all(
-      fns.length > 0 ? fns.map((fn) => Promise.resolve(fn(context))) : []
-    );
+    try {
+      const promisedProps = await Promise.all(
+        fns.length > 0 ? fns.map((fn) => Promise.resolve(fn(context))) : []
+      );
 
-    const props = promisedProps.reduce((res, val) => ({ ...res, ...val }), {});
+      const props = promisedProps.reduce(
+        (res, val) => ({ ...res, ...val }),
+        {}
+      );
 
-    return {
-      props,
-      /**
-       * @TODO revalidation should be disabled for now.
-       * revalidate: 1,
-       */
-    };
+      return {
+        props,
+        /**
+         * @TODO revalidation should be disabled for now.
+         * revalidate: 1,
+         */
+      };
+    } catch (e) {
+      // There's no accessible SystemError class so we cannot do `instanceof
+      // SystemError`, so this is a way to keep TS happy
+      if (e instanceof Error) {
+        const systemError = e as SystemError;
+        if (systemError.code && systemError.code === 'ENOENT') {
+          return {
+            notFound: true,
+          };
+        }
+      }
+
+      throw e;
+    }
   };
+}
+
+interface SystemError extends Error {
+  code: string;
 }
 
 // Type the results of createGetStaticProps
