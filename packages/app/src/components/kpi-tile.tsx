@@ -1,6 +1,6 @@
 import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
-import { Box, Spacer } from './base';
+import { Box } from './base';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
 interface KpiTileProps {
@@ -32,9 +32,6 @@ export function KpiTile({
           </Box>
         )}
       </Box>
-
-      {/* Using a spacer to push the footer down */}
-      <Spacer m="auto" />
 
       {metadata && <Metadata {...metadata} isTileFooter />}
     </Tile>

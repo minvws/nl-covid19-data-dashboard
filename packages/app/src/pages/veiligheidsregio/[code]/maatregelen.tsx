@@ -134,7 +134,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
           <AnchorTile
             external
-            shadow
             title={text.titel_aanvullendemaatregelen}
             href={regioUrl}
             label={replaceVariablesInText(text.linktext_regionpage, {
