@@ -54,8 +54,21 @@ export const getStaticProps = createGetStaticProps(
     return data;
   },
   createGetChoroplethData({
-    vr: ({ sewer }) => ({ sewer }),
-    gm: ({ sewer }) => ({ sewer }),
+    vr: ({ sewer }) => {
+      const roundedSewer = sewer.map((x) => {
+        return {
+          ...x,
+          average: isPresent(x.average) ? Math.round(x.average) : null,
+        };
+      });
+      return { sewer: roundedSewer };
+    },
+    gm: ({ sewer }) => {
+      const roundedSewer = sewer.map((x) => {
+        return { ...x, average: Math.round(x.average) };
+      });
+      return { sewer: roundedSewer };
+    },
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
