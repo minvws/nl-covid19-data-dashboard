@@ -17,6 +17,7 @@ import {
 } from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { isPresent } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -93,6 +94,16 @@ export function NlLayout(props: NlLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+
+  data.difference.sewer__average.difference = Math.round(
+    data.difference.sewer__average.difference
+  );
+  data.difference.sewer__average.old_value = Math.round(
+    data.difference.sewer__average.old_value
+  );
+  data.sewer.last_value.average = isPresent(data.sewer.last_value.average)
+    ? Math.round(data.sewer.last_value.average)
+    : null;
 
   const { isEnabled: isGpSuspicionsHistorical } = useFeature(
     'nlGpSuspicionsIsHistorical'

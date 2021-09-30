@@ -8,7 +8,7 @@ import { last } from 'lodash';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
@@ -366,6 +366,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           </TileList>
         </MaxWidth>
+
+        <Spacer mb={5} />
 
         <Box width="100%" backgroundColor="page" pb={5}>
           <MaxWidth>
