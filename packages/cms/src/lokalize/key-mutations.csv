@@ -227,6 +227,7 @@ timestamp,action,key,document_id,move_to
 2021-09-30T13:58:35.283Z,delete,sidebar.vr.vaccinations.title,7nClfXqPlyZyEU7POvN4bQ,__
 2021-09-30T13:58:35.285Z,delete,sidebar.vr.vulnerable_groups.title,qNGd4zPbpj47IuPd8I4Ncl,__
 2021-09-30T14:29:49.247Z,add,sidebar.shared.nl_title,wzQp83DAUqyqV3ewGA3H6j,__
+2021-09-30T14:29:49.247Z,add,sidebar.shared.metrics_title,wzQp83DAUqyqV3ewGA3H6j,__
 2021-09-30T14:44:11.464Z,add,sidebar.categories.international_metrics.title,wzQp83DAUqyqV3ewGA5oAR,__
 2021-09-30T14:54:38.898Z,delete,besmettelijke_personen.titel_sidebar,jF33EuwumlGuwav2FD3a8y,__
 2021-09-30T14:54:38.902Z,delete,brononderzoek.titel_sidebar,6dTIFBydK0C6dL2sJemQrH,__
