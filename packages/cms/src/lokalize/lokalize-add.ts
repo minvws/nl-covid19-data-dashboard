@@ -4,16 +4,6 @@ import prompts from 'prompts';
 import { getClient } from '../client';
 import { createTextDocument } from './logic/create-text-document';
 
-type LokalizeText = {
-  _id: string;
-  key: string;
-  text: {
-    _type: string;
-    nl: string;
-    en: string;
-  };
-};
-
 /**
  * This script allows a developer to manually add a lokalize document to Sanity (either to the development or production dataset)
  * Usually this script shouldn't be required to be used, because all mutations to the lokalize documents should ideally be
@@ -78,7 +68,7 @@ const cli = meow(
     process.exit(1);
   }
 
-  const document = await sanityClient.create(
+  await sanityClient.create(
     createTextDocument(newKeyResponse.newKey, newValueResponse.newValue)
   );
 
