@@ -120,7 +120,7 @@ export const colors = {
   header: '#cd005a',
   notification: '#cd005a',
   red: '#F35065',
-  sidebarLinkBorder: '#cd005a',
+  sidebarLinkBorder: '#01689b',
   category: '#6b6b6b',
   border: '#c4c4c4',
   lightBlue: '#E0EEF6',

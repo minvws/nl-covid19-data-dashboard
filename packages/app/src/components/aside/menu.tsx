@@ -6,13 +6,34 @@ import styled from 'styled-components';
 import { UrlObject } from 'url';
 import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
-import { Anchor, Heading } from '~/components/typography';
+import { Anchor, Heading, Text } from '~/components/typography';
+import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
+
+export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
+  return (
+    <>
+      {items.map((x) =>
+        'items' in x ? (
+          <CategoryMenu {...x}>
+            {x.items.map((item) => (
+              // item includes key, ESLint gives a false positive here
+              // eslint-disable-next-line react/jsx-key
+              <MenuItemLink {...item} />
+            ))}
+          </CategoryMenu>
+        ) : (
+          <MenuItemLink {...x} />
+        )
+      )}
+    </>
+  );
+}
 
 export function Menu({
   children,
@@ -30,16 +51,35 @@ export function Menu({
 
 export function CategoryMenu({
   title,
+  description,
   children,
 }: {
   children: ReactNode;
   title?: string;
+  description?: string;
 }) {
   return (
-    <Box as="li" spacing={3}>
+    <Box as="li" spacing={2}>
       {title && (
         <Box px={3} pt={3}>
-          <Heading level={3}>{title}</Heading>
+          <Heading
+            level={4}
+            css={css({
+              color: 'bodyLight',
+              fontSize: 1,
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+            })}
+          >
+            {title}
+          </Heading>
+        </Box>
+      )}
+      {description && (
+        <Box px={3}>
+          <Text css={css({ fontSize: 1, color: 'bodyLight' })}>
+            {description}
+          </Text>
         </Box>
       )}
       <Menu>{children}</Menu>
@@ -47,205 +87,91 @@ export function CategoryMenu({
   );
 }
 
-type buttonVariantType = 'top' | 'bottom' | 'default';
-interface MetricMenuItemLinkProps {
+interface MenuItemLinkProps {
   title: string;
   icon?: ReactNode;
   href?: Url;
-  subtitle?: string;
-  children?: ReactNode;
   showArrow?: boolean;
 }
 
-export function MetricMenuItemLink({
-  href,
-  icon,
-  title,
-  subtitle,
-  children,
-  showArrow,
-}: MetricMenuItemLinkProps) {
+export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
   const router = useRouter();
-
-  const content = (
-    <>
-      <AsideTitle
-        icon={icon}
-        title={title}
-        subtitle={subtitle}
-        showArrow={showArrow}
-      />
-      {children && (
-        <Box mx={icon ? '2.5em' : 0}>
-          <ChildrenWrapper>{children}</ChildrenWrapper>
-        </Box>
-      )}
-    </>
-  );
 
   if (!href) {
     return (
-      <MetricMenuItem>
-        <Unavailable>{content}</Unavailable>
-      </MetricMenuItem>
+      <li>
+        <Unavailable>
+          <AsideTitle icon={icon} title={title} />
+        </Unavailable>
+      </li>
     );
   }
 
   const isActive = isActivePath(router, href);
 
   return (
-    <MetricMenuItem>
+    <li>
       <Link href={href} passHref>
         <StyledAnchor
           isActive={isActive}
           aria-current={isActive ? 'page' : undefined}
         >
-          {content}
+          <AsideTitle icon={icon} title={title} showArrow={!isActive} />
         </StyledAnchor>
       </Link>
-    </MetricMenuItem>
-  );
-}
-
-interface MetricMenuButtonProps {
-  title: string;
-  href: Url;
-  subtitle?: string;
-  children?: ReactNode;
-  buttonVariant?: buttonVariantType;
-}
-
-export function MetricMenuButtonLink({
-  title,
-  subtitle,
-  children,
-  href,
-  buttonVariant = 'default',
-}: MetricMenuButtonProps) {
-  const router = useRouter();
-  const isActive = isActivePath(router, href);
-
-  return (
-    <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
-      <Link href={href} passHref>
-        <StyledAnchor
-          isButton={true}
-          isActive={isActive}
-          aria-current={isActive ? 'page' : undefined}
-        >
-          <AsideTitle title={title} subtitle={subtitle} />
-          {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
-        </StyledAnchor>
-      </Link>
-    </MetricMenuButton>
+    </li>
   );
 }
 
 function isActivePath(router: NextRouter, href: Url) {
   const currentPath = (router.asPath || '/').split('?')[0];
   const hrefPath = resolveHref(router, href).split('?')[0];
-
   return currentPath === hrefPath;
 }
-
-const MetricMenuItem = styled.li(
-  css({
-    borderBottom: '1px solid',
-    borderBottomColor: 'border',
-
-    '&:first-child': {
-      borderTop: '1px solid',
-      borderTopColor: 'border',
-    },
-  })
-);
-
-const MetricMenuButton = styled.li<{
-  buttonVariant: buttonVariantType;
-  isActive?: boolean;
-}>((x) =>
-  css({
-    borderRadius: x.buttonVariant === 'default' ? 5 : undefined,
-    border: '1px solid',
-    borderColor: 'border',
-
-    borderTopLeftRadius: x.buttonVariant === 'top' ? 5 : undefined,
-    borderTopRightRadius: x.buttonVariant === 'top' ? 5 : undefined,
-    borderBottomLeftRadius: x.buttonVariant === 'bottom' ? 5 : undefined,
-    borderBottomRightRadius: x.buttonVariant === 'bottom' ? 5 : undefined,
-
-    borderTop: x.buttonVariant === 'bottom' ? '0px' : undefined,
-
-    mx: 3,
-    overflow: 'hidden',
-    bg: x.isActive
-      ? asResponsiveArray({ _: null, md: '#ebebeb' })
-      : 'transparent',
-  })
-);
-
-const ChildrenWrapper = styled.div(
-  css({
-    '& > div:not(:first-child)': {
-      height: '3.5rem',
-      marginTop: '-1.25em',
-    },
-  })
-);
 
 const Unavailable = styled.span(
   css({
     display: 'block',
-    padding: 3,
+    padding: 2,
     color: 'gray',
 
     svg: {
       fill: 'currentColor',
-      color: 'gray',
     },
   })
 );
 
-const StyledAnchor = styled(Anchor)<{ isActive: boolean; isButton?: boolean }>(
-  (x) =>
-    css({
-      p: 3,
-      py: x.isButton ? 3 : undefined,
-      pr: x.isButton ? 0 : undefined,
+const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
+  css({
+    p: 2,
+    display: 'block',
+    borderRight: '5px solid transparent',
+    color: x.isActive ? 'blue' : 'black',
+    position: 'relative',
+    bg: x.isActive ? 'lightBlue' : 'transparent',
+    borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
+
+    '&:hover': {
+      bg: 'page',
+    },
+
+    '&:focus': {
+      bg: '#ebebeb',
+    },
+
+    '&::after': {
+      content: x.isActive
+        ? 'none'
+        : asResponsiveArray({ _: 'none', xs: undefined }),
+      backgroundImage: `url('${chevronUrl}')`,
+      // match aspect ratio of chevron.svg
+      backgroundSize: '0.6em 1.2em',
+      height: '1.2em',
+      width: '0.6em',
       display: 'block',
-      borderRight: '5px solid transparent',
-      color: 'black',
-      position: 'relative',
-
-      bg:
-        x.isActive && !x.isButton
-          ? asResponsiveArray({ _: undefined, md: '#ebebeb' })
-          : 'transparent',
-      borderRightColor: x.isActive
-        ? asResponsiveArray({ _: undefined, md: 'sidebarLinkBorder' })
-        : 'transparent',
-
-      '&:hover': {
-        bg: 'page',
-      },
-
-      '&:focus': {
-        bg: '#ebebeb',
-      },
-
-      '&::after': {
-        content: x.isActive
-          ? 'none'
-          : asResponsiveArray({ _: 'none', xs: undefined }),
-        backgroundImage: `url('${chevronUrl}')`,
-        // match aspect ratio of chevron.svg
-        backgroundSize: '0.6em 1.2em',
-        height: '1.2em',
-        width: '0.6em',
-        display: 'block',
-        position: 'absolute',
-        right: 3,
-        top: '1.35em',
-      },
-    })
+      position: 'absolute',
+      right: 3,
+      top: '1.35em',
+    },
+  })
 );

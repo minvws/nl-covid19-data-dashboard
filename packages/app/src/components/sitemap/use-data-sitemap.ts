@@ -14,32 +14,32 @@ export function useDataSitemap(
   if (base === 'gm' && code) {
     return [
       {
-        header: siteText.nationaal_layout.headings.besmettingen,
+        header: siteText.sidebar.categories.infections.title,
         links: [
           {
-            text: siteText.positief_geteste_personen.titel_sidebar,
+            text: siteText.sidebar.metrics.positive_tests.title,
             href: reverseRouter.gm.positiefGetesteMensen(code),
           },
           {
-            text: siteText.sterfte.titel_sidebar,
+            text: siteText.sidebar.metrics.mortality.title,
             href: reverseRouter.gm.sterfte(code),
           },
         ],
       },
       {
-        header: siteText.nationaal_layout.headings.ziekenhuizen,
+        header: siteText.sidebar.categories.hospitals.title,
         links: [
           {
-            text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
+            text: siteText.sidebar.metrics.hospital_admissions.title,
             href: reverseRouter.gm.ziekenhuisopnames(code),
           },
         ],
       },
       {
-        header: siteText.nationaal_layout.headings.vroege_signalen,
+        header: siteText.sidebar.categories.early_indicators.title,
         links: [
           {
-            text: siteText.rioolwater_metingen.titel_sidebar,
+            text: siteText.sidebar.metrics.sewage_measurement.title,
             href: data?.sewer ? reverseRouter.gm.rioolwater(code) : undefined,
           },
         ],
@@ -50,58 +50,58 @@ export function useDataSitemap(
   if (base === 'vr' && code) {
     return [
       {
-        header: siteText.nationaal_layout.headings.besmettingen,
+        header: siteText.sidebar.categories.infections.title,
         links: [
           {
-            text: siteText.positief_geteste_personen.titel_sidebar,
+            text: siteText.sidebar.metrics.positive_tests.title,
             href: reverseRouter.vr.positiefGetesteMensen(code),
           },
           {
-            text: siteText.sterfte.titel_sidebar,
+            text: siteText.sidebar.metrics.mortality.title,
             href: reverseRouter.vr.sterfte(code),
           },
         ],
       },
       {
-        header: siteText.nationaal_layout.headings.ziekenhuizen,
+        header: siteText.sidebar.categories.hospitals.title,
         links: [
           {
-            text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
+            text: siteText.sidebar.metrics.hospital_admissions.title,
             href: reverseRouter.vr.ziekenhuisopnames(code),
           },
         ],
       },
       {
-        header: siteText.nationaal_layout.headings.kwetsbare_groepen,
+        header: siteText.sidebar.categories.vulnerable_groups.title,
         links: [
           {
-            text: siteText.verpleeghuis_besmette_locaties.titel_sidebar,
+            text: siteText.sidebar.metrics.nursing_home_care.title,
             href: reverseRouter.vr.verpleeghuiszorg(code),
           },
           {
-            text: siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar,
+            text: siteText.sidebar.metrics.disabled_care.title,
             href: reverseRouter.vr.gehandicaptenzorg(code),
           },
           {
-            text: siteText.thuiswonende_ouderen.titel_sidebar,
+            text: siteText.sidebar.metrics.disabled_care.title,
             href: reverseRouter.vr.thuiswonendeOuderen(code),
           },
         ],
       },
       {
-        header: siteText.nationaal_layout.headings.vroege_signalen,
+        header: siteText.sidebar.categories.early_indicators.title,
         links: [
           {
-            text: siteText.rioolwater_metingen.titel_sidebar,
+            text: siteText.sidebar.metrics.sewage_measurement.title,
             href: reverseRouter.vr.rioolwater(code),
           },
         ],
       },
       {
-        header: siteText.nationaal_layout.headings.gedrag,
+        header: siteText.sidebar.categories.behaviour.title,
         links: [
           {
-            text: siteText.nl_gedrag.sidebar.titel,
+            text: siteText.sidebar.metrics.compliance.title,
             href: reverseRouter.vr.gedrag(code),
           },
         ],
@@ -111,109 +111,105 @@ export function useDataSitemap(
 
   return [
     {
-      header: siteText.nationaal_layout.headings.vaccinaties,
+      header: siteText.sidebar.categories.vaccinations.title,
       links: [
         {
-          text: siteText.vaccinaties.titel_sidebar,
+          text: siteText.sidebar.metrics.vaccinations.title,
           href: reverseRouter.nl.vaccinaties(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.ziekenhuizen,
+      header: siteText.sidebar.categories.hospitals.title,
       links: [
         {
-          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
+          text: siteText.sidebar.metrics.hospital_admissions.title,
           href: reverseRouter.nl.ziekenhuisopnames(),
         },
         {
-          text: siteText.ic_opnames_per_dag.titel_sidebar,
+          text: siteText.sidebar.metrics.intensive_care_admissions.title,
           href: reverseRouter.nl.intensiveCareOpnames(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.besmettingen,
+      header: siteText.sidebar.categories.infections.title,
       links: [
         {
-          text: siteText.positief_geteste_personen.titel_sidebar,
+          text: siteText.sidebar.metrics.positive_tests.title,
           href: reverseRouter.nl.positiefGetesteMensen(),
         },
         {
-          text: siteText.reproductiegetal.titel_sidebar,
+          text: siteText.sidebar.metrics.reproduction_number.title,
           href: reverseRouter.nl.reproductiegetal(),
         },
         {
-          text: siteText.sterfte.titel_sidebar,
+          text: siteText.sidebar.metrics.mortality.title,
           href: reverseRouter.nl.sterfte(),
         },
         {
-          text: siteText.covid_varianten.titel_sidebar,
+          text: siteText.sidebar.metrics.variants.title,
           href: reverseRouter.nl.varianten(),
         },
         {
-          text: siteText.brononderzoek.titel_sidebar,
+          text: siteText.sidebar.metrics.source_investigation.title,
           href: reverseRouter.nl.brononderzoek(),
-        },
-        {
-          text: siteText.besmettelijke_personen.titel_sidebar,
-          href: reverseRouter.nl.besmettelijkeMensen(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.gedrag,
+      header: siteText.sidebar.categories.behaviour.title,
       links: [
         {
-          text: siteText.nl_gedrag.sidebar.titel,
+          text: siteText.sidebar.metrics.compliance.title,
           href: reverseRouter.nl.gedrag(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.kwetsbare_groepen,
+      header: siteText.sidebar.categories.vulnerable_groups.title,
       links: [
         {
-          text: siteText.verpleeghuis_besmette_locaties.titel_sidebar,
+          text: siteText.sidebar.metrics.nursing_home_care.title,
           href: reverseRouter.nl.verpleeghuiszorg(),
         },
         {
-          text: siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar,
+          text: siteText.sidebar.metrics.disabled_care.title,
           href: reverseRouter.nl.gehandicaptenzorg(),
         },
         {
-          text: siteText.thuiswonende_ouderen.titel_sidebar,
+          text: siteText.sidebar.metrics.elderly_at_home.title,
           href: reverseRouter.nl.thuiswonendeOuderen(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.vroege_signalen,
+      header: siteText.sidebar.categories.early_indicators.title,
       links: [
         {
-          text: siteText.rioolwater_metingen.titel_sidebar,
+          text: siteText.sidebar.metrics.sewage_measurement.title,
           href: reverseRouter.nl.rioolwater(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.overig,
+      header: siteText.sidebar.categories.other.title,
       links: [
         {
-          text: siteText.corona_melder_app.sidebar.titel,
+          text: siteText.sidebar.metrics.coronamelder_app.title,
           href: reverseRouter.nl.coronamelder(),
         },
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.archief,
+      header: siteText.sidebar.categories.archived_metrics.title,
       links: [
         {
-          text: siteText.besmettelijke_personen.titel_sidebar,
+          text: siteText.sidebar.metrics.infectious_people.title,
           href: reverseRouter.nl.besmettelijkeMensen(),
         },
         {
-          text: siteText.verdenkingen_huisartsen.titel_sidebar,
+          text: siteText.sidebar.metrics.general_practitioner_suspicions.title,
           href: reverseRouter.nl.verdenkingenHuisartsen(),
         },
       ],

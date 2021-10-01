@@ -16,7 +16,6 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
@@ -27,7 +26,6 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
     return `
@@ -57,17 +55,8 @@ export const getStaticProps = createGetStaticProps(
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
-  const { content, lastGenerated, selectedNlData: data } = props;
+  const { content, lastGenerated } = props;
   const { lockdown } = content;
-
-  const { showLockdown } = lockdown;
-
-  // const escalationLevelData = useEscalationLevel(data.restrictions.values);
-
-  /**
-   * Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-   */
-  // const effectiveEscalationLevel: EscalationLevel = escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -75,11 +64,11 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
-          {showLockdown && (
+          {lockdown.showLockdown && (
             <KpiSection flexDirection="column">
               <Box spacing={3}>
                 <Heading level={3}>{lockdown.message.title}</Heading>
@@ -90,7 +79,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             </KpiSection>
           )}
 
-          {showLockdown && (
+          {lockdown.showLockdown && (
             <KpiSection display="flex" flexDirection="column" spacing={3}>
               <Heading level={3}>{lockdown.title}</Heading>
               <LockdownTable data={lockdown} />

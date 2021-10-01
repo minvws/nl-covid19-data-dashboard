@@ -27,7 +27,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Markdown } from '~/components/markdown';
@@ -41,15 +41,12 @@ export const getStaticProps = createGetStaticProps(
     return createPageArticlesQuery('behaviorPage', locale);
   }),
   (context) => {
-    const data = selectVrPageMetricData()(context);
+    const data = selectVrData('behavior')(context);
     const chartBehaviorOptions = getBehaviorChartOptions<NlBehaviorValue>(
       data.selectedVrData.behavior.values[0]
     );
 
-    return {
-      ...data,
-      chartBehaviorOptions,
-    };
+    return { ...data, chartBehaviorOptions };
   }
 );
 
@@ -84,7 +81,7 @@ export default function BehaviorPageVr(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.gedrag}
