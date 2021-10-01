@@ -14,7 +14,7 @@ import { get } from 'lodash';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
-import { F, O, S, U } from 'ts-toolbelt';
+import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
@@ -23,6 +23,24 @@ import { getClient, localize } from '~/lib/sanity';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
+
+// This type takes an object and merges unions that sit at its keys into a single object.
+// Only has support for one level deep.
+type UnionDeepMerge<T extends Record<string, unknown>> = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [K in keyof T]: T[K] extends object ? U.Merge<T[K]> : T[K];
+};
+
+/**
+ * This typing does, from the inside out:
+ * 1. Split string T at the '.' to get the path to the property.
+ * 2. Pick the property path from the data object
+ * 3. Merge picked data object union into a single object
+ * 4. Merge nested properties unions
+ */
+type DataShape<T extends string, D extends Nl | Vr | Gm> = UnionDeepMerge<
+  U.Merge<O.P.Pick<D, S.Split<T, '.'>>>
+>;
 
 /**
  * Usage:
@@ -126,11 +144,6 @@ async function replaceReferencesInContent(
     .walk(input);
 }
 
-type UnionDeepMerge<T extends Record<string, unknown>> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  [K in keyof T]: T[K] extends object ? U.Merge<T[K]> : T[K];
-};
-
 /**
  * This method selects the specified metric properties from the national data
  *
@@ -162,7 +175,8 @@ export function selectNlData<
            */
           get(data, p) ?? null
         ),
-      {} as UnionDeepMerge<U.Merge<O.P.Pick<Nl, S.Split<T, '.'>>>>
+
+      {} as DataShape<T, Nl>
     );
 
     return { selectedNlData };
@@ -190,7 +204,7 @@ export function selectVrData<
 
     const selectedVrData = metrics.reduce(
       (acc, p) => set(acc, p, get(data, p) ?? null),
-      {} as UnionDeepMerge<U.Merge<O.P.Pick<Vr, S.Split<T, '.'>>>>
+      {} as DataShape<T, Vr>
     );
 
     return { selectedVrData, vrName };
@@ -242,7 +256,7 @@ export function selectGmData<
 
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, get(gmData.data, p)),
-      {} as UnionDeepMerge<U.Merge<O.P.Pick<Gm, S.Split<T, '.'>>>>
+      {} as DataShape<T, Gm>
     );
 
     return {

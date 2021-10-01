@@ -34,11 +34,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       const data = selectNlData('variants', 'named_difference')();
 
       const {
-        selectedNlData: { variants, ...rest },
+        selectedNlData: { variants },
       } = data;
 
       return {
-        selectedNlData: rest,
         variantSidebarValue: getVariantSidebarValue(variants) ?? null,
         ...getVariantTableData(variants, data.selectedNlData.named_difference),
         ...getVariantChartData(variants),
