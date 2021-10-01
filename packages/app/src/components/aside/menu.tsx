@@ -24,11 +24,11 @@ export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
             {x.items.map((item) => (
               // item includes key, ESLint gives a false positive here
               // eslint-disable-next-line react/jsx-key
-              <MetricMenuItemLink {...item} />
+              <MenuItemLink {...item} />
             ))}
           </CategoryMenu>
         ) : (
-          <MetricMenuItemLink {...x} />
+          <MenuItemLink {...x} />
         )
       )}
     </>
@@ -87,18 +87,14 @@ export function CategoryMenu({
   );
 }
 
-interface MetricMenuItemLinkProps {
+interface MenuItemLinkProps {
   title: string;
   icon?: ReactNode;
   href?: Url;
   showArrow?: boolean;
 }
 
-export function MetricMenuItemLink({
-  href,
-  icon,
-  title,
-}: MetricMenuItemLinkProps) {
+export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
   const router = useRouter();
 
   if (!href) {
@@ -136,12 +132,11 @@ function isActivePath(router: NextRouter, href: Url) {
 const Unavailable = styled.span(
   css({
     display: 'block',
-    padding: 3,
+    padding: 2,
     color: 'gray',
 
     svg: {
       fill: 'currentColor',
-      color: 'gray',
     },
   })
 );
