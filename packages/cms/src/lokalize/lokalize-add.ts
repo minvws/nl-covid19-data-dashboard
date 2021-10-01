@@ -16,7 +16,7 @@ const cli = meow(
           $ lokalize:add
     
         Options
-          --dataset Define dataset to export, default is "development"
+          --dataset Define dataset that the new key/value will be added to, default is "development"
     
         Examples
           $ lokalize:add --dataset=production
