@@ -1,3 +1,4 @@
+import { NlSewer } from '@corona-dashboard/common';
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
 import { CollapsibleContent } from '~/components/collapsible';
@@ -24,7 +25,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectGmPageMetricData,
+  selectGmData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -34,11 +35,11 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   (context) => {
-    const data = selectGmPageMetricData(
+    const data = selectGmData(
+      'difference.sewer__average',
       'sewer_per_installation',
-      'static_values',
+      'static_values.population_count',
       'sewer',
-      'difference',
       'code'
     )(context);
     data.selectedGmData.sewer.values = data.selectedGmData.sewer.values.map(
@@ -77,7 +78,6 @@ export const getStaticProps = createGetStaticProps(
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
-    sideBarData,
     municipalityName,
     content,
     lastGenerated,
@@ -110,13 +110,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout
-        data={sideBarData}
-        code={data.code}
-        difference={data.difference}
-        municipalityName={municipalityName}
-        lastGenerated={lastGenerated}
-      >
+      <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.vroege_signalen}
@@ -225,7 +219,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
           <SewerChart
             accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
-            dataAverages={data.sewer}
+            dataAverages={data.sewer as unknown as NlSewer}
             dataPerInstallation={data.sewer_per_installation}
             text={{
               title: text.linechart_titel,

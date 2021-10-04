@@ -1,5 +1,6 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -9,7 +10,6 @@ import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -27,35 +27,43 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   () => {
-    const data = selectNlPageMetricData()();
-    data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
-      (x) => ({
-        ...x,
-        average: Math.round(x.average),
-      })
-    );
-    data.selectedNlData.sewer.last_value = {
-      ...data.selectedNlData.sewer.last_value,
-      average: Math.round(data.selectedNlData.sewer.last_value.average),
+    const { selectedNlData: data } = selectNlData(
+      'sewer',
+      'difference.sewer__average'
+    )();
+
+    data.sewer.values = data.sewer.values.map((x) => ({
+      ...x,
+      average: isPresent(x.average) ? Math.round(x.average) : null,
+    }));
+
+    data.sewer.last_value = {
+      ...data.sewer.last_value,
+      average: isPresent(data.sewer.last_value.average)
+        ? Math.round(data.sewer.last_value.average)
+        : null,
     };
-    data.selectedNlData.difference.sewer__average.difference = Math.round(
-      data.selectedNlData.difference.sewer__average.difference
+
+    data.difference.sewer__average.difference = Math.round(
+      data.difference.sewer__average.difference
     );
 
-    return data;
+    return { selectedNlData: data };
   },
   createGetChoroplethData({
     vr: ({ sewer }) => {
       const roundedSewer = sewer.map((x) => {
-        return { ...x, average: Math.round(x.average) };
+        return {
+          ...x,
+          average: isPresent(x.average) ? Math.round(x.average) : null,
+        };
       });
       return { sewer: roundedSewer };
     },
@@ -90,20 +98,19 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
-            screenReaderCategory={siteText.rioolwater_metingen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.sewage_measurement.title
+            }
             title={text.titel}
             icon={<RioolwaterMonitoring />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: {
-                start: sewerAverages.last_value.date_start_unix,
-                end: sewerAverages.last_value.date_end_unix,
-              },
+              dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix:
                 sewerAverages.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
@@ -119,10 +126,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
+                date: sewerAverages.last_value.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
@@ -136,35 +140,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={text.total_measurements_title}
-              description={text.total_measurements_description}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="total_number_of_samples"
-                absolute={sewerAverages.last_value.total_number_of_samples}
-              />
-              <Text>
-                {replaceComponentsInText(text.total_measurements_locations, {
-                  sampled_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.sampled_installation_count}
-                    </strong>
-                  ),
-                  total_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.total_installation_count}
-                    </strong>
-                  ),
-                })}
-              </Text>
-            </KpiTile>
+              title={text.tile_explanation_title}
+              description={text.tile_explanation_description}
+            />
           </TwoKpiSection>
 
           <SewerChart
@@ -175,7 +153,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
               description: text.linechart_description,
               splitLabels: siteText.rioolwater_metingen.split_labels,
-              averagesDataLabel: siteText.common.weekgemiddelde,
+              averagesDataLabel: siteText.common.daggemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
           />
@@ -184,10 +162,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={text.map_titel}
             description={text.map_toelichting}
             metadata={{
-              date: [
-                sewerAverages.last_value.date_start_unix,
-                sewerAverages.last_value.date_end_unix,
-              ],
+              date:
+                selectedMap === 'gm'
+                  ? [
+                      choropleth.gm.sewer[0].date_start_unix,
+                      choropleth.gm.sewer[0].date_end_unix,
+                    ]
+                  : choropleth.vr.sewer[0].date_unix,
               source: text.bronnen.rivm,
             }}
             onChartRegionChange={setSelectedMap}

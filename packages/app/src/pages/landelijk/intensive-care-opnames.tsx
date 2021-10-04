@@ -30,7 +30,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { IntakeHospitalPageQuery } from '~/types/cms';
@@ -39,7 +39,12 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('intensive_care_lcps'),
+  selectNlData(
+    'intensive_care_lcps',
+    'intensive_care_nice',
+    'intensive_care_nice_per_age_group',
+    'difference.intensive_care_lcps__beds_occupied_covid'
+  ),
   createGetContent<{
     page: IntakeHospitalPageQuery;
     highlight: PageArticlesQueryResult;
@@ -60,10 +65,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.ic_opnames_per_dag;
 
   const { selectedNlData: data, content, lastGenerated } = props;
-  const dataIntake = data.intensive_care_nice;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
+  const dataIntake = data.intensive_care_nice;
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
     3
@@ -77,11 +82,13 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
-            screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.intensive_care_admissions.title
+            }
             title={text.titel}
             icon={<Arts />}
             description={text.pagina_toelichting}

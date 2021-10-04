@@ -6,13 +6,12 @@ import {
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+import chevronDownUrl from '~/assets/chevron-down.svg';
 import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useSetLinkTabbability } from './logic';
-
-import chevronDownUrl from '~/assets/chevron-down.svg';
 
 interface CollapsibleButtonProps {
   children: React.ReactNode;
@@ -89,7 +88,7 @@ export const CollapsibleButton = ({
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <Box ref={buttonRef} display="flex">
+          <Box ref={buttonRef} display="flex" width="100%">
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}

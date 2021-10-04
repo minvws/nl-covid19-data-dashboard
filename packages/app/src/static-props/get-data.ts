@@ -10,34 +10,38 @@ import {
   VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
+import { get } from 'lodash';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
+import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/multi-select-countries';
-import { GmSideBarData } from '~/domain/layout/gm-layout';
-import {
-  NlPageMetricNames,
-  nlPageMetricNames,
-} from '~/domain/layout/nl-layout';
-import {
-  vrPageMetricNames,
-  VrRegionPageMetricNames,
-} from '~/domain/layout/vr-layout';
-import {
-  getVariantSidebarValue,
-  VariantSidebarValue,
-} from '~/domain/variants/static-props';
 import { getClient, localize } from '~/lib/sanity';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
-import {
-  getSituationsSidebarValue,
-  SituationsSidebarValue,
-} from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
-import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latets-values';
+import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
+
+// This type takes an object and merges unions that sit at its keys into a single object.
+// Only has support for one level deep.
+type UnionDeepMerge<T extends Record<string, unknown>> = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [K in keyof T]: T[K] extends object ? U.Merge<T[K]> : T[K];
+};
+
+/**
+ * This typing does, from the inside out:
+ * 1. Split string T at the '.' to get the path to the property.
+ * 2. Pick the property path from the data object
+ * 3. Merge picked data object union into a single object
+ * 4. Merge nested properties unions
+ */
+type DataShape<T extends string, D extends Nl | Vr | Gm> = UnionDeepMerge<
+  U.Merge<O.P.Pick<D, S.Split<T, '.'>>>
+>;
+
 /**
  * Usage:
  *
@@ -141,22 +145,12 @@ async function replaceReferencesInContent(
 }
 
 /**
- * This method returns all the national data that is required by the sidebar,
- * optional extra metric property names can be added as separate arguments which will
- * be added to the output
+ * This method selects the specified metric properties from the national data
  *
  */
-export function selectNlPageMetricData<T extends keyof Nl = NlPageMetricNames>(
-  ...additionalMetrics: T[]
-) {
-  return selectNlData(...[...nlPageMetricNames, ...additionalMetrics]);
-}
-
-/**
- * This method selects only the specified metric properties from the national data
- *
- */
-export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
+export function selectNlData<
+  T extends keyof Nl | F.AutoPath<Nl, keyof Nl, '.'>
+>(...metrics: T[]) {
   return () => {
     const { data } = getNlData();
 
@@ -179,17 +173,10 @@ export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
            * convert `undefined` values to `null` because nextjs cannot pass
            * undefined values via initial props.
            */
-          data[p] ?? null
+          get(data, p) ?? null
         ),
-      {
-        variantSidebarValue: getVariantSidebarValue(data.variants),
-        situationsSidebarValue: getSituationsSidebarValue(
-          json.vrCollection.situations
-        ),
-      } as {
-        variantSidebarValue: VariantSidebarValue;
-        situationsSidebarValue: SituationsSidebarValue;
-      } & Pick<Nl, T>
+
+      {} as DataShape<T, Nl>
     );
 
     return { selectedNlData };
@@ -206,37 +193,21 @@ export function getNlData() {
 }
 
 /**
- * This method returns all the region data that is required by the sidebar,
- * optional extra metric property names can be added as separate arguments which will
- * be added to the output
+ * This method selects the specified metric properties from the region data
  *
  */
-export function selectVrPageMetricData<
-  T extends keyof Vr = VrRegionPageMetricNames
->(...additionalMetrics: T[]) {
-  return selectVrData(...[...vrPageMetricNames, ...additionalMetrics]);
-}
-
-/**
- * This method selects only the specified metric properties from the region data
- *
- */
-export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
+export function selectVrData<
+  T extends keyof Vr | F.AutoPath<Vr, keyof Vr, '.'>
+>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
-    const vrData = getVrData(context);
+    const { data, vrName } = getVrData(context);
 
     const selectedVrData = metrics.reduce(
-      (acc, p) => set(acc, p, vrData.data[p] ?? null),
-      {
-        situationsSidebarValue: getSituationsSidebarValue(
-          json.vrCollection.situations
-        ),
-      } as {
-        situationsSidebarValue: SituationsSidebarValue;
-      } & Pick<Vr, T>
+      (acc, p) => set(acc, p, get(data, p) ?? null),
+      {} as DataShape<T, Vr>
     );
 
-    return { selectedVrData, vrName: vrData.vrName };
+    return { selectedVrData, vrName };
   };
 }
 
@@ -274,43 +245,22 @@ export function loadAndSortVrData(vrcode: string) {
 }
 
 /**
- * This method returns all the municipal data that is required by the sidebar,
- * optional extra metric property names can be added as separate arguments which will
- * be added to the output
+ * This method selects the specified metric properties from the municipal data
  *
  */
-export function selectGmPageMetricData<T extends keyof Gm>(
-  ...additionalMetrics: T[]
-) {
-  return selectGmData(...additionalMetrics);
-}
-
-/**
- * This method selects only the specified metric properties from the municipal data
- *
- */
-export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
+export function selectGmData<
+  T extends keyof Gm | F.AutoPath<Gm, keyof Gm, '.'>
+>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const sideBarData: GmSideBarData = {
-      deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
-      hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
-      tested_overall: { last_value: gmData.data.tested_overall.last_value },
-      sewer: { last_value: gmData.data.sewer.last_value },
-      vaccine_coverage_per_age_group: {
-        values: gmData.data.vaccine_coverage_per_age_group?.values ?? null,
-      },
-    };
-
     const selectedGmData = metrics.reduce(
-      (acc, p) => set(acc, p, gmData.data[p]),
-      {} as Pick<Gm, T>
+      (acc, p) => set(acc, p, get(gmData.data, p)),
+      {} as DataShape<T, Gm>
     );
 
     return {
       selectedGmData,
-      sideBarData,
       municipalityName: gmData.municipalityName,
     };
   };

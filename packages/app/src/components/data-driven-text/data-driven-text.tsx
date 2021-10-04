@@ -53,7 +53,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   content,
 }: DataDrivenTextProps<T, K>) {
   return (
-    <Text>
+    <Text variant="datadriven">
       {React.Children.toArray(
         content.map((x) => renderContent(x, data))
       ).reduce((children: ReactNode[], child: ReactNode, index, arr) => {

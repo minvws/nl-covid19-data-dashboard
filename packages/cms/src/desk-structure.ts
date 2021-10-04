@@ -40,7 +40,7 @@ const hiddenDocTypes = [
   'vaccinationsPage',
   'variantsPage',
   'toegankelijkheid',
-  'escalationLevelPage',
+  'riskLevelNational',
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
@@ -116,8 +116,8 @@ export default () =>
         ),
       addListItem(
         RiPagesFill,
-        'Inschaling risiconiveau',
-        'escalationLevelPage'
+        'Inschaling risiconiveau nationaal',
+        'riskLevelNational'
       ),
       addListItem(RiPagesFill, 'Sterfte', 'deceasedPage'),
       addListItem(RiPagesFill, 'Brononderzoek GGD', 'situationsPage'),

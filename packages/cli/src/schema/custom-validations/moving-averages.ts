@@ -15,7 +15,7 @@ export function validateMovingAverages(input: JSONObject) {
     // first filter out all the non-metric properties (we only want the ones with a values collection)
     .filter(hasValuesProperty)
     // Then filter out all the metrics that contain no properties with a '_moving_average' suffix
-    .filter(([_p, value]) => hasMovingAverages(value.values[0]))
+    .filter(([_p, value]) => hasMovingAverages(value.values))
     // Map to objects that ONLY contain the moving average properties
     .map(([propertyName, value]) => ({
       [propertyName]: value.values.map((x: Record<string, unknown>) => {
@@ -92,8 +92,8 @@ function findPropertiesWithValuesInFirstSixEntries(
     .filter((x, index, arr) => isDefined(x) && index === arr.indexOf(x));
 }
 
-function hasMovingAverages(input: Record<string, unknown>) {
-  return findMovingAverages(input).length > 0;
+function hasMovingAverages(input: Record<string, unknown>[]) {
+  return input.length > 0 && findMovingAverages(input[0]).length > 0;
 }
 
 function findMovingAverages(input: Record<string, unknown>) {

@@ -18,7 +18,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -32,7 +32,7 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData(),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
 
@@ -61,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, content, vrName, lastGenerated } = props;
+  const { content, vrName, lastGenerated } = props;
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_maatregelen;
@@ -97,7 +97,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             title={replaceVariablesInText(
