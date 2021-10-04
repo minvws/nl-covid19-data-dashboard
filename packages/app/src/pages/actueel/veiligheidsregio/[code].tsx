@@ -1,7 +1,7 @@
 import {
   GmCollectionVaccineCoveragePerAgeGroup,
   VrHospitalNiceValue,
-  VrVaccineCoveragePerAgeGroupValue
+  VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
@@ -24,7 +24,7 @@ import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   MiniTileSelectorItem,
-  MiniTileSelectorLayout
+  MiniTileSelectorLayout,
 } from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
@@ -35,18 +35,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
-  getWarning
+  getWarning,
 } from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrData
+  selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -371,7 +371,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="page" pb={5}>
+        <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth>
             <TileList>
               <TopicalSectionHeader

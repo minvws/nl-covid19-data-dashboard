@@ -455,7 +455,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="page" pb={5}>
+        <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth>
             <TileList>
               <TopicalSectionHeader
