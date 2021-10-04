@@ -1,5 +1,5 @@
 // prettier-ignore
-const space = [
+export const space = [
   0,          // 0 -   0px
   '0.25rem',  // 1 -   4px at default zoom
   '0.5rem',   // 2 -   8px
