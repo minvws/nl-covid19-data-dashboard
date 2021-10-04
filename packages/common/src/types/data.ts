@@ -40,7 +40,7 @@ export interface GmDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  sewer__average?: DifferenceDecimal;
+  sewer__average?: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
@@ -318,7 +318,7 @@ export interface NlDifference {
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
-  sewer__average: DifferenceDecimal;
+  sewer__average: DifferenceInteger;
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
@@ -989,7 +989,7 @@ export interface VrDifference {
   tested_ggd__tested_total_moving_average: DifferenceDecimal;
   tested_ggd__infected_percentage_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  sewer__average: DifferenceDecimal;
+  sewer__average: DifferenceInteger;
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
