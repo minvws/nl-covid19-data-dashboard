@@ -34,7 +34,7 @@ export function VaccinePageIntroductionNl({
     ) / 10;
 
   return (
-    <Tile atTop>
+    <Tile noBorder>
       <VaccineHeaderWithIcon title={text.title} />
 
       <Box spacing={3}>
