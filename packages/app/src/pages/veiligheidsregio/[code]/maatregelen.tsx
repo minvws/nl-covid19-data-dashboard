@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
@@ -109,7 +109,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {showLockdown && (
-            <KpiSection flexDirection="column">
+            <Tile>
               <Box
                 css={css({
                   'p:last-child': {
@@ -122,19 +122,18 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   <RichContent blocks={lockdown.message.description} />
                 ) : null}
               </Box>
-            </KpiSection>
+            </Tile>
           )}
 
           {showLockdown && (
-            <KpiSection display="flex" flexDirection="column">
+            <Tile>
               <Heading level={3}>{lockdown.title}</Heading>
               <LockdownTable data={lockdown} />
-            </KpiSection>
+            </Tile>
           )}
 
           <AnchorTile
             external
-            shadow
             title={text.titel_aanvullendemaatregelen}
             href={regioUrl}
             label={replaceVariablesInText(text.linktext_regionpage, {

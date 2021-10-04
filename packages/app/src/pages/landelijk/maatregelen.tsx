@@ -1,7 +1,7 @@
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
@@ -69,21 +69,23 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
           {lockdown.showLockdown && (
-            <KpiSection flexDirection="column">
+            <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{lockdown.message.title}</Heading>
                 {lockdown.message.description ? (
                   <RichContent blocks={lockdown.message.description} />
                 ) : null}
               </Box>
-            </KpiSection>
+            </Tile>
           )}
 
           {lockdown.showLockdown && (
-            <KpiSection display="flex" flexDirection="column" spacing={3}>
-              <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} />
-            </KpiSection>
+            <Tile>
+              <Box spacing={3}>
+                <Heading level={3}>{lockdown.title}</Heading>
+                <LockdownTable data={lockdown} />
+              </Box>
+            </Tile>
           )}
         </TileList>
       </NlLayout>

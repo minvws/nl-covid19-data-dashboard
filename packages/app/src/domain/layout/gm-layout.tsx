@@ -90,11 +90,7 @@ export function GmLayout(props: GmLayoutProps) {
       <AppContent
         hideMenuButton={isMainRoute}
         searchComponent={
-          <Box
-            backgroundColor="white"
-            maxWidth={{ _: '38rem', md: undefined }}
-            mx="auto"
-          >
+          <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
             <GmComboBox />
           </Box>
         }
@@ -108,7 +104,6 @@ export function GmLayout(props: GmLayoutProps) {
                 id="metric-navigation"
                 aria-labelledby="sidebar-title"
                 role="navigation"
-                backgroundColor="white"
                 maxWidth={{ _: '38rem', md: undefined }}
                 mx="auto"
                 spacing={1}

@@ -8,7 +8,7 @@ interface TwoKpiSectionProps {
   spacing?: number;
 }
 
-export function TwoKpiSection({ children, spacing = 3 }: TwoKpiSectionProps) {
+export function TwoKpiSection({ children, spacing }: TwoKpiSectionProps) {
   return (
     <Box
       display="flex"
@@ -18,8 +18,8 @@ export function TwoKpiSection({ children, spacing = 3 }: TwoKpiSectionProps) {
           flex: 1,
         },
         '& > *:not(:last-child)': {
-          mr: asResponsiveArray({ _: 0, lg: spacing }),
-          mb: asResponsiveArray({ _: spacing, lg: 0 }),
+          mr: asResponsiveArray({ _: 0, lg: spacing ?? 5 }),
+          mb: asResponsiveArray({ _: spacing ?? 4, lg: 0 }),
         },
       })}
     >
