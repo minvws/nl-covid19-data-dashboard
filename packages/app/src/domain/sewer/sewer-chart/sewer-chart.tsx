@@ -87,8 +87,6 @@ export function SewerChart({
     },
   ];
 
-  console.log(dataPerInstallation);
-
   return (
     <ChartTile
       timeframeOptions={['all', '5weeks']}
