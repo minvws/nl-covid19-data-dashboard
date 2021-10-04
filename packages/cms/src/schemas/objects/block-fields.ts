@@ -77,4 +77,8 @@ export const blockFields = [
     type: 'inlineCollapsible',
     title: 'Inklapbaar blok',
   },
+  {
+    title: 'Dashboard Grafiek',
+    type: 'chart',
+  },
 ];

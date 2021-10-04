@@ -146,6 +146,7 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
+    "typecheck-diag": " tsc --pretty --noEmit--extendedDiagnostics",
     "download": "node ./infra/download.js",
     "clean": "npx rimraf .next",
     "nuke": "yarn clean && npx rimraf node_modules"

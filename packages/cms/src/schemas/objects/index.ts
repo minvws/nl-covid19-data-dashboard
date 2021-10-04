@@ -1,3 +1,4 @@
+export * from './chart';
 export * from './collapsible';
 export * from './inline-block';
 export * from './inline-collapsible';
