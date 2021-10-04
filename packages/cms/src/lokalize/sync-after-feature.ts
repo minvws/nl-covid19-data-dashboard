@@ -76,6 +76,7 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
    order(subject asc)`)) as LokalizeText[];
 
   const devClient = await getClient('development');
+  const prdClient = await getClient('production');
   const prdTransaction = getClient('production').transaction();
 
   let successCount = 0;
@@ -109,12 +110,25 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
       };
 
       /**
-       * Using createIfNotExist we can safely run the script multiple times and
-       * we will never overwrite what has already been edited in the production
-       * set.
+       * Double check to see if the given key doesn't already exist on production
        */
-      prdTransaction.createIfNotExists(documentToInject);
-      successCount++;
+      const count = await prdClient.fetch(
+        `count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`
+      );
+
+      if (count === 0) {
+        /**
+         * Using createIfNotExist we can safely run the script multiple times and
+         * we will never overwrite what has already been edited in the production
+         * set.
+         */
+        prdTransaction.createIfNotExists(documentToInject);
+        successCount++;
+      } else {
+        console.warn(
+          `A lokalize document with key ${documentToInject.key} already exists. Skipped adding a new one.`
+        );
+      }
     } else {
       /**
        * This should never happen, but it is also not severe enough to

@@ -7,39 +7,32 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import {
-  getLastGeneratedDate,
-  selectGmPageMetricData,
-} from '~/static-props/get-data';
+import { getLastGeneratedDate, selectGmData } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('code', 'difference')
+  selectGmData('code')
 );
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated, municipalityName, sideBarData, selectedGmData } =
-    props;
+  const { lastGenerated, municipalityName, selectedGmData } = props;
   const router = useRouter();
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
   useEffect(() => {
-    const route = reverseRouter.gm.index(router.query.code as string);
+    const route = reverseRouter.gm.index(selectedGmData.code);
     router.replace(route);
-  }, [reverseRouter.gm, reverseRouter.vr, router]);
+  }, [reverseRouter.gm, reverseRouter.vr, router, selectedGmData.code]);
 
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
       <GmLayout
         code={selectedGmData.code}
-        difference={selectedGmData.difference}
-        data={sideBarData}
         municipalityName={municipalityName}
-        lastGenerated={lastGenerated}
       />
     </Layout>
   );

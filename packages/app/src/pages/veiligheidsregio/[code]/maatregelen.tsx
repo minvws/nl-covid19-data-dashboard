@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
-import { Box } from '~/components/base/box';
+import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
@@ -19,7 +19,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -36,7 +36,7 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData(),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
 
@@ -68,7 +68,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, content, vrName, lastGenerated } = props;
+  const { content, vrName, lastGenerated } = props;
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_maatregelen;
@@ -94,7 +94,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             title={replaceVariablesInText(
@@ -106,7 +106,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {showLockdown && (
-            <KpiSection flexDirection="column">
+            <Tile>
               <Box
                 css={css({
                   'p:last-child': {
@@ -119,19 +119,23 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   <RichContent blocks={lockdown.message.description} />
                 ) : null}
               </Box>
-            </KpiSection>
+            </Tile>
           )}
 
           {showLockdown && (
-            <KpiSection display="flex" flexDirection="column">
-              <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} level={content.riskLevel.level} />
-            </KpiSection>
+            <Tile>
+              <Box spacing={3}>
+                <Heading level={3}>{lockdown.title}</Heading>
+                <LockdownTable
+                  data={lockdown}
+                  level={content.riskLevel.level}
+                />
+              </Box>
+            </Tile>
           )}
 
           <AnchorTile
             external
-            shadow
             title={text.titel_aanvullendemaatregelen}
             href={regioUrl}
             label={replaceVariablesInText(text.linktext_regionpage, {

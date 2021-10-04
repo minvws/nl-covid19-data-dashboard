@@ -44,5 +44,11 @@ export function useAgegroupLabels(
         ? oneShotLabel.toLocaleLowerCase()
         : oneShotLabel,
     };
-  }, [dataValue, siteText, formatPercentage]);
+  }, [
+    dataValue,
+    siteText.vaccinaties_common.labels.meer_dan,
+    siteText.vaccinaties_common.labels.minder_dan,
+    formatPercentage,
+    lowerCased,
+  ]);
 }

@@ -23,7 +23,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -32,7 +32,11 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
+  selectVrData(
+    'deceased_cbs',
+    'deceased_rivm',
+    'difference.deceased_rivm__covid_daily'
+  ),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('deceasedPage', locale);
@@ -41,13 +45,12 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    selectedVrData: data,
-    vrName,
     selectedVrData: {
       deceased_cbs: dataCbs,
       deceased_rivm: dataRivm,
       difference,
     },
+    vrName,
     content,
     lastGenerated,
   } = props;
@@ -67,7 +70,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}

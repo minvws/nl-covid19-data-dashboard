@@ -21,12 +21,12 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  selectNlData('reproduction', 'difference.reproduction__index_average'),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('reproductionPage', locale);
@@ -49,11 +49,13 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.reproductiegetal.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.reproduction_number.title
+            }
             title={text.titel}
             icon={<Reproductiegetal />}
             description={text.pagina_toelichting}

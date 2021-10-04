@@ -1,11 +1,11 @@
+import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import { Anchor, Heading } from '~/components/typography';
-import { Link } from '~/utils/link';
-import { ExternalLink } from './external-link';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
+import { Link } from '~/utils/link';
+import { ExternalLink } from './external-link';
 interface AnchorTileProps {
   title: string;
   href: string;
@@ -21,10 +21,9 @@ export function AnchorTile({
   label,
   children,
   external = false,
-  shadow = false,
 }: AnchorTileProps) {
   return (
-    <Container shadow={shadow}>
+    <Container>
       <Content>
         <Heading level={3}>{title}</Heading>
         {children}
@@ -51,14 +50,12 @@ export function AnchorTile({
   );
 }
 
-const Container = styled.article<{ shadow: boolean }>((x) =>
+const Container = styled.article(
   css({
     display: 'flex',
-    bg: 'white',
-    p: asResponsiveArray({ _: 3, sm: 4 }),
-    borderRadius: 1,
+    py: asResponsiveArray({ _: 3, sm: 4 }),
     flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
-    boxShadow: x.shadow ? 'tile' : 'none',
+    borderTop: 'solid 2px lightGray',
   })
 );
 

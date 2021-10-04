@@ -39,7 +39,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
@@ -47,7 +47,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(
+  selectNlData(
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor',
     'vaccine_administered_ggd',
@@ -119,7 +119,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile

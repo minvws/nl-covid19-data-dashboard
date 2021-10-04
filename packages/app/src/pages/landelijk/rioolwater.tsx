@@ -27,31 +27,35 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   () => {
-    const data = selectNlPageMetricData()();
-    data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
-      (x) => ({
-        ...x,
-        average: isPresent(x.average) ? Math.round(x.average) : null,
-      })
-    );
-    data.selectedNlData.sewer.last_value = {
-      ...data.selectedNlData.sewer.last_value,
-      average: isPresent(data.selectedNlData.sewer.last_value.average)
-        ? Math.round(data.selectedNlData.sewer.last_value.average)
+    const { selectedNlData: data } = selectNlData(
+      'sewer',
+      'difference.sewer__average'
+    )();
+
+    data.sewer.values = data.sewer.values.map((x) => ({
+      ...x,
+      average: isPresent(x.average) ? Math.round(x.average) : null,
+    }));
+
+    data.sewer.last_value = {
+      ...data.sewer.last_value,
+      average: isPresent(data.sewer.last_value.average)
+        ? Math.round(data.sewer.last_value.average)
         : null,
     };
-    data.selectedNlData.difference.sewer__average.difference = Math.round(
-      data.selectedNlData.difference.sewer__average.difference
+
+    data.difference.sewer__average.difference = Math.round(
+      data.difference.sewer__average.difference
     );
 
-    return data;
+    return { selectedNlData: data };
   },
   createGetChoroplethData({
     vr: ({ sewer }) => {
@@ -94,11 +98,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
-            screenReaderCategory={siteText.rioolwater_metingen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.sewage_measurement.title
+            }
             title={text.titel}
             icon={<RioolwaterMonitoring />}
             description={text.pagina_toelichting}

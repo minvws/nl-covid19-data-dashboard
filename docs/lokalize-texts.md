@@ -195,3 +195,17 @@ in use in production, then copying the text from production will overwrite these
 changes. This should be a rare case and if it happens the development build will
 break. It shouldn't be much work to then re-apply the variable changes to the text,
 but this is something to be aware of.
+
+## When things break
+
+The above described workflows are not 100% fool proof. Situation do arise where the
+mutations file somehow becomes out of sync with the Sanity dataset.
+Usually this happens when a release is being cherry-picked from a number of disparate
+commits that might have branched off or merged off the develop set where multiple
+changes have happened in the mutations file.
+The `lokalize:add` script can help out here if for some reason a single key/value document
+needs to be added to Sanity. For example, when the mutations file contains an `add` command
+but for some reason this document hasn't been added to the production dataset. (This situation
+has already occured).
+Also see the section `release-procedure/Intermediate or Hotfix Release` for other faulty
+situations that might occur.

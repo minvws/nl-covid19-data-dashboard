@@ -18,17 +18,15 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import {
-  getLastGeneratedDate,
-  selectNlPageMetricData,
-} from '~/static-props/get-data';
+import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(
+  selectNlData(
+    'difference.corona_melder_app_warning__count',
     'corona_melder_app_warning',
     'corona_melder_app_download'
   )
@@ -50,7 +48,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={corona_melder_app.header.category}

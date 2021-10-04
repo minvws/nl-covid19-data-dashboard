@@ -9,3 +9,11 @@ declare module 'react' {
     css?: CssFunctionReturnType;
   }
 }
+
+declare module '@corona-dashboard/icons' {
+  import { IconProps as BaseIconProps } from '@corona-dashboard/icons';
+
+  export interface IconProps extends BaseIconProps {
+    css?: CssFunctionReturnType;
+  }
+}
