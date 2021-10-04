@@ -152,7 +152,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
     borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
 
     '&:hover': {
-      bg: 'page',
+      bg: 'offWhite',
     },
 
     '&:focus': {
