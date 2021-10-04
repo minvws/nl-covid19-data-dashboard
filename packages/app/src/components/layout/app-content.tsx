@@ -5,6 +5,7 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { LinkWithIcon } from '../link-with-icon';
 
@@ -116,6 +117,7 @@ const StyledAppContent = styled.main(
     minWidth: 0,
     flexGrow: 1,
     flexShrink: 1,
+    overflow: 'hidden',
   })
 );
 
@@ -128,6 +130,20 @@ const StyledSidebar = styled.aside(
     flexShrink: 0,
     flexGrow: 0,
     boxShadow: '1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5',
+    maxHeight: '100vh',
+    position: 'sticky',
+    top: 0,
+    overflow: 'auto',
+    scrollbarWidth: 'thin',
+    scrollbarColor: `${colors.blue} ${colors.white}`,
+    '&::-webkit-scrollbar': {
+      width: '6px',
+      backgroundColor: colors.white,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: colors.blue,
+      borderRadius: '5px',
+    },
   })
 );
 
