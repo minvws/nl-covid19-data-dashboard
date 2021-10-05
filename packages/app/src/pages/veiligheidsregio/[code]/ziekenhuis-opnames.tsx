@@ -1,4 +1,5 @@
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { useRouter } from 'next/router';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -31,7 +32,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
@@ -43,7 +44,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData('hospital_nice'),
   createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
@@ -72,11 +73,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
 
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
   const lastValue = data.hospital_nice.last_value;
 
-  const municipalCodes = gmCodesByVrCode[data.code];
+  const municipalCodes = gmCodesByVrCode[router.query.code as string];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const underReportedRange = getBoundaryDateStartUnix(
@@ -97,7 +99,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}

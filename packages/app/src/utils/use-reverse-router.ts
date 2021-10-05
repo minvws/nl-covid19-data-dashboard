@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 import { useFeature } from '~/lib/features';
 import { useBreakpoints } from './use-breakpoints';
 
+export type ReverseRouter = ReturnType<typeof useReverseRouter>;
+
 export function useReverseRouter() {
   const breakpoints = useBreakpoints();
   const openMenuSuffix = !breakpoints.md ? '?menu=1' : '';

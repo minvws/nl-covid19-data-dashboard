@@ -21,7 +21,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -30,19 +30,26 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   (context) => {
-    const data = selectVrPageMetricData('sewer_per_installation')(context);
+    const data = selectVrData(
+      'sewer',
+      'sewer_per_installation',
+      'difference.sewer__average'
+    )(context);
+
     data.selectedVrData.sewer.values = data.selectedVrData.sewer.values.map(
       (x) => ({
         ...x,
         average: isPresent(x.average) ? Math.round(x.average) : null,
       })
     );
+
     data.selectedVrData.sewer.last_value = {
       ...data.selectedVrData.sewer.last_value,
       average: isPresent(data.selectedVrData.sewer.last_value.average)
         ? Math.round(data.selectedVrData.sewer.last_value.average)
         : null,
     };
+
     data.selectedVrData.difference.sewer__average.difference = Math.round(
       data.selectedVrData.difference.sewer__average.difference
     );
@@ -83,7 +90,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.vroege_signalen}

@@ -186,10 +186,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.nationaal_actueel.mini_trend_tiles
                         .vaccinatiegraad.menu_item_label,
                     data: data.vaccine_coverage_per_age_group_estimated.values,
-                    dataProperty: 'age_18_plus_fully_vaccinated',
+                    dataProperty: 'age_18_plus_has_one_shot',
                     value:
                       last(data.vaccine_coverage_per_age_group_estimated.values)
-                        ?.age_18_plus_fully_vaccinated ?? 0,
+                        ?.age_18_plus_has_one_shot ?? 0,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,

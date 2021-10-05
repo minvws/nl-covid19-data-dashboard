@@ -30,7 +30,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -38,7 +38,11 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  selectNlData(
+    'difference.disability_care__newly_infected_people',
+    'difference.disability_care__infected_locations_total',
+    'disability_care'
+  ),
   createGetChoroplethData({
     vr: ({ disability_care }) => ({ disability_care }),
   }),
@@ -69,13 +73,11 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={
-              siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
-            }
+            screenReaderCategory={siteText.sidebar.metrics.disabled_care.title}
             title={positiveTestedPeopleText.titel}
             icon={<GehandicaptenZorg />}
             description={positiveTestedPeopleText.pagina_toelichting}
