@@ -11,6 +11,7 @@ import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
@@ -96,6 +97,7 @@ interface MenuItemLinkProps {
 
 export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
   const router = useRouter();
+  const breakpoints = useBreakpoints(true);
 
   if (!href) {
     return (
@@ -113,10 +115,14 @@ export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
     <li>
       <Link href={href} passHref>
         <StyledAnchor
-          isActive={isActive}
+          isActive={breakpoints.md && isActive}
           aria-current={isActive ? 'page' : undefined}
         >
-          <AsideTitle icon={icon} title={title} showArrow={!isActive} />
+          <AsideTitle
+            icon={icon}
+            title={title}
+            showArrow={!breakpoints.md || !isActive}
+          />
         </StyledAnchor>
       </Link>
     </li>
