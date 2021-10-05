@@ -5,15 +5,12 @@ import { asResponsiveArray } from '~/style/utils';
 interface TileProps {
   children: React.ReactNode;
   height?: number | string;
+  atTop?: boolean;
 }
 
-export function Tile({ children, height }: TileProps) {
-  return <StyledTile height={height}>{children}</StyledTile>;
-}
-
-export function BlueTile({ children, height }: TileProps) {
+export function Tile({ children, height, atTop = false }: TileProps) {
   return (
-    <StyledTile backgroundColor="lightBlue" height={height}>
+    <StyledTile height={height} atTop={atTop}>
       {children}
     </StyledTile>
   );
@@ -21,16 +18,14 @@ export function BlueTile({ children, height }: TileProps) {
 
 const StyledTile = styled.article<{
   height?: number | string;
-  backgroundColor?: string;
+  atTop: boolean;
 }>((x) =>
   css({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    bg: x.backgroundColor ? x.backgroundColor : 'white',
-    p: asResponsiveArray({ _: 3, sm: 4 }),
-    borderRadius: 1,
-    boxShadow: 'tile',
+    py: asResponsiveArray({ _: 3, sm: 4 }),
     height: x.height,
+    borderTop: x.atTop ? undefined : 'solid 2px lightGray',
   })
 );

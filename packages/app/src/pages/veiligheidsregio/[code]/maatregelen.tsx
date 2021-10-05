@@ -1,12 +1,13 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
-import { Box } from '~/components/base/box';
+import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
@@ -28,6 +29,9 @@ export { getStaticPaths } from '~/static-paths/vr';
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
+  riskLevel: {
+    level: EscalationLevelType;
+  };
 };
 
 export const getStaticProps = createGetStaticProps(
@@ -54,6 +58,9 @@ export const getStaticProps = createGetStaticProps(
           },
         }
       }[0],
+      'riskLevel': *[_type == 'riskLevelNational']{
+		    "level": riskLevel,
+      }[0],
       // We will need the roadmap when lockdown is disabled in the CMS.
       // 'roadmap': *[_type == 'roadmap'][0]
     }`;
@@ -74,16 +81,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const code = router.query.code as unknown as VRCode;
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
-
-  /**
-   * We will need this again when lockdown is disabled
-   */
-  // const escalationLevel = useEscalationLevel(data.restrictions.values);
-
-  // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-  // Data is determined by the actual escalation level which can be 1, 2, 3, 4, 401, 402, 41
-  // const effectiveEscalationLevel: EscalationLevel =
-  //   escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -109,7 +106,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {showLockdown && (
-            <KpiSection flexDirection="column">
+            <Tile>
               <Box
                 css={css({
                   'p:last-child': {
@@ -122,19 +119,23 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   <RichContent blocks={lockdown.message.description} />
                 ) : null}
               </Box>
-            </KpiSection>
+            </Tile>
           )}
 
           {showLockdown && (
-            <KpiSection display="flex" flexDirection="column">
-              <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} />
-            </KpiSection>
+            <Tile>
+              <Box spacing={3}>
+                <Heading level={3}>{lockdown.title}</Heading>
+                <LockdownTable
+                  data={lockdown}
+                  level={content.riskLevel.level}
+                />
+              </Box>
+            </Tile>
           )}
 
           <AnchorTile
             external
-            shadow
             title={text.titel_aanvullendemaatregelen}
             href={regioUrl}
             label={replaceVariablesInText(text.linktext_regionpage, {

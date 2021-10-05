@@ -1,5 +1,5 @@
 // prettier-ignore
-const space = [
+export const space = [
   0,          // 0 -   0px
   '0.25rem',  // 1 -   4px at default zoom
   '0.5rem',   // 2 -   8px
@@ -105,7 +105,7 @@ export const colors = {
   white: '#fff',
   body: '#000000',
   bodyLight: '#555555',
-  page: '#f3f3f3',
+  offWhite: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',

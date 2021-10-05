@@ -111,7 +111,6 @@ const AppContentContainer = styled.div(
 
 const StyledAppContent = styled.main(
   css({
-    bg: 'page',
     zIndex: 3,
     width: '100%',
     minWidth: 0,
@@ -123,13 +122,15 @@ const StyledAppContent = styled.main(
 
 const StyledSidebar = styled.aside(
   css({
-    bg: asResponsiveArray({ _: 'page', md: 'white' }),
     zIndex: 3,
     minHeight: [null, null, null, null, '35em'],
     width: [null, null, null, '25em'],
     flexShrink: 0,
     flexGrow: 0,
-    boxShadow: '1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5',
+    borderRight: asResponsiveArray({
+      _: 'none',
+      md: `solid 1px ${colors.border}`,
+    }),
     maxHeight: asResponsiveArray({ _: null, md: '100vh' }),
     position: asResponsiveArray({ _: null, md: 'sticky' }),
     top: asResponsiveArray({ _: null, md: 0 }),

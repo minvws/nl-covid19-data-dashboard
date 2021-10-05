@@ -387,7 +387,7 @@ function AreaMap(props: AreaMapProps) {
       {geoInfo.map((x, i) => (
         <area
           style={{
-            cursor: 'pointer',
+            cursor: isDefined(getLink) ? 'pointer' : undefined,
           }}
           tabIndex={2}
           aria-label={getFeatureName(x.code)}

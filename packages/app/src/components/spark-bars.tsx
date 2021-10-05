@@ -4,7 +4,7 @@ import { colors } from '~/style/theme';
 import { Box } from './base';
 
 const BAR_WIDTH = 6;
-const BAR_HEIGHT = 24;
+const BAR_HEIGHT = 16;
 
 type SparkBarsProps<T extends TimestampedValue> = {
   averageProperty: KeysOfType<T, number | null, true>;
@@ -46,6 +46,7 @@ export function SparkBars<T extends TimestampedValue>(
                 key={'date_unix' in d ? d.date_unix : d.date_start_unix}
                 x={i * BAR_WIDTH}
                 width={BAR_WIDTH}
+                opacity="0.5"
                 y={y(Math.max(0, d[averageProperty]))}
                 height={
                   d[averageProperty] >= 0 ? y(0) - y(d[averageProperty]) : y(0)
