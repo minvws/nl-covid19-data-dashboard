@@ -61,6 +61,7 @@ timestamp,action,key,document_id,move_to
 2021-09-22T15:25:26.359Z,add,common_actueel.secties.kpi.hospital_admissions.plural,PGwiP4IwXrA0GfLCLDof1I,__
 2021-09-22T15:25:27.339Z,add,common_actueel.secties.kpi.hospital_admissions.singular,7nClfXqPlyZyEU7PO5eeXg,__
 2021-09-22T15:25:28.358Z,add,common_actueel.secties.kpi.hospital_admissions.zero,PGwiP4IwXrA0GfLCLDofF5,__
+2021-09-27T11:29:05.836Z,add,accessibility.tab_navigatie_button,PGwiP4IwXrA0GfLCLKn8dp,__
 2021-09-29T11:23:35.300Z,add,sidebar.nl.measures.title,qNGd4zPbpj47IuPd8I44XY,__
 2021-09-29T11:23:36.274Z,add,sidebar.nl.vaccinations.title,PGwiP4IwXrA0GfLCLOOB7K,__
 2021-09-29T11:23:37.348Z,add,sidebar.nl.hospitals.title,PGwiP4IwXrA0GfLCLOOBCq,__
