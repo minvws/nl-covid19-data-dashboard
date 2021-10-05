@@ -115,8 +115,8 @@ export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
     <li>
       <Link href={href} passHref>
         <StyledAnchor
-          isActive={isActive}
-          aria-current={isActive ? 'page' : undefined}
+          isActive={breakpoints.md && isActive}
+          aria-current={breakpoints.md && isActive ? 'page' : undefined}
         >
           <AsideTitle
             icon={icon}
@@ -152,16 +152,10 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
     p: 2,
     display: 'block',
     borderRight: '5px solid transparent',
-    color: asResponsiveArray({ _: 'black', md: x.isActive ? 'blue' : 'black' }),
+    color: x.isActive ? 'blue' : 'black',
     position: 'relative',
-    bg: asResponsiveArray({
-      _: 'transparent',
-      md: x.isActive ? 'lightBlue' : 'transparent',
-    }),
-    borderRightColor: asResponsiveArray({
-      _: 'transparant',
-      md: x.isActive ? 'sidebarLinkBorder' : 'transparent',
-    }),
+    bg: x.isActive ? 'lightBlue' : 'transparent',
+    borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
 
     '&:hover': {
       bg: 'offWhite',
