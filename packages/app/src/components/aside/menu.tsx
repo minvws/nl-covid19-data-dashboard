@@ -11,6 +11,7 @@ import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
@@ -96,6 +97,7 @@ interface MenuItemLinkProps {
 
 export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
   const router = useRouter();
+  const breakpoints = useBreakpoints(true);
 
   if (!href) {
     return (
@@ -116,7 +118,11 @@ export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
           isActive={isActive}
           aria-current={isActive ? 'page' : undefined}
         >
-          <AsideTitle icon={icon} title={title} showArrow={!isActive} />
+          <AsideTitle
+            icon={icon}
+            title={title}
+            showArrow={!breakpoints.md || !isActive}
+          />
         </StyledAnchor>
       </Link>
     </li>
@@ -146,10 +152,16 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
     p: 2,
     display: 'block',
     borderRight: '5px solid transparent',
-    color: x.isActive ? 'blue' : 'black',
+    color: asResponsiveArray({ _: 'black', md: x.isActive ? 'blue' : 'black' }),
     position: 'relative',
-    bg: x.isActive ? 'lightBlue' : 'transparent',
-    borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
+    bg: asResponsiveArray({
+      _: 'transparent',
+      md: x.isActive ? 'lightBlue' : 'transparent',
+    }),
+    borderRightColor: asResponsiveArray({
+      _: 'transparant',
+      md: x.isActive ? 'sidebarLinkBorder' : 'transparent',
+    }),
 
     '&:hover': {
       bg: 'offWhite',
