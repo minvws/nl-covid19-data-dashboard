@@ -22,7 +22,7 @@ export const BreadcrumbsDataProvider = ({
   value,
   children,
 }: {
-  value: Record<string, string>;
+  value?: Record<string, string>;
   children: ReactNode;
 }) => {
   const mergedValue = useMemo(() => {
