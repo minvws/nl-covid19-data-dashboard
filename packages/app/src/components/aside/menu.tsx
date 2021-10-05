@@ -116,7 +116,7 @@ export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
       <Link href={href} passHref>
         <StyledAnchor
           isActive={breakpoints.md && isActive}
-          aria-current={breakpoints.md && isActive ? 'page' : undefined}
+          aria-current={isActive ? 'page' : undefined}
         >
           <AsideTitle
             icon={icon}
