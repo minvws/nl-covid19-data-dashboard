@@ -13,6 +13,7 @@ export * from './intensive-care-page';
 export * from './nursing-home-page';
 export * from './over-dit-dashboard-page';
 export * from './over-risiconiveaus-page';
+export * from './over-risiconiveaus-page-new';
 export * from './positive-tests-page';
 export * from './reproduction-page';
 export * from './sewer-page';

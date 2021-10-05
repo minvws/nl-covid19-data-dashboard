@@ -21,6 +21,7 @@ const hiddenDocTypes = [
   'cijferVerantwoordingGroups',
   'overDitDashboard',
   'overRisicoNiveaus',
+  'overRisicoNiveausNew',
   'roadmap',
   'lockdown',
   'behaviorPage',
@@ -74,6 +75,7 @@ export default () =>
       ),
       addListItem(GrDashboard, 'Actueel', 'topicalPage'),
       addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveaus'),
+      addListItem(BsMap, 'Over de risiconiveaus 2', 'overRisicoNiveausNew'),
       S.listItem()
         .title('Veelgestelde vragen')
         .icon(MdQuestionAnswer)
