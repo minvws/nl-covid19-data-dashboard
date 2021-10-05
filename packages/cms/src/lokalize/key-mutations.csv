@@ -268,3 +268,5 @@ timestamp,action,key,document_id,move_to
 2021-09-30T14:57:03.121Z,delete,escalatie_niveau.sidebar_label,jF33EuwumlGuwav2FD3o4q,__
 2021-09-30T14:57:03.124Z,delete,nl_gedrag.sidebar.titel,jF33EuwumlGuwav2FD3sce,__
 2021-09-30T14:57:03.126Z,delete,regionaal_gedrag.sidebar.titel,jF33EuwumlGuwav2FD3tW0,__
+2021-10-04T11:26:16.902Z,add,dashboard_wide_notification.title,wzQp83DAUqyqV3ewGLiXxV,__
+2021-10-04T11:26:18.146Z,add,dashboard_wide_notification.description,tdf6s1l0srCSpeM2lEl1X2,__
