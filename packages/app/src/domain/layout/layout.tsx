@@ -1,4 +1,6 @@
 import React from 'react';
+import { Breadcrumbs } from '~/components/breadcrumbs';
+import { BreadcrumbsDataProvider } from '~/components/breadcrumbs/logic/use-breadcrumbs';
 import { AppFooter } from '~/components/layout/app-footer';
 import { AppHeader } from '~/components/layout/app-header';
 import { SEOHead } from '~/components/seo-head';
@@ -12,12 +14,14 @@ interface LayoutProps {
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
+  breadcrumbsData?: Record<string, string>;
 }
 
 export function Layout(
   props: LayoutProps & { lastGenerated: string; children: React.ReactNode }
 ) {
   const {
+    breadcrumbsData,
     children,
     title,
     description,
@@ -50,6 +54,10 @@ export function Layout(
       />
 
       <AppHeader />
+
+      <BreadcrumbsDataProvider value={breadcrumbsData}>
+        <Breadcrumbs />
+      </BreadcrumbsDataProvider>
 
       <CurrentDateProvider dateInSeconds={Number(lastGenerated)}>
         <div>{children}</div>

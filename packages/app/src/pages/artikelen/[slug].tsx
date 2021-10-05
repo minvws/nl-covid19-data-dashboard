@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
@@ -95,8 +96,17 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
     twitterImage: imgPath,
   };
 
+  const breadcrumbsData = useMemo(
+    () => ({ [props.content.slug.current]: props.content.title }),
+    [props.content.slug, props.content.title]
+  );
+
   return (
-    <Layout {...metadata} lastGenerated={lastGenerated}>
+    <Layout
+      lastGenerated={lastGenerated}
+      breadcrumbsData={breadcrumbsData}
+      {...metadata}
+    >
       <Box backgroundColor="white">
         <ArticleDetail article={content} />
       </Box>
