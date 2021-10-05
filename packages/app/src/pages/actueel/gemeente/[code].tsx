@@ -1,7 +1,7 @@
 import {
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
-  GmVaccineCoveragePerAgeGroupValue,
+  GmVaccineCoveragePerAgeGroupValue
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
@@ -25,7 +25,7 @@ import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   MiniTileSelectorItem,
-  MiniTileSelectorLayout,
+  MiniTileSelectorLayout
 } from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
@@ -36,18 +36,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
-  getWarning,
+  getWarning
 } from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectGmData,
+  selectGmData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -198,9 +198,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.gemeente_actueel.mini_trend_tiles.vaccinatiegraad
                         .menu_item_label,
                     data: data.vaccine_coverage_per_age_group.values,
-                    dataProperty: 'fully_vaccinated_percentage',
+                    dataProperty: 'has_one_shot_percentage',
                     value:
-                      renderedAgeGroup18Pluslabels.fully_vaccinated_percentage,
+                      renderedAgeGroup18Pluslabels.has_one_shot_percentage,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
