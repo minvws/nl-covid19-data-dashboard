@@ -2,12 +2,14 @@ import {
   assert,
   Gm,
   GmCollection,
+  gmData,
   In,
   InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
   Vr,
   VrCollection,
+  vrData,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
@@ -16,8 +18,6 @@ import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
 import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
-import { gmData } from '~/data/gm';
-import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/multi-select-countries';
 import { getClient, localize } from '~/lib/sanity';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';

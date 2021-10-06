@@ -1,9 +1,7 @@
+import { ChartConfiguration } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import {
-  ChartConfiguration,
-  ChartConfigurationInput,
-} from '../../custom-inputs/chart-configuration-input';
+import { ChartConfigurationInput } from '../../custom-inputs/chart-configuration-input';
 
 export const Chart = {
   title: 'Dashboard Grafiek',

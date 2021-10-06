@@ -2,7 +2,7 @@ export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
 export type ChartConfiguration = Required<PartialChartConfiguration>;
 
-type PartialChartConfiguration = {
+export type PartialChartConfiguration = {
   area?: AreaType;
   metricName?: string;
   metricPropertyConfigs?: MetricPropertyConfig[];
