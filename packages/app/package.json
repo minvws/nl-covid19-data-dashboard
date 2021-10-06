@@ -122,7 +122,7 @@
     "react-refresh": "^0.10.0",
     "start-server-and-test": "^1.13.1",
     "ts-jest": "^27.0.4",
-    "typescript": "^4.4.2",
+    "typescript": "^4.4.3",
     "walkjs": "^3.1.11"
   },
   "lint-staged": {
@@ -146,6 +146,7 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
+    "trace": "tsc --pretty --noEmit --generateTrace \"trace-$(date +%Y%m%d%H%M)\" --composite false --incremental false",
     "download": "node ./infra/download.js",
     "clean": "npx rimraf .next",
     "nuke": "yarn clean && npx rimraf node_modules"
