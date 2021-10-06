@@ -1,5 +1,9 @@
+import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import { ChartConfigurationInput } from '../../custom-inputs/chart-configuration-input';
+import {
+  ChartConfiguration,
+  ChartConfigurationInput,
+} from '../../custom-inputs/chart-configuration-input';
 
 export const Chart = {
   title: 'Dashboard Grafiek',
@@ -16,7 +20,21 @@ export const Chart = {
   ],
   preview: {
     select: {
-      title: 'config',
+      config: 'config',
+    },
+    prepare({ config }: { config: string }) {
+      if (isDefined(config)) {
+        const cf: ChartConfiguration = JSON.parse(config);
+        return {
+          title: `${cf.area}_${cf.metricName}_${cf.timeframe}`,
+          subtitle: cf.metricPropertyConfigs
+            .map((x) => x.propertyName)
+            .join(', '),
+        };
+      }
+      return {
+        title: 'Undefined',
+      };
     },
   },
 };

@@ -94,7 +94,11 @@ function createGeoJson(map: MapType) {
   return [featureGeo, outlineGeo] as const;
 }
 
+const validMapTypes: MapType[] = ['gm', 'vr', 'in'];
 function loadChoroplethData(map: MapType, metric: string) {
+  if (!validMapTypes.includes(map)) {
+    throw new Error(`Invalid map type: ${map}`);
+  }
   const filename = `${map.toUpperCase()}_COLLECTION.json`;
   const content = JSON.parse(
     fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })

@@ -79,6 +79,7 @@ export const blockFields = [
   },
   {
     title: 'Dashboard Grafiek',
-    type: 'chart',
+    type: 'reference',
+    to: [{ type: 'chartConfiguration' }],
   },
 ];

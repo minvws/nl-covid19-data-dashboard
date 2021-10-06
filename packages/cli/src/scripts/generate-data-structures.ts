@@ -6,10 +6,14 @@ import { isDefined } from 'ts-is-present';
 import * as ts from 'typescript';
 import { schemaDirectory } from '../config';
 
+const header =
+  "/** This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.*/\n";
+
 const skippedProperties = [
   'code',
   'vrcode',
   'gmcode',
+  'country_code',
   'date_unix',
   'date_of_insertion_unix',
   'date_start_unix',
@@ -173,7 +177,7 @@ function generateCodeStructure(schemaInfo: Record<string, any>) {
     file
   );
 
-  return prettier.format(source, { parser: 'typescript' });
+  return prettier.format(header + source, { parser: 'typescript' });
 }
 
 function createPropertyValue(name: string, value: any) {

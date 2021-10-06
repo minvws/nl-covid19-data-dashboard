@@ -3,6 +3,7 @@
  */
 
 export * from './article';
+export * from './chart-configuration';
 export * from './cijfer-verantwoording-item';
 export * from './editorial';
 export * from './escalation-level';

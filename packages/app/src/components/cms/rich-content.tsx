@@ -1,3 +1,4 @@
+import { ChartConfiguration } from '@corona-dashboard/common';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
@@ -19,12 +20,20 @@ import {
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
+import { InlineTimeSeriesCharts } from '../time-series-chart/inline-time-series-charts';
 import { ContentImage } from './content-image';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
   imageSizes?: number[][];
+}
+
+interface ChartConfigNode {
+  chart: {
+    _type: string;
+    config: string;
+  };
 }
 
 export function RichContent({
@@ -76,6 +85,13 @@ export function RichContent({
             </CollapsibleSection>
           </ContentWrapper>
         );
+      },
+      chartConfiguration: (props: { node: ChartConfigNode }) => {
+        const configuration = JSON.parse(
+          props.node.chart.config
+        ) as ChartConfiguration;
+
+        return <InlineTimeSeriesCharts configuration={configuration} />;
       },
     },
     marks: {

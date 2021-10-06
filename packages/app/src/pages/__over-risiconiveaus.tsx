@@ -13,36 +13,43 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { RichContentBlock } from '~/types/cms';
+import { CollapsibleList, RichContentBlock } from '~/types/cms';
 
 interface OverRisiconiveausData {
-  content: RichContentBlock[];
+  title: string;
+  description: RichContentBlock[];
+  scoreBoardTitle: string;
+  scoreBoardDescription: string;
+  riskLevelExplanations: RichContentBlock[];
+  collapsibleList: CollapsibleList[];
 }
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<OverRisiconiveausData>((context) => {
     const { locale } = context;
-    return `*[_type == 'overRisicoNiveausNew']
-    {
-      "content": {
-            "_type": content._type,
-            "${locale}": [
-              ...content.${locale}[]
-              {
-                (asset == undefined && _type != 'reference') => {
-                  ...,
-                },
-                asset != undefined => {
-                  "_type": 'image',
-                  "asset": asset->
-                },
-                _type == 'reference' => {
-                  ...*[_id == ^._ref][0]
-                }
-              },
-            ]
-          },
+    return `*[_type == 'overRisicoNiveaus']{
+      "title": title.${locale},
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ]
+      },
+      "riskLevelExplanations": {
+        "_type": riskLevelExplanations._type,
+        "${locale}": [
+          ...riskLevelExplanations.${locale}[]
+          {
+            ...,
+            "asset": asset->,
+           },
+        ]
+      },
     }[0]
     `;
   })
@@ -51,8 +58,6 @@ export const getStaticProps = createGetStaticProps(
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
-
-  console.dir(content);
 
   return (
     <Layout
@@ -74,10 +79,14 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
       <Content>
         <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto" spacing={4}>
-          <Heading level={1}>Risico</Heading>
+          <Heading level={1}>{content.title}</Heading>
           <Box textVariant="body1">
-            <RichContent blocks={content.content} />
+            <RichContent blocks={content.description} />
           </Box>
+        </Box>
+
+        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
+          <RichContent blocks={content.riskLevelExplanations} />
         </Box>
       </Content>
     </Layout>
