@@ -219,7 +219,7 @@ export function VrLayout(props: VrLayoutProps) {
                       <SidebarMetric
                         data={data}
                         metricName="hospital_nice"
-                        metricProperty="admissions_on_date_of_admission_moving_average"
+                        metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
                         hideDate
                       />

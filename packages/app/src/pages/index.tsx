@@ -136,7 +136,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <DataDrivenText
                     data={data}
                     metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={
                       text.data_driven_texts.intensive_care_nice.value
@@ -154,7 +154,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
+                      'admissions_on_date_of_admission_moving_average_rounded',
                     label:
                       siteText.ic_opnames_per_dag
                         .linechart_legend_trend_label_moving_average,
@@ -173,7 +173,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
                 titleValue={
                   last(dataICTotal.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
+                    ?.admissions_on_date_of_admission_moving_average_rounded ??
+                  0
                 }
                 href={reverseRouter.nl.intensiveCareOpnames()}
                 accessibility={{ key: 'topical_intensive_care_nice' }}
@@ -189,7 +190,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <DataDrivenText
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={
                       text.data_driven_texts.intake_hospital_ma_nieuw.value
@@ -207,7 +208,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
+                      'admissions_on_date_of_admission_moving_average_rounded',
                     label:
                       siteText.ziekenhuisopnames_per_dag
                         .linechart_legend_titel_moving_average,
@@ -227,7 +228,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
                 titleValue={
                   last(dataHospitalIntake.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
+                    ?.admissions_on_date_of_admission_moving_average_rounded ??
+                  0
                 }
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}

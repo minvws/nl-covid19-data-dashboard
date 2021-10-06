@@ -128,7 +128,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="hospital_moving_avg_per_region"
                 absolute={
-                  lastValue.admissions_on_date_of_admission_moving_average
+                  lastValue.admissions_on_date_of_admission_moving_average_rounded
                 }
                 isMovingAverageDifference
                 isAmount

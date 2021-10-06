@@ -180,7 +180,7 @@ export function NlLayout(props: NlLayoutProps) {
                   <SidebarMetric
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     localeTextKey="ziekenhuisopnames_per_dag"
                   />
                 </MetricMenuItemLink>
@@ -193,7 +193,7 @@ export function NlLayout(props: NlLayoutProps) {
                   <SidebarMetric
                     data={data}
                     metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     localeTextKey="ic_opnames_per_dag"
                   />
                 </MetricMenuItemLink>

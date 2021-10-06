@@ -180,7 +180,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   <DataDrivenText
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_admission_moving_average"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceText={
@@ -195,7 +195,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
+                      'admissions_on_date_of_admission_moving_average_rounded',
                     label:
                       siteText.ziekenhuisopnames_per_dag
                         .linechart_legend_titel_moving_average,
@@ -210,11 +210,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                     curve: 'step',
                     strokeWidth: 0,
+                    noHover: true,
                   },
                 ]}
                 titleValue={
                   last(dataHospitalIntake.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
+                    ?.admissions_on_date_of_admission_moving_average_rounded ??
+                  0
                 }
                 href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
                 accessibility={{ key: 'topical_hospital_nice' }}

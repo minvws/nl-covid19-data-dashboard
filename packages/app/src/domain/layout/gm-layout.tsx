@@ -196,7 +196,7 @@ export function GmLayout(props: GmLayoutProps) {
                           <SidebarMetric
                             data={sidebarData}
                             metricName="hospital_nice"
-                            metricProperty="admissions_on_date_of_admission_moving_average"
+                            metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
                           />
                         </MetricMenuItemLink>

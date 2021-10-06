@@ -106,7 +106,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               <PageKpi
                 data={data}
                 metricName="intensive_care_nice"
-                metricProperty="admissions_on_date_of_admission_moving_average"
+                metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                 isAmount
                 isMovingAverageDifference
               />

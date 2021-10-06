@@ -134,7 +134,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="admissions_on_date_of_reporting"
                 absolute={
-                  lastValue.admissions_on_date_of_admission_moving_average
+                  lastValue.admissions_on_date_of_admission_moving_average_rounded
                 }
                 isAmount
                 isMovingAverageDifference
@@ -215,7 +215,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       label: text.linechart_legend_underreported_titel,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average',
+                        'admissions_on_date_of_admission_moving_average_rounded',
                       ],
                     },
                   ],
