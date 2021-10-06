@@ -14,6 +14,9 @@ export function NotificationBanner({
   title,
   description,
 }: NotificationBannerProps) {
+  const [lastWord, ...splittedWords] = title.split(' ').reverse();
+  const titleWithoutLastWord = splittedWords.reverse().join(' ');
+
   const collapsible = useCollapsible();
 
   const hasDescription = description.length !== 0;
@@ -26,7 +29,7 @@ export function NotificationBanner({
         display="flex"
         spacingHorizontal={3}
       >
-        <Box display="flex">
+        <Box display="flex" minWidth="1.6rem">
           <Warning fill="black" />
         </Box>
 
@@ -41,8 +44,15 @@ export function NotificationBanner({
                   cursor: 'pointer',
                 })}
               >
-                <InlineText fontWeight="bold">{title}</InlineText>
-                {collapsible.chevron}
+                <InlineText fontWeight="bold">
+                  {titleWithoutLastWord}{' '}
+                  <Box display="inline-flex" position="relative">
+                    <InlineText>
+                      {lastWord}
+                      {collapsible.chevron}
+                    </InlineText>
+                  </Box>
+                </InlineText>
               </Box>
             )
           ) : (
