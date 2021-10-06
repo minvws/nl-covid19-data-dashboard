@@ -91,7 +91,11 @@ export function RichContent({
           props.node.chart.config
         ) as ChartConfiguration;
 
-        return <InlineTimeSeriesCharts configuration={configuration} />;
+        return (
+          <Box width="infoWidth" maxWidth="infoWidth">
+            <InlineTimeSeriesCharts configuration={configuration} />
+          </Box>
+        );
       },
     },
     marks: {

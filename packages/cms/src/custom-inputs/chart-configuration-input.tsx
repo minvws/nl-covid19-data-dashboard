@@ -3,7 +3,17 @@ import {
   MetricPropertyConfig,
   PartialChartConfiguration,
 } from '@corona-dashboard/common';
-import { Box, Button, Card, Label, Radio, Select, TextInput } from '@sanity/ui';
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  Grid,
+  Label,
+  Radio,
+  Select,
+  TextInput,
+} from '@sanity/ui';
 import FormField from 'part:@sanity/components/formfields/default';
 import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -31,10 +41,15 @@ const chartTypes = [
 export const ChartConfigurationInput = React.forwardRef(
   (props: any, ref: any) => {
     const { value = '{}', type, onChange } = props;
+
     const configuration = value
       ? (JSON.parse(value) as PartialChartConfiguration)
       : ({} as PartialChartConfiguration);
 
+    const [isValidated, setIsValidated] = useState(isValid(configuration));
+    const [accessibilityKey, setAccessibilityKey] = useState<string>(
+      configuration.accessibilityKey ?? ''
+    );
     const [area, setArea] = useState<AreaType | ''>(configuration.area ?? '');
     const [metricName, setMetricName] = useState<string>(
       configuration.metricName ?? ''
@@ -48,6 +63,8 @@ export const ChartConfigurationInput = React.forwardRef(
     );
 
     const onChangeTimeframe = (event: any) => setTimeframe(event.target.value);
+    const accessibilityKeyChange = (event: any) =>
+      setAccessibilityKey(event.target.value);
 
     const areaNames = useMemo(
       () =>
@@ -68,7 +85,12 @@ export const ChartConfigurationInput = React.forwardRef(
     const addMetricProperty = () => {
       setMetricPropertyConfigs((x) => [
         ...x,
-        { propertyName: metricProperty, type: 'line', curve: 'linear' },
+        {
+          propertyName: metricProperty,
+          type: 'line',
+          curve: 'linear',
+          labelKey: '',
+        },
       ]);
     };
 
@@ -78,21 +100,41 @@ export const ChartConfigurationInput = React.forwardRef(
         metricName,
         metricPropertyConfigs,
         timeframe,
+        accessibilityKey,
       };
-      console.dir(chartConfig);
+
       if (isValid(chartConfig)) {
+        setIsValidated(true);
         onChange(PatchEvent.from(set(JSON.stringify(chartConfig))));
+      } else {
+        setIsValidated(false);
       }
-    }, [area, metricName, metricPropertyConfigs, timeframe]);
+    }, [area, metricName, metricPropertyConfigs, timeframe, accessibilityKey]);
 
     return (
-      <FormField label={type.title} description={type.description}>
+      <FormField>
         <TextInput
           type="text"
           ref={ref}
           value={value}
           style={{ display: 'none' }}
         />
+        {!isValidated && (
+          <Card marginBottom={2}>
+            <Badge tone="critical">Incomplete configuratie</Badge>
+          </Card>
+        )}
+
+        <Card marginBottom={3}>
+          <Grid gap={[2, 2, 2, 2]}>
+            <Label>Accessibility key</Label>
+            <TextInput
+              type="text"
+              value={accessibilityKey}
+              onChange={accessibilityKeyChange}
+            />
+          </Grid>
+        </Card>
         <Card padding={[0, 0, 2, 2]}>
           <Box display="flex" style={{ alignItems: 'center', gap: 10 }}>
             <Radio
@@ -135,6 +177,7 @@ export const ChartConfigurationInput = React.forwardRef(
               value={metricName}
               onChange={(event: any) => {
                 setMetricName(event.target.value);
+                setMetricPropertyConfigs([]);
                 onChange(PatchEvent.from(unset()));
               }}
             >
@@ -173,7 +216,7 @@ export const ChartConfigurationInput = React.forwardRef(
           </>
         )}
         {isDefined(metricPropertyConfigs) && (
-          <>
+          <Box paddingTop={2}>
             {metricPropertyConfigs.map((x, index) => (
               <MetricPropertyConfigForm
                 propertyConfig={x}
@@ -190,7 +233,7 @@ export const ChartConfigurationInput = React.forwardRef(
                 }}
               />
             ))}
-          </>
+          </Box>
         )}
       </FormField>
     );
@@ -216,6 +259,13 @@ const MetricPropertyConfigForm = (props: MetricPropertyConfigFormProps) => {
     });
   };
 
+  const onLabelKeyChange = (event: any) => {
+    onChange({
+      ...propertyConfig,
+      labelKey: event.target.value,
+    });
+  };
+
   const onChangeCurve = (event: any) => {
     onChange({
       ...propertyConfig,
@@ -224,10 +274,21 @@ const MetricPropertyConfigForm = (props: MetricPropertyConfigFormProps) => {
   };
 
   return (
-    <Box>
+    <Card border={true} padding={[1, 1, 1, 1]}>
       <Label>
         {propertyConfig.propertyName} <Button onClick={onDelete}>X</Button>
       </Label>
+      <Card
+        display="flex"
+        style={{ alignItems: 'center', gap: 10 }}
+        padding={[0, 0, 2, 2]}
+      >
+        <Label>Label key:</Label>
+        <TextInput
+          value={propertyConfig.labelKey}
+          onChange={onLabelKeyChange}
+        />
+      </Card>
       <Card
         display="flex"
         style={{ alignItems: 'center', gap: 10 }}
@@ -239,7 +300,9 @@ const MetricPropertyConfigForm = (props: MetricPropertyConfigFormProps) => {
             Selecteer een type
           </option>
           {chartTypes.map((x: string) => (
-            <option value={x}>{x}</option>
+            <option key={x} value={x}>
+              {x}
+            </option>
           ))}
         </Select>
       </Card>
@@ -265,15 +328,21 @@ const MetricPropertyConfigForm = (props: MetricPropertyConfigFormProps) => {
           </Box>
         </Card>
       )}
-    </Box>
+    </Card>
   );
 };
 
 function isValid(chartConfig: PartialChartConfiguration) {
+  if (!isDefined(chartConfig)) {
+    return false;
+  }
   return (
+    isDefined(chartConfig.accessibilityKey) &&
+    chartConfig.accessibilityKey?.length > 0 &&
     isDefined(chartConfig.area) &&
     isDefined(chartConfig.metricName) &&
     isDefined(chartConfig.timeframe) &&
-    (chartConfig.metricPropertyConfigs?.length ?? 0) > 0
+    (chartConfig.metricPropertyConfigs?.length ?? 0) > 0 &&
+    chartConfig.metricPropertyConfigs?.every((x) => x.labelKey?.length > 0)
   );
 }

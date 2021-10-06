@@ -7,6 +7,7 @@ export type PartialChartConfiguration = {
   metricName?: string;
   metricPropertyConfigs?: MetricPropertyConfig[];
   timeframe?: 'all' | '5weeks';
+  accessibilityKey?: string;
 };
 
 export type MetricPropertyConfig = {
@@ -21,4 +22,5 @@ export type MetricPropertyConfig = {
     | 'gapped-stacked-area'
     | 'invisible';
   curve?: 'linear' | 'step';
+  labelKey: string;
 };

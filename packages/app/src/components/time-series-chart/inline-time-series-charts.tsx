@@ -1,8 +1,11 @@
 import { ChartConfiguration } from '@corona-dashboard/common';
+import { get } from 'lodash';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { TimeSeriesChart } from '.';
 
@@ -12,6 +15,7 @@ interface InlineTimeSeriesChartsProps {
 
 export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
   const { configuration } = props;
+  const { siteText } = useIntl();
 
   const { data } = useSWRImmutable(
     `/api/data/${configuration.area}/${configuration.metricName}`,
@@ -23,7 +27,7 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
       const config: any = {
         type: x.type,
         metricProperty: x.propertyName,
-        label: 'label',
+        label: get(siteText, x.labelKey.split('.'), ''),
         color: colors.data.primary,
       };
       if (x.curve) {
@@ -38,10 +42,13 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
   }
 
   return (
-    <TimeSeriesChart
-      accessibility={{ key: 'behavior_choropleths' }}
-      values={data.values}
-      seriesConfig={seriesConfig}
-    />
+    <ErrorBoundary>
+      <TimeSeriesChart
+        accessibility={{ key: configuration.accessibilityKey as any }}
+        values={data.values}
+        seriesConfig={seriesConfig}
+        timeframe={configuration.timeframe}
+      />
+    </ErrorBoundary>
   );
 }

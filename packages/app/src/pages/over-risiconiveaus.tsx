@@ -1,5 +1,7 @@
+import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
@@ -73,11 +75,14 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
       <Content>
-        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto" spacing={4}>
-          <Heading level={1}>Risico</Heading>
-          <Box textVariant="body1">
-            <RichContent blocks={content.content} />
-          </Box>
+        <Box width="100%" maxWidth="maxWidthText">
+          <Heading level={1}>Risiconiveaus</Heading>
+        </Box>
+        <Box textVariant="body1">
+          <RichContent
+            blocks={content.content}
+            contentWrapper={RichContentWrapper}
+          />
         </Box>
       </Content>
     </Layout>
@@ -85,6 +90,12 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default OverRisicoNiveaus;
+
+const RichContentWrapper = styled.div(
+  css({
+    maxWidth: 'maxWidthText',
+  })
+);
 
 interface ContentProps {
   children: ReactNode;
@@ -100,6 +111,9 @@ function Content({ children }: ContentProps) {
         maxWidth="infoWidth"
         mx="auto"
         spacing={4}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
         {children}
       </Box>
