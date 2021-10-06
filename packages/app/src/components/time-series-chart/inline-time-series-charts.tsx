@@ -22,6 +22,8 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
     (url: string) => fetch(url).then((_) => _.json())
   );
 
+  console.dir(data);
+
   const seriesConfig = useMemo(() => {
     return configuration.metricPropertyConfigs.map((x) => {
       const config: any = {

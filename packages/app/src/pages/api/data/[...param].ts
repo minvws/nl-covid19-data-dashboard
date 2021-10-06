@@ -1,3 +1,4 @@
+import { sortTimeSeriesValues } from '@corona-dashboard/common';
 import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
@@ -11,8 +12,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const data = loadMetricData(root, metric);
+    data.values = sortTimeSeriesValues(data.values);
     res.status(200).json(data);
   } catch (e) {
+    console.error(e);
     res.status(500).end();
   }
 }
