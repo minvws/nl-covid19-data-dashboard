@@ -19,6 +19,7 @@ import { TileList } from '~/components/tile-list';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -50,6 +51,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -146,6 +148,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
       municipalityName,
     }),
   };
+
+  const underReportedRangeHospital = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    INACCURATE_ITEMS
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -262,9 +269,22 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                       curve: 'step',
                       strokeWidth: 0,
-                      noHover: true,
+                      noMarker: true,
                     },
                   ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeHospital,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
                   accessibility={{ key: 'topical_hospital_nice' }}
                   warning={getWarning(
                     content.elements.warning,

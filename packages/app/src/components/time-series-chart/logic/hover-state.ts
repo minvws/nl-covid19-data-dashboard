@@ -40,6 +40,7 @@ export type HoveredPoint<T> = {
   color: string;
   x: number;
   y: number;
+  noMarker?: boolean;
 };
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
@@ -96,7 +97,7 @@ export function useHoverState<T extends TimestampedValue>({
   const interactiveMetricProperties = useMemo(
     () =>
       seriesConfig
-        .filter((x) => !x.noHover)
+        .filter((x) => !x.nonInteractive)
         .filter(isVisible)
         .flatMap((x) => {
           switch (x.type) {
@@ -263,7 +264,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.noHover)
+      .filter((x) => !x.nonInteractive)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -308,7 +309,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.noHover)
+      .filter((x) => !x.nonInteractive)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -341,6 +342,7 @@ export function useHoverState<T extends TimestampedValue>({
               color: yValue ? config.color : 'transparent',
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
+              noMarker: config.noMarker,
             };
           case 'split-area':
             return {
@@ -350,6 +352,7 @@ export function useHoverState<T extends TimestampedValue>({
               color: findSplitPointForValue(config.splitPoints, yValue).color,
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
+              noMarker: config.noMarker,
             };
         }
       })
@@ -363,7 +366,7 @@ export function useHoverState<T extends TimestampedValue>({
      */
     const rangePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.noHover)
+      .filter((x) => !x.nonInteractive)
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesDoubleValue

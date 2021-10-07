@@ -39,13 +39,13 @@ interface SeriesCommonDefinition {
    * to give context to another interactive series, like in the sewer chart when
    * a location is selected.
    */
-  hideInTooltip?: boolean;
+  nonInteractive?: boolean;
   /**
-   * No-hover means the series will not have a hover state. This can be useful
+   * No-marker means the series will not have a marker on hover. This can be useful
    * when showing two variants of the same metric (like 7-day averages and daily
    * values), or when using a second series as a backdrop.
    */
-  noHover?: boolean;
+  noMarker?: boolean;
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>

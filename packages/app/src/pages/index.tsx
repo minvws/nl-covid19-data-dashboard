@@ -18,6 +18,8 @@ import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -51,6 +53,7 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -125,6 +128,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+
+  const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
+    data.intensive_care_nice.values,
+    INACCURATE_ITEMS_IC
+  );
+
+  const underReportedRangeHospital = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    INACCURATE_ITEMS_HOSPITAL
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -260,9 +273,22 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                       curve: 'step',
                       strokeWidth: 0,
-                      noHover: true,
+                      noMarker: true,
                     },
                   ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeIntensiveCare,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
                   accessibility={{ key: 'topical_intensive_care_nice' }}
                   warning={getWarning(
                     content.elements.warning,
@@ -331,9 +357,22 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                       curve: 'step',
                       strokeWidth: 0,
-                      noHover: true,
+                      noMarker: true,
                     },
                   ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeHospital,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
                   accessibility={{ key: 'topical_hospital_nice' }}
                   warning={getWarning(
                     content.elements.warning,
