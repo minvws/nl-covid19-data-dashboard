@@ -4,7 +4,6 @@ import {
   NlVaccineCoveragePerAgeGroupEstimated,
 } from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
@@ -126,6 +125,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pt={4}>
@@ -157,7 +157,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
-                      last(dataICTotal.values)
+                      dataICTotal.last_value
                         ?.admissions_on_date_of_admission_moving_average_rounded ??
                       0,
                     warning: getWarning(
@@ -173,7 +173,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
-                      last(dataHospitalIntake.values)
+                      dataHospitalIntake.last_value
                         ?.admissions_on_date_of_admission_moving_average_rounded ??
                       0,
                     warning: getWarning(
@@ -188,7 +188,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     data: data.vaccine_coverage_per_age_group_estimated.values,
                     dataProperty: 'age_18_plus_has_one_shot',
                     value:
-                      last(data.vaccine_coverage_per_age_group_estimated.values)
+                      data.vaccine_coverage_per_age_group_estimated.last_value
                         ?.age_18_plus_has_one_shot ?? 0,
                     valueIsPercentage: true,
                     warning: getWarning(

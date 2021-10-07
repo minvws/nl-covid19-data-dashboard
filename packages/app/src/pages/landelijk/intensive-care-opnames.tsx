@@ -10,6 +10,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
+import { INACCURATE_ITEMS } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -71,7 +72,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const dataIntake = data.intensive_care_nice;
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    3
+    INACCURATE_ITEMS
   );
 
   const metadata = {
@@ -113,7 +114,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               <PageKpi
                 data={data}
                 metricName="intensive_care_nice"
-                metricProperty="admissions_on_date_of_admission_moving_average"
+                metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                 isAmount
                 isMovingAverageDifference
               />
