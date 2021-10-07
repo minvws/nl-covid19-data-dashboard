@@ -9,8 +9,8 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -161,12 +161,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.rivm,
               }}
             >
-              <PageBarScale
+              <PageKpi
                 data={data}
-                scope="nl"
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                localeTextKey="positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
                 isMovingAverageDifference
                 isAmount
@@ -277,10 +275,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'

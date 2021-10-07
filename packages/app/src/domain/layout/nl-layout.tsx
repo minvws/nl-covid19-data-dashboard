@@ -155,7 +155,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="vaccine_administered_total"
                     metricProperty="estimated"
                     localeTextKey="vaccinaties"
@@ -180,12 +179,10 @@ export function NlLayout(props: NlLayoutProps) {
                    */}
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                    showBarScale={true}
                   />
                 </MetricMenuItemLink>
 
@@ -196,12 +193,10 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="intensive_care_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ic_opnames_per_dag"
                     differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
-                    showBarScale={true}
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -215,16 +210,10 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="tested_overall"
                     metricProperty="infected"
-                    altBarScaleMetric={{
-                      metricName: 'tested_overall',
-                      metricProperty: 'infected_per_100k',
-                    }}
                     localeTextKey="positief_geteste_personen"
                     differenceKey="tested_overall__infected_moving_average"
-                    showBarScale={true}
                   />
                 </MetricMenuItemLink>
 
@@ -235,11 +224,9 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="reproduction"
                     metricProperty="index_average"
                     localeTextKey="reproductiegetal"
-                    showBarScale={true}
                     differenceKey="reproduction__index_average"
                     showDateOfInsertion
                   />
@@ -252,7 +239,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="deceased_rivm"
                     metricProperty="covid_daily"
                     localeTextKey="sterfte"
@@ -292,7 +278,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="behavior"
                     localeTextKey="gedrag_common"
                   />
@@ -309,7 +294,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="nursing_home"
                     metricProperty="newly_infected_people"
                     localeTextKey="verpleeghuis_positief_geteste_personen"
@@ -326,7 +310,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="disability_care"
                     metricProperty="newly_infected_people"
                     localeTextKey="gehandicaptenzorg_positief_geteste_personen"
@@ -341,7 +324,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="elderly_at_home"
                     metricProperty="positive_tested_daily"
                     localeTextKey="thuiswonende_ouderen"
@@ -359,7 +341,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="sewer"
                     metricProperty="average"
                     localeTextKey="rioolwater_metingen"
@@ -377,7 +358,6 @@ export function NlLayout(props: NlLayoutProps) {
                 >
                   <SidebarMetric
                     data={data}
-                    scope="nl"
                     metricName="corona_melder_app_warning"
                     metricProperty="count"
                     localeTextKey="corona_melder_app"
@@ -409,7 +389,6 @@ export function NlLayout(props: NlLayoutProps) {
                   ) : (
                     <SidebarMetric
                       data={data}
-                      scope="nl"
                       metricName="doctor"
                       metricProperty="covid_symptoms"
                       localeTextKey="verdenkingen_huisartsen"
