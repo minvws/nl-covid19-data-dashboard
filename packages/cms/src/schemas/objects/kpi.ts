@@ -1,18 +1,18 @@
-import { ChartConfiguration } from '@corona-dashboard/common';
+import { KpiConfiguration } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import { ChartConfigurationInput } from '../../custom-inputs';
+import { KpiConfigurationInput } from '../../custom-inputs';
 
-export const Chart = {
-  title: 'Dashboard Grafiek',
-  name: 'chart',
+export const Kpi = {
+  title: 'Dashboard KPI',
+  name: 'dashboardKpi',
   type: 'object',
   fields: [
     {
       name: 'config',
       type: 'string',
       title: 'Configuratie',
-      inputComponent: ChartConfigurationInput,
+      inputComponent: KpiConfigurationInput,
       validation: (rule: Rule) => rule.required(),
     },
   ],
@@ -22,12 +22,10 @@ export const Chart = {
     },
     prepare({ config }: { config: string }) {
       if (isDefined(config)) {
-        const cf: ChartConfiguration = JSON.parse(config);
+        const cf: KpiConfiguration = JSON.parse(config);
         return {
-          title: `${cf.code ?? cf.area}_${cf.metricName}_${cf.timeframe}`,
-          subtitle: cf.metricPropertyConfigs
-            .map((x) => x.propertyName)
-            .join(', '),
+          title: `${cf.area}_${cf.metricName}`,
+          subtitle: cf.metricProperty,
         };
       }
       return {

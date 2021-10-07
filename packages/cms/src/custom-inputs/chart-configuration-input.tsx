@@ -1,4 +1,5 @@
 import {
+  areaTitles,
   AreaType,
   gmData,
   MetricPropertyConfig,
@@ -21,13 +22,6 @@ import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { useEffect, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { dataStructure } from '../data/data-structure';
-
-const areaTitles = {
-  in: 'Internationaal',
-  nl: 'Nationaal',
-  vr: 'Veiligheidsregio',
-  gm: 'Gemeente',
-};
 
 const chartTypes = [
   'line',
@@ -387,7 +381,9 @@ function isValid(chartConfig: PartialChartConfiguration) {
   return (
     isDefined(chartConfig.accessibilityKey) &&
     chartConfig.accessibilityKey?.length > 0 &&
-    isDefined(chartConfig.area) &&
+    (['nl', 'in'].includes(chartConfig.area ?? '') ||
+      (['gm', 'vr'].includes(chartConfig.area ?? '') &&
+        isDefined(chartConfig.code))) &&
     isDefined(chartConfig.metricName) &&
     isDefined(chartConfig.timeframe) &&
     (chartConfig.metricPropertyConfigs?.length ?? 0) > 0 &&

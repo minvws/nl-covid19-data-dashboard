@@ -1,3 +1,10 @@
+export const areaTitles = {
+  in: 'Internationaal',
+  nl: 'Nationaal',
+  vr: 'Veiligheidsregio',
+  gm: 'Gemeente',
+};
+
 export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
 export type ChartConfiguration = Omit<
@@ -27,4 +34,16 @@ export type MetricPropertyConfig = {
     | 'invisible';
   curve?: 'linear' | 'step';
   labelKey: string;
+};
+
+export type KpiConfiguration = Omit<
+  Required<PartialKpiConfiguration>,
+  'code'
+> & { code?: string };
+
+export type PartialKpiConfiguration = {
+  area?: AreaType;
+  metricName?: string;
+  metricProperty?: string;
+  code?: string;
 };

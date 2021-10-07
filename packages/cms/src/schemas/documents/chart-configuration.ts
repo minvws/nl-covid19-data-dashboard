@@ -1,3 +1,4 @@
+import { ChartConfiguration } from '@corona-dashboard/common';
 import { Rule } from '~/sanity';
 
 export const chartConfiguration = {
@@ -21,10 +22,13 @@ export const chartConfiguration = {
   preview: {
     select: {
       title: 'title',
+      chart: 'chart',
     },
-    prepare({ title }: { title: string }) {
+    prepare({ title, chart }: { title: string; chart: any }) {
+      const cf: ChartConfiguration = JSON.parse(chart.config);
       return {
         title,
+        subtitle: `${cf.code ?? cf.area}_${cf.metricName}_${cf.timeframe}`,
       };
     },
   },

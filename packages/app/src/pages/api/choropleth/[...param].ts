@@ -68,21 +68,26 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const [blob, eTag] = generateChoroplethImage(
-    metric,
-    property,
-    map,
-    height,
-    filename,
-    selectedCode
-  );
+  try {
+    const [blob, eTag] = generateChoroplethImage(
+      metric,
+      property,
+      map,
+      height,
+      filename,
+      selectedCode
+    );
 
-  res.setHeader('ETag', eTag);
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Vary', 'Accept-Encoding');
+    res.setHeader('ETag', eTag);
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Vary', 'Accept-Encoding');
 
-  res.status(200);
-  res.end(blob);
+    res.status(200);
+    res.end(blob);
+  } catch (e) {
+    console.error(e);
+    res.status(500).end();
+  }
 }
 
 function createGeoJson(map: MapType) {
