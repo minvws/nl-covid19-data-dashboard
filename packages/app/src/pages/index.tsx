@@ -16,6 +16,7 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
@@ -128,7 +129,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     data.vaccine_coverage_per_age_group_estimated.last_value;
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" pt={4}>
+      <Box bg="white">
         <MaxWidth id="content">
           <TileList>
             <Box spacing={3}>
@@ -353,7 +354,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   icon={<Vaccinaties />}
                   text={
                     <>
-                      <Box fontSize={5}>
+                      <Text variant="datadriven" as="div">
                         <Markdown
                           content={replaceVariablesInText(
                             text.mini_trend_tiles.vaccinatiegraad.text,
@@ -364,7 +365,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             formatters
                           )}
                         />
-                      </Box>
+                      </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}
                         icon={<ArrowIconRight />}

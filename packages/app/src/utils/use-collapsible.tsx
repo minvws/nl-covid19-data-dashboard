@@ -1,3 +1,4 @@
+import { Chevron } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import { isBoolean } from 'lodash';
@@ -11,7 +12,6 @@ import {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { Chevron } from '@corona-dashboard/icons';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';
