@@ -18,8 +18,14 @@ import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { CountryCode } from '~/domain/international/multi-select-countries';
 import { getClient, localize } from '~/lib/sanity';
+import {
+  adjustDataToLastAccurateValue,
+  isValuesWithLastValue,
+} from '~/utils/adjust-data-to-last-accurate-value';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
@@ -179,6 +185,8 @@ export function selectNlData<
       {} as DataShape<T, Nl>
     );
 
+    replaceInaccurateLastValue(selectedNlData);
+
     return { selectedNlData };
   };
 }
@@ -206,6 +214,8 @@ export function selectVrData<
       (acc, p) => set(acc, p, get(data, p) ?? null),
       {} as DataShape<T, Vr>
     );
+
+    replaceInaccurateLastValue(selectedVrData);
 
     return { selectedVrData, vrName };
   };
@@ -258,6 +268,8 @@ export function selectGmData<
       (acc, p) => set(acc, p, get(gmData.data, p)),
       {} as DataShape<T, Gm>
     );
+
+    replaceInaccurateLastValue(selectedGmData);
 
     return {
       selectedGmData,
@@ -324,4 +336,36 @@ export function getInData(countryCodes: CountryCode[]) {
       internationalData: Record<CountryCode, In>;
     };
   };
+}
+
+/**
+ * This function makes sure that for metrics with inaccurate data for the last x
+ * items, the last_value is replaced with the last accurate value. For now only
+ * the rounded values are replaced to minimize the potential impact on places
+ * where this is not the required behavior.
+ *
+ * This is meant to be a temporary fix until this is done on the backend.
+ */
+function replaceInaccurateLastValue(data: any) {
+  const metricsInaccurateItems = {
+    intensive_care_nice: INACCURATE_ITEMS_IC,
+    hospital_nice: INACCURATE_ITEMS_HOSPITAL,
+  };
+
+  const inaccurateMetricProperty =
+    'admissions_on_date_of_admission_moving_average_rounded';
+
+  const metricsWithInaccurateData = Object.keys(metricsInaccurateItems).filter(
+    (m) => m in data
+  ) as (keyof typeof data & keyof typeof metricsInaccurateItems)[];
+
+  metricsWithInaccurateData.forEach((m) => {
+    if (isValuesWithLastValue(data[m])) {
+      data[m] = adjustDataToLastAccurateValue(
+        data[m],
+        metricsInaccurateItems[m],
+        inaccurateMetricProperty
+      );
+    }
+  });
 }

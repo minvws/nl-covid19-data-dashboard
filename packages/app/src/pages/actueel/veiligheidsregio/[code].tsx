@@ -1,10 +1,9 @@
 import {
   GmCollectionVaccineCoveragePerAgeGroup,
   VrHospitalNiceValue,
-  VrVaccineCoveragePerAgeGroupValue
+  VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import { last } from 'lodash';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
@@ -19,12 +18,13 @@ import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import {
   MiniTileSelectorItem,
-  MiniTileSelectorLayout
+  MiniTileSelectorLayout,
 } from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
@@ -35,20 +35,21 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
-  getWarning
+  getWarning,
 } from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrData
+  selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -131,6 +132,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const underReportedRangeHospital = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    INACCURATE_ITEMS
+  );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pt={4}>
@@ -171,7 +177,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
-                      last(dataHospitalIntake.values)
+                      dataHospitalIntake.last_value
                         ?.admissions_on_date_of_admission_moving_average_rounded ??
                       0,
                     warning: getWarning(
@@ -249,9 +255,22 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                       curve: 'step',
                       strokeWidth: 0,
-                      noHover: true,
+                      noMarker: true,
                     },
                   ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeHospital,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
                   accessibility={{ key: 'topical_hospital_nice' }}
                   warning={getWarning(
                     content.elements.warning,
