@@ -18,7 +18,9 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
   const { siteText } = useIntl();
 
   const { data } = useSWRImmutable(
-    `/api/data/${configuration.area}/${configuration.metricName}`,
+    `/api/data/timeseries/${configuration.code ?? configuration.area}/${
+      configuration.metricName
+    }`,
     (url: string) => fetch(url).then((_) => _.json())
   );
 

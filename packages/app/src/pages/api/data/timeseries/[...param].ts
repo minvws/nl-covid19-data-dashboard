@@ -3,12 +3,14 @@ import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 
-const publicPath = path.resolve(__dirname, '../../../../../public');
+const publicPath = path.resolve(__dirname, '../../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { param } = req.query;
   const [root, metric] = param as [string, string, string];
+
+  console.log(root);
 
   try {
     const data = loadMetricData(root, metric);

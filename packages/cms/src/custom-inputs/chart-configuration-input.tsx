@@ -1,7 +1,9 @@
 import {
   AreaType,
+  gmData,
   MetricPropertyConfig,
   PartialChartConfiguration,
+  vrData,
 } from '@corona-dashboard/common';
 import {
   Badge,
@@ -61,6 +63,7 @@ export const ChartConfigurationInput = React.forwardRef(
     const [timeframe, setTimeframe] = useState<'all' | '5weeks'>(
       configuration.timeframe ?? 'all'
     );
+    const [code, setCode] = useState<string | undefined>(configuration.code);
 
     const onChangeTimeframe = (event: any) => setTimeframe(event.target.value);
     const accessibilityKeyChange = (event: any) =>
@@ -101,6 +104,7 @@ export const ChartConfigurationInput = React.forwardRef(
         metricPropertyConfigs,
         timeframe,
         accessibilityKey,
+        code,
       };
 
       if (isValid(chartConfig)) {
@@ -109,7 +113,14 @@ export const ChartConfigurationInput = React.forwardRef(
       } else {
         setIsValidated(false);
       }
-    }, [area, metricName, metricPropertyConfigs, timeframe, accessibilityKey]);
+    }, [
+      area,
+      metricName,
+      metricPropertyConfigs,
+      timeframe,
+      accessibilityKey,
+      code,
+    ]);
 
     return (
       <FormField>
@@ -160,6 +171,7 @@ export const ChartConfigurationInput = React.forwardRef(
           onChange={(event: any) => {
             setArea(event.target.value);
             setMetricName('');
+            setCode(undefined);
             onChange(PatchEvent.from(unset()));
           }}
         >
@@ -167,9 +179,41 @@ export const ChartConfigurationInput = React.forwardRef(
             Selecteer een gebied
           </option>
           {areaNames.map((x) => (
-            <option value={x}>{(areaTitles as any)[x]}</option>
+            <option key={x} value={x}>
+              {(areaTitles as any)[x]}
+            </option>
           ))}
         </Select>
+        {area === 'gm' && (
+          <Select
+            value={code}
+            onChange={(event: any) => setCode(event.target.value)}
+          >
+            <option value={undefined} disabled hidden>
+              Selecteer een gemeente
+            </option>
+            {gmData.map((x) => (
+              <option key={x.gemcode} value={x.gemcode}>
+                {x.displayName ?? x.name}
+              </option>
+            ))}
+          </Select>
+        )}
+        {area === 'vr' && (
+          <Select
+            value={code}
+            onChange={(event: any) => setCode(event.target.value)}
+          >
+            <option value={undefined} disabled hidden>
+              Selecteer een veiligheidsregio
+            </option>
+            {vrData.map((x) => (
+              <option key={x.code} value={x.code}>
+                {x.name}
+              </option>
+            ))}
+          </Select>
+        )}
         {isDefined(metricNames) && (
           <>
             <hr />
@@ -185,7 +229,9 @@ export const ChartConfigurationInput = React.forwardRef(
                 Selecteer een metriek
               </option>
               {metricNames.map((x) => (
-                <option value={x}>{x}</option>
+                <option key={x} value={x}>
+                  {x}
+                </option>
               ))}
             </Select>
           </>
@@ -203,7 +249,9 @@ export const ChartConfigurationInput = React.forwardRef(
                 Selecteer een metriek waarde
               </option>
               {metricProperties.map((x: string) => (
-                <option value={x}>{x}</option>
+                <option key={x} value={x}>
+                  {x}
+                </option>
               ))}
             </Select>
             <hr />

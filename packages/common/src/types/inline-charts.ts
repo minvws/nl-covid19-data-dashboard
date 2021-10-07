@@ -1,6 +1,9 @@
 export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
-export type ChartConfiguration = Required<PartialChartConfiguration>;
+export type ChartConfiguration = Omit<
+  Required<PartialChartConfiguration>,
+  'code'
+> & { code?: string };
 
 export type PartialChartConfiguration = {
   area?: AreaType;
@@ -8,6 +11,7 @@ export type PartialChartConfiguration = {
   metricPropertyConfigs?: MetricPropertyConfig[];
   timeframe?: 'all' | '5weeks';
   accessibilityKey?: string;
+  code?: string;
 };
 
 export type MetricPropertyConfig = {

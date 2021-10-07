@@ -54,8 +54,6 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
 
-  console.dir(content);
-
   return (
     <Layout
       {...siteText.over_risiconiveaus_metadata}
