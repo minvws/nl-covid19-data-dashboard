@@ -2,20 +2,29 @@ import { sortTimeSeriesValues } from '@corona-dashboard/common';
 import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
+import sanitize from 'sanitize-filename';
+import { isDefined } from 'ts-is-present';
 
 const publicPath = path.resolve(__dirname, '../../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { param } = req.query;
-  const [root, metric] = param as [string, string, string];
+  const [root, metric] = param as [string, string];
 
-  console.log(root);
+  if (!root?.length || !metric?.length) {
+    res.status(400).end();
+    return;
+  }
 
   try {
     const data = loadMetricData(root, metric);
-    data.values = sortTimeSeriesValues(data.values);
-    res.status(200).json(data);
+    if (isDefined(data)) {
+      data.values = sortTimeSeriesValues(data.values);
+      res.status(200).json(data);
+    } else {
+      res.status(404).end();
+    }
   } catch (e) {
     console.error(e);
     res.status(500).end();
@@ -23,10 +32,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 function loadMetricData(root: string, metric: string) {
-  const filename = `${root.toUpperCase()}.json`;
-  const content = JSON.parse(
-    fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
-  );
+  const filename = sanitize(`${root.toUpperCase()}.json`);
+  const fullPath = path.join(publicJsonPath, filename);
+  if (fs.existsSync(fullPath)) {
+    const content = JSON.parse(
+      fs.readFileSync(fullPath, { encoding: 'utf-8' })
+    );
 
-  return content[metric];
+    return metric in content ? content[metric] : undefined;
+  }
+  return undefined;
 }

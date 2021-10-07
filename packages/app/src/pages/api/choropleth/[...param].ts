@@ -4,6 +4,7 @@ import fs from 'fs';
 import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
+import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
 import {
@@ -51,7 +52,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const suffix = isDefined(selectedCode) ? `_${selectedCode}` : '';
-  const filename = `${metric}_${property}_${map}_${height}${suffix}.png`;
+  const filename = sanitize(
+    `${metric}_${property}_${map}_${height}${suffix}.png`
+  );
 
   const fullImageFilePath = path.join(publicImgPath, filename);
   if (fs.existsSync(fullImageFilePath)) {
@@ -99,13 +102,16 @@ function loadChoroplethData(map: MapType, metric: string) {
   if (!validMapTypes.includes(map)) {
     throw new Error(`Invalid map type: ${map}`);
   }
-  const filename = `${map.toUpperCase()}_COLLECTION.json`;
+
+  const filename = sanitize(`${map.toUpperCase()}_COLLECTION.json`);
   const content = JSON.parse(
     fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
   );
+
   if (metric !== 'gemeente') {
     return content[metric] as ChoroplethDataItem[];
   }
+
   const data = content['tested_overall'];
   return data.map((x: any) => ({
     gmcode: x.gemcode,
