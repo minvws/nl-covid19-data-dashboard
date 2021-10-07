@@ -80,16 +80,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  data.intensive_care_lcps.values = data.intensive_care_lcps.values.map((x) => {
-    if (Math.random() > 0.99) {
-      return {
-        ...x,
-        beds_occupied_covid: null,
-      };
-    }
-    return x;
-  });
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
