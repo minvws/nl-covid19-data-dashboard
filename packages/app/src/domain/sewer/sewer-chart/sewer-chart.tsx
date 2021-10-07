@@ -137,8 +137,7 @@ export function SewerChart({
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
-                    hideInTooltip: true,
-                    noHover: true,
+                    nonInteractive: true,
                   },
                 ]}
                 formatTooltip={(data) => {

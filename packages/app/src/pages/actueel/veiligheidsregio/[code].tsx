@@ -1,6 +1,5 @@
 import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Arts, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import { last } from 'lodash';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -15,6 +14,7 @@ import { TileList } from '~/components/tile-list';
 import { InlineText } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
@@ -43,6 +43,7 @@ import {
   selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -100,6 +101,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.veiligheidsregio_actueel;
 
   const dataHospitalIntake = data.hospital_nice;
+  console.log(dataHospitalIntake.last_value);
   const dataSitemap = useDataSitemap('vr', vrCode);
 
   const filteredAgeGroup18Plus =
@@ -120,6 +122,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
       safetyRegionName: vrName,
     }),
   };
+
+  const underReportedRangeHospital = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    INACCURATE_ITEMS
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -201,11 +208,24 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                     curve: 'step',
                     strokeWidth: 0,
-                    noHover: true,
+                    noMarker: true,
                   },
                 ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedRangeHospital,
+                      end: Infinity,
+                      label: siteText.common_actueel.data_incomplete,
+                      shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'admissions_on_date_of_admission_moving_average_rounded',
+                      ],
+                    },
+                  ],
+                }}
                 titleValue={
-                  last(dataHospitalIntake.values)
+                  dataHospitalIntake.last_value
                     ?.admissions_on_date_of_admission_moving_average_rounded ??
                   0
                 }

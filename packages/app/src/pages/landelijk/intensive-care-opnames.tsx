@@ -10,6 +10,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
+import { INACCURATE_ITEMS } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -66,7 +67,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    3
+    INACCURATE_ITEMS
   );
 
   const metadata = {
