@@ -67,7 +67,7 @@ export function useScales<T extends TimestampedValue>(args: {
     const xScale = scaleLinear({
       domain: [start, end],
       range: [0, bounds.width],
-      round: true, // round the output values so we render on round pixels
+      round: true, // round the output values so we render on round pixels,
     });
 
     /**
@@ -80,7 +80,7 @@ export function useScales<T extends TimestampedValue>(args: {
       domain: [yMin, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],
       nice: numTicks,
-      round: true, // round the output values so we render on round pixels
+      round: true, // round the output values so we render on round pixels,
     });
 
     const result: UseScalesResult = {
