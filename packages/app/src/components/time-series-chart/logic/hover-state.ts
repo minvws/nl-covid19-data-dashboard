@@ -334,6 +334,7 @@ export function useHoverState<T extends TimestampedValue>({
           case 'line':
           case 'gapped-line':
           case 'area':
+          case 'gapped-area':
             return {
               seriesValue,
               x: xScale(xValue),

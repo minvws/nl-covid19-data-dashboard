@@ -80,6 +80,16 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  data.intensive_care_lcps.values = data.intensive_care_lcps.values.map((x) => {
+    if (Math.random() > 0.99) {
+      return {
+        ...x,
+        beds_occupied_covid: null,
+      };
+    }
+    return x;
+  });
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -246,7 +256,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'gapped-area',
                     metricProperty: 'beds_occupied_covid',
                     label: text.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,
