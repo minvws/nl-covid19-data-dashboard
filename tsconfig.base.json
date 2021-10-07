@@ -19,5 +19,6 @@
     "jsx": "preserve",
     "composite": true,
     "incremental": true
-  }
+  },
+  "exclude": ["node_modules"]
 }

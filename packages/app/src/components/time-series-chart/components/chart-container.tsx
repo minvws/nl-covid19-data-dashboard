@@ -11,8 +11,10 @@
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
+import {
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
@@ -26,6 +28,7 @@ interface ChartContainerProps {
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
+  isTabInteractive: boolean;
   valueAnnotation?: string;
   onHover?: (event: Event) => void;
   onClick?: (event: Event) => void;
@@ -45,6 +48,7 @@ export function ChartContainer({
   onClick,
   onFocus,
   onBlur,
+  isTabInteractive,
 }: ChartContainerProps) {
   const isTouch = useIsTouchDevice();
 
@@ -84,7 +88,7 @@ export function ChartContainer({
         onFocus={onFocus}
         onBlur={onBlur}
         onClick={onClick}
-        tabIndex={onFocus ? 0 : -1}
+        tabIndex={isTabInteractive ? 0 : -1}
       >
         <Group
           left={padding.left}
