@@ -40,8 +40,15 @@ export function NotificationBanner({
                 spacingHorizontal={2}
                 display="flex"
                 alignItems="center"
+                as="button"
                 css={css({
                   cursor: 'pointer',
+                  border: 0,
+                  backgroundColor: 'transparent',
+                  padding: 0,
+                  margin: 0,
+                  textAlign: 'left',
+                  mt: 1,
                 })}
               >
                 <InlineText fontWeight="bold">
