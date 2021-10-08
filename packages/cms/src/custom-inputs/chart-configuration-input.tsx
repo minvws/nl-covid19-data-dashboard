@@ -1,13 +1,11 @@
 import {
   areaTitles,
-  AreaType,
   gmData,
   MetricPropertyConfig,
   PartialChartConfiguration,
   vrData,
 } from '@corona-dashboard/common';
 import {
-  Badge,
   Box,
   Button,
   Card,
@@ -18,8 +16,8 @@ import {
   TextInput,
 } from '@sanity/ui';
 import FormField from 'part:@sanity/components/formfields/default';
-import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
-import React, { useEffect, useMemo, useState } from 'react';
+import { PatchEvent, set } from 'part:@sanity/form-builder/patch-event';
+import React, { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { dataStructure } from '../data/data-structure';
 
@@ -36,32 +34,30 @@ const chartTypes = [
 
 export const ChartConfigurationInput = React.forwardRef(
   (props: any, ref: any) => {
-    const { value = '{}', type, onChange } = props;
+    const { value, onChange } = props;
 
-    const configuration = value
-      ? (JSON.parse(value) as PartialChartConfiguration)
-      : ({} as PartialChartConfiguration);
+    const configuration = JSON.parse(
+      value ?? '{}'
+    ) as PartialChartConfiguration;
 
-    const [isValidated, setIsValidated] = useState(isValid(configuration));
-    const [accessibilityKey, setAccessibilityKey] = useState<string>(
-      configuration.accessibilityKey ?? ''
-    );
-    const [area, setArea] = useState<AreaType | ''>(configuration.area ?? '');
-    const [metricName, setMetricName] = useState<string>(
-      configuration.metricName ?? ''
-    );
     const [metricProperty, setMetricProperty] = useState<string>('');
-    const [metricPropertyConfigs, setMetricPropertyConfigs] = useState<
-      MetricPropertyConfig[]
-    >(configuration.metricPropertyConfigs ?? []);
-    const [timeframe, setTimeframe] = useState<'all' | '5weeks'>(
-      configuration.timeframe ?? 'all'
-    );
-    const [code, setCode] = useState<string | undefined>(configuration.code);
 
-    const onChangeTimeframe = (event: any) => setTimeframe(event.target.value);
-    const accessibilityKeyChange = (event: any) =>
-      setAccessibilityKey(event.target.value);
+    const onChangeProp = (
+      propertyName: keyof PartialChartConfiguration,
+      value?: any
+    ) => {
+      return (event: any) =>
+        onChange(
+          PatchEvent.from(
+            set(
+              JSON.stringify({
+                ...configuration,
+                [propertyName]: isDefined(value) ? value : event.target.value,
+              })
+            )
+          )
+        );
+    };
 
     const areaNames = useMemo(
       () =>
@@ -69,52 +65,32 @@ export const ChartConfigurationInput = React.forwardRef(
       []
     );
     const metricNames = useMemo(
-      () => (area ? Object.keys((dataStructure as any)[area]) : undefined),
-      [area]
+      () =>
+        configuration.area
+          ? Object.keys((dataStructure as any)[configuration.area])
+          : undefined,
+      [configuration.area]
     );
     const metricProperties = useMemo(
       () =>
-        area && metricName
-          ? (dataStructure as any)[area][metricName]
+        configuration.area && configuration.metricName
+          ? (dataStructure as any)[configuration.area][configuration.metricName]
           : undefined,
-      [area, metricName]
+      [configuration.area, configuration.metricName]
     );
+
     const addMetricProperty = () => {
-      setMetricPropertyConfigs((x) => [
-        ...x,
-        {
-          propertyName: metricProperty,
-          type: 'line',
-          curve: 'linear',
-          labelKey: '',
-        },
-      ]);
+      const newArray = isDefined(configuration.metricPropertyConfigs)
+        ? [...configuration.metricPropertyConfigs]
+        : [];
+      newArray.push({
+        propertyName: metricProperty,
+        type: 'line',
+        curve: 'linear',
+        labelKey: '',
+      });
+      onChangeProp('metricPropertyConfigs', newArray)(undefined);
     };
-
-    useEffect(() => {
-      const chartConfig: PartialChartConfiguration = {
-        area: area !== '' ? area : undefined,
-        metricName,
-        metricPropertyConfigs,
-        timeframe,
-        accessibilityKey,
-        code,
-      };
-
-      if (isValid(chartConfig)) {
-        setIsValidated(true);
-        onChange(PatchEvent.from(set(JSON.stringify(chartConfig))));
-      } else {
-        setIsValidated(false);
-      }
-    }, [
-      area,
-      metricName,
-      metricPropertyConfigs,
-      timeframe,
-      accessibilityKey,
-      code,
-    ]);
 
     return (
       <FormField>
@@ -124,51 +100,38 @@ export const ChartConfigurationInput = React.forwardRef(
           value={value}
           style={{ display: 'none' }}
         />
-        {!isValidated && (
-          <Card marginBottom={2}>
-            <Badge tone="critical">Incomplete configuratie</Badge>
-          </Card>
-        )}
 
         <Card marginBottom={3}>
           <Grid gap={[2, 2, 2, 2]}>
             <Label>Accessibility key</Label>
             <TextInput
               type="text"
-              value={accessibilityKey}
-              onChange={accessibilityKeyChange}
+              value={configuration.accessibilityKey}
+              onChange={onChangeProp('accessibilityKey')}
             />
           </Grid>
         </Card>
         <Card padding={[0, 0, 2, 2]}>
           <Box display="flex" style={{ alignItems: 'center', gap: 10 }}>
             <Radio
-              checked={timeframe === 'all'}
+              checked={configuration.timeframe === 'all'}
               name="timeframe"
               value="all"
-              onChange={onChangeTimeframe}
+              onChange={onChangeProp('timeframe')}
             />
             <Label>Toon alles</Label>
           </Box>
           <Box display="flex" style={{ alignItems: 'center', gap: 10 }}>
             <Radio
-              checked={timeframe === '5weeks'}
+              checked={configuration.timeframe === '5weeks'}
               name="timeframe"
               value="5weeks"
-              onChange={onChangeTimeframe}
+              onChange={onChangeProp('timeframe')}
             />
             <Label>Toon laatste 5 weken</Label>
           </Box>
         </Card>
-        <Select
-          value={area}
-          onChange={(event: any) => {
-            setArea(event.target.value);
-            setMetricName('');
-            setCode(undefined);
-            onChange(PatchEvent.from(unset()));
-          }}
-        >
+        <Select value={configuration.area} onChange={onChangeProp('area')}>
           <option value="" disabled hidden>
             Selecteer een gebied
           </option>
@@ -178,11 +141,8 @@ export const ChartConfigurationInput = React.forwardRef(
             </option>
           ))}
         </Select>
-        {area === 'gm' && (
-          <Select
-            value={code}
-            onChange={(event: any) => setCode(event.target.value)}
-          >
+        {configuration.area === 'gm' && (
+          <Select value={configuration.code} onChange={onChangeProp('code')}>
             <option value={undefined} disabled hidden>
               Selecteer een gemeente
             </option>
@@ -193,11 +153,8 @@ export const ChartConfigurationInput = React.forwardRef(
             ))}
           </Select>
         )}
-        {area === 'vr' && (
-          <Select
-            value={code}
-            onChange={(event: any) => setCode(event.target.value)}
-          >
+        {configuration.area === 'vr' && (
+          <Select value={configuration.code} onChange={onChangeProp('code')}>
             <option value={undefined} disabled hidden>
               Selecteer een veiligheidsregio
             </option>
@@ -212,12 +169,8 @@ export const ChartConfigurationInput = React.forwardRef(
           <>
             <hr />
             <Select
-              value={metricName}
-              onChange={(event: any) => {
-                setMetricName(event.target.value);
-                setMetricPropertyConfigs([]);
-                onChange(PatchEvent.from(unset()));
-              }}
+              value={configuration.metricName}
+              onChange={onChangeProp('metricName')}
             >
               <option value="" disabled hidden>
                 Selecteer een metriek
@@ -236,7 +189,7 @@ export const ChartConfigurationInput = React.forwardRef(
             <Select
               value={metricProperty}
               onChange={(event: any) => {
-                setMetricProperty(event.target.value);
+                setMetricProperty(event.target.value ?? '');
               }}
             >
               <option value="" disabled hidden>
@@ -257,21 +210,29 @@ export const ChartConfigurationInput = React.forwardRef(
             </Button>
           </>
         )}
-        {isDefined(metricPropertyConfigs) && (
+        {isDefined(configuration.metricPropertyConfigs) && (
           <Box paddingTop={2}>
-            {metricPropertyConfigs.map((x, index) => (
+            {configuration.metricPropertyConfigs.map((x, index) => (
               <MetricPropertyConfigForm
                 propertyConfig={x}
                 key={`${x.propertyName}_${index}`}
                 onChange={(value) => {
-                  const newArray = [...metricPropertyConfigs];
+                  const newArray = isDefined(
+                    configuration.metricPropertyConfigs
+                  )
+                    ? [...configuration.metricPropertyConfigs]
+                    : [];
                   newArray[index] = value;
-                  setMetricPropertyConfigs(newArray);
+                  onChangeProp('metricPropertyConfigs', newArray)(undefined);
                 }}
                 onDelete={() => {
-                  const newArray = [...metricPropertyConfigs];
+                  const newArray = isDefined(
+                    configuration.metricPropertyConfigs
+                  )
+                    ? [...configuration.metricPropertyConfigs]
+                    : [];
                   newArray.splice(index, 1);
-                  setMetricPropertyConfigs(newArray);
+                  onChangeProp('metricPropertyConfigs', newArray)(undefined);
                 }}
               />
             ))}
@@ -373,20 +334,3 @@ const MetricPropertyConfigForm = (props: MetricPropertyConfigFormProps) => {
     </Card>
   );
 };
-
-function isValid(chartConfig: PartialChartConfiguration) {
-  if (!isDefined(chartConfig)) {
-    return false;
-  }
-  return (
-    isDefined(chartConfig.accessibilityKey) &&
-    chartConfig.accessibilityKey?.length > 0 &&
-    (['nl', 'in'].includes(chartConfig.area ?? '') ||
-      (['gm', 'vr'].includes(chartConfig.area ?? '') &&
-        isDefined(chartConfig.code))) &&
-    isDefined(chartConfig.metricName) &&
-    isDefined(chartConfig.timeframe) &&
-    (chartConfig.metricPropertyConfigs?.length ?? 0) > 0 &&
-    chartConfig.metricPropertyConfigs?.every((x) => x.labelKey?.length > 0)
-  );
-}

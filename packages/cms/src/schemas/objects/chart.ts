@@ -1,6 +1,5 @@
 import { ChartConfiguration } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-import { Rule } from '~/sanity';
 import { ChartConfigurationInput } from '../../custom-inputs';
 
 export const Chart = {
@@ -13,7 +12,6 @@ export const Chart = {
       type: 'string',
       title: 'Configuratie',
       inputComponent: ChartConfigurationInput,
-      validation: (rule: Rule) => rule.required(),
     },
   ],
   preview: {

@@ -1,4 +1,8 @@
-import { KpiConfiguration } from '@corona-dashboard/common';
+import {
+  KpiConfiguration,
+  PartialKpiConfiguration,
+} from '@corona-dashboard/common';
+import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 
 export const kpiConfiguration = {
@@ -33,3 +37,17 @@ export const kpiConfiguration = {
     },
   },
 };
+
+function isValid(kpiConfig: PartialKpiConfiguration) {
+  if (!isDefined(kpiConfig)) {
+    return false;
+  }
+
+  return (
+    (['nl', 'in'].includes(kpiConfig.area ?? '') ||
+      (['gm', 'vr'].includes(kpiConfig.area ?? '') &&
+        isDefined(kpiConfig.code))) &&
+    kpiConfig.metricName?.length &&
+    kpiConfig.metricProperty?.length
+  );
+}

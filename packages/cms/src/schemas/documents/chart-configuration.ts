@@ -1,4 +1,8 @@
-import { ChartConfiguration } from '@corona-dashboard/common';
+import {
+  ChartConfiguration,
+  PartialChartConfiguration,
+} from '@corona-dashboard/common';
+import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 
 export const chartConfiguration = {
@@ -16,7 +20,8 @@ export const chartConfiguration = {
       title: 'Configuratie',
       name: 'chart',
       type: 'chart',
-      validation: (rule: Rule) => rule.required(),
+      validation: (rule: Rule) =>
+        rule.required().custom((x: any) => isValid(x)),
     },
   ],
   preview: {
@@ -33,3 +38,47 @@ export const chartConfiguration = {
     },
   },
 };
+
+function isValid(chart: any) {
+  if (!isDefined(chart.config)) {
+    return {
+      message: 'Chart config is undefined',
+    };
+  }
+  const chartConfig = JSON.parse(chart.config) as PartialChartConfiguration;
+  if (!isDefined(chartConfig)) {
+    return {
+      message: 'Chart config is undefined',
+    };
+  }
+
+  const errors: string[] = [];
+
+  if (!hasValue(chartConfig.accessibilityKey)) {
+    errors.push('Accessibility Key is verplicht');
+  }
+  if (!hasValue(chartConfig.area)) {
+    errors.push('Gebied is verplicht');
+  }
+  if (!hasValue(chartConfig.metricName)) {
+    errors.push('Metriek naam is verplicht');
+  }
+  if (!hasValue(chartConfig.timeframe)) {
+    errors.push('Timeframe (Toon alles/Toon laatste 5 weken) is verplicht');
+  }
+  if ((chartConfig.metricPropertyConfigs?.length ?? 0) === 0) {
+    errors.push('Er moet minstens 1 metriek property geselecteerd zijn');
+  }
+  if (
+    !chartConfig.metricPropertyConfigs?.every((x) => x.labelKey?.length > 0)
+  ) {
+    errors.push('Iedere metriek property heeft een geldige label key nodig');
+  }
+
+  const result = errors.length ? errors.join('\n') : true;
+  return result;
+}
+
+function hasValue(value: string | undefined) {
+  return value?.length ?? 0 > 0;
+}
