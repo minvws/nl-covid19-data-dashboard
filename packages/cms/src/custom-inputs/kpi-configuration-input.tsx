@@ -4,7 +4,17 @@ import {
   PartialKpiConfiguration,
   vrData,
 } from '@corona-dashboard/common';
-import { Select, TextInput } from '@sanity/ui';
+import {
+  Box,
+  Card,
+  Checkbox,
+  Flex,
+  Grid,
+  Label,
+  Select,
+  Text,
+  TextInput,
+} from '@sanity/ui';
 import FormField from 'part:@sanity/components/formfields/default';
 import { PatchEvent, set } from 'part:@sanity/form-builder/patch-event';
 import React, { useMemo } from 'react';
@@ -19,18 +29,44 @@ export const KpiConfigurationInput = React.forwardRef(
       ? (JSON.parse(value) as PartialKpiConfiguration)
       : ({} as PartialKpiConfiguration);
 
-    const onChangeProp = (propertyName: keyof PartialKpiConfiguration) => {
-      return (event: any) =>
+    console.dir(configuration);
+
+    const onChangeProp = (
+      propertyName: keyof PartialKpiConfiguration,
+      reset: (keyof PartialKpiConfiguration)[] = []
+    ) => {
+      return (event: any) => {
+        if (
+          !isDefined(configuration) ||
+          configuration[propertyName] === event.target.value
+        ) {
+          return;
+        }
+        const newConfiguration = {
+          ...configuration,
+          [propertyName]: event.target.value,
+        };
+        reset.forEach((x) => (newConfiguration[x] = undefined));
+        onChange(PatchEvent.from(set(JSON.stringify(newConfiguration))));
+      };
+    };
+
+    const toggleProp = (propertyName: keyof PartialKpiConfiguration) => {
+      return () => {
+        const value = isDefined(configuration[propertyName])
+          ? !configuration[propertyName]
+          : true;
         onChange(
           PatchEvent.from(
             set(
               JSON.stringify({
                 ...configuration,
-                [propertyName]: event.target.value,
+                [propertyName]: value,
               })
             )
           )
         );
+      };
     };
 
     const areaNames = useMemo(
@@ -38,16 +74,15 @@ export const KpiConfigurationInput = React.forwardRef(
         Object.keys(dataStructure).filter((x) => !x.endsWith('_collection')),
       []
     );
-    const metricNames = useMemo(
-      () =>
-        configuration.area
-          ? Object.keys((dataStructure as any)[configuration.area])
-          : undefined,
-      [configuration.area]
-    );
+    const metricNames = useMemo(() => {
+      const areas = configuration.area?.length
+        ? (dataStructure as any)[configuration.area]
+        : undefined;
+      return areas ? Object.keys(areas) : undefined;
+    }, [configuration.area]);
     const metricProperties = useMemo(
       () =>
-        configuration.area && configuration.metricName
+        configuration.area?.length && configuration.metricName?.length
           ? (dataStructure as any)[configuration.area][configuration.metricName]
           : undefined,
       [configuration.area, configuration.metricName]
@@ -63,7 +98,11 @@ export const KpiConfigurationInput = React.forwardRef(
         />
         <Select
           value={configuration.area ?? ''}
-          onChange={onChangeProp('area')}
+          onChange={onChangeProp('area', [
+            'code',
+            'metricName',
+            'metricProperty',
+          ])}
         >
           <option value="" disabled hidden>
             Selecteer een gebied
@@ -109,7 +148,9 @@ export const KpiConfigurationInput = React.forwardRef(
             <hr />
             <Select
               value={configuration.metricName ?? ''}
-              onChange={onChangeProp('metricName')}
+              onChange={(event) =>
+                onChangeProp('metricName', ['metricProperty'])(event)
+              }
             >
               <option value="" disabled hidden>
                 Selecteer een metriek
@@ -140,6 +181,69 @@ export const KpiConfigurationInput = React.forwardRef(
             </Select>
           </>
         )}
+        <Card marginBottom={3} marginTop={3}>
+          <Grid gap={[2, 2, 2, 2]}>
+            <Label>Title key</Label>
+            <TextInput
+              type="text"
+              value={configuration.titleKey}
+              onChange={onChangeProp('titleKey')}
+            />
+          </Grid>
+        </Card>
+        <Card marginBottom={3}>
+          <Grid gap={[2, 2, 2, 2]}>
+            <Label>Difference key</Label>
+            <TextInput
+              type="text"
+              value={configuration.differenceKey}
+              onChange={onChangeProp('differenceKey')}
+            />
+          </Grid>
+        </Card>
+        <Card marginBottom={3}>
+          <Flex align="center">
+            {!isDefined(configuration.isMovingAverageDifference) && (
+              <Checkbox
+                indeterminate
+                onChange={toggleProp('isMovingAverageDifference')}
+              />
+            )}
+            {isDefined(configuration.isMovingAverageDifference) && (
+              <Checkbox
+                checked={Boolean(configuration.isMovingAverageDifference)}
+                onChange={toggleProp('isMovingAverageDifference')}
+              />
+            )}
+            <Box flex={1} paddingLeft={3}>
+              <Text>
+                <label htmlFor="checkbox">
+                  Dit is een moving average difference
+                </label>
+              </Text>
+            </Box>
+          </Flex>
+        </Card>
+        <Card marginBottom={3}>
+          <Flex align="center">
+            {!isDefined(configuration.isAmount) && (
+              <Checkbox indeterminate onChange={toggleProp('isAmount')} />
+            )}
+            {isDefined(configuration.isAmount) && (
+              <Checkbox
+                checked={Boolean(configuration.isAmount)}
+                onChange={toggleProp('isAmount')}
+              />
+            )}
+            <Box flex={1} paddingLeft={3}>
+              <Text>
+                <label htmlFor="checkbox">
+                  Dit is een hoeveelheid (amount)
+                </label>
+              </Text>
+            </Box>
+          </Flex>
+        </Card>
       </FormField>
     );
   }

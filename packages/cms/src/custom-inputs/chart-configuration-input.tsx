@@ -44,19 +44,25 @@ export const ChartConfigurationInput = React.forwardRef(
 
     const onChangeProp = (
       propertyName: keyof PartialChartConfiguration,
-      value?: any
+      reset: (keyof PartialChartConfiguration)[] = [],
+      explicitValue?: any
     ) => {
-      return (event: any) =>
-        onChange(
-          PatchEvent.from(
-            set(
-              JSON.stringify({
-                ...configuration,
-                [propertyName]: isDefined(value) ? value : event.target.value,
-              })
-            )
-          )
-        );
+      return (event: any) => {
+        if (
+          !isDefined(configuration) ||
+          configuration[propertyName] === event.target.value
+        ) {
+          return;
+        }
+        const newConfiguration = {
+          ...configuration,
+          [propertyName]: isDefined(explicitValue)
+            ? explicitValue
+            : event.target.value,
+        };
+        reset.forEach((x) => (newConfiguration[x] = undefined));
+        onChange(PatchEvent.from(set(JSON.stringify(newConfiguration))));
+      };
     };
 
     const areaNames = useMemo(
@@ -64,13 +70,12 @@ export const ChartConfigurationInput = React.forwardRef(
         Object.keys(dataStructure).filter((x) => !x.endsWith('_collection')),
       []
     );
-    const metricNames = useMemo(
-      () =>
-        configuration.area
-          ? Object.keys((dataStructure as any)[configuration.area])
-          : undefined,
-      [configuration.area]
-    );
+    const metricNames = useMemo(() => {
+      const areas = configuration.area
+        ? (dataStructure as any)[configuration.area]
+        : undefined;
+      return areas ? Object.keys(areas) : undefined;
+    }, [configuration.area]);
     const metricProperties = useMemo(
       () =>
         configuration.area && configuration.metricName
@@ -89,7 +94,7 @@ export const ChartConfigurationInput = React.forwardRef(
         curve: 'linear',
         labelKey: '',
       });
-      onChangeProp('metricPropertyConfigs', newArray)(undefined);
+      //onChangeProp('metricPropertyConfigs', newArray)(undefined);
     };
 
     return (
@@ -133,7 +138,9 @@ export const ChartConfigurationInput = React.forwardRef(
         </Card>
         <Select
           value={configuration.area ?? ''}
-          onChange={onChangeProp('area')}
+          onChange={(event) => {
+            onChangeProp('area', ['metricName'])(event);
+          }}
         >
           <option value="" disabled hidden>
             Selecteer een gebied
@@ -232,7 +239,11 @@ export const ChartConfigurationInput = React.forwardRef(
                     ? [...configuration.metricPropertyConfigs]
                     : [];
                   newArray[index] = value;
-                  onChangeProp('metricPropertyConfigs', newArray)(undefined);
+                  onChangeProp(
+                    'metricPropertyConfigs',
+                    [],
+                    newArray
+                  )(undefined);
                 }}
                 onDelete={() => {
                   const newArray = isDefined(
@@ -241,7 +252,11 @@ export const ChartConfigurationInput = React.forwardRef(
                     ? [...configuration.metricPropertyConfigs]
                     : [];
                   newArray.splice(index, 1);
-                  onChangeProp('metricPropertyConfigs', newArray)(undefined);
+                  onChangeProp(
+                    'metricPropertyConfigs',
+                    [],
+                    newArray
+                  )(undefined);
                 }}
               />
             ))}

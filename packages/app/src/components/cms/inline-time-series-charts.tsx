@@ -4,10 +4,10 @@ import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
 import { ErrorBoundary } from '~/components/error-boundary';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { TimeSeriesChart } from '.';
 
 interface InlineTimeSeriesChartsProps {
   configuration: ChartConfiguration;
@@ -23,8 +23,6 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
     }`,
     (url: string) => fetch(url).then((_) => _.json())
   );
-
-  console.dir(data);
 
   const seriesConfig = useMemo(() => {
     return configuration.metricPropertyConfigs.map((x) => {

@@ -1,4 +1,4 @@
-import { ChartConfiguration } from '@corona-dashboard/common';
+import { ChartConfiguration, KpiConfiguration } from '@corona-dashboard/common';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
@@ -20,8 +20,9 @@ import {
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
-import { InlineTimeSeriesCharts } from '../time-series-chart/inline-time-series-charts';
 import { ContentImage } from './content-image';
+import { InlineKpi } from './inline-kpi';
+import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
@@ -31,6 +32,13 @@ interface RichContentProps {
 
 interface ChartConfigNode {
   chart: {
+    _type: string;
+    config: string;
+  };
+}
+
+interface KpiConfigNode {
+  kpi: {
     _type: string;
     config: string;
   };
@@ -94,6 +102,17 @@ export function RichContent({
         return (
           <Box width="infoWidth" maxWidth="infoWidth">
             <InlineTimeSeriesCharts configuration={configuration} />
+          </Box>
+        );
+      },
+      kpiConfiguration: (props: { node: KpiConfigNode }) => {
+        const configuration = JSON.parse(
+          props.node.kpi.config
+        ) as KpiConfiguration;
+
+        return (
+          <Box width="infoWidth" maxWidth="infoWidth">
+            <InlineKpi configuration={configuration} />
           </Box>
         );
       },

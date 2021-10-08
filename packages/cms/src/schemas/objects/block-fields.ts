@@ -79,7 +79,14 @@ export const blockFields = [
   },
   {
     title: 'Dashboard Grafiek',
+    name: 'dashboardChart',
     type: 'reference',
     to: [{ type: 'chartConfiguration' }],
+  },
+  {
+    title: 'Dashboard KPIs',
+    name: 'dashboardKpi',
+    type: 'reference',
+    to: [{ type: 'kpiConfiguration' }],
   },
 ];

@@ -32,14 +32,14 @@ export const getStaticProps = createGetStaticProps(
             "${locale}": [
               ...content.${locale}[]
               {
-                (asset == undefined && _type != 'reference') => {
+                (asset == undefined && _type != 'dashboardChart' && _type != 'dashboardKpi') => {
                   ...,
                 },
                 asset != undefined => {
                   "_type": 'image',
                   "asset": asset->
                 },
-                _type == 'reference' => {
+                _type == 'dashboardChart' || _type == 'dashboardKpi' => {
                   ...*[_id == ^._ref][0]
                 }
               },

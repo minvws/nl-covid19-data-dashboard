@@ -73,6 +73,17 @@ function isValid(kpi: any) {
       } is verplicht`
     );
   }
+  if (!hasValue(kpiConfig.titleKey)) {
+    errors.push('Title key is verplicht');
+  }
+  if (
+    hasValue(kpiConfig.differenceKey) &&
+    !isDefined(kpiConfig.isMovingAverageDifference)
+  ) {
+    errors.push(
+      'isMovingAverageDifference is verplicht als er een difference key geselecteerd is'
+    );
+  }
 
   return errors.length ? errors.join(', ') : true;
 }

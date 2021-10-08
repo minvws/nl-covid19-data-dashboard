@@ -1,7 +1,6 @@
+import { gmData, vrData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { createContext, ReactNode, useContext, useMemo } from 'react';
-import { gmData } from '~/data/gm';
-import { vrData } from '~/data/vr';
 import { useIntl } from '~/intl';
 
 interface Breadcrumb {

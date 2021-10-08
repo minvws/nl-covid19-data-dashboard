@@ -38,12 +38,16 @@ export type MetricPropertyConfig = {
 
 export type KpiConfiguration = Omit<
   Required<PartialKpiConfiguration>,
-  'code'
-> & { code?: string };
+  'code' | 'differenceKey'
+> & { code?: string; differenceKey?: string };
 
 export type PartialKpiConfiguration = {
   area?: AreaType;
   metricName?: string;
   metricProperty?: string;
   code?: string;
+  titleKey?: string;
+  differenceKey?: string;
+  isMovingAverageDifference?: boolean;
+  isAmount?: boolean;
 };
