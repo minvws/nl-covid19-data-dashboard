@@ -63,6 +63,17 @@ function isValid(chart: any) {
   if (!hasValue(chartConfig.metricName)) {
     errors.push('Metriek naam is verplicht');
   }
+  if (
+    ['gm', 'vr'].includes(chartConfig.area ?? '') &&
+    !isDefined(chartConfig.code)
+  ) {
+    errors.push(
+      `${
+        chartConfig.area === 'gm' ? 'Gemeente' : 'Veiligheidsregio'
+      } is verplicht`
+    );
+  }
+
   if (!hasValue(chartConfig.timeframe)) {
     errors.push('Timeframe (Toon alles/Toon laatste 5 weken) is verplicht');
   }
@@ -75,8 +86,7 @@ function isValid(chart: any) {
     errors.push('Iedere metriek property heeft een geldige label key nodig');
   }
 
-  const result = errors.length ? errors.join('\n') : true;
-  return result;
+  return errors.length ? errors.join(', ') : true;
 }
 
 function hasValue(value: string | undefined) {

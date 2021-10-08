@@ -131,7 +131,10 @@ export const ChartConfigurationInput = React.forwardRef(
             <Label>Toon laatste 5 weken</Label>
           </Box>
         </Card>
-        <Select value={configuration.area} onChange={onChangeProp('area')}>
+        <Select
+          value={configuration.area ?? ''}
+          onChange={onChangeProp('area')}
+        >
           <option value="" disabled hidden>
             Selecteer een gebied
           </option>
@@ -142,8 +145,11 @@ export const ChartConfigurationInput = React.forwardRef(
           ))}
         </Select>
         {configuration.area === 'gm' && (
-          <Select value={configuration.code} onChange={onChangeProp('code')}>
-            <option value={undefined} disabled hidden>
+          <Select
+            value={configuration.code ?? ''}
+            onChange={onChangeProp('code')}
+          >
+            <option value="" disabled hidden>
               Selecteer een gemeente
             </option>
             {gmData.map((x) => (
@@ -154,8 +160,11 @@ export const ChartConfigurationInput = React.forwardRef(
           </Select>
         )}
         {configuration.area === 'vr' && (
-          <Select value={configuration.code} onChange={onChangeProp('code')}>
-            <option value={undefined} disabled hidden>
+          <Select
+            value={configuration.code ?? ''}
+            onChange={onChangeProp('code')}
+          >
+            <option value="" disabled hidden>
               Selecteer een veiligheidsregio
             </option>
             {vrData.map((x) => (
@@ -169,7 +178,7 @@ export const ChartConfigurationInput = React.forwardRef(
           <>
             <hr />
             <Select
-              value={configuration.metricName}
+              value={configuration.metricName ?? ''}
               onChange={onChangeProp('metricName')}
             >
               <option value="" disabled hidden>

@@ -20,7 +20,8 @@ export const kpiConfiguration = {
       title: 'Configuratie',
       name: 'kpi',
       type: 'dashboardKpi',
-      validation: (rule: Rule) => rule.required(),
+      validation: (rule: Rule) =>
+        rule.required().custom((x: any) => isValid(x)),
     },
   ],
   preview: {
@@ -38,16 +39,44 @@ export const kpiConfiguration = {
   },
 };
 
-function isValid(kpiConfig: PartialKpiConfiguration) {
+function isValid(kpi: any) {
+  if (!isDefined(kpi.config)) {
+    return {
+      message: 'Chart config is undefined',
+    };
+  }
+  const kpiConfig = JSON.parse(kpi.config) as PartialKpiConfiguration;
   if (!isDefined(kpiConfig)) {
-    return false;
+    return {
+      message: 'Chart config is undefined',
+    };
   }
 
-  return (
-    (['nl', 'in'].includes(kpiConfig.area ?? '') ||
-      (['gm', 'vr'].includes(kpiConfig.area ?? '') &&
-        isDefined(kpiConfig.code))) &&
-    kpiConfig.metricName?.length &&
-    kpiConfig.metricProperty?.length
-  );
+  const errors: string[] = [];
+  if (!hasValue(kpiConfig.area)) {
+    errors.push('Gebied is verplicht');
+  }
+  if (!hasValue(kpiConfig.metricName)) {
+    errors.push('Metriek naam is verplicht');
+  }
+  if (!hasValue(kpiConfig.metricProperty)) {
+    errors.push('Metriek waarde is verplicht');
+  }
+
+  if (
+    ['gm', 'vr'].includes(kpiConfig.area ?? '') &&
+    !isDefined(kpiConfig.code)
+  ) {
+    errors.push(
+      `${
+        kpiConfig.area === 'gm' ? 'Gemeente' : 'Veiligheidsregio'
+      } is verplicht`
+    );
+  }
+
+  return errors.length ? errors.join(', ') : true;
+}
+
+function hasValue(value: string | undefined) {
+  return value?.length ?? 0 > 0;
 }
