@@ -42,7 +42,11 @@ export function FullscreenChartTile({
 
   const tile = (
     <Tile noBorder={isFullscreen} height="100%">
-      <Box px={isFullscreen ? { _: 3, sm: 4 } : undefined}>
+      <Box
+        px={isFullscreen ? { _: 3, sm: 4 } : undefined}
+        py={isFullscreen ? { _: 2, sm: 3 } : undefined}
+        height="100%"
+      >
         {children}
 
         {metadata && (
