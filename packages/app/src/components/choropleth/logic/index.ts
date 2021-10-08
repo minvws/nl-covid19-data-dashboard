@@ -8,6 +8,5 @@ export * from './use-dynamic-size';
 export * from './use-feature-name';
 export * from './use-feature-props';
 export * from './use-fill-color';
-export * from './use-tab-interactive-button';
 export * from './utils';
 export * from './vr-bounding-box-gm-codes';

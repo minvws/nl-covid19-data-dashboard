@@ -11,6 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
@@ -83,7 +84,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    4
+    INACCURATE_ITEMS
   );
 
   const metadata = {
@@ -130,7 +131,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="hospital_moving_avg_per_region"
                 absolute={
-                  lastValue.admissions_on_date_of_admission_moving_average
+                  lastValue.admissions_on_date_of_admission_moving_average_rounded
                 }
                 isMovingAverageDifference
                 isAmount

@@ -15,6 +15,7 @@ import { useSidebar } from './logic/use-sidebar';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
+  getLink?: (code: string) => string;
 } & (
   | {
       code: string;
@@ -47,13 +48,14 @@ type GmLayoutProps = {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function GmLayout(props: GmLayoutProps) {
-  const { children, municipalityName, code } = props;
+  const { children, municipalityName, code, getLink } = props;
 
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
 
-  const showMetricLinks = router.route !== '/gemeente';
+  const showMetricLinks =
+    router.route !== '/gemeente' && router.route !== '/actueel/gemeente';
 
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
@@ -91,7 +93,7 @@ export function GmLayout(props: GmLayoutProps) {
         hideMenuButton={isMainRoute}
         searchComponent={
           <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
-            <GmComboBox />
+            <GmComboBox getLink={getLink} />
           </Box>
         }
         sidebarComponent={

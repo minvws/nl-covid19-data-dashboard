@@ -38,7 +38,6 @@
     "flat": "^5.0.2",
     "framer-motion": "^4.1.17",
     "geojson": "^0.5.0",
-    "geometric": "^2.2.6",
     "globby": "^12.0.0",
     "helmet": "^4.6.0",
     "http-proxy-middleware": "^2.0.1",
@@ -53,7 +52,6 @@
     "react-dom": "^17.0.1",
     "react-error-boundary": "^3.1.3",
     "react-konva": "^17.0.2-5",
-    "react-konva-utils": "^0.1.7",
     "react-markdown": "^5",
     "sanitize-filename": "^1.6.3",
     "styled-components": "^5.3.1",
@@ -82,7 +80,7 @@
     "@types/lodash": "^4.14.172",
     "@types/match-sorter": "^6.0.0",
     "@types/node": "^16.0.0",
-    "@types/node-fetch": "^2.5.12",
+    "@types/node-fetch": "^3",
     "@types/react": "^17.0.17",
     "@types/react-dom": "^17.0.8",
     "@types/styled-components": "^5.1.12",
@@ -123,7 +121,7 @@
     "react-refresh": "^0.10.0",
     "start-server-and-test": "^1.13.1",
     "ts-jest": "^27.0.4",
-    "typescript": "^4.4.2",
+    "typescript": "^4.4.3",
     "walkjs": "^3.1.11"
   },
   "lint-staged": {
@@ -147,7 +145,7 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
-    "typecheck-diag": " tsc --pretty --noEmit--extendedDiagnostics",
+    "trace": "tsc --pretty --noEmit --generateTrace \"trace-$(date +%Y%m%d%H%M)\" --composite false --incremental false",
     "download": "node ./infra/download.js",
     "clean": "npx rimraf .next",
     "nuke": "yarn clean && npx rimraf node_modules"

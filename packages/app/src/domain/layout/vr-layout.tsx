@@ -13,6 +13,7 @@ import { useSidebar } from './logic/use-sidebar';
 type VrLayoutProps = {
   children?: React.ReactNode;
   isLandingPage?: boolean;
+  getLink?: (code: string) => string;
 } & (
   | {
       vrName: string;
@@ -44,7 +45,7 @@ type VrLayoutProps = {
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function VrLayout(props: VrLayoutProps) {
-  const { children, vrName, isLandingPage } = props;
+  const { children, vrName, isLandingPage, getLink } = props;
 
   const router = useRouter();
   const { siteText } = useIntl();
@@ -55,7 +56,9 @@ export function VrLayout(props: VrLayoutProps) {
     router.route === '/veiligheidsregio' ||
     router.route === `/veiligheidsregio/[code]`;
 
-  const showMetricLinks = router.route !== '/veiligheidsregio';
+  const showMetricLinks =
+    router.route !== '/veiligheidsregio' &&
+    router.route !== '/actueel/veiligheidsregio';
 
   const topItems = useSidebar({
     layout: 'vr',
@@ -103,7 +106,7 @@ export function VrLayout(props: VrLayoutProps) {
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
-            <VrComboBox />
+            <VrComboBox getLink={getLink} />
           </Box>
         }
         sidebarComponent={

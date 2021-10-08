@@ -12,7 +12,7 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { SparkBars } from '~/components/spark-bars';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
+import { colors, space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
@@ -44,6 +44,7 @@ export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   if (breakpoints.md) {
     return <WideMiniTileSelectorLayout {...props} />;
   }
+
   return (
     <Box spacing={2}>
       <Text variant="label1">
@@ -120,7 +121,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         <InlineText>{item.label}</InlineText>
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
-            <WarningIconWrapper aria-label={siteText.aria_labels.warning} small>
+            <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
               <Warning viewBox="0 0 25 25" />
             </WarningIconWrapper>
           )}
@@ -153,45 +154,55 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 
   return (
     <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
-      <Box>
-        <WideMenuList>
+      <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
+        <ul>
           {menuItems.map((item, index) => (
-            <WideMenuListItem
-              key={item.label}
-              onClick={() => setSelectedIndex(index)}
-              selected={selectedIndex === index}
-            >
-              <SparkBars
-                data={item.data}
-                averageProperty={item.dataProperty}
-                hide={item.hideSparkBar}
-              />
-              <InlineText>{item.label}</InlineText>
-              <Box ml="auto" display="flex" alignItems="center">
-                {item.warning && (
-                  <InlineTooltip content={item.warning}>
-                    <WarningIconWrapper
-                      aria-label={siteText.aria_labels.warning}
-                    >
-                      <Warning viewBox="0 0 25 25" />
-                    </WarningIconWrapper>
-                  </InlineTooltip>
-                )}
-                <InlineText fontWeight="bold">
-                  {item.valueIsPercentage
-                    ? `${
-                        typeof item.value === 'number'
-                          ? formatPercentage(item.value)
-                          : item.value
-                      }%`
-                    : typeof item.value === 'number'
-                    ? formatNumber(item.value)
-                    : item.value}
-                </InlineText>
-              </Box>
+            <WideMenuListItem key={item.label}>
+              <WideMenuButton
+                onClick={() => setSelectedIndex(index)}
+                selected={selectedIndex === index}
+              >
+                <SparkBars
+                  data={item.data}
+                  averageProperty={item.dataProperty}
+                  hide={item.hideSparkBar}
+                />
+                <InlineText>{item.label}</InlineText>
+                <Box
+                  ml="auto"
+                  display="flex"
+                  alignItems="center"
+                  css={css({
+                    '> span': {
+                      display: 'flex',
+                    },
+                  })}
+                >
+                  {item.warning && (
+                    <InlineTooltip content={item.warning}>
+                      <WarningIconWrapper
+                        aria-label={siteText.aria_labels.warning}
+                      >
+                        <Warning viewBox="0 0 25 25" />
+                      </WarningIconWrapper>
+                    </InlineTooltip>
+                  )}
+                  <InlineText fontWeight="bold">
+                    {item.valueIsPercentage
+                      ? `${
+                          typeof item.value === 'number'
+                            ? formatPercentage(item.value)
+                            : item.value
+                        }%`
+                      : typeof item.value === 'number'
+                      ? formatNumber(item.value)
+                      : item.value}
+                  </InlineText>
+                </Box>
+              </WideMenuButton>
             </WideMenuListItem>
           ))}
-        </WideMenuList>
+        </ul>
         <>
           {
             /**
@@ -225,30 +236,45 @@ const NarrowMenuList = styled.ul(
   })
 );
 
-const WideMenuList = styled.ul(
+const WideMenuListItem = styled.li(
   css({
-    borderRight: '1px',
-    borderRightStyle: 'solid',
-    borderRightColor: 'border',
+    listStyleType: 'none',
   })
 );
 
-const WideMenuListItem = styled.li<{ selected: boolean }>((x) =>
+const WideMenuButton = styled.button<{ selected: boolean }>((x) =>
   css({
-    backgroundColor: x.selected ? colors.lightBlue : colors.white,
-    borderRightColor: x.selected ? colors.button : colors.white,
-    borderRightWidth: x.selected ? '5px' : 0,
-    borderRightStyle: x.selected ? 'solid' : 'none',
+    position: 'relative',
     height: '3em',
+    width: '100%',
     alignItems: 'center',
     listStyle: 'none',
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
-    pr: 3,
+    pr: `calc(5px + ${space[3]})`,
+    backgroundColor: x.selected ? colors.lightBlue : colors.white,
     pl: 2,
+    transition: '0.1s background-color',
+    zIndex: 3,
+    border: 0,
+    textAlign: 'left',
+
     '&:hover': {
       backgroundColor: colors.lightBlue,
+    },
+
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      height: '100%',
+      width: '5px',
+      backgroundColor: colors.button,
+      transform: x.selected ? 'scaleX(1)' : 'scaleX(0)',
+      transformOrigin: 'right',
+      transition: '0.2s transform',
     },
   })
 );
@@ -263,12 +289,12 @@ const StyledNarrowMenuListItem = styled.li(
   })
 );
 
-const WarningIconWrapper = styled.span<{ small?: boolean }>((x) =>
+const WarningIconWrapper = styled.span(
   css({
     display: 'inline-block',
     backgroundColor: 'warningYellow',
     borderRadius: 1,
-    mr: x.small ? '4px' : '8px',
+    mr: 2,
     width: '1.6em',
     height: '1.6em',
     padding: '2px',

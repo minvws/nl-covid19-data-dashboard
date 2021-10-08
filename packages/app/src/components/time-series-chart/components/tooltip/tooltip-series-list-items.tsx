@@ -52,7 +52,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 icon={<SeriesIcon config={x} />}
                 label={x.shortLabel ?? x.label}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.hideInTooltip}
+                isVisuallyHidden={x.nonInteractive}
               >
                 <span css={css({ whiteSpace: 'nowrap' })}>
                   {formatSeriesValue(value, x, options.isPercentage)}
@@ -66,7 +66,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 key={key}
                 label={x.label}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.hideInTooltip}
+                isVisuallyHidden={x.nonInteractive}
               >
                 {formatSeriesValue(
                   value,
@@ -89,7 +89,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 }
                 label={x.shortLabel ?? x.label}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.hideInTooltip}
+                isVisuallyHidden={x.nonInteractive}
               >
                 {formatSeriesValue(value, x, options.isPercentage)}
               </TooltipListItem>
@@ -102,7 +102,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 icon={<SeriesIcon config={x} />}
                 label={x.shortLabel ?? x.label}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.hideInTooltip}
+                isVisuallyHidden={x.nonInteractive}
               >
                 {formatSeriesValue(value, x, options.isPercentage)}
               </TooltipListItem>

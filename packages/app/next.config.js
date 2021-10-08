@@ -85,6 +85,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/actueel',
+        destination: '/',
+        permanent: false,
+      },
+      {
         source: '/apple-touch-icon-120x120-precomposed.png',
         destination: '/images/touch-icon.png',
         permanent: false,

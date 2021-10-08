@@ -1,4 +1,4 @@
-import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
+import type { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import * as topojson from 'topojson-client';
 import inTopology from './in.topo.json';
 import nlTopology from './nl-vr-gm.topo.json';

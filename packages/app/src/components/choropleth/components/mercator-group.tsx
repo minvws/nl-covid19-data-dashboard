@@ -1,8 +1,11 @@
 import Projection from '@visx/geo/lib/projections/Projection';
-import { ProjectionPreset } from '@visx/geo/lib/types';
-import { GeoProjection } from 'd3-geo';
-import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { CodedGeoProperties, FitExtent } from '~/components/choropleth/logic';
+import type { ProjectionPreset } from '@visx/geo/lib/types';
+import type { GeoProjection } from 'd3-geo';
+import type { Feature, MultiPolygon, Polygon } from 'geojson';
+import type {
+  CodedGeoProperties,
+  FitExtent,
+} from '~/components/choropleth/logic';
 import { featureHasPath, truncatePathCoordinates } from '../logic/utils';
 import { Path } from './path';
 

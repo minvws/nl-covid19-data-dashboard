@@ -2,18 +2,21 @@ import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { DataOptions } from './time-series-chart/logic';
 
 type MiniTrendChartProps<T extends TimestampedValue = TimestampedValue> = {
   accessibility: AccessibilityDefinition;
   timeframe?: TimeframeOption;
   title: string;
   seriesConfig: SeriesConfig<T>;
+  dataOptions?: DataOptions;
   values: T[];
 };
 
 export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
   accessibility,
   seriesConfig,
+  dataOptions,
   timeframe = '5weeks',
   values,
 }: MiniTrendChartProps<T>) {
@@ -29,6 +32,7 @@ export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
       values={values}
       numGridLines={3}
       seriesConfig={seriesConfig}
+      dataOptions={dataOptions}
     />
   );
 }
