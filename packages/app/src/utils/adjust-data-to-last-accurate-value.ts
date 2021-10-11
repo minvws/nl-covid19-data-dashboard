@@ -18,7 +18,7 @@ export function adjustDataToLastAccurateValue<T>(
       last_value: {
         ...data.last_value,
         [metricProperty]:
-          data.values[data.values.length - numberOfItems][
+          data.values[data.values.length - numberOfItems - 1][
             metricProperty as keyof T
           ],
       },
@@ -27,7 +27,7 @@ export function adjustDataToLastAccurateValue<T>(
 
   return {
     ...data,
-    last_value: data.values[data.values.length - numberOfItems],
+    last_value: data.values[data.values.length - numberOfItems - 1],
   };
 }
 
