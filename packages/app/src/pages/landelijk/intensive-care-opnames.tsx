@@ -10,6 +10,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
+import { INACCURATE_ITEMS } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -30,7 +31,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { IntakeHospitalPageQuery } from '~/types/cms';
@@ -39,7 +40,12 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('intensive_care_lcps'),
+  selectNlData(
+    'intensive_care_lcps',
+    'intensive_care_nice',
+    'intensive_care_nice_per_age_group',
+    'difference.intensive_care_lcps__beds_occupied_covid'
+  ),
   createGetContent<{
     page: IntakeHospitalPageQuery;
     highlight: PageArticlesQueryResult;
@@ -60,13 +66,13 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.ic_opnames_per_dag;
 
   const { selectedNlData: data, content, lastGenerated } = props;
-  const dataIntake = data.intensive_care_nice;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
+  const dataIntake = data.intensive_care_nice;
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    3
+    INACCURATE_ITEMS
   );
 
   const metadata = {
@@ -77,11 +83,13 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
-            screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.intensive_care_admissions.title
+            }
             title={text.titel}
             icon={<Arts />}
             description={text.pagina_toelichting}
@@ -100,15 +108,13 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={text.barscale_titel}
               metadata={{
-                date: dataIntake.last_value.date_unix,
                 source: text.bronnen.nice,
               }}
             >
               <PageKpi
                 data={data}
                 metricName="intensive_care_nice"
-                metricProperty="admissions_on_date_of_reporting"
-                differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
+                metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                 isAmount
                 isMovingAverageDifference
               />
@@ -241,7 +247,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'gapped-area',
                     metricProperty: 'beds_occupied_covid',
                     label: text.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,

@@ -88,4 +88,10 @@ export const restrictionIcons = {
   klok_2100: Icons.Klok2100,
   geen_entertainment: Icons.GeenEntertainment,
   frisse_lucht: Icons.FrisseLucht,
+  binnen_met_zitplaats: Icons.BinnenMetZitplaats,
+  binnen_zonder_zitplaats: Icons.BinnenZonderZitplaats,
+  geen_max_aantal_bezoekers: Icons.GeenMaxAantalBezoekers,
+  kunst_cultuur: Icons.KunstCultuur,
+  taxi: Icons.Taxi,
+  vliegen: Icons.Vliegen,
 } as const;

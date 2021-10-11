@@ -68,6 +68,9 @@ export const preset = {
       fontSize: 0,
       lineHeight: 1,
     },
+    datadriven: {
+      fontSize: asResponsiveArray({ _: 2, md: 5 }),
+    },
   },
 } as const;
 

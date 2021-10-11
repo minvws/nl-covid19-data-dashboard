@@ -27,7 +27,6 @@ export function AsideTitle(props: TitleProps) {
       flexDirection="row"
       flexWrap="nowrap"
       alignItems="center"
-      m={0}
     >
       {icon && <Icon>{icon}</Icon>}
 
@@ -42,7 +41,13 @@ export function AsideTitle(props: TitleProps) {
             })}
           >
             {title}
-            {showArrow && <Chevron />}
+            {showArrow && (
+              <Chevron
+                width={10}
+                height={14}
+                css={css({ mr: 2, color: 'blue' })}
+              />
+            )}
           </span>
         </Text>
         <Text>{subtitle}</Text>
@@ -70,6 +75,7 @@ function Icon({ children }: { children: ReactNode }) {
         height: '2.5rem',
         svg: {
           height: '2.25rem',
+          fill: 'currentColor',
         },
       })}
     >

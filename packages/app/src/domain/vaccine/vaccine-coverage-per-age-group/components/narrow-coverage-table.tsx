@@ -1,27 +1,21 @@
-import {
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
-} from '@corona-dashboard/common';
 import { Box, Spacer } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../common';
+import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
+import {
+  COLOR_FULLY_VACCINATED,
+  COLOR_HAS_ONE_SHOT,
+  CoverageTableRow,
+} from '../common';
 import { formatAgeGroupString } from '../logic/format-age-group-string';
 import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
 import { AgeGroup } from './age-group';
 import { Bar } from './bar';
 import { NarrowPercentage } from './narrow-percentage';
 
-interface NarrowCoverageRow {
-  values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
-}
-
-export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
-  const { siteText } = useIntl();
+export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
+  const { siteText, formatPercentage } = useIntl();
+  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
   const text = siteText.vaccinaties.vaccination_coverage;
   const { templates } = siteText.vaccinaties.vaccination_coverage;
 
@@ -58,14 +52,13 @@ export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
 
           <Box spacing={1}>
             <NarrowPercentage
-              value={item.has_one_shot_percentage}
+              value={
+                'has_one_shot_percentage_label' in item
+                  ? formatCoveragePercentage(item, 'has_one_shot_percentage')
+                  : `${formatPercentage(item.has_one_shot_percentage)}%`
+              }
               color={COLOR_HAS_ONE_SHOT}
               textLabel={text.headers.first_shot}
-              label={
-                'has_one_shot_percentage_label' in item
-                  ? item.has_one_shot_percentage_label
-                  : undefined
-              }
             />
 
             <Bar
@@ -83,14 +76,16 @@ export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
 
           <Box spacing={1}>
             <NarrowPercentage
-              value={item.fully_vaccinated_percentage}
+              value={
+                'fully_vaccinated_percentage_label' in item
+                  ? formatCoveragePercentage(
+                      item,
+                      'fully_vaccinated_percentage'
+                    )
+                  : `${formatPercentage(item.fully_vaccinated_percentage)}%`
+              }
               color={COLOR_FULLY_VACCINATED}
               textLabel={text.headers.coverage}
-              label={
-                'fully_vaccinated_percentage_label' in item
-                  ? item.fully_vaccinated_percentage_label
-                  : undefined
-              }
             />
 
             <Bar

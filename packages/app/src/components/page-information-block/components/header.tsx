@@ -40,7 +40,7 @@ export function Header({
           </Heading>
         </Box>
       )}
-      {isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
+      {icon && isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
       <Heading
         level={1}
         as="h2"
@@ -71,6 +71,7 @@ const Icon = styled.span<{ gridArea: 'topIcon' | 'sideIcon' }>((x) =>
 
     svg: {
       height: '3.5rem',
+      width: 'auto',
     },
   })
 );

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
 import { Layout } from '~/domain/layout/layout';
@@ -96,8 +97,17 @@ export default function EditorialDetailPage(
     twitterImage: imgPath,
   };
 
+  const breadcrumbsData = useMemo(
+    () => ({ [props.content.slug.current]: props.content.title }),
+    [props.content.slug, props.content.title]
+  );
+
   return (
-    <Layout {...metadata} lastGenerated={lastGenerated}>
+    <Layout
+      breadcrumbsData={breadcrumbsData}
+      lastGenerated={lastGenerated}
+      {...metadata}
+    >
       <Box backgroundColor="white">
         <EditorialDetail editorial={content} />
       </Box>

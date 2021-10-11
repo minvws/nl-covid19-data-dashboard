@@ -23,6 +23,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | InvisibleSeriesDefinition<T>
   | SplitAreaSeriesDefinition<T>
   | GappedLineSeriesDefinition<T>
+  | GappedAreaSeriesDefinition<T>
   | GappedStackedAreaSeriesDefinition<T>
 )[];
 
@@ -34,12 +35,18 @@ interface SeriesCommonDefinition {
    */
   shortLabel?: string;
   /**
-   * Non-interactive means the series will not have hover state and does not
-   * show up visually as part of the tooltip (only hidden). Sometimes we want to
-   * render a series as a backdrop to give context to another interactive
-   * series, like in the sewer chart when a location is selected.
+   * Hide in tooltip means the series will not show up visually as part of the
+   * tooltip (only hidden). Sometimes we want to render a series as a backdrop
+   * to give context to another interactive series, like in the sewer chart when
+   * a location is selected.
    */
-  isNonInteractive?: boolean;
+  nonInteractive?: boolean;
+  /**
+   * No-marker means the series will not have a marker on hover. This can be useful
+   * when showing two variants of the same metric (like 7-day averages and daily
+   * values), or when using a second series as a backdrop.
+   */
+  noMarker?: boolean;
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -52,7 +59,6 @@ export interface GappedLineSeriesDefinition<T extends TimestampedValue>
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-  isNonInteractive?: boolean;
 }
 
 export interface LineSeriesDefinition<T extends TimestampedValue>
@@ -65,7 +71,6 @@ export interface LineSeriesDefinition<T extends TimestampedValue>
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-  isNonInteractive?: boolean;
 }
 
 export interface AreaSeriesDefinition<T extends TimestampedValue>
@@ -78,7 +83,18 @@ export interface AreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-  isNonInteractive?: boolean;
+}
+
+export interface GappedAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'gapped-area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  fillOpacity?: number;
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
 }
 
 export interface BarSeriesDefinition<T extends TimestampedValue>
@@ -89,7 +105,6 @@ export interface BarSeriesDefinition<T extends TimestampedValue>
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
-  isNonInteractive?: boolean;
 }
 
 export interface SplitBarSeriesDefinition<T extends TimestampedValue>
@@ -100,7 +115,6 @@ export interface SplitBarSeriesDefinition<T extends TimestampedValue>
   shortLabel?: string;
   fillOpacity?: number;
   splitPoints: SplitPoint[];
-  isNonInteractive?: boolean;
 }
 
 export interface RangeSeriesDefinition<T extends TimestampedValue>
@@ -113,7 +127,6 @@ export interface RangeSeriesDefinition<T extends TimestampedValue>
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
-  isNonInteractive?: boolean;
 }
 
 export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
@@ -126,7 +139,6 @@ export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
   style?: 'solid' | 'hatched';
   fillOpacity?: number;
   strokeWidth?: number;
-  isNonInteractive?: boolean;
   mixBlendMode?: Property.MixBlendMode;
 }
 
@@ -140,7 +152,6 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
   style?: 'solid' | 'hatched';
   fillOpacity?: number;
   strokeWidth?: number;
-  isNonInteractive?: boolean;
   mixBlendMode?: Property.MixBlendMode;
 }
 
@@ -162,7 +173,6 @@ export interface SplitAreaSeriesDefinition<T extends TimestampedValue>
   splitPoints: SplitPoint[];
   strokeWidth?: number;
   fillOpacity?: number;
-  isNonInteractive?: boolean;
 }
 
 /**
@@ -185,7 +195,6 @@ export interface InvisibleSeriesDefinition<T extends TimestampedValue>
    * indicate the format.
    */
   isPercentage?: boolean;
-  isNonInteractive?: boolean;
 }
 
 type CutValuesConfig = {

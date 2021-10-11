@@ -1,9 +1,9 @@
 import Projection from '@visx/geo/lib/projections/Projection';
-import { ProjectionPreset } from '@visx/geo/lib/types';
-import { GeoProjection } from 'd3-geo';
-import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { FocusEvent } from 'react';
-import { CodedGeoProperties, FitExtent } from '../logic';
+import type { ProjectionPreset } from '@visx/geo/lib/types';
+import type { GeoProjection } from 'd3-geo';
+import type { Feature, MultiPolygon, Polygon } from 'geojson';
+import type { FocusEvent } from 'react';
+import type { CodedGeoProperties, FitExtent } from '../logic';
 import { featureHasPath, truncatePathCoordinates } from '../logic/utils';
 import { HoverPathLink } from './path';
 

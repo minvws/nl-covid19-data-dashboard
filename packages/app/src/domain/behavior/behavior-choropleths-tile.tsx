@@ -143,7 +143,7 @@ function ChoroplethBlock({
                 number | null | boolean | undefined,
                 true
               >,
-              noDataFillColor: colors.page,
+              noDataFillColor: colors.offWhite,
             }}
             dataOptions={{
               getLink: reverseRouter.vr.gedrag,

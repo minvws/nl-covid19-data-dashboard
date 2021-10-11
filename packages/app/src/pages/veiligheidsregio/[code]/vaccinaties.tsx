@@ -1,5 +1,6 @@
 import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -16,7 +17,6 @@ import {
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { getVaccineCoverageDisplayValues } from '~/domain/vaccine/logic/get-vaccine-coverage-display-values';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -35,7 +35,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -45,10 +45,9 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'vrVaccinationPage',
-
   createGetStaticProps(
     getLastGeneratedDate,
-    selectVrPageMetricData(),
+    selectVrData('vaccine_coverage_per_age_group'),
     createGetChoroplethData({
       gm: ({ vaccine_coverage_per_age_group }, ctx) => {
         if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -96,6 +95,7 @@ export const VaccinationsVrPage = (
   } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
@@ -116,7 +116,7 @@ export const VaccinationsVrPage = (
   );
   const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
 
-  const gmCodes = gmCodesByVrCode[data.code];
+  const gmCodes = gmCodesByVrCode[router.query.code as string];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
   /**
@@ -144,7 +144,7 @@ export const VaccinationsVrPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.vaccinaties}
@@ -178,9 +178,9 @@ export const VaccinationsVrPage = (
                   filteredAgeGroup18Plus.fully_vaccinated_percentage,
                 has_one_shot: filteredAgeGroup18Plus.has_one_shot_percentage,
                 birthyear: filteredAgeGroup18Plus.birthyear_range,
-                label_fully_vaccinated:
+                fully_vaccinated_label:
                   filteredAgeGroup18Plus.fully_vaccinated_percentage_label,
-                label_has_one_shot:
+                has_one_shot_label:
                   filteredAgeGroup18Plus.has_one_shot_percentage_label,
               }}
               age12Plus={{
@@ -188,9 +188,9 @@ export const VaccinationsVrPage = (
                   filteredAgeGroup12Plus.fully_vaccinated_percentage,
                 has_one_shot: filteredAgeGroup12Plus.has_one_shot_percentage,
                 birthyear: filteredAgeGroup12Plus.birthyear_range,
-                label_fully_vaccinated:
+                fully_vaccinated_label:
                   filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
-                label_has_one_shot:
+                has_one_shot_label:
                   filteredAgeGroup12Plus.has_one_shot_percentage_label,
               }}
             />
@@ -259,7 +259,10 @@ export const VaccinationsVrPage = (
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  getValues={getVaccineCoverageDisplayValues}
+                  percentageProps={[
+                    'fully_vaccinated_percentage',
+                    'has_one_shot_percentage',
+                  ]}
                 />
               )}
             />

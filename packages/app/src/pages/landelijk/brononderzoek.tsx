@@ -19,13 +19,11 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
 } from '~/static-props/get-data';
 export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectNlPageMetricData(),
     createGetChoroplethData({
       vr: ({ situations }) => ({
         situations,
@@ -41,7 +39,7 @@ export const getStaticProps = withFeatureNotFoundPage(
 export default function BrononderzoekPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { choropleth, selectedNlData: data, lastGenerated, content } = props;
+  const { choropleth, lastGenerated, content } = props;
 
   const intl = useIntl();
 
@@ -57,12 +55,12 @@ export default function BrononderzoekPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              intl.siteText.positief_geteste_personen.titel_sidebar
+              intl.siteText.sidebar.metrics.source_investigation.title
             }
             title={text.titel}
             icon={<Gedrag />}

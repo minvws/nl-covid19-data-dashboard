@@ -10,7 +10,7 @@
     "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "flat": "^5.0.2",
-    "json-schema-to-typescript": "^9",
+    "json-schema-to-typescript": "^10",
     "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "p-memoize": "^4.0.1",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "prepare-release": "ts-node src/release/prepare-release.ts",
-    "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/cli'",
+    "bootstrap": "yarn generate-typescript",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",

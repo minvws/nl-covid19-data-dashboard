@@ -7,6 +7,7 @@ import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { useIntl } from '~/intl';
 import { useCurrentDate } from '~/utils/current-date-context';
 import {
   AccessibilityDefinition,
@@ -14,6 +15,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { useUniqueId } from '../../utils/use-unique-id';
 import { InlineText } from '../typography';
 import {
@@ -164,6 +166,8 @@ export function TimeSeriesChart<
   markNearestPointOnly,
   displayTooltipValueOnly,
 }: TimeSeriesChartProps<T, C>) {
+  const { siteText } = useIntl();
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -262,6 +266,13 @@ export function TimeSeriesChart<
     [values, today]
   );
 
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+    setIsTabInteractive,
+  } = useTabInteractiveButton(siteText.accessibility.tab_navigatie_button);
+
   const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
     values,
@@ -273,6 +284,8 @@ export function TimeSeriesChart<
     timespanAnnotations,
     timelineEvents: timelineState.events,
     markNearestPointOnly,
+    isTabInteractive,
+    setIsTabInteractive,
   });
 
   const metricPropertyFormatters = useMetricPropertyFormatters(
@@ -385,6 +398,8 @@ export function TimeSeriesChart<
 
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
+          {tabInteractiveButton}
+
           <ChartContainer
             accessibility={timeSeriesAccessibility}
             width={width}
@@ -392,8 +407,8 @@ export function TimeSeriesChart<
             padding={padding}
             onClick={handleClick}
             onHover={chartEventHandlers.handleHover}
-            onFocus={chartEventHandlers.handleFocus}
-            onBlur={chartEventHandlers.handleBlur}
+            isTabInteractive={isTabInteractive}
+            {...anchorEventHandlers}
           >
             <Axes
               bounds={bounds}

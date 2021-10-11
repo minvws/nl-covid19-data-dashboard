@@ -1,12 +1,12 @@
-import {
+import type {
   GmCollection,
   InCollection,
   KeysOfType,
   VrCollection,
 } from '@corona-dashboard/common';
-import { ParsedFeature } from '@visx/geo/lib/projections/Projection';
-import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { CodedGeoProperties } from './topology';
+import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
+import type { Feature, MultiPolygon, Polygon } from 'geojson';
+import type { CodedGeoProperties } from './topology';
 
 export type Unpack<T> = T extends infer U ? U : never;
 

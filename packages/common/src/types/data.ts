@@ -4,11 +4,13 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
+export type GmCode = string;
+
 export interface Gm {
   last_generated: string;
-  proto_name: string;
-  name: string;
-  code: string;
+  proto_name: GmCode;
+  name: GmCode;
+  code: GmCode;
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
@@ -71,6 +73,7 @@ export interface GmHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -135,11 +138,13 @@ export interface GmVaccineCoveragePerAgeGroupValue {
   date_of_insertion_unix: number;
 }
 
+export type GmCollectionId = "GM_COLLECTION";
+
 export interface GmCollection {
   last_generated: string;
-  proto_name: "GM_COLLECTION";
-  name: string;
-  code: string;
+  proto_name: GmCollectionId;
+  name: GmCollectionId;
+  code: GmCollectionId;
   hospital_nice: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
@@ -179,10 +184,12 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   date_of_insertion_unix: number;
 }
 
+export type InCode = string;
+
 export interface In {
   last_generated: string;
-  proto_name: string;
-  name: string;
+  proto_name: InCode;
+  name: InCode;
   code: string;
   named_difference: InNamedDifference;
   tested_overall: InTestedOverall;
@@ -228,11 +235,13 @@ export interface InVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
+export type InCollectionId = "IN_COLLECTION";
+
 export interface InCollection {
   last_generated: string;
-  proto_name: "IN_COLLECTION";
-  name: string;
-  code: string;
+  proto_name: InCollectionId;
+  name: InCollectionId;
+  code: InCollectionId;
   tested_overall: InCollectionTestedOverall[];
 }
 export interface InCollectionTestedOverall {
@@ -244,11 +253,13 @@ export interface InCollectionTestedOverall {
   date_of_insertion_unix: number;
 }
 
+export type NlId = "NL";
+
 export interface Nl {
   last_generated: string;
-  proto_name: "NL";
-  name: string;
-  code: string;
+  proto_name: NlId;
+  name: NlId;
+  code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
   doctor: NlDoctor;
@@ -379,6 +390,7 @@ export interface NlIntensiveCareNice {
 export interface NlIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -448,13 +460,9 @@ export interface NlSewer {
   last_value: NlSewerValue;
 }
 export interface NlSewerValue {
-  average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
+  average: number | null;
   date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
 }
 export interface NlHospitalNice {
   values: NlHospitalNiceValue[];
@@ -463,6 +471,7 @@ export interface NlHospitalNice {
 export interface NlHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -944,11 +953,13 @@ export interface NlVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
+export type VrCode = string;
+
 export interface Vr {
   last_generated: string;
-  proto_name: string;
-  name: string;
-  code: string;
+  proto_name: VrCode;
+  name: VrCode;
+  code: VrCode;
   static_values?: VrStaticValues;
   difference: VrDifference;
   g_number: VrGNumber;
@@ -1013,12 +1024,8 @@ export interface VrSewer {
   last_value: VrSewerValue;
 }
 export interface VrSewerValue {
-  date_start_unix: number;
-  date_end_unix: number;
-  average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
+  date_unix: number;
+  average: number | null;
   date_of_insertion_unix: number;
 }
 export interface VrSewerPerInstallation {
@@ -1052,6 +1059,7 @@ export interface VrHospitalNice {
 export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1241,11 +1249,13 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   date_of_insertion_unix: number;
 }
 
+export type VrCollectionId = "VR_COLLECTION";
+
 export interface VrCollection {
   last_generated: string;
-  proto_name: "VR_COLLECTION";
-  name: string;
-  code: string;
+  proto_name: VrCollectionId;
+  name: VrCollectionId;
+  code: VrCollectionId;
   hospital_nice: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
@@ -1281,11 +1291,9 @@ export interface VrCollectionNursingHome {
   vrcode: string;
 }
 export interface VrCollectionSewer {
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   vrcode: string;
-  average: number;
-  total_installation_count: number;
+  average: number | null;
   date_of_insertion_unix: number;
 }
 export interface VrCollectionBehavior {

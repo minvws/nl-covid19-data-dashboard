@@ -98,10 +98,10 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         />
         <ComboboxPopover>
           {results.length > 0 ? (
-            <ComboboxList persistSelection>
+            <ComboboxList>
               {results.map((option, index) => (
                 <ComboboxOption
-                  key={index}
+                  key={`${index}-${option.name}`}
                   value={option.displayName || option.name}
                 />
               ))}
@@ -191,7 +191,7 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-option]:hover, [data-reach-combobox-option]:focus {
-  background: ${(x) => x.theme.colors.page};
+  background: ${(x) => x.theme.colors.offWhite};
 }
 
 [data-reach-combobox-option] span {
