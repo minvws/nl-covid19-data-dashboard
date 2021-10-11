@@ -495,20 +495,22 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="page" pb={5}>
-          <MaxWidth>
-            <TileList>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.meer_lezen.titel}
-                description={
-                  siteText.common_actueel.secties.meer_lezen.omschrijving
-                }
-                link={siteText.common_actueel.secties.meer_lezen.link}
-                headerVariant="h2"
-              />
+        <Box width="100%" backgroundColor="offWhite" pb={5}>
+          <MaxWidth
+            spacing={3}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 4, md: 3, lg: 4 }}
+          >
+            <TopicalSectionHeader
+              title={siteText.common_actueel.secties.meer_lezen.titel}
+              description={
+                siteText.common_actueel.secties.meer_lezen.omschrijving
+              }
+              link={siteText.common_actueel.secties.meer_lezen.link}
+              headerVariant="h2"
+            />
 
-              <ArticleList articles={content.articles} />
-            </TileList>
+            <ArticleList articles={content.articles} />
           </MaxWidth>
         </Box>
       </Box>

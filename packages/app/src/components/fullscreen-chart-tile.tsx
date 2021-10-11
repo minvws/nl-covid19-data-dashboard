@@ -1,13 +1,13 @@
+import { Close, Expand } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { useEffect, useRef, useState } from 'react';
-import { Close } from '@corona-dashboard/icons';
-import { Expand } from '@corona-dashboard/icons';
 import { Tile } from '~/components/tile';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { usePrevious } from '~/utils/use-previous';
 import { Spacer } from './base';
+import { Box } from './base/box';
 import { IconButton } from './icon-button';
 import { Metadata, MetadataProps } from './metadata';
 import { Modal } from './modal';
@@ -41,43 +41,49 @@ export function FullscreenChartTile({
   );
 
   const tile = (
-    <Tile height="100%">
-      {children}
+    <Tile noBorder={isFullscreen} height="100%">
+      <Box
+        px={isFullscreen ? { _: 3, sm: 4 } : undefined}
+        py={isFullscreen ? { _: 2, sm: 3 } : undefined}
+        height="100%"
+      >
+        {children}
 
-      {metadata && (
-        <>
-          <Spacer m="auto" />
-          <Metadata {...metadata} isTileFooter />
-        </>
-      )}
+        {metadata && (
+          <>
+            <Spacer m="auto" />
+            <Metadata {...metadata} isTileFooter />
+          </>
+        )}
 
-      {!disabled && breakpoints.md && (
-        <div
-          css={css({
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            color: 'silver',
+        {!disabled && breakpoints.md && (
+          <div
+            css={css({
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              color: 'silver',
 
-            '&:focus-within': {
-              outlineWidth: '1px',
-              outlineStyle: 'dashed',
-              outlineColor: 'blue',
-            },
+              '&:focus-within': {
+                outlineWidth: '1px',
+                outlineStyle: 'dashed',
+                outlineColor: 'blue',
+              },
 
-            '&:hover': { color: 'gray' },
-          })}
-        >
-          <IconButton
-            ref={isFullscreen ? undefined : buttonRef}
-            title={label}
-            onClick={() => setIsFullscreen((x) => !x)}
-            size={36}
+              '&:hover': { color: 'gray' },
+            })}
           >
-            {isFullscreen ? <Close /> : <Expand />}
-          </IconButton>
-        </div>
-      )}
+            <IconButton
+              ref={isFullscreen ? undefined : buttonRef}
+              title={label}
+              onClick={() => setIsFullscreen((x) => !x)}
+              size={36}
+            >
+              {isFullscreen ? <Close /> : <Expand />}
+            </IconButton>
+          </div>
+        )}
+      </Box>
     </Tile>
   );
 
