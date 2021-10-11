@@ -314,7 +314,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   />
                 }
                 titleValue={
-                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
+                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                 }
                 titleValueIsPercentage
                 oneShotPercentage={

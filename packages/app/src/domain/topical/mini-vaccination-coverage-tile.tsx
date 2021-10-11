@@ -29,15 +29,15 @@ export function MiniVaccinationCoverageTile(
     <MiniTile {...tileProps}>
       <Box display="flex" flexDirection="column" spacing={3}>
         <Bar
-          value={oneShotPercentage}
-          color={COLOR_HAS_ONE_SHOT}
-          label={oneShotPercentageLabel}
-          height={20}
-        />
-        <Bar
           value={fullyVaccinatedPercentage}
           color={COLOR_FULLY_VACCINATED}
           label={fullyVaccinatedPercentageLabel}
+          height={20}
+        />
+        <Bar
+          value={oneShotPercentage}
+          color={COLOR_HAS_ONE_SHOT}
+          label={oneShotPercentageLabel}
           height={20}
         />
       </Box>
@@ -45,14 +45,14 @@ export function MiniVaccinationCoverageTile(
         <Legend
           items={[
             {
-              color: COLOR_HAS_ONE_SHOT,
-              shape: 'square',
-              label: 'Opkomst eerste prik',
-            },
-            {
               color: COLOR_FULLY_VACCINATED,
               shape: 'square',
               label: 'Volledig gevaccineerd',
+            },
+            {
+              color: COLOR_HAS_ONE_SHOT,
+              shape: 'square',
+              label: 'Opkomst eerste prik',
             },
           ]}
         ></Legend>
