@@ -49,6 +49,7 @@ export function NlLayout(props: NlLayoutProps) {
           'positive_tests',
           'reproduction_number',
           'mortality',
+          'variants',
           'source_investigation',
         ],
       ],
