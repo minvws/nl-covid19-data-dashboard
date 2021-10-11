@@ -1,11 +1,11 @@
-import { useBreadcrumbs } from './logic/use-breadcrumbs';
-import { Link } from '~/utils/link';
 import css from '@styled-system/css';
-import { Box } from '../base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { Link } from '~/utils/link';
+import { Box } from '../base';
 import { MaxWidth } from '../max-width';
 import { Anchor } from '../typography';
+import { useBreadcrumbs } from './logic/use-breadcrumbs';
 
 export function Breadcrumbs() {
   const breadcrumbs = useBreadcrumbs();
