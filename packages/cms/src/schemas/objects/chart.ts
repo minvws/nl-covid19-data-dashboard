@@ -1,6 +1,6 @@
 import { ChartConfiguration } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-import { ChartConfigurationInput } from '../../custom-inputs';
+import { ChartConfigurationInput } from '../../components';
 
 export const Chart = {
   title: 'Dashboard Grafiek',

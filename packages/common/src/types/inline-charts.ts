@@ -42,6 +42,7 @@ export type KpiConfiguration = Omit<
 > & { code?: string; differenceKey?: string };
 
 export type PartialKpiConfiguration = {
+  icon?: string;
   area?: AreaType;
   metricName?: string;
   metricProperty?: string;

@@ -16,9 +16,10 @@ import {
   TextInput,
 } from '@sanity/ui';
 import FormField from 'part:@sanity/components/formfields/default';
-import { PatchEvent, set } from 'part:@sanity/form-builder/patch-event';
+import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { KpiIconInput, KpiIconKey } from '.';
 import { dataStructure } from '../data/data-structure';
 
 export const KpiConfigurationInput = React.forwardRef(
@@ -28,8 +29,6 @@ export const KpiConfigurationInput = React.forwardRef(
     const configuration = value
       ? (JSON.parse(value) as PartialKpiConfiguration)
       : ({} as PartialKpiConfiguration);
-
-    console.dir(configuration);
 
     const onChangeProp = (
       propertyName: keyof PartialKpiConfiguration,
@@ -49,6 +48,21 @@ export const KpiConfigurationInput = React.forwardRef(
         reset.forEach((x) => (newConfiguration[x] = undefined));
         onChange(PatchEvent.from(set(JSON.stringify(newConfiguration))));
       };
+    };
+
+    const onChangeIcon = (iconName: string) => {
+      if (!isDefined(configuration) || configuration.icon === iconName) {
+        return;
+      }
+      if (iconName?.length) {
+        const newConfiguration = {
+          ...configuration,
+          icon: iconName,
+        };
+        onChange(PatchEvent.from(set(JSON.stringify(newConfiguration))));
+      } else {
+        onChange(PatchEvent.from(unset()));
+      }
     };
 
     const toggleProp = (propertyName: keyof PartialKpiConfiguration) => {
@@ -186,7 +200,7 @@ export const KpiConfigurationInput = React.forwardRef(
             <Label>Title key</Label>
             <TextInput
               type="text"
-              value={configuration.titleKey}
+              value={configuration.titleKey ?? ''}
               onChange={onChangeProp('titleKey')}
             />
           </Grid>
@@ -196,8 +210,17 @@ export const KpiConfigurationInput = React.forwardRef(
             <Label>Difference key</Label>
             <TextInput
               type="text"
-              value={configuration.differenceKey}
+              value={configuration.differenceKey ?? ''}
               onChange={onChangeProp('differenceKey')}
+            />
+          </Grid>
+        </Card>
+        <Card marginBottom={3}>
+          <Grid gap={[2, 2, 2, 2]}>
+            <Label>Icoon</Label>
+            <KpiIconInput
+              onChange={onChangeIcon}
+              value={configuration.icon as KpiIconKey}
             />
           </Grid>
         </Card>

@@ -1,7 +1,7 @@
 import { KpiConfiguration } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import { KpiConfigurationInput } from '../../custom-inputs';
+import { KpiConfigurationInput } from '../../components';
 
 export const Kpi = {
   title: 'Dashboard KPI',

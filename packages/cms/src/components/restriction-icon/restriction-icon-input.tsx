@@ -1,3 +1,4 @@
+import { Icon as TIcon } from '@corona-dashboard/icons';
 import {
   Box,
   Button,
@@ -12,23 +13,21 @@ import {
   ThemeProvider,
 } from '@sanity/ui';
 import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
-import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-import { restrictionIcons, RestrictionIcon } from './icons';
-import { Icon as TIcon } from '@corona-dashboard/icons';
+import { RestrictionIconKey, restrictionIcons } from './restriction-icons';
 
 function createPatchFrom(value: string) {
-  return PatchEvent.from(value === '' ? unset() : set(String(value)));
+  return PatchEvent.from(value === '' ? unset() : set(value));
 }
-interface IconProps {
+interface RestrictionIconInputProps {
   type: {
     title: string;
     description: string;
   };
-  value: RestrictionIcon;
+  value: RestrictionIconKey;
   onChange: (event: PatchEvent) => void;
 }
-export function Icon(props: IconProps) {
+export function RestrictionIconInput(props: RestrictionIconInputProps) {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = useCallback(() => setIsOpen(false), []);
   const onOpen = useCallback(() => setIsOpen(true), []);
@@ -95,11 +94,3 @@ export function Icon(props: IconProps) {
     </ThemeProvider>
   );
 }
-
-Icon.propTypes = {
-  type: PropTypes.shape({
-    title: PropTypes.string,
-  }).isRequired,
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};

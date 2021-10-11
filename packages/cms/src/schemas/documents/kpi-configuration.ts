@@ -30,11 +30,19 @@ export const kpiConfiguration = {
       kpi: 'kpi',
     },
     prepare({ title, kpi }: { title: string; kpi: any }) {
-      const cf: KpiConfiguration = JSON.parse(kpi.config);
-      return {
-        title,
-        subtitle: `${cf.code ?? cf.area}_${cf.metricName}_${cf.metricProperty}`,
-      };
+      try {
+        const cf: KpiConfiguration = JSON.parse(kpi.config);
+        return {
+          title,
+          subtitle: `${cf.code ?? cf.area}_${cf.metricName}_${
+            cf.metricProperty
+          }`,
+        };
+      } catch (e) {
+        return {
+          title: title?.length ? title : 'Untitled',
+        };
+      }
     },
   },
 };
@@ -45,47 +53,51 @@ function isValid(kpi: any) {
       message: 'Chart config is undefined',
     };
   }
-  const kpiConfig = JSON.parse(kpi.config) as PartialKpiConfiguration;
-  if (!isDefined(kpiConfig)) {
-    return {
-      message: 'Chart config is undefined',
-    };
-  }
+  try {
+    const kpiConfig = JSON.parse(kpi.config) as PartialKpiConfiguration;
+    if (!isDefined(kpiConfig)) {
+      return {
+        message: 'Chart config is undefined',
+      };
+    }
 
-  const errors: string[] = [];
-  if (!hasValue(kpiConfig.area)) {
-    errors.push('Gebied is verplicht');
-  }
-  if (!hasValue(kpiConfig.metricName)) {
-    errors.push('Metriek naam is verplicht');
-  }
-  if (!hasValue(kpiConfig.metricProperty)) {
-    errors.push('Metriek waarde is verplicht');
-  }
+    const errors: string[] = [];
+    if (!hasValue(kpiConfig.area)) {
+      errors.push('Gebied is verplicht');
+    }
+    if (!hasValue(kpiConfig.metricName)) {
+      errors.push('Metriek naam is verplicht');
+    }
+    if (!hasValue(kpiConfig.metricProperty)) {
+      errors.push('Metriek waarde is verplicht');
+    }
 
-  if (
-    ['gm', 'vr'].includes(kpiConfig.area ?? '') &&
-    !isDefined(kpiConfig.code)
-  ) {
-    errors.push(
-      `${
-        kpiConfig.area === 'gm' ? 'Gemeente' : 'Veiligheidsregio'
-      } is verplicht`
-    );
-  }
-  if (!hasValue(kpiConfig.titleKey)) {
-    errors.push('Title key is verplicht');
-  }
-  if (
-    hasValue(kpiConfig.differenceKey) &&
-    !isDefined(kpiConfig.isMovingAverageDifference)
-  ) {
-    errors.push(
-      'isMovingAverageDifference is verplicht als er een difference key geselecteerd is'
-    );
-  }
+    if (
+      ['gm', 'vr'].includes(kpiConfig.area ?? '') &&
+      !isDefined(kpiConfig.code)
+    ) {
+      errors.push(
+        `${
+          kpiConfig.area === 'gm' ? 'Gemeente' : 'Veiligheidsregio'
+        } is verplicht`
+      );
+    }
+    if (!hasValue(kpiConfig.titleKey)) {
+      errors.push('Title key is verplicht');
+    }
+    if (
+      hasValue(kpiConfig.differenceKey) &&
+      !isDefined(kpiConfig.isMovingAverageDifference)
+    ) {
+      errors.push(
+        'isMovingAverageDifference is verplicht als er een difference key geselecteerd is'
+      );
+    }
 
-  return errors.length ? errors.join(', ') : true;
+    return errors.length ? errors.join(', ') : true;
+  } catch (e) {
+    return ['kpi.config has an invalid value'];
+  }
 }
 
 function hasValue(value: string | undefined) {
