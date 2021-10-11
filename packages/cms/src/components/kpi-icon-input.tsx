@@ -35,8 +35,9 @@ export function KpiIconInput(props: KpiIconInputProps) {
   const iconName = value?.length ? filename2IconName[value as any] : undefined;
 
   const TheIcon = isDefined(iconName)
-    ? allIcons[iconName as KpiIconKey]
+    ? (allIcons[iconName as KpiIconKey] as allIcons.Icon)
     : undefined;
+
   const iconInfoCollection = Object.entries(allIcons)
     .filter((entry) => entry[0] !== 'iconName2filename')
     // hide empty icons

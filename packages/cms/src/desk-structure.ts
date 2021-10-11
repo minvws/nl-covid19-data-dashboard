@@ -49,6 +49,9 @@ const hiddenDocTypes = [
   'timelineEvent',
   'contact',
   'cijferVerantwoordingItem',
+  'kpi',
+  'choropleth',
+  'warning',
 ];
 
 export default () =>

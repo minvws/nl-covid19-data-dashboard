@@ -38,7 +38,7 @@ if (!fs.existsSync(dir)) {
 const initialTypeDefinitions = `/// <reference types="react" />
 import { FC, SVGAttributes } from 'react';
 
-export interface IconProps extends SVGAttributes<SVGElement> {};
+export interface IconProps extends SVGAttributes<SVGElement> {}
 
 export const iconName2filename: Record<string, string>;
 
