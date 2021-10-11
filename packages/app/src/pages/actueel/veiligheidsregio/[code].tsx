@@ -190,8 +190,9 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.veiligheidsregio_actueel.mini_trend_tiles
                         .vaccinatiegraad.menu_item_label,
                     data: data.vaccine_coverage_per_age_group.values,
-                    dataProperty: 'has_one_shot_percentage',
-                    value: renderedAgeGroup18Pluslabels.has_one_shot_percentage,
+                    dataProperty: 'fully_vaccinated_percentage',
+                    value:
+                      renderedAgeGroup18Pluslabels.fully_vaccinated_percentage,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
