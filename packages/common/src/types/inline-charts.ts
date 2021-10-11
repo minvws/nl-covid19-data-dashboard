@@ -19,6 +19,7 @@ export type PartialChartConfiguration = {
   timeframe?: 'all' | '5weeks';
   accessibilityKey?: string;
   code?: string;
+  sourceKey?: string;
 };
 
 export type MetricPropertyConfig = {
@@ -51,4 +52,5 @@ export type PartialKpiConfiguration = {
   differenceKey?: string;
   isMovingAverageDifference?: boolean;
   isAmount?: boolean;
+  sourceKey?: string;
 };

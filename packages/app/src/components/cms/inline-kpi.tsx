@@ -48,11 +48,18 @@ export function InlineKpi({ configuration }: InlineKpiProps) {
         };
 
   const title = get(siteText, configuration.titleKey.split('.'), '');
+  const source = get(siteText, configuration.sourceKey.split('.'), '');
 
   return (
     <ErrorBoundary>
       <Box css={css({ width: '50%' })}>
-        <KpiTile title={title} iconName={configuration.icon}>
+        <KpiTile
+          title={title}
+          iconName={configuration.icon}
+          metadata={{
+            source,
+          }}
+        >
           {isDefined(configuration.differenceKey) &&
             configuration.differenceKey.length && (
               <PageKpi

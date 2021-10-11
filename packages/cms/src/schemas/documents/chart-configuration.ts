@@ -57,6 +57,9 @@ function isValid(chart: any) {
   if (!hasValue(chartConfig.accessibilityKey)) {
     errors.push('Accessibility Key is verplicht');
   }
+  if (!hasValue(chartConfig.sourceKey)) {
+    errors.push('Source key is verplicht');
+  }
   if (!hasValue(chartConfig.area)) {
     errors.push('Gebied is verplicht');
   }

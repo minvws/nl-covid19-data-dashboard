@@ -8,6 +8,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { Metadata } from '../metadata';
 
 interface InlineTimeSeriesChartsProps {
   configuration: ChartConfiguration;
@@ -43,14 +44,21 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
     return <Text>Loading...</Text>;
   }
 
+  console.dir(configuration);
+
+  const source = get(siteText, configuration.sourceKey.split('.'), '');
+
   return (
     <ErrorBoundary>
-      <TimeSeriesChart
-        accessibility={{ key: configuration.accessibilityKey as any }}
-        values={data.values}
-        seriesConfig={seriesConfig}
-        timeframe={configuration.timeframe}
-      />
+      <>
+        <TimeSeriesChart
+          accessibility={{ key: configuration.accessibilityKey as any }}
+          values={data.values}
+          seriesConfig={seriesConfig}
+          timeframe={configuration.timeframe}
+        />
+        <Metadata source={source} isTileFooter />
+      </>
     </ErrorBoundary>
   );
 }

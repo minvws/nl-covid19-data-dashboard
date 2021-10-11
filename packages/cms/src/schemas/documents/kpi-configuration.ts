@@ -71,6 +71,12 @@ function isValid(kpi: any) {
     if (!hasValue(kpiConfig.metricProperty)) {
       errors.push('Metriek waarde is verplicht');
     }
+    if (!hasValue(kpiConfig.icon)) {
+      errors.push('Icoon is verplicht');
+    }
+    if (!hasValue(kpiConfig.sourceKey)) {
+      errors.push('Source key is verplicht');
+    }
 
     if (
       ['gm', 'vr'].includes(kpiConfig.area ?? '') &&

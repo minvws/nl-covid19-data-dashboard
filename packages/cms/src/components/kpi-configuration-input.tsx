@@ -197,6 +197,16 @@ export const KpiConfigurationInput = React.forwardRef(
         )}
         <Card marginBottom={3} marginTop={3}>
           <Grid gap={[2, 2, 2, 2]}>
+            <Label>Source key</Label>
+            <TextInput
+              type="text"
+              value={configuration.sourceKey ?? ''}
+              onChange={onChangeProp('sourceKey')}
+            />
+          </Grid>
+        </Card>
+        <Card marginBottom={3} marginTop={3}>
+          <Grid gap={[2, 2, 2, 2]}>
             <Label>Title key</Label>
             <TextInput
               type="text"
