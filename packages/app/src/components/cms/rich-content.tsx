@@ -100,7 +100,7 @@ export function RichContent({
         ) as ChartConfiguration;
 
         return (
-          <Box width="infoWidth" maxWidth="infoWidth">
+          <Box maxWidth="infoWidth">
             <InlineTimeSeriesCharts configuration={configuration} />
           </Box>
         );
@@ -111,9 +111,9 @@ export function RichContent({
         ) as KpiConfiguration;
 
         return (
-          <Box width="infoWidth" maxWidth="infoWidth">
+          <ContentWrapper>
             <InlineKpi configuration={configuration} />
-          </Box>
+          </ContentWrapper>
         );
       },
     },
