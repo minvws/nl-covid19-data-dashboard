@@ -76,7 +76,15 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         <Box width="100%" maxWidth="maxWidthText">
           <Heading level={1}>Risiconiveaus</Heading>
         </Box>
-        <Box textVariant="body1">
+        <Box
+          textVariant="body1"
+          css={css({
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          })}
+        >
           <RichContent
             blocks={content.content}
             contentWrapper={RichContentWrapper}
@@ -92,6 +100,7 @@ export default OverRisicoNiveaus;
 const RichContentWrapper = styled.div(
   css({
     maxWidth: 'maxWidthText',
+    width: '100%',
   })
 );
 
@@ -107,6 +116,7 @@ function Content({ children }: ContentProps) {
         pb={5}
         px={{ _: 3, sm: 0 }}
         maxWidth="infoWidth"
+        width="100%"
         mx="auto"
         spacing={4}
         display="flex"

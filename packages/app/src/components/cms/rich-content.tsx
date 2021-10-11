@@ -100,7 +100,12 @@ export function RichContent({
         ) as ChartConfiguration;
 
         return (
-          <Box maxWidth="infoWidth">
+          <Box
+            css={css({
+              maxWidth: 'infoWidth',
+              width: '100%',
+            })}
+          >
             <InlineTimeSeriesCharts configuration={configuration} />
           </Box>
         );
@@ -159,4 +164,12 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   );
 }
 
-const StyledPortableText = styled(PortableText)(css(nestedHtml));
+const StyledPortableText = styled(PortableText)(
+  css({
+    ...nestedHtml,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  })
+);
