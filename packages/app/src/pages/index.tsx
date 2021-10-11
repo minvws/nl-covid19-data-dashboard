@@ -62,12 +62,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    vr: ({
-      escalation_levels,
-      tested_overall,
-      vaccine_coverage_per_age_group,
-    }) => ({
-      escalation_levels,
+    vr: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
       tested_overall,
       vaccine_coverage_per_age_group: isDefined(vaccine_coverage_per_age_group)
         ? selectVaccineCoverageData(vaccine_coverage_per_age_group)
