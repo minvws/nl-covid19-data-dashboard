@@ -179,7 +179,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: thresholds.vr.average,
             }}
           >
-            {selectedMap === 'gm' ? (
+            {selectedMap === 'gm' && (
               <DynamicChoropleth
                 renderTarget="canvas"
                 map="gm"
@@ -195,7 +195,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   getLink: reverseRouter.gm.rioolwater,
                 }}
               />
-            ) : (
+            )}
+
+            {selectedMap === 'vr' && (
               <DynamicChoropleth
                 renderTarget="canvas"
                 map="vr"
