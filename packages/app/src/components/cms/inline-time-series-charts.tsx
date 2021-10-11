@@ -38,13 +38,11 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
       }
       return config;
     });
-  }, [configuration.metricPropertyConfigs]);
+  }, [configuration.metricPropertyConfigs, siteText]);
 
   if (!isDefined(data)) {
     return <Text>Loading...</Text>;
   }
-
-  console.dir(configuration);
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 

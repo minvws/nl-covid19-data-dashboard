@@ -89,14 +89,17 @@ export function InlineKpi({ configuration }: InlineKpiProps) {
 }
 
 function useDifferenceData(configuration: KpiConfiguration) {
-  if (!isDefined(configuration.differenceKey)) {
-    return { data: null };
-  }
+  const differenceKey = configuration.differenceKey
+    ? configuration.differenceKey
+    : 'unknown';
   return useSWRImmutable(
     `/api/data/timeseries/${
       configuration.code ?? configuration.area
-    }/difference/${configuration.differenceKey}`,
-    (url: string) => fetch(url).then((_) => _.json())
+    }/difference/${differenceKey}`,
+    (url: string) =>
+      fetch(url)
+        .then((_) => _.json())
+        .catch((_) => undefined)
   );
 }
 
