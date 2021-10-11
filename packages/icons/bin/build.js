@@ -178,4 +178,14 @@ icons.forEach((i) => {
   );
 });
 
+const destSvgDir = path.join(__dirname, '../../app/public/icons/app');
+if (!fs.existsSync(destSvgDir)) {
+  fs.mkdirSync(destSvgDir);
+}
+icons
+  .map((x) => `${x}.svg`)
+  .forEach((x) => {
+    fs.copyFileSync(path.join(svgDir, x), path.join(destSvgDir, x));
+  });
+
 console.log('Done writing Icons');
