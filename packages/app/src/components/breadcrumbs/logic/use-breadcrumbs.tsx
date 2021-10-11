@@ -58,9 +58,9 @@ export function useBreadcrumbs(): Breadcrumb[] {
   return useMemo(() => {
     const getQueryParameter = (str: string) => {
       // Extract text between square brackets: https://stackoverflow.com/questions/2403122/regular-expression-to-extract-text-between-square-brackets
-      const regexp = /(?<=\[).*?(?=\])/;
+      const regexp = /(\[([^\]]+)\])/;
       const matches = str.match(regexp);
-      const param = matches?.[0];
+      const param = matches?.[2];
       return { key: param };
     };
 
