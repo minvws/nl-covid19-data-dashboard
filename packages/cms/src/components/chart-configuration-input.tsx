@@ -48,21 +48,27 @@ export const ChartConfigurationInput = React.forwardRef(
       explicitValue?: any
     ) => {
       return (event: any) => {
-        if (
-          !isDefined(configuration) ||
-          configuration[propertyName] === event.target.value
-        ) {
-          return;
-        }
-        const newConfiguration = {
-          ...configuration,
-          [propertyName]: isDefined(explicitValue)
-            ? explicitValue
-            : event.target.value,
-        };
-        reset.forEach((x) => (newConfiguration[x] = undefined));
-        onChange(PatchEvent.from(set(JSON.stringify(newConfiguration))));
+        changeProp(propertyName, reset, explicitValue ?? event.target.value);
       };
+    };
+
+    const changeProp = (
+      propertyName: keyof PartialChartConfiguration,
+      reset: (keyof PartialChartConfiguration)[] = [],
+      newValue: any
+    ) => {
+      if (
+        !isDefined(configuration) ||
+        configuration[propertyName] === newValue
+      ) {
+        return;
+      }
+      const newConfiguration = {
+        ...configuration,
+        [propertyName]: newValue,
+      };
+      reset.forEach((x) => (newConfiguration[x] = undefined));
+      onChange(PatchEvent.from(set(JSON.stringify(newConfiguration))));
     };
 
     const areaNames = useMemo(
@@ -249,11 +255,7 @@ export const ChartConfigurationInput = React.forwardRef(
                     ? [...configuration.metricPropertyConfigs]
                     : [];
                   newArray[index] = value;
-                  onChangeProp(
-                    'metricPropertyConfigs',
-                    [],
-                    newArray
-                  )(undefined);
+                  changeProp('metricPropertyConfigs', [], newArray);
                 }}
                 onDelete={() => {
                   const newArray = isDefined(
@@ -262,11 +264,7 @@ export const ChartConfigurationInput = React.forwardRef(
                     ? [...configuration.metricPropertyConfigs]
                     : [];
                   newArray.splice(index, 1);
-                  onChangeProp(
-                    'metricPropertyConfigs',
-                    [],
-                    newArray
-                  )(undefined);
+                  changeProp('metricPropertyConfigs', [], newArray);
                 }}
               />
             ))}
