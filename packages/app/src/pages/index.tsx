@@ -1,17 +1,26 @@
+import {
+  NlHospitalNiceValue,
+  NlIntensiveCareNiceValue,
+  NlVaccineCoveragePerAgeGroupEstimated,
+} from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { ArticleSummary } from '~/components/article-teaser';
-import { Box } from '~/components/base';
+import { ArrowIconRight } from '~/components/arrow-icon';
+import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
-import { DataDrivenText } from '~/components/data-driven-text/data-driven-text';
-import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { ContentTeaserProps } from '~/components/content-teaser';
+import { DataDrivenText } from '~/components/data-driven-text';
+import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -19,11 +28,13 @@ import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { MiniTileLayout } from '~/domain/topical/mini-tile-layout';
+import {
+  MiniTileSelectorItem,
+  MiniTileSelectorLayout,
+} from '~/domain/topical/mini-tile-selector-layout';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
-import { TopicalTile } from '~/domain/topical/topical-tile';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -43,6 +54,7 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -70,11 +82,21 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     showWeeklyHighlight: boolean;
-    articles?: ArticleSummary[];
+    articles: ContentTeaserProps[];
     weeklyHighlight?: WeeklyHighlightProps;
-    highlights?: HighlightTeaserProps[];
+    highlights: ContentTeaserProps[];
+    riskLevel: {
+      dateFrom: string;
+      level: EscalationLevelType;
+    };
     elements: ElementsQueryResult;
-  }>(getTopicalPageQuery),
+  }>(
+    getTopicalPageQuery('nl', [
+      'intensive_care_nice',
+      'hospital_nice',
+      'vaccine_coverage_per_age_group_estimated',
+    ])
+  ),
   selectNlData(
     'intensive_care_nice',
     'intensive_care_lcps',
@@ -107,185 +129,305 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+
+  const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
+    data.intensive_care_nice.values,
+    INACCURATE_ITEMS_IC
+  );
+
+  const underReportedRangeHospital = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    INACCURATE_ITEMS_HOSPITAL
+  );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" py={4}>
+      <Box bg="white">
         <MaxWidth id="content">
           <TileList>
-            <TopicalSectionHeader
-              lastGenerated={Number(lastGenerated)}
-              title={replaceComponentsInText(
-                text.secties.actuele_situatie.titel,
-                {
-                  the_netherlands: text.the_netherlands,
-                }
-              )}
-              headingLevel={1}
-              link={{
-                ...text.secties.actuele_situatie.link,
-                href: reverseRouter.nl.index(),
-              }}
-            />
+            <Box spacing={3}>
+              <TopicalSectionHeader
+                lastGenerated={Number(lastGenerated)}
+                title={replaceComponentsInText(
+                  text.secties.actuele_situatie.titel,
+                  {
+                    the_netherlands: text.the_netherlands,
+                  }
+                )}
+                headingLevel={1}
+              />
 
-            <Box width={{ lg: '65%' }}>
-              <Search />
+              <MiniTileSelectorLayout
+                link={{
+                  ...text.secties.actuele_situatie.link,
+                  href: reverseRouter.nl.index(),
+                }}
+                menuItems={[
+                  {
+                    label:
+                      siteText.nationaal_actueel.mini_trend_tiles.ic_opnames
+                        .menu_item_label,
+                    data: dataICTotal.values,
+                    dataProperty:
+                      'admissions_on_date_of_admission_moving_average_rounded',
+                    value:
+                      dataICTotal.last_value
+                        ?.admissions_on_date_of_admission_moving_average_rounded ??
+                      0,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'intensive_care_nice'
+                    ),
+                  } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
+                  {
+                    label:
+                      siteText.nationaal_actueel.mini_trend_tiles
+                        .ziekenhuis_opnames.menu_item_label,
+                    data: dataHospitalIntake.values,
+                    dataProperty:
+                      'admissions_on_date_of_admission_moving_average_rounded',
+                    value:
+                      dataHospitalIntake.last_value
+                        ?.admissions_on_date_of_admission_moving_average_rounded ??
+                      0,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'hospital_nice'
+                    ),
+                  } as MiniTileSelectorItem<NlHospitalNiceValue>,
+                  {
+                    label:
+                      siteText.nationaal_actueel.mini_trend_tiles
+                        .vaccinatiegraad.menu_item_label,
+                    data: data.vaccine_coverage_per_age_group_estimated.values,
+                    dataProperty: 'age_18_plus_fully_vaccinated',
+                    value:
+                      data.vaccine_coverage_per_age_group_estimated.last_value
+                        ?.age_18_plus_fully_vaccinated ?? 0,
+                    valueIsPercentage: true,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'vaccine_coverage_per_age_group_estimated'
+                    ),
+                    hideSparkBar:
+                      data.vaccine_coverage_per_age_group_estimated.values
+                        .length < 7,
+                  } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
+                ]}
+              >
+                <MiniTrendTile
+                  title={text.mini_trend_tiles.ic_opnames.title}
+                  text={
+                    <>
+                      <DataDrivenText
+                        data={data}
+                        content={[
+                          {
+                            type: 'metric',
+                            text: text.data_driven_texts.intensive_care_nice
+                              .value,
+                            metricName: 'intensive_care_nice',
+                            metricProperty:
+                              'admissions_on_date_of_admission_moving_average_rounded',
+                            differenceKey:
+                              'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                          },
+                          {
+                            type: 'metric',
+                            text: siteText.common_actueel.secties.kpi
+                              .ic_admissions,
+                            metricName: 'intensive_care_lcps',
+                            metricProperty: 'beds_occupied_covid',
+                            differenceKey:
+                              'intensive_care_lcps__beds_occupied_covid',
+                          },
+                        ]}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.nl.intensiveCareOpnames()}
+                        icon={<ArrowIconRight />}
+                        iconPlacement="right"
+                        fontWeight="bold"
+                      >
+                        {text.mini_trend_tiles.ic_opnames.read_more_link}
+                      </LinkWithIcon>
+                    </>
+                  }
+                  icon={<Arts />}
+                  values={dataICTotal.values}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty:
+                        'admissions_on_date_of_admission_moving_average_rounded',
+                      label:
+                        siteText.ic_opnames_per_dag
+                          .linechart_legend_trend_label_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'area',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label:
+                        siteText.ic_opnames_per_dag
+                          .linechart_legend_trend_label,
+                      color: colors.data.primary,
+                      curve: 'step',
+                      strokeWidth: 0,
+                      noMarker: true,
+                    },
+                  ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeIntensiveCare,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
+                  accessibility={{ key: 'topical_intensive_care_nice' }}
+                  warning={getWarning(
+                    content.elements.warning,
+                    'intensive_care_nice'
+                  )}
+                />
+
+                <MiniTrendTile
+                  title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+                  text={
+                    <>
+                      <DataDrivenText
+                        data={data}
+                        content={[
+                          {
+                            type: 'metric',
+                            text: text.data_driven_texts
+                              .intake_hospital_ma_nieuw.value,
+                            metricName: 'hospital_nice',
+                            metricProperty:
+                              'admissions_on_date_of_admission_moving_average_rounded',
+                            differenceKey:
+                              'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                          },
+                          {
+                            type: 'metric',
+                            text: siteText.common_actueel.secties.kpi
+                              .hospital_admissions,
+                            metricName: 'hospital_lcps',
+                            metricProperty: 'beds_occupied_covid',
+                            differenceKey: 'hospital_lcps__beds_occupied_covid',
+                          },
+                        ]}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.nl.ziekenhuisopnames()}
+                        icon={<ArrowIconRight />}
+                        iconPlacement="right"
+                        fontWeight="bold"
+                      >
+                        {
+                          text.mini_trend_tiles.ziekenhuis_opnames
+                            .read_more_link
+                        }
+                      </LinkWithIcon>
+                    </>
+                  }
+                  icon={<Ziekenhuis />}
+                  values={dataHospitalIntake.values}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty:
+                        'admissions_on_date_of_admission_moving_average_rounded',
+                      label:
+                        siteText.ziekenhuisopnames_per_dag
+                          .linechart_legend_titel_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'area',
+                      metricProperty: 'admissions_on_date_of_reporting',
+                      label:
+                        siteText.ziekenhuisopnames_per_dag
+                          .linechart_legend_titel_trend_label,
+                      color: colors.data.primary,
+                      curve: 'step',
+                      strokeWidth: 0,
+                      noMarker: true,
+                    },
+                  ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeHospital,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
+                  accessibility={{ key: 'topical_hospital_nice' }}
+                  warning={getWarning(
+                    content.elements.warning,
+                    'hospital_nice'
+                  )}
+                />
+
+                <MiniVaccinationCoverageTile
+                  title={text.mini_trend_tiles.vaccinatiegraad.title}
+                  oneShotBarLabel={
+                    text.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
+                  }
+                  fullyVaccinatedBarLabel={
+                    text.mini_trend_tiles.vaccinatiegraad
+                      .fully_vaccinated_bar_label
+                  }
+                  icon={<Vaccinaties />}
+                  text={
+                    <>
+                      <Text variant="datadriven" as="div">
+                        <Markdown
+                          content={replaceVariablesInText(
+                            text.mini_trend_tiles.vaccinatiegraad.text,
+                            vaccineCoverageEstimatedLastValue as unknown as Record<
+                              string,
+                              number
+                            >,
+                            formatters
+                          )}
+                        />
+                      </Text>
+                      <LinkWithIcon
+                        href={reverseRouter.nl.vaccinaties()}
+                        icon={<ArrowIconRight />}
+                        iconPlacement="right"
+                        fontWeight="bold"
+                      >
+                        {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
+                      </LinkWithIcon>
+                    </>
+                  }
+                  oneShotPercentage={
+                    vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
+                  }
+                  fullyVaccinatedPercentage={
+                    vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
+                  }
+                  warning={getWarning(
+                    content.elements.warning,
+                    'vaccine_coverage_per_age_group_estimated'
+                  )}
+                />
+              </MiniTileSelectorLayout>
             </Box>
-
-            <MiniTileLayout id="metric-navigation">
-              <MiniTrendTile
-                title={text.mini_trend_tiles.ic_opnames.title}
-                text={
-                  <DataDrivenText
-                    data={data}
-                    content={[
-                      {
-                        type: 'metric',
-                        text: text.data_driven_texts.intensive_care_nice.value,
-                        metricName: 'intensive_care_nice',
-                        metricProperty:
-                          'admissions_on_date_of_admission_moving_average',
-                        differenceKey:
-                          'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
-                      },
-                      {
-                        type: 'metric',
-                        text: siteText.common_actueel.secties.kpi.ic_admissions,
-                        metricName: 'intensive_care_lcps',
-                        metricProperty: 'beds_occupied_covid',
-                        differenceKey:
-                          'intensive_care_lcps__beds_occupied_covid',
-                      },
-                    ]}
-                  />
-                }
-                icon={<Arts />}
-                values={dataICTotal.values}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
-                    label:
-                      siteText.ic_opnames_per_dag
-                        .linechart_legend_trend_label_moving_average,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'area',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label:
-                      siteText.ic_opnames_per_dag.linechart_legend_trend_label,
-                    color: colors.data.primary,
-                    curve: 'step',
-                    strokeWidth: 0,
-                    noHover: true,
-                  },
-                ]}
-                titleValue={
-                  last(dataICTotal.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
-                }
-                href={reverseRouter.nl.intensiveCareOpnames()}
-                accessibility={{ key: 'topical_intensive_care_nice' }}
-                warning={getWarning(
-                  content.elements.timeSeries,
-                  'intensive_care_nice'
-                )}
-              />
-
-              <MiniTrendTile
-                title={text.mini_trend_tiles.ziekenhuis_opnames.title}
-                text={
-                  <DataDrivenText
-                    data={data}
-                    content={[
-                      {
-                        type: 'metric',
-                        text: text.data_driven_texts.intake_hospital_ma_nieuw
-                          .value,
-                        metricName: 'hospital_nice',
-                        metricProperty:
-                          'admissions_on_date_of_admission_moving_average',
-                        differenceKey:
-                          'hospital_nice__admissions_on_date_of_reporting_moving_average',
-                      },
-                      {
-                        type: 'metric',
-                        text: siteText.common_actueel.secties.kpi
-                          .hospital_admissions,
-                        metricName: 'hospital_lcps',
-                        metricProperty: 'beds_occupied_covid',
-                        differenceKey: 'hospital_lcps__beds_occupied_covid',
-                      },
-                    ]}
-                  />
-                }
-                icon={<Ziekenhuis />}
-                values={dataHospitalIntake.values}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
-                    label:
-                      siteText.ziekenhuisopnames_per_dag
-                        .linechart_legend_titel_moving_average,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'area',
-                    metricProperty: 'admissions_on_date_of_reporting',
-                    label:
-                      siteText.ziekenhuisopnames_per_dag
-                        .linechart_legend_titel_trend_label,
-                    color: colors.data.primary,
-                    curve: 'step',
-                    strokeWidth: 0,
-                    noHover: true,
-                  },
-                ]}
-                titleValue={
-                  last(dataHospitalIntake.values)
-                    ?.admissions_on_date_of_admission_moving_average ?? 0
-                }
-                href={reverseRouter.nl.ziekenhuisopnames()}
-                accessibility={{ key: 'topical_hospital_nice' }}
-                warning={getWarning(
-                  content.elements.timeSeries,
-                  'hospital_nice'
-                )}
-              />
-
-              <MiniVaccinationCoverageTile
-                title={text.mini_trend_tiles.vaccinatiegraad.title}
-                href={reverseRouter.nl.vaccinaties()}
-                icon={<Vaccinaties />}
-                text={
-                  <Markdown
-                    content={replaceVariablesInText(
-                      text.mini_trend_tiles.vaccinatiegraad.text,
-                      vaccineCoverageEstimatedLastValue as unknown as Record<
-                        string,
-                        number
-                      >,
-                      formatters
-                    )}
-                  />
-                }
-                titleValue={
-                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
-                }
-                titleValueIsPercentage
-                oneShotPercentage={
-                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot
-                }
-                fullyVaccinatedPercentage={
-                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
-                }
-              />
-            </MiniTileLayout>
-
-            <EscalationLevelBanner level={2} date={1632554802} />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
@@ -318,19 +460,21 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.weeklyHighlight && content.highlights && (
-              <Box pt={3} spacing={4}>
-                <TopicalSectionHeader
-                  title={siteText.common_actueel.secties.artikelen.titel}
-                />
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
 
-                <HighlightsTile
-                  weeklyHighlight={content.weeklyHighlight}
-                  highlights={content.highlights}
-                  showWeeklyHighlight={content.showWeeklyHighlight}
-                />
-              </Box>
-            )}
+            <Box py={4}>
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
+            </Box>
+
+            <HighlightsTile
+              hiddenTitle={text.highlighted_items.title}
+              weeklyHighlight={content.weeklyHighlight}
+              highlights={content.highlights}
+              showWeeklyHighlight={content.showWeeklyHighlight}
+            />
 
             <VaccinationCoverageChoropleth
               title={
@@ -346,19 +490,29 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 vr: choropleth.vr.vaccine_coverage_per_age_group,
               }}
             />
-
-            <TopicalTile>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.meer_lezen.titel}
-                description={
-                  siteText.common_actueel.secties.meer_lezen.omschrijving
-                }
-                link={siteText.common_actueel.secties.meer_lezen.link}
-              />
-              <ArticleList articleSummaries={content.articles} />
-            </TopicalTile>
           </TileList>
         </MaxWidth>
+
+        <Spacer mb={5} />
+
+        <Box width="100%" backgroundColor="offWhite" pb={5}>
+          <MaxWidth
+            spacing={3}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 4, md: 3, lg: 4 }}
+          >
+            <TopicalSectionHeader
+              title={siteText.common_actueel.secties.meer_lezen.titel}
+              description={
+                siteText.common_actueel.secties.meer_lezen.omschrijving
+              }
+              link={siteText.common_actueel.secties.meer_lezen.link}
+              headerVariant="h2"
+            />
+
+            <ArticleList articles={content.articles} />
+          </MaxWidth>
+        </Box>
       </Box>
     </Layout>
   );

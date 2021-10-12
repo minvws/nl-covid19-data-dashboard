@@ -19,6 +19,7 @@ interface TopicalSectionHeaderProps {
   lastGenerated?: number;
   showBackLink?: boolean;
   headingLevel?: HeadingLevel;
+  headerVariant?: 'h1' | 'h2';
   link?: {
     href: string;
     text: string;
@@ -32,11 +33,12 @@ export function TopicalSectionHeader({
   link,
   description,
   headingLevel = 2,
+  headerVariant = 'h1',
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box spacing={3}>
+    <Box pt={{ _: 2, lg: 3 }}>
       {showBackLink && (
         <Box fontSize="1.125rem" fontWeight="bold">
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
@@ -45,11 +47,8 @@ export function TopicalSectionHeader({
         </Box>
       )}
 
-      <Box spacing={{ _: 2, lg: 3 }}>
+      <Box spacing={{ _: 1, lg: 2 }}>
         <Box
-          borderBottom="1px solid"
-          borderBottomColor="border"
-          pb={{ _: 2, lg: 3 }}
           display="flex"
           flexDirection={{ _: 'column', lg: 'row' }}
           alignItems="baseline"
@@ -57,7 +56,7 @@ export function TopicalSectionHeader({
           spacingHorizontal={{ _: 0, lg: 4 }}
           flexWrap="wrap"
         >
-          <Heading level={headingLevel} variant="h1">
+          <Heading level={headingLevel} variant={headerVariant}>
             {title}
           </Heading>
 

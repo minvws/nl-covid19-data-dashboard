@@ -1,12 +1,12 @@
 import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
-import { Box, Spacer } from './base';
+import { Box } from './base';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
 interface KpiTileProps {
   title: string;
   description?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   metadata?: MetadataProps;
 }
 
@@ -24,7 +24,7 @@ export function KpiTile({
     <Tile>
       <Box spacing={3}>
         <Heading level={3}>{title}</Heading>
-        <Box spacing={3}>{children}</Box>
+        {children && <Box spacing={3}>{children}</Box>}
 
         {description && (
           <Box maxWidth="400px" fontSize={2} lineHeight={2}>
@@ -32,9 +32,6 @@ export function KpiTile({
           </Box>
         )}
       </Box>
-
-      {/* Using a spacer to push the footer down */}
-      <Spacer m="auto" />
 
       {metadata && <Metadata {...metadata} isTileFooter />}
     </Tile>

@@ -1,8 +1,8 @@
-import { ParsedFeature } from '@visx/geo/lib/projections/Projection';
-import { Feature, MultiPolygon, Polygon } from 'geojson';
+import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
+import type { Feature, MultiPolygon, Polygon } from 'geojson';
 import { isPresent } from 'ts-is-present';
-import { CodedGeoProperties } from './topology';
-import {
+import type { CodedGeoProperties } from './topology';
+import type {
   ChoroplethDataItem,
   CodeProp,
   GmDataItem,

@@ -3,9 +3,10 @@
  */
 
 export * from './article';
-export * from './editorial';
-export * from './faq-question';
 export * from './cijfer-verantwoording-item';
+export * from './editorial';
+export * from './escalation-level';
+export * from './faq-question';
 export * from './lokalize-text';
 export * from './pages';
 export * from './toegankelijkheid';

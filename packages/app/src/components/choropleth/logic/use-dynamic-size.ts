@@ -37,7 +37,7 @@ export function useResponsiveSize(
       })
       .find((item) => {
         if (isResponsiveConfiguration(item) && isDefined(containerWidth)) {
-          containerWidth >= item.containerWidth;
+          return containerWidth >= item.containerWidth;
         }
         return true;
       });

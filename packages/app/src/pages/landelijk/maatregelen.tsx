@@ -1,14 +1,14 @@
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
+import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
-// import { useEscalationLevel } from '~/utils/use-escalation-level';
 import {
   createGetStaticProps,
   StaticProps,
@@ -16,18 +16,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
+  riskLevel: {
+    level: EscalationLevelType;
+  };
 };
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
     return `
@@ -48,6 +49,9 @@ export const getStaticProps = createGetStaticProps(
           },
         }
       }[0],
+      'riskLevel': *[_type == 'riskLevelNational']{
+		    "level": riskLevel,
+      }[0],
       // We will need the roadmap when lockdown is disabled in the CMS.
       // 'roadmap': *[_type == 'roadmap'][0]
     }`;
@@ -57,17 +61,8 @@ export const getStaticProps = createGetStaticProps(
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
-  const { content, lastGenerated, selectedNlData: data } = props;
+  const { content, lastGenerated } = props;
   const { lockdown } = content;
-
-  const { showLockdown } = lockdown;
-
-  // const escalationLevelData = useEscalationLevel(data.restrictions.values);
-
-  /**
-   * Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-   */
-  // const effectiveEscalationLevel: EscalationLevel = escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -75,26 +70,31 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
-          {showLockdown && (
-            <KpiSection flexDirection="column">
+          {lockdown.showLockdown && (
+            <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{lockdown.message.title}</Heading>
                 {lockdown.message.description ? (
                   <RichContent blocks={lockdown.message.description} />
                 ) : null}
               </Box>
-            </KpiSection>
+            </Tile>
           )}
 
-          {showLockdown && (
-            <KpiSection display="flex" flexDirection="column" spacing={3}>
-              <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} />
-            </KpiSection>
+          {lockdown.showLockdown && (
+            <Tile>
+              <Box spacing={3}>
+                <Heading level={3}>{lockdown.title}</Heading>
+                <LockdownTable
+                  data={lockdown}
+                  level={content.riskLevel.level}
+                />
+              </Box>
+            </Tile>
           )}
         </TileList>
       </NlLayout>

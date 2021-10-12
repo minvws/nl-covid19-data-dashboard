@@ -12,12 +12,12 @@ import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { EscalationLevelLabel } from './escalation-level-label';
 interface EscalationLevelBannerProps {
   level: EscalationLevelType;
-  date: number;
+  dateFrom: string;
 }
 
 export function EscalationLevelBanner({
   level,
-  date,
+  dateFrom,
 }: EscalationLevelBannerProps) {
   const { siteText } = useIntl();
   const text = siteText.national_escalation_levels;
@@ -51,7 +51,7 @@ export function EscalationLevelBanner({
                 <NederlandGroot />
               </Box>
             )}
-            <EscalationLevelLabel level={level} date={date} />
+            <EscalationLevelLabel level={level} dateFrom={dateFrom} />
           </Box>
 
           <LinkWithIcon
@@ -71,7 +71,7 @@ export function EscalationLevelBanner({
 const Tile = styled.article<{ sideColor: string }>((x) =>
   css({
     position: 'relative',
-    backgroundColor: 'page',
+    backgroundColor: 'offWhite',
     borderRadius: 1,
 
     '&:before': {

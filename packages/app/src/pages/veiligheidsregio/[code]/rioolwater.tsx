@@ -1,10 +1,10 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isPresent } from 'ts-is-present';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -21,9 +21,8 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -31,17 +30,26 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   (context) => {
-    const data = selectVrPageMetricData('sewer_per_installation')(context);
+    const data = selectVrData(
+      'sewer',
+      'sewer_per_installation',
+      'difference.sewer__average'
+    )(context);
+
     data.selectedVrData.sewer.values = data.selectedVrData.sewer.values.map(
       (x) => ({
         ...x,
-        average: Math.round(x.average),
+        average: isPresent(x.average) ? Math.round(x.average) : null,
       })
     );
+
     data.selectedVrData.sewer.last_value = {
       ...data.selectedVrData.sewer.last_value,
-      average: Math.round(data.selectedVrData.sewer.last_value.average),
+      average: isPresent(data.selectedVrData.sewer.last_value.average)
+        ? Math.round(data.selectedVrData.sewer.last_value.average)
+        : null,
     };
+
     data.selectedVrData.difference.sewer__average.difference = Math.round(
       data.selectedVrData.difference.sewer__average.difference
     );
@@ -82,7 +90,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
@@ -93,10 +101,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: {
-                start: sewerAverages.last_value.date_start_unix,
-                end: sewerAverages.last_value.date_end_unix,
-              },
+              dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix:
                 sewerAverages.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
@@ -112,10 +117,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
+                date: sewerAverages.last_value.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
@@ -129,35 +131,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={text.total_measurements_title}
-              description={text.total_measurements_description}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="total_number_of_samples"
-                absolute={sewerAverages.last_value.total_number_of_samples}
-              />
-              <Text>
-                {replaceComponentsInText(text.total_measurements_locations, {
-                  sampled_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.sampled_installation_count}
-                    </strong>
-                  ),
-                  total_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.total_installation_count}
-                    </strong>
-                  ),
-                })}
-              </Text>
-            </KpiTile>
+              title={text.tile_explanation_title}
+              description={text.tile_explanation_description}
+            />
           </TwoKpiSection>
 
           <SewerChart
@@ -170,7 +146,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: text.linechart_description,
               selectPlaceholder: text.graph_selected_rwzi_placeholder,
               splitLabels: siteText.rioolwater_metingen.split_labels,
-              averagesDataLabel: siteText.common.weekgemiddelde,
+              averagesDataLabel: siteText.common.daggemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
           />

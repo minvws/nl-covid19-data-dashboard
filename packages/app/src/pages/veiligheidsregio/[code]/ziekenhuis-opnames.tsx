@@ -1,4 +1,5 @@
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { useRouter } from 'next/router';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -10,6 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
@@ -31,7 +33,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
@@ -43,7 +45,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData('hospital_nice'),
   createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
@@ -72,16 +74,17 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
 
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
   const lastValue = data.hospital_nice.last_value;
 
-  const municipalCodes = gmCodesByVrCode[data.code];
+  const municipalCodes = gmCodesByVrCode[router.query.code as string];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    4
+    INACCURATE_ITEMS
   );
 
   const metadata = {
@@ -97,7 +100,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
@@ -128,7 +131,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="hospital_moving_avg_per_region"
                 absolute={
-                  lastValue.admissions_on_date_of_admission_moving_average
+                  lastValue.admissions_on_date_of_admission_moving_average_rounded
                 }
                 isMovingAverageDifference
                 isAmount

@@ -1,5 +1,5 @@
 import {
-  GmSewer,
+  NlSewer,
   SewerPerInstallationData,
   VrSewer,
 } from '@corona-dashboard/common';
@@ -23,7 +23,7 @@ export function SewerChart({
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  dataAverages: VrSewer | GmSewer;
+  dataAverages: VrSewer | NlSewer;
   dataPerInstallation?: SewerPerInstallationData;
   text: {
     title: string;
@@ -137,8 +137,7 @@ export function SewerChart({
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
-                    hideInTooltip: true,
-                    noHover: true,
+                    nonInteractive: true,
                   },
                 ]}
                 formatTooltip={(data) => {

@@ -4,17 +4,18 @@ import { colors } from '~/style/theme';
 import { Box } from './base';
 
 const BAR_WIDTH = 6;
-const BAR_HEIGHT = 24;
+const BAR_HEIGHT = 16;
 
 type SparkBarsProps<T extends TimestampedValue> = {
   averageProperty: KeysOfType<T, number | null, true>;
   data: T[];
+  hide?: boolean;
 };
 
 export function SparkBars<T extends TimestampedValue>(
   props: SparkBarsProps<T>
 ) {
-  const { data, averageProperty } = props;
+  const { data, averageProperty, hide } = props;
 
   const last7Days = data.slice(-7);
 
@@ -38,22 +39,27 @@ export function SparkBars<T extends TimestampedValue>(
         aria-hidden="true"
         focusable="false"
       >
-        {last7Days.map((d, i) => (
-          <rect
-            key={'date_unix' in d ? d.date_unix : d.date_start_unix}
-            x={i * BAR_WIDTH}
-            width={BAR_WIDTH}
-            y={y(Math.max(0, d[averageProperty]))}
-            height={
-              d[averageProperty] >= 0 ? y(0) - y(d[averageProperty]) : y(0)
-            }
-            fill={
-              d[averageProperty] >= 0
-                ? colors.data.positive
-                : colors.data.negative
-            }
-          />
-        ))}
+        {!hide && (
+          <>
+            {last7Days.map((d, i) => (
+              <rect
+                key={'date_unix' in d ? d.date_unix : d.date_start_unix}
+                x={i * BAR_WIDTH}
+                width={BAR_WIDTH}
+                opacity="0.5"
+                y={y(Math.max(0, d[averageProperty]))}
+                height={
+                  d[averageProperty] >= 0 ? y(0) - y(d[averageProperty]) : y(0)
+                }
+                fill={
+                  d[averageProperty] >= 0
+                    ? colors.data.positive
+                    : colors.data.negative
+                }
+              />
+            ))}
+          </>
+        )}
       </svg>
     </Box>
   );
