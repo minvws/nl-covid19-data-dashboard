@@ -32,21 +32,13 @@ export const getStaticProps = createGetStaticProps(
             "${locale}": [
               ...content.${locale}[]
               {
-                (asset == undefined && _type != 'dashboardChart' && _type != 'dashboardKpi') => {
-                  ...,
-                },
-                asset != undefined => {
-                  "_type": 'image',
-                  "asset": asset->,
-                  markDefs[]{
-                    ...,
-                    "asset": asset->
-                  }
+                _type != 'dashboardChart' && _type != 'dashboardKpi' => {
+                  ...
                 },
                 _type == 'dashboardChart' || _type == 'dashboardKpi' => {
                   ...*[_id == ^._ref][0]
                 }
-              },
+              }    
             ]
           },
     }[0]
