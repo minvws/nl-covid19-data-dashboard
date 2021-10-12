@@ -587,6 +587,8 @@ export interface NlBehaviorValue {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_compliance: number | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -609,6 +611,8 @@ export interface NlBehaviorValue {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_support: number | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -624,6 +628,8 @@ export interface NlBehaviorPerAgeGroup {
   wash_hands_support: NlBehaviorPerAgeGroupValue;
   work_from_home_compliance: NlBehaviorPerAgeGroupValue;
   work_from_home_support: NlBehaviorPerAgeGroupValue;
+  ventilate_home_compliance: NlBehaviorPerAgeGroupValue;
+  ventilate_home_support: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -1134,6 +1140,8 @@ export interface VrBehaviorValue {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_compliance: number | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -1150,6 +1158,8 @@ export interface VrBehaviorValue {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_support: number | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -1328,6 +1338,8 @@ export interface VrCollectionBehavior {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_compliance: number | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -1344,6 +1356,8 @@ export interface VrCollectionBehavior {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_support: number | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
