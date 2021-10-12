@@ -11,7 +11,6 @@ type ArticlePageType =
   | 'reproductionPage'
   | 'sewerPage'
   | 'vaccinationsPage'
-  | 'escalationLevelPage'
   | 'situationsPage'
   | 'variantsPage'
   | 'nursingHomePage'

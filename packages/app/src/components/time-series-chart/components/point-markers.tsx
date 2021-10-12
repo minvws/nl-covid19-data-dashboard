@@ -32,6 +32,7 @@ export function PointMarkers<T extends TimestampedValue>(
       }}
     >
       {points
+        .filter((p) => !p.noMarker)
         .map((point, index) => (
           <PointMarker
             color={point.color}

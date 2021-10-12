@@ -43,6 +43,10 @@ export function getTopicalPageQuery(
         }
       }
     }[0].highlights,
+    'riskLevel': *[_type == 'riskLevelNational']{
+		    "level": riskLevel,
+		    "dateFrom": date,
+      }[0],
     'elements': ${createElementsQuery(
       'nl',
       ['tested_overall', 'hospital_nice', 'vaccine_administered_total'],

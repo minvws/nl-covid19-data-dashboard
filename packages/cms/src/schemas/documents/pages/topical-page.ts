@@ -71,7 +71,7 @@ export const topicalPage = {
           if (context.document.showWeeklyHighlight) {
             return value.length === 2
               ? true
-              : 'Als er een weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
+              : 'Als er een weekbericht geselecteerd is moet er 1 uitgelicht items toegevoegd zijn.';
           } else {
             return value.length === 3
               ? true

@@ -180,9 +180,8 @@ export function NlLayout(props: NlLayoutProps) {
                   <SidebarMetric
                     data={data}
                     metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                   />
                 </MetricMenuItemLink>
 
@@ -194,9 +193,8 @@ export function NlLayout(props: NlLayoutProps) {
                   <SidebarMetric
                     data={data}
                     metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_reporting"
+                    metricProperty="admissions_on_date_of_admission_moving_average_rounded"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -228,7 +226,6 @@ export function NlLayout(props: NlLayoutProps) {
                     metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     differenceKey="reproduction__index_average"
-                    showDateOfInsertion
                   />
                 </MetricMenuItemLink>
 
@@ -261,12 +258,7 @@ export function NlLayout(props: NlLayoutProps) {
                   icon={<Gedrag />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
-                  <SituationsSidebarMetric
-                    date_start_unix={
-                      data.situationsSidebarValue.date_start_unix
-                    }
-                    date_end_unix={data.situationsSidebarValue.date_end_unix}
-                  />
+                  <SituationsSidebarMetric />
                 </MetricMenuItemLink>
               </CategoryMenu>
 
