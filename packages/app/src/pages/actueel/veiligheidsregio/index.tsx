@@ -1,12 +1,12 @@
-import { VrCollectionHospitalNice } from '@corona-dashboard/common';
+import { VrCollectionHospitalNice, vrData } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Heading } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
-import { vrData } from '~/data/vr';
 import { VrComboBox } from '~/domain/layout/components/vr-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -19,7 +19,6 @@ import { getLastGeneratedDate } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { DynamicChoropleth } from '~/components/choropleth';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 

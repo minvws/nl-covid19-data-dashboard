@@ -82,8 +82,6 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { locale = 'nl' } = useRouter();
 
-  console.dir(content);
-
   const { cover } = content;
   const { asset } = cover;
 

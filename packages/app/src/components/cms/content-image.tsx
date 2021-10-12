@@ -34,8 +34,6 @@ export function ContentImage({
     </Text>
   );
 
-  console.dir(node);
-
   const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
