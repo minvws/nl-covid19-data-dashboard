@@ -46,6 +46,8 @@ export function FullscreenChartTile({
         px={isFullscreen ? { _: 3, sm: 4 } : undefined}
         py={isFullscreen ? { _: 2, sm: 3 } : undefined}
         height="100%"
+        display="flex"
+        flexDirection="column"
       >
         {children}
 
