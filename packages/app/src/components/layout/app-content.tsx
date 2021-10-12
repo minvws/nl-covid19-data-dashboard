@@ -137,13 +137,23 @@ const StyledSidebar = styled.aside(
     overflow: asResponsiveArray({ _: null, md: 'auto' }),
     scrollbarWidth: 'thin',
     scrollbarColor: `${colors.blue} ${colors.white}`,
+
     '&::-webkit-scrollbar': {
-      width: '6px',
-      backgroundColor: colors.white,
+      width: '5px',
+      backgroundColor: 'tileGray',
     },
+
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: colors.blue,
+      position: 'absolute',
+      right: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
       borderRadius: '5px',
+    },
+
+    '&:hover': {
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      },
     },
   })
 );
