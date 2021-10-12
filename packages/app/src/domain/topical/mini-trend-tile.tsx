@@ -2,6 +2,7 @@ import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { MiniTrendChart } from '~/components/mini-trend-chart';
 import { SeriesConfig } from '~/components/time-series-chart';
+import { DataOptions } from '~/components/time-series-chart/logic';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { MiniTile, MiniTileProps } from './mini-tile';
 
@@ -13,6 +14,7 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   accessibility: AccessibilityDefinition;
   timeframe?: TimeframeOption;
   seriesConfig: SeriesConfig<T>;
+  dataOptions?: DataOptions;
   values: T[];
 } & Omit<MiniTileProps, 'children'>;
 
@@ -24,6 +26,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
     timeframe = '5weeks',
     values,
     seriesConfig,
+    dataOptions,
     ...tileProps
   } = props;
 
@@ -37,6 +40,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
             title={tileProps.title}
             values={values}
             seriesConfig={seriesConfig}
+            dataOptions={dataOptions}
           />
         </ErrorBoundary>
       </div>

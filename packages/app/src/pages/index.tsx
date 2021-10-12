@@ -4,7 +4,6 @@ import {
   NlVaccineCoveragePerAgeGroupEstimated,
 } from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
-import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
@@ -16,9 +15,12 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
+import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -52,6 +54,7 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -126,9 +129,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+
+  const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
+    data.intensive_care_nice.values,
+    INACCURATE_ITEMS_IC
+  );
+
+  const underReportedRangeHospital = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    INACCURATE_ITEMS_HOSPITAL
+  );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" pt={4}>
+      <Box bg="white">
         <MaxWidth id="content">
           <TileList>
             <Box spacing={3}>
@@ -157,7 +171,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
-                      last(dataICTotal.values)
+                      dataICTotal.last_value
                         ?.admissions_on_date_of_admission_moving_average_rounded ??
                       0,
                     warning: getWarning(
@@ -173,7 +187,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
-                      last(dataHospitalIntake.values)
+                      dataHospitalIntake.last_value
                         ?.admissions_on_date_of_admission_moving_average_rounded ??
                       0,
                     warning: getWarning(
@@ -186,10 +200,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.nationaal_actueel.mini_trend_tiles
                         .vaccinatiegraad.menu_item_label,
                     data: data.vaccine_coverage_per_age_group_estimated.values,
-                    dataProperty: 'age_18_plus_has_one_shot',
+                    dataProperty: 'age_18_plus_fully_vaccinated',
                     value:
-                      last(data.vaccine_coverage_per_age_group_estimated.values)
-                        ?.age_18_plus_has_one_shot ?? 0,
+                      data.vaccine_coverage_per_age_group_estimated.last_value
+                        ?.age_18_plus_fully_vaccinated ?? 0,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
@@ -260,9 +274,22 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                       curve: 'step',
                       strokeWidth: 0,
-                      noHover: true,
+                      noMarker: true,
                     },
                   ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeIntensiveCare,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
                   accessibility={{ key: 'topical_intensive_care_nice' }}
                   warning={getWarning(
                     content.elements.warning,
@@ -331,9 +358,22 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                       curve: 'step',
                       strokeWidth: 0,
-                      noHover: true,
+                      noMarker: true,
                     },
                   ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRangeHospital,
+                        end: Infinity,
+                        label: siteText.common_actueel.data_incomplete,
+                        shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average_rounded',
+                        ],
+                      },
+                    ],
+                  }}
                   accessibility={{ key: 'topical_hospital_nice' }}
                   warning={getWarning(
                     content.elements.warning,
@@ -353,7 +393,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   icon={<Vaccinaties />}
                   text={
                     <>
-                      <Box fontSize={5}>
+                      <Text variant="datadriven" as="div">
                         <Markdown
                           content={replaceVariablesInText(
                             text.mini_trend_tiles.vaccinatiegraad.text,
@@ -364,7 +404,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             formatters
                           )}
                         />
-                      </Box>
+                      </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}
                         icon={<ArrowIconRight />}
@@ -455,20 +495,22 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="page" pb={5}>
-          <MaxWidth>
-            <TileList>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.meer_lezen.titel}
-                description={
-                  siteText.common_actueel.secties.meer_lezen.omschrijving
-                }
-                link={siteText.common_actueel.secties.meer_lezen.link}
-                headerVariant="h2"
-              />
+        <Box width="100%" backgroundColor="offWhite" pb={5}>
+          <MaxWidth
+            spacing={3}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 4, md: 3, lg: 4 }}
+          >
+            <TopicalSectionHeader
+              title={siteText.common_actueel.secties.meer_lezen.titel}
+              description={
+                siteText.common_actueel.secties.meer_lezen.omschrijving
+              }
+              link={siteText.common_actueel.secties.meer_lezen.link}
+              headerVariant="h2"
+            />
 
-              <ArticleList articles={content.articles} />
-            </TileList>
+            <ArticleList articles={content.articles} />
           </MaxWidth>
         </Box>
       </Box>

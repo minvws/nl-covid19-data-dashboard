@@ -1,4 +1,4 @@
-type MunicipalityInfo = {
+export type MunicipalityInfo = {
   name: string;
   vrCode: string;
   gemcode: string;

@@ -69,7 +69,7 @@ export const preset = {
       lineHeight: 1,
     },
     datadriven: {
-      fontSize: 5,
+      fontSize: asResponsiveArray({ _: 2, md: 5 }),
     },
   },
 } as const;

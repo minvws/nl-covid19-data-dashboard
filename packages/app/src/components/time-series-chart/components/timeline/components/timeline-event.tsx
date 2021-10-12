@@ -119,9 +119,6 @@ function TooltipTrigger({
       interactive={isTouch}
       visible={isSelected}
       maxWidth={breakpoints.sm ? '360px' : '100%'}
-      popperOptions={{
-        modifiers: [{ name: 'flip', enabled: false }],
-      }}
     >
       <div
         tabIndex={0}

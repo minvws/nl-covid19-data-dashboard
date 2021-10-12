@@ -13,6 +13,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { GappedAreaTrend } from './gapped-area-trend';
 import { GappedLinedTrend } from './gapped-line-trend';
 import { GappedStackedAreaTrend } from './gapped-stacked-area-trend';
 import { SplitAreaTrend } from './split-area-trend';
@@ -93,6 +94,21 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             case 'area':
               return (
                 <AreaTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  strokeWidth={config.strokeWidth}
+                  curve={config.curve}
+                  getX={getX}
+                  getY={getY}
+                  yScale={yScale}
+                  id={id}
+                />
+              );
+            case 'gapped-area':
+              return (
+                <GappedAreaTrend
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}

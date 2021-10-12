@@ -46,6 +46,7 @@ export function useTabInteractiveButton(label: string) {
     isTabInteractive,
     tabInteractiveButton,
     anchorEventHandlers,
+    setIsTabInteractive,
   } as const;
 }
 

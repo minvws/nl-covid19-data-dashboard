@@ -157,48 +157,49 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (
-            <WideMenuListItem
-              key={item.label}
-              onClick={() => setSelectedIndex(index)}
-              selected={selectedIndex === index}
-            >
-              <SparkBars
-                data={item.data}
-                averageProperty={item.dataProperty}
-                hide={item.hideSparkBar}
-              />
-              <InlineText>{item.label}</InlineText>
-              <Box
-                ml="auto"
-                display="flex"
-                alignItems="center"
-                css={css({
-                  '> span': {
-                    display: 'flex',
-                  },
-                })}
+            <WideMenuListItem key={item.label}>
+              <WideMenuButton
+                onClick={() => setSelectedIndex(index)}
+                selected={selectedIndex === index}
               >
-                {item.warning && (
-                  <InlineTooltip content={item.warning}>
-                    <WarningIconWrapper
-                      aria-label={siteText.aria_labels.warning}
-                    >
-                      <Warning viewBox="0 0 25 25" />
-                    </WarningIconWrapper>
-                  </InlineTooltip>
-                )}
-                <InlineText fontWeight="bold">
-                  {item.valueIsPercentage
-                    ? `${
-                        typeof item.value === 'number'
-                          ? formatPercentage(item.value)
-                          : item.value
-                      }%`
-                    : typeof item.value === 'number'
-                    ? formatNumber(item.value)
-                    : item.value}
-                </InlineText>
-              </Box>
+                <SparkBars
+                  data={item.data}
+                  averageProperty={item.dataProperty}
+                  hide={item.hideSparkBar}
+                />
+                <InlineText>{item.label}</InlineText>
+                <Box
+                  ml="auto"
+                  display="flex"
+                  alignItems="center"
+                  css={css({
+                    '> span': {
+                      display: 'flex',
+                    },
+                  })}
+                >
+                  {item.warning && (
+                    <InlineTooltip content={item.warning}>
+                      <WarningIconWrapper
+                        aria-label={siteText.aria_labels.warning}
+                      >
+                        <Warning viewBox="0 0 25 25" />
+                      </WarningIconWrapper>
+                    </InlineTooltip>
+                  )}
+                  <InlineText fontWeight="bold">
+                    {item.valueIsPercentage
+                      ? `${
+                          typeof item.value === 'number'
+                            ? formatPercentage(item.value)
+                            : item.value
+                        }%`
+                      : typeof item.value === 'number'
+                      ? formatNumber(item.value)
+                      : item.value}
+                  </InlineText>
+                </Box>
+              </WideMenuButton>
             </WideMenuListItem>
           ))}
         </ul>
@@ -235,17 +236,29 @@ const NarrowMenuList = styled.ul(
   })
 );
 
-const WideMenuListItem = styled.li<{ selected: boolean }>((x) =>
+const WideMenuListItem = styled.li(
+  css({
+    listStyleType: 'none',
+  })
+);
+
+const WideMenuButton = styled.button<{ selected: boolean }>((x) =>
   css({
     position: 'relative',
     height: '3em',
+    width: '100%',
     alignItems: 'center',
     listStyle: 'none',
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'row',
     pr: `calc(5px + ${space[3]})`,
+    backgroundColor: x.selected ? colors.lightBlue : colors.white,
     pl: 2,
+    transition: '0.1s background-color',
+    zIndex: 3,
+    border: 0,
+    textAlign: 'left',
 
     '&:hover': {
       backgroundColor: colors.lightBlue,

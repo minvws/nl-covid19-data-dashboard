@@ -53,7 +53,8 @@ export function AnchorTile({
 const Container = styled.article(
   css({
     display: 'flex',
-    py: asResponsiveArray({ _: 3, sm: 4 }),
+    pt: asResponsiveArray({ _: 2, sm: 3 }),
+    pb: asResponsiveArray({ _: 3, sm: 4 }),
     flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
     borderTop: 'solid 2px lightGray',
   })

@@ -124,12 +124,12 @@ const StyledSidebar = styled.aside(
   css({
     zIndex: 3,
     minHeight: [null, null, null, null, '35em'],
-    width: [null, null, null, '25em'],
+    width: asResponsiveArray({ md: '18rem', lg: '21rem' }),
     flexShrink: 0,
     flexGrow: 0,
     borderRight: asResponsiveArray({
       _: 'none',
-      md: `solid 1px ${colors.border}`,
+      md: `solid 1px ${colors.lightGray}`,
     }),
     maxHeight: asResponsiveArray({ _: null, md: '100vh' }),
     position: asResponsiveArray({ _: null, md: 'sticky' }),
