@@ -204,8 +204,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.gemeente_actueel.mini_trend_tiles.vaccinatiegraad
                         .menu_item_label,
                     data: data.vaccine_coverage_per_age_group.values,
-                    dataProperty: 'has_one_shot_percentage',
-                    value: renderedAgeGroup18Pluslabels.has_one_shot_percentage,
+                    dataProperty: 'fully_vaccinated_percentage',
+                    value:
+                      renderedAgeGroup18Pluslabels.fully_vaccinated_percentage,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
@@ -407,20 +408,22 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="page" pb={5}>
-          <MaxWidth>
-            <TileList>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.meer_lezen.titel}
-                description={
-                  siteText.common_actueel.secties.meer_lezen.omschrijving
-                }
-                link={siteText.common_actueel.secties.meer_lezen.link}
-                headerVariant="h2"
-              />
+        <Box width="100%" backgroundColor="offWhite" pb={5}>
+          <MaxWidth
+            spacing={3}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 4, md: 3, lg: 4 }}
+          >
+            <TopicalSectionHeader
+              title={siteText.common_actueel.secties.meer_lezen.titel}
+              description={
+                siteText.common_actueel.secties.meer_lezen.omschrijving
+              }
+              link={siteText.common_actueel.secties.meer_lezen.link}
+              headerVariant="h2"
+            />
 
-              <ArticleList articles={content.articles} />
-            </TileList>
+            <ArticleList articles={content.articles} />
           </MaxWidth>
         </Box>
       </Box>

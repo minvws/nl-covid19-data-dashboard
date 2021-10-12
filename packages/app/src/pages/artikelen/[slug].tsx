@@ -49,7 +49,9 @@ export const getStaticProps = createGetStaticProps(
       "slug": slug.current,
       "cover": {
         ...cover,
-        "asset": cover.asset->
+        "${locale}": [
+          ...cover.${locale}[]
+        ]
       },
       categories,
       "intro": {

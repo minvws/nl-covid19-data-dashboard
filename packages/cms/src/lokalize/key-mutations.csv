@@ -311,3 +311,5 @@ timestamp,action,key,document_id,move_to
 2021-10-04T11:26:16.902Z,add,dashboard_wide_notification.title,wzQp83DAUqyqV3ewGLiXxV,__
 2021-10-04T11:26:18.146Z,add,dashboard_wide_notification.description,tdf6s1l0srCSpeM2lEl1X2,__
 2021-10-07T09:50:33.503Z,add,common_actueel.data_incomplete,j9sEwGbzpgheGEMpYgaoQd,__
+2021-10-12T08:03:17.670Z,add,toe_en_afname.vorige_waarde_geljk_datum,nr2mIdlRRUQmHvbOdEkcgh,__
+2021-10-12T08:06:00.820Z,delete,toe_en_afname.de_vorige_waarde,Ierr3hadoEWr1dYNoMCudD,__

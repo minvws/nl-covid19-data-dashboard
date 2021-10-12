@@ -9,7 +9,7 @@
     "@reach/combobox": "^0.16.1",
     "@reach/disclosure": "^0.16.0",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/client": "^2.11.0",
+    "@sanity/client": "2.19.0",
     "@styled-system/css": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@testing-library/react-hooks": "^7.0.2",
