@@ -42,6 +42,7 @@ export function HighlightsTile({
             slug={weeklyHighlight.slug}
             cover={weeklyHighlight.cover}
             publicationDate={weeklyHighlight.publicationDate}
+            isWeeklyHighlight
           />
         )}
         {highlights
