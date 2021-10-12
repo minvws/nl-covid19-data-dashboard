@@ -100,7 +100,7 @@ export const ChartConfigurationInput = React.forwardRef(
         curve: 'linear',
         labelKey: '',
       });
-      //onChangeProp('metricPropertyConfigs', newArray)(undefined);
+      changeProp('metricPropertyConfigs', [], newArray);
     };
 
     return (
