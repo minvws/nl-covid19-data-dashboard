@@ -56,10 +56,6 @@ export const getStaticProps = createGetStaticProps(
         ...intro,
         "${locale}": [
           ...intro.${locale}[]
-          {
-            ...,
-            "asset": asset->
-           },
         ]
       },
       "content": {
@@ -67,13 +63,13 @@ export const getStaticProps = createGetStaticProps(
         "${locale}": [
           ...content.${locale}[]
           {
-            ...,
-            "asset": asset->,
-            markDefs[]{
-              ...,
-              "asset": asset->
+            _type != 'dashboardChart' && _type != 'dashboardKpi' => {
+              ...
+            },
+            _type == 'dashboardChart' || _type == 'dashboardKpi' => {
+              ...*[_id == ^._ref][0]
             }
-           },
+          }
         ]
       }
     }[0]`;
@@ -83,6 +79,8 @@ export const getStaticProps = createGetStaticProps(
 const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { locale = 'nl' } = useRouter();
+
+  console.dir(content);
 
   const { cover } = content;
   const { asset } = cover;

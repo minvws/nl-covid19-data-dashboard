@@ -104,6 +104,7 @@ export function RichContent({
             css={css({
               maxWidth: 'infoWidth',
               width: '100%',
+              my: 4,
             })}
           >
             <InlineTimeSeriesCharts configuration={configuration} />
@@ -171,5 +172,11 @@ const StyledPortableText = styled(PortableText)(
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    '& > ul': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      width: '100%',
+    },
   })
 );

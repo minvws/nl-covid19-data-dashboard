@@ -77,8 +77,7 @@ export default () =>
         'overDitDashboard'
       ),
       addListItem(GrDashboard, 'Actueel', 'topicalPage'),
-      addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveaus'),
-      addListItem(BsMap, 'Over de risiconiveaus 2', 'overRisicoNiveausNew'),
+      addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()
         .title('Veelgestelde vragen')
         .icon(MdQuestionAnswer)

@@ -37,7 +37,11 @@ export const getStaticProps = createGetStaticProps(
                 },
                 asset != undefined => {
                   "_type": 'image',
-                  "asset": asset->
+                  "asset": asset->,
+                  markDefs[]{
+                    ...,
+                    "asset": asset->
+                  }
                 },
                 _type == 'dashboardChart' || _type == 'dashboardKpi' => {
                   ...*[_id == ^._ref][0]

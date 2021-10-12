@@ -136,7 +136,7 @@ async function replaceReferencesInContent(
         );
       }
 
-      const doc = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+      const doc = await client.fetch(`*[_id == '${refId}'][0]`);
 
       await replaceReferencesInContent(doc, client, resolvedIds.concat(refId));
 
