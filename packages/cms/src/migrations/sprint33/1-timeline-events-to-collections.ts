@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getClient } from '../../client';
 
-const client = getClient('development');
+const client = getClient('migration');
 
-// Run this script from within your project folder in your terminal with: `sanity exec --with-user-token migrations/renameField.js`
+// Run this script from within your project folder in your terminal with: `sanity exec --with-user-token src/migrations/sprint33/1-timeline-events-to-collections.ts`
 //
 // This example shows how you may write a migration script that renames a field (name => fullname)
 // on a specific document type (author).
