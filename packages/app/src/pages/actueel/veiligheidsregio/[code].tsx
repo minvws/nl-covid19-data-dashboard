@@ -101,7 +101,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.veiligheidsregio_actueel;
 
   const dataHospitalIntake = data.hospital_nice;
-  console.log(dataHospitalIntake.last_value);
   const dataSitemap = useDataSitemap('vr', vrCode);
 
   const filteredAgeGroup18Plus =
