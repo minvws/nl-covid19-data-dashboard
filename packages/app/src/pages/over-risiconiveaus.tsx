@@ -47,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-function mergeKpiBlocks(blocks: RichContentBlock[]) {
+function mergeAdjacentKpiBlocks(blocks: RichContentBlock[]) {
   const result: RichContentBlock[] = [];
   for (let i = 0, ii = blocks.length; i < ii; i++) {
     const block = blocks[i];
@@ -72,7 +72,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, content } = props;
 
   if (isDefined(content.pageContent)) {
-    content.pageContent = mergeKpiBlocks(content.pageContent);
+    content.pageContent = mergeAdjacentKpiBlocks(content.pageContent);
   }
 
   return (
