@@ -52,18 +52,6 @@ export const features: Feature[] = [
     metricName: 'vaccine_coverage_per_age_group',
   },
   {
-    name: 'gmRankingHospital',
-    isEnabled: false,
-    dataScopes: ['gm'],
-    metricName: 'hospital_nice_sum',
-  },
-  {
-    name: 'gmRankingTested',
-    isEnabled: false,
-    dataScopes: ['gm'],
-    metricName: 'tested_overall_sum',
-  },
-  {
     name: 'nlVaccineCoverageEstimated',
     isEnabled: true,
     dataScopes: ['nl'],
