@@ -6,10 +6,12 @@ import { Box } from '../base';
 import { MaxWidth } from '../max-width';
 import { Anchor } from '../typography';
 import { useBreadcrumbs } from './logic/use-breadcrumbs';
+import { useRouter } from 'next/router';
 
 export function Breadcrumbs() {
   const breadcrumbs = useBreadcrumbs();
   const { siteText } = useIntl();
+  const { pathname } = useRouter();
 
   return (
     <Box
@@ -50,6 +52,7 @@ export function Breadcrumbs() {
                   typeof="WebPage"
                   css={css({ outlineOffset: 2 })}
                   aria-label={redirectLabel}
+                  aria-current={href === pathname ? 'location' : undefined}
                 >
                   <span property="name">{title}</span>
                 </Anchor>
