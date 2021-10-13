@@ -2,10 +2,12 @@ import { gmData, vrData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { createContext, ReactNode, useContext, useMemo } from 'react';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface Breadcrumb {
   href: string;
   title: string;
+  redirectLabel?: string;
 }
 
 export const BreadcrumbsDataContext = createContext<Record<string, string>>({});
@@ -49,6 +51,8 @@ export const BreadcrumbsDataProvider = ({
   );
 };
 
+// VR/GM pages that are NOT in Actueel should have a redirect label
+
 export function useBreadcrumbs(): Breadcrumb[] {
   const { pathname, query } = useRouter();
   const { siteText } = useIntl();
@@ -85,6 +89,52 @@ export function useBreadcrumbs(): Breadcrumb[] {
       ];
     };
 
+    const getRedirectLabel = (str: string): string | undefined => {
+      str = convertQueryParameter(str);
+
+      switch (str) {
+        case 'landelijk':
+        case 'actueel': {
+          return replaceVariablesInText(
+            siteText.breadcrumbs.redirects.template,
+            {
+              page: siteText.breadcrumbs.redirects[
+                str as keyof typeof siteText.breadcrumbs.redirects
+              ],
+            }
+          );
+        }
+        case 'veiligheidsregio':
+        case 'gemeente': {
+          // /gemeente and /veiligheidsregio and their /actueel counterparts do not redirect, return.
+          return undefined;
+        }
+        default: {
+          // actueel pages, apart from 'actueel' itself, have no redirects. Return early
+          if (pathname.includes('actueel')) return;
+
+          // this is the more complex case where we have a str with a gm/vr code
+          if (str.includes('GM') || str.includes('VR')) {
+            const pageTemplate = replaceVariablesInText(
+              siteText.breadcrumbs.redirects[
+                str.includes('GM') ? 'gemeente' : 'veiligheidsregio'
+              ],
+              {
+                name: ctx[str],
+              }
+            );
+
+            return replaceVariablesInText(
+              siteText.breadcrumbs.redirects.template,
+              {
+                page: pageTemplate,
+              }
+            );
+          }
+        }
+      }
+    };
+
     // '/' gets split into ['', '']. Make sure it doesn't.
     let arr = pathname === '/' ? [''] : pathname.split('/');
     // filter out '' when 'actueel' is in the path, as we'll have a double Actueel breadcrumb otherwise
@@ -97,8 +147,9 @@ export function useBreadcrumbs(): Breadcrumb[] {
           .join('/');
 
         return {
-          href: href === '' ? '/' : '/' + href,
+          href: href === '' ? '/' : href,
           title: getTitle(x),
+          redirectLabel: getRedirectLabel(x),
         };
       })
       .filter((x) => {

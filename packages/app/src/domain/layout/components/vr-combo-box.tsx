@@ -20,9 +20,11 @@ export function VrComboBox(props: VrComboBoxProps) {
       placeholder={siteText.common.zoekveld_placeholder_regio}
       options={vrData}
       onSelect={(region) =>
-        typeof getLink === 'function'
-          ? getLink(region.code)
-          : router.push(reverseRouter.vr.index(region.code))
+        router.push(
+          typeof getLink === 'function'
+            ? getLink(region.code)
+            : reverseRouter.vr.index(region.code)
+        )
       }
     />
   );
