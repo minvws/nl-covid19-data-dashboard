@@ -1,6 +1,6 @@
+import { vrData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { ComboBox } from '~/components/combo-box/combo-box';
-import { vrData } from '~/data/vr';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 

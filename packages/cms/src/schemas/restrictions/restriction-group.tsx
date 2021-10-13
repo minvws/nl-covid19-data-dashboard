@@ -1,13 +1,12 @@
+import { Icon as TIcon } from '@corona-dashboard/icons';
 import React from 'react';
 // @ts-expect-error
 import Tabs from 'sanity-plugin-tabs';
-import { Icon } from '../../components/icons/icon';
 import {
-  RestrictionIcon,
+  RestrictionIconInput,
+  RestrictionIconKey,
   restrictionIcons,
-} from '../../components/icons/icons';
-
-import { Icon as TIcon } from '@corona-dashboard/icons';
+} from '../../components/restriction-icon';
 
 export const restrictionGroup = {
   title: 'Maatregel groep',
@@ -25,7 +24,7 @@ export const restrictionGroup = {
       description: 'Welk icoon moet er naast de maatregelen groep staan?',
       name: 'icon',
       type: 'string',
-      inputComponent: Icon,
+      inputComponent: RestrictionIconInput,
     },
     {
       name: 'restrictions',
@@ -79,7 +78,7 @@ export const restrictionGroup = {
       title: 'title.nl',
       icon: 'icon',
     },
-    prepare(selection: { icon: RestrictionIcon; title: string }) {
+    prepare(selection: { icon: RestrictionIconKey; title: string }) {
       const { title, icon } = selection;
 
       const TheIcon = restrictionIcons[icon] as TIcon;
