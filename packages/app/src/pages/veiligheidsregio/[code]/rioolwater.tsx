@@ -1,4 +1,5 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -75,8 +76,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.articles}
           />
-
-          <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(text.warning_method) && (
+            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          )}
 
           <TwoKpiSection>
             <KpiTile

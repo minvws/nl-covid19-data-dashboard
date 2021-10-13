@@ -1,4 +1,5 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -82,7 +83,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(text.warning_method) && (
+            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          )}
 
           <TwoKpiSection>
             <KpiTile
