@@ -139,7 +139,12 @@ export function RichContent({
 
         return (
           <ContentWrapper>
-            <Box display="flex" css={css({ py: 3 })}>
+            <Box
+              spacing={{ _: 4, md: 2 }}
+              display="flex"
+              py={3}
+              flexDirection={{ _: 'column', md: 'row' }}
+            >
               <InlineKpi configuration={configurationLeft} />
               <InlineKpi configuration={configurationRight} />
             </Box>

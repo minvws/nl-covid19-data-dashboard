@@ -51,7 +51,7 @@ export function InlineKpi({ configuration }: InlineKpiProps) {
 
   return (
     <ErrorBoundary>
-      <Box css={css({ width: '50%' })}>
+      <Box width={{ _: '100%', md: '50%' }}>
         <KpiTile
           title={title}
           iconName={configuration.icon}
