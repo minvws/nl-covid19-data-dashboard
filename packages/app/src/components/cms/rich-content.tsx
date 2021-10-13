@@ -139,7 +139,7 @@ export function RichContent({
 
         return (
           <ContentWrapper>
-            <Box display="flex">
+            <Box display="flex" css={css({ py: 3 })}>
               <InlineKpi configuration={configurationLeft} />
               <InlineKpi configuration={configurationRight} />
             </Box>
