@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
 import useSWRImmutable from 'swr/immutable';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { PageKpi } from '~/components/page-kpi';
 import { Heading, Text } from '~/components/typography';
@@ -31,21 +31,20 @@ export function InlineKpi({ configuration }: InlineKpiProps) {
     return <Text>Loading...</Text>;
   }
 
-  const allData =
-    isDefined(configuration.differenceKey) && configuration.differenceKey.length
-      ? {
-          [configuration.metricName]: {
-            ...data,
-          },
-          difference: {
-            [configuration.differenceKey]: differenceData,
-          },
-        }
-      : {
-          [configuration.metricName]: {
-            ...data,
-          },
-        };
+  const allData = configuration.differenceKey?.length
+    ? {
+        [configuration.metricName]: {
+          ...data,
+        },
+        difference: {
+          [configuration.differenceKey]: differenceData,
+        },
+      }
+    : {
+        [configuration.metricName]: {
+          ...data,
+        },
+      };
 
   const title = get(siteText, configuration.titleKey.split('.'), '');
   const source = get(siteText, configuration.sourceKey.split('.'), '');
@@ -60,21 +59,19 @@ export function InlineKpi({ configuration }: InlineKpiProps) {
             source,
           }}
         >
-          {isDefined(configuration.differenceKey) &&
-            configuration.differenceKey.length && (
-              <PageKpi
-                data={allData}
-                metricName={configuration.metricName}
-                metricProperty={configuration.metricProperty}
-                differenceKey={configuration.differenceKey}
-                isMovingAverageDifference={
-                  configuration.isMovingAverageDifference
-                }
-                isAmount={configuration.isAmount}
-              />
-            )}
-          {(!isDefined(configuration.differenceKey) ||
-            !configuration.differenceKey.length) && (
+          {isPresent(differenceData) && (
+            <PageKpi
+              data={allData}
+              metricName={configuration.metricName}
+              metricProperty={configuration.metricProperty}
+              differenceKey={configuration.differenceKey}
+              isMovingAverageDifference={
+                configuration.isMovingAverageDifference
+              }
+              isAmount={configuration.isAmount}
+            />
+          )}
+          {!isPresent(differenceData) && (
             <PageKpi
               data={allData}
               metricName={configuration.metricName}
@@ -98,8 +95,13 @@ function useDifferenceData(configuration: KpiConfiguration) {
     }/difference/${differenceKey}`,
     (url: string) =>
       fetch(url)
-        .then((_) => _.json())
-        .catch((_) => undefined)
+        .then((_) => {
+          if (!_.ok) {
+            return null;
+          }
+          return _.json();
+        })
+        .catch((_) => null)
   );
 }
 
