@@ -19,6 +19,7 @@ import {
 import { RichContentBlock } from '~/types/cms';
 
 interface OverRisiconiveausData {
+  title: string;
   pageContent: RichContentBlock[];
 }
 
@@ -28,6 +29,7 @@ export const getStaticProps = createGetStaticProps(
     const { locale } = context;
     return `*[_type == 'overRisicoNiveausNew']
     {
+      ...,
       "pageContent": {
             "_type": content._type,
             "${locale}": [
@@ -95,7 +97,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
       <Content>
         <Box width="100%" maxWidth="maxWidthText">
-          <Heading level={1}>Risiconiveaus</Heading>
+          <Heading level={1}>{content.title}</Heading>
         </Box>
         <Box
           textVariant="body1"
