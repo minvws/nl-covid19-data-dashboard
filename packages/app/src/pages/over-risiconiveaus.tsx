@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
@@ -17,6 +16,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { RichContentBlock } from '~/types/cms';
+import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
 
 interface OverRisiconiveausData {
   title: string;
@@ -49,33 +49,11 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-function mergeAdjacentKpiBlocks(blocks: RichContentBlock[]) {
-  const result: RichContentBlock[] = [];
-  for (let i = 0, ii = blocks.length; i < ii; i++) {
-    const block = blocks[i];
-    if (
-      block._type === 'kpiConfiguration' &&
-      blocks[i + 1]?._type === 'kpiConfiguration'
-    ) {
-      block._type = 'kpiConfigurations';
-      (block as any).kpi = {
-        _type: 'dashboardKpis',
-        configs: [(block as any).kpi.config, (blocks[i + 1] as any).kpi.config],
-      };
-      i++;
-    }
-    result.push(block);
-  }
-  return result;
-}
-
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
 
-  if (isDefined(content.pageContent)) {
-    content.pageContent = mergeAdjacentKpiBlocks(content.pageContent);
-  }
+  content.pageContent = mergeAdjacentKpiBlocks(content.pageContent);
 
   return (
     <Layout
