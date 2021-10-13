@@ -32,7 +32,7 @@ export function Breadcrumbs() {
         aria-label={siteText.breadcrumbs.label}
       >
         <ol vocab="http://schema.org/" typeof="BreadcrumbList">
-          {breadcrumbs.map(({ title, href }, index) => (
+          {breadcrumbs.map(({ title, href, redirectLabel }, index) => (
             <li
               key={href}
               css={css({
@@ -49,6 +49,7 @@ export function Breadcrumbs() {
                   property="item"
                   typeof="WebPage"
                   css={css({ outlineOffset: 2 })}
+                  aria-label={redirectLabel}
                 >
                   <span property="name">{title}</span>
                 </Anchor>
