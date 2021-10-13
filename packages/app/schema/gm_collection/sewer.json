@@ -23,7 +23,7 @@
       "pattern": "^GM[0-9]+$"
     },
     "average": {
-      "type": "number"
+      "type": "integer"
     },
     "total_installation_count": {
       "type": "number"
