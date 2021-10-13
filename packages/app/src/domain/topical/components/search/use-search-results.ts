@@ -1,8 +1,7 @@
+import { gmData, vrData } from '@corona-dashboard/common';
 import { matchSorter } from 'match-sorter';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { vrData } from '~/data/vr';
-import { gmData } from '~/data/gm';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export interface Option {

@@ -1,3 +1,4 @@
+import { ChartConfiguration, KpiConfiguration } from '@corona-dashboard/common';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
@@ -20,11 +21,34 @@ import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { ContentImage } from './content-image';
+import { InlineKpi } from './inline-kpi';
+import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
   imageSizes?: number[][];
+}
+
+interface ChartConfigNode {
+  chart: {
+    _type: string;
+    config: string;
+  };
+}
+
+interface KpiConfigNode {
+  kpi: {
+    _type: string;
+    config: string;
+  };
+}
+
+interface KpisConfigNode {
+  kpi: {
+    _type: string;
+    configs: string[];
+  };
 }
 
 export function RichContent({
@@ -77,6 +101,56 @@ export function RichContent({
           </ContentWrapper>
         );
       },
+      chartConfiguration: (props: { node: ChartConfigNode }) => {
+        const configuration = JSON.parse(
+          props.node.chart.config
+        ) as ChartConfiguration;
+
+        return (
+          <Box
+            css={css({
+              maxWidth: 'infoWidth',
+              width: '100%',
+              my: 4,
+            })}
+          >
+            <InlineTimeSeriesCharts configuration={configuration} />
+          </Box>
+        );
+      },
+      kpiConfiguration: (props: { node: KpiConfigNode }) => {
+        const configuration = JSON.parse(
+          props.node.kpi.config
+        ) as KpiConfiguration;
+
+        return (
+          <ContentWrapper>
+            <InlineKpi configuration={configuration} />
+          </ContentWrapper>
+        );
+      },
+      kpiConfigurations: (props: { node: KpisConfigNode }) => {
+        const configurationLeft = JSON.parse(
+          props.node.kpi.configs[0]
+        ) as KpiConfiguration;
+        const configurationRight = JSON.parse(
+          props.node.kpi.configs[1]
+        ) as KpiConfiguration;
+
+        return (
+          <ContentWrapper>
+            <Box
+              spacing={{ _: 4, md: 2 }}
+              display="flex"
+              py={3}
+              flexDirection={{ _: 'column', md: 'row' }}
+            >
+              <InlineKpi configuration={configurationLeft} />
+              <InlineKpi configuration={configurationRight} />
+            </Box>
+          </ContentWrapper>
+        );
+      },
     },
     marks: {
       inlineAttachment: InlineAttachmentMark,
@@ -120,4 +194,18 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   );
 }
 
-const StyledPortableText = styled(PortableText)(css(nestedHtml));
+const StyledPortableText = styled(PortableText)(
+  css({
+    ...nestedHtml,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '& > ul': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      width: '100%',
+    },
+  })
+);

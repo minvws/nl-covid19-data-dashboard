@@ -58,6 +58,20 @@ const actionsByDocumentType = {
     DuplicateAction,
     DeleteAction,
   ],
+  chartConfiguration: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
+  kpiConfiguration: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
 };
 
 type DocumentType = keyof typeof actionsByDocumentType;

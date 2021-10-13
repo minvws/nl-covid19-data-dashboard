@@ -49,16 +49,14 @@ export const getStaticProps = createGetStaticProps(
         ...,
         "cover": {
           ...cover,
-          "asset": cover.asset->
-        },
+          "${locale}": [
+            ...cover.${locale}[]
+          ]
+        },  
         "intro": {
           ...intro,
           "${locale}": [
             ...intro.${locale}[]
-            {
-              ...,
-              "asset": asset->
-             },
           ]
         },
         "content": {
@@ -66,13 +64,13 @@ export const getStaticProps = createGetStaticProps(
           "${locale}": [
             ...content.${locale}[]
             {
-              ...,
-              "asset": asset->,
-              markDefs[]{
-                ...,
-                "asset": asset->
+              _type != 'dashboardChart' && _type != 'dashboardKpi' => {
+                ...
+              },
+              _type == 'dashboardChart' || _type == 'dashboardKpi' => {
+                ...*[_id == ^._ref][0]
               }
-            },
+            }  
           ]
         }
       }

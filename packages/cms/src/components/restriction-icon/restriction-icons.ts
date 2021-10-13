@@ -1,6 +1,6 @@
 import * as Icons from '@corona-dashboard/icons';
 
-export type RestrictionIcon = keyof typeof restrictionIcons;
+export type RestrictionIconKey = keyof typeof restrictionIcons;
 
 export const restrictionIcons = {
   '41_er_op_uit_1': null,

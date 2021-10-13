@@ -1,9 +1,7 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, gmData, vrData } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import { globby } from 'globby';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { gmData } from '~/data/gm';
-import { vrData } from '~/data/vr';
 
 export default function SitemapIndex() {
   return null;

@@ -44,8 +44,8 @@ export function ContentImage({
         spacing={3}
         display="flex"
         maxWidth={IMAGE_MAX_WIDTH}
-        mx="auto"
         textAlign="center"
+        mx="auto"
       >
         <ContentBlock>
           <SanityImageTile
