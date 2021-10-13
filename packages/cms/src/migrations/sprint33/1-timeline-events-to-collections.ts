@@ -61,7 +61,7 @@ function createCollections(docs: any[]) {
 }
 
 function buildPatches(
-  collections: Awaited<ReturnType<typeof createCollections>>
+  collections: { collection: any; timeSeriesId: string }[]
 ) {
   return collections.map((collection) => ({
     id: collection.timeSeriesId,
