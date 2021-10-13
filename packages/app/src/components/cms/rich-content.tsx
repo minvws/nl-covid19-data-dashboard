@@ -44,6 +44,13 @@ interface KpiConfigNode {
   };
 }
 
+interface KpisConfigNode {
+  kpi: {
+    _type: string;
+    configs: string[];
+  };
+}
+
 export function RichContent({
   contentWrapper,
   blocks,
@@ -119,6 +126,23 @@ export function RichContent({
         return (
           <ContentWrapper>
             <InlineKpi configuration={configuration} />
+          </ContentWrapper>
+        );
+      },
+      kpiConfigurations: (props: { node: KpisConfigNode }) => {
+        const configurationLeft = JSON.parse(
+          props.node.kpi.configs[0]
+        ) as KpiConfiguration;
+        const configurationRight = JSON.parse(
+          props.node.kpi.configs[1]
+        ) as KpiConfiguration;
+
+        return (
+          <ContentWrapper>
+            <Box display="flex">
+              <InlineKpi configuration={configurationLeft} />
+              <InlineKpi configuration={configurationRight} />
+            </Box>
           </ContentWrapper>
         );
       },

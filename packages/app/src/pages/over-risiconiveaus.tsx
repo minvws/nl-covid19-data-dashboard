@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
@@ -18,7 +19,7 @@ import {
 import { RichContentBlock } from '~/types/cms';
 
 interface OverRisiconiveausData {
-  content: RichContentBlock[];
+  pageContent: RichContentBlock[];
 }
 
 export const getStaticProps = createGetStaticProps(
@@ -27,7 +28,7 @@ export const getStaticProps = createGetStaticProps(
     const { locale } = context;
     return `*[_type == 'overRisicoNiveausNew']
     {
-      "content": {
+      "pageContent": {
             "_type": content._type,
             "${locale}": [
               ...content.${locale}[]
@@ -46,9 +47,33 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+function mergeKpiBlocks(blocks: RichContentBlock[]) {
+  const result: RichContentBlock[] = [];
+  for (let i = 0, ii = blocks.length; i < ii; i++) {
+    const block = blocks[i];
+    if (
+      block._type === 'kpiConfiguration' &&
+      blocks[i + 1]?._type === 'kpiConfiguration'
+    ) {
+      block._type = 'kpiConfigurations';
+      (block as any).kpi = {
+        _type: 'dashboardKpis',
+        configs: [(block as any).kpi.config, (blocks[i + 1] as any).kpi.config],
+      };
+      i++;
+    }
+    result.push(block);
+  }
+  return result;
+}
+
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
+
+  if (isDefined(content.pageContent)) {
+    content.pageContent = mergeKpiBlocks(content.pageContent);
+  }
 
   return (
     <Layout
@@ -82,7 +107,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           })}
         >
           <RichContent
-            blocks={content.content}
+            blocks={content.pageContent}
             contentWrapper={RichContentWrapper}
           />
         </Box>
