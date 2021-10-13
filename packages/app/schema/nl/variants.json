@@ -38,23 +38,31 @@
       "title": "nl_variants_variant_value",
       "additionalProperties": false,
       "required": [
-        "percentage",
         "occurrence",
-        "is_variant_of_concern",
+        "is_variant_of_concern_or_interest",
+        "is_variant_of_concern_or_interest_percentage",
+        "is_historical_significance",
+        "historical_significance_percentage",
         "sample_size",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "percentage": {
-          "type": "number"
-        },
         "occurrence": {
           "type": "integer"
         },
-        "is_variant_of_concern": {
+        "is_variant_of_concern_or_interest": {
           "type": "boolean"
+        },
+        "is_variant_of_concern_or_interest_percentage": {
+          "type": "number"
+        },
+        "is_historical_significance": {
+          "type": "boolean"
+        },
+        "historical_significance_percentage": {
+          "type": "number"
         },
         "sample_size": {
           "type": "integer"
