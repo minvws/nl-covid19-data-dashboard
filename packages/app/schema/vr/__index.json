@@ -19,6 +19,8 @@
     "elderly_at_home",
     "disability_care",
     "behavior",
+    "tested_overall_sum",
+    "hospital_nice_sum",
     "g_number",
     "situations",
     "vaccine_coverage_per_age_group",
@@ -79,6 +81,12 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
+    },
+    "tested_overall_sum": {
+      "$ref": "tested_overall_sum.json"
+    },
+    "hospital_nice_sum": {
+      "$ref": "hospital_nice_sum.json"
     },
     "situations": {
       "$ref": "situations.json"
