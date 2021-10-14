@@ -72,7 +72,7 @@ export function VaccinePageIntroductionNl({
                       values={data.vaccine_administered_total.values}
                       seriesConfig={[
                         {
-                          type: 'line',
+                          type: 'area',
                           metricProperty: 'estimated',
                           color: colors.data.primary,
                           label: '',
