@@ -3,9 +3,6 @@
   "title": "nl_behavior_per_age_group",
   "type": "object",
   "properties": {
-    "avoid_crowds_compliance": { "$ref": "#/definitions/value" },
-    "avoid_crowds_support": { "$ref": "#/definitions/value" },
-
     "keep_distance_compliance": { "$ref": "#/definitions/value" },
     "keep_distance_support": { "$ref": "#/definitions/value" },
 
@@ -26,8 +23,6 @@
     "date_end_unix": { "type": "integer" }
   },
   "required": [
-    "avoid_crowds_compliance",
-    "avoid_crowds_support",
     "keep_distance_compliance",
     "keep_distance_support",
     "sneeze_cough_elbow_compliance",
