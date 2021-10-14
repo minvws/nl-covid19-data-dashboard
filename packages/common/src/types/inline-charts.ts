@@ -10,7 +10,24 @@ export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 export type ChartConfiguration = Omit<
   Required<PartialChartConfiguration>,
   'code'
-> & { code?: string };
+> & { code?: string; dataOptions?: DataOptionsConfiguration };
+
+export type TimespanAnnotationConfiguration = {
+  fill?: 'solid' | 'hatched' | 'dotted';
+  start?: number;
+  end?: number;
+  labelKey?: string;
+  shortLabelKey?: string;
+  cutValuesForMetricProperties?: string[];
+};
+
+export interface DataOptionsConfiguration {
+  valueAnnotationKey?: string;
+  forcedMaximumValue?: number;
+  isPercentage?: boolean;
+  renderNullAsZero?: boolean;
+  timespanAnnotations?: TimespanAnnotationConfiguration[];
+}
 
 export type PartialChartConfiguration = {
   area?: AreaType;
@@ -20,6 +37,7 @@ export type PartialChartConfiguration = {
   accessibilityKey?: string;
   code?: string;
   sourceKey?: string;
+  dataOptions?: DataOptionsConfiguration;
 };
 
 export type MetricPropertyConfig = {
@@ -33,8 +51,13 @@ export type MetricPropertyConfig = {
     | 'stacked-area'
     | 'gapped-stacked-area'
     | 'invisible';
-  curve?: 'linear' | 'step';
   labelKey: string;
+  curve?: 'linear' | 'step';
+  color?: string;
+  fillOpacity?: number;
+  strokeWidth?: number;
+  shortLabelKey?: string;
+  mixBlendMode?: string;
 };
 
 export type KpiConfiguration = Omit<

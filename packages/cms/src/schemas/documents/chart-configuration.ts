@@ -45,7 +45,9 @@ function isValid(chart: any) {
       message: 'Chart config is undefined',
     };
   }
+
   const chartConfig = JSON.parse(chart.config) as PartialChartConfiguration;
+
   if (!isDefined(chartConfig)) {
     return {
       message: 'Chart config is undefined',
@@ -57,15 +59,19 @@ function isValid(chart: any) {
   if (!hasValue(chartConfig.accessibilityKey)) {
     errors.push('Accessibility Key is verplicht');
   }
+
   if (!hasValue(chartConfig.sourceKey)) {
     errors.push('Source key is verplicht');
   }
+
   if (!hasValue(chartConfig.area)) {
     errors.push('Gebied is verplicht');
   }
+
   if (!hasValue(chartConfig.metricName)) {
     errors.push('Metriek naam is verplicht');
   }
+
   if (
     ['gm', 'vr'].includes(chartConfig.area ?? '') &&
     !isDefined(chartConfig.code)
@@ -80,13 +86,60 @@ function isValid(chart: any) {
   if (!hasValue(chartConfig.timeframe)) {
     errors.push('Timeframe (Toon alles/Toon laatste 5 weken) is verplicht');
   }
+
   if ((chartConfig.metricPropertyConfigs?.length ?? 0) === 0) {
     errors.push('Er moet minstens 1 metriek property geselecteerd zijn');
   }
+
   if (
-    !chartConfig.metricPropertyConfigs?.every((x) => x.labelKey?.length > 0)
+    !chartConfig.metricPropertyConfigs?.every(
+      (x) => (x.labelKey?.length ?? 0) > 0
+    )
   ) {
     errors.push('Iedere metriek property heeft een geldige label key nodig');
+  }
+
+  if (
+    !chartConfig.metricPropertyConfigs?.every((x) => (x.color?.length ?? 0) > 0)
+  ) {
+    errors.push('Iedere metriek property heeft een geldige kleur nodig');
+  }
+
+  if (
+    !chartConfig.dataOptions?.timespanAnnotations?.every((x) =>
+      hasValue(x.fill)
+    )
+  ) {
+    errors.push(
+      'Iedere timespanAnnotations heeft een geldige fill waarde nodig'
+    );
+  }
+  if (
+    !chartConfig.dataOptions?.timespanAnnotations?.every((x) =>
+      hasValue(x.labelKey)
+    )
+  ) {
+    errors.push(
+      'Iedere timespanAnnotations heeft een geldige labelKey waarde nodig'
+    );
+  }
+  if (
+    !chartConfig.dataOptions?.timespanAnnotations?.every((x) =>
+      isDefined(x.start)
+    )
+  ) {
+    errors.push(
+      'Iedere timespanAnnotations heeft een geldige start waarde nodig'
+    );
+  }
+  if (
+    !chartConfig.dataOptions?.timespanAnnotations?.every((x) =>
+      isDefined(x.end)
+    )
+  ) {
+    errors.push(
+      'Iedere timespanAnnotations heeft een geldige end waarde nodig'
+    );
   }
 
   return errors.length ? errors.join(', ') : true;

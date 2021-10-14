@@ -49,8 +49,8 @@ export function KpiIconInput(props: KpiIconInputProps) {
         {TheIcon === undefined ? (
           <Text>Er is geen icoon geselecteerd</Text>
         ) : (
-          <Box style={{ width: '40px', height: '40px', marginBottom: '1rem' }}>
-            <TheIcon />
+          <Box style={{ width: '50px', height: '50px' }}>
+            <TheIcon width="50" height="50" />
           </Box>
         )}
 
@@ -75,7 +75,7 @@ export function KpiIconInput(props: KpiIconInputProps) {
                   onClick={() => onChange(iconName2filename[id])}
                   title={id}
                 >
-                  <GridIcon />
+                  <GridIcon width="35" height="35" color="black" />
                   <Radio checked={value === iconName2filename[id]} readOnly />
                 </Flex>
               ))}
