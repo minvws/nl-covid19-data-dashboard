@@ -65,9 +65,10 @@ export function VaccinePageIntroductionNl({
                     timeframe="all"
                     title={text.grafiek_gezette_prikken.titel}
                     values={data.vaccine_administered_total.values}
+                    displayTooltipValueOnly
                     seriesConfig={[
                       {
-                        type: 'line',
+                        type: 'area',
                         metricProperty: 'estimated',
                         color: colors.data.primary,
                         label: '',
