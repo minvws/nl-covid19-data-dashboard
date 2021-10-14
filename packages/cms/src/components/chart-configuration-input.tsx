@@ -148,6 +148,8 @@ export const ChartConfigurationInput = React.forwardRef(
       ];
       newArray.push({
         fill: 'solid',
+        start: Infinity,
+        end: Infinity,
       });
       changeDataOptionProp('timespanAnnotations', undefined, newArray);
     };

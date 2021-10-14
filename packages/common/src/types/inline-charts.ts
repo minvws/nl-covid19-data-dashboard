@@ -13,9 +13,9 @@ export type ChartConfiguration = Omit<
 > & { code?: string; dataOptions?: DataOptionsConfiguration };
 
 export type TimespanAnnotationConfiguration = {
-  fill?: 'solid' | 'hatched' | 'dotted';
-  start?: number;
-  end?: number;
+  fill: 'solid' | 'hatched' | 'dotted';
+  start: number;
+  end: number;
   labelKey?: string;
   shortLabelKey?: string;
   cutValuesForMetricProperties?: string[];

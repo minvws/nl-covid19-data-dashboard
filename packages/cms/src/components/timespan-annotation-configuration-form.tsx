@@ -61,7 +61,7 @@ export function TimespanAnnotationConfigurationForm(
           <Label>Start index</Label>
           <TextInput
             type="number"
-            value={timespanConfig.start ?? 0}
+            value={timespanConfig.start ?? Infinity}
             onChange={onChangeProp('start')}
           />
         </Grid>
