@@ -11,6 +11,7 @@ type MiniTrendChartProps<T extends TimestampedValue = TimestampedValue> = {
   seriesConfig: SeriesConfig<T>;
   dataOptions?: DataOptions;
   values: T[];
+  displayTooltipValueOnly?: boolean;
 };
 
 export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
@@ -19,6 +20,7 @@ export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
   dataOptions,
   timeframe = '5weeks',
   values,
+  displayTooltipValueOnly,
 }: MiniTrendChartProps<T>) {
   const { sm } = useBreakpoints(true);
 
@@ -28,6 +30,7 @@ export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
       initialWidth={400}
       minHeight={sm ? 180 : 140}
       timeframe={timeframe}
+      displayTooltipValueOnly={displayTooltipValueOnly}
       xTickNumber={2}
       values={values}
       numGridLines={3}
