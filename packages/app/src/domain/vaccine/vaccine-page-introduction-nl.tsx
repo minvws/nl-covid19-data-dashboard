@@ -67,6 +67,7 @@ export function VaccinePageIntroductionNl({
                         key: 'vaccine_introduction_administrations_over_time',
                       }}
                       timeframe="all"
+                      displayTooltipValueOnly
                       title={text.grafiek_gezette_prikken.titel}
                       values={data.vaccine_administered_total.values}
                       seriesConfig={[
