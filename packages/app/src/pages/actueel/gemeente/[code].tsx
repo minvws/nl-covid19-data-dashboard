@@ -170,18 +170,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               />
 
               <MiniTileSelectorLayout
-                link={{
-                  text: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.text,
-                    {
-                      municipalityName: municipalityName,
-                    }
-                  ),
-                  href: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.href,
-                    { gmCode }
-                  ),
-                }}
                 menuItems={[
                   {
                     label:

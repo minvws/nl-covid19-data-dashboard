@@ -158,10 +158,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
 
               <MiniTileSelectorLayout
-                link={{
-                  ...text.secties.actuele_situatie.link,
-                  href: reverseRouter.nl.index(),
-                }}
                 menuItems={[
                   {
                     label:
