@@ -351,7 +351,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     {
                       type: 'area',
-                      metricProperty: 'admissions_on_date_of_reporting',
+                      metricProperty: 'admissions_on_date_of_admission',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,
