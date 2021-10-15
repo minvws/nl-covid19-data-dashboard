@@ -1,12 +1,11 @@
 import { assert } from '@corona-dashboard/common';
 import { geoConicConformal, geoMercator } from 'd3-geo';
 import fs from 'fs';
-import imagemin from 'imagemin';
-import imageminPngquant from 'imagemin-pngquant';
 import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
+import sharp from 'sharp';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
 import {
@@ -227,11 +226,5 @@ async function generateChoroplethImage(
 }
 
 async function compressImage(blob: Buffer) {
-  return await imagemin.buffer(blob, {
-    plugins: [
-      imageminPngquant({
-        quality: [0.6, 0.8],
-      }),
-    ],
-  });
+  return await sharp(blob).png({ quality: 30 }).toBuffer();
 }
