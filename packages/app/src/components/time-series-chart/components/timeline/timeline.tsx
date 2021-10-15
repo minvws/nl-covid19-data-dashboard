@@ -55,8 +55,6 @@ export const Timeline = memo(function Timeline({
 
   if (!width) return null;
 
-  console.log(timelineState);
-
   return (
     <Box
       ref={ref}
