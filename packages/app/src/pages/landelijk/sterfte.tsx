@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { AgeDemographic } from '~/components/age-demographic';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -25,7 +26,6 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,

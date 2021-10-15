@@ -1,4 +1,4 @@
-import { getLastFilledValue } from '@corona-dashboard/common';
+import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useState } from 'react';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -39,9 +39,8 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(

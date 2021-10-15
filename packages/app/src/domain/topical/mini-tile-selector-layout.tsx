@@ -1,4 +1,9 @@
-import { KeysOfType, TimestampedValue, Unpack } from '@corona-dashboard/common';
+import {
+  colors,
+  KeysOfType,
+  TimestampedValue,
+  Unpack,
+} from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
@@ -12,7 +17,7 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { SparkBars } from '~/components/spark-bars';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors, space } from '~/style/theme';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';

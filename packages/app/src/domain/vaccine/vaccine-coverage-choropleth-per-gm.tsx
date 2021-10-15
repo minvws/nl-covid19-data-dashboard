@@ -1,5 +1,6 @@
 import {
   assert,
+  colors,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
@@ -18,7 +19,6 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';

@@ -9,7 +9,7 @@ export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
 export type ChartConfiguration = Omit<
   Required<PartialChartConfiguration>,
-  'code'
+  'code' | 'dataOptions'
 > & { code?: string; dataOptions?: DataOptionsConfiguration };
 
 export type TimespanAnnotationConfiguration = {

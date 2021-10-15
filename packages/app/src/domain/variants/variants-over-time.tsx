@@ -1,4 +1,4 @@
-import { TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { Spacer } from '~/components/base';
 import { InteractiveLegend } from '~/components/interactive-legend';
@@ -13,8 +13,7 @@ import {
 import { InlineText } from '~/components/typography';
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useList } from '~/utils/use-list';
 
 interface VariantsOverTimeProps {

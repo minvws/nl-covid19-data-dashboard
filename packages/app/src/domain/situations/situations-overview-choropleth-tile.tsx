@@ -1,5 +1,6 @@
 import {
   ChoroplethThresholdsValue,
+  colors,
   VrCollectionSituations,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -15,7 +16,6 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';

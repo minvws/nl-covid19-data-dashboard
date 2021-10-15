@@ -1,7 +1,7 @@
+import { colors } from '@corona-dashboard/common';
 import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
 import { CountryOption } from './context';

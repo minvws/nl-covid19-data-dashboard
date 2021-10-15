@@ -1,9 +1,9 @@
+import { colors } from '@corona-dashboard/common';
 import { MapType } from '~/components/choropleth/logic';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
 } from '~/domain/behavior/logic/behavior-types';
-import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {

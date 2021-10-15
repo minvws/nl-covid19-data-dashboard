@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -24,7 +25,6 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';

@@ -1,11 +1,13 @@
-import { NlVaccineAdministeredRateMovingAverageValue } from '@corona-dashboard/common';
+import {
+  colors,
+  NlVaccineAdministeredRateMovingAverageValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { shuffle } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 

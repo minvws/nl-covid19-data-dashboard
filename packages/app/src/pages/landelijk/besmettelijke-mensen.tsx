@@ -1,6 +1,6 @@
-import { getLastFilledValue } from '@corona-dashboard/common';
-import { isEmpty } from 'lodash';
+import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Ziektegolf } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -22,7 +22,6 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,

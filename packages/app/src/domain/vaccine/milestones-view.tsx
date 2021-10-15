@@ -1,13 +1,13 @@
+import { colors } from '@corona-dashboard/common';
+import { Vaccine } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Vaccine } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { RichContentBlock } from '~/types/cms';
 

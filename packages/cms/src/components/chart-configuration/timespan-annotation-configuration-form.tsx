@@ -50,14 +50,14 @@ export function TimespanAnnotationConfigurationForm(
           value={timespanConfig.start}
           onChange={onChangeProp('start')}
           inputProps={{ type: 'number' }}
-          onReset={() => changeProp('start', undefined)}
+          onReset={() => changeProp('start', Infinity)}
         />
         <PropertyInput
           label="End index"
           value={timespanConfig.end}
           onChange={onChangeProp('end')}
           inputProps={{ type: 'number', min: 0 }}
-          onReset={() => changeProp('end', undefined)}
+          onReset={() => changeProp('end', Infinity)}
         />
         <PropertyInput
           label="Label key"

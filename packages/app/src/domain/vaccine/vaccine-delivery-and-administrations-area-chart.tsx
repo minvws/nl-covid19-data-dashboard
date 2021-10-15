@@ -1,11 +1,10 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, colors } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { useMemo } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { StackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
