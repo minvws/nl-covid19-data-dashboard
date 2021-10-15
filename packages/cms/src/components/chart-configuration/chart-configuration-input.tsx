@@ -9,9 +9,7 @@ import {
   Box,
   Button,
   Card,
-  Checkbox,
   Flex,
-  Grid,
   Label,
   Radio,
   Stack,
@@ -24,6 +22,7 @@ import FormField from 'part:@sanity/components/formfields/default';
 import React, { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { dataStructure } from '../../data/data-structure';
+import { CheckboxInput } from './checkbox-input';
 import { useChangeMethods } from './hooks/use-change-methods';
 import { MetricPropertyConfigForm } from './metric-property-config-form';
 import { PropertyInput } from './property-input';
@@ -138,14 +137,14 @@ export const ChartConfigurationInput = React.forwardRef(
           <Tab
             aria-controls="config-panel"
             id="config-tab"
-            label="Configuration"
+            label="Configuratie"
             onClick={() => setId('config')}
             selected={id === 'config'}
           />
           <Tab
             aria-controls="options-panel"
             id="options-tab"
-            label="Options"
+            label="Data opties"
             onClick={() => setId('options')}
             selected={id === 'options'}
           />
@@ -271,97 +270,99 @@ export const ChartConfigurationInput = React.forwardRef(
           hidden={id !== 'options'}
           id="options-panel"
         >
-          <Card marginBottom={3}>
-            <Grid gap={[2, 2, 2, 2]}>
-              <Label>Value annotation key</Label>
-              <TextInput
-                type="text"
-                value={configuration.dataOptions?.valueAnnotationKey}
-                onChange={onChangeDataOptionProp('valueAnnotationKey')}
-              />
-            </Grid>
-          </Card>
-          <Card marginBottom={3}>
-            <Grid gap={[2, 2, 2, 2]}>
-              <Label>Forced maximum value</Label>
-              <TextInput
-                type="number"
-                value={configuration.dataOptions?.forcedMaximumValue}
-                onChange={onChangeDataOptionProp('forcedMaximumValue')}
-              />
-            </Grid>
-          </Card>
-          <Card marginBottom={3}>
-            <Grid gap={[2, 2, 2, 2]}>
-              <Label>Value is percentage</Label>
-              <Checkbox
-                checked={configuration.dataOptions?.isPercentage}
-                onChange={() =>
-                  changeDataOptionProp(
-                    'isPercentage',
-                    undefined,
-                    !Boolean(configuration.dataOptions?.isPercentage)
-                  )
-                }
-              />
-            </Grid>
-          </Card>
-          <Card marginBottom={3}>
-            <Grid gap={[2, 2, 2, 2]}>
-              <Label>Render null as zero</Label>
-              <Checkbox
-                checked={configuration.dataOptions?.renderNullAsZero}
-                onChange={() =>
-                  changeDataOptionProp(
-                    'renderNullAsZero',
-                    undefined,
-                    !Boolean(configuration.dataOptions?.renderNullAsZero)
-                  )
-                }
-              />
-            </Grid>
-          </Card>
-          <Card>
-            <Button onClick={addTimespanAnnotation}>
-              Timespan annotation toevoegen
-            </Button>
-          </Card>
-          {isDefined(configuration.dataOptions?.timespanAnnotations) && (
-            <Stack space={3}>
-              {configuration.dataOptions?.timespanAnnotations.map(
-                (x, index) => (
-                  <TimespanAnnotationConfigurationForm
-                    key={index}
-                    timespanConfig={x}
-                    onChange={(value) => {
-                      const newList = [
-                        ...(configuration.dataOptions?.timespanAnnotations ??
-                          []),
-                      ];
-                      newList[index] = value;
-                      changeDataOptionProp(
-                        'timespanAnnotations',
-                        undefined,
-                        newList
-                      );
-                    }}
-                    onDelete={() => {
-                      const newList = [
-                        ...(configuration.dataOptions?.timespanAnnotations ??
-                          []),
-                      ];
-                      newList.splice(index, 1);
-                      changeDataOptionProp(
-                        'timespanAnnotations',
-                        undefined,
-                        newList
-                      );
-                    }}
-                  />
+          <Stack space={3} marginTop={2}>
+            <PropertyInput
+              value={configuration.dataOptions?.valueAnnotationKey}
+              label="Value annotation key"
+              onChange={onChangeDataOptionProp('valueAnnotationKey')}
+              onReset={() =>
+                changeDataOptionProp('valueAnnotationKey', undefined, undefined)
+              }
+            />
+            <PropertyInput
+              value={configuration.dataOptions?.forcedMaximumValue}
+              label="Forced maximum value"
+              onChange={onChangeDataOptionProp('forcedMaximumValue')}
+              onReset={() =>
+                changeDataOptionProp('forcedMaximumValue', undefined, undefined)
+              }
+              inputProps={{ type: 'number', min: 0 }}
+            />
+            <CheckboxInput
+              label="Value is percentage"
+              value={Boolean(configuration.dataOptions?.isPercentage)}
+              onToggle={() =>
+                changeDataOptionProp(
+                  'isPercentage',
+                  undefined,
+                  !Boolean(configuration.dataOptions?.isPercentage)
                 )
-              )}
-            </Stack>
-          )}
+              }
+              onReset={() =>
+                changeDataOptionProp('isPercentage', undefined, undefined)
+              }
+            />
+            <CheckboxInput
+              label="Render null als nul (0)"
+              value={Boolean(configuration.dataOptions?.renderNullAsZero)}
+              onToggle={() =>
+                changeDataOptionProp(
+                  'renderNullAsZero',
+                  undefined,
+                  !Boolean(configuration.dataOptions?.renderNullAsZero)
+                )
+              }
+              onReset={() =>
+                changeDataOptionProp('renderNullAsZero', undefined, undefined)
+              }
+            />
+            <Card>
+              <Button onClick={addTimespanAnnotation}>
+                Timespan annotation toevoegen
+              </Button>
+            </Card>
+            {isDefined(configuration.dataOptions?.timespanAnnotations) && (
+              <>
+                <Card>
+                  <Label>Timespan annotaties</Label>
+                </Card>
+                <Stack space={3}>
+                  {configuration.dataOptions?.timespanAnnotations.map(
+                    (x, index) => (
+                      <TimespanAnnotationConfigurationForm
+                        key={index}
+                        timespanConfig={x}
+                        onChange={(value) => {
+                          const newList = [
+                            ...(configuration.dataOptions
+                              ?.timespanAnnotations ?? []),
+                          ];
+                          newList[index] = value;
+                          changeDataOptionProp(
+                            'timespanAnnotations',
+                            undefined,
+                            newList
+                          );
+                        }}
+                        onDelete={() => {
+                          const newList = [
+                            ...(configuration.dataOptions
+                              ?.timespanAnnotations ?? []),
+                          ];
+                          newList.splice(index, 1);
+                          changeDataOptionProp(
+                            'timespanAnnotations',
+                            undefined,
+                            newList
+                          );
+                        }}
+                      />
+                    )
+                  )}
+                </Stack>
+              </>
+            )}
+          </Stack>
         </TabPanel>
       </FormField>
     );

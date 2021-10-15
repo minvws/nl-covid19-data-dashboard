@@ -1,15 +1,8 @@
 import { TimespanAnnotationConfiguration } from '@corona-dashboard/common';
-import {
-  Box,
-  Button,
-  Card,
-  Flex,
-  Grid,
-  Label,
-  Select,
-  TextInput,
-} from '@sanity/ui';
+import { Button, Card, Stack } from '@sanity/ui';
 import React from 'react';
+import { PropertyInput } from './property-input';
+import { SelectInput } from './select-input';
 
 interface TimespanAnnotationConfigurationFormProps {
   timespanConfig: TimespanAnnotationConfiguration;
@@ -27,77 +20,58 @@ export function TimespanAnnotationConfigurationForm(
   const onChangeProp = (
     propertyName: keyof TimespanAnnotationConfiguration
   ) => {
-    return (event: any) => {
-      onChange({
-        ...timespanConfig,
-        [propertyName]: event.target.value,
-      });
-    };
+    return (event: any) => changeProp(propertyName, event.target.value);
+  };
+
+  const changeProp = (
+    propertyName: keyof TimespanAnnotationConfiguration,
+    value: any
+  ) => {
+    onChange({
+      ...timespanConfig,
+      [propertyName]: value,
+    });
   };
 
   return (
     <Card border={true} padding={[1, 1, 1, 1]}>
-      <Card marginBottom={3}>
-        <Button onClick={onDelete}>X</Button>
-      </Card>
-      <Card marginBottom={3}>
-        <Grid gap={[2, 2, 2, 2]}>
-          <Label>Fill</Label>
-          <Select
-            value={timespanConfig.fill ?? ''}
-            onChange={onChangeProp('fill')}
-          >
-            <option value="">Selecteer fill waarde</option>
-            {fills.map((x) => (
-              <option value={x} key={x}>
-                {x}
-              </option>
-            ))}
-          </Select>
-        </Grid>
-      </Card>
-      <Card marginBottom={3}>
-        <Grid gap={[2, 2, 2, 2]}>
-          <Label>Start index</Label>
-          <TextInput
-            type="number"
-            value={timespanConfig.start ?? Infinity}
-            onChange={onChangeProp('start')}
-          />
-        </Grid>
-      </Card>
-      <Card marginBottom={3}>
-        <Grid gap={[2, 2, 2, 2]}>
-          <Label>End index</Label>
-          <TextInput
-            type="number"
-            value={timespanConfig.end ?? Infinity}
-            onChange={onChangeProp('end')}
-          />
-        </Grid>
-      </Card>
-      <Card padding={[1, 1, 1, 1]}>
-        <Flex align="flex-start" gap={2} style={{ alignItems: 'center' }}>
-          <Label>Label key:</Label>
-          <Box style={{ width: '100%' }}>
-            <TextInput
-              value={timespanConfig.labelKey}
-              onChange={onChangeProp('labelKey')}
-            />
-          </Box>
-        </Flex>
-      </Card>
-      <Card padding={[1, 1, 1, 1]}>
-        <Flex align="flex-start" gap={2} style={{ alignItems: 'center' }}>
-          <Label>Short label key:</Label>
-          <Box style={{ width: '100%' }}>
-            <TextInput
-              value={timespanConfig.shortLabelKey}
-              onChange={onChangeProp('shortLabelKey')}
-            />
-          </Box>
-        </Flex>
-      </Card>
+      <Stack space={3}>
+        <Card>
+          <Button onClick={onDelete}>X</Button>
+        </Card>
+        <SelectInput
+          value={timespanConfig.fill}
+          placeholder="Selecteer fill waarde"
+          values={fills}
+          onChange={onChangeProp('fill')}
+        />
+        <PropertyInput
+          label="Start index"
+          value={timespanConfig.start}
+          onChange={onChangeProp('start')}
+          inputProps={{ type: 'number' }}
+          onReset={() => changeProp('start', undefined)}
+        />
+        <PropertyInput
+          label="End index"
+          value={timespanConfig.end}
+          onChange={onChangeProp('end')}
+          inputProps={{ type: 'number', min: 0 }}
+          onReset={() => changeProp('end', undefined)}
+        />
+        <PropertyInput
+          label="Label key"
+          value={timespanConfig.labelKey}
+          onChange={onChangeProp('labelKey')}
+          onReset={() => changeProp('labelKey', undefined)}
+        />
+        <PropertyInput
+          label="Short label key"
+          value={timespanConfig.shortLabelKey}
+          onChange={onChangeProp('shortLabelKey')}
+          onReset={() => changeProp('shortLabelKey', undefined)}
+        />
+      </Stack>
     </Card>
   );
 }
