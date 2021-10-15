@@ -46,14 +46,14 @@ export function TimespanAnnotationConfigurationForm(
           onChange={onChangeProp('fill')}
         />
         <PropertyInput
-          label="Start index"
+          label="Start index (use negative values to indicate a timespan starting from the end)"
           value={timespanConfig.start}
           onChange={onChangeProp('start')}
           inputProps={{ type: 'number' }}
           onReset={() => changeProp('start', Infinity)}
         />
         <PropertyInput
-          label="End index"
+          label="End index (leave empty when entering negative start values)"
           value={timespanConfig.end}
           onChange={onChangeProp('end')}
           inputProps={{ type: 'number', min: 0 }}
