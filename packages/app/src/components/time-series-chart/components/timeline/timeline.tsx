@@ -55,6 +55,8 @@ export const Timeline = memo(function Timeline({
 
   if (!width) return null;
 
+  console.log(timelineState);
+
   return (
     <Box
       ref={ref}
@@ -97,6 +99,7 @@ export const Timeline = memo(function Timeline({
                   onNext={() => setIndex(i + 1)}
                   onPrev={() => setIndex(i - 1)}
                   onClose={() => hideTooltip(i)}
+                  hasMultipleEvents={timelineState.events.length > 1}
                 />
               }
             />
