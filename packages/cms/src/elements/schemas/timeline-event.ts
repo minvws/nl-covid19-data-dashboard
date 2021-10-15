@@ -27,7 +27,7 @@ export const timelineEvent = {
     {
       title: 'Omschrijving',
       name: 'description',
-      type: 'localeString',
+      type: 'localeText',
       validation: REQUIRED,
       options: {
         ignoreLanguageSwitcher: true,

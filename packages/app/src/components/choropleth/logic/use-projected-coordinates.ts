@@ -1,12 +1,12 @@
 import cleanCoords from '@turf/clean-coords';
 import flatten from '@turf/flatten';
 import { multiPoint, round } from '@turf/helpers';
-import { GeoProjection } from 'd3-geo';
-import { Polygon, Position } from 'geojson';
+import type { GeoProjection } from 'd3-geo';
+import type { Polygon, Position } from 'geojson';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { CodedGeoJSON } from './topology';
-import { FitExtent } from './types';
+import type { CodedGeoJSON } from './topology';
+import type { FitExtent } from './types';
 
 type GeoPolygons = {
   code: string;

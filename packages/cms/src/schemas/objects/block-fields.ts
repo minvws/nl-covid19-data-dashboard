@@ -27,13 +27,14 @@ export const blockFields = [
         {
           name: 'link',
           type: 'object',
-          title: 'External link',
+          title: 'Link',
           icon: MdLink,
           fields: [
             {
               name: 'href',
               type: 'url',
               title: 'URL',
+              validation: (rule: Rule) => rule.uri({ allowRelative: true }),
             },
           ],
         },
@@ -76,5 +77,17 @@ export const blockFields = [
   {
     type: 'inlineCollapsible',
     title: 'Inklapbaar blok',
+  },
+  {
+    title: 'Dashboard Grafiek',
+    name: 'dashboardChart',
+    type: 'reference',
+    to: [{ type: 'chartConfiguration' }],
+  },
+  {
+    title: 'Dashboard KPIs',
+    name: 'dashboardKpi',
+    type: 'reference',
+    to: [{ type: 'kpiConfiguration' }],
   },
 ];

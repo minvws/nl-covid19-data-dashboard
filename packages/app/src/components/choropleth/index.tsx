@@ -10,12 +10,12 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { ChoroplethMap } from './components/choropleth-map';
 import {
   ChoroplethDataItem,
   InferedDataCollection,
   InferedMapType,
-  useTabInteractiveButton,
 } from './logic';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';

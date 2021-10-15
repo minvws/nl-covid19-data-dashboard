@@ -1,5 +1,5 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { isPresent } from 'ts-is-present';
+import { isEmpty } from 'lodash';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -29,40 +29,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  (context) => {
-    const data = selectVrData(
-      'sewer',
-      'sewer_per_installation',
-      'difference.sewer__average'
-    )(context);
-
-    data.selectedVrData.sewer.values = data.selectedVrData.sewer.values.map(
-      (x) => ({
-        ...x,
-        average: isPresent(x.average) ? Math.round(x.average) : null,
-      })
-    );
-
-    data.selectedVrData.sewer.last_value = {
-      ...data.selectedVrData.sewer.last_value,
-      average: isPresent(data.selectedVrData.sewer.last_value.average)
-        ? Math.round(data.selectedVrData.sewer.last_value.average)
-        : null,
-    };
-
-    data.selectedVrData.difference.sewer__average.difference = Math.round(
-      data.selectedVrData.difference.sewer__average.difference
-    );
-
-    data.selectedVrData.sewer_per_installation.values.forEach((x) => {
-      x.values = x.values.map((x) => ({
-        ...x,
-        rna_normalized: Math.round(x.rna_normalized),
-      }));
-    });
-
-    return data;
-  },
+  selectVrData('sewer', 'sewer_per_installation', 'difference.sewer__average'),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
@@ -109,8 +76,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.articles}
           />
-
-          <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(text.warning_method) && (
+            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          )}
 
           <TwoKpiSection>
             <KpiTile

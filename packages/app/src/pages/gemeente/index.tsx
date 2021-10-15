@@ -1,4 +1,4 @@
-import { GmCollectionHospitalNice } from '@corona-dashboard/common';
+import { GmCollectionHospitalNice, gmData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
@@ -6,7 +6,6 @@ import { TooltipContent } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Heading } from '~/components/typography';
-import { gmData } from '~/data/gm';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';

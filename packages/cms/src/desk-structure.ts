@@ -21,6 +21,7 @@ const hiddenDocTypes = [
   'cijferVerantwoordingGroups',
   'overDitDashboard',
   'overRisicoNiveaus',
+  'overRisicoNiveausNew',
   'roadmap',
   'lockdown',
   'behaviorPage',
@@ -48,6 +49,9 @@ const hiddenDocTypes = [
   'timelineEvent',
   'contact',
   'cijferVerantwoordingItem',
+  'kpi',
+  'choropleth',
+  'warning',
 ];
 
 export default () =>
@@ -73,7 +77,7 @@ export default () =>
         'overDitDashboard'
       ),
       addListItem(GrDashboard, 'Actueel', 'topicalPage'),
-      addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveaus'),
+      addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()
         .title('Veelgestelde vragen')
         .icon(MdQuestionAnswer)

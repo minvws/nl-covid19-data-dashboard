@@ -11,7 +11,15 @@ import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { isEmpty, pick, throttle } from 'lodash';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { TimelineEventConfig } from '../components/timeline';
 import { Padding, TimespanAnnotationConfig } from './common';
@@ -32,6 +40,7 @@ export type HoveredPoint<T> = {
   color: string;
   x: number;
   y: number;
+  noMarker?: boolean;
 };
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
@@ -41,9 +50,11 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   padding: Padding;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
+  setIsTabInteractive: Dispatch<SetStateAction<boolean>>;
   timespanAnnotations?: TimespanAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
   markNearestPointOnly?: boolean;
+  isTabInteractive?: boolean;
 }
 
 interface HoverState<T> {
@@ -68,20 +79,25 @@ export function useHoverState<T extends TimestampedValue>({
   timespanAnnotations,
   timelineEvents,
   markNearestPointOnly,
+  isTabInteractive,
+  setIsTabInteractive,
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
-  const [hasFocus, setHasFocus] = useState(false);
   const [valuesIndex, setValuesIndex] = useState<number>(0);
-  const keyboard = useKeyboardNavigation(setValuesIndex, values.length);
+  const keyboard = useKeyboardNavigation(
+    setValuesIndex,
+    values.length,
+    setIsTabInteractive
+  );
 
   useEffect(() => {
-    hasFocus ? keyboard.enable() : keyboard.disable();
-  }, [hasFocus, keyboard]);
+    isTabInteractive ? keyboard.enable() : keyboard.disable();
+  }, [isTabInteractive, keyboard]);
 
   const interactiveMetricProperties = useMemo(
     () =>
       seriesConfig
-        .filter((x) => !x.noHover)
+        .filter((x) => !x.nonInteractive)
         .filter(isVisible)
         .flatMap((x) => {
           switch (x.type) {
@@ -200,9 +216,6 @@ export function useHoverState<T extends TimestampedValue>({
     [bisect, padding.left, padding.top]
   );
 
-  const handleFocus = useCallback(() => setHasFocus(true), []);
-  const handleBlur = useCallback(() => setHasFocus(false), []);
-
   const timeoutRef = useRef<any>();
   useEffect(() => {
     return () => {
@@ -219,7 +232,7 @@ export function useHoverState<T extends TimestampedValue>({
       }
 
       if (event.type === 'mouseleave') {
-        !hasFocus && keyboard.disable();
+        !isTabInteractive && keyboard.disable();
         /**
          * Here a timeout is used on the clear hover state to prevent the
          * tooltip from getting jittery. Individual elements in the chart can
@@ -241,17 +254,17 @@ export function useHoverState<T extends TimestampedValue>({
       setPointThrottled(mousePoint);
       keyboard.enable();
     },
-    [values, setPointThrottled, keyboard, hasFocus]
+    [values, setPointThrottled, keyboard, isTabInteractive]
   );
 
   const hoverState = useMemo(() => {
-    if (!point && !hasFocus) return;
+    if (!point && !isTabInteractive) return;
 
     const pointY = point?.y ?? 0;
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.noHover)
+      .filter((x) => !x.nonInteractive)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -296,7 +309,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.noHover)
+      .filter((x) => !x.nonInteractive)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -322,6 +335,7 @@ export function useHoverState<T extends TimestampedValue>({
           case 'line':
           case 'gapped-line':
           case 'area':
+          case 'gapped-area':
             return {
               seriesValue,
               x: xScale(xValue),
@@ -329,6 +343,7 @@ export function useHoverState<T extends TimestampedValue>({
               color: yValue ? config.color : 'transparent',
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
+              noMarker: config.noMarker,
             };
           case 'split-area':
             return {
@@ -338,6 +353,7 @@ export function useHoverState<T extends TimestampedValue>({
               color: findSplitPointForValue(config.splitPoints, yValue).color,
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
+              noMarker: config.noMarker,
             };
         }
       })
@@ -351,7 +367,7 @@ export function useHoverState<T extends TimestampedValue>({
      */
     const rangePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
-      .filter((x) => !x.noHover)
+      .filter((x) => !x.nonInteractive)
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesDoubleValue
@@ -460,7 +476,7 @@ export function useHoverState<T extends TimestampedValue>({
     return hoverState;
   }, [
     point,
-    hasFocus,
+    isTabInteractive,
     seriesConfig,
     timespanAnnotations,
     timelineEvents,
@@ -472,7 +488,7 @@ export function useHoverState<T extends TimestampedValue>({
     yScale,
   ]);
 
-  return [hoverState, { handleHover, handleFocus, handleBlur }] as const;
+  return [hoverState, { handleHover }] as const;
 }
 
 function findActiveTimespanAnnotationIndex(

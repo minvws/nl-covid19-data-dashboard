@@ -7,6 +7,7 @@ import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { useIntl } from '~/intl';
 import { useCurrentDate } from '~/utils/current-date-context';
 import {
   AccessibilityDefinition,
@@ -14,6 +15,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { useUniqueId } from '../../utils/use-unique-id';
 import { InlineText } from '../typography';
 import {
@@ -138,6 +140,12 @@ type TimeSeriesChartProps<
    * This option only makes sense when we display a single trend.
    */
   displayTooltipValueOnly?: boolean;
+
+  /**
+   * Collapse the y axis. Useful for mini trend charts that can grow to widths
+   * larger than COLLAPSE_Y_AXIS_THRESHOLD.
+   */
+  isYAxisCollapsed?: boolean;
 };
 
 export function TimeSeriesChart<
@@ -163,7 +171,10 @@ export function TimeSeriesChart<
   onSeriesClick,
   markNearestPointOnly,
   displayTooltipValueOnly,
+  isYAxisCollapsed: defaultIsYAxisCollapsed,
 }: TimeSeriesChartProps<T, C>) {
+  const { siteText } = useIntl();
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -262,6 +273,13 @@ export function TimeSeriesChart<
     [values, today]
   );
 
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+    setIsTabInteractive,
+  } = useTabInteractiveButton(siteText.accessibility.tab_navigatie_button);
+
   const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
     values,
@@ -273,6 +291,8 @@ export function TimeSeriesChart<
     timespanAnnotations,
     timelineEvents: timelineState.events,
     markNearestPointOnly,
+    isTabInteractive,
+    setIsTabInteractive,
   });
 
   const metricPropertyFormatters = useMetricPropertyFormatters(
@@ -365,7 +385,8 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
-  const isYAxisCollapsed = width < COLLAPSE_Y_AXIS_THRESHOLD;
+  const isYAxisCollapsed =
+    defaultIsYAxisCollapsed ?? width < COLLAPSE_Y_AXIS_THRESHOLD;
   const timeSeriesAccessibility = addAccessibilityFeatures(accessibility, [
     'keyboard_time_series_chart',
   ]);
@@ -385,6 +406,8 @@ export function TimeSeriesChart<
 
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
+          {tabInteractiveButton}
+
           <ChartContainer
             accessibility={timeSeriesAccessibility}
             width={width}
@@ -392,8 +415,8 @@ export function TimeSeriesChart<
             padding={padding}
             onClick={handleClick}
             onHover={chartEventHandlers.handleHover}
-            onFocus={chartEventHandlers.handleFocus}
-            onBlur={chartEventHandlers.handleBlur}
+            isTabInteractive={isTabInteractive}
+            {...anchorEventHandlers}
           >
             <Axes
               bounds={bounds}

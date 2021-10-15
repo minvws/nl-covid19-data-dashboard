@@ -23,6 +23,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | InvisibleSeriesDefinition<T>
   | SplitAreaSeriesDefinition<T>
   | GappedLineSeriesDefinition<T>
+  | GappedAreaSeriesDefinition<T>
   | GappedStackedAreaSeriesDefinition<T>
 )[];
 
@@ -39,13 +40,13 @@ interface SeriesCommonDefinition {
    * to give context to another interactive series, like in the sewer chart when
    * a location is selected.
    */
-  hideInTooltip?: boolean;
+  nonInteractive?: boolean;
   /**
-   * No-hover means the series will not have a hover state. This can be useful
+   * No-marker means the series will not have a marker on hover. This can be useful
    * when showing two variants of the same metric (like 7-day averages and daily
    * values), or when using a second series as a backdrop.
    */
-  noHover?: boolean;
+  noMarker?: boolean;
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -75,6 +76,18 @@ export interface LineSeriesDefinition<T extends TimestampedValue>
 export interface AreaSeriesDefinition<T extends TimestampedValue>
   extends SeriesCommonDefinition {
   type: 'area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  fillOpacity?: number;
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
+}
+
+export interface GappedAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'gapped-area';
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;

@@ -11,6 +11,8 @@ declare module 'part:@sanity/components/buttons/default';
 
 declare module 'part:@sanity/base/datastore/document';
 
+declare module 'part:@sanity/components/formfields/default';
+
 declare module 'part:@sanity/base/client' {
   import { SanityClient } from '@sanity/client';
   const client: SanityClient;
