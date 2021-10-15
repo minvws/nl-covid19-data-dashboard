@@ -73,7 +73,7 @@ export const ChartConfigurationInput = React.forwardRef(
       [configuration.area, configuration.metricName]
     );
 
-    const addMetricProperty = useCallback(() => {
+    const addMetricProperty = () => {
       const newArray = isDefined(configuration.metricPropertyConfigs)
         ? [...configuration.metricPropertyConfigs]
         : [];
@@ -84,7 +84,7 @@ export const ChartConfigurationInput = React.forwardRef(
         labelKey: '',
       });
       changeProp('metricPropertyConfigs', [], newArray);
-    }, [configuration]);
+    };
 
     const addTimespanAnnotation = useCallback(() => {
       if (!isDefined(configuration.dataOptions)) {
@@ -103,26 +103,22 @@ export const ChartConfigurationInput = React.forwardRef(
       changeDataOptionProp('timespanAnnotations', undefined, newArray);
     }, [configuration]);
 
-    const changeMetricProperty = (index: number) =>
-      useCallback(
-        (value: MetricPropertyConfig) => {
-          const newArray = isDefined(configuration.metricPropertyConfigs)
-            ? [...configuration.metricPropertyConfigs]
-            : [];
-          newArray[index] = value;
-          changeProp('metricPropertyConfigs', [], newArray);
-        },
-        [configuration, index]
-      );
-
-    const deleteMetricProperty = (index: number) =>
-      useCallback(() => {
+    const changeMetricProperty =
+      (index: number) => (value: MetricPropertyConfig) => {
         const newArray = isDefined(configuration.metricPropertyConfigs)
           ? [...configuration.metricPropertyConfigs]
           : [];
-        newArray.splice(index, 1);
+        newArray[index] = value;
         changeProp('metricPropertyConfigs', [], newArray);
-      }, [configuration, index]);
+      };
+
+    const deleteMetricProperty = (index: number) => () => {
+      const newArray = isDefined(configuration.metricPropertyConfigs)
+        ? [...configuration.metricPropertyConfigs]
+        : [];
+      newArray.splice(index, 1);
+      changeProp('metricPropertyConfigs', [], newArray);
+    };
 
     return (
       <FormField>
@@ -130,7 +126,7 @@ export const ChartConfigurationInput = React.forwardRef(
           type="text"
           ref={ref}
           value={value}
-          style={{ display: 'none' }}
+          style={{ display: 'block' }}
         />
 
         <TabList space={2}>
