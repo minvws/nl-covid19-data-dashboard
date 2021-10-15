@@ -41,7 +41,9 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
         type: x.type,
         metricProperty: x.propertyName,
         label: get(siteText, x.labelKey.split('.'), null),
-        color: x.color ? get(colors, x.color) : colors.data.primary,
+        color: x.color
+          ? get(colors, x.color, colors.data.primary)
+          : colors.data.primary,
       };
       if (isDefined(x.curve) && x.curve.length) {
         config.curve = x.curve;
@@ -63,7 +65,7 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
   }, [configuration.metricPropertyConfigs, siteText]);
 
   const dataOptions = useMemo(() => {
-    if (!isDefined(configuration.dataOptions)) {
+    if (!isDefined(configuration.dataOptions) || !isDefined(data)) {
       return undefined;
     }
 
@@ -92,7 +94,7 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
         : undefined,
       timespanAnnotations,
     } as DataOptions;
-  }, [configuration.dataOptions, siteText]);
+  }, [configuration.dataOptions, siteText, data]);
 
   if (!isDefined(data)) {
     return <Text>Loading...</Text>;
