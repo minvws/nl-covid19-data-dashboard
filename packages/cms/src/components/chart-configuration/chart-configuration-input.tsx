@@ -290,7 +290,7 @@ export const ChartConfigurationInput = React.forwardRef(
             />
             <CheckboxInput
               label="Value is percentage"
-              value={Boolean(configuration.dataOptions?.isPercentage)}
+              value={configuration.dataOptions?.isPercentage}
               onToggle={() =>
                 changeDataOptionProp(
                   'isPercentage',
@@ -304,7 +304,7 @@ export const ChartConfigurationInput = React.forwardRef(
             />
             <CheckboxInput
               label="Render null als nul (0)"
-              value={Boolean(configuration.dataOptions?.renderNullAsZero)}
+              value={configuration.dataOptions?.renderNullAsZero}
               onToggle={() =>
                 changeDataOptionProp(
                   'renderNullAsZero',

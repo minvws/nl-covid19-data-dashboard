@@ -1,9 +1,10 @@
 import { Box, Button, Card, Checkbox, Flex, Label } from '@sanity/ui';
 import React from 'react';
+import { isDefined } from 'ts-is-present';
 
 interface CheckboxInputProps {
   label: string;
-  value: boolean;
+  value: any;
   onToggle: () => void;
   onReset: () => void;
 }
@@ -17,7 +18,11 @@ export function CheckboxInput(props: CheckboxInputProps) {
         <Label>{label}</Label>
         <Flex gap={1} align="center">
           <Box>
-            <Checkbox checked={value} onChange={() => onToggle()} />
+            <Checkbox
+              checked={value}
+              onChange={() => onToggle()}
+              indeterminate={!isDefined(value)}
+            />
           </Box>
           <Box>
             <Button
