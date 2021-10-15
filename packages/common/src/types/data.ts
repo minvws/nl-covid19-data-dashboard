@@ -4,13 +4,11 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
-export type GmCode = string;
-
 export interface Gm {
   last_generated: string;
-  proto_name: GmCode;
-  name: GmCode;
-  code: GmCode;
+  proto_name: string;
+  name: string;
+  code: string;
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
@@ -138,13 +136,11 @@ export interface GmVaccineCoveragePerAgeGroupValue {
   date_of_insertion_unix: number;
 }
 
-export type GmCollectionId = "GM_COLLECTION";
-
 export interface GmCollection {
   last_generated: string;
-  proto_name: GmCollectionId;
-  name: GmCollectionId;
-  code: GmCollectionId;
+  proto_name: "GM_COLLECTION";
+  name: "GM_COLLECTION";
+  code: "GM_COLLECTION";
   hospital_nice: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
@@ -184,12 +180,10 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   date_of_insertion_unix: number;
 }
 
-export type InCode = string;
-
 export interface In {
   last_generated: string;
-  proto_name: InCode;
-  name: InCode;
+  proto_name: string;
+  name: string;
   code: string;
   named_difference: InNamedDifference;
   tested_overall: InTestedOverall;
@@ -235,13 +229,11 @@ export interface InVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
-export type InCollectionId = "IN_COLLECTION";
-
 export interface InCollection {
   last_generated: string;
-  proto_name: InCollectionId;
-  name: InCollectionId;
-  code: InCollectionId;
+  proto_name: "IN_COLLECTION";
+  name: "IN_COLLECTION";
+  code: "IN_COLLECTION";
   tested_overall: InCollectionTestedOverall[];
 }
 export interface InCollectionTestedOverall {
@@ -253,13 +245,11 @@ export interface InCollectionTestedOverall {
   date_of_insertion_unix: number;
 }
 
-export type NlId = "NL";
-
 export interface Nl {
   last_generated: string;
-  proto_name: NlId;
-  name: NlId;
-  code: NlId;
+  proto_name: "NL";
+  name: "NL";
+  code: "NL";
   difference: NlDifference;
   named_difference: NlNamedDifference;
   doctor: NlDoctor;
@@ -953,13 +943,11 @@ export interface NlVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
-export type VrCode = string;
-
 export interface Vr {
   last_generated: string;
-  proto_name: VrCode;
-  name: VrCode;
-  code: VrCode;
+  proto_name: string;
+  name: string;
+  code: string;
   static_values?: VrStaticValues;
   difference: VrDifference;
   g_number: VrGNumber;
@@ -1261,13 +1249,11 @@ export interface VrEscalationLevel {
   date_of_insertion_unix: number;
 }
 
-export type VrCollectionId = "VR_COLLECTION";
-
 export interface VrCollection {
   last_generated: string;
-  proto_name: VrCollectionId;
-  name: VrCollectionId;
-  code: VrCollectionId;
+  proto_name: "VR_COLLECTION";
+  name: "VR_COLLECTION";
+  code: "VR_COLLECTION";
   hospital_nice: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
