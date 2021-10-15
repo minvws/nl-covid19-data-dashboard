@@ -19,8 +19,8 @@ import FormField from 'part:@sanity/components/formfields/default';
 import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { KpiIconInput, KpiIconKey } from '.';
-import { dataStructure } from '../data/data-structure';
+import { dataStructure } from '../../data/data-structure';
+import { KpiIconInput, KpiIconKey } from './kpi-icon-input';
 
 export const KpiConfigurationInput = React.forwardRef(
   (props: any, ref: any) => {
