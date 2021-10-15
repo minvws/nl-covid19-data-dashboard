@@ -123,10 +123,10 @@ export const ChartConfigurationInput = React.forwardRef(
     return (
       <FormField>
         <TextInput
-          type="text"
+          type="hidden"
           ref={ref}
           value={value}
-          style={{ display: 'block' }}
+          style={{ display: 'none' }}
         />
 
         <TabList space={2}>
