@@ -123,7 +123,7 @@ export const ChartConfigurationInput = React.forwardRef(
     return (
       <FormField>
         <TextInput
-          type="hidden"
+          type="text"
           ref={ref}
           value={value}
           style={{ display: 'none' }}
