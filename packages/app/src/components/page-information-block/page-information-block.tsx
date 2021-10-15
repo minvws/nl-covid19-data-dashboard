@@ -121,7 +121,6 @@ export function PageInformationBlock({
 
 const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
   css({
-    pb: asResponsiveArray({ _: 3, sm: 4 }),
     pt: x.hasTitle ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
     display: 'flex',
     flexWrap: 'wrap',
