@@ -1,6 +1,7 @@
 import {
   AvoidCrowds,
   Curfew,
+  FrisseLucht,
   KeepDistance,
   MaxVisitors,
   SneezeCoughElbow,
@@ -25,7 +26,7 @@ const icons: Record<BehaviorIdentifier, typeof Curfew> = {
   wear_mask_public_transport: WearMaskPublicTransport,
   sneeze_cough_elbow: SneezeCoughElbow,
   max_visitors: MaxVisitors,
-  ventilate_home: MaxVisitors,
+  ventilate_home: FrisseLucht,
 };
 
 interface BehaviorIconProps {
