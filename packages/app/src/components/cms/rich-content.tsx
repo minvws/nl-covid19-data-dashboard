@@ -33,7 +33,6 @@ interface RichContentProps {
 interface ChartConfigNode {
   chart: {
     _type: string;
-    config: string;
   };
 }
 
@@ -102,9 +101,7 @@ export function RichContent({
         );
       },
       chartConfiguration: (props: { node: ChartConfigNode }) => {
-        const configuration = JSON.parse(
-          props.node.chart.config
-        ) as ChartConfiguration;
+        const configuration = props.node as unknown as ChartConfiguration;
 
         return (
           <Box

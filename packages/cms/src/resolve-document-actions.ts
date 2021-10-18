@@ -58,7 +58,7 @@ const actionsByDocumentType = {
     DuplicateAction,
     DeleteAction,
   ],
-  chartConfiguration: [
+  chartConfigurationTest: [
     PublishAction,
     DiscardChangesAction,
     UnpublishAction,

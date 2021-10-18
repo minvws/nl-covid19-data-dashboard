@@ -7,11 +7,6 @@ export const areaTitles = {
 
 export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
-export type ChartConfiguration = Omit<
-  Required<PartialChartConfiguration>,
-  'code' | 'dataOptions'
-> & { code?: string; dataOptions?: DataOptionsConfiguration };
-
 export type TimespanAnnotationConfiguration = {
   fill: 'solid' | 'hatched' | 'dotted';
   start: number;
@@ -21,23 +16,19 @@ export type TimespanAnnotationConfiguration = {
   cutValuesForMetricProperties?: string[];
 };
 
-export interface DataOptionsConfiguration {
+export type ChartConfiguration = {
+  area: AreaType;
+  metricName: string;
+  metricProperties: MetricPropertyConfig[];
+  timeframe: 'all' | '5weeks';
+  accessibilityKey: string;
+  code?: string;
+  sourceKey: string;
   valueAnnotationKey?: string;
   forcedMaximumValue?: number;
   isPercentage?: boolean;
   renderNullAsZero?: boolean;
   timespanAnnotations?: TimespanAnnotationConfiguration[];
-}
-
-export type PartialChartConfiguration = {
-  area?: AreaType;
-  metricName?: string;
-  metricPropertyConfigs?: MetricPropertyConfig[];
-  timeframe?: 'all' | '5weeks';
-  accessibilityKey?: string;
-  code?: string;
-  sourceKey?: string;
-  dataOptions?: DataOptionsConfiguration;
 };
 
 export type MetricPropertyConfig = {

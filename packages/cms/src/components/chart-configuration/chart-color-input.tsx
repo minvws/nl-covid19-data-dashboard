@@ -10,9 +10,9 @@ import {
   Text,
   ThemeProvider,
 } from '@sanity/ui';
-import React, { useCallback, useState } from 'react';
-
-console.log('colors', colors);
+import FormField from 'part:@sanity/components/formfields/default';
+import { PatchEvent, set } from 'part:@sanity/form-builder/patch-event';
+import React, { forwardRef, useCallback, useState } from 'react';
 
 export const flatDataColors = Object.keys(colors.data).reduce<
   Record<string, string>
@@ -33,87 +33,93 @@ export const flatDataColors = Object.keys(colors.data).reduce<
   return aggr;
 }, {} as Record<string, string>);
 
-interface ChartColorInputProps {
-  value: string | undefined;
-  onChange: (event: string | undefined) => void;
-}
-
-export function ChartColorInput(props: ChartColorInputProps) {
+export const ChartColorInput = forwardRef((props: any, ref: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = useCallback(() => setIsOpen(false), []);
   const onOpen = useCallback(() => setIsOpen(true), []);
 
-  const { value, onChange } = props;
+  const { value, onChange, type, compareValue, markers } = props;
   const colorProperty = value?.length
     ? value.replaceAll('.', '___')
     : undefined;
 
+  const onChangeColor = (value: string) => {
+    onChange(PatchEvent.from(set(value)));
+  };
+
   return (
-    <ThemeProvider theme={studioTheme}>
-      <Flex style={{ gap: 10, alignItems: 'center' }}>
-        {colorProperty === undefined ? (
-          <Text size={1}>
-            Er is geen kleur
-            <br />
-            geselecteerd
-          </Text>
-        ) : (
-          <Box
-            style={{
-              width: '25px',
-              height: '25px',
-              borderRadius: '4px',
-              backgroundColor: flatDataColors[colorProperty],
-              border: '1px solid lightGray',
-            }}
-          ></Box>
-        )}
-        <Box>
-          <Button onClick={onOpen} text="Verander kleur" />
-        </Box>
-      </Flex>
-      {isOpen && (
-        <Dialog
-          header="Kies een kleur"
-          id="dialog-example"
-          onClose={onClose}
-          zOffset={1000}
-        >
-          <Box padding={4}>
-            <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
-              {Object.entries(flatDataColors).map(([id, color]) => (
+    <FormField
+      label={type.title}
+      description={type.description}
+      compareValue={compareValue}
+      markers={markers}
+    >
+      <ThemeProvider theme={studioTheme}>
+        <Flex style={{ gap: 10, alignItems: 'center' }}>
+          {colorProperty === undefined ? (
+            <Text size={1}>
+              Er is geen kleur
+              <br />
+              geselecteerd
+            </Text>
+          ) : (
+            <Box
+              style={{
+                width: '25px',
+                height: '25px',
+                borderRadius: '4px',
+                backgroundColor: flatDataColors[colorProperty],
+                border: '1px solid lightGray',
+              }}
+            ></Box>
+          )}
+          <Box>
+            <Button onClick={onOpen} text="Verander kleur" />
+          </Box>
+        </Flex>
+        {isOpen && (
+          <Dialog
+            header="Kies een kleur"
+            id="dialog-example"
+            onClose={onClose}
+            zOffset={1000}
+          >
+            <Box padding={4}>
+              <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
+                {Object.entries(flatDataColors).map(([id, color]) => (
+                  <Flex
+                    key={id}
+                    direction="column"
+                    align="center"
+                    onClick={() => onChangeColor(id.replaceAll('___', '.'))}
+                    title={id}
+                  >
+                    <Box
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        backgroundColor: color,
+                        borderRadius: '4px',
+                        border: '1px solid lightGray',
+                      }}
+                    />
+                    <Radio checked={colorProperty === id} readOnly />
+                  </Flex>
+                ))}
+
                 <Flex
-                  key={id}
                   direction="column"
                   align="center"
-                  onClick={() => onChange(id.replaceAll('___', '.'))}
-                  title={id}
+                  onClick={() => onChange(undefined)}
                 >
-                  <Box
-                    style={{
-                      width: '25px',
-                      height: '25px',
-                      backgroundColor: color,
-                      borderRadius: '4px',
-                      border: '1px solid lightGray',
-                    }}
-                  />
-                  <Radio checked={colorProperty === id} readOnly />
+                  <span>Geen kleur</span>
+                  <Radio checked={colorProperty === undefined} readOnly />
                 </Flex>
-              ))}
-
-              <Flex
-                direction="column"
-                align="center"
-                onClick={() => onChange(undefined)}
-              >
-                <span>Geen kleur</span>
-                <Radio checked={colorProperty === undefined} readOnly />
-              </Flex>
-            </Grid>
-          </Box>
-        </Dialog>
-      )}
-    </ThemeProvider>
+              </Grid>
+            </Box>
+          </Dialog>
+        )}
+      </ThemeProvider>
+    </FormField>
   );
-}
+});

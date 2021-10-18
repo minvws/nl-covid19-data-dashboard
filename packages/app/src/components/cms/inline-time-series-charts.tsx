@@ -36,7 +36,7 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
   );
 
   const seriesConfig = useMemo(() => {
-    return configuration.metricPropertyConfigs.map((x) => {
+    return configuration.metricProperties.map((x) => {
       const config: any = {
         type: x.type,
         metricProperty: x.propertyName,
@@ -62,15 +62,14 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
       }
       return config;
     });
-  }, [configuration.metricPropertyConfigs, siteText]);
+  }, [configuration.metricProperties, siteText]);
 
   const dataOptions = useMemo(() => {
-    if (!isDefined(configuration.dataOptions) || !isDefined(data)) {
+    if (!isDefined(configuration) || !isDefined(data)) {
       return undefined;
     }
 
-    const options = configuration.dataOptions;
-    const annotations = options.timespanAnnotations ?? [];
+    const annotations = configuration.timespanAnnotations ?? [];
     const timespanAnnotations = annotations.map<TimespanAnnotationConfig>(
       (x: TimespanAnnotationConfiguration) => ({
         fill: x.fill,
@@ -86,15 +85,15 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
     );
 
     return {
-      forcedMaximumValue: options.forcedMaximumValue,
-      isPercentage: options.isPercentage,
-      renderNullAsZero: options.renderNullAsZero,
-      valueAnnotation: options.valueAnnotationKey?.length
-        ? options.valueAnnotationKey
+      forcedMaximumValue: configuration.forcedMaximumValue,
+      isPercentage: configuration.isPercentage,
+      renderNullAsZero: configuration.renderNullAsZero,
+      valueAnnotation: configuration.valueAnnotationKey?.length
+        ? configuration.valueAnnotationKey
         : undefined,
       timespanAnnotations,
     } as DataOptions;
-  }, [configuration.dataOptions, siteText, data]);
+  }, [configuration, siteText, data]);
 
   if (!isDefined(data)) {
     return <Text>Loading...</Text>;
