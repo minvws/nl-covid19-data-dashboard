@@ -3,9 +3,6 @@
   "title": "nl_behavior_per_age_group",
   "type": "object",
   "properties": {
-    "avoid_crowds_compliance": { "$ref": "#/definitions/value" },
-    "avoid_crowds_support": { "$ref": "#/definitions/value" },
-
     "keep_distance_compliance": { "$ref": "#/definitions/value" },
     "keep_distance_support": { "$ref": "#/definitions/value" },
 
@@ -18,13 +15,14 @@
     "work_from_home_compliance": { "$ref": "#/definitions/value" },
     "work_from_home_support": { "$ref": "#/definitions/value" },
 
+    "ventilate_home_compliance": { "$ref": "#/definitions/value" },
+    "ventilate_home_support": { "$ref": "#/definitions/value" },
+
     "date_of_insertion_unix": { "type": "integer" },
     "date_start_unix": { "type": "integer" },
     "date_end_unix": { "type": "integer" }
   },
   "required": [
-    "avoid_crowds_compliance",
-    "avoid_crowds_support",
     "keep_distance_compliance",
     "keep_distance_support",
     "sneeze_cough_elbow_compliance",
@@ -33,6 +31,8 @@
     "wash_hands_support",
     "work_from_home_compliance",
     "work_from_home_support",
+    "ventilate_home_compliance",
+    "ventilate_home_support",
     "date_of_insertion_unix",
     "date_start_unix",
     "date_end_unix"
