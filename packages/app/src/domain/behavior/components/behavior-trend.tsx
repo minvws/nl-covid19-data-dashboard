@@ -1,11 +1,9 @@
+import { colors } from '@corona-dashboard/common';
+import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Gelijk } from '@corona-dashboard/icons';
-import { Up } from '@corona-dashboard/icons';
-import { Down } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { BehaviorTrendType } from '../logic/behavior-types';
 
 interface BehaviorTrendProps {

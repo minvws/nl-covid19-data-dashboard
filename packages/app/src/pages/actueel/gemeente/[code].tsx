@@ -1,4 +1,5 @@
 import {
+  colors,
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
   GmVaccineCoveragePerAgeGroupValue,
@@ -48,10 +49,9 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';

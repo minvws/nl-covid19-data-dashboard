@@ -52,6 +52,8 @@ const hiddenDocTypes = [
   'kpi',
   'choropleth',
   'warning',
+  'chartConfiguration',
+  'kpiConfiguration',
 ];
 
 export default () =>
@@ -145,6 +147,14 @@ export default () =>
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
       addListItem(RiPagesFill, 'Contact', 'contact'),
+
+      S.divider(),
+
+      ...S.documentTypeListItems().filter(
+        (item) =>
+          item.getId() === 'kpiConfiguration' ||
+          item.getId() === 'chartConfiguration'
+      ),
 
       S.divider(),
 

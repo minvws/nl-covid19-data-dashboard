@@ -1,4 +1,4 @@
-import { NlVaccineCoverageValue } from '@corona-dashboard/common';
+import { colors, NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
@@ -41,7 +41,6 @@ import {
   getNlData,
   selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 

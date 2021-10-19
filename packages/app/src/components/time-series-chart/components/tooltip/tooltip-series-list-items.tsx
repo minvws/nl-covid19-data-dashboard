@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { colors, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -6,7 +6,6 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { spacingStyle } from '~/style/functions/spacing';
-import { colors } from '~/style/theme';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { IconRow } from './tooltip-icon-row';

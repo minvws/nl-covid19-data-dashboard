@@ -1,7 +1,7 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { colors } from '~/style/theme';
 
 export function TimelineMarker({
   isHighlighted,

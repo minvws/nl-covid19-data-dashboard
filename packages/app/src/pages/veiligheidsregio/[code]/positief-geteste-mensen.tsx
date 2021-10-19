@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { Box, Spacer } from '~/components/base';
@@ -38,7 +39,6 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';

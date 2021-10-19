@@ -1,7 +1,7 @@
+import { colors } from '@corona-dashboard/common';
 import { transparentize } from 'polished';
 import { ReactNode } from 'react';
 import { Box } from '~/components/base';
-import { colors } from '~/style/theme';
 
 interface TimelineBarProps {
   width: number;

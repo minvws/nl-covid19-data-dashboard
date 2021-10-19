@@ -1,4 +1,4 @@
-import { Nl } from '@corona-dashboard/common';
+import { colors, Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -8,7 +8,6 @@ import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineHeaderWithIcon } from './components/vaccine-header-with-icon';

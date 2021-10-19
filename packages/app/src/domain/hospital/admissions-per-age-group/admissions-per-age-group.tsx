@@ -1,7 +1,9 @@
 import {
+  colors,
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
@@ -13,13 +15,11 @@ import { SeriesIcon } from '~/components/time-series-chart/components/series-ico
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
-import { Spacer } from '~/components/base';
 
 type NLHospitalAdmissionPerAgeGroupValue =
   | NlIntensiveCareNicePerAgeGroupValue

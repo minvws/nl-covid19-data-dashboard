@@ -1,11 +1,8 @@
-import { DifferenceDecimal } from '@corona-dashboard/common';
+import { colors, DifferenceDecimal } from '@corona-dashboard/common';
+import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Gelijk } from '@corona-dashboard/icons';
-import { Up } from '@corona-dashboard/icons';
-import { Down } from '@corona-dashboard/icons';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 
 export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   const { siteText, formatPercentage } = useIntl();

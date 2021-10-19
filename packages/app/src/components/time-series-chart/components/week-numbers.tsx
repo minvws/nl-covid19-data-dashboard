@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisTop } from '@visx/axis';
 import { RectClipPath } from '@visx/clip-path';
@@ -6,7 +7,6 @@ import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useUniqueId } from '~/utils/use-unique-id';

@@ -81,12 +81,21 @@ export const blockFields = [
   {
     title: 'Dashboard Grafiek',
     name: 'dashboardChart',
-    type: 'reference',
-    to: [{ type: 'chartConfiguration' }],
+    type: 'object',
+    fields: [
+      {
+        name: 'title',
+        type: 'string',
+      },
+      {
+        name: 'config',
+        type: 'reference',
+        to: [{ type: 'chartConfiguration' }],
+      },
+    ],
   },
   {
     title: 'Dashboard KPIs',
-    name: 'dashboardKpi',
     type: 'reference',
     to: [{ type: 'kpiConfiguration' }],
   },

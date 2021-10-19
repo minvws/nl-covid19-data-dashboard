@@ -1,4 +1,4 @@
-import { getLastFilledValue } from '@corona-dashboard/common';
+import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useState } from 'react';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -21,27 +21,26 @@ import { useIntl } from '~/intl';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents,
+  getTimelineEvents
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult,
+  PageArticlesQueryResult
 } from '~/queries/create-page-articles-query';
 import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
