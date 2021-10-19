@@ -48,10 +48,10 @@ import {
   selectVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { countTrailingNullValues } from '~/utils/trailing-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';

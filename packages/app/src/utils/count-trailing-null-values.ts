@@ -6,9 +6,3 @@ export function countTrailingNullValues<T>(values: T[], property?: keyof T) {
     ? values.length - findLastIndex(values, (d) => d[property] !== null) - 1
     : values.length - findLastIndex(values, (d) => d !== null);
 }
-
-export function trimNullValues<T>(values: T[], property?: keyof T) {
-  const numberOfTrailingNulls = countTrailingNullValues(values, property);
-
-  return values.slice(0, -numberOfTrailingNulls);
-}

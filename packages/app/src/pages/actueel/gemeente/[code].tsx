@@ -50,11 +50,11 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { countTrailingNullValues } from '~/utils/trailing-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/gm';

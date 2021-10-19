@@ -1,4 +1,4 @@
-import { countTrailingNullValues } from './trailing-null-values';
+import { countTrailingNullValues } from './count-trailing-null-values';
 
 type ValuesWithLastValue<T> = {
   values: T[];

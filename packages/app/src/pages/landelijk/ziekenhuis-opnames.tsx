@@ -40,8 +40,8 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { countTrailingNullValues } from '~/utils/trailing-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
