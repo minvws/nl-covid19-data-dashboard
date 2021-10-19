@@ -21,22 +21,22 @@ import { useIntl } from '~/intl';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
@@ -92,7 +92,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const sevenDayAverageDates: [number, number] = [
-    underReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    underReportedRange - WEEK_IN_SECONDS,
     underReportedRange - DAY_IN_SECONDS,
   ];
 
