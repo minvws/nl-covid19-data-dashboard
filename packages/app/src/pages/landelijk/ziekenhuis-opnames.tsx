@@ -71,6 +71,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
@@ -88,6 +91,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       'admissions_on_date_of_admission_moving_average'
     )
   );
+
+  const sevenDayAverageDates: [number, number] = [
+    underReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    underReportedRange - DAY_IN_SECONDS,
+  ];
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
@@ -126,6 +134,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
+                date: sevenDayAverageDates,
                 source: text.bronnen.nice,
               }}
             >
