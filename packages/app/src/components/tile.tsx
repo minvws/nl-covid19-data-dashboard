@@ -6,11 +6,17 @@ interface TileProps {
   children: React.ReactNode;
   height?: number | string;
   noBorder?: boolean;
+  noPadding?: boolean;
 }
 
-export function Tile({ children, height, noBorder = false }: TileProps) {
+export function Tile({
+  children,
+  height,
+  noBorder = false,
+  noPadding = false,
+}: TileProps) {
   return (
-    <StyledTile height={height} noBorder={noBorder}>
+    <StyledTile height={height} noBorder={noBorder} noPadding={noPadding}>
       {children}
     </StyledTile>
   );
@@ -19,13 +25,14 @@ export function Tile({ children, height, noBorder = false }: TileProps) {
 const StyledTile = styled.article<{
   height?: number | string;
   noBorder: boolean;
+  noPadding: boolean;
 }>((x) =>
   css({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    pt: asResponsiveArray({ _: 2, sm: 3 }),
-    pb: asResponsiveArray({ _: 3, sm: 4 }),
+    pt: x.noPadding ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
+    pb: x.noPadding ? undefined : asResponsiveArray({ _: 3, sm: 4 }),
     height: x.height,
     backgroundColor: 'white',
     borderTop: x.noBorder ? undefined : 'solid 2px lightGray',
