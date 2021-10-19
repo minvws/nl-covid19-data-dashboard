@@ -42,7 +42,11 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
         metricProperty: x.propertyName,
         label: get(siteText, x.labelKey.split('.'), null),
         color: x.color?.length
-          ? get(colors, x.color.split('.'), colors.data.primary)
+          ? get(
+              colors,
+              ['data'].concat(x.color.split('.')),
+              colors.data.primary
+            )
           : colors.data.primary,
       };
       if (isDefined(x.curve) && x.curve.length) {
