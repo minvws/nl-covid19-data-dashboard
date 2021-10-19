@@ -11,14 +11,9 @@ import { useIntl } from '~/intl';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineHeaderWithIcon } from './components/vaccine-header-with-icon';
-import { VaccineTicker } from './components/vaccine-ticker';
+
 interface VaccinePageIntroductionNlProps {
-  data: Pick<
-    Nl,
-    | 'vaccine_administered_planned'
-    | 'vaccine_administered_total'
-    | 'vaccine_administered_rate_moving_average'
-  >;
+  data: Pick<Nl, 'vaccine_administered_planned' | 'vaccine_administered_total'>;
 }
 
 export function VaccinePageIntroductionNl({
@@ -123,10 +118,6 @@ export function VaccinePageIntroductionNl({
               </Text>
             </Box>
           </TwoKpiSection>
-
-          <VaccineTicker
-            data={data.vaccine_administered_rate_moving_average.last_value}
-          />
         </Box>
       </Box>
     </Tile>

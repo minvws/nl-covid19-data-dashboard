@@ -52,7 +52,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_ggd',
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_planned',
-    'vaccine_administered_rate_moving_average',
     'vaccine_administered_total',
     'vaccine_coverage_per_age_group',
     'vaccine_coverage',
