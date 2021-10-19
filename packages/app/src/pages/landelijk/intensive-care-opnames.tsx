@@ -10,7 +10,6 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { INACCURATE_ITEMS } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -35,6 +34,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { IntakeHospitalPageQuery } from '~/types/cms';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -72,7 +72,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const dataIntake = data.intensive_care_nice;
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    INACCURATE_ITEMS
+    countTrailingNullValues(
+      dataIntake.values,
+      'admissions_on_date_of_admission_moving_average'
+    )
   );
 
   const metadata = {
