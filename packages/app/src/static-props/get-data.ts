@@ -301,6 +301,8 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
+    replaceInaccurateLastValue(gmData.data);
+
     const sideBarData: GmSideBarData = {
       deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
       hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
@@ -315,8 +317,6 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
       (acc, p) => set(acc, p, gmData.data[p]),
       {} as Pick<Gm, T>
     );
-
-    replaceInaccurateLastValue(selectedGmData);
 
     return {
       selectedGmData,
