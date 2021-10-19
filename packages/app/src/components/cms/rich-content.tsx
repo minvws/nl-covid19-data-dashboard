@@ -10,6 +10,7 @@ import { ExternalLink } from '~/components/external-link';
 import { useIntl } from '~/intl';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import { nestedHtml } from '~/style/preset';
+import { asResponsiveArray } from '~/style/utils';
 import {
   ImageBlock,
   InlineAttachment,
@@ -109,6 +110,7 @@ export function RichContent({
             css={css({
               maxWidth: 'infoWidth',
               width: '100%',
+              px: asResponsiveArray({ _: 4, md: undefined }),
             })}
           >
             <Box pb={4}>
