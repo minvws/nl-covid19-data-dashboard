@@ -1,12 +1,12 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { useRouter } from 'next/router';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { MaxWidth } from '../max-width';
 import { Anchor } from '../typography';
 import { useBreadcrumbs } from './logic/use-breadcrumbs';
-import { useRouter } from 'next/router';
 
 export function Breadcrumbs() {
   const breadcrumbs = useBreadcrumbs();

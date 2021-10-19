@@ -9,16 +9,15 @@ import { RichContentBlock } from '~/types/cms';
 export function mergeAdjacentKpiBlocks(blocks: RichContentBlock[]) {
   const result: RichContentBlock[] = [];
   for (let i = 0, ii = blocks.length; i < ii; i++) {
-    const block = blocks[i];
+    let block = blocks[i];
     if (
       block._type === 'kpiConfiguration' &&
       blocks[i + 1]?._type === 'kpiConfiguration'
     ) {
-      block._type = 'kpiConfigurations';
-      (block as any).kpi = {
-        _type: 'dashboardKpis',
-        configs: [(block as any).kpi.config, (blocks[i + 1] as any).kpi.config],
-      };
+      block = {
+        _type: 'kpiConfigurations',
+        configs: [block, blocks[i + 1]],
+      } as any;
       i++;
     }
     result.push(block);

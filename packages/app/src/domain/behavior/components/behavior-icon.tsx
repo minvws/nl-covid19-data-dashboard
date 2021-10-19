@@ -1,14 +1,17 @@
-import { Curfew } from '@corona-dashboard/icons';
-import { WashHands } from '@corona-dashboard/icons';
-import { KeepDistance } from '@corona-dashboard/icons';
-import { WorkFromHome } from '@corona-dashboard/icons';
-import { AvoidCrowds } from '@corona-dashboard/icons';
-import { SymptomsStayHome } from '@corona-dashboard/icons';
-import { SymptomsGetTested } from '@corona-dashboard/icons';
-import { WearMaskPublicIndoors } from '@corona-dashboard/icons';
-import { WearMaskPublicTransport } from '@corona-dashboard/icons';
-import { SneezeCoughElbow } from '@corona-dashboard/icons';
-import { MaxVisitors } from '@corona-dashboard/icons';
+import {
+  AvoidCrowds,
+  Curfew,
+  FrisseLucht,
+  KeepDistance,
+  MaxVisitors,
+  SneezeCoughElbow,
+  SymptomsGetTested,
+  SymptomsStayHome,
+  WashHands,
+  WearMaskPublicIndoors,
+  WearMaskPublicTransport,
+  WorkFromHome,
+} from '@corona-dashboard/icons';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 
 const icons: Record<BehaviorIdentifier, typeof Curfew> = {
@@ -23,6 +26,7 @@ const icons: Record<BehaviorIdentifier, typeof Curfew> = {
   wear_mask_public_transport: WearMaskPublicTransport,
   sneeze_cough_elbow: SneezeCoughElbow,
   max_visitors: MaxVisitors,
+  ventilate_home: FrisseLucht,
 };
 
 interface BehaviorIconProps {

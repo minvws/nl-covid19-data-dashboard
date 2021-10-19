@@ -1,16 +1,19 @@
-import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
+import {
+  colors,
+  NlBehaviorValue,
+  VrBehaviorValue,
+} from '@corona-dashboard/common';
+import { Chevron } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Chevron } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { PercentageBar } from '~/components/percentage-bar';
 import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';

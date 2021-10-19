@@ -1,4 +1,5 @@
 import {
+  colors,
   NlVaccineDeliveryPerSupplier,
   NlVaccineDeliveryPerSupplierValue,
 } from '@corona-dashboard/common';
@@ -18,7 +19,6 @@ import {
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 
 type Timeframe = 'all' | 'recent_and_coming';
 

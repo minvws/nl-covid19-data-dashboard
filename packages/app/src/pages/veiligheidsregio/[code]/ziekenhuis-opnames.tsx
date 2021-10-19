@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { ChartTile } from '~/components/chart-tile';
@@ -11,7 +12,6 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
@@ -35,9 +35,9 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -64,6 +64,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedVrData: data,
@@ -84,8 +87,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    INACCURATE_ITEMS
+    countTrailingNullValues(
+      data.hospital_nice.values,
+      'admissions_on_date_of_admission_moving_average'
+    )
   );
+
+  const sevenDayAverageDates: [number, number] = [
+    underReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    underReportedRange - DAY_IN_SECONDS,
+  ];
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -125,6 +136,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
+                date: sevenDayAverageDates,
                 source: text.bronnen.rivm,
               }}
             >

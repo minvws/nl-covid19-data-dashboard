@@ -1,4 +1,5 @@
 import {
+  colors,
   NlGNumber,
   TimeframeOption,
   VrGNumber,
@@ -7,7 +8,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 
 interface GNumberBarChartTileProps {
   data: NlGNumber | VrGNumber;

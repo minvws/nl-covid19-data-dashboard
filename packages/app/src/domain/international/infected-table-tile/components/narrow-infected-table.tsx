@@ -1,4 +1,4 @@
-import { InCollectionTestedOverall } from '@corona-dashboard/common';
+import { colors, InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { ReactNode, useMemo } from 'react';
@@ -8,7 +8,6 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';

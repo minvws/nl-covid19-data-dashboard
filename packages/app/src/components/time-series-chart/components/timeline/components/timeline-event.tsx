@@ -1,10 +1,10 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
 import { WithTooltip } from '~/lib/tooltip';
-import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
