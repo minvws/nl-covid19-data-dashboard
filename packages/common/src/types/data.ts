@@ -14,7 +14,9 @@ export interface Gm {
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
+  hospital_nice_sum: GmHospitalNiceSum;
   hospital_nice: GmHospitalNice;
+  tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
@@ -53,6 +55,16 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
+export interface GmHospitalNiceSum {
+  values: GmHospitalNiceSumValue[];
+  last_value: GmHospitalNiceSumValue;
+}
+export interface GmHospitalNiceSumValue {
+  admissions_per_1m: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface GmHospitalNice {
   values: GmHospitalNiceValue[];
   last_value: GmHospitalNiceValue;
@@ -63,6 +75,16 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
+}
+export interface GmTestedOverallSum {
+  values: GmTestedOverallSumValue[];
+  last_value: GmTestedOverallSumValue;
+}
+export interface GmTestedOverallSumValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  infected_per_100k: number;
   date_of_insertion_unix: number;
 }
 export interface GmTestedOverall {
@@ -565,6 +587,8 @@ export interface NlBehaviorValue {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_compliance: number | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -587,13 +611,13 @@ export interface NlBehaviorValue {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_support: number | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBehaviorPerAgeGroup {
-  avoid_crowds_compliance: NlBehaviorPerAgeGroupValue;
-  avoid_crowds_support: NlBehaviorPerAgeGroupValue;
   keep_distance_compliance: NlBehaviorPerAgeGroupValue;
   keep_distance_support: NlBehaviorPerAgeGroupValue;
   sneeze_cough_elbow_compliance: NlBehaviorPerAgeGroupValue;
@@ -602,6 +626,8 @@ export interface NlBehaviorPerAgeGroup {
   wash_hands_support: NlBehaviorPerAgeGroupValue;
   work_from_home_compliance: NlBehaviorPerAgeGroupValue;
   work_from_home_support: NlBehaviorPerAgeGroupValue;
+  ventilate_home_compliance: NlBehaviorPerAgeGroupValue;
+  ventilate_home_support: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -952,6 +978,8 @@ export interface Vr {
   deceased_rivm: VrDeceasedRivm;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
+  tested_overall_sum: VrTestedOverallSum;
+  hospital_nice_sum: VrHospitalNiceSum;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
   escalation_level: VrEscalationLevel;
@@ -1110,6 +1138,8 @@ export interface VrBehaviorValue {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_compliance: number | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -1126,6 +1156,8 @@ export interface VrBehaviorValue {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_support: number | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -1169,6 +1201,26 @@ export interface VrElderlyAtHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrTestedOverallSum {
+  values: VrTestedOverallSumValue[];
+  last_value: VrTestedOverallSumValue;
+}
+export interface VrTestedOverallSumValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  infected_per_100k: number;
+  date_of_insertion_unix: number;
+}
+export interface VrHospitalNiceSum {
+  values: VrHospitalNiceSumValue[];
+  last_value: VrHospitalNiceSumValue;
+}
+export interface VrHospitalNiceSumValue {
+  admissions_per_1m: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface VrSituations {
   values: VrSituationsValue[];
@@ -1284,6 +1336,8 @@ export interface VrCollectionBehavior {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_compliance: number | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -1300,6 +1354,8 @@ export interface VrCollectionBehavior {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  ventilate_home_support: number | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

@@ -15,31 +15,31 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents,
+  getTimelineEvents
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult,
+  PageArticlesQueryResult
 } from '~/queries/create-page-articles-query';
 import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -70,6 +70,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
@@ -82,8 +85,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
-    INACCURATE_ITEMS
+    countTrailingNullValues(
+      dataHospitalNice.values,
+      'admissions_on_date_of_admission_moving_average'
+    )
   );
+
+  const sevenDayAverageDates: [number, number] = [
+    underReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    underReportedRange - DAY_IN_SECONDS,
+  ];
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
@@ -122,6 +133,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
+                date: sevenDayAverageDates,
                 source: text.bronnen.nice,
               }}
             >

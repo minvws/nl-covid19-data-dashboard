@@ -5,6 +5,7 @@ import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
+import sharp from 'sharp';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
 import {
@@ -33,7 +34,10 @@ if (!fs.existsSync(publicImgPath)) {
   fs.mkdirSync(publicImgPath, { recursive: true });
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { param } = req.query;
   const [map, metric, property, heightStr, selectedCode] = param as [
     MapType,
@@ -69,7 +73,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const [blob, eTag] = generateChoroplethImage(
+    const [blob, eTag] = await generateChoroplethImage(
       metric,
       property,
       map,
@@ -124,7 +128,7 @@ function loadChoroplethData(map: MapType, metric: string) {
   })) as ChoroplethDataItem[];
 }
 
-function generateChoroplethImage(
+async function generateChoroplethImage(
   metric: string,
   property: string,
   map: MapType,
@@ -213,9 +217,14 @@ function generateChoroplethImage(
 
   const dataUrl = stage.toDataURL();
   const blob = dataUrltoBlob(dataUrl);
+  const compressedBlob = await compressImage(blob);
   const eTag = hash(dataUrl);
 
-  fs.writeFileSync(path.join(publicImgPath, filename), blob);
+  fs.writeFileSync(path.join(publicImgPath, filename), compressedBlob);
 
   return [blob, eTag] as const;
+}
+
+async function compressImage(blob: Buffer) {
+  return await sharp(blob).png({ quality: 30 }).toBuffer();
 }
