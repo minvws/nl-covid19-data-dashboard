@@ -123,8 +123,6 @@ export function RichContent({
       kpiConfiguration: (props: { node: KpiConfigNode }) => {
         const configuration = props.node as unknown as KpiConfiguration;
 
-        console.dir(props);
-
         return (
           <ContentWrapper>
             <InlineKpi configuration={configuration} />

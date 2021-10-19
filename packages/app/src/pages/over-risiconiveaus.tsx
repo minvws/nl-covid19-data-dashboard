@@ -25,7 +25,7 @@ interface OverRisiconiveausData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverRisiconiveausData>((context) => {
+  createGetContent<OverRisiconiveausData>(() => {
     return "*[_type == 'overRisicoNiveausNew'][0]";
   })
 );
@@ -33,8 +33,6 @@ export const getStaticProps = createGetStaticProps(
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
-
-  console.dir(content.content);
 
   content.content = mergeAdjacentKpiBlocks(content.content);
 
