@@ -41,8 +41,8 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
         type: x.type,
         metricProperty: x.propertyName,
         label: get(siteText, x.labelKey.split('.'), null),
-        color: x.color
-          ? get(colors, x.color, colors.data.primary)
+        color: x.color?.length
+          ? get(colors, x.color.split('.'), colors.data.primary)
           : colors.data.primary,
       };
       if (isDefined(x.curve) && x.curve.length) {
