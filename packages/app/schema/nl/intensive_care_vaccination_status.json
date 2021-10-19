@@ -22,10 +22,20 @@
       "title": "nl_intensive_care_vaccination_status_value",
       "type": "object",
       "properties": {
+        "total_amount_of_people": {
+          "type": "integer"
+        },
         "fully_vaccinated": {
           "type": ["integer", "null"]
         },
         "fully_vaccinated_label": {
+          "type": ["string", "null"],
+          "pattern": "^([><][=][0-9]{1,2})$"
+        },
+        "fully_vaccinated_percentage": {
+          "type": ["integer", "null"]
+        },
+        "fully_vaccinated_percentage_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
@@ -36,10 +46,24 @@
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
+        "has_one_shot_percentage": {
+          "type": ["integer", "null"]
+        },
+        "has_one_shot_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([><][=][0-9]{1,2})$"
+        },
         "not_vaccinated": {
           "type": ["integer", "null"]
         },
         "not_vaccinated_label": {
+          "type": ["string", "null"],
+          "pattern": "^([><][=][0-9]{1,2})$"
+        },
+        "not_vaccinated_percentage": {
+          "type": ["integer", "null"]
+        },
+        "not_vaccinated_percentage_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
@@ -54,12 +78,19 @@
         }
       },
       "required": [
+        "total_amount_of_people",
         "fully_vaccinated",
         "fully_vaccinated_label",
+        "fully_vaccinated_percentage",
+        "fully_vaccinated_percentage_label",
         "has_one_shot",
         "has_one_shot_label",
+        "has_one_shot_percentage",
+        "has_one_shot_percentage_label",
         "not_vaccinated",
         "not_vaccinated_label",
+        "not_vaccinated_percentage",
+        "not_vaccinated_percentage_label",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"

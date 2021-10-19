@@ -507,16 +507,22 @@ export interface NlHospitalLcpsValue {
   date_of_insertion_unix: number;
 }
 export interface NlHospitalVaccinationStatus {
-  values: NlHospitalVaccinationStatusValue[];
-  last_value: NlHospitalVaccinationStatusValue;
+  values: NlIntensiveCareVaccinationStatusValue[];
+  last_value: NlIntensiveCareVaccinationStatusValue;
 }
-export interface NlHospitalVaccinationStatusValue {
+export interface NlIntensiveCareVaccinationStatusValue {
   fully_vaccinated: number | null;
   fully_vaccinated_label: string | null;
+  fully_vaccinated_percentage: number | null;
+  fully_vaccinated_percentage_label: string | null;
   has_one_shot: number | null;
   has_one_shot_label: string | null;
+  has_one_shot_percentage: number | null;
+  has_one_shot_percentage_label: string | null;
   not_vaccinated: number | null;
   not_vaccinated_label: string | null;
+  not_vaccinated_percentage: number | null;
+  not_vaccinated_percentage_label: string | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -533,16 +539,22 @@ export interface NlIntensiveCareLcpsValue {
   date_of_insertion_unix: number;
 }
 export interface NlIntensiveCareVaccinationStatus {
-  values: NlIntensiveCareVaccinationStatusValue[];
-  last_value: NlIntensiveCareVaccinationStatusValue;
+  values: NlIntensiveCareVaccinationStatusValue1[];
+  last_value: NlIntensiveCareVaccinationStatusValue1;
 }
-export interface NlIntensiveCareVaccinationStatusValue {
+export interface NlIntensiveCareVaccinationStatusValue1 {
   fully_vaccinated: number | null;
   fully_vaccinated_label: string | null;
+  fully_vaccinated_percentage: number | null;
+  fully_vaccinated_percentage_label: string | null;
   has_one_shot: number | null;
   has_one_shot_label: string | null;
+  has_one_shot_percentage: number | null;
+  has_one_shot_percentage_label: string | null;
   not_vaccinated: number | null;
   not_vaccinated_label: string | null;
+  not_vaccinated_percentage: number | null;
+  not_vaccinated_percentage_label: string | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
