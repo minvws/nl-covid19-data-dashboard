@@ -9,7 +9,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -36,6 +35,7 @@ import {
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -65,6 +65,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
@@ -83,8 +86,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    INACCURATE_ITEMS
+    countTrailingNullValues(
+      data.hospital_nice.values,
+      'admissions_on_date_of_admission_moving_average'
+    )
   );
+
+  const sevenDayAverageDates: [number, number] = [
+    underReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    underReportedRange - DAY_IN_SECONDS,
+  ];
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -129,6 +140,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
+                date: sevenDayAverageDates,
                 source: text.bronnen.rivm,
               }}
             >

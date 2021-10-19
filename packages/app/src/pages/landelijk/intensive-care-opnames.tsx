@@ -10,7 +10,6 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { INACCURATE_ITEMS } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -35,6 +34,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { IntakeHospitalPageQuery } from '~/types/cms';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -55,6 +55,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatPercentage } = useIntl();
 
@@ -67,8 +70,16 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    INACCURATE_ITEMS
+    countTrailingNullValues(
+      dataIntake.values,
+      'admissions_on_date_of_admission_moving_average'
+    )
   );
+
+  const sevenDayAverageDates: [number, number] = [
+    intakeUnderReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    intakeUnderReportedRange - DAY_IN_SECONDS,
+  ];
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -101,6 +112,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={text.barscale_titel}
               metadata={{
+                date: sevenDayAverageDates,
                 source: text.bronnen.nice,
               }}
             >
