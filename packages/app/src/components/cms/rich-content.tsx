@@ -20,6 +20,7 @@ import {
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
+import { Heading } from '../typography';
 import { ContentImage } from './content-image';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
@@ -39,15 +40,12 @@ interface ChartConfigNode {
 interface KpiConfigNode {
   kpi: {
     _type: string;
-    config: string;
   };
 }
 
 interface KpisConfigNode {
-  kpi: {
-    _type: string;
-    configs: string[];
-  };
+  _type: string;
+  configs: KpiConfiguration[];
 }
 
 export function RichContent({
@@ -100,25 +98,32 @@ export function RichContent({
           </ContentWrapper>
         );
       },
-      chartConfiguration: (props: { node: ChartConfigNode }) => {
-        const configuration = props.node as unknown as ChartConfiguration;
+      dashboardChart: (props: { node: ChartConfigNode }) => {
+        const node = props.node as unknown as {
+          title: string;
+          config: ChartConfiguration;
+        };
 
         return (
           <Box
             css={css({
               maxWidth: 'infoWidth',
               width: '100%',
-              my: 4,
             })}
           >
-            <InlineTimeSeriesCharts configuration={configuration} />
+            <Box pb={4}>
+              <Heading level={3} as="h4">
+                {node.title}
+              </Heading>
+            </Box>
+            <InlineTimeSeriesCharts configuration={node.config} />
           </Box>
         );
       },
       kpiConfiguration: (props: { node: KpiConfigNode }) => {
-        const configuration = JSON.parse(
-          props.node.kpi.config
-        ) as KpiConfiguration;
+        const configuration = props.node as unknown as KpiConfiguration;
+
+        console.dir(props);
 
         return (
           <ContentWrapper>
@@ -127,12 +132,8 @@ export function RichContent({
         );
       },
       kpiConfigurations: (props: { node: KpisConfigNode }) => {
-        const configurationLeft = JSON.parse(
-          props.node.kpi.configs[0]
-        ) as KpiConfiguration;
-        const configurationRight = JSON.parse(
-          props.node.kpi.configs[1]
-        ) as KpiConfiguration;
+        const configurationLeft = props.node.configs[0] as KpiConfiguration;
+        const configurationRight = props.node.configs[1] as KpiConfiguration;
 
         return (
           <ContentWrapper>

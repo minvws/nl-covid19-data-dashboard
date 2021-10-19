@@ -4,7 +4,7 @@ import { withDocument } from 'part:@sanity/form-builder';
 import { PatchEvent, set } from 'part:@sanity/form-builder/patch-event';
 import React, { forwardRef, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { dataStructure } from '../../data/data-structure';
+import { dataStructure } from '../../../data/data-structure';
 
 export const MetricSelectInput = withDocument(
   forwardRef((props: any, ref: any) => {

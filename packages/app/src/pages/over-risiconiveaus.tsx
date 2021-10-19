@@ -20,32 +20,13 @@ import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
 
 interface OverRisiconiveausData {
   title: string;
-  pageContent: RichContentBlock[];
+  content: RichContentBlock[];
 }
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<OverRisiconiveausData>((context) => {
-    const { locale } = context;
-    return `*[_type == 'overRisicoNiveausNew']
-    {
-      ...,
-      "pageContent": {
-            "_type": content._type,
-            "${locale}": [
-              ...content.${locale}[]
-              {
-                _type != 'dashboardChart' && _type != 'dashboardKpi' => {
-                  ...
-                },
-                _type == 'dashboardChart' || _type == 'dashboardKpi' => {
-                  ...*[_id == ^._ref][0]
-                }
-              }    
-            ]
-          },
-    }[0]
-    `;
+    return "*[_type == 'overRisicoNiveausNew'][0]";
   })
 );
 
@@ -53,7 +34,9 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
 
-  content.pageContent = mergeAdjacentKpiBlocks(content.pageContent);
+  console.dir(content.content);
+
+  content.content = mergeAdjacentKpiBlocks(content.content);
 
   return (
     <Layout
@@ -87,7 +70,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           })}
         >
           <RichContent
-            blocks={content.pageContent}
+            blocks={content.content}
             contentWrapper={RichContentWrapper}
           />
         </Box>

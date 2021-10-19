@@ -1,7 +1,8 @@
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import { AreaSelectInput } from '../../components/chart-configuration/area-select-input';
-import { MetricSelectInput } from '../../components/chart-configuration/metric-select-input';
+import { AreaSelectInput } from '../../components/portable-text/shared/area-select-input';
+import { CodeSelectInput } from '../../components/portable-text/shared/code-select-input';
+import { MetricSelectInput } from '../../components/portable-text/shared/metric-select-input';
 
 export const chartConfiguration = {
   title: 'Grafiek configuratie',
@@ -68,6 +69,27 @@ export const chartConfiguration = {
       type: 'string',
       inputComponent: AreaSelectInput,
       validation: (rule: Rule) => rule.required(),
+      fieldset: 'configuration',
+    },
+    {
+      title: 'Gemeente / regio',
+      name: 'code',
+      type: 'string',
+      inputComponent: CodeSelectInput,
+      validation: (rule: Rule) =>
+        rule.custom((value: string | undefined, context: any) => {
+          const { parent } = context;
+          if (parent?.area === 'gm' || parent?.area === 'vr') {
+            if (!value?.length) {
+              return parent?.area === 'gm'
+                ? 'Gemeente is verplicht'
+                : 'Veiligheidsregio is verplicht';
+            }
+          }
+          return true;
+        }),
+      hidden: ({ parent }: { parent: any }) =>
+        parent?.area !== 'gm' && parent?.area !== 'vr',
       fieldset: 'configuration',
     },
     {

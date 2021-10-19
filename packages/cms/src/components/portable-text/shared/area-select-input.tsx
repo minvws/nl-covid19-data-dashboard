@@ -6,7 +6,7 @@ import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { forwardRef } from 'react';
 import { isDefined } from 'ts-is-present';
 import { v4 as uuidv4 } from 'uuid';
-import { dataStructure } from '../../data/data-structure';
+import { dataStructure } from '../../../data/data-structure';
 
 const createPatchFrom = (value: string) => {
   return PatchEvent.from(value === '' ? unset() : set(value));

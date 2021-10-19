@@ -1,9 +1,9 @@
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import { ChartColorInput } from '../../components/chart-configuration/chart-color-input';
-import { LineStyleInput } from '../../components/chart-configuration/line-style-input';
-import { LineTypeSelectInput } from '../../components/chart-configuration/line-type-select-input';
-import { MetricPropertySelectInput } from '../../components/chart-configuration/metric-property-select-input';
+import { ChartColorInput } from '../../components/portable-text/chart-configuration/chart-color-input';
+import { LineStyleInput } from '../../components/portable-text/chart-configuration/line-style-input';
+import { LineTypeSelectInput } from '../../components/portable-text/chart-configuration/line-type-select-input';
+import { MetricPropertySelectInput } from '../../components/portable-text/shared/metric-property-select-input';
 
 export const MetricPropertyConfig = {
   title: 'Dashboard Grafiek Metriek Waarde',
