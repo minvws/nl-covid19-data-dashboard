@@ -135,15 +135,15 @@ function KpiTile({
         >
           <img
             src={`/icons/app/${iconName}`}
-            width="50"
-            height="50"
+            width="40"
+            height="40"
             aria-hidden={true}
             css={css({
               color: '#000',
             })}
           />
 
-          <Heading level={3} hyphens="auto" style={{ margin: 0 }}>
+          <Heading level={3} as="h4" hyphens="auto" style={{ margin: 0 }}>
             {title}
           </Heading>
         </Box>
