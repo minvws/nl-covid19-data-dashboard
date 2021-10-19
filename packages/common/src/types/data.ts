@@ -511,6 +511,7 @@ export interface NlHospitalVaccinationStatus {
   last_value: NlIntensiveCareVaccinationStatusValue;
 }
 export interface NlIntensiveCareVaccinationStatusValue {
+  total_amount_of_people: number;
   fully_vaccinated: number | null;
   fully_vaccinated_label: string | null;
   fully_vaccinated_percentage: number | null;
@@ -543,6 +544,7 @@ export interface NlIntensiveCareVaccinationStatus {
   last_value: NlIntensiveCareVaccinationStatusValue1;
 }
 export interface NlIntensiveCareVaccinationStatusValue1 {
+  total_amount_of_people: number;
   fully_vaccinated: number | null;
   fully_vaccinated_label: string | null;
   fully_vaccinated_percentage: number | null;
