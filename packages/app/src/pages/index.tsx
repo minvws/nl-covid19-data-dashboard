@@ -12,8 +12,6 @@ import { TileList } from '~/components/tile-list';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
-import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
-import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -45,9 +43,11 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -117,12 +117,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
     data.intensive_care_nice.values,
-    INACCURATE_ITEMS_IC
+    countTrailingNullValues(
+      data.intensive_care_nice.values,
+      'admissions_on_date_of_admission_moving_average_rounded'
+    )
   );
 
   const underReportedRangeHospital = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    INACCURATE_ITEMS_HOSPITAL
+    countTrailingNullValues(
+      data.hospital_nice.values,
+      'admissions_on_date_of_admission_moving_average_rounded'
+    )
   );
 
   return (
