@@ -93,7 +93,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const sevenDayAverageDates: [number, number] = [
-    underReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    underReportedRange - WEEK_IN_SECONDS,
     underReportedRange - DAY_IN_SECONDS,
   ];
 
