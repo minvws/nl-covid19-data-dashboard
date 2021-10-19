@@ -507,10 +507,10 @@ export interface NlHospitalLcpsValue {
   date_of_insertion_unix: number;
 }
 export interface NlHospitalVaccinationStatus {
-  values: NlIntensiveCareVaccinationStatusValue[];
-  last_value: NlIntensiveCareVaccinationStatusValue;
+  values: NlHospitalVaccinationStatusValue[];
+  last_value: NlHospitalVaccinationStatusValue;
 }
-export interface NlIntensiveCareVaccinationStatusValue {
+export interface NlHospitalVaccinationStatusValue {
   total_amount_of_people: number;
   fully_vaccinated: number | null;
   fully_vaccinated_label: string | null;
@@ -540,10 +540,10 @@ export interface NlIntensiveCareLcpsValue {
   date_of_insertion_unix: number;
 }
 export interface NlIntensiveCareVaccinationStatus {
-  values: NlIntensiveCareVaccinationStatusValue1[];
-  last_value: NlIntensiveCareVaccinationStatusValue1;
+  values: NlIntensiveCareVaccinationStatusValue[];
+  last_value: NlIntensiveCareVaccinationStatusValue;
 }
-export interface NlIntensiveCareVaccinationStatusValue1 {
+export interface NlIntensiveCareVaccinationStatusValue {
   total_amount_of_people: number;
   fully_vaccinated: number | null;
   fully_vaccinated_label: string | null;

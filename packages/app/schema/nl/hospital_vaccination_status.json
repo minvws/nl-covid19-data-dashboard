@@ -19,7 +19,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_intensive_care_vaccination_status_value",
+      "title": "nl_hospital_vaccination_status_value",
       "type": "object",
       "properties": {
         "total_amount_of_people": {
