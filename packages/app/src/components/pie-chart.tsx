@@ -19,7 +19,7 @@ type PieChartProps<T> = {
   data: T;
   dataConfig: SeriesConfigType<T>[];
   paddingLeft?: number;
-  size?: number;
+  innerSize?: number;
   donutWidth?: number;
   padAngle?: number;
   minimumPercentageWhenZero?: number;
@@ -29,7 +29,7 @@ export function PieChart<T>({
   data,
   dataConfig,
   paddingLeft = 40,
-  size = 200,
+  innerSize = 200,
   donutWidth = 35,
   padAngle = 0.03,
   minimumPercentageWhenZero = 0.5,
@@ -52,21 +52,21 @@ export function PieChart<T>({
 
   const mappedDataWithValues = useMemo(
     () =>
-      dataConfig.map((i) => {
-        const currentProperty = data[i.metricProperty];
+      dataConfig.map((config) => {
+        const currentProperty = data[config.metricProperty];
 
         return {
           __value:
             data[currentProperty] === 0
               ? totalValue * (minimumPercentageWhenZero / 100) * 2
-              : data[i.metricProperty],
-          ...i,
+              : data[config.metricProperty],
+          ...config,
         };
       }),
     [data, dataConfig, minimumPercentageWhenZero, totalValue]
   );
 
-  const radius = Math.min(size, size) / 2;
+  const radius = innerSize / 2;
 
   return (
     <>
@@ -78,21 +78,21 @@ export function PieChart<T>({
         flexDirection={{ _: 'column', sm: 'row' }}
       >
         <svg
-          width={200}
-          height={size}
+          width={innerSize}
+          height={innerSize}
           aria-hidden="true"
           css={css({
-            minWidth: size,
+            minWidth: innerSize,
             marginLeft: asResponsiveArray({ xs: paddingLeft }),
             alignSelf: asResponsiveArray({ _: 'center', xs: 'self-start' }),
           })}
         >
-          <Group top={size / 2} left={size / 2}>
+          <Group top={innerSize / 2} left={innerSize / 2}>
             <Pie
               data={mappedDataWithValues}
               outerRadius={radius}
               innerRadius={radius - donutWidth}
-              pieValue={(d) => d.__value as number}
+              pieValue={(x) => x.__value as number}
               // Sort by the order of the config
               pieSortValues={(d, i) => i}
               padAngle={padAngle}
