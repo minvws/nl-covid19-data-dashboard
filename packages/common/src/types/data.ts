@@ -512,18 +512,12 @@ export interface NlHospitalVaccinationStatus {
 }
 export interface NlHospitalVaccinationStatusValue {
   total_amount_of_people: number;
-  fully_vaccinated: number | null;
-  fully_vaccinated_label: string | null;
-  fully_vaccinated_percentage: number | null;
-  fully_vaccinated_percentage_label: string | null;
-  has_one_shot: number | null;
-  has_one_shot_label: string | null;
-  has_one_shot_percentage: number | null;
-  has_one_shot_percentage_label: string | null;
-  not_vaccinated: number | null;
-  not_vaccinated_label: string | null;
-  not_vaccinated_percentage: number | null;
-  not_vaccinated_percentage_label: string | null;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  has_one_shot: number;
+  has_one_shot_percentage: number;
+  not_vaccinated: number;
+  not_vaccinated_percentage: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -545,18 +539,12 @@ export interface NlIntensiveCareVaccinationStatus {
 }
 export interface NlIntensiveCareVaccinationStatusValue {
   total_amount_of_people: number;
-  fully_vaccinated: number | null;
-  fully_vaccinated_label: string | null;
-  fully_vaccinated_percentage: number | null;
-  fully_vaccinated_percentage_label: string | null;
-  has_one_shot: number | null;
-  has_one_shot_label: string | null;
-  has_one_shot_percentage: number | null;
-  has_one_shot_percentage_label: string | null;
-  not_vaccinated: number | null;
-  not_vaccinated_label: string | null;
-  not_vaccinated_percentage: number | null;
-  not_vaccinated_percentage_label: string | null;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  has_one_shot: number;
+  has_one_shot_percentage: number;
+  not_vaccinated: number;
+  not_vaccinated_percentage: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
