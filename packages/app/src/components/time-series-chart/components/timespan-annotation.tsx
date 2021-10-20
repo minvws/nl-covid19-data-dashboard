@@ -1,5 +1,5 @@
+import { colors } from '@corona-dashboard/common';
 import { Bar } from '@visx/shape';
-import { colors } from '~/style/theme';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { GetX, TimespanAnnotationConfig } from '../logic';
 

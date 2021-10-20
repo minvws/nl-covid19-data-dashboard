@@ -7,10 +7,10 @@ export const timeSeries = {
   fields: [
     ...commonFields,
     {
-      title: 'Timeline Events',
-      name: 'timelineEvents',
+      title: 'Timeline Event Collections',
+      name: 'timelineEventCollections',
       type: 'array',
-      of: [{ type: 'timelineEvent' }],
+      of: [{ type: 'reference', to: [{ type: 'timelineEventCollection' }] }],
     },
   ],
   preview: commonPreview,

@@ -1,9 +1,9 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
-import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';

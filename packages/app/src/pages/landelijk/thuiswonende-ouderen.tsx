@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -29,8 +30,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(

@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { External, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
@@ -19,7 +20,6 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 

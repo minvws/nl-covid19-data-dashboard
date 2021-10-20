@@ -64,14 +64,6 @@ export const getStaticProps = createGetStaticProps(
         "_type": content._type,
         "${locale}": [
           ...content.${locale}[]
-          {
-            _type != 'dashboardChart' && _type != 'dashboardKpi' => {
-              ...
-            },
-            _type == 'dashboardChart' || _type == 'dashboardKpi' => {
-              ...*[_id == ^._ref][0]
-            }
-          }
         ]
       }
     }[0]`;

@@ -140,6 +140,12 @@ type TimeSeriesChartProps<
    * This option only makes sense when we display a single trend.
    */
   displayTooltipValueOnly?: boolean;
+
+  /**
+   * Collapse the y axis. Useful for mini trend charts that can grow to widths
+   * larger than COLLAPSE_Y_AXIS_THRESHOLD.
+   */
+  isYAxisCollapsed?: boolean;
 };
 
 export function TimeSeriesChart<
@@ -165,6 +171,7 @@ export function TimeSeriesChart<
   onSeriesClick,
   markNearestPointOnly,
   displayTooltipValueOnly,
+  isYAxisCollapsed: defaultIsYAxisCollapsed,
 }: TimeSeriesChartProps<T, C>) {
   const { siteText } = useIntl();
 
@@ -378,7 +385,8 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
-  const isYAxisCollapsed = width < COLLAPSE_Y_AXIS_THRESHOLD;
+  const isYAxisCollapsed =
+    defaultIsYAxisCollapsed ?? width < COLLAPSE_Y_AXIS_THRESHOLD;
   const timeSeriesAccessibility = addAccessibilityFeatures(accessibility, [
     'keyboard_time_series_chart',
   ]);

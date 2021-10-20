@@ -1,4 +1,4 @@
-import { colors } from '~/style/theme';
+import { colors } from '@corona-dashboard/common';
 import { OptionalDataConfig } from '..';
 import { ChoroplethDataItem } from './types';
 import {

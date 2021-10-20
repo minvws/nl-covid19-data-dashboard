@@ -1,3 +1,5 @@
+import { countTrailingNullValues } from './count-trailing-null-values';
+
 type ValuesWithLastValue<T> = {
   values: T[];
   last_value: T;
@@ -5,10 +7,11 @@ type ValuesWithLastValue<T> = {
 
 export function adjustDataToLastAccurateValue<T>(
   data: ValuesWithLastValue<T>,
-  numberOfItems: number,
-  metricProperty?: string
+  metricProperty?: keyof T
 ) {
-  if (numberOfItems > data.values.length) {
+  const numberOfItems = countTrailingNullValues(data.values, metricProperty);
+
+  if (numberOfItems >= data.values.length) {
     return data;
   }
 

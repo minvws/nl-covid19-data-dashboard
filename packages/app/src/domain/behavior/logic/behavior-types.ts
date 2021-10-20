@@ -10,6 +10,7 @@ export const behaviorIdentifiers = [
   'wear_mask_public_transport',
   'sneeze_cough_elbow',
   'max_visitors',
+  'ventilate_home',
 ] as const;
 
 export type BehaviorIdentifier = typeof behaviorIdentifiers[number];

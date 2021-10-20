@@ -1,4 +1,8 @@
-import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
+import {
+  colors,
+  NlBehaviorValue,
+  VrBehaviorValue,
+} from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -9,7 +13,6 @@ import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { SelectBehavior } from './components/select-behavior';
 import {
   BehaviorIdentifier,

@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, TickRendererProps } from '@visx/axis';
 import { GridColumns } from '@visx/grid';
@@ -10,14 +11,13 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { AgeDemographicCoordinates } from './age-demographic-coordinates';
-import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
-import { formatAgeGroupRange } from './utils';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
+import { AgeDemographicCoordinates } from './age-demographic-coordinates';
+import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
+import { formatAgeGroupRange } from './utils';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 

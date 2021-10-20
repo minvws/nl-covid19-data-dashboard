@@ -7,19 +7,28 @@ export const areaTitles = {
 
 export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
-export type ChartConfiguration = Omit<
-  Required<PartialChartConfiguration>,
-  'code'
-> & { code?: string };
+export type TimespanAnnotationConfiguration = {
+  fill: 'solid' | 'hatched' | 'dotted';
+  start: number;
+  end: number;
+  labelKey?: string;
+  shortLabelKey?: string;
+  cutValuesForMetricProperties?: string[];
+};
 
-export type PartialChartConfiguration = {
-  area?: AreaType;
-  metricName?: string;
-  metricPropertyConfigs?: MetricPropertyConfig[];
-  timeframe?: 'all' | '5weeks';
-  accessibilityKey?: string;
+export type ChartConfiguration = {
+  area: AreaType;
+  metricName: string;
+  metricProperties: MetricPropertyConfig[];
+  timeframe: 'all' | '5weeks';
+  accessibilityKey: string;
   code?: string;
-  sourceKey?: string;
+  sourceKey: string;
+  valueAnnotationKey?: string;
+  forcedMaximumValue?: number;
+  isPercentage?: boolean;
+  renderNullAsZero?: boolean;
+  timespanAnnotations?: TimespanAnnotationConfiguration[];
 };
 
 export type MetricPropertyConfig = {
@@ -33,8 +42,13 @@ export type MetricPropertyConfig = {
     | 'stacked-area'
     | 'gapped-stacked-area'
     | 'invisible';
-  curve?: 'linear' | 'step';
   labelKey: string;
+  curve?: 'linear' | 'step';
+  color?: string;
+  fillOpacity?: number;
+  strokeWidth?: number;
+  shortLabelKey?: string;
+  mixBlendMode?: string;
 };
 
 export type KpiConfiguration = Omit<

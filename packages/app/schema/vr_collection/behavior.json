@@ -71,6 +71,12 @@
     "max_visitors_compliance_trend": {
       "$ref": "#/definitions/value_trend"
     },
+    "ventilate_home_compliance": {
+      "type": ["integer", "null"]
+    },
+    "ventilate_home_compliance_trend": {
+      "$ref": "#/definitions/value_trend"
+    },
     "curfew_support": {
       "type": ["integer", "null"]
     },
@@ -119,6 +125,12 @@
     "max_visitors_support_trend": {
       "$ref": "#/definitions/value_trend"
     },
+    "ventilate_home_support": {
+      "type": ["integer", "null"]
+    },
+    "ventilate_home_support_trend": {
+      "$ref": "#/definitions/value_trend"
+    },
     "date_start_unix": {
       "type": "integer"
     },
@@ -147,6 +159,8 @@
     "sneeze_cough_elbow_compliance_trend",
     "max_visitors_compliance",
     "max_visitors_compliance_trend",
+    "ventilate_home_compliance",
+    "ventilate_home_compliance_trend",
     "curfew_support",
     "curfew_support_trend",
     "wash_hands_support",
@@ -163,6 +177,8 @@
     "sneeze_cough_elbow_support_trend",
     "max_visitors_support",
     "max_visitors_support_trend",
+    "ventilate_home_support",
+    "ventilate_home_support_trend",
     "date_start_unix",
     "date_end_unix",
     "date_of_insertion_unix",

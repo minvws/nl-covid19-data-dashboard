@@ -1,4 +1,5 @@
 import {
+  colors,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlVaccineCoveragePerAgeGroupEstimated,
@@ -19,8 +20,6 @@ import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
-import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
-import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -53,10 +52,10 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -132,12 +131,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
     data.intensive_care_nice.values,
-    INACCURATE_ITEMS_IC
+    countTrailingNullValues(
+      data.intensive_care_nice.values,
+      'admissions_on_date_of_admission_moving_average_rounded'
+    )
   );
 
   const underReportedRangeHospital = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    INACCURATE_ITEMS_HOSPITAL
+    countTrailingNullValues(
+      data.hospital_nice.values,
+      'admissions_on_date_of_admission_moving_average_rounded'
+    )
   );
 
   return (
@@ -167,7 +172,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       siteText.nationaal_actueel.mini_trend_tiles.ic_opnames
                         .menu_item_label,
-                    data: dataICTotal.values,
+                    data: trimNullValues(
+                      dataICTotal.values,
+                      'admissions_on_date_of_admission_moving_average_rounded'
+                    ),
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
@@ -183,7 +191,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       siteText.nationaal_actueel.mini_trend_tiles
                         .ziekenhuis_opnames.menu_item_label,
-                    data: dataHospitalIntake.values,
+                    data: trimNullValues(
+                      dataHospitalIntake.values,
+                      'admissions_on_date_of_admission_moving_average_rounded'
+                    ),
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:
@@ -351,7 +362,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     {
                       type: 'area',
-                      metricProperty: 'admissions_on_date_of_reporting',
+                      metricProperty: 'admissions_on_date_of_admission',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,

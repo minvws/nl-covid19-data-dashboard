@@ -1,5 +1,6 @@
 import {
   assert,
+  colors,
   Dictionary,
   InNamedDifference,
   InVariants,
@@ -13,7 +14,6 @@ import {
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
-import { colors } from '~/style/theme';
 
 export type VariantRow = {
   variant: string;

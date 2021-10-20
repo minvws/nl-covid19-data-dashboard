@@ -1,4 +1,8 @@
-import { VrCollectionHospitalNice, vrData } from '@corona-dashboard/common';
+import {
+  colors,
+  VrCollectionHospitalNice,
+  vrData,
+} from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -16,7 +20,6 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 

@@ -1,4 +1,5 @@
 import {
+  colors,
   NlSewer,
   SewerPerInstallationData,
   VrSewer,
@@ -7,7 +8,6 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Select } from '~/components/select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { colors } from '~/style/theme';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';

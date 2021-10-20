@@ -1,4 +1,4 @@
-import { Dictionary } from '@corona-dashboard/common';
+import { colors, Dictionary } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
@@ -14,7 +14,6 @@ import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-char
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
