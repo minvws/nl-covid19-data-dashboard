@@ -138,12 +138,12 @@ function KpiTile({
           flexWrap="nowrap"
           alignItems="center"
         >
-          <img
-            src={`/icons/app/${iconName}`}
-            width="40"
-            height="40"
+          <div
             aria-hidden={true}
             css={css({
+              background: `url(/icons/app/${iconName}) no-repeat top left`,
+              width: '30px',
+              height: '40px',
               color: '#000',
             })}
           />
