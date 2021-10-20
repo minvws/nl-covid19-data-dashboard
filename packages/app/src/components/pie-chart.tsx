@@ -122,7 +122,7 @@ export function PieChart<T>({
             listStyleType: 'none',
           })}
         >
-          {mappedDataWithValues.map((item, index) => (
+          {dataConfig.map((item, index) => (
             <Box
               as="li"
               key={`${item.color}-${index}`}
