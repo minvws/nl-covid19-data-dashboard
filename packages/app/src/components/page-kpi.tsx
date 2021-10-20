@@ -10,7 +10,7 @@ import { assert } from '~/utils/assert';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
 
-interface PageKpieBaseProps<T> {
+interface PageKpiBaseProps<T> {
   data: T;
   metricName: MetricKeys<T>;
   metricProperty: string;
@@ -30,9 +30,12 @@ type DifferenceProps =
       isAmount: boolean;
     };
 
-type PageKpiProps<T> = PageKpieBaseProps<T> & DifferenceProps;
+type PageKpiProps<T> = PageKpiBaseProps<T> & DifferenceProps;
 
-const metricNamesHoldingPartialData = ['infectious_people', 'reproduction'];
+export const metricNamesHoldingPartialData = [
+  'infectious_people',
+  'reproduction',
+];
 
 export function PageKpi<T>({
   data,

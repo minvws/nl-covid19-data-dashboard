@@ -1,11 +1,17 @@
-import { KpiConfiguration } from '@corona-dashboard/common';
+import {
+  formatStyle,
+  getLastFilledValue,
+  isDateSpanValue,
+  KpiConfiguration,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { PageKpi } from '~/components/page-kpi';
+import { metricNamesHoldingPartialData, PageKpi } from '~/components/page-kpi';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Box } from '../base';
@@ -17,6 +23,11 @@ interface InlineKpiProps {
   endDate?: string;
 }
 
+interface ServerData {
+  values: Record<string, any>[];
+  last_value: Record<string, any>;
+}
+
 function getDataUrl(configuration: KpiConfiguration, endDate?: string) {
   const { code, area, metricName } = configuration;
   const suffix = isDefined(endDate) ? `?end=${endDate}` : '';
@@ -24,9 +35,9 @@ function getDataUrl(configuration: KpiConfiguration, endDate?: string) {
 }
 
 export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
-  const { siteText } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
 
-  const { data } = useSWRImmutable(
+  const { data } = useSWRImmutable<ServerData>(
     getDataUrl(configuration, endDate),
     (url: string) => fetch(url).then((_) => _.json())
   );
@@ -54,6 +65,20 @@ export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
   const title = get(siteText, configuration.titleKey.split('.'), '');
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 
+  const lastValue = metricNamesHoldingPartialData.includes(
+    configuration.metricName as string
+  )
+    ? getLastFilledValue(data)
+    : get(data, ['last_value']);
+
+  const metadataDate = isDateSpanValue(lastValue as TimestampedValue)
+    ? toDateSpanString(
+        lastValue.date_start_unix,
+        lastValue.date_end_unix,
+        formatDateFromSeconds
+      )
+    : toDateString(lastValue.date_unix, formatDateFromSeconds);
+
   return (
     <ErrorBoundary>
       <Box width={{ _: '100%', md: '50%' }}>
@@ -62,6 +87,7 @@ export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
           iconName={configuration.icon}
           metadata={{
             source,
+            date: metadataDate,
           }}
         >
           {isPresent(differenceData) && (
@@ -164,4 +190,22 @@ function KpiTile({
       {metadata && <Metadata {...metadata} isTileFooter />}
     </>
   );
+}
+
+function toDateSpanString(
+  startDate: number,
+  endDate: number,
+  format: (v: number, s?: formatStyle) => string
+) {
+  return `${format(startDate, 'weekday-medium')}} - ${format(
+    endDate,
+    'weekday-medium'
+  )}`;
+}
+
+function toDateString(
+  date: number,
+  format: (v: number, s?: formatStyle) => string
+) {
+  return format(date, 'medium');
 }
