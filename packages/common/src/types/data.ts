@@ -950,7 +950,7 @@ export interface NlVariantsVariant {
 export interface NlVariantsVariantValue {
   occurrence: number;
   percentage: number;
-  is_variant_of_concern_or_interest: boolean;
+  is_variant_of_concern: boolean;
   has_historical_significance: boolean;
   sample_size: number;
   date_start_unix: number;
