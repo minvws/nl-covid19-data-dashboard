@@ -21,18 +21,40 @@ import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-s
 import { Metadata } from '../metadata';
 
 interface InlineTimeSeriesChartsProps {
+  startDate?: string;
+  endDate?: string;
   configuration: ChartConfiguration;
 }
 
+function getDataUrl(
+  startDate: string | undefined,
+  endDate: string | undefined,
+  configuration: ChartConfiguration
+) {
+  const { code, area, metricName } = configuration;
+  const qParams = [];
+
+  if (isDefined(startDate)) {
+    qParams.push(`start=${startDate}`);
+  }
+
+  if (isDefined(endDate)) {
+    qParams.push(`end=${endDate}`);
+  }
+
+  const suffix = qParams.length ? `?${qParams.join('&')}` : '';
+
+  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
+}
+
 export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
-  const { configuration } = props;
+  const { configuration, startDate, endDate } = props;
   const { siteText } = useIntl();
 
-  const { data } = useSWRImmutable(
-    `/api/data/timeseries/${configuration.code ?? configuration.area}/${
-      configuration.metricName
-    }`,
-    (url: string) => fetch(url).then((_) => _.json())
+  const dateUrl = getDataUrl(startDate, endDate, configuration);
+
+  const { data } = useSWRImmutable(dateUrl, (url: string) =>
+    fetch(url).then((_) => _.json())
   );
 
   const seriesConfig = useMemo(() => {

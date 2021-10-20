@@ -14,15 +14,20 @@ import { Metadata, MetadataProps } from '../metadata';
 
 interface InlineKpiProps {
   configuration: KpiConfiguration;
+  endDate?: string;
 }
 
-export function InlineKpi({ configuration }: InlineKpiProps) {
+function getDataUrl(configuration: KpiConfiguration, endDate?: string) {
+  const { code, area, metricName } = configuration;
+  const suffix = isDefined(endDate) ? `?end=${endDate}` : '';
+  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
+}
+
+export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
   const { siteText } = useIntl();
 
   const { data } = useSWRImmutable(
-    `/api/data/timeseries/${configuration.code ?? configuration.area}/${
-      configuration.metricName
-    }`,
+    getDataUrl(configuration, endDate),
     (url: string) => fetch(url).then((_) => _.json())
   );
   const { data: differenceData } = useDifferenceData(configuration);

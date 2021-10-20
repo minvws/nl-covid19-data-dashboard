@@ -4,6 +4,7 @@ import {
   sortTimeSeriesValues,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { getUnixTime, parseISO } from 'date-fns';
 import fs from 'fs';
 import { last } from 'lodash';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -16,8 +17,6 @@ const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { param, start, end } = req.query;
-  const startDate = +start;
-  const endDate = +end;
   const [root, metric, metricProperty] = param as [string, string, string];
 
   if (!root?.length || !metric?.length) {
@@ -27,12 +26,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const data = loadMetricData(root, metric, metricProperty);
-    if (isDefined(data)) {
+    if (isDefined(data) && isDefined(data.values)) {
       if (!isDefined(metricProperty)) {
         data.values = sortTimeSeriesValues(data.values);
       }
-      if (!isNaN(startDate) || !isNaN(endDate)) {
-        data.values = filterByDateSpan(data.values, startDate, endDate);
+      if (!isDefined(start) || !isDefined(end)) {
+        data.values = filterByDateSpan(
+          data.values,
+          start as string,
+          end as string
+        );
         data.last_value = last(data.values);
       }
       res.status(200).json(data);
@@ -65,9 +68,12 @@ function loadMetricData(root: string, metric: string, metricProperty?: string) {
 
 function filterByDateSpan(
   values: TimestampedValue[],
-  startDate: number,
-  endDate: number
+  start: string | undefined,
+  end: string | undefined
 ): TimestampedValue[] {
+  const startDate = createTimestamp(start);
+  const endDate = createTimestamp(end);
+
   if (isDateSeries(values)) {
     if (!isNaN(startDate) && !isNaN(endDate)) {
       return values.filter(
@@ -90,4 +96,13 @@ function filterByDateSpan(
     }
   }
   return values;
+}
+
+function createTimestamp(dateStr: string | undefined): number {
+  if (isDefined(dateStr)) {
+    // Suffix the date string with a Z to indicate that this is a UTC date:
+    const parsedDate = parseISO(`${dateStr}Z`);
+    return getUnixTime(parsedDate);
+  }
+  return NaN;
 }
