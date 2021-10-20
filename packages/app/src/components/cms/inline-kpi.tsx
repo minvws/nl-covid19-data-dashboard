@@ -65,19 +65,15 @@ export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
   const title = get(siteText, configuration.titleKey.split('.'), '');
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 
-  const lastValue = metricNamesHoldingPartialData.includes(
-    configuration.metricName as string
-  )
-    ? getLastFilledValue(data)
-    : get(data, ['last_value']);
+  const lastValue = getLastValue(data, configuration.metricName);
 
-  const metadataDate = isDateSpanValue(lastValue as TimestampedValue)
-    ? toDateSpanString(
+  const metadataDate = isDateSpanValue(lastValue)
+    ? formatDateSpanString(
         lastValue.date_start_unix,
         lastValue.date_end_unix,
         formatDateFromSeconds
       )
-    : toDateString(lastValue.date_unix, formatDateFromSeconds);
+    : formatDateValueString(lastValue.date_unix, formatDateFromSeconds);
 
   return (
     <ErrorBoundary>
@@ -192,7 +188,7 @@ function KpiTile({
   );
 }
 
-function toDateSpanString(
+function formatDateSpanString(
   startDate: number,
   endDate: number,
   format: (v: number, s?: formatStyle) => string
@@ -203,9 +199,17 @@ function toDateSpanString(
   )}`;
 }
 
-function toDateString(
+function formatDateValueString(
   date: number,
   format: (v: number, s?: formatStyle) => string
 ) {
   return format(date, 'medium');
+}
+
+function getLastValue(data: ServerData, metricName: string): TimestampedValue {
+  return (
+    metricNamesHoldingPartialData.includes(metricName)
+      ? getLastFilledValue(data as any)
+      : get(data, ['last_value'])
+  ) as TimestampedValue;
 }

@@ -11,7 +11,7 @@ type source = {
   aria_text?: string;
 };
 export interface MetadataProps extends MarginBottomProps {
-  date?: number | [number, number];
+  date?: number | [number, number] | string;
   source?: source;
   dataSources?: source[];
   obtainedAt?: number;
