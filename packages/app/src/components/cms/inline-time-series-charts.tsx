@@ -116,7 +116,7 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
       isPercentage: configuration.isPercentage,
       renderNullAsZero: configuration.renderNullAsZero,
       valueAnnotation: configuration.valueAnnotationKey?.length
-        ? configuration.valueAnnotationKey
+        ? get(siteText, configuration.valueAnnotationKey.split('.'), undefined)
         : undefined,
       timespanAnnotations,
     } as DataOptions;
