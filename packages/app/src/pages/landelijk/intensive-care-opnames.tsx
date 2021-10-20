@@ -2,8 +2,8 @@ import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
@@ -13,6 +13,7 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { getBarScaleConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -142,11 +143,18 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               {bedsLastValue.beds_occupied_covid !== null &&
                 bedsLastValue.beds_occupied_covid_percentage !== null && (
                   <>
-                    <KpiValue
-                      data-cy="beds_occupied_covid"
-                      absolute={bedsLastValue.beds_occupied_covid}
+                    <PageBarScale
+                      value={bedsLastValue.beds_occupied_covid}
+                      config={getBarScaleConfig(
+                        'nl',
+                        'intensive_care_lcps',
+                        'beds_occupied_covid'
+                      )}
                       difference={
                         data.difference.intensive_care_lcps__beds_occupied_covid
+                      }
+                      screenReaderText={
+                        text.kpi_bedbezetting.barscale_screenreader_text
                       }
                       isAmount
                     />

@@ -24,7 +24,7 @@ import {
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
-import { hash } from '~/utils/api/hash';
+import { hash } from '~/utils/hash';
 
 const publicPath = path.resolve(__dirname, '../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
