@@ -28,7 +28,7 @@ type PieChartProps<T> = {
 export function PieChart<T>({
   data,
   dataConfig,
-  paddingLeft = 20,
+  paddingLeft = 40,
   size = 200,
   donutWidth = 35,
   padAngle = 0.03,
