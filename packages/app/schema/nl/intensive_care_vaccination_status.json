@@ -19,7 +19,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_intensive_care_vaccination_status_value",
+      "title": "nl_hospital_vaccination_status_value",
       "type": "object",
       "properties": {
         "total_amount_of_people": {
@@ -56,13 +56,10 @@
       "required": [
         "total_amount_of_people",
         "fully_vaccinated",
-        "fully_vaccinated_label",
         "fully_vaccinated_percentage",
         "has_one_shot",
-        "has_one_shot_label",
         "has_one_shot_percentage",
         "not_vaccinated",
-        "not_vaccinated_label",
         "not_vaccinated_percentage",
         "date_start_unix",
         "date_end_unix",
