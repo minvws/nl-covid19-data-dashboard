@@ -36,8 +36,6 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
 
   content.content = mergeAdjacentKpiBlocks(content.content);
 
-  console.dir(content.content);
-
   return (
     <Layout
       {...siteText.over_risiconiveaus_metadata}
