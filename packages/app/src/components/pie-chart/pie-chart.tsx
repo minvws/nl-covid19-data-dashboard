@@ -7,14 +7,28 @@ import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-const VACCINATION_STATUS_HOSPITAL = {
-  fully_vaccinated: 300,
-  partly_vaccinated: 31,
-  not_vaccinated: 700,
-};
+interface PieChartProps {
+  data: any;
+  config: any;
+  paddingLeft?: number;
+  size?: number;
+  donutWidth?: number;
+  padAngle?: number;
+  minimumPercentageSlice?: number;
+  layout?: 'horizontal' | 'vertical';
+}
 
-function Chart({ data, config, pieConfig, paddingLeft }) {
-  const radius = Math.min(pieConfig.width, pieConfig.height) / 2;
+function PieChart({
+  data,
+  config,
+  paddingLeft = 20,
+  size = 200,
+  donutWidth = 35,
+  padAngle = 0.03,
+  minimumPercentageSlice = 0.5,
+  layout = 'horizontal',
+}: PieChartProps) {
+  const radius = Math.min(size, size) / 2;
 
   const totalValue = config.reduce(
     (previousValue, { metricProperty }) => previousValue + data[metricProperty],
@@ -26,7 +40,7 @@ function Chart({ data, config, pieConfig, paddingLeft }) {
       __value:
         data[i.metricProperty] === 0
           ? // Calculcate the percentage that needs to be added to the graph
-            totalValue * (pieConfig.minimumPercentageSlice / 100) * 2
+            totalValue * (minimumPercentageSlice / 100) * 2
           : data[i.metricProperty],
       ...i,
     };
@@ -37,16 +51,18 @@ function Chart({ data, config, pieConfig, paddingLeft }) {
       paddingLeft={paddingLeft}
       display="flex"
       spacingHorizontal={5}
-      alignItems="center"
+      spacing={{}}
+      alignItems={'center'}
+      flexDirection={{ _: 'column', sm: 'row' }}
     >
-      <svg width={pieConfig.width} height={pieConfig.height}>
-        <Group top={pieConfig.width / 2} left={pieConfig.height / 2}>
+      <svg width={size} height={size} aria-hidden="true">
+        <Group top={size / 2} left={size / 2}>
           <Pie
             data={dataMapped}
             outerRadius={radius}
-            innerRadius={radius - pieConfig.donutWidth}
+            innerRadius={radius - donutWidth}
             pieValue={(d) => d.__value}
-            padAngle={pieConfig.padAngle}
+            padAngle={padAngle}
           >
             {(pie) => {
               return pie.arcs.map((arc, index) => {
@@ -54,7 +70,7 @@ function Chart({ data, config, pieConfig, paddingLeft }) {
 
                 return (
                   <path
-                    d={arcPath}
+                    d={arcPath as string}
                     fill={arc.data.color}
                     key={`arc-${index}`}
                   />
@@ -68,6 +84,7 @@ function Chart({ data, config, pieConfig, paddingLeft }) {
       <Box
         spacing={3}
         as="ol"
+        width={{ _: '100%', sm: undefined }}
         css={css({
           listStyleType: 'none',
         })}
@@ -98,7 +115,13 @@ function Chart({ data, config, pieConfig, paddingLeft }) {
   );
 }
 
-export function PieChart() {
+const VACCINATION_STATUS_HOSPITAL = {
+  fully_vaccinated: 300,
+  partly_vaccinated: 31,
+  not_vaccinated: 700,
+};
+
+export function PieChartTile() {
   return (
     <ChartTile
       title={'Vaccinatiestatus ziekenhuisopnames'}
@@ -107,16 +130,9 @@ export function PieChart() {
         'Vaccinatiestatus van **1.369** COVID-19 patienten, opgenomen in het ziekenhuis (incluslief IC) tussen 1 september en 3 oktober 2021.'
       }
     >
-      <Chart
+      <PieChart
         data={VACCINATION_STATUS_HOSPITAL}
-        paddingLeft={20}
-        pieConfig={{
-          width: 200,
-          height: 200,
-          donutWidth: 35,
-          padAngle: 0.03,
-          minimumPercentageSlice: 0.5,
-        }}
+        layout="vertical"
         config={[
           {
             metricProperty: 'fully_vaccinated',
