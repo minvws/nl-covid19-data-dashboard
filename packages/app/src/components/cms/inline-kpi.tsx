@@ -5,6 +5,7 @@ import {
   KpiConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { Clock } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
@@ -12,7 +13,7 @@ import useSWRImmutable from 'swr/immutable';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { metricNamesHoldingPartialData, PageKpi } from '~/components/page-kpi';
-import { Heading, Text } from '~/components/typography';
+import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
@@ -44,7 +45,11 @@ export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
   const { data: differenceData } = useDifferenceData(configuration);
 
   if (!isDefined(data) || !isDefined(differenceData)) {
-    return <Text>Loading...</Text>;
+    return (
+      <Box width={{ _: '100%', md: '50%' }}>
+        <Clock width="3em" height="3em" />
+      </Box>
+    );
   }
 
   const allData = configuration.differenceKey?.length

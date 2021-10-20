@@ -4,6 +4,7 @@ import {
   TimespanAnnotationConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { Clock } from '@corona-dashboard/icons';
 import { get } from 'lodash';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
@@ -14,10 +15,10 @@ import {
   DataOptions,
   TimespanAnnotationConfig,
 } from '~/components/time-series-chart/logic/common';
-import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
+import { Box } from '../base';
 import { Metadata } from '../metadata';
 
 interface InlineTimeSeriesChartsProps {
@@ -122,7 +123,11 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
   }, [configuration, siteText, data]);
 
   if (!isDefined(data)) {
-    return <Text>Loading...</Text>;
+    return (
+      <Box width="100%">
+        <Clock width="3em" height="3em" />
+      </Box>
+    );
   }
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');
