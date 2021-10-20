@@ -10,6 +10,7 @@ import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
+import { PieChart } from '~/components/pie-chart/pie-chart';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -127,6 +128,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             pageLinks={content.page.pageLinks}
             articles={content.highlight.articles}
           />
+
+          <PieChart />
 
           <TwoKpiSection>
             <KpiTile
