@@ -534,10 +534,10 @@ export interface NlIntensiveCareLcpsValue {
   date_of_insertion_unix: number;
 }
 export interface NlIntensiveCareVaccinationStatus {
-  values: NlHospitalVaccinationStatusValue1[];
-  last_value: NlHospitalVaccinationStatusValue1;
+  values: NlIntensiveCareVaccinationStatusValue[];
+  last_value: NlIntensiveCareVaccinationStatusValue;
 }
-export interface NlHospitalVaccinationStatusValue1 {
+export interface NlIntensiveCareVaccinationStatusValue {
   total_amount_of_people: number;
   fully_vaccinated: number;
   fully_vaccinated_percentage: number;
