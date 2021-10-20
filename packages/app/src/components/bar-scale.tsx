@@ -142,7 +142,7 @@ export function BarScale({
 
           {limit && showAxis && (
             <g>
-              {value > limit && (
+              {scale(limit) < 100 && (
                 <line
                   x1={`${scale(limit)}%`}
                   x2={`${scale(limit)}%`}
@@ -154,7 +154,7 @@ export function BarScale({
               )}
               <text
                 x={`${scale(limit)}%`}
-                y={value > limit ? 72 : 64}
+                y={scale(limit) < 100 ? 72 : 64}
                 textAnchor={textAlign(scale(limit) ?? 0)}
                 css={css({ fill: 'annotation', fontSize: '0.875rem' })}
               >
