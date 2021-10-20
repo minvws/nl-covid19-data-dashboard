@@ -217,23 +217,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={siteText.ic_admissions_per_age_group.chart_title}
-            description={siteText.ic_admissions_per_age_group.chart_description}
-            timeframeOptions={['all', '5weeks']}
-            metadata={{ source: text.bronnen.nice }}
-          >
-            {(timeframe) => (
-              <AdmissionsPerAgeGroup
-                accessibility={{
-                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
-                }}
-                values={data.intensive_care_nice_per_age_group.values}
-                timeframe={timeframe}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
             metadata={{ source: text.bronnen.lnaz }}
@@ -264,6 +247,23 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
+            title={siteText.ic_admissions_per_age_group.chart_title}
+            description={siteText.ic_admissions_per_age_group.chart_description}
+            timeframeOptions={['all', '5weeks']}
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
+                }}
+                values={data.intensive_care_nice_per_age_group.values}
+                timeframe={timeframe}
               />
             )}
           </ChartTile>
