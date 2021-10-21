@@ -5,7 +5,6 @@ import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
-//import sharp from 'sharp';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
 import {
