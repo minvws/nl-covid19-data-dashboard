@@ -56,10 +56,10 @@ export function PieChart<T>({
         const currentProperty = data[config.metricProperty];
 
         return {
-          __value:
-            data[currentProperty] === 0
-              ? totalValue * (minimumPercentageWhenZero / 100) * 2
-              : data[config.metricProperty],
+          __value: Math.max(
+            currentProperty,
+            totalValue * (minimumPercentageWhenZero / 100) * 2
+          ),
           ...config,
         };
       }),
@@ -92,7 +92,7 @@ export function PieChart<T>({
               data={mappedDataWithValues}
               outerRadius={radius}
               innerRadius={radius - donutWidth}
-              pieValue={(x) => x.__value as number}
+              pieValue={(x) => x.__value}
               // Sort by the order of the config
               pieSortValues={(d, i) => i}
               padAngle={padAngle}
