@@ -41,6 +41,7 @@ import {
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -98,7 +99,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
-  const { siteText } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
   const text = siteText.ziekenhuisopnames_per_dag;
 
   return (
@@ -131,7 +132,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
-              description={text.extra_uitleg}
+              description={replaceVariablesInText(text.extra_uitleg, {
+                dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+              })}
               metadata={{
                 date: sevenDayAverageDates,
                 source: text.bronnen.nice,

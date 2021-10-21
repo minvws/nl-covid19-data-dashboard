@@ -15,6 +15,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   metricProperty,
   differenceKey,
   text,
+  additionalData,
 }: Extract<Content<T>, { type: 'metric' }> & { data: K }) {
   const { siteText, formatNumber } = useIntl();
 
@@ -60,6 +61,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
             {formatNumber(propertyValue)}
           </InlineText>
         ),
+        ...(additionalData || {}),
       })}
     </>
   );

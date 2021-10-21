@@ -63,7 +63,7 @@ const DAY_IN_SECONDS = 24 * 60 * 60;
 const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText, formatPercentage } = useIntl();
+  const { siteText, formatPercentage, formatDateFromSeconds } = useIntl();
 
   const text = siteText.ic_opnames_per_dag;
 
@@ -129,7 +129,12 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
                 isMovingAverageDifference
               />
-              <Markdown content={text.extra_uitleg} />
+              <Markdown
+                content={replaceVariablesInText(text.extra_uitleg, {
+                  dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                  dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+                })}
+              />
             </KpiTile>
 
             <KpiTile

@@ -48,8 +48,8 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -95,6 +95,9 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const {
     choropleth,
@@ -139,6 +142,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
       'admissions_on_date_of_admission_moving_average_rounded'
     )
   );
+
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -222,6 +230,14 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                         ]}
                       />

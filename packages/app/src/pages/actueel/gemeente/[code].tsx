@@ -102,6 +102,9 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const {
     municipalityName,
@@ -156,6 +159,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
       'admissions_on_date_of_admission_moving_average_rounded'
     )
   );
+
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -236,6 +244,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                         ]}
                       />

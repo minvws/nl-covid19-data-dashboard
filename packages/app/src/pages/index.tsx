@@ -52,8 +52,9 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -107,6 +108,9 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -144,6 +148,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       'admissions_on_date_of_admission_moving_average_rounded'
     )
   );
+
+  const sevenDayAverageDatesIntensiveCare: [number, number] = [
+    underReportedRangeIntensiveCare - WEEK_IN_SECONDS,
+    underReportedRangeIntensiveCare - DAY_IN_SECONDS,
+  ];
+
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -242,6 +256,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
@@ -324,6 +346,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
