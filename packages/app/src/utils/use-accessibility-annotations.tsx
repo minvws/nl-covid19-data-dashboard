@@ -6,10 +6,10 @@ import { SiteText } from '~/locale';
 
 export interface AccessibilityDefinition {
   key: keyof SiteText['accessibility']['charts'];
-  features?: AccesssibilityFeature[];
+  features?: AccessibilityFeature[];
 }
 
-type AccesssibilityFeature =
+type AccessibilityFeature =
   | 'keyboard_time_series_chart'
   | 'keyboard_bar_chart'
   | 'keyboard_choropleth';
@@ -84,7 +84,7 @@ export function useAccessibilityAnnotations(
 
 export function addAccessibilityFeatures(
   options: AccessibilityDefinition,
-  additionalFeatures: AccesssibilityFeature[]
+  additionalFeatures: AccessibilityFeature[]
 ): AccessibilityDefinition {
   return {
     ...options,

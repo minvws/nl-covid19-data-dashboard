@@ -52,7 +52,7 @@ export function Metadata({
   const { siteText } = useIntl();
   const text = siteText.common.metadata;
 
-  const dateText = useFormateDateText(
+  const dateText = useFormatDateText(
     dateOrRange,
     dateOfInsertionUnix,
     datumsText
@@ -96,7 +96,7 @@ export function Metadata({
   );
 }
 
-function useFormateDateText(
+function useFormatDateText(
   dateOrRange: number | DateRange,
   dateOfInsertionUnix: number,
   datumsText: string
