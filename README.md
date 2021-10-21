@@ -4,17 +4,11 @@ The dashboard provides information on the outbreak and prevalence of COVID-19 in
 The Netherlands. It combines measured and modelled data from various sources to
 give a broad perspective on the subject.
 
-## Disclaimer
+## Contact
 
-This dashboard is developed and maintained by a different team than the NL
-COVID-19 Notification App. They are separate projects. If you want to get in
-touch with that team, please join the CODE for NL Slack and join the channel
-`#coronadashboard`.
-
-Tamas Erkelens from the Municipality of Amsterdam is the contact person for the
-project team that made the dashboard.
-
-[CODE For NL Slack](https://doemee.codefor.nl)
+If you want to contact the dashboard team, feel free to open an issue for 
+technical questions, bug reports or security findings. If you have a generic question or remark about the
+corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.
 
 ## Development & Contribution process
 
