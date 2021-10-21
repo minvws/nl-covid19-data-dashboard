@@ -90,7 +90,7 @@ const attrsToString = (attrs) => {
   );
 };
 
-const lookup = icons.map((x) => `${pascalcase(x)}: '${x}.svg'`);
+const lookup = icons.sort().map((x) => `${pascalcase(x)}: '${x}.svg'`);
 
 const iconName2filename = ['export const iconName2filename = {']
   .concat(lookup.join(','))

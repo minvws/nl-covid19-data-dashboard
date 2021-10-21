@@ -319,3 +319,6 @@ timestamp,action,key,document_id,move_to
 2021-10-13T10:22:19.000Z,add,breadcrumbs.redirects.landelijk,nr2mIdlRRUQmHvbOdJw4m2,__
 2021-10-13T10:22:20.641Z,add,breadcrumbs.redirects.veiligheidsregio,r7l3neeB0b91piSnbsHs3C,__
 2021-10-13T10:22:21.766Z,add,breadcrumbs.redirects.gemeente,r7l3neeB0b91piSnbsHtY3,__
+2021-10-21T10:19:23.212Z,add,vaccinaties.coverage_kinds.fully_vaccinated_percentage,jDbv30Y7XYH5kl8ZaoSZwv,__
+2021-10-21T10:19:24.230Z,add,vaccinaties.coverage_kinds.has_one_shot_percentage,F3sVnbafS2gMInMltpLvWm,__
+2021-10-21T10:19:25.260Z,add,vaccinaties.coverage_kind_dropdown.label,jDbv30Y7XYH5kl8ZaoSa6I,__
