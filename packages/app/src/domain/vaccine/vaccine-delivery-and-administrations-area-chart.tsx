@@ -25,14 +25,13 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
   data: DeliveryAndAdministrationData;
 }) {
   const { siteText, formatNumber } = useIntl();
+  const breakpoints = useBreakpoints(true);
+
   const firstValue = first(data.values);
   const vaccineNames = useMemo(
     () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
     [firstValue]
   );
-
-  const breakpoints = useBreakpoints(true);
-
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
