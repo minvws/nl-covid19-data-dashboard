@@ -30,7 +30,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (!isDefined(metricProperty)) {
         data.values = sortTimeSeriesValues(data.values);
       }
-      if (!isDefined(start) || !isDefined(end)) {
+      if (isDefined(start) || isDefined(end)) {
         data.values = filterByDateSpan(
           data.values,
           start as string,
@@ -68,8 +68,8 @@ function loadMetricData(root: string, metric: string, metricProperty?: string) {
 
 function filterByDateSpan(
   values: TimestampedValue[],
-  start: string | undefined,
-  end: string | undefined
+  start?: string,
+  end?: string
 ): TimestampedValue[] {
   const startDate = createTimestamp(start);
   const endDate = createTimestamp(end);

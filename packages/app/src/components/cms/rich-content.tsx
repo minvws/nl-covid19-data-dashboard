@@ -137,7 +137,7 @@ export function RichContent({
 
         return (
           <ContentWrapper>
-            <InlineKpi configuration={kpi.config} endDate={kpi.endDate} />
+            <InlineKpi configuration={kpi.config} date={kpi.endDate} />
           </ContentWrapper>
         );
       },
@@ -155,11 +155,11 @@ export function RichContent({
             >
               <InlineKpi
                 configuration={kpiLeft.config}
-                endDate={kpiLeft.endDate}
+                date={kpiLeft.endDate}
               />
               <InlineKpi
                 configuration={kpiRight.config}
-                endDate={kpiRight.endDate}
+                date={kpiRight.endDate}
               />
             </Box>
           </ContentWrapper>

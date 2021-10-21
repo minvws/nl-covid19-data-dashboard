@@ -21,7 +21,7 @@ import { Metadata, MetadataProps } from '../metadata';
 
 interface InlineKpiProps {
   configuration: KpiConfiguration;
-  endDate?: string;
+  date?: string;
 }
 
 interface ServerData {
@@ -29,17 +29,17 @@ interface ServerData {
   last_value: Record<string, any>;
 }
 
-function getDataUrl(configuration: KpiConfiguration, endDate?: string) {
+function getDataUrl(configuration: KpiConfiguration, date?: string) {
   const { code, area, metricName } = configuration;
-  const suffix = isDefined(endDate) ? `?end=${endDate}` : '';
+  const suffix = isDefined(date) ? `?end=${date}` : '';
   return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
 }
 
-export function InlineKpi({ configuration, endDate }: InlineKpiProps) {
+export function InlineKpi({ configuration, date }: InlineKpiProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
   const { data } = useSWRImmutable<ServerData>(
-    getDataUrl(configuration, endDate),
+    getDataUrl(configuration, date),
     (url: string) => fetch(url).then((_) => _.json())
   );
   const { data: differenceData } = useDifferenceData(configuration);
