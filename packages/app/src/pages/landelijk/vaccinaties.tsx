@@ -1,11 +1,9 @@
 import { colors, NlVaccineCoverageValue } from '@corona-dashboard/common';
-import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -280,21 +278,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <Spacer pb={3} />
 
           <PageInformationBlock
-            title={text.bereidheid_section.title}
-            description={text.bereidheid_section.description}
-            referenceLink={text.bereidheid_section.reference.href}
-            icon={<Vaccinaties />}
-            metadata={{
-              datumsText: text.bereidheid_datums,
-              dateOrRange:
-                data.vaccine_vaccinated_or_support.last_value
-                  .date_of_insertion_unix,
-              dateOfInsertionUnix:
-                data.vaccine_vaccinated_or_support.last_value
-                  .date_of_insertion_unix,
-              dataSources: [],
-            }}
+            title={text.section_archived.title}
+            description={text.section_archived.description}
           />
+
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+
+          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
 
           <ChartTile
             title={text.grafiek_draagvlak.titel}
@@ -386,36 +376,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           </ChartTile>
-
-          <Spacer pb={3} />
-
-          <PageInformationBlock
-            title={text.stock_and_delivery_section.title}
-            icon={<Vaccinaties />}
-            description={text.stock_and_delivery_section.description}
-            referenceLink={text.stock_and_delivery_section.reference.href}
-            metadata={{
-              datumsText: text.levering_en_voorraad_datums,
-              dateOrRange: data.vaccine_stock.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.vaccine_stock.last_value.date_of_insertion_unix,
-              dataSources: [],
-            }}
-          />
-
-          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
-
-          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
-
-          <Spacer pb={3} />
-
-          <PageInformationBlock
-            title={'text.stock_and_delivery_section.title'}
-            description={' > text.stock_and_delivery_section.description'}
-          />
-
-          <Markdown content="> text.stock_and_delivery_section.description" />
-          <Markdown content="```Mercury Use code in your Markdown file.```" />
         </TileList>
       </NlLayout>
     </Layout>
