@@ -40,7 +40,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       return {
         variantSidebarValue: getVariantSidebarValue(variants) ?? null,
         ...getVariantTableData(variants, data.selectedNlData.named_difference),
-        // ...getVariantChartData(variants),
+        ...getVariantChartData(variants),
       };
     },
     createGetContent<{
@@ -81,6 +81,8 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
+  console.log(variantChart);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -119,13 +121,13 @@ export default function CovidVariantenPage(
             />
           )}
 
-          {/* <VariantsStackedAreaTile
+          <VariantsStackedAreaTile
             text={text.varianten_over_tijd_grafiek}
             values={variantChart}
             metadata={{
               dataSources: [text.bronnen.rivm],
             }}
-          /> */}
+          />
         </TileList>
       </NlLayout>
     </Layout>
