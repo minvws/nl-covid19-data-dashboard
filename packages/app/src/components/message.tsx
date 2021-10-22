@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { spacingStyle } from '~/style/functions/spacing';
 
-type Variant = 'warning';
+type Variant = 'warning' | 'message';
 
 interface MessageProps {
   children: ReactNode;
@@ -15,6 +15,10 @@ const theme: Record<Variant, { backgroundColor: string; borderColor: string }> =
     warning: {
       backgroundColor: '#FFFADE',
       borderColor: '#FFE766',
+    },
+    message: {
+      backgroundColor: 'blue',
+      borderColor: 'pink',
     },
   };
 
