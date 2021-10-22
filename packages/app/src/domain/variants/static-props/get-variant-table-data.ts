@@ -17,8 +17,9 @@ import { isDefined, isPresent } from 'ts-is-present';
 
 export type VariantRow = {
   variant: string;
-  percentage: number | null;
+  percentage: number;
   difference?: OptionalNamedDifferenceDecimal;
+  has_historical_significance: boolean;
   color: string;
 };
 
@@ -41,7 +42,7 @@ export function getVariantTableData(
       const difference = namedDifference.variants__percentage.find(
         (x) => x.name === name
       );
-      // assert(difference, `No variants__percentage found for variant ${name}`);
+      assert(difference, `No variants__percentage found for variant ${name}`);
       return difference;
     }
   }
@@ -55,6 +56,7 @@ export function getVariantTableData(
   const firstLastValue = first<NlVariantsVariant | InVariantsVariant>(
     variants.values
   );
+
   const dates = {
     date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
     date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
@@ -75,8 +77,19 @@ export function getVariantTableData(
     : true;
 
   const variantTable = variants.values
-    .filter((variant) => !variant.last_value.has_historical_significance)
-    .map<VariantRow>((variant) => ({
+    /**
+     * Since the schemas for international still has to change to
+     * the new setup this prevents the typescript error for now.
+     */
+    .map((variant) => ({
+      has_historical_significance:
+        'has_historical_significance' in variant.last_value
+          ? variant.last_value.has_historical_significance
+          : true,
+      ...variant,
+    }))
+    .filter((variant) => !variant.has_historical_significance)
+    .map((variant) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
