@@ -60,7 +60,7 @@ export function VariantsStackedAreaTile({
   );
 }
 
-const alwayEnabled: (keyof VariantChartValue)[] = [];
+const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
   text: VariantsStackedAreaTileText;
@@ -76,7 +76,7 @@ function VariantStackedAreaTileWithData({
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
   const { list, toggle, clear } =
-    useList<keyof VariantChartValue>(alwayEnabled);
+    useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
     text,
@@ -191,7 +191,7 @@ function useFilteredSeriesConfig(
     return [otherConfig, ...seriesConfig].filter(
       (item) =>
         compareList.includes(item.metricProperty) ||
-        compareList.length === alwayEnabled.length
+        compareList.length === alwaysEnabled.length
     );
   }, [seriesConfig, otherConfig, compareList]);
 }

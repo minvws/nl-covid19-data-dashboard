@@ -38,7 +38,7 @@ export function RichContentSelect<T extends string>(
   } = useRichContentSelect(options, onChange, initialValue);
 
   return (
-    <Box css={css({ pb: 3 })}>
+    <Box css={css({ pb: 3 })} height="100%">
       {visuallyHiddenLabel ? (
         <VisuallyHidden as="label" id={labelId}>
           {typeof label === 'string' ? <InlineText>{label}</InlineText> : label}
@@ -56,7 +56,7 @@ export function RichContentSelect<T extends string>(
         </label>
       )}
 
-      <SelectBoxRoot>
+      <SelectBoxRoot height="100%">
         <SelectBox {...getComboboxProps()}>
           {isPresent(selectedOption) && (
             <>

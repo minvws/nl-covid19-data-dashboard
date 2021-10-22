@@ -34,7 +34,8 @@ import {
 } from '~/static-props/get-data';
 import { IntakeHospitalPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -80,7 +81,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const sevenDayAverageDates: [number, number] = [
-    intakeUnderReportedRange - WEEK_IN_SECONDS - DAY_IN_SECONDS,
+    intakeUnderReportedRange - WEEK_IN_SECONDS,
     intakeUnderReportedRange - DAY_IN_SECONDS,
   ];
 

@@ -62,7 +62,7 @@ export function SEOHead(props: SEOHeadProps) {
       <link
         key="dc-authority-title"
         rel="overheid:authority"
-        href="http://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
+        href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
       <meta
@@ -74,7 +74,7 @@ export function SEOHead(props: SEOHeadProps) {
       <link
         key="dc-creator-title"
         rel="dcterms:creator"
-        href="http://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
+        href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
       <link
