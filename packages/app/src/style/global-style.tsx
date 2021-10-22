@@ -64,7 +64,7 @@ svg {
 }
 
 
-/* Remove outline from programatically focussed elements. */
+/* Remove outline from programmatically focussed elements. */
 [tabindex='-1']:focus {
   outline: none;
 }

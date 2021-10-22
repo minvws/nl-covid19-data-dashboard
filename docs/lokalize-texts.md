@@ -67,8 +67,8 @@ when resolving conflicts, so that none of the lines are ever deleted.
 
 The application reads its locale strings from
 `packages/app/public/nl_export.json` and `packages/app/public/en_export.json`.
-These JSONs are exported from the Sanity lokalize documents but they are not
-part of the repository. Therefore you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
+These JSONs are exported from the Sanity lokalize documents, but they are not
+part of the repository. Therefore, you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
 Sanity dataset.
 
 The JSONs will include Sanity document ids in every leaf-key which are used to
@@ -133,7 +133,7 @@ prepare them for an upcoming release.
 
 ## Sync After Feature
 
-The `sync-after-feature` command is triggered automatically by a Github Action
+The `sync-after-feature` command is triggered automatically by a GitHub Action
 whenever a feature branch is merged to the develop branch. It contains the
 following logic:
 
@@ -198,7 +198,7 @@ but this is something to be aware of.
 
 ## When things break
 
-The above described workflows are not 100% fool proof. Situation do arise where the
+The above described workflows are not 100% foolproof. Situation do arise where the
 mutations file somehow becomes out of sync with the Sanity dataset.
 Usually this happens when a release is being cherry-picked from a number of disparate
 commits that might have branched off or merged off the develop set where multiple
@@ -206,6 +206,6 @@ changes have happened in the mutations file.
 The `lokalize:add` script can help out here if for some reason a single key/value document
 needs to be added to Sanity. For example, when the mutations file contains an `add` command
 but for some reason this document hasn't been added to the production dataset. (This situation
-has already occured).
+has already occurred).
 Also see the section `release-procedure/Intermediate or Hotfix Release` for other faulty
 situations that might occur.

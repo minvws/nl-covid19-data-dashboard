@@ -32,7 +32,7 @@ const dateSeriesValues = [
 ];
 
 // This holds the rest of the values in a date series. Currently only holds
-// the last_value becuase it is required for a timeSeries to be valid
+// the last_value because it is required for a timeSeries to be valid
 const dateSeriesRest = {
   last_value: {
     date_unix: 1612828800,
@@ -69,7 +69,7 @@ const dateSpanSeriesValues = [
 ];
 
 // This holds the rest of the values in a date span series. Currently only holds
-// the last_value becuase it is required for a timeSeries to be valid
+// the last_value because it is required for a timeSeries to be valid
 const dateSpanSeriesRest = {
   last_value: {
     date_start_unix: 1612137600,
