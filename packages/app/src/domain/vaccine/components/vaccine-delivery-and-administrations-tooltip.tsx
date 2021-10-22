@@ -14,10 +14,6 @@ export function VaccineDeliveryAndAdministrationsTooltip<
   const { value, configIndex, config, options, metricPropertyFormatters } =
     data;
 
-  const isEstimate =
-    data.timespanAnnotation?.fill === 'hatched' &&
-    data.timespanAnnotation.start !== data.value.date_unix;
-
   const firstConfig = config
     .filter((x): x is LineSeriesDefinition<T> => x.type === 'line')
     .find((x) => x.metricProperty === 'total_delivered');
@@ -31,8 +27,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
   return (
     <TooltipSeriesListContainer
       {...data}
-      // do not display the timespan annotation label in the tooltip
-      timespanAnnotation={undefined}
+      timespanAnnotation={data.timespanAnnotation}
     >
       <Box spacing={1}>
         <TooltipSeriesListItems
@@ -40,9 +35,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
           config={[
             {
               ...firstConfig,
-              label: isEstimate
-                ? siteText.vaccinaties.data.vaccination_chart.estimated
-                : siteText.vaccinaties.data.vaccination_chart.delivered,
+              label: siteText.vaccinaties.data.vaccination_chart.delivered,
             },
           ]}
           configIndex={configIndex}
@@ -51,10 +44,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
         />
 
         <Text variant="label1" fontWeight="bold">
-          {!isEstimate
-            ? siteText.vaccinaties.data.vaccination_chart.doses_administered
-            : siteText.vaccinaties.data.vaccination_chart
-                .doses_administered_estimated}
+          {siteText.vaccinaties.data.vaccination_chart.doses_administered}
         </Text>
 
         <TooltipSeriesListItems
