@@ -41,7 +41,7 @@ export function getVariantTableData(
       const difference = namedDifference.variants__percentage.find(
         (x) => x.name === name
       );
-      assert(difference, `No variants__percentage found for variant ${name}`);
+      // assert(difference, `No variants__percentage found for variant ${name}`);
       return difference;
     }
   }
@@ -75,6 +75,7 @@ export function getVariantTableData(
     : true;
 
   const variantTable = variants.values
+    .filter((variant) => !variant.last_value.has_historical_significance)
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
@@ -83,10 +84,10 @@ export function getVariantTableData(
     }))
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last
-      if (rowA.variant === 'other') {
+      if (rowA.variant === 'other_table') {
         return 1;
       }
-      if (rowB.variant === 'other') {
+      if (rowB.variant === 'other_table') {
         return -1;
       }
       return (rowB.percentage ?? -1) - (rowA.percentage ?? -1);

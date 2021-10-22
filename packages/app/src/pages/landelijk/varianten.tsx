@@ -40,7 +40,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       return {
         variantSidebarValue: getVariantSidebarValue(variants) ?? null,
         ...getVariantTableData(variants, data.selectedNlData.named_difference),
-        ...getVariantChartData(variants),
+        // ...getVariantChartData(variants),
       };
     },
     createGetContent<{
@@ -85,7 +85,7 @@ export default function CovidVariantenPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
-          <PageInformationBlock
+          {/* <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={siteText.sidebar.metrics.variants.title}
             title={text.titel}
@@ -103,7 +103,7 @@ export default function CovidVariantenPage(
             referenceLink={text.reference.href}
             pageLinks={content.page.pageLinks}
             articles={content.highlight.articles}
-          />
+          /> */}
 
           {variantSidebarValue?.sample_size && (
             <VariantsTableTile
@@ -119,13 +119,13 @@ export default function CovidVariantenPage(
             />
           )}
 
-          <VariantsStackedAreaTile
+          {/* <VariantsStackedAreaTile
             text={text.varianten_over_tijd_grafiek}
             values={variantChart}
             metadata={{
               dataSources: [text.bronnen.rivm],
             }}
-          />
+          /> */}
         </TileList>
       </NlLayout>
     </Layout>
