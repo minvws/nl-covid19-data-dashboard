@@ -5,6 +5,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { StackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { getTimelineEvents } from '~/queries/create-elements-query';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
@@ -21,8 +22,10 @@ vaccines.forEach((x) =>
 
 export function VaccineDeliveryAndAdministrationsAreaChart({
   data,
+  timelineEvents,
 }: {
   data: DeliveryAndAdministrationData;
+  timelineEvents: ReturnType<typeof getTimelineEvents>;
 }) {
   const { siteText, formatNumber } = useIntl();
   const firstValue = first(data.values);
@@ -51,6 +54,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
         dataOptions={{
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
           forcedMaximumValue: (seriesMax) => seriesMax * 1.1,
+          timelineEvents: timelineEvents,
         }}
         initialWidth={400}
         minHeight={breakpoints.md ? 400 : 250}

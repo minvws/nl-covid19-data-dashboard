@@ -25,6 +25,11 @@ import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-elements-query';
+import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
@@ -64,11 +69,17 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: PageArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
     return `{
       "page": ${getVaccinePageQuery(locale)},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
+      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)},
+      "elements": ${createElementsQuery(
+        'nl',
+        ['vaccine_coverage', 'vaccine_administered'],
+        locale
+      )}
     }`;
   }),
   createGetChoroplethData({
@@ -218,6 +229,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   valueAnnotation:
                     text.grafiek_gevaccineerd_door_de_tijd_heen
                       .waarde_annotatie,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'vaccine_coverage'
+                  ),
                 }}
                 seriesConfig={[
                   {
@@ -263,6 +278,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
+            timelineEvents={getTimelineEvents(
+              content.elements.timeSeries,
+              'vaccine_administered'
+            )}
           />
 
           <VaccineAdministrationsKpiSection data={data} />
