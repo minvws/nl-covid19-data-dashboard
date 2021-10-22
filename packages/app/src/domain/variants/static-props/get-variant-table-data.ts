@@ -17,9 +17,8 @@ import { isDefined, isPresent } from 'ts-is-present';
 
 export type VariantRow = {
   variant: string;
-  percentage: number;
+  percentage: number | null;
   difference?: OptionalNamedDifferenceDecimal;
-  has_historical_significance: boolean;
   color: string;
 };
 
@@ -79,7 +78,7 @@ export function getVariantTableData(
   const variantTable = variants.values
     /**
      * Since the schemas for international still has to change to
-     * the new setup this prevents the typescript error for now.
+     * the new way of calculating this prevents the typescript error for now.
      */
     .map((variant) => ({
       has_historical_significance:
@@ -89,7 +88,7 @@ export function getVariantTableData(
       ...variant,
     }))
     .filter((variant) => !variant.has_historical_significance)
-    .map((variant) => ({
+    .map<VariantRow>((variant) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
