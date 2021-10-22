@@ -75,7 +75,7 @@ function ChartTileHeader(props: ChartTileHeaderProps) {
     setActiveVaccinationChart,
   } = props;
   return (
-    <Box spacing={3}>
+    <Box spacing={3} pb={3}>
       <Heading level={3}>{title}</Heading>
       <Box display="inline-table" alignSelf="flex-start">
         <VaccinationChartControls
