@@ -13,14 +13,14 @@ This section describes how generate this data with the correct projection applie
 
 ### Importing the source data
 
-To create the data files we need we will be using `cbsgebiedsindelingen_2020_v3_pdok.gpkg` as
+To create the data files we need, we will be using `cbsgebiedsindelingen_2020_v3_pdok.gpkg` as
 data source this package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen)
 
 ATTENTION: At the time of writing, the `cbsgebiedsindelingen_2020_v3_pdok.gpkg` file is the latest version.
 It is of course very likely that by the time new data needs to be generated that a newer file is available.
 Pay attention to download the very latest version.
 
-After downloading, import the package into QGIS (easiest way of doing this is by simply dragging the package into
+After downloading, import the package into QGIS (the easiest way of doing this is by simply dragging the package into
 the main QGIS window) and select the following layers to be added:
 
 - `cbs_gemeente_2020_gegeneraliseerd`
@@ -37,11 +37,11 @@ To clean up the data we have to undertake the following steps:
 
 Creating the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
 
-1. Right click on the **layer > Properties > Source fields**
+1. Right-click on the **layer > Properties > Source fields**
 2. Rename (click the pencil to active edit mode):
    - `statcode` to `code`
 3. **Apply > Ok**
-4. Right click on the **layer > Export > Save Features As..**
+4. Right-click on the **layer > Export > Save Features As..**
 5. Use the following settings:
    - Format: `GeoJSON`
    - File Name: `cbs_gemeente_2020_gegeneraliseerd.geojson`
@@ -52,11 +52,11 @@ Creating the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
 
 Creating the safety regions data file (**cbs_veiligheidsregio_2020_gegeneraliseerd**):
 
-1. Right click on the **layer > Properties > Source fields**
+1. Right-click on the **layer > Properties > Source fields**
 2. Rename (click the pencil to active edit mode):
    - `statcode` to `code`
 3. **Apply > Ok**
-4. Right click on the **layer > Export > Save Features As..**
+4. Right-click on the **layer > Export > Save Features As..**
 5. Use the following settings:
    - Format: `GeoJSON`
    - File Name: `cbs_veiligheidsregio_2020_gegeneraliseerd.geojson`
@@ -68,7 +68,7 @@ Creating the safety regions data file (**cbs_veiligheidsregio_2020_gegeneralisee
 Creating the Netherlands data file (**cbs_landsdeel_2020_gegeneraliseerd**):
 
 1. Select the layer and go to **Vector > Geoprocessing Tools > Dissolve > Run**, this will merge the different areas
-2. Select the new layer and right click on the **layer > Export > Save Features As..**
+2. Select the new layer and right-click on the **layer > Export > Save Features As..**
 3. Use the following settings:
    - Format: `GeoJSON`
    - File Name: `cbs_landsdeel_2020_gegeneraliseerd.geojson`
@@ -84,7 +84,7 @@ To make sure the coordinating system is correct we have to convert the exported 
    - `cbs_veiligheidsregio_2020_gegeneraliseerd.geojson`
    - `cbs_gemeente_2020_gegeneraliseerd.geojson`
 2. For each layer:
-   - Select the new layer and right click on the **layer > Export > Save Features As..**
+   - Select the new layer and right-click on the **layer > Export > Save Features As..**
    - Format: `GeoJSON`
    - File Name: `cbs_veiligheidsregio_2020_gegeneraliseerd_WGS84.geojson`
    - CRS: `EPSG:4326 - WGS 84 - Geographic`

@@ -40,7 +40,7 @@ export function VariantsOverTime({
     label: text.legend_niet_compleet_label,
   };
 
-  const alwayEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
+  const alwaysEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
 
   /* Filter for each config group */
 
@@ -49,14 +49,14 @@ export function VariantsOverTime({
    * - when nothing selected: all items
    * - otherwise: selected items
    */
-  const compareList = list.concat(alwayEnabled);
+  const compareList = list.concat(alwaysEnabled);
   const chartConfig = useMemo(
     () =>
       [
         ...seriesConfig.filter(
           (item) =>
             compareList.includes(item.metricProperty) ||
-            compareList.length === alwayEnabled.length
+            compareList.length === alwaysEnabled.length
         ),
         {
           type: 'invisible',
@@ -67,7 +67,7 @@ export function VariantsOverTime({
       ] as SeriesConfig<VariantChartValue>,
     [
       seriesConfig,
-      alwayEnabled,
+      alwaysEnabled,
       compareList,
       text.tooltip_labels.totaal_monsters,
     ]

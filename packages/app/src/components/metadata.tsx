@@ -57,7 +57,7 @@ export function Metadata({
         /**
          * @TODO Clean up the negative margin by passing the Metadata instance
          * to the Tile via props and position it there properly.
-         * @TODO split up the `isTileFooter` vs non `isTileFooter` implementataions,
+         * @TODO split up the `isTileFooter` vs non `isTileFooter` implementations,
          * should be separate components.
          */
         <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">

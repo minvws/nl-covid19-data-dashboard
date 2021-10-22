@@ -24,7 +24,7 @@ defined here.
 
 Why should we _not_ do this? Please consider:
 
-- implementation cost, both in term of code size and complexity
+- implementation cost, both in terms of code size and complexity
 - maintenance cost, how complex is the solution and how prone to change is it?
 - integration of this feature with other existing and planned features
 

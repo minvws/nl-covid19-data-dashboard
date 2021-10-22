@@ -2,6 +2,7 @@ import {
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useState } from 'react';
 import { hasValueAtKey } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -14,6 +15,11 @@ import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic';
 import { Markdown } from '~/components/markdown';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import {
+  CoverageKindProperty,
+  VaccinationCoverageKindSelect,
+} from '~/domain/vaccine/components/vaccination-coverage-kind-select';
+import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { ChoroplethTwoColumnLayout } from '../topical/choropleth-two-column-layout';
@@ -23,11 +29,11 @@ import {
   AgeGroup,
   AgeGroupSelect,
 } from '../vaccine/components/age-group-select';
-import { ChoroplethTooltip } from '../vaccine/vaccine-coverage-choropleth-per-gm';
 
 type DefaultProps = {
   title: string;
   content: string;
+  defaultCoverageKind?: CoverageKindProperty;
 };
 
 type GmCoverage = DefaultProps & {
@@ -76,10 +82,13 @@ type VaccinationCoverageChoroplethProps = GmCoverage | VrCoverage | NlCoverage;
 export function VaccinationCoverageChoropleth(
   props: VaccinationCoverageChoroplethProps
 ) {
+  const { defaultCoverageKind = 'fully_vaccinated_percentage' } = props;
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedCoverageKind, setSelectedCoverageKind] =
+    useState<CoverageKindProperty>(defaultCoverageKind);
   const [chartRegion, onChartRegionChange] =
     useState<RegionControlOption>('gm');
 
@@ -114,7 +123,7 @@ export function VaccinationCoverageChoropleth(
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'has_one_shot_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 isPercentage: true,
@@ -147,7 +156,7 @@ export function VaccinationCoverageChoropleth(
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'has_one_shot_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 isPercentage: true,
@@ -179,7 +188,7 @@ export function VaccinationCoverageChoropleth(
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'has_one_shot_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 isPercentage: true,
@@ -203,7 +212,20 @@ export function VaccinationCoverageChoropleth(
 
         <Box spacing={3}>
           <Markdown content={props.content} />
-          <AgeGroupSelect onChange={setSelectedAgeGroup} />
+          <Box
+            css={css({ display: 'flex', flexDirection: 'row' })}
+            spacingHorizontal={2}
+          >
+            <Box width="50%">
+              <AgeGroupSelect onChange={setSelectedAgeGroup} />
+            </Box>
+            <Box width="50%">
+              <VaccinationCoverageKindSelect
+                onChange={setSelectedCoverageKind}
+                initialValue={selectedCoverageKind}
+              />
+            </Box>
+          </Box>
           {isNlCoverage(props) && (
             <Box
               display="flex"

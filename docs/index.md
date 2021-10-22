@@ -5,3 +5,4 @@
 - [Timeline Events](/docs/timeline-events.md)
 - [Feature Flags](/docs/feature-flags.md)
 - [Choropleth GEOJson](/docs/choropleth-geojson.md)
+- [Developer notes](/docs/developers.md)
