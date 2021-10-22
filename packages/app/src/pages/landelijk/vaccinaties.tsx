@@ -1,7 +1,6 @@
-import { colors, NlVaccineCoverageValue } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
-import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -16,10 +15,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
-import {
-  VaccinationChartControls,
-  VaccinationsOverTimeChart,
-} from '~/domain/vaccine/vaccinations-over-time-chart';
+import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
@@ -106,8 +102,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccineCoverageEstimated'
   );
   const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
-  const [activeVaccinationChart, setActiveVaccinationChart] =
-    useState<ActiveVaccinationChart>('coverage');
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
@@ -208,29 +202,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
 
-          <ChartTile
-            title={text.grafiek_draagvlak.titel}
-            description={text.grafiek_draagvlak.omschrijving}
-            metadata={{
-              datumsText: siteText.vaccinaties.grafiek_draagvlak.metadata_tekst,
-              date: [
-                data.vaccine_vaccinated_or_support.last_value.date_start_unix,
-                data.vaccine_vaccinated_or_support.last_value.date_end_unix,
-              ],
-            }}
-            customControls={
-              <VaccinationChartControls
-                onChange={setActiveVaccinationChart}
-                initialChart={activeVaccinationChart}
-              />
-            }
-          >
-            <VaccinationsOverTimeChart
-              coverageData={data.vaccine_coverage}
-              deliveryAndAdministrationData={deliveryAndAdministration}
-              activeChart={activeVaccinationChart}
-            />
-          </ChartTile>
+          <VaccinationsOverTimeTile
+            coverageData={data.vaccine_coverage}
+            deliveryAndAdministrationData={deliveryAndAdministration}
+          />
 
           <MilestonesView
             title={page.title}
@@ -377,12 +352,3 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
-  return values.map((x) => ({
-    ...x,
-    date_unix: x.date_end_unix,
-    date_start_unix: undefined,
-    date_end_unix: undefined,
-  }));
-}

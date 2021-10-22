@@ -14,7 +14,6 @@ type ChartTileProps = {
   description?: string;
   timeframeInitialValue?: TimeframeOption;
   disableFullscreen?: boolean;
-  customControls?: ReactNode;
 } & (
   | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
@@ -35,7 +34,6 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue = 'all',
   disableFullscreen,
-  customControls = null,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
@@ -51,7 +49,6 @@ export function ChartTile({
             onChange={setTimeframe}
           />
         )}
-        {customControls}
       </ChartTileHeader>
 
       <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
