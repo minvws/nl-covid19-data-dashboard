@@ -44,9 +44,13 @@ interface KpiConfigNode {
   };
 }
 
+interface KPI {
+  endDate?: string;
+  config: KpiConfiguration;
+}
 interface KpisConfigNode {
   _type: string;
-  configs: KpiConfiguration[];
+  kpis: KPI[];
 }
 
 export function RichContent({
@@ -102,6 +106,8 @@ export function RichContent({
       dashboardChart: (props: { node: ChartConfigNode }) => {
         const node = props.node as unknown as {
           title: string;
+          startDate?: string;
+          endDate?: string;
           config: ChartConfiguration;
         };
 
@@ -118,22 +124,26 @@ export function RichContent({
                 {node.title}
               </Heading>
             </Box>
-            <InlineTimeSeriesCharts configuration={node.config} />
+            <InlineTimeSeriesCharts
+              configuration={node.config}
+              startDate={node.startDate}
+              endDate={node.endDate}
+            />
           </Box>
         );
       },
-      kpiConfiguration: (props: { node: KpiConfigNode }) => {
-        const configuration = props.node as unknown as KpiConfiguration;
+      dashboardKpi: (props: { node: KpiConfigNode }) => {
+        const kpi = props.node as unknown as KPI;
 
         return (
           <ContentWrapper>
-            <InlineKpi configuration={configuration} />
+            <InlineKpi configuration={kpi.config} date={kpi.endDate} />
           </ContentWrapper>
         );
       },
-      kpiConfigurations: (props: { node: KpisConfigNode }) => {
-        const configurationLeft = props.node.configs[0] as KpiConfiguration;
-        const configurationRight = props.node.configs[1] as KpiConfiguration;
+      dashboardKpis: (props: { node: KpisConfigNode }) => {
+        const kpiLeft = props.node.kpis[0];
+        const kpiRight = props.node.kpis[1];
 
         return (
           <ContentWrapper>
@@ -143,8 +153,14 @@ export function RichContent({
               py={3}
               flexDirection={{ _: 'column', md: 'row' }}
             >
-              <InlineKpi configuration={configurationLeft} />
-              <InlineKpi configuration={configurationRight} />
+              <InlineKpi
+                configuration={kpiLeft.config}
+                date={kpiLeft.endDate}
+              />
+              <InlineKpi
+                configuration={kpiRight.config}
+                date={kpiRight.endDate}
+              />
             </Box>
           </ContentWrapper>
         );

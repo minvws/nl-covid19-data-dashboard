@@ -11,12 +11,12 @@ export function mergeAdjacentKpiBlocks(blocks: RichContentBlock[]) {
   for (let i = 0, ii = blocks.length; i < ii; i++) {
     let block = blocks[i];
     if (
-      block._type === 'kpiConfiguration' &&
-      blocks[i + 1]?._type === 'kpiConfiguration'
+      block._type === 'dashboardKpi' &&
+      blocks[i + 1]?._type === 'dashboardKpi'
     ) {
       block = {
-        _type: 'kpiConfigurations',
-        configs: [block, blocks[i + 1]],
+        _type: 'dashboardKpis',
+        kpis: [block, blocks[i + 1]],
       } as any;
       i++;
     }

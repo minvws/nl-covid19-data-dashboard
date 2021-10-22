@@ -55,6 +55,7 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -190,7 +191,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       siteText.gemeente_actueel.mini_trend_tiles
                         .ziekenhuis_opnames.menu_item_label,
-                    data: dataHospitalIntake.values,
+                    data: trimNullValues(
+                      dataHospitalIntake.values,
+                      'admissions_on_date_of_admission_moving_average_rounded'
+                    ),
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:

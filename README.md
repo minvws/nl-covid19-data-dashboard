@@ -4,17 +4,11 @@ The dashboard provides information on the outbreak and prevalence of COVID-19 in
 The Netherlands. It combines measured and modelled data from various sources to
 give a broad perspective on the subject.
 
-## Disclaimer
+## Contact
 
-This dashboard is developed and maintained by a different team than the NL
-COVID-19 Notification App. They are separate projects. If you want to get in
-touch with that team, please join the CODE for NL Slack and join the channel
-`#coronadashboard`.
-
-Tamas Erkelens from the Municipality of Amsterdam is the contact person for the
-project team that made the dashboard.
-
-[CODE For NL Slack](https://doemee.codefor.nl)
+If you want to contact the dashboard team, feel free to open an issue for 
+technical questions, bug reports or security findings. If you have a generic question or remark about the
+corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.
 
 ## Development & Contribution process
 
@@ -65,7 +59,7 @@ noting:
 
 - All filenames are written in kebab-case.
 - We use named exports where possible. They improve typing, help refactoring and
-  allow us to work with so called barrel files (using an index file in a folder
+  allow us to work with so-called barrel files (using an index file in a folder
   to bundle exports for the consuming code). Barrel files should be used
   sparsely because as long as ES Modules and/or Webpack tree shaking is not
   fully supported they could increase bundle sizes. We typically only bundle
@@ -80,7 +74,7 @@ noting:
 - When a component uses its own folder it typically has a barrel file exporting
   only the public interface. The main component should preferably not live in an
   index.tsx file but its own named file that is exported by `index.ts`
-- Booleans are prefixed with is/has/should etc. However booleans that are part
+- Booleans are prefixed with is/has/should etc. However, booleans that are part
   of component props interfaces are usually not prefixed, to keep them aligned
   with standard html element syntax.
 - Data schema properties and locale keys are all snake_cased. These could be
