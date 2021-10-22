@@ -22,7 +22,7 @@ type PieChartProps<T> = {
   innerSize?: number;
   donutWidth?: number;
   padAngle?: number;
-  minimumPercentageWhenZero?: number;
+  minimumPercentage?: number;
 };
 
 export function PieChart<T>({
@@ -32,7 +32,7 @@ export function PieChart<T>({
   innerSize = 200,
   donutWidth = 35,
   padAngle = 0.03,
-  minimumPercentageWhenZero = 0.5,
+  minimumPercentage = 0.5,
 }: PieChartProps<T>) {
   const {
     formatNumber,
@@ -58,12 +58,12 @@ export function PieChart<T>({
         return {
           __value: Math.max(
             currentProperty,
-            totalValue * (minimumPercentageWhenZero / 100) * 2
+            totalValue * (minimumPercentage / 100) * 2
           ),
           ...config,
         };
       }),
-    [data, dataConfig, minimumPercentageWhenZero, totalValue]
+    [data, dataConfig, minimumPercentage, totalValue]
   );
 
   const radius = innerSize / 2;
