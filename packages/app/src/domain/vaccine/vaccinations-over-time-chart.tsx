@@ -4,7 +4,7 @@ import {
   NlVaccineCoverage,
   NlVaccineCoverageValue,
 } from '@corona-dashboard/common';
-import { first, last } from 'lodash';
+import { first } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { RadioGroup, RadioGroupItem } from '~/components/radio-group';
@@ -70,16 +70,6 @@ export function VaccinationsOverTimeChart(
           dataOptions: {
             valueAnnotation:
               text.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
-            timespanAnnotations: [
-              {
-                fill: 'none',
-                start: first(coverageData.values)?.date_start_unix ?? 0,
-                end: last(coverageData.values)?.date_end_unix ?? 0,
-                label:
-                  siteText.vaccinaties.vaccinations_over_time_tile
-                    .tooltip_header,
-              },
-            ],
           } as DataOptions,
           seriesConfig: [
             {
@@ -139,15 +129,6 @@ export function VaccinationsOverTimeChart(
       dataOptions: {
         valueAnnotation: siteText.waarde_annotaties.x_miljoen,
         forcedMaximumValue: (seriesMax: number) => seriesMax * 1.1,
-        timespanAnnotations: [
-          {
-            fill: 'none',
-            start: first(deliveryAndAdministrationData.values)?.date_unix ?? 0,
-            end: last(deliveryAndAdministrationData.values)?.date_unix ?? 0,
-            label:
-              siteText.vaccinaties.vaccinations_over_time_tile.tooltip_header,
-          },
-        ],
       } as DataOptions,
       initialWidth: 400,
       minHeight: breakpoints.md ? 400 : 250,
