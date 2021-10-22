@@ -14,7 +14,6 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
@@ -105,7 +104,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
-  const { page } = content;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -265,13 +263,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
-          />
-
-          <MilestonesView
-            title={page.title}
-            description={page.description}
-            milestones={page.milestones}
-            expectedMilestones={page.expectedMilestones}
           />
 
           <VaccineAdministrationsKpiSection data={data} />
