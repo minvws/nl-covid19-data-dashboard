@@ -8,7 +8,6 @@ export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
   is_reliable: boolean;
-  sample_size: number;
 } & Partial<{
   [key in `${VariantName}_percentage`]: number;
 }>;
@@ -38,8 +37,6 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   if (!isDefined(firstVariant)) {
     return EMPTY_VALUES;
   }
-
-  // console.log(firstVariant);
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
     const item = {

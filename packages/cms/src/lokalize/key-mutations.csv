@@ -338,3 +338,4 @@ timestamp,action,key,document_id,move_to
 2021-10-21T10:19:25.260Z,add,vaccinaties.coverage_kind_dropdown.label,jDbv30Y7XYH5kl8ZaoSa6I,__
 2021-10-22T12:12:04.781Z,add,covid_varianten.landen_van_herkomst.other_table,CsaEnMMYj9MSwroN4KqjFB,__
 2021-10-22T12:12:06.057Z,add,covid_varianten.varianten.other_table,3b0g43rcz8kXdS92Mf0qhm,__
+2021-10-22T13:14:46.418Z,add,covid_varianten.varianten.other_graph,Dku7cpbPEtTqHSBWBZZjSV,__
