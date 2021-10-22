@@ -81,13 +81,11 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  console.log(variantChart);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
-          {/* <PageInformationBlock
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={siteText.sidebar.metrics.variants.title}
             title={text.titel}
@@ -105,7 +103,7 @@ export default function CovidVariantenPage(
             referenceLink={text.reference.href}
             pageLinks={content.page.pageLinks}
             articles={content.highlight.articles}
-          /> */}
+          />
 
           {variantSidebarValue?.sample_size && (
             <VariantsTableTile
