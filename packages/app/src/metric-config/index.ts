@@ -16,11 +16,15 @@ import { nl } from './nl';
  * The data is scoped at nl/vr/gm, because we can not assume that the same
  * things like min/max/gradients apply everywhere for the same KPI.
  */
-export type DataScope = keyof typeof metricConfig;
-
 const metricConfig = {
   nl,
 } as const;
+
+type DataScope = keyof typeof metricConfig;
+
+type MetricName = keyof typeof metricConfig[DataScope];
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 
 /**
  * Special bar scale getter, so the assert is centralized.
@@ -29,10 +33,10 @@ const metricConfig = {
  * there seems to be no way of enforcing the structure of the config and
  * strictly typing it to the actual supplied config at the same time.
  */
-export function getBarScaleConfig(
-  scope: DataScope,
-  metricName: string,
-  metricProperty?: string
+export function getBarScaleConfig<S extends DataScope, K extends MetricName>(
+  scope: S,
+  metricName: K,
+  metricProperty?: KeysOfUnion<typeof metricConfig[S][K]>
 ) {
   const config = get(
     metricConfig,
