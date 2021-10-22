@@ -6,12 +6,6 @@ import { hash } from '~/utils/hash';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
 
-/**
- * This component originated from SidebarBarScale, but is used on pages and
- * adds the ability to show the difference as well as things like signaalwaarde.
- *
- * I think we can come up with a better name, maybe later.
- */
 interface PageBarScaleBaseProps {
   value: number;
   config: BarScaleConfig;
