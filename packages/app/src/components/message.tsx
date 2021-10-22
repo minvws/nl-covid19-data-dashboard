@@ -30,7 +30,9 @@ const StyledMessage = styled.div<{ variant: Variant }>((x) =>
     backgroundColor: theme[x.variant].backgroundColor,
     borderLeftColor: theme[x.variant].borderColor,
 
-    '& > *': { m: 0 },
+    '& > *': {
+      m: 0,
+    },
     ...spacingStyle(2),
   })
 );

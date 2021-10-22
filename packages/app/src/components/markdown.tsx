@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { ExternalLink } from '~/components/external-link';
@@ -10,7 +11,7 @@ import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
-import { ElementType } from 'react';
+
 interface MarkdownProps {
   content: string;
   renderersOverrides?: { [nodeType: string]: ElementType };
@@ -54,7 +55,21 @@ const renderers = {
    * The blockquote element is hijacked for displaying "warning" messages.
    */
   blockquote: (props: { children: ReactNode }) => {
+    const reactNodeToHTML = ReactDOMServer.renderToStaticMarkup(
+      props.children as React.ReactElement
+    );
+
+    const replace = reactNodeToHTML
+      .replace(/(<ul>)/gim, '')
+      .replace(/<\/ul>/gim, '')
+      .replace(/(<li)/gim, '<span')
+      .replace(/<\/li>/gim, '</span>');
+
     return <Message variant="warning">{props.children}</Message>;
+  },
+
+  pre: () => {
+    return <p>lol</p>;
   },
 };
 

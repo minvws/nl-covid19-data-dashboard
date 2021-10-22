@@ -5,6 +5,7 @@ import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -405,6 +406,16 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
           <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
+
+          <Spacer pb={3} />
+
+          <PageInformationBlock
+            title={'text.stock_and_delivery_section.title'}
+            description={' > text.stock_and_delivery_section.description'}
+          />
+
+          <Markdown content="> text.stock_and_delivery_section.description" />
+          <Markdown content="```Mercury Use code in your Markdown file.```" />
         </TileList>
       </NlLayout>
     </Layout>
