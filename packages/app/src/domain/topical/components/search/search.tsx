@@ -4,8 +4,6 @@ import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
@@ -20,9 +18,6 @@ export function Search({
 }) {
   const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
-
-  const isMounted = useIsMounted();
-  const breakpoints = useBreakpoints();
 
   return (
     <SearchContextProvider
@@ -59,11 +54,7 @@ export function Search({
               position="relative"
               zIndex={1}
             >
-              <SearchForm
-                ref={containerRef}
-                height={height}
-                isFloating={isMounted && breakpoints.md}
-              >
+              <SearchForm ref={containerRef} height={height} isFloating>
                 <Box {...context.comboboxProps}>
                   <Box position="relative" ref={heightRef}>
                     <SearchInput />
@@ -115,7 +106,9 @@ const SearchForm = forwardRef<HTMLFormElement, SearchContainerProps>(
     return (
       <form
         ref={ref}
-        css={css({ position: 'relative' })}
+        css={css({
+          position: 'relative',
+        })}
         onSubmit={(evt) => evt.preventDefault()}
       >
         <StyledSearchContainer isFloating={isFloating}>
