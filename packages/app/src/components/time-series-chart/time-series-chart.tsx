@@ -81,7 +81,7 @@ export type { SeriesConfig } from './logic';
  * to see if we can use the date_unix timestamps from the data directly
  * everywhere without unnecessary conversion to and from Date objects.
  */
-type TimeSeriesChartProps<
+export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
@@ -484,15 +484,17 @@ export function TimeSeriesChart<
              * Timespan annotations are rendered on top of the chart. It is
              * transparent thanks to the `mix-blend-mode` set to `multiply`.
              */}
-            {timespanAnnotations?.map((x, index) => (
-              <TimespanAnnotation
-                key={index}
-                domain={xScale.domain() as [number, number]}
-                getX={getX}
-                height={bounds.height}
-                config={x}
-              />
-            ))}
+            {timespanAnnotations
+              ?.filter((x) => x.fill !== 'none')
+              .map((x, index) => (
+                <TimespanAnnotation
+                  key={index}
+                  domain={xScale.domain() as [number, number]}
+                  getX={getX}
+                  height={bounds.height}
+                  config={x}
+                />
+              ))}
             {timeAnnotations?.map((x, index) => (
               <TimeAnnotation
                 key={index}
