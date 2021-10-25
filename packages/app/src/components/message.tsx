@@ -8,7 +8,7 @@ type Variant = 'warning' | 'message';
 interface MessageProps {
   children: ReactNode;
   variant: Variant;
-  resetParentStyles: boolean;
+  resetParentStyles?: boolean;
 }
 
 const theme: Record<Variant, { backgroundColor: string; borderColor: string }> =
@@ -42,7 +42,7 @@ export function Message({
 const StyledMessage = styled.div<{
   variant: Variant;
   styledComponentId: string;
-  resetParentStyles: boolean;
+  resetParentStyles?: boolean;
 }>((x) =>
   css({
     /**
