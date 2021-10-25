@@ -336,6 +336,14 @@ timestamp,action,key,document_id,move_to
 2021-10-21T10:19:23.212Z,add,vaccinaties.coverage_kinds.fully_vaccinated_percentage,jDbv30Y7XYH5kl8ZaoSZwv,__
 2021-10-21T10:19:24.230Z,add,vaccinaties.coverage_kinds.has_one_shot_percentage,F3sVnbafS2gMInMltpLvWm,__
 2021-10-21T10:19:25.260Z,add,vaccinaties.coverage_kind_dropdown.label,jDbv30Y7XYH5kl8ZaoSa6I,__
+2021-10-22T09:43:39.876Z,add,vaccinaties.section_archived.title,Dku7cpbPEtTqHSBWBYMHZ5,__
+2021-10-22T09:43:40.793Z,add,vaccinaties.section_archived.description,3b0g43rcz8kXdS92MdzerS,__
+2021-10-22T09:43:40.793Z,delete,vaccinaties.bereidheid_section.description,jF33EuwumlGuwav2FD4AYm,__
+2021-10-22T09:43:40.793Z,delete,vaccinaties.bereidheid_section.reference.href,jF33EuwumlGuwav2FD4AaS,__
+2021-10-22T09:43:40.794Z,delete,vaccinaties.bereidheid_section.title,jF33EuwumlGuwav2FD4AX6,__
+2021-10-22T09:43:40.794Z,delete,vaccinaties.stock_and_delivery_section.description,jF33EuwumlGuwav2FD4AfU,__
+2021-10-22T09:43:40.794Z,delete,vaccinaties.stock_and_delivery_section.reference.href,jF33EuwumlGuwav2FD4AhA,__
+2021-10-22T09:43:40.794Z,delete,vaccinaties.stock_and_delivery_section.title,jF33EuwumlGuwav2FD4Ado,__
 2021-10-22T10:06:02.550Z,add,vaccinaties.vaccinations_over_time_tile.title,Dku7cpbPEtTqHSBWBYUXdv,__
 2021-10-22T10:52:14.746Z,add,charts.vaccination_coverage_controls.coverage,Dku7cpbPEtTqHSBWBYkqXf,__
 2021-10-22T10:52:15.772Z,add,charts.vaccination_coverage_controls.delivery_and_administration,CsaEnMMYj9MSwroN4KX0ms,__

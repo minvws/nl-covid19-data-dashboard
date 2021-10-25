@@ -52,8 +52,9 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -270,7 +271,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ic_opnames_per_dag
                           .linechart_legend_trend_label_moving_average,
@@ -296,7 +297,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -354,7 +355,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,
@@ -380,7 +381,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
