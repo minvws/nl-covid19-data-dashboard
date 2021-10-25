@@ -151,9 +151,6 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
-          <Markdown content="> * text.stock_and_delivery_section.description" />
-          <Markdown content="```Mercury Use code in your Markdown file.```" />
         </TileList>
       </NlLayout>
     </Layout>

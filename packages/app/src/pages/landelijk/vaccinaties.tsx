@@ -4,7 +4,6 @@ import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -377,9 +376,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           </ChartTile>
-
-          <Markdown content={'> - test'} />
-          <Markdown content={'> test'} />
         </TileList>
       </NlLayout>
     </Layout>

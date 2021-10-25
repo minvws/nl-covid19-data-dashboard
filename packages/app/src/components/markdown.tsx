@@ -51,15 +51,21 @@ const renderers = {
   ),
 
   /**
-   * The blockquote element is hijacked for displaying "warning" messages.
+   * The blockquote element is hijacked for displaying "warning" or "message" banner.
+   * We also have to reset the parent styles when a double blockquote ("messages") is
+   * passed along to show the proper styling of the last blockquote ("messages").
    */
-  blockquote: (props: { children: ReactNode }) => {
-    console.log(props);
-    return <Message variant={'warning'}>{props.children}</Message>;
-  },
+  blockquote: (props: { children: ReactNode; node: any }) => {
+    const hasChildBlockquote = props.node.children[0].type === 'blockquote';
 
-  pre: () => {
-    return <p>lol</p>;
+    return (
+      <Message
+        variant={hasChildBlockquote ? 'message' : 'warning'}
+        resetParentStyles={hasChildBlockquote}
+      >
+        {props.children}
+      </Message>
+    );
   },
 };
 
@@ -68,7 +74,6 @@ export function Markdown({ content, renderersOverrides }: MarkdownProps) {
   const source = dataset === 'keys' ? `✅${content}` : content;
   return (
     <StyledReactMarkdown
-      remarkPlugins={[remarkGfm]}
       source={source}
       renderers={{
         ...renderers,
