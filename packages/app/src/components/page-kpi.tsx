@@ -85,8 +85,6 @@ export function PageKpi<T>({
 
   const hasDifference = isDefined(differenceKey) || isDefined(differenceValue);
 
-  console.log('hasDifference', hasDifference);
-
   return (
     <Box spacing={0} mb={hasDifference ? 3 : 0}>
       <KpiValue absolute={propertyValue} />
