@@ -126,9 +126,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-
           <VaccinePageIntroductionNl data={data} />
-
           <PageInformationBlock
             description={content.page.pageDescription}
             metadata={{
@@ -143,7 +141,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />
-
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
@@ -171,7 +168,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               numFractionDigits={1}
             />
           )}
-
           {vaccinationPerAgeGroupFeature.isEnabled && (
             <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
@@ -196,11 +192,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               values={data.vaccine_coverage_per_age_group.values}
             />
           )}
-
           {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
-
           {data.vaccine_coverage && (
             <ChartTile
               title={text.grafiek_gevaccineerd_door_de_tijd_heen.titel}
@@ -261,11 +255,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
-
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
           />
-
           <MilestonesView
             title={page.title}
             description={page.description}
