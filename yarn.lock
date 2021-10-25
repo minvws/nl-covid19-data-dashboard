@@ -2339,7 +2339,7 @@
     lodash "^4.17.15"
     sanity-diff-patch "^1.0.9"
 
-"@sanity/form-builder@2.21.6":
+"@sanity/form-builder@2.21.6", "@sanity/form-builder@^2.0.1":
   version "2.21.6"
   resolved "https://registry.npmjs.org/@sanity/form-builder/-/form-builder-2.21.6.tgz#cf9dc54bea747b63b304d092f474bcaf0304eb3e"
   integrity sha512-TQQNTUaHtvljiNs4ZjdVn3TUc9DCgp7sTs5AkddA/C7FiglpZAV+HNf94nM+j47v316d7xqwgbre7Pj7Vd3lBQ==
@@ -2359,48 +2359,6 @@
     "@sanity/types" "2.21.6"
     "@sanity/ui" "^0.36.12"
     "@sanity/util" "2.21.6"
-    "@sanity/uuid" "^3.0.1"
-    attr-accept "^1.1.0"
-    classnames "^2.2.5"
-    date-fns "^2.16.1"
-    debug "^3.2.7"
-    diff-match-patch "^1.0.4"
-    exif-component "^1.0.1"
-    get-random-values "^1.2.2"
-    lodash "^4.17.15"
-    nano-pubsub "^2.0.0"
-    pretty-bytes "^4.0.2"
-    pretty-ms "^7.0.1"
-    react-fast-compare "^3.2.0"
-    react-focus-lock "^2.5.0"
-    react-is "^17.0.2"
-    react-rx "^1.0.0-beta.6"
-    react-sortable-hoc "^1.11.0"
-    rxjs "^6.5.3"
-    scroll-into-view-if-needed "^2.2.26"
-    shallow-equals "^1.0.0"
-    speakingurl "^13.0.0"
-
-"@sanity/form-builder@^2.0.1":
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/@sanity/form-builder/-/form-builder-2.21.0.tgz#71adadf42f9480abd8715f1145ed2c3cc75bc2ab"
-  integrity sha512-H1CAMPYouSwknSlJlBDQDz7o2PXFCGfMuMok857qtCdhUV4Y0FtdHKGMjnJJ+4ts8GgiQDVEf9Eewtu28+FCvg==
-  dependencies:
-    "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.21.0"
-    "@sanity/block-tools" "2.21.0"
-    "@sanity/client" "2.21.0"
-    "@sanity/color" "^2.1.5"
-    "@sanity/generate-help-url" "2.18.0"
-    "@sanity/icons" "^1.2.1"
-    "@sanity/imagetool" "2.21.0"
-    "@sanity/initial-value-templates" "2.21.0"
-    "@sanity/mutator" "2.21.0"
-    "@sanity/portable-text-editor" "2.21.0"
-    "@sanity/schema" "2.21.0"
-    "@sanity/types" "2.21.0"
-    "@sanity/ui" "^0.36.12"
-    "@sanity/util" "2.21.0"
     "@sanity/uuid" "^3.0.1"
     attr-accept "^1.1.0"
     classnames "^2.2.5"
@@ -2721,7 +2679,7 @@
     "@types/lodash" "^4.14.149"
     lodash "^4.17.15"
 
-"@sanity/types@2.21.0", "@sanity/types@^2.17.1":
+"@sanity/types@2.21.0":
   version "2.21.0"
   resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.21.0.tgz#8f562a2fee2d78647d61ac6606c6dc08240fa689"
   integrity sha512-KPzP47Rg+ht4TYM7ebsyKmqNWg5sFgg+vHVPtUB0UQjIyu5QdLiSOke7DT1J1NGHDvsph4367m2sr45OrEvcxg==
@@ -2732,7 +2690,7 @@
     react "17.0.1"
     rxjs "^6.5.3"
 
-"@sanity/types@2.21.6":
+"@sanity/types@2.21.6", "@sanity/types@^2.17.1":
   version "2.21.6"
   resolved "https://registry.npmjs.org/@sanity/types/-/types-2.21.6.tgz#bedecbe3138aec67ac2865f2e0f8f3a2393b3c4f"
   integrity sha512-7R6Hyl6b7s0pGpPk4tOf5dTvPSlLu2tbkgpqFEM7s+zYr5N4qZ+lqjHVcpr5sIl9sWVFhK5xya1fHVyHhi14aA==
