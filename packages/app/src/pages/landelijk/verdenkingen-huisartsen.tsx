@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
@@ -19,7 +20,6 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,

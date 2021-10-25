@@ -12,7 +12,7 @@ This will automatically validate all of the json files present in the
 When generating data it can be useful to check simply one file instead of every
 file that lives in the public/json directory.
 
-Therefore it is also possible to execute this command with the given parameters:
+Therefore, it is also possible to execute this command with the given parameters:
 `yarn validate-json-single <schema-name> <json-filename>`
 
 ## Technical details
@@ -68,11 +68,11 @@ Use these guidelines when defining a new schema:
    suffix but keep otherwise the same as the root title.
 3. In order to avoid Typescript interface name clashes between national and
    regional and municipal types, the data should have the `nl_`,
-   `vr_` etc prefix in the titles. That way we can tweak definition per
-   source without creating any inter dependencies. An example of this is
+   `vr_` etc. prefix in the titles. That way we can tweak definition per
+   source without creating any interdependencies. An example of this is
    `nursing_home.json` which exists in both national and regional folders.
-4. Property names should first say what it measuring is and then optionally
-   postfix the how it was measured, but the latter only if required for clarity,
+4. Property names should first say what it is measuring and then optionally
+   postfix how it was measured, but the latter only if required for clarity,
    i.e. `date_unix` first describes what it is and then how it is
    formatted.
 5. Sometimes the JSON file contains only data for 1 measurement. In that case it

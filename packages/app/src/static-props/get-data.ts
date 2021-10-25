@@ -2,12 +2,14 @@ import {
   assert,
   Gm,
   GmCollection,
+  gmData,
   In,
   InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
   Vr,
   VrCollection,
+  vrData,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
@@ -16,10 +18,6 @@ import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
 import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
-import { gmData } from '~/data/gm';
-import { vrData } from '~/data/vr';
-import { INACCURATE_ITEMS as INACCURATE_ITEMS_HOSPITAL } from '~/domain/hospital/common';
-import { INACCURATE_ITEMS as INACCURATE_ITEMS_IC } from '~/domain/intensive-care/common';
 import { CountryCode } from '~/domain/international/multi-select-countries';
 import { getClient, localize } from '~/lib/sanity';
 import {
@@ -136,7 +134,7 @@ async function replaceReferencesInContent(
         );
       }
 
-      const doc = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+      const doc = await client.fetch(`*[_id == '${refId}'][0]`);
 
       await replaceReferencesInContent(doc, client, resolvedIds.concat(refId));
 
@@ -347,15 +345,12 @@ export function getInData(countryCodes: CountryCode[]) {
  * This is meant to be a temporary fix until this is done on the backend.
  */
 function replaceInaccurateLastValue(data: any) {
-  const metricsInaccurateItems = {
-    intensive_care_nice: INACCURATE_ITEMS_IC,
-    hospital_nice: INACCURATE_ITEMS_HOSPITAL,
-  };
+  const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice'];
 
   const inaccurateMetricProperty =
     'admissions_on_date_of_admission_moving_average_rounded';
 
-  const metricsWithInaccurateData = Object.keys(metricsInaccurateItems).filter(
+  const metricsWithInaccurateData = metricsInaccurateItems.filter(
     (m) => m in data
   ) as (keyof typeof data & keyof typeof metricsInaccurateItems)[];
 
@@ -363,7 +358,6 @@ function replaceInaccurateLastValue(data: any) {
     if (isValuesWithLastValue(data[m])) {
       data[m] = adjustDataToLastAccurateValue(
         data[m],
-        metricsInaccurateItems[m],
         inaccurateMetricProperty
       );
     }

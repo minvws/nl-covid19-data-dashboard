@@ -1,11 +1,10 @@
-import React from 'react';
-import { Icon } from '../../components/icons/icon';
-import {
-  RestrictionIcon,
-  restrictionIcons,
-} from '../../components/icons/icons';
-
 import { Icon as TIcon } from '@corona-dashboard/icons';
+import React from 'react';
+import {
+  RestrictionIconInput,
+  RestrictionIconKey,
+  restrictionIcons,
+} from '../../components/restriction-icon';
 
 export const restriction = {
   type: 'object',
@@ -23,7 +22,7 @@ export const restriction = {
       description: 'Welk icoon moet er naast de maatregel staan?',
       name: 'icon',
       type: 'string',
-      inputComponent: Icon,
+      inputComponent: RestrictionIconInput,
     },
   ],
   preview: {
@@ -31,7 +30,7 @@ export const restriction = {
       title: 'text.nl',
       icon: 'icon',
     },
-    prepare({ title, icon }: { icon: RestrictionIcon; title: string }) {
+    prepare({ title, icon }: { icon: RestrictionIconKey; title: string }) {
       const TheIcon = restrictionIcons[icon] as TIcon;
 
       return {

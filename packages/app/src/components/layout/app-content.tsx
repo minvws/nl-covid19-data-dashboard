@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -5,7 +6,6 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { LinkWithIcon } from '../link-with-icon';
 

@@ -1,4 +1,8 @@
-import { isDateValue, TimestampedValue } from '@corona-dashboard/common';
+import {
+  colors,
+  isDateValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { AnimatePresence } from 'framer-motion';
 import {
   ComponentProps,
@@ -11,7 +15,6 @@ import { Box, MotionBox } from '~/components/base';
 import { Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { TimelineMarker } from '../timeline';
 import { IconRow } from './tooltip-icon-row';

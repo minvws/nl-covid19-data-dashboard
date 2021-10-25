@@ -6,6 +6,7 @@ import { PublicationDate } from '~/components/publication-date';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { ImageBlock } from '~/types/cms';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export interface ContentTeaserProps {
@@ -15,6 +16,7 @@ export interface ContentTeaserProps {
   category?: string;
   publicationDate?: string;
   variant?: 'small' | 'normal';
+  isWeeklyHighlight?: boolean;
 }
 
 export function ContentTeaser({
@@ -24,6 +26,7 @@ export function ContentTeaser({
   category,
   publicationDate,
   variant = 'normal',
+  isWeeklyHighlight,
 }: ContentTeaserProps) {
   const { siteText } = useIntl();
   const breakpoints = useBreakpoints(true);
@@ -59,7 +62,13 @@ export function ContentTeaser({
         </Text>
         <Heading level={variant === 'normal' ? 3 : 5} as="h2" color="blue">
           <HeadingLinkWithIcon
-            href={slug}
+            href={
+              isAbsoluteUrl(slug)
+                ? slug
+                : isWeeklyHighlight
+                ? `/weekberichten/${slug}`
+                : `/artikelen/${slug}`
+            }
             icon={<ArrowIconRight />}
             iconPlacement="right"
             underline

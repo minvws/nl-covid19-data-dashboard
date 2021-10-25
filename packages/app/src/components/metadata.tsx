@@ -11,7 +11,7 @@ type source = {
   aria_text?: string;
 };
 export interface MetadataProps extends MarginBottomProps {
-  date?: number | [number, number];
+  date?: number | [number, number] | string;
   source?: source;
   dataSources?: source[];
   obtainedAt?: number;
@@ -40,6 +40,8 @@ export function Metadata({
           startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
           endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
         })
+      : typeof date === 'string'
+      ? date
       : null;
 
   return (
@@ -57,7 +59,7 @@ export function Metadata({
         /**
          * @TODO Clean up the negative margin by passing the Metadata instance
          * to the Tile via props and position it there properly.
-         * @TODO split up the `isTileFooter` vs non `isTileFooter` implementataions,
+         * @TODO split up the `isTileFooter` vs non `isTileFooter` implementations,
          * should be separate components.
          */
         <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
@@ -83,7 +85,7 @@ export function Metadata({
                   `${siteText.common.metadata.source}: ${source.text}`
                 ) : dataSources ? (
                   <>
-                    {` • ${siteText.common.metadata.source}: `}
+                    {`${siteText.common.metadata.source}: `}
                     {dataSources.map((item, index) => (
                       <InlineText key={index}>
                         {index > 0 &&

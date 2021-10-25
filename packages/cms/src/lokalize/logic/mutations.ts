@@ -155,7 +155,7 @@ export function getCollapsedAddDeleteMutations(
        * builds. But this also means that we have no easy way to prevent you
        * from running multiple delete actions on the same key. To make the
        * collapse work properly, we need to limit the "amount of deletes" to
-       * one when summing. This is done by cliping the weight to -1.
+       * one when summing. This is done by clipping the weight to -1.
        */
       weight: Math.max(weightByAction[mutation.action] + previousWeight, -1),
       timestamp: mutation.timestamp,

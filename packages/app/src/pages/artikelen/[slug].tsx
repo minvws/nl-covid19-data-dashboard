@@ -49,31 +49,21 @@ export const getStaticProps = createGetStaticProps(
       "slug": slug.current,
       "cover": {
         ...cover,
-        "asset": cover.asset->
+        "${locale}": [
+          ...cover.${locale}[]
+        ]
       },
       categories,
       "intro": {
         ...intro,
         "${locale}": [
           ...intro.${locale}[]
-          {
-            ...,
-            "asset": asset->
-           },
         ]
       },
       "content": {
         "_type": content._type,
         "${locale}": [
           ...content.${locale}[]
-          {
-            ...,
-            "asset": asset->,
-            markDefs[]{
-              ...,
-              "asset": asset->
-            }
-           },
         ]
       }
     }[0]`;

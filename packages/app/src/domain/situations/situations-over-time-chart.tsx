@@ -1,4 +1,8 @@
-import { TimeframeOption, VrSituationsValue } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  VrSituationsValue,
+} from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend } from '~/components/interactive-legend';
@@ -7,7 +11,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { useList } from '~/utils/use-list';
 import { SituationKey, useSituations } from './logic/situations';
 

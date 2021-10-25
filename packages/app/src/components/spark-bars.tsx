@@ -1,6 +1,6 @@
 import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
-import { colors } from '~/style/theme';
 import { Box } from './base';
 
 const BAR_WIDTH = 6;

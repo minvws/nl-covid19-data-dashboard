@@ -6,6 +6,8 @@
 
 # Assets that are processed by Sanity/Resizing
 public/cms
+# These icons are being copied by the packages/icons build
+public/icons/app
 
 # dependencies
 node_modules

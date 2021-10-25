@@ -20,12 +20,12 @@ export function createElementsQuery(
         _id,
         metricName,
         metricProperty,
-        timelineEvents[]{
+        timelineEventCollections[]->{timelineEvents[]{
           'title': title.${locale},
           'description': description.${locale},
           date,
           dateEnd
-        },
+        }},
         warning
       },
       'kpi': *[
@@ -81,8 +81,12 @@ type CmsTimeSeriesElement = {
   scope: MetricScope;
   metricName: string;
   metricProperty: string | null;
-  timelineEvents: CmsTimelineEventConfig[];
+  timelineEventCollections: CmsTimelineEventCollection[];
   warning: string | null;
+};
+
+type CmsTimelineEventCollection = {
+  timelineEvents: CmsTimelineEventConfig[];
 };
 
 type CmsKpiElement = ElementBase;
@@ -108,17 +112,19 @@ export function getTimelineEvents(
   elements: CmsTimeSeriesElement[],
   metricName: string
 ) {
-  const timelineEvents = elements.find(
+  const timelineEventCollections = elements.find(
     (x) => x.metricName === metricName
-  )?.timelineEvents;
+  )?.timelineEventCollections;
 
-  return timelineEvents
-    ? timelineEvents.map<TimelineEventConfig>((x) => ({
-        title: x.title,
-        description: x.description,
-        start: new Date(x.date).getTime() / 1000,
-        end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
-      }))
+  return timelineEventCollections
+    ? timelineEventCollections.flatMap<TimelineEventConfig>((collection) =>
+        collection.timelineEvents.map((x) => ({
+          title: x.title,
+          description: x.description,
+          start: new Date(x.date).getTime() / 1000,
+          end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
+        }))
+      )
     : undefined;
 }
 

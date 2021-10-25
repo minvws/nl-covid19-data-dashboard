@@ -1,4 +1,5 @@
 import {
+  colors,
   getValuesInTimeframe,
   NlVaccineStockValue,
   TimeframeOption,
@@ -14,7 +15,6 @@ import {
 } from '~/components/interactive-legend';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 

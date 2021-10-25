@@ -1,6 +1,6 @@
+import { Chevron } from '@corona-dashboard/icons';
 import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Chevron } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { Anchor, InlineText, Text } from '~/components/typography';
@@ -13,6 +13,7 @@ interface TimelineTooltipContentProps {
   onNext: () => void;
   onPrev: () => void;
   onClose: () => void;
+  hasMultipleEvents: boolean;
 }
 
 export function TimelineTooltipContent({
@@ -20,6 +21,7 @@ export function TimelineTooltipContent({
   onNext,
   onPrev,
   onClose,
+  hasMultipleEvents,
 }: TimelineTooltipContentProps) {
   const intl = useIntl();
   const isTouch = useIsTouchDevice();
@@ -46,23 +48,29 @@ export function TimelineTooltipContent({
       {isTouch && (
         <Box
           display="flex"
-          justifyContent="space-between"
+          justifyContent={hasMultipleEvents ? 'space-between' : 'center'}
           alignItems="center"
           ml={-2}
           mr={-2}
         >
-          <ChevronButton
-            onClick={onPrev}
-            rotate
-            title={intl.siteText.charts.timeline.prev}
-          />
+          {hasMultipleEvents && (
+            <ChevronButton
+              onClick={onPrev}
+              rotate
+              title={intl.siteText.charts.timeline.prev}
+            />
+          )}
+
           <InlineText variant="label1" color="labelGray">
             {dateStr}
           </InlineText>
-          <ChevronButton
-            onClick={onNext}
-            title={intl.siteText.charts.timeline.next}
-          />
+
+          {hasMultipleEvents && (
+            <ChevronButton
+              onClick={onNext}
+              title={intl.siteText.charts.timeline.next}
+            />
+          )}
         </Box>
       )}
       <Box spacing={2}>

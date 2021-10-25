@@ -1,6 +1,6 @@
+import { vrData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { ComboBox } from '~/components/combo-box/combo-box';
-import { vrData } from '~/data/vr';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -20,9 +20,11 @@ export function VrComboBox(props: VrComboBoxProps) {
       placeholder={siteText.common.zoekveld_placeholder_regio}
       options={vrData}
       onSelect={(region) =>
-        typeof getLink === 'function'
-          ? getLink(region.code)
-          : router.push(reverseRouter.vr.index(region.code))
+        router.push(
+          typeof getLink === 'function'
+            ? getLink(region.code)
+            : reverseRouter.vr.index(region.code)
+        )
       }
     />
   );

@@ -42,7 +42,7 @@ type VrLayoutProps = {
  * - /veiligheidsregio/[metric] -> shows aside and content (children)
  *
  * More info on persistent layouts:
- * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+ * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function VrLayout(props: VrLayoutProps) {
   const { children, vrName, isLandingPage, getLink } = props;
@@ -88,12 +88,12 @@ export function VrLayout(props: VrLayoutProps) {
         <link
           key="dc-spatial"
           rel="dcterms:spatial"
-          href="https:standaarden.overheid.nl/owms/terms/Nederland"
+          href="https://standaarden.overheid.nl/owms/terms/Nederland"
         />
         <link
           key="dc-spatial-title"
           rel="dcterms:spatial"
-          href="https:standaarden.overheid.nl/owms/terms/Nederland"
+          href="https://standaarden.overheid.nl/owms/terms/Nederland"
           title="Nederland"
         />
       </Head>

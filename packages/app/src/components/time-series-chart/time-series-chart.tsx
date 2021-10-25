@@ -81,7 +81,7 @@ export type { SeriesConfig } from './logic';
  * to see if we can use the date_unix timestamps from the data directly
  * everywhere without unnecessary conversion to and from Date objects.
  */
-type TimeSeriesChartProps<
+export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
@@ -140,6 +140,12 @@ type TimeSeriesChartProps<
    * This option only makes sense when we display a single trend.
    */
   displayTooltipValueOnly?: boolean;
+
+  /**
+   * Collapse the y axis. Useful for mini trend charts that can grow to widths
+   * larger than COLLAPSE_Y_AXIS_THRESHOLD.
+   */
+  isYAxisCollapsed?: boolean;
 };
 
 export function TimeSeriesChart<
@@ -165,6 +171,7 @@ export function TimeSeriesChart<
   onSeriesClick,
   markNearestPointOnly,
   displayTooltipValueOnly,
+  isYAxisCollapsed: defaultIsYAxisCollapsed,
 }: TimeSeriesChartProps<T, C>) {
   const { siteText } = useIntl();
 
@@ -378,7 +385,8 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
-  const isYAxisCollapsed = width < COLLAPSE_Y_AXIS_THRESHOLD;
+  const isYAxisCollapsed =
+    defaultIsYAxisCollapsed ?? width < COLLAPSE_Y_AXIS_THRESHOLD;
   const timeSeriesAccessibility = addAccessibilityFeatures(accessibility, [
     'keyboard_time_series_chart',
   ]);
@@ -476,15 +484,17 @@ export function TimeSeriesChart<
              * Timespan annotations are rendered on top of the chart. It is
              * transparent thanks to the `mix-blend-mode` set to `multiply`.
              */}
-            {timespanAnnotations?.map((x, index) => (
-              <TimespanAnnotation
-                key={index}
-                domain={xScale.domain() as [number, number]}
-                getX={getX}
-                height={bounds.height}
-                config={x}
-              />
-            ))}
+            {timespanAnnotations
+              ?.filter((x) => x.fill !== 'none')
+              .map((x, index) => (
+                <TimespanAnnotation
+                  key={index}
+                  domain={xScale.domain() as [number, number]}
+                  getX={getX}
+                  height={bounds.height}
+                  config={x}
+                />
+              ))}
             {timeAnnotations?.map((x, index) => (
               <TimeAnnotation
                 key={index}

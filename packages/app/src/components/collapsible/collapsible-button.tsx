@@ -33,7 +33,7 @@ export const CollapsibleButton = ({
   const isMounted = useIsMounted({ delayMs: 10 });
   /**
    * Calculate the clip path where the content needs to animate to,
-   * this is alligned with the position of the button percentage wise based of the content wrapper
+   * this is aligned with the position of the button percentage wise based of the content wrapper
    */
   const clipPathCalculation = useMemo(() => {
     if (
@@ -68,7 +68,7 @@ export const CollapsibleButton = ({
   ]);
 
   /**
-   * falback to `undefined` to prevent an initial animation from `0` to
+   * fallback to `undefined` to prevent an initial animation from `0` to
    * measured height
    */
   const height =

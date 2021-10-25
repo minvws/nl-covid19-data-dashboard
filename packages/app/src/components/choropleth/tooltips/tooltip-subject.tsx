@@ -38,15 +38,16 @@ export function TooltipSubject({
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'nowrap',
-          whiteSpace: 'pre-wrap',
+          whiteSpace: 'nowrap',
         })}
       >
         {children}
         <Box
+          flexShrink={0}
           height={13}
           width={13}
           borderRadius={'2px'}
-          ml={'auto'}
+          ml={1}
           backgroundColor={color}
         />
       </Box>

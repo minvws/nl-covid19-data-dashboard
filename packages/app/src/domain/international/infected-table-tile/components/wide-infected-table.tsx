@@ -1,4 +1,4 @@
-import { InCollectionTestedOverall } from '@corona-dashboard/common';
+import { colors, InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { useMemo } from 'react';
@@ -8,7 +8,6 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';

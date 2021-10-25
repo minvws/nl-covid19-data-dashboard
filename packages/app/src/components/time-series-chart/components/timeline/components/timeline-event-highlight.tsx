@@ -1,6 +1,6 @@
+import { colors } from '@corona-dashboard/common';
 import { AnimatePresence, motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { colors } from '~/style/theme';
 import { TimelineState } from '../logic';
 
 const activeColor = transparentize(0.7, colors.data.primary);

@@ -1,9 +1,9 @@
 import {
+  colors,
   GmVaccineCoveragePerAgeGroupValue,
   NlVaccineCoveragePerAgeGroupValue,
   VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { colors } from '~/style/theme';
 
 export type CoverageTableRow =
   | NlVaccineCoveragePerAgeGroupValue[]

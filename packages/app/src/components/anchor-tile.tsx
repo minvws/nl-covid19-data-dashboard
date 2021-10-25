@@ -1,8 +1,8 @@
+import { colors } from '@corona-dashboard/common';
 import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Anchor, Heading } from '~/components/typography';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';

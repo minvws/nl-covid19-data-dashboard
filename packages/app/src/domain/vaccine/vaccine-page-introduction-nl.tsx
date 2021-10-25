@@ -1,4 +1,4 @@
-import { Nl } from '@corona-dashboard/common';
+import { colors, Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -8,7 +8,6 @@ import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineHeaderWithIcon } from './components/vaccine-header-with-icon';
@@ -34,7 +33,7 @@ export function VaccinePageIntroductionNl({
     ) / 10;
 
   return (
-    <Tile noBorder>
+    <Tile noBorder noPadding>
       <VaccineHeaderWithIcon title={text.title} />
 
       <Box spacing={3}>
@@ -65,9 +64,10 @@ export function VaccinePageIntroductionNl({
                     timeframe="all"
                     title={text.grafiek_gezette_prikken.titel}
                     values={data.vaccine_administered_total.values}
+                    displayTooltipValueOnly
                     seriesConfig={[
                       {
-                        type: 'line',
+                        type: 'area',
                         metricProperty: 'estimated',
                         color: colors.data.primary,
                         label: '',

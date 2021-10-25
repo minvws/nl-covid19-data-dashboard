@@ -13,7 +13,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
-      "$ref": "#/definitions/diff_decimal"
+      "$ref": "#/definitions/diff_integer"
     },
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"

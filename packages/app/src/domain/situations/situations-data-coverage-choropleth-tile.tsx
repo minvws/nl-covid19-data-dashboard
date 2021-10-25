@@ -1,4 +1,4 @@
-import { VrCollectionSituations } from '@corona-dashboard/common';
+import { Color, VrCollectionSituations } from '@corona-dashboard/common';
 import { Check, Cross } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Box, Spacer } from '~/components/base';
@@ -8,7 +8,6 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { Color } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';

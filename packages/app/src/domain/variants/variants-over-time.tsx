@@ -1,4 +1,4 @@
-import { TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { Spacer } from '~/components/base';
 import { InteractiveLegend } from '~/components/interactive-legend';
@@ -13,8 +13,7 @@ import {
 import { InlineText } from '~/components/typography';
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useList } from '~/utils/use-list';
 
 interface VariantsOverTimeProps {
@@ -41,7 +40,7 @@ export function VariantsOverTime({
     label: text.legend_niet_compleet_label,
   };
 
-  const alwayEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
+  const alwaysEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
 
   /* Filter for each config group */
 
@@ -50,14 +49,14 @@ export function VariantsOverTime({
    * - when nothing selected: all items
    * - otherwise: selected items
    */
-  const compareList = list.concat(alwayEnabled);
+  const compareList = list.concat(alwaysEnabled);
   const chartConfig = useMemo(
     () =>
       [
         ...seriesConfig.filter(
           (item) =>
             compareList.includes(item.metricProperty) ||
-            compareList.length === alwayEnabled.length
+            compareList.length === alwaysEnabled.length
         ),
         {
           type: 'invisible',
@@ -68,7 +67,7 @@ export function VariantsOverTime({
       ] as SeriesConfig<VariantChartValue>,
     [
       seriesConfig,
-      alwayEnabled,
+      alwaysEnabled,
       compareList,
       text.tooltip_labels.totaal_monsters,
     ]

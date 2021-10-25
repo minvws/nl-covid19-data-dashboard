@@ -1,4 +1,4 @@
-import { VrSituationsValue } from '@corona-dashboard/common';
+import { colors, VrSituationsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
@@ -10,7 +10,6 @@ import { Tile } from '~/components/tile';
 import { Heading, InlineText } from '~/components/typography';
 import { useSituations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';

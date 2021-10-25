@@ -1,4 +1,5 @@
 import {
+  colors,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrHospitalNiceValue,
   VrVaccineCoveragePerAgeGroupValue,
@@ -18,7 +19,6 @@ import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { INACCURATE_ITEMS } from '~/domain/hospital/common';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
@@ -48,10 +48,11 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -134,7 +135,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
   const underReportedRangeHospital = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    INACCURATE_ITEMS
+    countTrailingNullValues(
+      data.hospital_nice.values,
+      'admissions_on_date_of_admission_moving_average_rounded'
+    )
   );
 
   return (
@@ -173,7 +177,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       siteText.veiligheidsregio_actueel.mini_trend_tiles
                         .ziekenhuis_opnames.menu_item_label,
-                    data: dataHospitalIntake.values,
+                    data: trimNullValues(
+                      dataHospitalIntake.values,
+                      'admissions_on_date_of_admission_moving_average_rounded'
+                    ),
                     dataProperty:
                       'admissions_on_date_of_admission_moving_average_rounded',
                     value:

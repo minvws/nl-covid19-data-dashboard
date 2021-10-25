@@ -78,6 +78,7 @@ const titleByElementType: Record<string, string | undefined> = {
   timeSeries: 'Grafiek',
   choropleth: 'Kaart',
   kpi: 'KPI',
+  warning: 'Waarschuwing',
 };
 
 function getTitleForElementType(elementType: string) {

@@ -3,6 +3,7 @@
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
 import {
+  colors,
   getValuesInTimeframe,
   TimeframeOption,
   TimestampedValue,
@@ -26,7 +27,6 @@ import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import {
   AccessibilityDefinition,

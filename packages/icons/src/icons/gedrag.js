@@ -8,6 +8,7 @@ const Gedrag = forwardRef(({ ...rest }, ref) => {
       focusable="false"
       width={32}
       height={32}
+      viewBox="0 0 32 32"
       fill="currentColor"
       {...rest}
     >

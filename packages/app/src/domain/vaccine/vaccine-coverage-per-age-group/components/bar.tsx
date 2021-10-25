@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -5,7 +6,6 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { parseVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 interface BarProps {
   value: number | null;
   color: string;
