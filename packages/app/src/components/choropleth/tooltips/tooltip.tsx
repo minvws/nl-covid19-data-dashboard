@@ -71,13 +71,21 @@ export function Tooltip<T extends ChoroplethDataItem>({
           Math.round(
             current > maxy / 2 ? -(height + padding.top) : padding.top
           );
-        return `translate(-${xt(left)}%, ${yt(top)}px)`;
+        const bboxTop = boundingBox?.top ?? 0;
+        return `translate(-${xt(left)}%, ${yt(bboxTop + top)}px)`;
       }
     }
   };
 
   return (
-    <div ref={boundingBoxRef}>
+    <Box
+      ref={boundingBoxRef}
+      position="absolute"
+      top="0"
+      left="0"
+      width="100%"
+      height="100%"
+    >
       <Box
         position="absolute"
         style={{ top, left, width: '1px', height: '1px' }}
@@ -99,6 +107,6 @@ export function Tooltip<T extends ChoroplethDataItem>({
           {content}
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 }
