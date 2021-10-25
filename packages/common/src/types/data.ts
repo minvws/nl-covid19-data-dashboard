@@ -274,7 +274,9 @@ export interface Nl {
   hospital_nice: NlHospitalNice;
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NlHospitalLcps;
+  hospital_vaccination_status: NlHospitalVaccinationStatus;
   intensive_care_lcps: NlIntensiveCareLcps;
+  intensive_care_vaccination_status: NlIntensiveCareVaccinationStatus;
   tested_ggd: NlTestedGgd;
   nursing_home: NlNursingHome;
   disability_care: NlDisabilityCare;
@@ -504,6 +506,22 @@ export interface NlHospitalLcpsValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlHospitalVaccinationStatus {
+  values: NlHospitalVaccinationStatusValue[];
+  last_value: NlHospitalVaccinationStatusValue;
+}
+export interface NlHospitalVaccinationStatusValue {
+  total_amount_of_people: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  has_one_shot: number;
+  has_one_shot_percentage: number;
+  not_vaccinated: number;
+  not_vaccinated_percentage: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlIntensiveCareLcps {
   values: NlIntensiveCareLcpsValue[];
   last_value: NlIntensiveCareLcpsValue;
@@ -513,6 +531,22 @@ export interface NlIntensiveCareLcpsValue {
   beds_occupied_non_covid: number | null;
   beds_occupied_covid_percentage: number | null;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlIntensiveCareVaccinationStatus {
+  values: NlIntensiveCareVaccinationStatusValue[];
+  last_value: NlIntensiveCareVaccinationStatusValue;
+}
+export interface NlIntensiveCareVaccinationStatusValue {
+  total_amount_of_people: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  has_one_shot: number;
+  has_one_shot_percentage: number;
+  not_vaccinated: number;
+  not_vaccinated_percentage: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlTestedGgd {
