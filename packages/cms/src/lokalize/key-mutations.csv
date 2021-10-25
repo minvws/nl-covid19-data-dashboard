@@ -339,3 +339,7 @@ timestamp,action,key,document_id,move_to
 2021-10-22T12:12:04.781Z,add,covid_varianten.landen_van_herkomst.other_table,CsaEnMMYj9MSwroN4KqjFB,__
 2021-10-22T12:12:06.057Z,add,covid_varianten.varianten.other_table,3b0g43rcz8kXdS92Mf0qhm,__
 2021-10-22T13:14:46.418Z,add,covid_varianten.varianten.other_graph,Dku7cpbPEtTqHSBWBZZjSV,__
+2021-10-22T10:06:02.550Z,add,vaccinaties.vaccinations_over_time_tile.title,Dku7cpbPEtTqHSBWBYUXdv,__
+2021-10-22T10:52:14.746Z,add,charts.vaccination_coverage_controls.coverage,Dku7cpbPEtTqHSBWBYkqXf,__
+2021-10-22T10:52:15.772Z,add,charts.vaccination_coverage_controls.delivery_and_administration,CsaEnMMYj9MSwroN4KX0ms,__
+2021-10-22T10:52:16.799Z,add,vaccinaties.vaccinations_over_time_tile.tooltip_header,Dku7cpbPEtTqHSBWBYkrVj,__

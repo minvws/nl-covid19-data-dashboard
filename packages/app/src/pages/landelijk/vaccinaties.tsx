@@ -1,4 +1,4 @@
-import { colors, NlVaccineCoverageValue } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
@@ -15,11 +15,11 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
+import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
-import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
@@ -202,69 +202,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
 
-          {data.vaccine_coverage && (
-            <ChartTile
-              title={text.grafiek_gevaccineerd_door_de_tijd_heen.titel}
-              description={
-                text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving
-              }
-              metadata={{
-                source: text.bronnen.rivm,
-              }}
-            >
-              <TimeSeriesChart
-                accessibility={{ key: 'vaccine_coverage_over_time_chart' }}
-                values={transformToDayTimestamps(data.vaccine_coverage.values)}
-                formatTickValue={(x) => `${x / 1_000_000}`}
-                dataOptions={{
-                  valueAnnotation:
-                    text.grafiek_gevaccineerd_door_de_tijd_heen
-                      .waarde_annotatie,
-                }}
-                seriesConfig={[
-                  {
-                    label:
-                      text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
-                    shortLabel:
-                      text.grafiek_gevaccineerd_door_de_tijd_heen
-                        .tooltip_label_totaal,
-                    type: 'line',
-                    metricProperty: 'partially_or_fully_vaccinated',
-                    color: 'black',
-                  },
-                  {
-                    label:
-                      text.grafiek_gevaccineerd_door_de_tijd_heen
-                        .label_gedeeltelijk,
-                    shortLabel:
-                      text.grafiek_gevaccineerd_door_de_tijd_heen
-                        .tooltip_label_gedeeltelijk,
-                    type: 'stacked-area',
-                    metricProperty: 'partially_vaccinated',
-                    color: colors.data.primary,
-                    mixBlendMode: 'multiply',
-                    fillOpacity: 1,
-                  },
-                  {
-                    label:
-                      text.grafiek_gevaccineerd_door_de_tijd_heen
-                        .label_volledig,
-                    shortLabel:
-                      text.grafiek_gevaccineerd_door_de_tijd_heen
-                        .tooltip_label_volledig,
-                    type: 'stacked-area',
-                    metricProperty: 'fully_vaccinated',
-                    color: colors.data.secondary,
-                    mixBlendMode: 'multiply',
-                    fillOpacity: 1,
-                  },
-                ]}
-              />
-            </ChartTile>
-          )}
-
-          <VaccineDeliveryAndAdministrationsAreaChart
-            data={deliveryAndAdministration}
+          <VaccinationsOverTimeTile
+            coverageData={data.vaccine_coverage}
+            deliveryAndAdministrationData={deliveryAndAdministration}
           />
 
           <MilestonesView
@@ -412,12 +352,3 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
-  return values.map((x) => ({
-    ...x,
-    date_unix: x.date_end_unix,
-    date_start_unix: undefined,
-    date_end_unix: undefined,
-  }));
-}
