@@ -74,8 +74,6 @@ export function useAccessibilityAnnotations(
       </VisuallyHidden>
     ),
     props: {
-      ariaDescribedby: describedById,
-      ariaLabel: label,
       'aria-label': label,
       'aria-describedby': describedById,
     },

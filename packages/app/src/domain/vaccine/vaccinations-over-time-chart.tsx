@@ -19,20 +19,14 @@ import {
   StackedAreaSeriesDefinition,
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
 import {
   DeliveryAndAdministrationData,
   VaccineDeliveryAndAdministrationsValue,
+  vaccines,
 } from './data-selection/select-delivery-and-administration-data';
-
-const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
-
-vaccines.forEach((x) =>
-  assert(colors.data.vaccines[x], `missing vaccine color for vaccine ${x}`)
-);
 
 export type ActiveVaccinationChart = 'coverage' | 'deliveryAndAdministration';
 
@@ -141,9 +135,9 @@ export function VaccinationsOverTimeChart(
       ) => <VaccineDeliveryAndAdministrationsTooltip data={x} />,
       seriesConfig: [
         {
-          metricProperty: 'total_delivered',
+          metricProperty: 'total',
           type: 'line',
-          label: text.data.vaccination_chart.legend.available,
+          label: text.data.vaccination_chart.doses_administered,
           color: 'black',
           strokeWidth: 3,
         },
@@ -164,11 +158,6 @@ export function VaccinationsOverTimeChart(
           fillOpacity: 1,
           strokeWidth: 0,
         })),
-        {
-          metricProperty: 'total',
-          type: 'invisible',
-          label: text.data.vaccination_chart.doses_administered_total,
-        },
       ],
     } as TimeSeriesChartProps<
       VaccineDeliveryAndAdministrationsValue,
@@ -177,7 +166,6 @@ export function VaccinationsOverTimeChart(
   }, [
     deliveryAndAdministrationData,
     siteText.waarde_annotaties.x_miljoen,
-    text.data.vaccination_chart.legend.available,
     text.data.vaccination_chart.legend_label,
     text.data.vaccination_chart.doses_administered_total,
     breakpoints.md,
