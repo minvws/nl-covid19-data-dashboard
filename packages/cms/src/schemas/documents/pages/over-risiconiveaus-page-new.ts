@@ -6,7 +6,7 @@ import {
 export const overRisiconiveausNew = {
   name: 'overRisicoNiveausNew',
   type: 'document',
-  title: 'Over risico niveaus',
+  title: 'Over risiconiveaus',
   fields: [
     {
       name: 'title',

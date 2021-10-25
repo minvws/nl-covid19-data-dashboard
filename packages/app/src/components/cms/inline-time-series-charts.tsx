@@ -4,6 +4,7 @@ import {
   TimespanAnnotationConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { Clock } from '@corona-dashboard/icons';
 import { get } from 'lodash';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
@@ -14,25 +15,47 @@ import {
   DataOptions,
   TimespanAnnotationConfig,
 } from '~/components/time-series-chart/logic/common';
-import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
+import { Box } from '../base';
 import { Metadata } from '../metadata';
 
 interface InlineTimeSeriesChartsProps {
+  startDate?: string;
+  endDate?: string;
   configuration: ChartConfiguration;
 }
 
+function getDataUrl(
+  startDate: string | undefined,
+  endDate: string | undefined,
+  configuration: ChartConfiguration
+) {
+  const { code, area, metricName } = configuration;
+  const qParams = [];
+
+  if (isDefined(startDate)) {
+    qParams.push(`start=${startDate}`);
+  }
+
+  if (isDefined(endDate)) {
+    qParams.push(`end=${endDate}`);
+  }
+
+  const suffix = qParams.length ? `?${qParams.join('&')}` : '';
+
+  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
+}
+
 export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
-  const { configuration } = props;
+  const { configuration, startDate, endDate } = props;
   const { siteText } = useIntl();
 
-  const { data } = useSWRImmutable(
-    `/api/data/timeseries/${configuration.code ?? configuration.area}/${
-      configuration.metricName
-    }`,
-    (url: string) => fetch(url).then((_) => _.json())
+  const dateUrl = getDataUrl(startDate, endDate, configuration);
+
+  const { data } = useSWRImmutable(dateUrl, (url: string) =>
+    fetch(url).then((_) => _.json())
   );
 
   const seriesConfig = useMemo(() => {
@@ -93,14 +116,18 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
       isPercentage: configuration.isPercentage,
       renderNullAsZero: configuration.renderNullAsZero,
       valueAnnotation: configuration.valueAnnotationKey?.length
-        ? configuration.valueAnnotationKey
+        ? get(siteText, configuration.valueAnnotationKey.split('.'), undefined)
         : undefined,
       timespanAnnotations,
     } as DataOptions;
   }, [configuration, siteText, data]);
 
   if (!isDefined(data)) {
-    return <Text>Loading...</Text>;
+    return (
+      <Box width="100%">
+        <Clock width="3em" height="3em" />
+      </Box>
+    );
   }
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');

@@ -66,7 +66,7 @@ export const SvgChoroplethMap = (props: GenericChoroplethMapProps) => {
       }}
     >
       <svg
-        aria-labelledby={annotations.props.ariaDescribedby}
+        aria-labelledby={annotations.props['aria-describedby']}
         role="img"
         width={width}
         viewBox={`0 0 ${width} ${height}`}

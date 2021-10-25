@@ -147,7 +147,7 @@ export function useBreadcrumbs(): Breadcrumb[] {
           .join('/');
 
         return {
-          href: href === '' ? '/' : href,
+          href: href.startsWith('/') ? href : `/${href}`,
           title: getTitle(x),
           redirectLabel: getRedirectLabel(x),
         };
