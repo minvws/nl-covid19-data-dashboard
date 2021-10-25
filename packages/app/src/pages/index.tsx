@@ -441,6 +441,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
+            <Box py={4}>
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
+            </Box>
+
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
+
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
               icon={<Chart />}
@@ -471,15 +480,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <EscalationLevelBanner
-              level={content.riskLevel.level}
-              dateFrom={content.riskLevel.dateFrom}
-            />
-
-            <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
-            </Box>
 
             <HighlightsTile
               hiddenTitle={text.highlighted_items.title}
