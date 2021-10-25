@@ -82,7 +82,29 @@ export const blockFields = [
     title: 'Dashboard Grafiek',
     name: 'dashboardChart',
     type: 'object',
+    fieldsets: [
+      {
+        title: 'Datum selectie',
+        name: 'datespan',
+        options: {
+          collapsible: true,
+          collapsed: true,
+        },
+      },
+    ],
     fields: [
+      {
+        title: 'Begin datum',
+        name: 'startDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
+      {
+        title: 'Eind datum',
+        name: 'endDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
       {
         name: 'title',
         type: 'string',
@@ -96,7 +118,40 @@ export const blockFields = [
   },
   {
     title: 'Dashboard KPIs',
-    type: 'reference',
-    to: [{ type: 'kpiConfiguration' }],
+    name: 'dashboardKpi',
+    type: 'object',
+    fieldsets: [
+      {
+        title: 'Datum selectie',
+        name: 'datespan',
+        options: {
+          collapsible: true,
+          collapsed: true,
+        },
+      },
+    ],
+    fields: [
+      {
+        title: 'Datum',
+        name: 'endDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
+      {
+        name: 'config',
+        type: 'reference',
+        to: [{ type: 'kpiConfiguration' }],
+      },
+    ],
+    preview: {
+      select: {
+        title: 'config.title',
+      },
+      prepare({ title }: { title: string }) {
+        return {
+          title,
+        };
+      },
+    },
   },
 ];

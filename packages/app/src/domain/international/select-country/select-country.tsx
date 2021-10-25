@@ -47,7 +47,7 @@ export function SelectCountry({
   const currentOption = options.filter((item) => item.value === value)[0];
 
   /**
-   * Find all the results that match the label aswell as the value
+   * Find all the results that match the label as well as the value
    */
   useEffect(() => {
     setMatchingCountries(

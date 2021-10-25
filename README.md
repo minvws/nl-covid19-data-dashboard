@@ -59,7 +59,7 @@ noting:
 
 - All filenames are written in kebab-case.
 - We use named exports where possible. They improve typing, help refactoring and
-  allow us to work with so called barrel files (using an index file in a folder
+  allow us to work with so-called barrel files (using an index file in a folder
   to bundle exports for the consuming code). Barrel files should be used
   sparsely because as long as ES Modules and/or Webpack tree shaking is not
   fully supported they could increase bundle sizes. We typically only bundle
@@ -74,7 +74,7 @@ noting:
 - When a component uses its own folder it typically has a barrel file exporting
   only the public interface. The main component should preferably not live in an
   index.tsx file but its own named file that is exported by `index.ts`
-- Booleans are prefixed with is/has/should etc. However booleans that are part
+- Booleans are prefixed with is/has/should etc. However, booleans that are part
   of component props interfaces are usually not prefixed, to keep them aligned
   with standard html element syntax.
 - Data schema properties and locale keys are all snake_cased. These could be
