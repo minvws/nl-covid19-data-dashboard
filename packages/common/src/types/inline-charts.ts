@@ -16,6 +16,13 @@ export type TimespanAnnotationConfiguration = {
   cutValuesForMetricProperties?: string[];
 };
 
+export type InlineChart = {
+  startDate?: string;
+  endDate?: string;
+  title: string;
+  config: ChartConfiguration;
+};
+
 export type ChartConfiguration = {
   area: AreaType;
   metricName: string;

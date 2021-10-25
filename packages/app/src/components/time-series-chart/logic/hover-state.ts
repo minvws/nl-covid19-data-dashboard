@@ -155,7 +155,7 @@ export function useHoverState<T extends TimestampedValue>({
    * can use the original data timestamps directly for the xDomain without
    * conversion to/from Date objects.
    *
-   * The points are always rendered in the middle of the date-span, and therefor
+   * The points are always rendered in the middle of the date-span, and therefore
    * we use bisectCenter otherwise the calculated index jumps to the next as
    * soon as you cross the marker line to the right.
    *
@@ -510,7 +510,7 @@ function findActiveTimespanAnnotationIndex(
    */
   for (const [index, annotation] of timespanAnnotations.entries()) {
     /**
-     * Tesing overlap of two ranges x1 <= y2 && y1 <= x2
+     * Testing overlap of two ranges x1 <= y2 && y1 <= x2
      */
     if (valueSpanStart <= annotation.end && annotation.start <= valueSpanEnd) {
       return index;

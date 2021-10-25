@@ -134,7 +134,7 @@ function useSearchedOptions<Option extends TOption>(
 }
 
 const ComboBoxStyles = createGlobalStyle`
-// Global comobox styles copied from the old SCSS
+// Global combobox styles copied from the old SCSS
 
 [data-reach-combobox] {
   position: relative;
