@@ -72,7 +72,7 @@ const StyledSearchInput = styled.input(
     m: 0,
 
     '&:focus': {
-      outline: 'none !important',
+      outline: '2px dotted currentColor !important',
     },
 
     '&::-webkit-search-cancel-button': {
@@ -92,7 +92,6 @@ const StyledSearchInput = styled.input(
       borderBottomColor: 'border',
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
-      outline: 'none !important',
     },
   })
 );
