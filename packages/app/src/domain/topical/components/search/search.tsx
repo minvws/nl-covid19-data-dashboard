@@ -106,7 +106,9 @@ const SearchForm = forwardRef<HTMLFormElement, SearchContainerProps>(
     return (
       <form
         ref={ref}
-        css={css({ position: 'relative' })}
+        css={css({
+          position: 'relative',
+        })}
         onSubmit={(evt) => evt.preventDefault()}
       >
         <StyledSearchContainer isFloating={isFloating}>
