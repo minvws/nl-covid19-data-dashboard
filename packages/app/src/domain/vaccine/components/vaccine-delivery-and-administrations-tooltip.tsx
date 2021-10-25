@@ -8,8 +8,6 @@ import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/select
 export function VaccineDeliveryAndAdministrationsTooltip<
   T extends VaccineDeliveryAndAdministrationsValue
 >({ data }: { data: TooltipData<T> }) {
-  console.dir(data);
-
   const { value, configIndex, config, options, metricPropertyFormatters } =
     data;
 

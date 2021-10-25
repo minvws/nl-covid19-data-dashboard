@@ -167,7 +167,7 @@ export function VaccinationsOverTimeChart(
     deliveryAndAdministrationData,
     siteText.waarde_annotaties.x_miljoen,
     text.data.vaccination_chart.legend_label,
-    text.data.vaccination_chart.doses_administered_total,
+    text.data.vaccination_chart.doses_administered,
     breakpoints.md,
     text.data.vaccination_chart.product_names,
     vaccineNames,
