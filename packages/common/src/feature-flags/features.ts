@@ -99,4 +99,16 @@ export const features: Feature[] = [
     dataScopes: ['gm'],
     metricName: 'vaccine_coverage_per_age_group',
   },
+  {
+    name: 'nlHospitalVaccinationStatus',
+    isEnabled: true,
+  },
+  {
+    name: 'nlIntensiveCareVaccinationStatus',
+    isEnabled: true,
+  },
+  {
+    name: 'nlVaccinationVaccinationStatus',
+    isEnabled: true,
+  },
 ];

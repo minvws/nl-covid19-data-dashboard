@@ -19,6 +19,7 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -129,6 +130,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
+  const vaccinationStatusFeature = useFeature('nlHospitalVaccinationStatus');
 
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const text = siteText.ziekenhuisopnames_per_dag;
@@ -199,57 +201,60 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.vaccination_status_chart.title}
-            metadata={{
-              isTileFooter: true,
-              date: [
-                DummyDataVaccinationStatus.date_start_unix,
-                DummyDataVaccinationStatus.date_end_unix,
-              ],
-              source: {
-                ...text.vaccination_status_chart.source,
-              },
-            }}
-            description={replaceVariablesInText(
-              text.vaccination_status_chart.description,
-              {
-                amountOfPeople: formatNumber(
-                  DummyDataVaccinationStatus.total_amount_of_people
-                ),
-                date_start: formatDateFromSeconds(
-                  DummyDataVaccinationStatus.date_start_unix
-                ),
-                date_end: formatDateFromSeconds(
+          {vaccinationStatusFeature.isEnabled && (
+            <ChartTile
+              title={text.vaccination_status_chart.title}
+              metadata={{
+                isTileFooter: true,
+                date: [
+                  DummyDataVaccinationStatus.date_start_unix,
                   DummyDataVaccinationStatus.date_end_unix,
-                  'medium'
-                ),
-              }
-            )}
-          >
-            <PieChart
-              data={
-                DummyDataVaccinationStatus as NlHospitalVaccinationStatusValue
-              }
-              dataConfig={[
-                {
-                  metricProperty: 'not_vaccinated',
-                  color: colors.data.yellow,
-                  label: text.vaccination_status_chart.labels.not_vaccinated,
+                ],
+                source: {
+                  ...text.vaccination_status_chart.source,
                 },
+              }}
+              description={replaceVariablesInText(
+                text.vaccination_status_chart.description,
                 {
-                  metricProperty: 'has_one_shot',
-                  color: colors.data.cyan,
-                  label: text.vaccination_status_chart.labels.has_one_shot,
-                },
-                {
-                  metricProperty: 'fully_vaccinated',
-                  color: colors.data.multiseries.cyan_dark,
-                  label: text.vaccination_status_chart.labels.fully_vaccinated,
-                },
-              ]}
-            />
-          </ChartTile>
+                  amountOfPeople: formatNumber(
+                    DummyDataVaccinationStatus.total_amount_of_people
+                  ),
+                  date_start: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_start_unix
+                  ),
+                  date_end: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_end_unix,
+                    'medium'
+                  ),
+                }
+              )}
+            >
+              <PieChart
+                data={
+                  DummyDataVaccinationStatus as NlHospitalVaccinationStatusValue
+                }
+                dataConfig={[
+                  {
+                    metricProperty: 'not_vaccinated',
+                    color: colors.data.yellow,
+                    label: text.vaccination_status_chart.labels.not_vaccinated,
+                  },
+                  {
+                    metricProperty: 'has_one_shot',
+                    color: colors.data.cyan,
+                    label: text.vaccination_status_chart.labels.has_one_shot,
+                  },
+                  {
+                    metricProperty: 'fully_vaccinated',
+                    color: colors.data.multiseries.cyan_dark,
+                    label:
+                      text.vaccination_status_chart.labels.fully_vaccinated,
+                  },
+                ]}
+              />
+            </ChartTile>
+          )}
 
           <ChoroplethTile
             title={text.map_titel}

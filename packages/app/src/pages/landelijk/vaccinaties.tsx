@@ -6,6 +6,7 @@ import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PieChart } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
@@ -88,6 +89,39 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
+/**
+ * @TODO: remove dummy data
+ */
+
+const DummyDataVaccinationStatus = {
+  total_amount_of_people: 1369,
+  fully_vaccinated: 340,
+  fully_vaccinated_percentage: 24.8,
+  has_one_shot: 31,
+  has_one_shot_percentage: 2.2,
+  not_vaccinated: 998,
+  not_vaccinated_percentage: 72.8,
+  date_start_unix: 1634726341 - WEEK_IN_SECONDS,
+  date_end_unix: 1634726341,
+  date_of_insertion_unix: 1634726341,
+};
+
+interface NlHospitalVaccinationStatusValue {
+  total_amount_of_people: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  has_one_shot: number;
+  has_one_shot_percentage: number;
+  not_vaccinated: number;
+  not_vaccinated_percentage: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     content,
@@ -103,7 +137,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
   const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
 
-  const { siteText } = useIntl();
+  const vaccinationStatusFeature = useFeature('nlVaccinationVaccinationStatus');
+
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
 
@@ -196,6 +232,61 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
               values={data.vaccine_coverage_per_age_group.values}
             />
+          )}
+
+          {vaccinationStatusFeature.isEnabled && (
+            <ChartTile
+              title={text.vaccination_status_chart.title}
+              metadata={{
+                isTileFooter: true,
+                date: [
+                  DummyDataVaccinationStatus.date_start_unix,
+                  DummyDataVaccinationStatus.date_end_unix,
+                ],
+                source: {
+                  ...text.vaccination_status_chart.source,
+                },
+              }}
+              description={replaceVariablesInText(
+                text.vaccination_status_chart.description,
+                {
+                  amountOfPeople: formatNumber(
+                    DummyDataVaccinationStatus.total_amount_of_people
+                  ),
+                  date_start: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_start_unix
+                  ),
+                  date_end: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_end_unix,
+                    'medium'
+                  ),
+                }
+              )}
+            >
+              <PieChart
+                data={
+                  DummyDataVaccinationStatus as NlHospitalVaccinationStatusValue
+                }
+                dataConfig={[
+                  {
+                    metricProperty: 'not_vaccinated',
+                    color: colors.data.yellow,
+                    label: text.vaccination_status_chart.labels.not_vaccinated,
+                  },
+                  {
+                    metricProperty: 'has_one_shot',
+                    color: colors.data.cyan,
+                    label: text.vaccination_status_chart.labels.has_one_shot,
+                  },
+                  {
+                    metricProperty: 'fully_vaccinated',
+                    color: colors.data.multiseries.cyan_dark,
+                    label:
+                      text.vaccination_status_chart.labels.fully_vaccinated,
+                  },
+                ]}
+              />
+            </ChartTile>
           )}
 
           {vaccinationChoroplethFeature.isEnabled && (
