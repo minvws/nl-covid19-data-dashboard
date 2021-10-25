@@ -137,7 +137,7 @@
     "analyze": "cross-env ANALYZE=true yarn build",
     "bootstrap": "exit 0",
     "export": "next export",
-    "dev": "yarn workspace @corona-dashboard/icons build & yarn workspace @corona-dashboard/common build & run-p dev:*",
+    "dev": "yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/common build && run-p dev:*",
     "dev:next": "node next-server.js",
     "dev:lokalize": "chokidar \"./src/locale/nl_export.json\" -c \"yarn workspace @corona-dashboard/cms lokalize:generate-types\"",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build",
