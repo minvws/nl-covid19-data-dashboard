@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
@@ -88,9 +88,6 @@ export const getStaticProps = createGetStaticProps(
     },
   })
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 /**
  * @TODO: remove dummy data

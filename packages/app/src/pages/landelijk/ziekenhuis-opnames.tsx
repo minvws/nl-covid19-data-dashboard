@@ -1,4 +1,9 @@
-import { colors, getLastFilledValue } from '@corona-dashboard/common';
+import {
+  colors,
+  DAY_IN_SECONDS,
+  getLastFilledValue,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useState } from 'react';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -72,9 +77,6 @@ export const getStaticProps = createGetStaticProps(
     }`;
   })
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 /**
  * @TODO: remove dummy data

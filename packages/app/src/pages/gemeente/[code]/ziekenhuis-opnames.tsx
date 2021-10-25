@@ -1,4 +1,8 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  DAY_IN_SECONDS,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -64,9 +68,6 @@ export const getStaticProps = createGetStaticProps(
     }`;
   })
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
