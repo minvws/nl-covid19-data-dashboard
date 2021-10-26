@@ -4,6 +4,7 @@ import {
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -23,6 +24,10 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
 import {
+  CoverageKindProperty,
+  VaccinationCoverageKindSelect,
+} from './components/vaccination-coverage-kind-select';
+import {
   KeyWithLabel,
   useVaccineCoveragePercentageFormatter,
 } from './logic/use-vaccine-coverage-percentage-formatter';
@@ -40,6 +45,8 @@ export function VaccineCoverageChoroplethPerGm({
   const { siteText } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedCoverageKind, setSelectedCoverageKind] =
+    useState<CoverageKindProperty>('has_one_shot_percentage');
   const reverseRouter = useReverseRouter();
 
   const variables = {
@@ -60,8 +67,20 @@ export function VaccineCoverageChoroplethPerGm({
               variables
             )}
           />
-
-          <AgeGroupSelect onChange={setSelectedAgeGroup} />
+          <Box
+            css={css({ display: 'flex', flexDirection: 'row' })}
+            spacingHorizontal={2}
+          >
+            <Box width="50%">
+              <AgeGroupSelect onChange={setSelectedAgeGroup} />
+            </Box>
+            <Box width="50%">
+              <VaccinationCoverageKindSelect
+                onChange={setSelectedCoverageKind}
+                initialValue={selectedCoverageKind}
+              />
+            </Box>
+          </Box>
         </>
       }
       legend={{
@@ -86,7 +105,7 @@ export function VaccineCoverageChoroplethPerGm({
           )}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
-            metricProperty: 'has_one_shot_percentage',
+            metricProperty: selectedCoverageKind,
           }}
           dataOptions={{
             isPercentage: true,
@@ -117,7 +136,7 @@ export function VaccineCoverageChoroplethPerGm({
           )}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
-            metricProperty: 'has_one_shot_percentage',
+            metricProperty: selectedCoverageKind,
           }}
           dataOptions={{
             isPercentage: true,

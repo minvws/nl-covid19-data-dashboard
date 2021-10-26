@@ -12,6 +12,7 @@ type ChartTileProps = {
   title: string;
   metadata?: MetadataProps;
   description?: string;
+
   timeframeInitialValue?: TimeframeOption;
   disableFullscreen?: boolean;
 } & (

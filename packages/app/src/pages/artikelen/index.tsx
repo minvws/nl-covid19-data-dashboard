@@ -51,7 +51,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
   const sortOptions = useMemo(() => {
     /**
-     * Find all the categorires that are currently being used in articles,
+     * Find all the categories that are currently being used in articles,
      * to later check if we still need it for the menu items.
      */
     const availableCategories = [
@@ -212,7 +212,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 /*
  * Since we are using a justify-content: space around for positioning the elements,
  * transforming them on hover to a bold text would cause a small layout shift.
- * Here we draw a indentical text on top and switch them once the item is active.
+ * Here we draw a identical text on top and switch them once the item is active.
  * It has a aria hidden label and is pure cosmetic for this use case.
  */
 const BoldText = styled.span(

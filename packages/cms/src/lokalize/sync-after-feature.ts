@@ -36,7 +36,7 @@ import {
    * We synchronize move mutations before deletions. That way we prevent
    * accidental deletions in possible edge cases where the same key was deleted
    * and moved. The mutations collapsing logic happens for add/delete and move
-   * separately and is therefor not 100% correct in figuring out what should
+   * separately and is therefore not 100% correct in figuring out what should
    * eventually happen to a key.
    *
    * We would rather have a delete fail than a move, because the latter can
