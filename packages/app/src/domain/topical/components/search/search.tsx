@@ -42,6 +42,7 @@ export function Search({
             alignItems={{ _: 'start', md: 'center' }}
             position="relative"
             width="100%"
+            zIndex={10}
           >
             <Box
               width={{
