@@ -16,11 +16,10 @@ export function VaccineAdministrationsKpiSection({
 }: {
   data: Pick<
     Nl,
-    | 'vaccine_administered_total' // keep
-    | 'vaccine_administered_ggd' // not used other then this
-    | 'vaccine_administered_hospitals_and_care_institutions' // not used other then this
-    | 'vaccine_administered_doctors' // not used other then this
-    | 'vaccine_administered_ggd_ghor' // not used other then this
+    | 'vaccine_administered_total'
+    | 'vaccine_administered_ggd'
+    | 'vaccine_administered_hospitals_and_care_institutions'
+    | 'vaccine_administered_doctors'
   >;
 }) {
   const { siteText } = useIntl();
