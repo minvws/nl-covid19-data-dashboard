@@ -1,5 +1,4 @@
 import { colors } from '@corona-dashboard/common';
-import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
@@ -127,9 +126,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-
           <VaccinePageIntroductionNl data={data} />
-
           <PageInformationBlock
             description={content.page.pageDescription}
             metadata={{
@@ -144,7 +141,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />
-
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
@@ -172,7 +168,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               numFractionDigits={1}
             />
           )}
-
           {vaccinationPerAgeGroupFeature.isEnabled && (
             <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
@@ -206,7 +201,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
           />
-
           <MilestonesView
             title={page.title}
             description={page.description}
@@ -219,21 +213,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <Spacer pb={3} />
 
           <PageInformationBlock
-            title={text.bereidheid_section.title}
-            description={text.bereidheid_section.description}
-            referenceLink={text.bereidheid_section.reference.href}
-            icon={<Vaccinaties />}
-            metadata={{
-              datumsText: text.bereidheid_datums,
-              dateOrRange:
-                data.vaccine_vaccinated_or_support.last_value
-                  .date_of_insertion_unix,
-              dateOfInsertionUnix:
-                data.vaccine_vaccinated_or_support.last_value
-                  .date_of_insertion_unix,
-              dataSources: [],
-            }}
+            title={text.section_archived.title}
+            description={text.section_archived.description}
           />
+
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+
+          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
 
           <ChartTile
             title={text.grafiek_draagvlak.titel}
@@ -325,26 +311,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           </ChartTile>
-
-          <Spacer pb={3} />
-
-          <PageInformationBlock
-            title={text.stock_and_delivery_section.title}
-            icon={<Vaccinaties />}
-            description={text.stock_and_delivery_section.description}
-            referenceLink={text.stock_and_delivery_section.reference.href}
-            metadata={{
-              datumsText: text.levering_en_voorraad_datums,
-              dateOrRange: data.vaccine_stock.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.vaccine_stock.last_value.date_of_insertion_unix,
-              dataSources: [],
-            }}
-          />
-
-          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
-
-          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
       </NlLayout>
     </Layout>
