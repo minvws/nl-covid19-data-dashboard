@@ -40,7 +40,7 @@ export function PageBarScale(props: PageBarScaleProps) {
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
    */
-  const uniqueId = hash(JSON.stringify(props)).slice(-10);
+  const uniqueId = hash(JSON.stringify(props));
 
   return (
     <Box spacing={2} mb={3}>
