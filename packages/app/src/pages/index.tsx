@@ -62,12 +62,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    vr: ({
-      escalation_levels,
-      tested_overall,
-      vaccine_coverage_per_age_group,
-    }) => ({
-      escalation_levels,
+    vr: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
       tested_overall,
       vaccine_coverage_per_age_group: isDefined(vaccine_coverage_per_age_group)
         ? selectVaccineCoverageData(vaccine_coverage_per_age_group)
@@ -441,6 +436,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
+            <Box py={4}>
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
+            </Box>
+
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
+
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
               icon={<Chart />}
@@ -471,15 +475,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <EscalationLevelBanner
-              level={content.riskLevel.level}
-              dateFrom={content.riskLevel.dateFrom}
-            />
-
-            <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
-            </Box>
 
             <HighlightsTile
               hiddenTitle={text.highlighted_items.title}

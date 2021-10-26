@@ -130,7 +130,8 @@ export const colors = {
       chi: multiseries.magenta_dark,
       psi: multiseries.magenta_dark,
       omega: multiseries.magenta_dark,
-      other: '#808080',
+      other_table: '#808080',
+      other_graph: '#808080',
     },
 
     vaccines: {

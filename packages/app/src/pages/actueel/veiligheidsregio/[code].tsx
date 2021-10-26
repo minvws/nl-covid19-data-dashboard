@@ -339,6 +339,25 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
+            <Box pt={4} pb={5}>
+              <Search title={siteText.common_actueel.secties.search.title.vr} />
+            </Box>
+
+            <VaccinationCoverageChoropleth
+              title={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.vr,
+                { safetyRegion: vrName }
+              )}
+              content={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.vr,
+                { safetyRegion: vrName }
+              )}
+              vrCode={vrCode}
+              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+            />
+
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
             >
@@ -374,25 +393,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <VaccinationCoverageChoropleth
-              title={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.vr,
-                { safetyRegion: vrName }
-              )}
-              content={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .content.vr,
-                { safetyRegion: vrName }
-              )}
-              vrCode={vrCode}
-              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
-            />
-
-            <Box pt={4} pb={5}>
-              <Search title={siteText.common_actueel.secties.search.title.vr} />
-            </Box>
           </TileList>
         </MaxWidth>
 
