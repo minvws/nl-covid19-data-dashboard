@@ -126,6 +126,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+
+  const text = siteText.vaccinaties;
+  const { page } = content;
 
   const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
   const vaccineCoverageEstimatedFeature = useFeature(
@@ -133,11 +137,18 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
   const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
 
-  const vaccinationStatusFeature = useFeature('nlVaccinationVaccinationStatus');
+  const vaccineAdministeredGgdFeature = useFeature('nlVaccineAdministeredGgd');
+  const vaccineAdministeredHospitalsAndCareInstitutionsFeature = useFeature(
+    'nlVaccineAdministeredHospitalsAndCareInstitutions'
+  );
+  const vaccineAdministeredDoctorsFeature = useFeature(
+    'nlVaccineAdministeredDoctors'
+  );
+  const vaccineAdministeredGgdGhorFeature = useFeature(
+    'nlVaccineAdministeredGgdGhor'
+  );
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
-  const text = siteText.vaccinaties;
-  const { page } = content;
+  const vaccinationStatusFeature = useFeature('nlVaccinationVaccinationStatus');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -296,7 +307,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             expectedMilestones={page.expectedMilestones}
           />
 
-          <VaccineAdministrationsKpiSection data={data} />
+          {vaccineAdministeredGgdFeature.isEnabled &&
+            vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
+            vaccineAdministeredDoctorsFeature.isEnabled &&
+            vaccineAdministeredGgdGhorFeature.isEnabled && (
+              <VaccineAdministrationsKpiSection data={data} />
+            )}
 
           <Spacer pb={3} />
 
