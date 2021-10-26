@@ -348,3 +348,10 @@ timestamp,action,key,document_id,move_to
 2021-10-22T10:52:14.746Z,add,charts.vaccination_coverage_controls.coverage,Dku7cpbPEtTqHSBWBYkqXf,__
 2021-10-22T10:52:15.772Z,add,charts.vaccination_coverage_controls.delivery_and_administration,CsaEnMMYj9MSwroN4KX0ms,__
 2021-10-22T10:52:16.799Z,add,vaccinaties.vaccinations_over_time_tile.tooltip_header,Dku7cpbPEtTqHSBWBYkrVj,__
+2021-10-25T12:17:03.768Z,add,vaccinaties.vaccination_status_chart.description,G6M7GhzH8XbtdKiRrSBqi6,__
+2021-10-25T12:17:04.835Z,add,vaccinaties.vaccination_status_chart.labels.fully_vaccinated,Pei0Nqv2MstfonnkI7e2bv,__
+2021-10-25T12:17:05.861Z,add,vaccinaties.vaccination_status_chart.labels.has_one_shot,Pei0Nqv2MstfonnkI7e3J2,__
+2021-10-25T12:17:06.807Z,add,vaccinaties.vaccination_status_chart.labels.not_vaccinated,G6M7GhzH8XbtdKiRrSBs3y,__
+2021-10-25T12:17:07.829Z,add,vaccinaties.vaccination_status_chart.source.href,G6M7GhzH8XbtdKiRrSBsKk,__
+2021-10-25T12:17:08.844Z,add,vaccinaties.vaccination_status_chart.source.text,G6M7GhzH8XbtdKiRrSBsz0,__
+2021-10-25T12:17:10.108Z,add,vaccinaties.vaccination_status_chart.title,G6M7GhzH8XbtdKiRrSBtdG,__
