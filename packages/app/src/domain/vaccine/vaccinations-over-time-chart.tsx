@@ -134,13 +134,6 @@ export function VaccinationsOverTimeChart(
         x: TooltipData<VaccineDeliveryAndAdministrationsValue>
       ) => <VaccineDeliveryAndAdministrationsTooltip data={x} />,
       seriesConfig: [
-        {
-          metricProperty: 'total',
-          type: 'line',
-          label: text.data.vaccination_chart.doses_administered,
-          color: 'black',
-          strokeWidth: 3,
-        },
         ...vaccineNames.map<
           StackedAreaSeriesDefinition<VaccineDeliveryAndAdministrationsValue>
         >((x) => ({
@@ -158,6 +151,11 @@ export function VaccinationsOverTimeChart(
           fillOpacity: 1,
           strokeWidth: 0,
         })),
+        {
+          metricProperty: 'total',
+          type: 'invisible',
+          label: text.data.vaccination_chart.doses_administered,
+        },
       ],
     } as TimeSeriesChartProps<
       VaccineDeliveryAndAdministrationsValue,

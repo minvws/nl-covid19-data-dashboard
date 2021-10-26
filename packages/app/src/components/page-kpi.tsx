@@ -83,26 +83,32 @@ export function PageKpi<T>({
     );
   }
 
+  const hasDifference = isDefined(differenceKey) || isDefined(differenceValue);
+
   return (
-    <Box spacing={0} mb={3}>
+    <Box spacing={0} mb={hasDifference ? 3 : 0}>
       <KpiValue absolute={propertyValue} />
 
       {isDefined(differenceKey) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference
-            value={differenceValue}
-            isAmount={isAmount}
-            maximumFractionDigits={differenceFractionDigits}
-          />
-        ) : (
-          <TileDifference
-            value={differenceValue}
-            maximumFractionDigits={differenceFractionDigits}
-            showOldDateUnix={showOldDateUnix}
-            isAmount={isAmount}
-          />
-        ))}
+          <Box pt={2}>
+            <TileAverageDifference
+              value={differenceValue}
+              isAmount={isAmount}
+              maximumFractionDigits={differenceFractionDigits}
+            />
+          </Box>
+        ) : isDefined(differenceValue) ? (
+          <Box pt={2}>
+            <TileDifference
+              value={differenceValue}
+              maximumFractionDigits={differenceFractionDigits}
+              showOldDateUnix={showOldDateUnix}
+              isAmount={isAmount}
+            />
+          </Box>
+        ) : null)}
     </Box>
   );
 }

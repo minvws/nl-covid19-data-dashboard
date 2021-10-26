@@ -49,7 +49,6 @@ const StyledValue = styled.div(
     fontWeight: 600,
     fontVariantNumeric: 'tabular-nums',
     lineHeight: 1,
-    paddingBottom: '.5rem',
   },
   color
 );
@@ -73,7 +72,7 @@ export function KpiValue({
   const { formatPercentage, formatNumber } = useIntl();
 
   return (
-    <Box mb={3}>
+    <Box mb={isDefined(difference) ? 3 : 0}>
       {isPresent(percentage) && isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage, {
@@ -105,20 +104,24 @@ export function KpiValue({
       {isDefined(difference) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference
-            value={difference}
-            isPercentage={isDefined(percentage) && !isDefined(absolute)}
-            isAmount={isAmount}
-            maximumFractionDigits={differenceFractionDigits}
-          />
-        ) : (
-          <TileDifference
-            value={difference}
-            isPercentage={isDefined(percentage) && !isDefined(absolute)}
-            isAmount={isAmount}
-            maximumFractionDigits={differenceFractionDigits}
-          />
-        ))}
+          <Box pt={2}>
+            <TileAverageDifference
+              value={difference}
+              isPercentage={isDefined(percentage) && !isDefined(absolute)}
+              isAmount={isAmount}
+              maximumFractionDigits={differenceFractionDigits}
+            />
+          </Box>
+        ) : isDefined(difference) ? (
+          <Box pt={2}>
+            <TileDifference
+              value={difference}
+              isPercentage={isDefined(percentage) && !isDefined(absolute)}
+              isAmount={isAmount}
+              maximumFractionDigits={differenceFractionDigits}
+            />
+          </Box>
+        ) : null)}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
     </Box>
   );

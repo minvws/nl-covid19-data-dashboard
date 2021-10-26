@@ -1,8 +1,10 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlVaccineCoveragePerAgeGroupEstimated,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
@@ -52,8 +54,9 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -61,12 +64,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    vr: ({
-      escalation_levels,
-      tested_overall,
-      vaccine_coverage_per_age_group,
-    }) => ({
-      escalation_levels,
+    vr: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
       tested_overall,
       vaccine_coverage_per_age_group: isDefined(vaccine_coverage_per_age_group)
         ? selectVaccineCoverageData(vaccine_coverage_per_age_group)
@@ -144,6 +142,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       'admissions_on_date_of_admission_moving_average_rounded'
     )
   );
+
+  const sevenDayAverageDatesIntensiveCare: [number, number] = [
+    underReportedRangeIntensiveCare - WEEK_IN_SECONDS,
+    underReportedRangeIntensiveCare - DAY_IN_SECONDS,
+  ];
+
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -242,6 +250,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
@@ -270,7 +286,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ic_opnames_per_dag
                           .linechart_legend_trend_label_moving_average,
@@ -296,7 +312,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -324,6 +340,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
@@ -354,7 +378,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,
@@ -380,7 +404,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -440,6 +464,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
+            <Box py={4}>
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
+            </Box>
+
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
+
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
               icon={<Chart />}
@@ -470,15 +503,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <EscalationLevelBanner
-              level={content.riskLevel.level}
-              dateFrom={content.riskLevel.dateFrom}
-            />
-
-            <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
-            </Box>
 
             <HighlightsTile
               hiddenTitle={text.highlighted_items.title}
