@@ -319,6 +319,7 @@ timestamp,action,key,document_id,move_to
 2021-10-13T10:22:19.000Z,add,breadcrumbs.redirects.landelijk,nr2mIdlRRUQmHvbOdJw4m2,__
 2021-10-13T10:22:20.641Z,add,breadcrumbs.redirects.veiligheidsregio,r7l3neeB0b91piSnbsHs3C,__
 2021-10-13T10:22:21.766Z,add,breadcrumbs.redirects.gemeente,r7l3neeB0b91piSnbsHtY3,__
+2021-10-21T13:37:45.168Z,add,ic_opnames_per_dag.kpi_bedbezetting.barscale_screenreader_text,jDbv30Y7XYH5kl8ZaovZD6,__
 2021-10-20T15:03:45.215Z,add,ic_opnames_per_dag.vaccination_status_chart.title,jDbv30Y7XYH5kl8ZamauTv,__
 2021-10-20T15:03:46.228Z,add,ic_opnames_per_dag.vaccination_status_chart.description,F3sVnbafS2gMInMltlUkT6,__
 2021-10-20T15:03:47.249Z,add,ic_opnames_per_dag.vaccination_status_chart.source.href,kEfMsz3QZs49YXq5jn3gWd,__

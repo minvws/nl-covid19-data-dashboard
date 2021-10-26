@@ -7,8 +7,8 @@ import {
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
 import { PieChart } from '~/components/pie-chart';
@@ -20,6 +20,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
+import { getBarScaleConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -181,11 +182,18 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               {bedsLastValue.beds_occupied_covid !== null &&
                 bedsLastValue.beds_occupied_covid_percentage !== null && (
                   <>
-                    <KpiValue
-                      data-cy="beds_occupied_covid"
-                      absolute={bedsLastValue.beds_occupied_covid}
+                    <PageBarScale
+                      value={bedsLastValue.beds_occupied_covid}
+                      config={getBarScaleConfig(
+                        'nl',
+                        'intensive_care_lcps',
+                        'beds_occupied_covid'
+                      )}
                       difference={
                         data.difference.intensive_care_lcps__beds_occupied_covid
+                      }
+                      screenReaderText={
+                        text.kpi_bedbezetting.barscale_screenreader_text
                       }
                       isAmount
                     />
@@ -311,23 +319,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={siteText.ic_admissions_per_age_group.chart_title}
-            description={siteText.ic_admissions_per_age_group.chart_description}
-            timeframeOptions={['all', '5weeks']}
-            metadata={{ source: text.bronnen.nice }}
-          >
-            {(timeframe) => (
-              <AdmissionsPerAgeGroup
-                accessibility={{
-                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
-                }}
-                values={data.intensive_care_nice_per_age_group.values}
-                timeframe={timeframe}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
             metadata={{ source: text.bronnen.lnaz }}
@@ -358,6 +349,23 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
+            title={siteText.ic_admissions_per_age_group.chart_title}
+            description={siteText.ic_admissions_per_age_group.chart_description}
+            timeframeOptions={['all', '5weeks']}
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
+                }}
+                values={data.intensive_care_nice_per_age_group.values}
+                timeframe={timeframe}
               />
             )}
           </ChartTile>
