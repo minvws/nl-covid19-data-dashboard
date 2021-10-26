@@ -20,6 +20,7 @@ export function VaccineAdministrationsKpiSection({
     | 'vaccine_administered_ggd'
     | 'vaccine_administered_hospitals_and_care_institutions'
     | 'vaccine_administered_doctors'
+    | 'vaccine_administered_ggd_ghor'
   >;
 }) {
   const { siteText } = useIntl();
