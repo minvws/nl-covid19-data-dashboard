@@ -167,7 +167,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
-              description={text.extra_uitleg}
+              description={replaceVariablesInText(text.extra_uitleg, {
+                dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+              })}
               metadata={{
                 date: sevenDayAverageDates,
                 source: text.bronnen.nice,

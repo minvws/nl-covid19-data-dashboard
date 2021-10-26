@@ -169,7 +169,12 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
                 isMovingAverageDifference
               />
-              <Markdown content={text.extra_uitleg} />
+              <Markdown
+                content={replaceVariablesInText(text.extra_uitleg, {
+                  dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                  dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+                })}
+              />
             </KpiTile>
 
             <KpiTile

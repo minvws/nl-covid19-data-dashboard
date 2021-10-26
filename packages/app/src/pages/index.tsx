@@ -1,8 +1,10 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlVaccineCoveragePerAgeGroupEstimated,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
@@ -141,6 +143,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     )
   );
 
+  const sevenDayAverageDatesIntensiveCare: [number, number] = [
+    underReportedRangeIntensiveCare - WEEK_IN_SECONDS,
+    underReportedRangeIntensiveCare - DAY_IN_SECONDS,
+  ];
+
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
@@ -238,6 +250,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
@@ -320,6 +340,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',

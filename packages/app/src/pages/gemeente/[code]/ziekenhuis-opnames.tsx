@@ -77,7 +77,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-  const { siteText } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
   const text = siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -132,7 +132,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
-              description={text.extra_uitleg}
+              description={replaceVariablesInText(text.extra_uitleg, {
+                dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+              })}
               metadata={{
                 date: sevenDayAverageDates,
                 source: text.bronnen.rivm,

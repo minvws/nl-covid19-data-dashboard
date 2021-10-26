@@ -1,8 +1,10 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrHospitalNiceValue,
   VrVaccineCoveragePerAgeGroupValue,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
@@ -141,6 +143,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     )
   );
 
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
@@ -226,6 +233,14 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                         ]}
                       />
