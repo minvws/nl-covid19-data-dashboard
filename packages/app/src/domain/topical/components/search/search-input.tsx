@@ -1,8 +1,7 @@
+import { Close, Search } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
-import { Close } from '@corona-dashboard/icons';
-import { Search } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -71,21 +70,28 @@ const StyledSearchInput = styled.input(
     fontSize: 2,
     appearance: 'none',
     m: 0,
+
+    '&:focus': {
+      outline: '2px dotted currentColor !important',
+    },
+
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
+
     '&::-ms-clear': {
       display: 'none',
     },
+
     '&:placeholder-shown': {
       pr: 2,
     },
+
     '[aria-expanded="true"] &': {
       borderColor: 'blue',
       borderBottomColor: 'border',
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
-      outline: 'none !important',
     },
   })
 );

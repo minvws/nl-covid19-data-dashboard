@@ -11,7 +11,7 @@ type source = {
   aria_text?: string;
 };
 export interface MetadataProps extends MarginBottomProps {
-  date?: number | [number, number];
+  date?: number | [number, number] | string;
   source?: source;
   dataSources?: source[];
   obtainedAt?: number;
@@ -40,6 +40,8 @@ export function Metadata({
           startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
           endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
         })
+      : typeof date === 'string'
+      ? date
       : null;
 
   return (
