@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Box } from '~/components/base';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
@@ -33,11 +34,14 @@ function useTileData(activeChart: ActiveVaccinationChart) {
 interface VaccinationsOverTimeTileProps {
   coverageData?: NlVaccineCoverage;
   deliveryAndAdministrationData: DeliveryAndAdministrationData;
+  timelineEvents: Partial<
+    Record<ActiveVaccinationChart, TimelineEventConfig[]>
+  >;
 }
 
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const { siteText } = useIntl();
-  const { coverageData, deliveryAndAdministrationData } = props;
+  const { coverageData, deliveryAndAdministrationData, timelineEvents } = props;
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
 
@@ -55,6 +59,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
         coverageData={coverageData}
         deliveryAndAdministrationData={deliveryAndAdministrationData}
         activeChart={activeVaccinationChart}
+        timelineEvents={timelineEvents}
       />
     </FullscreenChartTile>
   );

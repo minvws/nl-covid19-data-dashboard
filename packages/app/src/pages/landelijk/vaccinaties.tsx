@@ -14,7 +14,6 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
@@ -25,6 +24,11 @@ import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introdu
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -65,11 +69,17 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: PageArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
     return `{
       "page": ${getVaccinePageQuery(locale)},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
+      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)},
+      "elements": ${createElementsQuery(
+        'nl',
+        ['vaccine_coverage', 'vaccine_administered'],
+        locale
+      )}
     }`;
   }),
   createGetChoroplethData({
@@ -129,7 +139,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
   const text = siteText.vaccinaties;
-  const { page } = content;
 
   const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
   const vaccineCoverageEstimatedFeature = useFeature(
@@ -299,12 +308,16 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccinationsOverTimeTile
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
-          />
-          <MilestonesView
-            title={page.title}
-            description={page.description}
-            milestones={page.milestones}
-            expectedMilestones={page.expectedMilestones}
+            timelineEvents={{
+              coverage: getTimelineEvents(
+                content.elements.timeSeries,
+                'vaccine_coverage'
+              ),
+              deliveryAndAdministration: getTimelineEvents(
+                content.elements.timeSeries,
+                'vaccine_administered'
+              ),
+            }}
           />
 
           {vaccineAdministeredGgdFeature.isEnabled &&
