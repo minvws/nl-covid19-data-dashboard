@@ -1,4 +1,9 @@
-import { colors, getLastFilledValue } from '@corona-dashboard/common';
+import {
+  colors,
+  DAY_IN_SECONDS,
+  getLastFilledValue,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -14,6 +19,7 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -59,9 +65,6 @@ export const getStaticProps = createGetStaticProps(
     }`;
   })
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 /**
  * @TODO: remove dummy data
@@ -110,6 +113,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
       dataIntake.values,
       'admissions_on_date_of_admission_moving_average'
     )
+  );
+
+  const vaccinationStatusFeature = useFeature(
+    'nlIntensiveCareVaccinationStatus'
   );
 
   const sevenDayAverageDates: [number, number] = [
@@ -199,57 +206,60 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.vaccination_status_chart.title}
-            metadata={{
-              isTileFooter: true,
-              date: [
-                DummyDataVaccinationStatus.date_start_unix,
-                DummyDataVaccinationStatus.date_end_unix,
-              ],
-              source: {
-                ...text.vaccination_status_chart.source,
-              },
-            }}
-            description={replaceVariablesInText(
-              text.vaccination_status_chart.description,
-              {
-                amountOfPeople: formatNumber(
-                  DummyDataVaccinationStatus.total_amount_of_people
-                ),
-                date_start: formatDateFromSeconds(
-                  DummyDataVaccinationStatus.date_start_unix
-                ),
-                date_end: formatDateFromSeconds(
+          {vaccinationStatusFeature.isEnabled && (
+            <ChartTile
+              title={text.vaccination_status_chart.title}
+              metadata={{
+                isTileFooter: true,
+                date: [
+                  DummyDataVaccinationStatus.date_start_unix,
                   DummyDataVaccinationStatus.date_end_unix,
-                  'medium'
-                ),
-              }
-            )}
-          >
-            <PieChart
-              data={
-                DummyDataVaccinationStatus as NlIntensiveCareVaccinationStatusValue
-              }
-              dataConfig={[
-                {
-                  metricProperty: 'not_vaccinated',
-                  color: colors.data.yellow,
-                  label: text.vaccination_status_chart.labels.not_vaccinated,
+                ],
+                source: {
+                  ...text.vaccination_status_chart.source,
                 },
+              }}
+              description={replaceVariablesInText(
+                text.vaccination_status_chart.description,
                 {
-                  metricProperty: 'has_one_shot',
-                  color: colors.data.cyan,
-                  label: text.vaccination_status_chart.labels.has_one_shot,
-                },
-                {
-                  metricProperty: 'fully_vaccinated',
-                  color: colors.data.multiseries.cyan_dark,
-                  label: text.vaccination_status_chart.labels.fully_vaccinated,
-                },
-              ]}
-            />
-          </ChartTile>
+                  amountOfPeople: formatNumber(
+                    DummyDataVaccinationStatus.total_amount_of_people
+                  ),
+                  date_start: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_start_unix
+                  ),
+                  date_end: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_end_unix,
+                    'medium'
+                  ),
+                }
+              )}
+            >
+              <PieChart
+                data={
+                  DummyDataVaccinationStatus as NlIntensiveCareVaccinationStatusValue
+                }
+                dataConfig={[
+                  {
+                    metricProperty: 'not_vaccinated',
+                    color: colors.data.yellow,
+                    label: text.vaccination_status_chart.labels.not_vaccinated,
+                  },
+                  {
+                    metricProperty: 'has_one_shot',
+                    color: colors.data.cyan,
+                    label: text.vaccination_status_chart.labels.has_one_shot,
+                  },
+                  {
+                    metricProperty: 'fully_vaccinated',
+                    color: colors.data.multiseries.cyan_dark,
+                    label:
+                      text.vaccination_status_chart.labels.fully_vaccinated,
+                  },
+                ]}
+              />
+            </ChartTile>
+          )}
 
           <ChartTile
             title={text.linechart_titel}

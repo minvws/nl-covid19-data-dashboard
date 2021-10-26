@@ -188,7 +188,11 @@ function KpiTile({
         )}
       </Box>
 
-      {metadata && <Metadata {...metadata} isTileFooter />}
+      {metadata && (
+        <Box pt={2}>
+          <Metadata {...metadata} />
+        </Box>
+      )}
     </>
   );
 }

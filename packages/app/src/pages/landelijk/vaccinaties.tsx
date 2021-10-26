@@ -1,11 +1,11 @@
-import { colors } from '@corona-dashboard/common';
-import { Vaccinaties } from '@corona-dashboard/icons';
+import { colors, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PieChart } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
@@ -88,6 +88,36 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+/**
+ * @TODO: remove dummy data
+ */
+
+const DummyDataVaccinationStatus = {
+  total_amount_of_people: 1369,
+  fully_vaccinated: 340,
+  fully_vaccinated_percentage: 24.8,
+  has_one_shot: 31,
+  has_one_shot_percentage: 2.2,
+  not_vaccinated: 998,
+  not_vaccinated_percentage: 72.8,
+  date_start_unix: 1634726341 - WEEK_IN_SECONDS,
+  date_end_unix: 1634726341,
+  date_of_insertion_unix: 1634726341,
+};
+
+interface NlHospitalVaccinationStatusValue {
+  total_amount_of_people: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  has_one_shot: number;
+  has_one_shot_percentage: number;
+  not_vaccinated: number;
+  not_vaccinated_percentage: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     content,
@@ -103,7 +133,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
   const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
 
-  const { siteText } = useIntl();
+  const vaccinationStatusFeature = useFeature('nlVaccinationVaccinationStatus');
+
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
 
@@ -127,9 +159,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-
           <VaccinePageIntroductionNl data={data} />
-
           <PageInformationBlock
             description={content.page.pageDescription}
             metadata={{
@@ -144,7 +174,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />
-
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
@@ -172,7 +201,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               numFractionDigits={1}
             />
           )}
-
           {vaccinationPerAgeGroupFeature.isEnabled && (
             <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
@@ -198,6 +226,61 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
+          {vaccinationStatusFeature.isEnabled && (
+            <ChartTile
+              title={text.vaccination_status_chart.title}
+              metadata={{
+                isTileFooter: true,
+                date: [
+                  DummyDataVaccinationStatus.date_start_unix,
+                  DummyDataVaccinationStatus.date_end_unix,
+                ],
+                source: {
+                  ...text.vaccination_status_chart.source,
+                },
+              }}
+              description={replaceVariablesInText(
+                text.vaccination_status_chart.description,
+                {
+                  amountOfPeople: formatNumber(
+                    DummyDataVaccinationStatus.total_amount_of_people
+                  ),
+                  date_start: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_start_unix
+                  ),
+                  date_end: formatDateFromSeconds(
+                    DummyDataVaccinationStatus.date_end_unix,
+                    'medium'
+                  ),
+                }
+              )}
+            >
+              <PieChart
+                data={
+                  DummyDataVaccinationStatus as NlHospitalVaccinationStatusValue
+                }
+                dataConfig={[
+                  {
+                    metricProperty: 'not_vaccinated',
+                    color: colors.data.yellow,
+                    label: text.vaccination_status_chart.labels.not_vaccinated,
+                  },
+                  {
+                    metricProperty: 'has_one_shot',
+                    color: colors.data.cyan,
+                    label: text.vaccination_status_chart.labels.has_one_shot,
+                  },
+                  {
+                    metricProperty: 'fully_vaccinated',
+                    color: colors.data.multiseries.cyan_dark,
+                    label:
+                      text.vaccination_status_chart.labels.fully_vaccinated,
+                  },
+                ]}
+              />
+            </ChartTile>
+          )}
+
           {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
@@ -206,7 +289,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
           />
-
           <MilestonesView
             title={page.title}
             description={page.description}
@@ -219,21 +301,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <Spacer pb={3} />
 
           <PageInformationBlock
-            title={text.bereidheid_section.title}
-            description={text.bereidheid_section.description}
-            referenceLink={text.bereidheid_section.reference.href}
-            icon={<Vaccinaties />}
-            metadata={{
-              datumsText: text.bereidheid_datums,
-              dateOrRange:
-                data.vaccine_vaccinated_or_support.last_value
-                  .date_of_insertion_unix,
-              dateOfInsertionUnix:
-                data.vaccine_vaccinated_or_support.last_value
-                  .date_of_insertion_unix,
-              dataSources: [],
-            }}
+            title={text.section_archived.title}
+            description={text.section_archived.description}
           />
+
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+
+          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
 
           <ChartTile
             title={text.grafiek_draagvlak.titel}
@@ -325,26 +399,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           </ChartTile>
-
-          <Spacer pb={3} />
-
-          <PageInformationBlock
-            title={text.stock_and_delivery_section.title}
-            icon={<Vaccinaties />}
-            description={text.stock_and_delivery_section.description}
-            referenceLink={text.stock_and_delivery_section.reference.href}
-            metadata={{
-              datumsText: text.levering_en_voorraad_datums,
-              dateOrRange: data.vaccine_stock.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.vaccine_stock.last_value.date_of_insertion_unix,
-              dataSources: [],
-            }}
-          />
-
-          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
-
-          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
       </NlLayout>
     </Layout>

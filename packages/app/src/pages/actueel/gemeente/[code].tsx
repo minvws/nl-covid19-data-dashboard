@@ -262,7 +262,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,
@@ -288,7 +288,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -353,6 +353,25 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
+            <Box pt={4} pb={5}>
+              <Search title={siteText.common_actueel.secties.search.title.gm} />
+            </Box>
+
+            <VaccinationCoverageChoropleth
+              title={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.gm,
+                { municipalityName: municipalityName }
+              )}
+              content={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.gm,
+                { municipalityName: municipalityName }
+              )}
+              gmCode={gmCode}
+              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+            />
+
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
             >
@@ -391,25 +410,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <VaccinationCoverageChoropleth
-              title={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.gm,
-                { municipalityName: municipalityName }
-              )}
-              content={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .content.gm,
-                { municipalityName: municipalityName }
-              )}
-              gmCode={gmCode}
-              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
-            />
-
-            <Box pt={4} pb={5}>
-              <Search title={siteText.common_actueel.secties.search.title.gm} />
-            </Box>
           </TileList>
         </MaxWidth>
 
