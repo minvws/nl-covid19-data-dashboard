@@ -6,6 +6,7 @@ import { Markdown } from '~/components/markdown';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
 import {
   ActiveVaccinationChart,
@@ -34,24 +35,40 @@ function useTileData(activeChart: ActiveVaccinationChart) {
 interface VaccinationsOverTimeTileProps {
   coverageData?: NlVaccineCoverage;
   deliveryAndAdministrationData: DeliveryAndAdministrationData;
+  vaccineAdministeredTotal: number;
+  vaccineAdministeredPlanned: number;
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
 }
 
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
-  const { siteText } = useIntl();
-  const { coverageData, deliveryAndAdministrationData, timelineEvents } = props;
+  const { siteText, formatNumber } = useIntl();
+  const {
+    coverageData,
+    deliveryAndAdministrationData,
+    timelineEvents,
+    vaccineAdministeredTotal,
+    vaccineAdministeredPlanned,
+  } = props;
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
 
   const [metadata, description] = useTileData(activeVaccinationChart);
 
+  const roundedMillion =
+    Math.floor((vaccineAdministeredTotal / 1_000_000) * 10) / 10;
+
   return (
     <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader
         title={siteText.vaccinaties.vaccinations_over_time_tile.title}
-        description={description}
+        description={replaceVariablesInText(description, {
+          total_vaccines: `${formatNumber(roundedMillion)} ${
+            siteText.common.miljoen
+          }`,
+          planned_vaccines: formatNumber(vaccineAdministeredPlanned),
+        })}
         activeVaccinationChart={activeVaccinationChart}
         setActiveVaccinationChart={setActiveVaccinationChart}
       />
