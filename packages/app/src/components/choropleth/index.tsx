@@ -1,6 +1,6 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { GeoProjection } from 'd3-geo';
+import type { GeoProjection } from 'd3-geo';
 import withLoadingProps from 'next-dynamic-loading-props';
 import dynamic from 'next/dynamic';
 import { useRef, useState } from 'react';
