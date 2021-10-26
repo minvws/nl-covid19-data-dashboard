@@ -5,6 +5,7 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '../../data-sorting';
+import { DAY_IN_SECONDS } from '../../time';
 
 export type TimeframeOption = 'all' | '5weeks';
 
@@ -15,7 +16,7 @@ export function getDaysForTimeframe(timeframe: TimeframeOption) {
   return Infinity;
 }
 
-const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+const oneDayInMilliseconds = DAY_IN_SECONDS * 1000;
 
 export const getMinimumUnixForTimeframe = (
   timeframe: TimeframeOption,
@@ -76,12 +77,10 @@ export function getValuesInTimeframe<T extends TimestampedValue>(
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }
 
-const oneDayInSeconds = 24 * 60 * 60;
-
 function getTimeframeBoundaryUnix(timeframe: TimeframeOption, today: Date) {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return Math.floor(today.getTime() / 1000) - days * oneDayInSeconds;
+  return Math.floor(today.getTime() / 1000) - days * DAY_IN_SECONDS;
 }

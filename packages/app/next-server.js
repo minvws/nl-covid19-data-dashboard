@@ -8,6 +8,7 @@ const {
 const dotenv = require('dotenv');
 const path = require('path');
 const { imageResizeTargets } = require('@corona-dashboard/common');
+const intercept = require('intercept-stdout');
 
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
@@ -43,7 +44,19 @@ const STATIC_ASSET_HTTP_DATE = new Date(
 ).toUTCString();
 
 (async function () {
-  await app.prepare();
+  await app.prepare().then(async () => {
+    // in front of all other code
+    intercept((text) => {
+      if (
+        text.indexOf(
+          'Anonymous arrow functions cause Fast Refresh to not preserve local component state'
+        ) > -1
+      )
+        return '';
+      return text;
+    });
+  });
+
   const server = express();
 
   server.use(helmet());

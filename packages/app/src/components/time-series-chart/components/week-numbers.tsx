@@ -1,4 +1,8 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  DAY_IN_SECONDS,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisTop } from '@visx/axis';
 import { RectClipPath } from '@visx/clip-path';
@@ -17,9 +21,6 @@ import { AnyTickFormatter } from './axes';
  * Only show this amount of week numbers
  */
 const MAXIMUM_WEEK_COUNT = 6;
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 /**
  * Space to render above and below the graph

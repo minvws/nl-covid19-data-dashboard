@@ -1,8 +1,10 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
   GmVaccineCoveragePerAgeGroupValue,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
@@ -69,7 +71,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group'
   ),
   createGetChoroplethData({
-    vr: ({ escalation_levels }) => ({ escalation_levels }),
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
         return {
@@ -158,6 +159,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     )
   );
 
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
@@ -240,6 +246,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                         ]}
                       />
@@ -262,7 +276,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,
@@ -288,7 +302,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -353,6 +367,25 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
+            <Box pt={4} pb={5}>
+              <Search title={siteText.common_actueel.secties.search.title.gm} />
+            </Box>
+
+            <VaccinationCoverageChoropleth
+              title={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.gm,
+                { municipalityName: municipalityName }
+              )}
+              content={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.gm,
+                { municipalityName: municipalityName }
+              )}
+              gmCode={gmCode}
+              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+            />
+
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
             >
@@ -391,25 +424,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <VaccinationCoverageChoropleth
-              title={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.gm,
-                { municipalityName: municipalityName }
-              )}
-              content={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .content.gm,
-                { municipalityName: municipalityName }
-              )}
-              gmCode={gmCode}
-              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
-            />
-
-            <Box pt={4} pb={5}>
-              <Search title={siteText.common_actueel.secties.search.title.gm} />
-            </Box>
           </TileList>
         </MaxWidth>
 

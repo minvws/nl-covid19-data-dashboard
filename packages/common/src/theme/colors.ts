@@ -60,6 +60,7 @@ export const colors = {
     fill: 'rgba(0, 123, 199, .05)',
     margin: '#D0EDFF',
     positive: '#5BADDB',
+    partial_vaccination: '#6DC6E1',
     negative: '#F35065',
     cyan: '#219BE6',
     yellow: '#FFC000',
@@ -129,7 +130,8 @@ export const colors = {
       chi: multiseries.magenta_dark,
       psi: multiseries.magenta_dark,
       omega: multiseries.magenta_dark,
-      other: '#808080',
+      other_table: '#808080',
+      other_graph: '#808080',
     },
 
     vaccines: {

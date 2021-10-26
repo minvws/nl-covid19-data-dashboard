@@ -35,12 +35,14 @@ export type Content<T extends DataKeys> =
       differenceKey: string;
       metricName: T;
       metricProperty: string;
+      additionalData?: Record<string, ReactNode>;
     }
   | {
       type: 'difference';
       text: string;
       differenceKey: string;
       isAmount: boolean;
+      additionalData?: Record<string, ReactNode>;
     };
 
 interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {

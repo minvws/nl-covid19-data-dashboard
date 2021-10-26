@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Markdown } from '~/components/markdown';
 import { RadioGroup } from '~/components/radio-group';
 import {
   StackedBarTooltipData,
@@ -17,7 +18,6 @@ import {
   TooltipFormatter,
 } from '~/components/time-series-chart/components';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 type Timeframe = 'all' | 'recent_and_coming';
@@ -79,7 +79,7 @@ export function VaccineDeliveryBarChart({
         spacing={3}
       >
         <Box maxWidth={560}>
-          <Text>{text.omschrijving}</Text>
+          <Markdown content={text.omschrijving} />
         </Box>
 
         <RadioGroup
