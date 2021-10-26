@@ -17,7 +17,7 @@ type BarscaleProps = {
   value: number;
   limit?: number;
   gradient: GradientStop[];
-  id: number;
+  id: string;
   screenReaderText: string;
   showAxis?: boolean;
   showValue?: boolean;

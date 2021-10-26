@@ -1,8 +1,8 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
+import hash from 'hash-sum';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
 import { BarScaleConfig } from '~/metric-config/common';
-import { hash } from '~/utils/hash';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
 
@@ -40,7 +40,7 @@ export function PageBarScale(props: PageBarScaleProps) {
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
    */
-  const uniqueId = hash(JSON.stringify(props));
+  const uniqueId = hash(props);
 
   return (
     <Box spacing={2} mb={3}>
