@@ -1,8 +1,10 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
   GmVaccineCoveragePerAgeGroupValue,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
@@ -101,9 +103,6 @@ export const getStaticProps = createGetStaticProps(
     ])
   )
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const {

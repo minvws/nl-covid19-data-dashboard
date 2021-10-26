@@ -1,8 +1,10 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlVaccineCoveragePerAgeGroupEstimated,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
@@ -102,9 +104,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated'
   )
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
