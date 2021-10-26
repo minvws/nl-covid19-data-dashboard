@@ -301,7 +301,6 @@ export interface Nl {
   vaccine_administered_ggd: NlVaccineAdministeredGgd;
   vaccine_administered_hospitals_and_care_institutions: NlVaccineAdministeredHospitalsAndCareInstitutions;
   vaccine_administered_total: NlVaccineAdministeredTotal;
-  vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
@@ -896,19 +895,6 @@ export interface NlVaccineAdministeredTotalValue {
   estimated: number;
   reported: number;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineAdministeredRateMovingAverage {
-  values: NlVaccineAdministeredRateMovingAverageValue[];
-  last_value: NlVaccineAdministeredRateMovingAverageValue;
-}
-export interface NlVaccineAdministeredRateMovingAverageValue {
-  doses_per_day: number;
-  doses_per_second: number;
-  doses_per_minute: number;
-  seconds_per_dose: number;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineAdministeredPlanned {

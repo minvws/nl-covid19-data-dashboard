@@ -1,4 +1,5 @@
 import { colors, WEEK_IN_SECONDS } from '@corona-dashboard/common';
+import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
@@ -20,7 +21,6 @@ import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverag
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -56,7 +56,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_ggd',
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_planned',
-    'vaccine_administered_rate_moving_average',
     'vaccine_administered_total',
     'vaccine_coverage_per_age_group',
     'vaccine_coverage',
@@ -179,8 +178,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-          <VaccinePageIntroductionNl data={data} />
+
           <PageInformationBlock
+            title={text.title}
+            category={text.category}
+            icon={<VaccinatieIcon />}
             description={content.page.pageDescription}
             metadata={{
               datumsText: text.datums,
