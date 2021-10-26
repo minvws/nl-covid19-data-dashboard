@@ -13,7 +13,7 @@ export function useVariantNameAndDescription(
   )[variant];
 
   const variantDescription =
-    variant === 'other'
+    variant === 'other_table'
       ? otherDescription
       : (siteText.covid_varianten.varianten_omschrijving as Dictionary<string>)[
           variant
