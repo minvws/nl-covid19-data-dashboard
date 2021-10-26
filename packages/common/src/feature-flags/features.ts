@@ -99,4 +99,28 @@ export const features: Feature[] = [
     dataScopes: ['gm'],
     metricName: 'vaccine_coverage_per_age_group',
   },
+  {
+    name: 'nlVaccineAdministeredGgd',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_administered_ggd',
+  },
+  {
+    name: 'nlVaccineAdministeredHospitalsAndCareInstitutions',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_administered_hospitals_and_care_institutions',
+  },
+  {
+    name: 'nlVaccineAdministeredDoctors',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_administered_doctors',
+  },
+  {
+    name: 'nlVaccineAdministeredGgdGhor',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_administered_ggd_ghor',
+  },
 ];

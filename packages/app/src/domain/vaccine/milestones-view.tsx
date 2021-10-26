@@ -44,7 +44,7 @@ export function MilestonesView(props: MilestoneViewProps) {
     : milestones.slice(-MAX_ITEMS_VISIBLE);
 
   return (
-    <Tile>
+    <Tile noPadding>
       <Box spacing={3}>
         <Heading level={3}>{title}</Heading>
 

@@ -102,6 +102,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
   const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
 
+  const vaccineAdministeredGgdFeature = useFeature('nlVaccineAdministeredGgd');
+  const vaccineAdministeredHospitalsAndCareInstitutionsFeature = useFeature(
+    'nlVaccineAdministeredHospitalsAndCareInstitutions'
+  );
+  const vaccineAdministeredDoctorsFeature = useFeature(
+    'nlVaccineAdministeredDoctors'
+  );
+  const vaccineAdministeredGgdGhorFeature = useFeature(
+    'nlVaccineAdministeredGgdGhor'
+  );
+
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
@@ -208,7 +219,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             expectedMilestones={page.expectedMilestones}
           />
 
-          <VaccineAdministrationsKpiSection data={data} />
+          {vaccineAdministeredGgdFeature.isEnabled &&
+            vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
+            vaccineAdministeredDoctorsFeature.isEnabled &&
+            vaccineAdministeredGgdGhorFeature.isEnabled && (
+              <VaccineAdministrationsKpiSection data={data} />
+            )}
 
           <Spacer pb={3} />
 
