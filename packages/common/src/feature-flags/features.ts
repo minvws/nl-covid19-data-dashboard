@@ -123,4 +123,22 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'vaccine_administered_ggd_ghor',
   },
+  {
+    name: 'nlHospitalVaccinationStatus',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccination_status',
+  },
+  {
+    name: 'nlIntensiveCareVaccinationStatus',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'intensive_care_vaccination_status',
+  },
+  {
+    name: 'nlVaccinationVaccinationStatus',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'variants',
+  },
 ];
