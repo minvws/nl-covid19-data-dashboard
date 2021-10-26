@@ -1,4 +1,4 @@
-import { colors, WEEK_IN_SECONDS } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
@@ -62,7 +62,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_delivery_per_supplier',
     'vaccine_stock',
     'vaccine_vaccinated_or_support',
-    'vaccine_coverage_per_age_group_estimated'
+    'vaccine_coverage_per_age_group_estimated',
+    'intensive_care_vaccination_status'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -96,36 +97,6 @@ export const getStaticProps = createGetStaticProps(
     },
   })
 );
-
-/**
- * @TODO: remove dummy data
- */
-
-const DummyDataVaccinationStatus = {
-  total_amount_of_people: 1369,
-  fully_vaccinated: 340,
-  fully_vaccinated_percentage: 24.8,
-  has_one_shot: 31,
-  has_one_shot_percentage: 2.2,
-  not_vaccinated: 998,
-  not_vaccinated_percentage: 72.8,
-  date_start_unix: 1634726341 - WEEK_IN_SECONDS,
-  date_end_unix: 1634726341,
-  date_of_insertion_unix: 1634726341,
-};
-
-interface NlHospitalVaccinationStatusValue {
-  total_amount_of_people: number;
-  fully_vaccinated: number;
-  fully_vaccinated_percentage: number;
-  has_one_shot: number;
-  has_one_shot_percentage: number;
-  not_vaccinated: number;
-  not_vaccinated_percentage: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
@@ -166,6 +137,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+  const lastValueVaccinationStatus =
+    data.intensive_care_vaccination_status.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -254,8 +227,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 isTileFooter: true,
                 date: [
-                  DummyDataVaccinationStatus.date_start_unix,
-                  DummyDataVaccinationStatus.date_end_unix,
+                  lastValueVaccinationStatus.date_start_unix,
+                  lastValueVaccinationStatus.date_end_unix,
                 ],
                 source: {
                   ...text.vaccination_status_chart.source,
@@ -265,22 +238,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text.vaccination_status_chart.description,
                 {
                   amountOfPeople: formatNumber(
-                    DummyDataVaccinationStatus.total_amount_of_people
+                    lastValueVaccinationStatus.total_amount_of_people
                   ),
                   date_start: formatDateFromSeconds(
-                    DummyDataVaccinationStatus.date_start_unix
+                    lastValueVaccinationStatus.date_start_unix
                   ),
                   date_end: formatDateFromSeconds(
-                    DummyDataVaccinationStatus.date_end_unix,
+                    lastValueVaccinationStatus.date_end_unix,
                     'medium'
                   ),
                 }
               )}
             >
               <PieChart
-                data={
-                  DummyDataVaccinationStatus as NlHospitalVaccinationStatusValue
-                }
+                data={lastValueVaccinationStatus}
                 dataConfig={[
                   {
                     metricProperty: 'not_vaccinated',
