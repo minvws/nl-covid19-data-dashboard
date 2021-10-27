@@ -31,7 +31,7 @@ export function Search({
             justifyContent={{ _: 'start', md: 'center' }}
             textAlign={{ md: 'center' }}
           >
-            <Heading level={3} color={colors.bodyLight}>
+            <Heading as="h3" level={4}>
               {title}
             </Heading>
           </Box>
