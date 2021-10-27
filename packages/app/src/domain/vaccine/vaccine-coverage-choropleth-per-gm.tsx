@@ -18,7 +18,7 @@ import {
 } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
-import { InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -68,13 +68,33 @@ export function VaccineCoverageChoroplethPerGm({
             )}
           />
           <Box
-            css={css({ display: 'flex', flexDirection: 'row' })}
+            css={css({
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+            })}
             spacingHorizontal={2}
+            as={'fieldset'}
           >
-            <Box width="50%">
+            <Text
+              as="legend"
+              fontWeight="bold"
+              css={css({
+                flexBasis: '100%',
+                mb: 2,
+              })}
+            >
+              {
+                siteText.vaccinaties.nl_choropleth_vaccinatie_graad
+                  .legend_dropdowns
+              }
+            </Text>
+
+            <Box flex="1">
               <AgeGroupSelect onChange={setSelectedAgeGroup} />
             </Box>
-            <Box width="50%">
+
+            <Box flex="1">
               <VaccinationCoverageKindSelect
                 onChange={setSelectedCoverageKind}
                 initialValue={selectedCoverageKind}
