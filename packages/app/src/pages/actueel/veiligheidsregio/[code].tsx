@@ -167,16 +167,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniTileSelectorLayout
                 link={{
-                  text: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.text,
-                    {
-                      safetyRegionName: vrName,
-                    }
-                  ),
-                  href: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.href,
-                    { vrCode }
-                  ),
+                  text: replaceVariablesInText(text.title_link, {
+                    safetyRegionName: vrName,
+                  }),
+                  href: reverseRouter.vr.index(vrCode),
                 }}
                 menuItems={[
                   {

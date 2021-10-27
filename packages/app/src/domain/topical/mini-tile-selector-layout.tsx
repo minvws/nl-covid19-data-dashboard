@@ -82,7 +82,7 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
          * actually removes the link altogether
          */
         isDefined(link) && !isEmpty(link.text) ? (
-          <Box fontWeight="bold" pt={2}>
+          <Box pt={2}>
             <LinkWithIcon
               href={link.href}
               icon={<ArrowIconRight />}
@@ -215,7 +215,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
              * actually removes the link altogether
              */
             isDefined(link) && !isEmpty(link.text) ? (
-              <Box fontWeight="bold" pl={2} pt={4}>
+              <Box pl={2} pt={2}>
                 <LinkWithIcon
                   href={link.href}
                   icon={<ArrowIconRight />}

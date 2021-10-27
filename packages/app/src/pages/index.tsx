@@ -177,7 +177,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniTileSelectorLayout
                 link={{
-                  ...text.secties.actuele_situatie.link,
+                  text: text.quick_links.header,
                   href: reverseRouter.nl.index(),
                 }}
                 menuItems={[

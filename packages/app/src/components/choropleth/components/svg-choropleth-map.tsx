@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { GeoProjection } from 'd3-geo';
+import type { GeoProjection } from 'd3-geo';
 import { MutableRefObject } from 'react';
 import { isDefined } from 'ts-is-present';
 import { AccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
