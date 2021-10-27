@@ -69,6 +69,7 @@ export function VaccinationsOverTimeChart(
       ? ({
           accessibility: { key: 'vaccine_coverage_over_time_chart' },
           values: transformToDayTimestamps(coverageData.values),
+          minHeight: breakpoints.md ? 400 : 250,
           formatTickValue: (x: number) => `${x / 1_000_000}`,
           dataOptions: {
             valueAnnotation:
