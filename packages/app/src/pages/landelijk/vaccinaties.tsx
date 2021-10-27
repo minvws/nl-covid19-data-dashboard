@@ -2,14 +2,12 @@ import { colors } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { Box, Spacer } from '~/components/base';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PieChart } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -328,84 +326,72 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ],
             }}
           >
-            <Box spacing={3}>
-              <section>
-                <KpiValue
-                  percentage={
-                    data.vaccine_vaccinated_or_support.last_value
-                      .percentage_average
-                  }
-                />
-                <Text>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
-              </section>
-
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'vaccines_support_over_time_chart',
-                }}
-                tooltipTitle={text.grafiek_draagvlak.titel}
-                values={data.vaccine_vaccinated_or_support.values}
-                numGridLines={20}
-                tickValues={[0, 25, 50, 75, 100]}
-                dataOptions={{
+            <TimeSeriesChart
+              accessibility={{
+                key: 'vaccines_support_over_time_chart',
+              }}
+              tooltipTitle={text.grafiek_draagvlak.titel}
+              values={data.vaccine_vaccinated_or_support.values}
+              numGridLines={20}
+              tickValues={[0, 25, 50, 75, 100]}
+              dataOptions={{
+                isPercentage: true,
+                forcedMaximumValue: 100,
+              }}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_70_plus',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '70+' }
+                  ),
+                  color: colors.data.multiseries.magenta,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_55_69',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '55 - 69' }
+                  ),
+                  color: colors.data.multiseries.orange,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_40_54',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '40 - 54' }
+                  ),
+                  color: colors.data.multiseries.turquoise,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_25_39',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '25 - 39' }
+                  ),
+                  color: colors.data.multiseries.yellow,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_16_24',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '16 - 24' }
+                  ),
+                  color: colors.data.multiseries.cyan,
+                },
+                {
+                  type: 'invisible',
+                  metricProperty: 'percentage_average',
+                  label: siteText.common.totaal,
                   isPercentage: true,
-                  forcedMaximumValue: 100,
-                }}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_70_plus',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '70+' }
-                    ),
-                    color: colors.data.multiseries.magenta,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_55_69',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '55 - 69' }
-                    ),
-                    color: colors.data.multiseries.orange,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_40_54',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '40 - 54' }
-                    ),
-                    color: colors.data.multiseries.turquoise,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_25_39',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '25 - 39' }
-                    ),
-                    color: colors.data.multiseries.yellow,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_16_24',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '16 - 24' }
-                    ),
-                    color: colors.data.multiseries.cyan,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'percentage_average',
-                    label: siteText.common.totaal,
-                    isPercentage: true,
-                  },
-                ]}
-              />
-            </Box>
+                },
+              ]}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>
