@@ -259,7 +259,7 @@ const WideMenuButton = styled.button<{ selected: boolean }>((x) =>
     flexDirection: 'row',
     pr: `calc(5px + ${space[3]})`,
     backgroundColor: x.selected ? colors.lightBlue : colors.white,
-    pl: 2,
+    pl: 3,
     transition: '0.1s background-color',
     zIndex: 3,
     border: 0,
