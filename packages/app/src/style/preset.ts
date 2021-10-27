@@ -35,6 +35,14 @@ export const preset = {
       lineHeight: 2,
       fontWeight: 'bold',
     },
+    subtitle2: {
+      fontSize: 2,
+      lineHeight: 2,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      color: "category",
+    },
     body1: {
       fontSize: 3,
     },

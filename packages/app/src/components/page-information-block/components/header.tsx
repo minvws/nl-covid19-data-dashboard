@@ -32,12 +32,7 @@ export function Header({
       {icon && !isMediumScreen && <Icon gridArea="topIcon">{icon}</Icon>}
       {category && (
         <Box gridArea="category">
-          <Heading
-            level={1}
-            variant="subtitle1"
-            color="category"
-            textTransform="uppercase"
-          >
+          <Heading level={1} variant="subtitle2">
             {category}
             {screenReaderCategory && (
               <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
