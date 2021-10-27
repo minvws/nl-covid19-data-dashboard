@@ -281,6 +281,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccinationsOverTimeTile
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
+            vaccineAdministeredTotalLastValue={
+              data.vaccine_administered_total.last_value
+            }
+            vaccineAdministeredPlannedLastValue={
+              data.vaccine_administered_planned.last_value
+            }
             timelineEvents={{
               coverage: getTimelineEvents(
                 content.elements.timeSeries,
