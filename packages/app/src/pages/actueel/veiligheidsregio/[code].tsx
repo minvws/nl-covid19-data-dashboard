@@ -365,6 +365,14 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               )}
               vrCode={vrCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+              link={{
+                href: reverseRouter.vr.vaccinaties(vrCode),
+                text: replaceVariablesInText(
+                  siteText.common_actueel.secties
+                    .vaccination_coverage_choropleth.link_text.vr,
+                  { safetyRegion: vrName }
+                ),
+              }}
             />
 
             <CollapsibleButton

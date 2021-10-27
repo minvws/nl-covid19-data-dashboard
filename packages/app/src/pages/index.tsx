@@ -520,6 +520,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 gm: choropleth.gm.vaccine_coverage_per_age_group,
                 vr: choropleth.vr.vaccine_coverage_per_age_group,
               }}
+              link={{
+                href: reverseRouter.nl.vaccinaties(),
+                text: siteText.common_actueel.secties
+                  .vaccination_coverage_choropleth.link_text.nl,
+              }}
             />
           </TileList>
         </MaxWidth>

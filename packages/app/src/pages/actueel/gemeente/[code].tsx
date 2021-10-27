@@ -378,6 +378,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               )}
               gmCode={gmCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+              link={{
+                href: reverseRouter.gm.vaccinaties(gmCode),
+                text: replaceVariablesInText(
+                  siteText.common_actueel.secties
+                    .vaccination_coverage_choropleth.link_text.gm,
+                  { municipalityName: municipalityName }
+                ),
+              }}
             />
 
             <CollapsibleButton
