@@ -107,6 +107,7 @@ export function RichContent({
                   '> div > div': {
                     px: 0,
                     alignSelf: 'flex-start',
+                    width: '100%',
                   },
                 })}
               >
