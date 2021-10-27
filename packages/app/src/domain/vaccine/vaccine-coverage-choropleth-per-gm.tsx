@@ -50,20 +50,22 @@ export function VaccineCoverageChoroplethPerGm({
   const reverseRouter = useReverseRouter();
 
   const variables = {
-    regio: siteText.vaccinaties.nl_choropleth_vaccinatie_graad[selectedMap],
+    regio:
+      siteText.vaccinaties.choropleth_vaccination_coverage.shared[selectedMap],
   };
 
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        siteText.vaccinaties.nl_choropleth_vaccinatie_graad.titel,
+        siteText.vaccinaties.choropleth_vaccination_coverage.nl.title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.description,
+              siteText.vaccinaties.choropleth_vaccination_coverage.nl
+                .description,
               variables
             )}
           />
@@ -85,8 +87,8 @@ export function VaccineCoverageChoroplethPerGm({
               })}
             >
               {
-                siteText.vaccinaties.nl_choropleth_vaccinatie_graad
-                  .legend_dropdowns
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
               }
             </Text>
 
@@ -106,7 +108,8 @@ export function VaccineCoverageChoroplethPerGm({
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
         title:
-          siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel,
+          siteText.vaccinaties.choropleth_vaccination_coverage.shared
+            .legend_title,
       }}
       metadata={{
         source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,

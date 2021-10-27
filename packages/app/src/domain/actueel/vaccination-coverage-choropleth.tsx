@@ -107,7 +107,8 @@ export function VaccinationCoverageChoropleth(
           <ChoroplethLegenda
             thresholds={thresholds.gm.fully_vaccinated_percentage}
             title={
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel
+              siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                .legend_title
             }
           />
         }
@@ -231,8 +232,8 @@ export function VaccinationCoverageChoropleth(
               })}
             >
               {
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .legend_dropdowns
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
               }
             </Text>
 
