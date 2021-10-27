@@ -111,7 +111,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
   return (
     <StyledNarrowMenuListItem key={item.label}>
       <Box
-        height="3em"
+        height="3.5em"
         alignItems="center"
         display="flex"
         flexDirection="row"
@@ -237,7 +237,7 @@ const NarrowMenuList = styled.ul(
   css({
     borderBottom: '1px',
     borderBottomStyle: 'solid',
-    borderBottomColor: 'border',
+    borderBottomColor: 'lightGray',
   })
 );
 
@@ -289,7 +289,7 @@ const StyledNarrowMenuListItem = styled.li(
     listStyle: 'none',
     borderTop: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: 'border',
+    borderTopColor: 'lightGray',
     cursor: 'pointer',
   })
 );
