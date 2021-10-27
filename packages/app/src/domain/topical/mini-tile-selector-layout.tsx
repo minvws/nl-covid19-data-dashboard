@@ -51,8 +51,8 @@ export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   }
 
   return (
-    <Box spacing={2}>
-      <Text variant="label1">
+    <Box spacing={3}>
+      <Text variant="label1" color="bodyLight">
         {siteText.common_actueel.tile_selector_uitleg}
       </Text>
       <NarrowMiniTileSelectorLayout {...props} />
