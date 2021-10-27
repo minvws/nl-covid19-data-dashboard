@@ -99,12 +99,12 @@ export function RichContent({
               <Box
                 py={3}
                 css={css({
-                  p: { width: '100%' },
+                  '> div > p': { width: '100%' },
 
                   /** This is for removing the inline charts default padding
                    * and aligning the KPI's at the start of the flow
                    */
-                  'div > div': {
+                  '> div > div': {
                     px: 0,
                     alignSelf: 'flex-start',
                   },
