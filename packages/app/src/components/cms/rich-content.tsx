@@ -117,7 +117,7 @@ export function RichContent({
               maxWidth: 'infoWidth',
               width: '100%',
               px: asResponsiveArray({ _: 4, md: undefined }),
-              pb: 3,
+              pb: 4,
             })}
           >
             <Box pb={4}>
