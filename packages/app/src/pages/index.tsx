@@ -6,9 +6,14 @@ import {
   NlVaccineCoveragePerAgeGroupEstimated,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import {
+  Arts,
+  Chart,
+  Chevron,
+  Vaccinaties,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
@@ -272,9 +277,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.intensiveCareOpnames()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {text.mini_trend_tiles.ic_opnames.read_more_link}
                       </LinkWithIcon>
@@ -361,9 +365,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.ziekenhuisopnames()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {
                           text.mini_trend_tiles.ziekenhuis_opnames
@@ -442,9 +445,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
                       </LinkWithIcon>

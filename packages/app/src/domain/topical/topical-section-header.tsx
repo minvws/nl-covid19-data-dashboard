@@ -1,6 +1,7 @@
+import { Chevron } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
-import { ArrowIconLeft, ArrowIconRight } from '~/components/arrow-icon';
+import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { RelativeDate } from '~/components/relative-date';
@@ -66,10 +67,10 @@ export function TopicalSectionHeader({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) ? (
-              <Box mb={'2px'} fontWeight="bold">
+              <Box mb={'2px'}>
                 <LinkWithIcon
                   href={link.href}
-                  icon={<ArrowIconRight />}
+                  icon={<Chevron />}
                   iconPlacement="right"
                 >
                   {link.text}

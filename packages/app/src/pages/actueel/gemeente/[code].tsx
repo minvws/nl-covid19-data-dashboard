@@ -6,10 +6,9 @@ import {
   GmVaccineCoveragePerAgeGroupValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import { Chevron, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
@@ -259,9 +258,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {
                           text.mini_trend_tiles.ziekenhuis_opnames
@@ -338,9 +336,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         </Box>
                         <LinkWithIcon
                           href={reverseRouter.gm.vaccinaties(gmCode)}
-                          icon={<ArrowIconRight />}
+                          icon={<Chevron />}
                           iconPlacement="right"
-                          fontWeight="bold"
                         >
                           {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
                         </LinkWithIcon>
