@@ -177,6 +177,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   municipalityName: municipalityName,
                 })}
                 headingLevel={1}
+                link={{
+                  text: replaceVariablesInText(text.title_link, {
+                    municipalityName: municipalityName,
+                  }),
+                  href: reverseRouter.gm.index(gmCode),
+                }}
               />
 
               <MiniTileSelectorLayout
