@@ -125,6 +125,7 @@ export function VaccinationsOverTimeChart(
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
     timelineEvents.coverage,
+    breakpoints,
   ]);
 
   const deliveryAndAdministrationChartConfiguration = useMemo(() => {
