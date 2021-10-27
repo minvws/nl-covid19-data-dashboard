@@ -211,14 +211,14 @@ export const VaccinationsVrPage = (
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.vaccinaties.vr_choropleth_vaccinatie_graad.title,
+              siteText.vaccinaties.choropleth_vaccination_coverage.vr.title,
               { safetyRegionName: vrName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.vaccinaties.vr_choropleth_vaccinatie_graad
+                    siteText.vaccinaties.choropleth_vaccination_coverage.vr
                       .description,
                     { safetyRegionName: vrName }
                   )}
@@ -230,7 +230,7 @@ export const VaccinationsVrPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.vaccinaties.vr_choropleth_vaccinatie_graad
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
                   .legend_title,
             }}
             metadata={{

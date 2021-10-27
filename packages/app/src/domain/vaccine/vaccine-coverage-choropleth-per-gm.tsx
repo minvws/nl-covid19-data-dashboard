@@ -18,7 +18,7 @@ import {
 } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
-import { InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -50,31 +50,51 @@ export function VaccineCoverageChoroplethPerGm({
   const reverseRouter = useReverseRouter();
 
   const variables = {
-    regio: siteText.vaccinaties.nl_choropleth_vaccinatie_graad[selectedMap],
+    regio:
+      siteText.vaccinaties.choropleth_vaccination_coverage.shared[selectedMap],
   };
 
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        siteText.vaccinaties.nl_choropleth_vaccinatie_graad.titel,
+        siteText.vaccinaties.choropleth_vaccination_coverage.nl.title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.description,
+              siteText.vaccinaties.choropleth_vaccination_coverage.nl
+                .description,
               variables
             )}
           />
           <Box
-            css={css({ display: 'flex', flexDirection: 'row' })}
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
             spacingHorizontal={2}
+            as={'fieldset'}
           >
-            <Box width="50%">
+            <Text
+              as="legend"
+              fontWeight="bold"
+              css={css({
+                flexBasis: '100%',
+                mb: 2,
+              })}
+            >
+              {
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
+              }
+            </Text>
+
+            <Box flex="1">
               <AgeGroupSelect onChange={setSelectedAgeGroup} />
             </Box>
-            <Box width="50%">
+
+            <Box flex="1">
               <VaccinationCoverageKindSelect
                 onChange={setSelectedCoverageKind}
                 initialValue={selectedCoverageKind}
@@ -86,7 +106,8 @@ export function VaccineCoverageChoroplethPerGm({
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
         title:
-          siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel,
+          siteText.vaccinaties.choropleth_vaccination_coverage.shared
+            .legend_title,
       }}
       metadata={{
         source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,

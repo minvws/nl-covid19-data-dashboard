@@ -14,6 +14,7 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic';
 import { Markdown } from '~/components/markdown';
+import { Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import {
   CoverageKindProperty,
@@ -106,7 +107,8 @@ export function VaccinationCoverageChoropleth(
           <ChoroplethLegenda
             thresholds={thresholds.gm.fully_vaccinated_percentage}
             title={
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel
+              siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                .legend_title
             }
           />
         }
@@ -213,13 +215,31 @@ export function VaccinationCoverageChoropleth(
         <Box spacing={3}>
           <Markdown content={props.content} />
           <Box
-            css={css({ display: 'flex', flexDirection: 'row' })}
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
             spacingHorizontal={2}
+            as={'fieldset'}
           >
-            <Box width="50%">
+            <Text
+              as="legend"
+              fontWeight="bold"
+              css={css({
+                flexBasis: '100%',
+                mb: 2,
+              })}
+            >
+              {
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
+              }
+            </Text>
+
+            <Box flex={1}>
               <AgeGroupSelect onChange={setSelectedAgeGroup} />
             </Box>
-            <Box width="50%">
+
+            <Box flex={1}>
               <VaccinationCoverageKindSelect
                 onChange={setSelectedCoverageKind}
                 initialValue={selectedCoverageKind}
