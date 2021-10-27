@@ -268,15 +268,12 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
