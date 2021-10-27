@@ -215,11 +215,9 @@ export function VaccinationCoverageChoropleth(
         <Box spacing={3}>
           <Markdown content={props.content} />
           <Box
-            css={css({
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-            })}
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
             spacingHorizontal={2}
             as={'fieldset'}
           >

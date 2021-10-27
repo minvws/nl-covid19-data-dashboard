@@ -70,11 +70,9 @@ export function VaccineCoverageChoroplethPerGm({
             )}
           />
           <Box
-            css={css({
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-            })}
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
             spacingHorizontal={2}
             as={'fieldset'}
           >
