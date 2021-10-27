@@ -10,7 +10,6 @@ import { Markdown } from '~/components/markdown';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
@@ -59,7 +58,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     vaccineAdministeredPlannedLastValue,
   } = props;
 
-  const { siteText, formatNumber, formatDate } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
