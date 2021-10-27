@@ -89,8 +89,6 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const dateFromText = isSameMonth ? dateFrom.getDate() : formatDate(dateFrom);
   const dateToText = formatDate(dateTo);
 
-  console.log(description);
-
   return (
     <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader
