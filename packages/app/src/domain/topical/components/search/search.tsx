@@ -78,17 +78,6 @@ export function Search({
                 </Box>
               </SearchForm>
             </Box>
-
-            <Box
-              display={{ _: 'none', md: 'block' }}
-              position="absolute"
-              top="50%"
-              left="0"
-              height="1px"
-              width="100%"
-              transform="translate(0, -50%)"
-              bg={'border'}
-            />
           </Box>
         </Box>
       )}
