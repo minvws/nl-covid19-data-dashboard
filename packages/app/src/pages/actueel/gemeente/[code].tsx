@@ -428,7 +428,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth
-            spacing={3}
+            spacing={4}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >
