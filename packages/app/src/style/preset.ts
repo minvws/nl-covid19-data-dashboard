@@ -59,6 +59,7 @@ export const preset = {
       fontSize: 0,
       fontWeight: 'bold',
       textTransform: 'uppercase',
+      letterSpacing: '0.05em',
     },
     label1: {
       fontSize: 1,
