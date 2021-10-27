@@ -28,18 +28,18 @@ export function Search({
         <Box spacing={3}>
           <Box
             display="flex"
-            justifyContent={{ _: 'start', md: 'center' }}
-            textAlign={{ md: 'center' }}
+            justifyContent={{ _: 'start', xs: 'center' }}
+            textAlign={{ xs: 'center' }}
           >
-            <Heading level={3} color={colors.bodyLight}>
+            <Heading as="h3" level={4}>
               {title}
             </Heading>
           </Box>
 
           <Box
             display="flex"
-            justifyContent={{ _: 'start', md: 'center' }}
-            alignItems={{ _: 'start', md: 'center' }}
+            justifyContent={{ _: 'start', xs: 'center' }}
+            alignItems={{ _: 'start', xs: 'center' }}
             position="relative"
             width="100%"
             zIndex={10}
@@ -78,17 +78,6 @@ export function Search({
                 </Box>
               </SearchForm>
             </Box>
-
-            <Box
-              display={{ _: 'none', md: 'block' }}
-              position="absolute"
-              top="50%"
-              left="0"
-              height="1px"
-              width="100%"
-              transform="translate(0, -50%)"
-              bg={'border'}
-            />
           </Box>
         </Box>
       )}

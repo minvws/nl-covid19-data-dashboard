@@ -6,10 +6,9 @@ import {
   GmVaccineCoveragePerAgeGroupValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import { Chevron, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
@@ -253,9 +252,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {
                           text.mini_trend_tiles.ziekenhuis_opnames
@@ -277,15 +275,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
@@ -332,9 +327,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         </Box>
                         <LinkWithIcon
                           href={reverseRouter.gm.vaccinaties(gmCode)}
-                          icon={<ArrowIconRight />}
+                          icon={<Chevron />}
                           iconPlacement="right"
-                          fontWeight="bold"
                         >
                           {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
                         </LinkWithIcon>
@@ -361,7 +355,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
-            <Box pt={4} pb={5}>
+            <Box pt={4}>
               <Search title={siteText.common_actueel.secties.search.title.gm} />
             </Box>
 
@@ -378,6 +372,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               )}
               gmCode={gmCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+              link={{
+                href: reverseRouter.gm.vaccinaties(gmCode),
+                text: replaceVariablesInText(
+                  siteText.common_actueel.secties
+                    .vaccination_coverage_choropleth.link_text.gm,
+                  { municipalityName: municipalityName }
+                ),
+              }}
             />
 
             <CollapsibleButton
@@ -425,7 +427,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth
-            spacing={3}
+            spacing={4}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >

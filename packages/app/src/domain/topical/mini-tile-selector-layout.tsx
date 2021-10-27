@@ -51,8 +51,8 @@ export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   }
 
   return (
-    <Box spacing={2}>
-      <Text variant="label1">
+    <Box spacing={3}>
+      <Text variant="label1" color="bodyLight">
         {siteText.common_actueel.tile_selector_uitleg}
       </Text>
       <NarrowMiniTileSelectorLayout {...props} />
@@ -111,7 +111,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
   return (
     <StyledNarrowMenuListItem key={item.label}>
       <Box
-        height="3em"
+        height="3.5em"
         alignItems="center"
         display="flex"
         flexDirection="row"
@@ -228,7 +228,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           }
         </>
       </Box>
-      <Box pl={3}>{children[selectedIndex]}</Box>
+      <Box pl={4}>{children[selectedIndex]}</Box>
     </Box>
   );
 }
@@ -237,7 +237,7 @@ const NarrowMenuList = styled.ul(
   css({
     borderBottom: '1px',
     borderBottomStyle: 'solid',
-    borderBottomColor: 'border',
+    borderBottomColor: 'lightGray',
   })
 );
 
@@ -259,7 +259,7 @@ const WideMenuButton = styled.button<{ selected: boolean }>((x) =>
     flexDirection: 'row',
     pr: `calc(5px + ${space[3]})`,
     backgroundColor: x.selected ? colors.lightBlue : colors.white,
-    pl: 2,
+    pl: 3,
     transition: '0.1s background-color',
     zIndex: 3,
     border: 0,
@@ -289,7 +289,7 @@ const StyledNarrowMenuListItem = styled.li(
     listStyle: 'none',
     borderTop: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: 'border',
+    borderTopColor: 'lightGray',
     cursor: 'pointer',
   })
 );

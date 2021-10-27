@@ -49,7 +49,7 @@ export function EscalationLevelLabel({
 
       {dateFrom && (
         <Box pt="2px" pl={{ _: 0, sm: 2 }}>
-          <InlineText variant="body2">
+          <InlineText variant="body2" color="bodyLight">
             {replaceVariablesInText(
               siteText.national_escalation_levels.valid_from,
               {

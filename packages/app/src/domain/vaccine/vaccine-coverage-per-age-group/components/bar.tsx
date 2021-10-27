@@ -59,8 +59,10 @@ export function Bar({
         />
       )}
       {showAxisValues && (
-        <Box display="flex" flexDirection="row" position="relative">
-          <InlineText>0%</InlineText>
+        <Box display="flex" flexDirection="row" position="relative" pt={1}>
+          <InlineText variant="label1" color="bodyLight">
+            0%
+          </InlineText>
           <InlineText
             css={css({
               background:
@@ -71,11 +73,18 @@ export function Bar({
               left: `calc(${Math.round(barValue)}% - 30px)`,
               width: '60px',
             })}
+            fontWeight="bold"
           >
             {barValueSign}
             {formatPercentage(barValue)}%
           </InlineText>
-          <InlineText css={css({ ml: 'auto' })}>100%</InlineText>
+          <InlineText
+            css={css({ ml: 'auto' })}
+            variant="label1"
+            color="bodyLight"
+          >
+            100%
+          </InlineText>
         </Box>
       )}
     </Box>

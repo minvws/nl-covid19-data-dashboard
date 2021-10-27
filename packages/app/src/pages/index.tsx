@@ -6,9 +6,14 @@ import {
   NlVaccineCoveragePerAgeGroupEstimated,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import {
+  Arts,
+  Chart,
+  Chevron,
+  Vaccinaties,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
@@ -272,9 +277,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.intensiveCareOpnames()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {text.mini_trend_tiles.ic_opnames.read_more_link}
                       </LinkWithIcon>
@@ -293,15 +297,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
                       label:
                         siteText.ic_opnames_per_dag
                           .linechart_legend_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
@@ -361,9 +362,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.ziekenhuisopnames()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {
                           text.mini_trend_tiles.ziekenhuis_opnames
@@ -385,15 +385,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
@@ -442,9 +439,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
                       </LinkWithIcon>
@@ -524,6 +520,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 gm: choropleth.gm.vaccine_coverage_per_age_group,
                 vr: choropleth.vr.vaccine_coverage_per_age_group,
               }}
+              link={{
+                href: reverseRouter.nl.vaccinaties(),
+                text: siteText.common_actueel.secties
+                  .vaccination_coverage_choropleth.link_text.nl,
+              }}
             />
           </TileList>
         </MaxWidth>
@@ -532,7 +533,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth
-            spacing={3}
+            spacing={4}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >

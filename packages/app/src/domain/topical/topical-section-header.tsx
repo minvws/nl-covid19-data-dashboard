@@ -1,6 +1,7 @@
+import { Chevron } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
-import { ArrowIconLeft, ArrowIconRight } from '~/components/arrow-icon';
+import { ArrowIconThinLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { RelativeDate } from '~/components/relative-date';
@@ -38,10 +39,10 @@ export function TopicalSectionHeader({
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box pt={{ _: 2, lg: 3 }}>
+    <Box pt={{ _: 2, lg: 3 }} spacing={3}>
       {showBackLink && (
-        <Box fontSize="1.125rem" fontWeight="bold">
-          <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
+        <Box fontSize="1.125rem">
+          <LinkWithIcon href="/" icon={<ArrowIconThinLeft />}>
             {text.common_actueel.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
@@ -66,10 +67,10 @@ export function TopicalSectionHeader({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) ? (
-              <Box mb={'2px'} fontWeight="bold">
+              <Box mb={'2px'}>
                 <LinkWithIcon
                   href={link.href}
-                  icon={<ArrowIconRight />}
+                  icon={<Chevron />}
                   iconPlacement="right"
                 >
                   {link.text}

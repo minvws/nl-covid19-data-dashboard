@@ -362,6 +362,9 @@ timestamp,action,key,document_id,move_to
 2021-10-25T12:17:07.829Z,add,vaccinaties.vaccination_status_chart.source.href,G6M7GhzH8XbtdKiRrSBsKk,__
 2021-10-25T12:17:08.844Z,add,vaccinaties.vaccination_status_chart.source.text,G6M7GhzH8XbtdKiRrSBsz0,__
 2021-10-25T12:17:10.108Z,add,vaccinaties.vaccination_status_chart.title,G6M7GhzH8XbtdKiRrSBtdG,__
+2021-10-27T12:06:42.717Z,add,common_actueel.secties.vaccination_coverage_choropleth.link_text.gm,XIsMg3WYidPwwGdwwIv9xi,__
+2021-10-27T12:06:43.692Z,add,common_actueel.secties.vaccination_coverage_choropleth.link_text.vr,Pei0Nqv2MstfonnkIO4w8j,__
+2021-10-27T12:06:44.718Z,add,common_actueel.secties.vaccination_coverage_choropleth.link_text.nl,XIsMg3WYidPwwGdwwIvECJ,__
 2021-10-27T07:38:58.639Z,add,vaccinaties.choropleth_vaccination_coverage.shared.legend_title,G6M7GhzH8XbtdKiRrez0Cs,__
 2021-10-27T07:38:59.559Z,add,vaccinaties.choropleth_vaccination_coverage.shared.dropdowns_title,XIsMg3WYidPwwGdwwGszN9,__
 2021-10-27T07:39:00.584Z,add,vaccinaties.choropleth_vaccination_coverage.shared.gm,XIsMg3WYidPwwGdwwGszsV,__

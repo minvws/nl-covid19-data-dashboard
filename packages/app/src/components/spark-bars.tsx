@@ -3,7 +3,7 @@ import { colors } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { Box } from './base';
 
-const BAR_WIDTH = 6;
+const BAR_WIDTH = 5;
 const BAR_HEIGHT = 16;
 
 type SparkBarsProps<T extends TimestampedValue> = {

@@ -35,6 +35,10 @@ type DefaultProps = {
   title: string;
   content: string;
   defaultCoverageKind?: CoverageKindProperty;
+  link?: {
+    href: string;
+    text: string;
+  };
 };
 
 type GmCoverage = DefaultProps & {
@@ -100,7 +104,7 @@ export function VaccinationCoverageChoropleth(
 
   return (
     <TopicalTile>
-      <TopicalSectionHeader title={props.title} />
+      <TopicalSectionHeader title={props.title} link={props.link} />
 
       <ChoroplethTwoColumnLayout
         legendComponent={
