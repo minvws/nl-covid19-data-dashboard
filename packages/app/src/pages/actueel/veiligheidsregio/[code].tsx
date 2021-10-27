@@ -164,6 +164,12 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
                 headingLevel={1}
+                link={{
+                  text: replaceVariablesInText(text.title_link, {
+                    safetyRegionName: vrName,
+                  }),
+                  href: reverseRouter.vr.index(vrCode),
+                }}
               />
 
               <MiniTileSelectorLayout

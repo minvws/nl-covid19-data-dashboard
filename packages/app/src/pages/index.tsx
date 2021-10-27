@@ -168,6 +168,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
                 headingLevel={1}
+                link={{
+                  text: text.quick_links.header,
+                  href: reverseRouter.nl.index(),
+                }}
               />
 
               <MiniTileSelectorLayout
