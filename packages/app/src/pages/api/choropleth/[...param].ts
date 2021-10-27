@@ -15,12 +15,9 @@ import {
   getChoroplethFeatures,
   getFeatureProps,
   getFillColor,
-  gmGeo,
-  inGeo,
   MapType,
-  nlGeo,
-  vrGeo,
 } from '~/components/choropleth/logic';
+import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
@@ -161,6 +158,20 @@ async function generateChoroplethImage(
 
   const features = getChoroplethFeatures(map, data, geoJson, selectedCode);
 
+  const fitExtent: FitExtent = [
+    [
+      [0, 0],
+      [width, height],
+    ],
+    features.boundingBox,
+  ];
+
+  const [projectedGeoInfo] = getProjectedCoordinates(
+    features.hover,
+    mapProjection,
+    fitExtent
+  );
+
   const fColor = getFillColor(data, map, dataConfig);
   const fillColor = (code: string, index: number) => {
     if (code === 'VR19') {
@@ -175,20 +186,6 @@ async function generateChoroplethImage(
   };
 
   const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
-
-  const fitExtent: FitExtent = [
-    [
-      [0, 0],
-      [width, height],
-    ],
-    features.boundingBox,
-  ];
-
-  const [projectedGeoInfo] = getProjectedCoordinates(
-    features.hover,
-    mapProjection,
-    fitExtent
-  );
 
   const stage = new Konva.Stage({
     width,
