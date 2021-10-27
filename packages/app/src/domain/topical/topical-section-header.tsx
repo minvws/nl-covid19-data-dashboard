@@ -37,8 +37,6 @@ export function TopicalSectionHeader({
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
-  console.log(link);
-
   return (
     <Box pt={{ _: 2, lg: 3 }}>
       {showBackLink && (
