@@ -48,8 +48,7 @@ export function MiniTile(props: MiniTileProps) {
 
 const Icon = styled.span(
   css({
-    width: asResponsiveArray({ _: '1.5rem', md: '2rem' }),
-    height: asResponsiveArray({ _: '2.5rem', md: '3rem' }),
+    height: '2.5rem',
     mr: asResponsiveArray({ _: 2, md: 3 }),
 
     svg: {
