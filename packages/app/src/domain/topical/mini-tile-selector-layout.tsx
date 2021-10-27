@@ -228,7 +228,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           }
         </>
       </Box>
-      <Box pl={3}>{children[selectedIndex]}</Box>
+      <Box pl={4}>{children[selectedIndex]}</Box>
     </Box>
   );
 }
