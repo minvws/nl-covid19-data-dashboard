@@ -12,6 +12,7 @@ import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
 import {
   ActiveVaccinationChart,
@@ -69,25 +70,10 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     Math.floor((vaccineAdministeredTotalLastValue.estimated / 1_000_000) * 10) /
     10;
 
-  /**
-   * We'll render a date range either as:
-   *
-   * "1 tot en met 7 maart" (same month)
-   *
-   * or:
-   *
-   * "29 maart tot en met 4 april" (overlapping month)
-   *
-   */
-  const dateFrom = createDate(
-    vaccineAdministeredPlannedLastValue.date_start_unix
+  const [dateFromText, dateToText] = useFormatDateRange(
+    vaccineAdministeredPlannedLastValue.date_start_unix,
+    vaccineAdministeredPlannedLastValue.date_end_unix
   );
-  const dateTo = createDate(vaccineAdministeredPlannedLastValue.date_end_unix);
-
-  const isSameMonth = dateFrom.getMonth() === dateTo.getMonth();
-
-  const dateFromText = isSameMonth ? dateFrom.getDate() : formatDate(dateFrom);
-  const dateToText = formatDate(dateTo);
 
   return (
     <FullscreenChartTile metadata={metadata}>
