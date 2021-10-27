@@ -177,26 +177,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   municipalityName: municipalityName,
                 })}
                 headingLevel={1}
+              />
+
+              <MiniTileSelectorLayout
                 link={{
                   text: replaceVariablesInText(text.title_link, {
                     municipalityName: municipalityName,
                   }),
                   href: reverseRouter.gm.index(gmCode),
-                }}
-              />
-
-              <MiniTileSelectorLayout
-                link={{
-                  text: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.text,
-                    {
-                      municipalityName: municipalityName,
-                    }
-                  ),
-                  href: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.href,
-                    { gmCode }
-                  ),
                 }}
                 menuItems={[
                   {
