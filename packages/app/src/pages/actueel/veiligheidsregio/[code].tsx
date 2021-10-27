@@ -348,7 +348,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               </MiniTileSelectorLayout>
             </Box>
 
-            <Box pt={4} pb={5}>
+            <Box pt={4}>
               <Search title={siteText.common_actueel.secties.search.title.vr} />
             </Box>
 
