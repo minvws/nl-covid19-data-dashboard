@@ -17,7 +17,6 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
-import { TileList } from '~/components/tile-list';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
@@ -167,7 +166,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
         <MaxWidth id="content">
-          <TileList>
+          <Box
+            spacing={{ _: 4, md: 5 }}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 5 }}
+          >
             <Box spacing={3}>
               <TopicalSectionHeader
                 showBackLink
@@ -420,7 +423,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-          </TileList>
+          </Box>
         </MaxWidth>
 
         <Spacer mb={5} />
