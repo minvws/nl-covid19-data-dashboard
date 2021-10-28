@@ -41,7 +41,7 @@ export const preset = {
       fontWeight: 'bold',
       textTransform: 'uppercase',
       letterSpacing: '0.05em',
-      color: "category",
+      color: 'category',
     },
     body1: {
       fontSize: 3,
@@ -78,7 +78,7 @@ export const preset = {
       lineHeight: 1,
     },
     datadriven: {
-      fontSize: asResponsiveArray({ _: 2, md: 5 }),
+      fontSize: asResponsiveArray({ _: 3, md: 5 }),
     },
   },
 } as const;

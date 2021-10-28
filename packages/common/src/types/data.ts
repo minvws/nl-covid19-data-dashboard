@@ -784,7 +784,7 @@ export interface NlVaccineDelivery {
   last_value: NlVaccineDeliveryValue;
 }
 export interface NlVaccineDeliveryValue {
-  total: number;
+  total: number | null;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
   date_start_unix: number;

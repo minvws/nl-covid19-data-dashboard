@@ -56,7 +56,6 @@ export const getStaticProps = withFeatureNotFoundPage(
               null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
           };
         }
-
         return {
           vaccine_coverage_per_age_group: selectVaccineCoverageData(
             isPresent(ctx.params?.code)

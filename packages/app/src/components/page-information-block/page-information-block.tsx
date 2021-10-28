@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { HeadingLevel, Text } from '~/components/typography';
+import { Markdown } from '~/components/markdown';
+import { HeadingLevel } from '~/components/typography';
 import { asResponsiveArray } from '~/style/utils';
 import { RichContentBlock } from '~/types/cms';
 import { Articles } from './components/articles';
@@ -56,7 +57,7 @@ export function PageInformationBlock({
       {isValidElement(description) ? (
         description
       ) : typeof description === 'string' ? (
-        <Text>{description}</Text>
+        <Markdown content={description} />
       ) : (
         <RichContent blocks={description as RichContentBlock[]} />
       )}
