@@ -57,7 +57,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-function loadMetricData(root: string, metric: string, metricProperty?: string) {
+function loadMetricData(root: string, metric: string) {
   const filename = sanitize(`${root.toUpperCase()}.json`);
   const fullPath = path.join(publicJsonPath, filename);
   if (fs.existsSync(fullPath)) {
