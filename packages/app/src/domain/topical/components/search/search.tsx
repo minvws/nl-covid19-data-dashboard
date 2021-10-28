@@ -31,7 +31,7 @@ export function Search({
             justifyContent={{ _: 'start', xs: 'center' }}
             textAlign={{ xs: 'center' }}
           >
-            <Heading as="h3" level={4}>
+            <Heading as="h3" level={5}>
               {title}
             </Heading>
           </Box>
@@ -48,9 +48,9 @@ export function Search({
               width={{
                 _: '100%',
                 xs: '20rem',
-                md: context.showResults ? '42rem' : '26rem',
+                sm: context.showResults ? '42rem' : '26rem',
               }}
-              px={{ md: 4 }}
+              px={{ sm: 4 }}
               bg={colors.white}
               position="relative"
               zIndex={1}

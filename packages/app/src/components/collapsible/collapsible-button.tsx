@@ -82,7 +82,7 @@ export const CollapsibleButton = ({
             transform="translate(0, -50%)"
             bg={'border'}
           />
-          <Box ref={buttonRef} px={{ md: 4 }} bg={colors.white} zIndex={1}>
+          <Box ref={buttonRef} bg={colors.white} zIndex={1}>
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
