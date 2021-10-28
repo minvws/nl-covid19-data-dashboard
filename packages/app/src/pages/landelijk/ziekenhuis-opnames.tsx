@@ -2,7 +2,7 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
-  WEEK_IN_SECONDS
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useState } from 'react';
@@ -28,22 +28,22 @@ import { useFeature } from '~/lib/features';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
@@ -88,7 +88,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const dataHospitalLcps = data.hospital_lcps;
   const lastValueNice = data.hospital_nice.last_value;
   const lastValueLcps = data.hospital_lcps.last_value;
-  const lastValueVaccinationStatus = data.hospital_vaccination_status.last_value
+  const lastValueVaccinationStatus =
+    data.hospital_vaccination_status.last_value;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
@@ -195,8 +196,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 text.vaccination_status_chart.description,
                 {
                   amountOfPeople: formatNumber(
-                    lastValueVaccinationStatus
-                      .total_amount_of_people
+                    lastValueVaccinationStatus.total_amount_of_people
                   ),
                   date_start: formatDateFromSeconds(
                     lastValueVaccinationStatus.date_start_unix

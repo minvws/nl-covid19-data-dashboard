@@ -23,8 +23,7 @@
     run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
     script. This script will perform any necessary text mutations for keys that
     have been moved, and also cleans up any deleted texts from the Sanity
-    production dataset. For more information [read
-    this](/docs/lokalize-texts.md#sync-after-release).
+    production dataset. For more information [read this](/docs/lokalize-texts.md#sync-after-release).
 
 (\*) It should be possible to create a release branch from `develop` but if
 hotfix commits did not flow through develop first (see below) then merging

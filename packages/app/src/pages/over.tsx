@@ -22,7 +22,7 @@ interface OverData {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<OverData>((context) => {
-    const { locale } = context;
+    const { locale = 'nl' } = context;
     return `
     *[_type == 'overDitDashboard']{
       ...,

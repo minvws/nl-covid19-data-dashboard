@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { BehaviorTrendType } from '../logic/behavior-types';
-
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
   color?: string;
