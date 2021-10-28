@@ -298,6 +298,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.nice,
             }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -348,6 +349,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               siteText.hospital_admissions_per_age_group.chart_description
             }
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
             metadata={{ source: text.bronnen.nice }}
           >
             {(timeframe) => (
@@ -368,6 +370,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.lnaz,
             }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -378,7 +381,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'gapped-area',
                     metricProperty: 'beds_occupied_covid',
                     label: text.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,
