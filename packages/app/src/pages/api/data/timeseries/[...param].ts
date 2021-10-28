@@ -26,7 +26,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const data = loadMetricData(root, metric, metricProperty);
+    const data = loadMetricData(root, metric);
     if (isDefined(data) && isDefined(data.values)) {
       if (!isDefined(metricProperty)) {
         data.values = sortTimeSeriesValues(data.values);
