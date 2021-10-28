@@ -21,6 +21,7 @@ import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
+import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 
 export type MiniTileSelectorItem<T extends TimestampedValue> = {
   label: string;
@@ -29,7 +30,10 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
   value: number | string;
   valueIsPercentage?: boolean;
   warning?: string;
-  hideSparkBar?: boolean;
+  percentageBar?: {
+    value: number | null;
+    label?: string | null;
+  };
 };
 
 type MiniTileSelectorLayoutProps = {
@@ -69,7 +73,6 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
         {menuItems.map((x, index) => (
           <NarrowMenuListItem
             key={x.label}
-            hideSparkBar={x.hideSparkBar}
             item={x}
             content={children[index]}
           />
@@ -100,11 +103,10 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 type NarrowMenuListItemProps = {
   content: ReactNode;
   item: MiniTileSelectorItem<any>;
-  hideSparkBar?: boolean;
 };
 
 function NarrowMenuListItem(props: NarrowMenuListItemProps) {
-  const { content, item, hideSparkBar } = props;
+  const { content, item } = props;
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const collapsible = useCollapsible();
 
@@ -118,11 +120,19 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         pl={{ _: 0, md: 1 }}
         onClick={collapsible.toggle}
       >
-        <SparkBars
-          data={item.data}
-          averageProperty={item.dataProperty}
-          hide={hideSparkBar}
-        />
+        <Box width={35} mr="3" aria-hidden="true">
+          {item.percentageBar ? (
+            <Bar
+              value={item.percentageBar.value}
+              color={`${colors.data.positive}80`} // We need the color to be transparent so we make an 8-digit hex code
+              backgroundColor="rgba(0, 0, 0, 0.1)"
+              label={item.percentageBar.label}
+              height={10}
+            />
+          ) : (
+            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+          )}
+        </Box>
         <InlineText>{item.label}</InlineText>
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
@@ -167,11 +177,22 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                 onClick={() => setSelectedIndex(index)}
                 selected={selectedIndex === index}
               >
-                <SparkBars
-                  data={item.data}
-                  averageProperty={item.dataProperty}
-                  hide={item.hideSparkBar}
-                />
+                <Box width={35} mr="3" aria-hidden="true">
+                  {item.percentageBar ? (
+                    <Bar
+                      value={item.percentageBar.value}
+                      color={`${colors.data.positive}80`}
+                      backgroundColor="rgba(0, 0, 0, 0.1)"
+                      label={item.percentageBar.label}
+                      height={10}
+                    />
+                  ) : (
+                    <SparkBars
+                      data={item.data}
+                      averageProperty={item.dataProperty}
+                    />
+                  )}
+                </Box>
                 <InlineText>{item.label}</InlineText>
                 <Box
                   ml="auto"

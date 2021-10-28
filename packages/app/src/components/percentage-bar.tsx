@@ -47,9 +47,8 @@ export function PercentageBar({
                 backgroundColor,
               }
         )}
-        width="100%"
-        height="100%"
-        position="absolute"
+        flex={1}
+        height={height}
         top={0}
         left={0}
       />
@@ -61,7 +60,6 @@ const Wrapper = styled.div(
   css({
     display: 'flex',
     position: 'relative',
-    minWidth: '4em',
     width: '100%',
   })
 );
