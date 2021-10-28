@@ -132,8 +132,9 @@ function stripTrailingNullValues(
   if (index === data.values.length - 1) {
     return data;
   }
+  const values = data.values.slice(0, -index);
   return {
-    values: data.values.slice(0, index),
-    last_value: data.values[index],
+    values,
+    last_value: last(values),
   };
 }
