@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -110,7 +111,6 @@ const AppContentContainer = styled.div(
 
 const StyledAppContent = styled.main(
   css({
-    bg: 'page',
     zIndex: 3,
     width: '100%',
     minWidth: 0,
@@ -121,13 +121,15 @@ const StyledAppContent = styled.main(
 
 const StyledSidebar = styled.aside(
   css({
-    bg: asResponsiveArray({ _: 'page', md: 'white' }),
     zIndex: 3,
     minHeight: [null, null, null, null, '35em'],
-    width: [null, null, null, '25em'],
+    width: asResponsiveArray({ md: '18rem', lg: '21rem' }),
     flexShrink: 0,
     flexGrow: 0,
-    boxShadow: '1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5',
+    borderRight: asResponsiveArray({
+      _: 'none',
+      md: `solid 1px ${colors.lightGray}`,
+    }),
   })
 );
 

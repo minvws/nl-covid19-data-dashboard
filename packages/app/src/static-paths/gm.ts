@@ -1,4 +1,4 @@
-import { gmData } from '~/data/gm';
+import { gmData } from '@corona-dashboard/common';
 
 /**
  * getStaticPaths creates an array of all the allowed `/gemeente/[code]` routes.

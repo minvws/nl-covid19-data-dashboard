@@ -19,10 +19,12 @@
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
+    "hospital_vaccination_status",
     "infectious_people",
     "intensive_care_lcps",
     "intensive_care_nice",
     "intensive_care_nice_per_age_group",
+    "intensive_care_vaccination_status",
     "last_generated",
     "name",
     "nursing_home",
@@ -42,7 +44,6 @@
     "vaccine_administered_ggd",
     "vaccine_administered_hospitals_and_care_institutions",
     "vaccine_administered_total",
-    "vaccine_administered_rate_moving_average",
     "vaccine_administered_planned",
     "vaccine_stock",
     "vaccine_delivery_per_supplier",
@@ -55,16 +56,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "enum": ["NL"]
+      "$ref": "#/$defs/nl_id"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/nl_id"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/nl_id"
     },
     "difference": {
       "$ref": "__difference.json"
@@ -108,8 +106,14 @@
     "hospital_lcps": {
       "$ref": "hospital_lcps.json"
     },
+    "hospital_vaccination_status": {
+      "$ref": "hospital_vaccination_status.json"
+    },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
+    },
+    "intensive_care_vaccination_status": {
+      "$ref": "intensive_care_vaccination_status.json"
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
@@ -183,9 +187,6 @@
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
     },
-    "vaccine_administered_rate_moving_average": {
-      "$ref": "vaccine_administered_rate_moving_average.json"
-    },
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
     },
@@ -201,5 +202,8 @@
     "variants": {
       "$ref": "variants.json"
     }
+  },
+  "$defs": {
+    "nl_id": { "type": "string", "enum": ["NL"] }
   }
 }

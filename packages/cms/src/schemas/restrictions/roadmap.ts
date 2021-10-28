@@ -10,8 +10,8 @@ export const roadmap = {
       type: 'localeString',
     },
     {
-      title: 'Maatregelen categorien',
-      description: 'De maatregelen zijn onderverdeeld in categorien',
+      title: 'Maatregelen categorieën',
+      description: 'De maatregelen zijn onderverdeeld in categorieën',
       name: 'categories',
       type: 'array',
       of: [{ type: 'restrictionCategory' }],

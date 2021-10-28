@@ -8,6 +8,7 @@ import {
   getLocalMutations,
   readReferenceTexts,
 } from './logic';
+import { createTextDocument } from './logic/create-text-document';
 
 /**
  * Read the contents of the (edited) local export JSON file and compare it to
@@ -122,28 +123,6 @@ import {
   console.error('An error occurred:', err.message);
   process.exit(1);
 });
-
-function createTextDocument(key: string, nl: string, en = '') {
-  /**
-   * Subject is extracted from the key, because we use that to query/group texts
-   * in the Sanity UI.
-   */
-  const [subject] = key.split('.');
-
-  return {
-    _type: 'lokalizeText',
-    key,
-    subject,
-    is_newly_added: true,
-    publish_count: 0,
-    should_display_empty: false,
-    text: {
-      _type: 'localeText',
-      nl,
-      en,
-    },
-  };
-}
 
 /**
  * There is currently no native way to exit prompts on ctrl-c. This is a

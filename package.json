@@ -3,6 +3,7 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "scripts": {
+    "prepare-release": "yarn workspace @corona-dashboard/cli prepare-release",
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
     "bootstrap": "yarn workspaces run bootstrap",
@@ -11,7 +12,7 @@
     "typecheck": "yarn workspaces run typecheck",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
-    "dev": "yarn workspace @corona-dashboard/icons build & yarn workspace @corona-dashboard/common build & yarn workspace @corona-dashboard/app dev",
+    "dev": "yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json-all": "yarn workspace @corona-dashboard/cli validate-json-all",

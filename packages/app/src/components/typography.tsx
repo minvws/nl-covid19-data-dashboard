@@ -1,7 +1,7 @@
+import { Color } from '@corona-dashboard/common';
 import css, { CSSProperties } from '@styled-system/css';
 import styled, { DefaultTheme } from 'styled-components';
 import { Preset, preset } from '~/style/preset';
-import { Color } from '~/style/theme';
 
 export interface TextProps {
   variant?: keyof Preset['typography'];

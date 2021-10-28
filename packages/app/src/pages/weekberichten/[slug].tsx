@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
 import { Layout } from '~/domain/layout/layout';
@@ -48,16 +49,14 @@ export const getStaticProps = createGetStaticProps(
         ...,
         "cover": {
           ...cover,
-          "asset": cover.asset->
-        },
+          "${locale}": [
+            ...cover.${locale}[]
+          ]
+        },  
         "intro": {
           ...intro,
           "${locale}": [
             ...intro.${locale}[]
-            {
-              ...,
-              "asset": asset->
-             },
           ]
         },
         "content": {
@@ -65,13 +64,13 @@ export const getStaticProps = createGetStaticProps(
           "${locale}": [
             ...content.${locale}[]
             {
-              ...,
-              "asset": asset->,
-              markDefs[]{
-                ...,
-                "asset": asset->
+              _type != 'dashboardChart' && _type != 'dashboardKpi' => {
+                ...
+              },
+              _type == 'dashboardChart' || _type == 'dashboardKpi' => {
+                ...*[_id == ^._ref][0]
               }
-            },
+            }  
           ]
         }
       }
@@ -96,8 +95,17 @@ export default function EditorialDetailPage(
     twitterImage: imgPath,
   };
 
+  const breadcrumbsData = useMemo(
+    () => ({ [props.content.slug.current]: props.content.title }),
+    [props.content.slug, props.content.title]
+  );
+
   return (
-    <Layout {...metadata} lastGenerated={lastGenerated}>
+    <Layout
+      breadcrumbsData={breadcrumbsData}
+      lastGenerated={lastGenerated}
+      {...metadata}
+    >
       <Box backgroundColor="white">
         <EditorialDetail editorial={content} />
       </Box>

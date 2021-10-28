@@ -1,4 +1,4 @@
-context("Over risiconiveau's", () => {
+context('Over risiconiveaus', () => {
   before(() => {
     cy.beforeGeneralTests('over-risiconiveaus');
   });

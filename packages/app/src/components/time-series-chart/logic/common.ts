@@ -21,7 +21,7 @@ export interface BenchmarkConfig {
 }
 
 export type TimespanAnnotationConfig = {
-  fill?: 'solid' | 'hatched' | 'dotted';
+  fill?: 'solid' | 'hatched' | 'dotted' | 'none';
   start: number;
   end: number;
   label: string;

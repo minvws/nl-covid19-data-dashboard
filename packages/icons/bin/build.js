@@ -1,11 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 const format = require('prettier-eslint');
-const upperCamelCase = require('uppercamelcase');
 const camelCase = require('camelcase');
 const lodash = require('lodash');
 const prettierOptions = require('../.prettierrc');
 const eslintConfig = require('../.eslintrc');
+const pascalcase = require('pascalcase');
 
 const { parseSync, stringify } = require('svgson');
 
@@ -40,10 +40,16 @@ import { FC, SVGAttributes } from 'react';
 
 export interface IconProps extends SVGAttributes<SVGElement> {}
 
+export const iconName2filename: Record<string, string>;
+
 export type Icon = FC<IconProps>;
 `;
 
-fs.writeFileSync(path.join(rootDir, 'src', 'index.js'), '', 'utf-8');
+fs.writeFileSync(
+  path.join(rootDir, 'src', 'index.js'),
+  "export { iconName2filename } from './icon-name2filename';\n",
+  'utf-8'
+);
 fs.writeFileSync(
   path.join(rootDir, 'src', 'index.d.ts'),
   initialTypeDefinitions,
@@ -84,9 +90,25 @@ const attrsToString = (attrs) => {
   );
 };
 
+const lookup = icons.sort().map((x) => `${pascalcase(x)}: '${x}.svg'`);
+
+const iconName2filename = ['export const iconName2filename = {']
+  .concat(lookup.join(','))
+  .concat(['}', '']);
+
+fs.writeFileSync(
+  path.join(rootDir, 'src', 'icon-name2filename.js'),
+  format({
+    text: iconName2filename.join('\n'),
+    eslintConfig,
+    prettierOptions,
+  }),
+  { encoding: 'utf-8' }
+);
+
 icons.forEach((i) => {
   const location = path.join(rootDir, 'src/icons', `${i}.js`);
-  const ComponentName = upperCamelCase(i);
+  const ComponentName = pascalcase(i);
 
   const parsedSvg = parseSync(svgIcons[i]);
   const { attributes } = parsedSvg;
@@ -141,9 +163,6 @@ icons.forEach((i) => {
 
   fs.writeFileSync(location, component, 'utf-8');
 
-  // eslint-disable-next-line no-console
-  // console.log('Successfully built', ComponentName);
-
   const exportString = `export { default as ${ComponentName} } from './icons/${i}';\r\n`;
   fs.appendFileSync(
     path.join(rootDir, 'src', 'index.js'),
@@ -158,5 +177,15 @@ icons.forEach((i) => {
     'utf-8'
   );
 });
+
+const destSvgDir = path.join(__dirname, '../../app/public/icons/app');
+if (!fs.existsSync(destSvgDir)) {
+  fs.mkdirSync(destSvgDir);
+}
+icons
+  .map((x) => `${x}.svg`)
+  .forEach((x) => {
+    fs.copyFileSync(path.join(svgDir, x), path.join(destSvgDir, x));
+  });
 
 console.log('Done writing Icons');

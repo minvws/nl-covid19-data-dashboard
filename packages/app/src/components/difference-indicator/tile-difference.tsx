@@ -70,7 +70,11 @@ export function TileDifference({
         }}
         content={replaceVariablesInText(
           `${content} ${
-            showOldDateUnix ? text.vorige_waarde_datum : text.vorige_waarde
+            showOldDateUnix
+              ? content === text.waarde_gelijk
+                ? text.vorige_waarde_geljk_datum
+                : text.vorige_waarde_datum
+              : text.vorige_waarde
           }`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,

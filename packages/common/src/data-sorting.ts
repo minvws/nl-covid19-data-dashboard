@@ -152,7 +152,7 @@ function getTimeSeriesPropertyNames<T>(data: T) {
   );
 }
 
-function sortTimeSeriesValues(values: TimestampedValue[]) {
+export function sortTimeSeriesValues(values: TimestampedValue[]) {
   /**
    * There are 3 ways in which time series data can be timestamped. We need to
    * detect and handle each of them.

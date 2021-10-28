@@ -5,6 +5,7 @@ import { Box } from '~/components/base';
 export const ContentBlock = styled(Box)(
   css({
     mx: 'auto',
+    width: '100%',
     maxWidth: 'contentWidth',
     px: 4,
     /** remove padding of nested ContentBlock instances */

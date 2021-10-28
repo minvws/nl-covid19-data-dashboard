@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -27,15 +28,17 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  selectNlData(
+    'difference.elderly_at_home__positive_tested_daily',
+    'elderly_at_home'
+  ),
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),
@@ -74,11 +77,13 @@ const ElderlyAtHomeNationalPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.elderly_at_home.title
+            }
             title={text.section_positive_tested.title}
             icon={<Elderly />}
             description={text.section_positive_tested.description}

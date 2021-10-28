@@ -1,5 +1,6 @@
 import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -34,7 +35,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -46,7 +47,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'vrVaccinationPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectVrPageMetricData(),
+    selectVrData('vaccine_coverage_per_age_group'),
     createGetChoroplethData({
       gm: ({ vaccine_coverage_per_age_group }, ctx) => {
         if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -93,6 +94,7 @@ export const VaccinationsVrPage = (
   } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
@@ -113,7 +115,7 @@ export const VaccinationsVrPage = (
   );
   const vaccinationPerAgeGroupFeature = useFeature('vrVaccinationPerAgeGroup');
 
-  const gmCodes = gmCodesByVrCode[data.code];
+  const gmCodes = gmCodesByVrCode[router.query.code as string];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
   /**
@@ -141,7 +143,7 @@ export const VaccinationsVrPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.vaccinaties}
@@ -208,14 +210,14 @@ export const VaccinationsVrPage = (
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.vaccinaties.vr_choropleth_vaccinatie_graad.title,
+              siteText.vaccinaties.choropleth_vaccination_coverage.vr.title,
               { safetyRegionName: vrName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.vaccinaties.vr_choropleth_vaccinatie_graad
+                    siteText.vaccinaties.choropleth_vaccination_coverage.vr
                       .description,
                     { safetyRegionName: vrName }
                   )}
@@ -227,7 +229,7 @@ export const VaccinationsVrPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.vaccinaties.vr_choropleth_vaccinatie_graad
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
                   .legend_title,
             }}
             metadata={{

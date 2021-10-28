@@ -48,7 +48,7 @@ html {
   ${css(preset.typography.body2)}
 
   margin: 0;
-  background: #f3f3f3;
+  background: #fff;
   overflow-anchor: none;
 }
 
@@ -64,7 +64,7 @@ svg {
 }
 
 
-/* Remove outline from programatically focussed elements. */
+/* Remove outline from programmatically focussed elements. */
 [tabindex='-1']:focus {
   outline: none;
 }

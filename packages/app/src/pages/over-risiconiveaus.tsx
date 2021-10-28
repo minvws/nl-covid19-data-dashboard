@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import { Box } from '~/components/base';
@@ -13,51 +14,26 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { CollapsibleList, RichContentBlock } from '~/types/cms';
+import { RichContentBlock } from '~/types/cms';
+import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
 
 interface OverRisiconiveausData {
   title: string;
-  description: RichContentBlock[];
-  scoreBoardTitle: string;
-  scoreBoardDescription: string;
-  riskLevelExplanations: RichContentBlock[];
-  collapsibleList: CollapsibleList[];
+  content: RichContentBlock[];
 }
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverRisiconiveausData>((context) => {
-    const { locale } = context;
-    return `*[_type == 'overRisicoNiveaus']{
-      "title": title.${locale},
-      "description": {
-        "_type": description._type,
-        "${locale}": [
-          ...description.${locale}[]
-          {
-            ...,
-            "asset": asset->
-           },
-        ]
-      },
-      "riskLevelExplanations": {
-        "_type": riskLevelExplanations._type,
-        "${locale}": [
-          ...riskLevelExplanations.${locale}[]
-          {
-            ...,
-            "asset": asset->,
-           },
-        ]
-      },
-    }[0]
-    `;
+  createGetContent<OverRisiconiveausData>(() => {
+    return "*[_type == 'overRisicoNiveausNew'][0]";
   })
 );
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
+
+  content.content = mergeAdjacentKpiBlocks(content.content);
 
   return (
     <Layout
@@ -78,15 +54,22 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
       <Content>
-        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto" spacing={4}>
+        <Box width="100%" maxWidth="maxWidthText">
           <Heading level={1}>{content.title}</Heading>
-          <Box textVariant="body1">
-            <RichContent blocks={content.description} />
-          </Box>
         </Box>
-
-        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
-          <RichContent blocks={content.riskLevelExplanations} />
+        <Box
+          textVariant="body1"
+          css={css({
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          })}
+        >
+          <RichContent
+            blocks={content.content}
+            contentWrapper={RichContentWrapper}
+          />
         </Box>
       </Content>
     </Layout>
@@ -94,6 +77,13 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default OverRisicoNiveaus;
+
+const RichContentWrapper = styled.div(
+  css({
+    maxWidth: 'maxWidthText',
+    width: '100%',
+  })
+);
 
 interface ContentProps {
   children: ReactNode;
@@ -107,8 +97,12 @@ function Content({ children }: ContentProps) {
         pb={5}
         px={{ _: 3, sm: 0 }}
         maxWidth="infoWidth"
+        width="100%"
         mx="auto"
         spacing={4}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
         {children}
       </Box>

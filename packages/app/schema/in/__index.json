@@ -16,13 +16,10 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "$comment": "We might want to use an enum here with country codes. We need the IN_ prefix for validation because all files end up in the same folder",
-      "pattern": "^IN_[A-Z]+$"
+      "$ref": "#/$defs/in_code"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/in_code"
     },
     "code": {
       "type": "string",
@@ -37,6 +34,13 @@
     },
     "variants": {
       "$ref": "variants.json"
+    }
+  },
+  "$defs": {
+    "in_code": {
+      "type": "string",
+      "$comment": "We might want to use an enum here with country codes. We need the IN_ prefix for validation because all files end up in the same folder",
+      "pattern": "^IN_[A-Z]+$"
     }
   }
 }

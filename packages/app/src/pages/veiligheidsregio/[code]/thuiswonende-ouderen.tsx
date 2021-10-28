@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -22,16 +23,18 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData(
+    'elderly_at_home',
+    'difference.elderly_at_home__positive_tested_daily'
+  ),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('elderlyAtHomePage', locale);
@@ -70,13 +73,15 @@ const ElderlyAtHomeRegionalPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
-            screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.elderly_at_home.title
+            }
             title={replaceVariablesInText(text.section_positive_tested.title, {
               safetyRegion: vrName,
             })}

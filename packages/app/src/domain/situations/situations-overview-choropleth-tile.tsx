@@ -1,5 +1,6 @@
 import {
   ChoroplethThresholdsValue,
+  colors,
   VrCollectionSituations,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -15,7 +16,6 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
@@ -137,20 +137,29 @@ function ChoroplethTooltip({
   noDataFillColor,
 }: ChoroplethTooltipProps) {
   const intl = useIntl();
+
   return (
-    <Box px={3} py={2} display="inline-block" aria-live="polite">
+    <Box px={3} py={2} aria-live="polite">
       <TooltipSubject
         thresholdValues={thresholds}
         filterBelow={value}
         noDataFillColor={noDataFillColor}
       >
-        {regionName + ': '}
+        <Box
+          as="span"
+          css={css({
+            whiteSpace: 'nowrap',
+          })}
+        >
+          {regionName + ': '}
+        </Box>
         <Box
           as="span"
           display="inline-block"
           fontWeight="bold"
           textAlign="right"
           px={1}
+          flexShrink={0}
         >
           {typeof value === 'number'
             ? isPercentage

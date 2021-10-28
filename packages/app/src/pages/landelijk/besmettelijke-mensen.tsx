@@ -1,6 +1,6 @@
-import { getLastFilledValue } from '@corona-dashboard/common';
-import { isEmpty } from 'lodash';
+import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Ziektegolf } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -20,13 +20,12 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  selectNlData('infectious_people'),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('infectiousPeoplePage', locale);
@@ -49,11 +48,13 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.besmettelijke_personen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.infectious_people.title
+            }
             title={text.title}
             icon={<Ziektegolf />}
             description={text.toelichting_pagina}

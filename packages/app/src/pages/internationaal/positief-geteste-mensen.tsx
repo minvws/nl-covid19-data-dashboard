@@ -1,4 +1,9 @@
-import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
+import {
+  assert,
+  colors,
+  In,
+  InTestedOverallValue,
+} from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { useMemo } from 'react';
@@ -38,7 +43,6 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
-import { colors } from '~/style/theme';
 import { InPositiveTestsQuery } from '~/types/cms';
 
 type CompiledCountriesValue = {

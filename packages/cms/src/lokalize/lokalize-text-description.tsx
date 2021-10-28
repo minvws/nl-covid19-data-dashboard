@@ -77,7 +77,9 @@ export function LokalizeTextDescription() {
                 Overigens kan je binnen zo'n blok weer gewoon markdown opmaak toepassen.
                 [zoals links](#).
 
-                > Of een melding weergeven met de "blockquote" syntax.
+                Of een melding weergeven met de "blockquote" syntax.
+                > Dit zal een gele "warning" banner laten zien
+                > > Dit zal een grijze "message" banner laten zien
                 ~~~
 
                 Tussen deze blokken kunnen we weer gewone tekst weergeven.

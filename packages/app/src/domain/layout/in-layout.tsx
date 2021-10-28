@@ -1,17 +1,11 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { Test } from '@corona-dashboard/icons';
-import { Varianten } from '@corona-dashboard/icons';
-import {
-  CategoryMenu,
-  Menu,
-  MetricMenuItemLink,
-} from '~/components/aside/menu';
+import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useSidebar } from './logic/use-sidebar';
 
 type InLayoutProps = {
   lastGenerated: string;
@@ -22,8 +16,11 @@ export function InLayout(props: InLayoutProps) {
   const { children } = props;
 
   const { siteText } = useIntl();
-  const router = useRouter();
-  const reverseRouter = useReverseRouter();
+
+  const items = useSidebar({
+    layout: 'in',
+    map: [['international_metrics', ['positive_tests', 'variants']]],
+  });
 
   return (
     <>
@@ -44,32 +41,20 @@ export function InLayout(props: InLayoutProps) {
         sidebarComponent={
           <Box
             as="nav"
-            /** re-mount when route changes in order to blur anchors */
-            key={router.asPath}
             id="metric-navigation"
-            aria-label={siteText.aria_labels.metriek_navigatie}
+            aria-labelledby="sidebar-title"
             role="navigation"
             backgroundColor="white"
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
             pt={4}
           >
+            <VisuallyHidden id="sidebar-title" as="h2">
+              {siteText.internationaal_layout.headings.sidebar}
+            </VisuallyHidden>
+
             <Menu spacing={4}>
-              <CategoryMenu title={siteText.internationaal.titel_sidebar}>
-                <MetricMenuItemLink
-                  href={reverseRouter.in.positiefGetesteMensen()}
-                  title={
-                    siteText.internationaal_positief_geteste_personen
-                      .titel_sidebar
-                  }
-                  icon={<Test />}
-                />
-                <MetricMenuItemLink
-                  href={reverseRouter.in.varianten()}
-                  title={siteText.internationaal_varianten.titel_sidebar}
-                  icon={<Varianten />}
-                />
-              </CategoryMenu>
+              <MenuRenderer items={items} />
             </Menu>
           </Box>
         }

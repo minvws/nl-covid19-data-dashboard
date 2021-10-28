@@ -1,5 +1,4 @@
-import { gmData } from '~/data/gm';
-import { vrData } from '~/data/vr';
+import { gmData, vrData } from '@corona-dashboard/common';
 
 /**
  * This function returns the safety region information for the given

@@ -10,7 +10,7 @@
           "type": "integer"
         },
         "rna_normalized": {
-          "type": "number"
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"

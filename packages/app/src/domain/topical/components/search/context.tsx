@@ -82,6 +82,7 @@ function useSearchContextValue<T extends Element>(
    * if that initial event is recognized, we'll allow the results to show.
    */
   const [hasHadInputFocus, setHasHadInputFocus] = useState(false);
+
   useEffect(() => {
     if (hasInputFocus) setHasHadInputFocus(true);
   }, [hasInputFocus]);
@@ -127,7 +128,10 @@ function useSearchContextValue<T extends Element>(
    */
   const getOptionId = (index: number) => `${id}-result-${index}`;
 
-  useOnClickOutside([containerRef], () => setHasHitFocus(false));
+  useOnClickOutside([containerRef], () => {
+    setHasHitFocus(false);
+    setHasHadInputFocus(false);
+  });
 
   return {
     gmHits,

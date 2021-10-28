@@ -36,12 +36,6 @@ export const topicalPage = {
               validation: localeStringValidation((rule) => rule.required()),
             },
             {
-              name: 'label',
-              type: 'localeString',
-              title: 'Tekst in de link',
-              validation: localeStringValidation((rule) => rule.required()),
-            },
-            {
               name: 'href',
               type: 'string',
               title: 'Link naar pagina',
@@ -69,23 +63,24 @@ export const topicalPage = {
       validation: (Rule: any) => [
         Rule.custom((value: any, context: any) => {
           if (context.document.showWeeklyHighlight) {
-            return value.length === 2
+            return value.length === 1
               ? true
               : 'Als er een weekbericht geselecteerd is moet er 1 uitgelicht items toegevoegd zijn.';
           } else {
-            return value.length === 3
+            return value.length === 2
               ? true
-              : 'Als er geen weekbericht geselecteerd is moeten er 3 uitgelichte items toegevoegd zijn.';
+              : 'Als er geen weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
           }
         }).warning(),
-        Rule.required().unique().min(2).max(3),
+        Rule.required().unique().min(1).max(2),
       ],
     },
     {
-      title: 'empty-for-toggle',
-      name: 'empty',
-      type: 'localeString',
-      hidden: true,
+      title: 'Uitgelichte artikelen',
+      name: 'articles',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'article' } }],
+      validation: (rule: Rule) => rule.required().unique().min(3).max(3),
     },
   ],
 };

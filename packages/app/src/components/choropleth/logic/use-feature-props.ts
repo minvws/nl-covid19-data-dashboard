@@ -1,6 +1,6 @@
+import { colors } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { MapType } from '~/components/choropleth/logic';
-import { colors } from '~/style/theme';
 import { DataConfig, DataOptions } from '..';
 import { ChoroplethDataItem } from './types';
 

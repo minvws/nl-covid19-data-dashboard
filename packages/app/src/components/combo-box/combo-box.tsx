@@ -10,13 +10,12 @@ import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import searchUrl from '~/assets/search.svg';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useThrottle } from '~/utils/use-throttle';
-
-import searchUrl from '~/assets/search.svg';
 
 type TOption = {
   displayName?: string;
@@ -99,10 +98,10 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         />
         <ComboboxPopover>
           {results.length > 0 ? (
-            <ComboboxList persistSelection>
-              {results.map((option) => (
+            <ComboboxList>
+              {results.map((option, index) => (
                 <ComboboxOption
-                  key={option.name}
+                  key={`${index}-${option.name}`}
                   value={option.displayName || option.name}
                 />
               ))}
@@ -135,7 +134,7 @@ function useSearchedOptions<Option extends TOption>(
 }
 
 const ComboBoxStyles = createGlobalStyle`
-// Global comobox styles copied from the old SCSS
+// Global combobox styles copied from the old SCSS
 
 [data-reach-combobox] {
   position: relative;
@@ -192,7 +191,7 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-option]:hover, [data-reach-combobox-option]:focus {
-  background: ${(x) => x.theme.colors.page};
+  background: ${(x) => x.theme.colors.offWhite};
 }
 
 [data-reach-combobox-option] span {

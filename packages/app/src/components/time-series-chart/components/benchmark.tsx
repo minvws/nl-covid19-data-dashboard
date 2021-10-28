@@ -1,4 +1,4 @@
-import { colors } from '~/style/theme';
+import { colors } from '@corona-dashboard/common';
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
 import { Ref } from 'react';

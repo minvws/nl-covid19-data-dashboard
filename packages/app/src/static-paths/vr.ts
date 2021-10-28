@@ -1,4 +1,4 @@
-import { vrData } from '~/data/vr';
+import { vrData } from '@corona-dashboard/common';
 
 /**
  * getStaticPaths creates an array of all the allowed `/veiligheidsregio/[code]`

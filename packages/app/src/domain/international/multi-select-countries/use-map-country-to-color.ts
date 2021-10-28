@@ -1,5 +1,5 @@
+import { colors } from '@corona-dashboard/common';
 import { useCallback, useRef } from 'react';
-import { colors } from '~/style/theme';
 import { CountryCode } from './country-code';
 
 const {

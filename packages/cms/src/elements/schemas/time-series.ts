@@ -7,17 +7,10 @@ export const timeSeries = {
   fields: [
     ...commonFields,
     {
-      title: 'Timeline Events',
-      name: 'timelineEvents',
+      title: 'Timeline Event Collections',
+      name: 'timelineEventCollections',
       type: 'array',
-      of: [{ type: 'timelineEvent' }],
-    },
-    {
-      title: 'Warning',
-      name: 'warning',
-      type: 'string',
-      description:
-        'De hier ingevulde tekst kan naast de waardes van deze metriek worden getoond als waarschuwing voor bijv. tijdelijke inaccuraatheid van de data. Laat leeg om de waarschuwing te verbergen.',
+      of: [{ type: 'reference', to: [{ type: 'timelineEventCollection' }] }],
     },
   ],
   preview: commonPreview,

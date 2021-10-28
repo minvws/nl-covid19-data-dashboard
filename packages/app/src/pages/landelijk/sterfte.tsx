@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { AgeDemographic } from '~/components/age-demographic';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -23,13 +24,17 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('deceased_cbs', 'deceased_rivm_per_age_group'),
+  selectNlData(
+    'deceased_cbs',
+    'deceased_rivm_per_age_group',
+    'deceased_rivm',
+    'difference.deceased_rivm__covid_daily'
+  ),
   createGetContent<{
     main: { articles: ArticleSummary[] };
     monitor: { articles: ArticleSummary[] };
@@ -66,7 +71,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}

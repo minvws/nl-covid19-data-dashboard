@@ -1,4 +1,4 @@
-import { NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
+import { colors, NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,7 +7,6 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
 import { SelectBehavior } from './components/select-behavior';

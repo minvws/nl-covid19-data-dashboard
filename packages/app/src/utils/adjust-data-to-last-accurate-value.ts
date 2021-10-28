@@ -30,7 +30,7 @@ export function adjustDataToLastAccurateValue<T>(
 
   return {
     ...data,
-    last_value: data.values[data.values.length - numberOfItems],
+    last_value: data.values[data.values.length - numberOfItems - 1],
   };
 }
 

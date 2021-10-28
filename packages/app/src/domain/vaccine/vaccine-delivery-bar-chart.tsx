@@ -1,12 +1,12 @@
 import {
+  colors,
   NlVaccineDeliveryPerSupplier,
   NlVaccineDeliveryPerSupplierValue,
 } from '@corona-dashboard/common';
-import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { RadioGroup } from '~/components/radio-group';
+import { Markdown } from '~/components/markdown';
 import {
   StackedBarTooltipData,
   StackedChart,
@@ -16,11 +16,7 @@ import {
   TooltipFormatter,
 } from '~/components/time-series-chart/components';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-
-type Timeframe = 'all' | 'recent_and_coming';
 
 export function VaccineDeliveryBarChart({
   data,
@@ -29,27 +25,8 @@ export function VaccineDeliveryBarChart({
 }) {
   const intl = useIntl();
   const text = intl.siteText.vaccinaties.grafiek_leveringen;
-  const [timeframe, setTimeframe] = useState<Timeframe>('recent_and_coming');
 
   data.values = data.values.filter((x) => !x.is_estimate);
-
-  /**
-   * The timeframe `recent_and_coming` should display 4 delivered values
-   * and 4 expected values. We'll find the index of the first estimated value
-   * and slice values based on that index.
-   */
-  // const estimateIndex = data.values.findIndex((value) => value.is_estimate);
-
-  const timeframeOptions = [
-    {
-      label: intl.siteText.charts.time_controls.all,
-      value: 'all',
-    },
-    {
-      label: text.timeframe_recent_en_verwacht,
-      value: 'recent_and_coming',
-    },
-  ];
 
   const productNames =
     intl.siteText.vaccinaties.data.vaccination_chart.product_names;
@@ -79,14 +56,8 @@ export function VaccineDeliveryBarChart({
         spacing={3}
       >
         <Box maxWidth={560}>
-          <Text>{text.omschrijving}</Text>
+          <Markdown content={text.omschrijving} />
         </Box>
-
-        <RadioGroup
-          value={timeframe}
-          onChange={(x) => setTimeframe(x as Timeframe)}
-          items={timeframeOptions}
-        />
       </Box>
 
       <StackedChart
@@ -94,11 +65,7 @@ export function VaccineDeliveryBarChart({
           key: 'vaccine_delivery_bar_chart',
           features: ['keyboard_bar_chart'],
         }}
-        values={
-          timeframe === 'all'
-            ? data.values
-            : data.values.slice(data.values.length - 6)
-        }
+        values={data.values}
         valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
         formatTickValue={(x) => `${x / 100_000}`}
         config={[

@@ -2,6 +2,7 @@ import {
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useState } from 'react';
 import { hasValueAtKey } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -13,7 +14,13 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic';
 import { Markdown } from '~/components/markdown';
+import { Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import {
+  CoverageKindProperty,
+  VaccinationCoverageKindSelect,
+} from '~/domain/vaccine/components/vaccination-coverage-kind-select';
+import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { ChoroplethTwoColumnLayout } from '../topical/choropleth-two-column-layout';
@@ -23,11 +30,15 @@ import {
   AgeGroup,
   AgeGroupSelect,
 } from '../vaccine/components/age-group-select';
-import { ChoroplethTooltip } from '../vaccine/vaccine-coverage-choropleth-per-gm';
 
 type DefaultProps = {
   title: string;
   content: string;
+  defaultCoverageKind?: CoverageKindProperty;
+  link?: {
+    href: string;
+    text: string;
+  };
 };
 
 type GmCoverage = DefaultProps & {
@@ -76,10 +87,13 @@ type VaccinationCoverageChoroplethProps = GmCoverage | VrCoverage | NlCoverage;
 export function VaccinationCoverageChoropleth(
   props: VaccinationCoverageChoroplethProps
 ) {
+  const { defaultCoverageKind = 'fully_vaccinated_percentage' } = props;
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedCoverageKind, setSelectedCoverageKind] =
+    useState<CoverageKindProperty>(defaultCoverageKind);
   const [chartRegion, onChartRegionChange] =
     useState<RegionControlOption>('gm');
 
@@ -90,14 +104,15 @@ export function VaccinationCoverageChoropleth(
 
   return (
     <TopicalTile>
-      <TopicalSectionHeader title={props.title} />
+      <TopicalSectionHeader title={props.title} link={props.link} />
 
       <ChoroplethTwoColumnLayout
         legendComponent={
           <ChoroplethLegenda
             thresholds={thresholds.gm.fully_vaccinated_percentage}
             title={
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel
+              siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                .legend_title
             }
           />
         }
@@ -114,7 +129,7 @@ export function VaccinationCoverageChoropleth(
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'has_one_shot_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 isPercentage: true,
@@ -147,7 +162,7 @@ export function VaccinationCoverageChoropleth(
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'has_one_shot_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 isPercentage: true,
@@ -179,7 +194,7 @@ export function VaccinationCoverageChoropleth(
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'has_one_shot_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 isPercentage: true,
@@ -203,7 +218,38 @@ export function VaccinationCoverageChoropleth(
 
         <Box spacing={3}>
           <Markdown content={props.content} />
-          <AgeGroupSelect onChange={setSelectedAgeGroup} />
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            spacingHorizontal={2}
+            as={'fieldset'}
+          >
+            <Text
+              as="legend"
+              fontWeight="bold"
+              css={css({
+                flexBasis: '100%',
+                mb: 2,
+              })}
+            >
+              {
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
+              }
+            </Text>
+
+            <Box flex={1}>
+              <AgeGroupSelect onChange={setSelectedAgeGroup} />
+            </Box>
+
+            <Box flex={1}>
+              <VaccinationCoverageKindSelect
+                onChange={setSelectedCoverageKind}
+                initialValue={selectedCoverageKind}
+              />
+            </Box>
+          </Box>
           {isNlCoverage(props) && (
             <Box
               display="flex"

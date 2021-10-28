@@ -5,7 +5,7 @@ import { behaviorIdentifiers } from './behavior-types';
 /**
  * A hook returning keys in order to look up values in the behavior
  * data.
- * Additionaly it will return the behavior key/id and description because
+ * Additionally it will return the behavior key/id and description because
  * why not.
  */
 export function useBehaviorLookupKeys() {

@@ -1,0 +1,4 @@
+paths-ignore:
+  - packages/cms
+
+languages: ${{ matrix.language }}

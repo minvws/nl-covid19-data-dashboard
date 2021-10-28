@@ -35,6 +35,14 @@ export const preset = {
       lineHeight: 2,
       fontWeight: 'bold',
     },
+    subtitle2: {
+      fontSize: 2,
+      lineHeight: 2,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      color: "category",
+    },
     body1: {
       fontSize: 3,
     },
@@ -59,6 +67,7 @@ export const preset = {
       fontSize: 0,
       fontWeight: 'bold',
       textTransform: 'uppercase',
+      letterSpacing: '0.05em',
     },
     label1: {
       fontSize: 1,
@@ -67,6 +76,9 @@ export const preset = {
     label2: {
       fontSize: 0,
       lineHeight: 1,
+    },
+    datadriven: {
+      fontSize: asResponsiveArray({ _: 2, md: 5 }),
     },
   },
 } as const;

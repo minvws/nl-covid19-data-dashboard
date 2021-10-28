@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import {
   Disclosure,
   DisclosureButton,
@@ -6,13 +7,12 @@ import {
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+import chevronDownUrl from '~/assets/chevron-down.svg';
 import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useSetLinkTabbability } from './logic';
-
-import chevronDownUrl from '~/assets/chevron-down.svg';
 
 interface CollapsibleButtonProps {
   children: React.ReactNode;
@@ -34,42 +34,25 @@ export const CollapsibleButton = ({
   const isMounted = useIsMounted({ delayMs: 10 });
   /**
    * Calculate the clip path where the content needs to animate to,
-   * this is alligned with the position of the button percentage wise based of the content wrapper
+   * this is aligned with the position of the button percentage wise based of the content wrapper
    */
   const clipPathCalculation = useMemo(() => {
-    if (
-      !buttonSize.width ||
-      !buttonSize.height ||
-      !contentSize.width ||
-      !contentSize.height
-    ) {
+    if (!buttonSize.height || !contentSize.height) {
       return '0 0, 100% 0, 100% 0, 0 0';
     }
 
-    /**
-     * First find the percentage of how much is the button is the width of the size of the container.
-     * Deduct 100 and divide it by 2 to make it negative value for the left side of the mask to make
-     * it fully expand to the left edge of the container.
-     * In the return the value it's becoming a positive one so it can animate the mask to the right edge of the container.
-     */
-    const width = ((buttonSize.width / contentSize.width) * 100 - 100) / 2;
     const height = (buttonSize.height / contentSize.height) * 100 * -1;
 
     return `
-      ${width * -1}% ${height}%,
-      ${width - 100 * -1}% ${height}%,
-      ${width - 100 * -1}% 0%,
-      ${width * -1}% 0%
+      0% ${height}%,
+      100% ${height}%,
+      100% 0%,
+      0% 0%
   `;
-  }, [
-    buttonSize.width,
-    buttonSize.height,
-    contentSize.width,
-    contentSize.height,
-  ]);
+  }, [buttonSize.height, contentSize.height]);
 
   /**
-   * falback to `undefined` to prevent an initial animation from `0` to
+   * fallback to `undefined` to prevent an initial animation from `0` to
    * measured height
    */
   const height =
@@ -89,7 +72,17 @@ export const CollapsibleButton = ({
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <Box ref={buttonRef} display="flex">
+          <Box
+            display={{ _: 'none', md: 'block' }}
+            position="absolute"
+            top="50%"
+            left="0"
+            height="1px"
+            width="100%"
+            transform="translate(0, -50%)"
+            bg={'border'}
+          />
+          <Box ref={buttonRef} px={{ md: 4 }} bg={colors.white} zIndex={1}>
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
@@ -110,9 +103,12 @@ export const CollapsibleButton = ({
 
 const ButtonContainer = styled.div(
   css({
+    position: 'relative',
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     mx: 'auto',
+    zIndex: 0,
   })
 );
 
@@ -140,10 +136,8 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       alignItems: 'center',
       zIndex: 1,
       width: x.isOpen ? '100%' : 'fit-content',
-      border: '1px solid',
-      borderRadius: 1,
-      borderColor: x.isOpen ? 'transparent' : 'lightGray',
-      px: asResponsiveArray({ _: 2, sm: 3 }),
+      border: 'none',
+      px: asResponsiveArray({ _: 3, sm: 4 }),
       py: 3,
       background: 'none',
       color: 'black',
@@ -166,10 +160,6 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         svg: {
           fill: 'blue',
         },
-
-        '&:before': {
-          borderColor: x.isOpen ? 'lightGray' : 'data.primary',
-        },
       },
 
       // Outside border
@@ -180,9 +170,6 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         top: 0,
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
-        border: '1px solid',
-        borderRadius: 1,
-        borderColor: 'lightGray',
         zIndex: -1,
         content: x.isMounted ? '""' : 'unset',
         pointerEvents: 'none',
@@ -213,17 +200,6 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       clipPath: x.isOpen
         ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
         : `polygon(${x.clipPathCalculation})`,
-
-      '&:before': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        width: x.isOpen ? '100%' : '0%',
-        height: '1px',
-        backgroundColor: 'lightGray',
-        transform: x.isOpen ? 'scaleX(1)' : 'scale(0)',
-        transition: 'transform 0.4s',
-      },
 
       '.has-no-js &': {
         maxHeight: 0,

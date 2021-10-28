@@ -7,7 +7,7 @@
       "additionalProperties": false,
       "properties": {
         "average": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "date_of_insertion_unix": {
           "type": "integer"

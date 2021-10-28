@@ -8,6 +8,7 @@ const {
 const dotenv = require('dotenv');
 const path = require('path');
 const { imageResizeTargets } = require('@corona-dashboard/common');
+const intercept = require('intercept-stdout');
 
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
@@ -43,7 +44,19 @@ const STATIC_ASSET_HTTP_DATE = new Date(
 ).toUTCString();
 
 (async function () {
-  await app.prepare();
+  await app.prepare().then(async () => {
+    // in front of all other code
+    intercept((text) => {
+      if (
+        text.indexOf(
+          'Anonymous arrow functions cause Fast Refresh to not preserve local component state'
+        ) > -1
+      )
+        return '';
+      return text;
+    });
+  });
+
   const server = express();
 
   server.use(helmet());
@@ -145,13 +158,13 @@ const STATIC_ASSET_HTTP_DATE = new Date(
   ) {
     const contentSecurityPolicy =
       IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
-        ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'"
-        : '';
+        ? "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';"
+        : "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';";
 
     res.set('Content-Security-Policy', contentSecurityPolicy);
-    res.set('Referrer-Policy', 'origin');
+    res.set('Referrer-Policy', 'no-referrer');
     res.set('X-Content-Type-Options', 'nosniff');
-    res.set('X-Frame-Options', 'SAMEORIGIN');
+    res.set('X-Frame-Options', 'DENY');
     res.set('X-XSS-Protection', '1; mode=block');
     res.set(
       'Strict-Transport-Security',

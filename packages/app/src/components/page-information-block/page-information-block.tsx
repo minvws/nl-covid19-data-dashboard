@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
-import { isValidElement } from 'react';
+import { isValidElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -76,7 +75,7 @@ export function PageInformationBlock({
       )}
 
       {description && (
-        <Tile>
+        <Tile hasTitle={!!title}>
           <Box spacing={3}>
             <Box
               display={{ md: 'grid' }}
@@ -120,14 +119,12 @@ export function PageInformationBlock({
   );
 }
 
-const Tile = styled.div(
+const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
   css({
-    bg: 'white',
-    p: asResponsiveArray({ _: 3, sm: 4 }),
-    borderRadius: 1,
-    boxShadow: 'tile',
+    pt: x.hasTitle ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
     display: 'flex',
     flexWrap: 'wrap',
+    borderTop: x.hasTitle ? undefined : 'solid 2px lightGray',
   })
 );
 

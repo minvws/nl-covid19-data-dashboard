@@ -8,7 +8,7 @@ in the CMS, we will add another source:
 
 1. lokalize short-copy
 2. code based metric configurations (thresholds, isPercentage, color mappings,
-   etc)
+   etc.)
 3. options directly set via props (time series config)
 4. cms data content (timeline events)
 
@@ -54,7 +54,7 @@ Later on, if we do want to have pages as our main navigation structure in the
 CMS we could nest these objects under each page.
 
 Adding new objects should probably not be done by CMS editors, but be controlled
-by developers as we also need to query for them in code. Also the properties
+by developers as we also need to query for them in code. Also, the properties
 that make up the "identifier" should not be editable.
 
 The properties are combined into one string which is then used to store the

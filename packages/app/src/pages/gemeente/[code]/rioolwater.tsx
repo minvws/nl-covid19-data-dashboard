@@ -1,6 +1,6 @@
 import { NlSewer } from '@corona-dashboard/common';
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { isDefined } from 'ts-is-present';
+import { isEmpty } from 'lodash';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -25,7 +25,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectGmPageMetricData,
+  selectGmData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -34,41 +34,13 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  (context) => {
-    const data = selectGmPageMetricData(
-      'sewer_per_installation',
-      'static_values',
-      'sewer',
-      'difference',
-      'code'
-    )(context);
-    data.selectedGmData.sewer.values = data.selectedGmData.sewer.values.map(
-      (x) => ({
-        ...x,
-        average: Math.round(x.average),
-      })
-    );
-    data.selectedGmData.sewer.last_value = {
-      ...data.selectedGmData.sewer.last_value,
-      average: Math.round(data.selectedGmData.sewer.last_value.average),
-    };
-    if (isDefined(data.selectedGmData.difference.sewer__average)) {
-      data.selectedGmData.difference.sewer__average.difference = Math.round(
-        data.selectedGmData.difference.sewer__average.difference
-      );
-    }
-
-    if (isDefined(data.selectedGmData.sewer_per_installation)) {
-      data.selectedGmData.sewer_per_installation.values.forEach((x) => {
-        x.values = x.values.map((x) => ({
-          ...x,
-          rna_normalized: Math.round(x.rna_normalized),
-        }));
-      });
-    }
-
-    return data;
-  },
+  selectGmData(
+    'difference.sewer__average',
+    'sewer_per_installation',
+    'static_values.population_count',
+    'sewer',
+    'code'
+  ),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
@@ -78,7 +50,6 @@ export const getStaticProps = createGetStaticProps(
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
-    sideBarData,
     municipalityName,
     content,
     lastGenerated,
@@ -111,13 +82,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout
-        data={sideBarData}
-        code={data.code}
-        difference={data.difference}
-        municipalityName={municipalityName}
-        lastGenerated={lastGenerated}
-      >
+      <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.vroege_signalen}
@@ -140,7 +105,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(text.warning_method) && (
+            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          )}
 
           <TwoKpiSection>
             <KpiTile
