@@ -13,33 +13,32 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "dev": "tsc -w",
-    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "clean": "del-cli dist tsconfig.tsbuildinfo",
+    "build": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "clean": "npx rimraf dist tsconfig.tsbuildinfo",
     "nuke": "yarn clean && npx rimraf node_modules",
     "typecheck": "tsc --pretty --noEmit",
-    "prebuild": "tsc -b .",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "format": "prettier --write \"src/**/*.{ts,tsx,md,json,yml}\" \"*.{js,json,md,yml}\" \"!src/types/data.ts\"",
     "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
     "geojson": "^0.5.0",
-    "ts-is-present": "^1.2.1"
+    "ts-is-present": "^1.2.2"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "del-cli": "^4.0.1",
-    "eslint": "^8.0.0",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.24.0",
-    "jest": "^27.0.5",
-    "prettier": "^2.3.2",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
+    "eslint-plugin-react": "^7.26.1",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.4"
   }
 }

@@ -26,3 +26,12 @@ exports
 # Sanity backups
 *.ndjson
 /packages/app/public/images/choropleth
+
+# Yarn v3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

@@ -11,3 +11,19 @@ this OS and runs into this issue, add this the `.env.local` file in the `package
 
 As the var suggests, this simply turns off the compression and avoids having to import the offending
 library at runtime.
+
+## Building Docker locally
+
+To build the production Docker image locally, you can use the following command, with replaced environment variables:
+
+```sh
+docker build \
+--build-arg DISABLE_SITEMAP=true \
+--build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=5mog5ask \
+--build-arg SANITY_API_TOKEN=<token> \
+--build-arg SANITY_PREVIEW_SECRET=<secret> \
+--build-arg NEXT_PUBLIC_SANITY_DATASET=<development|production> \
+--build-arg NEXT_PUBLIC_COMMIT_ID=<some_random_string> \
+-t local-test \
+.
+```
