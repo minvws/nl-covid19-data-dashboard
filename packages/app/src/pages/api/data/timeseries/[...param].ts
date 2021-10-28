@@ -106,6 +106,8 @@ function createTimestamp(dateStr: string | undefined): number {
   if (isDefined(dateStr)) {
     // Suffix the date string with a Z to indicate that this is a UTC date:
     const parsedDate = parseISO(`${dateStr}Z`);
+    console.log('dateStr', dateStr);
+    console.log('unix time', getUnixTime(parsedDate));
     return getUnixTime(parsedDate);
   }
   return NaN;
@@ -128,11 +130,15 @@ function stripTrailingNullValues(
   ) {
     return data;
   }
-  const index = countTrailingNullValues(data.values, metricProperty);
-  if (index === data.values.length - 1) {
+
+  const count = countTrailingNullValues(data.values, metricProperty);
+
+  if (count === 0) {
     return data;
   }
-  const values = data.values.slice(0, -index);
+
+  const values = data.values.slice(0, -count);
+
   return {
     values,
     last_value: last(values),
