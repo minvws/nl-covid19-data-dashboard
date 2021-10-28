@@ -1,4 +1,5 @@
 import {
+  colors,
   NlReproduction,
   NlReproductionValue,
   TimeframeOption,
@@ -8,7 +9,6 @@ import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 
 interface ReproductionChartTileProps {
   data: NlReproduction;

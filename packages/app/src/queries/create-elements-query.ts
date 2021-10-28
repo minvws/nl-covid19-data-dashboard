@@ -20,16 +20,35 @@ export function createElementsQuery(
         _id,
         metricName,
         metricProperty,
-        timelineEvents[]{
+        timelineEventCollections[]->{timelineEvents[]{
           'title': title.${locale},
           'description': description.${locale},
           date,
           dateEnd
-        },
+        }},
         warning
       },
       'kpi': *[
         _type == 'kpi'
+        && scope == '${scope}'
+        && metricName in ${formatStringArray(metricNames)}
+      ]{
+        _id,
+        metricName,
+        metricProperty
+      },
+      'warning': *[
+        _type == 'warning'
+        && scope == '${scope}'
+        && metricName in ${formatStringArray(metricNames)}
+      ]{
+        _id,
+        metricName,
+        metricProperty,
+        warning
+      },
+      'choropleth': *[
+        _type == 'choropleth'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
       ]{
@@ -43,6 +62,13 @@ export function createElementsQuery(
   return query;
 }
 
+type ElementBase = {
+  _id: string;
+  scope: MetricScope;
+  metricName: string;
+  metricProperty: string | null;
+};
+
 type CmsTimelineEventConfig = {
   title: string;
   description: string;
@@ -55,20 +81,27 @@ type CmsTimeSeriesElement = {
   scope: MetricScope;
   metricName: string;
   metricProperty: string | null;
-  timelineEvents: CmsTimelineEventConfig[];
+  timelineEventCollections: CmsTimelineEventCollection[];
   warning: string | null;
 };
 
-type CmsKpiElement = {
-  _id: string;
-  scope: MetricScope;
-  metricName: string;
-  metricProperty: string | null;
+type CmsTimelineEventCollection = {
+  timelineEvents: CmsTimelineEventConfig[];
 };
+
+type CmsKpiElement = ElementBase;
+
+type CmsChoroplethElement = ElementBase;
+
+type CmsWarningElement = {
+  warning: string;
+} & ElementBase;
 
 export type ElementsQueryResult = {
   timeSeries: CmsTimeSeriesElement[];
   kpi: CmsKpiElement[];
+  choropleth: CmsChoroplethElement[];
+  warning: CmsWarningElement[];
 };
 
 /**
@@ -79,24 +112,23 @@ export function getTimelineEvents(
   elements: CmsTimeSeriesElement[],
   metricName: string
 ) {
-  const timelineEvents = elements.find(
+  const timelineEventCollections = elements.find(
     (x) => x.metricName === metricName
-  )?.timelineEvents;
+  )?.timelineEventCollections;
 
-  return timelineEvents
-    ? timelineEvents.map<TimelineEventConfig>((x) => ({
-        title: x.title,
-        description: x.description,
-        start: new Date(x.date).getTime() / 1000,
-        end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
-      }))
+  return timelineEventCollections
+    ? timelineEventCollections.flatMap<TimelineEventConfig>((collection) =>
+        collection.timelineEvents.map((x) => ({
+          title: x.title,
+          description: x.description,
+          start: new Date(x.date).getTime() / 1000,
+          end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
+        }))
+      )
     : undefined;
 }
 
-export function getWarning(
-  elements: CmsTimeSeriesElement[],
-  metricName: string
-) {
+export function getWarning(elements: CmsWarningElement[], metricName: string) {
   return (
     elements.find((x) => x.metricName === metricName)?.warning || undefined
   );

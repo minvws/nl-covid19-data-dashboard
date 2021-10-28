@@ -1,4 +1,8 @@
-import { GmCollectionHospitalNice } from '@corona-dashboard/common';
+import {
+  colors,
+  GmCollectionHospitalNice,
+  gmData,
+} from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
@@ -6,7 +10,6 @@ import { TooltipContent } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Heading } from '~/components/typography';
-import { gmData } from '~/data/gm';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
@@ -16,7 +19,6 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { DynamicChoropleth } from '../../components/choropleth';
@@ -48,7 +50,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout isLandingPage lastGenerated={lastGenerated} code={code}>
+      <GmLayout isLandingPage code={code}>
         {!breakpoints.md && (
           <Box bg="white">
             <GmComboBox />
@@ -84,11 +86,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 dataConfig={{
                   metricName: 'gemeente' as any,
                   metricProperty: 'admissions_on_date_of_reporting',
-                  areaStroke: colors.blue,
-                  areaStrokeWidth: 0.5,
-                  hoverFill: colors.blue,
-                  hoverStrokeWidth: 0.5,
-                  noDataFillColor: colors.white,
+                  areaStroke: colors.white,
+                  areaStrokeWidth: 1,
+                  hoverFill: colors.white,
+                  hoverStrokeWidth: 3,
+                  noDataFillColor: colors.lightGray,
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.index,

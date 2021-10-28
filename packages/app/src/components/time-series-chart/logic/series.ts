@@ -23,6 +23,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | InvisibleSeriesDefinition<T>
   | SplitAreaSeriesDefinition<T>
   | GappedLineSeriesDefinition<T>
+  | GappedAreaSeriesDefinition<T>
   | GappedStackedAreaSeriesDefinition<T>
 )[];
 
@@ -75,6 +76,18 @@ export interface LineSeriesDefinition<T extends TimestampedValue>
 export interface AreaSeriesDefinition<T extends TimestampedValue>
   extends SeriesCommonDefinition {
   type: 'area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  fillOpacity?: number;
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
+}
+
+export interface GappedAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'gapped-area';
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;

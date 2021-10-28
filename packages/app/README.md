@@ -29,7 +29,7 @@ The calculations for the data can be found in
 
 ### CMS Dataset
 
-By default the site builds using the development dataset. If you would like the
+By default, the site builds using the development dataset. If you would like the
 production content instead you can create a `.env.local` file in `packages/app`
 with the following content:
 

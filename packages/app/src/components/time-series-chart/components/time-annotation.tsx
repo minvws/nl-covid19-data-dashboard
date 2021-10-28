@@ -1,7 +1,8 @@
+import { colors } from '@corona-dashboard/common';
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import theme, { colors } from '~/style/theme';
+import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { GetX, TimeAnnotationConfig } from '../logic';
 

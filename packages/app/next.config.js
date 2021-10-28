@@ -11,8 +11,8 @@ const withTranspileModules = require('next-transpile-modules')([
   'globby',
   'internmap',
 ]);
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');
+const { DuplicatesPlugin } = require('inspectpack/plugin');
 
 const nextConfig = {
   /**
@@ -82,6 +82,11 @@ const nextConfig = {
       {
         source: '/landelijk',
         destination: '/landelijk/vaccinaties',
+        permanent: false,
+      },
+      {
+        source: '/actueel',
+        destination: '/',
         permanent: false,
       },
       {
@@ -158,6 +163,7 @@ const nextConfig = {
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
       ['internmap', '../../node_modules/internmap'],
       ['balanced-match', '../../node_modules/balanced-match'],
+      ['is-buffer', '../../node_modules/unified/node_modules/is-buffer'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {
@@ -172,10 +178,10 @@ const nextConfig = {
     );
 
     if (process.env.NODE_ENV === 'production') {
+      // See https://github.com/formidablelabs/inspectpack/#plugin
       config.plugins.push(
-        new DuplicatePackageCheckerPlugin({
+        new DuplicatesPlugin({
           verbose: true,
-          showHelp: true,
         })
       );
     }

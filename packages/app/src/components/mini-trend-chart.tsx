@@ -36,6 +36,7 @@ export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
       numGridLines={3}
       seriesConfig={seriesConfig}
       dataOptions={dataOptions}
+      isYAxisCollapsed
     />
   );
 }

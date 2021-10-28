@@ -1,9 +1,11 @@
 import { assert } from '@corona-dashboard/common';
 import { geoConicConformal, geoMercator } from 'd3-geo';
 import fs from 'fs';
+import hash from 'hash-sum';
 import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
+import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
 import {
@@ -13,16 +15,19 @@ import {
   getChoroplethFeatures,
   getFeatureProps,
   getFillColor,
-  gmGeo,
-  inGeo,
   MapType,
-  nlGeo,
-  vrGeo,
 } from '~/components/choropleth/logic';
+import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
-import { hash } from '~/utils/api/hash';
+/**
+ * The combination node-canvas and sharp leads to runtime crashes under Windows, this
+ * ENV variable disables compression. By conditionally importing the sharp lib we
+ * avoid a runtime crash.
+ */
+const sharp =
+  process.env.DISABLE_COMPRESSION !== '1' ? require('sharp') : undefined;
 
 const publicPath = path.resolve(__dirname, '../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
@@ -32,7 +37,10 @@ if (!fs.existsSync(publicImgPath)) {
   fs.mkdirSync(publicImgPath, { recursive: true });
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { param } = req.query;
   const [map, metric, property, heightStr, selectedCode] = param as [
     MapType,
@@ -51,7 +59,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const suffix = isDefined(selectedCode) ? `_${selectedCode}` : '';
-  const filename = `${metric}_${property}_${map}_${height}${suffix}.png`;
+  const filename = sanitize(
+    `${metric}_${property}_${map}_${height}${suffix}.png`
+  );
 
   const fullImageFilePath = path.join(publicImgPath, filename);
   if (fs.existsSync(fullImageFilePath)) {
@@ -65,21 +75,26 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const [blob, eTag] = generateChoroplethImage(
-    metric,
-    property,
-    map,
-    height,
-    filename,
-    selectedCode
-  );
+  try {
+    const [blob, eTag] = await generateChoroplethImage(
+      metric,
+      property,
+      map,
+      height,
+      filename,
+      selectedCode
+    );
 
-  res.setHeader('ETag', eTag);
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Vary', 'Accept-Encoding');
+    res.setHeader('ETag', eTag);
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Vary', 'Accept-Encoding');
 
-  res.status(200);
-  res.end(blob);
+    res.status(200);
+    res.end(blob);
+  } catch (e) {
+    console.error(e);
+    res.status(500).end();
+  }
 }
 
 function createGeoJson(map: MapType) {
@@ -94,14 +109,21 @@ function createGeoJson(map: MapType) {
   return [featureGeo, outlineGeo] as const;
 }
 
+const validMapTypes: MapType[] = ['gm', 'vr', 'in'];
 function loadChoroplethData(map: MapType, metric: string) {
-  const filename = `${map.toUpperCase()}_COLLECTION.json`;
+  if (!validMapTypes.includes(map)) {
+    throw new Error(`Invalid map type: ${map}`);
+  }
+
+  const filename = sanitize(`${map.toUpperCase()}_COLLECTION.json`);
   const content = JSON.parse(
     fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
   );
+
   if (metric !== 'gemeente') {
     return content[metric] as ChoroplethDataItem[];
   }
+
   const data = content['tested_overall'];
   return data.map((x: any) => ({
     gmcode: x.gemcode,
@@ -109,7 +131,7 @@ function loadChoroplethData(map: MapType, metric: string) {
   })) as ChoroplethDataItem[];
 }
 
-function generateChoroplethImage(
+async function generateChoroplethImage(
   metric: string,
   property: string,
   map: MapType,
@@ -136,6 +158,20 @@ function generateChoroplethImage(
 
   const features = getChoroplethFeatures(map, data, geoJson, selectedCode);
 
+  const fitExtent: FitExtent = [
+    [
+      [0, 0],
+      [width, height],
+    ],
+    features.boundingBox,
+  ];
+
+  const [projectedGeoInfo] = getProjectedCoordinates(
+    features.hover,
+    mapProjection,
+    fitExtent
+  );
+
   const fColor = getFillColor(data, map, dataConfig);
   const fillColor = (code: string, index: number) => {
     if (code === 'VR19') {
@@ -150,20 +186,6 @@ function generateChoroplethImage(
   };
 
   const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
-
-  const fitExtent: FitExtent = [
-    [
-      [0, 0],
-      [width, height],
-    ],
-    features.boundingBox,
-  ];
-
-  const [projectedGeoInfo] = getProjectedCoordinates(
-    features.hover,
-    mapProjection,
-    fitExtent
-  );
 
   const stage = new Konva.Stage({
     width,
@@ -198,9 +220,17 @@ function generateChoroplethImage(
 
   const dataUrl = stage.toDataURL();
   const blob = dataUrltoBlob(dataUrl);
+  const compressedBlob = await compressImage(blob);
   const eTag = hash(dataUrl);
 
-  fs.writeFileSync(path.join(publicImgPath, filename), blob);
+  fs.writeFileSync(path.join(publicImgPath, filename), compressedBlob);
 
   return [blob, eTag] as const;
+}
+
+async function compressImage(blob: Buffer) {
+  if (isDefined(sharp)) {
+    return await sharp(blob).png({ quality: 30 }).toBuffer();
+  }
+  return Promise.resolve(blob);
 }

@@ -1,14 +1,16 @@
+import { colors } from '@corona-dashboard/common';
+import {
+  Chevron,
+  Clock,
+  Database,
+  MeerInformatie,
+} from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Fragment } from 'react';
-import { Chevron } from '@corona-dashboard/icons';
-import { Clock } from '@corona-dashboard/icons';
-import { Database } from '@corona-dashboard/icons';
-import { MeerInformatie } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -50,7 +52,7 @@ export function Metadata({
   const { siteText } = useIntl();
   const text = siteText.common.metadata;
 
-  const dateText = useFormateDateText(
+  const dateText = useFormatDateText(
     dateOrRange,
     dateOfInsertionUnix,
     datumsText
@@ -94,7 +96,7 @@ export function Metadata({
   );
 }
 
-function useFormateDateText(
+function useFormatDateText(
   dateOrRange: number | DateRange,
   dateOfInsertionUnix: number,
   datumsText: string

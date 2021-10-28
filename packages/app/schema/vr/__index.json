@@ -23,8 +23,7 @@
     "hospital_nice_sum",
     "g_number",
     "situations",
-    "vaccine_coverage_per_age_group",
-    "escalation_level"
+    "vaccine_coverage_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
@@ -32,16 +31,13 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "$ref": "#/$defs/vr_code"
     },
     "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/vr_code"
     },
     "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "$ref": "#/$defs/vr_code"
     },
     "static_values": {
       "$ref": "__static_values.json"
@@ -96,9 +92,12 @@
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
-    },
-    "escalation_level": {
-      "$ref": "escalation_level.json"
+    }
+  },
+  "$defs": {
+    "vr_code": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
     }
   }
 }

@@ -1,4 +1,6 @@
+import { colors } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
+import { useRouter } from 'next/router';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -35,9 +37,8 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -46,7 +47,15 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData('tested_ggd', 'g_number'),
+  selectVrData(
+    'difference.tested_ggd__infected_percentage_moving_average',
+    'difference.tested_ggd__tested_total_moving_average',
+    'difference.tested_overall__infected_moving_average',
+    'difference.tested_overall__infected_per_100k_moving_average',
+    'g_number',
+    'tested_ggd',
+    'tested_overall'
+  ),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -85,6 +94,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     useIntl();
 
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -94,7 +104,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdValues = data.tested_ggd.values;
   const difference = data.difference;
 
-  const municipalCodes = gmCodesByVrCode[data.code];
+  const municipalCodes = gmCodesByVrCode[router.query.code as string];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
@@ -109,13 +119,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
-            screenReaderCategory={
-              siteText.positief_geteste_personen.titel_sidebar
-            }
+            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
             title={replaceVariablesInText(text.titel, {
               safetyRegion: vrName,
             })}

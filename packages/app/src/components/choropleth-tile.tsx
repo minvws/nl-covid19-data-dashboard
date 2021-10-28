@@ -101,7 +101,7 @@ export function ChoroplethTile({
           height="100%"
           spacing={3}
         >
-          <Box height="100%">
+          <Box height="100%" marginTop={4}>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Box>
 

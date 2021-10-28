@@ -1,10 +1,10 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
 import { WithTooltip } from '~/lib/tooltip';
-import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
@@ -119,9 +119,6 @@ function TooltipTrigger({
       interactive={isTouch}
       visible={isSelected}
       maxWidth={breakpoints.sm ? '360px' : '100%'}
-      popperOptions={{
-        modifiers: [{ name: 'flip', enabled: false }],
-      }}
     >
       <div
         tabIndex={0}

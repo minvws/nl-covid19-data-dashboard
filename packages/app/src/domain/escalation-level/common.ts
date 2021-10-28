@@ -1,7 +1,7 @@
-import { colors } from '~/style/theme';
+import { colors } from '@corona-dashboard/common';
 
 /**
- * @TODO remove when we have this avaliable in the schemas
+ * @TODO remove when we have this available in the schemas
  */
 export type EscalationLevelType = 1 | 2 | 3;
 

@@ -1,6 +1,7 @@
+import { Chevron } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
-import { ArrowIconLeft, ArrowIconRight } from '~/components/arrow-icon';
+import { ArrowIconThinLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { RelativeDate } from '~/components/relative-date';
@@ -19,6 +20,7 @@ interface TopicalSectionHeaderProps {
   lastGenerated?: number;
   showBackLink?: boolean;
   headingLevel?: HeadingLevel;
+  headerVariant?: 'h1' | 'h2';
   link?: {
     href: string;
     text: string;
@@ -32,24 +34,22 @@ export function TopicalSectionHeader({
   link,
   description,
   headingLevel = 2,
+  headerVariant = 'h1',
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box spacing={3}>
+    <Box pt={{ _: 2, lg: 3 }} spacing={3}>
       {showBackLink && (
-        <Box fontSize="1.125rem" fontWeight="bold">
-          <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
+        <Box fontSize="1.125rem">
+          <LinkWithIcon href="/" icon={<ArrowIconThinLeft />}>
             {text.common_actueel.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
       )}
 
-      <Box spacing={{ _: 2, lg: 3 }}>
+      <Box spacing={{ _: 1, lg: 2 }}>
         <Box
-          borderBottom="1px solid"
-          borderBottomColor="border"
-          pb={{ _: 2, lg: 3 }}
           display="flex"
           flexDirection={{ _: 'column', lg: 'row' }}
           alignItems="baseline"
@@ -57,7 +57,7 @@ export function TopicalSectionHeader({
           spacingHorizontal={{ _: 0, lg: 4 }}
           flexWrap="wrap"
         >
-          <Heading level={headingLevel} variant="h1">
+          <Heading level={headingLevel} variant={headerVariant}>
             {title}
           </Heading>
 
@@ -67,10 +67,10 @@ export function TopicalSectionHeader({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) ? (
-              <Box mb={'2px'} fontWeight="bold">
+              <Box mb={'2px'}>
                 <LinkWithIcon
                   href={link.href}
-                  icon={<ArrowIconRight />}
+                  icon={<Chevron />}
                   iconPlacement="right"
                 >
                   {link.text}

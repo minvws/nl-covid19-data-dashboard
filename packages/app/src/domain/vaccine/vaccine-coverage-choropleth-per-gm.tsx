@@ -1,8 +1,10 @@
 import {
   assert,
+  colors,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -16,12 +18,15 @@ import {
 } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
-import { InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
+import {
+  CoverageKindProperty,
+  VaccinationCoverageKindSelect,
+} from './components/vaccination-coverage-kind-select';
 import {
   KeyWithLabel,
   useVaccineCoveragePercentageFormatter,
@@ -40,34 +45,69 @@ export function VaccineCoverageChoroplethPerGm({
   const { siteText } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedCoverageKind, setSelectedCoverageKind] =
+    useState<CoverageKindProperty>('has_one_shot_percentage');
   const reverseRouter = useReverseRouter();
 
   const variables = {
-    regio: siteText.vaccinaties.nl_choropleth_vaccinatie_graad[selectedMap],
+    regio:
+      siteText.vaccinaties.choropleth_vaccination_coverage.shared[selectedMap],
   };
 
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        siteText.vaccinaties.nl_choropleth_vaccinatie_graad.titel,
+        siteText.vaccinaties.choropleth_vaccination_coverage.nl.title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.description,
+              siteText.vaccinaties.choropleth_vaccination_coverage.nl
+                .description,
               variables
             )}
           />
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            spacingHorizontal={2}
+            as={'fieldset'}
+          >
+            <Text
+              as="legend"
+              fontWeight="bold"
+              css={css({
+                flexBasis: '100%',
+                mb: 2,
+              })}
+            >
+              {
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
+              }
+            </Text>
 
-          <AgeGroupSelect onChange={setSelectedAgeGroup} />
+            <Box flex="1">
+              <AgeGroupSelect onChange={setSelectedAgeGroup} />
+            </Box>
+
+            <Box flex="1">
+              <VaccinationCoverageKindSelect
+                onChange={setSelectedCoverageKind}
+                initialValue={selectedCoverageKind}
+              />
+            </Box>
+          </Box>
         </>
       }
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
         title:
-          siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel,
+          siteText.vaccinaties.choropleth_vaccination_coverage.shared
+            .legend_title,
       }}
       metadata={{
         source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
@@ -86,7 +126,7 @@ export function VaccineCoverageChoroplethPerGm({
           )}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
-            metricProperty: 'has_one_shot_percentage',
+            metricProperty: selectedCoverageKind,
           }}
           dataOptions={{
             isPercentage: true,
@@ -117,7 +157,7 @@ export function VaccineCoverageChoroplethPerGm({
           )}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
-            metricProperty: 'has_one_shot_percentage',
+            metricProperty: selectedCoverageKind,
           }}
           dataOptions={{
             isPercentage: true,

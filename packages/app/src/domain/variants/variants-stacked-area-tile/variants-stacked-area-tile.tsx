@@ -1,4 +1,4 @@
-import { Dictionary } from '@corona-dashboard/common';
+import { colors, Dictionary } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
@@ -14,7 +14,6 @@ import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-char
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
@@ -61,7 +60,7 @@ export function VariantsStackedAreaTile({
   );
 }
 
-const alwayEnabled: (keyof VariantChartValue)[] = [];
+const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
   text: VariantsStackedAreaTileText;
@@ -77,7 +76,7 @@ function VariantStackedAreaTileWithData({
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
   const { list, toggle, clear } =
-    useList<keyof VariantChartValue>(alwayEnabled);
+    useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
     text,
@@ -157,12 +156,12 @@ function VariantStackedAreaTileWithData({
                   ...context.config.filter(
                     (x) =>
                       !hasMetricProperty(x) ||
-                      x.metricProperty !== 'other_percentage'
+                      x.metricProperty !== 'other_graph_percentage'
                   ),
                   context.config.find(
                     (x) =>
                       hasMetricProperty(x) &&
-                      x.metricProperty === 'other_percentage'
+                      x.metricProperty === 'other_graph_percentage'
                   ),
                 ].filter(isDefined),
               };
@@ -192,7 +191,7 @@ function useFilteredSeriesConfig(
     return [otherConfig, ...seriesConfig].filter(
       (item) =>
         compareList.includes(item.metricProperty) ||
-        compareList.length === alwayEnabled.length
+        compareList.length === alwaysEnabled.length
     );
   }, [seriesConfig, otherConfig, compareList]);
 }
@@ -207,7 +206,9 @@ function useSeriesConfig(
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
       .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
-      .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage')
+      .filter(
+        (x) => x.endsWith('_percentage') && x !== 'other_graph_percentage'
+      )
       .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
@@ -237,7 +238,7 @@ function useSeriesConfig(
 
     const otherConfig = {
       type: 'gapped-stacked-area',
-      metricProperty: 'other_percentage',
+      metricProperty: 'other_graph_percentage',
       label: text.tooltip_labels.other_percentage,
       fillOpacity: 1,
       shape: 'square',

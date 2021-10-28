@@ -1,7 +1,6 @@
-import { NederlandGroot } from '@corona-dashboard/icons';
+import { Chevron, NederlandGroot } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading } from '~/components/typography';
@@ -56,9 +55,8 @@ export function EscalationLevelBanner({
 
           <LinkWithIcon
             href={text.banner.link.href}
-            icon={<ArrowIconRight />}
+            icon={<Chevron />}
             iconPlacement="right"
-            fontWeight="bold"
           >
             {text.banner.link.label}
           </LinkWithIcon>
@@ -71,7 +69,7 @@ export function EscalationLevelBanner({
 const Tile = styled.article<{ sideColor: string }>((x) =>
   css({
     position: 'relative',
-    backgroundColor: 'page',
+    backgroundColor: 'offWhite',
     borderRadius: 1,
 
     '&:before': {

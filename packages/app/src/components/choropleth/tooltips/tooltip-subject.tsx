@@ -43,6 +43,7 @@ export function TooltipSubject({
       >
         {children}
         <Box
+          flexShrink={0}
           height={13}
           width={13}
           borderRadius={'2px'}

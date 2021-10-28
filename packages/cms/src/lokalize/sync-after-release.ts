@@ -1,5 +1,5 @@
 /**
- * THIS SCRIPT WILL POTENTIALLY BREAK PRODUCTION BUILD IF RAN HALFWAY SPRINT
+ * --> THIS SCRIPT WILL POTENTIALLY BREAK PRODUCTION BUILD IF RAN HALFWAY SPRINT <--
  *
  * This script will finalize move mutations and also prunes any LokalizeText
  * documents from the production dataset that are not present in the development
@@ -114,7 +114,17 @@ async function syncMissingTextsToPrd(
         publish_count: 0,
       };
 
-      prdTransaction.createOrReplace(documentToInject);
+      const count = await prdClient.fetch(
+        `count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`
+      );
+
+      if (count === 0) {
+        prdTransaction.createOrReplace(documentToInject);
+      } else {
+        console.warn(
+          `A lokalize document with key ${documentToInject.key} already exists. Skipped adding a new one.`
+        );
+      }
     }
 
     await prdTransaction.commit();

@@ -2,14 +2,13 @@ import { css } from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { Select } from '~/components/select';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { ArticlesOverviewList } from '~/domain/articles/articles-overview-list';
 import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
 import {
   articleCategory,
   ArticleCategoryType,
@@ -52,7 +51,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
   const sortOptions = useMemo(() => {
     /**
-     * Find all the categorires that are currently being used in articles,
+     * Find all the categories that are currently being used in articles,
      * to later check if we still need it for the menu items.
      */
     const availableCategories = [
@@ -140,7 +139,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
 
-          <ArticleList
+          <ArticlesOverviewList
             articleSummaries={content}
             hideLink={true}
             currentCategory={currentCategory}
@@ -213,7 +212,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 /*
  * Since we are using a justify-content: space around for positioning the elements,
  * transforming them on hover to a bold text would cause a small layout shift.
- * Here we draw a indentical text on top and switch them once the item is active.
+ * Here we draw a identical text on top and switch them once the item is active.
  * It has a aria hidden label and is pure cosmetic for this use case.
  */
 const BoldText = styled.span(

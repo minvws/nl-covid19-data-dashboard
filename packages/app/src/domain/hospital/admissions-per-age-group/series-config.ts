@@ -1,4 +1,4 @@
-import { colors } from '~/style/theme';
+import { colors } from '@corona-dashboard/common';
 
 export const BASE_SERIES_CONFIG = [
   {

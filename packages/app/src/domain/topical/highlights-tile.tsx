@@ -1,16 +1,11 @@
 import { Box } from '~/components/base';
-import {
-  HighlightTeaser,
-  HighlightTeaserProps,
-} from '~/components/highlight-teaser';
+import { ContentTeaser, ContentTeaserProps } from '~/components/content-teaser';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { Block, ImageBlock } from '~/types/cms';
-import { ArticleBox } from './article-list';
 
 export interface WeeklyHighlightProps {
   title: string;
-  slug: {
-    current: string;
-  };
+  slug: string;
   summary: Block;
   category: string;
   cover: ImageBlock;
@@ -18,47 +13,50 @@ export interface WeeklyHighlightProps {
 }
 
 interface HighlightsTileProps {
-  weeklyHighlight: WeeklyHighlightProps;
-  highlights: HighlightTeaserProps[];
+  hiddenTitle: string;
+  weeklyHighlight?: WeeklyHighlightProps;
+  highlights: ContentTeaserProps[];
   showWeeklyHighlight: boolean;
 }
 
-export function HighlightsTile(props: HighlightsTileProps) {
-  const { weeklyHighlight, highlights, showWeeklyHighlight } = props;
-
+export function HighlightsTile({
+  hiddenTitle,
+  weeklyHighlight,
+  highlights,
+  showWeeklyHighlight,
+}: HighlightsTileProps) {
   return (
-    <Box
-      display="flex"
-      flexDirection={{ _: 'column', xs: 'row' }}
-      flexWrap="wrap"
-      spacing={4}
-    >
-      {showWeeklyHighlight && (
-        <ArticleBox>
-          <HighlightTeaser
-            cover={weeklyHighlight.cover}
-            href={`/weekberichten/${weeklyHighlight.slug.current}`}
+    <article>
+      <VisuallyHidden>
+        <h2>{hiddenTitle}</h2>
+      </VisuallyHidden>
+
+      <Box
+        display="flex"
+        flexDirection={{ _: 'column', md: 'row' }}
+        spacing={{ _: 4, md: 0 }}
+      >
+        {showWeeklyHighlight && weeklyHighlight && (
+          <ContentTeaser
             title={weeklyHighlight.title}
-            category={weeklyHighlight.category}
+            slug={weeklyHighlight.slug}
+            cover={weeklyHighlight.cover}
             publicationDate={weeklyHighlight.publicationDate}
-            isWeekly
-            variant="blue"
+            isWeeklyHighlight
           />
-        </ArticleBox>
-      )}
-      {highlights
-        .map((item, index) => (
-          <ArticleBox key={index}>
-            <HighlightTeaser
-              cover={item.cover}
-              href={item.href}
-              label={item.label}
+        )}
+        {highlights
+          .map((item) => (
+            <ContentTeaser
+              key={item.slug}
               title={item.title}
+              slug={item.slug}
+              cover={item.cover}
               category={item.category}
             />
-          </ArticleBox>
-        ))
-        .slice(0, showWeeklyHighlight ? 2 : 3)}
-    </Box>
+          ))
+          .slice(0, showWeeklyHighlight ? 1 : 2)}
+      </Box>
+    </article>
   );
 }

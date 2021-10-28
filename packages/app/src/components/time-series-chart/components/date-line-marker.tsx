@@ -1,8 +1,11 @@
-import { isDateSpanValue, TimestampedValue } from '@corona-dashboard/common';
+import {
+  colors,
+  isDateSpanValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { HoveredPoint } from '../logic';
 
 type LineProps = {

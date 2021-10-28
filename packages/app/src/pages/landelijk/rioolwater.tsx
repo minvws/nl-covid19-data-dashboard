@@ -1,6 +1,6 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -27,48 +27,16 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  () => {
-    const data = selectNlPageMetricData()();
-    data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
-      (x) => ({
-        ...x,
-        average: isPresent(x.average) ? Math.round(x.average) : null,
-      })
-    );
-    data.selectedNlData.sewer.last_value = {
-      ...data.selectedNlData.sewer.last_value,
-      average: isPresent(data.selectedNlData.sewer.last_value.average)
-        ? Math.round(data.selectedNlData.sewer.last_value.average)
-        : null,
-    };
-    data.selectedNlData.difference.sewer__average.difference = Math.round(
-      data.selectedNlData.difference.sewer__average.difference
-    );
-
-    return data;
-  },
+  selectNlData('sewer', 'difference.sewer__average'),
   createGetChoroplethData({
-    vr: ({ sewer }) => {
-      const roundedSewer = sewer.map((x) => {
-        return {
-          ...x,
-          average: isPresent(x.average) ? Math.round(x.average) : null,
-        };
-      });
-      return { sewer: roundedSewer };
-    },
-    gm: ({ sewer }) => {
-      const roundedSewer = sewer.map((x) => {
-        return { ...x, average: Math.round(x.average) };
-      });
-      return { sewer: roundedSewer };
-    },
+    vr: ({ sewer }) => ({ sewer }),
+    gm: ({ sewer }) => ({ sewer }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
@@ -94,11 +62,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
-            screenReaderCategory={siteText.rioolwater_metingen.titel_sidebar}
+            screenReaderCategory={
+              siteText.sidebar.metrics.sewage_measurement.title
+            }
             title={text.titel}
             icon={<RioolwaterMonitoring />}
             description={text.pagina_toelichting}
@@ -113,7 +83,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(text.warning_method) && (
+            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          )}
 
           <TwoKpiSection>
             <KpiTile
@@ -173,7 +145,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: thresholds.vr.average,
             }}
           >
-            {selectedMap === 'gm' ? (
+            {selectedMap === 'gm' && (
               <DynamicChoropleth
                 renderTarget="canvas"
                 map="gm"
@@ -189,7 +161,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   getLink: reverseRouter.gm.rioolwater,
                 }}
               />
-            ) : (
+            )}
+
+            {selectedMap === 'vr' && (
               <DynamicChoropleth
                 renderTarget="canvas"
                 map="vr"

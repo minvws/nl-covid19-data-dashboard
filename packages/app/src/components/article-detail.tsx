@@ -8,6 +8,7 @@ import { ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
+import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
 import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
@@ -23,6 +24,9 @@ const imageSizes = [
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
   const { siteText } = useIntl();
+
+  article.intro = mergeAdjacentKpiBlocks(article.intro);
+  article.content = mergeAdjacentKpiBlocks(article.content);
 
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>

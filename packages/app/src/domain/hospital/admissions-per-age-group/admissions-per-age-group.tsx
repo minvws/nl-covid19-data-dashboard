@@ -1,7 +1,9 @@
 import {
+  colors,
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
@@ -13,13 +15,11 @@ import { SeriesIcon } from '~/components/time-series-chart/components/series-ico
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
-import { Spacer } from '~/components/base';
 
 type NLHospitalAdmissionPerAgeGroupValue =
   | NlIntensiveCareNicePerAgeGroupValue
@@ -47,7 +47,7 @@ export function AdmissionsPerAgeGroup({
   const text = siteText.admissions_per_age_group_chart;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
-  const alwayEnabled = ['admissions_overall_per_million'];
+  const alwaysEnabled = ['admissions_overall_per_million'];
 
   /* Enrich config with dynamic data / locale */
   const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] =
@@ -68,20 +68,20 @@ export function AdmissionsPerAgeGroup({
    * - when nothing selected: all items
    * - otherwise: selected items + always enabled items
    */
-  const compareList = list.concat(...alwayEnabled);
+  const compareList = list.concat(...alwaysEnabled);
   const chartConfig = seriesConfig.filter(
     (item) =>
       compareList.includes(item.metricProperty) ||
-      compareList.length === alwayEnabled.length
+      compareList.length === alwaysEnabled.length
   );
 
   const interactiveLegendOptions: SelectOption[] = seriesConfig.filter(
-    (item) => !alwayEnabled.includes(item.metricProperty)
+    (item) => !alwaysEnabled.includes(item.metricProperty)
   );
 
   /* Static legend contains always enabled items and the under reported item */
   const staticLegendItems = seriesConfig
-    .filter((item) => alwayEnabled.includes(item.metricProperty))
+    .filter((item) => alwaysEnabled.includes(item.metricProperty))
     .map<LegendItem>((item) => ({
       label: item.label,
       shape: 'custom' as const,

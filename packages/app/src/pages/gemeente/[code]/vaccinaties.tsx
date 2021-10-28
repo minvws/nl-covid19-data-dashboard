@@ -35,7 +35,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectGmPageMetricData,
+  selectGmData,
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -47,11 +47,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectGmPageMetricData(
-      'difference',
-      'code',
-      'vaccine_coverage_per_age_group'
-    ),
+    selectGmData('code', 'vaccine_coverage_per_age_group'),
     createGetChoroplethData({
       gm: ({ vaccine_coverage_per_age_group }, ctx) => {
         if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -93,9 +89,8 @@ export const VaccinationsGmPage = (
 ) => {
   const {
     choropleth,
-    sideBarData,
     municipalityName,
-    selectedGmData: { difference, code, vaccine_coverage_per_age_group },
+    selectedGmData: data,
     content,
     lastGenerated,
   } = props;
@@ -123,13 +118,15 @@ export const VaccinationsGmPage = (
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
    */
-  const filteredAgeGroup18Plus = vaccine_coverage_per_age_group.values.find(
-    (item) => item.age_group_range === '18+'
-  );
+  const filteredAgeGroup18Plus =
+    data.vaccine_coverage_per_age_group.values.find(
+      (x) => x.age_group_range === '18+'
+    );
 
-  const filteredAgeGroup12Plus = vaccine_coverage_per_age_group.values.find(
-    (item) => item.age_group_range === '12+'
-  );
+  const filteredAgeGroup12Plus =
+    data.vaccine_coverage_per_age_group.values.find(
+      (x) => x.age_group_range === '12+'
+    );
 
   assert(
     filteredAgeGroup18Plus,
@@ -143,13 +140,7 @@ export const VaccinationsGmPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout
-        data={sideBarData}
-        code={code}
-        difference={difference}
-        municipalityName={municipalityName}
-        lastGenerated={lastGenerated}
-      >
+      <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.vaccinaties}
@@ -207,23 +198,23 @@ export const VaccinationsGmPage = (
               description={text.vaccination_coverage.description}
               sortingOrder={['18+', '12-17', '12+']}
               metadata={{
-                date: vaccine_coverage_per_age_group.values[0].date_unix,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: text.vaccination_coverage.bronnen.rivm,
               }}
-              values={vaccine_coverage_per_age_group.values}
+              values={data.vaccine_coverage_per_age_group.values}
             />
           )}
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.vaccinaties.gm_choropleth_vaccinatie_graad.title,
+              siteText.vaccinaties.choropleth_vaccination_coverage.gm.title,
               { municipalityName: municipalityName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.vaccinaties.gm_choropleth_vaccinatie_graad
+                    siteText.vaccinaties.choropleth_vaccination_coverage.gm
                       .description,
                     { municipalityName: municipalityName }
                   )}
@@ -235,7 +226,7 @@ export const VaccinationsGmPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.vaccinaties.vr_choropleth_vaccinatie_graad
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
                   .legend_title,
             }}
             metadata={{
@@ -257,7 +248,7 @@ export const VaccinationsGmPage = (
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,
                 highlightSelection: true,
-                selectedCode: code,
+                selectedCode: data.code,
                 tooltipVariables: {
                   age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
                 },

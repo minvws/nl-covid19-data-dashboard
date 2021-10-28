@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import {
   Coronavirus,
   GehandicaptenZorg,
@@ -25,16 +26,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
+  selectVrData(
+    'disability_care',
+    'difference.disability_care__infected_locations_total',
+    'difference.disability_care__newly_infected_people'
+  ),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('disabilityCarePage', locale);
@@ -68,14 +72,14 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={
-              siteText.verpleeghuis_besmette_locaties.titel_sidebar
+              siteText.sidebar.metrics.nursing_home_care.title
             }
             title={replaceVariablesInText(positiveTestPeopleText.titel, {
               safetyRegion: vrName,

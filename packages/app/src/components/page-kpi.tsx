@@ -10,7 +10,7 @@ import { assert } from '~/utils/assert';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
 
-interface PageKpieBaseProps<T> {
+interface PageKpiBaseProps<T> {
   data: T;
   metricName: MetricKeys<T>;
   metricProperty: string;
@@ -30,9 +30,12 @@ type DifferenceProps =
       isAmount: boolean;
     };
 
-type PageKpiProps<T> = PageKpieBaseProps<T> & DifferenceProps;
+type PageKpiProps<T> = PageKpiBaseProps<T> & DifferenceProps;
 
-const metricNamesHoldingPartialData = ['infectious_people', 'reproduction'];
+export const metricNamesHoldingPartialData = [
+  'infectious_people',
+  'reproduction',
+];
 
 export function PageKpi<T>({
   data,
@@ -80,26 +83,32 @@ export function PageKpi<T>({
     );
   }
 
+  const hasDifference = isDefined(differenceKey) || isDefined(differenceValue);
+
   return (
-    <Box spacing={0} mb={3}>
+    <Box spacing={0} mb={hasDifference ? 3 : 0}>
       <KpiValue absolute={propertyValue} />
 
       {isDefined(differenceKey) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference
-            value={differenceValue}
-            isAmount={isAmount}
-            maximumFractionDigits={differenceFractionDigits}
-          />
-        ) : (
-          <TileDifference
-            value={differenceValue}
-            maximumFractionDigits={differenceFractionDigits}
-            showOldDateUnix={showOldDateUnix}
-            isAmount={isAmount}
-          />
-        ))}
+          <Box pt={2}>
+            <TileAverageDifference
+              value={differenceValue}
+              isAmount={isAmount}
+              maximumFractionDigits={differenceFractionDigits}
+            />
+          </Box>
+        ) : isDefined(differenceValue) ? (
+          <Box pt={2}>
+            <TileDifference
+              value={differenceValue}
+              maximumFractionDigits={differenceFractionDigits}
+              showOldDateUnix={showOldDateUnix}
+              isAmount={isAmount}
+            />
+          </Box>
+        ) : null)}
     </Box>
   );
 }

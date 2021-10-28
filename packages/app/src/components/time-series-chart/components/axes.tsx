@@ -5,7 +5,7 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -15,7 +15,6 @@ import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMounted } from '~/utils/use-is-mounted';
@@ -205,7 +204,7 @@ export const Axes = memo(function Axes({
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
   return (
-    <g css={css({ pointerEvents: 'none' })}>
+    <g css={css({ pointerEvents: 'none' })} aria-hidden="true">
       <GridRows
         /**
          * Lighter gray grid lines are used for the lines that have no label on

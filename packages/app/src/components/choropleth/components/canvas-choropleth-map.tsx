@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import Konva from 'konva';
 import {
   memo,
@@ -10,7 +11,6 @@ import {
 } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
-import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { FeatureProps } from '../logic';
@@ -387,7 +387,7 @@ function AreaMap(props: AreaMapProps) {
       {geoInfo.map((x, i) => (
         <area
           style={{
-            cursor: 'pointer',
+            cursor: isDefined(getLink) ? 'pointer' : undefined,
           }}
           tabIndex={2}
           aria-label={getFeatureName(x.code)}

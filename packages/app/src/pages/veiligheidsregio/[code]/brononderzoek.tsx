@@ -25,7 +25,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -36,7 +36,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectVrPageMetricData('situations'),
+    selectVrData('situations'),
     createGetContent<PageArticlesQueryResult>((context) => {
       const { locale } = context;
       return createPageArticlesQuery('situationsPage', locale);
@@ -70,12 +70,12 @@ export default function BrononderzoekPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              intl.siteText.positief_geteste_personen.titel_sidebar
+              intl.siteText.sidebar.metrics.source_investigation.title
             }
             title={replaceVariablesInText(
               intl.siteText.common.subject_in_location,

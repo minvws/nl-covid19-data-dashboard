@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -22,16 +23,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectGmPageMetricData,
+  selectGmData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
+  selectGmData(
+    'difference.deceased_rivm__covid_daily',
+    'deceased_rivm',
+    'code'
+  ),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('deceasedPage', locale);
@@ -40,9 +44,8 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    sideBarData,
     municipalityName,
-    selectedGmData: { deceased_rivm: dataRivm, difference, code },
+    selectedGmData: data,
     content,
     lastGenerated,
   } = props;
@@ -62,13 +65,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout
-        data={sideBarData}
-        code={code}
-        difference={difference}
-        municipalityName={municipalityName}
-        lastGenerated={lastGenerated}
-      >
+      <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.besmettingen}
@@ -80,8 +77,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{
               datumsText: text.section_deceased_rivm.datums,
-              dateOrRange: dataRivm.last_value.date_unix,
-              dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
+              dateOrRange: data.deceased_rivm.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.deceased_rivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.articles}
@@ -91,14 +89,14 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={text.section_deceased_rivm.kpi_covid_daily_title}
               metadata={{
-                date: dataRivm.last_value.date_unix,
+                date: data.deceased_rivm.last_value.date_unix,
                 source: text.section_deceased_rivm.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="covid_daily"
-                absolute={dataRivm.last_value.covid_daily}
-                difference={difference.deceased_rivm__covid_daily}
+                absolute={data.deceased_rivm.last_value.covid_daily}
+                difference={data.difference.deceased_rivm__covid_daily}
                 isAmount
               />
               <Markdown
@@ -108,13 +106,13 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={text.section_deceased_rivm.kpi_covid_total_title}
               metadata={{
-                date: dataRivm.last_value.date_unix,
+                date: data.deceased_rivm.last_value.date_unix,
                 source: text.section_deceased_rivm.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="covid_total"
-                absolute={dataRivm.last_value.covid_total}
+                absolute={data.deceased_rivm.last_value.covid_total}
               />
               <Text>
                 {text.section_deceased_rivm.kpi_covid_total_description}
@@ -135,7 +133,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'deceased_over_time_chart',
                 }}
-                values={dataRivm.values}
+                values={data.deceased_rivm.values}
                 timeframe={timeframe}
                 seriesConfig={[
                   {

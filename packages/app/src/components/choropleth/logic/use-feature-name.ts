@@ -1,8 +1,6 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, gmData, vrData } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { gmData } from '~/data/gm';
-import { vrData } from '~/data/vr';
 import { MapType } from './types';
 
 export function useFeatureName(

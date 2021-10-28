@@ -1,3 +1,8 @@
+import {
+  colors,
+  DAY_IN_SECONDS,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisTop } from '@visx/axis';
 import { RectClipPath } from '@visx/clip-path';
@@ -6,7 +11,6 @@ import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -17,9 +21,6 @@ import { AnyTickFormatter } from './axes';
  * Only show this amount of week numbers
  */
 const MAXIMUM_WEEK_COUNT = 6;
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 /**
  * Space to render above and below the graph

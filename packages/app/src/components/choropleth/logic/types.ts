@@ -1,12 +1,16 @@
-import {
+import type {
   GmCollection,
   InCollection,
   KeysOfType,
   VrCollection,
 } from '@corona-dashboard/common';
-import { ParsedFeature } from '@visx/geo/lib/projections/Projection';
-import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { CodedGeoProperties } from './topology';
+import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
+import type {
+  FeatureCollection,
+  Feature,
+  MultiPolygon,
+  Polygon,
+} from 'geojson';
 
 export type Unpack<T> = T extends infer U ? U : never;
 
@@ -106,6 +110,15 @@ export type MappedDataItem<T extends MapType> = T extends 'gm'
   : never;
 
 export type ChoroplethDataItem = GmDataItem | VrDataItem | InDataItem;
+
+export type CodedGeoProperties = {
+  code: string;
+};
+
+export type CodedGeoJSON = FeatureCollection<
+  MultiPolygon | Polygon,
+  CodedGeoProperties
+>;
 
 export type ParsedFeatureWithPath = Omit<
   ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>,

@@ -1,5 +1,5 @@
+import { Arrow, Chevron } from '@corona-dashboard/icons';
 import styled from 'styled-components';
-import { Arrow } from '@corona-dashboard/icons';
 
 export const ArrowIconRight = styled(Arrow)`
   transform: rotate(-90deg);
@@ -7,4 +7,10 @@ export const ArrowIconRight = styled(Arrow)`
 
 export const ArrowIconLeft = styled(Arrow)`
   transform: rotate(90deg);
+`;
+
+export const ArrowIconThinRight = Chevron;
+
+export const ArrowIconThinLeft = styled(Chevron)`
+  transform: scaleX(-1);
 `;
