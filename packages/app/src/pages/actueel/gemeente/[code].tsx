@@ -17,6 +17,7 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
+import { Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
@@ -319,7 +320,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     icon={<Vaccinaties />}
                     text={
                       <>
-                        <Box fontSize={5}>
+                        <Text variant="datadriven" as="div">
                           <Markdown
                             content={replaceVariablesInText(
                               text.mini_trend_tiles.vaccinatiegraad.text,
@@ -327,7 +328,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                               formatters
                             )}
                           />
-                        </Box>
+                        </Text>
                         <LinkWithIcon
                           href={reverseRouter.gm.vaccinaties(gmCode)}
                           icon={<Chevron />}
