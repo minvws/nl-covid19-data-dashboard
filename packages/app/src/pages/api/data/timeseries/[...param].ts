@@ -123,7 +123,6 @@ function stripTrailingNullValues(
   metricProperty?: keyof TimestampedValue
 ) {
   if (
-    !isDefined(metricProperty) ||
     !metricsInaccurateItems.includes(metric) ||
     !strippableMetricProperties.includes(metricProperty as unknown as string)
   ) {
