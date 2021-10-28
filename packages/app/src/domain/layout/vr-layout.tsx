@@ -82,18 +82,6 @@ export function VrLayout(props: VrLayoutProps) {
     ],
   });
 
-  if (isDefined(data)) {
-    data.difference.sewer__average.difference = Math.round(
-      data.difference.sewer__average.difference
-    );
-    data.difference.sewer__average.old_value = Math.round(
-      data.difference.sewer__average.old_value
-    );
-    data.sewer.last_value.average = isPresent(data.sewer.last_value.average)
-      ? Math.round(data.sewer.last_value.average)
-      : null;
-  }
-
   return (
     <>
       <Head>
@@ -123,10 +111,6 @@ export function VrLayout(props: VrLayoutProps) {
         }
         sidebarComponent={
           <>
-            {/**
-             * data is only available on /veiligheidsregio/{VRxx} routes
-             * and therefore optional
-             */}
             {!isLandingPage && showMetricLinks && (
               <Box
                 as="nav"

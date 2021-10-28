@@ -8,6 +8,7 @@ import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { Markdown } from '~/components/markdown';
+import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
 import { PieChart } from '~/components/pie-chart';
@@ -66,9 +67,6 @@ export const getStaticProps = createGetStaticProps(
     }`;
   })
 );
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatPercentage, formatDateFromSeconds, formatNumber } =

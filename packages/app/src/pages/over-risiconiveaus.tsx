@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';

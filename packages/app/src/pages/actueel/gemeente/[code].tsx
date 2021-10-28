@@ -50,7 +50,6 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
