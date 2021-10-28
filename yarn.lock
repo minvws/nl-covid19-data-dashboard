@@ -1637,7 +1637,7 @@ __metadata:
     "@types/flat": ^5.0.2
     "@types/fs-extra": ^9.0.13
     "@types/node": ^16.11.6
-    "@types/prompts": ^2.4.0
+    "@types/prompts": 2.0.14
     "@types/react-is": ^17.0.3
     "@types/react-world-flags": ^1.4.2
     braille: ^1.1.0
@@ -6039,10 +6039,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prompts@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@types/prompts@npm:2.4.0"
-  checksum: ec75655f07fbc3cb2df60a3e3bdd13bfda0554a16f5541285c4b1cc0610756838a2863dccfc911cbb1385492054c07210512164e3dbef272ec638d631783b278
+"@types/prompts@npm:2.0.14":
+  version: 2.0.14
+  resolution: "@types/prompts@npm:2.0.14"
+  dependencies:
+    "@types/node": "*"
+  checksum: e20a92a3fc38646d850ac3c7c03cab582a3b4f12224605a209ef7025d2fbe574656276ab9e43ea01b504f7e91d21a6da0119d1e1eeacf939895ec2ad8d9c6b5d
   languageName: node
   linkType: hard
 
