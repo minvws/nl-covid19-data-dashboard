@@ -1,5 +1,5 @@
 # Install dependencies only when needed
-FROM node:alpine AS deps
+FROM node:16-alpine AS deps
 
 ENV NODE_ENV="production"
 ENV NEXT_TELEMETRY_DISABLED=1
