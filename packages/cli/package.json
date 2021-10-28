@@ -40,7 +40,6 @@
     "generate-data-structures": "ts-node src/scripts/generate-data-structures.ts"
   },
   "devDependencies": {
-    "@types/meow": "^6.0.0",
     "@types/node": "^16.11.6",
     "@types/semver": "^7.3.8",
     "@types/topojson-client": "^3.1.0",

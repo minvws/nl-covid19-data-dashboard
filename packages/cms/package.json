@@ -67,7 +67,6 @@
     "@types/download": "^8.0.0",
     "@types/flat": "^5.0.1",
     "@types/fs-extra": "^9.0.6",
-    "@types/meow": "^6.0.0",
     "@types/node": "^16.11.6",
     "@types/prompts": "^2.0.13",
     "@types/react-is": "^17",
