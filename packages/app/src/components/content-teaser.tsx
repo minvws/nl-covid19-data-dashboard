@@ -17,6 +17,7 @@ export interface ContentTeaserProps {
   publicationDate?: string;
   variant?: 'small' | 'normal';
   isWeeklyHighlight?: boolean;
+  isArticle?: boolean;
 }
 
 export function ContentTeaser({
@@ -27,6 +28,7 @@ export function ContentTeaser({
   publicationDate,
   variant = 'normal',
   isWeeklyHighlight,
+  isArticle,
 }: ContentTeaserProps) {
   const { siteText } = useIntl();
   const breakpoints = useBreakpoints(true);
@@ -67,7 +69,9 @@ export function ContentTeaser({
                 ? slug
                 : isWeeklyHighlight
                 ? `/weekberichten/${slug}`
-                : `/artikelen/${slug}`
+                : isArticle
+                ? `/artikelen/${slug}`
+                : slug
             }
             icon={<ArrowIconRight />}
             iconPlacement="right"
