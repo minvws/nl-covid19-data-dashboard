@@ -1,7 +1,6 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
