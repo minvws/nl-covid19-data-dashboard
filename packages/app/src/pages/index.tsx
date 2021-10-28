@@ -22,7 +22,6 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
-import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
@@ -162,7 +161,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
         <MaxWidth id="content">
-          <TileList>
+          <Box
+            spacing={{ _: 4, md: 5 }}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 5 }}
+          >
             <Box spacing={3}>
               <TopicalSectionHeader
                 lastGenerated={Number(lastGenerated)}
@@ -526,7 +529,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   .vaccination_coverage_choropleth.link_text.nl,
               }}
             />
-          </TileList>
+          </Box>
         </MaxWidth>
 
         <Spacer mb={5} />
