@@ -18,7 +18,7 @@ export function MiniTile(props: MiniTileProps) {
   const { icon, text, title, warning, children } = props;
 
   return (
-    <Box ml={{ _: undefined, md: 3 }} spacing={2}>
+    <Box ml={{ _: undefined, md: 3 }} spacing={3}>
       <Box spacing={2}>
         <Heading level={3} as="h2">
           <Box as="span" fontWeight="bold" display="flex" alignItems="center">
@@ -35,7 +35,7 @@ export function MiniTile(props: MiniTileProps) {
         </Box>
       )}
       <Box display="grid" gridTemplateColumns={{ _: '1fr', md: '1fr 1fr' }}>
-        <Box>{children}</Box>
+        <Box pr={{ _: 0, md: 3 }}>{children}</Box>
         <Box position="relative" pl={{ _: 0, md: 4 }}>
           <Box spacing={3} py={{ _: 3, md: 0 }}>
             {text}
@@ -48,8 +48,7 @@ export function MiniTile(props: MiniTileProps) {
 
 const Icon = styled.span(
   css({
-    width: asResponsiveArray({ _: '1.5rem', md: '2rem' }),
-    height: asResponsiveArray({ _: '2.5rem', md: '3rem' }),
+    height: '2.5rem',
     mr: asResponsiveArray({ _: 2, md: 3 }),
 
     svg: {

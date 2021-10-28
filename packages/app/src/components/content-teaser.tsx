@@ -60,7 +60,7 @@ export function ContentTeaser({
             category
           )}
         </Text>
-        <Heading level={variant === 'normal' ? 3 : 5} as="h2" color="blue">
+        <Heading level={variant === 'normal' ? 4 : 5} as="h2" color="blue">
           <HeadingLinkWithIcon
             href={
               isAbsoluteUrl(slug)

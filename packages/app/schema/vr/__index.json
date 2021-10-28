@@ -23,8 +23,7 @@
     "hospital_nice_sum",
     "g_number",
     "situations",
-    "vaccine_coverage_per_age_group",
-    "escalation_level"
+    "vaccine_coverage_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
@@ -93,9 +92,6 @@
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
-    },
-    "escalation_level": {
-      "$ref": "escalation_level.json"
     }
   },
   "$defs": {

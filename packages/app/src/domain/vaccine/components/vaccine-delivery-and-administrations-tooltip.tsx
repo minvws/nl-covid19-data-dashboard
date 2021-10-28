@@ -12,7 +12,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
     data;
 
   const firstConfig = config
-    .filter((x): x is LineSeriesDefinition<T> => x.type === 'line')
+    .filter((x): x is LineSeriesDefinition<T> => x.type === 'invisible')
     .find((x) => x.metricProperty === 'total');
 
   const otherConfigs = config.filter((x) => x !== firstConfig);
@@ -21,7 +21,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
     return null;
   }
 
-  const configs = [firstConfig, ...otherConfigs];
+  const configs = [...otherConfigs, firstConfig];
 
   return (
     <TooltipSeriesListContainer

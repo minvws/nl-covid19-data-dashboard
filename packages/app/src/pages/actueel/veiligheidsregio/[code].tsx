@@ -1,13 +1,14 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrHospitalNiceValue,
   VrVaccineCoveragePerAgeGroupValue,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import { Chevron, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
@@ -141,6 +142,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     )
   );
 
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
@@ -161,16 +167,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniTileSelectorLayout
                 link={{
-                  text: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.text,
-                    {
-                      safetyRegionName: vrName,
-                    }
-                  ),
-                  href: replaceVariablesInText(
-                    text.secties.actuele_situatie.link.href,
-                    { vrCode }
-                  ),
+                  text: replaceVariablesInText(text.title_link, {
+                    safetyRegionName: vrName,
+                  }),
+                  href: reverseRouter.vr.index(vrCode),
                 }}
                 menuItems={[
                   {
@@ -226,14 +226,21 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                         ]}
                       />
                       <LinkWithIcon
                         href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {
                           text.mini_trend_tiles.ziekenhuis_opnames
@@ -255,15 +262,12 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
@@ -310,9 +314,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         </Box>
                         <LinkWithIcon
                           href={reverseRouter.vr.vaccinaties(vrCode)}
-                          icon={<ArrowIconRight />}
+                          icon={<Chevron />}
                           iconPlacement="right"
-                          fontWeight="bold"
                         >
                           {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
                         </LinkWithIcon>
@@ -338,6 +341,33 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               </MiniTileSelectorLayout>
             </Box>
+
+            <Box pt={4}>
+              <Search title={siteText.common_actueel.secties.search.title.vr} />
+            </Box>
+
+            <VaccinationCoverageChoropleth
+              title={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .title.vr,
+                { safetyRegion: vrName }
+              )}
+              content={replaceVariablesInText(
+                siteText.common_actueel.secties.vaccination_coverage_choropleth
+                  .content.vr,
+                { safetyRegion: vrName }
+              )}
+              vrCode={vrCode}
+              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+              link={{
+                href: reverseRouter.vr.vaccinaties(vrCode),
+                text: replaceVariablesInText(
+                  siteText.common_actueel.secties
+                    .vaccination_coverage_choropleth.link_text.vr,
+                  { safetyRegion: vrName }
+                ),
+              }}
+            />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
@@ -374,25 +404,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
-
-            <VaccinationCoverageChoropleth
-              title={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.vr,
-                { safetyRegion: vrName }
-              )}
-              content={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .content.vr,
-                { safetyRegion: vrName }
-              )}
-              vrCode={vrCode}
-              data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
-            />
-
-            <Box pt={4} pb={5}>
-              <Search title={siteText.common_actueel.secties.search.title.vr} />
-            </Box>
           </TileList>
         </MaxWidth>
 
@@ -400,7 +411,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth
-            spacing={3}
+            spacing={4}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >

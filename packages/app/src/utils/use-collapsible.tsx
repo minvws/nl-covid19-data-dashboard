@@ -94,7 +94,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
       id={id}
       aria-hidden={isOpen ? 'false' : 'true'}
       width="100%"
-      overflow="hidden"
+      overflow={isOpen ? 'visible' : 'hidden'}
       animate={isOpen ? 'open' : 'rest'}
       transition={{
         duration: 0.2,

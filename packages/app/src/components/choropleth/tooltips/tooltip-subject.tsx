@@ -38,7 +38,7 @@ export function TooltipSubject({
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'nowrap',
-          whiteSpace: 'nowrap',
+          whiteSpace: 'pre-wrap',
         })}
       >
         {children}
@@ -47,7 +47,7 @@ export function TooltipSubject({
           height={13}
           width={13}
           borderRadius={'2px'}
-          ml={1}
+          ml={'auto'}
           backgroundColor={color}
         />
       </Box>

@@ -1,6 +1,7 @@
 import {
   assert,
   DateSpanValue,
+  DAY_IN_SECONDS,
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
@@ -130,7 +131,7 @@ export function getTimeDomain<T extends TimestampedValue>({
    */
   if (isEmpty(values)) {
     const todayInSeconds = today.getTime() / 1000;
-    return [todayInSeconds, todayInSeconds + ONE_DAY_IN_SECONDS];
+    return [todayInSeconds, todayInSeconds + DAY_IN_SECONDS];
   }
 
   /**
@@ -151,7 +152,7 @@ export function getTimeDomain<T extends TimestampedValue>({
      * within the "stretched" domain on both ends of the graph.
      */
     return withPadding
-      ? [start - ONE_DAY_IN_SECONDS / 2, end + ONE_DAY_IN_SECONDS / 2]
+      ? [start - DAY_IN_SECONDS / 2, end + DAY_IN_SECONDS / 2]
       : [start, end];
   }
 
@@ -170,8 +171,6 @@ export function getTimeDomain<T extends TimestampedValue>({
   );
 }
 
-const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-
 /**
  * Calculate the width that one value spans on the chart x-axis. This assumes
  * that all values have consistent timestamps, and that date spans all span the
@@ -185,7 +184,7 @@ function getDateSpanWidth<T extends TimestampedValue>(
   xScale: ScaleLinear<number, number>
 ) {
   if (isDateSeries(values)) {
-    return xScale(ONE_DAY_IN_SECONDS) - xScale(0);
+    return xScale(DAY_IN_SECONDS) - xScale(0);
   }
 
   if (isDateSpanSeries(values)) {

@@ -1,6 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import { geoConicConformal, geoMercator } from 'd3-geo';
 import fs from 'fs';
+import hash from 'hash-sum';
 import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
@@ -14,16 +15,12 @@ import {
   getChoroplethFeatures,
   getFeatureProps,
   getFillColor,
-  gmGeo,
-  inGeo,
   MapType,
-  nlGeo,
-  vrGeo,
 } from '~/components/choropleth/logic';
+import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
-import { hash } from '~/utils/api/hash';
 /**
  * The combination node-canvas and sharp leads to runtime crashes under Windows, this
  * ENV variable disables compression. By conditionally importing the sharp lib we
@@ -161,6 +158,20 @@ async function generateChoroplethImage(
 
   const features = getChoroplethFeatures(map, data, geoJson, selectedCode);
 
+  const fitExtent: FitExtent = [
+    [
+      [0, 0],
+      [width, height],
+    ],
+    features.boundingBox,
+  ];
+
+  const [projectedGeoInfo] = getProjectedCoordinates(
+    features.hover,
+    mapProjection,
+    fitExtent
+  );
+
   const fColor = getFillColor(data, map, dataConfig);
   const fillColor = (code: string, index: number) => {
     if (code === 'VR19') {
@@ -175,20 +186,6 @@ async function generateChoroplethImage(
   };
 
   const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
-
-  const fitExtent: FitExtent = [
-    [
-      [0, 0],
-      [width, height],
-    ],
-    features.boundingBox,
-  ];
-
-  const [projectedGeoInfo] = getProjectedCoordinates(
-    features.hover,
-    mapProjection,
-    fitExtent
-  );
 
   const stage = new Konva.Stage({
     width,
