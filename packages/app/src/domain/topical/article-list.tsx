@@ -25,6 +25,7 @@ export function ArticleList({ articles }: ArticleListProps) {
           cover={item.cover}
           category={item.category}
           variant="small"
+          isArticle
         />
       ))}
     </Box>
