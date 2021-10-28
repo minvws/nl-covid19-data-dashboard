@@ -37,7 +37,7 @@ export const topicalPage = {
             },
             {
               name: 'href',
-              type: 'string',
+              type: 'localeString',
               title: 'Link naar pagina',
               validation: (rule: Rule) => rule.required(),
             },
