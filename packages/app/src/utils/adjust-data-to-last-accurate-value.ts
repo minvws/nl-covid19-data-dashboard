@@ -11,7 +11,7 @@ export function adjustDataToLastAccurateValue<T>(
 ) {
   const numberOfItems = countTrailingNullValues(data.values, metricProperty);
 
-  if (numberOfItems >= data.values.length) {
+  if (numberOfItems >= data.values.length || numberOfItems === 0) {
     return data;
   }
 
