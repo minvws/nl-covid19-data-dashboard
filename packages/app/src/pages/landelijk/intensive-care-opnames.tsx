@@ -250,6 +250,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             description={text.linechart_description}
             metadata={{ source: text.bronnen.nice }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -299,6 +300,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             description={text.chart_bedbezetting.description}
             metadata={{ source: text.bronnen.lnaz }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -333,6 +335,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={siteText.ic_admissions_per_age_group.chart_title}
             description={siteText.ic_admissions_per_age_group.chart_description}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
             metadata={{ source: text.bronnen.nice }}
           >
             {(timeframe) => (
