@@ -62,6 +62,9 @@ export function ReproductionChartTile({
             },
           ]}
           numGridLines={timeframe === 'all' ? 4 : 3}
+          dataOptions={{
+            minimumRange: 1,
+          }}
         />
       )}
     </ChartTile>
