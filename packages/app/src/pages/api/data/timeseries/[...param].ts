@@ -108,8 +108,6 @@ function createTimestamp(dateStr: string | undefined): number {
   if (isDefined(dateStr)) {
     // Suffix the date string with a Z to indicate that this is a UTC date:
     const parsedDate = parseISO(`${dateStr}Z`);
-    console.log('dateStr', dateStr);
-    console.log('unix time', getUnixTime(parsedDate));
     return getUnixTime(parsedDate);
   }
   return NaN;
