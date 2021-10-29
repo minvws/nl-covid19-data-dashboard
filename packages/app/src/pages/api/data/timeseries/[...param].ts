@@ -31,6 +31,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (!isDefined(metricProperty)) {
         data.values = sortTimeSeriesValues(data.values);
       }
+
       if (isDefined(start) || isDefined(end)) {
         data.values = filterByDateSpan(
           data.values,
@@ -39,6 +40,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         );
         data.last_value = last(data.values);
       }
+
       res
         .status(200)
         .json(
