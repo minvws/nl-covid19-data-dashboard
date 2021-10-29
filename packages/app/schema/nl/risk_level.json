@@ -26,6 +26,12 @@
           "type": "integer",
           "enum": [1, 2, 3]
         },
+        "hospital_admissions_on_date_of_admission_moving_average_rounded": {
+          "type": "integer"
+        },
+        "intensive_care_admissions_on_date_of_admission_moving_average_rounded": {
+          "type": "integer"
+        },
         "last_calculated_unix": {
           "type": "integer"
         },
@@ -38,6 +44,8 @@
       },
       "required": [
         "risk_level",
+        "hospital_admissions_on_date_of_admission_moving_average_rounded",
+        "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
         "last_calculated_unix",
         "valid_from_unix",
         "date_of_insertion_unix"

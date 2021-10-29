@@ -599,6 +599,8 @@ export interface NlRiskLevel {
 }
 export interface NlRiskLevelValue {
   risk_level: 1 | 2 | 3;
+  hospital_admissions_on_date_of_admission_moving_average_rounded: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded: number;
   last_calculated_unix: number;
   valid_from_unix: number;
   date_of_insertion_unix: number;
