@@ -195,6 +195,7 @@ export function TimeSeriesChart<
     timespanAnnotations,
     timeAnnotations,
     timelineEvents,
+    minimumRange,
   } = dataOptions || {};
 
   const {
@@ -258,6 +259,7 @@ export function TimeSeriesChart<
     minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: yTickValues?.length || numGridLines,
+    minimumRange,
   });
 
   const legendItems = useLegendItems(

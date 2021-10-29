@@ -13,6 +13,7 @@ export interface DataOptions {
   timeAnnotations?: TimeAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
   renderNullAsZero?: boolean;
+  minimumRange?: number;
 }
 
 export interface BenchmarkConfig {
