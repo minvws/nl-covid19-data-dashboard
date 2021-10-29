@@ -66,7 +66,7 @@ export function Bar({
           <InlineText
             css={css({
               background:
-                'linear-gradient(90deg, rgba(0,0,0,0) 0, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(0,0,0,0) 100%)',
+                'linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(255,255,255,0) 100%)',
               position: 'absolute',
               display: 'flex',
               justifyContent: 'center',

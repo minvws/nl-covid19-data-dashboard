@@ -28,9 +28,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const data = loadMetricData(root, metric);
     if (isDefined(data) && isDefined(data.values)) {
-      if (!isDefined(metricProperty)) {
-        data.values = sortTimeSeriesValues(data.values);
-      }
+      data.values = sortTimeSeriesValues(data.values);
 
       if (isDefined(start) || isDefined(end)) {
         data.values = filterByDateSpan(

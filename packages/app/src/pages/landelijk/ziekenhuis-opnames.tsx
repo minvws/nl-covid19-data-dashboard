@@ -218,12 +218,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   },
                   {
                     metricProperty: 'has_one_shot',
-                    color: colors.data.cyan,
+                    color: colors.data.partial_vaccination,
                     label: text.vaccination_status_chart.labels.has_one_shot,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
-                    color: colors.data.multiseries.cyan_dark,
+                    color: colors.data.primary,
                     label:
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },
@@ -298,6 +298,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.nice,
             }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -348,6 +349,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               siteText.hospital_admissions_per_age_group.chart_description
             }
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
             metadata={{ source: text.bronnen.nice }}
           >
             {(timeframe) => (
@@ -368,6 +370,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.lnaz,
             }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -378,7 +381,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'gapped-area',
                     metricProperty: 'beds_occupied_covid',
                     label: text.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,
