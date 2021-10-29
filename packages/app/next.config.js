@@ -145,7 +145,7 @@ const nextConfig = {
 
     const duplicatePackageResolves = [
       ['balanced-match', '../../node_modules/balanced-match'],
-      ['d3-array', '../node_modules/d3-array'],
+      ['d3-array', '../../node_modules/d3-array'],
       ['d3-color', '../../node_modules/d3-scale/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-scale/node_modules/d3-interpolate'],
