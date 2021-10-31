@@ -13,6 +13,7 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "dev": "tsc -w",
+    "build:watch": "chokidar \"./src/**/*.*\" -c \"yarn build\"",
     "build": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "npx rimraf dist tsconfig.tsbuildinfo",
     "nuke": "yarn clean && npx rimraf node_modules",
