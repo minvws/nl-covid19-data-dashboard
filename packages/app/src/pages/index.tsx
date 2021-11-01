@@ -245,15 +245,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty: 'age_18_plus_fully_vaccinated',
                     value:
                       data.vaccine_coverage_per_age_group_estimated.last_value
-                        ?.age_18_plus_fully_vaccinated ?? 0,
+                        ?.age_18_plus_fully_vaccinated,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
                       'vaccine_coverage_per_age_group_estimated'
                     ),
-                    hideSparkBar:
-                      data.vaccine_coverage_per_age_group_estimated.values
-                        .length < 7,
+                    percentageBar: {
+                      value:
+                        data.vaccine_coverage_per_age_group_estimated.last_value
+                          ?.age_18_plus_fully_vaccinated,
+                    },
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
                 ]}
               >
