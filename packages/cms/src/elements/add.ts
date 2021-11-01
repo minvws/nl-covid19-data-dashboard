@@ -1,3 +1,4 @@
+import { DataScopeKey } from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import prompts from 'prompts';
 import { isDefined } from 'ts-is-present';
@@ -5,11 +6,10 @@ import { getClient } from '../client';
 import {
   getSchemaMetricProperties,
   getSchemaMetrics,
-  Scope,
 } from './logic/get-schema';
 
 type Element = {
-  scope: Scope;
+  scope: DataScopeKey;
   metricName: string;
   metricProperty: string | undefined;
   _type: ElementType;
@@ -53,7 +53,7 @@ async function promptForElement(): Promise<Element | undefined> {
     message: 'Select the scope for this element:',
     choices,
     onState,
-  })) as { scope: Scope };
+  })) as { scope: DataScopeKey };
 
   element.scope = scopeResponse.scope;
 

@@ -195,7 +195,6 @@ export function TimeSeriesChart<
     timespanAnnotations,
     timeAnnotations,
     timelineEvents,
-    minimumRange,
   } = dataOptions || {};
 
   const {
@@ -243,6 +242,13 @@ export function TimeSeriesChart<
       ? forcedMaximumValue(calculatedSeriesMax)
       : forcedMaximumValue
     : calculatedSeriesMax;
+
+  const minimumRanges = seriesConfig
+    .map((c) => c.minimumRange)
+    .filter(isDefined);
+  const minimumRange = minimumRanges.length
+    ? Math.max(...minimumRanges)
+    : undefined;
 
   const {
     xScale,

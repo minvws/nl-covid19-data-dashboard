@@ -39,9 +39,8 @@ export interface Feature {
   metricProperties?: string[];
 }
 
-export type MetricScope = 'in' | 'nl' | 'vr' | 'gm';
 export type JsonDataScope =
-  | MetricScope
+  | DataScopeKey
   | 'in_collection'
   | 'vr_collection'
   | 'gm_collection';
