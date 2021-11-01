@@ -1,2 +1,10 @@
 timestamp,action,key,document_id,move_to
 2021-11-01T08:20:26.361Z,add,positief_geteste_personen.tooltip_labels.infected_overall,Pei0Nqv2MstfonnkJ0CTdL,__
+2021-11-01T14:00:00.698Z,add,deceased_age_groups.graph.left_title,Pei0Nqv2MstfonnkJ2rQ7D,__
+2021-11-01T14:00:02.131Z,add,deceased_age_groups.graph.left_tooltip,Pei0Nqv2MstfonnkJ2rQcZ,__
+2021-11-01T14:00:03.260Z,add,deceased_age_groups.graph.right_title,XIsMg3WYidPwwGdwwxpZkm,__
+2021-11-01T14:00:04.795Z,add,deceased_age_groups.graph.right_tooltip,G6M7GhzH8XbtdKiRsGFHGQ,__
+2021-11-01T14:00:04.803Z,delete,deceased_age_groups.graph.age_group_percentage_title,jF33EuwumlGuwav2FD45dU,__
+2021-11-01T14:00:04.811Z,delete,deceased_age_groups.graph.age_group_percentage_tooltip,jF33EuwumlGuwav2FD45fA,__
+2021-11-01T14:00:04.818Z,delete,deceased_age_groups.graph.value_percentage_title,jF33EuwumlGuwav2FD45gq,__
+2021-11-01T14:00:04.842Z,delete,deceased_age_groups.graph.value_percentage_tooltip,jF33EuwumlGuwav2FD45iW,__

@@ -1,4 +1,33 @@
-export type Color = keyof typeof colors | `data.${keyof typeof colors['data']}`;
+import { O } from 'ts-toolbelt';
+/**
+ * See: https://stackoverflow.com/a/47058976
+ *
+ * First we can use recursive conditional types as implemented in microsoft/TypeScript#40002
+ * and variadic tuple types as implemented in microsoft/TypeScript#39094 to turn an object type
+ * into a union of tuples of keys corresponding to its string-valued properties:
+ */
+type PathsToStringProps<T> = T extends string
+  ? []
+  : {
+      [K in Extract<keyof T, string>]: [K, ...PathsToStringProps<T[K]>];
+    }[Extract<keyof T, string>];
+
+/**
+ * And then we can use template string types to join a tuple of string literals into a dotted path
+ * (or any delimiter)
+ */
+type Join<T extends string[], D extends string> = T extends []
+  ? never
+  : T extends [infer F]
+  ? F
+  : T extends [infer F, ...infer R]
+  ? F extends string
+    ? `${F}${D}${Join<Extract<R, string[]>, D>}`
+    : never
+  : string;
+
+type ColorsWithoutRanges = O.Omit<typeof colors, 'data.scale'>;
+export type Color = Join<PathsToStringProps<ColorsWithoutRanges>, '.'>;
 export type DataColor = keyof Omit<typeof colors['data'], 'scale'>;
 
 const multiseries = {

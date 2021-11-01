@@ -179,7 +179,10 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 key: 'deceased_per_age_group_over_time_chart',
               }}
               data={dataDeceasedPerAgeGroup}
-              metricProperty="covid_percentage"
+              rightMetricProperty="covid_percentage"
+              leftMetricProperty="age_group_percentage"
+              rightColor={'data.primary'}
+              leftColor={'data.neutral'}
               displayMaxPercentage={45}
               text={siteText.deceased_age_groups.graph}
             />

@@ -1,3 +1,4 @@
+import type { Color, KeysOfType } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
@@ -15,13 +16,19 @@ import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 
 export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   data,
-  metricProperty,
+  rightMetricProperty,
+  leftMetricProperty,
+  rightColor,
+  leftColor,
   displayMaxPercentage,
   text,
   accessibility,
 }: {
   data: { values: T[] };
-  metricProperty: keyof T;
+  rightMetricProperty: KeysOfType<T, number, true>;
+  leftMetricProperty: KeysOfType<T, number, true>;
+  rightColor: Color;
+  leftColor: Color;
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -32,7 +39,8 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
 }) {
   const [ref, coordinates] = useAgeDemographicCoordinates(
     data,
-    metricProperty,
+    rightMetricProperty,
+    leftMetricProperty,
     displayMaxPercentage
   );
 
@@ -58,7 +66,10 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
             onMouseLeaveBar={closeTooltip}
             onKeyInput={keyboardNavigateTooltip}
             displayMaxPercentage={displayMaxPercentage}
-            metricProperty={metricProperty}
+            rightMetricProperty={rightMetricProperty}
+            leftMetricProperty={leftMetricProperty}
+            rightColor={rightColor}
+            leftColor={leftColor}
             text={text}
           />
         </div>
@@ -71,7 +82,10 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
           {tooltipState.value && (
             <AgeDemographicTooltipContent
               value={tooltipState.value}
-              metricProperty={metricProperty}
+              rightMetricProperty={rightMetricProperty}
+              leftMetricProperty={leftMetricProperty}
+              rightColor={rightColor}
+              leftColor={leftColor}
               text={text}
             />
           )}
