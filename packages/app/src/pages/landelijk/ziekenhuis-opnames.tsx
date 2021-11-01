@@ -233,6 +233,96 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
+          <ChartTile
+            title={text.linechart_titel}
+            description={text.linechart_description}
+            metadata={{
+              source: text.bronnen.nice,
+            }}
+            timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_admissions_over_time_chart',
+                }}
+                values={dataHospitalNice.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label: text.linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: text.linechart_legend_titel,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedRange,
+                      end: Infinity,
+                      label: text.linechart_legend_underreported_titel,
+                      shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'admissions_on_date_of_admission_moving_average',
+                      ],
+                    },
+                  ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
+                }}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
+            title={text.chart_bedbezetting.title}
+            description={text.chart_bedbezetting.description}
+            metadata={{
+              source: text.bronnen.lnaz,
+            }}
+            timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_beds_occupied_over_time_chart',
+                }}
+                values={dataHospitalLcps.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'gapped-area',
+                    metricProperty: 'beds_occupied_covid',
+                    label: text.chart_bedbezetting.legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataHospitalLcps.values[0].date_unix,
+                      end: new Date('1 June 2020').getTime() / 1000,
+                      label: text.chart_bedbezetting.legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
+            )}
+          </ChartTile>
+
           <ChoroplethTile
             title={text.map_titel}
             description={text.map_toelichting}
@@ -293,58 +383,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </ChoroplethTile>
 
           <ChartTile
-            title={text.linechart_titel}
-            description={text.linechart_description}
-            metadata={{
-              source: text.bronnen.nice,
-            }}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
-          >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'hospital_admissions_over_time_chart',
-                }}
-                values={dataHospitalNice.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
-                    label: text.linechart_legend_titel_moving_average,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label: text.linechart_legend_titel,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedRange,
-                      end: Infinity,
-                      label: text.linechart_legend_underreported_titel,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'hospital_nice'
-                  ),
-                }}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
             title={siteText.hospital_admissions_per_age_group.chart_title}
             description={
               siteText.hospital_admissions_per_age_group.chart_description
@@ -360,44 +398,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.hospital_nice_per_age_group.values}
                 timeframe={timeframe}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
-            title={text.chart_bedbezetting.title}
-            description={text.chart_bedbezetting.description}
-            metadata={{
-              source: text.bronnen.lnaz,
-            }}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
-          >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'hospital_beds_occupied_over_time_chart',
-                }}
-                values={dataHospitalLcps.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'gapped-area',
-                    metricProperty: 'beds_occupied_covid',
-                    label: text.chart_bedbezetting.legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataHospitalLcps.values[0].date_unix,
-                      end: new Date('1 June 2020').getTime() / 1000,
-                      label: text.chart_bedbezetting.legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>
