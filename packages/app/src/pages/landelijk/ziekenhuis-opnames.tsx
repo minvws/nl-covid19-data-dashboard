@@ -6,6 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useState } from 'react';
+import { AgeDemographicChart } from '~/components/age-demographic/age-demographic-chart';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
