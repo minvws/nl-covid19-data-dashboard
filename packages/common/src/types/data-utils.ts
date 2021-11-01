@@ -35,6 +35,6 @@ type ValueKeys<T> = T extends ValuesMetric<infer V> ? ValueKeys<V> : keyof T;
  * The metric properties of metric M in data scope S (scope being In/Nl/Vr/Gm)
  */
 export type MetricProperty<
-  S extends ScopedData[DataScopeKey],
+  S extends DataScope,
   M extends MetricKeys<S>
 > = ValueKeys<S[M]>;
