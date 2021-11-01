@@ -136,7 +136,13 @@ export const features: Feature[] = [
     metricName: 'intensive_care_vaccination_status',
   },
   {
-    name: 'nlVaccinationVaccinationStatus',
+    name: 'nlVaccinationHospitalVaccinationStatus',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccination_status',
+  },
+  {
+    name: 'nlVaccinationIntensiveCareVaccinationStatus',
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'intensive_care_vaccination_status',
