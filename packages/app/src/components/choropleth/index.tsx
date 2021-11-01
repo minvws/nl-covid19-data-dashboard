@@ -8,7 +8,6 @@ import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { ChoroplethMap } from './components/choropleth-map';
