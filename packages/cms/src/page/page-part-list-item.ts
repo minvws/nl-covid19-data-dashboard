@@ -35,9 +35,12 @@ function pageDataListItem(page: any) {
     .icon(RiPagesFill)
     .child(
       documentStore
-        .listenQuery(`*[pageIdentifier._ref == $id]`, {
-          id: page._id,
-        })
+        .listenQuery(
+          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]`,
+          {
+            id: page._id,
+          }
+        )
         .pipe(
           map((childPages: any) =>
             S.list()

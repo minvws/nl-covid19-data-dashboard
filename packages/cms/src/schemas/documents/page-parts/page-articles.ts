@@ -7,7 +7,7 @@ export const pageArticles = {
   name: 'pageArticles',
   type: 'document',
   fields: [
-    PAGE_IDENTIFIER_FIELDS,
+    ...PAGE_IDENTIFIER_FIELDS,
     {
       title: 'Artikel soort',
       name: 'articleKind',
@@ -28,16 +28,13 @@ export const pageArticles = {
       type: 'array',
       of: [{ type: 'reference', to: { type: 'article' } }],
       validation: (rule: Rule) =>
-        rule
-          .required()
-          .unique()
-          .custom((_: any, context: any) => {
-            const max = context.parent.maxNumber ?? 0;
-            if (max > 0 && context.parent.articles.length > max) {
-              return `Maximaal ${max} artikelen toegestaan`;
-            }
-            return true;
-          }),
+        rule.unique().custom((_: any, context: any) => {
+          const max = context.parent?.maxNumber ?? 0;
+          if (max > 0 && context.parent?.articles?.length > max) {
+            return `Maximaal ${max} artikelen toegestaan`;
+          }
+          return true;
+        }),
     },
   ],
 };
