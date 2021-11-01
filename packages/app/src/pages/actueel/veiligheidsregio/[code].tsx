@@ -209,8 +209,13 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'vaccinatiegraad'
                     ),
-                    hideSparkBar:
-                      data.vaccine_coverage_per_age_group.values.length < 7,
+                    percentageBar: {
+                      value:
+                        filteredAgeGroup18Plus?.fully_vaccinated_percentage ??
+                        null,
+                      label:
+                        filteredAgeGroup18Plus?.fully_vaccinated_percentage_label,
+                    },
                   } as MiniTileSelectorItem<VrVaccineCoveragePerAgeGroupValue>,
                 ]}
               >
