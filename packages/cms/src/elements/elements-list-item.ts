@@ -20,26 +20,29 @@ export function elementsListItem() {
 
               return documentStore
                 .listenQuery(
-                  `*[_type in $types]{ scope, metricName, metricProperty }`,
+                  `*[_type in $types]{ scope, metricName, metricProperty, _type }`,
                   { types }
                 )
                 .pipe(
-                  map((doc: { scope: string }[]) => {
-                    const scopes = uniq(doc.map((x) => x.scope));
+                  map((doc: { scope: string; _type: string }[]) => {
+                    const scopeInfos = uniq(
+                      doc.map((x) => ({ scope: x.scope, type: x._type }))
+                    );
 
                     return S.list()
                       .title('Scope')
                       .items(
-                        scopes
-                          .sort((a, b) => a.localeCompare(b))
-                          .map((scope) =>
+                        scopeInfos
+                          .sort((a, b) => a.scope.localeCompare(b.scope))
+                          .map((scopeInfo) =>
                             S.listItem()
-                              .title(scope)
-                              .id(scope)
+                              .title(scopeInfo.scope)
+                              .id(scopeInfo.scope)
                               .child(
                                 S.documentList()
-                                  .id(`${scope}-element`)
+                                  .id(`${scopeInfo}-element`)
                                   .title('Element')
+                                  .schemaType(scopeInfo.type)
                                   .defaultOrdering([
                                     { field: 'metricName', direction: 'asc' },
                                     { field: '_type', direction: 'asc' },
@@ -49,12 +52,13 @@ export function elementsListItem() {
                                     },
                                   ])
                                   .filter('scope == $scope')
-                                  .params({ scope })
+                                  .params({ scope: scopeInfo })
                                   .child((id) =>
                                     S.editor()
                                       .id(id)
                                       .title(id)
                                       .documentId(id)
+                                      .schemaType(scopeInfo.type)
                                       .views([S.view.form()])
                                   )
                               )

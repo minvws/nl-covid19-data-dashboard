@@ -72,6 +72,13 @@ const actionsByDocumentType = {
     DuplicateAction,
     DeleteAction,
   ],
+  pageIdentifier: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
 };
 
 type DocumentType = keyof typeof actionsByDocumentType;
