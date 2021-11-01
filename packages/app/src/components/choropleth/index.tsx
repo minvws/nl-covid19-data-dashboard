@@ -8,7 +8,6 @@ import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { ChoroplethMap } from './components/choropleth-map';
@@ -127,7 +126,6 @@ export function Choropleth<T extends ChoroplethDataItem>({
   ...props
 }: ChoroplethProps<T>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<T>>();
-  const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
   const hoverRef = useRef<SVGGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -156,10 +154,7 @@ export function Choropleth<T extends ChoroplethDataItem>({
         />
 
         {tooltip && (
-          <div
-            ref={tooltipRef}
-            style={{ pointerEvents: isTouch ? 'all' : 'none' }}
-          >
+          <div ref={tooltipRef} style={{ pointerEvents: 'none' }}>
             <Tooltip
               placement={tooltipPlacement}
               left={tooltip.left}
