@@ -6,8 +6,9 @@ import { useMemo } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
+const ICON_SIZE = 55;
 
 interface SeriesConfigType<T> {
   metricProperty: KeysOfType<T, number, true>;
@@ -81,10 +82,30 @@ export function PieChart<T>({
       >
         <Box
           alignSelf={{ _: 'center', xs: 'self-start' }}
-          height={innerHeight}
+          height={innerSize}
           position="relative"
+          marginLeft={{ xs: paddingLeft }}
         >
-          {icon && <Box width={36} height={36} backgroundColor="red" />}
+          {icon && (
+            <Box
+              width={ICON_SIZE}
+              height={ICON_SIZE}
+              top={`calc(50% - ${ICON_SIZE / 2}px)`}
+              left={`calc(50% - ${ICON_SIZE / 2}px)`}
+              position="absolute"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              css={css({
+                svg: {
+                  height: '100%',
+                  fill: 'silver',
+                },
+              })}
+            >
+              {icon}
+            </Box>
+          )}
 
           <svg
             width={innerSize}
@@ -92,7 +113,6 @@ export function PieChart<T>({
             aria-hidden="true"
             css={css({
               minWidth: innerSize,
-              marginLeft: asResponsiveArray({ xs: paddingLeft }),
             })}
           >
             <Group top={innerSize / 2} left={innerSize / 2}>
