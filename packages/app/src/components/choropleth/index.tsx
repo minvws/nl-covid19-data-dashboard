@@ -127,7 +127,6 @@ export function Choropleth<T extends ChoroplethDataItem>({
   ...props
 }: ChoroplethProps<T>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<T>>();
-  const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
   const hoverRef = useRef<SVGGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -156,10 +155,7 @@ export function Choropleth<T extends ChoroplethDataItem>({
         />
 
         {tooltip && (
-          <div
-            ref={tooltipRef}
-            style={{ pointerEvents: isTouch ? 'all' : 'none' }}
-          >
+          <div ref={tooltipRef} style={{ pointerEvents: 'none' }}>
             <Tooltip
               placement={tooltipPlacement}
               left={tooltip.left}
