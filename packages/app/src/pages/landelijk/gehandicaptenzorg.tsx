@@ -224,7 +224,6 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',
