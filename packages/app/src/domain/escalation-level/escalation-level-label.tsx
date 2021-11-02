@@ -50,7 +50,7 @@ export function EscalationLevelLabel({
         </InlineText>
       </Box>
 
-      <Box pt="2px" pl={{ _: 0, sm: 2 }} maxWidth="maxWidthText">
+      <Box pt="2px" pl={{ _: 0, sm: 2 }} maxWidth={350}>
         <InlineText variant="body2" color="body">
           {replaceVariablesInText(
             validFrom === lastCalculated

@@ -495,7 +495,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner data={DUMMY_DATA} />
+            <EscalationLevelBanner data={DUMMY_DATA} hasLink />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
