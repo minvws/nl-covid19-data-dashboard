@@ -29,7 +29,19 @@
         "hospital_admissions_on_date_of_admission_moving_average_rounded": {
           "type": "integer"
         },
+        "hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix": {
+          "type": "integer"
+        },
+        "hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix": {
+          "type": "integer"
+        },
         "intensive_care_admissions_on_date_of_admission_moving_average_rounded": {
+          "type": "integer"
+        },
+        "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix": {
+          "type": "integer"
+        },
+        "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix": {
           "type": "integer"
         },
         "last_calculated_unix": {
@@ -45,7 +57,11 @@
       "required": [
         "risk_level",
         "hospital_admissions_on_date_of_admission_moving_average_rounded",
+        "hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
+        "hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
         "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
+        "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
+        "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
         "last_calculated_unix",
         "valid_from_unix",
         "date_of_insertion_unix"
