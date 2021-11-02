@@ -1540,7 +1540,7 @@ __metadata:
     eslint-plugin-risxss: ^2.1.0
     express: ^4.17.1
     flat: ^5.0.2
-    framer-motion: ^4.1.17
+    framer-motion: ^5.0.1
     geojson: ^0.5.0
     globby: ^12.0.2
     hash-sum: ^2.0.0
@@ -13601,12 +13601,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "framer-motion@npm:5.0.1"
+  dependencies:
+    "@emotion/is-prop-valid": ^0.8.2
+    framesync: 6.0.1
+    hey-listen: ^1.0.8
+    popmotion: 10.0.2
+    style-value-types: 5.0.0
+    tslib: ^2.1.0
+  peerDependencies:
+    react: ">=16.8 || ^17.0.0"
+    react-dom: ">=16.8 || ^17.0.0"
+  dependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+  checksum: f3b5c8879c8a04b7340f18086add982727a4d24489d09fe4cdabff61d70667da869b51013474deef579a95369fbd4fb979af4cdb3ac819aac9d491a1e644fd61
+  languageName: node
+  linkType: hard
+
 "framesync@npm:5.3.0":
   version: 5.3.0
   resolution: "framesync@npm:5.3.0"
   dependencies:
     tslib: ^2.1.0
   checksum: 9ebbb2863e6a1cfd2e9dd1b73af427d23caa03c92dd49ea767ebdd208c3a573bba4a1026f67068d856a21704f79adcdf2f750cc852ff73bc1f0e80edaaecded8
+  languageName: node
+  linkType: hard
+
+"framesync@npm:6.0.1, framesync@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "framesync@npm:6.0.1"
+  dependencies:
+    tslib: ^2.1.0
+  checksum: a23ebe8f7e20a32c0b99c2f8175b6f07af3ec6316aad52a2316316a6d011d717af8d2175dcc2827031c59fabb30232ed3e19a720a373caba7f070e1eae436325
   languageName: node
   linkType: hard
 
@@ -19757,6 +19786,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"popmotion@npm:10.0.2":
+  version: 10.0.2
+  resolution: "popmotion@npm:10.0.2"
+  dependencies:
+    framesync: ^6.0.1
+    hey-listen: ^1.0.8
+    style-value-types: 5.0.0
+    tslib: ^2.1.0
+  checksum: 6c793f637a5dd9861edca257eac523c2d6c1d895399e9320562c26c2f2a2d1288af1892925af5bc88e091e0444b4478f352772b7d1a5ba1b972cd889d1560d4a
+  languageName: node
+  linkType: hard
+
 "popmotion@npm:9.3.6":
   version: 9.3.6
   resolution: "popmotion@npm:9.3.6"
@@ -24370,6 +24411,16 @@ __metadata:
     hey-listen: ^1.0.8
     tslib: ^2.1.0
   checksum: 96189770076a2717bf579f7d73a49953f0c3d633b90fed9b44b8285cbbe7facd19d6d7a0d2802fb493b45995791f62b87983c3d3c24128818a69e593b6d77aed
+  languageName: node
+  linkType: hard
+
+"style-value-types@npm:5.0.0":
+  version: 5.0.0
+  resolution: "style-value-types@npm:5.0.0"
+  dependencies:
+    hey-listen: ^1.0.8
+    tslib: ^2.1.0
+  checksum: 16d198302cd102edf9dba94e7752a2364c93b1eaa5cc7c32b42b28eef4af4ccb5149a3f16bc2a256adc02616a2404f4612bd15f3081c1e8ca06132cae78be6c0
   languageName: node
   linkType: hard
 

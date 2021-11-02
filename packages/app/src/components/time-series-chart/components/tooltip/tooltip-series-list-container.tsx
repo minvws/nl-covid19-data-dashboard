@@ -52,7 +52,6 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
       }}
     >
       <VisuallyHidden>{dateString}</VisuallyHidden>
-
       {!displayTooltipValueOnly && isMounted && (
         /**
          * The width of the list is potentially influenced by long annotations,
@@ -62,6 +61,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
           <AnimatePresence>
             {timespanAnnotation && (
               <AppearTransition key="1">
+                TEST 1
                 <Text
                   variant="label2"
                   color={colors.annotation}
@@ -90,7 +90,6 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
           </AnimatePresence>
         </Box>
       )}
-
       <div ref={listRef}>{children}</div>
     </section>
   );
