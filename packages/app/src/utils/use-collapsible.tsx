@@ -92,6 +92,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   const content = (children: ReactNode) => (
     <MotionBox
       id={id}
+      layout
       aria-hidden={isOpen ? 'false' : 'true'}
       width="100%"
       overflow={isOpen ? 'visible' : 'hidden'}

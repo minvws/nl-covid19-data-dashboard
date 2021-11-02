@@ -61,7 +61,6 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
           <AnimatePresence>
             {timespanAnnotation && (
               <AppearTransition key="1">
-                TEST 1
                 <Text
                   variant="label2"
                   color={colors.annotation}
