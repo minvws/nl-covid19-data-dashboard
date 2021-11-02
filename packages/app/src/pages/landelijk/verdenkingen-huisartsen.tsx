@@ -52,7 +52,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.vroege_signalen}
+            category={siteText.nationaal_layout.headings.archief}
             screenReaderCategory={
               siteText.sidebar.metrics.general_practitioner_suspicions.title
             }

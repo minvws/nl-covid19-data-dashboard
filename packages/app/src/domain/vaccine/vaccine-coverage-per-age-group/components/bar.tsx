@@ -9,6 +9,7 @@ import { useIntl } from '~/intl';
 interface BarProps {
   value: number | null;
   color: string;
+  backgroundColor?: string;
   label?: string | null;
   height?: number;
   showAxisValues?: boolean;
@@ -17,6 +18,7 @@ interface BarProps {
 export function Bar({
   value,
   color,
+  backgroundColor = colors.data.underReported,
   label,
   height = 8,
   showAxisValues,
@@ -45,9 +47,7 @@ export function Bar({
             parsedVaccinatedLabel.sign === '>' ? 'hatched' : 'normal'
           }
           backgroundColor={
-            parsedVaccinatedLabel.sign === '>'
-              ? color
-              : colors.data.underReported
+            parsedVaccinatedLabel.sign === '>' ? color : backgroundColor
           }
         />
       ) : (
@@ -55,7 +55,7 @@ export function Bar({
           percentage={barValue}
           height={height}
           color={color}
-          backgroundColor="data.underReported"
+          backgroundColor={backgroundColor}
         />
       )}
       {showAxisValues && (
@@ -66,7 +66,7 @@ export function Bar({
           <InlineText
             css={css({
               background:
-                'linear-gradient(90deg, rgba(0,0,0,0) 0, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(0,0,0,0) 100%)',
+                'linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(255,255,255,0) 100%)',
               position: 'absolute',
               display: 'flex',
               justifyContent: 'center',

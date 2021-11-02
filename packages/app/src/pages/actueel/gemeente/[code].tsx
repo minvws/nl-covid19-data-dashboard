@@ -52,6 +52,7 @@ import {
 } from '~/static-props/get-data';
 import { assert } from '~/utils/assert';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -63,12 +64,21 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmData(
-    'hospital_nice',
-    'sewer',
-    'difference',
-    'vaccine_coverage_per_age_group'
-  ),
+  (context) => {
+    const data = selectGmData(
+      'hospital_nice',
+      'sewer',
+      'difference',
+      'vaccine_coverage_per_age_group'
+    )(context);
+
+    data.selectedGmData.hospital_nice.values = cutValuesFromTimeframe(
+      data.selectedGmData.hospital_nice.values,
+      '5weeks'
+    );
+
+    return data;
+  },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -222,8 +232,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'vaccinatiegraad'
                     ),
-                    hideSparkBar:
-                      data.vaccine_coverage_per_age_group.values.length < 7,
+                    percentageBar: {
+                      value:
+                        filteredAgeGroup18Plus?.fully_vaccinated_percentage ??
+                        null,
+                      label:
+                        filteredAgeGroup18Plus?.fully_vaccinated_percentage_label,
+                    },
                   } as MiniTileSelectorItem<GmVaccineCoveragePerAgeGroupValue>,
                 ]}
               >

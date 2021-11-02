@@ -39,7 +39,7 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
     `*[_type == 'lokalizeText' && ${NO_DRAFTS}]`
   )) as LokalizeText[];
 
-  const devDocuments = (await prdClient.fetch(
+  const devDocuments = (await devClient.fetch(
     `*[_type == 'lokalizeText' && ${NO_DRAFTS}]`
   )) as LokalizeText[];
 
