@@ -2,16 +2,19 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
+  NlIntensiveCareVaccinationStatusValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
+import dynamic from 'next/dynamic';
+import { AgeDemographicProps } from '~/components/age-demographic';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
-import { PieChart } from '~/components/pie-chart';
+import { PieChartProps } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -44,6 +47,15 @@ import { IntakeHospitalPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
+// TODO: Update any to the proper type when the schema is merged.
+const AgeDemographic = dynamic<AgeDemographicProps<any>>(() =>
+  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
+);
+
+const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
+  () => import('~/components/pie-chart').then((mod) => mod.PieChart)
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -91,6 +103,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccinationStatusFeature = useFeature(
     'nlIntensiveCareVaccinationStatus'
+  );
+
+  const icVaccinationIncidencePerAgeGroupFeature = useFeature(
+    'nlIcAdmissionsIncidencePerAgeGroup'
   );
 
   const sevenDayAverageDates: [number, number] = [
@@ -242,6 +258,52 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },
                 ]}
+              />
+            </ChartTile>
+          )}
+
+          {icVaccinationIncidencePerAgeGroupFeature.isEnabled && (
+            <ChartTile
+              title={
+                siteText.ic_admissions_incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.ic_admissions_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                data={{
+                  values: [
+                    {
+                      age_group_range: '75+',
+                      fully_vaccinated: 0.25,
+                      not_or_partially_vaccinated: 2.95,
+                    },
+                    {
+                      age_group_range: '50-74',
+                      fully_vaccinated: 0.14,
+                      not_or_partially_vaccinated: 1.85,
+                    },
+                    {
+                      age_group_range: '12-49',
+                      fully_vaccinated: 0.05,
+                      not_or_partially_vaccinated: 0.3,
+                    },
+                  ],
+                }}
+                accessibility={{
+                  key: 'ic_admissions_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'not_or_partially_vaccinated'}
+                rightMetricProperty={'fully_vaccinated'}
+                formatValue={(n: number) => `${n}`}
+                text={
+                  siteText.ic_admissions_incidence_age_demographic_chart
+                    .chart_text
+                }
               />
             </ChartTile>
           )}

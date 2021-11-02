@@ -16,7 +16,7 @@ interface SeriesConfigType<T> {
   label: string;
 }
 
-type PieChartProps<T> = {
+export interface PieChartProps<T> {
   data: T;
   dataConfig: SeriesConfigType<T>[];
   paddingLeft?: number;
@@ -25,7 +25,7 @@ type PieChartProps<T> = {
   padAngle?: number;
   minimumPercentage?: number;
   icon?: JSX.Element;
-};
+}
 
 export function PieChart<T>({
   data,

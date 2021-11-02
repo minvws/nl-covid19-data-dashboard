@@ -59,7 +59,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
   const content = props.content;
 
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
 
   const text = siteText.sterfte;
 
@@ -183,8 +183,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               leftMetricProperty="age_group_percentage"
               rightColor={'data.primary'}
               leftColor={'data.neutral'}
-              displayMaxPercentage={45}
+              maxDisplayValue={45}
               text={siteText.deceased_age_groups.graph}
+              formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
             />
           </ChartTile>
 

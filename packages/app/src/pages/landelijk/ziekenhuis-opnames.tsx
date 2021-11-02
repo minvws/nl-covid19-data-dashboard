@@ -2,10 +2,13 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
+  NlHospitalVaccinationStatusValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import { AgeDemographicProps } from '~/components/age-demographic';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -15,7 +18,7 @@ import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
-import { PieChart } from '~/components/pie-chart';
+import { PieChartProps } from '~/components/pie-chart';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -50,6 +53,15 @@ import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+// TODO: Update any to the proper type when the schema is merged.
+const AgeDemographic = dynamic<AgeDemographicProps<any>>(() =>
+  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
+);
+
+const PieChart = dynamic<PieChartProps<NlHospitalVaccinationStatusValue>>(() =>
+  import('~/components/pie-chart').then((mod) => mod.PieChart)
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -106,6 +118,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
   const vaccinationStatusFeature = useFeature('nlHospitalVaccinationStatus');
+
+  const isVaccinationIncidenceChartShown = useFeature(
+    'nlHospitalAdmissionsVaccineIncidencePerAgeGroup'
+  );
 
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const text = siteText.ziekenhuisopnames_per_dag;
@@ -229,6 +245,53 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },
                 ]}
+              />
+            </ChartTile>
+          )}
+
+          {isVaccinationIncidenceChartShown.isEnabled && (
+            <ChartTile
+              title={
+                siteText.hospital_admissions_incidence_age_demographic_chart
+                  .title
+              }
+              description={
+                siteText.hospital_admissions_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                data={{
+                  values: [
+                    {
+                      age_group_range: '75+',
+                      fully_vaccinated: 0.25,
+                      not_or_partially_vaccinated: 2.95,
+                    },
+                    {
+                      age_group_range: '50-74',
+                      fully_vaccinated: 0.14,
+                      not_or_partially_vaccinated: 1.85,
+                    },
+                    {
+                      age_group_range: '12-49',
+                      fully_vaccinated: 0.05,
+                      not_or_partially_vaccinated: 0.3,
+                    },
+                  ],
+                }}
+                accessibility={{
+                  key: 'hospital_admissions_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'not_or_partially_vaccinated'}
+                rightMetricProperty={'fully_vaccinated'}
+                formatValue={(n) => `${n}`}
+                text={
+                  siteText.hospital_admissions_incidence_age_demographic_chart
+                    .chart_text
+                }
               />
             </ChartTile>
           )}
