@@ -1,3 +1,4 @@
+import { NlRiskLevelValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
@@ -7,7 +8,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
@@ -26,12 +26,14 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
+// @TODO remove dummy data once data is avaliable
+const DUMMY_DATA = {
+  risk_level: 2,
+} as NlRiskLevelValue;
+
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
-  riskLevel: {
-    level: EscalationLevelType;
-  };
 };
 
 export const getStaticProps = createGetStaticProps(
@@ -57,9 +59,6 @@ export const getStaticProps = createGetStaticProps(
             ]
           },
         }
-      }[0],
-      'riskLevel': *[_type == 'riskLevelNational']{
-		    "level": riskLevel,
       }[0],
       // We will need the roadmap when lockdown is disabled in the CMS.
       // 'roadmap': *[_type == 'roadmap'][0]
@@ -126,10 +125,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{lockdown.title}</Heading>
-                <LockdownTable
-                  data={lockdown}
-                  level={content.riskLevel.level}
-                />
+                <LockdownTable data={lockdown} level={DUMMY_DATA.risk_level} />
               </Box>
             </Tile>
           )}

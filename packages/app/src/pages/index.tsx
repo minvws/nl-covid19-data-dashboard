@@ -25,7 +25,6 @@ import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -103,10 +102,6 @@ export const getStaticProps = createGetStaticProps(
     articles: ContentTeaserProps[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights: ContentTeaserProps[];
-    riskLevel: {
-      dateFrom: string;
-      level: EscalationLevelType;
-    };
     elements: ElementsQueryResult;
   }>(
     getTopicalPageQuery('nl', [

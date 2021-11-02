@@ -44,11 +44,7 @@ export function getTopicalPageQuery(
           }
         }
       }[0].articles,
-      'elements': ${createElementsQuery(code, elementNames, locale)},
-      'riskLevel': *[_type == 'riskLevelNational']{
-		    "level": riskLevel,
-		    "dateFrom": date,
-      }[0]
+      'elements': ${createElementsQuery(code, elementNames, locale)}
     }`;
   };
 }
