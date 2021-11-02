@@ -1,9 +1,11 @@
 import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
-import { colors } from '@corona-dashboard/common';
+import { colors, colors } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { scaleLinear } from '@visx/scale';
 
 const BAR_WIDTH = 5;
 const BAR_HEIGHT = 16;
+const BORDER_HEIGHT = 2;
 
 type SparkBarsProps<T extends TimestampedValue> = {
   averageProperty: KeysOfType<T, number | null, true>;
@@ -31,11 +33,14 @@ export function SparkBars<T extends TimestampedValue>(
   return (
     <svg
       width="100%"
-      height={BAR_HEIGHT}
+      height={BAR_HEIGHT + 2}
       role="img"
       aria-hidden="true"
       focusable="false"
-      viewBox={`0 0 ${BAR_WIDTH * 7} ${BAR_HEIGHT}`}
+      viewBox={`0 0 ${BAR_WIDTH * 7} ${BAR_HEIGHT + BORDER_HEIGHT}`}
+      css={css({
+        overflow: 'visible',
+      })}
     >
       {last7Days.map((d, i) => (
         <rect
@@ -43,7 +48,7 @@ export function SparkBars<T extends TimestampedValue>(
           x={i * BAR_WIDTH}
           width={BAR_WIDTH}
           opacity="0.5"
-          y={y(Math.max(0, d[averageProperty]))}
+          y={y(Math.max(0, d[averageProperty])) + BORDER_HEIGHT}
           height={d[averageProperty] >= 0 ? y(0) - y(d[averageProperty]) : y(0)}
           fill={
             d[averageProperty] >= 0
@@ -52,6 +57,13 @@ export function SparkBars<T extends TimestampedValue>(
           }
         />
       ))}
+      <rect
+        x={0}
+        width={BAR_WIDTH * last7Days.length}
+        height={BORDER_HEIGHT}
+        fill={colors.silver}
+        y={BAR_HEIGHT + BORDER_HEIGHT}
+      />
     </svg>
   );
 }
