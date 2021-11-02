@@ -1,6 +1,6 @@
 import { Rule } from '~/sanity';
 import { whenNotAdministrator } from '../../../roles/when-not-administrator';
-import { PAGE_IDENTIFIER_FIELDS } from '../../fields/page-identifier';
+import { PAGE_IDENTIFIER_FIELDS } from '../../fields/page-identifier-fields';
 
 export const pageArticles = {
   title: 'Pagina Artikelen',
@@ -8,13 +8,6 @@ export const pageArticles = {
   type: 'document',
   fields: [
     ...PAGE_IDENTIFIER_FIELDS,
-    {
-      title: 'Artikel soort',
-      name: 'articleKind',
-      type: 'string',
-      hidden: whenNotAdministrator,
-      validation: (rule: Rule) => rule.required(),
-    },
     {
       title: 'Maximum aantal artikelen',
       name: 'maxNumber',

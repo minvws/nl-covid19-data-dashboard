@@ -58,7 +58,7 @@ function pageDataListItem(page: any) {
 function pageDataItem(pageData: any) {
   console.log('pageData', pageData);
   return S.listItem()
-    .title(pageData.title ?? 'page data documents need a title field!')
+    .title(pageData.title)
     .id(pageData._id)
     .icon(RiPagesFill)
     .child(
