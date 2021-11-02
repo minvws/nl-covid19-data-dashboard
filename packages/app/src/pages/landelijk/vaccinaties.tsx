@@ -26,23 +26,23 @@ import { useFeature } from '~/lib/features';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -147,21 +147,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
-  const lastIntensiveCareValueVaccinationStatus =
+  const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
 
-  const lastHositalValueVaccinationStatus =
+  const lastValueHositalVaccinationStatus =
     data.hospital_vaccination_status.last_value;
 
   const [hospitalDateFromText, hospitalDateToText] = useFormatDateRange(
-    lastHositalValueVaccinationStatus.date_start_unix,
-    lastHositalValueVaccinationStatus.date_end_unix
+    lastValueHositalVaccinationStatus.date_start_unix,
+    lastValueHositalVaccinationStatus.date_end_unix
   );
 
-  const [IntensiveCareDateFromText, IntensiveCareDateToText] =
+  const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
-      lastIntensiveCareValueVaccinationStatus.date_start_unix,
-      lastIntensiveCareValueVaccinationStatus.date_end_unix
+      lastValueIntensiveCareVaccinationStatus.date_start_unix,
+      lastValueIntensiveCareVaccinationStatus.date_end_unix
     );
 
   return (
@@ -253,22 +253,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   text.vaccination_status_ic_and_hospital_section.description,
                   {
                     hospitalAmount: formatNumber(
-                      lastHositalValueVaccinationStatus.total_amount_of_people
+                      lastValueHositalVaccinationStatus.total_amount_of_people
                     ),
                     hospitalDateStart: hospitalDateFromText,
                     hospitalDateEnd: hospitalDateToText,
                     intensiveCareAmount: formatNumber(
-                      lastIntensiveCareValueVaccinationStatus.total_amount_of_people
+                      lastValueIntensiveCareVaccinationStatus.total_amount_of_people
                     ),
-                    intensiveCareDateStart: IntensiveCareDateFromText,
-                    intensiveCareDateEnd: IntensiveCareDateToText,
+                    intensiveCareDateStart: intensiveCareDateFromText,
+                    intensiveCareDateEnd: intensiveCareDateToText,
                   }
                 )}
               >
                 <Box display="flex" flexDirection={{ _: 'column', sm: 'row' }}>
                   <Box width="100%" display="flex" flexDirection="column">
                     <PieChart
-                      data={lastHositalValueVaccinationStatus}
+                      data={lastValueHositalVaccinationStatus}
                       title={
                         text.vaccination_status_ic_and_hospital_section.hospital
                           .title
@@ -278,7 +278,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                         text: text.vaccination_status_ic_and_hospital_section
                           .hospital.link_text,
                       }}
-                      isVerticalLayout
+                      verticalLayout
                       dataConfig={[
                         {
                           metricProperty: 'has_one_shot_or_not_vaccinated',
@@ -297,13 +297,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                       ]}
                     />
 
-                    <Spacer m="auto" />
-
                     <Box pr={3}>
                       <Metadata
                         date={[
-                          lastHositalValueVaccinationStatus.date_start_unix,
-                          lastHositalValueVaccinationStatus.date_end_unix,
+                          lastValueHositalVaccinationStatus.date_start_unix,
+                          lastValueHositalVaccinationStatus.date_end_unix,
                         ]}
                         source={{
                           ...text.vaccination_status_ic_and_hospital_section
@@ -318,8 +316,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
                   <Box width="100%" display="flex" flexDirection="column">
                     <PieChart
-                      data={lastIntensiveCareValueVaccinationStatus}
-                      isVerticalLayout
+                      data={lastValueIntensiveCareVaccinationStatus}
+                      verticalLayout
                       title={
                         text.vaccination_status_ic_and_hospital_section
                           .intensive_care.title
@@ -331,7 +329,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                       }}
                       dataConfig={[
                         {
-                          metricProperty: 'not_vaccinated',
+                          metricProperty: 'has_one_shot_or_not_vaccinated',
                           color: colors.data.yellow,
                           label:
                             text.vaccination_status_ic_and_hospital_section
@@ -348,13 +346,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                       ]}
                     />
 
-                    <Spacer m="auto" />
-
                     <Box pr={3}>
                       <Metadata
                         date={[
-                          lastIntensiveCareValueVaccinationStatus.date_start_unix,
-                          lastIntensiveCareValueVaccinationStatus.date_end_unix,
+                          lastValueIntensiveCareVaccinationStatus.date_start_unix,
+                          lastValueIntensiveCareVaccinationStatus.date_end_unix,
                         ]}
                         source={{
                           ...text.vaccination_status_ic_and_hospital_section

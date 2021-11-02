@@ -29,7 +29,7 @@ type PieChartProps<T> = {
   padAngle?: number;
   minimumPercentage?: number;
   icon?: JSX.Element;
-  isVerticalLayout?: boolean;
+  verticalLayout?: boolean;
   title?: string;
   link?: {
     href: string;
@@ -46,7 +46,7 @@ export function PieChart<T>({
   padAngle = 0.03,
   minimumPercentage = 0.5,
   icon,
-  isVerticalLayout,
+  verticalLayout,
   title,
   link,
 }: PieChartProps<T>) {
@@ -89,9 +89,9 @@ export function PieChart<T>({
       <Box
         display="flex"
         spacingHorizontal={{ sm: 4, lg: 5 }}
-        spacing={isVerticalLayout ? 4 : { _: 4, sm: 0 }}
-        alignItems={isVerticalLayout ? 'flex-start' : { sm: 'center' }}
-        flexDirection={isVerticalLayout ? 'column' : { _: 'column', sm: 'row' }}
+        spacing={verticalLayout ? 4 : { _: 4, sm: 0 }}
+        alignItems={verticalLayout ? 'flex-start' : { sm: 'center' }}
+        flexDirection={verticalLayout ? 'column' : { _: 'column', sm: 'row' }}
       >
         <Box
           alignSelf={{ _: 'center', xs: 'self-start' }}
