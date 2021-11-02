@@ -46,15 +46,13 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints(true);
+  const breakpoints = useBreakpoints(false);
 
   const { siteText } = useIntl();
 
-  if (breakpoints.md) {
-    return <WideMiniTileSelectorLayout {...props} />;
-  }
-
-  return (
+  return breakpoints.md ? (
+    <WideMiniTileSelectorLayout {...props} />
+  ) : (
     <Box spacing={3}>
       <Text variant="label1" color="bodyLight">
         {siteText.common_actueel.tile_selector_uitleg}
