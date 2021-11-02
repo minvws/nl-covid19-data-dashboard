@@ -1,5 +1,5 @@
 import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
-import { colors, colors } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { scaleLinear } from '@visx/scale';
 
