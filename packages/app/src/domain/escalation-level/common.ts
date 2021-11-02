@@ -1,8 +1,5 @@
 import { colors } from '@corona-dashboard/common';
 
-/**
- * @TODO remove when we have this available in the schemas
- */
 export type EscalationLevelType = 1 | 2 | 3;
 
 export const escalationColors = [
