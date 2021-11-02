@@ -33,7 +33,7 @@ export function SparkBars<T extends TimestampedValue>(
   return (
     <svg
       width="100%"
-      height={BAR_HEIGHT + 2}
+      height={BAR_HEIGHT + BORDER_HEIGHT}
       role="img"
       aria-hidden="true"
       focusable="false"
