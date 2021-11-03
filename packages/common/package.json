@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "bootstrap": "yarn build",
-    "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register",
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register src __tests__",
     "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"yarn test\"",
     "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register --bail",
     "dev": "tsc -w",
@@ -24,6 +24,7 @@
     "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
+    "chokidar-cli": "^3.0.0",
     "geojson": "^0.5.0",
     "ts-is-present": "^1.2.2"
   },
