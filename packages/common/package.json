@@ -10,9 +10,9 @@
   ],
   "scripts": {
     "bootstrap": "yarn build",
-    "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register src __tests__",
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.json uvu -r ts-node/register src __tests__",
     "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"yarn test\"",
-    "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register --bail",
+    "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.json uvu -r ts-node/register --bail",
     "dev": "tsc -w",
     "build:watch": "chokidar \"./src/**/*.*\" -c \"yarn build\"",
     "build": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
