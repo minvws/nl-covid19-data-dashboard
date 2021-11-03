@@ -1,4 +1,6 @@
+import { suite } from 'uvu';
 import { getFilteredValues } from '..';
+import * as assert from 'uvu/assert';
 
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
@@ -34,32 +36,36 @@ function createTestValues(): TestValue[] {
 
 const testCallback = (item: TestValue) => item.date.getTime();
 
-describe('Utils: getFilteredValues', () => {
-  let _testList: any[];
+const GetFilteredValues = suite('getFilteredValues');
 
-  beforeEach(() => {
-    _testList = createTestValues();
-  });
-
-  it('should filter the list by 5weeks', () => {
-    const result = getFilteredValues(
-      _testList,
-      '5weeks',
-      new Date(),
-      testCallback
-    );
-
-    expect(result.length).toEqual(4);
-  });
-
-  it('should filter the list by all', () => {
-    const result = getFilteredValues(
-      _testList,
-      'all',
-      new Date(),
-      testCallback
-    );
-
-    expect(result.length).toEqual(5);
-  });
+GetFilteredValues.before((context) => {
+  context._testList = createTestValues();
 });
+
+GetFilteredValues.before.each((context) => {
+  context._testList = createTestValues();
+});
+
+GetFilteredValues('should filter the list by 5weeks', (context) => {
+  const result = getFilteredValues(
+    context._testList,
+    '5weeks',
+    new Date(),
+    testCallback
+  );
+
+  assert.is(result.length, 4);
+});
+
+GetFilteredValues('should filter the list by all', (context) => {
+  const result = getFilteredValues(
+    context._testList,
+    'all',
+    new Date(),
+    testCallback
+  );
+
+  assert.is(result.length, 5);
+});
+
+GetFilteredValues.run();
