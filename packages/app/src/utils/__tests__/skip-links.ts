@@ -6,11 +6,14 @@ const GetSkipLinkId = suite('getSkipLinkId');
 
 GetSkipLinkId('should return only lowercase characters', () => {
   assert.type(getSkipLinkId, 'function');
-  assert.equal(getSkipLinkId('MySQL, Amsterdam, YMCA'), 'mysql-amsterdam-ymca');
+  assert.snapshot(
+    getSkipLinkId('MySQL, Amsterdam, YMCA'),
+    'mysql-amsterdam-ymca'
+  );
 });
 
 GetSkipLinkId('should replace non-alphanumeric characters', () => {
-  assert.equal(
+  assert.snapshot(
     getSkipLinkId('ABC this goes on until the END.'),
     'abc-this-goes-on-until-the-end-'
   );
@@ -30,10 +33,10 @@ EnsureUniqueSkipLinkIds('should generate unique skip link ids', () => {
 
   ensureUniqueSkipLinkIds(source);
 
-  assert.equal(source[0].id, 'amsterdam-1');
-  assert.equal(source[1].id, 'amsterdam-2');
-  assert.equal(source[2].id, 'berlin');
-  assert.equal(source[3].id, 'amsterdam-3');
+  assert.is(source[0].id, 'amsterdam-1');
+  assert.is(source[1].id, 'amsterdam-2');
+  assert.is(source[2].id, 'berlin');
+  assert.is(source[3].id, 'amsterdam-3');
 });
 
 EnsureUniqueSkipLinkIds.run();

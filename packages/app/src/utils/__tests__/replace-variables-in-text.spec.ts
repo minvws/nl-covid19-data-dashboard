@@ -13,18 +13,18 @@ ReplaceVariablesInText(
       'string'
     );
 
-    assert.equal(
+    assert.snapshot(
       replaceVariablesInText('Hello {{name}}', { name: 'John' }),
       'Hello John'
     );
-    assert.equal(
+    assert.snapshot(
       replaceVariablesInText('Example translation {{keyOne}} {{keyTwo}}.', {
         keyOne: 'with',
         keyTwo: 'variables',
       }),
       'Example translation with variables.'
     );
-    assert.equal(
+    assert.snapshot(
       replaceVariablesInText(
         'Example translation with a {{ variableName }} with spaces around it.',
         {
@@ -39,7 +39,7 @@ ReplaceVariablesInText(
 ReplaceVariablesInText(
   "should leave curly braces in place if they aren't closed",
   () => {
-    assert.equal(
+    assert.snapshot(
       replaceVariablesInText('Example translation {{', {}),
       'Example translation {{'
     );
@@ -67,8 +67,8 @@ ReplaceVariablesInText('should handle pluralization', () => {
       }
     );
 
-  assert.equal(patients(1), '1 patient');
-  assert.equal(patients(2), '2 patients');
+  assert.snapshot(patients(1), '1 patient');
+  assert.snapshot(patients(2), '2 patients');
 });
 
 ReplaceVariablesInText.run();
