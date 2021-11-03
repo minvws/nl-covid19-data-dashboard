@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "lib": ["esnext", "dom"],
-    "target": "esnext",
+    "target": "es2018",
     "moduleResolution": "node",
     "rootDir": ".",
     "baseUrl": ".",
