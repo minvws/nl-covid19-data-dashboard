@@ -82,7 +82,6 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             <ErrorBoundary>
               <DynamicChoropleth
-                renderTarget="canvas"
                 accessibility={{
                   key: 'municipality_navigation_map',
                   features: ['keyboard_choropleth'],
