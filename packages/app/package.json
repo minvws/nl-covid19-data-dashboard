@@ -150,7 +150,7 @@
     "start-e2e": "next start -H 0.0.0.0 -p 3000",
     "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register",
     "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"yarn test\"",
-    "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register",
+    "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register --bail",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
