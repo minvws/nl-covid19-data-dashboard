@@ -32,6 +32,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn install
 
       - name: Lint code
@@ -63,6 +64,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn install
 
       - name: Build icon package
@@ -103,6 +105,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
         run: yarn install
 
       - name: Build common module
