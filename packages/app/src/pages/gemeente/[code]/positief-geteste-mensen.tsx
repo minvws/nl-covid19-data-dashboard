@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -22,9 +23,11 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  isArticleParts,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -55,16 +58,28 @@ export const getStaticProps = createGetStaticProps(
       tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
   }),
-  createGetContent<{
-    page: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
-      "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
-    }`;
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+       "parts": ${getPagePartsQuery('positiveTestsPage')},
+       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
+      }`;
+    })(context);
+    return {
+      content: {
+        articles:
+          content.parts.pageParts
+            .filter(isArticleParts)
+            .find((x) => x.pageDataKind === 'positiveTestsPageArticles')
+            ?.articles ?? null,
+        elements: content.elements,
+      },
+    } as const;
+  }
 );
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
@@ -110,7 +125,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            articles={content.articles}
           />
 
           <TwoKpiSection>

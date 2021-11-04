@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -27,9 +28,11 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  isArticleParts,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -59,29 +62,37 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
   }),
-  createGetContent<{
-    main: PageArticlesQueryResult;
-    ggd: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-
-    const query = `{
-      "main": ${createPageArticlesQuery('positiveTestsPage', locale)},
-      "ggd": ${createPageArticlesQuery(
-        'positiveTestsPage',
-        locale,
-        'ggdArticles'
-      )},
-     "elements": ${createElementsQuery(
-       'nl',
-       ['tested_overall', 'tested_ggd'],
-       locale
-     )}
-    }`;
-
-    return query;
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+       "parts": ${getPagePartsQuery('positiveTestsPage')},
+       "elements": ${createElementsQuery(
+         'nl',
+         ['tested_overall', 'tested_ggd'],
+         locale
+       )}
+      }`;
+    })(context);
+    return {
+      content: {
+        articles:
+          content.parts.pageParts
+            .filter(isArticleParts)
+            .find((x) => x.pageDataKind === 'positiveTestsPageArticles')
+            ?.articles ?? null,
+        ggdArticles:
+          content.parts.pageParts
+            .filter(isArticleParts)
+            .find((x) => x.pageDataKind === 'positiveTestsGGDArticles')
+            ?.articles ?? null,
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
@@ -121,7 +132,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.main.articles}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -328,7 +339,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [ggdText.bronnen.rivm],
             }}
             referenceLink={ggdText.reference_href}
-            articles={content.ggd.articles}
+            articles={content.ggdArticles}
           />
 
           <TwoKpiSection>

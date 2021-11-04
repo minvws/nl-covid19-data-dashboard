@@ -48,9 +48,10 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: content.pageParts.find(
-          (x) => x.pageDataKind === 'behaviorPageArticles'
-        )?.articles,
+        articles:
+          content.pageParts.find(
+            (x) => x.pageDataKind === 'behaviorPageArticles'
+          )?.articles ?? null,
       },
     };
   }

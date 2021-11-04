@@ -1,3 +1,5 @@
+import { ArticleSummary } from '~/components/article-teaser';
+
 export type PageIdentifier =
   | 'in_positiveTestsPage'
   | 'hospitalPage'
@@ -25,12 +27,15 @@ export type PageBasePart = {
 
 export type ArticleParts = {
   _type: 'pageArticles';
-  articles: any[];
+  articles: ArticleSummary[];
 } & PageBasePart;
 
 export type LinkParts = {
   _type: 'pageLinks';
-  pageLinks: any[];
+  links: {
+    title: string;
+    href: string;
+  }[];
 } & PageBasePart;
 
 export type HighlightedItemParts = {
@@ -62,22 +67,22 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
   const query = `
     *[_type == 'pageIdentifier' && identifier == '${pageIdentifier}']
     {
-      ...,
+      identifier,
       "pageParts": *[pageIdentifier._ref == ^._id]{
         (articles != undefined) => {
           _type,
           pageDataKind,
-          articles[]->{_id, title, slug, intro, "cover": {..., "asset": cover.asset->}}
+          articles[]->{_id, title, slug, intro, "cover": {"asset": cover.asset->}}
         },
         (links != undefined) => {
           _type,
           pageDataKind,
-          links[]->
+          links[]{href, title}
         },
         (highlights != undefined) => {
           _type,
           pageDataKind,
-          highlights[]->
+          highlights[]{title, category, href, "cover": {"asset": cover.asset->}}
         },
       }
     }[0]`;
