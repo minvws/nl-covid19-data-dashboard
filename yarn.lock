@@ -9789,8 +9789,6 @@ __metadata:
 "corona-dashboard@workspace:.":
   version: 0.0.0-use.local
   resolution: "corona-dashboard@workspace:."
-  dependencies:
-    c8: ^7.10.0
   languageName: unknown
   linkType: soft
 
