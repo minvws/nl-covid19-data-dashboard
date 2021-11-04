@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getFilteredThresholdValues } from '~/components/choropleth/logic/get-filtered-threshold-values';
 
 interface TooltipSubjectProps {
   subject?: string;

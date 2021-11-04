@@ -8,7 +8,7 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
-import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getFilteredThresholdValues } from '~/components/choropleth/logic/get-filtered-threshold-values';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
