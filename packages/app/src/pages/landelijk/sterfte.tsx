@@ -1,7 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { AgeDemographic } from '~/components/age-demographic';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -16,7 +15,11 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -35,20 +38,9 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'difference.deceased_rivm__covid_daily'
   ),
-  createGetContent<{
-    main: { articles: ArticleSummary[] };
-    monitor: { articles: ArticleSummary[] };
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "main": ${createPageArticlesQuery('deceasedPage', locale)},
-      "monitor": ${createPageArticlesQuery(
-        'deceasedPage',
-        locale,
-        'monitor_articles'
-      )},
-    }`;
-  })
+  createGetContent<PagePartQueryResult<ArticleParts>>(() =>
+    getPagePartsQuery('deceasedPage')
+  )
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -57,7 +49,12 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataCbs = data.deceased_cbs;
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
-  const content = props.content;
+  const mainArticles = props.content.pageParts.find(
+    (x) => x.pageDataKind === 'deceasedPageArticles'
+  )?.articles;
+  const monitorArticles = props.content.pageParts.find(
+    (x) => x.pageDataKind === 'deceasedMonitorArticles'
+  )?.articles;
 
   const { siteText } = useIntl();
 
@@ -85,7 +82,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.main.articles}
+            articles={mainArticles}
           />
 
           <TwoKpiSection>
@@ -201,7 +198,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
             }}
-            articles={content.monitor.articles}
+            articles={monitorArticles}
           />
 
           <DeceasedMonitorSection
