@@ -4,6 +4,7 @@ import {
   GehandicaptenZorg,
   Locatie,
 } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -20,9 +21,10 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -46,10 +48,19 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ disability_care }) => ({ disability_care }),
   }),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('disabilityCarePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('disabilityCarePage'))(context);
+
+    return {
+      content: {
+        articles: content.pageParts.find(
+          (x) => x.pageDataKind === 'disabilityCarePageArticles'
+        )?.articles,
+      },
+    };
+  }
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {

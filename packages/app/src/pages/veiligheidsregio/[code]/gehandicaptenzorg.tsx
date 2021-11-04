@@ -4,6 +4,7 @@ import {
   GehandicaptenZorg,
   Locatie,
 } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -16,9 +17,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -39,10 +41,19 @@ export const getStaticProps = createGetStaticProps(
     'difference.disability_care__infected_locations_total',
     'difference.disability_care__newly_infected_people'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('disabilityCarePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('disabilityCarePage'))(context);
+
+    return {
+      content: {
+        articles: content.pageParts.find(
+          (x) => x.pageDataKind === 'disabilityCarePageArticles'
+        )?.articles,
+      },
+    };
+  }
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
