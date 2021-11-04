@@ -528,8 +528,8 @@ export interface NlHospitalVaccineIncidencePerAgeGroup {
 }
 export interface NlHospitalVaccineIncidencePerAgeGroupValue {
   age_group_range: string;
-  fully_vaccinated: number;
-  has_one_shot_or_not_vaccinated: number;
+  fully_vaccinated_per_100k: number;
+  has_one_shot_or_not_vaccinated_per_100k: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -566,8 +566,8 @@ export interface NlIntensiveCareVaccineIncidencePerAgeGroup {
 }
 export interface NlIntensiveCareVaccineIncidencePerAgeGroupValue {
   age_group_range: string;
-  fully_vaccinated: number;
-  has_one_shot_or_not_vaccinated: number;
+  fully_vaccinated_per_100k: number;
+  has_one_shot_or_not_vaccinated_per_100k: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
