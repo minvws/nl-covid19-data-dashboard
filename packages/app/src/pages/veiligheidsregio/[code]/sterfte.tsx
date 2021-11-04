@@ -14,9 +14,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -37,10 +38,9 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'difference.deceased_rivm__covid_daily'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('deceasedPage', locale);
-  })
+  createGetContent<PagePartQueryResult<ArticleParts>>(() =>
+    getPagePartsQuery('deceasedPage')
+  )
 );
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -57,6 +57,13 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_sterfte;
+
+  const mainArticles = content.pageParts.find(
+    (x) => x.pageDataKind === 'deceasedPageArticles'
+  )?.articles;
+  const monitorArticles = content.pageParts.find(
+    (x) => x.pageDataKind === 'deceasedMonitorArticles'
+  )?.articles;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -86,7 +93,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.articles}
+            articles={mainArticles}
           />
 
           <TwoKpiSection>
@@ -181,6 +188,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor_vr.bronnen.cbs],
             }}
+            articles={monitorArticles}
           />
 
           <DeceasedMonitorSection data={dataCbs} />

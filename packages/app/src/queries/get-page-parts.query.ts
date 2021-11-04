@@ -67,7 +67,7 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
         (articles != undefined) => {
           _type,
           pageDataKind,
-          articles[]->{_id, intro, "cover": {..., "asset": cover.asset->}}
+          articles[]->{_id, title, slug, intro, "cover": {..., "asset": cover.asset->}}
         },
         (links != undefined) => {
           _type,

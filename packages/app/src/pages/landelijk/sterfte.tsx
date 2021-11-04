@@ -44,15 +44,16 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated, content } = props;
 
   const dataCbs = data.deceased_cbs;
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
-  const mainArticles = props.content.pageParts.find(
+
+  const mainArticles = content.pageParts.find(
     (x) => x.pageDataKind === 'deceasedPageArticles'
   )?.articles;
-  const monitorArticles = props.content.pageParts.find(
+  const monitorArticles = content.pageParts.find(
     (x) => x.pageDataKind === 'deceasedMonitorArticles'
   )?.articles;
 

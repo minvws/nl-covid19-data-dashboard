@@ -13,9 +13,10 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -36,10 +37,9 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'code'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('deceasedPage', locale);
-  })
+  createGetContent<PagePartQueryResult<ArticleParts>>(() =>
+    getPagePartsQuery('deceasedPage')
+  )
 );
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -52,6 +52,10 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.gemeente_sterfte;
+
+  const mainArticles = content.pageParts.find(
+    (x) => x.pageDataKind === 'deceasedPageArticles'
+  )?.articles;
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -82,7 +86,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 data.deceased_rivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.articles}
+            articles={mainArticles}
           />
 
           <TwoKpiSection>
