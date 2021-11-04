@@ -1,6 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { transparentize } from 'polished';
 import { ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
@@ -149,7 +149,7 @@ const StyledEvent = styled.div(
   })
 );
 
-const TimespanBar = styled(motion.div)<{
+const TimespanBar = styled(m.div)<{
   height: number;
   disableBorderRadius?: boolean;
 }>((x) =>

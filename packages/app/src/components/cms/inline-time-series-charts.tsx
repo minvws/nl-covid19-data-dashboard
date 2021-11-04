@@ -1,6 +1,9 @@
 import {
   ChartConfiguration,
   colors,
+  DataScopeKey,
+  MetricKeys,
+  ScopedData,
   TimespanAnnotationConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
@@ -16,21 +19,29 @@ import {
   TimespanAnnotationConfig,
 } from '~/components/time-series-chart/logic/common';
 import { useIntl } from '~/intl';
+import { metricConfigs } from '~/metric-config';
+import { ScopedMetricConfigs } from '~/metric-config/common';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
 import { Box } from '../base';
 import { Metadata } from '../metadata';
 
-interface InlineTimeSeriesChartsProps {
+interface InlineTimeSeriesChartsProps<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+> {
   startDate?: string;
   endDate?: string;
-  configuration: ChartConfiguration;
+  configuration: ChartConfiguration<S, M>;
 }
 
-function getDataUrl(
+function getDataUrl<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+>(
   startDate: string | undefined,
   endDate: string | undefined,
-  configuration: ChartConfiguration
+  configuration: ChartConfiguration<S, M>
 ) {
   const { code, area, metricName } = configuration;
   const qParams = [];
@@ -48,7 +59,10 @@ function getDataUrl(
   return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
 }
 
-export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
+export function InlineTimeSeriesCharts<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+>(props: InlineTimeSeriesChartsProps<S, M>) {
   const { configuration, startDate, endDate } = props;
   const { siteText } = useIntl();
 
@@ -58,8 +72,14 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
     fetch(url).then((_) => _.json())
   );
 
+  const scopedMetricConfigs = metricConfigs[configuration.area] as
+    | ScopedMetricConfigs<ScopedData[S]>
+    | undefined;
+
   const seriesConfig = useMemo(() => {
     return configuration.metricProperties.map((x) => {
+      const seriesMetricConfig =
+        scopedMetricConfigs?.[configuration.metricName]?.[x.propertyName];
       const config: any = {
         type: x.type,
         metricProperty: x.propertyName,
@@ -71,6 +91,7 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
               colors.data.primary
             )
           : colors.data.primary,
+        minimumRange: seriesMetricConfig?.minimumRange,
       };
       if (isDefined(x.curve) && x.curve.length) {
         config.curve = x.curve;
@@ -89,7 +110,12 @@ export function InlineTimeSeriesCharts(props: InlineTimeSeriesChartsProps) {
       }
       return config;
     });
-  }, [configuration.metricProperties, siteText]);
+  }, [
+    scopedMetricConfigs,
+    configuration.metricName,
+    configuration.metricProperties,
+    siteText,
+  ]);
 
   const dataOptions = useMemo(() => {
     if (!isDefined(configuration) || !isDefined(data)) {

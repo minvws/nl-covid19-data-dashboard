@@ -233,7 +233,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'invisible',
                     metricProperty: 'infected',
-                    label: siteText.common.totaal,
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_overall,
                   },
                 ]}
                 dataOptions={{
@@ -262,7 +264,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',

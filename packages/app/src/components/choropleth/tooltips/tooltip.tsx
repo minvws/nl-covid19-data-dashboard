@@ -3,6 +3,7 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useViewport } from '~/utils/use-viewport';
 import { ChoroplethDataItem } from '../logic';
@@ -37,6 +38,7 @@ export function Tooltip<T extends ChoroplethDataItem>({
   const isMounted = useIsMounted({ delayMs: 10 });
   const [ref, { height = 0 }] = useResizeObserver<HTMLDivElement>();
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
+  const isTouch = useIsTouchDevice();
 
   const content = isDefined(formatTooltip) ? (
     formatTooltip(data)
@@ -99,6 +101,7 @@ export function Tooltip<T extends ChoroplethDataItem>({
             opacity: isMounted ? 1 : 0,
             transform: t(placement, top, left),
             maxWidth,
+            pointerEvents: isTouch ? 'all' : 'none',
           }}
           boxShadow="rgba(33, 33, 33, 0.2) 0px 1px 2px"
           borderRadius={1}

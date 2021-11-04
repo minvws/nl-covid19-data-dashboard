@@ -258,12 +258,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   },
                   {
                     metricProperty: 'has_one_shot',
-                    color: colors.data.cyan,
+                    color: colors.data.partial_vaccination,
                     label: text.vaccination_status_chart.labels.has_one_shot,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
-                    color: colors.data.multiseries.cyan_dark,
+                    color: colors.data.primary,
                     label:
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },

@@ -17,6 +17,11 @@ const publicPath = path.resolve(__dirname, '../../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (!Array.isArray(req.query.param)) {
+    res.status(400).end();
+    return;
+  }
+
   const { param, start, end } = req.query;
   const [root, metric, metricProperty] = param as [string, string, string];
 
@@ -28,9 +33,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const data = loadMetricData(root, metric);
     if (isDefined(data) && isDefined(data.values)) {
-      if (!isDefined(metricProperty)) {
-        data.values = sortTimeSeriesValues(data.values);
-      }
+      data.values = sortTimeSeriesValues(data.values);
+
       if (isDefined(start) || isDefined(end)) {
         data.values = filterByDateSpan(
           data.values,
@@ -39,6 +43,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         );
         data.last_value = last(data.values);
       }
+
       res
         .status(200)
         .json(
@@ -128,11 +133,15 @@ function stripTrailingNullValues(
   ) {
     return data;
   }
-  const index = countTrailingNullValues(data.values, metricProperty);
-  if (index === data.values.length - 1) {
+
+  const count = countTrailingNullValues(data.values, metricProperty);
+
+  if (count === 0) {
     return data;
   }
-  const values = data.values.slice(0, -index);
+
+  const values = data.values.slice(0, -count);
+
   return {
     values,
     last_value: last(values),

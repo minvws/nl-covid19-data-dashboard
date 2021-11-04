@@ -122,7 +122,6 @@ export function VaccinationCoverageChoropleth(
             isGmCoverage(props)) && (
             <DynamicChoropleth
               map={'gm'}
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               data={props.data.gm.filter(
                 hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -155,7 +154,6 @@ export function VaccinationCoverageChoropleth(
           {isVrCoverage(props) && (
             <DynamicChoropleth
               map={'gm'}
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               data={props.data.gm.filter(
                 hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -187,7 +185,6 @@ export function VaccinationCoverageChoropleth(
           {isNlCoverage(props) && chartRegion === 'vr' && (
             <DynamicChoropleth
               map={'vr'}
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               data={props.data.vr.filter(
                 hasValueAtKey('age_group_range', selectedAgeGroup)

@@ -18,12 +18,11 @@ To build the production Docker image locally, you can use the following command,
 
 ```sh
 docker build \
---build-arg DISABLE_SITEMAP=true \
---build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=5mog5ask \
---build-arg SANITY_API_TOKEN=<token> \
---build-arg SANITY_PREVIEW_SECRET=<secret> \
---build-arg NEXT_PUBLIC_SANITY_DATASET=<development|production> \
---build-arg NEXT_PUBLIC_COMMIT_ID=<some_random_string> \
+--build-arg ARG_NEXT_PUBLIC_SANITY_PROJECT_ID="5mog5ask" \
+--build-arg SANITY_API_TOKEN="<sanity_token>" \
+--build-arg ARG_NEXT_PUBLIC_SANITY_DATASET="development" \
+--build-arg ARG_NEXT_PUBLIC_COMMIT_ID="local-test-random-string" \
+--build-arg ARG_API_URL="https://coronadashboard.rijksoverheid.nl/json/latest-data.zip" \
 -t local-test \
 .
 ```

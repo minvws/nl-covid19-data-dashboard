@@ -1,11 +1,17 @@
+import {
+  DataScope,
+  DataScopeKey,
+  MetricKeys,
+  MetricProperty,
+  ScopedData,
+} from '.';
+
 export const areaTitles = {
   in: 'Internationaal',
   nl: 'Nationaal',
   vr: 'Veiligheidsregio',
   gm: 'Gemeente',
 };
-
-export type AreaType = 'in' | 'nl' | 'vr' | 'gm';
 
 export type TimespanAnnotationConfiguration = {
   fill: 'solid' | 'hatched' | 'dotted';
@@ -16,17 +22,13 @@ export type TimespanAnnotationConfiguration = {
   cutValuesForMetricProperties?: string[];
 };
 
-export type InlineChart = {
-  startDate?: string;
-  endDate?: string;
-  title: string;
-  config: ChartConfiguration;
-};
-
-export type ChartConfiguration = {
-  area: AreaType;
-  metricName: string;
-  metricProperties: MetricPropertyConfig[];
+export type ChartConfiguration<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+> = {
+  area: S;
+  metricName: M;
+  metricProperties: MetricPropertyConfig<ScopedData[S], M>[];
   timeframe: 'all' | '5weeks';
   accessibilityKey: string;
   code?: string;
@@ -38,8 +40,11 @@ export type ChartConfiguration = {
   timespanAnnotations?: TimespanAnnotationConfiguration[];
 };
 
-export type MetricPropertyConfig = {
-  propertyName: string;
+export type MetricPropertyConfig<
+  S extends DataScope,
+  M extends MetricKeys<S>
+> = {
+  propertyName: MetricProperty<S, M>;
   type:
     | 'line'
     | 'gapped-line'
@@ -65,7 +70,7 @@ export type KpiConfiguration = Omit<
 
 export type PartialKpiConfiguration = {
   icon?: string;
-  area?: AreaType;
+  area?: DataScopeKey;
   metricName?: string;
   metricProperty?: string;
   code?: string;
