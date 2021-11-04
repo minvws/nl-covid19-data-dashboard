@@ -59,6 +59,7 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -98,15 +99,29 @@ export const getStaticProps = createGetStaticProps(
       'vaccine_coverage_per_age_group_estimated',
     ])
   ),
-  selectNlData(
-    'intensive_care_nice',
-    'intensive_care_lcps',
-    'hospital_nice',
-    'hospital_lcps',
-    'difference',
-    'vaccine_administered_total',
-    'vaccine_coverage_per_age_group_estimated'
-  )
+  () => {
+    const { selectedNlData: data } = selectNlData(
+      'intensive_care_nice',
+      'intensive_care_lcps',
+      'hospital_nice',
+      'hospital_lcps',
+      'difference',
+      'vaccine_administered_total',
+      'vaccine_coverage_per_age_group_estimated'
+    )();
+
+    data.hospital_nice.values = cutValuesFromTimeframe(
+      data.hospital_nice.values,
+      '5weeks'
+    );
+
+    data.intensive_care_nice.values = cutValuesFromTimeframe(
+      data.intensive_care_nice.values,
+      '5weeks'
+    );
+
+    return { selectedNlData: data };
+  }
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
@@ -230,15 +245,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty: 'age_18_plus_fully_vaccinated',
                     value:
                       data.vaccine_coverage_per_age_group_estimated.last_value
-                        ?.age_18_plus_fully_vaccinated ?? 0,
+                        ?.age_18_plus_fully_vaccinated,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
                       'vaccine_coverage_per_age_group_estimated'
                     ),
-                    hideSparkBar:
-                      data.vaccine_coverage_per_age_group_estimated.values
-                        .length < 7,
+                    percentageBar: {
+                      value:
+                        data.vaccine_coverage_per_age_group_estimated.last_value
+                          ?.age_18_plus_fully_vaccinated,
+                    },
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
                 ]}
               >

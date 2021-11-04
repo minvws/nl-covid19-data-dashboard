@@ -210,6 +210,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             >
               <PieChart
                 data={lastValueVaccinationStatus}
+                icon={<Ziekenhuis />}
                 dataConfig={[
                   {
                     metricProperty: 'not_vaccinated',
@@ -231,65 +232,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
-
-          <ChoroplethTile
-            title={text.map_titel}
-            description={text.map_toelichting}
-            onChartRegionChange={setSelectedMap}
-            chartRegion={selectedMap}
-            legend={{
-              thresholds:
-                selectedMap === 'gm'
-                  ? thresholds.gm.admissions_on_date_of_reporting
-                  : thresholds.gm.admissions_on_date_of_reporting,
-              title: text.chloropleth_legenda.titel,
-            }}
-            metadata={{
-              date: lastValueNice.date_unix,
-              source: text.bronnen.nice,
-            }}
-          >
-            {selectedMap === 'gm' && (
-              <DynamicChoropleth
-                renderTarget="canvas"
-                accessibility={{
-                  key: 'hospital_admissions_municipal_choropleth',
-                }}
-                map="gm"
-                data={choropleth.gm.hospital_nice}
-                dataConfig={{
-                  metricName: 'hospital_nice',
-                  metricProperty: 'admissions_on_date_of_reporting',
-                }}
-                dataOptions={{
-                  getLink: reverseRouter.gm.ziekenhuisopnames,
-                  tooltipVariables: {
-                    patients: siteText.choropleth_tooltip.patients,
-                  },
-                }}
-              />
-            )}
-            {selectedMap === 'vr' && (
-              <DynamicChoropleth
-                renderTarget="canvas"
-                accessibility={{
-                  key: 'hospital_admissions_region_choropleth',
-                }}
-                map="vr"
-                data={choropleth.vr.hospital_nice}
-                dataConfig={{
-                  metricName: 'hospital_nice',
-                  metricProperty: 'admissions_on_date_of_reporting',
-                }}
-                dataOptions={{
-                  getLink: reverseRouter.vr.ziekenhuisopnames,
-                  tooltipVariables: {
-                    patients: siteText.choropleth_tooltip.patients,
-                  },
-                }}
-              />
-            )}
-          </ChoroplethTile>
 
           <ChartTile
             title={text.linechart_titel}
@@ -344,26 +286,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={siteText.hospital_admissions_per_age_group.chart_title}
-            description={
-              siteText.hospital_admissions_per_age_group.chart_description
-            }
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
-            metadata={{ source: text.bronnen.nice }}
-          >
-            {(timeframe) => (
-              <AdmissionsPerAgeGroup
-                accessibility={{
-                  key: 'hospital_admissions_per_age_group_over_time_chart',
-                }}
-                values={data.hospital_nice_per_age_group.values}
-                timeframe={timeframe}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
             metadata={{
@@ -397,6 +319,83 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     },
                   ],
                 }}
+              />
+            )}
+          </ChartTile>
+
+          <ChoroplethTile
+            title={text.map_titel}
+            description={text.map_toelichting}
+            onChartRegionChange={setSelectedMap}
+            chartRegion={selectedMap}
+            legend={{
+              thresholds:
+                selectedMap === 'gm'
+                  ? thresholds.gm.admissions_on_date_of_reporting
+                  : thresholds.gm.admissions_on_date_of_reporting,
+              title: text.chloropleth_legenda.titel,
+            }}
+            metadata={{
+              date: lastValueNice.date_unix,
+              source: text.bronnen.nice,
+            }}
+          >
+            {selectedMap === 'gm' && (
+              <DynamicChoropleth
+                accessibility={{
+                  key: 'hospital_admissions_municipal_choropleth',
+                }}
+                map="gm"
+                data={choropleth.gm.hospital_nice}
+                dataConfig={{
+                  metricName: 'hospital_nice',
+                  metricProperty: 'admissions_on_date_of_reporting',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.gm.ziekenhuisopnames,
+                  tooltipVariables: {
+                    patients: siteText.choropleth_tooltip.patients,
+                  },
+                }}
+              />
+            )}
+            {selectedMap === 'vr' && (
+              <DynamicChoropleth
+                accessibility={{
+                  key: 'hospital_admissions_region_choropleth',
+                }}
+                map="vr"
+                data={choropleth.vr.hospital_nice}
+                dataConfig={{
+                  metricName: 'hospital_nice',
+                  metricProperty: 'admissions_on_date_of_reporting',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.vr.ziekenhuisopnames,
+                  tooltipVariables: {
+                    patients: siteText.choropleth_tooltip.patients,
+                  },
+                }}
+              />
+            )}
+          </ChoroplethTile>
+
+          <ChartTile
+            title={siteText.hospital_admissions_per_age_group.chart_title}
+            description={
+              siteText.hospital_admissions_per_age_group.chart_description
+            }
+            timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'hospital_admissions_per_age_group_over_time_chart',
+                }}
+                values={data.hospital_nice_per_age_group.values}
+                timeframe={timeframe}
               />
             )}
           </ChartTile>

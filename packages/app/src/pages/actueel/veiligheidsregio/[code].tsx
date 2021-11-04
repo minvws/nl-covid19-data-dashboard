@@ -50,6 +50,7 @@ import {
   selectVrData,
 } from '~/static-props/get-data';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -60,12 +61,22 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData(
-    'vaccine_coverage_per_age_group',
-    'hospital_nice',
-    'code',
-    'difference'
-  ),
+
+  (context) => {
+    const data = selectVrData(
+      'vaccine_coverage_per_age_group',
+      'hospital_nice',
+      'code',
+      'difference'
+    )(context);
+
+    data.selectedVrData.hospital_nice.values = cutValuesFromTimeframe(
+      data.selectedVrData.hospital_nice.values,
+      '5weeks'
+    );
+
+    return data;
+  },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -209,8 +220,13 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'vaccinatiegraad'
                     ),
-                    hideSparkBar:
-                      data.vaccine_coverage_per_age_group.values.length < 7,
+                    percentageBar: {
+                      value:
+                        filteredAgeGroup18Plus?.fully_vaccinated_percentage ??
+                        null,
+                      label:
+                        filteredAgeGroup18Plus?.fully_vaccinated_percentage_label,
+                    },
                   } as MiniTileSelectorItem<VrVaccineCoveragePerAgeGroupValue>,
                 ]}
               >

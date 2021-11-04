@@ -243,6 +243,13 @@ export function TimeSeriesChart<
       : forcedMaximumValue
     : calculatedSeriesMax;
 
+  const minimumRanges = seriesConfig
+    .map((c) => c.minimumRange)
+    .filter(isDefined);
+  const minimumRange = minimumRanges.length
+    ? Math.max(...minimumRanges)
+    : undefined;
+
   const {
     xScale,
     yScale,
@@ -258,6 +265,7 @@ export function TimeSeriesChart<
     minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: yTickValues?.length || numGridLines,
+    minimumRange,
   });
 
   const legendItems = useLegendItems(

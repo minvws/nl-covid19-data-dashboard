@@ -235,7 +235,6 @@ export const VaccinationsGmPage = (
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
               data={choropleth.gm.vaccine_coverage_per_age_group.filter(

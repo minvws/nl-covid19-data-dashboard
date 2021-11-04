@@ -223,6 +223,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             >
               <PieChart
                 data={lastValueVaccinationStatus}
+                icon={<Arts />}
                 dataConfig={[
                   {
                     metricProperty: 'not_vaccinated',
