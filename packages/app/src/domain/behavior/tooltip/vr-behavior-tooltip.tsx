@@ -8,7 +8,7 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { InlineText, Text } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
-import { getFilteredThresholdValues } from '~/components/choropleth/logic/get-filtered-threshold-values';
+import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrBehaviorTooltipProps {
