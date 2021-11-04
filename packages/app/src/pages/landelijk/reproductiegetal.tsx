@@ -1,5 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -11,9 +12,10 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,10 +29,20 @@ import {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('reproduction', 'difference.reproduction__index_average'),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('reproductionPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('reproductionPage'))(context);
+
+    return {
+      content: {
+        articles:
+          content.pageParts.find(
+            (x) => x.pageDataKind === 'reproductionPageArticles'
+          )?.articles ?? null,
+      },
+    };
+  }
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {

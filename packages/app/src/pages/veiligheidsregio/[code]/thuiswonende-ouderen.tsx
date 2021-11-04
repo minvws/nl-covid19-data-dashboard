@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -13,9 +14,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -35,10 +37,20 @@ export const getStaticProps = createGetStaticProps(
     'elderly_at_home',
     'difference.elderly_at_home__positive_tested_daily'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('elderlyAtHomePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('elderlyAtHomePage'))(context);
+
+    return {
+      content: {
+        articles:
+          content.pageParts.find(
+            (x) => x.pageDataKind === 'elderlyAtHomePageArticles'
+          )?.articles ?? null,
+      },
+    };
+  }
 );
 
 const ElderlyAtHomeRegionalPage = (

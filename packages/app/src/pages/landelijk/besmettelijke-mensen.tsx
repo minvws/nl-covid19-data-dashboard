@@ -35,9 +35,10 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: content.pageParts.find(
-          (x) => x.pageDataKind === 'infectiousPeoplePageArticles'
-        )?.articles,
+        articles:
+          content.pageParts.find(
+            (x) => x.pageDataKind === 'infectiousPeoplePageArticles'
+          )?.articles ?? null,
       },
     };
   }

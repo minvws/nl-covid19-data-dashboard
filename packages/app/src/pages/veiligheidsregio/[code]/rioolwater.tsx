@@ -1,5 +1,6 @@
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { GetStaticPropsContext } from 'next';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -11,9 +12,10 @@ import { VrLayout } from '~/domain/layout/vr-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -30,10 +32,19 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrData('sewer', 'sewer_per_installation', 'difference.sewer__average'),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('sewerPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('sewerPage'))(context);
+
+    return {
+      content: {
+        articles:
+          content.pageParts.find((x) => x.pageDataKind === 'sewerPageArticles')
+            ?.articles ?? null,
+      },
+    };
+  }
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {

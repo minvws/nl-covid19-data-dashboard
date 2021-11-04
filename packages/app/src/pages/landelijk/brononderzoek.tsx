@@ -38,9 +38,10 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles: content.pageParts.find(
-            (x) => x.pageDataKind === 'situationsPageArticles'
-          )?.articles,
+          articles:
+            content.pageParts.find(
+              (x) => x.pageDataKind === 'situationsPageArticles'
+            )?.articles ?? null,
         },
       };
     }
