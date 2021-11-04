@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { AgeDemographic } from '~/components/age-demographic';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -38,9 +39,22 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'difference.deceased_rivm__covid_daily'
   ),
-  createGetContent<PagePartQueryResult<ArticleParts>>(() =>
-    getPagePartsQuery('deceasedPage')
-  )
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('deceasedPage'))(context);
+
+    return {
+      content: {
+        mainArticles: content.pageParts.find(
+          (x) => x.pageDataKind === 'deceasedPageArticles'
+        )?.articles,
+        monitorArticles: content.pageParts.find(
+          (x) => x.pageDataKind === 'deceasedMonitorArticles'
+        )?.articles,
+      },
+    };
+  }
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -49,13 +63,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataCbs = data.deceased_cbs;
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
-
-  const mainArticles = content.pageParts.find(
-    (x) => x.pageDataKind === 'deceasedPageArticles'
-  )?.articles;
-  const monitorArticles = content.pageParts.find(
-    (x) => x.pageDataKind === 'deceasedMonitorArticles'
-  )?.articles;
 
   const { siteText } = useIntl();
 
@@ -83,7 +90,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={mainArticles}
+            articles={content.mainArticles}
           />
 
           <TwoKpiSection>
@@ -202,7 +209,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
             }}
-            articles={monitorArticles}
+            articles={content.monitorArticles}
           />
 
           <DeceasedMonitorSection
