@@ -85,7 +85,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.main.articles}
+            articles={content.main?.articles}
           />
 
           <TwoKpiSection>
@@ -204,7 +204,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
             }}
-            articles={content.monitor.articles}
+            articles={content.monitor?.articles}
           />
 
           <DeceasedMonitorSection
