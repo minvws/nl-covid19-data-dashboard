@@ -149,7 +149,7 @@
     "start": "cross-env NODE_ENV=production node next-server.js",
     "start-e2e": "next start -H 0.0.0.0 -p 3000",
     "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register",
-    "test:coverage": "c8 --inlcude=src yarn test",
+    "test:coverage": "c8 --include=src yarn test",
     "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"yarn test\"",
     "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register --bail",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
