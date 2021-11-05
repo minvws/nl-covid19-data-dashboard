@@ -101,8 +101,8 @@ export default function CovidVariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.page?.pageLinks}
+            articles={content.highlight?.articles}
           />
 
           {variantSidebarValue?.sample_size && (

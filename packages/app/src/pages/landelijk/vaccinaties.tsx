@@ -154,7 +154,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.title}
             category={text.category}
             icon={<VaccinatieIcon />}
-            description={content.page.pageDescription}
+            description={content.page?.pageDescription}
             metadata={{
               datumsText: text.datums,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
@@ -163,9 +163,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            pageLinks={content.page.pageLinks}
+            pageLinks={content.page?.pageLinks}
             referenceLink={text.reference.href}
-            articles={content.highlight.articles}
+            articles={content.highlight?.articles}
           />
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
@@ -287,11 +287,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             timelineEvents={{
               coverage: getTimelineEvents(
-                content.elements.timeSeries,
+                content.elements?.timeSeries,
                 'vaccine_coverage'
               ),
               deliveryAndAdministration: getTimelineEvents(
-                content.elements.timeSeries,
+                content.elements?.timeSeries,
                 'vaccine_administered'
               ),
             }}

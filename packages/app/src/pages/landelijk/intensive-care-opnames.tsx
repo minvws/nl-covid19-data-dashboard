@@ -123,8 +123,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.page?.pageLinks}
+            articles={content.highlight?.articles}
           />
 
           <TwoKpiSection>
@@ -273,7 +273,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     },
                   ],
                   timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
+                    content.elements?.timeSeries,
                     'intensive_care_nice'
                   ),
                 }}
