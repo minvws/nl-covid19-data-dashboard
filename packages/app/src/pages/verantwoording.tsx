@@ -1,5 +1,7 @@
+import css from '@styled-system/css';
 import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { CollapsibleSection } from '~/components/collapsible';
@@ -97,7 +99,10 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                   return item.content ? (
                     <CollapsibleSection key={id} id={id} summary={item.title}>
                       <Box pt={2} pb={4}>
-                        <RichContent blocks={item.content} />
+                        <RichContent
+                          blocks={item.content}
+                          contentWrapper={RichContentWrapper}
+                        />
                       </Box>
                     </CollapsibleSection>
                   ) : null;
@@ -110,5 +115,11 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
     </Layout>
   );
 };
+
+const RichContentWrapper = styled.div(
+  css({
+    width: '100%',
+  })
+);
 
 export default Verantwoording;

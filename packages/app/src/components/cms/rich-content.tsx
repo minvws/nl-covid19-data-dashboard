@@ -90,6 +90,7 @@ export function RichContent({
           {...props}
         />
       ),
+
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
 
@@ -230,6 +231,7 @@ const StyledPortableText = styled(PortableText)(
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
     '& > ul': {
       display: 'flex',
       flexDirection: 'column',
