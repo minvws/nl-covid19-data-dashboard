@@ -42,6 +42,7 @@ const hiddenDocTypes = [
   'pageArticles',
   'pageLinks',
   'pageHighlightedItems',
+  'pageRichText',
   'pageIdentifier',
 ];
 
@@ -146,6 +147,9 @@ export default () =>
               ),
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'pageHighlightedItems'
+              ),
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'pageRichText'
               ),
             ])
         ),

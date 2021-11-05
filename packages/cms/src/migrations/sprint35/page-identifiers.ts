@@ -172,6 +172,9 @@ const pageInfo = [
       },
     ],
     links: [{ title: 'Vaccinatie links', kind: 'vaccinationsPageLinks' }],
+    richText: [
+      { title: 'Vaccinatie omschrijving', kind: 'vaccinationsPageDescription' },
+    ],
   },
   {
     type: 'variantsPage',
@@ -280,6 +283,19 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
             minNumber: 1,
             maxNumber: 2,
             highlights: document.highlights?.slice(),
+          })
+        )
+      );
+    }
+    if (isDefined(info.richText)) {
+      promises.push(
+        ...info.richText.map((richTextInfo: any) =>
+          client.create({
+            _type: 'pageRichText',
+            title: richTextInfo.title,
+            pageIdentifier: { _type: 'reference', _ref: pageIdentifier._id },
+            pageDataKind: richTextInfo.kind,
+            text: document.pageDescription,
           })
         )
       );

@@ -4,7 +4,7 @@ const client = getClient('development');
 
 function fetchPartIds() {
   return client.fetch(
-    /* groq */ `*[_type in ['pageArticles', 'pageHighlightedItems', 'pageLinks']]{_id}`
+    /* groq */ `*[_type in ['pageArticles', 'pageHighlightedItems', 'pageLinks', 'pageRichText']]{_id}`
   );
 }
 
