@@ -79,6 +79,34 @@ const actionsByDocumentType = {
     DuplicateAction,
     DeleteAction,
   ],
+  pageArticles: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
+  pageHighlightedItems: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
+  pageLinks: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
+  pageRichText: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
 };
 
 type DocumentType = keyof typeof actionsByDocumentType;
