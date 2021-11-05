@@ -41,7 +41,8 @@ export type LinkParts = {
 
 export type HighlightedItemParts = {
   _type: 'pageHighlightedItems';
-  highlights: any[];
+  highlights: ArticleSummary[];
+  showWeeklyHighlight: boolean;
 } & PageBasePart;
 
 export type RichTextParts = {
@@ -96,7 +97,8 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
         (highlights != undefined) => {
           _type,
           pageDataKind,
-          highlights[]{title, category, href, "cover": {"asset": cover.asset->}}
+          showWeeklyHighlight,
+          highlights[]{title, category, "slug": {"current": href}, "cover": {"asset": cover.asset->}}
         },
         (text != undefined) => {
           _type,

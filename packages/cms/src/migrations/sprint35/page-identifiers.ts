@@ -282,6 +282,7 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
             pageDataKind: highlightInfo.kind,
             minNumber: 1,
             maxNumber: 2,
+            showWeeklyHighlight: document.showWeeklyHighlight,
             highlights: document.highlights?.slice(),
           })
         )

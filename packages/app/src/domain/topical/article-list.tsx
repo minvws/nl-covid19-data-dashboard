@@ -1,9 +1,10 @@
 import css from '@styled-system/css';
+import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
-import { ContentTeaser, ContentTeaserProps } from '~/components/content-teaser';
+import { ContentTeaser } from '~/components/content-teaser';
 import { asResponsiveArray } from '~/style/utils';
 interface ArticleListProps {
-  articles: ContentTeaserProps[];
+  articles: ArticleSummary[];
 }
 
 export function ArticleList({ articles }: ArticleListProps) {
@@ -19,9 +20,9 @@ export function ArticleList({ articles }: ArticleListProps) {
     >
       {articles.map((item) => (
         <ContentTeaser
-          key={item.slug}
+          key={item.slug.current}
           title={item.title}
-          slug={item.slug}
+          slug={item.slug.current}
           cover={item.cover}
           category={item.category}
           variant="small"
