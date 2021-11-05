@@ -19,7 +19,13 @@ export function SanityImage(props: SanityImageProps) {
   return (
     <picture className={props.className}>
       <source srcSet={srcSet} sizes={sizes} type={`image/${extension}`} />
-      <Image src={src} srcSet={srcSet} sizes={sizes} {...imageProps} />
+      <Image
+        loading="lazy"
+        src={src}
+        srcSet={srcSet}
+        sizes={sizes}
+        {...imageProps}
+      />
     </picture>
   );
 }
