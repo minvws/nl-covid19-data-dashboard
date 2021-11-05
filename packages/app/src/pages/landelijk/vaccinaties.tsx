@@ -33,6 +33,7 @@ import {
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
+  isRichTextParts,
   LinkParts,
   PagePartQueryResult,
 } from '~/queries/get-page-parts.query';
@@ -94,6 +95,11 @@ export const getStaticProps = createGetStaticProps(
             .filter(isLinkParts)
             .find((x) => x.pageDataKind === 'vaccinationsPageLinks')?.links ??
           null,
+        pageDescription:
+          content.parts.pageParts
+            .filter(isRichTextParts)
+            .find((x) => x.pageDataKind === 'vaccinationsPageDescription')
+            ?.text ?? null,
         elements: content.elements,
       },
     };

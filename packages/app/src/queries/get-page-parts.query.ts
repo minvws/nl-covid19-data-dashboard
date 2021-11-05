@@ -1,4 +1,5 @@
 import { ArticleSummary } from '~/components/article-teaser';
+import { RichContentBlock } from '~/types/cms';
 
 export type PageIdentifier =
   | 'in_positiveTestsPage'
@@ -43,7 +44,16 @@ export type HighlightedItemParts = {
   highlights: any[];
 } & PageBasePart;
 
-export type PagePart = ArticleParts | LinkParts | HighlightedItemParts;
+export type RichTextParts = {
+  _type: 'pageRichText';
+  text: RichContentBlock[];
+} & PageBasePart;
+
+export type PagePart =
+  | ArticleParts
+  | LinkParts
+  | HighlightedItemParts
+  | RichTextParts;
 
 export type PagePartQueryResult<T extends PagePart = PagePart> = {
   pageParts: T[];
@@ -61,6 +71,10 @@ export function isHighlightedItemParts(
   value: PagePart
 ): value is HighlightedItemParts {
   return value._type === 'pageHighlightedItems';
+}
+
+export function isRichTextParts(value: PagePart): value is RichTextParts {
+  return value._type === 'pageRichText';
 }
 
 export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
@@ -83,6 +97,11 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
           _type,
           pageDataKind,
           highlights[]{title, category, href, "cover": {"asset": cover.asset->}}
+        },
+        (text != undefined) => {
+          _type,
+          pageDataKind,
+          text
         },
       }
     }[0]`;

@@ -1,5 +1,5 @@
 import { Varianten } from '@corona-dashboard/icons';
-import { ArticleSummary } from '~/components/article-teaser';
+import { GetStaticPropsContext } from 'next';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
@@ -7,24 +7,22 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
   getVariantSidebarValue,
-  getVariantTableData,
+  getVariantTableData
 } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getVariantsPageQuery } from '~/queries/variants-page-query';
+import { ArticleParts, getPagePartsQuery, isArticleParts, isLinkParts, LinkParts, PagePartQueryResult } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
-import { VariantsPageQuery } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'nlVariantsPage',
@@ -43,19 +41,24 @@ export const getStaticProps = withFeatureNotFoundPage(
         ...getVariantChartData(variants),
       };
     },
-    createGetContent<{
-      page: VariantsPageQuery;
-      highlight: {
-        articles?: ArticleSummary[];
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<PagePartQueryResult<ArticleParts | LinkParts>>(() => getPagePartsQuery('variantsPage'))(context);
+  
+      return {
+        content: {
+          articles:
+            content.pageParts
+              .filter(isArticleParts)
+              .find((x) => x.pageDataKind === 'variantsPageArticles')
+              ?.articles ?? null,
+          links:
+            content.pageParts
+              .filter(isLinkParts)
+              .find((x) => x.pageDataKind === 'variantsPageLinks')?.links ??
+            null,
+        },
       };
-    }>((context) => {
-      const { locale } = context;
-      return `{
-        "page": ${getVariantsPageQuery(context)},
-        "highlight": ${createPageArticlesQuery('variantsPage', locale)}
-      }`;
-    })
-  )
+    )
 );
 
 export default function CovidVariantenPage(
