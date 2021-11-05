@@ -4,6 +4,7 @@ import {
   Locatie,
   Verpleeghuiszorg,
 } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -17,9 +18,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -41,10 +43,20 @@ export const getStaticProps = createGetStaticProps(
     'difference.nursing_home__newly_infected_people',
     'nursing_home'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('nursingHomePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('nursingHomePage'))(context);
+
+    return {
+      content: {
+        articles:
+          content.pageParts.find(
+            (x) => x.pageDataKind === 'nursingHomePageArticles'
+          )?.articles ?? null,
+      },
+    };
+  }
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {

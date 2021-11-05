@@ -4,6 +4,7 @@ import {
   Locatie,
   Verpleeghuiszorg,
 } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -21,9 +22,10 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -47,10 +49,20 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
   }),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('nursingHomePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('nursingHomePage'))(context);
+
+    return {
+      content: {
+        articles:
+          content.pageParts.find(
+            (x) => x.pageDataKind === 'nursingHomePageArticles'
+          )?.articles ?? null,
+      },
+    };
+  }
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {

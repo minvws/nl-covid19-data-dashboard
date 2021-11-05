@@ -6,9 +6,9 @@ import {
 } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { last } from 'lodash';
+import { GetStaticPropsContext } from 'next';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
@@ -30,8 +30,13 @@ import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getInPositiveTestsQuery } from '~/queries/in-positive-tests-query';
+import {
+  ArticleParts,
+  getPagePartsQuery,
+  isArticleParts,
+  isLinkParts,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,7 +48,6 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
-import { InPositiveTestsQuery } from '~/types/cms';
 
 type CompiledCountriesValue = {
   date_start_unix: number;
@@ -54,18 +58,25 @@ export const getStaticProps = withFeatureNotFoundPage(
   'inPositiveTestsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    createGetContent<{
-      page: InPositiveTestsQuery;
-      highlight: {
-        articles?: ArticleSummary[];
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts>
+      >(() => getPagePartsQuery('in_positiveTestsPage'))(context);
+      return {
+        content: {
+          articles:
+            content.pageParts
+              .filter(isArticleParts)
+              .find((x) => x.pageDataKind === 'in_positiveTestsPageArticles')
+              ?.articles ?? null,
+          links:
+            content.pageParts
+              .filter(isLinkParts)
+              .find((x) => x.pageDataKind === 'in_positiveTestsPageLinks')
+              ?.links ?? null,
+        },
       };
-    }>((context) => {
-      const { locale } = context;
-      return `{
-      "page": ${getInPositiveTestsQuery(context)},
-      "highlight": ${createPageArticlesQuery('in_positiveTestsPage', locale)}
-    }`;
-    }),
+    },
     createGetChoroplethData({
       in: ({ tested_overall }) => tested_overall,
     }),
@@ -150,8 +161,8 @@ export default function PositiefGetesteMensenPage(
               dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
-            articles={content.highlight.articles}
-            pageLinks={content.page.pageLinks}
+            articles={content.articles}
+            pageLinks={content.links}
           />
 
           <InformationTile message={text.informatie_tegel} />

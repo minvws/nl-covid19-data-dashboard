@@ -4,6 +4,7 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -23,10 +24,13 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
+  ArticleParts,
+  getPagePartsQuery,
+  isArticleParts,
+  isLinkParts,
+  LinkParts,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -38,7 +42,6 @@ import {
   selectGmData,
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
-import { HospitalAdmissionsPageQuery } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -54,19 +57,36 @@ export const getStaticProps = createGetStaticProps(
       hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
     }),
   }),
-  createGetContent<{
-    page: HospitalAdmissionsPageQuery;
-    highlight: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts | LinkParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+        "parts": ${getPagePartsQuery('hospitalPage')},
+        "elements": ${createElementsQuery(
+          'gm',
+          ['hospital_nice'],
+          context.locale
+        )}
+      }`;
+    })(context);
 
-    return `{
-      "page": ${getHospitalAdmissionsPageQuery(context)},
-      "highlight": ${createPageArticlesQuery('hospitalPage', locale)},
-      "elements": ${createElementsQuery('gm', ['hospital_nice'], locale)}
-    }`;
-  })
+    return {
+      content: {
+        articles:
+          content.parts.pageParts
+            .filter(isArticleParts)
+            .find((x) => x.pageDataKind === 'hospitalPageArticles')?.articles ??
+          null,
+        links:
+          content.parts.pageParts
+            .filter(isLinkParts)
+            .find((x) => x.pageDataKind === 'hospitalPageLinks')?.links ?? null,
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
@@ -125,8 +145,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.links}
+            articles={content.articles}
           />
 
           <TwoKpiSection>

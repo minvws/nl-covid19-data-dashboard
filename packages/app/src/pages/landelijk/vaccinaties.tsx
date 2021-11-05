@@ -36,6 +36,7 @@ import {
   isRichTextParts,
   LinkParts,
   PagePartQueryResult,
+  RichTextParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -70,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
-      parts: PagePartQueryResult<ArticleParts | LinkParts>;
+      parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
       elements: ElementsQueryResult;
     }>((context) => {
       return `{

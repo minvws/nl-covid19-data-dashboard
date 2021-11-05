@@ -7,21 +7,28 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
   getVariantSidebarValue,
-  getVariantTableData
+  getVariantTableData,
 } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { ArticleParts, getPagePartsQuery, isArticleParts, isLinkParts, LinkParts, PagePartQueryResult } from '~/queries/get-page-parts.query';
+import {
+  ArticleParts,
+  getPagePartsQuery,
+  isArticleParts,
+  isLinkParts,
+  LinkParts,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 
 export const getStaticProps = withFeatureNotFoundPage(
@@ -42,8 +49,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       };
     },
     async (context: GetStaticPropsContext) => {
-      const { content } = await createGetContent<PagePartQueryResult<ArticleParts | LinkParts>>(() => getPagePartsQuery('variantsPage'))(context);
-  
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts | LinkParts>
+      >(() => getPagePartsQuery('variantsPage'))(context);
+
       return {
         content: {
           articles:
@@ -58,7 +67,8 @@ export const getStaticProps = withFeatureNotFoundPage(
             null,
         },
       };
-    )
+    }
+  )
 );
 
 export default function CovidVariantenPage(

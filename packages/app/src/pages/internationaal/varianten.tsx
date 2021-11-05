@@ -1,7 +1,7 @@
+import { Test } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { useCallback, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { Test } from '@corona-dashboard/icons';
-
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -22,9 +22,13 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ArticleParts,
+  getPagePartsQuery,
+  isArticleParts,
+  isLinkParts,
+  LinkParts,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -35,7 +39,6 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-import { LinkProps } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
@@ -61,23 +64,26 @@ export const getStaticProps = withFeatureNotFoundPage(
         ...getInternationalVariantChartData(internationalData),
       };
     },
-    createGetContent<{
-      page: {
-        pageLinks?: LinkProps[];
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts | LinkParts>
+      >(() => getPagePartsQuery('in_variantsPage'))(context);
+
+      return {
+        content: {
+          articles:
+            content.pageParts
+              .filter(isArticleParts)
+              .find((x) => x.pageDataKind === 'in_variantsPageArticles')
+              ?.articles ?? null,
+          links:
+            content.pageParts
+              .filter(isLinkParts)
+              .find((x) => x.pageDataKind === 'in_variantsPageLinks')?.links ??
+            null,
+        },
       };
-      highlight: PageArticlesQueryResult;
-    }>((context) => {
-      const { locale } = context;
-      return `{
-        "page": *[_type=='in_variantsPage']{
-          "pageLinks": [...pageLinks[]{
-            "title": title.${locale},
-            "href": href,
-          }]
-        }[0],
-        "highlight": ${createPageArticlesQuery('in_variantsPage', locale)}
-    }`;
-    })
+    }
   )
 );
 
@@ -161,8 +167,8 @@ export default function VariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.highlight?.articles}
-            pageLinks={content.page?.pageLinks}
+            articles={content.articles}
+            pageLinks={content.links}
           />
 
           <InformationTile message={text.informatie_tegel} />
