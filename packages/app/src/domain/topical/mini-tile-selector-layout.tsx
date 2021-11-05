@@ -256,6 +256,10 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   );
 }
 
+/**
+ * Using this container is so that the user can see the correct layout of
+ * the tile selector depending on their screen size.
+ */
 const ContainerTileSelector = styled.div<{
   narrowId: string;
   wideId: string;
