@@ -120,9 +120,6 @@
     "intensive_care_vaccination_status": {
       "$ref": "intensive_care_vaccination_status.json"
     },
-    "intensive_care_vaccine_incidence_per_age_group": {
-      "$ref": "intensive_care_vaccine_incidence_per_age_group.json"
-    },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
     },
