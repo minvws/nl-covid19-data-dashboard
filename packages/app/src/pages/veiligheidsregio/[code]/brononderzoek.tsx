@@ -15,15 +15,19 @@ import { SituationsOverTimeChart } from '~/domain/situations/situations-over-tim
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { ArticleParts, getPagePartsQuery, PagePartQueryResult } from '~/queries/get-page-parts.query';
+import {
+  ArticleParts,
+  getPagePartsQuery,
+  PagePartQueryResult,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrData
+  selectVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -42,14 +46,13 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles: content.pageParts.find(
-            (x) => x.pageDataKind === 'situationsPageArticles'
-          )?.articles ?? null,
+          articles:
+            content.pageParts.find(
+              (x) => x.pageDataKind === 'situationsPageArticles'
+            )?.articles ?? null,
         },
       };
     }
-  )
-
   )
 );
 

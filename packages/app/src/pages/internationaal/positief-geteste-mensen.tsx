@@ -35,6 +35,7 @@ import {
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
+  LinkParts,
   PagePartQueryResult,
 } from '~/queries/get-page-parts.query';
 import {
@@ -60,7 +61,7 @@ export const getStaticProps = withFeatureNotFoundPage(
     getLastGeneratedDate,
     async (context: GetStaticPropsContext) => {
       const { content } = await createGetContent<
-        PagePartQueryResult<ArticleParts>
+        PagePartQueryResult<ArticleParts | LinkParts>
       >(() => getPagePartsQuery('in_positiveTestsPage'))(context);
       return {
         content: {
