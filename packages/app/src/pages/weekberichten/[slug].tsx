@@ -52,7 +52,7 @@ export const getStaticProps = createGetStaticProps(
           "${locale}": [
             ...cover.${locale}[]
           ]
-        },  
+        },
         "intro": {
           ...intro,
           "${locale}": [
@@ -70,7 +70,7 @@ export const getStaticProps = createGetStaticProps(
               _type == 'dashboardChart' || _type == 'dashboardKpi' => {
                 ...*[_id == ^._ref][0]
               }
-            }  
+            }
           ]
         }
       }
@@ -83,10 +83,9 @@ export default function EditorialDetailPage(
 ) {
   const { content, lastGenerated } = props;
   const { cover } = props.content;
-  const { asset } = cover;
   const { locale = 'nl' } = useRouter();
 
-  const imgPath = getImageSrc(asset, 1200);
+  const imgPath = cover ? getImageSrc(cover.asset, 1200) : '';
 
   const metadata = {
     title: getTitle(props.content.title, locale),
@@ -96,7 +95,7 @@ export default function EditorialDetailPage(
   };
 
   const breadcrumbsData = useMemo(
-    () => ({ [props.content.slug.current]: props.content.title }),
+    () => ({ [props.content.slug?.current]: props.content.title }),
     [props.content.slug, props.content.title]
   );
 

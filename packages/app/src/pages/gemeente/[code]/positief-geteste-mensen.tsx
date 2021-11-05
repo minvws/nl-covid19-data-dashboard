@@ -110,7 +110,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            articles={content.page?.articles}
           />
 
           <TwoKpiSection>
@@ -224,7 +224,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
                 dataOptions={{
                   timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
+                    content.elements?.timeSeries,
                     'tested_overall'
                   ),
                 }}

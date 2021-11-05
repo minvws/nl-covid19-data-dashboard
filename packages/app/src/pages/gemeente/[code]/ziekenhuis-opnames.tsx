@@ -125,8 +125,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.page?.pageLinks}
+            articles={content.highlight?.articles}
           />
 
           <TwoKpiSection>
@@ -193,7 +193,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     },
                   ],
                   timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
+                    content.elements?.timeSeries,
                     'hospital_nice'
                   ),
                 }}

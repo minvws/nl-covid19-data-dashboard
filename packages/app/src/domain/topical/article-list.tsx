@@ -17,7 +17,7 @@ export function ArticleList({ articles }: ArticleListProps) {
       })}
       spacing={{ _: 3, md: 0 }}
     >
-      {articles.map((item) => (
+      {articles?.map((item) => (
         <ContentTeaser
           key={item.slug}
           title={item.title}

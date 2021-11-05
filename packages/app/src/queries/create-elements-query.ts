@@ -112,7 +112,7 @@ export function getTimelineEvents(
   elements: CmsTimeSeriesElement[],
   metricName: string
 ) {
-  const timelineEventCollections = elements.find(
+  const timelineEventCollections = elements?.find(
     (x) => x.metricName === metricName
   )?.timelineEventCollections;
 
@@ -130,6 +130,6 @@ export function getTimelineEvents(
 
 export function getWarning(elements: CmsWarningElement[], metricName: string) {
   return (
-    elements.find((x) => x.metricName === metricName)?.warning || undefined
+    elements?.find((x) => x.metricName === metricName)?.warning || undefined
   );
 }

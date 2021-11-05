@@ -156,9 +156,9 @@ export const VaccinationsGmPage = (
                 filteredAgeGroup18Plus.date_of_insertion_unix,
               dataSources: [],
             }}
-            pageLinks={content.page.pageLinks}
+            pageLinks={content.page?.pageLinks}
             referenceLink={text.informatie_blok.reference.href}
-            articles={content.highlight.articles}
+            articles={content.highlight?.articles}
           />
 
           {vaccineCoverageEstimatedFeature.isEnabled && (

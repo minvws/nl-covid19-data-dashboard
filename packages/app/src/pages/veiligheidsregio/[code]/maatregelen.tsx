@@ -75,7 +75,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
 
   const { lockdown } = content;
-  const { showLockdown } = lockdown;
+  const showLockdown = lockdown?.showLockdown ?? false;
 
   const router = useRouter();
   const code = router.query.code as unknown as VRCode;
@@ -128,7 +128,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 <Heading level={3}>{lockdown.title}</Heading>
                 <LockdownTable
                   data={lockdown}
-                  level={content.riskLevel.level}
+                  level={content.riskLevel?.level}
                 />
               </Box>
             </Tile>

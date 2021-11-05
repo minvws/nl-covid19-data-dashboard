@@ -150,8 +150,8 @@ export default function PositiefGetesteMensenPage(
               dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
-            articles={content.highlight.articles}
-            pageLinks={content.page.pageLinks}
+            articles={content.highlight?.articles}
+            pageLinks={content.page?.pageLinks}
           />
 
           <InformationTile message={text.informatie_tegel} />

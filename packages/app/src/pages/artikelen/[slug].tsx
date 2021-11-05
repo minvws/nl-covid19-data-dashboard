@@ -75,9 +75,8 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { locale = 'nl' } = useRouter();
 
   const { cover } = content;
-  const { asset } = cover;
 
-  const imgPath = getImageSrc(asset, 1200);
+  const imgPath = cover ? getImageSrc(cover.asset, 1200) : '';
 
   const metadata = {
     title: getTitle(props.content.title, locale),
@@ -87,7 +86,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const breadcrumbsData = useMemo(
-    () => ({ [props.content.slug.current]: props.content.title }),
+    () => ({ [props.content.slug?.current]: props.content.title }),
     [props.content.slug, props.content.title]
   );
 

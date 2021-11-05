@@ -114,7 +114,7 @@ export function useSidebar<T extends Layout>({
 
       return {
         key,
-        title: siteText.sidebar.metrics[key].title,
+        title: siteText.sidebar.metrics[key]?.title,
         icon,
         href: getHref(key),
       };
@@ -126,7 +126,7 @@ export function useSidebar<T extends Layout>({
 
       return {
         key,
-        title: content.title,
+        title: content?.title,
         description: isPresent(content?.description)
           ? content.description
           : undefined,

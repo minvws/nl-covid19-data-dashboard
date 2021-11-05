@@ -136,7 +136,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.main.articles}
+            articles={content.main?.articles}
           />
 
           <TwoKpiSection>
@@ -240,7 +240,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
                 dataOptions={{
                   timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
+                    content.elements?.timeSeries,
                     'tested_overall'
                   ),
                 }}
@@ -298,7 +298,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [ggdText.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.ggd.articles}
+            articles={content.ggd?.articles}
           />
 
           <TwoKpiSection>
@@ -389,7 +389,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   isPercentage: true,
                   timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
+                    content.elements?.timeSeries,
                     'tested_ggd'
                   ),
                 }}

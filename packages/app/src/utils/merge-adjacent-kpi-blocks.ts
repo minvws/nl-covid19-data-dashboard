@@ -8,6 +8,11 @@ import { RichContentBlock } from '~/types/cms';
  */
 export function mergeAdjacentKpiBlocks(blocks: RichContentBlock[]) {
   const result: RichContentBlock[] = [];
+  if (!blocks) {
+    // Edge case in case blocks is undefined
+    return result;
+  }
+
   for (let i = 0, ii = blocks.length; i < ii; i++) {
     let block = blocks[i];
     if (

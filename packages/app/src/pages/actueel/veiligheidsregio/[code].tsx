@@ -203,7 +203,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         ?.admissions_on_date_of_admission_moving_average_rounded ??
                       0,
                     warning: getWarning(
-                      content.elements.warning,
+                      content.elements?.warning,
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<VrHospitalNiceValue>,
@@ -217,7 +217,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       renderedAgeGroup18Pluslabels.fully_vaccinated_percentage,
                     valueIsPercentage: true,
                     warning: getWarning(
-                      content.elements.warning,
+                      content.elements?.warning,
                       'vaccinatiegraad'
                     ),
                     percentageBar: {
@@ -305,7 +305,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   }}
                   accessibility={{ key: 'topical_hospital_nice' }}
                   warning={getWarning(
-                    content.elements.warning,
+                    content.elements?.warning,
                     'hospital_nice'
                   )}
                 />
@@ -354,7 +354,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       filteredAgeGroup18Plus.fully_vaccinated_percentage_label
                     }
                     warning={getWarning(
-                      content.elements.warning,
+                      content.elements?.warning,
                       'vaccine_coverage_per_age_group'
                     )}
                   />

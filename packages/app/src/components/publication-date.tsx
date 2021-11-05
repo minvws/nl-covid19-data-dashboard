@@ -7,5 +7,9 @@ type PublicationDateProps = {
 export function PublicationDate({ date }: PublicationDateProps) {
   const { formatDate } = useIntl();
 
-  return <time dateTime={date}>{formatDate(new Date(date), 'medium')}</time>;
+  return (
+    <time dateTime={date}>
+      {formatDate(date ? new Date(date) : new Date(), 'medium')}
+    </time>
+  );
 }

@@ -63,6 +63,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   const { content, lastGenerated } = props;
   const { lockdown } = content;
+  const showLockdown = lockdown?.showLockdown ?? false;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -74,7 +75,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
-          {lockdown.showLockdown && (
+          {showLockdown && (
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{lockdown.message.title}</Heading>
@@ -85,13 +86,13 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             </Tile>
           )}
 
-          {lockdown.showLockdown && (
+          {showLockdown && (
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{lockdown.title}</Heading>
                 <LockdownTable
                   data={lockdown}
-                  level={content.riskLevel.level}
+                  level={content.riskLevel?.level}
                 />
               </Box>
             </Tile>

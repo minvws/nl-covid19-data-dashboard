@@ -28,6 +28,10 @@ export function ContentImage({
   contentWrapper,
   sizes,
 }: ContentImageProps) {
+  if (!node) {
+    return null;
+  }
+
   const caption = 'caption' in node && node.caption && (
     <Text as="figcaption" variant="body2" textAlign="left">
       {node.caption}
