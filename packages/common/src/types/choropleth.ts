@@ -1,4 +1,5 @@
 import type { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
+import type { MetricKeys } from '.';
 import type {
   GmCollection,
   GmDifference,
@@ -62,11 +63,6 @@ export type Metric<T> = {
   values: T[];
   last_value: T;
 };
-
-export type MetricKeys<T> = keyof Omit<
-  T,
-  'last_generated' | 'proto_name' | 'name' | 'code'
->;
 
 export type GmCollectionMetricName = MetricKeys<GmCollection>;
 export type VrCollectionMetricName = MetricKeys<VrCollection>;

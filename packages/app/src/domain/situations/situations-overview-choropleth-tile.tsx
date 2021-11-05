@@ -89,7 +89,6 @@ export function SituationsOverviewChoroplethTile({
               key={situation.id}
             >
               <DynamicChoropleth
-                renderTarget="canvas"
                 accessibility={{ key: 'situations_choropleths' }}
                 map="vr"
                 data={data}

@@ -172,7 +172,6 @@ export default function PositiefGetesteMensenPage(
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',

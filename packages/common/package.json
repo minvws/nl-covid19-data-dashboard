@@ -10,8 +10,9 @@
   ],
   "scripts": {
     "bootstrap": "yarn build",
-    "test": "jest --watch",
-    "test:ci": "jest --ci",
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register src __tests__",
+    "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"yarn test\"",
+    "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register --bail",
     "dev": "tsc -w",
     "build:watch": "chokidar \"./src/**/*.*\" -c \"yarn build\"",
     "build": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
@@ -27,19 +28,20 @@
     "ts-is-present": "^1.2.2"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
     "@types/node": "^16.11.6",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
+    "chokidar-cli": "^3.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
-    "jest": "^27.3.1",
     "prettier": "^2.4.1",
-    "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.11.0",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "uvu": "^0.5.2"
   }
 }

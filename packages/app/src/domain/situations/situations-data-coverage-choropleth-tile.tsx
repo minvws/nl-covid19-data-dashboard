@@ -90,7 +90,6 @@ export function SituationsDataCoverageChoroplethTile({
           <Box height="100%">
             <ErrorBoundary>
               <DynamicChoropleth
-                renderTarget="canvas"
                 accessibility={{
                   key: 'situations_has_sufficient_data_choropleth',
                 }}

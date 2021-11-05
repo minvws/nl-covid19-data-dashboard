@@ -147,7 +147,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           >
             {selectedMap === 'gm' && (
               <DynamicChoropleth
-                renderTarget="canvas"
                 map="gm"
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
@@ -165,7 +164,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
             {selectedMap === 'vr' && (
               <DynamicChoropleth
-                renderTarget="canvas"
                 map="vr"
                 accessibility={{
                   key: 'sewer_region_choropleth',

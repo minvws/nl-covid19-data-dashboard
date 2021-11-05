@@ -1,4 +1,4 @@
-import { MetricScope } from '@corona-dashboard/common';
+import { DataScopeKey } from '@corona-dashboard/common';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 function formatStringArray(array: string[]) {
@@ -6,7 +6,7 @@ function formatStringArray(array: string[]) {
 }
 
 export function createElementsQuery(
-  scope: MetricScope,
+  scope: DataScopeKey,
   metricNames: string[],
   locale: string
 ) {
@@ -64,7 +64,7 @@ export function createElementsQuery(
 
 type ElementBase = {
   _id: string;
-  scope: MetricScope;
+  scope: DataScopeKey;
   metricName: string;
   metricProperty: string | null;
 };
@@ -78,7 +78,7 @@ type CmsTimelineEventConfig = {
 
 type CmsTimeSeriesElement = {
   _id: string;
-  scope: MetricScope;
+  scope: DataScopeKey;
   metricName: string;
   metricProperty: string | null;
   timelineEventCollections: CmsTimelineEventCollection[];
