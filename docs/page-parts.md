@@ -49,7 +49,7 @@ Sanity query.
 ## Querying page parts
 
 In the `getStaticProps` phase of a page `getPagePartsQuery` can be used to construct
-a query that will return the page parts for the specified page.
+a query that will return the page parts for a specified page.
 This array of page parts can then easily be projected into an object that holds
 each page part in a separate property.
 
