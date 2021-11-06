@@ -44,7 +44,7 @@ function pageDataListItem(page: any) {
         .pipe(
           map((childPages: any) =>
             S.list()
-              .title('Pagina data')
+              .title('Pagina onderdelen')
               .items(
                 childPages
                   .sort((a: any, b: any) => a.title.localeCompare(b.title))
