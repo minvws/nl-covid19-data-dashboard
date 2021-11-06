@@ -106,8 +106,6 @@ export const getStaticProps = createGetStaticProps(
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  console.log('content', content);
-
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
   const dataSitemap = useDataSitemap('nl');
