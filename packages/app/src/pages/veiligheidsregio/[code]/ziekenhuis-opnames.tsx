@@ -26,12 +26,9 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  ArticleParts,
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
-  LinkParts,
-  PagePartQueryResult,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -43,6 +40,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';

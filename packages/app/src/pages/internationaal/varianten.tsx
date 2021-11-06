@@ -22,12 +22,9 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  ArticleParts,
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
-  LinkParts,
-  PagePartQueryResult,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -39,6 +36,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',

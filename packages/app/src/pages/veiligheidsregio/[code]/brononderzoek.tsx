@@ -15,11 +15,7 @@ import { SituationsOverTimeChart } from '~/domain/situations/situations-over-tim
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import {
-  ArticleParts,
-  getPagePartsQuery,
-  PagePartQueryResult,
-} from '~/queries/get-page-parts.query';
+import { getPagePartsQuery } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -29,6 +25,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 

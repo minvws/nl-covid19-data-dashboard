@@ -13,11 +13,7 @@ import { Text } from '~/components/typography';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  ArticleParts,
-  getPagePartsQuery,
-  PagePartQueryResult,
-} from '~/queries/get-page-parts.query';
+import { getPagePartsQuery } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,6 +23,7 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';

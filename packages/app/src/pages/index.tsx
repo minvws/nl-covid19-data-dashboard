@@ -39,7 +39,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getWarning } from '~/queries/create-elements-query';
-import { getTopicalPageData } from '~/queries/topical-page-query';
+import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import {
   createGetStaticProps,
   StaticProps,

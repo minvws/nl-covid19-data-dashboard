@@ -11,11 +11,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
-import {
-  ArticleParts,
-  getPagePartsQuery,
-  PagePartQueryResult,
-} from '~/queries/get-page-parts.query';
+import { getPagePartsQuery } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -25,6 +21,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,

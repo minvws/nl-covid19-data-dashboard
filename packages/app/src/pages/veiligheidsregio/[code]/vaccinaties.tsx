@@ -24,12 +24,9 @@ import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-tog
 import { useIntl } from '~/intl';
 import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
-  ArticleParts,
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
-  LinkParts,
-  PagePartQueryResult,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -41,6 +38,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';

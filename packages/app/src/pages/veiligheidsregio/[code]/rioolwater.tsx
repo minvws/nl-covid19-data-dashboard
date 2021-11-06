@@ -11,11 +11,7 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import {
-  ArticleParts,
-  getPagePartsQuery,
-  PagePartQueryResult,
-} from '~/queries/get-page-parts.query';
+import { getPagePartsQuery } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -25,6 +21,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';

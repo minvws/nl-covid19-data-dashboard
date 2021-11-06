@@ -31,12 +31,9 @@ import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  ArticleParts,
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
-  LinkParts,
-  PagePartQueryResult,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -49,6 +46,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 
 type CompiledCountriesValue = {
   date_start_unix: number;

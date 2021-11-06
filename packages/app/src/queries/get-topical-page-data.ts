@@ -3,16 +3,18 @@ import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { WeeklyHighlightProps } from '~/domain/topical/highlights-tile';
 import { createGetContent } from '~/static-props/get-data';
 import {
+  ArticleParts,
+  HighlightedItemParts,
+  PagePartQueryResult,
+} from '~/types/cms';
+import {
   createElementsQuery,
   ElementsQueryResult,
 } from './create-elements-query';
 import {
-  ArticleParts,
   getPagePartsQuery,
-  HighlightedItemParts,
   isArticleParts,
   isHighlightedItemParts,
-  PagePartQueryResult,
 } from './get-page-parts.query';
 
 export function getTopicalPageData(

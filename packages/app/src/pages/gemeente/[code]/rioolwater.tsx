@@ -15,11 +15,7 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import {
-  ArticleParts,
-  getPagePartsQuery,
-  PagePartQueryResult,
-} from '~/queries/get-page-parts.query';
+import { getPagePartsQuery } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -29,6 +25,7 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 

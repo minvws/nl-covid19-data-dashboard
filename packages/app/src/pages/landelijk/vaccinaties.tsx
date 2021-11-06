@@ -29,14 +29,10 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  ArticleParts,
   getPagePartsQuery,
   isArticleParts,
   isLinkParts,
   isRichTextParts,
-  LinkParts,
-  PagePartQueryResult,
-  RichTextParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -49,6 +45,12 @@ import {
   getNlData,
   selectNlData,
 } from '~/static-props/get-data';
+import {
+  ArticleParts,
+  LinkParts,
+  PagePartQueryResult,
+  RichTextParts,
+} from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(

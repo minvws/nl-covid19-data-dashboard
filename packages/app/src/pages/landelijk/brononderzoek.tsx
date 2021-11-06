@@ -8,11 +8,7 @@ import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situat
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import {
-  ArticleParts,
-  getPagePartsQuery,
-  PagePartQueryResult,
-} from '~/queries/get-page-parts.query';
+import { getPagePartsQuery } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -22,6 +18,8 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+
 export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
