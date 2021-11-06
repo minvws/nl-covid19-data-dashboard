@@ -13,7 +13,7 @@ Each page part document has a reference to a page identifier document, by then s
 all documents that refer to a specific page identifier it is possible to query all
 of the different page parts in one statement.
 
-Currently there are these types of page parts:
+Currently there are the following types of page parts:
 
 ### Articles
 
