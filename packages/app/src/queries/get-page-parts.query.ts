@@ -84,25 +84,19 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
     {
       identifier,
       "pageParts": *[pageIdentifier._ref == ^._id]{
-        (articles != undefined) => {
-          _type,
-          pageDataKind,
+        _type,
+        pageDataKind,
+        (_type == 'pageArticles') => {
           articles[]->{_id, title, slug, intro, "cover": {"asset": cover.asset->}}
         },
-        (links != undefined) => {
-          _type,
-          pageDataKind,
+        (_type == 'pageLink') => {
           links[]{href, title}
         },
-        (highlights != undefined) => {
-          _type,
-          pageDataKind,
+        (_type == 'pageHighlightedItems') => {
           showWeeklyHighlight,
           highlights[]{title, category, "slug": {"current": href}, "cover": {"asset": cover.asset->}}
         },
-        (text != undefined) => {
-          _type,
-          pageDataKind,
+        (_type == 'pageRichText') => {
           text
         },
       }
