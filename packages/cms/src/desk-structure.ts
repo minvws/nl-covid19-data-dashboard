@@ -139,17 +139,13 @@ export default () =>
                 (item) => item.getId() === 'pageIdentifier'
               ),
               S.divider(),
-              ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'pageArticles'
-              ),
-              ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'pageLinks'
-              ),
-              ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'pageHighlightedItems'
-              ),
-              ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'pageRichText'
+              ...S.documentTypeListItems().filter((item) =>
+                [
+                  'pageArticles',
+                  'pageLinks',
+                  'pageHighlightedItems',
+                  'pageRichText',
+                ].includes(item.getId() ?? '')
               ),
             ])
         ),
