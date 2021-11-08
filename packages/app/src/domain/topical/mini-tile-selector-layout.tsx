@@ -19,7 +19,6 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 
@@ -39,6 +38,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
+
   link?: {
     href: string;
     text: string;
@@ -46,21 +46,21 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints(true);
-
   const { siteText } = useIntl();
 
-  if (breakpoints.md) {
-    return <WideMiniTileSelectorLayout {...props} />;
-  }
-
   return (
-    <Box spacing={3}>
-      <Text variant="label1" color="bodyLight">
-        {siteText.common_actueel.tile_selector_uitleg}
-      </Text>
-      <NarrowMiniTileSelectorLayout {...props} />
-    </Box>
+    <>
+      <Box display={{ _: 'none', md: 'block' }}>
+        <WideMiniTileSelectorLayout {...props} />
+      </Box>
+
+      <Box spacing={3} display={{ _: 'block', md: 'none' }}>
+        <Text variant="label1" color="bodyLight">
+          {siteText.common_actueel.tile_selector_uitleg}
+        </Text>
+        <NarrowMiniTileSelectorLayout {...props} />
+      </Box>
+    </>
   );
 }
 
