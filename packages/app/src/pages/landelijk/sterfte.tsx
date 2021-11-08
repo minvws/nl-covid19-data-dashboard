@@ -16,7 +16,10 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { getPagePartsQuery } from '~/queries/get-page-parts.query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,14 +46,14 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        mainArticles:
-          content.pageParts.find(
-            (x) => x.pageDataKind === 'deceasedPageArticles'
-          )?.articles ?? null,
-        monitorArticles:
-          content.pageParts.find(
-            (x) => x.pageDataKind === 'deceasedMonitorArticles'
-          )?.articles ?? null,
+        mainArticles: getArticleParts(
+          content.pageParts,
+          'deceasedPageArticles'
+        ),
+        monitorArticles: getArticleParts(
+          content.pageParts,
+          'deceasedMonitorArticles'
+        ),
       },
     };
   }

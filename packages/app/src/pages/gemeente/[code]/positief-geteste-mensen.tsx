@@ -23,8 +23,8 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
+  getArticleParts,
   getPagePartsQuery,
-  isArticleParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -70,11 +70,10 @@ export const getStaticProps = createGetStaticProps(
     })(context);
     return {
       content: {
-        articles:
-          content.parts.pageParts
-            .filter(isArticleParts)
-            .find((x) => x.pageDataKind === 'positiveTestsPageArticles')
-            ?.articles ?? null,
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'positiveTestsPageArticles'
+        ),
         elements: content.elements,
       },
     } as const;

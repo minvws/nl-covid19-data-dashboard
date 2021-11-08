@@ -12,9 +12,9 @@ import {
   ElementsQueryResult,
 } from './create-elements-query';
 import {
+  getArticleParts,
+  getHighlightedItemParts,
   getPagePartsQuery,
-  isArticleParts,
-  isHighlightedItemParts,
 } from './get-page-parts.query';
 
 export function getTopicalPageData(
@@ -48,17 +48,17 @@ export function getTopicalPageData(
       }`;
     })(context);
 
-    const highlightInfo = content.parts.pageParts
-      .filter(isHighlightedItemParts)
-      .find((x) => x.pageDataKind === 'topicalPageHighlights');
+    const highlightInfo = getHighlightedItemParts(
+      content.parts.pageParts,
+      'topicalPageHighlights'
+    );
 
     return {
       content: {
-        articles:
-          content.parts.pageParts
-            .filter(isArticleParts)
-            .find((x) => x.pageDataKind === 'topicalPageArticles')?.articles ??
-          null,
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'topicalPageArticles'
+        ),
         highlights: highlightInfo?.highlights ?? null,
         showWeeklyHighlight: highlightInfo?.showWeeklyHighlight ?? false,
         elements: content.elements,

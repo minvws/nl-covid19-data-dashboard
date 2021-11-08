@@ -32,9 +32,9 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
+  getArticleParts,
+  getLinkParts,
   getPagePartsQuery,
-  isArticleParts,
-  isLinkParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -82,15 +82,11 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles:
-          content.parts.pageParts
-            .filter(isArticleParts)
-            .find((x) => x.pageDataKind === 'hospitalPageArticles')?.articles ??
-          null,
-        links:
-          content.parts.pageParts
-            .filter(isLinkParts)
-            .find((x) => x.pageDataKind === 'hospitalPageLinks')?.links ?? null,
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'hospitalPageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'hospitalPageLinks'),
         elements: content.elements,
       },
     };

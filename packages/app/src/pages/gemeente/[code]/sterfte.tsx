@@ -13,7 +13,10 @@ import { Text } from '~/components/typography';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import { getPagePartsQuery } from '~/queries/get-page-parts.query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -42,10 +45,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        mainArticles:
-          content.pageParts.find(
-            (x) => x.pageDataKind === 'deceasedPageArticles'
-          )?.articles ?? null,
+        articles: getArticleParts(content.pageParts, 'deceasedPageArticles'),
       },
     };
   }
@@ -91,7 +91,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 data.deceased_rivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.mainArticles}
+            articles={content.articles}
           />
 
           <TwoKpiSection>

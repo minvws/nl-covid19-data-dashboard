@@ -29,10 +29,10 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
+  getArticleParts,
+  getLinkParts,
   getPagePartsQuery,
-  isArticleParts,
-  isLinkParts,
-  isRichTextParts,
+  getRichTextParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -88,21 +88,15 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles:
-          content.parts.pageParts
-            .filter(isArticleParts)
-            .find((x) => x.pageDataKind === 'vaccinationsPageArticles')
-            ?.articles ?? null,
-        links:
-          content.parts.pageParts
-            .filter(isLinkParts)
-            .find((x) => x.pageDataKind === 'vaccinationsPageLinks')?.links ??
-          null,
-        pageDescription:
-          content.parts.pageParts
-            .filter(isRichTextParts)
-            .find((x) => x.pageDataKind === 'vaccinationsPageDescription')
-            ?.text ?? null,
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'vaccinationsPageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
+        pageDescription: getRichTextParts(
+          content.parts.pageParts,
+          'vaccinationsPageDescription'
+        ),
         elements: content.elements,
       },
     };

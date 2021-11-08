@@ -18,7 +18,10 @@ import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { getPagePartsQuery } from '~/queries/get-page-parts.query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -50,10 +53,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles:
-          content.pageParts.find(
-            (x) => x.pageDataKind === 'behaviorPageArticles'
-          )?.articles ?? null,
+        articles: getArticleParts(content.pageParts, 'behaviorPageArticles'),
       },
     };
   }

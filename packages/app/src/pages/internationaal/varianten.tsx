@@ -22,9 +22,9 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
+  getArticleParts,
+  getLinkParts,
   getPagePartsQuery,
-  isArticleParts,
-  isLinkParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -69,16 +69,11 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles:
-            content.pageParts
-              .filter(isArticleParts)
-              .find((x) => x.pageDataKind === 'in_variantsPageArticles')
-              ?.articles ?? null,
-          links:
-            content.pageParts
-              .filter(isLinkParts)
-              .find((x) => x.pageDataKind === 'in_variantsPageLinks')?.links ??
-            null,
+          articles: getArticleParts(
+            content.pageParts,
+            'in_variantsPageArticles'
+          ),
+          links: getLinkParts(content.pageParts, 'in_variantsPageLinks'),
         },
       };
     }

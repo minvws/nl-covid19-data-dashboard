@@ -14,9 +14,9 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
+  getArticleParts,
+  getLinkParts,
   getPagePartsQuery,
-  isArticleParts,
-  isLinkParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -53,16 +53,8 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles:
-            content.pageParts
-              .filter(isArticleParts)
-              .find((x) => x.pageDataKind === 'variantsPageArticles')
-              ?.articles ?? null,
-          links:
-            content.pageParts
-              .filter(isLinkParts)
-              .find((x) => x.pageDataKind === 'variantsPageLinks')?.links ??
-            null,
+          articles: getArticleParts(content.pageParts, 'variantsPageArticles'),
+          links: getLinkParts(content.pageParts, 'variantsPageLinks'),
         },
       };
     }

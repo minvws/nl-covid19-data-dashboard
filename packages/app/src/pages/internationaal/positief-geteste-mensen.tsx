@@ -31,9 +31,9 @@ import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
+  getArticleParts,
+  getLinkParts,
   getPagePartsQuery,
-  isArticleParts,
-  isLinkParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -63,16 +63,11 @@ export const getStaticProps = withFeatureNotFoundPage(
       >(() => getPagePartsQuery('in_positiveTestsPage'))(context);
       return {
         content: {
-          articles:
-            content.pageParts
-              .filter(isArticleParts)
-              .find((x) => x.pageDataKind === 'in_positiveTestsPageArticles')
-              ?.articles ?? null,
-          links:
-            content.pageParts
-              .filter(isLinkParts)
-              .find((x) => x.pageDataKind === 'in_positiveTestsPageLinks')
-              ?.links ?? null,
+          articles: getArticleParts(
+            content.pageParts,
+            'in_positiveTestsPageArticles'
+          ),
+          links: getLinkParts(content.pageParts, 'in_positiveTestsPageLinks'),
         },
       };
     },

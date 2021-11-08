@@ -1,4 +1,5 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { ArticleSummary } from '~/components/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type PageIdentifier =

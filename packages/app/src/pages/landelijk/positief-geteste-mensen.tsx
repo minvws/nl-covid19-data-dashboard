@@ -25,21 +25,21 @@ import { useIntl } from '~/intl';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
+  getArticleParts,
   getPagePartsQuery,
-  isArticleParts
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -78,16 +78,14 @@ export const getStaticProps = createGetStaticProps(
     })(context);
     return {
       content: {
-        articles:
-          content.parts.pageParts
-            .filter(isArticleParts)
-            .find((x) => x.pageDataKind === 'positiveTestsPageArticles')
-            ?.articles ?? null,
-        ggdArticles:
-          content.parts.pageParts
-            .filter(isArticleParts)
-            .find((x) => x.pageDataKind === 'positiveTestsGGDArticles')
-            ?.articles ?? null,
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'positiveTestsPageArticles'
+        ),
+        ggdArticles: getArticleParts(
+          content.parts.pageParts,
+          'positiveTestsGGDArticles'
+        ),
         elements: content.elements,
       },
     };

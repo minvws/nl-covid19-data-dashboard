@@ -1,3 +1,4 @@
+import { isDefined } from 'ts-is-present';
 import {
   ArticleParts,
   HighlightedItemParts,
@@ -50,4 +51,40 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
     }[0]`;
 
   return query;
+}
+
+export function getArticleParts(pageParts: PagePart[], pageDataKind: string) {
+  const parts = pageParts
+    .filter(isArticleParts)
+    .find((x) => x.pageDataKind === pageDataKind)?.articles;
+  return isDefined(parts) ? parts : null;
+}
+
+export function getLinkParts(pageParts: PagePart[], pageDataKind: string) {
+  const parts = pageParts
+    .filter(isLinkParts)
+    .find((x) => x.pageDataKind === pageDataKind)?.links;
+  return isDefined(parts) ? parts : null;
+}
+
+export function getHighlightedItemParts(
+  pageParts: PagePart[],
+  pageDataKind: string
+) {
+  const parts = pageParts
+    .filter(isHighlightedItemParts)
+    .find((x) => x.pageDataKind === pageDataKind);
+  return isDefined(parts)
+    ? {
+        highlights: parts.highlights,
+        showWeeklyHighlight: parts.showWeeklyHighlight,
+      }
+    : null;
+}
+
+export function getRichTextParts(pageParts: PagePart[], pageDataKind: string) {
+  const parts = pageParts
+    .filter(isRichTextParts)
+    .find((x) => x.pageDataKind === pageDataKind)?.text;
+  return isDefined(parts) ? parts : null;
 }

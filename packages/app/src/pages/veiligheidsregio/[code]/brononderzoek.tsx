@@ -15,7 +15,10 @@ import { SituationsOverTimeChart } from '~/domain/situations/situations-over-tim
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { getPagePartsQuery } from '~/queries/get-page-parts.query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,10 +46,10 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles:
-            content.pageParts.find(
-              (x) => x.pageDataKind === 'situationsPageArticles'
-            )?.articles ?? null,
+          articles: getArticleParts(
+            content.pageParts,
+            'situationsPageArticles'
+          ),
         },
       };
     }

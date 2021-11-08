@@ -8,7 +8,10 @@ import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situat
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { getPagePartsQuery } from '~/queries/get-page-parts.query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -36,10 +39,10 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles:
-            content.pageParts.find(
-              (x) => x.pageDataKind === 'situationsPageArticles'
-            )?.articles ?? null,
+          articles: getArticleParts(
+            content.pageParts,
+            'situationsPageArticles'
+          ),
         },
       };
     }

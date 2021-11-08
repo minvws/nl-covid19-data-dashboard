@@ -24,9 +24,9 @@ import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-tog
 import { useIntl } from '~/intl';
 import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
+  getArticleParts,
+  getLinkParts,
   getPagePartsQuery,
-  isArticleParts,
-  isLinkParts,
 } from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
@@ -77,16 +77,11 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         content: {
-          articles:
-            content.pageParts
-              .filter(isArticleParts)
-              .find((x) => x.pageDataKind === 'vaccinationsPageArticles')
-              ?.articles ?? null,
-          links:
-            content.pageParts
-              .filter(isLinkParts)
-              .find((x) => x.pageDataKind === 'vaccinationsPageLinks')?.links ??
-            null,
+          articles: getArticleParts(
+            content.pageParts,
+            'vaccinationsPageArticles'
+          ),
+          links: getLinkParts(content.pageParts, 'vaccinationsPageLinks'),
         },
       };
     }

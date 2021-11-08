@@ -11,7 +11,10 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
-import { getPagePartsQuery } from '~/queries/get-page-parts.query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts.query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -33,10 +36,10 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles:
-          content.pageParts.find(
-            (x) => x.pageDataKind === 'reproductionPageArticles'
-          )?.articles ?? null,
+        articles: getArticleParts(
+          content.pageParts,
+          'reproductionPageArticles'
+        ),
       },
     };
   }
