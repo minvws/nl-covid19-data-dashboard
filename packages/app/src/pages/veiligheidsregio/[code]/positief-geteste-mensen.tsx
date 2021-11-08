@@ -264,7 +264,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',

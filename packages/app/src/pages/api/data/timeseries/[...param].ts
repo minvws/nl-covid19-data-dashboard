@@ -17,6 +17,11 @@ const publicPath = path.resolve(__dirname, '../../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (!Array.isArray(req.query.param)) {
+    res.status(400).end();
+    return;
+  }
+
   const { param, start, end } = req.query;
   const [root, metric, metricProperty] = param as [string, string, string];
 
