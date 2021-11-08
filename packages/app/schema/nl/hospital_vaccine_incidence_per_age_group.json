@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_hospital_vaccine_incidence_per_age_group",
+  "type": "object",
+  "required": ["values"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    }
+  },
+  "definitions": {
+    "value": {
+      "title": "nl_hospital_vaccine_incidence_per_age_group_value",
+      "type": "object",
+      "required": [
+        "age_group_range",
+        "fully_vaccinated_per_100k",
+        "has_one_shot_or_not_vaccinated_per_100k",
+        "date_start_unix",
+        "date_end_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "age_group_range": {
+          "type": "string"
+        },
+        "fully_vaccinated_per_100k": {
+          "type": "number"
+        },
+        "has_one_shot_or_not_vaccinated_per_100k": {
+          "type": "number"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
