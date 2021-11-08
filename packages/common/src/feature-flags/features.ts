@@ -147,4 +147,16 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'intensive_care_vaccination_status',
   },
+  {
+    name: 'nlHospitalAdmissionsVaccineIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    // metricName: 'hospital_vaccine_incidence_per_age_group', // uncomment when we merge the schema
+  },
+  {
+    name: 'nlIcAdmissionsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    // metricName: 'intensive_care_vaccine_incidence_per_age_group', // uncomment when we merge the schema
+  },
 ];

@@ -2,17 +2,20 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
+  NlIntensiveCareVaccinationStatusValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
+import type { AgeDemographicProps } from '~/components/age-demographic';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
-import { PieChart } from '~/components/pie-chart';
+import type { PieChartProps } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -41,10 +44,19 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import type { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
+// TODO: Update any to the proper type when the schema is merged.
+const AgeDemographic = dynamic<AgeDemographicProps<any>>(() =>
+  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
+);
+
+const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
+  () => import('~/components/pie-chart').then((mod) => mod.PieChart)
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -53,7 +65,8 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_nice',
     'intensive_care_nice_per_age_group',
     'difference.intensive_care_lcps__beds_occupied_covid',
-    'intensive_care_vaccination_status'
+    'intensive_care_vaccination_status',
+    'hospital_vaccine_incidence_per_age_group'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -106,6 +119,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccinationStatusFeature = useFeature(
     'nlIntensiveCareVaccinationStatus'
+  );
+
+  const icVaccinationIncidencePerAgeGroupFeature = useFeature(
+    'nlIcAdmissionsIncidencePerAgeGroup'
   );
 
   const sevenDayAverageDates: [number, number] = [
@@ -254,6 +271,35 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },
                 ]}
+              />
+            </ChartTile>
+          )}
+
+          {icVaccinationIncidencePerAgeGroupFeature.isEnabled && (
+            <ChartTile
+              title={
+                siteText.ic_admissions_incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.ic_admissions_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                // This is correct, hospital admissions data is supposed to be displayed here.
+                data={data.hospital_vaccine_incidence_per_age_group}
+                accessibility={{
+                  key: 'ic_admissions_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'not_or_partially_vaccinated'}
+                rightMetricProperty={'fully_vaccinated'}
+                formatValue={(n: number) => `${n}`}
+                text={
+                  siteText.ic_admissions_incidence_age_demographic_chart
+                    .chart_text
+                }
               />
             </ChartTile>
           )}

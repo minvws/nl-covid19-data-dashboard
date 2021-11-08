@@ -20,7 +20,7 @@ interface SeriesConfigType<T> {
   label: string;
 }
 
-type PieChartProps<T> = {
+export interface PieChartProps<T> {
   data: T;
   dataConfig: SeriesConfigType<T>[];
   paddingLeft?: number;
@@ -35,7 +35,7 @@ type PieChartProps<T> = {
     href: string;
     text: string;
   };
-};
+}
 
 export function PieChart<T>({
   data,

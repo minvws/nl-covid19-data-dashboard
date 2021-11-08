@@ -6,11 +6,10 @@ import { Group } from '@visx/group';
 import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
 import { Text as VisxText } from '@visx/text';
-import { KeyboardEvent, memo, MouseEvent } from 'react';
+import { KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { useIntl } from '~/intl';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
@@ -36,7 +35,8 @@ interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
   leftMetricProperty: KeysOfType<T, number, true>;
   rightColor: Color;
   leftColor: Color;
-  displayMaxPercentage?: number;
+  maxDisplayValue?: number;
+  formatValue: (n: number) => string;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -53,11 +53,7 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   );
 };
 
-export const AgeDemographicChart = memo(
-  AgeDemographicChartWithGenerics
-) as typeof AgeDemographicChartWithGenerics;
-
-function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
+export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
   accessibility,
   coordinates,
   text,
@@ -68,7 +64,8 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
   leftMetricProperty,
   rightColor,
   leftColor,
-  displayMaxPercentage,
+  maxDisplayValue,
+  formatValue,
 }: AgeDemographicChartProps<T>) {
   const {
     width,
@@ -77,10 +74,10 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     xMax,
     yMax,
     axisWidth,
-    leftPercentageScale,
-    leftPercentagePoint,
-    rightPercentageScale,
-    rightPercentagePoint,
+    leftScale,
+    leftPoint,
+    rightScale,
+    rightPoint,
     ageGroupRangeScale,
     ageGroupRangePoint,
     ageGroupRange,
@@ -88,14 +85,12 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     values,
   } = coordinates;
 
-  const { formatPercentage } = useIntl();
-
   const annotations = useAccessibilityAnnotations(accessibility);
 
   const hasClippedValue = !!values.find(
     (value) =>
-      getIsClipped(value[leftMetricProperty], displayMaxPercentage) ||
-      getIsClipped(value[rightMetricProperty], displayMaxPercentage)
+      getIsClipped(value[leftMetricProperty], maxDisplayValue) ||
+      getIsClipped(value[rightMetricProperty], maxDisplayValue)
   );
 
   return (
@@ -147,7 +142,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
         {/* Vertical lines */}
         <GridColumns
-          scale={leftPercentageScale}
+          scale={leftScale}
           width={xMax}
           height={yMax}
           left={margin.left}
@@ -157,7 +152,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
         />
 
         <GridColumns
-          scale={rightPercentageScale}
+          scale={rightScale}
           width={xMax}
           height={yMax}
           left={width / 2 + axisWidth / 2}
@@ -185,17 +180,17 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
         />
 
         {values.map((value, index) => {
-          const leftPercentageWidth = xMax - leftPercentagePoint(value);
-          const rightPercentageWidth = rightPercentagePoint(value);
+          const leftBarWidth = xMax - leftPoint(value);
+          const rightBarWidth = rightPoint(value);
 
           const isClippedLeftGroup = getIsClipped(
             value[leftMetricProperty],
-            displayMaxPercentage
+            maxDisplayValue
           );
 
           const isClippedRightGroup = getIsClipped(
             value[rightMetricProperty],
-            displayMaxPercentage
+            maxDisplayValue
           );
 
           const isClippedValue = isClippedLeftGroup || isClippedRightGroup;
@@ -214,10 +209,10 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
                 width={width - margin.left - margin.right}
               />
               <Bar
-                x={width / 2 - axisWidth / 2 - leftPercentageWidth}
+                x={width / 2 - axisWidth / 2 - leftBarWidth}
                 y={ageGroupRangePoint(value)}
                 height={ageGroupRangeScale.bandwidth()}
-                width={leftPercentageWidth}
+                width={leftBarWidth}
                 css={css({
                   fill: isClippedLeftGroup
                     ? `url(#is-clipped-pattern-left)`
@@ -241,7 +236,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
                 x={width / 2 + axisWidth / 2}
                 y={ageGroupRangePoint(value)}
                 height={ageGroupRangeScale.bandwidth()}
-                width={rightPercentageWidth}
+                width={rightBarWidth}
                 css={css({
                   fill: isClippedRightGroup
                     ? `url(#is-clipped-pattern-right)`
@@ -254,24 +249,24 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
         {/* Axis lines, match up with the vertical lines */}
         <AxisBottom
-          scale={leftPercentageScale}
+          scale={leftScale}
           left={margin.left}
           top={height - margin.bottom}
           numTicks={numTicks}
           hideTicks={true}
           hideAxisLine={true}
-          tickFormat={(a) => `${formatPercentage(a)}%`}
+          tickFormat={formatValue}
           tickComponent={TickValue}
         />
 
         <AxisBottom
-          scale={rightPercentageScale}
+          scale={rightScale}
           left={width / 2 + axisWidth / 2}
           top={height - margin.bottom}
           numTicks={numTicks}
           hideTicks={true}
           hideAxisLine={true}
-          tickFormat={(a) => `${formatPercentage(a)}%`}
+          tickFormat={formatValue}
           tickComponent={TickValue}
         />
       </svg>
