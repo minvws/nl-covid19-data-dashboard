@@ -51,6 +51,8 @@ RUN yarn workspace @corona-dashboard/common build \
 && yarn workspace @corona-dashboard/cli generate-typescript \
 && yarn workspace @corona-dashboard/icons build
 
+RUN yarn test
+
 # Map arguments to environment variables
 ARG ARG_NEXT_PUBLIC_SANITY_DATASET
 ARG ARG_NEXT_PUBLIC_SANITY_PROJECT_ID
