@@ -38,6 +38,7 @@ export function SeriesIcon<T extends TimestampedValue>({
         <RangeTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
       );
     case 'area':
+    case 'gapped-area':
       return (
         <AreaTrendIcon
           color={config.color}
