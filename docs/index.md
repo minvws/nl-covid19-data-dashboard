@@ -1,8 +1,20 @@
 # Coronavirus Dashboard - Developer Documentation
 
-- [Lokalize Texts](/docs/lokalize-texts.md)
+## Project
+
 - [Release Procedure](/docs/release-procedure.md)
-- [Timeline Events](/docs/timeline-events.md)
-- [Feature Flags](/docs/feature-flags.md)
+
+## Infrastructure
+
 - [Choropleth GEOJson](/docs/choropleth-geojson.md)
+- [Feature Flags](/docs/feature-flags.md)
+
+## Sanity related
+
+- [Lokalize Texts](/docs/lokalize-texts.md)
+- [Page Parts](/docs/page-parts.md)
+- [Timeline Events](/docs/timeline-events.md)
+
+## Miscelaneous
+
 - [Developer notes](/docs/developers.md)

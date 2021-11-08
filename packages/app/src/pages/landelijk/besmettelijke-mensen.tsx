@@ -1,6 +1,7 @@
 import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Ziektegolf } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -10,9 +11,9 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -22,14 +23,25 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('infectious_people'),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('infectiousPeoplePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('infectiousPeoplePage'))(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.pageParts,
+          'infectiousPeoplePageArticles'
+        ),
+      },
+    };
+  }
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {

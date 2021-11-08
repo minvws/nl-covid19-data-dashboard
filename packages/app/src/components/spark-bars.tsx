@@ -4,6 +4,7 @@ import { scaleLinear } from '@visx/scale';
 
 const BAR_WIDTH = 5;
 const BAR_HEIGHT = 16;
+const BORDER_HEIGHT = 2;
 
 type SparkBarsProps<T extends TimestampedValue> = {
   averageProperty: KeysOfType<T, number | null, true>;
@@ -31,11 +32,11 @@ export function SparkBars<T extends TimestampedValue>(
   return (
     <svg
       width="100%"
-      height={BAR_HEIGHT}
+      height={BAR_HEIGHT + BORDER_HEIGHT}
       role="img"
       aria-hidden="true"
       focusable="false"
-      viewBox={`0 0 ${BAR_WIDTH * 7} ${BAR_HEIGHT}`}
+      viewBox={`0 0 ${BAR_WIDTH * 7} ${BAR_HEIGHT + BORDER_HEIGHT}`}
     >
       {last7Days.map((d, i) => (
         <rect
@@ -52,6 +53,13 @@ export function SparkBars<T extends TimestampedValue>(
           }
         />
       ))}
+      <rect
+        x={0}
+        width={BAR_WIDTH * last7Days.length}
+        height={BORDER_HEIGHT}
+        fill={colors.silver}
+        y={BAR_HEIGHT}
+      />
     </svg>
   );
 }

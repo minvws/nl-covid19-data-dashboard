@@ -1,4 +1,6 @@
+import css from '@styled-system/css';
 import Head from 'next/head';
+import styled from 'styled-components';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
 import { Content } from '~/domain/layout/content';
@@ -70,10 +72,22 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
 
       <Content>
         {content.title && <Heading level={1}>{content.title}</Heading>}
-        {content.description && <RichContent blocks={content.description} />}
+        {content.description && (
+          <RichContent
+            blocks={content.description}
+            contentWrapper={RichContentWrapper}
+          />
+        )}
       </Content>
     </Layout>
   );
 };
+
+const RichContentWrapper = styled.div(
+  css({
+    maxWidth: 'maxWidthText',
+    width: '100%',
+  })
+);
 
 export default AccessibilityPage;
