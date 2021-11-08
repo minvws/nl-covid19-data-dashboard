@@ -58,7 +58,6 @@ export const restrictionIcons: Record<string, string | null> = {
   horeca_evenementen: 'horeca_evenementen.svg',
   kunstcultuur_musea: 'kunstcultuur_musea.svg',
   ontmoetingen_bezoek: 'ontmoetingen_bezoek.svg',
-  afstand_sporten: 'afstand-sporten.svg',
   alcohol_verkoop: 'alcohol-verkoop.svg',
   max_aantal_bezoekers: 'max-aantal-bezoekers.svg',
   meerdaagse_evenementen: 'meerdaagse-evenementen.svg',
@@ -73,4 +72,9 @@ export const restrictionIcons: Record<string, string | null> = {
   kunst_cultuur: 'kunst-cultuur.svg',
   taxi: 'taxi.svg',
   vliegen: 'vliegen.svg',
+  doorstroomevenementen: 'doorstroomevenementen.svg',
+  afstand_sporten: 'afstand-sporten.svg',
+  georganiseerdeKunstEnCultuurbeoefeningen:
+    'georganiseerde-kunst-en-cultuurbeoefening.svg',
+  openbaarVervoer: 'openbaar-vervoer.svg',
 };

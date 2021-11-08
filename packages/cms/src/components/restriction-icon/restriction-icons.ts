@@ -79,7 +79,6 @@ export const restrictionIcons = {
   horeca_evenementen: Icons.HorecaEvenementen,
   kunstcultuur_musea: Icons.KunstcultuurMusea,
   ontmoetingen_bezoek: Icons.OntmoetingenBezoek,
-  afstand_sporten: Icons.AfstandSporten,
   alcohol_verkoop: Icons.AlcoholVerkoop,
   max_aantal_bezoekers: Icons.MaxAantalBezoekers,
   meerdaagse_evenementen: Icons.MeerdaagseEvenementen,
@@ -94,4 +93,9 @@ export const restrictionIcons = {
   kunst_cultuur: Icons.KunstCultuur,
   taxi: Icons.Taxi,
   vliegen: Icons.Vliegen,
+  doorstroomevenementen: Icons.Doorstroomevenementen,
+  afstand_sporten: Icons.AfstandSporten,
+  georganiseerdeKunstEnCultuurbeoefeningen:
+    Icons.GeorganiseerdeKunstEnCultuurbeoefening,
+  openbaarVervoer: Icons.OpenbaarVervoer,
 } as const;
