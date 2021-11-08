@@ -2,7 +2,7 @@ import {
   colors,
   KeysOfType,
   TimestampedValue,
-  Unpack
+  Unpack,
 } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
@@ -14,7 +14,7 @@ import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { LinkWithIcon } from '~/components/link-with-icon';
-import { SparkBars } from '~/components/spark-bars';
+import { TinyTrendChart } from '~/components/tiny-trend-chart';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
@@ -130,7 +130,10 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
               height={10}
             />
           ) : (
-            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+            <TinyTrendChart
+              data={item.data}
+              averageProperty={item.dataProperty}
+            />
           )}
         </Box>
         <InlineText>{item.label}</InlineText>
@@ -168,7 +171,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
-    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265} >
+    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (
@@ -187,7 +190,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                       height={10}
                     />
                   ) : (
-                    <SparkBars
+                    <TinyTrendChart
                       data={item.data}
                       averageProperty={item.dataProperty}
                     />
