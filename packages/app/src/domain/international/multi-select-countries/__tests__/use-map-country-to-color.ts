@@ -4,11 +4,15 @@ import {
   ORDERED_COLORS,
 } from '../use-map-country-to-color';
 
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, cleanup, renderHook } from '@testing-library/react-hooks';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 
 const UseMapCountryToColor = suite('useMapCountryToColor');
+
+UseMapCountryToColor.after.each(() => {
+  cleanup();
+});
 
 UseMapCountryToColor('should initialize in order', () => {
   const selectedCountries: CountryCode[] = ['nld', 'bel', 'deu'];
