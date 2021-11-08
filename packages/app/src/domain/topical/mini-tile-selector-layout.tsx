@@ -2,7 +2,7 @@ import {
   colors,
   KeysOfType,
   TimestampedValue,
-  Unpack,
+  Unpack
 } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
@@ -19,7 +19,6 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 
@@ -39,6 +38,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
+
   link?: {
     href: string;
     text: string;
@@ -46,19 +46,21 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints(false);
-
   const { siteText } = useIntl();
 
-  return breakpoints.md ? (
-    <WideMiniTileSelectorLayout {...props} />
-  ) : (
-    <Box spacing={3}>
-      <Text variant="label1" color="bodyLight">
-        {siteText.common_actueel.tile_selector_uitleg}
-      </Text>
-      <NarrowMiniTileSelectorLayout {...props} />
-    </Box>
+  return (
+    <>
+      <Box display={{ _: 'none', md: 'block' }}>
+        <WideMiniTileSelectorLayout {...props} />
+      </Box>
+
+      <Box spacing={3} display={{ _: 'block', md: 'none' }}>
+        <Text variant="label1" color="bodyLight">
+          {siteText.common_actueel.tile_selector_uitleg}
+        </Text>
+        <NarrowMiniTileSelectorLayout {...props} />
+      </Box>
+    </>
   );
 }
 
@@ -166,7 +168,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
-    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
+    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265} >
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (

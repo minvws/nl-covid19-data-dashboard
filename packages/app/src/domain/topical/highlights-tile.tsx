@@ -1,5 +1,6 @@
+import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
-import { ContentTeaser, ContentTeaserProps } from '~/components/content-teaser';
+import { ContentTeaser } from '~/components/content-teaser';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { Block, ImageBlock } from '~/types/cms';
 
@@ -15,7 +16,7 @@ export interface WeeklyHighlightProps {
 interface HighlightsTileProps {
   hiddenTitle: string;
   weeklyHighlight?: WeeklyHighlightProps;
-  highlights: ContentTeaserProps[];
+  highlights: ArticleSummary[];
   showWeeklyHighlight: boolean;
 }
 
@@ -48,9 +49,9 @@ export function HighlightsTile({
         {highlights
           .map((item) => (
             <ContentTeaser
-              key={item.slug}
+              key={item.slug.current}
               title={item.title}
-              slug={item.slug}
+              slug={item.slug.current}
               cover={item.cover}
               category={item.category}
             />

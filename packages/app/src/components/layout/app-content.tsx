@@ -116,6 +116,7 @@ const StyledAppContent = styled.main(
     minWidth: 0,
     flexGrow: 1,
     flexShrink: 1,
+    overflow: 'hidden',
   })
 );
 
@@ -130,6 +131,30 @@ const StyledSidebar = styled.aside(
       _: 'none',
       md: `solid 1px ${colors.lightGray}`,
     }),
+    maxHeight: asResponsiveArray({ _: null, md: '100vh' }),
+    position: asResponsiveArray({ _: null, md: 'sticky' }),
+    top: asResponsiveArray({ _: null, md: 0 }),
+    overflow: asResponsiveArray({ _: null, md: 'auto' }),
+    scrollbarWidth: 'thin',
+    scrollbarColor: `${colors.blue} ${colors.white}`,
+
+    '&::-webkit-scrollbar': {
+      width: '5px',
+      backgroundColor: 'tileGray',
+    },
+
+    '&::-webkit-scrollbar-thumb': {
+      position: 'absolute',
+      right: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      borderRadius: '5px',
+    },
+
+    '&:hover': {
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      },
+    },
   })
 );
 
