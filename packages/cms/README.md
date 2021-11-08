@@ -8,7 +8,7 @@ developers that have access to the CMS.
 Run `yarn sanity login` and choose the Google option. This retrieves a token
 which is then used to talk to the Sanity API.
 
-Run `yarn start` to start serve the CMS.
+Run `yarn dev` to start serve the CMS.
 
 ## Lokalize Texts
 

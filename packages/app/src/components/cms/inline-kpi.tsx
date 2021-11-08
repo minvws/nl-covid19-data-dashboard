@@ -166,6 +166,8 @@ function KpiTile({
           flexDirection="row"
           flexWrap="nowrap"
           alignItems="center"
+          spacingHorizontal={{ md: 2 }}
+          pr={{ md: 2 }}
         >
           <div
             aria-hidden={true}

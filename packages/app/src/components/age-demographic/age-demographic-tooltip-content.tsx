@@ -6,18 +6,29 @@ import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 import { useIntl } from '~/intl';
 import { Box } from '../base';
+import type { Color, KeysOfType } from '@corona-dashboard/common';
 
 interface AgeDemographicTooltipContentProps<
   T extends AgeDemographicDefaultValue
 > {
   value: T;
-  metricProperty: keyof T;
+  rightMetricProperty: KeysOfType<T, number, true>;
+  leftMetricProperty: KeysOfType<T, number, true>;
+  rightColor: Color;
+  leftColor: Color;
   text: AgeDemographicChartText;
 }
 
 export function AgeDemographicTooltipContent<
   T extends AgeDemographicDefaultValue
->({ value, metricProperty, text }: AgeDemographicTooltipContentProps<T>) {
+>({
+  value,
+  rightMetricProperty,
+  leftMetricProperty,
+  rightColor,
+  leftColor,
+  text,
+}: AgeDemographicTooltipContentProps<T>) {
   const { formatPercentage } = useIntl();
 
   return (
@@ -30,22 +41,19 @@ export function AgeDemographicTooltipContent<
         </Text>
       </Box>
       <Legend>
-        <LegendItem color="data.primary">
+        <LegendItem color={rightColor}>
           <InlineText fontWeight="bold">
-            {formatPercentage(
-              (value[metricProperty] as unknown as number) * 100
-            )}
-            %
+            {formatPercentage(value[rightMetricProperty] * 100)}%
           </InlineText>{' '}
-          {replaceVariablesInText(text.value_percentage_tooltip, {
+          {replaceVariablesInText(text.right_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
-        <LegendItem color="data.neutral">
+        <LegendItem color={leftColor}>
           <InlineText fontWeight="bold">
-            {formatPercentage(value.age_group_percentage * 100)}%
+            {formatPercentage(value[leftMetricProperty] * 100)}%
           </InlineText>{' '}
-          {replaceVariablesInText(text.age_group_percentage_tooltip, {
+          {replaceVariablesInText(text.left_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
