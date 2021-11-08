@@ -1,6 +1,6 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, NlRiskLevelValue } from '@corona-dashboard/common';
 
-export type EscalationLevelType = 1 | 2 | 3;
+export type EscalationLevelType = NlRiskLevelValue['risk_level'];
 
 export const escalationColors = [
   {
