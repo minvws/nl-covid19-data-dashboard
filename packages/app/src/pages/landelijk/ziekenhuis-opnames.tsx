@@ -71,7 +71,8 @@ export const getStaticProps = createGetStaticProps(
     'hospital_lcps',
     'hospital_nice_per_age_group',
     'hospital_nice',
-    'hospital_vaccination_status'
+    'hospital_vaccination_status',
+    'hospital_vaccine_incidence_per_age_group'
   ),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
@@ -271,25 +272,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               }
             >
               <AgeDemographic
-                data={{
-                  values: [
-                    {
-                      age_group_range: '75+',
-                      fully_vaccinated: 0.25,
-                      not_or_partially_vaccinated: 2.95,
-                    },
-                    {
-                      age_group_range: '50-74',
-                      fully_vaccinated: 0.14,
-                      not_or_partially_vaccinated: 1.85,
-                    },
-                    {
-                      age_group_range: '12-49',
-                      fully_vaccinated: 0.05,
-                      not_or_partially_vaccinated: 0.3,
-                    },
-                  ],
-                }}
+                data={data.hospital_vaccine_incidence_per_age_group}
                 accessibility={{
                   key: 'hospital_admissions_incidence_age_demographic_chart',
                 }}
