@@ -48,11 +48,7 @@ export function SparkLine<T extends TimestampedValue>(
   });
 
   function getX(dataPoint: T) {
-    if ('date_unix' in dataPoint) {
-      return xScale(dataPoint.date_unix);
-    }
-
-    return xScale(dataPoint.date_start_unix);
+    return xScale(getDate(dataPoint));
   }
 
   function getY(dataPoint: T) {
