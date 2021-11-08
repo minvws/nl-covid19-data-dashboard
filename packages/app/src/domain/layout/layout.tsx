@@ -34,7 +34,7 @@ export function Layout(
   const { siteText } = useIntl();
 
   return (
-    <>
+    <div>
       <SEOHead
         title={title}
         description={description}
@@ -65,9 +65,9 @@ export function Layout(
       </BreadcrumbsDataProvider>
 
       <CurrentDateProvider dateInSeconds={Number(lastGenerated)}>
-        {children}
+        <div>{children}</div>
       </CurrentDateProvider>
       <AppFooter />
-    </>
+    </div>
   );
 }
