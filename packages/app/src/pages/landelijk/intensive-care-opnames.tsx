@@ -65,7 +65,8 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_nice',
     'intensive_care_nice_per_age_group',
     'difference.intensive_care_lcps__beds_occupied_covid',
-    'intensive_care_vaccination_status'
+    'intensive_care_vaccination_status',
+    'hospital_vaccine_incidence_per_age_group'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -257,14 +258,11 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<Arts />}
                 dataConfig={[
                   {
-                    metricProperty: 'not_vaccinated',
+                    metricProperty: 'has_one_shot_or_not_vaccinated',
                     color: colors.data.yellow,
-                    label: text.vaccination_status_chart.labels.not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'has_one_shot',
-                    color: colors.data.partial_vaccination,
-                    label: text.vaccination_status_chart.labels.has_one_shot,
+                    label:
+                      text.vaccination_status_chart.labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
@@ -288,27 +286,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               }
             >
               <AgeDemographic
-                data={{
-                  // TODO: wire up data. Please note: this should display hospital admissions data,
-                  // NOT the IC admissions data.
-                  values: [
-                    {
-                      age_group_range: '75+',
-                      fully_vaccinated: 0.25,
-                      not_or_partially_vaccinated: 2.95,
-                    },
-                    {
-                      age_group_range: '50-74',
-                      fully_vaccinated: 0.14,
-                      not_or_partially_vaccinated: 1.85,
-                    },
-                    {
-                      age_group_range: '12-49',
-                      fully_vaccinated: 0.05,
-                      not_or_partially_vaccinated: 0.3,
-                    },
-                  ],
-                }}
+                // This is correct, hospital admissions data is supposed to be displayed here.
+                data={data.hospital_vaccine_incidence_per_age_group}
                 accessibility={{
                   key: 'ic_admissions_incidence_age_demographic_chart',
                 }}

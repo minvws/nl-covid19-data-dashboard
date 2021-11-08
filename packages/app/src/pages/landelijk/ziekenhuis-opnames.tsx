@@ -240,14 +240,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<Ziekenhuis />}
                 dataConfig={[
                   {
-                    metricProperty: 'not_vaccinated',
+                    metricProperty: 'has_one_shot_or_not_vaccinated',
                     color: colors.data.yellow,
-                    label: text.vaccination_status_chart.labels.not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'has_one_shot',
-                    color: colors.data.partial_vaccination,
-                    label: text.vaccination_status_chart.labels.has_one_shot,
+                    label:
+                      text.vaccination_status_chart.labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
@@ -278,8 +275,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 rightColor="data.primary"
                 leftColor="data.yellow"
-                leftMetricProperty={'not_or_partially_vaccinated'}
-                rightMetricProperty={'fully_vaccinated'}
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
                 formatValue={(n) => `${n}`}
                 text={
                   siteText.hospital_admissions_incidence_age_demographic_chart
