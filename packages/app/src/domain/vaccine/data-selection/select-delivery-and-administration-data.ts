@@ -27,6 +27,7 @@ export type VaccineDeliveryAndAdministrationsValue = Optional<
 export type DeliveryAndAdministrationData = {
   values: VaccineDeliveryAndAdministrationsValue[];
   estimatedRange: [number, number];
+  last_value: NlVaccineAdministeredValue;
 };
 
 export function selectDeliveryAndAdministrationData(nlData: Nl) {
@@ -48,6 +49,7 @@ export function selectDeliveryAndAdministrationData(nlData: Nl) {
   const deliveryAndAdministration: DeliveryAndAdministrationData = {
     values,
     estimatedRange: [0, 0],
+    last_value: vaccine_administered.last_value,
   };
 
   return { deliveryAndAdministration };
