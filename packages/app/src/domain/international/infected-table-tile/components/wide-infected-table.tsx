@@ -9,7 +9,7 @@ import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
-import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getThresholdValue } from '~/utils/get-threshold-value';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
@@ -117,7 +117,7 @@ function TableRow({
 }: tableRowProps) {
   const { formatNumber } = useIntl();
 
-  const filterBelow = getFilteredThresholdValues(
+  const filterBelow = getThresholdValue(
     thresholds.in.infected_per_100k_average,
     item.infected_per_100k_average
   );
