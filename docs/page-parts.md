@@ -68,3 +68,12 @@ return {
   },
 };
 ```
+
+## Adding a new page
+
+The workflow for adding a new page with page parts is fairly simple:
+
+- Create a new page identifier document
+- Create a pageArticles document and assign the newly created page identifier as a reference
+- Add articles to the pageArticles document
+- Query the data in the application's page and off you go.
