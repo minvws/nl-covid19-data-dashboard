@@ -223,14 +223,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<Ziekenhuis />}
                 dataConfig={[
                   {
-                    metricProperty: 'not_vaccinated',
+                    metricProperty: 'has_one_shot_or_not_vaccinated',
                     color: colors.data.yellow,
-                    label: text.vaccination_status_chart.labels.not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'has_one_shot',
-                    color: colors.data.partial_vaccination,
-                    label: text.vaccination_status_chart.labels.has_one_shot,
+                    label:
+                      text.vaccination_status_chart.labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
