@@ -17,7 +17,7 @@ import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,

@@ -7,15 +7,12 @@ import {
   HighlightedItemParts,
   PagePartQueryResult,
 } from '~/types/cms';
-import {
-  createElementsQuery,
-  ElementsQueryResult,
-} from './create-elements-query';
+import { ElementsQueryResult, getElementsQuery } from './get-elements-query';
 import {
   getArticleParts,
   getHighlightedItemParts,
   getPagePartsQuery,
-} from './get-page-parts.query';
+} from './get-page-parts-query';
 
 export function getTopicalPageData(
   code: 'nl' | 'vr' | 'gm',
@@ -31,7 +28,7 @@ export function getTopicalPageData(
       const { locale } = context;
       return `{
        "parts": ${getPagePartsQuery('topicalPage')},
-       "elements": ${createElementsQuery(code, elementNames, locale)},
+       "elements": ${getElementsQuery(code, elementNames, locale)},
        "riskLevel": *[_type == 'riskLevelNational']{
           "level": riskLevel,
           "dateFrom": date,

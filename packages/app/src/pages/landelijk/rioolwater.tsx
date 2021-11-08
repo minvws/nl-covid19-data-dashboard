@@ -19,7 +19,7 @@ import { useIntl } from '~/intl';
 import {
   getArticleParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,

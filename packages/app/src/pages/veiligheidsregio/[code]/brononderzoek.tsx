@@ -18,7 +18,7 @@ import { withFeatureNotFoundPage } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,

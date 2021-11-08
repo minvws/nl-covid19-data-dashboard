@@ -27,15 +27,15 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -72,11 +72,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('hospitalPage')},
-        "elements": ${createElementsQuery(
-          'nl',
-          ['hospital_nice'],
-          context.locale
-        )}
+        "elements": ${getElementsQuery('nl', ['hospital_nice'], context.locale)}
       }`;
     })(context);
 

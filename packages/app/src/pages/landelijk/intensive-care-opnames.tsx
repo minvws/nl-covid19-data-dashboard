@@ -23,15 +23,15 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getBarScaleConfig } from '~/metric-config';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -62,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('intensiveCarePage')},
-        "elements": ${createElementsQuery(
+        "elements": ${getElementsQuery(
           'nl',
           ['intensive_care_nice'],
           context.locale

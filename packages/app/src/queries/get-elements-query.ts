@@ -5,7 +5,7 @@ function formatStringArray(array: string[]) {
   return `[${array.map((x) => `'${x}'`).join(',')}]`;
 }
 
-export function createElementsQuery(
+export function getElementsQuery(
   scope: DataScopeKey,
   metricNames: string[],
   locale: string

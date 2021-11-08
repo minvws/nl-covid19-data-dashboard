@@ -19,15 +19,15 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -62,11 +62,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('hospitalPage')},
-        "elements": ${createElementsQuery(
-          'gm',
-          ['hospital_nice'],
-          context.locale
-        )}
+        "elements": ${getElementsQuery('gm', ['hospital_nice'], context.locale)}
       }`;
     })(context);
 

@@ -18,14 +18,14 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getPagePartsQuery,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -65,7 +65,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
        "parts": ${getPagePartsQuery('positiveTestsPage')},
-       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
+       "elements": ${getElementsQuery('gm', ['tested_overall'], locale)}
       }`;
     })(context);
     return {

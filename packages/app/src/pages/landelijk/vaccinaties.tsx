@@ -24,16 +24,16 @@ import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
   getRichTextParts,
-} from '~/queries/get-page-parts.query';
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -78,7 +78,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('vaccinationsPage')},
-        "elements": ${createElementsQuery(
+        "elements": ${getElementsQuery(
           'nl',
           ['vaccine_coverage', 'vaccine_administered'],
           context.locale
