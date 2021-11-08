@@ -54,7 +54,6 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     coverageData,
     deliveryAndAdministrationData,
     timelineEvents,
-    vaccineAdministeredTotalLastValue,
     vaccineAdministeredPlannedLastValue,
   } = props;
 
@@ -66,8 +65,9 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const [metadata, description] = useTileData(activeVaccinationChart);
 
   const roundedMillion =
-    Math.floor((vaccineAdministeredTotalLastValue.estimated / 1_000_000) * 10) /
-    10;
+    Math.floor(
+      (deliveryAndAdministrationData.last_value.total / 1_000_000) * 10
+    ) / 10;
 
   const [dateFromText, dateToText] = useFormatDateRange(
     vaccineAdministeredPlannedLastValue.date_start_unix,
