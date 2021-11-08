@@ -1,6 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -23,15 +24,16 @@ import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+  getRichTextParts,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,7 +45,12 @@ import {
   getNlData,
   selectNlData,
 } from '~/static-props/get-data';
-import { VaccinationPageQuery } from '~/types/cms';
+import {
+  ArticleParts,
+  LinkParts,
+  PagePartQueryResult,
+  RichTextParts,
+} from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
@@ -64,22 +71,36 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_vaccination_status'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
-  createGetContent<{
-    page: VaccinationPageQuery;
-    highlight: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "page": ${getVaccinePageQuery(locale)},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)},
-      "elements": ${createElementsQuery(
-        'nl',
-        ['vaccine_coverage', 'vaccine_administered'],
-        locale
-      )}
-    }`;
-  }),
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+        "parts": ${getPagePartsQuery('vaccinationsPage')},
+        "elements": ${getElementsQuery(
+          'nl',
+          ['vaccine_coverage', 'vaccine_administered'],
+          context.locale
+        )}
+      }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'vaccinationsPageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
+        pageDescription: getRichTextParts(
+          content.parts.pageParts,
+          'vaccinationsPageDescription'
+        ),
+        elements: content.elements,
+      },
+    };
+  },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => {
       if (isDefined(vaccine_coverage_per_age_group)) {
@@ -154,7 +175,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.title}
             category={text.category}
             icon={<VaccinatieIcon />}
-            description={content.page.pageDescription}
+            description={content.pageDescription}
             metadata={{
               datumsText: text.datums,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
@@ -163,9 +184,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            pageLinks={content.page.pageLinks}
+            pageLinks={content.links}
             referenceLink={text.reference.href}
-            articles={content.highlight.articles}
+            articles={content.articles}
           />
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile

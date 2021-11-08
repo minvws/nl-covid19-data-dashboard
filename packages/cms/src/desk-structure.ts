@@ -1,11 +1,12 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
-import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
+import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
 import { elementsListItem } from './elements/elements-list-item';
 import { lokalizeListItem } from './lokalize/lokalize-list-item';
+import { pagePartListItem } from './page/page-part-list-item';
 
 /**
  * This is a list of doc types we handle in the custom menu structure. All
@@ -24,22 +25,6 @@ const hiddenDocTypes = [
   'overRisicoNiveausNew',
   'roadmap',
   'lockdown',
-  'behaviorPage',
-  'deceasedPage',
-  'situationsPage',
-  'hospitalPage',
-  'nursingHomePage',
-  'elderlyAtHomePage',
-  'infectiousPeoplePage',
-  'disabilityCarePage',
-  'intensiveCarePage',
-  'positiveTestsPage',
-  'in_positiveTestsPage',
-  'in_variantsPage',
-  'reproductionPage',
-  'sewerPage',
-  'vaccinationsPage',
-  'variantsPage',
   'toegankelijkheid',
   'riskLevelNational',
   'lokalizeSubject',
@@ -54,12 +39,18 @@ const hiddenDocTypes = [
   'warning',
   'chartConfiguration',
   'kpiConfiguration',
+  'pageArticles',
+  'pageLinks',
+  'pageHighlightedItems',
+  'pageRichText',
+  'pageIdentifier',
 ];
 
 export default () =>
   S.list()
     .title('Content')
     .items([
+      pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
       S.listItem()
@@ -78,7 +69,6 @@ export default () =>
         'Over dit dashboard',
         'overDitDashboard'
       ),
-      addListItem(GrDashboard, 'Actueel', 'topicalPage'),
       addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()
         .title('Veelgestelde vragen')
@@ -125,26 +115,6 @@ export default () =>
         'Inschaling risiconiveau nationaal',
         'riskLevelNational'
       ),
-      addListItem(RiPagesFill, 'Sterfte', 'deceasedPage'),
-      addListItem(RiPagesFill, 'Brononderzoek GGD', 'situationsPage'),
-      addListItem(RiPagesFill, 'Gedrag en naleving', 'behaviorPage'),
-      addListItem(RiPagesFill, 'Ziekenhuis opnames', 'hospitalPage'),
-      addListItem(RiPagesFill, 'Verpleeghuiszorg', 'nursingHomePage'),
-      addListItem(RiPagesFill, 'Gehandicaptenzorg', 'disabilityCarePage'),
-      addListItem(RiPagesFill, 'Thuiswonend 70-plus', 'elderlyAtHomePage'),
-      addListItem(RiPagesFill, 'Besmettelijke mensen', 'infectiousPeoplePage'),
-      addListItem(RiPagesFill, 'IC opnames', 'intensiveCarePage'),
-      addListItem(RiPagesFill, 'Positieve testen', 'positiveTestsPage'),
-      addListItem(
-        RiPagesFill,
-        'Positieve testen internationaal',
-        'in_positiveTestsPage'
-      ),
-      addListItem(RiPagesFill, 'Varianten internationaal', 'in_variantsPage'),
-      addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
-      addListItem(RiPagesFill, 'Covid varianten', 'variantsPage'),
-      addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
-      addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
       addListItem(RiPagesFill, 'Contact', 'contact'),
 
@@ -155,6 +125,30 @@ export default () =>
           item.getId() === 'kpiConfiguration' ||
           item.getId() === 'chartConfiguration'
       ),
+
+      S.divider(),
+
+      S.listItem()
+        .title('Pagina onderdelen')
+        .icon(BsTable)
+        .child(
+          S.list()
+            .title('Lockdown en Routekaart')
+            .items([
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'pageIdentifier'
+              ),
+              S.divider(),
+              ...S.documentTypeListItems().filter((item) =>
+                [
+                  'pageArticles',
+                  'pageLinks',
+                  'pageHighlightedItems',
+                  'pageRichText',
+                ].includes(item.getId() ?? '')
+              ),
+            ])
+        ),
 
       S.divider(),
 
