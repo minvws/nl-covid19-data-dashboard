@@ -1,4 +1,4 @@
-import { isBrowser } from '~/utils/is-browser';
+const isBrowser = typeof window !== 'undefined';
 
 /* eslint-disable no-console */
 declare global {
