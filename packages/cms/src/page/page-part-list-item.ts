@@ -56,7 +56,6 @@ function pageDataListItem(page: any) {
 }
 
 function pageDataItem(pageData: any) {
-  console.log('pageData', pageData);
   return S.listItem()
     .title(pageData.title)
     .id(pageData._id)
