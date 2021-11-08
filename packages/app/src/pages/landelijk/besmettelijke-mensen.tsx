@@ -51,7 +51,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
+            category={siteText.nationaal_layout.headings.archief}
             screenReaderCategory={
               siteText.sidebar.metrics.infectious_people.title
             }

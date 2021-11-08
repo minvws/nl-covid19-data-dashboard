@@ -1,6 +1,6 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { GeoProjection } from 'd3-geo';
+import type { GeoProjection } from 'd3-geo';
 import withLoadingProps from 'next-dynamic-loading-props';
 import dynamic from 'next/dynamic';
 import { useRef, useState } from 'react';
@@ -8,7 +8,6 @@ import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { ChoroplethMap } from './components/choropleth-map';
@@ -79,8 +78,6 @@ export type ResponsiveSizeConfiguration = [
 
 export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
-type RenderTarget = 'svg' | 'canvas';
-
 export type ChoroplethProps<T extends ChoroplethDataItem> = {
   accessibility: AccessibilityDefinition;
   data: T[];
@@ -101,7 +98,6 @@ export type ChoroplethProps<T extends ChoroplethDataItem> = {
    * on a set of given width break points
    */
   responsiveSizeConfiguration?: ResponsiveSizeConfiguration;
-  renderTarget?: RenderTarget;
 };
 
 export type ChoroplethComponent = typeof Choropleth;
@@ -127,12 +123,10 @@ export function Choropleth<T extends ChoroplethDataItem>({
   ...props
 }: ChoroplethProps<T>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<T>>();
-  const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
-  const hoverRef = useRef<SVGGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
+  useOnClickOutside([tooltipRef], () => setTooltip(undefined));
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
@@ -144,22 +138,16 @@ export function Choropleth<T extends ChoroplethDataItem>({
   return (
     <Box position="relative" height="100%">
       {tabInteractiveButton}
-      <div
-        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
-      >
+      <div css={css({ position: 'relative', height: '100%' })}>
         <ChoroplethMap
           {...props}
           setTooltip={setTooltip}
-          hoverRef={hoverRef}
           isTabInteractive={isTabInteractive}
           anchorEventHandlers={anchorEventHandlers}
         />
 
         {tooltip && (
-          <div
-            ref={tooltipRef}
-            style={{ pointerEvents: isTouch ? 'all' : 'none' }}
-          >
+          <div ref={tooltipRef} style={{ pointerEvents: 'none' }}>
             <Tooltip
               placement={tooltipPlacement}
               left={tooltip.left}

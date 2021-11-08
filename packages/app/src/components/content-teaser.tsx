@@ -17,6 +17,7 @@ export interface ContentTeaserProps {
   publicationDate?: string;
   variant?: 'small' | 'normal';
   isWeeklyHighlight?: boolean;
+  isArticle?: boolean;
 }
 
 export function ContentTeaser({
@@ -27,9 +28,11 @@ export function ContentTeaser({
   publicationDate,
   variant = 'normal',
   isWeeklyHighlight,
+  isArticle,
 }: ContentTeaserProps) {
   const { siteText } = useIntl();
   const breakpoints = useBreakpoints(true);
+  const imageWidth = variant === 'normal' ? (breakpoints.sm ? 186 : 90) : 90;
 
   return (
     <Box
@@ -39,14 +42,11 @@ export function ContentTeaser({
       alignItems="center"
       pr={3}
     >
-      <Box
-        maxWidth={variant === 'normal' ? (breakpoints.sm ? 186 : 90) : 90}
-        width="100%"
-      >
+      <Box maxWidth={imageWidth} width="100%">
         <BackgroundImage
           image={cover}
           height={variant === 'normal' ? (breakpoints.sm ? 108 : 66) : 66}
-          sizes={[[1200, 438]]}
+          sizes={[[imageWidth]]}
         />
       </Box>
       <Box maxWidth="25rem" spacing={publicationDate || category ? 2 : 0}>
@@ -60,14 +60,16 @@ export function ContentTeaser({
             category
           )}
         </Text>
-        <Heading level={variant === 'normal' ? 3 : 5} as="h2" color="blue">
+        <Heading level={variant === 'normal' ? 4 : 5} as="h2" color="blue">
           <HeadingLinkWithIcon
             href={
               isAbsoluteUrl(slug)
                 ? slug
                 : isWeeklyHighlight
                 ? `/weekberichten/${slug}`
-                : `/artikelen/${slug}`
+                : isArticle
+                ? `/artikelen/${slug}`
+                : slug
             }
             icon={<ArrowIconRight />}
             iconPlacement="right"

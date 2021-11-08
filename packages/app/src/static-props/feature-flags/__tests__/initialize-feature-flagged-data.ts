@@ -1,37 +1,31 @@
-import { Feature } from '@corona-dashboard/common';
+import sinon from 'sinon';
+import { suite } from 'uvu';
+import * as assert from 'uvu/assert';
+
 import { initializeFeatureFlaggedData } from '../initialize-feature-flagged-data';
+// Importing these files like this because of how sinon implements stub and replace
+import * as featureFlagConstants from '../feature-flag-constants';
+import * as load from '~/static-props/utils/load-json-from-file';
 
-const featureFlagConstantsMock = require('~/static-props/feature-flags/feature-flag-constants');
+const InitializeFeatureFlaggedData = suite('initializeFeatureFlaggedData');
 
-const loadJsonFromFileMock = require('~/static-props/utils/load-json-from-file');
-const loadJsonFromFileSpy = jest.spyOn(
-  loadJsonFromFileMock,
-  'loadJsonFromFile'
-);
+InitializeFeatureFlaggedData.after.each(() => {
+  sinon.restore();
+});
 
-describe('initializeFeatureFlaggedData', () => {
-  beforeEach(() => {
-    loadJsonFromFileSpy.mockReset();
-  });
-
-  it("should add an empty array to a GM_COLLECTION if it doesn't exist", () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  "should add an empty array to a GM_COLLECTION if it doesn't exist",
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
         dataScopes: ['gm_collection'],
         metricName: 'testCollection',
       },
-    ];
+    ]);
 
-    const gmCollection: any = {
-      last_generated: '1630502291',
-      proto_name: 'GM_COLLECTION',
-      name: 'GM_COLLECTION',
-      code: 'GM_COLLECTION',
-    };
-
-    loadJsonFromFileSpy.mockImplementation((...args) => {
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
       const pathStr = args[0] as string;
       if (pathStr.endsWith('__index.json')) {
         return gmCollectionSchema;
@@ -41,21 +35,41 @@ describe('initializeFeatureFlaggedData', () => {
       }
     });
 
+    const gmCollection: any = {
+      last_generated: '1630502291',
+      proto_name: 'GM_COLLECTION',
+      name: 'GM_COLLECTION',
+      code: 'GM_COLLECTION',
+    };
+
     initializeFeatureFlaggedData(gmCollection, 'gm_collection');
 
-    expect(gmCollection.testCollection).toBeDefined();
-    expect(gmCollection.testCollection.length).toEqual(0);
-  });
+    assert.ok(gmCollection.testCollection);
+    assert.equal(gmCollection.testCollection.length, 0);
+  }
+);
 
-  it('should do nothing if the specified metric name on GM_COLLECTION already exists', () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  'should do nothing if the specified metric name on GM_COLLECTION already exists',
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
         dataScopes: ['gm_collection'],
         metricName: 'testCollection',
       },
-    ];
+    ]);
+
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
+      const pathStr = args[0] as string;
+      if (pathStr.endsWith('__index.json')) {
+        return gmCollectionSchema;
+      }
+      if (pathStr.endsWith('testCollection.json')) {
+        return gmCollectionTestCollectionSchema;
+      }
+    });
 
     const initialValues = [{ test: true }, { test: true }];
     const testValues = JSON.parse(JSON.stringify(initialValues));
@@ -68,30 +82,33 @@ describe('initializeFeatureFlaggedData', () => {
       testCollection: initialValues,
     };
 
-    loadJsonFromFileSpy.mockImplementation((...args) => {
-      const pathStr = args[0] as string;
-      if (pathStr.endsWith('__index.json')) {
-        return gmCollectionSchema;
-      }
-      if (pathStr.endsWith('testCollection.json')) {
-        return gmCollectionTestCollectionSchema;
-      }
-    });
-
     initializeFeatureFlaggedData(gmCollection, 'gm_collection');
 
-    expect(gmCollection.testCollection).toEqual(testValues);
-  });
+    assert.equal(gmCollection.testCollection, testValues);
+  }
+);
 
-  it("should add an empty metric to a GM if it doesn't exist", () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  "should add an empty metric to a GM if it doesn't exist",
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
         dataScopes: ['gm'],
         metricName: 'testCollection',
       },
-    ];
+    ]);
+
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
+      const pathStr = args[0] as string;
+      if (pathStr.endsWith('__index.json')) {
+        return gmSchema;
+      }
+      if (pathStr.endsWith('testCollection.json')) {
+        return gmTestCollectionSchema;
+      }
+    });
 
     const gm: any = {
       last_generated: '1630502291',
@@ -100,24 +117,12 @@ describe('initializeFeatureFlaggedData', () => {
       code: 'GM001',
     };
 
-    loadJsonFromFileSpy.mockImplementation((...args) => {
-      const pathStr = args[0] as string;
-
-      if (pathStr.endsWith('__index.json')) {
-        return gmSchema;
-      }
-
-      if (pathStr.endsWith('testCollection.json')) {
-        return gmTestCollectionSchema;
-      }
-    });
-
     initializeFeatureFlaggedData(gm, 'gm');
 
-    expect(gm.testCollection).toBeDefined();
-    expect(gm.testCollection.values).toBeDefined();
-    expect(gm.testCollection.values.length).toEqual(0);
-    expect(gm.testCollection.last_value).toEqual({
+    assert.ok(gm.testCollection);
+    assert.ok(gm.testCollection.values);
+    assert.equal(gm.testCollection.values.length, 0);
+    assert.equal(gm.testCollection.last_value, {
       date_start_unix: 0,
       date_end_unix: 0,
       average: 0,
@@ -126,17 +131,30 @@ describe('initializeFeatureFlaggedData', () => {
       total_installation_count: 0,
       date_of_insertion_unix: 0,
     });
-  });
+  }
+);
 
-  it('should do nothing if the specified metric on GM already exists', () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  'should do nothing if the specified metric on GM already exists',
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
         dataScopes: ['gm'],
         metricName: 'testCollection',
       },
-    ];
+    ]);
+
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
+      const pathStr = args[0] as string;
+      if (pathStr.endsWith('__index.json')) {
+        return gmSchema;
+      }
+      if (pathStr.endsWith('testCollection.json')) {
+        return gmTestCollectionSchema;
+      }
+    });
 
     const initialValues = {
       values: [{ test: true }, { test: true }],
@@ -152,25 +170,16 @@ describe('initializeFeatureFlaggedData', () => {
       testCollection: initialValues,
     };
 
-    loadJsonFromFileSpy.mockImplementation((...args) => {
-      const pathStr = args[0] as string;
-
-      if (pathStr.endsWith('__index.json')) {
-        return gmSchema;
-      }
-
-      if (pathStr.endsWith('testCollection.json')) {
-        return gmTestCollectionSchema;
-      }
-    });
-
     initializeFeatureFlaggedData(gm, 'gm');
 
-    expect(gm.testCollection).toEqual(testValues);
-  });
+    assert.equal(gm.testCollection, testValues);
+  }
+);
 
-  it("should initialize the metric properties on a VR_COLLECTION metric if they don't exist", () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  'should init the metric properties on a VR_COLLECTION metric if they do not exist',
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
@@ -178,17 +187,9 @@ describe('initializeFeatureFlaggedData', () => {
         metricName: 'testCollection',
         metricProperties: ['test1', 'test2'],
       },
-    ] as Feature[];
+    ]);
 
-    const vrCollection: any = {
-      last_generated: '1630502291',
-      proto_name: 'VR_COLLECTION',
-      name: 'VR_COLLECTION',
-      code: 'VR_COLLECTION',
-      testCollection: [{ test3: 'test' }, { test3: 'test' }, { test3: 'test' }],
-    };
-
-    loadJsonFromFileSpy.mockImplementation((...args) => {
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
       const pathStr = args[0] as string;
       if (pathStr.endsWith('__index.json')) {
         return vrCollectionSchema;
@@ -198,29 +199,40 @@ describe('initializeFeatureFlaggedData', () => {
       }
     });
 
+    const vrCollection: any = {
+      last_generated: '1630502291',
+      proto_name: 'VR_COLLECTION',
+      name: 'VR_COLLECTION',
+      code: 'VR_COLLECTION',
+      testCollection: [{ test3: 'test' }, { test3: 'test' }, { test3: 'test' }],
+    };
+
     initializeFeatureFlaggedData(vrCollection, 'vr_collection');
 
-    expect(vrCollection.testCollection).toBeDefined();
-    expect(vrCollection.testCollection.length).toEqual(3);
-    expect(vrCollection.testCollection[0]).toEqual({
+    assert.ok(vrCollection.testCollection);
+    assert.equal(vrCollection.testCollection.length, 3);
+    assert.equal(vrCollection.testCollection[0], {
       test1: 0,
       test2: true,
       test3: 'test',
     });
-    expect(vrCollection.testCollection[1]).toEqual({
+    assert.equal(vrCollection.testCollection[1], {
       test1: 0,
       test2: true,
       test3: 'test',
     });
-    expect(vrCollection.testCollection[2]).toEqual({
+    assert.equal(vrCollection.testCollection[2], {
       test1: 0,
       test2: true,
       test3: 'test',
     });
-  });
+  }
+);
 
-  it('should do nothing if the specified metric properties already exist in the VR_COLLECTION items', () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  'should do nothing if the specified metric properties already exist in the VR_COLLECTION items',
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
@@ -228,13 +240,24 @@ describe('initializeFeatureFlaggedData', () => {
         metricName: 'testCollection',
         metricProperties: ['test1', 'test2'],
       },
-    ] as Feature[];
+    ]);
+
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
+      const pathStr = args[0] as string;
+      if (pathStr.endsWith('__index.json')) {
+        return vrCollectionSchema;
+      }
+      if (pathStr.endsWith('testCollection.json')) {
+        return vrCollectionTestCollectionSchema;
+      }
+    });
 
     const initialValues = [
       { test1: 100, test2: false, test3: 'test' },
       { test1: 200, test2: true, test3: 'test' },
       { test1: 300, test2: false, test3: 'test' },
     ];
+
     const testValues = JSON.parse(JSON.stringify(initialValues));
 
     const vrCollection: any = {
@@ -245,23 +268,16 @@ describe('initializeFeatureFlaggedData', () => {
       testCollection: initialValues,
     };
 
-    loadJsonFromFileSpy.mockImplementation((...args) => {
-      const pathStr = args[0] as string;
-      if (pathStr.endsWith('__index.json')) {
-        return vrCollectionSchema;
-      }
-      if (pathStr.endsWith('testCollection.json')) {
-        return vrCollectionTestCollectionSchema;
-      }
-    });
-
     initializeFeatureFlaggedData(vrCollection, 'vr_collection');
 
-    expect(vrCollection.testCollection).toEqual(testValues);
-  });
+    assert.equal(vrCollection.testCollection, testValues);
+  }
+);
 
-  it("should initialize the enum properties on a VR_COLLECTION metric if they don't exist", () => {
-    featureFlagConstantsMock.disabledMetrics = [
+InitializeFeatureFlaggedData(
+  "should initialize the enum properties on a VR_COLLECTION metric if they don't exist",
+  () => {
+    sinon.replace(featureFlagConstants, 'disabledMetrics', [
       {
         name: 'test',
         isEnabled: false,
@@ -269,17 +285,9 @@ describe('initializeFeatureFlaggedData', () => {
         metricName: 'testCollection',
         metricProperties: ['test1', 'test2'],
       },
-    ] as Feature[];
+    ]);
 
-    const vrCollection: any = {
-      last_generated: '1630502291',
-      proto_name: 'VR_COLLECTION',
-      name: 'VR_COLLECTION',
-      code: 'VR_COLLECTION',
-      testCollection: [{ test3: 'test' }, { test3: 'test' }, { test3: 'test' }],
-    };
-
-    loadJsonFromFileSpy.mockImplementation((...args) => {
+    sinon.stub(load, 'loadJsonFromFile').callsFake((...args) => {
       const pathStr = args[0] as string;
       if (pathStr.endsWith('__index.json')) {
         return vrCollectionSchema;
@@ -289,27 +297,37 @@ describe('initializeFeatureFlaggedData', () => {
       }
     });
 
+    const vrCollection: any = {
+      last_generated: '1630502291',
+      proto_name: 'VR_COLLECTION',
+      name: 'VR_COLLECTION',
+      code: 'VR_COLLECTION',
+      testCollection: [{ test3: 'test' }, { test3: 'test' }, { test3: 'test' }],
+    };
+
     initializeFeatureFlaggedData(vrCollection, 'vr_collection');
 
-    expect(vrCollection.testCollection).toBeDefined();
-    expect(vrCollection.testCollection.length).toEqual(3);
-    expect(vrCollection.testCollection[0]).toEqual({
+    assert.ok(vrCollection.testCollection);
+    assert.equal(vrCollection.testCollection.length, 3);
+    assert.equal(vrCollection.testCollection[0], {
       test1: 'enum1',
       test2: true,
       test3: 'test',
     });
-    expect(vrCollection.testCollection[1]).toEqual({
+    assert.equal(vrCollection.testCollection[1], {
       test1: 'enum1',
       test2: true,
       test3: 'test',
     });
-    expect(vrCollection.testCollection[2]).toEqual({
+    assert.equal(vrCollection.testCollection[2], {
       test1: 'enum1',
       test2: true,
       test3: 'test',
     });
-  });
-});
+  }
+);
+
+InitializeFeatureFlaggedData.run();
 
 /**
  * data: should add an empty array to a GM_COLLECTION if it doesn't exist

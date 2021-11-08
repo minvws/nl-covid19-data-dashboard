@@ -8,12 +8,9 @@ export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
   is_reliable: boolean;
-  sample_size: number;
-} & Partial<
-  {
-    [key in `${VariantName}_percentage`]: number;
-  }
->;
+} & Partial<{
+  [key in `${VariantName}_percentage`]: number;
+}>;
 
 const EMPTY_VALUES = {
   variantChart: null,
@@ -30,7 +27,9 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   }
 
   const variantsOfConcern = variants.values.filter(
-    (x) => x.last_value.is_variant_of_concern
+    (x) =>
+      x.last_value.is_variant_of_concern ||
+      x.last_value.has_historical_significance
   );
 
   const firstVariant = variantsOfConcern.shift();
@@ -40,22 +39,19 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    let total = value.percentage;
-    const item: VariantChartValue = {
+    const item = {
       is_reliable: true,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
-      sample_size: value.sample_size,
-      other_percentage: 0,
       [`${firstVariant.name}_percentage`]: value.percentage,
     };
+
     variantsOfConcern.forEach((variant) => {
       (item as unknown as Record<string, number>)[
         `${variant.name}_percentage`
       ] = variant.values[index].percentage;
-      total += variant.values[index].percentage;
     });
-    item.other_percentage = parseFloat((100 - total).toFixed(2));
+
     return item;
   });
 

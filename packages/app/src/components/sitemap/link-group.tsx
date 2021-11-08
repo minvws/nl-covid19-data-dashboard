@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ArrowIconRight } from '~/components/arrow-icon';
+import { ArrowIconThinRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { InlineText } from '~/components/typography';
@@ -40,10 +40,10 @@ function LinkItem(props: LinkItemProps) {
   if (!href) {
     return (
       <Item>
-        <InlineText fontWeight="bold" color="gray">
+        <InlineText color="gray">
           {text}
           <span css={css({ svg: { height: 10, width: 11, mx: '3px' } })}>
-            <ArrowIconRight />
+            <ArrowIconThinRight />
           </span>
         </InlineText>
       </Item>
@@ -52,10 +52,10 @@ function LinkItem(props: LinkItemProps) {
 
   return (
     <Item>
-      <InlineText fontWeight="bold">
+      <InlineText>
         <LinkWithIcon
           href={href}
-          icon={<ArrowIconRight />}
+          icon={<ArrowIconThinRight />}
           iconPlacement="right"
         >
           {text}

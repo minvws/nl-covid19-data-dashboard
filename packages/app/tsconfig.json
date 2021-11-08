@@ -1,12 +1,20 @@
 {
+  // See https://github.com/tsconfig/bases/blob/main/bases/next.json for optimal config
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "target": "es5",
     "allowJs": false,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "downlevelIteration": true,
+    "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]

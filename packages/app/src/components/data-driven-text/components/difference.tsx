@@ -14,7 +14,7 @@ import { Content, DataFile, DataKeys } from '..';
 export function Difference<T extends DataKeys, K = DataFile<T>>(
   props: Extract<Content<T>, { type: 'difference' }> & { data: K }
 ) {
-  const { data, text, isAmount, differenceKey } = props;
+  const { data, text, isAmount, differenceKey, additionalData } = props;
   const { formatNumber } = useIntl();
 
   const differenceValue = differenceKey
@@ -39,6 +39,7 @@ export function Difference<T extends DataKeys, K = DataFile<T>>(
             {formatNumber(differenceValue.old_value)}
           </InlineText>
         ),
+        ...(additionalData || {}),
       })}
     </>
   );

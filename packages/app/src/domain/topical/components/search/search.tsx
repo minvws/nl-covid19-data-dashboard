@@ -4,8 +4,6 @@ import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
@@ -21,9 +19,6 @@ export function Search({
   const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
 
-  const isMounted = useIsMounted();
-  const breakpoints = useBreakpoints();
-
   return (
     <SearchContextProvider
       containerRef={containerRef}
@@ -33,37 +28,34 @@ export function Search({
         <Box spacing={3}>
           <Box
             display="flex"
-            justifyContent={{ _: 'start', md: 'center' }}
-            textAlign={{ md: 'center' }}
+            justifyContent={{ _: 'start', xs: 'center' }}
+            textAlign={{ xs: 'center' }}
           >
-            <Heading level={3} color={colors.bodyLight}>
+            <Heading as="h3" level={5}>
               {title}
             </Heading>
           </Box>
 
           <Box
             display="flex"
-            justifyContent={{ _: 'start', md: 'center' }}
-            alignItems={{ _: 'start', md: 'center' }}
+            justifyContent={{ _: 'start', xs: 'center' }}
+            alignItems={{ _: 'start', xs: 'center' }}
             position="relative"
             width="100%"
+            zIndex={10}
           >
             <Box
               width={{
                 _: '100%',
                 xs: '20rem',
-                md: context.showResults ? '42rem' : '26rem',
+                sm: context.showResults ? '42rem' : '26rem',
               }}
-              px={{ md: 4 }}
+              px={{ sm: 4 }}
               bg={colors.white}
               position="relative"
               zIndex={1}
             >
-              <SearchForm
-                ref={containerRef}
-                height={height}
-                isFloating={isMounted && breakpoints.md}
-              >
+              <SearchForm ref={containerRef} height={height} isFloating>
                 <Box {...context.comboboxProps}>
                   <Box position="relative" ref={heightRef}>
                     <SearchInput />
@@ -86,17 +78,6 @@ export function Search({
                 </Box>
               </SearchForm>
             </Box>
-
-            <Box
-              display={{ _: 'none', md: 'block' }}
-              position="absolute"
-              top="50%"
-              left="0"
-              height="1px"
-              width="100%"
-              transform="translate(0, -50%)"
-              bg={'border'}
-            />
           </Box>
         </Box>
       )}
@@ -115,7 +96,9 @@ const SearchForm = forwardRef<HTMLFormElement, SearchContainerProps>(
     return (
       <form
         ref={ref}
-        css={css({ position: 'relative' })}
+        css={css({
+          position: 'relative',
+        })}
         onSubmit={(evt) => evt.preventDefault()}
       >
         <StyledSearchContainer isFloating={isFloating}>

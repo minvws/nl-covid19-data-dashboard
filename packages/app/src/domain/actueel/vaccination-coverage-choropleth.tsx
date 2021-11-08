@@ -14,6 +14,7 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic';
 import { Markdown } from '~/components/markdown';
+import { Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import {
   CoverageKindProperty,
@@ -34,6 +35,10 @@ type DefaultProps = {
   title: string;
   content: string;
   defaultCoverageKind?: CoverageKindProperty;
+  link?: {
+    href: string;
+    text: string;
+  };
 };
 
 type GmCoverage = DefaultProps & {
@@ -99,14 +104,15 @@ export function VaccinationCoverageChoropleth(
 
   return (
     <TopicalTile>
-      <TopicalSectionHeader title={props.title} />
+      <TopicalSectionHeader title={props.title} link={props.link} />
 
       <ChoroplethTwoColumnLayout
         legendComponent={
           <ChoroplethLegenda
             thresholds={thresholds.gm.fully_vaccinated_percentage}
             title={
-              siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel
+              siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                .legend_title
             }
           />
         }
@@ -116,7 +122,6 @@ export function VaccinationCoverageChoropleth(
             isGmCoverage(props)) && (
             <DynamicChoropleth
               map={'gm'}
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               data={props.data.gm.filter(
                 hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -149,7 +154,6 @@ export function VaccinationCoverageChoropleth(
           {isVrCoverage(props) && (
             <DynamicChoropleth
               map={'gm'}
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               data={props.data.gm.filter(
                 hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -181,7 +185,6 @@ export function VaccinationCoverageChoropleth(
           {isNlCoverage(props) && chartRegion === 'vr' && (
             <DynamicChoropleth
               map={'vr'}
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               data={props.data.vr.filter(
                 hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -213,13 +216,31 @@ export function VaccinationCoverageChoropleth(
         <Box spacing={3}>
           <Markdown content={props.content} />
           <Box
-            css={css({ display: 'flex', flexDirection: 'row' })}
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
             spacingHorizontal={2}
+            as={'fieldset'}
           >
-            <Box width="50%">
+            <Text
+              as="legend"
+              fontWeight="bold"
+              css={css({
+                flexBasis: '100%',
+                mb: 2,
+              })}
+            >
+              {
+                siteText.vaccinaties.choropleth_vaccination_coverage.shared
+                  .dropdowns_title
+              }
+            </Text>
+
+            <Box flex={1}>
               <AgeGroupSelect onChange={setSelectedAgeGroup} />
             </Box>
-            <Box width="50%">
+
+            <Box flex={1}>
               <VaccinationCoverageKindSelect
                 onChange={setSelectedCoverageKind}
                 initialValue={selectedCoverageKind}

@@ -1,4 +1,8 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  DAY_IN_SECONDS,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -65,9 +69,6 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
-
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
@@ -76,7 +77,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-  const { siteText } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
   const text = siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -131,7 +132,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
-              description={text.extra_uitleg}
+              description={replaceVariablesInText(text.extra_uitleg, {
+                dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+              })}
               metadata={{
                 date: sevenDayAverageDates,
                 source: text.bronnen.rivm,
@@ -147,43 +151,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             </KpiTile>
           </TwoKpiSection>
-
-          <ChoroplethTile
-            title={replaceVariablesInText(text.map_titel, {
-              municipality: municipalityName,
-            })}
-            metadata={{
-              date: lastValue.date_unix,
-              source: text.bronnen.rivm,
-            }}
-            description={text.map_toelichting}
-            legend={{
-              title:
-                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-              thresholds: thresholds.gm.admissions_on_date_of_reporting,
-            }}
-          >
-            <DynamicChoropleth
-              renderTarget="canvas"
-              map="gm"
-              accessibility={{
-                key: 'hospital_admissions_choropleth',
-              }}
-              data={choropleth.gm.hospital_nice}
-              dataConfig={{
-                metricName: 'hospital_nice',
-                metricProperty: 'admissions_on_date_of_reporting',
-              }}
-              dataOptions={{
-                selectedCode: data.code,
-                highlightSelection: true,
-                getLink: reverseRouter.gm.ziekenhuisopnames,
-                tooltipVariables: {
-                  patients: siteText.choropleth_tooltip.patients,
-                },
-              }}
-            />
-          </ChoroplethTile>
 
           <ChartTile
             title={text.linechart_titel}
@@ -221,7 +188,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       label: text.linechart_legend_underreported_titel,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average',
+                        'admissions_on_date_of_admission_moving_average_rounded',
                       ],
                     },
                   ],
@@ -233,6 +200,42 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
+
+          <ChoroplethTile
+            title={replaceVariablesInText(text.map_titel, {
+              municipality: municipalityName,
+            })}
+            metadata={{
+              date: lastValue.date_unix,
+              source: text.bronnen.rivm,
+            }}
+            description={text.map_toelichting}
+            legend={{
+              title:
+                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+              thresholds: thresholds.gm.admissions_on_date_of_reporting,
+            }}
+          >
+            <DynamicChoropleth
+              map="gm"
+              accessibility={{
+                key: 'hospital_admissions_choropleth',
+              }}
+              data={choropleth.gm.hospital_nice}
+              dataConfig={{
+                metricName: 'hospital_nice',
+                metricProperty: 'admissions_on_date_of_reporting',
+              }}
+              dataOptions={{
+                selectedCode: data.code,
+                highlightSelection: true,
+                getLink: reverseRouter.gm.ziekenhuisopnames,
+                tooltipVariables: {
+                  patients: siteText.choropleth_tooltip.patients,
+                },
+              }}
+            />
+          </ChoroplethTile>
         </TileList>
       </GmLayout>
     </Layout>

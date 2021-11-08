@@ -65,11 +65,9 @@ export function CategoryMenu({
         <Box px={3} pt={3}>
           <Heading
             level={4}
+            variant="subtitle2"
             css={css({
-              color: 'bodyLight',
               fontSize: 1,
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
             })}
           >
             {title}

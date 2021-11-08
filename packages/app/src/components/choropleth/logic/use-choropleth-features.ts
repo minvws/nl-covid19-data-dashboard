@@ -6,8 +6,7 @@ import { isDefined } from 'ts-is-present';
 import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth/logic';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
-import { CodedGeoJSON, gmGeo } from './topology';
-import { ChoroplethDataItem } from './types';
+import type { ChoroplethDataItem, CodedGeoJSON } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
 
@@ -62,7 +61,7 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
         featureGeo,
         selectedCode
       );
-      const hoverGeo = filterVrBySelectedGmCode(gmGeo, selectedCode);
+      const hoverGeo = filterVrBySelectedGmCode(featureGeo, selectedCode);
       return {
         outline: outlineGeo,
         hover: hoverGeo,

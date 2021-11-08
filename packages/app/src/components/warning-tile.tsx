@@ -7,7 +7,7 @@ import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
 
-type WarningMessageVariant = 'emphasis' | 'default';
+type WarningMessageVariant = 'emphasis' | 'default' | 'archived';
 
 interface WarningMessageProps {
   message: ReactNode;

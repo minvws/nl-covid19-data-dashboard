@@ -60,7 +60,7 @@ function LabeledBar(props: LabeledBarProps) {
   const { value, valueLabel, color, barLabel } = props;
 
   return (
-    <Box>
+    <Box spacing={1}>
       <Markdown content={barLabel} />
       <Bar
         value={value}

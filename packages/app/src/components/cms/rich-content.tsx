@@ -1,4 +1,10 @@
-import { ChartConfiguration, KpiConfiguration } from '@corona-dashboard/common';
+import {
+  ChartConfiguration,
+  DataScope,
+  DataScopeKey,
+  KpiConfiguration,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
@@ -90,13 +96,28 @@ export function RichContent({
           {...props}
         />
       ),
+
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
 
         return (
           <ContentWrapper>
             <CollapsibleSection summary={props.node.title}>
-              <Box py={3}>
+              <Box
+                py={3}
+                css={css({
+                  '> div > p': { width: '100%' },
+
+                  /** This is for removing the inline charts default padding
+                   * and aligning the KPI's at the start of the flow
+                   */
+                  '> div > div': {
+                    px: 0,
+                    alignSelf: 'flex-start',
+                    width: '100%',
+                  },
+                })}
+              >
                 <RichContent blocks={props.node.content.inlineBlockContent} />
               </Box>
             </CollapsibleSection>
@@ -108,7 +129,7 @@ export function RichContent({
           title: string;
           startDate?: string;
           endDate?: string;
-          config: ChartConfiguration;
+          config: ChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
         };
 
         return (
@@ -117,6 +138,7 @@ export function RichContent({
               maxWidth: 'infoWidth',
               width: '100%',
               px: asResponsiveArray({ _: 4, md: undefined }),
+              pb: 4,
             })}
           >
             <Box pb={4}>
@@ -215,6 +237,7 @@ const StyledPortableText = styled(PortableText)(
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
     '& > ul': {
       display: 'flex',
       flexDirection: 'column',

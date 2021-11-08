@@ -19,7 +19,6 @@ import {
 import { createDataConfig } from '../logic/create-data-config';
 import { TooltipSettings } from '../tooltips/types';
 import { CanvasChoroplethMap } from './canvas-choropleth-map';
-import { SvgChoroplethMap } from './svg-choropleth-map';
 
 export type AnchorEventHandler = {
   onFocus: (evt: FocusEvent<HTMLElement>) => void;
@@ -30,7 +29,6 @@ type ChoroplethMapProps<T extends ChoroplethDataItem> = Omit<
   ChoroplethProps<T>,
   'formatTooltip' | 'tooltipPlacement'
 > & {
-  hoverRef: React.RefObject<SVGGElement | null>;
   setTooltip: (tooltip: TooltipSettings<T> | undefined) => void;
   isTabInteractive: boolean;
   anchorEventHandlers: AnchorEventHandler;
@@ -46,13 +44,11 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     map,
     minHeight = 500,
     boundingBoxPadding = {},
-    hoverRef,
     setTooltip,
     accessibility,
     isTabInteractive,
     anchorEventHandlers,
     responsiveSizeConfiguration: dynamicSizeConfiguration,
-    renderTarget = 'svg',
   } = props;
 
   const dataConfig = createDataConfig(partialDataConfig);
@@ -136,15 +132,11 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     );
   }
 
-  const RenderComponent =
-    renderTarget === 'svg' ? SvgChoroplethMap : CanvasChoroplethMap;
-
   return (
     <>
       {annotations.descriptionElement}
-      <RenderComponent
+      <CanvasChoroplethMap
         containerRef={containerRef}
-        hoverRef={hoverRef}
         dataOptions={dataOptions}
         width={width}
         height={mapHeight}

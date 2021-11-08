@@ -22,7 +22,7 @@ interface AccessibilityPageData {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<AccessibilityPageData>((context) => {
-    const { locale } = context;
+    const { locale = 'nl' } = context;
 
     return `*[_type == 'toegankelijkheid']{
       ...,

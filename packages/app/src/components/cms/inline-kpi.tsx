@@ -30,9 +30,11 @@ interface ServerData {
 }
 
 function getDataUrl(configuration: KpiConfiguration, date?: string) {
-  const { code, area, metricName } = configuration;
+  const { code, area, metricName, metricProperty } = configuration;
   const suffix = isDefined(date) ? `?end=${date}` : '';
-  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
+  return `/api/data/timeseries/${
+    code ?? area
+  }/${metricName}/${metricProperty}${suffix}`;
 }
 
 export function InlineKpi({ configuration, date }: InlineKpiProps) {
@@ -164,6 +166,8 @@ function KpiTile({
           flexDirection="row"
           flexWrap="nowrap"
           alignItems="center"
+          spacingHorizontal={{ md: 2 }}
+          pr={{ md: 2 }}
         >
           <div
             aria-hidden={true}
@@ -188,7 +192,11 @@ function KpiTile({
         )}
       </Box>
 
-      {metadata && <Metadata {...metadata} isTileFooter />}
+      {metadata && (
+        <Box pt={2}>
+          <Metadata {...metadata} />
+        </Box>
+      )}
     </>
   );
 }

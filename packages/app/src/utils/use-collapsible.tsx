@@ -1,6 +1,6 @@
 import { Chevron } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { isBoolean } from 'lodash';
 import {
   cloneElement,
@@ -92,9 +92,10 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   const content = (children: ReactNode) => (
     <MotionBox
       id={id}
+      layout
       aria-hidden={isOpen ? 'false' : 'true'}
       width="100%"
-      overflow="hidden"
+      overflow={isOpen ? 'visible' : 'hidden'}
       animate={isOpen ? 'open' : 'rest'}
       transition={{
         duration: 0.2,
@@ -147,7 +148,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   };
 }
 
-const MotionChevron = styled(motion(Chevron))(
+const MotionChevron = styled(m(Chevron))(
   css({
     backgroundSize: '1.4em 0.9em',
     backgroundPosition: '0 50%',

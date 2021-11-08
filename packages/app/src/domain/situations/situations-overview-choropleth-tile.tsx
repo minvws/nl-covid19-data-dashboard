@@ -89,7 +89,6 @@ export function SituationsOverviewChoroplethTile({
               key={situation.id}
             >
               <DynamicChoropleth
-                renderTarget="canvas"
                 accessibility={{ key: 'situations_choropleths' }}
                 map="vr"
                 data={data}
@@ -137,20 +136,29 @@ function ChoroplethTooltip({
   noDataFillColor,
 }: ChoroplethTooltipProps) {
   const intl = useIntl();
+
   return (
-    <Box px={3} py={2} display="inline-block" aria-live="polite">
+    <Box px={3} py={2} aria-live="polite">
       <TooltipSubject
         thresholdValues={thresholds}
         filterBelow={value}
         noDataFillColor={noDataFillColor}
       >
-        {regionName + ': '}
+        <Box
+          as="span"
+          css={css({
+            whiteSpace: 'nowrap',
+          })}
+        >
+          {regionName + ': '}
+        </Box>
         <Box
           as="span"
           display="inline-block"
           fontWeight="bold"
           textAlign="right"
           px={1}
+          flexShrink={0}
         >
           {typeof value === 'number'
             ? isPercentage

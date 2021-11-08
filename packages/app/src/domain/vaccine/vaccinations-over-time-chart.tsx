@@ -14,6 +14,7 @@ import {
   TimeSeriesChartProps,
 } from '~/components/time-series-chart';
 import { TooltipData } from '~/components/time-series-chart/components';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import {
   DataOptions,
   StackedAreaSeriesDefinition,
@@ -34,12 +35,20 @@ interface VaccinationsOverTimeChartProps {
   coverageData?: NlVaccineCoverage;
   deliveryAndAdministrationData: DeliveryAndAdministrationData;
   activeChart: ActiveVaccinationChart;
+  timelineEvents: Partial<
+    Record<ActiveVaccinationChart, TimelineEventConfig[]>
+  >;
 }
 
 export function VaccinationsOverTimeChart(
   props: VaccinationsOverTimeChartProps
 ) {
-  const { coverageData, deliveryAndAdministrationData, activeChart } = props;
+  const {
+    coverageData,
+    deliveryAndAdministrationData,
+    activeChart,
+    timelineEvents,
+  } = props;
   const { siteText, formatNumber } = useIntl();
   const text = siteText.vaccinaties;
   const breakpoints = useBreakpoints(true);
@@ -60,10 +69,12 @@ export function VaccinationsOverTimeChart(
       ? ({
           accessibility: { key: 'vaccine_coverage_over_time_chart' },
           values: transformToDayTimestamps(coverageData.values),
+          minHeight: breakpoints.md ? 400 : 250,
           formatTickValue: (x: number) => `${x / 1_000_000}`,
           dataOptions: {
             valueAnnotation:
               text.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
+            timelineEvents: timelineEvents.coverage,
           } as DataOptions,
           seriesConfig: [
             {
@@ -113,6 +124,8 @@ export function VaccinationsOverTimeChart(
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
+    timelineEvents.coverage,
+    breakpoints,
   ]);
 
   const deliveryAndAdministrationChartConfiguration = useMemo(() => {
@@ -123,6 +136,7 @@ export function VaccinationsOverTimeChart(
       dataOptions: {
         valueAnnotation: siteText.waarde_annotaties.x_miljoen,
         forcedMaximumValue: (seriesMax: number) => seriesMax * 1.1,
+        timelineEvents: timelineEvents.deliveryAndAdministration,
       } as DataOptions,
       initialWidth: 400,
       minHeight: breakpoints.md ? 400 : 250,
@@ -134,13 +148,6 @@ export function VaccinationsOverTimeChart(
         x: TooltipData<VaccineDeliveryAndAdministrationsValue>
       ) => <VaccineDeliveryAndAdministrationsTooltip data={x} />,
       seriesConfig: [
-        {
-          metricProperty: 'total',
-          type: 'line',
-          label: text.data.vaccination_chart.doses_administered,
-          color: 'black',
-          strokeWidth: 3,
-        },
         ...vaccineNames.map<
           StackedAreaSeriesDefinition<VaccineDeliveryAndAdministrationsValue>
         >((x) => ({
@@ -158,6 +165,11 @@ export function VaccinationsOverTimeChart(
           fillOpacity: 1,
           strokeWidth: 0,
         })),
+        {
+          metricProperty: 'total',
+          type: 'invisible',
+          label: text.data.vaccination_chart.doses_administered,
+        },
       ],
     } as TimeSeriesChartProps<
       VaccineDeliveryAndAdministrationsValue,
@@ -172,6 +184,7 @@ export function VaccinationsOverTimeChart(
     text.data.vaccination_chart.product_names,
     vaccineNames,
     formatNumber,
+    timelineEvents.deliveryAndAdministration,
   ]);
 
   const chartProps =

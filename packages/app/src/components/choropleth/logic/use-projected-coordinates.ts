@@ -5,8 +5,7 @@ import type { GeoProjection } from 'd3-geo';
 import type { Polygon, Position } from 'geojson';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import type { CodedGeoJSON } from './topology';
-import type { FitExtent } from './types';
+import type { CodedGeoJSON, FitExtent } from './types';
 
 type GeoPolygons = {
   code: string;

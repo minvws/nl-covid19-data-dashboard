@@ -1,5 +1,4 @@
 export * from './thresholds';
-export * from './topology';
 export * from './types';
 export * from './use-choropleth-data';
 export * from './use-choropleth-features';

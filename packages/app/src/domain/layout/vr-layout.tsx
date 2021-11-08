@@ -111,10 +111,6 @@ export function VrLayout(props: VrLayoutProps) {
         }
         sidebarComponent={
           <>
-            {/**
-             * data is only available on /veiligheidsregio/{VRxx} routes
-             * and therefore optional
-             */}
             {!isLandingPage && showMetricLinks && (
               <Box
                 as="nav"

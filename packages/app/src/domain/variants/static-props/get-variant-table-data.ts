@@ -55,6 +55,7 @@ export function getVariantTableData(
   const firstLastValue = first<NlVariantsVariant | InVariantsVariant>(
     variants.values
   );
+
   const dates = {
     date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
     date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
@@ -75,6 +76,18 @@ export function getVariantTableData(
     : true;
 
   const variantTable = variants.values
+    /**
+     * Since the schemas for international still has to change to
+     * the new way of calculating this prevents the typescript error for now.
+     */
+    .map((variant) => ({
+      has_historical_significance:
+        'has_historical_significance' in variant.last_value
+          ? variant.last_value.has_historical_significance
+          : true,
+      ...variant,
+    }))
+    .filter((variant) => !variant.has_historical_significance)
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
@@ -83,10 +96,10 @@ export function getVariantTableData(
     }))
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last
-      if (rowA.variant === 'other') {
+      if (rowA.variant === 'other_table') {
         return 1;
       }
-      if (rowB.variant === 'other') {
+      if (rowB.variant === 'other_table') {
         return -1;
       }
       return (rowB.percentage ?? -1) - (rowA.percentage ?? -1);

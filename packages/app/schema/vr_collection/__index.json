@@ -16,8 +16,7 @@
     "disability_care",
     "sewer",
     "situations",
-    "vaccine_coverage_per_age_group",
-    "escalation_levels"
+    "vaccine_coverage_per_age_group"
   ],
   "properties": {
     "last_generated": {
@@ -101,14 +100,6 @@
       "maxItems": 75,
       "items": {
         "$ref": "vaccine_coverage_per_age_group.json"
-      }
-    },
-    "escalation_levels": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "escalation_levels.json"
       }
     }
   },

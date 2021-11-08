@@ -11,11 +11,17 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 
 const publicPath = path.resolve(__dirname, '../../../../../../public');
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (!Array.isArray(req.query.param)) {
+    res.status(400).end();
+    return;
+  }
+
   const { param, start, end } = req.query;
   const [root, metric, metricProperty] = param as [string, string, string];
 
@@ -25,11 +31,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const data = loadMetricData(root, metric, metricProperty);
+    const data = loadMetricData(root, metric);
     if (isDefined(data) && isDefined(data.values)) {
-      if (!isDefined(metricProperty)) {
-        data.values = sortTimeSeriesValues(data.values);
-      }
+      data.values = sortTimeSeriesValues(data.values);
+
       if (isDefined(start) || isDefined(end)) {
         data.values = filterByDateSpan(
           data.values,
@@ -38,7 +43,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         );
         data.last_value = last(data.values);
       }
-      res.status(200).json(data);
+
+      res
+        .status(200)
+        .json(
+          stripTrailingNullValues(
+            data,
+            metric,
+            metricProperty as keyof TimestampedValue
+          )
+        );
     } else {
       res.status(404).end();
     }
@@ -48,7 +62,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-function loadMetricData(root: string, metric: string, metricProperty?: string) {
+function loadMetricData(root: string, metric: string) {
   const filename = sanitize(`${root.toUpperCase()}.json`);
   const fullPath = path.join(publicJsonPath, filename);
   if (fs.existsSync(fullPath)) {
@@ -56,12 +70,7 @@ function loadMetricData(root: string, metric: string, metricProperty?: string) {
       fs.readFileSync(fullPath, { encoding: 'utf-8' })
     );
 
-    const result = metric in content ? content[metric] : undefined;
-    return isDefined(result) &&
-      isDefined(metricProperty) &&
-      metricProperty.length
-      ? result[metricProperty]
-      : result;
+    return metric in content ? content[metric] : undefined;
   }
   return undefined;
 }
@@ -105,4 +114,36 @@ function createTimestamp(dateStr: string | undefined): number {
     return getUnixTime(parsedDate);
   }
   return NaN;
+}
+
+const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice'];
+const strippableMetricProperties = [
+  'admissions_on_date_of_admission_moving_average_rounded',
+  'admissions_on_date_of_admission_moving_average',
+];
+
+function stripTrailingNullValues(
+  data: { values: TimestampedValue[]; last_value: TimestampedValue },
+  metric: string,
+  metricProperty?: keyof TimestampedValue
+) {
+  if (
+    !metricsInaccurateItems.includes(metric) ||
+    !strippableMetricProperties.includes(metricProperty as unknown as string)
+  ) {
+    return data;
+  }
+
+  const count = countTrailingNullValues(data.values, metricProperty);
+
+  if (count === 0) {
+    return data;
+  }
+
+  const values = data.values.slice(0, -count);
+
+  return {
+    values,
+    last_value: last(values),
+  };
 }

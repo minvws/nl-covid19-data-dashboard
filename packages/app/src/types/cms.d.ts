@@ -172,10 +172,6 @@ export interface LokalizeText {
 export type VaccinationPageQuery = {
   pageDescription: RichContentBlock[];
   pageLinks: LinkProps[];
-  title: string;
-  description: RichContentBlock[];
-  milestones: Milestones[];
-  expectedMilestones: ExpectedMilestones[];
 };
 
 export type HospitalAdmissionsPageQuery = {

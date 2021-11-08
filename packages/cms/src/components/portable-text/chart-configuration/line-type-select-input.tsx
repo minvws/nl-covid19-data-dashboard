@@ -17,6 +17,7 @@ const lineTypes = [
   'range',
   'stacked-area',
   'gapped-stacked-area',
+  'gapped-area',
   'invisible',
 ];
 

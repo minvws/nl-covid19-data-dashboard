@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { ExternalLink } from '~/components/external-link';
@@ -10,7 +10,7 @@ import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
-import { ElementType } from 'react';
+
 interface MarkdownProps {
   content: string;
   renderersOverrides?: { [nodeType: string]: ElementType };
@@ -51,10 +51,21 @@ const renderers = {
   ),
 
   /**
-   * The blockquote element is hijacked for displaying "warning" messages.
+   * The blockquote element is hijacked for displaying "warning" or "message" banner.
+   * We also have to reset the parent styles when a double blockquote ("messages") is
+   * passed along to show the proper styling of the last blockquote ("messages").
    */
-  blockquote: (props: { children: ReactNode }) => {
-    return <Message variant="warning">{props.children}</Message>;
+  blockquote: (props: { children: ReactNode; node: any }) => {
+    const hasChildBlockquote = props.node.children[0].type === 'blockquote';
+
+    return (
+      <Message
+        variant={hasChildBlockquote ? 'message' : 'warning'}
+        resetParentStyles={hasChildBlockquote}
+      >
+        {props.children}
+      </Message>
+    );
   },
 };
 

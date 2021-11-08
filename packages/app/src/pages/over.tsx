@@ -1,4 +1,6 @@
+import css from '@styled-system/css';
 import Head from 'next/head';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
@@ -22,7 +24,7 @@ interface OverData {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<OverData>((context) => {
-    const { locale } = context;
+    const { locale = 'nl' } = context;
     return `
     *[_type == 'overDitDashboard']{
       ...,
@@ -64,11 +66,22 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
       <Content>
         <Box spacing={4}>
           {content.title && <Heading level={1}>{content.title}</Heading>}
-          {content.description && <RichContent blocks={content.description} />}
+          {content.description && (
+            <RichContent
+              blocks={content.description}
+              contentWrapper={RichContentWrapper}
+            />
+          )}
         </Box>
       </Content>
     </Layout>
   );
 };
+
+const RichContentWrapper = styled.div(
+  css({
+    width: '100%',
+  })
+);
 
 export default Over;

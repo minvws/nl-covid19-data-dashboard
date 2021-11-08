@@ -38,22 +38,26 @@
       "title": "nl_variants_variant_value",
       "additionalProperties": false,
       "required": [
-        "percentage",
         "occurrence",
+        "percentage",
         "is_variant_of_concern",
+        "has_historical_significance",
         "sample_size",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "percentage": {
-          "type": "number"
-        },
         "occurrence": {
           "type": "integer"
         },
+        "percentage": {
+          "type": "number"
+        },
         "is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "has_historical_significance": {
           "type": "boolean"
         },
         "sample_size": {

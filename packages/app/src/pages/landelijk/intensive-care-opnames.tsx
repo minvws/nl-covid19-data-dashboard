@@ -1,9 +1,14 @@
-import { colors, getLastFilledValue } from '@corona-dashboard/common';
+import {
+  colors,
+  DAY_IN_SECONDS,
+  getLastFilledValue,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
 import { PieChart } from '~/components/pie-chart';
@@ -14,6 +19,8 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
+import { getBarScaleConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -44,7 +51,8 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_lcps',
     'intensive_care_nice',
     'intensive_care_nice_per_age_group',
-    'difference.intensive_care_lcps__beds_occupied_covid'
+    'difference.intensive_care_lcps__beds_occupied_covid',
+    'intensive_care_vaccination_status'
   ),
   createGetContent<{
     page: IntakeHospitalPageQuery;
@@ -60,39 +68,6 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const DAY_IN_SECONDS = 24 * 60 * 60;
-const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
-
-/**
- * @TODO: remove dummy data
- */
-
-const DummyDataVaccinationStatus = {
-  total_amount_of_people: 1369,
-  fully_vaccinated: 340,
-  fully_vaccinated_percentage: 24.8,
-  has_one_shot: 31,
-  has_one_shot_percentage: 2.2,
-  not_vaccinated: 998,
-  not_vaccinated_percentage: 72.8,
-  date_start_unix: 1634726341 - WEEK_IN_SECONDS,
-  date_end_unix: 1634726341,
-  date_of_insertion_unix: 1634726341,
-};
-
-interface NlIntensiveCareVaccinationStatusValue {
-  total_amount_of_people: number;
-  fully_vaccinated: number;
-  fully_vaccinated_percentage: number;
-  has_one_shot: number;
-  has_one_shot_percentage: number;
-  not_vaccinated: number;
-  not_vaccinated_percentage: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatPercentage, formatDateFromSeconds, formatNumber } =
     useIntl();
@@ -104,12 +79,18 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
   const dataIntake = data.intensive_care_nice;
+  const lastValueVaccinationStatus =
+    data.intensive_care_vaccination_status.last_value;
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
     countTrailingNullValues(
       dataIntake.values,
       'admissions_on_date_of_admission_moving_average'
     )
+  );
+
+  const vaccinationStatusFeature = useFeature(
+    'nlIntensiveCareVaccinationStatus'
   );
 
   const sevenDayAverageDates: [number, number] = [
@@ -161,7 +142,12 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
                 isMovingAverageDifference
               />
-              <Markdown content={text.extra_uitleg} />
+              <Markdown
+                content={replaceVariablesInText(text.extra_uitleg, {
+                  dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
+                  dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+                })}
+              />
             </KpiTile>
 
             <KpiTile
@@ -174,11 +160,18 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               {bedsLastValue.beds_occupied_covid !== null &&
                 bedsLastValue.beds_occupied_covid_percentage !== null && (
                   <>
-                    <KpiValue
-                      data-cy="beds_occupied_covid"
-                      absolute={bedsLastValue.beds_occupied_covid}
+                    <PageBarScale
+                      value={bedsLastValue.beds_occupied_covid}
+                      config={getBarScaleConfig(
+                        'nl',
+                        'intensive_care_lcps',
+                        'beds_occupied_covid'
+                      )}
                       difference={
                         data.difference.intensive_care_lcps__beds_occupied_covid
+                      }
+                      screenReaderText={
+                        text.kpi_bedbezetting.barscale_screenreader_text
                       }
                       isAmount
                     />
@@ -199,63 +192,66 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.vaccination_status_chart.title}
-            metadata={{
-              isTileFooter: true,
-              date: [
-                DummyDataVaccinationStatus.date_start_unix,
-                DummyDataVaccinationStatus.date_end_unix,
-              ],
-              source: {
-                ...text.vaccination_status_chart.source,
-              },
-            }}
-            description={replaceVariablesInText(
-              text.vaccination_status_chart.description,
-              {
-                amountOfPeople: formatNumber(
-                  DummyDataVaccinationStatus.total_amount_of_people
-                ),
-                date_start: formatDateFromSeconds(
-                  DummyDataVaccinationStatus.date_start_unix
-                ),
-                date_end: formatDateFromSeconds(
-                  DummyDataVaccinationStatus.date_end_unix,
-                  'medium'
-                ),
-              }
-            )}
-          >
-            <PieChart
-              data={
-                DummyDataVaccinationStatus as NlIntensiveCareVaccinationStatusValue
-              }
-              dataConfig={[
-                {
-                  metricProperty: 'not_vaccinated',
-                  color: colors.data.yellow,
-                  label: text.vaccination_status_chart.labels.not_vaccinated,
+          {vaccinationStatusFeature.isEnabled && (
+            <ChartTile
+              title={text.vaccination_status_chart.title}
+              metadata={{
+                isTileFooter: true,
+                date: [
+                  lastValueVaccinationStatus.date_start_unix,
+                  lastValueVaccinationStatus.date_end_unix,
+                ],
+                source: {
+                  ...text.vaccination_status_chart.source,
                 },
+              }}
+              description={replaceVariablesInText(
+                text.vaccination_status_chart.description,
                 {
-                  metricProperty: 'has_one_shot',
-                  color: colors.data.cyan,
-                  label: text.vaccination_status_chart.labels.has_one_shot,
-                },
-                {
-                  metricProperty: 'fully_vaccinated',
-                  color: colors.data.multiseries.cyan_dark,
-                  label: text.vaccination_status_chart.labels.fully_vaccinated,
-                },
-              ]}
-            />
-          </ChartTile>
+                  amountOfPeople: formatNumber(
+                    lastValueVaccinationStatus.total_amount_of_people
+                  ),
+                  date_start: formatDateFromSeconds(
+                    lastValueVaccinationStatus.date_start_unix
+                  ),
+                  date_end: formatDateFromSeconds(
+                    lastValueVaccinationStatus.date_end_unix,
+                    'medium'
+                  ),
+                }
+              )}
+            >
+              <PieChart
+                data={lastValueVaccinationStatus}
+                icon={<Arts />}
+                dataConfig={[
+                  {
+                    metricProperty: 'not_vaccinated',
+                    color: colors.data.yellow,
+                    label: text.vaccination_status_chart.labels.not_vaccinated,
+                  },
+                  {
+                    metricProperty: 'has_one_shot',
+                    color: colors.data.partial_vaccination,
+                    label: text.vaccination_status_chart.labels.has_one_shot,
+                  },
+                  {
+                    metricProperty: 'fully_vaccinated',
+                    color: colors.data.primary,
+                    label:
+                      text.vaccination_status_chart.labels.fully_vaccinated,
+                  },
+                ]}
+              />
+            </ChartTile>
+          )}
 
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
             metadata={{ source: text.bronnen.nice }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -301,27 +297,11 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={siteText.ic_admissions_per_age_group.chart_title}
-            description={siteText.ic_admissions_per_age_group.chart_description}
-            timeframeOptions={['all', '5weeks']}
-            metadata={{ source: text.bronnen.nice }}
-          >
-            {(timeframe) => (
-              <AdmissionsPerAgeGroup
-                accessibility={{
-                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
-                }}
-                values={data.intensive_care_nice_per_age_group.values}
-                timeframe={timeframe}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
             metadata={{ source: text.bronnen.lnaz }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -348,6 +328,24 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
+            title={siteText.ic_admissions_per_age_group.chart_title}
+            description={siteText.ic_admissions_per_age_group.chart_description}
+            timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
+                }}
+                values={data.intensive_care_nice_per_age_group.values}
+                timeframe={timeframe}
               />
             )}
           </ChartTile>

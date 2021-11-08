@@ -2,7 +2,7 @@ import {
   colors,
   KeysOfType,
   TimestampedValue,
-  Unpack,
+  Unpack
 } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
@@ -19,8 +19,8 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
+import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 
 export type MiniTileSelectorItem<T extends TimestampedValue> = {
   label: string;
@@ -29,12 +29,16 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
   value: number | string;
   valueIsPercentage?: boolean;
   warning?: string;
-  hideSparkBar?: boolean;
+  percentageBar?: {
+    value: number | null;
+    label?: string | null;
+  };
 };
 
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
+
   link?: {
     href: string;
     text: string;
@@ -42,21 +46,21 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints(true);
-
   const { siteText } = useIntl();
 
-  if (breakpoints.md) {
-    return <WideMiniTileSelectorLayout {...props} />;
-  }
-
   return (
-    <Box spacing={2}>
-      <Text variant="label1">
-        {siteText.common_actueel.tile_selector_uitleg}
-      </Text>
-      <NarrowMiniTileSelectorLayout {...props} />
-    </Box>
+    <>
+      <Box display={{ _: 'none', md: 'block' }}>
+        <WideMiniTileSelectorLayout {...props} />
+      </Box>
+
+      <Box spacing={3} display={{ _: 'block', md: 'none' }}>
+        <Text variant="label1" color="bodyLight">
+          {siteText.common_actueel.tile_selector_uitleg}
+        </Text>
+        <NarrowMiniTileSelectorLayout {...props} />
+      </Box>
+    </>
   );
 }
 
@@ -69,7 +73,6 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
         {menuItems.map((x, index) => (
           <NarrowMenuListItem
             key={x.label}
-            hideSparkBar={x.hideSparkBar}
             item={x}
             content={children[index]}
           />
@@ -82,7 +85,7 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
          * actually removes the link altogether
          */
         isDefined(link) && !isEmpty(link.text) ? (
-          <Box fontWeight="bold" pt={2}>
+          <Box pt={2}>
             <LinkWithIcon
               href={link.href}
               icon={<ArrowIconRight />}
@@ -100,29 +103,36 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 type NarrowMenuListItemProps = {
   content: ReactNode;
   item: MiniTileSelectorItem<any>;
-  hideSparkBar?: boolean;
 };
 
 function NarrowMenuListItem(props: NarrowMenuListItemProps) {
-  const { content, item, hideSparkBar } = props;
+  const { content, item } = props;
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const collapsible = useCollapsible();
 
   return (
     <StyledNarrowMenuListItem key={item.label}>
       <Box
-        height="3em"
+        height="3.5em"
         alignItems="center"
         display="flex"
         flexDirection="row"
         pl={{ _: 0, md: 1 }}
         onClick={collapsible.toggle}
       >
-        <SparkBars
-          data={item.data}
-          averageProperty={item.dataProperty}
-          hide={hideSparkBar}
-        />
+        <Box width={35} mr="3" aria-hidden="true">
+          {item.percentageBar ? (
+            <Bar
+              value={item.percentageBar.value}
+              color={`${colors.data.positive}80`} // We need the color to be transparent so we make an 8-digit hex code
+              backgroundColor="rgba(0, 0, 0, 0.1)"
+              label={item.percentageBar.label}
+              height={10}
+            />
+          ) : (
+            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+          )}
+        </Box>
         <InlineText>{item.label}</InlineText>
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
@@ -158,7 +168,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
-    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
+    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265} >
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (
@@ -167,11 +177,22 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                 onClick={() => setSelectedIndex(index)}
                 selected={selectedIndex === index}
               >
-                <SparkBars
-                  data={item.data}
-                  averageProperty={item.dataProperty}
-                  hide={item.hideSparkBar}
-                />
+                <Box width={35} mr="3" aria-hidden="true">
+                  {item.percentageBar ? (
+                    <Bar
+                      value={item.percentageBar.value}
+                      color={`${colors.data.positive}80`}
+                      backgroundColor="rgba(0, 0, 0, 0.1)"
+                      label={item.percentageBar.label}
+                      height={10}
+                    />
+                  ) : (
+                    <SparkBars
+                      data={item.data}
+                      averageProperty={item.dataProperty}
+                    />
+                  )}
+                </Box>
                 <InlineText>{item.label}</InlineText>
                 <Box
                   ml="auto"
@@ -215,7 +236,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
              * actually removes the link altogether
              */
             isDefined(link) && !isEmpty(link.text) ? (
-              <Box fontWeight="bold" pl={2} pt={4}>
+              <Box pl={2} pt={2}>
                 <LinkWithIcon
                   href={link.href}
                   icon={<ArrowIconRight />}
@@ -228,7 +249,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           }
         </>
       </Box>
-      <Box pl={3}>{children[selectedIndex]}</Box>
+      <Box pl={4}>{children[selectedIndex]}</Box>
     </Box>
   );
 }
@@ -237,7 +258,7 @@ const NarrowMenuList = styled.ul(
   css({
     borderBottom: '1px',
     borderBottomStyle: 'solid',
-    borderBottomColor: 'border',
+    borderBottomColor: 'lightGray',
   })
 );
 
@@ -259,7 +280,7 @@ const WideMenuButton = styled.button<{ selected: boolean }>((x) =>
     flexDirection: 'row',
     pr: `calc(5px + ${space[3]})`,
     backgroundColor: x.selected ? colors.lightBlue : colors.white,
-    pl: 2,
+    pl: 3,
     transition: '0.1s background-color',
     zIndex: 3,
     border: 0,
@@ -289,7 +310,7 @@ const StyledNarrowMenuListItem = styled.li(
     listStyle: 'none',
     borderTop: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: 'border',
+    borderTopColor: 'lightGray',
     cursor: 'pointer',
   })
 );

@@ -10,16 +10,6 @@ export function getVaccinePageQuery(locale: string) {
         ...cover,
         "asset": cover.asset->
       }
-    }],
-    "linksTitle": linksTitle.${locale},
-    "title": title.${locale},
-    "description": description.${locale},
-    "milestones": [...milestones | order(date)[] {
-      "title": title.${locale},
-      date,
-    }],
-    "expectedMilestones": [...expected[]{
-      "item": ${locale}
     }]
   }[0]
 `;

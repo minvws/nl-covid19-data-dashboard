@@ -1,5 +1,6 @@
 import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
+import { LazyMotion } from 'framer-motion';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -20,6 +21,9 @@ const pagesWithSmoothScroll = [
   'veiligheidsregio',
   'gemeente',
 ] as const;
+
+const loadAnimationFeatures = () =>
+  import('~/style/animations').then((mod) => mod.default);
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -77,11 +81,13 @@ export default function App(props: AppProps) {
       <ThemeProvider theme={theme}>
         <IntlContext.Provider value={intlContext}>
           <GlobalStyle />
-          <BreakpointContextProvider>
-            <IsTouchDeviceContextProvider>
-              <Component {...pageProps} />
-            </IsTouchDeviceContextProvider>
-          </BreakpointContextProvider>
+          <LazyMotion strict features={loadAnimationFeatures}>
+            <BreakpointContextProvider>
+              <IsTouchDeviceContextProvider>
+                <Component {...pageProps} />
+              </IsTouchDeviceContextProvider>
+            </BreakpointContextProvider>
+          </LazyMotion>
         </IntlContext.Provider>
         {toggleHotReloadButton}
       </ThemeProvider>

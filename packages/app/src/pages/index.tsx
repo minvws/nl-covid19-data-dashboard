@@ -1,12 +1,19 @@
 import {
   colors,
+  DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlVaccineCoveragePerAgeGroupEstimated,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Arts, Chart, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import {
+  Arts,
+  Chart,
+  Chevron,
+  Vaccinaties,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { isDefined } from 'ts-is-present';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { ContentTeaserProps } from '~/components/content-teaser';
@@ -15,7 +22,6 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
-import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
@@ -52,8 +58,10 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -61,12 +69,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    vr: ({
-      escalation_levels,
-      tested_overall,
-      vaccine_coverage_per_age_group,
-    }) => ({
-      escalation_levels,
+    vr: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
       tested_overall,
       vaccine_coverage_per_age_group: isDefined(vaccine_coverage_per_age_group)
         ? selectVaccineCoverageData(vaccine_coverage_per_age_group)
@@ -96,15 +99,29 @@ export const getStaticProps = createGetStaticProps(
       'vaccine_coverage_per_age_group_estimated',
     ])
   ),
-  selectNlData(
-    'intensive_care_nice',
-    'intensive_care_lcps',
-    'hospital_nice',
-    'hospital_lcps',
-    'difference',
-    'vaccine_administered_total',
-    'vaccine_coverage_per_age_group_estimated'
-  )
+  () => {
+    const { selectedNlData: data } = selectNlData(
+      'intensive_care_nice',
+      'intensive_care_lcps',
+      'hospital_nice',
+      'hospital_lcps',
+      'difference',
+      'vaccine_administered_total',
+      'vaccine_coverage_per_age_group_estimated'
+    )();
+
+    data.hospital_nice.values = cutValuesFromTimeframe(
+      data.hospital_nice.values,
+      '5weeks'
+    );
+
+    data.intensive_care_nice.values = cutValuesFromTimeframe(
+      data.intensive_care_nice.values,
+      '5weeks'
+    );
+
+    return { selectedNlData: data };
+  }
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
@@ -145,11 +162,25 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     )
   );
 
+  const sevenDayAverageDatesIntensiveCare: [number, number] = [
+    underReportedRangeIntensiveCare - WEEK_IN_SECONDS,
+    underReportedRangeIntensiveCare - DAY_IN_SECONDS,
+  ];
+
+  const sevenDayAverageDatesHospital: [number, number] = [
+    underReportedRangeHospital - WEEK_IN_SECONDS,
+    underReportedRangeHospital - DAY_IN_SECONDS,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
         <MaxWidth id="content">
-          <TileList>
+          <Box
+            spacing={{ _: 4, md: 5 }}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 5 }}
+          >
             <Box spacing={3}>
               <TopicalSectionHeader
                 lastGenerated={Number(lastGenerated)}
@@ -164,7 +195,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniTileSelectorLayout
                 link={{
-                  ...text.secties.actuele_situatie.link,
+                  text: text.quick_links.header,
                   href: reverseRouter.nl.index(),
                 }}
                 menuItems={[
@@ -214,15 +245,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     dataProperty: 'age_18_plus_fully_vaccinated',
                     value:
                       data.vaccine_coverage_per_age_group_estimated.last_value
-                        ?.age_18_plus_fully_vaccinated ?? 0,
+                        ?.age_18_plus_fully_vaccinated,
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
                       'vaccine_coverage_per_age_group_estimated'
                     ),
-                    hideSparkBar:
-                      data.vaccine_coverage_per_age_group_estimated.values
-                        .length < 7,
+                    percentageBar: {
+                      value:
+                        data.vaccine_coverage_per_age_group_estimated.last_value
+                          ?.age_18_plus_fully_vaccinated,
+                    },
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
                 ]}
               >
@@ -242,6 +275,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
@@ -256,9 +297,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.intensiveCareOpnames()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {text.mini_trend_tiles.ic_opnames.read_more_link}
                       </LinkWithIcon>
@@ -270,22 +310,19 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ic_opnames_per_dag
                           .linechart_legend_trend_label_moving_average,
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
                       label:
                         siteText.ic_opnames_per_dag
                           .linechart_legend_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
@@ -296,7 +333,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -324,6 +361,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               'admissions_on_date_of_admission_moving_average_rounded',
                             differenceKey:
                               'hospital_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesHospital[1]
+                              ),
+                            },
                           },
                           {
                             type: 'metric',
@@ -337,9 +382,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.ziekenhuisopnames()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {
                           text.mini_trend_tiles.ziekenhuis_opnames
@@ -354,22 +398,19 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
+                        'admissions_on_date_of_admission_moving_average',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
-                      type: 'area',
+                      type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
                       label:
                         siteText.ziekenhuisopnames_per_dag
                           .linechart_legend_titel_trend_label,
                       color: colors.data.primary,
-                      curve: 'step',
-                      strokeWidth: 0,
-                      noMarker: true,
                     },
                   ]}
                   dataOptions={{
@@ -380,7 +421,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         label: siteText.common_actueel.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average_rounded',
+                          'admissions_on_date_of_admission_moving_average',
                         ],
                       },
                     ],
@@ -418,9 +459,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}
-                        icon={<ArrowIconRight />}
+                        icon={<Chevron />}
                         iconPlacement="right"
-                        fontWeight="bold"
                       >
                         {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
                       </LinkWithIcon>
@@ -439,6 +479,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 />
               </MiniTileSelectorLayout>
             </Box>
+
+            <Box py={4}>
+              <Search title={siteText.common_actueel.secties.search.title.nl} />
+            </Box>
+
+            <EscalationLevelBanner
+              level={content.riskLevel.level}
+              dateFrom={content.riskLevel.dateFrom}
+            />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
@@ -471,15 +520,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            <EscalationLevelBanner
-              level={content.riskLevel.level}
-              dateFrom={content.riskLevel.dateFrom}
-            />
-
-            <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
-            </Box>
-
             <HighlightsTile
               hiddenTitle={text.highlighted_items.title}
               weeklyHighlight={content.weeklyHighlight}
@@ -500,15 +540,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 gm: choropleth.gm.vaccine_coverage_per_age_group,
                 vr: choropleth.vr.vaccine_coverage_per_age_group,
               }}
+              link={{
+                href: reverseRouter.nl.vaccinaties(),
+                text: siteText.common_actueel.secties
+                  .vaccination_coverage_choropleth.link_text.nl,
+              }}
             />
-          </TileList>
+          </Box>
         </MaxWidth>
 
         <Spacer mb={5} />
 
         <Box width="100%" backgroundColor="offWhite" pb={5}>
           <MaxWidth
-            spacing={3}
+            spacing={4}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >

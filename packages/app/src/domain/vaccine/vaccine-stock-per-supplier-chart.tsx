@@ -36,7 +36,6 @@ export function VaccineStockPerSupplierChart({
     () =>
       ({
         all: getMaximumPropertyValueInTimeframe(values, 'all', today),
-        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks', today),
       } as Record<TimeframeOption, number>),
     [values, today]
   );
@@ -105,32 +104,28 @@ export function VaccineStockPerSupplierChart({
       metadata={{
         source: siteText.vaccinaties.bronnen.rivm,
       }}
-      timeframeOptions={['all', '5weeks']}
-      timeframeInitialValue="5weeks"
     >
-      {(timeframe) => (
-        <>
-          <InteractiveLegend
-            helpText={text.select_help_text}
-            selectOptions={optionsConfig}
-            selection={[selected]}
-            onToggleItem={setSelected}
-          />
-          <Spacer mb={2} />
-          <TimeSeriesChart
-            accessibility={{
-              key: 'vaccine_stock_per_supplier_chart',
-            }}
-            tooltipTitle={text.tooltip_title}
-            values={values}
-            seriesConfig={seriesConfig}
-            timeframe={timeframe}
-            dataOptions={{
-              forcedMaximumValue: maximumValuesPerTimeframeOption[timeframe],
-            }}
-          />
-        </>
-      )}
+      <InteractiveLegend
+        helpText={text.select_help_text}
+        selectOptions={optionsConfig}
+        selection={[selected]}
+        onToggleItem={setSelected}
+      />
+
+      <Spacer mb={2} />
+
+      <TimeSeriesChart
+        accessibility={{
+          key: 'vaccine_stock_per_supplier_chart',
+        }}
+        tooltipTitle={text.tooltip_title}
+        values={values}
+        seriesConfig={seriesConfig}
+        timeframe={'all'}
+        dataOptions={{
+          forcedMaximumValue: maximumValuesPerTimeframeOption['all'],
+        }}
+      />
     </ChartTile>
   );
 }

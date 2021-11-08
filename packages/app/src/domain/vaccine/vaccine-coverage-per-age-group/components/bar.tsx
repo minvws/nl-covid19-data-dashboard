@@ -9,6 +9,7 @@ import { useIntl } from '~/intl';
 interface BarProps {
   value: number | null;
   color: string;
+  backgroundColor?: string;
   label?: string | null;
   height?: number;
   showAxisValues?: boolean;
@@ -17,6 +18,7 @@ interface BarProps {
 export function Bar({
   value,
   color,
+  backgroundColor = colors.data.underReported,
   label,
   height = 8,
   showAxisValues,
@@ -45,9 +47,7 @@ export function Bar({
             parsedVaccinatedLabel.sign === '>' ? 'hatched' : 'normal'
           }
           backgroundColor={
-            parsedVaccinatedLabel.sign === '>'
-              ? color
-              : colors.data.underReported
+            parsedVaccinatedLabel.sign === '>' ? color : backgroundColor
           }
         />
       ) : (
@@ -55,27 +55,36 @@ export function Bar({
           percentage={barValue}
           height={height}
           color={color}
-          backgroundColor="data.underReported"
+          backgroundColor={backgroundColor}
         />
       )}
       {showAxisValues && (
-        <Box display="flex" flexDirection="row" position="relative">
-          <InlineText>0%</InlineText>
+        <Box display="flex" flexDirection="row" position="relative" pt={1}>
+          <InlineText variant="label1" color="bodyLight">
+            0%
+          </InlineText>
           <InlineText
             css={css({
               background:
-                'linear-gradient(90deg, rgba(0,0,0,0) 0, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(0,0,0,0) 100%)',
+                'linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 90%, rgba(255,255,255,0) 100%)',
               position: 'absolute',
               display: 'flex',
               justifyContent: 'center',
               left: `calc(${Math.round(barValue)}% - 30px)`,
               width: '60px',
             })}
+            fontWeight="bold"
           >
             {barValueSign}
             {formatPercentage(barValue)}%
           </InlineText>
-          <InlineText css={css({ ml: 'auto' })}>100%</InlineText>
+          <InlineText
+            css={css({ ml: 'auto' })}
+            variant="label1"
+            color="bodyLight"
+          >
+            100%
+          </InlineText>
         </Box>
       )}
     </Box>

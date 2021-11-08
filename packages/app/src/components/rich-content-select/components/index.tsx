@@ -15,8 +15,7 @@ export const SelectBox = styled(Box)(
     borderColor: 'border',
     borderStyle: 'solid',
     borderWidth: 1,
-    height: '100%',
-    p: 3,
+    p: 2,
     '&[aria-expanded="true"]': {
       boxShadow: 'tile',
     },
