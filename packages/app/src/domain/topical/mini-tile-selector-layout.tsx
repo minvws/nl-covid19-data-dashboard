@@ -124,7 +124,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
           {item.percentageBar ? (
             <Bar
               value={item.percentageBar.value}
-              color={`${colors.data.positive}80`} // We need the color to be transparent so we make an 8-digit hex code
+              color={colors.data.primary}
               backgroundColor="rgba(0, 0, 0, 0.1)"
               label={item.percentageBar.label}
               height={10}
@@ -184,7 +184,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                   {item.percentageBar ? (
                     <Bar
                       value={item.percentageBar.value}
-                      color={`${colors.data.positive}80`}
+                      color={colors.data.primary}
                       backgroundColor="rgba(0, 0, 0, 0.1)"
                       label={item.percentageBar.label}
                       height={10}
