@@ -27,3 +27,9 @@ timestamp,action,key,document_id,move_to
 2021-11-01T14:00:04.811Z,delete,deceased_age_groups.graph.age_group_percentage_tooltip,jF33EuwumlGuwav2FD45fA,__
 2021-11-01T14:00:04.818Z,delete,deceased_age_groups.graph.value_percentage_title,jF33EuwumlGuwav2FD45gq,__
 2021-11-01T14:00:04.842Z,delete,deceased_age_groups.graph.value_percentage_tooltip,jF33EuwumlGuwav2FD45iW,__
+2021-11-01T16:12:01.805Z,add,ic_opnames_per_dag.vaccination_status_chart.labels.has_one_shot_or_not_vaccinated,XIsMg3WYidPwwGdwwywWh9,__
+2021-11-01T16:12:02.825Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.labels.has_one_shot_or_not_vaccinated,Pei0Nqv2MstfonnkJ3ydUc,__
+2021-11-01T16:12:02.825Z,delete,ic_opnames_per_dag.vaccination_status_chart.labels.has_one_shot,F3sVnbafS2gMInMltlUnDo,__
+2021-11-01T16:12:02.826Z,delete,ic_opnames_per_dag.vaccination_status_chart.labels.not_vaccinated,kEfMsz3QZs49YXq5jn3hR7,__
+2021-11-01T16:12:02.826Z,delete,ziekenhuisopnames_per_dag.vaccination_status_chart.labels.has_one_shot,jDbv30Y7XYH5kl8Zamawpq,__
+2021-11-01T16:12:02.826Z,delete,ziekenhuisopnames_per_dag.vaccination_status_chart.labels.not_vaccinated,kEfMsz3QZs49YXq5jn3lpZ,__
