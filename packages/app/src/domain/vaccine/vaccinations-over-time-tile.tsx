@@ -1,6 +1,5 @@
 import {
   NlVaccineAdministeredPlannedValue,
-  NlVaccineAdministeredTotalValue,
   NlVaccineCoverage,
 } from '@corona-dashboard/common';
 import React, { Dispatch, SetStateAction, useState } from 'react';
@@ -42,7 +41,6 @@ function useTileData(activeChart: ActiveVaccinationChart) {
 interface VaccinationsOverTimeTileProps {
   coverageData?: NlVaccineCoverage;
   deliveryAndAdministrationData: DeliveryAndAdministrationData;
-  vaccineAdministeredTotalLastValue: NlVaccineAdministeredTotalValue;
   vaccineAdministeredPlannedLastValue: NlVaccineAdministeredPlannedValue;
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
