@@ -14,7 +14,7 @@ import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { LinkWithIcon } from '~/components/link-with-icon';
-import { TinyTrendChart } from '~/components/tiny-trend-chart';
+import { SparkLine } from '~/components/spark-line';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
@@ -130,10 +130,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
               height={10}
             />
           ) : (
-            <TinyTrendChart
-              data={item.data}
-              averageProperty={item.dataProperty}
-            />
+            <SparkLine data={item.data} averageProperty={item.dataProperty} />
           )}
         </Box>
         <InlineText>{item.label}</InlineText>
@@ -190,7 +187,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                       height={10}
                     />
                   ) : (
-                    <TinyTrendChart
+                    <SparkLine
                       data={item.data}
                       averageProperty={item.dataProperty}
                     />

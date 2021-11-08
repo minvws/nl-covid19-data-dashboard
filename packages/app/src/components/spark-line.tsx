@@ -10,7 +10,7 @@ const HEIGHT = 24;
 const NUMBER_OF_POINTS = 7;
 const MARKER_RADIUS = 3;
 
-type TinyTrendChartProps<T extends TimestampedValue> = {
+type SparkLineProps<T extends TimestampedValue> = {
   averageProperty: KeysOfType<T, number | null, true>;
   data: T[];
 };
@@ -27,8 +27,8 @@ function getDate<T extends TimestampedValue>(value?: T) {
   return value.date_start_unix;
 }
 
-export function TinyTrendChart<T extends TimestampedValue>(
-  props: TinyTrendChartProps<T>
+export function SparkLine<T extends TimestampedValue>(
+  props: SparkLineProps<T>
 ) {
   const { data, averageProperty } = props;
 
