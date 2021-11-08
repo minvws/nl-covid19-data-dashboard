@@ -1,5 +1,6 @@
-import { useMemo, useRef, useState } from 'react';
 import { Gedrag } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
+import { useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -18,9 +19,9 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -31,6 +32,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
@@ -39,10 +41,17 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('behaviorPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('behaviorPage'))(context);
+
+    return {
+      content: {
+        articles: getArticleParts(content.pageParts, 'behaviorPageArticles'),
+      },
+    };
+  }
 );
 
 export default function BehaviorPage(

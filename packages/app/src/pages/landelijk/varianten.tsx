@@ -1,5 +1,5 @@
 import { Varianten } from '@corona-dashboard/icons';
-import { ArticleSummary } from '~/components/article-teaser';
+import { GetStaticPropsContext } from 'next';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
@@ -13,8 +13,11 @@ import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getVariantsPageQuery } from '~/queries/variants-page-query';
+import {
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -24,7 +27,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { VariantsPageQuery } from '~/types/cms';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'nlVariantsPage',
@@ -43,18 +46,18 @@ export const getStaticProps = withFeatureNotFoundPage(
         ...getVariantChartData(variants),
       };
     },
-    createGetContent<{
-      page: VariantsPageQuery;
-      highlight: {
-        articles?: ArticleSummary[];
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts | LinkParts>
+      >(() => getPagePartsQuery('variantsPage'))(context);
+
+      return {
+        content: {
+          articles: getArticleParts(content.pageParts, 'variantsPageArticles'),
+          links: getLinkParts(content.pageParts, 'variantsPageLinks'),
+        },
       };
-    }>((context) => {
-      const { locale } = context;
-      return `{
-        "page": ${getVariantsPageQuery(context)},
-        "highlight": ${createPageArticlesQuery('variantsPage', locale)}
-      }`;
-    })
+    }
   )
 );
 
@@ -101,8 +104,8 @@ export default function CovidVariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.links}
+            articles={content.articles}
           />
 
           {variantSidebarValue?.sample_size && (

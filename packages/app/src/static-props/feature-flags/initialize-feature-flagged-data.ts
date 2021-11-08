@@ -5,10 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import {
-  disabledMetrics,
-  schemaRootPath,
-} from '~/static-props/feature-flags/feature-flag-constants';
+import { disabledMetrics, schemaRootPath } from './feature-flag-constants';
 import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
 
 type AjvPropertyDef = { type?: MetricType; $ref: string; enum?: any[] };

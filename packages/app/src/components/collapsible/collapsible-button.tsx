@@ -73,7 +73,6 @@ export const CollapsibleButton = ({
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
           <Box
-            display={{ _: 'none', md: 'block' }}
             position="absolute"
             top="50%"
             left="0"

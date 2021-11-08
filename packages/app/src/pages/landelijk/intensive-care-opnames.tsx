@@ -5,6 +5,7 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { Markdown } from '~/components/markdown';
@@ -22,15 +23,15 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getBarScaleConfig } from '~/metric-config';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getIntakeHospitalPageQuery } from '~/queries/intake-hospital-page-query';
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -40,7 +41,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { IntakeHospitalPageQuery } from '~/types/cms';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -54,18 +55,32 @@ export const getStaticProps = createGetStaticProps(
     'difference.intensive_care_lcps__beds_occupied_covid',
     'intensive_care_vaccination_status'
   ),
-  createGetContent<{
-    page: IntakeHospitalPageQuery;
-    highlight: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "page": ${getIntakeHospitalPageQuery(context)},
-      "highlight": ${createPageArticlesQuery('intensiveCarePage', locale)},
-      "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
-    }`;
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts | LinkParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+        "parts": ${getPagePartsQuery('intensiveCarePage')},
+        "elements": ${getElementsQuery(
+          'nl',
+          ['intensive_care_nice'],
+          context.locale
+        )}
+      }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'intensiveCarePageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'intensiveCarePageLinks'),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
@@ -123,8 +138,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.links}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
