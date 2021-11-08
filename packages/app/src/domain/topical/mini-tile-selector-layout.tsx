@@ -2,7 +2,7 @@ import {
   colors,
   KeysOfType,
   TimestampedValue,
-  Unpack,
+  Unpack
 } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
@@ -20,7 +20,6 @@ import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useCollapsible } from '~/utils/use-collapsible';
-import { useUniqueId } from '~/utils/use-unique-id';
 import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 
 export type MiniTileSelectorItem<T extends TimestampedValue> = {
@@ -39,7 +38,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
-  id?: string;
+
   link?: {
     href: string;
     text: string;
@@ -49,20 +48,19 @@ type MiniTileSelectorLayoutProps = {
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { siteText } = useIntl();
 
-  const narrowId = useUniqueId();
-  const wideId = useUniqueId();
-
   return (
-    <ContainerTileSelector narrowId={narrowId} wideId={wideId}>
-      <WideMiniTileSelectorLayout {...props} id={wideId} />
+    <>
+      <Box display={{ _: 'none', md: 'block' }}>
+        <WideMiniTileSelectorLayout {...props} />
+      </Box>
 
-      <Box spacing={3} id={narrowId}>
+      <Box spacing={3} display={{ _: 'block', md: 'none' }}>
         <Text variant="label1" color="bodyLight">
           {siteText.common_actueel.tile_selector_uitleg}
         </Text>
         <NarrowMiniTileSelectorLayout {...props} />
       </Box>
-    </ContainerTileSelector>
+    </>
   );
 }
 
@@ -165,12 +163,12 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
 }
 
 function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const { menuItems, children, link, id } = props;
+  const { menuItems, children, link } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
-    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265} id={id}>
+    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265} >
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (
@@ -255,25 +253,6 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
     </Box>
   );
 }
-
-/**
- * Using his container so that the user can see the correct layout of
- * the tile selector depending on their screen size when the page is loading and not hydrated yet.
- */
-const ContainerTileSelector = styled.div<{
-  narrowId: string;
-  wideId: string;
-}>((x) =>
-  css({
-    [`#${x.narrowId}`]: {
-      display: asResponsiveArray({ _: 'block', md: 'none' }),
-    },
-
-    [`#${x.wideId}`]: {
-      display: asResponsiveArray({ _: 'none', md: 'grid' }),
-    },
-  })
-);
 
 const NarrowMenuList = styled.ul(
   css({
