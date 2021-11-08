@@ -1,6 +1,8 @@
 import { NlBehaviorValue } from '@corona-dashboard/common';
-import { useRef, useState } from 'react';
 import { Gedrag } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
+import { useRef, useState } from 'react';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -17,9 +19,9 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -29,17 +31,13 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { Markdown } from '~/components/markdown';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('behaviorPage', locale);
-  }),
   (context) => {
     const data = selectVrData('behavior')(context);
     const chartBehaviorOptions = getBehaviorChartOptions<NlBehaviorValue>(
@@ -47,6 +45,17 @@ export const getStaticProps = createGetStaticProps(
     );
 
     return { ...data, chartBehaviorOptions };
+  },
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('behaviorPage'))(context);
+
+    return {
+      content: {
+        articles: getArticleParts(content.pageParts, 'behaviorPageArticles'),
+      },
+    };
   }
 );
 

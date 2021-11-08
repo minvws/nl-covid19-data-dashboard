@@ -1,27 +1,43 @@
-/**
- * @jest-environment jsdom
- */
-
 import { CountryCode } from '../country-code';
 import {
   useMapCountryToColor,
   ORDERED_COLORS,
 } from '../use-map-country-to-color';
-import { renderHook } from '@testing-library/react-hooks';
 
-describe('useMapCountryToColor()', () => {
+import { act, renderHook } from '@testing-library/react-hooks';
+import { suite } from 'uvu';
+import * as assert from 'uvu/assert';
+
+const UseMapCountryToColor = suite('useMapCountryToColor');
+
+UseMapCountryToColor('should initialize in order', () => {
   const selectedCountries: CountryCode[] = ['nld', 'bel', 'deu'];
+
   const { result } = renderHook(() => useMapCountryToColor(selectedCountries));
 
-  it('should initialize in order', () => {
-    expect(
-      selectedCountries.map((code) => result.current.getColor(code))
-    ).toStrictEqual(ORDERED_COLORS.slice(0, selectedCountries.length));
-  });
-
-  it('should return the same color for the same country after changes', () => {
-    const beforeChangeColor = result.current.getColor('bel');
-    result.current.toggleColor('nld');
-    expect(result.current.getColor('bel')).toBe(beforeChangeColor);
-  });
+  assert.equal(
+    selectedCountries.map((code) => result.current.getColor(code)),
+    ORDERED_COLORS.slice(0, selectedCountries.length)
+  );
 });
+
+UseMapCountryToColor(
+  'should return the same color for the same country after updates',
+  () => {
+    const selectedCountries: CountryCode[] = ['nld', 'bel', 'deu'];
+
+    const { result } = renderHook(() =>
+      useMapCountryToColor(selectedCountries)
+    );
+
+    const beforeChangeColor = result.current.getColor('bel');
+
+    act(() => {
+      result.current.toggleColor('nld');
+    });
+
+    assert.is(result.current.getColor('bel'), beforeChangeColor);
+  }
+);
+
+UseMapCountryToColor.run();

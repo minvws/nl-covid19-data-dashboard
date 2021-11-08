@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -14,9 +15,9 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -26,6 +27,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -37,10 +39,24 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'difference.deceased_rivm__covid_daily'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('deceasedPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('deceasedPage'))(context);
+
+    return {
+      content: {
+        mainArticles: getArticleParts(
+          content.pageParts,
+          'deceasedPageArticles'
+        ),
+        monitorArticles: getArticleParts(
+          content.pageParts,
+          'deceasedMonitorArticles'
+        ),
+      },
+    };
+  }
 );
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -86,7 +102,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.articles}
+            articles={content.mainArticles}
           />
 
           <TwoKpiSection>
@@ -181,6 +197,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor_vr.bronnen.cbs],
             }}
+            articles={content.monitorArticles}
           />
 
           <DeceasedMonitorSection data={dataCbs} />

@@ -13,10 +13,9 @@ import {
   Vaccinaties,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
-import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
@@ -24,15 +23,11 @@ import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
 import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
-import {
-  HighlightsTile,
-  WeeklyHighlightProps,
-} from '~/domain/topical/highlights-tile';
+import { HighlightsTile } from '~/domain/topical/highlights-tile';
 import {
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
@@ -43,18 +38,14 @@ import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
-import {
-  ElementsQueryResult,
-  getWarning,
-} from '~/queries/create-elements-query';
-import { getTopicalPageQuery } from '~/queries/topical-page-query';
+import { getWarning } from '~/queries/get-elements-query';
+import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  createGetContent,
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
@@ -82,23 +73,11 @@ export const getStaticProps = createGetStaticProps(
         : vaccine_coverage_per_age_group ?? null,
     }),
   }),
-  createGetContent<{
-    showWeeklyHighlight: boolean;
-    articles: ContentTeaserProps[];
-    weeklyHighlight?: WeeklyHighlightProps;
-    highlights: ContentTeaserProps[];
-    riskLevel: {
-      dateFrom: string;
-      level: EscalationLevelType;
-    };
-    elements: ElementsQueryResult;
-  }>(
-    getTopicalPageQuery('nl', [
-      'intensive_care_nice',
-      'hospital_nice',
-      'vaccine_coverage_per_age_group_estimated',
-    ])
-  ),
+  getTopicalPageData('nl', [
+    'intensive_care_nice',
+    'hospital_nice',
+    'vaccine_coverage_per_age_group_estimated',
+  ]),
   () => {
     const { selectedNlData: data } = selectNlData(
       'intensive_care_nice',
@@ -520,12 +499,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            <HighlightsTile
-              hiddenTitle={text.highlighted_items.title}
-              weeklyHighlight={content.weeklyHighlight}
-              highlights={content.highlights}
-              showWeeklyHighlight={content.showWeeklyHighlight}
-            />
+            {isPresent(content.highlights) && (
+              <HighlightsTile
+                hiddenTitle={text.highlighted_items.title}
+                weeklyHighlight={content.weeklyHighlight}
+                highlights={content.highlights}
+                showWeeklyHighlight={content.showWeeklyHighlight}
+              />
+            )}
 
             <VaccinationCoverageChoropleth
               title={
@@ -566,7 +547,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               headerVariant="h2"
             />
 
-            <ArticleList articles={content.articles} />
+            {isPresent(content.articles) && (
+              <ArticleList articles={content.articles as any} />
+            )}
           </MaxWidth>
         </Box>
       </Box>

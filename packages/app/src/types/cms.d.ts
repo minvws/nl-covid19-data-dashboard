@@ -1,5 +1,65 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { ArticleSummary } from '~/components/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
+
+export type PageIdentifier =
+  | 'in_positiveTestsPage'
+  | 'hospitalPage'
+  | 'in_positiveTestsPage'
+  | 'in_variantsPage'
+  | 'behaviorPage'
+  | 'situationsPage'
+  | 'reproductionPage'
+  | 'infectiousPeoplePage'
+  | 'topicalPage'
+  | 'elderlyAtHomePage'
+  | 'disabilityCarePage'
+  | 'positiveTestsPage'
+  | 'variantsPage'
+  | 'sewerPage'
+  | 'intensiveCarePage'
+  | 'vaccinationsPage'
+  | 'in_variantsPage'
+  | 'nursingHomePage'
+  | 'deceasedPage';
+
+export type PageBasePart = {
+  pageDataKind: string;
+};
+
+export type ArticleParts = {
+  _type: 'pageArticles';
+  articles: ArticleSummary[];
+} & PageBasePart;
+
+export type LinkParts = {
+  _type: 'pageLinks';
+  links: {
+    title: string;
+    href: string;
+  }[];
+} & PageBasePart;
+
+export type HighlightedItemParts = {
+  _type: 'pageHighlightedItems';
+  highlights: ArticleSummary[];
+  showWeeklyHighlight: boolean;
+} & PageBasePart;
+
+export type RichTextParts = {
+  _type: 'pageRichText';
+  text: RichContentBlock[];
+} & PageBasePart;
+
+export type PagePart =
+  | ArticleParts
+  | LinkParts
+  | HighlightedItemParts
+  | RichTextParts;
+
+export type PagePartQueryResult<T extends PagePart = PagePart> = {
+  pageParts: T[];
+};
 
 export type FAQuestionAndAnswer = {
   content: RichContentBlock[] | null;
