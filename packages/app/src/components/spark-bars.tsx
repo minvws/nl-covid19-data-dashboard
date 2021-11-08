@@ -44,7 +44,7 @@ export function SparkBars<T extends TimestampedValue>(
           x={i * BAR_WIDTH}
           width={BAR_WIDTH}
           opacity="0.5"
-          y={y(Math.max(0, d[averageProperty])) + BORDER_HEIGHT}
+          y={y(Math.max(0, d[averageProperty]))}
           height={d[averageProperty] >= 0 ? y(0) - y(d[averageProperty]) : y(0)}
           fill={
             d[averageProperty] >= 0
