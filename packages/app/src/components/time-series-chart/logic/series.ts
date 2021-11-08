@@ -47,6 +47,10 @@ interface SeriesCommonDefinition {
    * values), or when using a second series as a backdrop.
    */
   noMarker?: boolean;
+  /**
+   * Specifies a different minimum range than the default for this series.
+   */
+  minimumRange?: number;
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>

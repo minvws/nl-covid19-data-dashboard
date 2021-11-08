@@ -207,7 +207,6 @@ const ElderlyAtHomeNationalPage = (
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'elderly_at_home_infected_people_choropleth',

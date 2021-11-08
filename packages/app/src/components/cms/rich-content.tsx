@@ -1,4 +1,10 @@
-import { ChartConfiguration, KpiConfiguration } from '@corona-dashboard/common';
+import {
+  ChartConfiguration,
+  DataScope,
+  DataScopeKey,
+  KpiConfiguration,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
@@ -90,6 +96,7 @@ export function RichContent({
           {...props}
         />
       ),
+
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
 
@@ -122,7 +129,7 @@ export function RichContent({
           title: string;
           startDate?: string;
           endDate?: string;
-          config: ChartConfiguration;
+          config: ChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
         };
 
         return (
@@ -230,6 +237,7 @@ const StyledPortableText = styled(PortableText)(
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
     '& > ul': {
       display: 'flex',
       flexDirection: 'column',

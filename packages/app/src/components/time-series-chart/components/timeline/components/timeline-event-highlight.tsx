@@ -1,5 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { transparentize } from 'polished';
 import { TimelineState } from '../logic';
 
@@ -21,7 +21,7 @@ export function TimelineEventHighlight({
   return (
     <AnimatePresence>
       {timelineState.current && (
-        <motion.rect
+        <m.rect
           key={`${event?.start}-${event?.end}`}
           pointerEvents="none"
           height={height}

@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
-import { asResponsiveArray } from '~/style/utils';
-import { Heading } from '~/components/typography';
-import { Box } from '~/components/base';
-import { LinkGroup, LinkItemProps, LinkGroupProps } from './link-group';
 import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { Heading } from '~/components/typography';
+import { asResponsiveArray } from '~/style/utils';
+import { LinkGroup, LinkGroupProps, LinkItemProps } from './link-group';
 
 type SitemapProps = {
   quickLinksHeader: string;
@@ -19,17 +19,19 @@ export function Sitemap({
   dataSitemap,
 }: SitemapProps) {
   return (
-    <Box display="flex" p={4} flexDirection={{ _: 'column', md: 'row' }}>
+    <Box display="flex" py={4} flexDirection={{ _: 'column', md: 'row' }}>
       <Box
         position="relative"
         flexBasis={{ _: '33%', lg: '25%' }}
         pb={{ _: 4, md: 0 }}
         pr={{ _: 0, md: 3 }}
+        borderColor="border"
+        borderStyle="solid"
+        borderRightWidth={{ md: '1px' }}
         spacing={3}
       >
         <Heading level={3}>{quickLinksHeader}</Heading>
         <LinkGroup links={quickLinks} />
-        <Divider />
       </Box>
 
       <Box
@@ -54,17 +56,6 @@ export function Sitemap({
     </Box>
   );
 }
-
-const Divider = styled.div(
-  css({
-    position: 'absolute',
-    bg: 'lightGray',
-    bottom: 0,
-    right: 0,
-    height: asResponsiveArray({ _: '1px', md: '100%' }),
-    width: asResponsiveArray({ _: '100%', md: '1px' }),
-  })
-);
 
 const LinkGroupContainer = styled.div(
   css({

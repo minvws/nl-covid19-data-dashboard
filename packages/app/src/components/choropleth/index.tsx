@@ -78,8 +78,6 @@ export type ResponsiveSizeConfiguration = [
 
 export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
-type RenderTarget = 'svg' | 'canvas';
-
 export type ChoroplethProps<T extends ChoroplethDataItem> = {
   accessibility: AccessibilityDefinition;
   data: T[];
@@ -100,7 +98,6 @@ export type ChoroplethProps<T extends ChoroplethDataItem> = {
    * on a set of given width break points
    */
   responsiveSizeConfiguration?: ResponsiveSizeConfiguration;
-  renderTarget?: RenderTarget;
 };
 
 export type ChoroplethComponent = typeof Choropleth;
@@ -127,10 +124,9 @@ export function Choropleth<T extends ChoroplethDataItem>({
 }: ChoroplethProps<T>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<T>>();
   const { siteText } = useIntl();
-  const hoverRef = useRef<SVGGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
+  useOnClickOutside([tooltipRef], () => setTooltip(undefined));
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
@@ -142,13 +138,10 @@ export function Choropleth<T extends ChoroplethDataItem>({
   return (
     <Box position="relative" height="100%">
       {tabInteractiveButton}
-      <div
-        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
-      >
+      <div css={css({ position: 'relative', height: '100%' })}>
         <ChoroplethMap
           {...props}
           setTooltip={setTooltip}
-          hoverRef={hoverRef}
           isTabInteractive={isTabInteractive}
           anchorEventHandlers={anchorEventHandlers}
         />

@@ -220,7 +220,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'hospital_admissions_choropleth',

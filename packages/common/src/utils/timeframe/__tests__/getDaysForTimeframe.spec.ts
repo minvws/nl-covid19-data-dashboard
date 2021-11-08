@@ -1,13 +1,15 @@
 import { getDaysForTimeframe } from '..';
+import { suite } from 'uvu';
+import * as assert from 'uvu/assert';
 
-describe('Utils: getDaysForTimeframe', () => {
-  it('should return 35 for 5weeks', () => {
-    const result = getDaysForTimeframe('5weeks');
-    expect(result).toEqual(35);
-  });
+const GetDaysForTimeframe = suite('getDaysForTimeframe');
 
-  it('should return Infinity for all', () => {
-    const result = getDaysForTimeframe('all');
-    expect(result).toEqual(Infinity);
-  });
+GetDaysForTimeframe('should return 35 for 5weeks', () => {
+  assert.is(getDaysForTimeframe('5weeks'), 35);
 });
+
+GetDaysForTimeframe('should return Infinity for all', () => {
+  assert.is(getDaysForTimeframe('all'), Infinity);
+});
+
+GetDaysForTimeframe.run();
