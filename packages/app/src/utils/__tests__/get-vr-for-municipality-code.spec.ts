@@ -1,42 +1,29 @@
 import { suite } from 'uvu';
-import * as assert from 'uvu/assert';
 import { getVrForMunicipalityCode } from '../get-vr-for-municipality-code';
-import * as sinon from 'sinon';
-import * as Common from '@corona-dashboard/common';
+import * as assert from 'uvu/assert';
+import { gmData, vrData } from '@corona-dashboard/common';
 
 const GetVrForMunicipalityCode = suite('getVrForMunicipalityCode');
-
-GetVrForMunicipalityCode.after(() => {
-  sinon.restore();
-});
 
 GetVrForMunicipalityCode(
   'should return the safety region data given a municipality code',
   () => {
-    sinon.replaceGetter(Common, 'gmData', () => [
-      {
-        name: 'test gemeente',
-        vrCode: 'VRTest',
-        gemcode: 'GMTest',
-      },
-    ]);
+    const firstMunicipality = gmData[0];
+    const safetyRegion = vrData.find(
+      (vr) => vr.code === firstMunicipality.vrCode
+    );
 
-    sinon.replaceGetter(Common, 'vrData', () => [
-      {
-        name: 'test veiligheidsregio',
-        code: 'VRTest',
-        id: 1,
-      },
-    ]);
+    const result = getVrForMunicipalityCode(firstMunicipality.gemcode);
 
-    const result = getVrForMunicipalityCode('GMTest');
+    assert.is(result, safetyRegion);
+  }
+);
 
-    console.log(result);
-
-    // assert.ok(result);
-    // assert.is(result.name, 'test veiligheidsregio');
-    // assert.is(result.code, 'VRTest');
-    // assert.is(result.id, 1);
+GetVrForMunicipalityCode(
+  'should return undefined given a faulty municipality code',
+  () => {
+    const result = getVrForMunicipalityCode('blub');
+    assert.is(result, undefined);
   }
 );
 
