@@ -36,7 +36,6 @@ export const pageArticles = {
       type: 'number',
       hidden: whenNotAdministrator,
       fieldset: 'articleConfiguration',
-      validation: (rule: Rule) => rule.required().min(1),
     },
     {
       title: 'Artikelen',

@@ -36,6 +36,7 @@ html {
 
 #__next {
   position: relative;
+  overflow: hidden;
 }
 
 /*

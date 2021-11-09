@@ -149,9 +149,11 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
   css({
     p: 2,
     display: 'block',
+    borderRight: '5px solid transparent',
     color: x.isActive ? 'blue' : 'black',
     position: 'relative',
     bg: x.isActive ? 'lightBlue' : 'transparent',
+    borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
 
     '&:hover': {
       bg: 'offWhite',
@@ -159,16 +161,6 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
 
     '&:focus': {
       bg: '#ebebeb',
-    },
-
-    '&:before': {
-      content: '""',
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      height: '100%',
-      width: x.isActive ? '5px' : 0,
-      backgroundColor: 'sidebarLinkBorder',
     },
 
     '&::after': {

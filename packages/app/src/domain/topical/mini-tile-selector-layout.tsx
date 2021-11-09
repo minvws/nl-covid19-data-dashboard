@@ -2,7 +2,7 @@ import {
   colors,
   KeysOfType,
   TimestampedValue,
-  Unpack
+  Unpack,
 } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
@@ -14,7 +14,7 @@ import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { LinkWithIcon } from '~/components/link-with-icon';
-import { SparkBars } from '~/components/spark-bars';
+import { SparkLine } from '~/components/spark-line';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
@@ -124,13 +124,13 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
           {item.percentageBar ? (
             <Bar
               value={item.percentageBar.value}
-              color={`${colors.data.positive}80`} // We need the color to be transparent so we make an 8-digit hex code
+              color={`${colors.data.primary}B2`} // Add 70% opacity by creating a 8-digit hex code
               backgroundColor="rgba(0, 0, 0, 0.1)"
               label={item.percentageBar.label}
               height={10}
             />
           ) : (
-            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+            <SparkLine data={item.data} averageProperty={item.dataProperty} />
           )}
         </Box>
         <InlineText>{item.label}</InlineText>
@@ -168,7 +168,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
   return (
-    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265} >
+    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (
@@ -181,13 +181,13 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                   {item.percentageBar ? (
                     <Bar
                       value={item.percentageBar.value}
-                      color={`${colors.data.positive}80`}
+                      color={`${colors.data.primary}B2`} // Add 70% opacity by creating a 8-digit hex code
                       backgroundColor="rgba(0, 0, 0, 0.1)"
                       label={item.percentageBar.label}
                       height={10}
                     />
                   ) : (
-                    <SparkBars
+                    <SparkLine
                       data={item.data}
                       averageProperty={item.dataProperty}
                     />

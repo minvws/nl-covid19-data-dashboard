@@ -20,10 +20,10 @@ export interface AgeDemographicCoordinates<
   numTicks: number;
   xMax: number;
   yMax: number;
-  leftPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
-  rightPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
-  leftPercentagePoint: (value: T) => any;
-  rightPercentagePoint: (value: T) => any;
+  leftScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
+  rightScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
+  leftPoint: (value: T) => any;
+  rightPoint: (value: T) => any;
   ageGroupRangeScale: ScaleBand<string>;
   ageGroupRangePoint: (value: T) => any;
   getTooltipCoordinates: GetTooltipCoordinates<T>;
@@ -45,7 +45,7 @@ export function useAgeDemographicCoordinates<
   data: { values: T[] },
   rightMetricProperty: KeysOfType<T, number, true>,
   leftMetricProperty: KeysOfType<T, number, true>,
-  displayMaxPercentage?: number
+  maxDisplayValue?: number
 ) {
   const [ref, { width = 840 }] = useResizeObserver<HTMLDivElement>();
 
@@ -61,7 +61,7 @@ export function useAgeDemographicCoordinates<
       isSmallScreen,
       width,
       isExtraSmallScreen,
-      displayMaxPercentage
+      maxDisplayValue
     );
   }, [
     data,
@@ -70,7 +70,7 @@ export function useAgeDemographicCoordinates<
     isSmallScreen,
     width,
     isExtraSmallScreen,
-    displayMaxPercentage,
+    maxDisplayValue,
   ]);
 
   return [ref, coordinates] as const;
@@ -85,7 +85,7 @@ function calculateAgeDemographicCoordinates<
   isSmallScreen: boolean,
   parentWidth: number,
   isExtraSmallScreen: boolean,
-  displayMaxPercentage?: number
+  maxDisplayValue?: number
 ): AgeDemographicCoordinates<T> {
   const values = data.values.sort((a, b) => {
     return b.age_group_range.localeCompare(a.age_group_range);
@@ -113,19 +113,18 @@ function calculateAgeDemographicCoordinates<
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const percentage = (value: number) => value * 100;
-  const leftPercentage = (value: T) => percentage(value[leftMetricProperty]);
-  const rightPercentage = (value: T) => percentage(value[rightMetricProperty]);
+  const getLeftValue = (value: T) => value[leftMetricProperty];
+  const getRightValue = (value: T) => value[rightMetricProperty];
   const ageGroupRange = (value: T) => value.age_group_range;
 
   // Scales to map between values and coordinates
 
-  // The ageGroupPercentageScale and infectedPercentageScale will use the same domain
-  const domainPercentages = [
+  // The scales for bar sizing will use the same domain
+  const domainValues = [
     0,
     Math.max(
       ...values.map((value) =>
-        Math.max(leftPercentage(value), rightPercentage(value))
+        Math.max(getLeftValue(value), getRightValue(value))
       )
     ),
   ];
@@ -133,22 +132,26 @@ function calculateAgeDemographicCoordinates<
   /**
    * If there's a `displayMaxPercentage`-prop we'll clip the domain to that value
    */
-  if (displayMaxPercentage) {
-    domainPercentages[1] = Math.min(displayMaxPercentage, domainPercentages[1]);
+  if (maxDisplayValue) {
+    domainValues[1] = Math.min(maxDisplayValue, domainValues[1]);
   }
 
-  const leftPercentageScale = scaleLinear({
+  const leftScale = scaleLinear({
     range: [xMax, 0],
     round: true,
-    domain: domainPercentages,
+    domain: domainValues,
     clamp: true,
+    nice: true,
   });
-  const rightPercentageScale = scaleLinear({
+
+  const rightScale = scaleLinear({
     range: [0, xMax],
     round: true,
-    domain: domainPercentages,
+    domain: domainValues,
     clamp: true,
+    nice: true,
   });
+
   const ageGroupRangeScale = scaleBand({
     range: [margin.top, height - margin.top],
     round: true,
@@ -160,11 +163,8 @@ function calculateAgeDemographicCoordinates<
   // The any/any is needed as typing would be a-flexible; and without it Typescript would complain
   const createPoint = (scale: any, accessor: any) => (value: T) =>
     scale(accessor(value));
-  const leftPercentagePoint = createPoint(leftPercentageScale, leftPercentage);
-  const rightPercentagePoint = createPoint(
-    rightPercentageScale,
-    rightPercentage
-  );
+  const leftPoint = createPoint(leftScale, getLeftValue);
+  const rightPoint = createPoint(rightScale, getRightValue);
   const ageGroupRangePoint = createPoint(ageGroupRangeScale, ageGroupRange);
 
   // Method for the tooltip to retrieve coordinates based on
@@ -185,13 +185,13 @@ function calculateAgeDemographicCoordinates<
       const infectedPercentageSide = point.x > width / 2;
       if (infectedPercentageSide) {
         // Align the top left of the tooltip with the middle of the infected percentage bar
-        left = width / 2 + axisWidth / 2 + rightPercentagePoint(value) / 2;
+        left = width / 2 + axisWidth / 2 + rightPoint(value) / 2;
       } else {
         // Align the top right of the tooltip with the middle of the age group percentage bar
         left =
           width / 2 -
           axisWidth / 2 -
-          (xMax - leftPercentagePoint(value)) / 2 -
+          (xMax - leftPoint(value)) / 2 -
           AGE_GROUP_TOOLTIP_WIDTH;
       }
     }
@@ -206,11 +206,11 @@ function calculateAgeDemographicCoordinates<
     numTicks,
     xMax,
     yMax,
-    leftPercentageScale,
-    rightPercentageScale,
+    leftScale,
+    rightScale,
     ageGroupRangeScale,
-    leftPercentagePoint,
-    rightPercentagePoint,
+    leftPoint,
+    rightPoint,
     ageGroupRangePoint,
     getTooltipCoordinates,
     isSmallScreen,
