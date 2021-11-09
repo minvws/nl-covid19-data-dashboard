@@ -21,6 +21,7 @@ export const iconName2filename = {
   BinnenMetZitplaats: 'binnen-met-zitplaats.svg',
   BinnenZonderZitplaats: 'binnen-zonder-zitplaats.svg',
   Binnensporten: 'binnensporten.svg',
+  Binnensportlocaties: 'binnensportlocaties.svg',
   Calendar: 'calendar.svg',
   Chart: 'chart.svg',
   Check: 'check.svg',
