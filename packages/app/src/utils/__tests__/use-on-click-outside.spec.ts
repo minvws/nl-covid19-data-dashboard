@@ -3,7 +3,6 @@ import injectJsDom from 'jsdom-global';
 import { RefObject } from 'react';
 import * as sinon from 'sinon';
 import { suite } from 'uvu';
-import * as assert from 'uvu/assert';
 import { useOnClickOutside } from '../use-on-click-outside';
 
 const UseOnClickOutside = suite('useOnClickOutside');
@@ -23,7 +22,7 @@ UseOnClickOutside.after.each(() => {
 
 UseOnClickOutside.before.each((context) => {
   context.addEventListenerSpy = sinon.spy(document, 'addEventListener');
-  context.removeEventListener = sinon.spy(document, 'removeEventListener');
+  context.removeEventListenerSpy = sinon.spy(document, 'removeEventListener');
 });
 
 UseOnClickOutside('should add document listeners on mount', (context) => {
@@ -39,7 +38,7 @@ UseOnClickOutside('should add document listeners on mount', (context) => {
 
   renderHook(() => useOnClickOutside([mockRef], handler));
 
-  assert.equal(context.addEventListenerSpy.callCount, 2);
+  sinon.assert.calledTwice(context.addEventListenerSpy);
 });
 
 UseOnClickOutside('should remove document listeners on unmount', (context) => {
@@ -57,7 +56,7 @@ UseOnClickOutside('should remove document listeners on unmount', (context) => {
 
   unmount();
 
-  assert.equal(context.removeEventListener.callCount, 2);
+  sinon.assert.calledTwice(context.removeEventListenerSpy);
 });
 
 UseOnClickOutside(
@@ -78,7 +77,7 @@ UseOnClickOutside(
     var event = new Event('mousedown');
     document.dispatchEvent(event);
 
-    assert.equal(handler.callCount, 1);
+    sinon.assert.calledOnce(handler);
   }
 );
 
@@ -100,7 +99,7 @@ UseOnClickOutside(
     var event = new Event('touchstart');
     document.dispatchEvent(event);
 
-    assert.equal(handler.callCount, 1);
+    sinon.assert.calledOnce(handler);
   }
 );
 
@@ -122,7 +121,7 @@ UseOnClickOutside(
     var event = new Event('mousedown');
     document.dispatchEvent(event);
 
-    assert.equal(handler.callCount, 0);
+    sinon.assert.notCalled(handler);
   }
 );
 
@@ -144,7 +143,7 @@ UseOnClickOutside(
     var event = new Event('touchstart');
     document.dispatchEvent(event);
 
-    assert.equal(handler.callCount, 0);
+    sinon.assert.notCalled(handler);
   }
 );
 
