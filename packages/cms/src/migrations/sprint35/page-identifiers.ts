@@ -247,8 +247,6 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
         title: articleInfo.title,
         pageIdentifier: { _type: 'reference', _ref: pageIdentifier._id },
         pageDataKind: articleInfo.kind,
-        minNumber: (articleInfo as any).minNumber,
-        maxNumber: (articleInfo as any).maxNumber ?? 2,
         articles: document[(articleInfo as any).fieldName ?? 'articles'].map(
           (x: { _ref: string }) => ({
             _ref: x._ref,

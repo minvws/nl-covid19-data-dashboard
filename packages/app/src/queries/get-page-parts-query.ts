@@ -37,7 +37,7 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
         (_type == 'pageArticles') => {
           articles[]->{_id, title, slug, intro, "cover": {"asset": cover.asset->}}
         },
-        (_type == 'pageLink') => {
+        (_type == 'pageLinks') => {
           links[]{href, title}
         },
         (_type == 'pageHighlightedItems') => {
