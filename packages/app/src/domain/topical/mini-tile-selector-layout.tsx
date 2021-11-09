@@ -124,7 +124,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
           {item.percentageBar ? (
             <Bar
               value={item.percentageBar.value}
-              color={colors.data.primary}
+              color={`${colors.data.primary}B2`} // Add 70% opacity by creating a 8-digit hex code
               backgroundColor="rgba(0, 0, 0, 0.1)"
               label={item.percentageBar.label}
               height={10}
@@ -181,7 +181,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                   {item.percentageBar ? (
                     <Bar
                       value={item.percentageBar.value}
-                      color={colors.data.primary}
+                      color={`${colors.data.primary}B2`} // Add 70% opacity by creating a 8-digit hex code
                       backgroundColor="rgba(0, 0, 0, 0.1)"
                       label={item.percentageBar.label}
                       height={10}
