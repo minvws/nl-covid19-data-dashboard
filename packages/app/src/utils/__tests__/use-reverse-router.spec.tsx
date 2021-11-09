@@ -1,4 +1,8 @@
 import { cleanup, render } from '@testing-library/react';
+import {
+  cleanup as cleanupHooks,
+  renderHook,
+} from '@testing-library/react-hooks';
 import injectJsDom from 'jsdom-global';
 import * as sinon from 'sinon';
 import { ThemeProvider } from 'styled-components';
@@ -39,6 +43,7 @@ UseReverseRouter.after((context) => {
 
 UseReverseRouter.after.each(() => {
   cleanup();
+  cleanupHooks();
 });
 
 UseReverseRouter.before.each((context) => {});
@@ -87,5 +92,31 @@ UseReverseRouter(
     assert.equal(nlDiv.textContent?.endsWith('?menu=1'), false);
   }
 );
+
+UseReverseRouter('VR routes should have the VR code in them', (context) => {
+  const { result } = renderHook(() => useReverseRouter());
+
+  const keys = Object.keys(result.current.vr);
+  keys.forEach((name) => {
+    const route = (result.current.vr as any)[name]('VR25');
+    assert.equal(route.indexOf('VR25') > -1, true);
+  });
+
+  const route = result.current.actueel.vr('VR25');
+  assert.equal(route.indexOf('VR25') > -1, true);
+});
+
+UseReverseRouter('GM routes should have the GM code in them', (context) => {
+  const { result } = renderHook(() => useReverseRouter());
+
+  const keys = Object.keys(result.current.gm);
+  keys.forEach((name) => {
+    const route = (result.current.gm as any)[name]('GM001');
+    assert.equal(route.indexOf('GM001') > -1, true);
+  });
+
+  const route = result.current.actueel.gm('GM001');
+  assert.equal(route.indexOf('GM001') > -1, true);
+});
 
 UseReverseRouter.run();
