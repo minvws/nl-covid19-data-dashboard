@@ -242,8 +242,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 rightColor="data.primary"
                 leftColor="data.yellow"
-                leftMetricProperty={'not_or_partially_vaccinated'}
-                rightMetricProperty={'fully_vaccinated'}
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
                 formatValue={(n: number) => `${n}`}
                 text={
                   siteText.ic_admissions_incidence_age_demographic_chart
