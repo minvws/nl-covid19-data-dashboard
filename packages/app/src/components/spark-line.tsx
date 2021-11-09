@@ -35,7 +35,7 @@ export function SparkLine<T extends TimestampedValue>(
   const values = data.slice(-NUMBER_OF_POINTS);
 
   const min = Math.min(0, ...values.map((d) => d[averageProperty] ?? 0));
-  const max = Math.max(1, ...values.map((d) => d[averageProperty] ?? 0));
+  const max = Math.max(0.1, ...values.map((d) => d[averageProperty] ?? 0));
 
   const xScale = scaleLinear({
     domain: [getDate(first(values)), getDate(last(values))],
