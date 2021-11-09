@@ -83,6 +83,28 @@ UseOnClickOutside(
 );
 
 UseOnClickOutside(
+  'should call handler when touch is outside specified element',
+  () => {
+    const mockElement = {
+      contains: () => false,
+    };
+
+    const mockRef = {
+      current: mockElement,
+    } as unknown as RefObject<Element>;
+
+    const handler = sinon.spy();
+
+    renderHook(() => useOnClickOutside([mockRef], handler));
+
+    var event = new Event('touchstart');
+    document.dispatchEvent(event);
+
+    assert.equal(handler.callCount, 1);
+  }
+);
+
+UseOnClickOutside(
   'should not call handler when click is inside specified element',
   () => {
     const mockElement = {
@@ -98,6 +120,28 @@ UseOnClickOutside(
     renderHook(() => useOnClickOutside([mockRef], handler));
 
     var event = new Event('mousedown');
+    document.dispatchEvent(event);
+
+    assert.equal(handler.callCount, 0);
+  }
+);
+
+UseOnClickOutside(
+  'should not call handler when touch is inside specified element',
+  () => {
+    const mockElement = {
+      contains: () => true,
+    };
+
+    const mockRef = {
+      current: mockElement,
+    } as unknown as RefObject<Element>;
+
+    const handler = sinon.spy();
+
+    renderHook(() => useOnClickOutside([mockRef], handler));
+
+    var event = new Event('touchstart');
     document.dispatchEvent(event);
 
     assert.equal(handler.callCount, 0);
