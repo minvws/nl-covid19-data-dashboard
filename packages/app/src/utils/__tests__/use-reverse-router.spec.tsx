@@ -64,8 +64,8 @@ const TestBed = () => {
   return (
     <>
       <div data-testid="nl">{router.nl.index()}</div>
-      <div data-testid="vr">{router.vr.index()}</div>
-      <div data-testid="gm">{router.gm.index()}</div>
+      <div data-testid="vr">{router.vr.index('VR25')}</div>
+      <div data-testid="gm">{router.gm.index('GM001')}</div>
       <div data-testid="in">{router.in.index()}</div>
     </>
   );
@@ -77,8 +77,14 @@ UseReverseRouter(
     largeScreen = false;
     const result = render(<TestContainer />);
     const nlDiv = result.getByTestId('nl');
+    const vrDiv = result.getByTestId('vr');
+    const gmDiv = result.getByTestId('gm');
+    const inDiv = result.getByTestId('in');
 
     assert.equal(nlDiv.textContent?.endsWith('?menu=1'), true);
+    assert.equal(vrDiv.textContent?.endsWith('?menu=1'), true);
+    assert.equal(gmDiv.textContent?.endsWith('?menu=1'), true);
+    assert.equal(inDiv.textContent?.endsWith('?menu=1'), true);
   }
 );
 
@@ -88,8 +94,14 @@ UseReverseRouter(
     largeScreen = true;
     const result = render(<TestContainer />);
     const nlDiv = result.getByTestId('nl');
+    const vrDiv = result.getByTestId('vr');
+    const gmDiv = result.getByTestId('gm');
+    const inDiv = result.getByTestId('in');
 
     assert.equal(nlDiv.textContent?.endsWith('?menu=1'), false);
+    assert.equal(vrDiv.textContent?.endsWith('?menu=1'), false);
+    assert.equal(gmDiv.textContent?.endsWith('?menu=1'), false);
+    assert.equal(inDiv.textContent?.endsWith('?menu=1'), false);
   }
 );
 
