@@ -1,5 +1,9 @@
 import { colors } from '@corona-dashboard/common';
-import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import {
+  Arts,
+  Vaccinaties as VaccinatieIcon,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
@@ -331,6 +335,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                         text: text.vaccination_status_ic_and_hospital_section
                           .hospital.link_text,
                       }}
+                      icon={<Ziekenhuis />}
                       verticalLayout
                       dataConfig={[
                         {
@@ -380,6 +385,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                         text: text.vaccination_status_ic_and_hospital_section
                           .intensive_care.link_text,
                       }}
+                      icon={<Arts />}
                       dataConfig={[
                         {
                           metricProperty: 'has_one_shot_or_not_vaccinated',
