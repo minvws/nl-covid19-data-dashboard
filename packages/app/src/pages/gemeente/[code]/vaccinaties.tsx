@@ -3,6 +3,7 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
@@ -226,7 +227,9 @@ export const VaccinationsGmPage = (
                   )}
                 />
 
-                <AgeGroupSelect onChange={setSelectedAgeGroup} />
+                <Box maxWidth="20rem">
+                  <AgeGroupSelect onChange={setSelectedAgeGroup} />
+                </Box>
               </>
             }
             legend={{
