@@ -36,13 +36,35 @@ UseMediaQuery.before.each((context) => {
 
 UseMediaQuery('Should initialize the mediaquerylist', (context) => {
   const breakpoint = 'testBreakpoint';
-  const { result } = renderHook(() => useMediaQuery(breakpoint));
+  renderHook(() => useMediaQuery(breakpoint));
 
   sinon.assert.calledOnce(context.matchMediaSpy);
-  //sinon.assert.calledOnce(context.mockMqList.addListener);
-  //sinon.assert.calledOnce(context.mockMqList.removeListener);
+  sinon.assert.calledOnce(context.mockMqList.addListener);
+});
+
+UseMediaQuery('Should cleanup when unmounting', (context) => {
+  const breakpoint = 'testBreakpoint';
+  const { unmount } = renderHook(() => useMediaQuery(breakpoint));
+
+  unmount();
+
+  sinon.assert.calledOnce(context.mockMqList.removeListener);
+});
+
+UseMediaQuery('Should return the matches value', (context) => {
+  const breakpoint = 'testBreakpoint';
+  const breakpoint2 = 'testBreakpoint2';
+  const { result, rerender } = renderHook((br) => useMediaQuery(br), {
+    initialProps: breakpoint,
+  });
 
   assert.equal(result.current, true);
+
+  context.mockMqList.matches = false;
+
+  rerender(breakpoint2);
+
+  assert.equal(result.current, false);
 });
 
 UseMediaQuery.run();
