@@ -206,6 +206,35 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
+          {isVaccinationIncidenceChartShown.isEnabled && (
+            <ChartTile
+              title={
+                siteText.hospital_admissions_incidence_age_demographic_chart
+                  .title
+              }
+              description={
+                siteText.hospital_admissions_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                data={data.hospital_vaccine_incidence_per_age_group}
+                accessibility={{
+                  key: 'hospital_admissions_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
+                formatValue={(n) => `${n}`}
+                text={
+                  siteText.hospital_admissions_incidence_age_demographic_chart
+                    .chart_text
+                }
+              />
+            </ChartTile>
+          )}
+
           {vaccinationStatusFeature.isEnabled && (
             <ChartTile
               title={text.vaccination_status_chart.title}
@@ -253,35 +282,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },
                 ]}
-              />
-            </ChartTile>
-          )}
-
-          {isVaccinationIncidenceChartShown.isEnabled && (
-            <ChartTile
-              title={
-                siteText.hospital_admissions_incidence_age_demographic_chart
-                  .title
-              }
-              description={
-                siteText.hospital_admissions_incidence_age_demographic_chart
-                  .description
-              }
-            >
-              <AgeDemographic
-                data={data.hospital_vaccine_incidence_per_age_group}
-                accessibility={{
-                  key: 'hospital_admissions_incidence_age_demographic_chart',
-                }}
-                rightColor="data.primary"
-                leftColor="data.yellow"
-                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
-                rightMetricProperty={'fully_vaccinated_per_100k'}
-                formatValue={(n) => `${n}`}
-                text={
-                  siteText.hospital_admissions_incidence_age_demographic_chart
-                    .chart_text
-                }
               />
             </ChartTile>
           )}
