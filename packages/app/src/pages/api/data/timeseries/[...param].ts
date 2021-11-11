@@ -13,8 +13,25 @@ import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 
-const publicPath = path.resolve(__dirname, '../../../../../../public');
+const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
+
+function resolvePublicFolder(cwd: string): string {
+  const parentPath = path.resolve(cwd, '..');
+
+  //This happens when we've navigated all the way up to the root and can't go any higher
+  if (parentPath === cwd) {
+    throw new Error('Unable to resolve public folder');
+  }
+
+  const publicPath = path.join(parentPath, 'public');
+
+  if (fs.existsSync(publicPath)) {
+    return publicPath;
+  }
+
+  return resolvePublicFolder(parentPath);
+}
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!Array.isArray(req.query.param)) {
@@ -72,6 +89,7 @@ function loadMetricData(root: string, metric: string) {
 
     return metric in content ? content[metric] : undefined;
   }
+  console.error(`${fullPath} not found`);
   return undefined;
 }
 
