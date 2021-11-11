@@ -160,6 +160,11 @@ export function PieChart<T>({
                   {(pie) => {
                     return pie.arcs.map((arc, index) => {
                       const arcPath = pie.path(arc);
+                      const side =
+                        (arc.startAngle + arc.endAngle) / 2 > Math.PI
+                          ? 'left'
+                          : 'right';
+                      const alternativeSide = side === 'left' ? 'end' : 'start';
 
                       return (
                         <WithTooltip
@@ -173,11 +178,20 @@ export function PieChart<T>({
                             />
                           }
                           key={`arc-${index}`}
-                          placement={
-                            (arc.startAngle + arc.endAngle) / 2 > Math.PI
-                              ? 'left'
-                              : 'right'
-                          }
+                          placement={side}
+                          popperOptions={{
+                            modifiers: [
+                              {
+                                name: 'flip',
+                                options: {
+                                  fallbackPlacements: [
+                                    `top-${alternativeSide}`,
+                                    `bottom-${alternativeSide}`,
+                                  ],
+                                },
+                              },
+                            ],
+                          }}
                           arrow={false}
                         >
                           <path
@@ -185,7 +199,6 @@ export function PieChart<T>({
                             fill={arc.data.color}
                             tabIndex={0}
                             pointerEvents="all"
-                            onClick={(e) => (e.target as SVGPathElement).blur()} // Prevent path keeping focus after click
                           />
                         </WithTooltip>
                       );
