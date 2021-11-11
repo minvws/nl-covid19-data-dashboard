@@ -1,7 +1,9 @@
 import { GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
@@ -23,10 +25,10 @@ import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-tog
 import { useIntl } from '~/intl';
 import { useFeature, withFeatureNotFoundPage } from '~/lib/features';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -37,7 +39,7 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
-import { VaccinationPageQuery } from '~/types/cms';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -71,16 +73,21 @@ export const getStaticProps = withFeatureNotFoundPage(
         };
       },
     }),
-    createGetContent<{
-      page: VaccinationPageQuery;
-      highlight: PageArticlesQueryResult;
-    }>((context) => {
-      const { locale } = context;
-      return `{
-      "page": ${getVaccinePageQuery(locale)},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
-    }`;
-    })
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts | LinkParts>
+      >(() => getPagePartsQuery('vaccinationsPage'))(context);
+
+      return {
+        content: {
+          articles: getArticleParts(
+            content.pageParts,
+            'vaccinationsPageArticles'
+          ),
+          links: getLinkParts(content.pageParts, 'vaccinationsPageLinks'),
+        },
+      };
+    }
   )
 );
 
@@ -156,9 +163,9 @@ export const VaccinationsGmPage = (
                 filteredAgeGroup18Plus.date_of_insertion_unix,
               dataSources: [],
             }}
-            pageLinks={content.page.pageLinks}
+            pageLinks={content.links}
             referenceLink={text.informatie_blok.reference.href}
-            articles={content.highlight.articles}
+            articles={content.articles}
           />
 
           {vaccineCoverageEstimatedFeature.isEnabled && (
@@ -220,7 +227,9 @@ export const VaccinationsGmPage = (
                   )}
                 />
 
-                <AgeGroupSelect onChange={setSelectedAgeGroup} />
+                <Box maxWidth="20rem">
+                  <AgeGroupSelect onChange={setSelectedAgeGroup} />
+                </Box>
               </>
             }
             legend={{
@@ -235,7 +244,6 @@ export const VaccinationsGmPage = (
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
               data={choropleth.gm.vaccine_coverage_per_age_group.filter(

@@ -11,7 +11,6 @@ import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
-import { ContentTeaserProps } from '~/components/content-teaser';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
@@ -35,18 +34,14 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
-import {
-  ElementsQueryResult,
-  getWarning,
-} from '~/queries/create-elements-query';
-import { getTopicalPageQuery } from '~/queries/topical-page-query';
+import { getWarning } from '~/queries/get-elements-query';
+import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  createGetContent,
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
@@ -102,15 +97,7 @@ export const getStaticProps = createGetStaticProps(
       };
     },
   }),
-  createGetContent<{
-    articles: ContentTeaserProps[];
-    elements: ElementsQueryResult;
-  }>(
-    getTopicalPageQuery('gm', [
-      'hospital_nice',
-      'vaccine_coverage_per_age_group',
-    ])
-  )
+  getTopicalPageData('gm', ['hospital_nice', 'vaccine_coverage_per_age_group'])
 );
 
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
@@ -459,7 +446,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               headerVariant="h2"
             />
 
-            <ArticleList articles={content.articles} />
+            {isPresent(content.articles) && (
+              <ArticleList articles={content.articles} />
+            )}
           </MaxWidth>
         </Box>
       </Box>

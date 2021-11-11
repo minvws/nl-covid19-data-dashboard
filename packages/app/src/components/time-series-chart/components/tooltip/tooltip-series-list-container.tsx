@@ -52,7 +52,6 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
       }}
     >
       <VisuallyHidden>{dateString}</VisuallyHidden>
-
       {!displayTooltipValueOnly && isMounted && (
         /**
          * The width of the list is potentially influenced by long annotations,
@@ -90,7 +89,6 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
           </AnimatePresence>
         </Box>
       )}
-
       <div ref={listRef}>{children}</div>
     </section>
   );

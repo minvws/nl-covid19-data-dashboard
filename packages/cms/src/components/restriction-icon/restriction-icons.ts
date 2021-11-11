@@ -98,4 +98,5 @@ export const restrictionIcons = {
   georganiseerdeKunstEnCultuurbeoefeningen:
     Icons.GeorganiseerdeKunstEnCultuurbeoefening,
   openbaarVervoer: Icons.OpenbaarVervoer,
+  binnensportlocaties: Icons.Binnensportlocaties,
 } as const;

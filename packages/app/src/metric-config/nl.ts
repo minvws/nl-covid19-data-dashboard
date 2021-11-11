@@ -37,4 +37,15 @@ export const nl: ScopedMetricConfigs<Nl> = {
       },
     },
   },
+  reproduction: {
+    index_low: {
+      minimumRange: 1,
+    },
+    index_average: {
+      minimumRange: 1,
+    },
+    index_high: {
+      minimumRange: 1,
+    },
+  },
 };

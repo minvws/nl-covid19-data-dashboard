@@ -209,7 +209,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   map: MapType,
   metricPropertyFormatter: (value: number) => string
 ) => {
-  return (event: React.MouseEvent<HTMLElement | SVGElement>) => {
+  return (event: React.MouseEvent<HTMLElement>) => {
     const elm = event.target as HTMLElement;
     const code = elm.getAttribute('data-id');
 

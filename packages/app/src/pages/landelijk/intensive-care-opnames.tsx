@@ -2,16 +2,20 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
+  NlIntensiveCareVaccinationStatusValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
+import type { AgeDemographicProps } from '~/components/age-demographic';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
-import { PieChart } from '~/components/pie-chart';
+import type { PieChartProps } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -22,15 +26,15 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getBarScaleConfig } from '~/metric-config';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getIntakeHospitalPageQuery } from '~/queries/intake-hospital-page-query';
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -40,10 +44,19 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
-import { IntakeHospitalPageQuery } from '~/types/cms';
+import type { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
+// TODO: Update any to the proper type when the schema is merged.
+const AgeDemographic = dynamic<AgeDemographicProps<any>>(() =>
+  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
+);
+
+const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
+  () => import('~/components/pie-chart').then((mod) => mod.PieChart)
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -52,20 +65,35 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_nice',
     'intensive_care_nice_per_age_group',
     'difference.intensive_care_lcps__beds_occupied_covid',
-    'intensive_care_vaccination_status'
+    'intensive_care_vaccination_status',
+    'hospital_vaccine_incidence_per_age_group'
   ),
-  createGetContent<{
-    page: IntakeHospitalPageQuery;
-    highlight: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "page": ${getIntakeHospitalPageQuery(context)},
-      "highlight": ${createPageArticlesQuery('intensiveCarePage', locale)},
-      "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
-    }`;
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts | LinkParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+        "parts": ${getPagePartsQuery('intensiveCarePage')},
+        "elements": ${getElementsQuery(
+          'nl',
+          ['intensive_care_nice'],
+          context.locale
+        )}
+      }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'intensiveCarePageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'intensiveCarePageLinks'),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
@@ -91,6 +119,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccinationStatusFeature = useFeature(
     'nlIntensiveCareVaccinationStatus'
+  );
+
+  const icVaccinationIncidencePerAgeGroupFeature = useFeature(
+    'nlIcAdmissionsIncidencePerAgeGroup'
   );
 
   const sevenDayAverageDates: [number, number] = [
@@ -123,8 +155,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.links}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -192,6 +224,35 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
+          {icVaccinationIncidencePerAgeGroupFeature.isEnabled && (
+            <ChartTile
+              title={
+                siteText.ic_admissions_incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.ic_admissions_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                // This is correct, hospital admissions data is supposed to be displayed here.
+                data={data.hospital_vaccine_incidence_per_age_group}
+                accessibility={{
+                  key: 'ic_admissions_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
+                formatValue={(n: number) => `${n}`}
+                text={
+                  siteText.ic_admissions_incidence_age_demographic_chart
+                    .chart_text
+                }
+              />
+            </ChartTile>
+          )}
+
           {vaccinationStatusFeature.isEnabled && (
             <ChartTile
               title={text.vaccination_status_chart.title}
@@ -223,16 +284,14 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             >
               <PieChart
                 data={lastValueVaccinationStatus}
+                icon={<Arts />}
                 dataConfig={[
                   {
-                    metricProperty: 'not_vaccinated',
+                    metricProperty: 'has_one_shot_or_not_vaccinated',
                     color: colors.data.yellow,
-                    label: text.vaccination_status_chart.labels.not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'has_one_shot',
-                    color: colors.data.partial_vaccination,
-                    label: text.vaccination_status_chart.labels.has_one_shot,
+                    label:
+                      text.vaccination_status_chart.labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
