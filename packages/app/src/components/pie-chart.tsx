@@ -199,6 +199,10 @@ export function PieChart<T>({
                             fill={arc.data.color}
                             tabIndex={0}
                             pointerEvents="all"
+                            // Prevents paths from keeping 0.4 opacity when clicked
+                            onMouseLeave={(e) =>
+                              (e.target as SVGPathElement).blur()
+                            }
                           />
                         </WithTooltip>
                       );
