@@ -17,10 +17,11 @@ import {
   getFillColor,
   MapType,
 } from '~/components/choropleth/logic';
-import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
+import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
+import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 /**
  * The combination node-canvas and sharp leads to runtime crashes under Windows, this
  * ENV variable disables compression. By conditionally importing the sharp lib we
@@ -29,7 +30,7 @@ import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 const sharp =
   process.env.DISABLE_COMPRESSION !== '1' ? require('sharp') : undefined;
 
-const publicPath = path.resolve(__dirname, '../../../../../public');
+const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
 const publicImgPath = path.resolve(publicPath, 'images', 'choropleth');
 
