@@ -18,8 +18,6 @@ UseTabInteractiveButton.after.each(() => {
   cleanup();
 });
 
-UseTabInteractiveButton.before.each(() => {});
-
 UseTabInteractiveButton(
   'should render the button and set isTabInteractive after click',
   (context) => {
