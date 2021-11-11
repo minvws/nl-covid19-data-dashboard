@@ -2,7 +2,7 @@ import { isDefined } from 'ts-is-present';
 import { v4 as uuidv4 } from 'uuid';
 import { getClient } from '../../client';
 
-const client = getClient('development');
+const client = getClient('production');
 
 const pageInfo = [
   {
@@ -50,7 +50,7 @@ const pageInfo = [
     ],
     links: [{ title: 'Ziekenhuisopnames links', kind: 'hospitalPageLinks' }],
   },
-  {
+  /*{
     type: 'in_positiveTestsPage',
     title: 'Positieve testen internationaal',
     articles: [
@@ -62,7 +62,7 @@ const pageInfo = [
     links: [
       { title: 'Positieve testen links', kind: 'in_positiveTestsPageLinks' },
     ],
-  },
+  },*/
   {
     type: 'in_variantsPage',
     title: 'Varianten internationaal',
@@ -191,8 +191,14 @@ const pageInfo = [
 
 function fetchDocuments() {
   return client.fetch(
-    /* groq */ `*[_type in [${pageInfo.map((x) => `'${x.type}'`).join(',')}]]`
+    /* groq */ `*[_type in [${pageInfo
+      .map((x) => `'${x.type}'`)
+      .join(',')}] && !(_id in path("drafts.**"))]`
   );
+}
+
+function fetchPageIdentifiers() {
+  return client.fetch(/* groq */ `*[_type == 'pageIdentifier']`);
 }
 
 async function createPageIdentifiers(types: string[]) {
@@ -265,7 +271,7 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
             pageIdentifier: { _type: 'reference', _ref: pageIdentifier._id },
             pageDataKind: linkInfo.kind,
             maxNumber: 4,
-            links: document.pageLinks?.slice(),
+            links: (document.pageLinks || document.usefulLinks)?.slice(),
           })
         )
       );
@@ -306,9 +312,7 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
 async function createDocuments(): Promise<any> {
   const documents = await fetchDocuments();
 
-  const pageIdentifiers = await createPageIdentifiers(
-    documents.map((x: any) => x._type)
-  );
+  const pageIdentifiers = await fetchPageIdentifiers();
 
   return createPagePartsForPages(
     documents,
