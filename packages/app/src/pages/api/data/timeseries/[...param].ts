@@ -11,9 +11,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
+import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 
-const publicPath = path.resolve(__dirname, '../../../../../../public');
+const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -72,6 +73,7 @@ function loadMetricData(root: string, metric: string) {
 
     return metric in content ? content[metric] : undefined;
   }
+  console.error(`${fullPath} not found`);
   return undefined;
 }
 
