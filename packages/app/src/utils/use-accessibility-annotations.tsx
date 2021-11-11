@@ -1,8 +1,8 @@
 import { assert } from '@corona-dashboard/common';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
+import type { SiteText } from '~/locale';
 
 export interface AccessibilityDefinition {
   key: keyof SiteText['accessibility']['charts'];
@@ -29,6 +29,8 @@ export function useAccessibilityAnnotations(
 ) {
   const { siteText } = useIntl();
 
+  console.log(siteText);
+
   const { label, description: chartDescription } =
     siteText.accessibility.charts[
       definition.key as keyof typeof siteText.accessibility.charts
@@ -52,7 +54,7 @@ export function useAccessibilityAnnotations(
     `An accessibility description or interaction features need to be provided for ${definition.key}`
   );
 
-  const description = [chartDescription];
+  const description = [chartDescription].filter(isPresent);
 
   if (isDefined(definition.features)) {
     description.push(
