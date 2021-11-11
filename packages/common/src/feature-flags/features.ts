@@ -125,20 +125,44 @@ export const features: Feature[] = [
   },
   {
     name: 'nlHospitalVaccinationStatus',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'hospital_vaccination_status',
   },
   {
     name: 'nlIntensiveCareVaccinationStatus',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'intensive_care_vaccination_status',
   },
   {
-    name: 'nlVaccinationVaccinationStatus',
-    isEnabled: false,
+    name: 'nlVaccinationHospitalVaccinationStatus',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccination_status',
+  },
+  {
+    name: 'nlVaccinationIntensiveCareVaccinationStatus',
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'intensive_care_vaccination_status',
+  },
+  {
+    name: 'nlHospitalAdmissionsVaccineIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlIcAdmissionsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
   },
 ];

@@ -10,5 +10,7 @@ export * from './escalation-level';
 export * from './faq-question';
 export * from './kpi-configuration';
 export * from './lokalize-text';
+export * from './page-identifier';
+export * from './page-parts';
 export * from './pages';
 export * from './toegankelijkheid';

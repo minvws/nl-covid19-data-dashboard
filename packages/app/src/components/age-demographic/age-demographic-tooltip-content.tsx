@@ -1,25 +1,35 @@
+import type { Color, KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { InlineText, Text } from '~/components/typography';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Box } from '../base';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
-import { useIntl } from '~/intl';
-import { Box } from '../base';
 
 interface AgeDemographicTooltipContentProps<
   T extends AgeDemographicDefaultValue
 > {
   value: T;
-  metricProperty: keyof T;
+  rightMetricProperty: KeysOfType<T, number, true>;
+  leftMetricProperty: KeysOfType<T, number, true>;
+  rightColor: Color;
+  leftColor: Color;
   text: AgeDemographicChartText;
+  formatValue: (n: number) => string;
 }
 
 export function AgeDemographicTooltipContent<
   T extends AgeDemographicDefaultValue
->({ value, metricProperty, text }: AgeDemographicTooltipContentProps<T>) {
-  const { formatPercentage } = useIntl();
-
+>({
+  value,
+  rightMetricProperty,
+  leftMetricProperty,
+  rightColor,
+  leftColor,
+  text,
+  formatValue,
+}: AgeDemographicTooltipContentProps<T>) {
   return (
     <>
       <Box px={3} py={2}>
@@ -30,22 +40,19 @@ export function AgeDemographicTooltipContent<
         </Text>
       </Box>
       <Legend>
-        <LegendItem color="data.primary">
+        <LegendItem color={rightColor}>
           <InlineText fontWeight="bold">
-            {formatPercentage(
-              (value[metricProperty] as unknown as number) * 100
-            )}
-            %
+            {formatValue(value[rightMetricProperty])}
           </InlineText>{' '}
-          {replaceVariablesInText(text.value_percentage_tooltip, {
+          {replaceVariablesInText(text.right_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
-        <LegendItem color="data.neutral">
+        <LegendItem color={leftColor}>
           <InlineText fontWeight="bold">
-            {formatPercentage(value.age_group_percentage * 100)}%
+            {formatValue(value[leftMetricProperty])}
           </InlineText>{' '}
-          {replaceVariablesInText(text.age_group_percentage_tooltip, {
+          {replaceVariablesInText(text.left_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>

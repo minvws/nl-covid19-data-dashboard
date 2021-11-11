@@ -1,66 +1,74 @@
+import { suite } from 'uvu';
+import * as assert from 'uvu/assert';
 import { replaceVariablesInText } from '../replace-variables-in-text';
 
-describe('Util: replaceVariablesInText', () => {
-  it('Should replace variables inside curly brackets with the variables supplied', () => {
-    expect(
+const ReplaceVariablesInText = suite('replaceVariablesInText');
+
+ReplaceVariablesInText(
+  'should replace variables in strings inside curly brackets with the variables supplied',
+  () => {
+    assert.type(replaceVariablesInText, 'function');
+    assert.type(
+      replaceVariablesInText('Hello {{name}}', { name: 'world' }),
+      'string'
+    );
+
+    assert.snapshot(
+      replaceVariablesInText('Hello {{name}}', { name: 'John' }),
+      'Hello John'
+    );
+    assert.snapshot(
       replaceVariablesInText('Example translation {{keyOne}} {{keyTwo}}.', {
         keyOne: 'with',
         keyTwo: 'variables',
-      })
-    ).toMatchInlineSnapshot(`"Example translation with variables."`);
-
-    expect(
+      }),
+      'Example translation with variables.'
+    );
+    assert.snapshot(
       replaceVariablesInText(
         'Example translation with a {{ variableName }} with spaces around it.',
         {
           variableName: 'variableKey',
         }
-      )
-    ).toMatchInlineSnapshot(
-      `"Example translation with a variableKey with spaces around it."`
+      ),
+      'Example translation with a variableKey with spaces around it.'
     );
-  });
+  }
+);
 
-  it('Should leave curly brackets in place if they are not closed.', () => {
-    expect(
-      replaceVariablesInText('Example translation {{', {})
-    ).toMatchInlineSnapshot(`"Example translation {{"`);
-  });
+ReplaceVariablesInText(
+  "should leave curly braces in place if they aren't closed",
+  () => {
+    assert.snapshot(
+      replaceVariablesInText('Example translation {{', {}),
+      'Example translation {{'
+    );
+  }
+);
 
-  it('Should throw error if no translation string is supplied', () => {
-    const testFunc = () => {
-      replaceVariablesInText(undefined as any, {});
-    };
-    expect(testFunc).toThrow(Error);
-  });
+ReplaceVariablesInText(
+  'should throw an error if no translation string is provided',
+  () => {
+    const fn = () => replaceVariablesInText(undefined as any, {});
+    assert.throws(fn);
+  }
+);
 
-  it('Should replace with singular variable using plural command', () => {
-    expect(
-      replaceVariablesInText(
-        '{{admissions_on_date_of_reporting}} {{admissions_on_date_of_reporting, plural, patients}}',
-        {
-          admissions_on_date_of_reporting: 1,
-          patients: {
-            plural: 'patients',
-            singular: 'patient',
-          },
-        }
-      )
-    ).toMatchInlineSnapshot('"1 patient"');
-  });
+ReplaceVariablesInText('should handle pluralization', () => {
+  const patients = (n: number) =>
+    replaceVariablesInText(
+      '{{admissions_on_date_of_reporting}} {{admissions_on_date_of_reporting, plural, patients}}',
+      {
+        admissions_on_date_of_reporting: n,
+        patients: {
+          plural: 'patients',
+          singular: 'patient',
+        },
+      }
+    );
 
-  it('Should replace with plural variable using plural command', () => {
-    expect(
-      replaceVariablesInText(
-        '{{admissions_on_date_of_reporting}} {{admissions_on_date_of_reporting, plural, patients}}',
-        {
-          admissions_on_date_of_reporting: 2,
-          patients: {
-            plural: 'patients',
-            singular: 'patient',
-          },
-        }
-      )
-    ).toMatchInlineSnapshot('"2 patients"');
-  });
+  assert.snapshot(patients(1), '1 patient');
+  assert.snapshot(patients(2), '2 patients');
 });
+
+ReplaceVariablesInText.run();

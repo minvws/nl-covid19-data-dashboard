@@ -10,36 +10,38 @@
   ],
   "scripts": {
     "bootstrap": "yarn build",
-    "test": "jest --watch",
-    "test:ci": "jest --ci",
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register src __tests__",
+    "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"yarn test\"",
+    "test:ci": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register --bail",
     "dev": "tsc -w",
-    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "clean": "del-cli dist tsconfig.tsbuildinfo",
+    "build:watch": "chokidar \"./src/**/*.*\" -c \"yarn build\"",
+    "build": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "clean": "npx rimraf dist tsconfig.tsbuildinfo",
     "nuke": "yarn clean && npx rimraf node_modules",
     "typecheck": "tsc --pretty --noEmit",
-    "prebuild": "tsc -b .",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "format": "prettier --write \"src/**/*.{ts,tsx,md,json,yml}\" \"*.{js,json,md,yml}\" \"!src/types/data.ts\"",
     "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
     "geojson": "^0.5.0",
-    "ts-is-present": "^1.2.1"
+    "ts-is-present": "^1.2.2"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
-    "del-cli": "^4.0.1",
-    "eslint": "^7.32.0",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "chokidar-cli": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.24.0",
-    "jest": "^27.0.5",
-    "prettier": "^2.3.2",
-    "ts-jest": "^27.0.5",
+    "eslint-plugin-react": "^7.26.1",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.11.0",
     "tscpaths": "^0.0.9",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.4",
+    "uvu": "^0.5.2"
   }
 }

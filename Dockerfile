@@ -1,5 +1,5 @@
 # Install dependencies only when needed
-FROM node:16-alpine AS deps
+FROM node:lts-alpine AS deps
 
 ENV NODE_ENV="production"
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -8,13 +8,16 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY ./.yarn/releases ./.yarn/releases
+COPY ./.yarn/plugins ./.yarn/plugins
 COPY packages/app/package.json ./packages/app/
 COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
 COPY packages/common/package.json ./packages/common/
 COPY packages/icons/package.json ./packages/icons/
-RUN apk add --no-cache --virtual build-dependencies \
+RUN apk add --no-cache --virtual \
+      build-dependencies \
       python3 \
       g++ \
       build-base \
@@ -27,7 +30,7 @@ RUN apk add --no-cache --virtual build-dependencies \
       pangomm-dev \
       libjpeg-turbo-dev \
       freetype-dev \
-    && yarn install --frozen-lockfile --production=false \
+    && yarn install \
     && apk del build-dependencies \
     && apk add --no-cache \
       cairo \

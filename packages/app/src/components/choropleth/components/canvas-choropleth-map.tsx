@@ -1,8 +1,10 @@
 import { colors } from '@corona-dashboard/common';
+import type { GeoProjection } from 'd3-geo';
 import Konva from 'konva';
 import {
   memo,
   MouseEvent,
+  MutableRefObject,
   RefObject,
   useCallback,
   useEffect,
@@ -11,19 +13,43 @@ import {
 } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
+import { AccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { FeatureProps } from '../logic';
+import type { DataOptions } from '..';
+import type {
+  ChoroplethFeatures,
+  ChoroplethTooltipHandlers,
+  FeatureProps,
+  FitExtent,
+} from '../logic';
 import { useHighlightedFeature } from '../logic/use-highlighted-feature';
 import {
   ProjectedGeoInfo,
   useProjectedCoordinates,
 } from '../logic/use-projected-coordinates';
-import { AnchorEventHandler } from './choropleth-map';
-import { GenericChoroplethMapProps } from './svg-choropleth-map';
+import type { AnchorEventHandler } from './choropleth-map';
 
 Konva.pixelRatio =
   typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1;
+
+export type CanvasChoroplethMapProps = {
+  anchorEventHandlers: AnchorEventHandler;
+  annotations: AccessibilityAnnotations;
+  choroplethFeatures: ChoroplethFeatures;
+  containerRef: MutableRefObject<HTMLDivElement | null>;
+  dataOptions: DataOptions;
+  featureOutHandler: ChoroplethTooltipHandlers[1];
+  featureOverHandler: ChoroplethTooltipHandlers[0];
+  featureProps: FeatureProps;
+  fitExtent: FitExtent;
+  getFeatureName: (code: string) => string;
+  height: number;
+  isTabInteractive: boolean;
+  mapProjection: () => GeoProjection;
+  tooltipTrigger: ChoroplethTooltipHandlers[2];
+  width: number;
+};
 
 /**
  * This is one transparent pixel encoded in a dataUrl. This is used for the image overlay on top of the canvas that
@@ -32,23 +58,23 @@ Konva.pixelRatio =
 const oneTransparentPixelImage =
   'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC';
 
-export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
+export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   const {
-    containerRef,
+    anchorEventHandlers,
     annotations,
-    dataOptions,
-    width,
-    height,
-    featureOverHandler,
-    featureOutHandler,
-    tooltipTrigger,
-    mapProjection,
     choroplethFeatures,
+    containerRef,
+    dataOptions,
+    featureOutHandler,
+    featureOverHandler,
     featureProps,
     fitExtent,
-    anchorEventHandlers,
-    isTabInteractive,
     getFeatureName,
+    height,
+    isTabInteractive,
+    mapProjection,
+    tooltipTrigger,
+    width,
   } = props;
 
   const [hover, setHover] = useState<[number, number][][]>();

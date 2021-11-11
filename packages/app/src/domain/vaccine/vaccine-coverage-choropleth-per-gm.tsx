@@ -90,15 +90,23 @@ export function VaccineCoverageChoroplethPerGm({
               }
             </Text>
 
-            <Box flex="1">
-              <AgeGroupSelect onChange={setSelectedAgeGroup} />
-            </Box>
+            <Box
+              display="flex"
+              width="100%"
+              spacingHorizontal={{ xs: 2 }}
+              flexWrap="wrap"
+              flexDirection={{ _: 'column', xs: 'row' }}
+            >
+              <Box flex="1">
+                <AgeGroupSelect onChange={setSelectedAgeGroup} />
+              </Box>
 
-            <Box flex="1">
-              <VaccinationCoverageKindSelect
-                onChange={setSelectedCoverageKind}
-                initialValue={selectedCoverageKind}
-              />
+              <Box flex="1">
+                <VaccinationCoverageKindSelect
+                  onChange={setSelectedCoverageKind}
+                  initialValue={selectedCoverageKind}
+                />
+              </Box>
             </Box>
           </Box>
         </>
@@ -119,7 +127,6 @@ export function VaccineCoverageChoroplethPerGm({
       {selectedMap === 'gm' && (
         <DynamicChoropleth
           map={'gm'}
-          renderTarget="canvas"
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
           data={data.gm.filter(
             hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -150,7 +157,6 @@ export function VaccineCoverageChoroplethPerGm({
       {selectedMap === 'vr' && (
         <DynamicChoropleth
           map={'vr'}
-          renderTarget="canvas"
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
           data={data.vr.filter(
             hasValueAtKey('age_group_range', selectedAgeGroup)

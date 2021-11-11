@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { Color, colors, KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, TickRendererProps } from '@visx/axis';
 import { GridColumns } from '@visx/grid';
@@ -6,11 +6,10 @@ import { Group } from '@visx/group';
 import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
 import { Text as VisxText } from '@visx/text';
-import { KeyboardEvent, memo, MouseEvent } from 'react';
+import { KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { useIntl } from '~/intl';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
@@ -32,8 +31,12 @@ interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
   onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
   onMouseLeaveBar: () => void;
   onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
-  metricProperty: keyof T;
-  displayMaxPercentage?: number;
+  rightMetricProperty: KeysOfType<T, number, true>;
+  leftMetricProperty: KeysOfType<T, number, true>;
+  rightColor: Color;
+  leftColor: Color;
+  maxDisplayValue?: number;
+  formatValue: (n: number) => string;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -50,19 +53,19 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   );
 };
 
-export const AgeDemographicChart = memo(
-  AgeDemographicChartWithGenerics
-) as typeof AgeDemographicChartWithGenerics;
-
-function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
+export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
   accessibility,
   coordinates,
   text,
   onKeyInput,
   onMouseMoveBar,
   onMouseLeaveBar,
-  metricProperty,
-  displayMaxPercentage,
+  rightMetricProperty,
+  leftMetricProperty,
+  rightColor,
+  leftColor,
+  maxDisplayValue,
+  formatValue,
 }: AgeDemographicChartProps<T>) {
   const {
     width,
@@ -70,29 +73,24 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     numTicks,
     xMax,
     yMax,
-    ageRangeAxisWidth,
-    ageGroupPercentageScale,
-    infectedPercentageScale,
+    axisWidth,
+    leftScale,
+    leftPoint,
+    rightScale,
+    rightPoint,
     ageGroupRangeScale,
-    ageGroupPercentagePoint,
-    infectedPercentagePoint,
     ageGroupRangePoint,
+    ageGroupRange,
     margin,
     values,
-    ageGroupRange,
   } = coordinates;
-
-  const { formatPercentage } = useIntl();
 
   const annotations = useAccessibilityAnnotations(accessibility);
 
   const hasClippedValue = !!values.find(
     (value) =>
-      getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
-      getIsClipped(
-        value[metricProperty] as unknown as number,
-        displayMaxPercentage
-      )
+      getIsClipped(value[leftMetricProperty], maxDisplayValue) ||
+      getIsClipped(value[rightMetricProperty], maxDisplayValue)
   );
 
   return (
@@ -121,30 +119,30 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           textAnchor="end"
           verticalAnchor="start"
           y={0}
-          x={width / 2 - ageRangeAxisWidth / 2}
+          x={width / 2 - axisWidth / 2}
           fill="black"
           fontWeight="bold"
           fontSize="1rem"
           width={xMax - 10}
         >
-          {text.age_group_percentage_title}
+          {text.left_title}
         </VisxText>
         <VisxText
           textAnchor="start"
           verticalAnchor="start"
           y={0}
-          x={width / 2 + ageRangeAxisWidth / 2}
+          x={width / 2 + axisWidth / 2}
           fill="black"
           fontWeight="bold"
           fontSize="1rem"
           width={xMax - 10}
         >
-          {text.value_percentage_title}
+          {text.right_title}
         </VisxText>
 
         {/* Vertical lines */}
         <GridColumns
-          scale={ageGroupPercentageScale}
+          scale={leftScale}
           width={xMax}
           height={yMax}
           left={margin.left}
@@ -152,50 +150,50 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           numTicks={numTicks}
           stroke={colors.silver}
         />
+
         <GridColumns
-          scale={infectedPercentageScale}
+          scale={rightScale}
           width={xMax}
           height={yMax}
-          left={width / 2 + ageRangeAxisWidth / 2}
+          left={width / 2 + axisWidth / 2}
           top={margin.top}
           numTicks={numTicks}
           stroke={colors.silver}
         />
 
-        <PatternLines
-          id="is-clipped-pattern-age-range"
+        <StyledPatternLines
+          id="is-clipped-pattern-left"
           height={6}
           width={6}
-          stroke={colors.data.neutral}
+          stroke={leftColor}
           strokeWidth={2}
           orientation={['diagonalRightToLeft']}
         />
 
-        <PatternLines
-          id="is-clipped-pattern-infected-percentage"
+        <StyledPatternLines
+          id="is-clipped-pattern-right"
           height={6}
           width={6}
-          stroke={colors.data.primary}
+          stroke={rightColor}
           strokeWidth={2}
           orientation={['diagonal']}
         />
 
         {values.map((value, index) => {
-          const ageGroupPercentageWidth = xMax - ageGroupPercentagePoint(value);
-          const infectedPercentageWidth = infectedPercentagePoint(value);
+          const leftBarWidth = xMax - leftPoint(value);
+          const rightBarWidth = rightPoint(value);
 
-          const isClippedAgeGroup = getIsClipped(
-            value.age_group_percentage,
-            displayMaxPercentage
+          const isClippedLeftGroup = getIsClipped(
+            value[leftMetricProperty],
+            maxDisplayValue
           );
 
-          const isClippedInfectedPercentage = getIsClipped(
-            value[metricProperty] as unknown as number,
-            displayMaxPercentage
+          const isClippedRightGroup = getIsClipped(
+            value[rightMetricProperty],
+            maxDisplayValue
           );
 
-          const isClippedValue =
-            isClippedAgeGroup || isClippedInfectedPercentage;
+          const isClippedValue = isClippedLeftGroup || isClippedRightGroup;
 
           return (
             <StyledGroup
@@ -211,15 +209,15 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
                 width={width - margin.left - margin.right}
               />
               <Bar
-                x={width / 2 - ageRangeAxisWidth / 2 - ageGroupPercentageWidth}
+                x={width / 2 - axisWidth / 2 - leftBarWidth}
                 y={ageGroupRangePoint(value)}
                 height={ageGroupRangeScale.bandwidth()}
-                width={ageGroupPercentageWidth}
-                fill={
-                  isClippedAgeGroup
-                    ? `url(#is-clipped-pattern-age-range)`
-                    : colors.data.neutral
-                }
+                width={leftBarWidth}
+                css={css({
+                  fill: isClippedLeftGroup
+                    ? `url(#is-clipped-pattern-left)`
+                    : leftColor,
+                })}
               />
               <VisxText
                 textAnchor="middle"
@@ -235,15 +233,15 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
                   (isClippedValue ? ' *' : '')}
               </VisxText>
               <Bar
-                x={width / 2 + ageRangeAxisWidth / 2}
+                x={width / 2 + axisWidth / 2}
                 y={ageGroupRangePoint(value)}
                 height={ageGroupRangeScale.bandwidth()}
-                width={infectedPercentageWidth}
-                fill={
-                  isClippedInfectedPercentage
-                    ? `url(#is-clipped-pattern-infected-percentage)`
-                    : colors.data.primary
-                }
+                width={rightBarWidth}
+                css={css({
+                  fill: isClippedRightGroup
+                    ? `url(#is-clipped-pattern-right)`
+                    : rightColor,
+                })}
               />
             </StyledGroup>
           );
@@ -251,24 +249,24 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
         {/* Axis lines, match up with the vertical lines */}
         <AxisBottom
-          scale={ageGroupPercentageScale}
+          scale={leftScale}
           left={margin.left}
           top={height - margin.bottom}
           numTicks={numTicks}
           hideTicks={true}
           hideAxisLine={true}
-          tickFormat={(a) => `${formatPercentage(a as number)}%`}
+          tickFormat={formatValue}
           tickComponent={TickValue}
         />
 
         <AxisBottom
-          scale={infectedPercentageScale}
-          left={width / 2 + ageRangeAxisWidth / 2}
+          scale={rightScale}
+          left={width / 2 + axisWidth / 2}
           top={height - margin.bottom}
           numTicks={numTicks}
           hideTicks={true}
           hideAxisLine={true}
-          tickFormat={(a) => `${formatPercentage(a as number)}%`}
+          tickFormat={formatValue}
           tickComponent={TickValue}
         />
       </svg>
@@ -279,6 +277,10 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     </Box>
   );
 }
+
+const StyledPatternLines = styled(PatternLines)<{ stroke: Color }>((p) =>
+  css({ stroke: p.stroke })
+);
 
 const StyledGroup = styled(Group)({});
 const StyledHoverBar = styled(Bar)(

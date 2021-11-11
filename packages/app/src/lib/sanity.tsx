@@ -2,6 +2,7 @@
 import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import { ClientConfig } from '@sanity/client';
+import { isPresent } from 'ts-is-present';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/find-closest-size';
 
@@ -133,7 +134,11 @@ export function getImageProps<T extends ImageBlock>(
    * viewport-widths.
    */
   const sizes = sizesOption
-    ?.map(([viewport, size]) => `(min-width: ${viewport}px) ${size}px`)
+    ?.map(([viewportOrSize, size]) =>
+      isPresent(size)
+        ? `(min-width: ${viewportOrSize}px) ${size}px`
+        : `${viewportOrSize}px`
+    )
     .join(', ');
 
   return {

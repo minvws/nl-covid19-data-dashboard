@@ -275,6 +275,7 @@ export interface Nl {
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NlHospitalLcps;
   hospital_vaccination_status: NlHospitalVaccinationStatus;
+  hospital_vaccine_incidence_per_age_group: NlHospitalVaccineIncidencePerAgeGroup;
   intensive_care_lcps: NlIntensiveCareLcps;
   intensive_care_vaccination_status: NlIntensiveCareVaccinationStatus;
   tested_ggd: NlTestedGgd;
@@ -513,10 +514,19 @@ export interface NlHospitalVaccinationStatusValue {
   total_amount_of_people: number;
   fully_vaccinated: number;
   fully_vaccinated_percentage: number;
-  has_one_shot: number;
-  has_one_shot_percentage: number;
-  not_vaccinated: number;
-  not_vaccinated_percentage: number;
+  has_one_shot_or_not_vaccinated: number;
+  has_one_shot_or_not_vaccinated_percentage: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlHospitalVaccineIncidencePerAgeGroup {
+  values: NlHospitalVaccineIncidencePerAgeGroupValue[];
+}
+export interface NlHospitalVaccineIncidencePerAgeGroupValue {
+  age_group_range: string;
+  fully_vaccinated_per_100k: number;
+  has_one_shot_or_not_vaccinated_per_100k: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -540,10 +550,8 @@ export interface NlIntensiveCareVaccinationStatusValue {
   total_amount_of_people: number;
   fully_vaccinated: number;
   fully_vaccinated_percentage: number;
-  has_one_shot: number;
-  has_one_shot_percentage: number;
-  not_vaccinated: number;
-  not_vaccinated_percentage: number;
+  has_one_shot_or_not_vaccinated: number;
+  has_one_shot_or_not_vaccinated_percentage: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

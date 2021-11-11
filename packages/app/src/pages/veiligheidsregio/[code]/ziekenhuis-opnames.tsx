@@ -4,6 +4,7 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -20,15 +21,15 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -39,7 +40,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
-import { HospitalAdmissionsPageQuery } from '~/types/cms';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -53,19 +54,28 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
-  createGetContent<{
-    page: HospitalAdmissionsPageQuery;
-    highlight: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts | LinkParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+        "parts": ${getPagePartsQuery('hospitalPage')},
+        "elements": ${getElementsQuery('vr', ['hospital_nice'], context.locale)}
+      }`;
+    })(context);
 
-    return `{
-      "page": ${getHospitalAdmissionsPageQuery(context)},
-      "highlight": ${createPageArticlesQuery('hospitalPage', locale)},
-      "elements": ${createElementsQuery('vr', ['hospital_nice'], locale)}
-    }`;
-  })
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'hospitalPageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'hospitalPageLinks'),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
@@ -128,8 +138,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            pageLinks={content.page.pageLinks}
-            articles={content.highlight.articles}
+            pageLinks={content.links}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -154,42 +164,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             </KpiTile>
           </TwoKpiSection>
-
-          <ChoroplethTile
-            title={replaceVariablesInText(text.map_titel, {
-              safetyRegion: vrName,
-            })}
-            description={text.map_toelichting}
-            legend={{
-              thresholds: thresholds.gm.admissions_on_date_of_reporting,
-              title:
-                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-            }}
-            metadata={{
-              date: lastValue.date_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <DynamicChoropleth
-              renderTarget="canvas"
-              map="gm"
-              accessibility={{
-                key: 'hospital_admissions_choropleth',
-              }}
-              data={choropleth.gm.hospital_nice}
-              dataConfig={{
-                metricName: 'hospital_nice',
-                metricProperty: 'admissions_on_date_of_reporting',
-              }}
-              dataOptions={{
-                selectedCode: selectedMunicipalCode,
-                getLink: reverseRouter.gm.ziekenhuisopnames,
-                tooltipVariables: {
-                  patients: siteText.choropleth_tooltip.patients,
-                },
-              }}
-            />
-          </ChoroplethTile>
 
           <ChartTile
             metadata={{ source: text.bronnen.rivm }}
@@ -239,6 +213,41 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
+
+          <ChoroplethTile
+            title={replaceVariablesInText(text.map_titel, {
+              safetyRegion: vrName,
+            })}
+            description={text.map_toelichting}
+            legend={{
+              thresholds: thresholds.gm.admissions_on_date_of_reporting,
+              title:
+                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+            }}
+            metadata={{
+              date: lastValue.date_unix,
+              source: text.bronnen.rivm,
+            }}
+          >
+            <DynamicChoropleth
+              map="gm"
+              accessibility={{
+                key: 'hospital_admissions_choropleth',
+              }}
+              data={choropleth.gm.hospital_nice}
+              dataConfig={{
+                metricName: 'hospital_nice',
+                metricProperty: 'admissions_on_date_of_reporting',
+              }}
+              dataOptions={{
+                selectedCode: selectedMunicipalCode,
+                getLink: reverseRouter.gm.ziekenhuisopnames,
+                tooltipVariables: {
+                  patients: siteText.choropleth_tooltip.patients,
+                },
+              }}
+            />
+          </ChoroplethTile>
         </TileList>
       </VrLayout>
     </Layout>

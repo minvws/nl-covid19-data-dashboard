@@ -1,11 +1,10 @@
+import { DataScopeKey } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 
-export type Scope = 'nl' | 'gm' | 'vr' | 'in';
-
 const schemaPath = path.join(__dirname, '..//..//..//..//app//schema');
 
-export function getSchemaMetrics(scope: Scope) {
+export function getSchemaMetrics(scope: DataScopeKey) {
   const schema = loadJsonFromFile(path.join(schemaPath, scope, '__index.json'));
 
   return Object.entries<{ type: string } | { $ref: string }>(schema.properties)
@@ -13,7 +12,10 @@ export function getSchemaMetrics(scope: Scope) {
     .map(([key]) => key);
 }
 
-export function getSchemaMetricProperties(scope: Scope, metricName: string) {
+export function getSchemaMetricProperties(
+  scope: DataScopeKey,
+  metricName: string
+) {
   const schema = loadJsonFromFile(
     path.join(schemaPath, scope, `${metricName}.json`)
   );

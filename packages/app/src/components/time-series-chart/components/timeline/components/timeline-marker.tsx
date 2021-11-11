@@ -1,6 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import styled from 'styled-components';
 
 export function TimelineMarker({
@@ -36,7 +36,7 @@ export function TimelineMarker({
   );
 }
 
-const StyledPointMarker = styled(motion.div)<{
+const StyledPointMarker = styled(m.div)<{
   color: string;
   size: number;
   borderWidth: number;

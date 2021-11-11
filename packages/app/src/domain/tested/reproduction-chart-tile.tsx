@@ -9,6 +9,7 @@ import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
+import { metricConfigs } from '~/metric-config';
 
 interface ReproductionChartTileProps {
   data: NlReproduction;
@@ -59,6 +60,8 @@ export function ReproductionChartTile({
               metricProperty: 'index_average',
               label: text.lineLegendLabel,
               color: colors.data.primary,
+              minimumRange:
+                metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
             },
           ]}
           numGridLines={timeframe === 'all' ? 4 : 3}

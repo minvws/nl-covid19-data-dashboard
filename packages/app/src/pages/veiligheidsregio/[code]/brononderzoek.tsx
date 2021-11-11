@@ -1,4 +1,5 @@
 import { Gedrag } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -15,9 +16,9 @@ import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,6 +28,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -37,10 +39,20 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     selectVrData('situations'),
-    createGetContent<PageArticlesQueryResult>((context) => {
-      const { locale } = context;
-      return createPageArticlesQuery('situationsPage', locale);
-    })
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts>
+      >(() => getPagePartsQuery('situationsPage'))(context);
+
+      return {
+        content: {
+          articles: getArticleParts(
+            content.pageParts,
+            'situationsPageArticles'
+          ),
+        },
+      };
+    }
   )
 );
 

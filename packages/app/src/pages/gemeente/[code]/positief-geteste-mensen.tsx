@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -17,14 +18,14 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -36,6 +37,7 @@ import {
   selectGmData,
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -55,16 +57,27 @@ export const getStaticProps = createGetStaticProps(
       tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
   }),
-  createGetContent<{
-    page: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
-      "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
-    }`;
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+       "parts": ${getPagePartsQuery('positiveTestsPage')},
+       "elements": ${getElementsQuery('gm', ['tested_overall'], locale)}
+      }`;
+    })(context);
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'positiveTestsPageArticles'
+        ),
+        elements: content.elements,
+      },
+    } as const;
+  }
 );
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
@@ -110,7 +123,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -217,7 +230,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'invisible',
                     metricProperty: 'infected',
-                    label: siteText.common.totaal,
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_overall,
                   },
                 ]}
                 dataOptions={{
@@ -246,7 +261,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <DynamicChoropleth
-              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_choropleth',

@@ -17,11 +17,13 @@ interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
   description?: string | RichContentBlock[] | ReactNode;
-  articles?: ArticleSummary[];
-  pageLinks?: {
-    title: string;
-    href: string;
-  }[];
+  articles?: ArticleSummary[] | null;
+  pageLinks?:
+    | {
+        title: string;
+        href: string;
+      }[]
+    | null;
   headingLevel?: HeadingLevel;
   metadata?: MetadataProps;
   referenceLink?: string;

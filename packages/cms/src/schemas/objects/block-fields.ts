@@ -34,7 +34,11 @@ export const blockFields = [
               name: 'href',
               type: 'url',
               title: 'URL',
-              validation: (rule: Rule) => rule.uri({ allowRelative: true }),
+              validation: (rule: Rule) =>
+                rule.uri({
+                  allowRelative: true,
+                  scheme: ['http', 'https', 'mailto'],
+                }),
             },
           ],
         },

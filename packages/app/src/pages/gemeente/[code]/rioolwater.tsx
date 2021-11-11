@@ -1,6 +1,7 @@
 import { NlSewer } from '@corona-dashboard/common';
 import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { GetStaticPropsContext } from 'next';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -15,9 +16,9 @@ import { Layout } from '~/domain/layout/layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,6 +28,7 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -41,10 +43,17 @@ export const getStaticProps = createGetStaticProps(
     'sewer',
     'code'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('sewerPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('sewerPage'))(context);
+
+    return {
+      content: {
+        articles: getArticleParts(content.pageParts, 'sewerPageArticles'),
+      },
+    };
+  }
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {

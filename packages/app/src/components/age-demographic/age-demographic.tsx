@@ -1,3 +1,4 @@
+import type { Color, KeysOfType } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
@@ -13,27 +14,38 @@ import { useAgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 
-export function AgeDemographic<T extends AgeDemographicDefaultValue>({
-  data,
-  metricProperty,
-  displayMaxPercentage,
-  text,
-  accessibility,
-}: {
+export interface AgeDemographicProps<T extends AgeDemographicDefaultValue> {
   data: { values: T[] };
-  metricProperty: keyof T;
+  rightMetricProperty: KeysOfType<T, number, true>;
+  leftMetricProperty: KeysOfType<T, number, true>;
+  rightColor: Color;
+  leftColor: Color;
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  displayMaxPercentage?: number;
+  maxDisplayValue?: number;
   text: AgeDemographicChartText;
-}) {
+  formatValue: (n: number) => string;
+}
+
+export function AgeDemographic<T extends AgeDemographicDefaultValue>({
+  accessibility,
+  data,
+  formatValue,
+  leftMetricProperty,
+  rightMetricProperty,
+  leftColor,
+  rightColor,
+  maxDisplayValue,
+  text,
+}: AgeDemographicProps<T>) {
   const [ref, coordinates] = useAgeDemographicCoordinates(
     data,
-    metricProperty,
-    displayMaxPercentage
+    rightMetricProperty,
+    leftMetricProperty,
+    maxDisplayValue
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
@@ -57,9 +69,13 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
             onMouseMoveBar={openTooltip}
             onMouseLeaveBar={closeTooltip}
             onKeyInput={keyboardNavigateTooltip}
-            displayMaxPercentage={displayMaxPercentage}
-            metricProperty={metricProperty}
+            maxDisplayValue={maxDisplayValue}
+            rightMetricProperty={rightMetricProperty}
+            leftMetricProperty={leftMetricProperty}
+            rightColor={rightColor}
+            leftColor={leftColor}
             text={text}
+            formatValue={formatValue}
           />
         </div>
 
@@ -71,8 +87,12 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
           {tooltipState.value && (
             <AgeDemographicTooltipContent
               value={tooltipState.value}
-              metricProperty={metricProperty}
+              rightMetricProperty={rightMetricProperty}
+              leftMetricProperty={leftMetricProperty}
+              rightColor={rightColor}
+              leftColor={leftColor}
               text={text}
+              formatValue={formatValue}
             />
           )}
         </Tooltip>

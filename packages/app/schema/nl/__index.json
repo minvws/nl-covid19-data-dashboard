@@ -20,6 +20,7 @@
     "hospital_nice",
     "hospital_nice_per_age_group",
     "hospital_vaccination_status",
+    "hospital_vaccine_incidence_per_age_group",
     "infectious_people",
     "intensive_care_lcps",
     "intensive_care_nice",
@@ -108,6 +109,9 @@
     },
     "hospital_vaccination_status": {
       "$ref": "hospital_vaccination_status.json"
+    },
+    "hospital_vaccine_incidence_per_age_group": {
+      "$ref": "hospital_vaccine_incidence_per_age_group.json"
     },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"

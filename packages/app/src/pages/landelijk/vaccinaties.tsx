@@ -1,9 +1,16 @@
 import { colors } from '@corona-dashboard/common';
-import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import {
+  Arts,
+  Vaccinaties as VaccinatieIcon,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
-import { Spacer } from '~/components/base';
+import { AgeDemographic } from '~/components/age-demographic';
+import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PieChart } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
@@ -23,15 +30,16 @@ import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
-  createElementsQuery,
   ElementsQueryResult,
+  getElementsQuery,
   getTimelineEvents,
-} from '~/queries/create-elements-query';
+} from '~/queries/get-elements-query';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
-import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
+  getArticleParts,
+  getLinkParts,
+  getPagePartsQuery,
+  getRichTextParts,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,8 +51,15 @@ import {
   getNlData,
   selectNlData,
 } from '~/static-props/get-data';
-import { VaccinationPageQuery } from '~/types/cms';
+import {
+  ArticleParts,
+  LinkParts,
+  PagePartQueryResult,
+  RichTextParts,
+} from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useFormatDateRange } from '~/utils/use-format-date-range';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -61,25 +76,41 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_stock',
     'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated',
+    'hospital_vaccination_status',
+    'hospital_vaccine_incidence_per_age_group',
     'intensive_care_vaccination_status'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
-  createGetContent<{
-    page: VaccinationPageQuery;
-    highlight: PageArticlesQueryResult;
-    elements: ElementsQueryResult;
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "page": ${getVaccinePageQuery(locale)},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)},
-      "elements": ${createElementsQuery(
-        'nl',
-        ['vaccine_coverage', 'vaccine_administered'],
-        locale
-      )}
-    }`;
-  }),
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+        "parts": ${getPagePartsQuery('vaccinationsPage')},
+        "elements": ${getElementsQuery(
+          'nl',
+          ['vaccine_coverage', 'vaccine_administered'],
+          context.locale
+        )}
+      }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'vaccinationsPageArticles'
+        ),
+        links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
+        pageDescription: getRichTextParts(
+          content.parts.pageParts,
+          'vaccinationsPageDescription'
+        ),
+        elements: content.elements,
+      },
+    };
+  },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => {
       if (isDefined(vaccine_coverage_per_age_group)) {
@@ -104,9 +135,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties;
+
+  const reverseRouter = useReverseRouter();
 
   const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
   const vaccineCoverageEstimatedFeature = useFeature(
@@ -124,8 +157,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineAdministeredGgdGhorFeature = useFeature(
     'nlVaccineAdministeredGgdGhor'
   );
-
-  const vaccinationStatusFeature = useFeature('nlVaccinationVaccinationStatus');
+  const vaccinationsIncidencePerAgeGroupFeature = useFeature(
+    'nlVaccinationsIncidencePerAgeGroup'
+  );
+  const vaccinationStatusHospitalFeature = useFeature(
+    'nlVaccinationHospitalVaccinationStatus'
+  );
+  const vaccinationStatusIntensiveCareFeature = useFeature(
+    'nlVaccinationIntensiveCareVaccinationStatus'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -135,8 +175,23 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
-  const lastValueVaccinationStatus =
+
+  const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
+
+  const lastValueHositalVaccinationStatus =
+    data.hospital_vaccination_status.last_value;
+
+  const [hospitalDateFromText, hospitalDateToText] = useFormatDateRange(
+    lastValueHositalVaccinationStatus.date_start_unix,
+    lastValueHositalVaccinationStatus.date_end_unix
+  );
+
+  const [intensiveCareDateFromText, intensiveCareDateToText] =
+    useFormatDateRange(
+      lastValueIntensiveCareVaccinationStatus.date_start_unix,
+      lastValueIntensiveCareVaccinationStatus.date_end_unix
+    );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -154,7 +209,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.title}
             category={text.category}
             icon={<VaccinatieIcon />}
-            description={content.page.pageDescription}
+            description={content.pageDescription}
             metadata={{
               datumsText: text.datums,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
@@ -163,9 +218,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            pageLinks={content.page.pageLinks}
+            pageLinks={content.links}
             referenceLink={text.reference.href}
-            articles={content.highlight.articles}
+            articles={content.articles}
           />
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
@@ -219,58 +274,154 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
-          {vaccinationStatusFeature.isEnabled && (
+          {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
             <ChartTile
-              title={text.vaccination_status_chart.title}
-              metadata={{
-                isTileFooter: true,
-                date: [
-                  lastValueVaccinationStatus.date_start_unix,
-                  lastValueVaccinationStatus.date_end_unix,
-                ],
-                source: {
-                  ...text.vaccination_status_chart.source,
-                },
-              }}
-              description={replaceVariablesInText(
-                text.vaccination_status_chart.description,
-                {
-                  amountOfPeople: formatNumber(
-                    lastValueVaccinationStatus.total_amount_of_people
-                  ),
-                  date_start: formatDateFromSeconds(
-                    lastValueVaccinationStatus.date_start_unix
-                  ),
-                  date_end: formatDateFromSeconds(
-                    lastValueVaccinationStatus.date_end_unix,
-                    'medium'
-                  ),
-                }
-              )}
+              title={
+                siteText.vaccinations_incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.vaccinations_incidence_age_demographic_chart
+                  .description
+              }
             >
-              <PieChart
-                data={lastValueVaccinationStatus}
-                dataConfig={[
-                  {
-                    metricProperty: 'not_vaccinated',
-                    color: colors.data.yellow,
-                    label: text.vaccination_status_chart.labels.not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'has_one_shot',
-                    color: colors.data.partial_vaccination,
-                    label: text.vaccination_status_chart.labels.has_one_shot,
-                  },
-                  {
-                    metricProperty: 'fully_vaccinated',
-                    color: colors.data.primary,
-                    label:
-                      text.vaccination_status_chart.labels.fully_vaccinated,
-                  },
-                ]}
+              <AgeDemographic
+                data={data.hospital_vaccine_incidence_per_age_group}
+                accessibility={{
+                  key: 'vaccinations_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
+                formatValue={(n) => `${n}`}
+                text={
+                  siteText.vaccinations_incidence_age_demographic_chart
+                    .chart_text
+                }
               />
             </ChartTile>
           )}
+
+          {vaccinationStatusHospitalFeature.isEnabled &&
+            vaccinationStatusIntensiveCareFeature.isEnabled && (
+              <ChartTile
+                title={text.vaccination_status_ic_and_hospital_section.title}
+                description={replaceVariablesInText(
+                  text.vaccination_status_ic_and_hospital_section.description,
+                  {
+                    hospitalAmount: formatNumber(
+                      lastValueHositalVaccinationStatus.total_amount_of_people
+                    ),
+                    hospitalDateStart: hospitalDateFromText,
+                    hospitalDateEnd: hospitalDateToText,
+                    intensiveCareAmount: formatNumber(
+                      lastValueIntensiveCareVaccinationStatus.total_amount_of_people
+                    ),
+                    intensiveCareDateStart: intensiveCareDateFromText,
+                    intensiveCareDateEnd: intensiveCareDateToText,
+                  }
+                )}
+              >
+                <Box display="flex" flexDirection={{ _: 'column', sm: 'row' }}>
+                  <Box width="100%" display="flex" flexDirection="column">
+                    <PieChart
+                      data={lastValueHositalVaccinationStatus}
+                      title={
+                        text.vaccination_status_ic_and_hospital_section.hospital
+                          .title
+                      }
+                      link={{
+                        href: reverseRouter.nl.ziekenhuisopnames(),
+                        text: text.vaccination_status_ic_and_hospital_section
+                          .hospital.link_text,
+                      }}
+                      icon={<Ziekenhuis />}
+                      verticalLayout
+                      dataConfig={[
+                        {
+                          metricProperty: 'has_one_shot_or_not_vaccinated',
+                          color: colors.data.yellow,
+                          label:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.labels.has_one_shot_or_not_vaccinated,
+                        },
+                        {
+                          metricProperty: 'fully_vaccinated',
+                          color: colors.data.primary,
+                          label:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.labels.fully_vaccinated,
+                        },
+                      ]}
+                    />
+
+                    <Box pr={3}>
+                      <Metadata
+                        date={[
+                          lastValueHositalVaccinationStatus.date_start_unix,
+                          lastValueHositalVaccinationStatus.date_end_unix,
+                        ]}
+                        source={{
+                          ...text.vaccination_status_ic_and_hospital_section
+                            .source,
+                        }}
+                        isTileFooter
+                      />
+                    </Box>
+                  </Box>
+
+                  <Spacer mb={{ _: 4, sm: 0 }} />
+
+                  <Box width="100%" display="flex" flexDirection="column">
+                    <PieChart
+                      data={lastValueIntensiveCareVaccinationStatus}
+                      verticalLayout
+                      title={
+                        text.vaccination_status_ic_and_hospital_section
+                          .intensive_care.title
+                      }
+                      link={{
+                        href: reverseRouter.nl.intensiveCareOpnames(),
+                        text: text.vaccination_status_ic_and_hospital_section
+                          .intensive_care.link_text,
+                      }}
+                      icon={<Arts />}
+                      dataConfig={[
+                        {
+                          metricProperty: 'has_one_shot_or_not_vaccinated',
+                          color: colors.data.yellow,
+                          label:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.labels
+                              .has_one_shot_or_not_vaccinated,
+                        },
+                        {
+                          metricProperty: 'fully_vaccinated',
+                          color: colors.data.primary,
+                          label:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.labels.fully_vaccinated,
+                        },
+                      ]}
+                    />
+
+                    <Box pr={3}>
+                      <Metadata
+                        date={[
+                          lastValueIntensiveCareVaccinationStatus.date_start_unix,
+                          lastValueIntensiveCareVaccinationStatus.date_end_unix,
+                        ]}
+                        source={{
+                          ...text.vaccination_status_ic_and_hospital_section
+                            .source,
+                        }}
+                        isTileFooter
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              </ChartTile>
+            )}
 
           {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
