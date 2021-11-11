@@ -274,12 +274,18 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       text.vaccination_status_chart.labels
                         .has_one_shot_or_not_vaccinated,
+                    tooltipLabel:
+                      text.vaccination_status_chart.tooltip_labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
                     color: colors.data.primary,
                     label:
                       text.vaccination_status_chart.labels.fully_vaccinated,
+                    tooltipLabel:
+                      text.vaccination_status_chart.tooltip_labels
+                        .fully_vaccinated,
                   },
                 ]}
               />

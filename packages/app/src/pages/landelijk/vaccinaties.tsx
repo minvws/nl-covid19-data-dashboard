@@ -344,6 +344,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .hospital.labels.has_one_shot_or_not_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.tooltip_labels
+                              .has_one_shot_or_not_vaccinated,
                         },
                         {
                           metricProperty: 'fully_vaccinated',
@@ -351,6 +355,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .hospital.labels.fully_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.tooltip_labels.fully_vaccinated,
                         },
                       ]}
                     />
@@ -394,6 +401,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                             text.vaccination_status_ic_and_hospital_section
                               .intensive_care.labels
                               .has_one_shot_or_not_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.tooltip_labels
+                              .has_one_shot_or_not_vaccinated,
                         },
                         {
                           metricProperty: 'fully_vaccinated',
@@ -401,6 +412,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .intensive_care.labels.fully_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.tooltip_labels.fully_vaccinated,
                         },
                       ]}
                     />
