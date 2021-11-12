@@ -112,6 +112,7 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-risxss": "^2.1.0",
+    "esmock": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
     "inspectpack": "^4.7.1",
     "jsdom": "^18.0.1",

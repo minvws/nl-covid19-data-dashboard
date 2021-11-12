@@ -1517,6 +1517,7 @@ __metadata:
     eslint-plugin-react: ^7.26.1
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-risxss: ^2.1.0
+    esmock: ^1.0.1
     express: ^4.17.1
     flat: ^5.0.2
     framer-motion: ^5.0.1
@@ -12194,6 +12195,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esmock@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "esmock@npm:1.0.1"
+  dependencies:
+    resolvewithplus: ^0.2.0
+  checksum: f63e23575dffb0677aee62080a644ad9582625973c2a886a9336342be417a5297f54fa1606130f34872b216a37be8f0b768065388a8314b562f4833283aed522
+  languageName: node
+  linkType: hard
+
 "espree@npm:^6.2.1":
   version: 6.2.1
   resolution: "espree@npm:6.2.1"
@@ -21920,6 +21930,13 @@ __metadata:
     is-core-module: ^2.2.0
     path-parse: ^1.0.6
   checksum: 21684b4d99a4877337cdbd5484311c811b3e8910edb5d868eec85c6e6550b0f570d911f9a384f9e176172d6713f2715bd0b0887fa512cb8c6aeece018de6a9f8
+  languageName: node
+  linkType: hard
+
+"resolvewithplus@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "resolvewithplus@npm:0.2.0"
+  checksum: c5eb2ef8c6e5f5f082e36e6721ebff03e4731f5b910009a5e9d661ee8594bd8aaf74f316d7105395e8f2f1e35c5713277dfd2ab4ccd40619a04b60f896764396
   languageName: node
   linkType: hard
 
