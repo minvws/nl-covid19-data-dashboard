@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import styled from 'styled-components';
 import {
   borders,
@@ -24,7 +24,7 @@ import {
 import { spacing, SpacingProps } from '~/style/functions/spacing';
 import { transform, TransformProps } from '~/style/functions/transform';
 import { Preset, preset } from '~/style/preset';
-import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
+import { styledShouldForwardProp } from '~/lib/styled-should-forward-prop';
 
 export type BoxProps = SpaceProps &
   SpacingProps &
@@ -66,4 +66,4 @@ export const Box = styled.div.withConfig({
  * The MotionBox component is enriched with framer-motion to support animated
  * properties.
  */
-export const MotionBox = motion(Box);
+export const MotionBox = m(Box);

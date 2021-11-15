@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
-import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
+import { styledShouldForwardProp } from '~/lib/styled-should-forward-prop';
 
 /**
  * A generic spacer element.

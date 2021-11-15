@@ -99,7 +99,7 @@ const sizes = {
   infoWidth: 1000,
   contentWidth: 700,
   maxWidthText: 600,
-};
+} as const;
 
 const theme = {
   fonts,

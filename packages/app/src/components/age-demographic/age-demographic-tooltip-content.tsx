@@ -1,12 +1,11 @@
+import type { Color, KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { InlineText, Text } from '~/components/typography';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Box } from '../base';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
-import { useIntl } from '~/intl';
-import { Box } from '../base';
-import type { Color, KeysOfType } from '@corona-dashboard/common';
 
 interface AgeDemographicTooltipContentProps<
   T extends AgeDemographicDefaultValue
@@ -17,6 +16,7 @@ interface AgeDemographicTooltipContentProps<
   rightColor: Color;
   leftColor: Color;
   text: AgeDemographicChartText;
+  formatValue: (n: number) => string;
 }
 
 export function AgeDemographicTooltipContent<
@@ -28,9 +28,8 @@ export function AgeDemographicTooltipContent<
   rightColor,
   leftColor,
   text,
+  formatValue,
 }: AgeDemographicTooltipContentProps<T>) {
-  const { formatPercentage } = useIntl();
-
   return (
     <>
       <Box px={3} py={2}>
@@ -43,7 +42,7 @@ export function AgeDemographicTooltipContent<
       <Legend>
         <LegendItem color={rightColor}>
           <InlineText fontWeight="bold">
-            {formatPercentage(value[rightMetricProperty] * 100)}%
+            {formatValue(value[rightMetricProperty])}
           </InlineText>{' '}
           {replaceVariablesInText(text.right_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
@@ -51,7 +50,7 @@ export function AgeDemographicTooltipContent<
         </LegendItem>
         <LegendItem color={leftColor}>
           <InlineText fontWeight="bold">
-            {formatPercentage(value[leftMetricProperty] * 100)}%
+            {formatValue(value[leftMetricProperty])}
           </InlineText>{' '}
           {replaceVariablesInText(text.left_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),

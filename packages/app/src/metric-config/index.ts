@@ -1,7 +1,13 @@
-import { assert } from '@corona-dashboard/common';
+import {
+  assert,
+  DataScopeKey,
+  MetricKeys,
+  MetricProperty,
+  ScopedData,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { BarScaleConfig } from './common';
+import { BarScaleConfig, ScopedMetricConfigs } from './common';
 import { nl } from './nl';
 
 /**
@@ -12,19 +18,17 @@ import { nl } from './nl';
  * a lot of the specialized components we now use to render everything.
  */
 
+type MetricConfigs = {
+  [key in DataScopeKey]?: ScopedMetricConfigs<ScopedData[key]>;
+};
+
 /**
  * The data is scoped at nl/vr/gm, because we can not assume that the same
  * things like min/max/gradients apply everywhere for the same KPI.
  */
-const metricConfig = {
+export const metricConfigs: MetricConfigs = {
   nl,
-} as const;
-
-type DataScope = keyof typeof metricConfig;
-
-type MetricName = keyof typeof metricConfig[DataScope];
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
+};
 
 /**
  * Special bar scale getter, so the assert is centralized.
@@ -33,13 +37,12 @@ type KeysOfUnion<T> = T extends T ? keyof T : never;
  * there seems to be no way of enforcing the structure of the config and
  * strictly typing it to the actual supplied config at the same time.
  */
-export function getBarScaleConfig<S extends DataScope, K extends MetricName>(
-  scope: S,
-  metricName: K,
-  metricProperty?: KeysOfUnion<typeof metricConfig[S][K]>
-) {
+export function getBarScaleConfig<
+  S extends DataScopeKey,
+  K extends MetricKeys<ScopedData[S]>
+>(scope: S, metricName: K, metricProperty?: MetricProperty<ScopedData[S], K>) {
   const config = get(
-    metricConfig,
+    metricConfigs,
     metricProperty ? [scope, metricName, metricProperty] : [scope, metricName]
   );
 

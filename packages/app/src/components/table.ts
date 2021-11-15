@@ -17,7 +17,7 @@ import {
   width,
   WidthProps,
 } from 'styled-system';
-import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
+import { styledShouldForwardProp } from '~/lib/styled-should-forward-prop';
 
 type TableProps = TableCellProps & PositionProps;
 

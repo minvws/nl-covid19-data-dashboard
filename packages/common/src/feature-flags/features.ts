@@ -136,9 +136,33 @@ export const features: Feature[] = [
     metricName: 'intensive_care_vaccination_status',
   },
   {
-    name: 'nlVaccinationVaccinationStatus',
-    isEnabled: false,
+    name: 'nlVaccinationHospitalVaccinationStatus',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccination_status',
+  },
+  {
+    name: 'nlVaccinationIntensiveCareVaccinationStatus',
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'intensive_care_vaccination_status',
+  },
+  {
+    name: 'nlHospitalAdmissionsVaccineIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlIcAdmissionsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
   },
 ];

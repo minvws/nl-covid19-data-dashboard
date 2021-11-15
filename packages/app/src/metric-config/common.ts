@@ -1,4 +1,8 @@
-import { Gm, MetricKeys, Nl, Vr } from '@corona-dashboard/common';
+import {
+  DataScope,
+  MetricKeys,
+  MetricProperty,
+} from '@corona-dashboard/common';
 
 /**
  * These types are placed here to avoid a circular dependency. The nl/vr/gm
@@ -13,25 +17,17 @@ export type BarScaleConfig = {
   gradient: { color: string; value: number }[];
 };
 
-type MetricConfig = {
+export type MetricConfig = {
   barScale?: BarScaleConfig;
-};
-
-type ValueMetric<T> = {
-  values: T[];
-  last_value: T;
+  minimumRange?: number;
 };
 
 /**
  * This makes sure the object containing the metric configs follows the same
  * structure as the data object it is coupled with
  */
-export type ScopedMetricConfigs<S extends Nl | Vr | Gm> = {
-  [key in MetricKeys<S>]?: S[key] extends ValueMetric<infer T>
-    ? {
-        [metricKey in keyof T]?: MetricConfig;
-      }
-    : {
-        [metricKey in keyof S[key]]?: MetricConfig;
-      };
+export type ScopedMetricConfigs<S extends DataScope> = {
+  [metricKey in MetricKeys<S>]?: {
+    [property in MetricProperty<S, metricKey>]?: MetricConfig;
+  };
 };

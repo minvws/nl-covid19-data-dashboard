@@ -1,4 +1,5 @@
 import { Gedrag } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
@@ -8,9 +9,9 @@ import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -20,6 +21,8 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+
 export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
@@ -29,10 +32,20 @@ export const getStaticProps = withFeatureNotFoundPage(
         situations,
       }),
     }),
-    createGetContent<PageArticlesQueryResult>((context) => {
-      const { locale } = context;
-      return createPageArticlesQuery('situationsPage', locale);
-    })
+    async (context: GetStaticPropsContext) => {
+      const { content } = await createGetContent<
+        PagePartQueryResult<ArticleParts>
+      >(() => getPagePartsQuery('situationsPage'))(context);
+
+      return {
+        content: {
+          articles: getArticleParts(
+            content.pageParts,
+            'situationsPageArticles'
+          ),
+        },
+      };
+    }
   )
 );
 
