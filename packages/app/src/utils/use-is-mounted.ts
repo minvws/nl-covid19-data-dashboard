@@ -10,14 +10,19 @@ export function useIsMounted({ delayMs }: { delayMs?: number } = {}) {
 
   useEffect(() => {
     if (!delayMs) {
-      return setIsMounted(true);
+      setIsMounted(true);
+      return () => setIsMounted(false);
     }
 
-    const timeoutId = setTimeout(() => {
-      isMountedRef.current && setIsMounted(true);
-    }, delayMs);
+    const timeoutId = setTimeout(
+      () => isMountedRef.current && setIsMounted(true),
+      delayMs
+    );
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+      setIsMounted(false);
+    };
   }, [delayMs, isMountedRef]);
   return isMounted;
 }

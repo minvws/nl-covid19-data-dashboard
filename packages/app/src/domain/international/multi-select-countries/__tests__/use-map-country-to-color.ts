@@ -4,11 +4,15 @@ import {
   ORDERED_COLORS,
 } from '../use-map-country-to-color';
 
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, cleanup, renderHook } from '@testing-library/react-hooks';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 
 const UseMapCountryToColor = suite('useMapCountryToColor');
+
+UseMapCountryToColor.after.each(() => {
+  cleanup();
+});
 
 UseMapCountryToColor('should initialize in order', () => {
   const selectedCountries: CountryCode[] = ['nld', 'bel', 'deu'];
@@ -19,6 +23,27 @@ UseMapCountryToColor('should initialize in order', () => {
     selectedCountries.map((code) => result.current.getColor(code)),
     ORDERED_COLORS.slice(0, selectedCountries.length)
   );
+});
+
+UseMapCountryToColor('should assign a unique color to a new country', () => {
+  const selectedCountries: CountryCode[] = ['nld', 'bel', 'deu'];
+
+  const { result } = renderHook(() => useMapCountryToColor(selectedCountries));
+
+  act(() => {
+    result.current.toggleColor('fra');
+  });
+
+  const uniqueAssignedColors = [
+    ...new Set(
+      (['nld', 'bel', 'deu', 'fra'] as CountryCode[]).map(
+        result.current.getColor
+      )
+    ),
+  ];
+
+  assert.is(result.current.getColor('fra'), ORDERED_COLORS[3]);
+  assert.is(['nld', 'bel', 'deu', 'fra'].length, uniqueAssignedColors.length);
 });
 
 UseMapCountryToColor(

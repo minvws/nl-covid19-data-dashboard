@@ -23,6 +23,9 @@
   "references": [
     {
       "path": "../common"
+    },
+    {
+      "path": "../icons"
     }
   ],
   "include": ["next-env.d.ts", "src", "src/**/*.json"],

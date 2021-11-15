@@ -9,7 +9,7 @@
     "nuke": "yarn clean && npx rimraf node_modules",
     "dev": "sanity start",
     "build": "sanity build",
-    "deploy": "yarn workspace @corona-dashboard/cli generate-data-structures && sanity deploy",
+    "deploy": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity deploy",
     "test": "sanity check",
     "test:ci": "yarn run test",
     "typecheck": "tsc --pretty --noEmit",
