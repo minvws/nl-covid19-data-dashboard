@@ -7,7 +7,7 @@
     "bootstrap": "yarn lokalize:export",
     "clean": "npx rimraf dist .sanity-asset-cache .lokalize-reference",
     "nuke": "yarn clean && npx rimraf node_modules",
-    "dev": "sanity start",
+    "dev": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity start",
     "build": "sanity build",
     "deploy": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity deploy",
     "test": "sanity check",

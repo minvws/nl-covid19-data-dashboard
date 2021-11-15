@@ -39,6 +39,7 @@ const hiddenDocTypes = [
   'warning',
   'chartConfiguration',
   'kpiConfiguration',
+  'ageDemographicChartConfiguration',
   'pageArticles',
   'pageLinks',
   'pageHighlightedItems',
@@ -120,10 +121,12 @@ export default () =>
 
       S.divider(),
 
-      ...S.documentTypeListItems().filter(
-        (item) =>
-          item.getId() === 'kpiConfiguration' ||
-          item.getId() === 'chartConfiguration'
+      ...S.documentTypeListItems().filter((item) =>
+        [
+          'kpiConfiguration',
+          'chartConfiguration',
+          'ageDemographicChartConfiguration',
+        ].includes(item.getId() ?? '')
       ),
 
       S.divider(),

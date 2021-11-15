@@ -1,7 +1,4 @@
-/**
- * @TODO add the others here once they are converted to named exports
- */
-
+export * from './age-demographic-chart-configuration';
 export * from './article';
 export * from './chart-configuration';
 export * from './cijfer-verantwoording-item';
