@@ -87,6 +87,7 @@ const titleByMetricName: Partial<
   vaccine_coverage_per_age_group_estimated:
     'Vaccinatiegraad berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',
+  nursing_home: 'Verpleeghuizen',
 };
 
 function getTitleForMetricName(metricName: MetricKeys<In & Nl & Vr & Gm>) {
