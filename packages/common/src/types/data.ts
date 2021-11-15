@@ -262,6 +262,7 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
+  booster_shot: NlBoosterShot;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -352,6 +353,19 @@ export interface NamedDifferenceDecimal {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface NlBoosterShot {
+  values: NlBoosterShotValue[];
+  last_value: NlBoosterShotValue;
+}
+export interface NlBoosterShotValue {
+  partially_or_fully_vaccinated_received_percentage: number;
+  partially_or_fully_vaccinated_amount_of_people: number;
+  received_last_seven_days: number;
+  vaccinated_last_seven_days: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];
