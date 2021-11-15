@@ -8,6 +8,7 @@ import { last } from 'lodash';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { useIntl } from '~/intl';
 import { metricConfigs } from '~/metric-config';
 
@@ -15,12 +16,14 @@ interface ReproductionChartTileProps {
   data: NlReproduction;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
+  timelineEvents?: TimelineEventConfig[];
 }
 
 export function ReproductionChartTile({
   data,
   timeframeOptions = ['all', '5weeks'],
   timeframeInitialValue = 'all',
+  timelineEvents,
 }: ReproductionChartTileProps) {
   const { siteText } = useIntl();
   const text = siteText.reproductiegetal;
@@ -64,6 +67,9 @@ export function ReproductionChartTile({
                 metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
             },
           ]}
+          dataOptions={{
+            timelineEvents,
+          }}
           numGridLines={timeframe === 'all' ? 4 : 3}
         />
       )}

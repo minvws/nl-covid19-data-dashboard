@@ -80,6 +80,7 @@ const titleByMetricName: Partial<
   hospital_nice: 'Ziekenhuisopnames',
   intensive_care_nice: 'Intensive care-opnames',
   situations: 'Besmettingssituaties',
+  reproduction: 'Reproduciegetal',
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_administered: 'Gezette prikken',
   vaccine_coverage: 'Vaccinatiegraad',
