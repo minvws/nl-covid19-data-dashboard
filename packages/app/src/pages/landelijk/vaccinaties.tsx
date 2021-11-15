@@ -1,4 +1,8 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  NlHospitalVaccineIncidencePerAgeGroupValue,
+  NlIntensiveCareVaccinationStatusValue,
+} from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
@@ -6,13 +10,14 @@ import {
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { isDefined } from 'ts-is-present';
-import { AgeDemographic } from '~/components/age-demographic';
+import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { PieChart } from '~/components/pie-chart';
+import { PieChartProps } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
@@ -60,6 +65,16 @@ import {
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const AgeDemographic = dynamic<
+  AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
+>(() =>
+  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
+);
+
+const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
+  () => import('~/components/pie-chart').then((mod) => mod.PieChart)
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -344,6 +359,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .hospital.labels.has_one_shot_or_not_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.tooltip_labels
+                              .has_one_shot_or_not_vaccinated,
                         },
                         {
                           metricProperty: 'fully_vaccinated',
@@ -351,6 +370,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .hospital.labels.fully_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.tooltip_labels.fully_vaccinated,
                         },
                       ]}
                     />
@@ -394,6 +416,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                             text.vaccination_status_ic_and_hospital_section
                               .intensive_care.labels
                               .has_one_shot_or_not_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.tooltip_labels
+                              .has_one_shot_or_not_vaccinated,
                         },
                         {
                           metricProperty: 'fully_vaccinated',
@@ -401,6 +427,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .intensive_care.labels.fully_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.tooltip_labels.fully_vaccinated,
                         },
                       ]}
                     />

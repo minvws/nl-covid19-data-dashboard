@@ -18,3 +18,7 @@
 ## Miscelaneous
 
 - [Developer notes](/docs/developers.md)
+
+## Schema
+
+- [Schema docs](/packages/app/schema/README.md)
