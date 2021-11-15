@@ -220,7 +220,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds: thresholds.gm.admissions_on_date_of_reporting,
+              thresholds: thresholds.gm.admissions_on_date_of_admission,
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             }}
@@ -237,7 +237,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               data={choropleth.gm.hospital_nice}
               dataConfig={{
                 metricName: 'hospital_nice',
-                metricProperty: 'admissions_on_date_of_reporting',
+                metricProperty: 'admissions_on_date_of_admission',
               }}
               dataOptions={{
                 selectedCode: selectedMunicipalCode,
