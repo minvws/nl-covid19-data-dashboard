@@ -34,10 +34,10 @@
         "total_date_end_unix": {
           "type": "integer"
         },
-        "received_last_seven_days": {
+        "received_booster_last_seven_days": {
           "type": "number"
         },
-        "vaccinated_last_seven_days": {
+        "total_shots_last_seven_days": {
           "type": "number"
         },
         "last_seven_days_date_start_unix": {
