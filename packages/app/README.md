@@ -8,16 +8,20 @@ React application uses Next.js as its framework.
 First run `yarn install` or simply `yarn` at the root of the repository if you
 haven't already. This installs all the dependencies for all of the packages.
 
-Then from `packages/app` you can run:
+Make sure you have an `.env.local` file in `packages/app` with correct environment variables. To
+get started, you can copy `.env.local.example`:
 
-1. `yarn bootstrap`
-2. `yarn dev`
+```sh
+cp packages/app/.env.local.example packages/app/.env.local
+```
+
+Then from the repository root you can run:
+
+1. `yarn download` - Downloads latest data
+2. `yarn bootstrap` - Downloads / builds all other requirements
+3. `yarn dev` - Starts the development server
 
 These steps are described in more detail below.
-
-### Yarn Bootstrap
-
-Run `yarn bootstrap` to walk over the packages and install/prebuild all requirements. Right now, it will download a fresh dataset from production, export the texts from lokalize (development dataset) and build the common and icons packages for use by the app package.
 
 ### JSON Data
 
@@ -41,7 +45,7 @@ The "Lokalize" part of Sanity is exported and consumed by the app as JSON. You w
 need to run this script regularly as an outdated JSON file will result in
 compile or build-time errors.
 
-`yarn workspace corona-dashboard/cms lokalize:export`
+`yarn workspace @corona-dashboard/cms lokalize:export`
 
 Alternatively you can run this from `packages/cms` as `yarn lokalize:export`
 
@@ -50,8 +54,7 @@ To learn more about the rationale behind Lokalize and how it works [read the doc
 ### Locale
 
 By default, the site builds the Dutch version. If you would like to build the English
-version instead, you can create a `.env.local` file in `packages/app` with the
-following content:
+version instead, update the following variable in your `packages/app/.env.local` file:
 
 ```sh
 NEXT_PUBLIC_LOCALE=en

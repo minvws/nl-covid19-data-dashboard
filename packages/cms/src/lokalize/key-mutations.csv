@@ -56,3 +56,14 @@ timestamp,action,key,document_id,move_to
 2021-11-01T16:12:02.826Z,delete,ic_opnames_per_dag.vaccination_status_chart.labels.not_vaccinated,kEfMsz3QZs49YXq5jn3hR7,__
 2021-11-01T16:12:02.826Z,delete,ziekenhuisopnames_per_dag.vaccination_status_chart.labels.has_one_shot,jDbv30Y7XYH5kl8Zamawpq,__
 2021-11-01T16:12:02.826Z,delete,ziekenhuisopnames_per_dag.vaccination_status_chart.labels.not_vaccinated,kEfMsz3QZs49YXq5jn3lpZ,__
+2021-11-09T14:51:46.400Z,add,accessibility.charts.vaccinations_incidence_age_demographic_chart.description,z1CGDOfh23CnZYQwEeXFeR,__
+2021-11-09T14:51:47.424Z,add,accessibility.charts.vaccinations_incidence_age_demographic_chart.label,L0R7Ua3YIau8O4TDxe1pyp,__
+2021-11-09T14:51:48.457Z,add,vaccinations_incidence_age_demographic_chart.chart_text.accessibility_description,41m6S8Y6xAJZkZywfhizrG,__
+2021-11-09T14:51:49.465Z,add,vaccinations_incidence_age_demographic_chart.chart_text.age_group_range_tooltip,41m6S8Y6xAJZkZywfhizuy,__
+2021-11-09T14:51:50.489Z,add,vaccinations_incidence_age_demographic_chart.chart_text.clipped_value_message,41m6S8Y6xAJZkZywfhj01e,__
+2021-11-09T14:51:51.507Z,add,vaccinations_incidence_age_demographic_chart.chart_text.left_title,L0R7Ua3YIau8O4TDxe1s2F,__
+2021-11-09T14:51:52.535Z,add,vaccinations_incidence_age_demographic_chart.chart_text.left_tooltip,z1CGDOfh23CnZYQwEeXGLz,__
+2021-11-09T14:51:53.577Z,add,vaccinations_incidence_age_demographic_chart.chart_text.right_title,L0R7Ua3YIau8O4TDxe1srD,__
+2021-11-09T14:51:54.576Z,add,vaccinations_incidence_age_demographic_chart.chart_text.right_tooltip,41m6S8Y6xAJZkZywfhj0HE,__
+2021-11-09T14:51:55.637Z,add,vaccinations_incidence_age_demographic_chart.description,L0R7Ua3YIau8O4TDxe1tlH,__
+2021-11-09T14:51:56.655Z,add,vaccinations_incidence_age_demographic_chart.title,41m6S8Y6xAJZkZywfhj0Oe,__

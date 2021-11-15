@@ -151,12 +151,18 @@ export const features: Feature[] = [
     name: 'nlHospitalAdmissionsVaccineIncidencePerAgeGroup',
     isEnabled: true,
     dataScopes: ['nl'],
-    // metricName: 'hospital_vaccine_incidence_per_age_group', // uncomment when we merge the schema
+    metricName: 'hospital_vaccine_incidence_per_age_group',
   },
   {
     name: 'nlIcAdmissionsIncidencePerAgeGroup',
     isEnabled: true,
     dataScopes: ['nl'],
-    // metricName: 'intensive_care_vaccine_incidence_per_age_group', // uncomment when we merge the schema
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
   },
 ];

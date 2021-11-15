@@ -1,8 +1,13 @@
 import { colors } from '@corona-dashboard/common';
-import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import {
+  Arts,
+  Vaccinaties as VaccinatieIcon,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
+import { AgeDemographic } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Metadata } from '~/components/metadata';
@@ -72,6 +77,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated',
     'hospital_vaccination_status',
+    'hospital_vaccine_incidence_per_age_group',
     'intensive_care_vaccination_status'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
@@ -151,7 +157,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineAdministeredGgdGhorFeature = useFeature(
     'nlVaccineAdministeredGgdGhor'
   );
-
+  const vaccinationsIncidencePerAgeGroupFeature = useFeature(
+    'nlVaccinationsIncidencePerAgeGroup'
+  );
   const vaccinationStatusHospitalFeature = useFeature(
     'nlVaccinationHospitalVaccinationStatus'
   );
@@ -266,6 +274,34 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
+          {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
+            <ChartTile
+              title={
+                siteText.vaccinations_incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.vaccinations_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                data={data.hospital_vaccine_incidence_per_age_group}
+                accessibility={{
+                  key: 'vaccinations_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
+                formatValue={(n) => `${n}`}
+                text={
+                  siteText.vaccinations_incidence_age_demographic_chart
+                    .chart_text
+                }
+              />
+            </ChartTile>
+          )}
+
           {vaccinationStatusHospitalFeature.isEnabled &&
             vaccinationStatusIntensiveCareFeature.isEnabled && (
               <ChartTile
@@ -299,6 +335,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                         text: text.vaccination_status_ic_and_hospital_section
                           .hospital.link_text,
                       }}
+                      icon={<Ziekenhuis />}
                       verticalLayout
                       dataConfig={[
                         {
@@ -348,6 +385,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                         text: text.vaccination_status_ic_and_hospital_section
                           .intensive_care.link_text,
                       }}
+                      icon={<Arts />}
                       dataConfig={[
                         {
                           metricProperty: 'has_one_shot_or_not_vaccinated',

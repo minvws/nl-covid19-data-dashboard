@@ -224,6 +224,35 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
+          {icVaccinationIncidencePerAgeGroupFeature.isEnabled && (
+            <ChartTile
+              title={
+                siteText.ic_admissions_incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.ic_admissions_incidence_age_demographic_chart
+                  .description
+              }
+            >
+              <AgeDemographic
+                // This is correct, hospital admissions data is supposed to be displayed here.
+                data={data.hospital_vaccine_incidence_per_age_group}
+                accessibility={{
+                  key: 'ic_admissions_incidence_age_demographic_chart',
+                }}
+                rightColor="data.primary"
+                leftColor="data.yellow"
+                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
+                rightMetricProperty={'fully_vaccinated_per_100k'}
+                formatValue={(n: number) => `${n}`}
+                text={
+                  siteText.ic_admissions_incidence_age_demographic_chart
+                    .chart_text
+                }
+              />
+            </ChartTile>
+          )}
+
           {vaccinationStatusFeature.isEnabled && (
             <ChartTile
               title={text.vaccination_status_chart.title}
@@ -271,35 +300,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       text.vaccination_status_chart.labels.fully_vaccinated,
                   },
                 ]}
-              />
-            </ChartTile>
-          )}
-
-          {icVaccinationIncidencePerAgeGroupFeature.isEnabled && (
-            <ChartTile
-              title={
-                siteText.ic_admissions_incidence_age_demographic_chart.title
-              }
-              description={
-                siteText.ic_admissions_incidence_age_demographic_chart
-                  .description
-              }
-            >
-              <AgeDemographic
-                // This is correct, hospital admissions data is supposed to be displayed here.
-                data={data.hospital_vaccine_incidence_per_age_group}
-                accessibility={{
-                  key: 'ic_admissions_incidence_age_demographic_chart',
-                }}
-                rightColor="data.primary"
-                leftColor="data.yellow"
-                leftMetricProperty={'not_or_partially_vaccinated'}
-                rightMetricProperty={'fully_vaccinated'}
-                formatValue={(n: number) => `${n}`}
-                text={
-                  siteText.ic_admissions_incidence_age_demographic_chart
-                    .chart_text
-                }
               />
             </ChartTile>
           )}
