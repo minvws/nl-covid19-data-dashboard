@@ -79,6 +79,13 @@ const titleByMetricName: Partial<
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
   intensive_care_nice: 'Intensive care-opnames',
+  situations: 'Besmettingssituaties',
+  vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
+  vaccine_administered: 'Gezette prikken',
+  vaccine_coverage: 'Vaccinatiegraad',
+  vaccine_coverage_per_age_group_estimated:
+    'Vaccinatiegraad berekend (per leeftijd)',
+  vaccine_administered_total: 'Totaal gezette prikken',
 };
 
 function getTitleForMetricName(metricName: MetricKeys<In & Nl & Vr & Gm>) {
