@@ -84,7 +84,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 minHeight={650}
                 dataConfig={{
                   metricName: 'gemeente' as any,
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'admissions_on_date_of_reporting',
                   areaStroke: colors.white,
                   areaStrokeWidth: 1,
                   hoverFill: colors.white,
