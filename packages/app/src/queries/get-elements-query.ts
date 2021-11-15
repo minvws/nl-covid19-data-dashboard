@@ -1,13 +1,18 @@
-import { DataScopeKey } from '@corona-dashboard/common';
+import {
+  DataScopeKey,
+  MetricKeys,
+  MetricName,
+  ScopedData,
+} from '@corona-dashboard/common';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 function formatStringArray(array: string[]) {
   return `[${array.map((x) => `'${x}'`).join(',')}]`;
 }
 
-export function getElementsQuery(
-  scope: DataScopeKey,
-  metricNames: string[],
+export function getElementsQuery<K extends DataScopeKey>(
+  scope: K,
+  metricNames: MetricKeys<ScopedData[K]>[],
   locale: string
 ) {
   const query = `// groq
@@ -15,7 +20,7 @@ export function getElementsQuery(
       'timeSeries': *[
         _type == 'timeSeries'
         && scope == '${scope}'
-        && metricName in ${formatStringArray(metricNames)}
+        && metricName in ${formatStringArray(metricNames as string[])}
       ]{
         _id,
         metricName,
@@ -31,7 +36,7 @@ export function getElementsQuery(
       'kpi': *[
         _type == 'kpi'
         && scope == '${scope}'
-        && metricName in ${formatStringArray(metricNames)}
+        && metricName in ${formatStringArray(metricNames as string[])}
       ]{
         _id,
         metricName,
@@ -40,7 +45,7 @@ export function getElementsQuery(
       'warning': *[
         _type == 'warning'
         && scope == '${scope}'
-        && metricName in ${formatStringArray(metricNames)}
+        && metricName in ${formatStringArray(metricNames as string[])}
       ]{
         _id,
         metricName,
@@ -50,7 +55,7 @@ export function getElementsQuery(
       'choropleth': *[
         _type == 'choropleth'
         && scope == '${scope}'
-        && metricName in ${formatStringArray(metricNames)}
+        && metricName in ${formatStringArray(metricNames as string[])}
       ]{
         _id,
         metricName,
@@ -110,7 +115,7 @@ export type ElementsQueryResult = {
  */
 export function getTimelineEvents(
   elements: CmsTimeSeriesElement[],
-  metricName: string,
+  metricName: MetricName,
   metricProperty?: string
 ) {
   const timelineEventCollections = elements.find(
@@ -131,7 +136,10 @@ export function getTimelineEvents(
     : undefined;
 }
 
-export function getWarning(elements: CmsWarningElement[], metricName: string) {
+export function getWarning(
+  elements: CmsWarningElement[],
+  metricName: MetricName
+) {
   return (
     elements.find((x) => x.metricName === metricName)?.warning || undefined
   );

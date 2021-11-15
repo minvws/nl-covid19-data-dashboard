@@ -1,11 +1,8 @@
 import {
   DataScopeKey,
-  Gm,
-  In,
   MetricKeys,
-  Nl,
+  MetricName,
   ScopedData,
-  Vr,
 } from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
@@ -54,7 +51,7 @@ export const commonPreview = {
   }) {
     return {
       title: [
-        getTitleForMetricName(x.metricName as MetricKeys<In & Nl & Vr & Gm>),
+        getTitleForMetricName(x.metricName as MetricName),
         getTitleForElementType(x.type),
         x.metricProperty,
       ]
@@ -72,9 +69,7 @@ export const commonPreview = {
  * user-friendly. We could take this further by also mapping type names like
  * choropleth and maybe even introducing a specific icon for each element type.
  */
-const titleByMetricName: Partial<
-  Record<MetricKeys<In & Nl & Vr & Gm>, string>
-> = {
+const titleByMetricName: Partial<Record<MetricName, string>> = {
   tested_overall: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
@@ -88,9 +83,10 @@ const titleByMetricName: Partial<
     'Vaccinatiegraad berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',
   nursing_home: 'Verpleeghuizen',
+  disability_care: 'Gehandicaptenzorg',
 };
 
-function getTitleForMetricName(metricName: MetricKeys<In & Nl & Vr & Gm>) {
+function getTitleForMetricName(metricName: MetricName) {
   return titleByMetricName[metricName] || metricName;
 }
 

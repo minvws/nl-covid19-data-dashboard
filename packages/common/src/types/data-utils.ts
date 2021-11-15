@@ -20,6 +20,8 @@ export type MetricKeys<T> = keyof Omit<
   'last_generated' | 'proto_name' | 'name' | 'code'
 >;
 
+export type MetricName = MetricKeys<In & Nl & Vr & Gm>;
+
 type ValuesMetric<T> = {
   values: T[];
 };
