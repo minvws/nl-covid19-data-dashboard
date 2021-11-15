@@ -77,7 +77,7 @@ export const getStaticProps = createGetStaticProps(
         "parts": ${getPagePartsQuery('intensiveCarePage')},
         "elements": ${getElementsQuery(
           'nl',
-          ['intensive_care_nice'],
+          ['intensive_care_nice', 'intensive_care_nice_per_age_group'],
           context.locale
         )}
       }`;
@@ -404,6 +404,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.intensive_care_nice_per_age_group.values}
                 timeframe={timeframe}
+                timelineEvents={getTimelineEvents(
+                  content.elements.timeSeries,
+                  'intensive_care_nice_per_age_group'
+                )}
               />
             )}
           </ChartTile>

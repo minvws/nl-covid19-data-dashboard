@@ -73,7 +73,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   tested_overall: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
-  intensive_care_nice: 'Intensive care-opnames',
+  intensive_care_nice: 'IC-opnames',
   situations: 'Besmettingssituaties',
   reproduction: 'Reproduciegetal',
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
@@ -85,6 +85,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   nursing_home: 'Verpleeghuizen',
   disability_care: 'Gehandicaptenzorg',
   deceased_rivm: 'Sterfte (RIVM)',
+  intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
 };
 
 function getTitleForMetricName(metricName: MetricName) {
