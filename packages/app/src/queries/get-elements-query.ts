@@ -110,10 +110,13 @@ export type ElementsQueryResult = {
  */
 export function getTimelineEvents(
   elements: CmsTimeSeriesElement[],
-  metricName: string
+  metricName: string,
+  metricProperty?: string
 ) {
   const timelineEventCollections = elements.find(
-    (x) => x.metricName === metricName
+    (x) =>
+      x.metricName === metricName &&
+      (!metricProperty || x.metricProperty === metricProperty)
   )?.timelineEventCollections;
 
   return timelineEventCollections
