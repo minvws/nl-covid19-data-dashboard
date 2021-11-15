@@ -79,11 +79,7 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
           />
         </div>
 
-        <Tooltip
-          controls="age-demographic-chart"
-          tooltipState={tooltipState}
-          width={AGE_GROUP_TOOLTIP_WIDTH}
-        >
+        <Tooltip tooltipState={tooltipState} width={AGE_GROUP_TOOLTIP_WIDTH}>
           {tooltipState.value && (
             <AgeDemographicTooltipContent
               value={tooltipState.value}

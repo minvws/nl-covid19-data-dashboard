@@ -67,3 +67,11 @@ timestamp,action,key,document_id,move_to
 2021-11-09T14:51:54.576Z,add,vaccinations_incidence_age_demographic_chart.chart_text.right_tooltip,41m6S8Y6xAJZkZywfhj0HE,__
 2021-11-09T14:51:55.637Z,add,vaccinations_incidence_age_demographic_chart.description,L0R7Ua3YIau8O4TDxe1tlH,__
 2021-11-09T14:51:56.655Z,add,vaccinations_incidence_age_demographic_chart.title,41m6S8Y6xAJZkZywfhj0Oe,__
+2021-11-11T17:09:53.885Z,add,ic_opnames_per_dag.vaccination_status_chart.tooltip_labels.fully_vaccinated,z1CGDOfh23CnZYQwEjkuLl,__
+2021-11-11T17:09:54.909Z,add,ic_opnames_per_dag.vaccination_status_chart.tooltip_labels.has_one_shot_or_not_vaccinated,L0R7Ua3YIau8O4TDxwmFqZ,__
+2021-11-11T17:09:55.921Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.hospital.tooltip_labels.fully_vaccinated,z1CGDOfh23CnZYQwEjkuhX,__
+2021-11-11T17:09:58.383Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.hospital.tooltip_labels.has_one_shot_or_not_vaccinated,41m6S8Y6xAJZkZywfkP3re,__
+2021-11-11T17:09:59.308Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.intensive_care.tooltip_labels.fully_vaccinated,41m6S8Y6xAJZkZywfkP3vM,__
+2021-11-11T17:10:00.334Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.intensive_care.tooltip_labels.has_one_shot_or_not_vaccinated,z1CGDOfh23CnZYQwEjkv7f,__
+2021-11-11T17:10:01.324Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.tooltip_labels.fully_vaccinated,L0R7Ua3YIau8O4TDxwmIEN,__
+2021-11-11T17:10:02.350Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.tooltip_labels.has_one_shot_or_not_vaccinated,L0R7Ua3YIau8O4TDxwmIt9,__

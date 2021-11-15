@@ -3,6 +3,7 @@ import {
   DAY_IN_SECONDS,
   getLastFilledValue,
   NlHospitalVaccinationStatusValue,
+  NlHospitalVaccineIncidencePerAgeGroupValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
@@ -55,8 +56,9 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-// TODO: Update any to the proper type when the schema is merged.
-const AgeDemographic = dynamic<AgeDemographicProps<any>>(() =>
+const AgeDemographic = dynamic<
+  AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
+>(() =>
   import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
 );
 
@@ -274,12 +276,18 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       text.vaccination_status_chart.labels
                         .has_one_shot_or_not_vaccinated,
+                    tooltipLabel:
+                      text.vaccination_status_chart.tooltip_labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
                     color: colors.data.primary,
                     label:
                       text.vaccination_status_chart.labels.fully_vaccinated,
+                    tooltipLabel:
+                      text.vaccination_status_chart.tooltip_labels
+                        .fully_vaccinated,
                   },
                 ]}
               />
