@@ -29,8 +29,6 @@ export function useAccessibilityAnnotations(
 ) {
   const { siteText } = useIntl();
 
-  console.log(siteText);
-
   const { label, description: chartDescription } =
     siteText.accessibility.charts[
       definition.key as keyof typeof siteText.accessibility.charts

@@ -23,6 +23,6 @@ export function useIsMounted({ delayMs }: { delayMs?: number } = {}) {
       clearTimeout(timeoutId);
       setIsMounted(false);
     };
-  }, [delayMs, isMountedRef.current]);
+  }, [delayMs, isMountedRef]);
   return isMounted;
 }
