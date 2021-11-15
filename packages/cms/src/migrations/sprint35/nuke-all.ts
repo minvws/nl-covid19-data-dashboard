@@ -1,6 +1,6 @@
 import { getClient } from '../../client';
 
-const client = getClient('development');
+const client = getClient('production');
 
 function fetchPartIds() {
   return client.fetch(
@@ -18,10 +18,10 @@ async function nukeDocuments(): Promise<any> {
 
   await Promise.all(partsIds.map((id: string) => client.delete(id)));
 
-  const pageDocument = await fetchPageIds();
-  const pageIds = pageDocument.map((x: any) => x._id);
+  //const pageDocument = await fetchPageIds();
+  //const pageIds = pageDocument.map((x: any) => x._id);
 
-  await Promise.all(pageIds.map((id: string) => client.delete(id)));
+  //await Promise.all(pageIds.map((id: string) => client.delete(id)));
 }
 
 nukeDocuments().catch((err) => {

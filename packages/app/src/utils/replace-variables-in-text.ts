@@ -6,7 +6,7 @@ import { assert } from './assert';
  * When lokalize hot reload is enabled we will render "[#ERROR {{key}}]"
  * instead of throwing an error when there's a validation error.
  */
-const shouldValidate =
+export const shouldValidate =
   typeof window === 'undefined' || process.env.NEXT_PUBLIC_PHASE !== 'develop';
 
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
@@ -63,16 +63,14 @@ export function replaceVariablesInText(
             );
           }
           case formatterNames.includes(command): {
-            return isDefined(formatters)
-              ? executeFormat(
-                  variables,
-                  trimmedName,
-                  translation,
-                  formatters[command as unknown as keyof DataFormatters] as (
-                    value: unknown
-                  ) => string
-                )
-              : '';
+            return executeFormat(
+              variables,
+              trimmedName,
+              translation,
+              (formatters as DataFormatters)[
+                command as unknown as keyof DataFormatters
+              ] as (value: unknown) => string
+            );
           }
           default: {
             throw new Error(`Unknown command encountered: ${command}`);

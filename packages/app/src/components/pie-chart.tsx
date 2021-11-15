@@ -6,18 +6,20 @@ import Pie from '@visx/shape/lib/shapes/Pie';
 import { isEmpty } from 'lodash';
 import { useMemo } from 'react';
 import { Box, Spacer } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { WithTooltip } from '~/lib/tooltip';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 const ICON_SIZE = 55;
 
 interface SeriesConfigType<T> {
   metricProperty: KeysOfType<T, number, true>;
   color: string;
   label: string;
+  tooltipLabel: string;
 }
 
 export interface PieChartProps<T> {
@@ -60,6 +62,16 @@ export function PieChart<T>({
     formatDateSpan,
   } = useIntl();
 
+  const formatters = {
+    formatNumber,
+    formatPercentage,
+    formatDate,
+    formatDateFromSeconds,
+    formatDateFromMilliseconds,
+    formatRelativeDate,
+    formatDateSpan,
+  };
+
   const totalValue = dataConfig.reduce(
     (previousValue, currentValue) =>
       previousValue + data[currentValue.metricProperty],
@@ -86,142 +98,184 @@ export function PieChart<T>({
 
   return (
     <Box width="100%">
-      <Box
-        display="flex"
-        spacingHorizontal={{ sm: 4, lg: 5 }}
-        spacing={verticalLayout ? 4 : { _: 4, sm: 0 }}
-        alignItems={verticalLayout ? 'flex-start' : { sm: 'center' }}
-        flexDirection={verticalLayout ? 'column' : { _: 'column', sm: 'row' }}
-      >
+      <ErrorBoundary>
         <Box
-          alignSelf={{ _: 'center', xs: 'self-start' }}
-          height={innerSize}
-          position="relative"
-          marginLeft={{ xs: paddingLeft }}
+          display="flex"
+          spacingHorizontal={{ sm: 4, lg: 5 }}
+          spacing={verticalLayout ? 4 : { _: 4, sm: 0 }}
+          alignItems={verticalLayout ? 'flex-start' : { sm: 'center' }}
+          flexDirection={verticalLayout ? 'column' : { _: 'column', sm: 'row' }}
         >
-          {icon && (
-            <Box
-              width={ICON_SIZE}
-              height={ICON_SIZE}
-              top={`calc(50% - ${ICON_SIZE / 2}px)`}
-              left={`calc(50% - ${ICON_SIZE / 2}px)`}
-              position="absolute"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              css={css({
-                svg: {
-                  height: '100%',
-                  fill: 'silver',
-                },
-              })}
-            >
-              {icon}
-            </Box>
-          )}
-
-          <svg
-            width={innerSize}
-            height={innerSize}
-            aria-hidden="true"
-            css={css({
-              minWidth: innerSize,
-            })}
-          >
-            <Group top={innerSize / 2} left={innerSize / 2}>
-              <Pie
-                data={mappedDataWithValues}
-                outerRadius={radius}
-                innerRadius={radius - donutWidth}
-                pieValue={(x) => x.__value}
-                // Sort by the order of the config
-                pieSortValues={(d, i) => i}
-                padAngle={padAngle}
-              >
-                {(pie) => {
-                  return pie.arcs.map((arc, index) => {
-                    const arcPath = pie.path(arc);
-
-                    return (
-                      <path
-                        d={arcPath as string}
-                        fill={arc.data.color}
-                        key={`arc-${index}`}
-                      />
-                    );
-                  });
-                }}
-              </Pie>
-            </Group>
-          </svg>
-        </Box>
-
-        <Box spacing={2}>
-          {title && (
-            <InlineText
-              fontWeight="bold"
-              css={css({
-                display: 'block',
-              })}
-            >
-              {title}
-            </InlineText>
-          )}
           <Box
-            spacing={2}
-            as="ol"
-            width={{ _: '100%', md: 'auto' }}
-            css={css({
-              listStyleType: 'none',
-            })}
+            alignSelf={{ _: 'center', xs: 'self-start' }}
+            height={innerSize}
+            position="relative"
+            marginLeft={{ xs: paddingLeft }}
           >
-            {dataConfig.map((item, index) => (
+            {icon && (
               <Box
-                as="li"
-                key={`${item.color}-${index}`}
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+                top={`calc(50% - ${ICON_SIZE / 2}px)`}
+                left={`calc(50% - ${ICON_SIZE / 2}px)`}
+                position="absolute"
                 display="flex"
                 alignItems="center"
-                spacingHorizontal={2}
+                justifyContent="center"
+                css={css({
+                  svg: {
+                    height: '100%',
+                    fill: 'silver',
+                  },
+                })}
               >
-                <Box
-                  width={12}
-                  height={12}
-                  backgroundColor={item.color}
-                  borderRadius="50%"
-                />
-                <Markdown
-                  content={replaceVariablesInText(item.label, data as any, {
-                    formatNumber,
-                    formatPercentage,
-                    formatDate,
-                    formatDateFromSeconds,
-                    formatDateFromMilliseconds,
-                    formatRelativeDate,
-                    formatDateSpan,
-                  })}
-                />
+                {icon}
               </Box>
-            ))}
-          </Box>
-          {
-            /**
-             * Check also for empty link text, so that clearing it in Lokalize
-             * actually removes the link altogether
-             */
-            link && !isEmpty(link.text) && (
-              <LinkWithIcon
-                href={link.href}
-                icon={<Chevron />}
-                iconPlacement="right"
-              >
-                {link.text}
-              </LinkWithIcon>
-            )
-          }
-        </Box>
-      </Box>
+            )}
 
-      <Spacer mb={3} />
+            <svg
+              width={innerSize}
+              height={innerSize}
+              aria-hidden="true"
+              css={css({
+                minWidth: innerSize,
+                '&:hover, &:focus-within': {
+                  'path:not(:hover):not(:focus-visible)': {
+                    opacity: 0.4,
+                  },
+                },
+              })}
+              pointerEvents="none"
+            >
+              <Group top={innerSize / 2} left={innerSize / 2}>
+                <Pie
+                  data={mappedDataWithValues}
+                  outerRadius={radius}
+                  innerRadius={radius - donutWidth}
+                  pieValue={(x) => x.__value}
+                  // Sort by the order of the config
+                  pieSortValues={(d, i) => i}
+                  padAngle={padAngle}
+                >
+                  {(pie) => {
+                    return pie.arcs.map((arc, index) => {
+                      const arcPath = pie.path(arc);
+                      const side =
+                        (arc.startAngle + arc.endAngle) / 2 > Math.PI
+                          ? 'left'
+                          : 'right';
+                      const alternativeSide = side === 'left' ? 'end' : 'start';
+
+                      return (
+                        <WithTooltip
+                          content={
+                            <Markdown
+                              content={replaceVariablesInText(
+                                dataConfig[index].tooltipLabel,
+                                data as any,
+                                formatters
+                              )}
+                            />
+                          }
+                          key={`arc-${index}`}
+                          placement={side}
+                          popperOptions={{
+                            modifiers: [
+                              {
+                                name: 'flip',
+                                options: {
+                                  fallbackPlacements: [
+                                    `top-${alternativeSide}`,
+                                    `bottom-${alternativeSide}`,
+                                  ],
+                                },
+                              },
+                            ],
+                          }}
+                          arrow={false}
+                        >
+                          <path
+                            d={arcPath as string}
+                            fill={arc.data.color}
+                            tabIndex={0}
+                            pointerEvents="all"
+                            // Prevents paths from keeping 0.4 opacity when clicked
+                            onMouseLeave={(e) =>
+                              (e.target as SVGPathElement).blur()
+                            }
+                          />
+                        </WithTooltip>
+                      );
+                    });
+                  }}
+                </Pie>
+              </Group>
+            </svg>
+          </Box>
+
+          <Box spacing={2}>
+            {title && (
+              <InlineText
+                fontWeight="bold"
+                css={css({
+                  display: 'block',
+                })}
+              >
+                {title}
+              </InlineText>
+            )}
+            <Box
+              spacing={2}
+              as="ol"
+              width={{ _: '100%', md: 'auto' }}
+              css={css({
+                listStyleType: 'none',
+              })}
+            >
+              {dataConfig.map((item, index) => (
+                <Box
+                  as="li"
+                  key={`${item.color}-${index}`}
+                  display="flex"
+                  alignItems="center"
+                  spacingHorizontal={2}
+                >
+                  <Box
+                    width={12}
+                    height={12}
+                    backgroundColor={item.color}
+                    borderRadius="50%"
+                  />
+                  <Markdown
+                    content={replaceVariablesInText(
+                      item.label,
+                      data as any,
+                      formatters
+                    )}
+                  />
+                </Box>
+              ))}
+            </Box>
+            {
+              /**
+               * Check also for empty link text, so that clearing it in Lokalize
+               * actually removes the link altogether
+               */
+              link && !isEmpty(link.text) && (
+                <LinkWithIcon
+                  href={link.href}
+                  icon={<Chevron />}
+                  iconPlacement="right"
+                >
+                  {link.text}
+                </LinkWithIcon>
+              )
+            }
+          </Box>
+        </Box>
+
+        <Spacer mb={3} />
+      </ErrorBoundary>
     </Box>
   );
 }

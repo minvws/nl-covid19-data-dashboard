@@ -49,8 +49,8 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   useEffect(() => setIsOpen(!!options.isOpen), [options.isOpen]);
 
   const toggle = useCallback(
-    (isOpen?: true | false | unknown) =>
-      setIsOpen((x) => (isBoolean(isOpen) ? isOpen : !x)),
+    (value?: true | false | unknown) =>
+      setIsOpen((x) => (isBoolean(value) ? value : !x)),
     []
   );
 

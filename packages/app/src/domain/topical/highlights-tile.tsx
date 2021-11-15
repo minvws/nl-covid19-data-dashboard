@@ -6,7 +6,7 @@ import { Block, ImageBlock } from '~/types/cms';
 
 export interface WeeklyHighlightProps {
   title: string;
-  slug: string;
+  slug: { current: string };
   summary: Block;
   category: string;
   cover: ImageBlock;
@@ -40,7 +40,7 @@ export function HighlightsTile({
         {showWeeklyHighlight && weeklyHighlight && (
           <ContentTeaser
             title={weeklyHighlight.title}
-            slug={weeklyHighlight.slug}
+            slug={weeklyHighlight.slug.current}
             cover={weeklyHighlight.cover}
             publicationDate={weeklyHighlight.publicationDate}
             isWeeklyHighlight
