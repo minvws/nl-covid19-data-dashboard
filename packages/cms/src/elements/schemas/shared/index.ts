@@ -84,6 +84,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_administered_total: 'Totaal gezette prikken',
   nursing_home: 'Verpleeghuizen',
   disability_care: 'Gehandicaptenzorg',
+  deceased_rivm: 'Sterfte (RIVM)',
 };
 
 function getTitleForMetricName(metricName: MetricName) {
