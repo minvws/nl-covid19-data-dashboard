@@ -32,6 +32,9 @@
         "infected_percentage_moving_average": {
           "type": ["number", "null"]
         },
+        "infected_percentage_separate": {
+          "type": "number"
+        },
         "tested_total": {
           "type": "integer"
         },
