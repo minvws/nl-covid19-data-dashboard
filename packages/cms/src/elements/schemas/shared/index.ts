@@ -1,3 +1,12 @@
+import {
+  DataScopeKey,
+  Gm,
+  In,
+  MetricKeys,
+  Nl,
+  ScopedData,
+  Vr,
+} from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
@@ -37,15 +46,15 @@ export const commonPreview = {
     metricName: 'metricName',
     metricProperty: 'metricProperty',
   },
-  prepare(x: {
-    scope: string;
+  prepare<K extends DataScopeKey>(x: {
+    scope: K;
     type: string;
-    metricName: string;
+    metricName: MetricKeys<ScopedData[K]>;
     metricProperty?: string;
   }) {
     return {
       title: [
-        getTitleForMetricName(x.metricName),
+        getTitleForMetricName(x.metricName as MetricKeys<In & Nl & Vr & Gm>),
         getTitleForElementType(x.type),
         x.metricProperty,
       ]
@@ -63,14 +72,16 @@ export const commonPreview = {
  * user-friendly. We could take this further by also mapping type names like
  * choropleth and maybe even introducing a specific icon for each element type.
  */
-const titleByMetricName: Record<string, string | undefined> = {
+const titleByMetricName: Partial<
+  Record<MetricKeys<In & Nl & Vr & Gm>, string>
+> = {
   tested_overall: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
   intensive_care_nice: 'Intensive care-opnames',
 };
 
-function getTitleForMetricName(metricName: string) {
+function getTitleForMetricName(metricName: MetricKeys<In & Nl & Vr & Gm>) {
   return titleByMetricName[metricName] || metricName;
 }
 
