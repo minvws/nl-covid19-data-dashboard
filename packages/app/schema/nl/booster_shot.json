@@ -55,8 +55,8 @@
         "partially_or_fully_vaccinated_amount_of_people",
         "total_date_start_unix",
         "total_date_end_unix",
-        "received_last_seven_days",
-        "vaccinated_last_seven_days",
+        "received_booster_last_seven_days",
+        "total_shots_last_seven_days",
         "last_seven_days_date_start_unix",
         "last_seven_days_date_end_unix",
         "date_of_insertion_unix"
