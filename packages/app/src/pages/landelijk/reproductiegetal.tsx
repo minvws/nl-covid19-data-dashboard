@@ -12,6 +12,11 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
   getArticleParts,
   getPagePartsQuery,
 } from '~/queries/get-page-parts-query';
@@ -30,16 +35,24 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('reproduction', 'difference.reproduction__index_average'),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('reproductionPage'))(context);
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('reproductionPage')},
+      "elements": ${getElementsQuery('nl', ['reproduction'], locale)}
+     }`;
+    })(context);
 
     return {
       content: {
         articles: getArticleParts(
-          content.pageParts,
+          content.parts.pageParts,
           'reproductionPageArticles'
         ),
+        elements: content.elements,
       },
     };
   }
@@ -108,7 +121,13 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          <ReproductionChartTile data={data.reproduction} />
+          <ReproductionChartTile
+            data={data.reproduction}
+            timelineEvents={getTimelineEvents(
+              content.elements.timeSeries,
+              'reproduction'
+            )}
+          />
         </TileList>
       </NlLayout>
     </Layout>

@@ -18,6 +18,11 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
   getArticleParts,
   getPagePartsQuery,
 } from '~/queries/get-page-parts-query';
@@ -44,13 +49,24 @@ export const getStaticProps = createGetStaticProps(
     'nursing_home'
   ),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('nursingHomePage'))(context);
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('nursingHomePage')},
+      "elements": ${getElementsQuery('vr', ['nursing_home'], locale)}
+     }`;
+    })(context);
 
     return {
       content: {
-        articles: getArticleParts(content.pageParts, 'nursingHomePageArticles'),
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'nursingHomePageArticles'
+        ),
+        elements: content.elements,
       },
     };
   }
@@ -184,6 +200,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'nursing_home',
+                    'newly_infected_people'
+                  ),
                 }}
               />
             )}
@@ -347,6 +368,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'nursing_home',
+                    'deceased_daily'
+                  ),
                 }}
               />
             )}

@@ -21,6 +21,11 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
   getArticleParts,
   getPagePartsQuery,
 } from '~/queries/get-page-parts-query';
@@ -49,16 +54,24 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ disability_care }) => ({ disability_care }),
   }),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('disabilityCarePage'))(context);
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('disabilityCarePage')},
+      "elements": ${getElementsQuery('nl', ['disability_care'], locale)}
+     }`;
+    })(context);
 
     return {
       content: {
         articles: getArticleParts(
-          content.pageParts,
+          content.parts.pageParts,
           'disabilityCarePageArticles'
         ),
+        elements: content.elements,
       },
     };
   }
@@ -167,6 +180,11 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'disability_care',
+                    'newly_infected_people'
+                  ),
                 }}
               />
             )}
