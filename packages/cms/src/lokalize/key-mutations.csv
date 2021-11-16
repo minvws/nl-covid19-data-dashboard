@@ -67,6 +67,15 @@ timestamp,action,key,document_id,move_to
 2021-11-09T14:51:54.576Z,add,vaccinations_incidence_age_demographic_chart.chart_text.right_tooltip,41m6S8Y6xAJZkZywfhj0HE,__
 2021-11-09T14:51:55.637Z,add,vaccinations_incidence_age_demographic_chart.description,L0R7Ua3YIau8O4TDxe1tlH,__
 2021-11-09T14:51:56.655Z,add,vaccinations_incidence_age_demographic_chart.title,41m6S8Y6xAJZkZywfhj0Oe,__
+2021-11-15T11:05:20.581Z,add,choropleth_tooltip.gm.admissions_on_date_of_admission.content,L0R7Ua3YIau8O4TDyK4SiR,__
+2021-11-15T11:05:21.604Z,add,choropleth_tooltip.gm.admissions_on_date_of_admission.subject,z1CGDOfh23CnZYQwEqMOv3,__
+2021-11-15T11:05:23.143Z,add,choropleth_tooltip.vr.admissions_on_date_of_admission.content,L0R7Ua3YIau8O4TDyK4TcV,__
+2021-11-15T11:05:23.979Z,add,choropleth_tooltip.vr.admissions_on_date_of_admission.subject,41m6S8Y6xAJZkZywfnhzTQ,__
+2021-11-15T11:05:23.979Z,delete,choropleth_tooltip.gm.admissions_on_date_of_reporting.content,q6JNEIlv8e5jJVtFa0Wo1M,__
+2021-11-15T11:05:23.980Z,delete,choropleth_tooltip.gm.admissions_on_date_of_reporting.subject,jF33EuwumlGuwav2FD4IFA,__
+2021-11-15T11:05:23.980Z,delete,choropleth_tooltip.gm.admissions_on_date_of_reporting.subject,m5cl7ciD7CmTUWm5dH6SaI,__
+2021-11-15T11:05:23.980Z,delete,choropleth_tooltip.vr.admissions_on_date_of_reporting.content,WcslWj37E82J6PAznCRxri,__
+2021-11-15T11:05:23.980Z,delete,choropleth_tooltip.vr.admissions_on_date_of_reporting.subject,q6JNEIlv8e5jJVtFa0Wpa8,__
 2021-11-11T17:09:53.885Z,add,ic_opnames_per_dag.vaccination_status_chart.tooltip_labels.fully_vaccinated,z1CGDOfh23CnZYQwEjkuLl,__
 2021-11-11T17:09:54.909Z,add,ic_opnames_per_dag.vaccination_status_chart.tooltip_labels.has_one_shot_or_not_vaccinated,L0R7Ua3YIau8O4TDxwmFqZ,__
 2021-11-11T17:09:55.921Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.hospital.tooltip_labels.fully_vaccinated,z1CGDOfh23CnZYQwEjkuhX,__

@@ -165,7 +165,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             pageLinks={content.links}
             articles={content.articles}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
@@ -207,7 +206,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               )}
             </KpiTile>
           </TwoKpiSection>
-
           {isVaccinationIncidenceChartShown.isEnabled && (
             <ChartTile
               title={
@@ -236,7 +234,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
-
           {vaccinationStatusFeature.isEnabled && (
             <ChartTile
               title={text.vaccination_status_chart.title}
@@ -293,7 +290,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
-
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
@@ -345,7 +341,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
           <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
@@ -392,8 +387,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'gm'
-                  ? thresholds.gm.admissions_on_date_of_reporting
-                  : thresholds.gm.admissions_on_date_of_reporting,
+                  ? thresholds.gm.admissions_on_date_of_admission
+                  : thresholds.gm.admissions_on_date_of_admission,
               title: text.chloropleth_legenda.titel,
             }}
             metadata={{
@@ -410,7 +405,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 data={choropleth.gm.hospital_nice}
                 dataConfig={{
                   metricName: 'hospital_nice',
-                  metricProperty: 'admissions_on_date_of_reporting',
+                  metricProperty: 'admissions_on_date_of_admission',
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.ziekenhuisopnames,
@@ -429,7 +424,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 data={choropleth.vr.hospital_nice}
                 dataConfig={{
                   metricName: 'hospital_nice',
-                  metricProperty: 'admissions_on_date_of_reporting',
+                  metricProperty: 'admissions_on_date_of_admission',
                 }}
                 dataOptions={{
                   getLink: reverseRouter.vr.ziekenhuisopnames,
