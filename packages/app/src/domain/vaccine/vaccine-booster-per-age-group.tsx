@@ -115,6 +115,11 @@ export function VaccineBoosterPerAgeGroup({
   );
 }
 
+interface AgeGroupProps {
+  range: string;
+  birthyear_range: string;
+}
+
 export function AgeGroup({ range, birthyear_range }: AgeGroupProps) {
   return (
     <Box display="flex" flexDirection="column">
@@ -157,9 +162,3 @@ const Cell = styled.td(
     verticalAlign: 'middle',
   })
 );
-
-interface AgeGroupProps {
-  range: string;
-  ageGroupTotal?: number;
-  birthyear_range: string;
-}
