@@ -1,3 +1,9 @@
+import {
+  DataScopeKey,
+  MetricKeys,
+  MetricName,
+  ScopedData,
+} from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
@@ -37,15 +43,15 @@ export const commonPreview = {
     metricName: 'metricName',
     metricProperty: 'metricProperty',
   },
-  prepare(x: {
-    scope: string;
+  prepare<K extends DataScopeKey>(x: {
+    scope: K;
     type: string;
-    metricName: string;
+    metricName: MetricKeys<ScopedData[K]>;
     metricProperty?: string;
   }) {
     return {
       title: [
-        getTitleForMetricName(x.metricName),
+        getTitleForMetricName(x.metricName as MetricName),
         getTitleForElementType(x.type),
         x.metricProperty,
       ]
@@ -63,14 +69,29 @@ export const commonPreview = {
  * user-friendly. We could take this further by also mapping type names like
  * choropleth and maybe even introducing a specific icon for each element type.
  */
-const titleByMetricName: Record<string, string | undefined> = {
+const titleByMetricName: Partial<Record<MetricName, string>> = {
   tested_overall: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
-  intensive_care_nice: 'Intensive care-opnames',
+  intensive_care_nice: 'IC-opnames',
+  situations: 'Besmettingssituaties',
+  reproduction: 'Reproduciegetal',
+  vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
+  vaccine_administered: 'Gezette prikken',
+  vaccine_coverage: 'Vaccinatiegraad',
+  vaccine_coverage_per_age_group_estimated:
+    'Vaccinatiegraad berekend (per leeftijd)',
+  vaccine_administered_total: 'Totaal gezette prikken',
+  nursing_home: 'Verpleeghuizen',
+  disability_care: 'Gehandicaptenzorg',
+  deceased_rivm: 'Sterfte (RIVM)',
+  intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
+  hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
+  tested_per_age_group: 'Positief getest (per leeftijd)',
+  elderly_at_home: '70-plussers',
 };
 
-function getTitleForMetricName(metricName: string) {
+function getTitleForMetricName(metricName: MetricName) {
   return titleByMetricName[metricName] || metricName;
 }
 

@@ -71,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
        "parts": ${getPagePartsQuery('positiveTestsPage')},
        "elements": ${getElementsQuery(
          'nl',
-         ['tested_overall', 'tested_ggd'],
+         ['tested_overall', 'tested_ggd', 'tested_per_age_group'],
          locale
        )}
       }`;
@@ -316,6 +316,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.tested_per_age_group.values}
                 timeframe={timeframe}
+                timelineEvents={getTimelineEvents(
+                  content.elements.timeSeries,
+                  'tested_per_age_group'
+                )}
               />
             )}
           </ChartTile>
