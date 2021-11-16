@@ -94,6 +94,7 @@ export interface GmTestedOverall {
 export interface GmTestedOverallValue {
   date_unix: number;
   infected: number;
+  infected_moving_average: number | null;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
@@ -1074,6 +1075,7 @@ export interface VrTestedOverall {
 export interface VrTestedOverallValue {
   date_unix: number;
   infected: number;
+  infected_moving_average: number | null;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
