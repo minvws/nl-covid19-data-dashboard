@@ -368,6 +368,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'nursing_home',
+                    'deceased_daily'
+                  ),
                 }}
               />
             )}
