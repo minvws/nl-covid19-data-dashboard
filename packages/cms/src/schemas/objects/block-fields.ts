@@ -83,7 +83,7 @@ export const blockFields = [
     title: 'Inklapbaar blok',
   },
   {
-    title: 'Dashboard Grafiek',
+    title: 'Dashboard Lijn Grafiek',
     name: 'dashboardChart',
     type: 'object',
     fieldsets: [
@@ -117,6 +117,44 @@ export const blockFields = [
         name: 'config',
         type: 'reference',
         to: [{ type: 'chartConfiguration' }],
+      },
+    ],
+  },
+  {
+    title: 'Dashboard LeeftijdsGrafiek',
+    name: 'dashboardAgeDemographicChart',
+    type: 'object',
+    fieldsets: [
+      {
+        title: 'Datum selectie',
+        name: 'datespan',
+        options: {
+          collapsible: true,
+          collapsed: true,
+        },
+      },
+    ],
+    fields: [
+      {
+        title: 'Begin datum',
+        name: 'startDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
+      {
+        title: 'Eind datum',
+        name: 'endDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
+      {
+        name: 'title',
+        type: 'string',
+      },
+      {
+        name: 'config',
+        type: 'reference',
+        to: [{ type: 'ageDemographicChartConfiguration' }],
       },
     ],
   },

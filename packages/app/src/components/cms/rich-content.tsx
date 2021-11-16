@@ -1,4 +1,5 @@
 import {
+  AgeDemographicConfiguration,
   ChartConfiguration,
   DataScope,
   DataScopeKey,
@@ -39,24 +40,27 @@ interface RichContentProps {
 }
 
 interface ChartConfigNode {
-  chart: {
-    _type: string;
-  };
+  title: string;
+  startDate?: string;
+  endDate?: string;
+  config: ChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+}
+
+interface AgeDemographicConfigNode {
+  title: string;
+  startDate?: string;
+  endDate?: string;
+  config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>>;
 }
 
 interface KpiConfigNode {
-  kpi: {
-    _type: string;
-  };
-}
-
-interface KPI {
   endDate?: string;
   config: KpiConfiguration;
 }
+
 interface KpisConfigNode {
   _type: string;
-  kpis: KPI[];
+  kpis: KpiConfigNode[];
 }
 
 export function RichContent({
@@ -125,12 +129,7 @@ export function RichContent({
         );
       },
       dashboardChart: (props: { node: ChartConfigNode }) => {
-        const node = props.node as unknown as {
-          title: string;
-          startDate?: string;
-          endDate?: string;
-          config: ChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
-        };
+        const node = props.node;
 
         return (
           <Box
@@ -151,6 +150,26 @@ export function RichContent({
               startDate={node.startDate}
               endDate={node.endDate}
             />
+          </Box>
+        );
+      },
+      dashboardAgeDemographicChart: (props: { node: any }) => {
+        const node = props.node;
+        return (
+          <Box
+            css={css({
+              maxWidth: 'infoWidth',
+              width: '100%',
+              px: asResponsiveArray({ _: 4, md: undefined }),
+              pb: 4,
+            })}
+          >
+            {' '}
+            <Box pb={4}>
+              <Heading level={3} as="h4">
+                {node.title}
+              </Heading>
+            </Box>
           </Box>
         );
       },

@@ -22,6 +22,23 @@ export type TimespanAnnotationConfiguration = {
   cutValuesForMetricProperties?: string[];
 };
 
+export type AgeDemographicConfiguration<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+> = {
+  area: S;
+  metricName: M;
+  accessibilityKey: string;
+  code?: string;
+  sourceKey: string;
+  text: string;
+  leftMetricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;
+  rightMetricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;
+  leftColor: string;
+  rightColor: string;
+  maxDisplayValue?: number;
+};
+
 export type ChartConfiguration<
   S extends DataScopeKey,
   M extends MetricKeys<ScopedData[S]>
