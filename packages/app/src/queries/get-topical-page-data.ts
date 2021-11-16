@@ -1,3 +1,4 @@
+import { MetricName } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { WeeklyHighlightProps } from '~/domain/topical/highlights-tile';
@@ -16,7 +17,7 @@ import {
 
 export function getTopicalPageData(
   code: 'nl' | 'vr' | 'gm',
-  elementNames: string[]
+  elementNames: MetricName[]
 ) {
   return async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
