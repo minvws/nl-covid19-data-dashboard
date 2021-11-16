@@ -88,6 +88,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
   tested_per_age_group: 'Positief getest (per leeftijd)',
+  elderly_at_home: '70-plussers',
 };
 
 function getTitleForMetricName(metricName: MetricName) {
