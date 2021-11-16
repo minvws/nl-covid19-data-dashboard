@@ -92,8 +92,11 @@ export function useLegendItems<T extends TimestampedValue>(
      * one) to determine if a legend is required. We only have to render a
      * legend when there's at least two items.
      */
-    const isLegendRequired =
-      config.filter(isVisible).length + (timespanAnnotations?.length ?? 0) > 1;
+    const totalLegendItems =
+      config.filter(isVisible).length +
+      (timespanAnnotations?.length ?? 0) +
+      (timelineEvents?.length ?? 0);
+    const isLegendRequired = totalLegendItems > 1;
 
     return isLegendRequired ? items : undefined;
   }, [config, domain, intl, timelineEvents, timespanAnnotations]);
