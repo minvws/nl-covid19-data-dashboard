@@ -30,6 +30,7 @@ import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { Heading } from '../typography';
 import { ContentImage } from './content-image';
+import { InlineAgeDemographic } from './inline-age-demographic';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 
@@ -153,8 +154,11 @@ export function RichContent({
           </Box>
         );
       },
-      dashboardAgeDemographicChart: (props: { node: any }) => {
+      dashboardAgeDemographicChart: (props: {
+        node: AgeDemographicConfigNode;
+      }) => {
         const node = props.node;
+
         return (
           <Box
             css={css({
@@ -164,21 +168,27 @@ export function RichContent({
               pb: 4,
             })}
           >
-            {' '}
             <Box pb={4}>
-              <Heading level={3} as="h4">
-                {node.title}
-              </Heading>
+              <Box pb={4}>
+                <Heading level={3} as="h4">
+                  {node.title}
+                </Heading>
+              </Box>
+              <InlineAgeDemographic
+                configuration={node.config}
+                startDate={node.startDate}
+                endDate={node.endDate}
+              />
             </Box>
           </Box>
         );
       },
       dashboardKpi: (props: { node: KpiConfigNode }) => {
-        const kpi = props.node as unknown as KPI;
+        const node = props.node;
 
         return (
           <ContentWrapper>
-            <InlineKpi configuration={kpi.config} date={kpi.endDate} />
+            <InlineKpi configuration={node.config} date={node.endDate} />
           </ContentWrapper>
         );
       },

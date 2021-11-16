@@ -25,6 +25,7 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
 import { Box } from '../base';
 import { Metadata } from '../metadata';
+import { getDataUrl } from './logic/get-data-url';
 
 interface InlineTimeSeriesChartsProps<
   S extends DataScopeKey,
@@ -33,30 +34,6 @@ interface InlineTimeSeriesChartsProps<
   startDate?: string;
   endDate?: string;
   configuration: ChartConfiguration<S, M>;
-}
-
-function getDataUrl<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
->(
-  startDate: string | undefined,
-  endDate: string | undefined,
-  configuration: ChartConfiguration<S, M>
-) {
-  const { code, area, metricName } = configuration;
-  const qParams = [];
-
-  if (isDefined(startDate)) {
-    qParams.push(`start=${startDate}`);
-  }
-
-  if (isDefined(endDate)) {
-    qParams.push(`end=${endDate}`);
-  }
-
-  const suffix = qParams.length ? `?${qParams.join('&')}` : '';
-
-  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
 }
 
 export function InlineTimeSeriesCharts<
