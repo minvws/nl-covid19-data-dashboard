@@ -19,7 +19,7 @@
       "type": "object",
       "required": [
         "age_group_range",
-        "received_booster_amount",
+        "received_booster_total",
         "received_booster_percentage",
         "date_start_unix",
         "date_end_unix",
@@ -40,7 +40,7 @@
             "81+"
           ]
         },
-        "received_booster_amount": {
+        "received_booster_total": {
           "type": "number"
         },
         "received_booster_percentage": {

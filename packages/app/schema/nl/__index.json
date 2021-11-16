@@ -4,7 +4,7 @@
   "title": "nl",
   "required": [
     "behavior",
-    "nl_booster_shot_per_age_group",
+    "booster_shot_per_age_group",
     "code",
     "corona_melder_app_download",
     "corona_melder_app_warning",

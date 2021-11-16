@@ -262,7 +262,7 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
-  booster_shot_per_age_group?: NlBoosterShotPerAgeGroup;
+  booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -359,7 +359,7 @@ export interface NlBoosterShotPerAgeGroup {
 }
 export interface NlBoosterShotPerAgeGroupValue {
   age_group_range: "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
-  received_booster_amount: number;
+  received_booster_total: number;
   received_booster_percentage: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
