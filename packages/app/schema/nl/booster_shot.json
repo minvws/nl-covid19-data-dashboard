@@ -51,8 +51,8 @@
         }
       },
       "required": [
-        "partially_or_fully_vaccinated_received_percentage",
-        "partially_or_fully_vaccinated_amount_of_people",
+        "partially_or_fully_vaccinated_total_received_percentage",
+        "partially_or_fully_vaccinated_total_amount_of_people",
         "total_date_start_unix",
         "total_date_end_unix",
         "received_booster_last_seven_days",
