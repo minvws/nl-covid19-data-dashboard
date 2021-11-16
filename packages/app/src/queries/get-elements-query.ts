@@ -1,9 +1,4 @@
-import {
-  DataScopeKey,
-  MetricKeys,
-  MetricName,
-  ScopedData,
-} from '@corona-dashboard/common';
+import { DataScopeKey, MetricName } from '@corona-dashboard/common';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 function formatStringArray(array: string[]) {
@@ -12,7 +7,7 @@ function formatStringArray(array: string[]) {
 
 export function getElementsQuery<K extends DataScopeKey>(
   scope: K,
-  metricNames: MetricKeys<ScopedData[K]>[],
+  metricNames: MetricName[],
   locale: string
 ) {
   const query = `// groq

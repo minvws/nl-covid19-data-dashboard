@@ -217,7 +217,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     valueIsPercentage: true,
                     warning: getWarning(
                       content.elements.warning,
-                      'vaccinatiegraad'
+                      'vaccine_coverage_per_age_group'
                     ),
                     percentageBar: {
                       value:
