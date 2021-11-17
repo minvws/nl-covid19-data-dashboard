@@ -5,6 +5,7 @@
   "required": [
     "behavior",
     "booster_shot",
+    "booster_shot_per_age_group",
     "code",
     "corona_melder_app_download",
     "corona_melder_app_warning",
@@ -74,6 +75,9 @@
     },
     "booster_shot": {
       "$ref": "booster_shot.json"
+    },
+    "booster_shot_per_age_group": {
+      "$ref": "booster_shot_per_age_group.json"
     },
     "doctor": {
       "$ref": "doctor.json"

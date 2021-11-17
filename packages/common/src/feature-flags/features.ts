@@ -166,8 +166,31 @@ export const features: Feature[] = [
     metricName: 'hospital_vaccine_incidence_per_age_group',
   },
   {
+    name: 'nlVaccinationBoosterShotsPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
+  },
+  {
     name: 'nlVaccinationsBoosterShotsKpi',
     isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot',
+  },
+
+  /**
+   * These flags are only here that the schemas will not be required when validating.
+   * But the features can be seen once toggled on with dummy data and have a seperate flag.
+   */
+  {
+    name: 'nlVaccinationBoosterShotsPerAgeGroupSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsBoosterShotsKpiSchemaDisable',
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot',
   },
