@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_tested_ggd",
+  "title": "nl_tested_ggd_archived",
   "type": "object",
   "properties": {
     "values": {
@@ -8,34 +8,19 @@
       "items": {
         "$ref": "#/definitions/value"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["values"],
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_tested_ggd_value",
+      "title": "nl_tested_ggd_archived_value",
       "type": "object",
       "properties": {
-        "infected": {
-          "type": "integer"
-        },
-        "infected_moving_average": {
-          "type": ["number", "null"]
-        },
         "infected_percentage": {
           "type": "number"
         },
         "infected_percentage_moving_average": {
-          "type": ["number", "null"]
-        },
-        "tested_total": {
-          "type": "integer"
-        },
-        "tested_total_moving_average": {
           "type": ["number", "null"]
         },
         "date_unix": {
@@ -43,22 +28,13 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "infected",
-        "infected_moving_average",
         "infected_percentage",
-        "tested_total",
-        "tested_total_moving_average",
         "infected_percentage_moving_average",
         "date_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }
