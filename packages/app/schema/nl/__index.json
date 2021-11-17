@@ -4,6 +4,7 @@
   "title": "nl",
   "required": [
     "behavior",
+    "booster_shot",
     "booster_shot_per_age_group",
     "code",
     "corona_melder_app_download",
@@ -71,6 +72,9 @@
     },
     "named_difference": {
       "$ref": "__named_difference.json"
+    },
+    "booster_shot": {
+      "$ref": "booster_shot.json"
     },
     "booster_shot_per_age_group": {
       "$ref": "booster_shot_per_age_group.json"

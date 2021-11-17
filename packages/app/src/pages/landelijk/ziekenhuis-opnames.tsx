@@ -87,7 +87,11 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('hospitalPage')},
-        "elements": ${getElementsQuery('nl', ['hospital_nice'], context.locale)}
+        "elements": ${getElementsQuery(
+          'nl',
+          ['hospital_nice', 'hospital_nice_per_age_group'],
+          context.locale
+        )}
       }`;
     })(context);
 
@@ -452,6 +456,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.hospital_nice_per_age_group.values}
                 timeframe={timeframe}
+                timelineEvents={getTimelineEvents(
+                  content.elements.timeSeries,
+                  'hospital_nice_per_age_group'
+                )}
               />
             )}
           </ChartTile>

@@ -16,6 +16,11 @@ import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
   getArticleParts,
   getPagePartsQuery,
 } from '~/queries/get-page-parts-query';
@@ -40,16 +45,24 @@ export const getStaticProps = withFeatureNotFoundPage(
     getLastGeneratedDate,
     selectVrData('situations'),
     async (context: GetStaticPropsContext) => {
-      const { content } = await createGetContent<
-        PagePartQueryResult<ArticleParts>
-      >(() => getPagePartsQuery('situationsPage'))(context);
+      const { content } = await createGetContent<{
+        parts: PagePartQueryResult<ArticleParts>;
+        elements: ElementsQueryResult;
+      }>((context) => {
+        const { locale } = context;
+        return `{
+         "parts": ${getPagePartsQuery('situationsPage')},
+         "elements": ${getElementsQuery('vr', ['situations'], locale)}
+        }`;
+      })(context);
 
       return {
         content: {
           articles: getArticleParts(
-            content.pageParts,
+            content.parts.pageParts,
             'situationsPageArticles'
           ),
+          elements: content.elements,
         },
       };
     }
@@ -171,7 +184,14 @@ export default function BrononderzoekPage(
               description={text.situaties_over_tijd_grafiek.omschrijving}
               metadata={{ source: text.bronnen.rivm }}
             >
-              <SituationsOverTimeChart timeframe={'all'} values={values} />
+              <SituationsOverTimeChart
+                timeframe={'all'}
+                values={values}
+                timelineEvents={getTimelineEvents(
+                  content.elements.timeSeries,
+                  'situations'
+                )}
+              />
             </ChartTile>
           )}
         </TileList>

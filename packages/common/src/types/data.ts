@@ -263,6 +263,7 @@ export interface Nl {
   difference: NlDifference;
   named_difference: NlNamedDifference;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
+  booster_shot: NlBoosterShot;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -365,6 +366,21 @@ export interface NlBoosterShotPerAgeGroupValue {
   date_start_unix: number;
   date_end_unix: number;
   birthyear_range: string;
+}
+export interface NlBoosterShot {
+  values: NlBoosterShotValue[];
+  last_value: NlBoosterShotValue;
+}
+export interface NlBoosterShotValue {
+  partially_or_fully_vaccinated_total_received_percentage: number;
+  partially_or_fully_vaccinated_total_amount_of_people: number;
+  total_date_start_unix: number;
+  total_date_end_unix: number;
+  received_booster_last_seven_days: number;
+  total_shots_last_seven_days: number;
+  last_seven_days_date_start_unix: number;
+  last_seven_days_date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];

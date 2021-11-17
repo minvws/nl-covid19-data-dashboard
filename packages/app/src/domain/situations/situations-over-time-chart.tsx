@@ -8,6 +8,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { useIntl } from '~/intl';
@@ -17,11 +18,13 @@ import { SituationKey, useSituations } from './logic/situations';
 interface SituationsTimeSeriesChartProps {
   timeframe: TimeframeOption;
   values: VrSituationsValue[];
+  timelineEvents?: TimelineEventConfig[];
 }
 
 export function SituationsOverTimeChart({
   values,
   timeframe,
+  timelineEvents,
 }: SituationsTimeSeriesChartProps) {
   const { siteText } = useIntl();
   const situations = useSituations();
@@ -71,7 +74,11 @@ export function SituationsOverTimeChart({
         accessibility={{ key: 'situations_over_time_chart' }}
         values={values}
         timeframe={timeframe}
-        dataOptions={{ timespanAnnotations, isPercentage: true }}
+        dataOptions={{
+          timespanAnnotations,
+          isPercentage: true,
+          timelineEvents,
+        }}
         seriesConfig={chartConfig}
         disableLegend
       />

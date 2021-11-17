@@ -14,6 +14,11 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
   getArticleParts,
   getPagePartsQuery,
 } from '~/queries/get-page-parts-query';
@@ -38,16 +43,24 @@ export const getStaticProps = createGetStaticProps(
     'difference.elderly_at_home__positive_tested_daily'
   ),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('elderlyAtHomePage'))(context);
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('elderlyAtHomePage')},
+      "elements": ${getElementsQuery('vr', ['elderly_at_home'], locale)}
+     }`;
+    })(context);
 
     return {
       content: {
         articles: getArticleParts(
-          content.pageParts,
+          content.parts.pageParts,
           'elderlyAtHomePageArticles'
         ),
+        elements: content.elements,
       },
     };
   }
@@ -200,6 +213,11 @@ const ElderlyAtHomeRegionalPage = (
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'elderly_at_home',
+                    'positive_tested_daily'
+                  ),
                 }}
               />
             )}
@@ -290,6 +308,11 @@ const ElderlyAtHomeRegionalPage = (
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'elderly_at_home',
+                    'deceased_daily'
+                  ),
                 }}
               />
             )}

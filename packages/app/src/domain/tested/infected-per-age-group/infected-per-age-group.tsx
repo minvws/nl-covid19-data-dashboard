@@ -8,6 +8,7 @@ import {
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
@@ -25,12 +26,14 @@ interface InfectedPerAgeGroup {
   accessibility: AccessibilityDefinition;
   values: NlTestedPerAgeGroupValue[];
   timeframe: 'all' | '5weeks';
+  timelineEvents?: TimelineEventConfig[];
 }
 
 export function InfectedPerAgeGroup({
   values,
   timeframe,
   accessibility,
+  timelineEvents,
 }: InfectedPerAgeGroup) {
   const { siteText } = useIntl();
   const { list, toggle, clear } = useList<string>();
@@ -120,6 +123,7 @@ export function InfectedPerAgeGroup({
               shortLabel: text.tooltip_labels.inaccurate,
             },
           ],
+          timelineEvents,
         }}
       />
       <Legend items={staticLegendItems} />
