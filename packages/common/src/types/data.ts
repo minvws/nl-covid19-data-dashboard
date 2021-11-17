@@ -262,6 +262,8 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
+  booster_shot: NlBoosterShot;
+  booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -352,6 +354,33 @@ export interface NamedDifferenceDecimal {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface NlBoosterShot {
+  values: NlBoosterShotValue[];
+  last_value: NlBoosterShotValue;
+}
+export interface NlBoosterShotValue {
+  partially_or_fully_vaccinated_total_received_percentage: number;
+  partially_or_fully_vaccinated_total_amount_of_people: number;
+  total_date_start_unix: number;
+  total_date_end_unix: number;
+  received_booster_last_seven_days: number;
+  total_shots_last_seven_days: number;
+  last_seven_days_date_start_unix: number;
+  last_seven_days_date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBoosterShotPerAgeGroup {
+  values: NlBoosterShotPerAgeGroupValue[];
+}
+export interface NlBoosterShotPerAgeGroupValue {
+  age_group_range: "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
+  received_booster_total: number;
+  received_booster_percentage: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  birthyear_range: string;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];

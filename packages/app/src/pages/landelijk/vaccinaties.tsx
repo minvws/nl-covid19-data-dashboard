@@ -1,7 +1,10 @@
 import {
   colors,
+  NlBoosterShotPerAgeGroupValue,
+  NlBoosterShotValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
   Arts,
@@ -27,6 +30,8 @@ import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selec
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
+import { VaccineBoosterKpiSection } from '~/domain/vaccine/vaccine-booster-kpi-section';
+import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -150,6 +155,42 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
+  {
+    age_group_range: '18-30',
+    received_booster_total: 1234,
+    received_booster_percentage: 99,
+    date_of_insertion_unix: 1637058313,
+    date_start_unix: 1637058313 - WEEK_IN_SECONDS,
+    date_end_unix: 1637058313,
+    birthyear_range: '-1204',
+  },
+  {
+    age_group_range: '81+',
+    received_booster_total: 43,
+    received_booster_percentage: 55,
+    date_of_insertion_unix: 1637058313,
+    date_start_unix: 1637058313 - WEEK_IN_SECONDS,
+    date_end_unix: 1637058313,
+    birthyear_range: '1204-',
+  },
+] as NlBoosterShotPerAgeGroupValue[];
+
+/**
+ * @TODO: Please remove once data becomes avaliable
+ */
+const DUMMY_DATA_BOOSTER_SHOTS_KPI = {
+  partially_or_fully_vaccinated_total_received_percentage: 99,
+  partially_or_fully_vaccinated_total_amount_of_people: 21944,
+  total_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
+  total_date_end_unix: 1637054676,
+  received_booster_last_seven_days: 1694,
+  total_shots_last_seven_days: 610876,
+  last_seven_days_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
+  last_seven_days_date_end_unix: 1637054676,
+  date_of_insertion_unix: 1637054676,
+} as NlBoosterShotValue;
+
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     content,
@@ -191,6 +232,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
   const vaccinationsBoosterInformationBlockFeature = useFeature(
     'nlVaccinationsBoosterInformationBlock'
+  );
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
+  const vaccinationsBoosterShotsKpiFeature = useFeature(
+    'nlVaccinationsBoosterShotsKpi'
   );
 
   const metadata = {
@@ -276,6 +323,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               numFractionDigits={1}
             />
           )}
+
           {vaccinationPerAgeGroupFeature.isEnabled && (
             <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
@@ -485,7 +533,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ),
             }}
           />
-
           {vaccineAdministeredGgdFeature.isEnabled &&
             vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
             vaccineAdministeredDoctorsFeature.isEnabled &&
@@ -515,6 +562,26 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 articles={content.boosterArticles}
               />
             </>
+          )}
+
+          {vaccinationsBoosterShotsKpiFeature.isEnabled && (
+            <VaccineBoosterKpiSection data={DUMMY_DATA_BOOSTER_SHOTS_KPI} />
+          )}
+
+          {vaccinationBoosterShotsPerAgeGroupFeature && (
+            <VaccineBoosterPerAgeGroup
+              data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+              ]}
+            />
           )}
 
           <Spacer pb={3} />
