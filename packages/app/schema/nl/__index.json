@@ -4,6 +4,7 @@
   "title": "nl",
   "required": [
     "behavior",
+    "booster_shot",
     "code",
     "corona_melder_app_download",
     "corona_melder_app_warning",
@@ -70,6 +71,9 @@
     },
     "named_difference": {
       "$ref": "__named_difference.json"
+    },
+    "booster_shot": {
+      "$ref": "booster_shot.json"
     },
     "doctor": {
       "$ref": "doctor.json"
