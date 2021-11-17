@@ -58,17 +58,29 @@ export function InlineDonutChart<
       data={data}
       dataConfig={dataConfig}
       icon={
-        <div
-          aria-hidden={true}
-          css={css({
-            background: `url(/icons/app/${configuration.icon}) no-repeat top left`,
-            width: '55px',
-            height: '55px',
-            position: 'absolute',
-            left: '14px',
-            backgroundPosition: '12px',
-          })}
-        />
+        <>
+          <div
+            aria-hidden={true}
+            css={css({
+              background: `url(/icons/app/${configuration.icon}) no-repeat top left`,
+              width: '55px',
+              height: '55px',
+              position: 'absolute',
+              left: '14px',
+              backgroundPosition: '12px',
+            })}
+          />
+          <div
+            css={css({
+              backgroundColor: 'white',
+              width: '55px',
+              height: '55px',
+              position: 'absolute',
+              left: '14px',
+              opacity: 0.7,
+            })}
+          />
+        </>
       }
     />
   );
