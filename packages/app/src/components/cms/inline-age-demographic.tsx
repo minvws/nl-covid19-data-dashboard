@@ -1,7 +1,5 @@
 import {
   AgeDemographicConfiguration,
-  Color,
-  colors,
   DataScope,
   DataScopeKey,
   MetricKeys,
@@ -15,6 +13,7 @@ import { AgeDemographic } from '../age-demographic';
 import { Box } from '../base';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
+import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
 
 interface InlineAgeDemographicProps {
@@ -57,20 +56,8 @@ export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
           text={text}
           leftMetricProperty={configuration.leftMetricProperty as any}
           rightMetricProperty={configuration.rightMetricProperty as any}
-          leftColor={
-            get(
-              colors,
-              ['data'].concat(configuration.leftColor.split('.')),
-              colors.data.primary
-            ) as Color
-          }
-          rightColor={
-            get(
-              colors,
-              ['data'].concat(configuration.rightColor.split('.')),
-              colors.data.primary
-            ) as Color
-          }
+          leftColor={getColor(configuration.leftColor)}
+          rightColor={getColor(configuration.rightColor)}
           formatValue={(n) => `${n}`}
         />
         <Metadata source={source} isTileFooter />

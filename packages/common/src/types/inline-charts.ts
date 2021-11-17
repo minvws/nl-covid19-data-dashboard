@@ -31,6 +31,23 @@ export type MetricConfiguration<
   code?: string;
 };
 
+export type DonutChartConfiguration<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+> = {
+  icon: string;
+  metricProperties: DonutMetricPropertyConfig<ScopedData[S], M>[];
+} & MetricConfiguration<S, M>;
+
+export type DonutMetricPropertyConfig<
+  S extends DataScope,
+  M extends MetricKeys<S>
+> = {
+  propertyName: MetricProperty<S, M>;
+  color: string;
+  labelKey: string;
+};
+
 export type AgeDemographicConfiguration<
   S extends DataScopeKey,
   M extends MetricKeys<ScopedData[S]>

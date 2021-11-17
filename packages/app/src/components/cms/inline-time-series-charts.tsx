@@ -1,6 +1,5 @@
 import {
   ChartConfiguration,
-  colors,
   DataScopeKey,
   MetricKeys,
   ScopedData,
@@ -25,6 +24,7 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
 import { Box } from '../base';
 import { Metadata } from '../metadata';
+import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
 
 interface InlineTimeSeriesChartsProps<
@@ -61,13 +61,7 @@ export function InlineTimeSeriesCharts<
         type: x.type,
         metricProperty: x.propertyName,
         label: get(siteText, x.labelKey.split('.'), null),
-        color: x.color?.length
-          ? get(
-              colors,
-              ['data'].concat(x.color.split('.')),
-              colors.data.primary
-            )
-          : colors.data.primary,
+        color: getColor(x.color),
         minimumRange: seriesMetricConfig?.minimumRange,
       };
       if (isDefined(x.curve) && x.curve.length) {

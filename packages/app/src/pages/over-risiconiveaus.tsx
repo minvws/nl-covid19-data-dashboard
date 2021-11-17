@@ -34,8 +34,6 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated, content } = props;
 
-  console.dir(content.content);
-
   content.content = mergeAdjacentKpiBlocks(content.content);
 
   return (

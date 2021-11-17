@@ -121,6 +121,44 @@ export const blockFields = [
     ],
   },
   {
+    title: 'Dashboard Donut Grafiek',
+    name: 'dashboardDonut',
+    type: 'object',
+    fieldsets: [
+      {
+        title: 'Datum selectie',
+        name: 'datespan',
+        options: {
+          collapsible: true,
+          collapsed: true,
+        },
+      },
+    ],
+    fields: [
+      {
+        title: 'Begin datum',
+        name: 'startDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
+      {
+        title: 'Eind datum',
+        name: 'endDate',
+        type: 'date',
+        fieldset: 'datespan',
+      },
+      {
+        name: 'title',
+        type: 'string',
+      },
+      {
+        name: 'config',
+        type: 'reference',
+        to: [{ type: 'donutChartConfiguration' }],
+      },
+    ],
+  },
+  {
     title: 'Dashboard LeeftijdsGrafiek',
     name: 'dashboardAgeDemographicChart',
     type: 'object',

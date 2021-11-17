@@ -1,5 +1,12 @@
 import { StructureBuilder as S } from '@sanity/structure';
-import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
+import {
+  BsCardChecklist,
+  BsFillFileBarGraphFill,
+  BsFillPuzzleFill,
+  BsLockFill,
+  BsMap,
+  BsTable,
+} from 'react-icons/bs';
 import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
@@ -59,11 +66,8 @@ export default () =>
         .icon(BsTable)
         .child(
           S.list()
-            .title('Lockdown en Routekaart')
-            .items([
-              addListItem(BsLockFill, 'Lockdown', 'lockdown'),
-              addListItem(BsTable, 'Routekaart', 'roadmap'),
-            ])
+            .title('Lockdown')
+            .items([addListItem(BsLockFill, 'Lockdown', 'lockdown')])
         ),
       addListItem(
         GrCircleInformation,
@@ -121,22 +125,30 @@ export default () =>
 
       S.divider(),
 
-      ...S.documentTypeListItems().filter((item) =>
-        [
-          'kpiConfiguration',
-          'chartConfiguration',
-          'ageDemographicChartConfiguration',
-        ].includes(item.getId() ?? '')
-      ),
-
-      S.divider(),
+      S.listItem()
+        .title('Grafieken')
+        .icon(BsFillFileBarGraphFill)
+        .child(
+          S.list()
+            .title('Configuraties')
+            .items(
+              S.documentTypeListItems().filter((item) =>
+                [
+                  'kpiConfiguration',
+                  'chartConfiguration',
+                  'ageDemographicChartConfiguration',
+                  'donutChartConfiguration',
+                ].includes(item.getId() ?? '')
+              )
+            )
+        ),
 
       S.listItem()
         .title('Pagina onderdelen')
-        .icon(BsTable)
+        .icon(BsFillPuzzleFill)
         .child(
           S.list()
-            .title('Lockdown en Routekaart')
+            .title("Pagina's en onderdelen")
             .items([
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'pageIdentifier'

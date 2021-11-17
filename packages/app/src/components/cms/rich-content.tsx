@@ -3,6 +3,7 @@ import {
   ChartConfiguration,
   DataScope,
   DataScopeKey,
+  DonutChartConfiguration,
   KpiConfiguration,
   MetricKeys,
 } from '@corona-dashboard/common';
@@ -31,6 +32,7 @@ import { Link } from '~/utils/link';
 import { Heading } from '../typography';
 import { ContentImage } from './content-image';
 import { InlineAgeDemographic } from './inline-age-demographic';
+import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 
@@ -52,6 +54,12 @@ interface AgeDemographicConfigNode {
   startDate?: string;
   endDate?: string;
   config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+}
+
+interface DonutConfigNode {
+  startDate?: string;
+  endDate?: string;
+  config: DonutChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
 }
 
 interface KpiConfigNode {
@@ -181,6 +189,19 @@ export function RichContent({
               />
             </Box>
           </Box>
+        );
+      },
+      dashboardDonut: (props: { node: DonutConfigNode }) => {
+        const node = props.node;
+
+        return (
+          <ContentWrapper>
+            <InlineDonutChart
+              configuration={node.config}
+              startDate={node.startDate}
+              endDate={node.endDate}
+            />
+          </ContentWrapper>
         );
       },
       dashboardKpi: (props: { node: KpiConfigNode }) => {

@@ -6,13 +6,16 @@ import {
 } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 
+type DataType = 'timeseries' | 'donut';
+
 export function getDataUrl<
   S extends DataScopeKey,
   M extends MetricKeys<ScopedData[S]>
 >(
   startDate: string | undefined,
   endDate: string | undefined,
-  configuration: MetricConfiguration<S, M>
+  configuration: MetricConfiguration<S, M>,
+  type: DataType = 'timeseries'
 ) {
   const { code, area, metricName } = configuration;
   const qParams = [];
@@ -27,5 +30,5 @@ export function getDataUrl<
 
   const suffix = qParams.length ? `?${qParams.join('&')}` : '';
 
-  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
+  return `/api/data/${type}/${code ?? area}/${metricName}${suffix}`;
 }

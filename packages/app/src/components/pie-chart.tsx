@@ -14,7 +14,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 const ICON_SIZE = 55;
 
-interface SeriesConfigType<T> {
+export interface PiePartConfig<T> {
   metricProperty: KeysOfType<T, number, true>;
   color: string;
   label: string;
@@ -22,7 +22,7 @@ interface SeriesConfigType<T> {
 
 export interface PieChartProps<T> {
   data: T;
-  dataConfig: SeriesConfigType<T>[];
+  dataConfig: PiePartConfig<T>[];
   paddingLeft?: number;
   innerSize?: number;
   donutWidth?: number;
