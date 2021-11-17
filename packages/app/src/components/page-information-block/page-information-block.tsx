@@ -79,7 +79,7 @@ export function PageInformationBlock({
 
       {description && (
         <Tile hasTitle={!!title}>
-          <Box spacing={3}>
+          <Box spacing={3} width="100%">
             <Box
               display={{ md: 'grid' }}
               gridTemplateColumns="repeat(2, 1fr)"
@@ -89,7 +89,7 @@ export function PageInformationBlock({
                 md: 0,
               }}
               css={css({
-                columnGap: 4,
+                columnGap: 5,
               })}
             >
               {articles && articles.length > 0 ? (

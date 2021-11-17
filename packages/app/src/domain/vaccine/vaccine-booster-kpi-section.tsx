@@ -18,7 +18,7 @@ export function VaccineBoosterKpiSection({
   const text = siteText.vaccinaties.booster_shots_kpi;
 
   return (
-    <TwoKpiSection spacing={4}>
+    <TwoKpiSection spacing={5}>
       <KpiTile
         title={text.total_section.title}
         metadata={{
