@@ -75,7 +75,7 @@ export function InlineDonutChart<
               width: '55px',
               height: '55px',
               position: 'absolute',
-              left: '14px',
+              left: configuration.verticalLayout ? undefined : '14px',
               backgroundPosition: '12px',
             })}
           />
@@ -85,7 +85,7 @@ export function InlineDonutChart<
               width: '55px',
               height: '55px',
               position: 'absolute',
-              left: '14px',
+              left: configuration.verticalLayout ? undefined : '14px',
               opacity: 0.7,
             })}
           />
