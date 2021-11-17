@@ -50,7 +50,6 @@ import {
   useMetricPropertyFormatters,
   useScales,
   useSeriesList,
-  useSplitLegendGroups,
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
@@ -268,13 +267,11 @@ export function TimeSeriesChart<
     minimumRange,
   });
 
-  const legendItems = useLegendItems(
+  const { legendItems, splitLegendGroups } = useLegendItems(
     xScale.domain(),
     seriesConfig,
     dataOptions
   );
-
-  const splitLegendGroups = useSplitLegendGroups(seriesConfig);
 
   const timeDomain = useMemo(
     () => getTimeDomain({ values, today, withPadding: false }),
