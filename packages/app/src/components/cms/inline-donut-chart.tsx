@@ -53,10 +53,19 @@ export function InlineDonutChart<
     })
   );
 
+  const title = get(siteText, configuration.LabelKey.split('.'), '');
+
   return (
     <PieChart
+      title={title}
       data={data}
       dataConfig={dataConfig}
+      paddingLeft={configuration.paddingLeft}
+      innerSize={configuration.innerSize}
+      donutWidth={configuration.donutWidth}
+      padAngle={configuration.padAngle}
+      minimumPercentage={configuration.minimumPercentage}
+      verticalLayout={configuration.verticalLayout}
       icon={
         <>
           <div

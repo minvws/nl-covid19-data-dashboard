@@ -16,11 +16,25 @@ export const donutChartConfiguration = {
         collapsed: false,
       },
     },
+    {
+      title: 'Layout configuratie',
+      name: 'layoutConfiguration',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
   ],
   fields: [
     {
       title: 'Titel',
       name: 'title',
+      type: 'string',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      title: 'Label key',
+      name: 'LabelKey',
       type: 'string',
       validation: (rule: Rule) => rule.required(),
     },
@@ -40,6 +54,42 @@ export const donutChartConfiguration = {
       validation: (rule: Rule) => rule.min(1),
       fieldset: 'configuration',
       hidden: ({ parent }: { parent: any }) => !isDefined(parent?.metricName),
+    },
+    {
+      title: 'Vertical layout',
+      name: 'verticalLayout',
+      type: 'boolean',
+      fieldset: 'layoutConfiguration',
+    },
+    {
+      title: 'Padding left',
+      name: 'paddingLeft',
+      type: 'number',
+      fieldset: 'layoutConfiguration',
+    },
+    {
+      title: 'Inner size',
+      name: 'innerSize',
+      type: 'number',
+      fieldset: 'layoutConfiguration',
+    },
+    {
+      title: 'Donut width',
+      name: 'donutWidth',
+      type: 'number',
+      fieldset: 'layoutConfiguration',
+    },
+    {
+      title: 'Pad angle',
+      name: 'padAngle',
+      type: 'number',
+      fieldset: 'layoutConfiguration',
+    },
+    {
+      title: 'Minimum percentage',
+      name: 'minimumPercentage',
+      type: 'number',
+      fieldset: 'layoutConfiguration',
     },
   ],
 };
