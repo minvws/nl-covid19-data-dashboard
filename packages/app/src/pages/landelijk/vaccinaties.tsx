@@ -118,6 +118,14 @@ export const getStaticProps = createGetStaticProps(
           'vaccinationsPageArticles'
         ),
         links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
+        boosterArticles: getArticleParts(
+          content.parts.pageParts,
+          'vaccineBoosterArticles'
+        ),
+        boosterLinks: getLinkParts(
+          content.parts.pageParts,
+          'vaccinationsBoosterPageLinks'
+        ),
         pageDescription: getRichTextParts(
           content.parts.pageParts,
           'vaccinationsPageDescription'
@@ -181,6 +189,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationStatusIntensiveCareFeature = useFeature(
     'nlVaccinationIntensiveCareVaccinationStatus'
   );
+  const vaccinationsBoosterInformationBlockFeature = useFeature(
+    'nlVaccinationsBoosterInformationBlock'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -237,6 +248,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.articles}
           />
+
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
@@ -480,6 +492,30 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
+
+          {vaccinationsBoosterInformationBlockFeature.isEnabled && (
+            <>
+              <Spacer pb={3} />
+
+              <PageInformationBlock
+                title={text.booster_information_block.title}
+                icon={<VaccinatieIcon />}
+                description={text.booster_information_block.description}
+                metadata={{
+                  datumsText: text.booster_information_block.datums,
+                  /**
+                   * @TODO Connect with real data
+                   */
+                  dateOrRange: 1637138475,
+                  dateOfInsertionUnix: 1637138475,
+                  dataSources: [],
+                }}
+                pageLinks={content.boosterLinks}
+                referenceLink={text.booster_information_block.reference.href}
+                articles={content.boosterArticles}
+              />
+            </>
+          )}
 
           <Spacer pb={3} />
 
