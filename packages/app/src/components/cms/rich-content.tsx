@@ -57,6 +57,7 @@ interface AgeDemographicConfigNode {
 }
 
 interface DonutConfigNode {
+  title: string;
   startDate?: string;
   endDate?: string;
   config: DonutChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
@@ -196,11 +197,19 @@ export function RichContent({
 
         return (
           <ContentWrapper>
-            <InlineDonutChart
-              configuration={node.config}
-              startDate={node.startDate}
-              endDate={node.endDate}
-            />
+            <Box pb={4}>
+              <Box pb={4}>
+                <Heading level={3} as="h4">
+                  {node.title}
+                </Heading>
+              </Box>
+
+              <InlineDonutChart
+                configuration={node.config}
+                startDate={node.startDate}
+                endDate={node.endDate}
+              />
+            </Box>
           </ContentWrapper>
         );
       },

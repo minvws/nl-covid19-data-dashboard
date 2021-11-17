@@ -62,9 +62,11 @@ export function InlineDonutChart<
           aria-hidden={true}
           css={css({
             background: `url(/icons/app/${configuration.icon}) no-repeat top left`,
-            width: '30px',
-            height: '40px',
-            color: '#000',
+            width: '55px',
+            height: '55px',
+            position: 'absolute',
+            left: '14px',
+            backgroundPosition: '12px',
           })}
         />
       }
