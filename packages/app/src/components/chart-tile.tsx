@@ -1,6 +1,7 @@
 import { assert, TimeframeOption } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useState } from 'react';
+import { asResponsiveArray } from '~/style/utils';
 import { Box, Spacer } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
@@ -82,7 +83,7 @@ function ChartTileHeader({
   return (
     <Box spacing={3}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
-      <Heading level={3} css={css({ pr: 5 })}>
+      <Heading level={3} css={css({ pr: asResponsiveArray({ md: 5 }) })}>
         {title}
       </Heading>
 
