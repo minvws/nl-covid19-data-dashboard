@@ -4,6 +4,7 @@ import {
   GehandicaptenZorg,
   Locatie,
 } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -16,9 +17,14 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -28,6 +34,7 @@ import {
   getLastGeneratedDate,
   selectVrData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
@@ -39,10 +46,28 @@ export const getStaticProps = createGetStaticProps(
     'difference.disability_care__infected_locations_total',
     'difference.disability_care__newly_infected_people'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('disabilityCarePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('disabilityCarePage')},
+      "elements": ${getElementsQuery('vr', ['disability_care'], locale)}
+     }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'disabilityCarePageArticles'
+        ),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
@@ -164,6 +189,11 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'disability_care',
+                    'newly_infected_people'
+                  ),
                 }}
               />
             )}

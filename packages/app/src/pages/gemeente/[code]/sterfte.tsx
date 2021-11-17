@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -13,9 +14,14 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -25,6 +31,7 @@ import {
   getLastGeneratedDate,
   selectGmData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -36,10 +43,28 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'code'
   ),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('deceasedPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('deceasedPage')},
+      "elements": ${getElementsQuery('gm', ['deceased_rivm'], locale)}
+     }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'deceasedPageArticles'
+        ),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -159,6 +184,12 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
+                dataOptions={{
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'deceased_rivm'
+                  ),
+                }}
               />
             )}
           </ChartTile>

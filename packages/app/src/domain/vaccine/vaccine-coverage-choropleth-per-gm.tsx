@@ -90,15 +90,23 @@ export function VaccineCoverageChoroplethPerGm({
               }
             </Text>
 
-            <Box flex="1">
-              <AgeGroupSelect onChange={setSelectedAgeGroup} />
-            </Box>
+            <Box
+              display="flex"
+              width="100%"
+              spacingHorizontal={{ xs: 2 }}
+              flexWrap="wrap"
+              flexDirection={{ _: 'column', xs: 'row' }}
+            >
+              <Box flex="1">
+                <AgeGroupSelect onChange={setSelectedAgeGroup} />
+              </Box>
 
-            <Box flex="1">
-              <VaccinationCoverageKindSelect
-                onChange={setSelectedCoverageKind}
-                initialValue={selectedCoverageKind}
-              />
+              <Box flex="1">
+                <VaccinationCoverageKindSelect
+                  onChange={setSelectedCoverageKind}
+                  initialValue={selectedCoverageKind}
+                />
+              </Box>
             </Box>
           </Box>
         </>

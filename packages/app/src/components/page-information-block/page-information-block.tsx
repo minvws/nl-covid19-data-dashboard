@@ -17,11 +17,13 @@ interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
   description?: string | RichContentBlock[] | ReactNode;
-  articles?: ArticleSummary[];
-  pageLinks?: {
-    title: string;
-    href: string;
-  }[];
+  articles?: ArticleSummary[] | null;
+  pageLinks?:
+    | {
+        title: string;
+        href: string;
+      }[]
+    | null;
   headingLevel?: HeadingLevel;
   metadata?: MetadataProps;
   referenceLink?: string;
@@ -77,7 +79,7 @@ export function PageInformationBlock({
 
       {description && (
         <Tile hasTitle={!!title}>
-          <Box spacing={3}>
+          <Box spacing={3} width="100%">
             <Box
               display={{ md: 'grid' }}
               gridTemplateColumns="repeat(2, 1fr)"
@@ -87,7 +89,7 @@ export function PageInformationBlock({
                 md: 0,
               }}
               css={css({
-                columnGap: 4,
+                columnGap: 5,
               })}
             >
               {articles && articles.length > 0 ? (
@@ -109,7 +111,7 @@ export function PageInformationBlock({
 
             {pageLinks && pageLinks.length > 0 && (
               <>
-                <Box height="1px" bg="border" />
+                <Box height={1} />
                 <PageLinks links={pageLinks} />
               </>
             )}

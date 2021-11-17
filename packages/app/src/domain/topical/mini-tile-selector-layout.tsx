@@ -14,12 +14,11 @@ import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { LinkWithIcon } from '~/components/link-with-icon';
-import { SparkBars } from '~/components/spark-bars';
+import { SparkLine } from '~/components/spark-line';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 
@@ -39,6 +38,7 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
+
   link?: {
     href: string;
     text: string;
@@ -46,19 +46,21 @@ type MiniTileSelectorLayoutProps = {
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const breakpoints = useBreakpoints(false);
-
   const { siteText } = useIntl();
 
-  return breakpoints.md ? (
-    <WideMiniTileSelectorLayout {...props} />
-  ) : (
-    <Box spacing={3}>
-      <Text variant="label1" color="bodyLight">
-        {siteText.common_actueel.tile_selector_uitleg}
-      </Text>
-      <NarrowMiniTileSelectorLayout {...props} />
-    </Box>
+  return (
+    <>
+      <Box display={{ _: 'none', md: 'block' }}>
+        <WideMiniTileSelectorLayout {...props} />
+      </Box>
+
+      <Box spacing={3} display={{ _: 'block', md: 'none' }}>
+        <Text variant="label1" color="bodyLight">
+          {siteText.common_actueel.tile_selector_uitleg}
+        </Text>
+        <NarrowMiniTileSelectorLayout {...props} />
+      </Box>
+    </>
   );
 }
 
@@ -122,13 +124,13 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
           {item.percentageBar ? (
             <Bar
               value={item.percentageBar.value}
-              color={`${colors.data.positive}80`} // We need the color to be transparent so we make an 8-digit hex code
+              color={`${colors.data.primary}B2`} // Add 70% opacity by creating a 8-digit hex code
               backgroundColor="rgba(0, 0, 0, 0.1)"
               label={item.percentageBar.label}
               height={10}
             />
           ) : (
-            <SparkBars data={item.data} averageProperty={item.dataProperty} />
+            <SparkLine data={item.data} averageProperty={item.dataProperty} />
           )}
         </Box>
         <InlineText>{item.label}</InlineText>
@@ -179,13 +181,13 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                   {item.percentageBar ? (
                     <Bar
                       value={item.percentageBar.value}
-                      color={`${colors.data.positive}80`}
+                      color={`${colors.data.primary}B2`} // Add 70% opacity by creating a 8-digit hex code
                       backgroundColor="rgba(0, 0, 0, 0.1)"
                       label={item.percentageBar.label}
                       height={10}
                     />
                   ) : (
-                    <SparkBars
+                    <SparkLine
                       data={item.data}
                       averageProperty={item.dataProperty}
                     />

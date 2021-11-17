@@ -27,6 +27,15 @@ type MaatregelenData = {
 // @TODO remove dummy data once data is avaliable
 const DUMMY_DATA = {
   risk_level: 2,
+  hospital_admissions_on_date_of_admission_moving_average_rounded: 10,
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1615845391,
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded: 12,
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1235845391,
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
+  date_unix: 1625245391,
+  valid_from_unix: 1635845391,
+  date_of_insertion_unix: 1635845391,
 } as NlRiskLevelValue;
 
 export const getStaticProps = createGetStaticProps(

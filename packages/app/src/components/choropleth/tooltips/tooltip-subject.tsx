@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getThresholdValue } from '~/utils/get-threshold-value';
 
 interface TooltipSubjectProps {
   subject?: string;
@@ -23,9 +23,9 @@ export function TooltipSubject({
 }: TooltipSubjectProps) {
   const color =
     !isPresent(filterBelow) && isDefined(thresholdValues)
-      ? noDataFillColor || getFilteredThresholdValues(thresholdValues, 0).color
+      ? noDataFillColor || getThresholdValue(thresholdValues, 0).color
       : isPresent(filterBelow) && isDefined(thresholdValues)
-      ? getFilteredThresholdValues(thresholdValues, filterBelow).color
+      ? getThresholdValue(thresholdValues, filterBelow).color
       : noDataFillColor;
 
   return (

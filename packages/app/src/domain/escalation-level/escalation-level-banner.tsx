@@ -55,7 +55,7 @@ export function EscalationLevelBanner({
             )}
             <EscalationLevelLabel
               level={data.risk_level}
-              lastCalculated={data.last_calculated_unix}
+              lastCalculated={data.date_unix}
               validFrom={data.valid_from_unix}
             />
           </Box>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 
 export const SelectBoxRoot = styled(Box)({
-  maxWidth: '20rem',
   position: 'relative',
 });
 

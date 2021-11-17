@@ -5,7 +5,7 @@ import { ReactNode, Fragment } from 'react';
  * When lokalize hot reload is enabled we will render "[#ERROR {{key}}]"
  * instead of throwing an error when there's a validation error.
  */
-const shouldValidate =
+export const shouldValidate =
   typeof window === 'undefined' || process.env.NEXT_PUBLIC_PHASE !== 'develop';
 
 /**

@@ -24,7 +24,7 @@ import {
 import { spacing, SpacingProps } from '~/style/functions/spacing';
 import { transform, TransformProps } from '~/style/functions/transform';
 import { Preset, preset } from '~/style/preset';
-import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
+import { styledShouldForwardProp } from '~/lib/styled-should-forward-prop';
 
 export type BoxProps = SpaceProps &
   SpacingProps &

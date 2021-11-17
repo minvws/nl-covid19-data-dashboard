@@ -61,10 +61,12 @@ async function promptForElement(): Promise<Element | undefined> {
     type: 'select',
     name: 'metricName',
     message: 'Select the metric name for this element:',
-    choices: getSchemaMetrics(scopeResponse.scope).map((x) => ({
-      title: x,
-      value: x,
-    })),
+    choices: getSchemaMetrics(scopeResponse.scope)
+      .sort()
+      .map((x) => ({
+        title: x,
+        value: x,
+      })),
     onState,
   })) as { metricName: string };
 
@@ -104,10 +106,12 @@ async function promptForElement(): Promise<Element | undefined> {
       choices: getSchemaMetricProperties(
         scopeResponse.scope,
         metricNameResponse.metricName
-      ).map((x) => ({
-        title: x,
-        value: x,
-      })),
+      )
+        .sort()
+        .map((x) => ({
+          title: x,
+          value: x,
+        })),
       onState,
     })) as { metricProperty: string };
 

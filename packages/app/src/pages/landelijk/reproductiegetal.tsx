@@ -1,5 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -11,9 +12,14 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -23,14 +29,33 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('reproduction', 'difference.reproduction__index_average'),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('reproductionPage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('reproductionPage')},
+      "elements": ${getElementsQuery('nl', ['reproduction'], locale)}
+     }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'reproductionPageArticles'
+        ),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
@@ -96,7 +121,13 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          <ReproductionChartTile data={data.reproduction} />
+          <ReproductionChartTile
+            data={data.reproduction}
+            timelineEvents={getTimelineEvents(
+              content.elements.timeSeries,
+              'reproduction'
+            )}
+          />
         </TileList>
       </NlLayout>
     </Layout>

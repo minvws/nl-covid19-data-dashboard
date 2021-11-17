@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -17,9 +18,14 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
-  createPageArticlesQuery,
-  PageArticlesQueryResult,
-} from '~/queries/create-page-articles-query';
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -30,6 +36,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -42,10 +49,28 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),
-  createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('elderlyAtHomePage', locale);
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('elderlyAtHomePage')},
+      "elements": ${getElementsQuery('nl', ['elderly_at_home'], locale)}
+     }`;
+    })(context);
+
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'elderlyAtHomePageArticles'
+        ),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const ElderlyAtHomeNationalPage = (
@@ -187,6 +212,11 @@ const ElderlyAtHomeNationalPage = (
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'elderly_at_home',
+                    'positive_tested_daily'
+                  ),
                 }}
               />
             )}
@@ -300,6 +330,11 @@ const ElderlyAtHomeNationalPage = (
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'elderly_at_home',
+                    'deceased_daily'
+                  ),
                 }}
               />
             )}

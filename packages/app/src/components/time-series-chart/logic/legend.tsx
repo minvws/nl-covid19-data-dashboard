@@ -14,6 +14,8 @@ import { isVisibleEvent } from '../components/timeline/logic';
 import { DataOptions } from './common';
 import { isVisible, SeriesConfig } from './series';
 
+type SplitLegendGroup = { label: string; items: LegendItem[] };
+
 export function useLegendItems<T extends TimestampedValue>(
   domain: number[],
   config: SeriesConfig<T>,
@@ -23,7 +25,7 @@ export function useLegendItems<T extends TimestampedValue>(
   const intl = useIntl();
 
   return useMemo(() => {
-    const items = config
+    const legendItems = config
       .filter(isVisible)
       .map<LegendItem | undefined>((x) => {
         switch (x.type) {
@@ -56,7 +58,7 @@ export function useLegendItems<T extends TimestampedValue>(
           annotation.start <= (last(domain) as number);
 
         if (isAnnotationVisible) {
-          items.push({
+          legendItems.push({
             label: annotation.label,
             shape: 'custom',
             shapeComponent:
@@ -79,7 +81,7 @@ export function useLegendItems<T extends TimestampedValue>(
       );
 
       if (hasVisibleEvents) {
-        items.push({
+        legendItems.push({
           label: intl.siteText.charts.timeline.legend_label,
           shape: 'custom',
           shapeComponent: <TimelineMarker size={10} />,
@@ -87,25 +89,7 @@ export function useLegendItems<T extends TimestampedValue>(
       }
     }
 
-    /**
-     * Define how many legend "items" there will be (counting split series as
-     * one) to determine if a legend is required. We only have to render a
-     * legend when there's at least two items.
-     */
-    const isLegendRequired =
-      config.filter(isVisible).length + (timespanAnnotations?.length ?? 0) > 1;
-
-    return isLegendRequired ? items : undefined;
-  }, [config, domain, intl, timelineEvents, timespanAnnotations]);
-}
-
-type SplitLegendGroup = { label: string; items: LegendItem[] };
-
-export function useSplitLegendGroups<T extends TimestampedValue>(
-  config: SeriesConfig<T>
-) {
-  return useMemo(() => {
-    const items = config
+    const splitLegendGroups = config
       .map<SplitLegendGroup | undefined>((x) => {
         switch (x.type) {
           case 'split-area':
@@ -123,6 +107,17 @@ export function useSplitLegendGroups<T extends TimestampedValue>(
       })
       .filter(isDefined);
 
-    return items.length > 0 ? items : undefined;
-  }, [config]);
+    /**
+     * Define how many legend "items" there will be (counting split series as
+     * one) to determine if a legend is required. We only have to render a
+     * legend when there's at least two items.
+     */
+    const isLegendRequired = legendItems.length + splitLegendGroups.length > 1;
+
+    return {
+      legendItems: isLegendRequired ? legendItems : undefined,
+      splitLegendGroups:
+        splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
+    };
+  }, [config, domain, intl, timelineEvents, timespanAnnotations]);
 }

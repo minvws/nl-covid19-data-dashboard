@@ -44,7 +44,7 @@
         "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix": {
           "type": "integer"
         },
-        "last_calculated_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "valid_from_unix": {
@@ -62,7 +62,7 @@
         "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
         "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
         "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
-        "last_calculated_unix",
+        "date_unix",
         "valid_from_unix",
         "date_of_insertion_unix"
       ],

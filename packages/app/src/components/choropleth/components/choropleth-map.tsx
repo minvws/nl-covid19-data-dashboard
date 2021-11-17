@@ -128,6 +128,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     return (
       <img
         src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
+        loading="lazy"
       />
     );
   }

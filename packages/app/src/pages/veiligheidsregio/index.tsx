@@ -91,7 +91,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
                 minHeight={650}
                 dataConfig={{
                   metricName: 'veiligheidsregio' as any,
-                  metricProperty: 'admissions_on_date_of_reporting',
+                  metricProperty: 'admissions_on_date_of_admission',
                   areaStroke: colors.white,
                   areaStrokeWidth: 1,
                   hoverFill: colors.white,

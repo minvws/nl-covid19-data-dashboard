@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
+import { GetStaticPropsContext } from 'next';
 import { AgeDemographic } from '~/components/age-demographic';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -16,7 +16,15 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
+import {
+  getArticleParts,
+  getPagePartsQuery,
+} from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -26,6 +34,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
 } from '~/static-props/get-data';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -35,31 +44,42 @@ export const getStaticProps = createGetStaticProps(
     'deceased_rivm',
     'difference.deceased_rivm__covid_daily'
   ),
-  createGetContent<{
-    main: { articles: ArticleSummary[] };
-    monitor: { articles: ArticleSummary[] };
-  }>((context) => {
-    const { locale } = context;
-    return `{
-      "main": ${createPageArticlesQuery('deceasedPage', locale)},
-      "monitor": ${createPageArticlesQuery(
-        'deceasedPage',
-        locale,
-        'monitor_articles'
-      )},
-    }`;
-  })
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+      "parts": ${getPagePartsQuery('deceasedPage')},
+      "elements": ${getElementsQuery('nl', ['deceased_rivm'], locale)}
+     }`;
+    })(context);
+
+    return {
+      content: {
+        mainArticles: getArticleParts(
+          content.parts.pageParts,
+          'deceasedPageArticles'
+        ),
+        monitorArticles: getArticleParts(
+          content.parts.pageParts,
+          'deceasedMonitorArticles'
+        ),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated, content } = props;
 
   const dataCbs = data.deceased_cbs;
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
-  const content = props.content;
 
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
 
   const text = siteText.sterfte;
 
@@ -85,7 +105,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.main.articles}
+            articles={content.mainArticles}
           />
 
           <TwoKpiSection>
@@ -162,6 +182,12 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
+                dataOptions={{
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'deceased_rivm'
+                  ),
+                }}
               />
             )}
           </ChartTile>
@@ -183,8 +209,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               leftMetricProperty="age_group_percentage"
               rightColor={'data.primary'}
               leftColor={'data.neutral'}
-              displayMaxPercentage={45}
+              maxDisplayValue={45}
               text={siteText.deceased_age_groups.graph}
+              formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
             />
           </ChartTile>
 
@@ -204,7 +231,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
             }}
-            articles={content.monitor.articles}
+            articles={content.monitorArticles}
           />
 
           <DeceasedMonitorSection

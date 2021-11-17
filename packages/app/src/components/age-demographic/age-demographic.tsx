@@ -14,16 +14,7 @@ import { useAgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 
-export function AgeDemographic<T extends AgeDemographicDefaultValue>({
-  data,
-  rightMetricProperty,
-  leftMetricProperty,
-  rightColor,
-  leftColor,
-  displayMaxPercentage,
-  text,
-  accessibility,
-}: {
+export interface AgeDemographicProps<T extends AgeDemographicDefaultValue> {
   data: { values: T[] };
   rightMetricProperty: KeysOfType<T, number, true>;
   leftMetricProperty: KeysOfType<T, number, true>;
@@ -34,14 +25,27 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  displayMaxPercentage?: number;
+  maxDisplayValue?: number;
   text: AgeDemographicChartText;
-}) {
+  formatValue: (n: number) => string;
+}
+
+export function AgeDemographic<T extends AgeDemographicDefaultValue>({
+  accessibility,
+  data,
+  formatValue,
+  leftMetricProperty,
+  rightMetricProperty,
+  leftColor,
+  rightColor,
+  maxDisplayValue,
+  text,
+}: AgeDemographicProps<T>) {
   const [ref, coordinates] = useAgeDemographicCoordinates(
     data,
     rightMetricProperty,
     leftMetricProperty,
-    displayMaxPercentage
+    maxDisplayValue
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
@@ -65,20 +69,17 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
             onMouseMoveBar={openTooltip}
             onMouseLeaveBar={closeTooltip}
             onKeyInput={keyboardNavigateTooltip}
-            displayMaxPercentage={displayMaxPercentage}
+            maxDisplayValue={maxDisplayValue}
             rightMetricProperty={rightMetricProperty}
             leftMetricProperty={leftMetricProperty}
             rightColor={rightColor}
             leftColor={leftColor}
             text={text}
+            formatValue={formatValue}
           />
         </div>
 
-        <Tooltip
-          controls="age-demographic-chart"
-          tooltipState={tooltipState}
-          width={AGE_GROUP_TOOLTIP_WIDTH}
-        >
+        <Tooltip tooltipState={tooltipState} width={AGE_GROUP_TOOLTIP_WIDTH}>
           {tooltipState.value && (
             <AgeDemographicTooltipContent
               value={tooltipState.value}
@@ -87,6 +88,7 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
               rightColor={rightColor}
               leftColor={leftColor}
               text={text}
+              formatValue={formatValue}
             />
           )}
         </Tooltip>

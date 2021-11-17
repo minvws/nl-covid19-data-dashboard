@@ -31,16 +31,10 @@
         "fully_vaccinated_percentage": {
           "type": "number"
         },
-        "has_one_shot": {
+        "has_one_shot_or_not_vaccinated": {
           "type": "integer"
         },
-        "has_one_shot_percentage": {
-          "type": "number"
-        },
-        "not_vaccinated": {
-          "type": "integer"
-        },
-        "not_vaccinated_percentage": {
+        "has_one_shot_or_not_vaccinated_percentage": {
           "type": "number"
         },
         "date_start_unix": {
@@ -57,10 +51,8 @@
         "total_amount_of_people",
         "fully_vaccinated",
         "fully_vaccinated_percentage",
-        "has_one_shot",
-        "has_one_shot_percentage",
-        "not_vaccinated",
-        "not_vaccinated_percentage",
+        "has_one_shot_or_not_vaccinated",
+        "has_one_shot_or_not_vaccinated_percentage",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"

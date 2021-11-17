@@ -136,9 +136,66 @@ export const features: Feature[] = [
     metricName: 'intensive_care_vaccination_status',
   },
   {
-    name: 'nlVaccinationVaccinationStatus',
-    isEnabled: false,
+    name: 'nlVaccinationHospitalVaccinationStatus',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccination_status',
+  },
+  {
+    name: 'nlVaccinationIntensiveCareVaccinationStatus',
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'intensive_care_vaccination_status',
+  },
+  {
+    name: 'nlHospitalAdmissionsVaccineIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlIcAdmissionsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsIncidencePerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'hospital_vaccine_incidence_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsBoosterInformationBlock',
+    isEnabled: true,
+  },
+  {
+    name: 'nlVaccinationBoosterShotsPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsBoosterShotsKpi',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot',
+  },
+
+  /**
+   * These flags are only here that the schemas will not be required when validating.
+   * But the features can be seen once toggled on with dummy data and have a seperate flag.
+   */
+  {
+    name: 'nlVaccinationBoosterShotsPerAgeGroupSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
+  },
+  {
+    name: 'nlVaccinationsBoosterShotsKpiSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot',
   },
 ];
