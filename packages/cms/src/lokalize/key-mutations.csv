@@ -84,6 +84,10 @@ timestamp,action,key,document_id,move_to
 2021-11-11T17:10:00.334Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.intensive_care.tooltip_labels.has_one_shot_or_not_vaccinated,z1CGDOfh23CnZYQwEjkv7f,__
 2021-11-11T17:10:01.324Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.tooltip_labels.fully_vaccinated,L0R7Ua3YIau8O4TDxwmIEN,__
 2021-11-11T17:10:02.350Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.tooltip_labels.has_one_shot_or_not_vaccinated,L0R7Ua3YIau8O4TDxwmIt9,__
+2021-11-17T08:52:09.482Z,add,vaccinaties.booster_information_block.title,L0R7Ua3YIau8O4TDybNd87,__
+2021-11-17T08:52:10.607Z,add,vaccinaties.booster_information_block.description,z1CGDOfh23CnZYQwEvF5eT,__
+2021-11-17T08:52:11.587Z,add,vaccinaties.booster_information_block.reference.href,z1CGDOfh23CnZYQwEvF5q5,__
+2021-11-17T08:52:12.606Z,add,vaccinaties.booster_information_block.datums,41m6S8Y6xAJZkZywfq8p50,__
 2021-11-16T16:33:15.061Z,add,vaccinaties.booster_per_age_group_section.title,L0R7Ua3YIau8O4TDyWDJiJ,__
 2021-11-16T16:33:16.250Z,add,vaccinaties.booster_per_age_group_section.description,z1CGDOfh23CnZYQwEtlZ6r,__
 2021-11-16T16:33:17.093Z,add,vaccinaties.booster_per_age_group_section.labels.age_group,41m6S8Y6xAJZkZywfpQB3u,__
