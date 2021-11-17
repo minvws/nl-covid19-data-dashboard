@@ -266,11 +266,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
       lastValueIntensiveCareVaccinationStatus.date_end_unix
     );
 
+  const hasActiveWarningTile =
+    text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
-        <TileList>
-          {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
+        <TileList hasActiveWarningTile={hasActiveWarningTile}>
+          {hasActiveWarningTile && (
             <WarningTile
               isFullWidth
               message={text.belangrijk_bericht}

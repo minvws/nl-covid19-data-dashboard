@@ -111,7 +111,7 @@ export function PageInformationBlock({
 
             {pageLinks && pageLinks.length > 0 && (
               <>
-                <Box height="1px" bg="border" />
+                <Box height={1} />
                 <PageLinks links={pageLinks} />
               </>
             )}
