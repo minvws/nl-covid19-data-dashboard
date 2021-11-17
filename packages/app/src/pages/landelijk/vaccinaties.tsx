@@ -533,6 +533,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ),
             }}
           />
+
           {vaccineAdministeredGgdFeature.isEnabled &&
             vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
             vaccineAdministeredDoctorsFeature.isEnabled &&
