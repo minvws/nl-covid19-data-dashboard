@@ -31,7 +31,7 @@ const StyledTile = styled.article<{
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    pt: x.noPadding ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
+    pt: x.noPadding ? undefined : 4,
     pb: x.noPadding ? undefined : asResponsiveArray({ _: 3, sm: 4 }),
     height: x.height,
     backgroundColor: 'white',

@@ -62,7 +62,7 @@ export function FullscreenChartTile({
           <div
             css={css({
               position: 'absolute',
-              top: '10px',
+              top: '1.25rem',
               right: '10px',
               color: 'silver',
 
