@@ -4,7 +4,7 @@ import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
 export const TileList = styled(Box).attrs({ spacing: 5 })<{
-  hasActiveWarningTile: boolean | string;
+  hasActiveWarningTile?: boolean | string;
 }>(({ hasActiveWarningTile }) => {
   return css({
     pt: hasActiveWarningTile ? 4 : asResponsiveArray({ _: 3, md: 5 }),
