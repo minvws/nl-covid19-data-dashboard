@@ -165,4 +165,10 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'hospital_vaccine_incidence_per_age_group',
   },
+  {
+    name: 'nlTestedOverallTopiclePage',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'tested_overall',
+  },
 ];
