@@ -94,6 +94,7 @@
     "@types/styled-system__should-forward-prop": "^5.1.2",
     "@types/unist": "^2.0.6",
     "@types/webpack": "^5.28.0",
+    "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
     "autoprefixer": "^10.4.0",
