@@ -6,7 +6,7 @@ export type ReverseRouter = ReturnType<typeof useReverseRouter>;
 
 export function useReverseRouter() {
   const breakpoints = useBreakpoints();
-  const openMenuSuffix = !breakpoints.md ? '?menu=1' : '';
+  const isMobile = !breakpoints.md;
 
   const vaccinationGmPagefeature = useFeature('gmVaccinationPage');
 
@@ -27,13 +27,16 @@ export function useReverseRouter() {
       },
 
       in: {
-        index: () => reverseRouter.in.positiefGetesteMensen() + openMenuSuffix,
+        index: () =>
+          isMobile
+            ? `/internationaal`
+            : reverseRouter.in.positiefGetesteMensen(),
         positiefGetesteMensen: () => `/internationaal/positief-geteste-mensen`,
         varianten: () => `/internationaal/varianten`,
       },
 
       nl: {
-        index: () => reverseRouter.nl.vaccinaties() + openMenuSuffix,
+        index: () => (isMobile ? `/landelijk` : reverseRouter.nl.vaccinaties()),
         vaccinaties: () => `/landelijk/vaccinaties`,
         positiefGetesteMensen: () => `/landelijk/positief-geteste-mensen`,
         besmettelijkeMensen: () => `/landelijk/besmettelijke-mensen`,
@@ -56,7 +59,9 @@ export function useReverseRouter() {
       vr: {
         index: (code?: string) =>
           code
-            ? reverseRouter.vr.vaccinaties(code) + openMenuSuffix
+            ? isMobile
+              ? `/veiligheidsregio/${code}`
+              : reverseRouter.vr.vaccinaties(code)
             : '/veiligheidsregio',
         maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
         vaccinaties: (code: string) => `/veiligheidsregio/${code}/vaccinaties`,
@@ -81,8 +86,12 @@ export function useReverseRouter() {
         index: (code?: string) =>
           code
             ? vaccinationGmPagefeature.isEnabled
-              ? reverseRouter.gm.vaccinaties(code) + openMenuSuffix
-              : reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
+              ? isMobile
+                ? `/gemeente/${code}`
+                : reverseRouter.gm.vaccinaties(code)
+              : isMobile
+              ? `/gemeente/${code}`
+              : reverseRouter.gm.ziekenhuisopnames(code)
             : `/gemeente`,
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
@@ -95,5 +104,5 @@ export function useReverseRouter() {
     } as const;
 
     return reverseRouter;
-  }, [openMenuSuffix, vaccinationGmPagefeature]);
+  }, [isMobile, vaccinationGmPagefeature]);
 }

@@ -8,6 +8,7 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, selectGmData } from '~/static-props/get-data';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -22,11 +23,13 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const breakpoints = useBreakpoints();
 
   useEffect(() => {
-    const route = reverseRouter.gm.index(selectedGmData.code);
-    router.replace(route);
-  }, [reverseRouter.gm, reverseRouter.vr, router, selectedGmData.code]);
+    if (breakpoints.md) {
+      router.replace(reverseRouter.gm.vaccinaties(router.query.code as string));
+    }
+  }, [breakpoints.md, reverseRouter.gm, router]);
 
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
