@@ -34,7 +34,13 @@ export const donutChartConfiguration = {
     },
     {
       title: 'Label key',
-      name: 'LabelKey',
+      name: 'labelKey',
+      type: 'string',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      title: 'Source key',
+      name: 'sourceKey',
       type: 'string',
       validation: (rule: Rule) => rule.required(),
     },

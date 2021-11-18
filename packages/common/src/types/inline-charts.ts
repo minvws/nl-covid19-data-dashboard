@@ -36,7 +36,8 @@ export type DonutChartConfiguration<
   M extends MetricKeys<ScopedData[S]>
 > = {
   icon: string;
-  LabelKey: string;
+  labelKey: string;
+  sourceKey: string;
   metricProperties: DonutMetricPropertyConfig<ScopedData[S], M>[];
   paddingLeft?: number;
   innerSize?: number;

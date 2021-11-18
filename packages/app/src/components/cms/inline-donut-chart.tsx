@@ -12,9 +12,9 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
 import { useIntl } from '~/intl';
+import { Metadata } from '../metadata';
 import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
-
 interface InlineDonutChartProps<
   S extends DataScopeKey,
   M extends MetricKeys<ScopedData[S]>
@@ -53,44 +53,52 @@ export function InlineDonutChart<
     })
   );
 
-  const title = get(siteText, configuration.LabelKey.split('.'), '');
+  const title = get(siteText, configuration.labelKey.split('.'), '');
+  const source = get(siteText, configuration.sourceKey.split('.'), '');
 
   return (
-    <PieChart
-      title={title}
-      data={data}
-      dataConfig={dataConfig}
-      paddingLeft={configuration.paddingLeft}
-      innerSize={configuration.innerSize}
-      donutWidth={configuration.donutWidth}
-      padAngle={configuration.padAngle}
-      minimumPercentage={configuration.minimumPercentage}
-      verticalLayout={configuration.verticalLayout}
-      icon={
-        <>
-          <div
-            aria-hidden={true}
-            css={css({
-              background: `url(/icons/app/${configuration.icon}) no-repeat top left`,
-              width: '55px',
-              height: '55px',
-              position: 'absolute',
-              left: configuration.verticalLayout ? undefined : '14px',
-              backgroundPosition: '12px',
-            })}
-          />
-          <div
-            css={css({
-              backgroundColor: 'white',
-              width: '55px',
-              height: '55px',
-              position: 'absolute',
-              left: configuration.verticalLayout ? undefined : '14px',
-              opacity: 0.7,
-            })}
-          />
-        </>
-      }
-    />
+    <>
+      <PieChart
+        title={title}
+        data={data}
+        dataConfig={dataConfig}
+        paddingLeft={configuration.paddingLeft}
+        innerSize={configuration.innerSize}
+        donutWidth={configuration.donutWidth}
+        padAngle={configuration.padAngle}
+        minimumPercentage={configuration.minimumPercentage}
+        verticalLayout={configuration.verticalLayout}
+        icon={
+          <>
+            <div
+              aria-hidden={true}
+              css={css({
+                background: `url(/icons/app/${configuration.icon}) no-repeat top left`,
+                width: '55px',
+                height: '55px',
+                position: 'absolute',
+                left: configuration.verticalLayout ? undefined : '14px',
+                backgroundPosition: '12px',
+              })}
+            />
+            <div
+              css={css({
+                backgroundColor: 'white',
+                width: '55px',
+                height: '55px',
+                position: 'absolute',
+                left: configuration.verticalLayout ? undefined : '14px',
+                opacity: 0.7,
+              })}
+            />
+          </>
+        }
+      />
+      <Metadata
+        date={[data.date_start_unix, data.date_end_unix]}
+        source={source}
+        isTileFooter
+      />
+    </>
   );
 }
