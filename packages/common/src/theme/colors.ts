@@ -93,6 +93,7 @@ export const colors = {
     negative: '#F35065',
     cyan: '#219BE6',
     yellow: '#FFC000',
+    darkBlue: '#003580',
     scale: {
       blue: [
         '#8FCAE7',
