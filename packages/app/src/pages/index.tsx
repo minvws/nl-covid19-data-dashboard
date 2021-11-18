@@ -126,7 +126,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.nationaal_actueel;
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-  const confirmedCasesFeature = useFeature('nlTestedOverallTopiclePage');
+  const confirmedCasesFeature = useFeature('nlTestedOverallTopicalPage');
 
   const metadata = {
     ...siteText.nationaal_metadata,

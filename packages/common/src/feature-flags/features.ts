@@ -166,7 +166,7 @@ export const features: Feature[] = [
     metricName: 'hospital_vaccine_incidence_per_age_group',
   },
   {
-    name: 'nlTestedOverallTopiclePage',
+    name: 'nlTestedOverallTopicalPage',
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'tested_overall',
