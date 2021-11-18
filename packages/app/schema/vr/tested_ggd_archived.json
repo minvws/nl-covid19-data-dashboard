@@ -8,9 +8,12 @@
       "items": {
         "$ref": "#/definitions/value"
       }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values"],
+  "required": ["values", "last_value"],
   "additionalProperties": false,
   "definitions": {
     "value": {
