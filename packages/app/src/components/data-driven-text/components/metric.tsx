@@ -1,5 +1,5 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { get } from 'lodash';
+import { get, isUndefined } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { RelativeDate } from '~/components/relative-date';
 import { InlineText } from '~/components/typography';
@@ -38,6 +38,13 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
         | DifferenceInteger
         | DifferenceDecimal)
     : undefined;
+
+  if (isUndefined(differenceKey)) {
+    assert(
+      isDefined(differenceValue),
+      `Missing value for difference:${differenceKey}`
+    )
+  }
 
   const baseText = getPluralizedText(text, propertyValue);
 
