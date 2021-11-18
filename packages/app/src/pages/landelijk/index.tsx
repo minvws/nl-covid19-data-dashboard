@@ -8,6 +8,8 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -16,10 +18,14 @@ const National = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
 
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
+  const breakpoints = useBreakpoints();
 
   useEffect(() => {
-    router.push('/landelijk/vaccinaties');
-  }, [router]);
+    if (breakpoints.md) {
+      router.replace(reverseRouter.nl.vaccinaties());
+    }
+  }, [breakpoints.md, reverseRouter.nl, router]);
 
   return (
     <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
