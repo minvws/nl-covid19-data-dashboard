@@ -36,8 +36,7 @@ export function useReverseRouter() {
       },
 
       nl: {
-        index: () =>
-          isMobile ? `/landelijk/` : reverseRouter.nl.vaccinaties(),
+        index: () => (isMobile ? `/landelijk` : reverseRouter.nl.vaccinaties()),
         vaccinaties: () => `/landelijk/vaccinaties`,
         positiefGetesteMensen: () => `/landelijk/positief-geteste-mensen`,
         besmettelijkeMensen: () => `/landelijk/besmettelijke-mensen`,

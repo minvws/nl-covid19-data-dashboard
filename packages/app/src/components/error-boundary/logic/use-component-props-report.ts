@@ -73,7 +73,6 @@ export function useComponentPropsReport(
     try {
       return extractPropsAndFillReport(children, propsReportRef);
     } catch (e) {
-      console.error(e);
       return children;
     }
   };
