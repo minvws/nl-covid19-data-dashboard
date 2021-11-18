@@ -93,3 +93,5 @@ timestamp,action,key,document_id,move_to
 2021-11-17T15:10:20.717Z,add,nationaal_actueel.mini_trend_tiles.positief_geteste_mensen.menu_item_label,41m6S8Y6xAJZkZywfqgXIs,__
 2021-11-17T15:10:21.729Z,add,nationaal_actueel.mini_trend_tiles.positief_geteste_mensen.read_more_link,41m6S8Y6xAJZkZywfqgXOo,__
 2021-11-17T15:10:22.748Z,add,nationaal_actueel.mini_trend_tiles.positief_geteste_mensen.title,41m6S8Y6xAJZkZywfqgXZC,__
+2021-11-18T11:18:49.891Z,add,accessibility.charts.topical_tested_overall_infected.description,41m6S8Y6xAJZkZywfrhufK,__
+2021-11-18T11:18:50.915Z,add,accessibility.charts.topical_tested_overall_infected.label,L0R7Ua3YIau8O4TDylxcoR,__

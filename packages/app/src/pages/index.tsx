@@ -11,6 +11,7 @@ import {
   Arts,
   Chart,
   Chevron,
+  Test,
   Vaccinaties,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
@@ -86,6 +87,7 @@ export const getStaticProps = createGetStaticProps(
       'intensive_care_lcps',
       'hospital_nice',
       'tested_overall',
+      'tested_ggd',
       'hospital_lcps',
       'difference',
       'vaccine_administered_total',
@@ -447,7 +449,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               text: text.data_driven_texts.tested_overall.value,
                               metricName: 'tested_overall',
                               metricProperty: 'infected',
-                              differenceKey: 'tested_overall__infected_moving_average',
                               additionalData: {
                                 dateStart: formatters.formatDateFromSeconds(
                                   data.tested_overall.last_value.date_unix - WEEK_IN_SECONDS
@@ -462,7 +463,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               text: text.data_driven_texts.tested_ggd.value,
                               metricName: 'tested_ggd',
                               metricProperty: 'infected_percentage_moving_average',
-                              differenceKey: 'tested_overall__infected_moving_average',
                             },
                           ]}
                         />
@@ -478,7 +478,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         </LinkWithIcon>
                       </>
                     }
-                    icon={<Ziekenhuis />}
+                    icon={<Test />}
                     values={dataTestedOverall.values}
                     seriesConfig={[
                       {
@@ -506,7 +506,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       },
                     ]}
                     accessibility={{
-                      key: 'confirmed_cases_infected_over_time_chart',
+                      key: 'topical_tested_overall_infected',
                     }}
                     warning={getWarning(
                       content.elements.warning,
