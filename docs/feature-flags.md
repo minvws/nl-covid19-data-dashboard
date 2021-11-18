@@ -8,7 +8,7 @@ will remove the flag related logic for it.
 
 ## Definition
 
-All feature flags are defined in `package/app/src/config/features.ts`. Below is
+All feature flags are defined in `packages/common/src/feature-flags/features.ts`. Below is
 the type definition for a feature flag:
 
 ```ts
