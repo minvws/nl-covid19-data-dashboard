@@ -84,6 +84,17 @@ timestamp,action,key,document_id,move_to
 2021-11-11T17:10:00.334Z,add,vaccinaties.vaccination_status_ic_and_hospital_section.intensive_care.tooltip_labels.has_one_shot_or_not_vaccinated,z1CGDOfh23CnZYQwEjkv7f,__
 2021-11-11T17:10:01.324Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.tooltip_labels.fully_vaccinated,L0R7Ua3YIau8O4TDxwmIEN,__
 2021-11-11T17:10:02.350Z,add,ziekenhuisopnames_per_dag.vaccination_status_chart.tooltip_labels.has_one_shot_or_not_vaccinated,L0R7Ua3YIau8O4TDxwmIt9,__
+2021-11-17T15:10:14.318Z,add,nationaal_actueel.data_driven_texts.tested_overall.value.plural,41m6S8Y6xAJZkZywfqgWHo,__
+2021-11-17T15:10:15.317Z,add,nationaal_actueel.data_driven_texts.tested_overall.value.singular,z1CGDOfh23CnZYQwEwFxLj,__
+2021-11-17T15:10:16.331Z,add,nationaal_actueel.data_driven_texts.tested_overall.value.zero,z1CGDOfh23CnZYQwEwFxXL,__
+2021-11-17T15:10:17.727Z,add,nationaal_actueel.data_driven_texts.tested_ggd.value.plural,41m6S8Y6xAJZkZywfqgWvs,__
+2021-11-17T15:10:18.692Z,add,nationaal_actueel.data_driven_texts.tested_ggd.value.singular,41m6S8Y6xAJZkZywfqgX9E,__
+2021-11-17T15:10:19.739Z,add,nationaal_actueel.data_driven_texts.tested_ggd.value.zero,41m6S8Y6xAJZkZywfqgXBS,__
+2021-11-17T15:10:20.717Z,add,nationaal_actueel.mini_trend_tiles.positief_geteste_mensen.menu_item_label,41m6S8Y6xAJZkZywfqgXIs,__
+2021-11-17T15:10:21.729Z,add,nationaal_actueel.mini_trend_tiles.positief_geteste_mensen.read_more_link,41m6S8Y6xAJZkZywfqgXOo,__
+2021-11-17T15:10:22.748Z,add,nationaal_actueel.mini_trend_tiles.positief_geteste_mensen.title,41m6S8Y6xAJZkZywfqgXZC,__
+2021-11-18T11:18:49.891Z,add,accessibility.charts.topical_tested_overall_infected.description,41m6S8Y6xAJZkZywfrhufK,__
+2021-11-18T11:18:50.915Z,add,accessibility.charts.topical_tested_overall_infected.label,L0R7Ua3YIau8O4TDylxcoR,__
 2021-11-17T08:52:09.482Z,add,vaccinaties.booster_information_block.title,L0R7Ua3YIau8O4TDybNd87,__
 2021-11-17T08:52:10.607Z,add,vaccinaties.booster_information_block.description,z1CGDOfh23CnZYQwEvF5eT,__
 2021-11-17T08:52:11.587Z,add,vaccinaties.booster_information_block.reference.href,z1CGDOfh23CnZYQwEvF5q5,__
