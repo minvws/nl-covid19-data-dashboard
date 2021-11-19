@@ -122,7 +122,7 @@ export default () =>
         .icon(BsTable)
         .child(
           S.list()
-            .title('Lockdown en Routekaart')
+            .title('Onderdelen')
             .items([
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'pageIdentifier'
