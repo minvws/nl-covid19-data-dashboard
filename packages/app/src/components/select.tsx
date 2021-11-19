@@ -109,6 +109,7 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'lightGray',
+      borderRadius: '5px',
       fontFamily: 'body',
       appearance: 'none',
       p: 2,
@@ -118,10 +119,14 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       backgroundSize: '18px 12px',
       backgroundRepeat: 'no-repeat, repeat',
       backgroundPosition: 'right 0.6em top 55%, 0 0',
-      '&:focus': {
-        borderColor: 'lightGray',
-        outline: '2px dotted',
-        outlineColor: 'blue',
+
+      '&:hover': {
+        bg: 'tileGray',
+        color: 'blue',
+        borderColor: 'blue'
+      },
+      '&:hover + span': {
+        color: 'blue'
       },
       '&::-ms-expand': {
         display: 'none',
