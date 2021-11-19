@@ -75,7 +75,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
 
   const { lockdown } = content;
-  const { showLockdown } = lockdown;
 
   const router = useRouter();
   const code = router.query.code as unknown as VRCode;
@@ -105,34 +104,27 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             )}
           />
 
-          {showLockdown && (
-            <Tile>
-              <Box
-                css={css({
-                  'p:last-child': {
-                    margin: '0',
-                  },
-                })}
-              >
-                <Heading level={3}>{lockdown.message.title}</Heading>
-                {lockdown.message.description ? (
-                  <RichContent blocks={lockdown.message.description} />
-                ) : null}
-              </Box>
-            </Tile>
-          )}
+          <Tile>
+            <Box
+              css={css({
+                'p:last-child': {
+                  margin: '0',
+                },
+              })}
+            >
+              <Heading level={3}>{lockdown.message.title}</Heading>
+              {lockdown.message.description ? (
+                <RichContent blocks={lockdown.message.description} />
+              ) : null}
+            </Box>
+          </Tile>
 
-          {showLockdown && (
-            <Tile>
-              <Box spacing={3}>
-                <Heading level={3}>{lockdown.title}</Heading>
-                <LockdownTable
-                  data={lockdown}
-                  level={content.riskLevel.level}
-                />
-              </Box>
-            </Tile>
-          )}
+          <Tile>
+            <Box spacing={3}>
+              <Heading level={3}>{lockdown.title}</Heading>
+              <LockdownTable data={lockdown} level={content.riskLevel.level} />
+            </Box>
+          </Tile>
 
           <AnchorTile
             external

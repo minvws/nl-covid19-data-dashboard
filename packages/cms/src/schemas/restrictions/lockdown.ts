@@ -10,13 +10,6 @@ export const lockdown = {
       type: 'localeString',
     },
     {
-      title: 'Schakel lockdown in?',
-      name: 'showLockdown',
-      description:
-        'In een lockdown is de routekaart minder van belang. Als deze knop aanstaat tonen wij niet de routekaart, maar de lockdown maatregelen.',
-      type: 'boolean',
-    },
-    {
       title: 'Lockdown boodschap',
       name: 'message',
       description:
