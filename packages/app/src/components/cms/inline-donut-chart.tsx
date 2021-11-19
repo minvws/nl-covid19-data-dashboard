@@ -51,6 +51,7 @@ export function InlineDonutChart<
       metricProperty: x.propertyName as any,
       color: getColor(x.color),
       label: get(siteText, x.labelKey.split('.'), null),
+      tooltipLabel: get(siteText, x.tooltipLabelKey.split('.'), null),
     })
   );
 

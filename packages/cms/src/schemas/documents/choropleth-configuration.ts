@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 import { ChartColorInput } from '../../components/portable-text/chart-configuration/chart-color-input';
@@ -48,7 +47,7 @@ export const choroplethConfiguration = {
     {
       title: 'Map type',
       name: 'map',
-      type: string,
+      type: 'string',
       initialValue: 'vr',
       options: {
         list: [
@@ -62,6 +61,7 @@ export const choroplethConfiguration = {
     {
       title: 'Metriek naam',
       name: 'metricName',
+      type: 'string',
       inputComponent: CollectionMetricSelectInput,
       validation: (rule: Rule) => rule.required(),
       hidden: ({ parent }: { parent: any }) => isDefined(parent?.map),

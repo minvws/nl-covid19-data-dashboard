@@ -27,5 +27,11 @@ export const donutMetricPropertyConfig = {
       title: 'Label key',
       validation: (rule: Rule) => rule.required(),
     },
+    {
+      name: 'tooltipLabelKey',
+      type: 'string',
+      title: 'Tooltip Label key',
+      validation: (rule: Rule) => rule.required(),
+    },
   ],
 };

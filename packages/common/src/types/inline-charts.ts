@@ -74,6 +74,7 @@ export type DonutMetricPropertyConfig<
   propertyName: MetricProperty<S, M>;
   color: string;
   labelKey: string;
+  tooltipLabelKey: string;
 };
 
 export type AgeDemographicConfiguration<

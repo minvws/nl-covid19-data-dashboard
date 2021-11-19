@@ -109,13 +109,12 @@ const ItemButton = styled(Text)<{
 }>(({ isActive, borderColor }) =>
   css({
     appearance: 'none',
-    backgroundColor: 'tileGray',
     cursor: 'pointer',
     pr: asResponsiveArray({ _: '5px', md: 10 }),
     pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
-    border: '3px solid',
-    borderColor: isActive ? borderColor : 'transparent',
+    borderRadius: '5px',
+    boxShadow: `inset 0px 0px 0px ${isActive ? '3px ' + borderColor : '1px #c4c4c4'}`,
     fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -125,18 +124,12 @@ const ItemButton = styled(Text)<{
     alignItems: 'center',
     justifyContent: 'space-between',
     '&:hover,&:focus': {
-      '&:before': {
-        content: '""',
-        background: borderColor,
-        height: '3px',
-        position: 'absolute',
-        left: '-3px',
-        right: '-3px',
-        bottom: '-3px',
-      },
+      bg: 'tileGray',
+      boxShadow: `inset 0px 0px 0px ${isActive ? '3px' : '2px'} ${borderColor}`
     },
     '&:focus': {
-      background: 'lightGray',
+      borderColor: 'silver',
+      borderWidth: '1px'
     },
     '&:after': {
       content: 'attr(data-text)',
@@ -148,6 +141,17 @@ const ItemButton = styled(Text)<{
       fontWeight: 'bold',
       pr: '1px',
     },
+    '&:before': {
+      bg: isActive ? borderColor : 'white',
+      opacity: '.1',
+      content: 'attr(data-color)',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      borderRadius: '5px'
+    }
   })
 );
 

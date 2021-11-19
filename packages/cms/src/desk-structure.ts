@@ -30,7 +30,6 @@ const hiddenDocTypes = [
   'overDitDashboard',
   'overRisicoNiveaus',
   'overRisicoNiveausNew',
-  'roadmap',
   'lockdown',
   'toegankelijkheid',
   'riskLevelNational',
@@ -63,14 +62,7 @@ export default () =>
       pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
-      S.listItem()
-        .title('Lockdown en Routekaart')
-        .icon(BsTable)
-        .child(
-          S.list()
-            .title('Lockdown')
-            .items([addListItem(BsLockFill, 'Lockdown', 'lockdown')])
-        ),
+      addListItem(BsLockFill, 'Lockdown', 'lockdown'),
       addListItem(
         GrCircleInformation,
         'Over dit dashboard',

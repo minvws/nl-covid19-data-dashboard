@@ -5,8 +5,8 @@ import {
 } from '@corona-dashboard/common';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { disabledMetrics, schemaRootPath } from './feature-flag-constants';
 import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
+import { disabledMetrics, schemaRootPath } from './feature-flag-constants';
 
 type AjvPropertyDef = { type?: MetricType; $ref: string; enum?: any[] };
 
@@ -93,13 +93,27 @@ function initializeMetricProperties(
   const metrics = Array.isArray(metric) ? metric : [metric];
   metrics.forEach((m) => {
     propertyNames.forEach((x) => {
-      if (!isDefined(metricSchema.properties[x])) {
+      let propertyDefinition: AjvPropertyDef | undefined =
+        metricSchema.properties[x];
+      if (!isDefined(propertyDefinition)) {
+        propertyDefinition = metricSchema.definitions?.value.properties[x];
+      }
+      if (!isDefined(propertyDefinition)) {
         throw new Error(
           `metric property ${x} not defined in ${metricSchema.title}`
         );
       }
       if (!isDefined(m[x])) {
-        m[x] = initializeProperty(metricSchema.properties[x], metricSchema);
+        m[x] = initializeProperty(propertyDefinition, metricSchema);
+      } else if (isDefined(m.values)) {
+        m.values.forEach((o: any) => {
+          if (!isDefined(o[x])) {
+            o[x] = initializeProperty(
+              propertyDefinition as AjvPropertyDef,
+              metricSchema
+            );
+          }
+        });
       }
     });
   });
