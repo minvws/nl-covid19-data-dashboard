@@ -28,7 +28,7 @@
     "ts-is-present": "^1.2.2"
   },
   "devDependencies": {
-    "@types/node": "^16.11.7",
+    "@types/node": "^16.11.9",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "chokidar-cli": "^3.0.0",
