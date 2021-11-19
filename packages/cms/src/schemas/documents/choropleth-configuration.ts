@@ -1,6 +1,7 @@
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 import { ChartColorInput } from '../../components/portable-text/chart-configuration/chart-color-input';
+import { CollectionMetricPropertySelectInput } from '../../components/portable-text/shared/collection-metric-property-select-input';
 import { CollectionMetricSelectInput } from '../../components/portable-text/shared/collection-metric-select-input';
 
 export const choroplethConfiguration = {
@@ -55,7 +56,7 @@ export const choroplethConfiguration = {
           { title: 'Gemeente', value: 'gm' },
           { title: 'Internationaal', value: 'in' },
         ],
-        layout: 'radio',
+        layout: 'dropdown',
       },
     },
     {
@@ -64,7 +65,15 @@ export const choroplethConfiguration = {
       type: 'string',
       inputComponent: CollectionMetricSelectInput,
       validation: (rule: Rule) => rule.required(),
-      hidden: ({ parent }: { parent: any }) => isDefined(parent?.map),
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.map),
+    },
+    {
+      title: 'Metriek property',
+      name: 'metricProperty',
+      type: 'string',
+      inputComponent: CollectionMetricPropertySelectInput,
+      validation: (rule: Rule) => rule.required(),
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.map),
     },
     {
       title: 'No Data color',
