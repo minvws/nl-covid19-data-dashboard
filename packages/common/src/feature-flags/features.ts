@@ -168,8 +168,9 @@ export const features: Feature[] = [
   {
     name: 'nlTestedOverallTopicalPage',
     isEnabled: false,
-    dataScopes: ['nl'],
+    dataScopes: ['nl', 'vr', 'gm'],
     metricName: 'tested_overall',
+    metricProperties: ['infected_moving_average'],
   },
   {
     name: 'nlVaccinationsBoosterInformationBlock',
