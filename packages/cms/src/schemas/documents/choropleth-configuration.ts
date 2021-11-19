@@ -73,7 +73,7 @@ export const choroplethConfiguration = {
       type: 'string',
       inputComponent: CollectionMetricPropertySelectInput,
       validation: (rule: Rule) => rule.required(),
-      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.map),
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.metricName),
     },
     {
       title: 'No Data color',
