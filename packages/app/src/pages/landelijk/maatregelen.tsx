@@ -73,29 +73,21 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
+          <Tile>
+            <Box spacing={3}>
+              <Heading level={3}>{lockdown.message.title}</Heading>
+              {lockdown.message.description ? (
+                <RichContent blocks={lockdown.message.description} />
+              ) : null}
+            </Box>
+          </Tile>
 
-          {lockdown.showLockdown && (
-            <Tile>
-              <Box spacing={3}>
-                <Heading level={3}>{lockdown.message.title}</Heading>
-                {lockdown.message.description ? (
-                  <RichContent blocks={lockdown.message.description} />
-                ) : null}
-              </Box>
-            </Tile>
-          )}
-
-          {lockdown.showLockdown && (
-            <Tile>
-              <Box spacing={3}>
-                <Heading level={3}>{lockdown.title}</Heading>
-                <LockdownTable
-                  data={lockdown}
-                  level={content.riskLevel.level}
-                />
-              </Box>
-            </Tile>
-          )}
+          <Tile>
+            <Box spacing={3}>
+              <Heading level={3}>{lockdown.title}</Heading>
+              <LockdownTable data={lockdown} level={content.riskLevel.level} />
+            </Box>
+          </Tile>
         </TileList>
       </NlLayout>
     </Layout>
