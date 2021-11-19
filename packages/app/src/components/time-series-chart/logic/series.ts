@@ -52,10 +52,10 @@ interface SeriesCommonDefinition {
    */
   minimumRange?: number;
   /**
-   * Does not show this series in the legend (because it is shown in a custom
+   * Hide this series in the legend (because it is shown in a custom
    * legend, for example)
    */
-  noLegend?: boolean;
+  hideInLegend?: boolean;
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>

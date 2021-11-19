@@ -27,7 +27,7 @@ export function useLegendItems<T extends TimestampedValue>(
   return useMemo(() => {
     const legendItems = config
       .filter(isVisible)
-      .filter((x) => !x.noLegend)
+      .filter((x) => !x.hideInLegend)
       .map<LegendItem | undefined>((x) => {
         switch (x.type) {
           case 'split-area':
