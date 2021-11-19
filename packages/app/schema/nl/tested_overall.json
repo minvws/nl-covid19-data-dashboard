@@ -6,6 +6,7 @@
       "additionalProperties": false,
       "required": [
         "infected",
+        "infected_moving_average",
         "infected_per_100k",
         "infected_per_100k_moving_average",
         "date_unix",
@@ -14,6 +15,9 @@
       "properties": {
         "infected": {
           "type": "integer"
+        },
+        "infected_moving_average": {
+          "type": ["number", "null"]
         },
         "infected_per_100k": {
           "type": "number"

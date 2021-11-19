@@ -1,6 +1,7 @@
 export * from './age-demographic-chart-configuration';
 export * from './article';
 export * from './chart-configuration';
+export * from './choropleth-configuration';
 export * from './cijfer-verantwoording-item';
 export * from './donut-chart-configuration';
 export * from './editorial';

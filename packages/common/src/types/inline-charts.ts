@@ -22,6 +22,26 @@ export type TimespanAnnotationConfiguration = {
   cutValuesForMetricProperties?: string[];
 };
 
+export type ChoroplethConfiguration<
+  S extends DataScopeKey,
+  M extends MetricKeys<ScopedData[S]>
+> = {
+  map: 'in' | 'vr' | 'gm';
+  accessibilityKey: string;
+  sourceKey: string;
+  noDataFillColor?: string;
+  hoverFill?: string;
+  hoverStroke?: string;
+  hoverStrokeWidth?: number;
+  highlightStroke?: string;
+  highlightStrokeWidth?: number;
+  areaStroke?: string;
+  areaStrokeWidth?: number;
+  isPercentage?: boolean;
+  highlightSelection?: boolean;
+  selectedCode?: string;
+} & MetricConfiguration<S, M>;
+
 export type MetricConfiguration<
   S extends DataScopeKey,
   M extends MetricKeys<ScopedData[S]>

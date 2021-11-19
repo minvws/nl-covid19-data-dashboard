@@ -134,7 +134,14 @@ function DesktopLockdownTable(props: LockdownTableData) {
       <TableBody>
         {data.groups.map((group) => {
           return (
-            <Row key={group._key}>
+            <Row
+              key={group._key}
+              css={css({
+                '&:last-of-type': {
+                  borderBottom: '1px solid black',
+                },
+              })}
+            >
               <Cell
                 role="rowheader"
                 borderTop={'1px solid black'}

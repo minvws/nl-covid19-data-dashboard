@@ -131,16 +131,14 @@ export function InlineTimeSeriesCharts<
 
   return (
     <ErrorBoundary>
-      <>
-        <TimeSeriesChart
-          accessibility={{ key: configuration.accessibilityKey as any }}
-          values={data.values}
-          seriesConfig={seriesConfig}
-          timeframe={configuration.timeframe}
-          dataOptions={dataOptions}
-        />
-        <Metadata source={source} isTileFooter />
-      </>
+      <TimeSeriesChart
+        accessibility={{ key: configuration.accessibilityKey as any }}
+        values={data.values}
+        seriesConfig={seriesConfig}
+        timeframe={configuration.timeframe}
+        dataOptions={dataOptions}
+      />
+      <Metadata source={source} isTileFooter />
     </ErrorBoundary>
   );
 }

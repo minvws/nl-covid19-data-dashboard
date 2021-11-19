@@ -7,7 +7,7 @@ import {
   useRef,
 } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Choropleth } from '~/components/choropleth';
+import type { ChoroplethComponent } from '~/components/choropleth';
 import { StackedChart } from '~/components/stacked-chart';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 
@@ -21,33 +21,25 @@ function keyCheck<T>(keys: (keyof T)[]) {
 
 type FunctionComponentProps<T extends (...args: any) => any> = Parameters<T>[0];
 
-const relevantComponentProps = new Map<(...args: any) => any, string[]>();
-relevantComponentProps.set(
-  TimeSeriesChart,
-  keyCheck<FunctionComponentProps<typeof TimeSeriesChart>>([
-    'values',
-    'dataOptions',
-    'seriesConfig',
-    'timeframe',
-  ])
-);
-relevantComponentProps.set(
-  Choropleth,
-  keyCheck<FunctionComponentProps<typeof Choropleth>>([
-    'map',
-    'data',
-    'dataConfig',
-    'dataOptions',
-  ])
-);
-relevantComponentProps.set(
-  StackedChart,
-  keyCheck<FunctionComponentProps<typeof StackedChart>>([
-    'values',
-    'config',
-    'timeframe',
-  ])
-);
+/**
+ * We work with resolveWeak since we don't want to import these components just
+ * to be able to check if a component is one of these types later. Instead, we
+ * resolve the paths here and later check webpack's require cache to compare
+ * components. That way we can check if a component is one of these types
+ * without importing them in this file: we'll only compare if the component was
+ * imported somewhere else.
+ */
+const relevantComponentPathProps: Record<string, string[]> = {
+  [require.resolveWeak('~/components/choropleth')]: keyCheck<
+    FunctionComponentProps<ChoroplethComponent>
+  >(['map', 'data', 'dataConfig', 'dataOptions']),
+  [require.resolveWeak('~/components/stacked-chart')]: keyCheck<
+    FunctionComponentProps<typeof StackedChart>
+  >(['values', 'config', 'timeframe']),
+  [require.resolveWeak('~/components/time-series-chart')]: keyCheck<
+    FunctionComponentProps<typeof TimeSeriesChart>
+  >(['values', 'dataOptions', 'seriesConfig', 'timeframe']),
+};
 
 /**
  * This hook will return two methods. The first one accepts a components children
@@ -111,9 +103,9 @@ function extractPropsAndFillReport(
 function extractComponentProps(
   reactNode: ReactElement | ReactNode[]
 ): Record<string, unknown> | undefined {
-  const [element, type] = findComponentNode(reactNode);
-  if (element && type) {
-    const propNames = relevantComponentProps.get(type);
+  const [element, type, path] = findComponentNode(reactNode);
+  if (element && type && path) {
+    const propNames = relevantComponentPathProps[path];
     return propNames
       ? Object.assign(
           Object.fromEntries(
@@ -127,20 +119,26 @@ function extractComponentProps(
   }
 }
 
-function isKnownComponentType(type: any) {
-  return relevantComponentProps.has(type);
+function findComponentPath(componentName: string) {
+  const paths = Object.keys(relevantComponentPathProps);
+
+  for (let i = 0; i < paths.length; i++) {
+    const imported = require.cache[paths[i]];
+    if (imported && componentName in imported.exports) {
+      return paths[i];
+    }
+  }
 }
 
 function findComponentNode(
   node: ReactNode | ReactNode[]
-): [ReactElement | undefined, any] {
+): [ReactElement | undefined, any, string | undefined] {
   if (isReactElement(node)) {
-    if (
-      isObject(node.type) &&
-      'name' in node.type &&
-      isKnownComponentType(node.type)
-    ) {
-      return [node, node.type];
+    if (isObject(node.type) && 'name' in node.type) {
+      const path = findComponentPath(node.type.name);
+      if (path) {
+        return [node, node.type, path];
+      }
     } else if (isArray(node.props.children)) {
       for (let i = 0; i < node.props.children.length; i++) {
         const result = findComponentNode(node.props.children[i]);
@@ -155,11 +153,11 @@ function findComponentNode(
       .filter(isReactElement)
       .find(
         (x) =>
-          isObject(x.type) && 'name' in x.type && isKnownComponentType(x.type)
+          isObject(x.type) && 'name' in x.type && findComponentPath(x.type.name)
       );
     if (isDefined(element)) {
       return findComponentNode(element);
     }
   }
-  return [undefined, undefined];
+  return [undefined, undefined, undefined];
 }

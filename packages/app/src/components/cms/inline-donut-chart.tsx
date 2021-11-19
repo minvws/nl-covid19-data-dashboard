@@ -12,6 +12,7 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
 import { useIntl } from '~/intl';
+import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
 import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
@@ -57,7 +58,7 @@ export function InlineDonutChart<
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 
   return (
-    <>
+    <ErrorBoundary>
       <PieChart
         title={title}
         data={data}
@@ -99,6 +100,6 @@ export function InlineDonutChart<
         source={source}
         isTileFooter
       />
-    </>
+    </ErrorBoundary>
   );
 }

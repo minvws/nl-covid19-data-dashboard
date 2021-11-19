@@ -15,6 +15,8 @@ import { useReverseRouter } from '../use-reverse-router';
 const UseReverseRouter = suite('useReverseRouter');
 
 let largeScreen = false;
+const vrCode = 'VR25';
+const gmCode = 'GM001';
 
 UseReverseRouter.before((context) => {
   context.cleanupJsDom = injectJsDom();
@@ -64,15 +66,15 @@ const TestBed = () => {
   return (
     <>
       <div data-testid="nl">{router.nl.index()}</div>
-      <div data-testid="vr">{router.vr.index('VR25')}</div>
-      <div data-testid="gm">{router.gm.index('GM001')}</div>
+      <div data-testid="vr">{router.vr.index(vrCode)}</div>
+      <div data-testid="gm">{router.gm.index(gmCode)}</div>
       <div data-testid="in">{router.in.index()}</div>
     </>
   );
 };
 
 UseReverseRouter(
-  'indexes should have menu suffix on small pages',
+  'indexes should link to the actual index on small screens',
   (context) => {
     largeScreen = false;
     const result = render(<TestContainer />);
@@ -81,41 +83,38 @@ UseReverseRouter(
     const gmDiv = result.getByTestId('gm');
     const inDiv = result.getByTestId('in');
 
-    assert.equal(nlDiv.textContent?.endsWith('?menu=1'), true);
-    assert.equal(vrDiv.textContent?.endsWith('?menu=1'), true);
-    assert.equal(gmDiv.textContent?.endsWith('?menu=1'), true);
-    assert.equal(inDiv.textContent?.endsWith('?menu=1'), true);
+    assert.equal(nlDiv.textContent?.endsWith('/landelijk'), true);
+    assert.equal(vrDiv.textContent?.endsWith(vrCode), true);
+    assert.equal(gmDiv.textContent?.endsWith(gmCode), true);
+    assert.equal(inDiv.textContent?.endsWith('/internationaal'), true);
   }
 );
 
-UseReverseRouter(
-  'indexes should not have menu suffix on large pages',
-  (context) => {
-    largeScreen = true;
-    const result = render(<TestContainer />);
-    const nlDiv = result.getByTestId('nl');
-    const vrDiv = result.getByTestId('vr');
-    const gmDiv = result.getByTestId('gm');
-    const inDiv = result.getByTestId('in');
+UseReverseRouter("indexes should 'redirect' to child pages", (context) => {
+  largeScreen = true;
+  const result = render(<TestContainer />);
+  const nlDiv = result.getByTestId('nl');
+  const vrDiv = result.getByTestId('vr');
+  const gmDiv = result.getByTestId('gm');
+  const inDiv = result.getByTestId('in');
 
-    assert.equal(nlDiv.textContent?.endsWith('?menu=1'), false);
-    assert.equal(vrDiv.textContent?.endsWith('?menu=1'), false);
-    assert.equal(gmDiv.textContent?.endsWith('?menu=1'), false);
-    assert.equal(inDiv.textContent?.endsWith('?menu=1'), false);
-  }
-);
+  assert.equal(nlDiv.textContent?.endsWith('/vaccinaties'), true);
+  assert.equal(vrDiv.textContent?.endsWith('/vaccinaties'), true);
+  assert.equal(gmDiv.textContent?.endsWith('/vaccinaties'), true);
+  assert.equal(inDiv.textContent?.endsWith('/positief-geteste-mensen'), true);
+});
 
 UseReverseRouter('VR routes should have the VR code in them', (context) => {
   const { result } = renderHook(() => useReverseRouter());
 
   const keys = Object.keys(result.current.vr);
   keys.forEach((name) => {
-    const route = (result.current.vr as any)[name]('VR25');
-    assert.equal(route.indexOf('VR25') > -1, true);
+    const route = (result.current.vr as any)[name](vrCode);
+    assert.equal(route.indexOf(vrCode) > -1, true);
   });
 
-  const route = result.current.actueel.vr('VR25');
-  assert.equal(route.indexOf('VR25') > -1, true);
+  const route = result.current.actueel.vr(vrCode);
+  assert.equal(route.indexOf(vrCode) > -1, true);
 });
 
 UseReverseRouter('GM routes should have the GM code in them', (context) => {
@@ -123,12 +122,12 @@ UseReverseRouter('GM routes should have the GM code in them', (context) => {
 
   const keys = Object.keys(result.current.gm);
   keys.forEach((name) => {
-    const route = (result.current.gm as any)[name]('GM001');
-    assert.equal(route.indexOf('GM001') > -1, true);
+    const route = (result.current.gm as any)[name](gmCode);
+    assert.equal(route.indexOf(gmCode) > -1, true);
   });
 
-  const route = result.current.actueel.gm('GM001');
-  assert.equal(route.indexOf('GM001') > -1, true);
+  const route = result.current.actueel.gm(gmCode);
+  assert.equal(route.indexOf(gmCode) > -1, true);
 });
 
 UseReverseRouter.run();

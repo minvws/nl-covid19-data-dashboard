@@ -12,6 +12,7 @@ export const dataStructure = {
     tested_overall_sum: ["infected_per_100k"],
     tested_overall: [
       "infected",
+      "infected_moving_average",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -52,6 +53,22 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
+    booster_shot: [
+      "partially_or_fully_vaccinated_total_received_percentage",
+      "partially_or_fully_vaccinated_total_amount_of_people",
+      "total_date_start_unix",
+      "total_date_end_unix",
+      "received_booster_last_seven_days",
+      "total_shots_last_seven_days",
+      "last_seven_days_date_start_unix",
+      "last_seven_days_date_end_unix",
+    ],
+    booster_shot_per_age_group: [
+      "age_group_range",
+      "received_booster_total",
+      "received_booster_percentage",
+      "birthyear_range",
+    ],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
     infectious_people: ["margin_low", "estimate", "margin_high"],
@@ -75,6 +92,7 @@ export const dataStructure = {
     ],
     tested_overall: [
       "infected",
+      "infected_moving_average",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -330,6 +348,7 @@ export const dataStructure = {
     sewer: ["average"],
     tested_overall: [
       "infected",
+      "infected_moving_average",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],

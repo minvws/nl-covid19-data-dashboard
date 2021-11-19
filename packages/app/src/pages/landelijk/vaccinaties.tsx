@@ -1,4 +1,11 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  NlBoosterShotPerAgeGroupValue,
+  NlBoosterShotValue,
+  NlHospitalVaccineIncidencePerAgeGroupValue,
+  NlIntensiveCareVaccinationStatusValue,
+  WEEK_IN_SECONDS,
+} from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
@@ -6,13 +13,14 @@ import {
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { isDefined } from 'ts-is-present';
-import { AgeDemographic } from '~/components/age-demographic';
+import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { PieChart } from '~/components/pie-chart';
+import { PieChartProps } from '~/components/pie-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
@@ -22,6 +30,8 @@ import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selec
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
+import { VaccineBoosterKpiSection } from '~/domain/vaccine/vaccine-booster-kpi-section';
+import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -60,6 +70,16 @@ import {
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const AgeDemographic = dynamic<
+  AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
+>(() =>
+  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
+);
+
+const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
+  () => import('~/components/pie-chart').then((mod) => mod.PieChart)
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -103,6 +123,14 @@ export const getStaticProps = createGetStaticProps(
           'vaccinationsPageArticles'
         ),
         links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
+        boosterArticles: getArticleParts(
+          content.parts.pageParts,
+          'vaccineBoosterArticles'
+        ),
+        boosterLinks: getLinkParts(
+          content.parts.pageParts,
+          'vaccinationsBoosterPageLinks'
+        ),
         pageDescription: getRichTextParts(
           content.parts.pageParts,
           'vaccinationsPageDescription'
@@ -126,6 +154,42 @@ export const getStaticProps = createGetStaticProps(
     },
   })
 );
+
+const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
+  {
+    age_group_range: '18-30',
+    received_booster_total: 1234,
+    received_booster_percentage: 99,
+    date_of_insertion_unix: 1637058313,
+    date_start_unix: 1637058313 - WEEK_IN_SECONDS,
+    date_end_unix: 1637058313,
+    birthyear_range: '-1204',
+  },
+  {
+    age_group_range: '81+',
+    received_booster_total: 43,
+    received_booster_percentage: 55,
+    date_of_insertion_unix: 1637058313,
+    date_start_unix: 1637058313 - WEEK_IN_SECONDS,
+    date_end_unix: 1637058313,
+    birthyear_range: '1204-',
+  },
+] as NlBoosterShotPerAgeGroupValue[];
+
+/**
+ * @TODO: Please remove once data becomes avaliable
+ */
+const DUMMY_DATA_BOOSTER_SHOTS_KPI = {
+  partially_or_fully_vaccinated_total_received_percentage: 99,
+  partially_or_fully_vaccinated_total_amount_of_people: 21944,
+  total_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
+  total_date_end_unix: 1637054676,
+  received_booster_last_seven_days: 1694,
+  total_shots_last_seven_days: 610876,
+  last_seven_days_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
+  last_seven_days_date_end_unix: 1637054676,
+  date_of_insertion_unix: 1637054676,
+} as NlBoosterShotValue;
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
@@ -166,6 +230,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationStatusIntensiveCareFeature = useFeature(
     'nlVaccinationIntensiveCareVaccinationStatus'
   );
+  const vaccinationsBoosterInformationBlockFeature = useFeature(
+    'nlVaccinationsBoosterInformationBlock'
+  );
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
+  const vaccinationsBoosterShotsKpiFeature = useFeature(
+    'nlVaccinationsBoosterShotsKpi'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -193,11 +266,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
       lastValueIntensiveCareVaccinationStatus.date_end_unix
     );
 
+  const hasActiveWarningTile =
+    text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
-        <TileList>
-          {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
+        <TileList hasActiveWarningTile={hasActiveWarningTile}>
+          {hasActiveWarningTile && (
             <WarningTile
               isFullWidth
               message={text.belangrijk_bericht}
@@ -222,6 +298,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.articles}
           />
+
           {vaccineCoverageEstimatedFeature.isEnabled && (
             <VaccineCoverageToggleTile
               title={text.vaccination_grade_toggle_tile.title}
@@ -249,6 +326,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               numFractionDigits={1}
             />
           )}
+
           {vaccinationPerAgeGroupFeature.isEnabled && (
             <VaccineCoveragePerAgeGroup
               title={siteText.vaccinaties.vaccination_coverage.title}
@@ -344,6 +422,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .hospital.labels.has_one_shot_or_not_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.tooltip_labels
+                              .has_one_shot_or_not_vaccinated,
                         },
                         {
                           metricProperty: 'fully_vaccinated',
@@ -351,6 +433,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .hospital.labels.fully_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .hospital.tooltip_labels.fully_vaccinated,
                         },
                       ]}
                     />
@@ -394,6 +479,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                             text.vaccination_status_ic_and_hospital_section
                               .intensive_care.labels
                               .has_one_shot_or_not_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.tooltip_labels
+                              .has_one_shot_or_not_vaccinated,
                         },
                         {
                           metricProperty: 'fully_vaccinated',
@@ -401,6 +490,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             text.vaccination_status_ic_and_hospital_section
                               .intensive_care.labels.fully_vaccinated,
+                          tooltipLabel:
+                            text.vaccination_status_ic_and_hospital_section
+                              .intensive_care.tooltip_labels.fully_vaccinated,
                         },
                       ]}
                     />
@@ -451,6 +543,50 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
+
+          {vaccinationsBoosterInformationBlockFeature.isEnabled && (
+            <>
+              <Spacer pb={3} />
+
+              <PageInformationBlock
+                title={text.booster_information_block.title}
+                icon={<VaccinatieIcon />}
+                description={text.booster_information_block.description}
+                metadata={{
+                  datumsText: text.booster_information_block.datums,
+                  /**
+                   * @TODO Connect with real data
+                   */
+                  dateOrRange: 1637138475,
+                  dateOfInsertionUnix: 1637138475,
+                  dataSources: [],
+                }}
+                pageLinks={content.boosterLinks}
+                referenceLink={text.booster_information_block.reference.href}
+                articles={content.boosterArticles}
+              />
+            </>
+          )}
+
+          {vaccinationsBoosterShotsKpiFeature.isEnabled && (
+            <VaccineBoosterKpiSection data={DUMMY_DATA_BOOSTER_SHOTS_KPI} />
+          )}
+
+          {vaccinationBoosterShotsPerAgeGroupFeature && (
+            <VaccineBoosterPerAgeGroup
+              data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+              ]}
+            />
+          )}
 
           <Spacer pb={3} />
 

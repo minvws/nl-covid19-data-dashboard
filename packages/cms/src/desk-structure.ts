@@ -46,6 +46,8 @@ const hiddenDocTypes = [
   'warning',
   'chartConfiguration',
   'kpiConfiguration',
+  'donutChartConfiguration',
+  'choroplethConfiguration',
   'ageDemographicChartConfiguration',
   'pageArticles',
   'pageLinks',
@@ -138,6 +140,7 @@ export default () =>
                   'chartConfiguration',
                   'ageDemographicChartConfiguration',
                   'donutChartConfiguration',
+                  'choroplethConfiguration',
                 ].includes(item.getId() ?? '')
               )
             )
