@@ -18,8 +18,9 @@ const StyledInput = styled.input(
     '&:checked + label': {
       bg: 'button',
       color: 'white',
+      borderColor: 'blue',
     },
-    '&:focus + label': {
+    '&:focus-visible + label': {
       outline: '2px dotted #cc005a',
     },
   })
@@ -30,20 +31,25 @@ const StyledLabel = styled.label(
     flex: '0 1 auto',
     color: 'button',
     textAlign: 'center',
-    p: asResponsiveArray({ _: '0.25em 0.5em', xs: '0.2em 1.5em' }),
-    borderStyle: 'solid',
-    borderColor: 'button',
-    borderWidth: '1px 0 1px 1px',
+    p: asResponsiveArray({ _: '0.25em 0.5em', xs: '0.3em 1.5em' }),
+    borderRadius: '5px 0 0 5px',
+    border: '1px solid silver',
+    borderRightWidth: 0,
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     userSelect: 'none',
+    height: '36px',
+    transition: '0.1s background-color',
 
     '&:last-child': {
-      borderRightWidth: '1px',
+      borderWidth: '1px 1px 1px 0',
+      borderRadius: '0 5px 5px 0',
     },
 
     '&:hover, &:focus': {
-      bg: '#cae1ed',
+      bg: 'tileGray',
+      color: 'blue',
+      borderColor: 'blue'
     },
   })
 );
