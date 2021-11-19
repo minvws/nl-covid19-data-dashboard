@@ -13,7 +13,7 @@ export const SelectBox = styled(Box)(
     alignItems: 'center',
     borderColor: 'silver',
     borderStyle: 'solid',
-    borderRadius: '5px',
+    borderRadius: theme => theme.radii[1],
     height: '36px',
     borderWidth: 1,
     transition: '0.1s background-color',
