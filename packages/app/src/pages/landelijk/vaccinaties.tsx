@@ -4,12 +4,12 @@ import {
   NlBoosterShotValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  WEEK_IN_SECONDS,
+  WEEK_IN_SECONDS
 } from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
-  Ziekenhuis,
+  Ziekenhuis
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
@@ -42,30 +42,30 @@ import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents,
+  getTimelineEvents
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-  getRichTextParts,
+  getRichTextParts
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import {
   ArticleParts,
   LinkParts,
   PagePartQueryResult,
-  RichTextParts,
+  RichTextParts
 } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
@@ -198,7 +198,6 @@ const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
  * @TODO: Please remove once data becomes avaliable
  */
 const DUMMY_DATA_BOOSTER_SHOTS_KPI = {
-  partially_or_fully_vaccinated_total_received_percentage: 99,
   partially_or_fully_vaccinated_total_amount_of_people: 21944,
   total_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
   total_date_end_unix: 1637054676,

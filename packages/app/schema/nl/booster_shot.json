@@ -22,9 +22,6 @@
       "title": "nl_booster_shot_value",
       "type": "object",
       "properties": {
-        "partially_or_fully_vaccinated_total_received_percentage": {
-          "type": "integer"
-        },
         "partially_or_fully_vaccinated_total_amount_of_people": {
           "type": "number"
         },
@@ -51,7 +48,6 @@
         }
       },
       "required": [
-        "partially_or_fully_vaccinated_total_received_percentage",
         "partially_or_fully_vaccinated_total_amount_of_people",
         "total_date_start_unix",
         "total_date_end_unix",
