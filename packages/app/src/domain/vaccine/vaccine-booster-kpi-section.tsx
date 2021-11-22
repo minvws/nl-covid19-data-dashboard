@@ -27,9 +27,7 @@ export function VaccineBoosterKpiSection({
         }}
       >
         <KpiValue
-          percentage={
-            data.partially_or_fully_vaccinated_total_received_percentage
-          }
+          absolute={data.partially_or_fully_vaccinated_total_amount_of_people}
         />
         <Markdown
           content={replaceVariablesInText(text.total_section.description, {

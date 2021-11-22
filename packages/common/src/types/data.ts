@@ -361,7 +361,6 @@ export interface NlBoosterShot {
   last_value: NlBoosterShotValue;
 }
 export interface NlBoosterShotValue {
-  partially_or_fully_vaccinated_total_received_percentage: number;
   partially_or_fully_vaccinated_total_amount_of_people: number;
   total_date_start_unix: number;
   total_date_end_unix: number;
