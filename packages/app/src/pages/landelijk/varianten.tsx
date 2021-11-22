@@ -12,7 +12,6 @@ import {
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
 import {
   getArticleParts,
   getLinkParts,
@@ -29,36 +28,33 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 
-export const getStaticProps = withFeatureNotFoundPage(
-  'nlVariantsPage',
-  createGetStaticProps(
-    getLastGeneratedDate,
-    () => {
-      const data = selectNlData('variants', 'named_difference')();
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  () => {
+    const data = selectNlData('variants', 'named_difference')();
 
-      const {
-        selectedNlData: { variants },
-      } = data;
+    const {
+      selectedNlData: { variants },
+    } = data;
 
-      return {
-        variantSidebarValue: getVariantSidebarValue(variants) ?? null,
-        ...getVariantTableData(variants, data.selectedNlData.named_difference),
-        ...getVariantChartData(variants),
-      };
-    },
-    async (context: GetStaticPropsContext) => {
-      const { content } = await createGetContent<
-        PagePartQueryResult<ArticleParts | LinkParts>
-      >(() => getPagePartsQuery('variantsPage'))(context);
+    return {
+      variantSidebarValue: getVariantSidebarValue(variants) ?? null,
+      ...getVariantTableData(variants, data.selectedNlData.named_difference),
+      ...getVariantChartData(variants),
+    };
+  },
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts | LinkParts>
+    >(() => getPagePartsQuery('variantsPage'))(context);
 
-      return {
-        content: {
-          articles: getArticleParts(content.pageParts, 'variantsPageArticles'),
-          links: getLinkParts(content.pageParts, 'variantsPageLinks'),
-        },
-      };
-    }
-  )
+    return {
+      content: {
+        articles: getArticleParts(content.pageParts, 'variantsPageArticles'),
+        links: getLinkParts(content.pageParts, 'variantsPageLinks'),
+      },
+    };
+  }
 );
 
 export default function CovidVariantenPage(

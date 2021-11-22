@@ -7,7 +7,6 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -23,30 +22,24 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
-export const getStaticProps = withFeatureNotFoundPage(
-  'situationsPage',
-  createGetStaticProps(
-    getLastGeneratedDate,
-    createGetChoroplethData({
-      vr: ({ situations }) => ({
-        situations,
-      }),
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetChoroplethData({
+    vr: ({ situations }) => ({
+      situations,
     }),
-    async (context: GetStaticPropsContext) => {
-      const { content } = await createGetContent<
-        PagePartQueryResult<ArticleParts>
-      >(() => getPagePartsQuery('situationsPage'))(context);
+  }),
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<
+      PagePartQueryResult<ArticleParts>
+    >(() => getPagePartsQuery('situationsPage'))(context);
 
-      return {
-        content: {
-          articles: getArticleParts(
-            content.pageParts,
-            'situationsPageArticles'
-          ),
-        },
-      };
-    }
-  )
+    return {
+      content: {
+        articles: getArticleParts(content.pageParts, 'situationsPageArticles'),
+      },
+    };
+  }
 );
 
 export default function BrononderzoekPage(

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useFeature } from '~/lib/features';
 import { useBreakpoints } from './use-breakpoints';
 
 export type ReverseRouter = ReturnType<typeof useReverseRouter>;
@@ -7,8 +6,6 @@ export type ReverseRouter = ReturnType<typeof useReverseRouter>;
 export function useReverseRouter() {
   const breakpoints = useBreakpoints();
   const isMobile = !breakpoints.md;
-
-  const vaccinationGmPagefeature = useFeature('gmVaccinationPage');
 
   return useMemo(() => {
     const reverseRouter = {
@@ -85,14 +82,10 @@ export function useReverseRouter() {
       gm: {
         index: (code?: string) =>
           code
-            ? vaccinationGmPagefeature.isEnabled
-              ? isMobile
-                ? `/gemeente/${code}`
-                : reverseRouter.gm.vaccinaties(code)
-              : isMobile
+            ? isMobile
               ? `/gemeente/${code}`
-              : reverseRouter.gm.ziekenhuisopnames(code)
-            : `/gemeente`,
+              : reverseRouter.gm.vaccinaties(code)
+            : '/gemeente',
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
         sterfte: (code: string) => `/gemeente/${code}/sterfte`,
@@ -104,5 +97,5 @@ export function useReverseRouter() {
     } as const;
 
     return reverseRouter;
-  }, [isMobile, vaccinationGmPagefeature]);
+  }, [isMobile]);
 }
