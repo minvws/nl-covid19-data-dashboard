@@ -63,7 +63,7 @@ export function FullscreenChartTile({
             css={css({
               position: 'absolute',
               top: '1.85rem',
-              right: '10px',
+              right: 0,
               color: 'silver',
 
               '&:focus-within': {
