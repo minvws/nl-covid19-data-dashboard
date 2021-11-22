@@ -116,7 +116,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
-          <PageInformationBlock
+          {/* <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
             title={text.titel}
@@ -131,7 +131,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.articles}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -190,7 +189,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Text>{text.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChoroplethTile
             data-cy="choropleths"
             title={text.map_titel}
@@ -205,19 +203,19 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               title: text.chloropleth_legenda.titel,
               thresholds: thresholds.vr.infected_per_100k,
             }}
-          >
-            {/**
-             * It's probably a good idea to abstract this even further, so that
-             * the switching of charts, and the state involved, are all handled by
-             * the component. The page does not have to be bothered with this.
-             *
-             * Ideally the ChoroplethTile would receive some props with the data
-             * it needs to render either Choropleth without it caring about
-             * MunicipalityChloropleth or VrChloropleth, that data would
-             * make the chart and define the tooltip layout for each, but maybe for
-             * now that is a bridge too far. Let's take it one step at a time.
-             */}
-            {selectedMap === 'gm' && (
+          > */}
+          {/**
+           * It's probably a good idea to abstract this even further, so that
+           * the switching of charts, and the state involved, are all handled by
+           * the component. The page does not have to be bothered with this.
+           *
+           * Ideally the ChoroplethTile would receive some props with the data
+           * it needs to render either Choropleth without it caring about
+           * MunicipalityChloropleth or VrChloropleth, that data would
+           * make the chart and define the tooltip layout for each, but maybe for
+           * now that is a bridge too far. Let's take it one step at a time.
+           */}
+          {/* {selectedMap === 'gm' && (
               <DynamicChoropleth
                 map="gm"
                 accessibility={{
@@ -249,7 +247,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChoroplethTile>
+          </ChoroplethTile> */}
 
           <ChartTile
             title={text.linechart_titel}
@@ -258,6 +256,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
             timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="5weeks"
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -275,21 +274,21 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         .infected_per_100k_moving_average,
                     color: colors.data.primary,
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'infected',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_overall,
-                  },
+                  // {
+                  //   type: 'bar',
+                  //   metricProperty: 'infected_per_100k',
+                  //   label:
+                  //     siteText.positief_geteste_personen.tooltip_labels
+                  //       .infected_per_100k,
+                  //   color: colors.data.primary,
+                  // },
+                  // {
+                  //   type: 'invisible',
+                  //   metricProperty: 'infected',
+                  //   label:
+                  //     siteText.positief_geteste_personen.tooltip_labels
+                  //       .infected_overall,
+                  // },
                 ]}
                 dataOptions={{
                   timelineEvents: getTimelineEvents(
@@ -301,7 +300,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ChartTile
+          {/* <ChartTile
             title={siteText.infected_per_age_group.title}
             description={siteText.infected_per_age_group.description}
             timeframeOptions={['all', '5weeks']}
@@ -323,11 +322,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
           <GNumberBarChartTile data={data.g_number} />
-
           <Spacer pb={3} />
-
           <PageInformationBlock
             title={ggdText.titel}
             id="ggd"
@@ -342,7 +338,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={ggdText.reference_href}
             articles={content.ggdArticles}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}
@@ -401,7 +396,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               </Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
@@ -445,7 +439,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
           <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
@@ -511,7 +504,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTile>
+          </ChartTile> */}
         </TileList>
       </NlLayout>
     </Layout>
