@@ -107,7 +107,8 @@ export const getStaticProps = createGetStaticProps(
       'hospital_lcps',
       'difference',
       'vaccine_administered_total',
-      'vaccine_coverage_per_age_group_estimated'
+      'vaccine_coverage_per_age_group_estimated',
+      'risk_level'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -584,7 +585,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner data={DUMMY_DATA} hasLink />
+            <EscalationLevelBanner data={data.risk_level.last_value} hasLink />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}

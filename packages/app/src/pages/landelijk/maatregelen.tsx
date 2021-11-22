@@ -1,4 +1,3 @@
-import { NlRiskLevelValue } from '@corona-dashboard/common';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -16,6 +15,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  selectNlData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
@@ -24,22 +24,9 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
-// @TODO remove dummy data once data is avaliable
-const DUMMY_DATA = {
-  risk_level: 2,
-  hospital_admissions_on_date_of_admission_moving_average_rounded: 10,
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1615845391,
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded: 12,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1235845391,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
-  date_unix: 1625245391,
-  valid_from_unix: 1635845391,
-  date_of_insertion_unix: 1635845391,
-} as NlRiskLevelValue;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
     return `
@@ -69,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
-  const { content, lastGenerated } = props;
+  const { content, lastGenerated, selectedNlData: data } = props;
   const { lockdown } = content;
 
   const metadata = {
@@ -93,7 +80,10 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           <Tile>
             <Box spacing={3}>
               <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} level={DUMMY_DATA.risk_level} />
+              <LockdownTable
+                data={lockdown}
+                level={data.risk_level.last_value.risk_level}
+              />
             </Box>
           </Tile>
         </TileList>

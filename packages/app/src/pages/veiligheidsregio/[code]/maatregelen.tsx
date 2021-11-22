@@ -1,4 +1,3 @@
-import { NlRiskLevelValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
@@ -19,26 +18,13 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  selectNlData,
   selectVrData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
-
-// @TODO remove dummy data once data is avaliable
-const DUMMY_DATA = {
-  risk_level: 2,
-  hospital_admissions_on_date_of_admission_moving_average_rounded: 10,
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1615845391,
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded: 12,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1235845391,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
-  date_unix: 1625245391,
-  valid_from_unix: 1635845391,
-  date_of_insertion_unix: 1635845391,
-} as NlRiskLevelValue;
 
 type MaatregelenData = {
   lockdown: LockdownData;
@@ -48,6 +34,7 @@ type MaatregelenData = {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrData(),
+  selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
 
@@ -76,7 +63,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, vrName, lastGenerated } = props;
+  const { content, vrName, lastGenerated, selectedNlData } = props;
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_maatregelen;
@@ -130,7 +117,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           <Tile>
             <Box spacing={3}>
               <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable data={lockdown} level={DUMMY_DATA.risk_level} />
+              <LockdownTable
+                data={lockdown}
+                level={selectedNlData.risk_level.last_value.risk_level}
+              />
             </Box>
           </Tile>
 

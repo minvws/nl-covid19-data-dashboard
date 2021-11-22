@@ -1,4 +1,3 @@
-import { NlRiskLevelValue } from '@corona-dashboard/common';
 import { Arts, Ziekenhuis } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import Head from 'next/head';
@@ -18,6 +17,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  selectNlData,
 } from '~/static-props/get-data';
 import { RichContentBlock } from '~/types/cms';
 import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
@@ -29,29 +29,9 @@ interface OverRisiconiveausData {
   content: RichContentBlock[];
 }
 
-// @TODO remove dummy data once data is avaliable
-
-const DUMMY_DATA = {
-  risk_level: 2,
-  hospital_admissions_on_date_of_admission_moving_average_rounded: 10,
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1615845391,
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded: 12,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: 1235845391,
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: 1635845391,
-  last_calculated_unix: 1625245391,
-  valid_from_unix: 1635845391,
-  date_of_insertion_unix: 1635845391,
-} as NlRiskLevelValue;
-
-const DUMMY_DATA_OBJECT = {
-  risk_levels: {
-    last_value: DUMMY_DATA,
-  },
-};
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  selectNlData('risk_level'),
   createGetContent<OverRisiconiveausData>(() => {
     return "*[_type == 'overRisicoNiveausNew'][0]";
   })
@@ -59,19 +39,23 @@ export const getStaticProps = createGetStaticProps(
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { lastGenerated, content } = props;
+  const { lastGenerated, content, selectedNlData: data } = props;
 
   content.content = mergeAdjacentKpiBlocks(content.content);
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
-      DUMMY_DATA.intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix,
-      DUMMY_DATA.intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix
+      data.risk_level.last_value
+        .intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix,
+      data.risk_level.last_value
+        .intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix
     );
 
   const [hospitalDateFromText, hospitalDateToText] = useFormatDateRange(
-    DUMMY_DATA.hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix,
-    DUMMY_DATA.hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix
+    data.risk_level.last_value
+      .hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix,
+    data.risk_level.last_value
+      .hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix
   );
 
   const text = siteText.over_risiconiveaus;
@@ -100,7 +84,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         </Box>
 
         <Box maxWidth="maxWidthText" spacing={4}>
-          <EscalationLevelBanner data={DUMMY_DATA} />
+          <EscalationLevelBanner data={data.risk_level.last_value} />
 
           <Box
             display="flex"
@@ -122,8 +106,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <PageKpi
-                data={DUMMY_DATA_OBJECT}
-                metricName={'risk_levels'}
+                data={data}
+                metricName={'risk_level'}
                 metricProperty={
                   'intensive_care_admissions_on_date_of_admission_moving_average_rounded'
                 }
@@ -145,8 +129,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <PageKpi
-                data={DUMMY_DATA_OBJECT}
-                metricName={'risk_levels'}
+                data={data}
+                metricName={'risk_level'}
                 metricProperty={
                   'hospital_admissions_on_date_of_admission_moving_average_rounded'
                 }
