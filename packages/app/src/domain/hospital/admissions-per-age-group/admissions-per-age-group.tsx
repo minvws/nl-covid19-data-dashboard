@@ -66,7 +66,7 @@ export function AdmissionsPerAgeGroup({
         type: 'line',
         shape: 'line',
         label,
-        ariaLabel: replaceVariablesInText(siteText.aria_labels.age_old, {
+        legendAriaLabel: replaceVariablesInText(siteText.aria_labels.age_old, {
           age: label,
         }),
       };

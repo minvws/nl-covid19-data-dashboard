@@ -11,7 +11,7 @@ export interface SelectOption<T = string> {
   label: string;
   color: string;
   shape?: 'line' | 'circle' | 'square';
-  ariaLabel?: 'string';
+  legendAriaLabel?: string;
 }
 
 interface InteractiveLegendProps<T = string> {
@@ -51,7 +51,7 @@ export function InteractiveLegend<T = string>({
                   isActive={hasSelection && isSelected}
                   borderColor={item.color}
                   data-text={item.label}
-                  aria-label={item.ariaLabel}
+                  aria-label={item.legendAriaLabel}
                 >
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
