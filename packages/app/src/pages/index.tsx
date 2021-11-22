@@ -91,7 +91,8 @@ export const getStaticProps = createGetStaticProps(
       'hospital_lcps',
       'difference',
       'vaccine_administered_total',
-      'vaccine_coverage_per_age_group_estimated'
+      'vaccine_coverage_per_age_group_estimated',
+      'risk_level'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -228,19 +229,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
-                  confirmedCasesFeature.isEnabled ?
-                  {
-                    label:
-                      siteText.nationaal_actueel.mini_trend_tiles
-                        .positief_geteste_mensen.menu_item_label,
-                    data: dataTestedOverall.values,
-                    dataProperty: 'infected',
-                    value: dataTestedOverall.last_value.infected,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'tested_overall'
-                    ),
-                  } as MiniTileSelectorItem<NlTestedOverallValue> : undefined as any,
+                  confirmedCasesFeature.isEnabled
+                    ? ({
+                        label:
+                          siteText.nationaal_actueel.mini_trend_tiles
+                            .positief_geteste_mensen.menu_item_label,
+                        data: dataTestedOverall.values,
+                        dataProperty: 'infected',
+                        value: dataTestedOverall.last_value.infected,
+                        warning: getWarning(
+                          content.elements.warning,
+                          'tested_overall'
+                        ),
+                      } as MiniTileSelectorItem<NlTestedOverallValue>)
+                    : (undefined as any),
                   {
                     label:
                       siteText.nationaal_actueel.mini_trend_tiles
@@ -261,7 +263,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           ?.age_18_plus_fully_vaccinated,
                     },
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
-                ].filter(x => x !== undefined)}
+                ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
                   title={text.mini_trend_tiles.ic_opnames.title}
@@ -451,7 +453,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               metricProperty: 'infected',
                               additionalData: {
                                 dateStart: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix - WEEK_IN_SECONDS
+                                  data.tested_overall.last_value.date_unix -
+                                    WEEK_IN_SECONDS
                                 ),
                                 dateEnd: formatters.formatDateFromSeconds(
                                   data.tested_overall.last_value.date_unix
@@ -462,7 +465,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               type: 'metric',
                               text: text.data_driven_texts.tested_ggd.value,
                               metricName: 'tested_ggd',
-                              metricProperty: 'infected_percentage_moving_average',
+                              metricProperty:
+                                'infected_percentage_moving_average',
                             },
                           ]}
                         />
@@ -565,10 +569,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner
-              level={content.riskLevel.level}
-              dateFrom={content.riskLevel.dateFrom}
-            />
+            <EscalationLevelBanner data={data.risk_level.last_value} hasLink />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
