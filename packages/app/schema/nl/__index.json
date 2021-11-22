@@ -35,6 +35,7 @@
     "reproduction",
     "sewer",
     "tested_ggd",
+    "tested_ggd_archived",
     "tested_overall",
     "tested_per_age_group",
     "vaccine_vaccinated_or_support",
@@ -129,6 +130,9 @@
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
+    },
+    "tested_ggd_archived": {
+      "$ref": "tested_ggd_archived.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
