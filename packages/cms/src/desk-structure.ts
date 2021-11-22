@@ -23,7 +23,6 @@ const hiddenDocTypes = [
   'overDitDashboard',
   'overRisicoNiveaus',
   'overRisicoNiveausNew',
-  'roadmap',
   'lockdown',
   'toegankelijkheid',
   'lokalizeSubject',
@@ -52,17 +51,7 @@ export default () =>
       pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
-      S.listItem()
-        .title('Lockdown en Routekaart')
-        .icon(BsTable)
-        .child(
-          S.list()
-            .title('Lockdown en Routekaart')
-            .items([
-              addListItem(BsLockFill, 'Lockdown', 'lockdown'),
-              addListItem(BsTable, 'Routekaart', 'roadmap'),
-            ])
-        ),
+      addListItem(BsLockFill, 'Lockdown', 'lockdown'),
       addListItem(
         GrCircleInformation,
         'Over dit dashboard',
@@ -132,7 +121,7 @@ export default () =>
         .icon(BsTable)
         .child(
           S.list()
-            .title('Lockdown en Routekaart')
+            .title('Onderdelen')
             .items([
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'pageIdentifier'

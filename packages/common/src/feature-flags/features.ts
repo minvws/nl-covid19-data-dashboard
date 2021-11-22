@@ -166,6 +166,13 @@ export const features: Feature[] = [
     metricName: 'hospital_vaccine_incidence_per_age_group',
   },
   {
+    name: 'nlTestedOverallTopicalPage',
+    isEnabled: false,
+    dataScopes: ['nl', 'vr', 'gm'],
+    metricName: 'tested_overall',
+    metricProperties: ['infected_moving_average'],
+  },
+  {
     name: 'nlVaccinationsBoosterInformationBlock',
     isEnabled: true,
   },

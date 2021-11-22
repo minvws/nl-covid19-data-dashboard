@@ -39,10 +39,12 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
         | DifferenceDecimal)
     : undefined;
 
-  assert(
-    isDefined(differenceValue),
-    `Missing value for difference:${differenceKey}`
-  );
+  if (isDefined(differenceKey)) {
+    assert(
+      isDefined(differenceValue),
+      `Missing value for difference:${differenceKey}`
+    )
+  }
 
   const baseText = getPluralizedText(text, propertyValue);
 
@@ -50,11 +52,13 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
     <>
       {replaceComponentsInText(baseText, {
         newDate: (
-          <RelativeDate
-            dateInSeconds={differenceValue.new_date_unix}
-            isCapitalized={baseText.indexOf('{{newDate}}') === 0}
-            absoluteDateTemplate={siteText.common.absolute_date_template}
-          />
+          differenceValue && (
+            <RelativeDate
+              dateInSeconds={differenceValue.new_date_unix}
+              isCapitalized={baseText.indexOf('{{newDate}}') === 0}
+              absoluteDateTemplate={siteText.common.absolute_date_template}
+            />
+          )
         ),
         propertyValue: (
           <InlineText fontWeight="bold">

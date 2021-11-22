@@ -35,7 +35,11 @@ export function AppContent({
    * but it's good enough for now I guess
    */
   const isMenuOpen =
-    router.pathname == '/landelijk' || router.query.menu === '1';
+    router.pathname == '/internationaal' ||
+    router.pathname == '/landelijk' ||
+    router.pathname == '/veiligheidsregio/[code]' ||
+    router.pathname == '/gemeente/[code]' ||
+    router.query.menu === '1';
 
   const menuOpenText = router.pathname.startsWith('/internationaal')
     ? siteText.nav.terug_naar_alle_cijfers_internationaal

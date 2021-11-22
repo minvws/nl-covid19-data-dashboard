@@ -188,7 +188,6 @@ export type LockdownData = {
   _type: 'lockdown';
   _updatedAt: string;
   groups: LockdownDataGroup[];
-  showLockdown: boolean;
   message: {
     title: string;
     description: RichContentBlock[] | null;
