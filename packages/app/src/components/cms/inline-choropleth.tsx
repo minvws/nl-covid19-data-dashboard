@@ -23,7 +23,7 @@ interface InlineChoroplethProps {
 }
 
 export function InlineChoropleth(props: InlineChoroplethProps) {
-  const { configuration, title } = props;
+  const { configuration } = props;
 
   const { siteText } = useIntl();
 
@@ -92,6 +92,7 @@ function parseTooltipVariables(
         return [name, value];
       })
     );
-  } catch (e) {}
-  return undefined;
+  } catch (e) {
+    return undefined;
+  }
 }

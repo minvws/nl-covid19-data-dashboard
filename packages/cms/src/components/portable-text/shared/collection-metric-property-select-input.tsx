@@ -48,7 +48,7 @@ export const CollectionMetricPropertySelectInput = withDocument(
           <option value="" disabled hidden>
             Selecteer een metriek waarde
           </option>
-          {values.map((x) => (
+          {values.map((x: { value: string; label: string }) => (
             <option key={x.value} value={x.value}>
               {x.label}
             </option>
