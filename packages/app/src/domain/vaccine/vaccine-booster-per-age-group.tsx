@@ -23,7 +23,7 @@ export function VaccineBoosterPerAgeGroup({
   data,
   sortingOrder,
 }: VaccineBoosterPerAgeGroupProps) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties.booster_per_age_group_section;
 
@@ -84,7 +84,7 @@ export function VaccineBoosterPerAgeGroup({
                   css={css({
                     display: 'flex',
                     alignItems: 'center',
-                    maxWidth: '10rem',
+                    maxWidth: '15rem',
                   })}
                 >
                   <InlineText
@@ -99,7 +99,7 @@ export function VaccineBoosterPerAgeGroup({
                       pr: 2,
                     })}
                   >
-                    {item.received_booster_total}
+                    {formatNumber(item.received_booster_total)}
                   </InlineText>
                   <PercentageBar
                     percentage={item.received_booster_percentage}

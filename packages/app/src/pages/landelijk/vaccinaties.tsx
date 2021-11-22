@@ -157,22 +157,40 @@ export const getStaticProps = createGetStaticProps(
 
 const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
   {
-    age_group_range: '18-30',
-    received_booster_total: 1234,
-    received_booster_percentage: 99,
+    age_group_range: '81+',
+    received_booster_total: 2342,
+    received_booster_percentage: 77,
     date_of_insertion_unix: 1637058313,
     date_start_unix: 1637058313 - WEEK_IN_SECONDS,
     date_end_unix: 1637058313,
-    birthyear_range: '-1204',
+    birthyear_range: '-1940',
   },
   {
-    age_group_range: '81+',
-    received_booster_total: 43,
-    received_booster_percentage: 55,
+    age_group_range: '71-80',
+    received_booster_total: 4130,
+    received_booster_percentage: 22,
     date_of_insertion_unix: 1637058313,
     date_start_unix: 1637058313 - WEEK_IN_SECONDS,
     date_end_unix: 1637058313,
-    birthyear_range: '1204-',
+    birthyear_range: '1941-1950',
+  },
+  {
+    age_group_range: '61-70',
+    received_booster_total: 1003,
+    received_booster_percentage: 12,
+    date_of_insertion_unix: 1637058313,
+    date_start_unix: 1637058313 - WEEK_IN_SECONDS,
+    date_end_unix: 1637058313,
+    birthyear_range: '1951-1960',
+  },
+  {
+    age_group_range: '51-60',
+    received_booster_total: 43433,
+    received_booster_percentage: 45,
+    date_of_insertion_unix: 1637058313,
+    date_start_unix: 1637058313 - WEEK_IN_SECONDS,
+    date_end_unix: 1637058313,
+    birthyear_range: '1961-1970',
   },
 ] as NlBoosterShotPerAgeGroupValue[];
 
