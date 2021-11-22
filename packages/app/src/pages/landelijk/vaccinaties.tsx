@@ -222,12 +222,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const reverseRouter = useReverseRouter();
 
-  const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
-  const vaccineCoverageEstimatedFeature = useFeature(
-    'nlVaccineCoverageEstimated'
-  );
-  const vaccinationPerAgeGroupFeature = useFeature('nlVaccinationPerAgeGroup');
-
   const vaccineAdministeredGgdFeature = useFeature('nlVaccineAdministeredGgd');
   const vaccineAdministeredHospitalsAndCareInstitutionsFeature = useFeature(
     'nlVaccineAdministeredHospitalsAndCareInstitutions'
@@ -316,58 +310,52 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          {vaccineCoverageEstimatedFeature.isEnabled && (
-            <VaccineCoverageToggleTile
-              title={text.vaccination_grade_toggle_tile.title}
-              source={text.vaccination_grade_toggle_tile.source}
-              descriptionFooter={
-                text.vaccination_grade_toggle_tile.description_footer
-              }
-              dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
-              age18Plus={{
-                fully_vaccinated:
-                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
-                has_one_shot:
-                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
-                birthyear:
-                  vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
-              }}
-              age12Plus={{
-                fully_vaccinated:
-                  vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
-                has_one_shot:
-                  vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
-                birthyear:
-                  vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
-              }}
-              numFractionDigits={1}
-            />
-          )}
+          <VaccineCoverageToggleTile
+            title={text.vaccination_grade_toggle_tile.title}
+            source={text.vaccination_grade_toggle_tile.source}
+            descriptionFooter={
+              text.vaccination_grade_toggle_tile.description_footer
+            }
+            dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
+            age18Plus={{
+              fully_vaccinated:
+                vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
+              has_one_shot:
+                vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+              birthyear:
+                vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
+            }}
+            age12Plus={{
+              fully_vaccinated:
+                vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
+              has_one_shot:
+                vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+              birthyear:
+                vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
+            }}
+            numFractionDigits={1}
+          />
 
-          {vaccinationPerAgeGroupFeature.isEnabled && (
-            <VaccineCoveragePerAgeGroup
-              title={siteText.vaccinaties.vaccination_coverage.title}
-              description={
-                siteText.vaccinaties.vaccination_coverage.toelichting
-              }
-              sortingOrder={[
-                '81+',
-                '71-80',
-                '61-70',
-                '51-60',
-                '41-50',
-                '31-40',
-                '18-30',
-                '12-17',
-              ]}
-              metadata={{
-                datumsText: text.datums,
-                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-                source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
-              }}
-              values={data.vaccine_coverage_per_age_group.values}
-            />
-          )}
+          <VaccineCoveragePerAgeGroup
+            title={siteText.vaccinaties.vaccination_coverage.title}
+            description={siteText.vaccinaties.vaccination_coverage.toelichting}
+            sortingOrder={[
+              '81+',
+              '71-80',
+              '61-70',
+              '51-60',
+              '41-50',
+              '31-40',
+              '18-30',
+              '12-17',
+            ]}
+            metadata={{
+              datumsText: text.datums,
+              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+              source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+            }}
+            values={data.vaccine_coverage_per_age_group.values}
+          />
 
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
             <ChartTile
@@ -532,9 +520,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               </ChartTile>
             )}
 
-          {vaccinationChoroplethFeature.isEnabled && (
-            <VaccineCoverageChoroplethPerGm data={choropleth} />
-          )}
+          <VaccineCoverageChoroplethPerGm data={choropleth} />
 
           <VaccinationsOverTimeTile
             coverageData={data.vaccine_coverage}

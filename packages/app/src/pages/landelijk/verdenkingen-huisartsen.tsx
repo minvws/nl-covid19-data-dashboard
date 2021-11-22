@@ -14,7 +14,6 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,10 +42,6 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  const { isEnabled: isGpSuspicionsHistorical } = useFeature(
-    'nlGpSuspicionsIsHistorical'
-  );
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -68,15 +63,13 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
           />
 
-          {isGpSuspicionsHistorical &&
-            text.belangrijk_bericht &&
-            isPresent(text.belangrijk_bericht) && (
-              <WarningTile
-                isFullWidth
-                message={text.belangrijk_bericht}
-                variant="emphasis"
-              />
-            )}
+          {text.belangrijk_bericht && isPresent(text.belangrijk_bericht) && (
+            <WarningTile
+              isFullWidth
+              message={text.belangrijk_bericht}
+              variant="emphasis"
+            />
+          )}
 
           <TwoKpiSection>
             <KpiTile
