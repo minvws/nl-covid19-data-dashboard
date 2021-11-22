@@ -6,7 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 
-type DataType = 'timeseries' | 'donut';
+type DataType = 'timeseries' | 'donut' | 'choropleth';
 
 export function getDataUrl<
   S extends DataScopeKey,

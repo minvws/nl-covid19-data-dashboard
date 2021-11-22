@@ -234,4 +234,30 @@ export const blockFields = [
       },
     },
   },
+  {
+    title: 'Dashboard Choropleths',
+    name: 'dashboardChoropleth',
+    type: 'object',
+    fields: [
+      {
+        name: 'title',
+        type: 'string',
+      },
+      {
+        name: 'config',
+        type: 'reference',
+        to: [{ type: 'choroplethConfiguration' }],
+      },
+    ],
+    preview: {
+      select: {
+        title: 'config.title',
+      },
+      prepare({ title }: { title: string }) {
+        return {
+          title,
+        };
+      },
+    },
+  },
 ];

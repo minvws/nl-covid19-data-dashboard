@@ -1,6 +1,7 @@
 import {
   AgeDemographicConfiguration,
   ChartConfiguration,
+  ChoroplethConfiguration,
   DataScope,
   DataScopeKey,
   DonutChartConfiguration,
@@ -32,6 +33,7 @@ import { Link } from '~/utils/link';
 import { Heading } from '../typography';
 import { ContentImage } from './content-image';
 import { InlineAgeDemographic } from './inline-age-demographic';
+import { InlineChoropleth } from './inline-choropleth';
 import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
@@ -54,6 +56,11 @@ interface AgeDemographicConfigNode {
   startDate?: string;
   endDate?: string;
   config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+}
+
+interface ChoroplethConfigNode {
+  title: string;
+  config: ChoroplethConfiguration<DataScopeKey, MetricKeys<DataScope>>;
 }
 
 interface DonutConfigNode {
@@ -190,6 +197,26 @@ export function RichContent({
               />
             </Box>
           </Box>
+        );
+      },
+      dashboardChoropleth: (props: { node: ChoroplethConfigNode }) => {
+        const node = props.node;
+
+        return (
+          <ContentWrapper>
+            <Box pb={4}>
+              <Box pb={4}>
+                <Heading level={3} as="h4">
+                  {node.title}
+                </Heading>
+              </Box>
+
+              <InlineChoropleth
+                configuration={node.config}
+                title={node.title}
+              />
+            </Box>
+          </ContentWrapper>
         );
       },
       dashboardDonut: (props: { node: DonutConfigNode }) => {

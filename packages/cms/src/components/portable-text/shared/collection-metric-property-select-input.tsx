@@ -23,14 +23,14 @@ export const CollectionMetricPropertySelectInput = withDocument(
   forwardRef((props: any, ref: any) => {
     const { type, value, onChange, document, compareValue, markers } = props;
 
-    const map = document?.map;
+    const area = document?.area;
     const metricName = document?.metricName;
 
-    if (!isDefined(map) || !isDefined(metricName)) {
+    if (!isDefined(area) || !isDefined(metricName)) {
       return null;
     }
 
-    const values = getDropdownValues(map, metricName);
+    const values = getDropdownValues(area, metricName);
 
     const onChangeSelect = (event: any) => {
       const value = event.target.value;

@@ -1,6 +1,7 @@
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 import { ChartColorInput } from '../../components/portable-text/chart-configuration/chart-color-input';
+import { ReverseRouterInput } from '../../components/portable-text/choropleth-configuration/reverse-router-input';
 import { CollectionMetricPropertySelectInput } from '../../components/portable-text/shared/collection-metric-property-select-input';
 import { CollectionMetricSelectInput } from '../../components/portable-text/shared/collection-metric-select-input';
 
@@ -47,7 +48,7 @@ export const choroplethConfiguration = {
     },
     {
       title: 'Map type',
-      name: 'map',
+      name: 'area',
       type: 'string',
       initialValue: 'vr',
       options: {
@@ -65,7 +66,7 @@ export const choroplethConfiguration = {
       type: 'string',
       inputComponent: CollectionMetricSelectInput,
       validation: (rule: Rule) => rule.required(),
-      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.map),
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.area),
     },
     {
       title: 'Metriek property',
@@ -145,6 +146,31 @@ export const choroplethConfiguration = {
       name: 'selectedCode',
       type: 'string',
       fieldset: 'dataOptions',
+    },
+    {
+      title: 'Link function',
+      name: 'link',
+      type: 'string',
+      fieldset: 'dataOptions',
+      inputComponent: ReverseRouterInput,
+    },
+    {
+      title: 'Tooltip Variables',
+      name: 'tooltipVariables',
+      type: 'text',
+      fieldset: 'dataOptions',
+      validation: (rule: Rule) =>
+        rule.custom((value?: string) => {
+          if (!isDefined(value) || !value.length) {
+            return true;
+          }
+          try {
+            JSON.parse(value);
+            return true;
+          } catch (e) {
+            return 'tooltipVariables must be either empty or a valid JSON object';
+          }
+        }),
     },
   ],
 };

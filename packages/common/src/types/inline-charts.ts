@@ -26,6 +26,7 @@ export type ChoroplethConfiguration<
   S extends DataScopeKey,
   M extends MetricKeys<ScopedData[S]>
 > = {
+  metricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;
   map: 'in' | 'vr' | 'gm';
   accessibilityKey: string;
   sourceKey: string;
@@ -40,6 +41,8 @@ export type ChoroplethConfiguration<
   isPercentage?: boolean;
   highlightSelection?: boolean;
   selectedCode?: string;
+  link?: string;
+  tooltipVariables?: string;
 } & MetricConfiguration<S, M>;
 
 export type MetricConfiguration<

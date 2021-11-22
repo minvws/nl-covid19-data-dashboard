@@ -26,13 +26,13 @@ export const CollectionMetricSelectInput = withDocument(
       document._type
     ) as any;
 
-    const map = document?.map;
+    const area = document?.area;
 
-    if (!isDefined(map)) {
+    if (!isDefined(area)) {
       return null;
     }
 
-    const values = getDropdownValues(map);
+    const values = getDropdownValues(area);
 
     const onChangeSelect = (event: any) => {
       const value = event.target.value;
