@@ -1,4 +1,4 @@
-export function getReverserRouter(isMobile: boolean) {
+export function getReverseRouter(isMobile: boolean) {
   const reverseRouter = {
     actueel: {
       vr: (code: string) => `/actueel/veiligheidsregio/${code}`,
@@ -74,9 +74,7 @@ export function getReverserRouter(isMobile: boolean) {
           ? isMobile
             ? `/gemeente/${code}`
             : reverseRouter.gm.vaccinaties(code)
-          : isMobile
-          ? `/gemeente/${code}`
-          : reverseRouter.gm.ziekenhuisopnames(code ?? ''),
+          : '/gemeente',
       positiefGetesteMensen: (code: string) =>
         `/gemeente/${code}/positief-geteste-mensen`,
       sterfte: (code: string) => `/gemeente/${code}/sterfte`,

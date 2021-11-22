@@ -6,7 +6,6 @@ import {
   TimespanAnnotationConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { Clock } from '@corona-dashboard/icons';
 import { get } from 'lodash';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
@@ -22,8 +21,8 @@ import { metricConfigs } from '~/metric-config';
 import { ScopedMetricConfigs } from '~/metric-config/common';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
-import { Box } from '../base';
 import { Metadata } from '../metadata';
+import { InlineLoader } from './inline-loader';
 import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
 
@@ -120,11 +119,7 @@ export function InlineTimeSeriesCharts<
   }, [configuration, siteText, data]);
 
   if (!isDefined(data)) {
-    return (
-      <Box width="100%">
-        <Clock width="3em" height="3em" />
-      </Box>
-    );
+    return <InlineLoader />;
   }
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');

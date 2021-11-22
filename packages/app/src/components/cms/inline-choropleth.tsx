@@ -4,17 +4,16 @@ import {
   DataScopeKey,
   MetricKeys,
 } from '@corona-dashboard/common';
-import { Clock } from '@corona-dashboard/icons';
 import { get, isString } from 'lodash';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { Box } from '../base';
 import { DynamicChoropleth } from '../choropleth';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
+import { InlineLoader } from './inline-loader';
 import { getDataUrl } from './logic/get-data-url';
 
 interface InlineChoroplethProps {
@@ -34,11 +33,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
   );
 
   if (!isDefined(data)) {
-    return (
-      <Box width="100%">
-        <Clock width="3em" height="3em" />
-      </Box>
-    );
+    return <InlineLoader />;
   }
 
   const dataOptions = {

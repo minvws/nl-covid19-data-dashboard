@@ -1,4 +1,4 @@
-import { getReverserRouter } from '@corona-dashboard/common';
+import { getReverseRouter } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { useBreakpoints } from './use-breakpoints';
 
@@ -9,7 +9,7 @@ export function useReverseRouter() {
   const isMobile = !breakpoints.md;
 
   return useMemo(() => {
-    const reverseRouter = getReverserRouter(isMobile);
+    const reverseRouter = getReverseRouter(isMobile);
 
     return reverseRouter;
   }, [isMobile]);

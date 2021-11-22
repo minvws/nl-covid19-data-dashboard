@@ -1,4 +1,4 @@
-import { getReverserRouter } from '@corona-dashboard/common';
+import { getReverseRouter } from '@corona-dashboard/common';
 import { Select } from '@sanity/ui';
 import { flatten } from 'flat';
 import FormField from 'part:@sanity/components/formfields/default';
@@ -8,7 +8,7 @@ import React, { forwardRef } from 'react';
 export const ReverseRouterInput = forwardRef((props: any, ref: any) => {
   const { value, onChange, compareValue, type, markers } = props;
 
-  const router = getReverserRouter(false);
+  const router = getReverseRouter(false);
   const reverseRouterPaths = Object.keys(flatten(router));
 
   const createPatchFrom = (value: string) => {
