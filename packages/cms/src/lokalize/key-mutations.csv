@@ -119,4 +119,8 @@ timestamp,action,key,document_id,move_to
 2021-11-16T09:45:34.804Z,add,vaccinaties.booster_shots_kpi.last_week_section.description,L0R7Ua3YIau8O4TDySLy2p,__
 2021-11-16T09:45:35.934Z,add,vaccinaties.booster_shots_kpi.last_week_section.sources.text,41m6S8Y6xAJZkZywfostfS,__
 2021-11-16T09:45:36.770Z,add,vaccinaties.booster_shots_kpi.last_week_section.sources.href,z1CGDOfh23CnZYQwEsi4PT,__
+2021-11-23T13:04:42.600Z,add,positief_geteste_personen.section_archived.description,z1CGDOfh23CnZYQwF8mhAZ,__
+2021-11-23T13:04:43.618Z,add,positief_geteste_personen.section_archived.title,41m6S8Y6xAJZkZywfx0IGE,__
+2021-11-23T13:04:44.641Z,add,veiligheidsregio_positief_geteste_personen.section_archived.description,41m6S8Y6xAJZkZywfx0IKg,__
+2021-11-23T13:04:45.714Z,add,veiligheidsregio_positief_geteste_personen.section_archived.title,z1CGDOfh23CnZYQwF8mhah,__
 2021-11-22T14:26:31.828Z,add,aria_labels.age_old,L0R7Ua3YIau8O4TDzEBxUd,__
