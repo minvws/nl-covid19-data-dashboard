@@ -386,37 +386,39 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={ggdText.positief_getest_week_titel}
+              title={ggdText.percentage_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: ggdText.bronnen.rivm,
+                source: text.bronnen.rivm,
               }}
             >
               <KpiValue
-                data-cy="ggd_infected"
-                percentage={dataGgdLastValue.infected_percentage}
-                difference={
-                  data.difference.tested_ggd__infected_percentage_moving_average
-                }
-                isMovingAverageDifference
-                isAmount={false}
+                data-cy="infected_percentage_moving_average"
+                absolute={dataGgdLastValue.infected_percentage_moving_average}
+                isAmount
               />
 
-              <Text>{ggdText.positief_getest_week_uitleg}</Text>
+              <Markdown content={ggdText.percentage_kpi.description} />
 
-              <Text fontWeight="bold">
+              <Text variant="body2" fontWeight="bold">
                 {replaceComponentsInText(
-                  ggdText.positief_getest_getest_week_uitleg,
+                  ggdText.percentage_kpi.last_value_text,
                   {
-                    numerator: (
-                      <InlineText color="data.primary">
-                        {formatNumber(dataGgdLastValue.infected)}
-                      </InlineText>
+                    infected_moving_average: (
+                      <InlineText color="data.primary">{`${formatNumber(
+                        dataGgdLastValue.infected_moving_average,
+                        0
+                      )}`}</InlineText>
                     ),
-                    denominator: (
-                      <InlineText color="data.primary">
-                        {formatNumber(dataGgdLastValue.tested_total)}
-                      </InlineText>
+                    tested_total_moving_average: (
+                      <InlineText color="data.primary">{`${formatNumber(
+                        dataGgdLastValue.tested_total_moving_average,
+                        0
+                      )}`}</InlineText>
+                    ),
+                    dateTo: formatDateFromSeconds(
+                      dataGgdLastValue.date_unix,
+                      'weekday-medium'
                     ),
                   }
                 )}
