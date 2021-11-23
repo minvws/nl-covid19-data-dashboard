@@ -279,6 +279,7 @@ export interface Nl {
   intensive_care_lcps: NlIntensiveCareLcps;
   intensive_care_vaccination_status: NlIntensiveCareVaccinationStatus;
   tested_ggd: NlTestedGgd;
+  tested_ggd_archived: NlTestedGgdArchived;
   nursing_home: NlNursingHome;
   disability_care: NlDisabilityCare;
   behavior: NlBehavior;
@@ -567,6 +568,16 @@ export interface NlTestedGgdValue {
   infected_percentage_moving_average: number | null;
   tested_total: number;
   tested_total_moving_average: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlTestedGgdArchived {
+  values: NlTestedGgdArchivedValue[];
+  last_value: NlTestedGgdArchivedValue;
+}
+export interface NlTestedGgdArchivedValue {
+  infected_percentage: number;
+  infected_percentage_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1001,6 +1012,7 @@ export interface Vr {
   tested_overall: VrTestedOverall;
   hospital_nice: VrHospitalNice;
   tested_ggd: VrTestedGgd;
+  tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
   disability_care: VrDisabilityCare;
   behavior: VrBehavior;
@@ -1111,6 +1123,16 @@ export interface VrTestedGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrTestedGgdArchived {
+  values: VrTestedGgdArchivedValue[];
+  last_value: VrTestedGgdArchivedValue;
+}
+export interface VrTestedGgdArchivedValue {
+  infected_percentage: number;
+  infected_percentage_moving_average: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface VrNursingHome {
   values: VrNursingHomeValue[];
