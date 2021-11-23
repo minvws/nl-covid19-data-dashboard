@@ -11,6 +11,7 @@ export interface SelectOption<T = string> {
   label: string;
   color: string;
   shape?: 'line' | 'circle' | 'square';
+  legendAriaLabel?: string;
 }
 
 interface InteractiveLegendProps<T = string> {
@@ -50,6 +51,7 @@ export function InteractiveLegend<T = string>({
                   isActive={hasSelection && isSelected}
                   borderColor={item.color}
                   data-text={item.label}
+                  aria-label={item.legendAriaLabel}
                 >
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
@@ -114,7 +116,9 @@ const ItemButton = styled(Text)<{
     pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
     borderRadius: '5px',
-    boxShadow: `inset 0px 0px 0px ${isActive ? '3px ' + borderColor : '1px #c4c4c4'}`,
+    boxShadow: `inset 0px 0px 0px ${
+      isActive ? '3px ' + borderColor : '1px #c4c4c4'
+    }`,
     fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -125,11 +129,11 @@ const ItemButton = styled(Text)<{
     justifyContent: 'space-between',
     '&:hover,&:focus': {
       bg: 'tileGray',
-      boxShadow: `inset 0px 0px 0px ${isActive ? '3px' : '2px'} ${borderColor}`
+      boxShadow: `inset 0px 0px 0px ${isActive ? '3px' : '2px'} ${borderColor}`,
     },
     '&:focus': {
       borderColor: 'silver',
-      borderWidth: '1px'
+      borderWidth: '1px',
     },
     '&:after': {
       content: 'attr(data-text)',
@@ -150,8 +154,8 @@ const ItemButton = styled(Text)<{
       right: 0,
       top: 0,
       bottom: 0,
-      borderRadius: '5px'
-    }
+      borderRadius: '5px',
+    },
   })
 );
 

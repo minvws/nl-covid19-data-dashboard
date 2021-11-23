@@ -14,6 +14,7 @@ import { TooltipSeriesList } from '~/components/time-series-chart/components/too
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
@@ -52,14 +53,19 @@ export function AdmissionsPerAgeGroup({
   /* Enrich config with dynamic data / locale */
   const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] =
     BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+      const label =
+        baseAgeGroup.metricProperty in text.legend
+          ? text.legend[baseAgeGroup.metricProperty]
+          : baseAgeGroup.metricProperty;
+
       return {
         ...baseAgeGroup,
         type: 'line',
         shape: 'line',
-        label:
-          baseAgeGroup.metricProperty in text.legend
-            ? text.legend[baseAgeGroup.metricProperty]
-            : baseAgeGroup.metricProperty,
+        label,
+        legendAriaLabel: replaceVariablesInText(siteText.aria_labels.age_old, {
+          age: label,
+        }),
       };
     });
 
