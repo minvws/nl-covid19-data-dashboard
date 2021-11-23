@@ -11,13 +11,11 @@ import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
-import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { createDate } from '~/utils/create-date';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
 
@@ -102,14 +100,12 @@ export const Axes = memo(function Axes({
   hasAllZeroValues: allZeroValues,
 }: AxesProps) {
   const [startUnix, endUnix] = timeDomain;
-  const isMounted = useIsMounted();
   const breakpoints = useBreakpoints();
 
   const {
     formatDateFromSeconds,
     formatNumber,
-    formatPercentage,
-    formatRelativeDate,
+    formatPercentage
   } = useIntl();
 
   const formatYAxis = useCallback(
@@ -140,16 +136,6 @@ export const Axes = memo(function Axes({
 
   const formatXAxis = useCallback(
     (date_unix: number, index: number) => {
-      /**
-       * Display relative dates when it's today or yesterday
-       */
-      if (isMounted && differenceInDays(Date.now(), date_unix * 1000) < 2) {
-        const relativeDate = formatRelativeDate({ seconds: date_unix });
-        if (relativeDate) {
-          return relativeDate;
-        }
-      }
-
       const startYear = createDate(startUnix).getFullYear();
       const endYear = createDate(endUnix).getFullYear();
 
@@ -171,14 +157,7 @@ export const Axes = memo(function Axes({
           : formatDateFromSeconds(date_unix, 'axis');
       }
     },
-    [
-      isMounted,
-      formatRelativeDate,
-      startUnix,
-      endUnix,
-      formatDateFromSeconds,
-      xTicks,
-    ]
+    [startUnix, endUnix, formatDateFromSeconds, xTicks]
   );
 
   /**
