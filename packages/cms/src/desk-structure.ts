@@ -32,7 +32,6 @@ const hiddenDocTypes = [
   'overRisicoNiveausNew',
   'lockdown',
   'toegankelijkheid',
-  'riskLevelNational',
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',

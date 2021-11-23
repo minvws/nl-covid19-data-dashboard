@@ -285,6 +285,7 @@ export interface Nl {
   tested_ggd_archived: NlTestedGgdArchived;
   nursing_home: NlNursingHome;
   disability_care: NlDisabilityCare;
+  risk_level: NlRiskLevel;
   behavior: NlBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
@@ -639,6 +640,22 @@ export interface NlDisabilityCareValue {
   infected_locations_total: number;
   infected_locations_percentage: number;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlRiskLevel {
+  values: NlRiskLevelValue[];
+  last_value: NlRiskLevelValue;
+}
+export interface NlRiskLevelValue {
+  risk_level: 1 | 2 | 3;
+  hospital_admissions_on_date_of_admission_moving_average_rounded: number;
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
+  date_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBehavior {

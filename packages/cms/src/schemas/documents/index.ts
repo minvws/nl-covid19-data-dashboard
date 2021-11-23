@@ -5,7 +5,6 @@ export * from './choropleth-configuration';
 export * from './cijfer-verantwoording-item';
 export * from './donut-chart-configuration';
 export * from './editorial';
-export * from './escalation-level';
 export * from './faq-question';
 export * from './kpi-configuration';
 export * from './lokalize-text';
