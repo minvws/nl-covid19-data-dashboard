@@ -243,26 +243,19 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 seriesConfig={[
                   {
                     type: 'line',
-                    metricProperty: 'infected_per_100k_moving_average',
+                    metricProperty: 'infected_moving_average',
                     label:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k_moving_average,
+                        .infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'invisible',
                     metricProperty: 'infected',
                     label:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .infected_overall,
+                        .infected,
+                    color: colors.data.primary,
                   },
                 ]}
                 dataOptions={{
@@ -404,7 +397,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ggdText.linechart_totaltests_legend_label_moving_average,
                     shortLabel:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .tested_total_moving_average,
+                        .ggd_tested_total_moving_average,
                   },
                   {
                     type: 'bar',
@@ -413,7 +406,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     label: ggdText.linechart_totaltests_legend_label,
                     shortLabel:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .tested_total,
+                        .ggd_tested_total,
                   },
                   {
                     type: 'line',
@@ -439,7 +432,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected_percentage',
                     label:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage,
+                        .ggd_infected_percentage,
                     isPercentage: true,
                   },
                 ]}
@@ -473,7 +466,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.primary,
                   label:
                     siteText.positief_geteste_personen.tooltip_labels
-                      .infected_percentage_moving_average,
+                      .ggd_infected_percentage_moving_average,
                 },
                 {
                   type: 'bar',
@@ -481,7 +474,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.primary,
                   label:
                     siteText.positief_geteste_personen.tooltip_labels
-                      .infected_percentage,
+                      .ggd_infected_percentage,
                 },
               ]}
               dataOptions={{
