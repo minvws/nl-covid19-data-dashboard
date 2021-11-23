@@ -29,7 +29,10 @@ we have an element with id `nl__tested_overall__time_series`.
 
 Adding a new element is only possible via a command-line interface.
 
-@TODO
+This script can be run using `packages/cms/yarn elements:add`.
+
+The script is self-explanatory as it allows the user to select the data item
+using a series of selection lists that are generated from the schema's.
 
 ## Query Elements Data
 
