@@ -249,7 +249,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         filteredAgeGroup18Plus?.fully_vaccinated_percentage_label,
                     },
                   } as MiniTileSelectorItem<VrVaccineCoveragePerAgeGroupValue>,
-                ]}
+                ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
                   title={text.mini_trend_tiles.ziekenhuis_opnames.title}

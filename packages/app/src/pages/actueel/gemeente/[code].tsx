@@ -112,7 +112,6 @@ export const getStaticProps = createGetStaticProps(
   getTopicalPageData('gm', [
     'hospital_nice',
     'vaccine_coverage_per_age_group',
-    'hospital_nice',
     'tested_overall',
   ])
 );
@@ -261,7 +260,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         filteredAgeGroup18Plus?.fully_vaccinated_percentage_label,
                     },
                   } as MiniTileSelectorItem<GmVaccineCoveragePerAgeGroupValue>,
-                ]}
+                ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
                   title={text.mini_trend_tiles.ziekenhuis_opnames.title}
