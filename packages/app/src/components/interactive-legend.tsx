@@ -104,9 +104,7 @@ const Item = styled.li(
  * :before to render the colored line on hover/focus
  * :after to widen the button to avoid font-weight bold jumps
  */
-const ItemButton = styled(Text).attrs((props) => ({
-  'aria-label': props['aria-label'],
-}))<{
+const ItemButton = styled(Text)<{
   isActive: boolean;
   borderColor: string;
   text?: string;
