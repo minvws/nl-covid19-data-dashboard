@@ -26,7 +26,15 @@ export const SelectBox = styled(Box)(
       color: 'body',
       borderRadius: '5px 5px 0 0',
       borderColor: 'blue',
-      borderBottom: 'none'
+      '&:after': {
+        content: 'attr(data-color)',
+        position: 'absolute',
+        left: '1px',
+        right: '1px',
+        bottom: 0,
+        borderBottom: '1px solid',
+        borderColor: 'silver'
+      }
     },
     '&:hover, &:focus': {
       bg: 'tileGray',
@@ -57,15 +65,6 @@ export const ListBox = styled(Box)(
     borderTopWidth: 0,
     display: 'none',
     zIndex: 1,
-    '&:before': {
-      content: 'attr(data-color)',
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      borderTop: '1px solid',
-      borderColor: 'silver',
-      zIndex: 1
-    },
     [`${SelectBox}[aria-expanded="true"] + &`]: {
       display: 'block',
       borderRadius: '0 0 5px 5px',

@@ -111,7 +111,7 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
   (x) =>
     css({
       display: 'block',
-      minWidth: '15em',
+      minWidth: '15rem',
       maxWidth: '100%',
       borderWidth: 1,
       borderStyle: 'solid',
@@ -120,12 +120,12 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       fontFamily: 'body',
       appearance: 'none',
       p: 2,
-      pr: x.isClearable ? '2.4rem' : '2rem',
-      pl: x.hasIcon ? '2.4rem' : '1rem',
+      pr: x.isClearable ? '2.4rem' : 4,
+      pl: x.hasIcon ? '2.4rem' : 3,
       background: `url('${chevronDownUrl}')`,
       backgroundSize: '16px 10px',
       backgroundRepeat: 'no-repeat, repeat',
-      backgroundPosition: 'right 1em top 55%, 0 0',
+      backgroundPosition: 'right 1rem top 55%, 0 0',
 
       '&:hover': {
         bg: 'tileGray',
