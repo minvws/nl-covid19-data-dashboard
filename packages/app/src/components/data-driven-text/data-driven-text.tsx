@@ -36,6 +36,7 @@ export type Content<T extends DataKeys> =
       metricName: T;
       metricProperty: string;
       additionalData?: Record<string, ReactNode>;
+      isPercentage?: boolean;
     }
   | {
       type: 'difference';

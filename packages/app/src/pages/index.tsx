@@ -126,7 +126,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.nationaal_actueel;
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-  const confirmedCasesFeature = useFeature('nlTestedOverallTopicalPage');
+  const testedOverallTopicalPageFeature = useFeature(
+    'nlTestedOverallTopicalPage'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -228,19 +230,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
-                  confirmedCasesFeature.isEnabled ?
-                  {
-                    label:
-                      siteText.nationaal_actueel.mini_trend_tiles
-                        .positief_geteste_mensen.menu_item_label,
-                    data: dataTestedOverall.values,
-                    dataProperty: 'infected',
-                    value: dataTestedOverall.last_value.infected,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'tested_overall'
-                    ),
-                  } as MiniTileSelectorItem<NlTestedOverallValue> : undefined as any,
+                  testedOverallTopicalPageFeature.isEnabled
+                    ? ({
+                        label:
+                          siteText.nationaal_actueel.mini_trend_tiles
+                            .positief_geteste_mensen.menu_item_label,
+                        data: dataTestedOverall.values,
+                        dataProperty: 'infected',
+                        value: dataTestedOverall.last_value.infected,
+                        warning: getWarning(
+                          content.elements.warning,
+                          'tested_overall'
+                        ),
+                      } as MiniTileSelectorItem<NlTestedOverallValue>)
+                    : (undefined as any),
                   {
                     label:
                       siteText.nationaal_actueel.mini_trend_tiles
@@ -261,7 +264,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           ?.age_18_plus_fully_vaccinated,
                     },
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
-                ].filter(x => x !== undefined)}
+                ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
                   title={text.mini_trend_tiles.ic_opnames.title}
@@ -436,7 +439,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-                {confirmedCasesFeature.isEnabled && (
+                {testedOverallTopicalPageFeature.isEnabled && (
                   <MiniTrendTile
                     title={text.mini_trend_tiles.positief_geteste_mensen.title}
                     text={
@@ -451,7 +454,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               metricProperty: 'infected',
                               additionalData: {
                                 dateStart: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix - WEEK_IN_SECONDS
+                                  data.tested_overall.last_value.date_unix -
+                                    WEEK_IN_SECONDS
                                 ),
                                 dateEnd: formatters.formatDateFromSeconds(
                                   data.tested_overall.last_value.date_unix
@@ -462,7 +466,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               type: 'metric',
                               text: text.data_driven_texts.tested_ggd.value,
                               metricName: 'tested_ggd',
-                              metricProperty: 'infected_percentage_moving_average',
+                              isPercentage: true,
+                              metricProperty:
+                                'infected_percentage_moving_average',
                             },
                           ]}
                         />
