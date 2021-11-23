@@ -12,7 +12,6 @@ import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -25,21 +24,21 @@ import { useIntl } from '~/intl';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
-  getPagePartsQuery
+  getPagePartsQuery,
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -96,7 +95,8 @@ export const getStaticProps = createGetStaticProps(
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+    useIntl();
   const reverseRouter = useReverseRouter();
 
   const text = siteText.positief_geteste_personen;
@@ -149,7 +149,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={text.infected_kpi.description} />
 
-              <Box>
+              <Box spacing={3}>
                 <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(text.infected_kpi.last_value_text, {
                     infected: (
@@ -168,23 +168,39 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={text.barscale_titel}
-              data-cy="infected_per_100k"
+              title={text.percentage_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
-              <PageKpi
-                data={data}
-                metricName="tested_overall"
-                metricProperty="infected_per_100k"
-                differenceKey="tested_overall__infected_per_100k_moving_average"
-                isMovingAverageDifference
+              <KpiValue
+                data-cy="infected_percentage_moving_average"
+                percentage={dataGgdLastValue.infected_percentage_moving_average}
                 isAmount
               />
 
-              <Text>{text.barscale_toelichting}</Text>
+              <Markdown content={text.percentage_kpi.description} />
+
+              <Box spacing={3}>
+                <Text variant="body2" fontWeight="bold">
+                  {replaceComponentsInText(
+                    text.percentage_kpi.last_value_text,
+                    {
+                      percentage: (
+                        <InlineText color="data.primary">{`${formatPercentage(
+                          dataGgdLastValue.infected_percentage
+                        )}%`}</InlineText>
+                      ),
+                      dateTo: formatDateFromSeconds(
+                        dataGgdLastValue.date_unix,
+                        'weekday-medium'
+                      ),
+                    }
+                  )}
+                </Text>
+                <Markdown content={text.percentage_kpi.link_cta} />
+              </Box>
             </KpiTile>
           </TwoKpiSection>
 
