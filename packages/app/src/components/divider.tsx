@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components/';
 
 /**
- * This divider is exclusively used (for now) to seperate a page information block
+ * This divider is exclusively used (for now) to separate a page information block
  * on a metric page when it's not the first one.
  *
  * Because of the way the spacing of the tileList is setup we need a border,
