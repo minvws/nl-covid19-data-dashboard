@@ -25,21 +25,21 @@ import { useIntl } from '~/intl';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents,
+  getTimelineEvents
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
-  getPagePartsQuery,
+  getPagePartsQuery
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -96,8 +96,7 @@ export const getStaticProps = createGetStaticProps(
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
-    useIntl();
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
   const text = siteText.positief_geteste_personen;
@@ -135,39 +134,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <TwoKpiSection>
             <KpiTile
-              title={text.kpi_titel}
+              title={text.infected_kpi.title}
               metadata={{
                 date: dataOverallLastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
               <KpiValue
-                data-cy="infected"
-                absolute={dataOverallLastValue.infected}
-                difference={
-                  data.difference.tested_overall__infected_moving_average
-                }
-                isMovingAverageDifference
+                data-cy="infected_moving_average"
+                absolute={dataOverallLastValue.infected_moving_average}
+                numFractionDigits={0}
                 isAmount
               />
 
-              <Markdown content={text.kpi_toelichting} />
+              <Markdown content={text.infected_kpi.description} />
 
               <Box>
                 <Text variant="body2" fontWeight="bold">
-                  {replaceComponentsInText(ggdText.summary_text, {
-                    percentage: (
-                      <InlineText color="data.primary">{`${formatPercentage(
-                        dataGgdLastValue.infected_percentage
-                      )}%`}</InlineText>
+                  {replaceComponentsInText(text.infected_kpi.last_value_text, {
+                    infected: (
+                      <InlineText color="data.primary">{`${formatNumber(
+                        dataOverallLastValue.infected
+                      )}`}</InlineText>
                     ),
                     dateTo: formatDateFromSeconds(
-                      dataGgdLastValue.date_unix,
+                      dataOverallLastValue.date_unix,
                       'weekday-medium'
                     ),
                   })}
                 </Text>
-                <Markdown content={ggdText.summary_link_cta} />
+                <Markdown content={text.infected_kpi.link_cta} />
               </Box>
             </KpiTile>
 
@@ -175,7 +171,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               data-cy="infected_per_100k"
               metadata={{
-                date: dataOverallLastValue.date_unix,
+                date: dataGgdLastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >

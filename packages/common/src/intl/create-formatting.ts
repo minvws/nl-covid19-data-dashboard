@@ -70,7 +70,7 @@ export function createFormatting(
     numFractionDigits?: number
   ): string {
     if (typeof value === 'undefined' || value === null) return '-';
-    const options = numFractionDigits
+    const options = isDefined(numFractionDigits)
       ? {
           maximumFractionDigits: numFractionDigits,
           minimumFractionDigits: numFractionDigits,

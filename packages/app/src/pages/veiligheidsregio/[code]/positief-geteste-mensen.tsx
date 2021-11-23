@@ -102,8 +102,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
-    useIntl();
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
   const reverseRouter = useReverseRouter();
   const router = useRouter();
@@ -152,41 +151,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <TwoKpiSection>
             <KpiTile
-              title={text.kpi_titel}
+              title={text.infected_kpi.title}
               metadata={{
                 date: dataOverallLastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
-              <Box spacing={3}>
-                <KpiValue
-                  data-cy="infected"
-                  absolute={Math.round(dataOverallLastValue.infected)}
-                  difference={
-                    data.difference.tested_overall__infected_moving_average
-                  }
-                  isMovingAverageDifference
-                  isAmount
-                />
+              <KpiValue
+                data-cy="infected_moving_average"
+                absolute={dataOverallLastValue.infected_moving_average}
+                numFractionDigits={0}
+                isAmount
+              />
 
-                <Markdown content={text.kpi_toelichting} />
+              <Markdown content={text.infected_kpi.description} />
 
-                <Box>
-                  <Text variant="body2" fontWeight="bold">
-                    {replaceComponentsInText(ggdText.summary_title, {
-                      percentage: (
-                        <InlineText color="data.primary">{`${formatPercentage(
-                          dataGgdLastValue.infected_percentage
-                        )}%`}</InlineText>
-                      ),
-                      dateTo: formatDateFromSeconds(
-                        dataGgdLastValue.date_unix,
-                        'weekday-medium'
-                      ),
-                    })}
-                  </Text>
-                  <Markdown content={ggdText.summary_link_cta} />
-                </Box>
+              <Box>
+                <Text variant="body2" fontWeight="bold">
+                  {replaceComponentsInText(text.infected_kpi.last_value_text, {
+                    infected: (
+                      <InlineText color="data.primary">{`${formatNumber(
+                        dataOverallLastValue.infected
+                      )}`}</InlineText>
+                    ),
+                    dateTo: formatDateFromSeconds(
+                      dataOverallLastValue.date_unix,
+                      'weekday-medium'
+                    ),
+                  })}
+                </Text>
+                <Markdown content={text.infected_kpi.link_cta} />
               </Box>
             </KpiTile>
 
