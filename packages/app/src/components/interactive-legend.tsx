@@ -112,7 +112,7 @@ const ItemButton = styled(Text)<{
     cursor: 'pointer',
     pr: asResponsiveArray({ _: '5px', md: 10 }),
     pl: asResponsiveArray({ _: 25, md: 30 }),
-    py: '3px',
+    py: '6px',
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${isActive ? '3px ' + borderColor : '1px #c4c4c4'}`,
     fontWeight: isActive ? 'bold' : 'normal',
