@@ -323,19 +323,34 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <TwoKpiSection>
             <KpiTile
-              title={ggdText.totaal_getest_week_titel}
+              title={ggdText.tests_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: ggdText.bronnen.rivm,
+                source: text.bronnen.rivm,
               }}
             >
               <KpiValue
-                absolute={dataGgdLastValue.tested_total}
-                difference={difference.tested_ggd__tested_total_moving_average}
-                isMovingAverageDifference
+                data-cy="tested_total_moving_average"
+                absolute={dataGgdLastValue.tested_total_moving_average}
+                numFractionDigits={0}
                 isAmount
               />
-              <Text>{ggdText.totaal_getest_week_uitleg}</Text>
+
+              <Markdown content={ggdText.tests_kpi.description} />
+
+              <Text variant="body2" fontWeight="bold">
+                {replaceComponentsInText(ggdText.tests_kpi.last_value_text, {
+                  tested_total: (
+                    <InlineText color="data.primary">{`${formatNumber(
+                      dataGgdLastValue.tested_total
+                    )}`}</InlineText>
+                  ),
+                  dateTo: formatDateFromSeconds(
+                    dataGgdLastValue.date_unix,
+                    'weekday-medium'
+                  ),
+                })}
+              </Text>
             </KpiTile>
             <KpiTile
               title={ggdText.positief_getest_week_titel}
