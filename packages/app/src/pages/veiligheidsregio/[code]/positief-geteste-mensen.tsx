@@ -2,11 +2,12 @@ import { colors } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -56,6 +57,7 @@ export const getStaticProps = createGetStaticProps(
     'difference.tested_overall__infected_per_100k_moving_average',
     'g_number',
     'tested_ggd',
+    'tested_ggd_archived',
     'tested_overall'
   ),
   createGetChoroplethData({
@@ -112,7 +114,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
-  const dataGgdValues = data.tested_ggd.values;
   const difference = data.difference;
 
   const municipalCodes = gmCodesByVrCode[router.query.code as string];
@@ -293,7 +294,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <Spacer mb={3} />
+          <Divider />
 
           <PageInformationBlock
             id="ggd"
@@ -366,50 +367,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             timeframeOptions={['all', '5weeks']}
-            title={ggdText.linechart_percentage_titel}
-            description={ggdText.linechart_percentage_toelichting}
-            metadata={{
-              source: ggdText.bronnen.rivm,
-            }}
-          >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'confirmed_cases_infected_percentage_over_time_chart',
-                }}
-                timeframe={timeframe}
-                values={dataGgdValues}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'infected_percentage_moving_average',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage_moving_average,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'infected_percentage',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage,
-                  },
-                ]}
-                dataOptions={{
-                  isPercentage: true,
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'tested_ggd'
-                  ),
-                }}
-              />
-            )}
-          </ChartTile>
-
-          <ChartTile
-            timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
             metadata={{
@@ -422,7 +379,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_tested_total_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdValues}
+                values={data.tested_ggd.values}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -473,6 +430,53 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
+          </ChartTile>
+
+          <Divider />
+
+          <PageInformationBlock
+            title={text.section_archived.title}
+            description={text.section_archived.description}
+          />
+
+          <ChartTile
+            title={ggdText.linechart_percentage_titel}
+            description={ggdText.linechart_percentage_toelichting}
+            metadata={{
+              source: ggdText.bronnen.rivm,
+            }}
+          >
+            <TimeSeriesChart
+              accessibility={{
+                key: 'confirmed_cases_infected_percentage_over_time_chart',
+              }}
+              values={data.tested_ggd_archived.values}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'infected_percentage_moving_average',
+                  color: colors.data.primary,
+                  label:
+                    siteText.positief_geteste_personen.tooltip_labels
+                      .infected_percentage_moving_average,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'infected_percentage',
+                  color: colors.data.primary,
+                  label:
+                    siteText.positief_geteste_personen.tooltip_labels
+                      .infected_percentage,
+                },
+              ]}
+              dataOptions={{
+                isPercentage: true,
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'tested_ggd'
+                ),
+              }}
+            />
           </ChartTile>
         </TileList>
       </VrLayout>

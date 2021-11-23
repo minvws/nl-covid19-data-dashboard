@@ -5,7 +5,7 @@ import { LineStyleInput } from '../../components/portable-text/chart-configurati
 import { LineTypeSelectInput } from '../../components/portable-text/chart-configuration/line-type-select-input';
 import { MetricPropertySelectInput } from '../../components/portable-text/shared/metric-property-select-input';
 
-export const MetricPropertyConfig = {
+export const metricPropertyConfig = {
   title: 'Dashboard Grafiek Metriek Waarde',
   name: 'metricPropertyConfig',
   type: 'object',

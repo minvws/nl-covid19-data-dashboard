@@ -282,8 +282,10 @@ export interface Nl {
   intensive_care_lcps: NlIntensiveCareLcps;
   intensive_care_vaccination_status: NlIntensiveCareVaccinationStatus;
   tested_ggd: NlTestedGgd;
+  tested_ggd_archived: NlTestedGgdArchived;
   nursing_home: NlNursingHome;
   disability_care: NlDisabilityCare;
+  risk_level: NlRiskLevel;
   behavior: NlBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
@@ -600,6 +602,16 @@ export interface NlTestedGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlTestedGgdArchived {
+  values: NlTestedGgdArchivedValue[];
+  last_value: NlTestedGgdArchivedValue;
+}
+export interface NlTestedGgdArchivedValue {
+  infected_percentage: number;
+  infected_percentage_moving_average: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlNursingHome {
   values: NlNursingHomeValue[];
   last_value: NlNursingHomeValue;
@@ -628,6 +640,22 @@ export interface NlDisabilityCareValue {
   infected_locations_total: number;
   infected_locations_percentage: number;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlRiskLevel {
+  values: NlRiskLevelValue[];
+  last_value: NlRiskLevelValue;
+}
+export interface NlRiskLevelValue {
+  risk_level: 1 | 2 | 3;
+  hospital_admissions_on_date_of_admission_moving_average_rounded: number;
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
+  date_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBehavior {
@@ -1031,6 +1059,7 @@ export interface Vr {
   tested_overall: VrTestedOverall;
   hospital_nice: VrHospitalNice;
   tested_ggd: VrTestedGgd;
+  tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
   disability_care: VrDisabilityCare;
   behavior: VrBehavior;
@@ -1142,6 +1171,16 @@ export interface VrTestedGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrTestedGgdArchived {
+  values: VrTestedGgdArchivedValue[];
+  last_value: VrTestedGgdArchivedValue;
+}
+export interface VrTestedGgdArchivedValue {
+  infected_percentage: number;
+  infected_percentage_moving_average: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface VrNursingHome {
   values: VrNursingHomeValue[];

@@ -4,12 +4,12 @@ import {
   NlBoosterShotValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  WEEK_IN_SECONDS
+  WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
-  Ziekenhuis
+  Ziekenhuis,
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
@@ -18,6 +18,7 @@ import { isDefined } from 'ts-is-present';
 import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
 import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PieChartProps } from '~/components/pie-chart';
@@ -42,30 +43,30 @@ import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-  getRichTextParts
+  getRichTextParts,
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import {
   ArticleParts,
   LinkParts,
   PagePartQueryResult,
-  RichTextParts
+  RichTextParts,
 } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
@@ -549,7 +550,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {vaccinationsBoosterInformationBlockFeature.isEnabled && (
             <>
-              <Spacer pb={3} />
+              <Divider />
 
               <PageInformationBlock
                 title={text.booster_information_block.title}
@@ -591,7 +592,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
-          <Spacer pb={3} />
+          <Divider />
 
           <PageInformationBlock
             title={text.section_archived.title}

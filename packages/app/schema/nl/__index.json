@@ -13,6 +13,7 @@
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
+    "risk_level",
     "named_difference",
     "disability_care",
     "doctor",
@@ -35,6 +36,7 @@
     "reproduction",
     "sewer",
     "tested_ggd",
+    "tested_ggd_archived",
     "tested_overall",
     "tested_per_age_group",
     "vaccine_vaccinated_or_support",
@@ -130,11 +132,17 @@
     "tested_ggd": {
       "$ref": "tested_ggd.json"
     },
+    "tested_ggd_archived": {
+      "$ref": "tested_ggd_archived.json"
+    },
     "nursing_home": {
       "$ref": "nursing_home.json"
     },
     "disability_care": {
       "$ref": "disability_care.json"
+    },
+    "risk_level": {
+      "$ref": "risk_level.json"
     },
     "behavior": {
       "$ref": "behavior.json"
