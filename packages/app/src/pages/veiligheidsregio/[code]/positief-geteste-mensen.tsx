@@ -180,7 +180,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   })}
                 </Text>
-                <Markdown content={text.infected_kpi.link_cta} />
+                {text.infected_kpi.link_cta && (
+                  <Markdown content={text.infected_kpi.link_cta} />
+                )}
               </Box>
             </KpiTile>
 
@@ -216,7 +218,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   )}
                 </Text>
-                <Markdown content={text.percentage_kpi.link_cta} />
+                {text.percentage_kpi.link_cta && (
+                  <Markdown content={text.percentage_kpi.link_cta} />
+                )}
               </Box>
             </KpiTile>
           </TwoKpiSection>

@@ -154,7 +154,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               </Text>
               <Markdown content={text.infected_kpi.description} />
 
-              <Box>
+              <Box spacing={3}>
                 <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(text.infected_kpi.last_value_text, {
                     infected: (
@@ -168,7 +168,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   })}
                 </Text>
-                <Markdown content={text.infected_kpi.link_cta} />
+                {text.infected_kpi.link_cta && (
+                  <Markdown content={text.infected_kpi.link_cta} />
+                )}
               </Box>
             </KpiTile>
 
