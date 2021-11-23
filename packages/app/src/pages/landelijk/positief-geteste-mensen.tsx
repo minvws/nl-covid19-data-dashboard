@@ -478,47 +478,43 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           <ChartTile
-            timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'confirmed_cases_infected_percentage_over_time_chart',
-                }}
-                timeframe={timeframe}
-                values={data.tested_ggd_archived.values}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'infected_percentage_moving_average',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage_moving_average,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'infected_percentage',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage,
-                  },
-                ]}
-                dataOptions={{
-                  isPercentage: true,
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'tested_ggd'
-                  ),
-                }}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'confirmed_cases_infected_percentage_over_time_chart',
+              }}
+              values={data.tested_ggd_archived.values}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'infected_percentage_moving_average',
+                  color: colors.data.primary,
+                  label:
+                    siteText.positief_geteste_personen.tooltip_labels
+                      .infected_percentage_moving_average,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'infected_percentage',
+                  color: colors.data.primary,
+                  label:
+                    siteText.positief_geteste_personen.tooltip_labels
+                      .infected_percentage,
+                },
+              ]}
+              dataOptions={{
+                isPercentage: true,
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'tested_ggd'
+                ),
+              }}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>
