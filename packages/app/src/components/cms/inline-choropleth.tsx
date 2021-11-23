@@ -70,8 +70,6 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
     noDataFillColor: getColor(configuration.noDataFillColor),
   };
 
-  console.dir(dataConfig);
-
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 
   return (
