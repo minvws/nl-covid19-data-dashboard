@@ -71,10 +71,10 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
-        <TileList>
+        <TileList needsMargin={false}>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
-          <Tile>
-            <Box spacing={3}>
+          <Tile noBorder={true} isFirstElement={false}>
+            <Box spacing={1}>
               <Heading level={3}>{lockdown.message.title}</Heading>
               {lockdown.message.description ? (
                 <RichContent blocks={lockdown.message.description} />

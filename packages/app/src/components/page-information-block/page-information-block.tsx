@@ -67,7 +67,7 @@ export function PageInformationBlock({
   ) : null;
 
   return (
-    <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
+    <Box as="header" id={id}>
       {title && (
         <Header
           icon={icon}
