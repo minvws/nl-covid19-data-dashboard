@@ -28,7 +28,7 @@ export function RichContentSelect<T extends string>(
   props: RichContentSelectProps<T>
 ) {
   const { label, options, onChange, initialValue, visuallyHiddenLabel } = props;
-
+  
   const {
     labelId,
     selectedOption,
@@ -60,8 +60,15 @@ export function RichContentSelect<T extends string>(
         <SelectBox {...getComboboxProps()}>
           {isPresent(selectedOption) && <Text>{selectedOption?.label}</Text>}
           <ArrowIcon
-            css={css({ color: 'blue', width: '1rem' })}
+            css={css({ 
+              color: 'blue', 
+              width: '1rem', 
+              '&[aria-expanded="true"]': { 
+                transform: 'rotate(180deg)'
+              } 
+            })}
             aria-hidden="true"
+            aria-expanded={getComboboxProps()['aria-expanded']}
           />
         </SelectBox>
 

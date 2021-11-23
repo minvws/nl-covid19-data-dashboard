@@ -8,6 +8,7 @@ export const SelectBoxRoot = styled(Box)({
 
 export const SelectBox = styled(Box)(
   css({
+    cursor: 'default',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -17,23 +18,34 @@ export const SelectBox = styled(Box)(
     height: '36px',
     borderWidth: 1,
     transition: '0.1s background-color',
-    p: 2,
+    userSelect: 'none',
+    py: 2,
+    px: 3,
     '&[aria-expanded="true"]': {
       bg: 'white',
       color: 'body',
-      boxShadow: 'tile',
       borderRadius: '5px 5px 0 0',
-      borderBottomWidth: 0
+      borderColor: 'blue',
+      '&:after': {
+        content: 'attr(data-color)',
+        position: 'absolute',
+        left: '1px',
+        right: '1px',
+        bottom: 0,
+        borderBottom: '1px solid',
+        borderColor: 'silver'
+      }
     },
     '&:hover, &:focus': {
       bg: 'tileGray',
-      borderColor: 'blue'
     },
     '&:hover': {
       color: 'blue',
+      borderColor: 'blue'
     },
     '&:focus': {
-      color: 'body'
+      bg: 'white',
+      color: 'body',
     }
   })
 );
@@ -50,12 +62,13 @@ export const ListBox = styled(Box)(
     borderColor: 'blue',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderTopWidth: 0,
     display: 'none',
     zIndex: 1,
     [`${SelectBox}[aria-expanded="true"] + &`]: {
       display: 'block',
-      borderTopColor: 'silver',
-      borderRadius: '0 0 5px 5px'
+      borderRadius: '0 0 5px 5px',
+      borderTopColor: 'silver'
     },
   })
 );
@@ -80,13 +93,12 @@ export const ListBoxOption = styled(Box)(
     },
     '&[aria-selected="true"]': {
       color: 'blue',
-      fontWeight: '700'
-    },
-    '&:hover': {
-      backgroundColor: 'tileGray',
       '&:before': {
         transform: 'scaleX(1)',
       }
+    },
+    '&:hover': {
+      backgroundColor: 'tileGray',
     },
   })
 );
