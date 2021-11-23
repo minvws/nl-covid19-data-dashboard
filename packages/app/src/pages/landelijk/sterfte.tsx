@@ -2,8 +2,8 @@ import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { AgeDemographic } from '~/components/age-demographic';
-import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -215,7 +215,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <Spacer mb={3} />
+          <Divider />
 
           <PageInformationBlock
             title={siteText.section_sterftemonitor.title}
