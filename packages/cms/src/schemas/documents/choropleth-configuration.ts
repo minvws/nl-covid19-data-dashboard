@@ -104,7 +104,7 @@ export const choroplethConfiguration = {
       fieldset: 'configuration',
     },
     {
-      title: 'Highlight stroke width',
+      title: 'Highlight stroke',
       name: 'highlightStroke',
       type: 'string',
       inputComponent: ChartColorInput,
@@ -117,7 +117,7 @@ export const choroplethConfiguration = {
       fieldset: 'configuration',
     },
     {
-      title: 'Area stroke width',
+      title: 'Area stroke',
       name: 'areaStroke',
       type: 'string',
       inputComponent: ChartColorInput,
