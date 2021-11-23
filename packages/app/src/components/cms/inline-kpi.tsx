@@ -5,7 +5,6 @@ import {
   KpiConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { Clock } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
@@ -18,6 +17,7 @@ import { useIntl } from '~/intl';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { Metadata, MetadataProps } from '../metadata';
+import { InlineLoader } from './inline-loader';
 
 interface InlineKpiProps {
   configuration: KpiConfiguration;
@@ -47,11 +47,7 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
   const { data: differenceData } = useDifferenceData(configuration);
 
   if (!isDefined(data) || !isDefined(differenceData)) {
-    return (
-      <Box width={{ _: '100%', md: '50%' }}>
-        <Clock width="3em" height="3em" />
-      </Box>
-    );
+    return <InlineLoader />;
   }
 
   const allData = configuration.differenceKey?.length

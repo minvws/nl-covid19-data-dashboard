@@ -73,7 +73,7 @@ return {
 
 The workflow for adding a new page with page parts is fairly simple:
 
-- Create a new page identifier document
-- Create a pageArticles document and assign the newly created page identifier as a reference
-- Add articles to the pageArticles document
+- Create a new page identifier document (in Sanity, Pagina onderdelen -> Page Identifier)
+- Create a pageArticles document and assign the newly created page identifier as a reference (Pagina onderdelen -> Pagina Artikelen)
+- Add articles to the pageArticles document (Dashboard pagina's -> 'New page name' -> 'Page articles name')
 - Query the data in the application's page and off you go.
