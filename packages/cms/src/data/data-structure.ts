@@ -54,7 +54,6 @@ export const dataStructure = {
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
     booster_shot: [
-      "partially_or_fully_vaccinated_total_received_percentage",
       "partially_or_fully_vaccinated_total_amount_of_people",
       "total_date_start_unix",
       "total_date_end_unix",

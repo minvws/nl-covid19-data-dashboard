@@ -19,6 +19,7 @@ import { ChoroplethDataItem } from '../choropleth/logic';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
 import { InlineLoader } from './inline-loader';
+import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
 
 interface InlineChoroplethProps {
@@ -59,15 +60,17 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
   const dataConfig: OptionalDataConfig<ChoroplethDataItem> = {
     metricName: configuration.metricName,
     metricProperty: configuration.metricProperty as any,
-    areaStroke: configuration.areaStroke,
+    areaStroke: getColor(configuration.areaStroke),
     areaStrokeWidth: configuration.areaStrokeWidth,
-    highlightStroke: configuration.highlightStroke,
+    highlightStroke: getColor(configuration.highlightStroke),
     highlightStrokeWidth: configuration.highlightStrokeWidth,
-    hoverFill: configuration.hoverFill,
-    hoverStroke: configuration.hoverStroke,
+    hoverFill: getColor(configuration.hoverFill),
+    hoverStroke: getColor(configuration.hoverStroke),
     hoverStrokeWidth: configuration.hoverStrokeWidth,
-    noDataFillColor: configuration.noDataFillColor,
+    noDataFillColor: getColor(configuration.noDataFillColor),
   };
+
+  console.dir(dataConfig);
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 
