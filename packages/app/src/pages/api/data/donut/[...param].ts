@@ -42,15 +42,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         data.last_value = last(data.values);
       }
 
-      res
-        .status(200)
-        .json(
-          stripTrailingNullValues(
-            data,
-            metric,
-            metricProperty as keyof TimestampedValue
-          )
-        );
+      const strippedData = stripTrailingNullValues(
+        data,
+        metric,
+        metricProperty as keyof TimestampedValue
+      );
+
+      res.status(200).json(strippedData.last_value);
     } else {
       res.status(404).end();
     }

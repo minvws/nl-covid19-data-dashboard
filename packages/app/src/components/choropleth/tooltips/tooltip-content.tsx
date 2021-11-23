@@ -1,8 +1,8 @@
+import { Locatie } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Locatie } from '@corona-dashboard/icons';
-import { Heading } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface IProps {
@@ -23,25 +23,20 @@ export function TooltipContent(props: IProps) {
       aria-live="polite"
     >
       <TooltipHeader href={link}>
-        <Heading
-          as="h3"
-          level={4}
+        <Text
+          variant="choroplethTooltipHeader"
           /**
            * If there's no link do not read the tooltip title because a
            * screenreader will also read the choropleth link which contains the
            * name of a region.
            */
           aria-hidden={link ? 'true' : 'false'}
-          css={css({
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          })}
         >
           <StyledLocationIcon>
             <Locatie />
           </StyledLocationIcon>
           {title}
-        </Heading>
+        </Text>
         {(onSelect || link) && <Chevron />}
       </TooltipHeader>
       {children && <TooltipInfo>{children}</TooltipInfo>}
@@ -80,16 +75,14 @@ function TooltipHeader({
 
 const StyledTooltipHeader = styled.div(
   css({
-    padding: '0.25rem 2rem 0.25rem 0.5rem',
     whiteSpace: 'nowrap',
-    fontSize: '1.125rem',
     color: 'body',
     py: 2,
     px: 3,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    textDecoration: 'none',
+    textDecoration: 'none!important',
   })
 );
 

@@ -159,7 +159,7 @@ const STATIC_ASSET_HTTP_DATE = new Date(
     const contentSecurityPolicy =
       IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
         ? "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';"
-        : "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';";
+        : "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none'; connect-src 'self' 5mog5ask.api.sanity.io;";
 
     res.set('Content-Security-Policy', contentSecurityPolicy);
     res.set('Referrer-Policy', 'no-referrer');
