@@ -53,6 +53,7 @@ export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
         leftColor={getColor(configuration.leftColor)}
         rightColor={getColor(configuration.rightColor)}
         formatValue={(n) => `${n}`}
+        maxDisplayValue={configuration.maxDisplayValue}
       />
       <Metadata source={source} isTileFooter />
     </ErrorBoundary>

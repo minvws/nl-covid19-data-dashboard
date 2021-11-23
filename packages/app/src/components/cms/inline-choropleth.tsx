@@ -10,7 +10,12 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { DynamicChoropleth } from '../choropleth';
+import {
+  DataOptions,
+  DynamicChoropleth,
+  OptionalDataConfig,
+} from '../choropleth';
+import { ChoroplethDataItem } from '../choropleth/logic';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
 import { InlineLoader } from './inline-loader';
@@ -28,6 +33,8 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
 
   const dateUrl = getDataUrl(undefined, undefined, configuration, 'choropleth');
 
+  const reverseRouter = useReverseRouter();
+
   const { data } = useSWRImmutable(dateUrl, (url: string) =>
     fetch(url).then((_) => _.json())
   );
@@ -36,14 +43,30 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
     return <InlineLoader />;
   }
 
-  const dataOptions = {
+  const dataOptions: DataOptions = {
     getLink: isDefined(configuration.link)
-      ? get(useReverseRouter, configuration.link, undefined)
+      ? get(reverseRouter, configuration.link, undefined)
       : undefined,
     tooltipVariables: parseTooltipVariables(
       configuration.tooltipVariables,
       siteText
     ),
+    highlightSelection: configuration.highlightSelection,
+    isPercentage: configuration.isPercentage,
+    selectedCode: configuration.selectedCode,
+  };
+
+  const dataConfig: OptionalDataConfig<ChoroplethDataItem> = {
+    metricName: configuration.metricName,
+    metricProperty: configuration.metricProperty as any,
+    areaStroke: configuration.areaStroke,
+    areaStrokeWidth: configuration.areaStrokeWidth,
+    highlightStroke: configuration.highlightStroke,
+    highlightStrokeWidth: configuration.highlightStrokeWidth,
+    hoverFill: configuration.hoverFill,
+    hoverStroke: configuration.hoverStroke,
+    hoverStrokeWidth: configuration.hoverStrokeWidth,
+    noDataFillColor: configuration.noDataFillColor,
   };
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');
@@ -56,10 +79,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
         }}
         map="gm"
         data={data}
-        dataConfig={{
-          metricName: configuration.metricName,
-          metricProperty: configuration.metricProperty as any,
-        }}
+        dataConfig={dataConfig}
         dataOptions={dataOptions}
       />
       <Metadata source={source} isTileFooter />
