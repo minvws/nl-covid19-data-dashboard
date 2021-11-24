@@ -129,7 +129,7 @@ function loadChoroplethData(map: MapType, metric: string) {
     return vrData.map((x) => ({
       vrcode: x.code,
       admissions_on_date_of_reporting: null,
-    }));
+    })) as unknown as ChoroplethDataItem[];
   }
 
   const data = content['tested_overall'];
