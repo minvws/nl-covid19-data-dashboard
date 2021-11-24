@@ -54,9 +54,9 @@ export function EscalationLevelLabel({
         <InlineText variant="body2" color="body">
           {replaceVariablesInText(
             validFrom === lastCalculated
-              ? siteText.national_escalation_levels
-                  .valid_from_and_last_calculated
-              : siteText.national_escalation_levels.valid_from,
+              ? siteText.national_escalation_levels.valid_from
+              : siteText.national_escalation_levels
+                  .valid_from_and_last_calculated,
             {
               date: formatDateFromSeconds(validFrom, 'medium'),
               lastCalculated: formatDateFromSeconds(lastCalculated, 'medium'),
