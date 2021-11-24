@@ -53,7 +53,8 @@ export function EscalationLevelLabel({
       <Box pt="2px" pl={{ _: 0, sm: 2 }} maxWidth={350}>
         <InlineText variant="body2" color="body">
           {replaceVariablesInText(
-            validFrom === lastCalculated
+            new Date(validFrom * 1000).setHours(0, 0, 0) ===
+              new Date(lastCalculated * 1000).setHours(0, 0, 0)
               ? siteText.national_escalation_levels.valid_from
               : siteText.national_escalation_levels
                   .valid_from_and_last_calculated,
