@@ -83,10 +83,12 @@ const Icon = styled.span(
 
 const ClearButton = styled.button(
   css({
-    width: 32,
+    width: 36,
     height: '100%',
-    border: '1px solid lightGray',
-    padding: 2,
+    border: '1px solid silver',
+    borderRadius: '0 5px 5px 0',
+    py: 2,
+    px: 3,
     textAlign: 'left',
     backgroundColor: 'white',
     backgroundImage: `url('${closeUrl}')`,
@@ -97,6 +99,11 @@ const ClearButton = styled.button(
     right: 0,
     top: 0,
     cursor: 'pointer',
+    '&:hover': {
+      bg: 'tileGray',
+      color: 'blue',
+      borderColor: 'blue'
+    }
   })
 );
 
@@ -104,21 +111,21 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
   (x) =>
     css({
       display: 'block',
-      minWidth: '15em',
+      minWidth: '15rem',
       maxWidth: '100%',
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: 'lightGray',
+      borderColor: 'silver',
       borderRadius: '5px',
       fontFamily: 'body',
       appearance: 'none',
       p: 2,
-      pr: x.isClearable ? '2.4rem' : '2rem',
-      pl: x.hasIcon ? '2.4rem' : '0.5rem',
+      pr: x.isClearable ? '2.4rem' : 4,
+      pl: x.hasIcon ? '2.4rem' : 3,
       background: `url('${chevronDownUrl}')`,
-      backgroundSize: '18px 12px',
+      backgroundSize: '16px 10px',
       backgroundRepeat: 'no-repeat, repeat',
-      backgroundPosition: 'right 0.6em top 55%, 0 0',
+      backgroundPosition: 'right 1rem top 55%, 0 0',
 
       '&:hover': {
         bg: 'tileGray',

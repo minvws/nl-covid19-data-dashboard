@@ -31,7 +31,7 @@ const StyledLabel = styled.label(
     flex: '0 1 auto',
     color: 'button',
     textAlign: 'center',
-    p: asResponsiveArray({ _: '0.25em 0.5em', xs: '0.3em 1.5em' }),
+    p: asResponsiveArray({ _: '0.25rem 0.5rem', xs: '0.3rem 1rem' }),
     borderRadius: '5px 0 0 5px',
     border: '1px solid silver',
     borderRightWidth: 0,
