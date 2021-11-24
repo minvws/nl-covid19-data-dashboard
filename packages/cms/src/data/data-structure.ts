@@ -58,7 +58,6 @@ export const dataStructure = {
       "total_date_start_unix",
       "total_date_end_unix",
       "received_booster_last_seven_days",
-      "total_shots_last_seven_days",
       "last_seven_days_date_start_unix",
       "last_seven_days_date_end_unix",
     ],
@@ -161,6 +160,10 @@ export const dataStructure = {
       "tested_total",
       "tested_total_moving_average",
     ],
+    tested_ggd_archived: [
+      "infected_percentage",
+      "infected_percentage_moving_average",
+    ],
     nursing_home: [
       "newly_infected_people",
       "newly_infected_people_moving_average",
@@ -178,6 +181,16 @@ export const dataStructure = {
       "newly_infected_locations",
       "infected_locations_total",
       "infected_locations_percentage",
+    ],
+    risk_level: [
+      "risk_level",
+      "hospital_admissions_on_date_of_admission_moving_average_rounded",
+      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
+      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
+      "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
+      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
+      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
+      "valid_from_unix",
     ],
     behavior: [
       "number_of_participants",
@@ -364,6 +377,10 @@ export const dataStructure = {
       "infected_percentage_moving_average",
       "tested_total",
       "tested_total_moving_average",
+    ],
+    tested_ggd_archived: [
+      "infected_percentage",
+      "infected_percentage_moving_average",
     ],
     nursing_home: [
       "newly_infected_people",
