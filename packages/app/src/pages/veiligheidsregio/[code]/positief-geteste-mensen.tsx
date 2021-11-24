@@ -360,7 +360,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 data-cy="infected_percentage_moving_average"
-                absolute={dataGgdLastValue.infected_percentage_moving_average}
+                percentage={dataGgdLastValue.infected_percentage_moving_average}
                 isAmount
               />
 
