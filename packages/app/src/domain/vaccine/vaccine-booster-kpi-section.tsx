@@ -45,15 +45,11 @@ export function VaccineBoosterKpiSection({
           source: text.last_week_section.sources,
         }}
       >
-        <KpiValue absolute={data.total_shots_last_seven_days} />
-        <Markdown
-          content={replaceVariablesInText(text.last_week_section.description, {
-            totalShots: formatNumber(data.total_shots_last_seven_days),
-            receivedBoosters: formatNumber(
-              data.received_booster_last_seven_days
-            ),
-          })}
-        />
+        <KpiValue absolute={data.received_booster_last_seven_days} />
+
+        {text.last_week_section.description_kpi && (
+          <Markdown content={text.last_week_section.description_kpi} />
+        )}
       </KpiTile>
     </TwoKpiSection>
   );
