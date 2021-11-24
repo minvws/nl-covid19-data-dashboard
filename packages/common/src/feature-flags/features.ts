@@ -118,17 +118,17 @@ export const features: Feature[] = [
   },
   {
     name: 'nlVaccinationsBoosterInformationBlock',
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     name: 'nlVaccinationBoosterShotsPerAgeGroup',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
   },
   {
     name: 'nlVaccinationsBoosterShotsKpi',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot',
   },
