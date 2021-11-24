@@ -5,11 +5,11 @@ import {
   Locatie,
 } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -190,7 +190,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer pb={3} />
+          <Divider />
 
           <PageInformationBlock
             id="besmette-locaties"
@@ -296,7 +296,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer pb={3} />
+          <Divider />
 
           <PageInformationBlock
             id="sterfte"

@@ -6,12 +6,15 @@ import type {
 } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type {
-  FeatureCollection,
   Feature,
+  FeatureCollection,
   MultiPolygon,
   Polygon,
 } from 'geojson';
 
+/**
+ * Infers the given type of T, if possible
+ */
 export type Unpack<T> = T extends infer U ? U : never;
 
 /**
@@ -28,6 +31,11 @@ export enum CHOROPLETH_ASPECT_RATIO {
   in = 1 / 0.775,
 }
 
+/**
+ * in - International, indicates a map of Europe
+ * gm - Municipality, indicates a map of the Netherlands that shows the different municipalities
+ * vr - Safety region, indicates a map of the Netherlands that shows the different safety regions
+ */
 export type MapType = 'gm' | 'vr' | 'in';
 
 export type CodeProp =
