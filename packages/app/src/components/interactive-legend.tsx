@@ -114,7 +114,7 @@ const ItemButton = styled(Text)<{
     cursor: 'pointer',
     pr: asResponsiveArray({ _: '5px', md: 10 }),
     pl: asResponsiveArray({ _: 25, md: 30 }),
-    py: '3px',
+    py: '6px',
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${
       isActive ? '3px ' + borderColor : '1px #c4c4c4'
@@ -177,7 +177,8 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
 
 const Line = styled.div<{ color: string }>(({ color }) =>
   css({
-    top: '10px',
+    top: '50%',
+    transform: 'translateY(-50%)',
     width: '15px',
     height: '3px',
     borderRadius: '2px',
@@ -194,7 +195,8 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
-    top: '6.5px',
+    top: '50%',
+    transform: 'translateY(-50%)',
     width: '10px',
     height: '10px',
     borderRadius: '50%',
@@ -207,7 +209,8 @@ const Square = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
-    top: '7px',
+    top: '50%',
+    transform: 'translateY(-50%)',
     width: '11px',
     height: '11px',
     borderRadius: '2px',
