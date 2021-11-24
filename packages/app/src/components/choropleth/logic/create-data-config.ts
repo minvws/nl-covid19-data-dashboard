@@ -6,9 +6,25 @@ import {
   DEFAULT_STROKE_WIDTH,
 } from './use-feature-props';
 
+const safetyRegionConfig = {
+  metricName: 'veiligheidsregio' as any,
+  metricProperty: 'admissions_on_date_of_admission',
+  areaStroke: colors.white,
+  areaStrokeWidth: 1,
+  hoverFill: colors.white,
+  hoverStroke: colors.choroplethFeatureStroke,
+  hoverStrokeWidth: 3,
+  noDataFillColor: colors.lightGray,
+  highlightStroke: colors.choroplethHighlightStroke,
+  highlightStrokeWidth: DEFAULT_HOVER_STROKE_WIDTH,
+};
+
 export function createDataConfig<T extends ChoroplethDataItem>(
   partialDataConfig: OptionalDataConfig<T>
 ) {
+  if (partialDataConfig.metricName === 'veiligheidsregio') {
+    return safetyRegionConfig;
+  }
   return {
     metricName: partialDataConfig.metricName ?? '',
     metricProperty: partialDataConfig.metricProperty,
