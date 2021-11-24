@@ -84,7 +84,7 @@ export const getStaticProps = createGetStaticProps(
       '5weeks'
     );
 
-    // ToDo: remove after Backend returns rounded values
+    // @TODO: remove after Backend returns rounded values
     if(data.selectedGmData.tested_overall.last_value.infected_moving_average !== null) {
       data.selectedGmData.tested_overall.last_value.infected_moving_average = Math.round(data.selectedGmData.tested_overall.last_value.infected_moving_average)
     }
