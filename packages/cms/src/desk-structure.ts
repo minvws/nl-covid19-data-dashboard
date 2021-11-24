@@ -108,11 +108,6 @@ export default () =>
               ),
             ])
         ),
-      addListItem(
-        RiPagesFill,
-        'Inschaling risiconiveau nationaal',
-        'riskLevelNational'
-      ),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
       addListItem(RiPagesFill, 'Contact', 'contact'),
 

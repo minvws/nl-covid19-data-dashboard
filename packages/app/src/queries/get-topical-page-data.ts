@@ -30,10 +30,6 @@ export function getTopicalPageData(
       return `{
        "parts": ${getPagePartsQuery('topicalPage')},
        "elements": ${getElementsQuery(code, elementNames, locale)},
-       "riskLevel": *[_type == 'riskLevelNational']{
-          "level": riskLevel,
-          "dateFrom": date,
-        }[0],
         "weeklyHighlight": *[_type == 'editorial'] | order(publicationDate desc) {
           title,
           publicationDate,
