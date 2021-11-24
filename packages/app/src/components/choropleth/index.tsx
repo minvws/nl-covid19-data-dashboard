@@ -20,25 +20,86 @@ import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
 
 export type DataOptions = {
+  /**
+   * True if the data shown in the map are percentages. (Can be used by the tooltips to format numbers correctly)
+   */
   isPercentage?: boolean;
+  /**
+   * Callback that, when set, will provide a link that will be activated when the user clicks on a feature.
+   * The corresponding code of the feature is passed to this callback, so for example in the case of
+   * safety regions, a code is the form of 'VR<Safety-region-number>' is passed in.
+   */
   getLink?: (code: string) => string;
+  /**
+   * Returns the name of the feature that corresponds to the given code. This mean in the case of VR25
+   * it will need to return the name of this safety region. GM0014 will have to provide the name of the municipality, etc
+   */
   getFeatureName?: (code: string) => string;
+  /**
+   * If true and a valid code is set for the selectedCode as well, the map will rendered with a highlight for the
+   * given feature. The configuration for this can be set using DataConfig.highlightStroke and highlightStroke.highlightStrokeWidth
+   */
   highlightSelection?: boolean;
+  /**
+   * Indicates a specific feature is selected. In the case of safety region this will also mean the map will be zoomed into
+   * this safety region. And in the case of municipality it means the map will be zoomed in to the safety region the municipality
+   * belongs to.
+   */
   selectedCode?: string;
+  /**
+   * Extra name/value pairs that will be passed to the tooltip formatter. In the tooltip replaceVariablesInText is used to format
+   * the tooltip text. By default the dataitem is passed to this function, but when set the tooltipVariables value will be merged
+   * with the dataitem and then passed into replaceVariablesInText.
+   */
   tooltipVariables?: Record<string, Record<string, string> | string>;
+  /**
+   * The type of geo projection that is used to render the map data with.
+   * Read this https://macwright.com/2015/03/23/geojson-second-bite.html to learn about projections.
+   */
   projection?: () => GeoProjection;
 };
 
 export type OptionalDataConfig<T extends ChoroplethDataItem> = {
+  /**
+   * A top-level property name of either IN_COLLECTION.json, VR_COLLECTION.json or GM_COLLECTION.json
+   */
   metricName: KeysOfType<InferedDataCollection<T>, T[]>;
+  /**
+   * A property name of the object determined by the metric name. This value is used to determine the color
+   * of the feature.
+   */
   metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
+  /**
+   * The color that is used for the feature when no data is available (a null value for example).
+   */
   noDataFillColor?: string;
+  /**
+   * The color that is used to for the feature when the feature is hovered.
+   */
   hoverFill?: string;
+  /**
+   * The color that is used to for the feature outline when the feature is hovered.
+   */
   hoverStroke?: string;
+  /**
+   * The width that is used to for the feature outline when the feature is hovered.
+   */
   hoverStrokeWidth?: number;
+  /**
+   * The color that is used to for the feature outline when the feature is highlighted.
+   */
   highlightStroke?: string;
+  /**
+   * The width that is used to for the feature outline when the feature is highlighted.
+   */
   highlightStrokeWidth?: number;
+  /**
+   * The color that is used to for the feature outline when the feature is rendered normally.
+   */
   areaStroke?: string;
+  /**
+   * The width that is used to for the feature outline when the feature is rendered normally.
+   */
   areaStrokeWidth?: number;
 };
 
@@ -79,13 +140,39 @@ export type ResponsiveSizeConfiguration = [
 export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
 export type ChoroplethProps<T extends ChoroplethDataItem> = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * choropleth with an accessible label and description.
+   */
   accessibility: AccessibilityDefinition;
+  /**
+   * The actual data that will be used to determine the colors of the choropleth
+   */
   data: T[];
+  /**
+   * Configuration options for which data and how this data is displayed within the map
+   */
   dataConfig: OptionalDataConfig<T>;
+  /**
+   * Several options that indicate how the map and its different parts are shown
+   */
   dataOptions: DataOptions;
+  /**
+   * Indicates which map is rendered.
+   */
   map: InferedMapType<T>;
+  /**
+   * An optional formatting callback that allows for customizing the contents
+   * of the tooltip
+   */
   formatTooltip?: TooltipFormatter<T>;
+  /**
+   * Placement of the tooltip relative to the mouse pointer
+   */
   tooltipPlacement?: ChoroplethTooltipPlacement;
+  /**
+   * Minimum heifght in pixels
+   */
   minHeight?: number;
   /**
    * A default set of paddings to be used on the bounding box, if

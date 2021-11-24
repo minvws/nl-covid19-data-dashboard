@@ -14,6 +14,7 @@
 - [Lokalize Texts](/docs/lokalize-texts.md)
 - [Page Parts](/docs/page-parts.md)
 - [Timeline Events](/docs/timeline-events.md)
+- [Inline charts](/docs/inline-charts.md)
 
 ## Miscelaneous
 
