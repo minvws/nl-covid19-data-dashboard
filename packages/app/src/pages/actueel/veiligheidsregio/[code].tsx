@@ -83,6 +83,11 @@ export const getStaticProps = createGetStaticProps(
       '5weeks'
     );
 
+    // @TODO: remove after Backend returns rounded values
+    if(data.selectedVrData.tested_overall.last_value.infected_moving_average !== null) {
+      data.selectedVrData.tested_overall.last_value.infected_moving_average = Math.round(data.selectedVrData.tested_overall.last_value.infected_moving_average)
+    }
+
     return data;
   },
   createGetChoroplethData({
@@ -220,8 +225,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                           siteText.veiligheidsregio_actueel.mini_trend_tiles
                             .positief_geteste_mensen.menu_item_label,
                         data: data.tested_overall.values,
-                        dataProperty: 'infected',
-                        value: data.tested_overall.last_value.infected,
+                        dataProperty: 'infected_moving_average',
+                        value: data.tested_overall.last_value.infected_moving_average,
                         warning: getWarning(
                           content.elements.warning,
                           'tested_overall'
@@ -343,7 +348,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                               type: 'metric',
                               text: text.data_driven_texts.tested_overall.value,
                               metricName: 'tested_overall',
-                              metricProperty: 'infected',
+                              metricProperty: 'infected_moving_average',
                               additionalData: {
                                 dateStart: formatters.formatDateFromSeconds(
                                   data.tested_overall.last_value.date_unix -
@@ -394,13 +399,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                           siteText.positief_geteste_personen.tooltip_labels
                             .infected_overall,
                         color: colors.data.primary,
-                      },
-                      {
-                        type: 'invisible',
-                        metricProperty: 'infected',
-                        label:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .infected_overall,
                       },
                     ]}
                     accessibility={{
