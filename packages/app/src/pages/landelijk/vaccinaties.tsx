@@ -576,7 +576,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <VaccineBoosterKpiSection data={DUMMY_DATA_BOOSTER_SHOTS_KPI} />
           )}
 
-          {vaccinationBoosterShotsPerAgeGroupFeature && (
+          {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <VaccineBoosterPerAgeGroup
               data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
               sortingOrder={[
