@@ -367,7 +367,6 @@ export interface NlBoosterShotValue {
   total_date_start_unix: number;
   total_date_end_unix: number;
   received_booster_last_seven_days: number;
-  total_shots_last_seven_days: number;
   last_seven_days_date_start_unix: number;
   last_seven_days_date_end_unix: number;
   date_of_insertion_unix: number;

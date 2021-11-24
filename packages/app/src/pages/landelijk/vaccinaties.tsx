@@ -203,7 +203,6 @@ const DUMMY_DATA_BOOSTER_SHOTS_KPI = {
   total_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
   total_date_end_unix: 1637054676,
   received_booster_last_seven_days: 1694,
-  total_shots_last_seven_days: 610876,
   last_seven_days_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
   last_seven_days_date_end_unix: 1637054676,
   date_of_insertion_unix: 1637054676,

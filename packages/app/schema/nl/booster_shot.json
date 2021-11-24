@@ -34,9 +34,6 @@
         "received_booster_last_seven_days": {
           "type": "number"
         },
-        "total_shots_last_seven_days": {
-          "type": "number"
-        },
         "last_seven_days_date_start_unix": {
           "type": "integer"
         },
@@ -52,7 +49,6 @@
         "total_date_start_unix",
         "total_date_end_unix",
         "received_booster_last_seven_days",
-        "total_shots_last_seven_days",
         "last_seven_days_date_start_unix",
         "last_seven_days_date_end_unix",
         "date_of_insertion_unix"

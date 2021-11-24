@@ -162,3 +162,5 @@ timestamp,action,key,document_id,move_to
 2021-11-23T13:04:44.641Z,add,veiligheidsregio_positief_geteste_personen.section_archived.description,41m6S8Y6xAJZkZywfx0IKg,__
 2021-11-23T13:04:45.714Z,add,veiligheidsregio_positief_geteste_personen.section_archived.title,z1CGDOfh23CnZYQwF8mhah,__
 2021-11-22T14:26:31.828Z,add,aria_labels.age_old,L0R7Ua3YIau8O4TDzEBxUd,__
+2021-11-24T08:50:59.691Z,delete,vaccinaties.booster_shots_kpi.last_week_section.description,L0R7Ua3YIau8O4TDySLy2p,__
+2021-11-24T08:54:06.768Z,add,vaccinaties.booster_shots_kpi.last_week_section.description_kpi,z1CGDOfh23CnZYQwFAfOdl,__
