@@ -127,7 +127,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.nationaal_actueel;
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-  const confirmedCasesFeature = useFeature('nlTestedOverallTopicalPage');
+  const testedOverallTopicalPageFeature = useFeature(
+    'nlTestedOverallTopicalPage'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -229,7 +231,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
-                  confirmedCasesFeature.isEnabled
+                  testedOverallTopicalPageFeature.isEnabled
                     ? ({
                         label:
                           siteText.nationaal_actueel.mini_trend_tiles
@@ -438,7 +440,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-                {confirmedCasesFeature.isEnabled && (
+                {testedOverallTopicalPageFeature.isEnabled && (
                   <MiniTrendTile
                     title={text.mini_trend_tiles.positief_geteste_mensen.title}
                     text={
@@ -465,6 +467,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               type: 'metric',
                               text: text.data_driven_texts.tested_ggd.value,
                               metricName: 'tested_ggd',
+                              isPercentage: true,
                               metricProperty:
                                 'infected_percentage_moving_average',
                             },
