@@ -100,7 +100,9 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               }
             </Heading>
             {lockdown.message.description ? (
-              <RichContent blocks={lockdown.message.description} />
+              <Box maxWidth='maxWidthText'>
+                <RichContent blocks={lockdown.message.description} />
+              </Box>
             ) : null}
           </Box>
 

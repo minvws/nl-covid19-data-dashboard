@@ -73,7 +73,9 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               {siteText.nationaal_maatregelen.titel}
             </Heading>
             {lockdown.message.description ? (
-              <RichContent blocks={lockdown.message.description} />
+              <Box maxWidth='maxWidthText'>
+                  <RichContent blocks={lockdown.message.description} />
+              </Box>
             ) : null}
           </Box>
           <Box as="article" spacing={3} >
