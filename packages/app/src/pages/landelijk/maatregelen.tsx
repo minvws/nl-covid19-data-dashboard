@@ -1,7 +1,5 @@
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
@@ -66,26 +64,25 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
-        <TileList needsMargin={false}>
-          <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
-          <Tile noBorder={true} isFirstElement={false}>
-            <Box spacing={1}>
-              <Heading level={3}>{lockdown.message.title}</Heading>
-              {lockdown.message.description ? (
-                <RichContent blocks={lockdown.message.description} />
-              ) : null}
-            </Box>
-          </Tile>
-
-          <Tile>
-            <Box spacing={3}>
-              <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable
-                data={lockdown}
-                level={data.risk_level.last_value.risk_level}
-              />
-            </Box>
-          </Tile>
+        <TileList>
+          <Box as="header" spacing={1}>
+            <Heading
+              level={1}
+              as="h2"
+            >
+              {siteText.nationaal_maatregelen.titel}
+            </Heading>
+            {lockdown.message.description ? (
+              <RichContent blocks={lockdown.message.description} />
+            ) : null}
+          </Box>
+          <Box as="article" spacing={3} >
+            <Heading level={3}>{lockdown.title}</Heading>
+            <LockdownTable
+              data={lockdown}
+              level={data.risk_level.last_value.risk_level}
+            />
+          </Box>
         </TileList>
       </NlLayout>
     </Layout>
