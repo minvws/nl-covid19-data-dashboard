@@ -8,7 +8,10 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import {
+  TimelineEventConfig,
+  TimelineMarker,
+} from '~/components/time-series-chart/components/timeline';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { useIntl } from '~/intl';
@@ -39,6 +42,14 @@ export function SituationsOverTimeChart({
       label: text.legenda.onvoldoende_gegevens,
     },
   ];
+
+  if (timelineEvents && timelineEvents.length > 0) {
+    staticLegendItems.push({
+      label: siteText.charts.timeline.legend_label,
+      shape: 'custom',
+      shapeComponent: <TimelineMarker size={10} />,
+    });
+  }
 
   const timespanAnnotations = useGappedLineAnnotations(
     values,

@@ -11,6 +11,7 @@ export interface SelectOption<T = string> {
   label: string;
   color: string;
   shape?: 'line' | 'circle' | 'square';
+  legendAriaLabel?: string;
 }
 
 interface InteractiveLegendProps<T = string> {
@@ -50,6 +51,7 @@ export function InteractiveLegend<T = string>({
                   isActive={hasSelection && isSelected}
                   borderColor={item.color}
                   data-text={item.label}
+                  aria-label={item.legendAriaLabel}
                 >
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
@@ -109,13 +111,14 @@ const ItemButton = styled(Text)<{
 }>(({ isActive, borderColor }) =>
   css({
     appearance: 'none',
-    backgroundColor: 'tileGray',
     cursor: 'pointer',
     pr: asResponsiveArray({ _: '5px', md: 10 }),
     pl: asResponsiveArray({ _: 25, md: 30 }),
-    py: '3px',
-    border: '3px solid',
-    borderColor: isActive ? borderColor : 'transparent',
+    py: '6px',
+    borderRadius: '5px',
+    boxShadow: `inset 0px 0px 0px ${
+      isActive ? '3px ' + borderColor : '1px #c4c4c4'
+    }`,
     fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -125,18 +128,12 @@ const ItemButton = styled(Text)<{
     alignItems: 'center',
     justifyContent: 'space-between',
     '&:hover,&:focus': {
-      '&:before': {
-        content: '""',
-        background: borderColor,
-        height: '3px',
-        position: 'absolute',
-        left: '-3px',
-        right: '-3px',
-        bottom: '-3px',
-      },
+      bg: 'tileGray',
+      boxShadow: `inset 0px 0px 0px ${isActive ? '3px' : '2px'} ${borderColor}`,
     },
     '&:focus': {
-      background: 'lightGray',
+      borderColor: 'silver',
+      borderWidth: '1px',
     },
     '&:after': {
       content: 'attr(data-text)',
@@ -147,6 +144,17 @@ const ItemButton = styled(Text)<{
       pointerEvents: 'none',
       fontWeight: 'bold',
       pr: '1px',
+    },
+    '&:before': {
+      bg: isActive ? borderColor : 'white',
+      opacity: '.1',
+      content: 'attr(data-color)',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      borderRadius: '5px',
     },
   })
 );
@@ -169,7 +177,8 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
 
 const Line = styled.div<{ color: string }>(({ color }) =>
   css({
-    top: '10px',
+    top: '50%',
+    transform: 'translateY(-50%)',
     width: '15px',
     height: '3px',
     borderRadius: '2px',
@@ -186,7 +195,8 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
-    top: '6.5px',
+    top: '50%',
+    transform: 'translateY(-50%)',
     width: '10px',
     height: '10px',
     borderRadius: '50%',
@@ -199,7 +209,8 @@ const Square = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
-    top: '7px',
+    top: '50%',
+    transform: 'translateY(-50%)',
     width: '11px',
     height: '11px',
     borderRadius: '2px',

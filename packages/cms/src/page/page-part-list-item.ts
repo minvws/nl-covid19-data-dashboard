@@ -1,12 +1,12 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import documentStore from 'part:@sanity/base/datastore/document';
-import { RiPagesFill } from 'react-icons/ri';
+import { BsBook, BsBookHalf, BsFillPuzzleFill } from 'react-icons/bs';
 import { map } from 'rxjs/operators';
 
 export function pagePartListItem() {
   return S.listItem()
     .title("Dashboard Pagina's")
-    .icon(RiPagesFill)
+    .icon(BsBook)
     .child(pageIdentifierListemItem);
 }
 
@@ -32,7 +32,7 @@ function pageDataListItem(page: any) {
   return S.listItem()
     .title(page.title)
     .id(page._id)
-    .icon(RiPagesFill)
+    .icon(BsBookHalf)
     .child(
       documentStore
         .listenQuery(
@@ -59,7 +59,7 @@ function pageDataItem(pageData: any) {
   return S.listItem()
     .title(pageData.title)
     .id(pageData._id)
-    .icon(RiPagesFill)
+    .icon(BsFillPuzzleFill)
     .child(
       S.editor()
         .id(pageData._id)

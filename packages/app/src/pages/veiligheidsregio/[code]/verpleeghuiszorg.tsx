@@ -5,8 +5,8 @@ import {
   Verpleeghuiszorg,
 } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -38,6 +38,7 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -210,7 +211,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer mb={3} />
+          <Divider />
 
           <PageInformationBlock
             id="besmette-locaties"
@@ -289,7 +290,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer mb={3} />
+          <Divider />
 
           <PageInformationBlock
             id="sterfte"

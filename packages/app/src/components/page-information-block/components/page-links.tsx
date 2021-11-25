@@ -1,12 +1,15 @@
+import {
+  ChevronLarge,
+  External as ExternalIcon,
+} from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ChevronLarge } from '@corona-dashboard/icons';
-import { External as ExternalIcon } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { spacingStyle } from '~/style/functions/spacing';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
@@ -73,8 +76,11 @@ const OrderedList = styled.ol(
 
 const ListItem = styled.li(
   css({
-    width: asResponsiveArray({ _: '100%', md: '50%' }),
-    pr: 4,
+    width: asResponsiveArray({ _: '100%', md: `calc(50% - ${space[4]})` }),
+
+    '&:nth-child(2n+1)': {
+      mr: asResponsiveArray({ md: 5 }),
+    },
   })
 );
 

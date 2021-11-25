@@ -3,10 +3,16 @@ import {
   DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
+  GmTestedOverallValue,
   GmVaccineCoveragePerAgeGroupValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Chevron, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
+import {
+  Chevron,
+  Test,
+  Vaccinaties,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
@@ -64,13 +70,24 @@ export const getStaticProps = createGetStaticProps(
       'hospital_nice',
       'sewer',
       'difference',
-      'vaccine_coverage_per_age_group'
+      'vaccine_coverage_per_age_group',
+      'tested_overall'
     )(context);
 
     data.selectedGmData.hospital_nice.values = cutValuesFromTimeframe(
       data.selectedGmData.hospital_nice.values,
       '5weeks'
     );
+
+    data.selectedGmData.tested_overall.values = cutValuesFromTimeframe(
+      data.selectedGmData.tested_overall.values,
+      '5weeks'
+    );
+
+    // @TODO: remove after Backend returns rounded values
+    if(data.selectedGmData.tested_overall.last_value.infected_moving_average !== null) {
+      data.selectedGmData.tested_overall.last_value.infected_moving_average = Math.round(data.selectedGmData.tested_overall.last_value.infected_moving_average)
+    }
 
     return data;
   },
@@ -97,7 +114,11 @@ export const getStaticProps = createGetStaticProps(
       };
     },
   }),
-  getTopicalPageData('gm', ['hospital_nice', 'vaccine_coverage_per_age_group'])
+  getTopicalPageData('gm', [
+    'hospital_nice',
+    'vaccine_coverage_per_age_group',
+    'tested_overall',
+  ])
 );
 
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
@@ -135,6 +156,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const internationalFeature = useFeature('inPositiveTestsPage');
+  const testedOverallTopicalPageFeature = useFeature(
+    'gmTestedOverallTopicalPage'
+  );
 
   const dataSitemap = useDataSitemap('gm', gmCode, data);
 
@@ -206,6 +230,20 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<GmHospitalNiceValue>,
+                  testedOverallTopicalPageFeature.isEnabled
+                    ? ({
+                        label:
+                          siteText.gemeente_actueel.mini_trend_tiles
+                            .positief_geteste_mensen.menu_item_label,
+                        data: data.tested_overall.values,
+                        dataProperty: 'infected_moving_average',
+                        value: data.tested_overall.last_value.infected_moving_average,
+                        warning: getWarning(
+                          content.elements.warning,
+                          'tested_overall'
+                        ),
+                      } as MiniTileSelectorItem<GmTestedOverallValue>)
+                    : (undefined as any),
                   {
                     label:
                       siteText.gemeente_actueel.mini_trend_tiles.vaccinatiegraad
@@ -227,7 +265,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         filteredAgeGroup18Plus?.fully_vaccinated_percentage_label,
                     },
                   } as MiniTileSelectorItem<GmVaccineCoveragePerAgeGroupValue>,
-                ]}
+                ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
                   title={text.mini_trend_tiles.ziekenhuis_opnames.title}
@@ -308,6 +346,73 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
+
+                {testedOverallTopicalPageFeature.isEnabled && (
+                  <MiniTrendTile
+                    title={text.mini_trend_tiles.positief_geteste_mensen.title}
+                    text={
+                      <>
+                        <DataDrivenText
+                          data={data}
+                          content={[
+                            {
+                              type: 'metric',
+                              text: text.data_driven_texts.tested_overall.value,
+                              metricName: 'tested_overall',
+                              metricProperty: 'infected_moving_average',
+                              additionalData: {
+                                dateStart: formatters.formatDateFromSeconds(
+                                  data.tested_overall.last_value.date_unix -
+                                    WEEK_IN_SECONDS
+                                ),
+                                dateEnd: formatters.formatDateFromSeconds(
+                                  data.tested_overall.last_value.date_unix
+                                ),
+                              },
+                            },
+                          ]}
+                        />
+                        <LinkWithIcon
+                          href={reverseRouter.nl.positiefGetesteMensen()}
+                          icon={<Chevron />}
+                          iconPlacement="right"
+                        >
+                          {
+                            text.mini_trend_tiles.positief_geteste_mensen
+                              .read_more_link
+                          }
+                        </LinkWithIcon>
+                      </>
+                    }
+                    icon={<Test />}
+                    values={data.tested_overall.values}
+                    seriesConfig={[
+                      {
+                        type: 'line',
+                        metricProperty: 'infected_moving_average',
+                        label:
+                          siteText.positief_geteste_personen.tooltip_labels
+                            .infected_moving_average,
+                        color: colors.data.primary,
+                      },
+                      {
+                        type: 'bar',
+                        metricProperty: 'infected',
+                        label:
+                          siteText.positief_geteste_personen.tooltip_labels
+                            .infected_overall,
+                        color: colors.data.primary,
+                      },
+                    ]}
+                    accessibility={{
+                      key: 'topical_tested_overall_infected',
+                    }}
+                    warning={getWarning(
+                      content.elements.warning,
+                      'tested_overall'
+                    )}
+                  />
+                )}
 
                 {isDefined(filteredAgeGroup18Plus) && (
                   <MiniVaccinationCoverageTile

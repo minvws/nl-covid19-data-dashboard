@@ -1,6 +1,5 @@
 import { MetricName } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { WeeklyHighlightProps } from '~/domain/topical/highlights-tile';
 import { createGetContent } from '~/static-props/get-data';
 import {
@@ -23,17 +22,13 @@ export function getTopicalPageData(
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | HighlightedItemParts>;
       elements: ElementsQueryResult;
-      riskLevel: { level: EscalationLevelType; dateFrom: string };
+
       weeklyHighlight: WeeklyHighlightProps;
     }>((context) => {
       const { locale } = context;
       return `{
        "parts": ${getPagePartsQuery('topicalPage')},
        "elements": ${getElementsQuery(code, elementNames, locale)},
-       "riskLevel": *[_type == 'riskLevelNational']{
-          "level": riskLevel,
-          "dateFrom": date,
-        }[0],
         "weeklyHighlight": *[_type == 'editorial'] | order(publicationDate desc) {
           title,
           publicationDate,
@@ -61,7 +56,6 @@ export function getTopicalPageData(
         showWeeklyHighlight: highlightInfo?.showWeeklyHighlight ?? false,
         elements: content.elements,
         weeklyHighlight: content.weeklyHighlight,
-        riskLevel: content.riskLevel,
       },
     };
   };

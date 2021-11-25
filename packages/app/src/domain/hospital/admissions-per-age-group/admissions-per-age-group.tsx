@@ -1,5 +1,4 @@
 import {
-  colors,
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
@@ -9,14 +8,13 @@ import {
   InteractiveLegend,
   SelectOption,
 } from '~/components/interactive-legend';
-import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
@@ -55,14 +53,19 @@ export function AdmissionsPerAgeGroup({
   /* Enrich config with dynamic data / locale */
   const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] =
     BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+      const label =
+        baseAgeGroup.metricProperty in text.legend
+          ? text.legend[baseAgeGroup.metricProperty]
+          : baseAgeGroup.metricProperty;
+
       return {
         ...baseAgeGroup,
         type: 'line',
         shape: 'line',
-        label:
-          baseAgeGroup.metricProperty in text.legend
-            ? text.legend[baseAgeGroup.metricProperty]
-            : baseAgeGroup.metricProperty,
+        label,
+        legendAriaLabel: replaceVariablesInText(siteText.aria_labels.age_old, {
+          age: label,
+        }),
       };
     });
 
@@ -81,22 +84,6 @@ export function AdmissionsPerAgeGroup({
   const interactiveLegendOptions: SelectOption[] = seriesConfig.filter(
     (item) => !alwaysEnabled.includes(item.metricProperty)
   );
-
-  /* Static legend contains always enabled items and the under reported item */
-  const staticLegendItems = seriesConfig
-    .filter((item) => alwaysEnabled.includes(item.metricProperty))
-    .map<LegendItem>((item) => ({
-      label: item.label,
-      shape: 'custom' as const,
-      shapeComponent: <SeriesIcon config={item} />,
-    }))
-    .concat([
-      {
-        shape: 'square' as const,
-        color: colors.data.underReported,
-        label: text.line_chart_legend_inaccurate_label,
-      },
-    ]);
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;
@@ -117,7 +104,6 @@ export function AdmissionsPerAgeGroup({
         timeframe={timeframe}
         seriesConfig={chartConfig}
         minHeight={breakpoints.md ? 300 : 250}
-        disableLegend
         formatTooltip={(data) => (
           <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
         )}
@@ -133,7 +119,6 @@ export function AdmissionsPerAgeGroup({
           timelineEvents,
         }}
       />
-      <Legend items={staticLegendItems} />
     </ErrorBoundary>
   );
 }

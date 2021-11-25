@@ -80,6 +80,14 @@ export const preset = {
     datadriven: {
       fontSize: asResponsiveArray({ _: 3, md: 5 }),
     },
+    choroplethTooltipHeader: {
+      fontSize: asResponsiveArray({ _: 5, md: 6 }),
+      lineHeight: 1,
+      fontWeight: 'bold',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      mt: 0,
+    },
   },
 } as const;
 

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_booster_shot",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_booster_shot_value",
+      "type": "object",
+      "properties": {
+        "partially_or_fully_vaccinated_total_amount_of_people": {
+          "type": "number"
+        },
+        "total_date_start_unix": {
+          "type": "integer"
+        },
+        "total_date_end_unix": {
+          "type": "integer"
+        },
+        "received_booster_last_seven_days": {
+          "type": "number"
+        },
+        "last_seven_days_date_start_unix": {
+          "type": "integer"
+        },
+        "last_seven_days_date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "partially_or_fully_vaccinated_total_amount_of_people",
+        "total_date_start_unix",
+        "total_date_end_unix",
+        "received_booster_last_seven_days",
+        "last_seven_days_date_start_unix",
+        "last_seven_days_date_end_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

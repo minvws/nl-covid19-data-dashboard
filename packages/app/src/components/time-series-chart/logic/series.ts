@@ -35,7 +35,7 @@ interface SeriesCommonDefinition {
    */
   shortLabel?: string;
   /**
-   * Hide in tooltip means the series will not show up visually as part of the
+   * nonInteractive means the series will not show up visually as part of the
    * tooltip (only hidden). Sometimes we want to render a series as a backdrop
    * to give context to another interactive series, like in the sewer chart when
    * a location is selected.
@@ -51,6 +51,11 @@ interface SeriesCommonDefinition {
    * Specifies a different minimum range than the default for this series.
    */
   minimumRange?: number;
+  /**
+   * Hide this series in the legend (because it is shown in a custom
+   * legend, for example)
+   */
+  hideInLegend?: boolean;
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>

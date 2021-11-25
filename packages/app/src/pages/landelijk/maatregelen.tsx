@@ -4,7 +4,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
@@ -16,19 +15,18 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  selectNlData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
-  riskLevel: {
-    level: EscalationLevelType;
-  };
 };
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
     return `
@@ -49,9 +47,6 @@ export const getStaticProps = createGetStaticProps(
           },
         }
       }[0],
-      'riskLevel': *[_type == 'riskLevelNational']{
-		    "level": riskLevel,
-      }[0],
       // We will need the roadmap when lockdown is disabled in the CMS.
       // 'roadmap': *[_type == 'roadmap'][0]
     }`;
@@ -61,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
-  const { content, lastGenerated } = props;
+  const { content, lastGenerated, selectedNlData: data } = props;
   const { lockdown } = content;
 
   const metadata = {
@@ -73,29 +68,24 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
+          <Tile>
+            <Box spacing={3}>
+              <Heading level={3}>{lockdown.message.title}</Heading>
+              {lockdown.message.description ? (
+                <RichContent blocks={lockdown.message.description} />
+              ) : null}
+            </Box>
+          </Tile>
 
-          {lockdown.showLockdown && (
-            <Tile>
-              <Box spacing={3}>
-                <Heading level={3}>{lockdown.message.title}</Heading>
-                {lockdown.message.description ? (
-                  <RichContent blocks={lockdown.message.description} />
-                ) : null}
-              </Box>
-            </Tile>
-          )}
-
-          {lockdown.showLockdown && (
-            <Tile>
-              <Box spacing={3}>
-                <Heading level={3}>{lockdown.title}</Heading>
-                <LockdownTable
-                  data={lockdown}
-                  level={content.riskLevel.level}
-                />
-              </Box>
-            </Tile>
-          )}
+          <Tile>
+            <Box spacing={3}>
+              <Heading level={3}>{lockdown.title}</Heading>
+              <LockdownTable
+                data={lockdown}
+                level={data.risk_level.last_value.risk_level}
+              />
+            </Box>
+          </Tile>
         </TileList>
       </NlLayout>
     </Layout>

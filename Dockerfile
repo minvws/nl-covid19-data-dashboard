@@ -49,7 +49,8 @@ FROM deps as builder
 COPY . .
 RUN yarn workspace @corona-dashboard/common build \
 && yarn workspace @corona-dashboard/cli generate-typescript \
-&& yarn workspace @corona-dashboard/icons build
+&& yarn workspace @corona-dashboard/icons build \
+&& yarn test:ci
 
 # Map arguments to environment variables
 ARG ARG_NEXT_PUBLIC_SANITY_DATASET

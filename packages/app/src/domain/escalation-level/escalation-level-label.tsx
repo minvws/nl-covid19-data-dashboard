@@ -10,26 +10,35 @@ import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 interface EscalationLevelLabelProps {
   level: EscalationLevelType;
-  dateFrom?: string;
+  validFrom: number;
+  lastCalculated: number;
 }
 
 export function EscalationLevelLabel({
   level,
-  dateFrom,
+  validFrom,
+  lastCalculated,
 }: EscalationLevelLabelProps) {
-  const { siteText, formatDate } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
   const escalationLevel = useEscalationLevel(level);
+
+  // We need to know if the two dates are on the same day, so reset hour to
+  // 00:00 for both before comparing to avoid bugs when hours differ
+  const isSameDate =
+    new Date(validFrom * 1000).setHours(0, 0, 0) ===
+    new Date(lastCalculated * 1000).setHours(0, 0, 0);
 
   return (
     <Box
       display="flex"
       alignItems={{ sm: 'center' }}
-      spacingHorizontal={2}
+      spacingHorizontal={3}
       flexDirection={{ _: 'column', sm: 'row' }}
     >
       <Box
         display={{ _: 'flex', sm: undefined }}
         alignItems={{ _: 'center', sm: undefined }}
+        minWidth="auto"
       >
         <EscalationLevelIcon color={escalationLevel.color}>
           <VisuallyHidden>
@@ -47,18 +56,20 @@ export function EscalationLevelLabel({
         </InlineText>
       </Box>
 
-      {dateFrom && (
-        <Box pt="2px" pl={{ _: 0, sm: 2 }}>
-          <InlineText variant="body2" color="bodyLight">
-            {replaceVariablesInText(
-              siteText.national_escalation_levels.valid_from,
-              {
-                date: formatDate(new Date(dateFrom)),
-              }
-            )}
-          </InlineText>
-        </Box>
-      )}
+      <Box pt="2px" pl={{ _: 0, sm: 2 }} maxWidth={350}>
+        <InlineText variant="body2" color="body">
+          {replaceVariablesInText(
+            isSameDate
+              ? siteText.national_escalation_levels.valid_from
+              : siteText.national_escalation_levels
+                  .valid_from_and_last_calculated,
+            {
+              date: formatDateFromSeconds(validFrom, 'medium'),
+              lastCalculated: formatDateFromSeconds(lastCalculated, 'medium'),
+            }
+          )}
+        </InlineText>
+      </Box>
     </Box>
   );
 }

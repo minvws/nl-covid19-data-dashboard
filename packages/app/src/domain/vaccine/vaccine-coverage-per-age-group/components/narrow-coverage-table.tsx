@@ -1,14 +1,14 @@
 import { Box, Spacer } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { formatAgeGroupString } from '~/utils/format-age-group-string';
+import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
   CoverageTableRow,
 } from '../common';
-import { formatAgeGroupString } from '../logic/format-age-group-string';
-import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
 import { AgeGroup } from './age-group';
 import { Bar } from './bar';
 import { NarrowPercentage } from './narrow-percentage';

@@ -1,4 +1,4 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, vrData } from '@corona-dashboard/common';
 import { geoConicConformal, geoMercator } from 'd3-geo';
 import fs from 'fs';
 import hash from 'hash-sum';
@@ -121,8 +121,15 @@ function loadChoroplethData(map: MapType, metric: string) {
     fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
   );
 
-  if (metric !== 'gemeente') {
+  if (metric !== 'gemeente' && metric !== 'veiligheidsregio') {
     return content[metric] as ChoroplethDataItem[];
+  }
+
+  if (metric === 'veiligheidsregio') {
+    return vrData.map((x) => ({
+      vrcode: x.code,
+      admissions_on_date_of_reporting: null,
+    })) as unknown as ChoroplethDataItem[];
   }
 
   const data = content['tested_overall'];

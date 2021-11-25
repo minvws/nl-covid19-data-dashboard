@@ -7,6 +7,7 @@
       "required": [
         "date_unix",
         "infected",
+        "infected_moving_average",
         "infected_per_100k",
         "infected_per_100k_moving_average",
         "date_of_insertion_unix"
@@ -17,6 +18,9 @@
         },
         "infected": {
           "type": "integer"
+        },
+        "infected_moving_average": {
+          "type": ["number", "null"]
         },
         "infected_per_100k": {
           "type": "number"

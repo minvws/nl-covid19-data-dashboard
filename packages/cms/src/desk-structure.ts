@@ -1,5 +1,12 @@
 import { StructureBuilder as S } from '@sanity/structure';
-import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
+import {
+  BsCardChecklist,
+  BsFillFileBarGraphFill,
+  BsFillPuzzleFill,
+  BsLockFill,
+  BsMap,
+  BsTable,
+} from 'react-icons/bs';
 import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
@@ -23,10 +30,8 @@ const hiddenDocTypes = [
   'overDitDashboard',
   'overRisicoNiveaus',
   'overRisicoNiveausNew',
-  'roadmap',
   'lockdown',
   'toegankelijkheid',
-  'riskLevelNational',
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
@@ -39,6 +44,9 @@ const hiddenDocTypes = [
   'warning',
   'chartConfiguration',
   'kpiConfiguration',
+  'donutChartConfiguration',
+  'choroplethConfiguration',
+  'ageDemographicChartConfiguration',
   'pageArticles',
   'pageLinks',
   'pageHighlightedItems',
@@ -53,17 +61,7 @@ export default () =>
       pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
-      S.listItem()
-        .title('Lockdown en Routekaart')
-        .icon(BsTable)
-        .child(
-          S.list()
-            .title('Lockdown en Routekaart')
-            .items([
-              addListItem(BsLockFill, 'Lockdown', 'lockdown'),
-              addListItem(BsTable, 'Routekaart', 'roadmap'),
-            ])
-        ),
+      addListItem(BsLockFill, 'Lockdown', 'lockdown'),
       addListItem(
         GrCircleInformation,
         'Over dit dashboard',
@@ -110,30 +108,36 @@ export default () =>
               ),
             ])
         ),
-      addListItem(
-        RiPagesFill,
-        'Inschaling risiconiveau nationaal',
-        'riskLevelNational'
-      ),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
       addListItem(RiPagesFill, 'Contact', 'contact'),
 
       S.divider(),
 
-      ...S.documentTypeListItems().filter(
-        (item) =>
-          item.getId() === 'kpiConfiguration' ||
-          item.getId() === 'chartConfiguration'
-      ),
-
-      S.divider(),
+      S.listItem()
+        .title('Grafieken')
+        .icon(BsFillFileBarGraphFill)
+        .child(
+          S.list()
+            .title('Configuraties')
+            .items(
+              S.documentTypeListItems().filter((item) =>
+                [
+                  'kpiConfiguration',
+                  'chartConfiguration',
+                  'ageDemographicChartConfiguration',
+                  'donutChartConfiguration',
+                  'choroplethConfiguration',
+                ].includes(item.getId() ?? '')
+              )
+            )
+        ),
 
       S.listItem()
         .title('Pagina onderdelen')
-        .icon(BsTable)
+        .icon(BsFillPuzzleFill)
         .child(
           S.list()
-            .title('Lockdown en Routekaart')
+            .title("Pagina's en onderdelen")
             .items([
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'pageIdentifier'

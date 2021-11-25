@@ -3,6 +3,7 @@ import {
   DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
+  NlTestedOverallValue,
   NlVaccineCoveragePerAgeGroupEstimated,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
@@ -10,6 +11,7 @@ import {
   Arts,
   Chart,
   Chevron,
+  Test,
   Vaccinaties,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
@@ -76,6 +78,7 @@ export const getStaticProps = createGetStaticProps(
   getTopicalPageData('nl', [
     'intensive_care_nice',
     'hospital_nice',
+    'tested_overall',
     'vaccine_coverage_per_age_group_estimated',
   ]),
   () => {
@@ -83,10 +86,13 @@ export const getStaticProps = createGetStaticProps(
       'intensive_care_nice',
       'intensive_care_lcps',
       'hospital_nice',
+      'tested_overall',
+      'tested_ggd',
       'hospital_lcps',
       'difference',
       'vaccine_administered_total',
-      'vaccine_coverage_per_age_group_estimated'
+      'vaccine_coverage_per_age_group_estimated',
+      'risk_level'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -94,10 +100,20 @@ export const getStaticProps = createGetStaticProps(
       '5weeks'
     );
 
+    data.tested_overall.values = cutValuesFromTimeframe(
+      data.tested_overall.values,
+      '5weeks'
+    );
+
     data.intensive_care_nice.values = cutValuesFromTimeframe(
       data.intensive_care_nice.values,
       '5weeks'
     );
+    
+    // @TODO: remove after Backend returns rounded values
+    if(data.tested_overall.last_value.infected_moving_average !== null) {
+      data.tested_overall.last_value.infected_moving_average = Math.round(data.tested_overall.last_value.infected_moving_average)
+    }
 
     return { selectedNlData: data };
   }
@@ -108,6 +124,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
+  const dataTestedOverall = data.tested_overall;
   const dataSitemap = useDataSitemap('nl');
 
   const { siteText, ...formatters } = useIntl();
@@ -115,6 +132,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.nationaal_actueel;
 
   const internationalFeature = useFeature('inPositiveTestsPage');
+  const testedOverallTopicalPageFeature = useFeature(
+    'nlTestedOverallTopicalPage'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -216,6 +236,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
+                  testedOverallTopicalPageFeature.isEnabled
+                    ? ({
+                        label:
+                          siteText.nationaal_actueel.mini_trend_tiles
+                            .positief_geteste_mensen.menu_item_label,
+                        data: dataTestedOverall.values,
+                        dataProperty: 'infected_moving_average',
+                        value: dataTestedOverall.last_value.infected_moving_average,
+                        warning: getWarning(
+                          content.elements.warning,
+                          'tested_overall'
+                        ),
+                      } as MiniTileSelectorItem<NlTestedOverallValue>)
+                    : (undefined as any),
                   {
                     label:
                       siteText.nationaal_actueel.mini_trend_tiles
@@ -236,7 +270,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           ?.age_18_plus_fully_vaccinated,
                     },
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
-                ]}
+                ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
                   title={text.mini_trend_tiles.ic_opnames.title}
@@ -411,7 +445,80 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-
+                {testedOverallTopicalPageFeature.isEnabled && (
+                  <MiniTrendTile
+                    title={text.mini_trend_tiles.positief_geteste_mensen.title}
+                    text={
+                      <>
+                        <DataDrivenText
+                          data={data}
+                          content={[
+                            {
+                              type: 'metric',
+                              text: text.data_driven_texts.tested_overall.value,
+                              metricName: 'tested_overall',
+                              metricProperty: 'infected_moving_average',
+                              additionalData: {
+                                dateStart: formatters.formatDateFromSeconds(
+                                  data.tested_overall.last_value.date_unix -
+                                    WEEK_IN_SECONDS
+                                ),
+                                dateEnd: formatters.formatDateFromSeconds(
+                                  data.tested_overall.last_value.date_unix
+                                ),
+                              },
+                            },
+                            {
+                              type: 'metric',
+                              text: text.data_driven_texts.tested_ggd.value,
+                              metricName: 'tested_ggd',
+                              isPercentage: true,
+                              metricProperty:
+                                'infected_percentage_moving_average',
+                            },
+                          ]}
+                        />
+                        <LinkWithIcon
+                          href={reverseRouter.nl.positiefGetesteMensen()}
+                          icon={<Chevron />}
+                          iconPlacement="right"
+                        >
+                          {
+                            text.mini_trend_tiles.positief_geteste_mensen
+                              .read_more_link
+                          }
+                        </LinkWithIcon>
+                      </>
+                    }
+                    icon={<Test />}
+                    values={dataTestedOverall.values}
+                    seriesConfig={[
+                      {
+                        type: 'line',
+                        metricProperty: 'infected_moving_average',
+                        label:
+                          siteText.positief_geteste_personen.tooltip_labels
+                            .infected_moving_average,
+                        color: colors.data.primary,
+                      },
+                      {
+                        type: 'bar',
+                        metricProperty: 'infected',
+                        label:
+                          siteText.positief_geteste_personen.tooltip_labels
+                            .infected_overall,
+                        color: colors.data.primary,
+                      },
+                    ]}
+                    accessibility={{
+                      key: 'topical_tested_overall_infected',
+                    }}
+                    warning={getWarning(
+                      content.elements.warning,
+                      'tested_overall'
+                    )}
+                  />
+                )}
                 <MiniVaccinationCoverageTile
                   title={text.mini_trend_tiles.vaccinatiegraad.title}
                   oneShotBarLabel={
@@ -463,10 +570,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner
-              level={content.riskLevel.level}
-              dateFrom={content.riskLevel.dateFrom}
-            />
+            <EscalationLevelBanner data={data.risk_level.last_value} hasLink />
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}

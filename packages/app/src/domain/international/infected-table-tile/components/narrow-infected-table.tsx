@@ -8,7 +8,7 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
-import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getThresholdValue } from '~/utils/get-threshold-value';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
@@ -88,7 +88,7 @@ function ItemRow({
   const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
-  const filterBelow = getFilteredThresholdValues(
+  const filterBelow = getThresholdValue(
     thresholds.in.infected_per_100k_average,
     item.infected_per_100k_average
   );

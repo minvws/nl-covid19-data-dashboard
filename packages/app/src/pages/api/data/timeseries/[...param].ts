@@ -1,18 +1,15 @@
 import {
-  isDateSeries,
-  isDateSpanSeries,
   sortTimeSeriesValues,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { getUnixTime, parseISO } from 'date-fns';
-import fs from 'fs';
 import { last } from 'lodash';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
-import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
+import { filterByDateSpan } from '~/utils/api/filter-by-date-span';
+import { loadMetricData } from '~/utils/api/load-metric-data';
 import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
+import { stripTrailingNullValues } from '~/utils/api/strip-trailing-null-values';
 
 const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
@@ -32,7 +29,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const data = loadMetricData(root, metric);
+    const data = loadMetricData(root, metric, publicJsonPath);
     if (isDefined(data) && isDefined(data.values)) {
       data.values = sortTimeSeriesValues(data.values);
 
@@ -61,91 +58,4 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     console.error(e);
     res.status(500).end();
   }
-}
-
-function loadMetricData(root: string, metric: string) {
-  const filename = sanitize(`${root.toUpperCase()}.json`);
-  const fullPath = path.join(publicJsonPath, filename);
-  if (fs.existsSync(fullPath)) {
-    const content = JSON.parse(
-      fs.readFileSync(fullPath, { encoding: 'utf-8' })
-    );
-
-    return metric in content ? content[metric] : undefined;
-  }
-  console.error(`${fullPath} not found`);
-  return undefined;
-}
-
-function filterByDateSpan(
-  values: TimestampedValue[],
-  start?: string,
-  end?: string
-): TimestampedValue[] {
-  const startDate = createTimestamp(start);
-  const endDate = createTimestamp(end);
-
-  if (isDateSeries(values)) {
-    if (!isNaN(startDate) && !isNaN(endDate)) {
-      return values.filter(
-        (x) => x.date_unix >= startDate && x.date_unix <= endDate
-      );
-    } else if (!isNaN(startDate)) {
-      return values.filter((x) => x.date_unix >= startDate);
-    } else if (!isNaN(endDate)) {
-      return values.filter((x) => x.date_unix <= endDate);
-    }
-  } else if (isDateSpanSeries(values)) {
-    if (!isNaN(startDate) && !isNaN(endDate)) {
-      return values.filter(
-        (x) => x.date_start_unix >= startDate && x.date_start_unix <= endDate
-      );
-    } else if (!isNaN(startDate)) {
-      return values.filter((x) => x.date_start_unix >= startDate);
-    } else if (!isNaN(endDate)) {
-      return values.filter((x) => x.date_start_unix <= endDate);
-    }
-  }
-  return values;
-}
-
-function createTimestamp(dateStr: string | undefined): number {
-  if (isDefined(dateStr)) {
-    // Suffix the date string with a Z to indicate that this is a UTC date:
-    const parsedDate = parseISO(`${dateStr}Z`);
-    return getUnixTime(parsedDate);
-  }
-  return NaN;
-}
-
-const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice'];
-const strippableMetricProperties = [
-  'admissions_on_date_of_admission_moving_average_rounded',
-  'admissions_on_date_of_admission_moving_average',
-];
-
-function stripTrailingNullValues(
-  data: { values: TimestampedValue[]; last_value: TimestampedValue },
-  metric: string,
-  metricProperty?: keyof TimestampedValue
-) {
-  if (
-    !metricsInaccurateItems.includes(metric) ||
-    !strippableMetricProperties.includes(metricProperty as unknown as string)
-  ) {
-    return data;
-  }
-
-  const count = countTrailingNullValues(data.values, metricProperty);
-
-  if (count === 0) {
-    return data;
-  }
-
-  const values = data.values.slice(0, -count);
-
-  return {
-    values,
-    last_value: last(values),
-  };
 }

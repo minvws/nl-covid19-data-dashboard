@@ -32,10 +32,11 @@ export type Content<T extends DataKeys> =
   | {
       type: 'metric';
       text: PluralizationTexts;
-      differenceKey: string;
+      differenceKey?: string;
       metricName: T;
       metricProperty: string;
       additionalData?: Record<string, ReactNode>;
+      isPercentage?: boolean;
     }
   | {
       type: 'difference';
