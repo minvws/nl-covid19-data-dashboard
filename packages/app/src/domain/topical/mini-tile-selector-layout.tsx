@@ -67,6 +67,11 @@ export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { menuItems, children, link } = props;
 
+  /**
+   * Extra filter for feature flag
+   */
+  const filteredChildren = children.filter(x => x !== false);
+
   return (
     <>
       <NarrowMenuList>
@@ -74,7 +79,7 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           <NarrowMenuListItem
             key={x.label}
             item={x}
-            content={children[index]}
+            content={filteredChildren[index]}
           />
         ))}
       </NarrowMenuList>
@@ -167,6 +172,11 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
+  /**
+   * Extra filter for feature flag
+   */
+  const filteredChildren = children.filter(x => x !== false);
+
   return (
     <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
@@ -249,7 +259,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           }
         </>
       </Box>
-      <Box pl={4}>{children[selectedIndex]}</Box>
+      <Box pl={4}>{filteredChildren[selectedIndex]}</Box>
     </Box>
   );
 }

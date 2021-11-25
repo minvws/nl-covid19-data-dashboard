@@ -27,24 +27,44 @@ export function loadRootSchema(
   }
 }
 
+function isMetricSchema(
+  schemaTitle: string,
+  metricName: string,
+  scopes: string[]
+) {
+  return scopes.some((scope) => schemaTitle === `${scope}_${metricName}`);
+}
+
 function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
   if (isDefined(schema.required)) {
-    const required = schema.required as string[];
     features.filter(isVerboseFeature).forEach((x) => {
-      if (!x.dataScopes.includes(schema.title)) {
+      if (
+        !x.dataScopes.includes(schema.title) &&
+        !isMetricSchema(schema.title, x.metricName, x.dataScopes)
+      ) {
         return;
       }
       if (isDefined(x.metricName)) {
+        const required = schema.required as string[];
         const index = required.indexOf(x.metricName);
         if (index > -1) {
+          console.info(
+            `Made ${x.metricName} non-required in schema ${schema.title} because the corresponding feature flag ${x.name} is disabled`
+          );
           required.splice(index, 1);
         }
       }
       if (isDefined(x.metricProperties)) {
-        x.metricProperties.forEach((x) => {
-          const index = required.indexOf(x);
-          if (index > -1) {
-            required.splice(index, 1);
+        x.metricProperties.forEach((m) => {
+          const required = schema.definitions?.value?.required as string[];
+          if (isDefined(required)) {
+            const index = required.indexOf(m);
+            if (index > -1) {
+              console.info(
+                `Made ${m} non-required in schema ${schema.title} because the corresponding feature flag ${x.name} is disabled`
+              );
+              required.splice(index, 1);
+            }
           }
         });
       }

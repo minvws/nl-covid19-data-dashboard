@@ -1,7 +1,10 @@
 import {
+  AgeDemographicConfiguration,
   ChartConfiguration,
+  ChoroplethConfiguration,
   DataScope,
   DataScopeKey,
+  DonutChartConfiguration,
   KpiConfiguration,
   MetricKeys,
 } from '@corona-dashboard/common';
@@ -29,6 +32,9 @@ import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { Heading } from '../typography';
 import { ContentImage } from './content-image';
+import { InlineAgeDemographic } from './inline-age-demographic';
+import { InlineChoropleth } from './inline-choropleth';
+import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 
@@ -39,24 +45,39 @@ interface RichContentProps {
 }
 
 interface ChartConfigNode {
-  chart: {
-    _type: string;
-  };
+  title: string;
+  startDate?: string;
+  endDate?: string;
+  config: ChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+}
+
+interface AgeDemographicConfigNode {
+  title: string;
+  startDate?: string;
+  endDate?: string;
+  config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+}
+
+interface ChoroplethConfigNode {
+  title: string;
+  config: ChoroplethConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+}
+
+interface DonutConfigNode {
+  title: string;
+  startDate?: string;
+  endDate?: string;
+  config: DonutChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
 }
 
 interface KpiConfigNode {
-  kpi: {
-    _type: string;
-  };
-}
-
-interface KPI {
   endDate?: string;
   config: KpiConfiguration;
 }
+
 interface KpisConfigNode {
   _type: string;
-  kpis: KPI[];
+  kpis: KpiConfigNode[];
 }
 
 export function RichContent({
@@ -125,12 +146,7 @@ export function RichContent({
         );
       },
       dashboardChart: (props: { node: ChartConfigNode }) => {
-        const node = props.node as unknown as {
-          title: string;
-          startDate?: string;
-          endDate?: string;
-          config: ChartConfiguration<DataScopeKey, MetricKeys<DataScope>>;
-        };
+        const node = props.node;
 
         return (
           <Box
@@ -154,12 +170,82 @@ export function RichContent({
           </Box>
         );
       },
-      dashboardKpi: (props: { node: KpiConfigNode }) => {
-        const kpi = props.node as unknown as KPI;
+      dashboardAgeDemographicChart: (props: {
+        node: AgeDemographicConfigNode;
+      }) => {
+        const node = props.node;
+
+        return (
+          <Box
+            css={css({
+              maxWidth: 'infoWidth',
+              width: '100%',
+              px: asResponsiveArray({ _: 4, md: undefined }),
+              pb: 4,
+            })}
+          >
+            <Box pb={4}>
+              <Box pb={4}>
+                <Heading level={3} as="h4">
+                  {node.title}
+                </Heading>
+              </Box>
+              <InlineAgeDemographic
+                configuration={node.config}
+                startDate={node.startDate}
+                endDate={node.endDate}
+              />
+            </Box>
+          </Box>
+        );
+      },
+      dashboardChoropleth: (props: { node: ChoroplethConfigNode }) => {
+        const node = props.node;
 
         return (
           <ContentWrapper>
-            <InlineKpi configuration={kpi.config} date={kpi.endDate} />
+            <Box pb={4}>
+              <Box pb={4}>
+                <Heading level={3} as="h4">
+                  {node.title}
+                </Heading>
+              </Box>
+
+              <InlineChoropleth
+                configuration={node.config}
+                title={node.title}
+              />
+            </Box>
+          </ContentWrapper>
+        );
+      },
+      dashboardDonut: (props: { node: DonutConfigNode }) => {
+        const node = props.node;
+
+        return (
+          <ContentWrapper>
+            <Box pb={4}>
+              <Box pb={4}>
+                <Heading level={3} as="h4">
+                  {node.title}
+                </Heading>
+              </Box>
+
+              <InlineDonutChart
+                configuration={node.config}
+                startDate={node.startDate}
+                endDate={node.endDate}
+              />
+            </Box>
+          </ContentWrapper>
+        );
+      },
+      dashboardKpi: (props: { node: KpiConfigNode }) => {
+        const node = props.node;
+
+        return (
+          <ContentWrapper>
+            <InlineKpi configuration={node.config} date={node.endDate} />
           </ContentWrapper>
         );
       },

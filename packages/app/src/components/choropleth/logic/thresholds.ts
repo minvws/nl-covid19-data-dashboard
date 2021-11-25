@@ -349,7 +349,7 @@ type Thresholds = Record<MapType, Record<string, ChoroplethThresholdsValue[]>>;
 export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
-    admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
+    admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
@@ -357,7 +357,7 @@ export const thresholds: Thresholds = {
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,
-    admissions_on_date_of_reporting: vrHospitalAdmissionsThresholds,
+    admissions_on_date_of_admission: vrHospitalAdmissionsThresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
     average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Callback, createContext, Options } from './hotkey';
 
 type OptionsWithDisabled = Options & { isDisabled?: boolean };
@@ -18,11 +18,11 @@ export function useHotkey(
   const hotkeyContextRef = React.useRef<ReturnType<typeof createContext>>();
   const callbackRef = React.useRef(callback);
 
-  React.useEffect(() => {
+  useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     /**
      * We'll parse the serialized arguments to recreate the argument objects.
      */

@@ -8,7 +8,7 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { InlineText, Text } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
-import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getThresholdValue } from '~/utils/get-threshold-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrBehaviorTooltipProps {
@@ -31,12 +31,12 @@ export function VrBehaviorTooltip({
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
 
-  const complianceFilteredThreshold = getFilteredThresholdValues(
+  const complianceFilteredThreshold = getThresholdValue(
     thresholds.vr[complianceThresholdKey],
     currentComplianceValue
   );
 
-  const supportFilteredThreshold = getFilteredThresholdValues(
+  const supportFilteredThreshold = getThresholdValue(
     thresholds.vr[supportThresholdKey],
     currentSupportValue
   );

@@ -13,11 +13,15 @@ context('Landelijk - Positief geteste mensen', () => {
     const ggdLastValue = getLastFilledValue(this.nationalData.tested_ggd);
 
     const kpiTestInfo = {
-      infected: cy.formatters.formatNumber(infectedTotalLastValue.infected),
-      ggd_infected: cy.formatters.formatPercentage(
-        ggdLastValue.infected_percentage
+      infected_moving_average: cy.formatters.formatNumber(
+        infectedTotalLastValue.infected_moving_average
       ),
-      ggd_tested_total: cy.formatters.formatNumber(ggdLastValue.tested_total),
+      infected_percentage_moving_average: cy.formatters.formatPercentage(
+        ggdLastValue.infected_percentage_moving_average
+      ),
+      tested_total_moving_average: cy.formatters.formatNumber(
+        ggdLastValue.tested_total_moving_average
+      ),
     };
 
     cy.checkKpiValues(kpiTestInfo);

@@ -6,6 +6,5 @@ export function cutValuesFromTimeframe<T>(
   timeframe: TimeframeOption
 ) {
   const amountOfDays = getDaysForTimeframe(timeframe);
-
   return takeRight(values, amountOfDays);
 }

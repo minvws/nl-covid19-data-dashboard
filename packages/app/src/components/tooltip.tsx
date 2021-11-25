@@ -23,7 +23,6 @@ interface TooltipProps<T> {
   children: ReactNode;
   tooltipState: TooltipState<T>;
   width?: number;
-  controls?: string;
   tooltipArrow?: string;
 }
 
@@ -128,7 +127,6 @@ export function useTooltip<T>({
 }
 
 export function Tooltip<T>({
-  controls,
   children,
   tooltipState,
   width,
@@ -137,7 +135,6 @@ export function Tooltip<T>({
   return (
     <Box
       aria-live="assertive"
-      aria-controls={controls}
       role="tooltip"
       aria-hidden={!tooltipState.isVisible}
       css={css({

@@ -1,13 +1,11 @@
 import {
   ChartConfiguration,
-  colors,
   DataScopeKey,
   MetricKeys,
   ScopedData,
   TimespanAnnotationConfiguration,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { Clock } from '@corona-dashboard/icons';
 import { get } from 'lodash';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
@@ -23,8 +21,10 @@ import { metricConfigs } from '~/metric-config';
 import { ScopedMetricConfigs } from '~/metric-config/common';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLowerBoundaryDateStartUnix } from '~/utils/get-lower-boundary-date-start-unix';
-import { Box } from '../base';
 import { Metadata } from '../metadata';
+import { InlineLoader } from './inline-loader';
+import { getColor } from './logic/get-color';
+import { getDataUrl } from './logic/get-data-url';
 
 interface InlineTimeSeriesChartsProps<
   S extends DataScopeKey,
@@ -33,30 +33,6 @@ interface InlineTimeSeriesChartsProps<
   startDate?: string;
   endDate?: string;
   configuration: ChartConfiguration<S, M>;
-}
-
-function getDataUrl<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
->(
-  startDate: string | undefined,
-  endDate: string | undefined,
-  configuration: ChartConfiguration<S, M>
-) {
-  const { code, area, metricName } = configuration;
-  const qParams = [];
-
-  if (isDefined(startDate)) {
-    qParams.push(`start=${startDate}`);
-  }
-
-  if (isDefined(endDate)) {
-    qParams.push(`end=${endDate}`);
-  }
-
-  const suffix = qParams.length ? `?${qParams.join('&')}` : '';
-
-  return `/api/data/timeseries/${code ?? area}/${metricName}${suffix}`;
 }
 
 export function InlineTimeSeriesCharts<
@@ -84,13 +60,7 @@ export function InlineTimeSeriesCharts<
         type: x.type,
         metricProperty: x.propertyName,
         label: get(siteText, x.labelKey.split('.'), null),
-        color: x.color?.length
-          ? get(
-              colors,
-              ['data'].concat(x.color.split('.')),
-              colors.data.primary
-            )
-          : colors.data.primary,
+        color: getColor(x.color),
         minimumRange: seriesMetricConfig?.minimumRange,
       };
       if (isDefined(x.curve) && x.curve.length) {
@@ -149,27 +119,21 @@ export function InlineTimeSeriesCharts<
   }, [configuration, siteText, data]);
 
   if (!isDefined(data)) {
-    return (
-      <Box width="100%">
-        <Clock width="3em" height="3em" />
-      </Box>
-    );
+    return <InlineLoader />;
   }
 
   const source = get(siteText, configuration.sourceKey.split('.'), '');
 
   return (
     <ErrorBoundary>
-      <>
-        <TimeSeriesChart
-          accessibility={{ key: configuration.accessibilityKey as any }}
-          values={data.values}
-          seriesConfig={seriesConfig}
-          timeframe={configuration.timeframe}
-          dataOptions={dataOptions}
-        />
-        <Metadata source={source} isTileFooter />
-      </>
+      <TimeSeriesChart
+        accessibility={{ key: configuration.accessibilityKey as any }}
+        values={data.values}
+        seriesConfig={seriesConfig}
+        timeframe={configuration.timeframe}
+        dataOptions={dataOptions}
+      />
+      <Metadata source={source} isTileFooter />
     </ErrorBoundary>
   );
 }

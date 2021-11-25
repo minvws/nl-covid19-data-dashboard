@@ -8,8 +8,8 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, selectVrData } from '~/static-props/get-data';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -22,11 +22,13 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
+  const breakpoints = useBreakpoints();
 
   useEffect(() => {
-    const route = reverseRouter.vr.index(router.query.code as string);
-    router.replace(route);
-  }, [reverseRouter.vr, router]);
+    if (breakpoints.md) {
+      router.replace(reverseRouter.vr.vaccinaties(router.query.code as string));
+    }
+  }, [breakpoints.md, reverseRouter.vr, router]);
 
   return (
     <Layout

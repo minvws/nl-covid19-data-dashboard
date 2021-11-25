@@ -1,6 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -13,7 +14,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -89,7 +90,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber } = useIntl();
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -128,20 +129,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <TwoKpiSection>
             <KpiTile
-              title={text.kpi_titel}
+              title={text.infected_kpi.title}
               metadata={{
                 date: lastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
               <KpiValue
-                data-cy="infected"
-                absolute={lastValue.infected}
-                difference={
-                  data.difference.tested_overall__infected_moving_average
-                }
+                data-cy="infected_moving_average"
+                absolute={lastValue.infected_moving_average}
+                numFractionDigits={0}
                 isAmount
-                isMovingAverageDifference
               />
               <Text>
                 {replaceComponentsInText(
@@ -154,7 +152,26 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
               </Text>
-              <Markdown content={text.kpi_toelichting} />
+              <Markdown content={text.infected_kpi.description} />
+
+              <Box spacing={3}>
+                <Text variant="body2" fontWeight="bold">
+                  {replaceComponentsInText(text.infected_kpi.last_value_text, {
+                    infected: (
+                      <InlineText color="data.primary">{`${formatNumber(
+                        lastValue.infected
+                      )}`}</InlineText>
+                    ),
+                    dateTo: formatDateFromSeconds(
+                      lastValue.date_unix,
+                      'weekday-medium'
+                    ),
+                  })}
+                </Text>
+                {text.infected_kpi.link_cta && (
+                  <Markdown content={text.infected_kpi.link_cta} />
+                )}
+              </Box>
             </KpiTile>
 
             <KpiTile
@@ -213,26 +230,19 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 seriesConfig={[
                   {
                     type: 'line',
-                    metricProperty: 'infected_per_100k_moving_average',
+                    metricProperty: 'infected_moving_average',
                     label:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k_moving_average,
+                        .infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'invisible',
                     metricProperty: 'infected',
                     label:
                       siteText.positief_geteste_personen.tooltip_labels
-                        .infected_overall,
+                        .infected,
+                    color: colors.data.primary,
                   },
                 ]}
                 dataOptions={{

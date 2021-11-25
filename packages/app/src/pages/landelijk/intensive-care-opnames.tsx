@@ -2,6 +2,7 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
+  NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
@@ -49,8 +50,9 @@ import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-// TODO: Update any to the proper type when the schema is merged.
-const AgeDemographic = dynamic<AgeDemographicProps<any>>(() =>
+const AgeDemographic = dynamic<
+  AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
+>(() =>
   import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
 );
 
@@ -292,12 +294,18 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       text.vaccination_status_chart.labels
                         .has_one_shot_or_not_vaccinated,
+                    tooltipLabel:
+                      text.vaccination_status_chart.tooltip_labels
+                        .has_one_shot_or_not_vaccinated,
                   },
                   {
                     metricProperty: 'fully_vaccinated',
                     color: colors.data.primary,
                     label:
                       text.vaccination_status_chart.labels.fully_vaccinated,
+                    tooltipLabel:
+                      text.vaccination_status_chart.tooltip_labels
+                        .fully_vaccinated,
                   },
                 ]}
               />

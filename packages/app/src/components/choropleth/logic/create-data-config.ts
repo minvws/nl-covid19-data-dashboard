@@ -1,5 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import { OptionalDataConfig } from '..';
+import { DataConfig, OptionalDataConfig } from '..';
 import { ChoroplethDataItem } from './types';
 import {
   DEFAULT_HOVER_STROKE_WIDTH,
@@ -9,6 +9,20 @@ import {
 export function createDataConfig<T extends ChoroplethDataItem>(
   partialDataConfig: OptionalDataConfig<T>
 ) {
+  if (partialDataConfig.metricName === 'veiligheidsregio') {
+    return {
+      metricName: 'veiligheidsregio' as any,
+      metricProperty: 'admissions_on_date_of_admission' as any,
+      areaStroke: colors.white,
+      areaStrokeWidth: 1,
+      hoverFill: colors.white,
+      hoverStroke: colors.choroplethFeatureStroke,
+      hoverStrokeWidth: 3,
+      noDataFillColor: colors.lightGray,
+      highlightStroke: colors.choroplethHighlightStroke,
+      highlightStrokeWidth: DEFAULT_HOVER_STROKE_WIDTH,
+    } as DataConfig<T>;
+  }
   return {
     metricName: partialDataConfig.metricName ?? '',
     metricProperty: partialDataConfig.metricProperty,
@@ -25,5 +39,5 @@ export function createDataConfig<T extends ChoroplethDataItem>(
       partialDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
     areaStroke: partialDataConfig.areaStroke ?? colors.choroplethFeatureStroke,
     areaStrokeWidth: partialDataConfig.areaStrokeWidth ?? DEFAULT_STROKE_WIDTH,
-  };
+  } as DataConfig<T>;
 }

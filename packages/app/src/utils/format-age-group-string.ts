@@ -1,8 +1,3 @@
-import {
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
-} from '@corona-dashboard/common';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 /**
@@ -22,16 +17,12 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
  * @param templates
  * @returns
  */
+
 export function formatAgeGroupString(
-  ageGroup:
-    | NlVaccineCoveragePerAgeGroupValue['age_group_range']
-    | VrVaccineCoveragePerAgeGroupValue['age_group_range']
-    | GmVaccineCoveragePerAgeGroupValue['age_group_range'],
+  ageGroup: string,
   templates: {
     oldest: string;
     group: string;
-    total: string;
-    total_people: string;
   }
 ) {
   switch (true) {

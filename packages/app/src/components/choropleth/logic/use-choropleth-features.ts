@@ -5,7 +5,7 @@ import { feature as topojsonFeature } from 'topojson-client';
 import { isDefined } from 'ts-is-present';
 import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth/logic';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
-import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
+import { getVrGmCodesForGmCode } from '~/utils/get-vr-gm-codes-for-gm-code';
 import type { ChoroplethDataItem, CodedGeoJSON } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
@@ -146,7 +146,7 @@ function filterVrBySelectedGmCode(
     `gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
   );
 
-  const gmCodes = getVrMunicipalsForMunicipalCode(selectedGmCode);
+  const gmCodes = getVrGmCodesForGmCode(selectedGmCode);
   assert(
     isDefined(gmCodes),
     `No associated municipal codes found for ${selectedGmCode}`

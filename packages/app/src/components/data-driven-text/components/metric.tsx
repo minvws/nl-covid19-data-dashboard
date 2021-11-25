@@ -16,6 +16,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   differenceKey,
   text,
   additionalData,
+  isPercentage,
 }: Extract<Content<T>, { type: 'metric' }> & { data: K }) {
   const { siteText, formatNumber } = useIntl();
 
@@ -39,17 +40,19 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
         | DifferenceDecimal)
     : undefined;
 
-  assert(
-    isDefined(differenceValue),
-    `Missing value for difference:${differenceKey}`
-  );
+  if (isDefined(differenceKey)) {
+    assert(
+      isDefined(differenceValue),
+      `Missing value for difference:${differenceKey}`
+    );
+  }
 
   const baseText = getPluralizedText(text, propertyValue);
 
   return (
     <>
       {replaceComponentsInText(baseText, {
-        newDate: (
+        newDate: differenceValue && (
           <RelativeDate
             dateInSeconds={differenceValue.new_date_unix}
             isCapitalized={baseText.indexOf('{{newDate}}') === 0}
@@ -58,7 +61,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
         ),
         propertyValue: (
           <InlineText fontWeight="bold">
-            {formatNumber(propertyValue)}
+            {`${formatNumber(propertyValue)}${isPercentage ? '%' : ''}`}
           </InlineText>
         ),
         ...(additionalData || {}),

@@ -14,7 +14,6 @@ import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
-import { withFeatureNotFoundPage } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -39,34 +38,31 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
-export const getStaticProps = withFeatureNotFoundPage(
-  'situationsPage',
-  createGetStaticProps(
-    getLastGeneratedDate,
-    selectVrData('situations'),
-    async (context: GetStaticPropsContext) => {
-      const { content } = await createGetContent<{
-        parts: PagePartQueryResult<ArticleParts>;
-        elements: ElementsQueryResult;
-      }>((context) => {
-        const { locale } = context;
-        return `{
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  selectVrData('situations'),
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
          "parts": ${getPagePartsQuery('situationsPage')},
          "elements": ${getElementsQuery('vr', ['situations'], locale)}
         }`;
-      })(context);
+    })(context);
 
-      return {
-        content: {
-          articles: getArticleParts(
-            content.parts.pageParts,
-            'situationsPageArticles'
-          ),
-          elements: content.elements,
-        },
-      };
-    }
-  )
+    return {
+      content: {
+        articles: getArticleParts(
+          content.parts.pageParts,
+          'situationsPageArticles'
+        ),
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 export default function BrononderzoekPage(
