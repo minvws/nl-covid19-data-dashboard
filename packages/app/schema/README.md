@@ -103,7 +103,7 @@ decide on a naming convension.
 
 ## Validation internals
 
-All of the validation codes lives in the cli package, in the `src/scripts` directory.
+All of the validation code lives in the cli package, in the `src/scripts` directory.
 `validate-json-all.ts` being the main entry point for running all of the available
 validations.
 
@@ -111,7 +111,7 @@ This script will retrieve all of its path information from `schema-info.ts`, thi
 generates a list of paths to each json file in the `packages/app/public/json` folder
 and serves them in a structure that divides them up between `in`, `nl`, `vr` and `gm`.
 
-The validator will then be able to pick associate the right schema with the right JSON file.
+The validator will then be able to associate the right schema with the right JSON file.
 
 Apart from the normal JSON schema validation, which simply uses AJV to validate the
 data against the schema, a number of custom validations have been added as well.
