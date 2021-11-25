@@ -87,7 +87,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
         <TileList>
-          <Box as="header" spacing={1}>
+          <Box as="header" spacing={4}>
             <Heading
               level={1}
               as="h2"
