@@ -46,10 +46,11 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
             label: siteText.vaccinaties.age_groups[el.ageGroup],
             content: (
               <Box>
-                <Text fontWeight="bold">
+                <Text 
+                >
                   {siteText.vaccinaties.age_groups[el.ageGroup]}
                 </Text>
-                <Text>
+                <Text variant="label1">
                   {replaceVariablesInText(
                     siteText.vaccinaties.birthyear_ranges[birthyearRange.type],
                     birthyearRange
