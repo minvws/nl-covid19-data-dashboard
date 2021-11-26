@@ -149,7 +149,8 @@ async function replaceReferencesInContent(
 }
 
 /**
- * This method selects the specified metric properties from the national data
+ * This method selects the specified metric properties from the national data.
+ * (public/json/nl.json)
  *
  */
 export function selectNlData<
