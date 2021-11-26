@@ -1,4 +1,7 @@
-/** This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.*/
+/**
+ * DO NOT MANUALLY CHANGE THE CONTENTS OF THIS FILE!
+ * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.
+ */
 export const dataStructure = {
   gm: {
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],

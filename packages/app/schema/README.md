@@ -15,6 +15,10 @@ file that lives in the public/json directory.
 Therefore, it is also possible to execute this command with the given parameters:
 `yarn validate-json-single <schema-name> <json-filename>`
 
+It is even possible to only validate a specific metric property within a json file,
+so these parameters are also available:
+`yarn validate-json-single <schema-name> <json-filename> <optional-metric-name>`
+
 ## Technical details
 
 The schemas are located in the `<project-name>`/schema folder. This folder also
@@ -96,3 +100,25 @@ decide on a naming convension.
 - infected over positively_tested
 - intensive_care over intensivecare
 - "kliniek" is simply referred to as "hospital" by lack of better term.
+
+## Validation internals
+
+All of the validation code lives in the cli package, in the `src/scripts` directory.
+`validate-json-all.ts` being the main entry point for running all of the available
+validations.
+
+This script will retrieve all of its path information from `schema-info.ts`, this file
+generates a list of paths to each json file in the `packages/app/public/json` folder
+and serves them in a structure that divides them up between `in`, `nl`, `vr` and `gm`.
+
+The validator will then be able to associate the right schema with the right JSON file.
+
+Apart from the normal JSON schema validation, which simply uses AJV to validate the
+data against the schema, a number of custom validations have been added as well.
+These validations don't necessarily validate the data _shape_ but validate the actual
+correctness of the data itself. Validations that cannot be expressed in JSON schema.
+These validations can be found in `cli/src/schema/custom-validations`, the schema-info
+struct is used to configure which custom validation needs to be run on which JSON file.
+
+Explanations for what the custom validations are exactly checking can be found in the
+source code files themselves.
