@@ -39,16 +39,21 @@ export async function getClient(
   });
 }
 
-// const builder = imageUrlBuilder(client);
 /**
- * Set up a helper function for generating Image URLs with only the asset
- * reference data in your documents. Read more:
- * https://www.sanity.io/docs/image-url CAUTION: This is commented out because
- * we should be talking to our images on our own filesystem! Chances are high
- * this helper will be removed completely!
- **/
-// export const urlFor = (source: SanityImageSource) => builder.image(source);
-
+ * This method reduces multi language query results to a single language.
+ *
+ * So, a query result that looks like this:
+ * {
+ *   nl: ...dutchData
+ *   en: ...englishData
+ * }
+ *
+ * will be reduced to the following when given languages are [nl]
+ * {
+ *   ...dutchData
+ * }
+ *
+ */
 export function localize<T>(value: T | T[], languages: string[]): T {
   const anyValue = value as any;
 
