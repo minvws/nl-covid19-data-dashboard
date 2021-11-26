@@ -259,7 +259,24 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               date: dataOverallLastValue.date_unix,
               source: text.bronnen.rivm,
             }}
-            description={<Markdown content={text.map_toelichting} />}
+            description={
+              <>
+                <Markdown content={text.map_toelichting} />
+                <Text variant="body2" fontWeight="bold">
+                  {replaceComponentsInText(text.map_last_value_text, {
+                    infected_per_100k: (
+                      <InlineText color="data.primary">{`${formatNumber(
+                        dataOverallLastValue.infected_per_100k
+                      )}`}</InlineText>
+                    ),
+                    dateTo: formatDateFromSeconds(
+                      dataOverallLastValue.date_unix,
+                      'weekday-medium'
+                    ),
+                  })}
+                </Text>
+              </>
+            }
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
             legend={{
