@@ -49,6 +49,10 @@ export function AppContent({
   const currentPageScope = getCurrentPageScope(router);
 
   const currentCode = router.query.code as string | undefined;
+
+  /**
+   * @TODO Open the menu purely client side without loading a new page
+   */
   const menuOpenUrl = currentPageScope
     ? reverseRouter[currentPageScope].index(currentCode)
     : undefined;
