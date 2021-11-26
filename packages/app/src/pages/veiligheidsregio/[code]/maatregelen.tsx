@@ -1,10 +1,7 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
@@ -90,39 +87,32 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
         <TileList>
-          <PageInformationBlock
-            title={replaceVariablesInText(
-              siteText.veiligheidsregio_maatregelen.titel,
-              {
-                safetyRegionName: vrName,
-              }
-            )}
-          />
-
-          <Tile>
-            <Box
-              css={css({
-                'p:last-child': {
-                  margin: '0',
-                },
-              })}
+          <Box as="header" spacing={4}>
+            <Heading
+              level={1}
+              as="h2"
             >
-              <Heading level={3}>{lockdown.message.title}</Heading>
-              {lockdown.message.description ? (
+              {replaceVariablesInText(
+                siteText.veiligheidsregio_maatregelen.titel,
+                {
+                  safetyRegionName: vrName,
+                })
+              }
+            </Heading>
+            {lockdown.message.description ? (
+              <Box maxWidth='maxWidthText'>
                 <RichContent blocks={lockdown.message.description} />
-              ) : null}
-            </Box>
-          </Tile>
+              </Box>
+            ) : null}
+          </Box>
 
-          <Tile>
-            <Box spacing={3}>
-              <Heading level={3}>{lockdown.title}</Heading>
-              <LockdownTable
-                data={lockdown}
-                level={selectedNlData.risk_level.last_value.risk_level}
-              />
-            </Box>
-          </Tile>
+          <Box as="article" spacing={3}>
+            <Heading level={3}>{lockdown.title}</Heading>
+            <LockdownTable
+              data={lockdown}
+              level={selectedNlData.risk_level.last_value.risk_level}
+            />
+          </Box>
 
           <AnchorTile
             external
