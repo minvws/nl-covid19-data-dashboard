@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, DataScopeKey } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -7,6 +7,8 @@ import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
+import { getCurrentPageScope } from '~/utils/get-current-page-scope';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkWithIcon } from '../link-with-icon';
 
 interface AppContentProps {
@@ -23,12 +25,8 @@ export function AppContent({
   hideMenuButton,
 }: AppContentProps) {
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
-
-  const menuOpenUrl = {
-    pathname: router.pathname,
-    query: { ...router.query, menu: '1' },
-  };
 
   /**
    * @TODO Possibly not the right place to check the "homepage" (/) menu-state,
@@ -41,20 +39,30 @@ export function AppContent({
     router.pathname == '/gemeente/[code]' ||
     router.query.menu === '1';
 
-  const menuOpenText = router.pathname.startsWith('/internationaal')
-    ? siteText.nav.terug_naar_alle_cijfers_internationaal
-    : router.pathname.startsWith('/landelijk')
-    ? siteText.nav.terug_naar_alle_cijfers_homepage
-    : router.pathname.startsWith('/veiligheidsregio')
-    ? siteText.nav.terug_naar_alle_cijfers_veiligheidsregio
-    : router.pathname.startsWith('/gemeente')
-    ? siteText.nav.terug_naar_alle_cijfers_gemeente
-    : siteText.nav.terug_naar_alle_cijfers;
+  const menuOpenTexts: Record<DataScopeKey, string> = {
+    nl: siteText.nav.terug_naar_alle_cijfers_homepage,
+    gm: siteText.nav.terug_naar_alle_cijfers_gemeente,
+    vr: siteText.nav.terug_naar_alle_cijfers_veiligheidsregio,
+    in: siteText.nav.terug_naar_alle_cijfers_internationaal,
+  };
+
+  const currentPageScope = getCurrentPageScope(router);
+
+  const currentCode = router.query.code as string | undefined;
+
+  /**
+   * @TODO Open the menu purely client side without loading a new page
+   */
+  const menuOpenUrl = currentPageScope
+    ? reverseRouter[currentPageScope].index(currentCode)
+    : undefined;
+
+  const menuOpenText = currentPageScope ? menuOpenTexts[currentPageScope] : '';
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>
-        {!hideMenuButton && (
+        {!hideMenuButton && menuOpenUrl && (
           <MenuLinkContainer
             isVisible={!isMenuOpen}
             css={css({
@@ -84,11 +92,16 @@ export function AppContent({
           <ResponsiveVisible isVisible={!isMenuOpen}>
             {children}
           </ResponsiveVisible>
-          <MenuLinkContainer isVisible={!isMenuOpen && !hideMenuButton} mt={4}>
-            <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
-              {menuOpenText}
-            </LinkWithIcon>
-          </MenuLinkContainer>
+          {menuOpenUrl && (
+            <MenuLinkContainer
+              isVisible={!isMenuOpen && !hideMenuButton}
+              mt={4}
+            >
+              <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
+                {menuOpenText}
+              </LinkWithIcon>
+            </MenuLinkContainer>
+          )}
         </StyledAppContent>
       </AppContentContainer>
     </MaxWidth>
