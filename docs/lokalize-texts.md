@@ -82,6 +82,31 @@ ids would result in compile- and run-time errors, but there's a workaround:
 The runtime workaround would be a waste of resources on production, so for this
 reason we use the `--clean-json` flag to ignore document ids.
 
+### Export/Import technical details
+
+In Sanity each lokalize value is stored as a separate `lokalizeText` document.
+The key property in this document represents the flattened property path in `nl_export.json`
+and `en_export.json`.
+So, when the json looks like this:
+
+```json
+{
+  "accessibility": {
+    "charts": {
+      "behavior_choropleths": {
+        "description": "This is a test value"
+      }
+    }
+  }
+}
+```
+
+This will be serialized to the key property in the Sanity document as follows: `accessibility.charts.behavior_choropleths.description`.
+
+The root key (so in this case `accessibility`) will be saved as the subject property.
+This allows us to filter on this subject under the Sanity `Lokalize` menu item. Making it a little
+easier for an editor to lookup a specific key in the menu.
+
 ## How to Add, Delete or Move Texts
 
 First make sure the JSONs include document ids (`some_key__@__{document_id}`).
