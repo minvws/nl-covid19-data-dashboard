@@ -107,6 +107,12 @@ The root key (so in this case `accessibility`) will be saved as the subject prop
 This allows us to filter on this subject under the Sanity `Lokalize` menu item. Making it a little
 easier for an editor to lookup a specific key in the menu.
 
+So, `yarn lokalize:export` simply retrieves all of the `lokalizeText` documents, replaces their ids in the root part of the path
+and unflattens this list of paths into a JSON file. (The Dutch texts are serialized as `nl_export.json`, the English as `en_export.json`).
+`yarn lokalize:apply-json-edits` does the exact opposite, it takes the `nl_export.json` file, flattens the file into an array of
+paths and saves those to Sanity. Obviously there is a bunch of logic involved that checks if a path is new or existing, but for those
+details we refer to the source code.
+
 ## How to Add, Delete or Move Texts
 
 First make sure the JSONs include document ids (`some_key__@__{document_id}`).
