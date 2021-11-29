@@ -52,9 +52,7 @@ export function VrLayout(props: VrLayoutProps) {
 
   const code = router.query.code as string;
 
-  const isMainRoute =
-    router.route === '/veiligheidsregio' ||
-    router.route === `/veiligheidsregio/[code]`;
+  const isMainRoute = router.route === '/veiligheidsregio';
 
   const showMetricLinks =
     router.route !== '/veiligheidsregio' &&
@@ -99,7 +97,7 @@ export function VrLayout(props: VrLayoutProps) {
       </Head>
 
       <AppContent
-        hideMenuButton={isMainRoute}
+        hideBackButton={isMainRoute}
         searchComponent={
           <Box
             backgroundColor="white"
