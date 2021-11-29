@@ -46,7 +46,10 @@ export function useHotkey(
       const handler = () => callbackRef.current();
       hotkeyContext.register(hotkeyParsed, handler);
 
-      return () => hotkeyContext.unregister(hotkeyParsed, handler);
+      return () => {
+        hotkeyContext.unregister(hotkeyParsed, handler);
+        hotkeyContext.destroy();
+      };
     }
   }, [hotkeySerialized, optionsSerialized]);
 }
