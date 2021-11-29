@@ -63,9 +63,7 @@ export function AppContent({
               isVisible={!hideBackButton}
               css={css({
                 background: 'white',
-                px: 0,
                 py: 3,
-                mx: 3,
                 position: 'relative',
                 borderBottom: 'solid 1px',
                 borderColor: 'border',
@@ -107,7 +105,7 @@ export function AppContent({
 
 const BackButtonContainer = styled(Box)<{ isVisible: boolean }>((x) =>
   css({
-    px: [3, null, 0],
+    mx: [3, null, 0],
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
   })
 );

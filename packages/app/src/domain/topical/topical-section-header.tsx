@@ -1,7 +1,7 @@
 import { Chevron } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
-import { ArrowIconThinLeft } from '~/components/arrow-icon';
+import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { RelativeDate } from '~/components/relative-date';
@@ -39,10 +39,10 @@ export function TopicalSectionHeader({
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box pt={{ _: 2, lg: 3 }} spacing={3}>
+    <Box spacing={3}>
       {showBackLink && (
-        <Box fontSize="1.125rem">
-          <LinkWithIcon href="/" icon={<ArrowIconThinLeft />}>
+        <Box py={3} borderBottom={'solid 1px'} borderColor={'border'}>
+          <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
             {text.common_actueel.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
