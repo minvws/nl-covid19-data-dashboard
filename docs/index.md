@@ -9,6 +9,7 @@
 - [Choropleth GEOJson](/docs/choropleth-geojson.md)
 - [Feature Flags](/docs/feature-flags.md)
 - [Static Props](/docs/get-static-props.md)
+- [Styling](/doc/styled-system.md)
 
 ## Sanity related
 
