@@ -259,7 +259,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           }
         </>
       </Box>
-      <Box pl="3rem">{filteredChildren[selectedIndex]}</Box>
+      <Box pl={5}>{filteredChildren[selectedIndex]}</Box>
     </Box>
   );
 }
