@@ -3,6 +3,12 @@ import { Callback, createContext, Options } from './hotkey';
 
 type OptionsWithDisabled = Options & { isDisabled?: boolean };
 
+/**
+ *
+ * @param hotkey
+ * @param callback
+ * @param options
+ */
 export function useHotkey(
   hotkey: string | string[],
   callback: Callback,
