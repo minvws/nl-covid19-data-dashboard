@@ -338,6 +338,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'hospital_nice'
                   )}
+                  hasMargin={true}
                 />
 
                 {testedOverallTopicalPageFeature.isEnabled && (
@@ -412,6 +413,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     )}
+                    hasMargin={true}
                   />
                 )}
 
@@ -462,6 +464,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'vaccine_coverage_per_age_group'
                     )}
+                    hasMargin={true}
                   />
                 )}
               </MiniTileSelectorLayout>

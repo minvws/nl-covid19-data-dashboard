@@ -178,7 +178,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           <Box
             spacing={{ _: 4, md: 5 }}
             pt={{ _: 3, md: 5 }}
-            px={{ _: 3, sm: 5 }}
+            px={{ _: 3, sm: 4 }}
           >
             <Box spacing={3}>
               <TopicalSectionHeader
@@ -444,6 +444,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'hospital_nice'
                   )}
+                  hasMargin={true}
                 />
                 {testedOverallTopicalPageFeature.isEnabled && (
                   <MiniTrendTile
@@ -517,6 +518,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     )}
+                    hasMargin={true}
                   />
                 )}
                 <MiniVaccinationCoverageTile
@@ -562,6 +564,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'vaccine_coverage_per_age_group_estimated'
                   )}
+                  hasMargin={true}
                 />
               </MiniTileSelectorLayout>
             </Box>

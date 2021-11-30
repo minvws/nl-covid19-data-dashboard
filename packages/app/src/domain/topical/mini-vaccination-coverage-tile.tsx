@@ -14,6 +14,7 @@ type MiniVaccinationCoverageTileProps = {
   fullyVaccinatedPercentageLabel?: string | null;
   oneShotBarLabel: string;
   fullyVaccinatedBarLabel: string;
+  hasSpace?: boolean
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(
@@ -26,11 +27,12 @@ export function MiniVaccinationCoverageTile(
     fullyVaccinatedPercentageLabel,
     oneShotBarLabel,
     fullyVaccinatedBarLabel,
+    hasMargin,
     ...tileProps
   } = props;
 
   return (
-    <MiniTile {...tileProps}>
+    <MiniTile {...tileProps} hasMargin={hasMargin}>
       <Box display="flex" flexDirection="column" spacing={3}>
         <LabeledBar
           value={oneShotPercentage}
