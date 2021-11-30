@@ -34,7 +34,7 @@ CreateContext('should clean up after destroy', (context) => {
   const registration = createContext();
   registration.destroy();
 
-  assert.equal(context.removeEventListenerSpy.callCount, 1);
+  assert.is(context.removeEventListenerSpy.callCount, 1);
 });
 
 CreateContext('should trigger the specified handler after registration', () => {
@@ -49,7 +49,7 @@ CreateContext('should trigger the specified handler after registration', () => {
   });
   document.dispatchEvent(kbEvent);
 
-  assert.equal(callBack.callCount, 1);
+  assert.is(callBack.callCount, 1);
 });
 
 CreateContext(
@@ -68,7 +68,7 @@ CreateContext(
 
     document.dispatchEvent(kbEvent);
 
-    assert.equal(callBack.callCount, 0);
+    assert.is(callBack.callCount, 0);
   }
 );
 

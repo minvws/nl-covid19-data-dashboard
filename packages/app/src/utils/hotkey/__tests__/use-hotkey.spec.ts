@@ -37,9 +37,9 @@ UseHotkey(
     });
     document.dispatchEvent(kbEvent);
 
-    assert.equal(context.addEventListenerSpy.callCount, 1);
-    assert.equal(context.removeEventListenerSpy.callCount, 0);
-    assert.equal(testHandler.callCount, 1);
+    assert.is(context.addEventListenerSpy.callCount, 1);
+    assert.is(context.removeEventListenerSpy.callCount, 0);
+    assert.is(testHandler.callCount, 1);
   }
 );
 
@@ -49,7 +49,7 @@ UseHotkey('should clean the document listener after unmount', (context) => {
 
   unmount();
 
-  assert.equal(context.removeEventListenerSpy.callCount, 1);
+  assert.is(context.removeEventListenerSpy.callCount, 1);
 });
 
 UseHotkey('should not call the key handler after unmount', () => {
@@ -64,7 +64,7 @@ UseHotkey('should not call the key handler after unmount', () => {
   });
   document.dispatchEvent(kbEvent);
 
-  assert.equal(testHandler.callCount, 0);
+  assert.is(testHandler.callCount, 0);
 });
 
 UseHotkey('should call twice when allowRepeat is true', () => {
@@ -84,7 +84,7 @@ UseHotkey('should call twice when allowRepeat is true', () => {
   });
   document.dispatchEvent(kbEvent2);
 
-  assert.equal(testHandler.callCount, 2);
+  assert.is(testHandler.callCount, 2);
 });
 
 UseHotkey('should not call twice when allowRepeat is false', () => {
@@ -104,7 +104,7 @@ UseHotkey('should not call twice when allowRepeat is false', () => {
   });
   document.dispatchEvent(kbEvent2);
 
-  assert.equal(testHandler.callCount, 1);
+  assert.is(testHandler.callCount, 1);
 });
 
 UseHotkey('should not be called when disabled', () => {
@@ -117,7 +117,7 @@ UseHotkey('should not be called when disabled', () => {
   });
   document.dispatchEvent(kbEvent1);
 
-  assert.equal(testHandler.callCount, 0);
+  assert.is(testHandler.callCount, 0);
 });
 
 UseHotkey('should prevent default when preventDefault is true', () => {
@@ -149,7 +149,7 @@ UseHotkey('should not prevent default when preventDefault is false', () => {
 });
 
 UseHotkey(
-  'should not be called when disableTextInputs is true and document active element is textarea or input',
+  'should not be called when disableTextInputs is true and document active element is textarea',
   () => {
     document.body.innerHTML = `
     <div>
@@ -170,6 +170,31 @@ UseHotkey(
     document.dispatchEvent(kbEvent1);
 
     assert.is(testHandler.callCount, 0);
+  }
+);
+
+UseHotkey(
+  'should be called when disableTextInputs is false and document active element is textarea',
+  () => {
+    document.body.innerHTML = `
+    <div>
+        <textarea id="ta">test</textarea>
+    </div>
+`;
+
+    const testHandler = sinon.spy();
+    renderHook(() => useHotkey('a', testHandler, { disableTextInputs: false }));
+
+    const mockArea = document.getElementById('ta');
+    mockArea?.focus();
+
+    const kbEvent1 = new KeyboardEvent('keydown', {
+      code: '123',
+      key: 'a',
+    });
+    document.dispatchEvent(kbEvent1);
+
+    assert.is(testHandler.callCount, 1);
   }
 );
 
