@@ -148,4 +148,29 @@ UseHotkey('should not prevent default when preventDefault is false', () => {
   assert.is((kbEvent1.preventDefault as sinon.SinonSpy).callCount, 0);
 });
 
+UseHotkey(
+  'should not be called when disableTextInputs is true and document active element is textarea or input',
+  () => {
+    document.body.innerHTML = `
+    <div>
+        <textarea id="ta">test</textarea>
+    </div>
+`;
+
+    const testHandler = sinon.spy();
+    renderHook(() => useHotkey('a', testHandler, { disableTextInputs: true }));
+
+    const mockArea = document.getElementById('ta');
+    mockArea?.focus();
+
+    const kbEvent1 = new KeyboardEvent('keydown', {
+      code: '123',
+      key: 'a',
+    });
+    document.dispatchEvent(kbEvent1);
+
+    assert.is(testHandler.callCount, 0);
+  }
+);
+
 UseHotkey.run();
