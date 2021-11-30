@@ -85,8 +85,14 @@ export const getStaticProps = createGetStaticProps(
     );
 
     // @TODO: remove after Backend returns rounded values
-    if(data.selectedGmData.tested_overall.last_value.infected_moving_average !== null) {
-      data.selectedGmData.tested_overall.last_value.infected_moving_average = Math.round(data.selectedGmData.tested_overall.last_value.infected_moving_average)
+    if (
+      data.selectedGmData.tested_overall.last_value.infected_moving_average !==
+      null
+    ) {
+      data.selectedGmData.tested_overall.last_value.infected_moving_average =
+        Math.round(
+          data.selectedGmData.tested_overall.last_value.infected_moving_average
+        );
     }
 
     return data;
@@ -188,11 +194,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
         <MaxWidth id="content">
-          <Box
-            spacing={{ _: 4, md: 5 }}
-            pt={{ _: 3, md: 5 }}
-            px={{ _: 3, sm: 5 }}
-          >
+          <Box spacing={{ _: 4, md: 5 }} px={{ _: 3, sm: 5 }}>
             <Box spacing={3}>
               <TopicalSectionHeader
                 showBackLink
@@ -237,7 +239,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                             .positief_geteste_mensen.menu_item_label,
                         data: data.tested_overall.values,
                         dataProperty: 'infected_moving_average',
-                        value: data.tested_overall.last_value.infected_moving_average,
+                        value:
+                          data.tested_overall.last_value
+                            .infected_moving_average,
                         warning: getWarning(
                           content.elements.warning,
                           'tested_overall'

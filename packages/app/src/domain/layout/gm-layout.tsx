@@ -57,8 +57,7 @@ export function GmLayout(props: GmLayoutProps) {
   const showMetricLinks =
     router.route !== '/gemeente' && router.route !== '/actueel/gemeente';
 
-  const isMainRoute =
-    router.route === '/gemeente' || router.route === `/gemeente/[code]`;
+  const isMainRoute = router.route === '/gemeente';
 
   const vr = getVrForMunicipalityCode(code);
 
@@ -90,7 +89,7 @@ export function GmLayout(props: GmLayoutProps) {
       </Head>
 
       <AppContent
-        hideMenuButton={isMainRoute}
+        hideBackButton={isMainRoute}
         searchComponent={
           <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
             <GmComboBox getLink={getLink} />

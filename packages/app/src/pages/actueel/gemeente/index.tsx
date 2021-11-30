@@ -43,7 +43,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
       (x) =>
         ({
           gmcode: x.gemcode,
-          admissions_on_date_of_reporting: null,
+          admissions_on_date_of_admission: null,
         } as unknown as GmCollectionHospitalNice)
     );
   }, []);
@@ -85,7 +85,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 minHeight={650}
                 dataConfig={{
                   metricName: 'gemeente' as any,
-                  metricProperty: 'admissions_on_date_of_reporting',
+                  metricProperty: 'admissions_on_date_of_admission',
                   areaStroke: colors.white,
                   areaStrokeWidth: 1,
                   hoverFill: colors.white,

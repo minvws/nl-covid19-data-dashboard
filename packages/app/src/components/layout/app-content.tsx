@@ -1,4 +1,4 @@
-import { colors, DataScopeKey } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -15,36 +15,25 @@ interface AppContentProps {
   children: React.ReactNode;
   sidebarComponent: React.ReactNode;
   searchComponent?: React.ReactNode;
-  hideMenuButton?: boolean;
+  hideBackButton?: boolean;
 }
 
 export function AppContent({
   children,
   sidebarComponent,
   searchComponent,
-  hideMenuButton,
+  hideBackButton,
 }: AppContentProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
-  /**
-   * @TODO Possibly not the right place to check the "homepage" (/) menu-state,
-   * but it's good enough for now I guess
-   */
   const isMenuOpen =
     router.pathname == '/internationaal' ||
     router.pathname == '/landelijk' ||
     router.pathname == '/veiligheidsregio/[code]' ||
     router.pathname == '/gemeente/[code]' ||
     router.query.menu === '1';
-
-  const menuOpenTexts: Record<DataScopeKey, string> = {
-    nl: siteText.nav.terug_naar_alle_cijfers_homepage,
-    gm: siteText.nav.terug_naar_alle_cijfers_gemeente,
-    vr: siteText.nav.terug_naar_alle_cijfers_veiligheidsregio,
-    in: siteText.nav.terug_naar_alle_cijfers_internationaal,
-  };
 
   const currentPageScope = getCurrentPageScope(router);
 
@@ -53,29 +42,38 @@ export function AppContent({
   /**
    * @TODO Open the menu purely client side without loading a new page
    */
-  const menuOpenUrl = currentPageScope
-    ? reverseRouter[currentPageScope].index(currentCode)
+  const backButtonUrl = currentPageScope
+    ? isMenuOpen && currentPageScope !== 'in'
+      ? reverseRouter.actueel[currentPageScope](currentCode)
+      : reverseRouter[currentPageScope].index(currentCode)
     : undefined;
 
-  const menuOpenText = currentPageScope ? menuOpenTexts[currentPageScope] : '';
+  const backButtonText = currentPageScope
+    ? isMenuOpen && currentPageScope !== 'in'
+      ? siteText.nav.back_topical[currentPageScope]
+      : siteText.nav.back_all_metrics[currentPageScope]
+    : '';
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>
-        {!hideMenuButton && menuOpenUrl && (
-          <MenuLinkContainer
-            isVisible={!isMenuOpen}
-            css={css({
-              background: 'white',
-              padding: '1em',
-              boxShadow: 'tile',
-              position: 'relative',
-            })}
-          >
-            <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
-              {menuOpenText}
-            </LinkWithIcon>
-          </MenuLinkContainer>
+        {backButtonUrl && (
+          <>
+            <BackButtonContainer
+              isVisible={!hideBackButton}
+              css={css({
+                background: 'white',
+                py: 3,
+                position: 'relative',
+                borderBottom: 'solid 1px',
+                borderColor: 'border',
+              })}
+            >
+              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
+                {backButtonText}
+              </LinkWithIcon>
+            </BackButtonContainer>
+          </>
         )}
 
         <StyledSidebar>
@@ -92,15 +90,12 @@ export function AppContent({
           <ResponsiveVisible isVisible={!isMenuOpen}>
             {children}
           </ResponsiveVisible>
-          {menuOpenUrl && (
-            <MenuLinkContainer
-              isVisible={!isMenuOpen && !hideMenuButton}
-              mt={4}
-            >
-              <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
-                {menuOpenText}
+          {backButtonUrl && (
+            <BackButtonContainer isVisible={!hideBackButton} mt={4}>
+              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
+                {backButtonText}
               </LinkWithIcon>
-            </MenuLinkContainer>
+            </BackButtonContainer>
           )}
         </StyledAppContent>
       </AppContentContainer>
@@ -108,9 +103,9 @@ export function AppContent({
   );
 }
 
-const MenuLinkContainer = styled(Box)<{ isVisible: boolean }>((x) =>
+const BackButtonContainer = styled(Box)<{ isVisible: boolean }>((x) =>
   css({
-    px: [3, null, 0],
+    mx: [3, null, 0],
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
   })
 );
