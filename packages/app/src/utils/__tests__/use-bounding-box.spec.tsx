@@ -42,8 +42,8 @@ UseBoundingBox.before.each((context) => {
   context.getBoundingClientRect.returns(testBoundingBox);
 });
 
-UseBoundingBox.after.each((context) => {
-  context.getBoundingClientRect.restore();
+UseBoundingBox.after.each(() => {
+  sinon.restore();
   cleanup();
 });
 
@@ -111,27 +111,12 @@ UseBoundingBox(
   async (context) => {
     render(<TestCase context={context} />);
 
-    assert.equal(context.boundingBox, testBoundingBox);
-
-    const updatedBoundingBox = { ...testBoundingBox, x: 1234 };
-
-    context.getBoundingClientRect.returns(updatedBoundingBox);
+    const removeEventListenerSpy = sinon.spy(window, 'removeEventListener');
 
     cleanup();
 
-    fireEvent.resize(window);
-    fireEvent.scroll(window);
-
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
-    // This will probably still work if the listeners are not removed,
-    // since it seems like React catches you trying to update state of an
-    // unmounted component before calling this function. However, you WILL get
-    // warnings in the console from React on which we can act.
-    assert.is(
-      (context.getBoundingClientRect as sinon.SinonStub).calledOnce,
-      true
-    );
+    assert.ok(removeEventListenerSpy.calledWith('scroll'));
+    assert.ok(removeEventListenerSpy.calledWith('resize'));
   }
 );
 
