@@ -3,6 +3,20 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 
+/**
+ * This hook handles a focus trap used for allowing keyboard users to optionally
+ * 'step into' a specific DOM area. For example, a choropleth or chart can be
+ * skipped by tabbing through the DOM elements by setting the tabindex to -1.
+ *
+ * This hook return a button that is hidden until it receives focus, once clicked
+ * the `isTabInteractive` state will be set to true, this state can then be used
+ * to change the appropriate tab index to 1, in which case the next tab press
+ * after this button will step into the chart or choropleth.
+ *
+ * @param label A text label which is rendered in the button
+ * @returns A stateful isTabInteractive/setIsTabInteractive set, a button instance that will toggle the isTabInteractive value and
+ * a focus and blur handler that also toggle the isTabInteractive value.
+ */
 export function useTabInteractiveButton(label: string) {
   const [isTabInteractive, setIsTabInteractive] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);

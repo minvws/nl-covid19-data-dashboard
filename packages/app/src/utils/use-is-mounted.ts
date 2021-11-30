@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useIsMountedRef } from './use-is-mounted-ref';
 
 /**
+ * Determines if the current component is mounted.
+ *
  * @param delayMs optionally mutate state after a delay
  */
 export function useIsMounted({ delayMs }: { delayMs?: number } = {}) {
