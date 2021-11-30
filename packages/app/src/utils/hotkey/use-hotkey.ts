@@ -4,10 +4,9 @@ import { Callback, createContext, Options } from './hotkey';
 type OptionsWithDisabled = Options & { isDisabled?: boolean };
 
 /**
- *
- * @param hotkey
- * @param callback
- * @param options
+ * General hook to handle a keydown operation. The operation may be
+ * triggered by one more more keys/key combinations.
+ * This hook will automatically clean up after unmount.
  */
 export function useHotkey(
   hotkey: string | string[],

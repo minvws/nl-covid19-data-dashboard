@@ -65,6 +65,11 @@ const defaultOptions: Options = {
   preventDefault: true,
 };
 
+/**
+ * Returns an object that allows to register and unregister handlers
+ * for separate keys/key combinations and a destroy method for
+ * cleaning up the document listener.
+ */
 export function createContext(options: Options = {}) {
   const listeners: Listener[] = [];
   const keydownHandler = createKeyListener(
