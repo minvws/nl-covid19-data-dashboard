@@ -48,7 +48,7 @@ UseBoundingBox.after.each((context) => {
 });
 
 UseBoundingBox(
-  'should give the bounding box of the element when the ref is applied',
+  'should return the bounding box of the element when the ref is applied',
   (context) => {
     render(<TestCase context={context} />);
 
