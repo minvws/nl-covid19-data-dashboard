@@ -7,6 +7,10 @@ type OptionsWithDisabled = Options & { isDisabled?: boolean };
  * General hook to handle a keydown operation. The operation may be
  * triggered by one more more keys/key combinations.
  * This hook will automatically clean up after unmount.
+ *
+ * @param hotkey one or more keys, combinations like 'control+z' are allowed as well
+ * @param callback The callback which will be called after the key(s) have been pressed
+ * @param options Options to tweak the behavior of the key press handling
  */
 export function useHotkey(
   hotkey: string | string[],

@@ -52,7 +52,7 @@ UseHotkey('should clean the document listener after unmount', (context) => {
   assert.equal(context.removeEventListenerSpy.callCount, 1);
 });
 
-UseHotkey('should not call the key handler after unmount', (context) => {
+UseHotkey('should not call the key handler after unmount', () => {
   const testHandler = sinon.spy();
   const { unmount } = renderHook(() => useHotkey('a', testHandler));
 
@@ -65,6 +65,87 @@ UseHotkey('should not call the key handler after unmount', (context) => {
   document.dispatchEvent(kbEvent);
 
   assert.equal(testHandler.callCount, 0);
+});
+
+UseHotkey('should call twice when allowRepeat is true', () => {
+  const testHandler = sinon.spy();
+  renderHook(() => useHotkey('a', testHandler, { allowRepeat: true }));
+
+  const kbEvent1 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+  });
+  document.dispatchEvent(kbEvent1);
+
+  const kbEvent2 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+    repeat: true,
+  });
+  document.dispatchEvent(kbEvent2);
+
+  assert.equal(testHandler.callCount, 2);
+});
+
+UseHotkey('should not call twice when allowRepeat is false', () => {
+  const testHandler = sinon.spy();
+  renderHook(() => useHotkey('a', testHandler, { allowRepeat: false }));
+
+  const kbEvent1 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+  });
+  document.dispatchEvent(kbEvent1);
+
+  const kbEvent2 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+    repeat: true,
+  });
+  document.dispatchEvent(kbEvent2);
+
+  assert.equal(testHandler.callCount, 1);
+});
+
+UseHotkey('should not be called when disabled', () => {
+  const testHandler = sinon.spy();
+  renderHook(() => useHotkey('a', testHandler, { isDisabled: true }));
+
+  const kbEvent1 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+  });
+  document.dispatchEvent(kbEvent1);
+
+  assert.equal(testHandler.callCount, 0);
+});
+
+UseHotkey('should prevent default when preventDefault is true', () => {
+  const testHandler = sinon.spy();
+  renderHook(() => useHotkey('a', testHandler, { preventDefault: true }));
+
+  const kbEvent1 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+  });
+  sinon.spy(kbEvent1, 'preventDefault');
+  document.dispatchEvent(kbEvent1);
+
+  assert.is((kbEvent1.preventDefault as sinon.SinonSpy).callCount, 1);
+});
+
+UseHotkey('should not prevent default when preventDefault is false', () => {
+  const testHandler = sinon.spy();
+  renderHook(() => useHotkey('a', testHandler, { preventDefault: false }));
+
+  const kbEvent1 = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+  });
+  sinon.spy(kbEvent1, 'preventDefault');
+  document.dispatchEvent(kbEvent1);
+
+  assert.is((kbEvent1.preventDefault as sinon.SinonSpy).callCount, 0);
 });
 
 UseHotkey.run();

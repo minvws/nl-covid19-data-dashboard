@@ -65,6 +65,7 @@ CreateContext(
       code: '123',
       key: 'a',
     });
+
     document.dispatchEvent(kbEvent);
 
     assert.equal(callBack.callCount, 0);
