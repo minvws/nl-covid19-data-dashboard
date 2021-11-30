@@ -356,6 +356,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'intensive_care_nice'
                   )}
+                  hasNoMargin={true}
                 />
 
                 <MiniTrendTile
@@ -444,7 +445,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'hospital_nice'
                   )}
-                  hasMargin={true}
                 />
                 {testedOverallTopicalPageFeature.isEnabled && (
                   <MiniTrendTile
@@ -518,7 +518,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     )}
-                    hasMargin={true}
                   />
                 )}
                 <MiniVaccinationCoverageTile
@@ -564,7 +563,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'vaccine_coverage_per_age_group_estimated'
                   )}
-                  hasMargin={true}
                 />
               </MiniTileSelectorLayout>
             </Box>
