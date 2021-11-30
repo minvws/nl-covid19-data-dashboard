@@ -30,22 +30,24 @@ export function MiniVaccinationCoverageTile(
   } = props;
 
   return (
-    <MiniTile {...tileProps}>
-      <Box display="flex" flexDirection="column" spacing={3}>
-        <LabeledBar
-          value={oneShotPercentage}
-          color={COLOR_HAS_ONE_SHOT}
-          valueLabel={oneShotPercentageLabel}
-          barLabel={oneShotBarLabel}
-        />
-        <LabeledBar
-          value={fullyVaccinatedPercentage}
-          color={COLOR_FULLY_VACCINATED}
-          valueLabel={fullyVaccinatedPercentageLabel}
-          barLabel={fullyVaccinatedBarLabel}
-        />
-      </Box>
-    </MiniTile>
+    <Box ml={{ _: undefined, md: 3 }}>
+      <MiniTile {...tileProps}>
+        <Box display="flex" flexDirection="column" spacing={3}>
+          <LabeledBar
+            value={oneShotPercentage}
+            color={COLOR_HAS_ONE_SHOT}
+            valueLabel={oneShotPercentageLabel}
+            barLabel={oneShotBarLabel}
+          />
+          <LabeledBar
+            value={fullyVaccinatedPercentage}
+            color={COLOR_FULLY_VACCINATED}
+            valueLabel={fullyVaccinatedPercentageLabel}
+            barLabel={fullyVaccinatedBarLabel}
+          />
+        </Box>
+      </MiniTile>
+    </Box>
   );
 }
 
