@@ -154,7 +154,10 @@ function TooltipListItem({
         <IconRow icon={icon}>
           <Box flexGrow={1}>
             <TooltipEntryContainer>
-              <InlineText aria-label={ariaLabel}>{label}:</InlineText>
+              <VisuallyHidden>
+                <InlineText>{ariaLabel ?? label}:</InlineText>
+              </VisuallyHidden>
+              <InlineText aria-hidden={true}>{label}:</InlineText>
               <TooltipEntryValue isCentered={displayTooltipValueOnly}>
                 {children}
               </TooltipEntryValue>
