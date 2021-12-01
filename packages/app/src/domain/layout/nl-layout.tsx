@@ -1,16 +1,26 @@
+import { useState, useEffect, lazy } from 'react';
 import Head from 'next/head';
 import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
-import { ErrorBoundary } from '~/components/error-boundary';
+// import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useSidebar } from './logic/use-sidebar';
+import { Loader } from '~/components/loader/loader';
 
 interface NlLayoutProps {
   children?: React.ReactNode;
 }
+
+const useMounted = () => {
+  const [ hasMounted, setHasMounted ] = useState(false);
+
+  useEffect(() => setHasMounted(true), []);
+
+  return { hasMounted };
+};
 
 /**
  * NlLayout is a composition of persistent layouts.
@@ -30,6 +40,13 @@ interface NlLayoutProps {
  */
 export function NlLayout(props: NlLayoutProps) {
   const { children } = props;
+
+  // const ErrorBoundary = React.lazy(() => import('~/components/error-boundary'));
+
+  const ErrorBoundary = lazy(() =>
+  import('~/components/error-boundary')
+    .then(({ ErrorBoundary }) => ({ default: ErrorBoundary })),
+);
 
   const { siteText } = useIntl();
 
@@ -72,6 +89,8 @@ export function NlLayout(props: NlLayoutProps) {
       ],
     ],
   });
+
+  const { hasMounted } = useMounted()
 
   return (
     <>
@@ -143,7 +162,7 @@ export function NlLayout(props: NlLayoutProps) {
           </Box>
         }
       >
-        <ErrorBoundary>{children}</ErrorBoundary>
+        {hasMounted ? <Loader/> : <ErrorBoundary>{children}</ErrorBoundary>}
       </AppContent>
     </>
   );
