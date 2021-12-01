@@ -12,14 +12,14 @@ export type MiniTileProps = {
   text: ReactNode;
   warning?: string;
   children: ReactNode;
-  hasNoMargin?: boolean;
+  hideLeftMargin?: boolean;
 };
 
 export function MiniTile(props: MiniTileProps) {
-  const { icon, text, title, warning, children, hasNoMargin } = props;
+  const { icon, text, title, warning, children, hideLeftMargin } = props;
 
   return (
-    <Box ml={ !hasNoMargin ? { _: undefined, md: 3 }: undefined} spacing={3}>
+    <Box ml={ !hideLeftMargin ? { _: undefined, md: 3 }: undefined} spacing={3}>
       <Box spacing={2}>
         <Heading level={3} as="h2">
           <Box as="span" fontWeight="bold" display="flex" alignItems="center">

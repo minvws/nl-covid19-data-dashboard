@@ -16,7 +16,7 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   seriesConfig: SeriesConfig<T>;
   dataOptions?: DataOptions;
   values: T[];
-  hasNoMargin?: boolean
+  hideLeftMargin?: boolean
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniTrendTile<T extends TimestampedValue>(
@@ -28,12 +28,12 @@ export function MiniTrendTile<T extends TimestampedValue>(
     values,
     seriesConfig,
     dataOptions,
-    hasNoMargin,
+    hideLeftMargin,
     ...tileProps
   } = props;
 
   return (
-    <MiniTile {...tileProps} hasNoMargin={hasNoMargin}>
+    <MiniTile {...tileProps} hideLeftMargin={hideLeftMargin}>
       <div>
         <ErrorBoundary>
           <MiniTrendChart
