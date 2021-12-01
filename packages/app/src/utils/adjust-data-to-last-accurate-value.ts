@@ -6,6 +6,9 @@ type ValuesWithLastValue<T> = {
   last_value: T;
 };
 
+/**
+ *
+ */
 export function adjustDataToLastAccurateValue<T>(
   data: ValuesWithLastValue<T>,
   metricProperty?: keyof T

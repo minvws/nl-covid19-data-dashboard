@@ -1,7 +1,7 @@
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 /**
- * Format the birthyear range these rules:
+ * Format the birth year range these rules:
  *
  * We could get 3 variants back from the data:
  * -2003, 2003-2006 and 2003-
