@@ -1,6 +1,6 @@
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
-import { wrapAroundLength } from '../number';
+import { wrapAroundLength } from '../wrap-around-length';
 
 const WrapAroundLength = suite('wrapAroundLength');
 

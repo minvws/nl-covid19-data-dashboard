@@ -1,5 +1,10 @@
 import { assert } from './assert';
 
+/**
+ * If the given value is greater than the given length it will return zero,
+ * if the value is smaller than zero it return the given length -1,
+ * otherwise it returns the given value
+ */
 export function wrapAroundLength(value: number, length: number) {
   assert(length > 0, 'Can not wrap around length zero');
 

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
-import { wrapAroundLength } from '~/utils/number';
+import { wrapAroundLength } from '~/utils/wrap-around-length';
 
 export function useKeyboardNavigation(
   setPosition: Dispatch<SetStateAction<number>>,
