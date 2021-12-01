@@ -36,6 +36,7 @@ export function Loader() {
     ease: "easeInOut"
   }
 
+  const loadingText = "Loading";
 
   return (
     <Box spacing={3} m={3} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
@@ -46,7 +47,7 @@ export function Loader() {
         <MotionBox {...attributes} transition={{...transitionProps, delay: .2 }} />
         <MotionBox {...attributes} transition={{...transitionProps, delay: .4 }} />
       </Box>
-      <Text lineHeight="1.0">Loading</Text>
+      <Text aria-label={loadingText} lineHeight="1.0">{loadingText}</Text>
     </Box>
   );
 }
