@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "es2020",
+    "module": "CommonJS",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "ES2021",
+    "target": "es5",
     "allowJs": false,
     "baseUrl": ".",
     "paths": {
