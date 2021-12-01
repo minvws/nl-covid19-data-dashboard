@@ -60,6 +60,7 @@ export const paddedStyle = css({
 const StyledSearchInput = styled.input(
   paddedStyle,
   css({
+    bg: 'white',
     fontFamily: 'body',
     display: 'block',
     width: '100%',
