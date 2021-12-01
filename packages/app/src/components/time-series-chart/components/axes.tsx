@@ -14,7 +14,7 @@ import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, Ref, useCallback } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
-import { createDate } from '~/utils/create-date';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
@@ -102,11 +102,7 @@ export const Axes = memo(function Axes({
   const [startUnix, endUnix] = timeDomain;
   const breakpoints = useBreakpoints();
 
-  const {
-    formatDateFromSeconds,
-    formatNumber,
-    formatPercentage
-  } = useIntl();
+  const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
   const formatYAxis = useCallback(
     (y: number) => {
@@ -136,8 +132,8 @@ export const Axes = memo(function Axes({
 
   const formatXAxis = useCallback(
     (date_unix: number, index: number) => {
-      const startYear = createDate(startUnix).getFullYear();
-      const endYear = createDate(endUnix).getFullYear();
+      const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
+      const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
 
       const isMultipleYearSpan = startYear !== endYear;
 
@@ -148,8 +144,10 @@ export const Axes = memo(function Axes({
       } else {
         const previousDate = xTicks[index - 1];
         const previousYear =
-          !!previousDate && createDate(previousDate).getFullYear();
-        const currentYear = createDate(date_unix).getFullYear();
+          !!previousDate &&
+          createDateFromUnixTimestamp(previousDate).getFullYear();
+        const currentYear =
+          createDateFromUnixTimestamp(date_unix).getFullYear();
         const isNewYear = previousYear !== currentYear;
 
         return isNewYear

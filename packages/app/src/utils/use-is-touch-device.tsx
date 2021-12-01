@@ -3,6 +3,11 @@ import { useMediaQuery } from './use-media-query';
 
 const isTouchDeviceContext = createContext(false);
 
+/**
+ * Context that tracks a media query which determines
+ * if the current device supports a touch interface
+ *
+ */
 export function IsTouchDeviceContextProvider({
   children,
 }: {
@@ -17,6 +22,9 @@ export function IsTouchDeviceContextProvider({
   );
 }
 
+/**
+ * This hook returns true if the current device supports a touch interface
+ */
 export function useIsTouchDevice() {
   return useContext(isTouchDeviceContext);
 }

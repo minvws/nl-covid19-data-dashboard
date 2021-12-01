@@ -1,5 +1,12 @@
 import { RefObject, useEffect, useRef } from 'react';
 
+/**
+ * Triggers the specified handler when a mouse click occurs outside the list of elements
+ * assigned to the given refs
+ *
+ * @param refs
+ * @param handler
+ */
 export function useOnClickOutside<T extends RefObject<Element>>(
   refs: T[],
   handler: (event: MouseEvent | TouchEvent) => void

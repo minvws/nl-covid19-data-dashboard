@@ -28,6 +28,12 @@ type Breakpoints = {
 
 const breakpointContext = createContext<Breakpoints | undefined>(undefined);
 
+/**
+ * Context that tracks all of the media queries configured in the theme.
+ *
+ * @param param0
+ * @returns
+ */
 export function BreakpointContextProvider({
   children,
 }: {
@@ -51,6 +57,12 @@ export function BreakpointContextProvider({
   );
 }
 
+/**
+ * This hook returns all of the matches for the tracked media queries by the BreakpointContextProvider
+ *
+ * @param initialValue default return value
+ * @returns
+ */
 export function useBreakpoints(initialValue = false): Breakpoints {
   const value = useContext(breakpointContext);
 

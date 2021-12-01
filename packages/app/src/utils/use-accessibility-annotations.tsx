@@ -24,6 +24,11 @@ export type AccessibilityAnnotations = ReturnType<
   typeof useAccessibilityAnnotations
 >;
 
+/**
+ *
+ * @param definition
+ * @returns
+ */
 export function useAccessibilityAnnotations(
   definition: AccessibilityDefinition
 ) {
