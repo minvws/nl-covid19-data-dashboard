@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "es2020",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es5",
+    "target": "ES2021",
     "allowJs": false,
     "baseUrl": ".",
     "paths": {
@@ -12,8 +12,9 @@
     "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true
+    "declarationMap": false,
+    "sourceMap": false,
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["**/__tests__/*"]

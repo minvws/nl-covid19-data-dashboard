@@ -2,7 +2,7 @@
   "name": "@corona-dashboard/icons",
   "version": "0.0.0",
   "description": "React ready Corona Dashboard Icons",
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "module": "dist/index.js",
   "sideEffects": false,
   "typings": "dist/index.d.ts",
@@ -13,10 +13,12 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli' && exit 0",
     "typecheck": "exit 0",
-    "build": "npx rimraf dist src/icons && node bin/build.js && babel src --out-dir dist --copy-files",
+    "build": "npx rimraf tsconfig.tsbuildinfo dist src/icons && node bin/generate.js && yarn compile",
+    "compile": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "rename-jsx": "node bin/rename.js",
     "lint": "eslint ."
   },
-  "files": [
+  "files": [ 
     "dist",
     "es"
   ],
@@ -30,6 +32,7 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "@rollup/plugin-babel": "^5.3.0",
+    "@types/pascalcase": "^1.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "camelcase": "^6.2.1",
@@ -43,6 +46,8 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.60.0",
     "svgson": "^5.2.1",
+    "ts-node": "^10.4.0",
+    "tscpaths": "^0.0.9",
     "uppercamelcase": "^3.0.0"
   },
   "peerDependencies": {

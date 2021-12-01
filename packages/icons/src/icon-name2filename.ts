@@ -1,4 +1,4 @@
-export const iconName2filename = {
+export const iconName2filename: Record<string, string> = {
   Afstand: 'afstand.svg',
   AfstandSporten: 'afstand-sporten.svg',
   AlcoholVerkoop: 'alcohol-verkoop.svg',

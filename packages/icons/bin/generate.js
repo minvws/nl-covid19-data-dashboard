@@ -1,13 +1,12 @@
-const path = require('path');
-const fs = require('fs');
-const format = require('prettier-eslint');
 const camelCase = require('camelcase');
+const fs = require('fs');
 const lodash = require('lodash');
-const prettierOptions = require('../.prettierrc');
-const eslintConfig = require('../.eslintrc');
 const pascalcase = require('pascalcase');
-
+const path = require('path');
+const format = require('prettier-eslint');
 const { parseSync, stringify } = require('svgson');
+const eslintConfig = require('../.eslintrc');
+const prettierOptions = require('../.prettierrc');
 
 const rootDir = path.join(__dirname, '..');
 
@@ -20,7 +19,7 @@ fs.readdirSync(svgDir).forEach((file) => {
   if (extension === '.svg') {
     const key = file.slice(0, -4);
     const data = fs.readFileSync(
-      path.resolve(__dirname, '..', `src/svg/${file}`),
+      path.resolve(rootDir, `src/svg/${file}`),
       'utf8'
     );
     svgIcons[key] = data;
@@ -46,7 +45,7 @@ export type Icon = FC<IconProps>;
 `;
 
 fs.writeFileSync(
-  path.join(rootDir, 'src', 'index.js'),
+  path.join(rootDir, 'src', 'index.ts'),
   "export { iconName2filename } from './icon-name2filename';\n",
   'utf-8'
 );
@@ -92,12 +91,14 @@ const attrsToString = (attrs) => {
 
 const lookup = icons.sort().map((x) => `${pascalcase(x)}: '${x}.svg'`);
 
-const iconName2filename = ['export const iconName2filename = {']
+const iconName2filename = [
+  'export const iconName2filename: Record<string, string> = {',
+]
   .concat(lookup.join(','))
   .concat(['}', '']);
 
 fs.writeFileSync(
-  path.join(rootDir, 'src', 'icon-name2filename.js'),
+  path.join(rootDir, 'src', 'icon-name2filename.ts'),
   format({
     text: iconName2filename.join('\n'),
     eslintConfig,
@@ -107,7 +108,7 @@ fs.writeFileSync(
 );
 
 icons.forEach((i) => {
-  const location = path.join(rootDir, 'src/icons', `${i}.js`);
+  const location = path.join(rootDir, 'src/icons', `${i}.tsx`);
   const ComponentName = pascalcase(i);
 
   const parsedSvg = parseSync(svgIcons[i]);
@@ -142,7 +143,7 @@ icons.forEach((i) => {
   const element = `
     import React, {forwardRef} from 'react';
 
-    const ${ComponentName} = forwardRef(({ ...rest }, ref) => {
+    const ${ComponentName} = forwardRef(({ ...rest }, ref: any) => {
       return (
         <svg ref={ref} ${attrsToString(defaultAttrs)} >
           ${iconWithoutWrapper}
@@ -165,7 +166,7 @@ icons.forEach((i) => {
 
   const exportString = `export { default as ${ComponentName} } from './icons/${i}';\r\n`;
   fs.appendFileSync(
-    path.join(rootDir, 'src', 'index.js'),
+    path.join(rootDir, 'src', 'index.ts'),
     exportString,
     'utf-8'
   );
