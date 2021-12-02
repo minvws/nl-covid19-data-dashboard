@@ -377,7 +377,6 @@ export interface NlBoosterShotDelivered {
   last_value: NlBoosterShotDeliveredValue;
 }
 export interface NlBoosterShotDeliveredValue {
-  delivered_last_7_days: number;
   delivered_total: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -388,8 +387,7 @@ export interface NlBoosterShotPlanned {
   last_value: NlBoosterShotPlannedValue;
 }
 export interface NlBoosterShotPlannedValue {
-  planned_last_7_days: number;
-  planned_total: number;
+  planned_7_days: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
