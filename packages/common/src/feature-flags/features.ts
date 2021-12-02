@@ -127,10 +127,28 @@ export const features: Feature[] = [
     metricName: 'booster_shot_per_age_group',
   },
   {
-    name: 'nlVaccinationsBoosterShotsKpi',
+    name: 'nlBoosterShotAdministeredKpiTile', // aan
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_administered',
+  },
+  {
+    name: 'nlBoosterShotDeliveredKpiTile',
     isEnabled: false,
     dataScopes: ['nl'],
-    metricName: 'booster_shot',
+    metricName: 'booster_shot_delivered',
+  },
+  {
+    name: 'nlBoosterShotPlannedKpiTile',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_planned',
+  },
+  {
+    name: 'nlThirdShotAdministeredKpiTile', // aan
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'third_shot_administered',
   },
 
   /**
@@ -144,9 +162,27 @@ export const features: Feature[] = [
     metricName: 'booster_shot_per_age_group',
   },
   {
-    name: 'nlVaccinationsBoosterShotsKpiSchemaDisable',
+    name: 'nlBoosterShotAdministeredSchemaDisable',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_administered',
+  },
+  {
+    name: 'nlBoosterShotDeliveredSchemaDisable',
     isEnabled: false,
     dataScopes: ['nl'],
-    metricName: 'booster_shot',
+    metricName: 'booster_shot_delivered',
+  },
+  {
+    name: 'nlBoosterShotPlannedSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_planned',
+  },
+  {
+    name: 'nlThirdShotAdministeredDisable',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'third_shot_administered',
   },
 ];

@@ -22,9 +22,6 @@
       "title": "nl_booster_shot_delivered_value",
       "type": "object",
       "properties": {
-        "delivered_last_7_days": {
-          "type": "number"
-        },
         "delivered_total": {
           "type": "number"
         },
@@ -39,7 +36,6 @@
         }
       },
       "required": [
-        "delivered_last_7_days",
         "delivered_total",
         "date_start_unix",
         "date_end_unix",

@@ -22,10 +22,7 @@
       "title": "nl_booster_shot_planned_value",
       "type": "object",
       "properties": {
-        "planned_last_7_days": {
-          "type": "number"
-        },
-        "planned_total": {
+        "planned_7_days": {
           "type": "number"
         },
         "date_start_unix": {
@@ -39,8 +36,7 @@
         }
       },
       "required": [
-        "planned_last_7_days",
-        "planned_total",
+        "planned_7_days",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"

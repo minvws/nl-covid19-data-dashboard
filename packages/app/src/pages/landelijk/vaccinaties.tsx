@@ -196,9 +196,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
-  const vaccinationsBoosterShotsKpiFeature = useFeature(
-    'nlVaccinationsBoosterShotsKpi'
-  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -520,9 +517,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </>
           )}
 
-          {vaccinationsBoosterShotsKpiFeature.isEnabled && (
+          {/* {vaccinationsBoosterShotsKpiFeature.isEnabled && (
             <VaccineBoosterKpiSection data={DUMMY_DATA_BOOSTER_SHOTS_KPI} />
-          )}
+          )} */}
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <VaccineBoosterPerAgeGroup
