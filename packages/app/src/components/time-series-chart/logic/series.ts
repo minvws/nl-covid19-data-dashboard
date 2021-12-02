@@ -35,8 +35,8 @@ interface SeriesCommonDefinition {
    */
   shortLabel?: string;
   /**
-   * @TODO: docs
-   * ...
+   * Adds an aria label to labels in the tooltip in order provide a clearer description
+   * for screen readers.
    */
   ariaLabel?: string;
   /**
