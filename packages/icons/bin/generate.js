@@ -143,7 +143,7 @@ icons.forEach((i) => {
   const element = `
     import React, {forwardRef} from 'react';
 
-    const ${ComponentName} = forwardRef(({ ...rest }, ref: any) => {
+    const ${ComponentName} = forwardRef<SVGElement, any>(({ ...rest }, ref) => {
       return (
         <svg ref={ref} ${attrsToString(defaultAttrs)} >
           ${iconWithoutWrapper}
