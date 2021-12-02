@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
