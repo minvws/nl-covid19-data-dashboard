@@ -23,7 +23,7 @@ UseReverseRouter.before((context) => {
   (window as any).matchMedia = () => {};
   sinon.stub(window, 'matchMedia').callsFake((mq: string) => {
     switch (mq) {
-      case 'screen and (min-width: 60em)': {
+      case theme.mediaQueries.md: {
         return {
           matches: largeScreen,
           addListener: (callback: any) => {},
