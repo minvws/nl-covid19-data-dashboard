@@ -2815,6 +2815,7 @@ __metadata:
     "@babel/preset-env": ^7.16.4
     "@babel/preset-react": ^7.16.0
     "@rollup/plugin-babel": ^5.3.0
+    "@types/pascalcase": ^1.0.1
     babel-plugin-transform-object-rest-spread: ^6.26.0
     babel-preset-env: ^1.7.0
     camelcase: ^6.2.1
@@ -2830,6 +2831,8 @@ __metadata:
     rimraf: ^3.0.2
     rollup: ^2.60.0
     svgson: ^5.2.1
+    ts-node: ^10.4.0
+    tscpaths: ^0.0.9
     uppercamelcase: ^3.0.0
   peerDependencies:
     react: ^16.8.6 || ^17
@@ -7286,6 +7289,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/pascalcase@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@types/pascalcase@npm:1.0.1"
+  checksum: 7d8955e6ab0a5d6a07cd1ee374392f9b9cc95b5682806bf1bd4f61be3d8432e6c4976e51b1ca362896571a81a84c90e6aa99b9dbbb586f0e3860b20caa7b93ad
+  languageName: node
+  linkType: hard
+
 "@types/prettier@npm:^2.1.5":
   version: 2.4.1
   resolution: "@types/prettier@npm:2.4.1"
@@ -11463,6 +11473,8 @@ __metadata:
 "corona-dashboard@workspace:.":
   version: 0.0.0-use.local
   resolution: "corona-dashboard@workspace:."
+  dependencies:
+    ts-node: ^10.4.0
   languageName: unknown
   linkType: soft
 
