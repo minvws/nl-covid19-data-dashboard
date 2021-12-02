@@ -39,19 +39,12 @@ import { FC, SVGAttributes } from 'react';
 
 export interface IconProps extends SVGAttributes<SVGElement> {}
 
-export const iconName2filename: Record<string, string>;
-
 export type Icon = FC<IconProps>;
 `;
 
 fs.writeFileSync(
   path.join(rootDir, 'src', 'index.ts'),
-  "export { iconName2filename } from './icon-name2filename';\n",
-  'utf-8'
-);
-fs.writeFileSync(
-  path.join(rootDir, 'src', 'index.d.ts'),
-  initialTypeDefinitions,
+  `${initialTypeDefinitions}\nexport { iconName2filename } from './icon-name2filename';\n`,
   'utf-8'
 );
 
