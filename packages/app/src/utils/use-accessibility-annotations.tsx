@@ -39,13 +39,12 @@ export function useAccessibilityAnnotations(
     ];
 
   /**
-   * @todo Make label content mandatory once enough content is filled.
-   *
-   * assert(
-   *  label,
-   *  `An accessibility label needs to be provided for ${options.key}`
-   * );
+   * There needs to be a label
    */
+  assert(
+    label,
+    `An accessibility label needs to be provided for ${definition.key}`
+  );
 
   /**
    * There needs to be a description, either constructed by a Lokalize text
