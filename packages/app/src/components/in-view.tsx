@@ -4,10 +4,14 @@ import { useIsInView } from '~/utils/use-is-in-view';
 interface InViewProps {
   children: ReactNode;
   rootMargin?: string;
-  once?: boolean;
+  triggerOnce?: boolean;
 }
 
-export function InView({ rootMargin, children, once = true }: InViewProps) {
+export function InView({
+  rootMargin,
+  children,
+  triggerOnce = true,
+}: InViewProps) {
   const ref = useRef(null);
   const isInView = useIsInView(ref, rootMargin);
   const [hasChanged, setHasChanged] = useState<boolean>(false);
@@ -16,5 +20,7 @@ export function InView({ rootMargin, children, once = true }: InViewProps) {
     isInView && setHasChanged(true);
   }, [isInView]);
 
-  return <div ref={ref}>{(isInView || (once && hasChanged)) && children}</div>;
+  return (
+    <div ref={ref}>{(isInView || (triggerOnce && hasChanged)) && children}</div>
+  );
 }
