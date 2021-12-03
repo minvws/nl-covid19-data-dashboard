@@ -1,14 +1,16 @@
 import {
   colors,
+  NlBoosterShotAdministeredValue,
   NlBoosterShotDeliveredValue,
   NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
+  NlThirdShotAdministeredValue
 } from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
-  Ziekenhuis,
+  Ziekenhuis
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
@@ -44,30 +46,30 @@ import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents,
+  getTimelineEvents
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-  getRichTextParts,
+  getRichTextParts
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import {
   ArticleParts,
   LinkParts,
   PagePartQueryResult,
-  RichTextParts,
+  RichTextParts
 } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
@@ -100,9 +102,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated',
     'hospital_vaccination_status',
     'hospital_vaccine_incidence_per_age_group',
-    'intensive_care_vaccination_status',
-    'booster_shot_administered',
-    'third_shot_administered'
+    'intensive_care_vaccination_status'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -241,10 +241,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_end_unix
   );
 
+  const data_booster_shot_administered = siteText.data.vaccinations
+    .booster_shot_administered as unknown as NlBoosterShotAdministeredValue;
+
   const data_booster_shot_delivered = siteText.data.vaccinations
     .booster_shot_delivered as unknown as NlBoosterShotDeliveredValue;
+
   const data_booster_shot_planned = siteText.data.vaccinations
     .booster_shot_planned as unknown as NlBoosterShotPlannedValue;
+
+  const data_third_shot_administered = siteText.data.vaccinations
+    .third_shot_administered as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
@@ -527,10 +534,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   description={text.booster_information_block.description}
                   metadata={{
                     datumsText: text.booster_information_block.datums,
-                    dateOrRange:
-                      data.booster_shot_administered.last_value.date_end_unix,
-                    dateOfInsertionUnix:
-                      data.booster_shot_administered.last_value.date_end_unix,
+                    dateOrRange: Number(
+                      data_booster_shot_administered.date_end_unix
+                    ),
+                    dateOfInsertionUnix: Number(
+                      data_booster_shot_administered.date_end_unix
+                    ),
                     dataSources: [],
                   }}
                   referenceLink={text.booster_information_block.reference.href}
@@ -544,7 +553,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             boosterShotDeliveredKpiTileFeature.isEnabled &&
             boosterShotPlannedKpiTileFeature.isEnabled && (
               <VaccineBoosterKpiAdministeredDeliveredSection
-                dataAdministered={data.booster_shot_administered.last_value}
+                dataAdministered={data_booster_shot_administered}
                 dateDelivered={data_booster_shot_delivered}
                 dataPlanned={data_booster_shot_planned}
               />
@@ -560,10 +569,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   description={text.third_shot_information_block.description}
                   metadata={{
                     datumsText: text.third_shot_information_block.datums,
-                    dateOrRange:
-                      data.third_shot_administered.last_value.date_end_unix,
+                    dateOrRange: Number(data_third_shot_administered.date_end_unix),
                     dateOfInsertionUnix:
-                      data.third_shot_administered.last_value.date_end_unix,
+                      Number(data_third_shot_administered.date_end_unix),
                     dataSources: [],
                   }}
                   referenceLink={
@@ -577,7 +585,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {thirdShotAdministeredKpiTileFeature.isEnabled && (
             <VaccineBoosterKpiThirdShotSection
-              data={data.third_shot_administered.last_value}
+              data={data_third_shot_administered}
             />
           )}
 

@@ -58,3 +58,13 @@ timestamp,action,key,document_id,move_to
 2021-12-02T16:35:10.260Z,delete,vaccinaties.booster_shots_kpi.total_section.sources.href,41m6S8Y6xAJZkZywfossIs,__
 2021-12-02T16:35:10.260Z,delete,vaccinaties.booster_shots_kpi.total_section.sources.text,z1CGDOfh23CnZYQwEsi0F5,__
 2021-12-02T16:35:10.260Z,delete,vaccinaties.booster_shots_kpi.total_section.title,41m6S8Y6xAJZkZywfosqJi,__
+2021-12-03T11:57:05.421Z,add,data.vaccinations.third_shot_administered.administered_last_7_days,jhyF3uxGuxcrROYEkXtark,__
+2021-12-03T11:57:06.775Z,add,data.vaccinations.third_shot_administered.administered_total,Et6a2CHme6oVciYddoZw0O,__
+2021-12-03T11:57:07.791Z,add,data.vaccinations.third_shot_administered.date_start_unix,jhyF3uxGuxcrROYEkXtc0s,__
+2021-12-03T11:57:09.809Z,add,data.vaccinations.third_shot_administered.date_end_unix,Et6a2CHme6oVciYddoZx5j,__
+2021-12-03T11:57:10.832Z,add,data.vaccinations.third_shot_administered.date_of_insertion_unix,jhyF3uxGuxcrROYEkXtdEk,__
+2021-12-03T11:57:11.844Z,add,data.vaccinations.booster_shot_administered.administered_last_7_days,5nFbN3wr6gLKhhZ5M70WpV,__
+2021-12-03T11:57:13.053Z,add,data.vaccinations.booster_shot_administered.administered_total,jhyF3uxGuxcrROYEkXteXM,__
+2021-12-03T11:57:13.884Z,add,data.vaccinations.booster_shot_administered.date_start_unix,jhyF3uxGuxcrROYEkXtfE2,__
+2021-12-03T11:57:14.909Z,add,data.vaccinations.booster_shot_administered.date_end_unix,Et6a2CHme6oVciYddoZyTv,__
+2021-12-03T11:57:15.913Z,add,data.vaccinations.booster_shot_administered.date_of_insertion_unix,5nFbN3wr6gLKhhZ5M70X2v,__
