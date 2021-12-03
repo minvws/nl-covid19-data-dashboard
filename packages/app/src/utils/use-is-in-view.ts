@@ -7,19 +7,18 @@ export function useIsInView(
   const [isInView, setIsInView] = useState(false);
   const connect = (observer: IntersectionObserver, htmlElement: HTMLElement) =>
     observer.observe(htmlElement);
-  const disconnect = useCallback(
-    (observer) => element.current || observer.unobserve(element.current),
-    []
-  );
+  const disconnect = useCallback((observer, el) => observer.unobserve(el), []);
 
   useEffect(() => {
+    if (!element.current) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => setIsInView(entry.isIntersecting),
       { rootMargin }
     );
 
-    element.current && connect(observer, element.current);
-    return () => disconnect(observer);
+    connect(observer, element.current);
+    return () => element.current && disconnect(observer, element.current);
   }, []);
 
   return isInView;
