@@ -33,8 +33,8 @@ export function createTextDocument(
     should_display_empty: false,
     text: {
       _type: 'localeText',
-      nl,
-      en,
+      nl: nl.toString(),
+      en: en.toString(),
     },
   };
 }
