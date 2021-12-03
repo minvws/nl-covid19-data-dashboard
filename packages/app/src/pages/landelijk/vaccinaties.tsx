@@ -3,12 +3,12 @@ import {
   NlBoosterShotDeliveredValue,
   NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
-  NlIntensiveCareVaccinationStatusValue
+  NlIntensiveCareVaccinationStatusValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
-  Ziekenhuis
+  Ziekenhuis,
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
@@ -26,11 +26,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import {
-  DUMMY_DATA_BOOSTER_PER_AGE_GROUP,
-  DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED,
-  DUMMY_DATA_THIRD_SHOT_ADMINISTERED
-} from '~/domain/vaccine/booster_dummy_data';
+import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
@@ -48,30 +44,30 @@ import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-  getRichTextParts
+  getRichTextParts,
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import {
   ArticleParts,
   LinkParts,
   PagePartQueryResult,
-  RichTextParts
+  RichTextParts,
 } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
@@ -104,7 +100,9 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated',
     'hospital_vaccination_status',
     'hospital_vaccine_incidence_per_age_group',
-    'intensive_care_vaccination_status'
+    'intensive_care_vaccination_status',
+    'booster_shot_administered',
+    'third_shot_administered'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -133,9 +131,17 @@ export const getStaticProps = createGetStaticProps(
           content.parts.pageParts,
           'vaccineBoosterArticles'
         ),
+        thirdShotArticles: getArticleParts(
+          content.parts.pageParts,
+          'vaccineThirdShotArticles'
+        ),
         boosterLinks: getLinkParts(
           content.parts.pageParts,
           'vaccinationsBoosterPageLinks'
+        ),
+        thirdShotLinks: getLinkParts(
+          content.parts.pageParts,
+          'vaccinationsThirdShotPageLinks'
         ),
         pageDescription: getRichTextParts(
           content.parts.pageParts,
@@ -522,13 +528,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   metadata={{
                     datumsText: text.booster_information_block.datums,
                     dateOrRange:
-                      DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED.date_end_unix,
+                      data.booster_shot_administered.last_value.date_end_unix,
                     dateOfInsertionUnix:
-                      DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED.date_end_unix,
+                      data.booster_shot_administered.last_value.date_end_unix,
                     dataSources: [],
                   }}
-                  pageLinks={content.boosterLinks}
                   referenceLink={text.booster_information_block.reference.href}
+                  pageLinks={content.boosterLinks}
                   articles={content.boosterArticles}
                 />
               </>
@@ -538,7 +544,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             boosterShotDeliveredKpiTileFeature.isEnabled &&
             boosterShotPlannedKpiTileFeature.isEnabled && (
               <VaccineBoosterKpiAdministeredDeliveredSection
-                dataAdministered={DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED}
+                dataAdministered={data.booster_shot_administered.last_value}
                 dateDelivered={data_booster_shot_delivered}
                 dataPlanned={data_booster_shot_planned}
               />
@@ -555,21 +561,23 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   metadata={{
                     datumsText: text.third_shot_information_block.datums,
                     dateOrRange:
-                      DUMMY_DATA_THIRD_SHOT_ADMINISTERED.date_end_unix,
+                      data.third_shot_administered.last_value.date_end_unix,
                     dateOfInsertionUnix:
-                      DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED.date_end_unix,
+                      data.third_shot_administered.last_value.date_end_unix,
                     dataSources: [],
                   }}
                   referenceLink={
                     text.third_shot_information_block.reference.href
                   }
+                  pageLinks={content.thirdShotLinks}
+                  articles={content.thirdShotArticles}
                 />
               </>
             )}
 
           {thirdShotAdministeredKpiTileFeature.isEnabled && (
             <VaccineBoosterKpiThirdShotSection
-              data={DUMMY_DATA_THIRD_SHOT_ADMINISTERED}
+              data={data.third_shot_administered.last_value}
             />
           )}
 

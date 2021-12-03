@@ -1,7 +1,5 @@
 import {
-  NlBoosterShotAdministeredValue,
   NlBoosterShotPerAgeGroupValue,
-  NlThirdShotAdministeredValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 
@@ -82,20 +80,3 @@ export const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
     birthyear_range: '2004-2009',
   },
 ] as NlBoosterShotPerAgeGroupValue[];
-
-// BOOSTER SHOT DUMMYD DATA
-export const DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED = {
-  administered_last_7_days: 303,
-  administered_total: 10694,
-  date_start_unix: 1637054676 - WEEK_IN_SECONDS,
-  date_end_unix: 1637054676,
-  date_of_insertion_unix: 1637054676,
-} as NlBoosterShotAdministeredValue;
-
-export const DUMMY_DATA_THIRD_SHOT_ADMINISTERED = {
-  administered_last_7_days: 394,
-  administered_total: 3002,
-  date_start_unix: 1637054676 - WEEK_IN_SECONDS,
-  date_end_unix: 1637054676,
-  date_of_insertion_unix: 1637054676,
-} as NlThirdShotAdministeredValue;
