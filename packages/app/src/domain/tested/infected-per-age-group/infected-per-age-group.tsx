@@ -51,14 +51,17 @@ export function InfectedPerAgeGroup({
           ? text.legend[baseAgeGroup.metricProperty]
           : baseAgeGroup.metricProperty;
 
+      const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
+        age: label,
+      });
+
       return {
         ...baseAgeGroup,
         type: 'line',
         shape: 'line',
         label,
-        legendAriaLabel: replaceVariablesInText(siteText.aria_labels.age_old, {
-          age: label,
-        }),
+        ariaLabel,
+        legendAriaLabel: ariaLabel,
       };
     });
 
