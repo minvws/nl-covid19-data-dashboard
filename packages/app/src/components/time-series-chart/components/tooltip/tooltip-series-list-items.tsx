@@ -129,7 +129,7 @@ function TooltipListItem({
   children,
   icon,
   label,
-  ariaLabel,
+  ariaLabel = label,
   displayTooltipValueOnly,
   isVisuallyHidden,
 }: TooltipListItemProps) {
