@@ -38,6 +38,9 @@
         "tested_total_moving_average": {
           "type": ["number", "null"]
         },
+        "tested_total_moving_average_rounded": {
+          "type": ["integer", "null"]
+        },
         "date_unix": {
           "type": "integer"
         },
