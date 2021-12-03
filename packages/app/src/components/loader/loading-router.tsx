@@ -13,13 +13,21 @@ export function LoadingRouter(props: LoadingRouterProps) {
   const router = useRouter()
 
   const [loaded, setLoaded] = useState(false);
+  const [noWait, setNoWait] = useState(false);
 
   useEffect(() => {
     router.events.on('routeChangeStart', (url) => {
-      url.startsWith("/" + layout) && setTimeout(() => {setLoaded(true)}, 700);
+      if(url.startsWith("/" + layout)) {
+        if (noWait) {
+          setTimeout(() => {setLoaded(true)}, 700);
+        }
+      } else {
+        setLoaded(false)
+      }
     });
     router.events.on('routeChangeComplete', () => {
       setLoaded(false);
+      setNoWait(true);
     });
   });
 
