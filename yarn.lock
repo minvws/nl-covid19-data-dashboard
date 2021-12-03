@@ -2833,6 +2833,7 @@ __metadata:
     svgson: ^5.2.1
     ts-node: ^10.4.0
     tscpaths: ^0.0.9
+    typescript: ^4.4.4
     uppercamelcase: ^3.0.0
   peerDependencies:
     react: ^16.8.6 || ^17
