@@ -135,7 +135,7 @@ function TooltipListItem({
 }: TooltipListItemProps) {
   return isVisuallyHidden ? (
     <VisuallyHidden as="li">
-      {ariaLabel ?? label}: {children}
+      {ariaLabel}: {children}
     </VisuallyHidden>
   ) : (
     <Box as="li" spacingHorizontal={2} display="flex" alignItems="stretch">
