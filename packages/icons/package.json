@@ -18,7 +18,7 @@
     "rename-jsx": "node bin/rename.js",
     "lint": "eslint ."
   },
-  "files": [ 
+  "files": [
     "dist",
     "es"
   ],
@@ -36,15 +36,15 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "camelcase": "^6.2.1",
-    "eslint": "^8.2.0",
+    "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react": "^7.27.1",
     "lodash": "^4.17.21",
     "prettier-eslint": "^13.0.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.60.0",
+    "rollup": "^2.60.2",
     "svgson": "^5.2.1",
     "ts-node": "^10.4.0",
     "tscpaths": "^0.0.9",
