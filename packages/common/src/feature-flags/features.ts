@@ -118,7 +118,11 @@ export const features: Feature[] = [
   },
   {
     name: 'nlVaccinationsBoosterInformationBlock',
-    isEnabled: false,
+    isEnabled: true,
+  },
+  {
+    name: 'nlVaccinationsBoosterThirdShotInformationBlock',
+    isEnabled: true,
   },
   {
     name: 'nlVaccinationBoosterShotsPerAgeGroup',
@@ -127,25 +131,25 @@ export const features: Feature[] = [
     metricName: 'booster_shot_per_age_group',
   },
   {
-    name: 'nlBoosterShotAdministeredKpiTile', // aan
+    name: 'nlBoosterShotAdministeredKpiTile', // aan met data
     isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_administered',
   },
   {
     name: 'nlBoosterShotDeliveredKpiTile',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_delivered',
   },
   {
     name: 'nlBoosterShotPlannedKpiTile',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_planned',
   },
   {
-    name: 'nlThirdShotAdministeredKpiTile', // aan
+    name: 'nlThirdShotAdministeredKpiTile', // aan met data
     isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'third_shot_administered',
