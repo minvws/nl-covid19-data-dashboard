@@ -14,20 +14,19 @@ type AccessibilityFeature =
   | 'keyboard_bar_chart'
   | 'keyboard_choropleth';
 
-/**
- * Provides accessibility labels and description for interactive elements.
- * The label and description are retrieved from Lokalize and
- * more generic descriptions of interactive features are added to them.
- */
-
 export type AccessibilityAnnotations = ReturnType<
   typeof useAccessibilityAnnotations
 >;
 
 /**
+ * Provides accessibility labels and description for interactive elements.
+ * The label and description are retrieved from Lokalize and
+ * more generic descriptions of interactive features are added to them.
  *
- * @param definition
- * @returns
+ * @param definition - An object with the key of the accessibility label/description
+ * in the site text, and optional accessibility features used.
+ * @returns A visually hidden element containing the description, and the props
+ * that should be added to the interactive element
  */
 export function useAccessibilityAnnotations(
   definition: AccessibilityDefinition
