@@ -14,13 +14,17 @@ export function InView({
 }: InViewProps) {
   const ref = useRef(null);
   const isInView = useIsInView(ref, rootMargin);
-  const [hasChanged, setHasChanged] = useState<boolean>(false);
+  const hasChanged = useRef(isInView);
 
   useEffect(() => {
-    isInView && setHasChanged(true);
+    if (isInView) {
+      hasChanged.current = true;
+    }
   }, [isInView]);
 
   return (
-    <div ref={ref}>{(isInView || (triggerOnce && hasChanged)) && children}</div>
+    <div ref={ref}>
+      {(isInView || (triggerOnce && hasChanged.current)) && children}
+    </div>
   );
 }
