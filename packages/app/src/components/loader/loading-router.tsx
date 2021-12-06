@@ -28,7 +28,7 @@ export function LoadingRouter(props: LoadingRouterProps) {
       setIsLoading(false);
       setHasCompleted(true);
     });
-  });
+  }, [hasCompleted, previousUrl, router.events]);
 
   return (
     <Box position="relative">
