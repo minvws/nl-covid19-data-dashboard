@@ -8,17 +8,6 @@ timestamp,action,key,document_id,move_to
 2021-11-29T13:55:02.861Z,add,nav.back_topical.nl,c3zQAq6gN39dqhcQq6dCNi,__
 2021-11-29T13:55:03.989Z,add,nav.back_topical.vr,c3zQAq6gN39dqhcQq6dCWr,__
 2021-11-29T13:55:05.011Z,add,nav.back_topical.gm,vlhYWEAgyN27KxCATPJ5jO,__
-2021-11-29T13:55:05.014Z,delete,gemeente_actueel.secties.actuele_situatie.link.href,jF33EuwumlGuwav2FD4FXQ,__
-2021-11-29T13:55:05.016Z,delete,gemeente_actueel.secties.actuele_situatie.link.text,jF33EuwumlGuwav2FD4FVk,__
-2021-11-29T13:55:05.017Z,delete,nationaal_actueel.secties.actuele_situatie.link.href,jF33EuwumlGuwav2FD4DOu,__
-2021-11-29T13:55:05.019Z,delete,nationaal_actueel.secties.actuele_situatie.link.text,jF33EuwumlGuwav2FD4DNE,__
-2021-11-29T13:55:05.021Z,delete,nav.terug_naar_alle_cijfers,jF33EuwumlGuwav2FD3Vhs,__
-2021-11-29T13:55:05.022Z,delete,nav.terug_naar_alle_cijfers_gemeente,jF33EuwumlGuwav2FD3VqG,__
-2021-11-29T13:55:05.023Z,delete,nav.terug_naar_alle_cijfers_homepage,jF33EuwumlGuwav2FD3VjY,__
-2021-11-29T13:55:05.025Z,delete,nav.terug_naar_alle_cijfers_internationaal,wFtsjn4QbgfPxwh4Ah2ENu,__
-2021-11-29T13:55:05.027Z,delete,nav.terug_naar_alle_cijfers_veiligheidsregio,jF33EuwumlGuwav2FD3Voa,__
-2021-11-29T13:55:05.028Z,delete,veiligheidsregio_actueel.secties.actuele_situatie.link.href,jF33EuwumlGuwav2FD4EVg,__
-2021-11-29T13:55:05.030Z,delete,veiligheidsregio_actueel.secties.actuele_situatie.link.text,jF33EuwumlGuwav2FD4EU0,__
 2021-12-02T16:33:39.728Z,add,vaccinaties.third_shot_kpi_section.title,Et6a2CHme6oVciYddlR13L,__
 2021-12-02T16:33:40.821Z,add,vaccinaties.third_shot_kpi_section.description,Et6a2CHme6oVciYddlR1Wy,__
 2021-12-02T16:33:41.887Z,add,vaccinaties.third_shot_kpi_section.source.href,jhyF3uxGuxcrROYEkS3cy4,__
