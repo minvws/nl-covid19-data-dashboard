@@ -22,7 +22,9 @@ export function VaccineBoosterKpiThirdShotSection({
       <KpiTile
         title={text.title}
         metadata={{
-          date: Number(data.date_start_unix),
+          date: isNaN(parseInt(data.date_start_unix as unknown as string))
+            ? 1638798433
+            : Number(data.date_start_unix),
           source: {
             ...text.source,
           },
