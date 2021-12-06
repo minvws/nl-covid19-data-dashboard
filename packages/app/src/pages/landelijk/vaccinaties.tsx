@@ -5,12 +5,12 @@ import {
   NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  NlThirdShotAdministeredValue
+  NlThirdShotAdministeredValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
   Vaccinaties as VaccinatieIcon,
-  Ziekenhuis
+  Ziekenhuis,
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
@@ -46,30 +46,30 @@ import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/get-elements-query';
 import {
   getArticleParts,
   getLinkParts,
   getPagePartsQuery,
-  getRichTextParts
+  getRichTextParts,
 } from '~/queries/get-page-parts-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import {
   ArticleParts,
   LinkParts,
   PagePartQueryResult,
-  RichTextParts
+  RichTextParts,
 } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
@@ -175,7 +175,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber } = useIntl();
+  const { siteText, formatNumber, dataset } = useIntl();
 
   const text = siteText.vaccinaties;
 
@@ -241,17 +241,46 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_end_unix
   );
 
-  const data_booster_shot_administered = siteText.data.vaccinations
-    .booster_shot_administered as unknown as NlBoosterShotAdministeredValue;
+  const data_booster_shot_administered = (dataset === 'keys'
+    ? {
+        administered_last_7_days: 1638799116,
+        administered_total: 1638799116,
+        date_start_unix: 1638799116,
+        date_end_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .booster_shot_administered) as unknown as NlBoosterShotAdministeredValue;
 
-  const data_booster_shot_delivered = siteText.data.vaccinations
-    .booster_shot_delivered as unknown as NlBoosterShotDeliveredValue;
+  const data_booster_shot_delivered = (dataset === 'keys'
+    ? {
+        delivered_total: 1638799116,
+        date_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .booster_shot_delivered) as unknown as NlBoosterShotDeliveredValue;
 
-  const data_booster_shot_planned = siteText.data.vaccinations
-    .booster_shot_planned as unknown as NlBoosterShotPlannedValue;
+  const data_booster_shot_planned = (dataset === 'keys'
+    ? {
+        planned_7_days: 1638799116,
+        date_start_unix: 1638799116,
+        date_end_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .booster_shot_planned) as unknown as NlBoosterShotPlannedValue;
 
-  const data_third_shot_administered = siteText.data.vaccinations
-    .third_shot_administered as unknown as NlThirdShotAdministeredValue;
+  const data_third_shot_administered = (dataset === 'keys'
+    ? {
+        administered_last_7_days: 1638799116,
+        administered_total: 1638799116,
+        date_start_unix: 1638799116,
+        date_end_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .third_shot_administered) as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
@@ -569,9 +598,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   description={text.third_shot_information_block.description}
                   metadata={{
                     datumsText: text.third_shot_information_block.datums,
-                    dateOrRange: Number(data_third_shot_administered.date_end_unix),
-                    dateOfInsertionUnix:
-                      Number(data_third_shot_administered.date_end_unix),
+                    dateOrRange: Number(
+                      data_third_shot_administered.date_end_unix
+                    ),
+                    dateOfInsertionUnix: Number(
+                      data_third_shot_administered.date_end_unix
+                    ),
                     dataSources: [],
                   }}
                   referenceLink={
