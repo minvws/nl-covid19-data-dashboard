@@ -9,7 +9,6 @@ export interface TextProps {
   textTransform?: CSSProperties['textTransform'];
   textAlign?: CSSProperties['textAlign'];
   hyphens?: CSSProperties['hyphens'];
-  lineHeight?: CSSProperties['lineHeight'];
   color?: Color | string;
 }
 
@@ -44,7 +43,6 @@ function textStyle(x: TextProps & { as?: string }) {
     ...(x.textTransform ? { textTransform: x.textTransform } : undefined),
     ...(x.textAlign ? { textAlign: x.textAlign } : undefined),
     ...(x.hyphens ? { hyphens: x.hyphens } : undefined),
-    ...(x.lineHeight ? { lineHeight: x.lineHeight } : undefined),
   });
 }
 
