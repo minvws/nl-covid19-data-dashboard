@@ -167,7 +167,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlBoosterShotAdministeredSchemaDisable',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_administered',
   },
@@ -185,7 +185,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlThirdShotAdministeredDisable',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'third_shot_administered',
   },
