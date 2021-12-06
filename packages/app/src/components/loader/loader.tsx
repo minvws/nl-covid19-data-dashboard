@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { colors } from '@corona-dashboard/common';
 import { Box, MotionBox } from '~/components/base';
 import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 
 type MotionBoxProps = { 
   height: string,
@@ -37,7 +38,11 @@ type InView = {
 }
 
 export function Loader() {
+  const { siteText } = useIntl();
+
   const duration = 1.5;
+
+  const delayTiming = [0, 0.3, 0.5, 0.2, 0.4];
 
   const attributes:MotionBoxProps = {
     height: '3rem',
@@ -50,10 +55,10 @@ export function Loader() {
   const transitionProps:TransitionProps = {
     duration: duration,
     repeat: Infinity,
-    ease: "easeInOut"
+    ease: "easeInOut",
   }
 
-  const loadingText = "Loading";
+  const loadingText = siteText.common.loading_text;
 
   const [inViewHeight, setinViewHeight] = useState('0');
 
@@ -94,11 +99,7 @@ export function Loader() {
       <Box {...wrapperProps} {...inView} position="absolute">
         <Box spacing={3} m={3} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
           <Box spacingHorizontal={1} display={'flex'} alignItems="end">
-            <MotionBox {...attributes} transition={{...transitionProps}} />
-            <MotionBox {...attributes} transition={{...transitionProps, delay: .3 }} />
-            <MotionBox {...attributes} transition={{...transitionProps, delay: .5 }} />
-            <MotionBox {...attributes} transition={{...transitionProps, delay: .2 }} />
-            <MotionBox {...attributes} transition={{...transitionProps, delay: .4 }} />
+            {delayTiming.map((delayPercentage) => <MotionBox {...attributes} transition={{...transitionProps, delay: delayPercentage}} />)}
           </Box>
           <Text aria-label={loadingText} lineHeight="1.0">{loadingText}</Text>
         </Box>

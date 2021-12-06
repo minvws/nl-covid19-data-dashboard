@@ -12,29 +12,27 @@ export function LoadingRouter(props: LoadingRouterProps) {
   const { children, layout } = props;
   const router = useRouter()
 
-  const [loaded, setLoaded] = useState(false);
-  const [noWait, setNoWait] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasCompleted, setHasCompleted] = useState(false);
 
   useEffect(() => {
     router.events.on('routeChangeStart', (url) => {
       if(url.startsWith("/" + layout)) {
-        if (noWait) {
-          setTimeout(() => {setLoaded(true)}, 700);
-        }
-      } else {
-        setLoaded(false)
+        setTimeout(() => {
+          setIsLoading(hasCompleted)
+        }, 700);
       }
     });
     router.events.on('routeChangeComplete', () => {
-      setLoaded(false);
-      setNoWait(true);
+      setIsLoading(false);
+      setHasCompleted(true);
     });
   });
 
   return (
     <Box position="relative">
       {children}
-      { loaded && <Loader/> }
+      { isLoading && <Loader/> }
     </Box>
   );
 }
