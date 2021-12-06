@@ -53,7 +53,7 @@ export function VaccineBoosterKpiAdministeredDeliveredSection({
       <KpiTile
         title={text.delivered.title}
         metadata={{
-          date: dateDelivered.date_unix,
+          date: Number(dateDelivered.date_unix),
           source: {
             ...text.delivered.source,
           },
