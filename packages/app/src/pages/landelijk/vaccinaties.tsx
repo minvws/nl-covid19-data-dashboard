@@ -548,13 +548,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             description={text.section_archived.description}
           />
 
-          <InView>
+          <InView rootMargin="500px">
             <VaccineDeliveryBarChart
               data={data.vaccine_delivery_per_supplier}
             />
           </InView>
 
-          <InView>
+          <InView rootMargin="500px">
             <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
           </InView>
 
@@ -569,7 +569,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ],
             }}
           >
-            <InView>
+            <InView rootMargin="500px">
               <TimeSeriesChart
                 accessibility={{
                   key: 'vaccines_support_over_time_chart',

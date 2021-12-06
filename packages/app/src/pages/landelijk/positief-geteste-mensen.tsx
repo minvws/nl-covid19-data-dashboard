@@ -526,7 +526,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: ggdText.bronnen.rivm,
             }}
           >
-            <InView>
+            <InView rootMargin="500px">
               <TimeSeriesChart
                 accessibility={{
                   key: 'confirmed_cases_infected_percentage_over_time_chart',
