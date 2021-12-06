@@ -13,12 +13,6 @@ interface MotionBoxProps{
   animate: object,
 };
 
-interface TransitionProps { 
-  duration: number,
-  repeat: number,
-  ease: string,
-};
-
 interface WrapperProps {
   top: string,
   right: string,
@@ -53,7 +47,7 @@ export function Loader() {
     animate: { scaleY: [1, .2, .7, .4, 1] },
   }
 
-  const transitionProps:TransitionProps = {
+  const transitionProps = {
     duration: duration,
     repeat: Infinity,
     ease: "easeInOut",
