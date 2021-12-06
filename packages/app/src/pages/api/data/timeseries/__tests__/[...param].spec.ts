@@ -12,6 +12,7 @@ Handler.before.each((context) => {
     return context.fileExists;
   });
   sinon.stub(fs, 'readFileSync').callsFake((_path, _options): string => {
+    console.log('_path', _path);
     return JSON.stringify(context.fileContent);
   });
 });
@@ -56,6 +57,17 @@ Handler('should return 200 and the correct file contents', (context) => {
   handler(req, res as unknown as NextApiResponse);
   assert.is(res.lastStatusCode, 200);
   assert.equal(res.lastJson, context.fileContent);
+});
+
+Handler('should return 500 if handler logic throws', (context) => {
+  context.fileExists = true;
+  context.fileContent = undefined;
+  const req = {
+    query: { param: ['nl', 'testMetric', 'testMetricProperty'] },
+  } as unknown as NextApiRequest;
+  const res = new MockResponse();
+  handler(req, res as unknown as NextApiResponse);
+  assert.is(res.lastStatusCode, 500);
 });
 
 Handler.run();

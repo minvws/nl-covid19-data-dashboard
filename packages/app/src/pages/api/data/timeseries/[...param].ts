@@ -14,6 +14,9 @@ import { stripTrailingNullValues } from '~/utils/api/strip-trailing-null-values'
 const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
 
+/**
+ * This API route
+ */
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!Array.isArray(req.query.param)) {
     res.status(400).end();
