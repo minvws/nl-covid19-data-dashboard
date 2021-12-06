@@ -141,7 +141,7 @@ export function GmLayout(props: GmLayoutProps) {
           </>
         }
       >
-        <LoadingRouter previousUrl={"gemeente/" + code}>
+        <LoadingRouter previousUrl={'gemeente/' + code}>
           <ErrorBoundary>{children}</ErrorBoundary>
         </LoadingRouter>
       </AppContent>

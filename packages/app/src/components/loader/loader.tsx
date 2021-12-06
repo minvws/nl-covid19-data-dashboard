@@ -5,31 +5,31 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VisuallyHidden } from '../visually-hidden';
 
-interface MotionBoxProps{ 
-  height: string,
-  width: string,
-  bg: string,
-  transformOrigin: string,
-  animate: object,
-};
+interface MotionBoxProps {
+  height: string;
+  width: string;
+  bg: string;
+  transformOrigin: string;
+  animate: object;
+}
 
 interface WrapperProps {
-  top: string,
-  right: string,
-  bottom: string,
-  left: string,
+  top: string;
+  right: string;
+  bottom: string;
+  left: string;
 }
 
 interface ToTopOverlay {
-  zIndex: number,
-  bg: string,
+  zIndex: number;
+  bg: string;
 }
 
 interface InView {
-  display: string,
-  alignItems: string,
-  justifyContent: string,
-  height: string,
+  display: string;
+  alignItems: string;
+  justifyContent: string;
+  height: string;
 }
 
 export function Loader() {
@@ -39,52 +39,56 @@ export function Loader() {
 
   const delayTiming = [0, 0.3, 0.5, 0.2, 0.4];
 
-  const attributes:MotionBoxProps = {
+  const attributes: MotionBoxProps = {
     height: '3rem',
     width: '0.75rem',
     bg: colors.data.scale.blue[0],
     transformOrigin: 'bottom center',
-    animate: { scaleY: [1, .2, .7, .4, 1] },
-  }
+    animate: { scaleY: [1, 0.2, 0.7, 0.4, 1] },
+  };
 
   const transitionProps = {
     duration: duration,
     repeat: Infinity,
-    ease: "easeInOut",
-  }
+    ease: 'easeInOut',
+  };
 
   const loadingText = siteText.common.loading_text;
 
   const [inViewHeight, setinViewHeight] = useState('0');
 
-  const wrapperProps:WrapperProps = {
+  const wrapperProps: WrapperProps = {
     top: '0',
     right: '0',
     bottom: '0',
     left: '0',
-  }
+  };
 
-  const toTopOverlay:ToTopOverlay = {
+  const toTopOverlay: ToTopOverlay = {
     zIndex: 1,
     bg: colors.white,
-  }
+  };
 
-  const inView:InView = {
+  const inView: InView = {
     display: 'flex',
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     height: inViewHeight,
-  }
+  };
 
   return (
-    <Box {...wrapperProps} {...toTopOverlay} position="absolute"
-      ref={el => {
+    <Box
+      {...wrapperProps}
+      {...toTopOverlay}
+      position="absolute"
+      ref={(el) => {
         if (!el) return;
 
         const windowHeight = window.innerHeight;
         const rect = el.getBoundingClientRect();
-        const elTop = (rect.top < 0 ? 0 : rect.top);
-        const elBottom = rect.bottom > windowHeight ? windowHeight : rect.bottom;
+        const elTop = rect.top < 0 ? 0 : rect.top;
+        const elBottom =
+          rect.bottom > windowHeight ? windowHeight : rect.bottom;
 
         const heightOfInView = elBottom - elTop + 'px';
 
@@ -92,9 +96,22 @@ export function Loader() {
       }}
     >
       <Box {...wrapperProps} {...inView} position="absolute">
-        <Box spacing={3} m={3} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+        <Box
+          spacing={3}
+          m={3}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Box spacingHorizontal={1} display={'flex'} alignItems="end">
-            {delayTiming.map((delayPercentage, i) => <MotionBox key={i} {...attributes} transition={{...transitionProps, delay: delayPercentage}} />)}
+            {delayTiming.map((delayPercentage, i) => (
+              <MotionBox
+                key={i}
+                {...attributes}
+                transition={{ ...transitionProps, delay: delayPercentage }}
+              />
+            ))}
           </Box>
           <VisuallyHidden>{loadingText}</VisuallyHidden>
           <Text lineHeight="1.0">{loadingText}</Text>

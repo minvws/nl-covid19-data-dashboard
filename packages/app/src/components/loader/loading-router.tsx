@@ -1,5 +1,5 @@
-import React, { useEffect, useState }from 'react';
-import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Loader } from '~/components/loader/loader';
 import { Box } from '~/components/base';
 
@@ -10,16 +10,16 @@ interface LoadingRouterProps {
 
 export function LoadingRouter(props: LoadingRouterProps) {
   const { children, previousUrl } = props;
-  const router = useRouter()
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [hasCompleted, setHasCompleted] = useState(false);
 
   useEffect(() => {
     router.events.on('routeChangeStart', (url) => {
-      if(url.startsWith("/" + previousUrl)) {
+      if (url.startsWith('/' + previousUrl)) {
         setTimeout(() => {
-          setIsLoading(hasCompleted)
+          setIsLoading(hasCompleted);
         }, 700);
       }
     });
@@ -32,7 +32,7 @@ export function LoadingRouter(props: LoadingRouterProps) {
   return (
     <Box position="relative">
       {children}
-      { isLoading && <Loader/> }
+      {isLoading && <Loader />}
     </Box>
   );
 }
