@@ -12,28 +12,27 @@ export function LoadingRouter(props: LoadingRouterProps) {
   const { children, previousUrl } = props;
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasCompleted, setHasCompleted] = useState(false);
+  const [routerLoadState, setRouterLoadState] = useState<'idle'|'loading'|'complete'>('idle');
 
   useEffect(() => {
     router.events.on('routeChangeStart', (url) => {
+      setRouterLoadState('idle');
       window.scrollTo(0, 0);
-      if (url.startsWith('/' + previousUrl)) {
+      if (url.startsWith('/' + previousUrl) && routerLoadState === 'idle') {
         setTimeout(() => {
-          setIsLoading(hasCompleted);
+          setRouterLoadState('loading');
         }, 700);
       }
     });
     router.events.on('routeChangeComplete', () => {
-      setIsLoading(false);
-      setHasCompleted(true);
+      setRouterLoadState('complete');
     });
-  }, [hasCompleted, previousUrl, router.events]);
+  }, [routerLoadState, previousUrl, router.events]);
 
   return (
     <Box position="relative">
       {children}
-      {isLoading && <Loader />}
+      {(routerLoadState === 'loading' || routerLoadState === 'idle') && <Loader showLoader={routerLoadState === 'loading'} />}
     </Box>
   );
 }

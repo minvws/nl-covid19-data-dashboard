@@ -32,7 +32,12 @@ interface InView {
   height: string;
 }
 
-export function Loader() {
+interface LoaderProps {
+  showLoader?: boolean;
+}
+
+export function Loader(props: LoaderProps) {
+  const { showLoader = true } = props;
   const { siteText } = useIntl();
 
   const duration = 1.5;
@@ -94,7 +99,7 @@ export function Loader() {
 
         setinViewHeight(heightOfInView);
       }}
-    >
+    > { showLoader &&
       <Box {...wrapperProps} {...inView} position="absolute">
         <Box
           spacing={3}
@@ -116,7 +121,7 @@ export function Loader() {
           <VisuallyHidden>{loadingText}</VisuallyHidden>
           <Text variant="loaderText" >{loadingText}</Text>
         </Box>
-      </Box>
+      </Box> }
     </Box>
   );
 }
