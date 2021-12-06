@@ -68,3 +68,5 @@ timestamp,action,key,document_id,move_to
 2021-12-03T11:57:13.884Z,add,data.vaccinations.booster_shot_administered.date_start_unix,jhyF3uxGuxcrROYEkXtfE2,__
 2021-12-03T11:57:14.909Z,add,data.vaccinations.booster_shot_administered.date_end_unix,Et6a2CHme6oVciYddoZyTv,__
 2021-12-03T11:57:15.913Z,add,data.vaccinations.booster_shot_administered.date_of_insertion_unix,5nFbN3wr6gLKhhZ5M70X2v,__
+2021-12-06T14:52:35.577Z,add,aria_labels.map_toggle_label,h5tk5FVVlV1jfPlUB88iCK,__
+2021-12-06T14:52:36.577Z,add,aria_labels.map_select_label,eExb1tVTD1y5h6ShWco80D,__
