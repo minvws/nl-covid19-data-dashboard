@@ -114,7 +114,7 @@ export function Loader() {
             ))}
           </Box>
           <VisuallyHidden>{loadingText}</VisuallyHidden>
-          <Text lineHeight="1.0">{loadingText}</Text>
+          <Text variant="loaderText" >{loadingText}</Text>
         </Box>
       </Box>
     </Box>
