@@ -17,6 +17,7 @@ export function LoadingRouter(props: LoadingRouterProps) {
 
   useEffect(() => {
     router.events.on('routeChangeStart', (url) => {
+      window.scrollTo(0, 0);
       if (url.startsWith('/' + previousUrl)) {
         setTimeout(() => {
           setIsLoading(hasCompleted);
