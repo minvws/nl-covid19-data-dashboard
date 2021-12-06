@@ -4,12 +4,12 @@ import { Loader } from '~/components/loader/loader';
 import { Box } from '~/components/base';
 
 interface LoadingRouterProps {
-  children?: React.ReactNode;
-  layout?: string;
+  children: React.ReactNode;
+  previousUrl?: string;
 }
 
 export function LoadingRouter(props: LoadingRouterProps) {
-  const { children, layout } = props;
+  const { children, previousUrl } = props;
   const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +17,7 @@ export function LoadingRouter(props: LoadingRouterProps) {
 
   useEffect(() => {
     router.events.on('routeChangeStart', (url) => {
-      if(url.startsWith("/" + layout)) {
+      if(url.startsWith("/" + previousUrl)) {
         setTimeout(() => {
           setIsLoading(hasCompleted)
         }, 700);

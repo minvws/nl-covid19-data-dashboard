@@ -3,8 +3,9 @@ import { colors } from '@corona-dashboard/common';
 import { Box, MotionBox } from '~/components/base';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { VisuallyHidden } from '../visually-hidden';
 
-type MotionBoxProps = { 
+interface MotionBoxProps{ 
   height: string,
   width: string,
   bg: string,
@@ -12,25 +13,25 @@ type MotionBoxProps = {
   animate: object,
 };
 
-type TransitionProps = { 
+interface TransitionProps { 
   duration: number,
   repeat: number,
   ease: string,
 };
 
-type WrapperProps = {
+interface WrapperProps {
   top: string,
   right: string,
   bottom: string,
   left: string,
 }
 
-type ToTopOverlay = {
+interface ToTopOverlay {
   zIndex: number,
   bg: string,
 }
 
-type InView = {
+interface InView {
   display: string,
   alignItems: string,
   justifyContent: string,
@@ -99,9 +100,10 @@ export function Loader() {
       <Box {...wrapperProps} {...inView} position="absolute">
         <Box spacing={3} m={3} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
           <Box spacingHorizontal={1} display={'flex'} alignItems="end">
-            {delayTiming.map((delayPercentage) => <MotionBox {...attributes} transition={{...transitionProps, delay: delayPercentage}} />)}
+            {delayTiming.map((delayPercentage, i) => <MotionBox key={i} {...attributes} transition={{...transitionProps, delay: delayPercentage}} />)}
           </Box>
-          <Text aria-label={loadingText} lineHeight="1.0">{loadingText}</Text>
+          <VisuallyHidden>{loadingText}</VisuallyHidden>
+          <Text lineHeight="1.0">{loadingText}</Text>
         </Box>
       </Box>
     </Box>

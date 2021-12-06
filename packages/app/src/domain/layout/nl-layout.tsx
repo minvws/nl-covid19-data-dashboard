@@ -144,7 +144,7 @@ export function NlLayout(props: NlLayoutProps) {
           </Box>
         }
       >
-        <LoadingRouter layout="landelijk">
+        <LoadingRouter previousUrl="landelijk">
           <ErrorBoundary>{children}</ErrorBoundary>
         </LoadingRouter>
       </AppContent>

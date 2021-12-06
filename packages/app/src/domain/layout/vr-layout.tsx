@@ -150,7 +150,7 @@ export function VrLayout(props: VrLayoutProps) {
           </>
         }
       >
-        <LoadingRouter layout={"veiligheidsregio/" + code}>
+        <LoadingRouter previousUrl={"veiligheidsregio/" + code}>
           <ErrorBoundary>{children}</ErrorBoundary>
         </LoadingRouter>
       </AppContent>
