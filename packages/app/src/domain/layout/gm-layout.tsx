@@ -141,9 +141,10 @@ export function GmLayout(props: GmLayoutProps) {
           </>
         }
       >
-        <LoadingWrapper previousUrl={'gemeente/' + code}>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </LoadingWrapper>
+        <ErrorBoundary>
+          {children}
+          <LoadingWrapper previousUrl={'gemeente/' + code}/>
+        </ErrorBoundary>
       </AppContent>
     </>
   );

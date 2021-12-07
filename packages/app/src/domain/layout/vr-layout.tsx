@@ -150,9 +150,11 @@ export function VrLayout(props: VrLayoutProps) {
           </>
         }
       >
-        <LoadingWrapper previousUrl={'veiligheidsregio/' + code}>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </LoadingWrapper>
+      >
+        <ErrorBoundary>
+          {children}
+          <LoadingWrapper previousUrl={'veiligheidsregio/' + code}/>
+        </ErrorBoundary>
       </AppContent>
     </>
   );
