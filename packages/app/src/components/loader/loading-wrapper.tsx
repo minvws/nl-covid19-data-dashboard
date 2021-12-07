@@ -18,8 +18,9 @@ export function LoadingWrapper(props: LoadingRouterProps) {
   const loaderTimeout = useRef(() => setTimeout(handleLoadingTimeout, 700));
 
   useEffect(() => {
-    const handleRouteChangeStart = (url: string) => {
+    const handleRouteChangeStart = async (url: string) => {
       await setRouterLoadState('idle');
+
       if (
         url.startsWith('/' + previousUrl) &&
         routerLoadState !== 'loading' &&
@@ -49,6 +50,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       router.events.off('routeChangeStart', handleRouteChangeStart);
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
       router.events.off('routeChangeError', handleRouteChangeError);
+      clearTimeout(loaderTimeout.current());
     };
   }, [currentRoute, previousUrl, router.events, routerLoadState]);
 
