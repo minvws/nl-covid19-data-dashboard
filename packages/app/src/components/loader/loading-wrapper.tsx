@@ -22,17 +22,25 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       if (shallow) return;
       setRouterLoadState('idle');
       window.scrollTo(0, 0);
-      url.startsWith('/' + previousUrl) && currentRoute !== url && loaderTimeout.current();
+      if (url.startsWith('/' + previousUrl) && currentRoute !== url) {
+        timeoutIdRef.current = setTimeout(handleLoadingTimeout, 700);  
+      }
     }
     
     const handleRouteChangeComplete = (url: string) => {
-      clearTimeout(loaderTimeout.current());
+      if (timeoutIdRef.current > 0) {
+        clearTimeout(timeoutIdRef.current);
+        timeoutIdRef.current = 0;
+      }
       setRouterLoadState('complete');
       setCurrentRoute(url);
     };
 
     const handleRouteChangeError = () => {
-      clearTimeout(loaderTimeout.current());
+      if (timeoutIdRef.current > 0) {
+        clearTimeout(timeoutIdRef.current);
+        timeoutIdRef.current = 0;
+      }```
       setRouterLoadState('complete');
     };
 
@@ -44,7 +52,10 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       router.events.off('routeChangeStart', handleRouteChangeStart);
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
       router.events.off('routeChangeError', handleRouteChangeError);
-      clearTimeout(loaderTimeout.current());
+      if (timeoutIdRef.current > 0) {
+        clearTimeout(timeoutIdRef.current);
+        timeoutIdRef.current = 0;
+      }```
     };
   }, [currentRoute, previousUrl, router.events, routerLoadState]);
 
