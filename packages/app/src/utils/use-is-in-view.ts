@@ -5,8 +5,11 @@ export function useIsInView(
   rootMargin?: string
 ) {
   const [isInView, setIsInView] = useState(false);
-  const connect = (observer: IntersectionObserver, htmlElement: HTMLElement) =>
-    observer.observe(htmlElement);
+  const connect = useCallback(
+    (observer: IntersectionObserver, htmlElement: HTMLElement) =>
+      observer.observe(htmlElement),
+    []
+  );
   const disconnect = useCallback((observer, el) => observer.unobserve(el), []);
 
   useEffect(() => {
