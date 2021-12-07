@@ -1,15 +1,17 @@
+import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 const DATE_UNIX_FOR_KEY_MODE = 1638705600;
 const METRIC_FOR_KEY_MODE = 9999;
 
 export function TemporaryBoosterKpiSection() {
-  const { siteText, dataset } = useIntl();
+  const { siteText, dataset, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties.four_kpi_section;
 
@@ -29,13 +31,20 @@ export function TemporaryBoosterKpiSection() {
             },
           }}
         >
-          <KpiValue
-            absolute={
-              dataset === 'keys'
-                ? METRIC_FOR_KEY_MODE
-                : Number(text.total_booster_and_third_shots.metric)
-            }
-          />
+          <Text
+            as="div"
+            css={css({
+              color: 'data.primary',
+              fontSize: 9,
+              fontWeight: 600,
+              fontVariantNumeric: 'tabular-nums',
+              lineHeight: 1,
+            })}
+          >
+            {dataset === 'keys'
+              ? METRIC_FOR_KEY_MODE
+              : formatNumber(Number(text.total_booster_and_third_shots.metric))}
+          </Text>
           <Markdown content={text.total_booster_and_third_shots.description} />
         </KpiTile>
 
