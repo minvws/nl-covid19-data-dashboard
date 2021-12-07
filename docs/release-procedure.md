@@ -68,7 +68,7 @@ easy to follow.
 4. Create a branch called `release/x.xx.x` from `master`(\*). If the release is
    about a small (bug) fix, use the patch version (last "x") to increment from
    the previous release.
-5. Cherry-pick the squashed commit from develop into the release branch.
+5. Cherry-pick the squashed commit from develop into the release branch. If there are merge conflicts in the `key-mutations.csv` file, make sure that no key deletions unrelated to the cherry-picked commit are in there. These deletions will probably break the build since the actual code related to these keys is _not_ deleted by the cherry pick.
 6. Do a full build with a Sanity export & data from production to make sure everything works.
 7. Publish the release branch to the `origin`, and create a pull-request on
    `master`.

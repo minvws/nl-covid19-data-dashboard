@@ -22,7 +22,7 @@ export function VaccineBoosterKpiThirdShotSection({
       <KpiTile
         title={text.title}
         metadata={{
-          date: data.date_start_unix,
+          date: Number(data.date_start_unix),
           source: {
             ...text.source,
           },
