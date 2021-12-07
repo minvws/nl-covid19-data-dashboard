@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -125,11 +124,3 @@ export function TemporaryBoosterKpiSection() {
     </Box>
   );
 }
-
-const StyledBigKpiValue = styled.div({
-  color: 'data.primary',
-  fontSize: 9,
-  fontWeight: 600,
-  fontVariantNumeric: 'tabular-nums',
-  lineHeight: 1,
-});
