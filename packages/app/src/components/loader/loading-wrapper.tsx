@@ -14,19 +14,18 @@ export function LoadingWrapper(props: LoadingRouterProps) {
     'idle' | 'loading' | 'complete'
   >('loading');
   const [currentRoute, setCurrentRoute] = useState<string>('');
-  const handleLoadingTimeout = () => setRouterLoadState('loading');
-  const loaderTimeout = useRef(() => setTimeout(handleLoadingTimeout, 1000));
+  const handleLoadingTimeout = () => setRouterLoadState('loading');;
+  const loaderTimeout = useRef(() => setTimeout(handleLoadingTimeout, 700));
 
   useEffect(() => {
-    const handleRouteChangeStart = async (url: string) => {
+    const handleRouteChangeStart = (url: string) => {
       await setRouterLoadState('idle');
-
       if (
         url.startsWith('/' + previousUrl) &&
-        // routerLoadState === 'idle' &&
+        routerLoadState !== 'loading' &&
+        routerLoadState !== 'complete' &&
         currentRoute !== url
       ) {
-        console.log('check');
         loaderTimeout.current();
       }
     };
@@ -53,11 +52,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
     };
   }, [currentRoute, previousUrl, router.events, routerLoadState]);
 
-  return (
-    <>
-      {(routerLoadState === 'loading' || routerLoadState === 'idle') && (
-        <Loader showLoader={routerLoadState === 'loading'} />
-      )}
-    </>
-  );
+  return routerLoadState === 'complete'
+    ? null
+    : <Loader showLoader={routerLoadState === 'loading'} />
 }

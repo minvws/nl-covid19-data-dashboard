@@ -7,14 +7,6 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VisuallyHidden } from '../visually-hidden';
 
-interface MotionBoxProps {
-  height: string;
-  width: string;
-  bg: string;
-  transformOrigin: string;
-  animate: object;
-}
-
 interface WrapperProps {
   top: string;
   right: string;
@@ -37,28 +29,13 @@ interface InView {
 interface LoaderProps {
   showLoader?: boolean;
 }
-const duration = 1.5;
+const duration = .7;
 
 export function Loader(props: LoaderProps) {
   const { showLoader = true } = props;
   const { siteText } = useIntl();
 
-
   const delayTiming = [0, 0.3, 0.5, 0.2, 0.4];
-
-  const attributes: MotionBoxProps = {
-    height: '3rem',
-    width: '0.75rem',
-    bg: colors.data.scale.blue[0],
-    transformOrigin: 'bottom center',
-    animate: { scaleY: [1, 0.2, 0.7, 0.4, 1] },
-  };
-
-  const transitionProps = {
-    duration: duration,
-    repeat: Infinity,
-    ease: 'easeInOut',
-  };
 
   const loadingText = siteText.common.loading_text;
 
@@ -112,11 +89,10 @@ export function Loader(props: LoaderProps) {
           justifyContent="center"
         >
           <Box spacingHorizontal={1} display={'flex'} alignItems="end">
-            {delayTiming.map((delayPercentage, i) => (
+            {delayTiming.map((delayTiming, i) => (
               <LoaderBar
                 key={i}
-                // {...attributes}
-                // transition={{ ...transitionProps, delay: delayPercentage }}
+                delay={`-${delayTiming}s`}
               />
             ))}
           </Box>
@@ -128,38 +104,22 @@ export function Loader(props: LoaderProps) {
   );
 }
 
-// animate: { scaleY: [1, 0.2, 0.7, 0.4, 1] },
-//     duration: duration,
-//     repeat: Infinity,
-//     ease: 'easeInOut',
-
-const LoaderBar = styled.div(
+const LoaderBar = styled.div<{ delay: string }>(({ delay }) =>
   css({
     height: '3rem',
     width: '0.75rem',
     bg: colors.data.scale.blue[0],
     transformOrigin: 'bottom center',
-    animation: `bounce ${duration}s ease-in-out infinite`,
-    animationDelay: `-${Math.random() * (duration / 3)}s`,
-    [`@keyframes bounce`]: {
-      from: {
+    animation: `bounce ${duration}s ease-in-out ${delay} infinite alternate`,
+    ['@keyframes bounce']: {
+      '0%': {
         transform: 'scaleY(1)',
       },
-      
-      '25%': {
-        transform: 'scaleY(.2)',
-      },
-      
       '50%': {
-        transform: 'scaleY(.7)',
+        transform: 'scaleY(.3)',
       },
-      
-      '75%': {
-        transform: 'scaleY(.4)',
-      },
-      
       '100%': {
-        transform: 'scaleY(1)',
+        transform: 'scaleY(.7)',
       },
     },
   })
