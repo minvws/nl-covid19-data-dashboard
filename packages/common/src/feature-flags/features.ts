@@ -118,11 +118,11 @@ export const features: Feature[] = [
   },
   {
     name: 'nlVaccinationsBoosterInformationBlock',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'nlVaccinationsBoosterThirdShotInformationBlock',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'nlVaccinationBoosterShotsPerAgeGroup',
@@ -132,29 +132,35 @@ export const features: Feature[] = [
   },
   {
     name: 'nlBoosterShotAdministeredKpiTile', // aan met data
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_administered',
   },
   {
     name: 'nlBoosterShotDeliveredKpiTile',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_delivered',
   },
   {
     name: 'nlBoosterShotPlannedKpiTile',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_planned',
   },
   {
     name: 'nlThirdShotAdministeredKpiTile', // aan met data
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'third_shot_administered',
   },
-
+  /**
+   * Temporary for the boosters
+   */
+  {
+    name: 'nlBoostersTemporary',
+    isEnabled: true,
+  },
   /**
    * These flags are only here that the schemas will not be required when validating.
    * But the features can be seen once toggled on with dummy data and have a seperate flag.
