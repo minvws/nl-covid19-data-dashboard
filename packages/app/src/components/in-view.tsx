@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useEffect, useState } from 'react';
+import { ReactNode, useRef, useEffect } from 'react';
 import { useIsInView } from '~/utils/use-is-in-view';
 
 interface InViewProps {
