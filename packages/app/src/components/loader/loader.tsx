@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { colors } from '@corona-dashboard/common';
-import { Box, MotionBox } from '~/components/base';
+import { Box } from '~/components/base';
+import styled from 'styled-components';
+import css from '@styled-system/css';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VisuallyHidden } from '../visually-hidden';
@@ -35,12 +37,12 @@ interface InView {
 interface LoaderProps {
   showLoader?: boolean;
 }
+const duration = 1.5;
 
 export function Loader(props: LoaderProps) {
   const { showLoader = true } = props;
   const { siteText } = useIntl();
 
-  const duration = 1.5;
 
   const delayTiming = [0, 0.3, 0.5, 0.2, 0.4];
 
@@ -111,10 +113,10 @@ export function Loader(props: LoaderProps) {
         >
           <Box spacingHorizontal={1} display={'flex'} alignItems="end">
             {delayTiming.map((delayPercentage, i) => (
-              <MotionBox
+              <LoaderBar
                 key={i}
-                {...attributes}
-                transition={{ ...transitionProps, delay: delayPercentage }}
+                // {...attributes}
+                // transition={{ ...transitionProps, delay: delayPercentage }}
               />
             ))}
           </Box>
@@ -125,3 +127,40 @@ export function Loader(props: LoaderProps) {
     </Box>
   );
 }
+
+// animate: { scaleY: [1, 0.2, 0.7, 0.4, 1] },
+//     duration: duration,
+//     repeat: Infinity,
+//     ease: 'easeInOut',
+
+const LoaderBar = styled.div(
+  css({
+    height: '3rem',
+    width: '0.75rem',
+    bg: colors.data.scale.blue[0],
+    transformOrigin: 'bottom center',
+    animation: `bounce ${duration}s ease-in-out infinite`,
+    animationDelay: `-${Math.random() * (duration / 3)}s`,
+    [`@keyframes bounce`]: {
+      from: {
+        transform: 'scaleY(1)',
+      },
+      
+      '25%': {
+        transform: 'scaleY(.2)',
+      },
+      
+      '50%': {
+        transform: 'scaleY(.7)',
+      },
+      
+      '75%': {
+        transform: 'scaleY(.4)',
+      },
+      
+      '100%': {
+        transform: 'scaleY(1)',
+      },
+    },
+  })
+);
