@@ -28,7 +28,10 @@ export function LoadingWrapper(props: LoadingRouterProps) {
     }
     
     const handleRouteChangeComplete = (url: string) => {
-      clearTimeout(loaderTimeout.current());
+      if (timeoutIdRef.current > 0) {
+        clearTimeout(timeoutIdRef.current);
+        timeoutIdRef.current = 0;
+      }
       setRouterLoadState('complete');
       setCurrentRoute(url);
     };
