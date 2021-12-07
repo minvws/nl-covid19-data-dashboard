@@ -18,19 +18,13 @@ export function LoadingWrapper(props: LoadingRouterProps) {
   const loaderTimeout = useRef(() => setTimeout(handleLoadingTimeout, 700));
 
   useEffect(() => {
-    const handleRouteChangeStart = async (url: string) => {
-      await setRouterLoadState('idle');
-
-      if (
-        url.startsWith('/' + previousUrl) &&
-        routerLoadState !== 'loading' &&
-        routerLoadState !== 'complete' &&
-        currentRoute !== url
-      ) {
-        loaderTimeout.current();
-      }
-    };
-
+    const handleRouteChangeStart = (url: string, { shallow }: { shallow: boolean }) => {
+      if (shallow) return;
+      setRouterLoadState('idle');
+      window.scrollTo(0, 0);
+      url.startsWith('/' + previousUrl) && currentRoute !== url && loaderTimeout.current();
+    }
+    
     const handleRouteChangeComplete = (url: string) => {
       clearTimeout(loaderTimeout.current());
       setRouterLoadState('complete');
