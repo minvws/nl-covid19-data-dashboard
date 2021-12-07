@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -9,7 +10,7 @@ const DATE_UNIX_FOR_KEY_MODE = 1638705600;
 const METRIC_FOR_KEY_MODE = 9999;
 
 export function TemporaryBoosterKpiSection() {
-  const { siteText, dataset } = useIntl();
+  const { siteText, dataset, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties.four_kpi_section;
 
@@ -29,6 +30,12 @@ export function TemporaryBoosterKpiSection() {
             },
           }}
         >
+          <StyledBigKpiValue>
+            {dataset === 'keys'
+              ? METRIC_FOR_KEY_MODE
+              : formatNumber(Number(text.total_booster_and_third_shots.metric))}
+          </StyledBigKpiValue>
+
           <KpiValue
             absolute={
               dataset === 'keys'
@@ -115,3 +122,11 @@ export function TemporaryBoosterKpiSection() {
     </Box>
   );
 }
+
+const StyledBigKpiValue = styled.div({
+  color: 'data.primary',
+  fontSize: 9,
+  fontWeight: 600,
+  fontVariantNumeric: 'tabular-nums',
+  lineHeight: 1,
+});
