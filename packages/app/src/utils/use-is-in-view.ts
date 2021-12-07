@@ -19,7 +19,7 @@ export function useIsInView(
 
     connect(observer, element.current);
     return () => element.current && disconnect(observer, element.current);
-  }, []);
+  }, [connect, disconnect, element, rootMargin]);
 
   return isInView;
 }
