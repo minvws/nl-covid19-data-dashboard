@@ -22,7 +22,9 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       if (shallow) return;
       setRouterLoadState('idle');
       window.scrollTo(0, 0);
-      url.startsWith('/' + previousUrl) && currentRoute !== url && loaderTimeout.current();
+      if (url.startsWith('/' + previousUrl) && currentRoute !== url) {
+        timeoutIdRef.current = setTimeout(handleLoadingTimeout, 700);  
+      }
     }
     
     const handleRouteChangeComplete = (url: string) => {
