@@ -1,30 +1,11 @@
 import React, { useState } from 'react';
 import { colors } from '@corona-dashboard/common';
-import { Box } from '~/components/base';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VisuallyHidden } from '../visually-hidden';
-
-interface WrapperProps {
-  top: string;
-  right: string;
-  bottom: string;
-  left: string;
-}
-
-interface ToTopOverlay {
-  zIndex: number;
-  bg: string;
-}
-
-interface InView {
-  display: string;
-  alignItems: string;
-  justifyContent: string;
-  height: string;
-}
+import { asResponsiveArray } from '~/style/utils';
 
 interface LoaderProps {
   showLoader?: boolean;
@@ -41,30 +22,8 @@ export function Loader(props: LoaderProps) {
 
   const [inViewHeight, setinViewHeight] = useState('0');
 
-  const wrapperProps: WrapperProps = {
-    top: '0',
-    right: '0',
-    bottom: '0',
-    left: '0',
-  };
-
-  const toTopOverlay: ToTopOverlay = {
-    zIndex: 1,
-    bg: colors.white,
-  };
-
-  const inView: InView = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: inViewHeight,
-  };
-
   return (
-    <Box
-      {...wrapperProps}
-      {...toTopOverlay}
-      position="absolute"
+    <LoaderOverlay
       ref={(el) => {
         if (!el) return;
 
@@ -79,28 +38,21 @@ export function Loader(props: LoaderProps) {
         setinViewHeight(heightOfInView);
       }}
     > { showLoader &&
-      <Box {...wrapperProps} {...inView} position="absolute">
-        <Box
-          spacing={3}
-          m={3}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box spacingHorizontal={1} display={'flex'} alignItems="end">
+      <LoaderFullSize inViewHeight={inViewHeight}>
+        <LoaderWrapper>
+          <BarWrapper>
             {delayTiming.map((delayTiming, i) => (
               <LoaderBar
                 key={i}
                 delay={`-${delayTiming}s`}
               />
             ))}
-          </Box>
+          </BarWrapper>
           <VisuallyHidden>{loadingText}</VisuallyHidden>
           <Text variant="loaderText" >{loadingText}</Text>
-        </Box>
-      </Box> }
-    </Box>
+        </LoaderWrapper>
+      </LoaderFullSize> }
+    </LoaderOverlay>
   );
 }
 
@@ -124,3 +76,53 @@ const LoaderBar = styled.div<{ delay: string }>(({ delay }) =>
     },
   })
 );
+
+const BarWrapper = styled.div(() =>
+  css({
+    display: 'flex',
+    alignItems: 'start',
+    '& > *:not(:last-child)': {
+      marginRight: asResponsiveArray(1),
+    }
+    
+  },
+));
+
+const LoaderWrapper = styled.div(() =>
+  css({
+    margin: asResponsiveArray(3),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& > *:not(:last-child)': {
+      marginBottom: asResponsiveArray(3),
+    },
+  },
+));
+
+const LoaderFullSize  = styled.div<{ inViewHeight: string }>(({ inViewHeight }) =>
+  css({
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: inViewHeight,
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left: '0',
+  },
+));
+
+const LoaderOverlay = styled.div(() =>
+  css({
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left: '0',
+    zIndex: 999,
+    bg: colors.white,
+  },
+));
