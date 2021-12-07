@@ -11,14 +11,16 @@ export function useIsInView(
 
   useEffect(() => {
     if (!element.current) return;
+    
+    const currentElement = element.current;
 
     const observer = new IntersectionObserver(
       ([entry]) => setIsInView(entry.isIntersecting),
       { rootMargin }
     );
 
-    connect(observer, element.current);
-    return () => element.current && disconnect(observer, element.current);
+    connect(observer, currentElement );
+    return () => currentElement  && disconnect(observer, currentElement );
   }, [connect, disconnect, element, rootMargin]);
 
   return isInView;
