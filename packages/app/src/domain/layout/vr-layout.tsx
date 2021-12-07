@@ -9,7 +9,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { VrComboBox } from './components/vr-combo-box';
 import { useSidebar } from './logic/use-sidebar';
-import { LoadingRouter } from '~/components/loader/loading-router';
+import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 type VrLayoutProps = {
   children?: React.ReactNode;
@@ -150,9 +150,9 @@ export function VrLayout(props: VrLayoutProps) {
           </>
         }
       >
-        <LoadingRouter previousUrl={'veiligheidsregio/' + code}>
+        <LoadingWrapper previousUrl={'veiligheidsregio/' + code}>
           <ErrorBoundary>{children}</ErrorBoundary>
-        </LoadingRouter>
+        </LoadingWrapper>
       </AppContent>
     </>
   );

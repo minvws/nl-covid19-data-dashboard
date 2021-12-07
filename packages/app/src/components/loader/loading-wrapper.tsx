@@ -8,7 +8,7 @@ interface LoadingRouterProps {
   previousUrl?: string;
 }
 
-export function LoadingRouter(props: LoadingRouterProps) {
+export function LoadingWrapper(props: LoadingRouterProps) {
   const { children, previousUrl } = props;
   const router = useRouter();
 
