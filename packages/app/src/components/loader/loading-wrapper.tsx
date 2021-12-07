@@ -49,7 +49,10 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       router.events.off('routeChangeStart', handleRouteChangeStart);
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
       router.events.off('routeChangeError', handleRouteChangeError);
-      clearTimeout(loaderTimeout.current());
+      if (timeoutIdRef.current > 0) {
+        clearTimeout(timeoutIdRef.current);
+        timeoutIdRef.current = 0;
+      }```
     };
   }, [currentRoute, previousUrl, router.events, routerLoadState]);
 
