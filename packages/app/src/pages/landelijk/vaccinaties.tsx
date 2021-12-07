@@ -24,16 +24,11 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import {
-  DUMMY_DATA_BOOSTER_PER_AGE_GROUP,
-  DUMMY_DATA_BOOSTER_SHOTS_KPI,
-} from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
+import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccineBoosterKpiSection } from '~/domain/vaccine/vaccine-booster-kpi-section';
-import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -165,7 +160,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber } = useIntl();
+  const { siteText, formatNumber, dataset } = useIntl();
 
   const text = siteText.vaccinaties;
 
@@ -190,15 +185,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationStatusIntensiveCareFeature = useFeature(
     'nlVaccinationIntensiveCareVaccinationStatus'
   );
-  const vaccinationsBoosterInformationBlockFeature = useFeature(
-    'nlVaccinationsBoosterInformationBlock'
-  );
-  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
-    'nlVaccinationBoosterShotsPerAgeGroup'
-  );
-  const vaccinationsBoosterShotsKpiFeature = useFeature(
-    'nlVaccinationsBoosterShotsKpi'
-  );
+
+  const boostersTemporaryFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -496,48 +484,42 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               <VaccineAdministrationsKpiSection data={data} />
             )}
 
-          {vaccinationsBoosterInformationBlockFeature.isEnabled && (
+          {boostersTemporaryFeature.isEnabled && (
             <>
               <Divider />
 
               <PageInformationBlock
                 title={text.booster_information_block.title}
-                icon={<VaccinatieIcon />}
                 description={text.booster_information_block.description}
                 metadata={{
                   datumsText: text.booster_information_block.datums,
-                  /**
-                   * @TODO Connect with real data
-                   */
-                  dateOrRange: 1637138475,
-                  dateOfInsertionUnix: 1637138475,
-                  dataSources: [],
+                  dateOrRange:
+                    dataset === 'keys'
+                      ? 1638705600
+                      : Number(
+                          text.four_kpi_section.information_block_date_unix
+                        ),
+                  dateOfInsertionUnix:
+                    dataset === 'keys'
+                      ? 1638705600
+                      : Number(
+                          text.four_kpi_section.information_block_date_unix
+                        ),
+                  dataSources: [
+                    {
+                      href: '',
+                      text: text.booster_information_block.sources.text,
+                      download: '',
+                    },
+                  ],
                 }}
-                pageLinks={content.boosterLinks}
                 referenceLink={text.booster_information_block.reference.href}
+                pageLinks={content.boosterLinks}
                 articles={content.boosterArticles}
               />
+
+              <TemporaryBoosterKpiSection />
             </>
-          )}
-
-          {vaccinationsBoosterShotsKpiFeature.isEnabled && (
-            <VaccineBoosterKpiSection data={DUMMY_DATA_BOOSTER_SHOTS_KPI} />
-          )}
-
-          {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
-            <VaccineBoosterPerAgeGroup
-              data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
-              sortingOrder={[
-                '81+',
-                '71-80',
-                '61-70',
-                '51-60',
-                '41-50',
-                '31-40',
-                '18-30',
-                '12-17',
-              ]}
-            />
           )}
 
           <Divider />
