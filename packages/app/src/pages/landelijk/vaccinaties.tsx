@@ -30,6 +30,7 @@ import {
 } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
+import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineBoosterKpiSection } from '~/domain/vaccine/vaccine-booster-kpi-section';
@@ -165,7 +166,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber } = useIntl();
+  const { siteText, formatNumber, dataset } = useIntl();
 
   const text = siteText.vaccinaties;
 
@@ -199,6 +200,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationsBoosterShotsKpiFeature = useFeature(
     'nlVaccinationsBoosterShotsKpi'
   );
+
+  const boostersTemporaryFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -495,6 +498,44 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
+
+          {boostersTemporaryFeature.isEnabled && (
+            <>
+              <Divider />
+
+              <PageInformationBlock
+                title={text.booster_information_block.title}
+                description={text.booster_information_block.description}
+                metadata={{
+                  datumsText: text.booster_information_block.datums,
+                  dateOrRange:
+                    dataset === 'keys'
+                      ? 1638705600
+                      : Number(
+                          text.four_kpi_section.information_block_date_unix
+                        ),
+                  dateOfInsertionUnix:
+                    dataset === 'keys'
+                      ? 1638705600
+                      : Number(
+                          text.four_kpi_section.information_block_date_unix
+                        ),
+                  dataSources: [
+                    {
+                      href: '',
+                      text: text.booster_information_block.sources.text,
+                      download: '',
+                    },
+                  ],
+                }}
+                referenceLink={text.booster_information_block.reference.href}
+                pageLinks={content.boosterLinks}
+                articles={content.boosterArticles}
+              />
+
+              <TemporaryBoosterKpiSection />
+            </>
+          )}
 
           {vaccinationsBoosterInformationBlockFeature.isEnabled && (
             <>
