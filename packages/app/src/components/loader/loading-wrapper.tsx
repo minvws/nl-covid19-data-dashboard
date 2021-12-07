@@ -15,7 +15,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
   >('loading');
   const [currentRoute, setCurrentRoute] = useState<string>('');
   const handleLoadingTimeout = () => setRouterLoadState('loading');;
-  const loaderTimeout = useRef(() => setTimeout(handleLoadingTimeout, 700));
+  const timeoutIdRef = useRef(0);
 
   useEffect(() => {
     const handleRouteChangeStart = (url: string, { shallow }: { shallow: boolean }) => {
@@ -23,7 +23,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       setRouterLoadState('idle');
       window.scrollTo(0, 0);
       if (url.startsWith('/' + previousUrl) && currentRoute !== url) {
-        timeoutIdRef.current = setTimeout(handleLoadingTimeout, 700);  
+        timeoutIdRef.current = window.setTimeout(handleLoadingTimeout, 700);  
       }
     }
     
@@ -40,7 +40,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       if (timeoutIdRef.current > 0) {
         clearTimeout(timeoutIdRef.current);
         timeoutIdRef.current = 0;
-      }```
+      }
       setRouterLoadState('complete');
     };
 
@@ -55,7 +55,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       if (timeoutIdRef.current > 0) {
         clearTimeout(timeoutIdRef.current);
         timeoutIdRef.current = 0;
-      }```
+      }
     };
   }, [currentRoute, previousUrl, router.events, routerLoadState]);
 
