@@ -20,6 +20,7 @@ import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
 import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PieChartProps } from '~/components/pie-chart';
@@ -644,9 +645,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             description={text.section_archived.description}
           />
 
-          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+          <InView rootMargin="500px">
+            <VaccineDeliveryBarChart
+              data={data.vaccine_delivery_per_supplier}
+            />
+          </InView>
 
-          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
+          <InView rootMargin="500px">
+            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
+          </InView>
 
           <ChartTile
             title={text.grafiek_draagvlak.titel}
@@ -659,72 +666,74 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ],
             }}
           >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'vaccines_support_over_time_chart',
-              }}
-              tooltipTitle={text.grafiek_draagvlak.titel}
-              values={data.vaccine_vaccinated_or_support.values}
-              numGridLines={20}
-              tickValues={[0, 25, 50, 75, 100]}
-              dataOptions={{
-                isPercentage: true,
-                forcedMaximumValue: 100,
-              }}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_70_plus',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '70+' }
-                  ),
-                  color: colors.data.multiseries.magenta,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_55_69',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '55 - 69' }
-                  ),
-                  color: colors.data.multiseries.orange,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_40_54',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '40 - 54' }
-                  ),
-                  color: colors.data.multiseries.turquoise,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_25_39',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '25 - 39' }
-                  ),
-                  color: colors.data.multiseries.yellow,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_16_24',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '16 - 24' }
-                  ),
-                  color: colors.data.multiseries.cyan,
-                },
-                {
-                  type: 'invisible',
-                  metricProperty: 'percentage_average',
-                  label: siteText.common.totaal,
+            <InView rootMargin="500px">
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'vaccines_support_over_time_chart',
+                }}
+                tooltipTitle={text.grafiek_draagvlak.titel}
+                values={data.vaccine_vaccinated_or_support.values}
+                numGridLines={20}
+                tickValues={[0, 25, 50, 75, 100]}
+                dataOptions={{
                   isPercentage: true,
-                },
-              ]}
-            />
+                  forcedMaximumValue: 100,
+                }}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_70_plus',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '70+' }
+                    ),
+                    color: colors.data.multiseries.magenta,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_55_69',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '55 - 69' }
+                    ),
+                    color: colors.data.multiseries.orange,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_40_54',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '40 - 54' }
+                    ),
+                    color: colors.data.multiseries.turquoise,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_25_39',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '25 - 39' }
+                    ),
+                    color: colors.data.multiseries.yellow,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_16_24',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '16 - 24' }
+                    ),
+                    color: colors.data.multiseries.cyan,
+                  },
+                  {
+                    type: 'invisible',
+                    metricProperty: 'percentage_average',
+                    label: siteText.common.totaal,
+                    isPercentage: true,
+                  },
+                ]}
+              />
+            </InView>
           </ChartTile>
         </TileList>
       </NlLayout>

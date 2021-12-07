@@ -44,6 +44,7 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { InView } from '~/components/in-view';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -525,37 +526,39 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: ggdText.bronnen.rivm,
             }}
           >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'confirmed_cases_infected_percentage_over_time_chart',
-              }}
-              values={data.tested_ggd_archived.values}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'infected_percentage_moving_average',
-                  color: colors.data.primary,
-                  label:
-                    siteText.positief_geteste_personen.tooltip_labels
-                      .ggd_infected_percentage_moving_average,
-                },
-                {
-                  type: 'bar',
-                  metricProperty: 'infected_percentage',
-                  color: colors.data.primary,
-                  label:
-                    siteText.positief_geteste_personen.tooltip_labels
-                      .ggd_infected_percentage,
-                },
-              ]}
-              dataOptions={{
-                isPercentage: true,
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'tested_ggd'
-                ),
-              }}
-            />
+            <InView rootMargin="500px">
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_percentage_over_time_chart',
+                }}
+                values={data.tested_ggd_archived.values}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'infected_percentage_moving_average',
+                    color: colors.data.primary,
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .ggd_infected_percentage_moving_average,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'infected_percentage',
+                    color: colors.data.primary,
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .ggd_infected_percentage,
+                  },
+                ]}
+                dataOptions={{
+                  isPercentage: true,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_ggd'
+                  ),
+                }}
+              />
+            </InView>
           </ChartTile>
         </TileList>
       </NlLayout>
