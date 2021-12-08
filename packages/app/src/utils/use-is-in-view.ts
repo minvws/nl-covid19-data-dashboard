@@ -1,5 +1,12 @@
-import { useState, useEffect, MutableRefObject, useCallback } from 'react';
+import { MutableRefObject, useCallback, useEffect, useState } from 'react';
 
+/**
+ * Returns & updates if the given element is visible in the viewport.
+ *
+ * @param element - A reference to the element to be watched
+ * @param rootMargin - Optional. An IntersectionObserver rootMargin string
+ * @returns A boolean telling if the element is in view or not
+ */
 export function useIsInView(
   element: MutableRefObject<HTMLElement | null>,
   rootMargin?: string
@@ -14,7 +21,7 @@ export function useIsInView(
 
   useEffect(() => {
     if (!element.current) return;
-    
+
     const currentElement = element.current;
 
     const observer = new IntersectionObserver(
@@ -22,8 +29,8 @@ export function useIsInView(
       { rootMargin }
     );
 
-    connect(observer, currentElement );
-    return () => currentElement  && disconnect(observer, currentElement );
+    connect(observer, currentElement);
+    return () => currentElement && disconnect(observer, currentElement);
   }, [connect, disconnect, element, rootMargin]);
 
   return isInView;
