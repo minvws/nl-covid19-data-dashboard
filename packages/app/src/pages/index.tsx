@@ -109,11 +109,6 @@ export const getStaticProps = createGetStaticProps(
       data.intensive_care_nice.values,
       '5weeks'
     );
-    
-    // @TODO: remove after Backend returns rounded values
-    if(data.tested_overall.last_value.infected_moving_average !== null) {
-      data.tested_overall.last_value.infected_moving_average = Math.round(data.tested_overall.last_value.infected_moving_average)
-    }
 
     return { selectedNlData: data };
   }
@@ -242,8 +237,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           siteText.nationaal_actueel.mini_trend_tiles
                             .positief_geteste_mensen.menu_item_label,
                         data: dataTestedOverall.values,
-                        dataProperty: 'infected_moving_average',
-                        value: dataTestedOverall.last_value.infected_moving_average,
+                        dataProperty: 'infected_moving_average_rounded',
+                        value:
+                          dataTestedOverall.last_value
+                            .infected_moving_average_rounded,
                         warning: getWarning(
                           content.elements.warning,
                           'tested_overall'
@@ -458,7 +455,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               type: 'metric',
                               text: text.data_driven_texts.tested_overall.value,
                               metricName: 'tested_overall',
-                              metricProperty: 'infected_moving_average',
+                              metricProperty: 'infected_moving_average_rounded',
                               additionalData: {
                                 dateStart: formatters.formatDateFromSeconds(
                                   data.tested_overall.last_value.date_unix -
