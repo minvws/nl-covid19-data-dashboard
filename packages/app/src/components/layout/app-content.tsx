@@ -124,6 +124,7 @@ const AppContentContainer = styled.div(
 const StyledAppContent = styled.main(
   css({
     zIndex: 3,
+    position: 'relative',
     width: '100%',
     minWidth: 0,
     flexGrow: 1,
