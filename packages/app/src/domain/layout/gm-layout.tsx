@@ -12,6 +12,7 @@ import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { GmComboBox } from './components/gm-combo-box';
 import { useSidebar } from './logic/use-sidebar';
+import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
@@ -57,8 +58,7 @@ export function GmLayout(props: GmLayoutProps) {
   const showMetricLinks =
     router.route !== '/gemeente' && router.route !== '/actueel/gemeente';
 
-  const isMainRoute =
-    router.route === '/gemeente' || router.route === `/gemeente/[code]`;
+  const isMainRoute = router.route === '/gemeente';
 
   const vr = getVrForMunicipalityCode(code);
 
@@ -90,7 +90,7 @@ export function GmLayout(props: GmLayoutProps) {
       </Head>
 
       <AppContent
-        hideMenuButton={isMainRoute}
+        hideBackButton={isMainRoute}
         searchComponent={
           <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
             <GmComboBox getLink={getLink} />
@@ -141,7 +141,10 @@ export function GmLayout(props: GmLayoutProps) {
           </>
         }
       >
-        <ErrorBoundary>{children}</ErrorBoundary>
+        <ErrorBoundary>
+          {children}
+          <LoadingWrapper previousUrl={'gemeente/' + code}/>
+        </ErrorBoundary>
       </AppContent>
     </>
   );

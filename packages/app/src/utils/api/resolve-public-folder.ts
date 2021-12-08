@@ -1,6 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
+/**
+ * Recursively walks up from the current working directory until one is
+ * found that contains a directory named 'public'.
+ * Throws an error when this wasn't found.
+ */
 export function resolvePublicFolder(cwd: string): string {
   const parentPath = path.resolve(cwd, '..');
 

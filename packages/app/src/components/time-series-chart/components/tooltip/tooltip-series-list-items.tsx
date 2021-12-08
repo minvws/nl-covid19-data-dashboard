@@ -50,6 +50,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 key={key}
                 icon={<SeriesIcon config={x} />}
                 label={x.shortLabel ?? x.label}
+                ariaLabel={x.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.nonInteractive}
               >
@@ -64,6 +65,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
               <TooltipListItem
                 key={key}
                 label={x.label}
+                ariaLabel={x.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.nonInteractive}
               >
@@ -87,6 +89,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                   />
                 }
                 label={x.shortLabel ?? x.label}
+                ariaLabel={x.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.nonInteractive}
               >
@@ -100,6 +103,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 key={key}
                 icon={<SeriesIcon config={x} />}
                 label={x.shortLabel ?? x.label}
+                ariaLabel={x.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.nonInteractive}
               >
@@ -115,6 +119,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
 interface TooltipListItemProps {
   children?: ReactNode;
   label?: string;
+  ariaLabel?: string;
   icon?: ReactNode;
   displayTooltipValueOnly?: boolean;
   isVisuallyHidden?: boolean;
@@ -124,12 +129,13 @@ function TooltipListItem({
   children,
   icon,
   label,
+  ariaLabel = label,
   displayTooltipValueOnly,
   isVisuallyHidden,
 }: TooltipListItemProps) {
   return isVisuallyHidden ? (
     <VisuallyHidden as="li">
-      {label}: {children}
+      {ariaLabel}: {children}
     </VisuallyHidden>
   ) : (
     <Box as="li" spacingHorizontal={2} display="flex" alignItems="stretch">
@@ -137,7 +143,7 @@ function TooltipListItem({
         <Box flexGrow={1}>
           <TooltipEntryContainer>
             <VisuallyHidden>
-              <InlineText>{label}:</InlineText>
+              <InlineText>{ariaLabel}:</InlineText>
             </VisuallyHidden>
             <TooltipEntryValue isCentered={displayTooltipValueOnly}>
               {children}
@@ -148,7 +154,10 @@ function TooltipListItem({
         <IconRow icon={icon}>
           <Box flexGrow={1}>
             <TooltipEntryContainer>
-              <InlineText>{label}:</InlineText>
+              <VisuallyHidden>
+                <InlineText>{ariaLabel}:</InlineText>
+              </VisuallyHidden>
+              <InlineText aria-hidden={true}>{label}:</InlineText>
               <TooltipEntryValue isCentered={displayTooltipValueOnly}>
                 {children}
               </TooltipEntryValue>

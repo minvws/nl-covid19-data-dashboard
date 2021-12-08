@@ -108,6 +108,9 @@ jobs:
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
 
+      - name: Build icons module
+        run: yarn workspace @corona-dashboard/icons build
+
       - name: Export texts
         run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
 

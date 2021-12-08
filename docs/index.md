@@ -18,10 +18,10 @@
 - [Timeline Events](timeline-events.md)
 - [Inline charts](inline-charts.md)
 
-## Miscelaneous
-
-- [Developer notes](developers.md)
-
 ## Schema
 
 - [Schema docs](schema.md)
+
+## Miscelaneous
+
+- [Developer notes](developers.md)

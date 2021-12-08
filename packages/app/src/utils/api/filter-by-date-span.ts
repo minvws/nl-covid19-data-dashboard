@@ -6,6 +6,12 @@ import {
 import { getUnixTime, parseISO } from 'date-fns';
 import { isDefined } from 'ts-is-present';
 
+/**
+ * Filters the given values array so that it only contains items that
+ * are within (or equal) the given start and end dates.
+ * The values array may be either a date series or a datespan series,
+ * the logic will switch based upon the given data.
+ */
 export function filterByDateSpan(
   values: TimestampedValue[],
   start?: string,

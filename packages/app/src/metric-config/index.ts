@@ -12,18 +12,19 @@ import { nl } from './nl';
 
 /**
  * This configuration declares properties about data to be used by various
- * display components to know how the data should be rendered.
+ * display components to know how the data should be rendered. This way
+ * components can stay clean since the logic for determining different render
+ * strategies per metric stays out of the component and is centralized here.
  *
- * By having a global declaration like this, we can keep an overview and prevent
- * a lot of the specialized components we now use to render everything.
+ * The metric configs follow the exact same structure as the data itself to make
+ * it easy to find the configs for a certain metric.
  */
-
 type MetricConfigs = {
   [key in DataScopeKey]?: ScopedMetricConfigs<ScopedData[key]>;
 };
 
 /**
- * The data is scoped at nl/vr/gm, because we can not assume that the same
+ * The data is scoped at in/nl/vr/gm, because we can not assume that the same
  * things like min/max/gradients apply everywhere for the same KPI.
  */
 export const metricConfigs: MetricConfigs = {

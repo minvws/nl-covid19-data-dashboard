@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 
+/**
+ * Loads a specified metric from a given json file
+ */
 export function loadMetricData(
   root: string,
   metric: string,
