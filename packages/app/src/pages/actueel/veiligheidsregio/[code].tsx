@@ -83,17 +83,6 @@ export const getStaticProps = createGetStaticProps(
       '5weeks'
     );
 
-    // @TODO: remove after Backend returns rounded values
-    if (
-      data.selectedVrData.tested_overall.last_value.infected_moving_average !==
-      null
-    ) {
-      data.selectedVrData.tested_overall.last_value.infected_moving_average =
-        Math.round(
-          data.selectedVrData.tested_overall.last_value.infected_moving_average
-        );
-    }
-
     return data;
   },
   createGetChoroplethData({
@@ -227,10 +216,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                           siteText.veiligheidsregio_actueel.mini_trend_tiles
                             .positief_geteste_mensen.menu_item_label,
                         data: data.tested_overall.values,
-                        dataProperty: 'infected_moving_average',
+                        dataProperty: 'infected_moving_average_rounded',
                         value:
                           data.tested_overall.last_value
-                            .infected_moving_average,
+                            .infected_moving_average_rounded,
                         warning: getWarning(
                           content.elements.warning,
                           'tested_overall'
