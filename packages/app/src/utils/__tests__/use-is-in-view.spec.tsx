@@ -82,6 +82,20 @@ UseIsInView('should observe the given element', (context) => {
 });
 
 UseIsInView('should set isInView to the correct value', (context) => {
+  render(<TestComponent context={context} />);
+
+  assert.equal(context.isInView, false);
+
+  context.callback([{ isIntersecting: true }]);
+
+  assert.equal(context.isInView, true);
+
+  context.callback([{ isIntersecting: false }]);
+
+  assert.equal(context.isInView, false);
+});
+
+UseIsInView('should unobserve the element on unmount', (context) => {
   const { unmount } = render(<TestComponent context={context} />);
 
   assert.ok(context.unobserve.notCalled);
