@@ -14,7 +14,7 @@ export function LoadingWrapper(props: LoadingRouterProps) {
     'idle' | 'loading' | 'complete'
   >('loading');
   const [currentRoute, setCurrentRoute] = useState<string>('');
-  const handleLoadingTimeout = () => setRouterLoadState('loading');;
+  const handleLoadingTimeout = () => setRouterLoadState('loading');
   const timeoutIdRef = useRef(0);
 
   useEffect(() => {
