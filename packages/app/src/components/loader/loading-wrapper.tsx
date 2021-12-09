@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Loader } from '~/components/loader/loader';
+import { useFeature } from '~/lib/features';
 
 interface LoadingRouterProps {
   previousUrl?: string;
 }
 
 export function LoadingWrapper(props: LoadingRouterProps) {
+  const loadingIndicatorFeature = useFeature(
+    'loadingIndicator'
+  );
+
   const { previousUrl } = props;
   const router = useRouter();
 
@@ -58,6 +63,10 @@ export function LoadingWrapper(props: LoadingRouterProps) {
       }
     };
   }, [currentRoute, previousUrl, router.events, routerLoadState]);
+
+  if (!loadingIndicatorFeature.isEnabled) {
+    return null;
+  }
 
   return routerLoadState === 'complete'
     ? null
