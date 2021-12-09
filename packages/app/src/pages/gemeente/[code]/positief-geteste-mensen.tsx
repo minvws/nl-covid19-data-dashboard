@@ -137,8 +137,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 data-cy="infected_moving_average"
-                absolute={lastValue.infected_moving_average}
-                numFractionDigits={0}
+                absolute={lastValue.infected_moving_average_rounded}
                 isAmount
               />
               <Text>
