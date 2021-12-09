@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
@@ -44,8 +43,8 @@ export function InteractiveLegend<T = string>({
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
-                <StyledLabel 
-                  htmlFor={`checkboxgroup-${item.label}`} 
+                <StyledLabel
+                  htmlFor={`checkboxgroup-${item.label}`}
                   isActive={hasSelection && isSelected}
                   borderColor={item.color}
                   data-text={item.label}
@@ -62,7 +61,6 @@ export function InteractiveLegend<T = string>({
                   onClick={() => onToggleItem(item.metricProperty)}
                   aria-label={item.legendAriaLabel}
                 />
-                  
               </Item>
             );
           })}
@@ -114,14 +112,14 @@ const StyledLabel = styled.label<{
   isActive: boolean;
   borderColor: string;
   text?: string;
-}>(({isActive, borderColor}) =>
+}>(({ isActive, borderColor }) =>
   css({
     height: '29px',
     cursor: 'pointer',
     position: 'relative',
     display: 'inline-flex',
-    pr: asResponsiveArray({ _: 13, md: 13 }),
-    pl: asResponsiveArray({ _: 28, md: 33 }),
+    pr: 13,
+    pl: 33,
     py: 1,
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${
@@ -130,7 +128,7 @@ const StyledLabel = styled.label<{
     fontWeight: 'normal',
     fontFamily: 'inherit',
     fontSize: 1,
-    color: isActive ? 'transparent': 'body',
+    color: isActive ? 'transparent' : 'body',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -145,7 +143,7 @@ const StyledLabel = styled.label<{
       borderWidth: '1px',
     },
     '&:focus:focus-visible': {
-      outline: '2px dotted currentColor'
+      outline: '2px dotted currentColor',
     },
     '&:before': {
       bg: isActive ? borderColor : 'white',
@@ -159,18 +157,19 @@ const StyledLabel = styled.label<{
       borderRadius: '5px',
     },
     '&:after': {
-      content: isActive ? 'attr(data-text)': '',
+      content: isActive ? 'attr(data-text)' : '',
       position: 'absolute',
       height: 0,
       userSelect: 'none',
       pointerEvents: 'none',
       fontWeight: 'bold',
-      color: 'body'
-    }
+      color: 'body',
+    },
   })
-  )
-  
-  const StyledInput = styled.input(css({
+);
+
+const StyledInput = styled.input(
+  css({
     appearance: 'none',
     '&:focus:focus-visible': {
       position: 'absolute',
@@ -178,8 +177,8 @@ const StyledLabel = styled.label<{
       left: 0,
       bottom: 0,
       right: 0,
-      width: '100%'
-    }
+      width: '100%',
+    },
   })
 );
 
@@ -208,7 +207,7 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     borderRadius: '2px',
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: 2, md: 10 }),
+    left: 13,
     backgroundColor: color,
   })
 );
@@ -217,7 +216,7 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: 2, md: 10 }),
+    left: 13,
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
@@ -231,7 +230,7 @@ const Square = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: 2, md: 10 }),
+    left: 13,
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
