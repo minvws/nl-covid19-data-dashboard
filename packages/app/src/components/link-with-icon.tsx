@@ -20,6 +20,7 @@ interface IconProps {
   isSingleWord?: boolean;
   width: number;
   height: number;
+  mr?: number | string;
 }
 
 export function LinkWithIcon({
@@ -52,7 +53,7 @@ export function LinkWithIcon({
           )}
           {iconPlacement === 'left' && (
             <>
-              <IconSmall icon={icon} width={11} height={10} />
+              <IconSmall icon={icon} width={11} height={10} mr={1} />
               {children}
             </>
           )}
@@ -101,8 +102,12 @@ export function HeadingLinkWithIcon({
   );
 }
 
-function IconSmall({ icon, width, height }: IconProps) {
-  return <span css={css({ svg: { height, width, mx: '3px' } })}>{icon}</span>;
+function IconSmall({ icon, width, height, mr }: IconProps) {
+  return (
+    <span css={css({ marginRight: mr, svg: { height, width, mx: '3px' } })}>
+      {icon}
+    </span>
+  );
 }
 
 function IconLarge({ icon, isSingleWord, width, height }: IconProps) {

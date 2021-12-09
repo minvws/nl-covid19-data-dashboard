@@ -65,9 +65,14 @@ const defaultOptions: Options = {
   preventDefault: true,
 };
 
+/**
+ * Returns an object that allows to register and unregister handlers
+ * for separate keys/key combinations and a destroy method for
+ * cleaning up the document listener.
+ */
 export function createContext(options: Options = {}) {
   const listeners: Listener[] = [];
-  const handler = createKeyListener(
+  const keydownHandler = createKeyListener(
     listeners,
     defaults({}, options, defaultOptions)
   );
@@ -76,12 +81,12 @@ export function createContext(options: Options = {}) {
    * must be keydown event, a keyup event won't work with keycombinations like
    * command+e
    */
-  document.addEventListener('keydown', handler);
+  document.addEventListener('keydown', keydownHandler);
 
   return {
     register: createListenersFn(listeners, registerListener),
     unregister: createListenersFn(listeners, unregisterListener),
-    destroy: () => document.removeEventListener('keydown', handler),
+    destroy: () => document.removeEventListener('keydown', keydownHandler),
   };
 }
 

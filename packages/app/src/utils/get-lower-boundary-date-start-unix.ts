@@ -1,7 +1,7 @@
 import { isDateValue, TimestampedValue } from '@corona-dashboard/common';
 
 /**
- * Return the start date for a timespan calculated x items from the start of a
+ * Return the start date for a time span calculated x items from the start of a
  * range of values.
  */
 export function getLowerBoundaryDateStartUnix(

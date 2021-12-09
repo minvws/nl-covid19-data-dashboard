@@ -9,6 +9,7 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -143,8 +144,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 data-cy="infected_moving_average"
-                absolute={dataOverallLastValue.infected_moving_average}
-                numFractionDigits={0}
+                absolute={dataOverallLastValue.infected_moving_average_rounded}
                 isAmount
               />
 
@@ -381,8 +381,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 data-cy="tested_total_moving_average"
-                absolute={dataGgdLastValue.tested_total_moving_average}
-                numFractionDigits={0}
+                absolute={dataGgdLastValue.tested_total_moving_average_rounded}
                 isAmount
               />
 
@@ -525,37 +524,39 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: ggdText.bronnen.rivm,
             }}
           >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'confirmed_cases_infected_percentage_over_time_chart',
-              }}
-              values={data.tested_ggd_archived.values}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'infected_percentage_moving_average',
-                  color: colors.data.primary,
-                  label:
-                    siteText.positief_geteste_personen.tooltip_labels
-                      .ggd_infected_percentage_moving_average,
-                },
-                {
-                  type: 'bar',
-                  metricProperty: 'infected_percentage',
-                  color: colors.data.primary,
-                  label:
-                    siteText.positief_geteste_personen.tooltip_labels
-                      .ggd_infected_percentage,
-                },
-              ]}
-              dataOptions={{
-                isPercentage: true,
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'tested_ggd'
-                ),
-              }}
-            />
+            <InView rootMargin="500px">
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_percentage_over_time_chart',
+                }}
+                values={data.tested_ggd_archived.values}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'infected_percentage_moving_average',
+                    color: colors.data.primary,
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .ggd_infected_percentage_moving_average,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'infected_percentage',
+                    color: colors.data.primary,
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .ggd_infected_percentage,
+                  },
+                ]}
+                dataOptions={{
+                  isPercentage: true,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_ggd'
+                  ),
+                }}
+              />
+            </InView>
           </ChartTile>
         </TileList>
       </NlLayout>

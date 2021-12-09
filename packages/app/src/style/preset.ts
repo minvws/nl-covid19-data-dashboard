@@ -88,6 +88,9 @@ export const preset = {
       textOverflow: 'ellipsis',
       mt: 0,
     },
+    loaderText: {
+      lineHeight: 1,
+    },
   },
 } as const;
 

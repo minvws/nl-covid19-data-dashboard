@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
@@ -44,20 +43,24 @@ export function InteractiveLegend<T = string>({
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
-                <ItemButton
-                  as="button"
-                  variant="button3"
-                  onClick={() => onToggleItem(item.metricProperty)}
+                <StyledLabel
+                  htmlFor={`checkboxgroup-${item.label}`}
                   isActive={hasSelection && isSelected}
                   borderColor={item.color}
                   data-text={item.label}
-                  aria-label={item.legendAriaLabel}
                 >
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
                   {item.shape === 'square' && <Square color={item.color} />}
-                </ItemButton>
+                </StyledLabel>
+                <StyledInput
+                  type="checkbox"
+                  id={`checkboxgroup-${item.label}`}
+                  value={item.label}
+                  onClick={() => onToggleItem(item.metricProperty)}
+                  aria-label={item.legendAriaLabel}
+                />
               </Item>
             );
           })}
@@ -93,7 +96,7 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     mb: 2,
-    mr: asResponsiveArray({ _: 2, md: 3 }),
+    mr: 2,
     position: 'relative',
     display: 'inline-block',
   })
@@ -104,46 +107,43 @@ const Item = styled.li(
  * :before to render the colored line on hover/focus
  * :after to widen the button to avoid font-weight bold jumps
  */
-const ItemButton = styled(Text)<{
+
+const StyledLabel = styled.label<{
   isActive: boolean;
   borderColor: string;
   text?: string;
 }>(({ isActive, borderColor }) =>
   css({
-    appearance: 'none',
+    height: '29px',
     cursor: 'pointer',
-    pr: asResponsiveArray({ _: '5px', md: 10 }),
-    pl: asResponsiveArray({ _: 25, md: 30 }),
-    py: '6px',
+    position: 'relative',
+    display: 'inline-flex',
+    pr: 13,
+    pl: 33,
+    py: 1,
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${
       isActive ? '3px ' + borderColor : '1px #c4c4c4'
     }`,
-    fontWeight: isActive ? 'bold' : 'normal',
+    fontWeight: 'normal',
     fontFamily: 'inherit',
-    position: 'relative',
-    outline: 'none',
-    display: 'inline-flex',
+    fontSize: 1,
+    color: isActive ? 'transparent' : 'body',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
     '&:hover,&:focus': {
       bg: 'tileGray',
+      borderColor: borderColor,
+      borderWidth: isActive ? '3px' : '1px',
       boxShadow: `inset 0px 0px 0px ${isActive ? '3px' : '2px'} ${borderColor}`,
     },
     '&:focus': {
       borderColor: 'silver',
       borderWidth: '1px',
     },
-    '&:after': {
-      content: 'attr(data-text)',
-      height: 0,
-      visibility: 'hidden',
-      overflow: 'hidden',
-      userSelect: 'none',
-      pointerEvents: 'none',
-      fontWeight: 'bold',
-      pr: '1px',
+    '&:focus:focus-visible': {
+      outline: '2px dotted currentColor',
     },
     '&:before': {
       bg: isActive ? borderColor : 'white',
@@ -155,6 +155,29 @@ const ItemButton = styled(Text)<{
       top: 0,
       bottom: 0,
       borderRadius: '5px',
+    },
+    '&:after': {
+      content: isActive ? 'attr(data-text)' : '',
+      position: 'absolute',
+      height: 0,
+      userSelect: 'none',
+      pointerEvents: 'none',
+      fontWeight: 'bold',
+      color: 'body',
+    },
+  })
+);
+
+const StyledInput = styled.input(
+  css({
+    appearance: 'none',
+    '&:focus:focus-visible': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      width: '100%',
     },
   })
 );
@@ -184,7 +207,7 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     borderRadius: '2px',
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: '5px', md: 10 }),
+    left: 13,
     backgroundColor: color,
   })
 );
@@ -193,7 +216,7 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: '5px', md: 10 }),
+    left: 13,
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
@@ -207,7 +230,7 @@ const Square = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: '5px', md: 10 }),
+    left: 13,
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',

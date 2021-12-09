@@ -2,24 +2,26 @@
 
 ## Project
 
-- [Release Procedure](/docs/release-procedure.md)
+- [Release Procedure](release-procedure.md)
 
 ## Infrastructure
 
-- [Choropleth GEOJson](/docs/choropleth-geojson.md)
-- [Feature Flags](/docs/feature-flags.md)
+- [Choropleth GEOJson](choropleth-geojson.md)
+- [Feature Flags](feature-flags.md)
+- [Static Props](get-static-props.md)
+- [Styling](styled-system.md)
 
 ## Sanity related
 
-- [Lokalize Texts](/docs/lokalize-texts.md)
-- [Page Parts](/docs/page-parts.md)
-- [Timeline Events](/docs/timeline-events.md)
-- [Inline charts](/docs/inline-charts.md)
-
-## Miscelaneous
-
-- [Developer notes](/docs/developers.md)
+- [Lokalize Texts](lokalize-texts.md)
+- [Page Parts](page-parts.md)
+- [Timeline Events](timeline-events.md)
+- [Inline charts](inline-charts.md)
 
 ## Schema
 
-- [Schema docs](/packages/app/schema/README.md)
+- [Schema docs](schema.md)
+
+## Miscelaneous
+
+- [Developer notes](developers.md)

@@ -12,8 +12,9 @@
     "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true
+    "declarationMap": false,
+    "sourceMap": false,
+    "jsx": "react"
   },
   "include": ["src"],
   "exclude": ["**/__tests__/*"]

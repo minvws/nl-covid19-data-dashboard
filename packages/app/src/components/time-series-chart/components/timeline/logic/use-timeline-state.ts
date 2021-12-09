@@ -1,7 +1,7 @@
 import { ScaleLinear } from 'd3-scale';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
-import { wrapAroundLength } from '~/utils/number';
+import { wrapAroundLength } from '~/utils/wrap-around-length';
 import { TimelineEventConfig, TimelineState } from './common';
 import { getTimelineEventXOffset } from './get-timeline-event-x-offset';
 import { isVisibleEvent } from './is-visible-event';

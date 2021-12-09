@@ -7,6 +7,10 @@ type Size = {
   height?: number;
 };
 
+/**
+ * Monitors the HTML or SVG element that is assigned to the returned ref for size changes and returns the updated size.
+ * @returns The ref and current size
+ */
 export function useResizeObserver<T extends HTMLElement | SVGElement>() {
   const [size, setSize] = useState<Size>({});
 

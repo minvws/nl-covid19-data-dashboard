@@ -1,5 +1,16 @@
 # Developer Notes
 
+## Common and icon packages
+
+The monorepo contains two shared packages: common and icons.
+These packages are both built automatically whenever 'yarn dev' is ran in
+packages/app, packages/cli or packages/cms.
+There may be situations where this gets out of sync, for example when
+merging develop into a branch.
+Whenever strange compile or typecheck errors occur. The first thing to therefore
+try is to explicitly build the common and icon package. This usually solves
+the problem.
+
 ## Node-canvas vs Sharp running on Windows
 
 Currently there is a dependency on node-canvas in combination with the sharp image compression library

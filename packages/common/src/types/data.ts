@@ -95,6 +95,7 @@ export interface GmTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_moving_average: number | null;
+  infected_moving_average_rounded: number | null;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
@@ -263,8 +264,11 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
-  booster_shot: NlBoosterShot;
+  booster_shot_administered: NlBoosterShotAdministered;
+  booster_shot_delivered: NlBoosterShotDelivered;
+  booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
+  third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -358,17 +362,34 @@ export interface NamedDifferenceDecimal {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface NlBoosterShot {
-  values: NlBoosterShotValue[];
-  last_value: NlBoosterShotValue;
+export interface NlBoosterShotAdministered {
+  values: NlBoosterShotAdministeredValue[];
+  last_value: NlBoosterShotAdministeredValue;
 }
-export interface NlBoosterShotValue {
-  partially_or_fully_vaccinated_total_amount_of_people: number;
-  total_date_start_unix: number;
-  total_date_end_unix: number;
-  received_booster_last_seven_days: number;
-  last_seven_days_date_start_unix: number;
-  last_seven_days_date_end_unix: number;
+export interface NlBoosterShotAdministeredValue {
+  administered_last_7_days: number;
+  administered_total: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBoosterShotDelivered {
+  values: NlBoosterShotDeliveredValue[];
+  last_value: NlBoosterShotDeliveredValue;
+}
+export interface NlBoosterShotDeliveredValue {
+  delivered_total: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBoosterShotPlanned {
+  values: NlBoosterShotPlannedValue[];
+  last_value: NlBoosterShotPlannedValue;
+}
+export interface NlBoosterShotPlannedValue {
+  planned_7_days: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBoosterShotPerAgeGroup {
@@ -382,6 +403,17 @@ export interface NlBoosterShotPerAgeGroupValue {
   date_start_unix: number;
   date_end_unix: number;
   birthyear_range: string;
+}
+export interface NlThirdShotAdministered {
+  values: NlThirdShotAdministeredValue[];
+  last_value: NlThirdShotAdministeredValue;
+}
+export interface NlThirdShotAdministeredValue {
+  administered_last_7_days: number;
+  administered_total: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];
@@ -453,6 +485,7 @@ export interface NlTestedOverall {
 export interface NlTestedOverallValue {
   infected: number;
   infected_moving_average: number | null;
+  infected_moving_average_rounded: number | null;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_unix: number;
@@ -598,6 +631,7 @@ export interface NlTestedGgdValue {
   infected_percentage_moving_average: number | null;
   tested_total: number;
   tested_total_moving_average: number | null;
+  tested_total_moving_average_rounded: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1140,6 +1174,7 @@ export interface VrTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_moving_average: number | null;
+  infected_moving_average_rounded: number | null;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
@@ -1167,6 +1202,7 @@ export interface VrTestedGgdValue {
   infected_percentage_moving_average: number | null;
   tested_total: number;
   tested_total_moving_average: number | null;
+  tested_total_moving_average_rounded: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;

@@ -11,7 +11,7 @@ import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
-import { createDate } from '~/utils/create-date';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, getWeekInfo } from '../logic';
@@ -65,7 +65,7 @@ export function WeekNumbers({
 
   const formatWeekNumberAxis = useCallback(
     (dateUnix: number) => {
-      const date = createDate(dateUnix);
+      const date = createDateFromUnixTimestamp(dateUnix);
       const weekInfo = getWeekInfo(date);
       return replaceVariablesInText(siteText.common.week_number_label, {
         weekNumber: weekInfo.weekNumber,
@@ -118,7 +118,7 @@ export function WeekNumbers({
 
 function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
   const weekCount = Math.floor((endUnix - startUnix) / WEEK_IN_SECONDS);
-  const firstWeek = getWeekInfo(createDate(startUnix));
+  const firstWeek = getWeekInfo(createDateFromUnixTimestamp(startUnix));
   const firstWeekUnix = firstWeek.weekStartDate.getTime() / 1000;
 
   /**

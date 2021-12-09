@@ -23,8 +23,15 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  * - If a specific variable is NOT given, it will replace it with an empty string.
  * - If no translation is given, an empty string will be returned.
  *
+ * Formatting commands are supported in this way:
+ * "An example placeholder string with {{count, formatNumber}} {{type}} brackets".
+ * When { count: 10000, type: 'curly' } is passed in and a valid DataFormatters object
+ * is also provided, this will eventually be rendered like so:
+ * "An example placeholder string with 10.000 curly brackets".
+ *
  * @param translation - Translation string with curly brackets for variables.
  * @param variables - An object with keys representing any variable available for replacement.
+ * @param formatters - Optional list of formatters that can be referenced by commands
  */
 export function replaceVariablesInText(
   translation: string,

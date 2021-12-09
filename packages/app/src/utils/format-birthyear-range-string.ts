@@ -1,7 +1,7 @@
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 /**
- * Format the birthyear range these rules:
+ * Format the birth year range according to these rules:
  *
  * We could get 3 variants back from the data:
  * -2003, 2003-2006 and 2003-
@@ -10,9 +10,8 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
  *
  * If the group includes a hyphen (-) at the end it is considered 2003 or later
  *
- * Otherwise the year will just be the full range with both birthyears.
+ * Otherwise the year will just be the full range with both birth years.
  */
-
 export function formatBirthyearRangeString(
   birthyearRange: string,
   templates: {
@@ -21,6 +20,12 @@ export function formatBirthyearRangeString(
     range: string;
   }
 ) {
+  if (birthyearRange.indexOf('-') < 0) {
+    throw new Error(
+      'Invalid birthyearRange received. Valid values are: -<year>, <year>- or <year>-<year>'
+    );
+  }
+
   const splittedBirthyear = birthyearRange.split('-');
 
   switch (true) {

@@ -83,6 +83,11 @@ export function getLastGeneratedDate() {
   };
 }
 
+/**
+ * This method takes a query or a method that returns a query, executes this against Sanity
+ * and subsequently resolves all of the references found in the query result.
+ * Lastly it reduces the query result to the given locale, using the localize method.
+ */
 export function createGetContent<T>(
   queryOrQueryGetter:
     | string
@@ -149,7 +154,8 @@ async function replaceReferencesInContent(
 }
 
 /**
- * This method selects the specified metric properties from the national data
+ * This method selects the specified metric properties from the national data.
+ * (public/json/nl.json)
  *
  */
 export function selectNlData<

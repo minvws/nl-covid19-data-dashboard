@@ -10,6 +10,11 @@ function hasValuesProperty(
   return !Array.isArray(value) && isObject(value) && 'values' in value;
 }
 
+/**
+ * This validation ensure that moving average data arrays always have null values in the last 6 items.
+ * These values need to be null because it is not possible calculate a 7 day average over the last 6 days.
+ * It also checks for non-consecutive NULL values in the rest of the array, since those aren't allowed either.
+ */
 export function validateMovingAverages(input: JSONObject) {
   const result = Object.entries(input)
     // first filter out all the non-metric properties (we only want the ones with a values collection)

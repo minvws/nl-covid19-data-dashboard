@@ -4,7 +4,6 @@ import { gmData, vrData } from '@corona-dashboard/common';
  * This function returns the safety region information for the given
  * municipality.
  *
- * @param code
  */
 export function getVrForMunicipalityCode(
   code: string
