@@ -93,6 +93,7 @@ export const ListBoxOption = styled(Box)(
     },
     '&[aria-selected="true"]': {
       color: 'blue',
+      fontWeight: 'bold',
       '&:before': {
         transform: 'scaleX(1)',
       }

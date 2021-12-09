@@ -9,6 +9,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { VrComboBox } from './components/vr-combo-box';
 import { useSidebar } from './logic/use-sidebar';
+import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 type VrLayoutProps = {
   children?: React.ReactNode;
@@ -52,9 +53,7 @@ export function VrLayout(props: VrLayoutProps) {
 
   const code = router.query.code as string;
 
-  const isMainRoute =
-    router.route === '/veiligheidsregio' ||
-    router.route === `/veiligheidsregio/[code]`;
+  const isMainRoute = router.route === '/veiligheidsregio';
 
   const showMetricLinks =
     router.route !== '/veiligheidsregio' &&
@@ -99,7 +98,7 @@ export function VrLayout(props: VrLayoutProps) {
       </Head>
 
       <AppContent
-        hideMenuButton={isMainRoute}
+        hideBackButton={isMainRoute}
         searchComponent={
           <Box
             backgroundColor="white"
@@ -151,7 +150,10 @@ export function VrLayout(props: VrLayoutProps) {
           </>
         }
       >
-        <ErrorBoundary>{children}</ErrorBoundary>
+        <ErrorBoundary>
+          {children}
+          <LoadingWrapper previousUrl={'veiligheidsregio/' + code}/>
+        </ErrorBoundary>
       </AppContent>
     </>
   );

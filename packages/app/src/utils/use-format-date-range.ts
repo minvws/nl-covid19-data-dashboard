@@ -1,5 +1,5 @@
 import { useIntl } from '~/intl';
-import { createDate } from '~/utils/create-date';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 /**
  * Util helper that helps render a date range either as:
@@ -15,12 +15,14 @@ import { createDate } from '~/utils/create-date';
 export function useFormatDateRange(dateStartUnix: number, dateEndUnix: number) {
   const { formatDate } = useIntl();
 
-  const dateFrom = createDate(dateStartUnix);
-  const dateTo = createDate(dateEndUnix);
+  const dateFrom = createDateFromUnixTimestamp(dateStartUnix);
+  const dateTo = createDateFromUnixTimestamp(dateEndUnix);
 
   const isSameMonth = dateFrom.getMonth() === dateTo.getMonth();
 
-  const dateFromText = isSameMonth ? dateFrom.getDate() : formatDate(dateFrom);
+  const dateFromText = isSameMonth
+    ? dateFrom.getDate().toString()
+    : formatDate(dateFrom);
   const dateToText = formatDate(dateTo);
 
   return [dateFromText, dateToText] as const;

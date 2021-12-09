@@ -22,7 +22,6 @@ import {
  * correctly re-rendered where necessary, which means rehydration issues won't
  * pop up anymore.
  */
-
 const CurrentDateContext = createContext<Date | undefined>(undefined);
 
 export function CurrentDateProvider({
@@ -47,6 +46,9 @@ export function CurrentDateProvider({
   );
 }
 
+/**
+ * Returns the current date value from the CurrentDateContext context.
+ */
 export function useCurrentDate() {
   const currentDate = useContext(CurrentDateContext);
   assert(currentDate, 'Missing CurrentDateProvider in component tree');

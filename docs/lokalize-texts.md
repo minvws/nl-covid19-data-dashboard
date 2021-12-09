@@ -23,14 +23,14 @@ In summary these are the most important things you should be aware of:
   dataset. The Typescript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
 - The JSON export contains document ids as part of the keys. You can make
-  changes locally to the `app/src/locale/nl_export.json` file. Add new keys,
+  changes locally to the **app/src/locale/nl_export.json** file. Add new keys,
   delete them or rename and move existing ones. After you make changes run the
   `lokalize:apply-json-edits` script. This will give you a list of changes and
   you can decide which ones to apply. Changes are written in a mutation log
   file, and at the end the JSON is re-exported to reflect all changes.
   It is recommended to run `lokalize:apply-json-edits` after the feature has
   been finished, right before merging it to develop since during development
-  changes to the `nl_export.json` file might fluctuate.
+  changes to the **nl_export.json** file might fluctuate.
 - Merge conflicts in the mutations file are common, but **always** choose to
   **accept both changes**, so that you never remove any mutations. You do not
   have to worry about the order of the timestamps, as these mutations are sorted
@@ -66,10 +66,10 @@ when resolving conflicts, so that none of the lines are ever deleted.
 ## Export
 
 The application reads its locale strings from
-`packages/app/public/nl_export.json` and `packages/app/public/en_export.json`.
+**packages/app/public/nl_export.json** and **packages/app/public/en_export.json**.
 These JSONs are exported from the Sanity lokalize documents, but they are not
-part of the repository. Therefore, you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
-Sanity dataset.
+part of the repository. Therefore, you will regularly need to run `yarn lokalize:export` in
+order to keep your local JSON file up-to-date with the Sanity dataset.
 
 The JSONs will include Sanity document ids in every leaf-key which are used to
 detect add-/delete-/move-actions of texts (`some_key__@__{document_id}`). These
@@ -82,12 +82,43 @@ ids would result in compile- and run-time errors, but there's a workaround:
 The runtime workaround would be a waste of resources on production, so for this
 reason we use the `--clean-json` flag to ignore document ids.
 
+### Export/Import technical details
+
+In Sanity each lokalize value is stored as a separate `lokalizeText` document.
+The key property in this document represents the flattened property path in **nl_export.json**
+and **en_export.json**.
+So, when the json looks like this:
+
+```json
+{
+  "accessibility": {
+    "charts": {
+      "behavior_choropleths": {
+        "description": "This is a test value"
+      }
+    }
+  }
+}
+```
+
+This will be serialized to the key property in the Sanity document as follows: `accessibility.charts.behavior_choropleths.description`.
+
+The root key (so in this case `accessibility`) will be saved as the subject property.
+This allows us to filter on this subject under the Sanity `Lokalize` menu item. Making it a little
+easier for an editor to lookup a specific key in the menu.
+
+So, `yarn lokalize:export` simply retrieves all of the `lokalizeText` documents, replaces their ids in the root part of the path
+and unflattens this list of paths into a JSON file. (The Dutch texts are serialized as **nl_export.json**, the English as **en_export.json**).
+`yarn lokalize:apply-json-edits` does the exact opposite, it takes the **nl_export.json** file, flattens the file into an array of
+paths and saves those to Sanity. Obviously there is a bunch of logic involved that checks if a path is new or existing, but for those
+details we refer to the source code.
+
 ## How to Add, Delete or Move Texts
 
 First make sure the JSONs include document ids (`some_key__@__{document_id}`).
 Run `yarn lokalize:export` if these are not yet present in your JSONs.
 
-You can add, delete and move keys by mutating the `nl_export.json` file. The
+You can add, delete and move keys by mutating the **nl_export.json** file. The
 sync script will automagically detect additions, deletions or moved lokalize
 texts.
 

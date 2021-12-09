@@ -1,8 +1,13 @@
 export function getReverseRouter(isMobile: boolean) {
   const reverseRouter = {
     actueel: {
-      vr: (code: string) => `/actueel/veiligheidsregio/${code}`,
-      gm: (code: string) => `/actueel/gemeente/${code}`,
+      vr: (code?: string) =>
+        code
+          ? `/actueel/veiligheidsregio/${code}`
+          : `/actueel/veiligheidsregio`,
+      gm: (code?: string) =>
+        code ? `/actueel/gemeente/${code}` : `/actueel/gemeente`,
+      nl: () => `/`,
     },
 
     algemeen: {

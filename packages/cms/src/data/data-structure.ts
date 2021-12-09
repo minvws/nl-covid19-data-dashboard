@@ -1,4 +1,7 @@
-/** This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.*/
+/**
+ * DO NOT MANUALLY CHANGE THE CONTENTS OF THIS FILE!
+ * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.
+ */
 export const dataStructure = {
   gm: {
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
@@ -53,20 +56,19 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
-    booster_shot: [
-      "partially_or_fully_vaccinated_total_amount_of_people",
-      "total_date_start_unix",
-      "total_date_end_unix",
-      "received_booster_last_seven_days",
-      "last_seven_days_date_start_unix",
-      "last_seven_days_date_end_unix",
+    booster_shot_administered: [
+      "administered_last_7_days",
+      "administered_total",
     ],
+    booster_shot_delivered: ["delivered_total"],
+    booster_shot_planned: ["planned_7_days"],
     booster_shot_per_age_group: [
       "age_group_range",
       "received_booster_total",
       "received_booster_percentage",
       "birthyear_range",
     ],
+    third_shot_administered: ["administered_last_7_days", "administered_total"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
     infectious_people: ["margin_low", "estimate", "margin_high"],

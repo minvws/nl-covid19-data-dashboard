@@ -6,6 +6,12 @@ import {
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 
+/**
+ *  Returns the associated color and title for the given escalation level
+ *
+ * @param level The given escalation level
+ * @returns a color and title
+ */
 export function useEscalationLevel(level: EscalationLevelType) {
   const { siteText } = useIntl();
 

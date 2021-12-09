@@ -68,18 +68,19 @@ easy to follow.
 4. Create a branch called `release/x.xx.x` from `master`(\*). If the release is
    about a small (bug) fix, use the patch version (last "x") to increment from
    the previous release.
-5. Cherry-pick the squashed commit from develop into the release branch.
-6. Publish the release branch to the `origin`, and create a pull-request on
+5. Cherry-pick the squashed commit from develop into the release branch. If there are merge conflicts in the `key-mutations.csv` file, make sure that no key deletions unrelated to the cherry-picked commit are in there. These deletions will probably break the build since the actual code related to these keys is _not_ deleted by the cherry pick.
+6. Do a full build with a Sanity export & data from production to make sure everything works.
+7. Publish the release branch to the `origin`, and create a pull-request on
    `master`.
-7. Create a GitHub release draft, pointing to the release branch and setting the
+8. Create a GitHub release draft, pointing to the release branch and setting the
    correct version number together with some release notes. Keep the release
    notes in English even though in the past they were written in Dutch.
-8. Possibly review the PR, make changes, or cherry-pick other commits to the
+9. Possibly review the PR, make changes, or cherry-pick other commits to the
    release branch.
-9. Once ready, merge the release branch to `master` using a **merge commit.
+10. Once ready, merge the release branch to `master` using a **merge commit.
    Never use a squash and merge action, since this will erase/rewrite the commit
    history.**
-10. Hit the publish button in the GitHub release draft. This should tag the
+11. Hit the publish button in the GitHub release draft. This should tag the
     correct commit in `master`.
 
 **NB:** After cherry-picking, the situation might arise where the lokalize mutations file

@@ -35,6 +35,11 @@ interface SeriesCommonDefinition {
    */
   shortLabel?: string;
   /**
+   * Adds an aria label to labels in the tooltip in order provide a clearer description
+   * for screen readers.
+   */
+  ariaLabel?: string;
+  /**
    * nonInteractive means the series will not show up visually as part of the
    * tooltip (only hidden). Sometimes we want to render a series as a backdrop
    * to give context to another interactive series, like in the sewer chart when

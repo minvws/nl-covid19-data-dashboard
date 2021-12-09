@@ -1,6 +1,9 @@
 import { throttle } from 'lodash';
 import { useEffect, useState } from 'react';
 
+/**
+ * Returns the window.innerWidth and window.innerHeight whenever the screen resizes.
+ */
 export function useViewport() {
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
 

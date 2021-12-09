@@ -7,7 +7,7 @@ import * as ts from 'typescript';
 import { schemaDirectory } from '../config';
 
 const header =
-  "/** This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.*/\n";
+  "/**\n * DO NOT MANUALLY CHANGE THE CONTENTS OF THIS FILE!\n * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.\n*/\n";
 
 const skippedProperties = [
   'code',

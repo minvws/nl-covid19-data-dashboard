@@ -1,13 +1,11 @@
 import {
   NlBoosterShotPerAgeGroupValue,
-  NlBoosterShotValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 
 /**
  * @TODO: Please remove once data becomes avaliable
  */
-
 export const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
   {
     age_group_range: '81+',
@@ -82,13 +80,3 @@ export const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
     birthyear_range: '2004-2009',
   },
 ] as NlBoosterShotPerAgeGroupValue[];
-
-export const DUMMY_DATA_BOOSTER_SHOTS_KPI = {
-  partially_or_fully_vaccinated_total_amount_of_people: 21944,
-  total_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
-  total_date_end_unix: 1637054676,
-  received_booster_last_seven_days: 1694,
-  last_seven_days_date_start_unix: 1637054676 - WEEK_IN_SECONDS,
-  last_seven_days_date_end_unix: 1637054676,
-  date_of_insertion_unix: 1637054676,
-} as NlBoosterShotValue;
