@@ -9,6 +9,7 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -44,7 +45,6 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { InView } from '~/components/in-view';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -144,8 +144,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 data-cy="infected_moving_average"
-                absolute={dataOverallLastValue.infected_moving_average}
-                numFractionDigits={0}
+                absolute={dataOverallLastValue.infected_moving_average_rounded}
                 isAmount
               />
 
@@ -382,8 +381,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 data-cy="tested_total_moving_average"
-                absolute={dataGgdLastValue.tested_total_moving_average}
-                numFractionDigits={0}
+                absolute={dataGgdLastValue.tested_total_moving_average_rounded}
                 isAmount
               />
 
