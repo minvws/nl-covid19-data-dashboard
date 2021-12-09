@@ -1,4 +1,4 @@
-import { colors, DataScopeKey } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';

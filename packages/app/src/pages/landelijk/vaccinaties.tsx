@@ -663,8 +663,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
-              <TemporaryBoosterKpiSection />
-            </>
+          {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
+            <VaccineBoosterPerAgeGroup
+              data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+              ]}
+            />
           )}
 
           <Divider />
