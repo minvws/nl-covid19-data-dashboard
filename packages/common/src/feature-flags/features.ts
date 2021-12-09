@@ -195,4 +195,8 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'third_shot_administered',
   },
+  {
+    name: 'loadingIndicator',
+    isEnabled: false,
+  },
 ];
