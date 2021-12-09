@@ -74,7 +74,7 @@ const LoaderOverlay = styled(Box).attrs({ spacing: 2 })(
   })
 );
 
-export const LoaderWrapper = styled(Box).attrs({ spacingHorizontal: 1 })(
+const LoaderWrapper = styled(Box).attrs({ spacingHorizontal: 1 })(
   css({
     display: 'flex',
     alignItems: 'end',
