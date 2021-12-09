@@ -19,23 +19,14 @@ export function Loader({ showLoader }: LoaderProps) {
 
   return (
     <LoaderOverlay>
-      <Box
-        spacing={3}
-        m={3}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Box spacingHorizontal={1} display={'flex'} alignItems="end">
-          {DELAY_TIMING.map((timing, i) => (
-            <LoaderBar key={i} delay={`-${timing}s`} />
-          ))}
-        </Box>
-        <Text variant="loaderText" role="status" aria-live="polite">
-          {siteText.common.loading_text}
-        </Text>
-      </Box>
+      <LoaderWrapper>
+        {DELAY_TIMING.map((timing, i) => (
+          <LoaderBar key={i} delay={`-${timing}s`} />
+        ))}
+      </LoaderWrapper>
+      <Text variant="loaderText" role="status" aria-live="polite">
+        {siteText.common.loading_text}
+      </Text>
     </LoaderOverlay>
   );
 }
@@ -62,13 +53,13 @@ const LoaderBar = styled.div<{ delay: string }>(({ delay }) =>
   })
 );
 
-const LoaderOverlay = styled.div(() =>
+const LoaderOverlay = styled(Box).attrs({ spacing: 2 })(
   css({
     position: 'absolute',
     top: '0',
     left: '0',
     zIndex: 999,
-    bg: 'red',
+    bg: 'white',
     // This is the full height of the menu bar, so we don't need to calculate stuff
     height: asResponsiveArray({
       _: 'calc(100vh - 200px)',
@@ -79,5 +70,13 @@ const LoaderOverlay = styled.div(() =>
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
+  })
+);
+
+export const LoaderWrapper = styled(Box).attrs({ spacingHorizontal: 1 })(
+  css({
+    display: 'flex',
+    alignItems: 'end',
   })
 );
