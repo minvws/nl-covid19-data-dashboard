@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
