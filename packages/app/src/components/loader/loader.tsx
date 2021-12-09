@@ -10,7 +10,7 @@ interface LoaderProps {
 }
 
 const DURATION = 0.7;
-const DELAY_TIMING: Array<number> = [0, 0.3, 0.5, 0.2, 0.4];
+const DELAY_TIMING = [0, 0.3, 0.5, 0.2, 0.4];
 
 export function Loader({ showLoader }: LoaderProps) {
   const { siteText } = useIntl();
