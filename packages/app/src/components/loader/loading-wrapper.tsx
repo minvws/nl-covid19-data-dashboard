@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Loader } from '~/components/loader/loader';
 import { useFeature } from '~/lib/features';
 
-const SHOW_LOADER_AFTER_AMOUNT_OF_MS = 100;
+const SHOW_LOADER_AFTER_AMOUNT_OF_MS = 700;
 
 interface LoadingRouterProps {
   previousUrl?: string;
