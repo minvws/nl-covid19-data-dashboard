@@ -69,7 +69,7 @@ const LoaderOverlay = styled.div(() =>
     left: '0',
     zIndex: 999,
     bg: 'red',
-    // This is the full height of the menu bar, so we doesn't need to calculate stuff
+    // This is the full height of the menu bar, so we don't need to calculate stuff
     height: asResponsiveArray({
       _: 'calc(100vh - 200px)',
       sm: 'calc(100vh - 257px)',
