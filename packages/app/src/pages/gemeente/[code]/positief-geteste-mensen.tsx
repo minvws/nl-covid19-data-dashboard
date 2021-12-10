@@ -6,6 +6,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { InView } from '~/components/in-view';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -254,38 +255,40 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ChoroplethTile
-            title={replaceVariablesInText(text.map_titel, {
-              municipality: municipalityName,
-            })}
-            description={<Markdown content={text.map_toelichting} />}
-            legend={{
-              thresholds: thresholds.gm.infected_per_100k,
-              title:
-                siteText.positief_geteste_personen.chloropleth_legenda.titel,
-            }}
-            metadata={{
-              date: lastValue.date_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <DynamicChoropleth
-              map="gm"
-              accessibility={{
-                key: 'confirmed_cases_choropleth',
+          <InView rootMargin="400px">
+            <ChoroplethTile
+              title={replaceVariablesInText(text.map_titel, {
+                municipality: municipalityName,
+              })}
+              description={<Markdown content={text.map_toelichting} />}
+              legend={{
+                thresholds: thresholds.gm.infected_per_100k,
+                title:
+                  siteText.positief_geteste_personen.chloropleth_legenda.titel,
               }}
-              data={choropleth.gm.tested_overall}
-              dataConfig={{
-                metricName: 'tested_overall',
-                metricProperty: 'infected_per_100k',
+              metadata={{
+                date: lastValue.date_unix,
+                source: text.bronnen.rivm,
               }}
-              dataOptions={{
-                selectedCode: data.code,
-                highlightSelection: true,
-                getLink: reverseRouter.gm.positiefGetesteMensen,
-              }}
-            />
-          </ChoroplethTile>
+            >
+              <DynamicChoropleth
+                map="gm"
+                accessibility={{
+                  key: 'confirmed_cases_choropleth',
+                }}
+                data={choropleth.gm.tested_overall}
+                dataConfig={{
+                  metricName: 'tested_overall',
+                  metricProperty: 'infected_per_100k',
+                }}
+                dataOptions={{
+                  selectedCode: data.code,
+                  highlightSelection: true,
+                  getLink: reverseRouter.gm.positiefGetesteMensen,
+                }}
+              />
+            </ChoroplethTile>
+          </InView>
         </TileList>
       </GmLayout>
     </Layout>
