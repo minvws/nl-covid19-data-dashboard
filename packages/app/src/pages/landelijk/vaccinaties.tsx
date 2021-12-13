@@ -1,11 +1,7 @@
 import {
   colors,
-  NlBoosterShotAdministeredValue,
-  NlBoosterShotDeliveredValue,
-  NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  NlThirdShotAdministeredValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
@@ -35,8 +31,6 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccineBoosterKpiAdministeredDeliveredSection } from '~/domain/vaccine/vaccine-booster-kpi-administered-delivered-section';
-import { VaccineBoosterKpiThirdShotSection } from '~/domain/vaccine/vaccine-booster-kpi-third-shot-section';
 import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
@@ -203,24 +197,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationStatusIntensiveCareFeature = useFeature(
     'nlVaccinationIntensiveCareVaccinationStatus'
   );
-  const vaccinationsBoosterInformationBlockFeature = useFeature(
-    'nlVaccinationsBoosterInformationBlock'
-  );
+
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
-  );
-
-  const boosterShotAdministeredKpiTileFeature = useFeature(
-    'nlBoosterShotAdministeredKpiTile'
-  );
-  const boosterShotDeliveredKpiTileFeature = useFeature(
-    'nlBoosterShotDeliveredKpiTile'
-  );
-  const boosterShotPlannedKpiTileFeature = useFeature(
-    'nlBoosterShotPlannedKpiTile'
-  );
-  const thirdShotAdministeredKpiTileFeature = useFeature(
-    'nlThirdShotAdministeredKpiTile'
   );
 
   const boostersTemporaryFeature = useFeature('nlBoostersTemporary');
@@ -244,47 +223,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_start_unix,
     lastValueHositalVaccinationStatus.date_end_unix
   );
-
-  const data_booster_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_administered) as unknown as NlBoosterShotAdministeredValue;
-
-  const data_booster_shot_delivered = (dataset === 'keys'
-    ? {
-        delivered_total: 1638799116,
-        date_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_delivered) as unknown as NlBoosterShotDeliveredValue;
-
-  const data_booster_shot_planned = (dataset === 'keys'
-    ? {
-        planned_7_days: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_planned) as unknown as NlBoosterShotPlannedValue;
-
-  const data_third_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .third_shot_administered) as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
@@ -593,74 +531,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
               <TemporaryBoosterKpiSection />
             </>
-          )}
-
-          {vaccinationsBoosterInformationBlockFeature.isEnabled &&
-            boosterShotAdministeredKpiTileFeature.isEnabled && (
-              <>
-                <Divider />
-
-                <PageInformationBlock
-                  title={text.booster_information_block.title}
-                  description={text.booster_information_block.description}
-                  metadata={{
-                    datumsText: text.booster_information_block.datums,
-                    dateOrRange: Number(
-                      data_booster_shot_administered.date_end_unix
-                    ),
-                    dateOfInsertionUnix: Number(
-                      data_booster_shot_administered.date_end_unix
-                    ),
-                    dataSources: [],
-                  }}
-                  referenceLink={text.booster_information_block.reference.href}
-                  pageLinks={content.boosterLinks}
-                  articles={content.boosterArticles}
-                />
-              </>
-            )}
-
-          {boosterShotAdministeredKpiTileFeature.isEnabled &&
-            boosterShotDeliveredKpiTileFeature.isEnabled &&
-            boosterShotPlannedKpiTileFeature.isEnabled && (
-              <VaccineBoosterKpiAdministeredDeliveredSection
-                dataAdministered={data_booster_shot_administered}
-                dateDelivered={data_booster_shot_delivered}
-                dataPlanned={data_booster_shot_planned}
-              />
-            )}
-
-          {vaccinationsBoosterInformationBlockFeature.isEnabled &&
-            thirdShotAdministeredKpiTileFeature.isEnabled && (
-              <>
-                <Divider />
-
-                <PageInformationBlock
-                  title={text.third_shot_information_block.title}
-                  description={text.third_shot_information_block.description}
-                  metadata={{
-                    datumsText: text.third_shot_information_block.datums,
-                    dateOrRange: Number(
-                      data_third_shot_administered.date_end_unix
-                    ),
-                    dateOfInsertionUnix: Number(
-                      data_third_shot_administered.date_end_unix
-                    ),
-                    dataSources: [],
-                  }}
-                  referenceLink={
-                    text.third_shot_information_block.reference.href
-                  }
-                  pageLinks={content.thirdShotLinks}
-                  articles={content.thirdShotArticles}
-                />
-              </>
-            )}
-
-          {thirdShotAdministeredKpiTileFeature.isEnabled && (
-            <VaccineBoosterKpiThirdShotSection
-              data={data_third_shot_administered}
-            />
           )}
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
