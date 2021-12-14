@@ -16,6 +16,7 @@ export const dataStructure = {
     tested_overall: [
       "infected",
       "infected_moving_average",
+      "infected_moving_average_rounded",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -56,20 +57,19 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
-    booster_shot: [
-      "partially_or_fully_vaccinated_total_amount_of_people",
-      "total_date_start_unix",
-      "total_date_end_unix",
-      "received_booster_last_seven_days",
-      "last_seven_days_date_start_unix",
-      "last_seven_days_date_end_unix",
+    booster_shot_administered: [
+      "administered_last_7_days",
+      "administered_total",
     ],
+    booster_shot_delivered: ["delivered_total"],
+    booster_shot_planned: ["planned_7_days"],
     booster_shot_per_age_group: [
       "age_group_range",
       "received_booster_total",
       "received_booster_percentage",
       "birthyear_range",
     ],
+    third_shot_administered: ["administered_last_7_days", "administered_total"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
     infectious_people: ["margin_low", "estimate", "margin_high"],
@@ -94,6 +94,7 @@ export const dataStructure = {
     tested_overall: [
       "infected",
       "infected_moving_average",
+      "infected_moving_average_rounded",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -162,6 +163,7 @@ export const dataStructure = {
       "infected_percentage_moving_average",
       "tested_total",
       "tested_total_moving_average",
+      "tested_total_moving_average_rounded",
     ],
     tested_ggd_archived: [
       "infected_percentage",
@@ -364,6 +366,7 @@ export const dataStructure = {
     tested_overall: [
       "infected",
       "infected_moving_average",
+      "infected_moving_average_rounded",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -380,6 +383,7 @@ export const dataStructure = {
       "infected_percentage_moving_average",
       "tested_total",
       "tested_total_moving_average",
+      "tested_total_moving_average_rounded",
     ],
     tested_ggd_archived: [
       "infected_percentage",

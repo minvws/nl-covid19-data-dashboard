@@ -9,6 +9,7 @@ import { InlineText } from './typography';
 export interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
+  ariaLabel?: string;
 }
 
 const StyledInput = styled.input(
@@ -79,6 +80,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
             name={`radiogroup-${id}-item-${item.value}`}
             value={item.value}
             checked={value === item.value}
+            aria-label={value === item.value ? item.ariaLabel : undefined}
           />
           <StyledLabel htmlFor={`radiogroup-${item.value}-${id}-${index}`}>
             <InlineText variant="button2">{item.label}</InlineText>

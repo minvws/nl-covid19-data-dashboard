@@ -76,7 +76,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { siteText } = useIntl();
-  const text = siteText.gemeente_sterfte;
+  const text = siteText.deceasedPage_gm;
 
   const metadata = {
     ...siteText.gemeente_index.metadata,

@@ -7,6 +7,7 @@
       "required": [
         "infected",
         "infected_moving_average",
+        "infected_moving_average_rounded",
         "infected_per_100k",
         "infected_per_100k_moving_average",
         "date_unix",
@@ -18,6 +19,9 @@
         },
         "infected_moving_average": {
           "type": ["number", "null"]
+        },
+        "infected_moving_average_rounded": {
+          "type": ["integer", "null"]
         },
         "infected_per_100k": {
           "type": "number"
