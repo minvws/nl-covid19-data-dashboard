@@ -85,7 +85,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { siteText } = useIntl();
-  const text = siteText.veiligheidsregio_sterfte;
+  const text = siteText.deceasedPage_vr;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,

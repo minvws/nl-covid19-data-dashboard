@@ -16,6 +16,7 @@ export const dataStructure = {
     tested_overall: [
       "infected",
       "infected_moving_average",
+      "infected_moving_average_rounded",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -93,6 +94,7 @@ export const dataStructure = {
     tested_overall: [
       "infected",
       "infected_moving_average",
+      "infected_moving_average_rounded",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -161,6 +163,7 @@ export const dataStructure = {
       "infected_percentage_moving_average",
       "tested_total",
       "tested_total_moving_average",
+      "tested_total_moving_average_rounded",
     ],
     tested_ggd_archived: [
       "infected_percentage",
@@ -363,6 +366,7 @@ export const dataStructure = {
     tested_overall: [
       "infected",
       "infected_moving_average",
+      "infected_moving_average_rounded",
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
@@ -379,6 +383,7 @@ export const dataStructure = {
       "infected_percentage_moving_average",
       "tested_total",
       "tested_total_moving_average",
+      "tested_total_moving_average_rounded",
     ],
     tested_ggd_archived: [
       "infected_percentage",
