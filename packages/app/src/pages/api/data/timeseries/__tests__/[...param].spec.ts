@@ -46,6 +46,10 @@ Handler("should return 404 Not Found when file doesn't exist", (context) => {
   assert.is(res._getStatusCode(), 404);
 });
 
+/**
+ * Skipping this test because of some runtime errors thrown by ts-node,
+ * I have no idea how to solve them. Maybe in a future version of ts-node it'll be solved...
+ */
 Handler.skip('should return 200 and the correct file contents', (context) => {
   context.fileExists = true;
   context.fileContent = {
@@ -64,6 +68,10 @@ Handler.skip('should return 200 and the correct file contents', (context) => {
   assert.equal(JSON.parse(res._getData()), context.fileContent);
 });
 
+/**
+ * Skipping this test because of some runtime errors thrown by ts-node,
+ * I have no idea how to solve them. Maybe in a future version of ts-node it'll be solved...
+ */
 Handler.skip('should return 500 if handler logic throws', (context) => {
   context.fileExists = true;
   context.fileContent = undefined;
