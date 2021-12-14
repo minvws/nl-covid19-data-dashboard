@@ -81,7 +81,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText, formatPercentage } = useIntl();
 
-  const text = siteText.sterfte;
+  const text = siteText.deceasedPage_nl;
 
   const metadata = {
     ...siteText.nationaal_metadata,
