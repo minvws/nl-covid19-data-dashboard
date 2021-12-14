@@ -507,13 +507,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: text.booster_information_block.datums,
               dateOrRange:
-                dataset === 'keys'
-                  ? 1638705600
-                  : Number(text.four_kpi_section.information_block_date_unix),
+                DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
               dateOfInsertionUnix:
-                dataset === 'keys'
-                  ? 1638705600
-                  : Number(text.four_kpi_section.information_block_date_unix),
+                DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
               dataSources: [
                 {
                   href: '',
