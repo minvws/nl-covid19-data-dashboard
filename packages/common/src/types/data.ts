@@ -267,7 +267,7 @@ export interface Nl {
   booster_shot_administered: NlBoosterShotAdministered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
-  booster_and_third_shots_administered: NlBoosterAndThirdShotsAdministered;
+  booster_and_third_shot_administered?: NlBoosterAndThirdShotAdministered;
   third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;
@@ -395,12 +395,11 @@ export interface NlBoosterShotPerAgeGroupValue {
   date_end_unix: number;
   birthyear_range: string;
 }
-export interface NlBoosterAndThirdShotsAdministered {
-  values: NlBoosterAndThirdShotsAdministeredValue[];
-  last_value: NlBoosterAndThirdShotsAdministeredValue;
+export interface NlBoosterAndThirdShotAdministered {
+  values: NlBoosterAndThirdShotAdministeredValue[];
+  last_value: NlBoosterAndThirdShotAdministeredValue;
 }
-export interface NlBoosterAndThirdShotsAdministeredValue {
-  administered_last_7_days: number;
+export interface NlBoosterAndThirdShotAdministeredValue {
   administered_total: number;
   date_unix: number;
   date_of_insertion_unix: number;

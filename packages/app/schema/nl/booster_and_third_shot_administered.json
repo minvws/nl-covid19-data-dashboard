@@ -22,9 +22,6 @@
       "title": "nl_booster_and_third_shot_administered_value",
       "type": "object",
       "properties": {
-        "administered_last_7_days": {
-          "type": "integer"
-        },
         "administered_total": {
           "type": "integer"
         },
@@ -35,12 +32,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "administered_last_7_days",
-        "administered_total",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["administered_total", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

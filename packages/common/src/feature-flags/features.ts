@@ -143,7 +143,7 @@ export const features: Feature[] = [
     metricName: 'booster_shot_administered',
   },
   {
-    name: 'nlBosoterShotPlanned',
+    name: 'nlBoosterShotPlanned',
     isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_planned',

@@ -177,7 +177,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber, dataset } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties;
 
@@ -197,6 +197,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationsIncidencePerAgeGroup'
   );
 
+  const vaccinationsBoosterInformationBlockFeature = useFeature(
+    'nlVaccinationsBoosterInformationBlock'
+  );
+
   const vaccinationStatusHospitalFeature = useFeature(
     'nlVaccinationHospitalVaccinationStatus'
   );
@@ -207,6 +211,16 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
+
+  const boosterAndThirdShotAdministeredFeature = useFeature(
+    'nlBoosterAndThirdShotAdministered'
+  );
+
+  const boosterShotAdministered = useFeature('nlBoosterShotAdministered');
+
+  const boosterShotPlannedFeature = useFeature('nlBoosterShotPlanned');
+
+  const bhirdShotAdministeredFeature = useFeature('nlThirdShotAdministered');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -501,36 +515,50 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <Divider />
 
-          <PageInformationBlock
-            title={text.booster_information_block.title}
-            description={text.booster_information_block.description}
-            metadata={{
-              datumsText: text.booster_information_block.datums,
-              dateOrRange:
-                DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
-              dateOfInsertionUnix:
-                DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
-              dataSources: [
-                {
-                  href: '',
-                  text: text.booster_information_block.sources.text,
-                  download: '',
-                },
-              ],
-            }}
-            referenceLink={text.booster_information_block.reference.href}
-            pageLinks={content.boosterLinks}
-            articles={content.boosterArticles}
-          />
+          {
+            (boosterAndThirdShotAdministeredFeature.isEnabled,
+            vaccinationsBoosterInformationBlockFeature.isEnabled && (
+              <PageInformationBlock
+                title={text.booster_information_block.title}
+                description={text.booster_information_block.description}
+                metadata={{
+                  datumsText: text.booster_information_block.datums,
+                  dateOrRange:
+                    DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
+                  dateOfInsertionUnix:
+                    DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
+                  dataSources: [
+                    {
+                      href: '',
+                      text: text.booster_information_block.sources.text,
+                      download: '',
+                    },
+                  ],
+                }}
+                referenceLink={text.booster_information_block.reference.href}
+                pageLinks={content.boosterLinks}
+                articles={content.boosterArticles}
+              />
+            ))
+          }
 
-          <VaccinationsBoosterKpiSection
-            dataBoosterAndThirdShotAdministered={
-              DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED
-            }
-            dataBoosterShotAdministered={DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED}
-            dataBoosterShotPlanned={DUMMY_DATA_BOOSTER_SHOT_PLANNED}
-            dataThirdShotAdministered={DUMMY_DATA_THIRD_SHOT_ADMINISTERED}
-          />
+          {
+            (boosterAndThirdShotAdministeredFeature.isEnabled,
+            boosterShotAdministered.isEnabled,
+            boosterShotPlannedFeature.isEnabled,
+            bhirdShotAdministeredFeature.isEnabled && (
+              <VaccinationsBoosterKpiSection
+                dataBoosterAndThirdShotAdministered={
+                  DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED
+                }
+                dataBoosterShotAdministered={
+                  DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED
+                }
+                dataBoosterShotPlanned={DUMMY_DATA_BOOSTER_SHOT_PLANNED}
+                dataThirdShotAdministered={DUMMY_DATA_THIRD_SHOT_ADMINISTERED}
+              />
+            ))
+          }
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <VaccineBoosterPerAgeGroup
