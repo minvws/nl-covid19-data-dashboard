@@ -267,7 +267,7 @@ export interface Nl {
   booster_shot_administered: NlBoosterShotAdministered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
-  booster_and_third_shot_administered?: NlBoosterAndThirdShotAdministered;
+  booster_and_third_shot_administered: NlBoosterAndThirdShotAdministered;
   third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;

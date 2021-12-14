@@ -25,13 +25,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import {
-  DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED,
-  DUMMY_DATA_BOOSTER_PER_AGE_GROUP,
-  DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED,
-  DUMMY_DATA_BOOSTER_SHOT_PLANNED,
-  DUMMY_DATA_THIRD_SHOT_ADMINISTERED,
-} from '~/domain/vaccine/booster_dummy_data';
+import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
@@ -104,7 +98,11 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated',
     'hospital_vaccination_status',
     'hospital_vaccine_incidence_per_age_group',
-    'intensive_care_vaccination_status'
+    'intensive_care_vaccination_status',
+    'booster_shot_administered',
+    'booster_shot_planned',
+    'booster_and_third_shot_administered',
+    'third_shot_administered'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -524,9 +522,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   datumsText: text.booster_information_block.datums,
                   dateOrRange:
-                    DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
+                    data.booster_and_third_shot_administered.last_value
+                      .date_unix,
                   dateOfInsertionUnix:
-                    DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED.date_unix,
+                    data.booster_and_third_shot_administered.last_value
+                      .date_unix,
                   dataSources: [
                     {
                       href: '',
@@ -549,13 +549,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             bhirdShotAdministeredFeature.isEnabled && (
               <VaccinationsBoosterKpiSection
                 dataBoosterAndThirdShotAdministered={
-                  DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED
+                  data.booster_and_third_shot_administered.last_value
                 }
                 dataBoosterShotAdministered={
-                  DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED
+                  data.booster_shot_administered.last_value
                 }
-                dataBoosterShotPlanned={DUMMY_DATA_BOOSTER_SHOT_PLANNED}
-                dataThirdShotAdministered={DUMMY_DATA_THIRD_SHOT_ADMINISTERED}
+                dataBoosterShotPlanned={data.booster_shot_planned.last_value}
+                dataThirdShotAdministered={
+                  data.third_shot_administered.last_value
+                }
               />
             ))
           }

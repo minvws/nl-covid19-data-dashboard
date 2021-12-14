@@ -1,9 +1,5 @@
 import {
-  NlBoosterAndThirdShotsAdministeredValue,
-  NlBoosterShotAdministeredValue,
   NlBoosterShotPerAgeGroupValue,
-  NlBoosterShotPlannedValue,
-  NlThirdShotAdministeredValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 
@@ -84,37 +80,3 @@ export const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
     birthyear_range: '2004-2009',
   },
 ] as NlBoosterShotPerAgeGroupValue[];
-
-/**
- * Four KPI booster shot dummy data
- * @TODO: Please remove once data becomes avaliable
- */
-
-export const DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED = {
-  administered_last_7_days: 11111,
-  administered_total: 11111,
-  date_unix: 1639484088,
-  date_of_insertion_unix: 1639484088,
-} as NlBoosterAndThirdShotsAdministeredValue;
-
-export const DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED = {
-  ggd_administered_last_7_days: 22222,
-  ggd_administered_total: 22222,
-  others_administered_last_7_days: 22222,
-  others_administered_total: 22222,
-  date_unix: 1639484088,
-  date_of_insertion_unix: 1639484088,
-} as NlBoosterShotAdministeredValue;
-
-export const DUMMY_DATA_BOOSTER_SHOT_PLANNED = {
-  planned_7_days: 33333,
-  date_unix: 1639484088,
-  date_of_insertion_unix: 1639484088,
-} as NlBoosterShotPlannedValue;
-
-export const DUMMY_DATA_THIRD_SHOT_ADMINISTERED = {
-  administered_last_7_days: 44444,
-  administered_total: 44444,
-  date_unix: 1639484088,
-  date_of_insertion_unix: 1639484088,
-} as NlThirdShotAdministeredValue;
