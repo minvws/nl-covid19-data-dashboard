@@ -87,8 +87,8 @@
     "booster_shot_per_age_group": {
       "$ref": "booster_shot_per_age_group.json"
     },
-    "booster_and_third_shots_administered": {
-      "$ref": "booster_and_third_shots_administered.json"
+    "booster_and_third_shot_administered": {
+      "$ref": "booster_and_third_shot_administered.json"
     },
     "third_shot_administered": {
       "$ref": "third_shot_administered.json"

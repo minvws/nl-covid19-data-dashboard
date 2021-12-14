@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_booster_and_third_shots_administered",
+  "title": "nl_booster_and_third_shot_administered",
   "type": "object",
   "properties": {
     "values": {
@@ -19,7 +19,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_and_third_shots_administered_value",
+      "title": "nl_booster_and_third_shot_administered_value",
       "type": "object",
       "properties": {
         "administered_last_7_days": {
