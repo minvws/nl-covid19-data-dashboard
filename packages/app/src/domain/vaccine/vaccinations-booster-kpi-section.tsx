@@ -1,5 +1,5 @@
 import {
-  NlBoosterAndThirdShotsAdministeredValue,
+  NlBoosterAndThirdShotAdministeredValue,
   NlBoosterShotAdministeredValue,
   NlBoosterShotPlannedValue,
   NlThirdShotAdministeredValue,
@@ -15,7 +15,7 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface VaccinationsBoosterKpiSectionProps {
-  dataBoosterAndThirdShotAdministered: NlBoosterAndThirdShotsAdministeredValue;
+  dataBoosterAndThirdShotAdministered: NlBoosterAndThirdShotAdministeredValue;
   dataBoosterShotAdministered: NlBoosterShotAdministeredValue;
   dataBoosterShotPlanned: NlBoosterShotPlannedValue;
   dataThirdShotAdministered: NlThirdShotAdministeredValue;
