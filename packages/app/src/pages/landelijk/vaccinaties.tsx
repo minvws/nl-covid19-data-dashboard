@@ -25,10 +25,16 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
+import {
+  DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED,
+  DUMMY_DATA_BOOSTER_PER_AGE_GROUP,
+  DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED,
+  DUMMY_DATA_BOOSTER_SHOT_PLANNED,
+  DUMMY_DATA_THIRD_SHOT_ADMINISTERED,
+} from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
+import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
@@ -201,8 +207,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
-
-  const boostersTemporaryFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -495,43 +499,42 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               <VaccineAdministrationsKpiSection data={data} />
             )}
 
-          {boostersTemporaryFeature.isEnabled && (
-            <>
-              <Divider />
+          <Divider />
 
-              <PageInformationBlock
-                title={text.booster_information_block.title}
-                description={text.booster_information_block.description}
-                metadata={{
-                  datumsText: text.booster_information_block.datums,
-                  dateOrRange:
-                    dataset === 'keys'
-                      ? 1638705600
-                      : Number(
-                          text.four_kpi_section.information_block_date_unix
-                        ),
-                  dateOfInsertionUnix:
-                    dataset === 'keys'
-                      ? 1638705600
-                      : Number(
-                          text.four_kpi_section.information_block_date_unix
-                        ),
-                  dataSources: [
-                    {
-                      href: '',
-                      text: text.booster_information_block.sources.text,
-                      download: '',
-                    },
-                  ],
-                }}
-                referenceLink={text.booster_information_block.reference.href}
-                pageLinks={content.boosterLinks}
-                articles={content.boosterArticles}
-              />
+          <PageInformationBlock
+            title={text.booster_information_block.title}
+            description={text.booster_information_block.description}
+            metadata={{
+              datumsText: text.booster_information_block.datums,
+              dateOrRange:
+                dataset === 'keys'
+                  ? 1638705600
+                  : Number(text.four_kpi_section.information_block_date_unix),
+              dateOfInsertionUnix:
+                dataset === 'keys'
+                  ? 1638705600
+                  : Number(text.four_kpi_section.information_block_date_unix),
+              dataSources: [
+                {
+                  href: '',
+                  text: text.booster_information_block.sources.text,
+                  download: '',
+                },
+              ],
+            }}
+            referenceLink={text.booster_information_block.reference.href}
+            pageLinks={content.boosterLinks}
+            articles={content.boosterArticles}
+          />
 
-              <TemporaryBoosterKpiSection />
-            </>
-          )}
+          <VaccinationsBoosterKpiSection
+            dataBoosterAndThirdShotAdministered={
+              DUMMY_DATA_BOOSTER_AND_THIRD_SHOT_ADMINISTERED
+            }
+            dataBoosterShotAdministered={DUMMY_DATA_BOOSTER_SHOT_ADMINISTERED}
+            dataBoosterShotPlanned={DUMMY_DATA_BOOSTER_SHOT_PLANNED}
+            dataThirdShotAdministered={DUMMY_DATA_THIRD_SHOT_ADMINISTERED}
+          />
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <VaccineBoosterPerAgeGroup
