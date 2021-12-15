@@ -4,7 +4,17 @@ import { BsBook, BsBookHalf, BsFillPuzzleFill } from 'react-icons/bs';
 import { FaLanguage } from 'react-icons/fa';
 import { map } from 'rxjs/operators';
 
-const scopes = ['nl', 'gm', 'vr'];
+interface PagePartPage {
+  _id: string;
+  identifier: string;
+  title: string;
+}
+
+interface PagePartChildPage {
+  _id: string;
+  _type: string;
+  title: string;
+}
 
 export function pagePartListItem() {
   return S.listItem()
@@ -16,10 +26,10 @@ export function pagePartListItem() {
 function pageIdentifierListemItem() {
   return documentStore
     .listenQuery(
-      `*[_type == 'pageIdentifier' && !(_id in path("drafts.**"))]{ title,_id,identifier }`
+      `*[_type == 'pageIdentifier' && !(_id in path("drafts.**"))]{ _id, identifier, title }`
     )
     .pipe(
-      map((pages: { title: string; _id: string }[]) => {
+      map((pages: PagePartPage[]) => {
         return S.list()
           .title('Pagina')
           .items(
@@ -31,7 +41,7 @@ function pageIdentifierListemItem() {
     );
 }
 
-function pageDataListItem(page: any) {
+function pageDataListItem(page: PagePartPage) {
   return S.listItem()
     .title(page.title)
     .id(page._id)
@@ -39,19 +49,19 @@ function pageDataListItem(page: any) {
     .child(
       documentStore
         .listenQuery(
-          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]`,
+          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]{ _id, _type, title }`,
           { id: page._id }
         )
         .pipe(
-          map((childPages: any) =>
+          map((childPages: PagePartChildPage[]) =>
             S.list()
               .title('Pagina onderdelen')
               .items(
                 childPages
-                  .sort((a: any, b: any) => a.title.localeCompare(b.title))
+                  .sort((a, b) => a.title.localeCompare(b.title))
                   .map(pageDataItem)
                   .concat(
-                    scopes.map((scope) =>
+                    ['nl', 'gm', 'vr'].map((scope) =>
                       S.listItem()
                         .title(scope)
                         .icon(FaLanguage)
@@ -71,7 +81,7 @@ function pageDataListItem(page: any) {
     );
 }
 
-function pageDataItem(pageData: any) {
+function pageDataItem(pageData: PagePartChildPage) {
   return S.listItem()
     .title(pageData.title)
     .id(pageData._id)
