@@ -242,3 +242,5 @@ but for some reason this document hasn't been added to the production dataset. (
 has already occurred).
 Also see the section `release-procedure/Intermediate or Hotfix Release` for other faulty
 situations that might occur.
+
+[Back to index](index.md)

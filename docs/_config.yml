@@ -1,1 +1,3 @@
 theme: jekyll-theme-cayman
+title: Corona Dashboard Development Documentation
+description: These pages describe the various moving parts of the Dutch Corona Dashboard and are meant as a reference for developers working on the codebase, or as an introduction for onboarding new developers.

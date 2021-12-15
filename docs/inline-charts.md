@@ -86,3 +86,5 @@ like strings, numbers and booleans.
 
 Custom tooltips can't be configured either, since this would require the `RichContent` component to include
 every available custom tooltip, which would unnecessarily bloat the bundle sizes.
+
+[Back to index](index.md)

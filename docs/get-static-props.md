@@ -145,3 +145,5 @@ type PageProps = {
   content: MyStrongTypedSanityData;
 };
 ```
+
+[Back to index](index.md)

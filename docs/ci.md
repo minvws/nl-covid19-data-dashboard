@@ -39,3 +39,5 @@ The build process follows these steps:
   - Run all the JSON data validations
   - Run lokalize:export to retrieve all the translations from Sanity
   - Run the NextJs build
+
+[Back to index](index.md)

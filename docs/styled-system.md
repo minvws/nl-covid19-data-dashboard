@@ -38,3 +38,5 @@ Example:
 
 In this example each `<Text>` component (except the last one) instance will receive a bottom margin of `0.5rem`
 (the second item in the theme's `space` array).
+
+[Back to index](index.md)

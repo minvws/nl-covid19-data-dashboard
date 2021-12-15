@@ -62,3 +62,5 @@ timelineEvents: getTimelineEvents(
   'hospital_nice'
 ),
 ```
+
+[Back to index](index.md)

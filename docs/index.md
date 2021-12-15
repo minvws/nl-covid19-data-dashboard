@@ -6,7 +6,7 @@
 
 ## Infrastructure
 
-- [Choropleth GEOJson](choropleth-geojson.md)
+- [Choropleth TopoJson](choropleth-topojson.md)
 - [Feature Flags](feature-flags.md)
 - [Static Props](get-static-props.md)
 - [Styling](styled-system.md)
