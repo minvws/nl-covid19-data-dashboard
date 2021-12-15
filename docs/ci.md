@@ -11,7 +11,7 @@ This action will perform the following tasks:
 - Run a typescript type check for each package
 - Run the unit tests
 
-Whenever a merge happens to either the master of develop branch a github
+Whenever a merge happens to either the master or develop branch, a github
 action will trigger an Azure build pipeline.
 These actions are located in the `.github/workflows` directory in the repository.
 `infra-develop.yml` runs when a merge to develop occurs, `infra.yml` runs
