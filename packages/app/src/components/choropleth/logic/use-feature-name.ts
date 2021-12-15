@@ -3,6 +3,19 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { MapType } from './types';
 
+/**
+ * This hook return a memoized function that will return a human readable title
+ * for a specific feature based on the data associated with it.
+ * A gm map will use the gemcode property and a vr map the vrcode property.
+ *
+ * If no customGetFeatureName method is used and an in map is being rendered
+ * an error is thrown because country names need to be localized and cannot
+ * simply be resolved from just the code value.
+ *
+ * @param map
+ * @param customGetFeatureName
+ * @returns
+ */
 export function useFeatureName(
   map: MapType,
   customGetFeatureName?: (code: string) => string
