@@ -141,4 +141,5 @@ export const gmGeo = topojson.feature(
 ) as CodedGeoJSON;
 ```
 
-Note that the
+Note that the map data is stored as TopoJson. This is because of the size optimizations that TopoJson provides,
+at run time, after being downloaded by the choropleth component this TopoJson is converted to GeoJson.
