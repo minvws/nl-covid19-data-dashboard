@@ -97,3 +97,5 @@ Sometimes a release also contains new configurations for the CMS. These are
 deployed via the Sanity CLI as `yarn deploy`. These deployments do
 not usually need to be done simultaneously with the release. If they are
 backwards-compatible they could be performed at any time and also repeatedly.
+
+[Back to index](index.md)

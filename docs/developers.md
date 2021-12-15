@@ -113,3 +113,5 @@ are testing screenreaders.
    get when clicking the menu button on the VM in the left bar.
 2. Click ‘Take’ on the left top, and click OK.
 3. Now whenever you are done testing with the VM, close the VM by closing the window itself (not through Windows), and choose ‘Power off’ with the ‘Restore snapshot’ option enabled.
+
+[Back to index](index.md)
