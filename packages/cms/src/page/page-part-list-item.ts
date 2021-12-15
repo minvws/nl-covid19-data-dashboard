@@ -1,6 +1,7 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import documentStore from 'part:@sanity/base/datastore/document';
 import { BsBook, BsBookHalf, BsFillPuzzleFill } from 'react-icons/bs';
+import { FaLanguage } from 'react-icons/fa';
 import { map } from 'rxjs/operators';
 
 const scopes = ['nl', 'gm', 'vr'];
@@ -56,39 +57,14 @@ function pageDataListItem(page: any) {
                     scopes.map((scope) =>
                       S.listItem()
                         .title(scope)
-                        .icon(BsBookHalf)
+                        .icon(FaLanguage)
                         .child(
-                          documentStore
-                            .listenQuery(
-                              `*[_type == "lokalizeText" && subject == $name]`,
-                              {
-                                name: `deceasedPage_${scope}`,
-                              }
+                          S.documentList()
+                            .title(scope)
+                            .filter(
+                              '_type == "lokalizeText" && subject == $name'
                             )
-                            .pipe(
-                              map((subjects: any[]) =>
-                                S.list()
-                                  .title('Onderwerp')
-                                  .items(
-                                    subjects
-                                      .sort((a, b) =>
-                                        a.key.localeCompare(b.key)
-                                      )
-                                      .map((subject) =>
-                                        S.listItem()
-                                          .title(subject.key)
-                                          .id(subject._id)
-                                          .child((id) =>
-                                            S.editor()
-                                              .id(id)
-                                              .schemaType('lokalizeText')
-                                              .documentId(id)
-                                              .views([S.view.form()])
-                                          )
-                                      )
-                                  )
-                              )
-                            )
+                            .params({ name: `deceasedPage_${scope}` })
                         )
                     )
                   )
