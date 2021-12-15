@@ -6,11 +6,11 @@ import sanitize from 'sanitize-filename';
  * Loads a specified metric from a given json file
  */
 export function loadMetricData(
-  root: string,
+  scope: string,
   metric: string,
   publicJsonPath: string
 ) {
-  const filename = sanitize(`${root.toUpperCase()}.json`);
+  const filename = sanitize(`${scope.toUpperCase()}.json`);
   const fullPath = path.join(publicJsonPath, filename);
   if (fs.existsSync(fullPath)) {
     const content = JSON.parse(

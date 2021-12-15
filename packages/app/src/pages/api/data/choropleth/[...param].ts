@@ -9,12 +9,23 @@ import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
 const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
 
-const rootFiles = {
+const choroplethScopes = {
   in: 'IN_COLLECTION',
   vr: 'VR_COLLECTION',
   gm: 'GM_COLLECTION',
 } as const;
 
+/**
+ * This route receives a scope and metric param and returns the associated
+ * choropleth data.
+ *
+ * Example:
+ * scope: VR_COLLECTION
+ * metric: disability_care
+ * This will load the VR_COLLECTION.json file from the public/json folder,
+ * extract the disability_care property from it and return the value array.
+ *
+ */
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!Array.isArray(req.query.param)) {
     res.status(400).end();
@@ -22,15 +33,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const { param, start, end } = req.query;
-  const [root, metric] = param as [keyof typeof rootFiles, string];
+  const [scope, metric] = param as [keyof typeof choroplethScopes, string];
 
-  if (!root?.length || !metric?.length) {
+  if (!scope?.length || !metric?.length) {
     res.status(400).end();
     return;
   }
 
   try {
-    let values = loadMetricData(rootFiles[root], metric, publicJsonPath);
+    let values = loadMetricData(
+      choroplethScopes[scope],
+      metric,
+      publicJsonPath
+    );
     if (isDefined(values)) {
       values.values = sortTimeSeriesValues(values);
 
