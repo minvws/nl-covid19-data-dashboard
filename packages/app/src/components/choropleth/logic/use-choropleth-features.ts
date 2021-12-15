@@ -24,6 +24,15 @@ export type ChoroplethFeatures = {
   boundingBox: CodedGeoJSON;
 };
 
+/**
+ * This hook returns the appropriate GEOJson data for the given map type.
+ * The data is being loaded from the /api/topo-json API route.
+ *
+ * @param map The given map type
+ * @param data Map data, only used for the European map features
+ * @param selectedCode An optional selected code, this will be used to determine the bounding box
+ * @returns The GEOJson data
+ */
 export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   map: MapType,
   data: T[],
@@ -84,6 +93,12 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
       ): v is { country_code: string } {
         return 'country_code' in v;
       });
+      /**
+       * The european map features are datadriven, only the features
+       * for which data exists are added to the outline, hover and boundingbox
+       * This way the map can be centered on only those countries with the
+       * surrounding countries only partially in view.
+       */
       return {
         outline: {
           ...featureGeo,

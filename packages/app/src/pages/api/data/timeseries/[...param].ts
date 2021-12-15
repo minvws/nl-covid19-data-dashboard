@@ -15,7 +15,17 @@ const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 /**
- * This API route
+ * This API route receives a scope, metric and metricProperty param
+ * and returns the associated data.
+ *
+ * Example:
+ * scope: nl
+ * metric: deceased_cbs
+ * This will load the file NL.json from the public/json folder, extract
+ * the property deceased_cbs from it and return the array value.
+ *
+ * The metricProperty is used to check whether the associated values
+ * will need to be stripped of null values.
  */
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!Array.isArray(req.query.param)) {
@@ -24,15 +34,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const { param, start, end } = req.query;
-  const [root, metric, metricProperty] = param as [string, string, string];
+  const [scope, metric, metricProperty] = param as [string, string, string];
 
-  if (!root?.length || !metric?.length) {
+  if (!scope?.length || !metric?.length) {
     res.status(400).end();
     return;
   }
 
   try {
-    const data = loadMetricData(root, metric, publicJsonPath);
+    const data = loadMetricData(scope, metric, publicJsonPath);
     if (isDefined(data) && isDefined(data.values)) {
       data.values = sortTimeSeriesValues(data.values);
 

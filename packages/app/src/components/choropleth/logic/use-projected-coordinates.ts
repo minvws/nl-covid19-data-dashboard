@@ -19,8 +19,8 @@ export type ProjectedGeoInfo = {
 
 /**
  * This hook transforms the given CodedGeoJSON to a list and lookup of feature codes
- * and their corresponding cartesian coordinates tuples which can
- * be used to draw onto a canvas.
+ * and their corresponding cartesian coordinates tuples which can be used to draw onto a canvas.
+ *
  */
 export function useProjectedCoordinates(
   geoJson: CodedGeoJSON | undefined,
