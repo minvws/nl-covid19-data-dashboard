@@ -31,7 +31,6 @@ function pageIdentifierListemItem() {
 }
 
 function pageDataListItem(page: any) {
-  console.log(page);
   return S.listItem()
     .title(page.title)
     .id(page._id)
@@ -39,7 +38,7 @@ function pageDataListItem(page: any) {
     .child(
       documentStore
         .listenQuery(
-          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**")) || _type == "lokalizeText" && subject match $name]`,
+          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]`,
           {
             id: page._id,
             name: `${page.identifier}*`,
@@ -67,40 +66,28 @@ function pageDataListItem(page: any) {
                               }
                             )
                             .pipe(
-                              map((subjects: []) => {
-                                console.log(subjects);
-                                const type = 'lokalizeText';
-                                return S.list()
+                              map((subjects: any[]) =>
+                                S.list()
                                   .title('Onderwerp')
                                   .items(
-                                    subjects.map((subject: any) => {
-                                      return S.listItem()
-                                        .title(subject.key)
-                                        .id(subject.key)
-                                        .child(
-                                          S.documentList()
-                                            .id(`${subject}-child`)
-                                            .title(subject.subject)
-                                            .schemaType(type)
-                                            .defaultOrdering([
-                                              {
-                                                field: 'key',
-                                                direction: 'asc',
-                                              },
-                                            ])
-                                            .filter('subject == $subject')
-                                            .params({ subject })
-                                            .child((id) =>
-                                              S.editor()
-                                                .id(id)
-                                                .schemaType(type)
-                                                .documentId(id)
-                                                .views([S.view.form()])
-                                            )
-                                        );
-                                    })
-                                  );
-                              })
+                                    subjects
+                                      .sort((a, b) =>
+                                        a.key.localeCompare(b.key)
+                                      )
+                                      .map((subject) =>
+                                        S.listItem()
+                                          .title(subject.key)
+                                          .id(subject._id)
+                                          .child((id) =>
+                                            S.editor()
+                                              .id(id)
+                                              .schemaType('lokalizeText')
+                                              .documentId(id)
+                                              .views([S.view.form()])
+                                          )
+                                      )
+                                  )
+                              )
                             )
                         )
                     )
