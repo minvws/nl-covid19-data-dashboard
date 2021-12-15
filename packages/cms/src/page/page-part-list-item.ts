@@ -40,10 +40,7 @@ function pageDataListItem(page: any) {
       documentStore
         .listenQuery(
           `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]`,
-          {
-            id: page._id,
-            name: `${page.identifier}*`,
-          }
+          { id: page._id }
         )
         .pipe(
           map((childPages: any) =>
@@ -62,9 +59,9 @@ function pageDataListItem(page: any) {
                           S.documentList()
                             .title(scope)
                             .filter(
-                              '_type == "lokalizeText" && subject == $name'
+                              '_type == "lokalizeText" && subject == $subject'
                             )
-                            .params({ name: `deceasedPage_${scope}` })
+                            .params({ subject: `${page.identifier}_${scope}` })
                         )
                     )
                   )
