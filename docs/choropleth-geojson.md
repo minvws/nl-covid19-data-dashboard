@@ -2,7 +2,7 @@
 
 The Dutch municipal and safety region borders get updated quite frequently, so there is
 a chance that a new set of GEOJson data will have to be created eventually.
-This section describes how generate this data with the correct projection applied.
+This section describes how to generate this data with the correct projection applied.
 
 ## Software requirements
 
