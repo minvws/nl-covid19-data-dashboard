@@ -1,4 +1,4 @@
-# Creating the choropleth GEOJson data
+# Creating the choropleth TopoJson data
 
 The Dutch municipal and safety region borders get updated quite frequently, so there is
 a chance that a new set of GEOJson data will have to be created eventually.
@@ -13,8 +13,8 @@ This section describes how to generate this data with the correct projection app
 
 ### Importing the source data
 
-To create the data files we need, we will be using `cbsgebiedsindelingen_2020_v3_pdok.gpkg` as
-data source this package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen)
+To create the data files we need, we will be using `cbsgebiedsindelingen_2020_v3_pdok.gpkg` as the
+data source. This package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen)
 
 ATTENTION: At the time of writing, the `cbsgebiedsindelingen_2020_v3_pdok.gpkg` file is the latest version.
 It is of course very likely that by the time new data needs to be generated that a newer file is available.
@@ -29,13 +29,13 @@ the main QGIS window) and select the following layers to be added:
 
 NOTE: The year indicator will differ when dealing with newer data. Find the layer with the most recent year.
 
-Import with the CRS: `EPSG:28992 - Amersfoort / RD New - Projected` projection which should the default while importing.
+Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection which should the default while importing.
 
 ### Cleaning up the imported data
 
-To clean up the data we have to undertake the following steps:
+To clean up the data we have to perform the following steps:
 
-Creating the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
+Create the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
 
 1. Right-click on the **layer > Properties > Source fields**
 2. Rename (click the pencil to active edit mode):
@@ -50,7 +50,7 @@ Creating the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
      - Select: `code`
 6. Export by clicking **"Ok"**
 
-Creating the safety regions data file (**cbs_veiligheidsregio_2020_gegeneraliseerd**):
+Create the safety regions data file (**cbs_veiligheidsregio_2020_gegeneraliseerd**):
 
 1. Right-click on the **layer > Properties > Source fields**
 2. Rename (click the pencil to active edit mode):
@@ -65,7 +65,7 @@ Creating the safety regions data file (**cbs_veiligheidsregio_2020_gegeneralisee
      - Select: `code`
 6. Export by clicking **"Ok"**
 
-Creating the Netherlands data file (**cbs_landsdeel_2020_gegeneraliseerd**):
+Create the Netherlands data file (**cbs_landsdeel_2020_gegeneraliseerd**):
 
 1. Select the layer and go to **Vector > Geoprocessing Tools > Dissolve > Run**, this will merge the different areas
 2. Select the new layer and right-click on the **layer > Export > Save Features As..**
@@ -77,7 +77,7 @@ Creating the Netherlands data file (**cbs_landsdeel_2020_gegeneraliseerd**):
      - Deselect all
 4. Export by clicking **"Ok"**
 
-To make sure the coordinating system is correct we have to convert the exported files to lat and lon coordinates:
+To make sure the coordinate system is correct we have to convert the exported files to lat and lon coordinates:
 
 1. Create a new project and add the three files:
    - `cbs_landsdeel_2020_gegeneraliseerd.geojson`
@@ -100,13 +100,15 @@ To make sure the coordinating system is correct we have to convert the exported 
    - Change: `cbs_veiligheidsregio_2020_gegeneraliseerd` to `vr_features`
 3. Export to TopoJSON > `nl-vr-gm-high-detail.topo.json`;
 
-Simplifying (this needs to be separate step; when doing this in the step above the output will not be correct):
+Simplifying:
+(NB: this needs to be separate step; when doing this in the step above the output will not be correct**!!**):
 
 1. Upload the output `nl-vr-gm-high-detail.topo.json` to a new instance of [mapshaper.org](https://mapshaper.org/)
 2. Do for each layer:
    - Select the layer and open the console; simplify using the following command: $ -simplify 27.5%
 3. When all the layers are simplified export to TopoJSON > `nl-vr-gm.topo.json`
-4. Add the new data file to the project and update `topology.ts`.
+4. Add the new data file to the project at `packages/app/pages/api/topo-json`.
+5. Update the file `topology.ts`, if necessary. (located at `packages/app/pages/api/choropleth`)
 
 ### Example of the topology.ts file
 
@@ -139,3 +141,6 @@ export const gmGeo = topojson.feature(
   nlTopology.objects.gm_features
 ) as CodedGeoJSON;
 ```
+
+Note that the map data is stored as TopoJson. This is because of the size optimizations that TopoJson provides,
+at run time, after being downloaded by the choropleth component this TopoJson is converted to GeoJson.
