@@ -265,9 +265,9 @@ export interface Nl {
   difference: NlDifference;
   named_difference: NlNamedDifference;
   booster_shot_administered: NlBoosterShotAdministered;
-  booster_shot_delivered: NlBoosterShotDelivered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
+  booster_and_third_shot_administered: NlBoosterAndThirdShotAdministered;
   third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;
@@ -367,18 +367,10 @@ export interface NlBoosterShotAdministered {
   last_value: NlBoosterShotAdministeredValue;
 }
 export interface NlBoosterShotAdministeredValue {
-  administered_last_7_days: number;
-  administered_total: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBoosterShotDelivered {
-  values: NlBoosterShotDeliveredValue[];
-  last_value: NlBoosterShotDeliveredValue;
-}
-export interface NlBoosterShotDeliveredValue {
-  delivered_total: number;
+  ggd_administered_last_7_days: number;
+  ggd_administered_total: number;
+  others_administered_last_7_days: number;
+  others_administered_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -388,8 +380,7 @@ export interface NlBoosterShotPlanned {
 }
 export interface NlBoosterShotPlannedValue {
   planned_7_days: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBoosterShotPerAgeGroup {
@@ -404,6 +395,15 @@ export interface NlBoosterShotPerAgeGroupValue {
   date_end_unix: number;
   birthyear_range: string;
 }
+export interface NlBoosterAndThirdShotAdministered {
+  values: NlBoosterAndThirdShotAdministeredValue[];
+  last_value: NlBoosterAndThirdShotAdministeredValue;
+}
+export interface NlBoosterAndThirdShotAdministeredValue {
+  administered_total: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlThirdShotAdministered {
   values: NlThirdShotAdministeredValue[];
   last_value: NlThirdShotAdministeredValue;
@@ -411,8 +411,7 @@ export interface NlThirdShotAdministered {
 export interface NlThirdShotAdministeredValue {
   administered_last_7_days: number;
   administered_total: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlDoctor {
