@@ -14,6 +14,7 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -30,6 +31,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectVrData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
@@ -38,6 +40,8 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(['deceasedPage_vr'], locale),
   getLastGeneratedDate,
   selectVrData(
     'deceased_cbs',
@@ -74,6 +78,7 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     selectedVrData: {
       deceased_cbs: dataCbs,
       deceased_rivm: dataRivm,
@@ -85,7 +90,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { siteText } = useIntl();
-  const text = siteText.deceasedPage_vr;
+  const text = pageText.deceasedPage_vr;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,

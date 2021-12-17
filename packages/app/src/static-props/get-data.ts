@@ -384,11 +384,13 @@ export function getLokalizeTexts<T extends keyof SiteText>(
   keys: T[],
   locale: keyof Languages
 ) {
-  return keys.reduce(
-    (acc, key) => ({
-      ...acc,
-      [key]: languages[locale][key],
-    }),
-    {}
-  ) as Pick<SiteText, T>;
+  return {
+    pageText: keys.reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: languages[locale][key],
+      }),
+      {}
+    ) as Pick<SiteText, T>,
+  } as const;
 }
