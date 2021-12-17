@@ -22,16 +22,19 @@
       "title": "nl_booster_shot_administered_value",
       "type": "object",
       "properties": {
-        "administered_last_7_days": {
-          "type": "number"
-        },
-        "administered_total": {
-          "type": "number"
-        },
-        "date_start_unix": {
+        "ggd_administered_last_7_days": {
           "type": "integer"
         },
-        "date_end_unix": {
+        "ggd_administered_total": {
+          "type": "integer"
+        },
+        "others_administered_last_7_days": {
+          "type": "integer"
+        },
+        "others_administered_total": {
+          "type": "integer"
+        },
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -39,10 +42,11 @@
         }
       },
       "required": [
-        "administered_last_7_days",
-        "administered_total",
-        "date_start_unix",
-        "date_end_unix",
+        "ggd_administered_last_7_days",
+        "ggd_administered_total",
+        "others_administered_last_7_days",
+        "others_administered_total",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

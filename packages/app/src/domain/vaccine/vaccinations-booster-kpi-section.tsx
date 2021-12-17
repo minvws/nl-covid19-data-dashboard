@@ -1,3 +1,9 @@
+import {
+  NlBoosterAndThirdShotAdministeredValue,
+  NlBoosterShotAdministeredValue,
+  NlBoosterShotPlannedValue,
+  NlThirdShotAdministeredValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
@@ -6,12 +12,22 @@ import { Markdown } from '~/components/markdown';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-const DATE_UNIX_FOR_KEY_MODE = 1638705600;
-const METRIC_FOR_KEY_MODE = 9999;
+interface VaccinationsBoosterKpiSectionProps {
+  dataBoosterAndThirdShotAdministered: NlBoosterAndThirdShotAdministeredValue;
+  dataBoosterShotAdministered: NlBoosterShotAdministeredValue;
+  dataBoosterShotPlanned: NlBoosterShotPlannedValue;
+  dataThirdShotAdministered: NlThirdShotAdministeredValue;
+}
 
-export function TemporaryBoosterKpiSection() {
-  const { siteText, dataset, formatNumber } = useIntl();
+export function VaccinationsBoosterKpiSection({
+  dataBoosterAndThirdShotAdministered,
+  dataBoosterShotAdministered,
+  dataBoosterShotPlanned,
+  dataThirdShotAdministered,
+}: VaccinationsBoosterKpiSectionProps) {
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties.four_kpi_section;
 
@@ -21,10 +37,7 @@ export function TemporaryBoosterKpiSection() {
         <KpiTile
           title={text.total_booster_and_third_shots.title}
           metadata={{
-            date:
-              dataset === 'keys'
-                ? DATE_UNIX_FOR_KEY_MODE
-                : Number(text.total_booster_and_third_shots.date_unix),
+            date: dataBoosterAndThirdShotAdministered.date_unix,
             source: {
               href: text.total_booster_and_third_shots.sources.href,
               text: text.total_booster_and_third_shots.sources.text,
@@ -41,9 +54,9 @@ export function TemporaryBoosterKpiSection() {
               lineHeight: 1,
             })}
           >
-            {dataset === 'keys'
-              ? METRIC_FOR_KEY_MODE
-              : formatNumber(Number(text.total_booster_and_third_shots.metric))}
+            {formatNumber(
+              dataBoosterAndThirdShotAdministered.administered_total
+            )}
           </Text>
           <Markdown content={text.total_booster_and_third_shots.description} />
         </KpiTile>
@@ -51,10 +64,7 @@ export function TemporaryBoosterKpiSection() {
         <KpiTile
           title={text.boosters_ggd.title}
           metadata={{
-            date:
-              dataset === 'keys'
-                ? DATE_UNIX_FOR_KEY_MODE
-                : Number(text.boosters_ggd.date_unix),
+            date: dataBoosterAndThirdShotAdministered.date_unix,
             source: {
               href: text.boosters_ggd.sources.href,
               text: text.boosters_ggd.sources.text,
@@ -62,13 +72,18 @@ export function TemporaryBoosterKpiSection() {
           }}
         >
           <KpiValue
-            absolute={
-              dataset === 'keys'
-                ? METRIC_FOR_KEY_MODE
-                : Number(text.boosters_ggd.metric)
-            }
+            absolute={dataBoosterShotAdministered.ggd_administered_total}
           />
-          <Markdown content={text.boosters_ggd.description} />
+          <Markdown
+            content={replaceVariablesInText(text.boosters_ggd.description, {
+              lastSevenDaysGgd: formatNumber(
+                dataBoosterShotAdministered.ggd_administered_last_7_days
+              ),
+              plannedSevenDays: formatNumber(
+                dataBoosterShotPlanned.planned_7_days
+              ),
+            })}
+          />
         </KpiTile>
       </TwoKpiSection>
 
@@ -76,10 +91,7 @@ export function TemporaryBoosterKpiSection() {
         <KpiTile
           title={text.estimated_boosters_other_operators.title}
           metadata={{
-            date:
-              dataset === 'keys'
-                ? DATE_UNIX_FOR_KEY_MODE
-                : Number(text.estimated_boosters_other_operators.date_unix),
+            date: dataBoosterAndThirdShotAdministered.date_unix,
             source: {
               href: text.estimated_boosters_other_operators.sources.href,
               text: text.estimated_boosters_other_operators.sources.text,
@@ -87,11 +99,7 @@ export function TemporaryBoosterKpiSection() {
           }}
         >
           <KpiValue
-            absolute={
-              dataset === 'keys'
-                ? METRIC_FOR_KEY_MODE
-                : Number(text.estimated_boosters_other_operators.metric)
-            }
+            absolute={dataBoosterShotAdministered.others_administered_total}
           />
           <Markdown
             content={text.estimated_boosters_other_operators.description}
@@ -101,24 +109,21 @@ export function TemporaryBoosterKpiSection() {
         <KpiTile
           title={text.third_shots_ggd.title}
           metadata={{
-            date:
-              dataset === 'keys'
-                ? DATE_UNIX_FOR_KEY_MODE
-                : Number(text.third_shots_ggd.date_unix),
+            date: dataBoosterAndThirdShotAdministered.date_unix,
             source: {
               href: text.third_shots_ggd.sources.href,
               text: text.third_shots_ggd.sources.text,
             },
           }}
         >
-          <KpiValue
-            absolute={
-              dataset === 'keys'
-                ? METRIC_FOR_KEY_MODE
-                : Number(text.third_shots_ggd.metric)
-            }
+          <KpiValue absolute={dataThirdShotAdministered.administered_total} />
+          <Markdown
+            content={replaceVariablesInText(text.third_shots_ggd.description, {
+              lastSevenDays: formatNumber(
+                dataThirdShotAdministered.administered_last_7_days
+              ),
+            })}
           />
-          <Markdown content={text.third_shots_ggd.description} />
         </KpiTile>
       </TwoKpiSection>
     </Box>
