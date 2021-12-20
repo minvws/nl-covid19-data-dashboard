@@ -145,6 +145,7 @@ const ComboBoxStyles = createGlobalStyle`
   content: '';
   background-image: url('${searchUrl}');
   background-size: 1.5em 1.5em;
+  border-radius: 5px;
   height: 1.5em;
   width: 1.5em;
   display: block;
@@ -155,6 +156,7 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-popover] {
+  border-radius: 5px;
   z-index: 100;
 }
 
@@ -168,6 +170,7 @@ const ComboBoxStyles = createGlobalStyle`
   height: 30em;
   overflow-y: scroll;
   border: none;
+  border-radius: 5px;
   box-shadow: 0 -1px 1px 0 #e5e5e5, 0 1px 1px 0 #e5e5e5, 0 2px 2px 0 #e5e5e5,
   0 4px 4px 0 #e5e5e5, 0 6px 6px 0 #e5e5e5;
 }
@@ -179,6 +182,7 @@ const ComboBoxStyles = createGlobalStyle`
   font-family: inherit;
   font-size: ${(x) => x.theme.fontSizes[2]} ;
   border: 1px solid #c4c4c4;
+  border-radius: 5px;
 }
 
 [data-reach-combobox-input]:focus {
