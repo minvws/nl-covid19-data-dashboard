@@ -169,7 +169,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
         <MaxWidth id="content">
-          <Box spacing={{ _: 4, md: 5 }} px={{ _: 3, sm: 5 }}>
+          <Box spacing={{ _: 4, md: 5 }} px={{ _: 3, sm: 4 }}>
             <Box spacing={3}>
               <TopicalSectionHeader
                 showBackLink

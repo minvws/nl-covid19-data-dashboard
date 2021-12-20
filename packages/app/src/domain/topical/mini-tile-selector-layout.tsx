@@ -70,7 +70,7 @@ function NarrowMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   /**
    * Extra filter for feature flag
    */
-  const filteredChildren = children.filter(x => x !== false);
+  const filteredChildren = children.filter((x) => x !== false);
 
   return (
     <>
@@ -175,10 +175,10 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   /**
    * Extra filter for feature flag
    */
-  const filteredChildren = children.filter(x => x !== false);
+  const filteredChildren = children.filter((x) => x !== false);
 
   return (
-    <Box display="grid" gridTemplateColumns="24% 1fr" minHeight={265}>
+    <Box display="grid" gridTemplateColumns="30% 1fr" minHeight={265}>
       <Box borderRight="1px" borderRightStyle="solid" borderRightColor="border">
         <ul>
           {menuItems.map((item, index) => (
@@ -259,7 +259,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
           }
         </>
       </Box>
-      <Box pl={5}>{filteredChildren[selectedIndex]}</Box>
+      <Box pl={4}>{filteredChildren[selectedIndex]}</Box>
     </Box>
   );
 }
