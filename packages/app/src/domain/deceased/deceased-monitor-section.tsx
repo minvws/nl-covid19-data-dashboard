@@ -3,20 +3,19 @@ import { AnchorTile } from '~/components/anchor-tile';
 import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 
 export function DeceasedMonitorSection({
   data,
+  text,
   showDataMessage,
   showCauseMessage,
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
+  text: SiteText['deceasedPage_shared']['section_sterftemonitor'];
   showDataMessage?: boolean;
   showCauseMessage?: boolean;
 }) {
-  const { siteText } = useIntl();
-  const text = siteText.section_sterftemonitor;
-
   return (
     <>
       {showDataMessage && (

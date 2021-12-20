@@ -40,7 +40,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(['deceasedPage_nl'], locale),
+    getLokalizeTexts(['deceasedPage_nl', 'deceasedPage_shared'], locale),
   getLastGeneratedDate,
   selectNlData(
     'deceased_cbs',
@@ -221,11 +221,11 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={siteText.deceased_age_groups.title}
-            description={siteText.deceased_age_groups.description}
+            title={pageText.deceasedPage_shared.age_groups.title}
+            description={pageText.deceasedPage_shared.age_groups.description}
             metadata={{
               date: dataRivm.last_value.date_unix,
-              source: siteText.deceased_age_groups.bronnen.rivm,
+              source: pageText.deceasedPage_shared.age_groups.bronnen.rivm,
             }}
           >
             <AgeDemographic
@@ -238,7 +238,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               rightColor={'data.primary'}
               leftColor={'data.neutral'}
               maxDisplayValue={45}
-              text={siteText.deceased_age_groups.graph}
+              text={pageText.deceasedPage_shared.age_groups.graph}
               formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
             />
           </ChartTile>
@@ -246,24 +246,32 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           <Divider />
 
           <PageInformationBlock
-            title={siteText.section_sterftemonitor.title}
+            title={pageText.deceasedPage_shared.section_sterftemonitor.title}
             icon={<Coronavirus />}
-            description={siteText.section_sterftemonitor.description}
-            referenceLink={siteText.section_sterftemonitor.reference.href}
+            description={
+              pageText.deceasedPage_shared.section_sterftemonitor.description
+            }
+            referenceLink={
+              pageText.deceasedPage_shared.section_sterftemonitor.reference.href
+            }
             metadata={{
-              datumsText: siteText.section_sterftemonitor.datums,
+              datumsText:
+                pageText.deceasedPage_shared.section_sterftemonitor.datums,
               dateOrRange: {
                 start: dataCbs.last_value.date_start_unix,
                 end: dataCbs.last_value.date_end_unix,
               },
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
-              dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
+              dataSources: [
+                pageText.deceasedPage_shared.section_sterftemonitor.bronnen.cbs,
+              ],
             }}
             articles={content.monitorArticles}
           />
 
           <DeceasedMonitorSection
             data={dataCbs}
+            text={pageText.deceasedPage_shared.section_sterftemonitor}
             showDataMessage
             showCauseMessage
           />
