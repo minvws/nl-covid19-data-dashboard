@@ -61,7 +61,12 @@ function pageDataListItem(page: PagePartPage) {
                   .sort((a, b) => a.title.localeCompare(b.title))
                   .map(pageDataItem)
                   .concat(
-                    [{scope: 'nl', title: 'Landelijk lokalize'}, {scope: 'gm', title: 'Regio lokalize'}, {scope: 'vr', title: 'Gemeente lokalize'}].map((item) =>
+                    [
+                      { scope: 'nl', title: 'Landelijk lokalize' },
+                      { scope: 'gm', title: 'Gemeente lokalize' },
+                      { scope: 'vr', title: 'Regio lokalize' },
+                      { scope: 'shared', title: 'Gedeelde lokalize' },
+                    ].map((item) =>
                       S.listItem()
                         .title(item.scope)
                         .icon(FaLanguage)
@@ -71,7 +76,9 @@ function pageDataListItem(page: PagePartPage) {
                             .filter(
                               '_type == "lokalizeText" && subject == $subject'
                             )
-                            .params({ subject: `${page.identifier}_${item.scope}` })
+                            .params({
+                              subject: `${page.identifier}_${item.scope}`,
+                            })
                         )
                     )
                   )
