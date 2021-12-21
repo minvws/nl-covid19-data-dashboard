@@ -24,62 +24,74 @@ export function VaccineBoosterAdministrationsKpiSection({
   const text = siteText.vaccinaties;
 
   const boosterAndThirdKpiText = text.booster_and_third_kpi;
-  
+
   const totalBoosterAndThirdShots = {
     value: boosterAndThirdKpiText.total_booster_and_third_shots.value,
-    description: boosterAndThirdKpiText.total_booster_and_third_shots.description,
+    description:
+      boosterAndThirdKpiText.total_booster_and_third_shots.description,
     percentage: boosterAndThirdKpiText.total_booster_and_third_shots.percentage,
-    percentageDescription: boosterAndThirdKpiText.total_booster_and_third_shots.percentage_description,
+    percentageDescription:
+      boosterAndThirdKpiText.total_booster_and_third_shots
+        .percentage_description,
     warning: boosterAndThirdKpiText.total_booster_and_third_shots.warning,
-    metadataDate: boosterAndThirdKpiText.total_booster_and_third_shots.metadata_date,
-  }
-  
+    metadataDate:
+      boosterAndThirdKpiText.total_booster_and_third_shots.metadata_date,
+  };
+
   const boosterGgd = {
     value: boosterAndThirdKpiText.booster_ggd.value,
     title: boosterAndThirdKpiText.booster_ggd.title,
     metadataDate: boosterAndThirdKpiText.booster_ggd.metadata_date,
-  }
-  
+  };
+
   const boosterEstimated = {
     value: boosterAndThirdKpiText.booster_estimated.value,
     title: boosterAndThirdKpiText.booster_estimated.title,
     metadataDate: boosterAndThirdKpiText.booster_estimated.metadata_date,
-  }
-  
+  };
+
   const thirdGgd = {
     value: boosterAndThirdKpiText.booster_ggd.value,
     title: boosterAndThirdKpiText.booster_ggd.title,
     metadataDate: boosterAndThirdKpiText.third_ggd.metadata_date,
-  }
+  };
 
   const metadata: MetadataProps = {
     date: totalBoosterAndThirdShots.metadataDate,
     source: source,
-  }
+  };
 
   return (
     <Tile>
       <Box mb={20}>
-        <Heading level={3}>{boosterAndThirdKpiText.title}</Heading>
+        <TwoKpiSection>
+          <Heading level={3}>{boosterAndThirdKpiText.title}</Heading>
+          <Box />
+        </TwoKpiSection>
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
           <KpiValue
-            absolute={parseInt(totalBoosterAndThirdShots.value.replace(/\D/g, ""))}
+            absolute={parseInt(
+              totalBoosterAndThirdShots.value.replace(/\D/g, '')
+            )}
           />
-          <Text>
-            {totalBoosterAndThirdShots.description}
-          </Text>
+          <Text>{totalBoosterAndThirdShots.description}</Text>
           <Text fontWeight="bold">
-            {replaceComponentsInText(totalBoosterAndThirdShots.percentageDescription, {
-              percentage: (
-                <InlineText color="data.primary">
-                  {`${formatPercentageAsNumber(totalBoosterAndThirdShots.percentage)}%`}
-                </InlineText>
-              ),
-            })}
+            {replaceComponentsInText(
+              totalBoosterAndThirdShots.percentageDescription,
+              {
+                percentage: (
+                  <InlineText color="data.primary">
+                    {`${formatPercentageAsNumber(
+                      totalBoosterAndThirdShots.percentage
+                    )}%`}
+                  </InlineText>
+                ),
+              }
+            )}
           </Text>
-          <Message variant='warning'>
+          <Message variant="warning">
             {totalBoosterAndThirdShots.warning}
           </Message>
           {metadata && <Metadata {...metadata} isTileFooter />}
@@ -121,7 +133,7 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
   const metadata: MetadataProps = {
     date: date,
     source: source,
-  }
+  };
 
   return (
     <Box spacing={1}>

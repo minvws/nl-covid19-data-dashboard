@@ -278,8 +278,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
-              boostered:
-                formatPercentageAsNumber(siteText.common_actueel.booster_shots_administered_total),
+              boostered: formatPercentageAsNumber(
+                siteText.common_actueel.booster_shots_administered_total
+              ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
@@ -500,36 +501,39 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
-              )}
+            )}
 
-          <Divider />
+          <Box
+            pt={40}
+            borderTopWidth={2}
+            borderColor="silver"
+            borderStyle="solid"
+          >
+            <PageInformationBlock
+              icon={<BoosterIcon />}
+              title={text.booster_information_block.title}
+              description={text.booster_information_block.description}
+              metadata={{
+                datumsText: text.booster_information_block.datums,
+                dateOrRange:
+                  data.booster_and_third_shot_administered.last_value.date_unix,
+                dateOfInsertionUnix:
+                  data.booster_and_third_shot_administered.last_value.date_unix,
+                dataSources: [
+                  {
+                    href: '',
+                    text: text.booster_information_block.sources.text,
+                    download: '',
+                  },
+                ],
+              }}
+              referenceLink={text.booster_information_block.reference.href}
+              pageLinks={content.boosterLinks}
+              articles={content.boosterArticles}
+            />
+          </Box>
 
-          <PageInformationBlock
-            icon={<BoosterIcon />}
-            title={text.booster_information_block.title}
-            description={text.booster_information_block.description}
-            metadata={{
-              datumsText: text.booster_information_block.datums,
-              dateOrRange:
-                data.booster_and_third_shot_administered.last_value
-                  .date_unix,
-              dateOfInsertionUnix:
-                data.booster_and_third_shot_administered.last_value
-                  .date_unix,
-              dataSources: [
-                {
-                  href: '',
-                  text: text.booster_information_block.sources.text,
-                  download: '',
-                },
-              ],
-            }}
-            referenceLink={text.booster_information_block.reference.href}
-            pageLinks={content.boosterLinks}
-            articles={content.boosterArticles}
-          />
-
-          <VaccineBoosterAdministrationsKpiSection 
+          <VaccineBoosterAdministrationsKpiSection
             source={text.vaccination_grade_toggle_tile.source}
           />
 
@@ -541,9 +545,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               data.booster_shot_administered.last_value
             }
             dataBoosterShotPlanned={data.booster_shot_planned.last_value}
-            dataThirdShotAdministered={
-              data.third_shot_administered.last_value
-            }
+            dataThirdShotAdministered={data.third_shot_administered.last_value}
           />
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
