@@ -58,6 +58,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { formatPercentageAsNumber } from '~/utils/format-percentage-as-number';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -559,7 +560,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={
-                    siteText.common_actueel.booster_shots_administered_total
+                    formatPercentageAsNumber(siteText.common_actueel.booster_shots_administered_total)
                   }
                   warning={getWarning(
                     content.elements.warning,

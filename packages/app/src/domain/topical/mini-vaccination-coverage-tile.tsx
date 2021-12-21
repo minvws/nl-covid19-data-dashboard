@@ -11,7 +11,7 @@ import { MiniTile, MiniTileProps } from './mini-tile';
 type MiniVaccinationCoverageTileProps = {
   oneShotPercentage: number | null;
   fullyVaccinatedPercentage: number | null;
-  boosterShotAdministered: string;
+  boosterShotAdministered: number | null;
   oneShotPercentageLabel?: string | null;
   fullyVaccinatedPercentageLabel?: string | null;
   boosterShotAdministeredLabel?: string | null;
@@ -52,7 +52,7 @@ export function MiniVaccinationCoverageTile(
           barLabel={fullyVaccinatedBarLabel}
         />
         <LabeledBar
-          value={parseFloat(boosterShotAdministered.replace(',', '.'))}
+          value={boosterShotAdministered}
           color={COLOR_FULLY_BOOSTERED}
           valueLabel={boosterShotAdministeredLabel}
           barLabel={boosterShotAdministeredBarLabel}
