@@ -4,6 +4,7 @@ import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { Metadata, MetadataProps } from '~/components/metadata';
 import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
@@ -19,9 +20,11 @@ import {
 type AgeTypes = {
   fully_vaccinated: number | null;
   has_one_shot: number | null;
+  boostered?: number | null;
   birthyear: string;
   fully_vaccinated_label?: string | null;
   has_one_shot_label?: string | null;
+  boostered_label?: string | null;
 };
 
 interface VaccineCoverageToggleTileProps {
@@ -50,13 +53,14 @@ export function VaccineCoverageToggleTile({
   const text = siteText.vaccinaties.vaccination_grade_toggle_tile;
   const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
 
+  const metadata: MetadataProps = {
+    date: dateUnix,
+    source: source,
+  }
+  
   return (
     <KpiTile
       title={title}
-      metadata={{
-        date: dateUnix,
-        source: source,
-      }}
     >
       <>
         <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
@@ -84,14 +88,18 @@ export function VaccineCoverageToggleTile({
                 property="has_one_shot"
                 description={text.age_18_plus.description_vaccination_one_shot}
                 numFractionDigits={numFractionDigits}
-              />
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
               <AgeGroupBlock
                 title={text.top_labels.vaccination_grade}
                 data={age18Plus}
                 property="fully_vaccinated"
                 description={text.age_18_plus.description_vaccination_grade}
                 numFractionDigits={numFractionDigits}
-              />
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
             </>
           )}
           {selectedTab === text.age_12_plus.label && (
@@ -102,19 +110,50 @@ export function VaccineCoverageToggleTile({
                 property="has_one_shot"
                 description={text.age_12_plus.description_vaccination_one_shot}
                 numFractionDigits={numFractionDigits}
-              />
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
               <AgeGroupBlock
                 title={text.top_labels.vaccination_grade}
                 data={age12Plus}
                 property="fully_vaccinated"
                 description={text.age_12_plus.description_vaccination_grade}
                 numFractionDigits={numFractionDigits}
-              />
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
             </>
           )}
         </TwoKpiSection>
+        <Box mt={56}>
+          <TwoKpiSection spacing={5}>
+            {selectedTab === text.age_18_plus.label && (
+              <>
+                <AgeGroupBlock
+                  title={text.top_labels.booster_grade}
+                  data={age18Plus}
+                  property="boostered"
+                  description={text.age_18_plus.description_booster_grade}
+                  numFractionDigits={numFractionDigits}
+                >
+                  {metadata && <Metadata {...metadata} intervalCount={text.age_18_plus.booster_date_interval} isTileFooter />}
+                </AgeGroupBlock>
+                <Box/>
+              </>
+            )}
+            {selectedTab === text.age_12_plus.label && (
+              <>
+                <NoBoosterBlock
+                  title={text.top_labels.booster_grade}
+                  description={text.age_12_plus.description_booster_grade}
+                />
+                <Box/>
+              </>
+            )}
+          </TwoKpiSection>
+        </Box>
       </>
-      <Box maxWidth="maxWidthText">
+      <Box maxWidth="maxWidthText" mt={36}>
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>
@@ -127,6 +166,7 @@ interface AgeGroupBlockProps {
   property: KeyWithLabel<AgeTypes>;
   description: string;
   numFractionDigits?: number;
+  children?: React.ReactNode;
 }
 
 function AgeGroupBlock({
@@ -135,6 +175,7 @@ function AgeGroupBlock({
   property,
   description,
   numFractionDigits,
+  children,
 }: AgeGroupBlockProps) {
   const { siteText } = useIntl();
   const formatCoveragePercentage =
@@ -165,6 +206,34 @@ function AgeGroupBlock({
             parsedBirthyearRange
           ),
         })}
+      />
+      { children }
+    </Box>
+  );
+}
+
+interface NoBoosterBlockProps {
+  title: string;
+  description: string;
+}
+
+function NoBoosterBlock({
+  title,
+  description,
+}: NoBoosterBlockProps) {
+
+  return (
+    <Box spacing={2}>
+      <InlineText
+        fontWeight="bold"
+        css={css({
+          display: 'flex',
+        })}
+      >
+        {title}
+      </InlineText>
+      <Markdown
+        content={description}
       />
     </Box>
   );

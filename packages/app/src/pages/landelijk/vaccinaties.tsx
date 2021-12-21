@@ -70,6 +70,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { formatPercentageAsNumber } from '~/utils/format-percentage-as-number';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -289,6 +290,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+              boostered:
+                formatPercentageAsNumber(siteText.common_actueel.booster_shots_administered_total),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
