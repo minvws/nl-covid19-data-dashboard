@@ -502,36 +502,34 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
-
           <Box
             pt={40}
             borderTopWidth={2}
             borderColor="silver"
             borderStyle="solid"
           >
-            <PageInformationBlock
-              icon={<BoosterIcon />}
-              title={text.booster_information_block.title}
-              description={text.booster_information_block.description}
-              metadata={{
-                datumsText: text.booster_information_block.datums,
-                dateOrRange:
-                  data.booster_and_third_shot_administered.last_value.date_unix,
-                dateOfInsertionUnix:
-                  data.booster_and_third_shot_administered.last_value.date_unix,
-                dataSources: [
-                  {
-                    href: '',
-                    text: text.booster_information_block.sources.text,
-                    download: '',
-                  },
-                ],
-              }}
-              referenceLink={text.booster_information_block.reference.href}
-              pageLinks={content.boosterLinks}
-              articles={content.boosterArticles}
-            />
-          </Box>
+          <PageInformationBlock
+            icon={<BoosterIcon />}
+            title={text.booster_information_block.title}
+            description={text.booster_information_block.description}
+            metadata={{
+              datumsText: text.booster_information_block.datums,
+              dateOrRange:
+                data.booster_and_third_shot_administered.last_value
+                  .date_unix,
+              dateOfInsertionUnix:
+                data.booster_and_third_shot_administered.last_value
+                  .date_unix,
+              dataSources: [
+                {
+                  href: '',
+                  text: text.booster_information_block.sources.text,
+                  download: '',
+                },
+              ],
+            referenceLink={text.booster_information_block.reference.href}
+          />
+		</Box>
 
           <VaccineBoosterAdministrationsKpiSection
             source={text.vaccination_grade_toggle_tile.source}
