@@ -525,8 +525,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ],
             }}
             referenceLink={text.booster_information_block.reference.href}
-            pageLinks={content.boosterLinks}
-            articles={content.boosterArticles}
           />
 
           <VaccineBoosterAdministrationsKpiSection 
@@ -534,16 +532,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           <VaccinationsBoosterKpiSection
-            dataBoosterAndThirdShotAdministered={
-              data.booster_and_third_shot_administered.last_value
-            }
             dataBoosterShotAdministered={
-              data.booster_shot_administered.last_value
+              data.booster_shot_administered.last_value.ggd_administered_last_7_days
             }
-            dataBoosterShotPlanned={data.booster_shot_planned.last_value}
-            dataThirdShotAdministered={
-              data.third_shot_administered.last_value
+            dataBoosterShotPlanned={
+              data.booster_shot_planned.last_value.planned_7_days
             }
+            source={text.vaccination_grade_toggle_tile.source}
           />
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
