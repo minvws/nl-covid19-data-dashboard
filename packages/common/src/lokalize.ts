@@ -64,14 +64,14 @@ export function parseLocaleTextDocument(
 
   const nl = document.should_display_empty
     ? ''
-    : document.text.nl?.trim() || '';
+    : document.text?.nl?.trim() || '';
 
   /**
    * Fall back to Dutch texts if English is missing.
    */
   const en = document.should_display_empty
     ? ''
-    : document.text.en?.trim() || nl;
+    : document.text?.en?.trim() || nl;
 
   return { jsonKey, localeText: { nl, en } };
 }
