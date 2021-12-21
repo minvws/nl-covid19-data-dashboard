@@ -83,5 +83,6 @@ const cli = meow(
   console.log(`Export dataset "${dataset}" completed`);
 })().catch((err) => {
   console.error(`Export failed: ${err.message}`);
+  console.error(err.stack);
   process.exit(1);
 });
