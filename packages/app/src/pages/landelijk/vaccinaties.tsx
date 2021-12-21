@@ -278,8 +278,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
-              boostered:
-                formatPercentageAsNumber(siteText.common_actueel.booster_shots_administered_total),
+              boostered: formatPercentageAsNumber(
+                siteText.common_actueel.booster_shots_administered_total
+              ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
@@ -500,10 +501,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
-              )}
-
-          <Divider />
-
+            )}
+          <Box
+            pt={40}
+            borderTopWidth={2}
+            borderColor="silver"
+            borderStyle="solid"
+          >
           <PageInformationBlock
             icon={<BoosterIcon />}
             title={text.booster_information_block.title}
@@ -526,8 +530,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={text.booster_information_block.reference.href}
           />
+		</Box>
 
-          <VaccineBoosterAdministrationsKpiSection 
+          <VaccineBoosterAdministrationsKpiSection
             source={text.vaccination_grade_toggle_tile.source}
           />
 
