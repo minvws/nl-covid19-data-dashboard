@@ -157,7 +157,7 @@ const ComboBoxStyles = createGlobalStyle`
 
 [data-reach-combobox-popover] {
   border: 1px solid ${(x) => x.theme.colors.icon};
-  border-top: 1px solid #c4c4c4;
+  border-top: none;
   border-radius: 0 0 5px 5px;
   z-index: 100;
 }
@@ -183,13 +183,14 @@ const ComboBoxStyles = createGlobalStyle`
   padding-left: 2.5em;
   font-family: inherit;
   font-size: ${(x) => x.theme.fontSizes[2]} ;
-  border: 1px solid #c4c4c4;
+  border: 1px solid ${(x) => x.theme.colors.silver};
   border-radius: 5px;
 }
 
-[data-reach-combobox-input]:focus {
+[data-reach-combobox-input]:focus,
+[data-reach-combobox-input][data-state="interacting"] {
   border-color: ${(x) => x.theme.colors.icon};
-  border-bottom: none;
+  border-bottom: 1px solid ${(x) => x.theme.colors.silver};
   border-radius: 5px 5px 0 0;
   outline: none;
 }
