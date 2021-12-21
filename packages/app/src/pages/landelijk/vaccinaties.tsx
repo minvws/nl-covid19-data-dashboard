@@ -5,6 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import {
   Arts,
+  VaccineBoosterThird as BoosterIcon,
   Vaccinaties as VaccinatieIcon,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
@@ -31,6 +32,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
+import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
 import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
@@ -196,10 +198,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationsIncidencePerAgeGroup'
   );
 
-  const vaccinationsBoosterInformationBlockFeature = useFeature(
-    'nlVaccinationsBoosterInformationBlock'
-  );
-
   const vaccinationStatusHospitalFeature = useFeature(
     'nlVaccinationHospitalVaccinationStatus'
   );
@@ -210,16 +208,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
-
-  const boosterAndThirdShotAdministeredFeature = useFeature(
-    'nlBoosterAndThirdShotAdministered'
-  );
-
-  const boosterShotAdministered = useFeature('nlBoosterShotAdministered');
-
-  const boosterShotPlannedFeature = useFeature('nlBoosterShotPlanned');
-
-  const bhirdShotAdministeredFeature = useFeature('nlThirdShotAdministered');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -512,58 +500,51 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
-            )}
+              )}
 
           <Divider />
 
-          {
-            (boosterAndThirdShotAdministeredFeature.isEnabled,
-            vaccinationsBoosterInformationBlockFeature.isEnabled && (
-              <PageInformationBlock
-                title={text.booster_information_block.title}
-                description={text.booster_information_block.description}
-                metadata={{
-                  datumsText: text.booster_information_block.datums,
-                  dateOrRange:
-                    data.booster_and_third_shot_administered.last_value
-                      .date_unix,
-                  dateOfInsertionUnix:
-                    data.booster_and_third_shot_administered.last_value
-                      .date_unix,
-                  dataSources: [
-                    {
-                      href: '',
-                      text: text.booster_information_block.sources.text,
-                      download: '',
-                    },
-                  ],
-                }}
-                referenceLink={text.booster_information_block.reference.href}
-                pageLinks={content.boosterLinks}
-                articles={content.boosterArticles}
-              />
-            ))
-          }
+          <PageInformationBlock
+            icon={<BoosterIcon />}
+            title={text.booster_information_block.title}
+            description={text.booster_information_block.description}
+            metadata={{
+              datumsText: text.booster_information_block.datums,
+              dateOrRange:
+                data.booster_and_third_shot_administered.last_value
+                  .date_unix,
+              dateOfInsertionUnix:
+                data.booster_and_third_shot_administered.last_value
+                  .date_unix,
+              dataSources: [
+                {
+                  href: '',
+                  text: text.booster_information_block.sources.text,
+                  download: '',
+                },
+              ],
+            }}
+            referenceLink={text.booster_information_block.reference.href}
+            pageLinks={content.boosterLinks}
+            articles={content.boosterArticles}
+          />
 
-          {
-            (boosterAndThirdShotAdministeredFeature.isEnabled,
-            boosterShotAdministered.isEnabled,
-            boosterShotPlannedFeature.isEnabled,
-            bhirdShotAdministeredFeature.isEnabled && (
-              <VaccinationsBoosterKpiSection
-                dataBoosterAndThirdShotAdministered={
-                  data.booster_and_third_shot_administered.last_value
-                }
-                dataBoosterShotAdministered={
-                  data.booster_shot_administered.last_value
-                }
-                dataBoosterShotPlanned={data.booster_shot_planned.last_value}
-                dataThirdShotAdministered={
-                  data.third_shot_administered.last_value
-                }
-              />
-            ))
-          }
+          <VaccineBoosterAdministrationsKpiSection 
+            source={text.vaccination_grade_toggle_tile.source}
+          />
+
+          <VaccinationsBoosterKpiSection
+            dataBoosterAndThirdShotAdministered={
+              data.booster_and_third_shot_administered.last_value
+            }
+            dataBoosterShotAdministered={
+              data.booster_shot_administered.last_value
+            }
+            dataBoosterShotPlanned={data.booster_shot_planned.last_value}
+            dataThirdShotAdministered={
+              data.third_shot_administered.last_value
+            }
+          />
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <VaccineBoosterPerAgeGroup
