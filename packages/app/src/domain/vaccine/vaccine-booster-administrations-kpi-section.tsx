@@ -4,16 +4,13 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Tile } from '~/components/tile';
 import { InlineText, Text, Heading } from '~/components/typography';
 import { Message } from '~/components/message';
-import { Metadata, MetadataProps } from '~/components/metadata';
+import { Metadata, source } from './components/metadata';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { formatPercentageAsNumber } from '~/utils/format-percentage-as-number';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
-  source: {
-    text: string;
-    href: string;
-  };
+  source: source,
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -52,11 +49,6 @@ export function VaccineBoosterAdministrationsKpiSection({
     metadataDate: boosterAndThirdKpiText.third_ggd.metadata_date,
   }
 
-  const metadata: MetadataProps = {
-    date: totalBoosterAndThirdShots.metadataDate,
-    source: source,
-  }
-
   return (
     <Tile>
       <Box mb={20}>
@@ -82,7 +74,7 @@ export function VaccineBoosterAdministrationsKpiSection({
           <Message variant='warning'>
             {totalBoosterAndThirdShots.warning}
           </Message>
-          {metadata && <Metadata {...metadata} isTileFooter />}
+          <Metadata date={totalBoosterAndThirdShots.metadataDate} source={source} />
         </Box>
         <Box spacing={4}>
           <BoosterAdministeredItem
@@ -112,16 +104,12 @@ export function VaccineBoosterAdministrationsKpiSection({
 interface BoosterAdministeredProps {
   value: string;
   description: string;
-  metadata: string;
+  date: string;
+  source: source;
 }
 
 function BoosterAdministeredItem(props: BoosterAdministeredProps) {
   const { value, description, date, source } = props;
-
-  const metadata: MetadataProps = {
-    date: date,
-    source: source,
-  }
 
   return (
     <Box spacing={1}>
@@ -135,7 +123,7 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
         })}
       </Text>
 
-      {metadata && <Metadata {...metadata} isTileFooter />}
+      <Metadata date={date} source={source}/>
     </Box>
   );
 }

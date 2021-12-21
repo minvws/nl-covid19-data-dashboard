@@ -1,48 +1,32 @@
-import {
-  NlBoosterAndThirdShotAdministeredValue,
-  NlBoosterShotAdministeredValue,
-  NlBoosterShotPlannedValue,
-  NlThirdShotAdministeredValue,
-} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Metadata, source } from './components/metadata';
 
 interface VaccinationsBoosterKpiSectionProps {
-  dataBoosterAndThirdShotAdministered: NlBoosterAndThirdShotAdministeredValue;
-  dataBoosterShotAdministered: NlBoosterShotAdministeredValue;
-  dataBoosterShotPlanned: NlBoosterShotPlannedValue;
-  dataThirdShotAdministered: NlThirdShotAdministeredValue;
+  dataBoosterShotAdministered: number;
+  dataBoosterShotPlanned: number;
+  source: source,
 }
 
 export function VaccinationsBoosterKpiSection({
-  dataBoosterAndThirdShotAdministered,
   dataBoosterShotAdministered,
   dataBoosterShotPlanned,
-  dataThirdShotAdministered,
+  source,
 }: VaccinationsBoosterKpiSectionProps) {
   const { siteText, formatNumber } = useIntl();
 
-  const text = siteText.vaccinaties.four_kpi_section;
+  const text = siteText.vaccinaties.booster_ggd_kpi_section;
 
   return (
     <Box spacing={4}>
       <TwoKpiSection>
         <KpiTile
-          title={text.total_booster_and_third_shots.title}
-          metadata={{
-            date: dataBoosterAndThirdShotAdministered.date_unix,
-            source: {
-              href: text.total_booster_and_third_shots.sources.href,
-              text: text.total_booster_and_third_shots.sources.text,
-            },
-          }}
+          title={text.booster_last_7_days.title}
         >
           <Text
             as="div"
@@ -55,75 +39,31 @@ export function VaccinationsBoosterKpiSection({
             })}
           >
             {formatNumber(
-              dataBoosterAndThirdShotAdministered.administered_total
+              dataBoosterShotAdministered
             )}
           </Text>
-          <Markdown content={text.total_booster_and_third_shots.description} />
+          <Markdown content={text.booster_last_7_days.description} />
+          <Metadata date={text.booster_last_7_days.metadata_date} source={source}/>
         </KpiTile>
-
         <KpiTile
-          title={text.boosters_ggd.title}
-          metadata={{
-            date: dataBoosterAndThirdShotAdministered.date_unix,
-            source: {
-              href: text.boosters_ggd.sources.href,
-              text: text.boosters_ggd.sources.text,
-            },
-          }}
+          title={text.booster_planned_7_days.title}
         >
-          <KpiValue
-            absolute={dataBoosterShotAdministered.ggd_administered_total}
-          />
-          <Markdown
-            content={replaceVariablesInText(text.boosters_ggd.description, {
-              lastSevenDaysGgd: formatNumber(
-                dataBoosterShotAdministered.ggd_administered_last_7_days
-              ),
-              plannedSevenDays: formatNumber(
-                dataBoosterShotPlanned.planned_7_days
-              ),
+          <Text
+            as="div"
+            css={css({
+              color: 'data.primary',
+              fontSize: 9,
+              fontWeight: 600,
+              fontVariantNumeric: 'tabular-nums',
+              lineHeight: 1,
             })}
-          />
-        </KpiTile>
-      </TwoKpiSection>
-
-      <TwoKpiSection>
-        <KpiTile
-          title={text.estimated_boosters_other_operators.title}
-          metadata={{
-            date: dataBoosterAndThirdShotAdministered.date_unix,
-            source: {
-              href: text.estimated_boosters_other_operators.sources.href,
-              text: text.estimated_boosters_other_operators.sources.text,
-            },
-          }}
-        >
-          <KpiValue
-            absolute={dataBoosterShotAdministered.others_administered_total}
-          />
-          <Markdown
-            content={text.estimated_boosters_other_operators.description}
-          />
-        </KpiTile>
-
-        <KpiTile
-          title={text.third_shots_ggd.title}
-          metadata={{
-            date: dataBoosterAndThirdShotAdministered.date_unix,
-            source: {
-              href: text.third_shots_ggd.sources.href,
-              text: text.third_shots_ggd.sources.text,
-            },
-          }}
-        >
-          <KpiValue absolute={dataThirdShotAdministered.administered_total} />
-          <Markdown
-            content={replaceVariablesInText(text.third_shots_ggd.description, {
-              lastSevenDays: formatNumber(
-                dataThirdShotAdministered.administered_last_7_days
-              ),
-            })}
-          />
+          >
+            {formatNumber(
+              dataBoosterShotPlanned
+            )}
+          </Text>
+          <Markdown content={text.booster_planned_7_days.description} />
+          <Metadata date={text.booster_last_7_days.metadata_date} source={source}/>
         </KpiTile>
       </TwoKpiSection>
     </Box>
