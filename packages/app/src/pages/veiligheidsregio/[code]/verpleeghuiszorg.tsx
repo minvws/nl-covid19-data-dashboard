@@ -171,7 +171,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'newly_infected_people_moving_average',
                     color: colors.data.primary,
                     label:
-                      positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
+                      positiveTestedPeopleText.legend
+                        .line_chart_legend_trend_moving_average,
                     shortLabel:
                       positiveTestedPeopleText.tooltip_labels
                         .newly_infected_people_moving_average,
@@ -181,7 +182,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'newly_infected_people',
                     color: colors.data.primary,
                     label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                      positiveTestedPeopleText.legend.line_chart_legend_trend,
                     shortLabel:
                       positiveTestedPeopleText.tooltip_labels
                         .newly_infected_people,
@@ -193,7 +194,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedDateStart,
                       end: Infinity,
                       label:
-                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+                        positiveTestedPeopleText.legend
+                          .line_chart_legend_inaccurate,
                       shortLabel:
                         positiveTestedPeopleText.tooltip_labels.inaccurate,
                       cutValuesForMetricProperties: [

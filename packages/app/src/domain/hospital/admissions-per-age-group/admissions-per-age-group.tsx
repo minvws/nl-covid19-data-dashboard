@@ -58,9 +58,9 @@ export function AdmissionsPerAgeGroup({
           ? text.legend[baseAgeGroup.metricProperty]
           : baseAgeGroup.metricProperty;
 
-          const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
-            age: label,
-          });
+      const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
+        age: label,
+      });
 
       return {
         ...baseAgeGroup,
