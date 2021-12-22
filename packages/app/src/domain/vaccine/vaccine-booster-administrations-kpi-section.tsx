@@ -10,7 +10,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { formatPercentageAsNumber } from '~/utils/format-percentage-as-number';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
-  source: source,
+  source: source;
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -86,7 +86,10 @@ export function VaccineBoosterAdministrationsKpiSection({
           <Message variant="warning">
             {totalBoosterAndThirdShots.warning}
           </Message>
-          <Metadata date={totalBoosterAndThirdShots.metadataDate} source={source} />
+          <Metadata
+            date={totalBoosterAndThirdShots.metadataDate}
+            source={source}
+          />
         </Box>
         <Box spacing={4}>
           <BoosterAdministeredItem
@@ -135,7 +138,7 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
         })}
       </Text>
 
-      <Metadata date={date} source={source}/>
+      <Metadata date={date} source={source} />
     </Box>
   );
 }

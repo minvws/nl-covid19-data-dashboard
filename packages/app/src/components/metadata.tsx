@@ -46,9 +46,11 @@ export function Metadata({
       ? date
       : null;
 
-  const intervalString = intervalCount && (replaceVariablesInText(siteText.common.metadata.interval, {
-    count: intervalCount,
-  }))
+  const intervalString =
+    intervalCount &&
+    replaceVariablesInText(siteText.common.metadata.interval, {
+      count: intervalCount,
+    });
 
   return (
     <>

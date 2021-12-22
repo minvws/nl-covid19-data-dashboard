@@ -53,7 +53,7 @@ export function VaccineCoverageToggleTile({
   const { siteText } = useIntl();
   const text = siteText.vaccinaties.vaccination_grade_toggle_tile;
   const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
-    
+
   const vaccinationsBoosterCoverageFeature = useFeature(
     'nlVaccinationsBoosterCoverage'
   );
@@ -61,12 +61,10 @@ export function VaccineCoverageToggleTile({
   const metadata: MetadataProps = {
     date: dateUnix,
     source: source,
-  }
-  
+  };
+
   return (
-    <KpiTile
-      title={title}
-    >
+    <KpiTile title={title}>
       <>
         <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
           <RadioGroup
@@ -142,9 +140,15 @@ export function VaccineCoverageToggleTile({
                     description={text.age_18_plus.description_booster_grade}
                     numFractionDigits={numFractionDigits}
                   >
-                    {metadata && <Metadata {...metadata} intervalCount={text.age_18_plus.booster_date_interval} isTileFooter />}
+                    {metadata && (
+                      <Metadata
+                        {...metadata}
+                        intervalCount={text.age_18_plus.booster_date_interval}
+                        isTileFooter
+                      />
+                    )}
                   </AgeGroupBlock>
-                  <Box/>
+                  <Box />
                 </>
               )}
               {selectedTab === text.age_12_plus.label && (
@@ -153,14 +157,17 @@ export function VaccineCoverageToggleTile({
                     title={text.top_labels.booster_grade}
                     description={text.age_12_plus.description_booster_grade}
                   />
-                  <Box/>
+                  <Box />
                 </>
               )}
             </TwoKpiSection>
           </Box>
         )}
       </>
-      <Box maxWidth="maxWidthText" mt={vaccinationsBoosterCoverageFeature.isEnabled ? 36 : 0}>
+      <Box
+        maxWidth="maxWidthText"
+        mt={vaccinationsBoosterCoverageFeature.isEnabled ? 36 : 0}
+      >
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>
@@ -214,7 +221,7 @@ function AgeGroupBlock({
           ),
         })}
       />
-      { children }
+      {children}
     </Box>
   );
 }
@@ -224,11 +231,7 @@ interface NoBoosterBlockProps {
   description: string;
 }
 
-function NoBoosterBlock({
-  title,
-  description,
-}: NoBoosterBlockProps) {
-
+function NoBoosterBlock({ title, description }: NoBoosterBlockProps) {
   return (
     <Box spacing={2}>
       <InlineText
@@ -239,9 +242,7 @@ function NoBoosterBlock({
       >
         {title}
       </InlineText>
-      <Markdown
-        content={description}
-      />
+      <Markdown content={description} />
     </Box>
   );
 }

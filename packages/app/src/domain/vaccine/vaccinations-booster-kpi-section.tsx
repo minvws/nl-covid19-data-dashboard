@@ -10,7 +10,7 @@ import { Metadata, source } from './components/metadata';
 interface VaccinationsBoosterKpiSectionProps {
   dataBoosterShotAdministered: number;
   dataBoosterShotPlanned: number;
-  source: source,
+  source: source;
 }
 
 export function VaccinationsBoosterKpiSection({
@@ -25,9 +25,7 @@ export function VaccinationsBoosterKpiSection({
   return (
     <Box spacing={4}>
       <TwoKpiSection>
-        <KpiTile
-          title={text.booster_last_7_days.title}
-        >
+        <KpiTile title={text.booster_last_7_days.title}>
           <Text
             as="div"
             css={css({
@@ -38,16 +36,15 @@ export function VaccinationsBoosterKpiSection({
               lineHeight: 1,
             })}
           >
-            {formatNumber(
-              dataBoosterShotAdministered
-            )}
+            {formatNumber(dataBoosterShotAdministered)}
           </Text>
           <Markdown content={text.booster_last_7_days.description} />
-          <Metadata date={text.booster_last_7_days.metadata_date} source={source}/>
+          <Metadata
+            date={text.booster_last_7_days.metadata_date}
+            source={source}
+          />
         </KpiTile>
-        <KpiTile
-          title={text.booster_planned_7_days.title}
-        >
+        <KpiTile title={text.booster_planned_7_days.title}>
           <Text
             as="div"
             css={css({
@@ -58,12 +55,13 @@ export function VaccinationsBoosterKpiSection({
               lineHeight: 1,
             })}
           >
-            {formatNumber(
-              dataBoosterShotPlanned
-            )}
+            {formatNumber(dataBoosterShotPlanned)}
           </Text>
           <Markdown content={text.booster_planned_7_days.description} />
-          <Metadata date={text.booster_last_7_days.metadata_date} source={source}/>
+          <Metadata
+            date={text.booster_last_7_days.metadata_date}
+            source={source}
+          />
         </KpiTile>
       </TwoKpiSection>
     </Box>

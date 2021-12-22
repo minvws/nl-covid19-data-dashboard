@@ -13,10 +13,7 @@ export interface MetadataProps extends MarginBottomProps {
   source: source;
 }
 
-export function Metadata({
-  date,
-  source,
-}: MetadataProps) {
+export function Metadata({ date, source }: MetadataProps) {
   const { siteText } = useIntl();
 
   return (

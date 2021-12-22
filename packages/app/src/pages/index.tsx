@@ -549,9 +549,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         />
                         {vaccinationsBoosterCoverageFeature.isEnabled && (
                           <Markdown
-                            content={replaceVariablesInText(siteText.common_actueel.booster_shots_administered_data_drive_text, {
-                              percentage: formatPercentageAsNumber(siteText.common_actueel.booster_shots_administered_total)
-                            })}
+                            content={replaceVariablesInText(
+                              siteText.common_actueel
+                                .booster_shots_administered_data_drive_text,
+                              {
+                                percentage: formatPercentageAsNumber(
+                                  siteText.common_actueel
+                                    .booster_shots_administered_total
+                                ),
+                              }
+                            )}
                           />
                         )}
                       </Text>
@@ -570,9 +577,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   fullyVaccinatedPercentage={
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
-                  boosterShotAdministered={
-                    formatPercentageAsNumber(siteText.common_actueel.booster_shots_administered_total)
-                  }
+                  boosterShotAdministered={formatPercentageAsNumber(
+                    siteText.common_actueel.booster_shots_administered_total
+                  )}
                   warning={getWarning(
                     content.elements.warning,
                     'vaccine_coverage_per_age_group_estimated'
