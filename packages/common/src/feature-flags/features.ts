@@ -132,7 +132,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlVaccinationsBoosterCoverage',
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     name: 'nlBoosterAndThirdShotAdministered',

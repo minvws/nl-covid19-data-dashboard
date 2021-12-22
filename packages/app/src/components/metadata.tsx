@@ -87,7 +87,7 @@ export function Metadata({
                       date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
                     }
                   )}`}
-                {`. ${intervalString}`}
+                {intervalString && `. ${intervalString}`}
                 {dateString && source ? ' · ' : null}
 
                 {source ? (

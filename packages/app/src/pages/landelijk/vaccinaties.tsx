@@ -72,7 +72,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { formatPercentageAsNumber } from '~/utils/format-percentage-as-number';
+import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -179,6 +179,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     deliveryAndAdministration,
   } = props;
   const { siteText, formatNumber } = useIntl();
+
+  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const text = siteText.vaccinaties;
 
@@ -545,7 +547,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
 
               <VaccineBoosterAdministrationsKpiSection
-                source={text.vaccination_grade_toggle_tile.source}
+                source={text.vaccination_grade_toggle_tile.source.text}
               />
             </>
           )}
@@ -593,7 +595,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               dataBoosterShotPlanned={
                 data.booster_shot_planned.last_value.planned_7_days
               }
-              source={text.vaccination_grade_toggle_tile.source}
+              source={text.vaccination_grade_toggle_tile.source.text}
             />
           )}
 

@@ -4,18 +4,20 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Tile } from '~/components/tile';
 import { InlineText, Text, Heading } from '~/components/typography';
 import { Message } from '~/components/message';
-import { Metadata, source } from './components/metadata';
+import { LokalizeMetadata } from '~/components/lokalize-metadata';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { formatPercentageAsNumber } from '~/utils/format-percentage-as-number';
+import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
-  source: source;
+  source: string;
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
   source,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
+  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
+
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
@@ -86,7 +88,7 @@ export function VaccineBoosterAdministrationsKpiSection({
           <Message variant="warning">
             {totalBoosterAndThirdShots.warning}
           </Message>
-          <Metadata
+          <LokalizeMetadata
             date={totalBoosterAndThirdShots.metadataDate}
             source={source}
           />
@@ -120,7 +122,7 @@ interface BoosterAdministeredProps {
   value: string;
   description: string;
   date: string;
-  source: source;
+  source: string;
 }
 
 function BoosterAdministeredItem(props: BoosterAdministeredProps) {
@@ -130,15 +132,11 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
     <Box spacing={1}>
       <Text fontWeight="bold">
         {replaceComponentsInText(description, {
-          value: (
-            <InlineText color="data.primary">
-              {`${formatPercentageAsNumber(value)}`}
-            </InlineText>
-          ),
+          value: <InlineText color="data.primary">{value}</InlineText>,
         })}
       </Text>
 
-      <Metadata date={date} source={source} />
+      <LokalizeMetadata date={date} source={source} />
     </Box>
   );
 }

@@ -58,8 +58,7 @@ export function MiniVaccinationCoverageTile(
         />
         {vaccinationsBoosterCoverageFeature.isEnabled &&
           boosterShotAdministered &&
-          boosterShotAdministeredBarLabel &&
-          boosterShotAdministeredLabel && (
+          boosterShotAdministeredBarLabel && (
             <LabeledBar
               value={boosterShotAdministered}
               color={COLOR_FULLY_BOOSTERED}

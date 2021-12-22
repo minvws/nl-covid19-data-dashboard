@@ -5,12 +5,12 @@ import { Markdown } from '~/components/markdown';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { Metadata, source } from './components/metadata';
+import { LokalizeMetadata } from '~/components/lokalize-metadata';
 
 interface VaccinationsBoosterKpiSectionProps {
   dataBoosterShotAdministered: number;
   dataBoosterShotPlanned: number;
-  source: source;
+  source: string;
 }
 
 export function VaccinationsBoosterKpiSection({
@@ -39,7 +39,7 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotAdministered)}
           </Text>
           <Markdown content={text.booster_last_7_days.description} />
-          <Metadata
+          <LokalizeMetadata
             date={text.booster_last_7_days.metadata_date}
             source={source}
           />
@@ -58,7 +58,7 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotPlanned)}
           </Text>
           <Markdown content={text.booster_planned_7_days.description} />
-          <Metadata
+          <LokalizeMetadata
             date={text.booster_last_7_days.metadata_date}
             source={source}
           />
