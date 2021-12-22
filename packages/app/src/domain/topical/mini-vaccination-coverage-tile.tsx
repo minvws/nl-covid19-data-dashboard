@@ -7,6 +7,8 @@ import {
 } from '../vaccine/vaccine-coverage-per-age-group/common';
 import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 import { MiniTile, MiniTileProps } from './mini-tile';
+import { useFeature } from '~/lib/features';
+
 
 type MiniVaccinationCoverageTileProps = {
   oneShotPercentage: number | null;
@@ -22,22 +24,26 @@ type MiniVaccinationCoverageTileProps = {
 
 export function MiniVaccinationCoverageTile(
   props: MiniVaccinationCoverageTileProps
-) {
-  const {
-    oneShotPercentage,
-    fullyVaccinatedPercentage,
-    boosterShotAdministered,
-    oneShotPercentageLabel,
-    fullyVaccinatedPercentageLabel,
-    boosterShotAdministeredLabel,
-    oneShotBarLabel,
-    fullyVaccinatedBarLabel,
-    boosterShotAdministeredBarLabel,
-    ...tileProps
-  } = props;
+  ) {
+    const {
+      oneShotPercentage,
+      fullyVaccinatedPercentage,
+      boosterShotAdministered,
+      oneShotPercentageLabel,
+      fullyVaccinatedPercentageLabel,
+      boosterShotAdministeredLabel,
+      oneShotBarLabel,
+      fullyVaccinatedBarLabel,
+      boosterShotAdministeredBarLabel,
+      ...tileProps
+    } = props;
+    
+    const vaccinationsBoosterCoverageFeature = useFeature(
+      'nlVaccinationsBoosterCoverage'
+    );
 
-  return (
-    <MiniTile {...tileProps}>
+    return (
+      <MiniTile {...tileProps}>
       <Box display="flex" flexDirection="column" spacing={3}>
         <LabeledBar
           value={oneShotPercentage}
@@ -51,12 +57,12 @@ export function MiniVaccinationCoverageTile(
           valueLabel={fullyVaccinatedPercentageLabel}
           barLabel={fullyVaccinatedBarLabel}
         />
-        <LabeledBar
+        {vaccinationsBoosterCoverageFeature.isEnabled && (<LabeledBar
           value={boosterShotAdministered}
           color={COLOR_FULLY_BOOSTERED}
           valueLabel={boosterShotAdministeredLabel}
           barLabel={boosterShotAdministeredBarLabel}
-        />
+        />)}
       </Box>
     </MiniTile>
   );

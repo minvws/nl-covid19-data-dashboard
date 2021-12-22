@@ -322,3 +322,4 @@ timestamp,action,key,document_id,move_to
 2021-12-21T16:47:45.519Z,add,vaccinaties.booster_ggd_kpi_section.booster_planned_7_days.metadata_date,Hpcrbv9k01wdsU0EgVfdnD,__
 2021-12-21T16:47:46.487Z,add,vaccinaties.booster_ggd_kpi_section.sources.href,0ztyMU2xVVOl2tFNiGHh2W,__
 2021-12-21T16:47:47.578Z,add,vaccinaties.booster_ggd_kpi_section.sources.text,grBB1wMeP3licxsoTrbtkC,__
+2021-12-22T09:35:48.725Z,add,common_actueel.booster_shots_administered_data_drive_text,Hpcrbv9k01wdsU0EgZSZNN,__

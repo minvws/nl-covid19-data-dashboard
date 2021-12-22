@@ -131,6 +131,10 @@ export const features: Feature[] = [
     isEnabled: false,
   },
   {
+    name: 'nlVaccinationsBoosterCoverage',
+    isEnabled: false,
+  },
+  {
     name: 'nlBoosterAndThirdShotAdministered',
     isEnabled: false,
     dataScopes: ['nl'],
