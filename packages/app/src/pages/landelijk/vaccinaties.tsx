@@ -214,12 +214,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlBoosterAndThirdShotAdministered'
   );
 
-  const boosterShotAdministered = useFeature('nlBoosterShotAdministered');
-
-  const boosterShotPlannedFeature = useFeature('nlBoosterShotPlanned');
-
-  const bhirdShotAdministeredFeature = useFeature('nlThirdShotAdministered');
-
   const vaccinationsBoosterCoverageFeature = useFeature(
     'nlVaccinationsBoosterCoverage'
   );
@@ -585,25 +579,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     }
                     pageLinks={content.boosterLinks}
                     articles={content.boosterArticles}
-                  />
-                )}
-              {boosterAndThirdShotAdministeredFeature.isEnabled &&
-                boosterShotAdministered.isEnabled &&
-                boosterShotPlannedFeature.isEnabled &&
-                bhirdShotAdministeredFeature.isEnabled && (
-                  <VaccinationsBoosterKpiSection
-                    dataBoosterAndThirdShotAdministered={
-                      data.booster_and_third_shot_administered.last_value
-                    }
-                    dataBoosterShotAdministered={
-                      data.booster_shot_administered.last_value
-                    }
-                    dataBoosterShotPlanned={
-                      data.booster_shot_planned.last_value
-                    }
-                    dataThirdShotAdministered={
-                      data.third_shot_administered.last_value
-                    }
                   />
                 )}
             </>

@@ -12,13 +12,13 @@ import { useFeature } from '~/lib/features';
 type MiniVaccinationCoverageTileProps = {
   oneShotPercentage: number | null;
   fullyVaccinatedPercentage: number | null;
-  boosterShotAdministered: number | null;
+  boosterShotAdministered?: number | null;
   oneShotPercentageLabel?: string | null;
   fullyVaccinatedPercentageLabel?: string | null;
   boosterShotAdministeredLabel?: string | null;
   oneShotBarLabel: string;
   fullyVaccinatedBarLabel: string;
-  boosterShotAdministeredBarLabel: string;
+  boosterShotAdministeredBarLabel?: string;
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(
@@ -56,14 +56,17 @@ export function MiniVaccinationCoverageTile(
           valueLabel={fullyVaccinatedPercentageLabel}
           barLabel={fullyVaccinatedBarLabel}
         />
-        {vaccinationsBoosterCoverageFeature.isEnabled && (
-          <LabeledBar
-            value={boosterShotAdministered}
-            color={COLOR_FULLY_BOOSTERED}
-            valueLabel={boosterShotAdministeredLabel}
-            barLabel={boosterShotAdministeredBarLabel}
-          />
-        )}
+        {vaccinationsBoosterCoverageFeature.isEnabled &&
+          boosterShotAdministered &&
+          boosterShotAdministeredBarLabel &&
+          boosterShotAdministeredLabel && (
+            <LabeledBar
+              value={boosterShotAdministered}
+              color={COLOR_FULLY_BOOSTERED}
+              valueLabel={boosterShotAdministeredLabel}
+              barLabel={boosterShotAdministeredBarLabel}
+            />
+          )}
       </Box>
     </MiniTile>
   );
