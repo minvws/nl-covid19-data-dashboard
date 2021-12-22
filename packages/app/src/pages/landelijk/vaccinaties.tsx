@@ -585,35 +585,39 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           )}
 
           {vaccinationsBoosterCoverageFeature.isEnabled && (
-            <VaccinationsBoosterKpiSection
-              dataBoosterShotAdministered={
-                data.booster_shot_administered.last_value
-                  .ggd_administered_last_7_days
-              }
-              dataBoosterShotPlanned={
-                data.booster_shot_planned.last_value.planned_7_days
-              }
-              source={text.vaccination_grade_toggle_tile.source}
-            />
+            <>
+              <VaccinationsBoosterKpiSection
+                dataBoosterShotAdministered={
+                  data.booster_shot_administered.last_value
+                    .ggd_administered_last_7_days
+                }
+                dataBoosterShotPlanned={
+                  data.booster_shot_planned.last_value.planned_7_days
+                }
+                source={text.vaccination_grade_toggle_tile.source}
+              />
+              <Divider />
+            </>
           )}
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
-            <VaccineBoosterPerAgeGroup
-              data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
-              sortingOrder={[
-                '81+',
-                '71-80',
-                '61-70',
-                '51-60',
-                '41-50',
-                '31-40',
-                '18-30',
-                '12-17',
-              ]}
-            />
+            <>
+              <VaccineBoosterPerAgeGroup
+                data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
+                sortingOrder={[
+                  '81+',
+                  '71-80',
+                  '61-70',
+                  '51-60',
+                  '41-50',
+                  '31-40',
+                  '18-30',
+                  '12-17',
+                ]}
+              />
+            <Divider />
+            </>
           )}
-
-          <Divider />
 
           <PageInformationBlock
             title={text.section_archived.title}
