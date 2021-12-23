@@ -1,7 +1,11 @@
 import {
   colors,
+  NlBoosterShotAdministeredValue,
+  NlBoosterShotDeliveredValue,
+  NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
+  NlThirdShotAdministeredValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
@@ -29,7 +33,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
+import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
@@ -101,11 +105,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated',
     'hospital_vaccination_status',
     'hospital_vaccine_incidence_per_age_group',
-    'intensive_care_vaccination_status',
-    'booster_shot_administered',
-    'booster_shot_planned',
-    'booster_and_third_shot_administered',
-    'third_shot_administered'
+    'intensive_care_vaccination_status'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -178,7 +178,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber } = useIntl();
+  const { siteText, formatNumber, dataset } = useIntl();
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -231,6 +231,47 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_start_unix,
     lastValueHositalVaccinationStatus.date_end_unix
   );
+
+  const data_booster_shot_administered = (dataset === 'keys'
+    ? {
+        administered_last_7_days: 1638799116,
+        administered_total: 1638799116,
+        date_start_unix: 1638799116,
+        date_end_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .booster_shot_administered) as unknown as NlBoosterShotAdministeredValue;
+
+  const data_booster_shot_delivered = (dataset === 'keys'
+    ? {
+        delivered_total: 1638799116,
+        date_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .booster_shot_delivered) as unknown as NlBoosterShotDeliveredValue;
+
+  const data_booster_shot_planned = (dataset === 'keys'
+    ? {
+        planned_7_days: 1638799116,
+        date_start_unix: 1638799116,
+        date_end_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .booster_shot_planned) as unknown as NlBoosterShotPlannedValue;
+
+  const data_third_shot_administered = (dataset === 'keys'
+    ? {
+        administered_last_7_days: 1638799116,
+        administered_total: 1638799116,
+        date_start_unix: 1638799116,
+        date_end_unix: 1638799116,
+        date_of_insertion_unix: 1638799116,
+      }
+    : siteText.data.vaccinations
+        .third_shot_administered) as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
@@ -519,11 +560,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   datumsText: text.booster_information_block.datums,
                   dateOrRange:
-                    data.booster_and_third_shot_administered.last_value
-                      .date_unix,
+                    dataset === 'keys'
+                      ? 1638705600
+                      : Number(
+                          text.four_kpi_section.information_block_date_unix
+                        ),
                   dateOfInsertionUnix:
-                    data.booster_and_third_shot_administered.last_value
-                      .date_unix,
+                    dataset === 'keys'
+                      ? 1638705600
+                      : Number(
+                          text.four_kpi_section.information_block_date_unix
+                        ),
                   dataSources: [
                     {
                       href: '',

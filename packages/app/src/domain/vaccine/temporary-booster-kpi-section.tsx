@@ -43,6 +43,7 @@ export function VaccinationsBoosterKpiSection({
             date={text.metadata_date}
             source={source}
           />
+          <Markdown content={text.boosters_ggd.description} />
         </KpiTile>
         <KpiTile title={text.booster_planned_7_days.title}>
           <Text
@@ -62,6 +63,7 @@ export function VaccinationsBoosterKpiSection({
             date={text.metadata_date}
             source={source}
           />
+          <Markdown content={text.third_shots_ggd.description} />
         </KpiTile>
       </TwoKpiSection>
     </Box>
