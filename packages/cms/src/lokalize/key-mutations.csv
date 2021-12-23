@@ -1,3 +1,5 @@
 timestamp,action,key,document_id,move_to
-2021-12-23T18:29:33.049Z,add,deceasedPage_shared.section_sterftemonitor.title,Hpcrbv9k01wdsU0EgiJzXH,__
-2021-12-23T18:29:33.053Z,delete,deceasedPage_shared.section_sterftemonitor.titletimestamp,jF33EuwumlGuwav2FD422O,__
+2021-12-23T19:05:13.773Z,delete,common_actueel.booster_shots_administered_bar_label,0ztyMU2xVVOl2tFNiK3q90,__
+2021-12-23T19:05:13.774Z,delete,common_actueel.booster_shots_administered_total,Hpcrbv9k01wdsU0EgiV3mI,__
+2021-12-23T19:09:20.063Z,add,common_actueel.booster_shots_administered_bar_label,Hpcrbv9k01wdsU0EgiW9MF,__
+2021-12-23T19:09:21.089Z,add,common_actueel.booster_shots_administered_total,0ztyMU2xVVOl2tFNiK4AVu,__
