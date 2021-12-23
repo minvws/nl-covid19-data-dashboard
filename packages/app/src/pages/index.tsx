@@ -530,7 +530,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       .fully_vaccinated_bar_label
                   }
                   boosterShotAdministeredBarLabel={
-                    siteText.common_actueel.booster_shots_administered_bar_label
+                    text.mini_trend_tiles.vaccinatiegraad
+                      .booster_shots_administered_bar_label
                   }
                   icon={<Vaccinaties />}
                   text={
@@ -552,7 +553,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .booster_shots_administered_data_drive_text,
                             {
                               percentage: formatLokalizePercentage(
-                                siteText.common_actueel
+                                text.mini_trend_tiles.vaccinatiegraad
                                   .booster_shots_administered_total
                               ),
                             }
@@ -575,7 +576,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    siteText.common_actueel.booster_shots_administered_total
+                    text.mini_trend_tiles.vaccinatiegraad
+                      .booster_shots_administered_total
                   )}
                   warning={getWarning(
                     content.elements.warning,
