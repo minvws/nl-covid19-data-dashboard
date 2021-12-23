@@ -335,6 +335,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+              boostered: formatPercentageAsNumber(
+                siteText.nationaal_actueel.mini_trend_tiles.vaccinatiegraad
+                  .booster_shots_administered_total
+              ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
