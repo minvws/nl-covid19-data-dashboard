@@ -135,10 +135,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     'nlTestedOverallTopicalPage'
   );
 
-  const vaccinationsBoosterCoverageFeature = useFeature(
-    'nlVaccinationsBoosterCoverage'
-  );
-
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
@@ -550,20 +546,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             formatters
                           )}
                         />
-                        {vaccinationsBoosterCoverageFeature.isEnabled && (
-                          <Markdown
-                            content={replaceVariablesInText(
-                              siteText.common_actueel
-                                .booster_shots_administered_data_drive_text,
-                              {
-                                percentage: formatLokalizePercentage(
-                                  siteText.common_actueel
-                                    .booster_shots_administered_total
-                                ),
-                              }
-                            )}
-                          />
-                        )}
+                        <Markdown
+                          content={replaceVariablesInText(
+                            siteText.common_actueel
+                              .booster_shots_administered_data_drive_text,
+                            {
+                              percentage: formatLokalizePercentage(
+                                siteText.common_actueel
+                                  .booster_shots_administered_total
+                              ),
+                            }
+                          )}
+                        />
                       </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}

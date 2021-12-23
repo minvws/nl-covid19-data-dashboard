@@ -85,9 +85,11 @@ export function VaccineBoosterAdministrationsKpiSection({
               }
             )}
           </Text>
-          <Message variant="warning">
-            {totalBoosterAndThirdShots.warning}
-          </Message>
+          {totalBoosterAndThirdShots.warning && (
+            <Message variant="warning">
+              {totalBoosterAndThirdShots.warning}
+            </Message>
+          )}
           <LokalizeMetadata
             date={totalBoosterAndThirdShots.metadataDate}
             source={source}

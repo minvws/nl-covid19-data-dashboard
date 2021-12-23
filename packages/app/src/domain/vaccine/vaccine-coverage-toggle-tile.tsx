@@ -10,7 +10,6 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
@@ -54,10 +53,6 @@ export function VaccineCoverageToggleTile({
   const text = siteText.vaccinaties.vaccination_grade_toggle_tile;
   const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
 
-  const vaccinationsBoosterCoverageFeature = useFeature(
-    'nlVaccinationsBoosterCoverage'
-  );
-
   const metadata: MetadataProps = {
     date: dateUnix,
     source: source,
@@ -65,109 +60,104 @@ export function VaccineCoverageToggleTile({
 
   return (
     <KpiTile title={title}>
-      <>
-        <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
-          <RadioGroup
-            value={selectedTab}
-            onChange={(value) => setSelectedTab(value)}
-            items={[
-              {
-                label: text.age_18_plus.label,
-                value: text.age_18_plus.label,
-              },
-              {
-                label: text.age_12_plus.label,
-                value: text.age_12_plus.label,
-              },
-            ]}
-          />
-        </Box>
-        <TwoKpiSection spacing={5}>
-          {selectedTab === text.age_18_plus.label && (
-            <>
-              <AgeGroupBlock
-                title={text.top_labels.one_shot}
-                data={age18Plus}
-                property="has_one_shot"
-                description={text.age_18_plus.description_vaccination_one_shot}
-                numFractionDigits={numFractionDigits}
-              >
-                {metadata && <Metadata {...metadata} isTileFooter />}
-              </AgeGroupBlock>
-              <AgeGroupBlock
-                title={text.top_labels.vaccination_grade}
-                data={age18Plus}
-                property="fully_vaccinated"
-                description={text.age_18_plus.description_vaccination_grade}
-                numFractionDigits={numFractionDigits}
-              >
-                {metadata && <Metadata {...metadata} isTileFooter />}
-              </AgeGroupBlock>
-            </>
-          )}
-          {selectedTab === text.age_12_plus.label && (
-            <>
-              <AgeGroupBlock
-                title={text.top_labels.one_shot}
-                data={age12Plus}
-                property="has_one_shot"
-                description={text.age_12_plus.description_vaccination_one_shot}
-                numFractionDigits={numFractionDigits}
-              >
-                {metadata && <Metadata {...metadata} isTileFooter />}
-              </AgeGroupBlock>
-              <AgeGroupBlock
-                title={text.top_labels.vaccination_grade}
-                data={age12Plus}
-                property="fully_vaccinated"
-                description={text.age_12_plus.description_vaccination_grade}
-                numFractionDigits={numFractionDigits}
-              >
-                {metadata && <Metadata {...metadata} isTileFooter />}
-              </AgeGroupBlock>
-            </>
-          )}
-        </TwoKpiSection>
-        {vaccinationsBoosterCoverageFeature.isEnabled && (
-          <Box mt={56}>
-            <TwoKpiSection spacing={5}>
-              {selectedTab === text.age_18_plus.label && (
-                <>
-                  <AgeGroupBlock
-                    title={text.top_labels.booster_grade}
-                    data={age18Plus}
-                    property="boostered"
-                    description={text.age_18_plus.description_booster_grade}
-                    numFractionDigits={numFractionDigits}
-                  >
-                    {metadata && (
-                      <Metadata
-                        {...metadata}
-                        intervalCount={text.age_18_plus.booster_date_interval}
-                        isTileFooter
-                      />
-                    )}
-                  </AgeGroupBlock>
-                  <Box />
-                </>
-              )}
-              {selectedTab === text.age_12_plus.label && (
-                <>
-                  <NoBoosterBlock
-                    title={text.top_labels.booster_grade}
-                    description={text.age_12_plus.description_booster_grade}
-                  />
-                  <Box />
-                </>
-              )}
-            </TwoKpiSection>
-          </Box>
+      <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
+        <RadioGroup
+          value={selectedTab}
+          onChange={(value) => setSelectedTab(value)}
+          items={[
+            {
+              label: text.age_18_plus.label,
+              value: text.age_18_plus.label,
+            },
+            {
+              label: text.age_12_plus.label,
+              value: text.age_12_plus.label,
+            },
+          ]}
+        />
+      </Box>
+      <TwoKpiSection spacing={5}>
+        {selectedTab === text.age_18_plus.label && (
+          <>
+            <AgeGroupBlock
+              title={text.top_labels.one_shot}
+              data={age18Plus}
+              property="has_one_shot"
+              description={text.age_18_plus.description_vaccination_one_shot}
+              numFractionDigits={numFractionDigits}
+            >
+              {metadata && <Metadata {...metadata} isTileFooter />}
+            </AgeGroupBlock>
+            <AgeGroupBlock
+              title={text.top_labels.vaccination_grade}
+              data={age18Plus}
+              property="fully_vaccinated"
+              description={text.age_18_plus.description_vaccination_grade}
+              numFractionDigits={numFractionDigits}
+            >
+              {metadata && <Metadata {...metadata} isTileFooter />}
+            </AgeGroupBlock>
+          </>
         )}
-      </>
-      <Box
-        maxWidth="maxWidthText"
-        mt={vaccinationsBoosterCoverageFeature.isEnabled ? 36 : 0}
-      >
+        {selectedTab === text.age_12_plus.label && (
+          <>
+            <AgeGroupBlock
+              title={text.top_labels.one_shot}
+              data={age12Plus}
+              property="has_one_shot"
+              description={text.age_12_plus.description_vaccination_one_shot}
+              numFractionDigits={numFractionDigits}
+            >
+              {metadata && <Metadata {...metadata} isTileFooter />}
+            </AgeGroupBlock>
+            <AgeGroupBlock
+              title={text.top_labels.vaccination_grade}
+              data={age12Plus}
+              property="fully_vaccinated"
+              description={text.age_12_plus.description_vaccination_grade}
+              numFractionDigits={numFractionDigits}
+            >
+              {metadata && <Metadata {...metadata} isTileFooter />}
+            </AgeGroupBlock>
+          </>
+        )}
+      </TwoKpiSection>
+      {age18Plus.boostered && (
+        <Box mt={56}>
+          <TwoKpiSection spacing={5}>
+            {selectedTab === text.age_18_plus.label && (
+              <>
+                <AgeGroupBlock
+                  title={text.top_labels.booster_grade}
+                  data={age18Plus}
+                  property="boostered"
+                  description={text.age_18_plus.description_booster_grade}
+                  numFractionDigits={numFractionDigits}
+                >
+                  {metadata && (
+                    <Metadata
+                      {...metadata}
+                      intervalCount={text.age_18_plus.booster_date_interval}
+                      isTileFooter
+                    />
+                  )}
+                </AgeGroupBlock>
+                <Box />
+              </>
+            )}
+            {selectedTab === text.age_12_plus.label && (
+              <>
+                <NoBoosterBlock
+                  title={text.top_labels.booster_grade}
+                  description={text.age_12_plus.description_booster_grade}
+                />
+                <Box />
+              </>
+            )}
+          </TwoKpiSection>
+        </Box>
+      )}
+      <Box maxWidth="maxWidthText" mt={36}>
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>

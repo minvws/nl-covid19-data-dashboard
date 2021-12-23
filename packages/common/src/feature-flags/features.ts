@@ -127,14 +127,6 @@ export const features: Feature[] = [
     metricName: 'booster_shot_per_age_group',
   },
   {
-    name: 'nlVaccinationsBoosterInformationBlock',
-    isEnabled: false,
-  },
-  {
-    name: 'nlVaccinationsBoosterCoverage',
-    isEnabled: true,
-  },
-  {
     name: 'nlBoosterAndThirdShotAdministered',
     isEnabled: false,
     dataScopes: ['nl'],
@@ -151,12 +143,6 @@ export const features: Feature[] = [
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_planned',
-  },
-  {
-    name: 'nlThirdShotAdministered',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'third_shot_administered',
   },
   /**
    * These flags are only here that the schemas will not be required when validating.
