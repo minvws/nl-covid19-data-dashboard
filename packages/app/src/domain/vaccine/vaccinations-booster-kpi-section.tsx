@@ -7,7 +7,6 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { LokalizeMetadata } from '~/components/lokalize-metadata';
 
-  const text = siteText.vaccinaties.four_kpi_section;
 interface VaccinationsBoosterKpiSectionProps {
   dataBoosterShotAdministered: string;
   dataBoosterShotPlanned: string;

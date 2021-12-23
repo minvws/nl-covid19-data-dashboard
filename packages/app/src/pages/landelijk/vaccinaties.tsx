@@ -1,11 +1,7 @@
 import {
   colors,
-  NlBoosterShotAdministeredValue,
-  NlBoosterShotDeliveredValue,
-  NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  NlThirdShotAdministeredValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
@@ -231,47 +227,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_start_unix,
     lastValueHositalVaccinationStatus.date_end_unix
   );
-
-  const data_booster_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_administered) as unknown as NlBoosterShotAdministeredValue;
-
-  const data_booster_shot_delivered = (dataset === 'keys'
-    ? {
-        delivered_total: 1638799116,
-        date_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_delivered) as unknown as NlBoosterShotDeliveredValue;
-
-  const data_booster_shot_planned = (dataset === 'keys'
-    ? {
-        planned_7_days: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_planned) as unknown as NlBoosterShotPlannedValue;
-
-  const data_third_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .third_shot_administered) as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
