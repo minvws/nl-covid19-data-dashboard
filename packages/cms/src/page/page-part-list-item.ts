@@ -1,7 +1,20 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import documentStore from 'part:@sanity/base/datastore/document';
 import { BsBook, BsBookHalf, BsFillPuzzleFill } from 'react-icons/bs';
+import { FaLanguage } from 'react-icons/fa';
 import { map } from 'rxjs/operators';
+
+interface PagePartPage {
+  _id: string;
+  identifier: string;
+  title: string;
+}
+
+interface PagePartChildPage {
+  _id: string;
+  _type: string;
+  title: string;
+}
 
 export function pagePartListItem() {
   return S.listItem()
@@ -13,10 +26,10 @@ export function pagePartListItem() {
 function pageIdentifierListemItem() {
   return documentStore
     .listenQuery(
-      `*[_type == 'pageIdentifier' && !(_id in path("drafts.**"))]{ title,_id }`
+      `*[_type == 'pageIdentifier' && !(_id in path("drafts.**"))]{ _id, identifier, title }`
     )
     .pipe(
-      map((pages: { title: string; _id: string }[]) => {
+      map((pages: PagePartPage[]) => {
         return S.list()
           .title('Pagina')
           .items(
@@ -28,7 +41,7 @@ function pageIdentifierListemItem() {
     );
 }
 
-function pageDataListItem(page: any) {
+function pageDataListItem(page: PagePartPage) {
   return S.listItem()
     .title(page.title)
     .id(page._id)
@@ -36,26 +49,46 @@ function pageDataListItem(page: any) {
     .child(
       documentStore
         .listenQuery(
-          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]`,
-          {
-            id: page._id,
-          }
+          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]{ _id, _type, title }`,
+          { id: page._id }
         )
         .pipe(
-          map((childPages: any) =>
+          map((childPages: PagePartChildPage[]) =>
             S.list()
               .title('Pagina onderdelen')
               .items(
                 childPages
-                  .sort((a: any, b: any) => a.title.localeCompare(b.title))
+                  .sort((a, b) => a.title.localeCompare(b.title))
                   .map(pageDataItem)
+                  .concat(
+                    [
+                      { scope: 'nl', title: 'Landelijk lokalize' },
+                      { scope: 'gm', title: 'Gemeente lokalize' },
+                      { scope: 'vr', title: 'Regio lokalize' },
+                      { scope: 'shared', title: 'Gedeelde lokalize' },
+                    ].map((item) =>
+                      S.listItem()
+                        .title(item.scope)
+                        .icon(FaLanguage)
+                        .child(
+                          S.documentList()
+                            .title(item.title)
+                            .filter(
+                              '_type == "lokalizeText" && subject == $subject'
+                            )
+                            .params({
+                              subject: `${page.identifier}_${item.scope}`,
+                            })
+                        )
+                    )
+                  )
               )
           )
         )
     );
 }
 
-function pageDataItem(pageData: any) {
+function pageDataItem(pageData: PagePartChildPage) {
   return S.listItem()
     .title(pageData.title)
     .id(pageData._id)

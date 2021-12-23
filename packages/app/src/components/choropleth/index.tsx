@@ -27,7 +27,7 @@ export type DataOptions = {
   /**
    * Callback that, when set, will provide a link that will be activated when the user clicks on a feature.
    * The corresponding code of the feature is passed to this callback, so for example in the case of
-   * safety regions, a code is the form of 'VR<Safety-region-number>' is passed in.
+   * safety regions, a code in the form of 'VR<Safety-region-number>' is passed in (for example: VR25).
    */
   getLink?: (code: string) => string;
   /**
@@ -213,6 +213,7 @@ export function Choropleth<T extends ChoroplethDataItem>({
   const { siteText } = useIntl();
   const tooltipRef = useRef<HTMLDivElement>(null);
 
+  /** Close the tooltip when a click outside of the component occurs */
   useOnClickOutside([tooltipRef], () => setTooltip(undefined));
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
@@ -250,6 +251,11 @@ export function Choropleth<T extends ChoroplethDataItem>({
   );
 }
 
+/**
+ * A dynamically loaded version of the choropleth component. It displays an image tag
+ * with a server-side rendered version of the choropleth as its source while loading
+ * the component.
+ */
 export const DynamicChoropleth = withLoadingProps((getLoadingProps) =>
   dynamic(() => import('./').then((mod) => mod.Choropleth), {
     ssr: false,

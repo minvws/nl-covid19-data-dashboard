@@ -48,7 +48,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     accessibility,
     isTabInteractive,
     anchorEventHandlers,
-    responsiveSizeConfiguration: dynamicSizeConfiguration,
+    responsiveSizeConfiguration,
   } = props;
 
   const dataConfig = createDataConfig(partialDataConfig);
@@ -74,7 +74,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     width,
     height,
     boundingBoxPadding,
-    dynamicSizeConfiguration
+    responsiveSizeConfiguration
   );
 
   const choroplethFeatures = useChoroplethFeatures(

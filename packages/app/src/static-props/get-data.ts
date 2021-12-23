@@ -20,6 +20,7 @@ import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
 import { CountryCode } from '~/domain/international/multi-select-countries';
 import { getClient, localize } from '~/lib/sanity';
+import { Languages, SiteText } from '~/locale';
 import {
   adjustDataToLastAccurateValue,
   isValuesWithLastValue,
@@ -27,6 +28,7 @@ import {
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
+import { languages } from '~/locale';
 
 // This type takes an object and merges unions that sit at its keys into a single object.
 // Only has support for one level deep.
@@ -368,4 +370,27 @@ function replaceInaccurateLastValue(data: any) {
       );
     }
   });
+}
+
+/**
+ * Returns a subset of a lokalize export file based on an array of keys and the
+ * locale of the site to be generated.
+ *
+ * @param keys An array of keys to extract from the lokcalize export files.
+ * @param locale The locale of the page to be generated.
+ * @returns a subset of a lokalize export file
+ */
+export function getLokalizeTexts<T extends keyof SiteText>(
+  keys: T[],
+  locale: keyof Languages
+) {
+  return {
+    pageText: keys.reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: languages[locale][key],
+      }),
+      {}
+    ) as Pick<SiteText, T>,
+  } as const;
 }

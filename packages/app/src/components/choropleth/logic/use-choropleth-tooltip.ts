@@ -24,6 +24,20 @@ export type ChoroplethTooltipHandlers = [
   ReturnType<typeof createTooltipTrigger>
 ];
 
+/**
+ * This hooks returns a toolset of functions that are used to display
+ * a tooltip over a choropleth at the correct coordinates and with the
+ * correct data displayed.
+ *
+ * @param map
+ * @param data
+ * @param dataConfig
+ * @param dataOptions
+ * @param showTooltipOnFocus
+ * @param setTooltip
+ * @param containerRef
+ * @returns
+ */
 export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   map: MapType,
   data: T[],
@@ -112,7 +126,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     }
 
     /**
-     * `focusin` and `focusout` events bubble whereas `focus` doesn't
+     * `focusin` and `focusout` events bubble whereas `focus` doesn't work consistently
      */
     container.addEventListener('focusin', handleBubbledFocusIn);
     container.addEventListener('focusout', handleBubbledFocusOut);
