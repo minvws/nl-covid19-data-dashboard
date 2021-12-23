@@ -8,8 +8,8 @@ import { useIntl } from '~/intl';
 import { LokalizeMetadata } from '~/components/lokalize-metadata';
 
 interface VaccinationsBoosterKpiSectionProps {
-  dataBoosterShotAdministered: number;
-  dataBoosterShotPlanned: number;
+  dataBoosterShotAdministered: string;
+  dataBoosterShotPlanned: string;
   source: string;
 }
 
@@ -39,11 +39,7 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotAdministered)}
           </Text>
           <Markdown content={text.booster_last_7_days.description} />
-          <LokalizeMetadata
-            date={text.metadata_date}
-            source={source}
-          />
-          <Markdown content={text.boosters_ggd.description} />
+          <LokalizeMetadata date={text.metadata_date} source={source} />
         </KpiTile>
         <KpiTile title={text.booster_planned_7_days.title}>
           <Text
@@ -59,11 +55,7 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotPlanned)}
           </Text>
           <Markdown content={text.booster_planned_7_days.description} />
-          <LokalizeMetadata
-            date={text.metadata_date}
-            source={source}
-          />
-          <Markdown content={text.third_shots_ggd.description} />
+          <LokalizeMetadata date={text.metadata_date} source={source} />
         </KpiTile>
       </TwoKpiSection>
     </Box>

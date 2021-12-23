@@ -1,11 +1,7 @@
 import {
   colors,
-  NlBoosterShotAdministeredValue,
-  NlBoosterShotDeliveredValue,
-  NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  NlThirdShotAdministeredValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
@@ -33,11 +29,11 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
 import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
+import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -231,47 +227,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_start_unix,
     lastValueHositalVaccinationStatus.date_end_unix
   );
-
-  const data_booster_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_administered) as unknown as NlBoosterShotAdministeredValue;
-
-  const data_booster_shot_delivered = (dataset === 'keys'
-    ? {
-        delivered_total: 1638799116,
-        date_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_delivered) as unknown as NlBoosterShotDeliveredValue;
-
-  const data_booster_shot_planned = (dataset === 'keys'
-    ? {
-        planned_7_days: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_planned) as unknown as NlBoosterShotPlannedValue;
-
-  const data_third_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .third_shot_administered) as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
@@ -588,13 +543,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             source={text.vaccination_grade_toggle_tile.source.text}
           />
           <VaccinationsBoosterKpiSection
-            dataBoosterShotAdministered={
-              data.booster_shot_administered.last_value
-                .ggd_administered_last_7_days
-            }
-            dataBoosterShotPlanned={
-              data.booster_shot_planned.last_value.planned_7_days
-            }
+            dataBoosterShotAdministered={text.data_booster_shot_administered}
+            dataBoosterShotPlanned={text.data_booster_shot_planned}
             source={text.vaccination_grade_toggle_tile.source.text}
           />
           <Divider />

@@ -187,4 +187,10 @@ export const features: Feature[] = [
     name: 'loadingIndicator',
     isEnabled: false,
   },
+  {
+    name: 'nlVaccinationBoosterShotsPerAgeGroup',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
+  },
 ];
