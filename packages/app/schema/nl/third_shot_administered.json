@@ -23,12 +23,15 @@
       "type": "object",
       "properties": {
         "administered_last_7_days": {
-          "type": "integer"
+          "type": "number"
         },
         "administered_total": {
+          "type": "number"
+        },
+        "date_start_unix": {
           "type": "integer"
         },
-        "date_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -38,7 +41,8 @@
       "required": [
         "administered_last_7_days",
         "administered_total",
-        "date_unix",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false
