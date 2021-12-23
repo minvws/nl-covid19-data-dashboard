@@ -78,8 +78,8 @@ easy to follow.
 9. Possibly review the PR, make changes, or cherry-pick other commits to the
    release branch.
 10. Once ready, merge the release branch to `master` using a **merge commit.
-   Never use a squash and merge action, since this will erase/rewrite the commit
-   history.**
+    Never use a squash and merge action, since this will erase/rewrite the commit
+    history.**
 11. Hit the publish button in the GitHub release draft. This should tag the
     correct commit in `master`.
 
@@ -97,3 +97,5 @@ Sometimes a release also contains new configurations for the CMS. These are
 deployed via the Sanity CLI as `yarn deploy`. These deployments do
 not usually need to be done simultaneously with the release. If they are
 backwards-compatible they could be performed at any time and also repeatedly.
+
+[Back to index](index.md)

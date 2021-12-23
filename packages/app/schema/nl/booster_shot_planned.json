@@ -23,24 +23,16 @@
       "type": "object",
       "properties": {
         "planned_7_days": {
-          "type": "number"
-        },
-        "date_start_unix": {
           "type": "integer"
         },
-        "date_end_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "planned_7_days",
-        "date_start_unix",
-        "date_end_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["planned_7_days", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

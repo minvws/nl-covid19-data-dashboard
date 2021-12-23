@@ -7,16 +7,16 @@ These packages are both built automatically whenever 'yarn dev' is ran in
 packages/app, packages/cli or packages/cms.
 There may be situations where this gets out of sync, for example when
 merging develop into a branch.
-Whenever strange compile or typecheck errors occur. The first thing to therefore
+Whenever strange compile or type check errors occur. The first thing to therefore
 try is to explicitly build the common and icon package. This usually solves
 the problem.
 
 ## Node-canvas vs Sharp running on Windows
 
 Currently there is a dependency on node-canvas in combination with the sharp image compression library
-for serverside rendering of the choropleths.
+for server-side rendering of the choropleths.
 Unfortunately, this combination leads to a runtime crash under Windows. So, when a developer uses
-this OS and runs into this issue, add this the `.env.local` file in the `packages/app` directory:
+this OS and runs into this issue, add this line to the `packages/app/.env.local` file:
 
 `DISABLE_COMPRESSION=1`
 
@@ -113,3 +113,5 @@ are testing screenreaders.
    get when clicking the menu button on the VM in the left bar.
 2. Click ‘Take’ on the left top, and click OK.
 3. Now whenever you are done testing with the VM, close the VM by closing the window itself (not through Windows), and choose ‘Power off’ with the ‘Restore snapshot’ option enabled.
+
+[Back to index](index.md)

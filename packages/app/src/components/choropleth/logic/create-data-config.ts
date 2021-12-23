@@ -6,6 +6,13 @@ import {
   DEFAULT_STROKE_WIDTH,
 } from './use-feature-props';
 
+/**
+ * Returns a DataConfig instance based on the given OptionalDataConfig,
+ * any undefined values are replaced by their defaults in the resulting object.
+ *
+ * @param partialDataConfig
+ * @returns
+ */
 export function createDataConfig<T extends ChoroplethDataItem>(
   partialDataConfig: OptionalDataConfig<T>
 ) {

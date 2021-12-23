@@ -353,7 +353,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'intensive_care_nice'
                   )}
-                  hideLeftMargin={true}
                 />
 
                 <MiniTrendTile

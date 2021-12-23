@@ -91,3 +91,5 @@ is, then specifying only the `metricName` is sufficient.
 
 The script that validates the features (and runs at build-time) can be
 triggered locally with `yarn workspace@corona-dashboard/cli validate-features`.
+
+[Back to index](index.md)

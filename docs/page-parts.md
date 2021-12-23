@@ -77,3 +77,5 @@ The workflow for adding a new page with page parts is fairly simple:
 - Create a pageArticles document and assign the newly created page identifier as a reference (Pagina onderdelen -> Pagina Artikelen)
 - Add articles to the pageArticles document (Dashboard pagina's -> 'New page name' -> 'Page articles name')
 - Query the data in the application's page and off you go.
+
+[Back to index](index.md)

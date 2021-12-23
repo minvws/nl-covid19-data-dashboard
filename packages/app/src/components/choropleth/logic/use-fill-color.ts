@@ -7,6 +7,16 @@ import { thresholds } from './thresholds';
 import { ChoroplethDataItem, CodeProp, mapToCodeType, MapType } from './types';
 import { isCodedValueType } from './utils';
 
+/**
+ * Returns a memoized fill color function. This function will return
+ * a color value based on a given numeric value based on an associated
+ * color threshold scale.
+ *
+ * @param data
+ * @param map
+ * @param dataConfig
+ * @returns
+ */
 export function useFillColor<T extends ChoroplethDataItem>(
   data: T[],
   map: MapType,

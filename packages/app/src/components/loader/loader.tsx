@@ -27,10 +27,8 @@ export function Loader(props: LoaderProps) {
         const windowHeight = window.innerHeight;
         const rect = el.getBoundingClientRect();
         const elTop = rect.top < 0 ? 0 : rect.top;
-        const elBottom =
-          rect.bottom > windowHeight ? windowHeight : rect.bottom;
 
-        const heightOfInView = elBottom - elTop + 'px';
+        const heightOfInView = windowHeight - elTop + 'px';
 
         setinViewHeight(heightOfInView);
       }}

@@ -122,3 +122,5 @@ struct is used to configure which custom validation needs to be run on which JSO
 
 Explanations for what the custom validations are exactly checking can be found in the
 source code files themselves.
+
+[Back to index](index.md)
