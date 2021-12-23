@@ -125,13 +125,7 @@ export const features: Feature[] = [
     isEnabled: false,
   },
   {
-    name: 'nlVaccinationBoosterShotsPerAgeGroup',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'booster_shot_per_age_group',
-  },
-  {
-    name: 'nlBoosterShotAdministeredKpiTile', // aan met data
+    name: 'nlBoosterAndThirdShotAdministered',
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_administered',
@@ -147,12 +141,6 @@ export const features: Feature[] = [
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_planned',
-  },
-  {
-    name: 'nlThirdShotAdministeredKpiTile', // aan met data
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'third_shot_administered',
   },
   /**
    * Temporary for the boosters
@@ -198,5 +186,11 @@ export const features: Feature[] = [
   {
     name: 'loadingIndicator',
     isEnabled: false,
+  },
+  {
+    name: 'nlVaccinationBoosterShotsPerAgeGroup',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
   },
 ];

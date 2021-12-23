@@ -58,6 +58,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -125,6 +126,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
+
+  const { formatLokalizePercentage, formatPercentageAsNumber } =
+    useFormatLokalizePercentage();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
   const testedOverallTopicalPageFeature = useFeature(
@@ -525,6 +529,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     text.mini_trend_tiles.vaccinatiegraad
                       .fully_vaccinated_bar_label
                   }
+                  boosterShotAdministeredBarLabel={
+                    siteText.common_actueel.booster_shots_administered_bar_label
+                  }
                   icon={<Vaccinaties />}
                   text={
                     <>
@@ -537,6 +544,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               number
                             >,
                             formatters
+                          )}
+                        />
+                        <Markdown
+                          content={replaceVariablesInText(
+                            siteText.common_actueel
+                              .booster_shots_administered_data_drive_text,
+                            {
+                              percentage: formatLokalizePercentage(
+                                siteText.common_actueel
+                                  .booster_shots_administered_total
+                              ),
+                            }
                           )}
                         />
                       </Text>
@@ -555,6 +574,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   fullyVaccinatedPercentage={
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
+                  boosterShotAdministered={formatPercentageAsNumber(
+                    siteText.common_actueel.booster_shots_administered_total
+                  )}
                   warning={getWarning(
                     content.elements.warning,
                     'vaccine_coverage_per_age_group_estimated'

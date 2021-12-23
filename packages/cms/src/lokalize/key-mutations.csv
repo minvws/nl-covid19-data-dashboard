@@ -245,4 +245,14 @@ timestamp,action,key,document_id,move_to
 2021-12-20T10:56:16.768Z,move,section_sterftemonitor.deceased_monitor_chart_title,jF33EuwumlGuwav2FD42OC,deceasedPage_shared.section_sterftemonitor.deceased_monitor_chart_title
 2021-12-20T10:56:16.770Z,move,section_sterftemonitor.description,jF33EuwumlGuwav2FD4244,deceasedPage_shared.section_sterftemonitor.description
 2021-12-20T10:56:16.773Z,move,section_sterftemonitor.reference.href,jF33EuwumlGuwav2FD42CS,deceasedPage_shared.section_sterftemonitor.reference.href
-2021-12-20T10:56:16.777Z,move,section_sterftemonitor.title,jF33EuwumlGuwav2FD422O,deceasedPage_shared.section_sterftemonitor.title
+2021-12-20T10:56:16.777Z,move,section_sterftemonitor.title,jF33EuwumlGuwav2FD422O,deceasedPage_shared.section_sterftemonitor.titletimestamp
+2021-12-23T10:51:33.695Z,add,vaccinaties.booster_and_third_kpi.metadata_date,Hpcrbv9k01wdsU0Egfv9sz,__
+2021-12-23T10:51:34.699Z,add,vaccinaties.booster_ggd_kpi_section.metadata_date,Hpcrbv9k01wdsU0EgfvApT,__
+2021-12-23T10:51:34.700Z,delete,vaccinaties.booster_and_third_kpi.booster_estimated.metadata_date,grBB1wMeP3licxsoTrHWdy,__
+2021-12-23T10:51:34.700Z,delete,vaccinaties.booster_and_third_kpi.booster_ggd.metadata_date,Hpcrbv9k01wdsU0EgV8Ulv,__
+2021-12-23T10:51:34.700Z,delete,vaccinaties.booster_and_third_kpi.third_ggd.metadata_date,Hpcrbv9k01wdsU0EgV8Xs5,__
+2021-12-23T10:51:34.701Z,delete,vaccinaties.booster_and_third_kpi.total_booster_and_third_shots.metadata_date,Hpcrbv9k01wdsU0EgV8Tcu,__
+2021-12-23T10:51:34.701Z,delete,vaccinaties.booster_ggd_kpi_section.booster_last_7_days.metadata_date,Hpcrbv9k01wdsU0EgVfcqj,__
+2021-12-23T10:51:34.701Z,delete,vaccinaties.booster_ggd_kpi_section.booster_planned_7_days.metadata_date,Hpcrbv9k01wdsU0EgVfdnD,__
+2021-12-23T16:01:40.318Z,add,vaccinaties.data_booster_shot_administered,Hpcrbv9k01wdsU0EghgUQG,__
+2021-12-23T16:01:41.341Z,add,vaccinaties.data_booster_shot_planned,Hpcrbv9k01wdsU0EghgVEO,__
