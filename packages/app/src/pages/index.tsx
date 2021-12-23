@@ -58,6 +58,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -125,6 +126,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
+
+  const { formatLokalizePercentage, formatPercentageAsNumber } =
+    useFormatLokalizePercentage();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
   const testedOverallTopicalPageFeature = useFeature(
