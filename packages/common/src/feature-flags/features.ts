@@ -117,7 +117,11 @@ export const features: Feature[] = [
     metricProperties: ['infected_moving_average'],
   },
   {
-    name: 'loadingIndicator',
+    name: 'nlVaccinationsBoosterInformationBlock',
+    isEnabled: false,
+  },
+  {
+    name: 'nlVaccinationsBoosterThirdShotInformationBlock',
     isEnabled: false,
   },
   {
@@ -127,32 +131,35 @@ export const features: Feature[] = [
     metricName: 'booster_shot_per_age_group',
   },
   {
-    name: 'nlVaccinationsBoosterInformationBlock',
-    isEnabled: false,
-  },
-  {
-    name: 'nlBoosterAndThirdShotAdministered',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'booster_and_third_shot_administered',
-  },
-  {
-    name: 'nlBoosterShotAdministered',
+    name: 'nlBoosterShotAdministeredKpiTile', // aan met data
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_administered',
   },
   {
-    name: 'nlBoosterShotPlanned',
+    name: 'nlBoosterShotDeliveredKpiTile',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_delivered',
+  },
+  {
+    name: 'nlBoosterShotPlannedKpiTile',
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_planned',
   },
   {
-    name: 'nlThirdShotAdministered',
+    name: 'nlThirdShotAdministeredKpiTile', // aan met data
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'third_shot_administered',
+  },
+  /**
+   * Temporary for the boosters
+   */
+  {
+    name: 'nlBoostersTemporary',
+    isEnabled: true,
   },
   /**
    * These flags are only here that the schemas will not be required when validating.
@@ -163,5 +170,33 @@ export const features: Feature[] = [
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
+  },
+  {
+    name: 'nlBoosterShotAdministeredSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_administered',
+  },
+  {
+    name: 'nlBoosterShotDeliveredSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_delivered',
+  },
+  {
+    name: 'nlBoosterShotPlannedSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_planned',
+  },
+  {
+    name: 'nlThirdShotAdministeredDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'third_shot_administered',
+  },
+  {
+    name: 'loadingIndicator',
+    isEnabled: false,
   },
 ];
