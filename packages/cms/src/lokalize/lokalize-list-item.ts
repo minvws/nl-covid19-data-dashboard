@@ -22,6 +22,10 @@ export function lokalizeListItem() {
               .items(
                 subjects
                   .sort((a, b) => a.localeCompare(b))
+                  .filter((subject, index) => {
+                    console.log(index, subject);
+                    return subject;
+                  })
                   .map((subject) =>
                     S.listItem()
                       .title(subject)
