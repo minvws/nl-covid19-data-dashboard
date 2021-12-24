@@ -39,7 +39,10 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotAdministered)}
           </Text>
           <Markdown content={text.booster_last_7_days.description} />
-          <LokalizeMetadata date={text.metadata_date} source={source} />
+          <LokalizeMetadata
+            date={text.booster_last_7_days.metadata_date}
+            source={source}
+          />
         </KpiTile>
         <KpiTile title={text.booster_planned_7_days.title}>
           <Text
@@ -55,7 +58,10 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotPlanned)}
           </Text>
           <Markdown content={text.booster_planned_7_days.description} />
-          <LokalizeMetadata date={text.metadata_date} source={source} />
+          <LokalizeMetadata
+            date={text.booster_planned_7_days.metadata_date}
+            source={source}
+          />
         </KpiTile>
       </TwoKpiSection>
     </Box>
