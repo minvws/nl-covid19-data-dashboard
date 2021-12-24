@@ -1,14 +1,11 @@
 import {
   colors,
-  NlBoosterShotAdministeredValue,
-  NlBoosterShotDeliveredValue,
-  NlBoosterShotPlannedValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
-  NlThirdShotAdministeredValue,
 } from '@corona-dashboard/common';
 import {
   Arts,
+  VaccineBoosterThird as BoosterIcon,
   Vaccinaties as VaccinatieIcon,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
@@ -32,12 +29,11 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { TemporaryBoosterKpiSection } from '~/domain/vaccine/temporary-booster-kpi-section';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccineBoosterKpiAdministeredDeliveredSection } from '~/domain/vaccine/vaccine-booster-kpi-administered-delivered-section';
-import { VaccineBoosterKpiThirdShotSection } from '~/domain/vaccine/vaccine-booster-kpi-third-shot-section';
+import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
 import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
+import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -76,6 +72,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -179,6 +176,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
   const { siteText, formatNumber, dataset } = useIntl();
 
+  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
+
   const text = siteText.vaccinaties;
 
   const reverseRouter = useReverseRouter();
@@ -196,34 +195,18 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationsIncidencePerAgeGroupFeature = useFeature(
     'nlVaccinationsIncidencePerAgeGroup'
   );
-
   const vaccinationStatusHospitalFeature = useFeature(
     'nlVaccinationHospitalVaccinationStatus'
   );
   const vaccinationStatusIntensiveCareFeature = useFeature(
     'nlVaccinationIntensiveCareVaccinationStatus'
   );
-  const vaccinationsBoosterInformationBlockFeature = useFeature(
-    'nlVaccinationsBoosterInformationBlock'
-  );
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
-
-  const boosterShotAdministeredKpiTileFeature = useFeature(
-    'nlBoosterShotAdministeredKpiTile'
+  const boosterAndThirdShotAdministeredFeature = useFeature(
+    'nlBoosterAndThirdShotAdministered'
   );
-  const boosterShotDeliveredKpiTileFeature = useFeature(
-    'nlBoosterShotDeliveredKpiTile'
-  );
-  const boosterShotPlannedKpiTileFeature = useFeature(
-    'nlBoosterShotPlannedKpiTile'
-  );
-  const thirdShotAdministeredKpiTileFeature = useFeature(
-    'nlThirdShotAdministeredKpiTile'
-  );
-
-  const boostersTemporaryFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -244,47 +227,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastValueHositalVaccinationStatus.date_start_unix,
     lastValueHositalVaccinationStatus.date_end_unix
   );
-
-  const data_booster_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_administered) as unknown as NlBoosterShotAdministeredValue;
-
-  const data_booster_shot_delivered = (dataset === 'keys'
-    ? {
-        delivered_total: 1638799116,
-        date_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_delivered) as unknown as NlBoosterShotDeliveredValue;
-
-  const data_booster_shot_planned = (dataset === 'keys'
-    ? {
-        planned_7_days: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .booster_shot_planned) as unknown as NlBoosterShotPlannedValue;
-
-  const data_third_shot_administered = (dataset === 'keys'
-    ? {
-        administered_last_7_days: 1638799116,
-        administered_total: 1638799116,
-        date_start_unix: 1638799116,
-        date_end_unix: 1638799116,
-        date_of_insertion_unix: 1638799116,
-      }
-    : siteText.data.vaccinations
-        .third_shot_administered) as unknown as NlThirdShotAdministeredValue;
 
   const [intensiveCareDateFromText, intensiveCareDateToText] =
     useFormatDateRange(
@@ -335,6 +277,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+              boostered: formatPercentageAsNumber(
+                siteText.nationaal_actueel.mini_trend_tiles.vaccinatiegraad
+                  .booster_shots_administered_total
+              ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
@@ -556,12 +502,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
-
-          {boostersTemporaryFeature.isEnabled && (
-            <>
-              <Divider />
-
+          {boosterAndThirdShotAdministeredFeature.isEnabled && (
+            <Box
+              pt={40}
+              borderTopWidth={2}
+              borderColor="silver"
+              borderStyle="solid"
+            >
               <PageInformationBlock
+                icon={<BoosterIcon />}
                 title={text.booster_information_block.title}
                 description={text.booster_information_block.description}
                 metadata={{
@@ -587,99 +536,38 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   ],
                 }}
                 referenceLink={text.booster_information_block.reference.href}
-                pageLinks={content.boosterLinks}
-                articles={content.boosterArticles}
               />
-
-              <TemporaryBoosterKpiSection />
-            </>
+            </Box>
           )}
 
-          {vaccinationsBoosterInformationBlockFeature.isEnabled &&
-            boosterShotAdministeredKpiTileFeature.isEnabled && (
-              <>
-                <Divider />
-
-                <PageInformationBlock
-                  title={text.booster_information_block.title}
-                  description={text.booster_information_block.description}
-                  metadata={{
-                    datumsText: text.booster_information_block.datums,
-                    dateOrRange: Number(
-                      data_booster_shot_administered.date_end_unix
-                    ),
-                    dateOfInsertionUnix: Number(
-                      data_booster_shot_administered.date_end_unix
-                    ),
-                    dataSources: [],
-                  }}
-                  referenceLink={text.booster_information_block.reference.href}
-                  pageLinks={content.boosterLinks}
-                  articles={content.boosterArticles}
-                />
-              </>
-            )}
-
-          {boosterShotAdministeredKpiTileFeature.isEnabled &&
-            boosterShotDeliveredKpiTileFeature.isEnabled &&
-            boosterShotPlannedKpiTileFeature.isEnabled && (
-              <VaccineBoosterKpiAdministeredDeliveredSection
-                dataAdministered={data_booster_shot_administered}
-                dateDelivered={data_booster_shot_delivered}
-                dataPlanned={data_booster_shot_planned}
-              />
-            )}
-
-          {vaccinationsBoosterInformationBlockFeature.isEnabled &&
-            thirdShotAdministeredKpiTileFeature.isEnabled && (
-              <>
-                <Divider />
-
-                <PageInformationBlock
-                  title={text.third_shot_information_block.title}
-                  description={text.third_shot_information_block.description}
-                  metadata={{
-                    datumsText: text.third_shot_information_block.datums,
-                    dateOrRange: Number(
-                      data_third_shot_administered.date_end_unix
-                    ),
-                    dateOfInsertionUnix: Number(
-                      data_third_shot_administered.date_end_unix
-                    ),
-                    dataSources: [],
-                  }}
-                  referenceLink={
-                    text.third_shot_information_block.reference.href
-                  }
-                  pageLinks={content.thirdShotLinks}
-                  articles={content.thirdShotArticles}
-                />
-              </>
-            )}
-
-          {thirdShotAdministeredKpiTileFeature.isEnabled && (
-            <VaccineBoosterKpiThirdShotSection
-              data={data_third_shot_administered}
-            />
-          )}
+          <VaccineBoosterAdministrationsKpiSection
+            source={text.vaccination_grade_toggle_tile.source.text}
+          />
+          <VaccinationsBoosterKpiSection
+            dataBoosterShotAdministered={text.data_booster_shot_administered}
+            dataBoosterShotPlanned={text.data_booster_shot_planned}
+            source={text.vaccination_grade_toggle_tile.source.text}
+          />
+          <Divider />
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
-            <VaccineBoosterPerAgeGroup
-              data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
-              sortingOrder={[
-                '81+',
-                '71-80',
-                '61-70',
-                '51-60',
-                '41-50',
-                '31-40',
-                '18-30',
-                '12-17',
-              ]}
-            />
+            <>
+              <VaccineBoosterPerAgeGroup
+                data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
+                sortingOrder={[
+                  '81+',
+                  '71-80',
+                  '61-70',
+                  '51-60',
+                  '41-50',
+                  '31-40',
+                  '18-30',
+                  '12-17',
+                ]}
+              />
+              <Divider />
+            </>
           )}
-
-          <Divider />
 
           <PageInformationBlock
             title={text.section_archived.title}

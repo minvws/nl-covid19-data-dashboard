@@ -17,6 +17,7 @@ export interface MetadataProps extends MarginBottomProps {
   obtainedAt?: number;
   isTileFooter?: boolean;
   datumsText?: string;
+  intervalCount?: string;
 }
 
 export function Metadata({
@@ -27,6 +28,7 @@ export function Metadata({
   datumsText,
   mb,
   dataSources,
+  intervalCount,
 }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -43,6 +45,12 @@ export function Metadata({
       : typeof date === 'string'
       ? date
       : null;
+
+  const intervalString =
+    intervalCount &&
+    replaceVariablesInText(siteText.common.metadata.interval, {
+      count: intervalCount,
+    });
 
   return (
     <>
@@ -79,6 +87,7 @@ export function Metadata({
                       date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
                     }
                   )}`}
+                {intervalString && `. ${intervalString}`}
                 {dateString && source ? ' · ' : null}
 
                 {source ? (

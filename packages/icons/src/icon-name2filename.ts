@@ -153,6 +153,7 @@ export const iconName2filename: Record<string, string> = {
   Up: 'up.svg',
   Vaccinaties: 'vaccinaties.svg',
   Vaccine: 'vaccine.svg',
+  VaccineBoosterThird: 'vaccine_booster_third.svg',
   Varianten: 'varianten.svg',
   Vermijd: 'vermijd.svg',
   Verpleeghuiszorg: 'verpleeghuiszorg.svg',

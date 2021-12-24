@@ -3,6 +3,7 @@ import { Markdown } from '~/components/markdown';
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
+  COLOR_FULLY_BOOSTERED,
 } from '../vaccine/vaccine-coverage-per-age-group/common';
 import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
 import { MiniTile, MiniTileProps } from './mini-tile';
@@ -10,10 +11,13 @@ import { MiniTile, MiniTileProps } from './mini-tile';
 type MiniVaccinationCoverageTileProps = {
   oneShotPercentage: number | null;
   fullyVaccinatedPercentage: number | null;
+  boosterShotAdministered?: number | null;
   oneShotPercentageLabel?: string | null;
   fullyVaccinatedPercentageLabel?: string | null;
+  boosterShotAdministeredLabel?: string | null;
   oneShotBarLabel: string;
   fullyVaccinatedBarLabel: string;
+  boosterShotAdministeredBarLabel?: string;
 } & Omit<MiniTileProps, 'children'>;
 
 export function MiniVaccinationCoverageTile(
@@ -22,10 +26,13 @@ export function MiniVaccinationCoverageTile(
   const {
     oneShotPercentage,
     fullyVaccinatedPercentage,
+    boosterShotAdministered,
     oneShotPercentageLabel,
     fullyVaccinatedPercentageLabel,
+    boosterShotAdministeredLabel,
     oneShotBarLabel,
     fullyVaccinatedBarLabel,
+    boosterShotAdministeredBarLabel,
     ...tileProps
   } = props;
 
@@ -44,6 +51,14 @@ export function MiniVaccinationCoverageTile(
           valueLabel={fullyVaccinatedPercentageLabel}
           barLabel={fullyVaccinatedBarLabel}
         />
+        {boosterShotAdministered && boosterShotAdministeredBarLabel && (
+          <LabeledBar
+            value={boosterShotAdministered}
+            color={COLOR_FULLY_BOOSTERED}
+            valueLabel={boosterShotAdministeredLabel}
+            barLabel={boosterShotAdministeredBarLabel}
+          />
+        )}
       </Box>
     </MiniTile>
   );
