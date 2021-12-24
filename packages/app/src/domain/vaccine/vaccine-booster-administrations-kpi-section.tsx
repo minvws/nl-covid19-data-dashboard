@@ -33,25 +33,26 @@ export function VaccineBoosterAdministrationsKpiSection({
       boosterAndThirdKpiText.total_booster_and_third_shots
         .percentage_description,
     warning: boosterAndThirdKpiText.total_booster_and_third_shots.warning,
-    metadataDate: boosterAndThirdKpiText.metadata_date,
+    metadataDate:
+      boosterAndThirdKpiText.total_booster_and_third_shots.metadata_date,
   };
 
   const boosterGgd = {
     value: boosterAndThirdKpiText.booster_ggd.value,
     title: boosterAndThirdKpiText.booster_ggd.title,
-    metadataDate: boosterAndThirdKpiText.metadata_date,
+    metadataDate: boosterAndThirdKpiText.booster_ggd.metadata_date,
   };
 
   const boosterEstimated = {
     value: boosterAndThirdKpiText.booster_estimated.value,
     title: boosterAndThirdKpiText.booster_estimated.title,
-    metadataDate: boosterAndThirdKpiText.metadata_date,
+    metadataDate: boosterAndThirdKpiText.booster_estimated.metadata_date,
   };
 
   const thirdGgd = {
     value: boosterAndThirdKpiText.third_ggd.value,
     title: boosterAndThirdKpiText.third_ggd.title,
-    metadataDate: boosterAndThirdKpiText.metadata_date,
+    metadataDate: boosterAndThirdKpiText.third_ggd.metadata_date,
   };
 
   return (
