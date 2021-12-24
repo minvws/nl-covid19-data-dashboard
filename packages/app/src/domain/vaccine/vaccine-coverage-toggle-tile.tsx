@@ -58,6 +58,11 @@ export function VaccineCoverageToggleTile({
     source: source,
   };
 
+  const metadataBooster: MetadataProps = {
+    date: text.age_18_plus.metadata_date,
+    source: source,
+  };
+
   return (
     <KpiTile title={title}>
       <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
@@ -134,9 +139,9 @@ export function VaccineCoverageToggleTile({
                   description={text.age_18_plus.description_booster_grade}
                   numFractionDigits={numFractionDigits}
                 >
-                  {metadata && (
+                  {metadataBooster && (
                     <Metadata
-                      {...metadata}
+                      {...metadataBooster}
                       intervalCount={text.age_18_plus.booster_date_interval}
                       isTileFooter
                     />
