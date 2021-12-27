@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_booster_shot_administered",
+  "title": "nl_booster_and_third_shot_administered",
   "type": "object",
   "properties": {
     "values": {
@@ -19,19 +19,13 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_shot_administered_value",
+      "title": "nl_booster_and_third_shot_administered_value",
       "type": "object",
       "properties": {
-        "ggd_administered_last_7_days": {
+        "administered_total": {
           "type": "number"
         },
-        "ggd_administered_total": {
-          "type": "number"
-        },
-        "others_administered_last_7_days": {
-          "type": "number"
-        },
-        "others_administered_total": {
+        "received_booster_percentage": {
           "type": "number"
         },
         "date_unix": {
@@ -42,10 +36,8 @@
         }
       },
       "required": [
-        "ggd_administered_last_7_days",
-        "ggd_administered_total",
-        "others_administered_last_7_days",
-        "others_administered_total",
+        "administered_total",
+        "received_booster_percentage",
         "date_unix",
         "date_of_insertion_unix"
       ],
