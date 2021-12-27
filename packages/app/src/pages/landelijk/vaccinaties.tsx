@@ -101,8 +101,11 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated',
     'hospital_vaccination_status',
     'hospital_vaccine_incidence_per_age_group',
-    'intensive_care_vaccination_status'
-  ),
+    'intensive_care_vaccination_status',
+    'booster_and_third_shot_administered',
+    'booster_shot_planned',
+    'booster_shot_administered',
+    'third_shot_administered',
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -217,6 +220,18 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
+  const boosterCoverageEstimatedLastValue =
+    data.booster_and_third_shot_administered.last_value;
+
+  const boosterShotAdministeredLastValue =
+    data.booster_shot_administered.last_value;
+    
+  const boosterShotPlannedLastValue =
+    data.booster_shot_planned.last_value;
+
+  const thirdShotAdministeredLastValue =
+    data.third_shot_administered.last_value;
+    
   const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
 
@@ -278,8 +293,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                siteText.nationaal_actueel.mini_trend_tiles.vaccinatiegraad
-                  .booster_shots_administered_total
+                boosterCoverageEstimatedLastValue.received_booster_percentage
               ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
@@ -502,51 +516,108 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
-          {boosterAndThirdShotAdministeredFeature.isEnabled && (
-            <Box
-              pt={40}
-              borderTopWidth={2}
-              borderColor="silver"
-              borderStyle="solid"
-            >
-              <PageInformationBlock
-                icon={<BoosterIcon />}
-                title={text.booster_information_block.title}
-                description={text.booster_information_block.description}
-                metadata={{
-                  datumsText: text.booster_information_block.datums,
-                  dateOrRange:
-                    dataset === 'keys'
-                      ? 1638705600
-                      : Number(
-                          text.four_kpi_section.information_block_date_unix
-                        ),
-                  dateOfInsertionUnix:
-                    dataset === 'keys'
-                      ? 1638705600
-                      : Number(
-                          text.four_kpi_section.information_block_date_unix
-                        ),
-                  dataSources: [
-                    {
-                      href: '',
-                      text: text.booster_information_block.sources.text,
-                      download: '',
-                    },
-                  ],
-                }}
-                referenceLink={text.booster_information_block.reference.href}
-              />
-            </Box>
-          )}
+          <Box
+            pt={40}
+            borderTopWidth={2}
+            borderColor="silver"
+            borderStyle="solid"
+          >
+            <PageInformationBlock
+              icon={<BoosterIcon />}
+              title={text.booster_information_block.title}
+              description={text.booster_information_block.description}
+              metadata={{
+                datumsText: text.booster_information_block.datums,
+                dateOrRange: boosterCoverageEstimatedLastValue.date_unix
+                dateOfInsertionUnix: boosterCoverageEstimatedLastValue.date_of_insertion_unix
+                dataSources: [
+                  {
+                    href: '',
+                    text: text.booster_information_block.sources.text,
+                    download: '',
+                  },
+                ],
+              }}
+              referenceLink={text.booster_information_block.reference.href}
+            />
+          </Box>
 
           <VaccineBoosterAdministrationsKpiSection
-            source={text.vaccination_grade_toggle_tile.source.text}
+            totalBoosterAndThirdShots={boosterCoverageEstimatedLastValue.administered_total}
+            percentageBoosterAndThirdShots={boosterCoverageEstimatedLastValue.received_booster_percentage}
+            metadateBoosterAndThirdShots={{
+              datumsText: text.booster_and_third_kpi.datums,
+              dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
+              dateOfInsertionUnix: boosterCoverageEstimatedLastValue.date_of_insertion_unix,
+              dataSources: [
+                {
+                  href: text.booster_and_third_kpi.source.href,
+                  text: text.booster_and_third_kpi.source.text,
+                },
+              ],
+            }}
+            boosterGgdValue={boosterShotAdministeredLastValue.ggd_administered_total}
+            metadateBoosterGgd={{
+              datumsText: text.booster_and_third_kpi.datums,
+              dateOrRange: boosterShotAdministeredLastValue.date_unix,
+              dateOfInsertionUnix: boosterShotAdministeredLastValue.date_of_insertion_unix,
+              dataSources: [
+                {
+                  href: text.booster_and_third_kpi.source.href,
+                  text: text.booster_and_third_kpi.source.text,
+                },
+              ],
+            }}
+            boosterEstimatedValue={boosterShotAdministeredLastValue.others_administered_total}
+            metadateBoosterEstimated={{
+              datumsText: text.booster_and_third_kpi.datums,
+              dateOrRange: boosterShotAdministeredLastValue.date_unix,
+              dateOfInsertionUnix: boosterShotAdministeredLastValue.date_of_insertion_unix,
+              dataSources: [
+                {
+                  href: text.booster_and_third_kpi.source.href,
+                  text: text.booster_and_third_kpi.source.text,
+                },
+              ],
+            }}
+            thirdGgdValue={thirdShotAdministeredLastValue.administered_total}
+            metadateThirdGgd={{
+              datumsText: text.booster_and_third_kpi.datums,
+              dateOrRange: thirdShotAdministeredLastValue.date_unix,
+              dateOfInsertionUnix: thirdShotAdministeredLastValue.date_of_insertion_unix,
+              dataSources: [
+                {
+                  href: text.booster_and_third_kpi.source.href,
+                  text: text.booster_and_third_kpi.source.text,
+                },
+              ],
+            }}
           />
           <VaccinationsBoosterKpiSection
-            dataBoosterShotAdministered={text.data_booster_shot_administered}
-            dataBoosterShotPlanned={text.data_booster_shot_planned}
-            source={text.vaccination_grade_toggle_tile.source.text}
+            dataBoosterShotAdministered={boosterShotAdministeredLastValue.ggd_administered_last_7_days}
+            dataBoosterShotPlanned={boosterShotPlannedLastValue.planned_7_days}
+            metadataBoosterShotPlanned={{
+              datumsText: text.booster_ggd_kpi_section.datums,
+              dateOrRange: boosterShotPlannedLastValue.date_unix,
+              dateOfInsertionUnix: boosterShotPlannedLastValue.date_of_insertion_unix,
+              dataSources: [
+                {
+                  href: text.booster_ggd_kpi_section.source.href,
+                  text: text.booster_ggd_kpi_section.source.text,
+                },
+              ],
+            }}
+            metadataBoosterShotAdministered={{
+              datumsText: text.booster_ggd_kpi_section.datums,
+              dateOrRange: boosterShotAdministeredLastValue.date_unix,
+              dateOfInsertionUnix: boosterShotAdministeredLastValue.date_of_insertion_unix,
+              dataSources: [
+                {
+                  href: text.booster_ggd_kpi_section.source.href,
+                  text: text.booster_ggd_kpi_section.source.text,
+                },
+              ],
+            }}
           />
           <Divider />
 

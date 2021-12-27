@@ -5,18 +5,20 @@ import { Markdown } from '~/components/markdown';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { LokalizeMetadata } from '~/components/lokalize-metadata';
+import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface VaccinationsBoosterKpiSectionProps {
   dataBoosterShotAdministered: string;
   dataBoosterShotPlanned: string;
-  source: string;
+  metadataBoosterShotPlanned: MetadataProps;
+  metadataBoosterShotAdministered: MetadataProps;
 }
 
 export function VaccinationsBoosterKpiSection({
   dataBoosterShotAdministered,
   dataBoosterShotPlanned,
-  source,
+  metadataBoosterShotPlanned,
+  metadataBoosterShotAdministered,
 }: VaccinationsBoosterKpiSectionProps) {
   const { siteText, formatNumber } = useIntl();
 
@@ -39,10 +41,7 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotAdministered)}
           </Text>
           <Markdown content={text.booster_last_7_days.description} />
-          <LokalizeMetadata
-            date={text.booster_last_7_days.metadata_date}
-            source={source}
-          />
+          <Metadata {...metadataBoosterShotAdministered} />
         </KpiTile>
         <KpiTile title={text.booster_planned_7_days.title}>
           <Text
@@ -58,10 +57,7 @@ export function VaccinationsBoosterKpiSection({
             {formatNumber(dataBoosterShotPlanned)}
           </Text>
           <Markdown content={text.booster_planned_7_days.description} />
-          <LokalizeMetadata
-            date={text.booster_planned_7_days.metadata_date}
-            source={source}
-          />
+          <Metadata {...metadataBoosterShotPlanned} />
         </KpiTile>
       </TwoKpiSection>
     </Box>

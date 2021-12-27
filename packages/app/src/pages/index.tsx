@@ -80,7 +80,9 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_nice',
     'hospital_nice',
     'tested_overall',
+    'vaccine_administered_total',
     'vaccine_coverage_per_age_group_estimated',
+    'booster_and_third_shot_administered',
   ]),
   () => {
     const { selectedNlData: data } = selectNlData(
@@ -94,6 +96,7 @@ export const getStaticProps = createGetStaticProps(
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
       'risk_level'
+      'booster_and_third_shot_administered',
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -143,6 +146,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+
+  const boosterCoverageEstimatedLastValue =
+    data.booster_and_third_shot_administered.last_value;
 
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
     data.intensive_care_nice.values,
@@ -553,8 +559,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .booster_shots_administered_data_drive_text,
                             {
                               percentage: formatLokalizePercentage(
-                                text.mini_trend_tiles.vaccinatiegraad
-                                  .booster_shots_administered_total
+                                boosterCoverageEstimatedLastValue.received_booster_percentage
                               ),
                             }
                           )}
@@ -576,8 +581,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    text.mini_trend_tiles.vaccinatiegraad
-                      .booster_shots_administered_total
+                    boosterCoverageEstimatedLastValue.received_booster_percentage
                   )}
                   warning={getWarning(
                     content.elements.warning,
