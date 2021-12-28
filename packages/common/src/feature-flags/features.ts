@@ -125,12 +125,6 @@ export const features: Feature[] = [
     isEnabled: false,
   },
   {
-    name: 'nlBoosterAndThirdShotAdministered',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'booster_shot_administered',
-  },
-  {
     name: 'nlBoosterShotDeliveredKpiTile',
     isEnabled: false,
     dataScopes: ['nl'],

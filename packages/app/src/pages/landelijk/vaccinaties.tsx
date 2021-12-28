@@ -105,7 +105,8 @@ export const getStaticProps = createGetStaticProps(
     'booster_and_third_shot_administered',
     'booster_shot_planned',
     'booster_shot_administered',
-    'third_shot_administered',
+    'third_shot_administered'
+  ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -177,7 +178,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber, dataset } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -207,9 +208,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
-  const boosterAndThirdShotAdministeredFeature = useFeature(
-    'nlBoosterAndThirdShotAdministered'
-  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -225,13 +223,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const boosterShotAdministeredLastValue =
     data.booster_shot_administered.last_value;
-    
-  const boosterShotPlannedLastValue =
-    data.booster_shot_planned.last_value;
+
+  const boosterShotPlannedLastValue = data.booster_shot_planned.last_value;
 
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
-    
+
   const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
 
@@ -293,7 +290,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                boosterCoverageEstimatedLastValue.received_booster_percentage
+                `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
               ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
@@ -528,8 +525,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               description={text.booster_information_block.description}
               metadata={{
                 datumsText: text.booster_information_block.datums,
-                dateOrRange: boosterCoverageEstimatedLastValue.date_unix
-                dateOfInsertionUnix: boosterCoverageEstimatedLastValue.date_of_insertion_unix
+                dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
+                dateOfInsertionUnix:
+                  boosterCoverageEstimatedLastValue.date_of_insertion_unix,
                 dataSources: [
                   {
                     href: '',
@@ -543,12 +541,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
 
           <VaccineBoosterAdministrationsKpiSection
-            totalBoosterAndThirdShots={boosterCoverageEstimatedLastValue.administered_total}
-            percentageBoosterAndThirdShots={boosterCoverageEstimatedLastValue.received_booster_percentage}
+            totalBoosterAndThirdShots={
+              boosterCoverageEstimatedLastValue.administered_total
+            }
+            percentageBoosterAndThirdShots={
+              boosterCoverageEstimatedLastValue.received_booster_percentage
+            }
             metadateBoosterAndThirdShots={{
               datumsText: text.booster_and_third_kpi.datums,
               dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
-              dateOfInsertionUnix: boosterCoverageEstimatedLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix:
+                boosterCoverageEstimatedLastValue.date_of_insertion_unix,
               dataSources: [
                 {
                   href: text.booster_and_third_kpi.source.href,
@@ -556,11 +559,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 },
               ],
             }}
-            boosterGgdValue={boosterShotAdministeredLastValue.ggd_administered_total}
+            boosterGgdValue={
+              boosterShotAdministeredLastValue.ggd_administered_total
+            }
             metadateBoosterGgd={{
               datumsText: text.booster_and_third_kpi.datums,
               dateOrRange: boosterShotAdministeredLastValue.date_unix,
-              dateOfInsertionUnix: boosterShotAdministeredLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix:
+                boosterShotAdministeredLastValue.date_of_insertion_unix,
               dataSources: [
                 {
                   href: text.booster_and_third_kpi.source.href,
@@ -568,11 +574,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 },
               ],
             }}
-            boosterEstimatedValue={boosterShotAdministeredLastValue.others_administered_total}
+            boosterEstimatedValue={
+              boosterShotAdministeredLastValue.others_administered_total
+            }
             metadateBoosterEstimated={{
               datumsText: text.booster_and_third_kpi.datums,
               dateOrRange: boosterShotAdministeredLastValue.date_unix,
-              dateOfInsertionUnix: boosterShotAdministeredLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix:
+                boosterShotAdministeredLastValue.date_of_insertion_unix,
               dataSources: [
                 {
                   href: text.booster_and_third_kpi.source.href,
@@ -584,7 +593,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadateThirdGgd={{
               datumsText: text.booster_and_third_kpi.datums,
               dateOrRange: thirdShotAdministeredLastValue.date_unix,
-              dateOfInsertionUnix: thirdShotAdministeredLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix:
+                thirdShotAdministeredLastValue.date_of_insertion_unix,
               dataSources: [
                 {
                   href: text.booster_and_third_kpi.source.href,
@@ -594,12 +604,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
           <VaccinationsBoosterKpiSection
-            dataBoosterShotAdministered={boosterShotAdministeredLastValue.ggd_administered_last_7_days}
+            dataBoosterShotAdministered={
+              boosterShotAdministeredLastValue.ggd_administered_last_7_days
+            }
             dataBoosterShotPlanned={boosterShotPlannedLastValue.planned_7_days}
             metadataBoosterShotPlanned={{
               datumsText: text.booster_ggd_kpi_section.datums,
               dateOrRange: boosterShotPlannedLastValue.date_unix,
-              dateOfInsertionUnix: boosterShotPlannedLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix:
+                boosterShotPlannedLastValue.date_of_insertion_unix,
               dataSources: [
                 {
                   href: text.booster_ggd_kpi_section.source.href,
@@ -610,7 +623,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadataBoosterShotAdministered={{
               datumsText: text.booster_ggd_kpi_section.datums,
               dateOrRange: boosterShotAdministeredLastValue.date_unix,
-              dateOfInsertionUnix: boosterShotAdministeredLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix:
+                boosterShotAdministeredLastValue.date_of_insertion_unix,
               dataSources: [
                 {
                   href: text.booster_ggd_kpi_section.source.href,

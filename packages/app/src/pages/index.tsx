@@ -95,8 +95,8 @@ export const getStaticProps = createGetStaticProps(
       'difference',
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
-      'risk_level'
-      'booster_and_third_shot_administered',
+      'risk_level',
+      'booster_and_third_shot_administered'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -130,8 +130,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
-  const { formatLokalizePercentage, formatPercentageAsNumber } =
-    useFormatLokalizePercentage();
+  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
+
+  const { formatPercentage } = useIntl();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
   const testedOverallTopicalPageFeature = useFeature(
@@ -558,7 +559,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             siteText.common_actueel
                               .booster_shots_administered_data_drive_text,
                             {
-                              percentage: formatLokalizePercentage(
+                              percentage: formatPercentage(
                                 boosterCoverageEstimatedLastValue.received_booster_percentage
                               ),
                             }
@@ -581,7 +582,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    boosterCoverageEstimatedLastValue.received_booster_percentage
+                    `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
                   )}
                   warning={getWarning(
                     content.elements.warning,
