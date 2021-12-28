@@ -28,9 +28,6 @@
         "ggd_administered_total": {
           "type": "number"
         },
-        "others_administered_last_7_days": {
-          "type": "number"
-        },
         "others_administered_total": {
           "type": "number"
         },
@@ -44,7 +41,6 @@
       "required": [
         "ggd_administered_last_7_days",
         "ggd_administered_total",
-        "others_administered_last_7_days",
         "others_administered_total",
         "date_unix",
         "date_of_insertion_unix"
