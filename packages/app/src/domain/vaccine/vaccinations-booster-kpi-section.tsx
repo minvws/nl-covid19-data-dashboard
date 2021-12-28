@@ -8,8 +8,8 @@ import { useIntl } from '~/intl';
 import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface VaccinationsBoosterKpiSectionProps {
-  dataBoosterShotAdministered: string;
-  dataBoosterShotPlanned: string;
+  dataBoosterShotAdministered: number;
+  dataBoosterShotPlanned: number;
   metadataBoosterShotPlanned: MetadataProps;
   metadataBoosterShotAdministered: MetadataProps;
 }

@@ -6,7 +6,6 @@ import { InlineText, Text, Heading } from '~/components/typography';
 import { Message } from '~/components/message';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
@@ -32,9 +31,7 @@ export function VaccineBoosterAdministrationsKpiSection({
   thirdGgdValue,
   metadateThirdGgd,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
-  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
-
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
 
   const text = siteText.vaccinaties.booster_and_third_kpi;
 
@@ -48,19 +45,15 @@ export function VaccineBoosterAdministrationsKpiSection({
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
-          <KpiValue
-            absolute={parseInt(totalBoosterAndThirdShots.replace(/\D/g, ''))}
-          />
+          <KpiValue absolute={totalBoosterAndThirdShots} />
           <Text>{text.total_booster_and_third_shots.description}</Text>
           <Text fontWeight="bold">
             {replaceComponentsInText(
-              text.total_booster_and_third_shots.percentageDescription,
+              text.total_booster_and_third_shots.percentage_description,
               {
                 percentage: (
                   <InlineText color="data.primary">
-                    {`${formatPercentageAsNumber(
-                      percentageBoosterAndThirdShots
-                    )}%`}
+                    {`${formatPercentage(percentageBoosterAndThirdShots)}%`}
                   </InlineText>
                 ),
               }
@@ -76,17 +69,17 @@ export function VaccineBoosterAdministrationsKpiSection({
         <Box spacing={4}>
           <BoosterAdministeredItem
             value={boosterGgdValue}
-            description={text.boosterGgd.title}
+            description={text.booster_ggd.title}
             metadata={metadateBoosterGgd}
           />
           <BoosterAdministeredItem
             value={boosterEstimatedValue}
-            description={text.boosterEstimated.title}
+            description={text.booster_estimated.title}
             metadata={metadateBoosterEstimated}
           />
           <BoosterAdministeredItem
             value={thirdGgdValue}
-            description={text.thirdGgd.title}
+            description={text.third_ggd.title}
             metadata={metadateThirdGgd}
           />
         </Box>
@@ -98,21 +91,25 @@ export function VaccineBoosterAdministrationsKpiSection({
 interface BoosterAdministeredProps {
   value: number;
   description: string;
-  metadeta: MetadataProps;
+  metadata: MetadataProps;
 }
 
 function BoosterAdministeredItem(props: BoosterAdministeredProps) {
-  const { value, description, metadeta } = props;
+  const { value, description, metadata } = props;
+
+  const { formatNumber } = useIntl();
 
   return (
     <Box spacing={1}>
       <Text fontWeight="bold">
         {replaceComponentsInText(description, {
-          value: <InlineText color="data.primary">{value}</InlineText>,
+          value: (
+            <InlineText color="data.primary">{formatNumber(value)}</InlineText>
+          ),
         })}
       </Text>
 
-      <Metadata {...metadeta} />
+      <Metadata {...metadata} />
     </Box>
   );
 }
