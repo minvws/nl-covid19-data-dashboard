@@ -370,7 +370,6 @@ export interface NlBoosterShotAdministered {
 export interface NlBoosterShotAdministeredValue {
   ggd_administered_last_7_days: number;
   ggd_administered_total: number;
-  others_administered_last_7_days: number;
   others_administered_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
