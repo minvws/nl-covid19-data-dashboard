@@ -50,7 +50,7 @@ const StyledLabel = styled.label(
     '&:hover, &:focus': {
       bg: 'tileGray',
       color: 'blue',
-      borderColor: 'blue'
+      borderColor: 'blue',
     },
   })
 );
@@ -77,7 +77,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
             onChange={() => onChange(item.value)}
             id={`radiogroup-${item.value}-${id}-${index}`}
             type="radio"
-            name={`radiogroup-${id}-item-${item.value}`}
+            name={`radiogroup-${id}-item`}
             value={item.value}
             checked={value === item.value}
             aria-label={value === item.value ? item.ariaLabel : undefined}
