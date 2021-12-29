@@ -4,115 +4,83 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Tile } from '~/components/tile';
 import { InlineText, Text, Heading } from '~/components/typography';
 import { Message } from '~/components/message';
-import { LokalizeMetadata } from '~/components/lokalize-metadata';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
+import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
-  source: string;
+  totalBoosterAndThirdShots: number;
+  percentageBoosterAndThirdShots: number;
+  metadateBoosterAndThirdShots: MetadataProps;
+  boosterGgdValue: number;
+  metadateBoosterGgd: MetadataProps;
+  boosterEstimatedValue: number;
+  metadateBoosterEstimated: MetadataProps;
+  thirdGgdValue: number;
+  metadateThirdGgd: MetadataProps;
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
-  source,
+  totalBoosterAndThirdShots,
+  percentageBoosterAndThirdShots,
+  metadateBoosterAndThirdShots,
+  boosterGgdValue,
+  metadateBoosterGgd,
+  boosterEstimatedValue,
+  metadateBoosterEstimated,
+  thirdGgdValue,
+  metadateThirdGgd,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
-  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
+  const { siteText, formatPercentage } = useIntl();
 
-  const { siteText } = useIntl();
-
-  const text = siteText.vaccinaties;
-
-  const boosterAndThirdKpiText = text.booster_and_third_kpi;
-
-  const totalBoosterAndThirdShots = {
-    value: boosterAndThirdKpiText.total_booster_and_third_shots.value,
-    description:
-      boosterAndThirdKpiText.total_booster_and_third_shots.description,
-    percentage: boosterAndThirdKpiText.total_booster_and_third_shots.percentage,
-    percentageDescription:
-      boosterAndThirdKpiText.total_booster_and_third_shots
-        .percentage_description,
-    warning: boosterAndThirdKpiText.total_booster_and_third_shots.warning,
-    metadataDate:
-      boosterAndThirdKpiText.total_booster_and_third_shots.metadata_date,
-  };
-
-  const boosterGgd = {
-    value: boosterAndThirdKpiText.booster_ggd.value,
-    title: boosterAndThirdKpiText.booster_ggd.title,
-    metadataDate: boosterAndThirdKpiText.booster_ggd.metadata_date,
-  };
-
-  const boosterEstimated = {
-    value: boosterAndThirdKpiText.booster_estimated.value,
-    title: boosterAndThirdKpiText.booster_estimated.title,
-    metadataDate: boosterAndThirdKpiText.booster_estimated.metadata_date,
-  };
-
-  const thirdGgd = {
-    value: boosterAndThirdKpiText.third_ggd.value,
-    title: boosterAndThirdKpiText.third_ggd.title,
-    metadataDate: boosterAndThirdKpiText.third_ggd.metadata_date,
-  };
+  const text = siteText.vaccinaties.booster_and_third_kpi;
 
   return (
     <Tile>
       <Box mb={20}>
         <TwoKpiSection>
-          <Heading level={3}>{boosterAndThirdKpiText.title}</Heading>
+          <Heading level={3}>{text.title}</Heading>
           <Box />
         </TwoKpiSection>
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
-          <KpiValue
-            absolute={parseInt(
-              totalBoosterAndThirdShots.value.replace(/\D/g, '')
-            )}
-          />
-          <Text>{totalBoosterAndThirdShots.description}</Text>
+          <KpiValue absolute={totalBoosterAndThirdShots} />
+          <Text>{text.total_booster_and_third_shots.description}</Text>
           <Text fontWeight="bold">
             {replaceComponentsInText(
-              totalBoosterAndThirdShots.percentageDescription,
+              text.total_booster_and_third_shots.percentage_description,
               {
                 percentage: (
                   <InlineText color="data.primary">
-                    {`${formatPercentageAsNumber(
-                      totalBoosterAndThirdShots.percentage
-                    )}%`}
+                    {`${formatPercentage(percentageBoosterAndThirdShots)}%`}
                   </InlineText>
                 ),
               }
             )}
           </Text>
-          {totalBoosterAndThirdShots.warning && (
+          {text.total_booster_and_third_shots.warning && (
             <Message variant="warning">
-              {totalBoosterAndThirdShots.warning}
+              {text.total_booster_and_third_shots.warning}
             </Message>
           )}
-          <LokalizeMetadata
-            date={totalBoosterAndThirdShots.metadataDate}
-            source={source}
-          />
+          <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
         </Box>
         <Box spacing={4}>
           <BoosterAdministeredItem
-            value={boosterGgd.value}
-            description={boosterGgd.title}
-            date={boosterGgd.metadataDate}
-            source={source}
+            value={boosterGgdValue}
+            description={text.booster_ggd.title}
+            metadata={metadateBoosterGgd}
           />
           <BoosterAdministeredItem
-            value={boosterEstimated.value}
-            description={boosterEstimated.title}
-            date={boosterEstimated.metadataDate}
-            source={source}
+            value={boosterEstimatedValue}
+            description={text.booster_estimated.title}
+            metadata={metadateBoosterEstimated}
           />
           <BoosterAdministeredItem
-            value={thirdGgd.value}
-            description={thirdGgd.title}
-            date={thirdGgd.metadataDate}
-            source={source}
+            value={thirdGgdValue}
+            description={text.third_ggd.title}
+            metadata={metadateThirdGgd}
           />
         </Box>
       </TwoKpiSection>
@@ -121,24 +89,27 @@ export function VaccineBoosterAdministrationsKpiSection({
 }
 
 interface BoosterAdministeredProps {
-  value: string;
+  value: number;
   description: string;
-  date: string;
-  source: string;
+  metadata: MetadataProps;
 }
 
 function BoosterAdministeredItem(props: BoosterAdministeredProps) {
-  const { value, description, date, source } = props;
+  const { value, description, metadata } = props;
+
+  const { formatNumber } = useIntl();
 
   return (
     <Box spacing={1}>
       <Text fontWeight="bold">
         {replaceComponentsInText(description, {
-          value: <InlineText color="data.primary">{value}</InlineText>,
+          value: (
+            <InlineText color="data.primary">{formatNumber(value)}</InlineText>
+          ),
         })}
       </Text>
 
-      <LokalizeMetadata date={date} source={source} />
+      <Metadata {...metadata} isTileFooter />
     </Box>
   );
 }
