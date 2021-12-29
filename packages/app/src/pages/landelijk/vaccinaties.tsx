@@ -552,12 +552,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               date: boosterCoverageEstimatedLastValue.date_unix,
               obtainedAt:
                 boosterCoverageEstimatedLastValue.date_of_insertion_unix,
-              dataSources: [
-                {
-                  href: text.booster_and_third_kpi.sources.href,
-                  text: text.booster_and_third_kpi.sources.text,
-                },
-              ],
+              source: {
+                href: text.booster_and_third_kpi.sources.href,
+                text: text.booster_and_third_kpi.sources.text,
+              },
             }}
             boosterGgdValue={
               boosterShotAdministeredLastValue.ggd_administered_total
@@ -567,12 +565,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               date: boosterShotAdministeredLastValue.date_unix,
               obtainedAt:
                 boosterShotAdministeredLastValue.date_of_insertion_unix,
-              dataSources: [
-                {
-                  href: text.booster_and_third_kpi.sources.href,
-                  text: text.booster_and_third_kpi.sources.text,
-                },
-              ],
+              source: {
+                href: text.booster_and_third_kpi.sources.href,
+                text: text.booster_and_third_kpi.sources.text,
+              },
             }}
             boosterEstimatedValue={
               boosterShotAdministeredLastValue.others_administered_total
@@ -582,24 +578,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               date: boosterShotAdministeredLastValue.date_unix,
               obtainedAt:
                 boosterShotAdministeredLastValue.date_of_insertion_unix,
-              dataSources: [
-                {
-                  href: text.booster_and_third_kpi.sources.href,
-                  text: text.booster_and_third_kpi.sources.text,
-                },
-              ],
+              source: {
+                href: text.booster_and_third_kpi.sources.href,
+                text: text.booster_and_third_kpi.sources.text,
+              },
             }}
             thirdGgdValue={thirdShotAdministeredLastValue.administered_total}
             metadateThirdGgd={{
               datumsText: text.booster_and_third_kpi.datums,
               date: thirdShotAdministeredLastValue.date_unix,
               obtainedAt: thirdShotAdministeredLastValue.date_of_insertion_unix,
-              dataSources: [
-                {
-                  href: text.booster_and_third_kpi.sources.href,
-                  text: text.booster_and_third_kpi.sources.text,
-                },
-              ],
+              source: {
+                href: text.booster_and_third_kpi.sources.href,
+                text: text.booster_and_third_kpi.sources.text,
+              },
             }}
           />
           <VaccinationsBoosterKpiSection
@@ -611,24 +603,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               datumsText: text.booster_ggd_kpi_section.datums,
               date: boosterShotPlannedLastValue.date_unix,
               obtainedAt: boosterShotPlannedLastValue.date_of_insertion_unix,
-              dataSources: [
-                {
-                  href: text.booster_ggd_kpi_section.sources.href,
-                  text: text.booster_ggd_kpi_section.sources.text,
-                },
-              ],
+              source: {
+                href: text.booster_ggd_kpi_section.sources.href,
+                text: text.booster_ggd_kpi_section.sources.text,
+              },
             }}
             metadataBoosterShotAdministered={{
               datumsText: text.booster_ggd_kpi_section.datums,
               date: boosterShotAdministeredLastValue.date_unix,
               obtainedAt:
                 boosterShotAdministeredLastValue.date_of_insertion_unix,
-              dataSources: [
-                {
-                  href: text.booster_ggd_kpi_section.sources.href,
-                  text: text.booster_ggd_kpi_section.sources.text,
-                },
-              ],
+              source: {
+                href: text.booster_ggd_kpi_section.sources.href,
+                text: text.booster_ggd_kpi_section.sources.text,
+              },
             }}
           />
           <Divider />

@@ -64,7 +64,7 @@ export function VaccineBoosterAdministrationsKpiSection({
               {text.total_booster_and_third_shots.warning}
             </Message>
           )}
-          <Metadata {...metadateBoosterAndThirdShots} />
+          <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
         </Box>
         <Box spacing={4}>
           <BoosterAdministeredItem
@@ -109,7 +109,7 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
         })}
       </Text>
 
-      <Metadata {...metadata} />
+      <Metadata {...metadata} isTileFooter />
     </Box>
   );
 }
