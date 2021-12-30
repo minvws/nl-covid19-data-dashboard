@@ -48,6 +48,8 @@ export function TooltipSubject({
           width={13}
           borderRadius={'2px'}
           ml={'auto'}
+          mb={'auto'}
+          mt={'5px'}
           backgroundColor={color}
         />
       </Box>
