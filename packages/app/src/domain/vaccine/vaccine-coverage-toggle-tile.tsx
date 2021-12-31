@@ -37,6 +37,7 @@ interface VaccineCoverageToggleTileProps {
   age18Plus: AgeTypes;
   age12Plus: AgeTypes;
   dateUnix: number;
+  dateUnixBoostered?: number;
   numFractionDigits?: number;
 }
 
@@ -45,6 +46,7 @@ export function VaccineCoverageToggleTile({
   source,
   descriptionFooter,
   dateUnix,
+  dateUnixBoostered,
   age18Plus,
   age12Plus,
   numFractionDigits = 0,
@@ -59,7 +61,7 @@ export function VaccineCoverageToggleTile({
   };
 
   const metadataBooster: MetadataProps = {
-    date: text.age_18_plus.metadata_date,
+    date: dateUnixBoostered,
     source: source,
   };
 
@@ -130,7 +132,7 @@ export function VaccineCoverageToggleTile({
       {age18Plus.boostered && (
         <Box mt={56}>
           <TwoKpiSection spacing={5}>
-            {selectedTab === text.age_18_plus.label && (
+            {selectedTab === text.age_18_plus.label && dateUnixBoostered && (
               <>
                 <AgeGroupBlock
                   title={text.top_labels.booster_grade}
