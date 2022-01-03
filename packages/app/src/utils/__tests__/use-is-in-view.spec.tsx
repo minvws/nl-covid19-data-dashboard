@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import * as sinon from 'sinon';
 import { Context, suite, uvu } from 'uvu';
 import * as assert from 'uvu/assert';
-import { useIsInView } from '../use-is-in-view';
+import { useViewState } from '../use-view-state';
 
 const UseIsInView = suite('useIsInView');
 
@@ -41,6 +41,7 @@ UseIsInView.before.each((context) => {
   }
 
   global.IntersectionObserver = IntersectionObserverStub;
+  window.IntersectionObserver = IntersectionObserverStub;
 });
 
 UseIsInView.after.each(() => {
@@ -49,7 +50,7 @@ UseIsInView.after.each(() => {
 
 function TestComponent({ context }: { context: Context & uvu.Crumbs }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useIsInView(ref, '100px');
+  const isInView = useViewState(ref, '100px');
 
   context.ref = ref;
   context.isInView = isInView;
@@ -71,7 +72,7 @@ UseIsInView(
 UseIsInView('should have a default state of false', (context) => {
   render(<TestComponent context={context} />);
 
-  assert.equal(context.isInView, false);
+  assert.equal(context.isInView, 'outView');
 });
 
 UseIsInView('should observe the given element', (context) => {
@@ -84,15 +85,15 @@ UseIsInView('should observe the given element', (context) => {
 UseIsInView('should set isInView to the correct value', (context) => {
   render(<TestComponent context={context} />);
 
-  assert.equal(context.isInView, false);
+  assert.equal(context.isInView, 'outView');
 
   context.callback([{ isIntersecting: true }]);
 
-  assert.equal(context.isInView, true);
+  assert.equal(context.isInView, 'inView');
 
   context.callback([{ isIntersecting: false }]);
 
-  assert.equal(context.isInView, false);
+  assert.equal(context.isInView, 'outView');
 });
 
 UseIsInView('should unobserve the element on unmount', (context) => {
