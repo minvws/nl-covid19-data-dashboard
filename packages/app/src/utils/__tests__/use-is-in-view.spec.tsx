@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import * as sinon from 'sinon';
 import { Context, suite, uvu } from 'uvu';
 import * as assert from 'uvu/assert';
-import { useIsInView } from '../use-is-in-view';
+import { useViewState } from '../use-view-state';
 
 const UseIsInView = suite('useIsInView');
 
@@ -49,7 +49,7 @@ UseIsInView.after.each(() => {
 
 function TestComponent({ context }: { context: Context & uvu.Crumbs }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useIsInView(ref, '100px');
+  const isInView = useViewState(ref, '100px');
 
   context.ref = ref;
   context.isInView = isInView;
