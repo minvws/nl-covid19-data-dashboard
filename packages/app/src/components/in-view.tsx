@@ -1,5 +1,5 @@
 import { ReactNode, useRef, useEffect } from 'react';
-import { useIsInView } from '~/utils/use-is-in-view';
+import { useViewState } from '~/utils/use-view-state';
 
 interface InViewProps {
   children: ReactNode;
@@ -13,8 +13,10 @@ export function InView({
   triggerOnce = true,
 }: InViewProps) {
   const ref = useRef(null);
-  const isInView = useIsInView(ref, rootMargin);
-  const hasChanged = useRef(isInView);
+  const viewState = useViewState(ref, rootMargin);
+  const hasChanged = useRef(viewState === 'inView');
+  const isInView = viewState === 'inView';
+  const alwaysShow = 'notSupported' === viewState;
 
   useEffect(() => {
     if (isInView) {
@@ -24,7 +26,8 @@ export function InView({
 
   return (
     <div ref={ref}>
-      {(isInView || (triggerOnce && hasChanged.current)) && children}
+      {(isInView || (triggerOnce && hasChanged.current) || alwaysShow) &&
+        children}
     </div>
   );
 }
