@@ -1,17 +1,19 @@
 import { MutableRefObject, useCallback, useEffect, useState } from 'react';
 
+type InViewState = 'inView' | 'outView' | 'notSupported';
+
 /**
  * Returns & updates if the given element is visible in the viewport.
  *
- * @param element - A reference to the element to be watched
- * @param rootMargin - Optional. An IntersectionObserver rootMargin string
- * @returns A boolean telling if the element is in view or not
+ * @param element - A reference to the element to be watched/
+ * @param rootMargin - Optional. An IntersectionObserver rootMargin string.
+ * @returns inView, outView or not supported.
  */
-export function useIsInView(
+export function useViewState(
   element: MutableRefObject<HTMLElement | null>,
   rootMargin?: string
 ) {
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState<InViewState>('outView');
   const connect = useCallback(
     (observer: IntersectionObserver, htmlElement: HTMLElement) =>
       observer.observe(htmlElement),
@@ -22,10 +24,15 @@ export function useIsInView(
   useEffect(() => {
     if (!element.current) return;
 
+    if (false === 'IntersectionObserver' in window) {
+      setIsInView('notSupported');
+      return;
+    }
+
     const currentElement = element.current;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
+      ([entry]) => setIsInView(entry.isIntersecting ? 'inView' : 'outView'),
       { rootMargin }
     );
 
