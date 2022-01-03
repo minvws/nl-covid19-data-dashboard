@@ -41,6 +41,7 @@ UseIsInView.before.each((context) => {
   }
 
   global.IntersectionObserver = IntersectionObserverStub;
+  window.IntersectionObserver = IntersectionObserverStub;
 });
 
 UseIsInView.after.each(() => {
@@ -71,7 +72,7 @@ UseIsInView(
 UseIsInView('should have a default state of false', (context) => {
   render(<TestComponent context={context} />);
 
-  assert.equal(context.isInView, false);
+  assert.equal(context.isInView, 'outView');
 });
 
 UseIsInView('should observe the given element', (context) => {
@@ -84,15 +85,15 @@ UseIsInView('should observe the given element', (context) => {
 UseIsInView('should set isInView to the correct value', (context) => {
   render(<TestComponent context={context} />);
 
-  assert.equal(context.isInView, false);
+  assert.equal(context.isInView, 'outView');
 
   context.callback([{ isIntersecting: true }]);
 
-  assert.equal(context.isInView, true);
+  assert.equal(context.isInView, 'inView');
 
   context.callback([{ isIntersecting: false }]);
 
-  assert.equal(context.isInView, false);
+  assert.equal(context.isInView, 'outView');
 });
 
 UseIsInView('should unobserve the element on unmount', (context) => {
