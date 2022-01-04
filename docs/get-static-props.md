@@ -50,7 +50,7 @@ function MyPage(props: PageProps) {
 The most basic usage of the `getStaticProps` functionality is loading the dashboard data into the page.
 By dashboard data we mean the JSON files in the **public/json** folder.
 
-It would inefficient to simply load the entire JSON file into the page because not all metrics
+It would be inefficient to simply load the entire JSON file into the page because not all metrics
 contained within the JSON file are displayed on every page. So this would unnecessarily bloat the
 page size.
 
@@ -84,11 +84,11 @@ type InfectiousPeopleType = {
 
 #### selectVr
 
-This does exactly the same as `selectNl` except it selects data from a specified **VR<vr-code>.json** file
+This does exactly the same as `selectNl` except it selects data from a specified **VR<vr-code>.json** file.
 
 #### selectGm
 
-This does exactly the same as `selectNl` and `selectVr` except it selects data from a specified **GM<gm-code>.json** file
+This does exactly the same as `selectNl` and `selectVr` except it selects data from a specified **GM<gm-code>.json** file.
 
 #### createGetChoroplethData
 
