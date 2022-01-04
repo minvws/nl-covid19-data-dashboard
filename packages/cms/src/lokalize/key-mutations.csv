@@ -25,3 +25,5 @@ timestamp,action,key,document_id,move_to
 2021-12-28T13:51:35.975Z,delete,vaccinaties.booster_and_third_kpi.total_booster_and_third_shots.value,0ztyMU2xVVOl2tFNiG8gFM,__
 2021-12-28T13:51:35.977Z,delete,vaccinaties.booster_ggd_kpi_section.booster_last_7_days.metadata_date,0ztyMU2xVVOl2tFNiLGg4o,__
 2021-12-28T13:51:35.978Z,delete,vaccinaties.booster_ggd_kpi_section.booster_planned_7_days.metadata_date,0ztyMU2xVVOl2tFNiLGgAr,__
+2022-01-04T13:35:49.858Z,add,gemeente_positief_geteste_personen.map_last_value_text,Hpcrbv9k01wdsU0EheZaiI,__
+2022-01-04T13:35:50.875Z,add,gemeente_positief_geteste_personen.map_safety_region_last_value_text,0ztyMU2xVVOl2tFNiaUuSE,__
