@@ -29,10 +29,8 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   const firstOccurences = variants.values.reduce<Record<string, number>>(
     (acc, x) =>
       Object.assign(acc, {
-        [x.name]: x.values.reduceRight(
-          (acc, value) => (value.percentage > 0 ? value.date_start_unix : acc),
-          0
-        ),
+        [x.name]: x.values.find((value) => value.percentage > 0)
+          ?.date_start_unix,
       }),
     {}
   );
