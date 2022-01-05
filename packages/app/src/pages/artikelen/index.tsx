@@ -2,10 +2,11 @@ import { css } from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
-import { Select } from '~/components/select';
+import { RichContentSelect } from '~/components/rich-content-select';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { ArticlesOverviewList } from '~/domain/articles/articles-overview-list';
 import { Layout } from '~/domain/layout/layout';
@@ -49,15 +50,15 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  const sortOptions = useMemo(() => {
+  const articleCategories = useMemo(() => {
     /**
      * Find all the categories that are currently being used in articles,
      * to later check if we still need it for the menu items.
      */
-    const availableCategories = [
+    const availableCategories: string[] = [
       '__alles',
       ...new Set(content.map((item) => item.categories).flat()),
-    ];
+    ].filter(isPresent);
 
     return articleCategory
       .map((id) => {
@@ -71,6 +72,19 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
       })
       .filter((item) => availableCategories.includes(item.value));
   }, [siteText, content]);
+
+  const selectOptions = useMemo(
+    () =>
+      articleCategories.map((category) => ({
+        ...category,
+        content: (
+          <Box pr={2}>
+            <Text>{category.label}</Text>
+          </Box>
+        ),
+      })),
+    [articleCategories]
+  );
 
   const handleCategoryFilter = useCallback(
     function setNewParam(item: ArticleCategoryType) {
@@ -106,15 +120,15 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
           {breakpoints.lg ? (
             <OrderedList>
-              {sortOptions.map((item, index) => (
+              {articleCategories.map((category, index) => (
                 <ListItem
                   key={index}
-                  isActive={currentCategory === item.value}
-                  onClick={() => handleCategoryFilter(item.value)}
+                  isActive={currentCategory === category.value}
+                  onClick={() => handleCategoryFilter(category.value)}
                 >
                   <StyledButton>
-                    <InlineText>{item.label}</InlineText>
-                    <BoldText aria-hidden="true">{item.label}</BoldText>
+                    <InlineText>{category.label}</InlineText>
+                    <BoldText aria-hidden="true">{category.label}</BoldText>
                   </StyledButton>
                 </ListItem>
               ))}
@@ -131,10 +145,15 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
                 },
               })}
             >
-              <Select
-                options={sortOptions}
-                onChange={handleCategoryFilter}
-                value={currentCategory}
+              <RichContentSelect
+                label={
+                  siteText.common_actueel.secties.artikelen
+                    .categorie_select_placeholder
+                }
+                visuallyHiddenLabel
+                initialValue={currentCategory}
+                options={selectOptions}
+                onChange={(item) => handleCategoryFilter(item.value)}
               />
             </Box>
           )}

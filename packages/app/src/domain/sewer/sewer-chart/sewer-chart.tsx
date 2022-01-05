@@ -15,12 +15,7 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 
-export function SewerChart({
-  accessibility,
-  dataAverages,
-  dataPerInstallation,
-  text,
-}: {
+type SewerChartProps = {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -35,7 +30,7 @@ export function SewerChart({
       href: string;
       text: string;
     };
-    selectPlaceholder?: string;
+    selectPlaceholder: string;
     splitLabels: {
       segment_0: string;
       segment_1: string;
@@ -45,7 +40,14 @@ export function SewerChart({
     averagesDataLabel: string;
     valueAnnotation: string;
   };
-}) {
+};
+
+export function SewerChart({
+  accessibility,
+  dataAverages,
+  dataPerInstallation,
+  text,
+}: SewerChartProps) {
   const {
     options,
     value: selectedInstallation,
