@@ -1,4 +1,6 @@
-import { Select } from '~/components/select';
+import { Box } from '~/components/base';
+import { RichContentSelect } from '~/components/rich-content-select';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import {
   BehaviorIdentifier,
@@ -19,18 +21,32 @@ export function SelectBehavior({
 }: SelectBehaviorProps) {
   const intl = useIntl();
   const selectOptions = options
-    .map((id) => ({
-      value: id,
-      label: intl.siteText.gedrag_onderwerpen[id],
-    }))
+    .map((id) => {
+      const label = intl.siteText.gedrag_onderwerpen[id];
+      const iconSize = 25;
+      return {
+        value: id,
+        label,
+        content: (
+          <Box display="flex" alignItems="center">
+            <Box pr={1} width={iconSize} height={iconSize}>
+              <BehaviorIcon name={id} size={iconSize} aria-hidden={true} />
+            </Box>
+            <Text>{label}</Text>
+          </Box>
+        ),
+      };
+    })
     .sort((a, b) => a.label.localeCompare(b.label));
 
   return (
-    <Select
-      value={value}
-      onChange={onChange}
-      icon={<BehaviorIcon name={value} size={25} />}
+    <RichContentSelect
+      label={''}
+      visuallyHiddenLabel
+      initialValue={value}
       options={selectOptions}
+      onChange={(option) => onChange(option.value)}
+      richContentForSelectedValue
     />
   );
 }

@@ -13,6 +13,7 @@ import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import {
   BehaviorIdentifier,
@@ -47,6 +48,8 @@ export function BehaviorLineChartTile({
   );
   const supportValuesHasGap = useDataHasGaps(values, selectedSupportValueKey);
 
+  const breakpoints = useBreakpoints();
+
   return (
     <ChartTile
       title={chartText.title}
@@ -60,7 +63,7 @@ export function BehaviorLineChartTile({
           spacing={{ _: 3, lg: 0 }}
           flexDirection={{ _: 'column', lg: 'row' }}
         >
-          <Box pr={3}>
+          <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior
               value={currentId}
               onChange={setCurrentId}

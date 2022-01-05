@@ -17,6 +17,7 @@ type RichContentSelectProps<T extends string> = {
   onChange: (option: Option<T>) => void;
   options: Option<T>[];
   visuallyHiddenLabel?: boolean;
+  richContentForSelectedValue?: boolean;
 };
 
 /**
@@ -29,7 +30,14 @@ type RichContentSelectProps<T extends string> = {
 export function RichContentSelect<T extends string>(
   props: RichContentSelectProps<T>
 ) {
-  const { label, options, onChange, initialValue, visuallyHiddenLabel } = props;
+  const {
+    label,
+    options,
+    onChange,
+    initialValue,
+    visuallyHiddenLabel,
+    richContentForSelectedValue,
+  } = props;
 
   const {
     labelId,
@@ -40,6 +48,14 @@ export function RichContentSelect<T extends string>(
   } = useRichContentSelect(options, onChange, initialValue);
 
   const { siteText } = useIntl();
+
+  const selectedOptionView =
+    isPresent(selectedOption) &&
+    (richContentForSelectedValue ? (
+      selectedOption?.content
+    ) : (
+      <Text>{selectedOption.label}</Text>
+    ));
 
   return (
     <Box pb={3}>
@@ -62,7 +78,7 @@ export function RichContentSelect<T extends string>(
 
       <SelectBoxRoot>
         <SelectBox {...getComboboxProps()}>
-          {isPresent(selectedOption) && <Text>{selectedOption?.label}</Text>}
+          {selectedOptionView}
           <ArrowIcon
             css={css({
               color: 'blue',
@@ -70,8 +86,9 @@ export function RichContentSelect<T extends string>(
               '&[aria-expanded="true"]': {
                 transform: 'rotate(180deg)',
               },
+              marginLeft: '0.5rem',
             })}
-            aria-hidden="true"
+            aria-hidden={true}
             aria-expanded={getComboboxProps()['aria-expanded']}
           />
         </SelectBox>

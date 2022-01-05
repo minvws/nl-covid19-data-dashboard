@@ -14,7 +14,7 @@ export const SelectBox = styled(Box)(
     alignItems: 'center',
     borderColor: 'silver',
     borderStyle: 'solid',
-    borderRadius: theme => theme.radii[1],
+    borderRadius: (theme) => theme.radii[1],
     height: '36px',
     borderWidth: 1,
     transition: '0.1s background-color',
@@ -33,20 +33,20 @@ export const SelectBox = styled(Box)(
         right: '1px',
         bottom: 0,
         borderBottom: '1px solid',
-        borderColor: 'silver'
-      }
+        borderColor: 'silver',
+      },
     },
     '&:hover, &:focus': {
       bg: 'tileGray',
     },
     '&:hover': {
       color: 'blue',
-      borderColor: 'blue'
+      borderColor: 'blue',
     },
     '&:focus': {
       bg: 'white',
       color: 'body',
-    }
+    },
   })
 );
 
@@ -64,11 +64,11 @@ export const ListBox = styled(Box)(
     borderWidth: 1,
     borderTopWidth: 0,
     display: 'none',
-    zIndex: 1,
+    zIndex: 10,
     [`${SelectBox}[aria-expanded="true"] + &`]: {
       display: 'block',
       borderRadius: '0 0 5px 5px',
-      borderTopColor: 'silver'
+      borderTopColor: 'silver',
     },
   })
 );
@@ -89,14 +89,14 @@ export const ListBoxOption = styled(Box)(
       backgroundColor: 'blue',
       transform: 'scaleX(0)',
       transformOrigin: 'left',
-      transition: '0.2s transform'
+      transition: '0.2s transform',
     },
     '&[aria-selected="true"]': {
       color: 'blue',
       fontWeight: 'bold',
       '&:before': {
         transform: 'scaleX(1)',
-      }
+      },
     },
     '&:hover': {
       backgroundColor: 'tileGray',

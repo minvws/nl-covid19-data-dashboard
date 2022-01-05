@@ -120,7 +120,7 @@ export function SewerChart({
           {dataPerInstallation && (
             <Box alignSelf="flex-start" mb={3} width={207}>
               <RichContentSelect
-                label={text.selectPlaceholder || ''}
+                label={text.selectPlaceholder}
                 visuallyHiddenLabel
                 initialValue={selectedInstallation}
                 options={optionsWithContent}
