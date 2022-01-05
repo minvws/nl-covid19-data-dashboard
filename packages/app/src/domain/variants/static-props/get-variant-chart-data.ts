@@ -26,11 +26,24 @@ export function getVariantChartData(variants: NlVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const variantsOfConcern = variants.values.filter(
-    (x) =>
-      x.last_value.is_variant_of_concern ||
-      x.last_value.has_historical_significance
+  const firstOccurences = variants.values.reduce<Record<string, number>>(
+    (acc, x) =>
+      Object.assign(acc, {
+        [x.name]: x.values.reduceRight(
+          (acc, value) => (value.percentage > 0 ? value.date_start_unix : acc),
+          0
+        ),
+      }),
+    {}
   );
+
+  const variantsOfConcern = variants.values
+    .filter(
+      (x) =>
+        x.last_value.is_variant_of_concern ||
+        x.last_value.has_historical_significance
+    )
+    .sort((a, b) => firstOccurences[b.name] - firstOccurences[a.name]);
 
   const firstVariant = variantsOfConcern.shift();
 
