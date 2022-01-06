@@ -2,9 +2,11 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 
-export const SelectBoxRoot = styled(Box)`
-  position: relative;
-`;
+export const SelectBoxRoot = styled(Box)(
+  css({
+    position: 'relative',
+  })
+);
 
 export const SelectBox = styled(Box)(
   css({
