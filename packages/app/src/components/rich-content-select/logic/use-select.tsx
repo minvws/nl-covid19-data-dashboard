@@ -58,11 +58,9 @@ export function useRichContentSelect<T extends string>(
   );
 
   useEffect(() => {
-    if (initialValue) {
-      const newActiveIndex = getActiveIndexForValue(options, initialValue);
-      setActiveIndex(newActiveIndex);
-      setSelectedOption(options[newActiveIndex]);
-    }
+    const newActiveIndex = getActiveIndexForValue(options, initialValue);
+    setActiveIndex(newActiveIndex);
+    setSelectedOption(options[newActiveIndex]);
   }, [options, initialValue]);
 
   const searchString = useRef('');

@@ -55,7 +55,7 @@ export function SelectBehavior({
       initialValue={value}
       options={selectOptions}
       onChange={(option) => onChange(option.value)}
-      richContentForSelectedValue
+      useContentForSelectedOption
     />
   );
 }

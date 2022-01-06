@@ -17,7 +17,7 @@ type RichContentSelectProps<T extends string> = {
   onChange: (option: Option<T>) => void;
   options: Option<T>[];
   visuallyHiddenLabel?: boolean;
-  richContentForSelectedValue?: boolean;
+  useContentForSelectedOption?: boolean;
 };
 
 /**
@@ -36,7 +36,7 @@ export function RichContentSelect<T extends string>(
     onChange,
     initialValue,
     visuallyHiddenLabel,
-    richContentForSelectedValue,
+    useContentForSelectedOption: richContentForSelectedValue,
   } = props;
 
   const {
