@@ -52,7 +52,11 @@ export function BehaviorPerAgeGroup({
   return (
     <ChartTile title={title} description={description}>
       <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
-        <SelectBehavior value={currentId} onChange={setCurrentId} />
+        <SelectBehavior
+          label={siteText.nl_gedrag.select_behaviour_label}
+          value={currentId}
+          onChange={setCurrentId}
+        />
         <Box overflow="auto">
           {isDefined(complianceValue) || isDefined(supportValue) ? (
             <Box overflow="auto">

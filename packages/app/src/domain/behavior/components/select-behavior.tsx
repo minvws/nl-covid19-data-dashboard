@@ -9,12 +9,14 @@ import {
 import { BehaviorIcon } from './behavior-icon';
 
 interface SelectBehaviorProps {
+  label: string;
   value: BehaviorIdentifier;
   onChange: (value: BehaviorIdentifier) => void;
   options?: BehaviorIdentifier[];
 }
 
 export function SelectBehavior({
+  label,
   value,
   onChange,
   options = behaviorIdentifiers as unknown as BehaviorIdentifier[],
@@ -41,7 +43,7 @@ export function SelectBehavior({
 
   return (
     <RichContentSelect
-      label={''}
+      label={label}
       visuallyHiddenLabel
       initialValue={value}
       options={selectOptions}

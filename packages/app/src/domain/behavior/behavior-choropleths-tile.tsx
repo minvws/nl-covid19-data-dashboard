@@ -66,7 +66,11 @@ export function BehaviorChoroplethsTile({
     <ChartTile title={title} description={description}>
       <Box spacing={4} height="100%">
         <Box width={breakpoints.lg ? '50%' : '100%'}>
-          <SelectBehavior value={currentId} onChange={setCurrentId} />
+          <SelectBehavior
+            label={siteText.nl_gedrag.select_behaviour_label}
+            value={currentId}
+            onChange={setCurrentId}
+          />
         </Box>
         <Box display="flex" flexWrap="wrap" spacing={{ _: 4, md: 0 }}>
           <ChoroplethBlock

@@ -66,6 +66,7 @@ export function BehaviorLineChartTile({
         >
           <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior
+              label={siteText.nl_gedrag.select_behaviour_label}
               value={currentId}
               onChange={setCurrentId}
               options={behaviorOptions}
