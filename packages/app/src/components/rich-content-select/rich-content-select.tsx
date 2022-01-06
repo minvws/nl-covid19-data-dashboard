@@ -58,7 +58,7 @@ export function RichContentSelect<T extends string>(
     ));
 
   return (
-    <Box pb={3}>
+    <Box>
       {visuallyHiddenLabel ? (
         <VisuallyHidden as="label" id={labelId}>
           {typeof label === 'string' ? <InlineText>{label}</InlineText> : label}

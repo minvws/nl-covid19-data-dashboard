@@ -62,6 +62,7 @@ export function BehaviorLineChartTile({
           alignItems={{ lg: 'center' }}
           spacing={{ _: 3, lg: 0 }}
           flexDirection={{ _: 'column', lg: 'row' }}
+          pb={3}
         >
           <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior
