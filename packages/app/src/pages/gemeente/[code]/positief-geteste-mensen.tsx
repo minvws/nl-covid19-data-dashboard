@@ -42,6 +42,7 @@ import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-reg
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -58,6 +59,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }, context) => ({
       tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
+    vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -96,7 +98,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
   const populationCount = data.static_values.population_count;
-
+  const vrForMunicipality = getVrForMunicipalityCode(data.code);
+  const vrData = choropleth.vr.tested_overall.find(
+    (v) => v.vrcode === vrForMunicipality?.code
+  );
   const metadata = {
     ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
@@ -260,7 +265,34 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceVariablesInText(text.map_titel, {
                 municipality: municipalityName,
               })}
-              description={<Markdown content={text.map_toelichting} />}
+              description={
+                <>
+                  <Markdown content={text.map_toelichting} />
+                  <Text variant="body2" fontWeight="bold">
+                    {replaceComponentsInText(text.map_last_value_text, {
+                      infected_per_100k: (
+                        <InlineText color="data.primary">{`${formatNumber(
+                          lastValue.infected_per_100k
+                        )}`}</InlineText>
+                      ),
+                      municipality: municipalityName,
+                    })}
+                  </Text>
+                  <Text variant="body2" fontWeight="bold">
+                    {replaceComponentsInText(
+                      text.map_safety_region_last_value_text,
+                      {
+                        infected_per_100k: (
+                          <InlineText color="data.primary">{`${formatNumber(
+                            vrData?.infected_per_100k
+                          )}`}</InlineText>
+                        ),
+                        safetyRegion: vrForMunicipality?.name,
+                      }
+                    )}
+                  </Text>
+                </>
+              }
               legend={{
                 thresholds: thresholds.gm.infected_per_100k,
                 title:

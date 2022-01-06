@@ -2,7 +2,7 @@
 
 ## Github actions
 
-When a PR is opened a github action will be triggered that runs a number of tests that validates the code.
+When a PR is opened a GitHub action will be triggered that runs a number of tests that validates the code.
 This action is located at `.github/workflows/main.yml` in the repository.
 This action will perform the following tasks:
 
@@ -11,7 +11,7 @@ This action will perform the following tasks:
 - Run a typescript type check for each package
 - Run the unit tests
 
-Whenever a merge happens to either the master or develop branch, a github
+Whenever a merge happens to either the master or develop branch, a GitHub
 action will trigger an Azure build pipeline.
 These actions are located in the `.github/workflows` directory in the repository.
 `infra-develop.yml` runs when a merge to develop occurs, `infra.yml` runs
@@ -32,7 +32,7 @@ The build process follows these steps:
 - Start the docker build:
   - Yarn install all dependencies
   - Build the commons package
-  - Generate the server data typescript interface from the schema's
+  - Generate the server data TypeScript interface from the schemas
   - Build the icons package
   - Run the unit tests
   - Download the server data files
