@@ -13,7 +13,6 @@ import {
 } from '@corona-dashboard/common';
 import { set } from 'lodash';
 import { useMemo, useState } from 'react';
-import { SelectProps } from '~/components/select';
 
 type MergedValue = {
   average: number | null;
@@ -115,7 +114,7 @@ export function useSewerStationSelectPropsSimplified(
     [data.values]
   );
 
-  const props: SelectProps<string> = {
+  const props = {
     options,
     value,
     onChange: setValue,
