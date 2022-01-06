@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { Text } from '~/components/typography';
@@ -30,11 +31,17 @@ export function SelectBehavior({
         value: id,
         label,
         content: (
-          <Box display="flex" alignItems="center">
+          <Box display="flex" alignItems="flex-start">
             <Box pr={1} width={iconSize} height={iconSize}>
               <BehaviorIcon name={id} size={iconSize} aria-hidden={true} />
             </Box>
-            <Text>{label}</Text>
+            <Text
+              css={css({
+                lineHeight: `${iconSize}px`,
+              })}
+            >
+              {label}
+            </Text>
           </Box>
         ),
       };

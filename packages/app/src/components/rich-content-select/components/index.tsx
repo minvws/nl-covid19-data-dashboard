@@ -2,9 +2,9 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 
-export const SelectBoxRoot = styled(Box)({
-  position: 'relative',
-});
+export const SelectBoxRoot = styled(Box)`
+  position: relative;
+`;
 
 export const SelectBox = styled(Box)(
   css({
@@ -15,7 +15,7 @@ export const SelectBox = styled(Box)(
     borderColor: 'silver',
     borderStyle: 'solid',
     borderRadius: (theme) => theme.radii[1],
-    height: '36px',
+    minHeight: '36px',
     borderWidth: 1,
     transition: '0.1s background-color',
     userSelect: 'none',
