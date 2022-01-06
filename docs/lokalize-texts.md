@@ -20,7 +20,7 @@ In summary these are the most important things you should be aware of:
 
 - Commands are run with `yarn lokalize:[command]` from the `packages/cms` root
 - The `export` command brings your local JSON files up-to-date with the Sanity
-  dataset. The Typescript compiler will error when your JSON files do not
+  dataset. The TypeScript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
 - The JSON export contains document ids as part of the keys. You can make
   changes locally to the **app/src/locale/nl_export.json** file. Add new keys,
