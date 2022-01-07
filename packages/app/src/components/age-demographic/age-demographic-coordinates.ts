@@ -99,7 +99,7 @@ function calculateAgeDemographicCoordinates<
 
   // Height and top margin are higher for small screens to fit the heading texts
   const isNarrowScreen = parentWidth < 400;
-  // Set height according to amount of bars in chart.
+  // Set height height according to amount of bars in chart.
   const height = isNarrowScreen ? 234 + (singleBarHeight * barCount) : 214 + (singleBarHeight * barCount);
   const marginX = isSmallScreen ? 10 : 40;
   const margin = {
