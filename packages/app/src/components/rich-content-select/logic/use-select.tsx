@@ -26,6 +26,17 @@ enum Actions {
   Type,
 }
 
+function getActiveIndexForValue<T extends string>(
+  options: Option<T>[],
+  value?: Unpack<T>
+) {
+  if (!value) {
+    return 0;
+  }
+
+  return options.findIndex((el) => el.value === value);
+}
+
 export function useRichContentSelect<T extends string>(
   options: Option<T>[],
   onChange: (option: Option<T>) => void,
@@ -37,19 +48,20 @@ export function useRichContentSelect<T extends string>(
   const [expanded, setExpanded] = useState(false);
   const [ignoreBlur, setIgnoreBlur] = useState(false);
 
-  const [activeIndex, setActiveIndex] = useState(() => {
-    // set the initial activeIndex
-    if (initialValue) {
-      return options.findIndex((el) => el.value === initialValue);
-    }
-
-    return 0;
-  });
+  const [activeIndex, setActiveIndex] = useState(
+    getActiveIndexForValue(options, initialValue)
+  );
 
   // make sure activeIndex and selectedOption are in sync at component mount
   const [selectedOption, setSelectedOption] = useState(
     () => options[activeIndex]
   );
+
+  useEffect(() => {
+    const newActiveIndex = getActiveIndexForValue(options, initialValue);
+    setActiveIndex(newActiveIndex);
+    setSelectedOption(options[newActiveIndex]);
+  }, [options, initialValue]);
 
   const searchString = useRef('');
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(

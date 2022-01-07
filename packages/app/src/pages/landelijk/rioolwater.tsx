@@ -127,6 +127,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title: text.linechart_titel,
               source: text.bronnen.rivm,
               description: text.linechart_description,
+              selectPlaceholder: text.graph_selected_rwzi_placeholder,
               splitLabels: siteText.rioolwater_metingen.split_labels,
               averagesDataLabel: siteText.common.daggemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,

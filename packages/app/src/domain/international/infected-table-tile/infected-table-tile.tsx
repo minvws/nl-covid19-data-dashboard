@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Metadata, MetadataProps } from '~/components/metadata';
+import { RichContentSelect } from '~/components/rich-content-select';
 import { SearchInput } from '~/components/search-input';
-import { Select } from '~/components/select';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { NarrowInfectedTable } from './components/narrow-infected-table';
@@ -111,10 +111,12 @@ export function InfectedTableTile({
             flexDirection={{ _: 'column', lg: 'row' }}
           >
             <label css={css({ pr: 2, fontSize: 1 })}>{text.sorteer_op}</label>
-            <Select
+            <RichContentSelect
+              label={text.sorteer_op}
+              visuallyHiddenLabel
+              initialValue={sortOption}
               options={sortOptions}
-              onChange={setSortOption}
-              value={sortOption}
+              onChange={(option) => setSortOption(option.value)}
             />
           </Box>
         </Box>

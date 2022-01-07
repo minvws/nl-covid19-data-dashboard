@@ -12,8 +12,7 @@ import {
   VrSewer,
 } from '@corona-dashboard/common';
 import { set } from 'lodash';
-import { useCallback, useMemo, useState } from 'react';
-import { SelectProps } from '~/components/select';
+import { useMemo, useState } from 'react';
 
 type MergedValue = {
   average: number | null;
@@ -115,13 +114,10 @@ export function useSewerStationSelectPropsSimplified(
     [data.values]
   );
 
-  const onClear = useCallback(() => setValue(undefined), []);
-
-  const props: SelectProps<string> = {
+  const props = {
     options,
     value,
     onChange: setValue,
-    onClear,
   };
 
   return props;
