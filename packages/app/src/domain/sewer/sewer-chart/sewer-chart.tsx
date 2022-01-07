@@ -1,11 +1,14 @@
 import {
   colors,
+  gmData,
   NlSewer,
   SewerPerInstallationData,
+  vrData,
   VrSewer,
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
+import { Warning } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { ChartTile } from '~/components/chart-tile';
@@ -13,7 +16,10 @@ import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
+import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
+import { useIntl } from '~/intl';
+import { getScopedGmWarning } from '~/utils/get-scoped-gm-warning';
 
 type SewerChartProps = {
   /**
@@ -40,6 +46,8 @@ type SewerChartProps = {
     averagesDataLabel: string;
     valueAnnotation: string;
   };
+  name?: string;
+  warning?: string;
 };
 
 export function SewerChart({
@@ -47,6 +55,8 @@ export function SewerChart({
   dataAverages,
   dataPerInstallation,
   text,
+  name,
+  warning,
 }: SewerChartProps) {
   const {
     options,
@@ -90,6 +100,21 @@ export function SewerChart({
       label: text.splitLabels.segment_3,
     },
   ];
+  const { siteText } = useIntl();
+  const scopedGmName = siteText.gemeente_index.municipality_warning;
+  const scopedGm = gmData.find(
+    (gm) =>
+      gm.name === scopedGmName ||
+      (gm.searchTerms && gm.searchTerms.includes(scopedGmName))
+  );
+  const scopedVr = vrData.find((vr) => vr.code === scopedGm?.vrCode);
+
+  const scopedWarning = getScopedGmWarning(
+    scopedGmName,
+    name || '',
+    warning || '',
+    scopedVr?.name || ''
+  );
 
   const optionsWithContent = useMemo(
     () =>
@@ -128,6 +153,17 @@ export function SewerChart({
               />
             </Box>
           )}
+          {scopedWarning &&
+            scopedGmName.toUpperCase() === selectedInstallation && (
+              <Box mt={2} mb={4}>
+                <WarningTile
+                  variant="emphasis"
+                  message={scopedWarning}
+                  icon={Warning}
+                  isFullWidth
+                />
+              </Box>
+            )}
 
           {
             /**

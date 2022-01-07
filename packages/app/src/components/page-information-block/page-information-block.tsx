@@ -1,4 +1,6 @@
 import css from '@styled-system/css';
+import { Warning } from '@corona-dashboard/icons';
+import { gmData, vrData } from '@corona-dashboard/common';
 import { isValidElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -12,6 +14,9 @@ import { Articles } from './components/articles';
 import { Header } from './components/header';
 import { Metadata, MetadataProps } from './components/metadata';
 import { PageLinks } from './components/page-links';
+import { WarningTile } from '~/components/warning-tile';
+import { getScopedGmWarning } from '~/utils/get-scoped-gm-warning';
+import { useIntl } from '~/intl';
 
 interface InformationBlockProps {
   title?: string;
@@ -30,6 +35,8 @@ interface InformationBlockProps {
   id?: string;
   category?: string;
   screenReaderCategory?: string;
+  name?: string;
+  warning?: string;
 }
 
 export function PageInformationBlock({
@@ -43,7 +50,25 @@ export function PageInformationBlock({
   id,
   category,
   screenReaderCategory,
+  name,
+  warning,
 }: InformationBlockProps) {
+  const { siteText } = useIntl();
+  const scopedGmName = siteText.gemeente_index.municipality_warning;
+  const scopedGm = gmData.find(
+    (gm) =>
+      gm.name === scopedGmName ||
+      (gm.searchTerms && gm.searchTerms.includes(scopedGmName))
+  );
+  const scopedVr = vrData.find((vr) => vr.code === scopedGm?.vrCode);
+
+  const scopedWarning = getScopedGmWarning(
+    scopedGmName,
+    name || '',
+    warning || '',
+    scopedVr?.name || ''
+  );
+
   const MetaDataBlock = metadata ? (
     <MetadataBox>
       <Metadata
@@ -74,6 +99,14 @@ export function PageInformationBlock({
           title={title}
           category={category}
           screenReaderCategory={screenReaderCategory}
+        />
+      )}
+      {scopedWarning && (
+        <WarningTile
+          variant="emphasis"
+          message={scopedWarning}
+          icon={Warning}
+          isFullWidth
         />
       )}
 

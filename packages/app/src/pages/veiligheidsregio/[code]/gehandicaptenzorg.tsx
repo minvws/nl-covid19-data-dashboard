@@ -124,6 +124,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={positiveTestPeopleText.reference.href}
             articles={content.articles}
+            name={vrName}
+            warning={locationsText.warning}
           />
 
           <TwoKpiSection>

@@ -140,6 +140,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             pageLinks={content.links}
             articles={content.articles}
+            name={vrName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>
