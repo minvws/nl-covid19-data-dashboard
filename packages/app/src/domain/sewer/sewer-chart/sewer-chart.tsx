@@ -44,7 +44,7 @@ type SewerChartProps = {
     averagesDataLabel: string;
     valueAnnotation: string;
   };
-  name?: string;
+  vrNameOrGmName?: string;
   warning?: string;
 };
 
@@ -53,7 +53,7 @@ export function SewerChart({
   dataAverages,
   dataPerInstallation,
   text,
-  name,
+  vrNameOrGmName,
   warning,
 }: SewerChartProps) {
   const {
@@ -101,7 +101,7 @@ export function SewerChart({
   const { siteText } = useIntl();
   const scopedGmName = siteText.gemeente_index.municipality_warning;
 
-  const scopedWarning = useScopedWarning(name || '', warning || '');
+  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
   const optionsWithContent = useMemo(
     () =>

@@ -33,7 +33,7 @@ interface InformationBlockProps {
   id?: string;
   category?: string;
   screenReaderCategory?: string;
-  name?: string;
+  vrNameOrGmName?: string;
   warning?: string;
 }
 
@@ -48,10 +48,10 @@ export function PageInformationBlock({
   id,
   category,
   screenReaderCategory,
-  name,
+  vrNameOrGmName,
   warning,
 }: InformationBlockProps) {
-  const scopedWarning = useScopedWarning(name || '', warning || '');
+  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
