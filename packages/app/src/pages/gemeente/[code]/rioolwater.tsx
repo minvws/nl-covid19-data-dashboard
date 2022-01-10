@@ -112,7 +112,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={text.reference.href}
             articles={content.articles}
-            name={municipalityName}
+            vrNameOrGmName={municipalityName}
             warning={text.warning}
           />
 
@@ -215,7 +215,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesDataLabel: siteText.common.weekgemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
-            name={municipalityName}
+            vrNameOrGmName={municipalityName}
             warning={text.warning_chart}
           />
         </TileList>

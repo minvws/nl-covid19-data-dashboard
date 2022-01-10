@@ -137,7 +137,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             pageLinks={content.links}
             articles={content.articles}
-            name={municipalityName}
+            vrNameOrGmName={municipalityName}
             warning={text.warning}
           />
 

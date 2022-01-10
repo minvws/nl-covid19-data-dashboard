@@ -124,7 +124,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [deceasedPage_vr.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.mainArticles}
-            name={vrName}
+            vrNameOrGmName={vrName}
             warning={deceasedPage_vr.warning}
           />
 

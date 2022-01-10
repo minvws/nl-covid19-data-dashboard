@@ -159,7 +159,7 @@ export const VaccinationsVrPage = (
             pageLinks={content.links}
             referenceLink={text.informatie_blok.reference.href}
             articles={content.articles}
-            name={vrName}
+            vrNameOrGmName={vrName}
             warning={text.warning}
           />
 

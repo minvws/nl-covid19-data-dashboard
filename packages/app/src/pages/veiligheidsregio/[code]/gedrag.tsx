@@ -108,7 +108,7 @@ export default function BehaviorPageVr(
             }}
             referenceLink={regionaal_gedrag.reference.href}
             articles={content.articles}
-            name={vrName}
+            vrNameOrGmName={vrName}
             warning={text.warning}
           />
 

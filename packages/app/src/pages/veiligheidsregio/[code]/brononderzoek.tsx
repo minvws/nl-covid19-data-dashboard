@@ -118,7 +118,7 @@ export default function BrononderzoekPage(
             }}
             referenceLink={text.reference.href}
             articles={content.articles}
-            name={vrName}
+            vrNameOrGmName={vrName}
             warning={text.warning}
           />
 
