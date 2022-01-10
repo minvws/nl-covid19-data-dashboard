@@ -1,9 +1,7 @@
 import {
   colors,
-  gmData,
   NlSewer,
   SewerPerInstallationData,
-  vrData,
   VrSewer,
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
@@ -19,7 +17,7 @@ import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
-import { getScopedGmWarning } from '~/utils/get-scoped-gm-warning';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
 
 type SewerChartProps = {
   /**
@@ -102,19 +100,8 @@ export function SewerChart({
   ];
   const { siteText } = useIntl();
   const scopedGmName = siteText.gemeente_index.municipality_warning;
-  const scopedGm = gmData.find(
-    (gm) =>
-      gm.name === scopedGmName ||
-      (gm.searchTerms && gm.searchTerms.includes(scopedGmName))
-  );
-  const scopedVr = vrData.find((vr) => vr.code === scopedGm?.vrCode);
 
-  const scopedWarning = getScopedGmWarning(
-    scopedGmName,
-    name || '',
-    warning || '',
-    scopedVr?.name || ''
-  );
+  const scopedWarning = useScopedWarning(name || '', warning || '');
 
   const optionsWithContent = useMemo(
     () =>
