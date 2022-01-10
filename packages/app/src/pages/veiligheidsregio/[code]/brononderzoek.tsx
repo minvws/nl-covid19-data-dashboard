@@ -118,6 +118,8 @@ export default function BrononderzoekPage(
             }}
             referenceLink={text.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>

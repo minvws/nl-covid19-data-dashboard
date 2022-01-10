@@ -131,6 +131,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={text.reference.href}
             articles={content.articles}
+            vrNameOrGmName={municipalityName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>

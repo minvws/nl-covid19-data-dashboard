@@ -108,6 +108,8 @@ export default function BehaviorPageVr(
             }}
             referenceLink={regionaal_gedrag.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>
