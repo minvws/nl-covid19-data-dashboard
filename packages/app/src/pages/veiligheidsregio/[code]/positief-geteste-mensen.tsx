@@ -313,6 +313,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 dataConfig={{
                   metricName: 'tested_overall',
                   metricProperty: 'infected_per_100k',
+                  dataFormatters: {
+                    infected: formatNumber,
+                    infected_per_100k: formatNumber,
+                  },
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.positiefGetesteMensen,

@@ -19,6 +19,7 @@ type TTooltipProps<T extends ChoroplethDataItem> = {
   placement?: ChoroplethTooltipPlacement;
   formatTooltip?: TooltipFormatter<T>;
   data: TooltipData<T>;
+  dataFormatters?: Partial<Record<keyof T, (input: string | number) => string>>;
 };
 
 const VIEWPORT_PADDING = 10;
@@ -32,6 +33,7 @@ export function Tooltip<T extends ChoroplethDataItem>({
   top,
   formatTooltip,
   data,
+  dataFormatters,
   placement = 'bottom-right',
 }: TTooltipProps<T>) {
   const viewportSize = useViewport();
@@ -43,7 +45,7 @@ export function Tooltip<T extends ChoroplethDataItem>({
   const content = isDefined(formatTooltip) ? (
     formatTooltip(data)
   ) : (
-    <ChoroplethTooltip data={data} />
+    <ChoroplethTooltip data={data} dataFormatters={dataFormatters} />
   );
 
   if (!content) return null;

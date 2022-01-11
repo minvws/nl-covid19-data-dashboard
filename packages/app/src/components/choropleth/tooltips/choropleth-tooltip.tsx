@@ -10,12 +10,13 @@ import { TooltipData } from './types';
 
 type ChoroplethDataItemProps<T extends ChoroplethDataItem> = {
   data: TooltipData<T>;
+  dataFormatters?: Partial<Record<keyof T, (input: string | number) => string>>;
 };
 
 export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   props: ChoroplethDataItemProps<T>
 ) {
-  const { data } = props;
+  const { data, dataFormatters } = props;
   const {
     siteText,
     formatNumber,
@@ -50,6 +51,26 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     ...data.dataOptions.tooltipVariables,
   } as Record<string, string | number>;
 
+  const formattedTooltipVars = Object.entries(dataFormatters || {}).reduce(
+    (acc, [key, formatter]) => {
+      return {
+        ...acc,
+        [key]: formatter(tooltipVars[key]),
+      };
+    },
+    tooltipVars
+  );
+
+  const content = replaceVariablesInText(tooltipContent, formattedTooltipVars, {
+    formatNumber,
+    formatPercentage,
+    formatDate,
+    formatDateFromSeconds,
+    formatDateFromMilliseconds,
+    formatRelativeDate,
+    formatDateSpan,
+  });
+
   return (
     <TooltipContent
       title={data.featureName}
@@ -64,17 +85,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
         thresholdValues={data.thresholdValues}
         filterBelow={data.dataItem[data.dataConfig.metricProperty]}
       >
-        <Markdown
-          content={replaceVariablesInText(tooltipContent, tooltipVars, {
-            formatNumber,
-            formatPercentage,
-            formatDate,
-            formatDateFromSeconds,
-            formatDateFromMilliseconds,
-            formatRelativeDate,
-            formatDateSpan,
-          })}
-        />
+        <Markdown content={content} />
       </TooltipSubject>
     </TooltipContent>
   );

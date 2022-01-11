@@ -27,7 +27,7 @@ export type AnchorEventHandler = {
 
 type ChoroplethMapProps<T extends ChoroplethDataItem> = Omit<
   ChoroplethProps<T>,
-  'formatTooltip' | 'tooltipPlacement'
+  'formatTooltip' | 'tooltipPlacement' | 'dataFormatters'
 > & {
   setTooltip: (tooltip: TooltipSettings<T> | undefined) => void;
   isTabInteractive: boolean;
