@@ -376,21 +376,13 @@ function replaceInaccurateLastValue(data: any) {
  * Returns a subset of a lokalize export file based on an array of keys and the
  * locale of the site to be generated.
  *
- * @param keys An array of keys to extract from the lokcalize export files.
+ * @param callback A function which returns a subset of a lokalize export
  * @param locale The locale of the page to be generated.
  * @returns a subset of a lokalize export file
  */
-export function getLokalizeTexts<T extends keyof SiteText>(
-  keys: T[],
+export function getLokalizeTexts<T extends object>(
+  callback: (a: SiteText) => T,
   locale: keyof Languages
 ) {
-  return {
-    pageText: keys.reduce(
-      (acc, key) => ({
-        ...acc,
-        [key]: languages[locale][key],
-      }),
-      {}
-    ) as Pick<SiteText, T>,
-  } as const;
+  return { pageText: callback(languages[locale]) };
 }
