@@ -105,6 +105,7 @@ export const getStaticProps = createGetStaticProps(
     'booster_and_third_shot_administered',
     'booster_shot_planned',
     'booster_shot_administered',
+    'booster_coverage',
     'third_shot_administered'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
@@ -226,6 +227,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const boosterShotPlannedLastValue = data.booster_shot_planned.last_value;
 
+  const boosterCoverageLastValue = data.booster_coverage.last_value;
+
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
 
@@ -291,7 +294,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
+                `${boosterCoverageLastValue.percentage}`
               ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
@@ -545,9 +548,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             totalBoosterAndThirdShots={
               boosterCoverageEstimatedLastValue.administered_total
             }
-            percentageBoosterAndThirdShots={
-              boosterCoverageEstimatedLastValue.received_booster_percentage
-            }
+            percentageBoosterAndThirdShots={boosterCoverageLastValue.percentage}
             metadateBoosterAndThirdShots={{
               datumsText: text.booster_and_third_kpi.datums,
               date: boosterCoverageEstimatedLastValue.date_unix,
