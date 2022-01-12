@@ -9,14 +9,15 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './legend-icon';
+import { SiteText } from '~/locale';
 
 export function SituationsDataCoverageTooltip({
   context,
+  text,
 }: {
   context: TooltipData<VrCollectionSituations>;
+  text: SiteText['pages']['contactTracing']['shared']['situaties_kaarten_uitkomsten'];
 }) {
-  const { siteText } = useIntl();
-  const text = siteText.brononderzoek;
   const reverseRouter = useReverseRouter();
 
   const { has_sufficient_data } = context.dataItem;
@@ -24,8 +25,8 @@ export function SituationsDataCoverageTooltip({
   const Icon = has_sufficient_data ? Check : Cross;
   const color = has_sufficient_data ? 'data.primary' : 'gray';
   const label = has_sufficient_data
-    ? text.situaties_kaarten_uitkomsten.tooltip.voldoende_data
-    : text.situaties_kaarten_uitkomsten.tooltip.onvoldoende_data;
+    ? text.tooltip.voldoende_data
+    : text.tooltip.onvoldoende_data;
 
   return (
     <TooltipContent
