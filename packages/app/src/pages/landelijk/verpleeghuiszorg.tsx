@@ -86,7 +86,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     7
   );
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
@@ -276,6 +276,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               dataConfig={{
                 metricName: 'nursing_home',
                 metricProperty: 'infected_locations_percentage',
+                dataFormatters: {
+                  infected_locations_percentage: formatNumber,
+                },
               }}
               dataOptions={{
                 isPercentage: true,
