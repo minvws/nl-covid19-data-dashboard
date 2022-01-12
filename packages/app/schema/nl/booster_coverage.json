@@ -19,7 +19,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_coverage",
+      "title": "nl_booster_coverage_value",
       "type": "object",
       "properties": {
         "percentage": {

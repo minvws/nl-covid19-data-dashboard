@@ -415,10 +415,10 @@ export interface NlBoosterShotPerAgeGroupValue {
   birthyear_range: string;
 }
 export interface NlBoosterCoverage {
-  values: NlBoosterCoverage1[];
-  last_value: NlBoosterCoverage1;
+  values: NlBoosterCoverageValue[];
+  last_value: NlBoosterCoverageValue;
 }
-export interface NlBoosterCoverage1 {
+export interface NlBoosterCoverageValue {
   percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
