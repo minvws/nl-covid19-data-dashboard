@@ -150,9 +150,6 @@ at run time, after being downloaded by the choropleth component this TopoJson is
 
 ### Adjust municipal file
 
-...
-
-In gm.ts de eventuele nieuwe gemeentes aanmaken en de oude gemeentes weggooien
-gemeente code mag maar een keer voor komen in de json - oude gemeentes verwijderen
+Please update the [municipal configuration](/packages/common/src/data/gm.ts) file accordingly. Make sure to remove the former municipalities so that the value of a `gemcode` only exists once in this file.
 
 [Back to index](index.md)
