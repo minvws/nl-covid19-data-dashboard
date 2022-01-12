@@ -134,7 +134,7 @@ export default function BrononderzoekPage(
             referenceLink={textShared.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={textShared.warning}
           />
 
           <TwoKpiSection>

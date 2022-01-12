@@ -128,7 +128,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             articles={content.mainArticles}
             vrNameOrGmName={vrName}
-            warning={deceasedPage_vr.warning}
+            warning={textVr.warning}
           />
 
           <TwoKpiSection>

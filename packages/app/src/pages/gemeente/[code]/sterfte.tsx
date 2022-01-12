@@ -117,7 +117,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             articles={content.articles}
             vrNameOrGmName={municipalityName}
-            warning={text.warning}
+            warning={textGm.warning}
           />
 
           <TwoKpiSection>
