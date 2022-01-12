@@ -6,6 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
+import { Warning } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { ChartTile } from '~/components/chart-tile';
@@ -13,7 +14,10 @@ import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
+import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
+import { useIntl } from '~/intl';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
 
 type SewerChartProps = {
   /**
@@ -40,6 +44,8 @@ type SewerChartProps = {
     averagesDataLabel: string;
     valueAnnotation: string;
   };
+  vrNameOrGmName?: string;
+  warning?: string;
 };
 
 export function SewerChart({
@@ -47,6 +53,8 @@ export function SewerChart({
   dataAverages,
   dataPerInstallation,
   text,
+  vrNameOrGmName,
+  warning,
 }: SewerChartProps) {
   const {
     options,
@@ -90,6 +98,10 @@ export function SewerChart({
       label: text.splitLabels.segment_3,
     },
   ];
+  const { siteText } = useIntl();
+  const scopedGmName = siteText.gemeente_index.municipality_warning;
+
+  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
   const optionsWithContent = useMemo(
     () =>
@@ -128,6 +140,17 @@ export function SewerChart({
               />
             </Box>
           )}
+          {scopedWarning &&
+            scopedGmName.toUpperCase() === selectedInstallation && (
+              <Box mt={2} mb={4}>
+                <WarningTile
+                  variant="emphasis"
+                  message={scopedWarning}
+                  icon={Warning}
+                  isFullWidth
+                />
+              </Box>
+            )}
 
           {
             /**

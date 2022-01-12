@@ -70,6 +70,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
   const {
     width,
     height,
+    singleBarHeight,
     numTicks,
     xMax,
     yMax,
@@ -78,7 +79,6 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
     leftPoint,
     rightScale,
     rightPoint,
-    ageGroupRangeScale,
     ageGroupRangePoint,
     ageGroupRange,
     margin,
@@ -205,13 +205,13 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
               <StyledHoverBar
                 x={margin.left}
                 y={ageGroupRangePoint(value)}
-                height={ageGroupRangeScale.bandwidth()}
+                height={singleBarHeight}
                 width={width - margin.left - margin.right}
               />
               <Bar
                 x={width / 2 - axisWidth / 2 - leftBarWidth}
                 y={ageGroupRangePoint(value)}
-                height={ageGroupRangeScale.bandwidth()}
+                height={singleBarHeight}
                 width={leftBarWidth}
                 css={css({
                   fill: isClippedLeftGroup
@@ -223,9 +223,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
                 textAnchor="middle"
                 verticalAnchor="middle"
                 fontSize="12"
-                y={
-                  ageGroupRangePoint(value) + ageGroupRangeScale.bandwidth() / 2
-                }
+                y={ageGroupRangePoint(value) + singleBarHeight / 2}
                 x={width / 2}
                 fill={colors.annotation}
               >
@@ -235,7 +233,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
               <Bar
                 x={width / 2 + axisWidth / 2}
                 y={ageGroupRangePoint(value)}
-                height={ageGroupRangeScale.bandwidth()}
+                height={singleBarHeight}
                 width={rightBarWidth}
                 css={css({
                   fill: isClippedRightGroup

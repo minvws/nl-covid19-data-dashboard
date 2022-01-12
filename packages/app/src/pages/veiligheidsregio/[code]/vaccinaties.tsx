@@ -159,6 +159,8 @@ export const VaccinationsVrPage = (
             pageLinks={content.links}
             referenceLink={text.informatie_blok.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={text.warning}
           />
 
           <VaccineCoverageToggleTile

@@ -8,7 +8,7 @@ import { isPresent } from 'ts-is-present';
 const STEP_WIDTH = 5;
 const HEIGHT = 24;
 const NUMBER_OF_POINTS = 7;
-const MARKER_RADIUS = 3;
+const MARKER_RADIUS = 2.5;
 
 type SparkLineProps<T extends TimestampedValue> = {
   averageProperty: KeysOfType<T, number | null, true>;

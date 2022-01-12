@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { Warning } from '@corona-dashboard/icons';
 import { isValidElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -12,6 +13,8 @@ import { Articles } from './components/articles';
 import { Header } from './components/header';
 import { Metadata, MetadataProps } from './components/metadata';
 import { PageLinks } from './components/page-links';
+import { WarningTile } from '~/components/warning-tile';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
 
 interface InformationBlockProps {
   title?: string;
@@ -30,6 +33,8 @@ interface InformationBlockProps {
   id?: string;
   category?: string;
   screenReaderCategory?: string;
+  vrNameOrGmName?: string;
+  warning?: string;
 }
 
 export function PageInformationBlock({
@@ -43,7 +48,11 @@ export function PageInformationBlock({
   id,
   category,
   screenReaderCategory,
+  vrNameOrGmName,
+  warning,
 }: InformationBlockProps) {
+  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+
   const MetaDataBlock = metadata ? (
     <MetadataBox>
       <Metadata
@@ -74,6 +83,14 @@ export function PageInformationBlock({
           title={title}
           category={category}
           screenReaderCategory={screenReaderCategory}
+        />
+      )}
+      {scopedWarning && (
+        <WarningTile
+          variant="emphasis"
+          message={scopedWarning}
+          icon={Warning}
+          isFullWidth
         />
       )}
 

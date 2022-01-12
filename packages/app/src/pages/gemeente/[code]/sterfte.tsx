@@ -116,6 +116,8 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.articles}
+            vrNameOrGmName={municipalityName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>

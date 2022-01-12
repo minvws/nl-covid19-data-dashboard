@@ -127,6 +127,8 @@ const ElderlyAtHomeRegionalPage = (
             }}
             referenceLink={text.section_positive_tested.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>

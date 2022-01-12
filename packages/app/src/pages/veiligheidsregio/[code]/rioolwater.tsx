@@ -1,12 +1,10 @@
-import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { isEmpty } from 'lodash';
+import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
@@ -84,10 +82,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={text.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={text.warning}
           />
-          {!isEmpty(text.warning_method) && (
-            <WarningTile message={text.warning_method} icon={Experimenteel} />
-          )}
 
           <TwoKpiSection>
             <KpiTile
@@ -126,6 +123,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesDataLabel: siteText.common.daggemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
+            vrNameOrGmName={vrName}
+            warning={text.warning_chart}
           />
         </TileList>
       </VrLayout>
