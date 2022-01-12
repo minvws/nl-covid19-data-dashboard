@@ -9,7 +9,6 @@ import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { metricConfigs } from '~/metric-config';
 

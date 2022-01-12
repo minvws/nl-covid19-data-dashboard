@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 
 export type SituationTexts =

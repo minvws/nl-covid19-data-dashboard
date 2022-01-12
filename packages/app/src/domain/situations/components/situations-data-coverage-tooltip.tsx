@@ -6,7 +6,6 @@ import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { InlineText } from '~/components/typography';
-import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './legend-icon';
 import { SiteText } from '~/locale';
