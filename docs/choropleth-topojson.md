@@ -7,6 +7,9 @@ This section describes how to generate this data with the correct projection app
 ## Software requirements
 
 - QGIS ([download](https://qgis.org/en/site/forusers/download.html))
+
+  > At this moment, QGIS is not yet notarized as required by macOS Catalina (10.15) security rules. On first launch, please right-click on the QGIS app icon, hold down the Option key, then choose Open.
+
 - Mapshaper (Online tool available at [mapshaper.org](https://mapshaper.org))
 
 ## Creating the GEOJson
@@ -14,18 +17,18 @@ This section describes how to generate this data with the correct projection app
 ### Importing the source data
 
 To create the data files we need, we will be using `cbsgebiedsindelingen_2020_v3_pdok.gpkg` as the
-data source. This package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen)
+data source. This package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen). Download the XML file and find the link to the latest `*.gpkg` file in it. The URL looks like this: https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/extract/cbsgebiedsindelingen_2022_v1.gpkg.
 
-ATTENTION: At the time of writing, the `cbsgebiedsindelingen_2020_v3_pdok.gpkg` file is the latest version.
+ATTENTION: At the time of writing, the `cbsgebiedsindelingen_2022_v1.gpkg` file is the latest version.
 It is of course very likely that by the time new data needs to be generated that a newer file is available.
 Pay attention to download the very latest version.
 
 After downloading, import the package into QGIS (the easiest way of doing this is by simply dragging the package into
 the main QGIS window) and select the following layers to be added:
 
-- `cbs_gemeente_2020_gegeneraliseerd`
-- `cbs_veiligheidsregio_2020_gegeneraliseerd`
-- `cbs_landsdeel_2020_gegeneraliseerd`
+- `cbs_gemeente_2022_gegeneraliseerd`
+- `cbs_veiligheidsregio_2022_gegeneraliseerd`
+- `cbs_landsdeel_2022_gegeneraliseerd`
 
 NOTE: The year indicator will differ when dealing with newer data. Find the layer with the most recent year.
 
@@ -35,16 +38,16 @@ Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection wh
 
 To clean up the data we have to perform the following steps:
 
-Create the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
+Create the municipalities data file (**cbs_gemeente_2022_gegeneraliseerd**):
 
-1. Right-click on the **layer > Properties > Source fields**
+1. Right-click on the **layer > Properties > Fields**
 2. Rename (click the pencil to active edit mode):
    - `statcode` to `code`
 3. **Apply > Ok**
 4. Right-click on the **layer > Export > Save Features As..**
 5. Use the following settings:
    - Format: `GeoJSON`
-   - File Name: `cbs_gemeente_2020_gegeneraliseerd.geojson`
+   - File Name: `cbs_gemeente_2022_gegeneraliseerd.geojson`
    - CRS: `EPSG:28992 - Amersfoort / RD New - Projected`
    - Open **"Select fields to export..."**
      - Select: `code`
@@ -144,5 +147,12 @@ export const gmGeo = topojson.feature(
 
 Note that the map data is stored as TopoJson. This is because of the size optimizations that TopoJson provides,
 at run time, after being downloaded by the choropleth component this TopoJson is converted to GeoJson.
+
+### Adjust municipal file
+
+...
+
+In gm.ts de eventuele nieuwe gemeentes aanmaken en de oude gemeentes weggooien
+gemeente code mag maar een keer voor komen in de json - oude gemeentes verwijderen
 
 [Back to index](index.md)
