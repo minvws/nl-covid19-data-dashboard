@@ -25,7 +25,7 @@ export function VaccineBoosterPerAgeGroup({
 }: VaccineBoosterPerAgeGroupProps) {
   const { siteText, formatNumber } = useIntl();
 
-  const text = siteText.vaccinaties.booster_per_age_group_section;
+  const text = siteText.pages.vaccinations.nl.booster_per_age_group_section;
 
   const getSortingOrder = (ageGroup: string) => {
     const index = sortingOrder.findIndex((x) => x === ageGroup);

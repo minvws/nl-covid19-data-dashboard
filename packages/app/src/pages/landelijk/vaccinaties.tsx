@@ -32,7 +32,6 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
-import { VaccineBoosterPerAgeGroup } from '~/domain/vaccine/vaccine-booster-per-age-group';
 import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
@@ -286,27 +285,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             pageLinks={content.links}
             referenceLink={textNl.reference.href}
             articles={content.articles}
-          />
-          <BoosterShotCoveragePerAgeGroup
-            title={textNl.vaccination_coverage.title}
-            description={textNl.vaccination_coverage.toelichting}
-            sortingOrder={[
-              '81+',
-              '71-80',
-              '61-70',
-              '51-60',
-              '41-50',
-              '31-40',
-              '18-30',
-              '12-17',
-            ]}
-            metadata={{
-              datumsText: textNl.datums,
-              date: data.booster_shot_per_age_group.values[0].date_unix,
-              source: textNl.vaccination_coverage.bronnen.rivm,
-            }}
-            values={data.booster_shot_per_age_group.values}
-            text={textNl}
           />
           <VaccineCoverageToggleTile
             title={textNl.vaccination_grade_toggle_tile.title}
@@ -641,25 +619,29 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               },
             }}
           />
-          <Divider />
 
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
-            <>
-              <VaccineBoosterPerAgeGroup
-                data={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
-                sortingOrder={[
-                  '81+',
-                  '71-80',
-                  '61-70',
-                  '51-60',
-                  '41-50',
-                  '31-40',
-                  '18-30',
-                  '12-17',
-                ]}
-              />
-              <Divider />
-            </>
+            <BoosterShotCoveragePerAgeGroup
+              title={textNl.booster_per_age_group_table.title}
+              description={textNl.booster_per_age_group_table.description}
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+              ]}
+              metadata={{
+                datumsText: textNl.datums,
+                date: data.booster_shot_per_age_group.values[0].date_unix,
+                source: textNl.booster_per_age_group_table.bronnen.rivm,
+              }}
+              values={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
+              text={textNl.booster_per_age_group_table}
+            />
           )}
 
           <PageInformationBlock

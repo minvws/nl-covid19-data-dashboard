@@ -15,7 +15,7 @@ interface BoosterShotCoveragePerAgeGroupProps {
   metadata: MetadataProps;
   sortingOrder: string[];
   values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinations']['nl'];
+  text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
 }
 
 export function BoosterShotCoveragePerAgeGroup({
@@ -45,7 +45,7 @@ export function BoosterShotCoveragePerAgeGroup({
       {breakpoints.md ? (
         <WideCoverageTable values={sortedValues} text={text} />
       ) : (
-        <NarrowCoverageTable values={sortedValues} />
+        <NarrowCoverageTable values={sortedValues} text={text} />
       )}
     </ChartTile>
   );

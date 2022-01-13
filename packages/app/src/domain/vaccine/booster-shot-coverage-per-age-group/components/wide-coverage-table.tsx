@@ -9,12 +9,12 @@ import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { COLOR_FULLY_BOOSTERED } from '../common';
-import { AgeGroup } from './age-group';
-import { Bar } from './bar';
-import { WidePercentage } from './wide-percentage';
+import { AgeGroup } from '../../components/age-group';
+import { Bar } from '../../components/bar';
+import { WidePercentage } from '../../components/wide-percentage';
 interface WideCoverageTable {
   values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinations']['nl'];
+  text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
@@ -39,9 +39,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.booster_per_age_group_table.headers.agegroup}
-              </InlineText>
+              <InlineText variant="label1">{text.headers.agegroup}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -54,7 +52,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.booster_per_age_group_table.headers.turnout_booter_shot}
+                {text.headers.turnout_booter_shot}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -76,16 +74,16 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
-                    text.vaccination_coverage.templates.agegroup
+                    text.templates.agegroup
                   )}
                   ageGroupTotal={
                     'age_group_total' in item ? item.age_group_total : undefined
                   }
                   birthyear_range={formatBirthyearRangeString(
                     item.birthyear_range,
-                    text.vaccination_coverage.templates.birthyears
+                    text.templates.birthyears
                   )}
-                  text={text.vaccination_coverage.templates}
+                  text={text.templates.agegroup.total_people}
                 />
               </Cell>
               <Cell>
@@ -94,6 +92,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                     item.received_booster_percentage
                   )}%)`}
                   color={COLOR_FULLY_BOOSTERED}
+                  justifyContent="flex-start"
                 />
               </Cell>
               <Cell>

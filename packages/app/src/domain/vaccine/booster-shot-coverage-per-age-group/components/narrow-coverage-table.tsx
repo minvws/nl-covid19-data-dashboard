@@ -1,24 +1,22 @@
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
-import {
-  COLOR_FULLY_BOOSTERED,
-  COLOR_FULLY_VACCINATED,
-  COLOR_HAS_ONE_SHOT,
-  CoverageTableRow,
-} from '../common';
-import { AgeGroup } from './age-group';
-import { Bar } from './bar';
-import { NarrowPercentage } from './narrow-percentage';
+import { Bar } from '../../components/bar';
+import { COLOR_FULLY_BOOSTERED, CoverageTableRow } from '../common';
+import { AgeGroup } from '../../components/age-group';
+import { NarrowPercentage } from '../../components/narrow-percentage';
 
-export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
-  const { siteText, formatPercentage } = useIntl();
-  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.vaccinaties.vaccination_coverage;
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+export function NarrowCoverageTable({
+  values,
+  text,
+}: {
+  values: CoverageTableRow;
+  text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
+}) {
+  const { formatPercentage } = useIntl();
 
   return (
     <Box>
@@ -40,22 +38,23 @@ export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
           <AgeGroup
             range={formatAgeGroupString(
               item.age_group_range,
-              templates.agegroup
+              text.templates.agegroup
             )}
             ageGroupTotal={
               'age_group_total' in item ? item.age_group_total : undefined
             }
             birthyear_range={formatBirthyearRangeString(
               item.birthyear_range,
-              templates.birthyears
+              text.templates.birthyears
             )}
+            text={text.templates.agegroup.total_people}
           />
 
           <Box spacing={1}>
             <NarrowPercentage
               value={`${formatPercentage(item.received_booster_percentage)}%`}
               color={COLOR_FULLY_BOOSTERED}
-              textLabel={text.headers.first_shot}
+              textLabel={text.headers.turnout_booter_shot}
             />
 
             <Bar

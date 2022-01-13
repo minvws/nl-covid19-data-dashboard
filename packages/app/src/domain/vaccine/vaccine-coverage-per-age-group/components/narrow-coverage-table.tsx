@@ -9,15 +9,15 @@ import {
   COLOR_HAS_ONE_SHOT,
   CoverageTableRow,
 } from '../common';
-import { AgeGroup } from './age-group';
-import { Bar } from './bar';
-import { NarrowPercentage } from './narrow-percentage';
+import { Bar } from '../../components/bar';
+import { NarrowPercentage } from '../../components/narrow-percentage';
+import { AgeGroup } from '../../components/age-group';
 
 export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
   const { siteText, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.vaccinaties.vaccination_coverage;
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const text = siteText.pages.vaccinations.nl.vaccination_coverage;
+  const { templates } = siteText.pages.vaccinations.nl.vaccination_coverage;
 
   return (
     <Box>
@@ -48,6 +48,7 @@ export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
               item.birthyear_range,
               templates.birthyears
             )}
+            text={templates.agegroup.total_people}
           />
 
           <Box spacing={1}>
