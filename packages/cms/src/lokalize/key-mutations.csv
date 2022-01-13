@@ -698,5 +698,3 @@ timestamp,action,key,document_id,move_to
 2022-01-13T14:38:01.178Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.birthyears.range,xCKwjuOezDI7FMkKYWqUNW,__
 2022-01-13T14:38:02.205Z,add,pages.vaccinations.nl.booster_per_age_group_table.bronnen.rivm.href,QRtDAv81NYkdBGRQixiRTi,__
 2022-01-13T14:38:03.206Z,add,pages.vaccinations.nl.booster_per_age_group_table.bronnen.rivm.text,i93JRHeRUDvH5qV1yxewWi,__
-2022-01-13T14:38:03.206Z,delete,pages.vaccinations.nl.booster_per_age_group_table.headers.agegroup,i93JRHeRUDvH5qV1yxEviI,__
-2022-01-13T14:38:03.206Z,delete,pages.vaccinations.nl.booster_per_age_group_table.headers.turnout_booter_shot,QRtDAv81NYkdBGRQixY8NC,__
