@@ -116,6 +116,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                       : `${formatPercentage(item.has_one_shot_percentage)}%`
                   }
                   color={COLOR_HAS_ONE_SHOT}
+                  justifyContent="flex-end"
                 />
               </Cell>
               <Cell>

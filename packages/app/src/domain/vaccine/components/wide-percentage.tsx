@@ -6,7 +6,7 @@ import { asResponsiveArray } from '~/style/utils';
 interface PercentageWideNumberProps {
   value: string;
   color: string;
-  justifyContent: 'flex-start' | 'flex-end';
+  justifyContent: string;
 }
 
 export function WidePercentage({

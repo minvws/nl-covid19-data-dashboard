@@ -146,8 +146,8 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
       <Text variant="label1" color="annotation">
         {replaceVariablesInText(
           isReported
-            ? siteText.vaccinaties.gezette_prikken.reported_until
-            : siteText.vaccinaties.gezette_prikken.estimated_until,
+            ? siteText.pages.vaccinations.nl.gezette_prikken.reported_until
+            : siteText.pages.vaccinations.nl.gezette_prikken.estimated_until,
           {
             reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
           }
