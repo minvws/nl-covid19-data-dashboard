@@ -8,6 +8,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';
@@ -17,15 +18,17 @@ interface SituationsDataCoverageChoroplethTileProps {
   data: {
     situations: VrCollectionSituations[];
   };
+  text: SiteText['pages']['contactTracing']['shared'];
+  tooltipText: SiteText['choropleth_tooltip']['patients'];
 }
 
 export function SituationsDataCoverageChoroplethTile({
   data,
+  text,
+  tooltipText,
 }: SituationsDataCoverageChoroplethTileProps) {
-  const { siteText, formatDateSpan } = useIntl();
+  const { formatDateSpan } = useIntl();
   const reverseRouter = useReverseRouter();
-
-  const text = siteText.brononderzoek;
   const { date_start_unix, date_end_unix } = data.situations[0];
 
   const [date_from, date_to] = formatDateSpan(
@@ -102,11 +105,14 @@ export function SituationsDataCoverageChoroplethTile({
                 dataOptions={{
                   getLink: reverseRouter.vr.brononderzoek,
                   tooltipVariables: {
-                    patients: siteText.choropleth_tooltip.patients,
+                    patients: tooltipText,
                   },
                 }}
                 formatTooltip={(context) => (
-                  <SituationsDataCoverageTooltip context={context} />
+                  <SituationsDataCoverageTooltip
+                    context={context}
+                    text={text.situaties_kaarten_uitkomsten}
+                  />
                 )}
               />
             </ErrorBoundary>

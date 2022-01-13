@@ -40,7 +40,10 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(['deceasedPage_gm'], locale),
+    getLokalizeTexts(
+      (siteText) => ({ textGm: siteText.pages.deceased.gm }),
+      locale
+    ),
   getLastGeneratedDate,
   selectGmData(
     'difference.deceased_rivm__covid_daily',
@@ -81,14 +84,14 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { siteText } = useIntl();
-  const text = pageText.deceasedPage_gm;
+  const { textGm } = pageText;
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textGm.metadata.description, {
       municipalityName,
     }),
   };
@@ -99,30 +102,30 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.besmettingen}
-            title={replaceVariablesInText(text.section_deceased_rivm.title, {
+            title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}
             icon={<Coronavirus />}
-            description={text.section_deceased_rivm.description}
-            referenceLink={text.section_deceased_rivm.reference.href}
+            description={textGm.section_deceased_rivm.description}
+            referenceLink={textGm.section_deceased_rivm.reference.href}
             metadata={{
-              datumsText: text.section_deceased_rivm.datums,
+              datumsText: textGm.section_deceased_rivm.datums,
               dateOrRange: data.deceased_rivm.last_value.date_unix,
               dateOfInsertionUnix:
                 data.deceased_rivm.last_value.date_of_insertion_unix,
-              dataSources: [text.section_deceased_rivm.bronnen.rivm],
+              dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.articles}
             vrNameOrGmName={municipalityName}
-            warning={text.warning}
+            warning={textGm.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.section_deceased_rivm.kpi_covid_daily_title}
+              title={textGm.section_deceased_rivm.kpi_covid_daily_title}
               metadata={{
                 date: data.deceased_rivm.last_value.date_unix,
-                source: text.section_deceased_rivm.bronnen.rivm,
+                source: textGm.section_deceased_rivm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -132,14 +135,16 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
               <Markdown
-                content={text.section_deceased_rivm.kpi_covid_daily_description}
+                content={
+                  textGm.section_deceased_rivm.kpi_covid_daily_description
+                }
               />
             </KpiTile>
             <KpiTile
-              title={text.section_deceased_rivm.kpi_covid_total_title}
+              title={textGm.section_deceased_rivm.kpi_covid_total_title}
               metadata={{
                 date: data.deceased_rivm.last_value.date_unix,
-                source: text.section_deceased_rivm.bronnen.rivm,
+                source: textGm.section_deceased_rivm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -147,18 +152,18 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={data.deceased_rivm.last_value.covid_total}
               />
               <Text>
-                {text.section_deceased_rivm.kpi_covid_total_description}
+                {textGm.section_deceased_rivm.kpi_covid_total_description}
               </Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={['all', '5weeks']}
-            title={text.section_deceased_rivm.line_chart_covid_daily_title}
+            title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
             description={
-              text.section_deceased_rivm.line_chart_covid_daily_description
+              textGm.section_deceased_rivm.line_chart_covid_daily_description
             }
-            metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
+            metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm }}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -172,10 +177,10 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'covid_daily_moving_average',
                     label:
-                      text.section_deceased_rivm
+                      textGm.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_label_moving_average,
                     shortLabel:
-                      text.section_deceased_rivm
+                      textGm.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_short_label_moving_average,
                     color: colors.data.primary,
                   },
@@ -183,10 +188,10 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'bar',
                     metricProperty: 'covid_daily',
                     label:
-                      text.section_deceased_rivm
+                      textGm.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_label,
                     shortLabel:
-                      text.section_deceased_rivm
+                      textGm.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_short_label,
                     color: colors.data.primary,
                   },
