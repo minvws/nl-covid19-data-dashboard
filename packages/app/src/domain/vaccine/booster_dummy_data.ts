@@ -1,7 +1,4 @@
-import {
-  NlBoosterShotPerAgeGroupValue,
-  WEEK_IN_SECONDS,
-} from '@corona-dashboard/common';
+import { NlBoosterShotPerAgeGroupValue } from '@corona-dashboard/common';
 
 /**
  * @TODO: Please remove once data becomes avaliable

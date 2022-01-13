@@ -16,7 +16,6 @@ import { isDefined } from 'ts-is-present';
 import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Divider } from '~/components/divider';
 import { InView } from '~/components/in-view';
 import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';

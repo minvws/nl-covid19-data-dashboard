@@ -1,7 +1,5 @@
 import {
   colors,
-  NlBehaviorPerAgeGroupValue,
-  NlBoosterShotPerAgeGroup,
   NlBoosterShotPerAgeGroupValue,
 } from '@corona-dashboard/common';
 
