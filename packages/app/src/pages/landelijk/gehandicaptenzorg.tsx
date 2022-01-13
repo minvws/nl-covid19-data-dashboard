@@ -83,7 +83,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const values = data.disability_care.values;
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
   const positiveTestedPeopleText =
@@ -262,6 +262,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               dataConfig={{
                 metricName: 'disability_care',
                 metricProperty: 'infected_locations_percentage',
+                dataFormatters: {
+                  infected_locations_percentage: formatNumber,
+                },
               }}
               dataOptions={{
                 getLink: reverseRouter.vr.gehandicaptenzorg,

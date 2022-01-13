@@ -9,16 +9,18 @@ import { Tile } from '~/components/tile';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { SiteText } from '~/locale';
 
 interface SituationsDataCoverageTileProps {
   data: VrSituationsValue;
+  text: SiteText['pages']['contactTracing']['shared']['veiligheidsregio_dekking'];
 }
 
 export function SituationsDataCoverageTile({
   data,
+  text,
 }: SituationsDataCoverageTileProps) {
-  const { siteText, formatDateSpan } = useIntl();
-  const text = siteText.brononderzoek.veiligheidsregio_dekking;
+  const { formatDateSpan } = useIntl();
 
   const [date_from, date_to] = formatDateSpan(
     { seconds: data.date_start_unix },

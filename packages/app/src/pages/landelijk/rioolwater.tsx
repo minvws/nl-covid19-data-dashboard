@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -165,6 +165,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 dataConfig={{
                   metricName: 'sewer',
                   metricProperty: 'average',
+                  dataFormatters: {
+                    average: formatNumber,
+                  },
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.rioolwater,
@@ -182,6 +185,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 dataConfig={{
                   metricName: 'sewer',
                   metricProperty: 'average',
+                  dataFormatters: {
+                    average: formatNumber,
+                  },
                 }}
                 dataOptions={{
                   getLink: reverseRouter.vr.rioolwater,

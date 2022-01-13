@@ -15,6 +15,7 @@ import {
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
 import { SituationKey, useSituations } from './logic/situations';
 
@@ -22,24 +23,24 @@ interface SituationsTimeSeriesChartProps {
   timeframe: TimeframeOption;
   values: VrSituationsValue[];
   timelineEvents?: TimelineEventConfig[];
+  text: SiteText['pages']['contactTracing']['shared'];
 }
 
 export function SituationsOverTimeChart({
   values,
   timeframe,
   timelineEvents,
+  text,
 }: SituationsTimeSeriesChartProps) {
   const { siteText } = useIntl();
-  const situations = useSituations();
+  const situations = useSituations(text.situaties);
   const { list, toggle, clear } = useList<string>();
-
-  const text = siteText.brononderzoek.situaties_over_tijd_grafiek;
 
   const staticLegendItems: LegendItem[] = [
     {
       shape: 'square',
       color: colors.data.underReported,
-      label: text.legenda.onvoldoende_gegevens,
+      label: text.situaties_over_tijd_grafiek.legenda.onvoldoende_gegevens,
     },
   ];
 
@@ -54,7 +55,7 @@ export function SituationsOverTimeChart({
   const timespanAnnotations = useGappedLineAnnotations(
     values,
     'has_sufficient_data',
-    text.tooltip.onvoldoende_gegevens
+    text.situaties_over_tijd_grafiek.tooltip.onvoldoende_gegevens
   );
 
   const seriesConfig = situations.map<
@@ -74,7 +75,7 @@ export function SituationsOverTimeChart({
   return (
     <ErrorBoundary extraComponentInfoReport={{ timeframe }}>
       <InteractiveLegend
-        helpText={text.legenda.help_text}
+        helpText={text.situaties_over_tijd_grafiek.legenda.help_text}
         selectOptions={seriesConfig}
         selection={list}
         onToggleItem={toggle}
