@@ -21,7 +21,7 @@ import {
 function useTileData(activeChart: ActiveVaccinationChart) {
   const { siteText } = useIntl();
 
-  const text = siteText.vaccinaties;
+  const text = siteText.pages.vaccinations.nl;
 
   if (activeChart === 'coverage') {
     const metadata = {
@@ -75,7 +75,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   return (
     <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader
-        title={siteText.vaccinaties.vaccinations_over_time_tile.title}
+        title={siteText.pages.vaccinations.nl.vaccinations_over_time_tile.title}
         description={replaceVariablesInText(description, {
           total_vaccines: `${formatNumber(roundedMillion)} ${
             siteText.common.miljoen

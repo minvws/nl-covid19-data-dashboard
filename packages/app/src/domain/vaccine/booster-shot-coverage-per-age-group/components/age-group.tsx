@@ -1,22 +1,24 @@
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 interface AgeGroupProps {
   range: string;
   ageGroupTotal?: number;
   birthyear_range: string;
+  text: SiteText['pages']['vaccinations']['nl']['vaccination_coverage']['templates'];
 }
 
 export function AgeGroup({
   range,
   ageGroupTotal,
   birthyear_range,
+  text,
 }: AgeGroupProps) {
-  const { siteText, formatNumber } = useIntl();
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const { formatNumber } = useIntl();
 
-  const totalText = replaceVariablesInText(templates.agegroup.total_people, {
+  const totalText = replaceVariablesInText(text.agegroup.total_people, {
     total: formatNumber(ageGroupTotal),
   });
 

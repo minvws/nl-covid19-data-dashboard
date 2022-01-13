@@ -7,6 +7,7 @@ import { MetadataProps } from '~/components/metadata';
 import { NarrowCoverageTable } from './components/narrow-coverage-table';
 import { WideCoverageTable } from './components/wide-coverage-table';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { SiteText } from '~/locale';
 
 interface BoosterShotCoveragePerAgeGroupProps {
   title: string;
@@ -14,6 +15,7 @@ interface BoosterShotCoveragePerAgeGroupProps {
   metadata: MetadataProps;
   sortingOrder: string[];
   values: NlBoosterShotPerAgeGroupValue[];
+  text: SiteText['pages']['vaccinations']['nl'];
 }
 
 export function BoosterShotCoveragePerAgeGroup({
@@ -22,6 +24,7 @@ export function BoosterShotCoveragePerAgeGroup({
   metadata,
   values,
   sortingOrder,
+  text,
 }: BoosterShotCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
 
@@ -40,7 +43,7 @@ export function BoosterShotCoveragePerAgeGroup({
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.md ? (
-        <WideCoverageTable values={sortedValues} />
+        <WideCoverageTable values={sortedValues} text={text} />
       ) : (
         <NarrowCoverageTable values={sortedValues} />
       )}

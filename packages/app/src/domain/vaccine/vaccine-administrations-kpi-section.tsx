@@ -25,7 +25,7 @@ export function VaccineAdministrationsKpiSection({
 }) {
   const { siteText } = useIntl();
 
-  const text = siteText.vaccinaties;
+  const text = siteText.pages.vaccinations.nl;
 
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title

@@ -4,22 +4,21 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
 import { COLOR_FULLY_BOOSTERED } from '../common';
 import { AgeGroup } from './age-group';
 import { Bar } from './bar';
 import { WidePercentage } from './wide-percentage';
 interface WideCoverageTable {
   values: NlBoosterShotPerAgeGroupValue[];
+  text: SiteText['pages']['vaccinations']['nl'];
 }
 
-export function WideCoverageTable({ values }: WideCoverageTable) {
-  const { siteText, formatPercentage } = useIntl();
-  const text = siteText.vaccinaties.vaccination_coverage;
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+export function WideCoverageTable({ values, text }: WideCoverageTable) {
+  const { formatPercentage } = useIntl();
 
   return (
     <Box overflow="auto">
@@ -40,7 +39,9 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{text.headers.agegroup}</InlineText>
+              <InlineText variant="label1">
+                {text.booster_per_age_group_table.headers.agegroup}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -53,7 +54,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.first_shot}
+                {text.booster_per_age_group_table.headers.turnout_booter_shot}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -65,9 +66,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                   lg: '34%',
                 }),
               })}
-            >
-              <InlineText variant="label1">{text.headers.coverage}</InlineText>
-            </HeaderCell>
+            ></HeaderCell>
           </Row>
         </thead>
         <tbody>
@@ -77,15 +76,16 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
-                    templates.agegroup
+                    text.vaccination_coverage.templates.agegroup
                   )}
                   ageGroupTotal={
                     'age_group_total' in item ? item.age_group_total : undefined
                   }
                   birthyear_range={formatBirthyearRangeString(
                     item.birthyear_range,
-                    templates.birthyears
+                    text.vaccination_coverage.templates.birthyears
                   )}
+                  text={text.vaccination_coverage.templates}
                 />
               </Cell>
               <Cell>

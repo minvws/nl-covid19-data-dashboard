@@ -14,7 +14,7 @@ export function AgeGroup({
   birthyear_range,
 }: AgeGroupProps) {
   const { siteText, formatNumber } = useIntl();
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const { templates } = siteText.pages.vaccinations.nl.vaccination_coverage;
 
   const totalText = replaceVariablesInText(templates.agegroup.total_people, {
     total: formatNumber(ageGroupTotal),
