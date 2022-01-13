@@ -73,6 +73,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
+import { BoosterShotCoveragePerAgeGroup } from '~/domain/vaccine/booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -105,7 +106,8 @@ export const getStaticProps = createGetStaticProps(
     'booster_and_third_shot_administered',
     'booster_shot_planned',
     'booster_shot_administered',
-    'third_shot_administered'
+    'third_shot_administered',
+    'booster_shot_per_age_group'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -248,7 +250,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const hasActiveWarningTile =
     text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht);
-
+  console.log(data);
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -276,6 +278,26 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             pageLinks={content.links}
             referenceLink={text.reference.href}
             articles={content.articles}
+          />
+          <BoosterShotCoveragePerAgeGroup
+            title={siteText.vaccinaties.vaccination_coverage.title}
+            description={siteText.vaccinaties.vaccination_coverage.toelichting}
+            sortingOrder={[
+              '81+',
+              '71-80',
+              '61-70',
+              '51-60',
+              '41-50',
+              '31-40',
+              '18-30',
+              '12-17',
+            ]}
+            metadata={{
+              datumsText: text.datums,
+              date: data.booster_shot_per_age_group.values[0].date_unix,
+              source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+            }}
+            values={data.booster_shot_per_age_group.values}
           />
           <VaccineCoverageToggleTile
             title={text.vaccination_grade_toggle_tile.title}

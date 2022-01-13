@@ -21,10 +21,10 @@
         "age_group_range",
         "received_booster_total",
         "received_booster_percentage",
-        "date_start_unix",
-        "date_end_unix",
+        "date_unix",
         "date_of_insertion_unix",
-        "birthyear_range"
+        "birthyear_range",
+        "age_group_total"
       ],
       "properties": {
         "age_group_range": {
@@ -49,15 +49,15 @@
         "date_of_insertion_unix": {
           "type": "integer"
         },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "birthyear_range": {
           "type": "string",
           "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
+        },
+        "age_group_total": {
+          "type": "integer"
         }
       }
     }

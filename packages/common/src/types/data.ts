@@ -410,9 +410,9 @@ export interface NlBoosterShotPerAgeGroupValue {
   received_booster_total: number;
   received_booster_percentage: number;
   date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   birthyear_range: string;
+  age_group_total: number;
 }
 export interface NlThirdShotAdministered {
   values: NlThirdShotAdministeredValue[];
