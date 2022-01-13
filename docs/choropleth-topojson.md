@@ -103,6 +103,8 @@ To make sure the coordinate system is correct we have to convert the exported fi
    - Change: `cbs_veiligheidsregio_2021_gegeneraliseerd` to `vr_features`
 3. Export to TopoJSON > `nl-vr-gm-high-detail.topo.json`;
 
+> Note: It's possible that the map looks a little streched on MapShaper. This is most likely not an issue and it will display correctly once it's integrated in the Dashboard again.
+
 Simplifying:
 (NB: this needs to be separate step; when doing this in the step above the output will not be correct**!!**):
 
