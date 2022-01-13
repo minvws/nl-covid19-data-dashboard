@@ -687,3 +687,16 @@ timestamp,action,key,document_id,move_to
 2022-01-13T11:03:50.588Z,move,vaccinaties.vaccination_status_ic_and_hospital_section.title,XIsMg3WYidPwwGdwwycvBn,pages.vaccinations.nl.vaccination_status_ic_and_hospital_section.title
 2022-01-13T11:03:50.588Z,move,vaccinaties.vaccinations_over_time_tile.title,Dku7cpbPEtTqHSBWBYUXdv,pages.vaccinations.nl.vaccinations_over_time_tile.title
 2022-01-13T11:03:50.588Z,move,vaccinaties.vaccinations_over_time_tile.tooltip_header,Dku7cpbPEtTqHSBWBYkrVj,pages.vaccinations.nl.vaccinations_over_time_tile.tooltip_header
+2022-01-13T14:37:52.001Z,add,pages.vaccinations.nl.booster_per_age_group_table.title,xCKwjuOezDI7FMkKYWqSJI,__
+2022-01-13T14:37:53.025Z,add,pages.vaccinations.nl.booster_per_age_group_table.description,xCKwjuOezDI7FMkKYWqSlV,__
+2022-01-13T14:37:54.061Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.agegroup.group,i93JRHeRUDvH5qV1yxevts,__
+2022-01-13T14:37:55.086Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.agegroup.oldest,QRtDAv81NYkdBGRQixiR5R,__
+2022-01-13T14:37:57.136Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.agegroup.total,QRtDAv81NYkdBGRQixiR9O,__
+2022-01-13T14:37:58.127Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.agegroup.total_people,QRtDAv81NYkdBGRQixiRGA,__
+2022-01-13T14:37:59.152Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.birthyears.earlier,QRtDAv81NYkdBGRQixiRJY,__
+2022-01-13T14:38:00.173Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.birthyears.later,xCKwjuOezDI7FMkKYWqU5Z,__
+2022-01-13T14:38:01.178Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.birthyears.range,xCKwjuOezDI7FMkKYWqUNW,__
+2022-01-13T14:38:02.205Z,add,pages.vaccinations.nl.booster_per_age_group_table.bronnen.rivm.href,QRtDAv81NYkdBGRQixiRTi,__
+2022-01-13T14:38:03.206Z,add,pages.vaccinations.nl.booster_per_age_group_table.bronnen.rivm.text,i93JRHeRUDvH5qV1yxewWi,__
+2022-01-13T14:38:03.206Z,delete,pages.vaccinations.nl.booster_per_age_group_table.headers.agegroup,i93JRHeRUDvH5qV1yxEviI,__
+2022-01-13T14:38:03.206Z,delete,pages.vaccinations.nl.booster_per_age_group_table.headers.turnout_booter_shot,QRtDAv81NYkdBGRQixY8NC,__
