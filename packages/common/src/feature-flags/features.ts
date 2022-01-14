@@ -143,10 +143,6 @@ export const features: Feature[] = [
     name: 'nlBoostersTemporary',
     isEnabled: true,
   },
-  {
-    name: 'nlBoosterCoverage',
-    isEnabled: true,
-  },
   /**
    * These flags are only here that the schemas will not be required when validating.
    * But the features can be seen once toggled on with dummy data and have a seperate flag.

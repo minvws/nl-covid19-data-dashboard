@@ -139,7 +139,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const testedOverallTopicalPageFeature = useFeature(
     'nlTestedOverallTopicalPage'
   );
-  const boosterCoverageFeature = useFeature('nlBoosterCoverage');
+  const boosterCoverageFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,

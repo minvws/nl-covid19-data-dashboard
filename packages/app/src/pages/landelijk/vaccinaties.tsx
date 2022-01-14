@@ -210,7 +210,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
 
-  const boosterCoverageFeature = useFeature('nlBoosterCoverage');
+  const boosterCoverageFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,
