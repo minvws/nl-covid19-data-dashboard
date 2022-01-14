@@ -210,6 +210,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
 
+  const boosterCoverageFeature = useFeature('nlBoosterCoverage');
+
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
@@ -227,7 +229,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const boosterShotPlannedLastValue = data.booster_shot_planned.last_value;
 
-  const boosterCoverageLastValue = data.booster_coverage.last_value;
+  const boosterCoverageLastValue = data.booster_coverage?.last_value;
 
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
@@ -294,7 +296,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageLastValue.percentage}`
+                boosterCoverageFeature.isEnabled &&
+                  boosterCoverageEstimatedLastValue.received_booster_percentage
+                  ? `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
+                  : `${boosterCoverageLastValue.percentage}`
               ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
@@ -548,7 +553,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             totalBoosterAndThirdShots={
               boosterCoverageEstimatedLastValue.administered_total
             }
-            percentageBoosterAndThirdShots={boosterCoverageLastValue.percentage}
+            percentageBoosterAndThirdShots={
+              boosterCoverageFeature.isEnabled &&
+              boosterCoverageEstimatedLastValue.received_booster_percentage
+                ? boosterCoverageEstimatedLastValue.received_booster_percentage
+                : boosterCoverageLastValue.percentage
+            }
             metadateBoosterAndThirdShots={{
               datumsText: text.booster_and_third_kpi.datums,
               date: boosterCoverageEstimatedLastValue.date_unix,

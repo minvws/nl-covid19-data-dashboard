@@ -139,6 +139,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const testedOverallTopicalPageFeature = useFeature(
     'nlTestedOverallTopicalPage'
   );
+  const boosterCoverageFeature = useFeature('nlBoosterCoverage');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -149,7 +150,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
-  const boosterCoverageLastValue = data.booster_coverage.last_value;
+  const boosterCoverageEstimatedLastValue =
+    data.booster_and_third_shot_administered.last_value;
+  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
     data.intensive_care_nice.values,
     countTrailingNullValues(
@@ -559,7 +563,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .booster_shots_administered_data_drive_text,
                             {
                               percentage: formatPercentage(
-                                boosterCoverageLastValue.percentage
+                                boosterCoverageFeature.isEnabled &&
+                                  boosterCoverageEstimatedLastValue.received_booster_percentage
+                                  ? boosterCoverageEstimatedLastValue.received_booster_percentage
+                                  : boosterCoverageLastValue.percentage
                               ),
                             }
                           )}
@@ -581,7 +588,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    `${boosterCoverageLastValue.percentage}`
+                    boosterCoverageFeature.isEnabled &&
+                      boosterCoverageEstimatedLastValue.received_booster_percentage
+                      ? `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
+                      : `${boosterCoverageLastValue.percentage}`
                   )}
                   warning={getWarning(
                     content.elements.warning,
