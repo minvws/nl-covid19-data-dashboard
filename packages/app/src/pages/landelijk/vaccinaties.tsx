@@ -74,6 +74,7 @@ import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 import { BoosterShotCoveragePerAgeGroup } from '~/domain/vaccine/booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
+import { Divider } from '~/components/divider';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -619,7 +620,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
+          {(vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <BoosterShotCoveragePerAgeGroup
               title={textNl.booster_per_age_group_table.title}
               description={textNl.booster_per_age_group_table.description}
@@ -635,13 +636,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ]}
               metadata={{
                 datumsText: textNl.datums,
-                date: data.booster_shot_per_age_group.values[0].date_unix,
+                date: DUMMY_DATA_BOOSTER_PER_AGE_GROUP[0].date_unix,
                 source: textNl.booster_per_age_group_table.bronnen.rivm,
               }}
               values={DUMMY_DATA_BOOSTER_PER_AGE_GROUP}
               text={textNl.booster_per_age_group_table}
             />
-          )}
+          )) || <Divider />}
 
           <PageInformationBlock
             title={textNl.section_archived.title}
