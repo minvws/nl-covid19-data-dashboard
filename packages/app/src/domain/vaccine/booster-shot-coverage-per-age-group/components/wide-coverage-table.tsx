@@ -8,10 +8,10 @@ import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { COLOR_FULLY_BOOSTERED } from '../../common';
-import { AgeGroup } from '../../components/age-group';
-import { Bar } from '../../components/bar';
-import { WidePercentage } from '../../components/wide-percentage';
+import { COLOR_FULLY_BOOSTERED } from '~/domain/vaccine/common';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import { Bar } from '~/domain/vaccine/components/bar';
+import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 interface WideCoverageTable {
   values: NlBoosterShotPerAgeGroupValue[];
   text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];

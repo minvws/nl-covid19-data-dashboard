@@ -4,10 +4,10 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { Bar } from '../../components/bar';
-import { COLOR_FULLY_BOOSTERED } from '../../common';
-import { AgeGroup } from '../../components/age-group';
-import { NarrowPercentage } from '../../components/narrow-percentage';
+import { Bar } from '~/domain/vaccine/components/bar';
+import { COLOR_FULLY_BOOSTERED } from '~/domain/vaccine/common';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
 import { NlBoosterShotPerAgeGroupValue } from '@corona-dashboard/common';
 
 export function NarrowCoverageTable({

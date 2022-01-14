@@ -11,11 +11,14 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
-import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../../common';
-import { Bar } from '../../components/bar';
-import { WidePercentage } from '../../components/wide-percentage';
-import { AgeGroup } from '../../components/age-group';
+import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
+import {
+  COLOR_FULLY_VACCINATED,
+  COLOR_HAS_ONE_SHOT,
+} from '~/domain/vaccine/common';
+import { Bar } from '~/domain/vaccine/components/bar';
+import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
 interface WideCoverageTable {
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
