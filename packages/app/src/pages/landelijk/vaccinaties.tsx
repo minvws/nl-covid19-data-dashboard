@@ -209,6 +209,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
 
+  const boosterDateGgdFeature = useFeature('nlBoostersTemporary');
+
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
@@ -561,7 +563,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             metadateBoosterGgd={{
               datumsText: text.booster_and_third_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_unix,
+              date: boosterDateGgdFeature.isEnabled
+                ? boosterShotAdministeredLastValue.date_unix
+                : boosterShotAdministeredLastValue.date_end_unix,
               source: {
                 href: text.booster_and_third_kpi.sources.href,
                 text: text.booster_and_third_kpi.sources.text,
@@ -572,7 +576,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             metadateBoosterEstimated={{
               datumsText: text.booster_and_third_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_unix,
+              date: boosterDateGgdFeature.isEnabled
+                ? boosterShotAdministeredLastValue.date_unix
+                : boosterShotAdministeredLastValue.date_end_unix,
               source: {
                 href: text.booster_and_third_kpi.sources.href,
                 text: text.booster_and_third_kpi.sources.text,
@@ -603,7 +609,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             metadataBoosterShotAdministered={{
               datumsText: text.booster_ggd_kpi_section.datums,
-              date: boosterShotAdministeredLastValue.date_unix,
+              date: boosterDateGgdFeature.isEnabled
+                ? boosterShotAdministeredLastValue.date_unix
+                : [
+                    boosterShotAdministeredLastValue.date_start_unix,
+                    boosterShotAdministeredLastValue.date_end_unix,
+                  ],
               source: {
                 href: text.booster_ggd_kpi_section.sources.href,
                 text: text.booster_ggd_kpi_section.sources.text,
