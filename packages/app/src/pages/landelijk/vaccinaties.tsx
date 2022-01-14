@@ -296,8 +296,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                boosterCoverageFeature.isEnabled &&
-                  boosterCoverageEstimatedLastValue.received_booster_percentage
+                boosterCoverageFeature.isEnabled
                   ? `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
                   : `${boosterCoverageLastValue.percentage}`
               ),
@@ -554,8 +553,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               boosterCoverageEstimatedLastValue.administered_total
             }
             percentageBoosterAndThirdShots={
-              boosterCoverageFeature.isEnabled &&
-              boosterCoverageEstimatedLastValue.received_booster_percentage
+              boosterCoverageFeature.isEnabled
                 ? boosterCoverageEstimatedLastValue.received_booster_percentage
                 : boosterCoverageLastValue.percentage
             }
