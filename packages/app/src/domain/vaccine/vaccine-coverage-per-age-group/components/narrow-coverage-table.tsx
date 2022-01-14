@@ -4,16 +4,24 @@ import { useIntl } from '~/intl';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
-import {
-  COLOR_FULLY_VACCINATED,
-  COLOR_HAS_ONE_SHOT,
-  CoverageTableRow,
-} from '../common';
+import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../../common';
 import { Bar } from '../../components/bar';
 import { NarrowPercentage } from '../../components/narrow-percentage';
 import { AgeGroup } from '../../components/age-group';
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 
-export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
+export function NarrowCoverageTable({
+  values,
+}: {
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
+}) {
   const { siteText, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
   const text = siteText.pages.vaccinations.nl.vaccination_coverage;

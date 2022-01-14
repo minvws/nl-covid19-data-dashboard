@@ -5,15 +5,16 @@ import { SiteText } from '~/locale';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { Bar } from '../../components/bar';
-import { COLOR_FULLY_BOOSTERED, CoverageTableRow } from '../common';
+import { COLOR_FULLY_BOOSTERED } from '../../common';
 import { AgeGroup } from '../../components/age-group';
 import { NarrowPercentage } from '../../components/narrow-percentage';
+import { NlBoosterShotPerAgeGroupValue } from '@corona-dashboard/common';
 
 export function NarrowCoverageTable({
   values,
   text,
 }: {
-  values: CoverageTableRow;
+  values: NlBoosterShotPerAgeGroupValue[];
   text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
 }) {
   const { formatPercentage } = useIntl();
