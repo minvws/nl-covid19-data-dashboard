@@ -51,20 +51,22 @@ export function VaccineCoverageChoroplethPerGm({
 
   const variables = {
     regio:
-      siteText.vaccinaties.choropleth_vaccination_coverage.shared[selectedMap],
+      siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.shared[
+        selectedMap
+      ],
   };
 
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        siteText.vaccinaties.choropleth_vaccination_coverage.nl.title,
+        siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.nl.title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              siteText.vaccinaties.choropleth_vaccination_coverage.nl
+              siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.nl
                 .description,
               variables
             )}
@@ -85,8 +87,8 @@ export function VaccineCoverageChoroplethPerGm({
               })}
             >
               {
-                siteText.vaccinaties.choropleth_vaccination_coverage.shared
-                  .dropdowns_title
+                siteText.pages.vaccinations.nl.choropleth_vaccination_coverage
+                  .shared.dropdowns_title
               }
             </Text>
 
@@ -114,11 +116,12 @@ export function VaccineCoverageChoroplethPerGm({
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
         title:
-          siteText.vaccinaties.choropleth_vaccination_coverage.shared
+          siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.shared
             .legend_title,
       }}
       metadata={{
-        source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+        source:
+          siteText.pages.vaccinations.nl.vaccination_coverage.bronnen.rivm,
         date: data[selectedMap][0].date_unix,
       }}
       chartRegion={selectedMap}
@@ -139,7 +142,8 @@ export function VaccineCoverageChoroplethPerGm({
             isPercentage: true,
             getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
             tooltipVariables: {
-              age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+              age_group:
+                siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
             },
           }}
           formatTooltip={(context) => (
@@ -169,7 +173,8 @@ export function VaccineCoverageChoroplethPerGm({
             isPercentage: true,
             getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
             tooltipVariables: {
-              age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+              age_group:
+                siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
             },
           }}
           formatTooltip={(context) => (

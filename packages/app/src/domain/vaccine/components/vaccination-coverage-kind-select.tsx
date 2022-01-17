@@ -32,20 +32,20 @@ export function VaccinationCoverageKindSelect(
       COVERAGE_KINDS.map((kind) => {
         return {
           value: kind,
-          label: siteText.vaccinaties.coverage_kinds[kind],
+          label: siteText.pages.vaccinations.nl.coverage_kinds[kind],
           content: (
             <Box pr={2}>
-              <Text>{siteText.vaccinaties.coverage_kinds[kind]}</Text>
+              <Text>{siteText.pages.vaccinations.nl.coverage_kinds[kind]}</Text>
             </Box>
           ),
         };
       }).filter(isPresent),
-    [siteText.vaccinaties.coverage_kinds]
+    [siteText.pages.vaccinations.nl.coverage_kinds]
   );
 
   return (
     <RichContentSelect
-      label={siteText.vaccinaties.coverage_kind_dropdown.label}
+      label={siteText.pages.vaccinations.nl.coverage_kind_dropdown.label}
       visuallyHiddenLabel
       initialValue={initialValue}
       options={options}

@@ -24,12 +24,12 @@ export function VaccineDeliveryBarChart({
   data: NlVaccineDeliveryPerSupplier;
 }) {
   const intl = useIntl();
-  const text = intl.siteText.vaccinaties.grafiek_leveringen;
+  const text = intl.siteText.pages.vaccinations.nl.grafiek_leveringen;
 
   data.values = data.values.filter((x) => !x.is_estimate);
 
   const productNames =
-    intl.siteText.vaccinaties.data.vaccination_chart.product_names;
+    intl.siteText.pages.vaccinations.nl.data.vaccination_chart.product_names;
 
   const formatTooltip: TooltipFormatter<
     NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
@@ -45,7 +45,7 @@ export function VaccineDeliveryBarChart({
     <ChartTile
       title={text.titel}
       metadata={{
-        source: intl.siteText.vaccinaties.bronnen.rivm,
+        source: intl.siteText.pages.vaccinations.nl.bronnen.rivm,
       }}
     >
       <Box

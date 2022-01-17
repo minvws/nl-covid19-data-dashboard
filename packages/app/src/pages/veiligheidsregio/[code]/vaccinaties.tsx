@@ -205,15 +205,16 @@ export const VaccinationsVrPage = (
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.vaccinaties.choropleth_vaccination_coverage.vr.title,
+              siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.vr
+                .title,
               { safetyRegionName: vrName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.vaccinaties.choropleth_vaccination_coverage.vr
-                      .description,
+                    siteText.pages.vaccinations.nl
+                      .choropleth_vaccination_coverage.vr.description,
                     { safetyRegionName: vrName }
                   )}
                 />
@@ -225,11 +226,13 @@ export const VaccinationsVrPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.vaccinaties.choropleth_vaccination_coverage.shared
-                  .legend_title,
+                siteText.pages.vaccinations.nl.choropleth_vaccination_coverage
+                  .shared.legend_title,
             }}
             metadata={{
-              source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+              source:
+                siteText.pages.vaccinations.nl.vaccination_coverage.bronnen
+                  .rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
           >
@@ -247,7 +250,8 @@ export const VaccinationsVrPage = (
                 getLink: reverseRouter.gm.vaccinaties,
                 selectedCode: selectedGmCode,
                 tooltipVariables: {
-                  age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+                  age_group:
+                    siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (
