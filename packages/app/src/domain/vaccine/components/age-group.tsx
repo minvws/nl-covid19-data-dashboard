@@ -6,17 +6,18 @@ interface AgeGroupProps {
   range: string;
   ageGroupTotal?: number;
   birthyear_range: string;
+  text: string;
 }
 
 export function AgeGroup({
   range,
   ageGroupTotal,
   birthyear_range,
+  text,
 }: AgeGroupProps) {
-  const { siteText, formatNumber } = useIntl();
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const { formatNumber } = useIntl();
 
-  const totalText = replaceVariablesInText(templates.agegroup.total_people, {
+  const totalText = replaceVariablesInText(text, {
     total: formatNumber(ageGroupTotal),
   });
 

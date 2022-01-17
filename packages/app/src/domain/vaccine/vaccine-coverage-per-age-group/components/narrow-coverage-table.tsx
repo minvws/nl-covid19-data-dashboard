@@ -3,21 +3,32 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
+import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
-  CoverageTableRow,
-} from '../common';
-import { AgeGroup } from './age-group';
-import { Bar } from './bar';
-import { NarrowPercentage } from './narrow-percentage';
+} from '~/domain/vaccine/common';
+import { Bar } from '~/domain/vaccine/components/bar';
+import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 
-export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
+export function NarrowCoverageTable({
+  values,
+}: {
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
+}) {
   const { siteText, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.vaccinaties.vaccination_coverage;
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const text = siteText.pages.vaccinations.nl.vaccination_coverage;
+  const { templates } = siteText.pages.vaccinations.nl.vaccination_coverage;
 
   return (
     <Box>
@@ -48,6 +59,7 @@ export function NarrowCoverageTable({ values }: { values: CoverageTableRow }) {
               item.birthyear_range,
               templates.birthyears
             )}
+            text={templates.agegroup.total_people}
           />
 
           <Box spacing={1}>

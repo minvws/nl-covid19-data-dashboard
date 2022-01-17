@@ -4,8 +4,8 @@ import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
   COLOR_FULLY_BOOSTERED,
-} from '../vaccine/vaccine-coverage-per-age-group/common';
-import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
+} from '../vaccine/common';
+import { Bar } from '../vaccine/components/bar';
 import { MiniTile, MiniTileProps } from './mini-tile';
 
 type MiniVaccinationCoverageTileProps = {

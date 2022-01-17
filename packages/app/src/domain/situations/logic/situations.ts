@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 
-export type SituationKey = keyof SiteText['brononderzoek']['situaties'];
+export type SituationTexts =
+  SiteText['pages']['contactTracing']['shared']['situaties'];
+export type SituationKey = keyof SituationTexts;
 
 interface Situation {
   id: SituationKey;
@@ -21,16 +22,14 @@ const situations: SituationKey[] = [
   'other',
 ];
 
-export function useSituations() {
-  const siteText = useIntl().siteText;
-
+export function useSituations(situationTexts: SituationTexts) {
   return useMemo(
     () =>
       situations.map<Situation>((id) => ({
         id,
-        title: siteText.brononderzoek.situaties[id].titel,
-        description: siteText.brononderzoek.situaties[id].beschrijving,
+        title: situationTexts[id].titel,
+        description: situationTexts[id].beschrijving,
       })),
-    [siteText]
+    [situationTexts]
   );
 }

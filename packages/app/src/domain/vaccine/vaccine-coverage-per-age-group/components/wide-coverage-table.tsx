@@ -11,11 +11,14 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { useVaccineCoveragePercentageFormatter } from '../../logic/use-vaccine-coverage-percentage-formatter';
-import { COLOR_FULLY_VACCINATED, COLOR_HAS_ONE_SHOT } from '../common';
-import { AgeGroup } from './age-group';
-import { Bar } from './bar';
-import { WidePercentage } from './wide-percentage';
+import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
+import {
+  COLOR_FULLY_VACCINATED,
+  COLOR_HAS_ONE_SHOT,
+} from '~/domain/vaccine/common';
+import { Bar } from '~/domain/vaccine/components/bar';
+import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
 interface WideCoverageTable {
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
@@ -26,8 +29,8 @@ interface WideCoverageTable {
 export function WideCoverageTable({ values }: WideCoverageTable) {
   const { siteText, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.vaccinaties.vaccination_coverage;
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const text = siteText.pages.vaccinations.nl.vaccination_coverage;
+  const { templates } = siteText.pages.vaccinations.nl.vaccination_coverage;
 
   return (
     <Box overflow="auto">
@@ -102,6 +105,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                     item.birthyear_range,
                     templates.birthyears
                   )}
+                  text={templates.agegroup.total_people}
                 />
               </Cell>
               <Cell>
@@ -115,6 +119,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                       : `${formatPercentage(item.has_one_shot_percentage)}%`
                   }
                   color={COLOR_HAS_ONE_SHOT}
+                  justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
@@ -128,6 +133,7 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                       : `${formatPercentage(item.fully_vaccinated_percentage)}%`
                   }
                   color={COLOR_FULLY_VACCINATED}
+                  justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
