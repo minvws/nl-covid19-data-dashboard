@@ -22,7 +22,7 @@ export function VaccinationsBoosterKpiSection({
 }: VaccinationsBoosterKpiSectionProps) {
   const { siteText, formatNumber } = useIntl();
 
-  const text = siteText.vaccinaties.booster_ggd_kpi_section;
+  const text = siteText.pages.vaccinations.nl.booster_ggd_kpi_section;
 
   return (
     <Box spacing={4}>

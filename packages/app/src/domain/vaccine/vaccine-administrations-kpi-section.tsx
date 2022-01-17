@@ -25,7 +25,7 @@ export function VaccineAdministrationsKpiSection({
 }) {
   const { siteText } = useIntl();
 
-  const text = siteText.vaccinaties;
+  const text = siteText.pages.vaccinations.nl;
 
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title
@@ -146,8 +146,8 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
       <Text variant="label1" color="annotation">
         {replaceVariablesInText(
           isReported
-            ? siteText.vaccinaties.gezette_prikken.reported_until
-            : siteText.vaccinaties.gezette_prikken.estimated_until,
+            ? siteText.pages.vaccinations.nl.gezette_prikken.reported_until
+            : siteText.pages.vaccinations.nl.gezette_prikken.estimated_until,
           {
             reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
           }

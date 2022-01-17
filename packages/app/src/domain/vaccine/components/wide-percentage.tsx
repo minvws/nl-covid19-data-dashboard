@@ -6,9 +6,14 @@ import { asResponsiveArray } from '~/style/utils';
 interface PercentageWideNumberProps {
   value: string;
   color: string;
+  justifyContent: string;
 }
 
-export function WidePercentage({ value, color }: PercentageWideNumberProps) {
+export function WidePercentage({
+  value,
+  color,
+  justifyContent,
+}: PercentageWideNumberProps) {
   return (
     <InlineText
       variant="body2"
@@ -16,7 +21,7 @@ export function WidePercentage({ value, color }: PercentageWideNumberProps) {
       css={css({
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent,
         pr: asResponsiveArray({ _: 3, xl: 4 }),
       })}
     >
