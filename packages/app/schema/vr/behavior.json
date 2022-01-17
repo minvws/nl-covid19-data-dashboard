@@ -88,6 +88,12 @@
         "ventilate_home_compliance_trend": {
           "$ref": "#/definitions/value_trend"
         },
+        "selftest_visit_compliance": {
+          "type": ["integer", "null"]
+        },
+        "selftest_visit_compliance_trend": {
+          "$ref": "#/definitions/value_trend"
+        },
         "curfew_support": {
           "type": ["integer", "null"]
         },
@@ -140,6 +146,12 @@
           "type": ["integer", "null"]
         },
         "ventilate_home_support_trend": {
+          "$ref": "#/definitions/value_trend"
+        },
+        "selftest_visit_support": {
+          "type": ["integer", "null"]
+        },
+        "selftest_visit_support_trend": {
           "$ref": "#/definitions/value_trend"
         },
         "date_start_unix": {
