@@ -111,8 +111,8 @@ export function VaccinationCoverageChoropleth(
           <ChoroplethLegenda
             thresholds={thresholds.gm.fully_vaccinated_percentage}
             title={
-              siteText.vaccinaties.choropleth_vaccination_coverage.shared
-                .legend_title
+              siteText.pages.vaccinations.nl.choropleth_vaccination_coverage
+                .shared.legend_title
             }
           />
         }
@@ -136,7 +136,8 @@ export function VaccinationCoverageChoropleth(
                 selectedCode: isGmCoverage(props) ? props.gmCode : undefined,
                 getLink: reverseRouter.gm.vaccinaties,
                 tooltipVariables: {
-                  age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+                  age_group:
+                    siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (
@@ -167,7 +168,8 @@ export function VaccinationCoverageChoropleth(
                 selectedCode: isVrCoverage(props) ? selectedGmCode : undefined,
                 getLink: reverseRouter.gm.vaccinaties,
                 tooltipVariables: {
-                  age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+                  age_group:
+                    siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (
@@ -197,7 +199,8 @@ export function VaccinationCoverageChoropleth(
                 isPercentage: true,
                 getLink: (vrcode) => reverseRouter.actueel.vr(vrcode),
                 tooltipVariables: {
-                  age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+                  age_group:
+                    siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (
@@ -230,8 +233,8 @@ export function VaccinationCoverageChoropleth(
               })}
             >
               {
-                siteText.vaccinaties.choropleth_vaccination_coverage.shared
-                  .dropdowns_title
+                siteText.pages.vaccinations.nl.choropleth_vaccination_coverage
+                  .shared.dropdowns_title
               }
             </Text>
 

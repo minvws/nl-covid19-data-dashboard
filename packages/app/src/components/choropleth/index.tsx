@@ -101,6 +101,10 @@ export type OptionalDataConfig<T extends ChoroplethDataItem> = {
    * The width that is used to for the feature outline when the feature is rendered normally.
    */
   areaStrokeWidth?: number;
+  /**
+   * A record containing the keys of T that needs formatting. The values are the formatting functions itself.
+   */
+  dataFormatters?: Partial<Record<keyof T, (input: string | number) => string>>;
 };
 
 export type DataConfig<T extends ChoroplethDataItem> = Required<
@@ -243,6 +247,7 @@ export function Choropleth<T extends ChoroplethDataItem>({
               setTooltip={setTooltip}
               formatTooltip={formatTooltip}
               data={tooltip.data}
+              dataFormatters={props.dataConfig.dataFormatters}
             />
           </div>
         )}

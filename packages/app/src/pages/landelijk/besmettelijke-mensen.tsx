@@ -10,6 +10,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -21,11 +22,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textNl: siteText.pages.infectiousPeople.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData('infectious_people'),
   async (context: GetStaticPropsContext) => {
@@ -45,17 +54,16 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, lastGenerated, content } = props;
+  const { pageText, selectedNlData: data, lastGenerated, content } = props;
   const { siteText } = useIntl();
+  const { textNl } = pageText;
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
 
-  const text = siteText.besmettelijke_personen;
-
   const metadata = {
     ...siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
@@ -67,52 +75,52 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             screenReaderCategory={
               siteText.sidebar.metrics.infectious_people.title
             }
-            title={text.title}
+            title={textNl.title}
             icon={<Ziektegolf />}
-            description={text.toelichting_pagina}
+            description={textNl.toelichting_pagina}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textNl.datums,
               dateOrRange: lastFullValue.date_unix,
               dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textNl.reference.href}
             articles={content.articles}
           />
 
-          {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
+          {textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht) && (
             <WarningTile
               isFullWidth
-              message={text.belangrijk_bericht}
+              message={textNl.belangrijk_bericht}
               variant="emphasis"
             />
           )}
 
           <ChartTile
-            metadata={{ source: text.bronnen.rivm }}
-            title={text.linechart_titel}
-            description={text.linechart_description}
+            metadata={{ source: textNl.bronnen.rivm }}
+            title={textNl.linechart_titel}
+            description={textNl.linechart_description}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'infectious_people_over_time_chart',
               }}
-              tooltipTitle={text.linechart_titel}
+              tooltipTitle={textNl.linechart_titel}
               values={data.infectious_people.values}
               seriesConfig={[
                 {
                   type: 'line',
                   metricProperty: 'estimate',
-                  label: text.legenda_line,
-                  shortLabel: text.lineLegendLabel,
+                  label: textNl.legenda_line,
+                  shortLabel: textNl.lineLegendLabel,
                   color: colors.data.primary,
                 },
                 {
                   type: 'range',
                   metricPropertyLow: 'margin_low',
                   metricPropertyHigh: 'margin_high',
-                  label: text.legenda_marge,
-                  shortLabel: text.rangeLegendLabel,
+                  label: textNl.legenda_marge,
+                  shortLabel: textNl.rangeLegendLabel,
                   color: colors.data.margin,
                 },
               ]}

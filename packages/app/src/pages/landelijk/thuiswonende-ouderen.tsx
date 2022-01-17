@@ -89,7 +89,7 @@ const ElderlyAtHomeNationalPage = (
     7
   );
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
 
   const text = siteText.thuiswonende_ouderen;
@@ -245,6 +245,9 @@ const ElderlyAtHomeNationalPage = (
               dataConfig={{
                 metricName: 'elderly_at_home',
                 metricProperty: 'positive_tested_daily_per_100k',
+                dataFormatters: {
+                  positive_tested_daily_per_100k: formatNumber,
+                },
               }}
               dataOptions={{
                 getLink: reverseRouter.vr.thuiswonendeOuderen,

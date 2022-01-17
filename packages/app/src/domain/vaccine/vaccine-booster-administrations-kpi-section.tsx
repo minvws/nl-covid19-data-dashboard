@@ -33,7 +33,7 @@ export function VaccineBoosterAdministrationsKpiSection({
 }: VaccineBoosterAdministrationsKpiSectionProps) {
   const { siteText, formatPercentage } = useIntl();
 
-  const text = siteText.vaccinaties.booster_and_third_kpi;
+  const text = siteText.pages.vaccinations.nl.booster_and_third_kpi;
 
   return (
     <Tile>

@@ -7,6 +7,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -19,10 +20,19 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textShared: siteText.pages.contactTracing.shared,
+        textChoroplethTooltips: siteText.choropleth_tooltip.patients,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   createGetChoroplethData({
     vr: ({ situations }) => ({
@@ -45,16 +55,14 @@ export const getStaticProps = createGetStaticProps(
 export default function BrononderzoekPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { choropleth, lastGenerated, content } = props;
-
+  const { pageText, choropleth, lastGenerated, content } = props;
+  const { textShared, textChoroplethTooltips } = pageText;
   const intl = useIntl();
-
-  const text = intl.siteText.brononderzoek;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    title: textShared.metadata.title,
+    description: textShared.metadata.description,
   };
 
   const singleValue = choropleth.vr.situations[0];
@@ -68,25 +76,32 @@ export default function BrononderzoekPage(
             screenReaderCategory={
               intl.siteText.sidebar.metrics.source_investigation.title
             }
-            title={text.titel}
+            title={textShared.titel}
             icon={<Gedrag />}
-            description={text.pagina_toelichting}
+            description={textShared.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textShared.datums,
               dateOrRange: {
                 start: singleValue.date_start_unix,
                 end: singleValue.date_end_unix,
               },
               dateOfInsertionUnix: singleValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textShared.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textShared.reference.href}
             articles={content.articles}
           />
 
-          <SituationsDataCoverageChoroplethTile data={choropleth.vr} />
+          <SituationsDataCoverageChoroplethTile
+            data={choropleth.vr}
+            text={textShared}
+            tooltipText={textChoroplethTooltips}
+          />
 
-          <SituationsOverviewChoroplethTile data={choropleth.vr.situations} />
+          <SituationsOverviewChoroplethTile
+            data={choropleth.vr.situations}
+            text={textShared}
+          />
         </TileList>
       </NlLayout>
     </Layout>

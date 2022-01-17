@@ -16,6 +16,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
@@ -23,19 +24,20 @@ import { useSituations } from './logic/situations';
 
 interface SmallMultiplesChoroplethTileProps {
   data: VrCollectionSituations[];
+  text: SiteText['pages']['contactTracing']['shared'];
 }
 
 export function SituationsOverviewChoroplethTile({
   data,
+  text,
 }: SmallMultiplesChoroplethTileProps) {
-  const intl = useIntl();
-  const situations = useSituations();
-  const text = intl.siteText.brononderzoek;
+  const { formatDateSpan } = useIntl();
+  const situations = useSituations(text.situaties);
   const singleValue = data[0];
 
   const breakpoints = useBreakpoints();
 
-  const [date_from, date_to] = intl.formatDateSpan(
+  const [date_from, date_to] = formatDateSpan(
     { seconds: singleValue.date_start_unix },
     { seconds: singleValue.date_end_unix }
   );
