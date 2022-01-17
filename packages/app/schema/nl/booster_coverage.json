@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_booster_coverage",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_booster_coverage_value",
+      "type": "object",
+      "properties": {
+        "percentage": {
+          "type": "number"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": ["percentage", "date_unix", "date_of_insertion_unix"],
+      "additionalProperties": false
+    }
+  }
+}

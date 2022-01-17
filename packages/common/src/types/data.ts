@@ -269,6 +269,7 @@ export interface Nl {
   booster_shot_delivered: NlBoosterShotDelivered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
+  booster_coverage: NlBoosterCoverage;
   third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;
@@ -415,6 +416,15 @@ export interface NlBoosterShotPerAgeGroupValue {
   date_unix: number;
   birthyear_range: string;
   age_group_total: number;
+}
+export interface NlBoosterCoverage {
+  values: NlBoosterCoverageValue[];
+  last_value: NlBoosterCoverageValue;
+}
+export interface NlBoosterCoverageValue {
+  percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlThirdShotAdministered {
   values: NlThirdShotAdministeredValue[];
