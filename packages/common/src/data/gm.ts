@@ -138,11 +138,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM1954',
   },
   {
-    name: 'Beemster',
-    vrCode: 'VR11',
-    gemcode: 'GM0370',
-  },
-  {
     name: 'Beesel',
     vrCode: 'VR23',
     gemcode: 'GM0889',
@@ -243,11 +238,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0654',
   },
   {
-    name: 'Boxmeer',
-    vrCode: 'VR21',
-    gemcode: 'GM0756',
-  },
-  {
     name: 'Boxtel',
     vrCode: 'VR21',
     gemcode: 'GM0757',
@@ -313,11 +303,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM1706',
   },
   {
-    name: 'Cuijk',
-    vrCode: 'VR21',
-    gemcode: 'GM1684',
-  },
-  {
     name: 'Culemborg',
     vrCode: 'VR08',
     gemcode: 'GM0216',
@@ -356,6 +341,11 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Dinkelland',
     vrCode: 'VR05',
     gemcode: 'GM1774',
+  },
+  {
+    name: 'Dijk en Waard',
+    vrCode: 'VR10',
+    gemcode: 'GM1980',
   },
   {
     name: 'Doesburg',
@@ -539,11 +529,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0513',
   },
   {
-    name: 'Grave',
-    vrCode: 'VR21',
-    gemcode: 'GM0786',
-  },
-  {
     name: 's-Gravenhage',
     vrCode: 'VR15',
     gemcode: 'GM0518',
@@ -624,11 +609,6 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Heerenveen',
     vrCode: 'VR02',
     gemcode: 'GM0074',
-  },
-  {
-    name: 'Heerhugowaard',
-    vrCode: 'VR10',
-    gemcode: 'GM0398',
   },
   {
     name: 'Heerlen',
@@ -808,11 +788,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM1659',
   },
   {
-    name: 'Landerd',
-    vrCode: 'VR21',
-    gemcode: 'GM1685',
-  },
-  {
     name: 'Landgraaf',
     vrCode: 'VR24',
     gemcode: 'GM0882',
@@ -823,9 +798,9 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0415',
   },
   {
-    name: 'Langedijk',
-    vrCode: 'VR10',
-    gemcode: 'GM0416',
+    name: 'Land van Cuijk',
+    vrCode: 'VR21',
+    gemcode: 'GM1982',
   },
   {
     name: 'Lansingerland',
@@ -913,6 +888,11 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM1641',
   },
   {
+    name: 'Maashorst',
+    vrCode: 'VR21',
+    gemcode: 'GM1991',
+  },
+  {
     name: 'Maassluis',
     vrCode: 'VR17',
     gemcode: 'GM0556',
@@ -961,11 +941,6 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Midden-Groningen',
     vrCode: 'VR01',
     gemcode: 'GM1952',
-  },
-  {
-    name: 'Mill en Sint Hubert',
-    vrCode: 'VR21',
-    gemcode: 'GM0815',
   },
   {
     name: 'Moerdijk',
@@ -1304,11 +1279,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0965',
   },
   {
-    name: 'Sint Anthonis',
-    vrCode: 'VR21',
-    gemcode: 'GM1702',
-  },
-  {
     name: 'Sint-Michielsgestel',
     vrCode: 'VR21',
     gemcode: 'GM0845',
@@ -1444,11 +1414,6 @@ export const gmData: MunicipalityInfo[] = [
     vrCode: 'VR02',
     gemcode: 'GM0737',
     searchTerms: ['Tietjerksteradeel'],
-  },
-  {
-    name: 'Uden',
-    vrCode: 'VR21',
-    gemcode: 'GM0856',
   },
   {
     name: 'Uitgeest',

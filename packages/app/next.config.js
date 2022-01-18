@@ -14,6 +14,28 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
+// When municipal reorganizations happened we want to redirect to the new municipality when
+// using the former municipality code. `from` contains the old municipality codes and `to` is
+// the new municipality code to link to.
+const gmRedirects = [
+  {
+    from: ['0370'],
+    to: '0439',
+  },
+  {
+    from: ['0398', '0416'],
+    to: '1980',
+  },
+  {
+    from: ['1685', '0856'],
+    to: '1991',
+  },
+  {
+    from: ['0756', '1684', '0786', '0815', '1702'],
+    to: '1982',
+  },
+];
+
 const nextConfig = {
   /**
    * Enables react strict mode
@@ -110,6 +132,11 @@ const nextConfig = {
         destination: '/veiligheidsregio/:code',
         permanent: true,
       },
+      ...gmRedirects.map(({ from, to }) => ({
+        source: `/gemeente/:gm(gm|GM|gM|Gm):nr(${from.join('|')})/:page*`,
+        destination: `/gemeente/GM${to}/:page*`,
+        permanent: true,
+      })),
     ];
   },
 
