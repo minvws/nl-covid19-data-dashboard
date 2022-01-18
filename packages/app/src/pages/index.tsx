@@ -149,8 +149,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
-  const boosterCoverageEstimatedLastValue =
-    data.booster_and_third_shot_administered.last_value;
   const boosterCoverageLastValue = data.booster_coverage?.last_value;
 
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(

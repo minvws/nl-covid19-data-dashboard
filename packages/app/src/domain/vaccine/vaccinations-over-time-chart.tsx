@@ -142,6 +142,10 @@ export function VaccinationsOverTimeChart(
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
+    text.grafiek_gevaccineerd_door_de_tijd_heen
+      .tooltip_label_booster_vaccinated,
+    vaccinationCoverageBoosterVaccinated.isEnabled,
     timelineEvents.coverage,
     breakpoints,
   ]);
