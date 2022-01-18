@@ -27,7 +27,7 @@ const icons: Record<BehaviorIdentifier, typeof Curfew> = {
   sneeze_cough_elbow: SneezeCoughElbow,
   max_visitors: MaxVisitors,
   ventilate_home: FrisseLucht,
-  selftest_visit: FrisseLucht,
+  selftest_visit: SymptomsGetTested,
 };
 
 interface BehaviorIconProps {

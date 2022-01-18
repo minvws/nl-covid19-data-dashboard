@@ -1,4 +1,4 @@
-import { NlBehaviorValue } from '@corona-dashboard/common';
+import { VrBehaviorValue } from '@corona-dashboard/common';
 import { Gedrag } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRef, useState } from 'react';
@@ -40,7 +40,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   (context) => {
     const data = selectVrData('behavior')(context);
-    const chartBehaviorOptions = getBehaviorChartOptions<NlBehaviorValue>(
+    const chartBehaviorOptions = getBehaviorChartOptions<VrBehaviorValue>(
       data.selectedVrData.behavior.values[0]
     );
 

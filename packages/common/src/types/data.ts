@@ -897,6 +897,7 @@ export interface NlVaccineCoverage {
   last_value: NlVaccineCoverageValue;
 }
 export interface NlVaccineCoverageValue {
+  booster_vaccinated: number;
   partially_vaccinated: number;
   fully_vaccinated: number;
   partially_or_fully_vaccinated: number;
@@ -1299,8 +1300,8 @@ export interface VrBehaviorValue {
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
   ventilate_home_compliance: number | null;
   ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
-  selftest_visit_compliance?: number | null;
-  selftest_visit_compliance_trend?: ("up" | "down" | "equal") | null;
+  selftest_visit_compliance: number | null;
+  selftest_visit_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -1319,8 +1320,8 @@ export interface VrBehaviorValue {
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
   ventilate_home_support: number | null;
   ventilate_home_support_trend: ("up" | "down" | "equal") | null;
-  selftest_visit_support?: number | null;
-  selftest_visit_support_trend?: ("up" | "down" | "equal") | null;
+  selftest_visit_support: number | null;
+  selftest_visit_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
