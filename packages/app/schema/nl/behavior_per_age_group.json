@@ -18,6 +18,9 @@
     "ventilate_home_compliance": { "$ref": "#/definitions/value" },
     "ventilate_home_support": { "$ref": "#/definitions/value" },
 
+    "selftest_visit_compliance": { "$ref": "#/definitions/value" },
+    "selftest_visit_support": { "$ref": "#/definitions/value" },
+
     "date_of_insertion_unix": { "type": "integer" },
     "date_start_unix": { "type": "integer" },
     "date_end_unix": { "type": "integer" }
@@ -33,6 +36,8 @@
     "work_from_home_support",
     "ventilate_home_compliance",
     "ventilate_home_support",
+    "selftest_visit_compliance",
+    "selftest_visit_support",
     "date_of_insertion_unix",
     "date_start_unix",
     "date_end_unix"

@@ -698,5 +698,6 @@ timestamp,action,key,document_id,move_to
 2022-01-13T14:38:01.178Z,add,pages.vaccinations.nl.booster_per_age_group_table.templates.birthyears.range,xCKwjuOezDI7FMkKYWqUNW,__
 2022-01-13T14:38:02.205Z,add,pages.vaccinations.nl.booster_per_age_group_table.bronnen.rivm.href,QRtDAv81NYkdBGRQixiRTi,__
 2022-01-13T14:38:03.206Z,add,pages.vaccinations.nl.booster_per_age_group_table.bronnen.rivm.text,i93JRHeRUDvH5qV1yxewWi,__
+2022-01-17T12:51:35.204Z,add,gedrag_onderwerpen.selftest_visit,vHg89fMiqzdfppYsojOzkK,__
 2022-01-17T20:07:50.063Z,add,pages.vaccinations.nl.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,mXd8VX04HWmWwlRai3ckYb,__
 2022-01-17T20:07:51.120Z,add,pages.vaccinations.nl.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_booster_vaccinated,mXd8VX04HWmWwlRai3ckjR,__
