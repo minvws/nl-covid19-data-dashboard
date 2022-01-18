@@ -562,9 +562,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .booster_shots_administered_data_drive_text,
                             {
                               percentage: formatPercentage(
-                                boosterCoverageEstimatedLastValue.received_booster_percentage
-                                  ? boosterCoverageEstimatedLastValue.received_booster_percentage
-                                  : boosterCoverageLastValue.percentage
+                                boosterCoverageLastValue.percentage
                               ),
                             }
                           )}
@@ -586,9 +584,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    boosterCoverageEstimatedLastValue.received_booster_percentage
-                      ? `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
-                      : `${boosterCoverageLastValue.percentage}`
+                    `${boosterCoverageLastValue.percentage}`
                   )}
                   warning={getWarning(
                     content.elements.warning,

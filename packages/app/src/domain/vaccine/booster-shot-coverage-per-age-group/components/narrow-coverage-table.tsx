@@ -17,7 +17,7 @@ export function NarrowCoverageTable({
   values: NlBoosterShotPerAgeGroupValue[];
   text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
 }) {
-  const { formatPercentage } = useIntl();
+  const { formatNumber, formatPercentage } = useIntl();
 
   return (
     <Box>
@@ -53,7 +53,9 @@ export function NarrowCoverageTable({
 
           <Box spacing={1}>
             <NarrowPercentage
-              value={`${formatPercentage(item.received_booster_percentage)}%`}
+              value={`${formatNumber(
+                item.received_booster_total
+              )} (${formatPercentage(item.received_booster_percentage)}%)`}
               color={COLOR_FULLY_BOOSTERED}
               textLabel={text.headers.turnout_booter_shot}
             />

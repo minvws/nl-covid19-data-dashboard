@@ -25,9 +25,6 @@
         "administered_total": {
           "type": "number"
         },
-        "received_booster_percentage": {
-          "type": "number"
-        },
         "date_unix": {
           "type": "integer"
         },
@@ -37,7 +34,6 @@
       },
       "required": [
         "administered_total",
-        "received_booster_percentage",
         "date_unix",
         "date_of_insertion_unix"
       ],
