@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_booster_shot_administered",
+  "title": "nl_booster_coverage",
   "type": "object",
   "properties": {
     "values": {
@@ -19,40 +19,20 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_shot_administered_value",
+      "title": "nl_booster_coverage_value",
       "type": "object",
       "properties": {
-        "ggd_administered_last_7_days": {
-          "type": "number"
-        },
-        "ggd_administered_total": {
-          "type": "number"
-        },
-        "others_administered_total": {
+        "percentage": {
           "type": "number"
         },
         "date_unix": {
-          "type": "integer"
-        },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "ggd_administered_last_7_days",
-        "ggd_administered_total",
-        "others_administered_total",
-        "date_unix",
-        "date_start_unix",
-        "date_end_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["percentage", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

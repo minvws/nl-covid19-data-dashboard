@@ -41,10 +41,10 @@
           ]
         },
         "received_booster_total": {
-          "type": "number"
+          "type": "integer"
         },
         "received_booster_percentage": {
-          "type": "integer"
+          "type": "number"
         },
         "date_of_insertion_unix": {
           "type": "integer"
