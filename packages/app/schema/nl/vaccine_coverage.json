@@ -4,6 +4,7 @@
       "title": "nl_vaccine_coverage_value",
       "type": "object",
       "required": [
+        "booster_vaccinated",
         "partially_vaccinated",
         "fully_vaccinated",
         "partially_or_fully_vaccinated",
@@ -13,6 +14,9 @@
       ],
       "additionalProperties": false,
       "properties": {
+        "booster_vaccinated": {
+          "type": "integer"
+        },
         "partially_vaccinated": {
           "type": "integer"
         },
