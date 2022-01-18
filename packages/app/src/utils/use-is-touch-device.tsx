@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { isTouch } from './is-touch';
+import { isTouchDevice } from './is-touch-device';
 
 const isTouchDeviceContext = createContext(false);
 
@@ -13,14 +13,9 @@ export function IsTouchDeviceContextProvider({
 }: {
   children: ReactNode;
 }) {
-  let isTouchDevice = false;
-
-  if (typeof window !== 'undefined') {
-    isTouchDevice = isTouch();
-  }
-
+  console.log(isTouchDevice());
   return (
-    <isTouchDeviceContext.Provider value={isTouchDevice}>
+    <isTouchDeviceContext.Provider value={isTouchDevice()}>
       {children}
     </isTouchDeviceContext.Provider>
   );
