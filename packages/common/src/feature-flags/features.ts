@@ -137,13 +137,6 @@ export const features: Feature[] = [
     metricName: 'booster_shot_planned',
   },
   /**
-   * Temporary for the boosters
-   */
-  {
-    name: 'nlBoostersTemporary',
-    isEnabled: true,
-  },
-  /**
    * These flags are only here that the schemas will not be required when validating.
    * But the features can be seen once toggled on with dummy data and have a seperate flag.
    */
