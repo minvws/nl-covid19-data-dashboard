@@ -10,30 +10,8 @@ import {
 
 const UseIsTouchDevice = suite('useIsTouchDevice');
 
-UseIsTouchDevice.before((context) => {
+UseIsTouchDevice.before.each((context) => {
   context.cleanupJsDom = injectJsDom();
-  context.isTouchDevice = false;
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  (window as any).matchMedia = () => {};
-
-  sinon.stub(window, 'matchMedia').callsFake((mq: string) => {
-    switch (mq) {
-      case '(hover: none)': {
-        return {
-          matches: context.isTouchDevice,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          addListener: (_callback: any) => {},
-        } as MediaQueryList;
-      }
-      default:
-        return {
-          matches: false,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          addListener: (_callback: any) => {},
-        } as MediaQueryList;
-    }
-  });
 });
 
 UseIsTouchDevice.after.each(() => {
@@ -55,19 +33,15 @@ UseIsTouchDevice('it should return false when there is no touch device', () => {
   assert.equal(result.current, false);
 });
 
-UseIsTouchDevice(
-  'it should return true when there is a touch device',
-  (context) => {
-    context.isTouchDevice = true;
+UseIsTouchDevice('it should return true when there is a touch device', () => {
+  window.window.ontouchstart = () => {};
+  const { result } = renderHook(() => useIsTouchDevice(), {
+    wrapper: ({ children }) => (
+      <IsTouchDeviceContextProvider>{children}</IsTouchDeviceContextProvider>
+    ),
+  });
 
-    const { result } = renderHook(() => useIsTouchDevice(), {
-      wrapper: ({ children }) => (
-        <IsTouchDeviceContextProvider>{children}</IsTouchDeviceContextProvider>
-      ),
-    });
-
-    assert.equal(result.current, true);
-  }
-);
+  assert.equal(result.current, true);
+});
 
 UseIsTouchDevice.run();
