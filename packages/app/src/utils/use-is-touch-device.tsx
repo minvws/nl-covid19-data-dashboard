@@ -13,7 +13,6 @@ export function IsTouchDeviceContextProvider({
 }: {
   children: ReactNode;
 }) {
-  console.log(isTouchDevice());
   return (
     <isTouchDeviceContext.Provider value={isTouchDevice()}>
       {children}
