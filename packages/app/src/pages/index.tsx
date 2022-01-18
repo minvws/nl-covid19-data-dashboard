@@ -139,7 +139,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const testedOverallTopicalPageFeature = useFeature(
     'nlTestedOverallTopicalPage'
   );
-  const boosterCoverageFeature = useFeature('nlBoostersTemporary');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -563,7 +562,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .booster_shots_administered_data_drive_text,
                             {
                               percentage: formatPercentage(
-                                boosterCoverageFeature.isEnabled
+                                boosterCoverageEstimatedLastValue.received_booster_percentage
                                   ? boosterCoverageEstimatedLastValue.received_booster_percentage
                                   : boosterCoverageLastValue.percentage
                               ),
@@ -587,7 +586,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    boosterCoverageFeature.isEnabled
+                    boosterCoverageEstimatedLastValue.received_booster_percentage
                       ? `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
                       : `${boosterCoverageLastValue.percentage}`
                   )}

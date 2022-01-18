@@ -27,7 +27,7 @@ export function VaccinationsBoosterKpiSection({
       <KpiTile title={text.booster_last_7_days.title}>
         <KpiValue text={formatNumber(dataBoosterShotAdministered)} />
         <Markdown content={text.booster_last_7_days.description} />
-        <Metadata {...metadataBoosterShotAdministered} isTileFooter />
+        <Metadata {...metadataBoosterShotAdministered} />
       </KpiTile>
       <KpiTile title={text.booster_planned_7_days.title}>
         <KpiValue text={formatNumber(dataBoosterShotPlanned)} />
