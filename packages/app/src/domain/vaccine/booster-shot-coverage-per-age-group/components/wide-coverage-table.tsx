@@ -18,7 +18,7 @@ interface WideCoverageTable {
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
-  const { formatPercentage } = useIntl();
+  const { formatNumber, formatPercentage } = useIntl();
 
   return (
     <Box overflow="auto">
@@ -88,9 +88,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               </Cell>
               <Cell>
                 <WidePercentage
-                  value={`${item.received_booster_total} (${formatPercentage(
-                    item.received_booster_percentage
-                  )}%)`}
+                  value={`${formatNumber(
+                    item.received_booster_total
+                  )} (${formatPercentage(item.received_booster_percentage)}%)`}
                   color={COLOR_FULLY_BOOSTERED}
                   justifyContent="flex-start"
                 />
