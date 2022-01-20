@@ -260,7 +260,7 @@ export function TimeSeriesChart<
     hasAllZeroValues,
   } = useScales({
     values,
-    maximumValue: seriesMax,
+    maximumValue: yTickValues?.[yTickValues.length - 1] || seriesMax,
     minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: yTickValues?.length || numGridLines,

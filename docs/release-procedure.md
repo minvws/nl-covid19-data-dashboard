@@ -5,6 +5,11 @@
 1. Create a branch called `release/x.xx.0` based on `master`(\*).
 2. Merge the develop branch into the release branch.
 3. Do a full build with a Sanity export from production to make sure everything works.
+
+   Use `yarn lokalize:export --dataset=production` to create the Sanity export.
+
+   Test the build locally by running `yarn start`.
+
 4. Publish the release branch to the `origin`, and create a pull-request on
    `master`.
 5. Create a GitHub release draft, pointing to the release branch and setting the
