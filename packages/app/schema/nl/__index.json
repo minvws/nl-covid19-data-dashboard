@@ -9,6 +9,7 @@
     "booster_shot_delivered",
     "booster_shot_planned",
     "booster_shot_per_age_group",
+    "booster_coverage",
     "code",
     "corona_melder_app_download",
     "corona_melder_app_warning",
@@ -93,6 +94,9 @@
     },
     "booster_shot_per_age_group": {
       "$ref": "booster_shot_per_age_group.json"
+    },
+    "booster_coverage": {
+      "$ref": "booster_coverage.json"
     },
     "third_shot_administered": {
       "$ref": "third_shot_administered.json"

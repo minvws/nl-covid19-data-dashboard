@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { useMediaQuery } from './use-media-query';
+import { isTouchDevice } from './is-touch-device';
 
 const isTouchDeviceContext = createContext(false);
 
@@ -13,10 +13,8 @@ export function IsTouchDeviceContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const isTouchDevice = useMediaQuery('(hover: none)');
-
   return (
-    <isTouchDeviceContext.Provider value={isTouchDevice}>
+    <isTouchDeviceContext.Provider value={isTouchDevice()}>
       {children}
     </isTouchDeviceContext.Provider>
   );

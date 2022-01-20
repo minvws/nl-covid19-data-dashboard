@@ -9,6 +9,7 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
@@ -34,6 +35,7 @@ export function BehaviorPerAgeGroup({
   setCurrentId,
 }: BehaviorPerAgeGroupProps) {
   const { siteText } = useIntl();
+  const breakpoints = useBreakpoints();
 
   const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
   const supportValue = data[`${currentId}_support` as keyof typeof data];
@@ -49,8 +51,12 @@ export function BehaviorPerAgeGroup({
 
   return (
     <ChartTile title={title} description={description}>
-      <Box spacing={4}>
-        <SelectBehavior value={currentId} onChange={setCurrentId} />
+      <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
+        <SelectBehavior
+          label={siteText.nl_gedrag.select_behaviour_label}
+          value={currentId}
+          onChange={setCurrentId}
+        />
         <Box overflow="auto">
           {isDefined(complianceValue) || isDefined(supportValue) ? (
             <Box overflow="auto">

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_booster_and_third_shot_administered",
+  "title": "nl_booster_coverage",
   "type": "object",
   "properties": {
     "values": {
@@ -19,10 +19,10 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_and_third_shot_administered_value",
+      "title": "nl_booster_coverage_value",
       "type": "object",
       "properties": {
-        "administered_total": {
+        "percentage": {
           "type": "number"
         },
         "date_unix": {
@@ -32,11 +32,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "administered_total",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["percentage", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

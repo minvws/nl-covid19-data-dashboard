@@ -148,6 +148,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={text.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={text.warning}
           />
 
           <TwoKpiSection>
@@ -311,6 +313,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 dataConfig={{
                   metricName: 'tested_overall',
                   metricProperty: 'infected_per_100k',
+                  dataFormatters: {
+                    infected: formatNumber,
+                    infected_per_100k: formatNumber,
+                  },
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.positiefGetesteMensen,

@@ -11,6 +11,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -27,11 +28,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textNl: siteText.pages.reproductionIndex.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData('reproduction', 'difference.reproduction__index_average'),
   async (context: GetStaticPropsContext) => {
@@ -59,17 +68,17 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, content, lastGenerated } = props;
+  const { pageText, selectedNlData: data, content, lastGenerated } = props;
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
 
   const { siteText } = useIntl();
-  const text = siteText.reproductiegetal;
+  const { textNl } = pageText;
 
   const metadata = {
     ...siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
@@ -81,31 +90,31 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             screenReaderCategory={
               siteText.sidebar.metrics.reproduction_number.title
             }
-            title={text.titel}
+            title={textNl.titel}
             icon={<Reproductiegetal />}
-            description={text.pagina_toelichting}
+            description={textNl.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textNl.datums,
               dateOrRange: lastFilledValue.date_unix,
               dateOfInsertionUnix: lastFilledValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textNl.reference.href}
             articles={content.articles}
           />
 
           <TwoKpiSection>
             <KpiWithIllustrationTile
-              title={text.barscale_titel}
+              title={textNl.barscale_titel}
               metadata={{
                 date: lastFilledValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
                 obtainedAt: lastFilledValue.date_of_insertion_unix,
               }}
               illustration={{
                 image: '/images/reproductie-explainer.svg',
-                alt: text.reproductie_explainer_alt,
-                description: text.extra_uitleg,
+                alt: textNl.reproductie_explainer_alt,
+                description: textNl.extra_uitleg,
               }}
             >
               <PageKpi
@@ -117,7 +126,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 showOldDateUnix
                 isAmount={false}
               />
-              <Markdown content={text.barscale_toelichting} />
+              <Markdown content={textNl.barscale_toelichting} />
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
@@ -127,6 +136,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               content.elements.timeSeries,
               'reproduction'
             )}
+            text={textNl}
           />
         </TileList>
       </NlLayout>

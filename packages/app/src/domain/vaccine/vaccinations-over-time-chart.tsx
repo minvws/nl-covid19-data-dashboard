@@ -20,6 +20,7 @@ import {
   StackedAreaSeriesDefinition,
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
@@ -50,13 +51,17 @@ export function VaccinationsOverTimeChart(
     timelineEvents,
   } = props;
   const { siteText, formatNumber } = useIntl();
-  const text = siteText.vaccinaties;
+  const text = siteText.pages.vaccinations.nl;
   const breakpoints = useBreakpoints(true);
 
   const firstValue = first(deliveryAndAdministrationData.values);
   const vaccineNames = useMemo(
     () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
     [firstValue]
+  );
+
+  const vaccinationCoverageBoosterVaccinated = useFeature(
+    'nlVaccinationCoverageBoosterVaccinated'
   );
 
   const coverageChartConfiguration:
@@ -109,6 +114,19 @@ export function VaccinationsOverTimeChart(
               mixBlendMode: 'multiply',
               fillOpacity: 1,
             },
+            vaccinationCoverageBoosterVaccinated.isEnabled && {
+              label:
+                text.grafiek_gevaccineerd_door_de_tijd_heen
+                  .label_booster_vaccinated,
+              shortLabel:
+                text.grafiek_gevaccineerd_door_de_tijd_heen
+                  .tooltip_label_booster_vaccinated,
+              type: 'stacked-area',
+              metricProperty: 'booster_vaccinated',
+              color: colors.data.darkBlue,
+              mixBlendMode: 'multiply',
+              fillOpacity: 1,
+            },
           ],
         } as TimeSeriesChartProps<
           DailyNlVaccineCoverageValue,
@@ -124,6 +142,10 @@ export function VaccinationsOverTimeChart(
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
+    text.grafiek_gevaccineerd_door_de_tijd_heen
+      .tooltip_label_booster_vaccinated,
+    vaccinationCoverageBoosterVaccinated.isEnabled,
     timelineEvents.coverage,
     breakpoints,
   ]);

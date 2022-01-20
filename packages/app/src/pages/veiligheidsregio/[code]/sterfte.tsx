@@ -41,7 +41,13 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(['deceasedPage_vr', 'deceasedPage_shared'], locale),
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.deceased.vr,
+        textShared: siteText.pages.deceased.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData(
     'deceased_cbs',
@@ -90,14 +96,14 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { siteText } = useIntl();
-  const { deceasedPage_vr, deceasedPage_shared } = pageText;
+  const { textVr, textShared } = pageText;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(deceasedPage_vr.metadata.title, {
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegion: vrName,
     }),
-    description: replaceVariablesInText(deceasedPage_vr.metadata.description, {
+    description: replaceVariablesInText(textVr.metadata.description, {
       safetyRegion: vrName,
     }),
   };
@@ -108,32 +114,29 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
-            title={replaceVariablesInText(
-              deceasedPage_vr.section_deceased_rivm.title,
-              {
-                safetyRegion: vrName,
-              }
-            )}
+            title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
+              safetyRegion: vrName,
+            })}
             icon={<Coronavirus />}
-            description={deceasedPage_vr.section_deceased_rivm.description}
-            referenceLink={deceasedPage_vr.section_deceased_rivm.reference.href}
+            description={textVr.section_deceased_rivm.description}
+            referenceLink={textVr.section_deceased_rivm.reference.href}
             metadata={{
-              datumsText: deceasedPage_vr.section_deceased_rivm.datums,
+              datumsText: textVr.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
-              dataSources: [deceasedPage_vr.section_deceased_rivm.bronnen.rivm],
+              dataSources: [textVr.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.mainArticles}
+            vrNameOrGmName={vrName}
+            warning={textVr.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={
-                deceasedPage_vr.section_deceased_rivm.kpi_covid_daily_title
-              }
+              title={textVr.section_deceased_rivm.kpi_covid_daily_title}
               metadata={{
                 date: dataRivm.last_value.date_unix,
-                source: deceasedPage_vr.section_deceased_rivm.bronnen.rivm,
+                source: textVr.section_deceased_rivm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -144,18 +147,15 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Markdown
                 content={
-                  deceasedPage_vr.section_deceased_rivm
-                    .kpi_covid_daily_description
+                  textVr.section_deceased_rivm.kpi_covid_daily_description
                 }
               />
             </KpiTile>
             <KpiTile
-              title={
-                deceasedPage_vr.section_deceased_rivm.kpi_covid_total_title
-              }
+              title={textVr.section_deceased_rivm.kpi_covid_total_title}
               metadata={{
                 date: dataRivm.last_value.date_unix,
-                source: deceasedPage_vr.section_deceased_rivm.bronnen.rivm,
+                source: textVr.section_deceased_rivm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -163,25 +163,19 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataRivm.last_value.covid_total}
               />
               <Text>
-                {
-                  deceasedPage_vr.section_deceased_rivm
-                    .kpi_covid_total_description
-                }
+                {textVr.section_deceased_rivm.kpi_covid_total_description}
               </Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={['all', '5weeks']}
-            title={
-              deceasedPage_vr.section_deceased_rivm.line_chart_covid_daily_title
-            }
+            title={textVr.section_deceased_rivm.line_chart_covid_daily_title}
             description={
-              deceasedPage_vr.section_deceased_rivm
-                .line_chart_covid_daily_description
+              textVr.section_deceased_rivm.line_chart_covid_daily_description
             }
             metadata={{
-              source: deceasedPage_vr.section_deceased_rivm.bronnen.rivm,
+              source: textVr.section_deceased_rivm.bronnen.rivm,
             }}
           >
             {(timeframe) => (
@@ -196,10 +190,10 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'covid_daily_moving_average',
                     label:
-                      deceasedPage_vr.section_deceased_rivm
+                      textVr.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_label_moving_average,
                     shortLabel:
-                      deceasedPage_vr.section_deceased_rivm
+                      textVr.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_short_label_moving_average,
                     color: colors.data.primary,
                   },
@@ -207,10 +201,10 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'bar',
                     metricProperty: 'covid_daily',
                     label:
-                      deceasedPage_vr.section_deceased_rivm
+                      textVr.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_label,
                     shortLabel:
-                      deceasedPage_vr.section_deceased_rivm
+                      textVr.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_short_label,
                     color: colors.data.primary,
                   },
@@ -226,26 +220,24 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <PageInformationBlock
-            title={deceasedPage_vr.section_sterftemonitor.title}
+            title={textVr.section_sterftemonitor.title}
             icon={<Coronavirus />}
-            description={deceasedPage_vr.section_sterftemonitor.description}
-            referenceLink={
-              deceasedPage_vr.section_sterftemonitor.reference.href
-            }
+            description={textVr.section_sterftemonitor.description}
+            referenceLink={textVr.section_sterftemonitor.reference.href}
             metadata={{
-              datumsText: deceasedPage_vr.section_sterftemonitor.datums,
+              datumsText: textVr.section_sterftemonitor.datums,
               dateOrRange: {
                 start: dataCbs.last_value.date_start_unix,
                 end: dataCbs.last_value.date_end_unix,
               },
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
-              dataSources: [deceasedPage_vr.section_sterftemonitor.bronnen.cbs],
+              dataSources: [textVr.section_sterftemonitor.bronnen.cbs],
             }}
             articles={content.monitorArticles}
           />
 
           <DeceasedMonitorSection
-            text={deceasedPage_shared.section_sterftemonitor}
+            text={textShared.section_sterftemonitor}
             data={dataCbs}
           />
         </TileList>

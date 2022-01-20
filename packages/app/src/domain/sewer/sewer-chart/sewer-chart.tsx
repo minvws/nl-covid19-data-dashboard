@@ -4,20 +4,22 @@ import {
   SewerPerInstallationData,
   VrSewer,
 } from '@corona-dashboard/common';
+import { useMemo } from 'react';
+import { isPresent } from 'ts-is-present';
+import { Warning } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
+import { Text } from '~/components/typography';
 import { ChartTile } from '~/components/chart-tile';
-import { Select } from '~/components/select';
+import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
+import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
+import { useIntl } from '~/intl';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
 
-export function SewerChart({
-  accessibility,
-  dataAverages,
-  dataPerInstallation,
-  text,
-}: {
+type SewerChartProps = {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -32,7 +34,7 @@ export function SewerChart({
       href: string;
       text: string;
     };
-    selectPlaceholder?: string;
+    selectPlaceholder: string;
     splitLabels: {
       segment_0: string;
       segment_1: string;
@@ -42,12 +44,22 @@ export function SewerChart({
     averagesDataLabel: string;
     valueAnnotation: string;
   };
-}) {
+  vrNameOrGmName?: string;
+  warning?: string;
+};
+
+export function SewerChart({
+  accessibility,
+  dataAverages,
+  dataPerInstallation,
+  text,
+  vrNameOrGmName,
+  warning,
+}: SewerChartProps) {
   const {
     options,
     value: selectedInstallation,
     onChange,
-    onClear,
   } = useSewerStationSelectPropsSimplified(
     dataPerInstallation ||
       ({
@@ -86,6 +98,25 @@ export function SewerChart({
       label: text.splitLabels.segment_3,
     },
   ];
+  const { siteText } = useIntl();
+  const scopedGmName = siteText.gemeente_index.municipality_warning;
+
+  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+
+  const optionsWithContent = useMemo(
+    () =>
+      options
+        .map((option) => ({
+          ...option,
+          content: (
+            <Box pr={2}>
+              <Text>{option.label}</Text>
+            </Box>
+          ),
+        }))
+        .filter(isPresent),
+    [options]
+  );
 
   return (
     <ChartTile
@@ -99,16 +130,27 @@ export function SewerChart({
       {(timeframe) => (
         <>
           {dataPerInstallation && (
-            <Box alignSelf="flex-start" mb={3}>
-              <Select
-                options={options}
-                onChange={onChange}
-                onClear={onClear}
-                value={selectedInstallation}
-                placeholder={text.selectPlaceholder}
+            <Box alignSelf="flex-start" mb={3} minWidth={207}>
+              <RichContentSelect
+                label={text.selectPlaceholder}
+                visuallyHiddenLabel
+                initialValue={selectedInstallation}
+                options={optionsWithContent}
+                onChange={(option) => onChange(option.value)}
               />
             </Box>
           )}
+          {scopedWarning &&
+            scopedGmName.toUpperCase() === selectedInstallation && (
+              <Box mt={2} mb={4}>
+                <WarningTile
+                  variant="emphasis"
+                  message={scopedWarning}
+                  icon={Warning}
+                  isFullWidth
+                />
+              </Box>
+            )}
 
           {
             /**

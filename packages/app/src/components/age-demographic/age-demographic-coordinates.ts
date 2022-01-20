@@ -1,7 +1,6 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
-import { ScaleBand } from 'd3-scale';
 import { MouseEvent, useMemo } from 'react';
 import {
   GetTooltipCoordinates,
@@ -17,6 +16,7 @@ export interface AgeDemographicCoordinates<
 > {
   width: number;
   height: number;
+  singleBarHeight: number;
   numTicks: number;
   xMax: number;
   yMax: number;
@@ -24,7 +24,6 @@ export interface AgeDemographicCoordinates<
   rightScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   leftPoint: (value: T) => any;
   rightPoint: (value: T) => any;
-  ageGroupRangeScale: ScaleBand<string>;
   ageGroupRangePoint: (value: T) => any;
   getTooltipCoordinates: GetTooltipCoordinates<T>;
   isSmallScreen: boolean;
@@ -91,13 +90,17 @@ function calculateAgeDemographicCoordinates<
     return b.age_group_range.localeCompare(a.age_group_range);
   });
 
+  const barCount = values.length;
+  const singleBarHeight = 25;
+
   // Define the graph dimensions and margins
   const axisWidth = isSmallScreen ? 60 : 100;
   const width = parentWidth;
 
   // Height and top margin are higher for small screens to fit the heading texts
   const isNarrowScreen = parentWidth < 400;
-  const height = isNarrowScreen ? 420 : 400;
+  // Set height height according to amount of bars in chart.
+  const height = isNarrowScreen ? 234 + (singleBarHeight * barCount) : 214 + (singleBarHeight * barCount);
   const marginX = isSmallScreen ? 10 : 40;
   const margin = {
     top: isNarrowScreen ? 55 : 35,
@@ -203,12 +206,12 @@ function calculateAgeDemographicCoordinates<
   return {
     width,
     height,
+    singleBarHeight,
     numTicks,
     xMax,
     yMax,
     leftScale,
     rightScale,
-    ageGroupRangeScale,
     leftPoint,
     rightPoint,
     ageGroupRangePoint,

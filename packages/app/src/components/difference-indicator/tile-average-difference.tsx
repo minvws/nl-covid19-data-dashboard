@@ -72,7 +72,7 @@ export function TileAverageDifference({
         }}
         content={replaceVariablesInText(content, {
           amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
-          totalAverage: old_value,
+          totalAverage: formatNumber(old_value),
         })}
       />
     </Container>

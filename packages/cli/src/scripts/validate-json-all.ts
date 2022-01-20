@@ -1,4 +1,8 @@
-import { sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
+import {
+  gmData,
+  sortTimeSeriesInDataInPlace,
+  vrData,
+} from '@corona-dashboard/common';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
@@ -34,19 +38,19 @@ const customJsonPath = customJsonPathArg
 const schemaInfo = getSchemaInfo(customJsonPath);
 
 if (!customJsonPathArg) {
-  if (schemaInfo.vr.files.length !== 25) {
+  if (schemaInfo.vr.files.length !== vrData.length) {
     console.error(
       chalk.bgRed.bold(
-        `\n Expected 25 region files, actually found ${schemaInfo.vr.files.length} \n`
+        `\n Expected ${vrData.length} region files, actually found ${schemaInfo.vr.files.length} \n`
       )
     );
     process.exit(1);
   }
 
-  if (schemaInfo.gm.files.length !== 352) {
+  if (schemaInfo.gm.files.length !== gmData.length) {
     console.error(
       chalk.bgRed.bold(
-        `\n Expected 352 municipal files, actually found ${schemaInfo.gm.files.length} \n`
+        `\n Expected ${gmData.length} municipal files, actually found ${schemaInfo.gm.files.length} \n`
       )
     );
     process.exit(1);

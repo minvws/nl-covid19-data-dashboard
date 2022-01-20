@@ -17,6 +17,7 @@ type RichContentSelectProps<T extends string> = {
   onChange: (option: Option<T>) => void;
   options: Option<T>[];
   visuallyHiddenLabel?: boolean;
+  useContentForSelectedOption?: boolean;
 };
 
 /**
@@ -29,8 +30,15 @@ type RichContentSelectProps<T extends string> = {
 export function RichContentSelect<T extends string>(
   props: RichContentSelectProps<T>
 ) {
-  const { label, options, onChange, initialValue, visuallyHiddenLabel } = props;
-  
+  const {
+    label,
+    options,
+    onChange,
+    initialValue,
+    visuallyHiddenLabel,
+    useContentForSelectedOption: richContentForSelectedValue,
+  } = props;
+
   const {
     labelId,
     selectedOption,
@@ -41,8 +49,16 @@ export function RichContentSelect<T extends string>(
 
   const { siteText } = useIntl();
 
+  const selectedOptionView =
+    isPresent(selectedOption) &&
+    (richContentForSelectedValue ? (
+      selectedOption?.content
+    ) : (
+      <Text>{selectedOption.label}</Text>
+    ));
+
   return (
-    <Box pb={3}>
+    <Box>
       {visuallyHiddenLabel ? (
         <VisuallyHidden as="label" id={labelId}>
           {typeof label === 'string' ? <InlineText>{label}</InlineText> : label}
@@ -62,16 +78,17 @@ export function RichContentSelect<T extends string>(
 
       <SelectBoxRoot>
         <SelectBox {...getComboboxProps()}>
-          {isPresent(selectedOption) && <Text>{selectedOption?.label}</Text>}
+          {selectedOptionView}
           <ArrowIcon
-            css={css({ 
-              color: 'blue', 
-              width: '1rem', 
-              '&[aria-expanded="true"]': { 
-                transform: 'rotate(180deg)'
-              } 
+            css={css({
+              color: 'blue',
+              width: '1rem',
+              '&[aria-expanded="true"]': {
+                transform: 'rotate(180deg)',
+              },
+              marginLeft: '0.5rem',
             })}
-            aria-hidden="true"
+            aria-hidden={true}
             aria-expanded={getComboboxProps()['aria-expanded']}
           />
         </SelectBox>
@@ -85,10 +102,15 @@ export function RichContentSelect<T extends string>(
               >
                 <VisuallyHidden>
                   {
-                  <InlineText>{replaceVariablesInText(siteText.aria_labels.map_select_label, {
-                    label: option.label
-                  })}</InlineText>
-                }
+                    <InlineText>
+                      {replaceVariablesInText(
+                        siteText.aria_labels.map_select_label,
+                        {
+                          label: option.label,
+                        }
+                      )}
+                    </InlineText>
+                  }
                 </VisuallyHidden>
                 <Box aria-hidden={true}>{option.content}</Box>
               </ListBoxOption>

@@ -96,7 +96,8 @@ export const getStaticProps = createGetStaticProps(
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
       'risk_level',
-      'booster_and_third_shot_administered'
+      'booster_and_third_shot_administered',
+      'booster_coverage'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -148,8 +149,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
-  const boosterCoverageEstimatedLastValue =
-    data.booster_and_third_shot_administered.last_value;
+  const boosterCoverageLastValue = data.booster_coverage?.last_value;
 
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
     data.intensive_care_nice.values,
@@ -560,7 +560,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               .booster_shots_administered_data_drive_text,
                             {
                               percentage: formatPercentage(
-                                boosterCoverageEstimatedLastValue.received_booster_percentage
+                                boosterCoverageLastValue.percentage
                               ),
                             }
                           )}
@@ -582,7 +582,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    `${boosterCoverageEstimatedLastValue.received_booster_percentage}`
+                    `${boosterCoverageLastValue.percentage}`
                   )}
                   warning={getWarning(
                     content.elements.warning,
