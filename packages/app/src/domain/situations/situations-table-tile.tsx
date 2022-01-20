@@ -10,22 +10,23 @@ import { Tile } from '~/components/tile';
 import { Heading, InlineText } from '~/components/typography';
 import { useSituations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
 interface SituationsTableTileProps {
   data: VrSituationsValue;
   metadata: MetadataProps;
+  text: SiteText['pages']['contactTracing']['shared'];
 }
 
 export function SituationsTableTile({
   metadata,
   data,
+  text,
 }: SituationsTableTileProps) {
-  const { siteText, formatDateSpan } = useIntl();
-  const text = siteText.brononderzoek.veiligheidsregio_tabel;
-
-  const situations = useSituations();
+  const { formatDateSpan } = useIntl();
+  const situations = useSituations(text.situaties);
 
   const [date_from, date_to] = formatDateSpan(
     { seconds: data.date_start_unix },
@@ -37,10 +38,13 @@ export function SituationsTableTile({
       <Heading level={3}>{text.titel}</Heading>
       <Box maxWidth="maxWidthText">
         <Markdown
-          content={replaceVariablesInText(text.beschrijving, {
-            date_from,
-            date_to,
-          })}
+          content={replaceVariablesInText(
+            text.veiligheidsregio_tabel.beschrijving,
+            {
+              date_from,
+              date_to,
+            }
+          )}
         />
       </Box>
 
@@ -48,7 +52,10 @@ export function SituationsTableTile({
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell> {text.soort_situatie}</HeaderCell>
+              <HeaderCell>
+                {' '}
+                {text.veiligheidsregio_tabel.soort_situatie}
+              </HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({
@@ -58,7 +65,7 @@ export function SituationsTableTile({
                   }),
                 })}
               >
-                {text.laatste_onderzoek}
+                {text.veiligheidsregio_tabel.laatste_onderzoek}
               </HeaderCell>
             </tr>
           </thead>
@@ -88,7 +95,7 @@ export function SituationsTableTile({
                   ) : (
                     <Box display="flex" alignSelf="center">
                       <InlineText color="data.axisLabels">
-                        {text.niet_genoeg_gegevens}
+                        {text.veiligheidsregio_tabel.niet_genoeg_gegevens}
                       </InlineText>
                     </Box>
                   )}

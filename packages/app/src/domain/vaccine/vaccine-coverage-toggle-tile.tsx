@@ -52,7 +52,7 @@ export function VaccineCoverageToggleTile({
   numFractionDigits = 0,
 }: VaccineCoverageToggleTileProps) {
   const { siteText } = useIntl();
-  const text = siteText.vaccinaties.vaccination_grade_toggle_tile;
+  const text = siteText.pages.vaccinations.nl.vaccination_grade_toggle_tile;
   const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
 
   const metadata: MetadataProps = {
@@ -213,7 +213,9 @@ function AgeGroupBlock({
       <Markdown
         content={replaceVariablesInText(description, {
           birthyear: replaceVariablesInText(
-            siteText.vaccinaties.birthyear_ranges[parsedBirthyearRange.type],
+            siteText.pages.vaccinations.nl.birthyear_ranges[
+              parsedBirthyearRange.type
+            ],
             parsedBirthyearRange
           ),
         })}

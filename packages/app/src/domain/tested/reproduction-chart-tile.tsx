@@ -9,7 +9,7 @@ import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { metricConfigs } from '~/metric-config';
 
 interface ReproductionChartTileProps {
@@ -17,6 +17,7 @@ interface ReproductionChartTileProps {
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
+  text: SiteText['pages']['reproductionIndex']['nl'];
 }
 
 export function ReproductionChartTile({
@@ -24,10 +25,8 @@ export function ReproductionChartTile({
   timeframeOptions = ['all', '5weeks'],
   timeframeInitialValue = 'all',
   timelineEvents,
+  text,
 }: ReproductionChartTileProps) {
-  const { siteText } = useIntl();
-  const text = siteText.reproductiegetal;
-
   /**
    * There is no data for the last 2 weeks so we are getting a slice
    * of all the values before the first datapoint with a null value to

@@ -2,6 +2,7 @@ import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { css, SystemStyleObject } from '@styled-system/css';
 import styled from 'styled-components';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { useIntl } from '~/intl';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from './base';
 import { Text } from './typography';
@@ -19,6 +20,7 @@ export function ChoroplethLegenda({
 }: ChoroplethLegendaProps) {
   const [itemRef, itemSize] = useResizeObserver<HTMLLIElement>();
   const [endLabelRef, endLabelSize] = useResizeObserver<HTMLSpanElement>();
+  const { formatNumber } = useIntl();
 
   return (
     <Box
@@ -33,6 +35,7 @@ export function ChoroplethLegenda({
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
           const displayLabel = (itemSize.width ?? 0) > 35 || index % 2 === 0;
+          const formattedTreshold = formatNumber(threshold);
 
           return (
             <Item
@@ -41,9 +44,9 @@ export function ChoroplethLegenda({
             >
               <LegendaColor color={color} first={isFirst} last={isLast} />
               {isFirst ? (
-                <StartLabel>{label ?? threshold}</StartLabel>
+                <StartLabel>{label ?? formattedTreshold}</StartLabel>
               ) : (
-                displayLabel && <Label>{label ?? threshold}</Label>
+                displayLabel && <Label>{label ?? formattedTreshold}</Label>
               )}
 
               {isLast && endLabel && (

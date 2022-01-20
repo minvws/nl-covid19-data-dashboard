@@ -10,7 +10,6 @@ import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
   totalBoosterAndThirdShots: number;
-  percentageBoosterAndThirdShots: number;
   metadateBoosterAndThirdShots: MetadataProps;
   boosterGgdValue: number;
   metadateBoosterGgd: MetadataProps;
@@ -22,7 +21,6 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
 
 export function VaccineBoosterAdministrationsKpiSection({
   totalBoosterAndThirdShots,
-  percentageBoosterAndThirdShots,
   metadateBoosterAndThirdShots,
   boosterGgdValue,
   metadateBoosterGgd,
@@ -31,9 +29,9 @@ export function VaccineBoosterAdministrationsKpiSection({
   thirdGgdValue,
   metadateThirdGgd,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
-  const { siteText, formatPercentage } = useIntl();
+  const { siteText } = useIntl();
 
-  const text = siteText.vaccinaties.booster_and_third_kpi;
+  const text = siteText.pages.vaccinations.nl.booster_and_third_kpi;
 
   return (
     <Tile>
@@ -47,18 +45,6 @@ export function VaccineBoosterAdministrationsKpiSection({
         <Box spacing={3}>
           <KpiValue absolute={totalBoosterAndThirdShots} />
           <Text>{text.total_booster_and_third_shots.description}</Text>
-          <Text fontWeight="bold">
-            {replaceComponentsInText(
-              text.total_booster_and_third_shots.percentage_description,
-              {
-                percentage: (
-                  <InlineText color="data.primary">
-                    {`${formatPercentage(percentageBoosterAndThirdShots)}%`}
-                  </InlineText>
-                ),
-              }
-            )}
-          </Text>
           {text.total_booster_and_third_shots.warning && (
             <Message variant="warning">
               {text.total_booster_and_third_shots.warning}

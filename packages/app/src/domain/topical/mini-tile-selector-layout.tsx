@@ -20,7 +20,7 @@ import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useCollapsible } from '~/utils/use-collapsible';
-import { Bar } from '../vaccine/vaccine-coverage-per-age-group/components/bar';
+import { Bar } from '../vaccine/components/bar';
 
 export type MiniTileSelectorItem<T extends TimestampedValue> = {
   label: string;

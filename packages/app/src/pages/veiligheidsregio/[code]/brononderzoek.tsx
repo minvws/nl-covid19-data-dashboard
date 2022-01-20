@@ -14,6 +14,7 @@ import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -30,6 +31,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectVrData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
@@ -39,6 +41,14 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textShared: siteText.pages.contactTracing.shared,
+        textChoroplethTooltips: siteText.choropleth_tooltip.patients,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData('situations'),
   async (context: GetStaticPropsContext) => {
@@ -68,17 +78,22 @@ export const getStaticProps = createGetStaticProps(
 export default function BrononderzoekPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { selectedVrData: data, lastGenerated, content, vrName } = props;
+  const {
+    pageText,
+    selectedVrData: data,
+    lastGenerated,
+    content,
+    vrName,
+  } = props;
 
   const intl = useIntl();
   const { formatNumber, formatDateSpan } = intl;
-
-  const text = intl.siteText.brononderzoek;
+  const { textShared } = pageText;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    title: textShared.metadata.title,
+    description: textShared.metadata.description,
   };
 
   const lastValue = data.situations.last_value;
@@ -101,33 +116,38 @@ export default function BrononderzoekPage(
             title={replaceVariablesInText(
               intl.siteText.common.subject_in_location,
               {
-                subject: text.titel,
+                subject: textShared.titel,
                 location: vrName,
               }
             )}
             icon={<Gedrag />}
-            description={text.pagina_toelichting}
+            description={textShared.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textShared.datums,
               dateOrRange: {
                 start: lastValue.date_start_unix,
                 end: lastValue.date_end_unix,
               },
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textShared.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textShared.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={textShared.warning}
           />
 
           <TwoKpiSection>
-            <SituationsDataCoverageTile data={lastValue} />
+            <SituationsDataCoverageTile
+              data={lastValue}
+              text={textShared.veiligheidsregio_dekking}
+            />
             {lastValue.has_sufficient_data && (
               <KpiTile
-                title={text.veiligheidsregio_kpi.titel}
+                title={textShared.veiligheidsregio_kpi.titel}
                 metadata={{
                   date: [lastValue.date_start_unix, lastValue.date_end_unix],
-                  source: text.bronnen.rivm,
+                  source: textShared.bronnen.rivm,
                 }}
               >
                 {lastValue.situations_known_percentage && (
@@ -137,7 +157,7 @@ export default function BrononderzoekPage(
                 )}
                 <Markdown
                   content={replaceVariablesInText(
-                    text.veiligheidsregio_kpi.beschrijving,
+                    textShared.veiligheidsregio_kpi.beschrijving,
                     {
                       date_to,
                       date_from,
@@ -147,7 +167,7 @@ export default function BrononderzoekPage(
 
                 <Text fontWeight="bold">
                   {replaceComponentsInText(
-                    text.veiligheidsregio_kpi.beschrijving_bekend,
+                    textShared.veiligheidsregio_kpi.beschrijving_bekend,
                     {
                       situations_known_total: (
                         <InlineText color="data.primary">
@@ -170,15 +190,16 @@ export default function BrononderzoekPage(
             data={lastValue}
             metadata={{
               date: [lastValue.date_start_unix, lastValue.date_end_unix],
-              source: text.bronnen.rivm,
+              source: textShared.bronnen.rivm,
             }}
+            text={textShared}
           />
 
           {values && (
             <ChartTile
-              title={text.situaties_over_tijd_grafiek.titel}
-              description={text.situaties_over_tijd_grafiek.omschrijving}
-              metadata={{ source: text.bronnen.rivm }}
+              title={textShared.situaties_over_tijd_grafiek.titel}
+              description={textShared.situaties_over_tijd_grafiek.omschrijving}
+              metadata={{ source: textShared.bronnen.rivm }}
             >
               <SituationsOverTimeChart
                 timeframe={'all'}
@@ -187,6 +208,7 @@ export default function BrononderzoekPage(
                   content.elements.timeSeries,
                   'situations'
                 )}
+                text={textShared}
               />
             </ChartTile>
           )}

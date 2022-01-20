@@ -269,6 +269,7 @@ export interface Nl {
   booster_shot_delivered: NlBoosterShotDelivered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
+  booster_coverage: NlBoosterCoverage;
   third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;
@@ -371,7 +372,8 @@ export interface NlBoosterShotAdministeredValue {
   ggd_administered_last_7_days: number;
   ggd_administered_total: number;
   others_administered_total: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBoosterAndThirdShotAdministered {
@@ -380,7 +382,6 @@ export interface NlBoosterAndThirdShotAdministered {
 }
 export interface NlBoosterAndThirdShotAdministeredValue {
   administered_total: number;
-  received_booster_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -410,9 +411,18 @@ export interface NlBoosterShotPerAgeGroupValue {
   received_booster_total: number;
   received_booster_percentage: number;
   date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   birthyear_range: string;
+  age_group_total: number;
+}
+export interface NlBoosterCoverage {
+  values: NlBoosterCoverageValue[];
+  last_value: NlBoosterCoverageValue;
+}
+export interface NlBoosterCoverageValue {
+  percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlThirdShotAdministered {
   values: NlThirdShotAdministeredValue[];
@@ -729,6 +739,8 @@ export interface NlBehaviorValue {
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
   ventilate_home_compliance: number | null;
   ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
+  selftest_visit_compliance: number | null;
+  selftest_visit_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -753,6 +765,8 @@ export interface NlBehaviorValue {
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
   ventilate_home_support: number | null;
   ventilate_home_support_trend: ("up" | "down" | "equal") | null;
+  selftest_visit_support: number | null;
+  selftest_visit_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -768,6 +782,8 @@ export interface NlBehaviorPerAgeGroup {
   work_from_home_support: NlBehaviorPerAgeGroupValue;
   ventilate_home_compliance: NlBehaviorPerAgeGroupValue;
   ventilate_home_support: NlBehaviorPerAgeGroupValue;
+  selftest_visit_compliance: NlBehaviorPerAgeGroupValue;
+  selftest_visit_support: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -879,6 +895,7 @@ export interface NlVaccineCoverage {
   last_value: NlVaccineCoverageValue;
 }
 export interface NlVaccineCoverageValue {
+  booster_vaccinated: number;
   partially_vaccinated: number;
   fully_vaccinated: number;
   partially_or_fully_vaccinated: number;
@@ -1281,6 +1298,8 @@ export interface VrBehaviorValue {
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
   ventilate_home_compliance: number | null;
   ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
+  selftest_visit_compliance: number | null;
+  selftest_visit_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
@@ -1299,6 +1318,8 @@ export interface VrBehaviorValue {
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
   ventilate_home_support: number | null;
   ventilate_home_support_trend: ("up" | "down" | "equal") | null;
+  selftest_visit_support: number | null;
+  selftest_visit_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

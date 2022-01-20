@@ -158,6 +158,8 @@ export const VaccinationsGmPage = (
             pageLinks={content.links}
             referenceLink={text.informatie_blok.reference.href}
             articles={content.articles}
+            vrNameOrGmName={municipalityName}
+            warning={text.warning}
           />
 
           <VaccineCoverageToggleTile
@@ -202,15 +204,16 @@ export const VaccinationsGmPage = (
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.vaccinaties.choropleth_vaccination_coverage.gm.title,
+              siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.gm
+                .title,
               { municipalityName: municipalityName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.vaccinaties.choropleth_vaccination_coverage.gm
-                      .description,
+                    siteText.pages.vaccinations.nl
+                      .choropleth_vaccination_coverage.gm.description,
                     { municipalityName: municipalityName }
                   )}
                 />
@@ -223,11 +226,13 @@ export const VaccinationsGmPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.vaccinaties.choropleth_vaccination_coverage.shared
-                  .legend_title,
+                siteText.pages.vaccinations.nl.choropleth_vaccination_coverage
+                  .shared.legend_title,
             }}
             metadata={{
-              source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+              source:
+                siteText.pages.vaccinations.nl.vaccination_coverage.bronnen
+                  .rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
           >
@@ -246,7 +251,8 @@ export const VaccinationsGmPage = (
                 highlightSelection: true,
                 selectedCode: data.code,
                 tooltipVariables: {
-                  age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+                  age_group:
+                    siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (
