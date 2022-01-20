@@ -557,7 +557,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             totalBoosterAndThirdShots={
               boosterCoverageEstimatedLastValue.administered_total
             }
-            percentageBoosterAndThirdShots={boosterCoverageLastValue.percentage}
             metadateBoosterAndThirdShots={{
               datumsText: textNl.booster_and_third_kpi.datums,
               date: boosterCoverageEstimatedLastValue.date_unix,
