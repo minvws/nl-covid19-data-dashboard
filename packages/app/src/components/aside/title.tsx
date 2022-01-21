@@ -42,11 +42,7 @@ export function AsideTitle(props: TitleProps) {
           >
             {title}
             {showArrow && (
-              <Chevron
-                width={10}
-                height={14}
-                css={css({ mr: 2, color: 'blue' })}
-              />
+              <Chevron width={10} height={14} css={css({ color: 'blue' })} />
             )}
           </span>
         </Text>
