@@ -162,8 +162,10 @@ export function BehaviorTableTile({
           </tbody>
         </StyledTable>
       </Box>
-      <Box maxWidth="maxWidthText">
-        <Text color="annotation">{annotation}</Text>
+      <Box mt={2} maxWidth="maxWidthText">
+        <Text variant="label1" color="annotation">
+          {annotation}
+        </Text>
       </Box>
     </ChartTile>
   );
