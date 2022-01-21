@@ -270,7 +270,11 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
       </svg>
 
       {hasClippedValue && (
-        <Text color="gray">* {text.clipped_value_message}</Text>
+        <Box mt={2}>
+          <Text variant="label1" color="annotation">
+            {text.clipped_value_message}
+          </Text>
+        </Box>
       )}
     </Box>
   );
