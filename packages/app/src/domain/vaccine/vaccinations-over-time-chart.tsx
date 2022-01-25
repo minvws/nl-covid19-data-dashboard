@@ -20,7 +20,6 @@ import {
   StackedAreaSeriesDefinition,
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
