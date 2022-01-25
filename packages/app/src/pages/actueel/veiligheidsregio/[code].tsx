@@ -139,9 +139,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-  const testedOverallTopicalPageFeature = useFeature(
-    'vrTestedOverallTopicalPage'
-  );
 
   const metadata = {
     title: replaceVariablesInText(text.metadata.title, {
@@ -210,22 +207,20 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<VrHospitalNiceValue>,
-                  testedOverallTopicalPageFeature.isEnabled
-                    ? ({
-                        label:
-                          siteText.veiligheidsregio_actueel.mini_trend_tiles
-                            .positief_geteste_mensen.menu_item_label,
-                        data: data.tested_overall.values,
-                        dataProperty: 'infected_moving_average_rounded',
-                        value:
-                          data.tested_overall.last_value
-                            .infected_moving_average_rounded,
-                        warning: getWarning(
-                          content.elements.warning,
-                          'tested_overall'
-                        ),
-                      } as MiniTileSelectorItem<VrTestedOverallValue>)
-                    : (undefined as any),
+                  {
+                    label:
+                      siteText.veiligheidsregio_actueel.mini_trend_tiles
+                        .positief_geteste_mensen.menu_item_label,
+                    data: data.tested_overall.values,
+                    dataProperty: 'infected_moving_average_rounded',
+                    value:
+                      data.tested_overall.last_value
+                        .infected_moving_average_rounded,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'tested_overall'
+                    ),
+                  } as MiniTileSelectorItem<VrTestedOverallValue>,
                   {
                     label:
                       siteText.veiligheidsregio_actueel.mini_trend_tiles
@@ -329,7 +324,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   )}
                 />
 
-                {testedOverallTopicalPageFeature.isEnabled && (
+                {
                   <MiniTrendTile
                     title={text.mini_trend_tiles.positief_geteste_mensen.title}
                     text={
@@ -402,7 +397,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       'tested_overall'
                     )}
                   />
-                )}
+                }
 
                 {isDefined(filteredAgeGroup18Plus) && (
                   <MiniVaccinationCoverageTile
