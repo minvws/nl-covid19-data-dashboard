@@ -84,11 +84,10 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     dataOptions.selectedCode
   );
 
-  const getFillColor = useFillColor(data, map, thresholdMap, dataConfig);
+  const getFillColor = useFillColor(data, map, dataConfig, thresholdMap);
 
   const featureProps = useFeatureProps(
     map,
-    thresholdMap,
     getFillColor,
     dataOptions,
     dataConfig
