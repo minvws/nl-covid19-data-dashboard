@@ -42,6 +42,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     dataConfig: partialDataConfig,
     dataOptions,
     map,
+    thresholdMap = map,
     minHeight = 500,
     boundingBoxPadding = {},
     setTooltip,
@@ -83,7 +84,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     dataOptions.selectedCode
   );
 
-  const getFillColor = useFillColor(data, map, dataConfig);
+  const getFillColor = useFillColor(data, map, dataConfig, thresholdMap);
 
   const featureProps = useFeatureProps(
     map,
