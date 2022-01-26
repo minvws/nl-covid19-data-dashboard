@@ -151,9 +151,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-  const testedOverallTopicalPageFeature = useFeature(
-    'gmTestedOverallTopicalPage'
-  );
 
   const dataSitemap = useDataSitemap('gm', gmCode, data);
 
@@ -221,22 +218,20 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<GmHospitalNiceValue>,
-                  testedOverallTopicalPageFeature.isEnabled
-                    ? ({
-                        label:
-                          siteText.gemeente_actueel.mini_trend_tiles
-                            .positief_geteste_mensen.menu_item_label,
-                        data: data.tested_overall.values,
-                        dataProperty: 'infected_moving_average_rounded',
-                        value:
-                          data.tested_overall.last_value
-                            .infected_moving_average_rounded,
-                        warning: getWarning(
-                          content.elements.warning,
-                          'tested_overall'
-                        ),
-                      } as MiniTileSelectorItem<GmTestedOverallValue>)
-                    : (undefined as any),
+                  {
+                    label:
+                      siteText.gemeente_actueel.mini_trend_tiles
+                        .positief_geteste_mensen.menu_item_label,
+                    data: data.tested_overall.values,
+                    dataProperty: 'infected_moving_average_rounded',
+                    value:
+                      data.tested_overall.last_value
+                        .infected_moving_average_rounded,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'tested_overall'
+                    ),
+                  } as MiniTileSelectorItem<GmTestedOverallValue>,
                   {
                     label:
                       siteText.gemeente_actueel.mini_trend_tiles.vaccinatiegraad
@@ -340,7 +335,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   )}
                 />
 
-                {testedOverallTopicalPageFeature.isEnabled && (
+                {
                   <MiniTrendTile
                     title={text.mini_trend_tiles.positief_geteste_mensen.title}
                     text={
@@ -405,7 +400,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       'tested_overall'
                     )}
                   />
-                )}
+                }
 
                 {isDefined(filteredAgeGroup18Plus) && (
                   <MiniVaccinationCoverageTile

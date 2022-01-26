@@ -20,7 +20,6 @@ import {
   StackedAreaSeriesDefinition,
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
@@ -58,10 +57,6 @@ export function VaccinationsOverTimeChart(
   const vaccineNames = useMemo(
     () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
     [firstValue]
-  );
-
-  const vaccinationCoverageBoosterVaccinated = useFeature(
-    'nlVaccinationCoverageBoosterVaccinated'
   );
 
   const coverageChartConfiguration:
@@ -114,7 +109,7 @@ export function VaccinationsOverTimeChart(
               mixBlendMode: 'multiply',
               fillOpacity: 1,
             },
-            vaccinationCoverageBoosterVaccinated.isEnabled && {
+            {
               label:
                 text.grafiek_gevaccineerd_door_de_tijd_heen
                   .label_booster_vaccinated,
@@ -145,7 +140,6 @@ export function VaccinationsOverTimeChart(
     text.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
     text.grafiek_gevaccineerd_door_de_tijd_heen
       .tooltip_label_booster_vaccinated,
-    vaccinationCoverageBoosterVaccinated.isEnabled,
     timelineEvents.coverage,
     breakpoints,
   ]);
