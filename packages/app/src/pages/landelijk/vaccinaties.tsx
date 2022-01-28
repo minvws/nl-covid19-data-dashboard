@@ -5,7 +5,6 @@ import {
 } from '@corona-dashboard/common';
 import {
   Arts,
-  VaccineBoosterThird as BoosterIcon,
   Vaccinaties as VaccinatieIcon,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
@@ -29,7 +28,6 @@ import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
-import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
 import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
@@ -196,16 +194,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const reverseRouter = useReverseRouter();
 
-  const vaccineAdministeredGgdFeature = useFeature('nlVaccineAdministeredGgd');
-  const vaccineAdministeredHospitalsAndCareInstitutionsFeature = useFeature(
-    'nlVaccineAdministeredHospitalsAndCareInstitutions'
-  );
-  const vaccineAdministeredDoctorsFeature = useFeature(
-    'nlVaccineAdministeredDoctors'
-  );
-  const vaccineAdministeredGgdGhorFeature = useFeature(
-    'nlVaccineAdministeredGgdGhor'
-  );
   const vaccinationsIncidencePerAgeGroupFeature = useFeature(
     'nlVaccinationsIncidencePerAgeGroup'
   );
@@ -237,9 +225,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const boosterShotPlannedLastValue = data.booster_shot_planned.last_value;
 
   const boosterCoverageLastValue = data.booster_coverage?.last_value;
-
-  const thirdShotAdministeredLastValue =
-    data.third_shot_administered.last_value;
 
   const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
@@ -520,39 +505,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          {vaccineAdministeredGgdFeature.isEnabled &&
-            vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
-            vaccineAdministeredDoctorsFeature.isEnabled &&
-            vaccineAdministeredGgdGhorFeature.isEnabled && (
-              <VaccineAdministrationsKpiSection data={data} />
-            )}
-          <Box
-            pt={40}
-            borderTopWidth={2}
-            borderColor="silver"
-            borderStyle="solid"
-          >
-            <PageInformationBlock
-              icon={<BoosterIcon />}
-              title={textNl.booster_information_block.title}
-              description={textNl.booster_information_block.description}
-              metadata={{
-                datumsText: textNl.booster_information_block.datums,
-                dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
-                dateOfInsertionUnix:
-                  boosterCoverageEstimatedLastValue.date_of_insertion_unix,
-                dataSources: [
-                  {
-                    href: '',
-                    text: textNl.booster_information_block.sources.text,
-                    download: '',
-                  },
-                ],
-              }}
-              referenceLink={textNl.booster_information_block.reference.href}
-            />
-          </Box>
-
           <VaccineBoosterAdministrationsKpiSection
             totalBoosterAndThirdShots={
               boosterCoverageEstimatedLastValue.administered_total
@@ -582,15 +534,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadateBoosterEstimated={{
               datumsText: textNl.booster_and_third_kpi.datums,
               date: boosterShotAdministeredLastValue.date_end_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-            thirdGgdValue={thirdShotAdministeredLastValue.administered_total}
-            metadateThirdGgd={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: thirdShotAdministeredLastValue.date_unix,
               source: {
                 href: textNl.booster_and_third_kpi.sources.href,
                 text: textNl.booster_and_third_kpi.sources.text,
