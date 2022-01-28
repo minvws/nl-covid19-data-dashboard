@@ -226,7 +226,7 @@ function AgeGroupBlock({
               ],
               parsedBirthyearRange
             ),
-            percentage: formatCoveragePercentage(data, property),
+            percentage: formatCoveragePercentage(data, secondProperty),
           })}
         />
       }
