@@ -50,7 +50,7 @@ export function VaccinationsOverTimeChart(
     timelineEvents,
   } = props;
   const { siteText, formatNumber } = useIntl();
-  const text = siteText.pages.vaccinations.nl;
+  const text = siteText.pages.vaccinationsPage.nl;
   const breakpoints = useBreakpoints(true);
 
   const firstValue = first(deliveryAndAdministrationData.values);

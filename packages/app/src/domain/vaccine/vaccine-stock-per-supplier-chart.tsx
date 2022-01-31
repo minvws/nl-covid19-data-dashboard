@@ -26,10 +26,10 @@ export function VaccineStockPerSupplierChart({
   values,
 }: VaccineStockPerSupplierChartProps) {
   const { siteText } = useIntl();
-  const text = siteText.pages.vaccinations.nl.stock_per_supplier_chart;
+  const text = siteText.pages.vaccinationsPage.nl.stock_per_supplier_chart;
 
   const productNames =
-    siteText.pages.vaccinations.nl.data.vaccination_chart.product_names;
+    siteText.pages.vaccinationsPage.nl.data.vaccination_chart.product_names;
 
   const today = useCurrentDate();
   const maximumValuesPerTimeframeOption = useMemo(
@@ -102,7 +102,7 @@ export function VaccineStockPerSupplierChart({
       title={text.title}
       description={text.description}
       metadata={{
-        source: siteText.pages.vaccinations.nl.bronnen.rivm,
+        source: siteText.pages.vaccinationsPage.nl.bronnen.rivm,
       }}
     >
       <InteractiveLegend
