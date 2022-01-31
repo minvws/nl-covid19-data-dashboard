@@ -278,7 +278,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
-          {vaccineCoverageToggleTileFeature ? 
+          {vaccineCoverageToggleTileFeature.isEnabled ? 
             <VaccineCoverageToggleTileWithFirstShot
               title={textNl.vaccination_grade_toggle_tile.title}
               source={textNl.vaccination_grade_toggle_tile.source}

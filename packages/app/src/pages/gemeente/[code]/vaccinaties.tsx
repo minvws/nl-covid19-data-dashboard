@@ -168,7 +168,7 @@ export const VaccinationsGmPage = (
             warning={text.warning}
           />
 
-          { vaccineCoverageToggleTileFeature ? 
+          { vaccineCoverageToggleTileFeature.isEnabled ? 
             <VaccineCoverageToggleTileWithFirstShot
               title={text.vaccination_grade_toggle_tile.title}
               source={text.vaccination_grade_toggle_tile.source}
