@@ -701,3 +701,8 @@ timestamp,action,key,document_id,move_to
 2022-01-17T12:51:35.204Z,add,gedrag_onderwerpen.selftest_visit,vHg89fMiqzdfppYsojOzkK,__
 2022-01-17T20:07:50.063Z,add,pages.vaccinations.nl.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,mXd8VX04HWmWwlRai3ckYb,__
 2022-01-17T20:07:51.120Z,add,pages.vaccinations.nl.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_booster_vaccinated,mXd8VX04HWmWwlRai3ckjR,__
+2022-01-28T16:11:25.208Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_12_plus.booster_date_interval,7j6KOQJkyGufOfrd56r6zo,__
+2022-01-28T16:11:26.235Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_12_plus.description_booster_grade_not_available,7j6KOQJkyGufOfrd56r78Z,__
+2022-01-28T16:11:27.162Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_12_plus.description_vaccination_one_shot_with_percentage,dEVJPM3ZTb5nede2drFRV6,__
+2022-01-28T16:11:28.182Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_18_plus.description_booster_grade_not_available,4RQC5Uo7Milcl0woBPcA6t,__
+2022-01-28T16:11:29.308Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_18_plus.description_vaccination_one_shot_with_percentage,dEVJPM3ZTb5nede2drFRej,__
