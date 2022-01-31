@@ -33,6 +33,7 @@ import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-boo
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
+import { VaccineCoverageToggleTileWithFirstShot } from '~/domain/vaccine/vaccine-coverage-toggle-tile-with-first-shot';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
@@ -206,6 +207,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
+  const vaccineCoverageToggleTileFeature = useFeature(
+    'vaccineCoverageToggleTile'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -274,7 +278,37 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
-          <VaccineCoverageToggleTile
+          {vaccineCoverageToggleTileFeature ? 
+            <VaccineCoverageToggleTileWithFirstShot
+              title={textNl.vaccination_grade_toggle_tile.title}
+              source={textNl.vaccination_grade_toggle_tile.source}
+              descriptionFooter={
+                textNl.vaccination_grade_toggle_tile.description_footer
+              }
+              dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
+              dateUnixBoostered={boosterCoverageEstimatedLastValue.date_unix}
+              age18Plus={{
+                fully_vaccinated:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
+                has_one_shot:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+                boostered: formatPercentageAsNumber(
+                  `${boosterCoverageLastValue.percentage}`
+                ),
+                birthyear:
+                  vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
+              }}
+              age12Plus={{
+                fully_vaccinated:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
+                has_one_shot:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+                birthyear:
+                  vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
+              }}
+              numFractionDigits={1}
+            />
+          : <VaccineCoverageToggleTile
             title={textNl.vaccination_grade_toggle_tile.title}
             source={textNl.vaccination_grade_toggle_tile.source}
             descriptionFooter={
@@ -302,7 +336,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
             }}
             numFractionDigits={1}
-          />
+          /> }
           <VaccineCoveragePerAgeGroup
             title={textNl.vaccination_coverage.title}
             description={textNl.vaccination_coverage.toelichting}
