@@ -12,7 +12,7 @@ export function DeceasedMonitorSection({
   showCauseMessage,
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
-  text: SiteText['pages']['deceased']['shared']['section_sterftemonitor'];
+  text: SiteText['pages']['deceasedPage']['shared']['section_sterftemonitor'];
   showDataMessage?: boolean;
   showCauseMessage?: boolean;
 }) {
