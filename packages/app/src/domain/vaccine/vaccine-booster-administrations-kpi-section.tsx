@@ -15,8 +15,6 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   metadateBoosterGgd: MetadataProps;
   boosterEstimatedValue: number;
   metadateBoosterEstimated: MetadataProps;
-  thirdGgdValue: number;
-  metadateThirdGgd: MetadataProps;
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -26,8 +24,6 @@ export function VaccineBoosterAdministrationsKpiSection({
   metadateBoosterGgd,
   boosterEstimatedValue,
   metadateBoosterEstimated,
-  thirdGgdValue,
-  metadateThirdGgd,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
   const { siteText } = useIntl();
 
@@ -62,11 +58,6 @@ export function VaccineBoosterAdministrationsKpiSection({
             value={boosterEstimatedValue}
             description={text.booster_estimated.title}
             metadata={metadateBoosterEstimated}
-          />
-          <BoosterAdministeredItem
-            value={thirdGgdValue}
-            description={text.third_ggd.title}
-            metadata={metadateThirdGgd}
           />
         </Box>
       </TwoKpiSection>

@@ -86,20 +86,34 @@ export function VaccineCoverageToggleTile({
       <TwoKpiSection spacing={5}>
         {selectedTab === text.age_18_plus.label && (
           <>
-            <AgeGroupBlock
-              title={text.top_labels.one_shot}
-              data={age18Plus}
-              property="has_one_shot"
-              description={text.age_18_plus.description_vaccination_one_shot}
-              numFractionDigits={numFractionDigits}
-            >
-              {metadata && <Metadata {...metadata} isTileFooter />}
-            </AgeGroupBlock>
+            {age18Plus.boostered ?
+              <AgeGroupBlock
+                title={text.top_labels.booster_grade}
+                data={age18Plus}
+                property="boostered"
+                description={text.age_18_plus.description_booster_grade}
+                numFractionDigits={numFractionDigits}
+              >
+                {metadataBooster && (
+                  <Metadata
+                    {...metadataBooster}
+                    intervalCount={text.age_18_plus.booster_date_interval}
+                    isTileFooter
+                  />
+                )}
+              </AgeGroupBlock>
+            : <NoBoosterBlock
+                title={text.top_labels.booster_grade}
+                description={text.age_18_plus.description_booster_grade_not_available}
+              />
+            }
             <AgeGroupBlock
               title={text.top_labels.vaccination_grade}
               data={age18Plus}
               property="fully_vaccinated"
+              secondProperty="has_one_shot"
               description={text.age_18_plus.description_vaccination_grade}
+              secondDescription={text.age_18_plus.description_vaccination_one_shot}
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
@@ -108,20 +122,34 @@ export function VaccineCoverageToggleTile({
         )}
         {selectedTab === text.age_12_plus.label && (
           <>
-            <AgeGroupBlock
-              title={text.top_labels.one_shot}
-              data={age12Plus}
-              property="has_one_shot"
-              description={text.age_12_plus.description_vaccination_one_shot}
-              numFractionDigits={numFractionDigits}
-            >
-              {metadata && <Metadata {...metadata} isTileFooter />}
-            </AgeGroupBlock>
+            {age12Plus.boostered ?
+              <AgeGroupBlock
+                title={text.top_labels.booster_grade}
+                data={age12Plus}
+                property="boostered"
+                description={text.age_12_plus.description_booster_grade}
+                numFractionDigits={numFractionDigits}
+              >
+                {metadataBooster && (
+                  <Metadata
+                    {...metadataBooster}
+                    intervalCount={text.age_12_plus.booster_date_interval}
+                    isTileFooter
+                  />
+                )}
+              </AgeGroupBlock>
+            : <NoBoosterBlock
+                title={text.top_labels.booster_grade}
+                description={text.age_12_plus.description_booster_grade_not_available}
+              />
+            }
             <AgeGroupBlock
               title={text.top_labels.vaccination_grade}
               data={age12Plus}
               property="fully_vaccinated"
+              secondProperty="has_one_shot"
               description={text.age_12_plus.description_vaccination_grade}
+              secondDescription={text.age_12_plus.description_vaccination_one_shot}
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
@@ -129,41 +157,6 @@ export function VaccineCoverageToggleTile({
           </>
         )}
       </TwoKpiSection>
-      {age18Plus.boostered && (
-        <Box mt={56}>
-          <TwoKpiSection spacing={5}>
-            {selectedTab === text.age_18_plus.label && dateUnixBoostered && (
-              <>
-                <AgeGroupBlock
-                  title={text.top_labels.booster_grade}
-                  data={age18Plus}
-                  property="boostered"
-                  description={text.age_18_plus.description_booster_grade}
-                  numFractionDigits={numFractionDigits}
-                >
-                  {metadataBooster && (
-                    <Metadata
-                      {...metadataBooster}
-                      intervalCount={text.age_18_plus.booster_date_interval}
-                      isTileFooter
-                    />
-                  )}
-                </AgeGroupBlock>
-                <Box />
-              </>
-            )}
-            {selectedTab === text.age_12_plus.label && (
-              <>
-                <NoBoosterBlock
-                  title={text.top_labels.booster_grade}
-                  description={text.age_12_plus.description_booster_grade}
-                />
-                <Box />
-              </>
-            )}
-          </TwoKpiSection>
-        </Box>
-      )}
       <Box maxWidth="maxWidthText" mt={36}>
         <Markdown content={descriptionFooter} />
       </Box>
@@ -175,7 +168,9 @@ interface AgeGroupBlockProps {
   title: string;
   data: AgeTypes;
   property: KeyWithLabel<AgeTypes>;
+  secondProperty?: KeyWithLabel<AgeTypes>;
   description: string;
+  secondDescription?: string,
   numFractionDigits?: number;
   children?: React.ReactNode;
 }
@@ -184,7 +179,9 @@ function AgeGroupBlock({
   title,
   data,
   property,
+  secondProperty,
   description,
+  secondDescription,
   numFractionDigits,
   children,
 }: AgeGroupBlockProps) {
@@ -220,6 +217,19 @@ function AgeGroupBlock({
           ),
         })}
       />
+      {secondDescription && secondProperty &&
+        <Markdown
+          content={replaceVariablesInText(secondDescription, {
+            birthyear: replaceVariablesInText(
+              siteText.pages.vaccinations.nl.birthyear_ranges[
+                parsedBirthyearRange.type
+              ],
+              parsedBirthyearRange
+            ),
+            percentage: formatCoveragePercentage(data, secondProperty),
+          })}
+        />
+      }
       {children}
     </Box>
   );
