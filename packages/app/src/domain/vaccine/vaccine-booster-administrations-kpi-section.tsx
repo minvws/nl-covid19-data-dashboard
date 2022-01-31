@@ -27,7 +27,7 @@ export function VaccineBoosterAdministrationsKpiSection({
 }: VaccineBoosterAdministrationsKpiSectionProps) {
   const { siteText } = useIntl();
 
-  const text = siteText.pages.vaccinations.nl.booster_and_third_kpi;
+  const text = siteText.pages.vaccinationsPage.nl.booster_and_third_kpi;
 
   return (
     <Tile>

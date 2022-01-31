@@ -29,8 +29,8 @@ interface WideCoverageTable {
 export function WideCoverageTable({ values }: WideCoverageTable) {
   const { siteText, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.pages.vaccinations.nl.vaccination_coverage;
-  const { templates } = siteText.pages.vaccinations.nl.vaccination_coverage;
+  const text = siteText.pages.vaccinationsPage.nl.vaccination_coverage;
+  const { templates } = siteText.pages.vaccinationsPage.nl.vaccination_coverage;
 
   return (
     <Box overflow="auto">

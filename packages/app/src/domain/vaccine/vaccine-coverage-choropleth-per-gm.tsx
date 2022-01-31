@@ -51,7 +51,7 @@ export function VaccineCoverageChoroplethPerGm({
 
   const variables = {
     regio:
-      siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.shared[
+      siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage.shared[
         selectedMap
       ],
   };
@@ -59,15 +59,16 @@ export function VaccineCoverageChoroplethPerGm({
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.nl.title,
+        siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage.nl
+          .title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.nl
-                .description,
+              siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
+                .nl.description,
               variables
             )}
           />
@@ -87,8 +88,8 @@ export function VaccineCoverageChoroplethPerGm({
               })}
             >
               {
-                siteText.pages.vaccinations.nl.choropleth_vaccination_coverage
-                  .shared.dropdowns_title
+                siteText.pages.vaccinationsPage.nl
+                  .choropleth_vaccination_coverage.shared.dropdowns_title
               }
             </Text>
 
@@ -116,12 +117,12 @@ export function VaccineCoverageChoroplethPerGm({
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
         title:
-          siteText.pages.vaccinations.nl.choropleth_vaccination_coverage.shared
-            .legend_title,
+          siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
+            .shared.legend_title,
       }}
       metadata={{
         source:
-          siteText.pages.vaccinations.nl.vaccination_coverage.bronnen.rivm,
+          siteText.pages.vaccinationsPage.nl.vaccination_coverage.bronnen.rivm,
         date: data[selectedMap][0].date_unix,
       }}
       chartRegion={selectedMap}
@@ -143,7 +144,7 @@ export function VaccineCoverageChoroplethPerGm({
             getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
             tooltipVariables: {
               age_group:
-                siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
+                siteText.pages.vaccinationsPage.nl.age_groups[selectedAgeGroup],
             },
           }}
           formatTooltip={(context) => (
@@ -174,7 +175,7 @@ export function VaccineCoverageChoroplethPerGm({
             getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
             tooltipVariables: {
               age_group:
-                siteText.pages.vaccinations.nl.age_groups[selectedAgeGroup],
+                siteText.pages.vaccinationsPage.nl.age_groups[selectedAgeGroup],
             },
           }}
           formatTooltip={(context) => (
