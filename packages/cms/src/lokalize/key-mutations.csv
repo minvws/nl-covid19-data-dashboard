@@ -701,7 +701,6 @@ timestamp,action,key,document_id,move_to
 2022-01-17T12:51:35.204Z,add,gedrag_onderwerpen.selftest_visit,vHg89fMiqzdfppYsojOzkK,__
 2022-01-17T20:07:50.063Z,add,pages.vaccinations.nl.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,mXd8VX04HWmWwlRai3ckYb,__
 2022-01-17T20:07:51.120Z,add,pages.vaccinations.nl.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_booster_vaccinated,mXd8VX04HWmWwlRai3ckjR,__
-<<<<<<< HEAD
 2022-01-31T10:43:36.039Z,move,pages.deceased.gm.kpi_titel,jF33EuwumlGuwav2FD4HSW,pages.deceasedPage.gm.kpi_titel
 2022-01-31T10:43:36.040Z,move,pages.deceased.gm.metadata.description,jF33EuwumlGuwav2FD4Guy,pages.deceasedPage.gm.metadata.description
 2022-01-31T10:43:36.041Z,move,pages.deceased.gm.metadata.title,jF33EuwumlGuwav2FD4GtI,pages.deceasedPage.gm.metadata.title
@@ -809,13 +808,11 @@ timestamp,action,key,document_id,move_to
 2022-01-31T10:43:36.052Z,move,pages.deceased.vr.section_sterftemonitor.title,jF33EuwumlGuwav2FD4ISa,pages.deceasedPage.vr.section_sterftemonitor.title
 2022-01-31T10:43:36.052Z,move,pages.deceased.vr.titel_kpi,jF33EuwumlGuwav2FD41Po,pages.deceasedPage.vr.titel_kpi
 2022-01-31T10:43:36.053Z,move,pages.deceased.vr.warning,i93JRHeRUDvH5qV1yv8rXG,pages.deceasedPage.vr.warning
-=======
 2022-01-28T16:11:25.208Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_12_plus.booster_date_interval,7j6KOQJkyGufOfrd56r6zo,__
 2022-01-28T16:11:26.235Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_12_plus.description_booster_grade_not_available,7j6KOQJkyGufOfrd56r78Z,__
 2022-01-28T16:11:27.162Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_12_plus.description_vaccination_one_shot_with_percentage,dEVJPM3ZTb5nede2drFRV6,__
 2022-01-28T16:11:28.182Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_18_plus.description_booster_grade_not_available,4RQC5Uo7Milcl0woBPcA6t,__
 2022-01-28T16:11:29.308Z,add,pages.vaccinations.nl.vaccination_grade_toggle_tile.age_18_plus.description_vaccination_one_shot_with_percentage,dEVJPM3ZTb5nede2drFRej,__
->>>>>>> develop
 2022-01-31T13:00:52.066Z,move,pages.contactTracing.shared.bronnen.rivm.download,4IMVphhWjPcsfUKN0EVEXi,pages.situationsPage.shared.bronnen.rivm.download
 2022-01-31T13:00:52.067Z,move,pages.contactTracing.shared.bronnen.rivm.href,CKPlHi4fNCjhqsan4TBhIQ,pages.situationsPage.shared.bronnen.rivm.href
 2022-01-31T13:00:52.067Z,move,pages.contactTracing.shared.bronnen.rivm.text,4IMVphhWjPcsfUKN0EVFBC,pages.situationsPage.shared.bronnen.rivm.text
