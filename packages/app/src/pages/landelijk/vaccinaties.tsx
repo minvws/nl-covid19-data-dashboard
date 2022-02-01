@@ -72,7 +72,6 @@ import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 import { BoosterShotCoveragePerAgeGroup } from '~/domain/vaccine/booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
-import { Divider } from '~/components/divider';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
