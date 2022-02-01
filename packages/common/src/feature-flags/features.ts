@@ -164,6 +164,6 @@ export const features: Feature[] = [
    */
   {
     name: 'vaccineCoverageToggleTile',
-    isEnabled: true,
+    isEnabled: false,
   },
 ];
