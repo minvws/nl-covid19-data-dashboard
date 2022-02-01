@@ -92,7 +92,7 @@ export function VaccineCoverageToggleTile({
         {selectedTab === text.age_18_plus.label && (
           vaccineCoverageToggleTileFeature ? (
             <>
-              {(age18Plus.boostered ? (
+              {age18Plus.boostered ? (
                 <AgeGroupBlock
                   title={text.top_labels.booster_grade}
                   data={age18Plus}
@@ -115,18 +115,18 @@ export function VaccineCoverageToggleTile({
                     text.age_18_plus.description_booster_grade_not_available
                   }
                 />
-              )) && <AgeGroupBlock
-                  title={text.top_labels.vaccination_grade}
-                  data={age18Plus}
-                  property="fully_vaccinated"
-                  secondProperty="has_one_shot"
-                  description={text.age_18_plus.description_vaccination_grade}
-                  secondDescription={text.age_18_plus.description_vaccination_one_shot_with_percentage}
-                  numFractionDigits={numFractionDigits}
-                >
-                  {metadata && <Metadata {...metadata} isTileFooter />}
-                </AgeGroupBlock>
-              }
+              )}
+              <AgeGroupBlock
+                title={text.top_labels.vaccination_grade}
+                data={age18Plus}
+                property="fully_vaccinated"
+                secondProperty="has_one_shot"
+                description={text.age_18_plus.description_vaccination_grade}
+                secondDescription={text.age_18_plus.description_vaccination_one_shot_with_percentage}
+                numFractionDigits={numFractionDigits}
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
             </>
           ) : (
             <>
@@ -153,30 +153,31 @@ export function VaccineCoverageToggleTile({
         )}
         {selectedTab === text.age_12_plus.label && (
           vaccineCoverageToggleTileFeature ? (
-            age12Plus.boostered ? (
-              <AgeGroupBlock
-                title={text.top_labels.booster_grade}
-                data={age12Plus}
-                property="boostered"
-                description={text.age_12_plus.description_booster_grade}
-                numFractionDigits={numFractionDigits}
-              >
-                {metadataBooster && (
-                  <Metadata
-                    {...metadataBooster}
-                    intervalCount={text.age_12_plus.booster_date_interval}
-                    isTileFooter
-                  />
-                )}
-              </AgeGroupBlock>
-            ) : (
-              <NoBoosterBlock
-                title={text.top_labels.booster_grade}
-                description={
-                  text.age_12_plus.description_booster_grade_not_available
-                }
-              />
-            ) &&
+            <>
+              {age12Plus.boostered ? (
+                <AgeGroupBlock
+                  title={text.top_labels.booster_grade}
+                  data={age12Plus}
+                  property="boostered"
+                  description={text.age_12_plus.description_booster_grade}
+                  numFractionDigits={numFractionDigits}
+                >
+                  {metadataBooster && (
+                    <Metadata
+                      {...metadataBooster}
+                      intervalCount={text.age_12_plus.booster_date_interval}
+                      isTileFooter
+                    />
+                  )}
+                </AgeGroupBlock>
+              ) : (
+                <NoBoosterBlock
+                  title={text.top_labels.booster_grade}
+                  description={
+                    text.age_12_plus.description_booster_grade_not_available
+                  }
+                />
+              )}
               <AgeGroupBlock
                 title={text.top_labels.vaccination_grade}
                 data={age12Plus}
@@ -188,29 +189,30 @@ export function VaccineCoverageToggleTile({
               >
                 {metadata && <Metadata {...metadata} isTileFooter />}
               </AgeGroupBlock>
-          ) :
-            <AgeGroupBlock
-              title={text.top_labels.one_shot}
-              data={age12Plus}
-              property="has_one_shot"
-              description={text.age_12_plus.description_vaccination_one_shot}
-              numFractionDigits={numFractionDigits}
-            >
-              {metadata && <Metadata {...metadata} isTileFooter />}
-            </AgeGroupBlock> &&
-            <AgeGroupBlock
-              title={text.top_labels.vaccination_grade}
-              data={age12Plus}
-              property="fully_vaccinated"
-              secondProperty="has_one_shot"
-              description={text.age_12_plus.description_vaccination_grade}
-              secondDescription={text.age_12_plus.description_vaccination_one_shot_with_percentage}
-              numFractionDigits={numFractionDigits}
-            >
-              {metadata && <Metadata {...metadata} isTileFooter />}
-            </AgeGroupBlock>
+            </>
+          ) : (
+            <>
+              <AgeGroupBlock
+                title={text.top_labels.one_shot}
+                data={age12Plus}
+                property="has_one_shot"
+                description={text.age_12_plus.description_vaccination_one_shot}
+                numFractionDigits={numFractionDigits}
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
+              <AgeGroupBlock
+                title={text.top_labels.vaccination_grade}
+                data={age12Plus}
+                property="fully_vaccinated"
+                description={text.age_12_plus.description_vaccination_grade}
+                numFractionDigits={numFractionDigits}
+              >
+                {metadata && <Metadata {...metadata} isTileFooter />}
+              </AgeGroupBlock>
+            </>
           )
-        }
+        )}
       </TwoKpiSection>
       {age18Plus.boostered && !vaccineCoverageToggleTileFeature && (
         <Box mt={56}>
