@@ -133,19 +133,10 @@ export function VaccineCoverageToggleTile({
               <AgeGroupBlock
                 title={text.top_labels.one_shot}
                 data={age18Plus}
-                property="boostered"
-                description={text.age_18_plus.description_booster_grade}
                 property="has_one_shot"
                 description={text.age_18_plus.description_vaccination_one_shot}
                 numFractionDigits={numFractionDigits}
               >
-                {metadataBooster && (
-                  <Metadata
-                    {...metadataBooster}
-                    intervalCount={text.age_18_plus.booster_date_interval}
-                    isTileFooter
-                  />
-                )}
                 {metadata && <Metadata {...metadata} isTileFooter />}
               </AgeGroupBlock>
               <AgeGroupBlock
