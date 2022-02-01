@@ -201,7 +201,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       position: 'absolute',
       left: 0,
       bottom: 0,
-      height: '6px',
+      height: '5px',
       width: `calc(100%)`,
       backgroundColor: 'blue',
       transform: `translateY(${x.isActive ? 0 : '6px'})`,
