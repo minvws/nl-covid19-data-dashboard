@@ -39,18 +39,6 @@ export function MiniVaccinationCoverageTile(
   return (
     <MiniTile {...tileProps}>
       <Box display="flex" flexDirection="column" spacing={3}>
-        <LabeledBar
-          value={oneShotPercentage}
-          color={COLOR_HAS_ONE_SHOT}
-          valueLabel={oneShotPercentageLabel}
-          barLabel={oneShotBarLabel}
-        />
-        <LabeledBar
-          value={fullyVaccinatedPercentage}
-          color={COLOR_FULLY_VACCINATED}
-          valueLabel={fullyVaccinatedPercentageLabel}
-          barLabel={fullyVaccinatedBarLabel}
-        />
         {boosterShotAdministered && boosterShotAdministeredBarLabel && (
           <LabeledBar
             value={boosterShotAdministered}
@@ -59,6 +47,18 @@ export function MiniVaccinationCoverageTile(
             barLabel={boosterShotAdministeredBarLabel}
           />
         )}
+        <LabeledBar
+          value={fullyVaccinatedPercentage}
+          color={COLOR_FULLY_VACCINATED}
+          valueLabel={fullyVaccinatedPercentageLabel}
+          barLabel={fullyVaccinatedBarLabel}
+        />
+        <LabeledBar
+          value={oneShotPercentage}
+          color={COLOR_HAS_ONE_SHOT}
+          valueLabel={oneShotPercentageLabel}
+          barLabel={oneShotBarLabel}
+        />
       </Box>
     </MiniTile>
   );
