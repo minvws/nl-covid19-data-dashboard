@@ -33,7 +33,6 @@ import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-boo
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
-import { VaccineCoverageToggleTileWithFirstShot } from '~/domain/vaccine/vaccine-coverage-toggle-tile-with-first-shot';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
@@ -205,9 +204,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
   const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
     'nlVaccinationBoosterShotsPerAgeGroup'
-  );
-  const vaccineCoverageToggleTileFeature = useFeature(
-    'vaccineCoverageToggleTile'
   );
 
   const metadata = {

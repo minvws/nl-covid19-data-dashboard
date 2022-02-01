@@ -22,9 +22,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
-import { VaccineCoverageToggleTileWithFirstShot } from '~/domain/vaccine/vaccine-coverage-toggle-tile-with-first-shot';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import {
   getArticleParts,
   getLinkParts,
@@ -103,10 +101,6 @@ export const VaccinationsGmPage = (
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
-
-  const vaccineCoverageToggleTileFeature = useFeature(
-    'vaccineCoverageToggleTile'
-  );
 
   const text = siteText.gemeente_vaccinaties;
 
