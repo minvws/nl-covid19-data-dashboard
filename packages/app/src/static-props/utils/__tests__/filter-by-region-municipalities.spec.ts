@@ -46,6 +46,19 @@ FilterByRegionMunicipalities(
   }
 );
 
+FilterByRegionMunicipalities(
+  'should return an empty array if data is empty',
+  () => {
+    sinon
+      .stub(File, 'getVrGmCodesForGmCode')
+      .returns(['AMS', 'HRLM', 'ALKM', 'VLDM']);
+    const data: any[] = [];
+    const context = { params: { code: 'NH' } };
+
+    assert.equal(filterByRegionMunicipalities(data, context), []);
+  }
+);
+
 FilterByRegionMunicipalities.after.each(() => {
   sinon.restore();
 });
