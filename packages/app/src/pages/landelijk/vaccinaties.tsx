@@ -468,6 +468,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               '31-40',
               '18-30',
               '12-17',
+              '5-11',
             ]}
             metadata={{
               datumsText: textNl.datums,
