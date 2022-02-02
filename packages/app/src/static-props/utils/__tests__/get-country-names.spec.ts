@@ -29,8 +29,6 @@ GetCountryNames(
         dza: 'Algerije',
       },
     });
-
-    sinon.assert.calledWith(loadStub, `nl-country-names.json`, 'static-json');
   }
 );
 
@@ -38,15 +36,7 @@ GetCountryNames('Should return country names', (context) => {
   const { loadStub } = context;
   const staticPropsContext = { locale: 'nl' };
 
-  assert.equal(getCountryNames(staticPropsContext), {
-    countryNames: {
-      afg: 'Afghanistan',
-      alb: 'Albanië',
-      ala: 'Ålandseilanden',
-      dza: 'Algerije',
-    },
-  });
-
+  getCountryNames(staticPropsContext);
   sinon.assert.calledWith(loadStub, `nl-country-names.json`, 'static-json');
 });
 
