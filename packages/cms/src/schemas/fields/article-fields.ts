@@ -4,16 +4,14 @@ import {
   localeValidation,
 } from '../../language/locale-validation';
 
-const REQUIRED_FIELD_WARNING = 'Dit veld is verplicht.';
+const REQUIRED_FIELD_ERROR = 'Dit veld is verplicht.';
 
 export const ARTICLE_FIELDS = [
   {
     title: 'Titel',
     name: 'title',
     type: 'localeString',
-    validation: localeStringValidation((rule) =>
-      rule.required().warning(REQUIRED_FIELD_WARNING)
-    ),
+    validation: localeStringValidation((rule) => rule.required()),
   },
   {
     title: 'Slug',
@@ -30,7 +28,7 @@ export const ARTICLE_FIELDS = [
     type: 'localeString',
     fieldset: 'metadata',
     validation: localeStringValidation((rule) =>
-      rule.required().warning(REQUIRED_FIELD_WARNING)
+      rule.required().error(REQUIRED_FIELD_ERROR)
     ),
   },
   {
@@ -44,7 +42,7 @@ export const ARTICLE_FIELDS = [
       calendarTodayLabel: 'Today',
     },
     fieldset: 'metadata',
-    validation: (rule: Rule) => rule.required().warning(REQUIRED_FIELD_WARNING),
+    validation: (rule: Rule) => rule.required().error(REQUIRED_FIELD_ERROR),
   },
   {
     title: 'Categorieën instellen',
@@ -64,7 +62,7 @@ export const ARTICLE_FIELDS = [
       ],
     },
     validation: (rule: Rule) =>
-      rule.required().min(1).warning(REQUIRED_FIELD_WARNING),
+      rule.required().min(1).error(REQUIRED_FIELD_ERROR),
   },
   {
     title: 'Samenvatting',
@@ -73,14 +71,16 @@ export const ARTICLE_FIELDS = [
     name: 'summary',
     type: 'localeText',
     // @Todo Align with content team about migrating content, and then enforce max length of 120.
-    validation: localeValidation((rule) => rule.required()),
+    validation: localeValidation((rule) =>
+      rule.required().error(REQUIRED_FIELD_ERROR)
+    ),
   },
   {
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
     validation: localeValidation((rule) =>
-      rule.required().warning(REQUIRED_FIELD_WARNING)
+      rule.required().error(REQUIRED_FIELD_ERROR)
     ),
   },
   {
@@ -102,14 +102,15 @@ export const ARTICLE_FIELDS = [
         .custom((context: any) => {
           return context.asset ? true : 'Image required';
         })
-        .required(),
+        .required()
+        .error(),
   },
   {
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
     validation: localeValidation((rule) =>
-      rule.required().warning(REQUIRED_FIELD_WARNING)
+      rule.required().error(REQUIRED_FIELD_ERROR)
     ),
   },
 ];
