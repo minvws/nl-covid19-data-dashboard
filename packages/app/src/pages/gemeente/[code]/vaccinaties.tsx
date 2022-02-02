@@ -161,7 +161,7 @@ export const VaccinationsGmPage = (
             vrNameOrGmName={municipalityName}
             warning={text.warning}
           />
-
+          
           <VaccineCoverageToggleTile
             title={text.vaccination_grade_toggle_tile.title}
             source={text.vaccination_grade_toggle_tile.source}
