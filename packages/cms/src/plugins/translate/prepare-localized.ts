@@ -7,7 +7,7 @@ selectedLanguages$.subscribe((selected: any[]) => {
 
 export function prepareLocalized(selection: any) {
   const result: any = {};
-  for (let prop in selection) {
+  for (const prop in selection) {
     const value = selection[prop];
     if (isLocaleObject(value)) {
       if (isLocaleBlock(value)) {

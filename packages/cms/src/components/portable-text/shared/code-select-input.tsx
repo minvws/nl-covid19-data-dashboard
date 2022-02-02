@@ -25,7 +25,7 @@ export const CodeSelectInput = withDocument(
         return vrData.map((x) => ({ value: x.code, label: x.name }));
       }
       return undefined;
-    }, []);
+    }, [document.area]);
 
     return (
       <FormField
