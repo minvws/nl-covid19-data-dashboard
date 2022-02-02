@@ -41,7 +41,7 @@ FilterByRegionMunicipalities(
 
     assert.throws(
       () => filterByRegionMunicipalities(data, context),
-      (err: Error) => err.message === `No regionCodes found for AMS`
+      (err: Error) => err.message === `No regionCodes found for NH`
     );
   }
 );
