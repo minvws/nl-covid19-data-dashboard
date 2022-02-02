@@ -16,9 +16,8 @@ GetCountryNames.before.each((context) => {
 });
 
 GetCountryNames(
-  'Should call load function with correct parameters',
-  (context) => {
-    const { loadStub } = context;
+  'Should return country names is the correct object structure',
+  () => {
     const staticPropsContext = { locale: 'nl' };
 
     assert.equal(getCountryNames(staticPropsContext), {
@@ -32,13 +31,16 @@ GetCountryNames(
   }
 );
 
-GetCountryNames('Should return country names', (context) => {
-  const { loadStub } = context;
-  const staticPropsContext = { locale: 'nl' };
+GetCountryNames(
+  ' Should call load function with correct parameters',
+  (context) => {
+    const { loadStub } = context;
+    const staticPropsContext = { locale: 'nl' };
 
-  getCountryNames(staticPropsContext);
-  sinon.assert.calledWith(loadStub, `nl-country-names.json`, 'static-json');
-});
+    getCountryNames(staticPropsContext);
+    sinon.assert.calledWith(loadStub, `nl-country-names.json`, 'static-json');
+  }
+);
 
 GetCountryNames.after.each(() => {
   sinon.restore();
