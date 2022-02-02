@@ -45,7 +45,7 @@ export function PublishOrAcceptAction(props: DocumentActionProps) {
     if (isPublishing && !props.draft) {
       setIsPublishing(false);
     }
-  }, [props.draft]);
+  }, [isPublishing, props.draft]);
 
   if (!document) return;
 

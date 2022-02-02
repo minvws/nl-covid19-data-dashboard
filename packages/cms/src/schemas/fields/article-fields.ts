@@ -19,6 +19,7 @@ export const ARTICLE_FIELDS = [
       source: 'title.nl',
     },
     fieldset: 'metadata',
+    validation: (rule: Rule) => rule.required(),
   },
   {
     title: 'Meta description',

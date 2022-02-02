@@ -13,7 +13,7 @@
     "test": "sanity check",
     "test:ci": "yarn run test",
     "typecheck": "tsc --pretty --noEmit",
-    "lint": "echo '@TODO add eslint'",
+    "lint": "eslint .",
     "lokalize:export": "ts-node src/lokalize/export.ts",
     "lokalize:add": "ts-node src/lokalize/lokalize-add.ts",
     "lokalize:dedupe": "ts-node src/lokalize/clean-duplicates.ts",
@@ -71,10 +71,25 @@
     "@types/prompts": "2.0.14",
     "@types/react-is": "^17.0.3",
     "@types/react-world-flags": "^1.4.2",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
     "dotenv-flow": "^3.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^12.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-risxss": "^2.1.0",
     "fast-csv": "^4.3.6",
+    "lint-staged": "^11.2.6",
     "meow": "^9.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn format"
+    ]
   }
 }

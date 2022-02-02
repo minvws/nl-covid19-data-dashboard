@@ -5,13 +5,13 @@ import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { forwardRef } from 'react';
 import { isDefined } from 'ts-is-present';
 
-function hasTypeWithCurve(type: string) {
+function hasTypeWithCurve() {
   return true; // type === 'line' || type === 'gapped-line';
 }
 
 export const LineStyleInput = withDocument(
   forwardRef((props: any, ref: any) => {
-    const { value, onChange, document, compareValue, type, markers } = props;
+    const { value, onChange, compareValue, type, markers } = props;
 
     const onChangeProp = (event: any) => {
       const setValue =
@@ -21,13 +21,8 @@ export const LineStyleInput = withDocument(
 
     return (
       <>
-        <TextInput
-          ref={ref}
-          style={{ display: 'none' }}
-          value={value ?? ''}
-          onChange={() => {}}
-        />
-        {hasTypeWithCurve(document.type) ? (
+        <TextInput ref={ref} style={{ display: 'none' }} value={value ?? ''} />
+        {hasTypeWithCurve() ? (
           <FormField
             compareValue={compareValue}
             label={type.title}
