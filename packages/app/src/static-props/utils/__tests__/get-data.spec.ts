@@ -11,7 +11,7 @@ FilterByRegionMunicipalities('should filter municipalities by region', () => {
     .stub(File, 'getVrGmCodesForGmCode')
     .returns(['AMS', 'HRLM', 'ALKM', 'VLDM']);
   const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
-  const context = { params: { code: 'AMS' } };
+  const context = { params: { code: 'NH' } };
 
   assert.equal(filterByRegionMunicipalities(data, context), [
     { gmcode: 'AMS' },
@@ -37,7 +37,7 @@ FilterByRegionMunicipalities(
   () => {
     sinon.stub(File, 'getVrGmCodesForGmCode').returns(undefined);
     const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
-    const context = { params: { code: 'AMS' } };
+    const context = { params: { code: 'NH' } };
 
     assert.throws(
       () => filterByRegionMunicipalities(data, context),
