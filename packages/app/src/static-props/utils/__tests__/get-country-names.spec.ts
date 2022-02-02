@@ -7,20 +7,18 @@ import * as assert from 'uvu/assert';
 const GetCountryNames = suite('GetCountryNames');
 
 GetCountryNames.before.each((context) => {
-  context.loadStub = sinon.stub(File, 'loadJsonFromDataFile');
+  context.loadStub = sinon.stub(File, 'loadJsonFromDataFile').returns({
+    afg: 'Afghanistan',
+    alb: 'Albanië',
+    ala: 'Ålandseilanden',
+    dza: 'Algerije',
+  });
 });
 
 GetCountryNames(
   'Should call load function with correct parameters',
   (context) => {
     const { loadStub } = context;
-
-    loadStub.returns({
-      afg: 'Afghanistan',
-      alb: 'Albanië',
-      ala: 'Ålandseilanden',
-      dza: 'Algerije',
-    });
     const staticPropsContext = { locale: 'nl' };
 
     assert.equal(getCountryNames(staticPropsContext), {
@@ -38,13 +36,6 @@ GetCountryNames(
 
 GetCountryNames('Should return country names', (context) => {
   const { loadStub } = context;
-
-  loadStub.returns({
-    afg: 'Afghanistan',
-    alb: 'Albanië',
-    ala: 'Ålandseilanden',
-    dza: 'Algerije',
-  });
   const staticPropsContext = { locale: 'nl' };
 
   assert.equal(getCountryNames(staticPropsContext), {
