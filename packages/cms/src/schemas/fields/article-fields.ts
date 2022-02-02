@@ -4,12 +4,16 @@ import {
   localeValidation,
 } from '../../language/locale-validation';
 
+const REQUIRED_FIELD_WARNING = 'Dit veld is verplicht.';
+
 export const ARTICLE_FIELDS = [
   {
     title: 'Titel',
     name: 'title',
     type: 'localeString',
-    validation: localeStringValidation((rule) => rule.required()),
+    validation: localeStringValidation((rule) =>
+      rule.required().warning(REQUIRED_FIELD_WARNING)
+    ),
   },
   {
     title: 'Slug',
@@ -25,7 +29,9 @@ export const ARTICLE_FIELDS = [
     name: 'metaDescription',
     type: 'localeString',
     fieldset: 'metadata',
-    validation: localeStringValidation((rule) => rule.required()),
+    validation: localeStringValidation((rule) =>
+      rule.required().warning(REQUIRED_FIELD_WARNING)
+    ),
   },
   {
     title: 'Publicatie datum',
@@ -38,7 +44,7 @@ export const ARTICLE_FIELDS = [
       calendarTodayLabel: 'Today',
     },
     fieldset: 'metadata',
-    validation: (rule: Rule) => rule.required(),
+    validation: (rule: Rule) => rule.required().warning(REQUIRED_FIELD_WARNING),
   },
   {
     title: 'Categorieën instellen',
@@ -57,7 +63,8 @@ export const ARTICLE_FIELDS = [
         { title: 'Gedrag', value: 'gedrag' },
       ],
     },
-    validation: (rule: Rule) => rule.required().min(1),
+    validation: (rule: Rule) =>
+      rule.required().min(1).warning(REQUIRED_FIELD_WARNING),
   },
   {
     title: 'Samenvatting',
@@ -72,7 +79,9 @@ export const ARTICLE_FIELDS = [
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
-    validation: localeValidation((rule) => rule.required()),
+    validation: localeValidation((rule) =>
+      rule.required().warning(REQUIRED_FIELD_WARNING)
+    ),
   },
   {
     title: 'Afbeelding',
@@ -99,6 +108,8 @@ export const ARTICLE_FIELDS = [
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
-    validation: localeValidation((rule) => rule.required()),
+    validation: localeValidation((rule) =>
+      rule.required().warning(REQUIRED_FIELD_WARNING)
+    ),
   },
 ];
