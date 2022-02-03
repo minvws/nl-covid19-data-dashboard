@@ -23,7 +23,7 @@ interface SituationsTimeSeriesChartProps {
   timeframe: TimeframeOption;
   values: VrSituationsValue[];
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['contactTracing']['shared'];
+  text: SiteText['pages']['situationsPage']['shared'];
 }
 
 export function SituationsOverTimeChart({

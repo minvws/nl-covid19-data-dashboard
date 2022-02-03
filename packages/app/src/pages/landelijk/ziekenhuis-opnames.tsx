@@ -425,6 +425,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'hospital_admissions_region_choropleth',
                 }}
                 map="vr"
+                thresholdMap="gm"
                 data={choropleth.vr.hospital_nice}
                 dataConfig={{
                   metricName: 'hospital_nice',

@@ -42,8 +42,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textNl: siteText.pages.deceased.nl,
-        textShared: siteText.pages.deceased.shared,
+        textNl: siteText.pages.deceasedPage.nl,
+        textShared: siteText.pages.deceasedPage.shared,
       }),
       locale
     ),

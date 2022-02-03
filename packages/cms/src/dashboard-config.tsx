@@ -10,7 +10,8 @@ export default {
           name: 'document-list',
           options: {
             title: 'Niet-gepubliceerde documenten',
-            query: '*[_id in path("drafts.**") && (defined(text))] | order(_updatedAt desc)',
+            query:
+              '*[_id in path("drafts.**") && (defined(text))] | order(_updatedAt desc)',
           },
         },
         {
@@ -18,7 +19,8 @@ export default {
           options: {
             title: 'Recent gepubliceerde documenten',
             limit: 30,
-            query: '*[!(_id in path("drafts.**")) && (defined(text))] | order(_publishedAt desc)',
+            query:
+              '*[!(_id in path("drafts.**")) && (defined(text))] | order(_publishedAt desc)',
           },
         },
         // { name: 'deploy' },

@@ -77,7 +77,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { cover } = content;
   const { asset } = cover;
 
-  const imgPath = getImageSrc(asset, 1200);
+  const imgPath = asset ? getImageSrc(asset, 1200) : undefined;
 
   const metadata = {
     title: getTitle(props.content.title, locale),

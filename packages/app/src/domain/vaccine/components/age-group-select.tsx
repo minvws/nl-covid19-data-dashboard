@@ -43,15 +43,15 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
         if (isPresent(birthyearRange)) {
           return {
             value: el.ageGroup,
-            label: siteText.pages.vaccinations.nl.age_groups[el.ageGroup],
+            label: siteText.pages.vaccinationsPage.nl.age_groups[el.ageGroup],
             content: (
               <Box>
                 <Text>
-                  {siteText.pages.vaccinations.nl.age_groups[el.ageGroup]}
+                  {siteText.pages.vaccinationsPage.nl.age_groups[el.ageGroup]}
                 </Text>
                 <Text variant="label1">
                   {replaceVariablesInText(
-                    siteText.pages.vaccinations.nl.birthyear_ranges[
+                    siteText.pages.vaccinationsPage.nl.birthyear_ranges[
                       birthyearRange.type
                     ],
                     birthyearRange
@@ -63,14 +63,14 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
         }
       }).filter(isPresent),
     [
-      siteText.pages.vaccinations.nl.age_groups,
-      siteText.pages.vaccinations.nl.birthyear_ranges,
+      siteText.pages.vaccinationsPage.nl.age_groups,
+      siteText.pages.vaccinationsPage.nl.birthyear_ranges,
     ]
   );
 
   return (
     <RichContentSelect
-      label={siteText.pages.vaccinations.nl.age_group_dropdown.label}
+      label={siteText.pages.vaccinationsPage.nl.age_group_dropdown.label}
       visuallyHiddenLabel
       initialValue={initialValue}
       options={options}

@@ -17,7 +17,7 @@ import { SituationIcon } from './components/situation-icon';
 interface SituationsTableTileProps {
   data: VrSituationsValue;
   metadata: MetadataProps;
-  text: SiteText['pages']['contactTracing']['shared'];
+  text: SiteText['pages']['situationsPage']['shared'];
 }
 
 export function SituationsTableTile({

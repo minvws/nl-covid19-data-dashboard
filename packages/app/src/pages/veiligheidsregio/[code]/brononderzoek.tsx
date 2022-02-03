@@ -44,7 +44,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textShared: siteText.pages.contactTracing.shared,
+        textShared: siteText.pages.situationsPage.shared,
         textChoroplethTooltips: siteText.choropleth_tooltip.patients,
       }),
       locale

@@ -55,6 +55,7 @@ const StyledMessage = styled.div<{
     borderLeft: x.resetParentStyles ? 0 : '7px solid',
     backgroundColor: theme[x.variant].backgroundColor,
     borderLeftColor: theme[x.variant].borderColor,
+    borderRadius: '5px',
 
     '& > *': {
       m: 0,

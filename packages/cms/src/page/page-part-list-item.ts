@@ -74,10 +74,10 @@ function pageDataListItem(page: PagePartPage) {
                           S.documentList()
                             .title(item.title)
                             .filter(
-                              '_type == "lokalizeText" && subject == $subject'
+                              '_type == "lokalizeText" && key match $subject'
                             )
                             .params({
-                              subject: `${page.identifier}_${item.scope}`,
+                              subject: `pages.${page.identifier}.${item.scope}.**`,
                             })
                         )
                     )

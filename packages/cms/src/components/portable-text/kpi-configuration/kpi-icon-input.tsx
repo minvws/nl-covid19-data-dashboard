@@ -54,12 +54,7 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
       description={type.description}
       compareValue={compareValue}
     >
-      <TextInput
-        value={value ?? ''}
-        onChange={() => {}}
-        ref={ref}
-        style={{ display: 'none' }}
-      />
+      <TextInput value={value ?? ''} ref={ref} style={{ display: 'none' }} />
       <ThemeProvider theme={studioTheme}>
         <Stack space={3}>
           {TheIcon === undefined ? (

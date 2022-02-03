@@ -136,9 +136,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { formatPercentage } = useIntl();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
-  const testedOverallTopicalPageFeature = useFeature(
-    'nlTestedOverallTopicalPage'
-  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -242,22 +239,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
-                  testedOverallTopicalPageFeature.isEnabled
-                    ? ({
-                        label:
-                          siteText.nationaal_actueel.mini_trend_tiles
-                            .positief_geteste_mensen.menu_item_label,
-                        data: dataTestedOverall.values,
-                        dataProperty: 'infected_moving_average_rounded',
-                        value:
-                          dataTestedOverall.last_value
-                            .infected_moving_average_rounded,
-                        warning: getWarning(
-                          content.elements.warning,
-                          'tested_overall'
-                        ),
-                      } as MiniTileSelectorItem<NlTestedOverallValue>)
-                    : (undefined as any),
+                  {
+                    label:
+                      siteText.nationaal_actueel.mini_trend_tiles
+                        .positief_geteste_mensen.menu_item_label,
+                    data: dataTestedOverall.values,
+                    dataProperty: 'infected_moving_average_rounded',
+                    value:
+                      dataTestedOverall.last_value
+                        .infected_moving_average_rounded,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'tested_overall'
+                    ),
+                  } as MiniTileSelectorItem<NlTestedOverallValue>,
                   {
                     label:
                       siteText.nationaal_actueel.mini_trend_tiles
@@ -453,7 +448,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-                {testedOverallTopicalPageFeature.isEnabled && (
+                {
                   <MiniTrendTile
                     title={text.mini_trend_tiles.positief_geteste_mensen.title}
                     text={
@@ -526,7 +521,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'tested_overall'
                     )}
                   />
-                )}
+                }
                 <MiniVaccinationCoverageTile
                   title={text.mini_trend_tiles.vaccinatiegraad.title}
                   oneShotBarLabel={

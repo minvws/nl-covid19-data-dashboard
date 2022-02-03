@@ -15,7 +15,7 @@ interface BoosterShotCoveragePerAgeGroupProps {
   metadata: MetadataProps;
   sortingOrder: string[];
   values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
 }
 
 export function BoosterShotCoveragePerAgeGroup({

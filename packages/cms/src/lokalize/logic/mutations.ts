@@ -94,7 +94,7 @@ export function appendTextMutation(args: {
 
 export function readTextMutations() {
   return new Promise<TextMutation[]>((resolve, reject) => {
-    let mutations: TextMutation[] = [];
+    const mutations: TextMutation[] = [];
 
     const stream = parse({ headers: true })
       .on('error', (err) => reject(err))
