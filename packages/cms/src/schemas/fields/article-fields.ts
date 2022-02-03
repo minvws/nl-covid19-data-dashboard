@@ -1,3 +1,4 @@
+import { ValidatedInput } from '../../components';
 import { Rule } from '~/sanity';
 import {
   localeStringValidation,
@@ -12,6 +13,7 @@ export const ARTICLE_FIELDS = [
     name: 'title',
     type: 'localeString',
     validation: localeStringValidation((rule) => rule.required()),
+    // inputComponent: ValidatedInput,
   },
   {
     title: 'Slug',
