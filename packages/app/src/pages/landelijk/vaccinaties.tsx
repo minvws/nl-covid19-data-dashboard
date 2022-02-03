@@ -372,11 +372,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             ]}
             metadata={{
               datumsText: textNl.datums,
-              date: data.vaccine_coverage_per_age_group.values[0]?.date_unix,
+              date: data.booster_shot_per_age_group.values[0]?.date_unix,
               source: textNl.booster_per_age_group_table.bronnen.rivm,
             }}
-            values={data.vaccine_coverage_per_age_group.values.filter(
-              (age) => !(age.age_group_range === '5-11' || age.age_group_range === '12-17')
+            values={data.booster_shot_per_age_group.values.filter(
+              (age) =>
+                !(
+                  age.age_group_range === '5-11' ||
+                  age.age_group_range === '12-17'
+                )
             )}
             text={textNl.booster_per_age_group_table}
           />
@@ -544,7 +548,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               </ChartTile>
             )}
 
-{vaccineAdministeredGgdFeature.isEnabled &&
+          {vaccineAdministeredGgdFeature.isEnabled &&
             vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
@@ -622,7 +626,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-
           <VaccinationsBoosterKpiSection
             dataBoosterShotAdministered={
               boosterShotAdministeredLastValue.ggd_administered_last_7_days
@@ -640,7 +643,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <Divider/>
+          <Divider />
 
           <PageInformationBlock
             title={textNl.section_archived.title}
