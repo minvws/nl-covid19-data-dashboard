@@ -30,9 +30,11 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledArticleTeaser>
-        <ZoomContainer height={200}>
-          <BackgroundImage image={cover} height={200} sizes={coverSizes} />
-        </ZoomContainer>
+        {cover.asset && (
+          <ZoomContainer height={200}>
+            <BackgroundImage image={cover} height={200} sizes={coverSizes} />
+          </ZoomContainer>
+        )}
 
         <Heading level={4} as="h2">
           {title}

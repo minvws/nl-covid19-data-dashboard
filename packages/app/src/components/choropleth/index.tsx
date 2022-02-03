@@ -15,6 +15,7 @@ import {
   ChoroplethDataItem,
   InferedDataCollection,
   InferedMapType,
+  MapType,
 } from './logic';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
@@ -165,6 +166,10 @@ export type ChoroplethProps<T extends ChoroplethDataItem> = {
    * Indicates which map is rendered.
    */
   map: InferedMapType<T>;
+  /**
+   * Indicates which threshold is rendered for the map.
+   */
+  thresholdMap?: MapType;
   /**
    * An optional formatting callback that allows for customizing the contents
    * of the tooltip

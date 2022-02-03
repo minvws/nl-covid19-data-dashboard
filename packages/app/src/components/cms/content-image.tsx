@@ -48,11 +48,13 @@ export function ContentImage({
         mx="auto"
       >
         <ContentBlock>
-          <SanityImageTile
-            {...getImageProps(node, {
-              sizes: [[IMAGE_MAX_WIDTH, IMAGE_MAX_WIDTH]],
-            })}
-          />
+          {node.asset && (
+            <SanityImageTile
+              {...getImageProps(node, {
+                sizes: [[IMAGE_MAX_WIDTH, IMAGE_MAX_WIDTH]],
+              })}
+            />
+          )}
 
           {caption}
         </ContentBlock>
@@ -62,7 +64,7 @@ export function ContentImage({
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
         <Box mb={3}>
-          <SanityImage {...getImageProps(node, { sizes })} />
+          {node.asset && <SanityImage {...getImageProps(node, { sizes })} />}
         </Box>
         {caption}
       </Box>

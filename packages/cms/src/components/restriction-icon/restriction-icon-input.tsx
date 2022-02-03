@@ -34,7 +34,7 @@ export function RestrictionIconInput(props: RestrictionIconInputProps) {
 
   const { type, value, onChange } = props;
 
-  var allIcons = Object.entries(restrictionIcons)
+  const allIcons = Object.entries(restrictionIcons)
     // hide empty icons
     .filter((entry) => entry[1]) as [string, TIcon][];
 

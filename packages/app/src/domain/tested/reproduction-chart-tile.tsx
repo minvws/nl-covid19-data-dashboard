@@ -17,7 +17,7 @@ interface ReproductionChartTileProps {
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['reproductionIndex']['nl'];
+  text: SiteText['pages']['reproductionPage']['nl'];
 }
 
 export function ReproductionChartTile({

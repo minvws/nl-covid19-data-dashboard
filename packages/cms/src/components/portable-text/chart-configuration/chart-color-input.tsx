@@ -33,7 +33,7 @@ export const flatDataColors = Object.keys(colors.data).reduce<
   return aggr;
 }, {} as Record<string, string>);
 
-export const ChartColorInput = forwardRef((props: any, ref: any) => {
+export const ChartColorInput = forwardRef((props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = useCallback(() => setIsOpen(false), []);
   const onOpen = useCallback(() => setIsOpen(true), []);

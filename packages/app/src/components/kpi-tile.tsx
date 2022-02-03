@@ -4,10 +4,11 @@ import { Box } from './base';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
 interface KpiTileProps {
-  title: string;
+  title?: string;
   description?: string;
   children?: React.ReactNode;
   metadata?: MetadataProps;
+  hasNoBorder?: boolean;
 }
 
 /**
@@ -19,9 +20,10 @@ export function KpiTile({
   description,
   children,
   metadata,
+  hasNoBorder,
 }: KpiTileProps) {
   return (
-    <Tile>
+    <Tile noBorder={hasNoBorder} noPadding={hasNoBorder}>
       <Box spacing={3}>
         <Heading level={3}>{title}</Heading>
         {children && <Box spacing={3}>{children}</Box>}

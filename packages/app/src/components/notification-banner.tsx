@@ -44,6 +44,7 @@ export function NotificationBanner({
                 css={css({
                   cursor: 'pointer',
                   border: 0,
+                  borderRadius: '5px',
                   backgroundColor: 'transparent',
                   padding: 0,
                   margin: 0,

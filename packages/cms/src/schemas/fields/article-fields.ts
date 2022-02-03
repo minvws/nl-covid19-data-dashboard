@@ -19,6 +19,7 @@ export const ARTICLE_FIELDS = [
       source: 'title.nl',
     },
     fieldset: 'metadata',
+    validation: (rule: Rule) => rule.required(),
   },
   {
     title: 'Meta description',
@@ -57,7 +58,7 @@ export const ARTICLE_FIELDS = [
         { title: 'Gedrag', value: 'gedrag' },
       ],
     },
-    // validation: (rule: Rule) => rule.required().min(1),
+    validation: (rule: Rule) => rule.required().min(1),
   },
   {
     title: 'Samenvatting',
@@ -88,7 +89,12 @@ export const ARTICLE_FIELDS = [
         type: 'localeString',
       },
     ],
-    validation: (rule: Rule) => rule.required(),
+    validation: (rule: Rule) =>
+      rule
+        .custom((context: any) => {
+          return context.asset ? true : 'Image required';
+        })
+        .required(),
   },
   {
     title: 'Content',

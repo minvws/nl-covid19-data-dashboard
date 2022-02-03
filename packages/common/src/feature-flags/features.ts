@@ -96,30 +96,6 @@ export const features: Feature[] = [
     metricName: 'hospital_vaccine_incidence_per_age_group',
   },
   {
-    name: 'nlTestedOverallTopicalPage',
-    isEnabled: true,
-    dataScopes: ['nl'],
-    metricName: 'tested_overall',
-    metricProperties: ['infected_moving_average'],
-  },
-  {
-    name: 'vrTestedOverallTopicalPage',
-    isEnabled: true,
-    dataScopes: ['vr'],
-    metricName: 'tested_overall',
-    metricProperties: ['infected_moving_average'],
-  },
-  {
-    name: 'gmTestedOverallTopicalPage',
-    isEnabled: true,
-    dataScopes: ['gm'],
-    metricName: 'tested_overall',
-    metricProperties: ['infected_moving_average'],
-  },
-  /**
-   * Temporary for the boosters
-   */
-  {
     name: 'nlVaccinationsBoosterInformationBlock',
     isEnabled: false,
   },
@@ -179,7 +155,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlVaccinationBoosterShotsPerAgeGroup',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
   },
@@ -216,12 +192,5 @@ export const features: Feature[] = [
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
-  },
-  {
-    name: 'nlVaccinationCoverageBoosterVaccinated',
-    isEnabled: true,
-    dataScopes: ['nl'],
-    metricName: 'vaccine_coverage',
-    metricProperties: ['booster_vaccinated'],
   },
 ];

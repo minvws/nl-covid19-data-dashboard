@@ -23,7 +23,7 @@ const lineTypes = [
 
 export const LineTypeSelectInput = withDocument(
   forwardRef((props: any, ref: any) => {
-    const { value, onChange, document, compareValue, type, markers } = props;
+    const { value, onChange, compareValue, type, markers } = props;
     /*const { patch } = useDocumentOperation(
       document._id.replace('drafts.', ''),
       document._type

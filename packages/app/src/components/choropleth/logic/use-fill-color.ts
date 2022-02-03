@@ -20,7 +20,8 @@ import { isCodedValueType } from './utils';
 export function useFillColor<T extends ChoroplethDataItem>(
   data: T[],
   map: MapType,
-  dataConfig: DataConfig<T>
+  dataConfig: DataConfig<T>,
+  thresholdMap?: MapType
 ) {
   const codeType = mapToCodeType[map];
   const { metricProperty, noDataFillColor } = dataConfig;
@@ -30,7 +31,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
     [metricProperty, codeType, data]
   );
 
-  const threshold = thresholds[map][metricProperty as string];
+  const threshold = thresholds[thresholdMap || map][metricProperty as string];
   assert(
     isDefined(threshold),
     `No threshold configured for map type ${map} and metric property ${metricProperty}`
@@ -47,13 +48,14 @@ export function useFillColor<T extends ChoroplethDataItem>(
 export function getFillColor<T extends ChoroplethDataItem>(
   data: T[],
   map: MapType,
-  dataConfig: DataConfig<T>
+  dataConfig: DataConfig<T>,
+  thresholdMap?: MapType
 ) {
   const codeType = mapToCodeType[map];
   const { metricProperty, noDataFillColor } = dataConfig;
 
   const getValueByCode = createGetValueByCode(metricProperty, codeType, data);
-  const threshold = thresholds[map][metricProperty as string];
+  const threshold = thresholds[thresholdMap || map][metricProperty as string];
   assert(
     isDefined(threshold),
     `No threshold configured for map type ${map} and metric property ${metricProperty}`

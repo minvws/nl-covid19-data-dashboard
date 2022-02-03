@@ -14,11 +14,11 @@ import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 interface WideCoverageTable {
   values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinations']['nl']['booster_per_age_group_table'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
-  const { formatNumber, formatPercentage } = useIntl();
+  const { formatPercentage } = useIntl();
 
   return (
     <Box overflow="auto">
@@ -35,7 +35,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 textAlign: 'left',
                 width: asResponsiveArray({
                   _: '30%',
-                  lg: '33%',
+                  lg: '30%',
                 }),
               })}
             >
@@ -43,11 +43,11 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
             </HeaderCell>
             <HeaderCell
               css={css({
-                textAlign: 'left',
+                textAlign: 'right',
                 pr: asResponsiveArray({ _: 3, xl: 4 }),
                 width: asResponsiveArray({
                   _: '25%',
-                  lg: '33%',
+                  lg: '20%',
                 }),
               })}
             >
@@ -61,7 +61,17 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 pr: asResponsiveArray({ _: 3, xl: 4 }),
                 width: asResponsiveArray({
                   _: '25%',
-                  lg: '34%',
+                  lg: '20%',
+                }),
+              })}
+            />
+            <HeaderCell
+              css={css({
+                textAlign: 'right',
+                pr: asResponsiveArray({ _: 3, xl: 4 }),
+                width: asResponsiveArray({
+                  _: '20%',
+                  lg: '30%',
                 }),
               })}
             ></HeaderCell>
@@ -88,13 +98,12 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               </Cell>
               <Cell>
                 <WidePercentage
-                  value={`${formatNumber(
-                    item.received_booster_total
-                  )} (${formatPercentage(item.received_booster_percentage)}%)`}
+                  value={`${formatPercentage(item.received_booster_percentage)}%`}
                   color={COLOR_FULLY_BOOSTERED}
-                  justifyContent="flex-start"
+                  justifyContent="flex-end"
                 />
               </Cell>
+              <Cell />
               <Cell>
                 <Box spacing={1}>
                   <Bar

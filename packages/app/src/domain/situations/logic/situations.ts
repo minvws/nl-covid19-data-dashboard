@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { SiteText } from '~/locale';
 
 export type SituationTexts =
-  SiteText['pages']['contactTracing']['shared']['situaties'];
+  SiteText['pages']['situationsPage']['shared']['situaties'];
 export type SituationKey = keyof SituationTexts;
 
 interface Situation {

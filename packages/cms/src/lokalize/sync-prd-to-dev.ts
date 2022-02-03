@@ -65,8 +65,8 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
     documents.forEach((doc) => {
       transaction.patch(doc._id, {
         set: {
-          'text.nl': doc.text.nl,
-          'text.en': doc.text.en,
+          'text.nl': doc?.text?.nl,
+          'text.en': doc?.text?.en,
           should_display_empty: doc.should_display_empty,
           /**
            * Never copy over the key and subject properties! Because these could

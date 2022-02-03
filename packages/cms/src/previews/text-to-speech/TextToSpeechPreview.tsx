@@ -85,8 +85,8 @@ class TextToSpeechPreview extends React.Component<any> {
   handleStopSpeaking = () => {
     speechSynth?.cancel();
   };
-
-  componentWillMount = () => {
+  // componentWillMount is deprecated since React 16.9.0, using UNSAFE_componentWillMount instead
+  UNSAFE_componentWillMount = () => {
     this.setState({ activeField: this.fieldsAvailableForUtterance()[0] });
   };
 
