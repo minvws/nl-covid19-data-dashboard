@@ -129,7 +129,7 @@ export const features: Feature[] = [
     name: 'nlBoosterShotAdministeredSchemaDisable',
     isEnabled: false,
     dataScopes: ['nl'],
-    metricName: 'booster_shot_administered',
+    metricName: 'booster_shot_delivered',
   },
   {
     name: 'nlBoosterShotDeliveredSchemaDisable',
@@ -159,11 +159,38 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
   },
-  /**
-   * Vaccination Page Redesign feature flags
-   */
   {
-    name: 'vaccineCoverageToggleTile',
+    name: 'nlBoosterShotAdministeredSchemaDisable',
     isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_administered',
+  },
+  {
+    name: 'nlBoosterShotDeliveredSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_delivered',
+  },
+  {
+    name: 'nlBoosterShotPlannedSchemaDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_planned',
+  },
+  {
+    name: 'nlThirdShotAdministeredDisable',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'third_shot_administered',
+  },
+  {
+    name: 'loadingIndicator',
+    isEnabled: false,
+  },
+  {
+    name: 'nlVaccinationBoosterShotsPerAgeGroup',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'booster_shot_per_age_group',
   },
 ];

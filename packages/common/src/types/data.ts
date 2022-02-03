@@ -407,7 +407,7 @@ export interface NlBoosterShotPerAgeGroup {
   values: NlBoosterShotPerAgeGroupValue[];
 }
 export interface NlBoosterShotPerAgeGroupValue {
-  age_group_range: "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
+  age_group_range: "5-11" | "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
   received_booster_total: number;
   received_booster_percentage: number;
   date_of_insertion_unix: number;

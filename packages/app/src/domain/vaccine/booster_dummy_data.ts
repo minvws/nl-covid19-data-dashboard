@@ -76,4 +76,13 @@ export const DUMMY_DATA_BOOSTER_PER_AGE_GROUP = [
     received_booster_percentage: 68,
     date_of_insertion_unix: 1641387926,
   },
+  {
+    date_unix: 1641292200,
+    age_group_range: '5-11',
+    birthyear_range: '2010-2016',
+    age_group_total: 2887458,
+    received_booster_total: 791510,
+    received_booster_percentage: 68,
+    date_of_insertion_unix: 1641387926,
+  },
 ] as NlBoosterShotPerAgeGroupValue[];
