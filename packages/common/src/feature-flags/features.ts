@@ -193,11 +193,4 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
   },
-  /**
-   * Vaccination Page Redesign feature flags
-   */
-  {
-    name: 'vaccineCoverageToggleTile',
-    isEnabled: false,
-  },
 ];

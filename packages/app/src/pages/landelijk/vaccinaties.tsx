@@ -25,7 +25,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { DUMMY_DATA_BOOSTER_PER_AGE_GROUP } from '~/domain/vaccine/booster_dummy_data';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
@@ -74,6 +73,7 @@ import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 import { BoosterShotCoveragePerAgeGroup } from '~/domain/vaccine/booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
+import { Divider } from '~/components/divider';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -332,127 +332,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          {vaccineAdministeredGgdFeature.isEnabled &&
-            vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
-            vaccineAdministeredDoctorsFeature.isEnabled &&
-            vaccineAdministeredGgdGhorFeature.isEnabled && (
-              <VaccineAdministrationsKpiSection data={data} />
-            )}
-          <Box
-            pt={40}
-            borderTopWidth={2}
-            borderColor="silver"
-            borderStyle="solid"
-          >
-            <PageInformationBlock
-              icon={<BoosterIcon />}
-              title={textNl.booster_information_block.title}
-              description={textNl.booster_information_block.description}
-              metadata={{
-                datumsText: textNl.booster_information_block.datums,
-                dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
-                dateOfInsertionUnix:
-                  boosterCoverageEstimatedLastValue.date_of_insertion_unix,
-                dataSources: [
-                  {
-                    href: '',
-                    text: textNl.booster_information_block.sources.text,
-                    download: '',
-                  },
-                ],
-              }}
-              referenceLink={textNl.booster_information_block.reference.href}
-            />
-          </Box>
-
-          <VaccineBoosterAdministrationsKpiSection
-            totalBoosterAndThirdShots={
-              boosterCoverageEstimatedLastValue.administered_total
-            }
-            metadateBoosterAndThirdShots={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: boosterCoverageEstimatedLastValue.date_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-            boosterGgdValue={
-              boosterShotAdministeredLastValue.ggd_administered_total
-            }
-            metadateBoosterGgd={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_end_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-            boosterEstimatedValue={
-              boosterShotAdministeredLastValue.others_administered_total
-            }
-            metadateBoosterEstimated={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_end_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-            thirdGgdValue={thirdShotAdministeredLastValue.administered_total}
-            metadateThirdGgd={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: thirdShotAdministeredLastValue.date_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-          />
-
-          <VaccinationsBoosterKpiSection
-            dataBoosterShotAdministered={
-              boosterShotAdministeredLastValue.ggd_administered_last_7_days
-            }
-            metadataBoosterShotAdministered={{
-              datumsText: textNl.booster_ggd_kpi_section.datums,
-              date: [
-                boosterShotAdministeredLastValue.date_start_unix,
-                boosterShotAdministeredLastValue.date_end_unix,
-              ],
-              source: {
-                href: textNl.booster_ggd_kpi_section.sources.href,
-                text: textNl.booster_ggd_kpi_section.sources.text,
-              },
-            }}
-          />
-
           <VaccineCoverageChoroplethPerGm data={choropleth} />
-
-          <BoosterShotCoveragePerAgeGroup
-            title={textNl.booster_per_age_group_table.title}
-            description={textNl.booster_per_age_group_table.description}
-            sortingOrder={[
-              '81+',
-              '71-80',
-              '61-70',
-              '51-60',
-              '41-50',
-              '31-40',
-              '18-30',
-              '12-17',
-              '5-11',
-            ]}
-            metadata={{
-              datumsText: textNl.datums,
-              date: data.booster_shot_per_age_group.values[0]?.date_unix,
-              source: textNl.booster_per_age_group_table.bronnen.rivm,
-            }}
-            values={data.booster_shot_per_age_group.values?.filter(
-              (age) => age.age_group_range !== '5-11'
-            )}
-            text={textNl.booster_per_age_group_table}
-          />
 
           <VaccineCoveragePerAgeGroup
             title={textNl.vaccination_coverage.title}
@@ -474,6 +354,31 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
             values={data.vaccine_coverage_per_age_group.values}
+          />
+
+          <BoosterShotCoveragePerAgeGroup
+            title={textNl.booster_per_age_group_table.title}
+            description={textNl.booster_per_age_group_table.description}
+            sortingOrder={[
+              '81+',
+              '71-80',
+              '61-70',
+              '51-60',
+              '41-50',
+              '31-40',
+              '18-30',
+              '12-17',
+              '5-11',
+            ]}
+            metadata={{
+              datumsText: textNl.datums,
+              date: data.vaccine_coverage_per_age_group.values[0]?.date_unix,
+              source: textNl.booster_per_age_group_table.bronnen.rivm,
+            }}
+            values={data.vaccine_coverage_per_age_group.values.filter(
+              (age) => !(age.age_group_range === '5-11' || age.age_group_range === '12-17')
+            )}
+            text={textNl.booster_per_age_group_table}
           />
 
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
@@ -638,6 +543,104 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 </Box>
               </ChartTile>
             )}
+
+{vaccineAdministeredGgdFeature.isEnabled &&
+            vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
+            vaccineAdministeredDoctorsFeature.isEnabled &&
+            vaccineAdministeredGgdGhorFeature.isEnabled && (
+              <VaccineAdministrationsKpiSection data={data} />
+            )}
+          <Box
+            pt={40}
+            borderTopWidth={2}
+            borderColor="silver"
+            borderStyle="solid"
+          >
+            <PageInformationBlock
+              icon={<BoosterIcon />}
+              title={textNl.booster_information_block.title}
+              description={textNl.booster_information_block.description}
+              metadata={{
+                datumsText: textNl.booster_information_block.datums,
+                dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
+                dateOfInsertionUnix:
+                  boosterCoverageEstimatedLastValue.date_of_insertion_unix,
+                dataSources: [
+                  {
+                    href: '',
+                    text: textNl.booster_information_block.sources.text,
+                    download: '',
+                  },
+                ],
+              }}
+              referenceLink={textNl.booster_information_block.reference.href}
+            />
+          </Box>
+
+          <VaccineBoosterAdministrationsKpiSection
+            totalBoosterAndThirdShots={
+              boosterCoverageEstimatedLastValue.administered_total
+            }
+            metadateBoosterAndThirdShots={{
+              datumsText: textNl.booster_and_third_kpi.datums,
+              date: boosterCoverageEstimatedLastValue.date_unix,
+              source: {
+                href: textNl.booster_and_third_kpi.sources.href,
+                text: textNl.booster_and_third_kpi.sources.text,
+              },
+            }}
+            boosterGgdValue={
+              boosterShotAdministeredLastValue.ggd_administered_total
+            }
+            metadateBoosterGgd={{
+              datumsText: textNl.booster_and_third_kpi.datums,
+              date: boosterShotAdministeredLastValue.date_end_unix,
+              source: {
+                href: textNl.booster_and_third_kpi.sources.href,
+                text: textNl.booster_and_third_kpi.sources.text,
+              },
+            }}
+            boosterEstimatedValue={
+              boosterShotAdministeredLastValue.others_administered_total
+            }
+            metadateBoosterEstimated={{
+              datumsText: textNl.booster_and_third_kpi.datums,
+              date: boosterShotAdministeredLastValue.date_end_unix,
+              source: {
+                href: textNl.booster_and_third_kpi.sources.href,
+                text: textNl.booster_and_third_kpi.sources.text,
+              },
+            }}
+            thirdGgdValue={thirdShotAdministeredLastValue.administered_total}
+            metadateThirdGgd={{
+              datumsText: textNl.booster_and_third_kpi.datums,
+              date: thirdShotAdministeredLastValue.date_unix,
+              source: {
+                href: textNl.booster_and_third_kpi.sources.href,
+                text: textNl.booster_and_third_kpi.sources.text,
+              },
+            }}
+          />
+
+
+          <VaccinationsBoosterKpiSection
+            dataBoosterShotAdministered={
+              boosterShotAdministeredLastValue.ggd_administered_last_7_days
+            }
+            metadataBoosterShotAdministered={{
+              datumsText: textNl.booster_ggd_kpi_section.datums,
+              date: [
+                boosterShotAdministeredLastValue.date_start_unix,
+                boosterShotAdministeredLastValue.date_end_unix,
+              ],
+              source: {
+                href: textNl.booster_ggd_kpi_section.sources.href,
+                text: textNl.booster_ggd_kpi_section.sources.text,
+              },
+            }}
+          />
+
+          <Divider/>
 
           <PageInformationBlock
             title={textNl.section_archived.title}
