@@ -1,11 +1,8 @@
-import { ValidatedInput } from '../../components';
 import { Rule } from '~/sanity';
 import {
   localeStringValidation,
   localeValidation,
 } from '../../language/locale-validation';
-
-const REQUIRED_FIELD_ERROR = 'Dit veld is verplicht.';
 
 export const ARTICLE_FIELDS = [
   {
@@ -13,7 +10,6 @@ export const ARTICLE_FIELDS = [
     name: 'title',
     type: 'localeString',
     validation: localeStringValidation((rule) => rule.required()),
-    // inputComponent: ValidatedInput,
   },
   {
     title: 'Slug',
@@ -29,9 +25,7 @@ export const ARTICLE_FIELDS = [
     name: 'metaDescription',
     type: 'localeString',
     fieldset: 'metadata',
-    validation: localeStringValidation((rule) =>
-      rule.required().error(REQUIRED_FIELD_ERROR)
-    ),
+    validation: localeStringValidation((rule) => rule.required()),
   },
   {
     title: 'Publicatie datum',
@@ -44,7 +38,7 @@ export const ARTICLE_FIELDS = [
       calendarTodayLabel: 'Today',
     },
     fieldset: 'metadata',
-    validation: (rule: Rule) => rule.required().error(REQUIRED_FIELD_ERROR),
+    validation: (rule: Rule) => rule.required(),
   },
   {
     title: 'Categorieën instellen',
@@ -63,27 +57,21 @@ export const ARTICLE_FIELDS = [
         { title: 'Gedrag', value: 'gedrag' },
       ],
     },
-    validation: (rule: Rule) =>
-      rule.required().min(1).error(REQUIRED_FIELD_ERROR),
+    validation: (rule: Rule) => rule.required().min(1),
   },
   {
     title: 'Samenvatting',
     description:
-      'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',
+      'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina. Maximaal 120 karakters toegestaan.',
     name: 'summary',
     type: 'localeText',
-    // @Todo Align with content team about migrating content, and then enforce max length of 120.
-    validation: localeValidation((rule) =>
-      rule.required().error(REQUIRED_FIELD_ERROR)
-    ),
+    validation: localeValidation((rule) => rule.required().max(120)),
   },
   {
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
-    validation: localeValidation((rule) =>
-      rule.required().error(REQUIRED_FIELD_ERROR)
-    ),
+    validation: localeValidation((rule) => rule.required()),
   },
   {
     title: 'Afbeelding',
@@ -104,15 +92,12 @@ export const ARTICLE_FIELDS = [
         .custom((context: any) => {
           return context.asset ? true : 'Image required';
         })
-        .required()
-        .error(),
+        .required(),
   },
   {
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
-    validation: localeValidation((rule) =>
-      rule.required().error(REQUIRED_FIELD_ERROR)
-    ),
+    validation: localeValidation((rule) => rule.required()),
   },
 ];

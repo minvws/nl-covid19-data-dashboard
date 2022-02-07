@@ -1,3 +1,4 @@
+import { ValidatedTextArea } from '../../components/validated-input';
 import { supportedLanguages } from '../../language/supported-languages';
 
 export const localeText = {
@@ -14,5 +15,6 @@ export const localeText = {
     title: lang.title,
     name: lang.id,
     type: 'text',
+    inputComponent: ValidatedTextArea,
   })),
 };

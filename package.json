@@ -37,5 +37,8 @@
   "packageManager": "yarn@3.1.0",
   "devDependencies": {
     "ts-node": "^10.4.0"
+  },
+  "dependencies": {
+    "@sanity/form-builder": "^2.26.0"
   }
 }
