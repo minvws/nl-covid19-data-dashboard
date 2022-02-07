@@ -408,7 +408,7 @@ function AreaMap(props: AreaMapProps) {
     <map
       name={id}
       tabIndex={isTabInteractive ? 0 : -1}
-      {...{ [isTouch ? 'onTouchStart' : 'onMouseMove']: handleMouseOver }}
+      onMouseMove={!isTouch ? handleMouseOver : undefined}
     >
       {geoInfo.map((x, i) => (
         <area
