@@ -19,7 +19,7 @@ UseIsTouchDevice.before((context) => {
 
   sinon.stub(window, 'matchMedia').callsFake((mq: string) => {
     switch (mq) {
-      case '(hover: none)': {
+      case '(pointer: coarse)': {
         return {
           matches: context.isTouchDevice,
           // eslint-disable-next-line @typescript-eslint/no-empty-function
