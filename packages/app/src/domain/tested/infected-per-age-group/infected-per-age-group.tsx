@@ -24,7 +24,13 @@ interface InfectedPerAgeGroup {
    */
   accessibility: AccessibilityDefinition;
   values: NlTestedPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks';
+  timeframe:
+    | 'all'
+    | '2weeks'
+    | '30days'
+    | '3months'
+    | 'lastYear'
+    | 'startOfYear';
   timelineEvents?: TimelineEventConfig[];
 }
 

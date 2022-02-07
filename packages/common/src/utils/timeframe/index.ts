@@ -7,13 +7,69 @@ import {
 } from '../../data-sorting';
 import { DAY_IN_SECONDS } from '../../time';
 
-export type TimeframeOption = 'all' | '5weeks';
+export type TimeframeOption =
+  | 'all'
+  | '2weeks'
+  | '5weeks'
+  | '30days'
+  | '3months'
+  | 'lastYear'
+  | 'startOfYear';
 
 export function getDaysForTimeframe(timeframe: TimeframeOption) {
-  if (timeframe === '5weeks') {
-    return 5 * 7;
+  // const today = new Date();
+  // const dd = String(today.getDate()).padStart(2, '0');
+  // const mm = String(today.getMonth() + 1).padStart(2, '0');
+  // const yyyy = today.getFullYear();
+
+  const today = new Date();
+  const startOfPrevYear = new Date('01/01/2021');
+
+  const difference = today.getTime() - startOfPrevYear.getTime();
+  const totalDays = Math.ceil(difference / (1000 * 3600 * 24) - 1);
+
+  switch (timeframe) {
+    case '2weeks':
+      return 2 * 7;
+    // break;
+    case '5weeks':
+      return 5 * 7;
+    // break;
+    case '30days':
+      return 30;
+    // break;
+    case '3months':
+      return 3 * 30;
+    // break;
+    case 'lastYear':
+      return 365;
+    // break;
+    case 'startOfYear':
+      return totalDays;
+    default:
+      return Infinity;
   }
-  return Infinity;
+
+  // if (timeframe === '2weeks') {
+  //   return 2 * 7;
+  // }
+  // if (timeframe === '5weeks') {
+  //   return 5 * 7;
+  // }
+  // if (timeframe === '30days') {
+  //   return 30;
+  // }
+  // if (timeframe === '3months') {
+  //   return 3 * 30;
+  // }
+  // if (timeframe === 'lastYear') {
+  //   return 365;
+  // }
+  // if (timeframe === 'startOfYear') {
+  //   //return new Date(new Date().getFullYear() - 1, 0, 1);
+  //   return 0;
+  // }
+  // return Infinity;
 }
 
 const oneDayInMilliseconds = DAY_IN_SECONDS * 1000;
