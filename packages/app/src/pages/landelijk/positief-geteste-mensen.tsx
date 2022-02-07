@@ -215,7 +215,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[
+              'all',
+              '2weeks',
+              '30days',
+              '3months',
+              'lastYear',
+              'startOfYear',
+            ]}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -343,7 +350,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <ChartTile
               title={siteText.infected_per_age_group.title}
               description={siteText.infected_per_age_group.description}
-              timeframeOptions={['all', '5weeks']}
+              timeframeOptions={[
+                'all',
+                '2weeks',
+                '30days',
+                '3months',
+                'lastYear',
+                'startOfYear',
+              ]}
               metadata={{
                 source: text.bronnen.rivm,
               }}
@@ -458,7 +472,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={['all', '5weeks']}
+              timeframeOptions={[
+                'all',
+                '2weeks',
+                '30days',
+                '3months',
+                'lastYear',
+                'startOfYear',
+              ]}
               title={ggdText.linechart_totaltests_titel}
               description={ggdText.linechart_totaltests_toelichting}
               metadata={{
