@@ -4,7 +4,7 @@
  */
 export function isTouchDevice() {
   return (
-    (typeof window !== 'undefined' && 'ontouchstart' in window) ||
-    (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0)
+    typeof window !== 'undefined' &&
+    window.matchMedia('(pointer: coarse)').matches
   );
 }
