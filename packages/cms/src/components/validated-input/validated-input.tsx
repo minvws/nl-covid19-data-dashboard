@@ -102,7 +102,7 @@ export const ValidatedInput = React.forwardRef(
         {markers.length ? (
           <Markers>
             {markers.map((marker) => (
-              <div>
+              <div key={marker.item.message}>
                 <strong>{marker.item.message}</strong>
               </div>
             ))}
