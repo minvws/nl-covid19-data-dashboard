@@ -27,6 +27,7 @@ interface InfectedPerAgeGroup {
   timeframe:
     | 'all'
     | '2weeks'
+    | '5weeks'
     | '30days'
     | '3months'
     | 'lastYear'
