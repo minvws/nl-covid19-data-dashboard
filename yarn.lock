@@ -2724,6 +2724,7 @@ __metadata:
     "@sanity/default-layout": ^2.25.4
     "@sanity/default-login": ^2.24.1
     "@sanity/desk-tool": ^2.25.4
+    "@sanity/form-builder": ^2.26.0
     "@sanity/production-preview": ^2.15.0
     "@sanity/ui": ^0.36.15
     "@sanity/vision": ^2.25.4
@@ -4207,8 +4208,8 @@ __metadata:
   linkType: hard
 
 "@sanity/client@npm:^3.0.1":
-  version: 3.0.3
-  resolution: "@sanity/client@npm:3.0.3"
+  version: 3.0.4
+  resolution: "@sanity/client@npm:3.0.4"
   dependencies:
     "@sanity/eventsource": ^2.23.0
     "@sanity/generate-help-url": ^2.18.0
@@ -4216,7 +4217,7 @@ __metadata:
     make-error: ^1.3.0
     object-assign: ^4.1.1
     rxjs: ^6.0.0
-  checksum: fdeb72cc508195ce2c1effdb5891637c6fd7ddac9ebe549b040d7b4c8ed0f4f4520bf1fc440ce0b65bb2c0f860796124e1092198becbf4c3041c0704d680a9f6
+  checksum: 440f3b1ac9b0c099c6675f69d04c3c1281f95ed00977d10daada6003fd29bd738351ab167d0072cffb6357cef60a5f02e17cf2f16e4d46b5d3f1a4d9a26bb3b5
   languageName: node
   linkType: hard
 
@@ -11790,7 +11791,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "corona-dashboard@workspace:."
   dependencies:
-    "@sanity/form-builder": ^2.26.0
     ts-node: ^10.4.0
   languageName: unknown
   linkType: soft

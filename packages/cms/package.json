@@ -36,6 +36,7 @@
     "@sanity/default-layout": "^2.25.4",
     "@sanity/default-login": "^2.24.1",
     "@sanity/desk-tool": "^2.25.4",
+    "@sanity/form-builder": "^2.26.0",
     "@sanity/production-preview": "^2.15.0",
     "@sanity/ui": "^0.36.15",
     "@sanity/vision": "^2.25.4",
