@@ -416,7 +416,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
                       label:
-                        siteText.ziekenhuisopnames_per_dag
+                        siteText.pages.hospitalPage.nl
                           .linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
@@ -424,7 +424,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
                       label:
-                        siteText.ziekenhuisopnames_per_dag
+                        siteText.pages.hospitalPage.nl
                           .linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
