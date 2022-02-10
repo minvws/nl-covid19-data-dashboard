@@ -14,14 +14,14 @@ interface ChartTimeControlsProps {
 export function ChartTimeControls(props: ChartTimeControlsProps) {
   const {
     onChange,
+    timeframe,
     timeframeOptions = [
-      'all',
       '2weeks',
-      '5weeks',
       '30days',
       '3months',
       'lastYear',
       'startOfYear',
+      'all',
     ],
   } = props;
   const { siteText } = useIntl();
@@ -43,7 +43,7 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
     <RichContentSelect
       label={siteText.pages.vaccinationsPage.nl.age_group_dropdown.label}
       visuallyHiddenLabel
-      initialValue={timeframeOptions[0]}
+      initialValue={timeframe}
       options={selectOptions}
       onChange={(option) => onChange(option.value)}
     />

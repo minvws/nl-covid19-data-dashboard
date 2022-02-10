@@ -35,12 +35,10 @@ export function ChartTile({
   children,
   metadata,
   timeframeOptions,
-  timeframeInitialValue = 'all',
+  timeframeInitialValue,
   disableFullscreen,
 }: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue
-  );
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || 'all');
 
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
