@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
+import { isIOSDevice } from '~/utils/is-ios-device';
 import { AccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -408,7 +409,7 @@ function AreaMap(props: AreaMapProps) {
     <map
       name={id}
       tabIndex={isTabInteractive ? 0 : -1}
-      {...{ [isTouch ? 'onTouchStart' : 'onMouseMove']: handleMouseOver }}
+      onMouseMove={!isTouch || isIOSDevice() ? handleMouseOver : undefined}
     >
       {geoInfo.map((x, i) => (
         <area

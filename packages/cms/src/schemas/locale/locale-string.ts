@@ -1,3 +1,4 @@
+import { ValidatedInput } from '../../components/validated-input';
 import { supportedLanguages } from '../../language/supported-languages';
 
 export const localeString = {
@@ -8,5 +9,6 @@ export const localeString = {
     title: lang.title,
     name: lang.id,
     type: 'string',
+    inputComponent: ValidatedInput,
   })),
 };
