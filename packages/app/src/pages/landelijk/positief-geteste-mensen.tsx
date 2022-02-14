@@ -216,13 +216,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
             timeframeOptions={[
+              'all',
               '2weeks',
               '30days',
               '3months',
               'lastYear',
               'startOfYear',
-              'all',
             ]}
+            hasFullWidth
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -351,16 +352,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               title={siteText.infected_per_age_group.title}
               description={siteText.infected_per_age_group.description}
               timeframeOptions={[
+                'all',
                 '2weeks',
                 '30days',
                 '3months',
                 'lastYear',
                 'startOfYear',
-                'all',
               ]}
               metadata={{
                 source: text.bronnen.rivm,
               }}
+              hasFullWidth
             >
               {(timeframe) => (
                 <InfectedPerAgeGroup
@@ -473,18 +475,19 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <InView rootMargin="400px">
             <ChartTile
               timeframeOptions={[
+                'all',
                 '2weeks',
                 '30days',
                 '3months',
                 'lastYear',
                 'startOfYear',
-                'all',
               ]}
               title={ggdText.linechart_totaltests_titel}
               description={ggdText.linechart_totaltests_toelichting}
               metadata={{
                 source: ggdText.bronnen.rivm,
               }}
+              hasFullWidth
             >
               {(timeframe) => (
                 <TimeSeriesChart

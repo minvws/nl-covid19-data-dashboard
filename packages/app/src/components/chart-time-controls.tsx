@@ -16,18 +16,19 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
     onChange,
     timeframe,
     timeframeOptions = [
+      'all',
       '2weeks',
       '30days',
       '3months',
       'lastYear',
       'startOfYear',
-      'all',
     ],
   } = props;
   const { siteText } = useIntl();
 
   const selectOptions = useMemo(
-    () => timeframeOptions.map((key) => ({
+    () =>
+      timeframeOptions.map((key) => ({
         label: siteText.charts.time_controls[key],
         value: key,
         content: (
