@@ -5,27 +5,31 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useIntl } from '~/intl';
 import { Tile } from '~/components/tile';
 import { Metadata, MetadataProps } from '~/components/metadata';
+import { Message } from '~/components/message';
 
 interface VaccinationsBoosterKpiSectionProps {
-  dataBoosterShotAdministered: number;
-  metadataBoosterShotAdministered: MetadataProps;
+  thirdGgdValue: number;
+  metadateThirdGgd: MetadataProps;
 }
 
 export function VaccinationsBoosterKpiSection({
-  dataBoosterShotAdministered,
-  metadataBoosterShotAdministered,
+  thirdGgdValue,
+  metadateThirdGgd,
 }: VaccinationsBoosterKpiSectionProps) {
   const { siteText, formatNumber } = useIntl();
 
-  const text = siteText.pages.vaccinationsPage.nl.booster_ggd_kpi_section;
+  const text = siteText.pages.vaccinationsPage.nl.booster_and_third_kpi;
 
   return (
     <Tile>
       <TwoKpiSection>
-        <KpiTile title={text.booster_last_7_days.title} hasNoBorder>
-          <KpiValue text={formatNumber(dataBoosterShotAdministered)} />
-          <Markdown content={text.booster_last_7_days.description} />
-          <Metadata {...metadataBoosterShotAdministered} />
+        <KpiTile title={text.third_ggd.title} hasNoBorder>
+          <KpiValue text={formatNumber(thirdGgdValue)} />
+          <Markdown content={text.third_ggd.description} />
+          {text.third_ggd.warning && (
+            <Message variant="warning">{text.third_ggd.warning}</Message>
+          )}
+          <Metadata {...metadateThirdGgd} />
         </KpiTile>
         <KpiTile hasNoBorder />
       </TwoKpiSection>
