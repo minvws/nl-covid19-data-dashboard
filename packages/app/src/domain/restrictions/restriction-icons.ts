@@ -78,5 +78,4 @@ export const restrictionIcons: Record<string, string | null> = {
     'georganiseerde-kunst-en-cultuurbeoefening.svg',
   openbaarVervoer: 'openbaar-vervoer.svg',
   binnensportlocaties: 'binnensportlocaties.svg',
-  dot: 'dot.svg',
 };
