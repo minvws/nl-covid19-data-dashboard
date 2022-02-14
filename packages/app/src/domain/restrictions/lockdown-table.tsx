@@ -106,16 +106,15 @@ function MobileLockdownTable(props: LockdownTableData) {
                                 css={css({ filter })}
                               />
                             ) : (
-                              <Box
-                                size={36}
-                                as="div"
-                                height="5px"
-                                width="5px"
-                                backgroundColor="#000000"
-                                borderRadius="50%"
-                                display="inline-block"
-                                mx={3}
-                                my={3}
+                              <img
+                                src={`/icons/app/dot.svg`}
+                                width="5"
+                                height="5"
+                                alt=""
+                                css={css({
+                                  filter: filter,
+                                  marginTop: 3,
+                                })}
                               />
                             )}
                           </Box>
@@ -204,16 +203,15 @@ function DesktopLockdownTable(props: LockdownTableData) {
                               })}
                             />
                           ) : (
-                            <Box
-                              size={36}
-                              as="div"
-                              height="5px"
-                              width="5px"
-                              backgroundColor="#000000"
-                              borderRadius="50%"
-                              display="inline-block"
-                              mx={3}
-                              my={3}
+                            <img
+                              src={`/icons/app/dot.svg`}
+                              width="5"
+                              height="5"
+                              alt=""
+                              css={css({
+                                filter: filter,
+                                marginTop: 3,
+                              })}
                             />
                           )}
                         </Box>
