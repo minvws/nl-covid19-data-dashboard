@@ -29,7 +29,7 @@
     "test": "echo 'No tests available for @corona-dashboard/cli'",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli'",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\"",
-    "lint": "echo 'No linter configured for @corona-dashboard/cli'",
+    "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
     "calculate-boundingboxes": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/calculate-bounding-box-municipalities.ts",
     "validate-json": "yarn run validate-json-all",
@@ -43,6 +43,10 @@
     "@types/node": "^16.11.11",
     "@types/semver": "^7.3.9",
     "@types/topojson-client": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   }
