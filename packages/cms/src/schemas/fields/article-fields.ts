@@ -63,11 +63,10 @@ export const ARTICLE_FIELDS = [
   {
     title: 'Samenvatting',
     description:
-      'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',
+      'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina. Maximaal 120 karakters toegestaan.',
     name: 'summary',
     type: 'localeText',
-    // @Todo Align with content team about migrating content, and then enforce max length of 120.
-    validation: localeValidation((rule) => rule.required()),
+    validation: localeValidation((rule) => rule.required().max(120)),
   },
   {
     title: 'Intro',

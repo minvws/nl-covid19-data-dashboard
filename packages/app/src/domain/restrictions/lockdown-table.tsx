@@ -106,7 +106,16 @@ function MobileLockdownTable(props: LockdownTableData) {
                                 css={css({ filter })}
                               />
                             ) : (
-                              <Box size={36} />
+                              <img
+                                src={`/icons/app/dot.svg`}
+                                width="5"
+                                height="5"
+                                alt=""
+                                css={css({
+                                  filter: filter,
+                                  marginTop: 3,
+                                })}
+                              />
                             )}
                           </Box>
                           <Box mt="2">{restriction.text}</Box>
@@ -194,7 +203,16 @@ function DesktopLockdownTable(props: LockdownTableData) {
                               })}
                             />
                           ) : (
-                            <Box size={36} />
+                            <img
+                              src={`/icons/app/dot.svg`}
+                              width="5"
+                              height="5"
+                              alt=""
+                              css={css({
+                                filter: filter,
+                                marginTop: 3,
+                              })}
+                            />
                           )}
                         </Box>
                         <Box as="span" ml={1} mt={2}>

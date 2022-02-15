@@ -69,6 +69,9 @@ export function AppFooter() {
                 <Item href={reverseRouter.algemeen.over()}>
                   {text.nav.links.over}
                 </Item>
+                <Item href={reverseRouter.algemeen.artikelen()}>
+                  {text.nav.links.artikelen}
+                </Item>
                 <Item href={reverseRouter.algemeen.toegankelijkheid()}>
                   {text.nav.links.toegankelijkheid}
                 </Item>

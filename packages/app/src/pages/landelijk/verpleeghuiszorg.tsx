@@ -20,6 +20,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
+import { Languages } from '~/locale';
 import { useIntl } from '~/intl';
 import {
   ElementsQueryResult,
@@ -38,6 +39,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
@@ -45,6 +47,14 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textNl: siteText.pages.nursingHomePage.nl,
+        textShared: siteText.pages.nursingHomePage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.nursing_home__infected_locations_total',
@@ -79,7 +89,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    lastGenerated,
+    content,
+  } = props;
   const nursinghomeDataLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
     data.nursing_home.values,
@@ -88,10 +104,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
+  const { textNl, textShared } = pageText;
+  const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
-    siteText.verpleeghuis_positief_geteste_personen;
-  const deceased = siteText.verpleeghuis_oversterfte;
+    textNl.verpleeghuis_positief_geteste_personen;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -305,7 +321,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'area',
                     metricProperty: 'infected_locations_total',
                     label:
-                      siteText.verpleeghuis_besmette_locaties
+                      textShared.verpleeghuis_besmette_locaties
                         .linechart_tooltip_label,
                     color: colors.data.primary,
                   },
@@ -318,26 +334,26 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="sterfte"
-            title={deceased.titel}
+            title={textNl.titel}
             icon={<Coronavirus />}
-            description={deceased.pagina_toelichting}
+            description={textNl.pagina_toelichting}
             metadata={{
-              datumsText: deceased.datums,
+              datumsText: textNl.datums,
               dateOrRange: nursinghomeDataLastValue.date_unix,
               dateOfInsertionUnix:
                 nursinghomeDataLastValue.date_of_insertion_unix,
-              dataSources: [deceased.bronnen.rivm],
+              dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={deceased.reference.href}
+            referenceLink={textNl.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={deceased.barscale_titel}
-              description={deceased.extra_uitleg}
+              title={textNl.barscale_titel}
+              description={textNl.extra_uitleg}
               metadata={{
                 date: nursinghomeDataLastValue.date_unix,
-                source: deceased.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -348,10 +364,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: deceased.bronnen.rivm }}
-            title={deceased.linechart_titel}
+            metadata={{ source: textNl.bronnen.rivm }}
+            title={textNl.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            description={deceased.linechart_description}
+            description={textNl.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -364,17 +380,16 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
-                    label:
-                      deceased.line_chart_legend_trend_moving_average_label,
+                    label: textNl.line_chart_legend_trend_moving_average_label,
                     shortLabel:
-                      deceased.tooltip_labels.deceased_daily_moving_average,
+                      textNl.tooltip_labels.deceased_daily_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
-                    label: deceased.line_chart_legend_trend_label,
-                    shortLabel: deceased.tooltip_labels.deceased_daily,
+                    label: textNl.line_chart_legend_trend_label,
+                    shortLabel: textNl.tooltip_labels.deceased_daily,
                     color: colors.data.primary,
                   },
                 ]}
@@ -383,8 +398,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedDateStart,
                       end: Infinity,
-                      label: deceased.line_chart_legend_inaccurate_label,
-                      shortLabel: deceased.tooltip_labels.inaccurate,
+                      label: textNl.line_chart_legend_inaccurate_label,
+                      shortLabel: textNl.tooltip_labels.inaccurate,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],
