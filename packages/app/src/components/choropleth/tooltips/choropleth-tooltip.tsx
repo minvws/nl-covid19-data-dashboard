@@ -83,7 +83,9 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       <TooltipSubject
         subject={replaceVariablesInText(subject, tooltipVars)}
         thresholdValues={data.thresholdValues}
-        filterBelow={data.dataItem[data.dataConfig.metricProperty]}
+        filterBelow={
+          data.dataItem[data.dataConfig.metricProperty] as unknown as number
+        }
       >
         <Markdown content={content} />
       </TooltipSubject>

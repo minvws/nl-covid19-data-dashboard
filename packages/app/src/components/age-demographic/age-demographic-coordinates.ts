@@ -100,7 +100,9 @@ function calculateAgeDemographicCoordinates<
   // Height and top margin are higher for small screens to fit the heading texts
   const isNarrowScreen = parentWidth < 400;
   // Set height height according to amount of bars in chart.
-  const height = isNarrowScreen ? 234 + (singleBarHeight * barCount) : 214 + (singleBarHeight * barCount);
+  const height = isNarrowScreen
+    ? 234 + singleBarHeight * barCount
+    : 214 + singleBarHeight * barCount;
   const marginX = isSmallScreen ? 10 : 40;
   const margin = {
     top: isNarrowScreen ? 55 : 35,
@@ -116,8 +118,10 @@ function calculateAgeDemographicCoordinates<
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const getLeftValue = (value: T) => value[leftMetricProperty];
-  const getRightValue = (value: T) => value[rightMetricProperty];
+  const getLeftValue = (value: T) =>
+    value[leftMetricProperty] as unknown as number;
+  const getRightValue = (value: T) =>
+    value[rightMetricProperty] as unknown as number;
   const ageGroupRange = (value: T) => value.age_group_range;
 
   // Scales to map between values and coordinates

@@ -42,7 +42,7 @@ export function AgeDemographicTooltipContent<
       <Legend>
         <LegendItem color={rightColor}>
           <InlineText fontWeight="bold">
-            {formatValue(value[rightMetricProperty])}
+            {formatValue(value[rightMetricProperty] as unknown as number)}
           </InlineText>{' '}
           {replaceVariablesInText(text.right_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
@@ -50,7 +50,7 @@ export function AgeDemographicTooltipContent<
         </LegendItem>
         <LegendItem color={leftColor}>
           <InlineText fontWeight="bold">
-            {formatValue(value[leftMetricProperty])}
+            {formatValue(value[leftMetricProperty] as unknown as number)}
           </InlineText>{' '}
           {replaceVariablesInText(text.left_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
