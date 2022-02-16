@@ -78,15 +78,6 @@ export function VaccinationsOverTimeChart(
           } as DataOptions,
           seriesConfig: [
             {
-              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
-              shortLabel:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .tooltip_label_totaal,
-              type: 'line',
-              metricProperty: 'partially_or_fully_vaccinated',
-              color: 'black',
-            },
-            {
               label:
                 text.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
               shortLabel:
@@ -121,6 +112,15 @@ export function VaccinationsOverTimeChart(
               color: colors.data.darkBlue,
               mixBlendMode: 'multiply',
               fillOpacity: 1,
+            },
+            {
+              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
+              shortLabel:
+                text.grafiek_gevaccineerd_door_de_tijd_heen
+                  .tooltip_label_totaal,
+              type: 'line',
+              metricProperty: 'partially_or_fully_vaccinated',
+              color: 'black',
             },
           ],
         } as TimeSeriesChartProps<
