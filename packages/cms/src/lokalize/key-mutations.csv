@@ -1363,3 +1363,6 @@ timestamp,action,key,document_id,move_to
 2022-02-15T08:32:27.405Z,add,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.description,bniNfVJZIl9JdqAvkahNEZ,__
 2022-02-15T08:32:28.427Z,add,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.warning,cMyxiAWysxVuQDLs1fweGl,__
 2022-02-15T08:32:29.424Z,add,pages.vaccinationsPage.nl.booster_and_third_kpi.booster_shot_last_seven_days.description,W42pYebYgNKSplnOwA9UMB,__
+2022-02-16T11:00:07.530Z,move,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.description,bniNfVJZIl9JdqAvkahNEZ,pages.vaccinationsPage.nl.booster_and_third_kpi.third_shots.description
+2022-02-16T11:00:07.530Z,move,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.title,Hpcrbv9k01wdsU0EgV8XGU,pages.vaccinationsPage.nl.booster_and_third_kpi.third_shots.title
+2022-02-16T11:00:07.530Z,move,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.warning,cMyxiAWysxVuQDLs1fweGl,pages.vaccinationsPage.nl.booster_and_third_kpi.third_shots.warning
