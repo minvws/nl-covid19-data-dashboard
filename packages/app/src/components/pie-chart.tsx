@@ -74,7 +74,7 @@ export function PieChart<T>({
 
   const totalValue = dataConfig.reduce(
     (previousValue, currentValue) =>
-      previousValue + data[currentValue.metricProperty],
+      previousValue + (data[currentValue.metricProperty] as unknown as number),
     0
   );
 
@@ -85,7 +85,7 @@ export function PieChart<T>({
 
         return {
           __value: Math.max(
-            currentProperty,
+            currentProperty as unknown as number,
             totalValue * (minimumPercentage / 100) * 2
           ),
           ...config,

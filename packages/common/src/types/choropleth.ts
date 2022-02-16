@@ -27,6 +27,8 @@ import type {
  *
  * (stringKeys = key1 | key2)
  *
+ * @TODO Since TypeScript v4.5.5 this util is no longer working as expected.
+ * Refactoring is needed before a couple of typecasts (as unknown as number) can be removed.
  */
 export type KeysOfType<T, U, B = false> = {
   [P in keyof T]: B extends true
