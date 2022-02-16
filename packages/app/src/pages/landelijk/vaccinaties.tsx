@@ -30,7 +30,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccinationsBoosterKpiSection } from '~/domain/vaccine/vaccinations-booster-kpi-section';
+import { VaccinationsThirdShotKpiSection } from '~/domain/vaccine/vaccinations-third-shot-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -620,22 +620,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text: textNl.booster_and_third_kpi.sources.text,
               },
             }}
-            thirdGgdValue={thirdShotAdministeredLastValue.administered_total}
-            metadateThirdGgd={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: thirdShotAdministeredLastValue.date_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-          />
-
-          <VaccinationsBoosterKpiSection
-            dataBoosterShotAdministered={
+            boosterShotLastSevenDays={
               boosterShotAdministeredLastValue.ggd_administered_last_7_days
             }
-            metadataBoosterShotAdministered={{
+            metadataBoosterShotLastSevenDays={{
               datumsText: textNl.booster_ggd_kpi_section.datums,
               date: [
                 boosterShotAdministeredLastValue.date_start_unix,
@@ -644,6 +632,18 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               source: {
                 href: textNl.booster_ggd_kpi_section.sources.href,
                 text: textNl.booster_ggd_kpi_section.sources.text,
+              },
+            }}
+          />
+
+          <VaccinationsThirdShotKpiSection
+            thirdShotValue={thirdShotAdministeredLastValue.administered_total}
+            metadateThirdShot={{
+              datumsText: textNl.booster_and_third_kpi.datums,
+              date: thirdShotAdministeredLastValue.date_unix,
+              source: {
+                href: textNl.booster_and_third_kpi.sources.href,
+                text: textNl.booster_and_third_kpi.sources.text,
               },
             }}
           />

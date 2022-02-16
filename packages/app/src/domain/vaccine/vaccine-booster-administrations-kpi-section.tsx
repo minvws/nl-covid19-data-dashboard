@@ -7,6 +7,8 @@ import { Message } from '~/components/message';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Metadata, MetadataProps } from '~/components/metadata';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Markdown } from '~/components/markdown';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
   totalBoosterAndThirdShots: number;
@@ -15,8 +17,8 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   metadateBoosterGgd: MetadataProps;
   boosterEstimatedValue: number;
   metadateBoosterEstimated: MetadataProps;
-  thirdGgdValue: number;
-  metadateThirdGgd: MetadataProps;
+  boosterShotLastSevenDays: number;
+  metadataBoosterShotLastSevenDays: MetadataProps;
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -26,10 +28,10 @@ export function VaccineBoosterAdministrationsKpiSection({
   metadateBoosterGgd,
   boosterEstimatedValue,
   metadateBoosterEstimated,
-  thirdGgdValue,
-  metadateThirdGgd,
+  boosterShotLastSevenDays,
+  metadataBoosterShotLastSevenDays,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.pages.vaccinationsPage.nl.booster_and_third_kpi;
 
@@ -51,6 +53,16 @@ export function VaccineBoosterAdministrationsKpiSection({
             </Message>
           )}
           <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
+
+          <Markdown
+            content={replaceVariablesInText(
+              text.booster_shot_last_seven_days.description,
+              {
+                amount: formatNumber(boosterShotLastSevenDays),
+              }
+            )}
+          />
+          <Metadata {...metadataBoosterShotLastSevenDays} />
         </Box>
         <Box spacing={4}>
           <BoosterAdministeredItem
@@ -62,11 +74,6 @@ export function VaccineBoosterAdministrationsKpiSection({
             value={boosterEstimatedValue}
             description={text.booster_estimated.title}
             metadata={metadateBoosterEstimated}
-          />
-          <BoosterAdministeredItem
-            value={thirdGgdValue}
-            description={text.third_ggd.title}
-            metadata={metadateThirdGgd}
           />
         </Box>
       </TwoKpiSection>
