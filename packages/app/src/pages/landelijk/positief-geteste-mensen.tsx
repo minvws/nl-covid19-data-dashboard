@@ -475,6 +475,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   seriesConfig={[
                     {
                       type: 'line',
+                      metricProperty: 'tested_total_moving_average',
+                      color: colors.data.secondary,
+                      label:
+                        ggdText.linechart_totaltests_legend_label_moving_average,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .ggd_tested_total_moving_average,
+                    },
+                    {
+                      type: 'line',
                       metricProperty: 'infected_moving_average',
                       color: colors.data.primary,
                       label:
@@ -492,16 +502,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       shortLabel:
                         siteText.positief_geteste_personen.tooltip_labels
                           .infected,
-                    },
-                    {
-                      type: 'line',
-                      metricProperty: 'tested_total_moving_average',
-                      color: colors.data.secondary,
-                      label:
-                        ggdText.linechart_totaltests_legend_label_moving_average,
-                      shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .ggd_tested_total_moving_average,
                     },
                     {
                       type: 'bar',
