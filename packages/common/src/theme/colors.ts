@@ -94,8 +94,6 @@ export const colors = {
     cyan: '#219BE6',
     yellow: '#FFC000',
     darkBlue: '#003580',
-    blueGray: '#D4E4F4',
-    grayBlue: '#D2D9E3',
     scale: {
       blue: [
         '#8FCAE7',
