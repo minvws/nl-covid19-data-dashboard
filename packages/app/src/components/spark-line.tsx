@@ -2,12 +2,12 @@ import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
 import { colors } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { AreaClosed, LinePath } from '@visx/shape';
+import { NumberValue } from 'd3-scale';
 import { first, last } from 'lodash';
 import { isPresent } from 'ts-is-present';
 
-const STEP_WIDTH = 5;
+const STEP_WIDTH = 1;
 const HEIGHT = 24;
-const NUMBER_OF_POINTS = 7;
 const MARKER_RADIUS = 2.5;
 
 type SparkLineProps<T extends TimestampedValue> = {
@@ -31,15 +31,18 @@ export function SparkLine<T extends TimestampedValue>(
   props: SparkLineProps<T>
 ) {
   const { data, averageProperty } = props;
-
-  const values = data.slice(-NUMBER_OF_POINTS);
-
-  const min = Math.min(0, ...values.map((d) => d[averageProperty] ?? 0));
-  const max = Math.max(0.1, ...values.map((d) => d[averageProperty] ?? 0));
-
+  const numberOfPoints = data.length;
+  const min = Math.min(
+    0,
+    ...data.map((d) => (d[averageProperty] as unknown as number) ?? 0)
+  );
+  const max = Math.max(
+    0.1,
+    ...data.map((d) => (d[averageProperty] as unknown as number) ?? 0)
+  );
   const xScale = scaleLinear({
-    domain: [getDate(first(values)), getDate(last(values))],
-    range: [0, STEP_WIDTH * NUMBER_OF_POINTS - MARKER_RADIUS],
+    domain: [getDate(first(data)), getDate(last(data))],
+    range: [0, STEP_WIDTH * numberOfPoints - MARKER_RADIUS],
   });
 
   const yScale = scaleLinear({
@@ -52,10 +55,10 @@ export function SparkLine<T extends TimestampedValue>(
   }
 
   function getY(dataPoint: T) {
-    return yScale(dataPoint[averageProperty]);
+    return yScale(dataPoint[averageProperty] as unknown as NumberValue);
   }
 
-  const nonNullValues = values.filter((x) => isPresent(x[averageProperty]));
+  const nonNullValues = data.filter((x) => isPresent(x[averageProperty]));
   const lastValue = last(nonNullValues);
 
   return (
@@ -65,7 +68,7 @@ export function SparkLine<T extends TimestampedValue>(
       role="img"
       aria-hidden="true"
       focusable="false"
-      viewBox={`0 0 ${STEP_WIDTH * NUMBER_OF_POINTS} ${HEIGHT}`}
+      viewBox={`0 0 ${STEP_WIDTH * numberOfPoints} ${HEIGHT}`}
     >
       <LinePath
         data={nonNullValues}

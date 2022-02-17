@@ -130,10 +130,7 @@ export function getBehaviorChartOptions<T>(value: T) {
  * Trim all the null values on the left and the right side of the array.
  * If there are still null values left we can assume there is a gap in the data.
  */
-export function useDataHasGaps(
-  values: NlBehaviorValue[] | VrBehaviorValue[],
-  key: keyof NlBehaviorValue
-) {
+export function useDataHasGaps<T>(values: T[], key: keyof T) {
   return useMemo(() => {
     const trimmedLeftValues = dropWhile(values, (i) => !isPresent(i[key]));
     const trimmedLeftAndRightValues = dropRightWhile(

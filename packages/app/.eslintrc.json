@@ -1,9 +1,8 @@
 {
   "extends": [
-    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "../../eslint-config"
   ],
   "settings": {
     "react": {
@@ -11,9 +10,7 @@
     }
   },
   "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
+    "browser": true
   },
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -25,24 +22,14 @@
   "rules": {
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
-    "react/prop-types": 0,
-    "no-console": [
-      2,
-      {
-        "allow": ["warn", "error"]
-      }
-    ]
+    "react/prop-types": 0
   },
   "overrides": [
     {
-      "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint", "risxss"],
       "extends": [
-        "eslint:recommended",
+        "../../eslint-overrides",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+        "plugin:react-hooks/recommended"
       ],
       "files": ["*.ts", "*.tsx"],
       "rules": {
@@ -54,29 +41,7 @@
         ],
         "react/react-in-jsx-scope": 0,
         "react/display-name": 0,
-        "react/prop-types": 0,
-        "@typescript-eslint/explicit-function-return-type": 0,
-        "@typescript-eslint/explicit-member-accessibility": 0,
-        "@typescript-eslint/indent": 0,
-        "@typescript-eslint/member-delimiter-style": 0,
-        "@typescript-eslint/ban-ts-comment": 0,
-        "@typescript-eslint/no-explicit-any": 0,
-        "@typescript-eslint/no-var-requires": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0,
-        "@typescript-eslint/no-use-before-define": 0,
-        "@typescript-eslint/no-unused-vars": [
-          2,
-          {
-            "argsIgnorePattern": "^_"
-          }
-        ],
-        "no-restricted-imports": [
-          "error",
-          {
-            "name": "next/link",
-            "message": "Please use the custom ~/utils/link instead"
-          }
-        ]
+        "react/prop-types": 0
       }
     }
   ]
