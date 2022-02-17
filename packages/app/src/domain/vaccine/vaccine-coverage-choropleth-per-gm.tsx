@@ -2,6 +2,7 @@ import {
   assert,
   colors,
   GmCollectionVaccineCoveragePerAgeGroup,
+  KeysOfType,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -247,7 +248,11 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
     ...data.dataOptions.tooltipVariables,
   } as Record<string, string | number>;
 
-  const filterBelow = data.dataItem[data.dataConfig.metricProperty] || null;
+  const dataItemKey = data.dataConfig.metricProperty as KeysOfType<
+    VaccineCoverageData,
+    number
+  >;
+  const filterBelow = data.dataItem[dataItemKey] || null;
 
   const mainContent = (
     text as unknown as Record<string, Record<string, Record<string, string>>>

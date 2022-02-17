@@ -16,6 +16,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
+import { Languages } from '~/locale';
 import { useIntl } from '~/intl';
 import {
   ElementsQueryResult,
@@ -33,6 +34,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectVrData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
@@ -42,6 +44,14 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.nursingHomePage.vr,
+        textShared: siteText.pages.nursingHomePage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData(
     'difference.nursing_home__deceased_daily',
@@ -74,15 +84,21 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, vrName, lastGenerated, content } = props;
+  const {
+    pageText,
+    selectedVrData: data,
+    vrName,
+    lastGenerated,
+    content,
+  } = props;
 
   const { siteText } = useIntl();
 
+  const { textVr, textShared } = pageText;
   const infectedLocationsText =
-    siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
+    textVr.veiligheidsregio_verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
-    siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
-  const deceased = siteText.veiligheidsregio_verpleeghuis_oversterfte;
+    textVr.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
   const nursinghomeLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
@@ -283,7 +299,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'area',
                     metricProperty: 'infected_locations_total',
                     label:
-                      siteText.verpleeghuis_besmette_locaties
+                      textShared.verpleeghuis_besmette_locaties
                         .linechart_tooltip_label,
                     color: colors.data.primary,
                   },
@@ -296,27 +312,27 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="sterfte"
-            title={replaceVariablesInText(deceased.titel, {
+            title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
             icon={<Coronavirus />}
-            description={deceased.pagina_toelichting}
+            description={textVr.pagina_toelichting}
             metadata={{
-              datumsText: deceased.datums,
+              datumsText: textVr.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
-              dataSources: [deceased.bronnen.rivm],
+              dataSources: [textVr.bronnen.rivm],
             }}
-            referenceLink={deceased.reference.href}
+            referenceLink={textVr.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={deceased.barscale_titel}
-              description={deceased.extra_uitleg}
+              title={textVr.barscale_titel}
+              description={textVr.extra_uitleg}
               metadata={{
                 date: nursinghomeLastValue.date_unix,
-                source: deceased.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -329,10 +345,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: deceased.bronnen.rivm }}
-            title={deceased.linechart_titel}
+            metadata={{ source: textVr.bronnen.rivm }}
+            title={textVr.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            description={deceased.linechart_description}
+            description={textVr.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -345,17 +361,16 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
-                    label:
-                      deceased.line_chart_legend_trend_moving_average_label,
+                    label: textVr.line_chart_legend_trend_moving_average_label,
                     shortLabel:
-                      deceased.tooltip_labels.deceased_daily_moving_average,
+                      textVr.tooltip_labels.deceased_daily_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
-                    label: deceased.line_chart_legend_trend_label,
-                    shortLabel: deceased.tooltip_labels.deceased_daily,
+                    label: textVr.line_chart_legend_trend_label,
+                    shortLabel: textVr.tooltip_labels.deceased_daily,
                     color: colors.data.primary,
                   },
                 ]}
@@ -364,8 +379,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedDateStart,
                       end: Infinity,
-                      label: deceased.line_chart_legend_inaccurate_label,
-                      shortLabel: deceased.tooltip_labels.inaccurate,
+                      label: textVr.line_chart_legend_inaccurate_label,
+                      shortLabel: textVr.tooltip_labels.inaccurate,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

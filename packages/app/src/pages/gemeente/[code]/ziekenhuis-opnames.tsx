@@ -18,6 +18,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -36,6 +37,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectGmData,
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
@@ -48,6 +50,14 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textGm: siteText.pages.hospitalPage.gm,
+        textShared: siteText.pages.hospitalPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectGmData('hospital_nice', 'code'),
   createGetChoroplethData({
@@ -81,6 +91,7 @@ export const getStaticProps = createGetStaticProps(
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     selectedGmData: data,
     choropleth,
     municipalityName,
@@ -90,7 +101,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const text = siteText.gemeente_ziekenhuisopnames_per_dag;
+  const { textGm, textShared } = pageText;
 
   const lastValue = data.hospital_nice.last_value;
 
@@ -109,10 +120,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textGm.metadata.description, {
       municipalityName,
     }),
   };
@@ -123,34 +134,34 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.ziekenhuizen}
-            title={replaceVariablesInText(text.titel, {
+            title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
             icon={<Ziekenhuis />}
-            description={text.pagina_toelichting}
+            description={textGm.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textGm.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textGm.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textGm.reference.href}
             pageLinks={content.links}
             articles={content.articles}
             vrNameOrGmName={municipalityName}
-            warning={text.warning}
+            warning={textGm.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.barscale_titel}
-              description={replaceVariablesInText(text.extra_uitleg, {
+              title={textGm.barscale_titel}
+              description={replaceVariablesInText(textGm.extra_uitleg, {
                 dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
                 dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
               })}
               metadata={{
                 date: sevenDayAverageDates,
-                source: text.bronnen.rivm,
+                source: textGm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -165,9 +176,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            title={text.linechart_titel}
-            description={text.linechart_description}
-            metadata={{ source: text.bronnen.rivm }}
+            title={textGm.linechart_titel}
+            description={textGm.linechart_description}
+            metadata={{ source: textGm.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
@@ -182,13 +193,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty:
                       'admissions_on_date_of_admission_moving_average',
-                    label: text.linechart_legend_titel_moving_average,
+                    label: textGm.linechart_legend_titel_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'admissions_on_date_of_admission',
-                    label: text.linechart_legend_titel,
+                    label: textGm.linechart_legend_titel,
                     color: colors.data.primary,
                   },
                 ]}
@@ -197,7 +208,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedRange,
                       end: Infinity,
-                      label: text.linechart_legend_underreported_titel,
+                      label: textGm.linechart_legend_underreported_titel,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average_rounded',
@@ -214,17 +225,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChoroplethTile
-            title={replaceVariablesInText(text.map_titel, {
+            title={replaceVariablesInText(textGm.map_titel, {
               municipality: municipalityName,
             })}
             metadata={{
               date: lastValue.date_unix,
-              source: text.bronnen.rivm,
+              source: textGm.bronnen.rivm,
             }}
-            description={text.map_toelichting}
+            description={textGm.map_toelichting}
             legend={{
-              title:
-                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+              title: textShared.chloropleth_legenda.titel,
               thresholds: thresholds.gm.admissions_on_date_of_admission,
             }}
           >

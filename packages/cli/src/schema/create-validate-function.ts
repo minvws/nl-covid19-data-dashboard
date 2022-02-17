@@ -80,7 +80,7 @@ function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
 export function createValidateFunction(
   schemaOrFilename: string | object,
   schemaBasePath: string,
-  skipFeatureDisable: boolean = false
+  skipFeatureDisable = false
 ) {
   const schema =
     typeof schemaOrFilename === 'string'

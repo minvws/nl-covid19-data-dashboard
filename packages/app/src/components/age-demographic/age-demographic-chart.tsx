@@ -89,8 +89,14 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
 
   const hasClippedValue = !!values.find(
     (value) =>
-      getIsClipped(value[leftMetricProperty], maxDisplayValue) ||
-      getIsClipped(value[rightMetricProperty], maxDisplayValue)
+      getIsClipped(
+        value[leftMetricProperty] as unknown as number,
+        maxDisplayValue
+      ) ||
+      getIsClipped(
+        value[rightMetricProperty] as unknown as number,
+        maxDisplayValue
+      )
   );
 
   return (
@@ -184,12 +190,12 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           const rightBarWidth = rightPoint(value);
 
           const isClippedLeftGroup = getIsClipped(
-            value[leftMetricProperty],
+            value[leftMetricProperty] as unknown as number,
             maxDisplayValue
           );
 
           const isClippedRightGroup = getIsClipped(
-            value[rightMetricProperty],
+            value[rightMetricProperty] as unknown as number,
             maxDisplayValue
           );
 

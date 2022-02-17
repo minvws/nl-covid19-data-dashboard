@@ -105,7 +105,7 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
 }
 
 const schemaBasePath = path.join(schemaDirectory, schemaName);
-let rootSchema = metricName
+const rootSchema = metricName
   ? loadStrippedSchema(metricName, schemaBasePath)
   : '__index.json';
 

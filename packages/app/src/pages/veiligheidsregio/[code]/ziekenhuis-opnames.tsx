@@ -20,6 +20,7 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -38,6 +39,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
   selectVrData,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
@@ -49,6 +51,14 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.hospitalPage.vr,
+        textShared: siteText.pages.hospitalPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData('hospital_nice'),
   createGetChoroplethData({
@@ -80,6 +90,7 @@ export const getStaticProps = createGetStaticProps(
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     selectedVrData: data,
     vrName,
     choropleth,
@@ -90,7 +101,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
-  const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
+  const { textVr, textShared } = pageText;
   const lastValue = data.hospital_nice.last_value;
 
   const municipalCodes = gmCodesByVrCode[router.query.code as string];
@@ -111,10 +122,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textVr.metadata.description, {
       safetyRegionName: vrName,
       vrName,
     }),
@@ -126,34 +137,34 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
-            title={replaceVariablesInText(text.titel, {
+            title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
             icon={<Ziekenhuis />}
-            description={text.pagina_toelichting}
+            description={textVr.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textVr.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textVr.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textVr.reference.href}
             pageLinks={content.links}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={textVr.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.barscale_titel}
-              description={replaceVariablesInText(text.extra_uitleg, {
+              title={textVr.barscale_titel}
+              description={replaceVariablesInText(textVr.extra_uitleg, {
                 dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
                 dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
               })}
               metadata={{
                 date: sevenDayAverageDates,
-                source: text.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -168,9 +179,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: text.bronnen.rivm }}
-            title={text.linechart_titel}
-            description={text.linechart_description}
+            metadata={{ source: textVr.bronnen.rivm }}
+            title={textVr.linechart_titel}
+            description={textVr.linechart_description}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
@@ -185,13 +196,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty:
                       'admissions_on_date_of_admission_moving_average',
-                    label: text.linechart_legend_titel_moving_average,
+                    label: textVr.linechart_legend_titel_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'admissions_on_date_of_admission',
-                    label: text.linechart_legend_titel,
+                    label: textVr.linechart_legend_titel,
                     color: colors.data.primary,
                   },
                 ]}
@@ -200,7 +211,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedRange,
                       end: Infinity,
-                      label: text.linechart_legend_underreported_titel,
+                      label: textVr.linechart_legend_underreported_titel,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
@@ -217,18 +228,17 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChoroplethTile
-            title={replaceVariablesInText(text.map_titel, {
+            title={replaceVariablesInText(textVr.map_titel, {
               safetyRegion: vrName,
             })}
-            description={text.map_toelichting}
+            description={textVr.map_toelichting}
             legend={{
               thresholds: thresholds.gm.admissions_on_date_of_admission,
-              title:
-                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+              title: textShared.chloropleth_legenda.titel,
             }}
             metadata={{
               date: lastValue.date_unix,
-              source: text.bronnen.rivm,
+              source: textVr.bronnen.rivm,
             }}
           >
             <DynamicChoropleth
