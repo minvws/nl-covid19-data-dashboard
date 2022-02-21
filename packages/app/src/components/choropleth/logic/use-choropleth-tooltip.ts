@@ -68,7 +68,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
         .find((x) => (x as any)[codeType] === code);
       assert(
         item,
-        `[${useChoroplethTooltip.name}] No data item found for code ${code}`
+        `[${useChoroplethTooltip.name}:${getItemByCode.name}] No data item found for code ${code}`
       );
       return item;
     };
@@ -77,7 +77,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const threshold = thresholds[map][dataConfig.metricProperty as string];
   assert(
     isDefined(threshold),
-    `No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty}`
+    `[${useChoroplethTooltip.name}] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty}`
   );
 
   useEffect(() => {

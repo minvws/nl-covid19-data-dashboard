@@ -123,11 +123,11 @@ export default function PositiefGetesteMensenPage(
 
   assert(
     isDefined(comparedName),
-    'comparedName could not be found for country code nld'
+    `[${PositiefGetesteMensenPage.name}] comparedName could not be found for country code nld`
   );
   assert(
     isDefined(comparedValue),
-    'comparedValue could not be found for country code nld'
+    `[${PositiefGetesteMensenPage.name}] comparedValue could not be found for country code nld`
   );
 
   const countryOptions = useMemo(
@@ -343,12 +343,15 @@ function compileCountryOptions(
 ): CountryOption[] {
   const lastValues = last(data);
 
-  assert(lastValues, 'No last values available to build the country select.');
+  assert(
+    lastValues,
+    `[${compileCountryOptions.name}] No last values available to build the country select.`
+  );
 
   return countryCodes.map((countryCode) => {
     assert(
       lastValues[countryCode],
-      `Country ${countryCode} has no supplied last value`
+      `[${compileCountryOptions.name}] Country ${countryCode} has no supplied last value`
     );
 
     return {

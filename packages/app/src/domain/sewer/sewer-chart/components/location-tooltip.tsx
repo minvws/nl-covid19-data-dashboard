@@ -21,7 +21,10 @@ export function LocationTooltip({
 
   const config = data.config.find((x) => x.type === 'line');
 
-  assert(config, 'Failed to find line configuration in location tooltip');
+  assert(
+    config,
+    `[${LocationTooltip.name}] Failed to find line configuration in location tooltip`
+  );
 
   const dateString = formatDateFromSeconds(data.value.date_unix, 'day-month');
 

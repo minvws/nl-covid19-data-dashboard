@@ -60,7 +60,7 @@ export function ChartTile({
         {timeframeOptions
           ? (assert(
               typeof children === 'function',
-              'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
+              `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
             ),
             children(timeframe))
           : children}
