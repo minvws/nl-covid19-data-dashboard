@@ -1,12 +1,12 @@
 import { geoConicConformal, geoMercator } from 'd3-geo';
-import { FocusEvent, memo, useMemo } from 'react';
+import { FocusEvent, memo, useMemo, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { ChoroplethProps } from '..';
 import {
   ChoroplethDataItem,
-  CHOROPLETH_ASPECT_RATIO,
   FitExtent,
   useChoroplethData,
   useChoroplethFeatures,
@@ -52,10 +52,11 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     responsiveSizeConfiguration,
   } = props;
 
-  const dataConfig = createDataConfig(partialDataConfig);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapContainerWidth =
+    mapContainerRef.current?.getBoundingClientRect().width || 0;
 
-  const aspectRatio =
-    map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
+  const dataConfig = createDataConfig(partialDataConfig);
 
   const mapProjection = isDefined(dataOptions.projection)
     ? dataOptions.projection
@@ -66,10 +67,8 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
   const annotations = useAccessibilityAnnotations(accessibility);
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
 
-  const [
-    containerRef,
-    { width = minHeight * (1 / aspectRatio), height = minHeight },
-  ] = useResizeObserver<HTMLDivElement>();
+  const [containerRef, { width = mapContainerWidth, height = minHeight }] =
+    useResizeObserver<HTMLDivElement>();
 
   const [mapHeight, padding] = useResponsiveSize(
     width,
@@ -125,35 +124,35 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     ]
   );
 
-  if (!isDefined(choroplethFeatures)) {
-    return (
-      <img
-        src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
-        loading="lazy"
-      />
-    );
-  }
-
   return (
-    <>
-      {annotations.descriptionElement}
-      <CanvasChoroplethMap
-        containerRef={containerRef}
-        dataOptions={dataOptions}
-        width={width}
-        height={mapHeight}
-        annotations={annotations}
-        featureOverHandler={featureOverHandler}
-        featureOutHandler={featureOutHandler}
-        tooltipTrigger={tooltipTrigger}
-        mapProjection={mapProjection}
-        choroplethFeatures={choroplethFeatures}
-        featureProps={featureProps}
-        fitExtent={fitExtent}
-        anchorEventHandlers={anchorEventHandlers}
-        isTabInteractive={isTabInteractive}
-        getFeatureName={getFeatureName}
-      />
-    </>
+    <Box ref={mapContainerRef} width="100%" height="100%">
+      {!isDefined(choroplethFeatures) ? (
+        <img
+          src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
+          loading="lazy"
+        />
+      ) : (
+        <>
+          {annotations.descriptionElement}
+          <CanvasChoroplethMap
+            containerRef={containerRef}
+            dataOptions={dataOptions}
+            width={mapContainerWidth}
+            height={mapHeight}
+            annotations={annotations}
+            featureOverHandler={featureOverHandler}
+            featureOutHandler={featureOutHandler}
+            tooltipTrigger={tooltipTrigger}
+            mapProjection={mapProjection}
+            choroplethFeatures={choroplethFeatures}
+            featureProps={featureProps}
+            fitExtent={fitExtent}
+            anchorEventHandlers={anchorEventHandlers}
+            isTabInteractive={isTabInteractive}
+            getFeatureName={getFeatureName}
+          />
+        </>
+      )}
+    </Box>
   );
 });
