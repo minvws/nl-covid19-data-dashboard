@@ -2686,7 +2686,7 @@ __metadata:
     "@types/topojson-client": ^3.1.0
     "@typescript-eslint/eslint-plugin": ^5.5.0
     "@typescript-eslint/parser": ^5.5.0
-    ajv: ^8.8.2
+    ajv: ^8.10.0
     chalk: ^4.1.2
     dotenv: ^10.0.0
     eslint: ^7.32.0
@@ -8668,15 +8668,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:^8.8.2":
-  version: 8.8.2
-  resolution: "ajv@npm:8.8.2"
+"ajv@npm:^8.10.0":
+  version: 8.10.0
+  resolution: "ajv@npm:8.10.0"
   dependencies:
     fast-deep-equal: ^3.1.1
     json-schema-traverse: ^1.0.0
     require-from-string: ^2.0.2
     uri-js: ^4.2.2
-  checksum: 90849ef03c4f4f7051d15f655120137b89e3205537d683beebd39d95f40c0ca00ea8476cd999602d2f433863e7e4bf1b81d1869d1e07f4dcf56d71b6430a605c
+  checksum: 3594728ef1e31219ef97bfacb203d0d72db8ad5c35d6d0578e38ee453e4537c2bf927dad144bb84b0c893f661d71b58337d4643e8ee2f2a6e1d63b041c92fe82
   languageName: node
   linkType: hard
 
