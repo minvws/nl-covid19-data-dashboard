@@ -66,7 +66,10 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       const item = data
         .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
-      assert(item, `No data item found for code ${code}`);
+      assert(
+        item,
+        `[${useChoroplethTooltip.name}] No data item found for code ${code}`
+      );
       return item;
     };
   }, [codeType, data]);
