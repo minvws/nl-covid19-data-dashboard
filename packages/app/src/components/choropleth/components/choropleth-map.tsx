@@ -1,6 +1,7 @@
 import { geoConicConformal, geoMercator } from 'd3-geo';
 import { FocusEvent, memo, useMemo, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { ChoroplethProps } from '..';
@@ -124,7 +125,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
   );
 
   return (
-    <div ref={mapContainerRef}>
+    <Box ref={mapContainerRef} width="100%" height="100%">
       {!isDefined(choroplethFeatures) ? (
         <img
           src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
@@ -152,6 +153,6 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
           />
         </>
       )}
-    </div>
+    </Box>
   );
 });
