@@ -6,6 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 
@@ -16,7 +17,7 @@ interface GNumberBarChartTileProps {
 
 export function GNumberBarChartTile({
   data: __data,
-  timeframeInitialValue = '5weeks',
+  timeframeInitialValue = 'all',
 }: GNumberBarChartTileProps) {
   const { formatPercentage, siteText } = useIntl();
 
@@ -30,12 +31,13 @@ export function GNumberBarChartTile({
       title={text.title}
       description={text.description}
       timeframeInitialValue={timeframeInitialValue}
+      timeframeOptions={['all', '5weeks']}
       metadata={{
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
       }}
     >
-      <TimeSeriesChart
+      {(timeframe) => <TimeSeriesChart
         accessibility={{
           key: 'g_number',
           features: ['keyboard_bar_chart'],
@@ -57,9 +59,17 @@ export function GNumberBarChartTile({
             date_unix: x.date_end_unix,
           }))
         }
-        timeframe={timeframeInitialValue}
+        timeframe={timeframe}
         dataOptions={{
           isPercentage: true,
+          timespanAnnotations: [
+            {
+              start: values[0].date_end_unix,
+              end: new Date('1 April 2020').getTime() / 1000,
+              label: text.legend_inaccurate_label,
+              shortLabel: siteText.common.incomplete,
+            },
+          ]
         }}
         disableLegend
         seriesConfig={[
@@ -82,17 +92,17 @@ export function GNumberBarChartTile({
             ],
           },
         ]}
-        formatTooltip={({ value }) => (
-          <>
+        formatTooltip={(data) => (
+          <TooltipSeriesListContainer {...data}>
             <InlineText fontWeight="bold">
-              {`${formatPercentage(Math.abs(value.g_number))}% `}
+              {`${formatPercentage(Math.abs(data.value.g_number))}% `}
             </InlineText>
-            {value.g_number > 0
+            {data.value.g_number > 0
               ? text.positive_descriptor
               : text.negative_descriptor}
-          </>
+          </TooltipSeriesListContainer>
         )}
-      />
+      />}
     </ChartTile>
   );
 }
