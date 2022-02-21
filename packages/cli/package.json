@@ -6,7 +6,7 @@
   "dependencies": {
     "@octokit/core": "^3.5.1",
     "@turf/turf": "^6.5.0",
-    "ajv": "^8.8.2",
+    "ajv": "^8.10.0",
     "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "flat": "^5.0.2",
