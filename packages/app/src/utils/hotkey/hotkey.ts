@@ -204,7 +204,7 @@ function normalizeHotkey(hotkey: string) {
 
     assert(
       Object.keys(result).length >= keys.length,
-      `Hotkey combination has duplicates "${hotkey}"`
+      `[${normalizeHotkey.name}] Hotkey combination has duplicates "${hotkey}"`
     );
 
     return result;
