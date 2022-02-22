@@ -42,7 +42,7 @@ export function SearchContextProvider<T extends Element>({
 export function useSearchContext() {
   const context = useContext(searchContext);
 
-  assert(context, 'Missing search context provider');
+  assert(context, `[${useSearchContext.name}] Missing search context provider`);
 
   return context;
 }

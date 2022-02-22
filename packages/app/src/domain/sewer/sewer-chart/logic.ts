@@ -39,7 +39,7 @@ export function mergeData(
 
   assert(
     valuesForInstallation,
-    `Failed to find data for rwzi_awzi_name ${selectedInstallation}`
+    `[${mergeData.name}] Failed to find data for rwzi_awzi_name ${selectedInstallation}`
   );
 
   const mergedValuesByTimestamp =

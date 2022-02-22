@@ -9,7 +9,10 @@ import { hasValueAtKey } from 'ts-is-present';
 export function useFeature(name: string): Feature {
   const feature = features.find(hasValueAtKey('name', name));
 
-  assert(feature, `Failed using an unknown feature: ${name}`);
+  assert(
+    feature,
+    `[${useFeature.name}] Failed using an unknown feature: ${name}`
+  );
 
   return feature;
 }
@@ -20,7 +23,10 @@ export function useFeature(name: string): Feature {
  */
 export function withFeatureNotFoundPage<T>(name: string, getProps: T): T {
   const feature = features.find((x) => x.name === name);
-  assert(feature, `Failed using an unknown feature: ${name}`);
+  assert(
+    feature,
+    `[${withFeatureNotFoundPage.name}] Failed using an unknown feature: ${name}`
+  );
 
   return feature.isEnabled
     ? getProps

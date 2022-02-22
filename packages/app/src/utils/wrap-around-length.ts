@@ -6,7 +6,10 @@ import { assert } from './assert';
  * otherwise it returns the given value
  */
 export function wrapAroundLength(value: number, length: number) {
-  assert(length > 0, 'Can not wrap around length zero');
+  assert(
+    length > 0,
+    `[${wrapAroundLength.name}] Can not wrap around length zero`
+  );
 
   const maxValue = length - 1;
 

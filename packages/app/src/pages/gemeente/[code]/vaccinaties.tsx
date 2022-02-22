@@ -129,12 +129,12 @@ export const VaccinationsGmPage = (
 
   assert(
     filteredAgeGroup18Plus,
-    'Could not find data for the vaccine coverage per age group for the age 18+'
+    `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`
   );
 
   assert(
     filteredAgeGroup12Plus,
-    'Could not find data for the vaccine coverage per age group for the age 12+'
+    `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
   );
 
   return (
@@ -161,7 +161,7 @@ export const VaccinationsGmPage = (
             vrNameOrGmName={municipalityName}
             warning={text.warning}
           />
-          
+
           <VaccineCoverageToggleTile
             title={text.vaccination_grade_toggle_tile.title}
             source={text.vaccination_grade_toggle_tile.source}

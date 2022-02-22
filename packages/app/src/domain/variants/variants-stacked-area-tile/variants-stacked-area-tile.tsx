@@ -218,7 +218,10 @@ function useSeriesConfig(
           variantKey.split('_')[0]
         ];
 
-        assert(color, `No color found found for variant: ${variantKey}`);
+        assert(
+          color,
+          `[${useSeriesConfig.name}] No color found found for variant: ${variantKey}`
+        );
 
         const variantName = variantKey.split(
           '_'
