@@ -49,6 +49,8 @@ export function RichContentSelect<T extends string>(
 
   const { siteText } = useIntl();
 
+  const { containerRef, ...selectBoxProps } = getComboboxProps();
+
   const selectedOptionView =
     isPresent(selectedOption) &&
     (richContentForSelectedValue ? (
@@ -58,7 +60,7 @@ export function RichContentSelect<T extends string>(
     ));
 
   return (
-    <Box>
+    <Box ref={containerRef}>
       {visuallyHiddenLabel ? (
         <VisuallyHidden as="label" id={labelId}>
           {typeof label === 'string' ? <InlineText>{label}</InlineText> : label}
@@ -77,7 +79,7 @@ export function RichContentSelect<T extends string>(
       )}
 
       <SelectBoxRoot>
-        <SelectBox {...getComboboxProps()}>
+        <SelectBox {...selectBoxProps}>
           {selectedOptionView}
           <ArrowIcon
             css={css({
