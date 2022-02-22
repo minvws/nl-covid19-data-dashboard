@@ -3,6 +3,7 @@ import { isPresent } from 'ts-is-present';
 import { findSplitPointForValue, SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { BarTrendIcon } from './bar-trend';
+import { BarOutOfBoundsTrendIcon } from './bar-trend-out-of-bounds';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
 import { SplitAreaTrendIcon } from './split-area-trend';
@@ -58,6 +59,8 @@ export function SeriesIcon<T extends TimestampedValue>({
       return (
         <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
       );
+    case 'bar-out-of-bounds':
+      return <BarOutOfBoundsTrendIcon />;
     case 'split-area':
       /**
        * Here we return the icon even if there is no value, because it

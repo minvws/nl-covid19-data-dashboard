@@ -1,4 +1,5 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { colors, TimestampedValue } from '@corona-dashboard/common';
+import { PatternLines } from '@visx/pattern';
 import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -86,6 +87,33 @@ export function useLegendItems<T extends TimestampedValue>(
           label: intl.siteText.charts.timeline.legend_label,
           shape: 'custom',
           shapeComponent: <TimelineMarker size={10} />,
+        } as LegendItem);
+      }
+
+      if (dataOptions?.overflowDates?.length) {
+        legendItems.push({
+          label: intl.siteText.charts.timeline.legend_label,
+          shape: 'custom',
+          shapeComponent: (
+            <svg height={15} width={15}>
+              <PatternLines
+                id="diagonal-pattern"
+                height={6}
+                width={6}
+                stroke={colors.data.neutral}
+                strokeWidth={2}
+                orientation={['diagonal']}
+              />
+              <rect
+                rx={2}
+                x={0}
+                y={0}
+                width={15}
+                height={15}
+                fill="url(#diagonal-pattern)"
+              />
+            </svg>
+          ),
         } as LegendItem);
       }
     }

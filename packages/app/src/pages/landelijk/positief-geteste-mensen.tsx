@@ -240,6 +240,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected,
                     color: colors.data.primary,
+                    exclude: [1644318000],
+                  },
+                  {
+                    type: 'bar-out-of-bounds',
+                    metricProperty: 'infected',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_out_of_bounds,
+                    color: colors.data.neutral,
+                    outOfBoundsDates: [1644318000],
                   },
                 ]}
                 dataOptions={{
