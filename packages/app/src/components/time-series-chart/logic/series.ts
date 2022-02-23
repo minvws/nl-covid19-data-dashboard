@@ -13,19 +13,21 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { DataOptions, TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 
-export type SeriesConfig<T extends TimestampedValue> = (
+type SeriesConfigSingle<T extends TimestampedValue> =
   | LineSeriesDefinition<T>
   | RangeSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
+  | BarOutOfBoundsSeriesDefinition<T>
   | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
   | SplitAreaSeriesDefinition<T>
   | GappedLineSeriesDefinition<T>
   | GappedAreaSeriesDefinition<T>
-  | GappedStackedAreaSeriesDefinition<T>
-)[];
+  | GappedStackedAreaSeriesDefinition<T>;
+
+export type SeriesConfig<T extends TimestampedValue> = SeriesConfigSingle<T>[];
 
 interface SeriesCommonDefinition {
   label: string;
@@ -61,6 +63,10 @@ interface SeriesCommonDefinition {
    * legend, for example)
    */
   hideInLegend?: boolean;
+  /**
+   * An array of unix timestamps for which the values will be excluded in the graph.
+   */
+  exclude?: number[];
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -119,6 +125,16 @@ export interface BarSeriesDefinition<T extends TimestampedValue>
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
+}
+
+export interface BarOutOfBoundsSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'bar-out-of-bounds';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  outOfBoundsDates?: number[];
 }
 
 export interface SplitBarSeriesDefinition<T extends TimestampedValue>
@@ -264,10 +280,16 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
 ) {
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
-    .flatMap((series) =>
-      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
-      )
+    .flatMap((series, index) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) => {
+        const config = seriesConfig[index];
+        return isBarOutOfBounds(config) &&
+          config.outOfBoundsDates?.includes(x.__date_unix)
+          ? undefined
+          : isSeriesSingleValue(x)
+          ? x.__value
+          : [x.__value_a, x.__value_b];
+      })
     )
     .filter(isDefined);
 
@@ -328,6 +350,12 @@ export interface SeriesDoubleValue extends SeriesItem {
   __value_b?: number;
 }
 
+export function isBarOutOfBounds<T extends TimestampedValue>(
+  value: SeriesConfigSingle<T>
+): value is BarOutOfBoundsSeriesDefinition<T> {
+  return isDefined((value as any).outOfBoundsDates);
+}
+
 export function isSeriesSingleValue(
   value: SeriesSingleValue | SeriesDoubleValue
 ): value is SeriesSingleValue {
@@ -368,7 +396,12 @@ function getSeriesList<T extends TimestampedValue>(
       : /**
          * Cutting values based on annotation is only supported for single line series
          */
-        getSeriesData(values, config.metricProperty, cutValuesConfig)
+        getSeriesData(
+          values,
+          config.metricProperty,
+          cutValuesConfig,
+          config.exclude
+        )
   );
 }
 
@@ -519,7 +552,8 @@ function getRangeSeriesData<T extends TimestampedValue>(
 function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  cutValuesConfig?: CutValuesConfig[]
+  cutValuesConfig?: CutValuesConfig[],
+  exclude?: number[]
 ): SeriesSingleValue[] {
   if (values.length === 0) {
     /**
@@ -539,8 +573,10 @@ function getSeriesData<T extends TimestampedValue>(
       /**
        * This is messy and could be improved.
        */
-      __value: (x[metricProperty] ?? undefined) as number | undefined,
       // @ts-expect-error @TODO figure out why the type guard doesn't work
+      __value: ((!exclude?.includes(x.date_unix) && x[metricProperty]) ??
+        undefined) as number | undefined,
+      // @ts-expect-error
       __date_unix: x.date_unix,
     }));
 
