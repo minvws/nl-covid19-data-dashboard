@@ -43,11 +43,12 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
   return (
     <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
       {seriesConfig
-        .filter((x) =>
-          isDateValue(value) && isBarOutOfBounds(x)
+        .filter((x) => {
+          if (!isDateValue(value)) return true;
+          return isBarOutOfBounds(x)
             ? x.outOfBoundsDates?.includes(value.date_unix)
-            : isDateValue(value) && !x.exclude?.includes(value.date_unix)
-        )
+            : !x.exclude?.includes(value.date_unix);
+        })
         .map((x, index) => {
           /**
            * The key is unique for every date to make sure a screenreader
