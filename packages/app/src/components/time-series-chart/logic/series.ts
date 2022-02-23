@@ -64,7 +64,7 @@ interface SeriesCommonDefinition {
    */
   hideInLegend?: boolean;
   /**
-   * An array of timestamp for which the values will be excluded in the graph.
+   * An array of unix timestamps for which the values will be excluded in the graph.
    */
   exclude?: number[];
 }

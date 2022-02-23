@@ -240,7 +240,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected,
                     color: colors.data.primary,
-                    exclude: [1644318000],
+                    exclude: [
+                      new Date('8 February 2022 12:00:00').getTime() / 1000,
+                    ],
                   },
                   {
                     type: 'bar-out-of-bounds',
@@ -249,7 +251,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected_out_of_bounds,
                     color: colors.data.neutral,
-                    outOfBoundsDates: [1644318000],
+                    outOfBoundsDates: [
+                      new Date('8 February 2022 12:00:00').getTime() / 1000,
+                    ],
                   },
                 ]}
                 dataOptions={{
