@@ -14,7 +14,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
-import { BarOutOfBoundsTrend } from './bar-trend-out-of-bounds';
+import { BarOutOfBounds } from './bar-out-of-bounds';
 import { GappedAreaTrend } from './gapped-area-trend';
 import { GappedLinedTrend } from './gapped-line-trend';
 import { GappedStackedAreaTrend } from './gapped-stacked-area-trend';
@@ -139,7 +139,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
               );
             case 'bar-out-of-bounds':
               return (
-                <BarOutOfBoundsTrend
+                <BarOutOfBounds
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}

@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Bounds, GetX, SeriesSingleValue } from '../logic';
 
-type BarOutOfBoundsTrendProps = {
+type BarOutOfBoundsProps = {
   series: SeriesSingleValue[];
   color: string;
   getX: GetX;
@@ -17,14 +17,14 @@ type BarOutOfBoundsTrendProps = {
   outOfBoundsDates?: number[];
 };
 
-export function BarOutOfBoundsTrend({
+export function BarOutOfBounds({
   series,
   getX,
   bounds,
   bandPadding = 0.2,
   id,
   outOfBoundsDates,
-}: BarOutOfBoundsTrendProps) {
+}: BarOutOfBoundsProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
     [series]
@@ -81,15 +81,15 @@ export function BarOutOfBoundsTrend({
   );
 }
 
-interface BarTrendIconProps {
+interface BarOutOfBoundsIconProps {
   width?: number;
   height?: number;
 }
 
-export function BarOutOfBoundsTrendIcon({
+export function BarOutOfBoundsIcon({
   width = 15,
   height = 15,
-}: BarTrendIconProps) {
+}: BarOutOfBoundsIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <PatternLines
