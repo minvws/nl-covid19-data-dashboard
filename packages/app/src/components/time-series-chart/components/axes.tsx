@@ -64,7 +64,28 @@ type AxesProps = {
   hasAllZeroValues?: boolean;
 };
 
-function createTimeTicks(start: number, end: number, count: number) {
+function tickToDate(tick: number): Date {
+  return new Date(tick * 1000);
+}
+
+function dateToTick(date: Date): number {
+  return date.valueOf() / 1000;
+}
+
+/**
+ * Convert tick timestamp to 12:00 at the given day so that the
+ * xAxis tick labels appear in the center of the dedicated bar
+ */
+function normaliseTick(tick: number): number {
+  const tickDate = tickToDate(tick);
+  tickDate.setHours(12);
+  return dateToTick(tickDate);
+}
+
+function createTimeTicks(startTick: number, endTick: number, count: number) {
+  const start = normaliseTick(startTick);
+  const end = normaliseTick(endTick);
+
   if (count <= 2) {
     return [start, end];
   }
@@ -72,8 +93,10 @@ function createTimeTicks(start: number, end: number, count: number) {
   const ticks: number[] = [];
   const stepCount = count - 1;
   const step = Math.floor((end - start) / stepCount);
+
   for (let i = 0; i < stepCount; i++) {
-    ticks.push(start + i * step);
+    const tick = start + i * step;
+    ticks.push(normaliseTick(tick));
   }
   ticks.push(end);
 
@@ -180,6 +203,8 @@ export const Axes = memo(function Axes({
     : yScale;
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
+  console.log(xTicks.map((x) => new Date(x * 1000)));
+
   return (
     <g css={css({ pointerEvents: 'none' })} aria-hidden="true">
       <GridRows
@@ -242,7 +267,7 @@ export const Axes = memo(function Axes({
                 : 'middle'
               : 'middle',
         })}
-        hideTicks
+        // hideTicks
       />
 
       <g>
