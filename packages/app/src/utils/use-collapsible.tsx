@@ -15,6 +15,8 @@ import styled from 'styled-components';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';
+import { isIOSDevice } from './is-ios-device';
+import { isTouchDevice } from './is-touch-device';
 
 /**
  * Generic hook for collapsing content. Core features:
@@ -71,6 +73,15 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
     </IconButton>
   );
 
+  const handleOnClick = (evt: MouseEvent, x: ReactElement) => {
+    evt.stopPropagation();
+    setIsOpen((x) => !x);
+
+    if (x?.props?.onClick) {
+      return x.props.onClick(evt);
+    }
+  };
+
   const button = (x: ReactElement = defaultButton) =>
     cloneElement(x, {
       'aria-controls': id,
@@ -79,13 +90,9 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
         ...x.props.style,
         userSelect: 'none',
       },
-      onClick: (evt: MouseEvent) => {
-        evt.stopPropagation();
-        setIsOpen((x) => !x);
-
-        if (x?.props?.onClick) {
-          return x.props.onClick(evt);
-        }
+      ...{
+        [isTouchDevice() ? 'onTouchStart' : 'onClick']: (evt: MouseEvent) =>
+          handleOnClick(evt, x),
       },
     });
 
