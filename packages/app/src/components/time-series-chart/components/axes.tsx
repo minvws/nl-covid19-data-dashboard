@@ -203,8 +203,6 @@ export const Axes = memo(function Axes({
     : yScale;
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
-  console.log(xTicks.map((x) => new Date(x * 1000)));
-
   return (
     <g css={css({ pointerEvents: 'none' })} aria-hidden="true">
       <GridRows
@@ -267,7 +265,7 @@ export const Axes = memo(function Axes({
                 : 'middle'
               : 'middle',
         })}
-        // hideTicks
+        hideTicks
       />
 
       <g>
