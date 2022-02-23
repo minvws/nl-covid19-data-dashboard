@@ -5,7 +5,11 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import {
+  colors,
+  middleOfDayInSeconds,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -64,27 +68,9 @@ type AxesProps = {
   hasAllZeroValues?: boolean;
 };
 
-function tickToDate(tick: number): Date {
-  return new Date(tick * 1000);
-}
-
-function dateToTick(date: Date): number {
-  return date.valueOf() / 1000;
-}
-
-/**
- * Convert tick timestamp to 12:00 at the given day so that the
- * xAxis tick labels appear in the center of the dedicated bar
- */
-function normaliseTick(tick: number): number {
-  const tickDate = tickToDate(tick);
-  tickDate.setHours(12);
-  return dateToTick(tickDate);
-}
-
 function createTimeTicks(startTick: number, endTick: number, count: number) {
-  const start = normaliseTick(startTick);
-  const end = normaliseTick(endTick);
+  const start = middleOfDayInSeconds(startTick);
+  const end = middleOfDayInSeconds(endTick);
 
   if (count <= 2) {
     return [start, end];
@@ -96,7 +82,7 @@ function createTimeTicks(startTick: number, endTick: number, count: number) {
 
   for (let i = 0; i < stepCount; i++) {
     const tick = start + i * step;
-    ticks.push(normaliseTick(tick));
+    ticks.push(middleOfDayInSeconds(tick));
   }
   ticks.push(end);
 
