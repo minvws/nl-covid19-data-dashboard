@@ -15,7 +15,6 @@ import styled from 'styled-components';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { isIOSDevice } from './is-ios-device';
 import { isTouchDevice } from './is-touch-device';
 
 /**
