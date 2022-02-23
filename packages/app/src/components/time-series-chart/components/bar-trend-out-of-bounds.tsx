@@ -4,14 +4,12 @@ import { scaleBand } from '@visx/scale';
 import { PositionScale } from '@visx/shape/lib/types';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { useUniqueId } from '~/utils/use-unique-id';
-import { Bounds, GetX, GetY, SeriesSingleValue } from '../logic';
+import { Bounds, GetX, SeriesSingleValue } from '../logic';
 
 type BarOutOfBoundsTrendProps = {
   series: SeriesSingleValue[];
   color: string;
   getX: GetX;
-  getY: GetY;
   bounds: Bounds;
   bandPadding?: number;
   id: string;
@@ -22,7 +20,6 @@ type BarOutOfBoundsTrendProps = {
 export function BarOutOfBoundsTrend({
   series,
   getX,
-  getY,
   bounds,
   bandPadding = 0.2,
   id,

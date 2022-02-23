@@ -1,4 +1,8 @@
-import { colors, TimestampedValue } from '@corona-dashboard/common';
+import {
+  colors,
+  isDateValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -40,9 +44,9 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
     <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
       {seriesConfig
         .filter((x) =>
-          isBarOutOfBounds(x)
+          isDateValue(value) && isBarOutOfBounds(x)
             ? x.outOfBoundsDates?.includes(value.date_unix)
-            : !x.exclude?.includes(value.date_unix)
+            : isDateValue(value) && !x.exclude?.includes(value.date_unix)
         )
         .map((x, index) => {
           /**

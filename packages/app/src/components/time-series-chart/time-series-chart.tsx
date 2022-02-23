@@ -1,8 +1,4 @@
-import {
-  DateValue,
-  TimeframeOption,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { first, isFunction, last } from 'lodash';

@@ -144,7 +144,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   series={series as SeriesSingleValue[]}
                   color={config.color}
                   getX={getX}
-                  getY={getY}
                   bounds={bounds}
                   yScale={yScale}
                   id={id}
