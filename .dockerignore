@@ -5,6 +5,9 @@ packages/**/node_modules
 packages/app/out
 packages/app/.next
 .github
+.git
+.vscode
+docs
 
 # Allowlist
 !packages/app/*.conf
