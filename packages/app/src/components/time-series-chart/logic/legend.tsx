@@ -56,7 +56,8 @@ export function useLegendItems<T extends TimestampedValue>(
       for (const annotation of timespanAnnotations) {
         const isAnnotationVisible =
           (first(domain) as number) <= annotation.end &&
-          annotation.start <= (last(domain) as number);
+          annotation.start <= (last(domain) as number) &&
+          annotation.hideInLegend;
 
         if (isAnnotationVisible) {
           legendItems.push({

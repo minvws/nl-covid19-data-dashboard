@@ -257,6 +257,18 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: data.tested_overall.values[0].date_unix,
+                      end: Infinity,
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .annotations,
+                      fill: 'none',
+                      textAlign: 'left',
+                      hideInLegend: false,
+                    },
+                  ],
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'
