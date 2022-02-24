@@ -130,12 +130,12 @@ export const VaccinationsVrPage = (
 
   assert(
     filteredAgeGroup18Plus,
-    'Could not find data for the vaccine coverage per age group for the age 18+'
+    `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`
   );
 
   assert(
     filteredAgeGroup12Plus,
-    'Could not find data for the vaccine coverage per age group for the age 12+'
+    `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
   );
 
   return (

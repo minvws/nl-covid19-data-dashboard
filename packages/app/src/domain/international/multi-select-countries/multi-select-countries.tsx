@@ -33,7 +33,7 @@ export function MultiSelectCountries({
 }: MultiSelectCountriesProps) {
   assert(
     limit ? limit <= ORDERED_COLORS.length : !limit,
-    'limit cannot be higher than the # of specified colors'
+    `[${MultiSelectCountries.name}] limit cannot be higher than the # of specified colors`
   );
 
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>(

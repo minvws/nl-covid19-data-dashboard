@@ -42,11 +42,11 @@ export function BehaviorPerAgeGroup({
 
   assert(
     typeof complianceValue !== 'number',
-    'There is a problem by filtering the numbers out (complianceValue)'
+    `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (complianceValue)`
   );
   assert(
     typeof supportValue !== 'number',
-    'There is a problem by filtering the numbers out (supportValue)'
+    `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (supportValue)`
   );
 
   return (

@@ -102,7 +102,7 @@ function createGeoJson(map: MapType) {
   const outlineGeo = map === 'in' ? undefined : nlGeo;
   assert(
     map === 'in' || map === 'vr' || map === 'gm',
-    `Unknown maptype: ${map}`
+    `[${createGeoJson.name}] Unknown maptype: ${map}`
   );
 
   const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;

@@ -60,7 +60,7 @@ export function PageKpi<T>({
 
   assert(
     isDefined(propertyValue),
-    `Missing value for metric property ${[
+    `[${PageKpi.name}] Missing value for metric property ${[
       metricName,
       'last_value',
       metricProperty,
@@ -79,7 +79,7 @@ export function PageKpi<T>({
      */
     assert(
       isDefined(differenceValue),
-      `Missing value for difference:${differenceKey}`
+      `[${PageKpi.name}] Missing value for difference:${differenceKey}`
     );
   }
 

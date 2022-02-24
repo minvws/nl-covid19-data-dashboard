@@ -8,11 +8,13 @@ import {
   GetY,
   GetY0,
   GetY1,
+  isBarOutOfBounds,
   SeriesConfig,
   SeriesDoubleValue,
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { BarOutOfBounds } from './bar-out-of-bounds';
 import { GappedAreaTrend } from './gapped-area-trend';
 import { GappedLinedTrend } from './gapped-line-trend';
 import { GappedStackedAreaTrend } from './gapped-stacked-area-trend';
@@ -133,6 +135,21 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   bounds={bounds}
                   yScale={yScale}
                   id={id}
+                />
+              );
+            case 'bar-out-of-bounds':
+              return (
+                <BarOutOfBounds
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  getX={getX}
+                  bounds={bounds}
+                  yScale={yScale}
+                  id={id}
+                  outOfBoundsDates={
+                    (isBarOutOfBounds(config) && config.outOfBoundsDates) || []
+                  }
                 />
               );
             case 'split-bar':
