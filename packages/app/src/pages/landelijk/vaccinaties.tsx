@@ -194,10 +194,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { textNl } = pageText;
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const reverseRouter = useReverseRouter();
-  const [isToggled, toggleArchived] = useState(false);
-  const handleArchivedClick = () => {
-    toggleArchived((currentState) => !currentState);
-  };
+  const [hasHideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
 
   const vaccineAdministeredGgdFeature = useFeature('nlVaccineAdministeredGgd');
   const vaccineAdministeredHospitalsAndCareInstitutionsFeature = useFeature(
@@ -658,11 +656,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
-            onArchivedClick={handleArchivedClick}
-            hasButton
+            hasHideArchivedButton
+            isArchivedHidden={hasHideArchivedCharts}
+            onToggleArchived={() =>
+              setHideArchivedCharts(!hasHideArchivedCharts)
+            }
           />
 
-          {isToggled && (
+          {hasHideArchivedCharts && (
             <InView rootMargin="500px">
               <VaccineDeliveryBarChart
                 data={data.vaccine_delivery_per_supplier}

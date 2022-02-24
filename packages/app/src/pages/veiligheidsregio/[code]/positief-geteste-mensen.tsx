@@ -109,10 +109,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const reverseRouter = useReverseRouter();
   const router = useRouter();
-  const [isToggled, toggleArchived] = useState(false);
-  const handleArchivedClick = () => {
-    toggleArchived((currentState) => !currentState);
-  };
+  const [hasHideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -499,11 +497,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={text.section_archived.title}
             description={text.section_archived.description}
-            onArchivedClick={handleArchivedClick}
-            hasButton
+            hasHideArchivedButton
+            isArchivedHidden={hasHideArchivedCharts}
+            onToggleArchived={() =>
+              setHideArchivedCharts(!hasHideArchivedCharts)
+            }
           />
 
-          {isToggled && (
+          {hasHideArchivedCharts && (
             <InView rootMargin="400px">
               <ChartTile
                 title={ggdText.linechart_percentage_titel}

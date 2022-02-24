@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { Warning } from '@corona-dashboard/icons';
-import { isValidElement, ReactNode, useState } from 'react';
+import { isValidElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -36,8 +36,9 @@ interface InformationBlockProps {
   screenReaderCategory?: string;
   vrNameOrGmName?: string;
   warning?: string;
-  hasButton?: boolean;
-  onArchivedClick?: any;
+  hasHideArchivedButton?: boolean;
+  isArchivedHidden?: boolean;
+  onToggleArchived?: () => void;
 }
 
 export function PageInformationBlock({
@@ -53,16 +54,12 @@ export function PageInformationBlock({
   screenReaderCategory,
   vrNameOrGmName,
   warning,
-  hasButton,
-  onArchivedClick,
+  hasHideArchivedButton,
+  isArchivedHidden,
+  onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
   const { siteText } = useIntl();
-  const [isToggled, toggleArchived] = useState(false);
-  const handleClick = () => {
-    toggleArchived(!isToggled);
-    onArchivedClick(isToggled);
-  };
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -145,9 +142,13 @@ export function PageInformationBlock({
             )}
           </Box>
           <Box my={4}>
-            {hasButton && (
-              <Button type="button" onClick={handleClick} isActive={isToggled}>
-                {!isToggled
+            {hasHideArchivedButton && (
+              <Button
+                type="button"
+                onClick={onToggleArchived}
+                isActive={isArchivedHidden}
+              >
+                {!isArchivedHidden
                   ? siteText.common.show_archived
                   : siteText.common.hide_archived}
               </Button>
@@ -175,7 +176,7 @@ const MetadataBox = styled.div(
   })
 );
 
-const Button = styled.button<{ isActive: boolean }>(({ isActive }) =>
+const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
   css({
     bg: !isActive ? 'button' : 'transparent',
     border: 'none',
