@@ -534,6 +534,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     )}
+                    dataOptions={{
+                      timespanAnnotations: [
+                        {
+                          start: data.tested_overall.values[0].date_unix,
+                          end: Infinity,
+                          label:
+                            siteText.positief_geteste_personen.tooltip_labels
+                              .annotations,
+                          fill: 'none',
+                          textAlign: 'left',
+                          hideInLegend: false,
+                        },
+                      ],
+                    }}
                   />
                 }
                 <MiniVaccinationCoverageTile

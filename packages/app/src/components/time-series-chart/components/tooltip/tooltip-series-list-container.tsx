@@ -64,7 +64,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
                 <Text
                   variant="label2"
                   color={colors.annotation}
-                  textAlign="center"
+                  textAlign={timespanAnnotation.textAlign || 'center'}
                 >
                   {timespanAnnotation.shortLabel || timespanAnnotation.label}
                 </Text>

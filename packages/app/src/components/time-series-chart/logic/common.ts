@@ -27,6 +27,8 @@ export type TimespanAnnotationConfig = {
   label: string;
   shortLabel?: string;
   cutValuesForMetricProperties?: string[];
+  textAlign?: 'left' | 'center' | 'right';
+  hideInLegend?: boolean;
 };
 
 export type TimeAnnotationConfig = {
