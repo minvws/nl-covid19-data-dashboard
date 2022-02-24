@@ -6,7 +6,6 @@ import * as assert from 'uvu/assert';
 import { useCollapsible } from '../use-collapsible';
 
 const UseCollapsible = suite('useCollapsible');
-let matchMediaOriginal;
 
 UseCollapsible.before((context) => {
   context.cleanupJsDom = injectJsDom();
