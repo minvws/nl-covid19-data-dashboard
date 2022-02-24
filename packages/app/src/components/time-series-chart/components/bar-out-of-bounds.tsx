@@ -1,4 +1,8 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  endOfDayInSeconds,
+  startOfDayInSeconds,
+} from '@corona-dashboard/common';
 import { PatternLines } from '@visx/pattern';
 import { scaleBand } from '@visx/scale';
 import { PositionScale } from '@visx/shape/lib/types';
@@ -47,36 +51,49 @@ export function BarOutOfBounds({
    */
   const barWidth = Math.max(xScale.bandwidth(), 1);
 
+  const onSameDay = (timestamp: number, dayToCheck: number) => {
+    const startOfDay = startOfDayInSeconds(dayToCheck);
+    const endOfDay = endOfDayInSeconds(dayToCheck);
+
+    return timestamp >= startOfDay && timestamp <= endOfDay;
+  };
+
+  const isOutOfBoundsValue = ({ __date_unix }: SeriesSingleValue) => {
+    const matchingTimestamp = outOfBoundsDates?.find((outOfBoundsDate) =>
+      onSameDay(outOfBoundsDate, __date_unix)
+    );
+
+    return matchingTimestamp !== undefined;
+  };
+
   return (
     <>
-      {nonNullSeries
-        .filter((x) => outOfBoundsDates?.includes(x.__date_unix))
-        .map((item) => {
-          const x = getX(item) - barWidth / 2;
-          const y = 1 / bounds.height;
-          const barHeight = bounds.height;
+      {nonNullSeries.filter(isOutOfBoundsValue).map((item) => {
+        const x = getX(item) - barWidth / 2;
+        const y = 1 / bounds.height;
+        const barHeight = bounds.height;
 
-          return (
-            <>
-              <rect
-                x={x}
-                y={y}
-                height={barHeight}
-                width={barWidth}
-                fill="url(#diagonal-pattern)"
-                id={id}
-              />
-              <PatternLines
-                id="diagonal-pattern"
-                height={6}
-                width={6}
-                stroke={colors.data.neutral}
-                strokeWidth={2}
-                orientation={['diagonal']}
-              />
-            </>
-          );
-        })}
+        return (
+          <>
+            <rect
+              x={x}
+              y={y}
+              height={barHeight}
+              width={barWidth}
+              fill="url(#diagonal-pattern)"
+              id={id}
+            />
+            <PatternLines
+              id="diagonal-pattern"
+              height={6}
+              width={6}
+              stroke={colors.data.neutral}
+              strokeWidth={2}
+              orientation={['diagonal']}
+            />
+          </>
+        );
+      })}
     </>
   );
 }
