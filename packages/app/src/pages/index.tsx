@@ -1,6 +1,7 @@
 import {
   colors,
   DAY_IN_SECONDS,
+  middleOfDayInSeconds,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlTestedOverallValue,

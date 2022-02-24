@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, middleOfDayInSeconds } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
