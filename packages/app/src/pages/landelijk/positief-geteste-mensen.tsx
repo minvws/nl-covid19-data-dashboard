@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, middleOfDayInSeconds } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -114,7 +114,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  const outOfBoundsDatesTestedOverall = [1644318000];
+  const outOfBoundsDatesTestedOverall = [middleOfDayInSeconds(1644278400)];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>

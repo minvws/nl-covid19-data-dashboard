@@ -1,6 +1,7 @@
 import {
   colors,
   DAY_IN_SECONDS,
+  middleOfDayInSeconds,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlTestedOverallValue,
@@ -174,7 +175,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
 
-  const outOfBoundsDatesTestedOverall = [1644318000];
+  const outOfBoundsDatesTestedOverall = [middleOfDayInSeconds(1644278400)];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
