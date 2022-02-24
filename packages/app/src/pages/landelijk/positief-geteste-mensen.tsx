@@ -114,6 +114,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  const outOfBoundsDatesTestedOverall = [1644318000];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -240,9 +242,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected,
                     color: colors.data.primary,
-                    exclude: [
-                      new Date('8 February 2022 12:00:00').getTime() / 1000,
-                    ],
+                    exclude: outOfBoundsDatesTestedOverall,
                   },
                   {
                     type: 'bar-out-of-bounds',
@@ -251,24 +251,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected_out_of_bounds,
                     color: colors.data.neutral,
-                    outOfBoundsDates: [
-                      new Date('8 February 2022 12:00:00').getTime() / 1000,
-                    ],
+                    outOfBoundsDates: outOfBoundsDatesTestedOverall,
                   },
                 ]}
                 dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: data.tested_overall.values[0].date_unix,
-                      end: Infinity,
+                  timespanAnnotations: outOfBoundsDatesTestedOverall.map(
+                    (date) => ({
+                      start: date,
+                      end: date,
                       label:
                         siteText.positief_geteste_personen.tooltip_labels
                           .annotations,
                       fill: 'none',
                       textAlign: 'left',
                       hideInLegend: false,
-                    },
-                  ],
+                    })
+                  ),
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'
