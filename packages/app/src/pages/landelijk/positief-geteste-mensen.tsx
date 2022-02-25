@@ -118,7 +118,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     Math.floor(new Date(Date.UTC(2022, 1, 8, 10, 0, 0)) / 1000),
   ];
 
-  console.log(outOfBoundsDatesTestedOverall);
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
