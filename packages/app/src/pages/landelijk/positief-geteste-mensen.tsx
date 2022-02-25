@@ -115,7 +115,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const outOfBoundsDatesTestedOverall = [
-    Math.floor(new Date(Date.UTC(2022, 1, 8, 10, 0, 0)) / 1000),
+    Math.floor(new Date(Date.UTC(2022, 1, 8, 10, 0, 0)).getTime() / 1000),
   ];
 
   return (
