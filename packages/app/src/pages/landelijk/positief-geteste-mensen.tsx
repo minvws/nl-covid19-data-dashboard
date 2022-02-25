@@ -114,8 +114,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  const outOfBoundsDatesTestedOverall = [middleOfDayInSeconds(1644278400)];
+  const outOfBoundsDatesTestedOverall = [
+    Math.floor(new Date(Date.UTC(2022, 1, 8, 10, 0, 0)) / 1000),
+  ];
 
+  console.log(outOfBoundsDatesTestedOverall);
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
