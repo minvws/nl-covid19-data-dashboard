@@ -11,6 +11,7 @@ import {
 } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { isDefined } from 'ts-is-present';
 import { AgeDemographicProps } from '~/components/age-demographic';
@@ -193,6 +194,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { textNl } = pageText;
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const reverseRouter = useReverseRouter();
+  const [hasHideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
 
   const vaccineAdministeredGgdFeature = useFeature('nlVaccineAdministeredGgd');
   const vaccineAdministeredHospitalsAndCareInstitutionsFeature = useFeature(
@@ -653,98 +656,103 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
+            isArchivedHidden={hasHideArchivedCharts}
+            onToggleArchived={() =>
+              setHideArchivedCharts(!hasHideArchivedCharts)
+            }
           />
 
-          <InView rootMargin="500px">
-            <VaccineDeliveryBarChart
-              data={data.vaccine_delivery_per_supplier}
-            />
-          </InView>
-
-          <InView rootMargin="500px">
-            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
-          </InView>
-
-          <ChartTile
-            title={textNl.grafiek_draagvlak.titel}
-            description={textNl.grafiek_draagvlak.omschrijving}
-            metadata={{
-              datumsText: textNl.grafiek_draagvlak.metadata_tekst,
-              date: [
-                data.vaccine_vaccinated_or_support.last_value.date_start_unix,
-                data.vaccine_vaccinated_or_support.last_value.date_end_unix,
-              ],
-            }}
-          >
+          {hasHideArchivedCharts && (
             <InView rootMargin="500px">
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'vaccines_support_over_time_chart',
-                }}
-                tooltipTitle={textNl.grafiek_draagvlak.titel}
-                values={data.vaccine_vaccinated_or_support.values}
-                numGridLines={20}
-                tickValues={[0, 25, 50, 75, 100]}
-                dataOptions={{
-                  isPercentage: true,
-                  forcedMaximumValue: 100,
-                }}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_70_plus',
-                    label: replaceVariablesInText(
-                      textNl.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '70+' }
-                    ),
-                    color: colors.data.multiseries.magenta,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_55_69',
-                    label: replaceVariablesInText(
-                      textNl.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '55 - 69' }
-                    ),
-                    color: colors.data.multiseries.orange,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_40_54',
-                    label: replaceVariablesInText(
-                      textNl.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '40 - 54' }
-                    ),
-                    color: colors.data.multiseries.turquoise,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_25_39',
-                    label: replaceVariablesInText(
-                      textNl.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '25 - 39' }
-                    ),
-                    color: colors.data.multiseries.yellow,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_16_24',
-                    label: replaceVariablesInText(
-                      textNl.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '16 - 24' }
-                    ),
-                    color: colors.data.multiseries.cyan,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'percentage_average',
-                    label: siteText.common.totaal,
-                    isPercentage: true,
-                  },
-                ]}
+              <VaccineDeliveryBarChart
+                data={data.vaccine_delivery_per_supplier}
               />
+
+              <VaccineStockPerSupplierChart
+                values={data.vaccine_stock.values}
+              />
+
+              <ChartTile
+                title={textNl.grafiek_draagvlak.titel}
+                description={textNl.grafiek_draagvlak.omschrijving}
+                metadata={{
+                  datumsText: textNl.grafiek_draagvlak.metadata_tekst,
+                  date: [
+                    data.vaccine_vaccinated_or_support.last_value
+                      .date_start_unix,
+                    data.vaccine_vaccinated_or_support.last_value.date_end_unix,
+                  ],
+                }}
+              >
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'vaccines_support_over_time_chart',
+                  }}
+                  tooltipTitle={textNl.grafiek_draagvlak.titel}
+                  values={data.vaccine_vaccinated_or_support.values}
+                  numGridLines={20}
+                  tickValues={[0, 25, 50, 75, 100]}
+                  dataOptions={{
+                    isPercentage: true,
+                    forcedMaximumValue: 100,
+                  }}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'percentage_70_plus',
+                      label: replaceVariablesInText(
+                        textNl.grafiek_draagvlak.leeftijd_jaar,
+                        { ageGroup: '70+' }
+                      ),
+                      color: colors.data.multiseries.magenta,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'percentage_55_69',
+                      label: replaceVariablesInText(
+                        textNl.grafiek_draagvlak.leeftijd_jaar,
+                        { ageGroup: '55 - 69' }
+                      ),
+                      color: colors.data.multiseries.orange,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'percentage_40_54',
+                      label: replaceVariablesInText(
+                        textNl.grafiek_draagvlak.leeftijd_jaar,
+                        { ageGroup: '40 - 54' }
+                      ),
+                      color: colors.data.multiseries.turquoise,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'percentage_25_39',
+                      label: replaceVariablesInText(
+                        textNl.grafiek_draagvlak.leeftijd_jaar,
+                        { ageGroup: '25 - 39' }
+                      ),
+                      color: colors.data.multiseries.yellow,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'percentage_16_24',
+                      label: replaceVariablesInText(
+                        textNl.grafiek_draagvlak.leeftijd_jaar,
+                        { ageGroup: '16 - 24' }
+                      ),
+                      color: colors.data.multiseries.cyan,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'percentage_average',
+                      label: siteText.common.totaal,
+                      isPercentage: true,
+                    },
+                  ]}
+                />
+              </ChartTile>
             </InView>
-          </ChartTile>
+          )}
         </TileList>
       </NlLayout>
     </Layout>
