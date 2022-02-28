@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { Warning } from '@corona-dashboard/icons';
-import { isValidElement, ReactNode } from 'react';
+import { isValidElement, ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -36,8 +36,6 @@ interface InformationBlockProps {
   screenReaderCategory?: string;
   vrNameOrGmName?: string;
   warning?: string;
-  hasHideArchivedButton?: boolean;
-  isArchivedHidden?: boolean;
   onToggleArchived?: () => void;
 }
 
@@ -54,8 +52,6 @@ export function PageInformationBlock({
   screenReaderCategory,
   vrNameOrGmName,
   warning,
-  hasHideArchivedButton,
-  isArchivedHidden,
   onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
@@ -82,6 +78,19 @@ export function PageInformationBlock({
       )}
     </Box>
   ) : null;
+
+  const hideArchivedButton = typeof onToggleArchived !== 'undefined';
+
+  const [hideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
+
+  const archiveButtonHandler = () => {
+    const inversedVar = !hideArchivedCharts
+    setHideArchivedCharts(inversedVar)
+    if(hideArchivedButton) {
+      onToggleArchived()
+    }
+  }
 
   return (
     <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
@@ -142,15 +151,15 @@ export function PageInformationBlock({
             )}
           </Box>
           <Box my={4}>
-            {hasHideArchivedButton && (
+            {hideArchivedButton && (
               <Button
                 type="button"
-                onClick={onToggleArchived}
-                isActive={isArchivedHidden}
+                onClick={archiveButtonHandler}
+                isActive={hideArchivedCharts}
               >
-                {!isArchivedHidden
-                  ? siteText.common.show_archived
-                  : siteText.common.hide_archived}
+                {hideArchivedCharts
+                  ? siteText.common.hide_archived
+                  : siteText.common.show_archived}
               </Button>
             )}
           </Box>
