@@ -1,8 +1,4 @@
-import {
-  colors,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { colors, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -10,12 +6,9 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { spacingStyle } from '~/style/functions/spacing';
-import {
-  isBarOutOfBounds,
-  SeriesConfig,
-  useFormatSeriesValue,
-} from '../../logic';
+import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
+import { OutOfBoundsIcon } from '../timespan-annotation';
 import { IconRow } from './tooltip-icon-row';
 import { TooltipData } from './types';
 
@@ -33,6 +26,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
   displayTooltipValueOnly,
   valueMinWidth,
   metricPropertyFormatters,
+  seriesMax,
 }: TooltipListOfSeriesProps<T>) {
   const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
 
@@ -42,93 +36,95 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
 
   return (
     <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
-      {seriesConfig
-        .filter((x) => {
-          if (!isDateValue(value)) return true;
-          return isBarOutOfBounds(x)
-            ? x.outOfBoundsDates?.includes(value.date_unix)
-            : !x.exclude?.includes(value.date_unix);
-        })
-        .map((x, index) => {
-          /**
-           * The key is unique for every date to make sure a screenreader
-           * will read `[label]: [value]`. Otherwise it would read the
-           * changed content which would only be `[value]` and thus miss some
-           * context.
-           */
-          const key = index + getDateUnixString(value);
+      {seriesConfig.map((x, index) => {
+        /**
+         * The key is unique for every date to make sure a screenreader
+         * will read `[label]: [value]`. Otherwise it would read the
+         * changed content which would only be `[value]` and thus miss some
+         * context.
+         */
+        const key = index + getDateUnixString(value);
+        const metricPropertyValue =
+          x.type !== 'range' &&
+          (value[x.metricProperty] as unknown as number | null);
 
-          switch (x.type) {
-            case 'range':
-              return (
-                <TooltipListItem
-                  key={key}
-                  icon={<SeriesIcon config={x} />}
-                  label={x.shortLabel ?? x.label}
-                  ariaLabel={x.ariaLabel}
-                  displayTooltipValueOnly={displayTooltipValueOnly}
-                  isVisuallyHidden={x.nonInteractive}
-                >
-                  <span css={css({ whiteSpace: 'nowrap' })}>
-                    {formatSeriesValue(value, x, options.isPercentage)}
-                  </span>
-                </TooltipListItem>
-              );
-
-            case 'invisible':
-              return (
-                <TooltipListItem
-                  key={key}
-                  label={x.label}
-                  ariaLabel={x.ariaLabel}
-                  displayTooltipValueOnly={displayTooltipValueOnly}
-                  isVisuallyHidden={x.nonInteractive}
-                >
-                  {formatSeriesValue(
-                    value,
-                    x,
-                    x.isPercentage ?? options.isPercentage
-                  )}
-                </TooltipListItem>
-              );
-
-            case 'split-area':
-            case 'split-bar':
-              return (
-                <TooltipListItem
-                  key={key}
-                  icon={
-                    <SeriesIcon
-                      config={x}
-                      value={
-                        value[x.metricProperty] as unknown as number | null
-                      }
-                    />
-                  }
-                  label={x.shortLabel ?? x.label}
-                  ariaLabel={x.ariaLabel}
-                  displayTooltipValueOnly={displayTooltipValueOnly}
-                  isVisuallyHidden={x.nonInteractive}
-                >
+        switch (x.type) {
+          case 'range':
+            return (
+              <TooltipListItem
+                key={key}
+                icon={<SeriesIcon config={x} />}
+                label={x.shortLabel ?? x.label}
+                ariaLabel={x.ariaLabel}
+                displayTooltipValueOnly={displayTooltipValueOnly}
+                isVisuallyHidden={x.nonInteractive}
+              >
+                <span css={css({ whiteSpace: 'nowrap' })}>
                   {formatSeriesValue(value, x, options.isPercentage)}
-                </TooltipListItem>
-              );
+                </span>
+              </TooltipListItem>
+            );
 
-            default:
-              return (
-                <TooltipListItem
-                  key={key}
-                  icon={<SeriesIcon config={x} />}
-                  label={x.shortLabel ?? x.label}
-                  ariaLabel={x.ariaLabel}
-                  displayTooltipValueOnly={displayTooltipValueOnly}
-                  isVisuallyHidden={x.nonInteractive}
-                >
-                  {formatSeriesValue(value, x, options.isPercentage)}
-                </TooltipListItem>
-              );
-          }
-        })}
+          case 'invisible':
+            return (
+              <TooltipListItem
+                key={key}
+                label={x.label}
+                ariaLabel={x.ariaLabel}
+                displayTooltipValueOnly={displayTooltipValueOnly}
+                isVisuallyHidden={x.nonInteractive}
+              >
+                {formatSeriesValue(
+                  value,
+                  x,
+                  x.isPercentage ?? options.isPercentage
+                )}
+              </TooltipListItem>
+            );
+
+          case 'split-area':
+          case 'split-bar':
+            return (
+              <TooltipListItem
+                key={key}
+                icon={
+                  <SeriesIcon
+                    config={x}
+                    value={value[x.metricProperty] as unknown as number | null}
+                  />
+                }
+                label={x.shortLabel ?? x.label}
+                ariaLabel={x.ariaLabel}
+                displayTooltipValueOnly={displayTooltipValueOnly}
+                isVisuallyHidden={x.nonInteractive}
+              >
+                {formatSeriesValue(value, x, options.isPercentage)}
+              </TooltipListItem>
+            );
+
+          default:
+            return (
+              <TooltipListItem
+                key={key}
+                icon={
+                  metricPropertyValue &&
+                  seriesMax &&
+                  seriesMax > metricPropertyValue ? (
+                    <SeriesIcon config={x} />
+                  ) : (
+                    <OutOfBoundsIcon />
+                  )
+                }
+                label={x.shortLabel ?? x.label}
+                ariaLabel={x.ariaLabel}
+                displayTooltipValueOnly={displayTooltipValueOnly}
+                isVisuallyHidden={x.nonInteractive}
+              >
+                {formatSeriesValue(value, x, options.isPercentage)}
+              </TooltipListItem>
+            );
+        }
+      })}
     </TooltipList>
   );
 }
