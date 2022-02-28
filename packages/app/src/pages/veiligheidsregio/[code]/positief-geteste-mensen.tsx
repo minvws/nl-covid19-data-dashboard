@@ -497,7 +497,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={text.section_archived.title}
             description={text.section_archived.description}
-            hasHideArchivedButton
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() =>
               setHideArchivedCharts(!hasHideArchivedCharts)

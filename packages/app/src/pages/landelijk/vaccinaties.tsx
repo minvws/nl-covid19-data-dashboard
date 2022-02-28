@@ -656,7 +656,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
-            hasHideArchivedButton
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() =>
               setHideArchivedCharts(!hasHideArchivedCharts)

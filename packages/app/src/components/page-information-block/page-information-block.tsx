@@ -54,11 +54,13 @@ export function PageInformationBlock({
   screenReaderCategory,
   vrNameOrGmName,
   warning,
-  hasHideArchivedButton,
   isArchivedHidden,
   onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+  const showArchivedToggleButton =
+    typeof isArchivedHidden !== 'undefined' &&
+    typeof onToggleArchived !== 'undefined';
   const { siteText } = useIntl();
 
   const MetaDataBlock = metadata ? (
@@ -142,7 +144,7 @@ export function PageInformationBlock({
             )}
           </Box>
           <Box my={4}>
-            {hasHideArchivedButton && (
+            {showArchivedToggleButton && (
               <Button
                 type="button"
                 onClick={onToggleArchived}
