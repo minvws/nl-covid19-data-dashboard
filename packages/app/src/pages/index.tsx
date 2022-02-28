@@ -1,7 +1,6 @@
 import {
   colors,
   DAY_IN_SECONDS,
-  middleOfDayInSeconds,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlTestedOverallValue,
@@ -174,8 +173,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - WEEK_IN_SECONDS,
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
-
-  const outOfBoundsDatesTestedOverall = [middleOfDayInSeconds(1644278400)];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -515,15 +512,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             .infected_overall,
                         color: colors.data.primary,
                       },
-                      {
-                        type: 'bar-out-of-bounds',
-                        metricProperty: 'infected',
-                        label:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .infected_out_of_bounds,
-                        color: colors.data.neutral,
-                        outOfBoundsDates: outOfBoundsDatesTestedOverall,
-                      },
                     ]}
                     accessibility={{
                       key: 'topical_tested_overall_infected',
@@ -533,18 +521,19 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'tested_overall'
                     )}
                     dataOptions={{
-                      timespanAnnotations: outOfBoundsDatesTestedOverall.map(
-                        (date) => ({
-                          start: date,
-                          end: date,
-                          label:
-                            siteText.positief_geteste_personen.tooltip_labels
-                              .annotations,
-                          fill: 'none',
-                          textAlign: 'left',
-                          hideInLegend: false,
-                        })
-                      ),
+                      forcedMaximumValue: 150000,
+                      outOfBoundsConfig: {
+                        label:
+                          siteText.positief_geteste_personen.tooltip_labels
+                            .infected_out_of_bounds,
+                        tooltipLabel:
+                          siteText.positief_geteste_personen.tooltip_labels
+                            .annotations,
+                        checkIsOutofBounds: (
+                          x: NlTestedOverallValue,
+                          max: number
+                        ) => x.infected > max,
+                      },
                     }}
                   />
                 }
