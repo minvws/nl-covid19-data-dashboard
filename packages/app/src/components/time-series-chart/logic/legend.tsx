@@ -135,6 +135,6 @@ export function useLegendItems<T extends TimestampedValue>(
     intl,
     timelineEvents,
     timespanAnnotations,
-    OutOfBoundsIcon,
+    outOfBoundsConfig,
   ]);
 }

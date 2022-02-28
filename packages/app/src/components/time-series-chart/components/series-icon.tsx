@@ -7,7 +7,6 @@ import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
 import { SplitAreaTrendIcon } from './split-area-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
-import { OutOfBoundsIcon } from './timespan-annotation';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
