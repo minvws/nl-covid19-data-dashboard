@@ -265,7 +265,6 @@ export interface Nl {
   difference: NlDifference;
   named_difference: NlNamedDifference;
   booster_shot_administered: NlBoosterShotAdministered;
-  booster_and_third_shot_administered: NlBoosterAndThirdShotAdministered;
   booster_shot_delivered: NlBoosterShotDelivered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
@@ -375,15 +374,6 @@ export interface NlBoosterShotAdministeredValue {
   others_administered_total: number;
   date_start_unix: number;
   date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBoosterAndThirdShotAdministered {
-  values: NlBoosterAndThirdShotAdministeredValue[];
-  last_value: NlBoosterAndThirdShotAdministeredValue;
-}
-export interface NlBoosterAndThirdShotAdministeredValue {
-  administered_total: number;
-  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBoosterShotDelivered {
