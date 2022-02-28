@@ -369,6 +369,7 @@ export interface NlBoosterShotAdministered {
   last_value: NlBoosterShotAdministeredValue;
 }
 export interface NlBoosterShotAdministeredValue {
+  administered_total: number;
   ggd_administered_last_7_days: number;
   ggd_administered_total: number;
   others_administered_total: number;
@@ -408,7 +409,6 @@ export interface NlBoosterShotPerAgeGroup {
 }
 export interface NlBoosterShotPerAgeGroupValue {
   age_group_range: "5-11" | "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
-  received_booster_total: number;
   received_booster_percentage: number;
   date_of_insertion_unix: number;
   date_unix: number;
