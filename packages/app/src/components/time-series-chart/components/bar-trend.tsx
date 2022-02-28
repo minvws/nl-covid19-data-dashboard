@@ -1,3 +1,5 @@
+import { colors } from '@corona-dashboard/common';
+import { PatternLines } from '@visx/pattern';
 import { scaleBand } from '@visx/scale';
 import { PositionScale } from '@visx/shape/lib/types';
 import { transparentize } from 'polished';
@@ -19,6 +21,7 @@ type BarTrendProps = {
   bandPadding?: number;
   id: string;
   yScale: PositionScale;
+  seriesMax?: number;
 };
 
 export function BarTrend({
@@ -31,6 +34,7 @@ export function BarTrend({
   bandPadding = 0.2,
   id,
   yScale,
+  seriesMax,
 }: BarTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -55,49 +59,95 @@ export function BarTrend({
   const barWidth = Math.max(xScale.bandwidth(), 1);
   const zeroPosition = getY({ __value: 0, __date_unix: 0 });
 
-  /**
-   * Only render bars when the bar width is greater than one pixel, otherwise render
-   * it as a 'stepped' area instead. A stepped area will consistently look like a
-   * bar chart with 1 pixel bar widths, where an actual bar chart with these sizes
-   * will sometimes render a gap and sometimes not. Resulting in weird looking charts.
-   */
-  if (barWidth > 1) {
-    return (
-      <>
-        {nonNullSeries.map((item, index) => {
-          const x = getX(item) - barWidth / 2;
-          const y = Math.min(zeroPosition, getY(item));
-          const barHeight = Math.abs(zeroPosition - getY(item));
+  const outOfBoundsItems: SeriesSingleValue[] = [];
+  const items: SeriesSingleValue[] = [];
+  nonNullSeries.forEach((x) => {
+    const outOfBounds =
+      undefined !== seriesMax &&
+      undefined !== x.__value &&
+      x.__value > seriesMax;
+    outOfBounds ? outOfBoundsItems.push(x) : items.push(x);
+  });
 
-          return (
-            <rect
-              key={index}
-              x={x}
-              y={y}
-              height={barHeight}
-              width={barWidth}
-              fill={transparentize(1 - fillOpacity, color)}
-              id={id}
-            />
-          );
-        })}
-      </>
-    );
-  } else {
-    return (
-      <AreaTrend
-        series={series}
-        color={color}
-        fillOpacity={fillOpacity}
-        strokeWidth={0}
-        curve="step"
-        getX={getX}
-        getY={getY}
-        yScale={yScale}
-        id={id}
-      />
-    );
-  }
+  return (
+    <>
+      {outOfBoundsItems.length && (
+        <>
+          {outOfBoundsItems.map((item, index) => {
+            const value = { __value: seriesMax, __date_unix: item.__date_unix };
+            const x = getX(item) - barWidth / 2;
+            const y = Math.min(zeroPosition, getY(value));
+            const barHeight = Math.abs(zeroPosition - getY(value));
+
+            return (
+              <>
+                <PatternLines
+                  id="diagonal-pattern"
+                  height={6}
+                  width={6}
+                  stroke={colors.data.neutral}
+                  strokeWidth={2}
+                  orientation={['diagonal']}
+                />
+                <rect
+                  key={index}
+                  x={x}
+                  y={y}
+                  height={barHeight}
+                  width={barWidth}
+                  fill={'url(#diagonal-pattern)'}
+                  id={id}
+                />
+              </>
+            );
+          })}
+        </>
+      )}
+
+      {barWidth > 1 ? (
+        <>
+          {items.map((item, index) => {
+            const x = getX(item) - barWidth / 2;
+            const y = Math.min(zeroPosition, getY(item));
+            const barHeight = Math.abs(zeroPosition - getY(item));
+
+            return (
+              <>
+                <rect
+                  key={index}
+                  x={x}
+                  y={y}
+                  height={barHeight}
+                  width={barWidth}
+                  fill={transparentize(1 - fillOpacity, color)}
+                  id={id}
+                />
+              </>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          <AreaTrend
+            series={series.filter(
+              (x) =>
+                undefined !== seriesMax &&
+                undefined !== x.__value &&
+                x.__value < seriesMax
+            )}
+            color={color}
+            fillOpacity={fillOpacity}
+            strokeWidth={0}
+            curve="step"
+            getX={getX}
+            getY={getY}
+            yScale={yScale}
+            id={id}
+          />
+        </>
+      )}
+    </>
+  );
 }
 
 interface BarTrendIconProps {

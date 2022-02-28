@@ -514,7 +514,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           siteText.positief_geteste_personen.tooltip_labels
                             .infected_overall,
                         color: colors.data.primary,
-                        exclude: outOfBoundsDatesTestedOverall,
                       },
                       {
                         type: 'bar-out-of-bounds',

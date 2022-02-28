@@ -359,6 +359,11 @@ export function TimeSeriesChart<
 
           valueMinWidth,
           metricPropertyFormatters,
+          seriesMax,
+          isOutOfBounds: dataOptions?.outOfBoundsConfig?.checkIsOutofBounds(
+            values[valuesIndex],
+            seriesMax
+          ),
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -380,6 +385,7 @@ export function TimeSeriesChart<
     timelineEvents,
     timelineState.events,
     metricPropertyFormatters,
+    seriesMax,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -460,6 +466,7 @@ export function TimeSeriesChart<
               bounds={bounds}
               yScale={yScale}
               chartId={chartId}
+              seriesMax={seriesMax}
             />
 
             {/**

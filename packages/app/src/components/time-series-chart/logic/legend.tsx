@@ -6,6 +6,7 @@ import { LegendItem } from '~/components/legend';
 import { useIntl } from '~/intl';
 import {
   HatchedTimespanAnnotationIcon,
+  OutOfBoundsIcon,
   SeriesIcon,
   SolidTimespanAnnotationIcon,
 } from '../components';
@@ -21,13 +22,13 @@ export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
   dataOptions?: DataOptions
 ) {
-  const { timelineEvents, timespanAnnotations } = dataOptions || {};
+  const { timelineEvents, timespanAnnotations, outOfBoundsConfig } =
+    dataOptions || {};
   const intl = useIntl();
 
   return useMemo(() => {
     const legendItems = config
       .filter(isVisible)
-      .filter((x) => !x.hideInLegend)
       .map<LegendItem | undefined>((x) => {
         switch (x.type) {
           case 'split-area':
@@ -49,6 +50,14 @@ export function useLegendItems<T extends TimestampedValue>(
       })
       .filter(isDefined);
 
+    if (outOfBoundsConfig) {
+      legendItems.push({
+        label: outOfBoundsConfig.label,
+        shape: 'custom',
+        shapeComponent: <OutOfBoundsIcon />,
+      } as LegendItem);
+    }
+
     /**
      * Add annotations to the legend
      */
@@ -56,8 +65,7 @@ export function useLegendItems<T extends TimestampedValue>(
       for (const annotation of timespanAnnotations) {
         const isAnnotationVisible =
           (first(domain) as number) <= annotation.end &&
-          annotation.start <= (last(domain) as number) &&
-          annotation.hideInLegend;
+          annotation.start <= (last(domain) as number);
 
         if (isAnnotationVisible) {
           legendItems.push({
@@ -121,5 +129,12 @@ export function useLegendItems<T extends TimestampedValue>(
       splitLegendGroups:
         splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
     };
-  }, [config, domain, intl, timelineEvents, timespanAnnotations]);
+  }, [
+    config,
+    domain,
+    intl,
+    timelineEvents,
+    timespanAnnotations,
+    outOfBoundsConfig,
+  ]);
 }

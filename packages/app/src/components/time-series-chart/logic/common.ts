@@ -13,7 +13,14 @@ export interface DataOptions {
   timeAnnotations?: TimeAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
   renderNullAsZero?: boolean;
+  outOfBoundsConfig?: OutOfBoundsConfig;
 }
+
+export type OutOfBoundsConfig = {
+  label: string;
+  tooltipLabel: string;
+  checkIsOutofBounds: (a: any, b: number) => boolean;
+};
 
 export interface BenchmarkConfig {
   value: number;
@@ -28,7 +35,6 @@ export type TimespanAnnotationConfig = {
   shortLabel?: string;
   cutValuesForMetricProperties?: string[];
   textAlign?: 'left' | 'center' | 'right';
-  hideInLegend?: boolean;
 };
 
 export type TimeAnnotationConfig = {
