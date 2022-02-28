@@ -36,7 +36,6 @@ interface InformationBlockProps {
   screenReaderCategory?: string;
   vrNameOrGmName?: string;
   warning?: string;
-  hasHideArchivedButton?: boolean;
   isArchivedHidden?: boolean;
   onToggleArchived?: () => void;
 }
