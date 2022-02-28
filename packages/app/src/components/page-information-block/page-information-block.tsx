@@ -85,8 +85,7 @@ export function PageInformationBlock({
     useState<boolean>(false);
 
   const archiveButtonHandler = () => {
-    const inversedVar = !hideArchivedCharts
-    setHideArchivedCharts(inversedVar)
+    setHideArchivedCharts(!hideArchivedCharts)
     if(hideArchivedButton) {
       onToggleArchived()
     }
