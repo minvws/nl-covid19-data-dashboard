@@ -83,7 +83,6 @@ export const getStaticProps = createGetStaticProps(
     'tested_overall',
     'vaccine_administered_total',
     'vaccine_coverage_per_age_group_estimated',
-    'booster_and_third_shot_administered',
   ]),
   () => {
     const { selectedNlData: data } = selectNlData(
@@ -97,7 +96,6 @@ export const getStaticProps = createGetStaticProps(
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
       'risk_level',
-      'booster_and_third_shot_administered',
       'booster_coverage'
     )();
 
