@@ -111,7 +111,6 @@ export const getStaticProps = createGetStaticProps(
     'hospital_vaccination_status',
     'hospital_vaccine_incidence_per_age_group',
     'intensive_care_vaccination_status',
-    'booster_and_third_shot_administered',
     'booster_shot_planned',
     'booster_shot_administered',
     'booster_coverage',
@@ -229,9 +228,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
-  const boosterCoverageEstimatedLastValue =
-    data.booster_and_third_shot_administered.last_value;
-
   const boosterShotAdministeredLastValue =
     data.booster_shot_administered.last_value;
 
@@ -297,7 +293,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               textNl.vaccination_grade_toggle_tile.description_footer
             }
             dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
-            dateUnixBoostered={boosterCoverageEstimatedLastValue.date_unix}
+            dateUnixBoostered={boosterShotAdministeredLastValue.date_end_unix}
             age18Plus={{
               fully_vaccinated:
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
@@ -574,9 +570,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               description={textNl.booster_information_block.description}
               metadata={{
                 datumsText: textNl.booster_information_block.datums,
-                dateOrRange: boosterCoverageEstimatedLastValue.date_unix,
+                dateOrRange: boosterShotAdministeredLastValue.date_end_unix,
                 dateOfInsertionUnix:
-                  boosterCoverageEstimatedLastValue.date_of_insertion_unix,
+                  boosterShotAdministeredLastValue.date_of_insertion_unix,
                 dataSources: [
                   {
                     href: '',
@@ -591,11 +587,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineBoosterAdministrationsKpiSection
             totalBoosterAndThirdShots={
-              boosterCoverageEstimatedLastValue.administered_total
+              boosterShotAdministeredLastValue.administered_total
             }
             metadateBoosterAndThirdShots={{
               datumsText: textNl.booster_and_third_kpi.datums,
-              date: boosterCoverageEstimatedLastValue.date_unix,
+              date: boosterShotAdministeredLastValue.date_end_unix,
               source: {
                 href: textNl.booster_and_third_kpi.sources.href,
                 text: textNl.booster_and_third_kpi.sources.text,
