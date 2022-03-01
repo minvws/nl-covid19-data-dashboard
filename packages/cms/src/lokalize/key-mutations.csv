@@ -1367,3 +1367,8 @@ timestamp,action,key,document_id,move_to
 2022-02-16T11:00:07.530Z,move,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.title,Hpcrbv9k01wdsU0EgV8XGU,pages.vaccinationsPage.nl.booster_and_third_kpi.third_shots.title
 2022-02-16T11:00:07.530Z,move,pages.vaccinationsPage.nl.booster_and_third_kpi.third_ggd.warning,cMyxiAWysxVuQDLs1fweGl,pages.vaccinationsPage.nl.booster_and_third_kpi.third_shots.warning
 2022-02-15T09:30:44.102Z,add,nav.links.artikelen,bniNfVJZIl9JdqAvkayfq1,__
+2022-02-22T14:01:50.875Z,add,common.show_archived,C5fGEEPyAh6cSfsFr5f4hS,__
+2022-02-22T14:01:51.899Z,add,common.hide_archived,EeUX9Ilw9TZGo6wHNX6yZf,__
+2022-02-22T15:50:50.197Z,add,positief_geteste_personen.tooltip_labels.infected_out_of_bounds,vptIRrAL4hvoCbpUiserZL,__
+2022-02-24T09:41:37.717Z,add,positief_geteste_personen.tooltip_labels.annotations,W2eUWa7YuTvaKEMbxndLVH,__
+2022-03-01T15:51:43.119Z,delete,pages.deceasedPage.shared.section_sterftemonitor.cause_message.link.href,JtApmkyAs5Fi3aTDSmAyYz,__
