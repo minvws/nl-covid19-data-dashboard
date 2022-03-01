@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, NlTestedOverallValue } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -115,10 +115,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  const outOfBoundsDatesTestedOverall = [
-    Math.floor(new Date(Date.UTC(2022, 1, 8, 10, 0, 0)).getTime() / 1000),
-  ];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -246,31 +242,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected,
                     color: colors.data.primary,
-                    exclude: outOfBoundsDatesTestedOverall,
-                  },
-                  {
-                    type: 'bar-out-of-bounds',
-                    metricProperty: 'infected',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_out_of_bounds,
-                    color: colors.data.neutral,
-                    outOfBoundsDates: outOfBoundsDatesTestedOverall,
                   },
                 ]}
                 dataOptions={{
-                  timespanAnnotations: outOfBoundsDatesTestedOverall.map(
-                    (date) => ({
-                      start: date,
-                      end: date,
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .annotations,
-                      fill: 'none',
-                      textAlign: 'left',
-                      hideInLegend: false,
-                    })
-                  ),
+                  forcedMaximumValue: 150000,
+                  outOfBoundsConfig: {
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_out_of_bounds,
+                    tooltipLabel:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .annotations,
+                    checkIsOutofBounds: (
+                      x: NlTestedOverallValue,
+                      max: number
+                    ) => x.infected > max,
+                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'

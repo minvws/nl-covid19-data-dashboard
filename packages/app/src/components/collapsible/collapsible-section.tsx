@@ -47,17 +47,19 @@ export const CollapsibleSection = ({
     >
       {collapsible.button(
         <Summary>
-          {summary}
-          {id && (
-            <StyledAnchor
-              aria-hidden="true"
-              tabIndex={-1}
-              onClick={(e) => e.stopPropagation()}
-              href={`#${id}`}
-            >
-              #
-            </StyledAnchor>
-          )}
+          <Box width="100%">
+            {summary}
+            {id && (
+              <StyledAnchor
+                aria-hidden="true"
+                tabIndex={-1}
+                onClick={(e) => e.stopPropagation()}
+                href={`#${id}`}
+              >
+                #
+              </StyledAnchor>
+            )}
+          </Box>
           {collapsible.chevron}
         </Summary>
       )}

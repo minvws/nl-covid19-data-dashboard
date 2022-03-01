@@ -63,10 +63,6 @@ interface SeriesCommonDefinition {
    * legend, for example)
    */
   hideInLegend?: boolean;
-  /**
-   * An array of unix timestamps for which the values will be excluded in the graph.
-   */
-  exclude?: number[];
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -280,16 +276,10 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
 ) {
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
-    .flatMap((series, index) =>
-      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) => {
-        const config = seriesConfig[index];
-        return isBarOutOfBounds(config) &&
-          config.outOfBoundsDates?.includes(x.__date_unix)
-          ? undefined
-          : isSeriesSingleValue(x)
-          ? x.__value
-          : [x.__value_a, x.__value_b];
-      })
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      )
     )
     .filter(isDefined);
 
@@ -396,12 +386,7 @@ function getSeriesList<T extends TimestampedValue>(
       : /**
          * Cutting values based on annotation is only supported for single line series
          */
-        getSeriesData(
-          values,
-          config.metricProperty,
-          cutValuesConfig,
-          config.exclude
-        )
+        getSeriesData(values, config.metricProperty, cutValuesConfig)
   );
 }
 
@@ -552,8 +537,7 @@ function getRangeSeriesData<T extends TimestampedValue>(
 function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  cutValuesConfig?: CutValuesConfig[],
-  exclude?: number[]
+  cutValuesConfig?: CutValuesConfig[]
 ): SeriesSingleValue[] {
   if (values.length === 0) {
     /**
@@ -573,9 +557,7 @@ function getSeriesData<T extends TimestampedValue>(
       /**
        * This is messy and could be improved.
        */
-      // @ts-expect-error @TODO figure out why the type guard doesn't work
-      __value: ((!exclude?.includes(x.date_unix) && x[metricProperty]) ??
-        undefined) as number | undefined,
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
       // @ts-expect-error
       __date_unix: x.date_unix,
     }));
