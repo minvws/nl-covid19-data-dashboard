@@ -73,7 +73,7 @@ export function DeceasedMonitorSection({
         <AnchorTile
           title={text.cause_message.title}
           label={text.cause_message.link.text}
-          href="https://www.cbs.nl/nl-nl/nieuws/2021/44/in-2e-kwartaal-2021-minder-mensen-overleden-aan-covid-19-dan-in-1e-kwartaal"
+          href={text.cause_message.link.href}
           external
         >
           <Markdown content={text.cause_message.message}></Markdown>
