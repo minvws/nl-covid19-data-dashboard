@@ -22,6 +22,9 @@
       "title": "nl_booster_shot_administered_value",
       "type": "object",
       "properties": {
+        "administered_total": {
+          "type": "number"
+        },
         "ggd_administered_last_7_days": {
           "type": "number"
         },
@@ -42,6 +45,7 @@
         }
       },
       "required": [
+        "administered_total",
         "ggd_administered_last_7_days",
         "ggd_administered_total",
         "others_administered_total",
