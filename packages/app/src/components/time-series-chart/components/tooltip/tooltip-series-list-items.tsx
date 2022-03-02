@@ -107,7 +107,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
               <TooltipListItem
                 key={key}
                 icon={
-                  metricPropertyValue &&
+                  metricPropertyValue !== null &&
                   seriesMax &&
                   seriesMax > metricPropertyValue ? (
                     <SeriesIcon config={x} />
