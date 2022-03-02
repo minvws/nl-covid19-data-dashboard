@@ -21,6 +21,7 @@ export interface Gm {
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
+  booster_coverage: GmBoosterCoverage;
 }
 export interface GmStaticValues {
   population_count: number;
@@ -136,6 +137,16 @@ export interface GmVaccineCoveragePerAgeGroupValue {
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface GmBoosterCoverage {
+  values: GmBoosterCoverageValue[];
+  last_value: GmBoosterCoverageValue;
+}
+export interface GmBoosterCoverageValue {
+  percentage: number;
+  percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1128,6 +1139,7 @@ export interface Vr {
   hospital_nice_sum: VrHospitalNiceSum;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
+  booster_coverage: VrBoosterCoverage;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1416,6 +1428,16 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrBoosterCoverage {
+  values: VrBoosterCoverageValue[];
+  last_value: VrBoosterCoverageValue;
+}
+export interface VrBoosterCoverageValue {
+  percentage: number;
+  percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
