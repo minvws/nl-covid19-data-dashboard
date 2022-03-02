@@ -4,6 +4,7 @@
   "title": "nl",
   "required": [
     "behavior",
+    "booster_and_third_shot_administered",
     "booster_shot_administered",
     "booster_shot_delivered",
     "booster_shot_planned",
@@ -78,6 +79,9 @@
     },
     "named_difference": {
       "$ref": "__named_difference.json"
+    },
+    "booster_and_third_shot_administered": {
+      "$ref": "booster_and_third_shot_administered.json"
     },
     "booster_shot_administered": {
       "$ref": "booster_shot_administered.json"
