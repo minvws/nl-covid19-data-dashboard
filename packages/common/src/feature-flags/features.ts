@@ -200,4 +200,10 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'booster_and_third_shot_administered',
   },
+  {
+    name: 'boosterCoverage',
+    isEnabled: false,
+    dataScopes: ['vr', 'gm'],
+    metricName: 'booster_coverage',
+  },
 ];
