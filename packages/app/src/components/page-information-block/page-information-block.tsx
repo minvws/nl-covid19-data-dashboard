@@ -142,7 +142,7 @@ export function PageInformationBlock({
               </>
             )}
           </Box>
-          <Box my={4}>
+          <Box my={3}>
             {showArchivedToggleButton && (
               <Button
                 type="button"
@@ -184,7 +184,7 @@ const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
     borderRadius: '5px',
     color: !isActive ? 'white' : 'blue',
     px: !isActive ? 3 : 0,
-    py: 12,
+    py: !isActive ? 12 : 0,
     cursor: 'pointer',
   })
 );
