@@ -29,6 +29,11 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
       return 365;
     case 'all':
       return Infinity;
+    default: {
+      // Checking the programmer here; are all timeframes implemented correctly
+      const exhaustive: never = timeframe;
+      throw exhaustive;
+    }
   }
 }
 
