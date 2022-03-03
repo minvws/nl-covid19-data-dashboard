@@ -25,7 +25,7 @@ export function Difference<T extends DataKeys, K = DataFile<T>>(
 
   assert(
     isDefined(differenceValue),
-    `Missing value for difference:${differenceKey}`
+    `[${Difference.name}] Missing value for difference:${differenceKey}`
   );
 
   return (

@@ -51,7 +51,10 @@ export function CurrentDateProvider({
  */
 export function useCurrentDate() {
   const currentDate = useContext(CurrentDateContext);
-  assert(currentDate, 'Missing CurrentDateProvider in component tree');
+  assert(
+    currentDate,
+    `[${useCurrentDate.name}] Missing CurrentDateProvider in component tree`
+  );
 
   return currentDate;
 }

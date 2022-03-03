@@ -31,7 +31,10 @@ export function BoosterShotCoveragePerAgeGroup({
   const getSortingOrder = (ageGroup: string) => {
     const index = sortingOrder.findIndex((x) => x === ageGroup);
 
-    assert(index >= 0, `No sorting order defined for age group ${ageGroup}`);
+    assert(
+      index >= 0,
+      `[${BoosterShotCoveragePerAgeGroup.name}] No sorting order defined for age group ${ageGroup}`
+    );
 
     return index;
   };

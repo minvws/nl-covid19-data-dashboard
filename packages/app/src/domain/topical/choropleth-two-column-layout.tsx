@@ -16,7 +16,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
 
   assert(
     childrenCount === 2,
-    `ChoroplethTwoColumnLayout can only have 2 children, but received ${childrenCount}`
+    `[${ChoroplethTwoColumnLayout.name}] ChoroplethTwoColumnLayout can only have 2 children, but received ${childrenCount}`
   );
 
   const childrenArray = Children.toArray(children);

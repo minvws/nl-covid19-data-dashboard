@@ -64,6 +64,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             metricProperty as keyof TimestampedValue
           )
         );
+    } else if (isDefined(data)) {
+      res.status(200).json(data);
     } else {
       res.status(404).end();
     }

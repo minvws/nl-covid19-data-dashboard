@@ -41,14 +41,20 @@ export function getVariantTableData(
       const difference = namedDifference.variants__percentage.find(
         (x) => x.name === name
       );
-      assert(difference, `No variants__percentage found for variant ${name}`);
+      assert(
+        difference,
+        `[${getVariantTableData.name}:${findDifference.name}] No variants__percentage found for variant ${name}`
+      );
       return difference;
     }
   }
 
   function findColor(name: string) {
     const color = (colors.data.variants as Dictionary<string>)[name];
-    assert(color, `No color found for variant ${name}`);
+    assert(
+      color,
+      `[${getVariantTableData.name}:${findColor.name}] No color found for variant ${name}`
+    );
     return color;
   }
 

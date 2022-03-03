@@ -16,7 +16,8 @@
     "difference",
     "static_values",
     "sewer",
-    "vaccine_coverage_per_age_group"
+    "vaccine_coverage_per_age_group",
+    "booster_coverage"
   ],
   "properties": {
     "last_generated": {
@@ -60,6 +61,9 @@
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
+    },
+    "booster_coverage": {
+      "$ref": "booster_coverage.json"
     }
   },
   "$defs": {

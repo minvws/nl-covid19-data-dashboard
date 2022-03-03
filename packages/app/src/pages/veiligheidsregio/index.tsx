@@ -75,8 +75,8 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
             flex="1"
             justifyContent="center"
             height="75vh"
-            maxWidth={750}
             maxHeight={960}
+            width="100%"
             flexDirection="column"
             spacing={3}
           >
@@ -88,7 +88,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="vr"
                 data={data}
-                minHeight={650}
+                minHeight={900}
                 dataConfig={{
                   metricName: 'veiligheidsregio' as any,
                   metricProperty: 'admissions_on_date_of_admission',

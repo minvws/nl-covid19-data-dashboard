@@ -35,7 +35,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
   assert(
     isDefined(subject),
-    `No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
   const tooltipContent = (
@@ -43,7 +43,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
     isDefined(tooltipContent),
-    `No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
   const tooltipVars = {

@@ -136,7 +136,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   assert(
     vrForMunicipality,
-    `Unable to get safety region for gm code "${gmCode}"`
+    `[${TopicalMunicipality.name}] Unable to get safety region for gm code "${gmCode}"`
   );
 
   const dataHospitalIntake = data.hospital_nice;

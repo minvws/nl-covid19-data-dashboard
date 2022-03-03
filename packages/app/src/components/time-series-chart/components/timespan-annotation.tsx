@@ -1,4 +1,5 @@
 import { colors } from '@corona-dashboard/common';
+import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { GetX, TimespanAnnotationConfig } from '../logic';
@@ -111,6 +112,37 @@ export function SolidTimespanAnnotationIcon({
         opacity={1}
         rx={2}
         style={{ mixBlendMode: 'multiply' }}
+      />
+    </svg>
+  );
+}
+
+interface OutOfBoundsIconProps {
+  width?: number;
+  height?: number;
+}
+
+export function OutOfBoundsIcon({
+  width = 15,
+  height = 15,
+}: OutOfBoundsIconProps) {
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <PatternLines
+        id="diagonal-pattern"
+        height={6}
+        width={6}
+        stroke={colors.data.neutral}
+        strokeWidth={2}
+        orientation={['diagonal']}
+      />
+      <rect
+        rx={2}
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        fill="url(#diagonal-pattern)"
       />
     </svg>
   );

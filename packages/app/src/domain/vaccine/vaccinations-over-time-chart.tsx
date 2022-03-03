@@ -1,4 +1,5 @@
 import {
+  assert,
   colors,
   DateValue,
   NlVaccineCoverage,
@@ -26,7 +27,6 @@ import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-d
 import {
   DeliveryAndAdministrationData,
   VaccineDeliveryAndAdministrationsValue,
-  vaccines,
 } from './data-selection/select-delivery-and-administration-data';
 
 export type ActiveVaccinationChart = 'coverage' | 'deliveryAndAdministration';
@@ -39,6 +39,14 @@ interface VaccinationsOverTimeChartProps {
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
 }
+
+const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
+vaccines.forEach((x) =>
+  assert(
+    colors.data.vaccines[x],
+    `[${VaccinationsOverTimeChart.name}] missing vaccine color for vaccine ${x}`
+  )
+);
 
 export function VaccinationsOverTimeChart(
   props: VaccinationsOverTimeChartProps
