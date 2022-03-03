@@ -225,7 +225,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               'lastYear',
               'startOfYear',
             ]}
-            hasFullWidth
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -377,7 +376,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 source: text.bronnen.rivm,
               }}
-              hasFullWidth
             >
               {(timeframe) => (
                 <InfectedPerAgeGroup
@@ -502,7 +500,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 source: ggdText.bronnen.rivm,
               }}
-              hasFullWidth
             >
               {(timeframe) => (
                 <TimeSeriesChart

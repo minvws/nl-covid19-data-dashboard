@@ -17,7 +17,6 @@ type ChartTileProps = {
 
   timeframeInitialValue?: TimeframeOption;
   disableFullscreen?: boolean;
-  hasFullWidth?: boolean;
 } & (
   | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
@@ -38,7 +37,6 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue,
   disableFullscreen,
-  hasFullWidth,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue || 'all'
@@ -48,7 +46,11 @@ export function ChartTile({
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       <ChartTileHeader title={title} description={description}>
         {timeframeOptions && timeframe && (
-          <Box pr={3} width={hasFullWidth ? 220 : '100%'}>
+          <Box
+            css={css({
+              width: asResponsiveArray({ xl: '25%', lg: '50%', sm: '100%' }),
+            })}
+          >
             <ChartTimeControls
               timeframeOptions={timeframeOptions}
               timeframe={timeframe}
@@ -97,7 +99,7 @@ function ChartTileHeader({
         </Box>
       )}
       {children && (
-        <Box display="inline-table" alignSelf="flex-start">
+        <Box display="inline-table" alignSelf="flex-start" width="100%">
           {children}
         </Box>
       )}
