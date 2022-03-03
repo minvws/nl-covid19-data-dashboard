@@ -38,6 +38,25 @@ docker build \
 .
 ```
 
+Running:
+
+```sh
+docker run --init --publish 8080:8080 local-test
+```
+
+Debugging a running container:
+
+```sh
+# get the containerId first by running
+docker ps
+
+# then use the containerId to connect into it
+docker exec -ti <containerId> sh
+
+# you can now run certain commands to debug, to inspect file/dir sizes for example:
+du -h -d 1 | sort -n
+```
+
 ## Testing Windows screenreaders on Mac
 
 To properly test accessibility on Mac, screenreaders for Windows should be

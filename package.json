@@ -11,6 +11,7 @@
     "nuke": "yarn workspaces foreach run nuke && npx rimraf node_modules",
     "typecheck": "yarn workspaces foreach run typecheck",
     "lint": "yarn workspaces foreach run lint",
+    "lint:fix": "yarn workspaces foreach run lint --fix",
     "format": "yarn workspaces foreach run format",
     "dev": "yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",

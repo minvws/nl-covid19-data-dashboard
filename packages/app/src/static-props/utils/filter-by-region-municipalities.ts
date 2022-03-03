@@ -9,11 +9,17 @@ export function filterByRegionMunicipalities<T extends { gmcode: string }>(
 ) {
   const municipalCode = context.params?.code as string | undefined;
 
-  assert(isDefined(municipalCode), 'No municipalCode in context params');
+  assert(
+    isDefined(municipalCode),
+    `[${filterByRegionMunicipalities.name}] No municipalCode in context params`
+  );
 
   const regionCodes = getVrGmCodesForGmCode(municipalCode);
 
-  assert(isDefined(regionCodes), `No regionCodes found for ${municipalCode}`);
+  assert(
+    isDefined(regionCodes),
+    `[${filterByRegionMunicipalities.name}] No regionCodes found for ${municipalCode}`
+  );
 
   return choroplethData.filter((x) => regionCodes.includes(x.gmcode));
 }

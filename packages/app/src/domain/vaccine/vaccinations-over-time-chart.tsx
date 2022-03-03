@@ -1,4 +1,5 @@
 import {
+  assert,
   colors,
   DateValue,
   NlVaccineCoverage,
@@ -26,7 +27,6 @@ import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-d
 import {
   DeliveryAndAdministrationData,
   VaccineDeliveryAndAdministrationsValue,
-  vaccines,
 } from './data-selection/select-delivery-and-administration-data';
 
 export type ActiveVaccinationChart = 'coverage' | 'deliveryAndAdministration';
@@ -39,6 +39,14 @@ interface VaccinationsOverTimeChartProps {
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
 }
+
+const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
+vaccines.forEach((x) =>
+  assert(
+    colors.data.vaccines[x],
+    `[${VaccinationsOverTimeChart.name}] missing vaccine color for vaccine ${x}`
+  )
+);
 
 export function VaccinationsOverTimeChart(
   props: VaccinationsOverTimeChartProps
@@ -78,15 +86,6 @@ export function VaccinationsOverTimeChart(
           } as DataOptions,
           seriesConfig: [
             {
-              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
-              shortLabel:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .tooltip_label_totaal,
-              type: 'line',
-              metricProperty: 'partially_or_fully_vaccinated',
-              color: 'black',
-            },
-            {
               label:
                 text.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
               shortLabel:
@@ -121,6 +120,15 @@ export function VaccinationsOverTimeChart(
               color: colors.data.darkBlue,
               mixBlendMode: 'multiply',
               fillOpacity: 1,
+            },
+            {
+              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
+              shortLabel:
+                text.grafiek_gevaccineerd_door_de_tijd_heen
+                  .tooltip_label_totaal,
+              type: 'line',
+              metricProperty: 'partially_or_fully_vaccinated',
+              color: 'black',
             },
           ],
         } as TimeSeriesChartProps<

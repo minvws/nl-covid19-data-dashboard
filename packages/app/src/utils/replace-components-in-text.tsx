@@ -29,7 +29,7 @@ export function replaceComponentsInText(
         if (isVariable && shouldValidate) {
           assert(
             replacementMap[part],
-            `Replacement text or component ${part} is not provided.`
+            `[${replaceComponentsInText.name}] Replacement text or component ${part} is not provided.`
           );
         }
 

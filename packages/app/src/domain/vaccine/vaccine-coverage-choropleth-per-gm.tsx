@@ -2,6 +2,7 @@ import {
   assert,
   colors,
   GmCollectionVaccineCoveragePerAgeGroup,
+  KeysOfType,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -212,7 +213,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
       data.dataConfig
         .metricProperty as unknown as KeyWithLabel<VaccineCoverageData>
     ) >= 0,
-    `The given metricProperty ${data.dataConfig.metricProperty} is not found in percentageProps`
+    `[${ChoroplethTooltip.name}] The given metricProperty ${data.dataConfig.metricProperty} is not found in percentageProps`
   );
 
   const { siteText } = useIntl();
@@ -239,7 +240,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
   assert(
     isDefined(subject),
-    `No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
   const tooltipVars = {
@@ -247,14 +248,18 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
     ...data.dataOptions.tooltipVariables,
   } as Record<string, string | number>;
 
-  const filterBelow = data.dataItem[data.dataConfig.metricProperty] || null;
+  const dataItemKey = data.dataConfig.metricProperty as KeysOfType<
+    VaccineCoverageData,
+    number
+  >;
+  const filterBelow = data.dataItem[dataItemKey] || null;
 
   const mainContent = (
     text as unknown as Record<string, Record<string, Record<string, string>>>
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
     isDefined(mainContent),
-    `No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
   const secondaryContent = Object.entries(secondaryValues).map(
@@ -267,7 +272,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
       )[data.map]?.[property as string]?.content;
       assert(
         isDefined(content),
-        `No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
+        `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
       );
       return (
         <Box

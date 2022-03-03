@@ -8,6 +8,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { spacingStyle } from '~/style/functions/spacing';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
+import { OutOfBoundsIcon } from '../timespan-annotation';
 import { IconRow } from './tooltip-icon-row';
 import { TooltipData } from './types';
 
@@ -25,6 +26,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
   displayTooltipValueOnly,
   valueMinWidth,
   metricPropertyFormatters,
+  seriesMax,
 }: TooltipListOfSeriesProps<T>) {
   const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
 
@@ -42,6 +44,9 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
          * context.
          */
         const key = index + getDateUnixString(value);
+        const metricPropertyValue =
+          x.type !== 'range' &&
+          (value[x.metricProperty] as unknown as number | null);
 
         switch (x.type) {
           case 'range':
@@ -101,7 +106,15 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
             return (
               <TooltipListItem
                 key={key}
-                icon={<SeriesIcon config={x} />}
+                icon={
+                  metricPropertyValue !== null &&
+                  seriesMax &&
+                  seriesMax > metricPropertyValue ? (
+                    <SeriesIcon config={x} />
+                  ) : (
+                    <OutOfBoundsIcon />
+                  )
+                }
                 label={x.shortLabel ?? x.label}
                 ariaLabel={x.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}

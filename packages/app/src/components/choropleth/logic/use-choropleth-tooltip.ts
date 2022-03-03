@@ -66,7 +66,10 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       const item = data
         .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
-      assert(item, `No data item found for code ${code}`);
+      assert(
+        item,
+        `[${useChoroplethTooltip.name}:${getItemByCode.name}] No data item found for code ${code}`
+      );
       return item;
     };
   }, [codeType, data]);
@@ -74,7 +77,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const threshold = thresholds[map][dataConfig.metricProperty as string];
   assert(
     isDefined(threshold),
-    `No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty}`
+    `[${useChoroplethTooltip.name}] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty}`
   );
 
   useEffect(() => {
@@ -278,7 +281,9 @@ function useMetricPropertyFormatter<T extends ChoroplethDataItem>(
   intl: IntlContextProps
 ) {
   return useMemo(() => {
-    const values = data.map((x) => x[dataConfig.metricProperty]);
+    const values = data.map(
+      (x) => x[dataConfig.metricProperty] as unknown as number
+    );
     const numberOfDecimals = getMaximumNumberOfDecimals(values);
     return (value: number) =>
       intl.formatPercentage(value, {

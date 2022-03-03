@@ -9,10 +9,10 @@
       "extends": [
         "../../eslint-overrides"
       ],
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ]
+      "files": ["*.js", "*.ts"],
+      "rules": {
+        "no-console": 0
+      }
     }
   ]
 }

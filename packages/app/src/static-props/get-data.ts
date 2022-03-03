@@ -132,7 +132,10 @@ async function replaceReferencesInContent(
     .withSimpleCallback(async (node) => {
       const refId = node.val._ref;
 
-      assert(typeof refId === 'string', 'node.val._ref is not set');
+      assert(
+        typeof refId === 'string',
+        `[${replaceReferencesInContent.name}] node.val._ref is not set`
+      );
 
       if (resolvedIds.includes(refId)) {
         const ids = `[${resolvedIds.concat(refId).join(',')}]`;

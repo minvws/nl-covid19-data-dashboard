@@ -118,7 +118,9 @@ function validateCommonPropertyEquality(
 }
 
 function getCommonProperties(left: UnknownObject, right: UnknownObject) {
-  return Object.keys(left).filter((key) => right.hasOwnProperty(key));
+  return Object.keys(left).filter((key) =>
+    Object.prototype.hasOwnProperty.call(right, key)
+  );
 }
 
 function getCommonDataProperties(
@@ -130,6 +132,8 @@ function getCommonDataProperties(
     .filter(([, values]) => typeof values === 'object')
     .map(([key]) => key)
     .filter(
-      (key) => right.hasOwnProperty(key) && !excludedProperties.includes(key)
+      (key) =>
+        Object.prototype.hasOwnProperty.call(right, key) &&
+        !excludedProperties.includes(key)
     );
 }

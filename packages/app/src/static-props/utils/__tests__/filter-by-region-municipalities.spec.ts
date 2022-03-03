@@ -27,7 +27,9 @@ FilterByRegionMunicipalities(
 
     assert.throws(
       () => filterByRegionMunicipalities(data, context),
-      (err: Error) => err.message === 'No municipalCode in context params'
+      (err: Error) =>
+        err.message ===
+        '[filterByRegionMunicipalities] No municipalCode in context params'
     );
   }
 );
@@ -41,7 +43,9 @@ FilterByRegionMunicipalities(
 
     assert.throws(
       () => filterByRegionMunicipalities(data, context),
-      (err: Error) => err.message === `No regionCodes found for NH`
+      (err: Error) =>
+        err.message ===
+        `[filterByRegionMunicipalities] No regionCodes found for NH`
     );
   }
 );

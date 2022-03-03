@@ -188,7 +188,7 @@ export function useHoverState<T extends TimestampedValue>({
 
       assert(
         indexInAllValues !== -1,
-        `Failed to find the values index for interactive value timestamp ${timestamp}`
+        `[${bisect.name}] Failed to find the values index for interactive value timestamp ${timestamp}`
       );
 
       return indexInAllValues;

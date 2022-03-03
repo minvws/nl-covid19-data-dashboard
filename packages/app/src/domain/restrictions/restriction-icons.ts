@@ -35,7 +35,7 @@ export const restrictionIcons: Record<string, string | null> = {
   geenWedstrijden: 'geen-wedstrijden.svg',
   sporterMetZweetband: 'sporter-met-zweetband.svg',
   'stap_1-horeca_max': 'stap_1-horeca_max.svg',
-  'stap-1_horeca_per_tafel': 'stap_1-horeca_pertafel.svg',
+  'stap_1-horeca_per_tafel': 'stap_1-horeca_pertafel.svg',
   'stap_1-horeca_reserveren': 'stap_1-horeca_reserveren.svg',
   'stap_1-horeca_sportaccomodaties': 'stap_1-horeca_sportaccomodaties.svg',
   'stap_1-horeca_terras': 'stap_1-horeca_terras.svg',

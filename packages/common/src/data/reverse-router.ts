@@ -12,6 +12,7 @@ export function getReverseRouter(isMobile: boolean) {
 
     algemeen: {
       over: () => '/over',
+      artikelen: () => '/artikelen',
       veelgesteldeVragen: () => '/veelgestelde-vragen',
       verantwoording: () => '/verantwoording',
       overRisiconiveaus: () => '/over-risiconiveaus',

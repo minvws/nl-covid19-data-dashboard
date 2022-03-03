@@ -49,7 +49,7 @@ export function getBarScaleConfig<
 
   assert(
     config.barScale,
-    `Missing metric configuration at ${[
+    `[${getBarScaleConfig.name}] Missing metric configuration at ${[
       scope,
       metricName,
       metricProperty,

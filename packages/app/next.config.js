@@ -107,6 +107,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/apple-touch-icon.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
         source: '/apple-touch-icon-120x120-precomposed.png',
         destination: '/images/touch-icon.png',
         permanent: false,
@@ -114,6 +119,26 @@ const nextConfig = {
       {
         source: '/apple-touch-icon-120x120.png',
         destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-152x152-precomposed.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-152x152.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-precomposed.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/regio',
+        destination: '/veiligheidsregio',
         permanent: false,
       },
       {

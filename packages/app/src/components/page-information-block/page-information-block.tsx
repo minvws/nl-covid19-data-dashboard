@@ -15,6 +15,7 @@ import { Metadata, MetadataProps } from './components/metadata';
 import { PageLinks } from './components/page-links';
 import { WarningTile } from '~/components/warning-tile';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
+import { useIntl } from '~/intl';
 
 interface InformationBlockProps {
   title?: string;
@@ -35,6 +36,8 @@ interface InformationBlockProps {
   screenReaderCategory?: string;
   vrNameOrGmName?: string;
   warning?: string;
+  isArchivedHidden?: boolean;
+  onToggleArchived?: () => void;
 }
 
 export function PageInformationBlock({
@@ -50,8 +53,14 @@ export function PageInformationBlock({
   screenReaderCategory,
   vrNameOrGmName,
   warning,
+  isArchivedHidden,
+  onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+  const showArchivedToggleButton =
+    typeof isArchivedHidden !== 'undefined' &&
+    typeof onToggleArchived !== 'undefined';
+  const { siteText } = useIntl();
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -133,6 +142,19 @@ export function PageInformationBlock({
               </>
             )}
           </Box>
+          <Box my={3}>
+            {showArchivedToggleButton && (
+              <Button
+                type="button"
+                onClick={onToggleArchived}
+                isActive={isArchivedHidden}
+              >
+                {!isArchivedHidden
+                  ? siteText.common.show_archived
+                  : siteText.common.hide_archived}
+              </Button>
+            )}
+          </Box>
         </Tile>
       )}
     </Box>
@@ -152,5 +174,17 @@ const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
     mb: asResponsiveArray({ _: 3, md: 0 }),
+  })
+);
+
+const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
+  css({
+    bg: !isActive ? 'button' : 'transparent',
+    border: 'none',
+    borderRadius: '5px',
+    color: !isActive ? 'white' : 'blue',
+    px: !isActive ? 3 : 0,
+    py: !isActive ? 12 : 0,
+    cursor: 'pointer',
   })
 );

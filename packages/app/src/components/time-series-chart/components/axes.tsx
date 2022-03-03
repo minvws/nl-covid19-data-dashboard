@@ -5,7 +5,11 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import {
+  colors,
+  middleOfDayInSeconds,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -64,7 +68,10 @@ type AxesProps = {
   hasAllZeroValues?: boolean;
 };
 
-function createTimeTicks(start: number, end: number, count: number) {
+function createTimeTicks(startTick: number, endTick: number, count: number) {
+  const start = middleOfDayInSeconds(startTick);
+  const end = middleOfDayInSeconds(endTick);
+
   if (count <= 2) {
     return [start, end];
   }
@@ -72,8 +79,10 @@ function createTimeTicks(start: number, end: number, count: number) {
   const ticks: number[] = [];
   const stepCount = count - 1;
   const step = Math.floor((end - start) / stepCount);
+
   for (let i = 0; i < stepCount; i++) {
-    ticks.push(start + i * step);
+    const tick = start + i * step;
+    ticks.push(middleOfDayInSeconds(tick));
   }
   ticks.push(end);
 
