@@ -7,7 +7,7 @@ const version = process.env.NEXT_PUBLIC_COMMIT_ID;
 if (process.env.NODE_ENV === 'production') {
   assert(
     version,
-    'Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID'
+    `[${SEOHead.name}] Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID`
   );
 }
 

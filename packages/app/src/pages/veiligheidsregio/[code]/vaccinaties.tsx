@@ -42,12 +42,13 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData('vaccine_coverage_per_age_group'),
+  selectVrData('vaccine_coverage_per_age_group', 'booster_coverage'),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -97,6 +98,7 @@ export const VaccinationsVrPage = (
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
+  const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
@@ -115,6 +117,8 @@ export const VaccinationsVrPage = (
   const gmCodes = gmCodesByVrCode[router.query.code as string];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
+  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
    */
@@ -130,12 +134,12 @@ export const VaccinationsVrPage = (
 
   assert(
     filteredAgeGroup18Plus,
-    'Could not find data for the vaccine coverage per age group for the age 18+'
+    `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`
   );
 
   assert(
     filteredAgeGroup12Plus,
-    'Could not find data for the vaccine coverage per age group for the age 12+'
+    `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
   );
 
   return (
@@ -170,6 +174,7 @@ export const VaccinationsVrPage = (
               text.vaccination_grade_toggle_tile.description_footer
             }
             dateUnix={filteredAgeGroup18Plus.date_unix}
+            dateUnixBoostered={boosterCoverageLastValue.date_unix}
             age18Plus={{
               fully_vaccinated:
                 filteredAgeGroup18Plus.fully_vaccinated_percentage,
@@ -179,6 +184,10 @@ export const VaccinationsVrPage = (
                 filteredAgeGroup18Plus.fully_vaccinated_percentage_label,
               has_one_shot_label:
                 filteredAgeGroup18Plus.has_one_shot_percentage_label,
+              boostered: formatPercentageAsNumber(
+                `${boosterCoverageLastValue.percentage}`
+              ),
+              boostered_label: boosterCoverageLastValue.percentage_label,
             }}
             age12Plus={{
               fully_vaccinated:

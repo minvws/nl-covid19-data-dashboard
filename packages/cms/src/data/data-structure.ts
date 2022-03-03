@@ -34,6 +34,7 @@ export const dataStructure = {
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
     ],
+    booster_coverage: ["percentage", "percentage_label"],
   },
   gm_collection: {
     hospital_nice: [
@@ -57,17 +58,17 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
+    booster_and_third_shot_administered: ["administered_total"],
     booster_shot_administered: [
+      "administered_total",
       "ggd_administered_last_7_days",
       "ggd_administered_total",
       "others_administered_total",
     ],
-    booster_and_third_shot_administered: ["administered_total"],
     booster_shot_delivered: ["delivered_total"],
     booster_shot_planned: ["planned_7_days"],
     booster_shot_per_age_group: [
       "age_group_range",
-      "received_booster_total",
       "received_booster_percentage",
       "birthyear_range",
       "age_group_total",
@@ -492,6 +493,7 @@ export const dataStructure = {
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
     ],
+    booster_coverage: ["percentage", "percentage_label"],
   },
   vr_collection: {
     hospital_nice: [

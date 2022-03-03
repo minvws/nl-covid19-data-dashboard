@@ -32,11 +32,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "administered_total",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["administered_total", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

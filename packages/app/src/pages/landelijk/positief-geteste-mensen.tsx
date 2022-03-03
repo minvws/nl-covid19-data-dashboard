@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, NlTestedOverallValue } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -100,6 +100,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
   const reverseRouter = useReverseRouter();
+  const [hasHideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
 
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
@@ -243,6 +245,19 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
+                  forcedMaximumValue: 150000,
+                  outOfBoundsConfig: {
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_out_of_bounds,
+                    tooltipLabel:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .annotations,
+                    checkIsOutofBounds: (
+                      x: NlTestedOverallValue,
+                      max: number
+                    ) => x.infected > max,
+                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'
@@ -530,49 +545,55 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={text.section_archived.title}
             description={text.section_archived.description}
+            isArchivedHidden={hasHideArchivedCharts}
+            onToggleArchived={() =>
+              setHideArchivedCharts(!hasHideArchivedCharts)
+            }
           />
 
-          <InView rootMargin="400px">
-            <ChartTile
-              title={ggdText.linechart_percentage_titel}
-              description={ggdText.linechart_percentage_toelichting}
-              metadata={{
-                source: ggdText.bronnen.rivm,
-              }}
-            >
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'confirmed_cases_infected_percentage_over_time_chart',
+          {hasHideArchivedCharts && (
+            <InView rootMargin="400px">
+              <ChartTile
+                title={ggdText.linechart_percentage_titel}
+                description={ggdText.linechart_percentage_toelichting}
+                metadata={{
+                  source: ggdText.bronnen.rivm,
                 }}
-                values={data.tested_ggd_archived.values}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'infected_percentage_moving_average',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .ggd_infected_percentage_moving_average,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'infected_percentage',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .ggd_infected_percentage,
-                  },
-                ]}
-                dataOptions={{
-                  isPercentage: true,
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'tested_ggd'
-                  ),
-                }}
-              />
-            </ChartTile>
-          </InView>
+              >
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_percentage_over_time_chart',
+                  }}
+                  values={data.tested_ggd_archived.values}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_percentage_moving_average',
+                      color: colors.data.primary,
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .ggd_infected_percentage_moving_average,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'infected_percentage',
+                      color: colors.data.primary,
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .ggd_infected_percentage,
+                    },
+                  ]}
+                  dataOptions={{
+                    isPercentage: true,
+                    timelineEvents: getTimelineEvents(
+                      content.elements.timeSeries,
+                      'tested_ggd'
+                    ),
+                  }}
+                />
+              </ChartTile>
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

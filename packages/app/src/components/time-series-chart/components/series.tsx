@@ -37,6 +37,7 @@ interface SeriesProps<T extends TimestampedValue> {
   yScale: ScaleLinear<number, number>;
   bounds: Bounds;
   chartId: string;
+  seriesMax?: number;
 }
 
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
@@ -51,6 +52,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   yScale,
   bounds,
   chartId,
+  seriesMax,
 }: SeriesProps<T>) {
   return (
     <>
@@ -133,6 +135,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   bounds={bounds}
                   yScale={yScale}
                   id={id}
+                  seriesMax={seriesMax}
                 />
               );
             case 'split-bar':

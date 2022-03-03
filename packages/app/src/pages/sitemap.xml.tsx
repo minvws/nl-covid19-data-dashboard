@@ -55,7 +55,7 @@ const gmCodes = gmData.map((x) => x.gemcode);
 async function getAllPathsWithPriorities() {
   assert(
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
+    `[${getAllPathsWithPriorities.name}] Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var`
   );
 
   const config = {

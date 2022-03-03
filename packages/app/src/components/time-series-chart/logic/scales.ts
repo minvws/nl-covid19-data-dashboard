@@ -152,7 +152,7 @@ export function getTimeDomain<T extends TimestampedValue>({
     const end = last(values)?.date_unix;
     assert(
       isDefined(start) && isDefined(end),
-      `Missing start or end timestamp in [${start}, ${end}]`
+      `[${getTimeDomain.name}] Missing start or end timestamp in [${start}, ${end}]`
     );
 
     /**
@@ -170,7 +170,7 @@ export function getTimeDomain<T extends TimestampedValue>({
     const end = last(values)?.date_end_unix;
     assert(
       isDefined(start) && isDefined(end),
-      `Missing start or end timestamp in [${start}, ${end}]`
+      `[${getTimeDomain.name}] Missing start or end timestamp in [${start}, ${end}]`
     );
     return [start, end];
   }

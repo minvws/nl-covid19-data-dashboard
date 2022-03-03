@@ -221,7 +221,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               leftMetricProperty="age_group_percentage"
               rightColor={'data.primary'}
               leftColor={'data.neutral'}
-              maxDisplayValue={45}
+              maxDisplayValue={60}
               text={textShared.age_groups.graph}
               formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
             />

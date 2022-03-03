@@ -70,7 +70,10 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
       (option) => option.name === name || option.displayName === name
     );
 
-    assert(option, `Failed to find option for name ${name}`);
+    assert(
+      option,
+      `[${ComboBox.name}:${handleSelect.name}] Failed to find option for name ${name}`
+    );
 
     props.onSelect(option);
 

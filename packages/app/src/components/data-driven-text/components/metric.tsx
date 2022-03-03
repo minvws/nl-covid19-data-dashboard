@@ -25,7 +25,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
 
   assert(
     isDefined(propertyValue),
-    `Missing value for metric property ${[
+    `[${Metric.name}] Missing value for metric property ${[
       metricName,
       'last_value',
       metricProperty,
@@ -43,7 +43,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   if (isDefined(differenceKey)) {
     assert(
       isDefined(differenceValue),
-      `Missing value for difference:${differenceKey}`
+      `[${Metric.name}] Missing value for difference:${differenceKey}`
     );
   }
 

@@ -84,7 +84,7 @@ export function VaccineCoverageToggleTile({
         />
       </Box>
       <TwoKpiSection spacing={5}>
-        {selectedTab === text.age_18_plus.label && 
+        {selectedTab === text.age_18_plus.label && (
           <>
             {age18Plus.boostered ? (
               <AgeGroupBlock
@@ -116,14 +116,17 @@ export function VaccineCoverageToggleTile({
               property="fully_vaccinated"
               secondProperty="has_one_shot"
               description={text.age_18_plus.description_vaccination_grade}
-              secondDescription={text.age_18_plus.description_vaccination_one_shot_with_percentage}
+              secondDescription={
+                text.age_18_plus
+                  .description_vaccination_one_shot_with_percentage
+              }
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
             </AgeGroupBlock>
           </>
-        }
-        {selectedTab === text.age_12_plus.label && 
+        )}
+        {selectedTab === text.age_12_plus.label && (
           <>
             {age12Plus.boostered ? (
               <AgeGroupBlock
@@ -155,13 +158,16 @@ export function VaccineCoverageToggleTile({
               property="fully_vaccinated"
               secondProperty="has_one_shot"
               description={text.age_12_plus.description_vaccination_grade}
-              secondDescription={text.age_12_plus.description_vaccination_one_shot_with_percentage}
+              secondDescription={
+                text.age_12_plus
+                  .description_vaccination_one_shot_with_percentage
+              }
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
             </AgeGroupBlock>
           </>
-        }
+        )}
       </TwoKpiSection>
       <Box maxWidth="maxWidthText" mt={36}>
         <Markdown content={descriptionFooter} />
@@ -199,7 +205,7 @@ function AgeGroupBlock({
 
   assert(
     parsedBirthyearRange,
-    `Something went wrong with parsing the birthyear: ${data.birthyear}`
+    `[${AgeGroupBlock.name}] Something went wrong with parsing the birthyear: ${data.birthyear}`
   );
 
   return (

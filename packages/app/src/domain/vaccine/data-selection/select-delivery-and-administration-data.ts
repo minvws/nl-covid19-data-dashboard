@@ -1,20 +1,8 @@
 import {
-  assert,
-  colors,
   Nl,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
-
-export const vaccines = [
-  'pfizer',
-  'moderna',
-  'astra_zeneca',
-  'janssen',
-] as const;
-vaccines.forEach((x) =>
-  assert(colors.data.vaccines[x], `missing vaccine color for vaccine ${x}`)
-);
 
 export type VaccineDeliveryAndAdministrationsValue = Optional<
   Omit<NlVaccineDeliveryValue, 'total' | 'date_start_unix' | 'date_end_unix'>,

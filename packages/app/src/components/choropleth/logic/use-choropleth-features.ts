@@ -65,7 +65,10 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
 
   switch (map) {
     case 'gm': {
-      assert(isDefined(outlineGeo), 'outlineGeo is required for map type gm');
+      assert(
+        isDefined(outlineGeo),
+        `[${getChoroplethFeatures.name}] outlineGeo is required for map type gm`
+      );
       const surroundingGeo = filterSurroundingFeaturesBySelectedGmCode(
         featureGeo,
         selectedCode
@@ -79,7 +82,10 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
       };
     }
     case 'vr': {
-      assert(isDefined(outlineGeo), 'outlineGeo is required for map type vr');
+      assert(
+        isDefined(outlineGeo),
+        `[${getChoroplethFeatures.name}] outlineGeo is required for map type vr`
+      );
       return {
         outline: outlineGeo,
         hover: featureGeo,
@@ -133,11 +139,14 @@ function filterSurroundingFeaturesBySelectedGmCode(
   }
   assert(
     selectedGmCode.startsWith('GM'),
-    `gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
+    `[${filterSurroundingFeaturesBySelectedGmCode.name}] gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
   );
 
   const vrInfo = getVrForMunicipalityCode(selectedGmCode);
-  assert(vrInfo, `No VR found for GM code ${selectedGmCode}`);
+  assert(
+    vrInfo,
+    `[${filterSurroundingFeaturesBySelectedGmCode.name}] No VR found for GM code ${selectedGmCode}`
+  );
 
   const viewBoxMunicipalCodes = vrBoundingBoxGmCodes[vrInfo.code];
 
@@ -158,13 +167,13 @@ function filterVrBySelectedGmCode(
   }
   assert(
     selectedGmCode.startsWith('GM'),
-    `gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
+    `[${filterVrBySelectedGmCode.name}] gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
   );
 
   const gmCodes = getVrGmCodesForGmCode(selectedGmCode);
   assert(
     isDefined(gmCodes),
-    `No associated municipal codes found for ${selectedGmCode}`
+    `[${filterVrBySelectedGmCode.name}] No associated municipal codes found for ${selectedGmCode}`
   );
 
   return {

@@ -68,7 +68,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             flex="1"
             justifyContent="center"
             height="75vh"
-            maxWidth={750}
+            width="100%"
             maxHeight={960}
             flexDirection="column"
             spacing={3}
@@ -81,7 +81,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="gm"
                 data={data}
-                minHeight={650}
+                minHeight={900}
                 dataConfig={{
                   metricName: 'gemeente' as any,
                   metricProperty: 'admissions_on_date_of_admission',

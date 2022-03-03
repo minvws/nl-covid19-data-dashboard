@@ -43,7 +43,7 @@ export function useAccessibilityAnnotations(
    */
   assert(
     label,
-    `An accessibility label needs to be provided for ${definition.key}`
+    `[${useAccessibilityAnnotations.name}] An accessibility label needs to be provided for ${definition.key}`
   );
 
   /**
@@ -52,7 +52,7 @@ export function useAccessibilityAnnotations(
    */
   assert(
     isDefined(chartDescription) || definition.features?.length,
-    `An accessibility description or interaction features need to be provided for ${definition.key}`
+    `[${useAccessibilityAnnotations.name}] An accessibility description or interaction features need to be provided for ${definition.key}`
   );
 
   const description = [chartDescription].filter(isPresent);

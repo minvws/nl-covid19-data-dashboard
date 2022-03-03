@@ -43,7 +43,10 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<Editorial>((context) => {
     const { locale } = context;
 
-    assert(context.params?.slug, 'Slug required to retrieve article');
+    assert(
+      context.params?.slug,
+      `[${getStaticProps.name}:weekberichten] Slug required to retrieve article`
+    );
     return `
       *[_type == 'editorial' && slug.current == '${context.params.slug}'][0]{
         ...,

@@ -13,19 +13,21 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { DataOptions, TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 
-export type SeriesConfig<T extends TimestampedValue> = (
+type SeriesConfigSingle<T extends TimestampedValue> =
   | LineSeriesDefinition<T>
   | RangeSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
+  | BarOutOfBoundsSeriesDefinition<T>
   | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
   | SplitAreaSeriesDefinition<T>
   | GappedLineSeriesDefinition<T>
   | GappedAreaSeriesDefinition<T>
-  | GappedStackedAreaSeriesDefinition<T>
-)[];
+  | GappedStackedAreaSeriesDefinition<T>;
+
+export type SeriesConfig<T extends TimestampedValue> = SeriesConfigSingle<T>[];
 
 interface SeriesCommonDefinition {
   label: string;
@@ -119,6 +121,16 @@ export interface BarSeriesDefinition<T extends TimestampedValue>
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
+}
+
+export interface BarOutOfBoundsSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'bar-out-of-bounds';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  outOfBoundsDates?: number[];
 }
 
 export interface SplitBarSeriesDefinition<T extends TimestampedValue>
@@ -326,6 +338,12 @@ export interface SeriesSingleValue extends SeriesItem {
 export interface SeriesDoubleValue extends SeriesItem {
   __value_a?: number;
   __value_b?: number;
+}
+
+export function isBarOutOfBounds<T extends TimestampedValue>(
+  value: SeriesConfigSingle<T>
+): value is BarOutOfBoundsSeriesDefinition<T> {
+  return isDefined((value as any).outOfBoundsDates);
 }
 
 export function isSeriesSingleValue(
@@ -540,7 +558,7 @@ function getSeriesData<T extends TimestampedValue>(
        * This is messy and could be improved.
        */
       __value: (x[metricProperty] ?? undefined) as number | undefined,
-      // @ts-expect-error @TODO figure out why the type guard doesn't work
+      // @ts-expect-error
       __date_unix: x.date_unix,
     }));
 

@@ -22,7 +22,7 @@ export function useEscalationLevel(level: EscalationLevelType) {
 
     assert(
       escalationColor,
-      `Cannot resolve an escalation color for level '${level}'`
+      `[${useEscalationLevel.name}] Cannot resolve an escalation color for level '${level}'`
     );
 
     return {
