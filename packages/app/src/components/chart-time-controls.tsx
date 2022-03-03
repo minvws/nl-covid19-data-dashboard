@@ -15,14 +15,7 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
   const {
     onChange,
     timeframe,
-    timeframeOptions = [
-      'all',
-      '2weeks',
-      '30days',
-      '3months',
-      'lastYear',
-      'startOfYear',
-    ],
+    timeframeOptions = ['all', '2weeks', '30days', '3months', 'lastYear'],
   } = props;
   const { siteText } = useIntl();
 

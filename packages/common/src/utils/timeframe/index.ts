@@ -13,16 +13,9 @@ export type TimeframeOption =
   | '30days'
   | '3months'
   | 'lastYear'
-  | 'startOfYear'
   | 'all';
 
 export function getDaysForTimeframe(timeframe: TimeframeOption): number {
-  const today = new Date();
-  const startOfPrevYear = new Date('01/01/2021');
-
-  const difference = today.getTime() - startOfPrevYear.getTime();
-  const totalDays = Math.ceil(difference / (1000 * 3600 * 24) - 1);
-
   switch (timeframe) {
     case '2weeks':
       return 2 * 7;
@@ -34,8 +27,6 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
       return 92;
     case 'lastYear':
       return 365;
-    case 'startOfYear':
-      return totalDays;
     case 'all':
       return Infinity;
   }

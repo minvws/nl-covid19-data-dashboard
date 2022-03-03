@@ -223,7 +223,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               '30days',
               '3months',
               'lastYear',
-              'startOfYear',
             ]}
           >
             {(timeframe) => (
@@ -371,7 +370,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 '30days',
                 '3months',
                 'lastYear',
-                'startOfYear',
               ]}
               metadata={{
                 source: text.bronnen.rivm,
@@ -493,7 +491,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 '30days',
                 '3months',
                 'lastYear',
-                'startOfYear',
               ]}
               title={ggdText.linechart_totaltests_titel}
               description={ggdText.linechart_totaltests_toelichting}
