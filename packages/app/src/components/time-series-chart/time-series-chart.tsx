@@ -505,6 +505,8 @@ export function TimeSeriesChart<
                   getX={getX}
                   height={bounds.height}
                   config={x}
+                  bounds={bounds}
+                  series={seriesList[0]}
                 />
               ))}
             {timeAnnotations?.map((x, index) => (
