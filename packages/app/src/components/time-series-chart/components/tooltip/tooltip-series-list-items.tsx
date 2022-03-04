@@ -107,12 +107,12 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
               <TooltipListItem
                 key={key}
                 icon={
-                  metricPropertyValue !== null &&
-                  seriesMax &&
-                  seriesMax > metricPropertyValue ? (
-                    <SeriesIcon config={x} />
-                  ) : (
+                  typeof metricPropertyValue === 'number' &&
+                  typeof seriesMax === 'number' &&
+                  seriesMax < metricPropertyValue ? (
                     <OutOfBoundsIcon />
+                  ) : (
+                    <SeriesIcon config={x} />
                   )
                 }
                 label={x.shortLabel ?? x.label}
