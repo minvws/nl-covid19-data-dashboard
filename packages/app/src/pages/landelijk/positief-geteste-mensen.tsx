@@ -1,4 +1,8 @@
-import { colors, NlTestedOverallValue } from '@corona-dashboard/common';
+import {
+  colors,
+  NlTestedOverallValue,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -218,11 +222,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
             timeframeOptions={[
-              'all',
-              '2weeks',
-              '30days',
-              '3months',
-              'lastYear',
+              TimeframeOption.ALL,
+              TimeframeOption.TWO_WEEKS,
+              TimeframeOption.THIRTY_DAYS,
+              TimeframeOption.THREE_MONTHS,
+              TimeframeOption.LAST_YEAR,
             ]}
           >
             {(timeframe) => (
@@ -365,11 +369,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               title={siteText.infected_per_age_group.title}
               description={siteText.infected_per_age_group.description}
               timeframeOptions={[
-                'all',
-                '2weeks',
-                '30days',
-                '3months',
-                'lastYear',
+                TimeframeOption.ALL,
+                TimeframeOption.TWO_WEEKS,
+                TimeframeOption.THIRTY_DAYS,
+                TimeframeOption.THREE_MONTHS,
+                TimeframeOption.LAST_YEAR,
               ]}
               metadata={{
                 source: text.bronnen.rivm,
@@ -486,11 +490,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <InView rootMargin="400px">
             <ChartTile
               timeframeOptions={[
-                'all',
-                '2weeks',
-                '30days',
-                '3months',
-                'lastYear',
+                TimeframeOption.ALL,
+                TimeframeOption.TWO_WEEKS,
+                TimeframeOption.THIRTY_DAYS,
+                TimeframeOption.THREE_MONTHS,
+                TimeframeOption.LAST_YEAR,
               ]}
               title={ggdText.linechart_totaltests_titel}
               description={ggdText.linechart_totaltests_toelichting}

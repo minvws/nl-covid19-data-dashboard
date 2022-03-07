@@ -39,7 +39,7 @@ export function ChartTile({
   disableFullscreen,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue || 'all'
+    timeframeInitialValue || TimeframeOption.ALL
   );
 
   return (

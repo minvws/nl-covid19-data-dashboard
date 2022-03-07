@@ -5,6 +5,7 @@ import {
   NlIntensiveCareNiceValue,
   NlTestedOverallValue,
   NlVaccineCoveragePerAgeGroupEstimated,
+  TimeframeOption,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
@@ -100,17 +101,17 @@ export const getStaticProps = createGetStaticProps(
 
     data.hospital_nice.values = cutValuesFromTimeframe(
       data.hospital_nice.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     data.tested_overall.values = cutValuesFromTimeframe(
       data.tested_overall.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     data.intensive_care_nice.values = cutValuesFromTimeframe(
       data.intensive_care_nice.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     return { selectedNlData: data };
