@@ -3,7 +3,7 @@ import { PatternLines } from '@visx/pattern';
 import { scaleBand } from '@visx/scale';
 import { PositionScale } from '@visx/shape/lib/types';
 import { transparentize } from 'polished';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, GetX, GetY, SeriesSingleValue } from '../logic';
@@ -80,7 +80,7 @@ export function BarTrend({
             const barHeight = Math.abs(zeroPosition - getY(value));
 
             return (
-              <>
+              <React.Fragment key={`out-of-bounds-${index}`}>
                 <PatternLines
                   id="diagonal-pattern"
                   height={6}
@@ -98,7 +98,7 @@ export function BarTrend({
                   fill={'url(#diagonal-pattern)'}
                   id={id}
                 />
-              </>
+              </React.Fragment>
             );
           })}
         </>
@@ -112,17 +112,15 @@ export function BarTrend({
             const barHeight = Math.abs(zeroPosition - getY(item));
 
             return (
-              <>
-                <rect
-                  key={index}
-                  x={x}
-                  y={y}
-                  height={barHeight}
-                  width={barWidth}
-                  fill={transparentize(1 - fillOpacity, color)}
-                  id={id}
-                />
-              </>
+              <rect
+                key={index}
+                x={x}
+                y={y}
+                height={barHeight}
+                width={barWidth}
+                fill={transparentize(1 - fillOpacity, color)}
+                id={id}
+              />
             );
           })}
         </>
