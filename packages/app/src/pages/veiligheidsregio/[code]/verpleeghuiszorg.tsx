@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import {
   Coronavirus,
   Locatie,
@@ -173,7 +173,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             description={positiveTestedPeopleText.linechart_description}
           >
             {(timeframe) => (
@@ -284,7 +284,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
@@ -347,7 +347,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.bronnen.rivm }}
             title={textVr.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             description={textVr.linechart_description}
           >
             {(timeframe) => (

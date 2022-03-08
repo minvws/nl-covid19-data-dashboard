@@ -156,7 +156,7 @@ export function TimeSeriesChart<
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
-  timeframe = 'all',
+  timeframe = TimeframeOption.ALL,
   formatTooltip,
   dataOptions,
   showWeekNumbers,

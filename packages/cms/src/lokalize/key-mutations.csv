@@ -1162,6 +1162,12 @@ timestamp,action,key,document_id,move_to
 2022-01-31T13:16:07.587Z,move,pages.vaccinations.nl.vaccination_status_ic_and_hospital_section.title,XIsMg3WYidPwwGdwwycvBn,pages.vaccinationsPage.nl.vaccination_status_ic_and_hospital_section.title
 2022-01-31T13:16:07.587Z,move,pages.vaccinations.nl.vaccinations_over_time_tile.title,Dku7cpbPEtTqHSBWBYUXdv,pages.vaccinationsPage.nl.vaccinations_over_time_tile.title
 2022-01-31T13:16:07.587Z,move,pages.vaccinations.nl.vaccinations_over_time_tile.tooltip_header,Dku7cpbPEtTqHSBWBYkrVj,pages.vaccinationsPage.nl.vaccinations_over_time_tile.tooltip_header
+2022-02-07T07:35:50.372Z,add,charts.time_controls.2weeks,IEYK0GWzYcvTjNCpNG0P1a,__
+2022-02-07T07:35:51.704Z,add,charts.time_controls.30days,lWUUemhEDkYeidZ2xp16Ks,__
+2022-02-07T07:35:52.727Z,add,charts.time_controls.3months,Ow1QpVvPwBxoo8iCzccGSi,__
+2022-02-07T07:35:53.788Z,add,charts.time_controls.lastYear,IEYK0GWzYcvTjNCpNG0Pew,__
+2022-02-07T07:35:54.827Z,add,charts.time_controls.startOfYear,Ow1QpVvPwBxoo8iCzccGoA,__
+2022-02-07T07:35:54.827Z,delete,charts.time_controls.week,jF33EuwumlGuwav2FD3fiW,__
 2022-02-09T09:56:30.478Z,move,gemeente_ziekenhuisopnames_per_dag.barscale_screenreader_text,jF33EuwumlGuwav2FD3kpY,pages.hospitalPage.gm.barscale_screenreader_text
 2022-02-09T09:56:30.479Z,move,gemeente_ziekenhuisopnames_per_dag.barscale_titel,jF33EuwumlGuwav2FD3khA,pages.hospitalPage.gm.barscale_titel
 2022-02-09T09:56:30.479Z,move,gemeente_ziekenhuisopnames_per_dag.bronnen.rivm.download,jF33EuwumlGuwav2FD3l4e,pages.hospitalPage.gm.bronnen.rivm.download

@@ -1,5 +1,8 @@
+import { useMemo } from 'react';
 import { TimeframeOption } from '@corona-dashboard/common';
-import { RadioGroup } from '~/components/radio-group';
+import { Box } from '~/components/base';
+import { Text } from '~/components/typography';
+import { RichContentSelect } from '~/components/rich-content-select';
 import { useIntl } from '~/intl';
 
 interface ChartTimeControlsProps {
@@ -9,20 +12,40 @@ interface ChartTimeControlsProps {
 }
 
 export function ChartTimeControls(props: ChartTimeControlsProps) {
-  const { onChange, timeframe, timeframeOptions = ['all', '5weeks'] } = props;
-
+  const {
+    onChange,
+    timeframe,
+    timeframeOptions = [
+      TimeframeOption.ALL,
+      TimeframeOption.TWO_WEEKS,
+      TimeframeOption.THIRTY_DAYS,
+      TimeframeOption.THREE_MONTHS,
+      TimeframeOption.LAST_YEAR,
+    ],
+  } = props;
   const { siteText } = useIntl();
 
-  const labelMap = {
-    '5weeks': siteText.charts.time_controls['5weeks'],
-    all: siteText.charts.time_controls['all'],
-    week: siteText.charts.time_controls['week'],
-  };
+  const selectOptions = useMemo(
+    () =>
+      timeframeOptions.map((key) => ({
+        label: siteText.charts.time_controls[key],
+        value: key,
+        content: (
+          <Box>
+            <Text>{siteText.charts.time_controls[key]}</Text>
+          </Box>
+        ),
+      })),
+    [siteText.charts.time_controls, timeframeOptions]
+  );
 
-  const items = timeframeOptions.map((key) => ({
-    label: labelMap[key],
-    value: key,
-  }));
-
-  return <RadioGroup value={timeframe} onChange={onChange} items={items} />;
+  return (
+    <RichContentSelect
+      label={siteText.pages.vaccinationsPage.nl.age_group_dropdown.label}
+      visuallyHiddenLabel
+      initialValue={timeframe}
+      options={selectOptions}
+      onChange={(option) => onChange(option.value)}
+    />
+  );
 }

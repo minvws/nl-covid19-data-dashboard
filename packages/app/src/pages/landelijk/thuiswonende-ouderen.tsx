@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -163,7 +163,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             title={text.section_positive_tested.line_chart_daily_title}
             metadata={{ source: text.section_positive_tested.bronnen.rivm }}
             description={
@@ -288,7 +288,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             title={text.section_deceased.line_chart_daily_title}
             metadata={{ source: text.section_positive_tested.bronnen.rivm }}
             description={text.section_deceased.line_chart_daily_description}

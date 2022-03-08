@@ -131,7 +131,7 @@ export function StackedChart<T extends TimestampedValue>(
     formatTickValue: formatYTickValue,
     formatTooltip,
     valueAnnotation,
-    timeframe = 'all',
+    timeframe = TimeframeOption.ALL,
   } = props;
 
   const breakpoints = useBreakpoints();
