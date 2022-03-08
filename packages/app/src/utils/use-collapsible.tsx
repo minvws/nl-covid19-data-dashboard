@@ -15,7 +15,6 @@ import styled from 'styled-components';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { isTouchDevice } from './is-touch-device';
 
 /**
  * Generic hook for collapsing content. Core features:
