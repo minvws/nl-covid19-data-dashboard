@@ -56,7 +56,7 @@ export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 
       <Box spacing={3} display={{ _: 'block', md: 'none' }}>
         <Text variant="label1" color="bodyLight">
-          {siteText.common_actueel.tile_selector_uitleg}
+          {siteText.pages.topicalPage.shared.tile_selector_uitleg}
         </Text>
         <NarrowMiniTileSelectorLayout {...props} />
       </Box>

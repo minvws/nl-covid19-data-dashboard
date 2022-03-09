@@ -91,7 +91,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: infectedLocationsText.metadata.title,
     description: infectedLocationsText.metadata.description,
   };

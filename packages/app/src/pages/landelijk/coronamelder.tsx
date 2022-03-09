@@ -41,7 +41,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
   const warningLastValue = data.corona_melder_app_warning.last_value;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: nl_gedrag.metadata.title,
     description: nl_gedrag.metadata.description,
   };
