@@ -3,7 +3,12 @@ import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
 import { scaleBand } from '@visx/scale';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { GetX, TimespanAnnotationConfig, Bounds, SeriesSingleValue } from '../logic';
+import {
+  GetX,
+  TimespanAnnotationConfig,
+  Bounds,
+  SeriesSingleValue,
+} from '../logic';
 import { useMemo } from 'react';
 
 const DEFAULT_COLOR = colors.data.underReported;
@@ -14,7 +19,7 @@ export function TimespanAnnotation({
   height,
   config,
   bounds,
-  series
+  series,
 }: {
   domain: [number, number];
   height: number;
@@ -33,17 +38,14 @@ export function TimespanAnnotation({
    * Calculate the width of one bar, for offset to cover the whole bar on the edge of the timespan.
    */
 
-  const bandPadding = 0.2;
-
   const xScale = useMemo(
     () =>
       scaleBand<number>({
         range: [0, bounds.width],
         round: true,
         domain: series.map(getX),
-        padding: bandPadding,
       }),
-    [bounds, getX, series, bandPadding]
+    [bounds, getX, series]
   );
 
   const halfBarWidth = Math.max(xScale.bandwidth(), 1) / 2;
