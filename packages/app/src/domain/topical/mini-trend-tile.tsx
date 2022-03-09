@@ -23,7 +23,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 ) {
   const {
     accessibility,
-    timeframe = '5weeks',
+    timeframe = TimeframeOption.FIVE_WEEKS,
     values,
     seriesConfig,
     dataOptions,

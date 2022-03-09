@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -236,7 +236,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -425,7 +425,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={['all', '5weeks']}
+              timeframeOptions={[
+                TimeframeOption.ALL,
+                TimeframeOption.FIVE_WEEKS,
+              ]}
               title={ggdText.linechart_totaltests_titel}
               description={ggdText.linechart_totaltests_toelichting}
               metadata={{

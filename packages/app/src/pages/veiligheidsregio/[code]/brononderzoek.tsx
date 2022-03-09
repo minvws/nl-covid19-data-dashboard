@@ -1,3 +1,4 @@
+import { TimeframeOption } from '@corona-dashboard/common';
 import { Gedrag } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -202,7 +203,7 @@ export default function BrononderzoekPage(
               metadata={{ source: textShared.bronnen.rivm }}
             >
               <SituationsOverTimeChart
-                timeframe={'all'}
+                timeframe={TimeframeOption.ALL}
                 values={values}
                 timelineEvents={getTimelineEvents(
                   content.elements.timeSeries,

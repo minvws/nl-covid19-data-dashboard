@@ -22,8 +22,8 @@ interface ReproductionChartTileProps {
 
 export function ReproductionChartTile({
   data,
-  timeframeOptions = ['all', '5weeks'],
-  timeframeInitialValue = 'all',
+  timeframeOptions = [TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS],
+  timeframeInitialValue = TimeframeOption.ALL,
   timelineEvents,
   text,
 }: ReproductionChartTileProps) {

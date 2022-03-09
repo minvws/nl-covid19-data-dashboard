@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
@@ -105,7 +105,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.nivel }}
             description={text.linechart_description}
