@@ -82,7 +82,7 @@ export const Timeline = memo(function Timeline({
         <TimelineBar width={width} height={barHeight}>
           {timelineState.events.map((x, i) => (
             <TimelineEvent
-              key={`${x.start}-${x.end}`}
+              key={`${x.start}-${i}`}
               range={timelineState.xOffsets[i]}
               timelineContainerRef={ref}
               size={size}

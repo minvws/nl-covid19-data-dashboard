@@ -78,7 +78,9 @@ export function TileDifference({
           }`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
-            date: formatDateFromSeconds(value.old_date_unix),
+            date: showOldDateUnix
+              ? formatDateFromSeconds(value.old_date_unix)
+              : '',
           }
         )}
       />
