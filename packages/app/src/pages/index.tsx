@@ -145,10 +145,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textNl, textShared } = pageText;
+  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
-
-  const { formatPercentage } = useIntl();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
 
@@ -513,7 +512,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         type: 'line',
                         metricProperty: 'infected_moving_average',
                         label:
-                          siteText.positief_geteste_personen.tooltip_labels
+                          positiveTestsText.tooltip_labels
                             .infected_moving_average,
                         color: colors.data.primary,
                       },
@@ -521,8 +520,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         type: 'bar',
                         metricProperty: 'infected',
                         label:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .infected_overall,
+                          positiveTestsText.tooltip_labels.infected_overall,
                         color: colors.data.primary,
                       },
                     ]}
@@ -537,11 +535,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       forcedMaximumValue: 150000,
                       outOfBoundsConfig: {
                         label:
-                          siteText.positief_geteste_personen.tooltip_labels
+                          positiveTestsText.tooltip_labels
                             .infected_out_of_bounds,
                         tooltipLabel:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .annotations,
+                          positiveTestsText.tooltip_labels.annotations,
                         checkIsOutofBounds: (
                           x: NlTestedOverallValue,
                           max: number
@@ -581,7 +578,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           content={replaceVariablesInText(
                             textShared.booster_shots_administered_data_drive_text,
                             {
-                              percentage: formatPercentage(
+                              percentage: formatters.formatPercentage(
                                 boosterCoverageLastValue.percentage
                               ),
                             }
