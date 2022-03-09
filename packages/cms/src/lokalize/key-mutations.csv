@@ -29,3 +29,6 @@ timestamp,action,key,document_id,move_to
 2022-03-08T15:46:43.868Z,add,pages.vaccinationsPage.gm.vaccination_grade_toggle_tile.age_18_plus.description_vaccination_one_shot_with_percentage,BQ2C9RbOg28sfWOKxJ5GZS,__
 2022-03-08T15:46:45.341Z,add,pages.vaccinationsPage.gm.vaccination_grade_toggle_tile.age_18_plus.label,BQ2C9RbOg28sfWOKxJ5GnX,__
 2022-03-08T15:46:45.973Z,add,pages.vaccinationsPage.gm.vaccination_grade_toggle_tile.age_18_plus.metadata_date,BQ2C9RbOg28sfWOKxJ5HTm,__
+2022-03-09T09:04:17.997Z,delete,pages.vaccinationsPage.gm.vaccination_grade_toggle_tile.age_18_plus.metadata_date,BQ2C9RbOg28sfWOKxJ5HTm,__
+2022-03-09T09:04:17.998Z,delete,pages.vaccinationsPage.nl.vaccination_grade_toggle_tile.age_18_plus.metadata_date,0ztyMU2xVVOl2tFNiLGgEU,__
+2022-03-09T09:04:17.998Z,delete,pages.vaccinationsPage.vr.vaccination_grade_toggle_tile.age_18_plus.metadata_date,BQ2C9RbOg28sfWOKxJ55fa,__

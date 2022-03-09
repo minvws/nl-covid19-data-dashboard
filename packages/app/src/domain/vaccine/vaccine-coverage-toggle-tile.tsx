@@ -35,7 +35,6 @@ type VaccinationGradeToggleTypes = {
   description_vaccination_one_shot: string;
   description_vaccination_one_shot_with_percentage: string;
   label: string;
-  metadata_date?: string;
 };
 
 interface VaccineCoverageToggleTileProps {
