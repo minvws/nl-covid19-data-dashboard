@@ -166,7 +166,7 @@ export function createGetStaticProps(
   };
 }
 
-interface SystemError extends Error {
+export interface SystemError extends Error {
   code: string;
 }
 
