@@ -34,8 +34,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   const breakpoints = useBreakpoints();
 
+  const textGm = siteText.pages.topicalPage.gm;
+
   const metadata = {
-    ...siteText.gemeente_actueel.index.metadata,
+    ...textGm.index.metadata,
   };
 
   const data = useMemo(() => {
@@ -59,10 +61,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box as="article" p={4}>
           <Heading level={2} as="h1">
-            {siteText.gemeente_actueel.index.title}
+            {textGm.index.title}
           </Heading>
 
-          <Markdown content={siteText.gemeente_actueel.index.description} />
+          <Markdown content={textGm.index.description} />
 
           <Box
             display="flex"

@@ -60,11 +60,12 @@ export default function BehaviorPage(
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const intl = useIntl();
-  const { nl_gedrag } = intl.siteText;
+  const { siteText, formatNumber, formatDateFromSeconds, formatPercentage } =
+    useIntl();
+  const { nl_gedrag } = siteText;
 
   const metadata = {
-    ...intl.siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: nl_gedrag.metadata.title,
     description: nl_gedrag.metadata.description,
   };
@@ -97,7 +98,7 @@ export default function BehaviorPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={intl.siteText.nationaal_layout.headings.gedrag}
+            category={siteText.nationaal_layout.headings.gedrag}
             title={nl_gedrag.pagina.titel}
             icon={<Gedrag />}
             description={nl_gedrag.pagina.toelichting}
@@ -132,33 +133,31 @@ export default function BehaviorPage(
                   content={replaceVariablesInText(
                     nl_gedrag.kpi_recente_inzichten.tekst,
                     {
-                      number_of_participants: intl.formatNumber(
+                      number_of_participants: formatNumber(
                         behaviorLastValue.number_of_participants
                       ),
-                      date_start: intl.formatDateFromSeconds(
+                      date_start: formatDateFromSeconds(
                         behaviorLastValue.date_start_unix
                       ),
-                      date_end: intl.formatDateFromSeconds(
+                      date_end: formatDateFromSeconds(
                         behaviorLastValue.date_end_unix
                       ),
 
                       highest_compliance_description:
                         highestCompliance.description,
                       highest_compliance_compliance_percentage:
-                        intl.formatPercentage(
+                        formatPercentage(
                           highestCompliance.compliancePercentage
                         ),
-                      highest_compliance_support_percentage:
-                        intl.formatPercentage(
-                          highestCompliance.supportPercentage
-                        ),
+                      highest_compliance_support_percentage: formatPercentage(
+                        highestCompliance.supportPercentage
+                      ),
 
                       highest_support_description: highestSupport.description,
-                      highest_support_compliance_percentage:
-                        intl.formatPercentage(
-                          highestSupport.compliancePercentage
-                        ),
-                      highest_support_support_percentage: intl.formatPercentage(
+                      highest_support_compliance_percentage: formatPercentage(
+                        highestSupport.compliancePercentage
+                      ),
+                      highest_support_support_percentage: formatPercentage(
                         highestSupport.supportPercentage
                       ),
                     }

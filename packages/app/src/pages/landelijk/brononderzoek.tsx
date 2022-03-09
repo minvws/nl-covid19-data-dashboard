@@ -57,10 +57,10 @@ export default function BrononderzoekPage(
 ) {
   const { pageText, choropleth, lastGenerated, content } = props;
   const { textShared, textChoroplethTooltips } = pageText;
-  const intl = useIntl();
+  const { siteText } = useIntl();
 
   const metadata = {
-    ...intl.siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textShared.metadata.title,
     description: textShared.metadata.description,
   };
@@ -72,9 +72,9 @@ export default function BrononderzoekPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={intl.siteText.nationaal_layout.headings.besmettingen}
+            category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              intl.siteText.sidebar.metrics.source_investigation.title
+              siteText.sidebar.metrics.source_investigation.title
             }
             title={textShared.titel}
             icon={<Gedrag />}

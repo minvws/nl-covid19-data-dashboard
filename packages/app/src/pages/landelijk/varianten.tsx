@@ -75,7 +75,7 @@ export default function CovidVariantenPage(
   const tableText = text.varianten_tabel;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };

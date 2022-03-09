@@ -133,7 +133,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };

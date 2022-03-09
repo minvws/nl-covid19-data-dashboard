@@ -61,7 +61,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const lastFullValue = getLastFilledValue(data.infectious_people);
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };

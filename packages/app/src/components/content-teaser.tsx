@@ -53,7 +53,7 @@ export function ContentTeaser({
         <Text variant="overline2" color="bodyLight">
           {publicationDate ? (
             <>
-              {`${siteText.common_actueel.secties.meer_lezen.weekly_category} -`}
+              {`${siteText.pages.topicalPage.shared.secties.meer_lezen.weekly_category} -`}
               <PublicationDate date={publicationDate} />
             </>
           ) : (

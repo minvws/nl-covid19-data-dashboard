@@ -37,7 +37,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.verdenkingen_huisartsen;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };

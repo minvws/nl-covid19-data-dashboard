@@ -58,7 +58,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { lockdown } = content;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
   };
 
   return (
@@ -66,19 +66,16 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <Box as="header" spacing={4}>
-            <Heading
-              level={1}
-              as="h2"
-            >
+            <Heading level={1} as="h2">
               {siteText.nationaal_maatregelen.titel}
             </Heading>
             {lockdown.message.description ? (
-              <Box maxWidth='maxWidthText'>
-                  <RichContent blocks={lockdown.message.description} />
+              <Box maxWidth="maxWidthText">
+                <RichContent blocks={lockdown.message.description} />
               </Box>
             ) : null}
           </Box>
-          <Box as="article" spacing={3} >
+          <Box as="article" spacing={3}>
             <Heading level={3}>{lockdown.title}</Heading>
             <LockdownTable
               data={lockdown}

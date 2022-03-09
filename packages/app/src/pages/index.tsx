@@ -42,6 +42,7 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -50,6 +51,7 @@ import {
   createGetChoroplethData,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
 import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
@@ -61,6 +63,14 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textNl: siteText.pages.topicalPage.nl,
+        textShared: siteText.pages.topicalPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   createGetChoroplethData({
     vr: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
@@ -118,7 +128,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    content,
+    lastGenerated,
+  } = props;
 
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
@@ -127,7 +143,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
-  const text = siteText.nationaal_actueel;
+  const { textNl, textShared } = pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -137,9 +153,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const riskLevelFeature = useFeature('riskLevel');
 
   const metadata = {
-    ...siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...textNl.nationaal_metadata,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   const vaccineCoverageEstimatedLastValue =
@@ -186,9 +202,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <TopicalSectionHeader
                 lastGenerated={Number(lastGenerated)}
                 title={replaceComponentsInText(
-                  text.secties.actuele_situatie.titel,
+                  textNl.secties.actuele_situatie.titel,
                   {
-                    the_netherlands: text.the_netherlands,
+                    the_netherlands: textNl.the_netherlands,
                   }
                 )}
                 headingLevel={1}
@@ -196,14 +212,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
               <MiniTileSelectorLayout
                 link={{
-                  text: text.quick_links.header,
+                  text: textNl.quick_links.header,
                   href: reverseRouter.nl.index(),
                 }}
                 menuItems={[
                   {
-                    label:
-                      siteText.nationaal_actueel.mini_trend_tiles.ic_opnames
-                        .menu_item_label,
+                    label: textNl.mini_trend_tiles.ic_opnames.menu_item_label,
                     data: trimNullValues(
                       dataICTotal.values,
                       'admissions_on_date_of_admission_moving_average_rounded'
@@ -221,8 +235,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
                   {
                     label:
-                      siteText.nationaal_actueel.mini_trend_tiles
-                        .ziekenhuis_opnames.menu_item_label,
+                      textNl.mini_trend_tiles.ziekenhuis_opnames
+                        .menu_item_label,
                     data: trimNullValues(
                       dataHospitalIntake.values,
                       'admissions_on_date_of_admission_moving_average_rounded'
@@ -240,8 +254,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
                   {
                     label:
-                      siteText.nationaal_actueel.mini_trend_tiles
-                        .positief_geteste_mensen.menu_item_label,
+                      textNl.mini_trend_tiles.positief_geteste_mensen
+                        .menu_item_label,
                     data: dataTestedOverall.values,
                     dataProperty: 'infected_moving_average_rounded',
                     value:
@@ -254,8 +268,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   } as MiniTileSelectorItem<NlTestedOverallValue>,
                   {
                     label:
-                      siteText.nationaal_actueel.mini_trend_tiles
-                        .vaccinatiegraad.menu_item_label,
+                      textNl.mini_trend_tiles.vaccinatiegraad.menu_item_label,
                     data: data.vaccine_coverage_per_age_group_estimated.values,
                     dataProperty: 'age_18_plus_fully_vaccinated',
                     value:
@@ -275,7 +288,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
-                  title={text.mini_trend_tiles.ic_opnames.title}
+                  title={textNl.mini_trend_tiles.ic_opnames.title}
                   text={
                     <>
                       <DataDrivenText
@@ -283,7 +296,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         content={[
                           {
                             type: 'metric',
-                            text: text.data_driven_texts.intensive_care_nice
+                            text: textNl.data_driven_texts.intensive_care_nice
                               .value,
                             metricName: 'intensive_care_nice',
                             metricProperty:
@@ -301,8 +314,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           },
                           {
                             type: 'metric',
-                            text: siteText.common_actueel.secties.kpi
-                              .ic_admissions,
+                            text: textShared.secties.kpi.ic_admissions,
                             metricName: 'intensive_care_lcps',
                             metricProperty: 'beds_occupied_covid',
                             differenceKey:
@@ -315,7 +327,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         icon={<Chevron />}
                         iconPlacement="right"
                       >
-                        {text.mini_trend_tiles.ic_opnames.read_more_link}
+                        {textNl.mini_trend_tiles.ic_opnames.read_more_link}
                       </LinkWithIcon>
                     </>
                   }
@@ -345,7 +357,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       {
                         start: underReportedRangeIntensiveCare,
                         end: Infinity,
-                        label: siteText.common_actueel.data_incomplete,
+                        label: textShared.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
@@ -361,7 +373,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 />
 
                 <MiniTrendTile
-                  title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+                  title={textNl.mini_trend_tiles.ziekenhuis_opnames.title}
                   text={
                     <>
                       <DataDrivenText
@@ -369,7 +381,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         content={[
                           {
                             type: 'metric',
-                            text: text.data_driven_texts
+                            text: textNl.data_driven_texts
                               .intake_hospital_ma_nieuw.value,
                             metricName: 'hospital_nice',
                             metricProperty:
@@ -387,8 +399,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           },
                           {
                             type: 'metric',
-                            text: siteText.common_actueel.secties.kpi
-                              .hospital_admissions,
+                            text: textShared.secties.kpi.hospital_admissions,
                             metricName: 'hospital_lcps',
                             metricProperty: 'beds_occupied_covid',
                             differenceKey: 'hospital_lcps__beds_occupied_covid',
@@ -401,7 +412,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         iconPlacement="right"
                       >
                         {
-                          text.mini_trend_tiles.ziekenhuis_opnames
+                          textNl.mini_trend_tiles.ziekenhuis_opnames
                             .read_more_link
                         }
                       </LinkWithIcon>
@@ -433,7 +444,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       {
                         start: underReportedRangeHospital,
                         end: Infinity,
-                        label: siteText.common_actueel.data_incomplete,
+                        label: textShared.data_incomplete,
                         shortLabel: siteText.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
@@ -449,7 +460,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 />
                 {
                   <MiniTrendTile
-                    title={text.mini_trend_tiles.positief_geteste_mensen.title}
+                    title={
+                      textNl.mini_trend_tiles.positief_geteste_mensen.title
+                    }
                     text={
                       <>
                         <DataDrivenText
@@ -457,7 +470,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           content={[
                             {
                               type: 'metric',
-                              text: text.data_driven_texts.tested_overall.value,
+                              text: textNl.data_driven_texts.tested_overall
+                                .value,
                               metricName: 'tested_overall',
                               metricProperty: 'infected_moving_average_rounded',
                               additionalData: {
@@ -472,7 +486,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             },
                             {
                               type: 'metric',
-                              text: text.data_driven_texts.tested_ggd.value,
+                              text: textNl.data_driven_texts.tested_ggd.value,
                               metricName: 'tested_ggd',
                               isPercentage: true,
                               metricProperty:
@@ -486,7 +500,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           iconPlacement="right"
                         >
                           {
-                            text.mini_trend_tiles.positief_geteste_mensen
+                            textNl.mini_trend_tiles.positief_geteste_mensen
                               .read_more_link
                           }
                         </LinkWithIcon>
@@ -537,16 +551,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   />
                 }
                 <MiniVaccinationCoverageTile
-                  title={text.mini_trend_tiles.vaccinatiegraad.title}
+                  title={textNl.mini_trend_tiles.vaccinatiegraad.title}
                   oneShotBarLabel={
-                    text.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
+                    textNl.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
                   }
                   fullyVaccinatedBarLabel={
-                    text.mini_trend_tiles.vaccinatiegraad
+                    textNl.mini_trend_tiles.vaccinatiegraad
                       .fully_vaccinated_bar_label
                   }
                   boosterShotAdministeredBarLabel={
-                    text.mini_trend_tiles.vaccinatiegraad
+                    textNl.mini_trend_tiles.vaccinatiegraad
                       .booster_shots_administered_bar_label
                   }
                   icon={<Vaccinaties />}
@@ -555,7 +569,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       <Text variant="datadriven" as="div">
                         <Markdown
                           content={replaceVariablesInText(
-                            text.mini_trend_tiles.vaccinatiegraad.text,
+                            textNl.mini_trend_tiles.vaccinatiegraad.text,
                             vaccineCoverageEstimatedLastValue as unknown as Record<
                               string,
                               number
@@ -565,8 +579,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         />
                         <Markdown
                           content={replaceVariablesInText(
-                            siteText.common_actueel
-                              .booster_shots_administered_data_drive_text,
+                            textShared.booster_shots_administered_data_drive_text,
                             {
                               percentage: formatPercentage(
                                 boosterCoverageLastValue.percentage
@@ -580,7 +593,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         icon={<Chevron />}
                         iconPlacement="right"
                       >
-                        {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
+                        {textNl.mini_trend_tiles.vaccinatiegraad.read_more_link}
                       </LinkWithIcon>
                     </>
                   }
@@ -602,7 +615,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             <Box py={4}>
-              <Search title={siteText.common_actueel.secties.search.title.nl} />
+              <Search title={textShared.secties.search.title.nl} />
             </Box>
 
             {riskLevelFeature.isEnabled && (
@@ -613,39 +626,39 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             )}
 
             <CollapsibleButton
-              label={siteText.common_actueel.overview_links_header}
+              label={textShared.overview_links_header}
               icon={<Chart />}
             >
               <Sitemap
-                quickLinksHeader={text.quick_links.header}
+                quickLinksHeader={textNl.quick_links.header}
                 quickLinks={[
                   {
                     href: reverseRouter.nl.index(),
-                    text: text.quick_links.links.nationaal,
+                    text: textNl.quick_links.links.nationaal,
                   },
                   {
                     href: reverseRouter.vr.index(),
-                    text: text.quick_links.links.veiligheidsregio,
+                    text: textNl.quick_links.links.veiligheidsregio,
                   },
                   {
                     href: reverseRouter.gm.index(),
-                    text: text.quick_links.links.gemeente,
+                    text: textNl.quick_links.links.gemeente,
                   },
                   internationalFeature.isEnabled
                     ? {
                         href: reverseRouter.in.index(),
-                        text: text.quick_links.links.internationaal,
+                        text: textNl.quick_links.links.internationaal,
                       }
                     : undefined,
                 ].filter(isDefined)}
-                dataSitemapHeader={text.data_sitemap_titel}
+                dataSitemapHeader={textNl.data_sitemap_titel}
                 dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
 
             {isPresent(content.highlights) && (
               <HighlightsTile
-                hiddenTitle={text.highlighted_items.title}
+                hiddenTitle={textNl.highlighted_items.title}
                 weeklyHighlight={content.weeklyHighlight}
                 highlights={content.highlights}
                 showWeeklyHighlight={content.showWeeklyHighlight}
@@ -654,12 +667,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <VaccinationCoverageChoropleth
               title={
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.nl
+                textShared.secties.vaccination_coverage_choropleth.title.nl
               }
               content={
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .content.nl
+                textShared.secties.vaccination_coverage_choropleth.content.nl
               }
               data={{
                 gm: choropleth.gm.vaccine_coverage_per_age_group,
@@ -667,8 +678,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
               link={{
                 href: reverseRouter.nl.vaccinaties(),
-                text: siteText.common_actueel.secties
-                  .vaccination_coverage_choropleth.link_text.nl,
+                text: textShared.secties.vaccination_coverage_choropleth
+                  .link_text.nl,
               }}
             />
           </Box>
@@ -683,11 +694,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >
             <TopicalSectionHeader
-              title={siteText.common_actueel.secties.meer_lezen.titel}
-              description={
-                siteText.common_actueel.secties.meer_lezen.omschrijving
-              }
-              link={siteText.common_actueel.secties.meer_lezen.link}
+              title={textShared.secties.meer_lezen.titel}
+              description={textShared.secties.meer_lezen.omschrijving}
+              link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
             />
 
