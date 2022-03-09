@@ -314,6 +314,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
             }}
             numFractionDigits={1}
+            age12PlusToggleText={
+              textNl.vaccination_grade_toggle_tile.age_12_plus
+            }
+            age18PlusToggleText={
+              textNl.vaccination_grade_toggle_tile.age_18_plus
+            }
           />
 
           <VaccinationsOverTimeTile

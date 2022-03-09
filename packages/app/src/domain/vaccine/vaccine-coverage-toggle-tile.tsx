@@ -27,6 +27,16 @@ type AgeTypes = {
   boostered_label?: string | null;
 };
 
+type VaccinationGradeToggleTypes = {
+  booster_date_interval: string;
+  description_booster_grade: string;
+  description_booster_grade_not_available: string;
+  description_vaccination_grade: string;
+  description_vaccination_one_shot: string;
+  description_vaccination_one_shot_with_percentage: string;
+  label: string;
+};
+
 interface VaccineCoverageToggleTileProps {
   title: string;
   source: {
@@ -39,6 +49,8 @@ interface VaccineCoverageToggleTileProps {
   dateUnix: number;
   dateUnixBoostered?: number;
   numFractionDigits?: number;
+  age12PlusToggleText: VaccinationGradeToggleTypes;
+  age18PlusToggleText: VaccinationGradeToggleTypes;
 }
 
 export function VaccineCoverageToggleTile({
@@ -50,10 +62,13 @@ export function VaccineCoverageToggleTile({
   age18Plus,
   age12Plus,
   numFractionDigits = 0,
+  age12PlusToggleText,
+  age18PlusToggleText,
 }: VaccineCoverageToggleTileProps) {
   const { siteText } = useIntl();
-  const text = siteText.pages.vaccinationsPage.nl.vaccination_grade_toggle_tile;
-  const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
+  const labelTexts =
+    siteText.pages.vaccinationsPage.nl.vaccination_grade_toggle_tile.top_labels;
+  const [selectedTab, setSelectedTab] = useState(age18PlusToggleText.label);
 
   const metadata: MetadataProps = {
     date: dateUnix,
@@ -73,52 +88,51 @@ export function VaccineCoverageToggleTile({
           onChange={(value) => setSelectedTab(value)}
           items={[
             {
-              label: text.age_18_plus.label,
-              value: text.age_18_plus.label,
+              label: age18PlusToggleText.label,
+              value: age18PlusToggleText.label,
             },
             {
-              label: text.age_12_plus.label,
-              value: text.age_12_plus.label,
+              label: age12PlusToggleText.label,
+              value: age12PlusToggleText.label,
             },
           ]}
         />
       </Box>
       <TwoKpiSection spacing={5}>
-        {selectedTab === text.age_18_plus.label && (
+        {selectedTab === age18PlusToggleText.label && (
           <>
             {age18Plus.boostered ? (
               <AgeGroupBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 data={age18Plus}
                 property="boostered"
-                description={text.age_18_plus.description_booster_grade}
+                description={age18PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
                 {metadataBooster && (
                   <Metadata
                     {...metadataBooster}
-                    intervalCount={text.age_18_plus.booster_date_interval}
+                    intervalCount={age18PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
                 )}
               </AgeGroupBlock>
             ) : (
               <NoBoosterBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 description={
-                  text.age_18_plus.description_booster_grade_not_available
+                  age18PlusToggleText.description_booster_grade_not_available
                 }
               />
             )}
             <AgeGroupBlock
-              title={text.top_labels.vaccination_grade}
+              title={labelTexts.vaccination_grade}
               data={age18Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
-              description={text.age_18_plus.description_vaccination_grade}
+              description={age18PlusToggleText.description_vaccination_grade}
               secondDescription={
-                text.age_18_plus
-                  .description_vaccination_one_shot_with_percentage
+                age18PlusToggleText.description_vaccination_one_shot_with_percentage
               }
               numFractionDigits={numFractionDigits}
             >
@@ -126,41 +140,40 @@ export function VaccineCoverageToggleTile({
             </AgeGroupBlock>
           </>
         )}
-        {selectedTab === text.age_12_plus.label && (
+        {selectedTab === age12PlusToggleText.label && (
           <>
             {age12Plus.boostered ? (
               <AgeGroupBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 data={age12Plus}
                 property="boostered"
-                description={text.age_12_plus.description_booster_grade}
+                description={age12PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
                 {metadataBooster && (
                   <Metadata
                     {...metadataBooster}
-                    intervalCount={text.age_12_plus.booster_date_interval}
+                    intervalCount={age12PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
                 )}
               </AgeGroupBlock>
             ) : (
               <NoBoosterBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 description={
-                  text.age_12_plus.description_booster_grade_not_available
+                  age12PlusToggleText.description_booster_grade_not_available
                 }
               />
             )}
             <AgeGroupBlock
-              title={text.top_labels.vaccination_grade}
+              title={labelTexts.vaccination_grade}
               data={age12Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
-              description={text.age_12_plus.description_vaccination_grade}
+              description={age12PlusToggleText.description_vaccination_grade}
               secondDescription={
-                text.age_12_plus
-                  .description_vaccination_one_shot_with_percentage
+                age12PlusToggleText.description_vaccination_one_shot_with_percentage
               }
               numFractionDigits={numFractionDigits}
             >

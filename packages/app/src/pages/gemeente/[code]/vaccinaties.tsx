@@ -14,6 +14,7 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
+import { Languages } from '~/locale';
 import {
   AgeGroup,
   AgeGroupSelect,
@@ -37,6 +38,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectGmData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -47,6 +49,13 @@ import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percent
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textGm: siteText.pages.vaccinationsPage.gm,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectGmData('code', 'vaccine_coverage_per_age_group', 'booster_coverage'),
   createGetChoroplethData({
@@ -93,6 +102,7 @@ export const VaccinationsGmPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
   const {
+    pageText,
     choropleth,
     municipalityName,
     selectedGmData: data,
@@ -104,7 +114,8 @@ export const VaccinationsGmPage = (
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
-  const text = siteText.gemeente_vaccinaties;
+  const text = siteText.gemeente_vaccinaties; // Todo: move these to pages level later and use textGm
+  const { textGm } = pageText;
 
   const metadata = {
     ...siteText.gemeente_vaccinaties.metadata,
@@ -198,6 +209,12 @@ export const VaccinationsGmPage = (
               has_one_shot_label:
                 filteredAgeGroup12Plus.has_one_shot_percentage_label,
             }}
+            age12PlusToggleText={
+              textGm.vaccination_grade_toggle_tile.age_12_plus
+            }
+            age18PlusToggleText={
+              textGm.vaccination_grade_toggle_tile.age_18_plus
+            }
           />
 
           <VaccineCoveragePerAgeGroup
