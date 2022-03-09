@@ -53,7 +53,7 @@ export default async function handler(
 
   const height = Number(heightStr);
 
-  if (height < 50 || height > 850) {
+  if (height < 50 || height > 900) {
     res.status(400);
     res.end();
     return;

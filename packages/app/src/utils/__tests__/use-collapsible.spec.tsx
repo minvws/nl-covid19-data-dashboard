@@ -61,26 +61,6 @@ UseCollapsible(
   }
 );
 
-UseCollapsible(
-  'should toggle the isOpen state after the button is touched',
-  (context) => {
-    function TestCase() {
-      context.isTouchDevice = true;
-      const { button, isOpen } = useCollapsible();
-      context.isOpen = isOpen;
-      return <>{button()}</>;
-    }
-
-    const result = render(<TestCase />);
-
-    assert.is(context.isOpen, false);
-
-    fireEvent.touchStart(result.getByTitle('toggle content'));
-
-    assert.is(context.isOpen, true);
-  }
-);
-
 UseCollapsible('should not show the content when is initially closed', () => {
   function TestCase() {
     const { content } = useCollapsible({ isOpen: false });

@@ -35,7 +35,11 @@ export function VaccineStockPerSupplierChart({
   const maximumValuesPerTimeframeOption = useMemo(
     () =>
       ({
-        all: getMaximumPropertyValueInTimeframe(values, 'all', today),
+        all: getMaximumPropertyValueInTimeframe(
+          values,
+          TimeframeOption.ALL,
+          today
+        ),
       } as Record<TimeframeOption, number>),
     [values, today]
   );
@@ -121,7 +125,7 @@ export function VaccineStockPerSupplierChart({
         tooltipTitle={text.tooltip_title}
         values={values}
         seriesConfig={seriesConfig}
-        timeframe={'all'}
+        timeframe={TimeframeOption.ALL}
         dataOptions={{
           forcedMaximumValue: maximumValuesPerTimeframeOption['all'],
         }}

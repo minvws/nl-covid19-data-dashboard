@@ -1,4 +1,4 @@
-import { colors, Dictionary } from '@corona-dashboard/common';
+import { colors, Dictionary, TimeframeOption } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
@@ -116,7 +116,7 @@ function VariantStackedAreaTileWithData({
       title={text.titel}
       description={text.toelichting}
       metadata={metadata}
-      timeframeOptions={['all', '5weeks']}
+      timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
     >
       {(timeframe) => (
         <>
