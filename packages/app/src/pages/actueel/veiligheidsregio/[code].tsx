@@ -135,7 +135,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const vrCode = router.query.code as string;
   const { siteText, ...formatters } = useIntl();
-  // const text = siteText.veiligheidsregio_actueel;
   const { textVr, textShared } = pageText;
 
   const dataHospitalIntake = data.hospital_nice;
