@@ -13,6 +13,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -30,6 +31,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -38,6 +40,13 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.elderlyAtHomePage.vr,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData(
     'elderly_at_home',
@@ -70,12 +79,17 @@ export const getStaticProps = createGetStaticProps(
 const ElderlyAtHomeRegionalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { vrName, selectedVrData: data, lastGenerated, content } = props;
+  const {
+    pageText,
+    vrName,
+    selectedVrData: data,
+    lastGenerated,
+    content,
+  } = props;
   const { elderly_at_home, difference } = data;
 
   const { siteText } = useIntl();
-
-  const text = siteText.veiligheidsregio_thuiswonende_ouderen;
+  const { textVr } = pageText;
 
   const elderlyAtHomeUnderReportedRange = getBoundaryDateStartUnix(
     elderly_at_home.values,
@@ -89,10 +103,10 @@ const ElderlyAtHomeRegionalPage = (
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegion: vrName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textVr.metadata.description, {
       safetyRegion: vrName,
     }),
   };
@@ -108,35 +122,38 @@ const ElderlyAtHomeRegionalPage = (
             screenReaderCategory={
               siteText.sidebar.metrics.elderly_at_home.title
             }
-            title={replaceVariablesInText(text.section_positive_tested.title, {
-              safetyRegion: vrName,
-            })}
+            title={replaceVariablesInText(
+              textVr.section_positive_tested.title,
+              {
+                safetyRegion: vrName,
+              }
+            )}
             icon={<Elderly />}
             description={replaceVariablesInText(
-              text.section_positive_tested.description,
+              textVr.section_positive_tested.description,
               {
                 safetyRegion: vrName,
               }
             )}
             metadata={{
-              datumsText: text.section_positive_tested.datums,
+              datumsText: textVr.section_positive_tested.datums,
               dateOrRange: elderly_at_home.last_value.date_unix,
               dateOfInsertionUnix:
                 elderly_at_home.last_value.date_of_insertion_unix,
-              dataSources: [text.section_positive_tested.bronnen.rivm],
+              dataSources: [textVr.section_positive_tested.bronnen.rivm],
             }}
-            referenceLink={text.section_positive_tested.reference.href}
+            referenceLink={textVr.section_positive_tested.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={textVr.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.section_positive_tested.kpi_daily_title}
+              title={textVr.section_positive_tested.kpi_daily_title}
               metadata={{
                 date: elderly_at_home.last_value.date_unix,
-                source: text.section_positive_tested.bronnen.rivm,
+                source: textVr.section_positive_tested.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -145,13 +162,15 @@ const ElderlyAtHomeRegionalPage = (
                 difference={difference.elderly_at_home__positive_tested_daily}
                 isAmount
               />
-              <Text>{text.section_positive_tested.kpi_daily_description}</Text>
+              <Text>
+                {textVr.section_positive_tested.kpi_daily_description}
+              </Text>
             </KpiTile>
             <KpiTile
-              title={text.section_positive_tested.kpi_daily_per_100k_title}
+              title={textVr.section_positive_tested.kpi_daily_per_100k_title}
               metadata={{
                 date: elderly_at_home.last_value.date_unix,
-                source: text.section_positive_tested.bronnen.rivm,
+                source: textVr.section_positive_tested.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -161,17 +180,17 @@ const ElderlyAtHomeRegionalPage = (
                 }
               />
               <Text>
-                {text.section_positive_tested.kpi_daily_per_100k_description}
+                {textVr.section_positive_tested.kpi_daily_per_100k_description}
               </Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            title={text.section_positive_tested.line_chart_daily_title}
-            metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+            title={textVr.section_positive_tested.line_chart_daily_title}
+            metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={
-              text.section_positive_tested.line_chart_daily_description
+              textVr.section_positive_tested.line_chart_daily_description
             }
           >
             {(timeframe) => (
@@ -186,10 +205,10 @@ const ElderlyAtHomeRegionalPage = (
                     type: 'line',
                     metricProperty: 'positive_tested_daily_moving_average',
                     label:
-                      text.section_positive_tested
+                      textVr.section_positive_tested
                         .line_chart_positive_tested_daily_moving_average,
                     shortLabel:
-                      text.section_positive_tested
+                      textVr.section_positive_tested
                         .line_chart_positive_tested_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
@@ -197,7 +216,7 @@ const ElderlyAtHomeRegionalPage = (
                     type: 'bar',
                     metricProperty: 'positive_tested_daily',
                     label:
-                      text.section_positive_tested
+                      textVr.section_positive_tested
                         .line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
@@ -208,7 +227,7 @@ const ElderlyAtHomeRegionalPage = (
                       start: elderlyAtHomeUnderReportedRange,
                       end: Infinity,
                       label:
-                        text.section_deceased
+                        textVr.section_deceased
                           .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
@@ -229,33 +248,33 @@ const ElderlyAtHomeRegionalPage = (
           <Divider />
 
           <PageInformationBlock
-            title={replaceVariablesInText(text.section_deceased.title, {
+            title={replaceVariablesInText(textVr.section_deceased.title, {
               safetyRegion: vrName,
             })}
             icon={<Elderly />}
             description={replaceVariablesInText(
-              text.section_deceased.description,
+              textVr.section_deceased.description,
               {
                 safetyRegion: vrName,
               }
             )}
             metadata={{
-              datumsText: text.section_deceased.datums,
+              datumsText: textVr.section_deceased.datums,
               dateOrRange: elderly_at_home.last_value.date_unix,
               dateOfInsertionUnix:
                 elderly_at_home.last_value.date_of_insertion_unix,
-              dataSources: [text.section_deceased.bronnen.rivm],
+              dataSources: [textVr.section_deceased.bronnen.rivm],
             }}
-            referenceLink={text.section_deceased.reference.href}
+            referenceLink={textVr.section_deceased.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.section_deceased.kpi_daily_title}
-              description={text.section_deceased.kpi_daily_description}
+              title={textVr.section_deceased.kpi_daily_title}
+              description={textVr.section_deceased.kpi_daily_description}
               metadata={{
                 date: elderly_at_home.last_value.date_unix,
-                source: text.section_deceased.bronnen.rivm,
+                source: textVr.section_deceased.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -267,9 +286,9 @@ const ElderlyAtHomeRegionalPage = (
 
           <ChartTile
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            title={text.section_deceased.line_chart_daily_title}
-            metadata={{ source: text.section_positive_tested.bronnen.rivm }}
-            description={text.section_deceased.line_chart_daily_description}
+            title={textVr.section_deceased.line_chart_daily_title}
+            metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
+            description={textVr.section_deceased.line_chart_daily_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -283,17 +302,18 @@ const ElderlyAtHomeRegionalPage = (
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
-                      text.section_deceased
+                      textVr.section_deceased
                         .line_chart_deceased_daily_moving_average,
                     shortLabel:
-                      text.section_deceased
+                      textVr.section_deceased
                         .line_chart_deceased_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
-                    label: text.section_deceased.line_chart_legend_trend_label,
+                    label:
+                      textVr.section_deceased.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -303,7 +323,7 @@ const ElderlyAtHomeRegionalPage = (
                       start: elderlyAtHomeDeceasedUnderReportedRange,
                       end: Infinity,
                       label:
-                        text.section_deceased
+                        textVr.section_deceased
                           .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
