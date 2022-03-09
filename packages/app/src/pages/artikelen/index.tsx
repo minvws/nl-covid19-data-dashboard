@@ -50,6 +50,8 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
+  const textShared = siteText.pages.topicalPage.shared;
+
   const articleCategories = useMemo(() => {
     /**
      * Find all the categories that are currently being used in articles,
@@ -62,8 +64,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
     return articleCategory
       .map((id) => {
-        const label =
-          siteText.common_actueel.secties.artikelen.categorie_filters[id];
+        const label = textShared.secties.artikelen.categorie_filters[id];
 
         return {
           label,
@@ -71,7 +72,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
         };
       })
       .filter((item) => availableCategories.includes(item.value));
-  }, [siteText, content]);
+  }, [content, textShared.secties.artikelen.categorie_filters]);
 
   const selectOptions = useMemo(
     () =>
@@ -112,11 +113,11 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
         <MaxWidth px={{ _: 3, lg: 4 }}>
           <Box pb={2}>
             <Heading level={2} as="h1">
-              {siteText.common_actueel.secties.artikelen.titel}
+              {textShared.secties.artikelen.titel}
             </Heading>
           </Box>
 
-          <Text>{siteText.common_actueel.secties.artikelen.beschrijving}</Text>
+          <Text>{textShared.secties.artikelen.beschrijving}</Text>
 
           {breakpoints.lg ? (
             <OrderedList>
@@ -147,8 +148,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             >
               <RichContentSelect
                 label={
-                  siteText.common_actueel.secties.artikelen
-                    .categorie_select_placeholder
+                  textShared.secties.artikelen.categorie_select_placeholder
                 }
                 visuallyHiddenLabel
                 initialValue={currentCategory}

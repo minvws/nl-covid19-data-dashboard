@@ -64,7 +64,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };

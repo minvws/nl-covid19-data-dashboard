@@ -161,7 +161,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { textNl, textShared } = pageText;
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...siteText.pages.topicalPage.nl.nationaal_metadata}
+      lastGenerated={lastGenerated}
+    >
       <NlLayout>
         <SEOHead
           title={textNl.metadata.title}

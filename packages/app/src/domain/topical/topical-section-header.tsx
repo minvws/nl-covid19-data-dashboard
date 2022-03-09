@@ -43,7 +43,7 @@ export function TopicalSectionHeader({
       {showBackLink && (
         <Box py={3} borderBottom={'solid 1px'} borderColor={'border'}>
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
-            {text.common_actueel.terug_naar_landelijk}
+            {text.pages.topicalPage.shared.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
       )}
@@ -82,10 +82,13 @@ export function TopicalSectionHeader({
 
         {lastGenerated && (
           <InlineText variant="label1" color="bodyLight">
-            {replaceComponentsInText(text.common_actueel.laatst_bijgewerkt, {
-              date: <RelativeDate dateInSeconds={lastGenerated} />,
-              time: formatDateFromSeconds(lastGenerated, 'time'),
-            })}
+            {replaceComponentsInText(
+              text.pages.topicalPage.shared.laatst_bijgewerkt,
+              {
+                date: <RelativeDate dateInSeconds={lastGenerated} />,
+                time: formatDateFromSeconds(lastGenerated, 'time'),
+              }
+            )}
           </InlineText>
         )}
 
