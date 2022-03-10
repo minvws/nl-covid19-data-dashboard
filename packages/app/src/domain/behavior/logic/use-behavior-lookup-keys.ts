@@ -9,14 +9,14 @@ import { behaviorIdentifiers } from './behavior-types';
  * why not.
  */
 export function useBehaviorLookupKeys() {
-  const intl = useIntl();
+  const { siteText } = useIntl();
 
   return useMemo(() => {
     return behaviorIdentifiers.map((key) => ({
       key,
-      description: intl.siteText.gedrag_onderwerpen[key],
+      description: siteText.pages.behaviorPage.shared.onderwerpen[key],
       complianceKey: `${key}_compliance` as const,
       supportKey: `${key}_support` as const,
     }));
-  }, [intl]);
+  }, [siteText.pages.behaviorPage.shared.onderwerpen]);
 }

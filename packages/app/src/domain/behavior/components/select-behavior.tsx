@@ -22,10 +22,10 @@ export function SelectBehavior({
   onChange,
   options = behaviorIdentifiers as unknown as BehaviorIdentifier[],
 }: SelectBehaviorProps) {
-  const intl = useIntl();
+  const { siteText } = useIntl();
   const selectOptions = options
     .map((id) => {
-      const label = intl.siteText.gedrag_onderwerpen[id];
+      const label = siteText.pages.behaviorPage.shared.onderwerpen[id];
       const iconSize = 25;
       return {
         value: id,

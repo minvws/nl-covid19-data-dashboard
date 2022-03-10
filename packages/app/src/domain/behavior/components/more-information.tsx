@@ -4,15 +4,16 @@ import { useIntl } from '~/intl';
 
 export function MoreInformation() {
   const { siteText } = useIntl();
-  const text = siteText.gedrag_common.meer_onderzoeksresultaten;
+  const behaviorPageText =
+    siteText.pages.behaviorPage.shared.meer_onderzoeksresultaten;
   return (
     <AnchorTile
-      title={text.title}
-      href={text.linkHref}
-      label={text.linkLabel}
+      title={behaviorPageText.title}
+      href={behaviorPageText.linkHref}
+      label={behaviorPageText.linkLabel}
       external
     >
-      <Text>{text.description}</Text>
+      <Text>{behaviorPageText.description}</Text>
     </AnchorTile>
   );
 }

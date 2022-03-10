@@ -36,6 +36,7 @@ export function BehaviorPerAgeGroup({
 }: BehaviorPerAgeGroupProps) {
   const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
+  const behaviorPageText = siteText.pages.behaviorPage;
 
   const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
   const supportValue = data[`${currentId}_support` as keyof typeof data];
@@ -53,7 +54,7 @@ export function BehaviorPerAgeGroup({
     <ChartTile title={title} description={description}>
       <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
         <SelectBehavior
-          label={siteText.nl_gedrag.select_behaviour_label}
+          label={behaviorPageText.nl.select_behaviour_label}
           value={currentId}
           onChange={setCurrentId}
         />
@@ -68,10 +69,10 @@ export function BehaviorPerAgeGroup({
                         width: asResponsiveArray({ _: 150, md: 200 }),
                       })}
                     >
-                      {siteText.gedrag_leeftijden.tabel.age_group}
+                      {behaviorPageText.shared.leeftijden.tabel.age_group}
                     </HeaderCell>
                     <HeaderCell>
-                      {siteText.gedrag_leeftijden.tabel.recent_research}
+                      {behaviorPageText.shared.leeftijden.tabel.recent_research}
                     </HeaderCell>
                   </tr>
                 </thead>
@@ -83,7 +84,9 @@ export function BehaviorPerAgeGroup({
                         isPresent(complianceValue[age]) &&
                         isPresent(supportValue[age]) && (
                           <tr>
-                            <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
+                            <Cell>
+                              {behaviorPageText.shared.leeftijden.tabel[age]}
+                            </Cell>
                             <Cell>
                               <PercentageBar
                                 color={colors.data.cyan}
@@ -126,7 +129,7 @@ export function BehaviorPerAgeGroup({
               mx="auto"
             >
               <Text textAlign="center">
-                {siteText.gedrag_leeftijden.tabel.error}
+                {behaviorPageText.shared.leeftijden.tabel.error}
               </Text>
             </Box>
           )}

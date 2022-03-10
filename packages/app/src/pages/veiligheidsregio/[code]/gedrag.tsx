@@ -18,6 +18,7 @@ import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -30,6 +31,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -37,6 +39,13 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.behaviorPage.vr,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   (context) => {
     const data = selectVrData('behavior')(context);
@@ -63,6 +72,7 @@ export default function BehaviorPageVr(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
+    pageText,
     lastGenerated,
     content,
     selectedVrData: data,
@@ -71,16 +81,14 @@ export default function BehaviorPageVr(
   } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
-
-  const text = siteText.regionaal_gedrag;
+  const { textVr } = pageText;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    title: textVr.metadata.title,
+    description: textVr.metadata.description,
   };
 
-  const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
@@ -94,73 +102,60 @@ export default function BehaviorPageVr(
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.gedrag}
-            title={regionaal_gedrag.pagina.titel}
+            title={textVr.pagina.titel}
             icon={<Gedrag />}
-            description={regionaal_gedrag.pagina.toelichting}
+            description={textVr.pagina.toelichting}
             metadata={{
-              datumsText: regionaal_gedrag.datums,
+              datumsText: textVr.datums,
               dateOrRange: {
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
-              dataSources: [regionaal_gedrag.bronnen.rivm],
+              dataSources: [textVr.bronnen.rivm],
             }}
-            referenceLink={regionaal_gedrag.reference.href}
+            referenceLink={textVr.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={textVr.warning}
           />
 
           <TwoKpiSection>
             <Tile>
-              <Heading level={3}>
-                {regionaal_gedrag.onderzoek_uitleg.titel}
-              </Heading>
-              <Markdown
-                content={regionaal_gedrag.onderzoek_uitleg.toelichting}
-              />
+              <Heading level={3}>{textVr.onderzoek_uitleg.titel}</Heading>
+              <Markdown content={textVr.onderzoek_uitleg.toelichting} />
             </Tile>
             <Tile height="100%">
-              <Heading level={3}>{regionaal_gedrag.kpi.titel}</Heading>
+              <Heading level={3}>{textVr.kpi.titel}</Heading>
               <Text>
-                {replaceComponentsInText(
-                  regionaal_gedrag.kpi.deelgenomen_mensen,
-                  {
-                    number_of_participants: (
-                      <InlineText fontWeight="bold">
-                        {formatNumber(behaviorLastValue.number_of_participants)}
-                      </InlineText>
-                    ),
-                    date_start: (
-                      <InlineText>
-                        {formatDateFromSeconds(
-                          behaviorLastValue.date_start_unix
-                        )}
-                      </InlineText>
-                    ),
-                    date_end: (
-                      <InlineText>
-                        {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
-                      </InlineText>
-                    ),
-                  }
-                )}
+                {replaceComponentsInText(textVr.kpi.deelgenomen_mensen, {
+                  number_of_participants: (
+                    <InlineText fontWeight="bold">
+                      {formatNumber(behaviorLastValue.number_of_participants)}
+                    </InlineText>
+                  ),
+                  date_start: (
+                    <InlineText>
+                      {formatDateFromSeconds(behaviorLastValue.date_start_unix)}
+                    </InlineText>
+                  ),
+                  date_end: (
+                    <InlineText>
+                      {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
+                    </InlineText>
+                  ),
+                })}
               </Text>
             </Tile>
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={regionaal_gedrag.basisregels.title}
-            description={regionaal_gedrag.basisregels.description}
-            complianceExplanation={
-              regionaal_gedrag.basisregels.volgen_beschrijving
-            }
-            supportExplanation={
-              regionaal_gedrag.basisregels.steunen_beschrijving
-            }
+            title={textVr.basisregels.title}
+            description={textVr.basisregels.description}
+            complianceExplanation={textVr.basisregels.volgen_beschrijving}
+            supportExplanation={textVr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={regionaal_gedrag.basisregels.annotatie}
+            annotation={textVr.basisregels.annotatie}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
           />
@@ -173,7 +168,7 @@ export default function BehaviorPageVr(
                 behaviorLastValue.date_start_unix,
                 behaviorLastValue.date_end_unix,
               ],
-              source: regionaal_gedrag.bronnen.rivm,
+              source: textVr.bronnen.rivm,
             }}
             currentId={currentId}
             setCurrentId={setCurrentId}
