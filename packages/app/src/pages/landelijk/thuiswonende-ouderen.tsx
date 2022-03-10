@@ -17,6 +17,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -35,12 +36,20 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textNl: siteText.pages.elderlyAtHomePage.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.elderly_at_home__positive_tested_daily',
@@ -76,7 +85,13 @@ export const getStaticProps = createGetStaticProps(
 const ElderlyAtHomeNationalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    lastGenerated,
+    content,
+  } = props;
   const elderlyAtHomeData = data.elderly_at_home;
 
   const elderlyAtHomeInfectedUnderReportedRange = getBoundaryDateStartUnix(
@@ -90,14 +105,14 @@ const ElderlyAtHomeNationalPage = (
   );
 
   const { siteText, formatNumber } = useIntl();
-  const reverseRouter = useReverseRouter();
+  const { textNl } = pageText;
 
-  const text = siteText.thuiswonende_ouderen;
+  const reverseRouter = useReverseRouter();
 
   const metadata = {
     ...siteText.pages.topicalPage.nl.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
@@ -109,26 +124,26 @@ const ElderlyAtHomeNationalPage = (
             screenReaderCategory={
               siteText.sidebar.metrics.elderly_at_home.title
             }
-            title={text.section_positive_tested.title}
+            title={textNl.section_positive_tested.title}
             icon={<Elderly />}
-            description={text.section_positive_tested.description}
+            description={textNl.section_positive_tested.description}
             metadata={{
-              datumsText: text.section_positive_tested.datums,
+              datumsText: textNl.section_positive_tested.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
               dateOfInsertionUnix:
                 elderlyAtHomeData.last_value.date_of_insertion_unix,
-              dataSources: [text.section_positive_tested.bronnen.rivm],
+              dataSources: [textNl.section_positive_tested.bronnen.rivm],
             }}
-            referenceLink={text.section_positive_tested.reference.href}
+            referenceLink={textNl.section_positive_tested.reference.href}
             articles={content.articles}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.section_positive_tested.kpi_daily_title}
+              title={textNl.section_positive_tested.kpi_daily_title}
               metadata={{
                 date: elderlyAtHomeData.last_value.date_unix,
-                source: text.section_positive_tested.bronnen.rivm,
+                source: textNl.section_positive_tested.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -140,14 +155,14 @@ const ElderlyAtHomeNationalPage = (
                 isAmount
               />
               <Markdown
-                content={text.section_positive_tested.kpi_daily_description}
+                content={textNl.section_positive_tested.kpi_daily_description}
               />
             </KpiTile>
             <KpiTile
-              title={text.section_positive_tested.kpi_daily_per_100k_title}
+              title={textNl.section_positive_tested.kpi_daily_per_100k_title}
               metadata={{
                 date: elderlyAtHomeData.last_value.date_unix,
-                source: text.section_positive_tested.bronnen.rivm,
+                source: textNl.section_positive_tested.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -157,17 +172,17 @@ const ElderlyAtHomeNationalPage = (
                 }
               />
               <Text>
-                {text.section_positive_tested.kpi_daily_per_100k_description}
+                {textNl.section_positive_tested.kpi_daily_per_100k_description}
               </Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            title={text.section_positive_tested.line_chart_daily_title}
-            metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+            title={textNl.section_positive_tested.line_chart_daily_title}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={
-              text.section_positive_tested.line_chart_daily_description
+              textNl.section_positive_tested.line_chart_daily_description
             }
           >
             {(timeframe) => (
@@ -182,10 +197,10 @@ const ElderlyAtHomeNationalPage = (
                     type: 'line',
                     metricProperty: 'positive_tested_daily_moving_average',
                     label:
-                      text.section_positive_tested
+                      textNl.section_positive_tested
                         .line_chart_positive_tested_daily_moving_average,
                     shortLabel:
-                      text.section_positive_tested
+                      textNl.section_positive_tested
                         .line_chart_positive_tested_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
@@ -193,7 +208,7 @@ const ElderlyAtHomeNationalPage = (
                     type: 'bar',
                     metricProperty: 'positive_tested_daily',
                     label:
-                      text.section_positive_tested
+                      textNl.section_positive_tested
                         .line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
@@ -204,7 +219,7 @@ const ElderlyAtHomeNationalPage = (
                       start: elderlyAtHomeInfectedUnderReportedRange,
                       end: Infinity,
                       label:
-                        text.section_deceased
+                        textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
@@ -223,17 +238,17 @@ const ElderlyAtHomeNationalPage = (
           </ChartTile>
 
           <ChoroplethTile
-            title={text.section_positive_tested.choropleth_daily_title}
+            title={textNl.section_positive_tested.choropleth_daily_title}
             description={
-              text.section_positive_tested.choropleth_daily_description
+              textNl.section_positive_tested.choropleth_daily_description
             }
             metadata={{
               date: elderlyAtHomeData.last_value.date_unix,
-              source: text.section_positive_tested.bronnen.rivm,
+              source: textNl.section_positive_tested.bronnen.rivm,
             }}
             legend={{
               thresholds: thresholds.vr.positive_tested_daily_per_100k,
-              title: text.section_positive_tested.choropleth_daily_legenda,
+              title: textNl.section_positive_tested.choropleth_daily_legenda,
             }}
           >
             <DynamicChoropleth
@@ -258,26 +273,26 @@ const ElderlyAtHomeNationalPage = (
           <Divider />
 
           <PageInformationBlock
-            title={text.section_deceased.title}
+            title={textNl.section_deceased.title}
             icon={<Elderly />}
-            description={text.section_deceased.description}
+            description={textNl.section_deceased.description}
             metadata={{
-              datumsText: text.section_deceased.datums,
+              datumsText: textNl.section_deceased.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
               dateOfInsertionUnix:
                 elderlyAtHomeData.last_value.date_of_insertion_unix,
-              dataSources: [text.section_deceased.bronnen.rivm],
+              dataSources: [textNl.section_deceased.bronnen.rivm],
             }}
-            referenceLink={text.section_deceased.reference.href}
+            referenceLink={textNl.section_deceased.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.section_deceased.kpi_daily_title}
-              description={text.section_deceased.kpi_daily_description}
+              title={textNl.section_deceased.kpi_daily_title}
+              description={textNl.section_deceased.kpi_daily_description}
               metadata={{
                 date: elderlyAtHomeData.last_value.date_unix,
-                source: text.section_deceased.bronnen.rivm,
+                source: textNl.section_deceased.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -289,9 +304,9 @@ const ElderlyAtHomeNationalPage = (
 
           <ChartTile
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            title={text.section_deceased.line_chart_daily_title}
-            metadata={{ source: text.section_positive_tested.bronnen.rivm }}
-            description={text.section_deceased.line_chart_daily_description}
+            title={textNl.section_deceased.line_chart_daily_title}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
+            description={textNl.section_deceased.line_chart_daily_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -305,17 +320,18 @@ const ElderlyAtHomeNationalPage = (
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
-                      text.section_deceased
+                      textNl.section_deceased
                         .line_chart_deceased_daily_moving_average,
                     shortLabel:
-                      text.section_deceased
+                      textNl.section_deceased
                         .line_chart_deceased_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
-                    label: text.section_deceased.line_chart_legend_trend_label,
+                    label:
+                      textNl.section_deceased.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -325,7 +341,7 @@ const ElderlyAtHomeNationalPage = (
                       start: elderlyAtHomeDeceasedUnderReportedRange,
                       end: Infinity,
                       label:
-                        text.section_deceased
+                        textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [

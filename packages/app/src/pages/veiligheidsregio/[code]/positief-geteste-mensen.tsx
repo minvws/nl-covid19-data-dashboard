@@ -23,6 +23,7 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -41,6 +42,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -50,6 +52,14 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.positiveTestsPage.vr,
+        textShared: siteText.pages.positiveTestsPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData(
     'difference.tested_ggd__infected_percentage_moving_average',
@@ -97,6 +107,7 @@ export const getStaticProps = createGetStaticProps(
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     selectedVrData: data,
     choropleth,
     vrName,
@@ -112,8 +123,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
 
-  const text = siteText.veiligheidsregio_positief_geteste_personen;
-  const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
+  const { textVr, textShared } = pageText;
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
@@ -123,10 +133,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textVr.metadata.description, {
       safetyRegionName: vrName,
     }),
   };
@@ -138,29 +148,29 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
             screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
-            title={replaceVariablesInText(text.titel, {
+            title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
             icon={<Test />}
-            description={text.pagina_toelichting}
+            description={textVr.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textVr.datums,
               dateOrRange: dataOverallLastValue.date_unix,
               dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textVr.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textVr.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={textVr.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.infected_kpi.title}
+              title={textVr.infected_kpi.title}
               metadata={{
                 date: dataOverallLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -169,33 +179,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={text.infected_kpi.description} />
+              <Markdown content={textVr.infected_kpi.description} />
 
               <Box spacing={3}>
                 <Text variant="body2" fontWeight="bold">
-                  {replaceComponentsInText(text.infected_kpi.last_value_text, {
-                    infected: (
-                      <InlineText color="data.primary">{`${formatNumber(
-                        dataOverallLastValue.infected
-                      )}`}</InlineText>
-                    ),
-                    dateTo: formatDateFromSeconds(
-                      dataOverallLastValue.date_unix,
-                      'weekday-medium'
-                    ),
-                  })}
+                  {replaceComponentsInText(
+                    textVr.infected_kpi.last_value_text,
+                    {
+                      infected: (
+                        <InlineText color="data.primary">{`${formatNumber(
+                          dataOverallLastValue.infected
+                        )}`}</InlineText>
+                      ),
+                      dateTo: formatDateFromSeconds(
+                        dataOverallLastValue.date_unix,
+                        'weekday-medium'
+                      ),
+                    }
+                  )}
                 </Text>
-                {text.infected_kpi.link_cta && (
-                  <Markdown content={text.infected_kpi.link_cta} />
+                {textVr.infected_kpi.link_cta && (
+                  <Markdown content={textVr.infected_kpi.link_cta} />
                 )}
               </Box>
             </KpiTile>
 
             <KpiTile
-              title={text.percentage_kpi.title}
+              title={textVr.percentage_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -204,12 +217,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={text.percentage_kpi.description} />
+              <Markdown content={textVr.percentage_kpi.description} />
 
               <Box spacing={3}>
                 <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(
-                    text.percentage_kpi.last_value_text,
+                    textVr.percentage_kpi.last_value_text,
                     {
                       percentage: (
                         <InlineText color="data.primary">{`${formatPercentage(
@@ -223,18 +236,18 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   )}
                 </Text>
-                {text.percentage_kpi.link_cta && (
-                  <Markdown content={text.percentage_kpi.link_cta} />
+                {textVr.percentage_kpi.link_cta && (
+                  <Markdown content={textVr.percentage_kpi.link_cta} />
                 )}
               </Box>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
-            title={text.linechart_titel}
-            description={text.linechart_toelichting}
+            title={textVr.linechart_titel}
+            description={textVr.linechart_toelichting}
             metadata={{
-              source: text.bronnen.rivm,
+              source: textVr.bronnen.rivm,
             }}
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
           >
@@ -249,17 +262,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'infected_moving_average',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_moving_average,
+                    label: textShared.tooltip_labels.infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'infected',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected,
+                    label: textShared.tooltip_labels.infected,
                     color: colors.data.primary,
                   },
                 ]}
@@ -275,18 +284,18 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChoroplethTile
-              title={replaceVariablesInText(text.map_titel, {
+              title={replaceVariablesInText(textVr.map_titel, {
                 safetyRegion: vrName,
               })}
               metadata={{
                 date: dataOverallLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
               description={
                 <>
-                  <Markdown content={text.map_toelichting} />
+                  <Markdown content={textVr.map_toelichting} />
                   <Text variant="body2" fontWeight="bold">
-                    {replaceComponentsInText(text.map_last_value_text, {
+                    {replaceComponentsInText(textVr.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
                           dataOverallLastValue.infected_per_100k
@@ -302,8 +311,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 </>
               }
               legend={{
-                title:
-                  siteText.positief_geteste_personen.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda.titel,
                 thresholds: thresholds.vr.infected_per_100k,
               }}
             >
@@ -337,27 +345,27 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="ggd"
-            title={replaceVariablesInText(ggdText.titel, {
+            title={replaceVariablesInText(textVr.ggd.titel, {
               safetyRegion: vrName,
             })}
             icon={<GgdTesten />}
-            description={ggdText.toelichting}
+            description={textVr.ggd.toelichting}
             metadata={{
-              datumsText: ggdText.datums,
+              datumsText: textVr.ggd.datums,
               dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
               dateOrRange: dataGgdLastValue.date_unix,
-              dataSources: [ggdText.bronnen.rivm],
+              dataSources: [textVr.ggd.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textVr.reference.href}
             articles={content.ggdArticles}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={ggdText.tests_kpi.title}
+              title={textVr.ggd.tests_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -366,10 +374,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={ggdText.tests_kpi.description} />
+              <Markdown content={textVr.ggd.tests_kpi.description} />
 
               <Text variant="body2" fontWeight="bold">
-                {replaceComponentsInText(ggdText.tests_kpi.last_value_text, {
+                {replaceComponentsInText(textVr.ggd.tests_kpi.last_value_text, {
                   tested_total: (
                     <InlineText color="data.primary">{`${formatNumber(
                       dataGgdLastValue.tested_total
@@ -383,10 +391,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               </Text>
             </KpiTile>
             <KpiTile
-              title={ggdText.percentage_kpi.title}
+              title={textVr.ggd.percentage_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textVr.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -395,11 +403,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={ggdText.percentage_kpi.description} />
+              <Markdown content={textVr.ggd.percentage_kpi.description} />
 
               <Text variant="body2" fontWeight="bold">
                 {replaceComponentsInText(
-                  ggdText.percentage_kpi.last_value_text,
+                  textVr.ggd.percentage_kpi.last_value_text,
                   {
                     infected_moving_average: (
                       <InlineText color="data.primary">{`${formatNumber(
@@ -429,10 +437,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 TimeframeOption.ALL,
                 TimeframeOption.FIVE_WEEKS,
               ]}
-              title={ggdText.linechart_totaltests_titel}
-              description={ggdText.linechart_totaltests_toelichting}
+              title={textVr.ggd.linechart_totaltests_titel}
+              description={textVr.ggd.linechart_totaltests_toelichting}
               metadata={{
-                source: ggdText.bronnen.rivm,
+                source: textVr.ggd.bronnen.rivm,
               }}
             >
               {(timeframe) => (
@@ -448,45 +456,40 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'tested_total_moving_average',
                       color: colors.data.secondary,
                       label:
-                        ggdText.linechart_totaltests_legend_label_moving_average,
+                        textVr.ggd
+                          .linechart_totaltests_legend_label_moving_average,
                       shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
+                        textShared.tooltip_labels
                           .ggd_tested_total_moving_average,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'tested_total',
                       color: colors.data.secondary,
-                      label: ggdText.linechart_totaltests_legend_label,
-                      shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .ggd_tested_total,
+                      label: textVr.ggd.linechart_totaltests_legend_label,
+                      shortLabel: textShared.tooltip_labels.ggd_tested_total,
                     },
                     {
                       type: 'line',
                       metricProperty: 'infected_moving_average',
                       color: colors.data.primary,
                       label:
-                        ggdText.linechart_positivetests_legend_label_moving_average,
+                        textVr.ggd
+                          .linechart_positivetests_legend_label_moving_average,
                       shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected_moving_average,
+                        textShared.tooltip_labels.infected_moving_average,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'infected',
                       color: colors.data.primary,
-                      label: ggdText.linechart_positivetests_legend_label,
-                      shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected,
+                      label: textVr.ggd.linechart_positivetests_legend_label,
+                      shortLabel: textShared.tooltip_labels.infected,
                     },
                     {
                       type: 'invisible',
                       metricProperty: 'infected_percentage',
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .ggd_infected_percentage,
+                      label: textShared.tooltip_labels.ggd_infected_percentage,
                       isPercentage: true,
                     },
                   ]}
@@ -498,8 +501,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <Divider />
 
           <PageInformationBlock
-            title={text.section_archived.title}
-            description={text.section_archived.description}
+            title={textVr.section_archived.title}
+            description={textVr.section_archived.description}
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() =>
               setHideArchivedCharts(!hasHideArchivedCharts)
@@ -509,10 +512,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           {hasHideArchivedCharts && (
             <InView rootMargin="400px">
               <ChartTile
-                title={ggdText.linechart_percentage_titel}
-                description={ggdText.linechart_percentage_toelichting}
+                title={textVr.ggd.linechart_percentage_titel}
+                description={textVr.ggd.linechart_percentage_toelichting}
                 metadata={{
-                  source: ggdText.bronnen.rivm,
+                  source: textVr.ggd.bronnen.rivm,
                 }}
               >
                 <TimeSeriesChart
@@ -526,16 +529,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'infected_percentage_moving_average',
                       color: colors.data.primary,
                       label:
-                        siteText.positief_geteste_personen.tooltip_labels
+                        textShared.tooltip_labels
                           .ggd_infected_percentage_moving_average,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'infected_percentage',
                       color: colors.data.primary,
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .ggd_infected_percentage,
+                      label: textShared.tooltip_labels.ggd_infected_percentage,
                     },
                   ]}
                   dataOptions={{

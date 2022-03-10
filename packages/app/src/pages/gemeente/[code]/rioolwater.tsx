@@ -15,6 +15,7 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -27,6 +28,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectGmData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -35,6 +37,14 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textGm: siteText.pages.sewerPage.gm,
+        textShared: siteText.pages.sewerPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectGmData(
     'difference.sewer__average',
@@ -58,14 +68,15 @@ export const getStaticProps = createGetStaticProps(
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     selectedGmData: data,
     municipalityName,
     content,
     lastGenerated,
   } = props;
-  const { siteText, formatNumber } = useIntl();
 
-  const text = siteText.gemeente_rioolwater_metingen;
+  const { siteText, formatNumber } = useIntl();
+  const { textGm, textShared } = pageText;
 
   const sewerAverages = data.sewer;
   const populationCount = data.static_values.population_count;
@@ -81,10 +92,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textGm.metadata.description, {
       municipalityName,
     }),
   };
@@ -95,40 +106,40 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={siteText.gemeente_layout.headings.vroege_signalen}
-            title={replaceVariablesInText(text.titel, {
+            title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
             icon={<RioolwaterMonitoring />}
-            description={text.pagina_toelichting}
+            description={textGm.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textGm.datums,
               dateOrRange: {
                 start: sewerAverages.last_value.date_start_unix,
                 end: sewerAverages.last_value.date_end_unix,
               },
               dateOfInsertionUnix:
                 sewerAverages.last_value.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textGm.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textGm.reference.href}
             articles={content.articles}
             vrNameOrGmName={municipalityName}
-            warning={text.warning}
+            warning={textGm.warning}
           />
 
-          {!isEmpty(text.warning_method) && (
-            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(textGm.warning_method) && (
+            <WarningTile message={textGm.warning_method} icon={Experimenteel} />
           )}
 
           <TwoKpiSection>
             <KpiTile
-              title={text.barscale_titel}
+              title={textGm.barscale_titel}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,
                   sewerAverages.last_value.date_end_unix,
                 ],
-                source: text.bronnen.rivm,
+                source: textGm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -150,7 +161,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               </Text>
 
-              <Markdown content={text.extra_uitleg} />
+              <Markdown content={textGm.extra_uitleg} />
 
               <CollapsibleContent
                 label={
@@ -158,27 +169,30 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Text>
-                  {replaceComponentsInText(text.population_count_explanation, {
-                    municipalityName: <strong>{municipalityName}</strong>,
-                    value: (
-                      <strong>
-                        {formatNumber(sewerAverages.last_value.average)}
-                      </strong>
-                    ),
-                  })}
+                  {replaceComponentsInText(
+                    textGm.population_count_explanation,
+                    {
+                      municipalityName: <strong>{municipalityName}</strong>,
+                      value: (
+                        <strong>
+                          {formatNumber(sewerAverages.last_value.average)}
+                        </strong>
+                      ),
+                    }
+                  )}
                 </Text>
               </CollapsibleContent>
             </KpiTile>
 
             <KpiTile
-              title={text.total_measurements_title}
-              description={text.total_measurements_description}
+              title={textGm.total_measurements_title}
+              description={textGm.total_measurements_description}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,
                   sewerAverages.last_value.date_end_unix,
                 ],
-                source: text.bronnen.rivm,
+                source: textGm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -186,7 +200,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={sewerAverages.last_value.total_number_of_samples}
               />
               <Text>
-                {replaceComponentsInText(text.total_measurements_locations, {
+                {replaceComponentsInText(textGm.total_measurements_locations, {
                   sampled_installation_count: (
                     <strong>
                       {sewerAverages.last_value.sampled_installation_count}
@@ -207,16 +221,16 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             dataAverages={data.sewer as unknown as NlSewer}
             dataPerInstallation={data.sewer_per_installation}
             text={{
-              title: text.linechart_titel,
-              source: text.bronnen.rivm,
-              description: text.linechart_description,
-              selectPlaceholder: text.graph_selected_rwzi_placeholder,
-              splitLabels: siteText.rioolwater_metingen.split_labels,
+              title: textGm.linechart_titel,
+              source: textGm.bronnen.rivm,
+              description: textGm.linechart_description,
+              selectPlaceholder: textGm.graph_selected_rwzi_placeholder,
+              splitLabels: textShared.split_labels,
               averagesDataLabel: siteText.common.weekgemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
             vrNameOrGmName={municipalityName}
-            warning={text.warning_chart}
+            warning={textGm.warning_chart}
           />
         </TileList>
       </GmLayout>

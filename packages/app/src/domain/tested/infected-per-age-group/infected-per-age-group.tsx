@@ -41,7 +41,7 @@ export function InfectedPerAgeGroup({
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
 
-  const text = siteText.infected_per_age_group;
+  const text = siteText.pages.positiveTestsPage.shared.infected_per_age_group;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
   const alwaysEnabled = ['infected_overall_per_100k'];

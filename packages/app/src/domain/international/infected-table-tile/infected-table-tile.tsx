@@ -33,7 +33,7 @@ export function InfectedTableTile({
   metadata,
 }: InfectedTableTileProps) {
   const { siteText } = useIntl();
-  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
+  const text = siteText.pages.in_positiveTestsPage.shared.land_tabel;
 
   const [inputValue, setInputValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
