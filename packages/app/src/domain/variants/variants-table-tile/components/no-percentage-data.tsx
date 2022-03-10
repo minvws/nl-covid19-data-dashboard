@@ -3,7 +3,7 @@ import { useIntl } from '~/intl';
 
 export function NoPercentageData() {
   const { siteText } = useIntl();
-  const text = siteText.internationaal_varianten;
+  const text = siteText.pages.in_variantsPage.shared;
 
   return (
     <InlineTooltip
