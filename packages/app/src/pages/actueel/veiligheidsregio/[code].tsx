@@ -135,6 +135,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const vrCode = router.query.code as string;
   const { siteText, ...formatters } = useIntl();
   const { textVr, textShared } = pageText;
+  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
 
   const dataHospitalIntake = data.hospital_nice;
   const dataSitemap = useDataSitemap('vr', vrCode);
@@ -388,7 +389,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         type: 'line',
                         metricProperty: 'infected_moving_average',
                         label:
-                          siteText.positief_geteste_personen.tooltip_labels
+                          positiveTestsText.tooltip_labels
                             .infected_moving_average,
                         color: colors.data.primary,
                       },
@@ -396,8 +397,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         type: 'bar',
                         metricProperty: 'infected',
                         label:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .infected_overall,
+                          positiveTestsText.tooltip_labels.infected_overall,
                         color: colors.data.primary,
                       },
                     ]}

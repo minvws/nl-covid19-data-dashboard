@@ -86,7 +86,7 @@ function ItemRow({
   formatValue,
 }: ItemRowProps) {
   const { siteText } = useIntl();
-  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
+  const text = siteText.pages.in_positiveTestsPage.shared.land_tabel;
 
   const filterBelow = getThresholdValue(
     thresholds.in.infected_per_100k_average,
