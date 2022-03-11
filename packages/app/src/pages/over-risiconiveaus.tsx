@@ -10,11 +10,8 @@ import { Heading, InlineText } from '~/components/typography';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
+import { useFeature as getFeature } from '~/lib/features';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -30,7 +27,7 @@ interface OverRisiconiveausData {
   content: RichContentBlock[];
 }
 
-const riskLevelFeature = useFeature('riskLevel');
+const riskLevelFeature = getFeature('riskLevel');
 export const getStaticProps = riskLevelFeature.isEnabled
   ? createGetStaticProps(
       getLastGeneratedDate,
