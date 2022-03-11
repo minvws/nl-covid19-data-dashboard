@@ -17,6 +17,7 @@ export function AppFooter() {
   const reverseRouter = useReverseRouter();
   const { siteText: text } = useIntl();
   const internationalFeature = useFeature('inHomePage');
+  const riskLevelFeature = useFeature('riskLevel');
 
   return (
     <footer>
@@ -81,9 +82,11 @@ export function AppFooter() {
                 <Item href={reverseRouter.algemeen.verantwoording()}>
                   {text.nav.links.verantwoording}
                 </Item>
-                <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
-                  {text.nav.links.over_risiconiveaus}
-                </Item>
+                {riskLevelFeature.isEnabled && (
+                  <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
+                    {text.nav.links.over_risiconiveaus}
+                  </Item>
+                )}
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
                 </Item>

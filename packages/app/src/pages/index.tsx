@@ -150,6 +150,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
+  const riskLevelFeature = useFeature('riskLevel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -615,7 +616,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={textShared.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner data={data.risk_level.last_value} hasLink />
+            {riskLevelFeature.isEnabled && (
+              <EscalationLevelBanner
+                data={data.risk_level.last_value}
+                hasLink
+              />
+            )}
 
             <CollapsibleButton
               label={textShared.overview_links_header}
