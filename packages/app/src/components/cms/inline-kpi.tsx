@@ -56,7 +56,8 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
           ...data,
         },
         difference: {
-          [configuration.differenceKey]: differenceData,
+          [configuration.differenceKey]:
+            differenceData[configuration.differenceKey],
         },
       }
     : {
