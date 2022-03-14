@@ -23,6 +23,7 @@ import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getLinkParts,
@@ -37,6 +38,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -47,6 +49,13 @@ import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percent
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.vaccinationsPage.vr,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData('vaccine_coverage_per_age_group', 'booster_coverage'),
   createGetChoroplethData({
@@ -89,6 +98,7 @@ export const VaccinationsVrPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
   const {
+    pageText,
     vrName,
     selectedVrData: data,
     choropleth,
@@ -102,7 +112,8 @@ export const VaccinationsVrPage = (
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
-  const text = siteText.veiligheidsregio_vaccinaties;
+  const text = siteText.veiligheidsregio_vaccinaties; // Todo: move these to pages level later and use textVr
+  const { textVr } = pageText;
 
   const metadata = {
     ...siteText.veiligheidsregio_vaccinaties.metadata,
@@ -199,6 +210,12 @@ export const VaccinationsVrPage = (
               has_one_shot_label:
                 filteredAgeGroup12Plus.has_one_shot_percentage_label,
             }}
+            age12PlusToggleText={
+              textVr.vaccination_grade_toggle_tile.age_12_plus
+            }
+            age18PlusToggleText={
+              textVr.vaccination_grade_toggle_tile.age_18_plus
+            }
           />
 
           <VaccineCoveragePerAgeGroup

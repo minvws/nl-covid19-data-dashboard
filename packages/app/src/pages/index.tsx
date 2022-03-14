@@ -134,6 +134,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { formatPercentage } = useIntl();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
+  const riskLevelFeature = useFeature('riskLevel');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -604,7 +605,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={siteText.common_actueel.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner data={data.risk_level.last_value} hasLink />
+            {riskLevelFeature.isEnabled && (
+              <EscalationLevelBanner
+                data={data.risk_level.last_value}
+                hasLink
+              />
+            )}
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
