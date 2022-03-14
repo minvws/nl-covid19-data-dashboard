@@ -10,10 +10,8 @@ import { Heading, InlineText } from '~/components/typography';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
+import { useFeature as getFeature } from '~/lib/features';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -29,15 +27,22 @@ interface OverRisiconiveausData {
   content: RichContentBlock[];
 }
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  selectNlData('risk_level'),
-  createGetContent<OverRisiconiveausData>(() => {
-    return "*[_type == 'overRisicoNiveausNew'][0]";
-  })
-);
+const riskLevelFeature = getFeature('riskLevel');
+export const getStaticProps = riskLevelFeature.isEnabled
+  ? createGetStaticProps(
+      getLastGeneratedDate,
+      selectNlData('risk_level'),
+      createGetContent<OverRisiconiveausData>(() => {
+        return "*[_type == 'overRisicoNiveausNew'][0]";
+      })
+    )
+  : () => ({ notFound: true });
 
-const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
+const OverRisicoNiveaus = (props: {
+  lastGenerated: any;
+  content: any;
+  selectedNlData: any;
+}) => {
   const { siteText } = useIntl();
   const { lastGenerated, content, selectedNlData: data } = props;
 
