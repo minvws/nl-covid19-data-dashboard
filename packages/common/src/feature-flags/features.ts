@@ -209,5 +209,7 @@ export const features: Feature[] = [
   {
     name: 'riskLevel',
     isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'risk_level',
   },
 ];
