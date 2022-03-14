@@ -2,7 +2,7 @@ import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { SiteText } from '~/locale';
 
-type VariantName = keyof SiteText['covid_varianten']['varianten'];
+type VariantName = keyof SiteText['pages']['variantsPage']['nl']['varianten'];
 
 export type VariantChartValue = {
   date_start_unix: number;

@@ -112,15 +112,14 @@ export const VaccinationsVrPage = (
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
-  const text = siteText.veiligheidsregio_vaccinaties; // Todo: move these to pages level later and use textVr
   const { textVr } = pageText;
 
   const metadata = {
-    ...siteText.veiligheidsregio_vaccinaties.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    ...textVr.metadata,
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textVr.metadata.description, {
       safetyRegionName: vrName,
     }),
   };
@@ -159,30 +158,30 @@ export const VaccinationsVrPage = (
         <TileList>
           <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.vaccinaties}
-            title={replaceVariablesInText(text.informatie_blok.titel, {
+            title={replaceVariablesInText(textVr.informatie_blok.titel, {
               safetyRegionName: vrName,
             })}
-            description={text.informatie_blok.beschrijving}
+            description={textVr.informatie_blok.beschrijving}
             icon={<VaccinatieIcon />}
             metadata={{
-              datumsText: text.informatie_blok.datums,
+              datumsText: textVr.informatie_blok.datums,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
               dateOfInsertionUnix:
                 filteredAgeGroup18Plus.date_of_insertion_unix,
               dataSources: [],
             }}
             pageLinks={content.links}
-            referenceLink={text.informatie_blok.reference.href}
+            referenceLink={textVr.informatie_blok.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={textVr.warning}
           />
 
           <VaccineCoverageToggleTile
-            title={text.vaccination_grade_toggle_tile.title}
-            source={text.vaccination_grade_toggle_tile.source}
+            title={textVr.vaccination_grade_toggle_tile.title}
+            source={textVr.vaccination_grade_toggle_tile.source}
             descriptionFooter={
-              text.vaccination_grade_toggle_tile.description_footer
+              textVr.vaccination_grade_toggle_tile.description_footer
             }
             dateUnix={filteredAgeGroup18Plus.date_unix}
             dateUnixBoostered={boosterCoverageLastValue.date_unix}
@@ -219,12 +218,12 @@ export const VaccinationsVrPage = (
           />
 
           <VaccineCoveragePerAgeGroup
-            title={text.vaccination_coverage.title}
-            description={text.vaccination_coverage.description}
+            title={textVr.vaccination_coverage.title}
+            description={textVr.vaccination_coverage.description}
             sortingOrder={['18+', '12-17', '12+']}
             metadata={{
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: text.vaccination_coverage.bronnen.rivm,
+              source: textVr.vaccination_coverage.bronnen.rivm,
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />

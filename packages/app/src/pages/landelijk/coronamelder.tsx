@@ -36,14 +36,15 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatNumber } = useIntl();
 
   const { selectedNlData: data, lastGenerated } = props;
-  const { nl_gedrag, corona_melder_app } = siteText;
+  const { corona_melder_app } = siteText;
+  const behaviorPageText = siteText.pages.behaviorPage.nl;
 
   const warningLastValue = data.corona_melder_app_warning.last_value;
 
   const metadata = {
     ...siteText.pages.topicalPage.nl.nationaal_metadata,
-    title: nl_gedrag.metadata.title,
-    description: nl_gedrag.metadata.description,
+    title: behaviorPageText.metadata.title,
+    description: behaviorPageText.metadata.description,
   };
 
   return (

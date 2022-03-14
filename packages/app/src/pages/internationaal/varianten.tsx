@@ -100,12 +100,12 @@ export default function VariantenPage(
   const [selectedCountryCode, setSelectedCountryCode] =
     useState<string>(defaultCountryCode);
 
-  const intl = useIntl();
-  const text = intl.siteText.internationaal_varianten;
+  const { siteText } = useIntl();
+  const text = siteText.pages.in_variantsPage.shared;
   const tableText = text.varianten_tabel;
 
   const metadata = {
-    ...intl.siteText.internationaal_metadata,
+    ...siteText.internationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };

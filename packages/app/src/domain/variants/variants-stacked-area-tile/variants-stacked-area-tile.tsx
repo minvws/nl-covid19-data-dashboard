@@ -19,8 +19,8 @@ import { useList } from '~/utils/use-list';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileText =
-  | SiteText['covid_varianten']['varianten_over_tijd_grafiek']
-  | SiteText['internationaal_varianten']['varianten_over_tijd_grafiek'];
+  | SiteText['pages']['variantsPage']['nl']['varianten_over_tijd_grafiek']
+  | SiteText['pages']['in_variantsPage']['shared']['varianten_over_tijd_grafiek'];
 
 type VariantsStackedAreaTileProps = {
   text: VariantsStackedAreaTileText;
@@ -225,13 +225,13 @@ function useSeriesConfig(
 
         const variantName = variantKey.split(
           '_'
-        )[0] as keyof typeof siteText.covid_varianten.varianten;
+        )[0] as keyof typeof siteText.pages.variantsPage.nl.varianten;
 
         return {
           type: 'gapped-stacked-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: siteText.covid_varianten.varianten[variantName],
+          label: siteText.pages.variantsPage.nl.varianten[variantName],
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
