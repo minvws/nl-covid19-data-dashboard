@@ -150,6 +150,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
+  const riskLevelFeature = useFeature('riskLevel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -338,7 +339,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
                       label:
-                        siteText.ic_opnames_per_dag
+                        siteText.pages.intensiveCarePage.nl
                           .linechart_legend_trend_label_moving_average,
                       color: colors.data.primary,
                     },
@@ -346,7 +347,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
                       label:
-                        siteText.ic_opnames_per_dag
+                        siteText.pages.intensiveCarePage.nl
                           .linechart_legend_trend_label,
                       color: colors.data.primary,
                     },
@@ -615,7 +616,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={textShared.secties.search.title.nl} />
             </Box>
 
-            <EscalationLevelBanner data={data.risk_level.last_value} hasLink />
+            {riskLevelFeature.isEnabled && (
+              <EscalationLevelBanner
+                data={data.risk_level.last_value}
+                hasLink
+              />
+            )}
 
             <CollapsibleButton
               label={textShared.overview_links_header}

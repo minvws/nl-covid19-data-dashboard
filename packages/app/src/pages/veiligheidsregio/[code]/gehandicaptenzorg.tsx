@@ -16,6 +16,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -33,6 +34,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -40,6 +42,13 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.disabilityCarePage.vr,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData(
     'disability_care',
@@ -71,15 +80,16 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, vrName, lastGenerated, content } = props;
+  const {
+    pageText,
+    selectedVrData: data,
+    vrName,
+    lastGenerated,
+    content,
+  } = props;
 
   const { siteText } = useIntl();
-
-  const locationsText =
-    siteText.veiligheidsregio_gehandicaptenzorg_besmette_locaties;
-  const positiveTestPeopleText =
-    siteText.veiligheidsregio_gehandicaptenzorg_positief_geteste_personen;
-  const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
+  const { textVr } = pageText;
 
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
@@ -87,12 +97,15 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(locationsText.metadata.title, {
+    title: replaceVariablesInText(textVr.besmette_locaties.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(locationsText.metadata.description, {
-      safetyRegionName: vrName,
-    }),
+    description: replaceVariablesInText(
+      textVr.besmette_locaties.metadata.description,
+      {
+        safetyRegionName: vrName,
+      }
+    ),
   };
 
   return (
@@ -106,35 +119,38 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             screenReaderCategory={
               siteText.sidebar.metrics.nursing_home_care.title
             }
-            title={replaceVariablesInText(positiveTestPeopleText.titel, {
-              safetyRegion: vrName,
-            })}
+            title={replaceVariablesInText(
+              textVr.positief_geteste_personen.titel,
+              {
+                safetyRegion: vrName,
+              }
+            )}
             icon={<GehandicaptenZorg />}
             description={replaceVariablesInText(
-              positiveTestPeopleText.pagina_toelichting,
+              textVr.positief_geteste_personen.pagina_toelichting,
               {
                 safetyRegion: vrName,
               }
             )}
             metadata={{
-              datumsText: positiveTestPeopleText.datums,
+              datumsText: textVr.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [positiveTestPeopleText.bronnen.rivm],
+              dataSources: [textVr.positief_geteste_personen.bronnen.rivm],
             }}
-            referenceLink={positiveTestPeopleText.reference.href}
+            referenceLink={textVr.positief_geteste_personen.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={locationsText.warning}
+            warning={textVr.besmette_locaties.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={positiveTestPeopleText.barscale_titel}
-              description={positiveTestPeopleText.extra_uitleg}
+              title={textVr.positief_geteste_personen.barscale_titel}
+              description={textVr.positief_geteste_personen.extra_uitleg}
               metadata={{
                 date: lastValue.date_unix,
-                source: positiveTestPeopleText.bronnen.rivm,
+                source: textVr.positief_geteste_personen.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -149,10 +165,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
-            title={positiveTestPeopleText.linechart_titel}
+            metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
+            title={textVr.positief_geteste_personen.linechart_titel}
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            description={positiveTestPeopleText.linechart_description}
+            description={textVr.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -166,15 +182,19 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'newly_infected_people_moving_average',
                     label:
-                      positiveTestPeopleText.line_chart_newly_infected_people_moving_average,
+                      textVr.positief_geteste_personen
+                        .line_chart_newly_infected_people_moving_average,
                     shortLabel:
-                      positiveTestPeopleText.line_chart_newly_infected_people_moving_average_short_label,
+                      textVr.positief_geteste_personen
+                        .line_chart_newly_infected_people_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'newly_infected_people',
-                    label: positiveTestPeopleText.line_chart_legend_trend_label,
+                    label:
+                      textVr.positief_geteste_personen
+                        .line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -184,7 +204,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedDateStart,
                       end: Infinity,
                       label:
-                        positiveTestPeopleText.line_chart_legend_inaccurate_label,
+                        textVr.positief_geteste_personen
+                          .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
                         'newly_infected_people_moving_average',
@@ -203,26 +224,26 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="besmette-locaties"
-            title={replaceVariablesInText(locationsText.titel, {
+            title={replaceVariablesInText(textVr.besmette_locaties.titel, {
               safetyRegion: vrName,
             })}
             icon={<Locatie />}
-            description={locationsText.pagina_toelichting}
+            description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
-              datumsText: locationsText.datums,
+              datumsText: textVr.besmette_locaties.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [locationsText.bronnen.rivm],
+              dataSources: [textVr.besmette_locaties.bronnen.rivm],
             }}
-            referenceLink={locationsText.reference.href}
+            referenceLink={textVr.besmette_locaties.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={locationsText.kpi_titel}
+              title={textVr.besmette_locaties.kpi_titel}
               metadata={{
                 date: lastValue.date_unix,
-                source: locationsText.bronnen.rivm,
+                source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -234,34 +255,34 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 isAmount
               />
-              <Text>{locationsText.kpi_toelichting}</Text>
+              <Text>{textVr.besmette_locaties.kpi_toelichting}</Text>
             </KpiTile>
             <KpiTile
-              title={locationsText.barscale_titel}
+              title={textVr.besmette_locaties.barscale_titel}
               metadata={{
                 date: lastValue.date_unix,
-                source: locationsText.bronnen.rivm,
+                source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="newly_infected_locations"
                 absolute={lastValue.newly_infected_locations}
               />
-              <Text>{locationsText.barscale_toelichting}</Text>
+              <Text>{textVr.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
 
           {lastValue.infected_locations_total !== undefined && (
             <ChartTile
-              title={locationsText.linechart_titel}
+              title={textVr.besmette_locaties.linechart_titel}
               metadata={{
-                source: locationsText.bronnen.rivm,
+                source: textVr.besmette_locaties.bronnen.rivm,
               }}
               timeframeOptions={[
                 TimeframeOption.ALL,
                 TimeframeOption.FIVE_WEEKS,
               ]}
-              description={locationsText.linechart_description}
+              description={textVr.besmette_locaties.linechart_description}
             >
               {(timeframe) => (
                 <TimeSeriesChart
@@ -274,7 +295,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'area',
                       metricProperty: 'infected_locations_total',
-                      label: locationsText.linechart_metric_label,
+                      label: textVr.besmette_locaties.linechart_metric_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -285,27 +306,27 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="sterfte"
-            title={replaceVariablesInText(mortalityText.titel, {
+            title={replaceVariablesInText(textVr.oversterfte.titel, {
               safetyRegion: vrName,
             })}
             icon={<Coronavirus />}
-            description={mortalityText.pagina_toelichting}
+            description={textVr.oversterfte.pagina_toelichting}
             metadata={{
-              datumsText: mortalityText.datums,
+              datumsText: textVr.oversterfte.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [mortalityText.bronnen.rivm],
+              dataSources: [textVr.oversterfte.bronnen.rivm],
             }}
-            referenceLink={mortalityText.reference.href}
+            referenceLink={textVr.oversterfte.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={mortalityText.barscale_titel}
-              description={mortalityText.extra_uitleg}
+              title={textVr.oversterfte.barscale_titel}
+              description={textVr.oversterfte.extra_uitleg}
               metadata={{
                 date: lastValue.date_unix,
-                source: mortalityText.bronnen.rivm,
+                source: textVr.oversterfte.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -316,10 +337,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: mortalityText.bronnen.rivm }}
-            title={mortalityText.linechart_titel}
+            metadata={{ source: textVr.oversterfte.bronnen.rivm }}
+            title={textVr.oversterfte.linechart_titel}
             timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            description={mortalityText.linechart_description}
+            description={textVr.oversterfte.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -333,15 +354,17 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
-                      mortalityText.line_chart_deceased_daily_moving_average,
+                      textVr.oversterfte
+                        .line_chart_deceased_daily_moving_average,
                     shortLabel:
-                      mortalityText.line_chart_deceased_daily_moving_average_short_label,
+                      textVr.oversterfte
+                        .line_chart_deceased_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
-                    label: mortalityText.line_chart_legend_trend_label,
+                    label: textVr.oversterfte.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -350,7 +373,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedDateStart,
                       end: Infinity,
-                      label: mortalityText.line_chart_legend_inaccurate_label,
+                      label:
+                        textVr.oversterfte.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
