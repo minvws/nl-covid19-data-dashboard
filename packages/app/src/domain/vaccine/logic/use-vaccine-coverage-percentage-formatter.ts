@@ -31,14 +31,14 @@ export function useVaccineCoveragePercentageFormatter(numFractionDigits = 0) {
   const { siteText, formatPercentage } = useIntl();
 
   return getVaccineCoveragePercentageFormatter(
-    siteText.vaccinaties_common,
+    siteText.pages.topicalPage.shared,
     formatPercentage,
     numFractionDigits
   );
 }
 
 function getVaccineCoveragePercentageFormatter(
-  text: SiteText['vaccinaties_common'],
+  text: SiteText['pages']['topicalPage']['shared'],
   formatPercentage: ReturnType<typeof createFormatting>['formatPercentage'],
   numFractionDigits: number
 ) {

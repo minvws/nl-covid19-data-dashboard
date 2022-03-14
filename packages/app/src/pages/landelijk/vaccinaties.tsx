@@ -398,11 +398,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
             <ChartTile
               title={
-                siteText.vaccinations_incidence_age_demographic_chart.title
+                siteText.pages.vaccinationsPage.nl
+                  .incidence_age_demographic_chart.title
               }
               description={
-                siteText.vaccinations_incidence_age_demographic_chart
-                  .description
+                siteText.pages.vaccinationsPage.nl
+                  .incidence_age_demographic_chart.description
               }
             >
               <AgeDemographic
@@ -416,8 +417,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 rightMetricProperty={'fully_vaccinated_per_100k'}
                 formatValue={(n) => `${n}`}
                 text={
-                  siteText.vaccinations_incidence_age_demographic_chart
-                    .chart_text
+                  siteText.pages.vaccinationsPage.nl
+                    .incidence_age_demographic_chart.chart_text
                 }
               />
             </ChartTile>
