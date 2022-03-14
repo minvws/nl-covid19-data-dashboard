@@ -67,9 +67,6 @@ ENV NEXT_PUBLIC_PHASE=$ARG_NEXT_PUBLIC_PHASE
 ENV NEXT_PUBLIC_HOT_RELOAD_LOKALIZE=ARG_NEXT_PUBLIC_HOT_RELOAD_LOKALIZE
 ENV API_URL=$ARG_API_URL
 
-# Layer that always gets executed
-# FROM builder
-
 # Yarn download uses the API_URL env variable to download the zip with JSONs from the provided URL.
 RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
@@ -92,7 +89,3 @@ USER nextjs
 WORKDIR /app
 
 CMD ["yarn", "start"]
-
-# ideas:
-# - install runtime dependencies after build
-# - copy only the .next + public folders?
