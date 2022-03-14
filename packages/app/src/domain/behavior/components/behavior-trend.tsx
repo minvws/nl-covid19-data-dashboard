@@ -27,13 +27,13 @@ const Trend = styled.span((a) =>
 
 export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
   const { siteText } = useIntl();
-  const commonText = siteText.gedrag_common;
+  const behaviorPageText = siteText.pages.behaviorPage.shared;
 
   if (trend === 'up') {
     return (
       <Trend color={color}>
         <Up />
-        {commonText.basisregels.trend_hoger}
+        {behaviorPageText.basisregels.trend_hoger}
       </Trend>
     );
   }
@@ -41,7 +41,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
     return (
       <Trend color={color}>
         <Down />
-        {commonText.basisregels.trend_lager}
+        {behaviorPageText.basisregels.trend_lager}
       </Trend>
     );
   }
@@ -49,7 +49,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
     return (
       <Trend color={colors.data.neutral}>
         <Gelijk />
-        {commonText.basisregels.trend_gelijk}
+        {behaviorPageText.basisregels.trend_gelijk}
       </Trend>
     );
   }

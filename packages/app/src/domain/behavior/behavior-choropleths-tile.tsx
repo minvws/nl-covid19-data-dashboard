@@ -39,6 +39,7 @@ export function BehaviorChoroplethsTile({
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
+  const behaviorPageText = siteText.pages.behaviorPage;
 
   const keysWithoutData = useMemo(() => {
     const firstRegionData = data.behavior[0];
@@ -67,14 +68,14 @@ export function BehaviorChoroplethsTile({
       <Box spacing={4} height="100%">
         <Box width={breakpoints.lg ? '50%' : '100%'}>
           <SelectBehavior
-            label={siteText.nl_gedrag.select_behaviour_label}
+            label={behaviorPageText.nl.select_behaviour_label}
             value={currentId}
             onChange={setCurrentId}
           />
         </Box>
         <Box display="flex" flexWrap="wrap" spacing={{ _: 4, md: 0 }}>
           <ChoroplethBlock
-            title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
+            title={behaviorPageText.nl.verdeling_in_nederland.compliance_title}
             data={data}
             behaviorType="compliance"
             currentId={currentId}
@@ -82,7 +83,7 @@ export function BehaviorChoroplethsTile({
           />
 
           <ChoroplethBlock
-            title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
+            title={behaviorPageText.nl.verdeling_in_nederland.support_title}
             data={data}
             behaviorType="support"
             currentId={currentId}
@@ -110,6 +111,7 @@ function ChoroplethBlock({
   title,
 }: ChoroplethBlockProps) {
   const { siteText } = useIntl();
+  const behaviorPageText = siteText.pages.behaviorPage;
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
 
@@ -135,7 +137,7 @@ function ChoroplethBlock({
             css={css({ zIndex: 9 })}
           >
             <Text textAlign="center" css={css({ maxWidth: '300px' })}>
-              {siteText.nl_gedrag.verdeling_in_nederland.geen_beschikbare_data}
+              {behaviorPageText.nl.verdeling_in_nederland.geen_beschikbare_data}
             </Text>
           </Box>
         )}
@@ -192,7 +194,7 @@ function ChoroplethBlock({
       >
         <ChoroplethLegenda
           thresholds={thresholds.vr[metricProperty]}
-          title={siteText.gedrag_common.basisregels.header_percentage}
+          title={behaviorPageText.shared.basisregels.header_percentage}
         />
       </Box>
     </Box>

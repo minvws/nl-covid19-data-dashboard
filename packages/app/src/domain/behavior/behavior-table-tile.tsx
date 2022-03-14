@@ -44,7 +44,7 @@ export function BehaviorTableTile({
   scrollRef,
 }: BehaviorTableTileProps) {
   const { siteText } = useIntl();
-  const commonText = siteText.gedrag_common;
+  const behaviorPageText = siteText.pages.behaviorPage.shared;
   const behaviorsTableData = useBehaviorTableData(value);
 
   return (
@@ -74,7 +74,7 @@ export function BehaviorTableTile({
                   }),
                 })}
               >
-                {commonText.basisregels.header_basisregel}
+                {behaviorPageText.basisregels.header_basisregel}
               </HeaderCell>
               <HeaderCell
                 css={css({
@@ -90,14 +90,14 @@ export function BehaviorTableTile({
                   }),
                 })}
               >
-                {commonText.basisregels.header_percentage}
+                {behaviorPageText.basisregels.header_percentage}
               </HeaderCell>
               <HeaderCell
                 css={css({
                   width: trendColumnWidth,
                 })}
               >
-                {commonText.basisregels.header_trend}
+                {behaviorPageText.basisregels.header_trend}
               </HeaderCell>
             </Row>
           </thead>

@@ -35,7 +35,7 @@ export function BehaviorLineChartTile({
   behaviorOptions,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
-  const chartText = siteText.gedrag_common.line_chart;
+  const behaviorPageText = siteText.pages.behaviorPage;
 
   const selectedComplianceValueKey =
     `${currentId}_compliance` as keyof NlBehaviorValue;
@@ -52,9 +52,9 @@ export function BehaviorLineChartTile({
 
   return (
     <ChartTile
-      title={chartText.title}
+      title={behaviorPageText.shared.line_chart.title}
       metadata={metadata}
-      description={chartText.description}
+      description={behaviorPageText.shared.line_chart.description}
     >
       <Box spacing={4}>
         <Box
@@ -66,7 +66,7 @@ export function BehaviorLineChartTile({
         >
           <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior
-              label={siteText.nl_gedrag.select_behaviour_label}
+              label={behaviorPageText.nl.select_behaviour_label}
               value={currentId}
               onChange={setCurrentId}
               options={behaviorOptions}
@@ -74,9 +74,14 @@ export function BehaviorLineChartTile({
           </Box>
 
           {(complianceValuesHasGap || supportValuesHasGap) && (
-            <InlineTooltip content={chartText.tooltip_witte_gaten_beschrijving}>
+            <InlineTooltip
+              content={
+                behaviorPageText.shared.line_chart
+                  .tooltip_witte_gaten_beschrijving
+              }
+            >
               <InlineText fontWeight="bold">
-                {chartText.tooltip_witte_gaten_label}
+                {behaviorPageText.shared.line_chart.tooltip_witte_gaten_label}
               </InlineText>
             </InlineTooltip>
           )}
@@ -91,16 +96,18 @@ export function BehaviorLineChartTile({
             {
               type: 'gapped-line',
               metricProperty: selectedComplianceValueKey,
-              label: chartText.compliance_label,
-              shortLabel: chartText.compliance_short_label,
+              label: behaviorPageText.shared.line_chart.compliance_label,
+              shortLabel:
+                behaviorPageText.shared.line_chart.compliance_short_label,
               strokeWidth: 3,
               color: colors.data.cyan,
             },
             {
               type: 'gapped-line',
               metricProperty: selectedSupportValueKey,
-              label: chartText.support_label,
-              shortLabel: chartText.support_short_label,
+              label: behaviorPageText.shared.line_chart.support_label,
+              shortLabel:
+                behaviorPageText.shared.line_chart.support_short_label,
               strokeWidth: 3,
               color: colors.data.yellow,
             },
