@@ -34,6 +34,10 @@ const gmRedirects = [
     from: ['0756', '1684', '0786', '0815', '1702'],
     to: '1982',
   },
+  {
+    from: ['0457'],
+    to: '0363',
+  },
 ];
 
 const nextConfig = {
@@ -172,20 +176,20 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
 
   webpack(config) {
-    config.optimization.chunkIds = 'named',
-    config.module.rules.push({
-      test: /\.svg$/,
-      type: 'asset',
-      use: 'svgo-loader',
-      generator: {
-        filename: 'static/image/[name].[hash][ext]',
-      },
-      parser: {
-        dataUrlCondition: {
-          maxSize: 2 * 1024, // only inline SVG's < 2kB
+    (config.optimization.chunkIds = 'named'),
+      config.module.rules.push({
+        test: /\.svg$/,
+        type: 'asset',
+        use: 'svgo-loader',
+        generator: {
+          filename: 'static/image/[name].[hash][ext]',
         },
-      },
-    });
+        parser: {
+          dataUrlCondition: {
+            maxSize: 2 * 1024, // only inline SVG's < 2kB
+          },
+        },
+      });
 
     config.resolve.alias = {
       ...config.resolve.alias,
