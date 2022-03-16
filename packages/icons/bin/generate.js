@@ -56,35 +56,13 @@ const allowedAttributes = [
   'height',
   'fill',
   'stroke',
-  'viewbox',
+  'viewBox',
   'role',
   'focusable',
   'rest',
-  'xmlns',
 ];
 
-const allowedAttributesForChildren = [
-  'width',
-  'height',
-  'transform',
-  'fill',
-  'fill-rule',
-  'clip-rule',
-  'stroke',
-  'stroke-width',
-  'stroke-linecap',
-  'points',
-  'd',
-  'r',
-  'x',
-  'cx',
-  'rx',
-  'y',
-  'cy',
-  'ry',
-]
-
-const attrsToString = (attrs, isSvgRoot = false) => {
+const attrsToString = (attrs) => {
   return Object.keys(attrs)
     // Remove all excluded keys because we want clean, predictable components
     .filter((key) => {
@@ -104,16 +82,16 @@ const attrsToString = (attrs, isSvgRoot = false) => {
           case '#FFF':
           case '#FFFFFFF':
           case 'WHITE':
-            return key + '="fff"'; // ToDo: remove when design-team adjusted all current layered SVG's
+            return key + '="fff"'; // ToDo: remove when design-team adjuste all current layered SVG's
           default:
             return key + '="currentColor"';
         }
       }
-      if (key === 'width' && isSvgRoot) {
+      if (key === 'width') {
         // Convert any width and height to viewbox dimensions.
         return attrs['height'] && !attrs['viewbox'] ? `viewbox="0 0 ${attrs['width']} ${attrs['height']}"`: ``;
       }
-      if (key === 'height' && isSvgRoot) {
+      if (key === 'height') {
         return
       }
       return key + '="' + attrs[key] + '"';
@@ -121,9 +99,8 @@ const attrsToString = (attrs, isSvgRoot = false) => {
     .join(' ')
 };
 
-const validateAttrs = (key, attribute, i) => {
+const validateAttrs = (key, attribute ) => {
   if (key === 'fill' || key === 'stroke') {
-    // remove all hardcoded colors and assign a currontColor value so css can determine the rifght color for the icon
     switch (attribute) {
       case 'currentColor':
         break
@@ -133,23 +110,19 @@ const validateAttrs = (key, attribute, i) => {
       case '#FFF':
       case '#FFFFFFF':
       case 'WHITE':
-        break  
-        // ToDo: remove when design-team adjusted all current layered SVG's
-        // to never have a white element and uncomment the line below to return the console output
-        // return `${key}="${attribute}" has a white ${key}; Which is not allowed.`;
+        return `${key}="${attribute}" has a white ${key}; Which is not allowed.`;
       case 'none':
         return `${key}="${attribute}" has a ${key} of none; Which is not allowed.`;
       default:
         return `${key}="${attribute}" has a hardcoded colored ${key}; Which is not allowed.` ;
     }
   }
-  // show non squared icons. It does not break the icon, but isn't according the design rules.'
   if (key === 'width' || key === 'height') {
     return `Element contains ${key} which is not allowed"`;
   }
   if (key === 'viewbox') {
     if (attribute !== '0 0 56 56') {
-      console.log(`WARNING: File: 'src/svg/${i}.svg' contains: ${key}="${attribute}" which does not comply with viewbox="0 0 56 56"`);
+      return `${key}="${attribute}" does not comply with viewbox="0 0 56 56"`;
     }
   }
   return false;
@@ -184,23 +157,6 @@ icons.forEach((i) => {
   const { attributes } = parsedSvg;
 
   /**
-   * Not allowed attributes needed to be filtered out.
-   * These attributes could lead to issues/errors.
-   * We loop over the attributes and remove them automatically
-   */
-  const parsedChildrenForSvgExport = parsedSvg.children.map((child) => {
-    for (const [key] of Object.entries(child.attributes)) {
-      if (!allowedAttributesForChildren.includes(key)) {
-        delete child.attributes[key]
-      }
-    }
-    return child;
-  });
-
-  // Stringify the children so we can wrap it in a SVG container later
-  const svgExportChildrenInString = stringify(parsedSvg.children);
-
-  /**
    * All keys in React need to be camelCased in order to work
    * We loop over the attributes and rename them automatically with the camelcase package
    */
@@ -226,11 +182,11 @@ icons.forEach((i) => {
     rest: '...rest',
   };
 
-  const childAttrs = parsedChildrenForSvgExport.map((child) => child.attributes);
+  const childAttrs = parsedSvg.children.map((child) => child.attributes);
   
   const attributesWithErrors = {
-    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key], i)).filter(Boolean),
-    children: Object.keys(childAttrs).map((key) => validateAttrs(key, childAttrs[key], i)).filter(Boolean)
+    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key])).filter(Boolean),
+    children: Object.keys(childAttrs).map((key) => validateAttrs(key, childAttrs[key])).filter(Boolean)
   }
 
   const element = `
@@ -238,7 +194,7 @@ icons.forEach((i) => {
 
     const ${ComponentName} = forwardRef<SVGElement, any>(({ ...rest }, ref) => {
       return (
-        <svg ref={ref} ${attrsToString(defaultAttrs, true)} >
+        <svg ref={ref} ${attrsToString(defaultAttrs)} >
           ${iconWithoutWrapper}
         </svg>
       )
@@ -249,14 +205,10 @@ icons.forEach((i) => {
     export default ${ComponentName}
   `;
 
-  //Refactor the SVG into a compliant version
+  const innerSvg = parsedSvg.children.map((child) => (child.attributes = attrsToString(child.attributes)));
+
   const svgElement = () => {
-    const noXmlns = !Object.keys(attributes).includes('xmlns')
-    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0 || noXmlns) {
-      // Console output, for informing users about the wrong elements inside a SVG.
-      if (noXmlns) {
-        console.warn('No xmlns attribute in the SVG-tag found - please fix');
-      }
+    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0) {
       console.log(`File: 'src/svg/${i}.svg'
 React component result: 'src/icons/${i}.tsx' Please check.
   ${attributesWithErrors.svgElement.length > 0 ? `Inside <svg>:\n    -${attributesWithErrors.svgElement.join('\n    -')}` : ''}
@@ -268,20 +220,20 @@ React component result: 'src/icons/${i}.tsx' Please check.
         ...attributes,
       };
 
-      return `<svg ${attrsToString(svgAttributes, true)}>
-  ${svgExportChildrenInString}
-</svg>`;
+      return `<svg ${attrsToString(svgAttributes)}>
+        ${innerSvg}
+      </svg>`;
     }
     return false;
   }
   
-  //Export new compliant SVG
-  const changedSvg = svgElement();
-  if (changedSvg) {
-    fs.writeFileSync(svgLocation, changedSvg, 'utf-8');
+  const changedSvgs = svgElement();
+  if (changedSvgs) {
+    fs.writeFileSync(svgLocation, changedSvgs, 'utf-8');
   
     newSvgsExported = true;
   }
+
 
   const component = format({
     text: element,
@@ -315,7 +267,7 @@ icons
   .forEach((x) => {
     fs.copyFileSync(path.join(svgDir, x), path.join(destSvgDir, x));
   });
-  
+
 if (newSvgsExported) {
   console.log(`New SVG export(s) made`);
 } else {
