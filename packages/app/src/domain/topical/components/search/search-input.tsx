@@ -72,10 +72,6 @@ const StyledSearchInput = styled.input(
     appearance: 'none',
     m: 0,
 
-    '&:focus': {
-      outline: '2px dotted currentColor !important',
-    },
-
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
@@ -88,11 +84,18 @@ const StyledSearchInput = styled.input(
       pr: 2,
     },
 
+    '&:focus, &:focus:focus-visible': {
+      outline: 'none',
+    },
+
     '[aria-expanded="true"] &': {
       borderColor: 'blue',
       borderBottomColor: 'border',
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
+      '&:focus': {
+        outline: 'none',
+      },
     },
   })
 );
