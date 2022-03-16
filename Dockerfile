@@ -67,25 +67,21 @@ ENV NEXT_PUBLIC_PHASE=$ARG_NEXT_PUBLIC_PHASE
 ENV NEXT_PUBLIC_HOT_RELOAD_LOKALIZE=ARG_NEXT_PUBLIC_HOT_RELOAD_LOKALIZE
 ENV API_URL=$ARG_API_URL
 
+# Layer that always gets executed
+FROM builder
+
 # Yarn download uses the API_URL env variable to download the zip with JSONs from the provided URL.
 RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
 && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$NEXT_PUBLIC_SANITY_DATASET \
 && yarn workspace @corona-dashboard/app build \
-&& mkdir -p /app/packages/app/public/images/choropleth
-
-FROM node:lts-alpine as runner
-COPY --from=builder /app /app
-
-RUN addgroup -g 1001 -S nodejs \
-&& adduser -S nextjs -u 1001
-
-RUN chown -R nextjs:nodejs /app/packages/app/.next \
+&& mkdir -p /app/packages/app/public/images/choropleth \
+&& addgroup -g 1001 -S nodejs \
+&& adduser -S nextjs -u 1001 \
+&& chown -R nextjs:nodejs /app/packages/app/.next \
 && chown -R nextjs:nodejs /app/packages/app/public/images/choropleth
 
 USER nextjs
-
-WORKDIR /app
 
 CMD ["yarn", "start"]

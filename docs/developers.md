@@ -57,12 +57,6 @@ docker exec -ti <containerId> sh
 du -h -d 1 | sort -n
 ```
 
-Clean Docker caches:
-
-```sh
-docker system prune
-```
-
 ## Testing Windows screenreaders on Mac
 
 To properly test accessibility on Mac, screenreaders for Windows should be
