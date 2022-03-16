@@ -63,24 +63,70 @@ const allowedAttributes = [
 ];
 
 const attrsToString = (attrs) => {
-  return (
-    Object.keys(attrs)
-      // Remove all excluded keys because we want clean, predictable components
-      .filter((key) => {
-        return allowedAttributes.includes(key);
-      })
-      .map((key) => {
-        if (key === 'width' || key === 'height') {
-          return key + '={' + attrs[key] + '}';
+  return Object.keys(attrs)
+    // Remove all excluded keys because we want clean, predictable components
+    .filter((key) => {
+      return allowedAttributes.includes(key);
+    })
+    .map((key) => {
+      if (key === 'rest') {
+        return '{...rest}';
+      }
+      if (key === 'fill' || key === 'stroke') {
+        switch (attrs[key]) {
+          case 'currentColor':
+            return key + '="currentColor"';
+          case '#fff':
+          case '#ffffff':
+          case 'white':
+          case '#FFF':
+          case '#FFFFFFF':
+          case 'WHITE':
+            return key + '="fff"'; // ToDo: remove when design-team adjuste all current layered SVG's
+          default:
+            return key + '="currentColor"';
         }
-        if (key === 'rest') {
-          return '{...rest}';
-        }
-        return key + '="' + attrs[key] + '"';
-      })
-      .join(' ')
-  );
+      }
+      if (key === 'width') {
+        // Convert any width and height to viewbox dimensions.
+        return attrs['height'] && !attrs['viewbox'] ? `viewbox="0 0 ${attrs['width']} ${attrs['height']}"`: ``;
+      }
+      if (key === 'height') {
+        return
+      }
+      return key + '="' + attrs[key] + '"';
+    })
+    .join(' ')
 };
+
+const validateAttrs = (key, attribute ) => {
+  if (key === 'fill' || key === 'stroke') {
+    switch (attribute) {
+      case 'currentColor':
+        break
+      case '#fff':
+      case '#ffffff':
+      case 'white':
+      case '#FFF':
+      case '#FFFFFFF':
+      case 'WHITE':
+        return `${key}="${attribute}" has a white ${key}; Which is not allowed.`;
+      case 'none':
+        return `${key}="${attribute}" has a ${key} of none; Which is not allowed.`;
+      default:
+        return `${key}="${attribute}" has a hardcoded colored ${key}; Which is not allowed.` ;
+    }
+  }
+  if (key === 'width' || key === 'height') {
+    return `Element contains ${key} which is not allowed"`;
+  }
+  if (key === 'viewbox') {
+    if (attribute !== '0 0 56 56') {
+      return `${key}="${attribute}" does not comply with viewbox="0 0 56 56"`;
+    }
+  }
+  return false;
+}
 
 const lookup = icons.sort().map((x) => `${pascalcase(x)}: '${x}.svg'`);
 
@@ -100,8 +146,11 @@ fs.writeFileSync(
   { encoding: 'utf-8' }
 );
 
+let newSvgsExported = false;
+
 icons.forEach((i) => {
   const location = path.join(rootDir, 'src/icons', `${i}.tsx`);
+  const svgLocation = path.join(rootDir, 'src/svg', `${i}.svg`);
   const ComponentName = pascalcase(i);
 
   const parsedSvg = parseSync(svgIcons[i]);
@@ -133,6 +182,13 @@ icons.forEach((i) => {
     rest: '...rest',
   };
 
+  const childAttrs = parsedSvg.children.map((child) => child.attributes);
+  
+  const attributesWithErrors = {
+    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key])).filter(Boolean),
+    children: Object.keys(childAttrs).map((key) => validateAttrs(key, childAttrs[key])).filter(Boolean)
+  }
+
   const element = `
     import React, {forwardRef} from 'react';
 
@@ -148,6 +204,36 @@ icons.forEach((i) => {
 
     export default ${ComponentName}
   `;
+
+  const innerSvg = parsedSvg.children.map((child) => (child.attributes = attrsToString(child.attributes)));
+
+  const svgElement = () => {
+    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0) {
+      console.log(`File: 'src/svg/${i}.svg'
+React component result: 'src/icons/${i}.tsx' Please check.
+  ${attributesWithErrors.svgElement.length > 0 ? `Inside <svg>:\n    -${attributesWithErrors.svgElement.join('\n    -')}` : ''}
+  ${attributesWithErrors.children.length > 0 ? `Inside a child:\n    -${attributesWithErrors.children.join('\n    -')}` : ''}
+`);
+
+      const svgAttributes = {
+        xmlns: 'http://www.w3.org/2000/svg',
+        ...attributes,
+      };
+
+      return `<svg ${attrsToString(svgAttributes)}>
+        ${innerSvg}
+      </svg>`;
+    }
+    return false;
+  }
+  
+  const changedSvgs = svgElement();
+  if (changedSvgs) {
+    fs.writeFileSync(svgLocation, changedSvgs, 'utf-8');
+  
+    newSvgsExported = true;
+  }
+
 
   const component = format({
     text: element,
@@ -181,5 +267,11 @@ icons
   .forEach((x) => {
     fs.copyFileSync(path.join(svgDir, x), path.join(destSvgDir, x));
   });
+
+if (newSvgsExported) {
+  console.log(`New SVG export(s) made`);
+} else {
+  console.log(`No SVG changes made`);
+}
 
 console.log('Done writing Icons');
