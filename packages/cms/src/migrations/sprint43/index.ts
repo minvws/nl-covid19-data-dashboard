@@ -8,8 +8,9 @@
  * NOTE: For the time being you should not delete more than ~1000 documents in one transaction. This will change in the future.
  * See docs:https://www.sanity.io/docs/http-api/http-mutations#deleting-multiple-documents-by-query
  */
-import sanityClient from 'part:@sanity/base/client';
-const client = sanityClient.withConfig({ apiVersion: 'v1' });
+
+import { getClient } from '../../client';
+const client = getClient('production');
 
 const types = [
   '"articlePageArticle"',
@@ -19,13 +20,16 @@ const types = [
   '"elderlyAtHomePage"',
   '"escalationLevelPage"',
   '"internationalPage"',
+  '"in_variantsPage"',
   '"nursingHomePage"',
+  '"sewerPage"',
+  '"TopicalPage"',
   '"vaccinationsPage"',
 ];
 
 client
   .delete({
-    query: `*[_type in [${types.join(', ')}]][0...999]`,
+    query: `*[_type in [${types.join(', ')}]]`,
   })
   .then(console.log)
   .catch(console.error);
