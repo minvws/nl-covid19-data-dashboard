@@ -1,5 +1,5 @@
 import { geoConicConformal, geoMercator } from 'd3-geo';
-import { FocusEvent, memo, useMemo, useRef } from 'react';
+import { FocusEvent, memo, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
