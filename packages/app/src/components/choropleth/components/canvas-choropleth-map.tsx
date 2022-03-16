@@ -38,7 +38,6 @@ export type CanvasChoroplethMapProps = {
   anchorEventHandlers: AnchorEventHandler;
   annotations: AccessibilityAnnotations;
   choroplethFeatures: ChoroplethFeatures;
-  containerRef: MutableRefObject<HTMLDivElement | null>;
   dataOptions: DataOptions;
   featureOutHandler: ChoroplethTooltipHandlers[1];
   featureOverHandler: ChoroplethTooltipHandlers[0];
@@ -64,7 +63,6 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
     anchorEventHandlers,
     annotations,
     choroplethFeatures,
-    containerRef,
     dataOptions,
     featureOutHandler,
     featureOverHandler,
@@ -168,7 +166,6 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
         handleMouseOver={handleMouseOver}
       />
       <div
-        ref={containerRef}
         style={{
           minHeight: height,
           maxHeight: '75vh',
