@@ -177,19 +177,19 @@ const nextConfig = {
 
   webpack(config) {
     (config.optimization.chunkIds = 'named'),
-      config.module.rules.push({
-        test: /\.svg$/,
-        type: 'asset',
-        use: 'svgo-loader',
-        generator: {
-          filename: 'static/image/[name].[hash][ext]',
+    config.module.rules.push({
+      test: /\.svg$/,
+      type: 'asset',
+      use: 'svgo-loader',
+      generator: {
+        filename: 'static/image/[name].[hash][ext]',
         },
-        parser: {
-          dataUrlCondition: {
-            maxSize: 2 * 1024, // only inline SVG's < 2kB
-          },
+      parser: {
+        dataUrlCondition: {
+          maxSize: 2 * 1024, // only inline SVG's < 2kB
         },
-      });
+      },
+    });
 
     config.resolve.alias = {
       ...config.resolve.alias,
