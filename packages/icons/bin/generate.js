@@ -95,6 +95,9 @@ const attrsToString = (attrs, isSvgRoot = false) => {
         return '{...rest}';
       }
       if (key === 'fill' || key === 'stroke') {
+        if (isSvgRoot) {
+          return key + '="' + attrs[key] + '"';
+        }
         switch (attrs[key]) {
           case 'currentColor':
             return key + '="currentColor"';
@@ -104,7 +107,7 @@ const attrsToString = (attrs, isSvgRoot = false) => {
           case '#FFF':
           case '#FFFFFFF':
           case 'WHITE':
-            return key + '="fff"'; // ToDo: remove when design-team adjusted all current layered SVG's
+            return key + '="#fff"'; // ToDo: remove when design-team adjusted all current layered SVG's
           default:
             return key + '="currentColor"';
         }
@@ -122,8 +125,38 @@ const attrsToString = (attrs, isSvgRoot = false) => {
     .join(' ')
 };
 
-const validateAttrs = (key, attribute, i) => {
+const fixAttrs = (attrs) => {
+  for (const [key] of Object.entries(attrs)) {
+    // Remove all excluded keys because we want clean, predictable components
+    if (!allowedAttributesForChildren.includes(key)) {
+      delete attrs[key]
+    } else {
+      if (key === 'fill' || key === 'stroke') {
+        switch (attrs[key]) {
+          case '#fff':
+          case '#ffffff':
+          case 'white':
+          case '#FFF':
+          case '#FFFFFFF':
+          case 'WHITE':
+            attrs[key] = '#fff'; // ToDo: remove when design-team adjusted all current layered SVG's
+            break
+          default:
+            attrs[key] = 'currentColor';
+        }
+      }
+    }
+  }
+
+  return attrs
+};
+
+const validateAttrs = (key, attribute, i, isSvgRoot = false) => {
   if (key === 'fill' || key === 'stroke') {
+    // Bypass SVG root eelement, which may contain other fill then children elements
+    if (isSvgRoot) {
+      return false;
+    }
     // remove all hardcoded colors and assign a currontColor value so css can determine the rifght color for the icon
     switch (attribute) {
       case 'currentColor':
@@ -144,7 +177,7 @@ const validateAttrs = (key, attribute, i) => {
         return `${key}="${attribute}" has a hardcoded colored ${key}; Which is not allowed.` ;
     }
   }
-  // show non squared icons. It does not break the icon, but isn't according the design rules.'
+  // Show non squared icons. It does not break the icon, but isn't according the design rules.'
   if (key === 'width' || key === 'height') {
     return `Element contains ${key} which is not allowed"`;
   }
@@ -190,16 +223,12 @@ icons.forEach((i) => {
    * We loop over the attributes and remove them automatically
    */
   const parsedChildrenForSvgExport = parsedSvg.children.map((child) => {
-    for (const [key] of Object.entries(child.attributes)) {
-      if (!allowedAttributesForChildren.includes(key)) {
-        delete child.attributes[key]
-      }
-    }
+    child.attributes = fixAttrs(child.attributes);
     return child;
   });
 
   // Stringify the children so we can wrap it in a SVG container later
-  const svgExportChildrenInString = stringify(parsedSvg.children);
+  const svgExportChildrenInString = stringify(parsedChildrenForSvgExport);
 
   /**
    * All keys in React need to be camelCased in order to work
@@ -227,10 +256,10 @@ icons.forEach((i) => {
     rest: '...rest',
   };
 
-  const childAttrs = parsedChildrenForSvgExport.map((child) => child.attributes);
+  const childAttrs = parsedSvg.children.map((child) => child.attributes);
   
   const attributesWithErrors = {
-    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key], i)).filter(Boolean),
+    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key], i, true)).filter(Boolean),
     children: Object.keys(childAttrs).map((key) => validateAttrs(key, childAttrs[key], i)).filter(Boolean)
   }
 
@@ -250,7 +279,7 @@ icons.forEach((i) => {
     export default ${ComponentName}
   `;
 
-  //Refactor the SVG into a compliant version
+  // Refactor the SVG into a compliant version
   const svgElement = () => {
     const noXmlns = !Object.keys(attributes).includes('xmlns')
     const noViewBox = !Object.keys(attributes).includes('viewBox') && !Object.keys(attributes).includes('height' || 'width')
@@ -280,7 +309,7 @@ React component result: 'src/icons/${i}.tsx' Please check.
     return false;
   }
   
-  //Export new compliant SVG
+  // Export new compliant SVG
   const changedSvg = svgElement();
   if (changedSvg) {
     fs.writeFileSync(svgLocation, changedSvg, 'utf-8');
