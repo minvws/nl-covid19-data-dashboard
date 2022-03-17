@@ -304,6 +304,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               boostered: formatPercentageAsNumber(
                 `${boosterCoverageLastValue.percentage}`
               ),
+              third_shot: thirdShotAdministeredLastValue.administered_total,
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
@@ -631,11 +632,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text: textNl.booster_ggd_kpi_section.sources.text,
               },
             }}
-          />
-          <VaccinationsShotKpiSection
-            text={textNl.booster_and_third_kpi}
-            value={thirdShotAdministeredLastValue.administered_total}
-            date={thirdShotAdministeredLastValue.date_unix}
           />
           <Divider />
           <PageInformationBlock
