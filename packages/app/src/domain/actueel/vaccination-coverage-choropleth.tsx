@@ -87,7 +87,7 @@ type VaccinationCoverageChoroplethProps = GmCoverage | VrCoverage | NlCoverage;
 export function VaccinationCoverageChoropleth(
   props: VaccinationCoverageChoroplethProps
 ) {
-  const { defaultCoverageKind = 'fully_vaccinated_percentage' } = props;
+  const { defaultCoverageKind = 'booster_shot_percentage' } = props;
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
