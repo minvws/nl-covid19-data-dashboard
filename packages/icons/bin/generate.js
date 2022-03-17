@@ -60,6 +60,7 @@ const allowedAttributes = [
   'role',
   'focusable',
   'rest',
+  'xmlns',
 ];
 
 const allowedAttributesForChildren = [
@@ -103,7 +104,7 @@ const attrsToString = (attrs, isSvgRoot = false) => {
           case '#FFF':
           case '#FFFFFFF':
           case 'WHITE':
-            return key + '="fff"'; // ToDo: remove when design-team adjuste all current layered SVG's
+            return key + '="fff"'; // ToDo: remove when design-team adjusted all current layered SVG's
           default:
             return key + '="currentColor"';
         }
@@ -122,6 +123,7 @@ const attrsToString = (attrs, isSvgRoot = false) => {
 
 const validateAttrs = (key, attribute, i) => {
   if (key === 'fill' || key === 'stroke') {
+    // remove all hardcoded colors and assign a currontColor value so css can determine the rifght color for the icon
     switch (attribute) {
       case 'currentColor':
         break
@@ -131,13 +133,17 @@ const validateAttrs = (key, attribute, i) => {
       case '#FFF':
       case '#FFFFFFF':
       case 'WHITE':
-        return `${key}="${attribute}" has a white ${key}; Which is not allowed.`;
+        break  
+        // ToDo: remove when design-team adjusted all current layered SVG's
+        // to never have a white element and uncomment the line below to return the console output
+        // return `${key}="${attribute}" has a white ${key}; Which is not allowed.`;
       case 'none':
         return `${key}="${attribute}" has a ${key} of none; Which is not allowed.`;
       default:
         return `${key}="${attribute}" has a hardcoded colored ${key}; Which is not allowed.` ;
     }
   }
+  // show non squared icons. It does not break the icon, but isn't according the design rules.'
   if (key === 'width' || key === 'height') {
     return `Element contains ${key} which is not allowed"`;
   }
@@ -178,8 +184,9 @@ icons.forEach((i) => {
   const { attributes } = parsedSvg;
 
   /**
-   * All keys in React need to be camelCased in order to work
-   * We loop over the attributes and rename them automatically with the camelcase package
+   * Not allowed attributes needed to be filtered out.
+   * These attributes could lead to issues/errors.
+   * We loop over the attributes and remove them automatically
    */
   const parsedChildrenForSvgExport = parsedSvg.children.map((child) => {
     for (const [key] of Object.entries(child.attributes)) {
@@ -242,8 +249,14 @@ icons.forEach((i) => {
     export default ${ComponentName}
   `;
 
+  //Refactor the SVG into a compliant version
   const svgElement = () => {
-    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0) {
+    const noXmlns = !Object.keys(attributes).includes('xmlns')
+    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0 || noXmlns) {
+      // Console output, for informing users about the wrong elements inside a SVG.
+      if (noXmlns) {
+        console.warn('No xmlns attribute in the SVG-tag found - please fix');
+      }
       console.log(`File: 'src/svg/${i}.svg'
 React component result: 'src/icons/${i}.tsx' Please check.
   ${attributesWithErrors.svgElement.length > 0 ? `Inside <svg>:\n    -${attributesWithErrors.svgElement.join('\n    -')}` : ''}
@@ -256,12 +269,13 @@ React component result: 'src/icons/${i}.tsx' Please check.
       };
 
       return `<svg ${attrsToString(svgAttributes, true)}>
-        ${svgExportChildrenInString}
-      </svg>`;
+  ${svgExportChildrenInString}
+</svg>`;
     }
     return false;
   }
   
+  //Export new compliant SVG
   const changedSvg = svgElement();
   if (changedSvg) {
     fs.writeFileSync(svgLocation, changedSvg, 'utf-8');
