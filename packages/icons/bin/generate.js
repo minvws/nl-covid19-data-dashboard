@@ -56,7 +56,7 @@ const allowedAttributes = [
   'height',
   'fill',
   'stroke',
-  'viewbox',
+  'viewBox',
   'role',
   'focusable',
   'rest',
@@ -110,14 +110,15 @@ const attrsToString = (attrs, isSvgRoot = false) => {
         }
       }
       if (key === 'width' && isSvgRoot) {
-        // Convert any width and height to viewbox dimensions.
-        return attrs['height'] && !attrs['viewbox'] ? `viewbox="0 0 ${attrs['width']} ${attrs['height']}"`: ``;
+        // Convert any width and height to viewBox dimensions.
+        return attrs['height'] && !attrs['viewBox'] ? `viewBox="0 0 ${attrs['width']} ${attrs['height']}"`: ``;
       }
       if (key === 'height' && isSvgRoot) {
         return
       }
       return key + '="' + attrs[key] + '"';
     })
+    .filter(Boolean) // filter out empty values
     .join(' ')
 };
 
@@ -147,9 +148,9 @@ const validateAttrs = (key, attribute, i) => {
   if (key === 'width' || key === 'height') {
     return `Element contains ${key} which is not allowed"`;
   }
-  if (key === 'viewbox') {
+  if (key === 'viewBox') {
     if (attribute !== '0 0 56 56') {
-      console.log(`WARNING: File: 'src/svg/${i}.svg' contains: ${key}="${attribute}" which does not comply with viewbox="0 0 56 56"`);
+      console.log(`WARNING: File: 'src/svg/${i}.svg' contains: ${key}="${attribute}" which does not comply with viewBox="0 0 56 56"`);
     }
   }
   return false;
@@ -252,10 +253,14 @@ icons.forEach((i) => {
   //Refactor the SVG into a compliant version
   const svgElement = () => {
     const noXmlns = !Object.keys(attributes).includes('xmlns')
-    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0 || noXmlns) {
+    const noViewBox = !Object.keys(attributes).includes('viewBox') && !Object.keys(attributes).includes('height' || 'width')
+    if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0 || noXmlns || noViewBox) {
       // Console output, for informing users about the wrong elements inside a SVG.
       if (noXmlns) {
         console.warn('No xmlns attribute in the SVG-tag found - please fix');
+      }
+      if (noViewBox) {
+        console.warn(`File: 'src/svg/${i}.svg' has no viewBox or width & height attribute in the SVG-tag found - please fix`);
       }
       console.log(`File: 'src/svg/${i}.svg'
 React component result: 'src/icons/${i}.tsx' Please check.
