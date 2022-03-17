@@ -56,13 +56,34 @@ const allowedAttributes = [
   'height',
   'fill',
   'stroke',
-  'viewBox',
+  'viewbox',
   'role',
   'focusable',
   'rest',
 ];
 
-const attrsToString = (attrs) => {
+const allowedAttributesForChildren = [
+  'width',
+  'height',
+  'transform',
+  'fill',
+  'fill-rule',
+  'clip-rule',
+  'stroke',
+  'stroke-width',
+  'stroke-linecap',
+  'points',
+  'd',
+  'r',
+  'x',
+  'cx',
+  'rx',
+  'y',
+  'cy',
+  'ry',
+]
+
+const attrsToString = (attrs, isSvgRoot = false) => {
   return Object.keys(attrs)
     // Remove all excluded keys because we want clean, predictable components
     .filter((key) => {
@@ -87,11 +108,11 @@ const attrsToString = (attrs) => {
             return key + '="currentColor"';
         }
       }
-      if (key === 'width') {
+      if (key === 'width' && isSvgRoot) {
         // Convert any width and height to viewbox dimensions.
         return attrs['height'] && !attrs['viewbox'] ? `viewbox="0 0 ${attrs['width']} ${attrs['height']}"`: ``;
       }
-      if (key === 'height') {
+      if (key === 'height' && isSvgRoot) {
         return
       }
       return key + '="' + attrs[key] + '"';
@@ -99,7 +120,7 @@ const attrsToString = (attrs) => {
     .join(' ')
 };
 
-const validateAttrs = (key, attribute ) => {
+const validateAttrs = (key, attribute, i) => {
   if (key === 'fill' || key === 'stroke') {
     switch (attribute) {
       case 'currentColor':
@@ -122,7 +143,7 @@ const validateAttrs = (key, attribute ) => {
   }
   if (key === 'viewbox') {
     if (attribute !== '0 0 56 56') {
-      return `${key}="${attribute}" does not comply with viewbox="0 0 56 56"`;
+      console.log(`WARNING: File: 'src/svg/${i}.svg' contains: ${key}="${attribute}" which does not comply with viewbox="0 0 56 56"`);
     }
   }
   return false;
@@ -160,6 +181,22 @@ icons.forEach((i) => {
    * All keys in React need to be camelCased in order to work
    * We loop over the attributes and rename them automatically with the camelcase package
    */
+  const parsedChildrenForSvgExport = parsedSvg.children.map((child) => {
+    for (const [key] of Object.entries(child.attributes)) {
+      if (!allowedAttributesForChildren.includes(key)) {
+        delete child.attributes[key]
+      }
+    }
+    return child;
+  });
+
+  // Stringify the children so we can wrap it in a SVG container later
+  const svgExportChildrenInString = stringify(parsedSvg.children);
+
+  /**
+   * All keys in React need to be camelCased in order to work
+   * We loop over the attributes and rename them automatically with the camelcase package
+   */
   parsedSvg.children = parsedSvg.children.map((child) => {
     const copy = child;
     copy.attributes = lodash.mapKeys(copy.attributes, (_value, key) => {
@@ -182,11 +219,11 @@ icons.forEach((i) => {
     rest: '...rest',
   };
 
-  const childAttrs = parsedSvg.children.map((child) => child.attributes);
+  const childAttrs = parsedChildrenForSvgExport.map((child) => child.attributes);
   
   const attributesWithErrors = {
-    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key])).filter(Boolean),
-    children: Object.keys(childAttrs).map((key) => validateAttrs(key, childAttrs[key])).filter(Boolean)
+    svgElement: Object.keys(attributes).map((key) => validateAttrs(key, attributes[key], i)).filter(Boolean),
+    children: Object.keys(childAttrs).map((key) => validateAttrs(key, childAttrs[key], i)).filter(Boolean)
   }
 
   const element = `
@@ -194,7 +231,7 @@ icons.forEach((i) => {
 
     const ${ComponentName} = forwardRef<SVGElement, any>(({ ...rest }, ref) => {
       return (
-        <svg ref={ref} ${attrsToString(defaultAttrs)} >
+        <svg ref={ref} ${attrsToString(defaultAttrs, true)} >
           ${iconWithoutWrapper}
         </svg>
       )
@@ -204,8 +241,6 @@ icons.forEach((i) => {
 
     export default ${ComponentName}
   `;
-
-  const innerSvg = parsedSvg.children.map((child) => (child.attributes = attrsToString(child.attributes)));
 
   const svgElement = () => {
     if (attributesWithErrors.svgElement.length > 0 || attributesWithErrors.children.length > 0) {
@@ -220,20 +255,19 @@ React component result: 'src/icons/${i}.tsx' Please check.
         ...attributes,
       };
 
-      return `<svg ${attrsToString(svgAttributes)}>
-        ${innerSvg}
+      return `<svg ${attrsToString(svgAttributes, true)}>
+        ${svgExportChildrenInString}
       </svg>`;
     }
     return false;
   }
   
-  const changedSvgs = svgElement();
-  if (changedSvgs) {
-    fs.writeFileSync(svgLocation, changedSvgs, 'utf-8');
+  const changedSvg = svgElement();
+  if (changedSvg) {
+    fs.writeFileSync(svgLocation, changedSvg, 'utf-8');
   
     newSvgsExported = true;
   }
-
 
   const component = format({
     text: element,
@@ -267,7 +301,7 @@ icons
   .forEach((x) => {
     fs.copyFileSync(path.join(svgDir, x), path.join(destSvgDir, x));
   });
-
+  
 if (newSvgsExported) {
   console.log(`New SVG export(s) made`);
 } else {
