@@ -4,7 +4,6 @@ import Konva from 'konva';
 import {
   memo,
   MouseEvent,
-  MutableRefObject,
   RefObject,
   useCallback,
   useEffect,
