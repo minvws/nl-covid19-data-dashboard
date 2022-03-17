@@ -1127,3 +1127,8 @@ timestamp,action,key,document_id,move_to
 2022-03-14T15:41:02.879Z,move,pages.nursingHomePage.vr.veiligheidsregio_verpleeghuis_positief_geteste_personen.warning,0ztyMU2xVVOl2tFNigYHIl,pages.nursingHomePage.vr.positief_geteste_personen.warning
 2022-03-14T15:41:02.879Z,move,vaccinaties_common.labels.meer_dan,rViLqMuzbcTEh1HjxtCvwN,pages.topicalPage.shared.labels.meer_dan
 2022-03-14T15:41:02.879Z,move,vaccinaties_common.labels.minder_dan,IdUyaapVWcyKHaD1kTgtC9,pages.topicalPage.shared.labels.minder_dan
+2022-03-17T15:58:34.891Z,add,choropleth_tooltip.gm.booster_shot_percentage.content,HphWIdm5NJE670xMUf8BcH,__
+2022-03-17T15:58:35.913Z,add,choropleth_tooltip.gm.booster_shot_percentage.subject,feYq219OWQP2cZqPVcphpu,__
+2022-03-17T15:58:37.921Z,add,choropleth_tooltip.vr.booster_shot_percentage.content,HphWIdm5NJE670xMUf8C7R,__
+2022-03-17T15:58:38.934Z,add,choropleth_tooltip.vr.booster_shot_percentage.subject,IYqltHiuagwQmC5ngNee7E,__
+2022-03-17T15:58:39.933Z,add,pages.vaccinationsPage.nl.coverage_kinds.booster_shot_percentage,IYqltHiuagwQmC5ngNeeu0,__
