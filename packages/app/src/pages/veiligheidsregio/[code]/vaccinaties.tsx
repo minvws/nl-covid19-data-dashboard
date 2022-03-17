@@ -285,6 +285,7 @@ export const VaccinationsVrPage = (
                 <ChoroplethTooltip
                   data={context}
                   percentageProps={[
+                    'booster_shot_percentage',
                     'fully_vaccinated_percentage',
                     'has_one_shot_percentage',
                   ]}

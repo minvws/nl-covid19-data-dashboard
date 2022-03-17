@@ -152,6 +152,7 @@ export function VaccineCoverageChoroplethPerGm({
             <ChoroplethTooltip
               data={context}
               percentageProps={[
+                'booster_shot_percentage',
                 'fully_vaccinated_percentage',
                 'has_one_shot_percentage',
               ]}
@@ -183,6 +184,7 @@ export function VaccineCoverageChoroplethPerGm({
             <ChoroplethTooltip
               data={context}
               percentageProps={[
+                'booster_shot_percentage',
                 'fully_vaccinated_percentage',
                 'has_one_shot_percentage',
               ]}
@@ -259,7 +261,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
     isDefined(mainContent),
-    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}:mainContent] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
   const secondaryContent = Object.entries(secondaryValues).map(
@@ -272,7 +274,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
       )[data.map]?.[property as string]?.content;
       assert(
         isDefined(content),
-        `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
+        `[${ChoroplethTooltip.name}:secondaryContent] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
       );
       return (
         <Box
