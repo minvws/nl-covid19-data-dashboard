@@ -1150,4 +1150,5 @@ timestamp,action,key,document_id,move_to
 2022-03-17T15:06:31.075Z,add,pages.vaccinationsPage.nl.vaccination_grade_toggle_tile.age_18_plus.description_vaccination_third_shot,HphWIdm5NJE670xMUevlYj,__
 2022-03-17T15:06:32.089Z,add,pages.vaccinationsPage.vr.vaccination_grade_toggle_tile.age_12_plus.description_vaccination_third_shot,IYqltHiuagwQmC5ngNM1KC,__
 2022-03-17T15:06:33.082Z,add,pages.vaccinationsPage.vr.vaccination_grade_toggle_tile.age_18_plus.description_vaccination_third_shot,HphWIdm5NJE670xMUevlsl,__
-2022-03-17T15:06:33.082Z,delete,pages.vaccinationsPage.nl.repeating_shot_kpi.sources.href,2qdbE03HV0PzfxchnwWOl3,__
+2022-03-18T13:31:52.545Z,add,pages.vaccinationsPage.nl.booster_information_block.sources.href,feYq219OWQP2cZqPVjbur0,__
+2022-03-18T13:31:53.568Z,add,pages.vaccinationsPage.nl.repeating_shot_information_block.sources.href,feYq219OWQP2cZqPVjbvYY,__

@@ -3,11 +3,13 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { VaccineBoosterThird as BoosterIcon } from '@corona-dashboard/icons';
 
 type ReferenceType = {
-  href?: string;
+  href: string;
+  text?: string;
 };
 
 type SourceType = {
   text: string;
+  href: string;
 };
 
 type TextTypes = {
@@ -20,13 +22,13 @@ type TextTypes = {
 
 interface VaccineKpiHeaderProps {
   text: TextTypes;
-  date: number;
+  dateUnix: number;
   dateOfInsertionUnix: number;
 }
 
 export function VaccinationsKpiHeader({
   text,
-  date,
+  dateUnix,
   dateOfInsertionUnix,
 }: VaccineKpiHeaderProps) {
   return (
@@ -37,15 +39,9 @@ export function VaccinationsKpiHeader({
         description={text.description}
         metadata={{
           datumsText: text.datums,
-          dateOrRange: date,
+          dateOrRange: dateUnix,
           dateOfInsertionUnix: dateOfInsertionUnix,
-          dataSources: [
-            {
-              href: '',
-              text: text.sources.text,
-              download: '',
-            },
-          ],
+          dataSources: [text.sources],
         }}
         referenceLink={text.reference.href}
       />

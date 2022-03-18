@@ -8,6 +8,7 @@ import { Message } from '~/components/message';
 
 type SourceType = {
   text: string;
+  href?: string;
 };
 
 type TextTypes = {
@@ -20,13 +21,13 @@ type TextTypes = {
 
 interface VaccinationsShotKpiSectionProps {
   text: TextTypes;
-  date: number;
+  dateUnix: number;
   value: number;
 }
 
 export function VaccinationsShotKpiSection({
   text,
-  date,
+  dateUnix,
   value,
 }: VaccinationsShotKpiSectionProps) {
   const { formatNumber } = useIntl();
@@ -38,10 +39,10 @@ export function VaccinationsShotKpiSection({
         <Markdown content={text.description} />
         {text.warning && <Message variant="warning">{text.warning}</Message>}
         <Metadata
-          date={date}
+          date={dateUnix}
           datumsText={text.datums}
           source={{
-            href: '',
+            href: text.sources.href ? text.sources.href : '',
             text: text.sources.text,
           }}
         />

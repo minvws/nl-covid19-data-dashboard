@@ -115,7 +115,8 @@ export const getStaticProps = createGetStaticProps(
     'booster_shot_administered',
     'booster_coverage',
     'third_shot_administered',
-    'booster_shot_per_age_group'
+    'booster_shot_per_age_group',
+    'repeating_shot_administered'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -240,6 +241,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
 
+  const repeatingShotAdministeredLastValue =
+    data.repeating_shot_administered?.last_value;
+
   const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
 
@@ -329,15 +333,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <>
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
-                date={boosterShotAdministeredLastValue.date_end_unix}
+                dateUnix={boosterShotAdministeredLastValue.date_end_unix}
                 dateOfInsertionUnix={
                   boosterShotAdministeredLastValue.date_of_insertion_unix
                 }
               />
               <VaccinationsShotKpiSection
                 text={textNl.repeating_shot_kpi}
-                date={thirdShotAdministeredLastValue.date_unix}
-                value={thirdShotAdministeredLastValue.administered_total}
+                dateUnix={repeatingShotAdministeredLastValue.date_unix}
+                value={
+                  repeatingShotAdministeredLastValue.ggd_administered_total
+                }
               />
             </>
           )}
@@ -580,7 +586,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             )}
           <VaccinationsKpiHeader
             text={textNl.booster_information_block}
-            date={boosterShotAdministeredLastValue.date_end_unix}
+            dateUnix={boosterShotAdministeredLastValue.date_end_unix}
             dateOfInsertionUnix={
               boosterShotAdministeredLastValue.date_of_insertion_unix
             }
