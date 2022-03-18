@@ -296,6 +296,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
             dateUnixBoostered={boosterShotAdministeredLastValue.date_end_unix}
+            dateUnixThirdShot={thirdShotAdministeredLastValue.date_unix}
             age18Plus={{
               fully_vaccinated:
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,

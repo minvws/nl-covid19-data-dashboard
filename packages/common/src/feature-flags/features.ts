@@ -214,7 +214,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlRepeatingShotAdministered',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'repeating_shot_administered',
   },

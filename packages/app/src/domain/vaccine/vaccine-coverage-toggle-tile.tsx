@@ -21,11 +21,12 @@ type AgeTypes = {
   fully_vaccinated: number | null;
   has_one_shot: number | null;
   boostered?: number | null;
+  third_shot?: number | null;
   birthyear: string;
   fully_vaccinated_label?: string | null;
   has_one_shot_label?: string | null;
   boostered_label?: string | null;
-  third_shot?: number | null;
+  third_shot_label?: string | null;
 };
 
 type VaccinationGradeToggleTypes = {
@@ -35,6 +36,7 @@ type VaccinationGradeToggleTypes = {
   description_vaccination_grade: string;
   description_vaccination_one_shot: string;
   description_vaccination_one_shot_with_percentage: string;
+  description_vaccination_third_shot: string;
   label: string;
 };
 
@@ -80,6 +82,11 @@ export function VaccineCoverageToggleTile({
 
   const metadataBooster: MetadataProps = {
     date: dateUnixBoostered,
+    source: source,
+  };
+
+  const metadataThirdShot: MetadataProps = {
+    date: dateUnixThirdShot,
     source: source,
   };
 
@@ -143,18 +150,7 @@ export function VaccineCoverageToggleTile({
               }
               numFractionDigits={numFractionDigits}
               metadataFullyOrOneShots={metadata}
-              metadataThirdShots={{
-                datumsText:
-                  siteText.pages.vaccinationsPage.nl.booster_and_third_kpi
-                    .datums,
-                date: dateUnixThirdShot,
-                source: {
-                  href: siteText.pages.vaccinationsPage.nl.booster_and_third_kpi
-                    .sources.href,
-                  text: siteText.pages.vaccinationsPage.nl.booster_and_third_kpi
-                    .sources.text,
-                },
-              }}
+              metadataThirdShots={metadataThirdShot}
             />
           </>
         )}
@@ -236,7 +232,7 @@ function AgeGroupBlock({
   metadataFullyOrOneShots,
   metadataThirdShots,
 }: AgeGroupBlockProps) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const formatCoveragePercentage =
     useVaccineCoveragePercentageFormatter(numFractionDigits);
 
@@ -287,7 +283,7 @@ function AgeGroupBlock({
       {thirdDescription && thirdProperty && (
         <Markdown
           content={replaceVariablesInText(thirdDescription, {
-            amount: 1234,
+            amount: formatNumber(data.third_shot),
           })}
         />
       )}
