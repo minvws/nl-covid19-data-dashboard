@@ -1132,3 +1132,8 @@ timestamp,action,key,document_id,move_to
 2022-03-17T15:58:37.921Z,add,choropleth_tooltip.vr.booster_shot_percentage.content,HphWIdm5NJE670xMUf8C7R,__
 2022-03-17T15:58:38.934Z,add,choropleth_tooltip.vr.booster_shot_percentage.subject,IYqltHiuagwQmC5ngNee7E,__
 2022-03-17T15:58:39.933Z,add,pages.vaccinationsPage.nl.coverage_kinds.booster_shot_percentage,IYqltHiuagwQmC5ngNeeu0,__
+2022-03-21T13:33:45.418Z,delete,choropleth_tooltip.gm.booster_shot_percentage.content,HphWIdm5NJE670xMUf8BcH,__
+2022-03-21T13:33:45.419Z,delete,choropleth_tooltip.gm.booster_shot_percentage.subject,feYq219OWQP2cZqPVcphpu,__
+2022-03-21T13:33:45.419Z,delete,choropleth_tooltip.vr.booster_shot_percentage.content,HphWIdm5NJE670xMUf8C7R,__
+2022-03-21T13:33:45.419Z,delete,choropleth_tooltip.vr.booster_shot_percentage.subject,IYqltHiuagwQmC5ngNee7E,__
+2022-03-21T13:33:45.419Z,delete,pages.vaccinationsPage.nl.coverage_kinds.booster_shot_percentage,IYqltHiuagwQmC5ngNeeu0,__
