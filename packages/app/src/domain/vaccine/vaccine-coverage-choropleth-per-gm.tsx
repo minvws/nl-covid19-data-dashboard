@@ -57,14 +57,14 @@ export function VaccineCoverageChoroplethPerGm({
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        commonTexts.choropleth.vaccination_coverage.nl.title,
+        commonTexts.choropleth.vaccination_coverage.gm.title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              commonTexts.choropleth.vaccination_coverage.nl.description,
+              commonTexts.choropleth.vaccination_coverage.gm.description,
               variables
             )}
           />
@@ -84,7 +84,7 @@ export function VaccineCoverageChoroplethPerGm({
               })}
             >
               {
-                commonTexts.choropleth.vaccination_coverage.shared
+                commonTexts.choropleth_vaccination_coverage.shared
                   .dropdowns_title
               }
             </Text>

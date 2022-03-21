@@ -220,12 +220,15 @@ export const VaccinationsVrPage = (
           />
 
           <VaccineCoveragePerAgeGroup
-            title={textVr.vaccination_coverage.title}
-            description={textVr.vaccination_coverage.description}
+            title={commonTexts.choropleth.vaccination_coverage.vr.title}
+            description={
+              commonTexts.choropleth.vaccination_coverage.vr.description
+            }
             sortingOrder={['18+', '12-17', '12+']}
             metadata={{
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: textVr.vaccination_coverage.bronnen.rivm,
+              source:
+                commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
             }}
             values={data.vaccine_coverage_per_age_group.values}
             text={textNl.vaccination_coverage}
