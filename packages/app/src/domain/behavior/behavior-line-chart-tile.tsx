@@ -11,6 +11,8 @@ import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { DataOptions } from '~/components/time-series-chart/logic';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -25,6 +27,7 @@ interface BehaviorLineChartTileProps {
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   behaviorOptions?: BehaviorIdentifier[];
+  timelineEvents?: TimelineEventConfig[];
 }
 
 export function BehaviorLineChartTile({
@@ -114,7 +117,8 @@ export function BehaviorLineChartTile({
           ]}
           dataOptions={{
             isPercentage: true,
-          }}
+            // timelineEvents: timelineEvents.coverage,
+          } as DataOptions}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
         />
