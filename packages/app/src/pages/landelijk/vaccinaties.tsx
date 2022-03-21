@@ -5,7 +5,6 @@ import {
 } from '@corona-dashboard/common';
 import {
   Arts,
-  VaccineBoosterThird as BoosterIcon,
   Vaccinaties as VaccinatieIcon,
   Ziekenhuis,
 } from '@corona-dashboard/icons';
@@ -31,7 +30,8 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
 import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccinationsThirdShotKpiSection } from '~/domain/vaccine/vaccinations-third-shot-kpi-section';
+import { VaccinationsShotKpiSection } from '~/domain/vaccine/vaccinations-shot-kpi-section';
+import { VaccinationsKpiHeader } from '~/domain/vaccine/vaccinations-kpi-header';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
@@ -115,7 +115,8 @@ export const getStaticProps = createGetStaticProps(
     'booster_shot_administered',
     'booster_coverage',
     'third_shot_administered',
-    'booster_shot_per_age_group'
+    'booster_shot_per_age_group',
+    'repeating_shot_administered'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   async (context: GetStaticPropsContext) => {
@@ -219,6 +220,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
 
+  const repeatingShotAdministeredFeature = useFeature(
+    'nlRepeatingShotAdministered'
+  );
+
   const metadata = {
     ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textNl.metadata.title,
@@ -235,6 +240,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
+
+  const repeatingShotAdministeredLastValue =
+    data.repeating_shot_administered?.last_value;
 
   const lastValueIntensiveCareVaccinationStatus =
     data.intensive_care_vaccination_status.last_value;
@@ -267,7 +275,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-
           <PageInformationBlock
             title={textNl.title}
             category={textNl.category}
@@ -285,7 +292,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
-
           <VaccineCoverageToggleTile
             title={textNl.vaccination_grade_toggle_tile.title}
             source={textNl.vaccination_grade_toggle_tile.source}
@@ -294,6 +300,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
             dateUnixBoostered={boosterShotAdministeredLastValue.date_end_unix}
+            dateUnixThirdShot={thirdShotAdministeredLastValue.date_unix}
             age18Plus={{
               fully_vaccinated:
                 vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
@@ -302,6 +309,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               boostered: formatPercentageAsNumber(
                 `${boosterCoverageLastValue.percentage}`
               ),
+              third_shot: thirdShotAdministeredLastValue.administered_total,
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
             }}
@@ -321,7 +329,24 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               textNl.vaccination_grade_toggle_tile.age_18_plus
             }
           />
-
+          {repeatingShotAdministeredFeature.isEnabled && (
+            <>
+              <VaccinationsKpiHeader
+                text={textNl.repeating_shot_information_block}
+                dateUnix={boosterShotAdministeredLastValue.date_end_unix}
+                dateOfInsertionUnix={
+                  boosterShotAdministeredLastValue.date_of_insertion_unix
+                }
+              />
+              <VaccinationsShotKpiSection
+                text={textNl.repeating_shot_kpi}
+                dateUnix={repeatingShotAdministeredLastValue.date_unix}
+                value={
+                  repeatingShotAdministeredLastValue.ggd_administered_total
+                }
+              />
+            </>
+          )}
           <VaccinationsOverTimeTile
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
@@ -339,9 +364,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ),
             }}
           />
-
           <VaccineCoverageChoroplethPerGm data={choropleth} />
-
           <VaccineCoveragePerAgeGroup
             title={textNl.vaccination_coverage.title}
             description={textNl.vaccination_coverage.toelichting}
@@ -363,7 +386,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />
-
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <BoosterShotCoveragePerAgeGroup
               title={textNl.booster_per_age_group_table.title}
@@ -394,7 +416,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               text={textNl.booster_per_age_group_table}
             />
           )}
-
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
             <ChartTile
               title={
@@ -423,7 +444,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
-
           {vaccinationStatusHospitalFeature.isEnabled &&
             vaccinationStatusIntensiveCareFeature.isEnabled && (
               <ChartTile
@@ -558,40 +578,19 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 </Box>
               </ChartTile>
             )}
-
           {vaccineAdministeredGgdFeature.isEnabled &&
             vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
               <VaccineAdministrationsKpiSection data={data} />
             )}
-          <Box
-            pt={40}
-            borderTopWidth={2}
-            borderColor="silver"
-            borderStyle="solid"
-          >
-            <PageInformationBlock
-              icon={<BoosterIcon />}
-              title={textNl.booster_information_block.title}
-              description={textNl.booster_information_block.description}
-              metadata={{
-                datumsText: textNl.booster_information_block.datums,
-                dateOrRange: boosterShotAdministeredLastValue.date_end_unix,
-                dateOfInsertionUnix:
-                  boosterShotAdministeredLastValue.date_of_insertion_unix,
-                dataSources: [
-                  {
-                    href: '',
-                    text: textNl.booster_information_block.sources.text,
-                    download: '',
-                  },
-                ],
-              }}
-              referenceLink={textNl.booster_information_block.reference.href}
-            />
-          </Box>
-
+          <VaccinationsKpiHeader
+            text={textNl.booster_information_block}
+            dateUnix={boosterShotAdministeredLastValue.date_end_unix}
+            dateOfInsertionUnix={
+              boosterShotAdministeredLastValue.date_of_insertion_unix
+            }
+          />
           <VaccineBoosterAdministrationsKpiSection
             totalBoosterAndThirdShots={
               boosterShotAdministeredLastValue.administered_total
@@ -641,21 +640,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               },
             }}
           />
-
-          <VaccinationsThirdShotKpiSection
-            thirdShotValue={thirdShotAdministeredLastValue.administered_total}
-            metadateThirdShot={{
-              datumsText: textNl.booster_and_third_kpi.datums,
-              date: thirdShotAdministeredLastValue.date_unix,
-              source: {
-                href: textNl.booster_and_third_kpi.sources.href,
-                text: textNl.booster_and_third_kpi.sources.text,
-              },
-            }}
-          />
-
           <Divider />
-
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
@@ -664,7 +649,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               setHideArchivedCharts(!hasHideArchivedCharts)
             }
           />
-
           {hasHideArchivedCharts && (
             <InView rootMargin="500px">
               <VaccineDeliveryBarChart
