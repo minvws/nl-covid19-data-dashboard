@@ -6,6 +6,7 @@
     "behavior",
     "booster_and_third_shot_administered",
     "booster_shot_administered",
+    "repeating_shot_administered",
     "booster_shot_delivered",
     "booster_shot_planned",
     "booster_shot_per_age_group",
@@ -85,6 +86,9 @@
     },
     "booster_shot_administered": {
       "$ref": "booster_shot_administered.json"
+    },
+    "repeating_shot_administered": {
+      "$ref": "repeating_shot_administered.json"
     },
     "booster_shot_delivered": {
       "$ref": "booster_shot_delivered.json"

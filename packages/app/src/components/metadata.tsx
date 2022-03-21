@@ -57,9 +57,13 @@ export function Metadata({
       {!isTileFooter && source && (
         <Text color="annotation" variant="label1">
           {`${dateString} - ${siteText.common.metadata.source}: `}
-          <ExternalLink ariaLabel={source.aria_text} href={source.href}>
-            {source.text}
-          </ExternalLink>
+          {source.href ? (
+            <ExternalLink ariaLabel={source.aria_text} href={source.href}>
+              {source.text}
+            </ExternalLink>
+          ) : (
+            <InlineText ariaLabel={source.aria_text}>{source.text}</InlineText>
+          )}
         </Text>
       )}
 

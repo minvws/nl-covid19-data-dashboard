@@ -65,6 +65,7 @@ export const dataStructure = {
       "ggd_administered_total",
       "others_administered_total",
     ],
+    repeating_shot_administered: ["ggd_administered_total"],
     booster_shot_delivered: ["delivered_total"],
     booster_shot_planned: ["planned_7_days"],
     booster_shot_per_age_group: [

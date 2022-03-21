@@ -17,7 +17,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 interface Datasource {
   href: string;
   text: string;
-  download: string;
+  download?: string;
 }
 
 interface DateRange {
