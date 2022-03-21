@@ -47,7 +47,7 @@ export function VaccineCoverageChoroplethPerGm({
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const [selectedCoverageKind, setSelectedCoverageKind] =
-    useState<CoverageKindProperty>('booster_shot_percentage');
+    useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
 
   const variables = {
@@ -151,10 +151,7 @@ export function VaccineCoverageChoroplethPerGm({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              percentageProps={[
-                'booster_shot_percentage',
-                'fully_vaccinated_percentage',
-              ]}
+              percentageProps={['fully_vaccinated_percentage']}
             />
           )}
         />
@@ -182,10 +179,7 @@ export function VaccineCoverageChoroplethPerGm({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              percentageProps={[
-                'booster_shot_percentage',
-                'fully_vaccinated_percentage',
-              ]}
+              percentageProps={['fully_vaccinated_percentage']}
             />
           )}
         />

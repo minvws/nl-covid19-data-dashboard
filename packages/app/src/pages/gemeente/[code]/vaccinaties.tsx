@@ -269,7 +269,7 @@ export const VaccinationsGmPage = (
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'booster_shot_percentage',
+                metricProperty: 'fully_vaccinated_percentage',
               }}
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,
@@ -285,10 +285,7 @@ export const VaccinationsGmPage = (
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  percentageProps={[
-                    'booster_shot_percentage',
-                    'fully_vaccinated_percentage',
-                  ]}
+                  percentageProps={['fully_vaccinated_percentage']}
                 />
               )}
             />

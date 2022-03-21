@@ -87,7 +87,7 @@ type VaccinationCoverageChoroplethProps = GmCoverage | VrCoverage | NlCoverage;
 export function VaccinationCoverageChoropleth(
   props: VaccinationCoverageChoroplethProps
 ) {
-  const { defaultCoverageKind = 'booster_shot_percentage' } = props;
+  const { defaultCoverageKind = 'fully_vaccinated_percentage' } = props;
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
@@ -145,10 +145,7 @@ export function VaccinationCoverageChoropleth(
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  percentageProps={[
-                    'booster_shot_percentage',
-                    'fully_vaccinated_percentage',
-                  ]}
+                  percentageProps={['fully_vaccinated_percentage']}
                 />
               )}
             />
@@ -179,10 +176,7 @@ export function VaccinationCoverageChoropleth(
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  percentageProps={[
-                    'booster_shot_percentage',
-                    'fully_vaccinated_percentage',
-                  ]}
+                  percentageProps={['fully_vaccinated_percentage']}
                 />
               )}
             />
@@ -212,10 +206,7 @@ export function VaccinationCoverageChoropleth(
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  percentageProps={[
-                    'booster_shot_percentage',
-                    'fully_vaccinated_percentage',
-                  ]}
+                  percentageProps={['fully_vaccinated_percentage']}
                 />
               )}
             />
