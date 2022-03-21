@@ -8,15 +8,25 @@
       "items": {
         "$ref": "#/definitions/value"
       }
+<<<<<<< HEAD
     }
   },
   "required": ["values"],
+=======
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+>>>>>>> 98dafbb7 (new data in schema)
   "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "nl_behavior_annotations",
       "type": "object",
       "properties": {
+<<<<<<< HEAD
         "source_type": {
           "enum": [
             "wash_hands",
@@ -55,6 +65,33 @@
           "type": "integer"
         },
         "date_end_unix": {
+=======
+        "first_wave": {
+          "type": "number"
+        },
+        "measurement_duration_in_days": {
+          "type": "number"
+        },
+        "indicator": {
+          "type": "string"
+        },
+        "title":  {
+          "type": "string"
+        },
+        "message_rivm":  {
+          "type": "string"
+        },
+        "message":  {
+          "type": "string"
+        },
+        "date_of_first_measurement_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_change_unix": {
+>>>>>>> 98dafbb7 (new data in schema)
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -62,10 +99,22 @@
         }
       },
       "required": [
+<<<<<<< HEAD
         "source_type",
         "behaviour_type",
         "date_start_unix",
         "date_end_unix",
+=======
+        "first_wave",
+        "measurement_duration_in_days",
+        "indicator",
+        "title",
+        "message_rivm",
+        "message",
+        "date_of_first_measurement_unix",
+        "date_of_report_unix",
+        "date_of_change_unix",
+>>>>>>> 98dafbb7 (new data in schema)
         "date_of_insertion_unix"
       ],
       "additionalProperties": false
