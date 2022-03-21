@@ -47,7 +47,7 @@ export function VaccineCoverageChoroplethPerGm({
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const [selectedCoverageKind, setSelectedCoverageKind] =
-    useState<CoverageKindProperty>('has_one_shot_percentage');
+    useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
 
   const variables = {
@@ -151,10 +151,7 @@ export function VaccineCoverageChoroplethPerGm({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              percentageProps={[
-                'fully_vaccinated_percentage',
-                'has_one_shot_percentage',
-              ]}
+              percentageProps={['fully_vaccinated_percentage']}
             />
           )}
         />
@@ -182,10 +179,7 @@ export function VaccineCoverageChoroplethPerGm({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              percentageProps={[
-                'fully_vaccinated_percentage',
-                'has_one_shot_percentage',
-              ]}
+              percentageProps={['fully_vaccinated_percentage']}
             />
           )}
         />
@@ -259,7 +253,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
     isDefined(mainContent),
-    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}:mainContent] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
   const secondaryContent = Object.entries(secondaryValues).map(
@@ -272,7 +266,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
       )[data.map]?.[property as string]?.content;
       assert(
         isDefined(content),
-        `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
+        `[${ChoroplethTooltip.name}:secondaryContent] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
       );
       return (
         <Box
