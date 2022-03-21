@@ -18,7 +18,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
 ) {
   const { data, dataFormatters } = props;
   const {
-    siteText,
+    commonTexts,
     formatNumber,
     formatPercentage,
     formatDate,
@@ -28,7 +28,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     formatDateSpan,
   } = useIntl();
 
-  const text = siteText.choropleth_tooltip;
+  const text = commonTexts.choropleth_tooltip;
 
   const subject = (
     text as unknown as Record<string, Record<string, Record<string, string>>>

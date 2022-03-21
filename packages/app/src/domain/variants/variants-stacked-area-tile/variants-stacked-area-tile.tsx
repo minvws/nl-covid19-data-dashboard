@@ -12,15 +12,16 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { VariantChartValue } from '~/domain/variants/static-props';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
+import { Variants } from '../variants-table-tile/types';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
-type VariantsStackedAreaTileText =
+type VariantsStackedAreaTileText = { varianten: Variants } & (
   | SiteText['pages']['variantsPage']['nl']['varianten_over_tijd_grafiek']
-  | SiteText['pages']['in_variantsPage']['shared']['varianten_over_tijd_grafiek'];
+  | SiteText['pages']['in_variantsPage']['shared']['varianten_over_tijd_grafiek']
+);
 
 type VariantsStackedAreaTileProps = {
   text: VariantsStackedAreaTileText;
@@ -200,8 +201,6 @@ function useSeriesConfig(
   text: VariantsStackedAreaTileText,
   values: VariantChartValue[]
 ) {
-  const { siteText } = useIntl();
-
   return useMemo(() => {
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
@@ -225,13 +224,13 @@ function useSeriesConfig(
 
         const variantName = variantKey.split(
           '_'
-        )[0] as keyof typeof siteText.pages.variantsPage.nl.varianten;
+        )[0] as keyof typeof text.varianten;
 
         return {
           type: 'gapped-stacked-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: siteText.pages.variantsPage.nl.varianten[variantName],
+          label: text.varianten[variantName].name,
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
@@ -253,7 +252,7 @@ function useSeriesConfig(
     const selectOptions = [...seriesConfig, otherConfig];
 
     return [seriesConfig, otherConfig, selectOptions] as const;
-  }, [values, text, siteText]);
+  }, [values, text]);
 }
 
 const NoDataBox = styled.div(

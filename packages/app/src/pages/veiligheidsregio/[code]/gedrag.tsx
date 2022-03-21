@@ -42,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.behaviorPage.vr,
+        text: siteText.pages.behaviorPage,
       }),
       locale
     ),
@@ -80,13 +80,13 @@ export default function BehaviorPageVr(
     chartBehaviorOptions,
   } = props;
 
-  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
-  const { textVr } = pageText;
+  const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
+  const { text } = pageText;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
-    title: textVr.metadata.title,
-    description: textVr.metadata.description,
+    ...commonTexts.veiligheidsregio_index.metadata,
+    title: text.vr.metadata.title,
+    description: text.vr.metadata.description,
   };
 
   const behaviorLastValue = data.behavior.last_value;
@@ -101,34 +101,34 @@ export default function BehaviorPageVr(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.gedrag}
-            title={textVr.pagina.titel}
+            category={commonTexts.nationaal_layout.headings.gedrag}
+            title={text.vr.pagina.titel}
             icon={<Gedrag />}
-            description={textVr.pagina.toelichting}
+            description={text.vr.pagina.toelichting}
             metadata={{
-              datumsText: textVr.datums,
+              datumsText: text.vr.datums,
               dateOrRange: {
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
-              dataSources: [textVr.bronnen.rivm],
+              dataSources: [text.vr.bronnen.rivm],
             }}
-            referenceLink={textVr.reference.href}
+            referenceLink={text.vr.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={textVr.warning}
+            warning={text.vr.warning}
           />
 
           <TwoKpiSection>
             <Tile>
-              <Heading level={3}>{textVr.onderzoek_uitleg.titel}</Heading>
-              <Markdown content={textVr.onderzoek_uitleg.toelichting} />
+              <Heading level={3}>{text.vr.onderzoek_uitleg.titel}</Heading>
+              <Markdown content={text.vr.onderzoek_uitleg.toelichting} />
             </Tile>
             <Tile height="100%">
-              <Heading level={3}>{textVr.kpi.titel}</Heading>
+              <Heading level={3}>{text.vr.kpi.titel}</Heading>
               <Text>
-                {replaceComponentsInText(textVr.kpi.deelgenomen_mensen, {
+                {replaceComponentsInText(text.vr.kpi.deelgenomen_mensen, {
                   number_of_participants: (
                     <InlineText fontWeight="bold">
                       {formatNumber(behaviorLastValue.number_of_participants)}
@@ -150,14 +150,15 @@ export default function BehaviorPageVr(
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={textVr.basisregels.title}
-            description={textVr.basisregels.description}
-            complianceExplanation={textVr.basisregels.volgen_beschrijving}
-            supportExplanation={textVr.basisregels.steunen_beschrijving}
+            title={text.vr.basisregels.title}
+            description={text.vr.basisregels.description}
+            complianceExplanation={text.vr.basisregels.volgen_beschrijving}
+            supportExplanation={text.vr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={textVr.basisregels.annotatie}
+            annotation={text.vr.basisregels.annotatie}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
+            text={text.shared}
           />
 
           <span ref={scrollToRef} />
@@ -168,14 +169,15 @@ export default function BehaviorPageVr(
                 behaviorLastValue.date_start_unix,
                 behaviorLastValue.date_end_unix,
               ],
-              source: textVr.bronnen.rivm,
+              source: text.vr.bronnen.rivm,
             }}
             currentId={currentId}
             setCurrentId={setCurrentId}
             behaviorOptions={chartBehaviorOptions}
+            text={text}
           />
 
-          <MoreInformation />
+          <MoreInformation text={text.shared.meer_onderzoeksresultaten} />
         </TileList>
       </VrLayout>
     </Layout>

@@ -46,6 +46,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.elderlyAtHomePage.nl,
       }),
       locale
@@ -104,13 +105,13 @@ const ElderlyAtHomeNationalPage = (
     7
   );
 
-  const { siteText, formatNumber } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts, formatNumber } = useIntl();
+  const { metadataTexts, textNl } = pageText;
 
   const reverseRouter = useReverseRouter();
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -120,9 +121,9 @@ const ElderlyAtHomeNationalPage = (
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+            category={commonTexts.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={
-              siteText.sidebar.metrics.elderly_at_home.title
+              commonTexts.sidebar.metrics.elderly_at_home.title
             }
             title={textNl.section_positive_tested.title}
             icon={<Elderly />}
@@ -221,7 +222,7 @@ const ElderlyAtHomeNationalPage = (
                       label:
                         textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'positive_tested_daily_moving_average',
                       ],
@@ -343,7 +344,7 @@ const ElderlyAtHomeNationalPage = (
                       label:
                         textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

@@ -13,7 +13,7 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
 import { VrBehaviorTooltip } from '~/domain/behavior/tooltip/vr-behavior-tooltip';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SelectBehavior } from './components/select-behavior';
@@ -28,6 +28,7 @@ interface BehaviorChoroplethsTileProps {
   data: { behavior: VrCollectionBehavior[] };
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  text: SiteText['pages']['behaviorPage'];
 }
 
 export function BehaviorChoroplethsTile({
@@ -36,10 +37,9 @@ export function BehaviorChoroplethsTile({
   data,
   currentId,
   setCurrentId,
+  text,
 }: BehaviorChoroplethsTileProps) {
-  const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
-  const behaviorPageText = siteText.pages.behaviorPage;
 
   const keysWithoutData = useMemo(() => {
     const firstRegionData = data.behavior[0];
@@ -68,26 +68,28 @@ export function BehaviorChoroplethsTile({
       <Box spacing={4} height="100%">
         <Box width={breakpoints.lg ? '50%' : '100%'}>
           <SelectBehavior
-            label={behaviorPageText.nl.select_behaviour_label}
+            label={text.nl.select_behaviour_label}
             value={currentId}
             onChange={setCurrentId}
           />
         </Box>
         <Box display="flex" flexWrap="wrap" spacing={{ _: 4, md: 0 }}>
           <ChoroplethBlock
-            title={behaviorPageText.nl.verdeling_in_nederland.compliance_title}
+            title={text.nl.verdeling_in_nederland.compliance_title}
             data={data}
             behaviorType="compliance"
             currentId={currentId}
             keysWithoutData={keysWithoutData}
+            text={text}
           />
 
           <ChoroplethBlock
-            title={behaviorPageText.nl.verdeling_in_nederland.support_title}
+            title={text.nl.verdeling_in_nederland.support_title}
             data={data}
             behaviorType="support"
             currentId={currentId}
             keysWithoutData={keysWithoutData}
+            text={text}
           />
         </Box>
       </Box>
@@ -101,6 +103,7 @@ interface ChoroplethBlockProps {
   behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
   title: string;
+  text: SiteText['pages']['behaviorPage'];
 }
 
 function ChoroplethBlock({
@@ -109,9 +112,8 @@ function ChoroplethBlock({
   behaviorType,
   currentId,
   title,
+  text,
 }: ChoroplethBlockProps) {
-  const { siteText } = useIntl();
-  const behaviorPageText = siteText.pages.behaviorPage;
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
 
@@ -137,7 +139,7 @@ function ChoroplethBlock({
             css={css({ zIndex: 9 })}
           >
             <Text textAlign="center" css={css({ maxWidth: '300px' })}>
-              {behaviorPageText.nl.verdeling_in_nederland.geen_beschikbare_data}
+              {text.nl.verdeling_in_nederland.geen_beschikbare_data}
             </Text>
           </Box>
         )}
@@ -181,6 +183,7 @@ function ChoroplethBlock({
                   currentSupportValue={
                     context.dataItem[currentSupportValue] as number
                   }
+                  text={text}
                 />
               );
             }}
@@ -194,7 +197,7 @@ function ChoroplethBlock({
       >
         <ChoroplethLegenda
           thresholds={thresholds.vr[metricProperty]}
-          title={behaviorPageText.shared.basisregels.header_percentage}
+          title={text.shared.basisregels.header_percentage}
         />
       </Box>
     </Box>

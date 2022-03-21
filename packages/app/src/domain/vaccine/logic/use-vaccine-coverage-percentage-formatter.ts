@@ -28,17 +28,17 @@ type Labels<T> = {
 type DataWithLabels<T> = PropertiesWithLabel<T> & Labels<T>;
 
 export function useVaccineCoveragePercentageFormatter(numFractionDigits = 0) {
-  const { siteText, formatPercentage } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
 
   return getVaccineCoveragePercentageFormatter(
-    siteText.pages.topicalPage.shared,
+    commonTexts.common,
     formatPercentage,
     numFractionDigits
   );
 }
 
 function getVaccineCoveragePercentageFormatter(
-  text: SiteText['pages']['topicalPage']['shared'],
+  text: SiteText['common']['common'],
   formatPercentage: ReturnType<typeof createFormatting>['formatPercentage'],
   numFractionDigits: number
 ) {
@@ -55,9 +55,7 @@ function getVaccineCoveragePercentageFormatter(
       );
       if (isPresent(parsedLabel)) {
         const content =
-          parsedLabel.sign === '>'
-            ? text.labels.meer_dan
-            : text.labels.minder_dan;
+          parsedLabel.sign === '>' ? text.meer_dan : text.minder_dan;
         return replaceVariablesInText(content, {
           value:
             formatPercentage(parsedLabel.value, {

@@ -10,24 +10,30 @@ interface ChartRegionControlsProps {
 }
 
 export function ChartRegionControls(props: ChartRegionControlsProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { value, onChange } = props;
 
   const items: RadioGroupItem<RegionControlOption>[] = [
     {
-      label: siteText.charts.region_controls.municipal,
+      label: commonTexts.charts.region_controls.municipal,
       value: 'gm',
-      ariaLabel: replaceVariablesInText(siteText.aria_labels.map_toggle_label, {
-        label: siteText.charts.region_controls.municipal
-      }),
+      ariaLabel: replaceVariablesInText(
+        commonTexts.aria_labels.map_toggle_label,
+        {
+          label: commonTexts.charts.region_controls.municipal,
+        }
+      ),
     },
     {
-      label: siteText.charts.region_controls.region,
+      label: commonTexts.charts.region_controls.region,
       value: 'vr',
-      ariaLabel: replaceVariablesInText(siteText.aria_labels.map_toggle_label, {
-        label: siteText.charts.region_controls.region
-      }),
+      ariaLabel: replaceVariablesInText(
+        commonTexts.aria_labels.map_toggle_label,
+        {
+          label: commonTexts.charts.region_controls.region,
+        }
+      ),
     },
   ];
 

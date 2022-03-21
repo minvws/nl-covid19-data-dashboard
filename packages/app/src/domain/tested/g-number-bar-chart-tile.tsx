@@ -18,9 +18,9 @@ export function GNumberBarChartTile({
   data: __data,
   timeframeInitialValue = TimeframeOption.FIVE_WEEKS,
 }: GNumberBarChartTileProps) {
-  const { formatPercentage, siteText } = useIntl();
+  const { formatPercentage, commonTexts } = useIntl();
 
-  const text = siteText.g_number.bar_chart;
+  const text = commonTexts.g_number.bar_chart;
 
   const values = __data.values;
   const last_value = __data.last_value;

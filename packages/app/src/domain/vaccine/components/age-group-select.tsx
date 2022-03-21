@@ -33,7 +33,7 @@ type AgeGroupSelectProps = {
 export function AgeGroupSelect(props: AgeGroupSelectProps) {
   const { onChange, initialValue = '18+' } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const options: Option<AgeGroup>[] = useMemo(
     () =>
@@ -43,17 +43,13 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
         if (isPresent(birthyearRange)) {
           return {
             value: el.ageGroup,
-            label: siteText.pages.vaccinationsPage.nl.age_groups[el.ageGroup],
+            label: commonTexts.common.age_groups[el.ageGroup],
             content: (
               <Box>
-                <Text>
-                  {siteText.pages.vaccinationsPage.nl.age_groups[el.ageGroup]}
-                </Text>
+                <Text>{commonTexts.common.age_groups[el.ageGroup]}</Text>
                 <Text variant="label1">
                   {replaceVariablesInText(
-                    siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-                      birthyearRange.type
-                    ],
+                    commonTexts.common.birthyear_ranges[birthyearRange.type],
                     birthyearRange
                   )}
                 </Text>
@@ -62,15 +58,12 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
           };
         }
       }).filter(isPresent),
-    [
-      siteText.pages.vaccinationsPage.nl.age_groups,
-      siteText.pages.vaccinationsPage.nl.birthyear_ranges,
-    ]
+    [commonTexts.common.age_groups, commonTexts.common.birthyear_ranges]
   );
 
   return (
     <RichContentSelect
-      label={siteText.pages.vaccinationsPage.nl.age_group_dropdown.label}
+      label={commonTexts.common.age_group_dropdown.label}
       visuallyHiddenLabel
       initialValue={initialValue}
       options={options}

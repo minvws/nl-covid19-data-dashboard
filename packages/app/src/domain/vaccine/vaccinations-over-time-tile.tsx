@@ -9,6 +9,7 @@ import { Markdown } from '~/components/markdown';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
@@ -18,23 +19,22 @@ import {
   VaccinationsOverTimeChart,
 } from './vaccinations-over-time-chart';
 
-function useTileData(activeChart: ActiveVaccinationChart) {
-  const { siteText } = useIntl();
-
-  const text = siteText.pages.vaccinationsPage.nl;
-
+function useTileData(
+  activeChart: ActiveVaccinationChart,
+  texts: SiteText['pages']['vaccinationsPage']['nl']
+) {
   if (activeChart === 'coverage') {
     const metadata = {
-      source: text.bronnen.rivm,
+      source: texts.bronnen.rivm,
     };
     const description =
-      text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
+      texts.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
     return [metadata, description] as const;
   }
   const metadata = {
-    source: text.bronnen.rivm,
+    source: texts.bronnen.rivm,
   };
-  const description = text.grafiek.omschrijving;
+  const description = texts.grafiek.omschrijving;
   return [metadata, description] as const;
 }
 
@@ -45,6 +45,7 @@ interface VaccinationsOverTimeTileProps {
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
+  texts: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
@@ -53,14 +54,15 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     deliveryAndAdministrationData,
     timelineEvents,
     vaccineAdministeredPlannedLastValue,
+    texts,
   } = props;
 
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
 
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
 
-  const [metadata, description] = useTileData(activeVaccinationChart);
+  const [metadata, description] = useTileData(activeVaccinationChart, texts);
 
   const roundedMillion =
     Math.floor(
@@ -75,12 +77,10 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   return (
     <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader
-        title={
-          siteText.pages.vaccinationsPage.nl.vaccinations_over_time_tile.title
-        }
+        title={texts.vaccinations_over_time_tile.title}
         description={replaceVariablesInText(description, {
           total_vaccines: `${formatNumber(roundedMillion)} ${
-            siteText.common.miljoen
+            commonTexts.common.miljoen
           }`,
           planned_vaccines: formatNumber(
             vaccineAdministeredPlannedLastValue.doses
@@ -96,6 +96,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
         deliveryAndAdministrationData={deliveryAndAdministrationData}
         activeChart={activeVaccinationChart}
         timelineEvents={timelineEvents}
+        texts={texts}
       />
     </FullscreenChartTile>
   );

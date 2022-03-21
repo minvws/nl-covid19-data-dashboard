@@ -67,6 +67,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.intensiveCarePage.nl,
         textShared: siteText.pages.intensiveCarePage.shared,
       }),
@@ -110,11 +111,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText, formatPercentage, formatDateFromSeconds, formatNumber } =
+  const { commonTexts, formatPercentage, formatDateFromSeconds, formatNumber } =
     useIntl();
 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
-  const { textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } = pageText;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
@@ -143,7 +144,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -153,9 +154,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.ziekenhuizen}
+            category={commonTexts.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={
-              siteText.sidebar.metrics.intensive_care_admissions.title
+              commonTexts.sidebar.metrics.intensive_care_admissions.title
             }
             title={textNl.titel}
             icon={<Arts />}
@@ -342,7 +343,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: intakeUnderReportedRange,
                       end: Infinity,
                       label: textNl.linechart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
                       ],
@@ -392,7 +393,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: data.intensive_care_lcps.values[0].date_unix,
                       end: new Date('1 June 2020').getTime() / 1000,
                       label: textNl.chart_bedbezetting.legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                     },
                   ],
                 }}

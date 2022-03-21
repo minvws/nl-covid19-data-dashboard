@@ -99,7 +99,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
   const { textGm, textShared } = pageText;
@@ -120,7 +120,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
@@ -134,7 +134,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.ziekenhuizen}
+            category={commonTexts.gemeente_layout.headings.ziekenhuizen}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -210,7 +210,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedRange,
                       end: Infinity,
                       label: textGm.linechart_legend_underreported_titel,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average_rounded',
                       ],
@@ -254,7 +254,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 highlightSelection: true,
                 getLink: reverseRouter.gm.ziekenhuisopnames,
                 tooltipVariables: {
-                  patients: siteText.choropleth_tooltip.patients,
+                  patients: commonTexts.choropleth_tooltip.patients,
                 },
               }}
             />

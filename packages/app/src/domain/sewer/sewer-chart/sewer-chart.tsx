@@ -99,8 +99,8 @@ export function SewerChart({
       label: text.splitLabels.segment_3,
     },
   ];
-  const { siteText } = useIntl();
-  const scopedGmName = siteText.gemeente_index.municipality_warning;
+  const { commonTexts } = useIntl();
+  const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 

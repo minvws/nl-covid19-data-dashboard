@@ -49,8 +49,8 @@ export function Metadata({
   moreInformationLink,
   referenceLink,
 }: MetadataProps) {
-  const { siteText } = useIntl();
-  const text = siteText.common.metadata;
+  const { commonTexts } = useIntl();
+  const text = commonTexts.common.metadata;
 
   const dateText = useFormatDateText(
     dateOrRange,
@@ -71,8 +71,10 @@ export function Metadata({
         <MetadataItem
           icon={<Database aria-hidden />}
           items={dataSources}
-          label={referenceLink ? siteText.informatie_header.bron : text.source}
-          accessibilityText={siteText.accessibility.text_source}
+          label={
+            referenceLink ? commonTexts.informatie_header.bron : text.source
+          }
+          accessibilityText={commonTexts.accessibility.text_source}
           accessibilitySubject={accessibilitySubject}
           referenceLink={referenceLink}
         />
@@ -151,7 +153,7 @@ function MetadataItem({
   accessibilityText,
   accessibilitySubject,
 }: MetadataItemProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
@@ -162,7 +164,7 @@ function MetadataItem({
       <Text variant="label1">
         {referenceLink && !items && (
           <Link href={referenceLink} passHref>
-            <a>{siteText.informatie_header.meer_informatie_link}</a>
+            <a>{commonTexts.informatie_header.meer_informatie_link}</a>
           </Link>
         )}
         {items && referenceLink && (
@@ -215,9 +217,9 @@ interface metadataReferenceProps {
 }
 
 function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
-  const words = siteText.informatie_header.meer_informatie_link.split(' ');
+  const words = commonTexts.informatie_header.meer_informatie_link.split(' ');
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">

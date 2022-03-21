@@ -9,6 +9,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Markdown } from '~/components/markdown';
+import { SiteText } from '~/locale';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
   totalBoosterAndThirdShots: number;
@@ -19,6 +20,7 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   metadateBoosterEstimated: MetadataProps;
   boosterShotLastSevenDays: number;
   metadataBoosterShotLastSevenDays: MetadataProps;
+  texts: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -30,33 +32,32 @@ export function VaccineBoosterAdministrationsKpiSection({
   metadateBoosterEstimated,
   boosterShotLastSevenDays,
   metadataBoosterShotLastSevenDays,
+  texts,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
-  const { siteText, formatNumber } = useIntl();
-
-  const text = siteText.pages.vaccinationsPage.nl.booster_and_third_kpi;
+  const { formatNumber } = useIntl();
 
   return (
     <Tile>
       <Box mb={20}>
         <TwoKpiSection>
-          <Heading level={3}>{text.title}</Heading>
+          <Heading level={3}>{texts.title}</Heading>
           <Box />
         </TwoKpiSection>
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
           <KpiValue absolute={totalBoosterAndThirdShots} />
-          <Text>{text.total_booster_and_third_shots.description}</Text>
-          {text.total_booster_and_third_shots.warning && (
+          <Text>{texts.total_booster_and_third_shots.description}</Text>
+          {texts.total_booster_and_third_shots.warning && (
             <Message variant="warning">
-              {text.total_booster_and_third_shots.warning}
+              {texts.total_booster_and_third_shots.warning}
             </Message>
           )}
           <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
 
           <Markdown
             content={replaceVariablesInText(
-              text.booster_shot_last_seven_days.description,
+              texts.booster_shot_last_seven_days.description,
               {
                 amount: formatNumber(boosterShotLastSevenDays),
               }
@@ -67,12 +68,12 @@ export function VaccineBoosterAdministrationsKpiSection({
         <Box spacing={4}>
           <BoosterAdministeredItem
             value={boosterGgdValue}
-            description={text.booster_ggd.title}
+            description={texts.booster_ggd.title}
             metadata={metadateBoosterGgd}
           />
           <BoosterAdministeredItem
             value={boosterEstimatedValue}
-            description={text.booster_estimated.title}
+            description={texts.booster_estimated.title}
             metadata={metadateBoosterEstimated}
           />
         </Box>

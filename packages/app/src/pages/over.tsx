@@ -44,11 +44,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Over = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { content, lastGenerated } = props;
 
   return (
-    <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
+    <Layout {...commonTexts.over_metadata} lastGenerated={lastGenerated}>
       <Head>
         <link
           key="dc-type"

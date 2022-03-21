@@ -49,7 +49,7 @@ export function VrLayout(props: VrLayoutProps) {
   const { children, vrName, isLandingPage, getLink } = props;
 
   const router = useRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const code = router.query.code as string;
 
@@ -124,7 +124,7 @@ export function VrLayout(props: VrLayoutProps) {
                 <Box px={3}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">
-                      {siteText.veiligheidsregio_layout.headings.sidebar}
+                      {commonTexts.veiligheidsregio_layout.headings.sidebar}
                     </VisuallyHidden>
                     {vrName}
                   </Heading>
@@ -138,7 +138,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                 <Box px={3}>
                   <Heading level={3}>
-                    {siteText.sidebar.shared.metrics_title}
+                    {commonTexts.sidebar.shared.metrics_title}
                   </Heading>
                 </Box>
 
@@ -152,7 +152,7 @@ export function VrLayout(props: VrLayoutProps) {
       >
         <ErrorBoundary>
           {children}
-          <LoadingWrapper previousUrl={'veiligheidsregio/' + code}/>
+          <LoadingWrapper previousUrl={'veiligheidsregio/' + code} />
         </ErrorBoundary>
       </AppContent>
     </>

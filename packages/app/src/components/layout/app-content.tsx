@@ -26,7 +26,7 @@ export function AppContent({
 }: AppContentProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const isMenuOpen =
     router.pathname == '/internationaal' ||
@@ -50,8 +50,8 @@ export function AppContent({
 
   const backButtonText = currentPageScope
     ? isMenuOpen && currentPageScope !== 'in'
-      ? siteText.nav.back_topical[currentPageScope]
-      : siteText.nav.back_all_metrics[currentPageScope]
+      ? commonTexts.nav.back_topical[currentPageScope]
+      : commonTexts.nav.back_all_metrics[currentPageScope]
     : '';
 
   return (

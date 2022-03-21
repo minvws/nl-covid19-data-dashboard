@@ -67,6 +67,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        hospitalText: siteText.pages.hospitalPage.nl,
+        positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textVr: siteText.pages.topicalPage.vr,
         textShared: siteText.pages.topicalPage.shared,
       }),
@@ -134,9 +136,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const vrCode = router.query.code as string;
-  const { siteText, ...formatters } = useIntl();
-  const { textVr, textShared } = pageText;
-  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
+  const { commonTexts, ...formatters } = useIntl();
+  const { hospitalText, positiveTestsText, textVr, textShared } = pageText;
 
   const dataHospitalIntake = data.hospital_nice;
   const dataSitemap = useDataSitemap('vr', vrCode);
@@ -190,9 +191,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
                 headingLevel={1}
+                text={textShared}
               />
 
               <MiniTileSelectorLayout
+                text={textShared}
                 link={{
                   text: replaceVariablesInText(textVr.title_link, {
                     safetyRegionName: vrName,
@@ -301,17 +304,13 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'line',
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_moving_average,
+                      label: hospitalText.linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_trend_label,
+                      label: hospitalText.linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -321,7 +320,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeHospital,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -482,6 +481,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               )}
               vrCode={vrCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+              text={textShared}
               link={{
                 href: reverseRouter.vr.vaccinaties(vrCode),
                 text: replaceVariablesInText(
@@ -541,10 +541,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               description={textShared.secties.meer_lezen.omschrijving}
               link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
+              text={textShared}
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} />
+              <ArticleList articles={content.articles} text={textShared} />
             )}
           </MaxWidth>
         </Box>

@@ -3,11 +3,12 @@ import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { BehaviorTrendType } from '../logic/behavior-types';
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
   color?: string;
+  text: SiteText['pages']['behaviorPage']['shared'];
 }
 
 const Trend = styled.span((a) =>
@@ -25,15 +26,12 @@ const Trend = styled.span((a) =>
   })
 );
 
-export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
-  const { siteText } = useIntl();
-  const behaviorPageText = siteText.pages.behaviorPage.shared;
-
+export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   if (trend === 'up') {
     return (
       <Trend color={color}>
         <Up />
-        {behaviorPageText.basisregels.trend_hoger}
+        {text.basisregels.trend_hoger}
       </Trend>
     );
   }
@@ -41,7 +39,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
     return (
       <Trend color={color}>
         <Down />
-        {behaviorPageText.basisregels.trend_lager}
+        {text.basisregels.trend_lager}
       </Trend>
     );
   }
@@ -49,7 +47,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
     return (
       <Trend color={colors.data.neutral}>
         <Gelijk />
-        {behaviorPageText.basisregels.trend_gelijk}
+        {text.basisregels.trend_gelijk}
       </Trend>
     );
   }

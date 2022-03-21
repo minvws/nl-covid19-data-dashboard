@@ -31,7 +31,7 @@ export function Layout(
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <div>
@@ -43,20 +43,26 @@ export function Layout(
         url={url}
       />
       <SkipLinkMenu
-        ariaLabel={siteText.aria_labels.skip_links}
+        ariaLabel={commonTexts.aria_labels.skip_links}
         links={[
-          { href: '#content', label: siteText.skiplinks.inhoud },
-          { href: '#main-navigation', label: siteText.skiplinks.nav },
-          { href: '#metric-navigation', label: siteText.skiplinks.metric_nav },
-          { href: '#footer-navigation', label: siteText.skiplinks.footer_nav },
+          { href: '#content', label: commonTexts.skiplinks.inhoud },
+          { href: '#main-navigation', label: commonTexts.skiplinks.nav },
+          {
+            href: '#metric-navigation',
+            label: commonTexts.skiplinks.metric_nav,
+          },
+          {
+            href: '#footer-navigation',
+            label: commonTexts.skiplinks.footer_nav,
+          },
         ]}
       />
       <AppHeader />
 
-      {siteText.dashboard_wide_notification.title.length !== 0 && (
+      {commonTexts.dashboard_wide_notification.title.length !== 0 && (
         <NotificationBanner
-          title={siteText.dashboard_wide_notification.title}
-          description={siteText.dashboard_wide_notification.description}
+          title={commonTexts.dashboard_wide_notification.title}
+          description={commonTexts.dashboard_wide_notification.description}
         />
       )}
 

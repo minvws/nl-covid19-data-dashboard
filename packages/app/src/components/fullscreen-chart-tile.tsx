@@ -24,7 +24,7 @@ export function FullscreenChartTile({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wasFullscreen = usePrevious(isFullscreen);
   const breakpoints = useBreakpoints();
-  const intl = useIntl();
+  const { commonTexts } = useIntl();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -35,9 +35,9 @@ export function FullscreenChartTile({
 
   const label = replaceVariablesInText(
     isFullscreen
-      ? intl.siteText.common.modal_close
-      : intl.siteText.common.modal_open,
-    { subject: intl.siteText.common.grafiek_singular }
+      ? commonTexts.common.modal_close
+      : commonTexts.common.modal_open,
+    { subject: commonTexts.common.grafiek_singular }
   );
 
   const tile = (

@@ -25,7 +25,7 @@ type ArticleTeaserProps = {
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
   const { title, slug, summary, cover, coverSizes } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
@@ -42,7 +42,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
         <Text>{summary}</Text>
 
         <InlineText aria-hidden="true" fontWeight="bold" color="link">
-          {siteText.common.read_more}
+          {commonTexts.common.read_more}
           <Arrow />
         </InlineText>
       </StyledArticleTeaser>

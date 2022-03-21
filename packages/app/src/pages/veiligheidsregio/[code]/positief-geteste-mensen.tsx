@@ -115,7 +115,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+  const { commonTexts, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
 
   const reverseRouter = useReverseRouter();
@@ -132,7 +132,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -146,8 +146,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.besmettingen}
-            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
+            category={commonTexts.veiligheidsregio_layout.headings.besmettingen}
+            screenReaderCategory={
+              commonTexts.sidebar.metrics.positive_tests.title
+            }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
