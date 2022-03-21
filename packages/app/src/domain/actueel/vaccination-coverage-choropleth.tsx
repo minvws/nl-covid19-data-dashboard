@@ -148,7 +148,6 @@ export function VaccinationCoverageChoropleth(
                   percentageProps={[
                     'booster_shot_percentage',
                     'fully_vaccinated_percentage',
-                    'has_one_shot_percentage',
                   ]}
                 />
               )}
@@ -183,7 +182,6 @@ export function VaccinationCoverageChoropleth(
                   percentageProps={[
                     'booster_shot_percentage',
                     'fully_vaccinated_percentage',
-                    'has_one_shot_percentage',
                   ]}
                 />
               )}
@@ -217,7 +215,6 @@ export function VaccinationCoverageChoropleth(
                   percentageProps={[
                     'booster_shot_percentage',
                     'fully_vaccinated_percentage',
-                    'has_one_shot_percentage',
                   ]}
                 />
               )}
