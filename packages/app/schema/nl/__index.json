@@ -4,6 +4,7 @@
   "title": "nl",
   "required": [
     "behavior",
+    "behavior_annotations",
     "booster_and_third_shot_administered",
     "booster_shot_administered",
     "repeating_shot_administered",
@@ -176,6 +177,9 @@
     },
     "behavior_get_tested_support_per_age_group": {
       "$ref": "behavior_get_tested_support_per_age_group.json"
+    },
+    "behavior_annotations": {
+      "$ref": "behavior_annotations.json"
     },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"

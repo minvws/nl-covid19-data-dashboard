@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_behavior_annotations",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_behavior_annotations",
+      "type": "object",
+      "properties": {
+        "first_wave": {
+          "type": "number"
+        },
+        "measurement_duration_in_days": {
+          "type": "number"
+        },
+        "indicator": {
+          "type": "string"
+        },
+        "title":  {
+          "type": "string"
+        },
+        "message_rivm":  {
+          "type": "string"
+        },
+        "message":  {
+          "type": "string"
+        },
+        "date_of_first_measurement_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_change_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "first_wave",
+        "measurement_duration_in_days",
+        "indicator",
+        "title",
+        "message_rivm",
+        "message",
+        "date_of_first_measurement_unix",
+        "date_of_report_unix",
+        "date_of_change_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
