@@ -8,43 +8,31 @@
       "items": {
         "$ref": "#/definitions/value"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["values"],
   "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "nl_behavior_annotations",
       "type": "object",
       "properties": {
-        "first_wave": {
-          "type": "number"
-        },
-        "measurement_duration_in_days": {
-          "type": "number"
-        },
         "indicator": {
           "type": "string"
         },
-        "title":  {
+        "message_title":  {
           "type": "string"
         },
-        "message_rivm":  {
-          "type": "string"
-        },
-        "message":  {
+        "message_text":  {
           "type": "string"
         },
         "date_of_first_measurement_unix": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "date_of_change_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -52,15 +40,11 @@
         }
       },
       "required": [
-        "first_wave",
-        "measurement_duration_in_days",
         "indicator",
-        "title",
-        "message_rivm",
-        "message",
-        "date_of_first_measurement_unix",
-        "date_of_report_unix",
-        "date_of_change_unix",
+        "message_title",
+        "message_text",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

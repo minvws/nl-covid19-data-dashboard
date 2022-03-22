@@ -46,7 +46,7 @@ export const getStaticProps = createGetStaticProps(
       locale
     ),
   getLastGeneratedDate,
-  selectNlData('behavior', 'behavior_per_age_group'),
+  selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
@@ -107,6 +107,21 @@ export default function BehaviorPage(
 
     return { highestCompliance, highestSupport };
   }, [behaviorLastValue, behaviorLookupKeys]);
+
+  const { currentTimelineEvents } = useMemo(() => {
+    // Timeline event from the current selected behaviour
+    const currentTimelineEvents = data.behavior_annotations.values.filter(
+      (a) => (a.indicator === currentId)
+    ).map((event) => ({
+        title: event.message_title,
+        description: event.message_text,
+        start: event.date_start_unix,
+        end: event.date_end_unix
+      })
+    );
+
+    return { currentTimelineEvents };
+  }, [currentId, data.behavior_annotations.values]);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -204,8 +219,10 @@ export default function BehaviorPage(
               ],
               source: textNl.bronnen.rivm,
             }}
+            timelineEvents={currentTimelineEvents}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            useDatesAsRange
           />
 
           <BehaviorChoroplethsTile
