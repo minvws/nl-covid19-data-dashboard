@@ -51,7 +51,10 @@ export function VaccineCoverageChoroplethPerGm({
   const reverseRouter = useReverseRouter();
 
   const variables = {
-    regio: commonTexts.choropleth.vaccination_coverage.shared[selectedMap],
+    regio:
+      commonTexts.choropleth.choropleth_vaccination_coverage.shared[
+        selectedMap
+      ],
   };
 
   return (
@@ -84,7 +87,7 @@ export function VaccineCoverageChoroplethPerGm({
               })}
             >
               {
-                commonTexts.choropleth_vaccination_coverage.shared
+                commonTexts.choropleth.vaccination_coverage.shared
                   .dropdowns_title
               }
             </Text>
