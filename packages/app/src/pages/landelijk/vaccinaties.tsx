@@ -334,7 +334,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           {repeatingShotAdministeredFeature.isEnabled && (
             <>
               <VaccinationsKpiHeader
-                text={textNl.repeating_shot_information_block}
+                text={textNl.repeating_information_block}
                 dateUnix={boosterShotAdministeredLastValue.date_end_unix}
                 dateOfInsertionUnix={
                   boosterShotAdministeredLastValue.date_of_insertion_unix
