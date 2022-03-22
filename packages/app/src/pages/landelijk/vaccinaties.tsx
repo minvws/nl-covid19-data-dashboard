@@ -220,10 +220,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
 
-  const repeatingShotAdministeredFeature = useFeature(
-    'nlRepeatingShotAdministered'
-  );
-
   const metadata = {
     ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textNl.metadata.title,
@@ -329,24 +325,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               textNl.vaccination_grade_toggle_tile.age_18_plus
             }
           />
-          {repeatingShotAdministeredFeature.isEnabled && (
-            <>
-              <VaccinationsKpiHeader
-                text={textNl.repeating_shot_information_block}
-                dateUnix={boosterShotAdministeredLastValue.date_end_unix}
-                dateOfInsertionUnix={
-                  boosterShotAdministeredLastValue.date_of_insertion_unix
-                }
-              />
-              <VaccinationsShotKpiSection
-                text={textNl.repeating_shot_kpi}
-                dateUnix={repeatingShotAdministeredLastValue.date_unix}
-                value={
-                  repeatingShotAdministeredLastValue.ggd_administered_total
-                }
-              />
-            </>
-          )}
+
+          <VaccinationsKpiHeader
+            text={textNl.repeating_shot_information_block}
+            dateUnix={boosterShotAdministeredLastValue.date_end_unix}
+            dateOfInsertionUnix={
+              boosterShotAdministeredLastValue.date_of_insertion_unix
+            }
+          />
+          <VaccinationsShotKpiSection
+            text={textNl.repeating_shot_kpi}
+            dateUnix={repeatingShotAdministeredLastValue.date_unix}
+            value={repeatingShotAdministeredLastValue.ggd_administered_total}
+          />
+
           <VaccinationsOverTimeTile
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
