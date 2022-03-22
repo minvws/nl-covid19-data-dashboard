@@ -72,7 +72,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         <ContentBlock>
           <Box pb={2} pt={4}>
             <InlineText color="annotation">
-              {siteText.common_actueel.secties.artikelen.tags}
+              {siteText.pages.topicalPage.shared.secties.artikelen.tags}
             </InlineText>
           </Box>
           <Box
@@ -97,7 +97,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
                 >
                   <TagAnchor>
                     {
-                      siteText.common_actueel.secties.artikelen
+                      siteText.pages.topicalPage.shared.secties.artikelen
                         .categorie_filters[item as ArticleCategoryType]
                     }
                   </TagAnchor>

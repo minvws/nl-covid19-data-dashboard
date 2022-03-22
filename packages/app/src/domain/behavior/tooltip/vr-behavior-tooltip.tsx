@@ -27,6 +27,7 @@ export function VrBehaviorTooltip({
   behaviorType,
 }: VrBehaviorTooltipProps) {
   const { siteText } = useIntl();
+  const behaviorPageText = siteText.pages.behaviorPage;
   const reverseRouter = useReverseRouter();
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
@@ -43,7 +44,7 @@ export function VrBehaviorTooltip({
 
   const complianceTooltipInfo = (
     <TooltipInfo
-      title={siteText.nl_gedrag.tooltip_labels.compliance}
+      title={behaviorPageText.nl.tooltip_labels.compliance}
       value={currentComplianceValue}
       background={complianceFilteredThreshold.color}
     />
@@ -51,7 +52,7 @@ export function VrBehaviorTooltip({
 
   const supportTooltipInfo = (
     <TooltipInfo
-      title={siteText.nl_gedrag.tooltip_labels.support}
+      title={behaviorPageText.nl.tooltip_labels.support}
       value={currentSupportValue}
       background={supportFilteredThreshold.color}
     />
@@ -64,7 +65,7 @@ export function VrBehaviorTooltip({
     >
       <Box maxWidth="15rem" spacing={2}>
         <Text fontWeight="bold">
-          {siteText.gedrag_onderwerpen[currentMetric]}
+          {behaviorPageText.shared.onderwerpen[currentMetric]}
         </Text>
 
         {/* Change order of the info based on the metric name */}

@@ -76,7 +76,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
   const { textNl } = pageText;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };

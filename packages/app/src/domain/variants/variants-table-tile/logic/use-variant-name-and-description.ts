@@ -9,18 +9,19 @@ export function useVariantNameAndDescription(
   const { siteText } = useIntl();
 
   const variantName = (
-    siteText.covid_varianten.varianten as Dictionary<string>
+    siteText.pages.variantsPage.nl.varianten as Dictionary<string>
   )[variant];
 
   const variantDescription =
     variant === 'other_table'
       ? otherDescription
-      : (siteText.covid_varianten.varianten_omschrijving as Dictionary<string>)[
-          variant
-        ];
+      : (
+          siteText.pages.variantsPage.nl
+            .varianten_omschrijving as Dictionary<string>
+        )[variant];
 
   const countryOfOrigin = (
-    siteText.covid_varianten.landen_van_herkomst as Dictionary<string>
+    siteText.pages.variantsPage.nl.landen_van_herkomst as Dictionary<string>
   )[variant];
 
   assert(

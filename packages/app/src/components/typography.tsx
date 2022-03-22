@@ -10,6 +10,7 @@ export interface TextProps {
   textAlign?: CSSProperties['textAlign'];
   hyphens?: CSSProperties['hyphens'];
   color?: Color | string;
+  ariaLabel?: string;
 }
 
 export interface AnchorProps extends TextProps {

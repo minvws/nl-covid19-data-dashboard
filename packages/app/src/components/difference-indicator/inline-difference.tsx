@@ -12,7 +12,7 @@ export function InlineDifference({
   isAmount: boolean;
 }) {
   const { siteText } = useIntl();
-  const text = siteText.common_actueel;
+  const text = siteText.pages.topicalPage.shared;
 
   if (value.difference > 0)
     return (

@@ -32,8 +32,10 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { lastGenerated } = props;
 
+  const textVr = siteText.pages.topicalPage.vr;
+
   const metadata = {
-    ...siteText.veiligheidsregio_actueel.index.metadata,
+    ...textVr.index.metadata,
   };
 
   const data = useMemo(() => {
@@ -64,12 +66,10 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
           )}
 
           <Heading level={2} as="h1">
-            {siteText.veiligheidsregio_actueel.index.title}
+            {textVr.index.title}
           </Heading>
 
-          <Markdown
-            content={siteText.veiligheidsregio_actueel.index.description}
-          />
+          <Markdown content={textVr.index.description} />
 
           <Box
             display="flex"

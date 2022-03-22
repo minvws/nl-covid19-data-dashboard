@@ -29,9 +29,8 @@ export function WideInfectedTable({
   countryNames,
   inputValue,
 }: WideInfectedTableProps) {
-  const intl = useIntl();
-  const text =
-    intl.siteText.internationaal_positief_geteste_personen.land_tabel;
+  const { siteText, formatPercentage } = useIntl();
+  const text = siteText.pages.in_positiveTestsPage.shared.land_tabel;
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   const formatValue = useMemo(() => {
@@ -39,11 +38,11 @@ export function WideInfectedTable({
       data.map((x) => x.infected_per_100k_average ?? 0)
     );
     return (value: number) =>
-      intl.formatPercentage(value, {
+      formatPercentage(value, {
         minimumFractionDigits: numberOfDecimals,
         maximumFractionDigits: numberOfDecimals,
       });
-  }, [intl, data]);
+  }, [data, formatPercentage]);
 
   return (
     <Box overflow="auto">

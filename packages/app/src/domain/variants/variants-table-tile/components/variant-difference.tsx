@@ -6,7 +6,7 @@ import { useIntl } from '~/intl';
 
 export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   const { siteText, formatPercentage } = useIntl();
-  const diffText = siteText.covid_varianten.varianten_tabel.verschil;
+  const diffText = siteText.pages.variantsPage.shared.varianten_tabel.verschil;
 
   const options = {
     minimumFractionDigits: 1,

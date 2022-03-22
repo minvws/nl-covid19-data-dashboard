@@ -30,6 +30,7 @@ import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getLinkParts,
@@ -44,6 +45,7 @@ import {
   createGetContent,
   getInData,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
@@ -56,6 +58,13 @@ type CompiledCountriesValue = {
 export const getStaticProps = withFeatureNotFoundPage(
   'inPositiveTestsPage',
   createGetStaticProps(
+    ({ locale }: { locale: keyof Languages }) =>
+      getLokalizeTexts(
+        (siteText) => ({
+          textIn: siteText.pages.in_positiveTestsPage.shared,
+        }),
+        locale
+      ),
     getLastGeneratedDate,
     async (context: GetStaticPropsContext) => {
       const { content } = await createGetContent<
@@ -69,7 +78,7 @@ export const getStaticProps = withFeatureNotFoundPage(
           ),
           links: getLinkParts(content.pageParts, 'in_positiveTestsPageLinks'),
         },
-      };
+      } as const;
     },
     createGetChoroplethData({
       in: ({ tested_overall }) => tested_overall,
@@ -97,6 +106,7 @@ export default function PositiefGetesteMensenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
+    pageText,
     lastGenerated,
     content,
     choropleth,
@@ -106,13 +116,13 @@ export default function PositiefGetesteMensenPage(
   } = props;
   const { in: choroplethData } = choropleth;
 
-  const intl = useIntl();
-  const text = intl.siteText.internationaal_positief_geteste_personen;
+  const { siteText } = useIntl();
+  const { textIn } = pageText;
 
   const metadata = {
-    ...intl.siteText.internationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...siteText.internationaal_metadata,
+    title: textIn.metadata.title,
+    description: textIn.metadata.description,
   };
 
   const comparedCode = 'nld';
@@ -145,31 +155,31 @@ export default function PositiefGetesteMensenPage(
       <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
-            category={text.categorie}
-            title={text.titel}
+            category={textIn.categorie}
+            title={textIn.titel}
             icon={<Test />}
-            description={text.pagina_toelichting}
+            description={textIn.pagina_toelichting}
             metadata={{
               ...internationalMetadataDatums,
-              datumsText: text.datums,
-              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              datumsText: textIn.datums,
+              dataSources: [textIn.bronnen.rivm, textIn.bronnen.ecdc],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textIn.reference.href}
             articles={content.articles}
             pageLinks={content.links}
           />
 
-          <InformationTile message={text.informatie_tegel} />
+          <InformationTile message={textIn.informatie_tegel} />
 
           <EuropeChoroplethTile
-            title={text.choropleth.titel}
-            description={text.choropleth.toelichting}
+            title={textIn.choropleth.titel}
+            description={textIn.choropleth.toelichting}
             legend={{
               thresholds: thresholds.in.infected_per_100k_average,
-              title: text.choropleth.legenda_titel,
+              title: textIn.choropleth.legenda_titel,
             }}
             metadata={{
-              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              dataSources: [textIn.bronnen.rivm, textIn.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
@@ -192,7 +202,7 @@ export default function PositiefGetesteMensenPage(
               }}
               formatTooltip={(context) => (
                 <InPositiveTestedPeopleTooltip
-                  title={text.choropleth.tooltip_titel}
+                  title={textIn.choropleth.tooltip_titel}
                   countryName={context.featureName}
                   countryCode={context.dataItem.country_code}
                   value={context.dataItem.infected_per_100k_average}
@@ -229,11 +239,11 @@ export default function PositiefGetesteMensenPage(
           </EuropeChoroplethTile>
 
           <ChartTile
-            title={text.time_graph.title}
+            title={textIn.time_graph.title}
             metadata={{
-              source: text.bronnen.rivm,
+              source: textIn.bronnen.rivm,
             }}
-            description={text.time_graph.description}
+            description={textIn.time_graph.description}
           >
             <MultiSelectCountries
               countryOptions={countryOptions}
@@ -262,7 +272,7 @@ export default function PositiefGetesteMensenPage(
             data={choroplethData}
             countryNames={countryNames}
             metadata={{
-              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              dataSources: [textIn.bronnen.rivm, textIn.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,

@@ -110,7 +110,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     textNl.verpleeghuis_positief_geteste_personen;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: infectedLocationsText.metadata.title,
     description: infectedLocationsText.metadata.description,
   };

@@ -86,12 +86,11 @@ export default function BrononderzoekPage(
     vrName,
   } = props;
 
-  const intl = useIntl();
-  const { formatNumber, formatDateSpan } = intl;
+  const { siteText, formatNumber, formatDateSpan } = useIntl();
   const { textShared } = pageText;
 
   const metadata = {
-    ...intl.siteText.nationaal_metadata,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textShared.metadata.title,
     description: textShared.metadata.description,
   };
@@ -109,17 +108,14 @@ export default function BrononderzoekPage(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={intl.siteText.nationaal_layout.headings.besmettingen}
+            category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              intl.siteText.sidebar.metrics.source_investigation.title
+              siteText.sidebar.metrics.source_investigation.title
             }
-            title={replaceVariablesInText(
-              intl.siteText.common.subject_in_location,
-              {
-                subject: textShared.titel,
-                location: vrName,
-              }
-            )}
+            title={replaceVariablesInText(siteText.common.subject_in_location, {
+              subject: textShared.titel,
+              location: vrName,
+            })}
             icon={<Gedrag />}
             description={textShared.pagina_toelichting}
             metadata={{

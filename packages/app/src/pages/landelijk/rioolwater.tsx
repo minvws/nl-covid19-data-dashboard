@@ -16,6 +16,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -29,11 +30,20 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textNl: siteText.pages.sewerPage.nl,
+        textShared: siteText.pages.sewerPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData('sewer', 'difference.sewer__average'),
   createGetChoroplethData({
@@ -56,17 +66,22 @@ export const getStaticProps = createGetStaticProps(
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    content,
+    lastGenerated,
+  } = props;
 
-  const text = siteText.rioolwater_metingen;
-
+  const { textNl, textShared } = pageText;
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const metadata = {
-    ...siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
@@ -78,31 +93,31 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             screenReaderCategory={
               siteText.sidebar.metrics.sewage_measurement.title
             }
-            title={text.titel}
+            title={textNl.titel}
             icon={<RioolwaterMonitoring />}
-            description={text.pagina_toelichting}
+            description={textNl.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textNl.datums,
               dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix:
                 sewerAverages.last_value.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textNl.reference.href}
             articles={content.articles}
           />
 
-          {!isEmpty(text.warning_method) && (
-            <WarningTile message={text.warning_method} icon={Experimenteel} />
+          {!isEmpty(textNl.warning_method) && (
+            <WarningTile message={textNl.warning_method} icon={Experimenteel} />
           )}
 
           <TwoKpiSection>
             <KpiTile
-              title={text.barscale_titel}
-              description={text.extra_uitleg}
+              title={textNl.barscale_titel}
+              description={textNl.extra_uitleg}
               metadata={{
                 date: sewerAverages.last_value.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -115,8 +130,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={text.tile_explanation_title}
-              description={text.tile_explanation_description}
+              title={textNl.tile_explanation_title}
+              description={textNl.tile_explanation_description}
             />
           </TwoKpiSection>
 
@@ -124,19 +139,19 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
             dataAverages={data.sewer}
             text={{
-              title: text.linechart_titel,
-              source: text.bronnen.rivm,
-              description: text.linechart_description,
-              selectPlaceholder: text.graph_selected_rwzi_placeholder,
-              splitLabels: siteText.rioolwater_metingen.split_labels,
+              title: textNl.linechart_titel,
+              source: textNl.bronnen.rivm,
+              description: textNl.linechart_description,
+              selectPlaceholder: textNl.graph_selected_rwzi_placeholder,
+              splitLabels: textShared.split_labels,
               averagesDataLabel: siteText.common.daggemiddelde,
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}
           />
 
           <ChoroplethTile
-            title={text.map_titel}
-            description={text.map_toelichting}
+            title={textNl.map_titel}
+            description={textNl.map_toelichting}
             metadata={{
               date:
                 selectedMap === 'gm'
@@ -145,13 +160,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                       choropleth.gm.sewer[0].date_end_unix,
                     ]
                   : choropleth.vr.sewer[0].date_unix,
-              source: text.bronnen.rivm,
+              source: textNl.bronnen.rivm,
             }}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
-              title: text.legenda_titel,
+              title: textNl.legenda_titel,
               thresholds: thresholds.vr.average,
             }}
           >

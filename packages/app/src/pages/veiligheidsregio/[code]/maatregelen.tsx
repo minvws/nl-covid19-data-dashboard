@@ -8,6 +8,7 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -17,6 +18,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -29,6 +31,13 @@ type MaatregelenData = {
 };
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.measuresPage.vr,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectVrData(),
   selectNlData('risk_level'),
@@ -60,25 +69,25 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, vrName, lastGenerated, selectedNlData } = props;
+  const { pageText, content, vrName, lastGenerated, selectedNlData } = props;
 
   const { siteText } = useIntl();
-  const text = siteText.veiligheidsregio_maatregelen;
-  type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
+  const { textVr } = pageText;
+  type VRCode = keyof typeof textVr.urls;
 
   const { lockdown } = content;
 
   const router = useRouter();
   const code = router.query.code as unknown as VRCode;
 
-  const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
+  const regioUrl = textVr.urls[code];
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(text.metadata.title, {
+    description: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
   };
@@ -88,19 +97,13 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <Box as="header" spacing={4}>
-            <Heading
-              level={1}
-              as="h2"
-            >
-              {replaceVariablesInText(
-                siteText.veiligheidsregio_maatregelen.titel,
-                {
-                  safetyRegionName: vrName,
-                })
-              }
+            <Heading level={1} as="h2">
+              {replaceVariablesInText(textVr.titel, {
+                safetyRegionName: vrName,
+              })}
             </Heading>
             {lockdown.message.description ? (
-              <Box maxWidth='maxWidthText'>
+              <Box maxWidth="maxWidthText">
                 <RichContent blocks={lockdown.message.description} />
               </Box>
             ) : null}
@@ -116,13 +119,13 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
           <AnchorTile
             external
-            title={text.titel_aanvullendemaatregelen}
+            title={textVr.titel_aanvullendemaatregelen}
             href={regioUrl}
-            label={replaceVariablesInText(text.linktext_regionpage, {
+            label={replaceVariablesInText(textVr.linktext_regionpage, {
               safetyRegionName: vrName,
             })}
           >
-            {text.toelichting_aanvullendemaatregelen}
+            {textVr.toelichting_aanvullendemaatregelen}
           </AnchorTile>
         </TileList>
       </VrLayout>

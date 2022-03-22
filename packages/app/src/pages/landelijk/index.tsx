@@ -28,7 +28,10 @@ const National = (props: StaticProps<typeof getStaticProps>) => {
   }, [breakpoints.md, reverseRouter.nl, router]);
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...siteText.pages.topicalPage.nl.nationaal_metadata}
+      lastGenerated={lastGenerated}
+    >
       <NlLayout />
     </Layout>
   );
