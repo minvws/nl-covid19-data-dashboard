@@ -62,6 +62,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { trimNullValues } from '~/utils/trim-null-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
+import { assert } from '~/utils/assert';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -161,7 +162,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
-  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+  const boosterCoverage18PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '18+'
+  );
+
+  assert(
+    boosterCoverage18PlusValue,
+    `[${Home.name}] Missing value for booster_coverage 18+`
+  );
 
   const underReportedRangeIntensiveCare = getBoundaryDateStartUnix(
     data.intensive_care_nice.values,
@@ -580,7 +588,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             textShared.booster_shots_administered_data_drive_text,
                             {
                               percentage: formatters.formatPercentage(
-                                boosterCoverageLastValue.percentage
+                                boosterCoverage18PlusValue.percentage
                               ),
                             }
                           )}
@@ -602,7 +610,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated
                   }
                   boosterShotAdministered={formatPercentageAsNumber(
-                    `${boosterCoverageLastValue.percentage}`
+                    `${boosterCoverage18PlusValue.percentage}`
                   )}
                   warning={getWarning(
                     content.elements.warning,
