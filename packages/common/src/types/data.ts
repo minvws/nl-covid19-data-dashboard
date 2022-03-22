@@ -307,6 +307,7 @@ export interface Nl {
   behavior: NlBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
+  behavior_annotations: NlBehaviorAnnotations;
   deceased_rivm: NlDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NlDeceasedCbs;
@@ -829,6 +830,18 @@ export interface NlBehaviorGetTestedSupportPerAgeGroupValue {
   percentage_16_24: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBehaviorAnnotations {
+  values: NlBehaviorAnnotations1[];
+}
+export interface NlBehaviorAnnotations1 {
+  indicator: string;
+  message_title: string;
+  message_text: string;
+  date_of_first_measurement_unix: number;
+  date_start_unix?: number;
+  date_end_unix?: number;
   date_of_insertion_unix: number;
 }
 export interface NlDeceasedRivm {

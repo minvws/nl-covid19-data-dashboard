@@ -28,6 +28,7 @@ interface BehaviorLineChartTileProps {
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   behaviorOptions?: BehaviorIdentifier[];
   timelineEvents?: TimelineEventConfig[];
+  useDatesAsRange?: boolean;
 }
 
 export function BehaviorLineChartTile({
@@ -36,6 +37,8 @@ export function BehaviorLineChartTile({
   currentId,
   setCurrentId,
   behaviorOptions,
+  timelineEvents,
+  useDatesAsRange,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
   const behaviorPageText = siteText.pages.behaviorPage;
@@ -117,7 +120,8 @@ export function BehaviorLineChartTile({
           ]}
           dataOptions={{
             isPercentage: true,
-            // timelineEvents: timelineEvents.coverage,
+            useDatesAsRange: useDatesAsRange,
+            timelineEvents: timelineEvents,
           } as DataOptions}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
