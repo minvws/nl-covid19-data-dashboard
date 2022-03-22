@@ -6,9 +6,14 @@ import { Option } from '~/components/rich-content-select/types';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
-export type CoverageKindProperty = 'fully_vaccinated_percentage';
+export type CoverageKindProperty =
+  | 'fully_vaccinated_percentage'
+  | 'has_one_shot_percentage';
 
-const COVERAGE_KINDS: CoverageKindProperty[] = ['fully_vaccinated_percentage'];
+const COVERAGE_KINDS: CoverageKindProperty[] = [
+  'fully_vaccinated_percentage',
+  'has_one_shot_percentage',
+];
 
 type VaccinationCoverageKindSelectProps = {
   onChange: (value: CoverageKindProperty) => void;
