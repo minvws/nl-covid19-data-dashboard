@@ -4,6 +4,7 @@ import {
   getLastFilledValue,
   NlHospitalVaccinationStatusValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
+  TimeframeOption,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
@@ -319,8 +320,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.nice,
             }}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -370,8 +371,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.lnaz,
             }}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -465,8 +466,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={
               siteText.hospital_admissions_per_age_group.chart_description
             }
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
             metadata={{ source: textNl.bronnen.nice }}
           >
             {(timeframe) => (

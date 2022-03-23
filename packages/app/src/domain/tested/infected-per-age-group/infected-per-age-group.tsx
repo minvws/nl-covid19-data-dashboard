@@ -1,4 +1,7 @@
-import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  NlTestedPerAgeGroupValue,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import {
@@ -24,7 +27,7 @@ interface InfectedPerAgeGroup {
    */
   accessibility: AccessibilityDefinition;
   values: NlTestedPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks';
+  timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
 }
 

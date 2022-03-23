@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
@@ -240,7 +240,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textGm.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
           >
             {(timeframe) => (
               <TimeSeriesChart

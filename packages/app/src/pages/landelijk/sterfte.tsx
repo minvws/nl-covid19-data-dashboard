@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { AgeDemographic } from '~/components/age-demographic';
@@ -154,7 +154,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             title={textNl.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               textNl.section_deceased_rivm.line_chart_covid_daily_description

@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { External, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
@@ -127,7 +127,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             description={
               corona_melder_app.waarschuwingen_over_tijd_grafiek.description
             }
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
           >
             {(timeframe) => (
               <TimeSeriesChart
