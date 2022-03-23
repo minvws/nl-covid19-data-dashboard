@@ -438,9 +438,9 @@ export interface NlBoosterShotPerAgeGroupValue {
 }
 export interface NlBoosterCoverage {
   values: NlBoosterCoverageValue[];
-  last_value: NlBoosterCoverageValue;
 }
 export interface NlBoosterCoverageValue {
+  age_group?: "12+" | "18+";
   percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
