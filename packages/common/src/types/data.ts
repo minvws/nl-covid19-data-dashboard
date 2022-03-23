@@ -839,9 +839,9 @@ export interface NlBehaviorAnnotations1 {
   indicator: string;
   message_title: string;
   message_text: string;
-  date_of_first_measurement_unix: number;
-  date_start_unix?: number;
-  date_end_unix?: number;
+  date_of_first_measurement_unix?: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlDeceasedRivm {
