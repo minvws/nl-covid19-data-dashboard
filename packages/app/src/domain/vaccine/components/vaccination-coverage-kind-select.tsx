@@ -7,6 +7,7 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 export type CoverageKindProperty =
+  | 'booster_shot_percentage'
   | 'fully_vaccinated_percentage'
   | 'has_one_shot_percentage';
 
