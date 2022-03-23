@@ -1,4 +1,5 @@
 import {
+  assert,
   colors,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
@@ -90,7 +91,6 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.vaccinationsPage.nl,
       }),
       locale
@@ -191,8 +191,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl } = pageText;
+  const { siteText, formatNumber } = useIntl();
+  const { textNl } = pageText;
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const reverseRouter = useReverseRouter();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
@@ -221,12 +221,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     'nlVaccinationBoosterShotsPerAgeGroup'
   );
 
-  const repeatingShotAdministeredFeature = useFeature(
-    'nlRepeatingShotAdministered'
-  );
-
   const metadata = {
-    ...metadataTexts,
+    ...siteText.pages.topicalPage.nl.nationaal_metadata,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -237,7 +233,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const boosterShotAdministeredLastValue =
     data.booster_shot_administered.last_value;
 
-  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+  const boosterCoverage18PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '18+'
+  );
+  const boosterCoverage12PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '12+'
+  );
+
+  assert(
+    boosterCoverage18PlusValue,
+    `[${VaccinationPage.name}] Missing value for booster_coverage 18+`
+  );
+  assert(
+    boosterCoverage12PlusValue,
+    `[${VaccinationPage.name}] Missing value for booster_coverage 12+`
+  );
 
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
@@ -308,7 +318,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageLastValue.percentage}`
+                `${boosterCoverage18PlusValue.percentage}`
               ),
               third_shot: thirdShotAdministeredLastValue.administered_total,
               birthyear:
@@ -319,6 +329,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+              boostered: formatPercentageAsNumber(
+                `${boosterCoverage12PlusValue.percentage}`
+              ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
             }}
@@ -329,28 +342,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             age18PlusToggleText={
               textNl.vaccination_grade_toggle_tile.age_18_plus
             }
-            labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
-          {repeatingShotAdministeredFeature.isEnabled && (
-            <>
-              <VaccinationsKpiHeader
-                text={textNl.repeating_information_block}
-                dateUnix={boosterShotAdministeredLastValue.date_end_unix}
-                dateOfInsertionUnix={
-                  boosterShotAdministeredLastValue.date_of_insertion_unix
-                }
-              />
-              <VaccinationsShotKpiSection
-                text={textNl.repeating_shot_kpi}
-                dateUnix={repeatingShotAdministeredLastValue.date_unix}
-                value={
-                  repeatingShotAdministeredLastValue.ggd_administered_total
-                }
-              />
-            </>
-          )}
+
+          <VaccinationsKpiHeader
+            text={textNl.repeating_shot_information_block}
+            dateUnix={boosterShotAdministeredLastValue.date_end_unix}
+            dateOfInsertionUnix={
+              boosterShotAdministeredLastValue.date_of_insertion_unix
+            }
+          />
+          <VaccinationsShotKpiSection
+            text={textNl.repeating_shot_kpi}
+            dateUnix={repeatingShotAdministeredLastValue.date_unix}
+            value={repeatingShotAdministeredLastValue.ggd_administered_total}
+          />
+
           <VaccinationsOverTimeTile
-            texts={textNl}
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
             vaccineAdministeredPlannedLastValue={
@@ -388,7 +395,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
             values={data.vaccine_coverage_per_age_group.values}
-            text={textNl.vaccination_coverage}
           />
           {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
             <BoosterShotCoveragePerAgeGroup
@@ -422,8 +428,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           )}
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
             <ChartTile
-              title={textNl.incidence_age_demographic_chart.title}
-              description={textNl.incidence_age_demographic_chart.description}
+              title={
+                siteText.pages.vaccinationsPage.nl
+                  .incidence_age_demographic_chart.title
+              }
+              description={
+                siteText.pages.vaccinationsPage.nl
+                  .incidence_age_demographic_chart.description
+              }
             >
               <AgeDemographic
                 data={data.hospital_vaccine_incidence_per_age_group}
@@ -435,7 +447,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
                 rightMetricProperty={'fully_vaccinated_per_100k'}
                 formatValue={(n) => `${n}`}
-                text={textNl.incidence_age_demographic_chart.chart_text}
+                text={
+                  siteText.pages.vaccinationsPage.nl
+                    .incidence_age_demographic_chart.chart_text
+                }
               />
             </ChartTile>
           )}
@@ -577,7 +592,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
-              <VaccineAdministrationsKpiSection data={data} text={textNl} />
+              <VaccineAdministrationsKpiSection data={data} />
             )}
           <VaccinationsKpiHeader
             text={textNl.booster_information_block}
@@ -634,7 +649,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text: textNl.booster_ggd_kpi_section.sources.text,
               },
             }}
-            texts={textNl.booster_and_third_kpi}
           />
           <Divider />
           <PageInformationBlock
@@ -649,12 +663,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <InView rootMargin="500px">
               <VaccineDeliveryBarChart
                 data={data.vaccine_delivery_per_supplier}
-                text={textNl}
               />
 
               <VaccineStockPerSupplierChart
                 values={data.vaccine_stock.values}
-                text={textNl}
               />
 
               <ChartTile
@@ -730,7 +742,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'invisible',
                       metricProperty: 'percentage_average',
-                      label: commonTexts.common.totaal,
+                      label: siteText.common.totaal,
                       isPercentage: true,
                     },
                   ]}
