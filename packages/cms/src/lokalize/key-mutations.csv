@@ -1152,3 +1152,8 @@ timestamp,action,key,document_id,move_to
 2022-03-17T15:06:33.082Z,add,pages.vaccinationsPage.vr.vaccination_grade_toggle_tile.age_18_plus.description_vaccination_third_shot,HphWIdm5NJE670xMUevlsl,__
 2022-03-18T13:31:52.545Z,add,pages.vaccinationsPage.nl.booster_information_block.sources.href,feYq219OWQP2cZqPVjbur0,__
 2022-03-18T13:31:53.568Z,add,pages.vaccinationsPage.nl.repeating_shot_information_block.sources.href,feYq219OWQP2cZqPVjbvYY,__
+2022-03-23T12:52:26.375Z,add,pages.vaccinationsPage.nl.coverage_kinds.booster_shot_percentage,VNAGnZtzuWCFY8gXn2py5S,__
+2022-03-23T13:27:31.119Z,add,choropleth_tooltip.gm.booster_shot_percentage.content,VNAGnZtzuWCFY8gXn2zsLa,__
+2022-03-23T13:27:32.168Z,add,choropleth_tooltip.gm.booster_shot_percentage.subject,VNAGnZtzuWCFY8gXn2zsT8,__
+2022-03-23T13:27:33.327Z,add,choropleth_tooltip.vr.booster_shot_percentage.content,ctWR1OtR3Bc4Z1QxETQyT3,__
+2022-03-23T13:27:34.550Z,add,choropleth_tooltip.vr.booster_shot_percentage.subject,4C4Y1v39Co3s0ZW9zUzEm1,__

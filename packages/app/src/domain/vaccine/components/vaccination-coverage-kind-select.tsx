@@ -13,6 +13,7 @@ export type CoverageKindProperty =
 
 const COVERAGE_KINDS: CoverageKindProperty[] = [
   'fully_vaccinated_percentage',
+  'booster_shot_percentage',
   'has_one_shot_percentage',
 ];
 
