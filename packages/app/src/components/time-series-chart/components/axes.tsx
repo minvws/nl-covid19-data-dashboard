@@ -9,7 +9,7 @@ import {
   colors,
   middleOfDayInSeconds,
   TimeframeOption,
-  TimestampedValue,
+  DateSpanValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -47,7 +47,7 @@ type AxesProps = {
   yTickValues?: number[];
   timeDomain: [number, number];
   xTickNumber?: number;
-  values?: TimestampedValue[];
+  values?: DateSpanValue[];
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -146,7 +146,7 @@ export const Axes = memo(function Axes({
   }
 
   const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
-  
+
   const formatXAxis = useCallback(
     (date_unix: number, index: number) => {
       const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
@@ -181,13 +181,13 @@ export const Axes = memo(function Axes({
   }), [startUnix, endUnix]);
   
   const formatXTickValue = useCallback(
-    (date_unix: number) => {
+    (date_unix: number, dateRange: DateSpanValue[]) => {
       const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
       const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
 
       const isMultipleYearSpan = startYear !== endYear;
 
-      const reduced = values.reduce((acc, value) => {
+      const reduced = dateRange.reduce((acc, value) => {
         const smallestDifferenceAcc = Math.min(Math.abs(acc.date_start_unix - date_unix), Math.abs(acc.date_end_unix - date_unix));
         const smallestDifferenceVal = Math.min(Math.abs(value.date_start_unix - date_unix), Math.abs(value.date_end_unix - date_unix));
         if (value.date_start_unix <= date_unix && value.date_end_unix >= date_unix) {
@@ -224,7 +224,7 @@ export const Axes = memo(function Axes({
         : `${formatDateFromSeconds(dateStartUnix, 'axis')} - ${formatDateFromSeconds(dateEndUnix, 'axis')}`;
       }
     },
-    [startUnix, endUnix, formatDateFromSeconds, firstAndLastDate, values]
+    [startUnix, endUnix, formatDateFromSeconds, firstAndLastDate]
   );
 
   /**
@@ -302,7 +302,10 @@ export const Axes = memo(function Axes({
       <AxisBottom
         scale={xScale}
         tickValues={xTicks}
-        tickFormat={useDatesAsRange && values ? formatXTickValue as AnyTickFormatter : formatXAxis as AnyTickFormatter}
+        tickFormat={useDatesAsRange && values 
+          ? ((x: number) => formatXTickValue(x, values)) as AnyTickFormatter
+          : formatXAxis as AnyTickFormatter
+        }
         top={bounds.height}
         stroke={colors.silver}
         rangePadding={xRangePadding}
