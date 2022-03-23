@@ -2,6 +2,7 @@ import {
   colors,
   DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
+  TimeframeOption,
   VrHospitalNiceValue,
   VrTestedOverallValue,
   VrVaccineCoveragePerAgeGroupValue,
@@ -84,12 +85,12 @@ export const getStaticProps = createGetStaticProps(
 
     data.selectedVrData.hospital_nice.values = cutValuesFromTimeframe(
       data.selectedVrData.hospital_nice.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     data.selectedVrData.tested_overall.values = cutValuesFromTimeframe(
       data.selectedVrData.tested_overall.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     return data;

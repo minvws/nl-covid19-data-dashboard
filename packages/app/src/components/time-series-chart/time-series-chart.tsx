@@ -156,7 +156,7 @@ export function TimeSeriesChart<
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
-  timeframe = 'all',
+  timeframe = TimeframeOption.ALL,
   formatTooltip,
   dataOptions,
   showWeekNumbers,
@@ -505,6 +505,8 @@ export function TimeSeriesChart<
                   getX={getX}
                   height={bounds.height}
                   config={x}
+                  bounds={bounds}
+                  series={seriesList[0]}
                 />
               ))}
             {timeAnnotations?.map((x, index) => (

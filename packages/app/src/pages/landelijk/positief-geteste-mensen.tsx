@@ -1,4 +1,8 @@
-import { colors, NlTestedOverallValue } from '@corona-dashboard/common';
+import {
+  colors,
+  NlTestedOverallValue,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -236,7 +240,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={[
+              TimeframeOption.ALL,
+              TimeframeOption.TWO_WEEKS,
+              TimeframeOption.THIRTY_DAYS,
+              TimeframeOption.THREE_MONTHS,
+              TimeframeOption.LAST_YEAR,
+            ]}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -369,7 +379,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <ChartTile
               title={textShared.infected_per_age_group.title}
               description={textShared.infected_per_age_group.description}
-              timeframeOptions={['all', '5weeks']}
+              timeframeOptions={[
+                TimeframeOption.ALL,
+                TimeframeOption.TWO_WEEKS,
+                TimeframeOption.THIRTY_DAYS,
+                TimeframeOption.THREE_MONTHS,
+                TimeframeOption.LAST_YEAR,
+              ]}
               metadata={{
                 source: textNl.bronnen.rivm,
               }}
@@ -484,7 +500,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={['all', '5weeks']}
+              timeframeOptions={[
+                TimeframeOption.ALL,
+                TimeframeOption.TWO_WEEKS,
+                TimeframeOption.THIRTY_DAYS,
+                TimeframeOption.THREE_MONTHS,
+                TimeframeOption.LAST_YEAR,
+              ]}
               title={textNl.ggd.linechart_totaltests_titel}
               description={textNl.ggd.linechart_totaltests_toelichting}
               metadata={{

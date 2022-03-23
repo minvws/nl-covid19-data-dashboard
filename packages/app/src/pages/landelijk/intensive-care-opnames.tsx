@@ -4,6 +4,7 @@ import {
   getLastFilledValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
+  TimeframeOption,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
@@ -325,8 +326,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.linechart_titel}
             description={textNl.linechart_description}
             metadata={{ source: textNl.bronnen.nice }}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -375,8 +376,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.chart_bedbezetting.title}
             description={textNl.chart_bedbezetting.description}
             metadata={{ source: textNl.bronnen.lnaz }}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -410,8 +411,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={textShared.admissions_per_age_group.chart_title}
             description={textShared.admissions_per_age_group.chart_description}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
+            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
             metadata={{ source: textNl.bronnen.nice }}
           >
             {(timeframe) => (

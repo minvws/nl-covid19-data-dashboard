@@ -47,7 +47,7 @@ export function VaccineCoverageChoroplethPerGm({
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const [selectedCoverageKind, setSelectedCoverageKind] =
-    useState<CoverageKindProperty>('has_one_shot_percentage');
+    useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
 
   const variables = {

@@ -5,23 +5,27 @@
   "properties": {
     "values": {
       "type": "array",
-      "minItems": 1,
-      "maxItems": 1,
+      "minItems": 2,
+      "maxItems": 2,
       "items": {
         "$ref": "#/definitions/value"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["values"],
   "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "nl_booster_coverage_value",
       "type": "object",
       "properties": {
+        "age_group": {
+          "type": "string",
+          "enum": [
+            "12+",
+            "18+"
+          ]
+        },
         "percentage": {
           "type": "number"
         },

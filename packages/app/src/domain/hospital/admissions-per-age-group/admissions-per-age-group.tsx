@@ -1,6 +1,7 @@
 import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
+  TimeframeOption,
 } from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -26,7 +27,7 @@ type NLHospitalAdmissionPerAgeGroupValue =
 
 interface AdmissionsPerAgeGroup {
   values: NLHospitalAdmissionPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks';
+  timeframe: TimeframeOption;
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -58,9 +59,9 @@ export function AdmissionsPerAgeGroup({
           ? text.legend[baseAgeGroup.metricProperty]
           : baseAgeGroup.metricProperty;
 
-          const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
-            age: label,
-          });
+      const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
+        age: label,
+      });
 
       return {
         ...baseAgeGroup,

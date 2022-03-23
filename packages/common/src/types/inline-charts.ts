@@ -1,3 +1,4 @@
+import { TimeframeOption } from '~/utils';
 import {
   DataScope,
   DataScopeKey,
@@ -99,7 +100,7 @@ export type ChartConfiguration<
   M extends MetricKeys<ScopedData[S]>
 > = {
   metricProperties: MetricPropertyConfig<ScopedData[S], M>[];
-  timeframe: 'all' | '5weeks';
+  timeframe: TimeframeOption;
   accessibilityKey: string;
   sourceKey: string;
   valueAnnotationKey?: string;

@@ -1,4 +1,5 @@
 import {
+  assert,
   colors,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
@@ -232,7 +233,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const boosterShotAdministeredLastValue =
     data.booster_shot_administered.last_value;
 
-  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+  const boosterCoverage18PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '18+'
+  );
+  const boosterCoverage12PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '12+'
+  );
+
+  assert(
+    boosterCoverage18PlusValue,
+    `[${VaccinationPage.name}] Missing value for booster_coverage 18+`
+  );
+  assert(
+    boosterCoverage12PlusValue,
+    `[${VaccinationPage.name}] Missing value for booster_coverage 12+`
+  );
 
   const thirdShotAdministeredLastValue =
     data.third_shot_administered.last_value;
@@ -303,7 +318,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageLastValue.percentage}`
+                `${boosterCoverage18PlusValue.percentage}`
               ),
               third_shot: thirdShotAdministeredLastValue.administered_total,
               birthyear:
@@ -314,6 +329,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
               has_one_shot:
                 vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+              boostered: formatPercentageAsNumber(
+                `${boosterCoverage12PlusValue.percentage}`
+              ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
             }}

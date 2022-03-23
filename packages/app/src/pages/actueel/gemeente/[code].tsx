@@ -5,6 +5,7 @@ import {
   GmHospitalNiceValue,
   GmTestedOverallValue,
   GmVaccineCoveragePerAgeGroupValue,
+  TimeframeOption,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
@@ -86,12 +87,12 @@ export const getStaticProps = createGetStaticProps(
 
     data.selectedGmData.hospital_nice.values = cutValuesFromTimeframe(
       data.selectedGmData.hospital_nice.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     data.selectedGmData.tested_overall.values = cutValuesFromTimeframe(
       data.selectedGmData.tested_overall.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     return data;
