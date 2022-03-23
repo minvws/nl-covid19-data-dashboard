@@ -153,7 +153,7 @@ export const Axes = memo(function Axes<
   }
 
   const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
-
+  
   const formatXAxis = useCallback(
     (date_unix: number, index: number) => {
       const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
