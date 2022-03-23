@@ -285,7 +285,10 @@ export const VaccinationsGmPage = (
               formatTooltip={(context) => (
                 <ChoroplethTooltip
                   data={context}
-                  percentageProps={['fully_vaccinated_percentage']}
+                  percentageProps={[
+                    'fully_vaccinated_percentage',
+                    'has_one_shot_percentage',
+                  ]}
                 />
               )}
             />
