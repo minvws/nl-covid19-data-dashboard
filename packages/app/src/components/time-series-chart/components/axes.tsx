@@ -306,14 +306,12 @@ export const Axes = memo(function Axes({
         top={bounds.height}
         stroke={colors.silver}
         rangePadding={xRangePadding}
-        tickLabelProps={(x) => {
-          return {
+        tickLabelProps={(x) => ({
             fill: colors.data.axisLabels,
             fontSize: 12,
             dy: '-0.5px',
             textAnchor: getAnchor(x)
-          }
-        }}
+        })}
         hideTicks
       />
 

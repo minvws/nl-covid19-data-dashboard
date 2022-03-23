@@ -111,17 +111,17 @@ export default function BehaviorPage(
   const { currentTimelineEvents } = useMemo(() => {
     // Timeline event from the current selected behaviour
     const currentTimelineEvents = data.behavior_annotations.values.filter(
-      (a) => (a.indicator === currentId)
+      (a) => (a.source_type === currentId)
     ).map((event) => ({
-        title: event.message_title,
-        description: event.message_text,
+        title: siteText.pages.behaviorPage.shared.onderwerpen[event.behaviour_type],
+        description: siteText.pages.behaviorPage.shared.annotation_description[event.behaviour_type],
         start: event.date_start_unix,
         end: event.date_end_unix
       })
     );
 
     return { currentTimelineEvents };
-  }, [currentId, data.behavior_annotations.values]);
+  }, [currentId, data.behavior_annotations.values, siteText.pages.behaviorPage.shared]);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
