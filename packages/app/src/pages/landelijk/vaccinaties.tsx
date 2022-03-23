@@ -310,7 +310,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               textNl.vaccination_grade_toggle_tile.description_footer
             }
             dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
-            dateUnixBoostered={boosterShotAdministeredLastValue.date_end_unix}
             dateUnixThirdShot={thirdShotAdministeredLastValue.date_unix}
             age18Plus={{
               fully_vaccinated:

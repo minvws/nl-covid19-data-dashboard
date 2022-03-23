@@ -183,7 +183,6 @@ export const VaccinationsGmPage = (
               textGm.vaccination_grade_toggle_tile.description_footer
             }
             dateUnix={filteredAgeGroup18Plus.date_unix}
-            dateUnixBoostered={boosterCoverageLastValue.date_unix}
             age18Plus={{
               fully_vaccinated:
                 filteredAgeGroup18Plus.fully_vaccinated_percentage,
@@ -197,6 +196,7 @@ export const VaccinationsGmPage = (
                 `${boosterCoverageLastValue.percentage}`
               ),
               boostered_label: boosterCoverageLastValue.percentage_label,
+              dateUnixBoostered: boosterCoverageLastValue.date_unix,
             }}
             age12Plus={{
               fully_vaccinated:
