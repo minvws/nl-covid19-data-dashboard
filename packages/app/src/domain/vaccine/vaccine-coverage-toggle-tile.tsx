@@ -21,6 +21,7 @@ type AgeTypes = {
   fully_vaccinated: number | null;
   has_one_shot: number | null;
   boostered?: number | null;
+  dateUnixBoostered?: number;
   third_shot?: number | null;
   birthyear: string;
   fully_vaccinated_label?: string | null;
@@ -121,7 +122,8 @@ export function VaccineCoverageToggleTile({
               >
                 {metadataBooster && (
                   <Metadata
-                    {...metadataBooster}
+                    source={source}
+                    date={age18Plus.dateUnixBoostered}
                     intervalCount={age18PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
@@ -166,7 +168,8 @@ export function VaccineCoverageToggleTile({
               >
                 {metadataBooster && (
                   <Metadata
-                    {...metadataBooster}
+                    source={source}
+                    date={age12Plus.dateUnixBoostered}
                     intervalCount={age12PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
