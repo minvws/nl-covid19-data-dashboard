@@ -1571,11 +1571,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0988',
   },
   {
-    name: 'Weesp',
-    vrCode: 'VR14',
-    gemcode: 'GM0457',
-  },
-  {
     name: 'West Betuwe',
     vrCode: 'VR08',
     gemcode: 'GM1960',
