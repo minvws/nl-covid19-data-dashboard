@@ -120,6 +120,8 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     ]
   );
 
+  const correctedHeight = Math.max(height, minHeight);
+
   return (
     <Box ref={containerRef} width="100%" height="100%">
       {!isDefined(choroplethFeatures) ? (
@@ -133,7 +135,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
           <CanvasChoroplethMap
             dataOptions={dataOptions}
             width={width}
-            height={height}
+            height={correctedHeight}
             annotations={annotations}
             featureOverHandler={featureOverHandler}
             featureOutHandler={featureOutHandler}
