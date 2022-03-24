@@ -19,6 +19,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
+import { useFeature } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -75,6 +76,8 @@ export default function BehaviorPage(
   } = props;
   const behaviorLastValue = data.behavior.last_value;
 
+  const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
+
   const { siteText, formatNumber, formatDateFromSeconds, formatPercentage } =
     useIntl();
   const { textNl } = pageText;
@@ -122,6 +125,11 @@ export default function BehaviorPage(
 
     return { currentTimelineEvents };
   }, [currentId, data.behavior_annotations.values, siteText.pages.behaviorPage.shared]);
+
+  let timelineProp = {}
+  if (behaviorAnnotationsFeature.isEnabled) {
+    timelineProp = {timelineEvents: currentTimelineEvents,}
+  }
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -219,10 +227,10 @@ export default function BehaviorPage(
               ],
               source: textNl.bronnen.rivm,
             }}
-            timelineEvents={currentTimelineEvents}
+            {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
-            useDatesAsRange
+            useDatesAsRange={behaviorAnnotationsFeature.isEnabled}
           />
 
           <BehaviorChoroplethsTile
