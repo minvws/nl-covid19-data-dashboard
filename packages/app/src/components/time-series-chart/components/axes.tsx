@@ -10,6 +10,7 @@ import {
   middleOfDayInSeconds,
   TimeframeOption,
   TimestampedValue,
+  DateSpanValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -186,13 +187,13 @@ export const Axes = memo(function Axes<
   }), [startUnix, endUnix]);
   
   const formatXTickValue = useCallback(
-    (date_unix: number, dateRange: T[]) => {
+    (date_unix: number, dateRange: DateSpanValue[]) => {
       const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
       const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
 
       const isMultipleYearSpan = startYear !== endYear;
 
-      const reduced = dateRange.reduce((acc, value) => {
+      const reduced = dateRange.reduce((acc: DateSpanValue, value: DateSpanValue) => {
         const smallestDifferenceAcc = Math.min(Math.abs(acc.date_start_unix - date_unix), Math.abs(acc.date_end_unix - date_unix));
         const smallestDifferenceVal = Math.min(Math.abs(value.date_start_unix - date_unix), Math.abs(value.date_end_unix - date_unix));
         if (value.date_start_unix <= date_unix && value.date_end_unix >= date_unix) {
@@ -308,7 +309,7 @@ export const Axes = memo(function Axes<
         scale={xScale}
         tickValues={xTicks}
         tickFormat={useDatesAsRange && values 
-          ? ((x: number) => formatXTickValue(x, values)) as AnyTickFormatter
+          ? ((x: number) => formatXTickValue(x, values as DateSpanValue[])) as AnyTickFormatter
           : formatXAxis as AnyTickFormatter
         }
         top={bounds.height}
