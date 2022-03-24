@@ -1,5 +1,5 @@
 import { geoConicConformal, geoMercator } from 'd3-geo';
-import { FocusEvent, memo, useMemo, useRef } from 'react';
+import { FocusEvent, memo, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
@@ -52,10 +52,6 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     responsiveSizeConfiguration,
   } = props;
 
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapContainerWidth =
-    mapContainerRef.current?.getBoundingClientRect().width || 0;
-
   const dataConfig = createDataConfig(partialDataConfig);
 
   const mapProjection = isDefined(dataOptions.projection)
@@ -67,7 +63,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
   const annotations = useAccessibilityAnnotations(accessibility);
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
 
-  const [containerRef, { width = mapContainerWidth, height = minHeight }] =
+  const [containerRef, { width = 0, height = minHeight }] =
     useResizeObserver<HTMLDivElement>();
 
   const [mapHeight, padding] = useResponsiveSize(
@@ -124,8 +120,10 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     ]
   );
 
+  const correctedHeight = Math.max(height, minHeight);
+
   return (
-    <Box ref={mapContainerRef} width="100%" height="100%">
+    <Box ref={containerRef} width="100%" height="100%">
       {!isDefined(choroplethFeatures) ? (
         <img
           src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
@@ -135,10 +133,9 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
         <>
           {annotations.descriptionElement}
           <CanvasChoroplethMap
-            containerRef={containerRef}
             dataOptions={dataOptions}
-            width={mapContainerWidth}
-            height={mapHeight}
+            width={width}
+            height={correctedHeight}
             annotations={annotations}
             featureOverHandler={featureOverHandler}
             featureOutHandler={featureOutHandler}
