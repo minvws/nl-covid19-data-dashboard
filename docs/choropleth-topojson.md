@@ -34,6 +34,8 @@ NOTE: The year indicator will differ when dealing with newer data. Find the laye
 
 Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection which should the default while importing.
 
+> Note: it is also possible to use and import `*.cbf` or `*.shp` files instead of the GeoPackage (`*.gpkg`) file. Those files are often inside the GeoPackage file. The steps below also applies to those other file extensions. Importing non-gpkg files could be helpfull when maps are generated manually instead of coming from CBS.
+
 ### Cleaning up the imported data
 
 To clean up the data we have to perform the following steps:
@@ -113,7 +115,7 @@ Simplifying:
    - Select the layer and open the console; simplify using the following command: $ -simplify 27.5%
 3. When all the layers are simplified export to TopoJSON > `nl-vr-gm.topo.json`
 4. Add the new data file to the project at `packages/app/pages/api/topo-json`.
-5. Update the file `topology.ts`, if necessary. (located at `packages/app/pages/api/choropleth`)
+5. Update the file `topology.ts`, if necessary. (located at `packages/app/src/pages/api/choropleth`)
 
 ### Example of the topology.ts file
 

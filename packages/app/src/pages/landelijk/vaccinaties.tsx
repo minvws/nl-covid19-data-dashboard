@@ -310,7 +310,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               textNl.vaccination_grade_toggle_tile.description_footer
             }
             dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
-            dateUnixBoostered={boosterShotAdministeredLastValue.date_end_unix}
             dateUnixThirdShot={thirdShotAdministeredLastValue.date_unix}
             age18Plus={{
               fully_vaccinated:
@@ -323,6 +322,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               third_shot: thirdShotAdministeredLastValue.administered_total,
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
+              dateUnixBoostered: boosterCoverage18PlusValue.date_unix,
             }}
             age12Plus={{
               fully_vaccinated:
@@ -334,6 +334,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ),
               birthyear:
                 vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
+              dateUnixBoostered: boosterCoverage12PlusValue.date_unix,
             }}
             numFractionDigits={1}
             age12PlusToggleText={
