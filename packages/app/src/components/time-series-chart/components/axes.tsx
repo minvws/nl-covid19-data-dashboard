@@ -9,13 +9,9 @@ import {
   colors,
   middleOfDayInSeconds,
   TimeframeOption,
-<<<<<<< HEAD
   TimestampedValue,
   DateSpanValue,
   assert,
-=======
-  DateSpanValue,
->>>>>>> 8d58a2bf (Fix TS warnings)
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -56,11 +52,7 @@ export type AxesProps<
   yTickValues?: number[];
   timeDomain: [number, number];
   xTickNumber?: number;
-<<<<<<< HEAD
   values?: T[];
-=======
-  values?: DateSpanValue[];
->>>>>>> 8d58a2bf (Fix TS warnings)
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -202,13 +194,9 @@ export const Axes = memo(function Axes<
 
       const isMultipleYearSpan = startYear !== endYear;
 
-<<<<<<< HEAD
       const reduced = dateRange.reduce((acc: DateSpanValue, value: DateSpanValue) => {
         assert(acc.date_start_unix && acc.date_end_unix && value.date_start_unix && value.date_end_unix,
           'This needs a date_start_unix & date_end_unix here');
-=======
-      const reduced = dateRange.reduce((acc, value) => {
->>>>>>> 8d58a2bf (Fix TS warnings)
         const smallestDifferenceAcc = Math.min(Math.abs(acc.date_start_unix - date_unix), Math.abs(acc.date_end_unix - date_unix));
         const smallestDifferenceVal = Math.min(Math.abs(value.date_start_unix - date_unix), Math.abs(value.date_end_unix - date_unix));
         if (value.date_start_unix <= date_unix && value.date_end_unix >= date_unix) {
