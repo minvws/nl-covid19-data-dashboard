@@ -9,7 +9,7 @@ import {
   colors,
   middleOfDayInSeconds,
   TimeframeOption,
-  DateSpanValue,
+  TimestampedValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -24,7 +24,10 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
 
-type AxesProps = {
+
+export type AxesProps<
+  T extends TimestampedValue
+> = {
   bounds: Bounds;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
@@ -47,7 +50,7 @@ type AxesProps = {
   yTickValues?: number[];
   timeDomain: [number, number];
   xTickNumber?: number;
-  values?: DateSpanValue[];
+  values?: T[];
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -94,7 +97,9 @@ function createTimeTicks(startTick: number, endTick: number, count: number) {
 
 export type AnyTickFormatter = (value: any) => string;
 
-export const Axes = memo(function Axes({
+export const Axes = memo(function Axes<
+  T extends TimestampedValue
+>({
   numGridLines,
   showWeekNumbers,
   bounds,
@@ -112,7 +117,7 @@ export const Axes = memo(function Axes({
   xRangePadding,
   hasAllZeroValues: allZeroValues,
   useDatesAsRange,
-}: AxesProps) {
+}: AxesProps<T>) {
   const [startUnix, endUnix] = timeDomain;
   const breakpoints = useBreakpoints();
 
@@ -181,7 +186,7 @@ export const Axes = memo(function Axes({
   }), [startUnix, endUnix]);
   
   const formatXTickValue = useCallback(
-    (date_unix: number, dateRange: DateSpanValue[]) => {
+    (date_unix: number, dateRange: T[]) => {
       const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
       const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
 
