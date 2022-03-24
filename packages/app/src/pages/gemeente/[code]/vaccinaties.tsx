@@ -269,7 +269,7 @@ export const VaccinationsGmPage = (
               )}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'fully_vaccinated_percentage',
+                metricProperty: 'booster_shot_percentage',
               }}
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,

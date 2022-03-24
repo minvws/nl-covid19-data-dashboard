@@ -12,8 +12,8 @@ export type CoverageKindProperty =
   | 'has_one_shot_percentage';
 
 const COVERAGE_KINDS: CoverageKindProperty[] = [
-  'fully_vaccinated_percentage',
   'booster_shot_percentage',
+  'fully_vaccinated_percentage',
   'has_one_shot_percentage',
 ];
 
@@ -25,7 +25,7 @@ type VaccinationCoverageKindSelectProps = {
 export function VaccinationCoverageKindSelect(
   props: VaccinationCoverageKindSelectProps
 ) {
-  const { onChange, initialValue = 'fully_vaccinated_percentage' } = props;
+  const { onChange, initialValue = 'booster_shot_percentage' } = props;
 
   const { siteText } = useIntl();
 
