@@ -21,6 +21,7 @@ type AgeTypes = {
   fully_vaccinated: number | null;
   has_one_shot: number | null;
   boostered?: number | null;
+  dateUnixBoostered?: number;
   third_shot?: number | null;
   birthyear: string;
   fully_vaccinated_label?: string | null;
@@ -50,7 +51,6 @@ interface VaccineCoverageToggleTileProps {
   age18Plus: AgeTypes;
   age12Plus: AgeTypes;
   dateUnix: number;
-  dateUnixBoostered?: number;
   dateUnixThirdShot?: number;
   numFractionDigits?: number;
   age12PlusToggleText: VaccinationGradeToggleTypes;
@@ -62,7 +62,6 @@ export function VaccineCoverageToggleTile({
   source,
   descriptionFooter,
   dateUnix,
-  dateUnixBoostered,
   dateUnixThirdShot,
   age18Plus,
   age12Plus,
@@ -77,11 +76,6 @@ export function VaccineCoverageToggleTile({
 
   const metadata: MetadataProps = {
     date: dateUnix,
-    source: source,
-  };
-
-  const metadataBooster: MetadataProps = {
-    date: dateUnixBoostered,
     source: source,
   };
 
@@ -119,9 +113,10 @@ export function VaccineCoverageToggleTile({
                 description={age18PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {metadataBooster && (
+                {age18Plus.dateUnixBoostered && (
                   <Metadata
-                    {...metadataBooster}
+                    source={source}
+                    date={age18Plus.dateUnixBoostered}
                     intervalCount={age18PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
@@ -164,9 +159,10 @@ export function VaccineCoverageToggleTile({
                 description={age12PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {metadataBooster && (
+                {age12Plus.dateUnixBoostered && (
                   <Metadata
-                    {...metadataBooster}
+                    source={source}
+                    date={age12Plus.dateUnixBoostered}
                     intervalCount={age12PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
