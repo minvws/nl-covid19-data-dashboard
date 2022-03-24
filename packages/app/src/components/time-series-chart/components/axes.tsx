@@ -11,7 +11,10 @@ import {
   TimeframeOption,
   TimestampedValue,
   DateSpanValue,
+<<<<<<< HEAD
   assert,
+=======
+>>>>>>> 3671e66a (Fixing Typescript errors)
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
