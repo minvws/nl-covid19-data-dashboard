@@ -223,8 +223,10 @@ icons.forEach((i) => {
    * We loop over the attributes and remove them automatically
    */
   const parsedChildrenForSvgExport = parsedSvg.children.map((child) => {
-    child.attributes = fixAttrs(child.attributes);
-    return child;
+    return {
+      ...child,
+      attributes: fixAttrs(child.attributes)
+    }
   });
 
   // Stringify the children so we can wrap it in a SVG container later
