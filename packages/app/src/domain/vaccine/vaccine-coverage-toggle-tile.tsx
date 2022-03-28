@@ -117,7 +117,6 @@ export function VaccineCoverageToggleTile({
                   <Metadata
                     source={source}
                     date={age18Plus.dateUnixBoostered}
-                    intervalCount={age18PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
                 )}
@@ -163,7 +162,6 @@ export function VaccineCoverageToggleTile({
                   <Metadata
                     source={source}
                     date={age12Plus.dateUnixBoostered}
-                    intervalCount={age12PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
                 )}
