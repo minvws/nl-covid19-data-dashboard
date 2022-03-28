@@ -34,7 +34,7 @@ export function useVariantNameAndDescription<T extends TableText>(
   return [
     name,
     replaceVariablesInText(variantDescription, {
-      name,
+      variantName: name,
       countryOfOrigin,
     }),
   ] as const;

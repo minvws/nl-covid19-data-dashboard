@@ -11,24 +11,24 @@ import { SiteText } from '~/locale';
 interface VaccinationsThirdShotKpiSectionProps {
   thirdShotValue: number;
   metadateThirdShot: MetadataProps;
-  texts: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
 }
 
 export function VaccinationsThirdShotKpiSection({
   thirdShotValue,
   metadateThirdShot,
-  texts,
+  text,
 }: VaccinationsThirdShotKpiSectionProps) {
   const { formatNumber } = useIntl();
 
   return (
     <Tile>
       <TwoKpiSection>
-        <KpiTile title={texts.third_shots.title} hasNoBorder>
+        <KpiTile title={text.third_shots.title} hasNoBorder>
           <KpiValue text={formatNumber(thirdShotValue)} />
-          <Markdown content={texts.third_shots.description} />
-          {texts.third_shots.warning && (
-            <Message variant="warning">{texts.third_shots.warning}</Message>
+          <Markdown content={text.third_shots.description} />
+          {text.third_shots.warning && (
+            <Message variant="warning">{text.third_shots.warning}</Message>
           )}
           <Metadata {...metadateThirdShot} />
         </KpiTile>

@@ -96,7 +96,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
         deliveryAndAdministrationData={deliveryAndAdministrationData}
         activeChart={activeVaccinationChart}
         timelineEvents={timelineEvents}
-        texts={text}
+        text={text}
       />
     </FullscreenChartTile>
   );
