@@ -20,7 +20,7 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   metadateBoosterEstimated: MetadataProps;
   boosterShotLastSevenDays: number;
   metadataBoosterShotLastSevenDays: MetadataProps;
-  texts: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -32,7 +32,7 @@ export function VaccineBoosterAdministrationsKpiSection({
   metadateBoosterEstimated,
   boosterShotLastSevenDays,
   metadataBoosterShotLastSevenDays,
-  texts,
+  text,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
   const { formatNumber } = useIntl();
 
@@ -40,24 +40,24 @@ export function VaccineBoosterAdministrationsKpiSection({
     <Tile>
       <Box mb={20}>
         <TwoKpiSection>
-          <Heading level={3}>{texts.title}</Heading>
+          <Heading level={3}>{text.title}</Heading>
           <Box />
         </TwoKpiSection>
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
           <KpiValue absolute={totalBoosterAndThirdShots} />
-          <Text>{texts.total_booster_and_third_shots.description}</Text>
-          {texts.total_booster_and_third_shots.warning && (
+          <Text>{text.total_booster_and_third_shots.description}</Text>
+          {text.total_booster_and_third_shots.warning && (
             <Message variant="warning">
-              {texts.total_booster_and_third_shots.warning}
+              {text.total_booster_and_third_shots.warning}
             </Message>
           )}
           <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
 
           <Markdown
             content={replaceVariablesInText(
-              texts.booster_shot_last_seven_days.description,
+              text.booster_shot_last_seven_days.description,
               {
                 amount: formatNumber(boosterShotLastSevenDays),
               }
@@ -68,12 +68,12 @@ export function VaccineBoosterAdministrationsKpiSection({
         <Box spacing={4}>
           <BoosterAdministeredItem
             value={boosterGgdValue}
-            description={texts.booster_ggd.title}
+            description={text.booster_ggd.title}
             metadata={metadateBoosterGgd}
           />
           <BoosterAdministeredItem
             value={boosterEstimatedValue}
-            description={texts.booster_estimated.title}
+            description={text.booster_estimated.title}
             metadata={metadateBoosterEstimated}
           />
         </Box>

@@ -21,20 +21,20 @@ import {
 
 function useTileData(
   activeChart: ActiveVaccinationChart,
-  texts: SiteText['pages']['vaccinationsPage']['nl']
+  text: SiteText['pages']['vaccinationsPage']['nl']
 ) {
   if (activeChart === 'coverage') {
     const metadata = {
-      source: texts.bronnen.rivm,
+      source: text.bronnen.rivm,
     };
     const description =
-      texts.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
+      text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
     return [metadata, description] as const;
   }
   const metadata = {
-    source: texts.bronnen.rivm,
+    source: text.bronnen.rivm,
   };
-  const description = texts.grafiek.omschrijving;
+  const description = text.grafiek.omschrijving;
   return [metadata, description] as const;
 }
 
@@ -45,7 +45,7 @@ interface VaccinationsOverTimeTileProps {
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
-  texts: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
@@ -54,7 +54,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     deliveryAndAdministrationData,
     timelineEvents,
     vaccineAdministeredPlannedLastValue,
-    texts,
+    text,
   } = props;
 
   const { commonTexts, formatNumber } = useIntl();
@@ -62,7 +62,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
 
-  const [metadata, description] = useTileData(activeVaccinationChart, texts);
+  const [metadata, description] = useTileData(activeVaccinationChart, text);
 
   const roundedMillion =
     Math.floor(
@@ -77,7 +77,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   return (
     <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader
-        title={texts.vaccinations_over_time_tile.title}
+        title={text.vaccinations_over_time_tile.title}
         description={replaceVariablesInText(description, {
           total_vaccines: `${formatNumber(roundedMillion)} ${
             commonTexts.common.miljoen
@@ -96,7 +96,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
         deliveryAndAdministrationData={deliveryAndAdministrationData}
         activeChart={activeVaccinationChart}
         timelineEvents={timelineEvents}
-        texts={texts}
+        texts={text}
       />
     </FullscreenChartTile>
   );
