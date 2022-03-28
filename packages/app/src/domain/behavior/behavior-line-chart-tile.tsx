@@ -122,7 +122,7 @@ export function BehaviorLineChartTile({
             isPercentage: true,
             useDatesAsRange: useDatesAsRange,
             timelineEvents: timelineEvents,
-          } as DataOptions}
+          }}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
         />
