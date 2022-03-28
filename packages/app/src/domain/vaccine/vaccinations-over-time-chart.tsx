@@ -39,7 +39,7 @@ interface VaccinationsOverTimeChartProps {
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
-  texts: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
 const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
@@ -58,7 +58,7 @@ export function VaccinationsOverTimeChart(
     deliveryAndAdministrationData,
     activeChart,
     timelineEvents,
-    texts,
+    text,
   } = props;
   const { commonTexts, formatNumber } = useIntl();
   const breakpoints = useBreakpoints(true);
@@ -83,15 +83,15 @@ export function VaccinationsOverTimeChart(
           formatTickValue: (x: number) => `${x / 1_000_000}`,
           dataOptions: {
             valueAnnotation:
-              texts.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
+              text.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
             timelineEvents: timelineEvents.coverage,
           } as DataOptions,
           seriesConfig: [
             {
               label:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
+                text.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
               shortLabel:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen
+                text.grafiek_gevaccineerd_door_de_tijd_heen
                   .tooltip_label_gedeeltelijk,
               type: 'stacked-area',
               metricProperty: 'partially_vaccinated',
@@ -100,10 +100,9 @@ export function VaccinationsOverTimeChart(
               fillOpacity: 1,
             },
             {
-              label:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen.label_volledig,
+              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_volledig,
               shortLabel:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen
+                text.grafiek_gevaccineerd_door_de_tijd_heen
                   .tooltip_label_volledig,
               type: 'stacked-area',
               metricProperty: 'fully_vaccinated',
@@ -113,10 +112,10 @@ export function VaccinationsOverTimeChart(
             },
             {
               label:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen
+                text.grafiek_gevaccineerd_door_de_tijd_heen
                   .label_booster_vaccinated,
               shortLabel:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen
+                text.grafiek_gevaccineerd_door_de_tijd_heen
                   .tooltip_label_booster_vaccinated,
               type: 'stacked-area',
               metricProperty: 'booster_vaccinated',
@@ -125,9 +124,9 @@ export function VaccinationsOverTimeChart(
               fillOpacity: 1,
             },
             {
-              label: texts.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
+              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
               shortLabel:
-                texts.grafiek_gevaccineerd_door_de_tijd_heen
+                text.grafiek_gevaccineerd_door_de_tijd_heen
                   .tooltip_label_totaal,
               type: 'line',
               metricProperty: 'partially_or_fully_vaccinated',
@@ -141,15 +140,15 @@ export function VaccinationsOverTimeChart(
       : undefined;
   }, [
     coverageData,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.label_volledig,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
-    texts.grafiek_gevaccineerd_door_de_tijd_heen
+    text.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.label_volledig,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
+    text.grafiek_gevaccineerd_door_de_tijd_heen
       .tooltip_label_booster_vaccinated,
     timelineEvents.coverage,
     breakpoints,
@@ -181,12 +180,12 @@ export function VaccinationsOverTimeChart(
           metricProperty: x as keyof VaccineDeliveryAndAdministrationsValue,
           type: 'stacked-area',
           label: replaceVariablesInText(
-            texts.data.vaccination_chart.legend_label,
+            text.data.vaccination_chart.legend_label,
             {
-              name: texts.data.vaccination_chart.product_names[x],
+              name: text.data.vaccination_chart.product_names[x],
             }
           ),
-          shortLabel: texts.data.vaccination_chart.product_names[x],
+          shortLabel: text.data.vaccination_chart.product_names[x],
           color: colors.data.vaccines[x],
           mixBlendMode: 'multiply',
           fillOpacity: 1,
@@ -195,7 +194,7 @@ export function VaccinationsOverTimeChart(
         {
           metricProperty: 'total',
           type: 'invisible',
-          label: texts.data.vaccination_chart.doses_administered,
+          label: text.data.vaccination_chart.doses_administered,
         },
       ],
     } as TimeSeriesChartProps<
@@ -205,10 +204,10 @@ export function VaccinationsOverTimeChart(
   }, [
     deliveryAndAdministrationData,
     commonTexts.waarde_annotaties.x_miljoen,
-    texts.data.vaccination_chart.legend_label,
-    texts.data.vaccination_chart.doses_administered,
+    text.data.vaccination_chart.legend_label,
+    text.data.vaccination_chart.doses_administered,
     breakpoints.md,
-    texts.data.vaccination_chart.product_names,
+    text.data.vaccination_chart.product_names,
     vaccineNames,
     formatNumber,
     timelineEvents.deliveryAndAdministration,

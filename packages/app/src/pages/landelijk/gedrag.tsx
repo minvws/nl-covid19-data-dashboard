@@ -41,7 +41,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        category: siteText.common.nationaal_layout.headings.gedrag,
+        caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
         metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         text: siteText.pages.behaviorPage,
       }),
@@ -78,7 +78,7 @@ export default function BehaviorPage(
   const behaviorLastValue = data.behavior.last_value;
 
   const { formatNumber, formatDateFromSeconds, formatPercentage } = useIntl();
-  const { category, metadataTexts, text } = pageText;
+  const { caterogyTexts, metadataTexts, text } = pageText;
 
   const metadata = {
     ...metadataTexts,
@@ -114,7 +114,7 @@ export default function BehaviorPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={category}
+            category={caterogyTexts}
             title={text.nl.pagina.titel}
             icon={<Gedrag />}
             description={text.nl.pagina.toelichting}

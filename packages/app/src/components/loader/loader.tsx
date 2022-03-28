@@ -33,7 +33,6 @@ export function Loader(props: LoaderProps) {
         setinViewHeight(heightOfInView);
       }}
     >
-      {' '}
       {showLoader && (
         <LoaderFullSize inViewHeight={inViewHeight}>
           <Box
