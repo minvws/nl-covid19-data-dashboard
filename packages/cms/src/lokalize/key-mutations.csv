@@ -1930,7 +1930,6 @@ timestamp,action,key,document_id,move_to
 2022-03-22T08:11:49.038Z,move,pages.topicalPage.shared.trend_minder,4Hn4MB4VRci1fnngMXslwu,common.trend.trend_minder
 2022-03-22T08:14:35.034Z,move,common.choropleth.choropleth_vaccination_coverage.shared.dropdowns_title,XIsMg3WYidPwwGdwwGszN9,common.choropleth.vaccination_coverage.shared.dropdowns_title
 2022-03-22T08:34:33.707Z,add,pages.in_variantsPage.shared.varianten_tabel.geen_percentage_cijfer,HphWIdm5NJE670xMUvSrv1,__
-2022-03-22T08:34:35.751Z,add,pages.in_variantsPage.shared.varianten_tabel.geen_percentage_cijfer_tooltip,x01HqpyF4J4Wom4a5xoM2Z,__
 2022-03-22T09:45:23.448Z,move,pages.vaccinationsPage.nl.repeating_shot_information_block.reference.text,feYq219OWQP2cZqPVcQbB0,pages.vaccinationsPage.nl.repeating_information_block.reference.text
 2022-03-22T09:45:23.449Z,move,pages.vaccinationsPage.nl.repeating_shot_information_block.sources.href,feYq219OWQP2cZqPVjbvYY,pages.vaccinationsPage.nl.repeating_information_block.sources.href
 2022-03-28T09:18:58.630Z,move,pages.vaccinationsPage.nl.repeating_information_block.description,ykODqW04yKm6ztWPGrHnuL,pages.vaccinationsPage.nl.repeating_shot_information_block.description
@@ -2029,3 +2028,4 @@ timestamp,action,key,document_id,move_to
 2022-03-28T11:05:02.968Z,add,pages.variantsPage.shared.varianten_tabel.geen_data_omschrijving,ATrwynrL85JmIH7bDlM93j,__
 2022-03-28T11:05:03.868Z,add,pages.variantsPage.shared.varianten_tabel.geen_percentage_cijfer,pMpoUeRMkAk3UTlOZSnABe,__
 2022-03-28T11:31:19.078Z,add,pages.variantsPage.shared.varianten_tabel.geen_percentage_cijfer_tooltip,ATrwynrL85JmIH7bDlQQsF,__
+2022-03-28T11:52:19.242Z,add,pages.in_variantsPage.shared.varianten_tabel.geen_percentage_cijfer_tooltip,ATrwynrL85JmIH7bDlXixX,__
