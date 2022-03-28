@@ -11,7 +11,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { DataOptions } from '~/components/time-series-chart/logic';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
