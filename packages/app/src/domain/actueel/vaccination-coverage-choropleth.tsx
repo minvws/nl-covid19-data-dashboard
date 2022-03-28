@@ -113,7 +113,8 @@ export function VaccinationCoverageChoropleth(
           <ChoroplethLegenda
             thresholds={thresholds.gm.fully_vaccinated_percentage}
             title={
-              commonTexts.choropleth.vaccination_coverage.shared.legend_title
+              commonTexts.choropleth.choropleth_vaccination_coverage.shared
+                .legend_title
             }
           />
         }

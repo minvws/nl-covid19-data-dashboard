@@ -232,14 +232,15 @@ export const VaccinationsGmPage = (
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              commonTexts.choropleth.vaccination_coverage.gm.title,
+              commonTexts.choropleth.choropleth_vaccination_coverage.gm.title,
               { municipalityName: municipalityName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    commonTexts.choropleth.vaccination_coverage.gm.description,
+                    commonTexts.choropleth.choropleth_vaccination_coverage.gm
+                      .description,
                     { municipalityName: municipalityName }
                   )}
                 />
@@ -252,7 +253,8 @@ export const VaccinationsGmPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                commonTexts.choropleth.vaccination_coverage.shared.legend_title,
+                commonTexts.choropleth.choropleth_vaccination_coverage.shared
+                  .legend_title,
             }}
             metadata={{
               source:

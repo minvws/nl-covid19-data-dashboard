@@ -181,8 +181,8 @@ export default function VariantenPage(
             source={textShared.bronnen.rivm}
             text={{
               ...textShared.varianten_tabel,
-              varianten: textNl.varianten,
-              description: textNl.description,
+              varianten: commonTexts.variants,
+              description: textNl.varianten_omschrijving,
             }}
             data={tableData?.variantTable}
             sampleSize={tableData?.sampleSize ?? 0}
@@ -215,7 +215,7 @@ export default function VariantenPage(
           <VariantsStackedAreaTile
             text={{
               ...textShared.varianten_over_tijd_grafiek,
-              varianten: textNl.varianten,
+              varianten: commonTexts.variants,
             }}
             noDataMessage={noDataMessageChart}
             values={chartData?.variantChart}

@@ -147,6 +147,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
             anchorEventHandlers={anchorEventHandlers}
             isTabInteractive={isTabInteractive}
             getFeatureName={getFeatureName}
+            containerRef={containerRef}
           />
         </>
       )}

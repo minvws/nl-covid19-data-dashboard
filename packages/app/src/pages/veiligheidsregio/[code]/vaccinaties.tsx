@@ -255,7 +255,8 @@ export const VaccinationsVrPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                commonTexts.choropleth.vaccination_coverage.shared.legend_title,
+                commonTexts.choropleth.choropleth_vaccination_coverage.shared
+                  .legend_title,
             }}
             metadata={{
               source:

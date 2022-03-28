@@ -741,7 +741,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'invisible',
                       metricProperty: 'percentage_average',
-                      label: siteText.common.totaal,
+                      label: commonTexts.common.totaal,
                       isPercentage: true,
                     },
                   ]}
