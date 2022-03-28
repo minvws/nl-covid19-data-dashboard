@@ -126,10 +126,9 @@ export default function BehaviorPage(
     return { currentTimelineEvents };
   }, [currentId, data.behavior_annotations.values, siteText.pages.behaviorPage.shared]);
 
-  let timelineProp = {}
-  if (behaviorAnnotationsFeature.isEnabled) {
-    timelineProp = {timelineEvents: currentTimelineEvents,}
-  }
+  const timelineProp = behaviorAnnotationsFeature.isEnabled
+    ? { timelineEvents: currentTimelineEvents }
+    : undefined;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
