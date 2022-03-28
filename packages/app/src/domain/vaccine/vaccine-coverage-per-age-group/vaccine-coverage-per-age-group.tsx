@@ -8,6 +8,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
 import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
+import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 interface VaccineCoveragePerAgeGroupProps {
   title: string;
@@ -18,6 +19,7 @@ interface VaccineCoveragePerAgeGroupProps {
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
+  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
 }
 
 export function VaccineCoveragePerAgeGroup({
@@ -26,6 +28,7 @@ export function VaccineCoveragePerAgeGroup({
   metadata,
   values,
   sortingOrder,
+  text,
 }: VaccineCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
 
@@ -47,9 +50,9 @@ export function VaccineCoveragePerAgeGroup({
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.md ? (
-        <WideCoverageTable values={sortedValues} />
+        <WideCoverageTable values={sortedValues} text={text} />
       ) : (
-        <NarrowCoverageTable values={sortedValues} />
+        <NarrowCoverageTable values={sortedValues} text={text} />
       )}
     </ChartTile>
   );

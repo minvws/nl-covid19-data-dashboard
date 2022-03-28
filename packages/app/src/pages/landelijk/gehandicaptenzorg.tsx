@@ -49,6 +49,12 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        caterogyTexts: {
+          category: siteText.common.nationaal_layout.headings.kwetsbare_groepen,
+          screenReaderCategory:
+            siteText.common.sidebar.metrics.disabled_care.title,
+        },
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.disabilityCarePage.nl,
       }),
       locale
@@ -98,12 +104,12 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const values = data.disability_care.values;
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { textNl } = pageText;
+  const { caterogyTexts, metadataTexts, textNl } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.besmette_locaties.metadata.title,
     description: textNl.besmette_locaties.metadata.description,
   };
@@ -113,8 +119,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={siteText.sidebar.metrics.disabled_care.title}
+            category={caterogyTexts.category}
+            screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.positief_geteste_personen.titel}
             icon={<GehandicaptenZorg />}
             description={textNl.positief_geteste_personen.pagina_toelichting}
@@ -190,7 +196,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       label:
                         textNl.positief_geteste_personen
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'newly_infected_people_moving_average',
                       ],
@@ -386,7 +392,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label:
                         textNl.oversterfte.line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

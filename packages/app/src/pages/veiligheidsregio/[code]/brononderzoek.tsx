@@ -45,8 +45,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textShared: siteText.pages.situationsPage.shared,
-        textChoroplethTooltips: siteText.choropleth_tooltip.patients,
+        textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
       }),
       locale
     ),
@@ -87,11 +88,11 @@ export default function BrononderzoekPage(
     vrName,
   } = props;
 
-  const { siteText, formatNumber, formatDateSpan } = useIntl();
-  const { textShared } = pageText;
+  const { commonTexts, formatNumber, formatDateSpan } = useIntl();
+  const { metadataTexts, textShared } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textShared.metadata.title,
     description: textShared.metadata.description,
   };
@@ -109,14 +110,17 @@ export default function BrononderzoekPage(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              siteText.sidebar.metrics.source_investigation.title
+              commonTexts.sidebar.metrics.source_investigation.title
             }
-            title={replaceVariablesInText(siteText.common.subject_in_location, {
-              subject: textShared.titel,
-              location: vrName,
-            })}
+            title={replaceVariablesInText(
+              commonTexts.common.subject_in_location,
+              {
+                subject: textShared.titel,
+                location: vrName,
+              }
+            )}
             icon={<Gedrag />}
             description={textShared.pagina_toelichting}
             metadata={{

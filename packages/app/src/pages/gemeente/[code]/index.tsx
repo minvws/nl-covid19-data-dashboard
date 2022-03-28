@@ -21,7 +21,7 @@ export const getStaticProps = createGetStaticProps(
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, municipalityName, selectedGmData } = props;
   const router = useRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
 
@@ -32,7 +32,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   }, [breakpoints.md, reverseRouter.gm, router]);
 
   return (
-    <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...commonTexts.gemeente_index.metadata}
+      lastGenerated={lastGenerated}
+    >
       <GmLayout
         code={selectedGmData.code}
         municipalityName={municipalityName}

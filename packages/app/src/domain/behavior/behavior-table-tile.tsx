@@ -14,6 +14,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { PercentageBar } from '~/components/percentage-bar';
 import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
@@ -29,6 +30,7 @@ interface BehaviorTableTileProps {
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
+  text: SiteText['pages']['behaviorPage']['shared'];
 }
 
 const trendColumnWidth = 125;
@@ -42,9 +44,8 @@ export function BehaviorTableTile({
   annotation,
   setCurrentId,
   scrollRef,
+  text,
 }: BehaviorTableTileProps) {
-  const { siteText } = useIntl();
-  const behaviorPageText = siteText.pages.behaviorPage.shared;
   const behaviorsTableData = useBehaviorTableData(value);
 
   return (
@@ -74,7 +75,7 @@ export function BehaviorTableTile({
                   }),
                 })}
               >
-                {behaviorPageText.basisregels.header_basisregel}
+                {text.basisregels.header_basisregel}
               </HeaderCell>
               <HeaderCell
                 css={css({
@@ -90,14 +91,14 @@ export function BehaviorTableTile({
                   }),
                 })}
               >
-                {behaviorPageText.basisregels.header_percentage}
+                {text.basisregels.header_percentage}
               </HeaderCell>
               <HeaderCell
                 css={css({
                   width: trendColumnWidth,
                 })}
               >
-                {behaviorPageText.basisregels.header_trend}
+                {text.basisregels.header_trend}
               </HeaderCell>
             </Row>
           </thead>
@@ -150,10 +151,12 @@ export function BehaviorTableTile({
                     <BehaviorTrend
                       trend={behavior.complianceTrend}
                       color={colors.body}
+                      text={text}
                     />
                     <BehaviorTrend
                       trend={behavior.supportTrend}
                       color={colors.body}
+                      text={text}
                     />
                   </Box>
                 </Cell>

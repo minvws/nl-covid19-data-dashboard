@@ -41,7 +41,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textNl: siteText.pages.behaviorPage.nl,
+        caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        text: siteText.pages.behaviorPage,
       }),
       locale
     ),
@@ -75,14 +77,13 @@ export default function BehaviorPage(
   } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { siteText, formatNumber, formatDateFromSeconds, formatPercentage } =
-    useIntl();
-  const { textNl } = pageText;
+  const { formatNumber, formatDateFromSeconds, formatPercentage } = useIntl();
+  const { caterogyTexts, metadataTexts, text } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
-    title: textNl.metadata.title,
-    description: textNl.metadata.description,
+    ...metadataTexts,
+    title: text.nl.metadata.title,
+    description: text.nl.metadata.description,
   };
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
@@ -113,40 +114,40 @@ export default function BehaviorPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.gedrag}
-            title={textNl.pagina.titel}
+            category={caterogyTexts}
+            title={text.nl.pagina.titel}
             icon={<Gedrag />}
-            description={textNl.pagina.toelichting}
+            description={text.nl.pagina.toelichting}
             metadata={{
-              datumsText: textNl.datums,
+              datumsText: text.nl.datums,
               dateOrRange: {
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
-              dataSources: [textNl.bronnen.rivm],
+              dataSources: [text.nl.bronnen.rivm],
             }}
-            referenceLink={textNl.reference.href}
+            referenceLink={text.nl.reference.href}
             articles={content.articles}
           />
 
           <TwoKpiSection>
             <Tile>
               <Box spacing={3}>
-                <Heading level={3}>{textNl.onderzoek_uitleg.titel}</Heading>
-                <Markdown content={textNl.onderzoek_uitleg.toelichting} />
+                <Heading level={3}>{text.nl.onderzoek_uitleg.titel}</Heading>
+                <Markdown content={text.nl.onderzoek_uitleg.toelichting} />
               </Box>
             </Tile>
 
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>
-                  {textNl.kpi_recente_inzichten.titel}
+                  {text.nl.kpi_recente_inzichten.titel}
                 </Heading>
 
                 <Markdown
                   content={replaceVariablesInText(
-                    textNl.kpi_recente_inzichten.tekst,
+                    text.nl.kpi_recente_inzichten.tekst,
                     {
                       number_of_participants: formatNumber(
                         behaviorLastValue.number_of_participants
@@ -183,14 +184,15 @@ export default function BehaviorPage(
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={textNl.basisregels.title}
-            description={textNl.basisregels.description}
-            complianceExplanation={textNl.basisregels.volgen_beschrijving}
-            supportExplanation={textNl.basisregels.steunen_beschrijving}
+            title={text.nl.basisregels.title}
+            description={text.nl.basisregels.description}
+            complianceExplanation={text.nl.basisregels.volgen_beschrijving}
+            supportExplanation={text.nl.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={textNl.basisregels.annotatie}
+            annotation={text.nl.basisregels.annotatie}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
+            text={text.shared}
           />
 
           <span ref={scrollToRef} />
@@ -202,37 +204,40 @@ export default function BehaviorPage(
                 behaviorLastValue.date_start_unix,
                 behaviorLastValue.date_end_unix,
               ],
-              source: textNl.bronnen.rivm,
+              source: text.nl.bronnen.rivm,
             }}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            text={text}
           />
 
           <BehaviorChoroplethsTile
-            title={textNl.verdeling_in_nederland.titel}
-            description={textNl.verdeling_in_nederland.description}
+            title={text.nl.verdeling_in_nederland.titel}
+            description={text.nl.verdeling_in_nederland.description}
             data={choropleth.vr}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            text={text}
           />
 
           {data.behavior_per_age_group && (
             <BehaviorPerAgeGroup
-              title={textNl.tabel_per_leeftijdsgroep.title}
-              description={textNl.tabel_per_leeftijdsgroep.description}
+              title={text.nl.tabel_per_leeftijdsgroep.title}
+              description={text.nl.tabel_per_leeftijdsgroep.description}
               complianceExplanation={
-                textNl.tabel_per_leeftijdsgroep.explanation.compliance
+                text.nl.tabel_per_leeftijdsgroep.explanation.compliance
               }
               supportExplanation={
-                textNl.tabel_per_leeftijdsgroep.explanation.support
+                text.nl.tabel_per_leeftijdsgroep.explanation.support
               }
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}
+              text={text}
             />
           )}
 
-          <MoreInformation />
+          <MoreInformation text={text.shared.meer_onderzoeksresultaten} />
         </TileList>
       </NlLayout>
     </Layout>

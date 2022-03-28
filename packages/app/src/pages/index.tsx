@@ -68,6 +68,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        hospitalText: siteText.pages.hospitalPage.nl,
+        intensiveCareText: siteText.pages.intensiveCarePage.nl,
+        positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textNl: siteText.pages.topicalPage.nl,
         textShared: siteText.pages.topicalPage.shared,
       }),
@@ -143,10 +146,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const dataTestedOverall = data.tested_overall;
   const dataSitemap = useDataSitemap('nl');
 
-  const { siteText, ...formatters } = useIntl();
+  const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { textNl, textShared } = pageText;
-  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
+  const {
+    hospitalText,
+    intensiveCareText,
+    positiveTestsText,
+    textNl,
+    textShared,
+  } = pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -216,9 +224,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
                 headingLevel={1}
+                text={textShared}
               />
 
               <MiniTileSelectorLayout
+                text={textShared}
                 link={{
                   text: textNl.quick_links.header,
                   href: reverseRouter.nl.index(),
@@ -347,16 +357,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
                       label:
-                        siteText.pages.intensiveCarePage.nl
-                          .linechart_legend_trend_label_moving_average,
+                        intensiveCareText.linechart_legend_trend_label_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
-                      label:
-                        siteText.pages.intensiveCarePage.nl
-                          .linechart_legend_trend_label,
+                      label: intensiveCareText.linechart_legend_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -366,7 +373,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeIntensiveCare,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -433,17 +440,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'line',
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_moving_average,
+                      label: hospitalText.linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_trend_label,
+                      label: hospitalText.linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -453,7 +456,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeHospital,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -668,6 +671,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 weeklyHighlight={content.weeklyHighlight}
                 highlights={content.highlights}
                 showWeeklyHighlight={content.showWeeklyHighlight}
+                text={textShared}
               />
             )}
 
@@ -687,6 +691,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 text: textShared.secties.vaccination_coverage_choropleth
                   .link_text.nl,
               }}
+              text={textShared}
             />
           </Box>
         </MaxWidth>
@@ -704,10 +709,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               description={textShared.secties.meer_lezen.omschrijving}
               link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
+              text={textShared}
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles as any} />
+              <ArticleList
+                articles={content.articles as any}
+                text={textShared}
+              />
             )}
           </MaxWidth>
         </Box>

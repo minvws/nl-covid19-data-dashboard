@@ -29,7 +29,7 @@ export const Timeline = memo(function Timeline({
   timelineState,
   isYAxisCollapsed,
 }: TimelineProps) {
-  const intl = useIntl();
+  const { commonTexts } = useIntl();
   const { index, setIndex } = timelineState;
   const [ref, { height = 0 }] = useResizeObserver<HTMLDivElement>();
 
@@ -70,7 +70,7 @@ export const Timeline = memo(function Timeline({
     >
       <Box pl={padding.left}>
         <Text variant="label1" fontWeight="bold">
-          {intl.siteText.charts.timeline.title}
+          {commonTexts.charts.timeline.title}
         </Text>
       </Box>
       <Box display="flex" pl={padding.left}>

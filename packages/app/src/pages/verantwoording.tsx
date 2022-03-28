@@ -60,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { content, lastGenerated } = props;
 
   const groups = groupBy<CollapsibleList>(
@@ -69,7 +69,10 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   return (
-    <Layout {...siteText.verantwoording_metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...commonTexts.verantwoording_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"

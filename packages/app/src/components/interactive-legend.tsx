@@ -28,7 +28,7 @@ export function InteractiveLegend<T = string>({
   onToggleItem,
   onReset,
 }: InteractiveLegendProps<T>) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const hasSelection = selection.length !== 0;
 
@@ -67,7 +67,7 @@ export function InteractiveLegend<T = string>({
           {isDefined(onReset) && (
             <Item>
               <ResetButton onClick={onReset} isVisible={hasSelection}>
-                {siteText.common.interactive_legend.reset_button_label}
+                {commonTexts.common.interactive_legend.reset_button_label}
               </ResetButton>
             </Item>
           )}

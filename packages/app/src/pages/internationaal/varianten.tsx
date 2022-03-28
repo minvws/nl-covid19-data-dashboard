@@ -21,6 +21,7 @@ import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getLinkParts,
@@ -34,6 +35,7 @@ import {
   createGetContent,
   getInData,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
@@ -41,6 +43,14 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
+    ({ locale }: { locale: keyof Languages }) =>
+      getLokalizeTexts(
+        (siteText) => ({
+          textNl: siteText.pages.variantsPage.nl,
+          textShared: siteText.pages.in_variantsPage.shared,
+        }),
+        locale
+      ),
     getLastGeneratedDate,
     (context) => {
       const { locale } = context;
@@ -84,6 +94,7 @@ export default function VariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
+    pageText,
     lastGenerated,
     content,
     variantTableData,
@@ -100,28 +111,27 @@ export default function VariantenPage(
   const [selectedCountryCode, setSelectedCountryCode] =
     useState<string>(defaultCountryCode);
 
-  const { siteText } = useIntl();
-  const text = siteText.pages.in_variantsPage.shared;
-  const tableText = text.varianten_tabel;
+  const { commonTexts } = useIntl();
+  const { textNl, textShared } = pageText;
 
   const metadata = {
-    ...siteText.internationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...commonTexts.internationaal_metadata,
+    title: textShared.metadata.title,
+    description: textShared.metadata.description,
   };
 
   const noDataMessageTable =
     tableData?.variantTable === undefined
-      ? text.selecteer_een_land_omschrijving
+      ? textShared.selecteer_een_land_omschrijving
       : tableData?.variantTable === null
-      ? text.geen_data_omschrijving
+      ? textShared.geen_data_omschrijving
       : '';
 
   const noDataMessageChart =
     chartData?.variantChart === undefined
-      ? text.selecteer_een_land_omschrijving
+      ? textShared.selecteer_een_land_omschrijving
       : chartData?.variantChart === null
-      ? text.geen_data_omschrijving
+      ? textShared.geen_data_omschrijving
       : '';
 
   const onChange = useCallback(
@@ -144,10 +154,10 @@ export default function VariantenPage(
       <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
-            category={text.categorie}
-            title={text.titel}
+            category={textShared.categorie}
+            title={textShared.titel}
             icon={<Test />}
-            description={text.pagina_toelichting}
+            description={textShared.pagina_toelichting}
             metadata={{
               dateOrRange: {
                 start: tableData?.dates?.date_start_unix ?? 0,
@@ -156,20 +166,24 @@ export default function VariantenPage(
               dateOfInsertionUnix:
                 tableData?.dates?.date_of_insertion_unix ?? 0,
 
-              datumsText: text.datums,
-              dataSources: [text.bronnen.rivm],
+              datumsText: textShared.datums,
+              dataSources: [textShared.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textShared.reference.href}
             articles={content.articles}
             pageLinks={content.links}
           />
 
-          <InformationTile message={text.informatie_tegel} />
+          <InformationTile message={textShared.informatie_tegel} />
 
           <VariantsTableTile
             noDataMessage={noDataMessageTable}
-            source={text.bronnen.rivm}
-            text={tableText}
+            source={textShared.bronnen.rivm}
+            text={{
+              ...textShared.varianten_tabel,
+              varianten: commonTexts.variants,
+              description: textNl.varianten_omschrijving,
+            }}
             data={tableData?.variantTable}
             sampleSize={tableData?.sampleSize ?? 0}
             dates={tableData?.dates}
@@ -190,20 +204,23 @@ export default function VariantenPage(
 
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
                 <WarningTile
-                  message={text.lagere_betrouwbaarheid}
+                  message={textShared.lagere_betrouwbaarheid}
                   variant="emphasis"
-                  tooltipText={text.lagere_betrouwbaarheid_uitleg}
+                  tooltipText={textShared.lagere_betrouwbaarheid_uitleg}
                 />
               )}
             </Box>
           </VariantsTableTile>
 
           <VariantsStackedAreaTile
-            text={text.varianten_over_tijd_grafiek}
+            text={{
+              ...textShared.varianten_over_tijd_grafiek,
+              varianten: commonTexts.variants,
+            }}
             noDataMessage={noDataMessageChart}
             values={chartData?.variantChart}
             metadata={{
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textShared.bronnen.rivm],
             }}
           >
             <Box alignSelf="flex-start">

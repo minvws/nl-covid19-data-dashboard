@@ -43,7 +43,7 @@ const OverRisicoNiveaus = (props: {
   content: any;
   selectedNlData: any;
 }) => {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { lastGenerated, content, selectedNlData: data } = props;
 
   content.content = mergeAdjacentKpiBlocks(content.content);
@@ -63,11 +63,11 @@ const OverRisicoNiveaus = (props: {
       .hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix
   );
 
-  const text = siteText.over_risiconiveaus;
+  const text = commonTexts.over_risiconiveaus;
 
   return (
     <Layout
-      {...siteText.over_risiconiveaus_metadata}
+      {...commonTexts.over_risiconiveaus_metadata}
       lastGenerated={lastGenerated}
     >
       <Head>

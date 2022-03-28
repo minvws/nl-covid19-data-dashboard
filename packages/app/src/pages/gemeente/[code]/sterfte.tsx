@@ -83,11 +83,11 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { textGm } = pageText;
 
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
@@ -101,7 +101,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.besmettingen}
+            category={commonTexts.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}

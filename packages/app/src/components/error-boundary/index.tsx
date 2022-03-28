@@ -49,7 +49,7 @@ export function ErrorBoundary({
 }
 
 function ErrorFallback({ error }: { error: Error }) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const [clipboardState, setClipboardState] = useState<
     'init' | 'copied' | 'error'
   >('init');
@@ -66,7 +66,7 @@ function ErrorFallback({ error }: { error: Error }) {
     }
   }
 
-  const mail = siteText.common.foutmelding_email_adres;
+  const mail = commonTexts.common.foutmelding_email_adres;
 
   const subject = encodeURIComponent('Foutmelding op corona dashboard');
   const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject})`;
@@ -74,21 +74,26 @@ function ErrorFallback({ error }: { error: Error }) {
   return (
     <ErrorBox>
       <Markdown
-        content={replaceVariablesInText(siteText.common.algemene_foutmelding, {
-          email_address: markdownEmail,
-        })}
+        content={replaceVariablesInText(
+          commonTexts.common.algemene_foutmelding,
+          {
+            email_address: markdownEmail,
+          }
+        )}
       />
       <Box display="flex" alignItems="center">
         <Button onClick={() => copyErrorReport()}>
-          {siteText.common.kopieer_foutmelding}
+          {commonTexts.common.kopieer_foutmelding}
         </Button>
 
         {clipboardState === 'copied' && (
-          <InlineText>{siteText.common.foutmelding_is_gekopieerd}</InlineText>
+          <InlineText>
+            {commonTexts.common.foutmelding_is_gekopieerd}
+          </InlineText>
         )}
         {clipboardState === 'error' && (
           <InlineText color="red">
-            {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
+            {commonTexts.common.foutmelding_kon_niet_gekopieerd_worden}
           </InlineText>
         )}
       </Box>

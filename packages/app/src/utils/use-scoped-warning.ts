@@ -6,8 +6,8 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
  * Before returning, the function will check if the defined GM or VR is the same as the current metric page
  */
 export function useScopedWarning(current: string, warning: string) {
-  const { siteText } = useIntl();
-  const scopedGmName = siteText.gemeente_index.municipality_warning;
+  const { commonTexts } = useIntl();
+  const scopedGmName = commonTexts.gemeente_index.municipality_warning;
   const scopedGm = gmData.find(
     (gm) =>
       gm.name === scopedGmName ||

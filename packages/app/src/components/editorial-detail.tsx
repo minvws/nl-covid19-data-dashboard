@@ -14,12 +14,12 @@ interface EditorialDetailProps {
 }
 
 export function EditorialDetail({ editorial }: EditorialDetailProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
-          {siteText.editorial_detail.back_link.text}
+          {commonTexts.editorial_detail.back_link.text}
         </LinkWithIcon>
 
         <Box spacing={2}>

@@ -8,6 +8,7 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { InlineText, Text } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { getThresholdValue } from '~/utils/get-threshold-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -17,6 +18,7 @@ interface VrBehaviorTooltipProps {
   currentComplianceValue: number;
   currentSupportValue: number;
   behaviorType: 'compliance' | 'support';
+  text: SiteText['pages']['behaviorPage'];
 }
 
 export function VrBehaviorTooltip({
@@ -25,9 +27,9 @@ export function VrBehaviorTooltip({
   currentComplianceValue,
   currentSupportValue,
   behaviorType,
+  text,
 }: VrBehaviorTooltipProps) {
-  const { siteText } = useIntl();
-  const behaviorPageText = siteText.pages.behaviorPage;
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
@@ -44,7 +46,7 @@ export function VrBehaviorTooltip({
 
   const complianceTooltipInfo = (
     <TooltipInfo
-      title={behaviorPageText.nl.tooltip_labels.compliance}
+      title={text.nl.tooltip_labels.compliance}
       value={currentComplianceValue}
       background={complianceFilteredThreshold.color}
     />
@@ -52,7 +54,7 @@ export function VrBehaviorTooltip({
 
   const supportTooltipInfo = (
     <TooltipInfo
-      title={behaviorPageText.nl.tooltip_labels.support}
+      title={text.nl.tooltip_labels.support}
       value={currentSupportValue}
       background={supportFilteredThreshold.color}
     />
@@ -65,7 +67,7 @@ export function VrBehaviorTooltip({
     >
       <Box maxWidth="15rem" spacing={2}>
         <Text fontWeight="bold">
-          {behaviorPageText.shared.onderwerpen[currentMetric]}
+          {commonTexts.behavior.subjects[currentMetric]}
         </Text>
 
         {/* Change order of the info based on the metric name */}

@@ -14,22 +14,20 @@ import {
   SelectOption,
 } from '~/components/interactive-legend';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
 export function VaccineStockPerSupplierChart({
   values,
+  text,
 }: VaccineStockPerSupplierChartProps) {
-  const { siteText } = useIntl();
-  const text = siteText.pages.vaccinationsPage.nl.stock_per_supplier_chart;
-
-  const productNames =
-    siteText.pages.vaccinationsPage.nl.data.vaccination_chart.product_names;
+  const productNames = text.data.vaccination_chart.product_names;
 
   const today = useCurrentDate();
   const maximumValuesPerTimeframeOption = useMemo(
@@ -82,20 +80,26 @@ export function VaccineStockPerSupplierChart({
     {
       type: 'area',
       metricProperty: `${selected}_available` as keyof NlVaccineStockValue,
-      label: replaceVariablesInText(text.legend.available, {
-        vaccineName: selectedConfig.label,
-      }),
-      shortLabel: text.tooltip_labels.available,
+      label: replaceVariablesInText(
+        text.stock_per_supplier_chart.legend.available,
+        {
+          vaccineName: selectedConfig.label,
+        }
+      ),
+      shortLabel: text.stock_per_supplier_chart.tooltip_labels.available,
       color: selectedConfig.color,
       curve: 'step',
     },
     {
       type: 'line',
       metricProperty: `${selected}_total` as keyof NlVaccineStockValue,
-      label: replaceVariablesInText(text.legend.total, {
-        vaccineName: selectedConfig.label,
-      }),
-      shortLabel: text.tooltip_labels.total,
+      label: replaceVariablesInText(
+        text.stock_per_supplier_chart.legend.total,
+        {
+          vaccineName: selectedConfig.label,
+        }
+      ),
+      shortLabel: text.stock_per_supplier_chart.tooltip_labels.total,
       color: colors.lightGray,
       curve: 'step',
     },
@@ -104,13 +108,13 @@ export function VaccineStockPerSupplierChart({
   return (
     <ChartTile
       title={text.title}
-      description={text.description}
+      description={text.stock_per_supplier_chart.description}
       metadata={{
-        source: siteText.pages.vaccinationsPage.nl.bronnen.rivm,
+        source: text.bronnen.rivm,
       }}
     >
       <InteractiveLegend
-        helpText={text.select_help_text}
+        helpText={text.stock_per_supplier_chart.select_help_text}
         selectOptions={optionsConfig}
         selection={[selected]}
         onToggleItem={setSelected}
@@ -122,7 +126,7 @@ export function VaccineStockPerSupplierChart({
         accessibility={{
           key: 'vaccine_stock_per_supplier_chart',
         }}
-        tooltipTitle={text.tooltip_title}
+        tooltipTitle={text.stock_per_supplier_chart.tooltip_title}
         values={values}
         seriesConfig={seriesConfig}
         timeframe={TimeframeOption.ALL}

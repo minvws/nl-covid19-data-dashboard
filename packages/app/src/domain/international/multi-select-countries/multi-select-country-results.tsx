@@ -22,7 +22,7 @@ export function MultiSelectCountriesResults() {
     selectedCount,
   } = useSearchContext();
 
-  const { formatNumber, siteText } = useIntl();
+  const { formatNumber, commonTexts } = useIntl();
 
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
@@ -70,19 +70,22 @@ export function MultiSelectCountriesResults() {
         ) : (
           <StyledNoHits>
             <Text variant="label1">
-              {siteText.select_countries.no_countries_found}
+              {commonTexts.select_countries.no_countries_found}
             </Text>
             <Text variant="label1">
-              {siteText.select_countries.no_countries_found_hint}
+              {commonTexts.select_countries.no_countries_found_hint}
             </Text>
           </StyledNoHits>
         )}
       </StyledCountriesList>
       <StyledSelectionSummary>
-        {replaceVariablesInText(siteText.select_countries.selection_summary, {
-          selectedCount,
-          limit,
-        })}
+        {replaceVariablesInText(
+          commonTexts.select_countries.selection_summary,
+          {
+            selectedCount,
+            limit,
+          }
+        )}
       </StyledSelectionSummary>
     </StyledSelectCountriesResults>
   );

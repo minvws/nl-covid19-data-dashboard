@@ -56,6 +56,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.positiveTestsPage.nl,
         textShared: siteText.pages.positiveTestsPage.shared,
       }),
@@ -117,13 +118,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+  const { commonTexts, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
   const reverseRouter = useReverseRouter();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
 
-  const { textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } = pageText;
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
@@ -131,7 +132,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdLastValue = data.tested_ggd.last_value;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -141,8 +142,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
+            screenReaderCategory={
+              commonTexts.sidebar.metrics.positive_tests.title
+            }
             title={textNl.titel}
             icon={<Test />}
             description={textNl.pagina_toelichting}
@@ -401,6 +404,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.timeSeries,
                     'tested_per_age_group'
                   )}
+                  text={textShared}
                 />
               )}
             </ChartTile>

@@ -43,6 +43,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        caterogyTexts:
+          siteText.common.veiligheidsregio_layout.headings.besmettingen,
         textVr: siteText.pages.deceasedPage.vr,
         textShared: siteText.pages.deceasedPage.shared,
       }),
@@ -95,11 +97,11 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
-  const { textVr, textShared } = pageText;
+  const { commonTexts } = useIntl();
+  const { caterogyTexts, textVr, textShared } = pageText;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegion: vrName,
     }),
@@ -113,7 +115,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.besmettingen}
+            category={caterogyTexts}
             title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
               safetyRegion: vrName,
             })}

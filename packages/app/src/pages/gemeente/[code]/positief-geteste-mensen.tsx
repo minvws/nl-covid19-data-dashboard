@@ -104,7 +104,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = pageText;
 
@@ -115,7 +115,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     (v) => v.vrcode === vrForMunicipality?.code
   );
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
@@ -129,7 +129,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.besmettingen}
+            category={commonTexts.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -162,7 +162,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Text>
                 {replaceComponentsInText(
-                  siteText.gemeente_index.population_count,
+                  commonTexts.gemeente_index.population_count,
                   {
                     municipalityName,
                     populationCount: (
@@ -212,7 +212,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <CollapsibleContent
                 label={
-                  siteText.gemeente_index.population_count_explanation_title
+                  commonTexts.gemeente_index.population_count_explanation_title
                 }
               >
                 <Text>

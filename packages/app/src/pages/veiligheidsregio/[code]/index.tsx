@@ -19,7 +19,7 @@ export const getStaticProps = createGetStaticProps(
 
 const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, vrName } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
@@ -32,7 +32,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout
-      {...siteText.veiligheidsregio_index.metadata}
+      {...commonTexts.veiligheidsregio_index.metadata}
       lastGenerated={lastGenerated}
     >
       <VrLayout vrName={vrName} />

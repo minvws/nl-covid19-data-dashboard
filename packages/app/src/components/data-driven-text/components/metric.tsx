@@ -18,7 +18,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   additionalData,
   isPercentage,
 }: Extract<Content<T>, { type: 'metric' }> & { data: K }) {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
 
   const lastValue = get(data, [metricName, 'last_value']);
   const propertyValue = metricProperty && lastValue[metricProperty];
@@ -56,7 +56,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
           <RelativeDate
             dateInSeconds={differenceValue.new_date_unix}
             isCapitalized={baseText.indexOf('{{newDate}}') === 0}
-            absoluteDateTemplate={siteText.common.absolute_date_template}
+            absoluteDateTemplate={commonTexts.common.absolute_date_template}
           />
         ),
         propertyValue: (

@@ -10,6 +10,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
@@ -55,6 +56,7 @@ interface VaccineCoverageToggleTileProps {
   numFractionDigits?: number;
   age12PlusToggleText: VaccinationGradeToggleTypes;
   age18PlusToggleText: VaccinationGradeToggleTypes;
+  labelTexts: SiteText['pages']['vaccinationsPage']['nl']['vaccination_grade_toggle_tile']['top_labels'];
 }
 
 export function VaccineCoverageToggleTile({
@@ -68,10 +70,8 @@ export function VaccineCoverageToggleTile({
   numFractionDigits = 0,
   age12PlusToggleText,
   age18PlusToggleText,
+  labelTexts,
 }: VaccineCoverageToggleTileProps) {
-  const { siteText } = useIntl();
-  const labelTexts =
-    siteText.pages.vaccinationsPage.nl.vaccination_grade_toggle_tile.top_labels;
   const [selectedTab, setSelectedTab] = useState(age18PlusToggleText.label);
 
   const metadata: MetadataProps = {
@@ -226,7 +226,7 @@ function AgeGroupBlock({
   metadataFullyOrOneShots,
   metadataThirdShots,
 }: AgeGroupBlockProps) {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const formatCoveragePercentage =
     useVaccineCoveragePercentageFormatter(numFractionDigits);
 
@@ -251,9 +251,7 @@ function AgeGroupBlock({
       <Markdown
         content={replaceVariablesInText(description, {
           birthyear: replaceVariablesInText(
-            siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-              parsedBirthyearRange.type
-            ],
+            commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
             parsedBirthyearRange
           ),
         })}
@@ -262,9 +260,7 @@ function AgeGroupBlock({
         <Markdown
           content={replaceVariablesInText(secondDescription, {
             birthyear: replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-                parsedBirthyearRange.type
-              ],
+              commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
               parsedBirthyearRange
             ),
             percentage: formatCoveragePercentage(data, secondProperty),

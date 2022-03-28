@@ -17,7 +17,7 @@ export function LocationTooltip({
 }: {
   data: TooltipData<MergedSewerType>;
 }) {
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
 
   const config = data.config.find((x) => x.type === 'line');
 
@@ -36,7 +36,7 @@ export function LocationTooltip({
           <Locatie />
         </StyledLocationIcon>
         <b>{config.label}</b>
-        <Box mx={2}>{siteText.waarde_annotaties.per_100_000_inwoners}:</Box>
+        <Box mx={2}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>
 
         <b>{formatNumber(data.value.selected_installation_rna_normalized)}</b>
       </Box>

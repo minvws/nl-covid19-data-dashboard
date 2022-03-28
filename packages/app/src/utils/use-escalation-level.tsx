@@ -13,7 +13,7 @@ import { assert } from '~/utils/assert';
  * @returns a color and title
  */
 export function useEscalationLevel(level: EscalationLevelType) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return useMemo(() => {
     const escalationColor = escalationColors.find(
@@ -27,7 +27,7 @@ export function useEscalationLevel(level: EscalationLevelType) {
 
     return {
       color: escalationColor,
-      title: siteText.national_escalation_levels.types[`${level}`].title,
+      title: commonTexts.national_escalation_levels.types[`${level}`].title,
     };
-  }, [level, siteText]);
+  }, [level, commonTexts]);
 }
