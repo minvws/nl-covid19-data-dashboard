@@ -219,7 +219,7 @@ export function Choropleth<T extends ChoroplethDataItem>({
   ...props
 }: ChoroplethProps<T>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<T>>();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   /** Close the tooltip when a click outside of the component occurs */
@@ -227,8 +227,8 @@ export function Choropleth<T extends ChoroplethDataItem>({
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
-      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-        subject: siteText.choropleth[props.map].plural,
+      replaceVariablesInText(commonTexts.choropleth.a11y.tab_navigatie_button, {
+        subject: commonTexts.choropleth[props.map].plural,
       })
     );
 

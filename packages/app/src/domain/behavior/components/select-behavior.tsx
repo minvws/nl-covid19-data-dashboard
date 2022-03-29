@@ -22,10 +22,10 @@ export function SelectBehavior({
   onChange,
   options = behaviorIdentifiers as unknown as BehaviorIdentifier[],
 }: SelectBehaviorProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const selectOptions = options
     .map((id) => {
-      const label = siteText.pages.behaviorPage.shared.onderwerpen[id];
+      const label = commonTexts.behavior.subjects[id];
       const iconSize = 25;
       return {
         value: id,

@@ -23,25 +23,25 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
       TimeframeOption.LAST_YEAR,
     ],
   } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const selectOptions = useMemo(
     () =>
       timeframeOptions.map((key) => ({
-        label: siteText.charts.time_controls[key],
+        label: commonTexts.charts.time_controls[key],
         value: key,
         content: (
           <Box>
-            <Text>{siteText.charts.time_controls[key]}</Text>
+            <Text>{commonTexts.charts.time_controls[key]}</Text>
           </Box>
         ),
       })),
-    [siteText.charts.time_controls, timeframeOptions]
+    [commonTexts.charts.time_controls, timeframeOptions]
   );
 
   return (
     <RichContentSelect
-      label={siteText.pages.vaccinationsPage.nl.age_group_dropdown.label}
+      label={commonTexts.common.age_group_dropdown.label}
       visuallyHiddenLabel
       initialValue={timeframe}
       options={selectOptions}

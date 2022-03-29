@@ -18,9 +18,9 @@ export function TileAverageDifference({
   isAmount: boolean;
   maximumFractionDigits?: number;
 }) {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const { difference, old_value } = value;
-  const text = siteText.toe_en_afname;
+  const text = commonTexts.toe_en_afname;
 
   const formattedDifference = formatNumber(
     Math.abs(difference),

@@ -47,7 +47,7 @@ export function RichContentSelect<T extends string>(
     getListBoxOptionsProps,
   } = useRichContentSelect(options, onChange, initialValue);
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { containerRef, ...selectBoxProps } = getComboboxProps();
 
@@ -106,7 +106,7 @@ export function RichContentSelect<T extends string>(
                   {
                     <InlineText>
                       {replaceVariablesInText(
-                        siteText.aria_labels.map_select_label,
+                        commonTexts.aria_labels.map_select_label,
                         {
                           label: option.label,
                         }

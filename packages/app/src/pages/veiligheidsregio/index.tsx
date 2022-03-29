@@ -28,12 +28,12 @@ export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
   const reverseRouter = useReverseRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { lastGenerated } = props;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
   };
 
   const data = useMemo(() => {
@@ -56,18 +56,18 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
         )}
 
         <Box as="article" p={4} spacing={3}>
-          {siteText.regionaal_index.belangrijk_bericht && (
+          {commonTexts.regionaal_index.belangrijk_bericht && (
             <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
+              message={commonTexts.regionaal_index.belangrijk_bericht}
               variant="emphasis"
             />
           )}
 
           <Heading level={2} as="h1">
-            {siteText.veiligheidsregio_index.selecteer_titel}
+            {commonTexts.veiligheidsregio_index.selecteer_titel}
           </Heading>
           <Markdown
-            content={siteText.veiligheidsregio_index.selecteer_toelichting}
+            content={commonTexts.veiligheidsregio_index.selecteer_toelichting}
           />
 
           <Box

@@ -4,6 +4,7 @@ import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
 import { getClient, getImageSrc } from '~/lib/sanity';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -11,6 +12,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -39,6 +41,13 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textTopicalPgaeShared: siteText.pages.topicalPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
     const { locale } = context;
@@ -74,7 +83,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, lastGenerated } = props;
+  const { pageText, content, lastGenerated } = props;
   const { locale = 'nl' } = useRouter();
 
   const { cover } = content;
@@ -101,7 +110,10 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
       {...metadata}
     >
       <Box backgroundColor="white">
-        <ArticleDetail article={content} />
+        <ArticleDetail
+          article={content}
+          text={pageText.textTopicalPgaeShared}
+        />
       </Box>
     </Layout>
   );

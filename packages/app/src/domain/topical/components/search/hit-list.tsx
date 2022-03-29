@@ -15,17 +15,19 @@ interface HitListProps {
 
 export function HitList({ scope }: HitListProps) {
   const { gmHits, vrHits, term, getOptionProps } = useSearchContext();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const isScopeVr = scope === 'vr';
 
   const hits = isScopeVr ? vrHits : gmHits;
   const title = isScopeVr
-    ? siteText.common.vr_plural
-    : siteText.common.gm_plural;
-  const noHitsMessage = replaceVariablesInText(siteText.search.no_hits, {
+    ? commonTexts.common.vr_plural
+    : commonTexts.common.gm_plural;
+  const noHitsMessage = replaceVariablesInText(commonTexts.search.no_hits, {
     search: term,
-    subject: isScopeVr ? siteText.common.vr_plural : siteText.common.gm_plural,
+    subject: isScopeVr
+      ? commonTexts.common.vr_plural
+      : commonTexts.common.gm_plural,
   });
 
   return (
@@ -39,8 +41,8 @@ export function HitList({ scope }: HitListProps) {
               <HitLink {...getOptionProps(x)}>
                 <VisuallyHidden>
                   {x.data.type === 'gm'
-                    ? siteText.common.gm_singular
-                    : siteText.common.vr_singular}{' '}
+                    ? commonTexts.common.gm_singular
+                    : commonTexts.common.vr_singular}{' '}
                 </VisuallyHidden>
                 {x.data.name}
               </HitLink>

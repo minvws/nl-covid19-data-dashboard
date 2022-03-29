@@ -6,7 +6,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineText, Text } from '~/components/typography';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -23,6 +23,7 @@ interface BehaviorPerAgeGroupProps {
   data: NlBehaviorPerAgeGroup;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  text: Pick<SiteText['pages']['behaviorPage'], 'nl' | 'shared'>;
 }
 
 export function BehaviorPerAgeGroup({
@@ -33,10 +34,9 @@ export function BehaviorPerAgeGroup({
   supportExplanation,
   currentId,
   setCurrentId,
+  text,
 }: BehaviorPerAgeGroupProps) {
-  const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
-  const behaviorPageText = siteText.pages.behaviorPage;
 
   const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
   const supportValue = data[`${currentId}_support` as keyof typeof data];
@@ -54,7 +54,7 @@ export function BehaviorPerAgeGroup({
     <ChartTile title={title} description={description}>
       <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
         <SelectBehavior
-          label={behaviorPageText.nl.select_behaviour_label}
+          label={text.nl.select_behaviour_label}
           value={currentId}
           onChange={setCurrentId}
         />
@@ -69,10 +69,10 @@ export function BehaviorPerAgeGroup({
                         width: asResponsiveArray({ _: 150, md: 200 }),
                       })}
                     >
-                      {behaviorPageText.shared.leeftijden.tabel.age_group}
+                      {text.shared.leeftijden.tabel.age_group}
                     </HeaderCell>
                     <HeaderCell>
-                      {behaviorPageText.shared.leeftijden.tabel.recent_research}
+                      {text.shared.leeftijden.tabel.recent_research}
                     </HeaderCell>
                   </tr>
                 </thead>
@@ -84,9 +84,7 @@ export function BehaviorPerAgeGroup({
                         isPresent(complianceValue[age]) &&
                         isPresent(supportValue[age]) && (
                           <tr>
-                            <Cell>
-                              {behaviorPageText.shared.leeftijden.tabel[age]}
-                            </Cell>
+                            <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
                             <Cell>
                               <PercentageBar
                                 color={colors.data.cyan}
@@ -129,7 +127,7 @@ export function BehaviorPerAgeGroup({
               mx="auto"
             >
               <Text textAlign="center">
-                {behaviorPageText.shared.leeftijden.tabel.error}
+                {text.shared.leeftijden.tabel.error}
               </Text>
             </Box>
           )}

@@ -51,8 +51,9 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
-      (siteText) => ({
-        textGm: siteText.pages.vaccinationsPage.gm,
+      (commonTexts) => ({
+        textGm: commonTexts.pages.vaccinationsPage.gm,
+        textNl: commonTexts.pages.vaccinationsPage.nl,
       }),
       locale
     ),
@@ -109,12 +110,12 @@ export const VaccinationsGmPage = (
     content,
     lastGenerated,
   } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
-  const { textGm } = pageText;
+  const { textGm, textNl } = pageText;
 
   const metadata = {
     ...textGm.metadata,
@@ -156,7 +157,7 @@ export const VaccinationsGmPage = (
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.vaccinaties}
+            category={commonTexts.gemeente_layout.headings.vaccinaties}
             title={replaceVariablesInText(textGm.informatie_blok.titel, {
               municipalityName: municipalityName,
             })}
@@ -214,6 +215,7 @@ export const VaccinationsGmPage = (
             age18PlusToggleText={
               textGm.vaccination_grade_toggle_tile.age_18_plus
             }
+            labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
 
           <VaccineCoveragePerAgeGroup
@@ -225,20 +227,20 @@ export const VaccinationsGmPage = (
               source: textGm.vaccination_coverage.bronnen.rivm,
             }}
             values={data.vaccine_coverage_per_age_group.values}
+            text={textNl.vaccination_coverage}
           />
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
-                .gm.title,
+              commonTexts.choropleth.choropleth_vaccination_coverage.gm.title,
               { municipalityName: municipalityName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.pages.vaccinationsPage.nl
-                      .choropleth_vaccination_coverage.gm.description,
+                    commonTexts.choropleth.choropleth_vaccination_coverage.gm
+                      .description,
                     { municipalityName: municipalityName }
                   )}
                 />
@@ -251,13 +253,12 @@ export const VaccinationsGmPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.pages.vaccinationsPage.nl
-                  .choropleth_vaccination_coverage.shared.legend_title,
+                commonTexts.choropleth.choropleth_vaccination_coverage.shared
+                  .legend_title,
             }}
             metadata={{
               source:
-                siteText.pages.vaccinationsPage.nl.vaccination_coverage.bronnen
-                  .rivm,
+                commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
           >
@@ -276,10 +277,7 @@ export const VaccinationsGmPage = (
                 highlightSelection: true,
                 selectedCode: data.code,
                 tooltipVariables: {
-                  age_group:
-                    siteText.pages.vaccinationsPage.nl.age_groups[
-                      selectedAgeGroup
-                    ],
+                  age_group: commonTexts.common.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (

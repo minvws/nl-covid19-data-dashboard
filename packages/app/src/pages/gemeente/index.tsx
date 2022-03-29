@@ -27,7 +27,7 @@ export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
   const code = router.query.code as string;
@@ -35,7 +35,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
   };
 
   const data = useMemo(() => {
@@ -59,9 +59,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box as="article" p={4}>
           <Heading level={2} as="h1">
-            {siteText.gemeente_index.selecteer_titel}
+            {commonTexts.gemeente_index.selecteer_titel}
           </Heading>
-          <Markdown content={siteText.gemeente_index.selecteer_toelichting} />
+          <Markdown
+            content={commonTexts.gemeente_index.selecteer_toelichting}
+          />
 
           <Box
             display="flex"

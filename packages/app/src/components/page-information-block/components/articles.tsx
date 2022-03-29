@@ -16,11 +16,11 @@ interface ArticlesProps {
 }
 
 export function Articles({ articles }: ArticlesProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <Box spacing={3}>
-      <Text variant="subtitle1">{siteText.informatie_header.artikelen}</Text>
+      <Text variant="subtitle1">{commonTexts.informatie_header.artikelen}</Text>
       <Box spacing={3}>
         {articles.map((article, index) => (
           <ArticleItem

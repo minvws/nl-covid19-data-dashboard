@@ -25,29 +25,27 @@ export function VaccinationCoverageKindSelect(
 ) {
   const { onChange, initialValue = 'fully_vaccinated_percentage' } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const options: Option<CoverageKindProperty>[] = useMemo(
     () =>
       COVERAGE_KINDS.map((kind) => {
         return {
           value: kind,
-          label: siteText.pages.vaccinationsPage.nl.coverage_kinds[kind],
+          label: commonTexts.vaccinations.coverage_kinds[kind],
           content: (
             <Box pr={2}>
-              <Text>
-                {siteText.pages.vaccinationsPage.nl.coverage_kinds[kind]}
-              </Text>
+              <Text>{commonTexts.vaccinations.coverage_kinds[kind]}</Text>
             </Box>
           ),
         };
       }).filter(isPresent),
-    [siteText.pages.vaccinationsPage.nl.coverage_kinds]
+    [commonTexts.vaccinations.coverage_kinds]
   );
 
   return (
     <RichContentSelect
-      label={siteText.pages.vaccinationsPage.nl.coverage_kind_dropdown.label}
+      label={commonTexts.vaccinations.coverage_kind_dropdown.label}
       visuallyHiddenLabel
       initialValue={initialValue}
       options={options}

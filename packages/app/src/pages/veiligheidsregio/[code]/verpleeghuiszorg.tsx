@@ -92,7 +92,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     content,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { textVr, textShared } = pageText;
 
@@ -103,7 +103,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.besmette_locaties.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -121,10 +121,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={
-              siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
+              commonTexts.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={
-              siteText.sidebar.metrics.nursing_home_care.title
+              commonTexts.sidebar.metrics.nursing_home_care.title
             }
             title={replaceVariablesInText(
               textVr.positief_geteste_personen.titel,

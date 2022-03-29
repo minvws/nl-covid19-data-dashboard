@@ -42,6 +42,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.deceasedPage.nl,
         textShared: siteText.pages.deceasedPage.shared,
       }),
@@ -88,11 +89,11 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
 
-  const { siteText, formatPercentage } = useIntl();
-  const { textNl, textShared } = pageText;
+  const { commonTexts, formatPercentage } = useIntl();
+  const { metadataTexts, textNl, textShared } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -102,7 +103,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
             title={textNl.section_deceased_rivm.title}
             icon={<Coronavirus />}
             description={textNl.section_deceased_rivm.description}

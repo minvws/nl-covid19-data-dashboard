@@ -61,7 +61,7 @@ export const getStaticProps = withFeatureNotFoundPage(
     ({ locale }: { locale: keyof Languages }) =>
       getLokalizeTexts(
         (siteText) => ({
-          textIn: siteText.pages.in_positiveTestsPage.shared,
+          textShared: siteText.pages.in_positiveTestsPage.shared,
         }),
         locale
       ),
@@ -116,13 +116,13 @@ export default function PositiefGetesteMensenPage(
   } = props;
   const { in: choroplethData } = choropleth;
 
-  const { siteText } = useIntl();
-  const { textIn } = pageText;
+  const { commonTexts } = useIntl();
+  const { textShared } = pageText;
 
   const metadata = {
-    ...siteText.internationaal_metadata,
-    title: textIn.metadata.title,
-    description: textIn.metadata.description,
+    ...commonTexts.internationaal_metadata,
+    title: textShared.metadata.title,
+    description: textShared.metadata.description,
   };
 
   const comparedCode = 'nld';
@@ -155,31 +155,31 @@ export default function PositiefGetesteMensenPage(
       <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
-            category={textIn.categorie}
-            title={textIn.titel}
+            category={textShared.categorie}
+            title={textShared.titel}
             icon={<Test />}
-            description={textIn.pagina_toelichting}
+            description={textShared.pagina_toelichting}
             metadata={{
               ...internationalMetadataDatums,
-              datumsText: textIn.datums,
-              dataSources: [textIn.bronnen.rivm, textIn.bronnen.ecdc],
+              datumsText: textShared.datums,
+              dataSources: [textShared.bronnen.rivm, textShared.bronnen.ecdc],
             }}
-            referenceLink={textIn.reference.href}
+            referenceLink={textShared.reference.href}
             articles={content.articles}
             pageLinks={content.links}
           />
 
-          <InformationTile message={textIn.informatie_tegel} />
+          <InformationTile message={textShared.informatie_tegel} />
 
           <EuropeChoroplethTile
-            title={textIn.choropleth.titel}
-            description={textIn.choropleth.toelichting}
+            title={textShared.choropleth.titel}
+            description={textShared.choropleth.toelichting}
             legend={{
               thresholds: thresholds.in.infected_per_100k_average,
-              title: textIn.choropleth.legenda_titel,
+              title: textShared.choropleth.legenda_titel,
             }}
             metadata={{
-              dataSources: [textIn.bronnen.rivm, textIn.bronnen.ecdc],
+              dataSources: [textShared.bronnen.rivm, textShared.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
@@ -202,7 +202,7 @@ export default function PositiefGetesteMensenPage(
               }}
               formatTooltip={(context) => (
                 <InPositiveTestedPeopleTooltip
-                  title={textIn.choropleth.tooltip_titel}
+                  title={textShared.choropleth.tooltip_titel}
                   countryName={context.featureName}
                   countryCode={context.dataItem.country_code}
                   value={context.dataItem.infected_per_100k_average}
@@ -239,11 +239,11 @@ export default function PositiefGetesteMensenPage(
           </EuropeChoroplethTile>
 
           <ChartTile
-            title={textIn.time_graph.title}
+            title={textShared.time_graph.title}
             metadata={{
-              source: textIn.bronnen.rivm,
+              source: textShared.bronnen.rivm,
             }}
-            description={textIn.time_graph.description}
+            description={textShared.time_graph.description}
           >
             <MultiSelectCountries
               countryOptions={countryOptions}
@@ -272,12 +272,13 @@ export default function PositiefGetesteMensenPage(
             data={choroplethData}
             countryNames={countryNames}
             metadata={{
-              dataSources: [textIn.bronnen.rivm, textIn.bronnen.ecdc],
+              dataSources: [textShared.bronnen.rivm, textShared.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
               ],
             }}
+            text={textShared}
           />
         </TileList>
       </InLayout>

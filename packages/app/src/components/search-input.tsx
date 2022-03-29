@@ -19,7 +19,7 @@ export function SearchInput({
   setValue,
   placeholderText,
 }: searchInputProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const inputRef = useRef<HTMLInputElement>(null);
   const searchId = useUniqueId();
 
@@ -48,7 +48,7 @@ export function SearchInput({
             },
           })}
         >
-          <VisuallyHidden>{siteText.search.clear}</VisuallyHidden>
+          <VisuallyHidden>{commonTexts.search.clear}</VisuallyHidden>
           <Close />
         </IconContainer>
       )}

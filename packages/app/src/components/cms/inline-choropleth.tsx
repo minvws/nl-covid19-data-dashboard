@@ -30,7 +30,7 @@ interface InlineChoroplethProps {
 export function InlineChoropleth(props: InlineChoroplethProps) {
   const { configuration } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const dateUrl = getDataUrl(undefined, undefined, configuration, 'choropleth');
 
@@ -50,7 +50,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
       : undefined,
     tooltipVariables: parseTooltipVariables(
       configuration.tooltipVariables,
-      siteText
+      commonTexts
     ),
     highlightSelection: configuration.highlightSelection,
     isPercentage: configuration.isPercentage,
@@ -70,7 +70,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
     noDataFillColor: getColor(configuration.noDataFillColor),
   };
 
-  const source = get(siteText, configuration.sourceKey.split('.'), '');
+  const source = get(commonTexts, configuration.sourceKey.split('.'), '');
 
   return (
     <ErrorBoundary>
@@ -90,7 +90,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
 
 function parseTooltipVariables(
   tooltipVarsJson: string | undefined,
-  siteText: SiteText
+  commonTexts: SiteText['common']
 ) {
   if (!tooltipVarsJson?.length) {
     return undefined;
@@ -99,10 +99,10 @@ function parseTooltipVariables(
     const varsObject = JSON.parse(tooltipVarsJson);
     return Object.fromEntries(
       Object.entries(varsObject).map(([name, value]) => {
-        if (isString(value) && value.startsWith('siteText')) {
+        if (isString(value) && value.startsWith('commonTexts')) {
           return [
             name,
-            get(siteText, value.replace('siteText.', ''), undefined),
+            get(commonTexts, value.replace('commonTexts.', ''), undefined),
           ];
         }
         return [name, value];

@@ -20,8 +20,8 @@ export function TileDifference({
   showOldDateUnix?: boolean;
   isAmount: boolean;
 }) {
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
-  const text = siteText.toe_en_afname;
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
+  const text = commonTexts.toe_en_afname;
   const { difference } = value;
 
   const formattedDifference = formatNumber(

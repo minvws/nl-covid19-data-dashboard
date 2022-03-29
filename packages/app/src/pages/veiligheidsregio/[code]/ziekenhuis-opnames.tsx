@@ -98,7 +98,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
@@ -122,7 +122,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -137,7 +137,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
+            category={commonTexts.veiligheidsregio_layout.headings.ziekenhuizen}
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -213,7 +213,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedRange,
                       end: Infinity,
                       label: textVr.linechart_legend_underreported_titel,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
                       ],
@@ -256,7 +256,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 selectedCode: selectedMunicipalCode,
                 getLink: reverseRouter.gm.ziekenhuisopnames,
                 tooltipVariables: {
-                  patients: siteText.choropleth_tooltip.patients,
+                  patients: commonTexts.choropleth_tooltip.patients,
                 },
               }}
             />
