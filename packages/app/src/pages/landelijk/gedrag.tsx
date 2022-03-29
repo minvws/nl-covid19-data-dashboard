@@ -44,6 +44,7 @@ export const getStaticProps = createGetStaticProps(
       (siteText) => ({
         caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
         metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        subjectTexts: siteText.common.behavior.subjects,
         text: siteText.pages.behaviorPage,
       }),
       locale
@@ -80,7 +81,7 @@ export default function BehaviorPage(
 
   const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
   const { formatNumber, formatDateFromSeconds, formatPercentage } = useIntl();
-  const { caterogyTexts, metadataTexts, text } = pageText;
+  const { caterogyTexts, subjectTexts, metadataTexts, text } = pageText;
 
   const metadata = {
     ...metadataTexts,
@@ -116,15 +117,15 @@ export default function BehaviorPage(
     const currentTimelineEvents = data.behavior_annotations.values.filter(
       (a) => (a.source_type === currentId)
     ).map((event) => ({
-        title: siteText.common.behavior.subjects[event.behaviour_type],
-        description: siteText.pages.behaviorPage.shared.annotation_description[event.behaviour_type],
+        title: subjectTexts[event.behaviour_type],
+        description: text.shared.annotation_description[event.behaviour_type],
         start: event.date_start_unix,
         end: event.date_end_unix
       })
     );
 
     return { currentTimelineEvents };
-  }, [currentId, data.behavior_annotations.values, siteText.pages.behaviorPage.shared.annotation_description, siteText.common.behavior.subjects]);
+  }, [currentId, data.behavior_annotations.values, text.shared.annotation_description, subjectTexts]);
 
   const timelineProp = behaviorAnnotationsFeature.isEnabled
     ? { timelineEvents: currentTimelineEvents }
@@ -135,8 +136,8 @@ export default function BehaviorPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.common.nationaal_layout.headings.gedrag}
-            title={textNl.pagina.titel}
+            category={caterogyTexts}
+            title={text.nl.pagina.titel}
             icon={<Gedrag />}
             description={text.nl.pagina.toelichting}
             metadata={{
