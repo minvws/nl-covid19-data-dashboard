@@ -116,7 +116,7 @@ export default function BehaviorPage(
     const currentTimelineEvents = data.behavior_annotations.values.filter(
       (a) => (a.source_type === currentId)
     ).map((event) => ({
-        title: siteText.pages.behaviorPage.shared.onderwerpen[event.behaviour_type],
+        title: siteText.common.behavior.subjects[event.behaviour_type],
         description: siteText.pages.behaviorPage.shared.annotation_description[event.behaviour_type],
         start: event.date_start_unix,
         end: event.date_end_unix
@@ -124,7 +124,7 @@ export default function BehaviorPage(
     );
 
     return { currentTimelineEvents };
-  }, [currentId, data.behavior_annotations.values, siteText.pages.behaviorPage.shared]);
+  }, [currentId, data.behavior_annotations.values, siteText.pages.behaviorPage.shared.annotation_description, siteText.common.behavior.subjects]);
 
   const timelineProp = behaviorAnnotationsFeature.isEnabled
     ? { timelineEvents: currentTimelineEvents }
@@ -135,7 +135,7 @@ export default function BehaviorPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.gedrag}
+            category={siteText.common.nationaal_layout.headings.gedrag}
             title={textNl.pagina.titel}
             icon={<Gedrag />}
             description={textNl.pagina.toelichting}
