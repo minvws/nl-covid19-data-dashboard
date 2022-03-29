@@ -67,21 +67,27 @@ ENV NEXT_PUBLIC_PHASE=$ARG_NEXT_PUBLIC_PHASE
 ENV NEXT_PUBLIC_HOT_RELOAD_LOKALIZE=ARG_NEXT_PUBLIC_HOT_RELOAD_LOKALIZE
 ENV API_URL=$ARG_API_URL
 
-# Layer that always gets executed
-FROM builder
-
 # Yarn download uses the API_URL env variable to download the zip with JSONs from the provided URL.
 RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
 && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$NEXT_PUBLIC_SANITY_DATASET \
-&& yarn workspace @corona-dashboard/app build \
-&& mkdir -p /app/packages/app/public/images/choropleth \
-&& addgroup -g 1001 -S nodejs \
-&& adduser -S nextjs -u 1001 \
-&& chown -R nextjs:nodejs /app/packages/app/.next \
-&& chown -R nextjs:nodejs /app/packages/app/public/images/choropleth
+&& yarn workspace @corona-dashboard/app build
+
+FROM node:lts-alpine as runner
+
+RUN addgroup -g 1001 -S nodejs \
+&& adduser -S nextjs -u 1001
+
+COPY --from=builder --chown=nextjs:nodejs /app/packages/app/.next/standalone /app/.next/standalone
+COPY --from=builder --chown=nextjs:nodejs /app/packages/app/.next/static /app/.next/standalone/packages/app/.next/static
+COPY --from=builder /app/packages/app/next.config.js /app/.next/standalone/packages/app
+
+RUN mkdir -p /app/.next/standalone/packages/app/public/images/choropleth
+RUN chown -R nextjs:nodejs /app/.next/standalone/packages/app/public/images/choropleth
 
 USER nextjs
 
-CMD ["yarn", "start"]
+WORKDIR /app/.next/standalone/packages/app
+
+CMD ["node", "server"]

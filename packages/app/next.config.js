@@ -41,6 +41,11 @@ const gmRedirects = [
 ];
 
 const nextConfig = {
+  experimental: {
+    outputStandalone: true,
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
+
   /**
    * Enables react strict mode
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
