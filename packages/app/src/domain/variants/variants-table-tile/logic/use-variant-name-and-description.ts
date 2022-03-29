@@ -17,7 +17,7 @@ export function useVariantNameAndDescription(
       ? otherDescription
       : (
           siteText.pages.variantsPage.nl
-            .varianten_omschrijving as Dictionary<string>
+            .variants_description as Dictionary<string>
         )[variant];
 
   const countryOfOrigin = (
