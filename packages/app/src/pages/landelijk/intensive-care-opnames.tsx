@@ -10,20 +10,21 @@ import {
 import { Arts } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
-import type { AgeDemographicProps } from '~/components/age-demographic';
-import { ChartTile } from '~/components/chart-tile';
-import { KpiTile } from '~/components/kpi-tile';
-import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
-import type { PieChartProps } from '~/components/pie-chart';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
+import {
+  AgeDemographicProps,
+  PieChartProps,
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  PageKpi,
+  ChartTile,
+  KpiTile,
+  Markdown,
+  PageInformationBlock,
+  PageBarScale,
+} from '~/components';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital';
+import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getBarScaleConfig } from '~/metric-config';
@@ -49,9 +50,11 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import type { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+} from '~/utils';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
