@@ -37,6 +37,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.reproductionPage.nl,
       }),
       locale
@@ -72,11 +73,11 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
 
-  const { siteText } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts } = useIntl();
+  const { metadataTexts, textNl } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -86,9 +87,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              siteText.sidebar.metrics.reproduction_number.title
+              commonTexts.sidebar.metrics.reproduction_number.title
             }
             title={textNl.titel}
             icon={<Reproductiegetal />}

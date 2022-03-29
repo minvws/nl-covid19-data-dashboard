@@ -22,11 +22,13 @@ interface pageLinksProps {
 }
 
 export function PageLinks({ links }: pageLinksProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <Box spacing={2}>
-      <Text fontWeight="bold">{siteText.informatie_header.handige_links}</Text>
+      <Text fontWeight="bold">
+        {commonTexts.informatie_header.handige_links}
+      </Text>
       <OrderedList>
         {links.map((link, index) => (
           <ListItem key={index}>

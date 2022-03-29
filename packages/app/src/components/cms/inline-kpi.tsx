@@ -38,7 +38,7 @@ function getDataUrl(configuration: KpiConfiguration, date?: string) {
 }
 
 export function InlineKpi({ configuration, date }: InlineKpiProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const { data } = useSWRImmutable<ServerData>(
     getDataUrl(configuration, date),
@@ -66,8 +66,8 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
         },
       };
 
-  const title = get(siteText, configuration.titleKey.split('.'), '');
-  const source = get(siteText, configuration.sourceKey.split('.'), '');
+  const title = get(commonTexts, configuration.titleKey.split('.'), '');
+  const source = get(commonTexts, configuration.sourceKey.split('.'), '');
 
   const lastValue = getLastValue(data, configuration.metricName);
 

@@ -86,7 +86,7 @@ export function useSidebar<T extends Layout>({
   code,
 }: UseSidebarArgs<T>): ExpandedSidebarMap<T> {
   const reverseRouter = useReverseRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return useMemo(() => {
     const getHref = (key: ItemKeys<T>) => {
@@ -114,7 +114,7 @@ export function useSidebar<T extends Layout>({
 
       return {
         key,
-        title: siteText.sidebar.metrics[key].title,
+        title: commonTexts.sidebar.metrics[key].title,
         icon,
         href: getHref(key),
       };
@@ -122,7 +122,7 @@ export function useSidebar<T extends Layout>({
 
     const getCategory = (category: SidebarElement<T>): SidebarCategory<T> => {
       const [key, items] = category;
-      const content: Content = siteText.sidebar.categories[key];
+      const content: Content = commonTexts.sidebar.categories[key];
 
       return {
         key,
@@ -138,5 +138,5 @@ export function useSidebar<T extends Layout>({
       map.map((x) => (typeof x === 'string' ? getItem(x) : getCategory(x)));
 
     return expandMap(map);
-  }, [code, layout, map, reverseRouter, siteText.sidebar]);
+  }, [code, layout, map, reverseRouter, commonTexts.sidebar]);
 }

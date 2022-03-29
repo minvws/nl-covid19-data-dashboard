@@ -19,7 +19,7 @@ interface SituationsDataCoverageChoroplethTileProps {
     situations: VrCollectionSituations[];
   };
   text: SiteText['pages']['situationsPage']['shared'];
-  tooltipText: SiteText['choropleth_tooltip']['patients'];
+  tooltipText: SiteText['common']['choropleth_tooltip']['patients'];
 }
 
 export function SituationsDataCoverageChoroplethTile({

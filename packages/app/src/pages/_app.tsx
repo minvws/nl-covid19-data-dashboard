@@ -41,7 +41,7 @@ export default function App(props: AppProps) {
 
   const intlContext = useIntlHelperContext(
     locale as LanguageKey,
-    text,
+    text.common,
     dataset
   );
 

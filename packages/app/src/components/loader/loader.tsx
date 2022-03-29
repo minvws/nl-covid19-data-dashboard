@@ -10,12 +10,12 @@ interface LoaderProps {
   showLoader?: boolean;
 }
 
-const DURATION = .7;
+const DURATION = 0.7;
 const DELAYTIMING: Array<number> = [0, 0.3, 0.5, 0.2, 0.4];
 
 export function Loader(props: LoaderProps) {
   const { showLoader = true } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const [inViewHeight, setinViewHeight] = useState('0');
 
@@ -32,27 +32,28 @@ export function Loader(props: LoaderProps) {
 
         setinViewHeight(heightOfInView);
       }}
-    > { showLoader &&
-      <LoaderFullSize inViewHeight={inViewHeight}>
-        <Box
-          spacing={3}
-          m={3}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box spacingHorizontal={1} display={'flex'} alignItems="end">
-            {DELAYTIMING.map((delayTiming, i) => (
-              <LoaderBar
-                key={i}
-                delay={`-${delayTiming}s`}
-              />
-            ))}
+    >
+      {showLoader && (
+        <LoaderFullSize inViewHeight={inViewHeight}>
+          <Box
+            spacing={3}
+            m={3}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box spacingHorizontal={1} display={'flex'} alignItems="end">
+              {DELAYTIMING.map((delayTiming, i) => (
+                <LoaderBar key={i} delay={`-${delayTiming}s`} />
+              ))}
+            </Box>
+            <Text variant="loaderText" role="status" aria-live="polite">
+              {commonTexts.common.loading_text}
+            </Text>
           </Box>
-          <Text variant="loaderText" role="status" aria-live="polite">{siteText.common.loading_text}</Text>
-        </Box>
-      </LoaderFullSize> }
+        </LoaderFullSize>
+      )}
     </LoaderOverlay>
   );
 }
@@ -78,19 +79,20 @@ const LoaderBar = styled.div<{ delay: string }>(({ delay }) =>
   })
 );
 
-const LoaderFullSize  = styled.div<{ inViewHeight: string }>(({ inViewHeight }) =>
-  css({
-    position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: inViewHeight,
-    top: '0',
-    right: '0',
-    bottom: '0',
-    left: '0',
-  },
-));
+const LoaderFullSize = styled.div<{ inViewHeight: string }>(
+  ({ inViewHeight }) =>
+    css({
+      position: 'absolute',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: inViewHeight,
+      top: '0',
+      right: '0',
+      bottom: '0',
+      left: '0',
+    })
+);
 
 const LoaderOverlay = styled.div(() =>
   css({
@@ -101,5 +103,5 @@ const LoaderOverlay = styled.div(() =>
     left: '0',
     zIndex: 999,
     bg: 'white',
-  },
-));
+  })
+);

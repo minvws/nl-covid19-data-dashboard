@@ -14,8 +14,8 @@ export function useAgegroupLabels(
     | undefined,
   lowerCased?: boolean
 ) {
-  const { siteText, formatPercentage } = useIntl();
-  const labelsText = siteText.pages.topicalPage.shared.labels;
+  const { commonTexts, formatPercentage } = useIntl();
+  const labelsText = commonTexts.common;
 
   return useMemo(() => {
     const fullyVaccinatedLabel = isDefined(dataValue)

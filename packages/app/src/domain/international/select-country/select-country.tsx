@@ -26,7 +26,7 @@ export function SelectCountry({
   onChange,
   value,
 }: SelectCountryProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const uniqueId = useUniqueId();
 
   const containerRef = useRef(null);
@@ -174,10 +174,10 @@ export function SelectCountry({
         ) : (
           <StyledNoHits>
             <Text variant="label1">
-              {siteText.select_countries.no_countries_found}
+              {commonTexts.select_countries.no_countries_found}
             </Text>
             <Text variant="label1">
-              {siteText.select_countries.no_countries_found_hint}
+              {commonTexts.select_countries.no_countries_found_hint}
             </Text>
           </StyledNoHits>
         )}

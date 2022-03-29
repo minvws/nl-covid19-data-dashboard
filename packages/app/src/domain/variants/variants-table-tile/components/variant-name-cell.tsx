@@ -15,8 +15,9 @@ export function VariantNameCell(props: VariantNameCellProps) {
   const { variant, text, mobile, narrow } = props;
 
   const [variantName, variantDescription] = useVariantNameAndDescription(
-    variant,
-    text.anderen_tooltip
+    variant as keyof typeof text.varianten,
+    text.anderen_tooltip,
+    text
   );
 
   return (

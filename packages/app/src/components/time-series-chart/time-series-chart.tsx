@@ -172,7 +172,7 @@ export function TimeSeriesChart<
   displayTooltipValueOnly,
   isYAxisCollapsed: defaultIsYAxisCollapsed,
 }: TimeSeriesChartProps<T, C>) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const {
     tooltipData,
@@ -283,7 +283,7 @@ export function TimeSeriesChart<
     tabInteractiveButton,
     anchorEventHandlers,
     setIsTabInteractive,
-  } = useTabInteractiveButton(siteText.accessibility.tab_navigatie_button);
+  } = useTabInteractiveButton(commonTexts.accessibility.tab_navigatie_button);
 
   const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({

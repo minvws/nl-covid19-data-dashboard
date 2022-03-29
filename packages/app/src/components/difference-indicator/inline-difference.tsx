@@ -11,8 +11,8 @@ export function InlineDifference({
   value: DifferenceDecimal | DifferenceInteger;
   isAmount: boolean;
 }) {
-  const { siteText } = useIntl();
-  const text = siteText.pages.topicalPage.shared;
+  const { commonTexts } = useIntl();
+  const text = commonTexts.trend;
 
   if (value.difference > 0)
     return (

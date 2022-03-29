@@ -15,7 +15,7 @@ type InLayoutProps = {
 export function InLayout(props: InLayoutProps) {
   const { children } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const items = useSidebar({
     layout: 'in',
@@ -50,7 +50,7 @@ export function InLayout(props: InLayoutProps) {
             pt={4}
           >
             <VisuallyHidden id="sidebar-title" as="h2">
-              {siteText.internationaal_layout.headings.sidebar}
+              {commonTexts.internationaal_layout.headings.sidebar}
             </VisuallyHidden>
 
             <Menu spacing={4}>

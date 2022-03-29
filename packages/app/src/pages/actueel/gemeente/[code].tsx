@@ -70,6 +70,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        hospitalText: siteText.pages.hospitalPage.nl,
+        positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textGm: siteText.pages.topicalPage.gm,
         textShared: siteText.pages.topicalPage.shared,
       }),
@@ -139,9 +141,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const { siteText, ...formatters } = useIntl();
-  const { textGm, textShared } = pageText;
-  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
+  const { commonTexts, ...formatters } = useIntl();
+  const { hospitalText, positiveTestsText, textGm, textShared } = pageText;
 
   const gmCode = router.query.code as string;
 
@@ -202,9 +203,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   municipalityName: municipalityName,
                 })}
                 headingLevel={1}
+                text={textShared}
               />
 
               <MiniTileSelectorLayout
+                text={textShared}
                 link={{
                   text: replaceVariablesInText(textGm.title_link, {
                     municipalityName: municipalityName,
@@ -313,17 +316,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'line',
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_moving_average,
+                      label: hospitalText.linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_trend_label,
+                      label: hospitalText.linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -333,7 +332,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeHospital,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -476,6 +475,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             <VaccinationCoverageChoropleth
+              text={textShared}
               title={replaceVariablesInText(
                 textShared.secties.vaccination_coverage_choropleth.title.gm,
                 { municipalityName: municipalityName }
@@ -548,10 +548,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               description={textShared.secties.meer_lezen.omschrijving}
               link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
+              text={textShared}
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} />
+              <ArticleList articles={content.articles} text={textShared} />
             )}
           </MaxWidth>
         </Box>

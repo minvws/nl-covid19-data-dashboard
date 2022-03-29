@@ -116,7 +116,7 @@ function wrapper({ children }: { children: any }) {
   const contextValue: IntlContextProps = {
     dataset: 'development',
     locale: 'nl',
-    siteText: {
+    commonTexts: {
       accessibility: {
         charts: {
           testKey: {
@@ -137,7 +137,7 @@ function wrapper({ children }: { children: any }) {
           keyboard_choropleth: 'test keyboard choropleth feature',
         },
       },
-    } as unknown as SiteText,
+    } as unknown as SiteText['common'],
     ...formatters,
   };
 

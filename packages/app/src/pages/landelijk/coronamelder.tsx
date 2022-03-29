@@ -15,15 +15,28 @@ import { Heading, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  getLokalizeTexts,
+  selectNlData,
+} from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        textNl: siteText.pages.behaviorPage.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.corona_melder_app_warning__count',
@@ -33,18 +46,18 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
 
-  const { selectedNlData: data, lastGenerated } = props;
-  const { corona_melder_app } = siteText;
-  const behaviorPageText = siteText.pages.behaviorPage.nl;
+  const { pageText, selectedNlData: data, lastGenerated } = props;
+  const { corona_melder_app } = commonTexts;
+  const { metadataTexts, textNl } = pageText;
 
   const warningLastValue = data.corona_melder_app_warning.last_value;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
-    title: behaviorPageText.metadata.title,
-    description: behaviorPageText.metadata.description,
+    ...metadataTexts,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
