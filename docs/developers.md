@@ -2,7 +2,7 @@
 
 ## Shortcut scripts
 
-The monorepo contains projects which the developer can access with shortcut scripts at the root of the project. Instead of writing the path in the CLI like `yarn workspace @corona-dashboard cms lokalize:import`, we can access the script by writing `yarn cms:import` to bring your local JSON files up-to-date with the Sanity dataset. Another example is using `yarn build:app` instead of `yarn workspace @corona-dashboard/app build` to make a build during the release procedure. Lastly, running `yarn check-all` will make sure the code, data and tests work as expected, instead of running scripts individually.
+The monorepo contains projects which the developer can access with shortcut scripts at the root of the project. Instead of writing the path in the CLI like `yarn workspace @corona-dashboard cms lokalize:import`, we can access the script by writing `yarn cms:lokalize-import` to bring your local JSON files up-to-date with the Sanity dataset. Another example is using `yarn build:app` instead of `yarn workspace @corona-dashboard/app build` to make a build during the release procedure. Lastly, running `yarn check-all` will make sure the code, data and tests work as expected, instead of running scripts individually.
 
 Available shortcut scripts:
 

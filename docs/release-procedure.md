@@ -6,7 +6,7 @@
 2. Merge the develop branch into the release branch.
 3. Do a full build with a Sanity export from production to make sure everything works.
 
-   Use `yarn cms:import:prd` to create the Sanity export.
+   Use `yarn cms:lokalize-import:prd` to create the Sanity export.
    Use `yarn build:app` to create a build with the latest production dataset
 
    Test the build locally by running `yarn start`.

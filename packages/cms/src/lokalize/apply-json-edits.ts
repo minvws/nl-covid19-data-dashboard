@@ -21,7 +21,7 @@ import { createTextDocument } from './logic/create-text-document';
 
   assert(
     referenceTexts,
-    `Failed to read reference texts. Please run lokalize:export first.`
+    `Failed to read reference texts. Please run lokalize:import first.`
   );
 
   const mutations = await getLocalMutations(referenceTexts);

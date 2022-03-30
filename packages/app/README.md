@@ -45,7 +45,7 @@ The "Lokalize" part of Sanity is exported and consumed by the app as JSON. You w
 need to run this script regularly as an outdated JSON file will result in
 compile or build-time errors.
 
-`yarn cms:import`
+`yarn cms:lokalize-import`
 
 Alternatively you can run this from `packages/cms` as `yarn lokalize:import`
 
