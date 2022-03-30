@@ -14,7 +14,18 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
+const IS_PRODUCTION_BUILD = process.env.NODE_ENV === 'production';
+const IS_DEVELOPMENT_PHASE = process.env.NEXT_PUBLIC_PHASE === 'develop';
+
 const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
+const SIX_MONTHS_IN_SECONDS = 15768000;
+
+const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
+const STATIC_ASSET_HTTP_DATE = new Date(
+  Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000
+).toUTCString();
+
+const PORT = process.env.EXPRESS_PORT || (IS_PRODUCTION_BUILD ? 8080 : 3000);
 
 // When municipal reorganizations happened we want to redirect to the new municipality when
 // using the former municipality code. `from` contains the old municipality codes and `to` is
@@ -54,6 +65,10 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
+  poweredByHeader: false,
+
+  port: PORT,
+
   i18n: {
     // These are all the locales you want to support in
     // your application
@@ -80,7 +95,14 @@ const nextConfig = {
   /**
    * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
    */
+
+  // todo: see if we can use `helmet` lib here
   async headers() {
+    const contentSecurityPolicy =
+      IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
+        ? "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';"
+        : "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none'; connect-src 'self' 5mog5ask.api.sanity.io * ws: wss:;";
+
     return [
       {
         source: '/:all*(svg|jpg|png|woff|woff2)',
@@ -92,9 +114,65 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/:all*(html)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, public',
+          },
+        ],
+      },
+      {
+        // todo: only apply for non-sanity stuff
+        source: '/:all*',
+        locale: false,
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: contentSecurityPolicy,
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'no-referrer',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: `max-age=${SIX_MONTHS_IN_SECONDS}; includeSubdomains; preload`,
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'interest-cohort=()',
+          },
+          {
+            key: 'Cache-Control',
+            value: `public, max-age=${STATIC_ASSET_MAX_AGE_IN_SECONDS}`,
+          },
+          {
+            key: 'Vary',
+            value: 'content-type',
+          },
+          {
+            key: 'Expires',
+            value: STATIC_ASSET_HTTP_DATE,
+          },
+        ],
+      },
     ];
   },
-  // https://cdn.sanity.io/images/5mog5ask/production/9c87f579ca51dffca08537af06cde1c8b2c12f7c-1922x1442.png
 
   async rewrites() {
     return {
@@ -167,6 +245,22 @@ const nextConfig = {
           '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
         destination: '/gemeente/GM:nr',
         permanent: false,
+      },
+      /**
+       * Redirect traffic from /en and /nl;
+       * due to Next.js bug these routes become available.
+       * @TODO: remove when bug in Next.js is fixed. -
+       * @VWS24 -> is this still required?
+       */
+      {
+        source: '/nl/:page*',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/en/:page*',
+        destination: '/',
+        permanent: true,
       },
       {
         source: '/veiligheidsregio/:code/risiconiveau',
