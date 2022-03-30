@@ -243,7 +243,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textGm.bronnen.rivm,
             }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={[
+              TimeframeOption.ALL,
+              TimeframeOption.ONE_WEEK,
+              TimeframeOption.TWO_WEEKS,
+              TimeframeOption.THIRTY_DAYS,
+              TimeframeOption.THREE_MONTHS,
+              TimeframeOption.SIX_MONTHS,
+              TimeframeOption.LAST_YEAR,
+            ]}
           >
             {(timeframe) => (
               <TimeSeriesChart

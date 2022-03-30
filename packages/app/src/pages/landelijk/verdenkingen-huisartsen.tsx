@@ -117,28 +117,25 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.nivel }}
             description={text.linechart_description}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'doctor_covid_symptoms_over_time_chart',
-                }}
-                timeframe={timeframe}
-                values={data.doctor.values}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'covid_symptoms_per_100k',
-                    label: text.tooltip_labels.covid_klachten,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'doctor_covid_symptoms_over_time_chart',
+              }}
+              timeframe={TimeframeOption.ALL}
+              values={data.doctor.values}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'covid_symptoms_per_100k',
+                  label: text.tooltip_labels.covid_klachten,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>
