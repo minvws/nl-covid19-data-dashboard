@@ -2042,3 +2042,5 @@ timestamp,action,key,document_id,move_to
 2022-03-28T11:05:03.868Z,add,pages.variantsPage.shared.varianten_tabel.geen_percentage_cijfer,pMpoUeRMkAk3UTlOZSnABe,__
 2022-03-28T11:31:19.078Z,add,pages.variantsPage.shared.varianten_tabel.geen_percentage_cijfer_tooltip,ATrwynrL85JmIH7bDlQQsF,__
 2022-03-28T11:52:19.242Z,add,pages.in_variantsPage.shared.varianten_tabel.geen_percentage_cijfer_tooltip,ATrwynrL85JmIH7bDlXixX,__
+2022-03-30T11:36:45.851Z,add,common.charts.time_controls.1week,f8H8TuRzzxdsAT6TvTWUWZ,__
+2022-03-30T11:36:46.771Z,add,common.charts.time_controls.6months,f8H8TuRzzxdsAT6TvTWUd6,__

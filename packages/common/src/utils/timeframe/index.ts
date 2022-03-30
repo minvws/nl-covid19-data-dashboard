@@ -8,16 +8,20 @@ import {
 import { DAY_IN_SECONDS } from '../../time';
 
 export enum TimeframeOption {
+  ONE_WEEK = '1week',
   TWO_WEEKS = '2weeks',
   FIVE_WEEKS = '5weeks',
   THIRTY_DAYS = '30days',
   THREE_MONTHS = '3months',
+  SIX_MONTHS = '6months',
   LAST_YEAR = 'lastYear',
   ALL = 'all',
 }
 
 export function getDaysForTimeframe(timeframe: TimeframeOption): number {
   switch (timeframe) {
+    case TimeframeOption.ONE_WEEK:
+      return 7;
     case TimeframeOption.TWO_WEEKS:
       return 2 * 7;
     case TimeframeOption.FIVE_WEEKS:
@@ -26,6 +30,8 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
       return 30;
     case TimeframeOption.THREE_MONTHS:
       return 92;
+    case TimeframeOption.SIX_MONTHS:
+      return 183;
     case TimeframeOption.LAST_YEAR:
       return 365;
     case TimeframeOption.ALL:
