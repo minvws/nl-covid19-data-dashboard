@@ -1,22 +1,22 @@
 const express = require('express');
 const helmet = require('helmet');
 const next = require('next');
-const {
-  createProxyMiddleware,
-  responseInterceptor,
-} = require('http-proxy-middleware');
+// const {
+//   createProxyMiddleware,
+//   responseInterceptor,
+// } = require('http-proxy-middleware');
 const dotenv = require('dotenv');
 const path = require('path');
-const { imageResizeTargets } = require('@corona-dashboard/common');
+// const { imageResizeTargets } = require('@corona-dashboard/common');
 const intercept = require('intercept-stdout');
 
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
-const ALLOWED_SENTRY_IMAGE_PARAMS = {
-  w: imageResizeTargets.map((x) => x.toString()),
-  q: ['65'],
-  auto: ['format'],
-};
+// const ALLOWED_SENTRY_IMAGE_PARAMS = {
+//   w: imageResizeTargets.map((x) => x.toString()),
+//   q: ['65'],
+//   auto: ['format'],
+// };
 
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
@@ -36,7 +36,7 @@ const app = next({ dev: !IS_PRODUCTION_BUILD });
 const handle = app.getRequestHandler();
 
 const PORT = process.env.EXPRESS_PORT || (IS_PRODUCTION_BUILD ? 8080 : 3000);
-const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
+// const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
 
 const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
 const STATIC_ASSET_HTTP_DATE = new Date(
@@ -86,37 +86,37 @@ const STATIC_ASSET_HTTP_DATE = new Date(
     next();
   });
 
-  server.use(
-    '/cms-:type(images|files)',
-    createProxyMiddleware(filterImageRequests, {
-      target: 'https://cdn.sanity.io',
-      changeOrigin: true,
-      selfHandleResponse: true,
-      pathRewrite: function (path) {
-        /**
-         * Rewrite
-         * /cms-images/filename.ext
-         * to
-         * /images/NEXT_PUBLIC_SANITY_PROJECT_ID/NEXT_PUBLIC_SANITY_DATASET/filename.ext
-         */
-        const newPath = path.replace(
-          /^\/cms-(images|files)/,
-          `/$1/${SANITY_PATH}`
-        );
+  // server.use(
+  //   '/cms-:type(images|files)',
+  //   createProxyMiddleware(filterImageRequests, {
+  //     target: 'https://cdn.sanity.io',
+  //     changeOrigin: true,
+  //     selfHandleResponse: true,
+  //     pathRewrite: function (path) {
+  //       /**
+  //        * Rewrite
+  //        * /cms-images/filename.ext
+  //        * to
+  //        * /images/NEXT_PUBLIC_SANITY_PROJECT_ID/NEXT_PUBLIC_SANITY_DATASET/filename.ext
+  //        */
+  //       const newPath = path.replace(
+  //         /^\/cms-(images|files)/,
+  //         `/$1/${SANITY_PATH}`
+  //       );
 
-        return newPath;
-      },
-      onProxyRes: responseInterceptor(async function (
-        responseBuffer,
-        proxyRes,
-        req,
-        res
-      ) {
-        setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, false);
-        return responseBuffer;
-      }),
-    })
-  );
+  //       return newPath;
+  //     },
+  //     onProxyRes: responseInterceptor(async function (
+  //       responseBuffer,
+  //       proxyRes,
+  //       req,
+  //       res
+  //     ) {
+  //       setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, false);
+  //       return responseBuffer;
+  //     }),
+  //   })
+  // );
 
   /**
    * Redirect traffic from /en and /nl;
@@ -197,18 +197,18 @@ const STATIC_ASSET_HTTP_DATE = new Date(
 /**
  * Filters requests to Sanity image API to prevent unwanted params to be sent along.
  */
-function filterImageRequests(pathname, req) {
-  return Object.entries(req.query).every(([key, value]) => {
-    const allowedValues = ALLOWED_SENTRY_IMAGE_PARAMS[key];
+// function filterImageRequests(pathname, req) {
+//   return Object.entries(req.query).every(([key, value]) => {
+//     const allowedValues = ALLOWED_SENTRY_IMAGE_PARAMS[key];
 
-    if (!allowedValues) {
-      return false;
-    }
+//     if (!allowedValues) {
+//       return false;
+//     }
 
-    if (!allowedValues.includes(value)) {
-      return false;
-    }
+//     if (!allowedValues.includes(value)) {
+//       return false;
+//     }
 
-    return true;
-  });
-}
+//     return true;
+//   });
+// }

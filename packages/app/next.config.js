@@ -14,6 +14,8 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
+const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
+
 // When municipal reorganizations happened we want to redirect to the new municipality when
 // using the former municipality code. `from` contains the old municipality codes and `to` is
 // the new municipality code to link to.
@@ -92,6 +94,7 @@ const nextConfig = {
       },
     ];
   },
+  // https://cdn.sanity.io/images/5mog5ask/production/9c87f579ca51dffca08537af06cde1c8b2c12f7c-1922x1442.png
 
   async rewrites() {
     return {
@@ -103,6 +106,10 @@ const nextConfig = {
         {
           source: '/veiligheidsregio/(v|V)(r|R):nr(\\d{2})/:page*',
           destination: '/veiligheidsregio/VR:nr/:page*',
+        },
+        {
+          source: `/cms-(files|images)/:filename`,
+          destination: `https://cdn.sanity.io/images/${SANITY_PATH}/:filename`,
         },
       ],
     };
