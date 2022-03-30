@@ -19,23 +19,21 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { LinkWithIcon } from '~/components/link-with-icon';
-import { Markdown } from '~/components/markdown';
-import { MaxWidth } from '~/components/max-width';
+import { LinkWithIcon, Markdown, MaxWidth } from '~/components';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
+import { gmCodesByVrCode } from '~/data';
+import { Layout } from '~/domain/layout';
 import { Search } from '~/domain/topical/components/search';
 import {
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
-} from '~/domain/topical/mini-tile-selector-layout';
-import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
-import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
+  VaccinationCoverageChoropleth,
+  ArticleList,
+  MiniTrendTile,
+  MiniVaccinationCoverageTile,
+  TopicalSectionHeader,
+} from '~/domain/topical';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
@@ -53,13 +51,15 @@ import {
   selectVrData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { trimNullValues } from '~/utils/trim-null-values';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  useReverseRouter,
+  countTrailingNullValues,
+  cutValuesFromTimeframe,
+  getBoundaryDateStartUnix,
+  replaceComponentsInText,
+  replaceVariablesInText,
+  trimNullValues,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/vr';
 

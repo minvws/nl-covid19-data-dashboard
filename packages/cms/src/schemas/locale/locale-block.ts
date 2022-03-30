@@ -1,3 +1,4 @@
+import { ValidatedRichText } from '../../components/validated-input/validated-input';
 import { supportedLanguages } from '../../language/supported-languages';
 import { blockFields } from '../objects/block-fields';
 
@@ -15,5 +16,6 @@ export const localeBlock = {
     name: lang.id,
     type: 'array',
     of: blockFields,
+    inputComponent: ValidatedRichText,
   })),
 };

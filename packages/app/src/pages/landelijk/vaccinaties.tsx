@@ -14,30 +14,35 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { isDefined } from 'ts-is-present';
-import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { InView } from '~/components/in-view';
-import { Metadata } from '~/components/metadata';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { PieChartProps } from '~/components/pie-chart';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
-import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
-import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
-import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccinationsShotKpiSection } from '~/domain/vaccine/vaccinations-shot-kpi-section';
-import { VaccinationsKpiHeader } from '~/domain/vaccine/vaccinations-kpi-header';
-import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
-import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
+import {
+  AgeDemographicProps,
+  ChartTile,
+  InView,
+  Metadata,
+  PageInformationBlock,
+  PieChartProps,
+  TileList,
+  TimeSeriesChart,
+  WarningTile,
+  Divider,
+} from '~/components';
+import { Layout, NlLayout } from '~/domain/layout';
+import {
+  selectDeliveryAndAdministrationData,
+  selectVaccineCoverageData,
+  VaccinationsOverTimeTile,
+  VaccineBoosterAdministrationsKpiSection,
+  VaccineAdministrationsKpiSection,
+  VaccinationsShotKpiSection,
+  VaccinationsKpiHeader,
+  VaccineCoverageChoroplethPerGm,
+  VaccineCoveragePerAgeGroup,
+  VaccineCoverageToggleTile,
+  VaccineDeliveryBarChart,
+  VaccineStockPerSupplierChart,
+  BoosterShotCoveragePerAgeGroup,
+} from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import { useFeature } from '~/lib/features';
@@ -70,12 +75,12 @@ import {
   PagePartQueryResult,
   RichTextParts,
 } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useFormatDateRange } from '~/utils/use-format-date-range';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
-import { BoosterShotCoveragePerAgeGroup } from '~/domain/vaccine/booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
-import { Divider } from '~/components/divider';
+import {
+  replaceVariablesInText,
+  useFormatDateRange,
+  useReverseRouter,
+  useFormatLokalizePercentage,
+} from '~/utils';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>

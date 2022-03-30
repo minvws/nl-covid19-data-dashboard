@@ -7,19 +7,20 @@ import {
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import {
+  ChartTile,
+  DynamicChoropleth,
+  ChoroplethTile,
+  KpiTile,
+  KpiValue,
+  PageInformationBlock,
+  TileList,
+  TimeSeriesChart,
+  TwoKpiSection,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { Layout } from '~/domain/layout/layout';
-import { VrLayout } from '~/domain/layout/vr-layout';
+import { gmCodesByVrCode } from '~/data';
+import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -44,10 +45,12 @@ import {
   selectVrData,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
