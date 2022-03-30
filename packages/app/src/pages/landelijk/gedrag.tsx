@@ -19,6 +19,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
+import { useFeature } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -43,12 +44,13 @@ export const getStaticProps = createGetStaticProps(
       (siteText) => ({
         caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
         metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        subjectTexts: siteText.common.behavior.subjects,
         text: siteText.pages.behaviorPage,
       }),
       locale
     ),
   getLastGeneratedDate,
-  selectNlData('behavior', 'behavior_per_age_group'),
+  selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
@@ -77,8 +79,9 @@ export default function BehaviorPage(
   } = props;
   const behaviorLastValue = data.behavior.last_value;
 
+  const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
   const { formatNumber, formatDateFromSeconds, formatPercentage } = useIntl();
-  const { caterogyTexts, metadataTexts, text } = pageText;
+  const { caterogyTexts, subjectTexts, metadataTexts, text } = pageText;
 
   const metadata = {
     ...metadataTexts,
@@ -108,6 +111,25 @@ export default function BehaviorPage(
 
     return { highestCompliance, highestSupport };
   }, [behaviorLastValue, behaviorLookupKeys]);
+
+  const { currentTimelineEvents } = useMemo(() => {
+    // Timeline event from the current selected behaviour
+    const currentTimelineEvents = data.behavior_annotations.values.filter(
+      (a) => (a.source_type === currentId)
+    ).map((event) => ({
+        title: subjectTexts[event.behaviour_type],
+        description: text.shared.annotation_description[event.behaviour_type],
+        start: event.date_start_unix,
+        end: event.date_end_unix
+      })
+    );
+
+    return { currentTimelineEvents };
+  }, [currentId, data.behavior_annotations.values, text.shared.annotation_description, subjectTexts]);
+
+  const timelineProp = behaviorAnnotationsFeature.isEnabled
+    ? { timelineEvents: currentTimelineEvents }
+    : undefined;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -206,8 +228,10 @@ export default function BehaviorPage(
               ],
               source: text.nl.bronnen.rivm,
             }}
+            {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            useDatesAsRange={behaviorAnnotationsFeature.isEnabled}
             text={text}
           />
 

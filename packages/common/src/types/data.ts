@@ -307,6 +307,7 @@ export interface Nl {
   behavior: NlBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
+  behavior_annotations: NlBehaviorAnnotations;
   deceased_rivm: NlDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NlDeceasedCbs;
@@ -827,6 +828,42 @@ export interface NlBehaviorGetTestedSupportPerAgeGroupValue {
   percentage_40_54: number;
   percentage_25_39: number;
   percentage_16_24: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBehaviorAnnotations {
+  values: NlBehaviorAnnotations1[];
+}
+export interface NlBehaviorAnnotations1 {
+  source_type:
+    | "wash_hands"
+    | "curfew"
+    | "keep_distance"
+    | "work_from_home"
+    | "avoid_crowds"
+    | "symptoms_stay_home_if_mandatory"
+    | "symptoms_get_tested"
+    | "wear_mask_public_indoors"
+    | "wear_mask_public_transport"
+    | "sneeze_cough_elbow"
+    | "max_visitors"
+    | "ventilate_home"
+    | "selftest_visit";
+  behaviour_type:
+    | "wash_hands"
+    | "curfew"
+    | "keep_distance"
+    | "work_from_home"
+    | "avoid_crowds"
+    | "symptoms_stay_home_if_mandatory"
+    | "symptoms_get_tested"
+    | "wear_mask_public_indoors"
+    | "wear_mask_public_transport"
+    | "sneeze_cough_elbow"
+    | "max_visitors"
+    | "ventilate_home"
+    | "selftest_visit";
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

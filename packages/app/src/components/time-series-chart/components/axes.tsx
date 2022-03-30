@@ -9,13 +9,16 @@ import {
   colors,
   middleOfDayInSeconds,
   TimeframeOption,
+  TimestampedValue,
+  DateSpanValue,
+  assert,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
-import { ScaleBand, ScaleLinear } from 'd3-scale';
-import { memo, Ref, useCallback } from 'react';
+import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
+import { memo, Ref, useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
@@ -23,7 +26,10 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
 
-type AxesProps = {
+
+export type AxesProps<
+  T extends TimestampedValue
+> = {
   bounds: Bounds;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
@@ -46,6 +52,7 @@ type AxesProps = {
   yTickValues?: number[];
   timeDomain: [number, number];
   xTickNumber?: number;
+  values?: T[];
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -66,6 +73,7 @@ type AxesProps = {
    * (In case this needs special rendering)
    */
   hasAllZeroValues?: boolean;
+  useDatesAsRange?: boolean;
 };
 
 function createTimeTicks(startTick: number, endTick: number, count: number) {
@@ -91,7 +99,9 @@ function createTimeTicks(startTick: number, endTick: number, count: number) {
 
 export type AnyTickFormatter = (value: any) => string;
 
-export const Axes = memo(function Axes({
+export const Axes = memo(function Axes<
+  T extends TimestampedValue
+>({
   numGridLines,
   showWeekNumbers,
   bounds,
@@ -102,12 +112,14 @@ export const Axes = memo(function Axes({
   yTickValues,
   timeDomain,
   xTickNumber,
+  values,
   formatYTickValue,
   yAxisRef,
   isYAxisCollapsed,
   xRangePadding,
   hasAllZeroValues: allZeroValues,
-}: AxesProps) {
+  useDatesAsRange,
+}: AxesProps<T>) {
   const [startUnix, endUnix] = timeDomain;
   const breakpoints = useBreakpoints();
 
@@ -130,9 +142,12 @@ export const Axes = memo(function Axes({
   if (!isPresent(xTickNumber)) {
     const preferredDateTicks = breakpoints.sm
       ? timeframe === 'all'
-        ? 6
-        : 5
-      : 3;
+        ? useDatesAsRange
+          ? 6 : 4
+        : useDatesAsRange
+        ? 5 : 3
+      : useDatesAsRange
+      ? 3 : 2;
     const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
     xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
   }
@@ -167,6 +182,60 @@ export const Axes = memo(function Axes({
     [startUnix, endUnix, formatDateFromSeconds, xTicks]
   );
 
+  const firstAndLastDate = useMemo(() => ({
+    "first_date": startUnix,
+    "last_date": endUnix,
+  }), [startUnix, endUnix]);
+  
+  const formatXTickValue = useCallback(
+    (date_unix: number, dateRange: DateSpanValue[]) => {
+      const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
+      const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
+
+      const isMultipleYearSpan = startYear !== endYear;
+
+      const reduced = dateRange.reduce((acc: DateSpanValue, value: DateSpanValue) => {
+        assert(acc.date_start_unix && acc.date_end_unix && value.date_start_unix && value.date_end_unix,
+          'This needs a date_start_unix & date_end_unix here');
+        const smallestDifferenceAcc = Math.min(Math.abs(acc.date_start_unix - date_unix), Math.abs(acc.date_end_unix - date_unix));
+        const smallestDifferenceVal = Math.min(Math.abs(value.date_start_unix - date_unix), Math.abs(value.date_end_unix - date_unix));
+        if (value.date_start_unix <= date_unix && value.date_end_unix >= date_unix) {
+          return value
+        } else if (smallestDifferenceVal < smallestDifferenceAcc) {
+          return value
+        }
+        return acc
+      })
+
+      const dateStartUnix = reduced.date_start_unix;
+      const dateEndUnix = reduced.date_end_unix;
+
+      const dateStartYear = createDateFromUnixTimestamp(dateStartUnix).getFullYear();
+      const dateEndYear = createDateFromUnixTimestamp(dateEndUnix).getFullYear();
+
+      /**
+       * set first and last date of new timerange.
+       * As and date we also want the smallest one,
+       * because the endDate will never be larger then the new endDate because that's filtered out earlier this file.
+       */
+      firstAndLastDate.first_date = dateStartUnix < firstAndLastDate.first_date ? dateStartUnix : firstAndLastDate.first_date;
+      firstAndLastDate.last_date = endUnix < firstAndLastDate.last_date && dateEndUnix > firstAndLastDate.last_date ? dateEndUnix : firstAndLastDate.last_date;
+
+      if (startUnix === dateStartUnix || endUnix === dateEndUnix) {
+        return isMultipleYearSpan
+          ? `${formatDateFromSeconds(dateStartUnix, 'axis')} - ${formatDateFromSeconds(dateEndUnix, 'axis-with-year')}`
+          : `${formatDateFromSeconds(dateStartUnix, 'axis')} - ${formatDateFromSeconds(dateEndUnix, 'axis')}`;
+      } else {
+        const isNewYear = dateStartYear !== dateEndYear;
+
+        return isNewYear
+        ? `${formatDateFromSeconds(dateStartUnix, 'axis')} - ${formatDateFromSeconds(dateEndUnix, 'axis-with-year')}`
+        : `${formatDateFromSeconds(dateStartUnix, 'axis')} - ${formatDateFromSeconds(dateEndUnix, 'axis')}`;
+      }
+    },
+    [startUnix, endUnix, formatDateFromSeconds, firstAndLastDate]
+  );
+
   /**
    * Long labels (like the ones including a year, are too long to be positioned
    * centered on the x-axis tick. Usually a short date has a 2 digit number plus
@@ -188,6 +257,23 @@ export const Axes = memo(function Axes({
       })
     : yScale;
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
+
+  const getAnchor = (x: NumberValue) => {
+    /**
+     * Using anchor middle the line marker label will fall nicely on top
+     * of the axis label.
+     *
+     * The only times at which we can not use middle is if we are
+     * rendering a year in the label, because it becomes too long.
+     */
+
+    if (x === firstAndLastDate.first_date) {
+      return isLongStartLabel || useDatesAsRange ? 'start' : 'middle';
+    } else if (x === firstAndLastDate.last_date) {
+      return isLongEndLabel || useDatesAsRange ? 'end' : 'middle';
+    }
+    return 'middle';
+  };
 
   return (
     <g css={css({ pointerEvents: 'none' })} aria-hidden="true">
@@ -225,31 +311,18 @@ export const Axes = memo(function Axes({
       <AxisBottom
         scale={xScale}
         tickValues={xTicks}
-        tickFormat={formatXAxis as AnyTickFormatter}
+        tickFormat={useDatesAsRange && values 
+          ? ((x: number) => formatXTickValue(x, values as DateSpanValue[])) as AnyTickFormatter
+          : formatXAxis as AnyTickFormatter
+        }
         top={bounds.height}
         stroke={colors.silver}
         rangePadding={xRangePadding}
         tickLabelProps={(x) => ({
-          fill: colors.data.axisLabels,
-          fontSize: 12,
-          dy: '-0.5px',
-          /**
-           * Using anchor middle the line marker label will fall nicely on top
-           * of the axis label.
-           *
-           * The only times at which we can not use middle is if we are
-           * rendering a year in the label, because it becomes too long.
-           */
-          textAnchor:
-            x === startUnix
-              ? isLongStartLabel
-                ? 'start'
-                : 'middle'
-              : x === endUnix
-              ? isLongEndLabel
-                ? 'end'
-                : 'middle'
-              : 'middle',
+            fill: colors.data.axisLabels,
+            fontSize: 12,
+            dy: '-0.5px',
+            textAnchor: getAnchor(x)
         })}
         hideTicks
       />
