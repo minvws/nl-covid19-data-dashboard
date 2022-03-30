@@ -18,26 +18,24 @@ import {
 } from '@corona-dashboard/icons';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
+import { LinkWithIcon, Markdown, MaxWidth } from '~/components';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { LinkWithIcon } from '~/components/link-with-icon';
-import { Markdown } from '~/components/markdown';
-import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
-import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
-import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
-import { Search } from '~/domain/topical/components/search';
-import { HighlightsTile } from '~/domain/topical/highlights-tile';
+import { EscalationLevelBanner } from '~/domain/escalation-level';
+import { Layout } from '~/domain/layout';
 import {
+  ArticleList,
+  HighlightsTile,
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
-} from '~/domain/topical/mini-tile-selector-layout';
-import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
-import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
+  MiniTrendTile,
+  MiniVaccinationCoverageTile,
+  TopicalSectionHeader,
+  VaccinationCoverageChoropleth,
+} from '~/domain/topical';
+import { Search } from '~/domain/topical/components/search';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -54,15 +52,17 @@ import {
   selectNlData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { trimNullValues } from '~/utils/trim-null-values';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
-import { assert } from '~/utils/assert';
+import {
+  assert,
+  countTrailingNullValues,
+  useFormatLokalizePercentage,
+  cutValuesFromTimeframe,
+  useReverseRouter,
+  getBoundaryDateStartUnix,
+  replaceComponentsInText,
+  trimNullValues,
+  replaceVariablesInText,
+} from '~/utils';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

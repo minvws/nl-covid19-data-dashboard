@@ -5,23 +5,26 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { Layout } from '~/domain/layout/layout';
-import { VrLayout } from '~/domain/layout/vr-layout';
+import {
+  TileList,
+  PageInformationBlock,
+  Markdown,
+  ChoroplethTile,
+  DynamicChoropleth,
+} from '~/components';
+import { gmCodesByVrCode } from '~/data';
+import { Layout, VrLayout } from '~/domain/layout';
 import {
   AgeGroup,
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
-import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
+import {
+  selectVaccineCoverageData,
+  ChoroplethTooltip,
+  VaccineCoveragePerAgeGroup,
+  VaccineCoverageToggleTile,
+} from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -41,10 +44,12 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
+import {
+  assert,
+  replaceVariablesInText,
+  useReverseRouter,
+  useFormatLokalizePercentage,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
