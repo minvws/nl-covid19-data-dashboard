@@ -73,11 +73,11 @@ jobs:
 
       - name: Export texts (develop)
         if: ${{ env.BRANCH_NAME != 'master' }}
-        run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
+        run: yarn workspace @corona-dashboard/cms lokalize:import --clean-json
 
       - name: Export texts (production)
         if: ${{ env.BRANCH_NAME == 'master' }}
-        run: yarn workspace @corona-dashboard/cms lokalize:export --dataset="production" --clean-json
+        run: yarn workspace @corona-dashboard/cms lokalize:import --dataset="production" --clean-json
 
       - name: Typecheck all code
         run: yarn typecheck
@@ -112,7 +112,7 @@ jobs:
         run: yarn workspace @corona-dashboard/icons build
 
       - name: Export texts
-        run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
+        run: yarn workspace @corona-dashboard/cms lokalize:import --clean-json
 
       - name: Run tests
         run: yarn test:ci
