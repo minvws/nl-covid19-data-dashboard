@@ -74,7 +74,7 @@ export const dataStructure = {
       "birthyear_range",
       "age_group_total",
     ],
-    booster_coverage: ["percentage"],
+    booster_coverage: ["age_group", "percentage"],
     third_shot_administered: ["administered_total"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],

@@ -4,7 +4,7 @@ import prompts from 'prompts';
 import { getClient } from '../client';
 import {
   appendTextMutation,
-  exportLokalizeTexts,
+  importLokalizeTexts,
   getLocalMutations,
   readReferenceTexts,
 } from './logic';
@@ -110,7 +110,7 @@ import { createTextDocument } from './logic/create-text-document';
 
   console.log('Updating text export...');
 
-  await exportLokalizeTexts({
+  await importLokalizeTexts({
     dataset: 'development',
     appendDocumentIdToKey: true,
   });

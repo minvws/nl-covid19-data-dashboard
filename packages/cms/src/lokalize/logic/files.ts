@@ -2,7 +2,7 @@ import flatten from 'flat';
 import fs from 'fs';
 import mapKeys from 'lodash/mapKeys';
 import path from 'path';
-import { localeDirectory, localeReferenceDirectory } from './export';
+import { localeDirectory, localeReferenceDirectory } from './import';
 
 export async function readLocalTexts() {
   const texts = JSON.parse(
