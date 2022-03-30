@@ -42,7 +42,13 @@ interface VaccinationsOverTimeChartProps {
   text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
-const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
+const vaccines = [
+  'pfizer',
+  'moderna',
+  'astra_zeneca',
+  'janssen',
+  'novavax',
+] as const;
 vaccines.forEach((x) =>
   assert(
     colors.data.vaccines[x],
