@@ -9,7 +9,7 @@ our codebase. Even though these texts now live as documents in Sanity, we still
 refer to them as "lokalize texts".
 
 Each text string lives as a document in the CMS, of which each has a unique "key"
-corresponding to a path. These documents are then exported as JSON files (one
+corresponding to a path. These documents are then imported as JSON files (one
 for each language) and consumed by the application as static data.
 
 This document describes how to manage and make changes to these texts.
@@ -19,15 +19,15 @@ This document describes how to manage and make changes to these texts.
 In summary these are the most important things you should be aware of:
 
 - Commands are run with `yarn lokalize:[command]` from the `packages/cms` root
-- The `export` command brings your local JSON files up-to-date with the Sanity
+- The `import` command brings your local JSON files up-to-date with the Sanity
   dataset. The TypeScript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
-- The JSON export contains document ids as part of the keys. You can make
+- The JSON import contains document ids as part of the keys. You can make
   changes locally to the **app/src/locale/nl_export.json** file. Add new keys,
   delete them or rename and move existing ones. After you make changes run the
   `lokalize:apply-json-edits` script. This will give you a list of changes and
   you can decide which ones to apply. Changes are written in a mutation log
-  file, and at the end the JSON is re-exported to reflect all changes.
+  file, and at the end the JSON is re-imported to reflect all changes.
   It is recommended to run `lokalize:apply-json-edits` after the feature has
   been finished, right before merging it to develop since during development
   changes to the **nl_export.json** file might fluctuate.
@@ -63,26 +63,26 @@ scripts.
 Merge conflicts in this file are common. You should always "accept both changes"
 when resolving conflicts, so that none of the lines are ever deleted.
 
-## Export
+## Import
 
 The application reads its locale strings from
 **packages/app/public/nl_export.json** and **packages/app/public/en_export.json**.
-These JSONs are exported from the Sanity lokalize documents, but they are not
-part of the repository. Therefore, you will regularly need to run `yarn lokalize:export` in
+These JSONs are imported from the Sanity lokalize documents, but they are not
+part of the repository. Therefore, you will regularly need to run `yarn lokalize:import` in
 order to keep your local JSON file up-to-date with the Sanity dataset.
 
 The JSONs will include Sanity document ids in every leaf-key which are used to
 detect add-/delete-/move-actions of texts (`some_key__@__{document_id}`). These
 ids would result in compile- and run-time errors, but there's a workaround:
 
-- compile-time: every export will also emit a `site-text.d.ts` with a `SiteText`
+- compile-time: every import will also emit a `site-text.d.ts` with a `SiteText`
   interface. This interface is used to type the imported JSONs.
 - run-time: on load of the app all ids will be removed from the keys.
 
 The runtime workaround would be a waste of resources on production, so for this
 reason we use the `--clean-json` flag to ignore document ids.
 
-### Export/Import technical details
+### Technical details
 
 In Sanity each lokalize value is stored as a separate `lokalizeText` document.
 The key property in this document represents the flattened property path in **nl_export.json**
@@ -107,7 +107,7 @@ The root key (so in this case `accessibility`) will be saved as the subject prop
 This allows us to filter on this subject under the Sanity `Lokalize` menu item. Making it a little
 easier for an editor to lookup a specific key in the menu.
 
-So, `yarn lokalize:export` simply retrieves all of the `lokalizeText` documents, replaces their ids in the root part of the path
+So, `yarn lokalize:import` simply retrieves all of the `lokalizeText` documents, replaces their ids in the root part of the path
 and unflattens this list of paths into a JSON file. (The Dutch texts are serialized as **nl_export.json**, the English as **en_export.json**).
 `yarn lokalize:apply-json-edits` does the exact opposite, it takes the **nl_export.json** file, flattens the file into an array of
 paths and saves those to Sanity. Obviously there is a bunch of logic involved that checks if a path is new or existing, but for those
@@ -116,7 +116,7 @@ details we refer to the source code.
 ## How to Add, Delete or Move Texts
 
 First make sure the JSONs include document ids (`some_key__@__{document_id}`).
-Run `yarn lokalize:export` if these are not yet present in your JSONs.
+Run `yarn lokalize:import` if these are not yet present in your JSONs.
 
 You can add, delete and move keys by mutating the **nl_export.json** file. The
 sync script will automagically detect additions, deletions or moved lokalize
@@ -129,7 +129,7 @@ file.
 New texts will only have an NL (Dutch) string when they are added and will use NL as a
 fallback.
 
-After syncing texts, the export script is called to update your local JSON file
+After syncing texts, the import script is called to update your local JSON file
 and re-generate the SiteText type interface.
 
 ### Delete/Move Mutations
@@ -139,7 +139,7 @@ dataset, we can not simply remove a lokalize text document from the dataset
 without potentially breaking other branches.
 
 For this reason, when you delete a lokalize text, it will append the delete
-action to the mutations file but not actually delete the document. The export
+action to the mutations file but not actually delete the document. The import
 filters out any deletions that were logged to the mutations file. So in effect
 you end up with a local JSON file that has the deleted key removed, and the TS
 compiler sees the correct dataset.
@@ -148,7 +148,7 @@ The actual deletions from Sanity only happen in the `sync-after-feature` phase,
 describe below.
 
 The same goes for move mutations. When you apply the move in your feature branch
-it will be simulated in the JSON export, but not yet applied to the CMS
+it will be simulated in the JSON import, but not yet applied to the CMS
 documents. During sync-after-feature the move is finalized by changing the key
 and subject properties of the targeted document. This preserves the document
 history and drafts.
