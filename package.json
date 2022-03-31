@@ -31,7 +31,8 @@
     "cms:sync-after-release": "yarn workspace @corona-dashboard/cms lokalize:sync-after-release",
     "cms:deploy": "yarn workspace @corona-dashboard/cms deploy",
     "build:app": "yarn workspace @corona-dashboard/app build",
-    "build:common": "yarn workspace @corona-dashboard/common build"
+    "build:common": "yarn workspace @corona-dashboard/common build",
+    "build:icons": "yarn workspace @corona-dashboard/icons build"
   },
   "workspaces": {
     "packages": [
