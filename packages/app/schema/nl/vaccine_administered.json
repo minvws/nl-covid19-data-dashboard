@@ -7,6 +7,7 @@
         "pfizer",
         "moderna",
         "astra_zeneca",
+        "novavax",
         "total",
         "date_of_insertion_unix",
         "date_start_unix",
@@ -30,6 +31,9 @@
           "type": "integer"
         },
         "sanofi": {
+          "type": "integer"
+        },
+        "novavax": {
           "type": "integer"
         },
         "total": {

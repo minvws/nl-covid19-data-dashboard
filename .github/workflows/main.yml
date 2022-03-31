@@ -66,18 +66,18 @@ jobs:
         run: yarn install
 
       - name: Build icon package
-        run: yarn workspace @corona-dashboard/icons build
+        run: yarn build:icons
 
       - name: Build common module
-        run: yarn workspace @corona-dashboard/common build
+        run: yarn build:common
 
-      - name: Export texts (develop)
+      - name: Import texts (develop)
         if: ${{ env.BRANCH_NAME != 'master' }}
-        run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
+        run: yarn cms:lokalize-import --clean-json
 
-      - name: Export texts (production)
+      - name: Import texts (production)
         if: ${{ env.BRANCH_NAME == 'master' }}
-        run: yarn workspace @corona-dashboard/cms lokalize:export --dataset="production" --clean-json
+        run: yarn cms:lokalize-import:prd --clean-json
 
       - name: Typecheck all code
         run: yarn typecheck
@@ -106,13 +106,13 @@ jobs:
         run: yarn install
 
       - name: Build common module
-        run: yarn workspace @corona-dashboard/common build
+        run: yarn build:common
 
       - name: Build icons module
-        run: yarn workspace @corona-dashboard/icons build
+        run: yarn build:icons
 
       - name: Export texts
-        run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
+        run: yarn cms:lokalize-import --clean-json
 
       - name: Run tests
         run: yarn test:ci

@@ -89,7 +89,4 @@ already existing metric, then declaring those properties will mean that only the
 checks are performed on those. If the whole schema / metric is new, as it often
 is, then specifying only the `metricName` is sufficient.
 
-The script that validates the features (and runs at build-time) can be
-triggered locally with `yarn workspace@corona-dashboard/cli validate-features`.
-
 [Back to index](index.md)

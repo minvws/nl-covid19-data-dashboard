@@ -72,7 +72,7 @@ ENV API_URL=$ARG_API_URL
 RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
-&& yarn workspace @corona-dashboard/cms lokalize:export --dataset=$NEXT_PUBLIC_SANITY_DATASET \
+&& yarn workspace @corona-dashboard/cms lokalize:import --dataset=$NEXT_PUBLIC_SANITY_DATASET \
 && yarn workspace @corona-dashboard/app build
 
 FROM node:lts-alpine as runner

@@ -14,6 +14,7 @@ export interface DataOptions {
   timelineEvents?: TimelineEventConfig[];
   renderNullAsZero?: boolean;
   outOfBoundsConfig?: OutOfBoundsConfig;
+  useDatesAsRange?: boolean;
 }
 
 export type OutOfBoundsConfig = {
