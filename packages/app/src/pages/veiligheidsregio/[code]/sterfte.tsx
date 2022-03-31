@@ -172,7 +172,15 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={[
+              TimeframeOption.ALL,
+              TimeframeOption.ONE_WEEK,
+              TimeframeOption.TWO_WEEKS,
+              TimeframeOption.THIRTY_DAYS,
+              TimeframeOption.THREE_MONTHS,
+              TimeframeOption.SIX_MONTHS,
+              TimeframeOption.LAST_YEAR,
+            ]}
             title={textVr.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               textVr.section_deceased_rivm.line_chart_covid_daily_description
