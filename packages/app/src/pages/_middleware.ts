@@ -20,6 +20,7 @@ export function middleware(req: NextRequest) {
     'host',
     req.headers.get('x-original-host') || req.headers.get('host') || ''
   );
+  response.headers.delete('via');
 
   return response;
 }

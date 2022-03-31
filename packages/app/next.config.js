@@ -99,13 +99,6 @@ const nextConfig = {
     ],
   },
 
-  /**
-   * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
-   */
-
-  // todo: can we remove the 'via' header?
-  // todo: headers for sanity images?
-  // todo: see if we can use `helmet` lib here
   async headers() {
     const contentSecurityPolicy =
       IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
@@ -114,27 +107,6 @@ const nextConfig = {
 
     return [
       {
-        source: '/:all*(svg|jpg|png|woff|woff2)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=9999999999, must-revalidate',
-          },
-        ],
-      },
-      {
-        source: '/:all*(html)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-cache, public',
-          },
-        ],
-      },
-      {
-        // todo: only apply for non-sanity stuff
         source: '/:all*',
         locale: false,
         headers: [
@@ -177,6 +149,30 @@ const nextConfig = {
           {
             key: 'Expires',
             value: STATIC_ASSET_HTTP_DATE,
+          },
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+        ],
+      },
+      {
+        source: '/:all*(svg|jpg|png|woff|woff2)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/:all*(html)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, public',
           },
         ],
       },
@@ -259,7 +255,7 @@ const nextConfig = {
        * Redirect traffic from /en and /nl;
        * due to Next.js bug these routes become available.
        * @TODO: remove when bug in Next.js is fixed. -
-       * @VWS24 -> is this still required?
+       * @VWS24 -> not sure if this is still required?
        */
       {
         source: '/nl/:page*',
