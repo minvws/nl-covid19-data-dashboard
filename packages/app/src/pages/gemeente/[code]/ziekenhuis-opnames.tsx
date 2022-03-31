@@ -6,18 +6,19 @@ import {
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import {
+  ChartTile,
+  DynamicChoropleth,
+  TwoKpiSection,
+  ChoroplethTile,
+  KpiTile,
+  KpiValue,
+  PageInformationBlock,
+  TileList,
+  TimeSeriesChart,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { GmLayout } from '~/domain/layout/gm-layout';
-import { Layout } from '~/domain/layout/layout';
+import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -43,10 +44,12 @@ import {
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/gm';
 

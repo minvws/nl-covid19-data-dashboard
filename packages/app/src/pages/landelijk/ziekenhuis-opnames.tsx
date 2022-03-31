@@ -11,24 +11,25 @@ import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import { AgeDemographicProps } from '~/components/age-demographic';
+import {
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  SEOHead,
+  AgeDemographicProps,
+  PieChartProps,
+  ChartTile,
+  DynamicChoropleth,
+  ChoroplethTile,
+  KpiTile,
+  KpiValue,
+  PageInformationBlock,
+  PageKpi,
+} from '~/components';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
-import { PieChartProps } from '~/components/pie-chart';
-import { SEOHead } from '~/components/seo-head';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital';
+import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import { useFeature } from '~/lib/features';
@@ -54,10 +55,12 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>

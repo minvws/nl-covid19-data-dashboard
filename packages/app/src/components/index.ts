@@ -1,3 +1,27 @@
 export * from './collapsible/collapsible-button';
 export * from './collapsible/collapsible-content';
 export * from './collapsible/collapsible-section';
+export type { AgeDemographicProps } from './age-demographic';
+export type { PieChartProps } from './pie-chart';
+
+export { AgeDemographic } from './age-demographic';
+export { ChartTile } from './chart-tile';
+export { InView } from './in-view';
+export { Metadata } from './metadata';
+export { PageInformationBlock } from './page-information-block';
+export { TileList } from './tile-list';
+export { TimeSeriesChart } from './time-series-chart';
+export { WarningTile } from './warning-tile';
+export { Divider } from './divider';
+export { DynamicChoropleth } from './choropleth';
+export { ChoroplethTile } from './choropleth-tile';
+export { Markdown } from './markdown';
+export { KpiTile } from './kpi-tile';
+export { KpiValue } from './kpi-value';
+export { TwoKpiSection } from './two-kpi-section';
+export { LinkWithIcon } from './link-with-icon';
+export { MaxWidth } from './max-width';
+export { ChoroplethLegenda } from './choropleth-legenda';
+export { SEOHead } from './seo-head';
+export { PageKpi } from './page-kpi';
+export { PageBarScale } from './page-barscale';
