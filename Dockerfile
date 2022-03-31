@@ -16,6 +16,7 @@ COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
 COPY packages/common/package.json ./packages/common/
 COPY packages/icons/package.json ./packages/icons/
+
 RUN apk add --no-cache --virtual \
       build-dependencies \
       python3 \
@@ -76,7 +77,17 @@ RUN yarn download \
 
 FROM node:lts-alpine as runner
 
-ENV PORT=8080
+# Required runtime dependencies for `canvas.node` - generating choropleths as image
+RUN apk add --no-cache \
+      cairo \
+      jpeg \
+      pango \
+      musl \
+      giflib \
+      pixman \
+      pangomm \
+      libjpeg-turbo \
+      freetype
 
 RUN addgroup -g 1001 -S nodejs \
 && adduser -S nextjs -u 1001
@@ -88,8 +99,10 @@ COPY --from=builder /app/packages/app/next.config.js /app/.next/standalone/packa
 RUN mkdir -p /app/.next/standalone/packages/app/public/images/choropleth
 RUN chown -R nextjs:nodejs /app/.next/standalone/packages/app/public/images/choropleth
 
-USER nextjs
-
 WORKDIR /app/.next/standalone/packages/app
 
-CMD ["node", "server"]
+USER nextjs
+
+ENV PORT=8080
+
+CMD ["node", "server.js"]
