@@ -1012,6 +1012,7 @@ export interface NlVaccineAdministeredValue {
   cure_vac?: number;
   janssen?: number;
   sanofi?: number;
+  novavax: number;
   total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
