@@ -76,6 +76,8 @@ RUN yarn download \
 
 FROM node:lts-alpine as runner
 
+ENV PORT=8080
+
 RUN addgroup -g 1001 -S nodejs \
 && adduser -S nextjs -u 1001
 

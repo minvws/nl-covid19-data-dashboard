@@ -14,6 +14,14 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
+if (!process.env.NEXT_PUBLIC_SANITY_DATASET) {
+  throw new Error('Provide NEXT_PUBLIC_SANITY_DATASET');
+}
+
+if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+  throw new Error('Provide NEXT_PUBLIC_SANITY_PROJECT_ID');
+}
+
 const IS_PRODUCTION_BUILD = process.env.NODE_ENV === 'production';
 const IS_DEVELOPMENT_PHASE = process.env.NEXT_PUBLIC_PHASE === 'develop';
 
@@ -24,8 +32,6 @@ const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
 const STATIC_ASSET_HTTP_DATE = new Date(
   Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000
 ).toUTCString();
-
-const PORT = process.env.EXPRESS_PORT || (IS_PRODUCTION_BUILD ? 8080 : 3000);
 
 // When municipal reorganizations happened we want to redirect to the new municipality when
 // using the former municipality code. `from` contains the old municipality codes and `to` is
@@ -54,10 +60,13 @@ const gmRedirects = [
 ];
 
 const nextConfig = {
-  experimental: {
-    outputStandalone: true,
-    outputFileTracingRoot: path.join(__dirname, '../../'),
-  },
+  experimental:
+    IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
+      ? {
+          outputStandalone: true,
+          outputFileTracingRoot: path.join(__dirname, '../../'),
+        }
+      : undefined,
 
   /**
    * Enables react strict mode
@@ -66,8 +75,6 @@ const nextConfig = {
   reactStrictMode: true,
 
   poweredByHeader: false,
-
-  port: PORT,
 
   i18n: {
     // These are all the locales you want to support in
@@ -96,6 +103,8 @@ const nextConfig = {
    * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
    */
 
+  // todo: can we remove the 'via' header?
+  // todo: headers for sanity images?
   // todo: see if we can use `helmet` lib here
   async headers() {
     const contentSecurityPolicy =
