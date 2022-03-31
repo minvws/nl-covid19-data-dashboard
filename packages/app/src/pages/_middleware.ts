@@ -4,7 +4,6 @@ const DISALLOWED_HTTP_METHODS = ['POST', 'PUT', 'DELETE'];
 
 export function middleware(req: NextRequest) {
   const method = req.method.toUpperCase();
-
   if (DISALLOWED_HTTP_METHODS.includes(method)) {
     return new Response(undefined, {
       status: 403,
@@ -20,6 +19,10 @@ export function middleware(req: NextRequest) {
     'host',
     req.headers.get('x-original-host') || req.headers.get('host') || ''
   );
+
+  /**
+   * Remove header from Sanity proxyed assets
+   */
   response.headers.delete('via');
 
   return response;

@@ -251,22 +251,6 @@ const nextConfig = {
         destination: '/gemeente/GM:nr',
         permanent: false,
       },
-      /**
-       * Redirect traffic from /en and /nl;
-       * due to Next.js bug these routes become available.
-       * @TODO: remove when bug in Next.js is fixed. -
-       * @VWS24 -> not sure if this is still required?
-       */
-      {
-        source: '/nl/:page*',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/en/:page*',
-        destination: '/',
-        permanent: true,
-      },
       {
         source: '/veiligheidsregio/:code/risiconiveau',
         destination: '/veiligheidsregio/:code',
