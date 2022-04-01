@@ -3,6 +3,7 @@ import {
   DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
+  NlSewerValue,
   NlTestedOverallValue,
   NlVaccineCoveragePerAgeGroupEstimated,
   TimeframeOption,
@@ -15,6 +16,7 @@ import {
   Test,
   Vaccinaties,
   Ziekenhuis,
+  RioolwaterMonitoring,
 } from '@corona-dashboard/icons';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
@@ -62,6 +64,7 @@ import {
   replaceComponentsInText,
   trimNullValues,
   replaceVariablesInText,
+  getAverageSplitPoints,
 } from '~/utils';
 
 export const getStaticProps = createGetStaticProps(
@@ -70,6 +73,7 @@ export const getStaticProps = createGetStaticProps(
       (siteText) => ({
         hospitalText: siteText.pages.hospitalPage.nl,
         intensiveCareText: siteText.pages.intensiveCarePage.nl,
+        sewerText: siteText.pages.sewerPage.shared,
         positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textNl: siteText.pages.topicalPage.nl,
         textShared: siteText.pages.topicalPage.shared,
@@ -110,7 +114,8 @@ export const getStaticProps = createGetStaticProps(
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
       'risk_level',
-      'booster_coverage'
+      'booster_coverage',
+      'sewer'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -128,6 +133,11 @@ export const getStaticProps = createGetStaticProps(
       TimeframeOption.FIVE_WEEKS
     );
 
+    data.sewer.values = cutValuesFromTimeframe(
+      data.sewer.values,
+      TimeframeOption.FIVE_WEEKS
+    );
+
     return { selectedNlData: data };
   }
 );
@@ -141,6 +151,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
+  const dataSewerTotal = data.sewer;
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
   const dataTestedOverall = data.tested_overall;
@@ -154,12 +165,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     positiveTestsText,
     textNl,
     textShared,
+    sewerText,
   } = pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
   const riskLevelFeature = useFeature('riskLevel');
+  const sewageOnActueelFeature = useFeature('sewageOnActueel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -205,7 +218,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
 
-  const sewageOnActueelFeature = true;
+  const averageSplitPoints = getAverageSplitPoints(sewerText.split_labels);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -236,23 +249,38 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   href: reverseRouter.nl.index(),
                 }}
                 menuItems={[
-                  {
-                    label: textNl.mini_trend_tiles.ic_opnames.menu_item_label,
-                    data: trimNullValues(
-                      dataICTotal.values,
-                      'admissions_on_date_of_admission_moving_average_rounded'
-                    ),
-                    dataProperty:
-                      'admissions_on_date_of_admission_moving_average_rounded',
-                    value:
-                      dataICTotal.last_value
-                        ?.admissions_on_date_of_admission_moving_average_rounded ??
-                      0,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'intensive_care_nice'
-                    ),
-                  } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
+                  (sewageOnActueelFeature.isEnabled ? {
+                      label: textNl.mini_trend_tiles.sewer.menu_item_label,
+                      data: dataSewerTotal.values.filter(x => typeof x.average === 'number'),
+                      dataProperty:
+                        'average',
+                      value:
+                        dataSewerTotal.last_value
+                          ?.average ??
+                        0,
+                      warning: getWarning(
+                        content.elements.warning,
+                        'sewer'
+                      ),
+                    } as MiniTileSelectorItem<NlSewerValue>
+                  : {
+                      label: textNl.mini_trend_tiles.ic_opnames.menu_item_label,
+                      data: trimNullValues(
+                        dataICTotal.values,
+                        'admissions_on_date_of_admission_moving_average_rounded'
+                      ),
+                      dataProperty:
+                        'admissions_on_date_of_admission_moving_average_rounded',
+                      value:
+                        dataICTotal.last_value
+                          ?.admissions_on_date_of_admission_moving_average_rounded ??
+                        0,
+                      warning: getWarning(
+                        content.elements.warning,
+                        'intensive_care_nice'
+                      ),
+                    } as MiniTileSelectorItem<NlIntensiveCareNiceValue>
+                  ),
                   {
                     label:
                       textNl.mini_trend_tiles.ziekenhuis_opnames
@@ -307,9 +335,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
                 ].filter((x) => x !== undefined)}
               >
-                { sewageOnActueelFeature ?
+                { sewageOnActueelFeature.isEnabled ?
                   <MiniTrendTile
-                    title={textNl.mini_trend_tiles.ic_opnames.title}
+                    title={textNl.mini_trend_tiles.sewer.title}
                     text={
                       <>
                         <DataDrivenText
@@ -317,79 +345,41 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           content={[
                             {
                               type: 'metric',
-                              text: textNl.data_driven_texts.intensive_care_nice
+                              text: textNl.data_driven_texts.sewer
                                 .value,
-                              metricName: 'intensive_care_nice',
-                              metricProperty:
-                                'admissions_on_date_of_admission_moving_average_rounded',
-                              differenceKey:
-                                'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
-                              additionalData: {
-                                dateStart: formatters.formatDateFromSeconds(
-                                  sevenDayAverageDatesIntensiveCare[0]
-                                ),
-                                dateEnd: formatters.formatDateFromSeconds(
-                                  sevenDayAverageDatesIntensiveCare[1]
-                                ),
-                              },
-                            },
-                            {
-                              type: 'metric',
-                              text: textShared.secties.kpi.ic_admissions,
-                              metricName: 'intensive_care_lcps',
-                              metricProperty: 'beds_occupied_covid',
-                              differenceKey:
-                                'intensive_care_lcps__beds_occupied_covid',
-                            },
+                              metricName: 'sewer',
+                              metricProperty: 'average',
+                            }
                           ]}
                         />
                         <LinkWithIcon
-                          href={reverseRouter.nl.intensiveCareOpnames()}
+                          href={reverseRouter.nl.rioolwater()}
                           icon={<Chevron />}
                           iconPlacement="right"
                         >
-                          {textNl.mini_trend_tiles.ic_opnames.read_more_link}
+                          {textNl.mini_trend_tiles.sewer.read_more_link}
                         </LinkWithIcon>
                       </>
                     }
-                    icon={<Arts />}
-                    values={dataICTotal.values}
+                    icon={<RioolwaterMonitoring />}
+                    values={dataSewerTotal.values}
                     seriesConfig={[
                       {
-                        type: 'line',
-                        metricProperty:
-                          'admissions_on_date_of_admission_moving_average',
-                        label:
-                          intensiveCareText.linechart_legend_trend_label_moving_average,
-                        color: colors.data.primary,
-                      },
-                      {
-                        type: 'bar',
-                        metricProperty: 'admissions_on_date_of_admission',
-                        label: intensiveCareText.linechart_legend_trend_label,
-                        color: colors.data.primary,
+                        type: 'split-area',
+                        metricProperty: 'average',
+                        label: commonTexts.common.daggemiddelde,
+                        splitPoints: averageSplitPoints,
                       },
                     ]}
                     dataOptions={{
-                      timespanAnnotations: [
-                        {
-                          start: underReportedRangeIntensiveCare,
-                          end: Infinity,
-                          label: textShared.data_incomplete,
-                          shortLabel: commonTexts.common.incomplete,
-                          cutValuesForMetricProperties: [
-                            'admissions_on_date_of_admission_moving_average',
-                          ],
-                        },
-                      ],
+                      valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
                     }}
-                    accessibility={{ key: 'topical_intensive_care_nice' }}
+                    accessibility={{ key: 'topical_sewer' }}
                     warning={getWarning(
                       content.elements.warning,
-                      'intensive_care_nice'
+                      'sewer'
                     )}
                   />
-                
                 : <MiniTrendTile
                     title={textNl.mini_trend_tiles.ic_opnames.title}
                     text={
@@ -472,19 +462,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     )}
                   />
                 }
-                {/* <SewerChart
-                  accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
-                  dataAverages={data.sewer}
-                  text={{
-                    title: textNl.linechart_titel,
-                    source: textNl.bronnen.rivm,
-                    description: textNl.linechart_description,
-                    selectPlaceholder: textNl.graph_selected_rwzi_placeholder,
-                    splitLabels: textShared.split_labels,
-                    averagesDataLabel: commonTexts.common.daggemiddelde,
-                    valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
-                  }}
-                /> */}
                 <MiniTrendTile
                   title={textNl.mini_trend_tiles.ziekenhuis_opnames.title}
                   text={
