@@ -249,38 +249,23 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   href: reverseRouter.nl.index(),
                 }}
                 menuItems={[
-                  (sewageOnActueelFeature.isEnabled ? {
-                      label: textNl.mini_trend_tiles.sewer.menu_item_label,
-                      data: dataSewerTotal.values.filter(x => typeof x.average === 'number'),
-                      dataProperty:
-                        'average',
-                      value:
-                        dataSewerTotal.last_value
-                          ?.average ??
-                        0,
-                      warning: getWarning(
-                        content.elements.warning,
-                        'sewer'
-                      ),
-                    } as MiniTileSelectorItem<NlSewerValue>
-                  : {
-                      label: textNl.mini_trend_tiles.ic_opnames.menu_item_label,
-                      data: trimNullValues(
-                        dataICTotal.values,
-                        'admissions_on_date_of_admission_moving_average_rounded'
-                      ),
-                      dataProperty:
-                        'admissions_on_date_of_admission_moving_average_rounded',
-                      value:
-                        dataICTotal.last_value
-                          ?.admissions_on_date_of_admission_moving_average_rounded ??
-                        0,
-                      warning: getWarning(
-                        content.elements.warning,
-                        'intensive_care_nice'
-                      ),
-                    } as MiniTileSelectorItem<NlIntensiveCareNiceValue>
-                  ),
+                  {
+                    label: textNl.mini_trend_tiles.ic_opnames.menu_item_label,
+                    data: trimNullValues(
+                      dataICTotal.values,
+                      'admissions_on_date_of_admission_moving_average_rounded'
+                    ),
+                    dataProperty:
+                      'admissions_on_date_of_admission_moving_average_rounded',
+                    value:
+                      dataICTotal.last_value
+                        ?.admissions_on_date_of_admission_moving_average_rounded ??
+                      0,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'intensive_care_nice'
+                    ),
+                  } as MiniTileSelectorItem<NlIntensiveCareNiceValue>,
                   {
                     label:
                       textNl.mini_trend_tiles.ziekenhuis_opnames
@@ -300,7 +285,21 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
-                  {
+                  (sewageOnActueelFeature.isEnabled ? {
+                    label: textNl.mini_trend_tiles.sewer.menu_item_label,
+                    data: dataSewerTotal.values.filter(x => typeof x.average === 'number'),
+                    dataProperty:
+                      'average',
+                    value:
+                      dataSewerTotal.last_value
+                        ?.average ??
+                      0,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'sewer'
+                    ),
+                  } as MiniTileSelectorItem<NlSewerValue>
+                : {
                     label:
                       textNl.mini_trend_tiles.positief_geteste_mensen
                         .menu_item_label,
@@ -313,7 +312,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     ),
-                  } as MiniTileSelectorItem<NlTestedOverallValue>,
+                  } as MiniTileSelectorItem<NlTestedOverallValue>
+                ),
                   {
                     label:
                       textNl.mini_trend_tiles.vaccinatiegraad.menu_item_label,
@@ -332,136 +332,90 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         data.vaccine_coverage_per_age_group_estimated.last_value
                           ?.age_18_plus_fully_vaccinated,
                     },
-                  } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
+                  } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>
                 ].filter((x) => x !== undefined)}
               >
-                { sewageOnActueelFeature.isEnabled ?
-                  <MiniTrendTile
-                    title={textNl.mini_trend_tiles.sewer.title}
-                    text={
-                      <>
-                        <DataDrivenText
-                          data={data}
-                          content={[
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.sewer
-                                .value,
-                              metricName: 'sewer',
-                              metricProperty: 'average',
-                            }
-                          ]}
-                        />
-                        <LinkWithIcon
-                          href={reverseRouter.nl.rioolwater()}
-                          icon={<Chevron />}
-                          iconPlacement="right"
-                        >
-                          {textNl.mini_trend_tiles.sewer.read_more_link}
-                        </LinkWithIcon>
-                      </>
-                    }
-                    icon={<RioolwaterMonitoring />}
-                    values={dataSewerTotal.values}
-                    seriesConfig={[
-                      {
-                        type: 'split-area',
-                        metricProperty: 'average',
-                        label: commonTexts.common.daggemiddelde,
-                        splitPoints: averageSplitPoints,
-                      },
-                    ]}
-                    dataOptions={{
-                      valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
-                    }}
-                    accessibility={{ key: 'topical_sewer' }}
-                    warning={getWarning(
-                      content.elements.warning,
-                      'sewer'
-                    )}
-                  />
-                : <MiniTrendTile
-                    title={textNl.mini_trend_tiles.ic_opnames.title}
-                    text={
-                      <>
-                        <DataDrivenText
-                          data={data}
-                          content={[
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.intensive_care_nice
-                                .value,
-                              metricName: 'intensive_care_nice',
-                              metricProperty:
-                                'admissions_on_date_of_admission_moving_average_rounded',
-                              differenceKey:
-                                'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
-                              additionalData: {
-                                dateStart: formatters.formatDateFromSeconds(
-                                  sevenDayAverageDatesIntensiveCare[0]
-                                ),
-                                dateEnd: formatters.formatDateFromSeconds(
-                                  sevenDayAverageDatesIntensiveCare[1]
-                                ),
-                              },
+                <MiniTrendTile
+                  title={textNl.mini_trend_tiles.ic_opnames.title}
+                  text={
+                    <>
+                      <DataDrivenText
+                        data={data}
+                        content={[
+                          {
+                            type: 'metric',
+                            text: textNl.data_driven_texts.intensive_care_nice
+                              .value,
+                            metricName: 'intensive_care_nice',
+                            metricProperty:
+                              'admissions_on_date_of_admission_moving_average_rounded',
+                            differenceKey:
+                              'intensive_care_nice__admissions_on_date_of_reporting_moving_average',
+                            additionalData: {
+                              dateStart: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[0]
+                              ),
+                              dateEnd: formatters.formatDateFromSeconds(
+                                sevenDayAverageDatesIntensiveCare[1]
+                              ),
                             },
-                            {
-                              type: 'metric',
-                              text: textShared.secties.kpi.ic_admissions,
-                              metricName: 'intensive_care_lcps',
-                              metricProperty: 'beds_occupied_covid',
-                              differenceKey:
-                                'intensive_care_lcps__beds_occupied_covid',
-                            },
-                          ]}
-                        />
-                        <LinkWithIcon
-                          href={reverseRouter.nl.intensiveCareOpnames()}
-                          icon={<Chevron />}
-                          iconPlacement="right"
-                        >
-                          {textNl.mini_trend_tiles.ic_opnames.read_more_link}
-                        </LinkWithIcon>
-                      </>
-                    }
-                    icon={<Arts />}
-                    values={dataICTotal.values}
-                    seriesConfig={[
+                          },
+                          {
+                            type: 'metric',
+                            text: textShared.secties.kpi.ic_admissions,
+                            metricName: 'intensive_care_lcps',
+                            metricProperty: 'beds_occupied_covid',
+                            differenceKey:
+                              'intensive_care_lcps__beds_occupied_covid',
+                          },
+                        ]}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.nl.intensiveCareOpnames()}
+                        icon={<Chevron />}
+                        iconPlacement="right"
+                      >
+                        {textNl.mini_trend_tiles.ic_opnames.read_more_link}
+                      </LinkWithIcon>
+                    </>
+                  }
+                  icon={<Arts />}
+                  values={dataICTotal.values}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty:
+                        'admissions_on_date_of_admission_moving_average',
+                      label:
+                        intensiveCareText.linechart_legend_trend_label_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: intensiveCareText.linechart_legend_trend_label,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    timespanAnnotations: [
                       {
-                        type: 'line',
-                        metricProperty:
+                        start: underReportedRangeIntensiveCare,
+                        end: Infinity,
+                        label: textShared.data_incomplete,
+                        shortLabel: commonTexts.common.incomplete,
+                        cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
-                        label:
-                          intensiveCareText.linechart_legend_trend_label_moving_average,
-                        color: colors.data.primary,
+                        ],
                       },
-                      {
-                        type: 'bar',
-                        metricProperty: 'admissions_on_date_of_admission',
-                        label: intensiveCareText.linechart_legend_trend_label,
-                        color: colors.data.primary,
-                      },
-                    ]}
-                    dataOptions={{
-                      timespanAnnotations: [
-                        {
-                          start: underReportedRangeIntensiveCare,
-                          end: Infinity,
-                          label: textShared.data_incomplete,
-                          shortLabel: commonTexts.common.incomplete,
-                          cutValuesForMetricProperties: [
-                            'admissions_on_date_of_admission_moving_average',
-                          ],
-                        },
-                      ],
-                    }}
-                    accessibility={{ key: 'topical_intensive_care_nice' }}
-                    warning={getWarning(
-                      content.elements.warning,
-                      'intensive_care_nice'
-                    )}
-                  />
-                }
+                    ],
+                  }}
+                  accessibility={{ key: 'topical_intensive_care_nice' }}
+                  warning={getWarning(
+                    content.elements.warning,
+                    'intensive_care_nice'
+                  )}
+                />
                 <MiniTrendTile
                   title={textNl.mini_trend_tiles.ziekenhuis_opnames.title}
                   text={
@@ -543,95 +497,140 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'hospital_nice'
                   )}
-                />
-                <MiniTrendTile
-                  title={
-                    textNl.mini_trend_tiles.positief_geteste_mensen.title
-                  }
-                  text={
-                    <>
-                      <DataDrivenText
-                        data={data}
-                        content={[
-                          {
-                            type: 'metric',
-                            text: textNl.data_driven_texts.tested_overall
-                              .value,
-                            metricName: 'tested_overall',
-                            metricProperty: 'infected_moving_average_rounded',
-                            additionalData: {
-                              dateStart: formatters.formatDateFromSeconds(
-                                data.tested_overall.last_value.date_unix -
-                                  WEEK_IN_SECONDS
-                              ),
-                              dateEnd: formatters.formatDateFromSeconds(
-                                data.tested_overall.last_value.date_unix
-                              ),
+                />{ sewageOnActueelFeature.isEnabled ?
+                  <MiniTrendTile
+                    title={textNl.mini_trend_tiles.sewer.title}
+                    text={
+                      <>
+                        <DataDrivenText
+                          data={data}
+                          content={[
+                            {
+                              type: 'metric',
+                              text: textNl.data_driven_texts.sewer
+                                .value,
+                              metricName: 'sewer',
+                              metricProperty: 'average',
+                            }
+                          ]}
+                        />
+                        <LinkWithIcon
+                          href={reverseRouter.nl.rioolwater()}
+                          icon={<Chevron />}
+                          iconPlacement="right"
+                        >
+                          {textNl.mini_trend_tiles.sewer.read_more_link}
+                        </LinkWithIcon>
+                      </>
+                    }
+                    icon={<RioolwaterMonitoring />}
+                    values={dataSewerTotal.values}
+                    seriesConfig={[
+                      {
+                        type: 'split-area',
+                        metricProperty: 'average',
+                        label: commonTexts.common.daggemiddelde,
+                        splitPoints: averageSplitPoints,
+                      },
+                    ]}
+                    dataOptions={{
+                      valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
+                    }}
+                    accessibility={{ key: 'topical_sewer' }}
+                    warning={getWarning(
+                      content.elements.warning,
+                      'sewer'
+                    )}
+                  />
+                : <MiniTrendTile
+                    title={
+                      textNl.mini_trend_tiles.positief_geteste_mensen.title
+                    }
+                    text={
+                      <>
+                        <DataDrivenText
+                          data={data}
+                          content={[
+                            {
+                              type: 'metric',
+                              text: textNl.data_driven_texts.tested_overall
+                                .value,
+                              metricName: 'tested_overall',
+                              metricProperty: 'infected_moving_average_rounded',
+                              additionalData: {
+                                dateStart: formatters.formatDateFromSeconds(
+                                  data.tested_overall.last_value.date_unix -
+                                    WEEK_IN_SECONDS
+                                ),
+                                dateEnd: formatters.formatDateFromSeconds(
+                                  data.tested_overall.last_value.date_unix
+                                ),
+                              },
                             },
-                          },
+                            {
+                              type: 'metric',
+                              text: textNl.data_driven_texts.tested_ggd.value,
+                              metricName: 'tested_ggd',
+                              isPercentage: true,
+                              metricProperty:
+                                'infected_percentage_moving_average',
+                            },
+                          ]}
+                        />
+                        <LinkWithIcon
+                          href={reverseRouter.nl.positiefGetesteMensen()}
+                          icon={<Chevron />}
+                          iconPlacement="right"
+                        >
                           {
-                            type: 'metric',
-                            text: textNl.data_driven_texts.tested_ggd.value,
-                            metricName: 'tested_ggd',
-                            isPercentage: true,
-                            metricProperty:
-                              'infected_percentage_moving_average',
-                          },
-                        ]}
-                      />
-                      <LinkWithIcon
-                        href={reverseRouter.nl.positiefGetesteMensen()}
-                        icon={<Chevron />}
-                        iconPlacement="right"
-                      >
-                        {
-                          textNl.mini_trend_tiles.positief_geteste_mensen
-                            .read_more_link
-                        }
-                      </LinkWithIcon>
-                    </>
-                  }
-                  icon={<Test />}
-                  values={dataTestedOverall.values}
-                  seriesConfig={[
-                    {
-                      type: 'line',
-                      metricProperty: 'infected_moving_average',
-                      label:
-                        positiveTestsText.tooltip_labels
-                          .infected_moving_average,
-                      color: colors.data.primary,
-                    },
-                    {
-                      type: 'bar',
-                      metricProperty: 'infected',
-                      label:
-                        positiveTestsText.tooltip_labels.infected_overall,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                  accessibility={{
-                    key: 'topical_tested_overall_infected',
-                  }}
-                  warning={getWarning(
-                    content.elements.warning,
-                    'tested_overall'
-                  )}
-                  dataOptions={{
-                    forcedMaximumValue: 150000,
-                    outOfBoundsConfig: {
-                      label:
-                        positiveTestsText.tooltip_labels
-                          .infected_out_of_bounds,
-                      tooltipLabel:
-                        positiveTestsText.tooltip_labels.annotations,
-                      checkIsOutofBounds: (
-                        x: NlTestedOverallValue,
-                        max: number
-                      ) => x.infected > max,
-                    },
-                  }}
-                />
+                            textNl.mini_trend_tiles.positief_geteste_mensen
+                              .read_more_link
+                          }
+                        </LinkWithIcon>
+                      </>
+                    }
+                    icon={<Test />}
+                    values={dataTestedOverall.values}
+                    seriesConfig={[
+                      {
+                        type: 'line',
+                        metricProperty: 'infected_moving_average',
+                        label:
+                          positiveTestsText.tooltip_labels
+                            .infected_moving_average,
+                        color: colors.data.primary,
+                      },
+                      {
+                        type: 'bar',
+                        metricProperty: 'infected',
+                        label:
+                          positiveTestsText.tooltip_labels.infected_overall,
+                        color: colors.data.primary,
+                      },
+                    ]}
+                    accessibility={{
+                      key: 'topical_tested_overall_infected',
+                    }}
+                    warning={getWarning(
+                      content.elements.warning,
+                      'tested_overall'
+                    )}
+                    dataOptions={{
+                      forcedMaximumValue: 150000,
+                      outOfBoundsConfig: {
+                        label:
+                          positiveTestsText.tooltip_labels
+                            .infected_out_of_bounds,
+                        tooltipLabel:
+                          positiveTestsText.tooltip_labels.annotations,
+                        checkIsOutofBounds: (
+                          x: NlTestedOverallValue,
+                          max: number
+                        ) => x.infected > max,
+                      },
+                    }}
+                  />
+                }
                 <MiniVaccinationCoverageTile
                   title={textNl.mini_trend_tiles.vaccinatiegraad.title}
                   oneShotBarLabel={
