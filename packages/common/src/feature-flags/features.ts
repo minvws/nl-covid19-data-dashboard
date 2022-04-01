@@ -233,6 +233,6 @@ export const features: Feature[] = [
   }, 
   {
     name: 'sewageOnActueel',
-    isEnabled: true,
+    isEnabled: false,
   },
 ];
