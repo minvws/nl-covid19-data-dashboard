@@ -31,7 +31,7 @@ that are referenced by the entry point.
 
 The schemas are also used to generate Typescript interfaces from their `title`
 attribute. This way the data shape is always synchronized with the frontend
-implementations. To execute this functionality run the `yarn generate-typescript` command from the project root directory. The output of this
+implementations. To execute this functionality run the `yarn generate-data-types` command from the project root directory. The output of this
 script is saved to the **src/types/data.ts** file. The titles are
 automatically PascalCased so spaces and \_ are replaced. In other to avoid
 naming conflicts it is advised to prefix the titles. See [Guidelines For New
