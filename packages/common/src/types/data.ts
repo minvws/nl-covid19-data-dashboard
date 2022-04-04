@@ -131,7 +131,7 @@ export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
-  age_group_range: '12+' | '12-17' | '18+';
+  age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   birthyear_range: string;
@@ -151,7 +151,7 @@ export interface GmBoosterCoverageValue {
   date_of_insertion_unix: number;
 }
 
-export type GmCollectionId = 'GM_COLLECTION';
+export type GmCollectionId = "GM_COLLECTION";
 
 export interface GmCollection {
   last_generated: string;
@@ -187,7 +187,7 @@ export interface GmCollectionSewer {
 }
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
-  age_group_range: '12+' | '12-17' | '18+';
+  age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   birthyear_range: string;
@@ -248,7 +248,7 @@ export interface InVariantsVariantValue {
   date_of_insertion_unix: number;
 }
 
-export type InCollectionId = 'IN_COLLECTION';
+export type InCollectionId = "IN_COLLECTION";
 
 export interface InCollection {
   last_generated: string;
@@ -266,7 +266,7 @@ export interface InCollectionTestedOverall {
   date_of_insertion_unix: number;
 }
 
-export type NlId = 'NL';
+export type NlId = "NL";
 
 export interface Nl {
   last_generated: string;
@@ -431,15 +431,15 @@ export interface NlBoosterShotPerAgeGroup {
 }
 export interface NlBoosterShotPerAgeGroupValue {
   age_group_range:
-    | '5-11'
-    | '12-17'
-    | '18-30'
-    | '31-40'
-    | '41-50'
-    | '51-60'
-    | '61-70'
-    | '71-80'
-    | '81+';
+    | "5-11"
+    | "12-17"
+    | "18-30"
+    | "31-40"
+    | "41-50"
+    | "51-60"
+    | "61-70"
+    | "71-80"
+    | "81+";
   received_booster_percentage: number;
   date_of_insertion_unix: number;
   date_unix: number;
@@ -450,7 +450,7 @@ export interface NlBoosterCoverage {
   values: NlBoosterCoverageValue[];
 }
 export interface NlBoosterCoverageValue {
-  age_group?: '12+' | '18+';
+  age_group?: "12+" | "18+";
   percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -747,63 +747,63 @@ export interface NlBehavior {
 export interface NlBehaviorValue {
   number_of_participants: number;
   curfew_compliance: number | null;
-  curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
+  curfew_compliance_trend: ("up" | "down" | "equal") | null;
   wash_hands_compliance: number | null;
-  wash_hands_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
-  keep_distance_compliance_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
   work_from_home_compliance: number | null;
-  work_from_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
-  avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
   symptoms_stay_home_if_mandatory_compliance?: number | null;
   symptoms_stay_home_if_mandatory_compliance_trend?:
-    | ('up' | 'down' | 'equal')
+    | ("up" | "down" | "equal")
     | null;
   symptoms_get_tested_compliance?: number | null;
-  symptoms_get_tested_compliance_trend?: ('up' | 'down' | 'equal') | null;
+  symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
-  wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_transport_compliance?: number | null;
   wear_mask_public_transport_compliance_trend?:
-    | ('up' | 'down' | 'equal')
+    | ("up" | "down" | "equal")
     | null;
   sneeze_cough_elbow_compliance: number | null;
-  sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
-  max_visitors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
   ventilate_home_compliance: number | null;
-  ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   selftest_visit_compliance: number | null;
-  selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  selftest_visit_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
-  curfew_support_trend: ('up' | 'down' | 'equal') | null;
+  curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
-  wash_hands_support_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
   keep_distance_support: number | null;
-  keep_distance_support_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
   work_from_home_support: number | null;
-  work_from_home_support_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
-  avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
   symptoms_stay_home_if_mandatory_support?: number | null;
   symptoms_stay_home_if_mandatory_support_trend?:
-    | ('up' | 'down' | 'equal')
+    | ("up" | "down" | "equal")
     | null;
   symptoms_get_tested_support?: number | null;
-  symptoms_get_tested_support_trend?: ('up' | 'down' | 'equal') | null;
+  symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
-  wear_mask_public_indoors_support_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_transport_support?: number | null;
-  wear_mask_public_transport_support_trend?: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_support: number | null;
-  sneeze_cough_elbow_support_trend: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
-  max_visitors_support_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
   ventilate_home_support: number | null;
-  ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   selftest_visit_support: number | null;
-  selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  selftest_visit_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -826,11 +826,11 @@ export interface NlBehaviorPerAgeGroup {
   date_end_unix: number;
 }
 export interface NlBehaviorPerAgeGroupValue {
-  '16_24': number | null;
-  '25_39': number | null;
-  '40_54': number | null;
-  '55_69': number | null;
-  '70_plus': number | null;
+  "16_24": number | null;
+  "25_39": number | null;
+  "40_54": number | null;
+  "55_69": number | null;
+  "70_plus": number | null;
 }
 export interface NlBehaviorGetTestedSupportPerAgeGroup {
   values: NlBehaviorGetTestedSupportPerAgeGroupValue[];
@@ -852,33 +852,33 @@ export interface NlBehaviorAnnotations {
 }
 export interface NlBehaviorAnnotations1 {
   source_type:
-    | 'wash_hands'
-    | 'curfew'
-    | 'keep_distance'
-    | 'work_from_home'
-    | 'avoid_crowds'
-    | 'symptoms_stay_home_if_mandatory'
-    | 'symptoms_get_tested'
-    | 'wear_mask_public_indoors'
-    | 'wear_mask_public_transport'
-    | 'sneeze_cough_elbow'
-    | 'max_visitors'
-    | 'ventilate_home'
-    | 'selftest_visit';
+    | "wash_hands"
+    | "curfew"
+    | "keep_distance"
+    | "work_from_home"
+    | "avoid_crowds"
+    | "symptoms_stay_home_if_mandatory"
+    | "symptoms_get_tested"
+    | "wear_mask_public_indoors"
+    | "wear_mask_public_transport"
+    | "sneeze_cough_elbow"
+    | "max_visitors"
+    | "ventilate_home"
+    | "selftest_visit";
   behaviour_type:
-    | 'wash_hands'
-    | 'curfew'
-    | 'keep_distance'
-    | 'work_from_home'
-    | 'avoid_crowds'
-    | 'symptoms_stay_home_if_mandatory'
-    | 'symptoms_get_tested'
-    | 'wear_mask_public_indoors'
-    | 'wear_mask_public_transport'
-    | 'sneeze_cough_elbow'
-    | 'max_visitors'
-    | 'ventilate_home'
-    | 'selftest_visit';
+    | "wash_hands"
+    | "curfew"
+    | "keep_distance"
+    | "work_from_home"
+    | "avoid_crowds"
+    | "symptoms_stay_home_if_mandatory"
+    | "symptoms_get_tested"
+    | "wear_mask_public_indoors"
+    | "wear_mask_public_transport"
+    | "sneeze_cough_elbow"
+    | "max_visitors"
+    | "ventilate_home"
+    | "selftest_visit";
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -1110,15 +1110,15 @@ export interface NlVaccineCoveragePerAgeGroup {
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_range:
-    | '5-11'
-    | '12-17'
-    | '18-30'
-    | '31-40'
-    | '41-50'
-    | '51-60'
-    | '61-70'
-    | '71-80'
-    | '81+';
+    | "5-11"
+    | "12-17"
+    | "18-30"
+    | "31-40"
+    | "41-50"
+    | "51-60"
+    | "61-70"
+    | "71-80"
+    | "81+";
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -1365,45 +1365,45 @@ export interface VrBehavior {
 export interface VrBehaviorValue {
   number_of_participants: number;
   curfew_compliance: number | null;
-  curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
+  curfew_compliance_trend: ("up" | "down" | "equal") | null;
   wash_hands_compliance: number | null;
-  wash_hands_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
-  keep_distance_compliance_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
   work_from_home_compliance: number | null;
-  work_from_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
-  avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
-  wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
-  sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
-  max_visitors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
   ventilate_home_compliance: number | null;
-  ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   selftest_visit_compliance: number | null;
-  selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  selftest_visit_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
-  curfew_support_trend: ('up' | 'down' | 'equal') | null;
+  curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
-  wash_hands_support_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
   keep_distance_support: number | null;
-  keep_distance_support_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
   work_from_home_support: number | null;
-  work_from_home_support_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
-  avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
-  wear_mask_public_indoors_support_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_support: number | null;
-  sneeze_cough_elbow_support_trend: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
-  max_visitors_support_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
   ventilate_home_support: number | null;
-  ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   selftest_visit_support: number | null;
-  selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  selftest_visit_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -1494,7 +1494,7 @@ export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
-  age_group_range: '12+' | '12-17' | '18+';
+  age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   birthyear_range: string;
@@ -1514,7 +1514,7 @@ export interface VrBoosterCoverageValue {
   date_of_insertion_unix: number;
 }
 
-export type VrCollectionId = 'VR_COLLECTION';
+export type VrCollectionId = "VR_COLLECTION";
 
 export interface VrCollection {
   last_generated: string;
@@ -1565,41 +1565,41 @@ export interface VrCollectionBehavior {
   vrcode: string;
   number_of_participants: number;
   curfew_compliance: number | null;
-  curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
+  curfew_compliance_trend: ("up" | "down" | "equal") | null;
   wash_hands_compliance: number | null;
-  wash_hands_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
-  keep_distance_compliance_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
   work_from_home_compliance: number | null;
-  work_from_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
-  avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
-  wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
-  sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
-  max_visitors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
   ventilate_home_compliance: number | null;
-  ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   curfew_support: number | null;
-  curfew_support_trend: ('up' | 'down' | 'equal') | null;
+  curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
-  wash_hands_support_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
   keep_distance_support: number | null;
-  keep_distance_support_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
   work_from_home_support: number | null;
-  work_from_home_support_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
-  avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
-  wear_mask_public_indoors_support_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_support: number | null;
-  sneeze_cough_elbow_support_trend: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
-  max_visitors_support_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
   ventilate_home_support: number | null;
-  ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -1639,7 +1639,7 @@ export interface VrCollectionSituations {
 }
 export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
-  age_group_range: '12+' | '12-17' | '18+';
+  age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   birthyear_range: string;
