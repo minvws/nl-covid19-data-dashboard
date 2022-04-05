@@ -2070,3 +2070,6 @@ timestamp,action,key,document_id,move_to
 2022-04-01T16:45:45.506Z,delete,pages.topicalPage.nl.data_driven_texts.sewer.value.plural,X9VBXXTCkpE7pd2SuqOUbw,__
 2022-04-01T16:45:45.507Z,delete,pages.topicalPage.nl.data_driven_texts.sewer.value.singular,f8H8TuRzzxdsAT6TvXS8bR,__
 2022-04-01T16:45:45.508Z,delete,pages.topicalPage.nl.data_driven_texts.sewer.value.zero,X9VBXXTCkpE7pd2SuqOV1n,__
+2022-04-05T13:10:41.106Z,add,pages.topicalPage.nl.data_driven_texts.sewer_text.value.plural,mZK7300JWni7S5PoBYol7T,__
+2022-04-05T13:10:43.917Z,add,pages.topicalPage.nl.data_driven_texts.sewer_text.value.singular,mZK7300JWni7S5PoBYoldh,__
+2022-04-05T13:10:44.929Z,add,pages.topicalPage.nl.data_driven_texts.sewer_text.value.zero,mZK7300JWni7S5PoBYolvb,__

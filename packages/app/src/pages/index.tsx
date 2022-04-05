@@ -539,8 +539,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           content={[
                             {
                               type: 'metric',
-                              text: textNl.data_driven_texts.sewer
-                                .value,
+                              text: textNl.data_driven_texts.sewer_text.value,
                               metricName: 'sewer',
                               metricProperty: 'average',
                             }
