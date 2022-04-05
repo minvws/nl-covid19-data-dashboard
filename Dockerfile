@@ -48,7 +48,7 @@ RUN apk add --no-cache --virtual \
 FROM deps as builder
 COPY . .
 RUN yarn workspace @corona-dashboard/common build \
-&& yarn workspace @corona-dashboard/cli generate-typescript \
+&& yarn workspace @corona-dashboard/cli generate-data-types \
 && yarn workspace @corona-dashboard/icons build \
 && yarn test:ci
 
