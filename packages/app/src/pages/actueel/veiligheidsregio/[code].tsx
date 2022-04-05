@@ -105,8 +105,35 @@ export const getStaticProps = createGetStaticProps(
       TimeframeOption.FIVE_WEEKS
     );
 
-    return data;
+    return {
+      ...data,
+      selectedVrData: {
+        ...data.selectedVrData,
+        hospital_nice: {
+          ...data.selectedVrData.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.selectedVrData.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        tested_overall: {
+          ...data.selectedVrData.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.selectedVrData.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        sewer: {
+          ...data.selectedVrData.sewer,
+          values: cutValuesFromTimeframe(
+            data.selectedVrData.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        }
+      }
+    }
   },
+
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {

@@ -90,22 +90,33 @@ export const getStaticProps = createGetStaticProps(
       'tested_overall'
     )(context);
 
-    data.selectedGmData.hospital_nice.values = cutValuesFromTimeframe(
-      data.selectedGmData.hospital_nice.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    data.selectedGmData.tested_overall.values = cutValuesFromTimeframe(
-      data.selectedGmData.tested_overall.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    data.selectedGmData.sewer.values = cutValuesFromTimeframe(
-      data.selectedGmData.sewer.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    return data;
+    return {
+      ...data,
+      selectedGmData: {
+        ...data.selectedGmData,
+        hospital_nice: {
+          ...data.selectedGmData.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        tested_overall: {
+          ...data.selectedGmData.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        sewer: {
+          ...data.selectedGmData.sewer,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        }
+      }
+    }
   },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {

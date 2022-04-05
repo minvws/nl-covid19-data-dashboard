@@ -138,7 +138,39 @@ export const getStaticProps = createGetStaticProps(
       TimeframeOption.FIVE_WEEKS
     );
 
-    return { selectedNlData: data };
+    return {
+      selectedNlData: {
+        ...data,
+        hospital_nice: {
+          ...data.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        tested_overall: {
+          ...data.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        intensive_care_nice: {
+          ...data.intensive_care_nice,
+          values: cutValuesFromTimeframe(
+            data.intensive_care_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        sewer: {
+          ...data.sewer,
+          values: cutValuesFromTimeframe(
+            data.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        }
+      }
+    }
   }
 );
 
