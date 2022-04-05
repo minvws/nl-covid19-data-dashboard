@@ -836,7 +836,7 @@ export interface NlBehaviorAnnotations {
   values: NlBehaviorAnnotations1[];
 }
 export interface NlBehaviorAnnotations1 {
-  source_type:
+  behavior_indicator:
     | "wash_hands"
     | "curfew"
     | "keep_distance"
@@ -850,20 +850,10 @@ export interface NlBehaviorAnnotations1 {
     | "max_visitors"
     | "ventilate_home"
     | "selftest_visit";
-  behaviour_type:
-    | "wash_hands"
-    | "curfew"
-    | "keep_distance"
-    | "work_from_home"
-    | "avoid_crowds"
-    | "symptoms_stay_home_if_mandatory"
-    | "symptoms_get_tested"
-    | "wear_mask_public_indoors"
-    | "wear_mask_public_transport"
-    | "sneeze_cough_elbow"
-    | "max_visitors"
-    | "ventilate_home"
-    | "selftest_visit";
+  message_title_nl: string;
+  message_title_en: string;
+  message_desc_nl: string;
+  message_desc_en: string;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
