@@ -542,6 +542,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               text: textNl.data_driven_texts.sewer_text.value,
                               metricName: 'sewer',
                               metricProperty: 'average',
+                              additionalData: {
+                                newDate: formatters.formatDateFromSeconds(
+                                  data.sewer.last_value.date_unix
+                                ),
+                              },
                             }
                           ]}
                         />
