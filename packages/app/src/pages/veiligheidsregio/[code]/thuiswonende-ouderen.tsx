@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -111,15 +111,6 @@ const ElderlyAtHomeRegionalPage = (
     }),
   };
 
-  const timeframeOptions = [
-    TimeframeOption.ALL,
-    TimeframeOption.ONE_WEEK,
-    TimeframeOption.THIRTY_DAYS,
-    TimeframeOption.THREE_MONTHS,
-    TimeframeOption.SIX_MONTHS,
-    TimeframeOption.LAST_YEAR,
-  ];
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -195,7 +186,7 @@ const ElderlyAtHomeRegionalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={timeframeOptions}
+            timeframeOptions={TimeframeOptionsList}
             title={textVr.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={
@@ -294,7 +285,7 @@ const ElderlyAtHomeRegionalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={timeframeOptions}
+            timeframeOptions={TimeframeOptionsList}
             title={textVr.section_deceased.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={textVr.section_deceased.line_chart_daily_description}

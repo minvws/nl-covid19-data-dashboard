@@ -1,7 +1,7 @@
 import {
   NlSewer,
   SewerPerInstallationData,
-  TimeframeOption,
+  TimeframeOptionsList,
   VrSewer,
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
@@ -100,14 +100,7 @@ export function SewerChart({
 
   return (
     <ChartTile
-      timeframeOptions={[
-        TimeframeOption.ALL,
-        TimeframeOption.ONE_WEEK,
-        TimeframeOption.THIRTY_DAYS,
-        TimeframeOption.THREE_MONTHS,
-        TimeframeOption.SIX_MONTHS,
-        TimeframeOption.LAST_YEAR,
-      ]}
+      timeframeOptions={TimeframeOptionsList}
       title={text.title}
       metadata={{
         source: text.source,
