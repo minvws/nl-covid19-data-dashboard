@@ -162,7 +162,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
     "trace": "tsc --pretty --noEmit --generateTrace \"trace-$(date +%Y%m%d%H%M)\" --composite false --incremental false",
-    "download": "npx rimraf ./public/json/* && node ./infra/download.js",
+    "download": "node ./infra/download.js",
     "clean": "npx rimraf .next",
     "nuke": "yarn clean && npx rimraf node_modules"
   },
