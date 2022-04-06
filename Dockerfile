@@ -95,7 +95,7 @@ RUN addgroup -g 1001 -S nodejs \
 
 COPY --from=builder --chown=nextjs:nodejs ./app/packages/app/.next/standalone ./.next/standalone
 COPY --from=builder --chown=nextjs:nodejs ./app/packages/app/.next/static ./.next/standalone/packages/app/.next/static
-COPY --from=builder //app/packages/app/next.config.js ./.next/standalone/packages/app
+COPY --from=builder ./app/packages/app/next.config.js ./.next/standalone/packages/app
 
 RUN mkdir -p ./.next/standalone/packages/app/public/images/choropleth
 RUN chown -R nextjs:nodejs ./.next/standalone/packages/app/public/images/choropleth
