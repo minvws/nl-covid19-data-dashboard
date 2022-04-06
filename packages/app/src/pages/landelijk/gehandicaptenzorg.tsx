@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   GehandicaptenZorg,
@@ -157,15 +157,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm }}
             title={textNl.positief_geteste_personen.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={textNl.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
@@ -307,15 +299,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.besmette_locaties.bronnen.rivm,
             }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={textNl.besmette_locaties.linechart_description}
           >
             {(timeframe) => (
@@ -372,15 +356,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textNl.oversterfte.bronnen.rivm }}
             title={textNl.oversterfte.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={textNl.oversterfte.linechart_description}
           >
             {(timeframe) => (

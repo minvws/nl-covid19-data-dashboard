@@ -1,7 +1,7 @@
 import {
   colors,
   DAY_IN_SECONDS,
-  TimeframeOption,
+  TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
@@ -183,15 +183,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             title={textGm.linechart_titel}
             description={textGm.linechart_description}
             metadata={{ source: textGm.bronnen.rivm }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart

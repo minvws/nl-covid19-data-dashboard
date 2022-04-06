@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { External, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
@@ -140,15 +140,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             description={
               corona_melder_app.waarschuwingen_over_tijd_grafiek.description
             }
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart

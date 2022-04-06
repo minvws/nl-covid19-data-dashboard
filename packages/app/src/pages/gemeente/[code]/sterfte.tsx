@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import {
@@ -159,15 +159,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               textGm.section_deceased_rivm.line_chart_covid_daily_description

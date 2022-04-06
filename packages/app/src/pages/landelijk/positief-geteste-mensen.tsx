@@ -1,7 +1,7 @@
 import {
   colors,
   NlTestedOverallValue,
-  TimeframeOption,
+  TimeframeOptionsList,
 } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
@@ -242,15 +242,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.rivm,
             }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -383,13 +375,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <ChartTile
               title={textShared.infected_per_age_group.title}
               description={textShared.infected_per_age_group.description}
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.TWO_WEEKS,
-                TimeframeOption.THIRTY_DAYS,
-                TimeframeOption.THREE_MONTHS,
-                TimeframeOption.LAST_YEAR,
-              ]}
+              timeframeOptions={TimeframeOptionsList}
               metadata={{
                 source: textNl.bronnen.rivm,
               }}
@@ -505,13 +491,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.TWO_WEEKS,
-                TimeframeOption.THIRTY_DAYS,
-                TimeframeOption.THREE_MONTHS,
-                TimeframeOption.LAST_YEAR,
-              ]}
+              timeframeOptions={TimeframeOptionsList}
               title={textNl.ggd.linechart_totaltests_titel}
               description={textNl.ggd.linechart_totaltests_toelichting}
               metadata={{

@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   GehandicaptenZorg,
@@ -167,15 +167,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
             title={textVr.positief_geteste_personen.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
@@ -286,10 +278,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 source: textVr.besmette_locaties.bronnen.rivm,
               }}
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.FIVE_WEEKS,
-              ]}
+              timeframeOptions={TimeframeOptionsList}
               description={textVr.besmette_locaties.linechart_description}
             >
               {(timeframe) => (
@@ -347,15 +336,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.oversterfte.bronnen.rivm }}
             title={textVr.oversterfte.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.oversterfte.linechart_description}
           >
             {(timeframe) => (

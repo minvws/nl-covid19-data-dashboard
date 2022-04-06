@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   Locatie,
@@ -163,15 +163,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             description={positiveTestedPeopleText.linechart_description}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -315,15 +307,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
@@ -383,15 +367,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textNl.bronnen.rivm }}
             title={textNl.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={TimeframeOptionsList}
             description={textNl.linechart_description}
           >
             {(timeframe) => (
