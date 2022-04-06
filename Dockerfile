@@ -76,6 +76,7 @@ RUN yarn download \
 && yarn workspace @corona-dashboard/app build
 
 FROM node:lts-alpine as runner
+WORKDIR /app
 
 # Required runtime dependencies for `canvas.node` - generating choropleths as image
 RUN apk add --no-cache \
@@ -92,14 +93,14 @@ RUN apk add --no-cache \
 RUN addgroup -g 1001 -S nodejs \
 && adduser -S nextjs -u 1001
 
-COPY --from=builder --chown=nextjs:nodejs app/packages/app/.next/standalone app/.next/standalone
-COPY --from=builder --chown=nextjs:nodejs app/packages/app/.next/static app/.next/standalone/packages/app/.next/static
-COPY --from=builder app/packages/app/next.config.js app/.next/standalone/packages/app
+COPY --from=builder --chown=nextjs:nodejs ./app/packages/app/.next/standalone ./.next/standalone
+COPY --from=builder --chown=nextjs:nodejs ./app/packages/app/.next/static ./.next/standalone/packages/app/.next/static
+COPY --from=builder ./app/packages/app/next.config.js ./.next/standalone/packages/app
 
-RUN mkdir -p app/.next/standalone/packages/app/public/images/choropleth
-RUN chown -R nextjs:nodejs app/.next/standalone/packages/app/public/images/choropleth
+RUN mkdir -p ./.next/standalone/packages/app/public/images/choropleth
+RUN chown -R nextjs:nodejs ./.next/standalone/packages/app/public/images/choropleth
 
-WORKDIR app/.next/standalone/packages/app
+WORKDIR ./.next/standalone/packages/app
 
 USER nextjs
 
