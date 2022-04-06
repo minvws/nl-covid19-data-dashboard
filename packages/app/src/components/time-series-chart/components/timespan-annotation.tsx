@@ -57,7 +57,9 @@ export function TimespanAnnotation({
   const clippedStart = Math.max(start, min);
   const clippedEnd = Math.min(end, max);
 
-  const x0 = getX({ __date_unix: clippedStart }) - halfBarWidth;
+  const x0 =
+    getX({ __date_unix: clippedStart }) -
+    (series.length > 0 ? halfBarWidth : 0);
   const x1 = getX({ __date_unix: clippedEnd });
 
   /**

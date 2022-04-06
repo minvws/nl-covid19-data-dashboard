@@ -22,7 +22,7 @@
   },
   "scripts": {
     "prepare-release": "ts-node src/release/prepare-release.ts",
-    "bootstrap": "yarn generate-typescript",
+    "bootstrap": "yarn generate-data-types",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",

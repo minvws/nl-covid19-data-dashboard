@@ -44,7 +44,6 @@ export const getStaticProps = createGetStaticProps(
       (siteText) => ({
         caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
         metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        subjectTexts: siteText.common.behavior.subjects,
         text: siteText.pages.behaviorPage,
       }),
       locale
@@ -80,8 +79,8 @@ export default function BehaviorPage(
   const behaviorLastValue = data.behavior.last_value;
 
   const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
-  const { formatNumber, formatDateFromSeconds, formatPercentage } = useIntl();
-  const { caterogyTexts, subjectTexts, metadataTexts, text } = pageText;
+  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
+  const { caterogyTexts, metadataTexts, text } = pageText;
 
   const metadata = {
     ...metadataTexts,
@@ -115,17 +114,17 @@ export default function BehaviorPage(
   const { currentTimelineEvents } = useMemo(() => {
     // Timeline event from the current selected behaviour
     const currentTimelineEvents = data.behavior_annotations.values.filter(
-      (a) => (a.source_type === currentId)
+      (a) => (a.behavior_indicator === currentId)
     ).map((event) => ({
-        title: subjectTexts[event.behaviour_type],
-        description: text.shared.annotation_description[event.behaviour_type],
+        title: event[`message_title_${locale}`],
+        description: event[`message_desc_${locale}`],
         start: event.date_start_unix,
         end: event.date_end_unix
       })
     );
 
     return { currentTimelineEvents };
-  }, [currentId, data.behavior_annotations.values, text.shared.annotation_description, subjectTexts]);
+  }, [currentId, data.behavior_annotations.values, locale]);
 
   const timelineProp = behaviorAnnotationsFeature.isEnabled
     ? { timelineEvents: currentTimelineEvents }
