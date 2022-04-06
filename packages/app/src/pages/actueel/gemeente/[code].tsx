@@ -4,6 +4,7 @@ import {
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
   GmTestedOverallValue,
+  GmSewerValue,
   GmVaccineCoveragePerAgeGroupValue,
   TimeframeOption,
   WEEK_IN_SECONDS,
@@ -13,6 +14,7 @@ import {
   Test,
   Vaccinaties,
   Ziekenhuis,
+  RioolwaterMonitoring,
 } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -61,6 +63,7 @@ import {
   getBoundaryDateStartUnix,
   getVrForMunicipalityCode,
   replaceComponentsInText,
+  getAverageSplitPoints,
 } from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -73,6 +76,7 @@ export const getStaticProps = createGetStaticProps(
         positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textGm: siteText.pages.topicalPage.gm,
         textShared: siteText.pages.topicalPage.shared,
+        sewerText: siteText.pages.sewerPage.shared,
       }),
       locale
     ),
@@ -86,17 +90,33 @@ export const getStaticProps = createGetStaticProps(
       'tested_overall'
     )(context);
 
-    data.selectedGmData.hospital_nice.values = cutValuesFromTimeframe(
-      data.selectedGmData.hospital_nice.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    data.selectedGmData.tested_overall.values = cutValuesFromTimeframe(
-      data.selectedGmData.tested_overall.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    return data;
+    return {
+      ...data,
+      selectedGmData: {
+        ...data.selectedGmData,
+        hospital_nice: {
+          ...data.selectedGmData.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        tested_overall: {
+          ...data.selectedGmData.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        sewer: {
+          ...data.selectedGmData.sewer,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        }
+      }
+    }
   },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
@@ -141,7 +161,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { commonTexts, ...formatters } = useIntl();
-  const { hospitalText, positiveTestsText, textGm, textShared } = pageText;
+  const { hospitalText, positiveTestsText, textGm, sewerText, textShared } = pageText;
 
   const gmCode = router.query.code as string;
 
@@ -153,6 +173,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const dataHospitalIntake = data.hospital_nice;
+  const dataSewerTotal = data.sewer;
 
   const filteredAgeGroup18Plus =
     data.vaccine_coverage_per_age_group.values.find(
@@ -162,6 +183,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     filteredAgeGroup18Plus,
     true
   );
+
+  const sewageOnActueelFeature = useFeature('sewageOnActueel');
 
   const internationalFeature = useFeature('inPositiveTestsPage');
 
@@ -188,6 +211,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - WEEK_IN_SECONDS,
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
+
+  const averageSplitPoints = getAverageSplitPoints(sewerText.split_labels);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -233,7 +258,21 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<GmHospitalNiceValue>,
-                  {
+                  (sewageOnActueelFeature.isEnabled ? {
+                    label: textGm.mini_trend_tiles.sewer.menu_item_label,
+                    data: dataSewerTotal.values.filter(x => typeof x.average === 'number'),
+                    dataProperty:
+                      'average',
+                    value:
+                      dataSewerTotal.last_value
+                        ?.average ??
+                      0,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'sewer'
+                    ),
+                    } as MiniTileSelectorItem<GmSewerValue>
+                  : {
                     label:
                       textGm.mini_trend_tiles.positief_geteste_mensen
                         .menu_item_label,
@@ -246,7 +285,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     ),
-                  } as MiniTileSelectorItem<GmTestedOverallValue>,
+                    } as MiniTileSelectorItem<GmTestedOverallValue>
+                  ),
                   {
                     label:
                       textGm.mini_trend_tiles.vaccinatiegraad.menu_item_label,
@@ -344,9 +384,52 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-
-                {
+                { sewageOnActueelFeature.isEnabled ?
                   <MiniTrendTile
+                    title={textGm.mini_trend_tiles.sewer.title}
+                    text={
+                      <>
+                        <DataDrivenText
+                          data={data}
+                          content={[
+                            {
+                              type: 'metric',
+                              text: textGm.data_driven_texts.sewer
+                                .value,
+                              metricName: 'sewer',
+                              metricProperty: 'average',
+                            }
+                          ]}
+                        />
+                        <LinkWithIcon
+                          href={reverseRouter.gm.rioolwater(gmCode)}
+                          icon={<Chevron />}
+                          iconPlacement="right"
+                        >
+                          {textGm.mini_trend_tiles.sewer.read_more_link}
+                        </LinkWithIcon>
+                      </>
+                    }
+                    icon={<RioolwaterMonitoring />}
+                    values={dataSewerTotal.values}
+                    seriesConfig={[
+                      {
+                        type: 'split-area',
+                        metricProperty: 'average',
+                        label: commonTexts.common.daggemiddelde,
+                        splitPoints: averageSplitPoints,
+                      },
+                    ]}
+                    dataOptions={{
+                      valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
+                    }}
+                    accessibility={{ key: 'topical_sewer' }}
+                    warning={getWarning(
+                      content.elements.warning,
+                      'sewer'
+                    )}
+                  />
+                : <MiniTrendTile
                     title={
                       textGm.mini_trend_tiles.positief_geteste_mensen.title
                     }
@@ -413,7 +496,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     )}
                   />
                 }
-
                 {isDefined(filteredAgeGroup18Plus) && (
                   <MiniVaccinationCoverageTile
                     title={textGm.mini_trend_tiles.vaccinatiegraad.title}

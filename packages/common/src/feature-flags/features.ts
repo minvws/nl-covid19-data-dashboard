@@ -231,4 +231,8 @@ export const features: Feature[] = [
     metricName: 'vaccine_administered',
     metricProperties: ['novavax'],
   }, 
+  {
+    name: 'sewageOnActueel',
+    isEnabled: false,
+  },
 ];
