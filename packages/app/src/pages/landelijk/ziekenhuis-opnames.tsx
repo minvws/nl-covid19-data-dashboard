@@ -164,6 +164,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const { metadataTexts, textNl, textShared } = pageText;
 
+  const timeframeOptions = [
+    TimeframeOption.ALL,
+    TimeframeOption.ONE_WEEK,
+    TimeframeOption.THIRTY_DAYS,
+    TimeframeOption.THREE_MONTHS,
+    TimeframeOption.SIX_MONTHS,
+    TimeframeOption.LAST_YEAR,
+  ];
+
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -322,15 +331,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.nice,
             }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
@@ -381,15 +382,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.lnaz,
             }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
@@ -484,15 +477,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={
               commonTexts.hospital_admissions_per_age_group.chart_description
             }
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
           >

@@ -9,7 +9,6 @@ import { DAY_IN_SECONDS } from '../../time';
 
 export enum TimeframeOption {
   ONE_WEEK = '1week',
-  TWO_WEEKS = '2weeks',
   FIVE_WEEKS = '5weeks',
   THIRTY_DAYS = '30days',
   THREE_MONTHS = '3months',
@@ -22,8 +21,6 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
   switch (timeframe) {
     case TimeframeOption.ONE_WEEK:
       return 7;
-    case TimeframeOption.TWO_WEEKS:
-      return 2 * 7;
     case TimeframeOption.FIVE_WEEKS:
       return 5 * 7;
     case TimeframeOption.THIRTY_DAYS:

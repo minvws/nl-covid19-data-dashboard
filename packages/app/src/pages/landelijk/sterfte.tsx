@@ -99,6 +99,15 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const timeframeOptions = [
+    TimeframeOption.ALL,
+    TimeframeOption.ONE_WEEK,
+    TimeframeOption.THIRTY_DAYS,
+    TimeframeOption.THREE_MONTHS,
+    TimeframeOption.SIX_MONTHS,
+    TimeframeOption.LAST_YEAR,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -156,15 +165,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             title={textNl.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               textNl.section_deceased_rivm.line_chart_covid_daily_description

@@ -116,6 +116,15 @@ const ElderlyAtHomeNationalPage = (
     description: textNl.metadata.description,
   };
 
+  const timeframeOptions = [
+    TimeframeOption.ALL,
+    TimeframeOption.ONE_WEEK,
+    TimeframeOption.THIRTY_DAYS,
+    TimeframeOption.THREE_MONTHS,
+    TimeframeOption.SIX_MONTHS,
+    TimeframeOption.LAST_YEAR,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -179,15 +188,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             title={textNl.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={
@@ -312,15 +313,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             title={textNl.section_deceased.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={textNl.section_deceased.line_chart_daily_description}

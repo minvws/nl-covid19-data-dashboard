@@ -152,6 +152,15 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const timeframeOptions = [
+    TimeframeOption.ALL,
+    TimeframeOption.ONE_WEEK,
+    TimeframeOption.THIRTY_DAYS,
+    TimeframeOption.THREE_MONTHS,
+    TimeframeOption.SIX_MONTHS,
+    TimeframeOption.LAST_YEAR,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -330,15 +339,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.linechart_titel}
             description={textNl.linechart_description}
             metadata={{ source: textNl.bronnen.nice }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
@@ -388,15 +389,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.chart_bedbezetting.title}
             description={textNl.chart_bedbezetting.description}
             metadata={{ source: textNl.bronnen.lnaz }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
@@ -431,15 +424,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={textShared.admissions_per_age_group.chart_title}
             description={textShared.admissions_per_age_group.chart_description}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
           >

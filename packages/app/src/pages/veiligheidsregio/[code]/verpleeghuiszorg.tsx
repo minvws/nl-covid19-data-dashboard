@@ -115,6 +115,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     ),
   };
 
+  const timeframeOptions = [
+    TimeframeOption.ALL,
+    TimeframeOption.ONE_WEEK,
+    TimeframeOption.THIRTY_DAYS,
+    TimeframeOption.THREE_MONTHS,
+    TimeframeOption.SIX_MONTHS,
+    TimeframeOption.LAST_YEAR,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -172,15 +181,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
             title={textVr.positief_geteste_personen.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             description={textVr.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
@@ -295,15 +296,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.besmette_locaties.bronnen.rivm }}
             title={textVr.besmette_locaties.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             description={textVr.besmette_locaties.linechart_description}
           >
             {(timeframe) => (
@@ -366,15 +359,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.bronnen.rivm }}
             title={textVr.linechart_titel}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
             description={textVr.linechart_description}
           >
             {(timeframe) => (

@@ -143,7 +143,6 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={[
               TimeframeOption.ALL,
               TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
               TimeframeOption.THIRTY_DAYS,
               TimeframeOption.THREE_MONTHS,
               TimeframeOption.SIX_MONTHS,

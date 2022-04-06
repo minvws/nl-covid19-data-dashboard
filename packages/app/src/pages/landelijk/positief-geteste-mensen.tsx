@@ -136,6 +136,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const timeframeOptions = [
+    TimeframeOption.ALL,
+    TimeframeOption.ONE_WEEK,
+    TimeframeOption.THIRTY_DAYS,
+    TimeframeOption.THREE_MONTHS,
+    TimeframeOption.SIX_MONTHS,
+    TimeframeOption.LAST_YEAR,
+  ];
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -242,15 +251,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.rivm,
             }}
-            timeframeOptions={[
-              TimeframeOption.ALL,
-              TimeframeOption.ONE_WEEK,
-              TimeframeOption.TWO_WEEKS,
-              TimeframeOption.THIRTY_DAYS,
-              TimeframeOption.THREE_MONTHS,
-              TimeframeOption.SIX_MONTHS,
-              TimeframeOption.LAST_YEAR,
-            ]}
+            timeframeOptions={timeframeOptions}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -383,13 +384,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <ChartTile
               title={textShared.infected_per_age_group.title}
               description={textShared.infected_per_age_group.description}
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.TWO_WEEKS,
-                TimeframeOption.THIRTY_DAYS,
-                TimeframeOption.THREE_MONTHS,
-                TimeframeOption.LAST_YEAR,
-              ]}
+              timeframeOptions={timeframeOptions}
               metadata={{
                 source: textNl.bronnen.rivm,
               }}
@@ -505,13 +500,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.TWO_WEEKS,
-                TimeframeOption.THIRTY_DAYS,
-                TimeframeOption.THREE_MONTHS,
-                TimeframeOption.LAST_YEAR,
-              ]}
+              timeframeOptions={timeframeOptions}
               title={textNl.ggd.linechart_totaltests_titel}
               description={textNl.ggd.linechart_totaltests_toelichting}
               metadata={{
