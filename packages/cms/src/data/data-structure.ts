@@ -74,7 +74,7 @@ export const dataStructure = {
       "birthyear_range",
       "age_group_total",
     ],
-    booster_coverage: ["percentage"],
+    booster_coverage: ["age_group", "percentage"],
     third_shot_administered: ["administered_total"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
@@ -266,6 +266,13 @@ export const dataStructure = {
       "percentage_25_39",
       "percentage_16_24",
     ],
+    behavior_annotations: [
+      "behavior_indicator",
+      "message_title_nl",
+      "message_title_en",
+      "message_desc_nl",
+      "message_desc_en",
+    ],
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
     deceased_rivm_per_age_group: [
       "age_group_range",
@@ -317,6 +324,7 @@ export const dataStructure = {
       "cure_vac",
       "janssen",
       "sanofi",
+      "novavax",
       "total",
     ],
     vaccine_administered_estimate: [
