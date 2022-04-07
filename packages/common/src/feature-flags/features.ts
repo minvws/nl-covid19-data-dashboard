@@ -220,7 +220,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlBehaviorAnnotations',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'behavior_annotations',
   },
