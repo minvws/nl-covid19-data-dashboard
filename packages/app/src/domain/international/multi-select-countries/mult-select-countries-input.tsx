@@ -9,7 +9,7 @@ import { useIntl } from '~/intl';
 import { useSearchContext } from './context';
 
 export function MultiSelectCountriesInput() {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { id, inputProps, setTerm } = useSearchContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,14 +35,14 @@ export function MultiSelectCountriesInput() {
             },
           })}
         >
-          <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
+          <VisuallyHidden>{commonTexts.select_countries.clear}</VisuallyHidden>
           <Close />
         </IconContainer>
       )}
 
       <VisuallyHidden>
         <label htmlFor={`${id}-input`}>
-          {siteText.select_countries.placeholder}
+          {commonTexts.select_countries.placeholder}
         </label>
       </VisuallyHidden>
 
@@ -50,7 +50,7 @@ export function MultiSelectCountriesInput() {
         ref={inputRef}
         type="search"
         id={`${id}-input`}
-        placeholder={siteText.select_countries.placeholder}
+        placeholder={commonTexts.select_countries.placeholder}
         autoComplete="off"
         {...inputProps}
       />

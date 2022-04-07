@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -46,6 +46,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.elderlyAtHomePage.nl,
       }),
       locale
@@ -104,13 +105,13 @@ const ElderlyAtHomeNationalPage = (
     7
   );
 
-  const { siteText, formatNumber } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts, formatNumber } = useIntl();
+  const { metadataTexts, textNl } = pageText;
 
   const reverseRouter = useReverseRouter();
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -120,9 +121,9 @@ const ElderlyAtHomeNationalPage = (
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+            category={commonTexts.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={
-              siteText.sidebar.metrics.elderly_at_home.title
+              commonTexts.sidebar.metrics.elderly_at_home.title
             }
             title={textNl.section_positive_tested.title}
             icon={<Elderly />}
@@ -178,7 +179,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={
@@ -221,7 +222,7 @@ const ElderlyAtHomeNationalPage = (
                       label:
                         textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'positive_tested_daily_moving_average',
                       ],
@@ -303,7 +304,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={textNl.section_deceased.line_chart_daily_description}
@@ -343,7 +344,7 @@ const ElderlyAtHomeNationalPage = (
                       label:
                         textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

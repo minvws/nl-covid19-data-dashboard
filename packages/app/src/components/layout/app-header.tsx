@@ -9,7 +9,7 @@ import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
 
 export function AppHeader() {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
@@ -31,7 +31,7 @@ export function AppHeader() {
           <Box py={[2, 2, 2, 3]}>
             <Link href="/" passHref>
               <Anchor color="white" variant="h3">
-                {siteText.header.title}
+                {commonTexts.header.title}
               </Anchor>
             </Link>
           </Box>

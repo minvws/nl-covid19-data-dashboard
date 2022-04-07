@@ -19,18 +19,18 @@ import {
 import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import { SiteText } from '~/locale';
 interface WideCoverageTable {
+  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
 }
 
-export function WideCoverageTable({ values }: WideCoverageTable) {
-  const { siteText, formatPercentage } = useIntl();
+export function WideCoverageTable({ values, text }: WideCoverageTable) {
+  const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.pages.vaccinationsPage.nl.vaccination_coverage;
-  const { templates } = siteText.pages.vaccinationsPage.nl.vaccination_coverage;
 
   return (
     <Box overflow="auto">
@@ -96,16 +96,16 @@ export function WideCoverageTable({ values }: WideCoverageTable) {
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
-                    templates.agegroup
+                    commonTexts.common.agegroup
                   )}
                   ageGroupTotal={
                     'age_group_total' in item ? item.age_group_total : undefined
                   }
                   birthyear_range={formatBirthyearRangeString(
                     item.birthyear_range,
-                    templates.birthyears
+                    commonTexts.common.birthyears
                   )}
-                  text={templates.agegroup.total_people}
+                  text={commonTexts.common.agegroup.total_people}
                 />
               </Cell>
               <Cell>

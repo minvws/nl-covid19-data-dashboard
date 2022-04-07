@@ -1,5 +1,5 @@
 /**
- * This script exports LokalizeText documents from Sanity as a locale JSON file,
+ * This script imports LokalizeText documents from Sanity as a locale JSON file,
  * and strips any keys that have been marked by the key-mutations.csv file as a
  * result of text changes via the CLI.
  */
@@ -31,7 +31,7 @@ export const localeReferenceDirectory = path.resolve(
   '.lokalize-reference'
 );
 
-export async function exportLokalizeTexts({
+export async function importLokalizeTexts({
   dataset,
   appendDocumentIdToKey = false,
 }: {

@@ -171,6 +171,7 @@ export const colors = {
       cure_vac: multiseries.magenta,
       janssen: multiseries.orange,
       sanofi: multiseries.cyan_dark,
+      novavax: multiseries.magenta_dark,
 
       // @TODO remove when data is updated to new name
       pfizer: multiseries.cyan,

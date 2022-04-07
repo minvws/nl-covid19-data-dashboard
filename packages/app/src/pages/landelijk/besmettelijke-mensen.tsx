@@ -31,6 +31,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.infectiousPeoplePage.nl,
       }),
       locale
@@ -55,13 +56,13 @@ export const getStaticProps = createGetStaticProps(
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, lastGenerated, content } = props;
-  const { siteText } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts } = useIntl();
+  const { metadataTexts, textNl } = pageText;
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -71,9 +72,9 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.archief}
+            category={commonTexts.nationaal_layout.headings.archief}
             screenReaderCategory={
-              siteText.sidebar.metrics.infectious_people.title
+              commonTexts.sidebar.metrics.infectious_people.title
             }
             title={textNl.title}
             icon={<Ziektegolf />}

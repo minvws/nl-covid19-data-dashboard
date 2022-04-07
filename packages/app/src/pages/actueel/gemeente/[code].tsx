@@ -4,6 +4,7 @@ import {
   GmCollectionVaccineCoveragePerAgeGroup,
   GmHospitalNiceValue,
   GmTestedOverallValue,
+  GmSewerValue,
   GmVaccineCoveragePerAgeGroupValue,
   TimeframeOption,
   WEEK_IN_SECONDS,
@@ -13,30 +14,28 @@ import {
   Test,
   Vaccinaties,
   Ziekenhuis,
+  RioolwaterMonitoring,
 } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { LinkWithIcon } from '~/components/link-with-icon';
-import { Markdown } from '~/components/markdown';
-import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
-import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
-import { Search } from '~/domain/topical/components/search';
+import { LinkWithIcon, Markdown, MaxWidth } from '~/components';
+import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
 import {
+  VaccinationCoverageChoropleth,
+  ArticleList,
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
-} from '~/domain/topical/mini-tile-selector-layout';
-import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
-import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
+  MiniTrendTile,
+  MiniVaccinationCoverageTile,
+  TopicalSectionHeader,
+} from '~/domain/topical';
+import { Search } from '~/domain/topical/components/search';
+import { Layout } from '~/domain/layout';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
@@ -54,15 +53,18 @@ import {
   selectGmData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
-import { assert } from '~/utils/assert';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { trimNullValues } from '~/utils/trim-null-values';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  assert,
+  useReverseRouter,
+  trimNullValues,
+  replaceVariablesInText,
+  countTrailingNullValues,
+  cutValuesFromTimeframe,
+  getBoundaryDateStartUnix,
+  getVrForMunicipalityCode,
+  replaceComponentsInText,
+  getAverageSplitPoints,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -70,8 +72,11 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        hospitalText: siteText.pages.hospitalPage.nl,
+        positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textGm: siteText.pages.topicalPage.gm,
         textShared: siteText.pages.topicalPage.shared,
+        sewerText: siteText.pages.sewerPage.shared,
       }),
       locale
     ),
@@ -85,17 +90,33 @@ export const getStaticProps = createGetStaticProps(
       'tested_overall'
     )(context);
 
-    data.selectedGmData.hospital_nice.values = cutValuesFromTimeframe(
-      data.selectedGmData.hospital_nice.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    data.selectedGmData.tested_overall.values = cutValuesFromTimeframe(
-      data.selectedGmData.tested_overall.values,
-      TimeframeOption.FIVE_WEEKS
-    );
-
-    return data;
+    return {
+      ...data,
+      selectedGmData: {
+        ...data.selectedGmData,
+        hospital_nice: {
+          ...data.selectedGmData.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        tested_overall: {
+          ...data.selectedGmData.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        },
+        sewer: {
+          ...data.selectedGmData.sewer,
+          values: cutValuesFromTimeframe(
+            data.selectedGmData.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          )
+        }
+      }
+    }
   },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
@@ -139,9 +160,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const { siteText, ...formatters } = useIntl();
-  const { textGm, textShared } = pageText;
-  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
+  const { commonTexts, ...formatters } = useIntl();
+  const { hospitalText, positiveTestsText, textGm, sewerText, textShared } = pageText;
 
   const gmCode = router.query.code as string;
 
@@ -153,6 +173,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const dataHospitalIntake = data.hospital_nice;
+  const dataSewerTotal = data.sewer;
 
   const filteredAgeGroup18Plus =
     data.vaccine_coverage_per_age_group.values.find(
@@ -162,6 +183,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     filteredAgeGroup18Plus,
     true
   );
+
+  const sewageOnActueelFeature = useFeature('sewageOnActueel');
 
   const internationalFeature = useFeature('inPositiveTestsPage');
 
@@ -189,6 +212,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
 
+  const averageSplitPoints = getAverageSplitPoints(sewerText.split_labels);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
@@ -202,9 +227,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   municipalityName: municipalityName,
                 })}
                 headingLevel={1}
+                text={textShared}
               />
 
               <MiniTileSelectorLayout
+                text={textShared}
                 link={{
                   text: replaceVariablesInText(textGm.title_link, {
                     municipalityName: municipalityName,
@@ -231,7 +258,21 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<GmHospitalNiceValue>,
-                  {
+                  (sewageOnActueelFeature.isEnabled ? {
+                    label: textGm.mini_trend_tiles.sewer.menu_item_label,
+                    data: dataSewerTotal.values.filter(x => typeof x.average === 'number'),
+                    dataProperty:
+                      'average',
+                    value:
+                      dataSewerTotal.last_value
+                        ?.average ??
+                      0,
+                    warning: getWarning(
+                      content.elements.warning,
+                      'sewer'
+                    ),
+                    } as MiniTileSelectorItem<GmSewerValue>
+                  : {
                     label:
                       textGm.mini_trend_tiles.positief_geteste_mensen
                         .menu_item_label,
@@ -244,7 +285,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       content.elements.warning,
                       'tested_overall'
                     ),
-                  } as MiniTileSelectorItem<GmTestedOverallValue>,
+                    } as MiniTileSelectorItem<GmTestedOverallValue>
+                  ),
                   {
                     label:
                       textGm.mini_trend_tiles.vaccinatiegraad.menu_item_label,
@@ -313,17 +355,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'line',
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_moving_average,
+                      label: hospitalText.linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_trend_label,
+                      label: hospitalText.linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -333,7 +371,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeHospital,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -346,9 +384,52 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-
-                {
+                { sewageOnActueelFeature.isEnabled ?
                   <MiniTrendTile
+                    title={textGm.mini_trend_tiles.sewer.title}
+                    text={
+                      <>
+                        <DataDrivenText
+                          data={data}
+                          content={[
+                            {
+                              type: 'metric',
+                              text: textGm.data_driven_texts.sewer
+                                .value,
+                              metricName: 'sewer',
+                              metricProperty: 'average',
+                            }
+                          ]}
+                        />
+                        <LinkWithIcon
+                          href={reverseRouter.gm.rioolwater(gmCode)}
+                          icon={<Chevron />}
+                          iconPlacement="right"
+                        >
+                          {textGm.mini_trend_tiles.sewer.read_more_link}
+                        </LinkWithIcon>
+                      </>
+                    }
+                    icon={<RioolwaterMonitoring />}
+                    values={dataSewerTotal.values}
+                    seriesConfig={[
+                      {
+                        type: 'split-area',
+                        metricProperty: 'average',
+                        label: commonTexts.common.daggemiddelde,
+                        splitPoints: averageSplitPoints,
+                      },
+                    ]}
+                    dataOptions={{
+                      valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
+                    }}
+                    accessibility={{ key: 'topical_sewer' }}
+                    warning={getWarning(
+                      content.elements.warning,
+                      'sewer'
+                    )}
+                  />
+                : <MiniTrendTile
                     title={
                       textGm.mini_trend_tiles.positief_geteste_mensen.title
                     }
@@ -415,7 +496,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     )}
                   />
                 }
-
                 {isDefined(filteredAgeGroup18Plus) && (
                   <MiniVaccinationCoverageTile
                     title={textGm.mini_trend_tiles.vaccinatiegraad.title}
@@ -476,6 +556,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             <VaccinationCoverageChoropleth
+              text={textShared}
               title={replaceVariablesInText(
                 textShared.secties.vaccination_coverage_choropleth.title.gm,
                 { municipalityName: municipalityName }
@@ -548,10 +629,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               description={textShared.secties.meer_lezen.omschrijving}
               link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
+              text={textShared}
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} />
+              <ArticleList articles={content.articles} text={textShared} />
             )}
           </MaxWidth>
         </Box>

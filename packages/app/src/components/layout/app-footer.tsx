@@ -15,7 +15,7 @@ import { Anchor, Heading } from '../typography';
 
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
-  const { siteText: text } = useIntl();
+  const { commonTexts: text } = useIntl();
   const internationalFeature = useFeature('inHomePage');
   const riskLevelFeature = useFeature('riskLevel');
 

@@ -6,6 +6,7 @@ import { ContentBlock } from '~/components/cms/content-block';
 import { Heading, InlineText } from '~/components/typography';
 import { ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
@@ -15,6 +16,7 @@ import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
 interface ArticleDetailProps {
   article: Article;
+  text: SiteText['pages']['topicalPage']['shared'];
 }
 
 const imageSizes = [
@@ -22,8 +24,8 @@ const imageSizes = [
   [700, 636],
 ];
 
-export function ArticleDetail({ article }: ArticleDetailProps) {
-  const { siteText } = useIntl();
+export function ArticleDetail({ article, text }: ArticleDetailProps) {
+  const { commonTexts } = useIntl();
 
   article.intro = mergeAdjacentKpiBlocks(article.intro);
   article.content = mergeAdjacentKpiBlocks(article.content);
@@ -32,7 +34,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon href="/artikelen" icon={<ArrowIconLeft />}>
-          {siteText.article_detail.back_link.text}
+          {commonTexts.article_detail.back_link.text}
         </LinkWithIcon>
 
         <Box spacing={2}>
@@ -72,7 +74,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         <ContentBlock>
           <Box pb={2} pt={4}>
             <InlineText color="annotation">
-              {siteText.pages.topicalPage.shared.secties.artikelen.tags}
+              {text.secties.artikelen.tags}
             </InlineText>
           </Box>
           <Box
@@ -97,8 +99,9 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
                 >
                   <TagAnchor>
                     {
-                      siteText.pages.topicalPage.shared.secties.artikelen
-                        .categorie_filters[item as ArticleCategoryType]
+                      text.secties.artikelen.categorie_filters[
+                        item as ArticleCategoryType
+                      ]
                     }
                   </TagAnchor>
                 </Link>

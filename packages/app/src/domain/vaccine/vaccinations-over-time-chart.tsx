@@ -21,6 +21,7 @@ import {
   StackedAreaSeriesDefinition,
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
@@ -38,9 +39,16 @@ interface VaccinationsOverTimeChartProps {
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
-const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
+const vaccines = [
+  'pfizer',
+  'moderna',
+  'astra_zeneca',
+  'janssen',
+  'novavax',
+] as const;
 vaccines.forEach((x) =>
   assert(
     colors.data.vaccines[x],
@@ -56,9 +64,9 @@ export function VaccinationsOverTimeChart(
     deliveryAndAdministrationData,
     activeChart,
     timelineEvents,
+    text,
   } = props;
-  const { siteText, formatNumber } = useIntl();
-  const text = siteText.pages.vaccinationsPage.nl;
+  const { commonTexts, formatNumber } = useIntl();
   const breakpoints = useBreakpoints(true);
 
   const firstValue = first(deliveryAndAdministrationData.values);
@@ -158,7 +166,7 @@ export function VaccinationsOverTimeChart(
         key: 'vaccine_delivery_and_administrations_area_chart',
       },
       dataOptions: {
-        valueAnnotation: siteText.waarde_annotaties.x_miljoen,
+        valueAnnotation: commonTexts.waarde_annotaties.x_miljoen,
         forcedMaximumValue: (seriesMax: number) => seriesMax * 1.1,
         timelineEvents: timelineEvents.deliveryAndAdministration,
       } as DataOptions,
@@ -201,7 +209,7 @@ export function VaccinationsOverTimeChart(
     >;
   }, [
     deliveryAndAdministrationData,
-    siteText.waarde_annotaties.x_miljoen,
+    commonTexts.waarde_annotaties.x_miljoen,
     text.data.vaccination_chart.legend_label,
     text.data.vaccination_chart.doses_administered,
     breakpoints.md,
@@ -246,16 +254,16 @@ interface VaccinationChartControlsProps {
 
 export function VaccinationChartControls(props: VaccinationChartControlsProps) {
   const { onChange, initialChart } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const items: RadioGroupItem<ActiveVaccinationChart>[] = [
     {
-      label: siteText.charts.vaccination_coverage_controls.coverage,
+      label: commonTexts.charts.vaccination_coverage_controls.coverage,
       value: 'coverage',
     },
     {
       label:
-        siteText.charts.vaccination_coverage_controls
+        commonTexts.charts.vaccination_coverage_controls
           .delivery_and_administration,
       value: 'deliveryAndAdministration',
     },

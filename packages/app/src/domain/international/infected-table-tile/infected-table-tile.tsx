@@ -8,7 +8,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { SearchInput } from '~/components/search-input';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { NarrowInfectedTable } from './components/narrow-infected-table';
 import { WideInfectedTable } from './components/wide-infected-table';
@@ -20,6 +20,7 @@ interface InfectedTableTileProps {
   data: InCollectionTestedOverall[];
   countryNames: Record<string, string>;
   metadata: MetadataProps;
+  text: SiteText['pages']['in_positiveTestsPage']['shared'];
 }
 
 export type FilterArrayType = {
@@ -31,10 +32,8 @@ export function InfectedTableTile({
   data,
   countryNames,
   metadata,
+  text,
 }: InfectedTableTileProps) {
-  const { siteText } = useIntl();
-  const text = siteText.pages.in_positiveTestsPage.shared.land_tabel;
-
   const [inputValue, setInputValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [matchingCountries, setMatchingCountries] = useState(
@@ -52,7 +51,7 @@ export function InfectedTableTile({
     ) as SortIdentifier[];
 
     return sortIdentifiers.map((id) => {
-      const label = text.sort_option[id];
+      const label = text.land_tabel.sort_option[id];
       return {
         label: label,
         value: id,
@@ -91,7 +90,10 @@ export function InfectedTableTile({
   }, [filterArray, inputValue, countryNames]);
 
   return (
-    <ChartTile title={text.title} description={text.description}>
+    <ChartTile
+      title={text.land_tabel.title}
+      description={text.land_tabel.description}
+    >
       <Box spacing={3}>
         <Box
           display="flex"
@@ -102,7 +104,7 @@ export function InfectedTableTile({
           <SearchInput
             value={inputValue}
             setValue={setInputValue}
-            placeholderText={text.search.placeholder}
+            placeholderText={text.land_tabel.search.placeholder}
           />
 
           <Box
@@ -110,9 +112,11 @@ export function InfectedTableTile({
             alignItems={{ lg: 'center' }}
             flexDirection={{ _: 'column', lg: 'row' }}
           >
-            <label css={css({ pr: 2, fontSize: 1 })}>{text.sorteer_op}</label>
+            <label css={css({ pr: 2, fontSize: 1 })}>
+              {text.land_tabel.sorteer_op}
+            </label>
             <RichContentSelect
-              label={text.sorteer_op}
+              label={text.land_tabel.sorteer_op}
               visuallyHiddenLabel
               initialValue={sortOption}
               options={sortOptions}
@@ -128,6 +132,7 @@ export function InfectedTableTile({
             matchingCountries={matchingCountries}
             countryNames={countryNames}
             inputValue={inputValue}
+            text={text}
           />
         ) : (
           <NarrowInfectedTable
@@ -136,13 +141,16 @@ export function InfectedTableTile({
             matchingCountries={matchingCountries}
             countryNames={countryNames}
             inputValue={inputValue}
+            text={text}
           />
         )}
 
         {matchingCountries.length > data.length && (
           <Box display="flex" pl={{ _: 2, sm: 3 }}>
             <ExpandButton onClick={() => setIsExpanded(!isExpanded)}>
-              {isExpanded ? text.toon_minder : text.toon_meer}
+              {isExpanded
+                ? text.land_tabel.toon_minder
+                : text.land_tabel.toon_meer}
             </ExpandButton>
           </Box>
         )}

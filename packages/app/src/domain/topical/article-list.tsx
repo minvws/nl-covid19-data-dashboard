@@ -2,12 +2,14 @@ import css from '@styled-system/css';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ContentTeaser } from '~/components/content-teaser';
+import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 interface ArticleListProps {
   articles: ArticleSummary[];
+  text: SiteText['pages']['topicalPage']['shared'];
 }
 
-export function ArticleList({ articles }: ArticleListProps) {
+export function ArticleList({ articles, text }: ArticleListProps) {
   return (
     <Box
       display="grid"
@@ -27,6 +29,7 @@ export function ArticleList({ articles }: ArticleListProps) {
           category={item.category}
           variant="small"
           isArticle
+          text={text}
         />
       ))}
     </Box>

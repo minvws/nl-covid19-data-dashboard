@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -88,7 +88,7 @@ const ElderlyAtHomeRegionalPage = (
   } = props;
   const { elderly_at_home, difference } = data;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { textVr } = pageText;
 
   const elderlyAtHomeUnderReportedRange = getBoundaryDateStartUnix(
@@ -102,7 +102,7 @@ const ElderlyAtHomeRegionalPage = (
   );
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegion: vrName,
     }),
@@ -117,10 +117,10 @@ const ElderlyAtHomeRegionalPage = (
         <TileList>
           <PageInformationBlock
             category={
-              siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
+              commonTexts.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={
-              siteText.sidebar.metrics.elderly_at_home.title
+              commonTexts.sidebar.metrics.elderly_at_home.title
             }
             title={replaceVariablesInText(
               textVr.section_positive_tested.title,
@@ -186,7 +186,7 @@ const ElderlyAtHomeRegionalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textVr.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={
@@ -229,7 +229,7 @@ const ElderlyAtHomeRegionalPage = (
                       label:
                         textVr.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'positive_tested_daily_moving_average',
                       ],
@@ -285,7 +285,7 @@ const ElderlyAtHomeRegionalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textVr.section_deceased.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={textVr.section_deceased.line_chart_daily_description}
@@ -325,7 +325,7 @@ const ElderlyAtHomeRegionalPage = (
                       label:
                         textVr.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

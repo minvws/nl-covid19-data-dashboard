@@ -42,11 +42,11 @@ export function AdmissionsPerAgeGroup({
   accessibility,
   timelineEvents,
 }: AdmissionsPerAgeGroup) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
 
-  const text = siteText.admissions_per_age_group_chart;
+  const text = commonTexts.admissions_per_age_group_chart;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
   const alwaysEnabled = ['admissions_overall_per_million'];
@@ -59,9 +59,12 @@ export function AdmissionsPerAgeGroup({
           ? text.legend[baseAgeGroup.metricProperty]
           : baseAgeGroup.metricProperty;
 
-      const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
-        age: label,
-      });
+      const ariaLabel = replaceVariablesInText(
+        commonTexts.aria_labels.age_old,
+        {
+          age: label,
+        }
+      );
 
       return {
         ...baseAgeGroup,

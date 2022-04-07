@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   Locatie,
@@ -50,6 +50,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.nursingHomePage.nl,
         textShared: siteText.pages.nursingHomePage.shared,
       }),
@@ -102,15 +103,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     7
   );
 
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } = pageText;
   const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
     textNl.verpleeghuis_positief_geteste_personen;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: infectedLocationsText.metadata.title,
     description: infectedLocationsText.metadata.description,
   };
@@ -120,9 +121,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+            category={commonTexts.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={
-              siteText.sidebar.metrics.nursing_home_care.title
+              commonTexts.sidebar.metrics.nursing_home_care.title
             }
             title={positiveTestedPeopleText.titel}
             icon={<Verpleeghuiszorg />}
@@ -162,7 +163,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             description={positiveTestedPeopleText.linechart_description}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -306,7 +307,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
@@ -366,7 +367,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textNl.bronnen.rivm }}
             title={textNl.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={textNl.linechart_description}
           >
             {(timeframe) => (

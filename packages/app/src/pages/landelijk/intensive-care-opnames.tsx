@@ -5,25 +5,27 @@ import {
   NlHospitalVaccineIncidencePerAgeGroupValue,
   NlIntensiveCareVaccinationStatusValue,
   TimeframeOption,
+  TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
-import type { AgeDemographicProps } from '~/components/age-demographic';
-import { ChartTile } from '~/components/chart-tile';
-import { KpiTile } from '~/components/kpi-tile';
-import { Markdown } from '~/components/markdown';
-import { PageBarScale } from '~/components/page-barscale';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
-import type { PieChartProps } from '~/components/pie-chart';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
+import {
+  AgeDemographicProps,
+  PieChartProps,
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  PageKpi,
+  ChartTile,
+  KpiTile,
+  Markdown,
+  PageInformationBlock,
+  PageBarScale,
+} from '~/components';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital';
+import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getBarScaleConfig } from '~/metric-config';
@@ -49,9 +51,11 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import type { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+} from '~/utils';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -67,6 +71,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.intensiveCarePage.nl,
         textShared: siteText.pages.intensiveCarePage.shared,
       }),
@@ -110,11 +115,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText, formatPercentage, formatDateFromSeconds, formatNumber } =
+  const { commonTexts, formatPercentage, formatDateFromSeconds, formatNumber } =
     useIntl();
 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
-  const { textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } = pageText;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
@@ -143,7 +148,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -153,9 +158,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.ziekenhuizen}
+            category={commonTexts.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={
-              siteText.sidebar.metrics.intensive_care_admissions.title
+              commonTexts.sidebar.metrics.intensive_care_admissions.title
             }
             title={textNl.titel}
             icon={<Arts />}
@@ -326,8 +331,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.linechart_titel}
             description={textNl.linechart_description}
             metadata={{ source: textNl.bronnen.nice }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -342,7 +347,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: intakeUnderReportedRange,
                       end: Infinity,
                       label: textNl.linechart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
                       ],
@@ -376,8 +381,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.chart_bedbezetting.title}
             description={textNl.chart_bedbezetting.description}
             metadata={{ source: textNl.bronnen.lnaz }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -392,7 +397,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: data.intensive_care_lcps.values[0].date_unix,
                       end: new Date('1 June 2020').getTime() / 1000,
                       label: textNl.chart_bedbezetting.legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                     },
                   ],
                 }}
@@ -411,8 +416,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={textShared.admissions_per_age_group.chart_title}
             description={textShared.admissions_per_age_group.chart_description}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
           >
             {(timeframe) => (

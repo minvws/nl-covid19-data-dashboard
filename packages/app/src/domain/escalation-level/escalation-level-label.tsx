@@ -19,7 +19,7 @@ export function EscalationLevelLabel({
   validFrom,
   lastCalculated,
 }: EscalationLevelLabelProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const escalationLevel = useEscalationLevel(level);
 
   // We need to know if the two dates are on the same day, so reset hour to
@@ -42,7 +42,7 @@ export function EscalationLevelLabel({
       >
         <EscalationLevelIcon color={escalationLevel.color}>
           <VisuallyHidden>
-            {siteText.common.risiconiveau_singular}{' '}
+            {commonTexts.common.risiconiveau_singular}{' '}
           </VisuallyHidden>
           {level}
         </EscalationLevelIcon>
@@ -60,8 +60,8 @@ export function EscalationLevelLabel({
         <InlineText variant="body2" color="body">
           {replaceVariablesInText(
             isSameDate
-              ? siteText.national_escalation_levels.valid_from
-              : siteText.national_escalation_levels
+              ? commonTexts.national_escalation_levels.valid_from
+              : commonTexts.national_escalation_levels
                   .valid_from_and_last_calculated,
             {
               date: formatDateFromSeconds(validFrom, 'medium'),

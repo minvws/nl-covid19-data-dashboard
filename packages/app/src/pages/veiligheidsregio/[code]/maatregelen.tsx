@@ -71,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, vrName, lastGenerated, selectedNlData } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { textVr } = pageText;
   type VRCode = keyof typeof textVr.urls;
 
@@ -83,7 +83,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const regioUrl = textVr.urls[code];
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),

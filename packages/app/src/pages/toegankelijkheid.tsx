@@ -48,12 +48,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { content, lastGenerated } = props;
 
   return (
     <Layout
-      {...siteText.toegankelijkheid_metadata}
+      {...commonTexts.toegankelijkheid_metadata}
       lastGenerated={lastGenerated}
     >
       <Head>

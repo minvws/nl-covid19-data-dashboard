@@ -12,7 +12,7 @@ import {
 } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
 import { VariantChartValue } from '~/domain/variants/static-props';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useList } from '~/utils/use-list';
 
@@ -20,16 +20,15 @@ interface VariantsOverTimeProps {
   values: VariantChartValue[];
   seriesConfig: LineSeriesDefinition<VariantChartValue>[];
   timeframe: TimeframeOption;
+  text: SiteText['pages']['variantsPage']['nl']['varianten_over_tijd'];
 }
 
 export function VariantsOverTime({
   values,
   seriesConfig,
   timeframe,
+  text,
 }: VariantsOverTimeProps) {
-  const { siteText } = useIntl();
-  const variantsPageText = siteText.pages.variantsPage.nl.varianten_over_tijd;
-
   const { list, toggle, clear } = useList<string>();
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
@@ -37,7 +36,7 @@ export function VariantsOverTime({
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
     color: colors.data.underReported,
-    label: variantsPageText.legend_niet_compleet_label,
+    label: text.legend_niet_compleet_label,
   };
 
   const alwaysEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
@@ -61,7 +60,7 @@ export function VariantsOverTime({
         {
           type: 'invisible',
           metricProperty: 'sample_size',
-          label: variantsPageText.tooltip_labels.totaal_monsters,
+          label: text.tooltip_labels.totaal_monsters,
           isPercentage: false,
         },
       ] as SeriesConfig<VariantChartValue>,
@@ -69,7 +68,7 @@ export function VariantsOverTime({
       seriesConfig,
       alwaysEnabled,
       compareList,
-      variantsPageText.tooltip_labels.totaal_monsters,
+      text.tooltip_labels.totaal_monsters,
     ]
   );
 
@@ -88,7 +87,7 @@ export function VariantsOverTime({
   return (
     <>
       <InteractiveLegend
-        helpText={variantsPageText.legend_help_tekst}
+        helpText={text.legend_help_tekst}
         selectOptions={seriesConfig}
         selection={list}
         onToggleItem={toggle}
@@ -96,7 +95,7 @@ export function VariantsOverTime({
       />
       <Spacer mb={2} />
       <InlineText variant="label2" fontWeight="bold" color="data.axisLabels">
-        {variantsPageText.percentage_gevonden_varianten}
+        {text.percentage_gevonden_varianten}
       </InlineText>
       <TimeSeriesChart
         accessibility={{ key: 'variants_over_time_chart' }}
@@ -111,8 +110,8 @@ export function VariantsOverTime({
             {
               start: underReportedDateStart,
               end: Infinity,
-              label: variantsPageText.legend_niet_compleet_label,
-              shortLabel: variantsPageText.tooltip_labels.niet_compleet,
+              label: text.legend_niet_compleet_label,
+              shortLabel: text.tooltip_labels.niet_compleet,
             },
           ],
         }}

@@ -11,13 +11,13 @@ interface VrComboBoxProps {
 export function VrComboBox(props: VrComboBoxProps) {
   const { getLink } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
   return (
     <ComboBox
-      placeholder={siteText.common.zoekveld_placeholder_regio}
+      placeholder={commonTexts.common.zoekveld_placeholder_regio}
       options={vrData}
       onSelect={(region) =>
         router.push(

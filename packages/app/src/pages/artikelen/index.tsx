@@ -15,6 +15,7 @@ import {
   ArticleCategoryType,
 } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -22,11 +23,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textShared: siteText.pages.topicalPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>((context) => {
     const { locale } = context;
@@ -45,12 +54,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { pageText, content, lastGenerated } = props;
+  const { commonTexts } = useIntl();
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  const textShared = siteText.pages.topicalPage.shared;
+  const { textShared } = pageText;
 
   const articleCategories = useMemo(() => {
     /**
@@ -108,7 +117,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   ) as ArticleCategoryType;
 
   return (
-    <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
+    <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
       <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
         <MaxWidth px={{ _: 3, lg: 4 }}>
           <Box pb={2}>

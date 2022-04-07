@@ -4,7 +4,7 @@ import prompts from 'prompts';
 import { getClient } from '../client';
 import {
   appendTextMutation,
-  exportLokalizeTexts,
+  importLokalizeTexts,
   getLocalMutations,
   readReferenceTexts,
 } from './logic';
@@ -21,7 +21,7 @@ import { createTextDocument } from './logic/create-text-document';
 
   assert(
     referenceTexts,
-    `Failed to read reference texts. Please run lokalize:export first.`
+    `Failed to read reference texts. Please run lokalize:import first.`
   );
 
   const mutations = await getLocalMutations(referenceTexts);
@@ -110,7 +110,7 @@ import { createTextDocument } from './logic/create-text-document';
 
   console.log('Updating text export...');
 
-  await exportLokalizeTexts({
+  await importLokalizeTexts({
     dataset: 'development',
     appendDocumentIdToKey: true,
   });

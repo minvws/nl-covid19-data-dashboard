@@ -18,7 +18,7 @@ interface WideCoverageTable {
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
-  const { formatPercentage } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
 
   return (
     <Box overflow="auto">
@@ -84,21 +84,23 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
-                    text.templates.agegroup
+                    commonTexts.common.agegroup
                   )}
                   ageGroupTotal={
                     'age_group_total' in item ? item.age_group_total : undefined
                   }
                   birthyear_range={formatBirthyearRangeString(
                     item.birthyear_range,
-                    text.templates.birthyears
+                    commonTexts.common.birthyears
                   )}
-                  text={text.templates.agegroup.total_people}
+                  text={commonTexts.common.agegroup.total_people}
                 />
               </Cell>
               <Cell>
                 <WidePercentage
-                  value={`${formatPercentage(item.received_booster_percentage)}%`}
+                  value={`${formatPercentage(
+                    item.received_booster_percentage
+                  )}%`}
                   color={COLOR_FULLY_BOOSTERED}
                   justifyContent="flex-end"
                 />

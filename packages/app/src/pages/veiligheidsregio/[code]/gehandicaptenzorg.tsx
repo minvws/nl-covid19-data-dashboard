@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   GehandicaptenZorg,
@@ -88,7 +88,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
     content,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { textVr } = pageText;
 
   const lastValue = data.disability_care.last_value;
@@ -96,7 +96,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.besmette_locaties.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -114,10 +114,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={
-              siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
+              commonTexts.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={
-              siteText.sidebar.metrics.nursing_home_care.title
+              commonTexts.sidebar.metrics.nursing_home_care.title
             }
             title={replaceVariablesInText(
               textVr.positief_geteste_personen.titel,
@@ -167,7 +167,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
             title={textVr.positief_geteste_personen.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
@@ -206,7 +206,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       label:
                         textVr.positief_geteste_personen
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'newly_infected_people_moving_average',
                       ],
@@ -278,10 +278,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 source: textVr.besmette_locaties.bronnen.rivm,
               }}
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.FIVE_WEEKS,
-              ]}
+              timeframeOptions={TimeframeOptionsList}
               description={textVr.besmette_locaties.linechart_description}
             >
               {(timeframe) => (
@@ -339,7 +336,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.oversterfte.bronnen.rivm }}
             title={textVr.oversterfte.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.oversterfte.linechart_description}
           >
             {(timeframe) => (
@@ -375,7 +372,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label:
                         textVr.oversterfte.line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],
