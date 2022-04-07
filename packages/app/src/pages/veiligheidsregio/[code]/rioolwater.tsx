@@ -62,12 +62,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { textVr, textShared } = pageText;
   const sewerAverages = data.sewer;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -81,7 +81,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
+            category={
+              commonTexts.veiligheidsregio_layout.headings.vroege_signalen
+            }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -112,7 +114,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="average"
                 absolute={data.sewer.last_value.average}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
                 isAmount
               />
@@ -134,8 +136,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: textVr.linechart_description,
               selectPlaceholder: textVr.graph_selected_rwzi_placeholder,
               splitLabels: textShared.split_labels,
-              averagesDataLabel: siteText.common.daggemiddelde,
-              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+              averagesDataLabel: commonTexts.common.daggemiddelde,
+              valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
             vrNameOrGmName={vrName}
             warning={textVr.warning_chart}

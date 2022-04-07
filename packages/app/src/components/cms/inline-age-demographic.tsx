@@ -27,7 +27,7 @@ interface InlineAgeDemographicProps {
 export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
   const { configuration, startDate, endDate } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const dateUrl = getDataUrl(startDate, endDate, configuration);
 
@@ -39,8 +39,8 @@ export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
     return <InlineLoader />;
   }
 
-  const source = get(siteText, configuration.sourceKey.split('.'), '');
-  const text = get(siteText, configuration.text.split('.'), '');
+  const source = get(commonTexts, configuration.sourceKey.split('.'), '');
+  const text = get(commonTexts, configuration.text.split('.'), '');
 
   return (
     <ErrorBoundary>

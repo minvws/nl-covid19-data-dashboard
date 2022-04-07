@@ -184,7 +184,7 @@ function setValueDatesToMiddleOfDay<T extends TimestampedValue>(value: T) {
   return value;
 }
 
-export type TimestampedValue = DateValue | DateSpanValue;
+export type TimestampedValue = DateSpanValue | DateValue;
 
 export interface DateValue {
   date_unix: number;

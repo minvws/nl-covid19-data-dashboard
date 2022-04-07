@@ -20,8 +20,8 @@ export function EscalationLevelBanner({
   data,
   hasLink,
 }: EscalationLevelBannerProps) {
-  const { siteText } = useIntl();
-  const text = siteText.national_escalation_levels;
+  const { commonTexts } = useIntl();
+  const text = commonTexts.national_escalation_levels;
   const escalationLevel = useEscalationLevel(data.risk_level);
   const breakpoints = useBreakpoints(true);
   const reverseRouter = useReverseRouter();

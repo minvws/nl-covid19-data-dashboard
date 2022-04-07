@@ -64,7 +64,7 @@ export const getStaticProps = createGetStaticProps(
 
 const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const groups = groupBy<FAQuestionAndAnswer>(
     content.questions,
@@ -73,7 +73,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout
-      {...siteText.veelgestelde_vragen_metadata}
+      {...commonTexts.veelgestelde_vragen_metadata}
       lastGenerated={lastGenerated}
     >
       <Head>

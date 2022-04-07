@@ -5,23 +5,26 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { Layout } from '~/domain/layout/layout';
-import { VrLayout } from '~/domain/layout/vr-layout';
+import {
+  TileList,
+  PageInformationBlock,
+  Markdown,
+  ChoroplethTile,
+  DynamicChoropleth,
+} from '~/components';
+import { gmCodesByVrCode } from '~/data';
+import { Layout, VrLayout } from '~/domain/layout';
 import {
   AgeGroup,
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
-import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
+import {
+  selectVaccineCoverageData,
+  ChoroplethTooltip,
+  VaccineCoveragePerAgeGroup,
+  VaccineCoverageToggleTile,
+} from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -41,10 +44,12 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
+import {
+  assert,
+  replaceVariablesInText,
+  useReverseRouter,
+  useFormatLokalizePercentage,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -52,6 +57,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        textNl: siteText.pages.vaccinationsPage.nl,
         textVr: siteText.pages.vaccinationsPage.vr,
       }),
       locale
@@ -105,14 +111,14 @@ export const VaccinationsVrPage = (
     lastGenerated,
     content,
   } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
-  const { textVr } = pageText;
+  const { textNl, textVr } = pageText;
 
   const metadata = {
     ...textVr.metadata,
@@ -157,7 +163,7 @@ export const VaccinationsVrPage = (
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.vaccinaties}
+            category={commonTexts.veiligheidsregio_layout.headings.vaccinaties}
             title={replaceVariablesInText(textVr.informatie_blok.titel, {
               safetyRegionName: vrName,
             })}
@@ -215,31 +221,34 @@ export const VaccinationsVrPage = (
             age18PlusToggleText={
               textVr.vaccination_grade_toggle_tile.age_18_plus
             }
+            labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
 
           <VaccineCoveragePerAgeGroup
-            title={textVr.vaccination_coverage.title}
-            description={textVr.vaccination_coverage.description}
+            title={commonTexts.choropleth.vaccination_coverage.vr.title}
+            description={
+              commonTexts.choropleth.vaccination_coverage.vr.description
+            }
             sortingOrder={['18+', '12-17', '12+']}
             metadata={{
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: textVr.vaccination_coverage.bronnen.rivm,
+              source:
+                commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
             }}
             values={data.vaccine_coverage_per_age_group.values}
+            text={textNl.vaccination_coverage}
           />
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
-                .vr.title,
+              commonTexts.choropleth.vaccination_coverage.vr.title,
               { safetyRegionName: vrName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.pages.vaccinationsPage.nl
-                      .choropleth_vaccination_coverage.vr.description,
+                    commonTexts.choropleth.vaccination_coverage.vr.description,
                     { safetyRegionName: vrName }
                   )}
                 />
@@ -251,13 +260,12 @@ export const VaccinationsVrPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.pages.vaccinationsPage.nl
-                  .choropleth_vaccination_coverage.shared.legend_title,
+                commonTexts.choropleth.choropleth_vaccination_coverage.shared
+                  .legend_title,
             }}
             metadata={{
               source:
-                siteText.pages.vaccinationsPage.nl.vaccination_coverage.bronnen
-                  .rivm,
+                commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
           >
@@ -275,10 +283,7 @@ export const VaccinationsVrPage = (
                 getLink: reverseRouter.gm.vaccinaties,
                 selectedCode: selectedGmCode,
                 tooltipVariables: {
-                  age_group:
-                    siteText.pages.vaccinationsPage.nl.age_groups[
-                      selectedAgeGroup
-                    ],
+                  age_group: commonTexts.common.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (

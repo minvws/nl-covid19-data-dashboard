@@ -14,30 +14,35 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { isDefined } from 'ts-is-present';
-import { AgeDemographicProps } from '~/components/age-demographic';
 import { Box, Spacer } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { InView } from '~/components/in-view';
-import { Metadata } from '~/components/metadata';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { PieChartProps } from '~/components/pie-chart';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
-import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { VaccinationsOverTimeTile } from '~/domain/vaccine/vaccinations-over-time-tile';
-import { VaccineBoosterAdministrationsKpiSection } from '~/domain/vaccine/vaccine-booster-administrations-kpi-section';
-import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
-import { VaccinationsShotKpiSection } from '~/domain/vaccine/vaccinations-shot-kpi-section';
-import { VaccinationsKpiHeader } from '~/domain/vaccine/vaccinations-kpi-header';
-import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
-import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
+import {
+  AgeDemographicProps,
+  ChartTile,
+  InView,
+  Metadata,
+  PageInformationBlock,
+  PieChartProps,
+  TileList,
+  TimeSeriesChart,
+  WarningTile,
+  Divider,
+} from '~/components';
+import { Layout, NlLayout } from '~/domain/layout';
+import {
+  selectDeliveryAndAdministrationData,
+  selectVaccineCoverageData,
+  VaccinationsOverTimeTile,
+  VaccineBoosterAdministrationsKpiSection,
+  VaccineAdministrationsKpiSection,
+  VaccinationsShotKpiSection,
+  VaccinationsKpiHeader,
+  VaccineCoverageChoroplethPerGm,
+  VaccineCoveragePerAgeGroup,
+  VaccineCoverageToggleTile,
+  VaccineDeliveryBarChart,
+  VaccineStockPerSupplierChart,
+  BoosterShotCoveragePerAgeGroup,
+} from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import { useFeature } from '~/lib/features';
@@ -70,12 +75,12 @@ import {
   PagePartQueryResult,
   RichTextParts,
 } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useFormatDateRange } from '~/utils/use-format-date-range';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
-import { BoosterShotCoveragePerAgeGroup } from '~/domain/vaccine/booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
-import { Divider } from '~/components/divider';
+import {
+  replaceVariablesInText,
+  useFormatDateRange,
+  useReverseRouter,
+  useFormatLokalizePercentage,
+} from '~/utils';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -91,6 +96,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.vaccinationsPage.nl,
       }),
       locale
@@ -191,8 +197,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-  const { siteText, formatNumber } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts, formatNumber } = useIntl();
+  const { metadataTexts, textNl } = pageText;
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const reverseRouter = useReverseRouter();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
@@ -222,7 +228,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -304,6 +310,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
           <VaccineCoverageToggleTile
+            labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
             title={textNl.vaccination_grade_toggle_tile.title}
             source={textNl.vaccination_grade_toggle_tile.source}
             descriptionFooter={
@@ -359,6 +366,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           <VaccinationsOverTimeTile
+            text={textNl}
             coverageData={data.vaccine_coverage}
             deliveryAndAdministrationData={deliveryAndAdministration}
             vaccineAdministeredPlannedLastValue={
@@ -377,6 +385,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           />
           <VaccineCoverageChoroplethPerGm data={choropleth} />
           <VaccineCoveragePerAgeGroup
+            text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
             description={textNl.vaccination_coverage.toelichting}
             sortingOrder={[
@@ -429,14 +438,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           )}
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
             <ChartTile
-              title={
-                siteText.pages.vaccinationsPage.nl
-                  .incidence_age_demographic_chart.title
-              }
-              description={
-                siteText.pages.vaccinationsPage.nl
-                  .incidence_age_demographic_chart.description
-              }
+              title={textNl.incidence_age_demographic_chart.title}
+              description={textNl.incidence_age_demographic_chart.description}
             >
               <AgeDemographic
                 data={data.hospital_vaccine_incidence_per_age_group}
@@ -448,10 +451,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
                 rightMetricProperty={'fully_vaccinated_per_100k'}
                 formatValue={(n) => `${n}`}
-                text={
-                  siteText.pages.vaccinationsPage.nl
-                    .incidence_age_demographic_chart.chart_text
-                }
+                text={textNl.incidence_age_demographic_chart.chart_text}
               />
             </ChartTile>
           )}
@@ -593,7 +593,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             vaccineAdministeredHospitalsAndCareInstitutionsFeature.isEnabled &&
             vaccineAdministeredDoctorsFeature.isEnabled &&
             vaccineAdministeredGgdGhorFeature.isEnabled && (
-              <VaccineAdministrationsKpiSection data={data} />
+              <VaccineAdministrationsKpiSection data={data} text={textNl} />
             )}
           <VaccinationsKpiHeader
             text={textNl.booster_information_block}
@@ -603,6 +603,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
           />
           <VaccineBoosterAdministrationsKpiSection
+            text={textNl.booster_and_third_kpi}
             totalBoosterAndThirdShots={
               boosterShotAdministeredLastValue.administered_total
             }
@@ -664,10 +665,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             <InView rootMargin="500px">
               <VaccineDeliveryBarChart
                 data={data.vaccine_delivery_per_supplier}
+                text={textNl}
               />
 
               <VaccineStockPerSupplierChart
                 values={data.vaccine_stock.values}
+                text={textNl}
               />
 
               <ChartTile
@@ -743,7 +746,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'invisible',
                       metricProperty: 'percentage_average',
-                      label: siteText.common.totaal,
+                      label: commonTexts.common.totaal,
                       isPercentage: true,
                     },
                   ]}

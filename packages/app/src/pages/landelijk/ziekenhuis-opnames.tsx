@@ -5,30 +5,32 @@ import {
   NlHospitalVaccinationStatusValue,
   NlHospitalVaccineIncidencePerAgeGroupValue,
   TimeframeOption,
+  TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import { AgeDemographicProps } from '~/components/age-demographic';
+import {
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  SEOHead,
+  AgeDemographicProps,
+  PieChartProps,
+  ChartTile,
+  DynamicChoropleth,
+  ChoroplethTile,
+  KpiTile,
+  KpiValue,
+  PageInformationBlock,
+  PageKpi,
+} from '~/components';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
-import { PieChartProps } from '~/components/pie-chart';
-import { SEOHead } from '~/components/seo-head';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital';
+import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import { useFeature } from '~/lib/features';
@@ -54,10 +56,12 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -73,6 +77,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.hospitalPage.nl,
         textShared: siteText.pages.hospitalPage.shared,
       }),
@@ -157,14 +162,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     'nlHospitalAdmissionsVaccineIncidencePerAgeGroup'
   );
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
-  const { textNl, textShared } = pageText;
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
+  const { metadataTexts, textNl, textShared } = pageText;
 
   return (
-    <Layout
-      {...siteText.pages.topicalPage.nl.nationaal_metadata}
-      lastGenerated={lastGenerated}
-    >
+    <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>
         <SEOHead
           title={textNl.metadata.title}
@@ -172,9 +174,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
         />
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.ziekenhuizen}
+            category={commonTexts.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={
-              siteText.sidebar.metrics.hospital_admissions.title
+              commonTexts.sidebar.metrics.hospital_admissions.title
             }
             title={textNl.titel}
             icon={<Ziekenhuis />}
@@ -233,11 +235,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           {isVaccinationIncidenceChartShown.isEnabled && (
             <ChartTile
               title={
-                siteText.hospital_admissions_incidence_age_demographic_chart
+                commonTexts.hospital_admissions_incidence_age_demographic_chart
                   .title
               }
               description={
-                siteText.hospital_admissions_incidence_age_demographic_chart
+                commonTexts.hospital_admissions_incidence_age_demographic_chart
                   .description
               }
             >
@@ -252,7 +254,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 rightMetricProperty={'fully_vaccinated_per_100k'}
                 formatValue={(n) => `${n}`}
                 text={
-                  siteText.hospital_admissions_incidence_age_demographic_chart
+                  commonTexts
+                    .hospital_admissions_incidence_age_demographic_chart
                     .chart_text
                 }
               />
@@ -320,8 +323,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.nice,
             }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -351,7 +354,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedRange,
                       end: Infinity,
                       label: textNl.linechart_legend_underreported_titel,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
                       ],
@@ -371,8 +374,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.bronnen.lnaz,
             }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -395,7 +398,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       start: dataHospitalLcps.values[0].date_unix,
                       end: new Date('1 June 2020').getTime() / 1000,
                       label: textNl.chart_bedbezetting.legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                     },
                   ],
                 }}
@@ -434,7 +437,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   getLink: reverseRouter.gm.ziekenhuisopnames,
                   tooltipVariables: {
-                    patients: siteText.choropleth_tooltip.patients,
+                    patients: commonTexts.choropleth_tooltip.patients,
                   },
                 }}
               />
@@ -454,7 +457,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   getLink: reverseRouter.vr.ziekenhuisopnames,
                   tooltipVariables: {
-                    patients: siteText.choropleth_tooltip.patients,
+                    patients: commonTexts.choropleth_tooltip.patients,
                   },
                 }}
               />
@@ -462,12 +465,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </ChoroplethTile>
 
           <ChartTile
-            title={siteText.hospital_admissions_per_age_group.chart_title}
+            title={commonTexts.hospital_admissions_per_age_group.chart_title}
             description={
-              siteText.hospital_admissions_per_age_group.chart_description
+              commonTexts.hospital_admissions_per_age_group.chart_description
             }
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
-            timeframeInitialValue={TimeframeOption.FIVE_WEEKS}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
           >
             {(timeframe) => (

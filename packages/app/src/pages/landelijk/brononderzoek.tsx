@@ -6,7 +6,6 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
-import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
   getArticleParts,
@@ -28,8 +27,14 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        caterogyTexts: {
+          category: siteText.common.nationaal_layout.headings.besmettingen,
+          screenReaderCategory:
+            siteText.common.sidebar.metrics.source_investigation.title,
+        },
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textShared: siteText.pages.situationsPage.shared,
-        textChoroplethTooltips: siteText.choropleth_tooltip.patients,
+        textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
       }),
       locale
     ),
@@ -56,11 +61,11 @@ export default function BrononderzoekPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const { pageText, choropleth, lastGenerated, content } = props;
-  const { textShared, textChoroplethTooltips } = pageText;
-  const { siteText } = useIntl();
+  const { caterogyTexts, metadataTexts, textShared, textChoroplethTooltips } =
+    pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textShared.metadata.title,
     description: textShared.metadata.description,
   };
@@ -72,10 +77,8 @@ export default function BrononderzoekPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={
-              siteText.sidebar.metrics.source_investigation.title
-            }
+            category={caterogyTexts.category}
+            screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textShared.titel}
             icon={<Gedrag />}
             description={textShared.pagina_toelichting}

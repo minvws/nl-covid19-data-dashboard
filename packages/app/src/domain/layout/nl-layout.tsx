@@ -32,7 +32,7 @@ interface NlLayoutProps {
 export function NlLayout(props: NlLayoutProps) {
   const { children } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const topItems = useSidebar({
     layout: 'nl',
@@ -104,12 +104,12 @@ export function NlLayout(props: NlLayoutProps) {
             spacing={1}
           >
             <VisuallyHidden as="h2" id="sidebar-title">
-              {siteText.nationaal_layout.headings.sidebar}
+              {commonTexts.nationaal_layout.headings.sidebar}
             </VisuallyHidden>
 
             <Box px={3}>
               <Heading level={2} variant={'h3'}>
-                {siteText.sidebar.shared.nl_title}
+                {commonTexts.sidebar.shared.nl_title}
               </Heading>
             </Box>
 
@@ -121,7 +121,7 @@ export function NlLayout(props: NlLayoutProps) {
 
             <Box px={3}>
               <Heading level={3}>
-                {siteText.sidebar.shared.metrics_title}
+                {commonTexts.sidebar.shared.metrics_title}
               </Heading>
             </Box>
 
@@ -146,7 +146,7 @@ export function NlLayout(props: NlLayoutProps) {
       >
         <ErrorBoundary>
           {children}
-          <LoadingWrapper previousUrl='landelijk'/>
+          <LoadingWrapper previousUrl="landelijk" />
         </ErrorBoundary>
       </AppContent>
     </>

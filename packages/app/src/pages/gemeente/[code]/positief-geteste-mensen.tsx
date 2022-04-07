@@ -1,23 +1,24 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import { Text, InlineText } from '~/components/typography';
+import {
+  ChartTile,
+  DynamicChoropleth,
+  TwoKpiSection,
+  ChoroplethTile,
+  TimeSeriesChart,
+  TileList,
+  InView,
+  CollapsibleContent,
+  KpiTile,
+  KpiValue,
+  Markdown,
+  PageInformationBlock,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { InView } from '~/components/in-view';
-import { CollapsibleContent } from '~/components/collapsible';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
-import { GmLayout } from '~/domain/layout/gm-layout';
-import { Layout } from '~/domain/layout/layout';
+import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -42,10 +43,12 @@ import {
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  replaceComponentsInText,
+  replaceVariablesInText,
+  getVrForMunicipalityCode,
+  useReverseRouter,
+} from '~/utils';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -104,7 +107,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = pageText;
 
@@ -115,7 +118,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     (v) => v.vrcode === vrForMunicipality?.code
   );
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
@@ -129,7 +132,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.besmettingen}
+            category={commonTexts.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -162,7 +165,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Text>
                 {replaceComponentsInText(
-                  siteText.gemeente_index.population_count,
+                  commonTexts.gemeente_index.population_count,
                   {
                     municipalityName,
                     populationCount: (
@@ -212,7 +215,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <CollapsibleContent
                 label={
-                  siteText.gemeente_index.population_count_explanation_title
+                  commonTexts.gemeente_index.population_count_explanation_title
                 }
               >
                 <Text>
@@ -240,7 +243,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textGm.bronnen.rivm,
             }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart

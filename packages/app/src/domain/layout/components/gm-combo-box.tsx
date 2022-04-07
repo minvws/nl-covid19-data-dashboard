@@ -11,13 +11,13 @@ interface GmComboBoxProps {
 export function GmComboBox(props: GmComboBoxProps) {
   const { getLink } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
   return (
     <ComboBox
-      placeholder={siteText.common.zoekveld_placeholder_gemeente}
+      placeholder={commonTexts.common.zoekveld_placeholder_gemeente}
       options={gmData}
       onSelect={({ gemcode }) => {
         router.push(

@@ -218,4 +218,21 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'repeating_shot_administered',
   },
+  {
+    name: 'nlBehaviorAnnotations',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'behavior_annotations',
+  },
+  {
+    name: 'nlVaccineAdministered',
+    isEnabled: false,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_administered',
+    metricProperties: ['novavax'],
+  }, 
+  {
+    name: 'sewageOnActueel',
+    isEnabled: false,
+  },
 ];

@@ -60,7 +60,7 @@ export function PageInformationBlock({
   const showArchivedToggleButton =
     typeof isArchivedHidden !== 'undefined' &&
     typeof onToggleArchived !== 'undefined';
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -150,8 +150,8 @@ export function PageInformationBlock({
                 isActive={isArchivedHidden}
               >
                 {!isArchivedHidden
-                  ? siteText.common.show_archived
-                  : siteText.common.hide_archived}
+                  ? commonTexts.common.show_archived
+                  : commonTexts.common.hide_archived}
               </Button>
             )}
           </Box>

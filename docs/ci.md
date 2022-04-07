@@ -37,7 +37,7 @@ The build process follows these steps:
   - Run the unit tests
   - Download the server data files
   - Run all the JSON data validations
-  - Run lokalize:export to retrieve all the translations from Sanity
+  - Run lokalize:import to retrieve all the translations from Sanity
   - Run the NextJs build
 
 [Back to index](index.md)

@@ -9,6 +9,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Markdown } from '~/components/markdown';
+import { SiteText } from '~/locale';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
   totalBoosterAndThirdShots: number;
@@ -19,6 +20,7 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   metadateBoosterEstimated: MetadataProps;
   boosterShotLastSevenDays: number;
   metadataBoosterShotLastSevenDays: MetadataProps;
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
@@ -30,10 +32,9 @@ export function VaccineBoosterAdministrationsKpiSection({
   metadateBoosterEstimated,
   boosterShotLastSevenDays,
   metadataBoosterShotLastSevenDays,
+  text,
 }: VaccineBoosterAdministrationsKpiSectionProps) {
-  const { siteText, formatNumber } = useIntl();
-
-  const text = siteText.pages.vaccinationsPage.nl.booster_and_third_kpi;
+  const { formatNumber } = useIntl();
 
   return (
     <Tile>

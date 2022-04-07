@@ -11,8 +11,9 @@ import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { InlineText } from '~/components/typography';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import {
@@ -25,6 +26,9 @@ interface BehaviorLineChartTileProps {
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   behaviorOptions?: BehaviorIdentifier[];
+  timelineEvents?: TimelineEventConfig[];
+  useDatesAsRange?: boolean;
+  text: SiteText['pages']['behaviorPage'];
 }
 
 export function BehaviorLineChartTile({
@@ -33,10 +37,10 @@ export function BehaviorLineChartTile({
   currentId,
   setCurrentId,
   behaviorOptions,
+  timelineEvents,
+  useDatesAsRange,
+  text,
 }: BehaviorLineChartTileProps) {
-  const { siteText } = useIntl();
-  const behaviorPageText = siteText.pages.behaviorPage;
-
   const selectedComplianceValueKey =
     `${currentId}_compliance` as keyof NlBehaviorValue;
   const selectedSupportValueKey =
@@ -52,9 +56,9 @@ export function BehaviorLineChartTile({
 
   return (
     <ChartTile
-      title={behaviorPageText.shared.line_chart.title}
+      title={text.shared.line_chart.title}
       metadata={metadata}
-      description={behaviorPageText.shared.line_chart.description}
+      description={text.shared.line_chart.description}
     >
       <Box spacing={4}>
         <Box
@@ -66,7 +70,7 @@ export function BehaviorLineChartTile({
         >
           <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior
-              label={behaviorPageText.nl.select_behaviour_label}
+              label={text.nl.select_behaviour_label}
               value={currentId}
               onChange={setCurrentId}
               options={behaviorOptions}
@@ -75,13 +79,10 @@ export function BehaviorLineChartTile({
 
           {(complianceValuesHasGap || supportValuesHasGap) && (
             <InlineTooltip
-              content={
-                behaviorPageText.shared.line_chart
-                  .tooltip_witte_gaten_beschrijving
-              }
+              content={text.shared.line_chart.tooltip_witte_gaten_beschrijving}
             >
               <InlineText fontWeight="bold">
-                {behaviorPageText.shared.line_chart.tooltip_witte_gaten_label}
+                {text.shared.line_chart.tooltip_witte_gaten_label}
               </InlineText>
             </InlineTooltip>
           )}
@@ -96,24 +97,24 @@ export function BehaviorLineChartTile({
             {
               type: 'gapped-line',
               metricProperty: selectedComplianceValueKey,
-              label: behaviorPageText.shared.line_chart.compliance_label,
-              shortLabel:
-                behaviorPageText.shared.line_chart.compliance_short_label,
+              label: text.shared.line_chart.compliance_label,
+              shortLabel: text.shared.line_chart.compliance_short_label,
               strokeWidth: 3,
               color: colors.data.cyan,
             },
             {
               type: 'gapped-line',
               metricProperty: selectedSupportValueKey,
-              label: behaviorPageText.shared.line_chart.support_label,
-              shortLabel:
-                behaviorPageText.shared.line_chart.support_short_label,
+              label: text.shared.line_chart.support_label,
+              shortLabel: text.shared.line_chart.support_short_label,
               strokeWidth: 3,
               color: colors.data.yellow,
             },
           ]}
           dataOptions={{
             isPercentage: true,
+            useDatesAsRange: useDatesAsRange,
+            timelineEvents: timelineEvents,
           }}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}

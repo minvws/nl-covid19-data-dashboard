@@ -6,7 +6,8 @@
 2. Merge the develop branch into the release branch.
 3. Do a full build with a Sanity export from production to make sure everything works.
 
-   Use `yarn lokalize:export --dataset=production` to create the Sanity export.
+   Use `yarn cms:lokalize-import:prd` to create the Sanity export.
+   Use `yarn build:app` to create a build with the latest production dataset
 
    Test the build locally by running `yarn start`.
 
@@ -23,9 +24,9 @@
 8. Hit the publish button in the GitHub release draft. This should tag the
    correct commit in `master`.
 9. Important before running the next step is building the common package to avoid any typescript errors,
-   so run `yarn workspace @corona-dashboard/common build`.
+   so run `yarn build:common`.
 10. After we are sure we are moving to production with the release as it is,
-    run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
+    run the `yarn cms:sync-after-release`
     script. This script will perform any necessary text mutations for keys that
     have been moved, and also cleans up any deleted texts from the Sanity
     production dataset. For more information [read this](/docs/lokalize-texts.md#sync-after-release).
@@ -99,7 +100,7 @@ the `key-mutations.csv` file and commit this to the release branch.
 ## CMS Deploy
 
 Sometimes a release also contains new configurations for the CMS. These are
-deployed via the Sanity CLI as `yarn deploy`. These deployments do
+deployed via the Sanity CLI by running `yarn cms:deploy` in the root of the project. These deployments do
 not usually need to be done simultaneously with the release. If they are
 backwards-compatible they could be performed at any time and also repeatedly.
 

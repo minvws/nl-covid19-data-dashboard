@@ -17,20 +17,19 @@ import {
 } from '~/components/time-series-chart/components';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 
 export function VaccineDeliveryBarChart({
   data,
+  text,
 }: {
   data: NlVaccineDeliveryPerSupplier;
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }) {
-  const intl = useIntl();
-  const text = intl.siteText.pages.vaccinationsPage.nl.grafiek_leveringen;
-
+  const { commonTexts } = useIntl();
   data.values = data.values.filter((x) => !x.is_estimate);
 
-  const productNames =
-    intl.siteText.pages.vaccinationsPage.nl.data.vaccination_chart
-      .product_names;
+  const productNames = text.data.vaccination_chart.product_names;
 
   const formatTooltip: TooltipFormatter<
     NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
@@ -44,9 +43,9 @@ export function VaccineDeliveryBarChart({
 
   return (
     <ChartTile
-      title={text.titel}
+      title={text.grafiek_leveringen.titel}
       metadata={{
-        source: intl.siteText.pages.vaccinationsPage.nl.bronnen.rivm,
+        source: text.bronnen.rivm,
       }}
     >
       <Box
@@ -57,7 +56,7 @@ export function VaccineDeliveryBarChart({
         spacing={3}
       >
         <Box maxWidth={560}>
-          <Markdown content={text.omschrijving} />
+          <Markdown content={text.grafiek_leveringen.omschrijving} />
         </Box>
       </Box>
 
@@ -67,7 +66,7 @@ export function VaccineDeliveryBarChart({
           features: ['keyboard_bar_chart'],
         }}
         values={data.values}
-        valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
+        valueAnnotation={commonTexts.waarde_annotaties.x_100k}
         formatTickValue={(x) => `${x / 100_000}`}
         config={[
           {
@@ -96,7 +95,7 @@ export function VaccineDeliveryBarChart({
             metricProperty: 'total' as const,
             color: 'transparent',
             type: 'invisible',
-            label: text.totaal,
+            label: text.grafiek_leveringen.totaal,
           },
         ].filter(isDefined)}
         formatTooltip={formatTooltip}

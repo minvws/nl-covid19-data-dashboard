@@ -12,20 +12,20 @@ export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const ErrorPage = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
-    <Layout {...siteText.error_metadata} lastGenerated={lastGenerated}>
+    <Layout {...commonTexts.error_metadata} lastGenerated={lastGenerated}>
       <Content>
-        <Heading level={1}>{siteText.error_titel.text}</Heading>
-        <Text>{siteText.error_beschrijving.text}</Text>
+        <Heading level={1}>{commonTexts.error_titel.text}</Heading>
+        <Text>{commonTexts.error_beschrijving.text}</Text>
 
         <button
           onClick={() => {
             location.reload();
           }}
         >
-          {siteText.error_probeer_opnieuw.text}
+          {commonTexts.error_probeer_opnieuw.text}
         </button>
       </Content>
     </Layout>

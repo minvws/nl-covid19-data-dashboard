@@ -1,8 +1,7 @@
 import {
-  colors,
   NlSewer,
   SewerPerInstallationData,
-  TimeframeOption,
+  TimeframeOptionsList,
   VrSewer,
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
@@ -14,6 +13,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { getAverageSplitPoints } from '~/utils/get-avarage-split-points';
 import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
@@ -77,30 +77,9 @@ export function SewerChart({
       } as SewerPerInstallationData)
   );
 
-  const averageSplitPoints = [
-    {
-      value: 10,
-      color: colors.data.scale.blue[0],
-      label: text.splitLabels.segment_0,
-    },
-    {
-      value: 50,
-      color: colors.data.scale.blue[1],
-      label: text.splitLabels.segment_1,
-    },
-    {
-      value: 100,
-      color: colors.data.scale.blue[2],
-      label: text.splitLabels.segment_2,
-    },
-    {
-      value: Infinity,
-      color: colors.data.scale.blue[3],
-      label: text.splitLabels.segment_3,
-    },
-  ];
-  const { siteText } = useIntl();
-  const scopedGmName = siteText.gemeente_index.municipality_warning;
+  const averageSplitPoints = getAverageSplitPoints(text.splitLabels);
+  const { commonTexts } = useIntl();
+  const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
@@ -121,7 +100,7 @@ export function SewerChart({
 
   return (
     <ChartTile
-      timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+      timeframeOptions={TimeframeOptionsList}
       title={text.title}
       metadata={{
         source: text.source,

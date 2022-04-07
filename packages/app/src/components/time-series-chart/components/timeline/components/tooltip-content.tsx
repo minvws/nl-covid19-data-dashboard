@@ -23,11 +23,11 @@ export function TimelineTooltipContent({
   onClose,
   hasMultipleEvents,
 }: TimelineTooltipContentProps) {
-  const intl = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const isTouch = useIsTouchDevice();
   const dateStr = [
-    intl.formatDateFromSeconds(config.start, 'medium'),
-    config.end && intl.formatDateFromSeconds(config.end, 'medium'),
+    formatDateFromSeconds(config.start, 'medium'),
+    config.end && formatDateFromSeconds(config.end, 'medium'),
   ]
     .filter(isDefined)
     .join(' – ');
@@ -57,7 +57,7 @@ export function TimelineTooltipContent({
             <ChevronButton
               onClick={onPrev}
               rotate
-              title={intl.siteText.charts.timeline.prev}
+              title={commonTexts.charts.timeline.prev}
             />
           )}
 
@@ -68,7 +68,7 @@ export function TimelineTooltipContent({
           {hasMultipleEvents && (
             <ChevronButton
               onClick={onNext}
-              title={intl.siteText.charts.timeline.next}
+              title={commonTexts.charts.timeline.next}
             />
           )}
         </Box>
@@ -97,7 +97,7 @@ export function TimelineTooltipContent({
           textVariant="label1"
         >
           <Anchor as="button" onClick={onClose} color="blue" underline>
-            {intl.siteText.common.sluiten}
+            {commonTexts.common.sluiten}
           </Anchor>
         </Box>
       )}

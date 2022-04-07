@@ -24,7 +24,7 @@ export function useLegendItems<T extends TimestampedValue>(
 ) {
   const { timelineEvents, timespanAnnotations, outOfBoundsConfig } =
     dataOptions || {};
-  const intl = useIntl();
+  const { commonTexts } = useIntl();
 
   return useMemo(() => {
     const legendItems = config
@@ -92,7 +92,7 @@ export function useLegendItems<T extends TimestampedValue>(
 
       if (hasVisibleEvents) {
         legendItems.push({
-          label: intl.siteText.charts.timeline.legend_label,
+          label: commonTexts.charts.timeline.legend_label,
           shape: 'custom',
           shapeComponent: <TimelineMarker size={10} />,
         } as LegendItem);
@@ -132,7 +132,7 @@ export function useLegendItems<T extends TimestampedValue>(
   }, [
     config,
     domain,
-    intl,
+    commonTexts,
     timelineEvents,
     timespanAnnotations,
     outOfBoundsConfig,

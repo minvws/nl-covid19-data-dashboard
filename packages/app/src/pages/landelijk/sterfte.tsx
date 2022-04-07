@@ -1,20 +1,21 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { AgeDemographic } from '~/components/age-demographic';
-import { ChartTile } from '~/components/chart-tile';
-import { Divider } from '~/components/divider';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
+import {
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  PageInformationBlock,
+  AgeDemographic,
+  ChartTile,
+  Divider,
+  KpiTile,
+  KpiValue,
+  Markdown,
+} from '~/components';
 import { Text } from '~/components/typography';
-import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
+import { DeceasedMonitorSection } from '~/domain/deceased';
+import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -42,6 +43,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.deceasedPage.nl,
         textShared: siteText.pages.deceasedPage.shared,
       }),
@@ -88,11 +90,11 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
 
-  const { siteText, formatPercentage } = useIntl();
-  const { textNl, textShared } = pageText;
+  const { commonTexts, formatPercentage } = useIntl();
+  const { metadataTexts, textNl, textShared } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -102,7 +104,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
             title={textNl.section_deceased_rivm.title}
             icon={<Coronavirus />}
             description={textNl.section_deceased_rivm.description}
@@ -154,7 +156,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               textNl.section_deceased_rivm.line_chart_covid_daily_description

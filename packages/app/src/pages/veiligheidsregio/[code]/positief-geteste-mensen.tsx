@@ -1,27 +1,28 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Box } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Divider } from '~/components/divider';
-import { InView } from '~/components/in-view';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { Layout } from '~/domain/layout/layout';
-import { VrLayout } from '~/domain/layout/vr-layout';
-import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
+import { Text, InlineText } from '~/components/typography';
+import {
+  ChartTile,
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  DynamicChoropleth,
+  ChoroplethTile,
+  Divider,
+  InView,
+  KpiTile,
+  KpiValue,
+  Markdown,
+  PageInformationBlock,
+} from '~/components';
+import { gmCodesByVrCode } from '~/data';
+import { Layout, VrLayout } from '~/domain/layout';
+import { GNumberBarChartTile } from '~/domain/tested';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -45,9 +46,11 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  replaceComponentsInText,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -115,7 +118,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+  const { commonTexts, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
 
   const reverseRouter = useReverseRouter();
@@ -132,7 +135,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -146,8 +149,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.besmettingen}
-            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
+            category={commonTexts.veiligheidsregio_layout.headings.besmettingen}
+            screenReaderCategory={
+              commonTexts.sidebar.metrics.positive_tests.title
+            }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -249,7 +254,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textVr.bronnen.rivm,
             }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -433,10 +438,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.FIVE_WEEKS,
-              ]}
+              timeframeOptions={TimeframeOptionsList}
               title={textVr.ggd.linechart_totaltests_titel}
               description={textVr.ggd.linechart_totaltests_toelichting}
               metadata={{

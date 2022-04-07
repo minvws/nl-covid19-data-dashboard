@@ -30,15 +30,15 @@ export function Metadata({
   dataSources,
   intervalCount,
 }: MetadataProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dateString =
     typeof date === 'number'
-      ? replaceVariablesInText(siteText.common.metadata.date, {
+      ? replaceVariablesInText(commonTexts.common.metadata.date, {
           date: formatDateFromSeconds(date, 'weekday-medium'),
         })
       : Array.isArray(date)
-      ? replaceVariablesInText(siteText.common.metadata.dateFromTo, {
+      ? replaceVariablesInText(commonTexts.common.metadata.dateFromTo, {
           startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
           endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
         })
@@ -48,7 +48,7 @@ export function Metadata({
 
   const intervalString =
     intervalCount &&
-    replaceVariablesInText(siteText.common.metadata.interval, {
+    replaceVariablesInText(commonTexts.common.metadata.interval, {
       count: intervalCount,
     });
 
@@ -56,14 +56,10 @@ export function Metadata({
     <>
       {!isTileFooter && source && (
         <Text color="annotation" variant="label1">
-          {`${dateString} - ${siteText.common.metadata.source}: `}
-          {source.href ? (
-            <ExternalLink ariaLabel={source.aria_text} href={source.href}>
-              {source.text}
-            </ExternalLink>
-          ) : (
-            <InlineText ariaLabel={source.aria_text}>{source.text}</InlineText>
-          )}
+          {`${dateString} - ${commonTexts.common.metadata.source}: `}
+          <ExternalLink ariaLabel={source.aria_text} href={source.href}>
+            {source.text}
+          </ExternalLink>
         </Text>
       )}
 
@@ -86,7 +82,7 @@ export function Metadata({
                 {dateString}
                 {obtainedAt &&
                   ` ${replaceVariablesInText(
-                    siteText.common.metadata.obtained,
+                    commonTexts.common.metadata.obtained,
                     {
                       date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
                     }
@@ -95,10 +91,10 @@ export function Metadata({
                 {dateString && source ? ' · ' : null}
 
                 {source ? (
-                  `${siteText.common.metadata.source}: ${source.text}`
+                  `${commonTexts.common.metadata.source}: ${source.text}`
                 ) : dataSources ? (
                   <>
-                    {`${siteText.common.metadata.source}: `}
+                    {`${commonTexts.common.metadata.source}: `}
                     {dataSources.map((item, index) => (
                       <InlineText key={index}>
                         {index > 0 &&

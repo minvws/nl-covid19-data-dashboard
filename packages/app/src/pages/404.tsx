@@ -12,13 +12,13 @@ export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const NotFound = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
-    <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
+    <Layout {...commonTexts.notfound_metadata} lastGenerated={lastGenerated}>
       <Content>
-        <Heading level={1}>{siteText.notfound_titel.text}</Heading>
-        <Text>{siteText.notfound_beschrijving.text}</Text>
+        <Heading level={1}>{commonTexts.notfound_titel.text}</Heading>
+        <Text>{commonTexts.notfound_beschrijving.text}</Text>
       </Content>
     </Layout>
   );

@@ -77,8 +77,9 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   const columnNames = text.kolommen;
 
   const [, variantDescription] = useVariantNameAndDescription(
-    row.variant,
-    text.anderen_tooltip
+    row.variant as keyof typeof text.varianten,
+    text.anderen_tooltip,
+    text
   );
 
   return (
@@ -93,7 +94,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
               formatValue={formatValue}
             />
           ) : (
-            <NoPercentageData />
+            <NoPercentageData text={text} />
           )}
         </Cell>
         <Cell mobile alignRight>
@@ -111,6 +112,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                 isPresent(row.difference.old_value) ? (
                   <VariantDifference
                     value={row.difference as DifferenceDecimal}
+                    text={text}
                   />
                 ) : (
                   '-'
