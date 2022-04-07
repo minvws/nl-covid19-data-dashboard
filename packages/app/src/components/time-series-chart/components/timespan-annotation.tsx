@@ -1,7 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
-import { scaleBand } from '@visx/scale';
 import { useUniqueId } from '~/utils/use-unique-id';
 import {
   GetX,
@@ -9,7 +8,6 @@ import {
   Bounds,
   SeriesSingleValue,
 } from '../logic';
-import { useMemo } from 'react';
 
 const DEFAULT_COLOR = colors.data.underReported;
 
@@ -18,8 +16,6 @@ export function TimespanAnnotation({
   getX,
   height,
   config,
-  bounds,
-  series,
 }: {
   domain: [number, number];
   height: number;
@@ -35,31 +31,13 @@ export function TimespanAnnotation({
   const patternId = `${id}_annotation_pattern`;
 
   /**
-   * Calculate the width of one bar, for offset to cover the whole bar on the edge of the timespan.
-   */
-
-  const xScale = useMemo(
-    () =>
-      scaleBand<number>({
-        range: [0, bounds.width],
-        round: true,
-        domain: series.map(getX),
-      }),
-    [bounds, getX, series]
-  );
-
-  const halfBarWidth = Math.max(xScale.bandwidth(), 1) / 2;
-
-  /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
    * conveniently pass in things like Infinity for end date.
    */
   const clippedStart = Math.max(start, min);
   const clippedEnd = Math.min(end, max);
 
-  const x0 =
-    getX({ __date_unix: clippedStart }) -
-    (series.length > 0 ? halfBarWidth : 0);
+  const x0 = getX({ __date_unix: clippedStart });
   const x1 = getX({ __date_unix: clippedEnd });
 
   /**
