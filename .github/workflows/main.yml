@@ -82,6 +82,9 @@ jobs:
       - name: Typecheck all code
         run: yarn typecheck
 
+      - name: Download lastest dataset
+        run: yarn download
+
       - name: Build app
         run: yarn build:app
 
