@@ -224,8 +224,4 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'behavior_annotations',
   },
-  {
-    name: 'sewageOnActueel',
-    isEnabled: false,
-  },
 ];
