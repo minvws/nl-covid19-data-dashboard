@@ -82,6 +82,9 @@ jobs:
       - name: Typecheck all code
         run: yarn typecheck
 
+      - name: Build app
+        run: yarn build:app
+
   test:
     runs-on: ubuntu-latest
     needs: init
