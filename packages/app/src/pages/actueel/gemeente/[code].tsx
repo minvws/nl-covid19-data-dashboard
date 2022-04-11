@@ -372,6 +372,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                             text: textGm.data_driven_texts.sewer.value,
                             metricName: 'sewer',
                             metricProperty: 'average',
+                            additionalData: {
+                              newDate: formatters.formatDateFromSeconds(
+                                data.sewer.last_value.date_end_unix
+                              ),
+                            },
                           },
                         ]}
                       />
