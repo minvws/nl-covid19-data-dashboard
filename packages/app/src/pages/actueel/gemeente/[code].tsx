@@ -374,7 +374,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                             metricProperty: 'average',
                             additionalData: {
                               newDate: formatters.formatDateFromSeconds(
-                                data.sewer.last_value.date_start_unix
+                                data.sewer.last_value.date_end_unix
                               ),
                             },
                           },
