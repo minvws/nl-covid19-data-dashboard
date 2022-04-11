@@ -182,8 +182,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     true
   );
 
-  const sewageOnActueelFeature = useFeature('sewageOnActueel');
-
   const internationalFeature = useFeature('inPositiveTestsPage');
 
   const dataSitemap = useDataSitemap('gm', gmCode, data);

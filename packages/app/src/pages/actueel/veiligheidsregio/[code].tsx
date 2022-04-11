@@ -189,8 +189,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
   const internationalFeature = useFeature('inPositiveTestsPage');
 
-  const sewageOnActueelFeature = useFeature('sewageOnActueel');
-
   const metadata = {
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,

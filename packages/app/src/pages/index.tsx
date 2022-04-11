@@ -195,7 +195,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const internationalFeature = useFeature('inPositiveTestsPage');
   const riskLevelFeature = useFeature('riskLevel');
-  const sewageOnActueelFeature = useFeature('sewageOnActueel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
