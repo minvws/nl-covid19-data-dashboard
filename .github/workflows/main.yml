@@ -129,8 +129,8 @@ jobs:
 
       - name: Build
         uses: docker/build-push-action@v2
-        context: .
         with:
+          context: .
           build-args: |
             "ARG_NEXT_PUBLIC_SANITY_PROJECT_ID=5mog5ask"
             "SANITY_API_TOKEN=<sanity_token>"
