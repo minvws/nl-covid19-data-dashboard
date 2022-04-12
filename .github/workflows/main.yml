@@ -120,6 +120,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     needs: init
+    if: contains(github.head_ref, 'release')
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
