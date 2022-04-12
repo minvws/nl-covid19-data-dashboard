@@ -1,12 +1,16 @@
 import { Nl, NlVaccineAdministeredValue } from '@corona-dashboard/common';
 
-export type VaccineDeliveryAndAdministrationsValue = Optional<
-  Omit<any, 'total' | 'date_start_unix' | 'date_end_unix'>,
-  'date_of_report_unix'
-> & { date_unix: number } & Omit<
-    NlVaccineAdministeredValue,
-    'date_start_unix' | 'date_end_unix'
-  >;
+export type VaccineDeliveryAndAdministrationsValue = Partial<{
+  date_unix: number;
+  total: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  astra_zeneca: number;
+  pfizer: number;
+  janssen: number;
+  moderna: number;
+  novavax: number;
+}>;
 
 export type DeliveryAndAdministrationData = {
   values: VaccineDeliveryAndAdministrationsValue[];
@@ -17,22 +21,11 @@ export type DeliveryAndAdministrationData = {
 export function selectDeliveryAndAdministrationData(nlData: Nl) {
   const { vaccine_administered } = nlData;
 
-  // const values: VaccineDeliveryAndAdministrationsValue[] = [];
-
-  const values: any = vaccine_administered.values.map((value, index) => ({
-    date_unix: vaccine_administered.values[index].date_end_unix,
-  }));
-
-  // for (const [index] of vaccine_administered.values.entries()) {
-  //   const value = {
-  //     date_unix: vaccine_administered.values[index].date_end_unix,
-  //     // ...vaccine_delivery.values[index],
-  //     // ...vaccine_administered.values[index],
-  //   };
-  //   delete (value as Record<string, number>).date_start_unix;
-  //   delete (value as Record<string, number>).date_end_unix;
-  //   values.push(value);
-  // }
+  const values: VaccineDeliveryAndAdministrationsValue[] =
+    vaccine_administered.values.map((value, index) => ({
+      ...value,
+      date_unix: vaccine_administered.values[index].date_end_unix,
+    }));
 
   const deliveryAndAdministration: DeliveryAndAdministrationData = {
     values,
