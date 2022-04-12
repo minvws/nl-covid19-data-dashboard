@@ -224,15 +224,4 @@ export const features: Feature[] = [
     dataScopes: ['nl'],
     metricName: 'behavior_annotations',
   },
-  {
-    name: 'nlVaccineAdministered',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'vaccine_administered',
-    metricProperties: ['novavax'],
-  }, 
-  {
-    name: 'sewageOnActueel',
-    isEnabled: false,
-  },
 ];

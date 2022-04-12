@@ -4,7 +4,6 @@ import {
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
   NlSewerValue,
-  NlTestedOverallValue,
   NlVaccineCoveragePerAgeGroupEstimated,
   TimeframeOption,
   WEEK_IN_SECONDS,
@@ -13,7 +12,6 @@ import {
   Arts,
   Chart,
   Chevron,
-  Test,
   Vaccinaties,
   Ziekenhuis,
   RioolwaterMonitoring,
@@ -146,31 +144,31 @@ export const getStaticProps = createGetStaticProps(
           values: cutValuesFromTimeframe(
             data.hospital_nice.values,
             TimeframeOption.FIVE_WEEKS
-          )
+          ),
         },
         tested_overall: {
           ...data.tested_overall,
           values: cutValuesFromTimeframe(
             data.tested_overall.values,
             TimeframeOption.FIVE_WEEKS
-          )
+          ),
         },
         intensive_care_nice: {
           ...data.intensive_care_nice,
           values: cutValuesFromTimeframe(
             data.intensive_care_nice.values,
             TimeframeOption.FIVE_WEEKS
-          )
+          ),
         },
         sewer: {
           ...data.sewer,
           values: cutValuesFromTimeframe(
             data.sewer.values,
             TimeframeOption.FIVE_WEEKS
-          )
-        }
-      }
-    }
+          ),
+        },
+      },
+    };
   }
 );
 
@@ -186,25 +184,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const dataSewerTotal = data.sewer;
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
-  const dataTestedOverall = data.tested_overall;
   const dataSitemap = useDataSitemap('nl');
 
   const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
-  const {
-    hospitalText,
-    intensiveCareText,
-    positiveTestsText,
-    textNl,
-    textShared,
-    sewerText,
-  } = pageText;
+  const { hospitalText, intensiveCareText, textNl, textShared, sewerText } =
+    pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
   const internationalFeature = useFeature('inPositiveTestsPage');
   const riskLevelFeature = useFeature('riskLevel');
-  const sewageOnActueelFeature = useFeature('sewageOnActueel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -317,35 +307,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       'hospital_nice'
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
-                  (sewageOnActueelFeature.isEnabled ? {
+                  {
                     label: textNl.mini_trend_tiles.sewer.menu_item_label,
-                    data: dataSewerTotal.values.filter(x => typeof x.average === 'number'),
-                    dataProperty:
-                      'average',
-                    value:
-                      dataSewerTotal.last_value
-                        ?.average ??
-                      0,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'sewer'
+                    data: dataSewerTotal.values.filter(
+                      (x) => typeof x.average === 'number'
                     ),
-                  } as MiniTileSelectorItem<NlSewerValue>
-                : {
-                    label:
-                      textNl.mini_trend_tiles.positief_geteste_mensen
-                        .menu_item_label,
-                    data: dataTestedOverall.values,
-                    dataProperty: 'infected_moving_average_rounded',
-                    value:
-                      dataTestedOverall.last_value
-                        .infected_moving_average_rounded,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'tested_overall'
-                    ),
-                  } as MiniTileSelectorItem<NlTestedOverallValue>
-                ),
+                    dataProperty: 'average',
+                    value: dataSewerTotal.last_value?.average ?? 0,
+                    warning: getWarning(content.elements.warning, 'sewer'),
+                  } as MiniTileSelectorItem<NlSewerValue>,
                   {
                     label:
                       textNl.mini_trend_tiles.vaccinatiegraad.menu_item_label,
@@ -364,7 +334,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         data.vaccine_coverage_per_age_group_estimated.last_value
                           ?.age_18_plus_fully_vaccinated,
                     },
-                  } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>
+                  } as MiniTileSelectorItem<NlVaccineCoveragePerAgeGroupEstimated>,
                 ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
@@ -529,144 +499,53 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.warning,
                     'hospital_nice'
                   )}
-                />{ sewageOnActueelFeature.isEnabled ?
-                  <MiniTrendTile
-                    title={textNl.mini_trend_tiles.sewer.title}
-                    text={
-                      <>
-                        <DataDrivenText
-                          data={data}
-                          content={[
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.sewer_text.value,
-                              metricName: 'sewer',
-                              metricProperty: 'average',
-                              additionalData: {
-                                newDate: formatters.formatDateFromSeconds(
-                                  data.sewer.last_value.date_unix
-                                ),
-                              },
-                            }
-                          ]}
-                        />
-                        <LinkWithIcon
-                          href={reverseRouter.nl.rioolwater()}
-                          icon={<Chevron />}
-                          iconPlacement="right"
-                        >
-                          {textNl.mini_trend_tiles.sewer.read_more_link}
-                        </LinkWithIcon>
-                      </>
-                    }
-                    icon={<RioolwaterMonitoring />}
-                    values={dataSewerTotal.values}
-                    seriesConfig={[
-                      {
-                        type: 'split-area',
-                        metricProperty: 'average',
-                        label: commonTexts.common.daggemiddelde,
-                        splitPoints: averageSplitPoints,
-                      },
-                    ]}
-                    dataOptions={{
-                      valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
-                    }}
-                    accessibility={{ key: 'topical_sewer' }}
-                    warning={getWarning(
-                      content.elements.warning,
-                      'sewer'
-                    )}
-                  />
-                : <MiniTrendTile
-                    title={
-                      textNl.mini_trend_tiles.positief_geteste_mensen.title
-                    }
-                    text={
-                      <>
-                        <DataDrivenText
-                          data={data}
-                          content={[
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.tested_overall
-                                .value,
-                              metricName: 'tested_overall',
-                              metricProperty: 'infected_moving_average_rounded',
-                              additionalData: {
-                                dateStart: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix -
-                                    WEEK_IN_SECONDS
-                                ),
-                                dateEnd: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix
-                                ),
-                              },
-                            },
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.tested_ggd.value,
-                              metricName: 'tested_ggd',
-                              isPercentage: true,
-                              metricProperty:
-                                'infected_percentage_moving_average',
-                            },
-                          ]}
-                        />
-                        <LinkWithIcon
-                          href={reverseRouter.nl.positiefGetesteMensen()}
-                          icon={<Chevron />}
-                          iconPlacement="right"
-                        >
+                />
+                <MiniTrendTile
+                  title={textNl.mini_trend_tiles.sewer.title}
+                  text={
+                    <>
+                      <DataDrivenText
+                        data={data}
+                        content={[
                           {
-                            textNl.mini_trend_tiles.positief_geteste_mensen
-                              .read_more_link
-                          }
-                        </LinkWithIcon>
-                      </>
-                    }
-                    icon={<Test />}
-                    values={dataTestedOverall.values}
-                    seriesConfig={[
-                      {
-                        type: 'line',
-                        metricProperty: 'infected_moving_average',
-                        label:
-                          positiveTestsText.tooltip_labels
-                            .infected_moving_average,
-                        color: colors.data.primary,
-                      },
-                      {
-                        type: 'bar',
-                        metricProperty: 'infected',
-                        label:
-                          positiveTestsText.tooltip_labels.infected_overall,
-                        color: colors.data.primary,
-                      },
-                    ]}
-                    accessibility={{
-                      key: 'topical_tested_overall_infected',
-                    }}
-                    warning={getWarning(
-                      content.elements.warning,
-                      'tested_overall'
-                    )}
-                    dataOptions={{
-                      forcedMaximumValue: 150000,
-                      outOfBoundsConfig: {
-                        label:
-                          positiveTestsText.tooltip_labels
-                            .infected_out_of_bounds,
-                        tooltipLabel:
-                          positiveTestsText.tooltip_labels.annotations,
-                        checkIsOutofBounds: (
-                          x: NlTestedOverallValue,
-                          max: number
-                        ) => x.infected > max,
-                      },
-                    }}
-                  />
-                }
+                            type: 'metric',
+                            text: textNl.data_driven_texts.sewer_text.value,
+                            metricName: 'sewer',
+                            metricProperty: 'average',
+                            additionalData: {
+                              newDate: formatters.formatDateFromSeconds(
+                                data.sewer.last_value.date_unix
+                              ),
+                            },
+                          },
+                        ]}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.nl.rioolwater()}
+                        icon={<Chevron />}
+                        iconPlacement="right"
+                      >
+                        {textNl.mini_trend_tiles.sewer.read_more_link}
+                      </LinkWithIcon>
+                    </>
+                  }
+                  icon={<RioolwaterMonitoring />}
+                  values={dataSewerTotal.values}
+                  seriesConfig={[
+                    {
+                      type: 'split-area',
+                      metricProperty: 'average',
+                      label: commonTexts.common.daggemiddelde,
+                      splitPoints: averageSplitPoints,
+                    },
+                  ]}
+                  dataOptions={{
+                    valueAnnotation:
+                      commonTexts.waarde_annotaties.riool_normalized,
+                  }}
+                  accessibility={{ key: 'topical_sewer' }}
+                  warning={getWarning(content.elements.warning, 'sewer')}
+                />
                 <MiniVaccinationCoverageTile
                   title={textNl.mini_trend_tiles.vaccinatiegraad.title}
                   oneShotBarLabel={
