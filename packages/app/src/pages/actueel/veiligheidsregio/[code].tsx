@@ -378,11 +378,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                             text: textVr.data_driven_texts.sewer.value,
                             metricName: 'sewer',
                             metricProperty: 'average',
-                            additionalData: {
-                              newDate: formatters.formatDateFromSeconds(
-                                data.sewer.last_value.date_unix
-                              ),
-                            },
                           },
                         ]}
                       />
@@ -401,7 +396,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'split-area',
                       metricProperty: 'average',
-                      label: commonTexts.common.weekgemiddelde,
+                      label: commonTexts.common.daggemiddelde,
                       splitPoints: averageSplitPoints,
                     },
                   ]}

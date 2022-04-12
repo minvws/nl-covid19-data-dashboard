@@ -398,7 +398,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'split-area',
                       metricProperty: 'average',
-                      label: commonTexts.common.daggemiddelde,
+                      label: commonTexts.common.weekgemiddelde,
                       splitPoints: averageSplitPoints,
                     },
                   ]}
