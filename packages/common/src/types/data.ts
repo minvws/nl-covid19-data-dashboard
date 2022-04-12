@@ -316,7 +316,6 @@ export interface Nl {
   corona_melder_app_download: NlCoronaMelderAppDownload;
   corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
-  vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
@@ -950,17 +949,6 @@ export interface NlVaccineCoverageValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
-}
-export interface NlVaccineDelivery {
-  values: NlVaccineDeliveryValue[];
-  last_value: NlVaccineDeliveryValue;
-}
-export interface NlVaccineDeliveryValue {
-  total: number | null;
-  date_of_insertion_unix: number;
-  date_of_report_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
 }
 export interface NlVaccineDeliveryEstimate {
   values: NlVaccineDeliveryEstimateValue[];
