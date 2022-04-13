@@ -98,6 +98,14 @@ export function SewerChart({
     [options]
   );
 
+  const underReportManuallyOverride = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    countTrailingNullValues(
+      data.hospital_nice.values,
+      'admissions_on_date_of_admission_moving_average_rounded'
+    )
+  );
+
   return (
     <ChartTile
       timeframeOptions={TimeframeOptionsList}
@@ -170,7 +178,21 @@ export function SewerChart({
                     return <LocationTooltip data={data} />;
                   }
                 }}
-                dataOptions={{ valueAnnotation: text.valueAnnotation }}
+                dataOptions={{
+                  valueAnnotation: text.valueAnnotation,
+                  timespanAnnotations: [
+                    //TODO Zeewolde manuallyIncomplete
+                    {
+                      start: underReportedRangeHospital,
+                      end: Infinity,
+                      label: textShared.data_incomplete,
+                      shortLabel: commonTexts.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'admissions_on_date_of_admission_moving_average',
+                      ],
+                    },
+                  ],
+                }}
               />
             ) : (
               <TimeSeriesChart
