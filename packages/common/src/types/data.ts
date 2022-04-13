@@ -319,7 +319,6 @@ export interface Nl {
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
-  vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_doctors: NlVaccineAdministeredDoctors;
   vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
   vaccine_administered_ggd: NlVaccineAdministeredGgd;
@@ -991,22 +990,6 @@ export interface NlVaccineAdministeredValue {
   janssen?: number;
   sanofi?: number;
   novavax: number;
-  total: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
-export interface NlVaccineAdministeredEstimate {
-  values: NlVaccineAdministeredEstimateValue[];
-  last_value: NlVaccineAdministeredEstimateValue;
-}
-export interface NlVaccineAdministeredEstimateValue {
-  pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  cure_vac?: number;
-  janssen?: number;
-  sanofi?: number;
   total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;

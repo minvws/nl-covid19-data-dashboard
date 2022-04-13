@@ -49,7 +49,6 @@
     "vaccine_vaccinated_or_support",
     "vaccine_delivery_estimate",
     "vaccine_administered",
-    "vaccine_administered_estimate",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
     "vaccine_administered_ggd",
@@ -212,9 +211,6 @@
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
-    },
-    "vaccine_administered_estimate": {
-      "$ref": "vaccine_administered_estimate.json"
     },
     "vaccine_administered_doctors": {
       "$ref": "vaccine_administered_doctors.json"
