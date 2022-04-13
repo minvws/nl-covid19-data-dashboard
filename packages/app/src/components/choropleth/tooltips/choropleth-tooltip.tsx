@@ -1,6 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-import { Markdown } from '~/components/markdown';
+import { Markdown, VisuallyHidden } from '~/components';
+import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { ChoroplethDataItem } from '../logic';
@@ -71,6 +72,9 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     formatDateSpan,
   });
 
+  // This line is to make sure the content is readible by screenreaders and does not skip numbers after a new line
+  const ariaContent = content.replace(/(\n|\*)/g, '');
+
   return (
     <TooltipContent
       title={data.featureName}
@@ -87,7 +91,10 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
           data.dataItem[data.dataConfig.metricProperty] as unknown as number
         }
       >
-        <Markdown content={content} />
+        <VisuallyHidden>{ariaContent}</VisuallyHidden>
+        <Box aria-hidden>
+          <Markdown content={content} />
+        </Box>
       </TooltipSubject>
     </TooltipContent>
   );
