@@ -36,6 +36,7 @@ export type TimespanAnnotationConfig = {
   shortLabel?: string;
   cutValuesForMetricProperties?: string[];
   textAlign?: 'left' | 'center' | 'right';
+  manuallyOverrideIncomplete?: {date_start: number; date_end: number};
 };
 
 export type TimeAnnotationConfig = {
