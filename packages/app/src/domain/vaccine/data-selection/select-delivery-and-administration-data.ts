@@ -15,18 +15,18 @@ export type DeliveryAndAdministrationData = {
 };
 
 export function selectDeliveryAndAdministrationData(
-  vaccine_administered: NlVaccineAdministered
+  vaccineAdministered: NlVaccineAdministered
 ) {
   const values: VaccineDeliveryAndAdministrationsValue[] =
-    vaccine_administered.values.map((value, index) => ({
+    vaccineAdministered.values.map((value, index) => ({
       ...value,
-      date_unix: vaccine_administered.values[index].date_end_unix,
+      date_unix: vaccineAdministered.values[index].date_end_unix,
     }));
 
   const deliveryAndAdministration: DeliveryAndAdministrationData = {
     values,
     estimatedRange: [0, 0],
-    last_value: vaccine_administered.last_value,
+    last_value: vaccineAdministered.last_value,
   };
 
   return { deliveryAndAdministration };
