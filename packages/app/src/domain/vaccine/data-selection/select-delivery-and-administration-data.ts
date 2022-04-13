@@ -1,4 +1,7 @@
-import { Nl, NlVaccineAdministeredValue } from '@corona-dashboard/common';
+import {
+  NlVaccineAdministered,
+  NlVaccineAdministeredValue,
+} from '@corona-dashboard/common';
 
 export type VaccineDeliveryAndAdministrationsValue =
   NlVaccineAdministeredValue & {
@@ -11,9 +14,9 @@ export type DeliveryAndAdministrationData = {
   last_value: NlVaccineAdministeredValue;
 };
 
-export function selectDeliveryAndAdministrationData(nlData: Nl) {
-  const { vaccine_administered } = nlData;
-
+export function selectDeliveryAndAdministrationData(
+  vaccine_administered: NlVaccineAdministered
+) {
   const values: VaccineDeliveryAndAdministrationsValue[] =
     vaccine_administered.values.map((value, index) => ({
       ...value,

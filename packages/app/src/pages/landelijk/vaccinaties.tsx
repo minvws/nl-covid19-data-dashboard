@@ -125,7 +125,8 @@ export const getStaticProps = createGetStaticProps(
     'booster_shot_per_age_group',
     'repeating_shot_administered'
   ),
-  () => selectDeliveryAndAdministrationData(getNlData().data),
+  () =>
+    selectDeliveryAndAdministrationData(getNlData().data.vaccine_administered),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
