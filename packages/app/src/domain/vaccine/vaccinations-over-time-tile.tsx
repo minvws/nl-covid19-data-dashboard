@@ -2,8 +2,9 @@ import {
   NlVaccineAdministeredPlannedValue,
   NlVaccineCoverage,
 } from '@corona-dashboard/common';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useMemo } from 'react';
 import { Box } from '~/components/base';
+import { isDefined } from 'ts-is-present';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
@@ -21,11 +22,13 @@ import {
 
 function useTileData(
   activeChart: ActiveVaccinationChart,
-  text: SiteText['pages']['vaccinationsPage']['nl']
+  text: SiteText['pages']['vaccinationsPage']['nl'],
+  insertionDate: number
 ) {
   if (activeChart === 'coverage') {
     const metadata = {
       source: text.bronnen.rivm,
+      date: insertionDate,
     };
     const description =
       text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
@@ -33,6 +36,7 @@ function useTileData(
   }
   const metadata = {
     source: text.bronnen.rivm,
+    date: insertionDate,
   };
   const description = text.grafiek.omschrijving;
   return [metadata, description] as const;
@@ -62,7 +66,23 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
 
-  const [metadata, description] = useTileData(activeVaccinationChart, text);
+  const lastDate = useMemo<number>(
+    () =>
+      activeVaccinationChart === 'coverage' && isDefined(coverageData)
+        ? coverageData.last_value.date_end_unix
+        : deliveryAndAdministrationData.last_value.date_end_unix,
+    [
+      activeVaccinationChart,
+      coverageData,
+      deliveryAndAdministrationData.last_value.date_end_unix,
+    ]
+  );
+
+  const [metadata, description] = useTileData(
+    activeVaccinationChart,
+    text,
+    lastDate
+  );
 
   const roundedMillion =
     Math.floor(
