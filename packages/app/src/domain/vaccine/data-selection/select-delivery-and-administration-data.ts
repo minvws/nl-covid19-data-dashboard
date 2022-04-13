@@ -2,11 +2,14 @@ import {
   NlVaccineAdministered,
   NlVaccineAdministeredValue,
 } from '@corona-dashboard/common';
+import { omit } from 'lodash';
 
-export type VaccineDeliveryAndAdministrationsValue =
-  NlVaccineAdministeredValue & {
-    date_unix: number;
-  };
+export type VaccineDeliveryAndAdministrationsValue = Omit<
+  NlVaccineAdministeredValue,
+  'date_start_unix' | 'date_end_unix'
+> & {
+  date_unix: number;
+};
 
 export type DeliveryAndAdministrationData = {
   values: VaccineDeliveryAndAdministrationsValue[];
@@ -19,7 +22,7 @@ export function selectDeliveryAndAdministrationData(
 ) {
   const values: VaccineDeliveryAndAdministrationsValue[] =
     vaccineAdministered.values.map((value, index) => ({
-      ...value,
+      ...omit(value, ['date_start_unix', 'date_end_unix']),
       date_unix: vaccineAdministered.values[index].date_end_unix,
     }));
 
