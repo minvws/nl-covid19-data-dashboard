@@ -46,6 +46,12 @@ type SewerChartProps = {
     valueAnnotation: string;
   };
   vrNameOrGmName?: string;
+  incompleteManuallyOverride?: {
+    zeewolde_date_end_in_unix_time: string;
+    zeewolde_date_start_in_unix_time: string;
+    zeewolde_label: string;
+    zeewolde_short_label: string;
+  };
   warning?: string;
 };
 
@@ -55,6 +61,7 @@ export function SewerChart({
   dataPerInstallation,
   text,
   vrNameOrGmName,
+  incompleteManuallyOverride,
   warning,
 }: SewerChartProps) {
   const {
@@ -83,6 +90,36 @@ export function SewerChart({
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
+  const isZeewolde =
+    vrNameOrGmName === 'GM0050' ||
+    vrNameOrGmName === 'Zeewolde' ||
+    vrNameOrGmName === 'VR25' ||
+    vrNameOrGmName === 'Flevoland';
+
+  const dataOptions =
+    incompleteManuallyOverride && isZeewolde
+      ? {
+          valueAnnotation: text.valueAnnotation,
+          timespanAnnotations: [
+            {
+              start: parseInt(
+                incompleteManuallyOverride.zeewolde_date_end_in_unix_time
+              ),
+              end: parseInt(
+                incompleteManuallyOverride.zeewolde_date_start_in_unix_time
+              ),
+              label: incompleteManuallyOverride.zeewolde_label,
+              shortLabel: incompleteManuallyOverride.zeewolde_short_label,
+              cutValuesForMetricProperties: [
+                'selected_installation_rna_normalized',
+              ],
+            },
+          ],
+        }
+      : {
+          valueAnnotation: text.valueAnnotation,
+        };
+
   const optionsWithContent = useMemo(
     () =>
       options
@@ -96,14 +133,6 @@ export function SewerChart({
         }))
         .filter(isPresent),
     [options]
-  );
-
-  const underReportManuallyOverride = getBoundaryDateStartUnix(
-    data.hospital_nice.values,
-    countTrailingNullValues(
-      data.hospital_nice.values,
-      'admissions_on_date_of_admission_moving_average_rounded'
-    )
   );
 
   return (
@@ -178,21 +207,7 @@ export function SewerChart({
                     return <LocationTooltip data={data} />;
                   }
                 }}
-                dataOptions={{
-                  valueAnnotation: text.valueAnnotation,
-                  timespanAnnotations: [
-                    //TODO Zeewolde manuallyIncomplete
-                    {
-                      start: underReportedRangeHospital,
-                      end: Infinity,
-                      label: textShared.data_incomplete,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average',
-                      ],
-                    },
-                  ],
-                }}
+                dataOptions={dataOptions}
               />
             ) : (
               <TimeSeriesChart
