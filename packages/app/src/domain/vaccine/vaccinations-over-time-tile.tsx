@@ -13,7 +13,7 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
-import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
+import { AdministrationData } from './data-selection/select-administration-data';
 import {
   ActiveVaccinationChart,
   VaccinationChartControls,
@@ -44,7 +44,7 @@ function useTileData(
 
 interface VaccinationsOverTimeTileProps {
   coverageData?: NlVaccineCoverage;
-  deliveryAndAdministrationData: DeliveryAndAdministrationData;
+  administrationData: AdministrationData;
   vaccineAdministeredPlannedLastValue: NlVaccineAdministeredPlannedValue;
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
@@ -55,7 +55,7 @@ interface VaccinationsOverTimeTileProps {
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const {
     coverageData,
-    deliveryAndAdministrationData,
+    administrationData,
     timelineEvents,
     vaccineAdministeredPlannedLastValue,
     text,
@@ -70,11 +70,11 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     () =>
       activeVaccinationChart === 'coverage' && isDefined(coverageData)
         ? coverageData.last_value.date_end_unix
-        : deliveryAndAdministrationData.last_value.date_end_unix,
+        : administrationData.last_value.date_end_unix,
     [
       activeVaccinationChart,
       coverageData,
-      deliveryAndAdministrationData.last_value.date_end_unix,
+      administrationData.last_value.date_end_unix,
     ]
   );
 
@@ -85,9 +85,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   );
 
   const roundedMillion =
-    Math.floor(
-      (deliveryAndAdministrationData.last_value.total / 1_000_000) * 10
-    ) / 10;
+    Math.floor((administrationData.last_value.total / 1_000_000) * 10) / 10;
 
   const [dateFromText, dateToText] = useFormatDateRange(
     vaccineAdministeredPlannedLastValue.date_start_unix,
@@ -113,7 +111,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
       />
       <VaccinationsOverTimeChart
         coverageData={coverageData}
-        deliveryAndAdministrationData={deliveryAndAdministrationData}
+        administrationData={administrationData}
         activeChart={activeVaccinationChart}
         timelineEvents={timelineEvents}
         text={text}

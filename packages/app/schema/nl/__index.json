@@ -46,10 +46,8 @@
     "tested_overall",
     "tested_per_age_group",
     "vaccine_vaccinated_or_support",
-    "vaccine_delivery",
     "vaccine_delivery_estimate",
     "vaccine_administered",
-    "vaccine_administered_estimate",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
     "vaccine_administered_ggd",
@@ -201,9 +199,6 @@
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
     },
-    "vaccine_delivery": {
-      "$ref": "vaccine_delivery.json"
-    },
     "vaccine_delivery_estimate": {
       "$ref": "vaccine_delivery_estimate.json"
     },
@@ -212,9 +207,6 @@
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
-    },
-    "vaccine_administered_estimate": {
-      "$ref": "vaccine_administered_estimate.json"
     },
     "vaccine_administered_doctors": {
       "$ref": "vaccine_administered_doctors.json"

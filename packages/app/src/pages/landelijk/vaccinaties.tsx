@@ -29,7 +29,7 @@ import {
 } from '~/components';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
-  selectDeliveryAndAdministrationData,
+  selectAdministrationData,
   selectVaccineCoverageData,
   VaccinationsOverTimeTile,
   VaccineBoosterAdministrationsKpiSection,
@@ -124,7 +124,7 @@ export const getStaticProps = createGetStaticProps(
     'booster_shot_per_age_group',
     'repeating_shot_administered'
   ),
-  () => selectDeliveryAndAdministrationData(getNlData().data),
+  () => selectAdministrationData(getNlData().data.vaccine_administered),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
@@ -194,7 +194,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     choropleth,
     selectedNlData: data,
     lastGenerated,
-    deliveryAndAdministration,
+    administrationData,
   } = props;
   const { commonTexts, formatNumber } = useIntl();
   const { metadataTexts, textNl } = pageText;
@@ -362,7 +362,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccinationsOverTimeTile
             text={textNl}
             coverageData={data.vaccine_coverage}
-            deliveryAndAdministrationData={deliveryAndAdministration}
+            administrationData={administrationData}
             vaccineAdministeredPlannedLastValue={
               data.vaccine_administered_planned.last_value
             }
