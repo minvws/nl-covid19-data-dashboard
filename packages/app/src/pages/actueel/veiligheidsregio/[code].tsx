@@ -408,18 +408,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   dataOptions={{
                     valueAnnotation:
                       commonTexts.waarde_annotaties.riool_normalized,
-                    timespanAnnotations: [
-                      //TODO Zeewolde manuallyIncomplete
-                      {
-                        start: underReportedRangeHospital,
-                        end: Infinity,
-                        label: textShared.data_incomplete,
-                        shortLabel: commonTexts.common.incomplete,
-                        cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average',
-                        ],
-                      },
-                    ],
                   }}
                   accessibility={{ key: 'topical_sewer' }}
                   warning={getWarning(content.elements.warning, 'sewer')}
