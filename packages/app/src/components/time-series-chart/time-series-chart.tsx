@@ -509,7 +509,6 @@ export function TimeSeriesChart<
                   config={x}
                   bounds={bounds}
                   series={seriesList[0]}
-                  // TODO adjust here for Zeewolde
                 />
               ))}
             {timeAnnotations?.map((x, index) => (
@@ -519,7 +518,6 @@ export function TimeSeriesChart<
                 getX={getX}
                 height={bounds.height}
                 config={x}
-                // TODO adjust here for Zeewolde
               />
             ))}
 
