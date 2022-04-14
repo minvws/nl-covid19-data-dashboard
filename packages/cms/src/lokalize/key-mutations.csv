@@ -48,7 +48,3 @@ timestamp,action,key,document_id,move_to
 2022-04-14T11:35:19.285Z,add,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_date_end_in_unix_time,BarLwW8hBDpE0bK0rLm9Kv,__
 2022-04-14T11:35:20.492Z,add,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_label,T6FOC3TDR34eMSB5nyztO0,__
 2022-04-14T11:35:21.318Z,add,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_short_label,T6FOC3TDR34eMSB5nyztli,__
-2022-04-14T11:41:43.338Z,move,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_date_end_in_unix_time,BarLwW8hBDpE0bK0rLm9Kv,pages.sewerPage.shared.zeewolde_incomplete_manualy_override.zeewolde_date_end_in_unix_time
-2022-04-14T11:41:43.340Z,move,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_date_start_in_unix_time,T6FOC3TDR34eMSB5nyzsA8,pages.sewerPage.shared.zeewolde_incomplete_manualy_override.zeewolde_date_start_in_unix_time
-2022-04-14T11:41:43.341Z,move,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_label,T6FOC3TDR34eMSB5nyztO0,pages.sewerPage.shared.zeewolde_incomplete_manualy_override.zeewolde_label
-2022-04-14T11:41:43.342Z,move,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_short_label,T6FOC3TDR34eMSB5nyztli,pages.sewerPage.shared.zeewolde_incomplete_manualy_override.zeewolde_short_label
