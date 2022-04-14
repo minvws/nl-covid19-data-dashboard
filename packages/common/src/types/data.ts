@@ -275,7 +275,6 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
-  booster_and_third_shot_administered: NlBoosterAndThirdShotAdministered;
   booster_shot_administered: NlBoosterShotAdministered;
   repeating_shot_administered: NlRepeatingShotAdministered;
   booster_shot_delivered: NlBoosterShotDelivered;
@@ -376,15 +375,6 @@ export interface NamedDifferenceDecimal {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
-}
-export interface NlBoosterAndThirdShotAdministered {
-  values: NlBoosterAndThirdShotAdministeredValue[];
-  last_value: NlBoosterAndThirdShotAdministeredValue;
-}
-export interface NlBoosterAndThirdShotAdministeredValue {
-  administered_total: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
 }
 export interface NlBoosterShotAdministered {
   values: NlBoosterShotAdministeredValue[];

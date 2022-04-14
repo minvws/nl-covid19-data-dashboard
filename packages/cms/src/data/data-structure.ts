@@ -58,7 +58,6 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
-    booster_and_third_shot_administered: ["administered_total"],
     booster_shot_administered: [
       "administered_total",
       "ggd_administered_last_7_days",

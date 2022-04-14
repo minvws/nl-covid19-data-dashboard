@@ -5,7 +5,6 @@
   "required": [
     "behavior",
     "behavior_annotations",
-    "booster_and_third_shot_administered",
     "booster_shot_administered",
     "repeating_shot_administered",
     "booster_shot_delivered",
@@ -81,9 +80,6 @@
     },
     "named_difference": {
       "$ref": "__named_difference.json"
-    },
-    "booster_and_third_shot_administered": {
-      "$ref": "booster_and_third_shot_administered.json"
     },
     "booster_shot_administered": {
       "$ref": "booster_shot_administered.json"
