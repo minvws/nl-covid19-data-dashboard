@@ -70,11 +70,11 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
     () =>
       activeVaccinationChart === 'coverage' && isDefined(coverageData)
         ? coverageData.last_value.date_end_unix
-        : deliveryAndAdministrationData.last_value.date_end_unix,
+        : administrationData.last_value.date_end_unix,
     [
       activeVaccinationChart,
       coverageData,
-      deliveryAndAdministrationData.last_value.date_end_unix,
+      administrationData.last_value.date_end_unix,
     ]
   );
 
