@@ -90,29 +90,20 @@ export function SewerChart({
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
-  const isZeewolde =
-    vrNameOrGmName === 'GM0050' ||
-    vrNameOrGmName === 'Zeewolde' ||
-    vrNameOrGmName === 'VR25' ||
-    vrNameOrGmName === 'Flevoland';
-
   const dataOptions =
-    incompleteManuallyOverride && isZeewolde
+    incompleteManuallyOverride && selectedInstallation === 'ZEEWOLDE'
       ? {
           valueAnnotation: text.valueAnnotation,
           timespanAnnotations: [
             {
               start: parseInt(
-                incompleteManuallyOverride.zeewolde_date_end_in_unix_time
+                incompleteManuallyOverride.zeewolde_date_start_in_unix_time
               ),
               end: parseInt(
-                incompleteManuallyOverride.zeewolde_date_start_in_unix_time
+                incompleteManuallyOverride.zeewolde_date_end_in_unix_time
               ),
               label: incompleteManuallyOverride.zeewolde_label,
               shortLabel: incompleteManuallyOverride.zeewolde_short_label,
-              cutValuesForMetricProperties: [
-                'selected_installation_rna_normalized',
-              ],
             },
           ],
         }
@@ -222,9 +213,7 @@ export function SewerChart({
                     splitPoints: averageSplitPoints,
                   },
                 ]}
-                dataOptions={{
-                  valueAnnotation: text.valueAnnotation,
-                }}
+                dataOptions={dataOptions}
               />
             )
           }
