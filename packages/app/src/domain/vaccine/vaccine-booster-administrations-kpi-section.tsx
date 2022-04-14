@@ -12,20 +12,20 @@ import { Markdown } from '~/components/markdown';
 import { SiteText } from '~/locale';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
-  totalBoosterAndThirdShots: number;
-  metadateBoosterAndThirdShots: MetadataProps;
+  totalBoosterShots: number;
+  metadateBoosterShots: MetadataProps;
   boosterGgdValue: number;
   metadateBoosterGgd: MetadataProps;
   boosterEstimatedValue: number;
   metadateBoosterEstimated: MetadataProps;
   boosterShotLastSevenDays: number;
   metadataBoosterShotLastSevenDays: MetadataProps;
-  text: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_kpi'];
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
-  totalBoosterAndThirdShots,
-  metadateBoosterAndThirdShots,
+  totalBoosterShots,
+  metadateBoosterShots,
   boosterGgdValue,
   metadateBoosterGgd,
   boosterEstimatedValue,
@@ -46,14 +46,14 @@ export function VaccineBoosterAdministrationsKpiSection({
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
-          <KpiValue absolute={totalBoosterAndThirdShots} />
-          <Text>{text.total_booster_and_third_shots.description}</Text>
-          {text.total_booster_and_third_shots.warning && (
+          <KpiValue absolute={totalBoosterShots} />
+          <Text>{text.total_booster_shots.description}</Text>
+          {text.total_booster_shots.warning && (
             <Message variant="warning">
-              {text.total_booster_and_third_shots.warning}
+              {text.total_booster_shots.warning}
             </Message>
           )}
-          <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
+          <Metadata {...metadateBoosterShots} isTileFooter />
 
           <Markdown
             content={replaceVariablesInText(

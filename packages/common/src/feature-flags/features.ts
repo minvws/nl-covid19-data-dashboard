@@ -100,10 +100,6 @@ export const features: Feature[] = [
     isEnabled: false,
   },
   {
-    name: 'nlVaccinationsBoosterThirdShotInformationBlock',
-    isEnabled: false,
-  },
-  {
     name: 'nlBoosterShotDeliveredKpiTile',
     isEnabled: false,
     dataScopes: ['nl'],
@@ -144,12 +140,6 @@ export const features: Feature[] = [
     metricName: 'booster_shot_planned',
   },
   {
-    name: 'nlThirdShotAdministeredDisable',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'third_shot_administered',
-  },
-  {
     name: 'loadingIndicator',
     isEnabled: false,
   },
@@ -179,12 +169,6 @@ export const features: Feature[] = [
     metricName: 'booster_shot_planned',
   },
   {
-    name: 'nlThirdShotAdministeredDisable',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'third_shot_administered',
-  },
-  {
     name: 'loadingIndicator',
     isEnabled: false,
   },
@@ -193,12 +177,6 @@ export const features: Feature[] = [
     isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'booster_shot_per_age_group',
-  },
-  {
-    name: 'nlBoosterAndThirdShotAdministered',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'booster_and_third_shot_administered',
   },
   {
     name: 'boosterCoverage',
