@@ -61,24 +61,22 @@ export function ContentTeaser({
             category
           )}
         </Text>
-        <Heading level={variant === 'normal' ? 4 : 5} as="h2" color="blue">
-          <HeadingLinkWithIcon
-            href={
-              isAbsoluteUrl(slug)
-                ? slug
-                : isWeeklyHighlight
-                ? `/weekberichten/${slug}`
-                : isArticle
-                ? `/artikelen/${slug}`
-                : slug
-            }
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-            underline
-          >
-            {title}
-          </HeadingLinkWithIcon>
-        </Heading>
+        <HeadingLinkWithIcon
+          href={
+            isAbsoluteUrl(slug)
+              ? slug
+              : isWeeklyHighlight
+              ? `/weekberichten/${slug}`
+              : isArticle
+              ? `/artikelen/${slug}`
+              : slug
+          }
+          icon={<ArrowIconRight />}
+          iconPlacement="right"
+          underline
+        >
+          {title}
+        </HeadingLinkWithIcon>
       </Box>
     </Box>
   );
