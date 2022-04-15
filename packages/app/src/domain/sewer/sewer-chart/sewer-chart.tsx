@@ -46,7 +46,7 @@ type SewerChartProps = {
     valueAnnotation: string;
   };
   vrNameOrGmName?: string;
-  incompleteManuallyOverride?: {
+  incompleteDatesAndTexts?: {
     zeewolde_date_end_in_unix_time: string;
     zeewolde_date_start_in_unix_time: string;
     zeewolde_label: string;
@@ -61,7 +61,7 @@ export function SewerChart({
   dataPerInstallation,
   text,
   vrNameOrGmName,
-  incompleteManuallyOverride,
+  incompleteDatesAndTexts,
   warning,
 }: SewerChartProps) {
   const {
@@ -91,19 +91,19 @@ export function SewerChart({
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
   const dataOptions =
-    incompleteManuallyOverride && selectedInstallation === 'ZEEWOLDE'
+    incompleteDatesAndTexts && selectedInstallation === 'ZEEWOLDE'
       ? {
           valueAnnotation: text.valueAnnotation,
           timespanAnnotations: [
             {
               start: parseInt(
-                incompleteManuallyOverride.zeewolde_date_start_in_unix_time
+                incompleteDatesAndTexts.zeewolde_date_start_in_unix_time
               ),
               end: parseInt(
-                incompleteManuallyOverride.zeewolde_date_end_in_unix_time
+                incompleteDatesAndTexts.zeewolde_date_end_in_unix_time
               ),
-              label: incompleteManuallyOverride.zeewolde_label,
-              shortLabel: incompleteManuallyOverride.zeewolde_short_label,
+              label: incompleteDatesAndTexts.zeewolde_label,
+              shortLabel: incompleteDatesAndTexts.zeewolde_short_label,
             },
           ],
         }
