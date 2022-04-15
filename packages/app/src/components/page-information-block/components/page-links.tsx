@@ -6,7 +6,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { spacingStyle } from '~/style/functions/spacing';
 import { space } from '~/style/theme';
@@ -26,9 +26,7 @@ export function PageLinks({ links }: pageLinksProps) {
 
   return (
     <Box spacing={2}>
-      <Text fontWeight="bold">
-        {commonTexts.informatie_header.handige_links}
-      </Text>
+      <BoldText>{commonTexts.informatie_header.handige_links}</BoldText>
       <OrderedList>
         {links.map((link, index) => (
           <ListItem key={index}>

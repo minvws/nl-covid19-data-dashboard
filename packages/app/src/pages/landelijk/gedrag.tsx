@@ -79,7 +79,8 @@ export default function BehaviorPage(
   const behaviorLastValue = data.behavior.last_value;
 
   const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
-  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
+  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } =
+    useIntl();
   const { caterogyTexts, metadataTexts, text } = pageText;
 
   const metadata = {
@@ -113,15 +114,14 @@ export default function BehaviorPage(
 
   const { currentTimelineEvents } = useMemo(() => {
     // Timeline event from the current selected behaviour
-    const currentTimelineEvents = data.behavior_annotations.values.filter(
-      (a) => (a.behavior_indicator === currentId)
-    ).map((event) => ({
+    const currentTimelineEvents = data.behavior_annotations.values
+      .filter((a) => a.behavior_indicator === currentId)
+      .map((event) => ({
         title: event[`message_title_${locale}`],
         description: event[`message_desc_${locale}`],
         start: event.date_start_unix,
-        end: event.date_end_unix
-      })
-    );
+        end: event.date_end_unix,
+      }));
 
     return { currentTimelineEvents };
   }, [currentId, data.behavior_annotations.values, locale]);

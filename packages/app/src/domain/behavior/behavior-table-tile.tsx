@@ -12,7 +12,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { PercentageBar } from '~/components/percentage-bar';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
@@ -254,9 +254,7 @@ function PercentageBarWithNumber({
       pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}
     >
       <Box as="span" minWidth={40} textAlign="right">
-        <InlineText fontWeight="bold">
-          {`${formatPercentage(percentage)}%`}
-        </InlineText>
+        <BoldText>{`${formatPercentage(percentage)}%`}</BoldText>
       </Box>
       <Box color={color} flexGrow={1}>
         <PercentageBar percentage={percentage} height="8px" />

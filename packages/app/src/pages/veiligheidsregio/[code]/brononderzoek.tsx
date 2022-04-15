@@ -8,7 +8,7 @@ import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
@@ -166,7 +166,7 @@ export default function BrononderzoekPage(
                   )}
                 />
 
-                <Text fontWeight="bold">
+                <BoldText>
                   {replaceComponentsInText(
                     textShared.veiligheidsregio_kpi.beschrijving_bekend,
                     {
@@ -182,7 +182,7 @@ export default function BrononderzoekPage(
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
               </KpiTile>
             )}
           </TwoKpiSection>

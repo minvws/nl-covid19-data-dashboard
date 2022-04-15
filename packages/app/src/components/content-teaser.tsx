@@ -3,7 +3,7 @@ import { BackgroundImage } from '~/components/background-image';
 import { Box } from '~/components/base';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { PublicationDate } from '~/components/publication-date';
-import { Heading, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
@@ -61,24 +61,22 @@ export function ContentTeaser({
             category
           )}
         </Text>
-        <Heading level={variant === 'normal' ? 4 : 5} as="h2" color="blue">
-          <HeadingLinkWithIcon
-            href={
-              isAbsoluteUrl(slug)
-                ? slug
-                : isWeeklyHighlight
-                ? `/weekberichten/${slug}`
-                : isArticle
-                ? `/artikelen/${slug}`
-                : slug
-            }
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-            underline
-          >
-            {title}
-          </HeadingLinkWithIcon>
-        </Heading>
+        <HeadingLinkWithIcon
+          href={
+            isAbsoluteUrl(slug)
+              ? slug
+              : isWeeklyHighlight
+              ? `/weekberichten/${slug}`
+              : isArticle
+              ? `/artikelen/${slug}`
+              : slug
+          }
+          icon={<ArrowIconRight />}
+          iconPlacement="right"
+          underline
+        >
+          {title}
+        </HeadingLinkWithIcon>
       </Box>
     </Box>
   );
