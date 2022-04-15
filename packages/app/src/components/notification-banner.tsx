@@ -4,7 +4,7 @@ import { Box, Spacer } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useCollapsible } from '~/utils/use-collapsible';
-import { InlineText } from './typography';
+import { InlineText, BoldText } from './typography';
 
 interface NotificationBannerProps {
   title: string;
@@ -52,7 +52,7 @@ export function NotificationBanner({
                   mt: 1,
                 })}
               >
-                <InlineText fontWeight="bold">
+                <BoldText>
                   {titleWithoutLastWord}{' '}
                   <Box display="inline-flex" position="relative">
                     <InlineText>
@@ -60,11 +60,11 @@ export function NotificationBanner({
                       {collapsible.chevron}
                     </InlineText>
                   </Box>
-                </InlineText>
+                </BoldText>
               </Box>
             )
           ) : (
-            <InlineText fontWeight="bold">{title}</InlineText>
+            <BoldText>{title}</BoldText>
           )}
 
           {hasDescription &&

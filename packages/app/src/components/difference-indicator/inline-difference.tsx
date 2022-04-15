@@ -1,6 +1,6 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { Down, Up } from '@corona-dashboard/icons';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
 
@@ -17,9 +17,7 @@ export function InlineDifference({
   if (value.difference > 0)
     return (
       <Container>
-        <InlineText fontWeight="bold">
-          {isAmount ? text.trend_meer : text.trend_hoger}
-        </InlineText>
+        <BoldText>{isAmount ? text.trend_meer : text.trend_hoger}</BoldText>
         <IconContainer color="red">
           <Up />
         </IconContainer>
@@ -28,9 +26,7 @@ export function InlineDifference({
   if (value.difference < 0)
     return (
       <Container>
-        <InlineText fontWeight="bold">
-          {isAmount ? text.trend_minder : text.trend_lager}
-        </InlineText>
+        <BoldText>{isAmount ? text.trend_minder : text.trend_lager}</BoldText>
         <IconContainer color="data.primary">
           <Down />
         </IconContainer>
@@ -39,7 +35,7 @@ export function InlineDifference({
 
   return (
     <Container>
-      <InlineText fontWeight="bold">{text.trend_gelijk}</InlineText>
+      <BoldText>{text.trend_gelijk}</BoldText>
     </Container>
   );
 }

@@ -2,7 +2,7 @@ import { css } from '@styled-system/css';
 import { Fragment } from 'react';
 import { Box } from '~/components/base';
 import { Cell, Row, Table, TableBody } from '~/components/table';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { LockdownData } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -70,7 +70,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                   verticalAlign="center"
                   backgroundColor="#F9F9F9"
                 >
-                  <InlineText fontWeight="bold">{group.title}</InlineText>
+                  <BoldText>{group.title}</BoldText>
                 </Cell>
               </Row>
               <Row>
@@ -160,7 +160,7 @@ function DesktopLockdownTable(props: LockdownTableData) {
                 px={2}
                 verticalAlign="top"
               >
-                <InlineText fontWeight="bold">{group.title}</InlineText>
+                <BoldText>{group.title}</BoldText>
               </Cell>
               <Cell
                 borderTop={'1px solid black'}

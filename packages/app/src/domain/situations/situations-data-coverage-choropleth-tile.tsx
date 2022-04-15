@@ -6,7 +6,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
-import { Text } from '~/components/typography';
+import { Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -138,9 +138,7 @@ function LegendItem({
     <Box display="flex" css={css({ gap: '.5rem' })}>
       <LegendIcon color={color}>{icon}</LegendIcon>
       <Box spacing={1}>
-        <Text color={color} fontWeight="bold">
-          {title}
-        </Text>
+        <BoldText color={color}>{title}</BoldText>
         <Text>{description}</Text>
       </Box>
     </Box>

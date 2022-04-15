@@ -12,7 +12,7 @@ import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
@@ -81,9 +81,9 @@ export function BehaviorLineChartTile({
             <InlineTooltip
               content={text.shared.line_chart.tooltip_witte_gaten_beschrijving}
             >
-              <InlineText fontWeight="bold">
+              <BoldText>
                 {text.shared.line_chart.tooltip_witte_gaten_label}
-              </InlineText>
+              </BoldText>
             </InlineTooltip>
           )}
         </Box>

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Box } from '~/components/base';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Text, InlineText } from '~/components/typography';
+import { BoldText, InlineText } from '~/components/typography';
 import {
   ChartTile,
   TwoKpiSection,
@@ -187,7 +187,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textVr.infected_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textVr.infected_kpi.last_value_text,
                     {
@@ -202,7 +202,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textVr.infected_kpi.link_cta && (
                   <Markdown content={textVr.infected_kpi.link_cta} />
                 )}
@@ -225,7 +225,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textVr.percentage_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textVr.percentage_kpi.last_value_text,
                     {
@@ -240,7 +240,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textVr.percentage_kpi.link_cta && (
                   <Markdown content={textVr.percentage_kpi.link_cta} />
                 )}
@@ -299,7 +299,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               description={
                 <>
                   <Markdown content={textVr.map_toelichting} />
-                  <Text variant="body2" fontWeight="bold">
+                  <BoldText variant="body2">
                     {replaceComponentsInText(textVr.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
@@ -312,7 +312,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                       safetyRegion: vrName,
                     })}
-                  </Text>
+                  </BoldText>
                 </>
               }
               legend={{
@@ -381,7 +381,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={textVr.ggd.tests_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(textVr.ggd.tests_kpi.last_value_text, {
                   tested_total: (
                     <InlineText color="data.primary">{`${formatNumber(
@@ -393,7 +393,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     'weekday-medium'
                   ),
                 })}
-              </Text>
+              </BoldText>
             </KpiTile>
             <KpiTile
               title={textVr.ggd.percentage_kpi.title}
@@ -410,7 +410,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={textVr.ggd.percentage_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(
                   textVr.ggd.percentage_kpi.last_value_text,
                   {
@@ -432,7 +432,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   }
                 )}
-              </Text>
+              </BoldText>
             </KpiTile>
           </TwoKpiSection>
 
