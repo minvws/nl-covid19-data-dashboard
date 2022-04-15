@@ -41,7 +41,6 @@ import {
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
-  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
@@ -222,8 +221,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationStatusIntensiveCareFeature = useFeature(
     'nlVaccinationIntensiveCareVaccinationStatus'
   );
-  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
-    'nlVaccinationBoosterShotsPerAgeGroup'
+  const vaccinationPerAgeGroupFeatureRedesign = useFeature(
+    'vaccinationPerAgeGroupFeatureRedesign'
   );
 
   const metadata = {
@@ -400,10 +399,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />
-          {vaccinationBoosterShotsPerAgeGroupFeature.isEnabled && (
-            <BoosterShotCoveragePerAgeGroup
-              title={textNl.booster_per_age_group_table.title}
-              description={textNl.booster_per_age_group_table.description}
+          {!vaccinationPerAgeGroupFeatureRedesign.isEnabled && (
+            <VaccineCoveragePerAgeGroup
+              text={textNl.vaccination_coverage}
+              title={textNl.vaccination_coverage.title}
+              description={textNl.vaccination_coverage.toelichting}
               sortingOrder={[
                 '81+',
                 '71-80',
@@ -417,17 +417,24 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ]}
               metadata={{
                 datumsText: textNl.datums,
-                date: data.booster_shot_per_age_group.values[0]?.date_unix,
-                source: textNl.booster_per_age_group_table.bronnen.rivm,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textNl.vaccination_coverage.bronnen.rivm,
               }}
-              values={data.booster_shot_per_age_group.values.filter(
-                (age) =>
-                  !(
-                    age.age_group_range === '5-11' ||
-                    age.age_group_range === '12-17'
-                  )
+              // add data.vaccine_coverage_per_age_group.values to the values
+              values={data.vaccine_coverage_per_age_group.values.map(
+                (coverageValue) => {
+                  return {
+                    ...coverageValue,
+                    ...data.booster_shot_per_age_group.values.filter(
+                      (boosterValue) =>
+                        boosterValue.age_group_range ===
+                        coverageValue.age_group_range
+                          ? boosterValue
+                          : {}
+                    ),
+                  };
+                }
               )}
-              text={textNl.booster_per_age_group_table}
             />
           )}
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (

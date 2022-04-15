@@ -1,23 +1,35 @@
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
+import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
+import {
+  COLOR_FULLY_VACCINATED,
+  COLOR_HAS_ONE_SHOT,
+} from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
-import { COLOR_FULLY_BOOSTERED } from '~/domain/vaccine/common';
-import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
-import { NlBoosterShotPerAgeGroupValue } from '@corona-dashboard/common';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
+import { SiteText } from '~/locale';
 
 export function NarrowCoverageTable({
   values,
   text,
 }: {
-  values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
 }) {
   const { commonTexts, formatPercentage } = useIntl();
+  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
 
   return (
     <Box>
@@ -51,14 +63,53 @@ export function NarrowCoverageTable({
 
           <Box spacing={1}>
             <NarrowPercentage
-              value={`${formatPercentage(item.received_booster_percentage)}%`}
-              color={COLOR_FULLY_BOOSTERED}
-              textLabel={text.headers.turnout_booter_shot}
+              value={
+                'fully_vaccinated_percentage_label' in item
+                  ? formatCoveragePercentage(
+                      item,
+                      'fully_vaccinated_percentage'
+                    )
+                  : `${formatPercentage(item.fully_vaccinated_percentage)}%`
+              }
+              color={COLOR_FULLY_VACCINATED}
+              textLabel={text.headers.coverage}
             />
 
             <Bar
-              value={item.received_booster_percentage}
-              color={COLOR_FULLY_BOOSTERED}
+              value={item.fully_vaccinated_percentage}
+              color={COLOR_FULLY_VACCINATED}
+              label={
+                'has_one_shot_percentage_label' in item
+                  ? item.fully_vaccinated_percentage_label
+                  : undefined
+              }
+            />
+          </Box>
+
+          <Spacer mb={3} />
+
+          <Box spacing={1}>
+            <NarrowPercentage
+              value={
+                'fully_vaccinated_percentage_label' in item
+                  ? formatCoveragePercentage(
+                      item,
+                      'fully_vaccinated_percentage'
+                    )
+                  : `${formatPercentage(item.fully_vaccinated_percentage)}%`
+              }
+              color={COLOR_FULLY_VACCINATED}
+              textLabel={text.headers.coverage}
+            />
+
+            <Bar
+              value={item.fully_vaccinated_percentage}
+              color={COLOR_FULLY_VACCINATED}
+              label={
+                'fully_vaccinated_percentage_label' in item
+                  ? item.fully_vaccinated_percentage_label
+                  : undefined
+              }
             />
           </Box>
         </Box>
