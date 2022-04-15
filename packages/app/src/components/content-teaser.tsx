@@ -3,7 +3,7 @@ import { BackgroundImage } from '~/components/background-image';
 import { Box } from '~/components/base';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { PublicationDate } from '~/components/publication-date';
-import { Heading, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
