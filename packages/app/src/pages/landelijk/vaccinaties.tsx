@@ -440,7 +440,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: textNl.vaccination_coverage.bronnen.rivm,
               }}
-              values={data.vaccine_coverage_per_age_group.values}
+              // add data.vaccine_coverage_per_age_group.values to the values
+              values={data.vaccine_coverage_per_age_group.values.map(
+                (coverageValue) => {
+                  return {
+                    ...coverageValue,
+                    ...data.booster_shot_per_age_group.values.filter(
+                      (boosterValue) =>
+                        boosterValue.age_group_range ===
+                        coverageValue.age_group_range
+                          ? boosterValue
+                          : {}
+                    ),
+                  };
+                }
+              )}
             />
           )}
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
