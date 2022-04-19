@@ -1,5 +1,5 @@
 import { Box, Spacer } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
@@ -34,9 +34,7 @@ export function NarrowCoverageTable({
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="silver" pb={2}>
-        <InlineText fontWeight="bold" variant="label1">
-          {text.headers.agegroup}
-        </InlineText>
+        <BoldText variant="label1">{text.headers.agegroup}</BoldText>
       </Box>
 
       {values.map((item, index) => (

@@ -3,7 +3,7 @@ import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { TimelineEventConfig } from '../logic';
@@ -80,9 +80,7 @@ export function TimelineTooltipContent({
           </Text>
         )}
 
-        <Text variant="label1" fontWeight="bold">
-          {config.title}
-        </Text>
+        <BoldText variant="label1">{config.title}</BoldText>
         <Text variant="label1">{config.description}</Text>
       </Box>
 

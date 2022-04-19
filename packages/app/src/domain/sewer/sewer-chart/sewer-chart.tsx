@@ -46,6 +46,12 @@ type SewerChartProps = {
     valueAnnotation: string;
   };
   vrNameOrGmName?: string;
+  incompleteDatesAndTexts?: {
+    zeewolde_date_end_in_unix_time: string;
+    zeewolde_date_start_in_unix_time: string;
+    zeewolde_label: string;
+    zeewolde_short_label: string;
+  };
   warning?: string;
 };
 
@@ -55,6 +61,7 @@ export function SewerChart({
   dataPerInstallation,
   text,
   vrNameOrGmName,
+  incompleteDatesAndTexts,
   warning,
 }: SewerChartProps) {
   const {
@@ -82,6 +89,27 @@ export function SewerChart({
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+
+  const dataOptions =
+    incompleteDatesAndTexts && selectedInstallation === 'ZEEWOLDE'
+      ? {
+          valueAnnotation: text.valueAnnotation,
+          timespanAnnotations: [
+            {
+              start: parseInt(
+                incompleteDatesAndTexts.zeewolde_date_start_in_unix_time
+              ),
+              end: parseInt(
+                incompleteDatesAndTexts.zeewolde_date_end_in_unix_time
+              ),
+              label: incompleteDatesAndTexts.zeewolde_label,
+              shortLabel: incompleteDatesAndTexts.zeewolde_short_label,
+            },
+          ],
+        }
+      : {
+          valueAnnotation: text.valueAnnotation,
+        };
 
   const optionsWithContent = useMemo(
     () =>
@@ -170,7 +198,7 @@ export function SewerChart({
                     return <LocationTooltip data={data} />;
                   }
                 }}
-                dataOptions={{ valueAnnotation: text.valueAnnotation }}
+                dataOptions={dataOptions}
               />
             ) : (
               <TimeSeriesChart
@@ -185,9 +213,7 @@ export function SewerChart({
                     splitPoints: averageSplitPoints,
                   },
                 ]}
-                dataOptions={{
-                  valueAnnotation: text.valueAnnotation,
-                }}
+                dataOptions={dataOptions}
               />
             )
           }
