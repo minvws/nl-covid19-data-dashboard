@@ -41,6 +41,7 @@ import {
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
+  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
@@ -400,7 +401,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             values={data.vaccine_coverage_per_age_group.values}
           />
           {!vaccinationPerAgeGroupFeatureRedesign.isEnabled && (
-            <VaccineCoveragePerAgeGroup
+            <BoosterShotCoveragePerAgeGroup
               text={textNl.vaccination_coverage}
               title={textNl.vaccination_coverage.title}
               description={textNl.vaccination_coverage.toelichting}
@@ -421,19 +422,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: textNl.vaccination_coverage.bronnen.rivm,
               }}
               // add data.vaccine_coverage_per_age_group.values to the values
-              values={data.vaccine_coverage_per_age_group.values.map(
-                (coverageValue) => {
-                  return {
-                    ...coverageValue,
-                    ...data.booster_shot_per_age_group.values.filter(
-                      (boosterValue) =>
-                        boosterValue.age_group_range ===
-                        coverageValue.age_group_range
-                          ? boosterValue
-                          : {}
-                    ),
-                  };
-                }
+              valuesCoverage={data.vaccine_coverage_per_age_group.values.filter(
+                (valueCoverage) =>
+                  data.booster_shot_per_age_group.values
+                    .map((valueBooster) => valueBooster.age_group_range)
+                    .includes(valueCoverage.age_group_range)
+              )}
+              valuesBooster={data.booster_shot_per_age_group.values.filter(
+                (valueBooster) =>
+                  data.vaccine_coverage_per_age_group.values
+                    .map((valueCoverage) => valueCoverage.age_group_range)
+                    .includes(valueBooster.age_group_range)
               )}
             />
           )}
