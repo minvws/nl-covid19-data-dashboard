@@ -13,7 +13,7 @@
     "has_one_shot_percentage_label",
     "date_of_insertion_unix",
     "booster_shot_percentage",
-    "booster_shot_percentage_label",
+    "booster_shot_label",
     "date_unix"
   ],
   "properties": {
