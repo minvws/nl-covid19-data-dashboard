@@ -25,7 +25,7 @@
         "fully_vaccinated_percentage",
         "has_one_shot_percentage",
         "booster_shot_percentage",
-        "booster_shot_label",
+        "booster_shot_percentage_label",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",

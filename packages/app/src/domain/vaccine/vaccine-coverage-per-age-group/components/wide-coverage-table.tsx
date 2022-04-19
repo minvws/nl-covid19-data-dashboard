@@ -13,8 +13,8 @@ import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
-  COLOR_FULLY_VACCINATED,
-  COLOR_HAS_ONE_SHOT,
+  COLOR_FIRST,
+  COLOR_LAST,
   vaccinceMetrics,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
@@ -66,7 +66,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.first_shot}
+                {text.headers.labels.first}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -79,7 +79,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{text.headers.coverage}</InlineText>
+              <InlineText variant="label1">
+                {text.headers.labels.last}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -117,48 +119,42 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               <Cell>
                 <WidePercentage
                   value={
-                    'has_one_shot_percentage_label' in item
-                      ? formatCoveragePercentage(
-                          item,
-                          'has_one_shot_percentage'
-                        )
-                      : `${formatPercentage(item.has_one_shot_percentage)}%`
+                    metrics.first.label in item
+                      ? formatCoveragePercentage(item, metrics.first.percentage)
+                      : `${formatPercentage(item[metrics.first.percentage])}%`
                   }
-                  color={COLOR_HAS_ONE_SHOT}
+                  color={COLOR_FIRST}
                   justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
                 <WidePercentage
                   value={
-                    'fully_vaccinated_percentage_label' in item
-                      ? formatCoveragePercentage(
-                          item,
-                          'fully_vaccinated_percentage'
-                        )
-                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
+                    metrics.last.label in item
+                      ? formatCoveragePercentage(item, metrics.last.percentage)
+                      : `${formatPercentage(item[metrics.last.percentage])}%`
                   }
-                  color={COLOR_FULLY_VACCINATED}
+                  color={COLOR_LAST}
                   justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
                 <Box spacing={1}>
                   <Bar
-                    value={item.has_one_shot_percentage}
-                    color={COLOR_HAS_ONE_SHOT}
+                    value={item[metrics.first.percentage]}
+                    color={COLOR_FIRST}
                     label={
-                      'has_one_shot_percentage_label' in item
-                        ? item.has_one_shot_percentage_label
+                      metrics.first.label in item
+                        ? item[metrics.first.label]
                         : undefined
                     }
                   />
                   <Bar
-                    value={item.fully_vaccinated_percentage}
-                    color={COLOR_FULLY_VACCINATED}
+                    value={item[metrics.last.percentage]}
+                    color={COLOR_LAST}
                     label={
-                      'fully_vaccinated_percentage_label' in item
-                        ? item.fully_vaccinated_percentage_label
+                      metrics.last.label in item
+                        ? item[metrics.last.label]
                         : undefined
                     }
                   />
