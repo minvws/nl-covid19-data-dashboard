@@ -1,6 +1,6 @@
 export { selectAdministrationData } from './data-selection/select-administration-data';
 export { selectVaccineCoverageData } from './data-selection/select-vaccine-coverage-data';
-export { vaccineCoveragePerAgeGroupRedesign } from './vaccine-coverage-per-age-group-redesign/vaccine-coverage-per-age-group-redesign';
+export { VaccineCoveragePerAgeGroupRedesign } from './vaccine-coverage-per-age-group-redesign/vaccine-coverage-per-age-group-redesign';
 export { VaccinationsOverTimeTile } from './vaccinations-over-time-tile';
 export { VaccineBoosterAdministrationsKpiSection } from './vaccine-booster-administrations-kpi-section';
 export { VaccineAdministrationsKpiSection } from './vaccine-administrations-kpi-section';
