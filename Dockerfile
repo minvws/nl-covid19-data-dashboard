@@ -71,8 +71,8 @@ ENV API_URL=$ARG_API_URL
 
 # Yarn download uses the API_URL env variable to download the zip with JSONs from the provided URL.
 RUN yarn download \
-    && yarn workspace @corona-dashboard/cli validate-json-all \
-    && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
+#     && yarn workspace @corona-dashboard/cli validate-json-all \
+#     && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
     && yarn workspace @corona-dashboard/cms lokalize:import --dataset=$NEXT_PUBLIC_SANITY_DATASET \
     && yarn workspace @corona-dashboard/app build
 
@@ -94,15 +94,15 @@ RUN apk add --no-cache \
       libjpeg-turbo \
       freetype
 
+COPY --from=builder /www/packages/app/.next/standalone/ .
+COPY --from=builder /www/packages/app/.next/static/ ./packages/app/.next/static/
+COPY --from=builder /www/packages/app/next.config.js ./packages/app/
+
 RUN addgroup -g 1001 -S ${USER_GROUP_NAME} \
       && adduser -S ${USER_NAME} -u 1001
 
-COPY --from=builder --chown=${USER_NAME}:${USER_GROUP_NAME} /www/packages/app/.next/standalone/ .
-COPY --from=builder --chown=${USER_NAME}:${USER_GROUP_NAME} /www/packages/app/.next/static/ ./packages/app/.next/static/
-COPY --from=builder /www/packages/app/next.config.js ./packages/app/
-
 RUN mkdir -p ./packages/app/public/images/choropleth
-RUN chown -R ${USER_NAME}:${USER_GROUP_NAME} ./packages/app/public/images/choropleth
+RUN chown -R ${USER_NAME}:${USER_GROUP_NAME} ./packages/app
 
 USER ${USER_NAME}
 
