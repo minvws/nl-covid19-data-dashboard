@@ -7,6 +7,7 @@ import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/us
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
+  vaccinceMetrics,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
@@ -21,12 +22,14 @@ import { SiteText } from '~/locale';
 export function NarrowCoverageTable({
   values,
   text,
+  metrics,
 }: {
   text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
+  metrics: vaccinceMetrics;
 }) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
@@ -64,20 +67,36 @@ export function NarrowCoverageTable({
           <Box spacing={1}>
             <NarrowPercentage
               value={
-                'has_one_shot_percentage_label' in item
-                  ? formatCoveragePercentage(item, 'has_one_shot_percentage')
-                  : `${formatPercentage(item.has_one_shot_percentage)}%`
+                metrics.first.label in item
+                  ? formatCoveragePercentage(item, metrics.first.percentage)
+                  : `${formatPercentage(item[metrics.first.percentage])}%`
               }
-              color={COLOR_HAS_ONE_SHOT}
-              textLabel={text.headers.first_shot}
+              color={
+                metrics === undefined
+                  ? COLOR_HAS_ONE_SHOT
+                  : COLOR_FULLY_VACCINATED
+              }
+              textLabel={
+                metrics === undefined
+                  ? text.headers.first_shot
+                  : text.headers.coverage
+              }
             />
 
             <Bar
-              value={item.has_one_shot_percentage}
-              color={COLOR_HAS_ONE_SHOT}
+              value={
+                metrics === undefined
+                  ? item.has_one_shot_percentage
+                  : item[metrics.first.percentage]
+              }
+              color={
+                metrics === undefined
+                  ? COLOR_HAS_ONE_SHOT
+                  : COLOR_FULLY_VACCINATED
+              }
               label={
-                'has_one_shot_percentage_label' in item
-                  ? item.has_one_shot_percentage_label
+                metrics.first.label in item
+                  ? item[metrics.first.label]
                   : undefined
               }
             />
