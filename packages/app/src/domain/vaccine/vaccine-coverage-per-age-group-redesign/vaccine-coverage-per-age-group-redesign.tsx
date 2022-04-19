@@ -24,8 +24,8 @@ interface vaccineCoveragePerAgeGroupRedesignProps {
   | GmVaccineCoveragePerAgeGroupValue[];
   valuesBooster: 
   | NlBoosterShotPerAgeGroupValue[]
-  | VrBoosterShotPerAgeGroupValue[]
-  | GmBoosterShotPerAgeGroupValue[];
+  // | VrBoosterShotPerAgeGroupValue[]
+  // | GmBoosterShotPerAgeGroupValue[];
   text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
 }
 
@@ -40,7 +40,7 @@ export function VaccineCoveragePerAgeGroupRedesign({
 }: vaccineCoveragePerAgeGroupRedesignProps) {
   const breakpoints = useBreakpoints(true);
 
-  const ageRangeFiltered = sortingOrder.filter((range) => range === valuesBooster && range === valuesCoverage));
+  const ageRangeFiltered = sortingOrder.filter((range) => range === valuesBooster.age_group_range && range === valuesCoverage.age_group_range));
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
