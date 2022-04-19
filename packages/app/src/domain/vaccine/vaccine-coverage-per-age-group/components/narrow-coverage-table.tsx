@@ -5,8 +5,8 @@ import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
-  COLOR_FIRST,
-  COLOR_LAST,
+  COLOR_FULLY_VACCINATED,
+  COLOR_HAS_ONE_SHOT,
   vaccinceMetrics,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
@@ -71,13 +71,29 @@ export function NarrowCoverageTable({
                   ? formatCoveragePercentage(item, metrics.first.percentage)
                   : `${formatPercentage(item[metrics.first.percentage])}%`
               }
-              color={COLOR_FIRST}
-              textLabel={text.headers.labels.first}
+              color={
+                metrics === undefined
+                  ? COLOR_HAS_ONE_SHOT
+                  : COLOR_FULLY_VACCINATED
+              }
+              textLabel={
+                metrics === undefined
+                  ? text.headers.first_shot
+                  : text.headers.coverage
+              }
             />
 
             <Bar
-              value={item[metrics.first.percentage]}
-              color={COLOR_FIRST}
+              value={
+                metrics === undefined
+                  ? item.has_one_shot_percentage
+                  : item[metrics.first.percentage]
+              }
+              color={
+                metrics === undefined
+                  ? COLOR_HAS_ONE_SHOT
+                  : COLOR_FULLY_VACCINATED
+              }
               label={
                 metrics.first.label in item
                   ? item[metrics.first.label]
@@ -91,20 +107,23 @@ export function NarrowCoverageTable({
           <Box spacing={1}>
             <NarrowPercentage
               value={
-                metrics.last.label in item
-                  ? formatCoveragePercentage(item, metrics.last.percentage)
-                  : `${formatPercentage(item[metrics.last.percentage])}%`
+                'fully_vaccinated_percentage_label' in item
+                  ? formatCoveragePercentage(
+                      item,
+                      'fully_vaccinated_percentage'
+                    )
+                  : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
-              color={COLOR_LAST}
-              textLabel={text.headers.labels.last}
+              color={COLOR_FULLY_VACCINATED}
+              textLabel={text.headers.coverage}
             />
 
             <Bar
-              value={item[metrics.last.percentage]}
-              color={COLOR_LAST}
+              value={item.fully_vaccinated_percentage}
+              color={COLOR_FULLY_VACCINATED}
               label={
-                metrics.last.label in item
-                  ? item[metrics.last.label]
+                'fully_vaccinated_percentage_label' in item
+                  ? item.fully_vaccinated_percentage_label
                   : undefined
               }
             />

@@ -13,8 +13,8 @@ import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
-  COLOR_FIRST,
-  COLOR_LAST,
+  COLOR_FULLY_VACCINATED,
+  COLOR_HAS_ONE_SHOT,
   vaccinceMetrics,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
@@ -66,7 +66,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.labels.first}
+                {text.headers.first_shot}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -79,9 +79,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.headers.labels.last}
-              </InlineText>
+              <InlineText variant="label1">{text.headers.coverage}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -90,17 +88,13 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   lg: '30%',
                 }),
               })}
-            >
-              <InlineText variant="label1">
-                {text.headers.difference}
-              </InlineText>
-            </HeaderCell>
+            />
           </Row>
         </thead>
         <tbody>
           {values.map((item, index) => (
             <Row key={index}>
-              <HeaderCell isColumn>
+              <Cell>
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
@@ -115,46 +109,52 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   )}
                   text={commonTexts.common.agegroup.total_people}
                 />
-              </HeaderCell>
+              </Cell>
               <Cell>
                 <WidePercentage
                   value={
-                    metrics.first.label in item
-                      ? formatCoveragePercentage(item, metrics.first.percentage)
-                      : `${formatPercentage(item[metrics.first.percentage])}%`
+                    'has_one_shot_percentage_label' in item
+                      ? formatCoveragePercentage(
+                          item,
+                          'has_one_shot_percentage'
+                        )
+                      : `${formatPercentage(item.has_one_shot_percentage)}%`
                   }
-                  color={COLOR_FIRST}
+                  color={COLOR_HAS_ONE_SHOT}
                   justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
                 <WidePercentage
                   value={
-                    metrics.last.label in item
-                      ? formatCoveragePercentage(item, metrics.last.percentage)
-                      : `${formatPercentage(item[metrics.last.percentage])}%`
+                    'fully_vaccinated_percentage_label' in item
+                      ? formatCoveragePercentage(
+                          item,
+                          'fully_vaccinated_percentage'
+                        )
+                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
                   }
-                  color={COLOR_LAST}
+                  color={COLOR_FULLY_VACCINATED}
                   justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
                 <Box spacing={1}>
                   <Bar
-                    value={item[metrics.first.percentage]}
-                    color={COLOR_FIRST}
+                    value={item.has_one_shot_percentage}
+                    color={COLOR_HAS_ONE_SHOT}
                     label={
-                      metrics.first.label in item
-                        ? item[metrics.first.label]
+                      'has_one_shot_percentage_label' in item
+                        ? item.has_one_shot_percentage_label
                         : undefined
                     }
                   />
                   <Bar
-                    value={item[metrics.last.percentage]}
-                    color={COLOR_LAST}
+                    value={item.fully_vaccinated_percentage}
+                    color={COLOR_FULLY_VACCINATED}
                     label={
-                      metrics.last.label in item
-                        ? item[metrics.last.label]
+                      'fully_vaccinated_percentage_label' in item
+                        ? item.fully_vaccinated_percentage_label
                         : undefined
                     }
                   />
@@ -182,13 +182,12 @@ const Row = styled.tr(
   })
 );
 
-const HeaderCell = styled.th<{ isColumn?: boolean }>((x) =>
+const HeaderCell = styled.th(
   css({
     textAlign: 'left',
-    fontWeight: x.isColumn ? 'normal' : 'bold',
+    fontWeight: 'bold',
     verticalAlign: 'middle',
-    pb: x.isColumn ? undefined : 2,
-    py: x.isColumn ? 3 : undefined,
+    pb: 2,
   })
 );
 
