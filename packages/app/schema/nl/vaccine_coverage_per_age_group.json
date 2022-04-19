@@ -24,6 +24,8 @@
         "has_one_shot",
         "fully_vaccinated_percentage",
         "has_one_shot_percentage",
+        "booster_shot_percentage",
+        "booster_shot_label",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",
@@ -62,6 +64,13 @@
         },
         "has_one_shot_percentage": {
           "type": "number"
+        },
+        "booster_shot_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([><][=][0-9]{1,2})$"
+        },
+        "booster_shot_percentage": {
+          "type": ["integer", "null"]
         },
         "date_unix": {
           "type": "integer"

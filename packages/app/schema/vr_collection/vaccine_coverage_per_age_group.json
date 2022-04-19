@@ -12,6 +12,8 @@
     "has_one_shot_percentage_label",
     "has_one_shot_percentage",
     "date_of_insertion_unix",
+    "booster_shot_percentage",
+    "booster_shot_label",
     "date_unix"
   ],
   "properties": {
@@ -40,6 +42,13 @@
     "has_one_shot_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
+    },
+    "booster_shot_percentage_label": {
+      "type": ["string", "null"],
+      "pattern": "^([><][=][0-9]{1,2})$"
+    },
+    "booster_shot_percentage": {
+      "type": ["integer", "null"]
     },
     "date_unix": {
       "type": "integer"
