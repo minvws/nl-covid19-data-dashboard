@@ -41,7 +41,6 @@ import {
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
-  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
@@ -428,11 +427,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ]}
               metrics={{
                 first: {
-                  label: 'has_one_shot_percentage_label',
-                  percentage: 'has_one_shot_percentage',
+                  label: 'fully_vaccinated_percentage_label',
+                  percentage: 'fully_vaccinated_percentage',
                 },
                 last: {
-                  label: 'booster_shot_label',
+                  label: 'booster_shot_percentage_label',
                   percentage: 'booster_shot_percentage',
                 },
               }}
