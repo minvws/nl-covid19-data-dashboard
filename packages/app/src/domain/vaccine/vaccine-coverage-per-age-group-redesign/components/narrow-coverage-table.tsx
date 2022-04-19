@@ -4,7 +4,7 @@ import { useIntl } from '~/intl';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
-import { COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
+import { COLOR_FULLY_BOOSTERED } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
@@ -24,10 +24,9 @@ export function NarrowCoverageTable({
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
-  valuesBooster:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+  valuesBooster: NlBoosterShotPerAgeGroupValue[];
+  // | VrVaccineCoveragePerAgeGroupValue[]
+  // | GmVaccineCoveragePerAgeGroupValue[];
 }) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
@@ -72,13 +71,13 @@ export function NarrowCoverageTable({
                     )
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
-              color={COLOR_FULLY_VACCINATED}
+              color={COLOR_FULLY_BOOSTERED}
               textLabel={text.headers.coverage}
             />
 
             <Bar
               value={item.fully_vaccinated_percentage}
-              color={COLOR_FULLY_VACCINATED}
+              color={COLOR_FULLY_BOOSTERED}
               label={
                 'has_one_shot_percentage_label' in item
                   ? item.fully_vaccinated_percentage_label
@@ -99,13 +98,13 @@ export function NarrowCoverageTable({
                     )
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
-              color={COLOR_FULLY_VACCINATED}
+              color={COLOR_FULLY_BOOSTERED}
               textLabel={text.headers.coverage}
             />
 
             <Bar
               value={item.fully_vaccinated_percentage}
-              color={COLOR_FULLY_VACCINATED}
+              color={COLOR_FULLY_BOOSTERED}
               label={
                 'fully_vaccinated_percentage_label' in item
                   ? item.fully_vaccinated_percentage_label
