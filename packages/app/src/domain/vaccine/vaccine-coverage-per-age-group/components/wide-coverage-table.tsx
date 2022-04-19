@@ -15,6 +15,7 @@ import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/us
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
+  vaccinceMetrics,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
@@ -26,6 +27,7 @@ interface WideCoverageTable {
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
+  metrics: vaccinceMetrics;
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {

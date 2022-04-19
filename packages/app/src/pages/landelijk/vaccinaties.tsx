@@ -398,10 +398,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
+            metrics={{
+              first: {
+                label: 'has_one_shot_percentage_label',
+                percentage: 'has_one_shot_percentage',
+              },
+              last: {
+                label: 'fully_vaccinated_percentage_label',
+                percentage: 'fully_vaccinated_percentage',
+              },
+            }}
             values={data.vaccine_coverage_per_age_group.values}
           />
           {!vaccinationPerAgeGroupFeatureRedesign.isEnabled && (
-            <BoosterShotCoveragePerAgeGroup
+            <VaccineCoveragePerAgeGroup
               text={textNl.vaccination_coverage}
               title={textNl.vaccination_coverage.title}
               description={textNl.vaccination_coverage.toelichting}
@@ -416,24 +426,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 '12-17',
                 '5-11',
               ]}
+              metrics={{
+                first: {
+                  label: 'has_one_shot_percentage_label',
+                  percentage: 'has_one_shot_percentage',
+                },
+                last: {
+                  label: 'booster_shot_label',
+                  percentage: 'booster_shot_percentage',
+                },
+              }}
               metadata={{
                 datumsText: textNl.datums,
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: textNl.vaccination_coverage.bronnen.rivm,
               }}
-              // add data.vaccine_coverage_per_age_group.values to the values
-              valuesCoverage={data.vaccine_coverage_per_age_group.values.filter(
-                (valueCoverage) =>
-                  data.booster_shot_per_age_group.values
-                    .map((valueBooster) => valueBooster.age_group_range)
-                    .includes(valueCoverage.age_group_range)
-              )}
-              valuesBooster={data.booster_shot_per_age_group.values.filter(
-                (valueBooster) =>
-                  data.vaccine_coverage_per_age_group.values
-                    .map((valueCoverage) => valueCoverage.age_group_range)
-                    .includes(valueBooster.age_group_range)
-              )}
+              values={data.vaccine_coverage_per_age_group.values}
             />
           )}
           {vaccinationsIncidencePerAgeGroupFeature.isEnabled && (
