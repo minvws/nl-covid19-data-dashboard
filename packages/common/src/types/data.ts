@@ -1045,7 +1045,6 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   has_one_shot: number;
   fully_vaccinated_percentage: number;
   has_one_shot_percentage: number;
-  booster_shot_percentage_label: string | null;
   booster_shot_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
