@@ -2622,6 +2622,7 @@ __metadata:
     geojson: ^0.5.0
     globby: ^12.0.2
     hash-sum: ^2.0.0
+    helmet: ^4.6.0
     http-proxy-middleware: ^2.0.1
     identity-obj-proxy: ^3.0.0
     inspectpack: ^4.7.1
@@ -15884,6 +15885,13 @@ __metadata:
     capital-case: ^1.0.4
     tslib: ^2.0.3
   checksum: 571c83eeb25e8130d172218712f807c0b96d62b020981400bccc1503a7cf14b09b8b10498a962d2739eccf231d950e3848ba7d420b58a6acd2f9283439546cd9
+  languageName: node
+  linkType: hard
+
+"helmet@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "helmet@npm:4.6.0"
+  checksum: 139ad678d1cab207b043c206f50f6744eff2ef1f463e4626d36718b45b337485c77d10260ef9d89d292fa678da5153d86b08172b3b365cc8e680241015ed3a49
   languageName: node
   linkType: hard
 
