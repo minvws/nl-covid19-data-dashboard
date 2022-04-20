@@ -74,9 +74,9 @@ export function HeadingLinkWithIcon({
   const isSingleWord = words.length === 1;
 
   return (
-    <Box as="span" display="inline-block" position="relative">
+    <Box display="inline-block" position="relative">
       <Link href={href} passHref locale={false}>
-        <Anchor color="inherit" hoverColor="blue">
+        <Anchor variant="h5" color="blue" hoverColor="blue">
           <Box
             paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}
             css={css({

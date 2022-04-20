@@ -140,6 +140,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
             vrNameOrGmName={vrName}
+            incompleteDatesAndTexts={
+              textShared.zeewolde_incomplete_manualy_override
+            }
             warning={textVr.warning_chart}
           />
         </TileList>

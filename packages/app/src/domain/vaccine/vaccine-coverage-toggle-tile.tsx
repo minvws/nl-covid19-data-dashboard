@@ -7,7 +7,7 @@ import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -218,14 +218,13 @@ function AgeGroupBlock({
 
   return (
     <Box spacing={2}>
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
         })}
       >
         {title}
-      </InlineText>
+      </BoldText>
       <KpiValue text={formatCoveragePercentage(data, property)} />
       <Markdown
         content={replaceVariablesInText(description, {
@@ -259,14 +258,13 @@ interface NoBoosterBlockProps {
 function NoBoosterBlock({ title, description }: NoBoosterBlockProps) {
   return (
     <Box spacing={2}>
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
         })}
       >
         {title}
-      </InlineText>
+      </BoldText>
       <Markdown content={description} />
     </Box>
   );
