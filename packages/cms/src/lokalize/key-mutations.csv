@@ -53,3 +53,4 @@ timestamp,action,key,document_id,move_to
 2022-04-15T09:48:51.334Z,move,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_label,T6FOC3TDR34eMSB5nyztO0,pages.sewerPage.shared.zeewolde_incomplete_manualy_override.zeewolde_label
 2022-04-15T09:48:51.336Z,move,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_short_label,T6FOC3TDR34eMSB5nyztli,pages.sewerPage.shared.zeewolde_incomplete_manualy_override.zeewolde_short_label
 2022-04-19T15:39:34.360Z,add,common.informatie_header.external_link,Raj9X55CxrYuKzixTpLCuB,__
+2022-04-20T12:18:03.965Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.difference,X8Z1HTDxqJ9pM59361KMk4,__

@@ -86,7 +86,11 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   lg: '30%',
                 }),
               })}
-            />
+            >
+              <InlineText variant="label1">
+                {text.headers.difference}
+              </InlineText>
+            </HeaderCell>
           </Row>
         </thead>
         <tbody>
