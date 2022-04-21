@@ -19,7 +19,7 @@ import {
 } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -79,9 +79,8 @@ export function VaccineCoverageChoroplethPerGm({
             spacingHorizontal={2}
             as={'fieldset'}
           >
-            <Text
+            <BoldText
               as="legend"
-              fontWeight="bold"
               css={css({
                 flexBasis: '100%',
                 mb: 2,
@@ -91,7 +90,7 @@ export function VaccineCoverageChoroplethPerGm({
                 commonTexts.choropleth.vaccination_coverage.shared
                   .dropdowns_title
               }
-            </Text>
+            </BoldText>
 
             <Box
               display="flex"
@@ -312,7 +311,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
           <Markdown
             content={replaceVariablesInText(mainContent, tooltipVars)}
           />
-          <InlineText fontWeight="bold">{mainValue}</InlineText>
+          <BoldText>{mainValue}</BoldText>
         </Box>
       </TooltipSubject>
       {secondaryContent}

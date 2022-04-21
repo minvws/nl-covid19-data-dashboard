@@ -3,7 +3,7 @@ import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { getThresholdValue } from '~/utils/get-threshold-value';
 
 interface TooltipSubjectProps {
@@ -30,7 +30,7 @@ export function TooltipSubject({
 
   return (
     <Box spacing={1}>
-      {subject && <Text fontWeight="bold">{subject}</Text>}
+      {subject && <BoldText>{subject}</BoldText>}
       <Box
         m={0}
         spacingHorizontal={2}

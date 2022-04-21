@@ -58,7 +58,6 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
-    booster_and_third_shot_administered: ["administered_total"],
     booster_shot_administered: [
       "administered_total",
       "ggd_administered_last_7_days",
@@ -75,7 +74,6 @@ export const dataStructure = {
       "age_group_total",
     ],
     booster_coverage: ["age_group", "percentage"],
-    third_shot_administered: ["administered_total"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
     infectious_people: ["margin_low", "estimate", "margin_high"],
@@ -303,7 +301,6 @@ export const dataStructure = {
       "fully_vaccinated",
       "partially_or_fully_vaccinated",
     ],
-    vaccine_delivery: ["total", "date_of_report_unix"],
     vaccine_delivery_estimate: ["total"],
     vaccine_delivery_per_supplier: [
       "total",
@@ -325,15 +322,6 @@ export const dataStructure = {
       "janssen",
       "sanofi",
       "novavax",
-      "total",
-    ],
-    vaccine_administered_estimate: [
-      "pfizer",
-      "moderna",
-      "astra_zeneca",
-      "cure_vac",
-      "janssen",
-      "sanofi",
       "total",
     ],
     vaccine_administered_doctors: ["estimated"],

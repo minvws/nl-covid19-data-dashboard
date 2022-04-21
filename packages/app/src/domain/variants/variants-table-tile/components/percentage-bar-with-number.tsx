@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { PercentageBar } from '~/components/percentage-bar';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 
 export function PercentageBarWithNumber({
   percentage,
@@ -19,7 +19,7 @@ export function PercentageBarWithNumber({
       spacingHorizontal={2}
     >
       <Box as="span" minWidth={40} textAlign="right">
-        <InlineText fontWeight="bold">{formatValue(percentage)}%</InlineText>
+        <BoldText>{formatValue(percentage)}%</BoldText>
       </Box>
       <Box color={color} flexGrow={1}>
         <PercentageBar percentage={percentage} height="8px" />

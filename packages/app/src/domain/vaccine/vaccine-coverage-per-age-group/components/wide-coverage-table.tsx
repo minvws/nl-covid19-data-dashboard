@@ -86,13 +86,17 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   lg: '30%',
                 }),
               })}
-            />
+            >
+              <InlineText variant="label1">
+                {text.headers.difference}
+              </InlineText>
+            </HeaderCell>
           </Row>
         </thead>
         <tbody>
           {values.map((item, index) => (
             <Row key={index}>
-              <Cell>
+              <HeaderCell isColumn>
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
@@ -107,7 +111,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   )}
                   text={commonTexts.common.agegroup.total_people}
                 />
-              </Cell>
+              </HeaderCell>
               <Cell>
                 <WidePercentage
                   value={
@@ -180,12 +184,13 @@ const Row = styled.tr(
   })
 );
 
-const HeaderCell = styled.th(
+const HeaderCell = styled.th<{ isColumn?: boolean }>((x) =>
   css({
     textAlign: 'left',
-    fontWeight: 'bold',
+    fontWeight: x.isColumn ? 'normal' : 'bold',
     verticalAlign: 'middle',
-    pb: 2,
+    pb: x.isColumn ? undefined : 2,
+    py: x.isColumn ? 3 : undefined,
   })
 );
 

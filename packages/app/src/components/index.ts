@@ -25,3 +25,4 @@ export { ChoroplethLegenda } from './choropleth-legenda';
 export { SEOHead } from './seo-head';
 export { PageKpi } from './page-kpi';
 export { PageBarScale } from './page-barscale';
+export { VisuallyHidden } from './visually-hidden';

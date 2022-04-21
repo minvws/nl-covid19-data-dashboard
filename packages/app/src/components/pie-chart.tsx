@@ -9,7 +9,7 @@ import { Box, Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { WithTooltip } from '~/lib/tooltip';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -215,14 +215,13 @@ export function PieChart<T>({
 
           <Box spacing={2}>
             {title && (
-              <InlineText
-                fontWeight="bold"
+              <BoldText
                 css={css({
                   display: 'block',
                 })}
               >
                 {title}
-              </InlineText>
+              </BoldText>
             )}
             <Box
               spacing={2}

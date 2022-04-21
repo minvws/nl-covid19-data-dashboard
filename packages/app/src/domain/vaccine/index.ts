@@ -1,4 +1,4 @@
-export { selectDeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
+export { selectAdministrationData } from './data-selection/select-administration-data';
 export { selectVaccineCoverageData } from './data-selection/select-vaccine-coverage-data';
 export { BoosterShotCoveragePerAgeGroup } from './booster-shot-coverage-per-age-group/booster-shot-coverage-per-age-group';
 export { VaccinationsOverTimeTile } from './vaccinations-over-time-tile';
