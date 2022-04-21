@@ -15,7 +15,7 @@ import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { SparkLine } from '~/components/spark-line';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
@@ -146,10 +146,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
               <Warning viewBox="0 0 25 25" />
             </WarningIconWrapper>
           )}
-          <InlineText
-            fontWeight="bold"
-            css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}
-          >
+          <BoldText css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}>
             {item.valueIsPercentage
               ? `${
                   typeof item.value === 'number'
@@ -159,7 +156,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
               : typeof item.value === 'number'
               ? formatNumber(item.value)
               : item.value}
-          </InlineText>
+          </BoldText>
           {cloneElement(collapsible.button(), { size: 12 })}
         </Box>
       </Box>
@@ -224,7 +221,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                       </WarningIconWrapper>
                     </InlineTooltip>
                   )}
-                  <InlineText fontWeight="bold">
+                  <strong>
                     {item.valueIsPercentage
                       ? `${
                           typeof item.value === 'number'
@@ -234,7 +231,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                       : typeof item.value === 'number'
                       ? formatNumber(item.value)
                       : item.value}
-                  </InlineText>
+                  </strong>
                 </Box>
               </WideMenuButton>
             </WideMenuListItem>

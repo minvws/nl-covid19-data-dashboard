@@ -6,7 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 interface GNumberBarChartTileProps {
@@ -84,9 +84,9 @@ export function GNumberBarChartTile({
         ]}
         formatTooltip={({ value }) => (
           <>
-            <InlineText fontWeight="bold">
+            <BoldText>
               {`${formatPercentage(Math.abs(value.g_number))}% `}
-            </InlineText>
+            </BoldText>
             {value.g_number > 0
               ? text.positive_descriptor
               : text.negative_descriptor}

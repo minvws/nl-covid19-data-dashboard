@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 interface AgeGroupProps {
@@ -23,7 +23,7 @@ export function AgeGroup({
 
   return (
     <Box display="flex" flexDirection="column">
-      <InlineText fontWeight="bold">{range}</InlineText>
+      <BoldText>{range}</BoldText>
       <InlineText variant="label1">
         {`${birthyear_range}${ageGroupTotal ? `: ${totalText}` : ''}`}
       </InlineText>

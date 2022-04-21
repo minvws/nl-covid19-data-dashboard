@@ -6,7 +6,7 @@ import {
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { InlineDifference } from '~/components/difference-indicator';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Content, DataFile, DataKeys } from '..';
@@ -35,9 +35,7 @@ export function Difference<T extends DataKeys, K = DataFile<T>>(
           <InlineDifference isAmount={isAmount} value={differenceValue} />
         ),
         differenceAverage: (
-          <InlineText fontWeight="bold">
-            {formatNumber(differenceValue.old_value)}
-          </InlineText>
+          <BoldText>{formatNumber(differenceValue.old_value)}</BoldText>
         ),
         ...(additionalData || {}),
       })}

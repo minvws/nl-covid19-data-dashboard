@@ -275,14 +275,12 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
-  booster_and_third_shot_administered: NlBoosterAndThirdShotAdministered;
   booster_shot_administered: NlBoosterShotAdministered;
   repeating_shot_administered: NlRepeatingShotAdministered;
   booster_shot_delivered: NlBoosterShotDelivered;
   booster_shot_planned: NlBoosterShotPlanned;
   booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
   booster_coverage: NlBoosterCoverage;
-  third_shot_administered: NlThirdShotAdministered;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -316,11 +314,9 @@ export interface Nl {
   corona_melder_app_download: NlCoronaMelderAppDownload;
   corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
-  vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
-  vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_doctors: NlVaccineAdministeredDoctors;
   vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
   vaccine_administered_ggd: NlVaccineAdministeredGgd;
@@ -376,15 +372,6 @@ export interface NamedDifferenceDecimal {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
-}
-export interface NlBoosterAndThirdShotAdministered {
-  values: NlBoosterAndThirdShotAdministeredValue[];
-  last_value: NlBoosterAndThirdShotAdministeredValue;
-}
-export interface NlBoosterAndThirdShotAdministeredValue {
-  administered_total: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
 }
 export interface NlBoosterShotAdministered {
   values: NlBoosterShotAdministeredValue[];
@@ -443,15 +430,6 @@ export interface NlBoosterCoverage {
 export interface NlBoosterCoverageValue {
   age_group?: "12+" | "18+";
   percentage: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlThirdShotAdministered {
-  values: NlThirdShotAdministeredValue[];
-  last_value: NlThirdShotAdministeredValue;
-}
-export interface NlThirdShotAdministeredValue {
-  administered_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -951,17 +929,6 @@ export interface NlVaccineCoverageValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineDelivery {
-  values: NlVaccineDeliveryValue[];
-  last_value: NlVaccineDeliveryValue;
-}
-export interface NlVaccineDeliveryValue {
-  total: number | null;
-  date_of_insertion_unix: number;
-  date_of_report_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
 export interface NlVaccineDeliveryEstimate {
   values: NlVaccineDeliveryEstimateValue[];
   last_value: NlVaccineDeliveryEstimateValue;
@@ -1003,22 +970,6 @@ export interface NlVaccineAdministeredValue {
   janssen?: number;
   sanofi?: number;
   novavax: number;
-  total: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
-export interface NlVaccineAdministeredEstimate {
-  values: NlVaccineAdministeredEstimateValue[];
-  last_value: NlVaccineAdministeredEstimateValue;
-}
-export interface NlVaccineAdministeredEstimateValue {
-  pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  cure_vac?: number;
-  janssen?: number;
-  sanofi?: number;
   total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;

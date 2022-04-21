@@ -11,7 +11,7 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, Text } from '~/components/typography';
+import { Heading, Text, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -100,13 +100,11 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                   corona_melder_app.waarschuwingen.total,
                   {
                     totalDownloads: (
-                      <span
-                        css={css({ color: 'data.primary', fontWeight: 'bold' })}
-                      >
+                      <BoldText color="primary">
                         {formatNumber(
                           data.corona_melder_app_download.last_value.count
                         )}
-                      </span>
+                      </BoldText>
                     ),
                   }
                 )}

@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Box } from './base';
 
@@ -34,9 +34,7 @@ export function InteractiveLegend<T = string>({
 
   return (
     <Box>
-      <Text variant="label1" fontWeight="bold">
-        {helpText}
-      </Text>
+      <BoldText variant="label1">{helpText}</BoldText>
       <Legend>
         <List>
           {selectOptions.map((item) => {

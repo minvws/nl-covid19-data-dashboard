@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { useIntl } from '~/intl';
@@ -47,13 +47,9 @@ export function EscalationLevelLabel({
           {level}
         </EscalationLevelIcon>
 
-        <InlineText
-          color={escalationLevel.color}
-          fontWeight="bold"
-          variant="h3"
-        >
+        <BoldText color={escalationLevel.color} variant="h3">
           {escalationLevel.title}
-        </InlineText>
+        </BoldText>
       </Box>
 
       <Box pt="2px" pl={{ _: 0, sm: 2 }} maxWidth={350}>

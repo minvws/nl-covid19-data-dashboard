@@ -2,7 +2,7 @@ import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
-import { Text, InlineText } from '~/components/typography';
+import { Text, InlineText, BoldText } from '~/components/typography';
 import {
   ChartTile,
   DynamicChoropleth,
@@ -177,7 +177,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textGm.infected_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textGm.infected_kpi.last_value_text,
                     {
@@ -192,7 +192,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textGm.infected_kpi.link_cta && (
                   <Markdown content={textGm.infected_kpi.link_cta} />
                 )}
@@ -284,7 +284,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               description={
                 <>
                   <Markdown content={textGm.map_toelichting} />
-                  <Text variant="body2" fontWeight="bold">
+                  <BoldText variant="body2">
                     {replaceComponentsInText(textGm.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
@@ -293,8 +293,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                       municipality: municipalityName,
                     })}
-                  </Text>
-                  <Text variant="body2" fontWeight="bold">
+                  </BoldText>
+                  <BoldText variant="body2">
                     {replaceComponentsInText(
                       textGm.map_safety_region_last_value_text,
                       {
@@ -306,7 +306,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         safetyRegion: vrForMunicipality?.name,
                       }
                     )}
-                  </Text>
+                  </BoldText>
                 </>
               }
               legend={{

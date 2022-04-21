@@ -7,7 +7,7 @@ import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { Box } from '~/components/base';
-import { Text, InlineText } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import {
   TwoKpiSection,
@@ -175,7 +175,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textNl.infected_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textNl.infected_kpi.last_value_text,
                     {
@@ -190,7 +190,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textNl.infected_kpi.link_cta && (
                   <Markdown content={textNl.infected_kpi.link_cta} />
                 )}
@@ -213,7 +213,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textNl.percentage_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textNl.percentage_kpi.last_value_text,
                     {
@@ -228,7 +228,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textNl.percentage_kpi.link_cta && (
                   <Markdown content={textNl.percentage_kpi.link_cta} />
                 )}
@@ -295,7 +295,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               description={
                 <>
                   <Markdown content={textNl.map_toelichting} />
-                  <Text variant="body2" fontWeight="bold">
+                  <BoldText variant="body2">
                     {replaceComponentsInText(textNl.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
@@ -307,7 +307,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         'weekday-medium'
                       ),
                     })}
-                  </Text>
+                  </BoldText>
                 </>
               }
               onChartRegionChange={setSelectedMap}
@@ -433,7 +433,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={textNl.ggd.tests_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(textNl.ggd.tests_kpi.last_value_text, {
                   tested_total: (
                     <InlineText color="data.primary">{`${formatNumber(
@@ -445,7 +445,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     'weekday-medium'
                   ),
                 })}
-              </Text>
+              </BoldText>
             </KpiTile>
 
             <KpiTile
@@ -463,7 +463,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={textNl.ggd.percentage_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(
                   textNl.ggd.percentage_kpi.last_value_text,
                   {
@@ -485,7 +485,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   }
                 )}
-              </Text>
+              </BoldText>
             </KpiTile>
           </TwoKpiSection>
 

@@ -7,7 +7,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Heading, InlineText, Text, BoldText } from '~/components/typography';
 import {
   BehaviorLineChartTile,
   getBehaviorChartOptions,
@@ -130,9 +130,9 @@ export default function BehaviorPageVr(
               <Text>
                 {replaceComponentsInText(text.vr.kpi.deelgenomen_mensen, {
                   number_of_participants: (
-                    <InlineText fontWeight="bold">
+                    <BoldText>
                       {formatNumber(behaviorLastValue.number_of_participants)}
-                    </InlineText>
+                    </BoldText>
                   ),
                   date_start: (
                     <InlineText>

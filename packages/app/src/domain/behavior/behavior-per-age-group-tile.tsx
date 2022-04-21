@@ -2,12 +2,13 @@ import { colors, NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { InlineText, Text } from '~/components/typography';
+import { BoldText, Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
+import { keys } from '~/utils';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
@@ -50,6 +51,13 @@ export function BehaviorPerAgeGroup({
     `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (supportValue)`
   );
 
+  const hasComplianceValues =
+    keys(complianceValue).every((key) => complianceValue[key] === null) ===
+    false;
+  const hasSupportValues =
+    keys(supportValue).every((key) => supportValue[key] === null) === false;
+  const dataAvailable = hasComplianceValues || hasSupportValues;
+
   return (
     <ChartTile title={title} description={description}>
       <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
@@ -59,7 +67,7 @@ export function BehaviorPerAgeGroup({
           onChange={setCurrentId}
         />
         <Box overflow="auto">
-          {isDefined(complianceValue) || isDefined(supportValue) ? (
+          {dataAvailable ? (
             <Box overflow="auto">
               <StyledTable>
                 <thead>
@@ -79,24 +87,37 @@ export function BehaviorPerAgeGroup({
                 <tbody>
                   {AGE_KEYS.map((age, index) => (
                     <React.Fragment key={index}>
-                      {supportValue &&
-                        complianceValue &&
-                        isPresent(complianceValue[age]) &&
-                        isPresent(supportValue[age]) && (
-                          <tr>
-                            <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
-                            <Cell>
+                      {(isPresent(complianceValue[age]) ||
+                        isPresent(supportValue[age])) && (
+                        <tr>
+                          <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
+                          <Cell>
+                            {isPresent(complianceValue[age]) ? (
                               <PercentageBar
                                 color={colors.data.cyan}
                                 amount={complianceValue[age]}
                               />
+                            ) : (
+                              <Text>
+                                {
+                                  text.shared.leeftijden.tabel
+                                    .compliance_no_data
+                                }
+                              </Text>
+                            )}
+                            {isPresent(supportValue[age]) ? (
                               <PercentageBar
                                 color={colors.data.yellow}
                                 amount={supportValue[age]}
                               />
-                            </Cell>
-                          </tr>
-                        )}
+                            ) : (
+                              <Text>
+                                {text.shared.leeftijden.tabel.support_no_data}
+                              </Text>
+                            )}
+                          </Cell>
+                        </tr>
+                      )}
                     </React.Fragment>
                   ))}
                 </tbody>
@@ -149,10 +170,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
 
   return (
     <Box display="flex" alignItems="center">
-      <InlineText
-        fontWeight="bold"
-        css={css({ minWidth: 50 })}
-      >{`${amount}%`}</InlineText>
+      <BoldText css={css({ minWidth: 50 })}>{`${amount}%`}</BoldText>
       <Box maxWidth={100} width="100%">
         <Box
           width={`${amount}%`}

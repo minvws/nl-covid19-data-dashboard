@@ -2,7 +2,7 @@ import { Box } from '~/components/base';
 import { KpiValue } from '~/components/kpi-value';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Tile } from '~/components/tile';
-import { InlineText, Text, Heading } from '~/components/typography';
+import { InlineText, Text, Heading, BoldText } from '~/components/typography';
 import { Message } from '~/components/message';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -12,20 +12,20 @@ import { Markdown } from '~/components/markdown';
 import { SiteText } from '~/locale';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
-  totalBoosterAndThirdShots: number;
-  metadateBoosterAndThirdShots: MetadataProps;
+  totalBoosterShots: number;
+  metadateBoosterShots: MetadataProps;
   boosterGgdValue: number;
   metadateBoosterGgd: MetadataProps;
   boosterEstimatedValue: number;
   metadateBoosterEstimated: MetadataProps;
   boosterShotLastSevenDays: number;
   metadataBoosterShotLastSevenDays: MetadataProps;
-  text: SiteText['pages']['vaccinationsPage']['nl']['booster_and_third_kpi'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['booster_kpi'];
 }
 
 export function VaccineBoosterAdministrationsKpiSection({
-  totalBoosterAndThirdShots,
-  metadateBoosterAndThirdShots,
+  totalBoosterShots,
+  metadateBoosterShots,
   boosterGgdValue,
   metadateBoosterGgd,
   boosterEstimatedValue,
@@ -46,14 +46,14 @@ export function VaccineBoosterAdministrationsKpiSection({
       </Box>
       <TwoKpiSection>
         <Box spacing={3}>
-          <KpiValue absolute={totalBoosterAndThirdShots} />
-          <Text>{text.total_booster_and_third_shots.description}</Text>
-          {text.total_booster_and_third_shots.warning && (
+          <KpiValue absolute={totalBoosterShots} />
+          <Text>{text.total_booster_shots.description}</Text>
+          {text.total_booster_shots.warning && (
             <Message variant="warning">
-              {text.total_booster_and_third_shots.warning}
+              {text.total_booster_shots.warning}
             </Message>
           )}
-          <Metadata {...metadateBoosterAndThirdShots} isTileFooter />
+          <Metadata {...metadateBoosterShots} isTileFooter />
 
           <Markdown
             content={replaceVariablesInText(
@@ -95,13 +95,13 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
 
   return (
     <Box spacing={1}>
-      <Text fontWeight="bold">
+      <BoldText>
         {replaceComponentsInText(description, {
           value: (
             <InlineText color="data.primary">{formatNumber(value)}</InlineText>
           ),
         })}
-      </Text>
+      </BoldText>
 
       <Metadata {...metadata} isTileFooter />
     </Box>

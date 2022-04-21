@@ -7,7 +7,7 @@ import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -142,10 +142,10 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
 
   return (
     <Box spacing={1}>
-      <Text fontWeight="bold">
+      <BoldText>
         <InlineText color="data.primary">{formatNumber(value)}</InlineText>
         {' ' + description}
-      </Text>
+      </BoldText>
 
       <Text variant="label1" color="annotation">
         {replaceVariablesInText(

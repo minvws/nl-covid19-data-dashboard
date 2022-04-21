@@ -2,7 +2,7 @@ import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { RelativeDate } from '~/components/relative-date';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -60,9 +60,9 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
           />
         ),
         propertyValue: (
-          <InlineText fontWeight="bold">
+          <BoldText>
             {`${formatNumber(propertyValue)}${isPercentage ? '%' : ''}`}
-          </InlineText>
+          </BoldText>
         ),
         ...(additionalData || {}),
       })}
