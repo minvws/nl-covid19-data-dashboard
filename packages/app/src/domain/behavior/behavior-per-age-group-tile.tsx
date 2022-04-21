@@ -39,8 +39,10 @@ export function BehaviorPerAgeGroup({
 }: BehaviorPerAgeGroupProps) {
   const breakpoints = useBreakpoints();
 
-  const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
-  const supportValue = data[`${currentId}_support` as keyof typeof data];
+  const complianceValue =
+    data[`${currentId}_compliance` as keyof typeof data] || undefined;
+  const supportValue =
+    data[`${currentId}_support` as keyof typeof data] || undefined;
 
   assert(
     typeof complianceValue !== 'number',
@@ -52,9 +54,11 @@ export function BehaviorPerAgeGroup({
   );
 
   const hasComplianceValues =
+    complianceValue &&
     keys(complianceValue).every((key) => complianceValue[key] === null) ===
-    false;
+      false;
   const hasSupportValues =
+    supportValue &&
     keys(supportValue).every((key) => supportValue[key] === null) === false;
   const dataAvailable = hasComplianceValues || hasSupportValues;
 
@@ -85,41 +89,42 @@ export function BehaviorPerAgeGroup({
                   </tr>
                 </thead>
                 <tbody>
-                  {AGE_KEYS.map((age, index) => (
-                    <React.Fragment key={index}>
-                      {(isPresent(complianceValue[age]) ||
-                        isPresent(supportValue[age])) && (
-                        <tr>
-                          <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
-                          <Cell>
-                            {isPresent(complianceValue[age]) ? (
-                              <PercentageBar
-                                color={colors.data.cyan}
-                                amount={complianceValue[age]}
-                              />
-                            ) : (
-                              <Text>
-                                {
-                                  text.shared.leeftijden.tabel
-                                    .compliance_no_data
-                                }
-                              </Text>
-                            )}
-                            {isPresent(supportValue[age]) ? (
-                              <PercentageBar
-                                color={colors.data.yellow}
-                                amount={supportValue[age]}
-                              />
-                            ) : (
-                              <Text>
-                                {text.shared.leeftijden.tabel.support_no_data}
-                              </Text>
-                            )}
-                          </Cell>
-                        </tr>
-                      )}
-                    </React.Fragment>
-                  ))}
+                  {AGE_KEYS.map((age, index) => {
+                    const ageValueCompliance = complianceValue?.[age];
+                    const ageValueSupport = supportValue?.[age];
+
+                    if (!ageValueCompliance && !ageValueSupport) {
+                      return null;
+                    }
+
+                    return (
+                      <tr key={index}>
+                        <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
+                        <Cell>
+                          {ageValueCompliance ? (
+                            <PercentageBar
+                              color={colors.data.cyan}
+                              amount={ageValueCompliance}
+                            />
+                          ) : (
+                            <Text>
+                              {text.shared.leeftijden.tabel.compliance_no_data}
+                            </Text>
+                          )}
+                          {ageValueSupport ? (
+                            <PercentageBar
+                              color={colors.data.yellow}
+                              amount={ageValueSupport}
+                            />
+                          ) : (
+                            <Text>
+                              {text.shared.leeftijden.tabel.support_no_data}
+                            </Text>
+                          )}
+                        </Cell>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </StyledTable>
               <Box
