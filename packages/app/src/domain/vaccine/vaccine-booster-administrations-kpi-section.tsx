@@ -2,7 +2,7 @@ import { Box } from '~/components/base';
 import { KpiValue } from '~/components/kpi-value';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Tile } from '~/components/tile';
-import { InlineText, Text, Heading } from '~/components/typography';
+import { InlineText, Text, Heading, BoldText } from '~/components/typography';
 import { Message } from '~/components/message';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -95,13 +95,13 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
 
   return (
     <Box spacing={1}>
-      <Text fontWeight="bold">
+      <BoldText>
         {replaceComponentsInText(description, {
           value: (
             <InlineText color="data.primary">{formatNumber(value)}</InlineText>
           ),
         })}
-      </Text>
+      </BoldText>
 
       <Metadata {...metadata} isTileFooter />
     </Box>

@@ -5,7 +5,7 @@ import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { PercentageBar } from '~/components/percentage-bar';
-import { InlineText } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { getThresholdValue } from '~/utils/get-threshold-value';
@@ -108,8 +108,7 @@ function ItemRow({
         item.country_code === 'NLD' ? colors.tileGray : undefined
       }
     >
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
           alignItems: 'center',
@@ -120,7 +119,7 @@ function ItemRow({
         </Box>
 
         {countryNames[item.country_code.toLocaleLowerCase()]}
-      </InlineText>
+      </BoldText>
       <Row
         formatValue={formatValue}
         label={text.land_tabel.header_per_inwoners}
@@ -167,7 +166,7 @@ function Row({
       <Box minWidth={100}>
         <Box display="flex" alignItems="center" spacingHorizontal={2}>
           <Box textAlign="right">
-            <InlineText fontWeight="bold">{formatValue(value)}</InlineText>
+            <BoldText>{formatValue(value)}</BoldText>
           </Box>
           {bar}
         </Box>

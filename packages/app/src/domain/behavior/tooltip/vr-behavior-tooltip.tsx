@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
-import { InlineText, Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -66,9 +66,9 @@ export function VrBehaviorTooltip({
       link={reverseRouter.vr.gedrag(context.dataItem.vrcode)}
     >
       <Box maxWidth="15rem" spacing={2}>
-        <Text fontWeight="bold">
+        <BoldText css={css({ marginBottom: 2 })}>
           {commonTexts.behavior.subjects[currentMetric]}
-        </Text>
+        </BoldText>
 
         {/* Change order of the info based on the metric name */}
         {behaviorType === 'compliance' ? (
@@ -98,7 +98,7 @@ function TooltipInfo({ title, value, background }: TooltipInfoProps) {
     <Box display="flex" alignItems="center" justifyContent="space-between">
       {title}
       <Box display="flex" alignItems="center">
-        <InlineText fontWeight="bold">{`${value}%`}</InlineText>
+        <BoldText>{`${value}%`}</BoldText>
         <LegendaColorBox backgroundColor={background} />
       </Box>
     </Box>

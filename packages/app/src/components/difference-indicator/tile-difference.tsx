@@ -1,8 +1,8 @@
+import css from '@styled-system/css';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { Down, Gelijk, Up } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
 import { Markdown } from '~/components/markdown';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Container, IconContainer } from './containers';
@@ -65,7 +65,7 @@ export function TileDifference({
         renderersOverrides={{
           paragraph: 'span',
           strong: (props) => (
-            <InlineText fontWeight="bold">{props.children}</InlineText>
+            <BoldText>{props.children}</BoldText>
           ),
         }}
         content={replaceVariablesInText(
