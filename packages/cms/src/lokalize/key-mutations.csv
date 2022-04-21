@@ -44,6 +44,8 @@ timestamp,action,key,document_id,move_to
 2022-04-14T08:55:50.896Z,move,pages.vaccinationsPage.nl.four_kpi_section.total_booster_and_third_shots.sources.href,eExb1tVTD1y5h6ShWfEAqa,pages.vaccinationsPage.nl.four_kpi_section.total_booster_shots.sources.href
 2022-04-14T08:55:50.896Z,move,pages.vaccinationsPage.nl.four_kpi_section.total_booster_and_third_shots.sources.text,eExb1tVTD1y5h6ShWfEB3y,pages.vaccinationsPage.nl.four_kpi_section.total_booster_shots.sources.text
 2022-04-14T08:55:50.896Z,move,pages.vaccinationsPage.nl.four_kpi_section.total_booster_and_third_shots.title,eExb1tVTD1y5h6ShWfEAB5,pages.vaccinationsPage.nl.four_kpi_section.total_booster_shots.title
+2022-04-20T11:56:09.423Z,add,pages.behaviorPage.shared.leeftijden.tabel.compliance_no_data,A5Y41hFe5J3wNnB7Np5dWd,__
+2022-04-20T11:56:10.610Z,add,pages.behaviorPage.shared.leeftijden.tabel.support_no_data,X8Z1HTDxqJ9pM59361JkzO,__
 2022-04-14T11:35:18.085Z,add,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_date_start_in_unix_time,T6FOC3TDR34eMSB5nyzsA8,__
 2022-04-14T11:35:19.285Z,add,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_date_end_in_unix_time,BarLwW8hBDpE0bK0rLm9Kv,__
 2022-04-14T11:35:20.492Z,add,pages.sewerPage.gm.zeewolde_incomplete_manualy_override.zeewolde_label,T6FOC3TDR34eMSB5nyztO0,__
