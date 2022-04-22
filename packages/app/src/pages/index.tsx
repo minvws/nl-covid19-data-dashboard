@@ -533,10 +533,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   values={dataSewerTotal.values}
                   seriesConfig={[
                     {
-                      type: 'split-area',
+                      type: 'area',
                       metricProperty: 'average',
                       label: commonTexts.common.daggemiddelde,
-                      splitPoints: averageSplitPoints,
+                      color: colors.data.scale.blue[3],
                     },
                   ]}
                   dataOptions={{
