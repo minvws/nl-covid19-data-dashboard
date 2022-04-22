@@ -34,7 +34,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
   const threshold = thresholds[thresholdMap || map][metricProperty as string];
   assert(
     isDefined(threshold),
-    `No threshold configured for map type ${map} and metric property ${metricProperty}`
+    `[${useFillColor.name}] No threshold configured for map type ${map} and metric property ${metricProperty}`
   );
 
   const colorScale = useMemo(() => createColorScale(threshold), [threshold]);
@@ -58,7 +58,7 @@ export function getFillColor<T extends ChoroplethDataItem>(
   const threshold = thresholds[thresholdMap || map][metricProperty as string];
   assert(
     isDefined(threshold),
-    `No threshold configured for map type ${map} and metric property ${metricProperty}`
+    `[${getFillColor.name}] No threshold configured for map type ${map} and metric property ${metricProperty}`
   );
   const colorScale = createColorScale(threshold);
 

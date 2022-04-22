@@ -7,7 +7,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Heading, InlineText, Text, BoldText } from '~/components/typography';
 import {
   BehaviorLineChartTile,
   getBehaviorChartOptions,
@@ -18,6 +18,7 @@ import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -30,6 +31,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -37,6 +39,13 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        text: siteText.pages.behaviorPage,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   (context) => {
     const data = selectVrData('behavior')(context);
@@ -63,6 +72,7 @@ export default function BehaviorPageVr(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
+    pageText,
     lastGenerated,
     content,
     selectedVrData: data,
@@ -70,17 +80,15 @@ export default function BehaviorPageVr(
     chartBehaviorOptions,
   } = props;
 
-  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
-
-  const text = siteText.regionaal_gedrag;
+  const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
+  const { text } = pageText;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...commonTexts.veiligheidsregio_index.metadata,
+    title: text.vr.metadata.title,
+    description: text.vr.metadata.description,
   };
 
-  const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
@@ -93,76 +101,64 @@ export default function BehaviorPageVr(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.gedrag}
-            title={regionaal_gedrag.pagina.titel}
+            category={commonTexts.nationaal_layout.headings.gedrag}
+            title={text.vr.pagina.titel}
             icon={<Gedrag />}
-            description={regionaal_gedrag.pagina.toelichting}
+            description={text.vr.pagina.toelichting}
             metadata={{
-              datumsText: regionaal_gedrag.datums,
+              datumsText: text.vr.datums,
               dateOrRange: {
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
-              dataSources: [regionaal_gedrag.bronnen.rivm],
+              dataSources: [text.vr.bronnen.rivm],
             }}
-            referenceLink={regionaal_gedrag.reference.href}
+            referenceLink={text.vr.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
-            warning={text.warning}
+            warning={text.vr.warning}
           />
 
           <TwoKpiSection>
             <Tile>
-              <Heading level={3}>
-                {regionaal_gedrag.onderzoek_uitleg.titel}
-              </Heading>
-              <Markdown
-                content={regionaal_gedrag.onderzoek_uitleg.toelichting}
-              />
+              <Heading level={3}>{text.vr.onderzoek_uitleg.titel}</Heading>
+              <Markdown content={text.vr.onderzoek_uitleg.toelichting} />
             </Tile>
             <Tile height="100%">
-              <Heading level={3}>{regionaal_gedrag.kpi.titel}</Heading>
+              <Heading level={3}>{text.vr.kpi.titel}</Heading>
               <Text>
-                {replaceComponentsInText(
-                  regionaal_gedrag.kpi.deelgenomen_mensen,
-                  {
-                    number_of_participants: (
-                      <InlineText fontWeight="bold">
-                        {formatNumber(behaviorLastValue.number_of_participants)}
-                      </InlineText>
-                    ),
-                    date_start: (
-                      <InlineText>
-                        {formatDateFromSeconds(
-                          behaviorLastValue.date_start_unix
-                        )}
-                      </InlineText>
-                    ),
-                    date_end: (
-                      <InlineText>
-                        {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
-                      </InlineText>
-                    ),
-                  }
-                )}
+                {replaceComponentsInText(text.vr.kpi.deelgenomen_mensen, {
+                  number_of_participants: (
+                    <BoldText>
+                      {formatNumber(behaviorLastValue.number_of_participants)}
+                    </BoldText>
+                  ),
+                  date_start: (
+                    <InlineText>
+                      {formatDateFromSeconds(behaviorLastValue.date_start_unix)}
+                    </InlineText>
+                  ),
+                  date_end: (
+                    <InlineText>
+                      {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
+                    </InlineText>
+                  ),
+                })}
               </Text>
             </Tile>
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={regionaal_gedrag.basisregels.title}
-            description={regionaal_gedrag.basisregels.description}
-            complianceExplanation={
-              regionaal_gedrag.basisregels.volgen_beschrijving
-            }
-            supportExplanation={
-              regionaal_gedrag.basisregels.steunen_beschrijving
-            }
+            title={text.vr.basisregels.title}
+            description={text.vr.basisregels.description}
+            complianceExplanation={text.vr.basisregels.volgen_beschrijving}
+            supportExplanation={text.vr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={regionaal_gedrag.basisregels.annotatie}
+            annotation={text.vr.basisregels.annotatie}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
+            text={text.shared}
           />
 
           <span ref={scrollToRef} />
@@ -173,14 +169,15 @@ export default function BehaviorPageVr(
                 behaviorLastValue.date_start_unix,
                 behaviorLastValue.date_end_unix,
               ],
-              source: regionaal_gedrag.bronnen.rivm,
+              source: text.vr.bronnen.rivm,
             }}
             currentId={currentId}
             setCurrentId={setCurrentId}
             behaviorOptions={chartBehaviorOptions}
+            text={text}
           />
 
-          <MoreInformation />
+          <MoreInformation text={text.shared.meer_onderzoeksresultaten} />
         </TileList>
       </VrLayout>
     </Layout>

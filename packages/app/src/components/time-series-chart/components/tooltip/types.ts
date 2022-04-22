@@ -63,6 +63,14 @@ export type TooltipData<T extends TimestampedValue> = {
    *
    */
   metricPropertyFormatters: MetricPropertyFormatters<T>;
+  /**
+   * The maximum value a graph can hav.
+   */
+  seriesMax?: number;
+  /**
+   * Function to check if at a certain moment the value is exceding the seriesMax at that time.
+   */
+  isOutOfBounds?: boolean;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (

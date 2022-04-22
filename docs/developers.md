@@ -1,5 +1,15 @@
 # Developer Notes
 
+## Shortcut scripts
+
+The monorepo contains projects which the developer can access with shortcut scripts at the root of the project. Instead of writing the path in the CLI like `yarn workspace @corona-dashboard cms lokalize:import`, we can access the script by writing `yarn cms:lokalize-import` to bring your local JSON files up-to-date with the Sanity dataset. Another example is using `yarn build:app` instead of `yarn workspace @corona-dashboard/app build` to make a build during the release procedure. Lastly, running `yarn check-all` will make sure the code, data and tests work as expected, instead of running scripts individually.
+
+Available shortcut scripts:
+
+- `yarn check-all`
+- `yarn cms:[command]`
+- `yarn build:[command]`
+
 ## Common and icon packages
 
 The monorepo contains two shared packages: common and icons.
@@ -36,6 +46,25 @@ docker build \
 --build-arg ARG_API_URL="https://coronadashboard.rijksoverheid.nl/json/latest-data.zip" \
 -t local-test \
 .
+```
+
+Running:
+
+```sh
+docker run --init --publish 8080:8080 local-test
+```
+
+Debugging a running container:
+
+```sh
+# get the containerId first by running
+docker ps
+
+# then use the containerId to connect into it
+docker exec -ti <containerId> sh
+
+# you can now run certain commands to debug, to inspect file/dir sizes for example:
+du -h -d 1 | sort -n
 ```
 
 ## Testing Windows screenreaders on Mac

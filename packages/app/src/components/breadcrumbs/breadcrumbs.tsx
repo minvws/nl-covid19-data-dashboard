@@ -10,7 +10,7 @@ import { useBreadcrumbs } from './logic/use-breadcrumbs';
 
 export function Breadcrumbs() {
   const breadcrumbs = useBreadcrumbs();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { pathname } = useRouter();
 
   return (
@@ -31,7 +31,7 @@ export function Breadcrumbs() {
           px: 4,
         })}
         as={'nav'}
-        aria-label={siteText.breadcrumbs.label}
+        aria-label={commonTexts.breadcrumbs.label}
       >
         <ol vocab="http://schema.org/" typeof="BreadcrumbList">
           {breadcrumbs.map(({ title, href, redirectLabel }, index) => (

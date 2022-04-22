@@ -1,3 +1,4 @@
+import { TimeframeOption } from '@corona-dashboard/common';
 import { Gedrag } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -7,7 +8,7 @@ import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
@@ -44,8 +45,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textShared: siteText.pages.situationsPage.shared,
-        textChoroplethTooltips: siteText.choropleth_tooltip.patients,
+        textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
       }),
       locale
     ),
@@ -86,12 +88,11 @@ export default function BrononderzoekPage(
     vrName,
   } = props;
 
-  const intl = useIntl();
-  const { formatNumber, formatDateSpan } = intl;
-  const { textShared } = pageText;
+  const { commonTexts, formatNumber, formatDateSpan } = useIntl();
+  const { metadataTexts, textShared } = pageText;
 
   const metadata = {
-    ...intl.siteText.nationaal_metadata,
+    ...metadataTexts,
     title: textShared.metadata.title,
     description: textShared.metadata.description,
   };
@@ -109,12 +110,12 @@ export default function BrononderzoekPage(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={intl.siteText.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              intl.siteText.sidebar.metrics.source_investigation.title
+              commonTexts.sidebar.metrics.source_investigation.title
             }
             title={replaceVariablesInText(
-              intl.siteText.common.subject_in_location,
+              commonTexts.common.subject_in_location,
               {
                 subject: textShared.titel,
                 location: vrName,
@@ -165,7 +166,7 @@ export default function BrononderzoekPage(
                   )}
                 />
 
-                <Text fontWeight="bold">
+                <BoldText>
                   {replaceComponentsInText(
                     textShared.veiligheidsregio_kpi.beschrijving_bekend,
                     {
@@ -181,7 +182,7 @@ export default function BrononderzoekPage(
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
               </KpiTile>
             )}
           </TwoKpiSection>
@@ -202,7 +203,7 @@ export default function BrononderzoekPage(
               metadata={{ source: textShared.bronnen.rivm }}
             >
               <SituationsOverTimeChart
-                timeframe={'all'}
+                timeframe={TimeframeOption.ALL}
                 values={values}
                 timelineEvents={getTimelineEvents(
                   content.elements.timeSeries,

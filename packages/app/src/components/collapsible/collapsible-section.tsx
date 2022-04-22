@@ -47,17 +47,19 @@ export const CollapsibleSection = ({
     >
       {collapsible.button(
         <Summary>
-          {summary}
-          {id && (
-            <StyledAnchor
-              aria-hidden="true"
-              tabIndex={-1}
-              onClick={(e) => e.stopPropagation()}
-              href={`#${id}`}
-            >
-              #
-            </StyledAnchor>
-          )}
+          <Box width="100%">
+            {summary}
+            {id && (
+              <StyledAnchor
+                aria-hidden="true"
+                tabIndex={-1}
+                onClick={(e) => e.stopPropagation()}
+                href={`#${id}`}
+              >
+                #
+              </StyledAnchor>
+            )}
+          </Box>
           {collapsible.chevron}
         </Summary>
       )}
@@ -72,6 +74,7 @@ const StyledAnchor = styled(Anchor)(
     color: 'lightGray',
     px: 3,
     py: 1,
+    width: 0,
     textDecoration: 'none',
     position: 'absolute',
     right: '100%',

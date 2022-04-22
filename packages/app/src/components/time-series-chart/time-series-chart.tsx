@@ -156,7 +156,7 @@ export function TimeSeriesChart<
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
-  timeframe = 'all',
+  timeframe = TimeframeOption.ALL,
   formatTooltip,
   dataOptions,
   showWeekNumbers,
@@ -172,7 +172,7 @@ export function TimeSeriesChart<
   displayTooltipValueOnly,
   isYAxisCollapsed: defaultIsYAxisCollapsed,
 }: TimeSeriesChartProps<T, C>) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const {
     tooltipData,
@@ -283,7 +283,7 @@ export function TimeSeriesChart<
     tabInteractiveButton,
     anchorEventHandlers,
     setIsTabInteractive,
-  } = useTabInteractiveButton(siteText.accessibility.tab_navigatie_button);
+  } = useTabInteractiveButton(commonTexts.accessibility.tab_navigatie_button);
 
   const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
@@ -359,6 +359,11 @@ export function TimeSeriesChart<
 
           valueMinWidth,
           metricPropertyFormatters,
+          seriesMax,
+          isOutOfBounds: dataOptions?.outOfBoundsConfig?.checkIsOutofBounds(
+            values[valuesIndex],
+            seriesMax
+          ),
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -380,6 +385,7 @@ export function TimeSeriesChart<
     timelineEvents,
     timelineState.events,
     metricPropertyFormatters,
+    seriesMax,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -430,6 +436,8 @@ export function TimeSeriesChart<
               yTickValues={yTickValues}
               timeDomain={timeDomain}
               xTickNumber={xTickNumber}
+              values={values}
+              useDatesAsRange={dataOptions?.useDatesAsRange}
               formatYTickValue={formatYTickValue}
               xScale={xScale}
               yScale={yScale}
@@ -460,6 +468,7 @@ export function TimeSeriesChart<
               bounds={bounds}
               yScale={yScale}
               chartId={chartId}
+              seriesMax={seriesMax}
             />
 
             {/**
@@ -498,6 +507,8 @@ export function TimeSeriesChart<
                   getX={getX}
                   height={bounds.height}
                   config={x}
+                  bounds={bounds}
+                  series={seriesList[0]}
                 />
               ))}
             {timeAnnotations?.map((x, index) => (

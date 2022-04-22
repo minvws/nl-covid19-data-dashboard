@@ -32,7 +32,7 @@ export function SituationsOverTimeChart({
   timelineEvents,
   text,
 }: SituationsTimeSeriesChartProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const situations = useSituations(text.situaties);
   const { list, toggle, clear } = useList<string>();
 
@@ -46,7 +46,7 @@ export function SituationsOverTimeChart({
 
   if (timelineEvents && timelineEvents.length > 0) {
     staticLegendItems.push({
-      label: siteText.charts.timeline.legend_label,
+      label: commonTexts.charts.timeline.legend_label,
       shape: 'custom',
       shapeComponent: <TimelineMarker size={10} />,
     });

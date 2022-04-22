@@ -40,7 +40,7 @@ export function InlineTimeSeriesCharts<
   M extends MetricKeys<ScopedData[S]>
 >(props: InlineTimeSeriesChartsProps<S, M>) {
   const { configuration, startDate, endDate } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const dateUrl = getDataUrl(startDate, endDate, configuration);
 
@@ -59,7 +59,7 @@ export function InlineTimeSeriesCharts<
       const config: any = {
         type: x.type,
         metricProperty: x.propertyName,
-        label: get(siteText, x.labelKey.split('.'), null),
+        label: get(commonTexts, x.labelKey.split('.'), null),
         color: getColor(x.color),
         minimumRange: seriesMetricConfig?.minimumRange,
       };
@@ -70,7 +70,11 @@ export function InlineTimeSeriesCharts<
         config.fillOpacity = x.fillOpacity;
       }
       if (isDefined(x.shortLabelKey) && x.shortLabelKey.length) {
-        config.shortLabelKey = get(siteText, x.shortLabelKey.split('.'), null);
+        config.shortLabelKey = get(
+          commonTexts,
+          x.shortLabelKey.split('.'),
+          null
+        );
       }
       if (isDefined(x.strokeWidth)) {
         config.strokeWidth = x.strokeWidth;
@@ -84,7 +88,7 @@ export function InlineTimeSeriesCharts<
     scopedMetricConfigs,
     configuration.metricName,
     configuration.metricProperties,
-    siteText,
+    commonTexts,
   ]);
 
   const dataOptions = useMemo(() => {
@@ -99,10 +103,10 @@ export function InlineTimeSeriesCharts<
         start: calculateStart(x.start, data.values),
         end: calculateEnd(x.end, x.start, data.values),
         label: isDefined(x.labelKey)
-          ? get(siteText, x.labelKey.split('.'), null)
+          ? get(commonTexts, x.labelKey.split('.'), null)
           : undefined,
         shortLabel: isDefined(x.shortLabelKey)
-          ? get(siteText, x.shortLabelKey.split('.'), null)
+          ? get(commonTexts, x.shortLabelKey.split('.'), null)
           : undefined,
       })
     );
@@ -112,17 +116,21 @@ export function InlineTimeSeriesCharts<
       isPercentage: configuration.isPercentage,
       renderNullAsZero: configuration.renderNullAsZero,
       valueAnnotation: configuration.valueAnnotationKey?.length
-        ? get(siteText, configuration.valueAnnotationKey.split('.'), undefined)
+        ? get(
+            commonTexts,
+            configuration.valueAnnotationKey.split('.'),
+            undefined
+          )
         : undefined,
       timespanAnnotations,
     } as DataOptions;
-  }, [configuration, siteText, data]);
+  }, [configuration, commonTexts, data]);
 
   if (!isDefined(data)) {
     return <InlineLoader />;
   }
 
-  const source = get(siteText, configuration.sourceKey.split('.'), '');
+  const source = get(commonTexts, configuration.sourceKey.split('.'), '');
 
   return (
     <ErrorBoundary>

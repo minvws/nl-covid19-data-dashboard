@@ -29,7 +29,7 @@ export function DateSpanMarker<T extends TimestampedValue>(
     <Container
       style={{
         width,
-        transform: `translateX(${point.x - width / 2}px)`,
+        transform: `translateX(${point.x - width / 2 + 0.5}px)`,
       }}
     >
       <DateSpan />

@@ -14,12 +14,14 @@ import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decima
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
 import { BarWithNumber } from './bar-with-number';
+import { SiteText } from '~/locale';
 interface WideInfectedTableProps {
   data: InCollectionTestedOverall[];
   isExpanded: boolean;
   matchingCountries: FilterArrayType[];
   countryNames: Record<string, string>;
   inputValue: string;
+  text: SiteText['pages']['in_positiveTestsPage']['shared'];
 }
 
 export function WideInfectedTable({
@@ -28,10 +30,9 @@ export function WideInfectedTable({
   matchingCountries,
   countryNames,
   inputValue,
+  text,
 }: WideInfectedTableProps) {
-  const intl = useIntl();
-  const text =
-    intl.siteText.internationaal_positief_geteste_personen.land_tabel;
+  const { formatPercentage } = useIntl();
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   const formatValue = useMemo(() => {
@@ -39,11 +40,11 @@ export function WideInfectedTable({
       data.map((x) => x.infected_per_100k_average ?? 0)
     );
     return (value: number) =>
-      intl.formatPercentage(value, {
+      formatPercentage(value, {
         minimumFractionDigits: numberOfDecimals,
         maximumFractionDigits: numberOfDecimals,
       });
-  }, [intl, data]);
+  }, [data, formatPercentage]);
 
   return (
     <Box overflow="auto">
@@ -52,13 +53,15 @@ export function WideInfectedTable({
           css={css({ borderBottom: '1px solid', borderBottomColor: 'silver' })}
         >
           <tr>
-            <HeaderCell css={css({ pl: 3 })}>{text.header_land}</HeaderCell>
+            <HeaderCell css={css({ pl: 3 })}>
+              {text.land_tabel.header_land}
+            </HeaderCell>
             <HeaderCell
               css={css({
                 width: asResponsiveArray({ sm: 180, lg: 200, xl: 210 }),
               })}
             >
-              {text.header_per_inwoners}
+              {text.land_tabel.header_per_inwoners}
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -67,7 +70,7 @@ export function WideInfectedTable({
                 width: asResponsiveArray({ sm: 200, lg: 220, xl: 260 }),
               })}
             >
-              {text.header_totale}
+              {text.land_tabel.header_totale}
             </HeaderCell>
           </tr>
         </thead>

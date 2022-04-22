@@ -2,45 +2,45 @@ import {
   colors,
   DAY_IN_SECONDS,
   GmCollectionVaccineCoveragePerAgeGroup,
+  TimeframeOption,
   VrHospitalNiceValue,
-  VrTestedOverallValue,
+  VrSewerValue,
   VrVaccineCoveragePerAgeGroupValue,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
   Chevron,
-  Test,
   Vaccinaties,
   Ziekenhuis,
+  RioolwaterMonitoring,
 } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { LinkWithIcon } from '~/components/link-with-icon';
-import { Markdown } from '~/components/markdown';
-import { MaxWidth } from '~/components/max-width';
+import { LinkWithIcon, Markdown, MaxWidth } from '~/components';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
+import { gmCodesByVrCode } from '~/data';
+import { Layout } from '~/domain/layout';
 import { Search } from '~/domain/topical/components/search';
 import {
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
-} from '~/domain/topical/mini-tile-selector-layout';
-import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
-import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
+  VaccinationCoverageChoropleth,
+  ArticleList,
+  MiniTrendTile,
+  MiniVaccinationCoverageTile,
+  TopicalSectionHeader,
+} from '~/domain/topical';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -49,25 +49,40 @@ import {
   createGetChoroplethData,
   getLastGeneratedDate,
   selectVrData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { trimNullValues } from '~/utils/trim-null-values';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  useReverseRouter,
+  countTrailingNullValues,
+  cutValuesFromTimeframe,
+  getBoundaryDateStartUnix,
+  replaceComponentsInText,
+  replaceVariablesInText,
+  trimNullValues,
+  getAverageSplitPoints,
+} from '~/utils';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        hospitalText: siteText.pages.hospitalPage.nl,
+        positiveTestsText: siteText.pages.positiveTestsPage.shared,
+        textVr: siteText.pages.topicalPage.vr,
+        textShared: siteText.pages.topicalPage.shared,
+        sewerText: siteText.pages.sewerPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
-
   (context) => {
     const data = selectVrData(
       'vaccine_coverage_per_age_group',
       'hospital_nice',
       'code',
+      'sewer',
       'difference',
       'tested_overall',
       'tested_ggd'
@@ -75,16 +90,48 @@ export const getStaticProps = createGetStaticProps(
 
     data.selectedVrData.hospital_nice.values = cutValuesFromTimeframe(
       data.selectedVrData.hospital_nice.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
     data.selectedVrData.tested_overall.values = cutValuesFromTimeframe(
       data.selectedVrData.tested_overall.values,
-      '5weeks'
+      TimeframeOption.FIVE_WEEKS
     );
 
-    return data;
+    data.selectedVrData.sewer.values = cutValuesFromTimeframe(
+      data.selectedVrData.sewer.values,
+      TimeframeOption.FIVE_WEEKS
+    );
+
+    return {
+      ...data,
+      selectedVrData: {
+        ...data.selectedVrData,
+        hospital_nice: {
+          ...data.selectedVrData.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.selectedVrData.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+        tested_overall: {
+          ...data.selectedVrData.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.selectedVrData.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+        sewer: {
+          ...data.selectedVrData.sewer,
+          values: cutValuesFromTimeframe(
+            data.selectedVrData.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+      },
+    };
   },
+
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -114,6 +161,7 @@ export const getStaticProps = createGetStaticProps(
 
 const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     choropleth,
     selectedVrData: data,
     content,
@@ -123,10 +171,11 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const vrCode = router.query.code as string;
-  const { siteText, ...formatters } = useIntl();
-  const text = siteText.veiligheidsregio_actueel;
+  const { commonTexts, ...formatters } = useIntl();
+  const { hospitalText, textVr, sewerText, textShared } = pageText;
 
   const dataHospitalIntake = data.hospital_nice;
+  const dataSewerTotal = data.sewer;
   const dataSitemap = useDataSitemap('vr', vrCode);
 
   const filteredAgeGroup18Plus =
@@ -141,10 +190,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const internationalFeature = useFeature('inPositiveTestsPage');
 
   const metadata = {
-    title: replaceVariablesInText(text.metadata.title, {
+    title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textVr.metadata.description, {
       safetyRegionName: vrName,
     }),
   };
@@ -162,6 +211,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
 
+  const averageSplitPoints = getAverageSplitPoints(sewerText.split_labels);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white">
@@ -172,17 +223,19 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 showBackLink
                 lastGenerated={Number(props.lastGenerated)}
                 title={replaceComponentsInText(
-                  text.secties.actuele_situatie.titel,
+                  textVr.secties.actuele_situatie.titel,
                   {
                     safetyRegionName: vrName,
                   }
                 )}
                 headingLevel={1}
+                text={textShared}
               />
 
               <MiniTileSelectorLayout
+                text={textShared}
                 link={{
-                  text: replaceVariablesInText(text.title_link, {
+                  text: replaceVariablesInText(textVr.title_link, {
                     safetyRegionName: vrName,
                   }),
                   href: reverseRouter.vr.index(vrCode),
@@ -190,8 +243,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 menuItems={[
                   {
                     label:
-                      siteText.veiligheidsregio_actueel.mini_trend_tiles
-                        .ziekenhuis_opnames.menu_item_label,
+                      textVr.mini_trend_tiles.ziekenhuis_opnames
+                        .menu_item_label,
                     data: trimNullValues(
                       dataHospitalIntake.values,
                       'admissions_on_date_of_admission_moving_average_rounded'
@@ -208,23 +261,17 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   } as MiniTileSelectorItem<VrHospitalNiceValue>,
                   {
-                    label:
-                      siteText.veiligheidsregio_actueel.mini_trend_tiles
-                        .positief_geteste_mensen.menu_item_label,
-                    data: data.tested_overall.values,
-                    dataProperty: 'infected_moving_average_rounded',
-                    value:
-                      data.tested_overall.last_value
-                        .infected_moving_average_rounded,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'tested_overall'
+                    label: textVr.mini_trend_tiles.sewer.menu_item_label,
+                    data: dataSewerTotal.values.filter(
+                      (x) => typeof x.average === 'number'
                     ),
-                  } as MiniTileSelectorItem<VrTestedOverallValue>,
+                    dataProperty: 'average',
+                    value: dataSewerTotal.last_value?.average ?? 0,
+                    warning: getWarning(content.elements.warning, 'sewer'),
+                  } as MiniTileSelectorItem<VrSewerValue>,
                   {
                     label:
-                      siteText.veiligheidsregio_actueel.mini_trend_tiles
-                        .vaccinatiegraad.menu_item_label,
+                      textVr.mini_trend_tiles.vaccinatiegraad.menu_item_label,
                     data: data.vaccine_coverage_per_age_group.values,
                     dataProperty: 'fully_vaccinated_percentage',
                     value:
@@ -245,7 +292,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 ].filter((x) => x !== undefined)}
               >
                 <MiniTrendTile
-                  title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+                  title={textVr.mini_trend_tiles.ziekenhuis_opnames.title}
                   text={
                     <>
                       <DataDrivenText
@@ -253,7 +300,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         content={[
                           {
                             type: 'metric',
-                            text: text.data_driven_texts.intake_hospital_ma
+                            text: textVr.data_driven_texts.intake_hospital_ma
                               .value,
                             metricName: 'hospital_nice',
                             metricProperty:
@@ -277,7 +324,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         iconPlacement="right"
                       >
                         {
-                          text.mini_trend_tiles.ziekenhuis_opnames
+                          textVr.mini_trend_tiles.ziekenhuis_opnames
                             .read_more_link
                         }
                       </LinkWithIcon>
@@ -290,17 +337,13 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'line',
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_moving_average,
+                      label: hospitalText.linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_reporting',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_trend_label,
+                      label: hospitalText.linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -309,8 +352,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       {
                         start: underReportedRangeHospital,
                         end: Infinity,
-                        label: siteText.common_actueel.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        label: textShared.data_incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -323,90 +366,60 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-
-                {
-                  <MiniTrendTile
-                    title={text.mini_trend_tiles.positief_geteste_mensen.title}
-                    text={
-                      <>
-                        <DataDrivenText
-                          data={data}
-                          content={[
-                            {
-                              type: 'metric',
-                              text: text.data_driven_texts.tested_overall.value,
-                              metricName: 'tested_overall',
-                              metricProperty: 'infected_moving_average',
-                              additionalData: {
-                                dateStart: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix -
-                                    WEEK_IN_SECONDS
-                                ),
-                                dateEnd: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix
-                                ),
-                              },
-                            },
-                            {
-                              type: 'metric',
-                              text: text.data_driven_texts.tested_ggd.value,
-                              metricName: 'tested_ggd',
-                              isPercentage: true,
-                              metricProperty:
-                                'infected_percentage_moving_average',
-                            },
-                          ]}
-                        />
-                        <LinkWithIcon
-                          href={reverseRouter.nl.positiefGetesteMensen()}
-                          icon={<Chevron />}
-                          iconPlacement="right"
-                        >
+                <MiniTrendTile
+                  title={textVr.mini_trend_tiles.sewer.title}
+                  text={
+                    <>
+                      <DataDrivenText
+                        data={data}
+                        content={[
                           {
-                            text.mini_trend_tiles.positief_geteste_mensen
-                              .read_more_link
-                          }
-                        </LinkWithIcon>
-                      </>
-                    }
-                    icon={<Test />}
-                    values={data.tested_overall.values}
-                    seriesConfig={[
-                      {
-                        type: 'line',
-                        metricProperty: 'infected_moving_average',
-                        label:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .infected_moving_average,
-                        color: colors.data.primary,
-                      },
-                      {
-                        type: 'bar',
-                        metricProperty: 'infected',
-                        label:
-                          siteText.positief_geteste_personen.tooltip_labels
-                            .infected_overall,
-                        color: colors.data.primary,
-                      },
-                    ]}
-                    accessibility={{
-                      key: 'topical_tested_overall_infected',
-                    }}
-                    warning={getWarning(
-                      content.elements.warning,
-                      'tested_overall'
-                    )}
-                  />
-                }
-
+                            type: 'metric',
+                            text: textVr.data_driven_texts.sewer.value,
+                            metricName: 'sewer',
+                            metricProperty: 'average',
+                            additionalData: {
+                              newDate: formatters.formatDateFromSeconds(
+                                data.sewer.last_value.date_unix
+                              ),
+                            },
+                          },
+                        ]}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.vr.rioolwater(vrCode)}
+                        icon={<Chevron />}
+                        iconPlacement="right"
+                      >
+                        {textVr.mini_trend_tiles.sewer.read_more_link}
+                      </LinkWithIcon>
+                    </>
+                  }
+                  icon={<RioolwaterMonitoring />}
+                  values={dataSewerTotal.values}
+                  seriesConfig={[
+                    {
+                      type: 'split-area',
+                      metricProperty: 'average',
+                      label: commonTexts.common.daggemiddelde,
+                      splitPoints: averageSplitPoints,
+                    },
+                  ]}
+                  dataOptions={{
+                    valueAnnotation:
+                      commonTexts.waarde_annotaties.riool_normalized,
+                  }}
+                  accessibility={{ key: 'topical_sewer' }}
+                  warning={getWarning(content.elements.warning, 'sewer')}
+                />
                 {isDefined(filteredAgeGroup18Plus) && (
                   <MiniVaccinationCoverageTile
-                    title={text.mini_trend_tiles.vaccinatiegraad.title}
+                    title={textVr.mini_trend_tiles.vaccinatiegraad.title}
                     oneShotBarLabel={
-                      text.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
+                      textVr.mini_trend_tiles.vaccinatiegraad.one_shot_bar_label
                     }
                     fullyVaccinatedBarLabel={
-                      text.mini_trend_tiles.vaccinatiegraad
+                      textVr.mini_trend_tiles.vaccinatiegraad
                         .fully_vaccinated_bar_label
                     }
                     icon={<Vaccinaties />}
@@ -415,7 +428,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         <Text variant="datadriven" as="div">
                           <Markdown
                             content={replaceVariablesInText(
-                              text.mini_trend_tiles.vaccinatiegraad.text,
+                              textVr.mini_trend_tiles.vaccinatiegraad.text,
                               renderedAgeGroup18Pluslabels,
                               formatters
                             )}
@@ -426,7 +439,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                           icon={<Chevron />}
                           iconPlacement="right"
                         >
-                          {text.mini_trend_tiles.vaccinatiegraad.read_more_link}
+                          {
+                            textVr.mini_trend_tiles.vaccinatiegraad
+                              .read_more_link
+                          }
                         </LinkWithIcon>
                       </>
                     }
@@ -452,62 +468,59 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             <Box pt={4}>
-              <Search title={siteText.common_actueel.secties.search.title.vr} />
+              <Search title={textShared.secties.search.title.vr} />
             </Box>
 
             <VaccinationCoverageChoropleth
               title={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .title.vr,
+                textShared.secties.vaccination_coverage_choropleth.title.vr,
                 { safetyRegion: vrName }
               )}
               content={replaceVariablesInText(
-                siteText.common_actueel.secties.vaccination_coverage_choropleth
-                  .content.vr,
+                textShared.secties.vaccination_coverage_choropleth.content.vr,
                 { safetyRegion: vrName }
               )}
               vrCode={vrCode}
               data={{ gm: choropleth.gm.vaccine_coverage_per_age_group }}
+              text={textShared}
               link={{
                 href: reverseRouter.vr.vaccinaties(vrCode),
                 text: replaceVariablesInText(
-                  siteText.common_actueel.secties
-                    .vaccination_coverage_choropleth.link_text.vr,
+                  textShared.secties.vaccination_coverage_choropleth.link_text
+                    .vr,
                   { safetyRegion: vrName }
                 ),
               }}
             />
 
-            <CollapsibleButton
-              label={siteText.common_actueel.overview_links_header}
-            >
+            <CollapsibleButton label={textShared.overview_links_header}>
               <Sitemap
-                quickLinksHeader={text.quick_links.header}
+                quickLinksHeader={textVr.quick_links.header}
                 quickLinks={[
                   {
                     href: reverseRouter.nl.index(),
-                    text: text.quick_links.links.nationaal,
+                    text: textVr.quick_links.links.nationaal,
                   },
                   {
                     href: reverseRouter.vr.index(router.query.code as string),
                     text: replaceVariablesInText(
-                      text.quick_links.links.veiligheidsregio,
+                      textVr.quick_links.links.veiligheidsregio,
                       { safetyRegionName: vrName }
                     ),
                   },
                   {
                     href: reverseRouter.gm.index(),
-                    text: text.quick_links.links.gemeente,
+                    text: textVr.quick_links.links.gemeente,
                   },
                   internationalFeature.isEnabled
                     ? {
                         href: reverseRouter.in.index(),
-                        text: text.quick_links.links.internationaal,
+                        text: textVr.quick_links.links.internationaal,
                       }
                     : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
-                  text.data_sitemap_title,
+                  textVr.data_sitemap_title,
                   { safetyRegionName: vrName }
                 )}
                 dataSitemap={dataSitemap}
@@ -525,16 +538,15 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
             px={{ _: 3, sm: 4, md: 3, lg: 4 }}
           >
             <TopicalSectionHeader
-              title={siteText.common_actueel.secties.meer_lezen.titel}
-              description={
-                siteText.common_actueel.secties.meer_lezen.omschrijving
-              }
-              link={siteText.common_actueel.secties.meer_lezen.link}
+              title={textShared.secties.meer_lezen.titel}
+              description={textShared.secties.meer_lezen.omschrijving}
+              link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
+              text={textShared}
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} />
+              <ArticleList articles={content.articles} text={textShared} />
             )}
           </MaxWidth>
         </Box>

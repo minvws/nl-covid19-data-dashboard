@@ -20,7 +20,7 @@ export const getStaticProps = withFeatureNotFoundPage(
 export default function InternationalPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const intl = useIntl();
+  const { commonTexts } = useIntl();
   const { lastGenerated } = props;
 
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function InternationalPage(
 
   return (
     <Layout
-      {...intl.siteText.internationaal_metadata}
+      {...commonTexts.internationaal_metadata}
       lastGenerated={lastGenerated}
     >
       <InLayout lastGenerated={lastGenerated} />

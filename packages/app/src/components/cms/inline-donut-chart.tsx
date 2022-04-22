@@ -29,7 +29,7 @@ export function InlineDonutChart<
   M extends MetricKeys<ScopedData[S]>
 >(props: InlineDonutChartProps<S, M>) {
   const { startDate, endDate, configuration } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const dateUrl = getDataUrl(startDate, endDate, configuration, 'donut');
 
@@ -45,13 +45,13 @@ export function InlineDonutChart<
     (x) => ({
       metricProperty: x.propertyName as any,
       color: getColor(x.color),
-      label: get(siteText, x.labelKey.split('.'), null),
-      tooltipLabel: get(siteText, x.tooltipLabelKey.split('.'), null),
+      label: get(commonTexts, x.labelKey.split('.'), null),
+      tooltipLabel: get(commonTexts, x.tooltipLabelKey.split('.'), null),
     })
   );
 
-  const title = get(siteText, configuration.labelKey.split('.'), '');
-  const source = get(siteText, configuration.sourceKey.split('.'), '');
+  const title = get(commonTexts, configuration.labelKey.split('.'), '');
+  const source = get(commonTexts, configuration.sourceKey.split('.'), '');
 
   return (
     <ErrorBoundary>

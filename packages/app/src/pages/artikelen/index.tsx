@@ -15,6 +15,7 @@ import {
   ArticleCategoryType,
 } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -22,11 +23,19 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textShared: siteText.pages.topicalPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>((context) => {
     const { locale } = context;
@@ -45,10 +54,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { pageText, content, lastGenerated } = props;
+  const { commonTexts } = useIntl();
   const router = useRouter();
   const breakpoints = useBreakpoints();
+
+  const { textShared } = pageText;
 
   const articleCategories = useMemo(() => {
     /**
@@ -62,8 +73,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
     return articleCategory
       .map((id) => {
-        const label =
-          siteText.common_actueel.secties.artikelen.categorie_filters[id];
+        const label = textShared.secties.artikelen.categorie_filters[id];
 
         return {
           label,
@@ -71,7 +81,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
         };
       })
       .filter((item) => availableCategories.includes(item.value));
-  }, [siteText, content]);
+  }, [content, textShared.secties.artikelen.categorie_filters]);
 
   const selectOptions = useMemo(
     () =>
@@ -107,16 +117,16 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   ) as ArticleCategoryType;
 
   return (
-    <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
+    <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
       <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
         <MaxWidth px={{ _: 3, lg: 4 }}>
           <Box pb={2}>
             <Heading level={2} as="h1">
-              {siteText.common_actueel.secties.artikelen.titel}
+              {textShared.secties.artikelen.titel}
             </Heading>
           </Box>
 
-          <Text>{siteText.common_actueel.secties.artikelen.beschrijving}</Text>
+          <Text>{textShared.secties.artikelen.beschrijving}</Text>
 
           {breakpoints.lg ? (
             <OrderedList>
@@ -147,8 +157,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             >
               <RichContentSelect
                 label={
-                  siteText.common_actueel.secties.artikelen
-                    .categorie_select_placeholder
+                  textShared.secties.artikelen.categorie_select_placeholder
                 }
                 visuallyHiddenLabel
                 initialValue={currentCategory}

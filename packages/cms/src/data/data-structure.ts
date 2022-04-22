@@ -34,6 +34,7 @@ export const dataStructure = {
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
     ],
+    booster_coverage: ["percentage", "percentage_label"],
   },
   gm_collection: {
     hospital_nice: [
@@ -58,22 +59,21 @@ export const dataStructure = {
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
     booster_shot_administered: [
+      "administered_total",
       "ggd_administered_last_7_days",
       "ggd_administered_total",
       "others_administered_total",
     ],
-    booster_and_third_shot_administered: ["administered_total"],
+    repeating_shot_administered: ["ggd_administered_total"],
     booster_shot_delivered: ["delivered_total"],
     booster_shot_planned: ["planned_7_days"],
     booster_shot_per_age_group: [
       "age_group_range",
-      "received_booster_total",
       "received_booster_percentage",
       "birthyear_range",
       "age_group_total",
     ],
-    booster_coverage: ["percentage"],
-    third_shot_administered: ["administered_total"],
+    booster_coverage: ["age_group", "percentage"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
     infectious_people: ["margin_low", "estimate", "margin_high"],
@@ -264,6 +264,13 @@ export const dataStructure = {
       "percentage_25_39",
       "percentage_16_24",
     ],
+    behavior_annotations: [
+      "behavior_indicator",
+      "message_title_nl",
+      "message_title_en",
+      "message_desc_nl",
+      "message_desc_en",
+    ],
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
     deceased_rivm_per_age_group: [
       "age_group_range",
@@ -294,7 +301,6 @@ export const dataStructure = {
       "fully_vaccinated",
       "partially_or_fully_vaccinated",
     ],
-    vaccine_delivery: ["total", "date_of_report_unix"],
     vaccine_delivery_estimate: ["total"],
     vaccine_delivery_per_supplier: [
       "total",
@@ -315,15 +321,7 @@ export const dataStructure = {
       "cure_vac",
       "janssen",
       "sanofi",
-      "total",
-    ],
-    vaccine_administered_estimate: [
-      "pfizer",
-      "moderna",
-      "astra_zeneca",
-      "cure_vac",
-      "janssen",
-      "sanofi",
+      "novavax",
       "total",
     ],
     vaccine_administered_doctors: ["estimated"],
@@ -492,6 +490,7 @@ export const dataStructure = {
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
     ],
+    booster_coverage: ["percentage", "percentage_label"],
   },
   vr_collection: {
     hospital_nice: [

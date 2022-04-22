@@ -3,7 +3,7 @@ import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { TimelineEventConfig } from '../logic';
@@ -23,11 +23,11 @@ export function TimelineTooltipContent({
   onClose,
   hasMultipleEvents,
 }: TimelineTooltipContentProps) {
-  const intl = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const isTouch = useIsTouchDevice();
   const dateStr = [
-    intl.formatDateFromSeconds(config.start, 'medium'),
-    config.end && intl.formatDateFromSeconds(config.end, 'medium'),
+    formatDateFromSeconds(config.start, 'medium'),
+    config.end && formatDateFromSeconds(config.end, 'medium'),
   ]
     .filter(isDefined)
     .join(' – ');
@@ -57,7 +57,7 @@ export function TimelineTooltipContent({
             <ChevronButton
               onClick={onPrev}
               rotate
-              title={intl.siteText.charts.timeline.prev}
+              title={commonTexts.charts.timeline.prev}
             />
           )}
 
@@ -68,7 +68,7 @@ export function TimelineTooltipContent({
           {hasMultipleEvents && (
             <ChevronButton
               onClick={onNext}
-              title={intl.siteText.charts.timeline.next}
+              title={commonTexts.charts.timeline.next}
             />
           )}
         </Box>
@@ -80,9 +80,7 @@ export function TimelineTooltipContent({
           </Text>
         )}
 
-        <Text variant="label1" fontWeight="bold">
-          {config.title}
-        </Text>
+        <BoldText variant="label1">{config.title}</BoldText>
         <Text variant="label1">{config.description}</Text>
       </Box>
 
@@ -97,7 +95,7 @@ export function TimelineTooltipContent({
           textVariant="label1"
         >
           <Anchor as="button" onClick={onClose} color="blue" underline>
-            {intl.siteText.common.sluiten}
+            {commonTexts.common.sluiten}
           </Anchor>
         </Box>
       )}

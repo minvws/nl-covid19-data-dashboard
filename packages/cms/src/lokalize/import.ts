@@ -1,5 +1,5 @@
 /**
- * This script exports LokalizeText documents from Sanity as a locale JSON file,
+ * This script imports LokalizeText documents from Sanity as a locale JSON file,
  * and strips any keys that have been marked by the key-mutations.csv file as a
  * result of text changes via the CLI.
  */
@@ -8,20 +8,20 @@ import meow from 'meow';
 import { outdent } from 'outdent';
 import prompts from 'prompts';
 import { getLocalMutations, readReferenceTexts } from './logic';
-import { exportLokalizeTexts } from './logic/export';
+import { importLokalizeTexts } from './logic/import';
 
 const cli = meow(
   `
     Usage
-      $ lokalize:export
+      $ lokalize:import
 
     Options
-      --dataset Define dataset to export, default is "development"
+      --dataset Define dataset to import, default is "development"
       --clean-json Export without document-ids in the keys
 
     Examples
-      $ lokalize:export --dataset=development
-      $ lokalize:export --dataset=development --clean-json
+      $ lokalize:import --dataset=development
+      $ lokalize:import --dataset=development --clean-json
 `,
   {
     flags: {
@@ -61,7 +61,7 @@ const cli = meow(
           type: 'confirm',
           name: 'isConfirmed',
           message: outdent`
-            There are local changes. Are you sure you want to overwrite these with an export?
+            There are local changes. Are you sure you want to overwrite these with an import?
 
             ${JSON.stringify(mutations, null, 2)}
           `,
@@ -75,14 +75,14 @@ const cli = meow(
     }
   }
 
-  await exportLokalizeTexts({
+  await importLokalizeTexts({
     dataset,
     appendDocumentIdToKey: !cli.flags.cleanJson,
   });
 
-  console.log(`Export dataset "${dataset}" completed`);
+  console.log(`Import dataset "${dataset}" completed`);
 })().catch((err) => {
-  console.error(`Export failed: ${err.message}`);
+  console.error(`Import failed: ${err.message}`);
   console.error(err.stack);
   process.exit(1);
 });

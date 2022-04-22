@@ -1,10 +1,12 @@
 import { AnchorTile } from '~/components/anchor-tile';
 import { Text } from '~/components/typography';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 
-export function MoreInformation() {
-  const { siteText } = useIntl();
-  const text = siteText.gedrag_common.meer_onderzoeksresultaten;
+interface MoreInformationProps {
+  text: SiteText['pages']['behaviorPage']['shared']['meer_onderzoeksresultaten'];
+}
+
+export function MoreInformation({ text }: MoreInformationProps) {
   return (
     <AnchorTile
       title={text.title}

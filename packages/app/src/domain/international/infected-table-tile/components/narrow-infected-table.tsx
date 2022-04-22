@@ -5,13 +5,14 @@ import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { PercentageBar } from '~/components/percentage-bar';
-import { InlineText } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { getThresholdValue } from '~/utils/get-threshold-value';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
+import { SiteText } from '~/locale';
 
 interface NarrowInfectedTableProps {
   data: InCollectionTestedOverall[];
@@ -19,6 +20,7 @@ interface NarrowInfectedTableProps {
   matchingCountries: FilterArrayType[];
   countryNames: Record<string, string>;
   inputValue: string;
+  text: SiteText['pages']['in_positiveTestsPage']['shared'];
 }
 export function NarrowInfectedTable({
   data,
@@ -26,8 +28,9 @@ export function NarrowInfectedTable({
   matchingCountries,
   countryNames,
   inputValue,
+  text,
 }: NarrowInfectedTableProps) {
-  const intl = useIntl();
+  const { formatPercentage } = useIntl();
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   const formatValue = useMemo(() => {
@@ -35,11 +38,11 @@ export function NarrowInfectedTable({
       data.map((x) => x.infected_per_100k_average ?? 0)
     );
     return (value: number) =>
-      intl.formatPercentage(value, {
+      formatPercentage(value, {
         minimumFractionDigits: numberOfDecimals,
         maximumFractionDigits: numberOfDecimals,
       });
-  }, [intl, data]);
+  }, [formatPercentage, data]);
 
   return (
     <Box borderBottom="1px solid" borderBottomColor="silver">
@@ -52,6 +55,7 @@ export function NarrowInfectedTable({
               countryNames={countryNames}
               formatValue={formatValue}
               key={index}
+              text={text}
             />
           ) : null
         ) : (
@@ -64,6 +68,7 @@ export function NarrowInfectedTable({
               countryNames={countryNames}
               formatValue={formatValue}
               key={index}
+              text={text}
             />
           )
         )
@@ -77,6 +82,7 @@ interface ItemRowProps {
   highestAverage: number | undefined;
   countryNames: Record<string, string>;
   formatValue: (value: number) => string;
+  text: SiteText['pages']['in_positiveTestsPage']['shared'];
 }
 
 function ItemRow({
@@ -84,10 +90,8 @@ function ItemRow({
   highestAverage,
   countryNames,
   formatValue,
+  text,
 }: ItemRowProps) {
-  const { siteText } = useIntl();
-  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
-
   const filterBelow = getThresholdValue(
     thresholds.in.infected_per_100k_average,
     item.infected_per_100k_average
@@ -104,8 +108,7 @@ function ItemRow({
         item.country_code === 'NLD' ? colors.tileGray : undefined
       }
     >
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
           alignItems: 'center',
@@ -116,10 +119,10 @@ function ItemRow({
         </Box>
 
         {countryNames[item.country_code.toLocaleLowerCase()]}
-      </InlineText>
+      </BoldText>
       <Row
         formatValue={formatValue}
-        label={text.header_per_inwoners}
+        label={text.land_tabel.header_per_inwoners}
         value={item.infected_per_100k_average}
         bar={
           highestAverage && highestAverage > 0 ? (
@@ -136,7 +139,7 @@ function ItemRow({
       />
       <Row
         formatValue={formatValue}
-        label={text.header_totale}
+        label={text.land_tabel.header_totale}
         value={item.infected}
       />
     </Box>
@@ -163,7 +166,7 @@ function Row({
       <Box minWidth={100}>
         <Box display="flex" alignItems="center" spacingHorizontal={2}>
           <Box textAlign="right">
-            <InlineText fontWeight="bold">{formatValue(value)}</InlineText>
+            <BoldText>{formatValue(value)}</BoldText>
           </Box>
           {bar}
         </Box>

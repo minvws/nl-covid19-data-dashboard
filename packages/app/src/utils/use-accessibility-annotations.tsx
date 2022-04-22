@@ -5,7 +5,7 @@ import { useIntl } from '~/intl';
 import type { SiteText } from '~/locale';
 
 export interface AccessibilityDefinition {
-  key: keyof SiteText['accessibility']['charts'];
+  key: keyof SiteText['common']['accessibility']['charts'];
   features?: AccessibilityFeature[];
 }
 
@@ -31,11 +31,11 @@ export type AccessibilityAnnotations = ReturnType<
 export function useAccessibilityAnnotations(
   definition: AccessibilityDefinition
 ) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { label, description: chartDescription } =
-    siteText.accessibility.charts[
-      definition.key as keyof typeof siteText.accessibility.charts
+    commonTexts.accessibility.charts[
+      definition.key as keyof typeof commonTexts.accessibility.charts
     ];
 
   /**
@@ -43,7 +43,7 @@ export function useAccessibilityAnnotations(
    */
   assert(
     label,
-    `An accessibility label needs to be provided for ${definition.key}`
+    `[${useAccessibilityAnnotations.name}] An accessibility label needs to be provided for ${definition.key}`
   );
 
   /**
@@ -52,7 +52,7 @@ export function useAccessibilityAnnotations(
    */
   assert(
     isDefined(chartDescription) || definition.features?.length,
-    `An accessibility description or interaction features need to be provided for ${definition.key}`
+    `[${useAccessibilityAnnotations.name}] An accessibility description or interaction features need to be provided for ${definition.key}`
   );
 
   const description = [chartDescription].filter(isPresent);
@@ -61,8 +61,8 @@ export function useAccessibilityAnnotations(
     description.push(
       ...definition.features.map(
         (feature) =>
-          siteText.accessibility.features[
-            feature as keyof typeof siteText.accessibility.features
+          commonTexts.accessibility.features[
+            feature as keyof typeof commonTexts.accessibility.features
           ]
       )
     );

@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { External, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
@@ -11,19 +11,32 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, Text } from '~/components/typography';
+import { Heading, Text, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  getLokalizeTexts,
+  selectNlData,
+} from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        textNl: siteText.pages.behaviorPage.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.corona_melder_app_warning__count',
@@ -33,17 +46,18 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
 
-  const { selectedNlData: data, lastGenerated } = props;
-  const { nl_gedrag, corona_melder_app } = siteText;
+  const { pageText, selectedNlData: data, lastGenerated } = props;
+  const { corona_melder_app } = commonTexts;
+  const { metadataTexts, textNl } = pageText;
 
   const warningLastValue = data.corona_melder_app_warning.last_value;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
-    title: nl_gedrag.metadata.title,
-    description: nl_gedrag.metadata.description,
+    ...metadataTexts,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
@@ -86,13 +100,11 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                   corona_melder_app.waarschuwingen.total,
                   {
                     totalDownloads: (
-                      <span
-                        css={css({ color: 'data.primary', fontWeight: 'bold' })}
-                      >
+                      <BoldText color="primary">
                         {formatNumber(
                           data.corona_melder_app_download.last_value.count
                         )}
-                      </span>
+                      </BoldText>
                     ),
                   }
                 )}
@@ -126,7 +138,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             description={
               corona_melder_app.waarschuwingen_over_tijd_grafiek.description
             }
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart

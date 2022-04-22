@@ -47,7 +47,9 @@ export function RichContentSelect<T extends string>(
     getListBoxOptionsProps,
   } = useRichContentSelect(options, onChange, initialValue);
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
+
+  const { containerRef, ...selectBoxProps } = getComboboxProps();
 
   const selectedOptionView =
     isPresent(selectedOption) &&
@@ -58,7 +60,7 @@ export function RichContentSelect<T extends string>(
     ));
 
   return (
-    <Box>
+    <Box ref={containerRef}>
       {visuallyHiddenLabel ? (
         <VisuallyHidden as="label" id={labelId}>
           {typeof label === 'string' ? <InlineText>{label}</InlineText> : label}
@@ -77,7 +79,7 @@ export function RichContentSelect<T extends string>(
       )}
 
       <SelectBoxRoot>
-        <SelectBox {...getComboboxProps()}>
+        <SelectBox {...selectBoxProps}>
           {selectedOptionView}
           <ArrowIcon
             css={css({
@@ -104,7 +106,7 @@ export function RichContentSelect<T extends string>(
                   {
                     <InlineText>
                       {replaceVariablesInText(
-                        siteText.aria_labels.map_select_label,
+                        commonTexts.aria_labels.map_select_label,
                         {
                           label: option.label,
                         }

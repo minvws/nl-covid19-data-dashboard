@@ -529,10 +529,10 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0513',
   },
   {
-    name: 's-Gravenhage',
+    name: "'s-Gravenhage",
     vrCode: 'VR15',
     gemcode: 'GM0518',
-    displayName: "'s Gravenhage",
+    displayName: "'s-Gravenhage",
     searchTerms: ['Den Haag'],
   },
   {
@@ -659,7 +659,7 @@ export const gmData: MunicipalityInfo[] = [
     name: "'s-Hertogenbosch",
     vrCode: 'VR21',
     gemcode: 'GM0796',
-    displayName: "'s Hertogenbosch",
+    displayName: "'s-Hertogenbosch",
     searchTerms: ['Den Bosch'],
   },
   {
@@ -1569,11 +1569,6 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Weert',
     vrCode: 'VR23',
     gemcode: 'GM0988',
-  },
-  {
-    name: 'Weesp',
-    vrCode: 'VR14',
-    gemcode: 'GM0457',
   },
   {
     name: 'West Betuwe',

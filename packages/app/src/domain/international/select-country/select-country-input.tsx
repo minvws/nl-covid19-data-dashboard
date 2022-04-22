@@ -32,7 +32,7 @@ export function SelectCountryInput({
   inputRef,
   isMouseDown,
 }: SelectCountryInputType) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   /**
    * A small timeout due the fact that otherwise the onClick event fires later than the onBlur.
@@ -75,7 +75,9 @@ export function SelectCountryInput({
                 },
               })}
             >
-              <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
+              <VisuallyHidden>
+                {commonTexts.select_countries.clear}
+              </VisuallyHidden>
               <Close />
             </Box>
           )

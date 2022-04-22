@@ -14,15 +14,16 @@ export function useAgegroupLabels(
     | undefined,
   lowerCased?: boolean
 ) {
-  const { siteText, formatPercentage } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
+  const labelsText = commonTexts.common;
 
   return useMemo(() => {
     const fullyVaccinatedLabel = isDefined(dataValue)
       ? getRenderedVaccinatedLabel(
           dataValue.fully_vaccinated_percentage_label,
           dataValue.fully_vaccinated_percentage,
-          siteText.vaccinaties_common.labels.meer_dan,
-          siteText.vaccinaties_common.labels.minder_dan,
+          labelsText.meer_dan,
+          labelsText.minder_dan,
           formatPercentage
         )
       : '0';
@@ -30,8 +31,8 @@ export function useAgegroupLabels(
       ? getRenderedVaccinatedLabel(
           dataValue.has_one_shot_percentage_label,
           dataValue.has_one_shot_percentage,
-          siteText.vaccinaties_common.labels.meer_dan,
-          siteText.vaccinaties_common.labels.minder_dan,
+          labelsText.meer_dan,
+          labelsText.minder_dan,
           formatPercentage
         )
       : '0';
@@ -46,8 +47,8 @@ export function useAgegroupLabels(
     };
   }, [
     dataValue,
-    siteText.vaccinaties_common.labels.meer_dan,
-    siteText.vaccinaties_common.labels.minder_dan,
+    labelsText.meer_dan,
+    labelsText.minder_dan,
     formatPercentage,
     lowerCased,
   ]);

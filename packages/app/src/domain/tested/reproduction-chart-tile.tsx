@@ -3,6 +3,7 @@ import {
   NlReproduction,
   NlReproductionValue,
   TimeframeOption,
+  TimeframeOptionsList,
 } from '@corona-dashboard/common';
 import { last } from 'lodash';
 import { isPresent } from 'ts-is-present';
@@ -22,8 +23,8 @@ interface ReproductionChartTileProps {
 
 export function ReproductionChartTile({
   data,
-  timeframeOptions = ['all', '5weeks'],
-  timeframeInitialValue = 'all',
+  timeframeOptions = TimeframeOptionsList,
+  timeframeInitialValue = TimeframeOption.ALL,
   timelineEvents,
   text,
 }: ReproductionChartTileProps) {

@@ -15,8 +15,9 @@ import { Box } from '~/components/base';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { SparkLine } from '~/components/spark-line';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useCollapsible } from '~/utils/use-collapsible';
@@ -38,15 +39,15 @@ export type MiniTileSelectorItem<T extends TimestampedValue> = {
 type MiniTileSelectorLayoutProps = {
   menuItems: MiniTileSelectorItem<any>[];
   children: ReactNode[];
-
   link?: {
     href: string;
     text: string;
   };
+  text: SiteText['pages']['topicalPage']['shared'];
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
-  const { siteText } = useIntl();
+  const { text } = props;
 
   return (
     <>
@@ -56,7 +57,7 @@ export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
 
       <Box spacing={3} display={{ _: 'block', md: 'none' }}>
         <Text variant="label1" color="bodyLight">
-          {siteText.common_actueel.tile_selector_uitleg}
+          {text.tile_selector_uitleg}
         </Text>
         <NarrowMiniTileSelectorLayout {...props} />
       </Box>
@@ -112,7 +113,7 @@ type NarrowMenuListItemProps = {
 
 function NarrowMenuListItem(props: NarrowMenuListItemProps) {
   const { content, item } = props;
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { commonTexts, formatNumber, formatPercentage } = useIntl();
   const collapsible = useCollapsible();
 
   return (
@@ -141,14 +142,11 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         <InlineText>{item.label}</InlineText>
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
-            <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
+            <WarningIconWrapper aria-label={commonTexts.aria_labels.warning}>
               <Warning viewBox="0 0 25 25" />
             </WarningIconWrapper>
           )}
-          <InlineText
-            fontWeight="bold"
-            css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}
-          >
+          <BoldText css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}>
             {item.valueIsPercentage
               ? `${
                   typeof item.value === 'number'
@@ -158,7 +156,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
               : typeof item.value === 'number'
               ? formatNumber(item.value)
               : item.value}
-          </InlineText>
+          </BoldText>
           {cloneElement(collapsible.button(), { size: 12 })}
         </Box>
       </Box>
@@ -170,7 +168,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
 function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { menuItems, children, link } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { commonTexts, formatNumber, formatPercentage } = useIntl();
 
   /**
    * Extra filter for feature flag
@@ -217,13 +215,13 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                   {item.warning && (
                     <InlineTooltip content={item.warning}>
                       <WarningIconWrapper
-                        aria-label={siteText.aria_labels.warning}
+                        aria-label={commonTexts.aria_labels.warning}
                       >
                         <Warning viewBox="0 0 25 25" />
                       </WarningIconWrapper>
                     </InlineTooltip>
                   )}
-                  <InlineText fontWeight="bold">
+                  <strong>
                     {item.valueIsPercentage
                       ? `${
                           typeof item.value === 'number'
@@ -233,7 +231,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                       : typeof item.value === 'number'
                       ? formatNumber(item.value)
                       : item.value}
-                  </InlineText>
+                  </strong>
                 </Box>
               </WideMenuButton>
             </WideMenuListItem>

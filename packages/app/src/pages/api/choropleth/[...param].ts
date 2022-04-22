@@ -53,7 +53,7 @@ export default async function handler(
 
   const height = Number(heightStr);
 
-  if (height < 50 || height > 850) {
+  if (height < 50 || height > 900) {
     res.status(400);
     res.end();
     return;
@@ -102,7 +102,7 @@ function createGeoJson(map: MapType) {
   const outlineGeo = map === 'in' ? undefined : nlGeo;
   assert(
     map === 'in' || map === 'vr' || map === 'gm',
-    `Unknown maptype: ${map}`
+    `[${createGeoJson.name}] Unknown maptype: ${map}`
   );
 
   const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;

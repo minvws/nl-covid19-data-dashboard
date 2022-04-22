@@ -34,11 +34,14 @@ export default function App(props: AppProps) {
     locale as LanguageKey
   );
 
-  assert(text, `Encountered unknown language: ${locale}`);
+  assert(
+    text,
+    `[${loadAnimationFeatures.name}] Encountered unknown language: ${locale}`
+  );
 
   const intlContext = useIntlHelperContext(
     locale as LanguageKey,
-    text,
+    text.common,
     dataset
   );
 

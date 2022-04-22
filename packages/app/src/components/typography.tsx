@@ -10,6 +10,7 @@ export interface TextProps {
   textAlign?: CSSProperties['textAlign'];
   hyphens?: CSSProperties['hyphens'];
   color?: Color | string;
+  ariaLabel?: string;
 }
 
 export interface AnchorProps extends TextProps {
@@ -49,6 +50,8 @@ function textStyle(x: TextProps & { as?: string }) {
 export const Text = styled.p<TextProps>(textStyle);
 
 export const InlineText = styled.span<TextProps>(textStyle);
+
+export const BoldText = styled.strong<TextProps>(textStyle);
 
 export const Anchor = styled.a<AnchorProps>(
   textStyle,

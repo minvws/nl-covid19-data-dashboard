@@ -14,28 +14,41 @@ import { Heading } from '~/components/typography';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  getLokalizeTexts,
+} from '~/static-props/get-data';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textGm: siteText.pages.topicalPage.gm,
+      }),
+      locale
+    ),
+  getLastGeneratedDate
+);
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated } = props;
-  const { siteText } = useIntl();
+  const { pageText, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
   const router = useRouter();
   const code = router.query.code as string;
 
   const breakpoints = useBreakpoints();
 
+  const { textGm } = pageText;
+
   const metadata = {
-    ...siteText.gemeente_actueel.index.metadata,
+    ...textGm.index.metadata,
   };
 
   const data = useMemo(() => {
@@ -59,10 +72,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box as="article" p={4}>
           <Heading level={2} as="h1">
-            {siteText.gemeente_actueel.index.title}
+            {textGm.index.title}
           </Heading>
 
-          <Markdown content={siteText.gemeente_actueel.index.description} />
+          <Markdown content={textGm.index.description} />
 
           <Box
             display="flex"

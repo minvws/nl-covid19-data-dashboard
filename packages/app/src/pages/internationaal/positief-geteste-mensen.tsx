@@ -30,6 +30,7 @@ import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { Languages } from '~/locale';
 import {
   getArticleParts,
   getLinkParts,
@@ -44,6 +45,7 @@ import {
   createGetContent,
   getInData,
   getLastGeneratedDate,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
@@ -56,6 +58,13 @@ type CompiledCountriesValue = {
 export const getStaticProps = withFeatureNotFoundPage(
   'inPositiveTestsPage',
   createGetStaticProps(
+    ({ locale }: { locale: keyof Languages }) =>
+      getLokalizeTexts(
+        (siteText) => ({
+          textShared: siteText.pages.in_positiveTestsPage.shared,
+        }),
+        locale
+      ),
     getLastGeneratedDate,
     async (context: GetStaticPropsContext) => {
       const { content } = await createGetContent<
@@ -69,7 +78,7 @@ export const getStaticProps = withFeatureNotFoundPage(
           ),
           links: getLinkParts(content.pageParts, 'in_positiveTestsPageLinks'),
         },
-      };
+      } as const;
     },
     createGetChoroplethData({
       in: ({ tested_overall }) => tested_overall,
@@ -97,6 +106,7 @@ export default function PositiefGetesteMensenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
+    pageText,
     lastGenerated,
     content,
     choropleth,
@@ -106,13 +116,13 @@ export default function PositiefGetesteMensenPage(
   } = props;
   const { in: choroplethData } = choropleth;
 
-  const intl = useIntl();
-  const text = intl.siteText.internationaal_positief_geteste_personen;
+  const { commonTexts } = useIntl();
+  const { textShared } = pageText;
 
   const metadata = {
-    ...intl.siteText.internationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...commonTexts.internationaal_metadata,
+    title: textShared.metadata.title,
+    description: textShared.metadata.description,
   };
 
   const comparedCode = 'nld';
@@ -123,11 +133,11 @@ export default function PositiefGetesteMensenPage(
 
   assert(
     isDefined(comparedName),
-    'comparedName could not be found for country code nld'
+    `[${PositiefGetesteMensenPage.name}] comparedName could not be found for country code nld`
   );
   assert(
     isDefined(comparedValue),
-    'comparedValue could not be found for country code nld'
+    `[${PositiefGetesteMensenPage.name}] comparedValue could not be found for country code nld`
   );
 
   const countryOptions = useMemo(
@@ -145,31 +155,31 @@ export default function PositiefGetesteMensenPage(
       <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
-            category={text.categorie}
-            title={text.titel}
+            category={textShared.categorie}
+            title={textShared.titel}
             icon={<Test />}
-            description={text.pagina_toelichting}
+            description={textShared.pagina_toelichting}
             metadata={{
               ...internationalMetadataDatums,
-              datumsText: text.datums,
-              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              datumsText: textShared.datums,
+              dataSources: [textShared.bronnen.rivm, textShared.bronnen.ecdc],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textShared.reference.href}
             articles={content.articles}
             pageLinks={content.links}
           />
 
-          <InformationTile message={text.informatie_tegel} />
+          <InformationTile message={textShared.informatie_tegel} />
 
           <EuropeChoroplethTile
-            title={text.choropleth.titel}
-            description={text.choropleth.toelichting}
+            title={textShared.choropleth.titel}
+            description={textShared.choropleth.toelichting}
             legend={{
               thresholds: thresholds.in.infected_per_100k_average,
-              title: text.choropleth.legenda_titel,
+              title: textShared.choropleth.legenda_titel,
             }}
             metadata={{
-              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              dataSources: [textShared.bronnen.rivm, textShared.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
@@ -192,7 +202,7 @@ export default function PositiefGetesteMensenPage(
               }}
               formatTooltip={(context) => (
                 <InPositiveTestedPeopleTooltip
-                  title={text.choropleth.tooltip_titel}
+                  title={textShared.choropleth.tooltip_titel}
                   countryName={context.featureName}
                   countryCode={context.dataItem.country_code}
                   value={context.dataItem.infected_per_100k_average}
@@ -229,11 +239,11 @@ export default function PositiefGetesteMensenPage(
           </EuropeChoroplethTile>
 
           <ChartTile
-            title={text.time_graph.title}
+            title={textShared.time_graph.title}
             metadata={{
-              source: text.bronnen.rivm,
+              source: textShared.bronnen.rivm,
             }}
-            description={text.time_graph.description}
+            description={textShared.time_graph.description}
           >
             <MultiSelectCountries
               countryOptions={countryOptions}
@@ -262,12 +272,13 @@ export default function PositiefGetesteMensenPage(
             data={choroplethData}
             countryNames={countryNames}
             metadata={{
-              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              dataSources: [textShared.bronnen.rivm, textShared.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
               ],
             }}
+            text={textShared}
           />
         </TileList>
       </InLayout>
@@ -343,12 +354,15 @@ function compileCountryOptions(
 ): CountryOption[] {
   const lastValues = last(data);
 
-  assert(lastValues, 'No last values available to build the country select.');
+  assert(
+    lastValues,
+    `[${compileCountryOptions.name}] No last values available to build the country select.`
+  );
 
   return countryCodes.map((countryCode) => {
     assert(
       lastValues[countryCode],
-      `Country ${countryCode} has no supplied last value`
+      `[${compileCountryOptions.name}] Country ${countryCode} has no supplied last value`
     );
 
     return {

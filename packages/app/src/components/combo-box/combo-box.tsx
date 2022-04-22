@@ -46,7 +46,7 @@ type TProps<Option extends TOption> = {
 export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const router = useRouter();
   const { code } = router.query;
@@ -70,7 +70,10 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
       (option) => option.name === name || option.displayName === name
     );
 
-    assert(option, `Failed to find option for name ${name}`);
+    assert(
+      option,
+      `[${ComboBox.name}:${handleSelect.name}] Failed to find option for name ${name}`
+    );
 
     props.onSelect(option);
 
@@ -107,7 +110,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
               ))}
             </ComboboxList>
           ) : (
-            <span>{siteText.common.zoekveld_geen_resultaten}</span>
+            <span>{commonTexts.common.zoekveld_geen_resultaten}</span>
           )}
         </ComboboxPopover>
       </Combobox>

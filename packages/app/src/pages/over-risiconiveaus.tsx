@@ -10,10 +10,8 @@ import { Heading, InlineText } from '~/components/typography';
 import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
+import { useFeature as getFeature } from '~/lib/features';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -29,16 +27,23 @@ interface OverRisiconiveausData {
   content: RichContentBlock[];
 }
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  selectNlData('risk_level'),
-  createGetContent<OverRisiconiveausData>(() => {
-    return "*[_type == 'overRisicoNiveausNew'][0]";
-  })
-);
+const riskLevelFeature = getFeature('riskLevel');
+export const getStaticProps = riskLevelFeature.isEnabled
+  ? createGetStaticProps(
+      getLastGeneratedDate,
+      selectNlData('risk_level'),
+      createGetContent<OverRisiconiveausData>(() => {
+        return "*[_type == 'overRisicoNiveausNew'][0]";
+      })
+    )
+  : () => ({ notFound: true });
 
-const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+const OverRisicoNiveaus = (props: {
+  lastGenerated: any;
+  content: any;
+  selectedNlData: any;
+}) => {
+  const { commonTexts } = useIntl();
   const { lastGenerated, content, selectedNlData: data } = props;
 
   content.content = mergeAdjacentKpiBlocks(content.content);
@@ -58,11 +63,11 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
       .hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix
   );
 
-  const text = siteText.over_risiconiveaus;
+  const text = commonTexts.over_risiconiveaus;
 
   return (
     <Layout
-      {...siteText.over_risiconiveaus_metadata}
+      {...commonTexts.over_risiconiveaus_metadata}
       lastGenerated={lastGenerated}
     >
       <Head>

@@ -8,7 +8,7 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 
 export function Logo() {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <LogoWrapper>
@@ -33,14 +33,14 @@ export function Logo() {
         >
           <LogoImage
             src={logoRo}
-            alt={siteText.header.logo_alt}
+            alt={commonTexts.header.logo_alt}
             css={css({
               display: asResponsiveArray({ _: 'none', xs: 'block' }),
             })}
           />
           <LogoImage
             src={logoRoSmall}
-            alt={siteText.header.logo_alt}
+            alt={commonTexts.header.logo_alt}
             css={css({
               display: asResponsiveArray({ _: 'block', xs: 'none' }),
             })}

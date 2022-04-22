@@ -7,9 +7,10 @@ import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
@@ -21,10 +22,22 @@ type AgeTypes = {
   fully_vaccinated: number | null;
   has_one_shot: number | null;
   boostered?: number | null;
+  dateUnixBoostered?: number;
+  third_shot?: number | null;
   birthyear: string;
   fully_vaccinated_label?: string | null;
   has_one_shot_label?: string | null;
   boostered_label?: string | null;
+};
+
+type VaccinationGradeToggleTypes = {
+  booster_date_interval: string;
+  description_booster_grade: string;
+  description_booster_grade_not_available: string;
+  description_vaccination_grade: string;
+  description_vaccination_one_shot: string;
+  description_vaccination_one_shot_with_percentage: string;
+  label: string;
 };
 
 interface VaccineCoverageToggleTileProps {
@@ -37,8 +50,10 @@ interface VaccineCoverageToggleTileProps {
   age18Plus: AgeTypes;
   age12Plus: AgeTypes;
   dateUnix: number;
-  dateUnixBoostered?: number;
   numFractionDigits?: number;
+  age12PlusToggleText: VaccinationGradeToggleTypes;
+  age18PlusToggleText: VaccinationGradeToggleTypes;
+  labelTexts: SiteText['pages']['vaccinationsPage']['nl']['vaccination_grade_toggle_tile']['top_labels'];
 }
 
 export function VaccineCoverageToggleTile({
@@ -46,22 +61,17 @@ export function VaccineCoverageToggleTile({
   source,
   descriptionFooter,
   dateUnix,
-  dateUnixBoostered,
   age18Plus,
   age12Plus,
   numFractionDigits = 0,
+  age12PlusToggleText,
+  age18PlusToggleText,
+  labelTexts,
 }: VaccineCoverageToggleTileProps) {
-  const { siteText } = useIntl();
-  const text = siteText.pages.vaccinationsPage.nl.vaccination_grade_toggle_tile;
-  const [selectedTab, setSelectedTab] = useState(text.age_18_plus.label);
+  const [selectedTab, setSelectedTab] = useState(age18PlusToggleText.label);
 
   const metadata: MetadataProps = {
     date: dateUnix,
-    source: source,
-  };
-
-  const metadataBooster: MetadataProps = {
-    date: dateUnixBoostered,
     source: source,
   };
 
@@ -73,95 +83,99 @@ export function VaccineCoverageToggleTile({
           onChange={(value) => setSelectedTab(value)}
           items={[
             {
-              label: text.age_18_plus.label,
-              value: text.age_18_plus.label,
+              label: age18PlusToggleText.label,
+              value: age18PlusToggleText.label,
             },
             {
-              label: text.age_12_plus.label,
-              value: text.age_12_plus.label,
+              label: age12PlusToggleText.label,
+              value: age12PlusToggleText.label,
             },
           ]}
         />
       </Box>
       <TwoKpiSection spacing={5}>
-        {selectedTab === text.age_18_plus.label && 
+        {selectedTab === age18PlusToggleText.label && (
           <>
             {age18Plus.boostered ? (
               <AgeGroupBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 data={age18Plus}
                 property="boostered"
-                description={text.age_18_plus.description_booster_grade}
+                description={age18PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {metadataBooster && (
+                {age18Plus.dateUnixBoostered && (
                   <Metadata
-                    {...metadataBooster}
-                    intervalCount={text.age_18_plus.booster_date_interval}
+                    source={source}
+                    date={age18Plus.dateUnixBoostered}
                     isTileFooter
                   />
                 )}
               </AgeGroupBlock>
             ) : (
               <NoBoosterBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 description={
-                  text.age_18_plus.description_booster_grade_not_available
+                  age18PlusToggleText.description_booster_grade_not_available
                 }
               />
             )}
             <AgeGroupBlock
-              title={text.top_labels.vaccination_grade}
+              title={labelTexts.vaccination_grade}
               data={age18Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
-              description={text.age_18_plus.description_vaccination_grade}
-              secondDescription={text.age_18_plus.description_vaccination_one_shot_with_percentage}
+              description={age18PlusToggleText.description_vaccination_grade}
+              secondDescription={
+                age18PlusToggleText.description_vaccination_one_shot_with_percentage
+              }
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
             </AgeGroupBlock>
           </>
-        }
-        {selectedTab === text.age_12_plus.label && 
+        )}
+        {selectedTab === age12PlusToggleText.label && (
           <>
             {age12Plus.boostered ? (
               <AgeGroupBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 data={age12Plus}
                 property="boostered"
-                description={text.age_12_plus.description_booster_grade}
+                description={age12PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {metadataBooster && (
+                {age12Plus.dateUnixBoostered && (
                   <Metadata
-                    {...metadataBooster}
-                    intervalCount={text.age_12_plus.booster_date_interval}
+                    source={source}
+                    date={age12Plus.dateUnixBoostered}
                     isTileFooter
                   />
                 )}
               </AgeGroupBlock>
             ) : (
               <NoBoosterBlock
-                title={text.top_labels.booster_grade}
+                title={labelTexts.booster_grade}
                 description={
-                  text.age_12_plus.description_booster_grade_not_available
+                  age12PlusToggleText.description_booster_grade_not_available
                 }
               />
             )}
             <AgeGroupBlock
-              title={text.top_labels.vaccination_grade}
+              title={labelTexts.vaccination_grade}
               data={age12Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
-              description={text.age_12_plus.description_vaccination_grade}
-              secondDescription={text.age_12_plus.description_vaccination_one_shot_with_percentage}
+              description={age12PlusToggleText.description_vaccination_grade}
+              secondDescription={
+                age12PlusToggleText.description_vaccination_one_shot_with_percentage
+              }
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
             </AgeGroupBlock>
           </>
-        }
+        )}
       </TwoKpiSection>
       <Box maxWidth="maxWidthText" mt={36}>
         <Markdown content={descriptionFooter} />
@@ -191,7 +205,7 @@ function AgeGroupBlock({
   numFractionDigits,
   children,
 }: AgeGroupBlockProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const formatCoveragePercentage =
     useVaccineCoveragePercentageFormatter(numFractionDigits);
 
@@ -199,26 +213,23 @@ function AgeGroupBlock({
 
   assert(
     parsedBirthyearRange,
-    `Something went wrong with parsing the birthyear: ${data.birthyear}`
+    `[${AgeGroupBlock.name}] Something went wrong with parsing the birthyear: ${data.birthyear}`
   );
 
   return (
     <Box spacing={2}>
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
         })}
       >
         {title}
-      </InlineText>
+      </BoldText>
       <KpiValue text={formatCoveragePercentage(data, property)} />
       <Markdown
         content={replaceVariablesInText(description, {
           birthyear: replaceVariablesInText(
-            siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-              parsedBirthyearRange.type
-            ],
+            commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
             parsedBirthyearRange
           ),
         })}
@@ -227,9 +238,7 @@ function AgeGroupBlock({
         <Markdown
           content={replaceVariablesInText(secondDescription, {
             birthyear: replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-                parsedBirthyearRange.type
-              ],
+              commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
               parsedBirthyearRange
             ),
             percentage: formatCoveragePercentage(data, secondProperty),
@@ -249,14 +258,13 @@ interface NoBoosterBlockProps {
 function NoBoosterBlock({ title, description }: NoBoosterBlockProps) {
   return (
     <Box spacing={2}>
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
         })}
       >
         {title}
-      </InlineText>
+      </BoldText>
       <Markdown content={description} />
     </Box>
   );

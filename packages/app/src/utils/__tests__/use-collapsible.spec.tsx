@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import injectJsDom from 'jsdom-global';
+import sinon from 'sinon';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { useCollapsible } from '../use-collapsible';
@@ -8,6 +9,28 @@ const UseCollapsible = suite('useCollapsible');
 
 UseCollapsible.before((context) => {
   context.cleanupJsDom = injectJsDom();
+});
+
+UseCollapsible.before.each((context) => {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  (window as any).matchMedia = () => {};
+  sinon.stub(window, 'matchMedia').callsFake((mq: string) => {
+    switch (mq) {
+      case '(pointer: coarse)': {
+        return {
+          matches: context.isTouchDevice,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          addListener: (_callback: any) => {},
+        } as MediaQueryList;
+      }
+      default:
+        return {
+          matches: false,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          addListener: (_callback: any) => {},
+        } as MediaQueryList;
+    }
+  });
 });
 
 UseCollapsible.after((context) => {
@@ -22,6 +45,7 @@ UseCollapsible(
   'should toggle the isOpen state after the button is clicked',
   (context) => {
     function TestCase() {
+      context.isTouchDevice = false;
       const { button, isOpen } = useCollapsible();
       context.isOpen = isOpen;
       return <>{button()}</>;

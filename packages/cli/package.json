@@ -22,7 +22,7 @@
   },
   "scripts": {
     "prepare-release": "ts-node src/release/prepare-release.ts",
-    "bootstrap": "yarn generate-typescript",
+    "bootstrap": "yarn generate-data-types",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
@@ -32,11 +32,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
     "calculate-boundingboxes": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/calculate-bounding-box-municipalities.ts",
-    "validate-json": "yarn run validate-json-all",
     "validate-json-all": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-all.ts",
     "validate-json-single": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-last-values.ts",
-    "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts",
+    "generate-data-types": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts",
     "generate-data-structures": "ts-node src/scripts/generate-data-structures.ts"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   GehandicaptenZorg,
@@ -20,6 +20,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -38,12 +39,26 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        caterogyTexts: {
+          category: siteText.common.nationaal_layout.headings.kwetsbare_groepen,
+          screenReaderCategory:
+            siteText.common.sidebar.metrics.disabled_care.title,
+        },
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        textNl: siteText.pages.disabilityCarePage.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.disability_care__newly_infected_people',
@@ -78,22 +93,25 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    lastGenerated,
+    content,
+  } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
-  const positiveTestedPeopleText =
-    siteText.gehandicaptenzorg_positief_geteste_personen;
-  const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
+  const { caterogyTexts, metadataTexts, textNl } = pageText;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
-    title: infectedLocationsText.metadata.title,
-    description: infectedLocationsText.metadata.description,
+    ...metadataTexts,
+    title: textNl.besmette_locaties.metadata.title,
+    description: textNl.besmette_locaties.metadata.description,
   };
 
   return (
@@ -101,28 +119,28 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={siteText.sidebar.metrics.disabled_care.title}
-            title={positiveTestedPeopleText.titel}
+            category={caterogyTexts.category}
+            screenReaderCategory={caterogyTexts.screenReaderCategory}
+            title={textNl.positief_geteste_personen.titel}
             icon={<GehandicaptenZorg />}
-            description={positiveTestedPeopleText.pagina_toelichting}
+            description={textNl.positief_geteste_personen.pagina_toelichting}
             metadata={{
-              datumsText: positiveTestedPeopleText.datums,
+              datumsText: textNl.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [positiveTestedPeopleText.bronnen.rivm],
+              dataSources: [textNl.positief_geteste_personen.bronnen.rivm],
             }}
-            referenceLink={positiveTestedPeopleText.reference.href}
+            referenceLink={textNl.positief_geteste_personen.reference.href}
             articles={content.articles}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={positiveTestedPeopleText.barscale_titel}
-              description={positiveTestedPeopleText.extra_uitleg}
+              title={textNl.positief_geteste_personen.barscale_titel}
+              description={textNl.positief_geteste_personen.extra_uitleg}
               metadata={{
                 date: lastValue.date_unix,
-                source: positiveTestedPeopleText.bronnen.rivm,
+                source: textNl.positief_geteste_personen.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -137,10 +155,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
-            title={positiveTestedPeopleText.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
-            description={positiveTestedPeopleText.linechart_description}
+            metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm }}
+            title={textNl.positief_geteste_personen.linechart_titel}
+            timeframeOptions={TimeframeOptionsList}
+            description={textNl.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -155,15 +173,18 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'newly_infected_people_moving_average',
                     color: colors.data.primary,
                     label:
-                      positiveTestedPeopleText.line_chart_newly_infected_people_moving_average,
+                      textNl.positief_geteste_personen
+                        .line_chart_newly_infected_people_moving_average,
                     shortLabel:
-                      positiveTestedPeopleText.line_chart_newly_infected_people_moving_average_short_label,
+                      textNl.positief_geteste_personen
+                        .line_chart_newly_infected_people_moving_average_short_label,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'newly_infected_people',
                     label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                      textNl.positief_geteste_personen
+                        .line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -173,8 +194,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedDateStart,
                       end: Infinity,
                       label:
-                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                        textNl.positief_geteste_personen
+                          .line_chart_legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'newly_infected_people_moving_average',
                       ],
@@ -194,24 +216,24 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="besmette-locaties"
-            title={infectedLocationsText.titel}
+            title={textNl.besmette_locaties.titel}
             icon={<Locatie />}
-            description={infectedLocationsText.pagina_toelichting}
+            description={textNl.besmette_locaties.pagina_toelichting}
             metadata={{
-              datumsText: infectedLocationsText.datums,
+              datumsText: textNl.besmette_locaties.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [infectedLocationsText.bronnen.rivm],
+              dataSources: [textNl.besmette_locaties.bronnen.rivm],
             }}
-            referenceLink={infectedLocationsText.reference.href}
+            referenceLink={textNl.besmette_locaties.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={infectedLocationsText.kpi_titel}
+              title={textNl.besmette_locaties.kpi_titel}
               metadata={{
                 date: lastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
+                source: textNl.besmette_locaties.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -223,34 +245,34 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 isAmount
               />
-              <Text>{infectedLocationsText.kpi_toelichting}</Text>
+              <Text>{textNl.besmette_locaties.kpi_toelichting}</Text>
             </KpiTile>
 
             <KpiTile
-              title={infectedLocationsText.barscale_titel}
+              title={textNl.besmette_locaties.barscale_titel}
               metadata={{
                 date: lastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
+                source: textNl.besmette_locaties.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="newly_infected_locations"
                 absolute={lastValue.newly_infected_locations}
               />
-              <Text>{infectedLocationsText.barscale_toelichting}</Text>
+              <Text>{textNl.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChoroplethTile
-            title={infectedLocationsText.map_titel}
-            description={infectedLocationsText.map_toelichting}
+            title={textNl.besmette_locaties.map_titel}
+            description={textNl.besmette_locaties.map_toelichting}
             metadata={{
               date: lastValue.date_unix,
-              source: infectedLocationsText.bronnen.rivm,
+              source: textNl.besmette_locaties.bronnen.rivm,
             }}
             legend={{
               thresholds: thresholds.vr.infected_locations_percentage,
-              title: infectedLocationsText.chloropleth_legenda.titel,
+              title: textNl.besmette_locaties.chloropleth_legenda.titel,
             }}
           >
             <DynamicChoropleth
@@ -273,12 +295,12 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </ChoroplethTile>
 
           <ChartTile
-            title={infectedLocationsText.linechart_titel}
+            title={textNl.besmette_locaties.linechart_titel}
             metadata={{
-              source: infectedLocationsText.bronnen.rivm,
+              source: textNl.besmette_locaties.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
-            description={infectedLocationsText.linechart_description}
+            timeframeOptions={TimeframeOptionsList}
+            description={textNl.besmette_locaties.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -291,7 +313,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'area',
                     metricProperty: 'infected_locations_total',
-                    label: infectedLocationsText.linechart_metric_label,
+                    label: textNl.besmette_locaties.linechart_metric_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -303,25 +325,25 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             id="sterfte"
-            title={locationDeaths.titel}
+            title={textNl.oversterfte.titel}
             icon={<Coronavirus />}
-            description={locationDeaths.pagina_toelichting}
+            description={textNl.oversterfte.pagina_toelichting}
             metadata={{
-              datumsText: locationDeaths.datums,
+              datumsText: textNl.oversterfte.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [locationDeaths.bronnen.rivm],
+              dataSources: [textNl.oversterfte.bronnen.rivm],
             }}
-            referenceLink={locationDeaths.reference.href}
+            referenceLink={textNl.oversterfte.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={locationDeaths.barscale_titel}
-              description={locationDeaths.extra_uitleg}
+              title={textNl.oversterfte.barscale_titel}
+              description={textNl.oversterfte.extra_uitleg}
               metadata={{
                 date: lastValue.date_unix,
-                source: locationDeaths.bronnen.rivm,
+                source: textNl.oversterfte.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -332,10 +354,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: locationDeaths.bronnen.rivm }}
-            title={locationDeaths.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
-            description={locationDeaths.linechart_description}
+            metadata={{ source: textNl.oversterfte.bronnen.rivm }}
+            title={textNl.oversterfte.linechart_titel}
+            timeframeOptions={TimeframeOptionsList}
+            description={textNl.oversterfte.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -349,15 +371,17 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
-                      locationDeaths.line_chart_deceased_daily_moving_average,
+                      textNl.oversterfte
+                        .line_chart_deceased_daily_moving_average,
                     shortLabel:
-                      locationDeaths.line_chart_deceased_daily_moving_average_short_label,
+                      textNl.oversterfte
+                        .line_chart_deceased_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
-                    label: locationDeaths.line_chart_legend_trend_label,
+                    label: textNl.oversterfte.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -366,8 +390,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedDateStart,
                       end: Infinity,
-                      label: locationDeaths.line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      label:
+                        textNl.oversterfte.line_chart_legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

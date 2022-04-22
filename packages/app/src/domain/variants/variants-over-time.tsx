@@ -10,9 +10,9 @@ import {
   SeriesConfig,
   useSeriesList,
 } from '~/components/time-series-chart/logic';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { VariantChartValue } from '~/domain/variants/static-props';
-import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useList } from '~/utils/use-list';
 
@@ -20,16 +20,15 @@ interface VariantsOverTimeProps {
   values: VariantChartValue[];
   seriesConfig: LineSeriesDefinition<VariantChartValue>[];
   timeframe: TimeframeOption;
+  text: SiteText['pages']['variantsPage']['nl']['varianten_over_tijd'];
 }
 
 export function VariantsOverTime({
   values,
   seriesConfig,
   timeframe,
+  text,
 }: VariantsOverTimeProps) {
-  const { siteText } = useIntl();
-  const text = siteText.covid_varianten.varianten_over_tijd;
-
   const { list, toggle, clear } = useList<string>();
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
@@ -95,9 +94,9 @@ export function VariantsOverTime({
         onReset={clear}
       />
       <Spacer mb={2} />
-      <InlineText variant="label2" fontWeight="bold" color="data.axisLabels">
+      <BoldText variant="label2" color="data.axisLabels">
         {text.percentage_gevonden_varianten}
-      </InlineText>
+      </BoldText>
       <TimeSeriesChart
         accessibility={{ key: 'variants_over_time_chart' }}
         values={values}

@@ -2,7 +2,7 @@ import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { RelativeDate } from '~/components/relative-date';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -18,14 +18,14 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   additionalData,
   isPercentage,
 }: Extract<Content<T>, { type: 'metric' }> & { data: K }) {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
 
   const lastValue = get(data, [metricName, 'last_value']);
   const propertyValue = metricProperty && lastValue[metricProperty];
 
   assert(
     isDefined(propertyValue),
-    `Missing value for metric property ${[
+    `[${Metric.name}] Missing value for metric property ${[
       metricName,
       'last_value',
       metricProperty,
@@ -43,7 +43,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   if (isDefined(differenceKey)) {
     assert(
       isDefined(differenceValue),
-      `Missing value for difference:${differenceKey}`
+      `[${Metric.name}] Missing value for difference:${differenceKey}`
     );
   }
 
@@ -56,13 +56,13 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
           <RelativeDate
             dateInSeconds={differenceValue.new_date_unix}
             isCapitalized={baseText.indexOf('{{newDate}}') === 0}
-            absoluteDateTemplate={siteText.common.absolute_date_template}
+            absoluteDateTemplate={commonTexts.common.absolute_date_template}
           />
         ),
         propertyValue: (
-          <InlineText fontWeight="bold">
+          <BoldText>
             {`${formatNumber(propertyValue)}${isPercentage ? '%' : ''}`}
-          </InlineText>
+          </BoldText>
         ),
         ...(additionalData || {}),
       })}

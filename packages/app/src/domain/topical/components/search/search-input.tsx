@@ -11,7 +11,7 @@ const ICON_SPACE = 50;
 const ICON_SPACE_LARGE = 66;
 
 export function SearchInput() {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { id, inputProps, setTerm } = useSearchContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,20 +31,20 @@ export function SearchInput() {
             setTerm('');
           }}
         >
-          <VisuallyHidden>{siteText.search.clear}</VisuallyHidden>
+          <VisuallyHidden>{commonTexts.search.clear}</VisuallyHidden>
           <Close />
         </IconContainer>
       )}
 
       <VisuallyHidden>
-        <label htmlFor={`${id}-input`}>{siteText.search.placeholder}</label>
+        <label htmlFor={`${id}-input`}>{commonTexts.search.placeholder}</label>
       </VisuallyHidden>
 
       <StyledSearchInput
         ref={inputRef}
         type="search"
         id={`${id}-input`}
-        placeholder={siteText.search.placeholder}
+        placeholder={commonTexts.search.placeholder}
         autoComplete="off"
         {...inputProps}
       />
@@ -72,10 +72,6 @@ const StyledSearchInput = styled.input(
     appearance: 'none',
     m: 0,
 
-    '&:focus': {
-      outline: '2px dotted currentColor !important',
-    },
-
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
@@ -88,11 +84,18 @@ const StyledSearchInput = styled.input(
       pr: 2,
     },
 
+    '&:focus, &:focus:focus-visible': {
+      outline: 'none',
+    },
+
     '[aria-expanded="true"] &': {
       borderColor: 'blue',
       borderBottomColor: 'border',
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
+      '&:focus': {
+        outline: 'none',
+      },
     },
   })
 );

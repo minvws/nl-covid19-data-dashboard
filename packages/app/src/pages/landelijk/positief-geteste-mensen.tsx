@@ -1,28 +1,33 @@
-import { colors } from '@corona-dashboard/common';
+import {
+  colors,
+  NlTestedOverallValue,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { Box } from '~/components/base';
+import { InlineText, BoldText } from '~/components/typography';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import {
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  PageInformationBlock,
+  ChartTile,
+  DynamicChoropleth,
+  ChoroplethTile,
+  Divider,
+  InView,
+  KpiTile,
+  KpiValue,
+  Markdown,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Divider } from '~/components/divider';
-import { InView } from '~/components/in-view';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
-import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
+import { Layout, NlLayout } from '~/domain/layout';
+import { GNumberBarChartTile, InfectedPerAgeGroup } from '~/domain/tested';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -41,12 +46,21 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import { replaceComponentsInText, useReverseRouter } from '~/utils';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        textNl: siteText.pages.positiveTestsPage.nl,
+        textShared: siteText.pages.positiveTestsPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.tested_ggd__infected_percentage_moving_average',
@@ -95,23 +109,31 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    content,
+    lastGenerated,
+  } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+  const { commonTexts, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
   const reverseRouter = useReverseRouter();
+  const [hasHideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
 
-  const text = siteText.positief_geteste_personen;
-  const ggdText = siteText.positief_geteste_personen_ggd;
+  const { metadataTexts, textNl, textShared } = pageText;
+
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
 
   const metadata = {
-    ...siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
+    ...metadataTexts,
+    title: textNl.metadata.title,
+    description: textNl.metadata.description,
   };
 
   return (
@@ -119,27 +141,29 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
-            title={text.titel}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
+            screenReaderCategory={
+              commonTexts.sidebar.metrics.positive_tests.title
+            }
+            title={textNl.titel}
             icon={<Test />}
-            description={text.pagina_toelichting}
+            description={textNl.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textNl.datums,
               dateOrRange: dataOverallLastValue.date_unix,
               dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textNl.reference.href}
             articles={content.articles}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.infected_kpi.title}
+              title={textNl.infected_kpi.title}
               metadata={{
                 date: dataOverallLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -148,33 +172,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={text.infected_kpi.description} />
+              <Markdown content={textNl.infected_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
-                  {replaceComponentsInText(text.infected_kpi.last_value_text, {
-                    infected: (
-                      <InlineText color="data.primary">{`${formatNumber(
-                        dataOverallLastValue.infected
-                      )}`}</InlineText>
-                    ),
-                    dateTo: formatDateFromSeconds(
-                      dataOverallLastValue.date_unix,
-                      'weekday-medium'
-                    ),
-                  })}
-                </Text>
-                {text.infected_kpi.link_cta && (
-                  <Markdown content={text.infected_kpi.link_cta} />
+                <BoldText variant="body2">
+                  {replaceComponentsInText(
+                    textNl.infected_kpi.last_value_text,
+                    {
+                      infected: (
+                        <InlineText color="data.primary">{`${formatNumber(
+                          dataOverallLastValue.infected
+                        )}`}</InlineText>
+                      ),
+                      dateTo: formatDateFromSeconds(
+                        dataOverallLastValue.date_unix,
+                        'weekday-medium'
+                      ),
+                    }
+                  )}
+                </BoldText>
+                {textNl.infected_kpi.link_cta && (
+                  <Markdown content={textNl.infected_kpi.link_cta} />
                 )}
               </Box>
             </KpiTile>
 
             <KpiTile
-              title={text.percentage_kpi.title}
+              title={textNl.percentage_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -183,12 +210,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={text.percentage_kpi.description} />
+              <Markdown content={textNl.percentage_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
-                    text.percentage_kpi.last_value_text,
+                    textNl.percentage_kpi.last_value_text,
                     {
                       percentage: (
                         <InlineText color="data.primary">{`${formatPercentage(
@@ -201,21 +228,21 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
-                {text.percentage_kpi.link_cta && (
-                  <Markdown content={text.percentage_kpi.link_cta} />
+                </BoldText>
+                {textNl.percentage_kpi.link_cta && (
+                  <Markdown content={textNl.percentage_kpi.link_cta} />
                 )}
               </Box>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
-            title={text.linechart_titel}
-            description={text.linechart_toelichting}
+            title={textNl.linechart_titel}
+            description={textNl.linechart_toelichting}
             metadata={{
-              source: text.bronnen.rivm,
+              source: textNl.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -228,21 +255,26 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'infected_moving_average',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_moving_average,
+                    label: textShared.tooltip_labels.infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'infected',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected,
+                    label: textShared.tooltip_labels.infected,
                     color: colors.data.primary,
                   },
                 ]}
                 dataOptions={{
+                  forcedMaximumValue: 150000,
+                  outOfBoundsConfig: {
+                    label: textShared.tooltip_labels.infected_out_of_bounds,
+                    tooltipLabel: textShared.tooltip_labels.annotations,
+                    checkIsOutofBounds: (
+                      x: NlTestedOverallValue,
+                      max: number
+                    ) => x.infected > max,
+                  },
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
                     'tested_overall'
@@ -255,16 +287,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <InView rootMargin="400px">
             <ChoroplethTile
               data-cy="choropleths"
-              title={text.map_titel}
+              title={textNl.map_titel}
               metadata={{
                 date: dataOverallLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
               description={
                 <>
-                  <Markdown content={text.map_toelichting} />
-                  <Text variant="body2" fontWeight="bold">
-                    {replaceComponentsInText(text.map_last_value_text, {
+                  <Markdown content={textNl.map_toelichting} />
+                  <BoldText variant="body2">
+                    {replaceComponentsInText(textNl.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
                           dataOverallLastValue.infected_per_100k
@@ -275,13 +307,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         'weekday-medium'
                       ),
                     })}
-                  </Text>
+                  </BoldText>
                 </>
               }
               onChartRegionChange={setSelectedMap}
               chartRegion={selectedMap}
               legend={{
-                title: text.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda.titel,
                 thresholds: thresholds.vr.infected_per_100k,
               }}
             >
@@ -341,11 +373,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChartTile
-              title={siteText.infected_per_age_group.title}
-              description={siteText.infected_per_age_group.description}
-              timeframeOptions={['all', '5weeks']}
+              title={textShared.infected_per_age_group.title}
+              description={textShared.infected_per_age_group.description}
+              timeframeOptions={TimeframeOptionsList}
               metadata={{
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               {(timeframe) => (
@@ -359,6 +391,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.timeSeries,
                     'tested_per_age_group'
                   )}
+                  text={textShared}
                 />
               )}
             </ChartTile>
@@ -370,26 +403,26 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <Divider />
 
           <PageInformationBlock
-            title={ggdText.titel}
+            title={textNl.ggd.titel}
             id="ggd"
             icon={<GgdTesten />}
-            description={ggdText.toelichting}
+            description={textNl.ggd.toelichting}
             metadata={{
-              datumsText: ggdText.datums,
+              datumsText: textNl.ggd.datums,
               dateOrRange: dataGgdLastValue.date_unix,
               dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
-              dataSources: [ggdText.bronnen.rivm],
+              dataSources: [textNl.ggd.bronnen.rivm],
             }}
-            referenceLink={ggdText.reference_href}
+            referenceLink={textNl.ggd.reference_href}
             articles={content.ggdArticles}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={ggdText.tests_kpi.title}
+              title={textNl.ggd.tests_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -398,10 +431,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={ggdText.tests_kpi.description} />
+              <Markdown content={textNl.ggd.tests_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
-                {replaceComponentsInText(ggdText.tests_kpi.last_value_text, {
+              <BoldText variant="body2">
+                {replaceComponentsInText(textNl.ggd.tests_kpi.last_value_text, {
                   tested_total: (
                     <InlineText color="data.primary">{`${formatNumber(
                       dataGgdLastValue.tested_total
@@ -412,14 +445,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     'weekday-medium'
                   ),
                 })}
-              </Text>
+              </BoldText>
             </KpiTile>
 
             <KpiTile
-              title={ggdText.percentage_kpi.title}
+              title={textNl.ggd.percentage_kpi.title}
               metadata={{
                 date: dataGgdLastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textNl.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -428,11 +461,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
 
-              <Markdown content={ggdText.percentage_kpi.description} />
+              <Markdown content={textNl.ggd.percentage_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(
-                  ggdText.percentage_kpi.last_value_text,
+                  textNl.ggd.percentage_kpi.last_value_text,
                   {
                     infected_moving_average: (
                       <InlineText color="data.primary">{`${formatNumber(
@@ -452,17 +485,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   }
                 )}
-              </Text>
+              </BoldText>
             </KpiTile>
           </TwoKpiSection>
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={['all', '5weeks']}
-              title={ggdText.linechart_totaltests_titel}
-              description={ggdText.linechart_totaltests_toelichting}
+              timeframeOptions={TimeframeOptionsList}
+              title={textNl.ggd.linechart_totaltests_titel}
+              description={textNl.ggd.linechart_totaltests_toelichting}
               metadata={{
-                source: ggdText.bronnen.rivm,
+                source: textNl.ggd.bronnen.rivm,
               }}
             >
               {(timeframe) => (
@@ -478,45 +511,40 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'tested_total_moving_average',
                       color: colors.data.secondary,
                       label:
-                        ggdText.linechart_totaltests_legend_label_moving_average,
+                        textNl.ggd
+                          .linechart_totaltests_legend_label_moving_average,
                       shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
+                        textShared.tooltip_labels
                           .ggd_tested_total_moving_average,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'tested_total',
                       color: colors.data.secondary,
-                      label: ggdText.linechart_totaltests_legend_label,
-                      shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .ggd_tested_total,
+                      label: textNl.ggd.linechart_totaltests_legend_label,
+                      shortLabel: textShared.tooltip_labels.ggd_tested_total,
                     },
                     {
                       type: 'line',
                       metricProperty: 'infected_moving_average',
                       color: colors.data.primary,
                       label:
-                        ggdText.linechart_positivetests_legend_label_moving_average,
+                        textNl.ggd
+                          .linechart_positivetests_legend_label_moving_average,
                       shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected_moving_average,
+                        textShared.tooltip_labels.infected_moving_average,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'infected',
                       color: colors.data.primary,
-                      label: ggdText.linechart_positivetests_legend_label,
-                      shortLabel:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected,
+                      label: textNl.ggd.linechart_positivetests_legend_label,
+                      shortLabel: textShared.tooltip_labels.infected,
                     },
                     {
                       type: 'invisible',
                       metricProperty: 'infected_percentage',
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .ggd_infected_percentage,
+                      label: textShared.tooltip_labels.ggd_infected_percentage,
                       isPercentage: true,
                     },
                   ]}
@@ -528,51 +556,55 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <Divider />
 
           <PageInformationBlock
-            title={text.section_archived.title}
-            description={text.section_archived.description}
+            title={textNl.section_archived.title}
+            description={textNl.section_archived.description}
+            isArchivedHidden={hasHideArchivedCharts}
+            onToggleArchived={() =>
+              setHideArchivedCharts(!hasHideArchivedCharts)
+            }
           />
 
-          <InView rootMargin="400px">
-            <ChartTile
-              title={ggdText.linechart_percentage_titel}
-              description={ggdText.linechart_percentage_toelichting}
-              metadata={{
-                source: ggdText.bronnen.rivm,
-              }}
-            >
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'confirmed_cases_infected_percentage_over_time_chart',
+          {hasHideArchivedCharts && (
+            <InView rootMargin="400px">
+              <ChartTile
+                title={textNl.ggd.linechart_percentage_titel}
+                description={textNl.ggd.linechart_percentage_toelichting}
+                metadata={{
+                  source: textNl.ggd.bronnen.rivm,
                 }}
-                values={data.tested_ggd_archived.values}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'infected_percentage_moving_average',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .ggd_infected_percentage_moving_average,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'infected_percentage',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .ggd_infected_percentage,
-                  },
-                ]}
-                dataOptions={{
-                  isPercentage: true,
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'tested_ggd'
-                  ),
-                }}
-              />
-            </ChartTile>
-          </InView>
+              >
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_percentage_over_time_chart',
+                  }}
+                  values={data.tested_ggd_archived.values}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_percentage_moving_average',
+                      color: colors.data.primary,
+                      label:
+                        textShared.tooltip_labels
+                          .ggd_infected_percentage_moving_average,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'infected_percentage',
+                      color: colors.data.primary,
+                      label: textShared.tooltip_labels.ggd_infected_percentage,
+                    },
+                  ]}
+                  dataOptions={{
+                    isPercentage: true,
+                    timelineEvents: getTimelineEvents(
+                      content.elements.timeSeries,
+                      'tested_ggd'
+                    ),
+                  }}
+                />
+              </ChartTile>
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

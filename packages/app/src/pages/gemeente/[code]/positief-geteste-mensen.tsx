@@ -1,24 +1,26 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import { Text, InlineText, BoldText } from '~/components/typography';
+import {
+  ChartTile,
+  DynamicChoropleth,
+  TwoKpiSection,
+  ChoroplethTile,
+  TimeSeriesChart,
+  TileList,
+  InView,
+  CollapsibleContent,
+  KpiTile,
+  KpiValue,
+  Markdown,
+  PageInformationBlock,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { InView } from '~/components/in-view';
-import { CollapsibleContent } from '~/components/collapsible';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
-import { GmLayout } from '~/domain/layout/gm-layout';
-import { Layout } from '~/domain/layout/layout';
+import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -37,16 +39,27 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectGmData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  replaceComponentsInText,
+  replaceVariablesInText,
+  getVrForMunicipalityCode,
+  useReverseRouter,
+} from '~/utils';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textGm: siteText.pages.positiveTestsPage.gm,
+        textShared: siteText.pages.positiveTestsPage.shared,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectGmData(
     'code',
@@ -86,6 +99,7 @@ export const getStaticProps = createGetStaticProps(
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    pageText,
     selectedGmData: data,
     choropleth,
     municipalityName,
@@ -93,9 +107,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
-  const text = siteText.gemeente_positief_geteste_personen;
+  const { textGm, textShared } = pageText;
+
   const lastValue = data.tested_overall.last_value;
   const populationCount = data.static_values.population_count;
   const vrForMunicipality = getVrForMunicipalityCode(data.code);
@@ -103,11 +118,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     (v) => v.vrcode === vrForMunicipality?.code
   );
   const metadata = {
-    ...siteText.gemeente_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, {
+    ...commonTexts.gemeente_index.metadata,
+    title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
-    description: replaceVariablesInText(text.metadata.description, {
+    description: replaceVariablesInText(textGm.metadata.description, {
       municipalityName,
     }),
   };
@@ -117,30 +132,30 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.besmettingen}
-            title={replaceVariablesInText(text.titel, {
+            category={commonTexts.gemeente_layout.headings.besmettingen}
+            title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
             icon={<Test />}
-            description={text.pagina_toelichting}
+            description={textGm.pagina_toelichting}
             metadata={{
-              datumsText: text.datums,
+              datumsText: textGm.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
+              dataSources: [textGm.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={textGm.reference.href}
             articles={content.articles}
             vrNameOrGmName={municipalityName}
-            warning={text.warning}
+            warning={textGm.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={text.infected_kpi.title}
+              title={textGm.infected_kpi.title}
               metadata={{
                 date: lastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textGm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -150,7 +165,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Text>
                 {replaceComponentsInText(
-                  siteText.gemeente_index.population_count,
+                  commonTexts.gemeente_index.population_count,
                   {
                     municipalityName,
                     populationCount: (
@@ -159,33 +174,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
               </Text>
-              <Markdown content={text.infected_kpi.description} />
+              <Markdown content={textGm.infected_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
-                  {replaceComponentsInText(text.infected_kpi.last_value_text, {
-                    infected: (
-                      <InlineText color="data.primary">{`${formatNumber(
-                        lastValue.infected
-                      )}`}</InlineText>
-                    ),
-                    dateTo: formatDateFromSeconds(
-                      lastValue.date_unix,
-                      'weekday-medium'
-                    ),
-                  })}
-                </Text>
-                {text.infected_kpi.link_cta && (
-                  <Markdown content={text.infected_kpi.link_cta} />
+                <BoldText variant="body2">
+                  {replaceComponentsInText(
+                    textGm.infected_kpi.last_value_text,
+                    {
+                      infected: (
+                        <InlineText color="data.primary">{`${formatNumber(
+                          lastValue.infected
+                        )}`}</InlineText>
+                      ),
+                      dateTo: formatDateFromSeconds(
+                        lastValue.date_unix,
+                        'weekday-medium'
+                      ),
+                    }
+                  )}
+                </BoldText>
+                {textGm.infected_kpi.link_cta && (
+                  <Markdown content={textGm.infected_kpi.link_cta} />
                 )}
               </Box>
             </KpiTile>
 
             <KpiTile
-              title={text.barscale_titel}
+              title={textGm.barscale_titel}
               metadata={{
                 date: lastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textGm.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -193,36 +211,39 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={lastValue.infected_per_100k_moving_average}
                 isAmount
               />
-              <Text>{text.barscale_toelichting}</Text>
+              <Text>{textGm.barscale_toelichting}</Text>
 
               <CollapsibleContent
                 label={
-                  siteText.gemeente_index.population_count_explanation_title
+                  commonTexts.gemeente_index.population_count_explanation_title
                 }
               >
                 <Text>
-                  {replaceComponentsInText(text.population_count_explanation, {
-                    municipalityName: <strong>{municipalityName}</strong>,
-                    value: (
-                      <strong>
-                        {formatNumber(
-                          lastValue.infected_per_100k_moving_average
-                        )}
-                      </strong>
-                    ),
-                  })}
+                  {replaceComponentsInText(
+                    textGm.population_count_explanation,
+                    {
+                      municipalityName: <strong>{municipalityName}</strong>,
+                      value: (
+                        <strong>
+                          {formatNumber(
+                            lastValue.infected_per_100k_moving_average
+                          )}
+                        </strong>
+                      ),
+                    }
+                  )}
                 </Text>
               </CollapsibleContent>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
-            title={text.linechart_titel}
-            description={text.linechart_toelichting}
+            title={textGm.linechart_titel}
+            description={textGm.linechart_toelichting}
             metadata={{
-              source: text.bronnen.rivm,
+              source: textGm.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -235,17 +256,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'infected_moving_average',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_moving_average,
+                    label: textShared.tooltip_labels.infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'infected',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected,
+                    label: textShared.tooltip_labels.infected,
                     color: colors.data.primary,
                   },
                 ]}
@@ -261,14 +278,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <InView rootMargin="400px">
             <ChoroplethTile
-              title={replaceVariablesInText(text.map_titel, {
+              title={replaceVariablesInText(textGm.map_titel, {
                 municipality: municipalityName,
               })}
               description={
                 <>
-                  <Markdown content={text.map_toelichting} />
-                  <Text variant="body2" fontWeight="bold">
-                    {replaceComponentsInText(text.map_last_value_text, {
+                  <Markdown content={textGm.map_toelichting} />
+                  <BoldText variant="body2">
+                    {replaceComponentsInText(textGm.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
                           lastValue.infected_per_100k
@@ -276,10 +293,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                       municipality: municipalityName,
                     })}
-                  </Text>
-                  <Text variant="body2" fontWeight="bold">
+                  </BoldText>
+                  <BoldText variant="body2">
                     {replaceComponentsInText(
-                      text.map_safety_region_last_value_text,
+                      textGm.map_safety_region_last_value_text,
                       {
                         infected_per_100k: (
                           <InlineText color="data.primary">{`${formatNumber(
@@ -289,17 +306,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         safetyRegion: vrForMunicipality?.name,
                       }
                     )}
-                  </Text>
+                  </BoldText>
                 </>
               }
               legend={{
                 thresholds: thresholds.gm.infected_per_100k,
-                title:
-                  siteText.positief_geteste_personen.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda.titel,
               }}
               metadata={{
                 date: lastValue.date_unix,
-                source: text.bronnen.rivm,
+                source: textGm.bronnen.rivm,
               }}
             >
               <DynamicChoropleth

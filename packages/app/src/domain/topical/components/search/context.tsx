@@ -42,7 +42,7 @@ export function SearchContextProvider<T extends Element>({
 export function useSearchContext() {
   const context = useContext(searchContext);
 
-  assert(context, 'Missing search context provider');
+  assert(context, `[${useSearchContext.name}] Missing search context provider`);
 
   return context;
 }
@@ -53,7 +53,7 @@ function useSearchContextValue<T extends Element>(
 ) {
   const router = useRouter();
   const breakpoints = useBreakpoints();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const id = '__search';
 
@@ -167,7 +167,7 @@ function useSearchContextValue<T extends Element>(
       'aria-expanded': showResults ? 'true' : 'false',
       'aria-haspopup': 'grid',
       'aria-owns': id,
-      'aria-label': siteText.search.aria_label,
+      'aria-label': commonTexts.search.aria_label,
     },
 
     getOptionProps: (option: Hit<Option>) =>

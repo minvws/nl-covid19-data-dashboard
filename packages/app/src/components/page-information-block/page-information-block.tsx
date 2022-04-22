@@ -15,6 +15,7 @@ import { Metadata, MetadataProps } from './components/metadata';
 import { PageLinks } from './components/page-links';
 import { WarningTile } from '~/components/warning-tile';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
+import { useIntl } from '~/intl';
 
 interface InformationBlockProps {
   title?: string;
@@ -35,6 +36,8 @@ interface InformationBlockProps {
   screenReaderCategory?: string;
   vrNameOrGmName?: string;
   warning?: string;
+  isArchivedHidden?: boolean;
+  onToggleArchived?: () => void;
 }
 
 export function PageInformationBlock({
@@ -50,8 +53,14 @@ export function PageInformationBlock({
   screenReaderCategory,
   vrNameOrGmName,
   warning,
+  isArchivedHidden,
+  onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+  const showArchivedToggleButton =
+    typeof isArchivedHidden !== 'undefined' &&
+    typeof onToggleArchived !== 'undefined';
+  const { commonTexts } = useIntl();
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -102,14 +111,14 @@ export function PageInformationBlock({
               gridTemplateColumns="repeat(2, 1fr)"
               width="100%"
               spacing={{
-                _: pageLinks && pageLinks.length > 0 ? 0 : 3,
+                _: pageLinks && pageLinks.length ? 0 : 3,
                 md: 0,
               }}
               css={css({
                 columnGap: 5,
               })}
             >
-              {articles && articles.length > 0 ? (
+              {articles && articles.length ? (
                 <>
                   <Box spacing={3}>
                     {DescriptionBlock}
@@ -126,11 +135,19 @@ export function PageInformationBlock({
               )}
             </Box>
 
-            {pageLinks && pageLinks.length > 0 && (
-              <>
-                <Box height={1} />
-                <PageLinks links={pageLinks} />
-              </>
+            {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
+          </Box>
+          <Box my={3}>
+            {showArchivedToggleButton && (
+              <Button
+                type="button"
+                onClick={onToggleArchived}
+                isActive={isArchivedHidden}
+              >
+                {!isArchivedHidden
+                  ? commonTexts.common.show_archived
+                  : commonTexts.common.hide_archived}
+              </Button>
             )}
           </Box>
         </Tile>
@@ -152,5 +169,17 @@ const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
     mb: asResponsiveArray({ _: 3, md: 0 }),
+  })
+);
+
+const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
+  css({
+    bg: !isActive ? 'button' : 'transparent',
+    border: 'none',
+    borderRadius: '5px',
+    color: !isActive ? 'white' : 'blue',
+    px: !isActive ? 3 : 0,
+    py: !isActive ? 12 : 0,
+    cursor: 'pointer',
   })
 );

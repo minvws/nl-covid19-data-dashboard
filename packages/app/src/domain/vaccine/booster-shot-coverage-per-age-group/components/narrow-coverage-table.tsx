@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
@@ -17,14 +17,12 @@ export function NarrowCoverageTable({
   values: NlBoosterShotPerAgeGroupValue[];
   text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
 }) {
-  const { formatPercentage } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
 
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="silver" pb={2}>
-        <InlineText fontWeight="bold" variant="label1">
-          {text.headers.agegroup}
-        </InlineText>
+        <BoldText variant="label1">{text.headers.agegroup}</BoldText>
       </Box>
 
       {values.map((item, index) => (
@@ -39,16 +37,16 @@ export function NarrowCoverageTable({
           <AgeGroup
             range={formatAgeGroupString(
               item.age_group_range,
-              text.templates.agegroup
+              commonTexts.common.agegroup
             )}
             ageGroupTotal={
               'age_group_total' in item ? item.age_group_total : undefined
             }
             birthyear_range={formatBirthyearRangeString(
               item.birthyear_range,
-              text.templates.birthyears
+              commonTexts.common.birthyears
             )}
-            text={text.templates.agegroup.total_people}
+            text={commonTexts.common.agegroup.total_people}
           />
 
           <Box spacing={1}>

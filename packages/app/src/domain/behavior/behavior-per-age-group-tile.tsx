@@ -2,12 +2,13 @@ import { colors, NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { InlineText, Text } from '~/components/typography';
-import { useIntl } from '~/intl';
+import { BoldText, Text } from '~/components/typography';
+import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
+import { keys } from '~/utils';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
@@ -23,6 +24,7 @@ interface BehaviorPerAgeGroupProps {
   data: NlBehaviorPerAgeGroup;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  text: Pick<SiteText['pages']['behaviorPage'], 'nl' | 'shared'>;
 }
 
 export function BehaviorPerAgeGroup({
@@ -33,32 +35,43 @@ export function BehaviorPerAgeGroup({
   supportExplanation,
   currentId,
   setCurrentId,
+  text,
 }: BehaviorPerAgeGroupProps) {
-  const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
 
-  const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
-  const supportValue = data[`${currentId}_support` as keyof typeof data];
+  const complianceValue =
+    data[`${currentId}_compliance` as keyof typeof data] || undefined;
+  const supportValue =
+    data[`${currentId}_support` as keyof typeof data] || undefined;
 
   assert(
     typeof complianceValue !== 'number',
-    'There is a problem by filtering the numbers out (complianceValue)'
+    `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (complianceValue)`
   );
   assert(
     typeof supportValue !== 'number',
-    'There is a problem by filtering the numbers out (supportValue)'
+    `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (supportValue)`
   );
+
+  const hasComplianceValues =
+    complianceValue &&
+    keys(complianceValue).every((key) => complianceValue[key] === null) ===
+      false;
+  const hasSupportValues =
+    supportValue &&
+    keys(supportValue).every((key) => supportValue[key] === null) === false;
+  const dataAvailable = hasComplianceValues || hasSupportValues;
 
   return (
     <ChartTile title={title} description={description}>
       <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
         <SelectBehavior
-          label={siteText.nl_gedrag.select_behaviour_label}
+          label={text.nl.select_behaviour_label}
           value={currentId}
           onChange={setCurrentId}
         />
         <Box overflow="auto">
-          {isDefined(complianceValue) || isDefined(supportValue) ? (
+          {dataAvailable ? (
             <Box overflow="auto">
               <StyledTable>
                 <thead>
@@ -68,36 +81,50 @@ export function BehaviorPerAgeGroup({
                         width: asResponsiveArray({ _: 150, md: 200 }),
                       })}
                     >
-                      {siteText.gedrag_leeftijden.tabel.age_group}
+                      {text.shared.leeftijden.tabel.age_group}
                     </HeaderCell>
                     <HeaderCell>
-                      {siteText.gedrag_leeftijden.tabel.recent_research}
+                      {text.shared.leeftijden.tabel.recent_research}
                     </HeaderCell>
                   </tr>
                 </thead>
                 <tbody>
-                  {AGE_KEYS.map((age, index) => (
-                    <React.Fragment key={index}>
-                      {supportValue &&
-                        complianceValue &&
-                        isPresent(complianceValue[age]) &&
-                        isPresent(supportValue[age]) && (
-                          <tr>
-                            <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
-                            <Cell>
-                              <PercentageBar
-                                color={colors.data.cyan}
-                                amount={complianceValue[age]}
-                              />
-                              <PercentageBar
-                                color={colors.data.yellow}
-                                amount={supportValue[age]}
-                              />
-                            </Cell>
-                          </tr>
-                        )}
-                    </React.Fragment>
-                  ))}
+                  {AGE_KEYS.map((age, index) => {
+                    const ageValueCompliance = complianceValue?.[age];
+                    const ageValueSupport = supportValue?.[age];
+
+                    if (!ageValueCompliance && !ageValueSupport) {
+                      return null;
+                    }
+
+                    return (
+                      <tr key={index}>
+                        <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
+                        <Cell>
+                          {ageValueCompliance ? (
+                            <PercentageBar
+                              color={colors.data.cyan}
+                              amount={ageValueCompliance}
+                            />
+                          ) : (
+                            <Text>
+                              {text.shared.leeftijden.tabel.compliance_no_data}
+                            </Text>
+                          )}
+                          {ageValueSupport ? (
+                            <PercentageBar
+                              color={colors.data.yellow}
+                              amount={ageValueSupport}
+                            />
+                          ) : (
+                            <Text>
+                              {text.shared.leeftijden.tabel.support_no_data}
+                            </Text>
+                          )}
+                        </Cell>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </StyledTable>
               <Box
@@ -126,7 +153,7 @@ export function BehaviorPerAgeGroup({
               mx="auto"
             >
               <Text textAlign="center">
-                {siteText.gedrag_leeftijden.tabel.error}
+                {text.shared.leeftijden.tabel.error}
               </Text>
             </Box>
           )}
@@ -148,10 +175,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
 
   return (
     <Box display="flex" alignItems="center">
-      <InlineText
-        fontWeight="bold"
-        css={css({ minWidth: 50 })}
-      >{`${amount}%`}</InlineText>
+      <BoldText css={css({ minWidth: 50 })}>{`${amount}%`}</BoldText>
       <Box maxWidth={100} width="100%">
         <Box
           width={`${amount}%`}

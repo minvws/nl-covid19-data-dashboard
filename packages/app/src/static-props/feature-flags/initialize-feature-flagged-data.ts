@@ -207,7 +207,7 @@ function getMetricType(schema: AjvSchema, metricName: string) {
   const propertyDef = schema.properties[metricName];
   assert(
     isDefined(propertyDef),
-    `property ${metricName} not found on schema ${schema.title}`
+    `[${getMetricType.name}] property ${metricName} not found on schema ${schema.title}`
   );
   return propertyDef.type ?? 'ref';
 }

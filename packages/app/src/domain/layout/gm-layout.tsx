@@ -51,7 +51,7 @@ type GmLayoutProps = {
 export function GmLayout(props: GmLayoutProps) {
   const { children, municipalityName, code, getLink } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
 
@@ -113,13 +113,13 @@ export function GmLayout(props: GmLayoutProps) {
                 <Box px={3} pb={4} spacing={1}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">
-                      {siteText.gemeente_layout.headings.sidebar}
+                      {commonTexts.gemeente_layout.headings.sidebar}
                     </VisuallyHidden>
                     {municipalityName}
                   </Heading>
                   {vr && (
                     <Text>
-                      {siteText.common.veiligheidsregio_label}{' '}
+                      {commonTexts.common.veiligheidsregio_label}{' '}
                       <Link href={reverseRouter.vr.index(vr.code)}>
                         <a>{vr.name}</a>
                       </Link>
@@ -129,7 +129,7 @@ export function GmLayout(props: GmLayoutProps) {
 
                 <Box px={3}>
                   <Heading level={3}>
-                    {siteText.sidebar.shared.metrics_title}
+                    {commonTexts.sidebar.shared.metrics_title}
                   </Heading>
                 </Box>
 
@@ -143,7 +143,7 @@ export function GmLayout(props: GmLayoutProps) {
       >
         <ErrorBoundary>
           {children}
-          <LoadingWrapper previousUrl={'gemeente/' + code}/>
+          <LoadingWrapper previousUrl={'gemeente/' + code} />
         </ErrorBoundary>
       </AppContent>
     </>

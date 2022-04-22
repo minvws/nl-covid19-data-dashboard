@@ -9,6 +9,7 @@ import {
   useState,
 } from 'react';
 import { isPresent } from 'ts-is-present';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Option } from '../types';
 
@@ -42,11 +43,11 @@ export function useRichContentSelect<T extends string>(
   onChange: (option: Option<T>) => void,
   initialValue?: Unpack<T>
 ) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
   const listBoxRef = useRef<HTMLDivElement>(null);
 
   const [expanded, setExpanded] = useState(false);
-  const [ignoreBlur, setIgnoreBlur] = useState(false);
 
   const [activeIndex, setActiveIndex] = useState(
     getActiveIndexForValue(options, initialValue)
@@ -56,6 +57,11 @@ export function useRichContentSelect<T extends string>(
   const [selectedOption, setSelectedOption] = useState(
     () => options[activeIndex]
   );
+
+  // close the combobox when a click outside of the component occurs
+  useOnClickOutside([containerRef], () => {
+    updateExpandedState(false, false);
+  });
 
   useEffect(() => {
     const newActiveIndex = getActiveIndexForValue(options, initialValue);
@@ -343,6 +349,7 @@ export function useRichContentSelect<T extends string>(
       selectedOption,
       getComboboxProps() {
         return {
+          containerRef,
           ref: comboboxRef,
           role: 'combobox',
           'aria-controls': listBoxId,
@@ -351,17 +358,6 @@ export function useRichContentSelect<T extends string>(
           'aria-labelledby': labelId,
           'aria-activedescendant': `${listBoxId}-${activeIndex}`,
           tabIndex: 0,
-          onBlur: () => {
-            if (ignoreBlur) {
-              setIgnoreBlur(false);
-              return;
-            }
-
-            if (expanded) {
-              selectOption(activeIndex);
-              updateExpandedState(false, false);
-            }
-          },
           onClick: () => updateExpandedState(!expanded, false),
           onKeyDown: handleKeyDown,
         };
@@ -385,9 +381,6 @@ export function useRichContentSelect<T extends string>(
             selectOption(index);
             updateExpandedState(false);
           },
-          onMouseDown: () => {
-            setIgnoreBlur(true);
-          },
         };
       },
     }),
@@ -395,7 +388,6 @@ export function useRichContentSelect<T extends string>(
       activeIndex,
       expanded,
       handleKeyDown,
-      ignoreBlur,
       labelId,
       listBoxId,
       selectOption,

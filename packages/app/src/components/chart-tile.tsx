@@ -35,22 +35,28 @@ export function ChartTile({
   children,
   metadata,
   timeframeOptions,
-  timeframeInitialValue = 'all',
+  timeframeInitialValue,
   disableFullscreen,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue
+    timeframeInitialValue || TimeframeOption.ALL
   );
 
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       <ChartTileHeader title={title} description={description}>
         {timeframeOptions && timeframe && (
-          <ChartTimeControls
-            timeframeOptions={timeframeOptions}
-            timeframe={timeframe}
-            onChange={setTimeframe}
-          />
+          <Box
+            css={css({
+              width: asResponsiveArray({ xl: '25%', lg: '50%', sm: '100%' }),
+            })}
+          >
+            <ChartTimeControls
+              timeframeOptions={timeframeOptions}
+              timeframe={timeframe}
+              onChange={setTimeframe}
+            />
+          </Box>
         )}
       </ChartTileHeader>
 
@@ -60,7 +66,7 @@ export function ChartTile({
         {timeframeOptions
           ? (assert(
               typeof children === 'function',
-              'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
+              `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
             ),
             children(timeframe))
           : children}
@@ -93,7 +99,7 @@ function ChartTileHeader({
         </Box>
       )}
       {children && (
-        <Box display="inline-table" alignSelf="flex-start">
+        <Box display="inline-table" alignSelf="flex-start" width="100%">
           {children}
         </Box>
       )}

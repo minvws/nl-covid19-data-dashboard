@@ -5,7 +5,7 @@ import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -14,6 +14,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
@@ -23,6 +24,14 @@ type MaatregelenData = {
 };
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        textNl: siteText.pages.measuresPage.nl,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
@@ -52,33 +61,26 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { pageText, content, lastGenerated, selectedNlData: data } = props;
+  const { metadataTexts, textNl } = pageText;
 
-  const { content, lastGenerated, selectedNlData: data } = props;
   const { lockdown } = content;
 
-  const metadata = {
-    ...siteText.nationaal_metadata,
-  };
-
   return (
-    <Layout {...metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <Box as="header" spacing={4}>
-            <Heading
-              level={1}
-              as="h2"
-            >
-              {siteText.nationaal_maatregelen.titel}
+            <Heading level={1} as="h2">
+              {textNl.titel}
             </Heading>
             {lockdown.message.description ? (
-              <Box maxWidth='maxWidthText'>
-                  <RichContent blocks={lockdown.message.description} />
+              <Box maxWidth="maxWidthText">
+                <RichContent blocks={lockdown.message.description} />
               </Box>
             ) : null}
           </Box>
-          <Box as="article" spacing={3} >
+          <Box as="article" spacing={3}>
             <Heading level={3}>{lockdown.title}</Heading>
             <LockdownTable
               data={lockdown}

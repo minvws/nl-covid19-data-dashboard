@@ -37,7 +37,7 @@ export function MiniTile(props: MiniTileProps) {
       <Box display="grid" gridTemplateColumns={{ _: '1fr', md: '1fr 1fr' }}>
         <Box pr={{ _: 0, md: 3 }}>{children}</Box>
         <Box position="relative" pl={{ _: 0, md: 4 }}>
-          <Box spacing={3} py={{ _: 3, md: 0 }}>
+          <Box spacing={3} py={{ _: 3, md: 0 }} aria-live="polite">
             {text}
           </Box>
         </Box>

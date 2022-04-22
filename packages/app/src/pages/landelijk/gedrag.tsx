@@ -18,6 +18,8 @@ import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-look
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
+import { useFeature } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -31,13 +33,23 @@ import {
   createGetContent,
   getLastGeneratedDate,
   selectNlData,
+  getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+        text: siteText.pages.behaviorPage,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
-  selectNlData('behavior', 'behavior_per_age_group'),
+  selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
@@ -57,16 +69,24 @@ export const getStaticProps = createGetStaticProps(
 export default function BehaviorPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    content,
+    lastGenerated,
+  } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const intl = useIntl();
-  const { nl_gedrag } = intl.siteText;
+  const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
+  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } =
+    useIntl();
+  const { caterogyTexts, metadataTexts, text } = pageText;
 
   const metadata = {
-    ...intl.siteText.nationaal_metadata,
-    title: nl_gedrag.metadata.title,
-    description: nl_gedrag.metadata.description,
+    ...metadataTexts,
+    title: text.nl.metadata.title,
+    description: text.nl.metadata.description,
   };
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
@@ -92,73 +112,89 @@ export default function BehaviorPage(
     return { highestCompliance, highestSupport };
   }, [behaviorLastValue, behaviorLookupKeys]);
 
+  const { currentTimelineEvents } = useMemo(() => {
+    // Timeline event from the current selected behaviour
+    const currentTimelineEvents = data.behavior_annotations.values
+      .filter((a) => a.behavior_indicator === currentId)
+      .map((event) => ({
+        title: event[`message_title_${locale}`],
+        description: event[`message_desc_${locale}`],
+        start: event.date_start_unix,
+        end: event.date_end_unix,
+      }));
+
+    return { currentTimelineEvents };
+  }, [currentId, data.behavior_annotations.values, locale]);
+
+  const timelineProp = behaviorAnnotationsFeature.isEnabled
+    ? { timelineEvents: currentTimelineEvents }
+    : undefined;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={intl.siteText.nationaal_layout.headings.gedrag}
-            title={nl_gedrag.pagina.titel}
+            category={caterogyTexts}
+            title={text.nl.pagina.titel}
             icon={<Gedrag />}
-            description={nl_gedrag.pagina.toelichting}
+            description={text.nl.pagina.toelichting}
             metadata={{
-              datumsText: nl_gedrag.datums,
+              datumsText: text.nl.datums,
               dateOrRange: {
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
-              dataSources: [nl_gedrag.bronnen.rivm],
+              dataSources: [text.nl.bronnen.rivm],
             }}
-            referenceLink={nl_gedrag.reference.href}
+            referenceLink={text.nl.reference.href}
             articles={content.articles}
           />
 
           <TwoKpiSection>
             <Tile>
               <Box spacing={3}>
-                <Heading level={3}>{nl_gedrag.onderzoek_uitleg.titel}</Heading>
-                <Markdown content={nl_gedrag.onderzoek_uitleg.toelichting} />
+                <Heading level={3}>{text.nl.onderzoek_uitleg.titel}</Heading>
+                <Markdown content={text.nl.onderzoek_uitleg.toelichting} />
               </Box>
             </Tile>
 
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>
-                  {nl_gedrag.kpi_recente_inzichten.titel}
+                  {text.nl.kpi_recente_inzichten.titel}
                 </Heading>
 
                 <Markdown
                   content={replaceVariablesInText(
-                    nl_gedrag.kpi_recente_inzichten.tekst,
+                    text.nl.kpi_recente_inzichten.tekst,
                     {
-                      number_of_participants: intl.formatNumber(
+                      number_of_participants: formatNumber(
                         behaviorLastValue.number_of_participants
                       ),
-                      date_start: intl.formatDateFromSeconds(
+                      date_start: formatDateFromSeconds(
                         behaviorLastValue.date_start_unix
                       ),
-                      date_end: intl.formatDateFromSeconds(
+                      date_end: formatDateFromSeconds(
                         behaviorLastValue.date_end_unix
                       ),
 
                       highest_compliance_description:
                         highestCompliance.description,
                       highest_compliance_compliance_percentage:
-                        intl.formatPercentage(
+                        formatPercentage(
                           highestCompliance.compliancePercentage
                         ),
-                      highest_compliance_support_percentage:
-                        intl.formatPercentage(
-                          highestCompliance.supportPercentage
-                        ),
+                      highest_compliance_support_percentage: formatPercentage(
+                        highestCompliance.supportPercentage
+                      ),
 
                       highest_support_description: highestSupport.description,
-                      highest_support_compliance_percentage:
-                        intl.formatPercentage(
-                          highestSupport.compliancePercentage
-                        ),
-                      highest_support_support_percentage: intl.formatPercentage(
+                      highest_support_compliance_percentage: formatPercentage(
+                        highestSupport.compliancePercentage
+                      ),
+                      highest_support_support_percentage: formatPercentage(
                         highestSupport.supportPercentage
                       ),
                     }
@@ -169,14 +205,15 @@ export default function BehaviorPage(
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={nl_gedrag.basisregels.title}
-            description={nl_gedrag.basisregels.description}
-            complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
-            supportExplanation={nl_gedrag.basisregels.steunen_beschrijving}
+            title={text.nl.basisregels.title}
+            description={text.nl.basisregels.description}
+            complianceExplanation={text.nl.basisregels.volgen_beschrijving}
+            supportExplanation={text.nl.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={nl_gedrag.basisregels.annotatie}
+            annotation={text.nl.basisregels.annotatie}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
+            text={text.shared}
           />
 
           <span ref={scrollToRef} />
@@ -188,37 +225,42 @@ export default function BehaviorPage(
                 behaviorLastValue.date_start_unix,
                 behaviorLastValue.date_end_unix,
               ],
-              source: nl_gedrag.bronnen.rivm,
+              source: text.nl.bronnen.rivm,
             }}
+            {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            useDatesAsRange={behaviorAnnotationsFeature.isEnabled}
+            text={text}
           />
 
           <BehaviorChoroplethsTile
-            title={nl_gedrag.verdeling_in_nederland.titel}
-            description={nl_gedrag.verdeling_in_nederland.description}
+            title={text.nl.verdeling_in_nederland.titel}
+            description={text.nl.verdeling_in_nederland.description}
             data={choropleth.vr}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            text={text}
           />
 
           {data.behavior_per_age_group && (
             <BehaviorPerAgeGroup
-              title={nl_gedrag.tabel_per_leeftijdsgroep.title}
-              description={nl_gedrag.tabel_per_leeftijdsgroep.description}
+              title={text.nl.tabel_per_leeftijdsgroep.title}
+              description={text.nl.tabel_per_leeftijdsgroep.description}
               complianceExplanation={
-                nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
+                text.nl.tabel_per_leeftijdsgroep.explanation.compliance
               }
               supportExplanation={
-                nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
+                text.nl.tabel_per_leeftijdsgroep.explanation.support
               }
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}
+              text={text}
             />
           )}
 
-          <MoreInformation />
+          <MoreInformation text={text.shared.meer_onderzoeksresultaten} />
         </TileList>
       </NlLayout>
     </Layout>

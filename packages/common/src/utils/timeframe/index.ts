@@ -7,13 +7,47 @@ import {
 } from '../../data-sorting';
 import { DAY_IN_SECONDS } from '../../time';
 
-export type TimeframeOption = 'all' | '5weeks';
+export enum TimeframeOption {
+  ONE_WEEK = '1week',
+  FIVE_WEEKS = '5weeks',
+  THIRTY_DAYS = '30days',
+  THREE_MONTHS = '3months',
+  SIX_MONTHS = '6months',
+  LAST_YEAR = 'lastYear',
+  ALL = 'all',
+}
 
-export function getDaysForTimeframe(timeframe: TimeframeOption) {
-  if (timeframe === '5weeks') {
-    return 5 * 7;
+export const TimeframeOptionsList = [
+  TimeframeOption.ALL,
+  TimeframeOption.ONE_WEEK,
+  TimeframeOption.THIRTY_DAYS,
+  TimeframeOption.THREE_MONTHS,
+  TimeframeOption.SIX_MONTHS,
+  TimeframeOption.LAST_YEAR,
+];
+
+export function getDaysForTimeframe(timeframe: TimeframeOption): number {
+  switch (timeframe) {
+    case TimeframeOption.ONE_WEEK:
+      return 7;
+    case TimeframeOption.FIVE_WEEKS:
+      return 5 * 7;
+    case TimeframeOption.THIRTY_DAYS:
+      return 30;
+    case TimeframeOption.THREE_MONTHS:
+      return 92;
+    case TimeframeOption.SIX_MONTHS:
+      return 183;
+    case TimeframeOption.LAST_YEAR:
+      return 365;
+    case TimeframeOption.ALL:
+      return Infinity;
+    default: {
+      // make sure that all timeframes are implemented correctly
+      const exhaustive: never = timeframe;
+      throw exhaustive;
+    }
   }
-  return Infinity;
 }
 
 const oneDayInMilliseconds = DAY_IN_SECONDS * 1000;
@@ -22,7 +56,7 @@ export const getMinimumUnixForTimeframe = (
   timeframe: TimeframeOption,
   today: Date
 ): number => {
-  if (timeframe === 'all') {
+  if (timeframe === TimeframeOption.ALL) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
@@ -78,7 +112,7 @@ export function getValuesInTimeframe<T extends TimestampedValue>(
 }
 
 function getTimeframeBoundaryUnix(timeframe: TimeframeOption, today: Date) {
-  if (timeframe === 'all') {
+  if (timeframe === TimeframeOption.ALL) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);

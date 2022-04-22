@@ -1,4 +1,7 @@
-import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  NlTestedPerAgeGroupValue,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import {
@@ -10,6 +13,7 @@ import { TimelineEventConfig } from '~/components/time-series-chart/components/t
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
@@ -24,8 +28,9 @@ interface InfectedPerAgeGroup {
    */
   accessibility: AccessibilityDefinition;
   values: NlTestedPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks';
+  timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
+  text: SiteText['pages']['positiveTestsPage']['shared'];
 }
 
 export function InfectedPerAgeGroup({
@@ -33,12 +38,11 @@ export function InfectedPerAgeGroup({
   timeframe,
   accessibility,
   timelineEvents,
+  text,
 }: InfectedPerAgeGroup) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
-
-  const text = siteText.infected_per_age_group;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
   const alwaysEnabled = ['infected_overall_per_100k'];
@@ -47,13 +51,16 @@ export function InfectedPerAgeGroup({
   const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] =
     BASE_SERIES_CONFIG.map((baseAgeGroup) => {
       const label =
-        baseAgeGroup.metricProperty in text.legend
-          ? text.legend[baseAgeGroup.metricProperty]
+        baseAgeGroup.metricProperty in text.infected_per_age_group.legend
+          ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty]
           : baseAgeGroup.metricProperty;
 
-      const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
-        age: label,
-      });
+      const ariaLabel = replaceVariablesInText(
+        commonTexts.aria_labels.age_old,
+        {
+          age: label,
+        }
+      );
 
       return {
         ...baseAgeGroup,
@@ -87,7 +94,7 @@ export function InfectedPerAgeGroup({
   return (
     <ErrorBoundary>
       <InteractiveLegend
-        helpText={text.legend_help_text}
+        helpText={text.infected_per_age_group.legend_help_text}
         selectOptions={interactiveLegendOptions}
         selection={list}
         onToggleItem={toggle}
@@ -104,13 +111,14 @@ export function InfectedPerAgeGroup({
           <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
         )}
         dataOptions={{
-          valueAnnotation: text.value_annotation,
+          valueAnnotation: text.infected_per_age_group.value_annotation,
           timespanAnnotations: [
             {
               start: underReportedDateStart,
               end: Infinity,
-              label: text.line_chart_legend_inaccurate_label,
-              shortLabel: text.tooltip_labels.inaccurate,
+              label:
+                text.infected_per_age_group.line_chart_legend_inaccurate_label,
+              shortLabel: text.infected_per_age_group.tooltip_labels.inaccurate,
             },
           ],
           timelineEvents,

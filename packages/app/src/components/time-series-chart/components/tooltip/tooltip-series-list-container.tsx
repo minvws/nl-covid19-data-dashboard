@@ -25,6 +25,8 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
   displayTooltipValueOnly,
   timespanAnnotation,
   timelineEvent,
+  isOutOfBounds,
+  options,
   children,
 }: TooltipData<T> & { children: ReactNode }) {
   const isMounted = useIsMounted();
@@ -64,9 +66,20 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
                 <Text
                   variant="label2"
                   color={colors.annotation}
-                  textAlign="center"
+                  textAlign={timespanAnnotation.textAlign || 'center'}
                 >
                   {timespanAnnotation.shortLabel || timespanAnnotation.label}
+                </Text>
+              </AppearTransition>
+            )}
+            {isOutOfBounds && (
+              <AppearTransition key="1">
+                <Text
+                  variant="label2"
+                  color={colors.annotation}
+                  textAlign={'left'}
+                >
+                  {options.outOfBoundsConfig?.tooltipLabel}
                 </Text>
               </AppearTransition>
             )}

@@ -3,8 +3,8 @@ import { BackgroundImage } from '~/components/background-image';
 import { Box } from '~/components/base';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { PublicationDate } from '~/components/publication-date';
-import { Heading, Text } from '~/components/typography';
-import { useIntl } from '~/intl';
+import { Text } from '~/components/typography';
+import { SiteText } from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -18,6 +18,7 @@ export interface ContentTeaserProps {
   variant?: 'small' | 'normal';
   isWeeklyHighlight?: boolean;
   isArticle?: boolean;
+  text: SiteText['pages']['topicalPage']['shared'];
 }
 
 export function ContentTeaser({
@@ -29,8 +30,8 @@ export function ContentTeaser({
   variant = 'normal',
   isWeeklyHighlight,
   isArticle,
+  text,
 }: ContentTeaserProps) {
-  const { siteText } = useIntl();
   const breakpoints = useBreakpoints(true);
   const imageWidth = variant === 'normal' ? (breakpoints.sm ? 186 : 90) : 90;
 
@@ -53,31 +54,29 @@ export function ContentTeaser({
         <Text variant="overline2" color="bodyLight">
           {publicationDate ? (
             <>
-              {`${siteText.common_actueel.secties.meer_lezen.weekly_category} -`}
+              {`${text.secties.meer_lezen.weekly_category} -`}
               <PublicationDate date={publicationDate} />
             </>
           ) : (
             category
           )}
         </Text>
-        <Heading level={variant === 'normal' ? 4 : 5} as="h2" color="blue">
-          <HeadingLinkWithIcon
-            href={
-              isAbsoluteUrl(slug)
-                ? slug
-                : isWeeklyHighlight
-                ? `/weekberichten/${slug}`
-                : isArticle
-                ? `/artikelen/${slug}`
-                : slug
-            }
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-            underline
-          >
-            {title}
-          </HeadingLinkWithIcon>
-        </Heading>
+        <HeadingLinkWithIcon
+          href={
+            isAbsoluteUrl(slug)
+              ? slug
+              : isWeeklyHighlight
+              ? `/weekberichten/${slug}`
+              : isArticle
+              ? `/artikelen/${slug}`
+              : slug
+          }
+          icon={<ArrowIconRight />}
+          iconPlacement="right"
+          underline
+        >
+          {title}
+        </HeadingLinkWithIcon>
       </Box>
     </Box>
   );

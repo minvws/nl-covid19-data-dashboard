@@ -73,7 +73,7 @@ export function DeceasedMonitorSection({
         <AnchorTile
           title={text.cause_message.title}
           label={text.cause_message.link.text}
-          href={text.cause_message.link.href}
+          href={text.cause_message.link.url}
           external
         >
           <Markdown content={text.cause_message.message}></Markdown>

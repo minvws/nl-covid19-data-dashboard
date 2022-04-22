@@ -45,7 +45,10 @@ export function useResponsiveSize(
     /**
      * This assert cannot ever trigger, since the Tuple will always return the last item, but the compiler doesn't understand this...
      */
-    assert(isDefined(result), 'Cannot find valid size');
+    assert(
+      isDefined(result),
+      `[${useResponsiveSize.name}] Cannot find valid size`
+    );
 
     return isResponsiveConfiguration(result)
       ? ([
