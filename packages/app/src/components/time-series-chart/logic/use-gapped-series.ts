@@ -14,7 +14,7 @@ import {
  */
 export function useGappedSeries<
   T extends SeriesSingleValue | SeriesDoubleValue
->(series: T[]) {
+>(series: T[], isMissing?: boolean) {
   return useMemo(
     () =>
       series.reduce<T[][]>(
@@ -29,13 +29,28 @@ export function useGappedSeries<
             lists.push(newList);
             currentList = newList;
           }
-          if (hasItemValue) {
+
+          // Get the previous value or the current one.
+          // The determain if days are skipped
+          // The current threshold is 1,5 days to take count for irregularity in data
+          const isLongerThanADay = last(currentList) ?? item;
+          const DayTreshholdInSeconds = 130000;
+          if ((item.__date_unix - isLongerThanADay.__date_unix) > DayTreshholdInSeconds && (isMissing ?? false)) {
+            
+            const newList: T[] = [item];
+            lists.push(newList);
+            currentList = newList;
             currentList.push(item);
+          } else {
+            if (hasItemValue) {
+              currentList.push(item);
+            }
           }
+
           return lists;
         },
         [[]]
       ),
-    [series]
+    [series, isMissing]
   );
 }

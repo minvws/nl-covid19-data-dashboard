@@ -18,6 +18,7 @@ type GappedAreaTrendProps = {
   yScale: PositionScale;
   curve?: 'linear' | 'step';
   id: string;
+  isMissing: boolean;
 };
 
 export function GappedAreaTrend({
@@ -30,8 +31,13 @@ export function GappedAreaTrend({
   yScale,
   curve = 'linear',
   id,
+  isMissing,
 }: GappedAreaTrendProps) {
   const gappedSeries = useGappedSeries(series);
+  const gappedSeriesMissing = useGappedSeries(
+    series,
+    isMissing /*isMissing data (For example: the weekends and holidays)*/
+  );
 
   return (
     <>
@@ -47,6 +53,10 @@ export function GappedAreaTrend({
             strokeLinejoin="round"
             curve={curves[curve]}
           />
+        </React.Fragment>
+      ))}
+      {gappedSeriesMissing.map((series, index) => (
+        <React.Fragment key={index}>
           <AreaClosed
             data={series}
             x={getX}
