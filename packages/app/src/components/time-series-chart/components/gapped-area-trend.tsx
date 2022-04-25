@@ -7,6 +7,7 @@ import {
   SeriesItem,
   SeriesSingleValue,
   SeriesMissingValue,
+  isSeriesMissingValue,
 } from '../logic';
 import { useGappedSeries } from '../logic/use-gapped-series';
 
@@ -50,7 +51,8 @@ export function GappedAreaTrend({
     <>
       {gappedSeriesMissing.map((gappedSeries: T[], index) => (
         <React.Fragment key={index}>
-          {gappedSeries[0].__hasMissing ? (
+          {isSeriesMissingValue(gappedSeries[0]) &&
+          gappedSeries[0].__hasMissing ? (
             <LinePath
               data={[gappedSeries[0], gappedSeries[gappedSeries.length - 1]]}
               x={getX}
@@ -78,7 +80,8 @@ export function GappedAreaTrend({
       ))}
       {gappedSeriesMissing.map((gappedSeries, index) => (
         <React.Fragment key={index}>
-          {gappedSeries[0].__hasMissing ? (
+          {isSeriesMissingValue(gappedSeries[0]) &&
+          gappedSeries[0].__hasMissing ? (
             <AreaClosed
               data={gappedSeries}
               x={getX}
