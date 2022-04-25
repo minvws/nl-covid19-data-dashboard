@@ -39,9 +39,8 @@ export function GappedAreaTrend({
   yScale,
   curve = 'linear',
   id,
-  isMissing,
+  isMissing = false,
 }: GappedAreaTrendProps) {
-  // const gappedSeries: T[][] = useGappedSeries(series);
   const gappedSeriesMissing: T[][] = useGappedSeries(
     series,
     isMissing /*isMissing data (For example: the weekends and holidays)*/

@@ -59,7 +59,7 @@ export function useGappedSeries<
             lists.push(getMissingDaysList(isLongerThanADay, item))
             const newList: T[] = [item];
             lists.push(newList);
-            currentList = newList;
+            currentList = [...newList];
             currentList.push(item);
           } else {
             if (hasItemValue) {
