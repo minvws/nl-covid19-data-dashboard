@@ -588,7 +588,7 @@ export function TimeSeriesChart<
               alignItems="baseline"
               spacingHorizontal={3}
             >
-              <InlineText>{x.label}:</InlineText>
+              {x.label && <InlineText>{x.label}:</InlineText>}
               <Legend items={x.items} />
             </Box>
           ))}

@@ -2,7 +2,6 @@ import {
   colors,
   NlGNumber,
   TimeframeOption,
-  TimeframeOptionsList,
   VrGNumber,
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
@@ -18,7 +17,7 @@ interface GNumberBarChartTileProps {
 
 export function GNumberBarChartTile({
   data: __data,
-  timeframeInitialValue = TimeframeOption.ALL,
+  timeframeInitialValue = TimeframeOption.FIRST_OF_SEPTEMBER,
 }: GNumberBarChartTileProps) {
   const { formatPercentage, commonTexts } = useIntl();
 
@@ -32,7 +31,14 @@ export function GNumberBarChartTile({
       title={text.title}
       description={text.description}
       timeframeInitialValue={timeframeInitialValue}
-      timeframeOptions={TimeframeOptionsList}
+      timeframeOptions={[
+        TimeframeOption.FIRST_OF_SEPTEMBER,
+        TimeframeOption.ONE_WEEK,
+        TimeframeOption.THIRTY_DAYS,
+        TimeframeOption.THREE_MONTHS,
+        TimeframeOption.SIX_MONTHS,
+        TimeframeOption.LAST_YEAR,
+      ]}
       metadata={{
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
@@ -64,32 +70,23 @@ export function GNumberBarChartTile({
           timeframe={timeframe}
           dataOptions={{
             isPercentage: true,
-            timespanAnnotations: [
-              {
-                start: values[0].date_end_unix,
-                end: new Date('1 April 2020').getTime() / 1000,
-                label: text.legend_inaccurate_label,
-                shortLabel: commonTexts.common.incomplete,
-              },
-            ],
           }}
-          disableLegend
           seriesConfig={[
             {
               type: 'split-bar',
               metricProperty: 'g_number',
-              label: 'G number',
+              label: '',
               fillOpacity: 1,
               splitPoints: [
                 {
                   color: colors.data.primary,
                   value: 0,
-                  label: '', // legend is hidden, we can leave this empty
+                  label: text.legend.negative_label,
                 },
                 {
                   color: colors.red,
                   value: Infinity,
-                  label: '', // legend is hidden, we can leave this empty
+                  label: text.legend.positive_label,
                 },
               ],
             },
