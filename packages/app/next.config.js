@@ -14,25 +14,6 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
-if (!process.env.NEXT_PUBLIC_SANITY_DATASET) {
-  throw new Error('Provide NEXT_PUBLIC_SANITY_DATASET');
-}
-
-if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-  throw new Error('Provide NEXT_PUBLIC_SANITY_PROJECT_ID');
-}
-
-const IS_PRODUCTION_BUILD = process.env.NODE_ENV === 'production';
-const IS_DEVELOPMENT_PHASE = process.env.NEXT_PUBLIC_PHASE === 'develop';
-
-const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
-const SIX_MONTHS_IN_SECONDS = 15768000;
-
-const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
-const STATIC_ASSET_HTTP_DATE = new Date(
-  Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000
-).toUTCString();
-
 // When municipal reorganizations happened we want to redirect to the new municipality when
 // using the former municipality code. `from` contains the old municipality codes and `to` is
 // the new municipality code to link to.
@@ -60,21 +41,11 @@ const gmRedirects = [
 ];
 
 const nextConfig = {
-  experimental:
-    IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
-      ? {
-          outputStandalone: true,
-          outputFileTracingRoot: path.join(__dirname, '../../'),
-        }
-      : undefined,
-
   /**
    * Enables react strict mode
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
    */
   reactStrictMode: true,
-
-  poweredByHeader: false,
 
   i18n: {
     // These are all the locales you want to support in
@@ -99,63 +70,11 @@ const nextConfig = {
     ],
   },
 
+  /**
+   * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
+   */
   async headers() {
-    const contentSecurityPolicy =
-      IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
-        ? "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';"
-        : "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none'; connect-src 'self' 5mog5ask.api.sanity.io * ws: wss:;";
-
     return [
-      {
-        source: '/:all*',
-        locale: false,
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: contentSecurityPolicy,
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'no-referrer',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: `max-age=${SIX_MONTHS_IN_SECONDS}; includeSubdomains; preload`,
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'interest-cohort=()',
-          },
-          {
-            key: 'Cache-Control',
-            value: `public, max-age=${STATIC_ASSET_MAX_AGE_IN_SECONDS}`,
-          },
-          {
-            key: 'Vary',
-            value: 'content-type',
-          },
-          {
-            key: 'Expires',
-            value: STATIC_ASSET_HTTP_DATE,
-          },
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-        ],
-      },
       {
         source: '/:all*(svg|jpg|png|woff|woff2)',
         locale: false,
@@ -163,16 +82,6 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=9999999999, must-revalidate',
-          },
-        ],
-      },
-      {
-        source: '/:all*(html)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-cache, public',
           },
         ],
       },
@@ -189,10 +98,6 @@ const nextConfig = {
         {
           source: '/veiligheidsregio/(v|V)(r|R):nr(\\d{2})/:page*',
           destination: '/veiligheidsregio/VR:nr/:page*',
-        },
-        {
-          source: `/cms-(files|images)/:filename`,
-          destination: `https://cdn.sanity.io/images/${SANITY_PATH}/:filename`,
         },
       ],
     };
