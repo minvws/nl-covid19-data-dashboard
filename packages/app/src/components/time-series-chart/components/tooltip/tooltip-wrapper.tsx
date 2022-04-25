@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
@@ -182,9 +182,7 @@ function TooltipHeading({ title }: { title: string }) {
         textOverflow: 'ellipsis',
       })}
     >
-      <Text variant="label1" fontWeight="bold">
-        {title}
-      </Text>
+      <BoldText variant="label1">{title}</BoldText>
     </div>
   );
 }

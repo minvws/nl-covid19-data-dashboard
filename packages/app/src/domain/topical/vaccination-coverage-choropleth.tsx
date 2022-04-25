@@ -12,7 +12,7 @@ import {
 } from '~/components/chart-region-controls';
 import { DynamicChoropleth, ChoroplethLegenda, Markdown } from '~/components';
 import { thresholds } from '~/components/choropleth/logic';
-import { Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data';
 import {
   CoverageKindProperty,
@@ -221,9 +221,8 @@ export function VaccinationCoverageChoropleth(
             justifyContent="flex-start"
             as={'fieldset'}
           >
-            <Text
+            <BoldText
               as="legend"
-              fontWeight="bold"
               css={css({
                 flexBasis: '100%',
                 mb: 2,
@@ -233,7 +232,7 @@ export function VaccinationCoverageChoropleth(
                 commonTexts.choropleth.vaccination_coverage.shared
                   .dropdowns_title
               }
-            </Text>
+            </BoldText>
 
             <Box
               display="flex"

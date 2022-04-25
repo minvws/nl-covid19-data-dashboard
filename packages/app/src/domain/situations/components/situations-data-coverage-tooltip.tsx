@@ -5,7 +5,7 @@ import { Cross } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './legend-icon';
 import { SiteText } from '~/locale';
@@ -45,9 +45,7 @@ export function SituationsDataCoverageTooltip({
         <LegendIcon color={color}>
           <Icon />
         </LegendIcon>
-        <InlineText color={color} fontWeight="bold">
-          {label}
-        </InlineText>
+        <BoldText color={color}>{label}</BoldText>
       </Box>
     </TooltipContent>
   );

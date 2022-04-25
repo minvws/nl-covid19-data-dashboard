@@ -10,7 +10,7 @@ import {
   SeriesConfig,
   useSeriesList,
 } from '~/components/time-series-chart/logic';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -94,9 +94,9 @@ export function VariantsOverTime({
         onReset={clear}
       />
       <Spacer mb={2} />
-      <InlineText variant="label2" fontWeight="bold" color="data.axisLabels">
+      <BoldText variant="label2" color="data.axisLabels">
         {text.percentage_gevonden_varianten}
-      </InlineText>
+      </BoldText>
       <TimeSeriesChart
         accessibility={{ key: 'variants_over_time_chart' }}
         values={values}

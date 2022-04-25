@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { memo, useCallback, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from '../../logic';
@@ -69,9 +69,9 @@ export const Timeline = memo(function Timeline({
       onMouseLeave={handleHover}
     >
       <Box pl={padding.left}>
-        <Text variant="label1" fontWeight="bold">
+        <BoldText variant="label1">
           {commonTexts.charts.timeline.title}
-        </Text>
+        </BoldText>
       </Box>
       <Box display="flex" pl={padding.left}>
         {showHistoryLine && (

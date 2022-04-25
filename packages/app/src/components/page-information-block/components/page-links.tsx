@@ -6,7 +6,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { spacingStyle } from '~/style/functions/spacing';
 import { space } from '~/style/theme';
@@ -24,21 +24,26 @@ interface pageLinksProps {
 export function PageLinks({ links }: pageLinksProps) {
   const { commonTexts } = useIntl();
 
+  const combinedAriaLabel = (title: string) =>
+    `${commonTexts.informatie_header.external_link}. ${title}`;
+
   return (
-    <Box spacing={2}>
-      <Text fontWeight="bold">
-        {commonTexts.informatie_header.handige_links}
-      </Text>
+    <Box spacing={2} pt={3}>
+      <BoldText>{commonTexts.informatie_header.handige_links}</BoldText>
       <OrderedList>
         {links.map((link, index) => (
           <ListItem key={index}>
             {isAbsoluteUrl(link.href) ? (
-              <ExternalLink href={link.href} underline="hover">
+              <ExternalLink
+                href={link.href}
+                underline="hover"
+                ariaLabel={combinedAriaLabel(link.title)}
+              >
                 <TitleWithIcon title={link.title} icon={<ExternalIcon />} />
               </ExternalLink>
             ) : (
               <Link href={link.href} passHref>
-                <Anchor underline="hover">
+                <Anchor underline="hover" ariaLabel={link.title}>
                   <TitleWithIcon title={link.title} icon={<ChevronLarge />} />
                 </Anchor>
               </Link>
