@@ -69,7 +69,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const lastDate = useMemo<number>(
     () =>
       activeVaccinationChart === 'coverage' && isDefined(coverageData)
-        ? coverageData.last_value.date_end_unix
+        ? coverageData.last_value.date_unix
         : administrationData.last_value.date_end_unix,
     [
       activeVaccinationChart,
