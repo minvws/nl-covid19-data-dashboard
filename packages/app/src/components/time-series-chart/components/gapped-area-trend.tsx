@@ -2,14 +2,19 @@ import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
 import React from 'react';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { curves, SeriesItem, SeriesSingleValue } from '../logic';
+import {
+  curves,
+  SeriesItem,
+  SeriesSingleValue,
+  SeriesMissingValue,
+} from '../logic';
 import { useGappedSeries } from '../logic/use-gapped-series';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 const DEFAULT_STROKE_WIDTH = 2;
 
 type GappedAreaTrendProps = {
-  series: SeriesSingleValue[];
+  series: SeriesSingleValue[] | SeriesMissingValue[];
   color: string;
   fillOpacity?: number;
   strokeWidth?: number;
@@ -43,30 +48,46 @@ export function GappedAreaTrend({
     <>
       {gappedSeries.map((series, index) => (
         <React.Fragment key={index}>
-          <LinePath
-            data={series}
-            x={getX}
-            y={getY}
-            stroke={color}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            curve={curves[curve]}
-          />
+          {!series[0]?.isMissing || true ? (
+            <LinePath
+              data={series}
+              x={getX}
+              y={getY}
+              stroke={color}
+              strokeWidth={strokeWidth}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              curve={curves[curve]}
+            />
+          ) : (
+            <LinePath
+              data={series}
+              x={getX}
+              y={getY}
+              stroke={color}
+              strokeWidth={strokeWidth}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              stroke-dasharray="5,5"
+              curve={curves[curve]}
+            />
+          )}
         </React.Fragment>
       ))}
       {gappedSeriesMissing.map((series, index) => (
         <React.Fragment key={index}>
-          <AreaClosed
-            data={series}
-            x={getX}
-            y={getY}
-            fill={color}
-            fillOpacity={fillOpacity}
-            curve={curves[curve]}
-            yScale={yScale}
-            id={`${id}_${index}`}
-          />
+          {!series[0]?.isMissing && (
+            <AreaClosed
+              data={series}
+              x={getX}
+              y={getY}
+              fill={color}
+              fillOpacity={fillOpacity}
+              curve={curves[curve]}
+              yScale={yScale}
+              id={`${id}_${index}`}
+            />
+          )}
         </React.Fragment>
       ))}
     </>
