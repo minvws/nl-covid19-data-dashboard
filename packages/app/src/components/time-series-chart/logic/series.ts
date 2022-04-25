@@ -335,6 +335,10 @@ export type SeriesItem = {
 export interface SeriesSingleValue extends SeriesItem {
   __value?: number;
 }
+export interface SeriesMissingValue extends SeriesItem {
+  __hasMissing?: boolean;
+  __value?: number;
+}
 export interface SeriesDoubleValue extends SeriesItem {
   __value_a?: number;
   __value_b?: number;
@@ -347,9 +351,15 @@ export function isBarOutOfBounds<T extends TimestampedValue>(
 }
 
 export function isSeriesSingleValue(
-  value: SeriesSingleValue | SeriesDoubleValue
+  value: SeriesSingleValue | SeriesDoubleValue | SeriesMissingValue
 ): value is SeriesSingleValue {
   return isDefined((value as any).__value);
+}
+
+export function isSeriesMissingValue(
+  value: SeriesSingleValue | SeriesDoubleValue | SeriesMissingValue
+): value is SeriesMissingValue {
+  return isDefined((value as any).__hasMissing);
 }
 
 /**
@@ -358,7 +368,7 @@ export function isSeriesSingleValue(
  * with TimestampedValue as the LineChart because types got simplified in other
  * places.
  */
-export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[];
+export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[] | SeriesMissingValue[];
 export type SeriesList = SingleSeries[];
 
 function getSeriesList<T extends TimestampedValue>(
