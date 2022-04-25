@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import {
   isSeriesSingleValue,
-  isSeriesMissingValue,
   SeriesDoubleValue,
   SeriesSingleValue,
   SeriesMissingValue,
@@ -23,22 +22,26 @@ export function useGappedSeries<
       const DayTreshholdInSeconds = 130000;
       const oneDay = 86400;
 
-      const getMissingDaysList = (startDate: number, endDate:number) => {
-        const missingDaysList: SeriesMissingValue[] = [];
-        const inBetweenSeconds = endDate - startDate - oneDay;
+      const getMissingDaysList = (startItem: SeriesSingleValue, endItem: SeriesSingleValue) => {
+        const missingDaysList: T[] = [];
+        const inBetweenSeconds = endItem.__date_unix - startItem.__date_unix - oneDay;
         const missingDaysCount = Math.round(inBetweenSeconds / oneDay)
+        const firstDay = {__value: startItem.__value, __date_unix: startItem.__date_unix, __hasMissing: true} as SeriesMissingValue as T;
+        missingDaysList.push(firstDay);
         for (let i = 1; i <= missingDaysCount; i++) {
-          const nextDate = startDate + (oneDay * i);
-          const newList = {__date_unix: nextDate, __hasMissing: true};
+          const nextDate = startItem.__date_unix + (oneDay * i);
+          const newList = {__value: startItem.__value, __date_unix: nextDate, __hasMissing: true} as SeriesMissingValue as T;
           missingDaysList.push(newList);
         }
+        const lastDay = {__value: endItem.__value, __date_unix: endItem.__date_unix, __hasMissing: true} as SeriesMissingValue as T;
+        missingDaysList.push(lastDay);
         return missingDaysList;
       }
 
       return series.reduce<T[][]>(
         (lists, item) => {
           const hasItemValue = isPresent(
-            isSeriesSingleValue(item) ? item.__value : isSeriesMissingValue(item) ? item.__hasMissing : item.__value_a
+            isSeriesSingleValue(item) ? item.__value : item.__value_a
           );
 
           let currentList = last(lists) ?? [];
@@ -53,7 +56,7 @@ export function useGappedSeries<
           // The current threshold is 1,5 days to take count for irregularity in data
           const isLongerThanADay = last(currentList) ?? item;
           if ((item.__date_unix - isLongerThanADay.__date_unix) > DayTreshholdInSeconds && (isMissing ?? false)) {
-            lists.push(getMissingDaysList(isLongerThanADay.__date_unix, item.__date_unix))
+            lists.push(getMissingDaysList(isLongerThanADay, item))
             const newList: T[] = [item];
             lists.push(newList);
             currentList = newList;

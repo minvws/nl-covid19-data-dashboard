@@ -335,9 +335,8 @@ export type SeriesItem = {
 export interface SeriesSingleValue extends SeriesItem {
   __value?: number;
 }
-export interface SeriesMissingValue extends SeriesItem {
+export interface SeriesMissingValue extends SeriesSingleValue {
   __hasMissing?: boolean;
-  __value?: number;
 }
 export interface SeriesDoubleValue extends SeriesItem {
   __value_a?: number;

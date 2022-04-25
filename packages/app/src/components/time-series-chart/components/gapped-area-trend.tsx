@@ -13,8 +13,10 @@ import { useGappedSeries } from '../logic/use-gapped-series';
 const DEFAULT_FILL_OPACITY = 0.2;
 const DEFAULT_STROKE_WIDTH = 2;
 
+type T = SeriesSingleValue | SeriesMissingValue;
+
 type GappedAreaTrendProps = {
-  series: SeriesSingleValue[] | SeriesMissingValue[];
+  series: SeriesSingleValue[];
   color: string;
   fillOpacity?: number;
   strokeWidth?: number;
@@ -38,47 +40,57 @@ export function GappedAreaTrend({
   id,
   isMissing,
 }: GappedAreaTrendProps) {
-  const gappedSeries = useGappedSeries(series);
-  const gappedSeriesMissing = useGappedSeries(
+  // const gappedSeries: T[][] = useGappedSeries(series);
+  const gappedSeriesMissing: T[][] = useGappedSeries(
     series,
     isMissing /*isMissing data (For example: the weekends and holidays)*/
   );
 
   return (
     <>
-      {gappedSeries.map((series, index) => (
+      {gappedSeriesMissing.map((gappedSeries: T[], index) => (
         <React.Fragment key={index}>
-          {!series[0]?.isMissing || true ? (
+          {gappedSeries[0].__hasMissing ? (
             <LinePath
-              data={series}
+              data={[gappedSeries[0], gappedSeries[gappedSeries.length - 1]]}
               x={getX}
               y={getY}
               stroke={color}
               strokeWidth={strokeWidth}
               strokeLinecap="round"
               strokeLinejoin="round"
+              strokeDasharray="5,5"
               curve={curves[curve]}
             />
           ) : (
             <LinePath
-              data={series}
+              data={gappedSeries}
               x={getX}
               y={getY}
               stroke={color}
               strokeWidth={strokeWidth}
               strokeLinecap="round"
               strokeLinejoin="round"
-              stroke-dasharray="5,5"
               curve={curves[curve]}
             />
           )}
         </React.Fragment>
       ))}
-      {gappedSeriesMissing.map((series, index) => (
+      {gappedSeriesMissing.map((gappedSeries, index) => (
         <React.Fragment key={index}>
-          {!series[0]?.isMissing && (
+          {gappedSeries[0].__hasMissing ? (
             <AreaClosed
-              data={series}
+              data={gappedSeries}
+              x={getX}
+              y={getY}
+              fillOpacity={0}
+              curve={curves[curve]}
+              yScale={yScale}
+              id={`${id}_${index}`}
+            />
+          ) : (
+            <AreaClosed
+              data={gappedSeries}
               x={getX}
               y={getY}
               fill={color}
