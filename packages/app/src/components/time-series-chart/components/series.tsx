@@ -121,6 +121,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY={getY}
                   yScale={yScale}
                   id={id}
+                  isMissing={config.metricProperty === 'beds_occupied_covid'}
                 />
               );
             case 'bar':
