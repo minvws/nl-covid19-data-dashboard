@@ -42,10 +42,10 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
     case TimeframeOption.LAST_YEAR:
       return 365;
     case TimeframeOption.FIRST_OF_SEPTEMBER: {
-      const date: any = new Date('1 September 2020');
-      const today: any = new Date();
+      const date = new Date('1 September 2020');
+      const today = new Date();
       const diffInDays = Math.round(
-        Math.abs(date - today) / (1000 * 60 * 60 * 24) - 1
+        Math.abs(date.valueOf() - today.valueOf()) / (1000 * DAY_IN_SECONDS)
       );
       return diffInDays;
     }
