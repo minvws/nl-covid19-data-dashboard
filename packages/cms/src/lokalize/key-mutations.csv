@@ -1,1 +1,6 @@
 timestamp,action,key,document_id,move_to
+2022-04-22T08:09:02.839Z,add,common.g_number.bar_chart.legend_inaccurate_label,X8Z1HTDxqJ9pM59362hg1m,__
+2022-04-25T14:25:46.327Z,add,common.charts.time_controls.firstOfSeptember,A5Y41hFe5J3wNnB7O7FFlP,__
+2022-04-25T14:25:47.391Z,add,common.g_number.bar_chart.legend.negative_label,Raj9X55CxrYuKzixU46zrk,__
+2022-04-25T14:25:48.351Z,add,common.g_number.bar_chart.legend.positive_label,X8Z1HTDxqJ9pM59364bIJw,__
+2022-04-25T14:25:48.352Z,move,common.g_number.bar_chart.legend_inaccurate_label,X8Z1HTDxqJ9pM59362hg1m,common.g_number.bar_chart.legend.inaccurate_label
