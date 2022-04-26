@@ -87,12 +87,16 @@ function search(term: string, limit = 10) {
   return hits;
 }
 
+const expStr = new RegExp(["'s-"].join(' | '), 'g');
+
 const ALL_HITS: Omit<Option, 'link'>[] = [
   ...gmData.map((x) => ({
     type: 'gm' as const,
     code: x.gemcode,
     name: x.displayName || x.name,
-    searchTerms: [x.name, x.displayName].filter(isPresent),
+    searchTerms: [x.name, x.displayName]
+      .concat(x.searchTerms)
+      .filter(isPresent),
   })),
   ...vrData.map((x) => ({
     type: 'vr' as const,
@@ -100,4 +104,6 @@ const ALL_HITS: Omit<Option, 'link'>[] = [
     name: x.name,
     searchTerms: [x.name, ...(x.searchTerms || [])].filter(isPresent),
   })),
-].sort((a, b) => a.name.localeCompare(b.name));
+].sort((a, b) =>
+  a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, ''))
+);
