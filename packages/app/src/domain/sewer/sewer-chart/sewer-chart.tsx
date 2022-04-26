@@ -1,4 +1,5 @@
 import {
+  colors,
   NlSewer,
   SewerPerInstallationData,
   TimeframeOptionsList,
@@ -13,7 +14,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { getAverageSplitPoints } from '~/utils/get-avarage-split-points';
 import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
@@ -84,7 +84,6 @@ export function SewerChart({
       } as SewerPerInstallationData)
   );
 
-  const averageSplitPoints = getAverageSplitPoints(text.splitLabels);
   const { commonTexts } = useIntl();
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
@@ -183,10 +182,10 @@ export function SewerChart({
                     style: 'dashed',
                   },
                   {
-                    type: 'split-area',
+                    type: 'area',
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
-                    splitPoints: averageSplitPoints,
+                    color: colors.data.scale.blue[3],
                     nonInteractive: true,
                   },
                 ]}
@@ -207,10 +206,10 @@ export function SewerChart({
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'split-area',
+                    type: 'area',
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
-                    splitPoints: averageSplitPoints,
+                    color: colors.data.scale.blue[3],
                   },
                 ]}
                 dataOptions={dataOptions}

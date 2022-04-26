@@ -62,7 +62,6 @@ import {
   replaceComponentsInText,
   trimNullValues,
   replaceVariablesInText,
-  getAverageSplitPoints,
 } from '~/utils';
 
 export const getStaticProps = createGetStaticProps(
@@ -188,8 +187,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { hospitalText, intensiveCareText, textNl, textShared, sewerText } =
-    pageText;
+  const { hospitalText, intensiveCareText, textNl, textShared } = pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -239,8 +237,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     underReportedRangeHospital - WEEK_IN_SECONDS,
     underReportedRangeHospital - DAY_IN_SECONDS,
   ];
-
-  const averageSplitPoints = getAverageSplitPoints(sewerText.split_labels);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -533,10 +529,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   values={dataSewerTotal.values}
                   seriesConfig={[
                     {
-                      type: 'split-area',
+                      type: 'area',
                       metricProperty: 'average',
                       label: commonTexts.common.daggemiddelde,
-                      splitPoints: averageSplitPoints,
+                      color: colors.data.scale.blue[3],
                     },
                   ]}
                   dataOptions={{
