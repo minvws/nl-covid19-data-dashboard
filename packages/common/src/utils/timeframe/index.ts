@@ -45,7 +45,7 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
       const date = new Date('1 September 2020');
       const today = new Date();
       const diffInDays = Math.round(
-        Math.abs(date.valueOf() - today.valueOf()) / (1000 * DAY_IN_SECONDS)
+        Math.abs(date.valueOf() - today.valueOf()) / (1000 * DAY_IN_SECONDS) - 1
       );
       return diffInDays;
     }
