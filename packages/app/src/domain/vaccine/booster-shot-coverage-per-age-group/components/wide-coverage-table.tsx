@@ -1,24 +1,36 @@
-import { NlBoosterShotPerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { COLOR_FULLY_BOOSTERED } from '~/domain/vaccine/common';
-import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
+import {
+  COLOR_FULLY_VACCINATED,
+  COLOR_BOOSTERED,
+} from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
+import { AgeGroup } from '~/domain/vaccine/components/age-group';
+import { SiteText } from '~/locale';
 interface WideCoverageTable {
-  values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
+  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
   const { commonTexts, formatPercentage } = useIntl();
+  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
 
   return (
     <Box overflow="auto">
@@ -52,7 +64,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.turnout_booter_shot}
+                {text.headers.first_shot}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -64,23 +76,27 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   lg: '20%',
                 }),
               })}
-            />
+            >
+              <InlineText variant="label1">{text.headers.coverage}</InlineText>
+            </HeaderCell>
             <HeaderCell
               css={css({
-                textAlign: 'right',
-                pr: asResponsiveArray({ _: 3, xl: 4 }),
                 width: asResponsiveArray({
                   _: '20%',
                   lg: '30%',
                 }),
               })}
-            ></HeaderCell>
+            >
+              <InlineText variant="label1">
+                {text.headers.difference}
+              </InlineText>
+            </HeaderCell>
           </Row>
         </thead>
         <tbody>
           {values.map((item, index) => (
             <Row key={index}>
-              <Cell>
+              <HeaderCell isColumn>
                 <AgeGroup
                   range={formatAgeGroupString(
                     item.age_group_range,
@@ -95,22 +111,55 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   )}
                   text={commonTexts.common.agegroup.total_people}
                 />
-              </Cell>
+              </HeaderCell>
               <Cell>
                 <WidePercentage
-                  value={`${formatPercentage(
-                    item.received_booster_percentage
-                  )}%`}
-                  color={COLOR_FULLY_BOOSTERED}
+                  value={
+                    'fully_vaccinated_percentage_label' in item
+                      ? formatCoveragePercentage(
+                          item,
+                          'fully_vaccinated_percentage'
+                        )
+                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
+                  }
+                  color={COLOR_FULLY_VACCINATED}
                   justifyContent="flex-end"
                 />
               </Cell>
-              <Cell />
+              <Cell>
+                <WidePercentage
+                  value={
+                    'booster_shot_percentage_label' in item
+                      ? formatCoveragePercentage(
+                          item,
+                          'booster_shot_percentage'
+                        )
+                      : `${formatPercentage(item.booster_shot_percentage)}%`
+                  }
+                  color={COLOR_BOOSTERED}
+                  justifyContent="flex-end"
+                />
+              </Cell>
               <Cell>
                 <Box spacing={1}>
+                <Bar
+                    value={item.fully_vaccinated_percentage}
+                    color={COLOR_FULLY_VACCINATED}
+                    label={
+                      'fully_vaccinated_percentage_label' in item
+                        ? item.fully_vaccinated_percentage_label
+                        : undefined
+                    }
+                  />
+                </Box>
                   <Bar
-                    value={item.received_booster_percentage}
-                    color={COLOR_FULLY_BOOSTERED}
+                    value={item.booster_shot_percentage}
+                    color={COLOR_BOOSTERED}
+                    label={
+                      'booster_shot_percentage_label' in item
+                        ? item.booster_shot_percentage_label
+                        : undefined
+                    }
                   />
                 </Box>
               </Cell>
@@ -136,12 +185,13 @@ const Row = styled.tr(
   })
 );
 
-const HeaderCell = styled.th(
+const HeaderCell = styled.th<{ isColumn?: boolean }>((x) =>
   css({
     textAlign: 'left',
-    fontWeight: 'bold',
+    fontWeight: x.isColumn ? 'normal' : 'bold',
     verticalAlign: 'middle',
-    pb: 2,
+    pb: x.isColumn ? undefined : 2,
+    py: x.isColumn ? 3 : undefined,
   })
 );
 

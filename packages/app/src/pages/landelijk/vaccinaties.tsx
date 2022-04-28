@@ -339,6 +339,53 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />
+          {!vaccinationBoosterShotsPerAgeGroupFeature.isEnabled ? (
+            <VaccineCoveragePerAgeGroup
+              text={textNl.vaccination_coverage}
+              title={textNl.vaccination_coverage.title}
+              description={textNl.vaccination_coverage.toelichting}
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+                '5-11',
+              ]}
+              metadata={{
+                datumsText: textNl.datums,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textNl.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+            />
+          ) : (
+            <BoosterShotCoveragePerAgeGroup
+              text={textNl.vaccination_coverage}
+              title={textNl.vaccination_coverage.title}
+              description={textNl.vaccination_coverage.toelichting}
+              sortingOrder={[
+                '81+',
+                '71-80',
+                '61-70',
+                '51-60',
+                '41-50',
+                '31-40',
+                '18-30',
+                '12-17',
+                '5-11',
+              ]}
+              metadata={{
+                datumsText: textNl.datums,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textNl.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+            />
+          )}
           <VaccinationsKpiHeader
             text={textNl.booster_information_block}
             dateUnix={boosterShotAdministeredLastValue.date_end_unix}
