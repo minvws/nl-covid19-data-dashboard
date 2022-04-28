@@ -10,6 +10,7 @@
         "partially_or_fully_vaccinated",
         "date_start_unix",
         "date_end_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
@@ -30,6 +31,9 @@
           "type": "integer"
         },
         "date_end_unix": {
+          "type": "integer"
+        },
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
