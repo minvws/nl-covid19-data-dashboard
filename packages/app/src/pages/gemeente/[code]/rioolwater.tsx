@@ -34,6 +34,16 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'difference.sewer__average',
+  'sewer_per_installation',
+  'static_values.population_count',
+  'sewer',
+  'code',
+];
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -100,6 +110,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
@@ -117,8 +129,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 start: sewerAverages.last_value.date_start_unix,
                 end: sewerAverages.last_value.date_end_unix,
               },
-              dateOfInsertionUnix:
-                sewerAverages.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
             referenceLink={textGm.reference.href}
