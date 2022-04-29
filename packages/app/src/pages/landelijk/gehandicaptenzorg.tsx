@@ -44,6 +44,13 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'difference.disability_care__newly_infected_people',
+  'difference.disability_care__infected_locations_total',
+  'disability_care',
+];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -114,6 +121,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.besmette_locaties.metadata.description,
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -127,7 +136,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.positief_geteste_personen.bronnen.rivm],
             }}
             referenceLink={textNl.positief_geteste_personen.reference.href}

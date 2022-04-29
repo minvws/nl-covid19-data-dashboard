@@ -37,6 +37,13 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'behavior',
+  'behavior_annotations',
+  'behavior_per_age_group',
+];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -130,6 +137,8 @@ export default function BehaviorPage(
     ? { timelineEvents: currentTimelineEvents }
     : undefined;
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -145,7 +154,7 @@ export default function BehaviorPage(
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
-              dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [text.nl.bronnen.rivm],
             }}
             referenceLink={text.nl.reference.href}
