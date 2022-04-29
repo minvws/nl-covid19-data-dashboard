@@ -41,6 +41,15 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'difference.nursing_home__deceased_daily',
+  'difference.nursing_home__infected_locations_total',
+  'difference.nursing_home__newly_infected_people',
+  'nursing_home',
+];
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -115,6 +124,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     ),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -142,7 +153,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.positief_geteste_personen.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.positief_geteste_personen.bronnen.rivm],
             }}
             referenceLink={textVr.positief_geteste_personen.reference.href}
