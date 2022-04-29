@@ -34,7 +34,7 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = ['reproduction', 'difference.reproduction__index_average'];
+const pageMetrics = ['reproduction'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

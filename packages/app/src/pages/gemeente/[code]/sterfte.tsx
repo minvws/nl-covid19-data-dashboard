@@ -39,11 +39,7 @@ import { replaceVariablesInText } from '~/utils';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'difference.deceased_rivm__covid_daily',
-  'deceased_rivm',
-  'code',
-];
+const pageMetrics = ['deceased_rivm', 'code'];
 
 export { getStaticPaths } from '~/static-paths/gm';
 

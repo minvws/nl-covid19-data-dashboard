@@ -55,10 +55,6 @@ import {
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
-  'difference.tested_ggd__infected_percentage_moving_average',
-  'difference.tested_ggd__tested_total_moving_average',
-  'difference.tested_overall__infected_moving_average',
-  'difference.tested_overall__infected_per_100k_moving_average',
   'g_number',
   'tested_ggd',
   'tested_ggd_archived',

@@ -55,8 +55,6 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 
 const pageMetrics = [
   'code',
-  'difference.tested_overall__infected_moving_average',
-  'difference.tested_overall__infected_per_100k_moving_average',
   'static_values.population_count',
   'tested_overall',
 ];

@@ -43,12 +43,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'difference.nursing_home__deceased_daily',
-  'difference.nursing_home__infected_locations_total',
-  'difference.nursing_home__newly_infected_people',
-  'nursing_home',
-];
+const pageMetrics = ['nursing_home'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 

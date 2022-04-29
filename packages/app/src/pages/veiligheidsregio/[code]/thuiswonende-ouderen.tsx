@@ -39,10 +39,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'elderly_at_home',
-  'difference.elderly_at_home__positive_tested_daily',
-];
+const pageMetrics = ['elderly_at_home'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 

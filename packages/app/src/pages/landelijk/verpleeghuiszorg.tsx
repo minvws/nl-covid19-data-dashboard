@@ -47,11 +47,7 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'difference.nursing_home__infected_locations_total',
-  'difference.nursing_home__newly_infected_people',
-  'nursing_home',
-];
+const pageMetrics = ['nursing_home'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

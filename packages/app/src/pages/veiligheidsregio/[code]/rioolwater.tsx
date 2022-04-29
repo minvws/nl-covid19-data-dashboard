@@ -29,11 +29,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'sewer',
-  'sewer_per_installation',
-  'difference.sewer__average',
-];
+const pageMetrics = ['sewer', 'sewer_per_installation'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 

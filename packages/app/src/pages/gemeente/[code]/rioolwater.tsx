@@ -37,7 +37,6 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
-  'difference.sewer__average',
   'sewer_per_installation',
   'static_values.population_count',
   'sewer',

@@ -75,7 +75,6 @@ const PieChart = dynamic<PieChartProps<NlHospitalVaccinationStatusValue>>(() =>
 );
 
 const pageMetrics = [
-  'difference.hospital_lcps__beds_occupied_covid',
   'hospital_lcps',
   'hospital_nice_per_age_group',
   'hospital_nice',

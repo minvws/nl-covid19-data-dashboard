@@ -36,7 +36,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = ['sewer', 'difference.sewer__average'];
+const pageMetrics = ['sewer'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

@@ -40,11 +40,7 @@ import { replaceVariablesInText } from '~/utils';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'deceased_cbs',
-  'deceased_rivm',
-  'difference.deceased_rivm__covid_daily',
-];
+const pageMetrics = ['deceased_cbs', 'deceased_rivm'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 

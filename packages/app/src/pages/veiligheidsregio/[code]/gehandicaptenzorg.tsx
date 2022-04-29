@@ -43,11 +43,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'disability_care',
-  'difference.disability_care__infected_locations_total',
-  'difference.disability_care__newly_infected_people',
-];
+const pageMetrics = ['disability_care'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

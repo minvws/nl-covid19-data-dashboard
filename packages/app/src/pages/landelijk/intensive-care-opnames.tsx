@@ -72,7 +72,6 @@ const pageMetrics = [
   'intensive_care_lcps',
   'intensive_care_nice',
   'intensive_care_nice_per_age_group',
-  'difference.intensive_care_lcps__beds_occupied_covid',
   'intensive_care_vaccination_status',
   'hospital_vaccine_incidence_per_age_group',
 ];

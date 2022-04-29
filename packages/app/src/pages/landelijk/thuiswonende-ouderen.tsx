@@ -43,10 +43,7 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'difference.elderly_at_home__positive_tested_daily',
-  'elderly_at_home',
-];
+const pageMetrics = ['elderly_at_home'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

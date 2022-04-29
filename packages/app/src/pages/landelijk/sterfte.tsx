@@ -44,7 +44,6 @@ const pageMetrics = [
   'deceased_cbs',
   'deceased_rivm_per_age_group',
   'deceased_rivm',
-  'difference.deceased_rivm__covid_daily',
 ];
 
 export const getStaticProps = createGetStaticProps(
