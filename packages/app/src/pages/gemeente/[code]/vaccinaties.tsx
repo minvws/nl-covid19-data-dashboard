@@ -131,8 +131,6 @@ export const VaccinationsGmPage = (
     }),
   };
 
-  const boosterCoverageLastValue = data.booster_coverage?.last_value;
-
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
    */
@@ -145,6 +143,13 @@ export const VaccinationsGmPage = (
     data.vaccine_coverage_per_age_group.values.find(
       (x) => x.age_group_range === '12+'
     );
+
+  const boosterCoverage18PlusValue =
+    data.booster_coverage.values.find((v) => v.age_group === '18+') ||
+    data.booster_coverage.last_value;
+  const boosterCoverage12PlusValue =
+    data.booster_coverage.values.find((v) => v.age_group === '12+') ||
+    undefined;
 
   assert(
     filteredAgeGroup18Plus,
@@ -198,10 +203,10 @@ export const VaccinationsGmPage = (
               has_one_shot_label:
                 filteredAgeGroup18Plus.has_one_shot_percentage_label,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageLastValue.percentage}`
+                `${boosterCoverage18PlusValue?.percentage}`
               ),
-              boostered_label: boosterCoverageLastValue.percentage_label,
-              dateUnixBoostered: boosterCoverageLastValue.date_unix,
+              boostered_label: boosterCoverage18PlusValue?.percentage_label,
+              dateUnixBoostered: boosterCoverage18PlusValue?.date_unix,
             }}
             age12Plus={{
               fully_vaccinated:
@@ -212,6 +217,11 @@ export const VaccinationsGmPage = (
                 filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
               has_one_shot_label:
                 filteredAgeGroup12Plus.has_one_shot_percentage_label,
+              boostered: formatPercentageAsNumber(
+                `${boosterCoverage12PlusValue?.percentage}`
+              ),
+              boostered_label: boosterCoverage12PlusValue?.percentage_label,
+              dateUnixBoostered: boosterCoverage12PlusValue?.date_unix,
             }}
             age12PlusToggleText={
               textGm.vaccination_grade_toggle_tile.age_12_plus

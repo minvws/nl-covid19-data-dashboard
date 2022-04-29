@@ -20,6 +20,10 @@
       "title": "vr_booster_coverage_value",
       "type": "object",
       "properties": {
+        "age_group": {
+          "type": "string",
+          "enum": ["12+", "18+"]
+        },
         "percentage": {
           "type": "number"
         },
@@ -35,6 +39,7 @@
         }
       },
       "required": [
+        "age_group",
         "percentage",
         "percentage_label",
         "date_unix",
