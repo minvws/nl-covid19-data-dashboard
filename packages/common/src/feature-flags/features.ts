@@ -185,6 +185,13 @@ export const features: Feature[] = [
     metricName: 'booster_coverage',
   },
   {
+    name: 'boosterCoverageAgeGroup',
+    isEnabled: false,
+    dataScopes: ['vr', 'gm'],
+    metricName: 'booster_coverage',
+    metricProperties: ['age_group'],
+  },
+  {
     name: 'riskLevel',
     isEnabled: false,
     dataScopes: ['nl'],
