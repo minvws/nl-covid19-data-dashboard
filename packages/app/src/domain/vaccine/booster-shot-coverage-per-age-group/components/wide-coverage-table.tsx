@@ -142,7 +142,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               </Cell>
               <Cell>
                 <Box spacing={1}>
-                <Bar
+                  <Bar
                     value={item.fully_vaccinated_percentage}
                     color={COLOR_FULLY_VACCINATED}
                     label={
@@ -151,7 +151,6 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                         : undefined
                     }
                   />
-                </Box>
                   <Bar
                     value={item.booster_shot_percentage}
                     color={COLOR_BOOSTERED}
