@@ -22,7 +22,7 @@ interface BoosterCoveragePerAgeGroupProps {
   text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
 }
 
-export function VaccineCoveragePerAgeGroup({
+export function BoosterShotCoveragePerAgeGroup({
   title,
   description,
   metadata,
@@ -37,7 +37,7 @@ export function VaccineCoveragePerAgeGroup({
 
     assert(
       index >= 0,
-      `[${VaccineCoveragePerAgeGroup.name}] No sorting order defined for age group ${ageGroup}`
+      `[${BoosterShotCoveragePerAgeGroup.name}] No sorting order defined for age group ${ageGroup}`
     );
 
     return index;
