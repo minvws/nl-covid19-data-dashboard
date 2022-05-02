@@ -41,6 +41,9 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['elderly_at_home'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -116,6 +119,8 @@ const ElderlyAtHomeNationalPage = (
     description: textNl.metadata.description,
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -131,8 +136,7 @@ const ElderlyAtHomeNationalPage = (
             metadata={{
               datumsText: textNl.section_positive_tested.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix:
-                elderlyAtHomeData.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.section_positive_tested.bronnen.rivm],
             }}
             referenceLink={textNl.section_positive_tested.reference.href}

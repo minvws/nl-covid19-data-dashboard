@@ -62,6 +62,7 @@ import {
   replaceVariablesInText,
   useReverseRouter,
 } from '~/utils';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -72,6 +73,14 @@ const AgeDemographic = dynamic<
 const PieChart = dynamic<PieChartProps<NlHospitalVaccinationStatusValue>>(() =>
   import('~/components/pie-chart').then((mod) => mod.PieChart)
 );
+
+const pageMetrics = [
+  'hospital_lcps',
+  'hospital_nice_per_age_group',
+  'hospital_nice',
+  'hospital_vaccination_status',
+  'hospital_vaccine_incidence_per_age_group',
+];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -165,6 +174,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const { metadataTexts, textNl, textShared } = pageText;
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -184,7 +195,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: lastValueNice.date_unix,
-              dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.nice, textNl.bronnen.lnaz],
             }}
             referenceLink={textNl.reference.href}
