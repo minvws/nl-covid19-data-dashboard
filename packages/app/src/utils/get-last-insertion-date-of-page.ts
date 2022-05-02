@@ -5,9 +5,13 @@
 
 export function getLastInsertionDateOfPage(data: any, pageMetrics: string[]) {
   let lastDate = 0;
-  pageMetrics.forEach((metric: any) => {
-    const metricDate = typeof data[metric].last_value?.date_of_insertion_unix === undefined ? 0 : data[metric].last_value?.date_of_insertion_unix
-    lastDate = metricDate > lastDate ? data[metric].last_value?.date_of_insertion_unix : lastDate
+
+  pageMetrics.forEach((metric:any) => {
+    const metricDate = data[metric]?.last_value?.date_of_insertion_unix;
+
+    if (metricDate) {
+      lastDate = metricDate > lastDate ? metricDate : lastDate;
+    }
   });
   return lastDate;
 }
