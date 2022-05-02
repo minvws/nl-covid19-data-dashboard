@@ -31,7 +31,15 @@
     "code": {
       "$ref": "#/$defs/vr_collection_id"
     },
-    "hospital_nice": {
+    "hospital_nice_graph": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "hospital_nice.json"
+      }
+    },
+    "hospital_nice_choropleth": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,

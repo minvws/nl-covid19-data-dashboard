@@ -59,7 +59,10 @@
     "tested_overall": {
       "$ref": "tested_overall.json"
     },
-    "hospital_nice": {
+    "hospital_nice_graph": {
+      "$ref": "hospital_nice.json"
+    },
+    "hospital_nice_choropleth": {
       "$ref": "hospital_nice.json"
     },
     "tested_ggd": {

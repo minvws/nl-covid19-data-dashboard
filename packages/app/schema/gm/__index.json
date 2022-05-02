@@ -44,7 +44,10 @@
     "hospital_nice_sum": {
       "$ref": "hospital_nice_sum.json"
     },
-    "hospital_nice": {
+    "hospital_nice_graph": {
+      "$ref": "hospital_nice.json"
+    },
+    "hospital_nice_choropleth": {
       "$ref": "hospital_nice.json"
     },
     "tested_overall_sum": {

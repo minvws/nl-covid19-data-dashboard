@@ -15,7 +15,8 @@ export interface Gm {
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
   hospital_nice_sum: GmHospitalNiceSum;
-  hospital_nice: GmHospitalNice;
+  hospital_nice_graph?: GmHospitalNice;
+  hospital_nice_choropleth?: GmHospitalNice;
   tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
@@ -158,7 +159,8 @@ export interface GmCollection {
   proto_name: GmCollectionId;
   name: GmCollectionId;
   code: GmCollectionId;
-  hospital_nice: GmCollectionHospitalNice[];
+  hospital_nice_graph?: GmCollectionHospitalNice[];
+  hospital_nice_choropleth?: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
   vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
@@ -1116,7 +1118,8 @@ export interface Vr {
   sewer: VrSewer;
   sewer_per_installation: VrSewerPerInstallation;
   tested_overall: VrTestedOverall;
-  hospital_nice: VrHospitalNice;
+  hospital_nice_graph?: VrHospitalNice;
+  hospital_nice_choropleth?: VrHospitalNice;
   tested_ggd: VrTestedGgd;
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
@@ -1439,7 +1442,8 @@ export interface VrCollection {
   proto_name: VrCollectionId;
   name: VrCollectionId;
   code: VrCollectionId;
-  hospital_nice: VrCollectionHospitalNice[];
+  hospital_nice_graph?: VrCollectionHospitalNice[];
+  hospital_nice_choropleth?: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];

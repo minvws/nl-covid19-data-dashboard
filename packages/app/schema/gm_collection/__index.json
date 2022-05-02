@@ -26,7 +26,14 @@
     "code": {
       "$ref": "#/$defs/gm_collection_id"
     },
-    "hospital_nice": {
+    "hospital_nice_graph": {
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "hospital_nice.json"
+      }
+    },
+    "hospital_nice_choropleth": {
       "type": "array",
       "maxItems": 355,
       "items": {
