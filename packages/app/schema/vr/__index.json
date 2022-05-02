@@ -9,6 +9,7 @@
     "code",
     "tested_overall",
     "hospital_nice",
+    "hospital_nice_choropleth",
     "tested_ggd",
     "tested_ggd_archived",
     "nursing_home",

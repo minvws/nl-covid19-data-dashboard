@@ -12,6 +12,7 @@
     "tested_overall",
     "hospital_nice_sum",
     "hospital_nice",
+    "hospital_nice_choropleth",
     "deceased_rivm",
     "difference",
     "static_values",

@@ -1,47 +1,34 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_hospital_nice",
+  "title": "vr_hospital_nice_value",
   "type": "object",
   "properties": {
-    "last_value": {
-      "$ref": "#/definitions/value"
+    "admissions_on_date_of_admission": {
+      "type": "integer"
+    },
+    "admissions_on_date_of_admission_moving_average": {
+      "type": ["number", "null"]
+    },
+    "admissions_on_date_of_admission_moving_average_rounded": {
+      "type": ["integer", "null"]
+    },
+    "admissions_on_date_of_reporting": {
+      "type": "integer"
+    },
+    "date_unix": {
+      "type": "integer"
+    },
+    "date_of_insertion_unix": {
+      "type": "integer"
     }
   },
-  "required": ["last_value"],
-  "additionalProperties": false,
-  "definitions": {
-    "value": {
-      "title": "vr_hospital_nice_value",
-      "type": "object",
-      "properties": {
-        "admissions_on_date_of_admission": {
-          "type": "integer"
-        },
-        "admissions_on_date_of_admission_moving_average": {
-          "type": ["number", "null"]
-        },
-        "admissions_on_date_of_admission_moving_average_rounded": {
-          "type": ["integer", "null"]
-        },
-        "admissions_on_date_of_reporting": {
-          "type": "integer"
-        },
-        "date_unix": {
-          "type": "integer"
-        },
-        "date_of_insertion_unix": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "admissions_on_date_of_admission",
-        "admissions_on_date_of_admission_moving_average",
-        "admissions_on_date_of_admission_moving_average_rounded",
-        "admissions_on_date_of_reporting",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
-      "additionalProperties": false
-    }
-  }
+  "required": [
+    "admissions_on_date_of_admission",
+    "admissions_on_date_of_admission_moving_average",
+    "admissions_on_date_of_admission_moving_average_rounded",
+    "admissions_on_date_of_reporting",
+    "date_unix",
+    "date_of_insertion_unix"
+  ],
+  "additionalProperties": false
 }
