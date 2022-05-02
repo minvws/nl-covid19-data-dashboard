@@ -81,6 +81,7 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -91,6 +92,29 @@ const AgeDemographic = dynamic<
 const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
   () => import('~/components/pie-chart').then((mod) => mod.PieChart)
 );
+
+const pageMetrics = [
+  'vaccine_administered_doctors',
+  'vaccine_administered_ggd_ghor',
+  'vaccine_administered_ggd',
+  'vaccine_administered_hospitals_and_care_institutions',
+  'vaccine_administered_planned',
+  'vaccine_administered_total',
+  'vaccine_coverage_per_age_group',
+  'vaccine_coverage',
+  'vaccine_delivery_per_supplier',
+  'vaccine_stock',
+  'vaccine_vaccinated_or_support',
+  'vaccine_coverage_per_age_group_estimated',
+  'hospital_vaccination_status',
+  'hospital_vaccine_incidence_per_age_group',
+  'intensive_care_vaccination_status',
+  'booster_shot_planned',
+  'booster_shot_administered',
+  'booster_coverage',
+  'booster_shot_per_age_group',
+  'repeating_shot_administered',
+];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -277,6 +301,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const hasActiveWarningTile =
     textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht);
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -296,9 +322,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.vaccine_administered_total.last_value
-                  .date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}

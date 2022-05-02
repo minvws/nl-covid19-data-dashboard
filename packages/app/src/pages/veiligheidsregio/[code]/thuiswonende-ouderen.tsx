@@ -37,6 +37,10 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['elderly_at_home'];
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -111,6 +115,8 @@ const ElderlyAtHomeRegionalPage = (
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -138,8 +144,7 @@ const ElderlyAtHomeRegionalPage = (
             metadata={{
               datumsText: textVr.section_positive_tested.datums,
               dateOrRange: elderly_at_home.last_value.date_unix,
-              dateOfInsertionUnix:
-                elderly_at_home.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.section_positive_tested.bronnen.rivm],
             }}
             referenceLink={textVr.section_positive_tested.reference.href}

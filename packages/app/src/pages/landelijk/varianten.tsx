@@ -29,6 +29,9 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['variants', 'named_difference'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -40,6 +43,7 @@ export const getStaticProps = createGetStaticProps(
       }),
       locale
     ),
+  selectNlData('variants', 'named_difference'),
   getLastGeneratedDate,
   () => {
     const data = selectNlData('variants', 'named_difference')();
@@ -74,6 +78,7 @@ export default function CovidVariantenPage(
   const {
     pageText,
     variantSidebarValue,
+    selectedNlData: data,
     lastGenerated,
     content,
     variantTable,
@@ -89,6 +94,8 @@ export default function CovidVariantenPage(
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -106,7 +113,7 @@ export default function CovidVariantenPage(
                 start: dates.date_start_unix,
                 end: dates.date_end_unix,
               },
-              dateOfInsertionUnix: dates.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
             referenceLink={textNl.reference.href}
