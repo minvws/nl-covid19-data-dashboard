@@ -3,17 +3,11 @@
   "title": "vr_hospital_nice",
   "type": "object",
   "properties": {
-    "values": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/value"
-      }
-    },
     "last_value": {
       "$ref": "#/definitions/value"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["last_value"],
   "additionalProperties": false,
   "definitions": {
     "value": {

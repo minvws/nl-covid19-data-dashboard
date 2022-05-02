@@ -26,7 +26,7 @@
     "code": {
       "$ref": "#/$defs/gm_collection_id"
     },
-    "hospital_nice_graph": {
+    "hospital_nice": {
       "type": "array",
       "maxItems": 355,
       "items": {

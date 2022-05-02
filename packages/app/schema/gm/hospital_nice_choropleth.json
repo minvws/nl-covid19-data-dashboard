@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "gm_hospital_nice_choropleth",
+  "type": "object",
+  "required": ["last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "last_value": {
+      "$ref": "hospital_nice.json"
+    }
+  }
+}
