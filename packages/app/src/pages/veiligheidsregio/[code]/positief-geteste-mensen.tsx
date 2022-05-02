@@ -52,6 +52,15 @@ import {
   useReverseRouter,
 } from '~/utils';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'g_number',
+  'tested_ggd',
+  'tested_ggd_archived',
+  'tested_overall',
+];
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -144,6 +153,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -161,7 +172,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.datums,
               dateOrRange: dataOverallLastValue.date_unix,
-              dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.bronnen.rivm],
             }}
             referenceLink={textVr.reference.href}

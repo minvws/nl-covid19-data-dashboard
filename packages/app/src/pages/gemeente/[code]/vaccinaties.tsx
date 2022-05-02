@@ -50,6 +50,14 @@ import {
   useFormatLokalizePercentage,
 } from '~/utils';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'code',
+  'vaccine_coverage_per_age_group',
+  'booster_coverage',
+];
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -156,6 +164,8 @@ export const VaccinationsGmPage = (
     `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
   );
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
@@ -170,8 +180,7 @@ export const VaccinationsGmPage = (
             metadata={{
               datumsText: textGm.informatie_blok.datums,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
-              dateOfInsertionUnix:
-                filteredAgeGroup18Plus.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
