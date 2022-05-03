@@ -9,3 +9,6 @@ timestamp,action,key,document_id,move_to
 2022-05-03T12:26:16.004Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated,xNELI4GNAeXqkWZzsHMnYw,__
 2022-05-03T12:26:17.032Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.booster_shot,xNELI4GNAeXqkWZzsHMprg,__
 2022-05-03T12:26:18.031Z,add,pages.vaccinationsPage.nl.vaccination_coverage.toelichting_booster_shot,hqivmGf8UPzCLjKFjHrGgv,__
+2022-05-03T15:21:44.684Z,add,pages.vaccinationsPage.gm.vaccination_coverage.description_booster_and_fully_vaccinated,hqivmGf8UPzCLjKFjIAkJp,__
+2022-05-03T15:21:46.025Z,add,pages.vaccinationsPage.vr.vaccination_coverage.description_booster_and_fully_vaccinated,hqivmGf8UPzCLjKFjIAkSr,__
+2022-05-03T15:21:47.062Z,add,pages.vaccinationsPage.vr.vaccination_coverage.title,xNELI4GNAeXqkWZzsI1aAP,__
