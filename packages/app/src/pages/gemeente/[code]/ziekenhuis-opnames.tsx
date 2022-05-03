@@ -65,8 +65,11 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmData('hospital_nice', 'code'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }, context) => ({
-      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
+    gm: ({ hospital_nice_choropleth }, context) => ({
+      hospital_nice_choropleth: filterByRegionMunicipalities(
+        hospital_nice_choropleth,
+        context
+      ),
     }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -247,9 +250,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              data={choropleth.gm.hospital_nice}
+              data={choropleth.gm.hospital_nice_choropleth}
               dataConfig={{
-                metricName: 'hospital_nice',
+                metricName: 'hospital_nice_choropleth',
                 metricProperty: 'admissions_on_date_of_admission',
               }}
               dataOptions={{

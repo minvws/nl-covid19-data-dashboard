@@ -93,8 +93,8 @@ export const getStaticProps = createGetStaticProps(
     'hospital_vaccine_incidence_per_age_group'
   ),
   createGetChoroplethData({
-    vr: ({ hospital_nice }) => ({ hospital_nice }),
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
+    gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -429,9 +429,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
                 map="gm"
-                data={choropleth.gm.hospital_nice}
+                data={choropleth.gm.hospital_nice_choropleth}
                 dataConfig={{
-                  metricName: 'hospital_nice',
+                  metricName: 'hospital_nice_choropleth',
                   metricProperty: 'admissions_on_date_of_admission',
                 }}
                 dataOptions={{
@@ -449,9 +449,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="vr"
                 thresholdMap="gm"
-                data={choropleth.vr.hospital_nice}
+                data={choropleth.vr.hospital_nice_choropleth}
                 dataConfig={{
-                  metricName: 'hospital_nice',
+                  metricName: 'hospital_nice_choropleth',
                   metricProperty: 'admissions_on_date_of_admission',
                 }}
                 dataOptions={{

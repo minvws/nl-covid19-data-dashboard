@@ -64,7 +64,7 @@
       "$ref": "hospital_nice.json"
     },
     "hospital_nice_choropleth": {
-      "$ref": "hospital_nice.json"
+      "$ref": "hospital_nice_choropleth.json"
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"

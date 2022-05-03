@@ -16,7 +16,7 @@ export interface Gm {
   difference: GmDifference;
   hospital_nice_sum: GmHospitalNiceSum;
   hospital_nice: GmHospitalNice;
-  hospital_nice_choropleth: GmHospitalNice;
+  hospital_nice_choropleth: GmHospitalNiceChoropleth;
   tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
@@ -76,6 +76,16 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
+}
+export interface GmHospitalNiceChoropleth {
+  values: GmHospitalNiceChoroplethValue[];
+  last_value: GmHospitalNiceChoroplethValue;
+}
+export interface GmHospitalNiceChoroplethValue {
+  date_unix: number;
+  admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -1119,7 +1129,7 @@ export interface Vr {
   sewer_per_installation: VrSewerPerInstallation;
   tested_overall: VrTestedOverall;
   hospital_nice: VrHospitalNice;
-  hospital_nice_choropleth: VrHospitalNice;
+  hospital_nice_choropleth: VrHospitalNiceChoropleth;
   tested_ggd: VrTestedGgd;
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
@@ -1217,6 +1227,16 @@ export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_on_date_of_reporting: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrHospitalNiceChoropleth {
+  values: VrHospitalNiceChoroplethValue[];
+  last_value: VrHospitalNiceChoroplethValue;
+}
+export interface VrHospitalNiceChoroplethValue {
+  admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
