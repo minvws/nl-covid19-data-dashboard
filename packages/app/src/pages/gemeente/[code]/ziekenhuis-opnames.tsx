@@ -5,6 +5,7 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { last } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import {
   ChartTile,
@@ -115,6 +116,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { textGm, textShared } = pageText;
 
   const lastValue = data.hospital_nice.last_value;
+  const lastValueChoropleth =
+    last(choropleth.gm.hospital_nice_choropleth) || lastValue;
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
@@ -242,7 +245,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               municipality: municipalityName,
             })}
             metadata={{
-              date: lastValue.date_unix,
+              date: lastValueChoropleth.date_unix,
               source: textGm.bronnen.rivm,
             }}
             description={textGm.map_toelichting}

@@ -63,6 +63,7 @@ import {
   useReverseRouter,
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { last } from 'lodash';
 
 const AgeDemographic = dynamic<
   AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
@@ -146,10 +147,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
-  const lastValueNice = data.hospital_nice.last_value;
   const lastValueLcps = data.hospital_lcps.last_value;
   const lastValueVaccinationStatus =
     data.hospital_vaccination_status.last_value;
+
+  const lastValueNice =
+    (selectedMap === 'gm'
+      ? last(choropleth.gm.hospital_nice_choropleth)
+      : last(choropleth.vr.hospital_nice_choropleth)) ||
+    data.hospital_nice.last_value;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
