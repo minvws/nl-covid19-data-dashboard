@@ -15,8 +15,8 @@ export interface Gm {
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
   hospital_nice_sum: GmHospitalNiceSum;
-  hospital_nice: GmHospitalNiceValue[];
-  hospital_nice_choropleth: GmHospitalNiceChoropleth;
+  hospital_nice: GmHospitalNice;
+  hospital_nice_choropleth: GmHospitalNice;
   tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
@@ -67,6 +67,10 @@ export interface GmHospitalNiceSumValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface GmHospitalNice {
+  values: GmHospitalNiceValue[];
+  last_value: GmHospitalNiceValue;
+}
 export interface GmHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
@@ -74,9 +78,6 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
-}
-export interface GmHospitalNiceChoropleth {
-  last_value: GmHospitalNiceValue;
 }
 export interface GmTestedOverallSum {
   values: GmTestedOverallSumValue[];
@@ -1117,8 +1118,8 @@ export interface Vr {
   sewer: VrSewer;
   sewer_per_installation: VrSewerPerInstallation;
   tested_overall: VrTestedOverall;
-  hospital_nice: VrHospitalNiceValue[];
-  hospital_nice_choropleth: VrHospitalNiceChoropleth;
+  hospital_nice: VrHospitalNice;
+  hospital_nice_choropleth: VrHospitalNice;
   tested_ggd: VrTestedGgd;
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
@@ -1208,6 +1209,10 @@ export interface VrTestedOverallValue {
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
+export interface VrHospitalNice {
+  values: VrHospitalNiceValue[];
+  last_value: VrHospitalNiceValue;
+}
 export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
@@ -1215,9 +1220,6 @@ export interface VrHospitalNiceValue {
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
-}
-export interface VrHospitalNiceChoropleth {
-  last_value: VrHospitalNiceValue;
 }
 export interface VrTestedGgd {
   values: VrTestedGgdValue[];

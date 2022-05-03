@@ -1,34 +1,53 @@
 {
+  "definitions": {
+    "value": {
+      "title": "gm_hospital_nice_value",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admissions_on_date_of_admission",
+        "admissions_on_date_of_admission_moving_average",
+        "admissions_on_date_of_admission_moving_average_rounded",
+        "admissions_on_date_of_reporting",
+        "date_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "date_unix": {
+          "type": "integer"
+        },
+        "admissions_on_date_of_admission": {
+          "type": "integer"
+        },
+        "admissions_on_date_of_admission_moving_average": {
+          "type": ["number", "null"]
+        },
+        "admissions_on_date_of_admission_moving_average_rounded": {
+          "type": ["integer", "null"]
+        },
+        "admissions_on_date_of_reporting": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_hospital_nice_value",
+  "title": "gm_hospital_nice",
   "type": "object",
-  "required": [
-    "admissions_on_date_of_admission",
-    "admissions_on_date_of_admission_moving_average",
-    "admissions_on_date_of_admission_moving_average_rounded",
-    "admissions_on_date_of_reporting",
-    "date_unix",
-    "date_of_insertion_unix"
-  ],
+  "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
-    "date_unix": {
-      "type": "integer"
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
     },
-    "admissions_on_date_of_admission": {
-      "type": "integer"
-    },
-    "admissions_on_date_of_admission_moving_average": {
-      "type": ["number", "null"]
-    },
-    "admissions_on_date_of_admission_moving_average_rounded": {
-      "type": ["integer", "null"]
-    },
-    "admissions_on_date_of_reporting": {
-      "type": "integer"
-    },
-    "date_of_insertion_unix": {
-      "type": "integer"
+    "last_value": {
+      "$ref": "#/definitions/value"
     }
   }
 }
