@@ -5,3 +5,4 @@ timestamp,action,key,document_id,move_to
 2022-04-25T14:25:48.351Z,add,common.g_number.bar_chart.legend.positive_label,X8Z1HTDxqJ9pM59364bIJw,__
 2022-04-25T14:25:48.352Z,move,common.g_number.bar_chart.legend_inaccurate_label,X8Z1HTDxqJ9pM59362hg1m,common.g_number.bar_chart.legend.inaccurate_label
 2022-04-26T12:03:58.578Z,move,ic_opnames_per_dag.chart_bedbezetting.description,jF33EuwumlGuwav2FD3WM8,pages.intensiveCarePage.nl.chart_bedbezetting.description
+2022-05-03T14:03:24.707Z,add,common.corona_melder_app.belangrijk_bericht,xNELI4GNAeXqkWZzsHkjJM,__
