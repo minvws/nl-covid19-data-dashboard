@@ -24,6 +24,7 @@ import {
   VaccineCoverageToggleTile,
   ChoroplethTooltip,
   VaccineCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import {
@@ -49,6 +50,7 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
+import { useFeature } from '~/lib/features';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -138,6 +140,10 @@ export const VaccinationsGmPage = (
       municipalityName: municipalityName,
     }),
   };
+
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
@@ -241,17 +247,34 @@ export const VaccinationsGmPage = (
             labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
 
-          <VaccineCoveragePerAgeGroup
-            title={textGm.vaccination_coverage.title}
-            description={textGm.vaccination_coverage.description}
-            sortingOrder={['18+', '12-17', '12+']}
-            metadata={{
-              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: textGm.vaccination_coverage.bronnen.rivm,
-            }}
-            values={data.vaccine_coverage_per_age_group.values}
-            text={textNl.vaccination_coverage}
-          />
+          {!vaccinationBoosterShotsPerAgeGroupFeature.isEnabled ? (
+            <VaccineCoveragePerAgeGroup
+              title={textGm.vaccination_coverage.title}
+              description={textGm.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textGm.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          ) : (
+            <BoosterShotCoveragePerAgeGroup
+              title={textGm.vaccination_coverage.title}
+              description={
+                textGm.vaccination_coverage
+                  .description_booster_and_fully_vaccinated
+              }
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textGm.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(
