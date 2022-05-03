@@ -14,7 +14,7 @@ import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-strin
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
-  COLOR_BOOSTERED,
+  COLOR_FULLY_BOOSTERED,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
@@ -64,7 +64,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.first_shot}
+                {text.headers.fully_vaccinated}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -77,7 +77,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{text.headers.coverage}</InlineText>
+              <InlineText variant="label1">
+                {text.headers.booster_shot}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -88,7 +90,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.difference}
+                {text.headers.difference_booster_shot_and_fully_vaccinated}
               </InlineText>
             </HeaderCell>
           </Row>
@@ -136,7 +138,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                         )
                       : `${formatPercentage(item.booster_shot_percentage)}%`
                   }
-                  color={COLOR_BOOSTERED}
+                  color={COLOR_FULLY_BOOSTERED}
                   justifyContent="flex-end"
                 />
               </Cell>
@@ -153,7 +155,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   />
                   <Bar
                     value={item.booster_shot_percentage}
-                    color={COLOR_BOOSTERED}
+                    color={COLOR_FULLY_BOOSTERED}
                     label={
                       'booster_shot_percentage_label' in item
                         ? item.booster_shot_percentage_label

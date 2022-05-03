@@ -6,7 +6,7 @@ import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-strin
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
-  COLOR_BOOSTERED,
+  COLOR_FULLY_BOOSTERED,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
@@ -72,7 +72,7 @@ export function NarrowCoverageTable({
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
               color={COLOR_FULLY_VACCINATED}
-              textLabel={text.headers.coverage}
+              textLabel={text.headers.fully_vaccinated}
             />
 
             <Bar
@@ -91,17 +91,17 @@ export function NarrowCoverageTable({
           <Box spacing={1}>
             <NarrowPercentage
               value={
-                'booster_shot_label' in item
-                  ? formatCoveragePercentage(item, 'booster_shot')
+                'booster_shot_percentage_label' in item
+                  ? formatCoveragePercentage(item, 'booster_shot_percentage')
                   : `${formatPercentage(item.booster_shot_percentage)}%`
               }
-              color={COLOR_BOOSTERED}
+              color={COLOR_FULLY_BOOSTERED}
               textLabel={text.headers.coverage}
             />
 
             <Bar
               value={item.booster_shot_percentage}
-              color={COLOR_FULLY_VACCINATED}
+              color={COLOR_FULLY_BOOSTERED}
               label={
                 'booster_shot_percentage_label' in item
                   ? item.booster_shot_percentage_label
