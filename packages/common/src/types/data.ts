@@ -168,6 +168,7 @@ export interface GmCollectionHospitalNice {
   date_unix: number;
   gmcode: string;
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_per_100000?: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }

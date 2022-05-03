@@ -414,9 +414,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'gm'
-                  ? thresholds.gm.admissions_on_date_of_admission
-                  : thresholds.gm.admissions_on_date_of_admission,
+                  ? thresholds.gm.admissions_on_date_of_admission_per_100000
+                  : thresholds.gm.admissions_on_date_of_admission_per_100000,
               title: textShared.chloropleth_legenda.titel,
+              type: 'default',
             }}
             metadata={{
               date: lastValueNice.date_unix,
@@ -432,7 +433,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 data={choropleth.gm.hospital_nice}
                 dataConfig={{
                   metricName: 'hospital_nice',
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'admissions_on_date_of_admission_per_100000',
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.ziekenhuisopnames,
@@ -452,7 +453,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 data={choropleth.vr.hospital_nice}
                 dataConfig={{
                   metricName: 'hospital_nice',
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'admissions_on_date_of_admission_per_100000',
                 }}
                 dataOptions={{
                   getLink: reverseRouter.vr.ziekenhuisopnames,
