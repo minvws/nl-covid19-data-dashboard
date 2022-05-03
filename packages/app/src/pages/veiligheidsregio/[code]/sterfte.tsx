@@ -38,6 +38,10 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['deceased_cbs', 'deceased_rivm'];
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -88,15 +92,13 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     pageText,
-    selectedVrData: {
-      deceased_cbs: dataCbs,
-      deceased_rivm: dataRivm,
-      difference,
-    },
+    selectedVrData: data,
     vrName,
     content,
     lastGenerated,
   } = props;
+
+  const { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference } = data;
 
   const { commonTexts } = useIntl();
   const { caterogyTexts, textVr, textShared } = pageText;
@@ -110,6 +112,8 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
       safetyRegion: vrName,
     }),
   };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -126,7 +130,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
-              dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.mainArticles}

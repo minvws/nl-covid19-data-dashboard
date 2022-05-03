@@ -156,6 +156,7 @@ export interface GmBoosterCoverage {
   last_value: GmBoosterCoverageValue;
 }
 export interface GmBoosterCoverageValue {
+  age_group: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
@@ -1449,6 +1450,7 @@ export interface VrBoosterCoverage {
   last_value: VrBoosterCoverageValue;
 }
 export interface VrBoosterCoverageValue {
+  age_group: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;

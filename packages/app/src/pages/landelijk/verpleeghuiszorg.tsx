@@ -45,6 +45,9 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['nursing_home'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -116,6 +119,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     description: infectedLocationsText.metadata.description,
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -133,8 +138,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
               dateOrRange: nursinghomeDataLastValue.date_unix,
-              dateOfInsertionUnix:
-                nursinghomeDataLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
             referenceLink={positiveTestedPeopleText.reference.href}

@@ -38,6 +38,13 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'deceased_cbs',
+  'deceased_rivm_per_age_group',
+  'deceased_rivm',
+];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -99,6 +106,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -112,7 +121,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
-              dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.mainArticles}

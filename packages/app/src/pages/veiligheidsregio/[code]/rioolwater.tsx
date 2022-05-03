@@ -27,6 +27,10 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['sewer', 'sewer_per_installation'];
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -76,6 +80,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -92,8 +98,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.datums,
               dateOrRange: sewerAverages.last_value.date_unix,
-              dateOfInsertionUnix:
-                sewerAverages.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.bronnen.rivm],
             }}
             referenceLink={textVr.reference.href}
