@@ -57,6 +57,7 @@ import {
   useReverseRouter,
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { last } from 'lodash';
 
 const pageMetrics = [
   'hospital_lcps',
@@ -82,8 +83,8 @@ export const getStaticProps = createGetStaticProps(
     'hospital_nice'
   ),
   createGetChoroplethData({
-    vr: ({ hospital_nice }) => ({ hospital_nice }),
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
+    gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -126,8 +127,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
-  const lastValueNice = data.hospital_nice.last_value;
   const lastValueLcps = data.hospital_lcps.last_value;
+
+  const lastValueNice =
+    (selectedMap === 'gm'
+      ? last(choropleth.gm.hospital_nice_choropleth)
+      : last(choropleth.vr.hospital_nice_choropleth)) ||
+    data.hospital_nice.last_value;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
@@ -328,9 +334,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
                 map="gm"
-                data={choropleth.gm.hospital_nice}
+                data={choropleth.gm.hospital_nice_choropleth}
                 dataConfig={{
-                  metricName: 'hospital_nice',
+                  metricName: 'hospital_nice_choropleth',
                   metricProperty: 'admissions_on_date_of_admission',
                 }}
                 dataOptions={{
@@ -348,9 +354,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="vr"
                 thresholdMap="gm"
-                data={choropleth.vr.hospital_nice}
+                data={choropleth.vr.hospital_nice_choropleth}
                 dataConfig={{
-                  metricName: 'hospital_nice',
+                  metricName: 'hospital_nice_choropleth',
                   metricProperty: 'admissions_on_date_of_admission',
                 }}
                 dataOptions={{

@@ -150,12 +150,12 @@ export const VaccinationsVrPage = (
       (item) => item.age_group_range === '12+'
     );
 
-  const boosterCoverage18PlusValue =
-    data.booster_coverage.values.find((v) => v.age_group === '18+') ||
-    data.booster_coverage.last_value;
-  const boosterCoverage12PlusValue =
-    data.booster_coverage.values.find((v) => v.age_group === '12+') ||
-    undefined;
+  const boosterCoverage18PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '18+'
+  );
+  const boosterCoverage12PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '12+'
+  );
 
   assert(
     filteredAgeGroup18Plus,

@@ -16,6 +16,7 @@ export interface Gm {
   difference: GmDifference;
   hospital_nice_sum: GmHospitalNiceSum;
   hospital_nice: GmHospitalNice;
+  hospital_nice_choropleth: GmHospitalNiceChoropleth;
   tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
@@ -75,6 +76,16 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
+}
+export interface GmHospitalNiceChoropleth {
+  values: GmHospitalNiceChoroplethValue[];
+  last_value: GmHospitalNiceChoroplethValue;
+}
+export interface GmHospitalNiceChoroplethValue {
+  date_unix: number;
+  admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -142,10 +153,9 @@ export interface GmVaccineCoveragePerAgeGroupValue {
 }
 export interface GmBoosterCoverage {
   values: GmBoosterCoverageValue[];
-  last_value: GmBoosterCoverageValue;
 }
 export interface GmBoosterCoverageValue {
-  age_group: "12+" | "18+";
+  age_group?: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
@@ -160,6 +170,7 @@ export interface GmCollection {
   name: GmCollectionId;
   code: GmCollectionId;
   hospital_nice: GmCollectionHospitalNice[];
+  hospital_nice_choropleth: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
   vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
@@ -451,8 +462,7 @@ export interface NlGNumber {
 }
 export interface NlGNumberValue {
   g_number: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlInfectiousPeople {
@@ -1118,6 +1128,7 @@ export interface Vr {
   sewer_per_installation: VrSewerPerInstallation;
   tested_overall: VrTestedOverall;
   hospital_nice: VrHospitalNice;
+  hospital_nice_choropleth: VrHospitalNiceChoropleth;
   tested_ggd: VrTestedGgd;
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
@@ -1168,8 +1179,7 @@ export interface VrGNumber {
 }
 export interface VrGNumberValue {
   g_number: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrSewer {
@@ -1215,6 +1225,16 @@ export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_on_date_of_reporting: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrHospitalNiceChoropleth {
+  values: VrHospitalNiceChoroplethValue[];
+  last_value: VrHospitalNiceChoroplethValue;
+}
+export interface VrHospitalNiceChoroplethValue {
+  admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1424,10 +1444,9 @@ export interface VrVaccineCoveragePerAgeGroupValue {
 }
 export interface VrBoosterCoverage {
   values: VrBoosterCoverageValue[];
-  last_value: VrBoosterCoverageValue;
 }
 export interface VrBoosterCoverageValue {
-  age_group: "12+" | "18+";
+  age_group?: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
@@ -1442,6 +1461,7 @@ export interface VrCollection {
   name: VrCollectionId;
   code: VrCollectionId;
   hospital_nice: VrCollectionHospitalNice[];
+  hospital_nice_choropleth: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];

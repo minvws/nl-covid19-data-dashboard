@@ -6,12 +6,6 @@ export const dataStructure = {
   gm: {
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
     hospital_nice_sum: ["admissions_per_1m"],
-    hospital_nice: [
-      "admissions_on_date_of_admission",
-      "admissions_on_date_of_admission_moving_average",
-      "admissions_on_date_of_admission_moving_average_rounded",
-      "admissions_on_date_of_reporting",
-    ],
     tested_overall_sum: ["infected_per_100k"],
     tested_overall: [
       "infected",
@@ -38,6 +32,10 @@ export const dataStructure = {
   },
   gm_collection: {
     hospital_nice: [
+      "admissions_on_date_of_admission",
+      "admissions_on_date_of_reporting",
+    ],
+    hospital_nice_choropleth: [
       "admissions_on_date_of_admission",
       "admissions_on_date_of_reporting",
     ],
@@ -377,12 +375,6 @@ export const dataStructure = {
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
-    hospital_nice: [
-      "admissions_on_date_of_admission",
-      "admissions_on_date_of_admission_moving_average",
-      "admissions_on_date_of_admission_moving_average_rounded",
-      "admissions_on_date_of_reporting",
-    ],
     tested_ggd: [
       "infected",
       "infected_moving_average",
@@ -494,6 +486,10 @@ export const dataStructure = {
   },
   vr_collection: {
     hospital_nice: [
+      "admissions_on_date_of_admission",
+      "admissions_on_date_of_reporting",
+    ],
+    hospital_nice_choropleth: [
       "admissions_on_date_of_admission",
       "admissions_on_date_of_reporting",
     ],

@@ -16,7 +16,10 @@ export function getBoundaryDateStartUnix(
     return Infinity;
   }
 
-  const boundaryValue = values[values.length - numberOfItems];
+  const boundaryValue =
+    numberOfItems > 0
+      ? values[values.length - numberOfItems]
+      : values[values.length - 1];
 
   return (
     (isDateValue(boundaryValue)

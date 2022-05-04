@@ -5,15 +5,14 @@
   "properties": {
     "values": {
       "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
       "items": {
         "$ref": "#/definitions/value"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["values"],
   "additionalProperties": false,
   "definitions": {
     "value": {
@@ -39,7 +38,6 @@
         }
       },
       "required": [
-        "age_group",
         "percentage",
         "percentage_label",
         "date_unix",
