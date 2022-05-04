@@ -204,9 +204,11 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
+  booster_shot_percentage?: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  booster_shot_percentage_label?: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1054,10 +1056,10 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_total: number;
   fully_vaccinated: number;
   has_one_shot: number;
-  booster_shot: number;
+  booster_shot: number | null;
   fully_vaccinated_percentage: number;
   has_one_shot_percentage: number;
-  booster_shot_percentage: number;
+  booster_shot_percentage: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -1591,6 +1593,7 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  booster_shot_percentage_label?: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }

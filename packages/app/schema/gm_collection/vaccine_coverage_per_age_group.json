@@ -29,6 +29,9 @@
     "has_one_shot_percentage": {
       "type": ["integer", "null"]
     },
+    "booster_shot_percentage": {
+      "type": ["integer", "null"]
+    },
     "birthyear_range": {
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
@@ -38,6 +41,10 @@
       "pattern": "^([><][=][0-9]{1,2})$"
     },
     "has_one_shot_percentage_label": {
+      "type": ["string", "null"],
+      "pattern": "^([><][=][0-9]{1,2})$"
+    },
+    "booster_shot_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },

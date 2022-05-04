@@ -60,7 +60,7 @@
           "type": "integer"
         },
         "booster_shot": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "fully_vaccinated_percentage": {
           "type": "number"
@@ -69,7 +69,7 @@
           "type": "number"
         },
         "booster_shot_percentage": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"
