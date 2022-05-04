@@ -12,6 +12,7 @@
     "nursing_home",
     "behavior",
     "hospital_nice",
+    "hospital_nice_choropleth",
     "elderly_at_home",
     "disability_care",
     "sewer",
@@ -32,6 +33,14 @@
       "$ref": "#/$defs/vr_collection_id"
     },
     "hospital_nice": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "hospital_nice.json"
+      }
+    },
+    "hospital_nice_choropleth": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
