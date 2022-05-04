@@ -21,8 +21,10 @@ import { SiteText } from '~/locale';
 export function NarrowCoverageTable({
   values,
   text,
+  textShared,
 }: {
   text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
+  textShared: SiteText['pages']['vaccinationsPage']['shared'];
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
@@ -93,6 +95,8 @@ export function NarrowCoverageTable({
               value={
                 'booster_shot_percentage_label' in item
                   ? formatCoveragePercentage(item, 'booster_shot_percentage')
+                  : item.booster_shot_percentage === null
+                  ? textShared.vaccine_coverage_per_age_group
                   : `${formatPercentage(item.booster_shot_percentage)}%`
               }
               color={COLOR_FULLY_BOOSTERED}
