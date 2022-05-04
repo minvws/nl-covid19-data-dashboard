@@ -1590,10 +1590,11 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
+  booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
-  booster_shot_percentage_label?: string | null;
+  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
