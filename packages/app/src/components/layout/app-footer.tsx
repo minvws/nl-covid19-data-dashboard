@@ -16,8 +16,6 @@ import { Anchor, Heading } from '../typography';
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
   const { commonTexts: text } = useIntl();
-  const internationalFeature = useFeature('inHomePage');
-  const riskLevelFeature = useFeature('riskLevel');
 
   return (
     <footer>
@@ -53,10 +51,6 @@ export function AppFooter() {
                 <Item href={reverseRouter.gm.index()}>
                   {text.nav.links.gemeente}
                 </Item>
-                {internationalFeature.isEnabled ? (
-                  <Item href={reverseRouter.in.index()}>
-                    {text.nav.links.internationaal}
-                  </Item>
                 ) : null}
               </Box>
             </nav>
@@ -82,11 +76,6 @@ export function AppFooter() {
                 <Item href={reverseRouter.algemeen.verantwoording()}>
                   {text.nav.links.verantwoording}
                 </Item>
-                {riskLevelFeature.isEnabled && (
-                  <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
-                    {text.nav.links.over_risiconiveaus}
-                  </Item>
-                )}
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
                 </Item>

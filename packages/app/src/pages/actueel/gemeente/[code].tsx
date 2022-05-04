@@ -182,8 +182,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     true
   );
 
-  const internationalFeature = useFeature('inPositiveTestsPage');
-
   const dataSitemap = useDataSitemap('gm', gmCode, data);
 
   const metadata = {
@@ -512,12 +510,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       { municipalityName: municipalityName }
                     ),
                   },
-                  internationalFeature.isEnabled
-                    ? {
-                        href: reverseRouter.in.index(),
-                        text: textGm.quick_links.links.internationaal,
-                      }
-                    : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   textGm.data_sitemap_title,

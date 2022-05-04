@@ -187,8 +187,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     true
   );
 
-  const internationalFeature = useFeature('inPositiveTestsPage');
-
   const metadata = {
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
@@ -512,12 +510,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: textVr.quick_links.links.gemeente,
                   },
-                  internationalFeature.isEnabled
-                    ? {
-                        href: reverseRouter.in.index(),
-                        text: textVr.quick_links.links.internationaal,
-                      }
-                    : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   textVr.data_sitemap_title,

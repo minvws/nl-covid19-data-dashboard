@@ -22,8 +22,6 @@ export function TopNavigation() {
   const { commonTexts } = useIntl();
   const collapsible = useCollapsible({ isOpen: isWideNav });
 
-  const internationalFeature = useFeature('inHomePage');
-
   return (
     <>
       <div
@@ -78,15 +76,6 @@ export function TopNavigation() {
               <NavItem href={reverseRouter.gm.index()}>
                 {commonTexts.nav.links.gemeente}
               </NavItem>
-
-              {internationalFeature.isEnabled ? (
-                <NavItem
-                  href={reverseRouter.in.index()}
-                  isActive={router.pathname.startsWith('/internationaal')}
-                >
-                  {commonTexts.nav.links.internationaal}
-                </NavItem>
-              ) : null}
 
               <NavItem href={reverseRouter.algemeen.over()}>
                 {commonTexts.nav.links.over}

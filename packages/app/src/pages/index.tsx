@@ -23,7 +23,6 @@ import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
-import { EscalationLevelBanner } from '~/domain/escalation-level';
 import { Layout } from '~/domain/layout';
 import {
   ArticleList,
@@ -110,7 +109,6 @@ export const getStaticProps = createGetStaticProps(
       'difference',
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
-      'risk_level',
       'booster_coverage',
       'sewer'
     )();
@@ -190,9 +188,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { hospitalText, intensiveCareText, textNl, textShared } = pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
-
-  const internationalFeature = useFeature('inPositiveTestsPage');
-  const riskLevelFeature = useFeature('riskLevel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -610,13 +605,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={textShared.secties.search.title.nl} />
             </Box>
 
-            {riskLevelFeature.isEnabled && (
-              <EscalationLevelBanner
-                data={data.risk_level.last_value}
-                hasLink
-              />
-            )}
-
             <CollapsibleButton
               label={textShared.overview_links_header}
               icon={<Chart />}
@@ -636,12 +624,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: textNl.quick_links.links.gemeente,
                   },
-                  internationalFeature.isEnabled
-                    ? {
-                        href: reverseRouter.in.index(),
-                        text: textNl.quick_links.links.internationaal,
-                      }
-                    : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={textNl.data_sitemap_titel}
                 dataSitemap={dataSitemap}
