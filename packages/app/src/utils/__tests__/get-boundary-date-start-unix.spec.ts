@@ -1,3 +1,4 @@
+import { DAY_IN_SECONDS } from '@corona-dashboard/common';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { getBoundaryDateStartUnix } from '../get-boundary-date-start-unix';
