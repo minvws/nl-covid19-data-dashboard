@@ -19,7 +19,6 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
-import { useFeature } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,

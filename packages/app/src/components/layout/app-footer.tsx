@@ -7,7 +7,6 @@ import { ExternalLink } from '~/components/external-link';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -51,7 +50,6 @@ export function AppFooter() {
                 <Item href={reverseRouter.gm.index()}>
                   {text.nav.links.gemeente}
                 </Item>
-                ) : null}
               </Box>
             </nav>
           </Box>
