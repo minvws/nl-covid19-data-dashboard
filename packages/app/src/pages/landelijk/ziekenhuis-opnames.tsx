@@ -151,11 +151,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const lastValueVaccinationStatus =
     data.hospital_vaccination_status.last_value;
 
-  const lastValueNice =
+  const lastValueNice = data.hospital_nice.last_value;
+
+  const lastValueNiceChoropleth =
     (selectedMap === 'gm'
       ? last(choropleth.gm.hospital_nice_choropleth)
-      : last(choropleth.vr.hospital_nice_choropleth)) ||
-    data.hospital_nice.last_value;
+      : last(choropleth.vr.hospital_nice_choropleth)) || lastValueNice;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
@@ -436,7 +437,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title: textShared.chloropleth_legenda.titel,
             }}
             metadata={{
-              date: lastValueNice.date_unix,
+              date: lastValueNiceChoropleth.date_unix,
               source: textNl.bronnen.nice,
             }}
           >
