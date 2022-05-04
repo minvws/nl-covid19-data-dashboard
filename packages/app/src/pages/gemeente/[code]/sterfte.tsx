@@ -37,6 +37,10 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['deceased_rivm', 'code'];
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -97,6 +101,8 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
@@ -112,8 +118,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textGm.section_deceased_rivm.datums,
               dateOrRange: data.deceased_rivm.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.deceased_rivm.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.articles}

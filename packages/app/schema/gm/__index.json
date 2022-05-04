@@ -12,6 +12,7 @@
     "tested_overall",
     "hospital_nice_sum",
     "hospital_nice",
+    "hospital_nice_choropleth",
     "deceased_rivm",
     "difference",
     "static_values",
@@ -46,6 +47,9 @@
     },
     "hospital_nice": {
       "$ref": "hospital_nice.json"
+    },
+    "hospital_nice_choropleth": {
+      "$ref": "hospital_nice_choropleth.json"
     },
     "tested_overall_sum": {
       "$ref": "tested_overall_sum.json"

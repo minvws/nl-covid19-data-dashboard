@@ -5,6 +5,7 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { last } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import {
   ChartTile,
@@ -51,6 +52,10 @@ import {
   useReverseRouter,
 } from '~/utils';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['hospital_nice', 'code'];
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -65,8 +70,11 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmData('hospital_nice', 'code'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }, context) => ({
-      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
+    gm: ({ hospital_nice_choropleth }, context) => ({
+      hospital_nice_choropleth: filterByRegionMunicipalities(
+        hospital_nice_choropleth,
+        context
+      ),
     }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -108,6 +116,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { textGm, textShared } = pageText;
 
   const lastValue = data.hospital_nice.last_value;
+  const lastValueChoropleth =
+    last(choropleth.gm.hospital_nice_choropleth) || lastValue;
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
@@ -132,6 +142,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
@@ -146,7 +158,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
             referenceLink={textGm.reference.href}
@@ -233,7 +245,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               municipality: municipalityName,
             })}
             metadata={{
-              date: lastValue.date_unix,
+              date: lastValueChoropleth.date_unix,
               source: textGm.bronnen.rivm,
             }}
             description={textGm.map_toelichting}
@@ -247,9 +259,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              data={choropleth.gm.hospital_nice}
+              data={choropleth.gm.hospital_nice_choropleth}
               dataConfig={{
-                metricName: 'hospital_nice',
+                metricName: 'hospital_nice_choropleth',
                 metricProperty: 'admissions_on_date_of_admission',
               }}
               dataOptions={{

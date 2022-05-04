@@ -41,6 +41,10 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export { getStaticPaths } from '~/static-paths/vr';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['disability_care'];
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
@@ -108,6 +112,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
     ),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -135,7 +141,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.positief_geteste_personen.bronnen.rivm],
             }}
             referenceLink={textVr.positief_geteste_personen.reference.href}

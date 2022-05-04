@@ -51,6 +51,10 @@ import {
   useFormatLokalizePercentage,
 } from '~/utils';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['vaccine_coverage_per_age_group', 'booster_coverage'];
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -146,12 +150,12 @@ export const VaccinationsVrPage = (
       (item) => item.age_group_range === '12+'
     );
 
-  const boosterCoverage18PlusValue =
-    data.booster_coverage.values.find((v) => v.age_group === '18+') ||
-    data.booster_coverage.last_value;
-  const boosterCoverage12PlusValue =
-    data.booster_coverage.values.find((v) => v.age_group === '12+') ||
-    undefined;
+  const boosterCoverage18PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '18+'
+  );
+  const boosterCoverage12PlusValue = data.booster_coverage.values.find(
+    (v) => v.age_group === '12+'
+  );
 
   assert(
     filteredAgeGroup18Plus,
@@ -162,6 +166,8 @@ export const VaccinationsVrPage = (
     filteredAgeGroup12Plus,
     `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
   );
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -177,8 +183,7 @@ export const VaccinationsVrPage = (
             metadata={{
               datumsText: textVr.informatie_blok.datums,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
-              dateOfInsertionUnix:
-                filteredAgeGroup18Plus.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
