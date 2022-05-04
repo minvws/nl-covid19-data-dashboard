@@ -50,23 +50,7 @@ export function GNumberBarChartTile({
             key: 'g_number',
             features: ['keyboard_bar_chart'],
           }}
-          values={
-            /**
-             * @TODO the two `g_number`-schema's needs to be updated from
-             * date-span-value to date-value:
-             *
-             *     - "date_start_unix": { "type": "integer" },
-             *     - "date_end_unix": { "type": "integer" },
-             *     + "date_unix": { "type": "integer" },
-             *
-             * After this schema change we can also get rid of the following map:
-             */
-            values.map((x) => ({
-              date_of_insertion_unix: x.date_of_insertion_unix,
-              g_number: x.g_number,
-              date_unix: x.date_end_unix,
-            }))
-          }
+          values={values}
           timeframe={timeframe}
           dataOptions={{
             isPercentage: true,

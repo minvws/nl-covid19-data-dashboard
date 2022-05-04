@@ -462,8 +462,7 @@ export interface NlGNumber {
 }
 export interface NlGNumberValue {
   g_number: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlInfectiousPeople {
@@ -1180,8 +1179,7 @@ export interface VrGNumber {
 }
 export interface VrGNumberValue {
   g_number: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrSewer {
