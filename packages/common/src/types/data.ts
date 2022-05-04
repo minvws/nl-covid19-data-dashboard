@@ -142,10 +142,9 @@ export interface GmVaccineCoveragePerAgeGroupValue {
 }
 export interface GmBoosterCoverage {
   values: GmBoosterCoverageValue[];
-  last_value: GmBoosterCoverageValue;
 }
 export interface GmBoosterCoverageValue {
-  age_group: "12+" | "18+";
+  age_group?: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
@@ -1424,10 +1423,9 @@ export interface VrVaccineCoveragePerAgeGroupValue {
 }
 export interface VrBoosterCoverage {
   values: VrBoosterCoverageValue[];
-  last_value: VrBoosterCoverageValue;
 }
 export interface VrBoosterCoverageValue {
-  age_group: "12+" | "18+";
+  age_group?: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
