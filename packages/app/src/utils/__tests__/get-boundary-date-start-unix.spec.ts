@@ -61,4 +61,23 @@ GetBoundaryDateStartUnix(
   }
 );
 
+GetBoundaryDateStartUnix(
+  'should return the last date_unix when numberOfItems is zero',
+  () => {
+    const values = [
+      { date_unix: Date.now() / 1000 },
+      { date_unix: Date.now() / 1000 },
+      { date_unix: Date.now() / 1000 },
+      { date_unix: Date.now() / 1000 },
+      { date_unix: Date.now() / 1000 },
+    ];
+
+    const numberOfItems = 0;
+
+    const result = getBoundaryDateStartUnix(values, numberOfItems);
+
+    assert.is(result, values[values.length - 1].date_unix - DAY_IN_SECONDS / 2);
+  }
+);
+
 GetBoundaryDateStartUnix.run();

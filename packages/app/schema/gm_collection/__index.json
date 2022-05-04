@@ -9,6 +9,7 @@
     "name",
     "code",
     "hospital_nice",
+    "hospital_nice_choropleth",
     "tested_overall",
     "sewer",
     "vaccine_coverage_per_age_group"
@@ -27,6 +28,13 @@
       "$ref": "#/$defs/gm_collection_id"
     },
     "hospital_nice": {
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "hospital_nice.json"
+      }
+    },
+    "hospital_nice_choropleth": {
       "type": "array",
       "maxItems": 355,
       "items": {
