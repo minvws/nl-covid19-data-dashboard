@@ -235,7 +235,7 @@ export default function BehaviorPage(
             {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
-            useDatesAsRange={true}
+            useDatesAsRange
             text={text}
           />
 
