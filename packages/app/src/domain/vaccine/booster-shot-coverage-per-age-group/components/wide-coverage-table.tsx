@@ -22,18 +22,13 @@ import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
 interface WideCoverageTable {
   text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
-  textShared: SiteText['pages']['vaccinationsPage']['shared'];
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
 }
 
-export function WideCoverageTable({
-  values,
-  text,
-  textShared,
-}: WideCoverageTable) {
+export function WideCoverageTable({ values, text }: WideCoverageTable) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
 
@@ -142,7 +137,7 @@ export function WideCoverageTable({
                           'booster_shot_percentage'
                         )
                       : item.booster_shot_percentage === null
-                      ? textShared.vaccine_coverage_per_age_group
+                      ? text.no_data
                       : `${formatPercentage(item.booster_shot_percentage)}%`
                   }
                   color={COLOR_FULLY_BOOSTERED}

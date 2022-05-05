@@ -13,3 +13,5 @@ timestamp,action,key,document_id,move_to
 2022-05-03T15:21:46.025Z,add,pages.vaccinationsPage.vr.vaccination_coverage.description_booster_and_fully_vaccinated,hqivmGf8UPzCLjKFjIAkSr,__
 2022-05-03T15:21:47.062Z,add,pages.vaccinationsPage.vr.vaccination_coverage.title,xNELI4GNAeXqkWZzsI1aAP,__
 2022-05-04T12:40:09.691Z,add,pages.vaccinationsPage.shared.vaccine_coverage_per_age_group,hqivmGf8UPzCLjKFjK6SXZ,__
+2022-05-05T11:48:10.313Z,add,pages.vaccinationsPage.nl.vaccination_coverage.no_data,hqivmGf8UPzCLjKFjLpCSD,__
+2022-05-05T11:48:10.323Z,delete,pages.vaccinationsPage.shared.vaccine_coverage_per_age_group,hqivmGf8UPzCLjKFjK6SXZ,__
