@@ -60,6 +60,7 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { last } from 'lodash';
 
 const pageMetrics = [
+  'difference.hospital_lcps__beds_occupied_covid.new_date_unix',
   'hospital_lcps',
   'hospital_nice_per_age_group',
   'hospital_nice',
@@ -129,11 +130,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const dataHospitalLcps = data.hospital_lcps;
   const lastValueLcps = data.hospital_lcps.last_value;
 
-  const lastValueNice =
+  const lastValueNice = data.hospital_nice.last_value;
+  const lastValueNiceChoropleth =
     (selectedMap === 'gm'
       ? last(choropleth.gm.hospital_nice_choropleth)
-      : last(choropleth.vr.hospital_nice_choropleth)) ||
-    data.hospital_nice.last_value;
+      : last(choropleth.vr.hospital_nice_choropleth)) || lastValueNice;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
@@ -324,7 +325,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title: textShared.chloropleth_legenda.titel,
             }}
             metadata={{
-              date: lastValueNice.date_unix,
+              date: lastValueNiceChoropleth.date_unix,
               source: textNl.bronnen.nice,
             }}
           >
