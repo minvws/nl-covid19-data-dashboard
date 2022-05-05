@@ -57,7 +57,7 @@
     },
     "vaccine_coverage_per_age_group": {
       "type": "array",
-      "maxItems": 1065,
+      "maxItems": 710,
       "items": {
         "$ref": "vaccine_coverage_per_age_group.json"
       }
