@@ -76,6 +76,7 @@ const PieChart = dynamic<PieChartProps<NlHospitalVaccinationStatusValue>>(() =>
 );
 
 const pageMetrics = [
+  'difference.hospital_lcps__beds_occupied_covid.new_date_unix',
   'hospital_lcps',
   'hospital_nice_per_age_group',
   'hospital_nice',
@@ -152,7 +153,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     data.hospital_vaccination_status.last_value;
 
   const lastValueNice = data.hospital_nice.last_value;
-
   const lastValueNiceChoropleth =
     (selectedMap === 'gm'
       ? last(choropleth.gm.hospital_nice_choropleth)
