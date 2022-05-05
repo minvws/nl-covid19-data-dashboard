@@ -26,9 +26,11 @@ import {
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
+  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
+import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -181,6 +183,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
+
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
 
   const metadata = {
     ...metadataTexts,
