@@ -7,7 +7,6 @@ import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useSidebar } from './logic/use-sidebar';
-import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 interface NlLayoutProps {
   children?: React.ReactNode;
@@ -144,10 +143,7 @@ export function NlLayout(props: NlLayoutProps) {
           </Box>
         }
       >
-        <ErrorBoundary>
-          {children}
-          <LoadingWrapper previousUrl="landelijk" />
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );
