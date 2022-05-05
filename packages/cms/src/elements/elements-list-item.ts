@@ -6,13 +6,16 @@ import { map } from 'rxjs/operators';
 
 export function elementsListItem() {
   return S.listItem()
+    .id('datagerelateerde-content')
     .title('Datagerelateerde content')
     .icon(FaChartLine)
-    .child(
+    .child((id) =>
       S.list()
+        .id('datagerelateerde-content-list')
         .title('Datagerelateerde content')
         .items([
           S.listItem()
+            .id(id)
             .title('Elements')
             .icon(FaChartLine)
             .child(() => {
@@ -25,17 +28,21 @@ export function elementsListItem() {
                 )
                 .pipe(
                   map((doc: { scope: string }[]) => {
-                    const scopes = uniq(doc.map((x) => x.scope));
+                    const scopes = uniq(doc.map((x) => x.scope)).filter(
+                      (s) => s !== undefined
+                    );
+                    console.log(scopes);
 
                     return S.list()
+                      .id('datagerelateerde-content-list-items')
                       .title('Scope')
                       .items(
                         scopes
                           .sort((a, b) => a.localeCompare(b))
-                          .map((scope) =>
+                          .map((scope, index) =>
                             S.listItem()
                               .title(scope)
-                              .id(scope)
+                              .id(`${scope}-${index}`)
                               .child(
                                 S.documentList()
                                   .id(`${scope}-element`)
@@ -64,6 +71,7 @@ export function elementsListItem() {
                 );
             }),
           S.listItem()
+            .id('timeline-event-collections')
             .title('Timeline Event Collections')
             .icon(FaTags)
             .child(() =>
