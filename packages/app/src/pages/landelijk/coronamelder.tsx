@@ -1,7 +1,9 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { External, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
+import { isEmpty } from 'lodash';
 import styled from 'styled-components';
+import { WarningTile } from '~/components';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -65,7 +67,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={corona_melder_app.header.category}
+            category={commonTexts.nationaal_layout.headings.archief}
             title={corona_melder_app.header.title}
             icon={<Phone />}
             description={corona_melder_app.header.description}
@@ -77,6 +79,14 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={corona_melder_app.header.reference.href}
           />
+
+          {corona_melder_app.belangrijk_bericht && !isEmpty(corona_melder_app.belangrijk_bericht) && (
+            <WarningTile
+              isFullWidth
+              message={corona_melder_app.belangrijk_bericht}
+              variant="emphasis"
+            />
+          )}
 
           <TwoKpiSection>
             <KpiTile

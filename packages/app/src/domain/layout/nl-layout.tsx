@@ -59,7 +59,6 @@ export function NlLayout(props: NlLayoutProps) {
         ['nursing_home_care', 'disabled_care', 'elderly_at_home'],
       ],
       ['early_indicators', ['sewage_measurement']],
-      ['other', ['coronamelder_app']],
     ],
   });
 
@@ -68,7 +67,7 @@ export function NlLayout(props: NlLayoutProps) {
     map: [
       [
         'archived_metrics',
-        ['infectious_people', 'general_practitioner_suspicions'],
+        ['coronamelder_app', 'infectious_people', 'general_practitioner_suspicions'],
       ],
     ],
   });
