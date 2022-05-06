@@ -8,9 +8,11 @@
     "age_group_range",
     "fully_vaccinated_percentage",
     "has_one_shot_percentage",
+    "booster_shot_percentage",
     "birthyear_range",
     "fully_vaccinated_percentage_label",
     "has_one_shot_percentage_label",
+    "booster_shot_percentage_label",
     "date_of_insertion_unix",
     "date_unix"
   ],
@@ -29,6 +31,9 @@
     "has_one_shot_percentage": {
       "type": ["integer", "null"]
     },
+    "booster_shot_percentage": {
+      "type": ["integer", "null"]
+    },
     "birthyear_range": {
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
@@ -38,6 +43,10 @@
       "pattern": "^([><][=][0-9]{1,2})$"
     },
     "has_one_shot_percentage_label": {
+      "type": ["string", "null"],
+      "pattern": "^([><][=][0-9]{1,2})$"
+    },
+    "booster_shot_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },

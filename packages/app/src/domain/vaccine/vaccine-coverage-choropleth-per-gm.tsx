@@ -247,7 +247,8 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
     VaccineCoverageData,
     number
   >;
-  const filterBelow = data.dataItem[dataItemKey] || null;
+  const filterBelow =
+    (dataItemKey === undefined ? null : data.dataItem[dataItemKey]) || null;
 
   const mainContent = (
     text as unknown as Record<string, Record<string, Record<string, string>>>

@@ -23,6 +23,7 @@ import {
   selectVaccineCoverageData,
   ChoroplethTooltip,
   VaccineCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
   VaccineCoverageToggleTile,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
@@ -50,6 +51,7 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
+import { useFeature } from '~/lib/features';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -133,6 +135,10 @@ export const VaccinationsVrPage = (
       safetyRegionName: vrName,
     }),
   };
+
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
 
   const gmCodes = gmCodesByVrCode[router.query.code as string];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
@@ -238,21 +244,38 @@ export const VaccinationsVrPage = (
             }
             labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
-
-          <VaccineCoveragePerAgeGroup
-            title={commonTexts.choropleth.vaccination_coverage.vr.title}
-            description={
-              commonTexts.choropleth.vaccination_coverage.vr.description
-            }
-            sortingOrder={['18+', '12-17', '12+']}
-            metadata={{
-              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source:
-                commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
-            }}
-            values={data.vaccine_coverage_per_age_group.values}
-            text={textNl.vaccination_coverage}
-          />
+          {!vaccinationBoosterShotsPerAgeGroupFeature.isEnabled ? (
+            <VaccineCoveragePerAgeGroup
+              title={commonTexts.choropleth.vaccination_coverage.vr.title}
+              description={
+                commonTexts.choropleth.vaccination_coverage.vr.description
+              }
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source:
+                  commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          ) : (
+            <BoosterShotCoveragePerAgeGroup
+              title={textVr.vaccination_coverage.title}
+              description={
+                textVr.vaccination_coverage
+                  .description_booster_and_fully_vaccinated
+              }
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source:
+                  commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(
