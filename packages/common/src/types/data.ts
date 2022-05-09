@@ -161,19 +161,12 @@ export interface GmCollection {
   name: GmCollectionId;
   code: GmCollectionId;
   hospital_nice: GmCollectionHospitalNice[];
-  hospital_nice_choropleth: GmCollectionHospitalNiceChoropleth[];
+  hospital_nice_choropleth: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
   vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface GmCollectionHospitalNice {
-  date_unix: number;
-  gmcode: string;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-}
-export interface GmCollectionHospitalNiceChoropleth {
   date_unix: number;
   gmcode: string;
   admissions_on_date_of_admission: number;
@@ -286,6 +279,7 @@ export interface Nl {
   name: NlId;
   code: NlId;
   difference: NlDifference;
+  risk_level: NlRiskLevel;
   named_difference: NlNamedDifference;
   booster_shot_administered: NlBoosterShotAdministered;
   repeating_shot_administered: NlRepeatingShotAdministered;
@@ -367,6 +361,22 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface NlRiskLevel {
+  values: NlRiskLevelValue[];
+  last_value: NlRiskLevelValue;
+}
+export interface NlRiskLevelValue {
+  risk_level: 1 | 2 | 3;
+  hospital_admissions_on_date_of_admission_moving_average_rounded: number;
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
+  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
+  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
+  date_unix: number;
+  valid_from_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlNamedDifference {
   variants__percentage: NamedDifferenceDecimal[];
@@ -1363,7 +1373,7 @@ export interface VrCollection {
   name: VrCollectionId;
   code: VrCollectionId;
   hospital_nice: VrCollectionHospitalNice[];
-  hospital_nice_choropleth: VrCollectionHospitalNiceChoropleth[];
+  hospital_nice_choropleth: VrCollectionHospitalNice[];
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];
@@ -1376,13 +1386,6 @@ export interface VrCollection {
 export interface VrCollectionHospitalNice {
   date_unix: number;
   vrcode: string;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-}
-export interface VrCollectionHospitalNiceChoropleth {
-  date_unix: number;
-  gmcode: string;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
