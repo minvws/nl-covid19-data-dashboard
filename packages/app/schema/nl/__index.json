@@ -15,6 +15,7 @@
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
+    "risk_level",
     "named_difference",
     "disability_care",
     "doctor",
@@ -67,6 +68,9 @@
     },
     "difference": {
       "$ref": "__difference.json"
+    },
+    "risk_level": {
+      "$ref": "risk_level.json"
     },
     "named_difference": {
       "$ref": "__named_difference.json"
