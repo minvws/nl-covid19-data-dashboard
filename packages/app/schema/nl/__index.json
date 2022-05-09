@@ -27,7 +27,6 @@
     "intensive_care_lcps",
     "intensive_care_nice",
     "intensive_care_nice_per_age_group",
-    "intensive_care_vaccination_status",
     "last_generated",
     "name",
     "nursing_home",
@@ -119,9 +118,6 @@
     },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
-    },
-    "intensive_care_vaccination_status": {
-      "$ref": "intensive_care_vaccination_status.json"
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
