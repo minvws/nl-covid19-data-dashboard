@@ -29,8 +29,6 @@ export function elementsListItem() {
                 .pipe(
                   map((doc: { scope: string }[]) => {
                     const scopes = uniq(doc.map((x) => x.scope));
-                    console.log(scopes);
-
                     return S.list()
                       .id('datagerelateerde-content-list-items')
                       .title('Scope')
