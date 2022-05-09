@@ -32,11 +32,15 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['reproduction'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.reproductionPage.nl,
       }),
       locale
@@ -72,23 +76,25 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
 
-  const { siteText } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts } = useIntl();
+  const { metadataTexts, textNl } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
-              siteText.sidebar.metrics.reproduction_number.title
+              commonTexts.sidebar.metrics.reproduction_number.title
             }
             title={textNl.titel}
             icon={<Reproductiegetal />}
@@ -96,7 +102,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: lastFilledValue.date_unix,
-              dateOfInsertionUnix: lastFilledValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
             referenceLink={textNl.reference.href}

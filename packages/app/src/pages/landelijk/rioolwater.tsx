@@ -34,11 +34,20 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['sewer'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        caterogyTexts: {
+          category: siteText.common.nationaal_layout.headings.vroege_signalen,
+          screenReaderCategory:
+            siteText.common.sidebar.metrics.sewage_measurement.title,
+        },
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.sewerPage.nl,
         textShared: siteText.pages.sewerPage.shared,
       }),
@@ -64,7 +73,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const {
     pageText,
@@ -74,33 +83,32 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { textNl, textShared } = pageText;
+  const { caterogyTexts, metadataTexts, textNl, textShared } = pageText;
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.vroege_signalen}
-            screenReaderCategory={
-              siteText.sidebar.metrics.sewage_measurement.title
-            }
+            category={caterogyTexts.category}
+            screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.titel}
             icon={<RioolwaterMonitoring />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: sewerAverages.last_value.date_unix,
-              dateOfInsertionUnix:
-                sewerAverages.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
             referenceLink={textNl.reference.href}
@@ -123,7 +131,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="average"
                 absolute={sewerAverages.last_value.average}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
                 isAmount
               />
@@ -144,8 +152,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: textNl.linechart_description,
               selectPlaceholder: textNl.graph_selected_rwzi_placeholder,
               splitLabels: textShared.split_labels,
-              averagesDataLabel: siteText.common.daggemiddelde,
-              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+              averagesDataLabel: commonTexts.common.daggemiddelde,
+              valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
           />
 
@@ -164,7 +172,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
             legend={{
               title: textNl.legenda_titel,
               thresholds: thresholds.vr.average,

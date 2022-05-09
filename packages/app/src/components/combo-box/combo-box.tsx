@@ -46,7 +46,7 @@ type TProps<Option extends TOption> = {
 export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const router = useRouter();
   const { code } = router.query;
@@ -110,7 +110,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
               ))}
             </ComboboxList>
           ) : (
-            <span>{siteText.common.zoekveld_geen_resultaten}</span>
+            <span>{commonTexts.common.zoekveld_geen_resultaten}</span>
           )}
         </ComboboxPopover>
       </Combobox>
@@ -128,7 +128,7 @@ function useSearchedOptions<Option extends TOption>(
   return useMemo(
     () =>
       throttledTerm.trim() === ''
-        ? options.sort((a: Option, b: Option) => a.name.localeCompare(b.name))
+        ? options
         : matchSorter(options, throttledTerm.trim(), {
             keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
           }),

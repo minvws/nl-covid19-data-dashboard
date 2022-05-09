@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Box } from './base';
 
@@ -28,15 +28,13 @@ export function InteractiveLegend<T = string>({
   onToggleItem,
   onReset,
 }: InteractiveLegendProps<T>) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const hasSelection = selection.length !== 0;
 
   return (
     <Box>
-      <Text variant="label1" fontWeight="bold">
-        {helpText}
-      </Text>
+      <BoldText variant="label1">{helpText}</BoldText>
       <Legend>
         <List>
           {selectOptions.map((item) => {
@@ -67,7 +65,7 @@ export function InteractiveLegend<T = string>({
           {isDefined(onReset) && (
             <Item>
               <ResetButton onClick={onReset} isVisible={hasSelection}>
-                {siteText.common.interactive_legend.reset_button_label}
+                {commonTexts.common.interactive_legend.reset_button_label}
               </ResetButton>
             </Item>
           )}

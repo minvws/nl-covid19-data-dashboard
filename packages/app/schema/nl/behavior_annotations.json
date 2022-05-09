@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_behavior_annotations",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    }
+  },
+  "required": ["values"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_behavior_annotations",
+      "type": "object",
+      "properties": {
+        "behavior_indicator": {
+          "enum": [
+            "wash_hands",
+            "curfew",
+            "keep_distance",
+            "work_from_home",
+            "avoid_crowds",
+            "symptoms_stay_home_if_mandatory",
+            "symptoms_get_tested",
+            "wear_mask_public_indoors",
+            "wear_mask_public_transport",
+            "sneeze_cough_elbow",
+            "max_visitors",
+            "ventilate_home",
+            "selftest_visit"
+          ]
+        },
+        "message_title_nl": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "message_title_en": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "message_desc_nl": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "message_desc_en": {
+          "minLength": 1,
+          "type": "string"
+        },  
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "behavior_indicator",
+        "message_title_nl",
+        "message_title_en",
+        "message_desc_nl",
+        "message_desc_en",
+        "date_start_unix",
+        "date_end_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

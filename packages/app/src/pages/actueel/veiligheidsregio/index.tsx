@@ -15,24 +15,37 @@ import { VrComboBox } from '~/domain/layout/components/vr-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  getLokalizeTexts,
+} from '~/static-props/get-data';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        textVr: siteText.pages.topicalPage.vr,
+      }),
+      locale
+    ),
+  getLastGeneratedDate
+);
 
 const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
   const reverseRouter = useReverseRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
-  const { lastGenerated } = props;
+  const { pageText, lastGenerated } = props;
 
-  const textVr = siteText.pages.topicalPage.vr;
+  const { textVr } = pageText;
 
   const metadata = {
     ...textVr.index.metadata,
@@ -58,9 +71,9 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
         )}
 
         <Box as="article" p={4} spacing={3}>
-          {siteText.regionaal_index.belangrijk_bericht && (
+          {commonTexts.regionaal_index.belangrijk_bericht && (
             <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
+              message={commonTexts.regionaal_index.belangrijk_bericht}
               variant="emphasis"
             />
           )}

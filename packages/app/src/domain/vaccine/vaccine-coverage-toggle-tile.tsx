@@ -7,9 +7,10 @@ import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
@@ -27,7 +28,6 @@ type AgeTypes = {
   fully_vaccinated_label?: string | null;
   has_one_shot_label?: string | null;
   boostered_label?: string | null;
-  third_shot_label?: string | null;
 };
 
 type VaccinationGradeToggleTypes = {
@@ -37,7 +37,6 @@ type VaccinationGradeToggleTypes = {
   description_vaccination_grade: string;
   description_vaccination_one_shot: string;
   description_vaccination_one_shot_with_percentage: string;
-  description_vaccination_third_shot: string;
   label: string;
 };
 
@@ -51,10 +50,10 @@ interface VaccineCoverageToggleTileProps {
   age18Plus: AgeTypes;
   age12Plus: AgeTypes;
   dateUnix: number;
-  dateUnixThirdShot?: number;
   numFractionDigits?: number;
   age12PlusToggleText: VaccinationGradeToggleTypes;
   age18PlusToggleText: VaccinationGradeToggleTypes;
+  labelTexts: SiteText['pages']['vaccinationsPage']['nl']['vaccination_grade_toggle_tile']['top_labels'];
 }
 
 export function VaccineCoverageToggleTile({
@@ -62,25 +61,17 @@ export function VaccineCoverageToggleTile({
   source,
   descriptionFooter,
   dateUnix,
-  dateUnixThirdShot,
   age18Plus,
   age12Plus,
   numFractionDigits = 0,
   age12PlusToggleText,
   age18PlusToggleText,
+  labelTexts,
 }: VaccineCoverageToggleTileProps) {
-  const { siteText } = useIntl();
-  const labelTexts =
-    siteText.pages.vaccinationsPage.nl.vaccination_grade_toggle_tile.top_labels;
   const [selectedTab, setSelectedTab] = useState(age18PlusToggleText.label);
 
   const metadata: MetadataProps = {
     date: dateUnix,
-    source: source,
-  };
-
-  const metadataThirdShot: MetadataProps = {
-    date: dateUnixThirdShot,
     source: source,
   };
 
@@ -117,7 +108,6 @@ export function VaccineCoverageToggleTile({
                   <Metadata
                     source={source}
                     date={age18Plus.dateUnixBoostered}
-                    intervalCount={age18PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
                 )}
@@ -135,18 +125,14 @@ export function VaccineCoverageToggleTile({
               data={age18Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
-              thirdProperty="third_shot"
               description={age18PlusToggleText.description_vaccination_grade}
               secondDescription={
                 age18PlusToggleText.description_vaccination_one_shot_with_percentage
               }
-              thirdDescription={
-                age18PlusToggleText.description_vaccination_third_shot
-              }
               numFractionDigits={numFractionDigits}
-              metadataFullyOrOneShots={metadata}
-              metadataThirdShots={metadataThirdShot}
-            />
+            >
+              {metadata && <Metadata {...metadata} isTileFooter />}
+            </AgeGroupBlock>
           </>
         )}
         {selectedTab === age12PlusToggleText.label && (
@@ -163,7 +149,6 @@ export function VaccineCoverageToggleTile({
                   <Metadata
                     source={source}
                     date={age12Plus.dateUnixBoostered}
-                    intervalCount={age12PlusToggleText.booster_date_interval}
                     isTileFooter
                   />
                 )}
@@ -204,14 +189,10 @@ interface AgeGroupBlockProps {
   data: AgeTypes;
   property: KeyWithLabel<AgeTypes>;
   secondProperty?: KeyWithLabel<AgeTypes>;
-  thirdProperty?: KeyWithLabel<AgeTypes>;
   description: string;
   secondDescription?: string;
-  thirdDescription?: string;
   numFractionDigits?: number;
   children?: React.ReactNode;
-  metadataFullyOrOneShots?: MetadataProps;
-  metadataThirdShots?: MetadataProps;
 }
 
 function AgeGroupBlock({
@@ -219,16 +200,12 @@ function AgeGroupBlock({
   data,
   property,
   secondProperty,
-  thirdProperty,
   description,
   secondDescription,
-  thirdDescription,
   numFractionDigits,
   children,
-  metadataFullyOrOneShots,
-  metadataThirdShots,
 }: AgeGroupBlockProps) {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts } = useIntl();
   const formatCoveragePercentage =
     useVaccineCoveragePercentageFormatter(numFractionDigits);
 
@@ -241,21 +218,18 @@ function AgeGroupBlock({
 
   return (
     <Box spacing={2}>
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
         })}
       >
         {title}
-      </InlineText>
+      </BoldText>
       <KpiValue text={formatCoveragePercentage(data, property)} />
       <Markdown
         content={replaceVariablesInText(description, {
           birthyear: replaceVariablesInText(
-            siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-              parsedBirthyearRange.type
-            ],
+            commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
             parsedBirthyearRange
           ),
         })}
@@ -264,26 +238,13 @@ function AgeGroupBlock({
         <Markdown
           content={replaceVariablesInText(secondDescription, {
             birthyear: replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.birthyear_ranges[
-                parsedBirthyearRange.type
-              ],
+              commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
               parsedBirthyearRange
             ),
             percentage: formatCoveragePercentage(data, secondProperty),
           })}
         />
       )}
-      {metadataFullyOrOneShots && (
-        <Metadata {...metadataFullyOrOneShots} isTileFooter />
-      )}
-      {thirdDescription && thirdProperty && (
-        <Markdown
-          content={replaceVariablesInText(thirdDescription, {
-            amount: formatNumber(data.third_shot),
-          })}
-        />
-      )}
-      {metadataThirdShots && <Metadata {...metadataThirdShots} isTileFooter />}
       {children}
     </Box>
   );
@@ -297,14 +258,13 @@ interface NoBoosterBlockProps {
 function NoBoosterBlock({ title, description }: NoBoosterBlockProps) {
   return (
     <Box spacing={2}>
-      <InlineText
-        fontWeight="bold"
+      <BoldText
         css={css({
           display: 'flex',
         })}
       >
         {title}
-      </InlineText>
+      </BoldText>
       <Markdown content={description} />
     </Box>
   );

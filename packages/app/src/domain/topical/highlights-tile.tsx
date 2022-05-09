@@ -2,6 +2,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ContentTeaser } from '~/components/content-teaser';
 import { VisuallyHidden } from '~/components/visually-hidden';
+import { SiteText } from '~/locale';
 import { Block, ImageBlock } from '~/types/cms';
 
 export interface WeeklyHighlightProps {
@@ -18,6 +19,7 @@ interface HighlightsTileProps {
   weeklyHighlight?: WeeklyHighlightProps;
   highlights: ArticleSummary[];
   showWeeklyHighlight: boolean;
+  text: SiteText['pages']['topicalPage']['shared'];
 }
 
 export function HighlightsTile({
@@ -25,6 +27,7 @@ export function HighlightsTile({
   weeklyHighlight,
   highlights,
   showWeeklyHighlight,
+  text,
 }: HighlightsTileProps) {
   return (
     <article>
@@ -44,6 +47,7 @@ export function HighlightsTile({
             cover={weeklyHighlight.cover}
             publicationDate={weeklyHighlight.publicationDate}
             isWeeklyHighlight
+            text={text}
           />
         )}
         {highlights
@@ -54,6 +58,7 @@ export function HighlightsTile({
               slug={item.slug.current}
               cover={item.cover}
               category={item.category}
+              text={text}
             />
           ))
           .slice(0, showWeeklyHighlight ? 1 : 2)}

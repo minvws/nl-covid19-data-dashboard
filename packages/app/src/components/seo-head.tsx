@@ -20,14 +20,14 @@ type SEOHeadProps = {
 };
 
 export function SEOHead(props: SEOHeadProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const {
-    description = siteText.seoHead.default_description,
+    description = commonTexts.seoHead.default_description,
     openGraphImage = '/banner.png',
-    title = siteText.seoHead.default_title,
+    title = commonTexts.seoHead.default_title,
     twitterImage = '/banner-twitter.png',
-    url = siteText.seoHead.default_url,
+    url = commonTexts.seoHead.default_url,
   } = props;
 
   return (

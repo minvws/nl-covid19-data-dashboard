@@ -21,26 +21,34 @@ import {
   StackedAreaSeriesDefinition,
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
 import {
-  DeliveryAndAdministrationData,
-  VaccineDeliveryAndAdministrationsValue,
-} from './data-selection/select-delivery-and-administration-data';
+  AdministrationData,
+  VaccineAdministrationsValue,
+} from './data-selection/select-administration-data';
 
 export type ActiveVaccinationChart = 'coverage' | 'deliveryAndAdministration';
 
 interface VaccinationsOverTimeChartProps {
   coverageData?: NlVaccineCoverage;
-  deliveryAndAdministrationData: DeliveryAndAdministrationData;
+  administrationData: AdministrationData;
   activeChart: ActiveVaccinationChart;
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
-const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
+const vaccines = [
+  'pfizer',
+  'moderna',
+  'astra_zeneca',
+  'janssen',
+  'novavax',
+] as const;
 vaccines.forEach((x) =>
   assert(
     colors.data.vaccines[x],
@@ -53,15 +61,15 @@ export function VaccinationsOverTimeChart(
 ) {
   const {
     coverageData,
-    deliveryAndAdministrationData,
+    administrationData,
     activeChart,
     timelineEvents,
+    text,
   } = props;
-  const { siteText, formatNumber } = useIntl();
-  const text = siteText.pages.vaccinationsPage.nl;
+  const { commonTexts, formatNumber } = useIntl();
   const breakpoints = useBreakpoints(true);
 
-  const firstValue = first(deliveryAndAdministrationData.values);
+  const firstValue = first(administrationData.values);
   const vaccineNames = useMemo(
     () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
     [firstValue]
@@ -158,24 +166,24 @@ export function VaccinationsOverTimeChart(
         key: 'vaccine_delivery_and_administrations_area_chart',
       },
       dataOptions: {
-        valueAnnotation: siteText.waarde_annotaties.x_miljoen,
+        valueAnnotation: commonTexts.waarde_annotaties.x_miljoen,
         forcedMaximumValue: (seriesMax: number) => seriesMax * 1.1,
         timelineEvents: timelineEvents.deliveryAndAdministration,
       } as DataOptions,
       initialWidth: 400,
       minHeight: breakpoints.md ? 400 : 250,
       timeframe: 'all',
-      values: deliveryAndAdministrationData.values,
+      values: administrationData.values,
       numGridLines: 6,
       formatTickValue: (x: number) => formatNumber(x / 1000000),
-      formatTooltip: (
-        x: TooltipData<VaccineDeliveryAndAdministrationsValue>
-      ) => <VaccineDeliveryAndAdministrationsTooltip data={x} />,
+      formatTooltip: (x: TooltipData<VaccineAdministrationsValue>) => (
+        <VaccineDeliveryAndAdministrationsTooltip data={x} />
+      ),
       seriesConfig: [
         ...vaccineNames.map<
-          StackedAreaSeriesDefinition<VaccineDeliveryAndAdministrationsValue>
+          StackedAreaSeriesDefinition<VaccineAdministrationsValue>
         >((x) => ({
-          metricProperty: x as keyof VaccineDeliveryAndAdministrationsValue,
+          metricProperty: x as keyof VaccineAdministrationsValue,
           type: 'stacked-area',
           label: replaceVariablesInText(
             text.data.vaccination_chart.legend_label,
@@ -196,12 +204,12 @@ export function VaccinationsOverTimeChart(
         },
       ],
     } as TimeSeriesChartProps<
-      VaccineDeliveryAndAdministrationsValue,
-      SeriesConfig<VaccineDeliveryAndAdministrationsValue>
+      VaccineAdministrationsValue,
+      SeriesConfig<VaccineAdministrationsValue>
     >;
   }, [
-    deliveryAndAdministrationData,
-    siteText.waarde_annotaties.x_miljoen,
+    administrationData,
+    commonTexts.waarde_annotaties.x_miljoen,
     text.data.vaccination_chart.legend_label,
     text.data.vaccination_chart.doses_administered,
     breakpoints.md,
@@ -246,16 +254,16 @@ interface VaccinationChartControlsProps {
 
 export function VaccinationChartControls(props: VaccinationChartControlsProps) {
   const { onChange, initialChart } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const items: RadioGroupItem<ActiveVaccinationChart>[] = [
     {
-      label: siteText.charts.vaccination_coverage_controls.coverage,
+      label: commonTexts.charts.vaccination_coverage_controls.coverage,
       value: 'coverage',
     },
     {
       label:
-        siteText.charts.vaccination_coverage_controls
+        commonTexts.charts.vaccination_coverage_controls
           .delivery_and_administration,
       value: 'deliveryAndAdministration',
     },

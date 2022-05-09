@@ -2,20 +2,31 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  getLokalizeTexts,
+} from '~/static-props/get-data';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        text: siteText.pages.topicalPage.nl.nationaal_metadata,
+      }),
+      locale
+    ),
+  getLastGeneratedDate
+);
 
 const National = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
-  const { lastGenerated } = props;
+  const { pageText, lastGenerated } = props;
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();
@@ -28,10 +39,7 @@ const National = (props: StaticProps<typeof getStaticProps>) => {
   }, [breakpoints.md, reverseRouter.nl, router]);
 
   return (
-    <Layout
-      {...siteText.pages.topicalPage.nl.nationaal_metadata}
-      lastGenerated={lastGenerated}
-    >
+    <Layout {...pageText.text} lastGenerated={lastGenerated}>
       <NlLayout />
     </Layout>
   );

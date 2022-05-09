@@ -2,7 +2,7 @@ import {
   colors,
   NlSewer,
   SewerPerInstallationData,
-  TimeframeOption,
+  TimeframeOptionsList,
   VrSewer,
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
@@ -46,6 +46,12 @@ type SewerChartProps = {
     valueAnnotation: string;
   };
   vrNameOrGmName?: string;
+  incompleteDatesAndTexts?: {
+    zeewolde_date_end_in_unix_time: string;
+    zeewolde_date_start_in_unix_time: string;
+    zeewolde_label: string;
+    zeewolde_short_label: string;
+  };
   warning?: string;
 };
 
@@ -55,6 +61,7 @@ export function SewerChart({
   dataPerInstallation,
   text,
   vrNameOrGmName,
+  incompleteDatesAndTexts,
   warning,
 }: SewerChartProps) {
   const {
@@ -77,32 +84,31 @@ export function SewerChart({
       } as SewerPerInstallationData)
   );
 
-  const averageSplitPoints = [
-    {
-      value: 10,
-      color: colors.data.scale.blue[0],
-      label: text.splitLabels.segment_0,
-    },
-    {
-      value: 50,
-      color: colors.data.scale.blue[1],
-      label: text.splitLabels.segment_1,
-    },
-    {
-      value: 100,
-      color: colors.data.scale.blue[2],
-      label: text.splitLabels.segment_2,
-    },
-    {
-      value: Infinity,
-      color: colors.data.scale.blue[3],
-      label: text.splitLabels.segment_3,
-    },
-  ];
-  const { siteText } = useIntl();
-  const scopedGmName = siteText.gemeente_index.municipality_warning;
+  const { commonTexts } = useIntl();
+  const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+
+  const dataOptions =
+    incompleteDatesAndTexts && selectedInstallation === 'ZEEWOLDE'
+      ? {
+          valueAnnotation: text.valueAnnotation,
+          timespanAnnotations: [
+            {
+              start: parseInt(
+                incompleteDatesAndTexts.zeewolde_date_start_in_unix_time
+              ),
+              end: parseInt(
+                incompleteDatesAndTexts.zeewolde_date_end_in_unix_time
+              ),
+              label: incompleteDatesAndTexts.zeewolde_label,
+              shortLabel: incompleteDatesAndTexts.zeewolde_short_label,
+            },
+          ],
+        }
+      : {
+          valueAnnotation: text.valueAnnotation,
+        };
 
   const optionsWithContent = useMemo(
     () =>
@@ -121,7 +127,7 @@ export function SewerChart({
 
   return (
     <ChartTile
-      timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+      timeframeOptions={TimeframeOptionsList}
       title={text.title}
       metadata={{
         source: text.source,
@@ -176,10 +182,10 @@ export function SewerChart({
                     style: 'dashed',
                   },
                   {
-                    type: 'split-area',
+                    type: 'area',
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
-                    splitPoints: averageSplitPoints,
+                    color: colors.data.scale.blue[3],
                     nonInteractive: true,
                   },
                 ]}
@@ -191,7 +197,7 @@ export function SewerChart({
                     return <LocationTooltip data={data} />;
                   }
                 }}
-                dataOptions={{ valueAnnotation: text.valueAnnotation }}
+                dataOptions={dataOptions}
               />
             ) : (
               <TimeSeriesChart
@@ -200,15 +206,13 @@ export function SewerChart({
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'split-area',
+                    type: 'area',
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
-                    splitPoints: averageSplitPoints,
+                    color: colors.data.scale.blue[3],
                   },
                 ]}
-                dataOptions={{
-                  valueAnnotation: text.valueAnnotation,
-                }}
+                dataOptions={dataOptions}
               />
             )
           }

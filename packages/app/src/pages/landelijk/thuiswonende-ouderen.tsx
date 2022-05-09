@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -41,11 +41,15 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['elderly_at_home'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.elderlyAtHomePage.nl,
       }),
       locale
@@ -104,25 +108,27 @@ const ElderlyAtHomeNationalPage = (
     7
   );
 
-  const { siteText, formatNumber } = useIntl();
-  const { textNl } = pageText;
+  const { commonTexts, formatNumber } = useIntl();
+  const { metadataTexts, textNl } = pageText;
 
   const reverseRouter = useReverseRouter();
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+            category={commonTexts.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={
-              siteText.sidebar.metrics.elderly_at_home.title
+              commonTexts.sidebar.metrics.elderly_at_home.title
             }
             title={textNl.section_positive_tested.title}
             icon={<Elderly />}
@@ -130,8 +136,7 @@ const ElderlyAtHomeNationalPage = (
             metadata={{
               datumsText: textNl.section_positive_tested.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix:
-                elderlyAtHomeData.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.section_positive_tested.bronnen.rivm],
             }}
             referenceLink={textNl.section_positive_tested.reference.href}
@@ -178,7 +183,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={
@@ -221,7 +226,7 @@ const ElderlyAtHomeNationalPage = (
                       label:
                         textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'positive_tested_daily_moving_average',
                       ],
@@ -303,7 +308,7 @@ const ElderlyAtHomeNationalPage = (
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
             description={textNl.section_deceased.line_chart_daily_description}
@@ -343,7 +348,7 @@ const ElderlyAtHomeNationalPage = (
                       label:
                         textNl.section_deceased
                           .line_chart_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],

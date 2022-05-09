@@ -1,4 +1,4 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
   Locatie,
@@ -40,6 +40,10 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['nursing_home'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -92,7 +96,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     content,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { textVr, textShared } = pageText;
 
@@ -103,7 +107,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.besmette_locaties.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -115,16 +119,18 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     ),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={
-              siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
+              commonTexts.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={
-              siteText.sidebar.metrics.nursing_home_care.title
+              commonTexts.sidebar.metrics.nursing_home_care.title
             }
             title={replaceVariablesInText(
               textVr.positief_geteste_personen.titel,
@@ -142,7 +148,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.positief_geteste_personen.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.positief_geteste_personen.bronnen.rivm],
             }}
             referenceLink={textVr.positief_geteste_personen.reference.href}
@@ -172,7 +178,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
             title={textVr.positief_geteste_personen.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.positief_geteste_personen.linechart_description}
           >
             {(timeframe) => (
@@ -287,7 +293,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.besmette_locaties.bronnen.rivm }}
             title={textVr.besmette_locaties.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.besmette_locaties.linechart_description}
           >
             {(timeframe) => (
@@ -350,7 +356,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: textVr.bronnen.rivm }}
             title={textVr.linechart_titel}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             description={textVr.linechart_description}
           >
             {(timeframe) => (

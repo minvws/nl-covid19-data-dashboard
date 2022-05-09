@@ -1,10 +1,11 @@
 import { InlineTooltip } from '~/components/inline-tooltip';
-import { useIntl } from '~/intl';
+import { TableText } from '../types';
 
-export function NoPercentageData() {
-  const { siteText } = useIntl();
-  const text = siteText.pages.in_variantsPage.shared;
+interface NoPercentageDataProps {
+  text: TableText;
+}
 
+export function NoPercentageData({ text }: NoPercentageDataProps) {
   return (
     <InlineTooltip
       content={text.geen_percentage_cijfer_tooltip}

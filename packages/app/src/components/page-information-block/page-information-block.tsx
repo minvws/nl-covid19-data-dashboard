@@ -60,7 +60,7 @@ export function PageInformationBlock({
   const showArchivedToggleButton =
     typeof isArchivedHidden !== 'undefined' &&
     typeof onToggleArchived !== 'undefined';
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -111,14 +111,14 @@ export function PageInformationBlock({
               gridTemplateColumns="repeat(2, 1fr)"
               width="100%"
               spacing={{
-                _: pageLinks && pageLinks.length > 0 ? 0 : 3,
+                _: pageLinks && pageLinks.length ? 0 : 3,
                 md: 0,
               }}
               css={css({
                 columnGap: 5,
               })}
             >
-              {articles && articles.length > 0 ? (
+              {articles && articles.length ? (
                 <>
                   <Box spacing={3}>
                     {DescriptionBlock}
@@ -135,12 +135,7 @@ export function PageInformationBlock({
               )}
             </Box>
 
-            {pageLinks && pageLinks.length > 0 && (
-              <>
-                <Box height={1} />
-                <PageLinks links={pageLinks} />
-              </>
-            )}
+            {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
           </Box>
           <Box my={3}>
             {showArchivedToggleButton && (
@@ -150,8 +145,8 @@ export function PageInformationBlock({
                 isActive={isArchivedHidden}
               >
                 {!isArchivedHidden
-                  ? siteText.common.show_archived
-                  : siteText.common.hide_archived}
+                  ? commonTexts.common.show_archived
+                  : commonTexts.common.hide_archived}
               </Button>
             )}
           </Box>

@@ -7,12 +7,14 @@ import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function VaccineAdministrationsKpiSection({
   data,
+  text,
 }: {
   data: Pick<
     Nl,
@@ -22,11 +24,8 @@ export function VaccineAdministrationsKpiSection({
     | 'vaccine_administered_doctors'
     | 'vaccine_administered_ggd_ghor'
   >;
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }) {
-  const { siteText } = useIntl();
-
-  const text = siteText.pages.vaccinationsPage.nl;
-
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title
   );
@@ -71,6 +70,7 @@ export function VaccineAdministrationsKpiSection({
                   value={data.vaccine_administered_ggd.last_value.estimated}
                   description={text.gezette_prikken.estimated.ggd}
                   date={data.vaccine_administered_ggd.last_value.date_unix}
+                  text={text.gezette_prikken}
                 />
 
                 <VaccineAdministeredItem
@@ -86,12 +86,14 @@ export function VaccineAdministrationsKpiSection({
                     data.vaccine_administered_hospitals_and_care_institutions
                       .last_value.date_unix
                   }
+                  text={text.gezette_prikken}
                 />
 
                 <VaccineAdministeredItem
                   value={data.vaccine_administered_doctors.last_value.estimated}
                   description={text.gezette_prikken.estimated.doctors}
                   date={data.vaccine_administered_doctors.last_value.date_unix}
+                  text={text.gezette_prikken}
                 />
               </Box>
             </Box>
@@ -114,6 +116,7 @@ export function VaccineAdministrationsKpiSection({
                   description={text.gezette_prikken.reported.ggd_ghor}
                   date={data.vaccine_administered_ggd_ghor.last_value.date_unix}
                   isReported
+                  text={text.gezette_prikken}
                 />
               </Box>
             </Box>
@@ -129,26 +132,24 @@ interface VaccineAdministeredProps {
   date: number;
   description: string;
   isReported?: boolean;
+  text: SiteText['pages']['vaccinationsPage']['nl']['gezette_prikken'];
 }
 
 function VaccineAdministeredItem(props: VaccineAdministeredProps) {
-  const { value, date, description, isReported } = props;
+  const { value, date, description, isReported, text } = props;
 
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { formatNumber, formatDateFromSeconds } = useIntl();
 
   return (
     <Box spacing={1}>
-      <Text fontWeight="bold">
+      <BoldText>
         <InlineText color="data.primary">{formatNumber(value)}</InlineText>
         {' ' + description}
-      </Text>
+      </BoldText>
 
       <Text variant="label1" color="annotation">
         {replaceVariablesInText(
-          isReported
-            ? siteText.pages.vaccinationsPage.nl.gezette_prikken.reported_until
-            : siteText.pages.vaccinationsPage.nl.gezette_prikken
-                .estimated_until,
+          isReported ? text.reported_until : text.estimated_until,
           {
             reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
           }

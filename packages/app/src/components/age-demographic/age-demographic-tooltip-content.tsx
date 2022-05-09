@@ -1,7 +1,7 @@
 import type { Color, KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { InlineText, Text } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
@@ -33,25 +33,25 @@ export function AgeDemographicTooltipContent<
   return (
     <>
       <Box px={3} py={2}>
-        <Text variant="h3" fontWeight="bold">
+        <BoldText variant="h3">
           {replaceVariablesInText(text.age_group_range_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
-        </Text>
+        </BoldText>
       </Box>
       <Legend>
         <LegendItem color={rightColor}>
-          <InlineText fontWeight="bold">
+          <BoldText>
             {formatValue(value[rightMetricProperty] as unknown as number)}
-          </InlineText>{' '}
+          </BoldText>{' '}
           {replaceVariablesInText(text.right_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
         <LegendItem color={leftColor}>
-          <InlineText fontWeight="bold">
+          <BoldText>
             {formatValue(value[leftMetricProperty] as unknown as number)}
-          </InlineText>{' '}
+          </BoldText>{' '}
           {replaceVariablesInText(text.left_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}

@@ -3,10 +3,10 @@ import { TooltipData } from '~/components/time-series-chart/components';
 import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
 import { TooltipSeriesListItems } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-items';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic/series';
-import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/select-delivery-and-administration-data';
+import { VaccineAdministrationsValue } from '../data-selection/select-administration-data';
 
 export function VaccineDeliveryAndAdministrationsTooltip<
-  T extends VaccineDeliveryAndAdministrationsValue
+  T extends VaccineAdministrationsValue
 >({ data }: { data: TooltipData<T> }) {
   const { value, configIndex, config, options, metricPropertyFormatters } =
     data;

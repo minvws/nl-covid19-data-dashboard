@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { useIntl } from '~/intl';
@@ -19,7 +19,7 @@ export function EscalationLevelLabel({
   validFrom,
   lastCalculated,
 }: EscalationLevelLabelProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const escalationLevel = useEscalationLevel(level);
 
   // We need to know if the two dates are on the same day, so reset hour to
@@ -42,26 +42,22 @@ export function EscalationLevelLabel({
       >
         <EscalationLevelIcon color={escalationLevel.color}>
           <VisuallyHidden>
-            {siteText.common.risiconiveau_singular}{' '}
+            {commonTexts.common.risiconiveau_singular}{' '}
           </VisuallyHidden>
           {level}
         </EscalationLevelIcon>
 
-        <InlineText
-          color={escalationLevel.color}
-          fontWeight="bold"
-          variant="h3"
-        >
+        <BoldText color={escalationLevel.color} variant="h3">
           {escalationLevel.title}
-        </InlineText>
+        </BoldText>
       </Box>
 
       <Box pt="2px" pl={{ _: 0, sm: 2 }} maxWidth={350}>
         <InlineText variant="body2" color="body">
           {replaceVariablesInText(
             isSameDate
-              ? siteText.national_escalation_levels.valid_from
-              : siteText.national_escalation_levels
+              ? commonTexts.national_escalation_levels.valid_from
+              : commonTexts.national_escalation_levels
                   .valid_from_and_last_calculated,
             {
               date: formatDateFromSeconds(validFrom, 'medium'),

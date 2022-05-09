@@ -34,6 +34,15 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'sewer_per_installation',
+  'static_values.population_count',
+  'sewer',
+  'code',
+];
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -75,7 +84,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const { textGm, textShared } = pageText;
 
   const sewerAverages = data.sewer;
@@ -91,7 +100,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   }
 
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
@@ -100,12 +109,14 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.vroege_signalen}
+            category={commonTexts.gemeente_layout.headings.vroege_signalen}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -117,8 +128,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 start: sewerAverages.last_value.date_start_unix,
                 end: sewerAverages.last_value.date_end_unix,
               },
-              dateOfInsertionUnix:
-                sewerAverages.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
             referenceLink={textGm.reference.href}
@@ -145,13 +155,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="average"
                 absolute={sewerAverages.last_value.average}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
                 isAmount
               />
               <Text>
                 {replaceComponentsInText(
-                  siteText.gemeente_index.population_count,
+                  commonTexts.gemeente_index.population_count,
                   {
                     municipalityName: municipalityName,
                     populationCount: (
@@ -165,7 +175,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
               <CollapsibleContent
                 label={
-                  siteText.gemeente_index.population_count_explanation_title
+                  commonTexts.gemeente_index.population_count_explanation_title
                 }
               >
                 <Text>
@@ -226,10 +236,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: textGm.linechart_description,
               selectPlaceholder: textGm.graph_selected_rwzi_placeholder,
               splitLabels: textShared.split_labels,
-              averagesDataLabel: siteText.common.weekgemiddelde,
-              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+              averagesDataLabel: commonTexts.common.weekgemiddelde,
+              valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
             vrNameOrGmName={municipalityName}
+            incompleteDatesAndTexts={
+              textShared.zeewolde_incomplete_manualy_override
+            }
             warning={textGm.warning_chart}
           />
         </TileList>

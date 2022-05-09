@@ -4,25 +4,28 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import {
+  DynamicChoropleth,
+  ChoroplethTile,
+  Markdown,
+  PageInformationBlock,
+  TileList,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
-import { GmLayout } from '~/domain/layout/gm-layout';
-import { Layout } from '~/domain/layout/layout';
+import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
+import { Layout, GmLayout } from '~/domain/layout';
 import { Languages } from '~/locale';
 import {
   AgeGroup,
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
-import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
-import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
+import {
+  selectVaccineCoverageData,
+  VaccineCoverageToggleTile,
+  ChoroplethTooltip,
+  VaccineCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
+} from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import {
   getArticleParts,
@@ -41,18 +44,30 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
+import {
+  assert,
+  replaceVariablesInText,
+  useReverseRouter,
+  useFormatLokalizePercentage,
+} from '~/utils';
+import { useFeature } from '~/lib/features';
+
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'code',
+  'vaccine_coverage_per_age_group',
+  'booster_coverage',
+];
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
-      (siteText) => ({
-        textGm: siteText.pages.vaccinationsPage.gm,
+      (commonTexts) => ({
+        textGm: commonTexts.pages.vaccinationsPage.gm,
+        textNl: commonTexts.pages.vaccinationsPage.nl,
       }),
       locale
     ),
@@ -109,12 +124,12 @@ export const VaccinationsGmPage = (
     content,
     lastGenerated,
   } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
-  const { textGm } = pageText;
+  const { textGm, textNl } = pageText;
 
   const metadata = {
     ...textGm.metadata,
@@ -126,7 +141,9 @@ export const VaccinationsGmPage = (
     }),
   };
 
-  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
@@ -141,6 +158,13 @@ export const VaccinationsGmPage = (
       (x) => x.age_group_range === '12+'
     );
 
+  const boosterCoverage18PlusValue = data.booster_coverage?.values?.find(
+    (v) => v.age_group === '18+'
+  );
+  const boosterCoverage12PlusValue = data.booster_coverage?.values?.find(
+    (v) => v.age_group === '12+'
+  );
+
   assert(
     filteredAgeGroup18Plus,
     `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`
@@ -151,12 +175,14 @@ export const VaccinationsGmPage = (
     `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
   );
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.vaccinaties}
+            category={commonTexts.gemeente_layout.headings.vaccinaties}
             title={replaceVariablesInText(textGm.informatie_blok.titel, {
               municipalityName: municipalityName,
             })}
@@ -165,8 +191,7 @@ export const VaccinationsGmPage = (
             metadata={{
               datumsText: textGm.informatie_blok.datums,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
-              dateOfInsertionUnix:
-                filteredAgeGroup18Plus.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
@@ -193,10 +218,10 @@ export const VaccinationsGmPage = (
               has_one_shot_label:
                 filteredAgeGroup18Plus.has_one_shot_percentage_label,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageLastValue.percentage}`
+                `${boosterCoverage18PlusValue?.percentage}`
               ),
-              boostered_label: boosterCoverageLastValue.percentage_label,
-              dateUnixBoostered: boosterCoverageLastValue.date_unix,
+              boostered_label: boosterCoverage18PlusValue?.percentage_label,
+              dateUnixBoostered: boosterCoverage18PlusValue?.date_unix,
             }}
             age12Plus={{
               fully_vaccinated:
@@ -207,6 +232,11 @@ export const VaccinationsGmPage = (
                 filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
               has_one_shot_label:
                 filteredAgeGroup12Plus.has_one_shot_percentage_label,
+              boostered: formatPercentageAsNumber(
+                `${boosterCoverage12PlusValue?.percentage}`
+              ),
+              boostered_label: boosterCoverage12PlusValue?.percentage_label,
+              dateUnixBoostered: boosterCoverage12PlusValue?.date_unix,
             }}
             age12PlusToggleText={
               textGm.vaccination_grade_toggle_tile.age_12_plus
@@ -214,31 +244,49 @@ export const VaccinationsGmPage = (
             age18PlusToggleText={
               textGm.vaccination_grade_toggle_tile.age_18_plus
             }
+            labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
 
-          <VaccineCoveragePerAgeGroup
-            title={textGm.vaccination_coverage.title}
-            description={textGm.vaccination_coverage.description}
-            sortingOrder={['18+', '12-17', '12+']}
-            metadata={{
-              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: textGm.vaccination_coverage.bronnen.rivm,
-            }}
-            values={data.vaccine_coverage_per_age_group.values}
-          />
+          {!vaccinationBoosterShotsPerAgeGroupFeature.isEnabled ? (
+            <VaccineCoveragePerAgeGroup
+              title={textGm.vaccination_coverage.title}
+              description={textGm.vaccination_coverage.description}
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textGm.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          ) : (
+            <BoosterShotCoveragePerAgeGroup
+              title={textGm.vaccination_coverage.title}
+              description={
+                textGm.vaccination_coverage
+                  .description_booster_and_fully_vaccinated
+              }
+              sortingOrder={['18+', '12-17', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textGm.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
-                .gm.title,
+              commonTexts.choropleth.choropleth_vaccination_coverage.gm.title,
               { municipalityName: municipalityName }
             )}
             description={
               <>
                 <Markdown
                   content={replaceVariablesInText(
-                    siteText.pages.vaccinationsPage.nl
-                      .choropleth_vaccination_coverage.gm.description,
+                    commonTexts.choropleth.choropleth_vaccination_coverage.gm
+                      .description,
                     { municipalityName: municipalityName }
                   )}
                 />
@@ -251,13 +299,12 @@ export const VaccinationsGmPage = (
             legend={{
               thresholds: thresholds.gm.fully_vaccinated_percentage,
               title:
-                siteText.pages.vaccinationsPage.nl
-                  .choropleth_vaccination_coverage.shared.legend_title,
+                commonTexts.choropleth.choropleth_vaccination_coverage.shared
+                  .legend_title,
             }}
             metadata={{
               source:
-                siteText.pages.vaccinationsPage.nl.vaccination_coverage.bronnen
-                  .rivm,
+                commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
           >
@@ -276,10 +323,7 @@ export const VaccinationsGmPage = (
                 highlightSelection: true,
                 selectedCode: data.code,
                 tooltipVariables: {
-                  age_group:
-                    siteText.pages.vaccinationsPage.nl.age_groups[
-                      selectedAgeGroup
-                    ],
+                  age_group: commonTexts.common.age_groups[selectedAgeGroup],
                 },
               }}
               formatTooltip={(context) => (

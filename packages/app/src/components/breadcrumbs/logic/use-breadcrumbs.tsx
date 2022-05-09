@@ -55,7 +55,7 @@ export const BreadcrumbsDataProvider = ({
 
 export function useBreadcrumbs(): Breadcrumb[] {
   const { pathname, query } = useRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const ctx = useContext(BreadcrumbsDataContext);
 
   return useMemo(() => {
@@ -73,7 +73,7 @@ export function useBreadcrumbs(): Breadcrumb[] {
     };
 
     const getTitle = (str: string): string => {
-      if (str === '') return siteText.breadcrumbs.paths.actueel;
+      if (str === '') return commonTexts.breadcrumbs.paths.actueel;
 
       const { key } = getQueryParameter(str);
       str = convertQueryParameter(str);
@@ -84,8 +84,8 @@ export function useBreadcrumbs(): Breadcrumb[] {
         return pageTitle ? pageTitle : str;
       }
 
-      return siteText.breadcrumbs.paths[
-        str as keyof typeof siteText.breadcrumbs.paths
+      return commonTexts.breadcrumbs.paths[
+        str as keyof typeof commonTexts.breadcrumbs.paths
       ];
     };
 
@@ -96,10 +96,10 @@ export function useBreadcrumbs(): Breadcrumb[] {
         case 'landelijk':
         case 'actueel': {
           return replaceVariablesInText(
-            siteText.breadcrumbs.redirects.template,
+            commonTexts.breadcrumbs.redirects.template,
             {
-              page: siteText.breadcrumbs.redirects[
-                str as keyof typeof siteText.breadcrumbs.redirects
+              page: commonTexts.breadcrumbs.redirects[
+                str as keyof typeof commonTexts.breadcrumbs.redirects
               ],
             }
           );
@@ -116,7 +116,7 @@ export function useBreadcrumbs(): Breadcrumb[] {
           // this is the more complex case where we have a str with a gm/vr code
           if (str.includes('GM') || str.includes('VR')) {
             const pageTemplate = replaceVariablesInText(
-              siteText.breadcrumbs.redirects[
+              commonTexts.breadcrumbs.redirects[
                 str.includes('GM') ? 'gemeente' : 'veiligheidsregio'
               ],
               {
@@ -125,7 +125,7 @@ export function useBreadcrumbs(): Breadcrumb[] {
             );
 
             return replaceVariablesInText(
-              siteText.breadcrumbs.redirects.template,
+              commonTexts.breadcrumbs.redirects.template,
               {
                 page: pageTemplate,
               }
@@ -160,5 +160,5 @@ export function useBreadcrumbs(): Breadcrumb[] {
       });
 
     return breadcrumbs;
-  }, [ctx, pathname, query, siteText]);
+  }, [ctx, pathname, query, commonTexts]);
 }

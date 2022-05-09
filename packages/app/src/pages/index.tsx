@@ -3,7 +3,7 @@ import {
   DAY_IN_SECONDS,
   NlHospitalNiceValue,
   NlIntensiveCareNiceValue,
-  NlTestedOverallValue,
+  NlSewerValue,
   NlVaccineCoveragePerAgeGroupEstimated,
   TimeframeOption,
   WEEK_IN_SECONDS,
@@ -12,35 +12,31 @@ import {
   Arts,
   Chart,
   Chevron,
-  Test,
   Vaccinaties,
   Ziekenhuis,
+  RioolwaterMonitoring,
 } from '@corona-dashboard/icons';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
+import { LinkWithIcon, Markdown, MaxWidth } from '~/components';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
-import { LinkWithIcon } from '~/components/link-with-icon';
-import { Markdown } from '~/components/markdown';
-import { MaxWidth } from '~/components/max-width';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { Text } from '~/components/typography';
-import { VaccinationCoverageChoropleth } from '~/domain/actueel/vaccination-coverage-choropleth';
-import { EscalationLevelBanner } from '~/domain/escalation-level/escalation-level-banner';
-import { Layout } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
-import { Search } from '~/domain/topical/components/search';
-import { HighlightsTile } from '~/domain/topical/highlights-tile';
+import { Layout } from '~/domain/layout';
 import {
+  ArticleList,
+  HighlightsTile,
   MiniTileSelectorItem,
   MiniTileSelectorLayout,
-} from '~/domain/topical/mini-tile-selector-layout';
-import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import { MiniVaccinationCoverageTile } from '~/domain/topical/mini-vaccination-coverage-tile';
-import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
+  MiniTrendTile,
+  MiniVaccinationCoverageTile,
+  TopicalSectionHeader,
+  VaccinationCoverageChoropleth,
+} from '~/domain/topical';
+import { Search } from '~/domain/topical/components/search';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import { Languages } from '~/locale';
@@ -54,20 +50,26 @@ import {
   selectNlData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { cutValuesFromTimeframe } from '~/utils/cut-values-from-timeframe';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { trimNullValues } from '~/utils/trim-null-values';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useFormatLokalizePercentage } from '~/utils/use-format-lokalize-percentage';
-import { assert } from '~/utils/assert';
+import {
+  assert,
+  countTrailingNullValues,
+  useFormatLokalizePercentage,
+  cutValuesFromTimeframe,
+  useReverseRouter,
+  getBoundaryDateStartUnix,
+  replaceComponentsInText,
+  trimNullValues,
+  replaceVariablesInText,
+} from '~/utils';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        hospitalText: siteText.pages.hospitalPage.nl,
+        intensiveCareText: siteText.pages.intensiveCarePage.nl,
+        sewerText: siteText.pages.sewerPage.shared,
+        positiveTestsText: siteText.pages.positiveTestsPage.shared,
         textNl: siteText.pages.topicalPage.nl,
         textShared: siteText.pages.topicalPage.shared,
       }),
@@ -106,8 +108,8 @@ export const getStaticProps = createGetStaticProps(
       'difference',
       'vaccine_administered_total',
       'vaccine_coverage_per_age_group_estimated',
-      'risk_level',
-      'booster_coverage'
+      'booster_coverage',
+      'sewer'
     )();
 
     data.hospital_nice.values = cutValuesFromTimeframe(
@@ -125,7 +127,44 @@ export const getStaticProps = createGetStaticProps(
       TimeframeOption.FIVE_WEEKS
     );
 
-    return { selectedNlData: data };
+    data.sewer.values = cutValuesFromTimeframe(
+      data.sewer.values,
+      TimeframeOption.FIVE_WEEKS
+    );
+
+    return {
+      selectedNlData: {
+        ...data,
+        hospital_nice: {
+          ...data.hospital_nice,
+          values: cutValuesFromTimeframe(
+            data.hospital_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+        tested_overall: {
+          ...data.tested_overall,
+          values: cutValuesFromTimeframe(
+            data.tested_overall.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+        intensive_care_nice: {
+          ...data.intensive_care_nice,
+          values: cutValuesFromTimeframe(
+            data.intensive_care_nice.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+        sewer: {
+          ...data.sewer,
+          values: cutValuesFromTimeframe(
+            data.sewer.values,
+            TimeframeOption.FIVE_WEEKS
+          ),
+        },
+      },
+    };
   }
 );
 
@@ -138,20 +177,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
+  const dataSewerTotal = data.sewer;
   const dataICTotal = data.intensive_care_nice;
   const dataHospitalIntake = data.hospital_nice;
-  const dataTestedOverall = data.tested_overall;
   const dataSitemap = useDataSitemap('nl');
 
-  const { siteText, ...formatters } = useIntl();
+  const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { textNl, textShared } = pageText;
-  const positiveTestsText = siteText.pages.positiveTestsPage.shared;
+  const { hospitalText, intensiveCareText, textNl, textShared } = pageText;
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
-
-  const internationalFeature = useFeature('inPositiveTestsPage');
-  const riskLevelFeature = useFeature('riskLevel');
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -216,9 +251,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
                 headingLevel={1}
+                text={textShared}
               />
 
               <MiniTileSelectorLayout
+                text={textShared}
                 link={{
                   text: textNl.quick_links.header,
                   href: reverseRouter.nl.index(),
@@ -261,19 +298,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   } as MiniTileSelectorItem<NlHospitalNiceValue>,
                   {
-                    label:
-                      textNl.mini_trend_tiles.positief_geteste_mensen
-                        .menu_item_label,
-                    data: dataTestedOverall.values,
-                    dataProperty: 'infected_moving_average_rounded',
-                    value:
-                      dataTestedOverall.last_value
-                        .infected_moving_average_rounded,
-                    warning: getWarning(
-                      content.elements.warning,
-                      'tested_overall'
+                    label: textNl.mini_trend_tiles.sewer.menu_item_label,
+                    data: dataSewerTotal.values.filter(
+                      (x) => typeof x.average === 'number'
                     ),
-                  } as MiniTileSelectorItem<NlTestedOverallValue>,
+                    dataProperty: 'average',
+                    value: dataSewerTotal.last_value?.average ?? 0,
+                    warning: getWarning(content.elements.warning, 'sewer'),
+                  } as MiniTileSelectorItem<NlSewerValue>,
                   {
                     label:
                       textNl.mini_trend_tiles.vaccinatiegraad.menu_item_label,
@@ -347,16 +379,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
                       label:
-                        siteText.pages.intensiveCarePage.nl
-                          .linechart_legend_trend_label_moving_average,
+                        intensiveCareText.linechart_legend_trend_label_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
-                      label:
-                        siteText.pages.intensiveCarePage.nl
-                          .linechart_legend_trend_label,
+                      label: intensiveCareText.linechart_legend_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -366,7 +395,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeIntensiveCare,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -379,7 +408,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     'intensive_care_nice'
                   )}
                 />
-
                 <MiniTrendTile
                   title={textNl.mini_trend_tiles.ziekenhuis_opnames.title}
                   text={
@@ -433,17 +461,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       type: 'line',
                       metricProperty:
                         'admissions_on_date_of_admission_moving_average',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_moving_average,
+                      label: hospitalText.linechart_legend_titel_moving_average,
                       color: colors.data.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'admissions_on_date_of_admission',
-                      label:
-                        siteText.pages.hospitalPage.nl
-                          .linechart_legend_titel_trend_label,
+                      label: hospitalText.linechart_legend_titel_trend_label,
                       color: colors.data.primary,
                     },
                   ]}
@@ -453,7 +477,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         start: underReportedRangeHospital,
                         end: Infinity,
                         label: textShared.data_incomplete,
-                        shortLabel: siteText.common.incomplete,
+                        shortLabel: commonTexts.common.incomplete,
                         cutValuesForMetricProperties: [
                           'admissions_on_date_of_admission_moving_average',
                         ],
@@ -466,96 +490,52 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     'hospital_nice'
                   )}
                 />
-                {
-                  <MiniTrendTile
-                    title={
-                      textNl.mini_trend_tiles.positief_geteste_mensen.title
-                    }
-                    text={
-                      <>
-                        <DataDrivenText
-                          data={data}
-                          content={[
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.tested_overall
-                                .value,
-                              metricName: 'tested_overall',
-                              metricProperty: 'infected_moving_average_rounded',
-                              additionalData: {
-                                dateStart: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix -
-                                    WEEK_IN_SECONDS
-                                ),
-                                dateEnd: formatters.formatDateFromSeconds(
-                                  data.tested_overall.last_value.date_unix
-                                ),
-                              },
-                            },
-                            {
-                              type: 'metric',
-                              text: textNl.data_driven_texts.tested_ggd.value,
-                              metricName: 'tested_ggd',
-                              isPercentage: true,
-                              metricProperty:
-                                'infected_percentage_moving_average',
-                            },
-                          ]}
-                        />
-                        <LinkWithIcon
-                          href={reverseRouter.nl.positiefGetesteMensen()}
-                          icon={<Chevron />}
-                          iconPlacement="right"
-                        >
+                <MiniTrendTile
+                  title={textNl.mini_trend_tiles.sewer.title}
+                  text={
+                    <>
+                      <DataDrivenText
+                        data={data}
+                        content={[
                           {
-                            textNl.mini_trend_tiles.positief_geteste_mensen
-                              .read_more_link
-                          }
-                        </LinkWithIcon>
-                      </>
-                    }
-                    icon={<Test />}
-                    values={dataTestedOverall.values}
-                    seriesConfig={[
-                      {
-                        type: 'line',
-                        metricProperty: 'infected_moving_average',
-                        label:
-                          positiveTestsText.tooltip_labels
-                            .infected_moving_average,
-                        color: colors.data.primary,
-                      },
-                      {
-                        type: 'bar',
-                        metricProperty: 'infected',
-                        label:
-                          positiveTestsText.tooltip_labels.infected_overall,
-                        color: colors.data.primary,
-                      },
-                    ]}
-                    accessibility={{
-                      key: 'topical_tested_overall_infected',
-                    }}
-                    warning={getWarning(
-                      content.elements.warning,
-                      'tested_overall'
-                    )}
-                    dataOptions={{
-                      forcedMaximumValue: 150000,
-                      outOfBoundsConfig: {
-                        label:
-                          positiveTestsText.tooltip_labels
-                            .infected_out_of_bounds,
-                        tooltipLabel:
-                          positiveTestsText.tooltip_labels.annotations,
-                        checkIsOutofBounds: (
-                          x: NlTestedOverallValue,
-                          max: number
-                        ) => x.infected > max,
-                      },
-                    }}
-                  />
-                }
+                            type: 'metric',
+                            text: textNl.data_driven_texts.sewer_text.value,
+                            metricName: 'sewer',
+                            metricProperty: 'average',
+                            additionalData: {
+                              newDate: formatters.formatDateFromSeconds(
+                                data.sewer.last_value.date_unix
+                              ),
+                            },
+                          },
+                        ]}
+                      />
+                      <LinkWithIcon
+                        href={reverseRouter.nl.rioolwater()}
+                        icon={<Chevron />}
+                        iconPlacement="right"
+                      >
+                        {textNl.mini_trend_tiles.sewer.read_more_link}
+                      </LinkWithIcon>
+                    </>
+                  }
+                  icon={<RioolwaterMonitoring />}
+                  values={dataSewerTotal.values}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'average',
+                      label: commonTexts.common.daggemiddelde,
+                      color: colors.data.scale.blue[3],
+                    },
+                  ]}
+                  dataOptions={{
+                    valueAnnotation:
+                      commonTexts.waarde_annotaties.riool_normalized,
+                  }}
+                  accessibility={{ key: 'topical_sewer' }}
+                  warning={getWarning(content.elements.warning, 'sewer')}
+                />
                 <MiniVaccinationCoverageTile
                   title={textNl.mini_trend_tiles.vaccinatiegraad.title}
                   oneShotBarLabel={
@@ -624,13 +604,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search title={textShared.secties.search.title.nl} />
             </Box>
 
-            {riskLevelFeature.isEnabled && (
-              <EscalationLevelBanner
-                data={data.risk_level.last_value}
-                hasLink
-              />
-            )}
-
             <CollapsibleButton
               label={textShared.overview_links_header}
               icon={<Chart />}
@@ -650,12 +623,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: textNl.quick_links.links.gemeente,
                   },
-                  internationalFeature.isEnabled
-                    ? {
-                        href: reverseRouter.in.index(),
-                        text: textNl.quick_links.links.internationaal,
-                      }
-                    : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={textNl.data_sitemap_titel}
                 dataSitemap={dataSitemap}
@@ -668,6 +635,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 weeklyHighlight={content.weeklyHighlight}
                 highlights={content.highlights}
                 showWeeklyHighlight={content.showWeeklyHighlight}
+                text={textShared}
               />
             )}
 
@@ -687,6 +655,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 text: textShared.secties.vaccination_coverage_choropleth
                   .link_text.nl,
               }}
+              text={textShared}
             />
           </Box>
         </MaxWidth>
@@ -704,10 +673,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               description={textShared.secties.meer_lezen.omschrijving}
               link={textShared.secties.meer_lezen.link}
               headerVariant="h2"
+              text={textShared}
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles as any} />
+              <ArticleList
+                articles={content.articles as any}
+                text={textShared}
+              />
             )}
           </MaxWidth>
         </Box>

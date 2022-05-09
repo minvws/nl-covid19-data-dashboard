@@ -14,13 +14,25 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { Languages } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, selectNlData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  getLokalizeTexts,
+  selectNlData,
+} from '~/static-props/get-data';
 
 export const getStaticProps = createGetStaticProps(
+  ({ locale }: { locale: keyof Languages }) =>
+    getLokalizeTexts(
+      (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
+      }),
+      locale
+    ),
   getLastGeneratedDate,
   selectNlData(
     'difference.doctor__covid_symptoms_per_100k',
@@ -30,14 +42,14 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, lastGenerated } = props;
+  const { pageText, selectedNlData: data, lastGenerated } = props;
   const lastValue = data.doctor.last_value;
-
-  const { siteText } = useIntl();
-  const text = siteText.verdenkingen_huisartsen;
+  const { metadataTexts } = pageText;
+  const { commonTexts } = useIntl();
+  const text = commonTexts.verdenkingen_huisartsen;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: text.metadata.title,
     description: text.metadata.description,
   };
@@ -47,9 +59,9 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.archief}
+            category={commonTexts.nationaal_layout.headings.archief}
             screenReaderCategory={
-              siteText.sidebar.metrics.general_practitioner_suspicions.title
+              commonTexts.sidebar.metrics.general_practitioner_suspicions.title
             }
             title={text.titel}
             icon={<Arts />}
@@ -105,28 +117,25 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.nivel }}
             description={text.linechart_description}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'doctor_covid_symptoms_over_time_chart',
-                }}
-                timeframe={timeframe}
-                values={data.doctor.values}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'covid_symptoms_per_100k',
-                    label: text.tooltip_labels.covid_klachten,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'doctor_covid_symptoms_over_time_chart',
+              }}
+              timeframe={TimeframeOption.ALL}
+              values={data.doctor.values}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'covid_symptoms_per_100k',
+                  label: text.tooltip_labels.covid_klachten,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>

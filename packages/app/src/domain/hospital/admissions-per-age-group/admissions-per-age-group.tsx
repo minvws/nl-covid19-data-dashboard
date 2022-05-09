@@ -1,4 +1,5 @@
 import {
+  DAY_IN_SECONDS,
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
   TimeframeOption,
@@ -42,11 +43,11 @@ export function AdmissionsPerAgeGroup({
   accessibility,
   timelineEvents,
 }: AdmissionsPerAgeGroup) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
 
-  const text = siteText.admissions_per_age_group_chart;
+  const text = commonTexts.admissions_per_age_group_chart;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
   const alwaysEnabled = ['admissions_overall_per_million'];
@@ -59,9 +60,12 @@ export function AdmissionsPerAgeGroup({
           ? text.legend[baseAgeGroup.metricProperty]
           : baseAgeGroup.metricProperty;
 
-      const ariaLabel = replaceVariablesInText(siteText.aria_labels.age_old, {
-        age: label,
-      });
+      const ariaLabel = replaceVariablesInText(
+        commonTexts.aria_labels.age_old,
+        {
+          age: label,
+        }
+      );
 
       return {
         ...baseAgeGroup,
@@ -114,7 +118,7 @@ export function AdmissionsPerAgeGroup({
         dataOptions={{
           timespanAnnotations: [
             {
-              start: underReportedDateStart,
+              start: underReportedDateStart + DAY_IN_SECONDS / 2,
               end: Infinity,
               label: text.line_chart_legend_inaccurate_label,
               shortLabel: text.tooltip_labels.inaccurate,

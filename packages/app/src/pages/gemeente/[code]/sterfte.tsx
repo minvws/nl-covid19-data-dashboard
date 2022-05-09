@@ -1,17 +1,18 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { ChartTile } from '~/components/chart-tile';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
+import {
+  KpiValue,
+  KpiTile,
+  ChartTile,
+  PageInformationBlock,
+  Markdown,
+  TimeSeriesChart,
+  TwoKpiSection,
+  TileList,
+} from '~/components';
 import { Text } from '~/components/typography';
-import { GmLayout } from '~/domain/layout/gm-layout';
-import { Layout } from '~/domain/layout/layout';
+import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -34,7 +35,11 @@ import {
   selectGmData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { replaceVariablesInText } from '~/utils';
+
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['deceased_rivm', 'code'];
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -83,11 +88,11 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const { textGm } = pageText;
 
   const metadata = {
-    ...siteText.gemeente_index.metadata,
+    ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
       municipalityName,
     }),
@@ -96,12 +101,14 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.gemeente_layout.headings.besmettingen}
+            category={commonTexts.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}
@@ -111,8 +118,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textGm.section_deceased_rivm.datums,
               dateOrRange: data.deceased_rivm.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.deceased_rivm.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
             }}
             articles={content.articles}
@@ -158,7 +164,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
             title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               textGm.section_deceased_rivm.line_chart_covid_daily_description

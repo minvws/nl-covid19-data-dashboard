@@ -8,7 +8,7 @@ import { Article, Block, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
-import { Anchor, Heading, InlineText, Text } from './typography';
+import { Anchor, Heading, Text, BoldText } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
@@ -25,7 +25,7 @@ type ArticleTeaserProps = {
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
   const { title, slug, summary, cover, coverSizes } = props;
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
@@ -41,10 +41,10 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
         </Heading>
         <Text>{summary}</Text>
 
-        <InlineText aria-hidden="true" fontWeight="bold" color="link">
-          {siteText.common.read_more}
+        <BoldText aria-hidden="true" color="link">
+          {commonTexts.common.read_more}
           <Arrow />
-        </InlineText>
+        </BoldText>
       </StyledArticleTeaser>
     </Link>
   );

@@ -1,7 +1,7 @@
+import css from '@styled-system/css';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { Down, Gelijk, Up } from '@corona-dashboard/icons';
-import { InlineText } from '~/components/typography';
-import css from '@styled-system/css';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
 import { Markdown } from '~/components/markdown';
@@ -18,9 +18,9 @@ export function TileAverageDifference({
   isAmount: boolean;
   maximumFractionDigits?: number;
 }) {
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const { difference, old_value } = value;
-  const text = siteText.toe_en_afname;
+  const text = commonTexts.toe_en_afname;
 
   const formattedDifference = formatNumber(
     Math.abs(difference),
@@ -66,9 +66,7 @@ export function TileAverageDifference({
       <Markdown
         renderersOverrides={{
           paragraph: 'span',
-          strong: (props) => (
-            <InlineText fontWeight="bold">{props.children}</InlineText>
-          ),
+          strong: (props) => <BoldText>{props.children}</BoldText>,
         }}
         content={replaceVariablesInText(content, {
           amount: `${formattedDifference}${isPercentage ? '%' : ''}`,

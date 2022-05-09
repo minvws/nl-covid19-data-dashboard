@@ -1,5 +1,5 @@
 import { Box, Spacer } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
@@ -16,26 +16,25 @@ import {
   NlVaccineCoveragePerAgeGroupValue,
   VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { SiteText } from '~/locale';
 
 export function NarrowCoverageTable({
   values,
+  text,
 }: {
+  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
   values:
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
 }) {
-  const { siteText, formatPercentage } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const text = siteText.pages.vaccinationsPage.nl.vaccination_coverage;
-  const { templates } = siteText.pages.vaccinationsPage.nl.vaccination_coverage;
 
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="silver" pb={2}>
-        <InlineText fontWeight="bold" variant="label1">
-          {text.headers.agegroup}
-        </InlineText>
+        <BoldText variant="label1">{text.headers.agegroup}</BoldText>
       </Box>
 
       {values.map((item, index) => (
@@ -50,16 +49,16 @@ export function NarrowCoverageTable({
           <AgeGroup
             range={formatAgeGroupString(
               item.age_group_range,
-              templates.agegroup
+              commonTexts.common.agegroup
             )}
             ageGroupTotal={
               'age_group_total' in item ? item.age_group_total : undefined
             }
             birthyear_range={formatBirthyearRangeString(
               item.birthyear_range,
-              templates.birthyears
+              commonTexts.common.birthyears
             )}
-            text={templates.agegroup.total_people}
+            text={commonTexts.common.agegroup.total_people}
           />
 
           <Box spacing={1}>

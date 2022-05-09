@@ -29,16 +29,21 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['variants', 'named_difference'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.variantsPage.nl,
         textShared: siteText.pages.variantsPage.shared,
       }),
       locale
     ),
+  selectNlData('variants', 'named_difference'),
   getLastGeneratedDate,
   () => {
     const data = selectNlData('variants', 'named_difference')();
@@ -73,6 +78,7 @@ export default function CovidVariantenPage(
   const {
     pageText,
     variantSidebarValue,
+    selectedNlData: data,
     lastGenerated,
     content,
     variantTable,
@@ -80,22 +86,24 @@ export default function CovidVariantenPage(
     dates,
   } = props;
 
-  const { siteText } = useIntl();
-  const { textNl, textShared } = pageText;
+  const { commonTexts } = useIntl();
+  const { metadataTexts, textNl, textShared } = pageText;
 
   const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
+    ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.sidebar.metrics.variants.title}
+            category={commonTexts.nationaal_layout.headings.besmettingen}
+            screenReaderCategory={commonTexts.sidebar.metrics.variants.title}
             title={textNl.titel}
             icon={<Varianten />}
             description={textNl.pagina_toelichting}
@@ -105,7 +113,7 @@ export default function CovidVariantenPage(
                 start: dates.date_start_unix,
                 end: dates.date_end_unix,
               },
-              dateOfInsertionUnix: dates.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
             referenceLink={textNl.reference.href}
@@ -117,7 +125,11 @@ export default function CovidVariantenPage(
             <VariantsTableTile
               data={variantTable}
               sampleSize={variantSidebarValue.sample_size}
-              text={textShared.varianten_tabel}
+              text={{
+                ...textShared.varianten_tabel,
+                varianten: commonTexts.variants,
+                description: textNl.varianten_omschrijving,
+              }}
               source={textNl.bronnen.rivm}
               dates={{
                 date_end_unix: dates.date_end_unix,
@@ -128,7 +140,10 @@ export default function CovidVariantenPage(
           )}
 
           <VariantsStackedAreaTile
-            text={textNl.varianten_over_tijd_grafiek}
+            text={{
+              ...textNl.varianten_over_tijd_grafiek,
+              varianten: commonTexts.variants,
+            }}
             values={variantChart}
             metadata={{
               dataSources: [textNl.bronnen.rivm],

@@ -12,6 +12,7 @@ import {
   Text,
 } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface TopicalSectionHeaderProps {
@@ -25,6 +26,7 @@ interface TopicalSectionHeaderProps {
     href: string;
     text: string;
   };
+  text: SiteText['pages']['topicalPage']['shared'];
 }
 
 export function TopicalSectionHeader({
@@ -35,15 +37,16 @@ export function TopicalSectionHeader({
   description,
   headingLevel = 2,
   headerVariant = 'h1',
+  text,
 }: TopicalSectionHeaderProps) {
-  const { siteText: text, formatDateFromSeconds } = useIntl();
+  const { formatDateFromSeconds } = useIntl();
 
   return (
     <Box spacing={3}>
       {showBackLink && (
         <Box py={3} borderBottom={'solid 1px'} borderColor={'border'}>
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
-            {text.pages.topicalPage.shared.terug_naar_landelijk}
+            {text.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
       )}
@@ -82,13 +85,10 @@ export function TopicalSectionHeader({
 
         {lastGenerated && (
           <InlineText variant="label1" color="bodyLight">
-            {replaceComponentsInText(
-              text.pages.topicalPage.shared.laatst_bijgewerkt,
-              {
-                date: <RelativeDate dateInSeconds={lastGenerated} />,
-                time: formatDateFromSeconds(lastGenerated, 'time'),
-              }
-            )}
+            {replaceComponentsInText(text.laatst_bijgewerkt, {
+              date: <RelativeDate dateInSeconds={lastGenerated} />,
+              time: formatDateFromSeconds(lastGenerated, 'time'),
+            })}
           </InlineText>
         )}
 

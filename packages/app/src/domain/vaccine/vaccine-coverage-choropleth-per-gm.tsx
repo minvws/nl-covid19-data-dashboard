@@ -19,7 +19,7 @@ import {
 } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -43,7 +43,7 @@ interface VaccineCoverageChoroplethPerGmProps {
 export function VaccineCoverageChoroplethPerGm({
   data,
 }: VaccineCoverageChoroplethPerGmProps) {
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const [selectedCoverageKind, setSelectedCoverageKind] =
@@ -52,7 +52,7 @@ export function VaccineCoverageChoroplethPerGm({
 
   const variables = {
     regio:
-      siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage.shared[
+      commonTexts.choropleth.choropleth_vaccination_coverage.shared[
         selectedMap
       ],
   };
@@ -60,16 +60,15 @@ export function VaccineCoverageChoroplethPerGm({
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
-        siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage.nl
-          .title,
+        commonTexts.choropleth.choropleth_vaccination_coverage.nl.title,
         variables
       )}
       description={
         <>
           <Markdown
             content={replaceVariablesInText(
-              siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
-                .nl.description,
+              commonTexts.choropleth.choropleth_vaccination_coverage.nl
+                .description,
               variables
             )}
           />
@@ -80,19 +79,18 @@ export function VaccineCoverageChoroplethPerGm({
             spacingHorizontal={2}
             as={'fieldset'}
           >
-            <Text
+            <BoldText
               as="legend"
-              fontWeight="bold"
               css={css({
                 flexBasis: '100%',
                 mb: 2,
               })}
             >
               {
-                siteText.pages.vaccinationsPage.nl
-                  .choropleth_vaccination_coverage.shared.dropdowns_title
+                commonTexts.choropleth.vaccination_coverage.shared
+                  .dropdowns_title
               }
-            </Text>
+            </BoldText>
 
             <Box
               display="flex"
@@ -118,12 +116,11 @@ export function VaccineCoverageChoroplethPerGm({
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
         title:
-          siteText.pages.vaccinationsPage.nl.choropleth_vaccination_coverage
-            .shared.legend_title,
+          commonTexts.choropleth.choropleth_vaccination_coverage.shared
+            .legend_title,
       }}
       metadata={{
-        source:
-          siteText.pages.vaccinationsPage.nl.vaccination_coverage.bronnen.rivm,
+        source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
         date: data[selectedMap][0].date_unix,
       }}
       chartRegion={selectedMap}
@@ -144,8 +141,7 @@ export function VaccineCoverageChoroplethPerGm({
             isPercentage: true,
             getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
             tooltipVariables: {
-              age_group:
-                siteText.pages.vaccinationsPage.nl.age_groups[selectedAgeGroup],
+              age_group: commonTexts.common.age_groups[selectedAgeGroup],
             },
           }}
           formatTooltip={(context) => (
@@ -176,8 +172,7 @@ export function VaccineCoverageChoroplethPerGm({
             isPercentage: true,
             getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
             tooltipVariables: {
-              age_group:
-                siteText.pages.vaccinationsPage.nl.age_groups[selectedAgeGroup],
+              age_group: commonTexts.common.age_groups[selectedAgeGroup],
             },
           }}
           formatTooltip={(context) => (
@@ -218,8 +213,8 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
     `[${ChoroplethTooltip.name}] The given metricProperty ${data.dataConfig.metricProperty} is not found in percentageProps`
   );
 
-  const { siteText } = useIntl();
-  const text = siteText.choropleth_tooltip;
+  const { commonTexts } = useIntl();
+  const text = commonTexts.choropleth_tooltip;
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
   const coverageData = data.dataItem as VaccineCoverageData;
 
@@ -254,7 +249,8 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
     VaccineCoverageData,
     number
   >;
-  const filterBelow = data.dataItem[dataItemKey] || null;
+  const filterBelow =
+    (dataItemKey === undefined ? null : data.dataItem[dataItemKey]) || null;
 
   const mainContent = (
     text as unknown as Record<string, Record<string, Record<string, string>>>
@@ -318,7 +314,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
           <Markdown
             content={replaceVariablesInText(mainContent, tooltipVars)}
           />
-          <InlineText fontWeight="bold">{mainValue}</InlineText>
+          <BoldText>{mainValue}</BoldText>
         </Box>
       </TooltipSubject>
       {secondaryContent}

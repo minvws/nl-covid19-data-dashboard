@@ -7,7 +7,6 @@ import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { Link } from '~/utils/link';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { useMediaQuery } from '~/utils/use-media-query';
@@ -19,10 +18,8 @@ export function TopNavigation() {
   const isWideNav = useMediaQuery(wideNavBreakpoint);
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
   const collapsible = useCollapsible({ isOpen: isWideNav });
-
-  const internationalFeature = useFeature('inHomePage');
 
   return (
     <>
@@ -38,8 +35,8 @@ export function TopNavigation() {
             {collapsible.isOpen ? <CloseThick /> : <Menu />}
             <VisuallyHidden>
               {collapsible.isOpen
-                ? siteText.nav.menu.close_menu
-                : siteText.nav.menu.open_menu}
+                ? commonTexts.nav.menu.close_menu
+                : commonTexts.nav.menu.open_menu}
             </VisuallyHidden>
           </NavToggle>
         )}
@@ -52,7 +49,7 @@ export function TopNavigation() {
         id="main-navigation"
       >
         <VisuallyHidden id="top-nav-title" as="h2">
-          {siteText.nav.menu.title}
+          {commonTexts.nav.menu.title}
         </VisuallyHidden>
         {collapsible.content(
           <MaxWidth>
@@ -64,32 +61,23 @@ export function TopNavigation() {
                   router.pathname.startsWith('/actueel')
                 }
               >
-                {siteText.nav.links.actueel}
+                {commonTexts.nav.links.actueel}
               </NavItem>
               <NavItem
                 href={reverseRouter.nl.index()}
                 isActive={router.pathname.startsWith('/landelijk')}
               >
-                {siteText.nav.links.index}
+                {commonTexts.nav.links.index}
               </NavItem>
               <NavItem href={reverseRouter.vr.index()}>
-                {siteText.nav.links.veiligheidsregio}
+                {commonTexts.nav.links.veiligheidsregio}
               </NavItem>
               <NavItem href={reverseRouter.gm.index()}>
-                {siteText.nav.links.gemeente}
+                {commonTexts.nav.links.gemeente}
               </NavItem>
 
-              {internationalFeature.isEnabled ? (
-                <NavItem
-                  href={reverseRouter.in.index()}
-                  isActive={router.pathname.startsWith('/internationaal')}
-                >
-                  {siteText.nav.links.internationaal}
-                </NavItem>
-              ) : null}
-
               <NavItem href={reverseRouter.algemeen.over()}>
-                {siteText.nav.links.over}
+                {commonTexts.nav.links.over}
               </NavItem>
             </NavList>
           </MaxWidth>

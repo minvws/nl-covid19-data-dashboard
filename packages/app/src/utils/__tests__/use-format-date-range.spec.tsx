@@ -64,7 +64,7 @@ function createContext() {
     formatDateFromMilliseconds,
     formatRelativeDate,
     formatDateSpan,
-  } = createFormatting('nl-NL', {} as SiteText['utils']);
+  } = createFormatting('nl-NL', {} as SiteText['common']['utils']);
 
   return {
     dataset: 'production' as Dataset,
@@ -75,7 +75,7 @@ function createContext() {
     formatDateFromMilliseconds,
     formatRelativeDate,
     formatDateSpan,
-    siteText: {} as SiteText,
+    commonTexts: {} as SiteText['common'],
     locale: 'nl' as 'nl' | 'en',
   };
 }

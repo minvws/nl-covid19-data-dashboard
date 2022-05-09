@@ -106,6 +106,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/over-risiconiveaus',
+        destination: '/',
+        permanent: false,
+      },
+      {
         source: '/actueel',
         destination: '/',
         permanent: false,

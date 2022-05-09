@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { Locatie } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { TooltipData } from '~/components/time-series-chart/components';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { VisuallyHidden } from '~/components';
+import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { MergedSewerType } from '../logic';
 
@@ -17,7 +18,7 @@ export function LocationTooltip({
 }: {
   data: TooltipData<MergedSewerType>;
 }) {
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
 
   const config = data.config.find((x) => x.type === 'line');
 
@@ -35,10 +36,12 @@ export function LocationTooltip({
         <StyledLocationIcon>
           <Locatie />
         </StyledLocationIcon>
-        <b>{config.label}</b>
-        <Box mx={2}>{siteText.waarde_annotaties.per_100_000_inwoners}:</Box>
+        <BoldText>{config.label}</BoldText>
+        <Box mx={2}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>
 
-        <b>{formatNumber(data.value.selected_installation_rna_normalized)}</b>
+        <BoldText>
+          {formatNumber(data.value.selected_installation_rna_normalized)}
+        </BoldText>
       </Box>
     </>
   );

@@ -4,6 +4,7 @@ import { TextArea, TextInput } from '@sanity/ui';
 import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent';
 import { Marker } from '@sanity/types';
 import styled, { css } from 'styled-components';
+import { BlockEditor } from 'part:@sanity/form-builder';
 
 type ValidatedInputProps = {
   type: {
@@ -112,5 +113,25 @@ export const ValidatedInput = React.forwardRef(
     );
   }
 );
+
+export const ValidatedRichText = (props: Partial<{ markers: Marker[] }>) => {
+  const { markers } = props;
+
+  return (
+    <div>
+      <BlockEditor {...props} />
+
+      {markers?.length ? (
+        <Markers>
+          {markers.map((marker, index) => (
+            <div key={index}>
+              <strong>{marker.item.message}</strong>
+            </div>
+          ))}
+        </Markers>
+      ) : null}
+    </div>
+  );
+};
 
 export default ValidatedInput;

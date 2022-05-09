@@ -2,30 +2,33 @@ import {
   NlVaccineAdministeredPlannedValue,
   NlVaccineCoverage,
 } from '@corona-dashboard/common';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useMemo } from 'react';
 import { Box } from '~/components/base';
+import { isDefined } from 'ts-is-present';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
-import { DeliveryAndAdministrationData } from './data-selection/select-delivery-and-administration-data';
+import { AdministrationData } from './data-selection/select-administration-data';
 import {
   ActiveVaccinationChart,
   VaccinationChartControls,
   VaccinationsOverTimeChart,
 } from './vaccinations-over-time-chart';
 
-function useTileData(activeChart: ActiveVaccinationChart) {
-  const { siteText } = useIntl();
-
-  const text = siteText.pages.vaccinationsPage.nl;
-
+function useTileData(
+  activeChart: ActiveVaccinationChart,
+  text: SiteText['pages']['vaccinationsPage']['nl'],
+  insertionDate: number
+) {
   if (activeChart === 'coverage') {
     const metadata = {
       source: text.bronnen.rivm,
+      date: insertionDate,
     };
     const description =
       text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
@@ -33,6 +36,7 @@ function useTileData(activeChart: ActiveVaccinationChart) {
   }
   const metadata = {
     source: text.bronnen.rivm,
+    date: insertionDate,
   };
   const description = text.grafiek.omschrijving;
   return [metadata, description] as const;
@@ -40,32 +44,48 @@ function useTileData(activeChart: ActiveVaccinationChart) {
 
 interface VaccinationsOverTimeTileProps {
   coverageData?: NlVaccineCoverage;
-  deliveryAndAdministrationData: DeliveryAndAdministrationData;
+  administrationData: AdministrationData;
   vaccineAdministeredPlannedLastValue: NlVaccineAdministeredPlannedValue;
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
+  text: SiteText['pages']['vaccinationsPage']['nl'];
 }
 
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   const {
     coverageData,
-    deliveryAndAdministrationData,
+    administrationData,
     timelineEvents,
     vaccineAdministeredPlannedLastValue,
+    text,
   } = props;
 
-  const { siteText, formatNumber } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
 
   const [activeVaccinationChart, setActiveVaccinationChart] =
     useState<ActiveVaccinationChart>('coverage');
 
-  const [metadata, description] = useTileData(activeVaccinationChart);
+  const lastDate = useMemo<number>(
+    () =>
+      activeVaccinationChart === 'coverage' && isDefined(coverageData)
+        ? coverageData.last_value.date_unix
+        : administrationData.last_value.date_end_unix,
+    [
+      activeVaccinationChart,
+      coverageData,
+      administrationData.last_value.date_end_unix,
+    ]
+  );
+
+  const [metadata, description] = useTileData(
+    activeVaccinationChart,
+    text,
+    lastDate
+  );
 
   const roundedMillion =
-    Math.floor(
-      (deliveryAndAdministrationData.last_value.total / 1_000_000) * 10
-    ) / 10;
+    Math.floor((administrationData.last_value.total / 1_000_000) * 10) / 10;
 
   const [dateFromText, dateToText] = useFormatDateRange(
     vaccineAdministeredPlannedLastValue.date_start_unix,
@@ -75,12 +95,10 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
   return (
     <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader
-        title={
-          siteText.pages.vaccinationsPage.nl.vaccinations_over_time_tile.title
-        }
+        title={text.vaccinations_over_time_tile.title}
         description={replaceVariablesInText(description, {
           total_vaccines: `${formatNumber(roundedMillion)} ${
-            siteText.common.miljoen
+            commonTexts.common.miljoen
           }`,
           planned_vaccines: formatNumber(
             vaccineAdministeredPlannedLastValue.doses
@@ -93,9 +111,10 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
       />
       <VaccinationsOverTimeChart
         coverageData={coverageData}
-        deliveryAndAdministrationData={deliveryAndAdministrationData}
+        administrationData={administrationData}
         activeChart={activeVaccinationChart}
         timelineEvents={timelineEvents}
+        text={text}
       />
     </FullscreenChartTile>
   );

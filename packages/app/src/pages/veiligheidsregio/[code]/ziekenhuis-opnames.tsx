@@ -1,25 +1,27 @@
 import {
   colors,
   DAY_IN_SECONDS,
-  TimeframeOption,
+  TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { last } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
+import {
+  ChartTile,
+  DynamicChoropleth,
+  ChoroplethTile,
+  KpiTile,
+  KpiValue,
+  PageInformationBlock,
+  TileList,
+  TimeSeriesChart,
+  TwoKpiSection,
+} from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { Layout } from '~/domain/layout/layout';
-import { VrLayout } from '~/domain/layout/vr-layout';
+import { gmCodesByVrCode } from '~/data';
+import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -44,10 +46,16 @@ import {
   selectVrData,
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues } from '~/utils/count-trailing-null-values';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  countTrailingNullValues,
+  getBoundaryDateStartUnix,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
+
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = ['hospital_nice'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -63,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrData('hospital_nice'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -98,12 +106,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
   const { textVr, textShared } = pageText;
   const lastValue = data.hospital_nice.last_value;
+
+  const lastValueChoropleth =
+    last(choropleth.gm.hospital_nice_choropleth) || lastValue;
 
   const municipalCodes = gmCodesByVrCode[router.query.code as string];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -122,7 +133,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -132,12 +143,14 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
+            category={commonTexts.veiligheidsregio_layout.headings.ziekenhuizen}
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -146,7 +159,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.bronnen.rivm],
             }}
             referenceLink={textVr.reference.href}
@@ -183,7 +196,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: textVr.bronnen.rivm }}
             title={textVr.linechart_titel}
             description={textVr.linechart_description}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -213,7 +226,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedRange,
                       end: Infinity,
                       label: textVr.linechart_legend_underreported_titel,
-                      shortLabel: siteText.common.incomplete,
+                      shortLabel: commonTexts.common.incomplete,
                       cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
                       ],
@@ -238,7 +251,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title: textShared.chloropleth_legenda.titel,
             }}
             metadata={{
-              date: lastValue.date_unix,
+              date: lastValueChoropleth.date_unix,
               source: textVr.bronnen.rivm,
             }}
           >
@@ -247,16 +260,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              data={choropleth.gm.hospital_nice}
+              data={choropleth.gm.hospital_nice_choropleth}
               dataConfig={{
-                metricName: 'hospital_nice',
+                metricName: 'hospital_nice_choropleth',
                 metricProperty: 'admissions_on_date_of_admission',
               }}
               dataOptions={{
                 selectedCode: selectedMunicipalCode,
                 getLink: reverseRouter.gm.ziekenhuisopnames,
                 tooltipVariables: {
-                  patients: siteText.choropleth_tooltip.patients,
+                  patients: commonTexts.choropleth_tooltip.patients,
                 },
               }}
             />

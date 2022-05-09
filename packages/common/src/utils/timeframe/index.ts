@@ -8,26 +8,47 @@ import {
 import { DAY_IN_SECONDS } from '../../time';
 
 export enum TimeframeOption {
-  TWO_WEEKS = '2weeks',
+  ONE_WEEK = '1week',
   FIVE_WEEKS = '5weeks',
   THIRTY_DAYS = '30days',
   THREE_MONTHS = '3months',
+  SIX_MONTHS = '6months',
   LAST_YEAR = 'lastYear',
+  FIRST_OF_SEPTEMBER = 'firstOfSeptember',
   ALL = 'all',
 }
 
+export const TimeframeOptionsList = [
+  TimeframeOption.ALL,
+  TimeframeOption.ONE_WEEK,
+  TimeframeOption.THIRTY_DAYS,
+  TimeframeOption.THREE_MONTHS,
+  TimeframeOption.SIX_MONTHS,
+  TimeframeOption.LAST_YEAR,
+];
+
 export function getDaysForTimeframe(timeframe: TimeframeOption): number {
   switch (timeframe) {
-    case TimeframeOption.TWO_WEEKS:
-      return 2 * 7;
+    case TimeframeOption.ONE_WEEK:
+      return 7;
     case TimeframeOption.FIVE_WEEKS:
       return 5 * 7;
     case TimeframeOption.THIRTY_DAYS:
       return 30;
     case TimeframeOption.THREE_MONTHS:
       return 92;
+    case TimeframeOption.SIX_MONTHS:
+      return 183;
     case TimeframeOption.LAST_YEAR:
       return 365;
+    case TimeframeOption.FIRST_OF_SEPTEMBER: {
+      const date = new Date('1 September 2020');
+      const today = new Date();
+      const diffInDays = Math.round(
+        Math.abs(date.valueOf() - today.valueOf()) / (1000 * DAY_IN_SECONDS) - 1
+      );
+      return diffInDays;
+    }
     case TimeframeOption.ALL:
       return Infinity;
     default: {

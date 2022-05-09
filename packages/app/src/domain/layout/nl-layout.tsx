@@ -7,7 +7,6 @@ import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useSidebar } from './logic/use-sidebar';
-import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 interface NlLayoutProps {
   children?: React.ReactNode;
@@ -32,7 +31,7 @@ interface NlLayoutProps {
 export function NlLayout(props: NlLayoutProps) {
   const { children } = props;
 
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const topItems = useSidebar({
     layout: 'nl',
@@ -60,7 +59,6 @@ export function NlLayout(props: NlLayoutProps) {
         ['nursing_home_care', 'disabled_care', 'elderly_at_home'],
       ],
       ['early_indicators', ['sewage_measurement']],
-      ['other', ['coronamelder_app']],
     ],
   });
 
@@ -69,7 +67,7 @@ export function NlLayout(props: NlLayoutProps) {
     map: [
       [
         'archived_metrics',
-        ['infectious_people', 'general_practitioner_suspicions'],
+        ['coronamelder_app', 'infectious_people', 'general_practitioner_suspicions'],
       ],
     ],
   });
@@ -104,12 +102,12 @@ export function NlLayout(props: NlLayoutProps) {
             spacing={1}
           >
             <VisuallyHidden as="h2" id="sidebar-title">
-              {siteText.nationaal_layout.headings.sidebar}
+              {commonTexts.nationaal_layout.headings.sidebar}
             </VisuallyHidden>
 
             <Box px={3}>
               <Heading level={2} variant={'h3'}>
-                {siteText.sidebar.shared.nl_title}
+                {commonTexts.sidebar.shared.nl_title}
               </Heading>
             </Box>
 
@@ -121,7 +119,7 @@ export function NlLayout(props: NlLayoutProps) {
 
             <Box px={3}>
               <Heading level={3}>
-                {siteText.sidebar.shared.metrics_title}
+                {commonTexts.sidebar.shared.metrics_title}
               </Heading>
             </Box>
 
@@ -144,10 +142,7 @@ export function NlLayout(props: NlLayoutProps) {
           </Box>
         }
       >
-        <ErrorBoundary>
-          {children}
-          <LoadingWrapper previousUrl='landelijk'/>
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

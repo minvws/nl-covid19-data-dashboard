@@ -4,12 +4,9 @@
   "title": "nl",
   "required": [
     "behavior",
-    "booster_and_third_shot_administered",
+    "behavior_annotations",
     "booster_shot_administered",
     "repeating_shot_administered",
-    "booster_shot_delivered",
-    "booster_shot_planned",
-    "booster_shot_per_age_group",
     "booster_coverage",
     "code",
     "corona_melder_app_download",
@@ -18,7 +15,6 @@
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
-    "risk_level",
     "named_difference",
     "disability_care",
     "doctor",
@@ -27,8 +23,6 @@
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
-    "hospital_vaccination_status",
-    "hospital_vaccine_incidence_per_age_group",
     "infectious_people",
     "intensive_care_lcps",
     "intensive_care_nice",
@@ -39,17 +33,14 @@
     "nursing_home",
     "proto_name",
     "reproduction",
-    "third_shot_administered",
     "sewer",
     "tested_ggd",
     "tested_ggd_archived",
     "tested_overall",
     "tested_per_age_group",
     "vaccine_vaccinated_or_support",
-    "vaccine_delivery",
     "vaccine_delivery_estimate",
     "vaccine_administered",
-    "vaccine_administered_estimate",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
     "vaccine_administered_ggd",
@@ -81,29 +72,14 @@
     "named_difference": {
       "$ref": "__named_difference.json"
     },
-    "booster_and_third_shot_administered": {
-      "$ref": "booster_and_third_shot_administered.json"
-    },
     "booster_shot_administered": {
       "$ref": "booster_shot_administered.json"
     },
     "repeating_shot_administered": {
       "$ref": "repeating_shot_administered.json"
     },
-    "booster_shot_delivered": {
-      "$ref": "booster_shot_delivered.json"
-    },
-    "booster_shot_planned": {
-      "$ref": "booster_shot_planned.json"
-    },
-    "booster_shot_per_age_group": {
-      "$ref": "booster_shot_per_age_group.json"
-    },
     "booster_coverage": {
       "$ref": "booster_coverage.json"
-    },
-    "third_shot_administered": {
-      "$ref": "third_shot_administered.json"
     },
     "doctor": {
       "$ref": "doctor.json"
@@ -141,12 +117,6 @@
     "hospital_lcps": {
       "$ref": "hospital_lcps.json"
     },
-    "hospital_vaccination_status": {
-      "$ref": "hospital_vaccination_status.json"
-    },
-    "hospital_vaccine_incidence_per_age_group": {
-      "$ref": "hospital_vaccine_incidence_per_age_group.json"
-    },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
     },
@@ -165,9 +135,6 @@
     "disability_care": {
       "$ref": "disability_care.json"
     },
-    "risk_level": {
-      "$ref": "risk_level.json"
-    },
     "behavior": {
       "$ref": "behavior.json"
     },
@@ -176,6 +143,9 @@
     },
     "behavior_get_tested_support_per_age_group": {
       "$ref": "behavior_get_tested_support_per_age_group.json"
+    },
+    "behavior_annotations": {
+      "$ref": "behavior_annotations.json"
     },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
@@ -201,9 +171,6 @@
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
     },
-    "vaccine_delivery": {
-      "$ref": "vaccine_delivery.json"
-    },
     "vaccine_delivery_estimate": {
       "$ref": "vaccine_delivery_estimate.json"
     },
@@ -212,9 +179,6 @@
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
-    },
-    "vaccine_administered_estimate": {
-      "$ref": "vaccine_administered_estimate.json"
     },
     "vaccine_administered_doctors": {
       "$ref": "vaccine_administered_doctors.json"

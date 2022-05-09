@@ -45,7 +45,7 @@ export function WeekNumbers({
    * which prevents grid lines and axis from bleeding out of the graph
    */
   const id = useUniqueId();
-  const { siteText } = useIntl();
+  const { commonTexts } = useIntl();
 
   const { weekGridLines, weekNumberLabels } = useMemo(
     () => calculateWeekNumberAxis(startUnix, endUnix),
@@ -67,11 +67,11 @@ export function WeekNumbers({
     (dateUnix: number) => {
       const date = createDateFromUnixTimestamp(dateUnix);
       const weekInfo = getWeekInfo(date);
-      return replaceVariablesInText(siteText.common.week_number_label, {
+      return replaceVariablesInText(commonTexts.common.week_number_label, {
         weekNumber: weekInfo.weekNumber,
       });
     },
-    [siteText.common]
+    [commonTexts.common]
   );
 
   return (

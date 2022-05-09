@@ -5,7 +5,6 @@ import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
   createGetStaticProps,
@@ -14,7 +13,6 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
@@ -28,12 +26,12 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
+        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
         textNl: siteText.pages.measuresPage.nl,
       }),
       locale
     ),
   getLastGeneratedDate,
-  selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
     return `
@@ -61,18 +59,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, lastGenerated, selectedNlData: data } = props;
-  const { siteText } = useIntl();
-  const { textNl } = pageText;
+  const { pageText, content, lastGenerated } = props;
+  const { metadataTexts, textNl } = pageText;
 
   const { lockdown } = content;
 
-  const metadata = {
-    ...siteText.pages.topicalPage.nl.nationaal_metadata,
-  };
-
   return (
-    <Layout {...metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <Box as="header" spacing={4}>
@@ -87,10 +80,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
           <Box as="article" spacing={3}>
             <Heading level={3}>{lockdown.title}</Heading>
-            <LockdownTable
-              data={lockdown}
-              level={data.risk_level.last_value.risk_level}
-            />
+            <LockdownTable data={lockdown} level={1} />
           </Box>
         </TileList>
       </NlLayout>

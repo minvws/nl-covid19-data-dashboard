@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { PercentageBar } from '~/components/percentage-bar';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 
 export function BarWithNumber({
   amount,
@@ -22,9 +22,7 @@ export function BarWithNumber({
       spacingHorizontal={2}
     >
       <Box minWidth="4ch" textAlign="right">
-        <InlineText fontWeight="bold" color="black">
-          {formatValue(amount)}
-        </InlineText>
+        <BoldText color="black">{formatValue(amount)}</BoldText>
       </Box>
       <PercentageBar percentage={percentage} height="12px" />
     </Box>

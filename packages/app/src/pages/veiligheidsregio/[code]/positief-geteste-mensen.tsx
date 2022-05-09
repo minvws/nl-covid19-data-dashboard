@@ -1,27 +1,28 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Box } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Divider } from '~/components/divider';
-import { InView } from '~/components/in-view';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { InlineText, Text } from '~/components/typography';
-import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
-import { Layout } from '~/domain/layout/layout';
-import { VrLayout } from '~/domain/layout/vr-layout';
-import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
+import { BoldText, InlineText } from '~/components/typography';
+import {
+  ChartTile,
+  TwoKpiSection,
+  TimeSeriesChart,
+  TileList,
+  DynamicChoropleth,
+  ChoroplethTile,
+  Divider,
+  InView,
+  KpiTile,
+  KpiValue,
+  Markdown,
+  PageInformationBlock,
+} from '~/components';
+import { gmCodesByVrCode } from '~/data';
+import { Layout, VrLayout } from '~/domain/layout';
+import { GNumberBarChartTile } from '~/domain/tested';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -45,9 +46,20 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import {
+  replaceComponentsInText,
+  replaceVariablesInText,
+  useReverseRouter,
+} from '~/utils';
+
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+
+const pageMetrics = [
+  'g_number',
+  'tested_ggd',
+  'tested_ggd_archived',
+  'tested_overall',
+];
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -115,7 +127,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+  const { commonTexts, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
 
   const reverseRouter = useReverseRouter();
@@ -132,7 +144,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
-    ...siteText.veiligheidsregio_index.metadata,
+    ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.metadata.title, {
       safetyRegionName: vrName,
     }),
@@ -141,13 +153,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={siteText.veiligheidsregio_layout.headings.besmettingen}
-            screenReaderCategory={siteText.sidebar.metrics.positive_tests.title}
+            category={commonTexts.veiligheidsregio_layout.headings.besmettingen}
+            screenReaderCategory={
+              commonTexts.sidebar.metrics.positive_tests.title
+            }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -156,7 +172,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textVr.datums,
               dateOrRange: dataOverallLastValue.date_unix,
-              dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.bronnen.rivm],
             }}
             referenceLink={textVr.reference.href}
@@ -182,7 +198,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textVr.infected_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textVr.infected_kpi.last_value_text,
                     {
@@ -197,7 +213,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textVr.infected_kpi.link_cta && (
                   <Markdown content={textVr.infected_kpi.link_cta} />
                 )}
@@ -220,7 +236,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textVr.percentage_kpi.description} />
 
               <Box spacing={3}>
-                <Text variant="body2" fontWeight="bold">
+                <BoldText variant="body2">
                   {replaceComponentsInText(
                     textVr.percentage_kpi.last_value_text,
                     {
@@ -235,7 +251,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                     }
                   )}
-                </Text>
+                </BoldText>
                 {textVr.percentage_kpi.link_cta && (
                   <Markdown content={textVr.percentage_kpi.link_cta} />
                 )}
@@ -249,7 +265,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textVr.bronnen.rivm,
             }}
-            timeframeOptions={[TimeframeOption.ALL, TimeframeOption.FIVE_WEEKS]}
+            timeframeOptions={TimeframeOptionsList}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -294,7 +310,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               description={
                 <>
                   <Markdown content={textVr.map_toelichting} />
-                  <Text variant="body2" fontWeight="bold">
+                  <BoldText variant="body2">
                     {replaceComponentsInText(textVr.map_last_value_text, {
                       infected_per_100k: (
                         <InlineText color="data.primary">{`${formatNumber(
@@ -307,7 +323,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       ),
                       safetyRegion: vrName,
                     })}
-                  </Text>
+                  </BoldText>
                 </>
               }
               legend={{
@@ -376,7 +392,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={textVr.ggd.tests_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(textVr.ggd.tests_kpi.last_value_text, {
                   tested_total: (
                     <InlineText color="data.primary">{`${formatNumber(
@@ -388,7 +404,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     'weekday-medium'
                   ),
                 })}
-              </Text>
+              </BoldText>
             </KpiTile>
             <KpiTile
               title={textVr.ggd.percentage_kpi.title}
@@ -405,7 +421,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
               <Markdown content={textVr.ggd.percentage_kpi.description} />
 
-              <Text variant="body2" fontWeight="bold">
+              <BoldText variant="body2">
                 {replaceComponentsInText(
                   textVr.ggd.percentage_kpi.last_value_text,
                   {
@@ -427,16 +443,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   }
                 )}
-              </Text>
+              </BoldText>
             </KpiTile>
           </TwoKpiSection>
 
           <InView rootMargin="400px">
             <ChartTile
-              timeframeOptions={[
-                TimeframeOption.ALL,
-                TimeframeOption.FIVE_WEEKS,
-              ]}
+              timeframeOptions={TimeframeOptionsList}
               title={textVr.ggd.linechart_totaltests_titel}
               description={textVr.ggd.linechart_totaltests_toelichting}
               metadata={{
