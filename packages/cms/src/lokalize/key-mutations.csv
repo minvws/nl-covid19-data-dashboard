@@ -23,3 +23,4 @@ timestamp,action,key,document_id,move_to
 2022-05-09T09:27:24.543Z,delete,choropleth_tooltip.vr.booster_shot_percentage.subject,4C4Y1v39Co3s0ZW9zUzEm1,__
 2022-05-09T09:27:24.543Z,move,choropleth_tooltip.gm.booster_shot_percentage.content,VNAGnZtzuWCFY8gXn2zsLa,common.choropleth_tooltip.gm.booster_shot_percentage.content
 2022-05-09T09:27:24.544Z,move,choropleth_tooltip.gm.booster_shot_percentage.subject,VNAGnZtzuWCFY8gXn2zsT8,common.choropleth_tooltip.gm.booster_shot_percentage.subject
+2022-05-09T08:58:28.088Z,move,accessibility.charts.hospital_admissions_region_choropleth.description,G1DXw0RdifOml06twMjbPq,common.accessibility.charts.hospital_admissions_region_choropleth.description
