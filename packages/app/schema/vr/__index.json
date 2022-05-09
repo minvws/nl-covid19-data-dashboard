@@ -9,7 +9,6 @@
     "code",
     "tested_overall",
     "hospital_nice",
-    "hospital_nice_choropleth",
     "tested_ggd",
     "tested_ggd_archived",
     "nursing_home",
@@ -62,9 +61,6 @@
     },
     "hospital_nice": {
       "$ref": "hospital_nice.json"
-    },
-    "hospital_nice_choropleth": {
-      "$ref": "hospital_nice_choropleth.json"
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
