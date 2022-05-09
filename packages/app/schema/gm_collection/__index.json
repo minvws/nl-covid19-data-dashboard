@@ -38,7 +38,7 @@
       "type": "array",
       "maxItems": 355,
       "items": {
-        "$ref": "hospital_nice.json"
+        "$ref": "hospital_nice_choropleth.json"
       }
     },
     "tested_overall": {
