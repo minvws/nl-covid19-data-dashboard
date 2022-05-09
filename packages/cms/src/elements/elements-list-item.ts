@@ -28,9 +28,7 @@ export function elementsListItem() {
                 )
                 .pipe(
                   map((doc: { scope: string }[]) => {
-                    const scopes = uniq(doc.map((x) => x.scope)).filter(
-                      (s) => s !== undefined
-                    );
+                    const scopes = uniq(doc.map((x) => x.scope));
                     console.log(scopes);
 
                     return S.list()
@@ -39,13 +37,14 @@ export function elementsListItem() {
                       .items(
                         scopes
                           .sort((a, b) => a.localeCompare(b))
-                          .map((scope, index) =>
-                            S.listItem()
-                              .title(scope)
-                              .id(`${scope}-${index}`)
+                          .map((scope, index) => {
+                            const scopeName = scope || 'EMPTY';
+                            return S.listItem()
+                              .title(scopeName)
+                              .id(`${scopeName}-${index}`)
                               .child(
                                 S.documentList()
-                                  .id(`${scope}-element`)
+                                  .id(`${scopeName}-element`)
                                   .title('Element')
                                   .defaultOrdering([
                                     { field: 'metricName', direction: 'asc' },
@@ -55,8 +54,8 @@ export function elementsListItem() {
                                       direction: 'asc',
                                     },
                                   ])
-                                  .filter('scope == $scope')
-                                  .params({ scope })
+                                  .filter('scope == $scopeName')
+                                  .params({ scopeName })
                                   .child((id) =>
                                     S.editor()
                                       .id(id)
@@ -64,8 +63,8 @@ export function elementsListItem() {
                                       .documentId(id)
                                       .views([S.view.form()])
                                   )
-                              )
-                          )
+                              );
+                          })
                       );
                   })
                 );

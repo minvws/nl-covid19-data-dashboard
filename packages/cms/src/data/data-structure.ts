@@ -38,7 +38,7 @@ export const dataStructure = {
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
     ],
-    booster_coverage: ["percentage", "percentage_label"],
+    booster_coverage: ["age_group", "percentage", "percentage_label"],
   },
   gm_collection: {
     hospital_nice: [
@@ -502,7 +502,7 @@ export const dataStructure = {
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
     ],
-    booster_coverage: ["percentage", "percentage_label"],
+    booster_coverage: ["age_group", "percentage", "percentage_label"],
   },
   vr_collection: {
     hospital_nice: [
