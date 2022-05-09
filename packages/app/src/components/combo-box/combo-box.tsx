@@ -128,7 +128,7 @@ function useSearchedOptions<Option extends TOption>(
   return useMemo(
     () =>
       throttledTerm.trim() === ''
-        ? options.sort((a: Option, b: Option) => a.name.localeCompare(b.name))
+        ? options
         : matchSorter(options, throttledTerm.trim(), {
             keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
           }),
