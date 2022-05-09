@@ -15,6 +15,7 @@
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
+    "risk_level",
     "named_difference",
     "disability_care",
     "doctor",
@@ -27,7 +28,6 @@
     "intensive_care_lcps",
     "intensive_care_nice",
     "intensive_care_nice_per_age_group",
-    "intensive_care_vaccination_status",
     "last_generated",
     "name",
     "nursing_home",
@@ -68,6 +68,9 @@
     },
     "difference": {
       "$ref": "__difference.json"
+    },
+    "risk_level": {
+      "$ref": "risk_level.json"
     },
     "named_difference": {
       "$ref": "__named_difference.json"
@@ -119,9 +122,6 @@
     },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
-    },
-    "intensive_care_vaccination_status": {
-      "$ref": "intensive_care_vaccination_status.json"
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
