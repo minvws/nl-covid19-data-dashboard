@@ -16,3 +16,4 @@ timestamp,action,key,document_id,move_to
 2022-05-05T11:48:10.313Z,add,pages.vaccinationsPage.nl.vaccination_coverage.no_data,hqivmGf8UPzCLjKFjLpCSD,__
 2022-05-05T11:48:10.323Z,delete,pages.vaccinationsPage.shared.vaccine_coverage_per_age_group,hqivmGf8UPzCLjKFjK6SXZ,__
 2022-05-03T14:03:24.707Z,add,common.corona_melder_app.belangrijk_bericht,xNELI4GNAeXqkWZzsHkjJM,__
+2022-05-09T08:58:28.088Z,move,accessibility.charts.hospital_admissions_region_choropleth.description,G1DXw0RdifOml06twMjbPq,common.accessibility.charts.hospital_admissions_region_choropleth.description
