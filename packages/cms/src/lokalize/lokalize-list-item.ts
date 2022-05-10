@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 export function lokalizeListItem() {
   return S.listItem()
+    .id('lokalize')
     .title('Lokalize')
     .icon(FaLanguage)
     .child(() => {

@@ -7,7 +7,6 @@ import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { Link } from '~/utils/link';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { useMediaQuery } from '~/utils/use-media-query';
@@ -21,8 +20,6 @@ export function TopNavigation() {
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
   const collapsible = useCollapsible({ isOpen: isWideNav });
-
-  const internationalFeature = useFeature('inHomePage');
 
   return (
     <>
@@ -78,15 +75,6 @@ export function TopNavigation() {
               <NavItem href={reverseRouter.gm.index()}>
                 {commonTexts.nav.links.gemeente}
               </NavItem>
-
-              {internationalFeature.isEnabled ? (
-                <NavItem
-                  href={reverseRouter.in.index()}
-                  isActive={router.pathname.startsWith('/internationaal')}
-                >
-                  {commonTexts.nav.links.internationaal}
-                </NavItem>
-              ) : null}
 
               <NavItem href={reverseRouter.algemeen.over()}>
                 {commonTexts.nav.links.over}

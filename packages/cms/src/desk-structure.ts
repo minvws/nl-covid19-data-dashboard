@@ -56,6 +56,7 @@ const hiddenDocTypes = [
 
 export default () =>
   S.list()
+    .id('content')
     .title('Content')
     .items([
       pagePartListItem(),
@@ -69,6 +70,7 @@ export default () =>
       ),
       addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()
+        .id('veelgestelde-vragen')
         .title('Veelgestelde vragen')
         .icon(MdQuestionAnswer)
         .child(
@@ -89,6 +91,7 @@ export default () =>
             ])
         ),
       S.listItem()
+        .id('cijferverantwoording')
         .title('Cijferverantwoording')
         .icon(BsCardChecklist)
         .child(
@@ -114,6 +117,7 @@ export default () =>
       S.divider(),
 
       S.listItem()
+        .id('grafieken')
         .title('Grafieken')
         .icon(BsFillFileBarGraphFill)
         .child(
@@ -133,6 +137,7 @@ export default () =>
         ),
 
       S.listItem()
+        .id('pagina-onderdelen')
         .title('Pagina onderdelen')
         .icon(BsFillPuzzleFill)
         .child(
@@ -172,11 +177,13 @@ function addListItem(
   documentId = schemaType
 ) {
   return S.listItem()
+    .id(schemaType)
     .title(title)
     .schemaType(schemaType)
     .icon(icon)
-    .child(
+    .child((id) =>
       S.editor()
+        .id(id)
         .title(title)
         .schemaType(schemaType)
         .documentId(documentId)

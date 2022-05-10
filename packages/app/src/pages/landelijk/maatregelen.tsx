@@ -13,7 +13,6 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
@@ -33,7 +32,6 @@ export const getStaticProps = createGetStaticProps(
       locale
     ),
   getLastGeneratedDate,
-  selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
     return `
@@ -61,7 +59,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, lastGenerated, selectedNlData: data } = props;
+  const { pageText, content, lastGenerated } = props;
   const { metadataTexts, textNl } = pageText;
 
   const { lockdown } = content;
@@ -82,10 +80,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
           <Box as="article" spacing={3}>
             <Heading level={3}>{lockdown.title}</Heading>
-            <LockdownTable
-              data={lockdown}
-              level={data.risk_level.last_value.risk_level}
-            />
+            <LockdownTable data={lockdown} level={1} />
           </Box>
         </TileList>
       </NlLayout>

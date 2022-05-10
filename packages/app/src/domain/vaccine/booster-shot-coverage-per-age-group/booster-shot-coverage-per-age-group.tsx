@@ -1,21 +1,25 @@
 import {
   assert,
-  NlBoosterShotPerAgeGroupValue,
+  GmVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { NarrowCoverageTable } from './components/narrow-coverage-table';
 import { WideCoverageTable } from './components/wide-coverage-table';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SiteText } from '~/locale';
-
-interface BoosterShotCoveragePerAgeGroupProps {
+import { useBreakpoints } from '~/utils/use-breakpoints';
+interface BoosterCoveragePerAgeGroupProps {
   title: string;
   description: string;
   metadata: MetadataProps;
   sortingOrder: string[];
-  values: NlBoosterShotPerAgeGroupValue[];
-  text: SiteText['pages']['vaccinationsPage']['nl']['booster_per_age_group_table'];
+  values:
+    | NlVaccineCoveragePerAgeGroupValue[]
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
+  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
 }
 
 export function BoosterShotCoveragePerAgeGroup({
@@ -25,7 +29,7 @@ export function BoosterShotCoveragePerAgeGroup({
   values,
   sortingOrder,
   text,
-}: BoosterShotCoveragePerAgeGroupProps) {
+}: BoosterCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
 
   const getSortingOrder = (ageGroup: string) => {
