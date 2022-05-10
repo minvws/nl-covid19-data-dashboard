@@ -57,6 +57,11 @@ export function VaccineCoverageChoroplethPerGm({
       ],
   };
 
+  const choroplethDataVr: VrCollectionVaccineCoveragePerAgeGroup[] =
+    data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
+    data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
@@ -130,9 +135,7 @@ export function VaccineCoverageChoroplethPerGm({
         <DynamicChoropleth
           map={'gm'}
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-          data={data.gm.filter(
-            hasValueAtKey('age_group_range', selectedAgeGroup)
-          )}
+          data={choroplethDataGm}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
             metricProperty: selectedCoverageKind,
@@ -161,9 +164,7 @@ export function VaccineCoverageChoroplethPerGm({
         <DynamicChoropleth
           map={'vr'}
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-          data={data.vr.filter(
-            hasValueAtKey('age_group_range', selectedAgeGroup)
-          )}
+          data={choroplethDataVr}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
             metricProperty: selectedCoverageKind,

@@ -176,6 +176,10 @@ export const VaccinationsGmPage = (
   );
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] =
+    choropleth.gm.vaccine_coverage_per_age_group.filter(
+      hasValueAtKey('age_group_range', selectedAgeGroup)
+    );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -311,9 +315,7 @@ export const VaccinationsGmPage = (
             <DynamicChoropleth
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
-              data={choropleth.gm.vaccine_coverage_per_age_group.filter(
-                hasValueAtKey('age_group_range', selectedAgeGroup)
-              )}
+              data={choroplethData}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: 'fully_vaccinated_percentage',
