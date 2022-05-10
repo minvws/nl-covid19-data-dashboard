@@ -134,7 +134,7 @@ function useSearchedOptions<Option extends TOption>(
         : matchSorter(options, throttledTerm.trim(), {
             keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
           }),
-    [throttledTerm, options]
+    [throttledTerm, options, sorter]
   );
 }
 

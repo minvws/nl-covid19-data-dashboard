@@ -19,6 +19,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 type SewerChartProps = {
   /**
@@ -53,6 +54,7 @@ type SewerChartProps = {
     zeewolde_short_label: string;
   };
   warning?: string;
+  timelineEvents?: TimelineEventConfig[];
 };
 
 export function SewerChart({
@@ -63,6 +65,7 @@ export function SewerChart({
   vrNameOrGmName,
   incompleteDatesAndTexts,
   warning,
+  timelineEvents,
 }: SewerChartProps) {
   const {
     options,
@@ -108,6 +111,7 @@ export function SewerChart({
         }
       : {
           valueAnnotation: text.valueAnnotation,
+          timelineEvents,
         };
 
   const optionsWithContent = useMemo(

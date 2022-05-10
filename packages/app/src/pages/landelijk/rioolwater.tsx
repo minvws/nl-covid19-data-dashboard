@@ -35,6 +35,11 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import {
+  ElementsQueryResult,
+  getElementsQuery,
+  getTimelineEvents,
+} from '~/queries/get-elements-query';
 
 const pageMetrics = ['sewer'];
 
@@ -60,13 +65,20 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ sewer }) => ({ sewer }),
   }),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('sewerPage'))(context);
+    const { content } = await createGetContent<{
+      parts: PagePartQueryResult<ArticleParts>;
+      elements: ElementsQueryResult;
+    }>((context) => {
+      return `{
+      "parts": ${getPagePartsQuery('sewerPage')},
+      "elements": ${getElementsQuery('nl', ['sewer'], context.locale)}
+      }`;
+    })(context);
 
     return {
       content: {
-        articles: getArticleParts(content.pageParts, 'sewerPageArticles'),
+        articles: getArticleParts(content.parts.pageParts, 'sewerPageArticles'),
+        elements: content.elements,
       },
     };
   }
@@ -155,6 +167,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesDataLabel: commonTexts.common.daggemiddelde,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
+            timelineEvents={getTimelineEvents(
+              content.elements.timeSeries,
+              'sewer'
+            )}
           />
 
           <ChoroplethTile
