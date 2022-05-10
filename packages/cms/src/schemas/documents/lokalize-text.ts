@@ -12,6 +12,9 @@ import { LokalizeTextDescription } from '../../lokalize/lokalize-text-descriptio
  * both Lokalize and Sanity.
  */
 export const lokalizeText = {
+  // See: https://www.sanity.io/docs/ui-affordances-for-actions
+  // We don't allow creation of new keys or deleting them from the UI.
+  __experimental_actions: ['update', 'publish'],
   name: 'lokalizeText',
   type: 'document',
   title: 'Text',
