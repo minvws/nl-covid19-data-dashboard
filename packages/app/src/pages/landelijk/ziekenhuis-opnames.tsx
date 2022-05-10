@@ -2,8 +2,10 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
+  GmCollectionHospitalNice,
   TimeframeOption,
   TimeframeOptionsList,
+  VrCollectionHospitalNice,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
@@ -155,6 +157,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { metadataTexts, textNl, textShared } = pageText;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const choroplethDataGm: GmCollectionHospitalNice[] =
+    choropleth.gm.hospital_nice_choropleth;
+  const choroplethDataVr: VrCollectionHospitalNice[] =
+    choropleth.vr.hospital_nice_choropleth;
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -336,7 +343,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
                 map="gm"
-                data={choropleth.gm.hospital_nice_choropleth}
+                data={choroplethDataGm}
                 dataConfig={{
                   metricName: 'hospital_nice_choropleth',
                   metricProperty: 'admissions_on_date_of_admission_per_100000',
@@ -356,7 +363,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="vr"
                 thresholdMap="gm"
-                data={choropleth.vr.hospital_nice_choropleth}
+                data={choroplethDataVr}
                 dataConfig={{
                   metricName: 'hospital_nice_choropleth',
                   metricProperty: 'admissions_on_date_of_admission_per_100000',
