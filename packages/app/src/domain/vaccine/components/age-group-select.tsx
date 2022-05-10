@@ -8,16 +8,12 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseBirthyearRange } from '../logic/parse-birthyear-range';
 
-export type AgeGroup = '12+' | '12-17' | '18+';
+export type AgeGroup = '12+' | '18+';
 
 const AGE_GROUPS = [
   {
     ageGroup: '12+',
     birthyearRange: '-2009',
-  },
-  {
-    ageGroup: '12-17',
-    birthyearRange: '2004-2009',
   },
   {
     ageGroup: '18+',

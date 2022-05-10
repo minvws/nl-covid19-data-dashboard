@@ -74,8 +74,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
         return {
-          vaccine_coverage_per_age_group:
-            null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
+          vaccine_coverage_per_age_group: [],
         };
       }
       return {
@@ -174,6 +173,10 @@ export const VaccinationsVrPage = (
   );
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] =
+    choropleth.gm.vaccine_coverage_per_age_group.filter(
+      hasValueAtKey('age_group_range', selectedAgeGroup)
+    );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -310,9 +313,7 @@ export const VaccinationsVrPage = (
             <DynamicChoropleth
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
-              data={choropleth.gm.vaccine_coverage_per_age_group.filter(
-                hasValueAtKey('age_group_range', selectedAgeGroup)
-              )}
+              data={choroplethData}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: 'fully_vaccinated_percentage',
@@ -328,6 +329,7 @@ export const VaccinationsVrPage = (
                 <ChoroplethTooltip
                   data={context}
                   percentageProps={[
+                    'booster_shot_percentage',
                     'fully_vaccinated_percentage',
                     'has_one_shot_percentage',
                   ]}

@@ -16,4 +16,11 @@ timestamp,action,key,document_id,move_to
 2022-05-05T11:48:10.313Z,add,pages.vaccinationsPage.nl.vaccination_coverage.no_data,hqivmGf8UPzCLjKFjLpCSD,__
 2022-05-05T11:48:10.323Z,delete,pages.vaccinationsPage.shared.vaccine_coverage_per_age_group,hqivmGf8UPzCLjKFjK6SXZ,__
 2022-05-03T14:03:24.707Z,add,common.corona_melder_app.belangrijk_bericht,xNELI4GNAeXqkWZzsHkjJM,__
+2022-05-09T09:27:22.505Z,add,common.choropleth_tooltip.vr.booster_shot_percentage.content,Hx8hkeSw0pqyYojKu0sKeK,__
+2022-05-09T09:27:23.526Z,add,common.choropleth_tooltip.vr.booster_shot_percentage.subject,Hx8hkeSw0pqyYojKu0sKtH,__
+2022-05-09T09:27:24.542Z,add,common.vaccinations.coverage_kinds.booster_shot_percentage,Hx8hkeSw0pqyYojKu0sL8E,__
+2022-05-09T09:27:24.543Z,delete,choropleth_tooltip.vr.booster_shot_percentage.content,ctWR1OtR3Bc4Z1QxETQyT3,__
+2022-05-09T09:27:24.543Z,delete,choropleth_tooltip.vr.booster_shot_percentage.subject,4C4Y1v39Co3s0ZW9zUzEm1,__
+2022-05-09T09:27:24.543Z,move,choropleth_tooltip.gm.booster_shot_percentage.content,VNAGnZtzuWCFY8gXn2zsLa,common.choropleth_tooltip.gm.booster_shot_percentage.content
+2022-05-09T09:27:24.544Z,move,choropleth_tooltip.gm.booster_shot_percentage.subject,VNAGnZtzuWCFY8gXn2zsT8,common.choropleth_tooltip.gm.booster_shot_percentage.subject
 2022-05-09T08:58:28.088Z,move,accessibility.charts.hospital_admissions_region_choropleth.description,G1DXw0RdifOml06twMjbPq,common.accessibility.charts.hospital_admissions_region_choropleth.description

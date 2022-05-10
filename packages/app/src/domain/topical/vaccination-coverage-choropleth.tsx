@@ -102,6 +102,16 @@ export function VaccinationCoverageChoropleth(
     : undefined;
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
+  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
+    isVrCoverage(props)
+      ? props.data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup))
+      : [];
+
+  const choroplethDataVr: VrCollectionVaccineCoveragePerAgeGroup[] =
+    isNlCoverage(props)
+      ? props.data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup))
+      : [];
+
   return (
     <TopicalTile>
       <TopicalSectionHeader title={props.title} link={props.link} text={text} />
@@ -123,9 +133,7 @@ export function VaccinationCoverageChoropleth(
             <DynamicChoropleth
               map={'gm'}
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-              data={props.data.gm.filter(
-                hasValueAtKey('age_group_range', selectedAgeGroup)
-              )}
+              data={choroplethDataGm}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: selectedCoverageKind,
@@ -143,6 +151,7 @@ export function VaccinationCoverageChoropleth(
                 <ChoroplethTooltip
                   data={context}
                   percentageProps={[
+                    'booster_shot_percentage',
                     'fully_vaccinated_percentage',
                     'has_one_shot_percentage',
                   ]}
@@ -155,9 +164,7 @@ export function VaccinationCoverageChoropleth(
             <DynamicChoropleth
               map={'gm'}
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-              data={props.data.gm.filter(
-                hasValueAtKey('age_group_range', selectedAgeGroup)
-              )}
+              data={choroplethDataGm}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: selectedCoverageKind,
@@ -174,6 +181,7 @@ export function VaccinationCoverageChoropleth(
                 <ChoroplethTooltip
                   data={context}
                   percentageProps={[
+                    'booster_shot_percentage',
                     'fully_vaccinated_percentage',
                     'has_one_shot_percentage',
                   ]}
@@ -186,9 +194,7 @@ export function VaccinationCoverageChoropleth(
             <DynamicChoropleth
               map={'vr'}
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-              data={props.data.vr.filter(
-                hasValueAtKey('age_group_range', selectedAgeGroup)
-              )}
+              data={choroplethDataVr}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: selectedCoverageKind,
@@ -204,6 +210,7 @@ export function VaccinationCoverageChoropleth(
                 <ChoroplethTooltip
                   data={context}
                   percentageProps={[
+                    'booster_shot_percentage',
                     'fully_vaccinated_percentage',
                     'has_one_shot_percentage',
                   ]}
