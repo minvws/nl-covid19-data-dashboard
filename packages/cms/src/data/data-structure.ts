@@ -6,6 +6,12 @@ export const dataStructure = {
   gm: {
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
     hospital_nice_sum: ["admissions_per_1m"],
+    hospital_nice: [
+      "admissions_on_date_of_admission",
+      "admissions_on_date_of_admission_moving_average",
+      "admissions_on_date_of_admission_moving_average_rounded",
+      "admissions_on_date_of_reporting",
+    ],
     tested_overall_sum: ["infected_per_100k"],
     tested_overall: [
       "infected",
@@ -30,7 +36,7 @@ export const dataStructure = {
       "has_one_shot_percentage_label",
       "booster_shot_percentage_label",
     ],
-    booster_coverage: ["percentage", "percentage_label"],
+    booster_coverage: ["age_group", "percentage", "percentage_label"],
   },
   gm_collection: {
     hospital_nice: [
@@ -47,9 +53,11 @@ export const dataStructure = {
       "age_group_range",
       "fully_vaccinated_percentage",
       "has_one_shot_percentage",
+      "booster_shot_percentage",
       "birthyear_range",
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
+      "booster_shot_percentage_label",
     ],
   },
   in: {
@@ -58,6 +66,16 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
+    risk_level: [
+      "risk_level",
+      "hospital_admissions_on_date_of_admission_moving_average_rounded",
+      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
+      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
+      "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
+      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
+      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
+      "valid_from_unix",
+    ],
     booster_shot_administered: [
       "administered_total",
       "ggd_administered_last_7_days",
@@ -65,14 +83,6 @@ export const dataStructure = {
       "others_administered_total",
     ],
     repeating_shot_administered: ["ggd_administered_total"],
-    booster_shot_delivered: ["delivered_total"],
-    booster_shot_planned: ["planned_7_days"],
-    booster_shot_per_age_group: [
-      "age_group_range",
-      "received_booster_percentage",
-      "birthyear_range",
-      "age_group_total",
-    ],
     booster_coverage: ["age_group", "percentage"],
     doctor: ["covid_symptoms_per_100k", "covid_symptoms"],
     g_number: ["g_number"],
@@ -136,29 +146,10 @@ export const dataStructure = {
       "admissions_overall_per_million",
     ],
     hospital_lcps: ["beds_occupied_covid"],
-    hospital_vaccination_status: [
-      "total_amount_of_people",
-      "fully_vaccinated",
-      "fully_vaccinated_percentage",
-      "has_one_shot_or_not_vaccinated",
-      "has_one_shot_or_not_vaccinated_percentage",
-    ],
-    hospital_vaccine_incidence_per_age_group: [
-      "age_group_range",
-      "fully_vaccinated_per_100k",
-      "has_one_shot_or_not_vaccinated_per_100k",
-    ],
     intensive_care_lcps: [
       "beds_occupied_covid",
       "beds_occupied_non_covid",
       "beds_occupied_covid_percentage",
-    ],
-    intensive_care_vaccination_status: [
-      "total_amount_of_people",
-      "fully_vaccinated",
-      "fully_vaccinated_percentage",
-      "has_one_shot_or_not_vaccinated",
-      "has_one_shot_or_not_vaccinated_percentage",
     ],
     tested_ggd: [
       "infected",
@@ -190,16 +181,6 @@ export const dataStructure = {
       "newly_infected_locations",
       "infected_locations_total",
       "infected_locations_percentage",
-    ],
-    risk_level: [
-      "risk_level",
-      "hospital_admissions_on_date_of_admission_moving_average_rounded",
-      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
-      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
-      "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
-      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
-      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
-      "valid_from_unix",
     ],
     behavior: [
       "number_of_participants",
@@ -379,6 +360,12 @@ export const dataStructure = {
       "infected_per_100k",
       "infected_per_100k_moving_average",
     ],
+    hospital_nice: [
+      "admissions_on_date_of_admission",
+      "admissions_on_date_of_admission_moving_average",
+      "admissions_on_date_of_admission_moving_average_rounded",
+      "admissions_on_date_of_reporting",
+    ],
     tested_ggd: [
       "infected",
       "infected_moving_average",
@@ -488,7 +475,7 @@ export const dataStructure = {
       "has_one_shot_percentage_label",
       "booster_shot_percentage_label",
     ],
-    booster_coverage: ["percentage", "percentage_label"],
+    booster_coverage: ["age_group", "percentage", "percentage_label"],
   },
   vr_collection: {
     hospital_nice: [
@@ -574,9 +561,11 @@ export const dataStructure = {
       "age_group_range",
       "fully_vaccinated_percentage",
       "has_one_shot_percentage",
+      "booster_shot_percentage",
       "birthyear_range",
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
+      "booster_shot_percentage_label",
     ],
   },
 };

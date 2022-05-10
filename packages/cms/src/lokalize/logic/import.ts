@@ -46,7 +46,7 @@ export async function importLokalizeTexts({
   const client = getClient(dataset);
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' && !(_id in path('drafts.**'))] | order(key asc)`
+    `*[_type == 'lokalizeText' && (defined(key)) && !(_id in path('drafts.**'))] | order(key asc)`
   );
 
   const mutations = await readTextMutations();
