@@ -25,7 +25,7 @@ type VaccinationCoverageKindSelectProps = {
 export function VaccinationCoverageKindSelect(
   props: VaccinationCoverageKindSelectProps
 ) {
-  const { onChange, initialValue = 'booster_shot_percentage' } = props;
+  const { onChange, initialValue = 'fully_vaccinated_percentage' } = props;
 
   const { commonTexts } = useIntl();
 
