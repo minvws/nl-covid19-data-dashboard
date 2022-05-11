@@ -7,9 +7,11 @@ import { LockdownData } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { restrictionIcons } from './restriction-icons';
 
+type EscalationLevelType = 1 | 2 | 3;
+
 type LockdownTableProps = {
   data: LockdownData;
-  level: number;
+  level: EscalationLevelType;
 };
 
 export function LockdownTable(props: LockdownTableProps) {
@@ -29,7 +31,7 @@ export function LockdownTable(props: LockdownTableProps) {
  * We can't use fill or currentColor because we're loading the SVG's as images to save on bundle size
  * The colors are pre-calculated though this URL: https://codepen.io/sosuke/pen/Pjoqqp
  */
-function getEscalationFilter(escalationLevel: number) {
+function getEscalationFilter(escalationLevel: EscalationLevelType) {
   switch (escalationLevel) {
     // #F291BC
     case 1:
@@ -47,7 +49,7 @@ function getEscalationFilter(escalationLevel: number) {
 
 type LockdownTableData = {
   data: LockdownData;
-  escalationLevel: number;
+  escalationLevel: EscalationLevelType;
 };
 
 function MobileLockdownTable(props: LockdownTableData) {
