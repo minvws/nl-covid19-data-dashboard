@@ -258,7 +258,6 @@ export interface Nl {
   name: NlId;
   code: NlId;
   difference: NlDifference;
-  risk_level: NlRiskLevel;
   named_difference: NlNamedDifference;
   booster_shot_administered: NlBoosterShotAdministered;
   repeating_shot_administered: NlRepeatingShotAdministered;
@@ -340,22 +339,6 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
-}
-export interface NlRiskLevel {
-  values: NlRiskLevelValue[];
-  last_value: NlRiskLevelValue;
-}
-export interface NlRiskLevelValue {
-  risk_level: 1 | 2 | 3;
-  hospital_admissions_on_date_of_admission_moving_average_rounded: number;
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded: number;
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
-  date_unix: number;
-  valid_from_unix: number;
-  date_of_insertion_unix: number;
 }
 export interface NlNamedDifference {
   variants__percentage: NamedDifferenceDecimal[];
