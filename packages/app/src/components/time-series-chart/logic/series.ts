@@ -358,7 +358,7 @@ export function isSeriesSingleValue(
 export function isSeriesMissingValue(
   value: SeriesSingleValue | SeriesDoubleValue | SeriesMissingValue
 ): value is SeriesMissingValue {
-  return isDefined(value as any) && !!value.__date_unix;
+  return isDefined(value) && isDefined((value as any).__hasMissing);
 }
 
 /**
