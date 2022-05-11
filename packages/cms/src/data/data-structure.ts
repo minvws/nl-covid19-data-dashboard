@@ -5,14 +5,12 @@
 export const dataStructure = {
   gm: {
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
-    hospital_nice_sum: ["admissions_per_1m"],
     hospital_nice: [
       "admissions_on_date_of_admission",
       "admissions_on_date_of_admission_moving_average",
       "admissions_on_date_of_admission_moving_average_rounded",
       "admissions_on_date_of_reporting",
     ],
-    tested_overall_sum: ["infected_per_100k"],
     tested_overall: [
       "infected",
       "infected_moving_average",
@@ -66,16 +64,6 @@ export const dataStructure = {
   },
   in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
-    risk_level: [
-      "risk_level",
-      "hospital_admissions_on_date_of_admission_moving_average_rounded",
-      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
-      "hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
-      "intensive_care_admissions_on_date_of_admission_moving_average_rounded",
-      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix",
-      "intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix",
-      "valid_from_unix",
-    ],
     booster_shot_administered: [
       "administered_total",
       "ggd_administered_last_7_days",

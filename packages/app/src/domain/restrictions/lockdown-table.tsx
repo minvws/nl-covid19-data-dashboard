@@ -3,14 +3,13 @@ import { Fragment } from 'react';
 import { Box } from '~/components/base';
 import { Cell, Row, Table, TableBody } from '~/components/table';
 import { BoldText } from '~/components/typography';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { LockdownData } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { restrictionIcons } from './restriction-icons';
 
 type LockdownTableProps = {
   data: LockdownData;
-  level: EscalationLevelType;
+  level: number;
 };
 
 export function LockdownTable(props: LockdownTableProps) {
@@ -30,7 +29,7 @@ export function LockdownTable(props: LockdownTableProps) {
  * We can't use fill or currentColor because we're loading the SVG's as images to save on bundle size
  * The colors are pre-calculated though this URL: https://codepen.io/sosuke/pen/Pjoqqp
  */
-function getEscalationFilter(escalationLevel: EscalationLevelType) {
+function getEscalationFilter(escalationLevel: number) {
   switch (escalationLevel) {
     // #F291BC
     case 1:
@@ -48,7 +47,7 @@ function getEscalationFilter(escalationLevel: EscalationLevelType) {
 
 type LockdownTableData = {
   data: LockdownData;
-  escalationLevel: EscalationLevelType;
+  escalationLevel: number;
 };
 
 function MobileLockdownTable(props: LockdownTableData) {
