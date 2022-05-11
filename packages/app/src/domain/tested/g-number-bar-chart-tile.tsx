@@ -17,13 +17,16 @@ interface GNumberBarChartTileProps {
 
 export function GNumberBarChartTile({
   data: __data,
-  timeframeInitialValue = TimeframeOption.FIRST_OF_SEPTEMBER,
+  timeframeInitialValue = TimeframeOption.ALL,
 }: GNumberBarChartTileProps) {
   const { formatPercentage, commonTexts } = useIntl();
 
   const text = commonTexts.g_number.bar_chart;
 
-  const values = __data.values;
+  const firstOfSeptember2020Unix = new Date('1 September 2020').valueOf() / 1000
+  const values = __data.values.filter((value) => {
+    return value.date_unix >= firstOfSeptember2020Unix
+  });
   const last_value = __data.last_value;
 
   return (
@@ -32,7 +35,7 @@ export function GNumberBarChartTile({
       description={text.description}
       timeframeInitialValue={timeframeInitialValue}
       timeframeOptions={[
-        TimeframeOption.FIRST_OF_SEPTEMBER,
+        TimeframeOption.ALL,
         TimeframeOption.ONE_WEEK,
         TimeframeOption.THIRTY_DAYS,
         TimeframeOption.THREE_MONTHS,
