@@ -152,6 +152,33 @@ const vrHospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.underReported,
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0.1,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 0.3,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 0.5,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 0.9,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 1.5,
+  },
+];
+
 const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
@@ -349,6 +376,8 @@ type Thresholds = Record<MapType, Record<string, ChoroplethThresholdsValue[]>>;
 export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
+    admissions_on_date_of_admission_per_100000:
+      hospitalAdmissionsPer100000Thresholds,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
@@ -359,6 +388,8 @@ export const thresholds: Thresholds = {
   vr: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission: vrHospitalAdmissionsThresholds,
+    admissions_on_date_of_admission_per_100000:
+      hospitalAdmissionsPer100000Thresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
     average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,

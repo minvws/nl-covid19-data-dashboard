@@ -5,6 +5,12 @@ timestamp,action,key,document_id,move_to
 2022-04-25T14:25:48.351Z,add,common.g_number.bar_chart.legend.positive_label,X8Z1HTDxqJ9pM59364bIJw,__
 2022-04-25T14:25:48.352Z,move,common.g_number.bar_chart.legend_inaccurate_label,X8Z1HTDxqJ9pM59362hg1m,common.g_number.bar_chart.legend.inaccurate_label
 2022-04-26T12:03:58.578Z,move,ic_opnames_per_dag.chart_bedbezetting.description,jF33EuwumlGuwav2FD3WM8,pages.intensiveCarePage.nl.chart_bedbezetting.description
+2022-05-03T07:38:37.855Z,add,common.choropleth_tooltip.gm.admissions_on_date_of_admission_per_100000.content,Hx8hkeSw0pqyYojKtfA6sV,__
+2022-05-03T07:38:38.919Z,add,common.choropleth_tooltip.gm.admissions_on_date_of_admission_per_100000.subject,xNELI4GNAeXqkWZzsGHq9R,__
+2022-05-03T07:38:39.890Z,add,common.choropleth_tooltip.vr.admissions_on_date_of_admission_per_100000.content,xNELI4GNAeXqkWZzsGHqv1,__
+2022-05-03T07:38:40.968Z,add,common.choropleth_tooltip.vr.admissions_on_date_of_admission_per_100000.subject,Hx8hkeSw0pqyYojKtfA8KD,__
+2022-05-03T07:38:41.991Z,add,common.common.value_until_value,Hx8hkeSw0pqyYojKtfA8e9,__
+2022-05-03T07:38:42.924Z,add,common.common.value_and_higher,hqivmGf8UPzCLjKFjHM91t,__
 2022-05-03T12:26:14.845Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.fully_vaccinated,hqivmGf8UPzCLjKFjHrFoj,__
 2022-05-03T12:26:16.004Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated,xNELI4GNAeXqkWZzsHMnYw,__
 2022-05-03T12:26:17.032Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.booster_shot,xNELI4GNAeXqkWZzsHMprg,__

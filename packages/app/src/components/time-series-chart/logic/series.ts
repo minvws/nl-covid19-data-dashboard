@@ -358,7 +358,7 @@ export function isSeriesSingleValue(
 export function isSeriesMissingValue(
   value: SeriesSingleValue | SeriesDoubleValue | SeriesMissingValue
 ): value is SeriesMissingValue {
-  return isDefined((value as any).__hasMissing);
+  return isDefined(value) && isDefined((value as any).__hasMissing);
 }
 
 /**
@@ -367,7 +367,10 @@ export function isSeriesMissingValue(
  * with TimestampedValue as the LineChart because types got simplified in other
  * places.
  */
-export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[] | SeriesMissingValue[];
+export type SingleSeries =
+  | SeriesSingleValue[]
+  | SeriesDoubleValue[]
+  | SeriesMissingValue[];
 export type SeriesList = SingleSeries[];
 
 function getSeriesList<T extends TimestampedValue>(
