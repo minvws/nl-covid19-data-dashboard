@@ -27,6 +27,7 @@ import {
   getLokalizeTexts,
   selectNlData,
 } from '~/static-props/get-data';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
@@ -55,6 +56,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
   const { metadataTexts, textNl } = pageText;
 
   const warningLastValue = data.corona_melder_app_warning.last_value;
+  const endDate = createDateFromUnixTimestamp(warningLastValue.date_unix);
 
   const metadata = {
     ...metadataTexts,
@@ -160,6 +162,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 timeframe={timeframe}
                 values={data.corona_melder_app_warning.values}
+                endDate={endDate}
                 seriesConfig={[
                   {
                     type: 'area',

@@ -254,12 +254,13 @@ export function useSeriesList<T extends TimestampedValue>(
 
 export function useValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  endDate?: Date
 ) {
   const today = useCurrentDate();
   return useMemo(
-    () => getValuesInTimeframe(values, timeframe, today),
-    [values, timeframe, today]
+    () => getValuesInTimeframe(values, timeframe, endDate ?? today),
+    [values, timeframe, endDate, today]
   );
 }
 
