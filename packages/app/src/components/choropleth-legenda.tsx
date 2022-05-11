@@ -86,14 +86,13 @@ export function ChoroplethLegenda({
   );
 }
 
-const List = styled.ul<{ columns?: string }>((x) =>
+const List = styled.ul(
   css({
     width: '100%',
     marginTop: 0,
     paddingLeft: 0,
     listStyle: 'none',
     display: 'flex',
-    columns: x.columns,
   })
 );
 
