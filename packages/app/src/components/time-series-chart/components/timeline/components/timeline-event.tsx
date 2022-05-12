@@ -128,10 +128,7 @@ function TooltipTrigger({
          * tooltip when a user navigates through the tooltips using prev/next
          */
         onBlur={isTouch ? undefined : onBlur}
-        /**
-         * Somehow without the role='text' the screenreader won't read the
-         * tooltip content..?
-         */
+        role="group"
         aria-labelledby={uniqueId}
       >
         {children}

@@ -12,7 +12,6 @@ import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { GmComboBox } from './components/gm-combo-box';
 import { useSidebar } from './logic/use-sidebar';
-import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
@@ -141,10 +140,7 @@ export function GmLayout(props: GmLayoutProps) {
           </>
         }
       >
-        <ErrorBoundary>
-          {children}
-          <LoadingWrapper previousUrl={'gemeente/' + code} />
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

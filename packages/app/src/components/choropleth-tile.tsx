@@ -19,6 +19,7 @@ type ChoroplethTileProps = DataProps & {
   legend?: {
     title: string;
     thresholds: ChoroplethThresholdsValue[];
+    type?: 'default' | 'bar';
   };
   metadata?: MetadataProps;
   valueAnnotation?: string;
@@ -51,6 +52,7 @@ export function ChoroplethTile({
         thresholds={legend.thresholds}
         title={legend.title}
         valueAnnotation={valueAnnotation}
+        type={legend.type}
       />
     </Box>
   );

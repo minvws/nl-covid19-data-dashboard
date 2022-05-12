@@ -18,6 +18,7 @@ interface PagePartChildPage {
 
 export function pagePartListItem() {
   return S.listItem()
+    .id('dashboard-paginas')
     .title("Dashboard Pagina's")
     .icon(BsBook)
     .child(pageIdentifierListemItem);
@@ -68,6 +69,7 @@ function pageDataListItem(page: PagePartPage) {
                       { scope: 'shared', title: 'Gedeelde lokalize' },
                     ].map((item) =>
                       S.listItem()
+                        .id(item.scope)
                         .title(item.scope)
                         .icon(FaLanguage)
                         .child(

@@ -8,11 +8,8 @@
     "proto_name",
     "name",
     "code",
-    "tested_overall_sum",
     "tested_overall",
-    "hospital_nice_sum",
     "hospital_nice",
-    "hospital_nice_choropleth",
     "deceased_rivm",
     "difference",
     "static_values",
@@ -42,17 +39,8 @@
     "difference": {
       "$ref": "__difference.json"
     },
-    "hospital_nice_sum": {
-      "$ref": "hospital_nice_sum.json"
-    },
     "hospital_nice": {
       "$ref": "hospital_nice.json"
-    },
-    "hospital_nice_choropleth": {
-      "$ref": "hospital_nice_choropleth.json"
-    },
-    "tested_overall_sum": {
-      "$ref": "tested_overall_sum.json"
     },
     "tested_overall": {
       "$ref": "tested_overall.json"

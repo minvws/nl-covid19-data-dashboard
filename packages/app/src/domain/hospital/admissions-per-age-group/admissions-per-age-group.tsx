@@ -1,4 +1,5 @@
 import {
+  DAY_IN_SECONDS,
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
   TimeframeOption,
@@ -117,7 +118,7 @@ export function AdmissionsPerAgeGroup({
         dataOptions={{
           timespanAnnotations: [
             {
-              start: underReportedDateStart,
+              start: underReportedDateStart + DAY_IN_SECONDS / 2,
               end: Infinity,
               label: text.line_chart_legend_inaccurate_label,
               shortLabel: text.tooltip_labels.inaccurate,

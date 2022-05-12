@@ -19,7 +19,6 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
-import { useFeature } from '~/lib/features';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -85,7 +84,6 @@ export default function BehaviorPage(
   } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const behaviorAnnotationsFeature = useFeature('nlBehaviorAnnotations');
   const { formatNumber, formatDateFromSeconds, formatPercentage, locale } =
     useIntl();
   const { caterogyTexts, metadataTexts, text } = pageText;
@@ -133,9 +131,9 @@ export default function BehaviorPage(
     return { currentTimelineEvents };
   }, [currentId, data.behavior_annotations.values, locale]);
 
-  const timelineProp = behaviorAnnotationsFeature.isEnabled
-    ? { timelineEvents: currentTimelineEvents }
-    : undefined;
+  const timelineProp = { timelineEvents: currentTimelineEvents };
+
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -239,7 +237,7 @@ export default function BehaviorPage(
             {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
-            useDatesAsRange={behaviorAnnotationsFeature.isEnabled}
+            useDatesAsRange
             text={text}
           />
 

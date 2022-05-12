@@ -24,11 +24,12 @@ export type LegendItem = {
 
 interface LegendProps {
   items: LegendItem[];
+  columns?: number;
 }
 
-export function Legend({ items }: LegendProps) {
+export function Legend({ items, columns }: LegendProps) {
   return (
-    <List>
+    <List columns={columns}>
       {items.map((item, i) => {
         if (item.shape === 'custom') {
           return (
@@ -60,13 +61,15 @@ export function Legend({ items }: LegendProps) {
   );
 }
 
-const List = styled.ul(
+const List = styled.ul<{ columns?: number }>(({ columns }) =>
   css({
     listStyle: 'none',
     px: 0,
     m: 0,
     fontSize: 1,
     color: 'annotation',
+    columns,
+    ...(columns === 1 && { display: 'flex', flexDirection: 'column' }),
   })
 );
 

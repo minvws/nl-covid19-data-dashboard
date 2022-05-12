@@ -37,7 +37,6 @@ import {
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import { Languages } from '~/locale';
@@ -186,8 +185,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
     filteredAgeGroup18Plus,
     true
   );
-
-  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const metadata = {
     title: replaceVariablesInText(textVr.metadata.title, {
@@ -512,12 +509,6 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: textVr.quick_links.links.gemeente,
                   },
-                  internationalFeature.isEnabled
-                    ? {
-                        href: reverseRouter.in.index(),
-                        text: textVr.quick_links.links.internationaal,
-                      }
-                    : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   textVr.data_sitemap_title,

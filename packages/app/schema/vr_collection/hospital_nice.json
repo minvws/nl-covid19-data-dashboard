@@ -6,6 +6,7 @@
   "required": [
     "vrcode",
     "admissions_on_date_of_admission",
+    "admissions_on_date_of_admission_per_100000",
     "admissions_on_date_of_reporting",
     "date_unix",
     "date_of_insertion_unix"
@@ -20,6 +21,9 @@
     },
     "admissions_on_date_of_admission": {
       "type": "integer"
+    },
+    "admissions_on_date_of_admission_per_100000": {
+      "type": "number"
     },
     "admissions_on_date_of_reporting": {
       "type": "integer"

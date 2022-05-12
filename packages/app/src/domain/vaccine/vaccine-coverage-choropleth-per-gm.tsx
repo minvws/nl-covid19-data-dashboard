@@ -57,6 +57,11 @@ export function VaccineCoverageChoroplethPerGm({
       ],
   };
 
+  const choroplethDataVr: VrCollectionVaccineCoveragePerAgeGroup[] =
+    data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
+    data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+
   return (
     <ChoroplethTile
       title={replaceVariablesInText(
@@ -130,9 +135,7 @@ export function VaccineCoverageChoroplethPerGm({
         <DynamicChoropleth
           map={'gm'}
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-          data={data.gm.filter(
-            hasValueAtKey('age_group_range', selectedAgeGroup)
-          )}
+          data={choroplethDataGm}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
             metricProperty: selectedCoverageKind,
@@ -148,8 +151,8 @@ export function VaccineCoverageChoroplethPerGm({
             <ChoroplethTooltip
               data={context}
               percentageProps={[
+                'booster_shot_percentage',
                 'fully_vaccinated_percentage',
-                'has_one_shot_percentage',
               ]}
             />
           )}
@@ -160,9 +163,7 @@ export function VaccineCoverageChoroplethPerGm({
         <DynamicChoropleth
           map={'vr'}
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-          data={data.vr.filter(
-            hasValueAtKey('age_group_range', selectedAgeGroup)
-          )}
+          data={choroplethDataVr}
           dataConfig={{
             metricName: 'vaccine_coverage_per_age_group',
             metricProperty: selectedCoverageKind,
@@ -178,8 +179,8 @@ export function VaccineCoverageChoroplethPerGm({
             <ChoroplethTooltip
               data={context}
               percentageProps={[
+                'booster_shot_percentage',
                 'fully_vaccinated_percentage',
-                'has_one_shot_percentage',
               ]}
             />
           )}
@@ -247,7 +248,8 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
     VaccineCoverageData,
     number
   >;
-  const filterBelow = data.dataItem[dataItemKey] || null;
+  const filterBelow =
+    (dataItemKey === undefined ? null : data.dataItem[dataItemKey]) || null;
 
   const mainContent = (
     text as unknown as Record<string, Record<string, Record<string, string>>>

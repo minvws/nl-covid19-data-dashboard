@@ -26,6 +26,7 @@ type TProps<Option extends TOption> = {
   options: Option[];
   placeholder: string;
   onSelect: (option: Option) => void;
+  sorter?: (a: Option, b: Option) => number;
 };
 
 /**
@@ -44,7 +45,7 @@ type TProps<Option extends TOption> = {
  * ```
  */
 export function ComboBox<Option extends TOption>(props: TProps<Option>) {
-  const { options, placeholder } = props;
+  const { options, placeholder, sorter } = props;
 
   const { commonTexts } = useIntl();
 
@@ -52,7 +53,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
-  const results = useSearchedOptions<Option>(inputValue, options);
+  const results = useSearchedOptions<Option>(inputValue, options, sorter);
   const breakpoints = useBreakpoints();
   const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
@@ -121,18 +122,19 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
 
 function useSearchedOptions<Option extends TOption>(
   term: string,
-  options: Option[]
+  options: Option[],
+  sorter?: (a: Option, b: Option) => number
 ): Option[] {
   const throttledTerm = useThrottle(term, 100);
 
   return useMemo(
     () =>
       throttledTerm.trim() === ''
-        ? options.sort((a: Option, b: Option) => a.name.localeCompare(b.name))
+        ? options.sort(sorter)
         : matchSorter(options, throttledTerm.trim(), {
             keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
           }),
-    [throttledTerm, options]
+    [throttledTerm, options, sorter]
   );
 }
 

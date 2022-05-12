@@ -54,13 +54,13 @@ const oneDayInMilliseconds = DAY_IN_SECONDS * 1000;
 
 export const getMinimumUnixForTimeframe = (
   timeframe: TimeframeOption,
-  today: Date
+  endDate: Date
 ): number => {
   if (timeframe === TimeframeOption.ALL) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return today.getTime() - days * oneDayInMilliseconds;
+  return endDate.getTime() - days * oneDayInMilliseconds;
 };
 
 type CompareCallbackFunction<T> = (value: T) => number;
@@ -70,15 +70,16 @@ type CompareCallbackFunction<T> = (value: T) => number;
  * to retrieve the unix time zone to compare with.
  * @param values
  * @param timeframe
+ * @param endDate
  * @param compareCallback
  */
 export const getFilteredValues = <T>(
   values: T[],
   timeframe: TimeframeOption,
-  today: Date,
+  endDate: Date,
   compareCallback: CompareCallbackFunction<T>
 ): T[] => {
-  const minimumUnix = getMinimumUnixForTimeframe(timeframe, today);
+  const minimumUnix = getMinimumUnixForTimeframe(timeframe, endDate);
   return values.filter((value: T): boolean => {
     return compareCallback(value) >= minimumUnix;
   });
@@ -94,27 +95,28 @@ export const getFilteredValues = <T>(
 export function getValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
   timeframe: TimeframeOption,
-  today: Date
+  endDate: Date
 ): T[] {
-  const boundary = getTimeframeBoundaryUnix(timeframe, today);
+  const start = getTimeframeBoundaryUnix(timeframe, endDate);
+  const end = Math.ceil(endDate.getTime() / 1000);
 
   if (isDateSeries(values)) {
-    return values.filter((x: DateValue) => x.date_unix >= boundary) as T[];
+    return values.filter((x: DateValue) => x.date_unix >= start && x.date_unix <= end) as T[];
   }
 
   if (isDateSpanSeries(values)) {
     return values.filter(
-      (x: DateSpanValue) => x.date_end_unix >= boundary
+      (x: DateSpanValue) => x.date_end_unix >= start && x.date_end_unix <= end
     ) as T[];
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }
 
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption, today: Date) {
+function getTimeframeBoundaryUnix(timeframe: TimeframeOption, endDate: Date): number {
   if (timeframe === TimeframeOption.ALL) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return Math.floor(today.getTime() / 1000) - days * DAY_IN_SECONDS;
+  return Math.floor(endDate.getTime() / 1000) - days * DAY_IN_SECONDS;
 }
