@@ -14,10 +14,7 @@ export interface Gm {
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
-  hospital_nice_sum: GmHospitalNiceSum;
   hospital_nice: GmHospitalNice;
-  hospital_nice_choropleth: GmHospitalNiceChoropleth;
-  tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
@@ -57,16 +54,6 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface GmHospitalNiceSum {
-  values: GmHospitalNiceSumValue[];
-  last_value: GmHospitalNiceSumValue;
-}
-export interface GmHospitalNiceSumValue {
-  admissions_per_1m: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface GmHospitalNice {
   values: GmHospitalNiceValue[];
   last_value: GmHospitalNiceValue;
@@ -77,26 +64,6 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-}
-export interface GmHospitalNiceChoropleth {
-  values: GmHospitalNiceChoroplethValue[];
-  last_value: GmHospitalNiceChoroplethValue;
-}
-export interface GmHospitalNiceChoroplethValue {
-  date_unix: number;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-}
-export interface GmTestedOverallSum {
-  values: GmTestedOverallSumValue[];
-  last_value: GmTestedOverallSumValue;
-}
-export interface GmTestedOverallSumValue {
-  date_start_unix: number;
-  date_end_unix: number;
-  infected_per_100k: number;
   date_of_insertion_unix: number;
 }
 export interface GmTestedOverall {
@@ -142,20 +109,22 @@ export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
+  booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface GmBoosterCoverage {
   values: GmBoosterCoverageValue[];
-  last_value: GmBoosterCoverageValue;
 }
 export interface GmBoosterCoverageValue {
+  age_group?: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
@@ -179,6 +148,7 @@ export interface GmCollectionHospitalNice {
   date_unix: number;
   gmcode: string;
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_per_100000: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -199,12 +169,14 @@ export interface GmCollectionSewer {
 }
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
+  booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -289,9 +261,6 @@ export interface Nl {
   named_difference: NlNamedDifference;
   booster_shot_administered: NlBoosterShotAdministered;
   repeating_shot_administered: NlRepeatingShotAdministered;
-  booster_shot_delivered: NlBoosterShotDelivered;
-  booster_shot_planned: NlBoosterShotPlanned;
-  booster_shot_per_age_group: NlBoosterShotPerAgeGroup;
   booster_coverage: NlBoosterCoverage;
   doctor: NlDoctor;
   g_number: NlGNumber;
@@ -305,15 +274,11 @@ export interface Nl {
   hospital_nice: NlHospitalNice;
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NlHospitalLcps;
-  hospital_vaccination_status: NlHospitalVaccinationStatus;
-  hospital_vaccine_incidence_per_age_group: NlHospitalVaccineIncidencePerAgeGroup;
   intensive_care_lcps: NlIntensiveCareLcps;
-  intensive_care_vaccination_status: NlIntensiveCareVaccinationStatus;
   tested_ggd: NlTestedGgd;
   tested_ggd_archived: NlTestedGgdArchived;
   nursing_home: NlNursingHome;
   disability_care: NlDisabilityCare;
-  risk_level: NlRiskLevel;
   behavior: NlBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
@@ -407,35 +372,6 @@ export interface NlRepeatingShotAdministeredValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlBoosterShotDelivered {
-  values: NlBoosterShotDeliveredValue[];
-  last_value: NlBoosterShotDeliveredValue;
-}
-export interface NlBoosterShotDeliveredValue {
-  delivered_total: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBoosterShotPlanned {
-  values: NlBoosterShotPlannedValue[];
-  last_value: NlBoosterShotPlannedValue;
-}
-export interface NlBoosterShotPlannedValue {
-  planned_7_days: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBoosterShotPerAgeGroup {
-  values: NlBoosterShotPerAgeGroupValue[];
-}
-export interface NlBoosterShotPerAgeGroupValue {
-  age_group_range: "5-11" | "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
-  received_booster_percentage: number;
-  date_of_insertion_unix: number;
-  date_unix: number;
-  birthyear_range: string;
-  age_group_total: number;
-}
 export interface NlBoosterCoverage {
   values: NlBoosterCoverageValue[];
 }
@@ -462,8 +398,7 @@ export interface NlGNumber {
 }
 export interface NlGNumberValue {
   g_number: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlInfectiousPeople {
@@ -600,31 +535,6 @@ export interface NlHospitalLcpsValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlHospitalVaccinationStatus {
-  values: NlHospitalVaccinationStatusValue[];
-  last_value: NlHospitalVaccinationStatusValue;
-}
-export interface NlHospitalVaccinationStatusValue {
-  total_amount_of_people: number;
-  fully_vaccinated: number;
-  fully_vaccinated_percentage: number;
-  has_one_shot_or_not_vaccinated: number;
-  has_one_shot_or_not_vaccinated_percentage: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlHospitalVaccineIncidencePerAgeGroup {
-  values: NlHospitalVaccineIncidencePerAgeGroupValue[];
-}
-export interface NlHospitalVaccineIncidencePerAgeGroupValue {
-  age_group_range: string;
-  fully_vaccinated_per_100k: number;
-  has_one_shot_or_not_vaccinated_per_100k: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface NlIntensiveCareLcps {
   values: NlIntensiveCareLcpsValue[];
   last_value: NlIntensiveCareLcpsValue;
@@ -634,20 +544,6 @@ export interface NlIntensiveCareLcpsValue {
   beds_occupied_non_covid: number | null;
   beds_occupied_covid_percentage: number | null;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlIntensiveCareVaccinationStatus {
-  values: NlIntensiveCareVaccinationStatusValue[];
-  last_value: NlIntensiveCareVaccinationStatusValue;
-}
-export interface NlIntensiveCareVaccinationStatusValue {
-  total_amount_of_people: number;
-  fully_vaccinated: number;
-  fully_vaccinated_percentage: number;
-  has_one_shot_or_not_vaccinated: number;
-  has_one_shot_or_not_vaccinated_percentage: number;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlTestedGgd {
@@ -703,22 +599,6 @@ export interface NlDisabilityCareValue {
   infected_locations_total: number;
   infected_locations_percentage: number;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlRiskLevel {
-  values: NlRiskLevelValue[];
-  last_value: NlRiskLevelValue;
-}
-export interface NlRiskLevelValue {
-  risk_level: 1 | 2 | 3;
-  hospital_admissions_on_date_of_admission_moving_average_rounded: number;
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
-  hospital_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded: number;
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_start_unix: number;
-  intensive_care_admissions_on_date_of_admission_moving_average_rounded_date_end_unix: number;
-  date_unix: number;
-  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlBehavior {
@@ -1053,8 +933,10 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_total: number;
   fully_vaccinated: number;
   has_one_shot: number;
+  booster_shot: number | null;
   fully_vaccinated_percentage: number;
   has_one_shot_percentage: number;
+  booster_shot_percentage: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -1180,8 +1062,7 @@ export interface VrGNumber {
 }
 export interface VrGNumberValue {
   g_number: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrSewer {
@@ -1435,20 +1316,22 @@ export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
+  booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrBoosterCoverage {
   values: VrBoosterCoverageValue[];
-  last_value: VrBoosterCoverageValue;
 }
 export interface VrBoosterCoverageValue {
+  age_group?: "12+" | "18+";
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
@@ -1477,6 +1360,7 @@ export interface VrCollectionHospitalNice {
   date_unix: number;
   vrcode: string;
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_per_100000: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -1581,12 +1465,14 @@ export interface VrCollectionSituations {
 }
 export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
+  booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
+  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }

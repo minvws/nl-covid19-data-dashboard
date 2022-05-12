@@ -92,6 +92,11 @@ export type TimeSeriesChartProps<
   tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
+  timeframe?: TimeframeOption;
+  /**
+   * If not provided, the code assumes 'today' to be the end date.
+   */
+  endDate?: Date;
   /**
    * @TODO making it optional for now until we figure out how we want to enforce
    * aria labels and descriptions
@@ -102,7 +107,6 @@ export type TimeSeriesChartProps<
    */
   initialWidth?: number;
   minHeight?: number;
-  timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
   /**
    * The number of grid lines also by default determines the number of y-axis
@@ -153,6 +157,7 @@ export function TimeSeriesChart<
 >({
   accessibility,
   values: allValues,
+  endDate,
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
@@ -210,7 +215,7 @@ export function TimeSeriesChart<
     paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
-  const values = useValuesInTimeframe(allValues, timeframe);
+  const values = useValuesInTimeframe(allValues, timeframe, endDate);
 
   const cutValuesConfig = useMemo(
     () => extractCutValuesConfig(timespanAnnotations),
@@ -274,8 +279,8 @@ export function TimeSeriesChart<
   );
 
   const timeDomain = useMemo(
-    () => getTimeDomain({ values, today, withPadding: false }),
-    [values, today]
+    () => getTimeDomain({ values, today: endDate ?? today, withPadding: false }),
+    [values, endDate, today]
   );
 
   const {
@@ -588,7 +593,7 @@ export function TimeSeriesChart<
               alignItems="baseline"
               spacingHorizontal={3}
             >
-              <InlineText>{x.label}:</InlineText>
+              {x.label && <InlineText>{x.label}:</InlineText>}
               <Legend items={x.items} />
             </Box>
           ))}

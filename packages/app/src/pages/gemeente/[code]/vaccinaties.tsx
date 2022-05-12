@@ -24,6 +24,7 @@ import {
   VaccineCoverageToggleTile,
   ChoroplethTooltip,
   VaccineCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import {
@@ -49,6 +50,7 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
+import { useFeature } from '~/lib/features';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -139,7 +141,9 @@ export const VaccinationsGmPage = (
     }),
   };
 
-  const boosterCoverageLastValue = data.booster_coverage?.last_value;
+  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
+    'nlVaccinationBoosterShotsPerAgeGroup'
+  );
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
@@ -154,6 +158,13 @@ export const VaccinationsGmPage = (
       (x) => x.age_group_range === '12+'
     );
 
+  const boosterCoverage18PlusValue = data.booster_coverage?.values?.find(
+    (v) => v.age_group === '18+'
+  );
+  const boosterCoverage12PlusValue = data.booster_coverage?.values?.find(
+    (v) => v.age_group === '12+'
+  );
+
   assert(
     filteredAgeGroup18Plus,
     `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`
@@ -165,6 +176,10 @@ export const VaccinationsGmPage = (
   );
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] =
+    choropleth.gm.vaccine_coverage_per_age_group.filter(
+      hasValueAtKey('age_group_range', selectedAgeGroup)
+    );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -207,10 +222,10 @@ export const VaccinationsGmPage = (
               has_one_shot_label:
                 filteredAgeGroup18Plus.has_one_shot_percentage_label,
               boostered: formatPercentageAsNumber(
-                `${boosterCoverageLastValue.percentage}`
+                `${boosterCoverage18PlusValue?.percentage}`
               ),
-              boostered_label: boosterCoverageLastValue.percentage_label,
-              dateUnixBoostered: boosterCoverageLastValue.date_unix,
+              boostered_label: boosterCoverage18PlusValue?.percentage_label,
+              dateUnixBoostered: boosterCoverage18PlusValue?.date_unix,
             }}
             age12Plus={{
               fully_vaccinated:
@@ -221,6 +236,11 @@ export const VaccinationsGmPage = (
                 filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
               has_one_shot_label:
                 filteredAgeGroup12Plus.has_one_shot_percentage_label,
+              boostered: formatPercentageAsNumber(
+                `${boosterCoverage12PlusValue?.percentage}`
+              ),
+              boostered_label: boosterCoverage12PlusValue?.percentage_label,
+              dateUnixBoostered: boosterCoverage12PlusValue?.date_unix,
             }}
             age12PlusToggleText={
               textGm.vaccination_grade_toggle_tile.age_12_plus
@@ -231,17 +251,34 @@ export const VaccinationsGmPage = (
             labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
 
-          <VaccineCoveragePerAgeGroup
-            title={textGm.vaccination_coverage.title}
-            description={textGm.vaccination_coverage.description}
-            sortingOrder={['18+', '12-17', '12+']}
-            metadata={{
-              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: textGm.vaccination_coverage.bronnen.rivm,
-            }}
-            values={data.vaccine_coverage_per_age_group.values}
-            text={textNl.vaccination_coverage}
-          />
+          {!vaccinationBoosterShotsPerAgeGroupFeature.isEnabled ? (
+            <VaccineCoveragePerAgeGroup
+              title={textGm.vaccination_coverage.title}
+              description={textGm.vaccination_coverage.description}
+              sortingOrder={['18+', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textGm.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          ) : (
+            <BoosterShotCoveragePerAgeGroup
+              title={textGm.vaccination_coverage.title}
+              description={
+                textGm.vaccination_coverage
+                  .description_booster_and_fully_vaccinated
+              }
+              sortingOrder={['18+', '12+']}
+              metadata={{
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                source: textGm.vaccination_coverage.bronnen.rivm,
+              }}
+              values={data.vaccine_coverage_per_age_group.values}
+              text={textNl.vaccination_coverage}
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(
@@ -278,9 +315,7 @@ export const VaccinationsGmPage = (
             <DynamicChoropleth
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
-              data={choropleth.gm.vaccine_coverage_per_age_group.filter(
-                hasValueAtKey('age_group_range', selectedAgeGroup)
-              )}
+              data={choroplethData}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: 'fully_vaccinated_percentage',
@@ -297,8 +332,8 @@ export const VaccinationsGmPage = (
                 <ChoroplethTooltip
                   data={context}
                   percentageProps={[
+                    'booster_shot_percentage',
                     'fully_vaccinated_percentage',
-                    'has_one_shot_percentage',
                   ]}
                 />
               )}

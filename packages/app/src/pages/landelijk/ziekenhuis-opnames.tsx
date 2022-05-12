@@ -2,23 +2,20 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
-  NlHospitalVaccinationStatusValue,
-  NlHospitalVaccineIncidencePerAgeGroupValue,
+  GmCollectionHospitalNice,
   TimeframeOption,
   TimeframeOptionsList,
+  VrCollectionHospitalNice,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import {
   TwoKpiSection,
   TimeSeriesChart,
   TileList,
   SEOHead,
-  AgeDemographicProps,
-  PieChartProps,
   ChartTile,
   DynamicChoropleth,
   ChoroplethTile,
@@ -33,7 +30,6 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
-import { useFeature } from '~/lib/features';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -65,22 +61,11 @@ import {
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { last } from 'lodash';
 
-const AgeDemographic = dynamic<
-  AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
->(() =>
-  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
-);
-
-const PieChart = dynamic<PieChartProps<NlHospitalVaccinationStatusValue>>(() =>
-  import('~/components/pie-chart').then((mod) => mod.PieChart)
-);
-
 const pageMetrics = [
+  'difference.hospital_lcps__beds_occupied_covid.new_date_unix',
   'hospital_lcps',
   'hospital_nice_per_age_group',
   'hospital_nice',
-  'hospital_vaccination_status',
-  'hospital_vaccine_incidence_per_age_group',
 ];
 
 export const getStaticProps = createGetStaticProps(
@@ -98,9 +83,7 @@ export const getStaticProps = createGetStaticProps(
     'difference.hospital_lcps__beds_occupied_covid',
     'hospital_lcps',
     'hospital_nice_per_age_group',
-    'hospital_nice',
-    'hospital_vaccination_status',
-    'hospital_vaccine_incidence_per_age_group'
+    'hospital_nice'
   ),
   createGetChoroplethData({
     vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
@@ -148,14 +131,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
   const lastValueLcps = data.hospital_lcps.last_value;
-  const lastValueVaccinationStatus =
-    data.hospital_vaccination_status.last_value;
 
-  const lastValueNice =
+  const lastValueNice = data.hospital_nice.last_value;
+  const lastValueNiceChoropleth =
     (selectedMap === 'gm'
       ? last(choropleth.gm.hospital_nice_choropleth)
-      : last(choropleth.vr.hospital_nice_choropleth)) ||
-    data.hospital_nice.last_value;
+      : last(choropleth.vr.hospital_nice_choropleth)) || lastValueNice;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
@@ -171,16 +152,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
-  const vaccinationStatusFeature = useFeature('nlHospitalVaccinationStatus');
 
-  const isVaccinationIncidenceChartShown = useFeature(
-    'nlHospitalAdmissionsVaccineIncidencePerAgeGroup'
-  );
-
-  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
+  const { commonTexts, formatDateFromSeconds } = useIntl();
   const { metadataTexts, textNl, textShared } = pageText;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const choroplethDataGm: GmCollectionHospitalNice[] =
+    choropleth.gm.hospital_nice_choropleth;
+  const choroplethDataVr: VrCollectionHospitalNice[] =
+    choropleth.vr.hospital_nice_choropleth;
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -249,91 +230,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               )}
             </KpiTile>
           </TwoKpiSection>
-          {isVaccinationIncidenceChartShown.isEnabled && (
-            <ChartTile
-              title={
-                commonTexts.hospital_admissions_incidence_age_demographic_chart
-                  .title
-              }
-              description={
-                commonTexts.hospital_admissions_incidence_age_demographic_chart
-                  .description
-              }
-            >
-              <AgeDemographic
-                data={data.hospital_vaccine_incidence_per_age_group}
-                accessibility={{
-                  key: 'hospital_admissions_incidence_age_demographic_chart',
-                }}
-                rightColor="data.primary"
-                leftColor="data.yellow"
-                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
-                rightMetricProperty={'fully_vaccinated_per_100k'}
-                formatValue={(n) => `${n}`}
-                text={
-                  commonTexts
-                    .hospital_admissions_incidence_age_demographic_chart
-                    .chart_text
-                }
-              />
-            </ChartTile>
-          )}
-          {vaccinationStatusFeature.isEnabled && (
-            <ChartTile
-              title={textNl.vaccination_status_chart.title}
-              metadata={{
-                isTileFooter: true,
-                date: [
-                  lastValueVaccinationStatus.date_start_unix,
-                  lastValueVaccinationStatus.date_end_unix,
-                ],
-                source: {
-                  ...textNl.vaccination_status_chart.source,
-                },
-              }}
-              description={replaceVariablesInText(
-                textNl.vaccination_status_chart.description,
-                {
-                  amountOfPeople: formatNumber(
-                    lastValueVaccinationStatus.total_amount_of_people
-                  ),
-                  date_start: formatDateFromSeconds(
-                    lastValueVaccinationStatus.date_start_unix
-                  ),
-                  date_end: formatDateFromSeconds(
-                    lastValueVaccinationStatus.date_end_unix,
-                    'medium'
-                  ),
-                }
-              )}
-            >
-              <PieChart
-                data={lastValueVaccinationStatus}
-                icon={<Ziekenhuis />}
-                dataConfig={[
-                  {
-                    metricProperty: 'has_one_shot_or_not_vaccinated',
-                    color: colors.data.yellow,
-                    label:
-                      textNl.vaccination_status_chart.labels
-                        .has_one_shot_or_not_vaccinated,
-                    tooltipLabel:
-                      textNl.vaccination_status_chart.tooltip_labels
-                        .has_one_shot_or_not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'fully_vaccinated',
-                    color: colors.data.primary,
-                    label:
-                      textNl.vaccination_status_chart.labels.fully_vaccinated,
-                    tooltipLabel:
-                      textNl.vaccination_status_chart.tooltip_labels
-                        .fully_vaccinated,
-                  },
-                ]}
-              />
-            </ChartTile>
-          )}
           <ChartTile
             title={textNl.linechart_titel}
             description={textNl.linechart_description}
@@ -431,12 +327,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'gm'
-                  ? thresholds.gm.admissions_on_date_of_admission
-                  : thresholds.gm.admissions_on_date_of_admission,
+                  ? thresholds.gm.admissions_on_date_of_admission_per_100000
+                  : thresholds.gm.admissions_on_date_of_admission_per_100000,
               title: textShared.chloropleth_legenda.titel,
+              type: 'default',
             }}
             metadata={{
-              date: lastValueNice.date_unix,
+              date: lastValueNiceChoropleth.date_unix,
               source: textNl.bronnen.nice,
             }}
           >
@@ -446,10 +343,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
                 map="gm"
-                data={choropleth.gm.hospital_nice_choropleth}
+                data={choroplethDataGm}
                 dataConfig={{
                   metricName: 'hospital_nice_choropleth',
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'admissions_on_date_of_admission_per_100000',
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.ziekenhuisopnames,
@@ -466,10 +363,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="vr"
                 thresholdMap="gm"
-                data={choropleth.vr.hospital_nice_choropleth}
+                data={choroplethDataVr}
                 dataConfig={{
                   metricName: 'hospital_nice_choropleth',
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'admissions_on_date_of_admission_per_100000',
                 }}
                 dataOptions={{
                   getLink: reverseRouter.vr.ziekenhuisopnames,

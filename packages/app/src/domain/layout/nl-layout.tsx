@@ -7,7 +7,6 @@ import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useSidebar } from './logic/use-sidebar';
-import { LoadingWrapper } from '~/components/loader/loading-wrapper';
 
 interface NlLayoutProps {
   children?: React.ReactNode;
@@ -60,7 +59,6 @@ export function NlLayout(props: NlLayoutProps) {
         ['nursing_home_care', 'disabled_care', 'elderly_at_home'],
       ],
       ['early_indicators', ['sewage_measurement']],
-      ['other', ['coronamelder_app']],
     ],
   });
 
@@ -69,7 +67,7 @@ export function NlLayout(props: NlLayoutProps) {
     map: [
       [
         'archived_metrics',
-        ['infectious_people', 'general_practitioner_suspicions'],
+        ['coronamelder_app', 'infectious_people', 'general_practitioner_suspicions'],
       ],
     ],
   });
@@ -144,10 +142,7 @@ export function NlLayout(props: NlLayoutProps) {
           </Box>
         }
       >
-        <ErrorBoundary>
-          {children}
-          <LoadingWrapper previousUrl="landelijk" />
-        </ErrorBoundary>
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

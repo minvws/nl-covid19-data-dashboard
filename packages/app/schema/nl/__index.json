@@ -7,9 +7,6 @@
     "behavior_annotations",
     "booster_shot_administered",
     "repeating_shot_administered",
-    "booster_shot_delivered",
-    "booster_shot_planned",
-    "booster_shot_per_age_group",
     "booster_coverage",
     "code",
     "corona_melder_app_download",
@@ -18,7 +15,6 @@
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
-    "risk_level",
     "named_difference",
     "disability_care",
     "doctor",
@@ -27,13 +23,10 @@
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
-    "hospital_vaccination_status",
-    "hospital_vaccine_incidence_per_age_group",
     "infectious_people",
     "intensive_care_lcps",
     "intensive_care_nice",
     "intensive_care_nice_per_age_group",
-    "intensive_care_vaccination_status",
     "last_generated",
     "name",
     "nursing_home",
@@ -84,15 +77,6 @@
     "repeating_shot_administered": {
       "$ref": "repeating_shot_administered.json"
     },
-    "booster_shot_delivered": {
-      "$ref": "booster_shot_delivered.json"
-    },
-    "booster_shot_planned": {
-      "$ref": "booster_shot_planned.json"
-    },
-    "booster_shot_per_age_group": {
-      "$ref": "booster_shot_per_age_group.json"
-    },
     "booster_coverage": {
       "$ref": "booster_coverage.json"
     },
@@ -132,17 +116,8 @@
     "hospital_lcps": {
       "$ref": "hospital_lcps.json"
     },
-    "hospital_vaccination_status": {
-      "$ref": "hospital_vaccination_status.json"
-    },
-    "hospital_vaccine_incidence_per_age_group": {
-      "$ref": "hospital_vaccine_incidence_per_age_group.json"
-    },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
-    },
-    "intensive_care_vaccination_status": {
-      "$ref": "intensive_care_vaccination_status.json"
     },
     "tested_ggd": {
       "$ref": "tested_ggd.json"
@@ -155,9 +130,6 @@
     },
     "disability_care": {
       "$ref": "disability_care.json"
-    },
-    "risk_level": {
-      "$ref": "risk_level.json"
     },
     "behavior": {
       "$ref": "behavior.json"

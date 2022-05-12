@@ -11,6 +11,8 @@
     "fully_vaccinated_percentage_label",
     "has_one_shot_percentage_label",
     "has_one_shot_percentage",
+    "booster_shot_percentage",
+    "booster_shot_percentage_label",
     "date_of_insertion_unix",
     "date_unix"
   ],
@@ -21,12 +23,15 @@
     },
     "age_group_range": {
       "type": "string",
-      "enum": ["12+", "12-17", "18+"]
+      "enum": ["12+", "18+"]
     },
     "fully_vaccinated_percentage": {
       "type": ["integer", "null"]
     },
     "has_one_shot_percentage": {
+      "type": ["integer", "null"]
+    },
+    "booster_shot_percentage": {
       "type": ["integer", "null"]
     },
     "birthyear_range": {
@@ -38,6 +43,10 @@
       "pattern": "^([><][=][0-9]{1,2})$"
     },
     "has_one_shot_percentage_label": {
+      "type": ["string", "null"],
+      "pattern": "^([><][=][0-9]{1,2})$"
+    },
+    "booster_shot_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },

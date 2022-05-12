@@ -37,7 +37,6 @@ import { Layout } from '~/domain/layout';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import { Languages } from '~/locale';
@@ -181,8 +180,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     filteredAgeGroup18Plus,
     true
   );
-
-  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const dataSitemap = useDataSitemap('gm', gmCode, data);
 
@@ -512,12 +509,6 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       { municipalityName: municipalityName }
                     ),
                   },
-                  internationalFeature.isEnabled
-                    ? {
-                        href: reverseRouter.in.index(),
-                        text: textGm.quick_links.links.internationaal,
-                      }
-                    : undefined,
                 ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   textGm.data_sitemap_title,

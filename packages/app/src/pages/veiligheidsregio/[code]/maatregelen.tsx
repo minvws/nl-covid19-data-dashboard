@@ -16,7 +16,6 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
   selectVrData,
   getLokalizeTexts,
 } from '~/static-props/get-data';
@@ -40,7 +39,6 @@ export const getStaticProps = createGetStaticProps(
     ),
   getLastGeneratedDate,
   selectVrData(),
-  selectNlData('risk_level'),
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
 
@@ -69,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, vrName, lastGenerated, selectedNlData } = props;
+  const { pageText, content, vrName, lastGenerated } = props;
 
   const { commonTexts } = useIntl();
   const { textVr } = pageText;
@@ -111,10 +109,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
           <Box as="article" spacing={3}>
             <Heading level={3}>{lockdown.title}</Heading>
-            <LockdownTable
-              data={lockdown}
-              level={selectedNlData.risk_level.last_value.risk_level}
-            />
+            <LockdownTable data={lockdown} level={1} />
           </Box>
 
           <AnchorTile

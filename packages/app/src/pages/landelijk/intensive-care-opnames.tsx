@@ -2,18 +2,13 @@ import {
   colors,
   DAY_IN_SECONDS,
   getLastFilledValue,
-  NlHospitalVaccineIncidencePerAgeGroupValue,
-  NlIntensiveCareVaccinationStatusValue,
   TimeframeOption,
   TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import dynamic from 'next/dynamic';
 import {
-  AgeDemographicProps,
-  PieChartProps,
   TwoKpiSection,
   TimeSeriesChart,
   TileList,
@@ -27,7 +22,6 @@ import {
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { getBarScaleConfig } from '~/metric-config';
 import { Languages } from '~/locale';
 import {
@@ -58,22 +52,10 @@ import {
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const AgeDemographic = dynamic<
-  AgeDemographicProps<NlHospitalVaccineIncidencePerAgeGroupValue>
->(() =>
-  import('~/components/age-demographic').then((mod) => mod.AgeDemographic)
-);
-
-const PieChart = dynamic<PieChartProps<NlIntensiveCareVaccinationStatusValue>>(
-  () => import('~/components/pie-chart').then((mod) => mod.PieChart)
-);
-
 const pageMetrics = [
   'intensive_care_lcps',
   'intensive_care_nice',
   'intensive_care_nice_per_age_group',
-  'intensive_care_vaccination_status',
-  'hospital_vaccine_incidence_per_age_group',
 ];
 
 export const getStaticProps = createGetStaticProps(
@@ -91,9 +73,7 @@ export const getStaticProps = createGetStaticProps(
     'intensive_care_lcps',
     'intensive_care_nice',
     'intensive_care_nice_per_age_group',
-    'difference.intensive_care_lcps__beds_occupied_covid',
-    'intensive_care_vaccination_status',
-    'hospital_vaccine_incidence_per_age_group'
+    'difference.intensive_care_lcps__beds_occupied_covid'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -124,8 +104,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { commonTexts, formatPercentage, formatDateFromSeconds, formatNumber } =
-    useIntl();
+  const { commonTexts, formatPercentage, formatDateFromSeconds } = useIntl();
 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
   const { metadataTexts, textNl, textShared } = pageText;
@@ -133,22 +112,12 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
   const dataIntake = data.intensive_care_nice;
-  const lastValueVaccinationStatus =
-    data.intensive_care_vaccination_status.last_value;
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
     countTrailingNullValues(
       dataIntake.values,
       'admissions_on_date_of_admission_moving_average'
     )
-  );
-
-  const vaccinationStatusFeature = useFeature(
-    'nlIntensiveCareVaccinationStatus'
-  );
-
-  const icVaccinationIncidencePerAgeGroupFeature = useFeature(
-    'nlIcAdmissionsIncidencePerAgeGroup'
   );
 
   const sevenDayAverageDates: [number, number] = [
@@ -251,92 +220,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 )}
             </KpiTile>
           </TwoKpiSection>
-
-          {icVaccinationIncidencePerAgeGroupFeature.isEnabled && (
-            <ChartTile
-              title={
-                textShared.admissions_incidence_age_demographic_chart.title
-              }
-              description={
-                textShared.admissions_incidence_age_demographic_chart
-                  .description
-              }
-            >
-              <AgeDemographic
-                // This is correct, hospital admissions data is supposed to be displayed here.
-                data={data.hospital_vaccine_incidence_per_age_group}
-                accessibility={{
-                  key: 'ic_admissions_incidence_age_demographic_chart',
-                }}
-                rightColor="data.primary"
-                leftColor="data.yellow"
-                leftMetricProperty={'has_one_shot_or_not_vaccinated_per_100k'}
-                rightMetricProperty={'fully_vaccinated_per_100k'}
-                formatValue={(n: number) => `${n}`}
-                text={
-                  textShared.admissions_incidence_age_demographic_chart
-                    .chart_text
-                }
-              />
-            </ChartTile>
-          )}
-
-          {vaccinationStatusFeature.isEnabled && (
-            <ChartTile
-              title={textNl.vaccination_status_chart.title}
-              metadata={{
-                isTileFooter: true,
-                date: [
-                  lastValueVaccinationStatus.date_start_unix,
-                  lastValueVaccinationStatus.date_end_unix,
-                ],
-                source: {
-                  ...textNl.vaccination_status_chart.source,
-                },
-              }}
-              description={replaceVariablesInText(
-                textNl.vaccination_status_chart.description,
-                {
-                  amountOfPeople: formatNumber(
-                    lastValueVaccinationStatus.total_amount_of_people
-                  ),
-                  date_start: formatDateFromSeconds(
-                    lastValueVaccinationStatus.date_start_unix
-                  ),
-                  date_end: formatDateFromSeconds(
-                    lastValueVaccinationStatus.date_end_unix,
-                    'medium'
-                  ),
-                }
-              )}
-            >
-              <PieChart
-                data={lastValueVaccinationStatus}
-                icon={<Arts />}
-                dataConfig={[
-                  {
-                    metricProperty: 'has_one_shot_or_not_vaccinated',
-                    color: colors.data.yellow,
-                    label:
-                      textNl.vaccination_status_chart.labels
-                        .has_one_shot_or_not_vaccinated,
-                    tooltipLabel:
-                      textNl.vaccination_status_chart.tooltip_labels
-                        .has_one_shot_or_not_vaccinated,
-                  },
-                  {
-                    metricProperty: 'fully_vaccinated',
-                    color: colors.data.primary,
-                    label:
-                      textNl.vaccination_status_chart.labels.fully_vaccinated,
-                    tooltipLabel:
-                      textNl.vaccination_status_chart.tooltip_labels
-                        .fully_vaccinated,
-                  },
-                ]}
-              />
-            </ChartTile>
-          )}
 
           <ChartTile
             title={textNl.linechart_titel}

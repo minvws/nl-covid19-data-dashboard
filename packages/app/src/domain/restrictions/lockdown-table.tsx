@@ -3,10 +3,11 @@ import { Fragment } from 'react';
 import { Box } from '~/components/base';
 import { Cell, Row, Table, TableBody } from '~/components/table';
 import { BoldText } from '~/components/typography';
-import { EscalationLevelType } from '~/domain/escalation-level/common';
 import { LockdownData } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { restrictionIcons } from './restriction-icons';
+
+type EscalationLevelType = 1 | 2 | 3;
 
 type LockdownTableProps = {
   data: LockdownData;
