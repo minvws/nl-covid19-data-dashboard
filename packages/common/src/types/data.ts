@@ -1011,7 +1011,6 @@ export interface Vr {
   sewer_per_installation: VrSewerPerInstallation;
   tested_overall: VrTestedOverall;
   hospital_nice: VrHospitalNice;
-  hospital_nice_choropleth: VrHospitalNiceChoropleth;
   tested_ggd: VrTestedGgd;
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
@@ -1108,16 +1107,6 @@ export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
-  admissions_on_date_of_reporting: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface VrHospitalNiceChoropleth {
-  values: VrHospitalNiceChoroplethValue[];
-  last_value: VrHospitalNiceChoroplethValue;
-}
-export interface VrHospitalNiceChoroplethValue {
-  admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
