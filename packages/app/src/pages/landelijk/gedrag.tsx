@@ -135,8 +135,6 @@ export default function BehaviorPage(
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>

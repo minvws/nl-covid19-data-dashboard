@@ -58,14 +58,6 @@ const pageMetrics = [
   'intensive_care_nice_per_age_group',
 ];
 
-const pageMetrics = [
-  'intensive_care_lcps',
-  'intensive_care_nice',
-  'intensive_care_nice_per_age_group',
-  'intensive_care_vaccination_status',
-  'hospital_vaccine_incidence_per_age_group',
-];
-
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(

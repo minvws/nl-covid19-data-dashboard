@@ -52,11 +52,6 @@ import {
   useFormatLokalizePercentage,
 } from '~/utils';
 import { useFeature } from '~/lib/features';
-
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-
-const pageMetrics = ['vaccine_coverage_per_age_group', 'booster_coverage'];
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'booster_coverage'];

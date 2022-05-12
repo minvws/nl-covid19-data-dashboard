@@ -68,14 +68,6 @@ const pageMetrics = [
   'hospital_nice',
 ];
 
-const pageMetrics = [
-  'hospital_lcps',
-  'hospital_nice_per_age_group',
-  'hospital_nice',
-  'hospital_vaccination_status',
-  'hospital_vaccine_incidence_per_age_group',
-];
-
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
@@ -145,12 +137,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     (selectedMap === 'gm'
       ? last(choropleth.gm.hospital_nice_choropleth)
       : last(choropleth.vr.hospital_nice_choropleth)) || lastValueNice;
-
-  const lastValueNice =
-    (selectedMap === 'gm'
-      ? last(choropleth.gm.hospital_nice_choropleth)
-      : last(choropleth.vr.hospital_nice_choropleth)) ||
-    data.hospital_nice.last_value;
 
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,

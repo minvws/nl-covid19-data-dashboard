@@ -60,14 +60,6 @@ const pageMetrics = [
   'booster_coverage',
 ];
 
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-
-const pageMetrics = [
-  'code',
-  'vaccine_coverage_per_age_group',
-  'booster_coverage',
-];
-
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
