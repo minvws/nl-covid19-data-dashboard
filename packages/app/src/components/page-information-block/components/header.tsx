@@ -32,7 +32,7 @@ export function Header({
       {icon && !isMediumScreen && <Icon gridArea="topIcon">{icon}</Icon>}
       {category && (
         <Box gridArea="category">
-          <Heading level={1} variant="subtitle2">
+          <Heading level={2} variant="subtitle2">
             {category}
             {screenReaderCategory && (
               <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
@@ -41,12 +41,7 @@ export function Header({
         </Box>
       )}
       {icon && isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
-      <Heading
-        level={1}
-        as="h2"
-        hyphens="auto"
-        css={css({ gridArea: 'title' })}
-      >
+      <Heading level={1} hyphens="auto" css={css({ gridArea: 'title' })}>
         {title}
       </Heading>
     </GridLayout>
