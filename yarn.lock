@@ -11703,7 +11703,6 @@ __metadata:
   resolution: "corona-dashboard@workspace:."
   dependencies:
     ts-node: ^10.4.0
-    yarn-audit-fix: ^9.3.1
   languageName: unknown
   linkType: soft
 
@@ -28117,34 +28116,6 @@ __metadata:
     decamelize: ^1.0.0
     window-size: 0.1.0
   checksum: 73fd1978a311c853ae4c2c2da12642878912a33e4a8e9e8fec00900dc3b5db31a334c337cff04a542ebba7a32f64a9330419ba45249002f45f349a5d41010cab
-  languageName: node
-  linkType: hard
-
-"yarn-audit-fix@npm:^9.3.1":
-  version: 9.3.1
-  resolution: "yarn-audit-fix@npm:9.3.1"
-  dependencies:
-    "@types/find-cache-dir": ^3.2.1
-    "@types/fs-extra": ^9.0.13
-    "@types/lodash-es": ^4.17.6
-    "@types/semver": ^7.3.9
-    "@types/yarnpkg__lockfile": ^1.1.5
-    "@yarnpkg/lockfile": ^1.1.0
-    chalk: ^5.0.1
-    commander: ^9.2.0
-    find-cache-dir: ^3.3.2
-    find-up: ^6.3.0
-    fs-extra: ^10.1.0
-    globby: ^13.1.1
-    js-yaml: ^4.1.0
-    lodash-es: ^4.17.21
-    pkg-dir: ^6.0.1
-    semver: ^7.3.7
-    synp: ^1.9.10
-    tslib: ^2.4.0
-  bin:
-    yarn-audit-fix: target/es6/cli.js
-  checksum: f64aa842490cb78cd7036a0aade5f530bd81bbb8b3d64c6e93fb7011704390247eb3d93b377429efdbba7a99936439041f9bdc6701250a66164cf9a700cea92b
   languageName: node
   linkType: hard
 
