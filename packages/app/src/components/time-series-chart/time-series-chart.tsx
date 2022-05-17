@@ -246,9 +246,7 @@ export function TimeSeriesChart<
     : forcedMaximumValue;
 
   const seriesMax = calculatedForcedMaximumValue
-    ? calculatedForcedMaximumValue < calculatedSeriesMax
-      ? calculatedForcedMaximumValue
-      : calculatedSeriesMax
+    ? Math.min(calculatedForcedMaximumValue, calculatedSeriesMax)
     : calculatedSeriesMax;
 
   const minimumRanges = seriesConfig
