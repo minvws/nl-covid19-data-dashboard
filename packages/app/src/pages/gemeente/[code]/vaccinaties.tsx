@@ -255,7 +255,7 @@ export const VaccinationsGmPage = (
             <VaccineCoveragePerAgeGroup
               title={textGm.vaccination_coverage.title}
               description={textGm.vaccination_coverage.description}
-              sortingOrder={['18+', '12-17', '12+']}
+              sortingOrder={['18+', '12+']}
               metadata={{
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: textGm.vaccination_coverage.bronnen.rivm,
@@ -270,7 +270,7 @@ export const VaccinationsGmPage = (
                 textGm.vaccination_coverage
                   .description_booster_and_fully_vaccinated
               }
-              sortingOrder={['18+', '12-17', '12+']}
+              sortingOrder={['18+', '12+']}
               metadata={{
                 date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: textGm.vaccination_coverage.bronnen.rivm,

@@ -14,7 +14,6 @@ export enum TimeframeOption {
   THREE_MONTHS = '3months',
   SIX_MONTHS = '6months',
   LAST_YEAR = 'lastYear',
-  FIRST_OF_SEPTEMBER = 'firstOfSeptember',
   ALL = 'all',
 }
 
@@ -41,14 +40,6 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
       return 183;
     case TimeframeOption.LAST_YEAR:
       return 365;
-    case TimeframeOption.FIRST_OF_SEPTEMBER: {
-      const date = new Date('1 September 2020');
-      const today = new Date();
-      const diffInDays = Math.round(
-        Math.abs(date.valueOf() - today.valueOf()) / (1000 * DAY_IN_SECONDS) - 1
-      );
-      return diffInDays;
-    }
     case TimeframeOption.ALL:
       return Infinity;
     default: {

@@ -103,7 +103,7 @@ export function VaccinationCoverageChoropleth(
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
   const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
-    isVrCoverage(props)
+    isVrCoverage(props) || isGmCoverage(props) || isNlCoverage(props)
       ? props.data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup))
       : [];
 
