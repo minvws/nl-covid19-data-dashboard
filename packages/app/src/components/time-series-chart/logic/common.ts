@@ -1,4 +1,3 @@
-import { TimeDomain } from '@visx/scale';
 import { TimelineEventConfig } from '../components/timeline';
 
 /**

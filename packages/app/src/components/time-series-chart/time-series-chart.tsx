@@ -398,6 +398,7 @@ export function TimeSeriesChart<
     timelineState.events,
     metricPropertyFormatters,
     seriesMax,
+    timeDomain,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
