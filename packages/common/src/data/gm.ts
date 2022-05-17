@@ -532,7 +532,7 @@ export const gmData: MunicipalityInfo[] = [
     name: "'s-Gravenhage",
     vrCode: 'VR15',
     gemcode: 'GM0518',
-    displayName: "'s-Gravenhage",
+    displayName: 'Den Haag',
     searchTerms: ['Den Haag'],
   },
   {
@@ -659,7 +659,7 @@ export const gmData: MunicipalityInfo[] = [
     name: "'s-Hertogenbosch",
     vrCode: 'VR21',
     gemcode: 'GM0796',
-    displayName: "'s-Hertogenbosch",
+    displayName: 'Den Bosch',
     searchTerms: ['Den Bosch'],
   },
   {
