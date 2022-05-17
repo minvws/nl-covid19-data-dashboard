@@ -109,7 +109,7 @@ export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
@@ -169,7 +169,7 @@ export interface GmCollectionSewer {
 }
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
@@ -356,11 +356,9 @@ export interface NlBoosterShotAdministered {
 }
 export interface NlBoosterShotAdministeredValue {
   administered_total: number;
-  ggd_administered_last_7_days: number;
   ggd_administered_total: number;
   others_administered_total: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlRepeatingShotAdministered {
@@ -1305,7 +1303,7 @@ export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
@@ -1454,7 +1452,7 @@ export interface VrCollectionSituations {
 }
 export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
-  age_group_range: "12+" | "12-17" | "18+";
+  age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;

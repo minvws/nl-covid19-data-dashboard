@@ -25,19 +25,13 @@
         "administered_total": {
           "type": "number"
         },
-        "ggd_administered_last_7_days": {
-          "type": "number"
-        },
         "ggd_administered_total": {
           "type": "number"
         },
         "others_administered_total": {
           "type": "number"
         },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -46,11 +40,9 @@
       },
       "required": [
         "administered_total",
-        "ggd_administered_last_7_days",
         "ggd_administered_total",
         "others_administered_total",
-        "date_start_unix",
-        "date_end_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false
