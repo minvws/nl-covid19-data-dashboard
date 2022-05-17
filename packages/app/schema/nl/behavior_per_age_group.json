@@ -25,23 +25,7 @@
     "date_start_unix": { "type": "integer" },
     "date_end_unix": { "type": "integer" }
   },
-  "required": [
-    "keep_distance_compliance",
-    "keep_distance_support",
-    "sneeze_cough_elbow_compliance",
-    "sneeze_cough_elbow_support",
-    "wash_hands_compliance",
-    "wash_hands_support",
-    "work_from_home_compliance",
-    "work_from_home_support",
-    "ventilate_home_compliance",
-    "ventilate_home_support",
-    "selftest_visit_compliance",
-    "selftest_visit_support",
-    "date_of_insertion_unix",
-    "date_start_unix",
-    "date_end_unix"
-  ],
+  "required": ["date_of_insertion_unix", "date_start_unix", "date_end_unix"],
   "additionalProperties": false,
   "definitions": {
     "value": {
