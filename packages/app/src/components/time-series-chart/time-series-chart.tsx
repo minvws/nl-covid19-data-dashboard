@@ -241,10 +241,14 @@ export function TimeSeriesChart<
     [seriesList, seriesConfig, benchmark?.value]
   );
 
-  const seriesMax = isDefined(forcedMaximumValue)
-    ? isFunction(forcedMaximumValue)
-      ? forcedMaximumValue(calculatedSeriesMax)
-      : forcedMaximumValue
+  const calculatedForcedMaximumValue = isFunction(forcedMaximumValue)
+    ? forcedMaximumValue(calculatedSeriesMax)
+    : forcedMaximumValue;
+
+  const seriesMax = calculatedForcedMaximumValue
+    ? calculatedForcedMaximumValue < calculatedSeriesMax
+      ? calculatedForcedMaximumValue
+      : calculatedSeriesMax
     : calculatedSeriesMax;
 
   const minimumRanges = seriesConfig
@@ -275,11 +279,13 @@ export function TimeSeriesChart<
   const { legendItems, splitLegendGroups } = useLegendItems(
     xScale.domain(),
     seriesConfig,
-    dataOptions
+    dataOptions,
+    dataOptions?.outOfBoundsConfig && seriesMax < calculatedSeriesMax
   );
 
   const timeDomain = useMemo(
-    () => getTimeDomain({ values, today: endDate ?? today, withPadding: false }),
+    () =>
+      getTimeDomain({ values, today: endDate ?? today, withPadding: false }),
     [values, endDate, today]
   );
 
@@ -367,7 +373,8 @@ export function TimeSeriesChart<
           seriesMax,
           isOutOfBounds: dataOptions?.outOfBoundsConfig?.checkIsOutofBounds(
             values[valuesIndex],
-            seriesMax
+            seriesMax,
+            timeDomain
           ),
         },
         tooltipLeft: nearestPoint.x,
