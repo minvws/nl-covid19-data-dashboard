@@ -95,7 +95,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <Box as="header" spacing={4}>
-            <Heading level={1} as="h2">
+            <Heading level={1}>
               {replaceVariablesInText(textVr.titel, {
                 safetyRegionName: vrName,
               })}

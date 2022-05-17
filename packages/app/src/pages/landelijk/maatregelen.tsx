@@ -69,9 +69,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <Box as="header" spacing={4}>
-            <Heading level={1} as="h2">
-              {textNl.titel}
-            </Heading>
+            <Heading level={1}>{textNl.titel}</Heading>
             {lockdown.message.description ? (
               <Box maxWidth="maxWidthText">
                 <RichContent blocks={lockdown.message.description} />
