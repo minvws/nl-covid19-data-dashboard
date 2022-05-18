@@ -229,9 +229,10 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
                 textAnchor="middle"
                 verticalAnchor="middle"
                 fontSize="12"
+                fontWeight="bold"
                 y={ageGroupRangePoint(value) + singleBarHeight / 2}
                 x={width / 2}
-                fill={colors.annotation}
+                fill="black"
               >
                 {formatAgeGroupRange(ageGroupRange(value)) +
                   (isClippedValue ? ' *' : '')}
