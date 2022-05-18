@@ -126,5 +126,5 @@ function getTimeframeBoundaryUnix(
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return Math.floor(endDate.getTime() / 1000) - days * DAY_IN_SECONDS;
+  return startOfDayInSeconds(endDate.getTime() / 1000) - days * DAY_IN_SECONDS;
 }
