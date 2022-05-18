@@ -47,7 +47,6 @@ export function VaccinationsShotKpiSection({
           }}
         />
       </KpiTile>
-      <KpiTile />
     </TwoKpiSection>
   );
 }
