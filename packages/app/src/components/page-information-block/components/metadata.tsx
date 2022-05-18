@@ -7,6 +7,7 @@ import {
 } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Fragment } from 'react';
+import styled from 'styled-components'
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';
@@ -61,9 +62,9 @@ export function Metadata({
   return (
     <Box spacing={2}>
       <Box display="flex" alignItems="flex-start" color="annotation">
-        <Box as="span" minWidth="1.8rem">
+        <Icon>
           <Clock aria-hidden color={colors.annotation} />
-        </Box>
+        </Icon>
         <Text variant="label1">{dateText}</Text>
       </Box>
 
@@ -157,9 +158,7 @@ function MetadataItem({
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
-      <Box as="span" minWidth="1.8rem">
-        {icon}
-      </Box>
+      <Icon>{icon}</Icon>
 
       <Text variant="label1">
         {referenceLink && !items && (
@@ -223,7 +222,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
-      <Box minWidth="1.8rem">{icon}</Box>
+      <Icon>{icon}</Icon>
 
       <Link href={referenceLink} passHref>
         <Anchor underline="hover" variant="label1">
@@ -249,3 +248,14 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
     </Box>
   );
 }
+
+const Icon = styled.span(() =>
+  css({
+    minWidth: '1.8rem',
+
+    svg: {
+      height: '15px',
+      width: 'auto',
+    },
+  })
+);
