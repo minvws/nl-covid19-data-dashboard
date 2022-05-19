@@ -252,6 +252,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title: textShared.chloropleth_legenda.titel,
               thresholds: thresholds.gm.admissions_on_date_of_admission,
+              type: 'default',
             }}
           >
             <DynamicChoropleth
@@ -262,7 +263,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               data={choropleth.gm.hospital_nice_choropleth}
               dataConfig={{
                 metricName: 'hospital_nice_choropleth',
-                metricProperty: 'admissions_on_date_of_admission',
+                metricProperty: 'admissions_on_date_of_admission_per_100000',
               }}
               dataOptions={{
                 selectedCode: data.code,
