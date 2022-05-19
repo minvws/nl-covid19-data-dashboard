@@ -4,6 +4,7 @@ import {
   VrCollectionBehavior,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { isNumber } from 'lodash';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -164,13 +165,17 @@ function ChoroplethBlock({
             }}
             minHeight={!isSmallScreen ? 350 : 400}
             formatTooltip={(context) => {
-              const currentComplianceValue =
+              const currentComplianceValueKey =
                 `${currentId}_compliance` as keyof VrCollectionBehavior;
-              const currentSupportValue =
+              const currentSupportValueKey =
                 `${currentId}_support` as keyof VrCollectionBehavior;
 
               // Return null when there is no data available to prevent breaking the application when using tab
               if (keysWithoutData.includes(currentId)) return null;
+
+              const complianceValue =
+                context.dataItem[currentComplianceValueKey];
+              const supportValue = context.dataItem[currentSupportValueKey];
 
               return (
                 <VrBehaviorTooltip
@@ -178,10 +183,10 @@ function ChoroplethBlock({
                   context={context}
                   currentMetric={currentId}
                   currentComplianceValue={
-                    context.dataItem[currentComplianceValue] as number
+                    isNumber(complianceValue) ? complianceValue : null
                   }
                   currentSupportValue={
-                    context.dataItem[currentSupportValue] as number
+                    isNumber(supportValue) ? supportValue : null
                   }
                   text={text}
                 />
