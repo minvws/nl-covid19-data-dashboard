@@ -15,8 +15,8 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 interface VrBehaviorTooltipProps {
   context: TooltipData<VrCollectionBehavior>;
   currentMetric: BehaviorIdentifier;
-  currentComplianceValue: number;
-  currentSupportValue: number;
+  currentComplianceValue: number | null;
+  currentSupportValue: number | null;
   behaviorType: 'compliance' | 'support';
   text: SiteText['pages']['behaviorPage'];
 }
@@ -29,25 +29,29 @@ export function VrBehaviorTooltip({
   behaviorType,
   text,
 }: VrBehaviorTooltipProps) {
-  const { commonTexts } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
   const reverseRouter = useReverseRouter();
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
 
   const complianceFilteredThreshold = getThresholdValue(
     thresholds.vr[complianceThresholdKey],
-    currentComplianceValue
+    currentComplianceValue || 0
   );
 
   const supportFilteredThreshold = getThresholdValue(
     thresholds.vr[supportThresholdKey],
-    currentSupportValue
+    currentSupportValue || 0
   );
 
   const complianceTooltipInfo = (
     <TooltipInfo
       title={text.nl.tooltip_labels.compliance}
-      value={currentComplianceValue}
+      value={
+        currentComplianceValue
+          ? `${formatPercentage(currentComplianceValue)}%`
+          : '-'
+      }
       background={complianceFilteredThreshold.color}
     />
   );
@@ -55,7 +59,9 @@ export function VrBehaviorTooltip({
   const supportTooltipInfo = (
     <TooltipInfo
       title={text.nl.tooltip_labels.support}
-      value={currentSupportValue}
+      value={
+        currentSupportValue ? `${formatPercentage(currentSupportValue)}%` : '-'
+      }
       background={supportFilteredThreshold.color}
     />
   );
@@ -89,7 +95,7 @@ export function VrBehaviorTooltip({
 
 interface TooltipInfoProps {
   title: string;
-  value: number;
+  value: string;
   background: string;
 }
 
@@ -98,7 +104,7 @@ function TooltipInfo({ title, value, background }: TooltipInfoProps) {
     <Box display="flex" alignItems="center" justifyContent="space-between">
       {title}
       <Box display="flex" alignItems="center">
-        <BoldText>{`${value}%`}</BoldText>
+        <BoldText>{value}</BoldText>
         <LegendaColorBox backgroundColor={background} />
       </Box>
     </Box>
