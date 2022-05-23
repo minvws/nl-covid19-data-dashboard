@@ -119,7 +119,7 @@ export function BarTrend({
                 height={barHeight}
                 width={barWidth}
                 fill={transparentize(1 - fillOpacity, color)}
-                id={id}
+                id={`${id}_${index}`}
               />
             );
           })}
