@@ -27,6 +27,7 @@ export type VrItemKeys =
   | 'vaccinations';
 
 export type VrCategoryKeys =
+  | 'archived_metrics'
   | 'behaviour'
   | 'early_indicators'
   | 'hospitals'
