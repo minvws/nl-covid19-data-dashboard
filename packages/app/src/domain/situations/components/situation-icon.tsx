@@ -21,5 +21,5 @@ const icons = {
 
 export function SituationIcon({ id }: { id: SituationKey }) {
   const IconFromMap = icons[id];
-  return <IconFromMap />;
+  return <IconFromMap heigth="36px" width="36px"/>;
 }
