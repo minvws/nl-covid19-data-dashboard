@@ -97,13 +97,14 @@ export default function BrononderzoekPage(
             articles={content.articles}
           />
 
-          {textShared.warning && !isEmpty(textShared.warning) && (
-            <WarningTile
-              isFullWidth
-              message={textShared.warning}
-              variant="emphasis"
-            />
-          )}
+          {textShared.belangrijk_bericht &&
+            !isEmpty(textShared.belangrijk_bericht) && (
+              <WarningTile
+                isFullWidth
+                message={textShared.belangrijk_bericht}
+                variant="emphasis"
+              />
+            )}
 
           <SituationsDataCoverageChoroplethTile
             data={choropleth.vr}
