@@ -11,11 +11,16 @@ import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '../use-accessibility-annotations';
+import { useUniqueId } from '../use-unique-id';
 
 const UseAccessibilityAnnotations = suite('useAccessibilityAnnotations');
 
 UseAccessibilityAnnotations.before((context) => {
   context.cleanupJsDom = injectJsDom();
+  // @TODO: Mocking a React Hook is not possible without installing another npm package. We might consider cleaning this up later
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  useUniqueId = () => 'uniqueId';
 });
 
 UseAccessibilityAnnotations.after((context) => {
@@ -41,12 +46,12 @@ UseAccessibilityAnnotations(
 
     assert.equal(result.current.descriptionElement.type.name, 'VisuallyHidden');
     assert.equal(result.current.descriptionElement.props, {
-      id: 'testKey_id',
+      id: 'testKey_uniqueId',
       children: 'test description',
     });
     assert.equal(result.current.props, {
       'aria-label': 'test label',
-      'aria-describedby': 'testKey_id',
+      'aria-describedby': 'testKey_uniqueId',
     });
   }
 );
@@ -70,7 +75,7 @@ UseAccessibilityAnnotations(
     );
 
     assert.equal(result.current.descriptionElement.props, {
-      id: 'testKey_id',
+      id: 'testKey_uniqueId',
       children:
         'test description test keyboard series feature test keyboard bar feature test keyboard choropleth feature',
     });
