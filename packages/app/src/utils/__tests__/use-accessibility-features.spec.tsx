@@ -15,8 +15,11 @@ import { useUniqueId } from '../use-unique-id';
 
 const UseAccessibilityAnnotations = suite('useAccessibilityAnnotations');
 
+const originalUseUniqueId = useUniqueId.bind({}); // clones the hook
+
 UseAccessibilityAnnotations.before((context) => {
   context.cleanupJsDom = injectJsDom();
+
   // @TODO: Mocking a React Hook is not possible without installing another npm package. We might consider cleaning this up later
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -25,6 +28,10 @@ UseAccessibilityAnnotations.before((context) => {
 
 UseAccessibilityAnnotations.after((context) => {
   context.cleanupJsDom();
+
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  useUniqueId = originalUseUniqueId;
 });
 
 UseAccessibilityAnnotations.after.each(() => {
