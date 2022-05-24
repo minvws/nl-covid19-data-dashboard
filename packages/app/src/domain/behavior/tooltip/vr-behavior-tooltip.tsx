@@ -36,19 +36,19 @@ export function VrBehaviorTooltip({
 
   const complianceFilteredThreshold = getThresholdValue(
     thresholds.vr[complianceThresholdKey],
-    currentComplianceValue || 0
+    currentComplianceValue ?? 0
   );
 
   const supportFilteredThreshold = getThresholdValue(
     thresholds.vr[supportThresholdKey],
-    currentSupportValue || 0
+    currentSupportValue ?? 0
   );
 
   const complianceTooltipInfo = (
     <TooltipInfo
       title={text.nl.tooltip_labels.compliance}
       value={
-        currentComplianceValue
+        currentComplianceValue !== null
           ? `${formatPercentage(currentComplianceValue)}%`
           : '-'
       }
@@ -60,7 +60,9 @@ export function VrBehaviorTooltip({
     <TooltipInfo
       title={text.nl.tooltip_labels.support}
       value={
-        currentSupportValue ? `${formatPercentage(currentSupportValue)}%` : '-'
+        currentSupportValue !== null
+          ? `${formatPercentage(currentSupportValue)}%`
+          : '-'
       }
       background={supportFilteredThreshold.color}
     />
