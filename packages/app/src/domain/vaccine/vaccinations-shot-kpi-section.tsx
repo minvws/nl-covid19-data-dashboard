@@ -34,7 +34,7 @@ export function VaccinationsShotKpiSection({
 
   return (
     <TwoKpiSection>
-      <KpiTile title={text.title}>
+      <KpiTile title={text.title} hasNoBorder>
         <KpiValue text={formatNumber(value)} />
         <Markdown content={text.description} />
         {text.warning && <Message variant="warning">{text.warning}</Message>}
@@ -47,7 +47,6 @@ export function VaccinationsShotKpiSection({
           }}
         />
       </KpiTile>
-      <KpiTile />
     </TwoKpiSection>
   );
 }

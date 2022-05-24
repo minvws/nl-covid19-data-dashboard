@@ -70,7 +70,7 @@ export function VrLayout(props: VrLayoutProps) {
     map: [
       ['vaccinations', ['vaccinations']],
       ['hospitals', ['hospital_admissions']],
-      ['infections', ['positive_tests', 'mortality', 'source_investigation']],
+      ['infections', ['positive_tests', 'mortality']],
       ['behaviour', ['compliance']],
       [
         'vulnerable_groups',
@@ -78,6 +78,12 @@ export function VrLayout(props: VrLayoutProps) {
       ],
       ['early_indicators', ['sewage_measurement']],
     ],
+  });
+
+  const archivedItems = useSidebar({
+    layout: 'vr',
+    code: code,
+    map: [['archived_metrics', ['source_investigation']]],
   });
 
   return (
@@ -144,6 +150,17 @@ export function VrLayout(props: VrLayoutProps) {
                 <Menu spacing={2}>
                   <MenuRenderer items={items} />
                 </Menu>
+
+                <Box
+                  borderTopColor="border"
+                  borderTopStyle="solid"
+                  borderTopWidth={1}
+                  pt={3}
+                >
+                  <Menu>
+                    <MenuRenderer items={archivedItems} />
+                  </Menu>
+                </Box>
               </Box>
             )}
           </>

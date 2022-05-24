@@ -3,6 +3,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import type { SiteText } from '~/locale';
+import { useUniqueId } from './use-unique-id';
 
 export interface AccessibilityDefinition {
   key: keyof SiteText['common']['accessibility']['charts'];
@@ -32,6 +33,7 @@ export function useAccessibilityAnnotations(
   definition: AccessibilityDefinition
 ) {
   const { commonTexts } = useIntl();
+  const uniqueId = useUniqueId();
 
   const { label, description: chartDescription } =
     commonTexts.accessibility.charts[
@@ -68,7 +70,7 @@ export function useAccessibilityAnnotations(
     );
   }
 
-  const describedById = `${definition.key}_id`;
+  const describedById = `${definition.key}_${uniqueId}`;
 
   return {
     descriptionElement: (

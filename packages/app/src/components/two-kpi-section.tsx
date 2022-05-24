@@ -1,5 +1,4 @@
-import css from '@styled-system/css';
-import React from 'react';
+import React, { Children } from 'react';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
@@ -9,19 +8,17 @@ interface TwoKpiSectionProps {
 }
 
 export function TwoKpiSection({ children, spacing }: TwoKpiSectionProps) {
+  const hasOnlyOneChild = Children.toArray(children).length === 1;
+
   return (
     <Box
-      display="flex"
-      flexDirection={{ _: 'column', lg: 'row' }}
-      css={css({
-        '& > *': {
-          flex: 1,
-        },
-        '& > *:not(:last-child)': {
-          mr: asResponsiveArray({ _: 0, lg: spacing ?? 5 }),
-          mb: asResponsiveArray({ _: spacing ?? 4, lg: 0 }),
-        },
-      })}
+      display="grid"
+      gridTemplateColumns={asResponsiveArray({ _: '1fr', lg: '1fr 1fr' })}
+      gridColumnGap={asResponsiveArray({ _: 0, lg: spacing ?? '10rem' })}
+      gridRowGap={asResponsiveArray({ _: '3rem', lg: spacing ?? '8rem' })}
+      borderTop={hasOnlyOneChild ? 'solid 2px lightGray' : undefined}
+      pt={hasOnlyOneChild ? 4 : undefined}
+      pb={hasOnlyOneChild ? asResponsiveArray({ _: 3, sm: 4 }) : undefined}
     >
       {children}
     </Box>

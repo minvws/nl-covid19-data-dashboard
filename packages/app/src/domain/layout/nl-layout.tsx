@@ -45,13 +45,7 @@ export function NlLayout(props: NlLayoutProps) {
       ['hospitals', ['hospital_admissions', 'intensive_care_admissions']],
       [
         'infections',
-        [
-          'positive_tests',
-          'reproduction_number',
-          'mortality',
-          'variants',
-          'source_investigation',
-        ],
+        ['positive_tests', 'reproduction_number', 'mortality', 'variants'],
       ],
       ['behaviour', ['compliance']],
       [
@@ -67,7 +61,12 @@ export function NlLayout(props: NlLayoutProps) {
     map: [
       [
         'archived_metrics',
-        ['coronamelder_app', 'infectious_people', 'general_practitioner_suspicions'],
+        [
+          'source_investigation',
+          'coronamelder_app',
+          'infectious_people',
+          'general_practitioner_suspicions',
+        ],
       ],
     ],
   });

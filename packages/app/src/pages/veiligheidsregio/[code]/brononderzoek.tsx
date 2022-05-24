@@ -1,13 +1,17 @@
 import { TimeframeOption } from '@corona-dashboard/common';
 import { Gedrag } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
-import { ChartTile } from '~/components/chart-tile';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TwoKpiSection } from '~/components/two-kpi-section';
+import {
+  ChartTile,
+  WarningTile,
+  KpiTile,
+  KpiValue,
+  Markdown,
+  PageInformationBlock,
+  TileList,
+  TwoKpiSection,
+} from '~/components';
 import { InlineText, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -110,7 +114,7 @@ export default function BrononderzoekPage(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.besmettingen}
+            category={commonTexts.nationaal_layout.headings.archief}
             screenReaderCategory={
               commonTexts.sidebar.metrics.source_investigation.title
             }
@@ -137,6 +141,15 @@ export default function BrononderzoekPage(
             vrNameOrGmName={vrName}
             warning={textShared.warning}
           />
+
+          {textShared.belangrijk_bericht &&
+            !isEmpty(textShared.belangrijk_bericht) && (
+              <WarningTile
+                isFullWidth
+                message={textShared.belangrijk_bericht}
+                variant="emphasis"
+              />
+            )}
 
           <TwoKpiSection>
             <SituationsDataCoverageTile
