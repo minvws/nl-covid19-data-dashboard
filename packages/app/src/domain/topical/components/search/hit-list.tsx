@@ -1,4 +1,3 @@
-import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';

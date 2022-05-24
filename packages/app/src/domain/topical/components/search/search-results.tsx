@@ -5,7 +5,6 @@ import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useSearchContext } from './context';
 import { HitList } from './hit-list';
-import { paddedStyle } from './search-input';
 
 export function SearchResults() {
   const { id, hits, setHasHitFocus } = useSearchContext();
