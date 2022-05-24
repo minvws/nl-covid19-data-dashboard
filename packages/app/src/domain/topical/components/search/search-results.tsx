@@ -28,23 +28,20 @@ export function SearchResults() {
       role="listbox"
       onPointerDown={() => setHasHitFocus(true)}
     >
-      <HitList key={col1Scope} scope={col1Scope} />
-      <HitList key={col2Scope} scope={col2Scope} />
+      <HitList key={col2Scope} scope="vr" />
+      <HitList key={col1Scope} scope="gm" />
     </StyledSearchResults>
   );
 }
 
 const StyledSearchResults = styled.div(
-  paddedStyle,
   css({
+    p: '1em 0',
     position: 'relative',
-    /** negative margin necessary for text alignment */
-    mx: -2,
     display: 'flex',
     flexDirection: asResponsiveArray({ _: 'column', sm: 'row' }),
-    '& > *:not(:last-child)': {
-      marginRight: asResponsiveArray({ sm: 4 }),
-      marginBottom: asResponsiveArray({ _: 4, sm: 0 }),
+    '& > :not(:last-child)': {
+      marginBottom: '2em',
     },
   })
 );

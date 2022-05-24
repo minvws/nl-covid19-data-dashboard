@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
@@ -60,13 +61,18 @@ interface HitLinkProps {
   href: string;
   children: ReactNode;
   hasFocus: boolean;
+  onClick: () => void;
   onHover: () => void;
   onFocus: () => void;
   id: string;
+  isActiveResult: boolean;
 }
 
 const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
-  ({ href, children, hasFocus, onHover, onFocus, id }, ref) => {
+  (
+    { href, children, hasFocus, onClick, onHover, onFocus, id, isActiveResult },
+    ref
+  ) => {
     return (
       <Link passHref href={href}>
         <StyledHitLink
@@ -77,6 +83,8 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
           role="option"
           id={id}
           aria-selected={hasFocus ? 'true' : 'false'}
+          aria-active={isActiveResult ? 'true' : 'false'}
+          onClick={onClick}
         >
           {children}
         </StyledHitLink>
@@ -85,16 +93,42 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
   }
 );
 
-const StyledHitLink = styled(Anchor)<{ hasFocus: boolean }>((x) =>
+const StyledHitLink = styled(Anchor)<{
+  hasFocus: boolean;
+}>((x) =>
   css({
-    p: 2,
+    padding: '0.5em 2em',
     display: 'block',
     textDecoration: 'none',
     color: 'black',
     width: '100%',
-    bg: x.hasFocus ? 'contextualContent' : 'transparant',
     transitionProperty: 'background',
     transitionDuration: x.hasFocus ? '0ms' : '120ms',
+    position: 'relative',
+    '&:before': {
+      content: 'attr(data-text)',
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      height: '100%',
+      width: '5px',
+      backgroundColor: 'blue',
+      transform: 'scaleX(0)',
+      transformOrigin: 'left',
+      transition: '0.2s transform',
+    },
+    '&[aria-active="true"]': {
+      color: 'blue',
+      fontWeight: 'bold',
+      '&:before': {
+        transform: 'scaleX(1)',
+      },
+    },
+    '&:hover, &[aria-selected="true"]': {
+      bg: 'blue',
+      color: 'white',
+      fontWeight: 'normal',
+    },
   })
 );
 
@@ -104,7 +138,7 @@ const HitListHeader = styled.span(
     textTransform: 'uppercase',
     fontSize: 1,
     fontWeight: 'bold',
-    px: 2,
+    px: '2em',
   })
 );
 

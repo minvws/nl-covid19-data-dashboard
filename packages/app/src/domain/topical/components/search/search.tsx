@@ -12,9 +12,11 @@ import { SearchResults } from './search-results';
 export function Search({
   initialValue,
   title,
+  activeResult,
 }: {
   initialValue?: string;
   title: string;
+  activeResult?: string;
 }) {
   const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
@@ -23,6 +25,7 @@ export function Search({
     <SearchContextProvider
       containerRef={containerRef}
       initialValue={initialValue}
+      activeResult={activeResult}
     >
       {(context) => (
         <Box spacing={3}>
