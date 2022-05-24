@@ -61,8 +61,8 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           const config = seriesConfig[index];
           const id =
             config.type === 'range'
-              ? `${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}`
-              : `${chartId}_${config.metricProperty}`;
+              ? `${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}_${config.type}`
+              : `${chartId}_${config.metricProperty}_${config.type}`;
 
           switch (config.type) {
             case 'gapped-line':
