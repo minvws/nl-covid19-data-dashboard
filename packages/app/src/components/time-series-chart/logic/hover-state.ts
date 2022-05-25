@@ -333,6 +333,7 @@ export function useHoverState<T extends TimestampedValue>({
 
         switch (config.type) {
           case 'line':
+          case 'scatter-plot':
           case 'gapped-line':
           case 'area':
           case 'gapped-area':

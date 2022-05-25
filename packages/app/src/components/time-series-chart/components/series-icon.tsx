@@ -25,6 +25,7 @@ export function SeriesIcon<T extends TimestampedValue>({
 }: SeriesIconProps<T>) {
   switch (config.type) {
     case 'line':
+    case 'scatter-plot':
     case 'gapped-line':
       return (
         <LineTrendIcon

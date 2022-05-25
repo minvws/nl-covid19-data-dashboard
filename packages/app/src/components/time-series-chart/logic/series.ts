@@ -15,6 +15,7 @@ import { SplitPoint } from './split';
 
 type SeriesConfigSingle<T extends TimestampedValue> =
   | LineSeriesDefinition<T>
+  | ScatterPlotSeriesDefinition<T>
   | RangeSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
@@ -87,6 +88,15 @@ export interface LineSeriesDefinition<T extends TimestampedValue>
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
+}
+
+export interface ScatterPlotSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'scatter-plot';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
 }
 
 export interface AreaSeriesDefinition<T extends TimestampedValue>

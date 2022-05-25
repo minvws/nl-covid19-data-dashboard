@@ -299,7 +299,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'gapped-area',
+                    type: 'line',
+                    metricProperty: 'beds_occupied_covid',
+                    label: textNl.chart_bedbezetting.legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'scatter-plot',
                     metricProperty: 'beds_occupied_covid',
                     label: textNl.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,
