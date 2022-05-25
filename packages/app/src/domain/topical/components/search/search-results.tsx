@@ -7,19 +7,9 @@ import { useSearchContext } from './context';
 import { HitList } from './hit-list';
 
 export function SearchResults() {
-  const { id, hits, setHasHitFocus } = useSearchContext();
-  const breakpoints = useBreakpoints();
+  const { id, setHasHitFocus } = useSearchContext();
 
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
-
-  /**
-   * On narrow devices we'll render the category with the best result on top
-   */
-  const vrHasBestResult =
-    [...hits].sort((a, b) => b.score - a.score)[0]?.data.type === 'vr';
-
-  const col1Scope = breakpoints.sm ? 'gm' : vrHasBestResult ? 'vr' : 'gm';
-  const col2Scope = breakpoints.sm ? 'vr' : vrHasBestResult ? 'gm' : 'vr';
 
   return (
     <StyledSearchResults
@@ -27,8 +17,8 @@ export function SearchResults() {
       role="listbox"
       onPointerDown={() => setHasHitFocus(true)}
     >
-      <HitList key={col2Scope} scope="vr" />
-      <HitList key={col1Scope} scope="gm" />
+      <HitList key="vr" scope="vr" />
+      <HitList key="gm" scope="gm" />
     </StyledSearchResults>
   );
 }
