@@ -12,9 +12,11 @@ import { SearchResults } from './search-results';
 export function Search({
   initialValue,
   title,
+  activeResult,
 }: {
   initialValue?: string;
   title: string;
+  activeResult?: string;
 }) {
   const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
@@ -23,6 +25,7 @@ export function Search({
     <SearchContextProvider
       containerRef={containerRef}
       initialValue={initialValue}
+      activeResult={activeResult}
     >
       {(context) => (
         <Box spacing={3}>
@@ -48,7 +51,7 @@ export function Search({
               width={{
                 _: '100%',
                 xs: '20rem',
-                sm: context.showResults ? '42rem' : '26rem',
+                sm: '42rem',
               }}
               px={{ sm: 4 }}
               bg={colors.white}
