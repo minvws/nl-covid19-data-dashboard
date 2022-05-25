@@ -51,7 +51,7 @@ export function Search({
               width={{
                 _: '100%',
                 xs: '20rem',
-                sm: context.showResults ? '42rem' : '26rem',
+                sm: '42rem',
               }}
               px={{ sm: 4 }}
               bg={colors.white}
