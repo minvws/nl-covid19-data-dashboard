@@ -1,4 +1,3 @@
-import { DAY_IN_SECONDS } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { SeriesItem, SeriesSingleValue } from '../logic';
@@ -14,37 +13,27 @@ type LineTrendProps = {
   id: string;
 };
 
-export function ScatterPlot({ series, color, getX, getY, id }: LineTrendProps) {
-  const nonNullSeries = useMemo(() => {
-    let nonNull = series.filter((x) => isPresent(x.__value));
-    if (nonNull.length === 1) {
-      nonNull = [
-        {
-          __date_unix: nonNull[0].__date_unix - DAY_IN_SECONDS,
-          __value: nonNull[0].__value,
-        },
-        {
-          __date_unix: nonNull[0].__date_unix + DAY_IN_SECONDS,
-          __value: nonNull[0].__value,
-        },
-      ];
-    }
-    return nonNull;
-  }, [series]);
+export function ScatterPlot({
+  series: dataSeries,
+  color,
+  getX,
+  getY,
+  id,
+}: LineTrendProps) {
+  const series = useMemo(
+    () => dataSeries.filter((x) => isPresent(x.__value)),
+    [dataSeries]
+  );
 
-  if (!nonNullSeries.length) {
-    return null;
-  }
-
-  return (
+  return series.length === 0 ? null : (
     <Group>
-      {nonNullSeries.map((d, i) => (
+      {series.map((data, i) => (
         <circle
           key={i}
           id={`${id}-${i}`}
           r={DEFAULT_DOT_SIZE}
-          cx={getX(d)}
-          cy={getY(d)}
+          cx={getX(data)}
+          cy={getY(data)}
           fill={color}
         />
       ))}
