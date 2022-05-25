@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useSearchContext } from './context';
 import { HitList } from './hit-list';
 
