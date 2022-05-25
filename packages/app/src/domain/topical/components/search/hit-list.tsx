@@ -50,7 +50,9 @@ export function HitList({ scope }: HitListProps) {
           ))}
         </StyledHitList>
       ) : (
-        <Text color="gray">{noHitsMessage}</Text>
+        <NoResultMessage>
+          <Text color="gray">{noHitsMessage}</Text>
+        </NoResultMessage>
       )}
     </Box>
   );
@@ -147,5 +149,11 @@ const StyledHitList = styled.ol(
     p: 0,
     m: 0,
     width: ['100%', null],
+  })
+);
+
+const NoResultMessage = styled.div(
+  css({
+    px: '2em',
   })
 );
