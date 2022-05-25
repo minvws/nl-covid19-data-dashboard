@@ -301,7 +301,7 @@ function getGmData(context: GetStaticPropsContext) {
 
 const NOOP = () => null;
 
-export function createGetChoroplethData<T1, T2, T3>(settings?: {
+export function createGetChoroplethData<T1, T2>(settings?: {
   vr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
   gm?: (collection: GmCollection, context: GetStaticPropsContext) => T2;
 }) {
