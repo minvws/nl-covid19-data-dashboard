@@ -2,6 +2,7 @@ import { DAY_IN_SECONDS } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { SeriesItem, SeriesSingleValue } from '../logic';
+import { Group } from '@visx/group';
 
 const DEFAULT_DOT_SIZE = 3;
 
@@ -36,7 +37,7 @@ export function ScatterPlot({ series, color, getX, getY, id }: LineTrendProps) {
   }
 
   return (
-    <>
+    <Group>
       {nonNullSeries.map((d, i) => (
         <circle
           key={i}
@@ -47,6 +48,31 @@ export function ScatterPlot({ series, color, getX, getY, id }: LineTrendProps) {
           fill={color}
         />
       ))}
-    </>
+    </Group>
+  );
+}
+
+interface ScatterPlotIconProps {
+  color: string;
+  radius?: number;
+  width?: number;
+  height?: number;
+}
+
+export function ScatterPlotIcon({
+  color,
+  width = 15,
+  height = 15,
+  radius = 3,
+}: ScatterPlotIconProps) {
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <circle
+        r={Math.min(width / 2, radius)}
+        fill={color}
+        cy={height / 2}
+        cx={width / 2}
+      />
+    </svg>
   );
 }

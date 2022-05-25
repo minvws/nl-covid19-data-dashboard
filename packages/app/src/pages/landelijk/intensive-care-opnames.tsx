@@ -305,7 +305,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'scatter-plot',
                     metricProperty: 'beds_occupied_covid',
-                    label: textNl.chart_bedbezetting.legend_trend_label,
+                    label: textNl.chart_bedbezetting.legend_dot_label,
                     color: colors.data.primary,
                   },
                 ]}
