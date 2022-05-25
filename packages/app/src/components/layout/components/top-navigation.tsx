@@ -32,7 +32,9 @@ export function TopNavigation() {
       >
         {collapsible.button(
           <NavToggle>
-            {collapsible.isOpen ? <CloseThick /> : <Menu />}
+            {collapsible.isOpen
+              ? <CloseThick heigth="36px" width="36px"/>
+              : <Menu  heigth="36px" width="36px"/>}
             <VisuallyHidden>
               {collapsible.isOpen
                 ? commonTexts.nav.menu.close_menu
