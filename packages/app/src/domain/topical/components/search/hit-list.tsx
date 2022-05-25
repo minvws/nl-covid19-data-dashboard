@@ -98,7 +98,7 @@ const StyledHitLink = styled(Anchor)<{
   hasFocus: boolean;
 }>((x) =>
   css({
-    padding: '0.5em 2em',
+    padding: '0.5em 1.75em',
     display: 'block',
     textDecoration: 'none',
     color: 'black',
@@ -154,6 +154,6 @@ const StyledHitList = styled.ol(
 
 const NoResultMessage = styled.div(
   css({
-    px: '2em',
+    px: '1.75em',
   })
 );
