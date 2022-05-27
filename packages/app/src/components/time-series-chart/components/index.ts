@@ -6,6 +6,7 @@ export * from './chart-container';
 export * from './date-line-marker';
 export * from './date-span-marker';
 export * from './line-trend';
+export * from './scatter-plot';
 export * from './overlay';
 export * from './point-markers';
 export * from './range-trend';

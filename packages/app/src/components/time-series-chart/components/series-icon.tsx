@@ -4,6 +4,7 @@ import { findSplitPointForValue, SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { BarTrendIcon } from './bar-trend';
 import { LineTrendIcon } from './line-trend';
+import { ScatterPlotIcon } from './scatter-plot';
 import { RangeTrendIcon } from './range-trend';
 import { SplitAreaTrendIcon } from './split-area-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
@@ -33,6 +34,8 @@ export function SeriesIcon<T extends TimestampedValue>({
           style={config.style}
         />
       );
+    case 'scatter-plot':
+      return <ScatterPlotIcon color={config.color} />;
     case 'range':
       return (
         <RangeTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
