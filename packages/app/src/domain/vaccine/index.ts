@@ -7,7 +7,6 @@ export { VaccineAdministrationsKpiSection } from './vaccine-administrations-kpi-
 export { VaccinationsShotKpiSection } from './vaccinations-shot-kpi-section';
 export { VaccinationsKpiHeader } from './vaccinations-kpi-header';
 export { VaccineCoverageChoroplethPerGm } from './vaccine-coverage-choropleth-per-gm';
-export { VaccineCoveragePerAgeGroup } from './vaccine-coverage-per-age-group';
 export { VaccineCoverageToggleTile } from './vaccine-coverage-toggle-tile';
 export { VaccineDeliveryBarChart } from './vaccine-delivery-bar-chart';
 export { VaccineStockPerSupplierChart } from './vaccine-stock-per-supplier-chart';
