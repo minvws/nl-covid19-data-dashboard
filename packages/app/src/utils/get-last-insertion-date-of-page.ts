@@ -11,12 +11,17 @@ export function getLastInsertionDateOfPage(
   return pageMetrics.reduce((lastDate, metricProperty) => {
     const metricOrUnixDate = get(data, metricProperty);
 
-    // TODO: extract all cases in seperate function. 1. date, 2. last_values, 3. values
+    let metricDate = 0;
 
-    const metricDate =
-      typeof metricOrUnixDate === 'number'
-        ? metricOrUnixDate
-        : metricOrUnixDate?.last_value?.date_of_insertion_unix || metricOrUnixDate?.values.reduce((max: number, value: any) => value?.date_of_insertion_unix > max ? value.date_of_insertion_unix : max, 0) || 0;
+    if (typeof metricOrUnixDate === 'number') {
+      metricDate = metricOrUnixDate;
+    } else if (typeof metricOrUnixDate?.last_value?.date_of_insertion_unix !== 'undefined') {
+      metricDate = metricOrUnixDate?.last_value?.date_of_insertion_unix;
+    } else if (typeof metricOrUnixDate?.values !== 'undefined') {
+      metricDate = metricOrUnixDate?.values.reduce((max: number, value: any) => value.date_of_insertion_unix > max ? value.date_of_insertion_unix : max, 0);
+    } else {
+      metricDate = 0;
+    }
 
     return metricDate > lastDate ? metricDate : lastDate;
   }, 0);
