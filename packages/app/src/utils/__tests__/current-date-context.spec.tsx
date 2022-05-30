@@ -2,7 +2,7 @@ import { cleanup, renderHook } from '@testing-library/react-hooks/server';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { CurrentDateProvider, useCurrentDate } from '../current-date-context';
-import { middleOfDayInSeconds } from '@corona-dashboard/common';
+import { endOfDayInSeconds } from '@corona-dashboard/common';
 import injectJsDom from 'jsdom-global';
 
 const UseCurrentDate = suite('useCurrentDate');
@@ -20,7 +20,7 @@ UseCurrentDate.after((context) => {
 });
 
 UseCurrentDate('should return the passed date initially', () => {
-  const yesterday = middleOfDayInSeconds(
+  const yesterday = endOfDayInSeconds(
     new Date().setDate(new Date().getDate() - 1) / 1000
   );
 
@@ -37,11 +37,11 @@ UseCurrentDate('should return the passed date initially', () => {
 });
 
 UseCurrentDate('should return the current date after hydration', () => {
-  const yesterday = middleOfDayInSeconds(
+  const yesterday = endOfDayInSeconds(
     new Date().setDate(new Date().getDate() - 1) / 1000
   );
 
-  const now = middleOfDayInSeconds(Date.now() / 1000);
+  const now = endOfDayInSeconds(Date.now() / 1000);
 
   const { result, hydrate } = renderHook(() => useCurrentDate(), {
     wrapper: ({ children }) => (
