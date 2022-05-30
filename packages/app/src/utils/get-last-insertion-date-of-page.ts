@@ -11,7 +11,7 @@ export function getLastInsertionDateOfPage(
   return pageMetrics.reduce((lastDate, metricProperty) => {
     const metricOrUnixDate = get(data, metricProperty);
 
-    let metricDate = 0;
+    let metricDate: number;
 
     if (typeof metricOrUnixDate === 'number') {
       metricDate = metricOrUnixDate;
