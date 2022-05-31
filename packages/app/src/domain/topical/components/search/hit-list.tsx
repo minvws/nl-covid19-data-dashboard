@@ -93,12 +93,10 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
   }
 );
 
-const paddingLeftNarrow = '50px';
-const paddingLeftWide = '66px';
 const paddedStyle = {
-  pl: [paddingLeftNarrow, null, null, paddingLeftWide],
-  pr: '2em',
-  py: '0.5em',
+  pl: [50, null, null, 5],
+  pr: 4,
+  py: 2,
 };
 
 const StyledHitLink = styled(Anchor)(
@@ -158,7 +156,8 @@ const StyledHitList = styled.ol(
 
 const NoResultMessage = styled.div(
   css({
-    ...paddedStyle,
-    py: '0em',
+    pl: [50, null, null, 5],
+    pr: 4,
+    py: 0,
   })
 );
