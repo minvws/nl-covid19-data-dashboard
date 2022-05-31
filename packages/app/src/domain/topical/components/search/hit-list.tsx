@@ -78,7 +78,6 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
       <Link passHref href={href}>
         <StyledHitLink
           ref={ref}
-          hasFocus={hasFocus}
           onFocus={onFocus}
           onMouseMove={onHover}
           role="option"
@@ -94,17 +93,22 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
   }
 );
 
-const StyledHitLink = styled(Anchor)<{
-  hasFocus: boolean;
-}>((x) =>
+const paddingLeftNarrow = '50px';
+const paddingLeftWide = '66px';
+const paddedStyle = {
+  pl: [paddingLeftNarrow, null, null, paddingLeftWide],
+  pr: '2em',
+  py: '0.5em',
+};
+
+const StyledHitLink = styled(Anchor)(
   css({
-    padding: '0.5em 1.75em',
+    ...paddedStyle,
     display: 'block',
     textDecoration: 'none',
     color: 'black',
     width: '100%',
     transitionProperty: 'background',
-    transitionDuration: x.hasFocus ? '0ms' : '120ms',
     position: 'relative',
     '&:before': {
       content: 'attr(data-text)',
@@ -125,7 +129,7 @@ const StyledHitLink = styled(Anchor)<{
         transform: 'scaleX(1)',
       },
     },
-    '&:hover, &[aria-selected="true"]': {
+    '&:hover': {
       bg: 'blue',
       color: 'white',
       fontWeight: 'normal',
@@ -139,7 +143,7 @@ const HitListHeader = styled.span(
     textTransform: 'uppercase',
     fontSize: 1,
     fontWeight: 'bold',
-    px: '2em',
+    ...paddedStyle,
   })
 );
 
@@ -154,6 +158,7 @@ const StyledHitList = styled.ol(
 
 const NoResultMessage = styled.div(
   css({
-    px: '1.75em',
+    ...paddedStyle,
+    py: '0em',
   })
 );
