@@ -80,8 +80,15 @@ export const lokalizeText = {
        * list, but the path field is cleaner when browsing texts because it
        * avoids a lot of string duplication.
        */
-      title: 'key',
+      key: 'key',
       subtitle: 'text.nl',
+    },
+    prepare({ key, subtitle}: { key: string, subtitle: string}) {
+      const title = key.split('.').slice(3).join('.');
+      return {
+        title,
+        subtitle
+      }
     },
   },
 };
