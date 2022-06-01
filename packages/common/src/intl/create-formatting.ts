@@ -163,7 +163,7 @@ export function createFormatting(
         return DayMonthShort.format(date).replace(/\./g, '');
 
       case 'axis-with-year': // '23 jul. 2021'
-        return DayMonthShortYear.format(date);
+        return DayMonthShortYear.format(date).replace(/\./g, '');
 
       case 'weekday-medium':
         return WeekdayMedium.format(date);
