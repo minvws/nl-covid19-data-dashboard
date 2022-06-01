@@ -35,7 +35,7 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
           curve={curve}
           getX={getX}
           getY={getY}
-          id={id}
+          id={`${id}_${index}`}
         />
       ))}
     </>

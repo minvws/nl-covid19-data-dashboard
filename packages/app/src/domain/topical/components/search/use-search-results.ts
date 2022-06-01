@@ -27,10 +27,11 @@ export interface Hit<T> {
    * The `id` is unique for every hit.
    */
   id: string;
+  isActiveResult: boolean;
   data: T;
 }
 
-export function useSearchResults(term: string) {
+export function useSearchResults(term: string, activeResult?: string) {
   const reverseRouter = useReverseRouter();
   const termTrimmed = term.trim();
 
@@ -47,6 +48,7 @@ export function useSearchResults(term: string) {
           ...x.data,
           link,
         },
+        isActiveResult: activeResult === x.id,
       };
     });
 
@@ -54,7 +56,7 @@ export function useSearchResults(term: string) {
     const vrHits = hits.filter((x) => x.data.type === 'vr');
 
     return { hits, gmHits, vrHits };
-  }, [termTrimmed, reverseRouter]);
+  }, [termTrimmed, reverseRouter, activeResult]);
 
   return { hits, gmHits, vrHits };
 }

@@ -3,6 +3,7 @@ import {
   DateValue,
   isDateSeries,
   isDateSpanSeries,
+  startOfDayInSeconds,
   TimestampedValue,
 } from '../../data-sorting';
 import { DAY_IN_SECONDS } from '../../time';
@@ -101,22 +102,29 @@ export function getValuesInTimeframe<T extends TimestampedValue>(
   const end = Math.ceil(endDate.getTime() / 1000);
 
   if (isDateSeries(values)) {
-    return values.filter((x: DateValue) => x.date_unix >= start && x.date_unix <= end) as T[];
+    return values.filter((x: DateValue) => {
+      const correctedDateUnix = startOfDayInSeconds(x.date_unix);
+      return correctedDateUnix >= start && correctedDateUnix <= end;
+    }) as T[];
   }
 
   if (isDateSpanSeries(values)) {
-    return values.filter(
-      (x: DateSpanValue) => x.date_end_unix >= start && x.date_end_unix <= end
-    ) as T[];
+    return values.filter((x: DateSpanValue) => {
+      const correctedDateUnix = startOfDayInSeconds(x.date_end_unix);
+      return correctedDateUnix >= start && correctedDateUnix <= end;
+    }) as T[];
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }
 
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption, endDate: Date): number {
+function getTimeframeBoundaryUnix(
+  timeframe: TimeframeOption,
+  endDate: Date
+): number {
   if (timeframe === TimeframeOption.ALL) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return Math.floor(endDate.getTime() / 1000) - days * DAY_IN_SECONDS;
+  return startOfDayInSeconds(endDate.getTime() / 1000) - days * DAY_IN_SECONDS;
 }

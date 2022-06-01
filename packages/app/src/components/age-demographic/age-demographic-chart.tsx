@@ -10,6 +10,7 @@ import { KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
+import { replaceVariablesInText } from '~/utils';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
@@ -229,12 +230,16 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
                 textAnchor="middle"
                 verticalAnchor="middle"
                 fontSize="12"
+                fontWeight="bold"
                 y={ageGroupRangePoint(value) + singleBarHeight / 2}
                 x={width / 2}
-                fill={colors.annotation}
+                fill="black"
               >
-                {formatAgeGroupRange(ageGroupRange(value)) +
-                  (isClippedValue ? ' *' : '')}
+                {replaceVariablesInText(text.age_group_range_tooltip, {
+                  ageGroupRange:
+                    formatAgeGroupRange(ageGroupRange(value)) +
+                    (isClippedValue ? ' *' : ''),
+                })}
               </VisxText>
               <Bar
                 x={width / 2 + axisWidth / 2}

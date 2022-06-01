@@ -20,7 +20,8 @@ type SplitLegendGroup = { label: string; items: LegendItem[] };
 export function useLegendItems<T extends TimestampedValue>(
   domain: number[],
   config: SeriesConfig<T>,
-  dataOptions?: DataOptions
+  dataOptions?: DataOptions,
+  hasOutofBoudsValues = false
 ) {
   const { timelineEvents, timespanAnnotations, outOfBoundsConfig } =
     dataOptions || {};
@@ -50,9 +51,9 @@ export function useLegendItems<T extends TimestampedValue>(
       })
       .filter(isDefined);
 
-    if (outOfBoundsConfig) {
+    if (hasOutofBoudsValues) {
       legendItems.push({
-        label: outOfBoundsConfig.label,
+        label: outOfBoundsConfig?.label,
         shape: 'custom',
         shapeComponent: <OutOfBoundsIcon />,
       } as LegendItem);
@@ -136,5 +137,6 @@ export function useLegendItems<T extends TimestampedValue>(
     timelineEvents,
     timespanAnnotations,
     outOfBoundsConfig,
+    hasOutofBoudsValues,
   ]);
 }

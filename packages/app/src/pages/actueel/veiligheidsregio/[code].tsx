@@ -465,7 +465,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             <Box pt={4}>
-              <Search title={textShared.secties.search.title.vr} />
+              <Search
+                title={textShared.secties.search.title.vr}
+                activeResult={vrCode}
+              />
             </Box>
 
             <VaccinationCoverageChoropleth

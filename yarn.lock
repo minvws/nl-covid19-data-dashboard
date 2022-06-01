@@ -2711,7 +2711,7 @@ __metadata:
   dependencies:
     "@corona-dashboard/icons": 0.0.0
     "@sanity/base": ^2.29.3
-    "@sanity/cli": ^2.29.3
+    "@sanity/cli": ^2.30.0
     "@sanity/components": ^2.14.0
     "@sanity/core": ^2.29.3
     "@sanity/dashboard": ^2.29.3
@@ -4038,12 +4038,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/cli@npm:^2.29.3":
-  version: 2.29.3
-  resolution: "@sanity/cli@npm:2.29.3"
+"@sanity/cli@npm:^2.30.0":
+  version: 2.30.0
+  resolution: "@sanity/cli@npm:2.30.0"
   bin:
     sanity: bin/sanity
-  checksum: c68e5565fffa3e7225427745f1e7ae63109bbf280d1b3536d4f9dec8e9eeaa6abeefda8a209cf41b381933f6c695e29f13255251041bc5df509ccb8f7be8f462
+  checksum: dae16c3219dce6e0aca3e6a8cb49819ce7f16a314c8179650c42e7db8894bbb2444244d134410fa8ad44fcac6ab5580a4e130c5a1cccf2ce59022aab57313cab
   languageName: node
   linkType: hard
 

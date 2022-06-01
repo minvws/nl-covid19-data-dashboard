@@ -73,7 +73,7 @@ export function SplitBarTrend({
         return (
           <rect
             key={index}
-            id={id}
+            id={`${id}_${index}`}
             x={x}
             y={y}
             height={barHeight}

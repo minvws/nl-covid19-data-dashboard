@@ -1,7 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
-import { AreaTrend, BarTrend, LineTrend, RangeTrend } from '.';
+import { AreaTrend, BarTrend, LineTrend, ScatterPlot, RangeTrend } from '.';
 import {
   Bounds,
   GetX,
@@ -61,8 +61,8 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           const config = seriesConfig[index];
           const id =
             config.type === 'range'
-              ? `${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}`
-              : `${chartId}_${config.metricProperty}`;
+              ? `${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}_${config.type}`
+              : `${chartId}_${config.metricProperty}_${config.type}`;
 
           switch (config.type) {
             case 'gapped-line':
@@ -88,6 +88,17 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   style={config.style}
                   strokeWidth={config.strokeWidth}
                   curve={config.curve}
+                  getX={getX}
+                  getY={getY}
+                  id={id}
+                />
+              );
+            case 'scatter-plot':
+              return (
+                <ScatterPlot
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
                   getX={getX}
                   getY={getY}
                   id={id}

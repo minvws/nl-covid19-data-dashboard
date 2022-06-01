@@ -293,7 +293,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccinationsKpiHeader
             text={textNl.repeating_shot_information_block}
-            dateUnix={boosterShotAdministeredLastValue.date_end_unix}
+            dateUnix={boosterShotAdministeredLastValue.date_unix}
             dateOfInsertionUnix={
               boosterShotAdministeredLastValue.date_of_insertion_unix
             }
@@ -372,7 +372,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           )}
           <VaccinationsKpiHeader
             text={textNl.booster_information_block}
-            dateUnix={boosterShotAdministeredLastValue.date_end_unix}
+            dateUnix={boosterShotAdministeredLastValue.date_unix}
             dateOfInsertionUnix={
               boosterShotAdministeredLastValue.date_of_insertion_unix
             }
@@ -384,7 +384,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             metadateBoosterShots={{
               datumsText: textNl.booster_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_end_unix,
+              date: boosterShotAdministeredLastValue.date_unix,
               source: {
                 href: textNl.booster_kpi.sources.href,
                 text: textNl.booster_kpi.sources.text,
@@ -395,7 +395,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             metadateBoosterGgd={{
               datumsText: textNl.booster_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_end_unix,
+              date: boosterShotAdministeredLastValue.date_unix,
               source: {
                 href: textNl.booster_kpi.sources.href,
                 text: textNl.booster_kpi.sources.text,
@@ -406,24 +406,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
             metadateBoosterEstimated={{
               datumsText: textNl.booster_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_end_unix,
+              date: boosterShotAdministeredLastValue.date_unix,
               source: {
                 href: textNl.booster_kpi.sources.href,
                 text: textNl.booster_kpi.sources.text,
-              },
-            }}
-            boosterShotLastSevenDays={
-              boosterShotAdministeredLastValue.ggd_administered_last_7_days
-            }
-            metadataBoosterShotLastSevenDays={{
-              datumsText: textNl.booster_ggd_kpi_section.datums,
-              date: [
-                boosterShotAdministeredLastValue.date_start_unix,
-                boosterShotAdministeredLastValue.date_end_unix,
-              ],
-              source: {
-                href: textNl.booster_ggd_kpi_section.sources.href,
-                text: textNl.booster_ggd_kpi_section.sources.text,
               },
             }}
           />

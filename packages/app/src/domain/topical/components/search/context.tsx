@@ -21,6 +21,7 @@ interface SearchContextProviderProps<T extends Element> {
   containerRef: RefObject<T>;
   children: (context: SearchContext) => ReactNode;
   initialValue?: string;
+  activeResult?: string;
 }
 
 const searchContext = createContext<SearchContext | undefined>(undefined);
@@ -29,8 +30,9 @@ export function SearchContextProvider<T extends Element>({
   children,
   containerRef,
   initialValue = '',
+  activeResult,
 }: SearchContextProviderProps<T>) {
-  const value = useSearchContextValue(initialValue, containerRef);
+  const value = useSearchContextValue(initialValue, containerRef, activeResult);
 
   return (
     <searchContext.Provider value={value}>
@@ -49,7 +51,8 @@ export function useSearchContext() {
 
 function useSearchContextValue<T extends Element>(
   initialValue: string,
-  containerRef: RefObject<T>
+  containerRef: RefObject<T>,
+  activeResult?: string
 ) {
   const router = useRouter();
   const breakpoints = useBreakpoints();
@@ -90,7 +93,7 @@ function useSearchContextValue<T extends Element>(
   /**
    * the useSearchResults-hook which will perform the actual search
    */
-  const { hits, vrHits, gmHits } = useSearchResults(term);
+  const { hits, vrHits, gmHits } = useSearchResults(term, activeResult);
 
   const showResults =
     hasHadInputFocus && (hasInputFocus || hasHitFocus || !breakpoints.md);
@@ -176,6 +179,8 @@ function useSearchContextValue<T extends Element>(
         ref: option.index === focusIndex ? focusRef : undefined,
         href: option.data.link,
         hasFocus: focusIndex === option.index,
+        isActiveResult: option.isActiveResult,
+        onClick: () => setHasHadInputFocus(false),
         onHover: () => setFocusIndex(option.index),
         onFocus: () => {
           setFocusIndex(option.index);

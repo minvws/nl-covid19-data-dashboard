@@ -241,11 +241,14 @@ export function TimeSeriesChart<
     [seriesList, seriesConfig, benchmark?.value]
   );
 
-  const seriesMax = isDefined(forcedMaximumValue)
-    ? isFunction(forcedMaximumValue)
-      ? forcedMaximumValue(calculatedSeriesMax)
-      : forcedMaximumValue
-    : calculatedSeriesMax;
+  const calculatedForcedMaximumValue = isFunction(forcedMaximumValue)
+    ? forcedMaximumValue(calculatedSeriesMax)
+    : forcedMaximumValue;
+
+  const seriesMax =
+    typeof calculatedForcedMaximumValue === 'number'
+      ? Math.min(calculatedForcedMaximumValue, calculatedSeriesMax)
+      : calculatedSeriesMax;
 
   const minimumRanges = seriesConfig
     .map((c) => c.minimumRange)
@@ -275,11 +278,13 @@ export function TimeSeriesChart<
   const { legendItems, splitLegendGroups } = useLegendItems(
     xScale.domain(),
     seriesConfig,
-    dataOptions
+    dataOptions,
+    dataOptions?.outOfBoundsConfig && seriesMax < calculatedSeriesMax
   );
 
   const timeDomain = useMemo(
-    () => getTimeDomain({ values, today: endDate ?? today, withPadding: false }),
+    () =>
+      getTimeDomain({ values, today: endDate ?? today, withPadding: false }),
     [values, endDate, today]
   );
 
@@ -367,7 +372,8 @@ export function TimeSeriesChart<
           seriesMax,
           isOutOfBounds: dataOptions?.outOfBoundsConfig?.checkIsOutofBounds(
             values[valuesIndex],
-            seriesMax
+            seriesMax,
+            timeDomain
           ),
         },
         tooltipLeft: nearestPoint.x,
@@ -391,6 +397,7 @@ export function TimeSeriesChart<
     timelineState.events,
     metricPropertyFormatters,
     seriesMax,
+    timeDomain,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());

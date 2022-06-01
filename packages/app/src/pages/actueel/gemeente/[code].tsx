@@ -462,7 +462,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             <Box pt={4}>
-              <Search title={textShared.secties.search.title.gm} />
+              <Search
+                title={textShared.secties.search.title.gm}
+                activeResult={gmCode}
+              />
             </Box>
 
             <VaccinationCoverageChoropleth
