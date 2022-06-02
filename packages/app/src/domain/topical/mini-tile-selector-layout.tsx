@@ -20,6 +20,7 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Bar } from '../vaccine/components/bar';
 
@@ -48,19 +49,20 @@ type MiniTileSelectorLayoutProps = {
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
   const { text } = props;
+  const breakpoints = useBreakpoints();
 
   return (
     <>
-      <Box display={{ _: 'none', md: 'block' }}>
+      {breakpoints.md ? (
         <WideMiniTileSelectorLayout {...props} />
-      </Box>
-
-      <Box spacing={3} display={{ _: 'block', md: 'none' }}>
-        <Text variant="label1" color="bodyLight">
-          {text.tile_selector_uitleg}
-        </Text>
-        <NarrowMiniTileSelectorLayout {...props} />
-      </Box>
+      ) : (
+        <Box spacing={3}>
+          <Text variant="label1" color="bodyLight">
+            {text.tile_selector_uitleg}
+          </Text>
+          <NarrowMiniTileSelectorLayout {...props} />
+        </Box>
+      )}
     </>
   );
 }

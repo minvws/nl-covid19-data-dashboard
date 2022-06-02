@@ -1,10 +1,13 @@
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
-import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useIntl } from '~/intl';
-import { Metadata } from '~/components/metadata';
-import { Message } from '~/components/message';
+import {
+  KpiTile,
+  KpiValue,
+  Markdown,
+  TwoKpiSection,
+  Metadata,
+  Message,
+} from '~/components';
+import { Box } from '~/components/base';
 
 type SourceType = {
   text: string;
@@ -33,8 +36,8 @@ export function VaccinationsShotKpiSection({
   const { formatNumber } = useIntl();
 
   return (
-    <TwoKpiSection>
-      <KpiTile title={text.title}>
+    <TwoKpiSection hasBorder hasPadding>
+      <KpiTile title={text.title} hasNoBorder>
         <KpiValue text={formatNumber(value)} />
         <Markdown content={text.description} />
         {text.warning && <Message variant="warning">{text.warning}</Message>}
@@ -47,7 +50,7 @@ export function VaccinationsShotKpiSection({
           }}
         />
       </KpiTile>
-      <KpiTile />
+      <Box />
     </TwoKpiSection>
   );
 }

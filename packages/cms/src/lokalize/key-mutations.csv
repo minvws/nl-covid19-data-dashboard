@@ -31,3 +31,7 @@ timestamp,action,key,document_id,move_to
 2022-05-09T09:27:24.544Z,move,choropleth_tooltip.gm.booster_shot_percentage.subject,VNAGnZtzuWCFY8gXn2zsT8,common.choropleth_tooltip.gm.booster_shot_percentage.subject
 2022-05-09T08:58:28.088Z,move,accessibility.charts.hospital_admissions_region_choropleth.description,G1DXw0RdifOml06twMjbPq,common.accessibility.charts.hospital_admissions_region_choropleth.description
 2022-05-12T07:55:42.658Z,delete,common.charts.time_controls.firstOfSeptember,A5Y41hFe5J3wNnB7O7FFlP,__
+2022-05-17T11:30:05.964Z,delete,pages.vaccinationsPage.nl.booster_kpi.booster_shot_last_seven_days.description,W42pYebYgNKSplnOwA9UMB,__
+2022-05-23T10:24:35.671Z,add,pages.situationsPage.shared.belangrijk_bericht,RQYRq9yqc5kuEd5capEHG3,__
+2022-05-25T12:52:50.949Z,add,pages.hospitalPage.nl.chart_bedbezetting.legend_dot_label,hErpiCVzoc9qP245irsdCS,__
+2022-05-25T13:25:56.013Z,add,pages.intensiveCarePage.nl.chart_bedbezetting.legend_dot_label,l9y47X7Mn753quuWoDXzrN,__

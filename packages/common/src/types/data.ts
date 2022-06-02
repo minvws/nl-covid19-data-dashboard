@@ -356,11 +356,9 @@ export interface NlBoosterShotAdministered {
 }
 export interface NlBoosterShotAdministeredValue {
   administered_total: number;
-  ggd_administered_last_7_days: number;
   ggd_administered_total: number;
   others_administered_total: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlRepeatingShotAdministered {

@@ -3,8 +3,6 @@ import {
   Gm,
   GmCollection,
   gmData,
-  In,
-  InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
   Vr,
@@ -18,7 +16,6 @@ import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
 import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
-import { CountryCode } from '~/domain/international/multi-select-countries';
 import { getClient, localize } from '~/lib/sanity';
 import { Languages, SiteText } from '~/locale';
 import {
@@ -72,10 +69,6 @@ const json = {
   gmCollection: initializeFeatureFlaggedData<GmCollection>(
     loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
     'gm_collection'
-  ),
-  inCollection: initializeFeatureFlaggedData<InCollection>(
-    loadJsonFromDataFile<InCollection>('IN_COLLECTION.json', undefined, true),
-    'in_collection'
   ),
 };
 
@@ -308,41 +301,19 @@ function getGmData(context: GetStaticPropsContext) {
 
 const NOOP = () => null;
 
-export function createGetChoroplethData<T1, T2, T3>(settings?: {
+export function createGetChoroplethData<T1, T2>(settings?: {
   vr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
   gm?: (collection: GmCollection, context: GetStaticPropsContext) => T2;
-  in?: (collection: InCollection, context: GetStaticPropsContext) => T3;
 }) {
   return (context: GetStaticPropsContext) => {
     const filterVr = settings?.vr ?? NOOP;
     const filterGm = settings?.gm ?? NOOP;
-    const filterIn = settings?.in ?? NOOP;
 
     return {
       choropleth: {
         vr: filterVr(json.vrCollection, context) as T1,
         gm: filterGm(json.gmCollection, context) as T2,
-        in: filterIn(json.inCollection, context) as T3,
       },
-    };
-  };
-}
-
-export function getInData(countryCodes: CountryCode[]) {
-  return function () {
-    const internationalData: Record<string, In> = {};
-    countryCodes.forEach((countryCode) => {
-      const data = initializeFeatureFlaggedData<In>(
-        loadJsonFromDataFile<In>(`IN_${countryCode.toUpperCase()}.json`),
-        'in'
-      );
-
-      sortTimeSeriesInDataInPlace(data);
-
-      internationalData[countryCode] = data;
-    });
-    return { internationalData } as {
-      internationalData: Record<CountryCode, In>;
     };
   };
 }

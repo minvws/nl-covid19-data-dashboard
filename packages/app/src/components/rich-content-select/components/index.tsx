@@ -101,7 +101,9 @@ export const ListBoxOption = styled(Box)(
       },
     },
     '&:hover': {
-      backgroundColor: 'tileGray',
+      backgroundColor: 'blue',
+      color: 'white',
+      fontWeight: 'normal',
     },
   })
 );

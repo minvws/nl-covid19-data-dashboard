@@ -1,11 +1,12 @@
 import { Gedrag } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
+import { PageInformationBlock, TileList, WarningTile } from '~/components';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
+import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
   getArticleParts,
@@ -63,6 +64,7 @@ export default function BrononderzoekPage(
   const { pageText, choropleth, lastGenerated, content } = props;
   const { caterogyTexts, metadataTexts, textShared, textChoroplethTooltips } =
     pageText;
+  const { commonTexts } = useIntl();
 
   const metadata = {
     ...metadataTexts,
@@ -77,7 +79,7 @@ export default function BrononderzoekPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts.category}
+            category={commonTexts.nationaal_layout.headings.archief}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textShared.titel}
             icon={<Gedrag />}
@@ -94,6 +96,15 @@ export default function BrononderzoekPage(
             referenceLink={textShared.reference.href}
             articles={content.articles}
           />
+
+          {textShared.belangrijk_bericht &&
+            !isEmpty(textShared.belangrijk_bericht) && (
+              <WarningTile
+                isFullWidth
+                message={textShared.belangrijk_bericht}
+                variant="emphasis"
+              />
+            )}
 
           <SituationsDataCoverageChoroplethTile
             data={choropleth.vr}
