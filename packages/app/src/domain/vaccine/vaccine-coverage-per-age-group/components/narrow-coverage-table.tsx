@@ -4,10 +4,7 @@ import { useIntl } from '~/intl';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
-import {
-  COLOR_FULLY_VACCINATED,
-  COLOR_HAS_ONE_SHOT,
-} from '~/domain/vaccine/common';
+import { ARCHIVED_COLORS } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
@@ -68,13 +65,13 @@ export function NarrowCoverageTable({
                   ? formatCoveragePercentage(item, 'has_one_shot_percentage')
                   : `${formatPercentage(item.has_one_shot_percentage)}%`
               }
-              color={COLOR_HAS_ONE_SHOT}
+              color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
               textLabel={text.headers.first_shot}
             />
 
             <Bar
               value={item.has_one_shot_percentage}
-              color={COLOR_HAS_ONE_SHOT}
+              color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
               label={
                 'has_one_shot_percentage_label' in item
                   ? item.has_one_shot_percentage_label
@@ -95,13 +92,13 @@ export function NarrowCoverageTable({
                     )
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
-              color={COLOR_FULLY_VACCINATED}
+              color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
               textLabel={text.headers.coverage}
             />
 
             <Bar
               value={item.fully_vaccinated_percentage}
-              color={COLOR_FULLY_VACCINATED}
+              color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
               label={
                 'fully_vaccinated_percentage_label' in item
                   ? item.fully_vaccinated_percentage_label

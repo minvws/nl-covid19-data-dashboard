@@ -4,7 +4,7 @@ import {
   COLOR_FULLY_VACCINATED,
   COLOR_HAS_ONE_SHOT,
   COLOR_FULLY_BOOSTERED,
-} from '../vaccine/common';
+} from './common';
 import { Bar } from '../vaccine/components/bar';
 import { MiniTile, MiniTileProps } from './mini-tile';
 
