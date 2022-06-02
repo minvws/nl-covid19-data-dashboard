@@ -10,6 +10,8 @@ import {
   Markdown,
   PageInformationBlock,
   TileList,
+  InView,
+  Divider,
 } from '~/components';
 import { thresholds } from '~/components/choropleth/logic';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
@@ -50,7 +52,6 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
-import { useFeature } from '~/lib/features';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -128,6 +129,8 @@ export const VaccinationsGmPage = (
   const reverseRouter = useReverseRouter();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
+  const [hasHideArchivedCharts, setHideArchivedCharts] =
+    useState<boolean>(false);
 
   const { textGm, textNl } = pageText;
 
@@ -140,10 +143,6 @@ export const VaccinationsGmPage = (
       municipalityName: municipalityName,
     }),
   };
-
-  const vaccinationBoosterShotsPerAgeGroupFeature = useFeature(
-    'nlVaccinationBoosterShotsPerAgeGroup'
-  );
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
@@ -250,35 +249,20 @@ export const VaccinationsGmPage = (
             }
             labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
           />
-
-          {!vaccinationBoosterShotsPerAgeGroupFeature.isEnabled ? (
-            <VaccineCoveragePerAgeGroup
-              title={textGm.vaccination_coverage.title}
-              description={textGm.vaccination_coverage.description}
-              sortingOrder={['18+', '12+']}
-              metadata={{
-                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-                source: textGm.vaccination_coverage.bronnen.rivm,
-              }}
-              values={data.vaccine_coverage_per_age_group.values}
-              text={textNl.vaccination_coverage}
-            />
-          ) : (
-            <BoosterShotCoveragePerAgeGroup
-              title={textGm.vaccination_coverage.title}
-              description={
-                textGm.vaccination_coverage
-                  .description_booster_and_fully_vaccinated
-              }
-              sortingOrder={['18+', '12+']}
-              metadata={{
-                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-                source: textGm.vaccination_coverage.bronnen.rivm,
-              }}
-              values={data.vaccine_coverage_per_age_group.values}
-              text={textNl.vaccination_coverage}
-            />
-          )}
+          <BoosterShotCoveragePerAgeGroup
+            title={textGm.vaccination_coverage.title}
+            description={
+              textGm.vaccination_coverage
+                .description_booster_and_fully_vaccinated
+            }
+            sortingOrder={['18+', '12+']}
+            metadata={{
+              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+              source: textGm.vaccination_coverage.bronnen.rivm,
+            }}
+            values={data.vaccine_coverage_per_age_group.values}
+            text={textNl.vaccination_coverage}
+          />
 
           <ChoroplethTile
             title={replaceVariablesInText(
@@ -339,6 +323,30 @@ export const VaccinationsGmPage = (
               )}
             />
           </ChoroplethTile>
+          <Divider />
+          <PageInformationBlock
+            title={textNl.section_archived.title}
+            description={textNl.section_archived.description}
+            isArchivedHidden={hasHideArchivedCharts}
+            onToggleArchived={() =>
+              setHideArchivedCharts(!hasHideArchivedCharts)
+            }
+          />
+          {hasHideArchivedCharts && (
+            <InView rootMargin="500px">
+              <VaccineCoveragePerAgeGroup
+                title={textGm.vaccination_coverage.title}
+                description={textGm.vaccination_coverage.description}
+                sortingOrder={['18+', '12+']}
+                metadata={{
+                  date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                  source: textGm.vaccination_coverage.bronnen.rivm,
+                }}
+                values={data.vaccine_coverage_per_age_group.values}
+                text={textNl.vaccination_coverage}
+              />
+            </InView>
+          )}
         </TileList>
       </GmLayout>
     </Layout>

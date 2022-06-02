@@ -29,7 +29,7 @@ const StyledSearchResults = styled.div(
     display: 'flex',
     flexDirection: asResponsiveArray({ _: 'column', sm: 'row' }),
     '& > :not(:last-child)': {
-      marginBottom: '2em',
+      marginBottom: ['2em', 0],
     },
   })
 );
