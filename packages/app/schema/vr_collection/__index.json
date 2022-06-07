@@ -17,8 +17,7 @@
     "disability_care",
     "sewer",
     "situations",
-    "vaccine_coverage_per_age_group",
-    "vaccine_coverage_per_age_group_archived"
+    "vaccine_coverage_per_age_group"
   ],
   "properties": {
     "last_generated": {
