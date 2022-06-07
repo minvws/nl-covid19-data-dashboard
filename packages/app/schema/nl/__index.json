@@ -198,6 +198,9 @@
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
     },
+    "vaccine_coverage_per_age_group_archived": {
+      "$ref": "vaccine_coverage_per_age_group_archived.json"
+    },
     "vaccine_coverage_per_age_group_estimated": {
       "$ref": "vaccine_coverage_per_age_group_estimated.json"
     },
