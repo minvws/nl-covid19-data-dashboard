@@ -339,10 +339,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           </InView>
 
           <InView rootMargin="400px">
-            <GNumberBarChartTile data={data.g_number} />
-          </InView>
-
-          <InView rootMargin="400px">
             <ChartTile
               timeframeOptions={TimeframeOptionsList}
               title={textNl.ggd.linechart_totaltests_titel}
@@ -428,55 +424,62 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {hasHideArchivedCharts && (
-            <InView rootMargin="400px">
-              <ChartTile
-                title={textNl.ggd.linechart_percentage_titel}
-                description={replaceVariablesInText(
-                  textNl.ggd.linechart_percentage_toelichting,
-                  {
-                    date: formatDateFromSeconds(
-                      dataGgdLastValue.date_unix,
-                      'weekday-medium'
-                    ),
-                    tested_total: formatNumber(dataGgdLastValue.tested_total),
-                    infected_total: formatNumber(dataGgdLastValue.infected),
-                  }
-                )}
-                metadata={{
-                  source: textNl.ggd.bronnen.rivm,
-                }}
-              >
-                <TimeSeriesChart
-                  accessibility={{
-                    key: 'confirmed_cases_infected_percentage_over_time_chart',
-                  }}
-                  values={data.tested_ggd_archived.values}
-                  seriesConfig={[
+            /** Fragment will to be removed when the second graph is no longer archived */
+            <>
+              <InView rootMargin="400px">
+                <GNumberBarChartTile data={data.g_number} />
+              </InView>
+              <InView rootMargin="400px">
+                <ChartTile
+                  title={textNl.ggd.linechart_percentage_titel}
+                  description={replaceVariablesInText(
+                    textNl.ggd.linechart_percentage_toelichting,
                     {
-                      type: 'line',
-                      metricProperty: 'infected_percentage_moving_average',
-                      color: colors.data.primary,
-                      label:
-                        textShared.tooltip_labels
-                          .ggd_infected_percentage_moving_average,
-                    },
-                    {
-                      type: 'bar',
-                      metricProperty: 'infected_percentage',
-                      color: colors.data.primary,
-                      label: textShared.tooltip_labels.ggd_infected_percentage,
-                    },
-                  ]}
-                  dataOptions={{
-                    isPercentage: true,
-                    timelineEvents: getTimelineEvents(
-                      content.elements.timeSeries,
-                      'tested_ggd'
-                    ),
+                      date: formatDateFromSeconds(
+                        dataGgdLastValue.date_unix,
+                        'weekday-medium'
+                      ),
+                      tested_total: formatNumber(dataGgdLastValue.tested_total),
+                      infected_total: formatNumber(dataGgdLastValue.infected),
+                    }
+                  )}
+                  metadata={{
+                    source: textNl.ggd.bronnen.rivm,
                   }}
-                />
-              </ChartTile>
-            </InView>
+                >
+                  <TimeSeriesChart
+                    accessibility={{
+                      key: 'confirmed_cases_infected_percentage_over_time_chart',
+                    }}
+                    values={data.tested_ggd_archived.values}
+                    seriesConfig={[
+                      {
+                        type: 'line',
+                        metricProperty: 'infected_percentage_moving_average',
+                        color: colors.data.primary,
+                        label:
+                          textShared.tooltip_labels
+                            .ggd_infected_percentage_moving_average,
+                      },
+                      {
+                        type: 'bar',
+                        metricProperty: 'infected_percentage',
+                        color: colors.data.primary,
+                        label:
+                          textShared.tooltip_labels.ggd_infected_percentage,
+                      },
+                    ]}
+                    dataOptions={{
+                      isPercentage: true,
+                      timelineEvents: getTimelineEvents(
+                        content.elements.timeSeries,
+                        'tested_ggd'
+                      ),
+                    }}
+                  />
+                </ChartTile>
+              </InView>
+            </>
           )}
         </TileList>
       </NlLayout>
