@@ -1,22 +1,18 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import { GgdTesten, Test } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Box } from '~/components/base';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { BoldText, InlineText } from '~/components/typography';
 import {
   ChartTile,
-  TwoKpiSection,
   TimeSeriesChart,
   TileList,
   DynamicChoropleth,
   ChoroplethTile,
   Divider,
   InView,
-  KpiTile,
-  KpiValue,
   Markdown,
   PageInformationBlock,
 } from '~/components';
@@ -127,8 +123,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { commonTexts, formatNumber, formatPercentage, formatDateFromSeconds } =
-    useIntl();
+  const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
 
   const reverseRouter = useReverseRouter();
   const router = useRouter();
@@ -181,87 +176,18 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             warning={textVr.warning}
           />
 
-          <TwoKpiSection>
-            <KpiTile
-              title={textVr.infected_kpi.title}
-              metadata={{
-                date: dataOverallLastValue.date_unix,
-                source: textVr.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="infected_moving_average"
-                absolute={dataOverallLastValue.infected_moving_average_rounded}
-                isAmount
-              />
-
-              <Markdown content={textVr.infected_kpi.description} />
-
-              <Box spacing={3}>
-                <BoldText variant="body2">
-                  {replaceComponentsInText(
-                    textVr.infected_kpi.last_value_text,
-                    {
-                      infected: (
-                        <InlineText color="data.primary">{`${formatNumber(
-                          dataOverallLastValue.infected
-                        )}`}</InlineText>
-                      ),
-                      dateTo: formatDateFromSeconds(
-                        dataOverallLastValue.date_unix,
-                        'weekday-medium'
-                      ),
-                    }
-                  )}
-                </BoldText>
-                {textVr.infected_kpi.link_cta && (
-                  <Markdown content={textVr.infected_kpi.link_cta} />
-                )}
-              </Box>
-            </KpiTile>
-
-            <KpiTile
-              title={textVr.percentage_kpi.title}
-              metadata={{
-                date: dataGgdLastValue.date_unix,
-                source: textVr.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="infected_percentage_moving_average"
-                percentage={dataGgdLastValue.infected_percentage_moving_average}
-                isAmount
-              />
-
-              <Markdown content={textVr.percentage_kpi.description} />
-
-              <Box spacing={3}>
-                <BoldText variant="body2">
-                  {replaceComponentsInText(
-                    textVr.percentage_kpi.last_value_text,
-                    {
-                      percentage: (
-                        <InlineText color="data.primary">{`${formatPercentage(
-                          dataGgdLastValue.infected_percentage
-                        )}%`}</InlineText>
-                      ),
-                      dateTo: formatDateFromSeconds(
-                        dataGgdLastValue.date_unix,
-                        'weekday-medium'
-                      ),
-                    }
-                  )}
-                </BoldText>
-                {textVr.percentage_kpi.link_cta && (
-                  <Markdown content={textVr.percentage_kpi.link_cta} />
-                )}
-              </Box>
-            </KpiTile>
-          </TwoKpiSection>
-
           <ChartTile
             title={textVr.linechart_titel}
-            description={textVr.linechart_toelichting}
+            description={replaceVariablesInText(textVr.linechart_toelichting, {
+              date: formatDateFromSeconds(
+                dataOverallLastValue.date_unix,
+                'weekday-medium'
+              ),
+              administered_total: formatNumber(dataOverallLastValue.infected),
+              infected_total: formatNumber(
+                dataOverallLastValue.infected_moving_average_rounded
+              ),
+            })}
             metadata={{
               source: textVr.bronnen.rivm,
             }}
@@ -357,101 +283,21 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <GNumberBarChartTile data={data.g_number} />
           </InView>
 
-          <Divider />
-
-          <PageInformationBlock
-            id="ggd"
-            title={replaceVariablesInText(textVr.ggd.titel, {
-              safetyRegion: vrName,
-            })}
-            icon={<GgdTesten />}
-            description={textVr.ggd.toelichting}
-            metadata={{
-              datumsText: textVr.ggd.datums,
-              dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
-              dateOrRange: dataGgdLastValue.date_unix,
-              dataSources: [textVr.ggd.bronnen.rivm],
-            }}
-            referenceLink={textVr.reference.href}
-            articles={content.ggdArticles}
-          />
-
-          <TwoKpiSection>
-            <KpiTile
-              title={textVr.ggd.tests_kpi.title}
-              metadata={{
-                date: dataGgdLastValue.date_unix,
-                source: textVr.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="tested_total_moving_average"
-                absolute={dataGgdLastValue.tested_total_moving_average_rounded}
-                isAmount
-              />
-
-              <Markdown content={textVr.ggd.tests_kpi.description} />
-
-              <BoldText variant="body2">
-                {replaceComponentsInText(textVr.ggd.tests_kpi.last_value_text, {
-                  tested_total: (
-                    <InlineText color="data.primary">{`${formatNumber(
-                      dataGgdLastValue.tested_total
-                    )}`}</InlineText>
-                  ),
-                  dateTo: formatDateFromSeconds(
-                    dataGgdLastValue.date_unix,
-                    'weekday-medium'
-                  ),
-                })}
-              </BoldText>
-            </KpiTile>
-            <KpiTile
-              title={textVr.ggd.percentage_kpi.title}
-              metadata={{
-                date: dataGgdLastValue.date_unix,
-                source: textVr.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="infected_percentage_moving_average"
-                percentage={dataGgdLastValue.infected_percentage_moving_average}
-                isAmount
-              />
-
-              <Markdown content={textVr.ggd.percentage_kpi.description} />
-
-              <BoldText variant="body2">
-                {replaceComponentsInText(
-                  textVr.ggd.percentage_kpi.last_value_text,
-                  {
-                    infected_moving_average: (
-                      <InlineText color="data.primary">{`${formatNumber(
-                        dataGgdLastValue.infected_moving_average,
-                        0
-                      )}`}</InlineText>
-                    ),
-                    tested_total_moving_average: (
-                      <InlineText color="data.primary">{`${formatNumber(
-                        dataGgdLastValue.tested_total_moving_average,
-                        0
-                      )}`}</InlineText>
-                    ),
-                    dateTo: formatDateFromSeconds(
-                      dataGgdLastValue.date_unix,
-                      'weekday-medium'
-                    ),
-                  }
-                )}
-              </BoldText>
-            </KpiTile>
-          </TwoKpiSection>
-
           <InView rootMargin="400px">
             <ChartTile
               timeframeOptions={TimeframeOptionsList}
               title={textVr.ggd.linechart_totaltests_titel}
-              description={textVr.ggd.linechart_totaltests_toelichting}
+              description={replaceVariablesInText(
+                textVr.ggd.linechart_totaltests_toelichting,
+                {
+                  date: formatDateFromSeconds(
+                    dataGgdLastValue.date_unix,
+                    'weekday-medium'
+                  ),
+                  tested_total: formatNumber(dataGgdLastValue.tested_total),
+                  infected_total: formatNumber(dataGgdLastValue.infected),
+                }
+              )}
               metadata={{
                 source: textVr.ggd.bronnen.rivm,
               }}
@@ -526,7 +372,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <InView rootMargin="400px">
               <ChartTile
                 title={textVr.ggd.linechart_percentage_titel}
-                description={textVr.ggd.linechart_percentage_toelichting}
+                description={replaceVariablesInText(
+                  textVr.ggd.linechart_percentage_toelichting,
+                  {
+                    date: formatDateFromSeconds(
+                      dataGgdLastValue.date_unix,
+                      'weekday-medium'
+                    ),
+                    tested_total: formatNumber(dataGgdLastValue.tested_total),
+                    infected_total: formatNumber(dataGgdLastValue.infected),
+                  }
+                )}
                 metadata={{
                   source: textVr.ggd.bronnen.rivm,
                 }}
