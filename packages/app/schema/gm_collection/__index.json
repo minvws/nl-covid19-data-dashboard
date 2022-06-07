@@ -12,7 +12,8 @@
     "hospital_nice_choropleth",
     "tested_overall",
     "sewer",
-    "vaccine_coverage_per_age_group"
+    "vaccine_coverage_per_age_group",
+    "vaccine_coverage_per_age_group_archived"
   ],
   "properties": {
     "last_generated": {

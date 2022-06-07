@@ -1,23 +1,23 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_collection_vaccine_coverage_per_age_group",
+  "title": "gm_collection_vaccine_coverage_per_age_group_archived",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "vrcode",
+    "gmcode",
     "age_group_range",
     "fully_vaccinated_percentage",
+    "has_one_shot_percentage",
     "birthyear_range",
     "fully_vaccinated_percentage_label",
-    "booster_shot_percentage",
-    "booster_shot_percentage_label",
+    "has_one_shot_percentage_label",
     "date_of_insertion_unix",
     "date_unix"
   ],
   "properties": {
-    "vrcode": {
+    "gmcode": {
       "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "pattern": "^GM[0-9]+$"
     },
     "age_group_range": {
       "type": "string",
@@ -26,7 +26,7 @@
     "fully_vaccinated_percentage": {
       "type": ["integer", "null"]
     },
-    "booster_shot_percentage": {
+    "has_one_shot_percentage": {
       "type": ["integer", "null"]
     },
     "birthyear_range": {
@@ -37,7 +37,7 @@
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },
-    "booster_shot_percentage_label": {
+    "has_one_shot_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },
