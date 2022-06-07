@@ -70,6 +70,7 @@ const pageMetrics = [
   'vaccine_administered_planned',
   'vaccine_administered_total',
   'vaccine_coverage_per_age_group',
+  'vaccine_coverage_per_age_group_archived',
   'vaccine_coverage',
   'vaccine_delivery_per_supplier',
   'vaccine_stock',
@@ -414,7 +415,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                   source: textNl.vaccination_coverage.bronnen.rivm,
                 }}
-                values={data.vaccine_coverage_per_age_group.values}
+                values={data.vaccine_coverage_per_age_group_archived.values}
               />
               <VaccineDeliveryBarChart
                 data={data.vaccine_delivery_per_supplier}

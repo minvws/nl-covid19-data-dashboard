@@ -58,6 +58,7 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 const pageMetrics = [
   'code',
   'vaccine_coverage_per_age_group',
+  'vaccine_coverage_per_age_group_archived',
   'booster_coverage',
 ];
 
@@ -342,7 +343,7 @@ export const VaccinationsGmPage = (
                   date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                   source: textGm.vaccination_coverage.bronnen.rivm,
                 }}
-                values={data.vaccine_coverage_per_age_group.values}
+                values={data.vaccine_coverage_per_age_group_archived.values}
                 text={textNl.vaccination_coverage}
               />
             </InView>
