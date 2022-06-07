@@ -98,7 +98,7 @@ export function NarrowCoverageTable({
                   : `${formatPercentage(item.booster_shot_percentage)}%`
               }
               color={COLOR_FULLY_BOOSTERED}
-              textLabel={text.headers.coverage}
+              textLabel={text.headers.booster_shot}
             />
 
             <Bar
