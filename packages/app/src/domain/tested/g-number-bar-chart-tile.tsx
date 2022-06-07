@@ -9,6 +9,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 interface GNumberBarChartTileProps {
   data: NlGNumber | VrGNumber;
@@ -23,11 +24,13 @@ export function GNumberBarChartTile({
 
   const text = commonTexts.g_number.bar_chart;
 
-  const firstOfSeptember2020Unix = new Date('1 September 2020').valueOf() / 1000
+  const firstOfSeptember2020Unix =
+    new Date('1 September 2020').valueOf() / 1000;
   const values = __data.values.filter((value) => {
-    return value.date_unix >= firstOfSeptember2020Unix
+    return value.date_unix >= firstOfSeptember2020Unix;
   });
   const last_value = __data.last_value;
+  const endDate = createDateFromUnixTimestamp(last_value.date_unix);
 
   return (
     <ChartTile
@@ -54,6 +57,7 @@ export function GNumberBarChartTile({
             features: ['keyboard_bar_chart'],
           }}
           values={values}
+          endDate={endDate}
           timeframe={timeframe}
           dataOptions={{
             isPercentage: true,
