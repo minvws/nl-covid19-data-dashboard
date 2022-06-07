@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_coverage_per_age_group",
+  "title": "nl_vaccine_coverage_per_age_group_archived",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -14,16 +14,16 @@
   },
   "definitions": {
     "value": {
-      "title": "nl_vaccine_coverage_per_age_group_value",
+      "title": "nl_vaccine_coverage_per_age_group_archived_value",
       "additionalProperties": false,
       "type": "object",
       "required": [
         "age_group_percentage",
         "age_group_range",
         "age_group_total",
-        "booster_shot",
+        "has_one_shot",
         "fully_vaccinated_percentage",
-        "booster_shot_percentage",
+        "has_one_shot_percentage",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",
@@ -54,14 +54,14 @@
         "fully_vaccinated": {
           "type": "integer"
         },
-        "booster_shot": {
-          "type": ["integer", "null"]
+        "has_one_shot": {
+          "type": "integer"
         },
         "fully_vaccinated_percentage": {
           "type": "number"
         },
-        "booster_shot_percentage": {
-          "type": ["number", "null"]
+        "has_one_shot_percentage": {
+          "type": "number"
         },
         "date_unix": {
           "type": "integer"
