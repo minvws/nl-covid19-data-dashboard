@@ -113,9 +113,11 @@ export interface GmVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -183,9 +185,11 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
   age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
+  has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -942,8 +946,10 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_total: number;
   fully_vaccinated: number;
   booster_shot: number | null;
+  has_one_shot: number;
   fully_vaccinated_percentage: number;
   booster_shot_percentage: number | null;
+  has_one_shot_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -1332,9 +1338,11 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1491,9 +1499,11 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
   age_group_range: "12+" | "18+";
   fully_vaccinated_percentage: number | null;
+  has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
