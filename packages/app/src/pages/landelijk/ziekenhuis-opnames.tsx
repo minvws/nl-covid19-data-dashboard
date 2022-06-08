@@ -297,6 +297,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={dataHospitalLcps.values}
                 timeframe={timeframe}
+                forceLegend
                 seriesConfig={[
                   {
                     type: 'line',

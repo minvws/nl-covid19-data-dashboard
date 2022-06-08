@@ -285,6 +285,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.intensive_care_lcps.values}
                 timeframe={timeframe}
+                forceLegend
                 dataOptions={{
                   timespanAnnotations: [
                     {
