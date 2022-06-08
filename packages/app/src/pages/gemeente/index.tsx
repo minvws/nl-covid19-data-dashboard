@@ -53,7 +53,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout isLandingPage code={code}>
         {!breakpoints.md && (
           <Box bg="white">
-            <GmComboBox />
+            <GmComboBox selectedGmCode={code} />
           </Box>
         )}
 
