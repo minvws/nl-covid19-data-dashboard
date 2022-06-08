@@ -22,8 +22,10 @@
         "age_group_range",
         "age_group_total",
         "booster_shot",
+        "has_one_shot",
         "fully_vaccinated_percentage",
         "booster_shot_percentage",
+        "has_one_shot_percentage",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",
@@ -57,11 +59,17 @@
         "booster_shot": {
           "type": ["integer", "null"]
         },
+        "has_one_shot": {
+          "type": "integer"
+        },
         "fully_vaccinated_percentage": {
           "type": "number"
         },
         "booster_shot_percentage": {
           "type": ["number", "null"]
+        },
+        "has_one_shot_percentage": {
+          "type": "number"
         },
         "date_unix": {
           "type": "integer"
