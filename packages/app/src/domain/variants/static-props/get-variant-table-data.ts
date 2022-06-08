@@ -1,7 +1,6 @@
 import {
   assert,
   colors,
-  Dictionary,
   InNamedDifference,
   InVariants,
   InVariantsVariant,
@@ -49,15 +48,6 @@ export function getVariantTableData(
     }
   }
 
-  function findColor(name: string) {
-    const color = (colors.data.variants as Dictionary<string>)[name];
-    assert(
-      color,
-      `[${getVariantTableData.name}:${findColor.name}] No color found for variant ${name}`
-    );
-    return color;
-  }
-
   const firstLastValue = first<NlVariantsVariant | InVariantsVariant>(
     variants.values
   );
@@ -94,11 +84,11 @@ export function getVariantTableData(
       ...variant,
     }))
     .filter((variant) => !variant.has_historical_significance)
-    .map<VariantRow>((variant) => ({
+    .map<VariantRow>((variant, index) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
-      color: findColor(variant.name),
+      color: colors.data.variants.colorList[index],
     }))
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last
