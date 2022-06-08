@@ -69,6 +69,16 @@ export function useBreakpoints(initialValue = false): Breakpoints {
   return value || (initialValue ? breakpointsTrue : breakpointsFalse);
 }
 
+/**
+ * This hook works the same as useBreakpointsAsync but can also return undefined when the app is not mounted completely.
+ * This allows the programmer to make decisons based on the loaded state of the breakpoints.
+ *
+ * @returns
+ */
+export function useBreakpointsAsync(): Breakpoints | undefined {
+  return useContext(breakpointContext);
+}
+
 const breakpointsTrue: Breakpoints = {
   xs: true,
   sm: true,
