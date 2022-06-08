@@ -129,6 +129,7 @@ export type TimeSeriesChartProps<
    */
   dataOptions?: DataOptions;
   disableLegend?: boolean;
+  forceLegend?: boolean;
   onSeriesClick?: (seriesConfig: C[number], value: T) => void;
 
   /**
@@ -172,6 +173,7 @@ export function TimeSeriesChart<
   paddingLeft,
   tooltipTitle,
   disableLegend,
+  forceLegend = false,
   onSeriesClick,
   markNearestPointOnly,
   displayTooltipValueOnly,
@@ -279,7 +281,8 @@ export function TimeSeriesChart<
     xScale.domain(),
     seriesConfig,
     dataOptions,
-    dataOptions?.outOfBoundsConfig && seriesMax < calculatedSeriesMax
+    dataOptions?.outOfBoundsConfig && seriesMax < calculatedSeriesMax,
+    forceLegend
   );
 
   const timeDomain = useMemo(

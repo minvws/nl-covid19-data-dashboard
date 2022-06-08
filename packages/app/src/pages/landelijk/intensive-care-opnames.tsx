@@ -299,6 +299,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'beds_occupied_covid',
+                    nonInteractive: true,
+                    hideInLegend: true,
                     label: textNl.chart_bedbezetting.legend_trend_label,
                     color: colors.data.primary,
                   },
