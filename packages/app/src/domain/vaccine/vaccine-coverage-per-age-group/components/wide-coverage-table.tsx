@@ -1,7 +1,7 @@
 import {
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
+  GmVaccineCoveragePerAgeGroupArchivedValue,
+  NlVaccineCoveragePerAgeGroupArchivedValue,
+  VrVaccineCoveragePerAgeGroupArchivedValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
@@ -20,9 +20,9 @@ import { SiteText } from '~/locale';
 interface WideCoverageTable {
   text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
   values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+    | NlVaccineCoveragePerAgeGroupArchivedValue[]
+    | VrVaccineCoveragePerAgeGroupArchivedValue[]
+    | GmVaccineCoveragePerAgeGroupArchivedValue[];
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {

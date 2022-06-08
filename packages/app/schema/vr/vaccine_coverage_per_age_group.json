@@ -20,11 +20,11 @@
       "required": [
         "age_group_range",
         "fully_vaccinated_percentage",
-        "has_one_shot_percentage",
         "booster_shot_percentage",
+        "has_one_shot_percentage",
         "fully_vaccinated_percentage_label",
-        "has_one_shot_percentage_label",
         "booster_shot_percentage_label",
+        "has_one_shot_percentage_label",
         "birthyear_range",
         "date_of_insertion_unix",
         "date_unix"
@@ -37,10 +37,10 @@
         "fully_vaccinated_percentage": {
           "type": ["integer", "null"]
         },
-        "has_one_shot_percentage": {
+        "booster_shot_percentage": {
           "type": ["integer", "null"]
         },
-        "booster_shot_percentage": {
+        "has_one_shot_percentage": {
           "type": ["integer", "null"]
         },
         "birthyear_range": {
@@ -51,11 +51,11 @@
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
-        "has_one_shot_percentage_label": {
+        "booster_shot_percentage_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
-        "booster_shot_percentage_label": {
+        "has_one_shot_percentage_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
