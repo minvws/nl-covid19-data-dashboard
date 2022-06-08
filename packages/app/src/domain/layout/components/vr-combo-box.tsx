@@ -6,7 +6,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrComboBoxProps {
   getLink?: (code: string) => string;
-  selectedVrCode?: string;
+  selectedVrCode: string;
 }
 
 export function VrComboBox(props: VrComboBoxProps) {

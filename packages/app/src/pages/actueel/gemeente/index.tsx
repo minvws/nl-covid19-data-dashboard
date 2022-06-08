@@ -66,7 +66,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout isLandingPage code={code} getLink={reverseRouter.actueel.gm}>
         {!breakpoints.md && (
           <Box bg="white">
-            <GmComboBox getLink={reverseRouter.actueel.gm} />
+            <GmComboBox
+              getLink={reverseRouter.actueel.gm}
+              selectedGmCode={code}
+            />
           </Box>
         )}
 

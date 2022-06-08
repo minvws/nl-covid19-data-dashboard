@@ -3,6 +3,7 @@ import {
   VrCollectionHospitalNice,
   vrData,
 } from '@corona-dashboard/common';
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips';
@@ -28,6 +29,7 @@ export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
   const { commonTexts } = useIntl();
 
   const { lastGenerated } = props;
@@ -35,6 +37,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
   };
+  const code = router.query.code as string;
 
   const data = useMemo(() => {
     return vrData.map<VrCollectionHospitalNice>(
@@ -51,7 +54,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout isLandingPage>
         {!breakpoints.md && (
           <Box bg="white">
-            <VrComboBox />
+            <VrComboBox selectedVrCode={code} />
           </Box>
         )}
 
