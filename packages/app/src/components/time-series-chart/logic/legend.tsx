@@ -21,7 +21,8 @@ export function useLegendItems<T extends TimestampedValue>(
   domain: number[],
   config: SeriesConfig<T>,
   dataOptions?: DataOptions,
-  hasOutofBoudsValues = false
+  hasOutofBoudsValues = false,
+  forceLegend = false
 ) {
   const { timelineEvents, timespanAnnotations, outOfBoundsConfig } =
     dataOptions || {};
@@ -30,6 +31,7 @@ export function useLegendItems<T extends TimestampedValue>(
   return useMemo(() => {
     const legendItems = config
       .filter(isVisible)
+      .filter((configItem) => !configItem?.hideInLegend)
       .map<LegendItem | undefined>((x) => {
         switch (x.type) {
           case 'split-area':
@@ -123,7 +125,7 @@ export function useLegendItems<T extends TimestampedValue>(
      * one) to determine if a legend is required. We only have to render a
      * legend when there's at least two items.
      */
-    const isLegendRequired = legendItems.length + splitLegendGroups.length > 1;
+    const isLegendRequired = forceLegend || legendItems.length + splitLegendGroups.length > 1;
 
     return {
       legendItems: isLegendRequired ? legendItems : undefined,

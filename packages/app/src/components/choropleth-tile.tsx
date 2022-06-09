@@ -81,6 +81,7 @@ export function ChoroplethTile({
             <Box
               display="flex"
               justifyContent={{ _: 'center', lg: 'flex-start' }}
+              pt={4}
             >
               <ChartRegionControls
                 value={chartRegion}
