@@ -18,7 +18,7 @@ import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
 import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
-import { memo, Ref, useCallback, useMemo } from 'react';
+import { memo, Ref, useCallback } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
@@ -118,8 +118,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const isDateSpanValue = (value: any): value is DateSpanValue =>
     value.date_start_unix !== undefined && value.date_end_unix !== undefined;
-  const isDateSpanValues = (values: any): values is DateSpanValue[] =>
-    isDateSpanValue(values[0]);
+  const isDateSpanValues = useCallback(
+    (values: any): values is DateSpanValue[] => isDateSpanValue(values[0]),
+    []
+  );
 
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
@@ -206,7 +208,14 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
           )} - ${formatDateFromSeconds(tickValue.date_end_unix, style)}`
         : formatDateFromSeconds(dateUnix, style);
     },
-    [startUnix, endUnix, formatDateFromSeconds, xTicks]
+    [
+      startUnix,
+      endUnix,
+      formatDateFromSeconds,
+      xTicks,
+      isDateSpanValues,
+      values,
+    ]
   );
 
   /**
