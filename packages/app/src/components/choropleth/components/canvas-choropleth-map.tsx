@@ -155,8 +155,6 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
 
   const mapId = useUniqueId();
 
-  console.log('useMinHeight', useMinHeight)
-
   return (
     <>
       <AreaMap
