@@ -26,7 +26,7 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
 
-export type AxesProps<T extends TimestampedValue | number> = {
+export type AxesProps<T extends TimestampedValue> = {
   bounds: Bounds;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
