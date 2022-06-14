@@ -83,7 +83,6 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="gm"
                 data={data}
-                minHeight={900}
                 dataConfig={{
                   metricName: 'gemeente' as any,
                   metricProperty: 'admissions_on_date_of_admission',

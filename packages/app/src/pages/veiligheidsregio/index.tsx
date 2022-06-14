@@ -91,7 +91,6 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="vr"
                 data={data}
-                minHeight={900}
                 dataConfig={{
                   metricName: 'veiligheidsregio' as any,
                   metricProperty: 'admissions_on_date_of_admission',
