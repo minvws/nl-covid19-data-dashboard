@@ -1,7 +1,7 @@
 // When municipal reorganizations happened we want to redirect to the new municipality when
 // using the former municipality code. `from` contains the old municipality codes and `to` is
 // the new municipality code to link to.
-export const gmRedirects = [
+const gmRedirects = [
   {
     from: ['0370'],
     to: '0439',
@@ -23,3 +23,7 @@ export const gmRedirects = [
     to: '0363',
   },
 ];
+
+module.exports = {
+  gmRedirects,
+};

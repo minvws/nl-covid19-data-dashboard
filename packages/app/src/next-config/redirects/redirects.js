@@ -1,6 +1,6 @@
-import { gmRedirects } from './gmRedirects';
+const { gmRedirects } = require('./gmRedirects');
 
-export const redirects = async () => {
+async function redirects() {
   return [
     {
       source: '/over-risiconiveaus',
@@ -69,4 +69,8 @@ export const redirects = async () => {
       permanent: true,
     })),
   ];
+}
+
+module.exports = {
+  redirects,
 };

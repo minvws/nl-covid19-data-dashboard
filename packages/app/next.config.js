@@ -14,9 +14,9 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
-const headers = require('./src/next-config/headers');
-const redirects = require('./src/next-config/redirects/redirects');
-const rewrites = require('./src/next-config/rewrites');
+const { headers } = require('./src/next-config/headers');
+const { redirects } = require('./src/next-config/redirects/redirects');
+const { rewrites } = require('./src/next-config/rewrites');
 
 const nextConfig = {
   /**
@@ -48,9 +48,6 @@ const nextConfig = {
     ],
   },
 
-  /**
-   * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
-   */
   headers,
   redirects,
   rewrites,

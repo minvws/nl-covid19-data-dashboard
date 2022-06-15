@@ -1,4 +1,7 @@
-export const headers = async () => {
+/**
+ * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
+ */
+async function headers() {
   return [
     {
       source: '/:all*(svg|jpg|png|woff|woff2)',
@@ -11,4 +14,8 @@ export const headers = async () => {
       ],
     },
   ];
+}
+
+module.exports = {
+  headers,
 };
