@@ -53,11 +53,39 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const router = useRouter();
   const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
   const results = useSearchedOptions<Option>(inputValue, options, sorter);
   const breakpoints = useBreakpoints();
   const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
+
+  /**
+   * Allow keyboard interaction to scroll through a list of results.
+   */
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!event.isDefaultPrevented()) {
+      const container = containerRef.current;
+
+      if (container) {
+        window.requestAnimationFrame(() => {
+          const element: HTMLInputElement | null = container.querySelector(
+            '[aria-selected=true]'
+          );
+          if (element) {
+            const top = element.offsetTop - container.scrollTop;
+            const bottom =
+              container.scrollTop +
+              container.clientHeight -
+              (element.offsetTop + element.clientHeight);
+
+            if (bottom < 0) container.scrollTop -= bottom;
+            if (top < 0) container.scrollTop += top;
+          }
+        });
+      }
+    }
+  };
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setInputValue(event.target.value);
@@ -99,6 +127,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         <ComboboxInput
           ref={inputRef}
           onChange={handleInputChange}
+          onKeyDown={onKeyDown}
           placeholder={placeholder}
         />
         <ComboboxPopover>
