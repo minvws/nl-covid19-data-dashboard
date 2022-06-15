@@ -1,6 +1,8 @@
-// When municipal reorganizations happened we want to redirect to the new municipality when
-// using the former municipality code. `from` contains the old municipality codes and `to` is
-// the new municipality code to link to.
+/**
+ * When municipal reorganizations happened we want to redirect to the new municipality when
+ * using the former municipality code. `from` contains the old municipality codes and `to` is
+ * the new municipality code to link to.
+ */
 const gmRedirects = [
   {
     from: ['0370'],
