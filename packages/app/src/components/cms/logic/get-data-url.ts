@@ -30,5 +30,5 @@ export function getDataUrl<
 
   const suffix = qParams.length ? `?${qParams.join('&')}` : '';
 
-  return `/api/data/${type}/${code ?? area}/${metricName}${suffix}`;
+  return `/api/data/${type}/${code ?? area}/${metricName.toString()}${suffix}`;
 }
