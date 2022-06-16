@@ -27,18 +27,18 @@
   },
   "dependencies": {
     "@corona-dashboard/icons": "0.0.0",
-    "@sanity/base": "^2.29.3",
+    "@sanity/base": "^2.30.1",
     "@sanity/cli": "^2.30.0",
     "@sanity/components": "^2.14.0",
-    "@sanity/core": "^2.29.3",
-    "@sanity/dashboard": "^2.29.3",
-    "@sanity/default-layout": "^2.29.3",
-    "@sanity/default-login": "^2.29.3",
-    "@sanity/desk-tool": "^2.29.3",
-    "@sanity/form-builder": "^2.29.3",
+    "@sanity/core": "^2.30.1",
+    "@sanity/dashboard": "^2.30.1",
+    "@sanity/default-layout": "^2.30.1",
+    "@sanity/default-login": "^2.30.1",
+    "@sanity/desk-tool": "^2.30.1",
+    "@sanity/form-builder": "^2.30.1",
     "@sanity/production-preview": "^2.29.3",
     "@sanity/ui": "^0.36.15",
-    "@sanity/vision": "^2.29.3",
+    "@sanity/vision": "^2.30.1",
     "braille": "^1.1.0",
     "change-case": "^4.1.2",
     "download": "^8.0.0",
@@ -83,8 +83,8 @@
     "fast-csv": "^4.3.6",
     "lint-staged": "^11.2.6",
     "meow": "^9.0.0",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "lint-staged": {
     "*.@(ts|tsx)": [

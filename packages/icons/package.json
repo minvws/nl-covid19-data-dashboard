@@ -14,7 +14,7 @@
     "test:ci": "echo 'No tests available for @corona-dashboard/cli' && exit 0",
     "typecheck": "exit 0",
     "build": "npx rimraf tsconfig.tsbuildinfo dist src/icons && node bin/generate.js && yarn compile",
-    "compile": "tsc -b . && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "compile": "tsc -b . && tsconfig-replace-paths -p tsconfig.json -s ./src -o ./dist",
     "rename-jsx": "node bin/rename.js",
     "lint": "eslint ."
   },
@@ -46,9 +46,9 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.60.2",
     "svgson": "^5.2.1",
-    "ts-node": "^10.4.0",
-    "tscpaths": "^0.0.9",
-    "typescript": "^4.4.4",
+    "ts-node": "^10.8.1",
+    "tsconfig-replace-paths": "^0.0.11",
+    "typescript": "^4.7.3",
     "uppercamelcase": "^3.0.0"
   },
   "peerDependencies": {
