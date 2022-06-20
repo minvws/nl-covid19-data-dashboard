@@ -424,10 +424,15 @@ export function TimeSeriesChart<
   return (
     <>
       {valueAnnotation && (
-        <>
+        <Box
+          position={isYAxisCollapsed ? 'relative' : undefined}
+          top={isYAxisCollapsed ? '-6px' : undefined}
+          left={isYAxisCollapsed ? 25 : undefined}
+          css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}
+        >
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
           <Spacer mb={{ _: 2, sm: 0 }} />
-        </>
+        </Box>
       )}
 
       <ResponsiveContainer>
