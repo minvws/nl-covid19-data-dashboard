@@ -125,7 +125,8 @@ export function useLegendItems<T extends TimestampedValue>(
      * one) to determine if a legend is required. We only have to render a
      * legend when there's at least two items.
      */
-    const isLegendRequired = forceLegend || legendItems.length + splitLegendGroups.length > 1;
+    const isLegendRequired =
+      forceLegend || legendItems.length + splitLegendGroups.length > 1;
 
     return {
       legendItems: isLegendRequired ? legendItems : undefined,
@@ -140,5 +141,6 @@ export function useLegendItems<T extends TimestampedValue>(
     timespanAnnotations,
     outOfBoundsConfig,
     hasOutofBoudsValues,
+    forceLegend,
   ]);
 }
