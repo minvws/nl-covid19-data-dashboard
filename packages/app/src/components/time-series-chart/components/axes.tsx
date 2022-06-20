@@ -11,14 +11,13 @@ import {
   TimeframeOption,
   TimestampedValue,
   DateSpanValue,
-  assert,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
 import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
-import { memo, Ref, useCallback } from 'react';
+import { memo, Ref, useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
@@ -114,14 +113,19 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   hasAllZeroValues: allZeroValues,
 }: AxesProps<T>) {
   const [startUnix, endUnix] = timeDomain;
+  const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
+  const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
+
   const breakpoints = useBreakpoints();
 
   const isDateSpanValue = (value: any): value is DateSpanValue =>
     value.date_start_unix !== undefined && value.date_end_unix !== undefined;
   const isDateSpanValues = useCallback(
-    (values: any): values is DateSpanValue[] => isDateSpanValue(values[0]),
+    (values: any): values is DateSpanValue[] =>
+      values.every((x: DateSpanValue) => isDateSpanValue(x)),
     []
   );
+  const hasDatesAsRange = isDateSpanValues(values);
 
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
@@ -136,7 +140,6 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   );
 
   if (!isPresent(xTickNumber)) {
-    const hasDatesAsRange = isDateSpanValues(values);
     const preferredDateTicks = breakpoints.sm
       ? timeframe === 'all'
         ? hasDatesAsRange
@@ -152,70 +155,94 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
     xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
   }
 
-  const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
   const getSmallestDiff = (start: number, end: number, current: number) =>
     Math.min(Math.abs(start - current), Math.abs(end - current));
 
-  const formatXAxis = useCallback(
-    (dateUnix: number, index: number) => {
-      const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
-      const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
+  const getXTickStyle = (
+    isFirstOrLast: boolean,
+    startYear: number,
+    endYear: number,
+    previousYear: number,
+    currentYear: number
+  ) =>
+    (isFirstOrLast && startYear !== endYear) || previousYear !== currentYear
+      ? 'axis-with-year'
+      : 'axis';
+  const tickValues = createTimeTicks(startUnix, endUnix, xTickNumber);
+
+  const DateSpanTick = useCallback(
+    (dateUnix: number, values: DateSpanValue[], index: number) => {
       const previousYear = createDateFromUnixTimestamp(
-        xTicks[index - 1]
+        tickValues[index - 1]
       ).getFullYear();
       const currentYear = createDateFromUnixTimestamp(dateUnix).getFullYear();
+      const tickValue = values.reduce((acc, value) => {
+        const smallestDifferenceAcc = getSmallestDiff(
+          acc.date_start_unix,
+          acc.date_end_unix,
+          dateUnix
+        );
+        const smallestDifferenceVal = getSmallestDiff(
+          value.date_start_unix,
+          value.date_end_unix,
+          dateUnix
+        );
 
-      const tickValue = isDateSpanValues(values)
-        ? values.reduce((acc: DateSpanValue, value: DateSpanValue) => {
-            assert(
-              value.date_start_unix && value.date_end_unix,
-              'This needs a date_start_unix & date_end_unix here'
-            );
+        return (value.date_start_unix <= dateUnix &&
+          value.date_end_unix >= dateUnix) ||
+          smallestDifferenceVal < smallestDifferenceAcc
+          ? value
+          : acc;
+      });
 
-            const smallestDifferenceAcc = getSmallestDiff(
-              acc.date_start_unix,
-              acc.date_end_unix,
-              dateUnix
-            );
-            const smallestDifferenceVal = getSmallestDiff(
-              value.date_start_unix,
-              value.date_end_unix,
-              dateUnix
-            );
+      const isFirstOrLast =
+        startUnix === tickValue.date_start_unix ||
+        endUnix === tickValue.date_end_unix;
+      const style = getXTickStyle(
+        isFirstOrLast,
+        startYear,
+        endYear,
+        previousYear,
+        currentYear
+      );
 
-            return (value.date_start_unix <= dateUnix &&
-              value.date_end_unix >= dateUnix) ||
-              smallestDifferenceVal < smallestDifferenceAcc
-              ? value
-              : acc;
-          })
-        : dateUnix;
-
-      const style =
-        ((isDateSpanValue(tickValue)
-          ? startUnix === tickValue.date_start_unix ||
-            endUnix === tickValue.date_end_unix
-          : [startUnix, endUnix].includes(tickValue)) &&
-          startYear !== endYear) ||
-        previousYear !== currentYear
-          ? 'axis-with-year'
-          : 'axis';
-
-      return isDateSpanValue(tickValue)
-        ? `${formatDateFromSeconds(
-            tickValue.date_start_unix,
-            'axis'
-          )} - ${formatDateFromSeconds(tickValue.date_end_unix, style)}`
-        : formatDateFromSeconds(dateUnix, style);
+      return `${formatDateFromSeconds(
+        tickValue.date_start_unix,
+        'axis'
+      )} - ${formatDateFromSeconds(tickValue.date_end_unix, style)}`;
     },
-    [
-      startUnix,
-      endUnix,
-      formatDateFromSeconds,
-      xTicks,
-      isDateSpanValues,
-      values,
-    ]
+    [endUnix, endYear, formatDateFromSeconds, startUnix, startYear, tickValues]
+  );
+
+  const TimeStampTick = useCallback(
+    (tickValue: number, index: number) => {
+      const previousYear = createDateFromUnixTimestamp(
+        tickValues[index - 1]
+      ).getFullYear();
+      const currentYear = createDateFromUnixTimestamp(tickValue).getFullYear();
+
+      const isFirstOrLast = [startUnix, endUnix].includes(tickValue);
+      const style = getXTickStyle(
+        isFirstOrLast,
+        startYear,
+        endYear,
+        previousYear,
+        currentYear
+      );
+
+      return formatDateFromSeconds(tickValue, style);
+    },
+    [endUnix, endYear, formatDateFromSeconds, startUnix, startYear, tickValues]
+  );
+
+  const xTicks = useMemo(
+    () =>
+      tickValues.map((x, i) =>
+        isDateSpanValues(values)
+          ? DateSpanTick(x, values, i)
+          : TimeStampTick(x, i)
+      ),
+    [values, DateSpanTick, TimeStampTick, isDateSpanValues, tickValues]
   );
 
   /**
@@ -223,8 +250,8 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
    * centered on the x-axis tick. Usually a short date has a 2 digit number plus
    * a space plus a three character month, which makes 6.
    */
-  const isLongStartLabel = formatXAxis(startUnix, 0).length > 6;
-  const isLongEndLabel = formatXAxis(endUnix, xTickNumber - 1).length > 6;
+  const isLongStartLabel = xTicks[0].length > 6;
+  const isLongEndLabel = xTicks[xTicks.length - 1].length > 6;
 
   /**
    * We make an exception for the situation where all the values in the chart are zero.
@@ -248,9 +275,9 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
    * rendering a year in the label, because it becomes too long.
    */
   const getAnchor = (x: NumberValue) => {
-    return x === xTicks[0] && isLongStartLabel
+    return x === tickValues[0] && isLongStartLabel
       ? 'start'
-      : x === xTicks[xTicks.length - 1] && isLongEndLabel
+      : x === tickValues[tickValues.length - 1] && isLongEndLabel
       ? 'end'
       : 'middle';
   };
@@ -290,8 +317,8 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
       <AxisBottom
         scale={xScale}
-        tickValues={xTicks}
-        tickFormat={formatXAxis as AnyTickFormatter}
+        tickValues={tickValues}
+        tickFormat={(_x, i) => xTicks[i]}
         top={bounds.height}
         stroke={colors.silver}
         rangePadding={xRangePadding}
