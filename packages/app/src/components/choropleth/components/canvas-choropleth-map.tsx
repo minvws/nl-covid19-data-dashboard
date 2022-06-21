@@ -46,7 +46,7 @@ export type CanvasChoroplethMapProps = {
   fitExtent: FitExtent;
   getFeatureName: (code: string) => string;
   height: number;
-  useMinHeight?: boolean;
+  minHeight?: number;
   isTabInteractive: boolean;
   mapProjection: () => GeoProjection;
   tooltipTrigger: ChoroplethTooltipHandlers[2];
@@ -73,7 +73,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
     fitExtent,
     getFeatureName,
     height,
-    useMinHeight = false,
+    minHeight,
     isTabInteractive,
     mapProjection,
     tooltipTrigger,
@@ -172,7 +172,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
       <div
         ref={containerRef}
         style={{
-          minHeight: useMinHeight ? height : 'inherit',
+          minHeight: minHeight && minHeight > 0 ? minHeight : 'inherit',
           maxHeight: '75vh',
           maxWidth: '100%',
           height: '100%',

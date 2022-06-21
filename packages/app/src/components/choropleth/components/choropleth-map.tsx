@@ -136,7 +136,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
             dataOptions={dataOptions}
             width={width}
             height={correctedHeight}
-            useMinHeight={minHeight > 0}
+            minHeight={minHeight}
             annotations={annotations}
             featureOverHandler={featureOverHandler}
             featureOutHandler={featureOutHandler}
