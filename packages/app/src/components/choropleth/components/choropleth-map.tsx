@@ -126,7 +126,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
     <Box ref={containerRef} width="100%" height="100%">
       {!isDefined(choroplethFeatures) ? (
         <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
+          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${dataConfig.metricProperty.toString()}/${minHeight}`}
           loading="lazy"
         />
       ) : (

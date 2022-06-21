@@ -77,7 +77,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const threshold = thresholds[map][dataConfig.metricProperty as string];
   assert(
     isDefined(threshold),
-    `[${useChoroplethTooltip.name}] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty}`
+    `[${useChoroplethTooltip.name}] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty.toString()}`
   );
 
   useEffect(() => {

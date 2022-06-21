@@ -38,7 +38,7 @@ export function sortTimeSeriesInDataInPlace<T>(
         }
       }
     } catch (e) {
-      console.error(`Error during processing ${propertyName}`);
+      console.error(`Error during processing ${propertyName.toString()}`);
       throw e;
     }
   }

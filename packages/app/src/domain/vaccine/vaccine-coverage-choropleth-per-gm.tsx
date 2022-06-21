@@ -209,7 +209,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
       data.dataConfig
         .metricProperty as unknown as KeyWithLabel<VaccineCoverageData>
     ) >= 0,
-    `[${ChoroplethTooltip.name}] The given metricProperty ${data.dataConfig.metricProperty} is not found in percentageProps`
+    `[${ChoroplethTooltip.name}] The given metricProperty ${data.dataConfig.metricProperty.toString()} is not found in percentageProps`
   );
 
   const { commonTexts } = useIntl();
@@ -236,7 +236,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
   assert(
     isDefined(subject),
-    `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
   );
 
   const tooltipVars = {
@@ -256,7 +256,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
     isDefined(mainContent),
-    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
   );
 
   const secondaryContent = Object.entries(secondaryValues).map(

@@ -211,7 +211,7 @@ function useSeriesConfig(
           type: 'gapped-stacked-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: text.varianten[variantName].name,
+          label: text.varianten[variantName]?.name || variantName,
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
