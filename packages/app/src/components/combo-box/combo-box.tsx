@@ -63,7 +63,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   /**
    * Allow keyboard interaction to scroll through a list of results.
    */
-  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const container = containerRef.current;
 
     if (event.isDefaultPrevented() || !container) return;
@@ -126,7 +126,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
         <ComboboxInput
           ref={inputRef}
           onChange={handleInputChange}
-          onKeyDown={onKeyDown}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
         />
         <ComboboxPopover>
