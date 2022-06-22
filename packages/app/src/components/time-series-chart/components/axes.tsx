@@ -175,6 +175,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
       const previousYear = createDateFromUnixTimestamp(
         tickValues[index - 1]
       ).getFullYear();
+
       const currentYear = createDateFromUnixTimestamp(dateUnix).getFullYear();
       const tickValue = values.reduce((acc, value) => {
         const smallestDifferenceAcc = getSmallestDiff(
