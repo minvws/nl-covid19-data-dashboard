@@ -394,7 +394,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
               fontSize: 12,
               textAnchor: 'start',
               // position the label above the chart
-              dx: 7,
+              dx: 10,
               dy: -5,
             })}
           />
