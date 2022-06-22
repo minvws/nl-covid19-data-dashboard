@@ -78,6 +78,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
           container.scrollTop +
           container.clientHeight -
           (element.offsetTop + element.clientHeight); // Calculate the space between active element and bottom of the list
+
         if (bottom < 0) container.scrollTop -= bottom;
         if (top < 0) container.scrollTop += top;
       }
