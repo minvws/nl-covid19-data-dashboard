@@ -45,7 +45,7 @@ type TProps<Option extends TOption> = {
  * />
  * ```
  */
-export function ComboBox<Option extends TOption>(props: TProps<Option>) {
+export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   const { options, placeholder, sorter, selectedOption } = props;
 
   const { commonTexts } = useIntl();
@@ -53,17 +53,45 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const router = useRouter();
   const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLUListElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
   const results = useSearchedOptions<Option>(inputValue, options, sorter);
   const breakpoints = useBreakpoints();
   const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
 
-  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setInputValue(event.target.value);
-  }
+  /**
+   * Allow keyboard interaction to scroll through a list of results.
+   */
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const container = containerRef.current;
 
-  function handleSelect(name: string): void {
+    if (event.isDefaultPrevented() || !container) return;
+
+    window.requestAnimationFrame(() => {
+      const element: HTMLInputElement | null = container.querySelector(
+        '[aria-selected=true]'
+      );
+      if (element) {
+        const top = element.offsetTop - container.scrollTop; // Calculate the space between active element and top of the list
+        const bottom =
+          container.scrollTop +
+          container.clientHeight -
+          (element.offsetTop + element.clientHeight); // Calculate the space between active element and bottom of the list
+
+        if (bottom < 0) container.scrollTop -= bottom;
+        if (top < 0) container.scrollTop += top;
+      }
+    });
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSelect = (name: string): void => {
     if (!name) {
       return;
     }
@@ -85,7 +113,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
     setTimeout(() => {
       inputRef.current?.blur();
     }, 1);
-  }
+  };
 
   useEffect(() => {
     if (!inputRef.current?.value && isLargeScreen && !hasRegionSelected) {
@@ -99,11 +127,12 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         <ComboboxInput
           ref={inputRef}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
         />
         <ComboboxPopover>
           {results.length > 0 ? (
-            <ComboboxList>
+            <ComboboxList ref={containerRef}>
               {results.map((option, index) => (
                 <StyledComboboxOption
                   key={`${index}-${option.name}`}
@@ -120,13 +149,13 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
       <ComboBoxStyles />
     </Box>
   );
-}
+};
 
-function useSearchedOptions<Option extends TOption>(
+const useSearchedOptions = <Option extends TOption>(
   term: string,
   options: Option[],
   sorter?: (a: Option, b: Option) => number
-): Option[] {
+): Option[] => {
   const throttledTerm = useThrottle(term, 100);
 
   return useMemo(
@@ -138,7 +167,7 @@ function useSearchedOptions<Option extends TOption>(
           }),
     [throttledTerm, options, sorter]
   );
-}
+};
 
 const StyledComboboxOption = styled(ComboboxOption)<{
   isSelectedOption: boolean;
