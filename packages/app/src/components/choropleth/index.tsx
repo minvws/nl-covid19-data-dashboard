@@ -278,8 +278,8 @@ export const DynamicChoropleth = withLoadingProps((getLoadingProps) =>
       } = getLoadingProps();
       return (
         <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName}/${
-            dataConfig.metricProperty
+          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${
+            dataConfig.metricProperty.toString()
           }/${minHeight}/${dataOptions.selectedCode ?? ''}`}
         />
       );

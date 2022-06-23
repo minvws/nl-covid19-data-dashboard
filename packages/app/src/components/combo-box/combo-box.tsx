@@ -9,7 +9,7 @@ import css from '@styled-system/css';
 import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import searchUrl from '~/assets/search.svg';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
@@ -27,6 +27,7 @@ type TProps<Option extends TOption> = {
   placeholder: string;
   onSelect: (option: Option) => void;
   sorter?: (a: Option, b: Option) => number;
+  selectedOption?: Option;
 };
 
 /**
@@ -44,25 +45,53 @@ type TProps<Option extends TOption> = {
  * />
  * ```
  */
-export function ComboBox<Option extends TOption>(props: TProps<Option>) {
-  const { options, placeholder, sorter } = props;
+export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
+  const { options, placeholder, sorter, selectedOption } = props;
 
   const { commonTexts } = useIntl();
 
   const router = useRouter();
   const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLUListElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
   const results = useSearchedOptions<Option>(inputValue, options, sorter);
   const breakpoints = useBreakpoints();
   const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
 
-  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setInputValue(event.target.value);
-  }
+  /**
+   * Allow keyboard interaction to scroll through a list of results.
+   */
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const container = containerRef.current;
 
-  function handleSelect(name: string): void {
+    if (event.isDefaultPrevented() || !container) return;
+
+    window.requestAnimationFrame(() => {
+      const element: HTMLInputElement | null = container.querySelector(
+        '[aria-selected=true]'
+      );
+      if (element) {
+        const top = element.offsetTop - container.scrollTop; // Calculate the space between active element and top of the list
+        const bottom =
+          container.scrollTop +
+          container.clientHeight -
+          (element.offsetTop + element.clientHeight); // Calculate the space between active element and bottom of the list
+
+        if (bottom < 0) container.scrollTop -= bottom;
+        if (top < 0) container.scrollTop += top;
+      }
+    });
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSelect = (name: string): void => {
     if (!name) {
       return;
     }
@@ -84,7 +113,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
     setTimeout(() => {
       inputRef.current?.blur();
     }, 1);
-  }
+  };
 
   useEffect(() => {
     if (!inputRef.current?.value && isLargeScreen && !hasRegionSelected) {
@@ -98,15 +127,17 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
         <ComboboxInput
           ref={inputRef}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
         />
         <ComboboxPopover>
           {results.length > 0 ? (
-            <ComboboxList>
+            <ComboboxList ref={containerRef}>
               {results.map((option, index) => (
-                <ComboboxOption
+                <StyledComboboxOption
                   key={`${index}-${option.name}`}
                   value={option.displayName || option.name}
+                  isSelectedOption={selectedOption?.name === option.name}
                 />
               ))}
             </ComboboxList>
@@ -118,13 +149,13 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
       <ComboBoxStyles />
     </Box>
   );
-}
+};
 
-function useSearchedOptions<Option extends TOption>(
+const useSearchedOptions = <Option extends TOption>(
   term: string,
   options: Option[],
   sorter?: (a: Option, b: Option) => number
-): Option[] {
+): Option[] => {
   const throttledTerm = useThrottle(term, 100);
 
   return useMemo(
@@ -136,7 +167,19 @@ function useSearchedOptions<Option extends TOption>(
           }),
     [throttledTerm, options, sorter]
   );
-}
+};
+
+const StyledComboboxOption = styled(ComboboxOption)<{
+  isSelectedOption: boolean;
+}>`
+  border-left: ${(x) =>
+    x.isSelectedOption ? `5px solid ${x.theme.colors.blue}` : '0'};
+
+  span:first-child {
+    display: inline-block;
+    padding-left: ${(x) => (x.isSelectedOption ? '0' : '5px')};
+  }
+`;
 
 const ComboBoxStyles = createGlobalStyle`
 // Global combobox styles copied from the old SCSS
@@ -205,7 +248,8 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-option]:hover, [data-reach-combobox-option]:focus {
-  background: ${(x) => x.theme.colors.offWhite};
+  color: ${(x) => x.theme.colors.white};
+  background: ${(x) => x.theme.colors.blue};
 }
 
 [data-reach-combobox-option] span {

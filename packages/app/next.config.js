@@ -14,31 +14,9 @@ const withTranspileModules = require('next-transpile-modules')([
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
-// When municipal reorganizations happened we want to redirect to the new municipality when
-// using the former municipality code. `from` contains the old municipality codes and `to` is
-// the new municipality code to link to.
-const gmRedirects = [
-  {
-    from: ['0370'],
-    to: '0439',
-  },
-  {
-    from: ['0398', '0416'],
-    to: '1980',
-  },
-  {
-    from: ['1685', '0856'],
-    to: '1991',
-  },
-  {
-    from: ['0756', '1684', '0786', '0815', '1702'],
-    to: '1982',
-  },
-  {
-    from: ['0457'],
-    to: '0363',
-  },
-];
+const { headers } = require('./src/next-config/headers');
+const { redirects } = require('./src/next-config/redirects/redirects');
+const { rewrites } = require('./src/next-config/rewrites');
 
 const nextConfig = {
   /**
@@ -70,109 +48,9 @@ const nextConfig = {
     ],
   },
 
-  /**
-   * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
-   */
-  async headers() {
-    return [
-      {
-        source: '/:all*(svg|jpg|png|woff|woff2)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=9999999999, must-revalidate',
-          },
-        ],
-      },
-    ];
-  },
-
-  async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/gemeente/(g|G)(m|M):nr(\\d{4})/:page*',
-          destination: '/gemeente/GM:nr/:page*',
-        },
-        {
-          source: '/veiligheidsregio/(v|V)(r|R):nr(\\d{2})/:page*',
-          destination: '/veiligheidsregio/VR:nr/:page*',
-        },
-      ],
-    };
-  },
-
-  async redirects() {
-    return [
-      {
-        source: '/over-risiconiveaus',
-        destination: '/',
-        permanent: false,
-      },
-      {
-        source: '/actueel',
-        destination: '/',
-        permanent: false,
-      },
-      {
-        source: '/apple-touch-icon.png',
-        destination: '/images/touch-icon.png',
-        permanent: false,
-      },
-      {
-        source: '/apple-touch-icon-120x120-precomposed.png',
-        destination: '/images/touch-icon.png',
-        permanent: false,
-      },
-      {
-        source: '/apple-touch-icon-120x120.png',
-        destination: '/images/touch-icon.png',
-        permanent: false,
-      },
-      {
-        source: '/apple-touch-icon-152x152-precomposed.png',
-        destination: '/images/touch-icon.png',
-        permanent: false,
-      },
-      {
-        source: '/apple-touch-icon-152x152.png',
-        destination: '/images/touch-icon.png',
-        permanent: false,
-      },
-      {
-        source: '/apple-touch-icon-precomposed.png',
-        destination: '/images/touch-icon.png',
-        permanent: false,
-      },
-      {
-        source: '/regio',
-        destination: '/veiligheidsregio',
-        permanent: false,
-      },
-      {
-        source: '/gemeente/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
-        destination: '/veiligheidsregio/VR:nr',
-        permanent: false,
-      },
-      {
-        source:
-          '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
-        destination: '/gemeente/GM:nr',
-        permanent: false,
-      },
-      {
-        source: '/veiligheidsregio/:code/risiconiveau',
-        destination: '/veiligheidsregio/:code',
-        permanent: true,
-      },
-      ...gmRedirects.map(({ from, to }) => ({
-        source: `/gemeente/:gm(gm|GM|gM|Gm):nr(${from.join('|')})/:page*`,
-        destination: `/gemeente/GM${to}/:page*`,
-        permanent: true,
-      })),
-    ];
-  },
+  headers,
+  redirects,
+  rewrites,
 
   /**
    * Enable source maps in production, because we want people to report readable

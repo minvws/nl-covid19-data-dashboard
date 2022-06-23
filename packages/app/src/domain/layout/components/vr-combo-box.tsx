@@ -6,10 +6,11 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrComboBoxProps {
   getLink?: (code: string) => string;
+  selectedVrCode: string;
 }
 
 export function VrComboBox(props: VrComboBoxProps) {
-  const { getLink } = props;
+  const { getLink, selectedVrCode } = props;
 
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -26,6 +27,8 @@ export function VrComboBox(props: VrComboBoxProps) {
             : reverseRouter.vr.index(region.code)
         )
       }
+      sorter={(a, b) => a.name.localeCompare(b.name)}
+      selectedOption={vrData.find((vr) => vr.code === selectedVrCode)}
     />
   );
 }

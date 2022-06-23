@@ -9,9 +9,9 @@ import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import {
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
+  GmVaccineCoveragePerAgeGroupArchivedValue,
+  NlVaccineCoveragePerAgeGroupArchivedValue,
+  VrVaccineCoveragePerAgeGroupArchivedValue,
 } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 
@@ -21,9 +21,9 @@ export function NarrowCoverageTable({
 }: {
   text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
   values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+    | NlVaccineCoveragePerAgeGroupArchivedValue[]
+    | VrVaccineCoveragePerAgeGroupArchivedValue[]
+    | GmVaccineCoveragePerAgeGroupArchivedValue[];
 }) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();

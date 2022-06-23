@@ -110,7 +110,7 @@ export function VrLayout(props: VrLayoutProps) {
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
-            <VrComboBox getLink={getLink} />
+            <VrComboBox getLink={getLink} selectedVrCode={code} />
           </Box>
         }
         sidebarComponent={

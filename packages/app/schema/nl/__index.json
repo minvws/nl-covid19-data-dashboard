@@ -49,6 +49,7 @@
     "vaccine_stock",
     "vaccine_delivery_per_supplier",
     "vaccine_coverage_per_age_group",
+    "vaccine_coverage_per_age_group_archived",
     "vaccine_coverage_per_age_group_estimated"
   ],
   "additionalProperties": false,
@@ -196,6 +197,9 @@
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
+    },
+    "vaccine_coverage_per_age_group_archived": {
+      "$ref": "vaccine_coverage_per_age_group_archived.json"
     },
     "vaccine_coverage_per_age_group_estimated": {
       "$ref": "vaccine_coverage_per_age_group_estimated.json"

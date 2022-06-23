@@ -53,7 +53,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout isLandingPage code={code}>
         {!breakpoints.md && (
           <Box bg="white">
-            <GmComboBox />
+            <GmComboBox selectedGmCode={code} />
           </Box>
         )}
 
@@ -83,7 +83,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 map="gm"
                 data={data}
-                minHeight={900}
+                minHeight={0}
                 dataConfig={{
                   metricName: 'gemeente' as any,
                   metricProperty: 'admissions_on_date_of_admission',

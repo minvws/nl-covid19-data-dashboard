@@ -56,7 +56,11 @@ import {
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = ['vaccine_coverage_per_age_group', 'booster_coverage'];
+const pageMetrics = [
+  'vaccine_coverage_per_age_group',
+  'vaccine_coverage_per_age_group_archived',
+  'booster_coverage',
+];
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -70,7 +74,11 @@ export const getStaticProps = createGetStaticProps(
       locale
     ),
   getLastGeneratedDate,
-  selectVrData('vaccine_coverage_per_age_group', 'booster_coverage'),
+  selectVrData(
+    'vaccine_coverage_per_age_group',
+    'vaccine_coverage_per_age_group_archived',
+    'booster_coverage'
+  ),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -335,11 +343,12 @@ export const VaccinationsVrPage = (
                 }
                 sortingOrder={['18+', '12+']}
                 metadata={{
-                  date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                  date: data.vaccine_coverage_per_age_group_archived.values[0]
+                    .date_unix,
                   source:
                     commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
                 }}
-                values={data.vaccine_coverage_per_age_group.values}
+                values={data.vaccine_coverage_per_age_group_archived.values}
                 text={textNl.vaccination_coverage}
               />
             </InView>

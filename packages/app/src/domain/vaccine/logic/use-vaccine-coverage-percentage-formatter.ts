@@ -43,7 +43,7 @@ function getVaccineCoveragePercentageFormatter(
   numFractionDigits: number
 ) {
   return <T extends DataWithLabels<T>>(data: T, property: KeyWithLabel<T>) => {
-    const labelKey = `${property}_label` as keyof T;
+    const labelKey = `${property.toString()}_label` as keyof T;
 
     if (
       labelKey in data &&

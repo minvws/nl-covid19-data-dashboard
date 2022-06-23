@@ -6,10 +6,11 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface GmComboBoxProps {
   getLink?: (gmcode: string) => string;
+  selectedGmCode: string;
 }
 
 export function GmComboBox(props: GmComboBoxProps) {
-  const { getLink } = props;
+  const { getLink, selectedGmCode } = props;
 
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -30,6 +31,7 @@ export function GmComboBox(props: GmComboBoxProps) {
       sorter={(a, b) =>
         a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, ''))
       }
+      selectedOption={gmData.find((gm) => gm.gemcode === selectedGmCode)}
     />
   );
 }

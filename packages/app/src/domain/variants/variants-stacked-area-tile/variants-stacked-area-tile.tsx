@@ -1,4 +1,4 @@
-import { colors, Dictionary, TimeframeOption } from '@corona-dashboard/common';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
@@ -13,7 +13,6 @@ import { TooltipSeriesList } from '~/components/time-series-chart/components/too
 import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
-import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
 import { Variants } from '../variants-table-tile/types';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
@@ -91,13 +90,7 @@ function VariantStackedAreaTileWithData({
   );
 
   /* Static legend contains only the inaccurate item */
-  const staticLegendItems: LegendItem[] = [
-    {
-      shape: 'outlined-square',
-      color: colors.white,
-      label: text.legend_niet_compleet_label,
-    },
-  ];
+  const staticLegendItems: LegendItem[] = [];
 
   const timespanAnnotations = useUnreliableDataAnnotations(
     values,
@@ -207,15 +200,8 @@ function useSeriesConfig(
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
-      baseVariantsFiltered.map((variantKey) => {
-        const color = (colors.data.variants as Dictionary<string>)[
-          variantKey.split('_')[0]
-        ];
-
-        assert(
-          color,
-          `[${useSeriesConfig.name}] No color found found for variant: ${variantKey}`
-        );
+      baseVariantsFiltered.map((variantKey, index) => {
+        const color = colors.data.variants.colorList[index];
 
         const variantName = variantKey.split(
           '_'
@@ -225,7 +211,7 @@ function useSeriesConfig(
           type: 'gapped-stacked-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: text.varianten[variantName].name,
+          label: text.varianten[variantName]?.name || variantName,
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
