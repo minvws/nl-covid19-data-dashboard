@@ -127,7 +127,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
-  const formatYAxis: TickFormatter<NumberValue>  = useCallback(
+  const formatYAxis: TickFormatter<NumberValue> = useCallback(
     (y: NumberValue) => formatNumber(y as number),
     [formatNumber]
   );
@@ -350,10 +350,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
               stroke={colors.silver}
               tickFormat={
                 formatYTickValue
-                  ? (formatYTickValue)
+                  ? formatYTickValue
                   : isPercentage
-                  ? (formatYAxisPercentage)
-                  : (formatYAxis)
+                  ? formatYAxisPercentage
+                  : formatYAxis
               }
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
@@ -382,10 +382,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
             stroke={colors.silver}
             tickFormat={
               formatYTickValue
-                ? (formatYTickValue)
+                ? formatYTickValue
                 : isPercentage
-                ? (formatYAxisPercentage)
-                : (formatYAxis)
+                ? formatYAxisPercentage
+                : formatYAxis
             }
             tickLabelProps={() => ({
               fill: colors.data.axisLabels,
