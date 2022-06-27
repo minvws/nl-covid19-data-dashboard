@@ -56,7 +56,6 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 const pageMetrics = [
   'g_number',
   'tested_ggd',
-  'tested_ggd_archived',
   'tested_overall',
 ];
 
@@ -79,7 +78,6 @@ export const getStaticProps = createGetStaticProps(
     'difference.tested_overall__infected_per_100k_moving_average',
     'g_number',
     'tested_ggd',
-    'tested_ggd_archived',
     'tested_overall'
   ),
   createGetChoroplethData({
@@ -289,7 +287,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         key: 'confirmed_cases_infected_percentage_over_time_chart',
                       }}
                       timeframe={timeframe}
-                      values={data.tested_ggd_archived.values}
+                      values={data.tested_ggd.values}
                       forceLegend
                       seriesConfig={[
                         {
