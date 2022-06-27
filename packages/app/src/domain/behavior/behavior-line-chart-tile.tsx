@@ -31,6 +31,8 @@ interface BehaviorLineChartTileProps {
   text: SiteText['pages']['behaviorPage'];
 }
 
+type ValueKey = keyof NlBehaviorValue & keyof VrBehaviorValue
+
 export function BehaviorLineChartTile({
   values,
   metadata,
@@ -42,15 +44,15 @@ export function BehaviorLineChartTile({
   text,
 }: BehaviorLineChartTileProps) {
   const selectedComplianceValueKey =
-    `${currentId}_compliance` as keyof NlBehaviorValue;
+    `${currentId}_compliance` as ValueKey;
   const selectedSupportValueKey =
-    `${currentId}_support` as keyof NlBehaviorValue;
+    `${currentId}_support` as ValueKey;
 
-  const complianceValuesHasGap = useDataHasGaps(
+  const complianceValuesHasGap = useDataHasGaps<NlBehaviorValue>(
     values,
     selectedComplianceValueKey
   );
-  const supportValuesHasGap = useDataHasGaps(values, selectedSupportValueKey);
+  const supportValuesHasGap = useDataHasGaps<NlBehaviorValue | VrBehaviorValue>(values, selectedSupportValueKey);
 
   const breakpoints = useBreakpoints();
 

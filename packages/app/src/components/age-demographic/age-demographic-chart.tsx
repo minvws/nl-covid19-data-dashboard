@@ -1,4 +1,4 @@
-import { Color, colors, KeysOfType } from '@corona-dashboard/common';
+import { Color, colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, TickRendererProps } from '@visx/axis';
 import { GridColumns } from '@visx/grid';
@@ -32,8 +32,8 @@ interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
   onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
   onMouseLeaveBar: () => void;
   onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
-  rightMetricProperty: KeysOfType<T, number, true>;
-  leftMetricProperty: KeysOfType<T, number, true>;
+  rightMetricProperty: keyof T;
+  leftMetricProperty: keyof T;
   rightColor: Color;
   leftColor: Color;
   maxDisplayValue?: number;

@@ -1,4 +1,4 @@
-import type { Color, KeysOfType } from '@corona-dashboard/common';
+import type { Color } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { BoldText } from '~/components/typography';
@@ -11,8 +11,8 @@ interface AgeDemographicTooltipContentProps<
   T extends AgeDemographicDefaultValue
 > {
   value: T;
-  rightMetricProperty: KeysOfType<T, number, true>;
-  leftMetricProperty: KeysOfType<T, number, true>;
+  rightMetricProperty: keyof T;
+  leftMetricProperty: keyof T;
   rightColor: Color;
   leftColor: Color;
   text: AgeDemographicChartText;

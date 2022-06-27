@@ -1,4 +1,3 @@
-import { KeysOfType } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { MouseEvent, useMemo } from 'react';
@@ -42,8 +41,8 @@ export function useAgeDemographicCoordinates<
   T extends AgeDemographicDefaultValue
 >(
   data: { values: T[] },
-  rightMetricProperty: KeysOfType<T, number, true>,
-  leftMetricProperty: KeysOfType<T, number, true>,
+  rightMetricProperty: keyof T,
+  leftMetricProperty: keyof T,
   maxDisplayValue?: number
 ) {
   const [ref, { width = 840 }] = useResizeObserver<HTMLDivElement>();
@@ -79,8 +78,8 @@ function calculateAgeDemographicCoordinates<
   T extends AgeDemographicDefaultValue
 >(
   data: { values: T[] },
-  rightMetricProperty: KeysOfType<T, number, true>,
-  leftMetricProperty: KeysOfType<T, number, true>,
+  rightMetricProperty: keyof T,
+  leftMetricProperty: keyof T,
   isSmallScreen: boolean,
   parentWidth: number,
   isExtraSmallScreen: boolean,

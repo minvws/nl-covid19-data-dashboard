@@ -1,4 +1,4 @@
-import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import type { TimestampedValue } from '@corona-dashboard/common';
 import { colors } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { AreaClosed, LinePath } from '@visx/shape';
@@ -11,7 +11,7 @@ const HEIGHT = 24;
 const MARKER_RADIUS = 2.5;
 
 type SparkLineProps<T extends TimestampedValue> = {
-  averageProperty: KeysOfType<T, number | null, true>;
+  averageProperty: keyof T;
   data: T[];
 };
 

@@ -1,4 +1,4 @@
-import type { Color, KeysOfType } from '@corona-dashboard/common';
+import type { Color } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
@@ -16,8 +16,8 @@ import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 
 export interface AgeDemographicProps<T extends AgeDemographicDefaultValue> {
   data: { values: T[] };
-  rightMetricProperty: KeysOfType<T, number, true>;
-  leftMetricProperty: KeysOfType<T, number, true>;
+  rightMetricProperty: keyof T;
+  leftMetricProperty: keyof T;
   rightColor: Color;
   leftColor: Color;
   /**
