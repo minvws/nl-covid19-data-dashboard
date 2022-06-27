@@ -58,7 +58,6 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 const pageMetrics = [
   'g_number',
   'tested_ggd',
-  'tested_ggd_archived',
   'tested_overall',
   'tested_per_age_group',
 ];
@@ -81,7 +80,6 @@ export const getStaticProps = createGetStaticProps(
     'difference.tested_overall__infected_per_100k_moving_average',
     'g_number',
     'tested_ggd',
-    'tested_ggd_archived',
     'tested_overall',
     'tested_per_age_group'
   ),
