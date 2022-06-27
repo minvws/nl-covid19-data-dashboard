@@ -4,10 +4,10 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { AxisTop } from '@visx/axis';
+import { AxisTop, TickFormatter } from '@visx/axis';
 import { RectClipPath } from '@visx/clip-path';
 import { GridColumns } from '@visx/grid';
-import { ScaleBand, ScaleLinear } from 'd3-scale';
+import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -15,7 +15,6 @@ import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-times
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, getWeekInfo } from '../logic';
-import { AnyTickFormatter } from './axes';
 
 /**
  * Only show this amount of week numbers
@@ -72,7 +71,7 @@ export function WeekNumbers({
       });
     },
     [commonTexts.common]
-  );
+  ) as TickFormatter<NumberValue>;
 
   return (
     <>
@@ -101,7 +100,7 @@ export function WeekNumbers({
         <AxisTop
           scale={xScale}
           tickValues={weekNumberLabels}
-          tickFormat={formatWeekNumberAxis as AnyTickFormatter}
+          tickFormat={formatWeekNumberAxis}
           stroke={colors.silver}
           hideTicks
           tickLabelProps={() => ({
