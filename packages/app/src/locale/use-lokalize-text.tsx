@@ -19,7 +19,7 @@ const datasets = ['development', 'production', 'keys'] as const;
 export type Dataset = typeof datasets[number];
 
 const query = `*[_type == 'lokalizeText']`;
-const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
+const enableHotReload = process.env.NODE_ENV === 'development';
 
 /**
  * This hook will return an object which contains all lokalize translations.
@@ -36,12 +36,15 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
+  const isStagingEnv = typeof window !== 'undefined' && window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
+  const showSanityDebugToggle = enableHotReload || isStagingEnv;
+
   const [dataset, setDataset] = useState<Dataset>(
     (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
       'development'
   );
 
-  const toggleButton = enableHotReload ? (
+  const toggleButton = showSanityDebugToggle ? (
     <ToggleButton isActive={isActive} onClick={() => setIsActive((x) => !x)}>
       <Toggle values={[...datasets]} onToggle={setDataset} value={dataset} />
       <Toggle
