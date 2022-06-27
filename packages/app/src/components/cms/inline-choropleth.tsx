@@ -59,7 +59,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
 
   const dataConfig: OptionalDataConfig<ChoroplethDataItem> = {
     metricName: configuration.metricName,
-    metricProperty: configuration.metricProperty as any,
+    metricProperty: configuration.metricProperty as keyof ChoroplethDataItem,
     areaStroke: getColor(configuration.areaStroke),
     areaStrokeWidth: configuration.areaStrokeWidth,
     highlightStroke: getColor(configuration.highlightStroke),

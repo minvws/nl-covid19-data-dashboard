@@ -91,7 +91,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       return;
     }
 
-    function handleBubbledFocusIn(event: FocusEvent): any {
+    function handleBubbledFocusIn(event: FocusEvent): void {
       const link = event.target as HTMLAnchorElement;
       if (!isDefined(link)) {
         return;
