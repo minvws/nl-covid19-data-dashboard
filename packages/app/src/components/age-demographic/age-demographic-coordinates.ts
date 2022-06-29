@@ -117,10 +117,14 @@ function calculateAgeDemographicCoordinates<
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const getLeftValue = (value: T) =>
-    value[leftMetricProperty] as unknown as number;
-  const getRightValue = (value: T) =>
-    value[rightMetricProperty] as unknown as number;
+  const getLeftValue = (value: T) => {
+    const leftValue = value[leftMetricProperty];
+    return typeof leftValue === 'number' ? leftValue : 0;
+  };
+  const getRightValue = (value: T) => {
+    const rightValue = value[rightMetricProperty];
+    return typeof rightValue === 'number' ? rightValue : 0;
+  };
   const ageGroupRange = (value: T) => value.age_group_range;
 
   // Scales to map between values and coordinates

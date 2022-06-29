@@ -30,6 +30,13 @@ export function AgeDemographicTooltipContent<
   text,
   formatValue,
 }: AgeDemographicTooltipContentProps<T>) {
+  const valueRight = value[rightMetricProperty];
+  const rightMetricPropertyValue =
+    typeof valueRight === 'number' ? valueRight : 0;
+
+  const valueLeft = value[leftMetricProperty];
+  const leftMetricPropertyValue = typeof valueLeft === 'number' ? valueLeft : 0;
+
   return (
     <>
       <Box px={3} py={2}>
@@ -41,17 +48,13 @@ export function AgeDemographicTooltipContent<
       </Box>
       <Legend>
         <LegendItem color={rightColor}>
-          <BoldText>
-            {formatValue(value[rightMetricProperty] as unknown as number)}
-          </BoldText>{' '}
+          <BoldText>{formatValue(rightMetricPropertyValue)}</BoldText>{' '}
           {replaceVariablesInText(text.right_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
         <LegendItem color={leftColor}>
-          <BoldText>
-            {formatValue(value[leftMetricProperty] as unknown as number)}
-          </BoldText>{' '}
+          <BoldText>{formatValue(leftMetricPropertyValue)}</BoldText>{' '}
           {replaceVariablesInText(text.left_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}

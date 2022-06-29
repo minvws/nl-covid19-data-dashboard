@@ -71,11 +71,13 @@ export function PieChart<T>({
     formatDateSpan,
   };
 
-  const totalValue = dataConfig.reduce(
-    (previousValue, currentValue) =>
-      previousValue + (data[currentValue.metricProperty] as unknown as number),
-    0
-  );
+  const totalValue = dataConfig.reduce((previousValue, currentValue) => {
+    const metricPropertyValue = data[currentValue.metricProperty];
+    return (
+      previousValue +
+      (typeof metricPropertyValue === 'number' ? metricPropertyValue : 0)
+    );
+  }, 0);
 
   const mappedDataWithValues = useMemo(
     () =>
@@ -84,7 +86,7 @@ export function PieChart<T>({
 
         return {
           __value: Math.max(
-            currentProperty as unknown as number,
+            typeof currentProperty === 'number' ? currentProperty : 0,
             totalValue * (minimumPercentage / 100) * 2
           ),
           ...config,

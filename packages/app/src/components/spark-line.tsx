@@ -31,14 +31,20 @@ export function SparkLine<T extends TimestampedValue>(
   props: SparkLineProps<T>
 ) {
   const { data, averageProperty } = props;
+
+  const getNumberValue = (data: T, key: keyof T): number => {
+    const value = data[key];
+    return typeof value === 'number' ? value : 0;
+  };
+
   const numberOfPoints = data.length;
   const min = Math.min(
     0,
-    ...data.map((d) => (d[averageProperty] as unknown as number) ?? 0)
+    ...data.map((d) => getNumberValue(d, averageProperty))
   );
   const max = Math.max(
     0.1,
-    ...data.map((d) => (d[averageProperty] as unknown as number) ?? 0)
+    ...data.map((d) => getNumberValue(d, averageProperty))
   );
   const xScale = scaleLinear({
     domain: [getDate(first(data)), getDate(last(data))],
@@ -55,7 +61,7 @@ export function SparkLine<T extends TimestampedValue>(
   }
 
   function getY(dataPoint: T) {
-    return yScale(dataPoint[averageProperty] as unknown as NumberValue);
+    return yScale(getNumberValue(dataPoint, averageProperty));
   }
 
   const nonNullValues = data.filter((x) => isPresent(x[averageProperty]));
