@@ -76,6 +76,7 @@ import { get } from 'lodash';
     case "named_difference":
     case "difference":
     case "code":
+    case "static_values":
       // Has no date_of_insertion_unix or is usable for this purpose.
       break;
     default:
