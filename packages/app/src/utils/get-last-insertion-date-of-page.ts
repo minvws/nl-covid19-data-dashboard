@@ -3,7 +3,7 @@ import { get } from 'lodash';
  * This method gets the most recent insertion date from the metrics used in a page
  *
  */
- const getLastInsertionDatePerMetric = (data: any, metricProperty: String): number => {
+ const getLastInsertionDatePerMetric = (data: any, metricProperty: string): number => {
    switch (metricProperty) {
     case "booster_shot_administered":
     case "behavior":  
