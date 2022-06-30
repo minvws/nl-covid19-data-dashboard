@@ -75,10 +75,11 @@ import { get } from 'lodash';
       }, 0);
     case "named_difference":
     case "difference":
-      // Has no date_of_insertion_unix
+    case "code":
+      // Has no date_of_insertion_unix or is usable for this purpose.
       break;
     default:
-      console.log(`error in metric ${metricProperty}`)
+      console.log(`Found unmatched metric: ${metricProperty}`)
    }
    return 0;
 }
