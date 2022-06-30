@@ -48,7 +48,6 @@ import { get } from 'lodash';
     case "vaccine_vaccinated_or_support":
     case 'one_variant':
     case 'one_sewer_installation':
-    case 'one_variant':
       // Has Last Value
       return data.last_value.date_of_insertion_unix;
     case "behavior_annotations":
@@ -80,7 +79,7 @@ import { get } from 'lodash';
       // Has no date_of_insertion_unix or is usable for this purpose.
       break;
     default:
-      console.log(`Found unmatched metric: ${metricProperty}`)
+      console.error(`Found unmatched metric: ${metricProperty}`)
    }
    return 0;
 }
