@@ -2,7 +2,6 @@ import type { TimestampedValue } from '@corona-dashboard/common';
 import { colors } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { AreaClosed, LinePath } from '@visx/shape';
-import { NumberValue } from 'd3-scale';
 import { first, last } from 'lodash';
 import { isPresent } from 'ts-is-present';
 
