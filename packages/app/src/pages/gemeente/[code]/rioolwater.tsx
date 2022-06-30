@@ -36,12 +36,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'sewer_per_installation',
-  'static_values.population_count',
-  'sewer',
-  'code',
-];
+const pageMetrics = ['sewer_per_installation', 'sewer'];
 
 export { getStaticPaths } from '~/static-paths/gm';
 

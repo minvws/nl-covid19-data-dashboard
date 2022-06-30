@@ -54,7 +54,7 @@ import {
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = ['hospital_nice', 'code'];
+const pageMetrics = ['hospital_nice'];
 
 export { getStaticPaths } from '~/static-paths/gm';
 
