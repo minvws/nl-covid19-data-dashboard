@@ -64,8 +64,6 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 
 const pageMetrics = [
   'vaccine_administered_doctors',
-  'vaccine_administered_ggd_ghor',
-  'vaccine_administered_ggd',
   'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_planned',
   'vaccine_administered_total',
