@@ -26,19 +26,19 @@ function hasNestedLastValue(metric: any): boolean {
 }
 
 // functions for getting values
-function getLastValue(metric: any): number {
+function getDateFromLastValue(metric: any): number {
   return metric?.last_value?.date_of_insertion_unix;
 }
 
-function getValues(metric: any): number {
+function getDateFromValues(metric: any): number {
   return metric?.values[metric.values.length - 1]?.date_of_insertion_unix
 }
 
-function getInsertionDate(metric: any): number {
+function getDateFromInsertionDate(metric: any): number {
   return metric?.date_of_insertion_unix;
 }
 
-function getNestedLastValue(metric: any): number {
+function getDateFromNestedLastValue(metric: any): number {
   return metric?.values.reduce((lastDate :number, innerValue: any) => {
     const metricDate = getMetricDate(innerValue);
     return Math.max(metricDate, lastDate);
@@ -47,18 +47,17 @@ function getNestedLastValue(metric: any): number {
 
 function getMetricDate(metricOrUnixDate: any): number {
   if (hasLastValue(metricOrUnixDate)) {
-    return getLastValue(metricOrUnixDate);
+    return getDateFromLastValue(metricOrUnixDate);
   }
   if (hasValues(metricOrUnixDate)) {
-    return getValues(metricOrUnixDate);
+    return getDateFromValues(metricOrUnixDate);
   }
   if (hasInsertionDate(metricOrUnixDate)) {
-    return getInsertionDate(metricOrUnixDate);
+    return getDateFromInsertionDate(metricOrUnixDate);
   }
   if (hasNestedLastValue(metricOrUnixDate)) {
-    return getNestedLastValue(metricOrUnixDate);
+    return getDateFromNestedLastValue(metricOrUnixDate);
   }
-  console.error(`Found unmatched metric: ${metricOrUnixDate}`)
   return 0;
 }
 
@@ -67,8 +66,8 @@ export function getLastInsertionDateOfPage(
   pageMetrics: string[]
 ) {
   return pageMetrics.reduce((lastDate, metricProperty) => {
-    const metricOrUnixDate: any = get(data, metricProperty);
-    const metricDate = getMetricDate(metricOrUnixDate);
+    const metric: any = get(data, metricProperty);
+    const metricDate = getMetricDate(metric);
     
     return Math.max(metricDate, lastDate);
   }, 0);

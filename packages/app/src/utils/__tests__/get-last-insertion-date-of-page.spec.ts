@@ -20,10 +20,10 @@ GetLastInsertionDateOfPage('returns zero when metrics are empty', () => {
 GetLastInsertionDateOfPage('returns the max date_of_insertion_unix', () => {
   const result = getLastInsertionDateOfPage(
     {
-      "booster_shot_administered": { last_value: { date_of_insertion_unix: 123 } },
-      "behavior": { last_value: { date_of_insertion_unix: 12345 } },
+      key1: { last_value: { date_of_insertion_unix: 123 } },
+      key2: { last_value: { date_of_insertion_unix: 12345 } },
     },
-    ['booster_shot_administered', 'behavior']
+    ['key1', 'key2']
   );
   assert.is(result, 12345);
 });
@@ -31,9 +31,9 @@ GetLastInsertionDateOfPage('returns the max date_of_insertion_unix', () => {
 GetLastInsertionDateOfPage('returns the max date_of_insertion_unix without last_value', () => {
   const result = getLastInsertionDateOfPage(
     {
-      "booster_coverage": { values: [{ date_of_insertion_unix: 123 }, { date_of_insertion_unix: 12345 }] },
+      key1: { values: [{ date_of_insertion_unix: 123 }, { date_of_insertion_unix: 12345 }] },
     },
-    ['booster_coverage']
+    ['key1']
   );
   assert.is(result, 12345);
 });
@@ -43,10 +43,10 @@ GetLastInsertionDateOfPage(
   () => {
     const result = getLastInsertionDateOfPage(
       {
-        "booster_shot_administered": { last_value: { date_of_insertion_unix: 1 } },
-        "variants": { values: [{last_value: { date_of_insertion_unix: 123 }}]},
+        key1: { last_value: { date_of_insertion_unix: 1 } },
+        key2: { values: [{last_value: { date_of_insertion_unix: 123 }}]},
       },
-      ['booster_shot_administered', 'variants']
+      ['key1', 'key2']
     );
     assert.is(result, 123);
   }
@@ -57,10 +57,10 @@ GetLastInsertionDateOfPage(
   () => {
     const result = getLastInsertionDateOfPage(
       {
-        "behavior_per_age_group": {
+        key1: {
           "date_of_insertion_unix": 123}
       },
-      ['behavior_per_age_group']
+      ['key1']
     );
     assert.is(result, 123);
   }
