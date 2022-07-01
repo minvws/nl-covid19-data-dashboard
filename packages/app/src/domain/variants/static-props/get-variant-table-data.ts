@@ -23,6 +23,8 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
+const VARIANT_TABLE_MINIMAL_PERCENTAGE = 0.1;
+
 export function getVariantTableData(
   variants: NlVariants | InVariants | undefined,
   namedDifference: NlNamedDifference | InNamedDifference
@@ -71,6 +73,7 @@ export function getVariantTableData(
     ? inVariants.some((x) => x.is_reliable)
     : true;
 
+  const variantColors = [...colors.data.variants.colorList];
   const variantTable = variants.values
     /**
      * Since the schemas for international still has to change to
@@ -83,13 +86,24 @@ export function getVariantTableData(
           : true,
       ...variant,
     }))
-    .filter((variant) => !variant.has_historical_significance)
+    .filter((variant, index) => {
+      if (variant.has_historical_significance) {
+        variantColors.splice(index, 1);
+      }
+
+      return !variant.has_historical_significance;
+    })
     .map<VariantRow>((variant, index) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
-      color: colors.data.variants.colorList[index],
+      color: variantColors[index],
     }))
+    .filter(
+      (row) =>
+        row.variant === 'other_table' ||
+        (row.percentage && row.percentage >= VARIANT_TABLE_MINIMAL_PERCENTAGE)
+    )
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last
       if (rowA.variant === 'other_table') {
