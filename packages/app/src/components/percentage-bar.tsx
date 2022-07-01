@@ -1,6 +1,7 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { colors } from '@corona-dashboard/common';
 
 interface PercentageProps {
   percentage: number;
@@ -14,7 +15,7 @@ export function PercentageBar({
   percentage,
   height,
   color,
-  backgroundColor = '8fcae7',
+  backgroundColor = colors.data.underReported,
   backgroundStyle = 'normal',
 }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
