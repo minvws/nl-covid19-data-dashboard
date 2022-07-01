@@ -172,6 +172,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const DateSpanTick = useCallback(
     (dateUnix: number, values: DateSpanValue[], index: number) => {
+      if (values.length === 0) {
+        return '';
+      }
+
       const previousYear = createDateFromUnixTimestamp(
         tickValues[index - 1]
       ).getFullYear();
