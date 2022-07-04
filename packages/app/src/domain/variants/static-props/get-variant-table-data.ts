@@ -17,13 +17,38 @@ import { isDefined, isPresent } from 'ts-is-present';
 export type VariantRow = {
   variant: string;
   percentage: number | null;
-  difference?: OptionalNamedDifferenceDecimal;
+  difference?: OptionalNamedDifferenceDecimal | null;
   color: string;
 };
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
-const VARIANT_TABLE_MINIMAL_PERCENTAGE = 0.1;
+export const VARIANT_TABLE_MAP = [
+  'alpha',
+  'beta',
+  'gamma',
+  'delta',
+  'eta',
+  'epsilon',
+  'theta',
+  'kappa',
+  'lambda',
+  'iota',
+  'zeta',
+  'mu',
+  'nu',
+  'xi',
+  'omicron',
+  'pi',
+  'rho',
+  'sigma',
+  'tau',
+  'upsilon',
+  'phi',
+  'chi',
+  'psi',
+  'omega',
+];
 
 export function getVariantTableData(
   variants: NlVariants | InVariants | undefined,
@@ -42,6 +67,12 @@ export function getVariantTableData(
       const difference = namedDifference.variants__percentage.find(
         (x) => x.name === name
       );
+
+      if (!difference) {
+        return null;
+      }
+
+      // TODO: this can possibly be deleted as they are filtered out either way?
       assert(
         difference,
         `[${getVariantTableData.name}:${findDifference.name}] No variants__percentage found for variant ${name}`
@@ -73,7 +104,7 @@ export function getVariantTableData(
     ? inVariants.some((x) => x.is_reliable)
     : true;
 
-  const variantColors = [...colors.data.variants.colorList];
+  const variantColors = colors.data.variants;
   const variantTable = variants.values
     /**
      * Since the schemas for international still has to change to
@@ -86,26 +117,41 @@ export function getVariantTableData(
           : true,
       ...variant,
     }))
-    .filter((variant, index) => {
-      if (variant.has_historical_significance) {
-        variantColors.splice(index, 1);
+    .filter((variant) => variant.name !== 'other_graph')
+    .sort((variantA, variantB) => {
+      if (variantA.name === 'other_table') {
+        return 1;
+      }
+      if (variantB.name === 'other_table') {
+        return -1;
       }
 
-      return !variant.has_historical_significance;
+      return VARIANT_TABLE_MAP.findIndex((variant) =>
+        variant.includes(variantA.name)
+      ) >
+        VARIANT_TABLE_MAP.findIndex((variant) =>
+          variant.includes(variantB.name)
+        )
+        ? 1
+        : -1;
     })
     .map<VariantRow>((variant, index) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
+      // percentage: 50,
       difference: findDifference(variant.name),
-      color: variantColors[index],
+      color:
+        variant.name === 'other_table'
+          ? variantColors.other_table
+          : variantColors.colorList[index],
     }))
     .filter(
       (row) =>
-        row.variant === 'other_table' ||
-        (row.percentage && row.percentage >= VARIANT_TABLE_MINIMAL_PERCENTAGE)
+        // Make sure the 'other' variants persist in the table
+        row.variant === 'other_table' || row.percentage
     )
     .sort((rowA, rowB) => {
-      // Make sure the 'other' variant is always sorted last
+      // Make sure the 'other' variants are always sorted last
       if (rowA.variant === 'other_table') {
         return 1;
       }
