@@ -117,7 +117,10 @@ export function getVariantTableData(
           : true,
       ...variant,
     }))
-    .filter((variant) => variant.name !== 'other_graph')
+    .filter(
+      (variant) =>
+        variant.name !== 'other_graph' || !variant.has_historical_significance
+    )
     .sort((variantA, variantB) => {
       if (variantA.name === 'other_table') {
         return 1;

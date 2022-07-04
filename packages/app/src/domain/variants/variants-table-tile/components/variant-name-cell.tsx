@@ -9,11 +9,11 @@ type VariantNameCellProps = {
   text: TableText;
   mobile?: boolean;
   narrow?: boolean;
-  hasHoverState?: boolean;
+  isTooltipEnabled?: boolean;
 };
 
 export function VariantNameCell(props: VariantNameCellProps) {
-  const { variant, text, mobile, narrow, hasHoverState } = props;
+  const { variant, text, mobile, narrow, isTooltipEnabled } = props;
 
   const [variantName, variantDescription] = useVariantNameAndDescription(
     variant as keyof typeof text.varianten,
@@ -23,13 +23,13 @@ export function VariantNameCell(props: VariantNameCellProps) {
 
   return (
     <Cell mobile={mobile} narrow={narrow}>
-      {!mobile && hasHoverState && (
+      {!mobile && isTooltipEnabled && (
         <InlineTooltip content={variantDescription}>
           <BoldText>{variantName}</BoldText>
         </InlineTooltip>
       )}
 
-      {(mobile || !hasHoverState) && <BoldText>{variantName}</BoldText>}
+      {(mobile || !isTooltipEnabled) && <BoldText>{variantName}</BoldText>}
     </Cell>
   );
 }
