@@ -227,20 +227,20 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'infected_moving_average',
-                    label: textShared.tooltip_labels.infected_moving_average,
+                    label: textShared.labels.infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'infected',
-                    label: textShared.tooltip_labels.infected,
+                    label: textShared.labels.infected,
                     color: colors.data.primary,
                   },
                 ]}
                 dataOptions={{
                   forcedMaximumValue: 150000,
                   outOfBoundsConfig: {
-                    label: textShared.tooltip_labels.infected_out_of_bounds,
+                    label: textShared.labels.infected_out_of_bounds,
                     tooltipLabel: textShared.tooltip_labels.annotations,
                     checkIsOutofBounds: (
                       x: NlTestedOverallValue,
@@ -297,7 +297,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                           color: colors.data.primary,
                           label: textNl.ggd.linechart_percentage_legend_label,
                           shortLabel:
-                            textShared.tooltip_labels
+                            textShared.labels
                               .ggd_infected_percentage_moving_average,
                         },
                       ]}
@@ -350,8 +350,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                             textNl.ggd
                               .linechart_totaltests_legend_label_moving_average,
                           shortLabel:
-                            textShared.tooltip_labels
-                              .ggd_tested_total_moving_average,
+                            textShared.labels.ggd_tested_total_moving_average,
                         },
                         {
                           type: 'line',
@@ -360,8 +359,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                           label:
                             textNl.ggd
                               .linechart_positivetests_legend_label_moving_average,
-                          shortLabel:
-                            textShared.tooltip_labels.infected_moving_average,
+                          shortLabel: textShared.labels.infected_moving_average,
                         },
                       ]}
                     />

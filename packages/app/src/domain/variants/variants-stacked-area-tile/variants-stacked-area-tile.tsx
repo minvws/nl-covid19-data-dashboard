@@ -222,7 +222,7 @@ function useSeriesConfig(
     const otherConfig = {
       type: 'gapped-stacked-area',
       metricProperty: 'other_graph_percentage',
-      label: text.tooltip_labels.other_percentage,
+      label: text.labels.other_percentage,
       fillOpacity: 1,
       shape: 'square',
       color: colors.lightGray,

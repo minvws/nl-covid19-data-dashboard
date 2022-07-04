@@ -121,7 +121,7 @@ export function AdmissionsPerAgeGroup({
               start: underReportedDateStart + DAY_IN_SECONDS / 2,
               end: Infinity,
               label: text.line_chart_legend_inaccurate_label,
-              shortLabel: text.tooltip_labels.inaccurate,
+              shortLabel: text.labels.inaccurate,
             },
           ],
           timelineEvents,

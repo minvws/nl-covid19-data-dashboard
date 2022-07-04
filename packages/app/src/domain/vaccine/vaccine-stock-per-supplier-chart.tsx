@@ -86,7 +86,7 @@ export function VaccineStockPerSupplierChart({
           vaccineName: selectedConfig.label,
         }
       ),
-      shortLabel: text.stock_per_supplier_chart.tooltip_labels.available,
+      shortLabel: text.stock_per_supplier_chart.labels.available,
       color: selectedConfig.color,
       curve: 'step',
     },
@@ -99,7 +99,7 @@ export function VaccineStockPerSupplierChart({
           vaccineName: selectedConfig.label,
         }
       ),
-      shortLabel: text.stock_per_supplier_chart.tooltip_labels.total,
+      shortLabel: text.stock_per_supplier_chart.labels.total,
       color: colors.lightGray,
       curve: 'step',
     },

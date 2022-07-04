@@ -118,7 +118,7 @@ export function InfectedPerAgeGroup({
               end: Infinity,
               label:
                 text.infected_per_age_group.line_chart_legend_inaccurate_label,
-              shortLabel: text.infected_per_age_group.tooltip_labels.inaccurate,
+              shortLabel: text.infected_per_age_group.labels.inaccurate,
             },
           ],
           timelineEvents,

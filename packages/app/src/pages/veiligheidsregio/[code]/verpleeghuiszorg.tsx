@@ -197,7 +197,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       textVr.positief_geteste_personen
                         .line_chart_legend_trend_moving_average_label,
                     shortLabel:
-                      textVr.positief_geteste_personen.tooltip_labels
+                      textVr.positief_geteste_personen.labels
                         .newly_infected_people_moving_average,
                   },
                   {
@@ -208,7 +208,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       textVr.positief_geteste_personen
                         .line_chart_legend_trend_label,
                     shortLabel:
-                      textVr.positief_geteste_personen.tooltip_labels
+                      textVr.positief_geteste_personen.labels
                         .newly_infected_people,
                   },
                 ]}
@@ -221,8 +221,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                         textVr.positief_geteste_personen
                           .line_chart_legend_inaccurate_label,
                       shortLabel:
-                        textVr.positief_geteste_personen.tooltip_labels
-                          .inaccurate,
+                        textVr.positief_geteste_personen.labels.inaccurate,
                       cutValuesForMetricProperties: [
                         'newly_infected_people_moving_average',
                       ],
@@ -371,15 +370,14 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label: textVr.line_chart_legend_trend_moving_average_label,
-                    shortLabel:
-                      textVr.tooltip_labels.deceased_daily_moving_average,
+                    shortLabel: textVr.labels.deceased_daily_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'deceased_daily',
                     label: textVr.line_chart_legend_trend_label,
-                    shortLabel: textVr.tooltip_labels.deceased_daily,
+                    shortLabel: textVr.labels.deceased_daily,
                     color: colors.data.primary,
                   },
                 ]}
@@ -389,7 +387,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       start: underReportedDateStart,
                       end: Infinity,
                       label: textVr.line_chart_legend_inaccurate_label,
-                      shortLabel: textVr.tooltip_labels.inaccurate,
+                      shortLabel: textVr.labels.inaccurate,
                       cutValuesForMetricProperties: [
                         'deceased_daily_moving_average',
                       ],
