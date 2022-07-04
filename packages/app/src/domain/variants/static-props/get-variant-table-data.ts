@@ -138,7 +138,6 @@ export function getVariantTableData(
     .map<VariantRow>((variant, index) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
-      // percentage: 50,
       difference: findDifference(variant.name),
       color:
         variant.name === 'other_table'
