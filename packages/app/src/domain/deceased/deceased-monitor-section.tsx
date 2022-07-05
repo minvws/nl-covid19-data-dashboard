@@ -8,7 +8,6 @@ import { SiteText } from '~/locale';
 export function DeceasedMonitorSection({
   data,
   text,
-  showDataMessage,
   showCauseMessage,
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
