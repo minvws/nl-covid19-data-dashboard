@@ -149,11 +149,11 @@ export function getVariantTableData(
     }))
     .filter(
       (row) =>
-        // Make sure the 'other' variants persist in the table
+        // Make sure the 'other' variant persists in the table.
         row.variant === 'other_table' || row.percentage
     )
     .sort((rowA, rowB) => {
-      // Make sure the 'other' variants are always sorted last
+      // Make sure the 'other' variant is always sorted last.
       if (rowA.variant === 'other_table') {
         return 1;
       }
