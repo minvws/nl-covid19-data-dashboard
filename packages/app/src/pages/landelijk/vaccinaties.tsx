@@ -325,13 +325,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.vaccination_coverage.title}
             description={textNl.vaccination_coverage.toelichting}
             sortingOrder={[
-              '81+',
-              '71-80',
-              '61-70',
-              '51-60',
-              '41-50',
-              '31-40',
-              '18-30',
+              '80+',
+              '70-79',
+              '60-69',
+              '50-59',
+              '40-49',
+              '30-39',
+              '18-29',
               '12-17',
               '5-11',
             ]}
@@ -401,13 +401,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 title={textNl.vaccination_coverage.title}
                 description={textNl.vaccination_coverage.toelichting}
                 sortingOrder={[
-                  '81+',
-                  '71-80',
-                  '61-70',
-                  '51-60',
-                  '41-50',
-                  '31-40',
-                  '18-30',
+                  '80+',
+                  '70-79',
+                  '60-69',
+                  '50-59',
+                  '40-49',
+                  '30-39',
+                  '18-29',
                   '12-17',
                   '5-11',
                 ]}
