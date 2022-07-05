@@ -12,7 +12,6 @@ export function DeceasedMonitorSection({
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
   text: SiteText['pages']['deceasedPage']['shared']['section_sterftemonitor'];
-  showDataMessage?: boolean;
   showCauseMessage?: boolean;
 }) {
   return (
