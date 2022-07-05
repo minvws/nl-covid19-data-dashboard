@@ -8,27 +8,14 @@ import { SiteText } from '~/locale';
 export function DeceasedMonitorSection({
   data,
   text,
-  showDataMessage,
   showCauseMessage,
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
   text: SiteText['pages']['deceasedPage']['shared']['section_sterftemonitor'];
-  showDataMessage?: boolean;
   showCauseMessage?: boolean;
 }) {
   return (
     <>
-      {showDataMessage && (
-        <AnchorTile
-          title={text.cbs_message.title}
-          label={text.cbs_message.link.text}
-          href={text.cbs_message.link.href}
-          external
-        >
-          {text.cbs_message.message}
-        </AnchorTile>
-      )}
-
       <ChartTile
         metadata={{ source: text.bronnen.cbs }}
         title={text.deceased_monitor_chart_title}
@@ -68,7 +55,6 @@ export function DeceasedMonitorSection({
           ]}
         />
       </ChartTile>
-
       {showCauseMessage && (
         <AnchorTile
           title={text.cause_message.title}
