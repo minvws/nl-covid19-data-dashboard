@@ -72,11 +72,6 @@ export function getVariantTableData(
         return null;
       }
 
-      // TODO: this can possibly be deleted as they are filtered out either way?
-      assert(
-        difference,
-        `[${getVariantTableData.name}:${findDifference.name}] No variants__percentage found for variant ${name}`
-      );
       return difference;
     }
   }
