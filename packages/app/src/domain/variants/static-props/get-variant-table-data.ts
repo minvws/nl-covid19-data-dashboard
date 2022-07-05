@@ -1,5 +1,4 @@
 import {
-  assert,
   colors,
   InNamedDifference,
   InVariants,
