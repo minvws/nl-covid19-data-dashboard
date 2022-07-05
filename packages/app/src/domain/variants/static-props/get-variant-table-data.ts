@@ -1,5 +1,4 @@
 import {
-  assert,
   colors,
   InNamedDifference,
   InVariants,
@@ -23,33 +22,6 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
-export const VARIANT_TABLE_MAP = [
-  'alpha',
-  'beta',
-  'gamma',
-  'delta',
-  'eta',
-  'epsilon',
-  'theta',
-  'kappa',
-  'lambda',
-  'iota',
-  'zeta',
-  'mu',
-  'nu',
-  'xi',
-  'omicron',
-  'pi',
-  'rho',
-  'sigma',
-  'tau',
-  'upsilon',
-  'phi',
-  'chi',
-  'psi',
-  'omega',
-];
-
 export function getVariantTableData(
   variants: NlVariants | InVariants | undefined,
   namedDifference: NlNamedDifference | InNamedDifference
@@ -62,7 +34,7 @@ export function getVariantTableData(
     } as const;
   }
 
-  function findDifference(name: string) {
+  const findDifference = (name: string) => {
     if (isPresent(namedDifference.variants__percentage)) {
       const difference = namedDifference.variants__percentage.find(
         (x) => x.name === name
@@ -72,17 +44,23 @@ export function getVariantTableData(
         return null;
       }
 
-      // TODO: this can possibly be deleted as they are filtered out either way?
-      assert(
-        difference,
-        `[${getVariantTableData.name}:${findDifference.name}] No variants__percentage found for variant ${name}`
-      );
       return difference;
     }
-  }
+  };
+
+  const findPercentage = (name: string): number | null => {
+    return (
+      variants?.values
+        ?.map((variant) => ({
+          name: variant.name,
+          percentage: variant.last_value.percentage,
+        }))
+        .find((variant) => variant.name === name)?.percentage ?? null
+    );
+  };
 
   const firstLastValue = first<NlVariantsVariant | InVariantsVariant>(
-    variants.values
+    variants?.values
   );
 
   const dates = {
@@ -93,75 +71,82 @@ export function getVariantTableData(
   };
   const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
 
-  const inVariants = variants.values
-    .map((x) => x.last_value)
+  const inVariants = variants?.values
+    ?.map((x) => x.last_value)
     .filter(isInVariant);
+
   /**
    * Only international data has the is_reliable key,
    * so for national data we assume it is reliable by default.
    */
-  const isReliable = inVariants.length
+  const isReliable = inVariants?.length
     ? inVariants.some((x) => x.is_reliable)
     : true;
 
-  const variantColors = colors.data.variants;
-  const variantTable = variants.values
-    /**
-     * Since the schemas for international still has to change to
-     * the new way of calculating this prevents the typescript error for now.
-     */
-    .map((variant) => ({
-      has_historical_significance:
-        'has_historical_significance' in variant.last_value
-          ? variant.last_value.has_historical_significance
-          : true,
-      ...variant,
-    }))
-    .filter(
-      (variant) =>
-        variant.name !== 'other_graph' || !variant.has_historical_significance
-    )
-    .sort((variantA, variantB) => {
-      if (variantA.name === 'other_table') {
-        return 1;
-      }
-      if (variantB.name === 'other_table') {
-        return -1;
-      }
+  /**
+   * Filter and sort variants based on their first occurence,
+   * to get a chronological overview.
+   */
+  const variantsByFirstOccurence: NlVariantsVariant[] | InVariantsVariant[] =
+    variants?.values
+      ?.filter(
+        (variant: NlVariantsVariant | InVariantsVariant) =>
+          !variant.name.includes('other_')
+      )
+      .reduce(
+        (
+          accumulator: NlVariantsVariant[] | InVariantsVariant[],
+          currentVariant: NlVariantsVariant | InVariantsVariant
+        ) => {
+          const firstOccurence = currentVariant?.values?.find(
+            (variant: NlVariantsVariantValue | InVariantsVariantValue) =>
+              variant.percentage
+          );
 
-      return VARIANT_TABLE_MAP.findIndex((variant) =>
-        variant.includes(variantA.name)
-      ) >
-        VARIANT_TABLE_MAP.findIndex((variant) =>
-          variant.includes(variantB.name)
-        )
-        ? 1
-        : -1;
-    })
-    .map<VariantRow>((variant, index) => ({
+          if (firstOccurence) {
+            firstOccurence.name = currentVariant.name;
+            accumulator.push(firstOccurence);
+          }
+
+          return accumulator;
+        },
+        []
+      )
+      .sort(
+        (
+          variantA: NlVariantsVariantValue | InVariantsVariantValue,
+          variantB: NlVariantsVariantValue | InVariantsVariantValue
+        ) => variantA?.date_start_unix - variantB?.date_start_unix
+      );
+
+  const variantColors = colors.data.variants;
+  const variantTable = variantsByFirstOccurence
+    .map<VariantRow>((variant, index: number) => ({
       variant: variant.name,
-      percentage: variant.last_value.percentage,
+      percentage: findPercentage(variant.name),
       difference: findDifference(variant.name),
-      color:
-        variant.name === 'other_table'
-          ? variantColors.other_table
-          : variantColors.colorList[index],
+      color: variantColors.colorList[index],
     }))
-    .filter(
-      (row) =>
-        // Make sure the 'other' variants persist in the table
-        row.variant === 'other_table' || row.percentage
-    )
-    .sort((rowA, rowB) => {
-      // Make sure the 'other' variants are always sorted last
-      if (rowA.variant === 'other_table') {
-        return 1;
-      }
-      if (rowB.variant === 'other_table') {
-        return -1;
-      }
-      return (rowB.percentage ?? -1) - (rowA.percentage ?? -1);
+    .filter((row: VariantRow) => 'percentage' in row && row.percentage);
+
+  // Find the 'other_table' variant.
+  const otherVariant: NlVariantsVariant | InVariantsVariant | undefined =
+    variants?.values
+      ?.map((variant) => variant)
+      .find(
+        (variant: NlVariantsVariant | InVariantsVariant) =>
+          variant.name === 'other_table'
+      );
+
+  // Push the 'other' variant so that it is always sorted last.
+  if (otherVariant) {
+    variantTable.push({
+      variant: otherVariant.name,
+      percentage: otherVariant.last_value.percentage,
+      difference: findDifference(otherVariant.name),
+      color: variantColors.other_table,
     });
+  }
 
   return { variantTable, dates, sampleSize, isReliable };
 }
