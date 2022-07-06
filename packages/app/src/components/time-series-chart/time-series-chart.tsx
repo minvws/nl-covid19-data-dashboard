@@ -457,7 +457,6 @@ export function TimeSeriesChart<
               timeDomain={timeDomain}
               xTickNumber={xTickNumber}
               values={values}
-              useDatesAsRange={dataOptions?.useDatesAsRange}
               formatYTickValue={formatYTickValue}
               xScale={xScale}
               yScale={yScale}

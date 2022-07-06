@@ -36,12 +36,15 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
+  const isStagingEnv = typeof window !== 'undefined' && window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
+  const showSanityDebugToggle = enableHotReload || isStagingEnv;
+
   const [dataset, setDataset] = useState<Dataset>(
     (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
       'development'
   );
 
-  const toggleButton = enableHotReload ? (
+  const toggleButton = showSanityDebugToggle ? (
     <ToggleButton isActive={isActive} onClick={() => setIsActive((x) => !x)}>
       <Toggle values={[...datasets]} onToggle={setDataset} value={dataset} />
       <Toggle

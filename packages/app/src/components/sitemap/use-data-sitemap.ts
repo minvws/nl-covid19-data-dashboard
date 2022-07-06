@@ -106,6 +106,15 @@ export function useDataSitemap(
           },
         ],
       },
+      {
+        header: commonTexts.sidebar.categories.archived_metrics.title,
+        links: [
+          {
+            text: commonTexts.sidebar.metrics.source_investigation.title,
+            href: reverseRouter.vr.brononderzoek(code),
+          },
+        ],
+      },
     ];
   }
 
@@ -151,10 +160,6 @@ export function useDataSitemap(
           text: commonTexts.sidebar.metrics.variants.title,
           href: reverseRouter.nl.varianten(),
         },
-        {
-          text: commonTexts.sidebar.metrics.source_investigation.title,
-          href: reverseRouter.nl.brononderzoek(),
-        },
       ],
     },
     {
@@ -193,15 +198,6 @@ export function useDataSitemap(
       ],
     },
     {
-      header: commonTexts.sidebar.categories.other.title,
-      links: [
-        {
-          text: commonTexts.sidebar.metrics.coronamelder_app.title,
-          href: reverseRouter.nl.coronamelder(),
-        },
-      ],
-    },
-    {
       header: commonTexts.sidebar.categories.archived_metrics.title,
       links: [
         {
@@ -212,6 +208,14 @@ export function useDataSitemap(
           text: commonTexts.sidebar.metrics.general_practitioner_suspicions
             .title,
           href: reverseRouter.nl.verdenkingenHuisartsen(),
+        },
+        {
+          text: commonTexts.sidebar.metrics.coronamelder_app.title,
+          href: reverseRouter.nl.coronamelder(),
+        },
+        {
+          text: commonTexts.sidebar.metrics.source_investigation.title,
+          href: reverseRouter.nl.brononderzoek(),
         },
       ],
     },
