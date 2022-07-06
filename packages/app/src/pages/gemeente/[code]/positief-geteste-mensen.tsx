@@ -54,8 +54,6 @@ export { getStaticPaths } from '~/static-paths/gm';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
-  'code',
-  'static_values.population_count',
   'tested_overall',
 ];
 
