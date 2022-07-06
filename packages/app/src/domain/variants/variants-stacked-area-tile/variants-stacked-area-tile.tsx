@@ -223,7 +223,7 @@ function useSeriesConfig(
           metricProperty: variantKey as keyof VariantChartValue,
           color,
           label: text.varianten[variantName]?.name || variantName,
-          shape: 'square',
+          shape: 'gapped-area',
           strokeWidth: 2,
           fillOpacity: 0.2,
           mixBlendMode: 'multiply',

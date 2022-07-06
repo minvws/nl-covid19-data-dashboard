@@ -9,7 +9,7 @@ export interface SelectOption<T = string> {
   metricProperty: T;
   label: string;
   color: string;
-  shape?: 'line' | 'circle' | 'square';
+  shape?: 'line' | 'circle' | 'square' | 'gapped-area';
   legendAriaLabel?: string;
 }
 
@@ -51,6 +51,9 @@ export function InteractiveLegend<T = string>({
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
                   {item.shape === 'square' && <Square color={item.color} />}
+                  {item.shape === 'gapped-area' && (
+                    <GappedArea color={item.color} />
+                  )}
                 </StyledLabel>
                 <StyledInput
                   type="checkbox"
@@ -230,6 +233,21 @@ const Square = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: 13,
     backgroundColor: color,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '11px',
+    height: '11px',
+    borderRadius: '2px',
+  })
+);
+
+const GappedArea = styled.div<{ color: string }>(({ color }) =>
+  css({
+    display: 'block',
+    position: 'absolute',
+    left: 13,
+    backgroundColor: `${color}30`,
+    borderTop: `2px solid ${color}`,
     top: '50%',
     transform: 'translateY(-50%)',
     width: '11px',
