@@ -260,7 +260,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           <DeceasedMonitorSection
             data={dataCbs}
             text={textShared.section_sterftemonitor}
-            showDataMessage
             showCauseMessage
           />
         </TileList>
