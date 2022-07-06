@@ -213,9 +213,9 @@ function useSeriesConfig(
       baseVariantsFiltered.map((variantKey, index) => {
         const color = colors.data.variants.colorList[index];
 
-        const variantName = variantKey.split(
-          '_'
-        )[0] as keyof typeof text.varianten;
+        const variantNameFragments = variantKey.split('_');
+        variantNameFragments.pop();
+        const variantName = variantNameFragments.join('_') as keyof Variants;
 
         return {
           type: 'gapped-area',
