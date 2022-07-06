@@ -142,11 +142,13 @@ export const colors = {
         '#00BB95',
         '#E37321',
         '#D360E5',
+        '#48FF50', // TODO: to be removed/changed
         '#CF9C00',
         '#005082',
         '#008372',
         '#A14E00',
         '#9515AA',
+        '#39cc40', // TODO: to be removed/changed
       ],
       other_table: '#808080',
       other_graph: '#808080',
