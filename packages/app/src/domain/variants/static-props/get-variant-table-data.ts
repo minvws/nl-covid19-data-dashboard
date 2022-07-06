@@ -98,6 +98,15 @@ export function getVariantTableData(
     ? inVariants.some((x) => x.is_reliable)
     : true;
 
+  const getVariantSortingRank = (variantName: string): number => {
+    const index = VARIANT_TABLE_MAP.findIndex((variant) =>
+      variantName.includes(variant)
+    );
+
+    if (index === -1) return 1000;
+    return index;
+  };
+
   const variantColors = colors.data.variants;
   const variantTable = variants.values
     /**
@@ -124,12 +133,8 @@ export function getVariantTableData(
       }
 
       const relativeSortingValue: number =
-        VARIANT_TABLE_MAP.findIndex((variant) =>
-          variantA.name.includes(variant)
-        ) -
-        VARIANT_TABLE_MAP.findIndex((variant) =>
-          variantB.name.includes(variant)
-        );
+        getVariantSortingRank(variantA.name) -
+        getVariantSortingRank(variantB.name);
 
       if (relativeSortingValue !== 0) {
         return relativeSortingValue;
