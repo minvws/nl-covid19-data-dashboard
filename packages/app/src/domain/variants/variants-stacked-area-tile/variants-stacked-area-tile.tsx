@@ -189,8 +189,9 @@ function useFilteredSeriesConfig(
   return useMemo(() => {
     return [otherConfig, ...seriesConfig].filter(
       (item) =>
-        compareList.includes(item.metricProperty) ||
-        compareList.length === alwaysEnabled.length
+        item.metricProperty !== 'other_graph_percentage' &&
+        (compareList.includes(item.metricProperty) ||
+          compareList.length === alwaysEnabled.length)
     );
   }, [seriesConfig, otherConfig, compareList]);
 }
@@ -240,7 +241,7 @@ function useSeriesConfig(
       mixBlendMode: 'multiply',
     } as GappedAreaSeriesDefinition<VariantChartValue>;
 
-    const selectOptions = [...seriesConfig, otherConfig];
+    const selectOptions = [...seriesConfig];
 
     return [seriesConfig, otherConfig, selectOptions] as const;
   }, [values, text]);
