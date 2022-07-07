@@ -37,3 +37,17 @@ timestamp,action,key,document_id,move_to
 2022-05-25T13:25:56.013Z,add,pages.intensiveCarePage.nl.chart_bedbezetting.legend_dot_label,l9y47X7Mn753quuWoDXzrN,__
 2022-06-08T14:31:12.676Z,add,pages.positiveTestsPage.nl.ggd.linechart_percentage_legend_label,FpB1VG3smRHDNCGaZQZZoS,__
 2022-06-08T14:31:13.689Z,add,pages.positiveTestsPage.vr.ggd.linechart_percentage_legend_label,avHj0RuKBVR3WKDFaNt28q,__
+2022-07-06T13:00:33.984Z,add,common.variants.omicron b_1_1_529.countryOfOrigin,FpB1VG3smRHDNCGaZfFnHc,__
+2022-07-06T13:00:35.005Z,add,common.variants.omicron b_1_1_529.name,FpB1VG3smRHDNCGaZfFnJP,__
+2022-07-06T13:00:36.018Z,add,common.variants.omicron ba_1.countryOfOrigin,ITiTU3jVuy3jp8GMhgLGnz,__
+2022-07-06T13:00:37.027Z,add,common.variants.omicron ba_1.name,FpB1VG3smRHDNCGaZfFnPN,__
+2022-07-06T13:00:38.028Z,add,common.variants.omicron ba_2.countryOfOrigin,avHj0RuKBVR3WKDFarkBDI,__
+2022-07-06T13:00:39.050Z,add,common.variants.omicron ba_2.name,FpB1VG3smRHDNCGaZfFnWX,__
+2022-07-06T13:00:40.061Z,add,common.variants.omicron ba_2_12_1.countryOfOrigin,ITiTU3jVuy3jp8GMhgLHhL,__
+2022-07-06T13:00:41.073Z,add,common.variants.omicron ba_2_12_1.name,FpB1VG3smRHDNCGaZfFnnF,__
+2022-07-06T13:00:42.075Z,add,common.variants.omicron ba_3.countryOfOrigin,FpB1VG3smRHDNCGaZfFnp2,__
+2022-07-06T13:00:43.098Z,add,common.variants.omicron ba_3.name,avHj0RuKBVR3WKDFarkBch,__
+2022-07-06T13:00:44.103Z,add,common.variants.omicron ba_4.countryOfOrigin,FpB1VG3smRHDNCGaZfFnuP,__
+2022-07-06T13:00:45.123Z,add,common.variants.omicron ba_4.name,FpB1VG3smRHDNCGaZfFnwC,__
+2022-07-06T13:00:46.132Z,add,common.variants.omicron ba_5.countryOfOrigin,avHj0RuKBVR3WKDFarkC5j,__
+2022-07-06T13:00:47.149Z,add,common.variants.omicron ba_5.name,ITiTU3jVuy3jp8GMhgLJBb,__
