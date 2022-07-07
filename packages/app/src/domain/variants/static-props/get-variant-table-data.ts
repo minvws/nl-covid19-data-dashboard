@@ -156,6 +156,8 @@ export function getVariantTableData(
         // Make sure the 'other' variant persists in the table.
         row.variant === 'other_table' || row.percentage
     )
+    .sort()
+    .reverse()
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last.
       if (rowA.variant === 'other_table') {
@@ -164,7 +166,8 @@ export function getVariantTableData(
       if (rowB.variant === 'other_table') {
         return -1;
       }
-      return (rowB.percentage ?? -1) - (rowA.percentage ?? -1);
+
+      return 0;
     });
 
   return { variantTable, dates, sampleSize, isReliable };
