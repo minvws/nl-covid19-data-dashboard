@@ -121,6 +121,19 @@ export default function CovidVariantenPage(
             articles={content.articles}
           />
 
+          <VariantsStackedAreaTile
+            text={{
+              ...textNl.varianten_over_tijd_grafiek,
+              varianten: commonTexts.variants,
+            }}
+            values={variantChart}
+            metadata={{
+              datumsText: textNl.datums,
+              date: getLastInsertionDateOfPage(data, ['variants']),
+              source: textNl.bronnen.rivm,
+            }}
+          />
+
           {variantSidebarValue?.sample_size && (
             <VariantsTableTile
               data={variantTable}
@@ -138,17 +151,6 @@ export default function CovidVariantenPage(
               }}
             />
           )}
-
-          <VariantsStackedAreaTile
-            text={{
-              ...textNl.varianten_over_tijd_grafiek,
-              varianten: commonTexts.variants,
-            }}
-            values={variantChart}
-            metadata={{
-              dataSources: [textNl.bronnen.rivm],
-            }}
-          />
         </TileList>
       </NlLayout>
     </Layout>

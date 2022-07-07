@@ -38,9 +38,7 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 
 const pageMetrics = [
   'sewer_per_installation',
-  'static_values.population_count',
   'sewer',
-  'code',
 ];
 
 export { getStaticPaths } from '~/static-paths/gm';

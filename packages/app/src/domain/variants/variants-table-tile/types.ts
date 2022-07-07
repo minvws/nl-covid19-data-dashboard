@@ -51,7 +51,31 @@ export interface Variants {
     name: string;
     countryOfOrigin: string;
   };
-  omicron: {
+  'omicron b_1_1_529': {
+    name: string;
+    countryOfOrigin: string;
+  };
+  'omicron ba_1': {
+    name: string;
+    countryOfOrigin: string;
+  };
+  'omicron ba_2': {
+    name: string;
+    countryOfOrigin: string;
+  };
+  'omicron ba_3': {
+    name: string;
+    countryOfOrigin: string;
+  };
+  'omicron ba_4': {
+    name: string;
+    countryOfOrigin: string;
+  };
+  'omicron ba_5': {
+    name: string;
+    countryOfOrigin: string;
+  };
+  'omicron ba_2_12_1': {
     name: string;
     countryOfOrigin: string;
   };

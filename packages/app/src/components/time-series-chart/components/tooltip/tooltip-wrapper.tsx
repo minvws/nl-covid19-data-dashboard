@@ -199,7 +199,7 @@ const TooltipChildren = styled.div<{ hasTitle?: boolean }>(({ hasTitle }) =>
 const StyledTooltipContent = styled.div((x) =>
   css({
     color: 'body',
-    maxWidth: 375,
+    maxWidth: 425,
     borderRadius: 1,
     cursor: x.onClick ? 'pointer' : 'default',
     fontSize: 1,
