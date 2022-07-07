@@ -56,7 +56,6 @@ import {
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
-  'code',
   'vaccine_coverage_per_age_group',
   'vaccine_coverage_per_age_group_archived',
   'booster_coverage',
