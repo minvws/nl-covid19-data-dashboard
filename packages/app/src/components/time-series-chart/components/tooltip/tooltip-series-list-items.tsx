@@ -6,6 +6,7 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { spacingStyle } from '~/style/functions/spacing';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { OutOfBoundsIcon } from '../timespan-annotation';
@@ -209,7 +210,7 @@ interface TooltipListProps {
 
 const TooltipList = styled.ol<TooltipListProps>((x) =>
   css({
-    columns: x.hasTwoColumns ? 2 : 1,
+    columns: x.hasTwoColumns && useBreakpoints().md ? 2 : 1,
     columnRule: x.hasTwoColumns ? `1px solid ${colors.lightGray}` : 'unset',
     columnGap: x.hasTwoColumns ? '2em' : 'unset',
     m: 0,
