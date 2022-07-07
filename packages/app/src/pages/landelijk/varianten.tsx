@@ -130,7 +130,7 @@ export default function CovidVariantenPage(
             metadata={{
               datumsText: textNl.datums,
               date: getLastInsertionDateOfPage(data, ['variants']),
-              dataSources: [textNl.bronnen.rivm],
+              source: textNl.bronnen.rivm,
             }}
           />
 
