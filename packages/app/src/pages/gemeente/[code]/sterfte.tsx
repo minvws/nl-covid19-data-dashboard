@@ -39,7 +39,7 @@ import { replaceVariablesInText } from '~/utils';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = ['deceased_rivm', 'code'];
+const pageMetrics = ['deceased_rivm'];
 
 export { getStaticPaths } from '~/static-paths/gm';
 
