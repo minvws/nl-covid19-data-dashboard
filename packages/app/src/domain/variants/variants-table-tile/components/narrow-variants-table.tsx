@@ -68,10 +68,11 @@ type MobileVariantRowProps = {
   row: VariantRow;
   text: TableText;
   formatValue: (value: number) => string;
+  showDescription?: boolean;
 };
 
 function MobileVariantRow(props: MobileVariantRowProps) {
-  const { row, text, formatValue } = props;
+  const { row, text, formatValue, showDescription } = props;
   const collapsible = useCollapsible();
 
   const columnNames = text.kolommen;
@@ -121,7 +122,8 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                   '-'
                 )}
               </Box>
-              {variantCountryOfOriginText &&
+              {showDescription &&
+                variantCountryOfOriginText &&
                 variantCountryOfOriginText !== '-' && (
                   <Text color="annotation">{variantDescription}</Text>
                 )}
