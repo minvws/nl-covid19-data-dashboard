@@ -82,6 +82,9 @@ function MobileVariantRow(props: MobileVariantRowProps) {
     text
   );
 
+  const variantCountryOfOriginText =
+    text.varianten[row.variant as keyof typeof text.varianten].countryOfOrigin;
+
   return (
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
@@ -118,7 +121,10 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                   '-'
                 )}
               </Box>
-              <Text color="annotation">{variantDescription}</Text>
+              {variantCountryOfOriginText &&
+                variantCountryOfOriginText !== '-' && (
+                  <Text color="annotation">{variantDescription}</Text>
+                )}
             </Box>
           )}
         </MobileCell>
