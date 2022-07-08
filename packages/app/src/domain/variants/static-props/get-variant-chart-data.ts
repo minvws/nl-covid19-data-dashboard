@@ -26,7 +26,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const firstOccurences = variants.values.reduce<Record<string, number>>(
+  const firstOccurences = variants.values.sort().reverse().reduce<Record<string, number>>(
     (acc, x) =>
       Object.assign(acc, {
         [x.name]: x.values.find((value) => value.percentage > 0)
