@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
@@ -17,7 +17,6 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
-import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
 import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
@@ -76,12 +75,6 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   const columnNames = text.kolommen;
 
-  const [, variantDescription] = useVariantNameAndDescription(
-    row.variant as keyof typeof text.varianten,
-    text.anderen_tooltip,
-    text
-  );
-
   return (
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
@@ -118,7 +111,6 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                   '-'
                 )}
               </Box>
-              <Text color="annotation">{variantDescription}</Text>
             </Box>
           )}
         </MobileCell>
