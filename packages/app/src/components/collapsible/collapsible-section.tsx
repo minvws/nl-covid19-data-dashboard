@@ -1,5 +1,5 @@
 import { css } from '@styled-system/css';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
 import { useCollapsible } from '~/utils/use-collapsible';
@@ -18,6 +18,8 @@ export const CollapsibleSection = ({
   id,
   hideBorder,
 }: CollapsibleSectionProps) => {
+  const section = useRef<HTMLElement>(null);
+
   const collapsible = useCollapsible();
   const { toggle } = collapsible;
 
@@ -28,7 +30,7 @@ export const CollapsibleSection = ({
      */
     function handleHashChange() {
       if (id && window.location.hash === `#${id}`) {
-        const sectionElement = document.getElementById(id);
+        const sectionElement = section?.current;
         if (!sectionElement) return;
 
         let shouldToggle = false;
@@ -64,6 +66,7 @@ export const CollapsibleSection = ({
       borderTop={hideBorder ? undefined : '1px solid'}
       borderTopColor={hideBorder ? undefined : 'lightGray'}
       id={id}
+      ref={section}
     >
       {collapsible.button(
         <Summary>
