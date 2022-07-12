@@ -1,5 +1,5 @@
 import { css } from '@styled-system/css';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
 import { useCollapsible } from '~/utils/use-collapsible';
@@ -75,7 +75,6 @@ export const CollapsibleSection = ({
                 tabIndex={-1}
                 onClick={(e) => e.stopPropagation()}
                 href={`#${id}`}
-                id={`${id}-anchor`}
               >
                 #
               </StyledAnchor>
