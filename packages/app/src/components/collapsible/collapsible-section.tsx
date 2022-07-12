@@ -1,5 +1,5 @@
 import { css } from '@styled-system/css';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
 import { useCollapsible } from '~/utils/use-collapsible';
@@ -28,7 +28,27 @@ export const CollapsibleSection = ({
      */
     function handleHashChange() {
       if (id && window.location.hash === `#${id}`) {
-        toggle(true);
+        const sectionElement = document.getElementById(id);
+        if (!sectionElement) return;
+
+        let shouldToggle = false;
+        const interval = setInterval(() => {
+          const isElementAtTopOfViewport =
+            sectionElement.getBoundingClientRect().top <= 1;
+          const isElementAtBottomOfViewport =
+            window.innerHeight + Math.round(window.scrollY) >=
+            document.body.scrollHeight;
+          if (isElementAtTopOfViewport || isElementAtBottomOfViewport) {
+            shouldToggle = true;
+          }
+
+          if (shouldToggle) {
+            toggle(true);
+
+            clearInterval(interval);
+            return;
+          }
+        }, 250);
       }
     }
 
@@ -55,6 +75,7 @@ export const CollapsibleSection = ({
                 tabIndex={-1}
                 onClick={(e) => e.stopPropagation()}
                 href={`#${id}`}
+                id={`${id}-anchor`}
               >
                 #
               </StyledAnchor>
