@@ -144,13 +144,10 @@ function filterVrBySelectedGmCode(
 }
 
 function createGeoJson(map: MapType, topoJson: any) {
-  const outlineGeo =
-    map === 'gm' || map === 'vr'
-      ? (topojsonFeature(
-          topoJson,
-          topoJson.objects.nl_features
-        ) as CodedGeoJSON)
-      : undefined;
+  const outlineGeo = topojsonFeature(
+    topoJson,
+    topoJson.objects.nl_features
+  ) as CodedGeoJSON;
 
   const featureGeo = topojsonFeature(
     topoJson,

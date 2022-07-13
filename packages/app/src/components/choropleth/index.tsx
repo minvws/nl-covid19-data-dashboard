@@ -1,4 +1,3 @@
-import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import type { GeoProjection } from 'd3-geo';
 import withLoadingProps from 'next-dynamic-loading-props';
@@ -11,12 +10,7 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { ChoroplethMap } from './components/choropleth-map';
-import {
-  ChoroplethDataItem,
-  InferedDataCollection,
-  InferedMapType,
-  MapType,
-} from './logic';
+import { ChoroplethDataItem, InferedMapType, MapType } from './logic';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
 
@@ -62,14 +56,14 @@ export type DataOptions = {
 
 export type OptionalDataConfig<T extends ChoroplethDataItem> = {
   /**
-   * A top-level property name of either IN_COLLECTION.json, VR_COLLECTION.json or GM_COLLECTION.json
+   * A top-level property name of either VR_COLLECTION.json or GM_COLLECTION.json
    */
-  metricName: KeysOfType<InferedDataCollection<T>, T[]>;
+  metricName: string | number | boolean;
   /**
    * A property name of the object determined by the metric name. This value is used to determine the color
    * of the feature.
    */
-  metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
+  metricProperty: string | number | boolean;
   /**
    * The color that is used for the feature when no data is available (a null value for example).
    */
@@ -278,9 +272,9 @@ export const DynamicChoropleth = withLoadingProps((getLoadingProps) =>
       } = getLoadingProps();
       return (
         <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${
-            dataConfig.metricProperty.toString()
-          }/${minHeight}/${dataOptions.selectedCode ?? ''}`}
+          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${dataConfig.metricProperty.toString()}/${minHeight}/${
+            dataOptions.selectedCode ?? ''
+          }`}
         />
       );
     },
