@@ -100,7 +100,6 @@ The object it returns is of this shape:
     choropleth: {
         vr: VrCollection;
         gm: GmCollection
-        in: InCollection;
     },
 }
 ```

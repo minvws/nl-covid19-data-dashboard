@@ -99,18 +99,17 @@ export default async function handler(
 }
 
 function createGeoJson(map: MapType) {
-  const outlineGeo = map === 'in' ? undefined : nlGeo;
   assert(
-    map === 'in' || map === 'vr' || map === 'gm',
+    map === 'vr' || map === 'gm',
     `[${createGeoJson.name}] Unknown maptype: ${map}`
   );
 
-  const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;
+  const featureGeo = map === 'vr' ? vrGeo : gmGeo;
 
-  return [featureGeo, outlineGeo] as const;
+  return [featureGeo, nlGeo] as const;
 }
 
-const validMapTypes: MapType[] = ['gm', 'vr', 'in'];
+const validMapTypes: MapType[] = ['gm', 'vr'];
 function loadChoroplethData(map: MapType, metric: string) {
   if (!validMapTypes.includes(map)) {
     throw new Error(`Invalid map type: ${map}`);
@@ -154,10 +153,8 @@ async function generateChoroplethImage(
 
   const dataOptions: DataOptions = {};
 
-  const aspectRatio =
-    map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
-
-  const mapProjection = map === 'in' ? geoConicConformal : geoMercator;
+  const aspectRatio = CHOROPLETH_ASPECT_RATIO.nl;
+  const mapProjection = geoMercator;
 
   const width = height * (1 / aspectRatio);
 

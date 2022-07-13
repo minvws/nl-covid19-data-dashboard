@@ -55,7 +55,6 @@ export const choroplethConfiguration = {
         list: [
           { title: 'Veiligheidsregio', value: 'vr' },
           { title: 'Gemeente', value: 'gm' },
-          { title: 'Internationaal', value: 'in' },
         ],
         layout: 'dropdown',
       },

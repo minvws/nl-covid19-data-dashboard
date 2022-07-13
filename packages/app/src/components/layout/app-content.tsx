@@ -29,7 +29,6 @@ export function AppContent({
   const { commonTexts } = useIntl();
 
   const isMenuOpen =
-    router.pathname == '/internationaal' ||
     router.pathname == '/landelijk' ||
     router.pathname == '/veiligheidsregio/[code]' ||
     router.pathname == '/gemeente/[code]' ||
@@ -43,13 +42,13 @@ export function AppContent({
    * @TODO Open the menu purely client side without loading a new page
    */
   const backButtonUrl = currentPageScope
-    ? isMenuOpen && currentPageScope !== 'in'
+    ? isMenuOpen
       ? reverseRouter.actueel[currentPageScope](currentCode)
       : reverseRouter[currentPageScope].index(currentCode)
     : undefined;
 
   const backButtonText = currentPageScope
-    ? isMenuOpen && currentPageScope !== 'in'
+    ? isMenuOpen
       ? commonTexts.nav.back_topical[currentPageScope]
       : commonTexts.nav.back_all_metrics[currentPageScope]
     : '';
