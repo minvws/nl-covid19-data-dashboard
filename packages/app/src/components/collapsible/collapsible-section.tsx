@@ -2,6 +2,8 @@ import { css } from '@styled-system/css';
 import { ReactNode, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
+import { isAtBottomOfPage } from '~/utils/is-at-bottom-of-page';
+import { isElementAtTopOfViewport } from '~/utils/is-element-at-top-of-viewport';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Anchor } from '../typography';
 
@@ -33,16 +35,8 @@ export const CollapsibleSection = ({
         const sectionElement = section?.current;
         if (!sectionElement) return;
 
-        let isElementAtTopOfViewport: boolean;
-        let isElementAtBottomOfViewport: boolean;
         const interval = setInterval(() => {
-          isElementAtTopOfViewport =
-            sectionElement.getBoundingClientRect().top <= 1;
-          isElementAtBottomOfViewport =
-            window.innerHeight + Math.round(window.scrollY) >=
-            document.body.scrollHeight;
-
-          if (isElementAtTopOfViewport || isElementAtBottomOfViewport) {
+          if (isElementAtTopOfViewport(sectionElement) || isAtBottomOfPage()) {
             toggle(true);
 
             clearInterval(interval);
