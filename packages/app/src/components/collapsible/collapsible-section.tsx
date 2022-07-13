@@ -28,31 +28,29 @@ export const CollapsibleSection = ({
      * Checks the hash part of the URL to see if it matches the id.
      * If so, the collapsible needs to be opened.
      */
-    function handleHashChange() {
+    const handleHashChange = () => {
       if (id && window.location.hash === `#${id}`) {
         const sectionElement = section?.current;
         if (!sectionElement) return;
 
-        let shouldToggle = false;
+        let isElementAtTopOfViewport: boolean;
+        let isElementAtBottomOfViewport: boolean;
         const interval = setInterval(() => {
-          const isElementAtTopOfViewport =
+          isElementAtTopOfViewport =
             sectionElement.getBoundingClientRect().top <= 1;
-          const isElementAtBottomOfViewport =
+          isElementAtBottomOfViewport =
             window.innerHeight + Math.round(window.scrollY) >=
             document.body.scrollHeight;
-          if (isElementAtTopOfViewport || isElementAtBottomOfViewport) {
-            shouldToggle = true;
-          }
 
-          if (shouldToggle) {
+          if (isElementAtTopOfViewport || isElementAtBottomOfViewport) {
             toggle(true);
 
             clearInterval(interval);
             return;
           }
-        }, 250);
+        }, 250); // This value is slightly higher than the animation duration of the collapsible section.
       }
-    }
+    };
 
     handleHashChange();
 
