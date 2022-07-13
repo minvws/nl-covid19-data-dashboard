@@ -1,5 +1,5 @@
 import { assert, vrData } from '@corona-dashboard/common';
-import { geoConicConformal, geoMercator } from 'd3-geo';
+import { geoMercator } from 'd3-geo';
 import fs from 'fs';
 import hash from 'hash-sum';
 import Konva from 'konva-node';
@@ -21,7 +21,7 @@ import { createDataConfig } from '~/components/choropleth/logic/create-data-conf
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
-import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
+import { gmGeo, nlGeo, vrGeo } from './topology';
 /**
  * The combination node-canvas and sharp leads to runtime crashes under Windows, this
  * ENV variable disables compression. By conditionally importing the sharp lib we
