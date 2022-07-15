@@ -73,7 +73,8 @@ const VaccinatedPeopleRow = ({
             </tr>
 
             {columns
-              .filter((column) => column !== 'vaccine')
+              // TODO: this is supposed to be different (matching with data coming from BE)
+              .filter((column) => column !== 'Vaccine')
               .map((column) => (
                 <tr key={column}>
                   <Cell css={css({ py: 0 })} mobile>

@@ -291,11 +291,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {/* -------------------------------------------------------------- */}
           {/*
-              Data needed:
-              1 - Absolute amount on repeating_shot_administered
-              2 - Absolute amount of booster_shot_administered
-              3 - Absolute amount of vaccine_administerd_total
-
               TODO:
               - update the labelTexts, title, source and description props to
               point to the correct new text entries.

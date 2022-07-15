@@ -12,7 +12,7 @@ interface VaccinatedPeopleTileProps {
   descriptionFooter: string;
 }
 
-const columns = ['vaccine', 'previous_week', 'total'] as const;
+const columns = ['Vaccine', 'Previous_week', 'Total'] as const;
 
 const rows = [
   {

@@ -2,6 +2,7 @@ import React from 'react';
 import css from '@styled-system/css';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Cell, HeaderCell, Row, StyledTable } from '.';
+import { Box } from '~/components/base';
 
 interface WideVaccinatedPeopleTableProps {
   rows: any[];
@@ -16,13 +17,8 @@ export const WideVaccinatedPeopleTable = ({
     <StyledTable>
       <thead>
         <tr>
-          {columns.map((column, index) => (
-            <HeaderCell
-              key={column}
-              colSpan={index + 1 === columns.length ? 2 : 1}
-            >
-              {column}
-            </HeaderCell>
+          {columns.map((column) => (
+            <HeaderCell key={column}>{column}</HeaderCell>
           ))}
         </tr>
       </thead>
@@ -72,9 +68,16 @@ const VaccinatedPeopleRow = ({
                 )}
               </Cell>
               <Cell>
-                {isOpen ? <strong>{row.total}</strong> : <>{row.total}</>}
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  {isOpen ? <strong>{row.total}</strong> : <>{row.total}</>}
+
+                  {collapsible.button()}
+                </Box>
               </Cell>
-              <Cell alignRight>{collapsible.button()}</Cell>
             </tr>
 
             <tr>

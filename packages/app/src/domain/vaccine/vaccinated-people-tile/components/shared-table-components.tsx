@@ -9,13 +9,14 @@ export const StyledTable = styled.table(
   })
 );
 
-export const HeaderCell = styled.th(
+export const HeaderCell = styled.th<{ mobile?: boolean }>((x) =>
   css({
     textAlign: 'left',
     fontSize: 14,
     fontWeight: 'bold',
     p: 3,
     verticalAlign: 'top',
+    width: !x.mobile ? '33%' : undefined,
   })
 );
 
@@ -25,11 +26,11 @@ export const Cell = styled.td<{
   mobile?: boolean;
 }>((x) =>
   css({
-    // background: x.isOpen ? colors.data.fill : undefined,
     float: x.alignRight ? 'right' : undefined,
     px: 3,
     py: x.mobile ? 2 : 4,
     verticalAlign: 'top',
+    width: !x.mobile ? '33%' : undefined,
   })
 );
 
