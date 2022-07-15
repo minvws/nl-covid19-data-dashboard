@@ -3,7 +3,7 @@
   "title": "nl_vaccine_planned",
   "type": "object",
   "required": [
-    "vaccine_planned",
+    "doses",
     "date_unix",
     "date_start_unix",
     "date_end_unix",
@@ -11,7 +11,7 @@
   ],
   "additionalProperties": false,
   "properties": {
-    "vaccine_planned": {
+    "doses": {
       "type": "integer"
     },
     "date_unix": {
