@@ -25,10 +25,23 @@ export const Cell = styled.td<{
   mobile?: boolean;
 }>((x) =>
   css({
-    background: x.isOpen ? colors.data.fill : undefined,
+    // background: x.isOpen ? colors.data.fill : undefined,
     float: x.alignRight ? 'right' : undefined,
     px: 3,
     py: x.mobile ? 2 : 4,
     verticalAlign: 'top',
+  })
+);
+
+export const Row = styled.tr<{
+  isLast: boolean;
+  isOpen?: boolean;
+}>((x) =>
+  css({
+    background: x.isOpen ? colors.data.fill : undefined,
+    borderTop: '1px solid',
+    borderBottom: x.isOpen || x.isLast ? '1px solid' : undefined,
+    borderColor: x.isOpen ? colors.blue : colors.lightGray,
+    cursor: 'pointer',
   })
 );

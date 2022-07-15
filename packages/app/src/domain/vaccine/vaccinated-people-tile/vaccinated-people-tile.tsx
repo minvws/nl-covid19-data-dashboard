@@ -1,7 +1,5 @@
-// import { useState } from 'react';
-import { KpiTile } from '~/components';
-import { Box } from '~/components/base';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { KpiTile } from '~/components';
 import { NarrowVaccinatedPeopleTable } from './components/narrow-vaccinated-people-table';
 import { WideVaccinatedPeopleTable } from './components/wide-vaccinated-people-table';
 
@@ -14,7 +12,7 @@ interface VaccinatedPeopleTileProps {
   descriptionFooter: string;
 }
 
-const columns = ['campaign', 'previous_week', 'total'] as const;
+const columns = ['vaccine', 'previous_week', 'total'] as const;
 
 const rows = [
   {
