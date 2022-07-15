@@ -35,7 +35,6 @@
   "type": "object",
   "required": [
     "vaccine_campaigns",
-    "vaccine_planned",
     "date_unix",
     "date_start_unix",
     "date_end_unix",
@@ -48,9 +47,6 @@
       "items": {
         "$ref": "#/definitions/vaccine_campaign"
       }
-    },
-    "vaccine_planned": {
-      "type": "integer"
     },
     "date_unix": {
       "type": "integer"
