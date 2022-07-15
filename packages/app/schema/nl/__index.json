@@ -37,6 +37,7 @@
     "tested_ggd_archived",
     "tested_overall",
     "tested_per_age_group",
+    "vaccine_campaigns",
     "vaccine_vaccinated_or_support",
     "vaccine_delivery_estimate",
     "vaccine_administered",
@@ -194,6 +195,9 @@
     },
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
+    },
+    "vaccine_campaigns": {
+      "$ref": "vaccine_campaigns.json"
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
