@@ -288,37 +288,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
           />
 
-          <VaccinationsKpiHeader
-            text={textNl.repeating_shot_information_block}
-            dateUnix={boosterShotAdministeredLastValue.date_unix}
-            dateOfInsertionUnix={
-              boosterShotAdministeredLastValue.date_of_insertion_unix
-            }
-          />
-          <VaccinationsShotKpiSection
-            text={textNl.repeating_shot_kpi}
-            dateUnix={repeatingShotAdministeredLastValue.date_unix}
-            value={repeatingShotAdministeredLastValue.ggd_administered_total}
-          />
-
-          <VaccinationsOverTimeTile
-            text={textNl}
-            coverageData={data.vaccine_coverage}
-            administrationData={administrationData}
-            vaccineAdministeredPlannedLastValue={
-              data.vaccine_administered_planned.last_value
-            }
-            timelineEvents={{
-              coverage: getTimelineEvents(
-                content.elements.timeSeries,
-                'vaccine_coverage'
-              ),
-              deliveryAndAdministration: getTimelineEvents(
-                content.elements.timeSeries,
-                'vaccine_administered'
-              ),
-            }}
-          />
           <VaccineCoverageChoroplethPerGm data={choropleth} />
           <BoosterShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
@@ -342,49 +311,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />
-          <VaccinationsKpiHeader
-            text={textNl.booster_information_block}
-            dateUnix={boosterShotAdministeredLastValue.date_unix}
-            dateOfInsertionUnix={
-              boosterShotAdministeredLastValue.date_of_insertion_unix
-            }
-          />
-          <VaccineBoosterAdministrationsKpiSection
-            text={textNl.booster_kpi}
-            totalBoosterShots={
-              boosterShotAdministeredLastValue.administered_total
-            }
-            metadateBoosterShots={{
-              datumsText: textNl.booster_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_unix,
-              source: {
-                href: textNl.booster_kpi.sources.href,
-                text: textNl.booster_kpi.sources.text,
-              },
-            }}
-            boosterGgdValue={
-              boosterShotAdministeredLastValue.ggd_administered_total
-            }
-            metadateBoosterGgd={{
-              datumsText: textNl.booster_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_unix,
-              source: {
-                href: textNl.booster_kpi.sources.href,
-                text: textNl.booster_kpi.sources.text,
-              },
-            }}
-            boosterEstimatedValue={
-              boosterShotAdministeredLastValue.others_administered_total
-            }
-            metadateBoosterEstimated={{
-              datumsText: textNl.booster_kpi.datums,
-              date: boosterShotAdministeredLastValue.date_unix,
-              source: {
-                href: textNl.booster_kpi.sources.href,
-                text: textNl.booster_kpi.sources.text,
-              },
-            }}
-          />
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}
@@ -395,40 +321,124 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
           />
           {hasHideArchivedCharts && (
-            <InView rootMargin="500px">
-              <VaccineCoveragePerAgeGroup
-                text={textNl.vaccination_coverage}
-                title={textNl.vaccination_coverage.title}
-                description={textNl.vaccination_coverage.toelichting}
-                sortingOrder={[
-                  '81+',
-                  '71-80',
-                  '61-70',
-                  '51-60',
-                  '41-50',
-                  '31-40',
-                  '18-30',
-                  '12-17',
-                  '5-11',
-                ]}
-                metadata={{
-                  datumsText: textNl.datums,
-                  date: data.vaccine_coverage_per_age_group_archived.values[0]
-                    .date_unix,
-                  source: textNl.vaccination_coverage.bronnen.rivm,
+            <>
+              <VaccinationsKpiHeader
+                text={textNl.repeating_shot_information_block}
+                dateUnix={boosterShotAdministeredLastValue.date_unix}
+                dateOfInsertionUnix={
+                  boosterShotAdministeredLastValue.date_of_insertion_unix
+                }
+              />
+
+              <VaccinationsShotKpiSection
+                text={textNl.repeating_shot_kpi}
+                dateUnix={repeatingShotAdministeredLastValue.date_unix}
+                value={repeatingShotAdministeredLastValue.ggd_administered_total}
+              />
+
+              <VaccinationsOverTimeTile
+                text={textNl}
+                coverageData={data.vaccine_coverage}
+                administrationData={administrationData}
+                vaccineAdministeredPlannedLastValue={
+                  data.vaccine_administered_planned.last_value
+                }
+                timelineEvents={{
+                  coverage: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'vaccine_coverage'
+                  ),
+                  deliveryAndAdministration: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'vaccine_administered'
+                  ),
                 }}
-                values={data.vaccine_coverage_per_age_group_archived.values}
-              />
-              <VaccineDeliveryBarChart
-                data={data.vaccine_delivery_per_supplier}
-                text={textNl}
               />
 
-              <VaccineStockPerSupplierChart
-                values={data.vaccine_stock.values}
-                text={textNl}
+              <VaccinationsKpiHeader
+                text={textNl.booster_information_block}
+                dateUnix={boosterShotAdministeredLastValue.date_unix}
+                dateOfInsertionUnix={
+                  boosterShotAdministeredLastValue.date_of_insertion_unix
+                }
               />
 
+              <VaccineBoosterAdministrationsKpiSection
+                text={textNl.booster_kpi}
+                totalBoosterShots={
+                  boosterShotAdministeredLastValue.administered_total
+                }
+                metadateBoosterShots={{
+                  datumsText: textNl.booster_kpi.datums,
+                  date: boosterShotAdministeredLastValue.date_unix,
+                  source: {
+                    href: textNl.booster_kpi.sources.href,
+                    text: textNl.booster_kpi.sources.text,
+                  },
+                }}
+                boosterGgdValue={
+                  boosterShotAdministeredLastValue.ggd_administered_total
+                }
+                metadateBoosterGgd={{
+                  datumsText: textNl.booster_kpi.datums,
+                  date: boosterShotAdministeredLastValue.date_unix,
+                  source: {
+                    href: textNl.booster_kpi.sources.href,
+                    text: textNl.booster_kpi.sources.text,
+                  },
+                }}
+                boosterEstimatedValue={
+                  boosterShotAdministeredLastValue.others_administered_total
+                }
+                metadateBoosterEstimated={{
+                  datumsText: textNl.booster_kpi.datums,
+                  date: boosterShotAdministeredLastValue.date_unix,
+                  source: {
+                    href: textNl.booster_kpi.sources.href,
+                    text: textNl.booster_kpi.sources.text,
+                  },
+                }}
+              />
+
+              <InView rootMargin="500px">
+                <VaccineCoveragePerAgeGroup
+                  text={textNl.vaccination_coverage}
+                  title={textNl.vaccination_coverage.title}
+                  description={textNl.vaccination_coverage.toelichting}
+                  sortingOrder={[
+                    '81+',
+                    '71-80',
+                    '61-70',
+                    '51-60',
+                    '41-50',
+                    '31-40',
+                    '18-30',
+                    '12-17',
+                    '5-11',
+                  ]}
+                  metadata={{
+                    datumsText: textNl.datums,
+                    date: data.vaccine_coverage_per_age_group_archived.values[0]
+                      .date_unix,
+                    source: textNl.vaccination_coverage.bronnen.rivm,
+                  }}
+                  values={data.vaccine_coverage_per_age_group_archived.values}
+                />
+              </InView>
+
+              <InView rootMargin="500px">
+                <VaccineDeliveryBarChart
+                  data={data.vaccine_delivery_per_supplier}
+                  text={textNl}
+                />
+              </InView>
+
+              <InView rootMargin="500px">
+                <VaccineStockPerSupplierChart
+                  values={data.vaccine_stock.values}
+                  text={textNl}
+                />
+              </InView>
               <ChartTile
                 title={textNl.grafiek_draagvlak.titel}
                 description={textNl.grafiek_draagvlak.omschrijving}
@@ -441,74 +451,76 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   ],
                 }}
               >
-                <TimeSeriesChart
-                  accessibility={{
-                    key: 'vaccines_support_over_time_chart',
-                  }}
-                  tooltipTitle={textNl.grafiek_draagvlak.titel}
-                  values={data.vaccine_vaccinated_or_support.values}
-                  numGridLines={20}
-                  tickValues={[0, 25, 50, 75, 100]}
-                  dataOptions={{
-                    isPercentage: true,
-                    forcedMaximumValue: 100,
-                  }}
-                  seriesConfig={[
-                    {
-                      type: 'line',
-                      metricProperty: 'percentage_70_plus',
-                      label: replaceVariablesInText(
-                        textNl.grafiek_draagvlak.leeftijd_jaar,
-                        { ageGroup: '70+' }
-                      ),
-                      color: colors.data.multiseries.magenta,
-                    },
-                    {
-                      type: 'line',
-                      metricProperty: 'percentage_55_69',
-                      label: replaceVariablesInText(
-                        textNl.grafiek_draagvlak.leeftijd_jaar,
-                        { ageGroup: '55 - 69' }
-                      ),
-                      color: colors.data.multiseries.orange,
-                    },
-                    {
-                      type: 'line',
-                      metricProperty: 'percentage_40_54',
-                      label: replaceVariablesInText(
-                        textNl.grafiek_draagvlak.leeftijd_jaar,
-                        { ageGroup: '40 - 54' }
-                      ),
-                      color: colors.data.multiseries.turquoise,
-                    },
-                    {
-                      type: 'line',
-                      metricProperty: 'percentage_25_39',
-                      label: replaceVariablesInText(
-                        textNl.grafiek_draagvlak.leeftijd_jaar,
-                        { ageGroup: '25 - 39' }
-                      ),
-                      color: colors.data.multiseries.yellow,
-                    },
-                    {
-                      type: 'line',
-                      metricProperty: 'percentage_16_24',
-                      label: replaceVariablesInText(
-                        textNl.grafiek_draagvlak.leeftijd_jaar,
-                        { ageGroup: '16 - 24' }
-                      ),
-                      color: colors.data.multiseries.cyan,
-                    },
-                    {
-                      type: 'invisible',
-                      metricProperty: 'percentage_average',
-                      label: commonTexts.common.totaal,
+                <InView rootMargin="500px">
+                  <TimeSeriesChart
+                    accessibility={{
+                      key: 'vaccines_support_over_time_chart',
+                    }}
+                    tooltipTitle={textNl.grafiek_draagvlak.titel}
+                    values={data.vaccine_vaccinated_or_support.values}
+                    numGridLines={20}
+                    tickValues={[0, 25, 50, 75, 100]}
+                    dataOptions={{
                       isPercentage: true,
-                    },
-                  ]}
-                />
+                      forcedMaximumValue: 100,
+                    }}
+                    seriesConfig={[
+                      {
+                        type: 'line',
+                        metricProperty: 'percentage_70_plus',
+                        label: replaceVariablesInText(
+                          textNl.grafiek_draagvlak.leeftijd_jaar,
+                          { ageGroup: '70+' }
+                        ),
+                        color: colors.data.multiseries.magenta,
+                      },
+                      {
+                        type: 'line',
+                        metricProperty: 'percentage_55_69',
+                        label: replaceVariablesInText(
+                          textNl.grafiek_draagvlak.leeftijd_jaar,
+                          { ageGroup: '55 - 69' }
+                        ),
+                        color: colors.data.multiseries.orange,
+                      },
+                      {
+                        type: 'line',
+                        metricProperty: 'percentage_40_54',
+                        label: replaceVariablesInText(
+                          textNl.grafiek_draagvlak.leeftijd_jaar,
+                          { ageGroup: '40 - 54' }
+                        ),
+                        color: colors.data.multiseries.turquoise,
+                      },
+                      {
+                        type: 'line',
+                        metricProperty: 'percentage_25_39',
+                        label: replaceVariablesInText(
+                          textNl.grafiek_draagvlak.leeftijd_jaar,
+                          { ageGroup: '25 - 39' }
+                        ),
+                        color: colors.data.multiseries.yellow,
+                      },
+                      {
+                        type: 'line',
+                        metricProperty: 'percentage_16_24',
+                        label: replaceVariablesInText(
+                          textNl.grafiek_draagvlak.leeftijd_jaar,
+                          { ageGroup: '16 - 24' }
+                        ),
+                        color: colors.data.multiseries.cyan,
+                      },
+                      {
+                        type: 'invisible',
+                        metricProperty: 'percentage_average',
+                        label: commonTexts.common.totaal,
+                        isPercentage: true,
+                      },
+                    ]}
+                  />
+                </InView>
               </ChartTile>
-            </InView>
+            </>
           )}
         </TileList>
       </NlLayout>
