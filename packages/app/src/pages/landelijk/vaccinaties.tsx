@@ -28,6 +28,7 @@ import {
   VaccineStockPerSupplierChart,
   BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
+import { VaccinatedPeopleTile } from '~/domain/vaccine/vaccinated-people-tile/vaccinated-people-tile';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -287,6 +288,26 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               textNl.vaccination_grade_toggle_tile.age_18_plus
             }
           />
+
+          {/* -------------------------------------------------------------- */}
+          {/*
+              Data needed:
+              1 - Absolute amount on repeating_shot_administered
+              2 - Absolute amount of booster_shot_administered
+              3 - Absolute amount of vaccine_administerd_total
+
+              TODO:
+              - update the labelTexts, title, source and description props to
+              point to the correct new text entries.
+          */}
+          <VaccinatedPeopleTile
+            title={textNl.vaccination_grade_toggle_tile.title}
+            source={textNl.vaccination_grade_toggle_tile.source}
+            descriptionFooter={
+              textNl.vaccination_grade_toggle_tile.description_footer
+            }
+          />
+          {/* -------------------------------------------------------------- */}
 
           <VaccinationsKpiHeader
             text={textNl.repeating_shot_information_block}

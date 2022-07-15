@@ -1,0 +1,34 @@
+import { colors } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import styled from 'styled-components';
+
+export const StyledTable = styled.table(
+  css({
+    borderCollapse: 'collapse',
+    width: '100%',
+  })
+);
+
+export const HeaderCell = styled.th(
+  css({
+    textAlign: 'left',
+    fontSize: 14,
+    fontWeight: 'bold',
+    p: 3,
+    verticalAlign: 'top',
+  })
+);
+
+export const Cell = styled.td<{
+  alignRight?: boolean;
+  isOpen?: boolean;
+  mobile?: boolean;
+}>((x) =>
+  css({
+    background: x.isOpen ? colors.data.fill : undefined,
+    float: x.alignRight ? 'right' : undefined,
+    px: 3,
+    py: x.mobile ? 2 : 4,
+    verticalAlign: 'top',
+  })
+);
