@@ -30,6 +30,7 @@ import {
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { Heading } from '../typography';
 import { ContentImage } from './content-image';
 import { InlineAgeDemographic } from './inline-age-demographic';
@@ -55,7 +56,7 @@ interface AgeDemographicConfigNode {
   title: string;
   startDate?: string;
   endDate?: string;
-  config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>>;
+  config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>, AccessibilityDefinition['key']>;
 }
 
 interface ChoroplethConfigNode {

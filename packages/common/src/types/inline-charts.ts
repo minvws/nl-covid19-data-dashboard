@@ -82,9 +82,10 @@ export type DonutMetricPropertyConfig<
 
 export type AgeDemographicConfiguration<
   S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
+  M extends MetricKeys<ScopedData[S]>,
+  K extends string
 > = {
-  accessibilityKey: string;
+  accessibilityKey: K;
   sourceKey: string;
   text: string;
   leftMetricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;

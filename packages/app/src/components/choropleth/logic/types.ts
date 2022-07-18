@@ -1,7 +1,19 @@
 import type {
   GmCollection,
-  KeysOfType,
+  GmCollectionHospitalNice,
+  GmCollectionSewer,
+  GmCollectionTestedOverall,
+  GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
+  VrCollectionBehavior,
+  VrCollectionDisabilityCare,
+  VrCollectionElderlyAtHome,
+  VrCollectionHospitalNice,
+  VrCollectionNursingHome,
+  VrCollectionSewer,
+  VrCollectionSituations,
+  VrCollectionTestedOverall,
+  VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type {
@@ -35,9 +47,18 @@ export enum CHOROPLETH_ASPECT_RATIO {
  */
 export type MapType = 'gm' | 'vr';
 
+const CODE_PROP_GM = 'gmcode';
+const CODE_PROP_VR = 'vrcode';
+const CODE_PROP_COUNTRY = 'country_code';
+
 export type CodeProp =
-  | KeysOfType<VrDataItem, string, true>
-  | KeysOfType<GmDataItem, string, true>;
+  | typeof CODE_PROP_GM
+  | typeof CODE_PROP_VR
+  | typeof CODE_PROP_COUNTRY;
+
+export const isCodeProp = (input: string): input is CodeProp => {
+  return [CODE_PROP_GM, CODE_PROP_VR, CODE_PROP_COUNTRY].includes(input);
+};
 
 export const mapToCodeType: Record<MapType, CodeProp> = {
   gm: 'gmcode',
@@ -59,22 +80,24 @@ export type InferedDataCollection<T extends ChoroplethDataItem> =
     ? VrCollection
     : never;
 
-/**
- * Select all the item types of all the properties from the VrCollection with an array type that has a vrcode property
- */
-export type VrDataCollection = VrCollection[KeysOfType<
-  VrCollection,
-  { vrcode: string }[]
->];
+export type VrDataCollection =
+  | VrCollectionHospitalNice[]
+  | VrCollectionHospitalNice[]
+  | VrCollectionTestedOverall[]
+  | VrCollectionNursingHome[]
+  | VrCollectionSewer[]
+  | VrCollectionBehavior[]
+  | VrCollectionDisabilityCare[]
+  | VrCollectionElderlyAtHome[]
+  | VrCollectionSituations[]
+  | VrCollectionVaccineCoveragePerAgeGroup[];
 export type VrDataItem = VrDataCollection[number];
 
-/**
- * Select all the item types of all the properties from the GmCollection with an array type that has a gmcode property
- */
-export type GmDataCollection = GmCollection[KeysOfType<
-  GmCollection,
-  { gmcode: string }[]
->];
+export type GmDataCollection =
+  | GmCollectionHospitalNice[]
+  | GmCollectionTestedOverall[]
+  | GmCollectionSewer[]
+  | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
 /**
