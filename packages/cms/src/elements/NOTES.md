@@ -38,7 +38,6 @@ The scopes would be:
 - nl: national
 - vr: safety-region
 - gm: municipality
-- in: international
 
 This combination of properties should be sufficient to generate a globally
 unique id for each instance of data visualization on the dashboard. It makes a

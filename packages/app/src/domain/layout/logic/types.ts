@@ -1,4 +1,4 @@
-export type Layout = 'in' | 'nl' | 'vr' | 'gm';
+export type Layout = 'nl' | 'vr' | 'gm';
 
 export type GmItemKeys =
   | 'hospital_admissions'
@@ -64,21 +64,13 @@ export type NlCategoryKeys =
   | 'vaccinations'
   | 'vulnerable_groups';
 
-export type InItemKeys = 'positive_tests' | 'variants';
-
-export type InCategoryKeys = 'international_metrics';
-
-export type CategoryKeys<T extends Layout> = T extends 'in'
-  ? InCategoryKeys
-  : T extends 'nl'
+export type CategoryKeys<T extends Layout> = T extends 'nl'
   ? NlCategoryKeys
   : T extends 'vr'
   ? VrCategoryKeys
   : GmCategoryKeys;
 
-export type ItemKeys<T extends Layout> = T extends 'in'
-  ? InItemKeys
-  : T extends 'nl'
+export type ItemKeys<T extends Layout> = T extends 'nl'
   ? NlItemKeys
   : T extends 'vr'
   ? VrItemKeys

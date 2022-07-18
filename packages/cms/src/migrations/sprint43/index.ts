@@ -19,8 +19,6 @@ const types = [
   '"disabilityCarePage"',
   '"elderlyAtHomePage"',
   '"escalationLevelPage"',
-  '"internationalPage"',
-  '"in_variantsPage"',
   '"nursingHomePage"',
   '"sewerPage"',
   '"TopicalPage"',

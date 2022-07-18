@@ -3,10 +3,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type PageIdentifier =
-  | 'in_positiveTestsPage'
   | 'hospitalPage'
-  | 'in_positiveTestsPage'
-  | 'in_variantsPage'
   | 'behaviorPage'
   | 'situationsPage'
   | 'reproductionPage'
@@ -19,7 +16,6 @@ export type PageIdentifier =
   | 'sewerPage'
   | 'intensiveCarePage'
   | 'vaccinationsPage'
-  | 'in_variantsPage'
   | 'nursingHomePage'
   | 'deceasedPage';
 
@@ -254,8 +250,4 @@ export type LinkProps = {
 
 export type VariantsPageQuery = {
   pageLinks: [LinkProps];
-};
-
-export type InPositiveTestsQuery = {
-  pageLinks?: LinkProps[];
 };

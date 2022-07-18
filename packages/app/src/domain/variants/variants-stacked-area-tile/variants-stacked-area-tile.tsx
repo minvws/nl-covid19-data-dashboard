@@ -1,4 +1,8 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
@@ -10,7 +14,7 @@ import { Legend, LegendItem } from '~/components/legend';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
+import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
@@ -110,59 +114,65 @@ function VariantStackedAreaTileWithData({
       title={text.titel}
       description={text.toelichting}
       metadata={metadata}
+      timeframeOptions={TimeframeOptionsList}
+      timeframeInitialValue={TimeframeOption.SIX_MONTHS}
     >
-      {children}
-      {children && <Spacer mb={3} />}
-      <InteractiveLegend
-        helpText={text.legend_help_tekst}
-        selectOptions={selectOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
-      />
-      <Spacer mb={2} />
-      <TimeSeriesChart
-        accessibility={{
-          key: 'variants_stacked_area_over_time_chart',
-        }}
-        values={values}
-        timeframe={TimeframeOption.ALL}
-        seriesConfig={filteredConfig}
-        disableLegend
-        dataOptions={{
-          isPercentage: true,
-          forcedMaximumValue: 100,
-          timespanAnnotations,
-          renderNullAsZero: true,
-        }}
-        formatTooltip={(context) => {
-          /**
-           * In the chart the 'other_percentage' stack is rendered on top,
-           * but in the tooltip it needs to be displayed as the last item.
-           * (These are both design decisions)
-           */
-          const reorderContext = {
-            ...context,
-            config: [
-              ...context.config.filter(
-                (x) =>
-                  !hasMetricProperty(x) ||
-                  x.metricProperty !== 'other_graph_percentage'
-              ),
-              context.config.find(
-                (x) =>
-                  hasMetricProperty(x) &&
-                  x.metricProperty === 'other_graph_percentage'
-              ),
-            ].filter(isDefined),
-          };
+      {(timeframe) => (
+        <>
+          {children}
+          {children && <Spacer mb={3} />}
+          <InteractiveLegend
+            helpText={text.legend_help_tekst}
+            selectOptions={selectOptions}
+            selection={list}
+            onToggleItem={toggle}
+            onReset={clear}
+          />
+          <Spacer mb={2} />
+          <TimeSeriesChart
+            accessibility={{
+              key: 'variants_stacked_area_over_time_chart',
+            }}
+            values={values}
+            timeframe={timeframe}
+            seriesConfig={filteredConfig}
+            disableLegend
+            dataOptions={{
+              isPercentage: true,
+              forcedMaximumValue: 100,
+              timespanAnnotations,
+              renderNullAsZero: true,
+            }}
+            formatTooltip={(context) => {
+              /**
+               * In the chart the 'other_percentage' stack is rendered on top,
+               * but in the tooltip it needs to be displayed as the last item.
+               * (These are both design decisions)
+               */
+              const reorderContext = {
+                ...context,
+                config: [
+                  ...context.config.filter(
+                    (x) =>
+                      !hasMetricProperty(x) ||
+                      x.metricProperty !== 'other_graph_percentage'
+                  ),
+                  context.config.find(
+                    (x) =>
+                      hasMetricProperty(x) &&
+                      x.metricProperty === 'other_graph_percentage'
+                  ),
+                ].filter(isDefined),
+              };
 
-          return <TooltipSeriesList data={reorderContext} />;
-        }}
-        numGridLines={0}
-        tickValues={[0, 25, 50, 75, 100]}
-      />
-      <Legend items={staticLegendItems} />
+              return <TooltipSeriesList data={reorderContext} hasTwoColumns />;
+            }}
+            numGridLines={0}
+            tickValues={[0, 25, 50, 75, 100]}
+          />
+          <Legend items={staticLegendItems} />
+        </>
+      )}
     </ChartTile>
   );
 }
@@ -172,15 +182,16 @@ function hasMetricProperty(config: any): config is { metricProperty: string } {
 }
 
 function useFilteredSeriesConfig(
-  seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[],
-  otherConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>,
+  seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[],
+  otherConfig: GappedAreaSeriesDefinition<VariantChartValue>,
   compareList: (keyof VariantChartValue)[]
 ) {
   return useMemo(() => {
     return [otherConfig, ...seriesConfig].filter(
       (item) =>
-        compareList.includes(item.metricProperty) ||
-        compareList.length === alwaysEnabled.length
+        item.metricProperty !== 'other_graph_percentage' &&
+        (compareList.includes(item.metricProperty) ||
+          compareList.length === alwaysEnabled.length)
     );
   }, [seriesConfig, otherConfig, compareList]);
 }
@@ -199,38 +210,38 @@ function useSeriesConfig(
       .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
-    const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
+    const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] =
       baseVariantsFiltered.map((variantKey, index) => {
         const color = colors.data.variants.colorList[index];
 
-        const variantName = variantKey.split(
-          '_'
-        )[0] as keyof typeof text.varianten;
+        const variantNameFragments = variantKey.split('_');
+        variantNameFragments.pop();
+        const variantName = variantNameFragments.join('_') as keyof Variants;
 
         return {
-          type: 'gapped-stacked-area',
+          type: 'gapped-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
           label: text.varianten[variantName]?.name || variantName,
-          shape: 'square',
-          strokeWidth: 0,
-          fillOpacity: 1,
+          shape: 'gapped-area',
+          strokeWidth: 2,
+          fillOpacity: 0.2,
           mixBlendMode: 'multiply',
         };
       });
 
     const otherConfig = {
-      type: 'gapped-stacked-area',
+      type: 'gapped-area',
       metricProperty: 'other_graph_percentage',
       label: text.tooltip_labels.other_percentage,
-      fillOpacity: 1,
+      fillOpacity: 0.2,
       shape: 'square',
-      color: colors.lightGray,
-      strokeWidth: 0,
+      color: colors.data.variants.other_graph,
+      strokeWidth: 2,
       mixBlendMode: 'multiply',
-    } as GappedStackedAreaSeriesDefinition<VariantChartValue>;
+    } as GappedAreaSeriesDefinition<VariantChartValue>;
 
-    const selectOptions = [...seriesConfig, otherConfig];
+    const selectOptions = [...seriesConfig];
 
     return [seriesConfig, otherConfig, selectOptions] as const;
   }, [values, text]);

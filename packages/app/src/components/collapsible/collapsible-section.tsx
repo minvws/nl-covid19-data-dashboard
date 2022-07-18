@@ -1,7 +1,9 @@
 import { css } from '@styled-system/css';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
+import { isAtBottomOfPage } from '~/utils/is-at-bottom-of-page';
+import { isElementAtTopOfViewport } from '~/utils/is-element-at-top-of-viewport';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Anchor } from '../typography';
 
@@ -18,6 +20,8 @@ export const CollapsibleSection = ({
   id,
   hideBorder,
 }: CollapsibleSectionProps) => {
+  const section = useRef<HTMLElement>(null);
+
   const collapsible = useCollapsible();
   const { toggle } = collapsible;
 
@@ -26,11 +30,21 @@ export const CollapsibleSection = ({
      * Checks the hash part of the URL to see if it matches the id.
      * If so, the collapsible needs to be opened.
      */
-    function handleHashChange() {
+    const handleHashChange = () => {
       if (id && window.location.hash === `#${id}`) {
-        toggle(true);
+        const sectionElement = section?.current;
+        if (!sectionElement) return;
+
+        const interval = setInterval(() => {
+          if (isElementAtTopOfViewport(sectionElement) || isAtBottomOfPage()) {
+            toggle(true);
+
+            clearInterval(interval);
+            return;
+          }
+        }, 250); // This value is slightly higher than the animation duration of the collapsible section.
       }
-    }
+    };
 
     handleHashChange();
 
@@ -44,6 +58,7 @@ export const CollapsibleSection = ({
       borderTop={hideBorder ? undefined : '1px solid'}
       borderTopColor={hideBorder ? undefined : 'lightGray'}
       id={id}
+      ref={section}
     >
       {collapsible.button(
         <Summary>

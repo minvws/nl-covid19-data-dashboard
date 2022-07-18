@@ -45,11 +45,6 @@ export function useFeatureName(
           return item.name;
         };
       }
-      case 'in': {
-        throw new Error(
-          'International feature names are lokalized and need to be passed in using a custom getFeatureName method'
-        );
-      }
     }
   }, [map, customGetFeatureName]);
 }

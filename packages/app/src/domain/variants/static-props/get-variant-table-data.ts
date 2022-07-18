@@ -1,15 +1,9 @@
 import {
-  assert,
   colors,
-  InNamedDifference,
-  InVariants,
-  InVariantsVariant,
-  InVariantsVariantValue,
   NlNamedDifference,
   NlVariants,
   NlVariantsVariant,
-  NlVariantsVariantValue,
-  OptionalNamedDifferenceDecimal,
+  NamedDifferenceDecimal,
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -17,15 +11,42 @@ import { isDefined, isPresent } from 'ts-is-present';
 export type VariantRow = {
   variant: string;
   percentage: number | null;
-  difference?: OptionalNamedDifferenceDecimal;
+  difference?: NamedDifferenceDecimal | null;
   color: string;
 };
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
+export const VARIANT_TABLE_MAP = [
+  'alpha',
+  'beta',
+  'gamma',
+  'delta',
+  'eta',
+  'epsilon',
+  'theta',
+  'kappa',
+  'lambda',
+  'iota',
+  'zeta',
+  'mu',
+  'nu',
+  'xi',
+  'omicron',
+  'pi',
+  'rho',
+  'sigma',
+  'tau',
+  'upsilon',
+  'phi',
+  'chi',
+  'psi',
+  'omega',
+];
+
 export function getVariantTableData(
-  variants: NlVariants | InVariants | undefined,
-  namedDifference: NlNamedDifference | InNamedDifference
+  variants: NlVariants | undefined,
+  namedDifference: NlNamedDifference
 ) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return {
@@ -40,17 +61,16 @@ export function getVariantTableData(
       const difference = namedDifference.variants__percentage.find(
         (x) => x.name === name
       );
-      assert(
-        difference,
-        `[${getVariantTableData.name}:${findDifference.name}] No variants__percentage found for variant ${name}`
-      );
+
+      if (!difference) {
+        return null;
+      }
+
       return difference;
     }
   }
 
-  const firstLastValue = first<NlVariantsVariant | InVariantsVariant>(
-    variants.values
-  );
+  const firstLastValue = first<NlVariantsVariant>(variants.values);
 
   const dates = {
     date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
@@ -60,17 +80,16 @@ export function getVariantTableData(
   };
   const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
 
-  const inVariants = variants.values
-    .map((x) => x.last_value)
-    .filter(isInVariant);
-  /**
-   * Only international data has the is_reliable key,
-   * so for national data we assume it is reliable by default.
-   */
-  const isReliable = inVariants.length
-    ? inVariants.some((x) => x.is_reliable)
-    : true;
+  const getVariantSortingRank = (variantName: string): number => {
+    const index = VARIANT_TABLE_MAP.findIndex((variant) =>
+      variantName.includes(variant)
+    );
 
+    if (index === -1) return 1000;
+    return index;
+  };
+
+  const variantColors = colors.data.variants;
   const variantTable = variants.values
     /**
      * Since the schemas for international still has to change to
@@ -83,29 +102,55 @@ export function getVariantTableData(
           : true,
       ...variant,
     }))
-    .filter((variant) => !variant.has_historical_significance)
+    .filter(
+      (variant) =>
+        variant.name !== 'other_graph' || !variant.has_historical_significance
+    )
+    .sort((variantA, variantB) => {
+      if (variantA.name === 'other_table') {
+        return 1;
+      }
+      if (variantB.name === 'other_table') {
+        return -1;
+      }
+
+      const relativeSortingValue: number =
+        getVariantSortingRank(variantA.name) -
+        getVariantSortingRank(variantB.name);
+
+      if (relativeSortingValue !== 0) {
+        return relativeSortingValue;
+      }
+
+      return variantA.name.localeCompare(variantB.name);
+    })
     .map<VariantRow>((variant, index) => ({
       variant: variant.name,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
-      color: colors.data.variants.colorList[index],
+      color:
+        variant.name === 'other_table'
+          ? variantColors.other_table
+          : variantColors.colorList[index],
     }))
+    .filter(
+      (row) =>
+        // Make sure the 'other' variant persists in the table.
+        row.variant === 'other_table' || row.percentage
+    )
+    .sort()
+    .reverse()
     .sort((rowA, rowB) => {
-      // Make sure the 'other' variant is always sorted last
+      // Make sure the 'other' variant is always sorted last.
       if (rowA.variant === 'other_table') {
         return 1;
       }
       if (rowB.variant === 'other_table') {
         return -1;
       }
-      return (rowB.percentage ?? -1) - (rowA.percentage ?? -1);
+
+      return 0;
     });
 
-  return { variantTable, dates, sampleSize, isReliable };
-}
-
-function isInVariant(
-  value: NlVariantsVariantValue | InVariantsVariantValue
-): value is InVariantsVariantValue {
-  return 'is_reliable' in value;
+  return { variantTable, dates, sampleSize };
 }

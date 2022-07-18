@@ -61,7 +61,7 @@ export type DataOptions = {
 
 export type OptionalDataConfig<T extends ChoroplethDataItem> = {
   /**
-   * A top-level property name of either IN_COLLECTION.json, VR_COLLECTION.json or GM_COLLECTION.json
+   * A top-level property name of either VR_COLLECTION.json or GM_COLLECTION.json
    */
   metricName: keyof InferedDataCollection<T>;
   /**
@@ -277,9 +277,9 @@ export const DynamicChoropleth = withLoadingProps((getLoadingProps) =>
       } = getLoadingProps();
       return (
         <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${
-            dataConfig.metricProperty.toString()
-          }/${minHeight}/${dataOptions.selectedCode ?? ''}`}
+          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${dataConfig.metricProperty.toString()}/${minHeight}/${
+            dataOptions.selectedCode ?? ''
+          }`}
         />
       );
     },
