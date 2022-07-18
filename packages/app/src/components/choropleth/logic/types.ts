@@ -47,7 +47,18 @@ export enum CHOROPLETH_ASPECT_RATIO {
  */
 export type MapType = 'gm' | 'vr';
 
-export type CodeProp = 'gmcode' | 'vrcode' | 'country_code';
+const CODE_PROP_GM = 'gmcode';
+const CODE_PROP_VR = 'vrcode';
+const CODE_PROP_COUNTRY = 'country_code';
+
+export type CodeProp =
+  | typeof CODE_PROP_GM
+  | typeof CODE_PROP_VR
+  | typeof CODE_PROP_COUNTRY;
+
+export const isCodeProp = (input: string): input is CodeProp => {
+  return [CODE_PROP_GM, CODE_PROP_VR, CODE_PROP_COUNTRY].includes(input);
+};
 
 export const mapToCodeType: Record<MapType, CodeProp> = {
   gm: 'gmcode',

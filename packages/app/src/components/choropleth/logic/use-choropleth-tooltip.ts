@@ -9,7 +9,13 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { DataConfig, DataOptions } from '..';
 import { TooltipSettings } from '../tooltips/types';
 import { thresholds } from './thresholds';
-import { ChoroplethDataItem, mapToCodeType, MapType } from './types';
+import {
+  ChoroplethDataItem,
+  CodeProp,
+  isCodeProp,
+  mapToCodeType,
+  MapType,
+} from './types';
 import { useFeatureName } from './use-feature-name';
 import { isCodedValueType } from './utils';
 
@@ -62,9 +68,12 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
 
   const getItemByCode = useMemo(() => {
-    return (code: string) => {
+    return (code: CodeProp) => {
       const item = data
-        .filter(isCodedValueType(codeType))
+        .filter((x) => {
+          const filterFn = isCodedValueType(codeType);
+          return filterFn && filterFn(x);
+        })
         .find((x) => (x as any)[codeType] === code);
       assert(
         item,
@@ -101,7 +110,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
 
       const code = link.getAttribute('data-id');
 
-      if (isPresent(code) && isPresent(container)) {
+      if (isPresent(code) && isPresent(container) && isCodeProp(code)) {
         const bboxContainer = container.getBoundingClientRect();
         const bboxLink = link.getBoundingClientRect();
         const left = bboxLink.left - bboxContainer.left;
@@ -185,7 +194,7 @@ type HoverInfo = { code: string; x: number; y: number };
 
 const createTooltipTrigger = <T extends ChoroplethDataItem>(
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
-  getItemByCode: (code: string) => T,
+  getItemByCode: (code: CodeProp) => T,
   dataConfig: DataConfig<T>,
   dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
@@ -194,7 +203,7 @@ const createTooltipTrigger = <T extends ChoroplethDataItem>(
   metricPropertyFormatter: (value: number) => string
 ) => {
   return (hoverInfo?: HoverInfo) => {
-    if (!isDefined(hoverInfo)) {
+    if (!isDefined(hoverInfo) || !isCodeProp(hoverInfo.code)) {
       return setTooltip(undefined);
     }
 
@@ -220,7 +229,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   ref: RefObject<HTMLElement>,
-  getItemByCode: (code: string) => T,
+  getItemByCode: (code: CodeProp) => T,
   dataConfig: DataConfig<T>,
   dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
@@ -232,7 +241,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
     const elm = event.target as HTMLElement;
     const code = elm.getAttribute('data-id');
 
-    if (isPresent(code) && ref.current) {
+    if (isPresent(code) && isCodeProp(code) && ref.current) {
       if (timeout.current > -1) {
         clearTimeout(timeout.current);
         timeout.current = -1;
