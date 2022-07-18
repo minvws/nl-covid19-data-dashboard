@@ -131,7 +131,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 {
                   type: 'area',
                   metricProperty: 'covid_symptoms_per_100k',
-                  label: text.tooltip_labels.covid_klachten,
+                  label: text.labels.covid_klachten,
                   color: colors.data.primary,
                 },
               ]}

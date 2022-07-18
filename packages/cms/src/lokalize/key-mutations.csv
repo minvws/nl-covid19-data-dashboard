@@ -1,1 +1,10 @@
 timestamp,action,key,document_id,move_to
+2022-07-18T09:23:55.208Z,move,pages.variantsPage.nl.varianten_over_tijd.tooltip_labels.totaal_monsters,JtApmkyAs5Fi3aTDStcdtl,pages.variantsPage.nl.varianten_over_tijd.labels.totaal_monsters
+2022-07-18T09:32:08.990Z,add,pages.in_variantsPage.shared.varianten_over_tijd_grafiek.labels,eqFl28ScTYzTImF144LuNw,__
+2022-07-18T09:32:09.994Z,add,pages.variantsPage.nl.varianten_over_tijd.labels.niet_compleet,rqPl4RDgHRhhQeuZ9blFFw,__
+2022-07-18T09:32:09.994Z,delete,pages.in_variantsPage.shared.varianten_over_tijd_grafiek.labels.niet_compleet,eqFl28ScTYzTImF144Lf2E,__
+2022-07-18T09:32:09.995Z,delete,pages.variantsPage.nl.varianten_over_tijd.legend_niet_compleet_label,0Fi2ZNty1p5jcXUiTmaRVr,__
+2022-07-18T09:35:53.376Z,add,pages.positiveTestsPage.shared.labels.infected,rqPl4RDgHRhhQeuZ9blice,__
+2022-07-18T09:35:54.396Z,add,pages.positiveTestsPage.shared.labels.infected_moving_average,rqPl4RDgHRhhQeuZ9bliyu,__
+2022-07-18T09:37:37.631Z,add,pages.positiveTestsPage.shared.labels.infected_out_of_bounds,M1X5uhtA0L6eSCc3lIjw3R,__
+2022-07-18T09:40:19.115Z,add,common.verdenkingen_huisartsen.labels.covid_klachten,M1X5uhtA0L6eSCc3lIkDll,__
