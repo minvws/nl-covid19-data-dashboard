@@ -20,13 +20,6 @@ export function getReverseRouter(isMobile: boolean) {
       contact: () => '/contact',
     },
 
-    in: {
-      index: () =>
-        isMobile ? `/internationaal` : reverseRouter.in.positiefGetesteMensen(),
-      positiefGetesteMensen: () => `/internationaal/positief-geteste-mensen`,
-      varianten: () => `/internationaal/varianten`,
-    },
-
     nl: {
       index: () => (isMobile ? `/landelijk` : reverseRouter.nl.vaccinaties()),
       vaccinaties: () => `/landelijk/vaccinaties`,

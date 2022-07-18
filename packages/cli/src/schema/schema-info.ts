@@ -26,24 +26,6 @@ export function getSchemaInfo(
   const fileList = fs.readdirSync(jsonDirectory);
 
   return {
-    in: {
-      files: getFileNames(fileList, /^IN_[A-Z]{3}.json$/),
-      basePath: jsonDirectory,
-      customValidations: [
-        createChoroplethValidation(
-          path.join(defaultJsonDirectory, 'IN_COLLECTION.json'),
-          'country_code'
-        ),
-        validateMovingAverages,
-      ],
-    },
-    in_collection: {
-      files: [
-        // @TODO enable when file is available
-        /* 'IN_COLLECTION.json' */
-      ],
-      basePath: jsonDirectory,
-    },
     nl: {
       files: ['NL.json'],
       basePath: jsonDirectory,

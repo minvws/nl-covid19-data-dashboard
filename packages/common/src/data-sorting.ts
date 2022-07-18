@@ -1,7 +1,6 @@
 import { isDefined } from 'ts-is-present';
 import {
   GmSewerPerInstallationValue,
-  InVariantsVariantValue,
   NlVariantsVariantValue,
   VrSewerPerInstallationValue,
 } from './types';
@@ -123,9 +122,7 @@ export function sortTimeSeriesInDataInPlace<T>(
         return x;
       }
 
-      x.values = sortTimeSeriesValues(x.values) as
-        | NlVariantsVariantValue[]
-        | InVariantsVariantValue[];
+      x.values = sortTimeSeriesValues(x.values) as NlVariantsVariantValue[];
 
       if (setDatesToMiddleOfDay) {
         x.values = x.values.map(setValueDatesToMiddleOfDay);
@@ -209,7 +206,7 @@ export interface SewerPerInstallationData {
 }
 
 export interface VariantsData {
-  values: (TimeSeriesMetric<NlVariantsVariantValue | InVariantsVariantValue> & {
+  values: (TimeSeriesMetric<NlVariantsVariantValue> & {
     name: string;
   })[];
 }

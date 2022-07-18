@@ -12,7 +12,7 @@ const createPatchFrom = (value: string) => {
   return PatchEvent.from(value === '' ? unset() : set(value));
 };
 
-function getDropdownValues(map: 'in' | 'gm' | 'vr') {
+function getDropdownValues(map: 'gm' | 'vr') {
   const collection = dataStructure[`${map}_collection`];
 
   return Object.keys(collection).map((x) => ({ value: x, label: x }));

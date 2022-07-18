@@ -91,11 +91,6 @@ export function useSidebar<T extends Layout>({
   return useMemo(() => {
     const getHref = (key: ItemKeys<T>) => {
       const route = mapKeysToReverseRouter[key];
-
-      if (layout === 'in') {
-        return reverseRouter.in[route as keyof ReverseRouter['in']]();
-      }
-
       if (layout === 'nl') {
         return reverseRouter.nl[route]();
       }
