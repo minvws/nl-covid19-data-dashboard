@@ -10,7 +10,7 @@ const createPatchFrom = (value: string) => {
   return PatchEvent.from(value === '' ? unset() : set(value));
 };
 
-function getDropdownValues(map: 'in' | 'gm' | 'vr', metricName: string) {
+function getDropdownValues(map: 'gm' | 'vr', metricName: string) {
   const collection = dataStructure[`${map}_collection`];
 
   return (collection as any)?.[metricName].map((x: string) => ({
