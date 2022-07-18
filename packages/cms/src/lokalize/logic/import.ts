@@ -31,6 +31,15 @@ export const localeReferenceDirectory = path.resolve(
   '.lokalize-reference'
 );
 
+export const fetchLokalizeTexts = async (dataset: string) => {
+  const client = getClient(dataset);
+  const documents: LokalizeText[] = await client.fetch(
+    `*[_type == 'lokalizeText' && (defined(key)) && !(_id in path('drafts.**'))] | order(key asc)`
+  );
+  const flatTexts = createFlatTexts(documents, false);
+  return flatTexts;
+};
+
 export async function importLokalizeTexts({
   dataset,
   appendDocumentIdToKey = false,
