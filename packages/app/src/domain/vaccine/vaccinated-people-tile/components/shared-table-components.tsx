@@ -14,7 +14,8 @@ export const HeaderCell = styled.th<{ mobile?: boolean }>((x) =>
     textAlign: 'left',
     fontSize: 14,
     fontWeight: 'bold',
-    p: 3,
+    px: 3,
+    py: x.mobile ? 3 : 2,
     verticalAlign: 'top',
     width: !x.mobile ? '33%' : undefined,
   })

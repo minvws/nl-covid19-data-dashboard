@@ -298,7 +298,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccinatedPeopleTile
             title={textNl.vaccination_grade_toggle_tile.title}
             source={textNl.vaccination_grade_toggle_tile.source}
-            descriptionFooter={
+            description={
               textNl.vaccination_grade_toggle_tile.description_footer
             }
           />

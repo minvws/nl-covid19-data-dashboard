@@ -1,5 +1,5 @@
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { KpiTile } from '~/components';
+import { ChartTile } from '~/components';
 import { NarrowVaccinatedPeopleTable } from './components/narrow-vaccinated-people-table';
 import { WideVaccinatedPeopleTable } from './components/wide-vaccinated-people-table';
 
@@ -9,7 +9,8 @@ interface VaccinatedPeopleTileProps {
     text: string;
     href: string;
   };
-  descriptionFooter: string;
+  description: string;
+  metadata: any;
 }
 
 const columns = ['Vaccine', 'Previous_week', 'Total'] as const;
@@ -41,17 +42,18 @@ const rows = [
 export const VaccinatedPeopleTile = ({
   title,
   source,
-  descriptionFooter,
+  description,
+  metadata,
 }: VaccinatedPeopleTileProps) => {
   const breakpoints = useBreakpoints();
 
   return (
-    <KpiTile title={title}>
+    <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.sm ? (
         <WideVaccinatedPeopleTable rows={rows} columns={columns} />
       ) : (
         <NarrowVaccinatedPeopleTable rows={rows} columns={columns} />
       )}
-    </KpiTile>
+    </ChartTile>
   );
 };

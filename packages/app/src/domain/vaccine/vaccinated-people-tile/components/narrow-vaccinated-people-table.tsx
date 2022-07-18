@@ -17,9 +17,11 @@ export const NarrowVaccinatedPeopleTable = ({
       <thead>
         <tr>
           {columns
-            .filter((column) => column === 'vaccine')
+            .filter((column) => column === 'Vaccine')
             .map((column) => (
-              <HeaderCell key={column}>{column}</HeaderCell>
+              <HeaderCell key={column} mobile>
+                {column}
+              </HeaderCell>
             ))}
         </tr>
       </thead>
@@ -63,11 +65,11 @@ const VaccinatedPeopleRow = ({
         <StyledTable>
           <tbody>
             <tr>
-              <Cell mobile>
+              <Cell css={css({ pt: 3 })} mobile>
                 <strong>{row.title}</strong>
               </Cell>
 
-              <Cell alignRight mobile>
+              <Cell css={css({ pt: 3 })} alignRight mobile>
                 {collapsible.button()}
               </Cell>
             </tr>
@@ -84,7 +86,11 @@ const VaccinatedPeopleRow = ({
               ))}
 
             <tr>
-              <Cell colSpan={2} mobile>
+              <Cell
+                css={css({ pb: collapsible.isOpen ? 3 : 2 })}
+                colSpan={2}
+                mobile
+              >
                 {collapsible.content(row.description)}
               </Cell>
             </tr>
