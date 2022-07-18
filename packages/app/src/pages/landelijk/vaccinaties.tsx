@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import {
   ChartTile,
-  InView,
   PageInformationBlock,
   TileList,
   TimeSeriesChart,
