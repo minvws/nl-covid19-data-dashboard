@@ -55,8 +55,6 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
   const dataConfig = createDataConfig(partialDataConfig);
 
   const mapProjection = isDefined(dataOptions.projection)
-    ? dataOptions.projection
-    : map === 'in'
     ? geoConicConformal
     : geoMercator;
 

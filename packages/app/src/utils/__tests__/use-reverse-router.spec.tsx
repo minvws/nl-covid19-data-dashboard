@@ -20,19 +20,16 @@ const gmCode = 'GM001';
 
 UseReverseRouter.before((context) => {
   context.cleanupJsDom = injectJsDom();
-  (window as any).matchMedia = () => {};
   sinon.stub(window, 'matchMedia').callsFake((mq: string) => {
     switch (mq) {
       case theme.mediaQueries.md: {
         return {
           matches: largeScreen,
-          addListener: (callback: any) => {},
         } as MediaQueryList;
       }
       default:
         return {
           matches: false,
-          addListener: (callback: any) => {},
         } as MediaQueryList;
     }
   });
@@ -47,8 +44,6 @@ UseReverseRouter.after.each(() => {
   cleanup();
   cleanupHooks();
 });
-
-UseReverseRouter.before.each((context) => {});
 
 const TestContainer = () => {
   return (
@@ -68,43 +63,38 @@ const TestBed = () => {
       <div data-testid="nl">{router.nl.index()}</div>
       <div data-testid="vr">{router.vr.index(vrCode)}</div>
       <div data-testid="gm">{router.gm.index(gmCode)}</div>
-      <div data-testid="in">{router.in.index()}</div>
     </>
   );
 };
 
 UseReverseRouter(
   'indexes should link to the actual index on small screens',
-  (context) => {
+  () => {
     largeScreen = false;
     const result = render(<TestContainer />);
     const nlDiv = result.getByTestId('nl');
     const vrDiv = result.getByTestId('vr');
     const gmDiv = result.getByTestId('gm');
-    const inDiv = result.getByTestId('in');
 
     assert.equal(nlDiv.textContent?.endsWith('/landelijk'), true);
     assert.equal(vrDiv.textContent?.endsWith(vrCode), true);
     assert.equal(gmDiv.textContent?.endsWith(gmCode), true);
-    assert.equal(inDiv.textContent?.endsWith('/internationaal'), true);
   }
 );
 
-UseReverseRouter("indexes should 'redirect' to child pages", (context) => {
+UseReverseRouter("indexes should 'redirect' to child pages", () => {
   largeScreen = true;
   const result = render(<TestContainer />);
   const nlDiv = result.getByTestId('nl');
   const vrDiv = result.getByTestId('vr');
   const gmDiv = result.getByTestId('gm');
-  const inDiv = result.getByTestId('in');
 
   assert.equal(nlDiv.textContent?.endsWith('/vaccinaties'), true);
   assert.equal(vrDiv.textContent?.endsWith('/vaccinaties'), true);
   assert.equal(gmDiv.textContent?.endsWith('/vaccinaties'), true);
-  assert.equal(inDiv.textContent?.endsWith('/positief-geteste-mensen'), true);
 });
 
-UseReverseRouter('VR routes should have the VR code in them', (context) => {
+UseReverseRouter('VR routes should have the VR code in them', () => {
   const { result } = renderHook(() => useReverseRouter());
 
   const keys = Object.keys(result.current.vr);
@@ -117,7 +107,7 @@ UseReverseRouter('VR routes should have the VR code in them', (context) => {
   assert.equal(route.indexOf(vrCode) > -1, true);
 });
 
-UseReverseRouter('GM routes should have the GM code in them', (context) => {
+UseReverseRouter('GM routes should have the GM code in them', () => {
   const { result } = renderHook(() => useReverseRouter());
 
   const keys = Object.keys(result.current.gm);

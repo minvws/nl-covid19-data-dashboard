@@ -1,4 +1,3 @@
-import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import type { GeoProjection } from 'd3-geo';
 import withLoadingProps from 'next-dynamic-loading-props';
@@ -62,14 +61,14 @@ export type DataOptions = {
 
 export type OptionalDataConfig<T extends ChoroplethDataItem> = {
   /**
-   * A top-level property name of either IN_COLLECTION.json, VR_COLLECTION.json or GM_COLLECTION.json
+   * A top-level property name of either VR_COLLECTION.json or GM_COLLECTION.json
    */
-  metricName: KeysOfType<InferedDataCollection<T>, T[]>;
+  metricName: keyof InferedDataCollection<T>;
   /**
    * A property name of the object determined by the metric name. This value is used to determine the color
    * of the feature.
    */
-  metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
+  metricProperty: keyof T;
   /**
    * The color that is used for the feature when no data is available (a null value for example).
    */
@@ -278,9 +277,9 @@ export const DynamicChoropleth = withLoadingProps((getLoadingProps) =>
       } = getLoadingProps();
       return (
         <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${
-            dataConfig.metricProperty.toString()
-          }/${minHeight}/${dataOptions.selectedCode ?? ''}`}
+          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${dataConfig.metricProperty.toString()}/${minHeight}/${
+            dataOptions.selectedCode ?? ''
+          }`}
         />
       );
     },
