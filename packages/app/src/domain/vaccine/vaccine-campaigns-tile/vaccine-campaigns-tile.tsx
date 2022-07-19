@@ -1,0 +1,56 @@
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { ChartTile, Markdown, MetadataProps } from '~/components';
+import { NarrowVaccineCampaignTable } from './components/narrow-vaccine-campaign-table';
+import { WideVaccineCampaignTable } from './components/wide-vaccine-campaign-table';
+import {
+  VaccineCampaign,
+  VaccineCampaignDescriptions,
+  VaccineCampaignHeaders,
+} from './types';
+import { Box } from '~/components/base';
+
+interface VaccineCampaignsTileProps {
+  title: string;
+  description: string;
+  descriptionFooter: string;
+  metadata: MetadataProps;
+  headers: VaccineCampaignHeaders;
+  campaigns: VaccineCampaign[];
+  campaignDescriptions: VaccineCampaignDescriptions;
+}
+
+export const VaccineCampaignsTile = ({
+  title,
+  headers,
+  campaigns,
+  campaignDescriptions,
+  description,
+  descriptionFooter,
+  metadata,
+}: VaccineCampaignsTileProps) => {
+  const breakpoints = useBreakpoints();
+
+  return (
+    <>
+      <ChartTile title={title} description={description} metadata={metadata}>
+        {breakpoints.sm ? (
+          <WideVaccineCampaignTable
+            campaigns={campaigns}
+            campaignDescriptions={campaignDescriptions}
+            headers={headers}
+          />
+        ) : (
+          <NarrowVaccineCampaignTable
+            campaigns={campaigns}
+            campaignDescriptions={campaignDescriptions}
+            headers={headers}
+          />
+        )}
+      </ChartTile>
+
+      <Box maxWidth="maxWidthText" mt={-55}>
+        <Markdown content={descriptionFooter} />
+      </Box>
+    </>
+  );
+};

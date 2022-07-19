@@ -1,1 +1,12 @@
 timestamp,action,key,document_id,move_to
+2022-07-18T09:35:38.702Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.title,eqFl28ScTYzTImF144MBIv,__
+2022-07-18T09:35:39.754Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.description,eqFl28ScTYzTImF144MBYh,__
+2022-07-18T09:35:40.799Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.vaccine,M1X5uhtA0L6eSCc3lIjk73,__
+2022-07-18T09:35:41.673Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.previous_week,rqPl4RDgHRhhQeuZ9blk3g,__
+2022-07-18T09:35:42.688Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.total,M1X5uhtA0L6eSCc3lIjkfN,__
+2022-07-18T09:35:43.707Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeating_shot_description,M1X5uhtA0L6eSCc3lIjl3t,__
+2022-07-18T09:35:44.708Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_shot_description,rqPl4RDgHRhhQeuZ9blkUO,__
+2022-07-18T09:35:45.717Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_shot_description,M1X5uhtA0L6eSCc3lIjlcD,__
+2022-07-18T09:35:46.791Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.description_footer,rqPl4RDgHRhhQeuZ9blkqe,__
+2022-07-18T09:35:47.752Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.source.href,rqPl4RDgHRhhQeuZ9bllQG,__
+2022-07-18T09:35:48.762Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.source.text,eqFl28ScTYzTImF144MCRu,__

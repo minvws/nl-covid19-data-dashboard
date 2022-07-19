@@ -28,7 +28,7 @@ import {
   VaccineStockPerSupplierChart,
   BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
-import { VaccinatedPeopleTile } from '~/domain/vaccine/vaccinated-people-tile/vaccinated-people-tile';
+import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
 import {
@@ -104,6 +104,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_stock',
     'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated',
+    'vaccine_campaigns',
+    'vaccine_planned',
     'booster_coverage',
     'booster_shot_administered',
     'repeating_shot_administered'
@@ -180,7 +182,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     administrationData,
   } = props;
-  const { commonTexts } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
   const { metadataTexts, textNl } = pageText;
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
@@ -289,20 +291,24 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
           />
 
-          {/* -------------------------------------------------------------- */}
-          {/*
-              TODO:
-              - update the labelTexts, title, source and description props to
-              point to the correct new text entries.
-          */}
-          <VaccinatedPeopleTile
-            title={textNl.vaccination_grade_toggle_tile.title}
-            source={textNl.vaccination_grade_toggle_tile.source}
-            description={
-              textNl.vaccination_grade_toggle_tile.description_footer
-            }
+          <VaccineCampaignsTile
+            title={textNl.vaccine_campaigns.title}
+            description={replaceVariablesInText(
+              textNl.vaccine_campaigns.description,
+              {
+                vaccinePlanned: formatNumber(data.vaccine_planned.doses),
+              }
+            )}
+            descriptionFooter={textNl.vaccine_campaigns.description_footer}
+            headers={textNl.vaccine_campaigns.headers}
+            campaigns={data.vaccine_campaigns.vaccine_campaigns}
+            campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+            metadata={{
+              datumsText: textNl.datums,
+              date: data.vaccine_campaigns.date_unix,
+              source: textNl.vaccination_coverage.bronnen.rivm,
+            }}
           />
-          {/* -------------------------------------------------------------- */}
 
           <VaccinationsKpiHeader
             text={textNl.repeating_shot_information_block}
