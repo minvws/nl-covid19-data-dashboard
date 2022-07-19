@@ -1,15 +1,14 @@
-import React from 'react';
 import css from '@styled-system/css';
 import { useCollapsible } from '~/utils/use-collapsible';
+import { useIntl } from '~/intl';
 import { Cell, HeaderCell, Row, StyledTable } from '.';
 import { Box } from '~/components/base';
+import { Markdown } from '~/components';
 import {
   VaccineCampaign,
   VaccineCampaignDescriptions,
   VaccineCampaignHeaders,
 } from '../types';
-import { Markdown } from '~/components';
-import { useIntl } from '~/intl';
 
 interface WideVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
