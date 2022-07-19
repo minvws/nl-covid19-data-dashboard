@@ -193,7 +193,7 @@ async function generateChoroplethImage(
   const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
 
   const stage = new Konva.Stage({
-    container: `${selectedCode}`,
+    container: selectedCode ? selectedCode : '',
     width,
     height,
   });
