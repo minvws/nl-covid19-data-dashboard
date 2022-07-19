@@ -1,5 +1,6 @@
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ChartTile, Markdown, MetadataProps } from '~/components';
+import { Text } from '~/components/typography';
 import { NarrowVaccineCampaignTable } from './components/narrow-vaccine-campaign-table';
 import { WideVaccineCampaignTable } from './components/wide-vaccine-campaign-table';
 import {
@@ -51,11 +52,12 @@ export const VaccineCampaignsTile = ({
             headers={headers}
           />
         )}
+        <Box mt={3}>
+          <Text variant="label1" color="annotation">
+            <Markdown content={descriptionFooter} />
+          </Text>
+        </Box>
       </ChartTile>
-
-      <Box maxWidth="maxWidthText" mt={-55}>
-        <Markdown content={descriptionFooter} />
-      </Box>
     </>
   );
 };
