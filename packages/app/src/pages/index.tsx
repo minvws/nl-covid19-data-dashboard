@@ -8,7 +8,6 @@ import {
   TimeframeOption,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { fetchLokalizeTexts } from '@corona-dashboard/cms/src/lokalize/logic/import';
 import {
   Arts,
   Chart,
@@ -62,6 +61,7 @@ import {
   trimNullValues,
   replaceVariablesInText,
 } from '~/utils';
+import { useDynamicLokalizeTexts } from '~/utils/cms/useDynamicLokalizeTexts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospitalPage.nl,
@@ -71,6 +71,8 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.topicalPage.nl,
   textShared: siteText.pages.topicalPage.shared,
 });
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
@@ -168,22 +170,6 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const useDynamicLokalizeTexts = async (
-  initialTexts: any,
-  selector: (text: SiteText) => any
-) => {
-  const { dataset } = useIntl();
-
-  if (dataset !== 'keys') {
-    return initialTexts;
-  }
-
-  const lokalizeTexts = await fetchLokalizeTexts(dataset);
-  const siteText = lokalizeTexts.nl as unknown as SiteText;
-
-  return selector(siteText);
-};
-
 const Home = async (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -195,7 +181,7 @@ const Home = async (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const pageText = await useDynamicLokalizeTexts(
+  const pageText = useDynamicLokalizeTexts<LokalizeTexts>(
     props.pageText,
     selectLokalizeTexts
   );
