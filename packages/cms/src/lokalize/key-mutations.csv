@@ -1,4 +1,15 @@
 timestamp,action,key,document_id,move_to
+2022-07-18T09:35:38.702Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.title,eqFl28ScTYzTImF144MBIv,__
+2022-07-18T09:35:39.754Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.description,eqFl28ScTYzTImF144MBYh,__
+2022-07-18T09:35:40.799Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.vaccine,M1X5uhtA0L6eSCc3lIjk73,__
+2022-07-18T09:35:41.673Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.previous_week,rqPl4RDgHRhhQeuZ9blk3g,__
+2022-07-18T09:35:42.688Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.total,M1X5uhtA0L6eSCc3lIjkfN,__
+2022-07-18T09:35:43.707Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeating_shot_description,M1X5uhtA0L6eSCc3lIjl3t,__
+2022-07-18T09:35:44.708Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_shot_description,rqPl4RDgHRhhQeuZ9blkUO,__
+2022-07-18T09:35:45.717Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_shot_description,M1X5uhtA0L6eSCc3lIjlcD,__
+2022-07-18T09:35:46.791Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.description_footer,rqPl4RDgHRhhQeuZ9blkqe,__
+2022-07-18T09:35:47.752Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.source.href,rqPl4RDgHRhhQeuZ9bllQG,__
+2022-07-18T09:35:48.762Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.source.text,eqFl28ScTYzTImF144MCRu,__
 2022-07-18T09:23:55.208Z,move,pages.variantsPage.nl.varianten_over_tijd.tooltip_labels.totaal_monsters,JtApmkyAs5Fi3aTDStcdtl,pages.variantsPage.nl.varianten_over_tijd.labels.totaal_monsters
 2022-07-18T09:32:08.990Z,add,pages.in_variantsPage.shared.varianten_over_tijd_grafiek.labels,eqFl28ScTYzTImF144LuNw,__
 2022-07-18T09:32:09.994Z,add,pages.variantsPage.nl.varianten_over_tijd.labels.niet_compleet,rqPl4RDgHRhhQeuZ9blFFw,__
@@ -8,3 +19,11 @@ timestamp,action,key,document_id,move_to
 2022-07-18T09:35:54.396Z,add,pages.positiveTestsPage.shared.labels.infected_moving_average,rqPl4RDgHRhhQeuZ9bliyu,__
 2022-07-18T09:37:37.631Z,add,pages.positiveTestsPage.shared.labels.infected_out_of_bounds,M1X5uhtA0L6eSCc3lIjw3R,__
 2022-07-18T09:40:19.115Z,add,common.verdenkingen_huisartsen.labels.covid_klachten,M1X5uhtA0L6eSCc3lIkDll,__
+2022-07-19T07:40:02.548Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.bronnen.rivm.href,M1X5uhtA0L6eSCc3lNRvdN,__
+2022-07-19T07:40:03.779Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.bronnen.rivm.text,M1X5uhtA0L6eSCc3lNRwBh,__
+2022-07-19T07:40:03.781Z,delete,pages.vaccinationsPage.nl.vaccine_campaigns.source.href,rqPl4RDgHRhhQeuZ9bllQG,__
+2022-07-19T07:40:03.788Z,delete,pages.vaccinationsPage.nl.vaccine_campaigns.source.text,eqFl28ScTYzTImF144MCRu,__
+2022-07-19T07:40:03.812Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_shot_description,rqPl4RDgHRhhQeuZ9blkUO,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_vaccination_description
+2022-07-19T07:40:03.828Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_shot_description,M1X5uhtA0L6eSCc3lIjlcD,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_serie_description
+2022-07-19T07:40:03.854Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeating_shot_description,M1X5uhtA0L6eSCc3lIjl3t,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeat_vaccination_description
+2022-07-19T07:40:03.857Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.headers.previous_week,rqPl4RDgHRhhQeuZ9blk3g,pages.vaccinationsPage.nl.vaccine_campaigns.headers.last_week
