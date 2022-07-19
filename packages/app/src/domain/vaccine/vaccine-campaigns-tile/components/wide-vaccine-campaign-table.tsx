@@ -25,28 +25,22 @@ export const WideVaccineCampaignTable = ({
     <StyledTable>
       <thead>
         <tr>
-          {Object.entries(headers).map(([key, value]) => (
-            <HeaderCell key={key}>{value}</HeaderCell>
-          ))}
+          <HeaderCell>{headers.vaccine}</HeaderCell>
+          <HeaderCell>{headers.last_week}</HeaderCell>
+          <HeaderCell>{headers.total}</HeaderCell>
         </tr>
       </thead>
 
       <tbody>
-        {campaigns
-          .sort(
-            (campaignA, campaignB) =>
-              campaignA.vaccine_campaign_order -
-              campaignB.vaccine_campaign_order
-          )
-          .map((campaign, index) => (
-            <VaccineCampaignRow
-              key={index}
-              campaign={campaign}
-              campaigns={campaigns}
-              campaignDescriptions={campaignDescriptions}
-              index={index}
-            />
-          ))}
+        {campaigns.map((campaign, index) => (
+          <VaccineCampaignRow
+            key={index}
+            campaign={campaign}
+            campaignDescriptions={campaignDescriptions}
+            isFirst={index === 0}
+            isLast={index + 1 === campaigns.length}
+          />
+        ))}
       </tbody>
     </StyledTable>
   );
@@ -54,27 +48,23 @@ export const WideVaccineCampaignTable = ({
 
 interface VaccineCampaignRowProps {
   campaign: VaccineCampaign;
-  campaigns: VaccineCampaign[];
   campaignDescriptions: VaccineCampaignDescriptions;
-  index: number;
+  isFirst: boolean;
+  isLast: boolean;
 }
 
 const VaccineCampaignRow = ({
   campaign,
-  campaigns,
   campaignDescriptions,
-  index,
+  isFirst,
+  isLast,
 }: VaccineCampaignRowProps) => {
   const { formatNumber } = useIntl();
-  const collapsible = useCollapsible({ isOpen: index === 0 });
+  const collapsible = useCollapsible({ isOpen: isFirst });
   const isOpen = collapsible.isOpen;
 
   return (
-    <Row
-      isLast={index + 1 === campaigns.length}
-      isOpen={isOpen}
-      onClick={() => collapsible.toggle()}
-    >
+    <Row isLast={isLast} isOpen={isOpen} onClick={() => collapsible.toggle()}>
       <Cell colSpan={4} css={css({ p: 0 })}>
         <StyledTable>
           <tbody>
@@ -82,6 +72,7 @@ const VaccineCampaignRow = ({
               <Cell css={css({ fontWeight: 'bold' })}>
                 {campaign.vaccine_campaign_name_nl}
               </Cell>
+
               <Cell>
                 {isOpen ? (
                   <strong>
@@ -91,6 +82,7 @@ const VaccineCampaignRow = ({
                   <>{formatNumber(campaign.vaccine_administered_last_week)}</>
                 )}
               </Cell>
+
               <Cell>
                 <Box
                   display="flex"

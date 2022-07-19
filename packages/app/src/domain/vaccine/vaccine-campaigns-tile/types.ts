@@ -6,10 +6,5 @@ export interface VaccineCampaign {
   vaccine_administered_last_week: number;
 }
 
-export type VaccineCampaignDescriptions = {
-  [key: string]: string;
-};
-
-export type VaccineCampaignHeaders = {
-  [key: string]: string;
-};
+export type VaccineCampaignDescriptions = Record<string, string>;
+export type VaccineCampaignHeaders = Record<string, string>;

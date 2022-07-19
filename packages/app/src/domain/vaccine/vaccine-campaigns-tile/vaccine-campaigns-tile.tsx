@@ -30,18 +30,23 @@ export const VaccineCampaignsTile = ({
 }: VaccineCampaignsTileProps) => {
   const breakpoints = useBreakpoints();
 
+  const sortedCampaigns = campaigns.sort(
+    (campaignA, campaignB) =>
+      campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order
+  );
+
   return (
     <>
       <ChartTile title={title} description={description} metadata={metadata}>
         {breakpoints.sm ? (
           <WideVaccineCampaignTable
-            campaigns={campaigns}
+            campaigns={sortedCampaigns}
             campaignDescriptions={campaignDescriptions}
             headers={headers}
           />
         ) : (
           <NarrowVaccineCampaignTable
-            campaigns={campaigns}
+            campaigns={sortedCampaigns}
             campaignDescriptions={campaignDescriptions}
             headers={headers}
           />
