@@ -104,13 +104,17 @@ const VaccineCampaignRow = ({
                     {isOpen ? (
                       <strong>
                         {formatNumber(
-                          campaign[`vaccine_administered_${header}`]
+                          campaign[
+                            `vaccine_administered_${header}` as keyof VaccineCampaign
+                          ]
                         )}
                       </strong>
                     ) : (
                       <>
                         {formatNumber(
-                          campaign[`vaccine_administered_${header}`]
+                          campaign[
+                            `vaccine_administered_${header}` as keyof VaccineCampaign
+                          ]
                         )}
                       </>
                     )}

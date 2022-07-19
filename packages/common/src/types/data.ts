@@ -245,6 +245,8 @@ export interface Nl {
   vaccine_administered_hospitals_and_care_institutions: NlVaccineAdministeredHospitalsAndCareInstitutions;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccine_campaigns: NlVaccineCampaigns;
+  vaccine_planned: NlVaccinePlanned;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: NlVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
@@ -864,6 +866,27 @@ export interface NlVaccineAdministeredPlanned {
 }
 export interface NlVaccineAdministeredPlannedValue {
   doses: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCampaigns {
+  vaccine_campaigns: NlVaccineCampaign[];
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCampaign {
+  vaccine_campaign_order: number;
+  vaccine_campaign_name_nl: string;
+  vaccine_campaign_name_en: string;
+  vaccine_administered_total: number;
+  vaccine_administered_last_week: number;
+}
+export interface NlVaccinePlanned {
+  doses: number;
+  date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
