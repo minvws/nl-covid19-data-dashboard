@@ -61,7 +61,7 @@ import {
   trimNullValues,
   replaceVariablesInText,
 } from '~/utils';
-import { useDynamicLokalizeTexts } from '~/utils/cms/useDynamicLokalizeTexts';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospitalPage.nl,
@@ -170,7 +170,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Home = async (props: StaticProps<typeof getStaticProps>) => {
+const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const dataSewerTotal = data.sewer;
@@ -181,11 +181,8 @@ const Home = async (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const pageText = useDynamicLokalizeTexts<LokalizeTexts>(
-    props.pageText,
-    selectLokalizeTexts
-  );
-  const { hospitalText, intensiveCareText, textNl, textShared } = pageText;
+  const { hospitalText, intensiveCareText, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 

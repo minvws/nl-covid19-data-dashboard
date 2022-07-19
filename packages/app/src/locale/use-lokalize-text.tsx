@@ -36,8 +36,10 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
-  const isStagingEnv = typeof window !== 'undefined' && window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
-  const showSanityDebugToggle = enableHotReload || isStagingEnv;
+  const isStagingEnv =
+    typeof window !== 'undefined' &&
+    window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
+  const showSanityDebugToggle = true || enableHotReload || isStagingEnv;
 
   const [dataset, setDataset] = useState<Dataset>(
     (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
@@ -143,7 +145,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
  * output:
  *     { foo: { bar: 'foo.bar', baz: 'foo.baz' }}
  */
-function mapSiteTextValuesToKeys(siteText: SiteText) {
+export function mapSiteTextValuesToKeys(siteText: SiteText) {
   const keys = Object.keys(flatten(siteText));
 
   const obj = keys.reduce(
