@@ -36,7 +36,7 @@ export function VariantsOverTime({
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
     color: colors.data.underReported,
-    label: text.legend_niet_compleet_label,
+    label: text.labels.niet_compleet,
   };
 
   const alwaysEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
@@ -60,16 +60,11 @@ export function VariantsOverTime({
         {
           type: 'invisible',
           metricProperty: 'sample_size',
-          label: text.tooltip_labels.totaal_monsters,
+          label: text.labels.totaal_monsters,
           isPercentage: false,
         },
       ] as SeriesConfig<VariantChartValue>,
-    [
-      seriesConfig,
-      alwaysEnabled,
-      compareList,
-      text.tooltip_labels.totaal_monsters,
-    ]
+    [seriesConfig, alwaysEnabled, compareList, text.labels.totaal_monsters]
   );
 
   /* Static legend contains only the inaccurate item */
@@ -110,7 +105,7 @@ export function VariantsOverTime({
             {
               start: underReportedDateStart,
               end: Infinity,
-              label: text.legend_niet_compleet_label,
+              label: text.labels.niet_compleet,
               shortLabel: text.tooltip_labels.niet_compleet,
             },
           ],
