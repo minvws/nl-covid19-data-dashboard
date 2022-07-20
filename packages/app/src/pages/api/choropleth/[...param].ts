@@ -2,7 +2,7 @@ import { assert, vrData } from '@corona-dashboard/common';
 import { geoMercator } from 'd3-geo';
 import fs from 'fs';
 import hash from 'hash-sum';
-import Konva from 'konva-node';
+import Konva from 'konva';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
@@ -193,6 +193,7 @@ async function generateChoroplethImage(
   const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
 
   const stage = new Konva.Stage({
+    container: selectedCode ? selectedCode : '',
     width,
     height,
   });
