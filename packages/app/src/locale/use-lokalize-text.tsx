@@ -39,7 +39,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const isStagingEnv =
     typeof window !== 'undefined' &&
     window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
-  const showSanityDebugToggle = true || enableHotReload || isStagingEnv;
+  const showSanityDebugToggle = enableHotReload || isStagingEnv;
 
   const [dataset, setDataset] = useState<Dataset>(
     (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
