@@ -9,13 +9,7 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { DataConfig, DataOptions } from '..';
 import { TooltipSettings } from '../tooltips/types';
 import { thresholds } from './thresholds';
-import {
-  ChoroplethDataItem,
-  CodeProp,
-  isCodeProp,
-  mapToCodeType,
-  MapType,
-} from './types';
+import { ChoroplethDataItem, CodeProp, mapToCodeType, MapType } from './types';
 import { useFeatureName } from './use-feature-name';
 import { isCodedValueType } from './utils';
 
@@ -102,15 +96,15 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       return;
     }
 
-    function handleBubbledFocusIn(event: FocusEvent): void {
+    function handleBubbledFocusIn(event: FocusEvent) {
       const link = event.target as HTMLAnchorElement;
       if (!isDefined(link)) {
         return;
       }
 
-      const code = link.getAttribute('data-id');
+      const code = link.getAttribute('data-id') as CodeProp;
 
-      if (isPresent(code) && isPresent(container) && isCodeProp(code)) {
+      if (isPresent(code) && isPresent(container)) {
         const bboxContainer = container.getBoundingClientRect();
         const bboxLink = link.getBoundingClientRect();
         const left = bboxLink.left - bboxContainer.left;
@@ -190,7 +184,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   ] as ChoroplethTooltipHandlers;
 }
 
-type HoverInfo = { code: string; x: number; y: number };
+type HoverInfo = { code: CodeProp; x: number; y: number };
 
 const createTooltipTrigger = <T extends ChoroplethDataItem>(
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
@@ -203,7 +197,7 @@ const createTooltipTrigger = <T extends ChoroplethDataItem>(
   metricPropertyFormatter: (value: number) => string
 ) => {
   return (hoverInfo?: HoverInfo) => {
-    if (!isDefined(hoverInfo) || !isCodeProp(hoverInfo.code)) {
+    if (!isDefined(hoverInfo)) {
       return setTooltip(undefined);
     }
 
@@ -239,9 +233,9 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
 ) => {
   return (event: React.MouseEvent<HTMLElement>) => {
     const elm = event.target as HTMLElement;
-    const code = elm.getAttribute('data-id');
+    const code = elm.getAttribute('data-id') as CodeProp;
 
-    if (isPresent(code) && isCodeProp(code) && ref.current) {
+    if (isPresent(code) && ref.current) {
       if (timeout.current > -1) {
         clearTimeout(timeout.current);
         timeout.current = -1;
@@ -292,10 +286,9 @@ function useMetricPropertyFormatter<T extends ChoroplethDataItem>(
   intl: IntlContextProps
 ) {
   return useMemo(() => {
-    const values = data.map((value) => {
-      const valueEntry = value[dataConfig.metricProperty];
-      return typeof valueEntry === 'number' ? valueEntry : 0;
-    });
+    const values = data.map(
+      (x) => x[dataConfig.metricProperty] as unknown as number
+    );
     const numberOfDecimals = getMaximumNumberOfDecimals(values);
     return (value: number) =>
       intl.formatPercentage(value, {
