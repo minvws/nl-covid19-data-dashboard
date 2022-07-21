@@ -1,3 +1,4 @@
+import type { KeysOfType } from '@corona-dashboard/common';
 import { Chevron } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
@@ -15,7 +16,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 const ICON_SIZE = 55;
 
 export interface PiePartConfig<T> {
-  metricProperty: keyof T;
+  metricProperty: KeysOfType<T, number, true>;
   color: string;
   label: string;
   tooltipLabel: string;
@@ -71,13 +72,11 @@ export function PieChart<T>({
     formatDateSpan,
   };
 
-  const totalValue = dataConfig.reduce((previousValue, currentValue) => {
-    const metricPropertyValue = data[currentValue.metricProperty];
-    return (
-      previousValue +
-      (typeof metricPropertyValue === 'number' ? metricPropertyValue : 0)
-    );
-  }, 0);
+  const totalValue = dataConfig.reduce(
+    (previousValue, currentValue) =>
+      previousValue + (data[currentValue.metricProperty] as unknown as number),
+    0
+  );
 
   const mappedDataWithValues = useMemo(
     () =>
@@ -86,7 +85,7 @@ export function PieChart<T>({
 
         return {
           __value: Math.max(
-            typeof currentProperty === 'number' ? currentProperty : 0,
+            currentProperty as unknown as number,
             totalValue * (minimumPercentage / 100) * 2
           ),
           ...config,

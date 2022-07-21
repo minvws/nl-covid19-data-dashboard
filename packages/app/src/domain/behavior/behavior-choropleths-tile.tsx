@@ -1,5 +1,6 @@
 import {
   colors,
+  KeysOfType,
   VrCollectionBehavior,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -118,7 +119,7 @@ function ChoroplethBlock({
   const breakpoints = useBreakpoints();
 
   const isSmallScreen = breakpoints.sm;
-  const metricProperty = `${currentId}_${behaviorType}` as keyof VrCollectionBehavior;
+  const metricProperty = `${currentId}_${behaviorType}` as const;
 
   return (
     <Box width={{ _: '100%', lg: '50%' }} spacing={3}>
@@ -152,7 +153,11 @@ function ChoroplethBlock({
             data={data.behavior}
             dataConfig={{
               metricName: 'behavior',
-              metricProperty,
+              metricProperty: metricProperty as unknown as KeysOfType<
+                VrCollectionBehavior,
+                number | null | boolean | undefined,
+                true
+              >,
               noDataFillColor: colors.offWhite,
             }}
             dataOptions={{

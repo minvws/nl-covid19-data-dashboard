@@ -13,7 +13,7 @@ import {
   DateSpanValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
+import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
 import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
@@ -49,7 +49,7 @@ export type AxesProps<T extends TimestampedValue> = {
   timeDomain: [number, number];
   xTickNumber?: number;
   values?: T[];
-  formatYTickValue?: TickFormatter<NumberValue>;
+  formatYTickValue?: (value: number) => string;
 
   /**
    * On narrow screens we'll "collapse" the Y-axis. Only the low value will be
@@ -92,6 +92,8 @@ function createTimeTicks(startTick: number, endTick: number, count: number) {
   return ticks;
 }
 
+export type AnyTickFormatter = (value: any) => string;
+
 export const Axes = memo(function Axes<T extends TimestampedValue>({
   numGridLines,
   showWeekNumbers,
@@ -127,13 +129,13 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
-  const formatYAxis: TickFormatter<NumberValue> = useCallback(
-    (y: NumberValue) => formatNumber(y as number),
+  const formatYAxis = useCallback(
+    (y: number) => formatNumber(y),
     [formatNumber]
   );
 
-  const formatYAxisPercentage: TickFormatter<NumberValue> = useCallback(
-    (y: NumberValue) => `${formatPercentage(y as number)}%`,
+  const formatYAxisPercentage = useCallback(
+    (y: number) => `${formatPercentage(y)}%`,
     [formatPercentage]
   );
 
@@ -354,10 +356,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
               stroke={colors.silver}
               tickFormat={
                 formatYTickValue
-                  ? formatYTickValue
+                  ? (formatYTickValue as AnyTickFormatter)
                   : isPercentage
-                  ? formatYAxisPercentage
-                  : formatYAxis
+                  ? (formatYAxisPercentage as AnyTickFormatter)
+                  : (formatYAxis as AnyTickFormatter)
               }
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
@@ -386,10 +388,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
             stroke={colors.silver}
             tickFormat={
               formatYTickValue
-                ? formatYTickValue
+                ? (formatYTickValue as AnyTickFormatter)
                 : isPercentage
-                ? formatYAxisPercentage
-                : formatYAxis
+                ? (formatYAxisPercentage as AnyTickFormatter)
+                : (formatYAxis as AnyTickFormatter)
             }
             tickLabelProps={() => ({
               fill: colors.data.axisLabels,

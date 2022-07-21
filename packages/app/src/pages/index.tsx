@@ -675,7 +675,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} text={textShared} />
+              <ArticleList
+                articles={content.articles as any}
+                text={textShared}
+              />
             )}
           </MaxWidth>
         </Box>

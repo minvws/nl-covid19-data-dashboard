@@ -1,7 +1,8 @@
-import type { TimestampedValue } from '@corona-dashboard/common';
+import type { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
 import { colors } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { AreaClosed, LinePath } from '@visx/shape';
+import { NumberValue } from 'd3-scale';
 import { first, last } from 'lodash';
 import { isPresent } from 'ts-is-present';
 
@@ -10,7 +11,7 @@ const HEIGHT = 24;
 const MARKER_RADIUS = 2.5;
 
 type SparkLineProps<T extends TimestampedValue> = {
-  averageProperty: keyof T;
+  averageProperty: KeysOfType<T, number | null, true>;
   data: T[];
 };
 
@@ -30,20 +31,14 @@ export function SparkLine<T extends TimestampedValue>(
   props: SparkLineProps<T>
 ) {
   const { data, averageProperty } = props;
-
-  const getNumberValue = (data: T, key: keyof T): number => {
-    const value = data[key];
-    return typeof value === 'number' ? value : 0;
-  };
-
   const numberOfPoints = data.length;
   const min = Math.min(
     0,
-    ...data.map((d) => getNumberValue(d, averageProperty))
+    ...data.map((d) => (d[averageProperty] as unknown as number) ?? 0)
   );
   const max = Math.max(
     0.1,
-    ...data.map((d) => getNumberValue(d, averageProperty))
+    ...data.map((d) => (d[averageProperty] as unknown as number) ?? 0)
   );
   const xScale = scaleLinear({
     domain: [getDate(first(data)), getDate(last(data))],
@@ -60,7 +55,7 @@ export function SparkLine<T extends TimestampedValue>(
   }
 
   function getY(dataPoint: T) {
-    return yScale(getNumberValue(dataPoint, averageProperty));
+    return yScale(dataPoint[averageProperty] as unknown as NumberValue);
   }
 
   const nonNullValues = data.filter((x) => isPresent(x[averageProperty]));
