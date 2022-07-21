@@ -1,8 +1,8 @@
 import { assert, vrData } from '@corona-dashboard/common';
-import { geoConicConformal, geoMercator } from 'd3-geo';
+import { geoMercator } from 'd3-geo';
 import fs from 'fs';
 import hash from 'hash-sum';
-import Konva from 'konva-node';
+import Konva from 'konva';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
 import sanitize from 'sanitize-filename';
@@ -21,7 +21,7 @@ import { createDataConfig } from '~/components/choropleth/logic/create-data-conf
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
-import { gmGeo, inGeo, nlGeo, vrGeo } from './topology';
+import { gmGeo, nlGeo, vrGeo } from './topology';
 /**
  * The combination node-canvas and sharp leads to runtime crashes under Windows, this
  * ENV variable disables compression. By conditionally importing the sharp lib we
@@ -99,18 +99,17 @@ export default async function handler(
 }
 
 function createGeoJson(map: MapType) {
-  const outlineGeo = map === 'in' ? undefined : nlGeo;
   assert(
-    map === 'in' || map === 'vr' || map === 'gm',
+    map === 'vr' || map === 'gm',
     `[${createGeoJson.name}] Unknown maptype: ${map}`
   );
 
-  const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;
+  const featureGeo = map === 'vr' ? vrGeo : gmGeo;
 
-  return [featureGeo, outlineGeo] as const;
+  return [featureGeo, nlGeo] as const;
 }
 
-const validMapTypes: MapType[] = ['gm', 'vr', 'in'];
+const validMapTypes: MapType[] = ['gm', 'vr'];
 function loadChoroplethData(map: MapType, metric: string) {
   if (!validMapTypes.includes(map)) {
     throw new Error(`Invalid map type: ${map}`);
@@ -154,10 +153,8 @@ async function generateChoroplethImage(
 
   const dataOptions: DataOptions = {};
 
-  const aspectRatio =
-    map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
-
-  const mapProjection = map === 'in' ? geoConicConformal : geoMercator;
+  const aspectRatio = CHOROPLETH_ASPECT_RATIO.nl;
+  const mapProjection = geoMercator;
 
   const width = height * (1 / aspectRatio);
 
@@ -196,6 +193,7 @@ async function generateChoroplethImage(
   const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
 
   const stage = new Konva.Stage({
+    container: selectedCode ? selectedCode : '',
     width,
     height,
   });

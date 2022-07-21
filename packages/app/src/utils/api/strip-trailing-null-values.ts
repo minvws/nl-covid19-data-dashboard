@@ -15,7 +15,7 @@ export function stripTrailingNullValues(
 ) {
   if (
     !metricsInaccurateItems.includes(metric) ||
-    !strippableMetricProperties.includes(metricProperty as unknown as string)
+    !strippableMetricProperties.includes(metricProperty ?? '')
   ) {
     return data;
   }

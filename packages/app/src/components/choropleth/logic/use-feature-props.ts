@@ -138,28 +138,5 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
         },
       };
     }
-    case 'in': {
-      return {
-        area: {
-          fill: (code: string) => {
-            return getFillColor(code);
-          },
-          stroke: () => colors.white,
-          strokeWidth: () => DEFAULT_STROKE_WIDTH,
-        },
-        hover: {
-          fill: () => 'none',
-          stroke: (_code: string, isActivated?: boolean) =>
-            isActivated ? colors.body : 'none',
-          strokeWidth: (_code: string, isActivated?: boolean) =>
-            isActivated ? 1 : 0,
-        },
-        outline: {
-          fill: () => 'none',
-          stroke: () => colors.silver,
-          strokeWidth: () => DEFAULT_STROKE_WIDTH,
-        },
-      };
-    }
   }
 }

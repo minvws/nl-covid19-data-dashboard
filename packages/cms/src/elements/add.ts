@@ -44,7 +44,6 @@ async function promptForElement(): Promise<Element | undefined> {
     { title: 'Municipal', value: 'gm' },
     { title: 'Safety region', value: 'vr' },
     { title: 'National', value: 'nl' },
-    { title: 'International', value: 'in' },
   ];
 
   const scopeResponse = (await prompts({

@@ -1,53 +1,29 @@
 timestamp,action,key,document_id,move_to
-2022-04-22T08:09:02.839Z,add,common.g_number.bar_chart.legend_inaccurate_label,X8Z1HTDxqJ9pM59362hg1m,__
-2022-04-25T14:25:46.327Z,add,common.charts.time_controls.firstOfSeptember,A5Y41hFe5J3wNnB7O7FFlP,__
-2022-04-25T14:25:47.391Z,add,common.g_number.bar_chart.legend.negative_label,Raj9X55CxrYuKzixU46zrk,__
-2022-04-25T14:25:48.351Z,add,common.g_number.bar_chart.legend.positive_label,X8Z1HTDxqJ9pM59364bIJw,__
-2022-04-25T14:25:48.352Z,move,common.g_number.bar_chart.legend_inaccurate_label,X8Z1HTDxqJ9pM59362hg1m,common.g_number.bar_chart.legend.inaccurate_label
-2022-04-26T12:03:58.578Z,move,ic_opnames_per_dag.chart_bedbezetting.description,jF33EuwumlGuwav2FD3WM8,pages.intensiveCarePage.nl.chart_bedbezetting.description
-2022-05-03T07:38:37.855Z,add,common.choropleth_tooltip.gm.admissions_on_date_of_admission_per_100000.content,Hx8hkeSw0pqyYojKtfA6sV,__
-2022-05-03T07:38:38.919Z,add,common.choropleth_tooltip.gm.admissions_on_date_of_admission_per_100000.subject,xNELI4GNAeXqkWZzsGHq9R,__
-2022-05-03T07:38:39.890Z,add,common.choropleth_tooltip.vr.admissions_on_date_of_admission_per_100000.content,xNELI4GNAeXqkWZzsGHqv1,__
-2022-05-03T07:38:40.968Z,add,common.choropleth_tooltip.vr.admissions_on_date_of_admission_per_100000.subject,Hx8hkeSw0pqyYojKtfA8KD,__
-2022-05-03T07:38:41.991Z,add,common.common.value_until_value,Hx8hkeSw0pqyYojKtfA8e9,__
-2022-05-03T07:38:42.924Z,add,common.common.value_and_higher,hqivmGf8UPzCLjKFjHM91t,__
-2022-05-03T12:26:14.845Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.fully_vaccinated,hqivmGf8UPzCLjKFjHrFoj,__
-2022-05-03T12:26:16.004Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated,xNELI4GNAeXqkWZzsHMnYw,__
-2022-05-03T12:26:17.032Z,add,pages.vaccinationsPage.nl.vaccination_coverage.headers.booster_shot,xNELI4GNAeXqkWZzsHMprg,__
-2022-05-03T12:26:18.031Z,add,pages.vaccinationsPage.nl.vaccination_coverage.toelichting_booster_shot,hqivmGf8UPzCLjKFjHrGgv,__
-2022-05-03T15:21:44.684Z,add,pages.vaccinationsPage.gm.vaccination_coverage.description_booster_and_fully_vaccinated,hqivmGf8UPzCLjKFjIAkJp,__
-2022-05-03T15:21:46.025Z,add,pages.vaccinationsPage.vr.vaccination_coverage.description_booster_and_fully_vaccinated,hqivmGf8UPzCLjKFjIAkSr,__
-2022-05-03T15:21:47.062Z,add,pages.vaccinationsPage.vr.vaccination_coverage.title,xNELI4GNAeXqkWZzsI1aAP,__
-2022-05-04T12:40:09.691Z,add,pages.vaccinationsPage.shared.vaccine_coverage_per_age_group,hqivmGf8UPzCLjKFjK6SXZ,__
-2022-05-05T11:48:10.313Z,add,pages.vaccinationsPage.nl.vaccination_coverage.no_data,hqivmGf8UPzCLjKFjLpCSD,__
-2022-05-05T11:48:10.323Z,delete,pages.vaccinationsPage.shared.vaccine_coverage_per_age_group,hqivmGf8UPzCLjKFjK6SXZ,__
-2022-05-03T14:03:24.707Z,add,common.corona_melder_app.belangrijk_bericht,xNELI4GNAeXqkWZzsHkjJM,__
-2022-05-09T09:27:22.505Z,add,common.choropleth_tooltip.vr.booster_shot_percentage.content,Hx8hkeSw0pqyYojKu0sKeK,__
-2022-05-09T09:27:23.526Z,add,common.choropleth_tooltip.vr.booster_shot_percentage.subject,Hx8hkeSw0pqyYojKu0sKtH,__
-2022-05-09T09:27:24.542Z,add,common.vaccinations.coverage_kinds.booster_shot_percentage,Hx8hkeSw0pqyYojKu0sL8E,__
-2022-05-09T09:27:24.543Z,delete,choropleth_tooltip.vr.booster_shot_percentage.content,ctWR1OtR3Bc4Z1QxETQyT3,__
-2022-05-09T09:27:24.543Z,delete,choropleth_tooltip.vr.booster_shot_percentage.subject,4C4Y1v39Co3s0ZW9zUzEm1,__
-2022-05-09T09:27:24.543Z,move,choropleth_tooltip.gm.booster_shot_percentage.content,VNAGnZtzuWCFY8gXn2zsLa,common.choropleth_tooltip.gm.booster_shot_percentage.content
-2022-05-09T09:27:24.544Z,move,choropleth_tooltip.gm.booster_shot_percentage.subject,VNAGnZtzuWCFY8gXn2zsT8,common.choropleth_tooltip.gm.booster_shot_percentage.subject
-2022-05-09T08:58:28.088Z,move,accessibility.charts.hospital_admissions_region_choropleth.description,G1DXw0RdifOml06twMjbPq,common.accessibility.charts.hospital_admissions_region_choropleth.description
-2022-05-12T07:55:42.658Z,delete,common.charts.time_controls.firstOfSeptember,A5Y41hFe5J3wNnB7O7FFlP,__
-2022-05-17T11:30:05.964Z,delete,pages.vaccinationsPage.nl.booster_kpi.booster_shot_last_seven_days.description,W42pYebYgNKSplnOwA9UMB,__
-2022-05-23T10:24:35.671Z,add,pages.situationsPage.shared.belangrijk_bericht,RQYRq9yqc5kuEd5capEHG3,__
-2022-05-25T12:52:50.949Z,add,pages.hospitalPage.nl.chart_bedbezetting.legend_dot_label,hErpiCVzoc9qP245irsdCS,__
-2022-05-25T13:25:56.013Z,add,pages.intensiveCarePage.nl.chart_bedbezetting.legend_dot_label,l9y47X7Mn753quuWoDXzrN,__
-2022-06-08T14:31:12.676Z,add,pages.positiveTestsPage.nl.ggd.linechart_percentage_legend_label,FpB1VG3smRHDNCGaZQZZoS,__
-2022-06-08T14:31:13.689Z,add,pages.positiveTestsPage.vr.ggd.linechart_percentage_legend_label,avHj0RuKBVR3WKDFaNt28q,__
-2022-07-06T13:00:33.984Z,add,common.variants.omicron b_1_1_529.countryOfOrigin,FpB1VG3smRHDNCGaZfFnHc,__
-2022-07-06T13:00:35.005Z,add,common.variants.omicron b_1_1_529.name,FpB1VG3smRHDNCGaZfFnJP,__
-2022-07-06T13:00:36.018Z,add,common.variants.omicron ba_1.countryOfOrigin,ITiTU3jVuy3jp8GMhgLGnz,__
-2022-07-06T13:00:37.027Z,add,common.variants.omicron ba_1.name,FpB1VG3smRHDNCGaZfFnPN,__
-2022-07-06T13:00:38.028Z,add,common.variants.omicron ba_2.countryOfOrigin,avHj0RuKBVR3WKDFarkBDI,__
-2022-07-06T13:00:39.050Z,add,common.variants.omicron ba_2.name,FpB1VG3smRHDNCGaZfFnWX,__
-2022-07-06T13:00:40.061Z,add,common.variants.omicron ba_2_12_1.countryOfOrigin,ITiTU3jVuy3jp8GMhgLHhL,__
-2022-07-06T13:00:41.073Z,add,common.variants.omicron ba_2_12_1.name,FpB1VG3smRHDNCGaZfFnnF,__
-2022-07-06T13:00:42.075Z,add,common.variants.omicron ba_3.countryOfOrigin,FpB1VG3smRHDNCGaZfFnp2,__
-2022-07-06T13:00:43.098Z,add,common.variants.omicron ba_3.name,avHj0RuKBVR3WKDFarkBch,__
-2022-07-06T13:00:44.103Z,add,common.variants.omicron ba_4.countryOfOrigin,FpB1VG3smRHDNCGaZfFnuP,__
-2022-07-06T13:00:45.123Z,add,common.variants.omicron ba_4.name,FpB1VG3smRHDNCGaZfFnwC,__
-2022-07-06T13:00:46.132Z,add,common.variants.omicron ba_5.countryOfOrigin,avHj0RuKBVR3WKDFarkC5j,__
-2022-07-06T13:00:47.149Z,add,common.variants.omicron ba_5.name,ITiTU3jVuy3jp8GMhgLJBb,__
+2022-07-18T09:35:38.702Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.title,eqFl28ScTYzTImF144MBIv,__
+2022-07-18T09:35:39.754Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.description,eqFl28ScTYzTImF144MBYh,__
+2022-07-18T09:35:40.799Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.vaccine,M1X5uhtA0L6eSCc3lIjk73,__
+2022-07-18T09:35:41.673Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.previous_week,rqPl4RDgHRhhQeuZ9blk3g,__
+2022-07-18T09:35:42.688Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.headers.total,M1X5uhtA0L6eSCc3lIjkfN,__
+2022-07-18T09:35:43.707Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeating_shot_description,M1X5uhtA0L6eSCc3lIjl3t,__
+2022-07-18T09:35:44.708Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_shot_description,rqPl4RDgHRhhQeuZ9blkUO,__
+2022-07-18T09:35:45.717Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_shot_description,M1X5uhtA0L6eSCc3lIjlcD,__
+2022-07-18T09:35:46.791Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.description_footer,rqPl4RDgHRhhQeuZ9blkqe,__
+2022-07-18T09:35:47.752Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.source.href,rqPl4RDgHRhhQeuZ9bllQG,__
+2022-07-18T09:35:48.762Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.source.text,eqFl28ScTYzTImF144MCRu,__
+2022-07-18T09:23:55.208Z,move,pages.variantsPage.nl.varianten_over_tijd.tooltip_labels.totaal_monsters,JtApmkyAs5Fi3aTDStcdtl,pages.variantsPage.nl.varianten_over_tijd.labels.totaal_monsters
+2022-07-18T09:32:08.990Z,add,pages.in_variantsPage.shared.varianten_over_tijd_grafiek.labels,eqFl28ScTYzTImF144LuNw,__
+2022-07-18T09:32:09.994Z,add,pages.variantsPage.nl.varianten_over_tijd.labels.niet_compleet,rqPl4RDgHRhhQeuZ9blFFw,__
+2022-07-18T09:32:09.994Z,delete,pages.in_variantsPage.shared.varianten_over_tijd_grafiek.labels.niet_compleet,eqFl28ScTYzTImF144Lf2E,__
+2022-07-18T09:32:09.995Z,delete,pages.variantsPage.nl.varianten_over_tijd.legend_niet_compleet_label,0Fi2ZNty1p5jcXUiTmaRVr,__
+2022-07-18T09:35:53.376Z,add,pages.positiveTestsPage.shared.labels.infected,rqPl4RDgHRhhQeuZ9blice,__
+2022-07-18T09:35:54.396Z,add,pages.positiveTestsPage.shared.labels.infected_moving_average,rqPl4RDgHRhhQeuZ9bliyu,__
+2022-07-18T09:37:37.631Z,add,pages.positiveTestsPage.shared.labels.infected_out_of_bounds,M1X5uhtA0L6eSCc3lIjw3R,__
+2022-07-18T09:40:19.115Z,add,common.verdenkingen_huisartsen.labels.covid_klachten,M1X5uhtA0L6eSCc3lIkDll,__
+2022-07-19T07:40:02.548Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.bronnen.rivm.href,M1X5uhtA0L6eSCc3lNRvdN,__
+2022-07-19T07:40:03.779Z,add,pages.vaccinationsPage.nl.vaccine_campaigns.bronnen.rivm.text,M1X5uhtA0L6eSCc3lNRwBh,__
+2022-07-19T07:40:03.781Z,delete,pages.vaccinationsPage.nl.vaccine_campaigns.source.href,rqPl4RDgHRhhQeuZ9bllQG,__
+2022-07-19T07:40:03.788Z,delete,pages.vaccinationsPage.nl.vaccine_campaigns.source.text,eqFl28ScTYzTImF144MCRu,__
+2022-07-19T07:40:03.812Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_shot_description,rqPl4RDgHRhhQeuZ9blkUO,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.booster_vaccination_description
+2022-07-19T07:40:03.828Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_shot_description,M1X5uhtA0L6eSCc3lIjlcD,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_serie_description
+2022-07-19T07:40:03.854Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeating_shot_description,M1X5uhtA0L6eSCc3lIjl3t,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeat_vaccination_description
+2022-07-19T07:40:03.857Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.headers.previous_week,rqPl4RDgHRhhQeuZ9blk3g,pages.vaccinationsPage.nl.vaccine_campaigns.headers.last_week

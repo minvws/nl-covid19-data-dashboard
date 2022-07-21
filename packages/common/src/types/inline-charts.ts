@@ -8,7 +8,6 @@ import {
 } from '.';
 
 export const areaTitles = {
-  in: 'Internationaal',
   nl: 'Nationaal',
   vr: 'Veiligheidsregio',
   gm: 'Gemeente',
@@ -28,7 +27,7 @@ export type ChoroplethConfiguration<
   M extends MetricKeys<ScopedData[S]>
 > = {
   metricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;
-  map: 'in' | 'vr' | 'gm';
+  map: 'vr' | 'gm';
   accessibilityKey: string;
   sourceKey: string;
   noDataFillColor?: string;
@@ -83,9 +82,10 @@ export type DonutMetricPropertyConfig<
 
 export type AgeDemographicConfiguration<
   S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
+  M extends MetricKeys<ScopedData[S]>,
+  K extends string
 > = {
-  accessibilityKey: string;
+  accessibilityKey: K;
   sourceKey: string;
   text: string;
   leftMetricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;

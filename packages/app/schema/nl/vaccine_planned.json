@@ -1,26 +1,21 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_planned",
   "type": "object",
-  "title": "in_collection_tested_overall",
-  "additionalProperties": false,
   "required": [
-    "country_code",
-    "infected",
-    "infected_per_100k_average",
+    "doses",
+    "date_unix",
     "date_start_unix",
     "date_end_unix",
     "date_of_insertion_unix"
   ],
+  "additionalProperties": false,
   "properties": {
-    "country_code": {
-      "type": "string",
-      "pattern": "^[A-Z]+$"
-    },
-    "infected": {
+    "doses": {
       "type": "integer"
     },
-    "infected_per_100k_average": {
-      "type": "number"
+    "date_unix": {
+      "type": "integer"
     },
     "date_start_unix": {
       "type": "integer"

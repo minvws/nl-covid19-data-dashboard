@@ -13,7 +13,6 @@ const createPatchFrom = (value: string) => {
 };
 
 export const areaTitles = {
-  in: 'Internationaal',
   nl: 'Nationaal',
   vr: 'Veiligheidsregio',
   gm: 'Gemeente',

@@ -1,8 +1,19 @@
 import type {
   GmCollection,
-  InCollection,
-  KeysOfType,
+  GmCollectionHospitalNice,
+  GmCollectionSewer,
+  GmCollectionTestedOverall,
+  GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
+  VrCollectionBehavior,
+  VrCollectionDisabilityCare,
+  VrCollectionElderlyAtHome,
+  VrCollectionHospitalNice,
+  VrCollectionNursingHome,
+  VrCollectionSewer,
+  VrCollectionSituations,
+  VrCollectionTestedOverall,
+  VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type {
@@ -28,71 +39,65 @@ export type FitExtent = [[[number, number], [number, number]], any];
 
 export enum CHOROPLETH_ASPECT_RATIO {
   nl = 1 / 1.2,
-  in = 1 / 0.775,
 }
 
 /**
- * in - International, indicates a map of Europe
  * gm - Municipality, indicates a map of the Netherlands that shows the different municipalities
  * vr - Safety region, indicates a map of the Netherlands that shows the different safety regions
  */
-export type MapType = 'gm' | 'vr' | 'in';
+export type MapType = 'gm' | 'vr';
+
+const CODE_PROP_GM = 'gmcode';
+const CODE_PROP_VR = 'vrcode';
+const CODE_PROP_COUNTRY = 'country_code';
 
 export type CodeProp =
-  | KeysOfType<InDataItem, string, true>
-  | KeysOfType<VrDataItem, string, true>
-  | KeysOfType<GmDataItem, string, true>;
+  | typeof CODE_PROP_GM
+  | typeof CODE_PROP_VR
+  | typeof CODE_PROP_COUNTRY;
+
+export const isCodeProp = (input: string): input is CodeProp => {
+  return [CODE_PROP_GM, CODE_PROP_VR, CODE_PROP_COUNTRY].includes(input);
+};
 
 export const mapToCodeType: Record<MapType, CodeProp> = {
   gm: 'gmcode',
   vr: 'vrcode',
-  in: 'country_code',
 };
 
-export type ChoroplethCollection = InCollection | GmCollection | VrCollection;
+export type ChoroplethCollection = GmCollection | VrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends InDataItem
-  ? 'in'
-  : T extends GmDataItem
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem
   ? 'gm'
   : T extends VrDataItem
   ? 'vr'
   : never;
 
 export type InferedDataCollection<T extends ChoroplethDataItem> =
-  T extends InDataItem
-    ? InCollection
-    : T extends GmDataItem
+  T extends GmDataItem
     ? GmCollection
     : T extends VrDataItem
     ? VrCollection
     : never;
 
-/**
- * Select all the item types of all the properties from the InCollection with an array type that has a country_code property
- */
-export type InDataCollection = InCollection[KeysOfType<
-  InCollection,
-  { country_code: string }[]
->];
-export type InDataItem = InDataCollection[number];
-
-/**
- * Select all the item types of all the properties from the VrCollection with an array type that has a vrcode property
- */
-export type VrDataCollection = VrCollection[KeysOfType<
-  VrCollection,
-  { vrcode: string }[]
->];
+export type VrDataCollection =
+  | VrCollectionHospitalNice[]
+  | VrCollectionHospitalNice[]
+  | VrCollectionTestedOverall[]
+  | VrCollectionNursingHome[]
+  | VrCollectionSewer[]
+  | VrCollectionBehavior[]
+  | VrCollectionDisabilityCare[]
+  | VrCollectionElderlyAtHome[]
+  | VrCollectionSituations[]
+  | VrCollectionVaccineCoveragePerAgeGroup[];
 export type VrDataItem = VrDataCollection[number];
 
-/**
- * Select all the item types of all the properties from the GmCollection with an array type that has a gmcode property
- */
-export type GmDataCollection = GmCollection[KeysOfType<
-  GmCollection,
-  { gmcode: string }[]
->];
+export type GmDataCollection =
+  | GmCollectionHospitalNice[]
+  | GmCollectionTestedOverall[]
+  | GmCollectionSewer[]
+  | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
 /**
@@ -102,8 +107,6 @@ export type MappedDataCollection<T extends MapType> = T extends 'gm'
   ? GmCollection
   : T extends 'vr'
   ? VrCollection
-  : T extends 'in'
-  ? InCollection
   : never;
 
 /**
@@ -113,11 +116,9 @@ export type MappedDataItem<T extends MapType> = T extends 'gm'
   ? GmDataItem
   : T extends 'vr'
   ? VrDataItem
-  : T extends 'in'
-  ? InDataItem
   : never;
 
-export type ChoroplethDataItem = GmDataItem | VrDataItem | InDataItem;
+export type ChoroplethDataItem = GmDataItem | VrDataItem;
 
 export type CodedGeoProperties = {
   code: string;

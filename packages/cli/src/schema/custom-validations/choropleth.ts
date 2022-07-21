@@ -34,7 +34,7 @@ export function createChoroplethValidation(
 }
 
 /**
- * This validation function receives a data file (either VR, GM or IN) and a choropleth data file (GM_COLLECTION, VR_COLLECTION or IN_COLLECTION).
+ * This validation function receives a data file (either VR, GM or IN) and a choropleth data file (GM_COLLECTION, VR_COLLECTION).
  * It extracts all of the data points that both files have in common, then it
  * compares the last_value property from each of these data point
  * in the data file with the corresponding value in the choropleth file using the codeProperty to find the correct value.
@@ -47,7 +47,7 @@ export function createChoroplethValidation(
  *
  */
 export const validateChoroplethValues = (
-  collectionJsonFilename: string, // GM_COLLECTION.json|VR_COLLECTION.json|IN_COLLECTION.json
+  collectionJsonFilename: string, // GM_COLLECTION.json|VR_COLLECTION.json
   collectionJson: JSONObject, // The contents of the aforementioned json file
   codeProperty: string, //the gmcode, vrcode, country_code property name
   input: JSONObject, // contents of a GM***.json or VR***.json or IN_***.json file

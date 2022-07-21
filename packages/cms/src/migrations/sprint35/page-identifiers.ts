@@ -50,27 +50,6 @@ const pageInfo = [
     ],
     links: [{ title: 'Ziekenhuisopnames links', kind: 'hospitalPageLinks' }],
   },
-  /*{
-    type: 'in_positiveTestsPage',
-    title: 'Positieve testen internationaal',
-    articles: [
-      {
-        title: 'Positieve testen artikelen',
-        kind: 'in_positiveTestsPageArticles',
-      },
-    ],
-    links: [
-      { title: 'Positieve testen links', kind: 'in_positiveTestsPageLinks' },
-    ],
-  },*/
-  {
-    type: 'in_variantsPage',
-    title: 'Varianten internationaal',
-    articles: [
-      { title: 'Varianten artikelen', kind: 'in_variantsPageArticles' },
-    ],
-    links: [{ title: 'Varianten links', kind: 'in_variantsPageLinks' }],
-  },
   {
     type: 'infectiousPeoplePage',
     title: 'Besmettelijke mensen',
