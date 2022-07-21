@@ -2,6 +2,7 @@ import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type { Feature, MultiPolygon, Polygon } from 'geojson';
 import { isPresent } from 'ts-is-present';
 import type {
+  ChoroplethDataItem,
   CodedGeoProperties,
   CodeProp,
   GmDataItem,
@@ -18,11 +19,11 @@ export function isCodedValueType(codeType: CodeProp) {
   }
 }
 
-export function isGmData(item: any): item is GmDataItem {
+export function isGmData(item: ChoroplethDataItem): item is GmDataItem {
   return 'gmcode' in item;
 }
 
-export function isVrData(item: any): item is VrDataItem {
+export function isVrData(item: ChoroplethDataItem): item is VrDataItem {
   return 'vrcode' in item;
 }
 

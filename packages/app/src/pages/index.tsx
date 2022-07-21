@@ -678,7 +678,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             {isPresent(content.articles) && (
               <ArticleList
-                articles={content.articles}
+                articles={content.articles as any}
                 text={textShared}
               />
             )}

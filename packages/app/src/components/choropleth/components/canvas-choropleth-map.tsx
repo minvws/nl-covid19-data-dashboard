@@ -321,7 +321,7 @@ const Outlines = memo((props: OutlinesProps) => {
 type FeaturesProps = {
   geoInfo: ProjectedGeoInfo[];
   featureProps: FeatureProps;
-  children: React.ReactNode;
+  children: any;
 };
 
 const Features = memo((props: FeaturesProps) => {

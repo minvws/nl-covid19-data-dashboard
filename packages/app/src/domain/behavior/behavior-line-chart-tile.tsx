@@ -10,7 +10,7 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
-import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { BoldText } from '~/components/typography';
 import { SiteText } from '~/locale';
@@ -20,12 +20,8 @@ import {
   BehaviorIdentifier,
   behaviorIdentifiers,
 } from './logic/behavior-types';
-
-type ValueType = NlBehaviorValue | VrBehaviorValue;
-type ValueKey = keyof ValueType;
-
 interface BehaviorLineChartTileProps {
-  values: ValueType[];
+  values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
@@ -46,15 +42,15 @@ export function BehaviorLineChartTile({
   text,
 }: BehaviorLineChartTileProps) {
   const selectedComplianceValueKey =
-    `${currentId}_compliance` as ValueKey;
+    `${currentId}_compliance` as keyof NlBehaviorValue;
   const selectedSupportValueKey =
-    `${currentId}_support` as ValueKey;
+    `${currentId}_support` as keyof NlBehaviorValue;
 
-  const complianceValuesHasGap = useDataHasGaps<ValueType>(
+  const complianceValuesHasGap = useDataHasGaps(
     values,
     selectedComplianceValueKey
   );
-  const supportValuesHasGap = useDataHasGaps<ValueType>(values, selectedSupportValueKey);
+  const supportValuesHasGap = useDataHasGaps(values, selectedSupportValueKey);
 
   const breakpoints = useBreakpoints();
 
@@ -92,7 +88,7 @@ export function BehaviorLineChartTile({
           )}
         </Box>
 
-        <TimeSeriesChart<ValueType, SeriesConfig<ValueType>>
+        <TimeSeriesChart
           accessibility={{
             key: 'behavior_line_chart',
           }}

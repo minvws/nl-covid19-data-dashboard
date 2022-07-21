@@ -18,11 +18,10 @@ export function useFormatSeriesValue<T extends TimestampedValue>(
     ) {
       const formatter =
         metricPropertyFormatters[metricProperty] || intl.formatNumber;
-      const numberValue = value[metricProperty];
-      const formattedValue =
-        isPresent(numberValue) && typeof numberValue === 'number'
-          ? formatter(numberValue)
-          : String(numberValue);
+      const numberValue = value[metricProperty] as unknown as number | null;
+      const formattedValue = isPresent(numberValue)
+        ? formatter(numberValue)
+        : numberValue;
 
       return isPresent(formattedValue)
         ? isPercentage

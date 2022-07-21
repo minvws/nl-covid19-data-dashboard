@@ -1,4 +1,4 @@
-import { Color, colors } from '@corona-dashboard/common';
+import { Color, colors, KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, TickRendererProps } from '@visx/axis';
 import { GridColumns } from '@visx/grid';
@@ -32,8 +32,8 @@ interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
   onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
   onMouseLeaveBar: () => void;
   onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
-  rightMetricProperty: keyof T;
-  leftMetricProperty: keyof T;
+  rightMetricProperty: KeysOfType<T, number, true>;
+  leftMetricProperty: KeysOfType<T, number, true>;
   rightColor: Color;
   leftColor: Color;
   maxDisplayValue?: number;
@@ -88,18 +88,16 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
 
   const annotations = useAccessibilityAnnotations(accessibility);
 
-  const getNumberValue = (data: T, key: keyof T): number => {
-    const value = data[key];
-    return typeof value === 'number' ? value : 0;
-  };
-
   const hasClippedValue = !!values.find(
     (value) =>
       getIsClipped(
-        getNumberValue(value, leftMetricProperty),
+        value[leftMetricProperty] as unknown as number,
         maxDisplayValue
       ) ||
-      getIsClipped(getNumberValue(value, rightMetricProperty), maxDisplayValue)
+      getIsClipped(
+        value[rightMetricProperty] as unknown as number,
+        maxDisplayValue
+      )
   );
 
   return (
@@ -193,12 +191,12 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           const rightBarWidth = rightPoint(value);
 
           const isClippedLeftGroup = getIsClipped(
-            getNumberValue(value, leftMetricProperty),
+            value[leftMetricProperty] as unknown as number,
             maxDisplayValue
           );
 
           const isClippedRightGroup = getIsClipped(
-            getNumberValue(value, rightMetricProperty),
+            value[rightMetricProperty] as unknown as number,
             maxDisplayValue
           );
 
