@@ -15,7 +15,7 @@ import {
   DynamicChoropleth,
   OptionalDataConfig,
 } from '../choropleth';
-import { ChoroplethDataItem, InferedDataCollection } from '../choropleth/logic';
+import { ChoroplethDataItem } from '../choropleth/logic';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
 import { InlineLoader } from './inline-loader';
@@ -58,9 +58,8 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
   };
 
   const dataConfig: OptionalDataConfig<ChoroplethDataItem> = {
-    metricName:
-      configuration.metricName as keyof InferedDataCollection<ChoroplethDataItem>,
-    metricProperty: configuration.metricProperty as keyof ChoroplethDataItem,
+    metricName: configuration.metricName as any,
+    metricProperty: configuration.metricProperty as any,
     areaStroke: getColor(configuration.areaStroke),
     areaStrokeWidth: configuration.areaStrokeWidth,
     highlightStroke: getColor(configuration.highlightStroke),

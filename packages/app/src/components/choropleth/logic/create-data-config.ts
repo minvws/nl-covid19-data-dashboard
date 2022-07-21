@@ -18,8 +18,8 @@ export function createDataConfig<T extends ChoroplethDataItem>(
 ) {
   if (partialDataConfig.metricName === 'veiligheidsregio') {
     return {
-      metricName: 'veiligheidsregio',
-      metricProperty: 'admissions_on_date_of_admission',
+      metricName: 'veiligheidsregio' as any,
+      metricProperty: 'admissions_on_date_of_admission' as any,
       areaStroke: colors.white,
       areaStrokeWidth: 1,
       hoverFill: colors.white,

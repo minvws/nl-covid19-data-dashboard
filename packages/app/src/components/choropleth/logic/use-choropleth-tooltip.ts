@@ -9,13 +9,7 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { DataConfig, DataOptions } from '..';
 import { TooltipSettings } from '../tooltips/types';
 import { thresholds } from './thresholds';
-import {
-  ChoroplethDataItem,
-  CodeProp,
-  isCodeProp,
-  mapToCodeType,
-  MapType,
-} from './types';
+import { ChoroplethDataItem, mapToCodeType, MapType } from './types';
 import { useFeatureName } from './use-feature-name';
 import { isCodedValueType } from './utils';
 
@@ -68,12 +62,9 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
 
   const getItemByCode = useMemo(() => {
-    return (code: CodeProp) => {
+    return (code: string) => {
       const item = data
-        .filter((x) => {
-          const filterFn = isCodedValueType(codeType);
-          return filterFn && filterFn(x);
-        })
+        .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
       assert(
         item,
@@ -86,9 +77,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const threshold = thresholds[map][dataConfig.metricProperty as string];
   assert(
     isDefined(threshold),
-    `[${
-      useChoroplethTooltip.name
-    }] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty.toString()}`
+    `[${useChoroplethTooltip.name}] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty.toString()}`
   );
 
   useEffect(() => {
@@ -102,7 +91,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       return;
     }
 
-    function handleBubbledFocusIn(event: FocusEvent): void {
+    function handleBubbledFocusIn(event: FocusEvent): any {
       const link = event.target as HTMLAnchorElement;
       if (!isDefined(link)) {
         return;
@@ -110,7 +99,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
 
       const code = link.getAttribute('data-id');
 
-      if (isPresent(code) && isPresent(container) && isCodeProp(code)) {
+      if (isPresent(code) && isPresent(container)) {
         const bboxContainer = container.getBoundingClientRect();
         const bboxLink = link.getBoundingClientRect();
         const left = bboxLink.left - bboxContainer.left;
@@ -194,7 +183,7 @@ type HoverInfo = { code: string; x: number; y: number };
 
 const createTooltipTrigger = <T extends ChoroplethDataItem>(
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
-  getItemByCode: (code: CodeProp) => T,
+  getItemByCode: (code: string) => T,
   dataConfig: DataConfig<T>,
   dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
@@ -203,7 +192,7 @@ const createTooltipTrigger = <T extends ChoroplethDataItem>(
   metricPropertyFormatter: (value: number) => string
 ) => {
   return (hoverInfo?: HoverInfo) => {
-    if (!isDefined(hoverInfo) || !isCodeProp(hoverInfo.code)) {
+    if (!isDefined(hoverInfo)) {
       return setTooltip(undefined);
     }
 
@@ -229,7 +218,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   ref: RefObject<HTMLElement>,
-  getItemByCode: (code: CodeProp) => T,
+  getItemByCode: (code: string) => T,
   dataConfig: DataConfig<T>,
   dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
@@ -241,7 +230,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
     const elm = event.target as HTMLElement;
     const code = elm.getAttribute('data-id');
 
-    if (isPresent(code) && isCodeProp(code) && ref.current) {
+    if (isPresent(code) && ref.current) {
       if (timeout.current > -1) {
         clearTimeout(timeout.current);
         timeout.current = -1;
@@ -292,10 +281,9 @@ function useMetricPropertyFormatter<T extends ChoroplethDataItem>(
   intl: IntlContextProps
 ) {
   return useMemo(() => {
-    const values = data.map((value) => {
-      const valueEntry = value[dataConfig.metricProperty];
-      return typeof valueEntry === 'number' ? valueEntry : 0;
-    });
+    const values = data.map(
+      (x) => x[dataConfig.metricProperty] as unknown as number
+    );
     const numberOfDecimals = getMaximumNumberOfDecimals(values);
     return (value: number) =>
       intl.formatPercentage(value, {
