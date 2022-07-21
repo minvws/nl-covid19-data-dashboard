@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
-import inTopology from './in.topo.json';
 import nlTopology from './nl-vr-gm.topo.json';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -34,10 +33,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         },
       };
       res.status(200).json(result);
-      break;
-    }
-    case 'in': {
-      res.status(200).json(inTopology);
       break;
     }
     default: {

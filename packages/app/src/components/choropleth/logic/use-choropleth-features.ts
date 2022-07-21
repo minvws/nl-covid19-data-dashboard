@@ -10,13 +10,6 @@ import type { ChoroplethDataItem, CodedGeoJSON } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
 
-/**
- * These country codes represent the outer most features of the international
- * map that need to be centered in on. So, roughly the top left, top right
- * bottom left and bottom right features.
- */
-const internationalBoundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
-
 export type ChoroplethFeatures = {
   outline?: CodedGeoJSON;
   hover: CodedGeoJSON;
@@ -93,40 +86,6 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
         boundingBox: outlineGeo,
       };
     }
-    case 'in': {
-      const inData = (data as unknown[]).filter(function (
-        v: any
-      ): v is { country_code: string } {
-        return 'country_code' in v;
-      });
-      /**
-       * The european map features are datadriven, only the features
-       * for which data exists are added to the outline, hover and boundingbox
-       * This way the map can be centered on only those countries with the
-       * surrounding countries only partially in view.
-       */
-      return {
-        outline: {
-          ...featureGeo,
-          features: featureGeo.features.filter(
-            (x) => !inData.some((d) => d.country_code === x.properties.code)
-          ),
-        },
-        hover: {
-          ...featureGeo,
-          features: featureGeo.features.filter((x) =>
-            inData.some((d) => d.country_code === x.properties.code)
-          ),
-        },
-        area: featureGeo,
-        boundingBox: {
-          ...featureGeo,
-          features: featureGeo.features.filter((x) =>
-            internationalBoundingBoxCodes.includes(x.properties.code)
-          ),
-        },
-      };
-    }
   }
 }
 
@@ -185,13 +144,10 @@ function filterVrBySelectedGmCode(
 }
 
 function createGeoJson(map: MapType, topoJson: any) {
-  const outlineGeo =
-    map === 'in'
-      ? undefined
-      : (topojsonFeature(
-          topoJson,
-          topoJson.objects.nl_features
-        ) as CodedGeoJSON);
+  const outlineGeo = topojsonFeature(
+    topoJson,
+    topoJson.objects.nl_features
+  ) as CodedGeoJSON;
 
   const featureGeo = topojsonFeature(
     topoJson,

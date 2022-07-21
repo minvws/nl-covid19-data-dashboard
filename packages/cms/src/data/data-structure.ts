@@ -2,7 +2,7 @@
  * DO NOT MANUALLY CHANGE THE CONTENTS OF THIS FILE!
  * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.
  */
- export const dataStructure = {
+export const dataStructure = {
   gm: {
     deceased_rivm: ["covid_daily", "covid_daily_moving_average", "covid_total"],
     hospital_nice: [
@@ -27,12 +27,20 @@
     vaccine_coverage_per_age_group: [
       "age_group_range",
       "fully_vaccinated_percentage",
-      "has_one_shot_percentage",
       "booster_shot_percentage",
+      "has_one_shot_percentage",
+      "birthyear_range",
+      "fully_vaccinated_percentage_label",
+      "booster_shot_percentage_label",
+      "has_one_shot_percentage_label",
+    ],
+    vaccine_coverage_per_age_group_archived: [
+      "age_group_range",
+      "fully_vaccinated_percentage",
+      "has_one_shot_percentage",
       "birthyear_range",
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
-      "booster_shot_percentage_label",
     ],
     booster_coverage: ["age_group", "percentage", "percentage_label"],
   },
@@ -60,15 +68,9 @@
       "booster_shot_percentage_label",
     ],
   },
-  in: {
-    tested_overall: ["infected", "infected_per_100k_average"],
-    variants: ["name", "values", "last_value"],
-  },
-  in_collection: { tested_overall: ["infected", "infected_per_100k_average"] },
   nl: {
     booster_shot_administered: [
       "administered_total",
-      "ggd_administered_last_7_days",
       "ggd_administered_total",
       "others_administered_total",
     ],
@@ -306,11 +308,22 @@
       "age_group_percentage",
       "age_group_total",
       "fully_vaccinated",
-      "has_one_shot",
       "booster_shot",
+      "has_one_shot",
+      "fully_vaccinated_percentage",
+      "booster_shot_percentage",
+      "has_one_shot_percentage",
+      "date_of_report_unix",
+      "birthyear_range",
+    ],
+    vaccine_coverage_per_age_group_archived: [
+      "age_group_range",
+      "age_group_percentage",
+      "age_group_total",
+      "fully_vaccinated",
+      "has_one_shot",
       "fully_vaccinated_percentage",
       "has_one_shot_percentage",
-      "booster_shot_percentage",
       "date_of_report_unix",
       "birthyear_range",
     ],
@@ -462,12 +475,20 @@
     vaccine_coverage_per_age_group: [
       "age_group_range",
       "fully_vaccinated_percentage",
-      "has_one_shot_percentage",
       "booster_shot_percentage",
+      "has_one_shot_percentage",
+      "birthyear_range",
+      "fully_vaccinated_percentage_label",
+      "booster_shot_percentage_label",
+      "has_one_shot_percentage_label",
+    ],
+    vaccine_coverage_per_age_group_archived: [
+      "age_group_range",
+      "fully_vaccinated_percentage",
+      "has_one_shot_percentage",
       "birthyear_range",
       "fully_vaccinated_percentage_label",
       "has_one_shot_percentage_label",
-      "booster_shot_percentage_label",
     ],
     booster_coverage: ["age_group", "percentage", "percentage_label"],
   },

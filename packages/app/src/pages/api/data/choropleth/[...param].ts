@@ -10,7 +10,6 @@ const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
 
 const choroplethScopes = {
-  in: 'IN_COLLECTION',
   vr: 'VR_COLLECTION',
   gm: 'GM_COLLECTION',
 } as const;

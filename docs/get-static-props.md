@@ -92,7 +92,7 @@ This does exactly the same as `selectNl` and `selectVr` except it selects data f
 
 #### createGetChoroplethData
 
-This selects choropleth data from **GM_COLLECTION.json**, **VR_COLLECTION.json** or **IN_COLLECTION.json**.
+This selects choropleth data from **GM_COLLECTION.json** or **VR_COLLECTION.json**.
 The object it returns is of this shape:
 
 ```ts
@@ -100,7 +100,6 @@ The object it returns is of this shape:
     choropleth: {
         vr: VrCollection;
         gm: GmCollection
-        in: InCollection;
     },
 }
 ```

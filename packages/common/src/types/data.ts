@@ -195,75 +195,6 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   date_of_insertion_unix: number;
 }
 
-export type InCode = string;
-
-export interface In {
-  last_generated: string;
-  proto_name: InCode;
-  name: InCode;
-  code: string;
-  named_difference: InNamedDifference;
-  tested_overall: InTestedOverall;
-  variants?: InVariants;
-}
-export interface InNamedDifference {
-  variants__percentage?: OptionalNamedDifferenceDecimal[];
-}
-export interface OptionalNamedDifferenceDecimal {
-  name: string;
-  old_value: number | null;
-  difference: number | null;
-  old_date_unix: number;
-  new_date_unix: number;
-}
-export interface InTestedOverall {
-  values: InTestedOverallValue[];
-  last_value: InTestedOverallValue;
-}
-export interface InTestedOverallValue {
-  infected: number;
-  infected_per_100k_average: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface InVariants {
-  values?: InVariantsVariant[];
-}
-export interface InVariantsVariant {
-  name: string;
-  values: InVariantsVariantValue[];
-  last_value: InVariantsVariantValue;
-}
-export interface InVariantsVariantValue {
-  percentage: number | null;
-  occurrence: number | null;
-  is_variant_of_concern: boolean;
-  sample_size: number;
-  is_reliable: boolean;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-
-export type InCollectionId = "IN_COLLECTION";
-
-export interface InCollection {
-  last_generated: string;
-  proto_name: InCollectionId;
-  name: InCollectionId;
-  code: InCollectionId;
-  tested_overall: InCollectionTestedOverall[];
-}
-export interface InCollectionTestedOverall {
-  country_code: string;
-  infected: number;
-  infected_per_100k_average: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-
 export type NlId = "NL";
 
 export interface Nl {
@@ -314,6 +245,8 @@ export interface Nl {
   vaccine_administered_hospitals_and_care_institutions: NlVaccineAdministeredHospitalsAndCareInstitutions;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccine_campaigns: NlVaccineCampaigns;
+  vaccine_planned: NlVaccinePlanned;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: NlVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
@@ -933,6 +866,27 @@ export interface NlVaccineAdministeredPlanned {
 }
 export interface NlVaccineAdministeredPlannedValue {
   doses: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCampaigns {
+  vaccine_campaigns: NlVaccineCampaign[];
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCampaign {
+  vaccine_campaign_order: number;
+  vaccine_campaign_name_nl: string;
+  vaccine_campaign_name_en: string;
+  vaccine_administered_total: number;
+  vaccine_administered_last_week: number;
+}
+export interface NlVaccinePlanned {
+  doses: number;
+  date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

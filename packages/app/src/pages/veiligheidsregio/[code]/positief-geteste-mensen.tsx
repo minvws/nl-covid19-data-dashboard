@@ -53,11 +53,7 @@ import {
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'g_number',
-  'tested_ggd',
-  'tested_overall',
-];
+const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall'];
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -235,13 +231,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'line',
                     metricProperty: 'infected_moving_average',
-                    label: textShared.tooltip_labels.infected_moving_average,
+                    label: textShared.labels.infected_moving_average,
                     color: colors.data.primary,
                   },
                   {
                     type: 'bar',
                     metricProperty: 'infected',
-                    label: textShared.tooltip_labels.infected,
+                    label: textShared.labels.infected,
                     color: colors.data.primary,
                   },
                 ]}
