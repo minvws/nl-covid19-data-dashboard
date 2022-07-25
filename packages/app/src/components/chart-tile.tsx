@@ -17,6 +17,7 @@ type ChartTileProps = {
 
   timeframeInitialValue?: TimeframeOption;
   disableFullscreen?: boolean;
+  hasSplitLayout?: boolean;
 } & (
   | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
@@ -37,6 +38,7 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue,
   disableFullscreen,
+  hasSplitLayout,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue || TimeframeOption.ALL
@@ -48,7 +50,11 @@ export function ChartTile({
         {timeframeOptions && timeframe && (
           <Box
             css={css({
-              width: asResponsiveArray({ xl: '25%', lg: '50%', sm: '100%' }),
+              width: asResponsiveArray({
+                xl: '25%',
+                lg: '50%',
+                sm: '100%',
+              }),
             })}
           >
             <ChartTimeControls
@@ -59,18 +65,40 @@ export function ChartTile({
           </Box>
         )}
       </ChartTileHeader>
+      {hasSplitLayout ? (
+        <Box
+          display="flex"
+          flexDirection={{ xs: 'column', md: 'row' }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
 
-      <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
+          <ErrorBoundary>
+            {timeframeOptions
+              ? (assert(
+                  typeof children === 'function',
+                  `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
+                ),
+                children(timeframe))
+              : children}
+          </ErrorBoundary>
+        </Box>
+      ) : (
+        <>
+          <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
 
-      <ErrorBoundary>
-        {timeframeOptions
-          ? (assert(
-              typeof children === 'function',
-              `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
-            ),
-            children(timeframe))
-          : children}
-      </ErrorBoundary>
+          <ErrorBoundary>
+            {timeframeOptions
+              ? (assert(
+                  typeof children === 'function',
+                  `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
+                ),
+                children(timeframe))
+              : children}
+          </ErrorBoundary>
+        </>
+      )}
     </FullscreenChartTile>
   );
 }
