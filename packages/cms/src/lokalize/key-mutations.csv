@@ -1,1 +1,5 @@
 timestamp,action,key,document_id,move_to
+2022-07-25T12:05:15.460Z,add,pages.vaccinationsPage.nl.archived.vaccination_coverage.title,pSO29YJFzVDfBLprQK2naM,__
+2022-07-25T12:05:16.484Z,add,pages.vaccinationsPage.nl.archived.vaccination_coverage.description,pSO29YJFzVDfBLprQK2nsV,__
+2022-07-25T12:05:16.485Z,move,pages.vaccinationsPage.nl.vaccination_coverage.toelichting,jF33EuwumlGuwav2FD4660,pages.vaccinationsPage.nl.vaccination_coverage.description
+2022-07-25T12:05:16.486Z,move,pages.vaccinationsPage.nl.vaccination_coverage.toelichting_booster_shot,hqivmGf8UPzCLjKFjHrGgv,pages.vaccinationsPage.nl.vaccination_coverage.description_booster_shot
