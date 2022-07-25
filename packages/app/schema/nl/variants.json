@@ -17,9 +17,9 @@
       "type": "object",
       "title": "nl_variants_variant",
       "additionalProperties": false,
-      "required": ["name", "values", "last_value"],
+      "required": ["variant_code", "values", "last_value"],
       "properties": {
-        "name": {
+        "variant_code": {
           "type": "string"
         },
         "values": {
@@ -38,6 +38,7 @@
       "title": "nl_variants_variant_value",
       "additionalProperties": false,
       "required": [
+        "order",
         "occurrence",
         "percentage",
         "is_variant_of_concern",
@@ -48,6 +49,9 @@
         "date_of_insertion_unix"
       ],
       "properties": {
+        "order": {
+          "type": "integer"
+        },
         "occurrence": {
           "type": "integer"
         },
