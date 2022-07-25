@@ -27,3 +27,7 @@ timestamp,action,key,document_id,move_to
 2022-07-19T07:40:03.828Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_shot_description,M1X5uhtA0L6eSCc3lIjlcD,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.primary_serie_description
 2022-07-19T07:40:03.854Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeating_shot_description,M1X5uhtA0L6eSCc3lIjl3t,pages.vaccinationsPage.nl.vaccine_campaigns.campaigns.repeat_vaccination_description
 2022-07-19T07:40:03.857Z,move,pages.vaccinationsPage.nl.vaccine_campaigns.headers.previous_week,rqPl4RDgHRhhQeuZ9blk3g,pages.vaccinationsPage.nl.vaccine_campaigns.headers.last_week
+2022-07-25T12:05:15.460Z,add,pages.vaccinationsPage.nl.archived.vaccination_coverage.title,pSO29YJFzVDfBLprQK2naM,__
+2022-07-25T12:05:16.484Z,add,pages.vaccinationsPage.nl.archived.vaccination_coverage.description,pSO29YJFzVDfBLprQK2nsV,__
+2022-07-25T12:05:16.485Z,move,pages.vaccinationsPage.nl.vaccination_coverage.toelichting,jF33EuwumlGuwav2FD4660,pages.vaccinationsPage.nl.vaccination_coverage.description
+2022-07-25T12:05:16.486Z,move,pages.vaccinationsPage.nl.vaccination_coverage.toelichting_booster_shot,hqivmGf8UPzCLjKFjHrGgv,pages.vaccinationsPage.nl.vaccination_coverage.description_booster_shot
