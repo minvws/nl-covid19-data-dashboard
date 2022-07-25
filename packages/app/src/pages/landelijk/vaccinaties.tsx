@@ -27,6 +27,7 @@ import {
   VaccineStockPerSupplierChart,
   BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
+import { AdministeredVaccinationTile } from '~/domain/vaccine/administered-vaccine-tile/administered-vaccine-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
@@ -302,6 +303,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             headers={textNl.vaccine_campaigns.headers}
             campaigns={data.vaccine_campaigns.vaccine_campaigns}
             campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+            metadata={{
+              datumsText: textNl.datums,
+              date: data.vaccine_campaigns.date_unix,
+              source: textNl.vaccine_campaigns.bronnen.rivm,
+            }}
+          />
+          <AdministeredVaccinationTile
+            title={textNl.vaccine_campaigns.title}
+            description={replaceVariablesInText(
+              textNl.vaccine_campaigns.description,
+              {
+                vaccinePlanned: formatNumber(data.vaccine_planned.doses),
+              }
+            )}
+            data={administrationData.last_value}
             metadata={{
               datumsText: textNl.datums,
               date: data.vaccine_campaigns.date_unix,
