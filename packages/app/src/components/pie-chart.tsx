@@ -49,7 +49,7 @@ export function PieChart<T>({
   padAngle = 0.03,
   minimumPercentage = 0.5,
   icon,
-  iconFill,
+  iconFill = 'silver',
   verticalLayout,
   title,
   link,
@@ -127,7 +127,7 @@ export function PieChart<T>({
                 css={css({
                   svg: {
                     height: '100%',
-                    fill: iconFill ? iconFill : 'silver',
+                    fill: iconFill,
                   },
                 })}
               >
