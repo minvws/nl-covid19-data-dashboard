@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { useRouter } from 'next/router';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { useIntl } from '~/intl';
 import { Cell, HeaderCell, Row, StyledTable } from '.';
@@ -62,6 +63,7 @@ const VaccineCampaignRow = ({
   const { formatNumber } = useIntl();
   const collapsible = useCollapsible({ isOpen: isFirst });
   const isOpen = collapsible.isOpen;
+  const { locale = 'nl' } = useRouter();
 
   return (
     <Row isLast={isLast} isOpen={isOpen} onClick={() => collapsible.toggle()}>
@@ -70,7 +72,11 @@ const VaccineCampaignRow = ({
           <tbody>
             <tr>
               <Cell css={css({ pt: 3 })} mobile>
-                <strong>{campaign.vaccine_campaign_name_nl}</strong>
+                <strong>
+                  {locale === 'nl'
+                    ? campaign.vaccine_campaign_name_nl
+                    : campaign.vaccine_campaign_name_en}
+                </strong>
               </Cell>
 
               <Cell css={css({ pt: 3 })} alignRight mobile>
