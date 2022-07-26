@@ -43,14 +43,14 @@ export function getTopicalPageData(
 
     const highlightInfo = getHighlightedItemParts(
       content.parts.pageParts,
-      'topicalPageHighlights'
+      'topical_page_highlights'
     );
 
     return {
       content: {
         articles: getArticleParts(
           content.parts.pageParts,
-          'topicalPageArticles'
+          'topical_page_articles'
         ),
         highlights: highlightInfo?.highlights ?? null,
         showWeeklyHighlight: highlightInfo?.showWeeklyHighlight ?? false,
