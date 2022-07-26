@@ -318,6 +318,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }
             )}
             data={administrationData.last_value}
+            text={textNl}
             metadata={{
               datumsText: textNl.datums,
               date: data.vaccine_campaigns.date_unix,
