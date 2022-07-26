@@ -150,6 +150,7 @@ export const colors = {
       ],
       other_table: '#808080',
       other_graph: '#808080',
+      fallbackColor: '#808080',
     },
 
     vaccines: {

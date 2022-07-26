@@ -7,6 +7,7 @@ import {
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
+import { colorMatch } from './get-variant-order-colors';
 
 export type VariantRow = {
   variant: string;
@@ -17,36 +18,10 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
-export const VARIANT_TABLE_MAP = [
-  'alpha',
-  'beta',
-  'gamma',
-  'delta',
-  'eta',
-  'epsilon',
-  'theta',
-  'kappa',
-  'lambda',
-  'iota',
-  'zeta',
-  'mu',
-  'nu',
-  'xi',
-  'omicron',
-  'pi',
-  'rho',
-  'sigma',
-  'tau',
-  'upsilon',
-  'phi',
-  'chi',
-  'psi',
-  'omega',
-];
-
 export function getVariantTableData(
   variants: NlVariants | undefined,
-  namedDifference: NlNamedDifference
+  namedDifference: NlNamedDifference,
+  variantColors: colorMatch
 ) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return {
@@ -59,7 +34,7 @@ export function getVariantTableData(
   function findDifference(name: string) {
     if (isPresent(namedDifference.variants__percentage)) {
       const difference = namedDifference.variants__percentage.find(
-        (x) => x.name === name
+        (x) => x.variant_code === name
       );
 
       if (!difference) {
@@ -80,16 +55,6 @@ export function getVariantTableData(
   };
   const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
 
-  const getVariantSortingRank = (variantName: string): number => {
-    const index = VARIANT_TABLE_MAP.findIndex((variant) =>
-      variantName.includes(variant)
-    );
-
-    if (index === -1) return 1000;
-    return index;
-  };
-
-  const variantColors = colors.data.variants;
   const variantTable = variants.values
     /**
      * Since the schemas for international still has to change to
@@ -104,35 +69,23 @@ export function getVariantTableData(
     }))
     .filter(
       (variant) =>
-        variant.name !== 'other_graph' || !variant.has_historical_significance
+        variant.variant_code !== 'other_graph' ||
+        !variant.has_historical_significance
     )
-    .sort((variantA, variantB) => {
-      if (variantA.name === 'other_table') {
-        return 1;
-      }
-      if (variantB.name === 'other_table') {
-        return -1;
-      }
+    .sort((a, b) => b.last_value.order - a.last_value.order)
+    .map<VariantRow>((variant) => {
+      const color =
+        variantColors.find(
+          (variantColors) => variantColors.variant === variant.variant_code
+        )?.color || colors.data.variants.fallbackColor;
 
-      const relativeSortingValue: number =
-        getVariantSortingRank(variantA.name) -
-        getVariantSortingRank(variantB.name);
-
-      if (relativeSortingValue !== 0) {
-        return relativeSortingValue;
-      }
-
-      return variantA.name.localeCompare(variantB.name);
+      return {
+        variant: variant.variant_code,
+        percentage: variant.last_value.percentage,
+        difference: findDifference(variant.variant_code),
+        color,
+      };
     })
-    .map<VariantRow>((variant, index) => ({
-      variant: variant.name,
-      percentage: variant.last_value.percentage,
-      difference: findDifference(variant.name),
-      color:
-        variant.name === 'other_table'
-          ? variantColors.other_table
-          : variantColors.colorList[index],
-    }))
     .filter(
       (row) =>
         // Make sure the 'other' variant persists in the table.

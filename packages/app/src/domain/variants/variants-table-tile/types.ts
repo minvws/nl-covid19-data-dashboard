@@ -1,136 +1,21 @@
 export interface Variants {
-  alpha: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  beta: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  chi: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  delta: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  epsilon: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  eta: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  gamma: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  iota: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  kappa: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  lambda: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  mu: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  nu: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  omega: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron b_1_1_529': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron ba_1': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron ba_2': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron ba_3': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron ba_4': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron ba_5': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  'omicron ba_2_12_1': {
-    name: string;
-    countryOfOrigin: string;
-  };
-  other: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  other_graph: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  other_table: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  phi: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  pi: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  psi: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  rho: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  sigma: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  tau: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  theta: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  upsilon: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  xi: {
-    name: string;
-    countryOfOrigin: string;
-  };
-  zeta: {
-    name: string;
-    countryOfOrigin: string;
-  };
+  B_1_1_529: string;
+  BA_1: string;
+  BA_2: string;
+  BA_4: string;
+  BA_5: string;
+  'BA_2+S:L452X': string;
+  BA_2_12_1: string;
+  BA_3: string;
+  B_1_617_2: string;
+  B_1_351: string;
+  P_1: string;
+  B_1_1_7: string;
+  B_1_621: string;
+  C_37: string;
+  BA_2_75: string;
+  other_table: string;
+  other_graph: string;
 }
 
 export type TableText = {
