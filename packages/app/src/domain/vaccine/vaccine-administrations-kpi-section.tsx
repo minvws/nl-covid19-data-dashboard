@@ -24,7 +24,7 @@ export function VaccineAdministrationsKpiSection({
     | 'vaccine_administered_doctors'
     | 'vaccine_administered_ggd_ghor'
   >;
-  text: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
 }) {
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title
@@ -132,7 +132,7 @@ interface VaccineAdministeredProps {
   date: number;
   description: string;
   isReported?: boolean;
-  text: SiteText['pages']['vaccinationsPage']['nl']['gezette_prikken'];
+  text: SiteText['pages']['vaccinations_page']['nl']['gezette_prikken'];
 }
 
 function VaccineAdministeredItem(props: VaccineAdministeredProps) {

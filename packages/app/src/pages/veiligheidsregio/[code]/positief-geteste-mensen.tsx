@@ -61,8 +61,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.positiveTestsPage.vr,
-        textShared: siteText.pages.positiveTestsPage.shared,
+        textVr: siteText.pages.positive_tests_page.vr,
+        textShared: siteText.pages.positive_tests_page.shared,
       }),
       locale
     ),
@@ -86,7 +86,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('positiveTestsPage')},
+       "parts": ${getPagePartsQuery('positive_tests_page')},
        "elements": ${getElementsQuery(
          'vr',
          ['tested_overall', 'tested_ggd'],

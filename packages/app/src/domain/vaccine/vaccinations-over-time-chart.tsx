@@ -39,7 +39,7 @@ interface VaccinationsOverTimeChartProps {
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
-  text: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
 const vaccines = [

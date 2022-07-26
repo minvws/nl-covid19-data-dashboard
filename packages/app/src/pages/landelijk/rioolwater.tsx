@@ -52,9 +52,9 @@ export const getStaticProps = createGetStaticProps(
           screenReaderCategory:
             siteText.common.sidebar.metrics.sewage_measurement.title,
         },
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.sewerPage.nl,
-        textShared: siteText.pages.sewerPage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.sewer_page.nl,
+        textShared: siteText.pages.sewer_page.shared,
       }),
       locale
     ),
@@ -70,7 +70,7 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-      "parts": ${getPagePartsQuery('sewerPage')},
+      "parts": ${getPagePartsQuery('sewer_page')},
       "elements": ${getElementsQuery('nl', ['sewer'], context.locale)}
       }`;
     })(context);

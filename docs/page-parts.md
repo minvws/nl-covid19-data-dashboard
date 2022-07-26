@@ -57,7 +57,7 @@ For example:
 
 ```ts
 const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(
-  () => getPagePartsQuery('sewerPage')
+  () => getPagePartsQuery('sewer_page')
 )(context);
 
 return {

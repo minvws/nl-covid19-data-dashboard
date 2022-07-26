@@ -20,7 +20,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];
-  text: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
 export function VaccineStockPerSupplierChart({

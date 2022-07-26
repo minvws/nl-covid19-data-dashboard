@@ -19,7 +19,7 @@ interface HighlightsTileProps {
   weeklyHighlight?: WeeklyHighlightProps;
   highlights: ArticleSummary[];
   showWeeklyHighlight: boolean;
-  text: SiteText['pages']['topicalPage']['shared'];
+  text: SiteText['pages']['topical_page']['shared'];
 }
 
 export function HighlightsTile({

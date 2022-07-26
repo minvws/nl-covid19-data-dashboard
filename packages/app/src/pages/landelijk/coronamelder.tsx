@@ -35,8 +35,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.behaviorPage.nl,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.behavior_page.nl,
       }),
       locale
     ),
@@ -82,13 +82,14 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={corona_melder_app.header.reference.href}
           />
 
-          {corona_melder_app.belangrijk_bericht && !isEmpty(corona_melder_app.belangrijk_bericht) && (
-            <WarningTile
-              isFullWidth
-              message={corona_melder_app.belangrijk_bericht}
-              variant="emphasis"
-            />
-          )}
+          {corona_melder_app.belangrijk_bericht &&
+            !isEmpty(corona_melder_app.belangrijk_bericht) && (
+              <WarningTile
+                isFullWidth
+                message={corona_melder_app.belangrijk_bericht}
+                variant="emphasis"
+              />
+            )}
 
           <TwoKpiSection>
             <KpiTile

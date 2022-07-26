@@ -44,7 +44,7 @@ type MiniTileSelectorLayoutProps = {
     href: string;
     text: string;
   };
-  text: SiteText['pages']['topicalPage']['shared'];
+  text: SiteText['pages']['topical_page']['shared'];
 };
 
 export function MiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {

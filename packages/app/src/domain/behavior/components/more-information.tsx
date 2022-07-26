@@ -3,15 +3,15 @@ import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 
 interface MoreInformationProps {
-  text: SiteText['pages']['behaviorPage']['shared']['meer_onderzoeksresultaten'];
+  text: SiteText['pages']['behavior_page']['shared']['meer_onderzoeksresultaten'];
 }
 
 export function MoreInformation({ text }: MoreInformationProps) {
   return (
     <AnchorTile
       title={text.title}
-      href={text.linkHref}
-      label={text.linkLabel}
+      href={text.link_href}
+      label={text.link_label}
       external
     >
       <Text>{text.description}</Text>
