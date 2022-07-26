@@ -31,6 +31,7 @@ export interface PieChartProps<T> {
   padAngle?: number;
   minimumPercentage?: number;
   icon?: JSX.Element;
+  iconFill?: string;
   verticalLayout?: boolean;
   title?: string;
   link?: {
@@ -48,6 +49,7 @@ export function PieChart<T>({
   padAngle = 0.03,
   minimumPercentage = 0.5,
   icon,
+  iconFill,
   verticalLayout,
   title,
   link,
@@ -125,7 +127,7 @@ export function PieChart<T>({
                 css={css({
                   svg: {
                     height: '100%',
-                    fill: 'silver',
+                    fill: iconFill ? iconFill : 'silver',
                   },
                 })}
               >
