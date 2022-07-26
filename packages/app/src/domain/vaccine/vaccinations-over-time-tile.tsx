@@ -22,7 +22,7 @@ import {
 
 function useTileData(
   activeChart: ActiveVaccinationChart,
-  text: SiteText['pages']['vaccinationsPage']['nl'],
+  text: SiteText['pages']['vaccinations_page']['nl'],
   insertionDate: number
 ) {
   if (activeChart === 'coverage') {
@@ -49,7 +49,7 @@ interface VaccinationsOverTimeTileProps {
   timelineEvents: Partial<
     Record<ActiveVaccinationChart, TimelineEventConfig[]>
   >;
-  text: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
 export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {

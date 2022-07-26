@@ -37,9 +37,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.variantsPage.nl,
-        textShared: siteText.pages.variantsPage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.variants_page.nl,
+        textShared: siteText.pages.variants_page.shared,
       }),
       locale
     ),
@@ -61,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts | LinkParts>
-    >(() => getPagePartsQuery('variantsPage'))(context);
+    >(() => getPagePartsQuery('variants_page'))(context);
 
     return {
       content: {

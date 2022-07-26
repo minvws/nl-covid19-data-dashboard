@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.measuresPage.vr,
+        textVr: siteText.pages.measures_page.vr,
       }),
       locale
     ),

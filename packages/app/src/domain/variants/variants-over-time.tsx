@@ -20,7 +20,7 @@ interface VariantsOverTimeProps {
   values: VariantChartValue[];
   seriesConfig: LineSeriesDefinition<VariantChartValue>[];
   timeframe: TimeframeOption;
-  text: SiteText['pages']['variantsPage']['nl']['varianten_over_tijd'];
+  text: SiteText['pages']['variants_page']['nl']['varianten_over_tijd'];
 }
 
 export function VariantsOverTime({

@@ -24,7 +24,7 @@ export function VaccineDeliveryBarChart({
   text,
 }: {
   data: NlVaccineDeliveryPerSupplier;
-  text: SiteText['pages']['vaccinationsPage']['nl'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
 }) {
   const { commonTexts } = useIntl();
   data.values = data.values.filter((x) => !x.is_estimate);

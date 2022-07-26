@@ -49,8 +49,8 @@ export const getStaticProps = createGetStaticProps(
     getLokalizeTexts(
       (siteText) => ({
         caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        text: siteText.pages.behaviorPage,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        text: siteText.pages.behavior_page,
       }),
       locale
     ),
@@ -62,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('behaviorPage'))(context);
+    >(() => getPagePartsQuery('behavior_page'))(context);
 
     return {
       content: {

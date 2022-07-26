@@ -28,7 +28,7 @@ interface BehaviorLineChartTileProps {
   behaviorOptions?: BehaviorIdentifier[];
   timelineEvents?: TimelineEventConfig[];
   useDatesAsRange?: boolean;
-  text: SiteText['pages']['behaviorPage'];
+  text: SiteText['pages']['behavior_page'];
 }
 
 export function BehaviorLineChartTile({

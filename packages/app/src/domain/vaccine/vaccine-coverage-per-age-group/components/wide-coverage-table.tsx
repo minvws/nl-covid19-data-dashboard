@@ -18,7 +18,7 @@ import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
 interface WideCoverageTable {
-  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
+  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
   values:
     | NlVaccineCoveragePerAgeGroupArchivedValue[]
     | VrVaccineCoveragePerAgeGroupArchivedValue[]
