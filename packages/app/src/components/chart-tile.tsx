@@ -46,25 +46,6 @@ export function ChartTile({
 
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
-      <ChartTileHeader title={title} description={description}>
-        {timeframeOptions && timeframe && (
-          <Box
-            css={css({
-              width: asResponsiveArray({
-                xl: '25%',
-                lg: '50%',
-                sm: '100%',
-              }),
-            })}
-          >
-            <ChartTimeControls
-              timeframeOptions={timeframeOptions}
-              timeframe={timeframe}
-              onChange={setTimeframe}
-            />
-          </Box>
-        )}
-      </ChartTileHeader>
       {hasSplitLayout ? (
         <Box
           display="flex"
@@ -72,20 +53,32 @@ export function ChartTile({
           justifyContent="space-between"
           alignItems="center"
         >
-          <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
+          <ChartTileHeader title={title} description={description} />
 
-          <ErrorBoundary>
-            {timeframeOptions
-              ? (assert(
-                  typeof children === 'function',
-                  `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
-                ),
-                children(timeframe))
-              : children}
-          </ErrorBoundary>
+          <ErrorBoundary>{children}</ErrorBoundary>
         </Box>
       ) : (
         <>
+          <ChartTileHeader title={title} description={description}>
+            {timeframeOptions && timeframe && (
+              <Box
+                css={css({
+                  width: asResponsiveArray({
+                    xl: '25%',
+                    lg: '50%',
+                    sm: '100%',
+                  }),
+                })}
+              >
+                <ChartTimeControls
+                  timeframeOptions={timeframeOptions}
+                  timeframe={timeframe}
+                  onChange={setTimeframe}
+                />
+              </Box>
+            )}
+          </ChartTileHeader>
+
           <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
 
           <ErrorBoundary>
