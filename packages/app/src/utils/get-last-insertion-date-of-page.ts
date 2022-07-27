@@ -7,7 +7,7 @@ function hasLastValue(metric: any): boolean {
 
 function hasValues(metric: any): boolean {
   return Array.isArray(metric?.values) &&
-    typeof metric?.values[metric?.values.length - 1]?.date_of_insertion_unix !== 'undefined';
+    typeof metric?.values[metric.values.length - 1]?.date_of_insertion_unix !== 'undefined';
 }
 
 function hasInsertionDate(metric: any): boolean {

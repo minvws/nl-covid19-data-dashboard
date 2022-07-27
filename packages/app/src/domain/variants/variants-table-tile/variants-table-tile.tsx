@@ -101,8 +101,8 @@ function VariantsTableTileWithData({
   };
 
   const [date_start, date_end] = formatDateSpan(
-    { seconds: dates?.date_start_unix },
-    { seconds: dates?.date_end_unix }
+    { seconds: dates.date_start_unix },
+    { seconds: dates.date_end_unix }
   );
 
   const descriptionText = replaceVariablesInText(text.omschrijving, {
