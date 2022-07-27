@@ -1,15 +1,25 @@
 import { assert, colors } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinationIcon } from '@corona-dashboard/icons';
-import { ChartTile, MetadataProps } from '~/components';
+import { ChartTile } from '~/components';
 import { PieChart } from '~/components/pie-chart';
 import { SiteText } from '~/locale';
+import { MetadataProps } from '~/components/metadata';
 
 interface AdministeredVaccinationProps {
   title: string;
   description: string;
-  metadata: MetadataProps;
   data: any;
   text: SiteText['pages']['vaccinationsPage']['nl'];
+  source: {
+    download: string;
+    href: string;
+    text: string;
+  };
+  dates: {
+    date_start_unix: number;
+    date_end_unix: number;
+    date_of_insertion_unix: number;
+  };
 }
 
 const vaccines = [
@@ -28,13 +38,14 @@ vaccines.forEach((x) =>
   )
 );
 
-export const AdministeredVaccinationTile = ({
+export function AdministeredVaccinationTile({
   title,
   description,
-  metadata,
   data,
   text,
-}: AdministeredVaccinationProps) => {
+  source,
+  dates,
+}: AdministeredVaccinationProps) {
   const dataConfig = vaccines
     .map((vaccine) => {
       return {
@@ -46,6 +57,12 @@ export const AdministeredVaccinationTile = ({
       };
     })
     .sort((entryA, entryB) => entryB.value - entryA.value);
+
+  const metadata: MetadataProps = {
+    date: [dates.date_start_unix, dates.date_end_unix],
+    source,
+    obtainedAt: dates.date_of_insertion_unix,
+  };
 
   return (
     <ChartTile
@@ -62,4 +79,4 @@ export const AdministeredVaccinationTile = ({
       />
     </ChartTile>
   );
-};
+}
