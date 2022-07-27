@@ -65,6 +65,7 @@
         "sample_size",
         "date_start_unix",
         "date_end_unix",
+        "date_of_report_unix",
         "date_of_insertion_unix"
       ],
       "properties": {

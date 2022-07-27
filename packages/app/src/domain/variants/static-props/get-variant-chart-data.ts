@@ -15,7 +15,7 @@ export type VariantChartValue = {
 const EMPTY_VALUES = {
   variantChart: null,
   dates: {
-    date_of_insertion_unix: 0,
+    date_of_report_unix: 0,
     date_start_unix: 0,
     date_end_unix: 0,
   },
@@ -60,7 +60,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   return {
     variantChart: values,
     dates: {
-      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
+      date_of_report_unix: firstVariant.last_value.date_of_report_unix,
       date_start_unix: firstVariant.last_value.date_start_unix,
       date_end_unix: firstVariant.last_value.date_end_unix,
     },

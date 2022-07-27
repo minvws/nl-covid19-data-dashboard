@@ -17,6 +17,16 @@ export type VariantRow = {
   color: string;
 };
 
+const EMPTY_VALUES = {
+  variantTable: null,
+  dates: {
+    date_of_report_unix: 0,
+    date_start_unix: 0,
+    date_end_unix: 0,
+  },
+  sampleSize: 0,
+} as const
+
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
 export function getVariantTableData(
@@ -25,11 +35,7 @@ export function getVariantTableData(
   variantColors: colorMatch
 ) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
-    return {
-      variantTable: null,
-      dates: null,
-      sampleSize: 0,
-    } as const;
+    return EMPTY_VALUES;
   }
 
   function findDifference(name: string) {
@@ -48,13 +54,17 @@ export function getVariantTableData(
 
   const firstLastValue = first<NlVariantsVariant>(variants.values);
 
+  if (!isDefined(firstLastValue)) {
+    return EMPTY_VALUES;
+  }
   const dates = {
-    date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
-    date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
-    date_of_insertion_unix:
-      firstLastValue?.last_value.date_of_insertion_unix ?? 0,
+    date_end_unix: firstLastValue.last_value.date_end_unix,
+    date_start_unix: firstLastValue.last_value.date_start_unix,
+    date_of_report_unix:
+      firstLastValue.last_value.date_of_report_unix,
   };
-  const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
+  const sampleSize = firstLastValue.last_value.sample_size;
+
 
   const variantTable = variants.values
     /**

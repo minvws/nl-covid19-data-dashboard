@@ -32,11 +32,11 @@ export function VariantsTableTile({
     text: string;
   };
   sampleSize: number;
-  dates?: {
+  dates: {
     date_start_unix: number;
     date_end_unix: number;
-    date_of_insertion_unix: number;
-  } | null;
+    date_of_report_unix: number;
+  };
   children?: ReactNode;
 }) {
   if (!isPresent(data) || !isPresent(dates)) {
@@ -88,7 +88,7 @@ function VariantsTableTileWithData({
   dates: {
     date_start_unix: number;
     date_end_unix: number;
-    date_of_insertion_unix: number;
+    date_of_report_unix: number;
   };
   children?: ReactNode;
 }) {
@@ -97,7 +97,7 @@ function VariantsTableTileWithData({
   const metadata: MetadataProps = {
     date: [dates.date_start_unix, dates.date_end_unix],
     source,
-    obtainedAt: dates.date_of_insertion_unix,
+    obtainedAt: dates.date_of_report_unix,
   };
 
   const [date_start, date_end] = formatDateSpan(

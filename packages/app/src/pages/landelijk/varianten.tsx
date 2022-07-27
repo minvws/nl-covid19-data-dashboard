@@ -156,7 +156,7 @@ export default function CovidVariantenPage(
               source={textNl.bronnen.rivm}
               dates={{
                 date_end_unix: dates.date_end_unix,
-                date_of_insertion_unix: dates.date_of_insertion_unix,
+                date_of_report_unix: dates.date_of_report_unix,
                 date_start_unix: dates.date_start_unix,
               }}
             />
