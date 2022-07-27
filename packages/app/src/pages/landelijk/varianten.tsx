@@ -6,6 +6,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
+  getVariantOrderColors,
   getVariantSidebarValue,
   getVariantTableData,
 } from '~/domain/variants/static-props';
@@ -52,10 +53,17 @@ export const getStaticProps = createGetStaticProps(
       selectedNlData: { variants },
     } = data;
 
+    const variantColors = getVariantOrderColors(variants);
+
     return {
       variantSidebarValue: getVariantSidebarValue(variants) ?? null,
-      ...getVariantTableData(variants, data.selectedNlData.named_difference),
+      ...getVariantTableData(
+        variants,
+        data.selectedNlData.named_difference,
+        variantColors
+      ),
       ...getVariantChartData(variants),
+      variantColors,
     };
   },
   async (context: GetStaticPropsContext) => {
@@ -83,6 +91,7 @@ export default function CovidVariantenPage(
     content,
     variantTable,
     variantChart,
+    variantColors,
     dates,
   } = props;
 
@@ -127,6 +136,7 @@ export default function CovidVariantenPage(
               varianten: commonTexts.variants,
             }}
             values={variantChart}
+            variantColors={variantColors}
             metadata={{
               datumsText: textNl.datums,
               date: getLastInsertionDateOfPage(data, ['variants']),

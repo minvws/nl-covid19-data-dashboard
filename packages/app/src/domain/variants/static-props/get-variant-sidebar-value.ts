@@ -13,7 +13,7 @@ export function getVariantSidebarValue(nlVariants: NlVariants | undefined) {
 
   return maxBy(
     nlVariants.values.map<VariantSidebarValue>((x) => ({
-      name: x.name,
+      name: x.variant_code,
       ...x.last_value,
     })),
     (x) => x.percentage
