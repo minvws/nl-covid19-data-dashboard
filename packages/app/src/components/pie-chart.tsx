@@ -107,6 +107,7 @@ export function PieChart<T>({
           spacing={verticalLayout ? 4 : { _: 4, sm: 0 }}
           alignItems={verticalLayout ? 'flex-start' : { sm: 'center' }}
           flexDirection={verticalLayout ? 'column' : { _: 'column', sm: 'row' }}
+          marginTop={4}
         >
           <Box
             alignSelf={{ _: 'center', xs: 'self-start' }}
