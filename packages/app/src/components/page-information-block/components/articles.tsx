@@ -42,7 +42,7 @@ interface ArticleItemProps {
 }
 
 function ArticleItem({ slug, cover, title }: ArticleItemProps) {
-  const words = title.split(' ');
+  const words = title.trim().split(' ');
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>

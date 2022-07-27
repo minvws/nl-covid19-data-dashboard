@@ -330,7 +330,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <BoosterShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
-            description={textNl.vaccination_coverage.toelichting}
+            description={textNl.vaccination_coverage.description}
             sortingOrder={[
               '80+',
               '70-79',
@@ -442,8 +442,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
               <VaccineCoveragePerAgeGroup
                 text={textNl.vaccination_coverage}
-                title={textNl.vaccination_coverage.title}
-                description={textNl.vaccination_coverage.toelichting}
+                title={textNl.archived.vaccination_coverage.title}
+                description={textNl.archived.vaccination_coverage.description}
                 sortingOrder={[
                   '81+',
                   '71-80',
