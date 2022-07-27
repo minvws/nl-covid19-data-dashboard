@@ -1013,7 +1013,7 @@ export interface NlVariantsVariantValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
-  date_of_report_unix?: number;
+  date_of_report_unix: number;
 }
 
 export type VrCode = string;
