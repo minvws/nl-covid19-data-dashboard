@@ -133,7 +133,7 @@ export default function CovidVariantenPage(
           <VariantsStackedAreaTile
             text={{
               ...textNl.varianten_over_tijd_grafiek,
-              varianten: commonTexts.variants,
+              varianten: commonTexts.variant_codes,
             }}
             values={variantChart}
             variantColors={variantColors}
@@ -150,7 +150,7 @@ export default function CovidVariantenPage(
               sampleSize={variantSidebarValue.sample_size}
               text={{
                 ...textShared.varianten_tabel,
-                varianten: commonTexts.variants,
+                varianten: commonTexts.variant_codes,
                 description: textNl.varianten_omschrijving,
               }}
               source={textNl.bronnen.rivm}

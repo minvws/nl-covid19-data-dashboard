@@ -18,12 +18,12 @@ import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
-import { Variants } from '../variants-table-tile/types';
+import { VariantCodes } from '../variants-table-tile/types';
 import { colorMatch } from '~/domain/variants/static-props';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileText = {
-  varianten: Variants;
+  varianten: VariantCodes;
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
 type VariantsStackedAreaTileProps = {
@@ -226,7 +226,9 @@ function useSeriesConfig(
 
         const variantNameFragments = variantKey.split('_');
         variantNameFragments.pop();
-        const variantName = variantNameFragments.join('_') as keyof Variants;
+        const variantName = variantNameFragments.join(
+          '_'
+        ) as keyof VariantCodes;
 
         return {
           type: 'gapped-area',

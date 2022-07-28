@@ -1,9 +1,9 @@
 import { BoldText } from '~/components/typography';
 import { Cell } from '.';
-import { TableText, Variants } from '../types';
+import { TableText, VariantCodes } from '../types';
 
 type VariantNameCellProps = {
-  variant: keyof Variants;
+  variant: keyof VariantCodes;
   text: TableText;
   mobile?: boolean;
   narrow?: boolean;

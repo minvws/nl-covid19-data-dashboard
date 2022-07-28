@@ -1,4 +1,4 @@
-export interface Variants {
+export interface VariantCodes {
   B_1_1_529: string;
   BA_1: string;
   BA_2: string;
@@ -31,7 +31,7 @@ export type TableText = {
     vorige_meting: string;
   };
   verschil: { gelijk: string; meer: string; minder: string };
-  varianten: Variants;
+  varianten: VariantCodes;
   description: string;
   geen_percentage_cijfer: string;
   geen_percentage_cijfer_tooltip: string;
