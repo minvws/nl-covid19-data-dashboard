@@ -10,16 +10,7 @@ interface AdministeredVaccinationProps {
   description: string;
   data: any;
   text: SiteText['pages']['vaccinationsPage']['nl'];
-  source: {
-    download: string;
-    href: string;
-    text: string;
-  };
-  dates: {
-    date_start_unix: number;
-    date_end_unix: number;
-    date_of_insertion_unix: number;
-  };
+  metadata: MetadataProps;
 }
 
 const vaccines = [
@@ -43,8 +34,7 @@ export function AdministeredVaccinationTile({
   description,
   data,
   text,
-  source,
-  dates,
+  metadata,
 }: AdministeredVaccinationProps) {
   const dataConfig = vaccines
     .map((vaccine) => {
@@ -57,12 +47,6 @@ export function AdministeredVaccinationTile({
       };
     })
     .sort((entryA, entryB) => entryB.value - entryA.value);
-
-  const metadata: MetadataProps = {
-    date: [dates.date_start_unix, dates.date_end_unix],
-    source,
-    obtainedAt: dates.date_of_insertion_unix,
-  };
 
   return (
     <ChartTile

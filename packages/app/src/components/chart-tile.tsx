@@ -49,9 +49,9 @@ export function ChartTile({
       {hasSplitLayout ? (
         <Box
           display="flex"
-          flexDirection={{ xs: 'column', md: 'row' }}
+          flexDirection={{ xs: 'column', xl: 'row' }}
           justifyContent="space-between"
-          alignItems="center"
+          alignItems={{ xs: 'start', xl: 'center' }}
         >
           <ChartTileHeader title={title} description={description} />
 

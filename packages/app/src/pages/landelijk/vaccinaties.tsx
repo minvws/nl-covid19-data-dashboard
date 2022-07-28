@@ -319,12 +319,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             )}
             data={administrationData.last_value}
             text={textNl}
-            source={textNl.bronnen.rivm}
-            dates={{
-              date_end_unix: data.vaccine_campaigns.date_end_unix,
-              date_start_unix: data.vaccine_campaigns.date_start_unix,
-              date_of_insertion_unix:
-                data.vaccine_campaigns.date_of_insertion_unix,
+            metadata={{
+              source: textNl.bronnen.rivm,
+              date: [
+                data.vaccine_campaigns.date_start_unix,
+                data.vaccine_campaigns.date_end_unix,
+              ],
+              obtainedAt: data.vaccine_campaigns.date_of_insertion_unix,
             }}
           />
 
@@ -332,7 +333,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <BoosterShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
-            description={textNl.vaccination_coverage.toelichting}
+            description={textNl.vaccination_coverage.description}
             sortingOrder={[
               '80+',
               '70-79',
@@ -444,8 +445,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
               <VaccineCoveragePerAgeGroup
                 text={textNl.vaccination_coverage}
-                title={textNl.vaccination_coverage.title}
-                description={textNl.vaccination_coverage.toelichting}
+                title={textNl.archived.vaccination_coverage.title}
+                description={textNl.archived.vaccination_coverage.description}
                 sortingOrder={[
                   '81+',
                   '71-80',
