@@ -1,31 +1,31 @@
 import { assert, colors } from '@corona-dashboard/common';
+import { NlVaccineType } from '@corona-dashboard/common/src/types';
 import { Vaccinaties as VaccinationIcon } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components';
-import { PieChart } from '~/components/pie-chart';
-import { SiteText } from '~/locale';
+import { PieChart, PiePartConfig } from '~/components/pie-chart';
 import { MetadataProps } from '~/components/metadata';
 
 interface AdministeredVaccinationProps {
   title: string;
   description: string;
-  data: any;
-  text: SiteText['pages']['vaccinationsPage']['nl'];
+  data: NlVaccineType[];
   metadata: MetadataProps;
 }
 
 const vaccines = [
+  'bio_n_tech_pfizer',
   'pfizer',
   'moderna',
   'astra_zeneca',
   'janssen',
   'novavax',
+  'cure_vac',
+  'sanofi',
 ] as const;
 vaccines.forEach((x) =>
   assert(
     colors.data.vaccines[x],
-    ''
-    // TODO: fix this
-    // `[${AdministeredVaccinationTile.name}] missing vaccine color for vaccine ${x}`
+    `[${AdministeredVaccinationTile.name}] missing vaccine color for vaccine ${x}`
   )
 );
 
@@ -33,20 +33,37 @@ export function AdministeredVaccinationTile({
   title,
   description,
   data,
-  text,
   metadata,
 }: AdministeredVaccinationProps) {
-  const dataConfig = vaccines
-    .map((vaccine) => {
+  const formatLabel = (label: string, value: number) =>
+    `${label}: **${value}**`;
+
+  const mappedData: Record<string, number> = {};
+  data.forEach(
+    (vaccineType) =>
+      (mappedData[vaccineType.vaccine_type_name] =
+        vaccineType.vaccine_type_value)
+  );
+  const dataConfig = data
+    .filter((vaccineType) => !!vaccineType.vaccine_type_value)
+    .sort(
+      (vaccineTypeA, vaccineTypeB) =>
+        vaccineTypeB.vaccine_type_value - vaccineTypeA.vaccine_type_value
+    )
+    .map<PiePartConfig<typeof mappedData>>((vaccineType) => {
       return {
-        metricProperty: vaccine,
-        color: colors.data.vaccines[vaccine],
-        label: text.data.vaccination_chart.product_names[vaccine],
-        tooltipLabel: text.data.vaccination_chart.product_names[vaccine],
-        value: data[vaccine],
+        metricProperty: vaccineType.vaccine_type_name,
+        color: '#f3f', // TODO: change this
+        label: formatLabel(
+          vaccineType.vaccine_type_name,
+          vaccineType.vaccine_type_value
+        ),
+        tooltipLabel: formatLabel(
+          vaccineType.vaccine_type_name,
+          vaccineType.vaccine_type_value
+        ),
       };
-    })
-    .sort((entryA, entryB) => entryB.value - entryA.value);
+    });
 
   return (
     <ChartTile
@@ -56,7 +73,7 @@ export function AdministeredVaccinationTile({
       hasSplitLayout
     >
       <PieChart
-        data={data}
+        data={mappedData}
         dataConfig={dataConfig}
         icon={<VaccinationIcon />}
         iconFill={colors.body}

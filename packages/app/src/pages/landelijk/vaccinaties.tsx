@@ -97,6 +97,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_planned',
     'vaccine_administered_total',
+    'vaccine_administered_last_week',
     'vaccine_coverage_per_age_group',
     'vaccine_coverage_per_age_group_archived',
     'vaccine_coverage',
@@ -291,7 +292,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
           />
 
-          <VaccineCampaignsTile
+          {/* <VaccineCampaignsTile
             title={textNl.vaccine_campaigns.title}
             description={replaceVariablesInText(
               textNl.vaccine_campaigns.description,
@@ -308,8 +309,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               date: data.vaccine_campaigns.date_unix,
               source: textNl.vaccine_campaigns.bronnen.rivm,
             }}
-          />
+          /> */}
           <AdministeredVaccinationTile
+            // TODO: delete/change the below two props
             title={textNl.vaccine_campaigns.title}
             description={replaceVariablesInText(
               textNl.vaccine_campaigns.description,
@@ -317,15 +319,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 vaccinePlanned: formatNumber(data.vaccine_planned.doses),
               }
             )}
-            data={administrationData.last_value}
-            text={textNl}
+            data={data.vaccine_administered_last_week.vaccine_types}
             metadata={{
               source: textNl.bronnen.rivm,
               date: [
-                data.vaccine_campaigns.date_start_unix,
-                data.vaccine_campaigns.date_end_unix,
+                data.vaccine_administered_last_week.date_start_unix,
+                data.vaccine_administered_last_week.date_end_unix,
               ],
-              obtainedAt: data.vaccine_campaigns.date_of_insertion_unix,
+              obtainedAt:
+                data.vaccine_administered_last_week.date_of_insertion_unix,
             }}
           />
 
