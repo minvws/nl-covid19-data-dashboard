@@ -38,7 +38,7 @@ type DefaultProps = {
     href: string;
     text: string;
   };
-  text: SiteText['pages']['topicalPage']['shared'];
+  text: SiteText['pages']['topical_page']['shared'];
 };
 
 type GmCoverage = DefaultProps & {

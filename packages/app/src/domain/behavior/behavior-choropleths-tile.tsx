@@ -29,7 +29,7 @@ interface BehaviorChoroplethsTileProps {
   data: { behavior: VrCollectionBehavior[] };
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
-  text: SiteText['pages']['behaviorPage'];
+  text: SiteText['pages']['behavior_page'];
 }
 
 export function BehaviorChoroplethsTile({
@@ -104,7 +104,7 @@ interface ChoroplethBlockProps {
   behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
   title: string;
-  text: SiteText['pages']['behaviorPage'];
+  text: SiteText['pages']['behavior_page'];
 }
 
 function ChoroplethBlock({

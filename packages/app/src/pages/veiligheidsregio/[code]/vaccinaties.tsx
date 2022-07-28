@@ -68,8 +68,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textNl: siteText.pages.vaccinationsPage.nl,
-        textVr: siteText.pages.vaccinationsPage.vr,
+        textNl: siteText.pages.vaccinations_page.nl,
+        textVr: siteText.pages.vaccinations_page.vr,
       }),
       locale
     ),
@@ -100,7 +100,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts | LinkParts>
-    >(() => getPagePartsQuery('vaccinationsPage'))(context);
+    >(() => getPagePartsQuery('vaccinations_page'))(context);
 
     return {
       content: {

@@ -21,10 +21,9 @@ import { useList } from '~/utils/use-list';
 import { Variants } from '../variants-table-tile/types';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
-type VariantsStackedAreaTileText = { varianten: Variants } & (
-  | SiteText['pages']['variantsPage']['nl']['varianten_over_tijd_grafiek']
-  | SiteText['pages']['in_variantsPage']['shared']['varianten_over_tijd_grafiek']
-);
+type VariantsStackedAreaTileText = {
+  varianten: Variants;
+} & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
 type VariantsStackedAreaTileProps = {
   text: VariantsStackedAreaTileText;

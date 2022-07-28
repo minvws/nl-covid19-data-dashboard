@@ -19,7 +19,7 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   metadateBoosterGgd: MetadataProps;
   boosterEstimatedValue: number;
   metadateBoosterEstimated: MetadataProps;
-  text: SiteText['pages']['vaccinationsPage']['nl']['booster_kpi'];
+  text: SiteText['pages']['vaccinations_page']['nl']['booster_kpi'];
 }
 
 export function VaccineBoosterAdministrationsKpiSection({

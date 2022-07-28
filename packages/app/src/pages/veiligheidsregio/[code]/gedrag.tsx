@@ -46,7 +46,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        text: siteText.pages.behaviorPage,
+        text: siteText.pages.behavior_page,
       }),
       locale
     ),
@@ -62,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('behaviorPage'))(context);
+    >(() => getPagePartsQuery('behavior_page'))(context);
 
     return {
       content: {

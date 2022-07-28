@@ -72,9 +72,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.hospitalPage.nl,
-        textShared: siteText.pages.hospitalPage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.hospital_page.nl,
+        textShared: siteText.pages.hospital_page.shared,
       }),
       locale
     ),
@@ -95,7 +95,7 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-        "parts": ${getPagePartsQuery('hospitalPage')},
+        "parts": ${getPagePartsQuery('hospital_page')},
         "elements": ${getElementsQuery(
           'nl',
           ['hospital_nice', 'hospital_nice_per_age_group'],

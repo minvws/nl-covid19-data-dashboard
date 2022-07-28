@@ -33,8 +33,8 @@ export const getStaticProps = createGetStaticProps(
           screenReaderCategory:
             siteText.common.sidebar.metrics.source_investigation.title,
         },
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textShared: siteText.pages.situationsPage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textShared: siteText.pages.situations_page.shared,
         textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
       }),
       locale
@@ -48,7 +48,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('situationsPage'))(context);
+    >(() => getPagePartsQuery('situations_page'))(context);
 
     return {
       content: {

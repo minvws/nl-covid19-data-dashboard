@@ -37,8 +37,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.sewerPage.vr,
-        textShared: siteText.pages.sewerPage.shared,
+        textVr: siteText.pages.sewer_page.vr,
+        textShared: siteText.pages.sewer_page.shared,
       }),
       locale
     ),
@@ -47,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('sewerPage'))(context);
+    >(() => getPagePartsQuery('sewer_page'))(context);
 
     return {
       content: {

@@ -6,12 +6,12 @@ const client = getClient('production');
 
 const pageInfo = [
   {
-    type: 'behaviorPage',
+    type: 'behavior_page',
     title: 'Gedrag en naleving',
     articles: [{ title: 'Gedrag artikelen', kind: 'behaviorPageArticles' }],
   },
   {
-    type: 'deceasedPage',
+    type: 'deceased_page',
     title: 'Sterfte',
     articles: [
       { title: 'Sterfte artikelen', kind: 'deceasedPageArticles' },
@@ -23,7 +23,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'disabilityCarePage',
+    type: 'disability_care_page',
     title: 'Gehandicaptenzorg',
     articles: [
       {
@@ -33,7 +33,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'elderlyAtHomePage',
+    type: 'elderly_at_home_page',
     title: 'Thuiswonend 70-plus',
     articles: [
       {
@@ -43,7 +43,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'hospitalPage',
+    type: 'hospital_page',
     title: 'Ziekenhuisopnames',
     articles: [
       { title: 'Ziekenhuisopnames artikelen', kind: 'hospitalPageArticles' },
@@ -51,7 +51,7 @@ const pageInfo = [
     links: [{ title: 'Ziekenhuisopnames links', kind: 'hospitalPageLinks' }],
   },
   {
-    type: 'infectiousPeoplePage',
+    type: 'infectious_people_page',
     title: 'Besmettelijke mensen',
     articles: [
       {
@@ -61,7 +61,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'intensiveCarePage',
+    type: 'intensive_care_page',
     title: 'IC opnames',
     articles: [
       {
@@ -72,14 +72,14 @@ const pageInfo = [
     links: [{ title: 'IC Opnames links', kind: 'intensiveCarePageLinks' }],
   },
   {
-    type: 'nursingHomePage',
+    type: 'nursing_home_page',
     title: 'Verpleeghuiszorg',
     articles: [
       { title: 'Verpleeghuiszorg artikelen', kind: 'nursingHomePageArticles' },
     ],
   },
   {
-    type: 'positiveTestsPage',
+    type: 'positive_tests_page',
     title: 'Positieve testen',
     articles: [
       {
@@ -94,7 +94,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'reproductionPage',
+    type: 'reproduction_page',
     title: 'Reproductiegetal',
     articles: [
       {
@@ -104,7 +104,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'sewerPage',
+    type: 'sewer_page',
     title: 'Rioolwater',
     articles: [
       {
@@ -114,7 +114,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'situationsPage',
+    type: 'situations_page',
     title: 'Brononderzoek GGD',
     articles: [
       {
@@ -124,7 +124,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'topicalPage',
+    type: 'topical_page',
     title: 'Actueel',
     articles: [
       {
@@ -142,7 +142,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'vaccinationsPage',
+    type: 'vaccinations_page',
     title: 'Vaccinaties',
     articles: [
       {
@@ -156,7 +156,7 @@ const pageInfo = [
     ],
   },
   {
-    type: 'variantsPage',
+    type: 'variants_page',
     title: 'Covid varianten',
     articles: [
       {

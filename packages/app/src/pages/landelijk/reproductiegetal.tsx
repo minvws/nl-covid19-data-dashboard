@@ -40,8 +40,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.reproductionPage.nl,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.reproduction_page.nl,
       }),
       locale
     ),
@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('reproductionPage')},
+      "parts": ${getPagePartsQuery('reproduction_page')},
       "elements": ${getElementsQuery('nl', ['reproduction'], locale)}
      }`;
     })(context);

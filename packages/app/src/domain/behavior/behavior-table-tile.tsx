@@ -30,7 +30,7 @@ interface BehaviorTableTileProps {
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
-  text: SiteText['pages']['behaviorPage']['shared'];
+  text: SiteText['pages']['behavior_page']['shared'];
 }
 
 const trendColumnWidth = 125;

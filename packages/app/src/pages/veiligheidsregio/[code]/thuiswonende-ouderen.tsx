@@ -47,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.elderlyAtHomePage.vr,
+        textVr: siteText.pages.elderly_at_home_page.vr,
       }),
       locale
     ),
@@ -63,7 +63,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('elderlyAtHomePage')},
+      "parts": ${getPagePartsQuery('elderly_at_home_page')},
       "elements": ${getElementsQuery('vr', ['elderly_at_home'], locale)}
      }`;
     })(context);

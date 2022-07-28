@@ -86,8 +86,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.vaccinationsPage.nl,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.vaccinations_page.nl,
       }),
       locale
     ),
@@ -118,7 +118,7 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-        "parts": ${getPagePartsQuery('vaccinationsPage')},
+        "parts": ${getPagePartsQuery('vaccinations_page')},
         "elements": ${getElementsQuery(
           'nl',
           ['vaccine_coverage', 'vaccine_administered'],

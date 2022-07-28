@@ -6,7 +6,7 @@ import { SiteText } from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
 interface ArticleListProps {
   articles: ArticleSummary[];
-  text: SiteText['pages']['topicalPage']['shared'];
+  text: SiteText['pages']['topical_page']['shared'];
 }
 
 export function ArticleList({ articles, text }: ArticleListProps) {

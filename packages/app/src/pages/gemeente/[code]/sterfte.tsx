@@ -46,7 +46,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
-      (siteText) => ({ textGm: siteText.pages.deceasedPage.gm }),
+      (siteText) => ({ textGm: siteText.pages.deceased_page.gm }),
       locale
     ),
   getLastGeneratedDate,
@@ -62,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('deceasedPage')},
+      "parts": ${getPagePartsQuery('deceased_page')},
       "elements": ${getElementsQuery('gm', ['deceased_rivm'], locale)}
      }`;
     })(context);
