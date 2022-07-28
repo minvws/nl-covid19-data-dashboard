@@ -9,12 +9,12 @@ import {
 import { DAY_IN_SECONDS } from '../../time';
 
 export enum TimeframeOption {
-  ONE_WEEK = '1week',
-  FIVE_WEEKS = '5weeks',
-  THIRTY_DAYS = '30days',
-  THREE_MONTHS = '3months',
-  SIX_MONTHS = '6months',
-  LAST_YEAR = 'lastYear',
+  ONE_WEEK = '1_week',
+  FIVE_WEEKS = '5_weeks',
+  THIRTY_DAYS = '30_days',
+  THREE_MONTHS = '3_months',
+  SIX_MONTHS = '6_months',
+  LAST_YEAR = 'last_year',
   ALL = 'all',
 }
 

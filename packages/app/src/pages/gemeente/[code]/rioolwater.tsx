@@ -36,10 +36,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
-const pageMetrics = [
-  'sewer_per_installation',
-  'sewer',
-];
+const pageMetrics = ['sewer_per_installation', 'sewer'];
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -47,8 +44,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textGm: siteText.pages.sewerPage.gm,
-        textShared: siteText.pages.sewerPage.shared,
+        textGm: siteText.pages.sewer_page.gm,
+        textShared: siteText.pages.sewer_page.shared,
       }),
       locale
     ),
@@ -63,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<
       PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('sewerPage'))(context);
+    >(() => getPagePartsQuery('sewer_page'))(context);
 
     return {
       content: {

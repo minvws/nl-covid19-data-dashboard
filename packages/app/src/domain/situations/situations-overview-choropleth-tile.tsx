@@ -24,7 +24,7 @@ import { useSituations } from './logic/situations';
 
 interface SmallMultiplesChoroplethTileProps {
   data: VrCollectionSituations[];
-  text: SiteText['pages']['situationsPage']['shared'];
+  text: SiteText['pages']['situations_page']['shared'];
 }
 
 export function SituationsOverviewChoroplethTile({

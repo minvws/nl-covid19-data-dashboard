@@ -57,8 +57,8 @@ export const getStaticProps = createGetStaticProps(
           screenReaderCategory:
             siteText.common.sidebar.metrics.disabled_care.title,
         },
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.disabilityCarePage.nl,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.disability_care_page.nl,
       }),
       locale
     ),
@@ -78,7 +78,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('disabilityCarePage')},
+      "parts": ${getPagePartsQuery('disability_care_page')},
       "elements": ${getElementsQuery('nl', ['disability_care'], locale)}
      }`;
     })(context);

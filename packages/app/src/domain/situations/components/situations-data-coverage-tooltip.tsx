@@ -15,7 +15,7 @@ export function SituationsDataCoverageTooltip({
   text,
 }: {
   context: TooltipData<VrCollectionSituations>;
-  text: SiteText['pages']['situationsPage']['shared']['situaties_kaarten_uitkomsten'];
+  text: SiteText['pages']['situations_page']['shared']['situaties_kaarten_uitkomsten'];
 }) {
   const reverseRouter = useReverseRouter();
 

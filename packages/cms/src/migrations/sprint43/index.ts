@@ -13,16 +13,15 @@ import { getClient } from '../../client';
 const client = getClient('production');
 
 const types = [
-  '"articlePageArticle"',
-  '"behaviorPage"',
-  '"deceasedPage"',
-  '"disabilityCarePage"',
-  '"elderlyAtHomePage"',
-  '"escalationLevelPage"',
-  '"nursingHomePage"',
+  '"article_page_article"',
+  '"behavior_page"',
+  '"deceased_page"',
+  '"disability_care_page"',
+  '"elderly_at_home_page"',
+  '"nursing_home_page"',
   '"sewerPage"',
-  '"TopicalPage"',
-  '"vaccinationsPage"',
+  '"topical_page"',
+  '"vaccinations_page"',
 ];
 
 client

@@ -38,7 +38,7 @@ export function Metadata({
           date: formatDateFromSeconds(date, 'weekday-medium'),
         })
       : Array.isArray(date)
-      ? replaceVariablesInText(commonTexts.common.metadata.dateFromTo, {
+      ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
           startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
           endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
         })
