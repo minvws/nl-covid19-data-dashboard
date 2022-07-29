@@ -1,4 +1,4 @@
-import { VariantCodesKeys } from "../static-props";
+import { VariantCodesAll } from "../static-props";
 
 export type TableText = {
   anderen_tooltip: string;
@@ -13,7 +13,7 @@ export type TableText = {
     vorige_meting: string;
   };
   verschil: { gelijk: string; meer: string; minder: string };
-  varianten: VariantCodesKeys;
+  variantCodes: VariantCodesAll;
   description: string;
   geen_percentage_cijfer: string;
   geen_percentage_cijfer_tooltip: string;

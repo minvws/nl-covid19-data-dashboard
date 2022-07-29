@@ -8,10 +8,10 @@ import {
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ColorMatch } from './get-variant-order-colors';
-import { VariantCodes } from '../static-props';
+import { VariantCode } from '../static-props';
 
 export type VariantRow = {
-  variantCode: VariantCodes;
+  variantCode: VariantCode;
   percentage: number | null;
   difference?: NamedDifferenceDecimal | null;
   color: string;

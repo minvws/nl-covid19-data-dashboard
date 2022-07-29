@@ -20,13 +20,13 @@ import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
 import {
   ColorMatch,
-  VariantCodes,
-  VariantCodesKeys,
+  VariantCode,
+  VariantCodesAll,
 } from '~/domain/variants/static-props';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileText = {
-  varianten: VariantCodes;
+  variantCodes: VariantCodesAll;
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
 type VariantsStackedAreaTileProps = {
@@ -231,15 +231,15 @@ function useSeriesConfig(
         variantNameFragments.pop();
         const variantName = variantNameFragments.join(
           '_'
-        ) as unknown as VariantCodesKeys;
+        ) as unknown as VariantCode;
 
         return {
           type: 'gapped-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
           label:
-            text.varianten[variantName] ||
-            (variantName as unknown as VariantCodes),
+            text.variantCodes[variantName] ||
+            (variantName as unknown as VariantCode),
           shape: 'gapped-area',
           strokeWidth: 2,
           fillOpacity: 0.2,
@@ -264,7 +264,7 @@ function useSeriesConfig(
   }, [
     values,
     text.tooltip_labels.other_percentage,
-    text.varianten,
+    text.variantCodes,
     variantColors,
   ]);
 }

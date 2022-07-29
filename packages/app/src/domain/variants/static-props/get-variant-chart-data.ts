@@ -2,16 +2,16 @@ import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { SiteText } from '~/locale';
 
-export type VariantCodes = keyof SiteText['common']['variant_codes'];
+export type VariantCodesAll = SiteText['common']['variant_codes']
 
-export enum VariantCodesKeys {VariantCodes};
+export type VariantCode = keyof VariantCodesAll;
 
 export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
   is_reliable: boolean;
 } & Partial<{
-  [key in `${VariantCodes}_percentage`]: number;
+  [key in `${VariantCode}_percentage`]: number;
 }>;
 
 const EMPTY_VALUES = {
