@@ -7,35 +7,35 @@ import {
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
-import { colorMatch } from './get-variant-order-colors';
-import { VariantCodes } from '../variants-table-tile/types';
+import { ColorMatch } from './get-variant-order-colors';
+import { VariantCodes } from '../static-props';
 
 export type VariantRow = {
-  variant: keyof VariantCodes;
+  variantCode: VariantCodes;
   percentage: number | null;
   difference?: NamedDifferenceDecimal | null;
   color: string;
 };
-
-const EMPTY_VALUES = {
-  variantTable: null,
-  dates: {
-    date_of_report_unix: 0,
-    date_start_unix: 0,
-    date_end_unix: 0,
-  },
-  sampleSize: 0,
-} as const
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
 export function getVariantTableData(
   variants: NlVariants | undefined,
   namedDifference: NlNamedDifference,
-  variantColors: colorMatch
+  variantColors: ColorMatch
 ) {
+  const emptyValues = {
+    variantTable: null,
+    dates: {
+      date_of_report_unix: 0,
+      date_start_unix: 0,
+      date_end_unix: 0,
+    },
+    sampleSize: 0,
+  } as const
+
   if (!isDefined(variants) || !isDefined(variants.values)) {
-    return EMPTY_VALUES;
+    return emptyValues;
   }
 
   function findDifference(name: string) {
@@ -55,7 +55,7 @@ export function getVariantTableData(
   const firstLastValue = first<NlVariantsVariant>(variants.values);
 
   if (!isDefined(firstLastValue)) {
-    return EMPTY_VALUES;
+    return emptyValues;
   }
   const dates = {
     date_end_unix: firstLastValue.last_value.date_end_unix,
@@ -87,11 +87,11 @@ export function getVariantTableData(
     .map<VariantRow>((variant) => {
       const color =
         variantColors.find(
-          (variantColors) => variantColors.variant === variant.variant_code
+          (variantColor) => variantColor.variant === variant.variant_code
         )?.color || colors.data.variants.fallbackColor;
 
       return {
-        variant: variant.variant_code,
+        variantCode: variant.variant_code,
         percentage: variant.last_value.percentage,
         difference: findDifference(variant.variant_code),
         color,
@@ -100,16 +100,16 @@ export function getVariantTableData(
     .filter(
       (row) =>
         // Make sure the 'other' variant persists in the table.
-        row.variant === 'other_table' || row.percentage
+        row.variantCode === 'other_table' || row.percentage
     )
     .sort()
     .reverse()
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last.
-      if (rowA.variant === 'other_table') {
+      if (rowA.variantCode === 'other_table') {
         return 1;
       }
-      if (rowB.variant === 'other_table') {
+      if (rowB.variantCode === 'other_table') {
         return -1;
       }
 

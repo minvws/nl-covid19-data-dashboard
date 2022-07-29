@@ -1,16 +1,24 @@
 import { NlVariants, colors } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
+import { VariantCodes } from './'
 
 type SingleColorMatchType = {
-  variant: string;
+  variant: VariantCodes;
   color: string;
 };
 
-export type colorMatch = SingleColorMatchType[];
+export type ColorMatch = SingleColorMatchType[];
+
+const getColorForVariant = (variantCode: VariantCodes, index: number): string => {
+  if (variantCode === 'other_table') return colors.data.variants.other_table;
+  if (variantCode === 'other_graph') return colors.data.variants.other_graph;
+
+  return colors.data.variants.colorList[index];
+}
 
 export function getVariantOrderColors(
   variants: NlVariants | undefined
-): colorMatch {
+): ColorMatch {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return [];
   }
@@ -29,17 +37,13 @@ export function getVariantOrderColors(
     return [];
   }
 
-  const colorMatch = variantsOfConcern.map((variant, index) => {
+  const colorOrder = variantsOfConcern.map((variant, index) => {
+    const variantColor = getColorForVariant(variant.variant_code, index)
     return {
       variant: variant.variant_code,
-      color:
-        variant.variant_code === 'other_table'
-          ? colors.data.variants.other_table
-          : variant.variant_code === 'other_graph'
-          ? colors.data.variants.other_graph
-          : colors.data.variants.colorList[index],
+      color: variantColor
     };
   });
 
-  return colorMatch;
+  return colorOrder;
 }

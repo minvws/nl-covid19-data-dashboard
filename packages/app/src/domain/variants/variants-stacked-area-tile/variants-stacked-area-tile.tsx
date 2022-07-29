@@ -18,8 +18,11 @@ import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
-import { VariantCodes } from '../variants-table-tile/types';
-import { colorMatch } from '~/domain/variants/static-props';
+import {
+  ColorMatch,
+  VariantCodes,
+  VariantCodesKeys,
+} from '~/domain/variants/static-props';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileText = {
@@ -29,7 +32,7 @@ type VariantsStackedAreaTileText = {
 type VariantsStackedAreaTileProps = {
   text: VariantsStackedAreaTileText;
   values?: VariantChartValue[] | null;
-  variantColors: colorMatch;
+  variantColors: ColorMatch;
   metadata: MetadataProps;
   children?: ReactNode;
   noDataMessage?: ReactNode;
@@ -73,7 +76,7 @@ type VariantStackedAreaTileWithDataProps = {
   text: VariantsStackedAreaTileText;
   values: VariantChartValue[];
   metadata: MetadataProps;
-  variantColors: colorMatch;
+  variantColors: ColorMatch;
   children?: ReactNode;
 };
 
@@ -205,7 +208,7 @@ function useFilteredSeriesConfig(
 function useSeriesConfig(
   text: VariantsStackedAreaTileText,
   values: VariantChartValue[],
-  variantColors: colorMatch
+  variantColors: ColorMatch
 ) {
   return useMemo(() => {
     const baseVariantsFiltered = values
@@ -228,13 +231,15 @@ function useSeriesConfig(
         variantNameFragments.pop();
         const variantName = variantNameFragments.join(
           '_'
-        ) as keyof VariantCodes;
+        ) as unknown as VariantCodesKeys;
 
         return {
           type: 'gapped-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: text.varianten[variantName] || variantName,
+          label:
+            text.varianten[variantName] ||
+            (variantName as unknown as VariantCodes),
           shape: 'gapped-area',
           strokeWidth: 2,
           fillOpacity: 0.2,

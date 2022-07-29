@@ -2,7 +2,9 @@ import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { SiteText } from '~/locale';
 
-type VariantCodes = keyof SiteText['common']['variant_codes'];
+export type VariantCodes = keyof SiteText['common']['variant_codes'];
+
+export enum VariantCodesKeys {VariantCodes};
 
 export type VariantChartValue = {
   date_start_unix: number;

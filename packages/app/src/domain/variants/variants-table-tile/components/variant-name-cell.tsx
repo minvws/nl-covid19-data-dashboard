@@ -1,18 +1,19 @@
 import { BoldText } from '~/components/typography';
 import { Cell } from '.';
-import { TableText, VariantCodes } from '../types';
+import { TableText } from '../types';
+import { VariantCodesKeys } from '../../static-props';
 
 type VariantNameCellProps = {
-  variant: keyof VariantCodes;
+  variantCode: VariantCodesKeys;
   text: TableText;
   mobile?: boolean;
   narrow?: boolean;
 };
 
 export function VariantNameCell(props: VariantNameCellProps) {
-  const { variant, text, mobile, narrow } = props;
+  const { variantCode, text, mobile, narrow } = props;
 
-  const variantName = text.varianten[variant];
+  const variantName = text.varianten[variantCode];
 
   return (
     <Cell mobile={mobile} narrow={narrow}>
