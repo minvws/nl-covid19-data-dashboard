@@ -292,7 +292,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }
           />
 
-          {/* <VaccineCampaignsTile
+          <VaccineCampaignsTile
             title={textNl.vaccine_campaigns.title}
             description={replaceVariablesInText(
               textNl.vaccine_campaigns.description,
@@ -309,7 +309,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               date: data.vaccine_campaigns.date_unix,
               source: textNl.vaccine_campaigns.bronnen.rivm,
             }}
-          /> */}
+          />
+
           <AdministeredVaccinationTile
             // TODO: delete/change the below two props
             title={textNl.vaccine_campaigns.title}

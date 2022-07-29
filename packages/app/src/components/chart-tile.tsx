@@ -47,16 +47,33 @@ export function ChartTile({
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       {hasSplitLayout ? (
-        <Box
-          display="flex"
-          flexDirection={{ xs: 'column', xl: 'row' }}
-          justifyContent="space-between"
-          alignItems={{ xs: 'start', xl: 'center' }}
-        >
-          <ChartTileHeader title={title} description={description} />
+        <>
+          <Heading
+            level={3}
+            css={css({ pr: asResponsiveArray({ md: 5 }), mb: 3 })}
+          >
+            {title}
+          </Heading>
 
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </Box>
+          <Box
+            display="flex"
+            flexDirection={{ _: 'column', lg: 'row' }}
+            justifyContent={{ _: 'flex-start', lg: 'space-between' }}
+            alignItems={{ _: 'flex-start', lg: 'normal' }}
+          >
+            {description && (
+              <Box width={{ _: '100%', lg: '50%' }}>
+                <Box maxWidth="maxWidthText">
+                  <Markdown content={description} />
+                </Box>
+              </Box>
+            )}
+
+            <Box width={{ _: '100%', lg: '50%' }}>
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </Box>
+          </Box>
+        </>
       ) : (
         <>
           <ChartTileHeader title={title} description={description}>

@@ -1,9 +1,11 @@
 import { assert, colors } from '@corona-dashboard/common';
 import { NlVaccineType } from '@corona-dashboard/common/src/types';
 import { Vaccinaties as VaccinationIcon } from '@corona-dashboard/icons';
-import { ChartTile } from '~/components';
-import { PieChart, PiePartConfig } from '~/components/pie-chart';
+import { useIntl } from '~/intl';
+import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
+import { PieChart, PiePartConfig } from '~/components/pie-chart';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 interface AdministeredVaccinationProps {
   title: string;
@@ -12,20 +14,32 @@ interface AdministeredVaccinationProps {
   metadata: MetadataProps;
 }
 
+/**
+ * This list contains duplicate entries, because BE is unable to deliver
+ * specific IDs that match with previously delivered data entry IDs.
+ * As per example: 'bio_n_tech_pfizer' vs 'BioNTech/Pfizer'.
+ * This has been introduced as part of COR-938.
+ * @TODO - remove duplicates when/if BE is able to provide IDs.
+ */
 const vaccines = [
   'bio_n_tech_pfizer',
   'pfizer',
+  'BioNTech/Pfizer',
   'moderna',
+  'Moderna',
   'astra_zeneca',
+  'AstraZeneca',
   'janssen',
+  'Janssen',
   'novavax',
+  'Novavax',
   'cure_vac',
   'sanofi',
 ] as const;
-vaccines.forEach((x) =>
+vaccines.forEach((vaccine) =>
   assert(
-    colors.data.vaccines[x],
-    `[${AdministeredVaccinationTile.name}] missing vaccine color for vaccine ${x}`
+    colors.data.vaccines[vaccine],
+    `[${AdministeredVaccinationTile.name}] missing vaccine color for vaccine ${vaccine}`
   )
 );
 
@@ -35,8 +49,11 @@ export function AdministeredVaccinationTile({
   data,
   metadata,
 }: AdministeredVaccinationProps) {
+  const breakpoints = useBreakpoints();
+  const { formatNumber } = useIntl();
+
   const formatLabel = (label: string, value: number) =>
-    `${label}: **${value}**`;
+    `${label}: **${formatNumber(value)}**`;
 
   const mappedData: Record<string, number> = {};
   data.forEach(
@@ -53,7 +70,10 @@ export function AdministeredVaccinationTile({
     .map<PiePartConfig<typeof mappedData>>((vaccineType) => {
       return {
         metricProperty: vaccineType.vaccine_type_name,
-        color: '#f3f', // TODO: change this
+        color:
+          colors.data.vaccines[
+            vaccineType.vaccine_type_name as keyof typeof colors.data.vaccines
+          ],
         label: formatLabel(
           vaccineType.vaccine_type_name,
           vaccineType.vaccine_type_value
@@ -75,8 +95,12 @@ export function AdministeredVaccinationTile({
       <PieChart
         data={mappedData}
         dataConfig={dataConfig}
+        donutWidth={25}
         icon={<VaccinationIcon />}
         iconFill={colors.body}
+        innerSize={180}
+        marginLeft={breakpoints.lg ? 30 : 0}
+        marginRight={breakpoints.lg ? 30 : 0}
       />
     </ChartTile>
   );
