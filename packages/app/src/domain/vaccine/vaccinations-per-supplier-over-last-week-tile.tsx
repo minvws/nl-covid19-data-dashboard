@@ -7,7 +7,7 @@ import { MetadataProps } from '~/components/metadata';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-interface AdministeredVaccinationProps {
+interface VaccinationsPerSupplierOverLastWeekTileProps {
   title: string;
   description: string;
   data: NlVaccineType[];
@@ -39,16 +39,16 @@ const vaccines = [
 vaccines.forEach((vaccine) =>
   assert(
     colors.data.vaccines[vaccine],
-    `[${AdministeredVaccinationTile.name}] missing vaccine color for vaccine ${vaccine}`
+    `[${VaccinationsPerSupplierOverLastWeekTile.name}] missing vaccine color for vaccine ${vaccine}`
   )
 );
 
-export function AdministeredVaccinationTile({
+export function VaccinationsPerSupplierOverLastWeekTile({
   title,
   description,
   data,
   metadata,
-}: AdministeredVaccinationProps) {
+}: VaccinationsPerSupplierOverLastWeekTileProps) {
   const breakpoints = useBreakpoints();
   const { formatNumber } = useIntl();
 
