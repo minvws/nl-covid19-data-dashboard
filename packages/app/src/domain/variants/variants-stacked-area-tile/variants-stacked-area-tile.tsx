@@ -222,16 +222,16 @@ function useSeriesConfig(
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] =
       baseVariantsFiltered.map((variantKey) => {
-        const color =
-          variantColors.find(
-            (variantColors) => variantColors.variant === variantKey
-          )?.color || colors.data.variants.fallbackColor;
-
         const variantNameFragments = variantKey.split('_');
         variantNameFragments.pop();
         const variantName = variantNameFragments.join(
           '_'
         ) as unknown as VariantCode;
+
+        const color =
+          variantColors.find(
+            (variantColors) => variantColors.variant === variantName
+          )?.color || colors.data.variants.fallbackColor;
 
         return {
           type: 'gapped-area',
