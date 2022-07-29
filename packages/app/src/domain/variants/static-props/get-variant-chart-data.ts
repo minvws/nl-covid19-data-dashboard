@@ -2,7 +2,7 @@ import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { SiteText } from '~/locale';
 
-export type VariantCodesAll = SiteText['common']['variant_codes']
+export type VariantCodesAll = SiteText['common']['variant_codes'];
 
 export type VariantCode = keyof VariantCodesAll;
 
@@ -34,7 +34,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
         variant.last_value.is_variant_of_concern ||
         variant.last_value.has_historical_significance
     )
-    .sort((a, b) => a.last_value.order - b.last_value.order);
+    .sort((a, b) => b.last_value.order - a.last_value.order);
 
   
 

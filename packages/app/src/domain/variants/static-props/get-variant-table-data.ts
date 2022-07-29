@@ -31,7 +31,7 @@ export function getVariantTableData(
       date_start_unix: 0,
       date_end_unix: 0,
     },
-  } as const
+  } as const;
 
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return emptyValues;
@@ -65,7 +65,7 @@ export function getVariantTableData(
   const variantTable = variants.values
     .filter(
       (variant) =>
-        variant.variant_code !== 'other_graph' || (!variant.last_value.has_historical_significance && variant.last_value.is_variant_of_concern)
+        variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance
     )
     .sort((a, b) => a.last_value.order - b.last_value.order)
     .map<VariantRow>((variant) => {
