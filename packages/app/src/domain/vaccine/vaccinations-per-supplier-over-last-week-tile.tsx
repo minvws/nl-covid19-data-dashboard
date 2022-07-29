@@ -5,7 +5,6 @@ import { useIntl } from '~/intl';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 
 interface VaccinationsPerSupplierOverLastWeekTileProps {
   title: string;
@@ -49,7 +48,6 @@ export function VaccinationsPerSupplierOverLastWeekTile({
   data,
   metadata,
 }: VaccinationsPerSupplierOverLastWeekTileProps) {
-  const breakpoints = useBreakpoints();
   const { formatNumber } = useIntl();
 
   const formatLabel = (label: string, value: number) =>
@@ -99,8 +97,8 @@ export function VaccinationsPerSupplierOverLastWeekTile({
         icon={<VaccinationIcon />}
         iconFill={colors.body}
         innerSize={180}
-        marginLeft={breakpoints.lg ? 30 : 0}
-        marginRight={breakpoints.lg ? 30 : 0}
+        marginLeft={32}
+        marginRight={32}
       />
     </ChartTile>
   );

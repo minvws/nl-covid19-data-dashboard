@@ -115,11 +115,10 @@ export function PieChart<T>({
           marginTop={{ _: 3, lg: 0 }}
         >
           <Box
-            alignSelf="self-start"
+            alignSelf={{ _: 'center', md: 'self-start' }}
             height={innerSize}
             position="relative"
-            marginLeft={{ xs: marginLeft }}
-            marginRight={{ xs: marginRight }}
+            css={css({ marginLeft, marginRight })}
             spacingHorizontal={2}
           >
             {icon && (
