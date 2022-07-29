@@ -224,9 +224,7 @@ function useSeriesConfig(
       baseVariantsFiltered.map((variantKey) => {
         const variantNameFragments = variantKey.split('_');
         variantNameFragments.pop();
-        const variantName = variantNameFragments.join(
-          '_'
-        ) as unknown as VariantCode;
+        const variantName = variantNameFragments.join('_') as VariantCode;
 
         const color =
           variantColors.find(
@@ -237,9 +235,7 @@ function useSeriesConfig(
           type: 'gapped-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label:
-            text.variantCodes[variantName] ||
-            (variantName as unknown as VariantCode),
+          label: text.variantCodes[variantName] || variantName,
           shape: 'gapped-area',
           strokeWidth: 2,
           fillOpacity: 0.2,
