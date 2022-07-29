@@ -19,7 +19,6 @@ export function VariantsTableTile({
   noDataMessage = '',
   source,
   data,
-  sampleSize,
   dates,
   children = null,
 }: {
@@ -31,7 +30,6 @@ export function VariantsTableTile({
     href: string;
     text: string;
   };
-  sampleSize: number;
   dates: {
     date_start_unix: number;
     date_end_unix: number;
@@ -61,7 +59,6 @@ export function VariantsTableTile({
       text={text}
       source={source}
       data={data}
-      sampleSize={sampleSize}
       dates={dates}
     >
       {children}
@@ -73,7 +70,6 @@ function VariantsTableTileWithData({
   text,
   source,
   data,
-  sampleSize,
   dates,
   children = null,
 }: {
@@ -84,7 +80,6 @@ function VariantsTableTileWithData({
     href: string;
     text: string;
   };
-  sampleSize: number;
   dates: {
     date_start_unix: number;
     date_end_unix: number;
@@ -106,7 +101,6 @@ function VariantsTableTileWithData({
   );
 
   const descriptionText = replaceVariablesInText(text.omschrijving, {
-    sample_size: sampleSize,
     date_start,
     date_end,
   });

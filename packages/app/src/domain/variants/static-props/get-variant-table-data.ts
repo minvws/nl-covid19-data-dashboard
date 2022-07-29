@@ -31,7 +31,6 @@ export function getVariantTableData(
       date_start_unix: 0,
       date_end_unix: 0,
     },
-    sampleSize: 0,
   } as const
 
   if (!isDefined(variants) || !isDefined(variants.values)) {
@@ -60,30 +59,15 @@ export function getVariantTableData(
   const dates = {
     date_end_unix: firstLastValue.last_value.date_end_unix,
     date_start_unix: firstLastValue.last_value.date_start_unix,
-    date_of_report_unix:
-      firstLastValue.last_value.date_of_report_unix,
+    date_of_report_unix: firstLastValue.last_value.date_of_report_unix,
   };
-  const sampleSize = firstLastValue.last_value.sample_size;
-
 
   const variantTable = variants.values
-    /**
-     * Since the schemas for international still has to change to
-     * the new way of calculating this prevents the typescript error for now.
-     */
-    .map((variant) => ({
-      has_historical_significance:
-        'has_historical_significance' in variant.last_value
-          ? variant.last_value.has_historical_significance
-          : true,
-      ...variant,
-    }))
     .filter(
       (variant) =>
-        variant.variant_code !== 'other_graph' ||
-        !variant.has_historical_significance
+        variant.variant_code !== 'other_graph' || (!variant.last_value.has_historical_significance && variant.last_value.is_variant_of_concern)
     )
-    .sort((a, b) => b.last_value.order - a.last_value.order)
+    .sort((a, b) => a.last_value.order - b.last_value.order)
     .map<VariantRow>((variant) => {
       const color =
         variantColors.find(
@@ -96,25 +80,7 @@ export function getVariantTableData(
         difference: findDifference(variant.variant_code),
         color,
       };
-    })
-    .filter(
-      (row) =>
-        // Make sure the 'other' variant persists in the table.
-        row.variantCode === 'other_table' || row.percentage
-    )
-    .sort()
-    .reverse()
-    .sort((rowA, rowB) => {
-      // Make sure the 'other' variant is always sorted last.
-      if (rowA.variantCode === 'other_table') {
-        return 1;
-      }
-      if (rowB.variantCode === 'other_table') {
-        return -1;
-      }
-
-      return 0;
     });
 
-  return { variantTable, dates, sampleSize };
+  return { variantTable, dates };
 }

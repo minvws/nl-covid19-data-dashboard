@@ -30,11 +30,13 @@ export function getVariantChartData(variants: NlVariants | undefined) {
 
   const variantsOfConcern = variants.values
     .filter(
-      (x) =>
-        x.last_value.is_variant_of_concern ||
-        x.last_value.has_historical_significance
+      (variant) =>
+        variant.last_value.is_variant_of_concern ||
+        variant.last_value.has_historical_significance
     )
-    .sort((a, b) => b.last_value.order - a.last_value.order);
+    .sort((a, b) => a.last_value.order - b.last_value.order);
+
+  
 
   const firstVariant = variantsOfConcern.shift();
 

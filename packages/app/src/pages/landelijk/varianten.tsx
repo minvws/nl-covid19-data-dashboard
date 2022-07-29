@@ -7,7 +7,6 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
   getVariantOrderColors,
-  getVariantSidebarValue,
   getVariantTableData,
 } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
@@ -56,7 +55,6 @@ export const getStaticProps = createGetStaticProps(
     const variantColors = getVariantOrderColors(variants);
 
     return {
-      variantSidebarValue: getVariantSidebarValue(variants) ?? null,
       ...getVariantTableData(
         variants,
         data.selectedNlData.named_difference,
@@ -85,7 +83,6 @@ export default function CovidVariantenPage(
 ) {
   const {
     pageText,
-    variantSidebarValue,
     selectedNlData: data,
     lastGenerated,
     content,
@@ -144,23 +141,20 @@ export default function CovidVariantenPage(
             }}
           />
 
-          {variantSidebarValue?.sample_size && (
-            <VariantsTableTile
-              data={variantTable}
-              sampleSize={variantSidebarValue.sample_size}
-              text={{
-                ...textShared.varianten_tabel,
-                variantCodes: commonTexts.variant_codes,
-                description: textNl.varianten_omschrijving,
-              }}
-              source={textNl.bronnen.rivm}
-              dates={{
-                date_end_unix: dates.date_end_unix,
-                date_of_report_unix: dates.date_of_report_unix,
-                date_start_unix: dates.date_start_unix,
-              }}
-            />
-          )}
+          <VariantsTableTile
+            data={variantTable}
+            text={{
+              ...textShared.varianten_tabel,
+              variantCodes: commonTexts.variant_codes,
+              description: textNl.varianten_omschrijving,
+            }}
+            source={textNl.bronnen.rivm}
+            dates={{
+              date_end_unix: dates.date_end_unix,
+              date_of_report_unix: dates.date_of_report_unix,
+              date_start_unix: dates.date_start_unix,
+            }}
+          />
         </TileList>
       </NlLayout>
     </Layout>

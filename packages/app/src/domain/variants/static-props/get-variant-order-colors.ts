@@ -23,20 +23,19 @@ export function getVariantOrderColors(
     return [];
   }
 
-  const variantsOfConcern = variants.values
+  const colorOrder = variants.values
     .filter(
-      (x) =>
-        x.last_value.is_variant_of_concern ||
-        x.last_value.has_historical_significance
+      (variant) =>
+        variant.last_value.is_variant_of_concern ||
+        variant.last_value.has_historical_significance
     )
-    .sort((a, b) => b.last_value.order - a.last_value.order);
-
-  const colorOrder = variantsOfConcern.map((variant, index) => {
-    const variantColor = getColorForVariant(variant.variant_code, index)
-    return {
-      variant: variant.variant_code,
-      color: variantColor
-    };
+    .sort((a, b) => a.last_value.order - b.last_value.order)
+    .map((variant, index) => {
+      const variantColor = getColorForVariant(variant.variant_code, index)
+      return {
+        variant: variant.variant_code,
+        color: variantColor
+      };
   });
 
   return colorOrder;
