@@ -86,7 +86,7 @@ function createTimeTicks(
 
   const ticks: number[] = [];
   const stepCount =
-    valueCount && valueCount <= count ? valueCount - 1 : count - 1;
+    (valueCount && valueCount <= count ? valueCount : count) - 1;
   const step = Math.floor((end - start) / stepCount);
 
   for (let i = 0; i < stepCount; i++) {
