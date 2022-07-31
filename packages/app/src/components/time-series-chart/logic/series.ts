@@ -10,7 +10,11 @@ import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { DataOptions, TimespanAnnotationConfig } from './common';
+import {
+  DataOptions,
+  LeadingSeriesType,
+  TimespanAnnotationConfig,
+} from './common';
 import { SplitPoint } from './split';
 
 type SeriesConfigSingle<T extends TimestampedValue> =
@@ -283,9 +287,10 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity
+  benchmarkValue = -Infinity,
+  leadingSeriesType?: LeadingSeriesType
 ) {
-  const values = seriesList
+  let values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
     .flatMap((series) =>
       series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
@@ -293,6 +298,21 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
       )
     )
     .filter(isDefined);
+
+  if (leadingSeriesType) {
+    const leadingSeriesTypeIndex = seriesConfig.findIndex(
+      (seriesConfig) => seriesConfig.type === leadingSeriesType
+    );
+
+    if (leadingSeriesTypeIndex >= 0) {
+      const leadingSeries = seriesList[leadingSeriesTypeIndex];
+      values = leadingSeries
+        .flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+          isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+        )
+        .filter(isDefined);
+    }
+  }
 
   const overallMaximum = Math.max(...values);
 

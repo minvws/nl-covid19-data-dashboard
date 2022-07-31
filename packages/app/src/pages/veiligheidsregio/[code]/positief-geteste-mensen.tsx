@@ -246,6 +246,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.timeSeries,
                     'tested_overall'
                   ),
+                  leadingSeriesType: 'line',
                 }}
               />
             )}

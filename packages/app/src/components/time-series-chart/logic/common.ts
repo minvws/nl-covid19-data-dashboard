@@ -15,7 +15,21 @@ export interface DataOptions {
   renderNullAsZero?: boolean;
   outOfBoundsConfig?: OutOfBoundsConfig;
   useDatesAsRange?: boolean;
+  leadingSeriesType?: LeadingSeriesType;
 }
+
+export type LeadingSeriesType =
+  | 'area'
+  | 'bar'
+  | 'gapped-area'
+  | 'gapped-line'
+  | 'gapped-stacked-area'
+  | 'line'
+  | 'range'
+  | 'scatter-plot'
+  | 'split-area'
+  | 'split-bar'
+  | 'stacked-area';
 
 export type OutOfBoundsConfig = {
   label: string;

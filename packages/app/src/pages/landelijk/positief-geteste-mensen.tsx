@@ -241,7 +241,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  forcedMaximumValue: 150000,
                   outOfBoundsConfig: {
                     label: textShared.labels.infected_out_of_bounds,
                     tooltipLabel: textShared.tooltip_labels.annotations,
@@ -254,6 +253,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.timeSeries,
                     'tested_overall'
                   ),
+                  leadingSeriesType: 'line',
                 }}
               />
             )}
