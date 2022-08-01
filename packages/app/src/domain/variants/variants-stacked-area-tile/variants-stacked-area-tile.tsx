@@ -19,7 +19,7 @@ import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
 import {
-  ColorMatch,
+  ColorMatches,
   VariantCode,
   VariantCodesAll,
 } from '~/domain/variants/static-props';
@@ -32,7 +32,7 @@ type VariantsStackedAreaTileText = {
 type VariantsStackedAreaTileProps = {
   text: VariantsStackedAreaTileText;
   values?: VariantChartValue[] | null;
-  variantColors: ColorMatch;
+  variantColors: ColorMatches;
   metadata: MetadataProps;
   children?: ReactNode;
   noDataMessage?: ReactNode;
@@ -76,7 +76,7 @@ type VariantStackedAreaTileWithDataProps = {
   text: VariantsStackedAreaTileText;
   values: VariantChartValue[];
   metadata: MetadataProps;
-  variantColors: ColorMatch;
+  variantColors: ColorMatches;
   children?: ReactNode;
 };
 
@@ -208,7 +208,7 @@ function useFilteredSeriesConfig(
 function useSeriesConfig(
   text: VariantsStackedAreaTileText,
   values: VariantChartValue[],
-  variantColors: ColorMatch
+  variantColors: ColorMatches
 ) {
   return useMemo(() => {
     const baseVariantsFiltered = values

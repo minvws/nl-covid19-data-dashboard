@@ -7,7 +7,7 @@ import {
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ColorMatch } from './get-variant-order-colors';
+import { ColorMatches } from './get-variant-order-colors';
 import { VariantCode } from '../static-props';
 
 export type VariantRow = {
@@ -22,7 +22,7 @@ export type VariantTableData = ReturnType<typeof getVariantTableData>;
 export function getVariantTableData(
   variants: NlVariants | undefined,
   namedDifference: NlNamedDifference,
-  variantColors: ColorMatch
+  variantColors: ColorMatches
 ) {
   const emptyValues = {
     variantTable: null,
