@@ -66,9 +66,10 @@ function getVaccineCoveragePercentageFormatter(
       }
     }
 
-    if (isPresent(data[property]) && typeof data[property] === 'number') {
+    const dataEntry = data[property];
+    if (isPresent(dataEntry) && typeof dataEntry === 'number') {
       return (
-        formatPercentage(data[property] as unknown as number, {
+        formatPercentage(dataEntry, {
           minimumFractionDigits: numFractionDigits,
           maximumFractionDigits: numFractionDigits,
         }) + '%'

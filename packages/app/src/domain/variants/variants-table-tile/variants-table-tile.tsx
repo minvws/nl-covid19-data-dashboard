@@ -19,7 +19,6 @@ export function VariantsTableTile({
   noDataMessage = '',
   source,
   data,
-  sampleSize,
   dates,
   children = null,
 }: {
@@ -31,12 +30,11 @@ export function VariantsTableTile({
     href: string;
     text: string;
   };
-  sampleSize: number;
-  dates?: {
+  dates: {
     date_start_unix: number;
     date_end_unix: number;
-    date_of_insertion_unix: number;
-  } | null;
+    date_of_report_unix: number;
+  };
   children?: ReactNode;
 }) {
   if (!isPresent(data) || !isPresent(dates)) {
@@ -61,7 +59,6 @@ export function VariantsTableTile({
       text={text}
       source={source}
       data={data}
-      sampleSize={sampleSize}
       dates={dates}
     >
       {children}
@@ -73,7 +70,6 @@ function VariantsTableTileWithData({
   text,
   source,
   data,
-  sampleSize,
   dates,
   children = null,
 }: {
@@ -84,11 +80,10 @@ function VariantsTableTileWithData({
     href: string;
     text: string;
   };
-  sampleSize: number;
   dates: {
     date_start_unix: number;
     date_end_unix: number;
-    date_of_insertion_unix: number;
+    date_of_report_unix: number;
   };
   children?: ReactNode;
 }) {
@@ -97,16 +92,15 @@ function VariantsTableTileWithData({
   const metadata: MetadataProps = {
     date: [dates.date_start_unix, dates.date_end_unix],
     source,
-    obtainedAt: dates.date_of_insertion_unix,
+    obtainedAt: dates.date_of_report_unix,
   };
 
   const [date_start, date_end] = formatDateSpan(
-    { seconds: dates?.date_start_unix },
-    { seconds: dates?.date_end_unix }
+    { seconds: dates.date_start_unix },
+    { seconds: dates.date_end_unix }
   );
 
   const descriptionText = replaceVariablesInText(text.omschrijving, {
-    sample_size: sampleSize,
     date_start,
     date_end,
   });
