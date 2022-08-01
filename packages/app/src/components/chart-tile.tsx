@@ -6,9 +6,9 @@ import { Box, Spacer } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
+import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { Heading } from './typography';
 
 type ChartTileProps = {
   title: string;
@@ -17,7 +17,6 @@ type ChartTileProps = {
 
   timeframeInitialValue?: TimeframeOption;
   disableFullscreen?: boolean;
-  hasSplitLayout?: boolean;
 } & (
   | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
@@ -38,7 +37,6 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue,
   disableFullscreen,
-  hasSplitLayout,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue || TimeframeOption.ALL
@@ -46,69 +44,37 @@ export function ChartTile({
 
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
-      {hasSplitLayout ? (
-        <>
-          <Heading
-            level={3}
-            css={css({ pr: asResponsiveArray({ md: 5 }), mb: 3 })}
-          >
-            {title}
-          </Heading>
-
+      <ChartTileHeader title={title} description={description}>
+        {timeframeOptions && timeframe && (
           <Box
-            display="flex"
-            flexDirection={{ _: 'column', lg: 'row' }}
-            justifyContent={{ _: 'flex-start', lg: 'space-between' }}
-            alignItems={{ _: 'flex-start', lg: 'normal' }}
+            css={css({
+              width: asResponsiveArray({
+                xl: '25%',
+                lg: '50%',
+                sm: '100%',
+              }),
+            })}
           >
-            {description && (
-              <Box width={{ _: '100%', lg: '50%' }}>
-                <Box maxWidth="maxWidthText">
-                  <Markdown content={description} />
-                </Box>
-              </Box>
-            )}
-
-            <Box width={{ _: '100%', lg: '50%' }}>
-              <ErrorBoundary>{children}</ErrorBoundary>
-            </Box>
+            <ChartTimeControls
+              timeframeOptions={timeframeOptions}
+              timeframe={timeframe}
+              onChange={setTimeframe}
+            />
           </Box>
-        </>
-      ) : (
-        <>
-          <ChartTileHeader title={title} description={description}>
-            {timeframeOptions && timeframe && (
-              <Box
-                css={css({
-                  width: asResponsiveArray({
-                    xl: '25%',
-                    lg: '50%',
-                    sm: '100%',
-                  }),
-                })}
-              >
-                <ChartTimeControls
-                  timeframeOptions={timeframeOptions}
-                  timeframe={timeframe}
-                  onChange={setTimeframe}
-                />
-              </Box>
-            )}
-          </ChartTileHeader>
+        )}
+      </ChartTileHeader>
 
-          <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
+      <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
 
-          <ErrorBoundary>
-            {timeframeOptions
-              ? (assert(
-                  typeof children === 'function',
-                  `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
-                ),
-                children(timeframe))
-              : children}
-          </ErrorBoundary>
-        </>
-      )}
+      <ErrorBoundary>
+        {timeframeOptions
+          ? (assert(
+              typeof children === 'function',
+              `[${ChartTile.name}] When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.`
+            ),
+            children(timeframe))
+          : children}
+      </ErrorBoundary>
     </FullscreenChartTile>
   );
 }

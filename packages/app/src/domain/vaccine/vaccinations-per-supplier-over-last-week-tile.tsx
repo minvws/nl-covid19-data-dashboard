@@ -2,7 +2,7 @@ import { assert, colors } from '@corona-dashboard/common';
 import { NlVaccineType } from '@corona-dashboard/common/src/types';
 import { Vaccinaties as VaccinationIcon } from '@corona-dashboard/icons';
 import { useIntl } from '~/intl';
-import { ChartTile } from '~/components/chart-tile';
+import { ChartTileDoubleColumn } from '~/components/chart-tile-double-column';
 import { MetadataProps } from '~/components/metadata';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
 
@@ -84,11 +84,11 @@ export function VaccinationsPerSupplierOverLastWeekTile({
     });
 
   return (
-    <ChartTile
+    <ChartTileDoubleColumn
       title={title}
       description={description}
       metadata={metadata}
-      hasSplitLayout
+      disableFullscreen
     >
       <PieChart
         data={mappedData}
@@ -100,6 +100,6 @@ export function VaccinationsPerSupplierOverLastWeekTile({
         marginLeft={32}
         marginRight={32}
       />
-    </ChartTile>
+    </ChartTileDoubleColumn>
   );
 }
