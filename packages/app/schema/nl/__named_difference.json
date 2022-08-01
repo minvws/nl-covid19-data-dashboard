@@ -13,41 +13,31 @@
   "required": ["variants__percentage"],
   "additionalProperties": false,
   "definitions": {
-    "named_diff_integer": {
-      "title": "named_difference_integer",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "old_value": {
-          "type": "integer"
-        },
-        "difference": {
-          "type": "integer"
-        },
-        "old_date_unix": {
-          "type": "integer"
-        },
-        "new_date_unix": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "name",
-        "old_value",
-        "difference",
-        "old_date_unix",
-        "new_date_unix"
-      ],
-      "additionalProperties": false
-    },
     "named_diff_decimal": {
       "title": "named_difference_decimal",
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
+        "variant_code": {
+          "type": "string",
+          "enum": [
+            "B_1_1_529",
+            "BA_1",
+            "BA_2",
+            "BA_4",
+            "BA_5",
+            "BA_2+S:L452X",
+            "BA_2_12_1",
+            "BA_3",
+            "B_1_617_2",
+            "B_1_351",
+            "P_1",
+            "B_1_1_7",
+            "B_1_621",
+            "C_37",
+            "BA_2_75",
+            "other_table",
+            "other_graph"
+          ]
         },
         "old_value": {
           "type": "number"
@@ -63,7 +53,7 @@
         }
       },
       "required": [
-        "name",
+        "variant_code",
         "old_value",
         "difference",
         "old_date_unix",

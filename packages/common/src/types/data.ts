@@ -292,7 +292,24 @@ export interface NlNamedDifference {
   variants__percentage: NamedDifferenceDecimal[];
 }
 export interface NamedDifferenceDecimal {
-  name: string;
+  variant_code:
+    | "B_1_1_529"
+    | "BA_1"
+    | "BA_2"
+    | "BA_4"
+    | "BA_5"
+    | "BA_2+S:L452X"
+    | "BA_2_12_1"
+    | "BA_3"
+    | "B_1_617_2"
+    | "B_1_351"
+    | "P_1"
+    | "B_1_1_7"
+    | "B_1_621"
+    | "C_37"
+    | "BA_2_75"
+    | "other_table"
+    | "other_graph";
   old_value: number;
   difference: number;
   old_date_unix: number;
@@ -965,11 +982,29 @@ export interface NlVariants {
   values: NlVariantsVariant[];
 }
 export interface NlVariantsVariant {
-  name: string;
+  variant_code:
+    | "B_1_1_529"
+    | "BA_1"
+    | "BA_2"
+    | "BA_4"
+    | "BA_5"
+    | "BA_2+S:L452X"
+    | "BA_2_12_1"
+    | "BA_3"
+    | "B_1_617_2"
+    | "B_1_351"
+    | "P_1"
+    | "B_1_1_7"
+    | "B_1_621"
+    | "C_37"
+    | "BA_2_75"
+    | "other_table"
+    | "other_graph";
   values: NlVariantsVariantValue[];
   last_value: NlVariantsVariantValue;
 }
 export interface NlVariantsVariantValue {
+  order: number;
   occurrence: number;
   percentage: number;
   is_variant_of_concern: boolean;
@@ -978,6 +1013,7 @@ export interface NlVariantsVariantValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+  date_of_report_unix: number;
 }
 
 export type VrCode = string;

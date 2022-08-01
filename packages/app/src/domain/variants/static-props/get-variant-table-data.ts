@@ -7,9 +7,11 @@ import {
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
+import { ColorMatch } from './get-variant-order-colors';
+import { VariantCode } from '../static-props';
 
 export type VariantRow = {
-  variant: string;
+  variantCode: VariantCode;
   percentage: number | null;
   difference?: NamedDifferenceDecimal | null;
   color: string;
@@ -17,49 +19,28 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
-export const VARIANT_TABLE_MAP = [
-  'alpha',
-  'beta',
-  'gamma',
-  'delta',
-  'eta',
-  'epsilon',
-  'theta',
-  'kappa',
-  'lambda',
-  'iota',
-  'zeta',
-  'mu',
-  'nu',
-  'xi',
-  'omicron',
-  'pi',
-  'rho',
-  'sigma',
-  'tau',
-  'upsilon',
-  'phi',
-  'chi',
-  'psi',
-  'omega',
-];
-
 export function getVariantTableData(
   variants: NlVariants | undefined,
-  namedDifference: NlNamedDifference
+  namedDifference: NlNamedDifference,
+  variantColors: ColorMatch[]
 ) {
+  const emptyValues = {
+    variantTable: null,
+    dates: {
+      date_of_report_unix: 0,
+      date_start_unix: 0,
+      date_end_unix: 0,
+    },
+  } as const;
+
   if (!isDefined(variants) || !isDefined(variants.values)) {
-    return {
-      variantTable: null,
-      dates: null,
-      sampleSize: 0,
-    } as const;
+    return emptyValues;
   }
 
   function findDifference(name: string) {
     if (isPresent(namedDifference.variants__percentage)) {
       const difference = namedDifference.variants__percentage.find(
-        (x) => x.name === name
+        (x) => x.variant_code === name
       );
 
       if (!difference) {
@@ -72,85 +53,34 @@ export function getVariantTableData(
 
   const firstLastValue = first<NlVariantsVariant>(variants.values);
 
+  if (!isDefined(firstLastValue)) {
+    return emptyValues;
+  }
   const dates = {
-    date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
-    date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
-    date_of_insertion_unix:
-      firstLastValue?.last_value.date_of_insertion_unix ?? 0,
-  };
-  const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
-
-  const getVariantSortingRank = (variantName: string): number => {
-    const index = VARIANT_TABLE_MAP.findIndex((variant) =>
-      variantName.includes(variant)
-    );
-
-    if (index === -1) return 1000;
-    return index;
+    date_end_unix: firstLastValue.last_value.date_end_unix,
+    date_start_unix: firstLastValue.last_value.date_start_unix,
+    date_of_report_unix: firstLastValue.last_value.date_of_report_unix,
   };
 
-  const variantColors = colors.data.variants;
   const variantTable = variants.values
-    /**
-     * Since the schemas for international still has to change to
-     * the new way of calculating this prevents the typescript error for now.
-     */
-    .map((variant) => ({
-      has_historical_significance:
-        'has_historical_significance' in variant.last_value
-          ? variant.last_value.has_historical_significance
-          : true,
-      ...variant,
-    }))
     .filter(
       (variant) =>
-        variant.name !== 'other_graph' || !variant.has_historical_significance
+        variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance
     )
-    .sort((variantA, variantB) => {
-      if (variantA.name === 'other_table') {
-        return 1;
-      }
-      if (variantB.name === 'other_table') {
-        return -1;
-      }
+    .sort((a, b) => a.last_value.order - b.last_value.order)
+    .map<VariantRow>((variant) => {
+      const color =
+        variantColors.find(
+          (variantColor) => variantColor.variant === variant.variant_code
+        )?.color || colors.data.variants.fallbackColor;
 
-      const relativeSortingValue: number =
-        getVariantSortingRank(variantA.name) -
-        getVariantSortingRank(variantB.name);
-
-      if (relativeSortingValue !== 0) {
-        return relativeSortingValue;
-      }
-
-      return variantA.name.localeCompare(variantB.name);
-    })
-    .map<VariantRow>((variant, index) => ({
-      variant: variant.name,
-      percentage: variant.last_value.percentage,
-      difference: findDifference(variant.name),
-      color:
-        variant.name === 'other_table'
-          ? variantColors.other_table
-          : variantColors.colorList[index],
-    }))
-    .filter(
-      (row) =>
-        // Make sure the 'other' variant persists in the table.
-        row.variant === 'other_table' || row.percentage
-    )
-    .sort()
-    .reverse()
-    .sort((rowA, rowB) => {
-      // Make sure the 'other' variant is always sorted last.
-      if (rowA.variant === 'other_table') {
-        return 1;
-      }
-      if (rowB.variant === 'other_table') {
-        return -1;
-      }
-
-      return 0;
+      return {
+        variantCode: variant.variant_code,
+        percentage: variant.last_value.percentage,
+        difference: findDifference(variant.variant_code),
+        color,
+      };
     });
 
-  return { variantTable, dates, sampleSize };
+  return { variantTable, dates };
 }

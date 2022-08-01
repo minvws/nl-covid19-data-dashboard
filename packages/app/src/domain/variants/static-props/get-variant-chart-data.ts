@@ -2,20 +2,20 @@ import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { SiteText } from '~/locale';
 
-type VariantName = keyof SiteText['common']['variants'];
+export type VariantCode = keyof SiteText['common']['variant_codes'];
 
 export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
   is_reliable: boolean;
 } & Partial<{
-  [key in `${VariantName}_percentage`]: number;
+  [key in `${VariantCode}_percentage`]: number;
 }>;
 
 const EMPTY_VALUES = {
   variantChart: null,
   dates: {
-    date_of_insertion_unix: 0,
+    date_of_report_unix: 0,
     date_start_unix: 0,
     date_end_unix: 0,
   },
@@ -26,22 +26,15 @@ export function getVariantChartData(variants: NlVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const firstOccurences = variants.values.sort().reverse().reduce<Record<string, number>>(
-    (acc, x) =>
-      Object.assign(acc, {
-        [x.name]: x.values.find((value) => value.percentage > 0)
-          ?.date_start_unix,
-      }),
-    {}
-  );
-
   const variantsOfConcern = variants.values
     .filter(
-      (x) =>
-        x.last_value.is_variant_of_concern ||
-        x.last_value.has_historical_significance
+      (variant) =>
+        variant.last_value.is_variant_of_concern ||
+        variant.last_value.has_historical_significance
     )
-    .sort((a, b) => firstOccurences[b.name] - firstOccurences[a.name]);
+    .sort((a, b) => b.last_value.order - a.last_value.order);
+
+  
 
   const firstVariant = variantsOfConcern.shift();
 
@@ -54,12 +47,12 @@ export function getVariantChartData(variants: NlVariants | undefined) {
       is_reliable: true,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
-      [`${firstVariant.name}_percentage`]: value.percentage,
+      [`${firstVariant.variant_code}_percentage`]: value.percentage,
     };
 
     variantsOfConcern.forEach((variant) => {
       (item as unknown as Record<string, number>)[
-        `${variant.name}_percentage`
+        `${variant.variant_code}_percentage`
       ] = variant.values[index].percentage;
     });
 
@@ -69,7 +62,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   return {
     variantChart: values,
     dates: {
-      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
+      date_of_report_unix: firstVariant.last_value.date_of_report_unix,
       date_start_unix: firstVariant.last_value.date_start_unix,
       date_end_unix: firstVariant.last_value.date_end_unix,
     },

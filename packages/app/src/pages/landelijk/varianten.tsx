@@ -6,7 +6,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
-  getVariantSidebarValue,
+  getVariantOrderColors,
   getVariantTableData,
 } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
@@ -52,10 +52,16 @@ export const getStaticProps = createGetStaticProps(
       selectedNlData: { variants },
     } = data;
 
+    const variantColors = getVariantOrderColors(variants);
+
     return {
-      variantSidebarValue: getVariantSidebarValue(variants) ?? null,
-      ...getVariantTableData(variants, data.selectedNlData.named_difference),
+      ...getVariantTableData(
+        variants,
+        data.selectedNlData.named_difference,
+        variantColors
+      ),
       ...getVariantChartData(variants),
+      variantColors,
     };
   },
   async (context: GetStaticPropsContext) => {
@@ -77,12 +83,12 @@ export default function CovidVariantenPage(
 ) {
   const {
     pageText,
-    variantSidebarValue,
     selectedNlData: data,
     lastGenerated,
     content,
     variantTable,
     variantChart,
+    variantColors,
     dates,
   } = props;
 
@@ -124,9 +130,10 @@ export default function CovidVariantenPage(
           <VariantsStackedAreaTile
             text={{
               ...textNl.varianten_over_tijd_grafiek,
-              varianten: commonTexts.variants,
+              variantCodes: commonTexts.variant_codes,
             }}
             values={variantChart}
+            variantColors={variantColors}
             metadata={{
               datumsText: textNl.datums,
               date: getLastInsertionDateOfPage(data, ['variants']),
@@ -134,23 +141,20 @@ export default function CovidVariantenPage(
             }}
           />
 
-          {variantSidebarValue?.sample_size && (
-            <VariantsTableTile
-              data={variantTable}
-              sampleSize={variantSidebarValue.sample_size}
-              text={{
-                ...textShared.varianten_tabel,
-                varianten: commonTexts.variants,
-                description: textNl.varianten_omschrijving,
-              }}
-              source={textNl.bronnen.rivm}
-              dates={{
-                date_end_unix: dates.date_end_unix,
-                date_of_insertion_unix: dates.date_of_insertion_unix,
-                date_start_unix: dates.date_start_unix,
-              }}
-            />
-          )}
+          <VariantsTableTile
+            data={variantTable}
+            text={{
+              ...textShared.varianten_tabel,
+              variantCodes: commonTexts.variant_codes,
+              description: textNl.varianten_omschrijving,
+            }}
+            source={textNl.bronnen.rivm}
+            dates={{
+              date_end_unix: dates.date_end_unix,
+              date_of_report_unix: dates.date_of_report_unix,
+              date_start_unix: dates.date_start_unix,
+            }}
+          />
         </TileList>
       </NlLayout>
     </Layout>
