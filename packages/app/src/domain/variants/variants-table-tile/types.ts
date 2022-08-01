@@ -1,4 +1,4 @@
-import { VariantCodesAll } from "../static-props";
+import { SiteText } from '~/locale';
 
 export type TableText = {
   anderen_tooltip: string;
@@ -13,7 +13,7 @@ export type TableText = {
     vorige_meting: string;
   };
   verschil: { gelijk: string; meer: string; minder: string };
-  variantCodes: VariantCodesAll;
+  variantCodes: SiteText['common']['variant_codes'];
   description: string;
   geen_percentage_cijfer: string;
   geen_percentage_cijfer_tooltip: string;

@@ -2,12 +2,10 @@ import { NlVariants, colors } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { VariantCode } from './'
 
-type ColorMatch = {
+export type ColorMatch = {
   variant: VariantCode;
   color: string;
 };
-
-export type ColorMatches = ColorMatch[];
 
 const getColorForVariant = (variantCode: VariantCode, index: number): string => {
   if (variantCode === 'other_table') return colors.data.variants.other_table;
@@ -18,7 +16,7 @@ const getColorForVariant = (variantCode: VariantCode, index: number): string => 
 
 export function getVariantOrderColors(
   variants: NlVariants | undefined
-): ColorMatches {
+): ColorMatch[] {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return [];
   }
