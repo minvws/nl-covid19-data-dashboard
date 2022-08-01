@@ -4,7 +4,7 @@ import { Group } from '@visx/group';
 import Pie from '@visx/shape/lib/shapes/Pie';
 import { isEmpty } from 'lodash';
 import { useMemo } from 'react';
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Markdown } from '~/components/markdown';
@@ -24,32 +24,38 @@ export interface PiePartConfig<T> {
 export interface PieChartProps<T> {
   data: T;
   dataConfig: PiePartConfig<T>[];
-  paddingLeft?: number;
+  marginLeft?: number;
+  marginRight?: number;
   innerSize?: number;
   donutWidth?: number;
   padAngle?: number;
   minimumPercentage?: number;
   icon?: JSX.Element;
+  iconFill?: string;
   verticalLayout?: boolean;
   title?: string;
   link?: {
     href: string;
     text: string;
   };
+  hasHoverState?: boolean;
 }
 
 export function PieChart<T>({
   data,
   dataConfig,
-  paddingLeft = 40,
+  marginLeft = 40,
+  marginRight = 40,
   innerSize = 200,
   donutWidth = 35,
   padAngle = 0.03,
   minimumPercentage = 0.5,
   icon,
+  iconFill = 'silver',
   verticalLayout,
   title,
   link,
+  hasHoverState,
 }: PieChartProps<T>) {
   const {
     formatNumber,
@@ -102,16 +108,19 @@ export function PieChart<T>({
       <ErrorBoundary>
         <Box
           display="flex"
-          spacingHorizontal={{ sm: 4, lg: 5 }}
-          spacing={verticalLayout ? 4 : { _: 4, sm: 0 }}
-          alignItems={verticalLayout ? 'flex-start' : { sm: 'center' }}
-          flexDirection={verticalLayout ? 'column' : { _: 'column', sm: 'row' }}
+          spacingHorizontal={4}
+          spacing={verticalLayout ? 4 : { _: 4, xs: 0 }}
+          alignItems={verticalLayout ? 'flex-start' : { xs: 'center' }}
+          flexDirection={verticalLayout ? 'column' : { _: 'column', xs: 'row' }}
+          justifyContent={{ _: 'flex-start', xl: 'flex-end' }}
+          marginTop={{ _: 3, lg: 0 }}
         >
           <Box
-            alignSelf={{ _: 'center', xs: 'self-start' }}
+            alignSelf={{ _: 'center', md: 'self-start' }}
             height={innerSize}
             position="relative"
-            marginLeft={{ xs: paddingLeft }}
+            css={css({ marginLeft, marginRight })}
+            spacingHorizontal={2}
           >
             {icon && (
               <Box
@@ -126,7 +135,7 @@ export function PieChart<T>({
                 css={css({
                   svg: {
                     height: '100%',
-                    fill: 'silver',
+                    fill: iconFill,
                   },
                 })}
               >
@@ -140,11 +149,13 @@ export function PieChart<T>({
               aria-hidden="true"
               css={css({
                 minWidth: innerSize,
-                '&:hover, &:focus-within': {
-                  'path:not(:hover):not(:focus-visible)': {
-                    opacity: 0.4,
-                  },
-                },
+                '&:hover, &:focus-within': hasHoverState
+                  ? {
+                      'path:not(:hover):not(:focus-visible)': {
+                        opacity: 0.4,
+                      },
+                    }
+                  : null,
               })}
               pointerEvents="none"
             >
@@ -167,7 +178,7 @@ export function PieChart<T>({
                           : 'right';
                       const alternativeSide = side === 'left' ? 'end' : 'start';
 
-                      return (
+                      return hasHoverState ? (
                         <WithTooltip
                           content={
                             <Markdown
@@ -206,6 +217,13 @@ export function PieChart<T>({
                             }
                           />
                         </WithTooltip>
+                      ) : (
+                        <path
+                          d={arcPath as string}
+                          fill={arc.data.color}
+                          tabIndex={0}
+                          pointerEvents="all"
+                        />
                       );
                     });
                   }}
@@ -273,8 +291,6 @@ export function PieChart<T>({
             }
           </Box>
         </Box>
-
-        <Spacer mb={3} />
       </ErrorBoundary>
     </Box>
   );

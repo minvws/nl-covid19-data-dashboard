@@ -1779,6 +1779,8 @@ timestamp,action,key,document_id,move_to
 2022-07-28T12:22:19.973Z,move,common.seoHead.default_url,jF33EuwumlGuwav2FD3h4O,common.seo_head.default_url
 2022-07-28T12:22:19.977Z,move,pages.infectious_people_page.nl.lineLegendLabel,jF33EuwumlGuwav2FD3Zts,pages.infectious_people_page.nl.line_legend_label
 2022-07-28T12:22:19.981Z,move,pages.infectious_people_page.nl.rangeLegendLabel,jF33EuwumlGuwav2FD3ZsC,pages.infectious_people_page.nl.range_legend_label
+2022-07-29T11:05:16.837Z,add,pages.vaccinations_page.nl.vaccinations_per_supplier_over_last_week.title,An4w9epLkFHDxSkpYzYK3T,__
+2022-07-29T11:05:17.851Z,add,pages.vaccinations_page.nl.vaccinations_per_supplier_over_last_week.description,An4w9epLkFHDxSkpYzYKl1,__
 2022-07-26T16:26:05.902Z,delete,common.variants.alpha.country_of_origin,ATrwynrL85JmIH7bDlAcr5,__
 2022-07-26T16:26:05.902Z,delete,common.variants.alpha.name,ivi6qq7M7M0wYBxAz9VgMO,__
 2022-07-26T16:26:05.902Z,delete,common.variants.beta.country_of_origin,ATrwynrL85JmIH7bDlAdY3,__

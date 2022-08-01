@@ -62,7 +62,8 @@ export type DonutChartConfiguration<
   labelKey: string;
   sourceKey: string;
   metricProperties: DonutMetricPropertyConfig<ScopedData[S], M>[];
-  paddingLeft?: number;
+  marginLeft?: number;
+  marginRight?: number;
   innerSize?: number;
   donutWidth?: number;
   padAngle?: number;

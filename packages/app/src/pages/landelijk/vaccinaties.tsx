@@ -27,6 +27,7 @@ import {
   VaccineStockPerSupplierChart,
   BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
+import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages } from '~/locale';
@@ -96,6 +97,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_planned',
     'vaccine_administered_total',
+    'vaccine_administered_last_week',
     'vaccine_coverage_per_age_group',
     'vaccine_coverage_per_age_group_archived',
     'vaccine_coverage',
@@ -306,6 +308,23 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               datumsText: textNl.datums,
               date: data.vaccine_campaigns.date_unix,
               source: textNl.vaccine_campaigns.bronnen.rivm,
+            }}
+          />
+
+          <VaccinationsPerSupplierOverLastWeekTile
+            title={textNl.vaccinations_per_supplier_over_last_week.title}
+            description={
+              textNl.vaccinations_per_supplier_over_last_week.description
+            }
+            data={data.vaccine_administered_last_week.vaccine_types}
+            metadata={{
+              source: textNl.bronnen.rivm,
+              date: [
+                data.vaccine_administered_last_week.date_start_unix,
+                data.vaccine_administered_last_week.date_end_unix,
+              ],
+              obtainedAt:
+                data.vaccine_administered_last_week.date_of_insertion_unix,
             }}
           />
 

@@ -169,6 +169,18 @@ export const colors = {
 
       // @TODO remove when data is updated to new name
       pfizer: multiseries.cyan,
+
+      /**
+       * The below list are duplicates of the above entries, because BE is
+       * unabled to deliver specific IDs that match with previously delivered
+       * data entry IDs. This has been introduced as part of COR-938.
+       * @TODO - remove duplicates when/if BE is able to provide IDs.
+       */
+      'BioNTech/Pfizer': multiseries.cyan,
+      Moderna: multiseries.yellow,
+      AstraZeneca: multiseries.turquoise,
+      Janssen: multiseries.orange,
+      Novavax: multiseries.magenta_dark,
     },
   },
 } as const;
