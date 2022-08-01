@@ -8,6 +8,7 @@ import { get } from 'lodash';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { AgeDemographic } from '../age-demographic';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
@@ -18,7 +19,8 @@ import { getDataUrl } from './logic/get-data-url';
 interface InlineAgeDemographicProps {
   configuration: AgeDemographicConfiguration<
     DataScopeKey,
-    MetricKeys<DataScope>
+    MetricKeys<DataScope>,
+    AccessibilityDefinition['key']
   >;
   startDate?: string;
   endDate?: string;
@@ -45,11 +47,11 @@ export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
   return (
     <ErrorBoundary>
       <AgeDemographic
-        accessibility={{ key: configuration.accessibilityKey as any }}
+        accessibility={{ key: configuration.accessibilityKey }}
         data={data as { values: any[] }}
         text={text}
-        leftMetricProperty={configuration.leftMetricProperty as any}
-        rightMetricProperty={configuration.rightMetricProperty as any}
+        leftMetricProperty={configuration.leftMetricProperty}
+        rightMetricProperty={configuration.rightMetricProperty}
         leftColor={getColor(configuration.leftColor)}
         rightColor={getColor(configuration.rightColor)}
         formatValue={(n) => `${n}`}

@@ -1,6 +1,5 @@
 import {
   colors,
-  KeysOfType,
   TimestampedValue,
   Unpack,
 } from '@corona-dashboard/common';
@@ -27,7 +26,7 @@ import { Bar } from '../vaccine/components/bar';
 export type MiniTileSelectorItem<T extends TimestampedValue> = {
   label: string;
   data: T[];
-  dataProperty: KeysOfType<Unpack<T>, number | null, true>;
+  dataProperty: keyof Unpack<T>;
   value: number | string;
   valueIsPercentage?: boolean;
   warning?: string;
