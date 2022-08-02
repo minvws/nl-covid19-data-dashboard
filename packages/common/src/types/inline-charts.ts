@@ -1,4 +1,3 @@
-import { TimeframeOption } from '~/utils';
 import {
   DataScope,
   DataScopeKey,
@@ -6,6 +5,7 @@ import {
   MetricProperty,
   ScopedData,
 } from '.';
+import { TimeframeOption } from '..';
 
 export const areaTitles = {
   nl: 'Nationaal',
