@@ -1,6 +1,6 @@
 import every from 'lodash/every';
 import { isFilled } from 'ts-is-present';
-import { Metric } from '~/types';
+import { Metric } from '..';
 
 /**
  * This function attempts to get the lastValue but then checks whether all
