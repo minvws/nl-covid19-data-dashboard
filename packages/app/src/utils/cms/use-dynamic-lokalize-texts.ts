@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { mapSiteTextValuesToKeys } from '~/locale/use-lokalize-text';
+import {
+  IS_STAGING_ENV,
+  mapSiteTextValuesToKeys,
+} from '~/locale/use-lokalize-text';
 import { fetchLokalizeTexts } from './fetch-lokalize-texts';
 
 export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(
@@ -13,7 +16,7 @@ export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(
 
   useEffect(() => {
     if (dataset === 'keys') {
-      fetchLokalizeTexts('production')
+      fetchLokalizeTexts(IS_STAGING_ENV ? 'production' : 'development')
         .catch((err) => {
           throw new Error(
             `[${useDynamicLokalizeTexts.name}] Error while fetching Sanity content: "${err}"`
