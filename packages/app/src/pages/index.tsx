@@ -39,7 +39,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { useIntl } from '~/intl';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -61,20 +61,22 @@ import {
   trimNullValues,
   replaceVariablesInText,
 } from '~/utils';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  hospitalText: siteText.pages.hospital_page.nl,
+  intensiveCareText: siteText.pages.intensive_care_page.nl,
+  sewerText: siteText.pages.sewer_page.shared,
+  positiveTestsText: siteText.pages.positive_tests_page.shared,
+  textNl: siteText.pages.topical_page.nl,
+  textShared: siteText.pages.topical_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        hospitalText: siteText.pages.hospital_page.nl,
-        intensiveCareText: siteText.pages.intensive_care_page.nl,
-        sewerText: siteText.pages.sewer_page.shared,
-        positiveTestsText: siteText.pages.positive_tests_page.shared,
-        textNl: siteText.pages.topical_page.nl,
-        textShared: siteText.pages.topical_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetChoroplethData({
     vr: ({ tested_overall, vaccine_coverage_per_age_group }) => ({
@@ -169,13 +171,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    pageText,
-    selectedNlData: data,
-    choropleth,
-    content,
-    lastGenerated,
-  } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const dataSewerTotal = data.sewer;
   const dataICTotal = data.intensive_care_nice;
@@ -184,7 +180,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts, ...formatters } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { hospitalText, intensiveCareText, textNl, textShared } = pageText;
+
+  const { hospitalText, intensiveCareText, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -677,10 +675,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             />
 
             {isPresent(content.articles) && (
-              <ArticleList
-                articles={content.articles}
-                text={textShared}
-              />
+              <ArticleList articles={content.articles} text={textShared} />
             )}
           </MaxWidth>
         </Box>
