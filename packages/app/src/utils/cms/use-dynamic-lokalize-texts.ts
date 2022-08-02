@@ -21,7 +21,7 @@ export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(
         })
         .then((texts) => texts[locale] as unknown as SiteText)
         .then((texts) => mapSiteTextValuesToKeys(texts))
-        .then((nlTexts) => setTexts(selector(nlTexts)));
+        .then((texts) => setTexts(selector(texts)));
     } else {
       setTexts(initialTexts);
     }
