@@ -53,7 +53,7 @@ interface VaccineCoverageToggleTileProps {
   numFractionDigits?: number;
   age12PlusToggleText: VaccinationGradeToggleTypes;
   age18PlusToggleText: VaccinationGradeToggleTypes;
-  labelTexts: SiteText['pages']['vaccinationsPage']['nl']['vaccination_grade_toggle_tile']['top_labels'];
+  labelTexts: SiteText['pages']['vaccinations_page']['nl']['vaccination_grade_toggle_tile']['top_labels'];
 }
 
 export function VaccineCoverageToggleTile({

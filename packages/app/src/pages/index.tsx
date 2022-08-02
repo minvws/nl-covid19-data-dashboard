@@ -64,12 +64,12 @@ import {
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  hospitalText: siteText.pages.hospitalPage.nl,
-  intensiveCareText: siteText.pages.intensiveCarePage.nl,
-  sewerText: siteText.pages.sewerPage.shared,
-  positiveTestsText: siteText.pages.positiveTestsPage.shared,
-  textNl: siteText.pages.topicalPage.nl,
-  textShared: siteText.pages.topicalPage.shared,
+  hospitalText: siteText.pages.hospital_page.nl,
+  intensiveCareText: siteText.pages.intensive_care_page.nl,
+  sewerText: siteText.pages.sewer_page.shared,
+  positiveTestsText: siteText.pages.positive_tests_page.shared,
+  textNl: siteText.pages.topical_page.nl,
+  textShared: siteText.pages.topical_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -675,10 +675,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             />
 
             {isPresent(content.articles) && (
-              <ArticleList
-                articles={content.articles as any}
-                text={textShared}
-              />
+              <ArticleList articles={content.articles} text={textShared} />
             )}
           </MaxWidth>
         </Box>

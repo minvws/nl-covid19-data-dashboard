@@ -63,8 +63,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.hospitalPage.vr,
-        textShared: siteText.pages.hospitalPage.shared,
+        textVr: siteText.pages.hospital_page.vr,
+        textShared: siteText.pages.hospital_page.shared,
       }),
       locale
     ),
@@ -79,7 +79,7 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-        "parts": ${getPagePartsQuery('hospitalPage')},
+        "parts": ${getPagePartsQuery('hospital_page')},
         "elements": ${getElementsQuery('vr', ['hospital_nice'], context.locale)}
       }`;
     })(context);

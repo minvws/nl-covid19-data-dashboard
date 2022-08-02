@@ -8,7 +8,7 @@ import { BehaviorTrendType } from '../logic/behavior-types';
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
   color?: string;
-  text: SiteText['pages']['behaviorPage']['shared'];
+  text: SiteText['pages']['behavior_page']['shared'];
 }
 
 const Trend = styled.span((a) =>

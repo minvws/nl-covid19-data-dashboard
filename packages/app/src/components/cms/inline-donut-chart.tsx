@@ -59,7 +59,8 @@ export function InlineDonutChart<
         title={title}
         data={data}
         dataConfig={dataConfig}
-        paddingLeft={configuration.paddingLeft}
+        marginLeft={configuration.marginLeft}
+        marginRight={configuration.marginRight}
         innerSize={configuration.innerSize}
         donutWidth={configuration.donutWidth}
         padAngle={configuration.padAngle}

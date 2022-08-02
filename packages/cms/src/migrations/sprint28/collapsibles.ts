@@ -14,7 +14,7 @@ const schemaInfo = [
   { schemaName: 'contact', fields: ['description'] },
   { schemaName: 'overDitDashboard', fields: ['description'] },
   {
-    schemaName: 'vaccinationsPage',
+    schemaName: 'vaccinations_page',
     fields: ['pageDescription', 'description'],
   },
   { schemaName: 'veelgesteldeVragen', fields: ['localeBlock'] },

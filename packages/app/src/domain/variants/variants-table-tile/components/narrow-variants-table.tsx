@@ -55,7 +55,7 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
             row={row}
             formatValue={formatValue}
             text={text}
-            key={row.variant}
+            key={row.variantCode}
           />
         ))}
       </tbody>
@@ -78,7 +78,12 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   return (
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
-        <VariantNameCell variant={row.variant} text={text} mobile narrow />
+        <VariantNameCell
+          variantCode={row.variantCode}
+          text={text}
+          mobile
+          narrow
+        />
         <Cell mobile>
           {isPresent(row.percentage) ? (
             <PercentageBarWithNumber

@@ -18,7 +18,7 @@ interface SituationsDataCoverageChoroplethTileProps {
   data: {
     situations: VrCollectionSituations[];
   };
-  text: SiteText['pages']['situationsPage']['shared'];
+  text: SiteText['pages']['situations_page']['shared'];
   tooltipText: SiteText['common']['choropleth_tooltip']['patients'];
 }
 

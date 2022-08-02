@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import {
   MouseEvent,
+  KeyboardEvent,
   ReactNode,
   useCallback,
   useEffect,
@@ -16,7 +17,7 @@ export interface TooltipCoordinates {
 
 export type GetTooltipCoordinates<T> = (
   value: T,
-  event?: MouseEvent<any>
+  event?: MouseEvent<SVGElement>
 ) => TooltipCoordinates;
 
 interface TooltipProps<T> {
@@ -76,7 +77,7 @@ export function useTooltip<T>({
   }
 
   const openTooltip = useCallback(
-    (value: T, event: MouseEvent<any>) => {
+    (value: T, event: MouseEvent<SVGElement>) => {
       debounceMouseEvents(() => {
         setCoordinates(getTooltipCoordinates(value, event));
         setIsVisible(true);
@@ -93,7 +94,7 @@ export function useTooltip<T>({
   }, []);
 
   const keyboardNavigateTooltip = useCallback(
-    (event: any) => {
+    (event: KeyboardEvent<SVGElement>) => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
         return;
       }

@@ -19,7 +19,7 @@ export function NarrowCoverageTable({
   values,
   text,
 }: {
-  text: SiteText['pages']['vaccinationsPage']['nl']['vaccination_coverage'];
+  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
   values:
     | NlVaccineCoveragePerAgeGroupArchivedValue[]
     | VrVaccineCoveragePerAgeGroupArchivedValue[]

@@ -18,17 +18,17 @@ import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
-import { Variants } from '../variants-table-tile/types';
+import { ColorMatch, VariantCode } from '~/domain/variants/static-props';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
-type VariantsStackedAreaTileText = { varianten: Variants } & (
-  | SiteText['pages']['variantsPage']['nl']['varianten_over_tijd_grafiek']
-  | SiteText['pages']['in_variantsPage']['shared']['varianten_over_tijd_grafiek']
-);
+type VariantsStackedAreaTileText = {
+  variantCodes: SiteText['common']['variant_codes'];
+} & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
 type VariantsStackedAreaTileProps = {
   text: VariantsStackedAreaTileText;
   values?: VariantChartValue[] | null;
+  variantColors: ColorMatch[];
   metadata: MetadataProps;
   children?: ReactNode;
   noDataMessage?: ReactNode;
@@ -36,6 +36,7 @@ type VariantsStackedAreaTileProps = {
 
 export function VariantsStackedAreaTile({
   values,
+  variantColors,
   metadata,
   children = null,
   noDataMessage = '',
@@ -58,6 +59,7 @@ export function VariantsStackedAreaTile({
       text={text}
       values={values}
       metadata={metadata}
+      variantColors={variantColors}
     >
       {children}
     </VariantStackedAreaTileWithData>
@@ -70,12 +72,14 @@ type VariantStackedAreaTileWithDataProps = {
   text: VariantsStackedAreaTileText;
   values: VariantChartValue[];
   metadata: MetadataProps;
+  variantColors: ColorMatch[];
   children?: ReactNode;
 };
 
 function VariantStackedAreaTileWithData({
   text,
   values,
+  variantColors,
   metadata,
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
@@ -84,7 +88,8 @@ function VariantStackedAreaTileWithData({
 
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
     text,
-    values
+    values,
+    variantColors
   );
 
   const filteredConfig = useFilteredSeriesConfig(
@@ -198,7 +203,8 @@ function useFilteredSeriesConfig(
 
 function useSeriesConfig(
   text: VariantsStackedAreaTileText,
-  values: VariantChartValue[]
+  values: VariantChartValue[],
+  variantColors: ColorMatch[]
 ) {
   return useMemo(() => {
     const baseVariantsFiltered = values
@@ -211,18 +217,21 @@ function useSeriesConfig(
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] =
-      baseVariantsFiltered.map((variantKey, index) => {
-        const color = colors.data.variants.colorList[index];
+      baseVariantsFiltered.map((variantKey) => {
+        const variantCodeFragments = variantKey.split('_');
+        variantCodeFragments.pop();
+        const variantCode = variantCodeFragments.join('_') as VariantCode;
 
-        const variantNameFragments = variantKey.split('_');
-        variantNameFragments.pop();
-        const variantName = variantNameFragments.join('_') as keyof Variants;
+        const color =
+          variantColors.find(
+            (variantColors) => variantColors.variant === variantCode
+          )?.color || colors.data.variants.fallbackColor;
 
         return {
           type: 'gapped-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: text.varianten[variantName]?.name || variantName,
+          label: text.variantCodes[variantCode],
           shape: 'gapped-area',
           strokeWidth: 2,
           fillOpacity: 0.2,
@@ -244,7 +253,12 @@ function useSeriesConfig(
     const selectOptions = [...seriesConfig];
 
     return [seriesConfig, otherConfig, selectOptions] as const;
-  }, [values, text]);
+  }, [
+    values,
+    text.tooltip_labels.other_percentage,
+    text.variantCodes,
+    variantColors,
+  ]);
 }
 
 const NoDataBox = styled.div(

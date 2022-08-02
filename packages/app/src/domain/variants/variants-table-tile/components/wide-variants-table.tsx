@@ -49,8 +49,8 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.variant}>
-            <VariantNameCell variant={row.variant} text={text} />
+          <tr key={row.variantCode}>
+            <VariantNameCell variantCode={row.variantCode} text={text} />
             <Cell>
               {isPresent(row.percentage) ? (
                 <Box maxWidth="20em">

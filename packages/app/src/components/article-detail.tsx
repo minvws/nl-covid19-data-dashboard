@@ -16,7 +16,7 @@ import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
 interface ArticleDetailProps {
   article: Article;
-  text: SiteText['pages']['topicalPage']['shared'];
+  text: SiteText['pages']['topical_page']['shared'];
 }
 
 const imageSizes = [

@@ -49,8 +49,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.elderlyAtHomePage.nl,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.elderly_at_home_page.nl,
       }),
       locale
     ),
@@ -69,7 +69,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('elderlyAtHomePage')},
+      "parts": ${getPagePartsQuery('elderly_at_home_page')},
       "elements": ${getElementsQuery('nl', ['elderly_at_home'], locale)}
      }`;
     })(context);

@@ -18,7 +18,7 @@ export interface ContentTeaserProps {
   variant?: 'small' | 'normal';
   isWeeklyHighlight?: boolean;
   isArticle?: boolean;
-  text: SiteText['pages']['topicalPage']['shared'];
+  text: SiteText['pages']['topical_page']['shared'];
 }
 
 export function ContentTeaser({

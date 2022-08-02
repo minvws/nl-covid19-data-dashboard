@@ -27,7 +27,7 @@ export function getTopicalPageData(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('topicalPage')},
+       "parts": ${getPagePartsQuery('topical_page')},
        "elements": ${getElementsQuery(code, elementNames, locale)},
         "weeklyHighlight": *[_type == 'editorial'] | order(publicationDate desc) {
           title,
@@ -43,14 +43,14 @@ export function getTopicalPageData(
 
     const highlightInfo = getHighlightedItemParts(
       content.parts.pageParts,
-      'topicalPageHighlights'
+      'topical_page_highlights'
     );
 
     return {
       content: {
         articles: getArticleParts(
           content.parts.pageParts,
-          'topicalPageArticles'
+          'topical_page_articles'
         ),
         highlights: highlightInfo?.highlights ?? null,
         showWeeklyHighlight: highlightInfo?.showWeeklyHighlight ?? false,

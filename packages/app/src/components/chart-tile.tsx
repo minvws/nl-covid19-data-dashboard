@@ -6,9 +6,9 @@ import { Box, Spacer } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
+import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { Heading } from './typography';
 
 type ChartTileProps = {
   title: string;
@@ -48,7 +48,11 @@ export function ChartTile({
         {timeframeOptions && timeframe && (
           <Box
             css={css({
-              width: asResponsiveArray({ xl: '25%', lg: '50%', sm: '100%' }),
+              width: asResponsiveArray({
+                xl: '25%',
+                lg: '50%',
+                sm: '100%',
+              }),
             })}
           >
             <ChartTimeControls
