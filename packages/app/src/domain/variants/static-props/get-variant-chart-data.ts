@@ -31,6 +31,9 @@ export function getVariantChartData(variants: NlVariants | undefined) {
       (variant) =>
         variant.last_value.is_variant_of_concern ||
         variant.last_value.has_historical_significance
+    ).filter(
+      (variant) =>
+        variant.variant_code !== 'other_graph' && variant.variant_code !== 'other_table'
     )
     .sort((a, b) => b.last_value.order - a.last_value.order);
 
