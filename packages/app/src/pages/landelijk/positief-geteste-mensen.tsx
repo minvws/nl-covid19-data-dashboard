@@ -66,9 +66,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.positiveTestsPage.nl,
-        textShared: siteText.pages.positiveTestsPage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.positive_tests_page.nl,
+        textShared: siteText.pages.positive_tests_page.shared,
       }),
       locale
     ),
@@ -94,7 +94,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('positiveTestsPage')},
+       "parts": ${getPagePartsQuery('positive_tests_page')},
        "elements": ${getElementsQuery(
          'nl',
          ['tested_overall', 'tested_ggd', 'tested_per_age_group'],

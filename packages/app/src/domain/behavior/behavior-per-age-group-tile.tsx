@@ -24,7 +24,7 @@ interface BehaviorPerAgeGroupProps {
   data: NlBehaviorPerAgeGroup;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
-  text: Pick<SiteText['pages']['behaviorPage'], 'nl' | 'shared'>;
+  text: Pick<SiteText['pages']['behavior_page'], 'nl' | 'shared'>;
 }
 
 export function BehaviorPerAgeGroup({

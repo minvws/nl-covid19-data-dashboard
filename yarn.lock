@@ -2550,7 +2550,7 @@ __metadata:
     "@reach/combobox": ^0.16.4
     "@reach/disclosure": ^0.16.2
     "@sanity/block-content-to-react": ^3.0.0
-    "@sanity/client": ^2.22.3
+    "@sanity/client": ^3.3.2
     "@styled-system/css": ^5.1.5
     "@styled-system/should-forward-prop": ^5.1.5
     "@testing-library/react": ^12.1.2
@@ -2630,7 +2630,6 @@ __metadata:
     jsdom: ^18.1.1
     jsdom-global: ^3.0.2
     konva: ^7.2.5
-    konva-node: ^0.11.2
     lint-staged: ^11.2.6
     lodash: ^4.17.21
     lodash-webpack-plugin: ^0.11.6
@@ -3308,25 +3307,6 @@ __metadata:
   version: 1.1.1
   resolution: "@kwsites/promise-deferred@npm:1.1.1"
   checksum: 07455477a0123d9a38afb503739eeff2c5424afa8d3dbdcc7f9502f13604488a4b1d9742fc7288832a52a6422cf1e1c0a1d51f69a39052f14d27c9a0420b6629
-  languageName: node
-  linkType: hard
-
-"@mapbox/node-pre-gyp@npm:^1.0.0":
-  version: 1.0.5
-  resolution: "@mapbox/node-pre-gyp@npm:1.0.5"
-  dependencies:
-    detect-libc: ^1.0.3
-    https-proxy-agent: ^5.0.0
-    make-dir: ^3.1.0
-    node-fetch: ^2.6.1
-    nopt: ^5.0.0
-    npmlog: ^4.1.2
-    rimraf: ^3.0.2
-    semver: ^7.3.4
-    tar: ^6.1.0
-  bin:
-    node-pre-gyp: bin/node-pre-gyp
-  checksum: c1f182a707f5782e47b77a76e9d6a073fb043999cf9ad965bc86732e88db27ad00926d1602918edb7105f05cde67871b84a178ee9844eb742319ade419636675
   languageName: node
   linkType: hard
 
@@ -4071,21 +4051,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:^2.22.3":
-  version: 2.22.3
-  resolution: "@sanity/client@npm:2.22.3"
-  dependencies:
-    "@sanity/eventsource": 2.14.0
-    "@sanity/generate-help-url": 2.18.0
-    "@sanity/observable": 2.0.9
-    deep-assign: ^2.0.0
-    get-it: ^5.0.3
-    make-error: ^1.3.0
-    object-assign: ^4.1.1
-  checksum: f9bc475226d8ec90cf970d8f22d5f6a4314be71220156f71445ae986cee214d5a208217c55a22efb10d8b0176beee1e0a4d30de084f1821f87ad51ead0c32d3a
-  languageName: node
-  linkType: hard
-
 "@sanity/client@npm:^3.2.0":
   version: 3.3.0
   resolution: "@sanity/client@npm:3.3.0"
@@ -4097,6 +4062,20 @@ __metadata:
     object-assign: ^4.1.1
     rxjs: ^6.0.0
   checksum: d3a25bf6c85635b5a107f63eff9db8a12ec906e69131c1f778b449821b1fb1497081ab97a73c691254c69bacfe506ccb5905f6556ed57020e0f8805d0fa53667
+  languageName: node
+  linkType: hard
+
+"@sanity/client@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "@sanity/client@npm:3.3.2"
+  dependencies:
+    "@sanity/eventsource": ^4.0.0
+    "@sanity/generate-help-url": ^3.0.0
+    get-it: ^6.0.1
+    make-error: ^1.3.0
+    object-assign: ^4.1.1
+    rxjs: ^6.0.0
+  checksum: aa435c905a7ba567fe75736414acf9bfaf9b325aaeb48a6e888694a6a7f12d172081f364dee021b68f64a823726f5ad00ef7985644c30f3896a57965b22acf89
   languageName: node
   linkType: hard
 
@@ -4334,6 +4313,16 @@ __metadata:
     event-source-polyfill: 1.0.25
     eventsource: ^1.0.6
   checksum: 9e6608bc6f0a7a269ef2b7ce09dfdde792323d0c83de69479a460f4e99b4d13bf576bf58deaa5e7773121f93731718cebf29986ecfaab9ea3034f8df342c17d7
+  languageName: node
+  linkType: hard
+
+"@sanity/eventsource@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@sanity/eventsource@npm:4.0.0"
+  dependencies:
+    event-source-polyfill: 1.0.25
+    eventsource: ^2.0.2
+  checksum: ae1f950ff126fd37cea5cbb2adaa952ab4a56221b2af5e284ebd113adc0754b4a8fdea9d6d7e0022058425a72b158342cb1f1a8d799b22f53f6d995065cbc141
   languageName: node
   linkType: hard
 
@@ -10637,18 +10626,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"canvas@npm:^2.5.0":
-  version: 2.8.0
-  resolution: "canvas@npm:2.8.0"
-  dependencies:
-    "@mapbox/node-pre-gyp": ^1.0.0
-    nan: ^2.14.0
-    node-gyp: latest
-    simple-get: ^3.0.3
-  checksum: 4cc909f63eaf88d22f9164601903745abcc6ccb7f70090b9389dc2cb68cbf139c220dbd75837e6d04602ff122b44a2eb17413bca850f9c6c602f74f1f0f1cc3f
-  languageName: node
-  linkType: hard
-
 "capital-case@npm:^1.0.4":
   version: 1.0.4
   resolution: "capital-case@npm:1.0.4"
@@ -12487,15 +12464,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decompress-response@npm:^4.2.0":
-  version: 4.2.1
-  resolution: "decompress-response@npm:4.2.1"
-  dependencies:
-    mimic-response: ^2.0.0
-  checksum: 4e783ca4dfe9417354d61349750fe05236f565a4415a6ca20983a311be2371debaedd9104c0b0e7b36e5f167aeaae04f84f1a0b3f8be4162f1d7d15598b8fdba
-  languageName: node
-  linkType: hard
-
 "decompress-response@npm:^6.0.0":
   version: 6.0.0
   resolution: "decompress-response@npm:6.0.0"
@@ -12724,15 +12692,6 @@ __metadata:
   version: 1.0.4
   resolution: "destroy@npm:1.0.4"
   checksum: da9ab4961dc61677c709da0c25ef01733042614453924d65636a7db37308fef8a24cd1e07172e61173d471ca175371295fbc984b0af5b2b4ff47cd57bd784c03
-  languageName: node
-  linkType: hard
-
-"detect-libc@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "detect-libc@npm:1.0.3"
-  bin:
-    detect-libc: ./bin/detect-libc.js
-  checksum: daaaed925ffa7889bd91d56e9624e6c8033911bb60f3a50a74a87500680652969dbaab9526d1e200a4c94acf80fc862a22131841145a0a8482d60a99c24f4a3e
   languageName: node
   linkType: hard
 
@@ -14072,6 +14031,13 @@ __metadata:
   dependencies:
     original: ^1.0.0
   checksum: 8de239626900726b4ef5d721ffd37df87c6cd734feb0f8abb85aeb73f1400bdb6afecb0ed412a8b92448bd31d9da79cc2efbfc79aa6efe597ba351cc2e94b01f
+  languageName: node
+  linkType: hard
+
+"eventsource@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "eventsource@npm:2.0.2"
+  checksum: c0072d972753e10c705d9b2285b559184bf29d011bc208973dde9c8b6b8b7b6fdad4ef0846cecb249f7b1585e860fdf324cbd2ac854a76bc53649e797496e99a
   languageName: node
   linkType: hard
 
@@ -17648,17 +17614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"konva-node@npm:^0.11.2":
-  version: 0.11.2
-  resolution: "konva-node@npm:0.11.2"
-  dependencies:
-    canvas: ^2.5.0
-    konva: ^7
-  checksum: 11d99492c653d6e52c370af5831a4dce60b6cabbf81016806fa58c8563174272db39940b8d638fc29f83f949cf5934471ed7c1d3d1d6c3bad60152450f308fd2
-  languageName: node
-  linkType: hard
-
-"konva@npm:^7, konva@npm:^7.2.5":
+"konva@npm:^7.2.5":
   version: 7.2.5
   resolution: "konva@npm:7.2.5"
   checksum: 795ab73af38307243f867be3dab122ec6a5c37bc7f44a20359baf2bf6e1d5cd8a9ce9d7e3b69b21dd6429615b8f96254858e346e8ccb4b5fff8be6c5b60cd12d
@@ -18785,13 +18741,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mimic-response@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "mimic-response@npm:2.1.0"
-  checksum: 014fad6ab936657e5f2f48bd87af62a8e928ebe84472aaf9e14fec4fcb31257a5edff77324d8ac13ddc6685ba5135cf16e381efac324e5f174fb4ddbf902bf07
-  languageName: node
-  linkType: hard
-
 "mimic-response@npm:^3.1.0":
   version: 3.1.0
   resolution: "mimic-response@npm:3.1.0"
@@ -19034,7 +18983,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.12.1, nan@npm:^2.14.0":
+"nan@npm:^2.12.1":
   version: 2.15.0
   resolution: "nan@npm:2.15.0"
   dependencies:
@@ -24439,17 +24388,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-get@npm:^3.0.3":
-  version: 3.1.1
-  resolution: "simple-get@npm:3.1.1"
-  dependencies:
-    decompress-response: ^4.2.0
-    once: ^1.3.1
-    simple-concat: ^1.0.0
-  checksum: 80195e70bf171486e75c31e28e5485468195cc42f85940f8b45c4a68472160144d223eb4d07bc82ef80cb974b7c401db021a540deb2d34ac4b3b8883da2d6401
-  languageName: node
-  linkType: hard
-
 "simple-get@npm:^4.0.0, simple-get@npm:^4.0.1":
   version: 4.0.1
   resolution: "simple-get@npm:4.0.1"
@@ -25610,7 +25548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^6.0.2, tar@npm:^6.1.0, tar@npm:^6.1.2":
+"tar@npm:^6.0.2, tar@npm:^6.1.2":
   version: 6.1.11
   resolution: "tar@npm:6.1.11"
   dependencies:

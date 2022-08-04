@@ -23,11 +23,11 @@ export function SEOHead(props: SEOHeadProps) {
   const { commonTexts } = useIntl();
 
   const {
-    description = commonTexts.seoHead.default_description,
+    description = commonTexts.seo_head.default_description,
     openGraphImage = '/banner.png',
-    title = commonTexts.seoHead.default_title,
+    title = commonTexts.seo_head.default_title,
     twitterImage = '/banner-twitter.png',
-    url = commonTexts.seoHead.default_url,
+    url = commonTexts.seo_head.default_url,
   } = props;
 
   return (

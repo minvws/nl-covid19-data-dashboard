@@ -27,7 +27,7 @@ export function getTopicalPageData(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('topicalPage')},
+       "parts": ${getPagePartsQuery('topical_page')},
        "elements": ${getElementsQuery(code, elementNames, locale)},
         "weeklyHighlight": *[_type == 'editorial'] | order(publicationDate desc) {
           title,

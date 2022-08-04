@@ -1,6 +1,5 @@
 import {
   colors,
-  KeysOfType,
   VrCollectionBehavior,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -29,7 +28,7 @@ interface BehaviorChoroplethsTileProps {
   data: { behavior: VrCollectionBehavior[] };
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
-  text: SiteText['pages']['behaviorPage'];
+  text: SiteText['pages']['behavior_page'];
 }
 
 export function BehaviorChoroplethsTile({
@@ -104,7 +103,7 @@ interface ChoroplethBlockProps {
   behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
   title: string;
-  text: SiteText['pages']['behaviorPage'];
+  text: SiteText['pages']['behavior_page'];
 }
 
 function ChoroplethBlock({
@@ -119,7 +118,7 @@ function ChoroplethBlock({
   const breakpoints = useBreakpoints();
 
   const isSmallScreen = breakpoints.sm;
-  const metricProperty = `${currentId}_${behaviorType}` as const;
+  const metricProperty = `${currentId}_${behaviorType}` as keyof VrCollectionBehavior;
 
   return (
     <Box width={{ _: '100%', lg: '50%' }} spacing={3}>
@@ -153,11 +152,7 @@ function ChoroplethBlock({
             data={data.behavior}
             dataConfig={{
               metricName: 'behavior',
-              metricProperty: metricProperty as unknown as KeysOfType<
-                VrCollectionBehavior,
-                number | null | boolean | undefined,
-                true
-              >,
+              metricProperty,
               noDataFillColor: colors.offWhite,
             }}
             dataOptions={{

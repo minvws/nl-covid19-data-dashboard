@@ -18,7 +18,7 @@ interface VrBehaviorTooltipProps {
   currentComplianceValue: number | null;
   currentSupportValue: number | null;
   behaviorType: 'compliance' | 'support';
-  text: SiteText['pages']['behaviorPage'];
+  text: SiteText['pages']['behavior_page'];
 }
 
 export function VrBehaviorTooltip({

@@ -1,4 +1,3 @@
-import { Feature } from '~/types';
+import { Feature } from '..';
 
-export const features: Feature[] = [
-];
+export const features: Feature[] = [];

@@ -1,6 +1,8 @@
 import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { TickFormatter } from '@visx/axis';
 import { useTooltip } from '@visx/tooltip';
+import { NumberValue } from 'd3-scale';
 import { first, isFunction, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -120,7 +122,7 @@ export type TimeSeriesChartProps<
   showWeekNumbers?: boolean;
   tickValues?: number[];
   xTickNumber?: number;
-  formatTickValue?: (value: number) => string;
+  formatTickValue?: TickFormatter<NumberValue>;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them

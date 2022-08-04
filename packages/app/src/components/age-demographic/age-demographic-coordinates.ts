@@ -1,4 +1,3 @@
-import { KeysOfType } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { MouseEvent, useMemo } from 'react';
@@ -42,8 +41,8 @@ export function useAgeDemographicCoordinates<
   T extends AgeDemographicDefaultValue
 >(
   data: { values: T[] },
-  rightMetricProperty: KeysOfType<T, number, true>,
-  leftMetricProperty: KeysOfType<T, number, true>,
+  rightMetricProperty: keyof T,
+  leftMetricProperty: keyof T,
   maxDisplayValue?: number
 ) {
   const [ref, { width = 840 }] = useResizeObserver<HTMLDivElement>();
@@ -79,8 +78,8 @@ function calculateAgeDemographicCoordinates<
   T extends AgeDemographicDefaultValue
 >(
   data: { values: T[] },
-  rightMetricProperty: KeysOfType<T, number, true>,
-  leftMetricProperty: KeysOfType<T, number, true>,
+  rightMetricProperty: keyof T,
+  leftMetricProperty: keyof T,
   isSmallScreen: boolean,
   parentWidth: number,
   isExtraSmallScreen: boolean,
@@ -118,10 +117,14 @@ function calculateAgeDemographicCoordinates<
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const getLeftValue = (value: T) =>
-    value[leftMetricProperty] as unknown as number;
-  const getRightValue = (value: T) =>
-    value[rightMetricProperty] as unknown as number;
+  const getLeftValue = (value: T) => {
+    const leftValue = value[leftMetricProperty];
+    return typeof leftValue === 'number' ? leftValue : 0;
+  };
+  const getRightValue = (value: T) => {
+    const rightValue = value[rightMetricProperty];
+    return typeof rightValue === 'number' ? rightValue : 0;
+  };
   const ageGroupRange = (value: T) => value.age_group_range;
 
   // Scales to map between values and coordinates

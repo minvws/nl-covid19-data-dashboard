@@ -1,4 +1,3 @@
-import { TimeframeOption } from '~/utils';
 import {
   DataScope,
   DataScopeKey,
@@ -6,6 +5,7 @@ import {
   MetricProperty,
   ScopedData,
 } from '.';
+import { TimeframeOption } from '..';
 
 export const areaTitles = {
   nl: 'Nationaal',
@@ -62,7 +62,8 @@ export type DonutChartConfiguration<
   labelKey: string;
   sourceKey: string;
   metricProperties: DonutMetricPropertyConfig<ScopedData[S], M>[];
-  paddingLeft?: number;
+  marginLeft?: number;
+  marginRight?: number;
   innerSize?: number;
   donutWidth?: number;
   padAngle?: number;
@@ -82,9 +83,10 @@ export type DonutMetricPropertyConfig<
 
 export type AgeDemographicConfiguration<
   S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
+  M extends MetricKeys<ScopedData[S]>,
+  K extends string
 > = {
-  accessibilityKey: string;
+  accessibilityKey: K;
   sourceKey: string;
   text: string;
   leftMetricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;

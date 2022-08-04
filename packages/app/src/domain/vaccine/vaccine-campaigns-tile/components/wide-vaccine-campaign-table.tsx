@@ -116,7 +116,7 @@ const VaccineCampaignRow = ({
                       campaignDescriptions[
                         `${campaign.vaccine_campaign_name_en
                           .toLowerCase()
-                          .replaceAll(' ', '_')}_description`
+                          .replace(/ /g, '_')}_description`
                       ]
                     }
                   />
