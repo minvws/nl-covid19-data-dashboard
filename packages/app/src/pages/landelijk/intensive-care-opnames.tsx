@@ -62,9 +62,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.intensiveCarePage.nl,
-        textShared: siteText.pages.intensiveCarePage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.intensive_care_page.nl,
+        textShared: siteText.pages.intensive_care_page.shared,
       }),
       locale
     ),
@@ -81,7 +81,7 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-        "parts": ${getPagePartsQuery('intensiveCarePage')},
+        "parts": ${getPagePartsQuery('intensive_care_page')},
         "elements": ${getElementsQuery(
           'nl',
           ['intensive_care_nice', 'intensive_care_nice_per_age_group'],

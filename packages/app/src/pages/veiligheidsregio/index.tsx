@@ -39,15 +39,18 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   };
   const code = router.query.code as string;
 
-  const data = useMemo(() => {
-    return vrData.map<VrCollectionHospitalNice>(
-      (x) =>
-        ({
-          vrcode: x.code,
-          admissions_on_date_of_reporting: null,
-        } as unknown as VrCollectionHospitalNice)
-    );
-  }, []);
+  const data = useMemo(
+    () =>
+      vrData.map<VrCollectionHospitalNice>((x) => ({
+        date_unix: 0,
+        admissions_on_date_of_admission: 0,
+        admissions_on_date_of_admission_per_100000: 0,
+        admissions_on_date_of_reporting: 0,
+        date_of_insertion_unix: 0,
+        vrcode: x.code,
+      })),
+    []
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>

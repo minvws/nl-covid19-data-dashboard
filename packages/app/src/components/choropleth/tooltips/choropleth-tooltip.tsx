@@ -36,7 +36,11 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
   assert(
     isDefined(subject),
-    `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
+    `[${
+      ChoroplethTooltip.name
+    }] No tooltip subject found in siteText.choropleth_tooltip.${
+      data.map
+    }.${data.dataConfig.metricProperty.toString()}`
   );
 
   const tooltipContent = (
@@ -44,7 +48,11 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
     isDefined(tooltipContent),
-    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
+    `[${
+      ChoroplethTooltip.name
+    }] No tooltip content found in siteText.choropleth_tooltip.${
+      data.map
+    }.${data.dataConfig.metricProperty.toString()}`
   );
 
   const tooltipVars = {
@@ -74,6 +82,8 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
 
   // This line is to make sure the content is readible by screenreaders and does not skip numbers after a new line
   const ariaContent = content.replace(/(\n|\*)/g, '');
+  const dataItem = data.dataItem[data.dataConfig.metricProperty];
+  const filterBelow = typeof dataItem === 'number' ? dataItem : null;
 
   return (
     <TooltipContent
@@ -87,9 +97,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       <TooltipSubject
         subject={replaceVariablesInText(subject, tooltipVars)}
         thresholdValues={data.thresholdValues}
-        filterBelow={
-          data.dataItem[data.dataConfig.metricProperty] as unknown as number
-        }
+        filterBelow={filterBelow}
       >
         <VisuallyHidden>{ariaContent}</VisuallyHidden>
         <Box aria-hidden>

@@ -49,8 +49,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textShared: siteText.pages.situationsPage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textShared: siteText.pages.situations_page.shared,
         textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
       }),
       locale
@@ -64,7 +64,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-         "parts": ${getPagePartsQuery('situationsPage')},
+         "parts": ${getPagePartsQuery('situations_page')},
          "elements": ${getElementsQuery('vr', ['situations'], locale)}
         }`;
     })(context);

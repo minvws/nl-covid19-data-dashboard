@@ -21,6 +21,7 @@ import type { DataOptions } from '..';
 import type {
   ChoroplethFeatures,
   ChoroplethTooltipHandlers,
+  CodeProp,
   FeatureProps,
   FitExtent,
 } from '../logic';
@@ -81,7 +82,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   } = props;
 
   const [hover, setHover] = useState<[number, number][][]>();
-  const [hoverCode, setHoverCode] = useState<string>();
+  const [hoverCode, setHoverCode] = useState<CodeProp>();
   const [keyboardActive, setKeyboardActive] = useState(false);
 
   const [geoInfo, geoInfoLookup] = useProjectedCoordinates(
@@ -99,7 +100,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   const highlightedFeature = useHighlightedFeature(geoInfo, dataOptions);
 
   const selectFeature = useCallback(
-    (code: string | undefined, isKeyboardAction = false) => {
+    (code: CodeProp | undefined, isKeyboardAction = false) => {
       setKeyboardActive(isKeyboardAction);
       if (!isDefined(code)) {
         return;
@@ -114,7 +115,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   const handleMouseOver = useCallback(
     (evt: MouseEvent<HTMLElement>) => {
       const areaElm = evt.target as HTMLElement;
-      const code = areaElm.getAttribute('data-id');
+      const code = areaElm.getAttribute('data-id') as CodeProp;
       if (!isPresent(code)) {
         setHover(undefined);
         setHoverCode(undefined);
@@ -321,7 +322,7 @@ const Outlines = memo((props: OutlinesProps) => {
 type FeaturesProps = {
   geoInfo: ProjectedGeoInfo[];
   featureProps: FeatureProps;
-  children: any;
+  children: React.ReactNode;
 };
 
 const Features = memo((props: FeaturesProps) => {
@@ -384,7 +385,10 @@ type AreaMapProps = {
   getLink?: (code: string) => string;
   getFeatureName: (code: string) => string;
   anchorEventHandlers: AnchorEventHandler;
-  selectFeature: (code: string | undefined, isKeyboardAction?: boolean) => void;
+  selectFeature: (
+    code: CodeProp | undefined,
+    isKeyboardAction?: boolean
+  ) => void;
   id: string;
   handleMouseOver: (event: MouseEvent<HTMLElement>) => void;
   height: number;
@@ -427,7 +431,7 @@ function AreaMap(props: AreaMapProps) {
           href={!isTouch && isDefined(getLink) ? getLink(x.code) : undefined}
           onFocus={(event) => {
             anchorEventHandlers.onFocus(event);
-            selectFeature(x.code, true);
+            selectFeature(x.code as CodeProp, true);
           }}
           onBlur={(event) => {
             anchorEventHandlers.onBlur(event);

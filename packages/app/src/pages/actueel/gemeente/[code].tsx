@@ -69,11 +69,11 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        hospitalText: siteText.pages.hospitalPage.nl,
-        positiveTestsText: siteText.pages.positiveTestsPage.shared,
-        textGm: siteText.pages.topicalPage.gm,
-        textShared: siteText.pages.topicalPage.shared,
-        sewerText: siteText.pages.sewerPage.shared,
+        hospitalText: siteText.pages.hospital_page.nl,
+        positiveTestsText: siteText.pages.positive_tests_page.shared,
+        textGm: siteText.pages.topical_page.gm,
+        textShared: siteText.pages.topical_page.shared,
+        sewerText: siteText.pages.sewer_page.shared,
       }),
       locale
     ),

@@ -50,8 +50,8 @@ export const getStaticProps = createGetStaticProps(
       (siteText) => ({
         caterogyTexts:
           siteText.common.veiligheidsregio_layout.headings.besmettingen,
-        textVr: siteText.pages.deceasedPage.vr,
-        textShared: siteText.pages.deceasedPage.shared,
+        textVr: siteText.pages.deceased_page.vr,
+        textShared: siteText.pages.deceased_page.shared,
       }),
       locale
     ),
@@ -68,7 +68,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('deceasedPage')},
+      "parts": ${getPagePartsQuery('deceased_page')},
       "elements": ${getElementsQuery('vr', ['deceased_rivm'], locale)}
      }`;
     })(context);

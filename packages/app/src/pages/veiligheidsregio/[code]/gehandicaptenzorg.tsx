@@ -49,7 +49,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textVr: siteText.pages.disabilityCarePage.vr,
+        textVr: siteText.pages.disability_care_page.vr,
       }),
       locale
     ),
@@ -66,7 +66,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('disabilityCarePage')},
+      "parts": ${getPagePartsQuery('disability_care_page')},
       "elements": ${getElementsQuery('vr', ['disability_care'], locale)}
      }`;
     })(context);

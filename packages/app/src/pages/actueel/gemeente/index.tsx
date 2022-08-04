@@ -30,7 +30,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textGm: siteText.pages.topicalPage.gm,
+        textGm: siteText.pages.topical_page.gm,
       }),
       locale
     ),

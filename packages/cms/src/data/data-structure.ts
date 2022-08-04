@@ -351,7 +351,7 @@ export const dataStructure = {
       "janssen_not_available",
       "janssen_total",
     ],
-    variants: ["name", "values", "last_value"],
+    variants: ["variant_code", "values", "last_value"],
   },
   vr: {
     g_number: ["g_number"],

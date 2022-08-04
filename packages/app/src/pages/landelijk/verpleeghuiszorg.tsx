@@ -53,9 +53,9 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        metadataTexts: siteText.pages.topicalPage.nl.nationaal_metadata,
-        textNl: siteText.pages.nursingHomePage.nl,
-        textShared: siteText.pages.nursingHomePage.shared,
+        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+        textNl: siteText.pages.nursing_home_page.nl,
+        textShared: siteText.pages.nursing_home_page.shared,
       }),
       locale
     ),
@@ -75,7 +75,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('nursingHomePage')},
+      "parts": ${getPagePartsQuery('nursing_home_page')},
       "elements": ${getElementsQuery('nl', ['nursing_home'], locale)}
      }`;
     })(context);

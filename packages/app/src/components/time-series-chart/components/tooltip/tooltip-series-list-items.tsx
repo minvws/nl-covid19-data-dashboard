@@ -37,7 +37,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
 
   return (
     <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
-      {seriesConfig.map((x, index) => {
+      {seriesConfig.map((serie, index) => {
         /**
          * The key is unique for every date to make sure a screenreader
          * will read `[label]: [value]`. Otherwise it would read the
@@ -45,23 +45,27 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
          * context.
          */
         const key = index + getDateUnixString(value);
-        const metricPropertyValue =
-          x.type !== 'range' &&
-          (value[x.metricProperty] as unknown as number | null);
+        const metricProperty = serie.type !== 'range' && serie.metricProperty;
+        const metricPropertyValue = metricProperty
+          ? value[metricProperty]
+          : null;
 
-        switch (x.type) {
+        const tooltipValue =
+          typeof metricPropertyValue === 'number' ? metricPropertyValue : null;
+
+        switch (serie.type) {
           case 'range':
             return (
               <TooltipListItem
                 key={key}
-                icon={<SeriesIcon config={x} />}
-                label={x.shortLabel ?? x.label}
-                ariaLabel={x.ariaLabel}
+                icon={<SeriesIcon config={serie} />}
+                label={serie.shortLabel ?? serie.label}
+                ariaLabel={serie.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.nonInteractive}
+                isVisuallyHidden={serie.nonInteractive}
               >
                 <span css={css({ whiteSpace: 'nowrap' })}>
-                  {formatSeriesValue(value, x, options.isPercentage)}
+                  {formatSeriesValue(value, serie, options.isPercentage)}
                 </span>
               </TooltipListItem>
             );
@@ -70,15 +74,15 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
             return (
               <TooltipListItem
                 key={key}
-                label={x.label}
-                ariaLabel={x.ariaLabel}
+                label={serie.label}
+                ariaLabel={serie.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.nonInteractive}
+                isVisuallyHidden={serie.nonInteractive}
               >
                 {formatSeriesValue(
                   value,
-                  x,
-                  x.isPercentage ?? options.isPercentage
+                  serie,
+                  serie.isPercentage ?? options.isPercentage
                 )}
               </TooltipListItem>
             );
@@ -88,18 +92,13 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
             return (
               <TooltipListItem
                 key={key}
-                icon={
-                  <SeriesIcon
-                    config={x}
-                    value={value[x.metricProperty] as unknown as number | null}
-                  />
-                }
-                label={x.shortLabel ?? x.label}
-                ariaLabel={x.ariaLabel}
+                icon={<SeriesIcon config={serie} value={tooltipValue} />}
+                label={serie.shortLabel ?? serie.label}
+                ariaLabel={serie.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.nonInteractive}
+                isVisuallyHidden={serie.nonInteractive}
               >
-                {formatSeriesValue(value, x, options.isPercentage)}
+                {formatSeriesValue(value, serie, options.isPercentage)}
               </TooltipListItem>
             );
 
@@ -108,20 +107,20 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
               <TooltipListItem
                 key={key}
                 icon={
-                  typeof metricPropertyValue === 'number' &&
+                  typeof tooltipValue === 'number' &&
                   typeof seriesMax === 'number' &&
-                  seriesMax < metricPropertyValue ? (
+                  seriesMax < tooltipValue ? (
                     <OutOfBoundsIcon />
                   ) : (
-                    <SeriesIcon config={x} />
+                    <SeriesIcon config={serie} />
                   )
                 }
-                label={x.shortLabel ?? x.label}
-                ariaLabel={x.ariaLabel}
+                label={serie.shortLabel ?? serie.label}
+                ariaLabel={serie.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={x.nonInteractive}
+                isVisuallyHidden={serie.nonInteractive}
               >
-                {formatSeriesValue(value, x, options.isPercentage)}
+                {formatSeriesValue(value, serie, options.isPercentage)}
               </TooltipListItem>
             );
         }

@@ -13,7 +13,7 @@ import { SiteText } from '~/locale';
 
 interface SituationsDataCoverageTileProps {
   data: VrSituationsValue;
-  text: SiteText['pages']['situationsPage']['shared']['veiligheidsregio_dekking'];
+  text: SiteText['pages']['situations_page']['shared']['veiligheidsregio_dekking'];
 }
 
 export function SituationsDataCoverageTile({

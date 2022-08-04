@@ -44,7 +44,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(
       (siteText) => ({
-        textTopicalPgaeShared: siteText.pages.topicalPage.shared,
+        textTopicalPgaeShared: siteText.pages.topical_page.shared,
       }),
       locale
     ),
