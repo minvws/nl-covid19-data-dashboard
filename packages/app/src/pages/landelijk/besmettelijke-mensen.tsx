@@ -10,7 +10,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -26,16 +26,18 @@ import {
   selectNlData,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.infectious_people_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.infectious_people_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('infectious_people'),
   async (context: GetStaticPropsContext) => {
@@ -57,7 +59,10 @@ export const getStaticProps = createGetStaticProps(
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, lastGenerated, content } = props;
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl } = pageText;
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
 

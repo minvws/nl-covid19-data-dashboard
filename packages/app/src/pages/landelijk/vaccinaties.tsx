@@ -30,7 +30,7 @@ import {
 import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -61,6 +61,7 @@ import {
   RichTextParts,
 } from '~/types/cms';
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
@@ -82,15 +83,16 @@ const pageMetrics = [
   'repeating_shot_administered',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.vaccinations_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.vaccinations_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'vaccine_administered_doctors',
@@ -176,7 +178,6 @@ export const getStaticProps = createGetStaticProps(
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    pageText,
     content,
     choropleth,
     selectedNlData: data,
@@ -184,7 +185,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     administrationData,
   } = props;
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl } = pageText;
+
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
+    props.pageText,
+    selectLokalizeTexts
+  );
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
