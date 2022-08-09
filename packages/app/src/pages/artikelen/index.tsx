@@ -15,7 +15,7 @@ import {
   ArticleCategoryType,
 } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,15 +27,17 @@ import {
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textShared: siteText.pages.topical_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textShared: siteText.pages.topical_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>((context) => {
     const { locale } = context;
@@ -59,7 +61,10 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  const { textShared } = pageText;
+  const { textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const articleCategories = useMemo(() => {
     /**
