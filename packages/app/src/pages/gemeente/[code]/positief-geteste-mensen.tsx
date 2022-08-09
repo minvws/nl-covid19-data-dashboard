@@ -20,7 +20,7 @@ import {
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -49,21 +49,23 @@ import {
   getVrForMunicipalityCode,
   useReverseRouter,
 } from '~/utils';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
 export { getStaticPaths } from '~/static-paths/gm';
 
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textGm: siteText.pages.positive_tests_page.gm,
+  textShared: siteText.pages.positive_tests_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 const pageMetrics = ['tested_overall'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textGm: siteText.pages.positive_tests_page.gm,
-        textShared: siteText.pages.positive_tests_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectGmData(
     'code',
@@ -113,7 +115,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { textGm, textShared } = pageText;
+  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const lastValue = data.tested_overall.last_value;
   const populationCount = data.static_values.population_count;
