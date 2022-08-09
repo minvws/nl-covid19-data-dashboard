@@ -16,7 +16,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import { useIntl } from '~/intl';
 import {
   ElementsQueryResult,
@@ -40,22 +40,23 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['nursing_home'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textVr: siteText.pages.nursing_home_page.vr,
+  textShared: siteText.pages.nursing_home_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textVr: siteText.pages.nursing_home_page.vr,
-        textShared: siteText.pages.nursing_home_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(
     'difference.nursing_home__deceased_daily',
@@ -98,7 +99,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts } = useIntl();
 
-  const { textVr, textShared } = pageText;
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const nursinghomeLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(

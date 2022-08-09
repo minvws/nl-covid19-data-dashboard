@@ -19,7 +19,7 @@ import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -42,19 +42,21 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textShared: siteText.pages.situations_page.shared,
+  textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textShared: siteText.pages.situations_page.shared,
-        textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData('situations'),
   async (context: GetStaticPropsContext) => {
@@ -93,7 +95,10 @@ export default function BrononderzoekPage(
   } = props;
 
   const { commonTexts, formatNumber, formatDateSpan } = useIntl();
-  const { metadataTexts, textShared } = pageText;
+  const { metadataTexts, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const metadata = {
     ...metadataTexts,
