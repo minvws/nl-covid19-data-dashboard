@@ -17,7 +17,7 @@ import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -39,6 +39,7 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'deceased_cbs',
@@ -46,16 +47,17 @@ const pageMetrics = [
   'deceased_rivm',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.deceased_page.nl,
+  textShared: siteText.pages.deceased_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.deceased_page.nl,
-        textShared: siteText.pages.deceased_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'deceased_cbs',
@@ -98,7 +100,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
 
   const { commonTexts, formatPercentage } = useIntl();
-  const { metadataTexts, textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,

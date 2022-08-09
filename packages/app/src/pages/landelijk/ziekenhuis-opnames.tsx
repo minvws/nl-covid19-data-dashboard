@@ -29,7 +29,7 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -60,6 +60,7 @@ import {
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { last } from 'lodash';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'difference.hospital_lcps__beds_occupied_covid.new_date_unix',
@@ -68,16 +69,17 @@ const pageMetrics = [
   'hospital_nice',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.hospital_page.nl,
+  textShared: siteText.pages.hospital_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.hospital_page.nl,
-        textShared: siteText.pages.hospital_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.hospital_lcps__beds_occupied_covid',
@@ -154,7 +156,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
   const { commonTexts, formatDateFromSeconds } = useIntl();
-  const { metadataTexts, textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
