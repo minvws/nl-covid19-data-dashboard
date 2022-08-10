@@ -58,6 +58,35 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
+        <MaxWidth id="content">
+          <Box
+            spacing={{ _: 4, md: 5 }}
+            pt={{ _: 3, md: 5 }}
+            px={{ _: 3, sm: 4 }}
+            display="flex"
+          >
+            <SubjectsTitle title="Meer onderwerpen:" />
+            <SubjectList
+              subjects={[
+                {
+                  text: 'Reproductiegetal',
+                  url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
+                },
+                {
+                  text: 'Kwetsbare groepen',
+                  url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
+                },
+                {
+                  text: 'Sterfte',
+                  url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
+                },
+              ]}
+              icon={<ArrowIconRight />}
+            />
+          </Box>
+        </MaxWidth>
+      </Box>
+      <Box bg="white">
       <Box bg={colors.white}>
         <MaxWidth id="content">
           <Box
