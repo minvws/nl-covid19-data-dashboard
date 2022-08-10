@@ -75,7 +75,7 @@ function createTimeTicks(
   startTick: number,
   endTick: number,
   count: number,
-  valueCount: number | undefined
+  valuesCount: number | undefined
 ) {
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);
@@ -86,7 +86,7 @@ function createTimeTicks(
 
   const ticks: number[] = [];
   const stepCount =
-    (valueCount && valueCount <= count ? valueCount : count) - 1;
+    (valuesCount && valuesCount <= count ? valuesCount : count) - 1;
   const step = Math.floor((end - start) / stepCount);
 
   for (let i = 0; i < stepCount; i++) {
