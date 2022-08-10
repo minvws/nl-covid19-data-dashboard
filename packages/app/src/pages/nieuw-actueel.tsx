@@ -4,6 +4,7 @@ import { Layout } from '~/domain/layout';
 import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
+import { TopicalTile } from '~/domain/topical/components/topical-tile';
 import { Languages, SiteText } from '~/locale';
 import DynamicIcon from '~/components/get-icon-by-name';
 import {
@@ -64,7 +65,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             px={{ _: 3, sm: 4 }}
           >
             <Box py={4}>
-              <DynamicIcon name={selectedTopicalData.themes[0].icon} />
+              <TopicalTile />
             </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
