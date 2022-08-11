@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "topical_theme_link",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["label", "href"],
+  "properties": {
+    "label": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    }
+  }
+}

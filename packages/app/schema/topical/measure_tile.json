@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "topical_measures_tile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "icon"],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string",
+      "enum": ["icon-1", "icon-2"]
+    }
+  }
+}
