@@ -26,6 +26,10 @@ export function getSchemaInfo(
   const fileList = fs.readdirSync(jsonDirectory);
 
   return {
+    topical: {
+      files: ['TOPICAL.json'],
+      basePath: jsonDirectory,
+    },
     nl: {
       files: ['NL.json'],
       basePath: jsonDirectory,

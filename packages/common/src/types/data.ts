@@ -1042,7 +1042,10 @@ export interface TopicalTheme {
 export interface TopicalThemeTile {
   title: string;
   dynamicDescription: string;
-  trendIcon: ("up" | "down" | "forward") | null;
+  trendIcon: {
+    direction: "up" | "down" | "forward";
+    color: "green" | "red";
+  } | null;
   tileIcon: "icon-1" | "icon-2";
   cta: {
     label: string;

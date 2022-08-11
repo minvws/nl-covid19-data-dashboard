@@ -12,8 +12,19 @@
       "type": "string"
     },
     "trendIcon": {
-      "type": ["string", "null"],
-      "enum": ["up", "down", "forward"]
+      "type": ["object", "null"],
+      "required": ["direction", "color"],
+      "additionalProperties": false,
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": ["up", "down", "forward"]
+        },
+        "color": {
+          "type": "string",
+          "enum": ["green", "red"]
+        }
+      }
     },
     "tileIcon": {
       "type": "string",
