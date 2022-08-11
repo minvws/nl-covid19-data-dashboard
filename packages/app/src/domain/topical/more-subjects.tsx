@@ -33,16 +33,16 @@ export function SubjectsTitle({ title }: SubjectsTitleProps) {
 export function SubjectList({ subjects, icon }: SubjectListProps) {
   return (
     <Box
-      display="flex"
+      display="flex-start"
       gridTemplateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
       css={css({
         // Same value to be aligned with the footer grid
-        columnGap: asResponsiveArray({ md: '48px' }),
+        columnGap: asResponsiveArray({ md: '16px' }),
       })}
       spacing={{ _: 3, md: 0 }}
     >
       {subjects.map((item) => (
-        <Button type="button" key={item.text}>
+        <Button type="button" key={item.text} as="a" href={item.url}>
           {item.text}
           <IconWrapper>
             <IconSmall icon={icon} width={11} height={10} />
@@ -62,6 +62,8 @@ const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
     px: !isActive ? 3 : 0,
     py: !isActive ? 12 : 0,
     cursor: 'pointer',
+    margin: '1em',
+    padding: '1em',
 
     '&:hover': {
       bg: 'blue',
