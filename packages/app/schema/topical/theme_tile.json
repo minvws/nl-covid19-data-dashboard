@@ -3,7 +3,7 @@
   "title": "topical_theme_tile",
   "type": "object",
   "additionalProperties": false,
-  "required": ["title", "dynamicDescription", "trendIcon", "kpiIcon", "cta"],
+  "required": ["title", "dynamicDescription", "trendIcon", "tileIcon", "cta"],
   "properties": {
     "title": {
       "type": "string"
@@ -15,7 +15,7 @@
       "type": ["string", "null"],
       "enum": ["up", "down", "forward"]
     },
-    "kpiIcon": {
+    "tileIcon": {
       "type": "string",
       "enum": ["icon-1", "icon-2"]
     },

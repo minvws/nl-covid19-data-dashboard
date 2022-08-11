@@ -1028,6 +1028,42 @@ export interface NlVariantsVariantValue {
   date_of_report_unix: number;
 }
 
+export interface Topical {
+  themes: TopicalTheme[];
+  measures: TopicalMeasures;
+}
+export interface TopicalTheme {
+  title: string;
+  dynamicSubtitle: string;
+  icon: "icon-1" | "icon-2";
+  themeTiles: TopicalThemeTile[];
+  moreLinks: TopicalThemeLink[];
+}
+export interface TopicalThemeTile {
+  title: string;
+  dynamicDescription: string;
+  trendIcon: ("up" | "down" | "forward") | null;
+  tileIcon: "icon-1" | "icon-2";
+  cta: {
+    label: string;
+    href: string;
+  } | null;
+}
+export interface TopicalThemeLink {
+  label: string;
+  href: string;
+}
+export interface TopicalMeasures {
+  title: string;
+  dynamicSubtitle: string;
+  icon: "icon-1" | "icon-2";
+  measureTiles: TopicalMeasuresTile[];
+}
+export interface TopicalMeasuresTile {
+  title: string;
+  icon: "icon-1" | "icon-2";
+}
+
 export type VrCode = string;
 
 export interface Vr {

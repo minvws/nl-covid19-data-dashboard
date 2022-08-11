@@ -3,7 +3,7 @@
   "title": "topical_theme",
   "type": "object",
   "additionalProperties": false,
-  "required": ["title", "dynamicSubtitle", "icon", "kpiTiles", "moreLinks"],
+  "required": ["title", "dynamicSubtitle", "icon", "themeTiles", "moreLinks"],
   "properties": {
     "title": {
       "type": "string"
@@ -15,7 +15,7 @@
       "type": "string",
       "enum": ["icon-1", "icon-2"]
     },
-    "kpiTiles": {
+    "themeTiles": {
       "type": "array",
       "minItems": 1,
       "maxItems": 3,
