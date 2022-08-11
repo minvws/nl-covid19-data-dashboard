@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { useBreakpointsAsync } from '~/utils/use-breakpoints';
 import { LinkWithIcon } from '~/components/link-with-icon';
+import { colors } from '@corona-dashboard/common';
 
 interface Subject {
   text: string;
@@ -41,19 +42,24 @@ export function SubjectsList({
   return (
     <>
       {breakpoints.sm ? (
-        <>
+        <Box>
           <p>{title}</p>
           <Box display="flex-start" flex-wrap="wrap" spacing={{ _: 3, md: 0 }}>
             {subjects.map((item) => (
-              <Button type="button" key={item.text} as="a" href={item.url}>
+              <ButtonWithIcon
+                type="button"
+                key={item.text}
+                as="a"
+                href={item.url}
+              >
                 {item.text}
                 <IconWrapper>
                   <IconSmall icon={icon} width={11} height={10} />
                 </IconWrapper>
-              </Button>
+              </ButtonWithIcon>
             ))}
           </Box>
-        </>
+        </Box>
       ) : (
         <>
           <Box flex-direction="row" display="grid" spacing={{ _: 1, sm: 0 }}>
@@ -77,25 +83,26 @@ export function SubjectsList({
   );
 }
 
-const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
+const ButtonWithIcon = styled.button(
   css({
-    bg: !isActive ? 'lightBlue' : 'transparant',
+    bg: colors.lightBlue,
     border: 'none',
     borderRadius: '0px',
-    color: !isActive ? 'blue' : 'blue',
-    px: !isActive ? 3 : 0,
-    py: !isActive ? 12 : 0,
+    color: colors.blue,
+    px: 3,
+    py: 12,
     cursor: 'pointer',
     margin: '16px',
 
     '&:hover': {
-      bg: 'blue',
-      color: !isActive ? 'offWhite' : 'blue',
+      bg: colors.blue,
+      color: colors.offWhite,
     },
 
     '&:focus': {
-      outline: '2px dotted',
-      outlineColor: 'blue',
+      outlineWidth: '1px',
+      outlineStyle: 'dashed',
+      outlineColor: colors.blue,
     },
   })
 );
