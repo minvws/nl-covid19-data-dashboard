@@ -2,20 +2,17 @@ import { css } from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { asResponsiveArray } from '~/style/utils';
 import { useBreakpointsAsync } from '~/utils/use-breakpoints';
 import { LinkWithIcon } from '~/components/link-with-icon';
-
-interface SubjectsTitleProps {
-  title: string;
-}
 
 interface Subject {
   text: string;
   url: string;
 }
 
-interface SubjectListProps {
+interface SubjectsListProps {
+  title: string;
+  title_mobile: string;
   subjects: Subject[];
   icon: ReactNode;
 }
@@ -28,11 +25,12 @@ interface IconProps {
   mr?: number | string;
 }
 
-export function SubjectsTitle({ title }: SubjectsTitleProps) {
-  return <p>{title}</p>;
-}
-
-export function SubjectList({ subjects, icon }: SubjectListProps) {
+export function SubjectsList({
+  title,
+  title_mobile,
+  subjects,
+  icon,
+}: SubjectsListProps) {
   const breakpoints = useBreakpointsAsync();
 
   // Prevents flickering; don't show anything until breakpoints are loaded
@@ -44,17 +42,8 @@ export function SubjectList({ subjects, icon }: SubjectListProps) {
     <>
       {breakpoints.sm ? (
         <>
-          <SubjectsTitle title="Meer onderwerpen:" />
-          <Box
-            display="flex-start"
-            flex-wrap="wrap"
-            gridTemplateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
-            css={css({
-              // Same value to be aligned with the footer grid
-              columnGap: asResponsiveArray({ md: '16px' }),
-            })}
-            spacing={{ _: 3, md: 0 }}
-          >
+          <p>{title}</p>
+          <Box display="flex-start" flex-wrap="wrap" spacing={{ _: 3, md: 0 }}>
             {subjects.map((item) => (
               <Button type="button" key={item.text} as="a" href={item.url}>
                 {item.text}
@@ -68,7 +57,7 @@ export function SubjectList({ subjects, icon }: SubjectListProps) {
       ) : (
         <>
           <Box flex-direction="row" display="grid" spacing={{ _: 1, sm: 0 }}>
-            <SubjectsTitle title="Meer onderwerpen:" />
+            <p>{title_mobile}</p>
             <Box display="grid" spacing={{ _: 1, sm: 0 }}>
               {subjects.map((item) => (
                 <LinkWithIcon
