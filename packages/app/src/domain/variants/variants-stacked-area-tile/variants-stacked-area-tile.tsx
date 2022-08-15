@@ -153,12 +153,15 @@ function VariantStackedAreaTileWithData({
                * Filter out zero values in value object, so it will be invisible in the tooltip.
                * When a selection has been made, the zero values will be shown in the tooltip.
                */
-              const metricCount = context.config.length;
-              const totalMetricCount = seriesConfig.length;
+              const metricAmount = context.config.length;
+              const totalMetricAmount = seriesConfig.length;
+              const hasSelectedMetrics = metricAmount !== totalMetricAmount;
 
               const filteredValues = Object.fromEntries(
                 Object.entries(context.value).filter(([key, value]) =>
-                  key.includes('percentage') ? value !== 0 : value
+                  key.includes('percentage')
+                    ? value !== 0 && isPresent(value) && !isNaN(Number(value))
+                    : value
                 )
               ) as VariantChartValue;
 
@@ -166,32 +169,27 @@ function VariantStackedAreaTileWithData({
                 ...context,
                 config: [
                   ...context.config.filter(
-                    (x) =>
-                      !hasMetricProperty(x) ||
-                      filteredValues[x.metricProperty] ||
-                      (metricCount !== totalMetricCount &&
-                        x.metricProperty !== 'other_graph_percentage')
+                    (value) =>
+                      !hasMetricProperty(value) ||
+                      filteredValues[value.metricProperty] ||
+                      hasSelectedMetrics
                   ),
                   context.config.find(
-                    (x) =>
-                      hasMetricProperty(x) &&
-                      x.metricProperty === 'other_graph_percentage'
+                    (value) =>
+                      hasMetricProperty(value) &&
+                      value.metricProperty === 'other_graph_percentage'
                   ),
                 ].filter(isDefined),
-                value:
-                  metricCount === totalMetricCount
-                    ? filteredValues
-                    : context.value,
+                value: !hasSelectedMetrics ? filteredValues : context.value,
               };
 
-              const percentageValues = Object.keys(reorderContext.value).filter(
-                (key) => key.includes('percentage')
-              );
+              const percentageValuesAmount = Object.keys(
+                reorderContext.value
+              ).filter((key) => key.includes('percentage')).length;
 
-              const hasTwoColumns =
-                metricCount === totalMetricCount
-                  ? percentageValues.length > 4
-                  : metricCount > 4;
+              const hasTwoColumns = !hasSelectedMetrics
+                ? percentageValuesAmount > 4
+                : metricAmount > 4;
 
               return (
                 <TooltipSeriesList
