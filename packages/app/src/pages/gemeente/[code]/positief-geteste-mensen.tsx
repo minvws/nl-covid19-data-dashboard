@@ -270,6 +270,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected',
                     label: textShared.labels.infected,
                     color: colors.data.primary,
+                    yAxisExceptionValues: [{ date_unix: 1644318000 }],
                   },
                 ]}
                 dataOptions={{
@@ -277,7 +278,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     content.elements.timeSeries,
                     'tested_overall'
                   ),
-                  leadingSeriesType: 'line',
                 }}
               />
             )}

@@ -203,7 +203,6 @@ export function TimeSeriesChart<
     timespanAnnotations,
     timeAnnotations,
     timelineEvents,
-    leadingSeriesType,
   } = dataOptions || {};
 
   const {
@@ -241,14 +240,9 @@ export function TimeSeriesChart<
   const [calculatedSeriesMin, calculatedSeriesMax] = useMemo(
     () => [
       calculateSeriesMinimum(seriesList, seriesConfig, benchmark?.value),
-      calculateSeriesMaximum(
-        seriesList,
-        seriesConfig,
-        benchmark?.value,
-        leadingSeriesType
-      ),
+      calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
     ],
-    [seriesList, seriesConfig, benchmark?.value, leadingSeriesType]
+    [seriesList, seriesConfig, benchmark?.value]
   );
 
   const calculatedForcedMaximumValue = isFunction(forcedMaximumValue)

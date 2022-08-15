@@ -2,6 +2,7 @@ import {
   getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
+  isDateSpanValue,
   TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
@@ -10,11 +11,7 @@ import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
-import {
-  DataOptions,
-  LeadingSeriesType,
-  TimespanAnnotationConfig,
-} from './common';
+import { DataOptions, TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 
 type SeriesConfigSingle<T extends TimestampedValue> =
@@ -68,6 +65,13 @@ interface SeriesCommonDefinition {
    * legend, for example)
    */
   hideInLegend?: boolean;
+  /**
+   * Specifies different exception values (in either data_unix or date_start_unix & date_end_unix)
+   * notitation to be ignored when scaling the Y-axis based on the maximum values
+   * of a series. Values matching with the passed in date(s) will be ignored and
+   * are therefore not eligible as maximum values.
+   */
+  yAxisExceptionValues?: TimestampedValue[];
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -287,32 +291,40 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity,
-  leadingSeriesType?: LeadingSeriesType
+  benchmarkValue = -Infinity
 ) {
-  let values = seriesList
+  const datesToFilter: number[] = [];
+  seriesConfig.forEach((config) => {
+    if (config.yAxisExceptionValues) {
+      config.yAxisExceptionValues.forEach((value) => {
+        const dateValue = isDateSpanValue(value)
+          ? [value.date_start_unix, value.date_end_unix]
+          : value.date_unix;
+        if (Array.isArray(dateValue)) {
+          dateValue.forEach((value) => {
+            if (!datesToFilter.includes(value)) datesToFilter.push(value);
+          });
+        } else {
+          if (!datesToFilter.includes(dateValue)) datesToFilter.push(dateValue);
+        }
+      });
+    }
+  });
+
+  const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
-    .flatMap((series) =>
-      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+    .map((series) =>
+      [...series].filter(
+        (series: SeriesSingleValue | SeriesDoubleValue) =>
+          !datesToFilter.includes(series.__date_unix)
       )
     )
+    .flatMap((series) => {
+      return series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      );
+    })
     .filter(isDefined);
-
-  if (leadingSeriesType) {
-    const leadingSeriesTypeIndex = seriesConfig.findIndex(
-      (seriesConfig) => seriesConfig.type === leadingSeriesType
-    );
-
-    if (leadingSeriesTypeIndex >= 0) {
-      const leadingSeries = seriesList[leadingSeriesTypeIndex];
-      values = leadingSeries
-        .flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-          isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
-        )
-        .filter(isDefined);
-    }
-  }
 
   const overallMaximum = Math.max(...values);
 
