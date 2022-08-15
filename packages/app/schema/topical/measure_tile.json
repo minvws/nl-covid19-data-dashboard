@@ -3,14 +3,16 @@
   "title": "topical_measures_tile",
   "type": "object",
   "additionalProperties": false,
-  "required": ["title", "icon"],
+  "required": ["index", "title", "icon"],
   "properties": {
+    "index": {
+      "type": "number"
+    },
     "title": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     },
     "icon": {
-      "type": "string",
-      "enum": ["icon-1", "icon-2"]
+      "$ref": "icon.json"
     }
   }
 }

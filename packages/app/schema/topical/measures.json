@@ -3,17 +3,19 @@
   "type": "object",
   "title": "topical_measures",
   "additionalProperties": false,
-  "required": ["title", "dynamicSubtitle", "icon", "measureTiles"],
+  "required": ["index", "title", "dynamicSubtitle", "icon", "measureTiles"],
   "properties": {
+    "index": {
+      "type": "number"
+    },
     "title": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     },
     "dynamicSubtitle": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     },
     "icon": {
-      "type": "string",
-      "enum": ["icon-1", "icon-2"]
+      "$ref": "icon.json"
     },
     "measureTiles": {
       "type": "array",

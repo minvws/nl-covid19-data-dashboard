@@ -3,13 +3,23 @@
   "title": "topical_theme_tile",
   "type": "object",
   "additionalProperties": false,
-  "required": ["title", "dynamicDescription", "trendIcon", "tileIcon", "cta"],
+  "required": [
+    "index",
+    "title",
+    "dynamicDescription",
+    "trendIcon",
+    "tileIcon",
+    "cta"
+  ],
   "properties": {
+    "index": {
+      "type": "number"
+    },
     "title": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     },
     "dynamicDescription": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     },
     "trendIcon": {
       "type": ["object", "null"],
@@ -27,8 +37,7 @@
       }
     },
     "tileIcon": {
-      "type": "string",
-      "enum": ["icon-1", "icon-2"]
+      "$ref": "icon.json"
     },
     "cta": {
       "type": ["object", "null"],
@@ -36,10 +45,10 @@
       "additionalProperties": false,
       "properties": {
         "label": {
-          "type": "string"
+          "$ref": "multilanguage_string.json"
         },
         "href": {
-          "type": "string"
+          "$ref": "multilanguage_string.json"
         }
       }
     }

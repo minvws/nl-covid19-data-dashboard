@@ -3,13 +3,16 @@
   "title": "topical_theme_link",
   "type": "object",
   "additionalProperties": false,
-  "required": ["label", "href"],
+  "required": ["index", "label", "href"],
   "properties": {
+    "index": {
+      "type": "number"
+    },
     "label": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     },
     "href": {
-      "type": "string"
+      "$ref": "multilanguage_string.json"
     }
   }
 }

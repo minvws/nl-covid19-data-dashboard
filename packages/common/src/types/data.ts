@@ -1028,43 +1028,62 @@ export interface NlVariantsVariantValue {
   date_of_report_unix: number;
 }
 
+export type TopicalIcon = "icon-1" | "icon-2";
+
 export interface Topical {
+  title: MultilanguageString;
+  dynamicDescription: MultilanguageString;
   themes: TopicalTheme[];
   measures: TopicalMeasures;
 }
+export interface MultilanguageString {
+  NL: string;
+  EN: string;
+}
 export interface TopicalTheme {
-  title: string;
-  dynamicSubtitle: string;
-  icon: "icon-1" | "icon-2";
+  index: number;
+  title: MultilanguageString;
+  dynamicSubtitle: MultilanguageString;
+  icon: TopicalIcon;
   themeTiles: TopicalThemeTile[];
-  moreLinks: TopicalThemeLink[];
+  moreLinks: {
+    label: {
+      DESKTOP: MultilanguageString;
+      MOBILE: MultilanguageString;
+    };
+    links: TopicalThemeLink[];
+  };
 }
 export interface TopicalThemeTile {
-  title: string;
-  dynamicDescription: string;
+  index: number;
+  title: MultilanguageString;
+  dynamicDescription: MultilanguageString;
   trendIcon: {
     direction: "up" | "down" | "forward";
     color: "green" | "red";
   } | null;
-  tileIcon: "icon-1" | "icon-2";
+  tileIcon: TopicalIcon;
   cta: {
-    label: string;
-    href: string;
+    label: MultilanguageString;
+    href: MultilanguageString;
   } | null;
 }
 export interface TopicalThemeLink {
-  label: string;
-  href: string;
+  index: number;
+  label: MultilanguageString;
+  href: MultilanguageString;
 }
 export interface TopicalMeasures {
-  title: string;
-  dynamicSubtitle: string;
-  icon: "icon-1" | "icon-2";
+  index: number;
+  title: MultilanguageString;
+  dynamicSubtitle: MultilanguageString;
+  icon: TopicalIcon;
   measureTiles: TopicalMeasuresTile[];
 }
 export interface TopicalMeasuresTile {
-  title: string;
-  icon: "icon-1" | "icon-2";
+  index: number;
+  title: MultilanguageString;
+  icon: TopicalIcon;
 }
 
 export type VrCode = string;

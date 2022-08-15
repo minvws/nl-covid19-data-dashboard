@@ -3,11 +3,14 @@
   "type": "object",
   "title": "topical",
   "additionalProperties": false,
-  "required": [
-    "themes",
-    "measures"
-  ],
+  "required": ["title", "dynamicDescription", "themes", "measures"],
   "properties": {
+    "title": {
+      "$ref": "multilanguage_string.json"
+    },
+    "dynamicDescription": {
+      "$ref": "multilanguage_string.json"
+    },
     "themes": {
       "type": "array",
       "minItems": 1,
