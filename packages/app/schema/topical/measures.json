@@ -3,11 +3,8 @@
   "type": "object",
   "title": "topical_measures",
   "additionalProperties": false,
-  "required": ["index", "title", "dynamicSubtitle", "icon", "measureTiles"],
+  "required": ["title", "dynamicSubtitle", "icon", "measureTiles"],
   "properties": {
-    "index": {
-      "type": "number"
-    },
     "title": {
       "$ref": "multilanguage_string.json"
     },

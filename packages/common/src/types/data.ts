@@ -1028,7 +1028,21 @@ export interface NlVariantsVariantValue {
   date_of_report_unix: number;
 }
 
-export type TopicalIcon = "icon-1" | "icon-2";
+export type TopicalIcon =
+  | "eye"
+  | "reageerbuis"
+  | "rioolwater"
+  | "virusvarianten"
+  | "cross"
+  | "ziekenhuis"
+  | "IC"
+  | "dokter"
+  | "mensen"
+  | "handen"
+  | "test"
+  | "raam"
+  | "prik"
+  | "nies";
 
 export interface Topical {
   title: MultilanguageString;
@@ -1059,8 +1073,8 @@ export interface TopicalThemeTile {
   title: MultilanguageString;
   dynamicDescription: MultilanguageString;
   trendIcon: {
-    direction: "up" | "down" | "forward";
-    color: "green" | "red";
+    direction: "UP" | "DOWN";
+    color: "GREEN" | "RED";
   } | null;
   tileIcon: TopicalIcon;
   cta: {

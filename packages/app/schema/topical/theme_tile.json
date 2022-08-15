@@ -28,11 +28,11 @@
       "properties": {
         "direction": {
           "type": "string",
-          "enum": ["up", "down", "forward"]
+          "enum": ["UP", "DOWN"]
         },
         "color": {
           "type": "string",
-          "enum": ["green", "red"]
+          "enum": ["GREEN", "RED"]
         }
       }
     },

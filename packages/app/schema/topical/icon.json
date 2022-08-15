@@ -2,5 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "topical_icon",
   "type": "string",
-  "enum": ["icon-1", "icon-2"]
+  "enum": [
+    "eye",
+    "reageerbuis",
+    "rioolwater",
+    "virusvarianten",
+    "cross",
+    "ziekenhuis",
+    "IC",
+    "dokter",
+    "mensen",
+    "handen",
+    "test",
+    "raam",
+    "prik",
+    "nies"
+  ]
 }
