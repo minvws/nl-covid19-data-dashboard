@@ -12,23 +12,22 @@ interface Subject {
 }
 
 interface SubjectsListProps {
-  title: string;
-  title_mobile: string;
+  label: string;
+  label_mobile: string;
   subjects: Subject[];
   icon: ReactNode;
 }
 
 interface IconProps {
   icon: ReactNode;
-  isSingleWord?: boolean;
   width: number;
   height: number;
   mr?: number | string;
 }
 
 export function SubjectsList({
-  title,
-  title_mobile,
+  label,
+  label_mobile,
   subjects,
   icon,
 }: SubjectsListProps) {
@@ -39,47 +38,47 @@ export function SubjectsList({
     return null;
   }
 
-  return (
-    <>
-      {breakpoints.sm ? (
-        <Box>
-          <p>{title}</p>
-          <Box display="flex-start" flex-wrap="wrap" spacing={{ _: 3, md: 0 }}>
-            {subjects.map((item) => (
-              <ButtonWithIcon
-                type="button"
-                key={item.text}
-                as="a"
-                href={item.url}
-              >
-                {item.text}
-                <IconWrapper>
-                  <IconSmall icon={icon} width={11} height={10} />
-                </IconWrapper>
-              </ButtonWithIcon>
-            ))}
-          </Box>
-        </Box>
-      ) : (
-        <>
-          <Box flex-direction="row" display="grid" spacing={{ _: 1, sm: 0 }}>
-            <p>{title_mobile}</p>
-            <Box display="grid" spacing={{ _: 1, sm: 0 }}>
-              {subjects.map((item) => (
-                <LinkWithIcon
-                  key={item.text}
-                  href={item.url}
-                  icon={icon}
-                  iconPlacement="right"
-                >
-                  {item.text}
-                </LinkWithIcon>
-              ))}
-            </Box>
-          </Box>
-        </>
-      )}
-    </>
+  return breakpoints.sm ? (
+    <Box
+      display="flex"
+      flex-direction="row"
+      flex-wrap="wrap"
+      alignItems="baseline"
+      spacing={{ _: 3, md: 3 }}
+      //gap='16px' // how to add gap?
+    >
+      <p>{label}</p>
+      {subjects.map((item) => (
+        <ButtonWithIcon type="button" key={item.text} as="a" href={item.url}>
+          {item.text}
+          <IconWrapper>
+            <IconSmall icon={icon} width={11} height={10} />
+          </IconWrapper>
+        </ButtonWithIcon>
+      ))}
+    </Box>
+  ) : (
+    <Box
+      display="flex"
+      flex-direction="column"
+      flex-wrap="wrap"
+      alignItems="flex-start"
+      spacing={1}
+    >
+      <p>{label_mobile}</p>
+      <Box>
+        {subjects.map((item) => (
+          <LinkWithIcon
+            key={item.text}
+            href={item.url}
+            icon={icon}
+            iconPlacement="right"
+          >
+            {item.text}
+          </LinkWithIcon>
+        ))}
+      </Box>
+    </Box>
   );
 }
 
@@ -92,7 +91,6 @@ const ButtonWithIcon = styled.button(
     px: 3,
     py: 12,
     cursor: 'pointer',
-    margin: '16px',
 
     '&:hover': {
       bg: colors.blue,
