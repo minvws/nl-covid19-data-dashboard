@@ -293,9 +293,11 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
 ) {
+  const configsToFilterIndexes: number[] = [];
   const datesToFilter: number[] = [];
-  seriesConfig.forEach((config) => {
+  seriesConfig.forEach((config, index) => {
     if (config.yAxisExceptionValues) {
+      configsToFilterIndexes.push(index);
       config.yAxisExceptionValues.forEach((value) => {
         const dateValue = isDateSpanValue(value)
           ? [value.date_start_unix, value.date_end_unix]
@@ -313,17 +315,21 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
 
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
-    .map((series) =>
-      [...series].filter(
-        (series: SeriesSingleValue | SeriesDoubleValue) =>
-          !datesToFilter.includes(series.__date_unix)
+    .map((series, index) => {
+      if (configsToFilterIndexes.includes(index)) {
+        return [...series].filter(
+          (series: SeriesSingleValue | SeriesDoubleValue) =>
+            !datesToFilter.includes(series.__date_unix)
+        );
+      }
+
+      return series;
+    })
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
       )
     )
-    .flatMap((series) => {
-      return series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
-      );
-    })
     .filter(isDefined);
 
   const overallMaximum = Math.max(...values);
