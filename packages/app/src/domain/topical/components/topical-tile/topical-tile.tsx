@@ -29,6 +29,9 @@ export function TopicalTile({ direction }: TopicalTileProps) {
       borderWidth="1px"
       borderStyle="solid"
       position="relative"
+      display="flex"
+      flexDirection={'column'}
+      justifyContent={{ _: 'space-between' }}
     >
       <Box
         display="flex"

@@ -64,7 +64,19 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4 }}
           >
-            <Box py={4}>
+            <Box
+              // spacing={{ _: 4, md: 5 }}
+              py={4}
+              display="grid"
+              gridTemplateColumns={{
+                _: 'repeat(1, 1fr)',
+                xs: 'repeat(3, 1fr)',
+              }}
+              gridColumnGap={{ _: 4, md: 5 }}
+              gridRowGap={{ _: 4, md: 5 }}
+            >
+              <TopicalTile direction="UP" />
+              <TopicalTile direction="DOWN" />
               <TopicalTile direction="UP" />
             </Box>
             <Box py={4}>
