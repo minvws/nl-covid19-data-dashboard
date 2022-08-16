@@ -5,6 +5,7 @@ import {
   gmData,
   Nl,
   sortTimeSeriesInDataInPlace,
+  Topical,
   Vr,
   VrCollection,
   vrData,
@@ -69,6 +70,10 @@ const json = {
   gmCollection: initializeFeatureFlaggedData<GmCollection>(
     loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
     'gm_collection'
+  ),
+  topical: initializeFeatureFlaggedData<any>(
+    loadJsonFromDataFile<any>('TOPICAL.json'),
+    'topical'
   ),
 };
 
@@ -196,6 +201,15 @@ export function selectNlData<
 export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as Nl;
+
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
+
+  return { data };
+}
+
+export function getTopicalData() {
+  // clone data to prevent mutation of the original
+  const data = JSON.parse(JSON.stringify(json.topical)) as Topical;
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 

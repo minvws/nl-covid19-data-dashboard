@@ -14,6 +14,7 @@ import {
   getLastGeneratedDate,
   selectNlData,
   getLokalizeTexts,
+  getTopicalData,
 } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -58,12 +59,13 @@ export const getStaticProps = createGetStaticProps(
       selectedNlData: {
         ...data,
       },
+      selectedTopicalData: getTopicalData().data,
     };
   }
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, lastGenerated } = props;
+  const { pageText, content, lastGenerated, selectedTopicalData } = props;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
     pageText,
@@ -78,6 +80,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
+      <Box>{selectedTopicalData.title.NL}</Box>
       <Box bg="white">
         <MaxWidth id="content">
           <Box
