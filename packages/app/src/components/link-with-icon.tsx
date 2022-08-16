@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -13,6 +14,7 @@ interface LinkWithIconProps {
   iconPlacement?: 'left' | 'right';
   underline?: boolean;
   fontWeight?: 'normal' | 'bold';
+  isButton?: boolean;
 }
 
 interface IconProps {
@@ -29,12 +31,30 @@ export function LinkWithIcon({
   children,
   iconPlacement = 'left',
   fontWeight,
+  isButton = false,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
+  const Container = ({
+    isButton,
+    children,
+  }: {
+    isButton: boolean;
+    children: ReactNode;
+  }) =>
+    isButton ? (
+      <ButtonBox as="span" display="inline-block" position="relative">
+        {children}
+      </ButtonBox>
+    ) : (
+      <Box as="span" display="inline-block" position="relative">
+        {children}
+      </Box>
+    );
+
   return (
-    <Box as="span" display="inline-block" position="relative">
+    <Container isButton={isButton}>
       <Link href={href} passHref locale={false}>
         <Anchor
           underline="hover"
@@ -59,7 +79,7 @@ export function LinkWithIcon({
           )}
         </Anchor>
       </Link>
-    </Box>
+    </Container>
   );
 }
 
@@ -136,3 +156,29 @@ const IconWrapper = styled.span(
     textDecoration: 'inherit',
   })
 );
+
+const ButtonBox = styled(Box)`
+  background-color: ${colors.lightBlue};
+  border: none;
+  border-radius: 0px;
+  color: ${colors.blue};
+  padding: 12px ${({ theme }) => theme.space[3]};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.blue};
+
+    a {
+      color: ${colors.offWhite};
+    }
+  }
+
+  &:hover a {
+  }
+
+  &:focus {
+    outline-width: 1px;
+    outline-style: dashed;
+    outline-color: ${colors.blue};
+  }
+`;
