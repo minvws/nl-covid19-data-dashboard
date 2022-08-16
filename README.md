@@ -6,7 +6,7 @@ give a broad perspective on the subject.
 
 ## Contact
 
-If you want to contact the dashboard team, feel free to open an issue for 
+If you want to contact the dashboard team, feel free to open an issue for
 technical questions, bug reports or security findings. If you have a generic question or remark about the
 corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.
 
@@ -70,24 +70,37 @@ noting:
   local types they are often put in a separate `types.ts` file to avoid
   circular dependencies.
 - Booleans are prefixed with is/has/should etc.
-- Data schema properties and locale keys are all snake_cased. These could be
+- Data schema properties and locale keys for the CMS are all snake_cased. These could be
   viewed as external data sources / APIs.
 - Event props follow a pattern of `onEventName` for the component props API.
-  For handling the event we aim to use a name that describes what the function does as opposed to use `handleEventName`.
+  For handling the event we aim to use a name that describes what the function does as opposed to use `handleEventNameSubject`.
   Specifically, if the function is not specifically created to handle an event
   or if the function doings can comfortably be described in a function name.
 - We prefer to use function expressions over named function declarations.
   This means `const doSomething = () => {}` instead of `function doSomething(){}`.
 - Short functions, especially lambda's, are okay to write on a single line.
 - Short if-statements are okay to put on a single line, especially if it only calls a single command: `if (isGoingToHappening()) doSomething();`
+- We avoid using `boolean && doSomething();` inside the component's JavaScript logic, but do use it inside the component's JSX (`{boolean && ( ... )}`) to conditionally render (parts of) the component.
 - We avoid unnecessary short-hand variable names like
   `arr` for array or `i` for index or `acc` for a `reduce` accumulator.
-- All Unix timestamps are defined in seconds, not milliseconds like you would
-  expect in Javascript. This is because our data sources are using seconds.
+
+### Under discussion
+
+- What should branch names look like?
+  - `feature/COR-XXX-descriptive-name-of-ticket-branch`
+  - `bugfix/COR-XXX-descriptive-name-of-ticket-branch`
+  - `hotfix/COR-XXX-descriptive-name-of-ticket-branch` (update release docs)
+  - ~~`task/COR-XXX-descriptive-name-of-ticket-branch`~~
+  - `epic/descriptive-name-of-epic`?
+- What should commit messages look like? Is there a certain style to follow?
+- What should we do with a multitude of commits? Squash and combine or leave as is?
 
 ### Yet to discuss
+
 - What about early returns? Readability is key, maybe always put a return on its own line?
 - What about max line length? Clean code advocates to use vertical space for code structure, horizontal space for code details. What problems would arise when we stop using a max line length and developers start using _soft wrap_ in their editors instead?
+- All Unix timestamps are defined in seconds, not milliseconds like you would
+  expect in JavaScript. This is because our data sources are using seconds.
 
 ## Developer Documentation
 
