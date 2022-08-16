@@ -65,7 +65,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             px={{ _: 3, sm: 4 }}
           >
             <Box py={4}>
-              <TopicalTile />
+              <TopicalTile direction="UP" />
             </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
