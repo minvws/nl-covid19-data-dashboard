@@ -52,6 +52,7 @@ export type IconName =
   | 'Expand'
   | 'Experimenteel'
   | 'External'
+  | 'Eye'
   | 'Frame2'
   | 'FrisseLucht'
   | 'Gathering'
@@ -236,6 +237,7 @@ export const iconName2filename: Record<IconName, string> = {
   Expand: 'expand.svg',
   Experimenteel: 'experimenteel.svg',
   External: 'external.svg',
+  Eye: 'eye.svg',
   Frame2: 'frame_2.svg',
   FrisseLucht: 'frisse_lucht.svg',
   Gathering: 'gathering.svg',
