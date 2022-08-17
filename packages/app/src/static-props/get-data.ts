@@ -5,6 +5,7 @@ import {
   gmData,
   Nl,
   sortTimeSeriesInDataInPlace,
+  Topical,
   Vr,
   VrCollection,
   vrData,
@@ -69,6 +70,10 @@ const json = {
   gmCollection: initializeFeatureFlaggedData<GmCollection>(
     loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
     'gm_collection'
+  ),
+  topical: initializeFeatureFlaggedData<Topical>(
+    loadJsonFromDataFile<Topical>('TOPICAL.json'),
+    'topical'
   ),
 };
 
@@ -201,6 +206,70 @@ export function getNlData() {
 
   return { data };
 }
+
+export function getTopicalData() {
+  // clone data to prevent mutation of the original
+  const data = JSON.parse(JSON.stringify(json.topical)) as Topical;
+
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
+
+  return { data };
+}
+
+export function selectTopicalData(locale: keyof Languages) {
+  const topicalData = getTopicalData().data;
+  const localeKey = locale === 'nl' ? 'NL' : 'EN';
+
+  return {
+    version: topicalData.version,
+    title: topicalData.title[localeKey],
+    dynamicDescription: topicalData.dynamicDescription.map(
+      (description) => description[localeKey]
+    ),
+    themes: topicalData.themes.map((theme) => ({
+      index: theme.index,
+      title: theme.title[localeKey],
+      dynamicSubtitle: theme.dynamicSubtitle[localeKey],
+      icon: theme.icon,
+      themeTiles: theme.themeTiles.map((tile) => ({
+        index: tile.index,
+        title: tile.title[localeKey],
+        dynamicDescription: tile.dynamicDescription[localeKey],
+        trendIcon: tile.trendIcon,
+        tileIcon: tile.tileIcon,
+        cta: tile.cta
+          ? {
+              label: tile.cta.label[localeKey],
+              href: tile.cta.href[localeKey],
+            }
+          : null,
+      })),
+      moreLinks: {
+        label: {
+          DESKTOP: theme.moreLinks.label.DESKTOP[localeKey],
+          MOBILE: theme.moreLinks.label.MOBILE[localeKey],
+        },
+        links: theme.moreLinks.links.map((link) => ({
+          index: link.index,
+          label: link.label[localeKey],
+          href: link.href[localeKey],
+        })),
+      },
+    })),
+    measures: {
+      title: topicalData.measures.title[localeKey],
+      dynamicSubtitle: topicalData.measures.dynamicSubtitle[localeKey],
+      icon: topicalData.measures.icon,
+      measureTiles: topicalData.measures.measureTiles.map((tile) => ({
+        index: tile.index,
+        title: tile.title[localeKey],
+        icon: tile.icon,
+      })),
+    },
+  };
+}
+
+export type TopicalData = ReturnType<typeof selectTopicalData>;
 
 /**
  * This method selects the specified metric properties from the region data
