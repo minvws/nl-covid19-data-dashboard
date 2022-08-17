@@ -64,7 +64,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             px={{ _: 3, sm: 4 }}
           >
             <Box py={4}>
-              <DynamicIcon iconName="Down" />
+              <DynamicIcon name="Down" />
             </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
