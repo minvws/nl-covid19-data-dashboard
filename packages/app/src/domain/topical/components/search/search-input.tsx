@@ -1,4 +1,4 @@
-import { Close, Search } from '@corona-dashboard/icons';
+import { Close, SearchIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
@@ -18,7 +18,7 @@ export function SearchInput() {
   return (
     <Box position="relative">
       <IconContainer align="left">
-        <Search />
+        <SearchIcon />
       </IconContainer>
 
       {inputProps.value && (

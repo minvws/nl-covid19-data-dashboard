@@ -1,4 +1,4 @@
-import { Gedrag } from '@corona-dashboard/icons';
+import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
@@ -145,7 +145,7 @@ export default function BehaviorPage(
           <PageInformationBlock
             category={caterogyTexts}
             title={text.nl.pagina.titel}
-            icon={<Gedrag />}
+            icon={<Bevolking />}
             description={text.nl.pagina.toelichting}
             metadata={{
               datumsText: text.nl.datums,

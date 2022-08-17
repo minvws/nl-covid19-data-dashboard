@@ -1,5 +1,5 @@
 import { TimeframeOption } from '@corona-dashboard/common';
-import { Gedrag } from '@corona-dashboard/icons';
+import { Bevolking } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import {
@@ -130,7 +130,7 @@ export default function BrononderzoekPage(
                 location: vrName,
               }
             )}
-            icon={<Gedrag />}
+            icon={<Bevolking />}
             description={textShared.pagina_toelichting}
             metadata={{
               datumsText: textShared.datums,

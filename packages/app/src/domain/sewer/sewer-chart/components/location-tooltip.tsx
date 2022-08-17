@@ -1,7 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Locatie } from '@corona-dashboard/icons';
+import { Location } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { TooltipData } from '~/components/time-series-chart/components';
 import { VisuallyHidden } from '~/components';
@@ -34,7 +34,7 @@ export function LocationTooltip({
       <VisuallyHidden>{dateString}</VisuallyHidden>
       <Box fontSize={1} display="flex" alignItems="center">
         <StyledLocationIcon>
-          <Locatie />
+          <Location />
         </StyledLocationIcon>
         <BoldText>{config.label}</BoldText>
         <Box mx={2}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>

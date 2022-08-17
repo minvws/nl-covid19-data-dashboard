@@ -1,5 +1,5 @@
 import { NlSewer } from '@corona-dashboard/common';
-import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { CollapsibleContent } from '~/components/collapsible';
@@ -119,7 +119,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
-            icon={<RioolwaterMonitoring />}
+            icon={<Rioolvirus />}
             description={textGm.pagina_toelichting}
             metadata={{
               datumsText: textGm.datums,

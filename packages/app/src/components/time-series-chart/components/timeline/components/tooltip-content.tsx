@@ -1,4 +1,4 @@
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -118,7 +118,7 @@ function ChevronButton({
       style={{ transform: rotate ? 'rotate(180deg)' : undefined }}
     >
       <IconButton title={title} onClick={onClick} size={13} padding={2}>
-        <Chevron aria-hidden={true} />
+        <ChevronRight aria-hidden={true} />
       </IconButton>
     </Box>
   );

@@ -6,6 +6,7 @@ import { Anchor, Heading } from '~/components/typography';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
+
 interface AnchorTileProps {
   title: string;
   href: string;

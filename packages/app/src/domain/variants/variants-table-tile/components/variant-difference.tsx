@@ -1,5 +1,5 @@
 import { colors, DifferenceDecimal } from '@corona-dashboard/common';
-import { Down, Gelijk, Up } from '@corona-dashboard/icons';
+import { Down, Dot, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
@@ -40,7 +40,7 @@ export function VariantDifference({
   }
   return (
     <Difference color={colors.data.neutral}>
-      <Gelijk color={colors.data.neutral} />
+      <Dot color={colors.data.neutral} />
       {text.verschil.gelijk}
     </Difference>
   );

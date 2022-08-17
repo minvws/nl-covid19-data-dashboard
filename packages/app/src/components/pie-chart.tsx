@@ -1,4 +1,4 @@
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import Pie from '@visx/shape/lib/shapes/Pie';
@@ -282,7 +282,7 @@ export function PieChart<T>({
               link && !isEmpty(link.text) && (
                 <LinkWithIcon
                   href={link.href}
-                  icon={<Chevron />}
+                  icon={<ChevronRight />}
                   iconPlacement="right"
                 >
                   {link.text}

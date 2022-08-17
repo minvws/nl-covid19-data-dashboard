@@ -1,4 +1,4 @@
-import { RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { Rioolvirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -97,7 +97,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
-            icon={<RioolwaterMonitoring />}
+            icon={<Rioolvirus />}
             description={textVr.pagina_toelichting}
             metadata={{
               datumsText: textVr.datums,

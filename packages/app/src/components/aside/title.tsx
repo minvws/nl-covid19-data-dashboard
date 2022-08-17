@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { Box } from '../base';
 import { Text } from '../typography';
 
@@ -42,7 +42,11 @@ export function AsideTitle(props: TitleProps) {
           >
             {title}
             {showArrow && (
-              <Chevron width={10} height={14} css={css({ color: 'blue' })} />
+              <ChevronRight
+                width={10}
+                height={14}
+                css={css({ color: 'blue' })}
+              />
             )}
           </span>
         </Text>

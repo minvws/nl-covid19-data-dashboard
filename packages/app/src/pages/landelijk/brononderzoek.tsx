@@ -1,4 +1,4 @@
-import { Gedrag } from '@corona-dashboard/icons';
+import { Bevolking } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { PageInformationBlock, TileList, WarningTile } from '~/components';
@@ -84,7 +84,7 @@ export default function BrononderzoekPage(
             category={commonTexts.nationaal_layout.headings.archief}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textShared.titel}
-            icon={<Gedrag />}
+            icon={<Bevolking />}
             description={textShared.pagina_toelichting}
             metadata={{
               datumsText: textShared.datums,

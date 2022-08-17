@@ -1,4 +1,4 @@
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { m } from 'framer-motion';
 import { isBoolean } from 'lodash';
@@ -148,7 +148,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   };
 }
 
-const MotionChevron = styled(m(Chevron))(
+const MotionChevron = styled(m(ChevronRight))(
   css({
     backgroundSize: '1.4em 0.9em',
     backgroundPosition: '0 50%',

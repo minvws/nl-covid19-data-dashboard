@@ -1,5 +1,5 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Gelijk } from '@corona-dashboard/icons';
+import { Dot } from '@corona-dashboard/icons';
 import { Up } from '@corona-dashboard/icons';
 import { Down } from '@corona-dashboard/icons';
 import { Container, IconContainer } from './containers';
@@ -34,7 +34,7 @@ export function SidebarDifference({
   return (
     <Container>
       <IconContainer color="data.neutral">
-        <Gelijk />
+        <Dot />
       </IconContainer>
     </Container>
   );
