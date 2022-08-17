@@ -25,11 +25,11 @@ interface SubjectsListLargeProps {
   subjects: Subject[];
 }
 
-export function SubjectsList({
+export const SubjectsList = ({
   label,
   label_mobile,
   subjects,
-}: SubjectsListProps) {
+}: SubjectsListProps) => {
   const breakpoints = useBreakpointsAsync();
 
   // Prevents flickering; don't show anything until breakpoints are loaded
@@ -42,9 +42,9 @@ export function SubjectsList({
   ) : (
     <SubjectsListLarge label={label} subjects={subjects} />
   );
-}
+};
 
-function SubjectsListSmall({ label, subjects }: SubjectsListSmallProps) {
+const SubjectsListSmall = ({ label, subjects }: SubjectsListSmallProps) => {
   return (
     <Box display="flex" flexDirection="column" spacing={3}>
       <p id={label}>{label}</p>
@@ -63,9 +63,9 @@ function SubjectsListSmall({ label, subjects }: SubjectsListSmallProps) {
       </ul>
     </Box>
   );
-}
+};
 
-function SubjectsListLarge({ label, subjects }: SubjectsListLargeProps) {
+const SubjectsListLarge = ({ label, subjects }: SubjectsListLargeProps) => {
   return (
     <Box
       display="flex"
@@ -94,4 +94,4 @@ function SubjectsListLarge({ label, subjects }: SubjectsListLargeProps) {
       </ul>
     </Box>
   );
-}
+};
