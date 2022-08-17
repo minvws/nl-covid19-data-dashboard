@@ -60,9 +60,8 @@ export function TopicalTile({ direction }: TopicalTileProps) {
           >
             {'Postieve testen'}
             <IconWrapper iconColor={'#f35065'}>
-              <Down />
-              {/* {direction === 'DOWN' && <Down />}
-              {direction === 'UP' && <Up />} */}
+              {direction === 'DOWN' && <Down />}
+              {direction === 'UP' && <Up />}
             </IconWrapper>
           </Heading>
         </Box>
