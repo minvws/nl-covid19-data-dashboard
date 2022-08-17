@@ -83,9 +83,12 @@ const attrsToString = (attrs) => {
 };
 
 const lookup = icons.sort().map((x) => `${pascalcase(x)}: '${x}.svg'`);
+const iconNames = icons.sort().map((x) => `'${pascalcase(x)}'`);
 
 const iconName2filename = [
-  'export const iconName2filename: Record<string, string> = {',
+  `export type IconName = ${iconNames.join(' | ')};`,
+  '',
+  'export const iconName2filename: Record<IconName, string> = {',
 ]
   .concat(lookup.join(','))
   .concat(['}', '']);
