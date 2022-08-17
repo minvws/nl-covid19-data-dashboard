@@ -1,13 +1,10 @@
 import { Box, Spacer } from '~/components/base';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
-import {
-  ArticleList,
-  TopicalSectionHeader,
-  TopicalTile,
-} from '~/domain/topical';
+import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
+import { TopicalTile } from '~/domain/topical/components/topical-tile';
 import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
