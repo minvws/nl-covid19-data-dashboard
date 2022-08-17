@@ -1,11 +1,14 @@
 import { Box, Spacer } from '~/components/base';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
-import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
+import {
+  ArticleList,
+  TopicalSectionHeader,
+  TopicalTile,
+} from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
 import { Languages, SiteText } from '~/locale';
-import DynamicIcon from '~/components/get-icon-by-name';
 import {
   createGetStaticProps,
   StaticProps,
@@ -17,6 +20,7 @@ import {
   selectTopicalData,
 } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { colors } from '@corona-dashboard/common';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -55,16 +59,27 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box>{selectedTopicalData.title}</Box>
-      <Box bg="white">
+      <Box bg={colors.white}>
+        {selectedTopicalData.title}
         <MaxWidth id="content">
           <Box
             spacing={{ _: 4, md: 5 }}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4 }}
           >
-            <Box py={4}>
-              <DynamicIcon name={selectedTopicalData.themes[0].icon} />
+            <Box
+              py={4}
+              display="grid"
+              gridTemplateColumns={{
+                _: 'repeat(1, 1fr)',
+                xs: 'repeat(3, 1fr)',
+              }}
+              gridColumnGap={{ _: 4, md: 5 }}
+              gridRowGap={{ _: 4, md: 5 }}
+            >
+              <TopicalTile direction="UP" />
+              <TopicalTile direction="DOWN" />
+              <TopicalTile direction="UP" />
             </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
