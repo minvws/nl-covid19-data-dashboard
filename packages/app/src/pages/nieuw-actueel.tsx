@@ -4,6 +4,7 @@ import { Layout } from '~/domain/layout';
 import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
+import { MeasurementTile } from '~/domain/topical/components/measurement-tile';
 import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
@@ -85,6 +86,23 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4 }}
           >
+            <Box
+              // spacing={{ _: 4, md: 5 }}
+              py={4}
+              display="grid"
+              gridTemplateColumns={{
+                _: 'repeat(1, 1fr)',
+                xs: 'repeat(3, 1fr)',
+              }}
+              gridColumnGap={{ _: 4, md: 5 }}
+              gridRowGap={{ _: 4, md: 5 }}
+            >
+              <MeasurementTile />
+              <MeasurementTile />
+              <MeasurementTile />
+              <MeasurementTile />
+              <MeasurementTile />
+            </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
             </Box>
