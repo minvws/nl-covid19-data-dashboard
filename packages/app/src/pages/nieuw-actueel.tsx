@@ -5,6 +5,7 @@ import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
 import { Languages, SiteText } from '~/locale';
+import DynamicIcon from '~/components/get-icon-by-name';
 import {
   createGetStaticProps,
   StaticProps,
@@ -85,6 +86,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4 }}
           >
+            <Box py={4}>
+              <DynamicIcon iconName="Down" />
+            </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
             </Box>
