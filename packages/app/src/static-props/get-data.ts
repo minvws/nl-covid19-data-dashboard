@@ -71,8 +71,8 @@ const json = {
     loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
     'gm_collection'
   ),
-  topical: initializeFeatureFlaggedData<any>(
-    loadJsonFromDataFile<any>('TOPICAL.json'),
+  topical: initializeFeatureFlaggedData<Topical>(
+    loadJsonFromDataFile<Topical>('TOPICAL.json'),
     'topical'
   ),
 };
