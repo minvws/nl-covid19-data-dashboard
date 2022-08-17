@@ -31,13 +31,13 @@ export function TopicalTile({ direction }: TopicalTileProps) {
       position="relative"
       display="flex"
       flexDirection={'column'}
-      justifyContent={{ _: 'space-between' }}
+      justifyContent={'space-between'}
     >
       <Box
         display="flex"
         flexDirection={'column'}
-        justifyContent={{ _: 'start' }}
-        textAlign={{ _: 'left' }}
+        justifyContent={'start'}
+        textAlign={'left'}
         p={{ _: 3, xs: 4 }}
       >
         <KpiIcon>
@@ -47,8 +47,8 @@ export function TopicalTile({ direction }: TopicalTileProps) {
         <Box
           display="block"
           fontSize={{ _: 6, xs: 7 }}
-          paddingRight={{ _: 5 }}
-          marginBottom={{ _: 3 }}
+          paddingRight={5}
+          marginBottom={3}
         >
           <Heading level={3} color={colors.blue}>
             {'Postieve testen'}
@@ -59,7 +59,7 @@ export function TopicalTile({ direction }: TopicalTileProps) {
           </Heading>
         </Box>
 
-        <Box display="flex" alignItems={{ _: 'center' }}>
+        <Box display="flex" alignItems={'center'}>
           <Markdown
             content={
               'Het aantal positief geteste mensen is de **afgelopen week 10% gestegen**. Hiermee zet de stijgende trend zich voort.'
@@ -70,7 +70,7 @@ export function TopicalTile({ direction }: TopicalTileProps) {
 
       <Box
         display="flex"
-        justifyContent={{ _: 'center' }}
+        justifyContent={'center'}
         bg={colors.lightBlue}
         color={colors.blue}
         padding={3}
