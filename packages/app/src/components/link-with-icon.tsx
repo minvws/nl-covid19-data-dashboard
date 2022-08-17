@@ -158,28 +158,23 @@ const IconWrapper = styled.span(
 );
 
 const ButtonBox = styled(Box)`
-  background-color: ${colors.lightBlue};
-  border: none;
-  border-radius: 0px;
-  color: ${colors.blue};
-  padding: 12px ${({ theme }) => theme.space[3]};
-  cursor: pointer;
+  a {
+    background-color: ${colors.lightBlue};
+    color: ${colors.blue};
+    padding: 12px ${({ theme }) => theme.space[3]};
 
-  a,
-  a:hover,
-  a:focus {
-    text-decoration: none;
-  }
-
-  &:hover {
-    background-color: ${colors.blue};
-
-    a {
+    &:hover {
+      background-color: ${colors.blue};
       color: ${colors.offWhite};
     }
-  }
 
-  &:focus {
-    outline: #000000 dotted 2px;
+    &:focus {
+      outline: #000000 dotted 2px;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
   }
 `;
