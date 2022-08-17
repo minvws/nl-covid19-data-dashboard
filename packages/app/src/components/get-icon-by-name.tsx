@@ -4,18 +4,18 @@ import React from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 
-type IconTypes = keyof typeof iconName2filename;
+type IconName = keyof typeof iconName2filename;
 
 interface DynamicIconProps extends IconProps {
-  name: IconTypes;
+  name: IconName;
 }
 
 /**
  * Returns an icon component by the name of the icon
  * Throws when requested component was not found
  */
-function getIconByName(name: IconTypes) {
-  const icons: Record<IconTypes, React.ComponentType> = allIcons;
+function getIconByName(name: IconName) {
+  const icons: Record<IconName, React.ComponentType> = allIcons;
   const DynamicIcon = icons[name];
 
   assert(
