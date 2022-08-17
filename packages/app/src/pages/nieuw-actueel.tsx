@@ -64,20 +64,38 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4 }}
           >
-            <Box
-              py={4}
-              display="grid"
-              gridTemplateColumns={{
-                _: 'repeat(1, 1fr)',
-                xs: 'repeat(3, 1fr)',
-              }}
-              gridColumnGap={{ _: 4, md: 5 }}
-              gridRowGap={{ _: 4, md: 5 }}
-            >
-              <TopicalTile direction="UP" />
-              <TopicalTile direction="DOWN" />
-              <TopicalTile direction="UP" />
-            </Box>
+            {selectedTopicalData.themes
+              .sort((a, b) => a.index - b.index)
+              .map((theme) => {
+                return (
+                  <Box
+                    py={4}
+                    display="grid"
+                    gridTemplateColumns={{
+                      _: 'repeat(1, 1fr)',
+                      xs: 'repeat(3, 1fr)',
+                    }}
+                    gridColumnGap={{ _: 4, md: 5 }}
+                    gridRowGap={{ _: 4, md: 5 }}
+                    key={theme.index}
+                  >
+                    {theme.themeTiles
+                      .sort((a, b) => a.index - b.index)
+                      .map((themeTile) => {
+                        return (
+                          <TopicalTile
+                            trendIcon={themeTile.trendIcon}
+                            title={themeTile.title}
+                            tileIcon={themeTile.tileIcon}
+                            dynamicDescription={themeTile.dynamicDescription}
+                            cta={themeTile.cta}
+                            key={themeTile.index}
+                          />
+                        );
+                      })}
+                  </Box>
+                );
+              })}
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
             </Box>
