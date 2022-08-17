@@ -1082,6 +1082,7 @@ export type TopicalIcon =
   | "Expand"
   | "Experimenteel"
   | "External"
+  | "Eye"
   | "Frame2"
   | "FrisseLucht"
   | "Gathering"
