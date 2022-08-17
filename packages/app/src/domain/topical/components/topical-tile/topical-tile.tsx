@@ -129,6 +129,7 @@ const KpiIcon = styled.span(
     position: 'absolute',
     display: 'block',
     width: asResponsiveArray({ _: 40, sm: 50 }),
+    height: asResponsiveArray({ _: 40, sm: 50 }),
     right: 0,
     top: 0,
   })
