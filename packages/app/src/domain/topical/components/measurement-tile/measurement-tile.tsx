@@ -16,22 +16,26 @@ export function MeasurementTile() {
       position="relative"
       display="flex"
       flexDirection={{ _: 'column', xs: 'row' }}
-      justifyContent={{ _: 'space-between' }}
+      justifyContent={'space-between'}
     >
       <Box
         display="flex"
-        justifyContent={{ _: 'flex-start' }}
-        textAlign={{ _: 'left' }}
-        p={{ _: 3, xs: 4 }}
+        justifyContent={'flex-start'}
+        textAlign={'left'}
+        p={'1.5rem'}
       >
         <KpiIcon>
           <Doorstroomevenementen />
         </KpiIcon>
-        <Markdown
-          content={
-            'Het aantal positief geteste mensen is de **afgelopen week 10% gestegen**. Hiermee zet de stijgende trend zich voort.'
-          }
-        />
+
+        <Box
+          display="flex"
+          justifyContent={'flex-start'}
+          textAlign={'left'}
+          pr={{ _: 0, xs: 4 }}
+        >
+          <Markdown content={'Het aantal positief geteste mensen.'} />
+        </Box>
       </Box>
     </Box>
   );
@@ -41,6 +45,7 @@ const KpiIcon = styled.div(
   css({
     color: colors.blue,
     display: 'flex',
-    minWidth: asResponsiveArray({ _: 40, sm: 50 }),
+    minWidth: asResponsiveArray(40),
+    marginRight: 3,
   })
 );
