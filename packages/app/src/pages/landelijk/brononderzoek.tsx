@@ -7,7 +7,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -23,22 +23,24 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  caterogyTexts: {
+    category: siteText.common.nationaal_layout.headings.besmettingen,
+    screenReaderCategory:
+      siteText.common.sidebar.metrics.source_investigation.title,
+  },
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textShared: siteText.pages.situations_page.shared,
+  textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        caterogyTexts: {
-          category: siteText.common.nationaal_layout.headings.besmettingen,
-          screenReaderCategory:
-            siteText.common.sidebar.metrics.source_investigation.title,
-        },
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textShared: siteText.pages.situations_page.shared,
-        textChoroplethTooltips: siteText.common.choropleth_tooltip.patients,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetChoroplethData({
     vr: ({ situations }) => ({
@@ -63,7 +65,7 @@ export default function BrononderzoekPage(
 ) {
   const { pageText, choropleth, lastGenerated, content } = props;
   const { caterogyTexts, metadataTexts, textShared, textChoroplethTooltips } =
-    pageText;
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
 
   const metadata = {

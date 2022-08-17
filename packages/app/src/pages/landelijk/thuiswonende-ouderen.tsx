@@ -17,7 +17,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -42,18 +42,20 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['elderly_at_home'];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.elderly_at_home_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.elderly_at_home_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.elderly_at_home__positive_tested_daily',
@@ -109,7 +111,10 @@ const ElderlyAtHomeNationalPage = (
   );
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl } = pageText;
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const reverseRouter = useReverseRouter();
 
