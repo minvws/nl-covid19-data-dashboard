@@ -5,8 +5,14 @@ import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
 import { Markdown } from '~/components/markdown';
+import { TopicalIcon } from '@corona-dashboard/common/src/types';
 
-export function MeasurementTile() {
+interface MeasurementTileProps {
+  icon: TopicalIcon;
+  title: string;
+}
+
+export function MeasurementTile({ icon, title }: MeasurementTileProps) {
   return (
     <Box
       spacing={3}
@@ -25,7 +31,7 @@ export function MeasurementTile() {
         p={'1.5rem'}
       >
         <KpiIcon>
-          <DynamicIcon name="Doorstroomevenementen" />
+          <DynamicIcon name={icon} />
         </KpiIcon>
 
         <Box
@@ -34,7 +40,7 @@ export function MeasurementTile() {
           textAlign={'left'}
           pr={{ _: 0, xs: 4 }}
         >
-          <Markdown content={'Het aantal positief geteste mensen.'} />
+          <Markdown content={title} />
         </Box>
       </Box>
     </Box>

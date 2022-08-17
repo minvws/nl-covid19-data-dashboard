@@ -110,7 +110,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       .sort((a, b) => a.index - b.index)
                       .map((measureTile) => {
                         return (
-                          <MeasurementTile key={measureTile.index}/>
+                          <MeasurementTile
+                            icon={measureTile.icon}
+                            title={measureTile.title}
+                            key={measureTile.index}
+                          />
                         );
                       })}
                   </Box>
