@@ -39,4 +39,8 @@ export type VerboseFeature = {
   metricProperties?: string[];
 } & SimpleFeature;
 
-export type JsonDataScope = DataScopeKey | 'vr_collection' | 'gm_collection';
+export type JsonDataScope =
+  | DataScopeKey
+  | 'vr_collection'
+  | 'gm_collection'
+  | 'topical';
