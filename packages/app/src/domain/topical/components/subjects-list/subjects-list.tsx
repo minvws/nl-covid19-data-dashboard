@@ -37,6 +37,41 @@ export const SubjectsList = ({
     return null;
   }
 
+  // return (
+  //   <Box
+  //     display="flex"
+  //     flexDirection={breakpoints.sm ? 'row' : 'column'}
+  //     alignItems={breakpoints.sm ? 'center' : 'flex-start'}
+  //     spacing={3}
+  //   >
+  //     <p id={label_mobile} style={{ margin: 0 }}>
+  //       {breakpoints.sm ? label : label_mobile}
+  //     </p>
+  //     <ul
+  //       aria-labelledby={label}
+  //       css={css({
+  //         display: breakpoints.sm ? 'flex' : 'block',
+  //         listStyle: 'none',
+  //         m: 0,
+  //         p: 0,
+  //       })}
+  //     >
+  //       {subjects.map((subject) => (
+  //         <li key={subject.text} css={css({ ml: breakpoints.sm ? 3 : 0 })}>
+  //           <LinkWithIcon
+  //             href={subject.url}
+  //             icon={<ArrowIconRight />}
+  //             iconPlacement="right"
+  //             hasButtonStyling={breakpoints.sm}
+  //           >
+  //             {subject.text}
+  //           </LinkWithIcon>
+  //         </li>
+  //       ))}
+  //     </ul>
+  //   </Box>
+  // );
+
   return !breakpoints.sm ? (
     <SubjectsListSmall label={label_mobile} subjects={subjects} />
   ) : (
@@ -49,14 +84,17 @@ const SubjectsListSmall = ({ label, subjects }: SubjectsListSmallProps) => {
     <Box display="flex" flexDirection="column" spacing={3}>
       <p id={label}>{label}</p>
       <ul aria-labelledby={label} css={css({ listStyle: 'none', m: 0, p: 0 })}>
-        {subjects.map((item) => (
-          <li key={item.text}>
+        {subjects.map((subject, index) => (
+          <li
+            key={subject.text}
+            css={css({ mb: subjects.length - 1 === index ? 0 : 2 })}
+          >
             <LinkWithIcon
-              href={item.url}
+              href={subject.url}
               icon={<ArrowIconRight />}
               iconPlacement="right"
             >
-              {item.text}
+              {subject.text}
             </LinkWithIcon>
           </li>
         ))}
@@ -79,15 +117,15 @@ const SubjectsListLarge = ({ label, subjects }: SubjectsListLargeProps) => {
         aria-labelledby={label}
         css={css({ display: 'flex', listStyle: 'none', m: 0, p: 0 })}
       >
-        {subjects.map((item) => (
-          <li key={item.text}>
+        {subjects.map((subject) => (
+          <li key={subject.text} css={css({ ml: 3 })}>
             <LinkWithIcon
-              href={item.url}
+              href={subject.url}
               icon={<ArrowIconRight />}
               iconPlacement="right"
-              isButton
+              hasButtonStyling
             >
-              {item.text}
+              {subject.text}
             </LinkWithIcon>
           </li>
         ))}

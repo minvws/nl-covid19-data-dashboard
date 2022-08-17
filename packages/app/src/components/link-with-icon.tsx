@@ -14,7 +14,7 @@ interface LinkWithIconProps {
   iconPlacement?: 'left' | 'right';
   underline?: boolean;
   fontWeight?: 'normal' | 'bold';
-  isButton?: boolean;
+  hasButtonStyling?: boolean;
 }
 
 interface IconProps {
@@ -31,19 +31,19 @@ export function LinkWithIcon({
   children,
   iconPlacement = 'left',
   fontWeight,
-  isButton = false,
+  hasButtonStyling = false,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
   const Container = ({
-    isButton,
+    hasButtonStyling,
     children,
   }: {
-    isButton: boolean;
+    hasButtonStyling: boolean;
     children: ReactNode;
   }) =>
-    isButton ? (
+    hasButtonStyling ? (
       <ButtonBox as="span" display="inline-block" position="relative">
         {children}
       </ButtonBox>
@@ -54,7 +54,7 @@ export function LinkWithIcon({
     );
 
   return (
-    <Container isButton={isButton}>
+    <Container hasButtonStyling={hasButtonStyling}>
       <Link href={href} passHref locale={false}>
         <Anchor
           underline="hover"
@@ -165,6 +165,12 @@ const ButtonBox = styled(Box)`
   padding: 12px ${({ theme }) => theme.space[3]};
   cursor: pointer;
 
+  a,
+  a:hover,
+  a:focus {
+    text-decoration: none;
+  }
+
   &:hover {
     background-color: ${colors.blue};
 
@@ -173,12 +179,7 @@ const ButtonBox = styled(Box)`
     }
   }
 
-  &:hover a {
-  }
-
   &:focus {
-    outline-width: 1px;
-    outline-style: dashed;
-    outline-color: ${colors.blue};
+    outline: #000000 dotted 2px;
   }
 `;
