@@ -12,9 +12,8 @@ import {
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
 import {
   getLastGeneratedDate,
-  selectNlData,
   getLokalizeTexts,
-  getTopicalData,
+  selectTopicalData,
 } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -33,35 +32,10 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  getTopicalPageData('nl', [
-    'intensive_care_nice',
-    'hospital_nice',
-    'tested_overall',
-    'vaccine_administered_total',
-    'vaccine_coverage_per_age_group_estimated',
-  ]),
-  () => {
-    const { selectedNlData: data } = selectNlData(
-      'intensive_care_nice',
-      'intensive_care_lcps',
-      'hospital_nice',
-      'tested_overall',
-      'tested_ggd',
-      'hospital_lcps',
-      'difference',
-      'vaccine_administered_total',
-      'vaccine_coverage_per_age_group_estimated',
-      'booster_coverage',
-      'sewer'
-    )();
-
-    return {
-      selectedNlData: {
-        ...data,
-      },
-      selectedTopicalData: getTopicalData().data,
-    };
-  }
+  getTopicalPageData('nl', []),
+  ({ locale }: { locale: keyof Languages }) => ({
+    selectedTopicalData: selectTopicalData(locale),
+  })
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
@@ -80,7 +54,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box>{selectedTopicalData.title.NL}</Box>
+      <Box>{selectedTopicalData.title}</Box>
       <Box bg="white">
         <MaxWidth id="content">
           <Box
