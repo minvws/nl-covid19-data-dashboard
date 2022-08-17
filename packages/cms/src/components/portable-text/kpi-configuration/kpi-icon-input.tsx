@@ -18,10 +18,15 @@ import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { forwardRef, useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 
-const filename2IconName = Object.keys(iconName2filename).reduce((aggr, key) => {
-  aggr[iconName2filename[key]] = key;
-  return aggr;
-}, {} as Record<string, string>);
+const allIconsToFilename: Record<string, string> = iconName2filename;
+
+const filename2IconName = Object.keys(allIconsToFilename).reduce(
+  (aggr, key) => {
+    aggr[allIconsToFilename[key]] = key;
+    return aggr;
+  },
+  {} as Record<string, string>
+);
 
 export type KpiIconKey = keyof typeof allIcons;
 
@@ -83,11 +88,14 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
                     key={id}
                     direction="column"
                     align="center"
-                    onClick={() => onChangeIcon(iconName2filename[id])}
+                    onClick={() => onChangeIcon(allIconsToFilename[id])}
                     title={id}
                   >
                     <GridIcon width="35" height="35" color="black" />
-                    <Radio checked={value === iconName2filename[id]} readOnly />
+                    <Radio
+                      checked={value === allIconsToFilename[id]}
+                      readOnly
+                    />
                   </Flex>
                 ))}
 
