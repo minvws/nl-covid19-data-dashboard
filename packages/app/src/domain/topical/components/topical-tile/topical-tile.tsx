@@ -50,11 +50,19 @@ export function TopicalTile({ direction }: TopicalTileProps) {
           paddingRight={5}
           marginBottom={3}
         >
-          <Heading level={3} color={colors.blue}>
+          <Heading
+            level={3}
+            color={colors.blue}
+            css={css({
+              display: 'flex',
+              alignItems: 'center',
+            })}
+          >
             {'Postieve testen'}
             <IconWrapper iconColor={'#f35065'}>
-              {direction === 'DOWN' && <Down />}
-              {direction === 'UP' && <Up />}
+              <Down />
+              {/* {direction === 'DOWN' && <Down />}
+              {direction === 'UP' && <Up />} */}
             </IconWrapper>
           </Heading>
         </Box>
@@ -86,8 +94,9 @@ export function TopicalTile({ direction }: TopicalTileProps) {
 const IconWrapper = styled.span<IconWrapperProps>((x) =>
   css({
     color: x.iconColor,
-    display: 'inline-block',
-    height: '20px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    width: '20px',
     marginLeft: '15px;',
   })
 );
