@@ -94,8 +94,8 @@ const IconWrapper = styled.span<IconWrapperProps>((x) =>
 
 const KpiIcon = styled.span(
   css({
-    color: 'white',
-    backgroundColor: 'blue',
+    color: colors.white,
+    backgroundColor: colors.blue,
     position: 'absolute',
     display: 'block',
     width: asResponsiveArray({ _: 40, sm: 50 }),
