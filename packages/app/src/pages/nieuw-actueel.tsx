@@ -1,5 +1,4 @@
 import { Box, Spacer } from '~/components/base';
-import css from '@styled-system/css';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
 import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
