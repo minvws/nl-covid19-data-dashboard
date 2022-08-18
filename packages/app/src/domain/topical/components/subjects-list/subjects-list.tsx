@@ -33,22 +33,23 @@ export const SubjectsList = ({
     <Box
       display="flex"
       flexDirection={{ _: 'column', sm: 'row' }}
-      alignItems={{ _: 'flex-start', sm: 'baseline' }}
+      alignItems="flex-start"
       spacing={{ _: 3, sm: 0 }}
+      width="100%"
     >
       <Text
-        id={labelLong}
         css={css({
-          flex: asResponsiveArray({ sm: '0 0 17.5%', md: '0 0 12.5%' }),
+          flex: asResponsiveArray({ sm: '0 0 10em' }),
+          mr: asResponsiveArray({ _: 0, sm: 4 }),
         })}
       >
         {breakpoints.sm ? labelShort : labelLong}
       </Text>
       <ul
-        aria-labelledby={labelLong}
+        aria-label={labelLong}
+        tabIndex={0}
         css={css({
           display: asResponsiveArray({ sm: 'flex' }),
-          flex: asResponsiveArray({ sm: '0 0 82.5%', md: '0 0 87.5%' }),
           flexWrap: 'wrap',
           listStyle: 'none',
           m: 0,

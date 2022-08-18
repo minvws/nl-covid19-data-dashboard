@@ -19,7 +19,7 @@ import {
 } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors } from '@corona-dashboard/common';
-import { MeasurementTile } from '~/domain/topical/components/measurement-tile';
+import { SubjectsList } from '~/domain/topical/components/subjects-list';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -58,35 +58,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-        <MaxWidth id="content">
-          <Box
-            spacing={{ _: 4, md: 5 }}
-            pt={{ _: 3, md: 5 }}
-            px={{ _: 3, sm: 4 }}
-            display="flex"
-          >
-            <SubjectsTitle title="Meer onderwerpen:" />
-            <SubjectList
-              subjects={[
-                {
-                  text: 'Reproductiegetal',
-                  url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
-                },
-                {
-                  text: 'Kwetsbare groepen',
-                  url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
-                },
-                {
-                  text: 'Sterfte',
-                  url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
-                },
-              ]}
-              icon={<ArrowIconRight />}
-            />
-          </Box>
-        </MaxWidth>
-      </Box>
-      <Box bg="white">
       <Box bg={colors.white}>
         <MaxWidth id="content">
           <Box
@@ -98,32 +69,59 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               .sort((a, b) => a.index - b.index)
               .map((theme) => {
                 return (
-                  <Box
-                    py={4}
-                    display="grid"
-                    gridTemplateColumns={{
-                      _: 'repeat(1, 1fr)',
-                      xs: 'repeat(3, 1fr)',
-                    }}
-                    gridColumnGap={{ _: 4, md: 5 }}
-                    gridRowGap={{ _: 4, md: 5 }}
-                    key={theme.index}
-                  >
-                    {theme.themeTiles
-                      .sort((a, b) => a.index - b.index)
-                      .map((themeTile) => {
-                        return (
-                          <TopicalTile
-                            trendIcon={themeTile.trendIcon}
-                            title={themeTile.title}
-                            tileIcon={themeTile.tileIcon}
-                            dynamicDescription={themeTile.dynamicDescription}
-                            cta={themeTile.cta}
-                            key={themeTile.index}
-                          />
-                        );
-                      })}
-                  </Box>
+                  <>
+                    <Box
+                      py={4}
+                      display="grid"
+                      gridTemplateColumns={{
+                        _: 'repeat(1, 1fr)',
+                        xs: 'repeat(3, 1fr)',
+                      }}
+                      gridColumnGap={{ _: 4, md: 5 }}
+                      gridRowGap={{ _: 4, md: 5 }}
+                      key={theme.index}
+                    >
+                      {theme.themeTiles
+                        .sort((a, b) => a.index - b.index)
+                        .map((themeTile) => {
+                          return (
+                            <TopicalTile
+                              trendIcon={themeTile.trendIcon}
+                              title={themeTile.title}
+                              tileIcon={themeTile.tileIcon}
+                              dynamicDescription={themeTile.dynamicDescription}
+                              cta={themeTile.cta}
+                              key={themeTile.index}
+                            />
+                          );
+                        })}
+                    </Box>
+                    <Box
+                      spacing={{ _: 4, md: 5 }}
+                      pt={{ _: 3, md: 5 }}
+                      px={{ _: 3, sm: 4 }}
+                      display="flex"
+                    >
+                      <SubjectsList
+                        labelLong="Meer onderwerpen over 'Ontwikkeling van het virus':"
+                        labelShort="Meer onderwerpen:"
+                        subjects={[
+                          {
+                            text: 'Reproductiegetal',
+                            url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
+                          },
+                          {
+                            text: 'Kwetsbare groepen',
+                            url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
+                          },
+                          {
+                            text: 'Sterfte',
+                            url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
+                          },
+                        ]}
+                      />
+                    </Box>
+                  </>
                 );
               })}
             <Box
