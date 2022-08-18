@@ -30,7 +30,7 @@ export function NotificationBanner({
         spacingHorizontal={3}
       >
         <Box display="flex" minWidth="1.6rem">
-          <Warning fill="black" />
+          <Warning />
         </Box>
 
         <Box maxWidth="maxWidthText">

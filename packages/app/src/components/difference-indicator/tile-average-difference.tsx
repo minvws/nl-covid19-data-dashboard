@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Down, Gelijk, Up } from '@corona-dashboard/icons';
+import { Down, Dot, Up } from '@corona-dashboard/icons';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -52,7 +52,7 @@ export function TileAverageDifference({
     content = text.zeven_daags_gemiddelde_waarde_gelijk;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Gelijk />} color="data.neutral" />
+      <ContainerWithIcon icon={<Dot />} color="data.neutral" />
     );
   }
 

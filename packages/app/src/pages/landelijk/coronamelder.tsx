@@ -136,7 +136,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               <Link href={corona_melder_app.rapport.link.href} passHref>
                 <a target="_blank" css={css({ display: 'flex' })}>
                   <IconContainer>
-                    <External />
+                    <External aria-hidden="true" />
                   </IconContainer>
                   <span css={css({ maxWidth: 200 })}>
                     {corona_melder_app.rapport.link.text}

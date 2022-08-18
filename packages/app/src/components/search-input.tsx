@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { Close } from '@corona-dashboard/icons';
-import { Search } from '@corona-dashboard/icons';
+import { SearchIcon } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -26,7 +26,7 @@ export function SearchInput({
   return (
     <Box position="relative" width="15rem">
       <IconContainer align="left">
-        <Search />
+        <SearchIcon />
       </IconContainer>
 
       {value.length > 0 && (

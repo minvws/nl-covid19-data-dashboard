@@ -3,7 +3,7 @@ import {
   NlBehaviorValue,
   VrBehaviorValue,
 } from '@corona-dashboard/common';
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -225,7 +225,7 @@ function DescriptionWithIcon({
               <InlineText css={css({ display: 'flex', position: 'relative' })}>
                 {word}
                 <Box position="absolute" right={-14} top={0}>
-                  <Chevron width="7px" />
+                  <ChevronRight width="7px" />
                 </Box>
               </InlineText>
             ) : (

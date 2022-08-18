@@ -1,8 +1,4 @@
-import {
-  colors,
-  TimestampedValue,
-  Unpack,
-} from '@corona-dashboard/common';
+import { colors, TimestampedValue, Unpack } from '@corona-dashboard/common';
 import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
@@ -149,7 +145,7 @@ function NarrowMenuListItem(props: NarrowMenuListItemProps) {
         <Box ml="auto" display="flex" pr={1}>
           {item.warning && (
             <WarningIconWrapper aria-label={commonTexts.aria_labels.warning}>
-              <Warning viewBox="0 0 25 25" />
+              <Warning />
             </WarningIconWrapper>
           )}
           <BoldText css={css({ pr: asResponsiveArray({ _: 2, md: 3 }) })}>
@@ -223,7 +219,7 @@ function WideMiniTileSelectorLayout(props: MiniTileSelectorLayoutProps) {
                       <WarningIconWrapper
                         aria-label={commonTexts.aria_labels.warning}
                       >
-                        <Warning viewBox="0 0 25 25" />
+                        <Warning />
                       </WarningIconWrapper>
                     </InlineTooltip>
                   )}
@@ -340,7 +336,6 @@ const WarningIconWrapper = styled.span(
     padding: '2px',
 
     svg: {
-      fill: 'black',
       width: '100%',
       height: 'auto',
     },
