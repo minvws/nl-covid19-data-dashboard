@@ -224,7 +224,10 @@ export function selectTopicalData(locale: keyof Languages) {
     version: topicalData.version,
     title: topicalData.title[localeKey],
     dynamicDescription: topicalData.dynamicDescription.map(
-      (description) => description[localeKey]
+      (description) => {
+        return {
+          index: description.index,
+          content: description.content[localeKey] }}
     ),
     themes: topicalData.themes.map((theme) => ({
       index: theme.index,

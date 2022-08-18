@@ -51,54 +51,60 @@ export function TopicalTile({
       flexDirection={'column'}
       justifyContent={'space-between'}
     >
-      <Box
-        display="flex"
-        flexDirection={'column'}
-        justifyContent={'start'}
-        textAlign={'left'}
-        p={{ _: 3, xs: 4 }}
-      >
-        <KpiIcon>
-          <DynamicIcon name={tileIcon} />
-        </KpiIcon>
-
+      <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
         <Box
-          display="block"
-          fontSize={{ _: 6, xs: 7 }}
-          paddingRight={5}
-          marginBottom={3}
+          display="flex"
+          flexDirection={{ _: 'row-reverse', xs: 'column', sm: 'row-reverse' }}
+          justifyContent={'space-between'}
         >
-          <Heading
-            level={3}
-            color={colors.blue}
-            css={css({
-              display: 'flex',
-              alignItems: 'center',
-            })}
-          >
-            {title}
-            {isDefined(trendIcon) && trendIcon !== null && (
-              <IconWrapper iconColor={trendIcon.color}>
-                {trendIcon.direction === 'DOWN' && <Down />}
-                {trendIcon.direction === 'UP' && <Up />}
-              </IconWrapper>
-            )}
-          </Heading>
-        </Box>
+          <KpiIcon>
+            <DynamicIcon name={tileIcon} />
+          </KpiIcon>
 
-        <Box display="flex" alignItems={'center'}>
-          <Markdown content={dynamicDescription} />
+          <Box display="block" fontSize={{ _: 6, xs: 7 }} flexShrink={0}>
+            <Heading
+              level={3}
+              color={colors.blue}
+              css={css({
+                display: 'flex',
+                justifyContent: 'start',
+                paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
+                paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
+                paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
+                marginBottom: 3,
+              })}
+            >
+              {title}
+              {isDefined(trendIcon) && trendIcon !== null && (
+                <IconWrapper iconColor={trendIcon.color}>
+                  {trendIcon.direction === 'DOWN' && <Down />}
+                  {trendIcon.direction === 'UP' && <Up />}
+                </IconWrapper>
+              )}
+            </Heading>
+          </Box>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection={'column'}
+          justifyContent={'start'}
+          textAlign={'left'}
+          p={{ _: 3, xs: 4 }}
+        >
+          <Box display="flex" alignItems={'center'}>
+            <Markdown content={dynamicDescription} />
+          </Box>
         </Box>
       </Box>
 
-      <Box
-        display="flex"
-        justifyContent={'center'}
-        bg={colors.lightBlue}
-        color={colors.blue}
-        padding={3}
-      >
-        {isDefined(cta) && cta !== null && (
+      {isDefined(cta) && cta !== null && (
+        <Box
+          display="flex"
+          justifyContent={'center'}
+          bg={colors.lightBlue}
+          color={colors.blue}
+          padding={3}
+        >
           <LinkWithIcon
             href={cta.href}
             icon={<ChevronRight />}
@@ -106,8 +112,8 @@ export function TopicalTile({
           >
             {cta.label}
           </LinkWithIcon>
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 }
@@ -115,9 +121,9 @@ export function TopicalTile({
 const IconWrapper = styled.span<IconWrapperProps>((x) =>
   css({
     color: x.iconColor,
-    display: 'inline-flex',
-    alignItems: 'center',
+    display: 'inline',
     width: '20px',
+    minWidth: '20px',
     marginLeft: '15px;',
   })
 );
@@ -126,12 +132,10 @@ const KpiIcon = styled.span(
   css({
     color: colors.white,
     backgroundColor: colors.blue,
-    position: 'absolute',
-    display: 'block',
     width: asResponsiveArray({ _: 40, sm: 50 }),
+    minWidth: asResponsiveArray({ _: 40, sm: 50 }),
     height: asResponsiveArray({ _: 40, sm: 50 }),
-    right: 0,
-    top: 0,
-    padding: asResponsiveArray(2),
+    padding: 2,
+    alignSelf: asResponsiveArray({ _: 'inherit', xs: 'end', sm: 'inherit' }),
   })
 );

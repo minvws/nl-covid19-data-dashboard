@@ -1160,13 +1160,17 @@ export type TopicalIcon =
 export interface Topical {
   version: string;
   title: MultilanguageString;
-  dynamicDescription: MultilanguageString[];
+  dynamicDescription: TopicalDynamicDescription[];
   themes: TopicalTheme[];
   measures: TopicalMeasures;
 }
 export interface MultilanguageString {
   NL: string;
   EN: string;
+}
+export interface TopicalDynamicDescription {
+  index: number;
+  content: MultilanguageString;
 }
 export interface TopicalTheme {
   index: number;

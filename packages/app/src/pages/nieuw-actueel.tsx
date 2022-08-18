@@ -1,10 +1,12 @@
 import { Box, Spacer } from '~/components/base';
+import css from '@styled-system/css';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
 import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
 import { TopicalTile } from '~/domain/topical/components/topical-tile';
+import { TopicalHeader } from '~/domain/topical/components/topical-header';
 import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
@@ -61,25 +63,30 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       <Box bg={colors.white}>
         <MaxWidth id="content">
           <Box
-            spacing={{ _: 4, md: 5 }}
+            marginBottom={{ _: 4, md: 5 }}
             pt={{ _: 3, md: 5 }}
             px={{ _: 3, sm: 4 }}
           >
+            <TopicalHeader
+              title={selectedTopicalData.title}
+              dynamicDescription={selectedTopicalData.dynamicDescription}
+            />
+          </Box>
+          <Box spacing={{ _: 4, md: 6 }} px={{ _: 3, sm: 4 }}>
             {selectedTopicalData.themes
               .sort((a, b) => a.index - b.index)
               .map((theme) => {
                 return (
-                  <>
+                  <Box spacing={{ _: 4, md: 5 }} key={theme.index}>
                     <Box
-                      py={4}
                       display="grid"
                       gridTemplateColumns={{
                         _: 'repeat(1, 1fr)',
-                        xs: 'repeat(3, 1fr)',
+                        xs: 'repeat(2, 1fr)',
+                        md: 'repeat(3, 1fr)',
                       }}
                       gridColumnGap={{ _: 4, md: 5 }}
                       gridRowGap={{ _: 4, md: 5 }}
-                      key={theme.index}
                     >
                       {theme.themeTiles
                         .sort((a, b) => a.index - b.index)
@@ -97,7 +104,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         })}
                     </Box>
                     <SubjectsList moreLinks={theme.moreLinks} />
-                  </>
+                  </Box>
                 );
               })}
             <Box
