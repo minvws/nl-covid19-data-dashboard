@@ -6,7 +6,6 @@ import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
 import { TopicalTile } from '~/domain/topical/components/topical-tile';
 import { Languages, SiteText } from '~/locale';
-import DynamicIcon from '~/components/get-icon-by-name';
 import {
   createGetStaticProps,
   StaticProps,
@@ -20,6 +19,7 @@ import {
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors } from '@corona-dashboard/common';
 import { SubjectsList } from '~/domain/topical/components/subjects-list';
+import { MeasurementTile } from '~/domain/topical/components/measurement-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
