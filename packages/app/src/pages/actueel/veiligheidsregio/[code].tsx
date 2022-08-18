@@ -39,7 +39,7 @@ import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -60,21 +60,23 @@ import {
   trimNullValues,
   getAverageSplitPoints,
 } from '~/utils';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  hospitalText: siteText.pages.hospital_page.nl,
+  positiveTestsText: siteText.pages.positive_tests_page.shared,
+  textVr: siteText.pages.topical_page.vr,
+  textShared: siteText.pages.topical_page.shared,
+  sewerText: siteText.pages.sewer_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        hospitalText: siteText.pages.hospital_page.nl,
-        positiveTestsText: siteText.pages.positive_tests_page.shared,
-        textVr: siteText.pages.topical_page.vr,
-        textShared: siteText.pages.topical_page.shared,
-        sewerText: siteText.pages.sewer_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   (context) => {
     const data = selectVrData(
@@ -171,7 +173,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const vrCode = router.query.code as string;
   const { commonTexts, ...formatters } = useIntl();
-  const { hospitalText, textVr, sewerText, textShared } = pageText;
+  const { hospitalText, textVr, sewerText, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const dataHospitalIntake = data.hospital_nice;
   const dataSewerTotal = data.sewer;

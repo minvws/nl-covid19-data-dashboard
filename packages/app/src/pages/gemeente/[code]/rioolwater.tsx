@@ -15,7 +15,7 @@ import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -33,22 +33,23 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['sewer_per_installation', 'sewer'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textGm: siteText.pages.sewer_page.gm,
+  textShared: siteText.pages.sewer_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textGm: siteText.pages.sewer_page.gm,
-        textShared: siteText.pages.sewer_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectGmData(
     'difference.sewer__average',
@@ -80,7 +81,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { commonTexts, formatNumber } = useIntl();
-  const { textGm, textShared } = pageText;
+  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const sewerAverages = data.sewer;
   const populationCount = data.static_values.population_count;
