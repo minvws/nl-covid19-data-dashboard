@@ -8,7 +8,6 @@ import { TopicalTile } from '~/domain/topical/components/topical-tile';
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
 import { ThemeHeader } from '~/domain/topical/components/theme-header';
 import { Languages, SiteText } from '~/locale';
-import DynamicIcon from '~/components/get-icon-by-name';
 import {
   createGetStaticProps,
   StaticProps,
