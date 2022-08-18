@@ -96,37 +96,42 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   </Box>
                 );
               })}
-                  <Box
-                  py={4}
-                  display="grid"
-                  gridTemplateColumns={{
-                    _: 'repeat(1, 1fr)',
-                    xs: 'repeat(3, 1fr)',
-                  }}
-                  gridColumnGap={{ _: 4, md: 5 }}
-                  gridRowGap={{ _: 4, md: 5 }}
-                >
-                    {selectedTopicalData.measures.measureTiles
-                      .sort((a, b) => a.index - b.index)
-                      .map((measureTile) => {
-                        return (
-                          <MeasurementTile
-                            icon={measureTile.icon}
-                            title={measureTile.title}
-                            key={measureTile.index}
-                          />
-                        );
-                      })}
-                  </Box>
-            <Box py={4}>
-              <Search title={textShared.secties.search.title.nl} />
+            <Box
+              py={4}
+              display="grid"
+              gridTemplateColumns={{
+                _: 'repeat(1, 1fr)',
+                xs: 'repeat(3, 1fr)',
+              }}
+              gridColumnGap={{ _: 4, md: 5 }}
+              gridRowGap={{ _: 4, md: 5 }}
+            >
+              {selectedTopicalData.measures.measureTiles
+                .sort((a, b) => a.index - b.index)
+                .map((measureTile) => {
+                  return (
+                    <MeasurementTile
+                      icon={measureTile.icon}
+                      title={measureTile.title}
+                      key={measureTile.index}
+                    />
+                  );
+                })}
             </Box>
           </Box>
         </MaxWidth>
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="offWhite" pb={5}>
+        <Box width="100%" backgroundColor="offWhite" py={5}>
+          <Box py={4}>
+            <Search title={textShared.secties.search.title.nl} />
+          </Box>
+        </Box>
+
+        <Spacer mb={5} />
+
+        <Box width="100%" pb={5}>
           <MaxWidth
             spacing={4}
             pt={{ _: 3, md: 5 }}
