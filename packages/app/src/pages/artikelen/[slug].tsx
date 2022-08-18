@@ -85,11 +85,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, lastGenerated } = props;
+  const { content, lastGenerated, pageText } = props;
   const { locale = 'nl' } = useRouter();
 
-  const pageText = useDynamicLokalizeTexts<LokalizeTexts>(
-    props.pageText,
+  const { textTopicalPageShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
     selectLokalizeTexts
   );
 
@@ -117,10 +117,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
       {...metadata}
     >
       <Box backgroundColor="white">
-        <ArticleDetail
-          article={content}
-          text={pageText.textTopicalPageShared}
-        />
+        <ArticleDetail article={content} text={textTopicalPageShared} />
       </Box>
     </Layout>
   );

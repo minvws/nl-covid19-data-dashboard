@@ -43,7 +43,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['deceased_cbs', 'deceased_rivm'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  caterogyTexts: siteText.common.veiligheidsregio_layout.headings.besmettingen,
+  categoryTexts: siteText.common.veiligheidsregio_layout.headings.besmettingen,
   textVr: siteText.pages.deceased_page.vr,
   textShared: siteText.pages.deceased_page.shared,
 });
@@ -101,7 +101,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { caterogyTexts, textVr, textShared } =
+  const { categoryTexts, textVr, textShared } =
     useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
@@ -121,7 +121,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts}
+            category={categoryTexts}
             title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
               safetyRegion: vrName,
             })}
