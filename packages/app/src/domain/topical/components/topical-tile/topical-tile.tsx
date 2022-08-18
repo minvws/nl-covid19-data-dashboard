@@ -12,7 +12,7 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { isDefined } from 'ts-is-present';
 
 interface IconWrapperProps {
-  iconColor: any;
+  iconColor: string;
 }
 
 type TrendIcon = {
