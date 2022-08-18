@@ -150,27 +150,53 @@ function VariantStackedAreaTileWithData({
             }}
             formatTooltip={(context) => {
               /**
-               * In the chart the 'other_percentage' stack is rendered on top,
-               * but in the tooltip it needs to be displayed as the last item.
-               * (These are both design decisions)
+               * Filter out zero values in value object, so it will be invisible in the tooltip.
+               * When a selection has been made, the zero values will be shown in the tooltip.
                */
+              const metricAmount = context.config.length;
+              const totalMetricAmount = seriesConfig.length;
+              const hasSelectedMetrics = metricAmount !== totalMetricAmount;
+
+              const filteredValues = Object.fromEntries(
+                Object.entries(context.value).filter(([key, value]) =>
+                  key.includes('percentage')
+                    ? value !== 0 && isPresent(value) && !isNaN(Number(value))
+                    : value
+                )
+              ) as VariantChartValue;
+
               const reorderContext = {
                 ...context,
                 config: [
                   ...context.config.filter(
-                    (x) =>
-                      !hasMetricProperty(x) ||
-                      x.metricProperty !== 'other_graph_percentage'
+                    (value) =>
+                      !hasMetricProperty(value) ||
+                      filteredValues[value.metricProperty] ||
+                      hasSelectedMetrics
                   ),
                   context.config.find(
-                    (x) =>
-                      hasMetricProperty(x) &&
-                      x.metricProperty === 'other_graph_percentage'
+                    (value) =>
+                      hasMetricProperty(value) &&
+                      value.metricProperty === 'other_graph_percentage'
                   ),
                 ].filter(isDefined),
+                value: !hasSelectedMetrics ? filteredValues : context.value,
               };
 
-              return <TooltipSeriesList data={reorderContext} hasTwoColumns />;
+              const percentageValuesAmount = Object.keys(
+                reorderContext.value
+              ).filter((key) => key.includes('percentage')).length;
+
+              const hasTwoColumns = !hasSelectedMetrics
+                ? percentageValuesAmount > 4
+                : metricAmount > 4;
+
+              return (
+                <TooltipSeriesList
+                  data={reorderContext}
+                  hasTwoColumns={hasTwoColumns}
+                />
+              );
             }}
             numGridLines={0}
             tickValues={[0, 25, 50, 75, 100]}

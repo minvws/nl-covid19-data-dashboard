@@ -40,17 +40,16 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
       ].join(' – ');
 
   /**
-   * The listRef/listWidth is used to apply the width of the list to the tooltip
+   * The listRef is used to apply the width of the list to the tooltip
    * annotation components. This prevent a jittery tooltip when
    * moving between samples with/without annotations.
    */
-  const [listRef, listWidth] = useInitialWidth<HTMLDivElement>();
+  const [listRef] = useInitialWidth<HTMLDivElement>();
 
   return (
     <section
       style={{
         maxWidth: '100%',
-        width: listWidth ? listWidth + 20 : undefined,
       }}
     >
       <VisuallyHidden>{dateString}</VisuallyHidden>
