@@ -8,7 +8,7 @@ import {
   Phone,
   Reproductiegetal,
   Rioolvirus,
-  Stap1Thuisbezoek,
+  BasisregelsTesten,
   Vaccinaties,
   Varianten,
   Verpleeghuis,
@@ -31,7 +31,7 @@ import {
 
 const mapKeysToIcons = {
   hospital_admissions: <Ziekenhuis />,
-  positive_tests: <Stap1Thuisbezoek />,
+  positive_tests: <BasisregelsTesten />,
   mortality: <Coronavirus />,
   sewage_measurement: <Rioolvirus />,
   source_investigation: <Bevolking />,

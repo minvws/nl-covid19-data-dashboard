@@ -1,136 +1,4 @@
-export type IconName =
-  | 'AfstandSporten'
-  | 'AlcoholVerkoop'
-  | 'Arrow'
-  | 'Arts'
-  | 'Avondklok'
-  | 'BarChart'
-  | 'BasisregelsAfstand'
-  | 'BasisregelsDrukte'
-  | 'BasisregelsElleboog'
-  | 'BasisregelsGeenBezoek'
-  | 'BasisregelsHandenwassen'
-  | 'BasisregelsMondkapje'
-  | 'BasisregelsTesten'
-  | 'Bevolking'
-  | 'Bezoek'
-  | 'Bibliotheek'
-  | 'BinnenMetZitplaats'
-  | 'BinnenZonderZitplaats'
-  | 'Binnensporten'
-  | 'Binnensportlocaties'
-  | 'Boosterprik'
-  | 'Calendar'
-  | 'Check'
-  | 'Checked'
-  | 'ChevronDown'
-  | 'ChevronRight'
-  | 'Clock'
-  | 'Close'
-  | 'CloseThick'
-  | 'ContactBeroepen'
-  | 'Coronavirus'
-  | 'Cross'
-  | 'Curfew'
-  | 'Database'
-  | 'DoorstroomEvenementen'
-  | 'Dot'
-  | 'Down'
-  | 'Download'
-  | 'EenPersoonDoorgestreept'
-  | 'Elderly'
-  | 'Expand'
-  | 'Experimenteel'
-  | 'External'
-  | 'Eye'
-  | 'FrisseLucht'
-  | 'GedeeltelijkOpenRugzak'
-  | 'GeenEntertainment'
-  | 'GeenMaxAantalBezoekers'
-  | 'GeenWedstrijden'
-  | 'Gehandicaptenzorg'
-  | 'GeorganiseerdeKunstEnCultuurbeoefening'
-  | 'GgdTesten'
-  | 'Groepen'
-  | 'HealthCare'
-  | 'HomeAndVisits'
-  | 'HorecaEnEvenementenBestellen'
-  | 'HorecaEnEvenementenEtendrinken'
-  | 'HorecaEnEvenementenEvenementen'
-  | 'HorecaEvenementen'
-  | 'Hospitality'
-  | 'Information'
-  | 'Klachten'
-  | 'Klok210001'
-  | 'KunstCultuur'
-  | 'KunstcultuurMusea'
-  | 'Line'
-  | 'Locaties'
-  | 'Location'
-  | 'Lopend'
-  | 'Maatregelen'
-  | 'MaxAantalBezoekers'
-  | 'MaxVisitors'
-  | 'MedischeScreening'
-  | 'MeerInformatie'
-  | 'MeerdaagseEvenementen'
-  | 'Menu'
-  | 'Mondkapje'
-  | 'Nederland'
-  | 'Notification'
-  | 'OnderwijsEnKinderopvangNoodopvang'
-  | 'OnderwijsEnKinderopvangOpAfstand'
-  | 'OntmoetingenBezoek'
-  | 'OpenbaarVervoer'
-  | 'Openingstijden'
-  | 'Other'
-  | 'Overige'
-  | 'Phone'
-  | 'Recreatie'
-  | 'Reizen'
-  | 'ReproductieGraf'
-  | 'Reproductiegetal'
-  | 'Rioolvirus'
-  | 'SearchIcon'
-  | 'SearchIconBold'
-  | 'SportBuiten'
-  | 'SportMetZweetband'
-  | 'SportWedstrijden'
-  | 'Stap1Avondklok'
-  | 'Stap1HorecaMax'
-  | 'Stap1HorecaPertafel'
-  | 'Stap1HorecaVerplaatsen'
-  | 'Stap1OnderwijsBibliotheek'
-  | 'Stap1OnderwijsOpen'
-  | 'Stap1Theorie'
-  | 'Stap1Thuisbezoek'
-  | 'Stap1Uitvaarten'
-  | 'Stap1WinkelsAlleen'
-  | 'Stap1WinkelsMarkten'
-  | 'Stap1WinkelsOpen'
-  | 'Stopwatch'
-  | 'Taxi'
-  | 'Testbewijs'
-  | 'Toegangsbewijzen'
-  | 'Travel'
-  | 'Unchecked'
-  | 'Up'
-  | 'Vaccinaties'
-  | 'VaccineBoosterThird'
-  | 'Varianten'
-  | 'Verpleeghuis'
-  | 'VervoerEnReizenBuitenland'
-  | 'VervoerEnReizenOv'
-  | 'Vliegen'
-  | 'Warn'
-  | 'Warning'
-  | 'WinkelenEnBoodschappenAlcohol'
-  | 'WinkelenEnBoodschappenOpen'
-  | 'Work'
-  | 'Ziekenhuis'
-  | 'Ziektegolf';
-
-export const iconName2filename: Record<IconName, string> = {
+export const iconName2filename: Record<string, string> = {
   AfstandSporten: 'afstand_sporten.svg',
   AlcoholVerkoop: 'alcohol_verkoop.svg',
   Arrow: 'arrow.svg',
@@ -163,7 +31,6 @@ export const iconName2filename: Record<IconName, string> = {
   ContactBeroepen: 'contact_beroepen.svg',
   Coronavirus: 'coronavirus.svg',
   Cross: 'cross.svg',
-  Curfew: 'curfew.svg',
   Database: 'database.svg',
   DoorstroomEvenementen: 'doorstroom_evenementen.svg',
   Dot: 'dot.svg',
@@ -174,7 +41,6 @@ export const iconName2filename: Record<IconName, string> = {
   Expand: 'expand.svg',
   Experimenteel: 'experimenteel.svg',
   External: 'external.svg',
-  Eye: 'eye.svg',
   FrisseLucht: 'frisse_lucht.svg',
   GedeeltelijkOpenRugzak: 'gedeeltelijk_open_rugzak.svg',
   GeenEntertainment: 'geen_entertainment.svg',
@@ -229,7 +95,6 @@ export const iconName2filename: Record<IconName, string> = {
   SportBuiten: 'sport_buiten.svg',
   SportMetZweetband: 'sport_met_zweetband.svg',
   SportWedstrijden: 'sport_wedstrijden.svg',
-  Stap1Avondklok: 'stap_1_avondklok.svg',
   Stap1HorecaMax: 'stap_1_horeca_max.svg',
   Stap1HorecaPertafel: 'stap_1_horeca_pertafel.svg',
   Stap1HorecaVerplaatsen: 'stap_1_horeca_verplaatsen.svg',
@@ -249,7 +114,6 @@ export const iconName2filename: Record<IconName, string> = {
   Unchecked: 'unchecked.svg',
   Up: 'up.svg',
   Vaccinaties: 'vaccinaties.svg',
-  VaccineBoosterThird: 'vaccine_booster_third.svg',
   Varianten: 'varianten.svg',
   Verpleeghuis: 'verpleeghuis.svg',
   VervoerEnReizenBuitenland: 'vervoer_en_reizen_buitenland.svg',

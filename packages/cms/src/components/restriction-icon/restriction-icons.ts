@@ -70,7 +70,7 @@ export const restrictionIcons = {
   'stap_1-winkels_markten': Icons.Stap1WinkelsMarkten,
   'stap_1-winkels_max': Icons.Groepen,
   'stap_1-winkels_open': Icons.Stap1WinkelsOpen,
-  'stap-1_avondklok': Icons.Stap1Avondklok,
+  'stap-1_avondklok': Icons.Avondklok,
   testbewijs: Icons.Testbewijs,
   reizen: Icons.Reizen,
   recreatie: Icons.Recreatie,

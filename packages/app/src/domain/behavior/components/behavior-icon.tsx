@@ -1,6 +1,6 @@
 import {
   BasisregelsDrukte,
-  Curfew,
+  Avondklok,
   FrisseLucht,
   BasisregelsAfstand,
   MaxVisitors,
@@ -13,8 +13,8 @@ import {
 } from '@corona-dashboard/icons';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 
-const icons: Record<BehaviorIdentifier, typeof Curfew> = {
-  curfew: Curfew,
+const icons: Record<BehaviorIdentifier, typeof Avondklok> = {
+  curfew: Avondklok,
   wash_hands: BasisregelsHandenwassen,
   keep_distance: BasisregelsAfstand,
   work_from_home: OnderwijsEnKinderopvangOpAfstand,

@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { VaccineBoosterThird as BoosterIcon } from '@corona-dashboard/icons';
+import { Boosterprik as BoosterIcon } from '@corona-dashboard/icons';
 
 type ReferenceType = {
   href: string;
