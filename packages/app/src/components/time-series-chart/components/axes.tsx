@@ -71,7 +71,12 @@ export type AxesProps<T extends TimestampedValue> = {
   hasAllZeroValues?: boolean;
 };
 
-function createTimeTicks(startTick: number, endTick: number, count: number) {
+function createTimeTicks(
+  startTick: number,
+  endTick: number,
+  count: number,
+  valuesCount: number | undefined
+) {
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);
 
@@ -80,7 +85,8 @@ function createTimeTicks(startTick: number, endTick: number, count: number) {
   }
 
   const ticks: number[] = [];
-  const stepCount = count - 1;
+  const stepCount =
+    (valuesCount && valuesCount <= count ? valuesCount : count) - 1;
   const step = Math.floor((end - start) / stepCount);
 
   for (let i = 0; i < stepCount; i++) {
@@ -166,7 +172,12 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
     (isFirstOrLast && startYear !== endYear) || previousYear !== currentYear
       ? 'axis-with-year'
       : 'axis';
-  const tickValues = createTimeTicks(startUnix, endUnix, xTickNumber);
+  const tickValues = createTimeTicks(
+    startUnix,
+    endUnix,
+    xTickNumber,
+    values?.length
+  );
 
   const DateSpanTick = useCallback(
     (dateUnix: number, values: DateSpanValue[], index: number) => {
@@ -240,10 +251,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const xTicks = useMemo(
     () =>
-      tickValues.map((x, i) =>
+      tickValues.map((tickValue, index) =>
         isDateSpanValues(values)
-          ? DateSpanTick(x, values, i)
-          : TimeStampTick(x, i)
+          ? DateSpanTick(tickValue, values, index)
+          : TimeStampTick(tickValue, index)
       ),
     [values, DateSpanTick, TimeStampTick, isDateSpanValues, tickValues]
   );

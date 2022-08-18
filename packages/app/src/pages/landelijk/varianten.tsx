@@ -12,7 +12,7 @@ import {
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getLinkParts,
@@ -30,19 +30,21 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['variants', 'named_difference'];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.variants_page.nl,
+  textShared: siteText.pages.variants_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.variants_page.nl,
-        textShared: siteText.pages.variants_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   selectNlData('variants', 'named_difference'),
   getLastGeneratedDate,
   () => {
@@ -93,7 +95,8 @@ export default function CovidVariantenPage(
   } = props;
 
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,

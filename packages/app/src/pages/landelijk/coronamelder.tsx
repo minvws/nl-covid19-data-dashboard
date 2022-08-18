@@ -17,7 +17,7 @@ import { Heading, Text, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -30,16 +30,18 @@ import {
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.behavior_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.behavior_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.corona_melder_app_warning__count',
@@ -53,7 +55,10 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { pageText, selectedNlData: data, lastGenerated } = props;
   const { corona_melder_app } = commonTexts;
-  const { metadataTexts, textNl } = pageText;
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const warningLastValue = data.corona_melder_app_warning.last_value;
   const endDate = createDateFromUnixTimestamp(warningLastValue.date_unix);

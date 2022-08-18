@@ -20,7 +20,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import { useIntl } from '~/intl';
 import {
   ElementsQueryResult,
@@ -46,19 +46,21 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['nursing_home'];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.nursing_home_page.nl,
+  textShared: siteText.pages.nursing_home_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.nursing_home_page.nl,
-        textShared: siteText.pages.nursing_home_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.nursing_home__infected_locations_total',
@@ -108,7 +110,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { metadataTexts, textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
     textNl.verpleeghuis_positief_geteste_personen;

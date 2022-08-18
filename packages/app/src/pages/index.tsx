@@ -171,7 +171,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    content,
+    lastGenerated,
+  } = props;
 
   const dataSewerTotal = data.sewer;
   const dataICTotal = data.intensive_care_nice;
@@ -182,7 +188,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
 
   const { hospitalText, intensiveCareText, textNl, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 

@@ -16,7 +16,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -40,24 +40,26 @@ import {
   getElementsQuery,
   getTimelineEvents,
 } from '~/queries/get-elements-query';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['sewer'];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  caterogyTexts: {
+    category: siteText.common.nationaal_layout.headings.vroege_signalen,
+    screenReaderCategory:
+      siteText.common.sidebar.metrics.sewage_measurement.title,
+  },
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.sewer_page.nl,
+  textShared: siteText.pages.sewer_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        caterogyTexts: {
-          category: siteText.common.nationaal_layout.headings.vroege_signalen,
-          screenReaderCategory:
-            siteText.common.sidebar.metrics.sewage_measurement.title,
-        },
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.sewer_page.nl,
-        textShared: siteText.pages.sewer_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('sewer', 'difference.sewer__average'),
   createGetChoroplethData({
@@ -95,7 +97,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { caterogyTexts, metadataTexts, textNl, textShared } = pageText;
+  const { caterogyTexts, metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 

@@ -23,7 +23,7 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { getBarScaleConfig } from '~/metric-config';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -51,6 +51,7 @@ import {
   replaceVariablesInText,
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'intensive_care_lcps',
@@ -58,16 +59,17 @@ const pageMetrics = [
   'intensive_care_nice_per_age_group',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.intensive_care_page.nl,
+  textShared: siteText.pages.intensive_care_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.intensive_care_page.nl,
-        textShared: siteText.pages.intensive_care_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'intensive_care_lcps',
@@ -107,7 +109,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts, formatPercentage, formatDateFromSeconds } = useIntl();
 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
-  const { metadataTexts, textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
