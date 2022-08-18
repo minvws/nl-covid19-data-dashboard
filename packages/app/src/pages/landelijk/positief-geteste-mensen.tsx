@@ -238,7 +238,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected',
                     label: textShared.labels.infected,
                     color: colors.data.primary,
-                    yAxisExceptionValues: [{ date_unix: 1644318000 }],
+                    yAxisExceptionValues: [1644318000],
                   },
                 ]}
                 dataOptions={{
@@ -259,7 +259,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <InView rootMargin="400px">
+          {/* <InView rootMargin="400px">
             {selectedGgdGraph === 'GGD_infected_percentage_over_time_chart' && (
               <ChartTile
                 timeframeOptions={TimeframeOptionsList}
@@ -398,7 +398,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 />
               )}
             </ChartTile>
-          </InView>
+          </InView> */}
 
           <InView rootMargin="400px">
             <ChoroplethTile

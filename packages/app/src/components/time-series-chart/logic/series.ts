@@ -2,7 +2,6 @@ import {
   getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
-  isDateSpanValue,
   TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
@@ -71,7 +70,7 @@ interface SeriesCommonDefinition {
    * of a series. Values matching with the passed in date(s) will be ignored and
    * are therefore not eligible as maximum values.
    */
-  yAxisExceptionValues?: TimestampedValue[];
+  yAxisExceptionValues?: number[];
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -293,41 +292,30 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
 ) {
-  const configsToFilterIndexes: number[] = [];
-  const datesToFilter: number[] = [];
-  seriesConfig.forEach((config, index) => {
-    if (config.yAxisExceptionValues) {
-      configsToFilterIndexes.push(index);
-      config.yAxisExceptionValues.forEach((value) => {
-        const dateValue = isDateSpanValue(value)
-          ? [value.date_start_unix, value.date_end_unix]
-          : value.date_unix;
-        if (Array.isArray(dateValue)) {
-          dateValue.forEach((value) => {
-            if (!datesToFilter.includes(value)) datesToFilter.push(value);
-          });
-        } else {
-          if (!datesToFilter.includes(dateValue)) datesToFilter.push(dateValue);
-        }
-      });
-    }
-  });
-
-  const values = seriesList
-    .filter((_, index) => isVisible(seriesConfig[index]))
-    .map((series, index) => {
-      if (configsToFilterIndexes.includes(index)) {
-        return [...series].filter(
-          (series: SeriesSingleValue | SeriesDoubleValue) =>
-            !datesToFilter.includes(series.__date_unix)
-        );
-      }
-
+  const filterSeries = (
+    seriesConfig: SeriesConfigSingle<T>,
+    series: SingleSeries
+  ): SingleSeries => {
+    const yAxisExceptionValues = seriesConfig.yAxisExceptionValues;
+    if (!yAxisExceptionValues || yAxisExceptionValues.length === 0)
       return series;
-    })
+
+    return [...series].filter(
+      (seriesItem) => yAxisExceptionValues.indexOf(seriesItem.__date_unix) < 0
+    );
+  };
+
+  const filteredSeriesList = seriesList.map((_, index) =>
+    filterSeries(seriesConfig[index], seriesList[index])
+  );
+
+  const values = filteredSeriesList
+    .filter((_, index) => isVisible(seriesConfig[index]))
     .flatMap((series) =>
-      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      series.flatMap((seriesItem: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(seriesItem)
+          ? seriesItem.__value
+          : [seriesItem.__value_a, seriesItem.__value_b]
       )
     )
     .filter(isDefined);
