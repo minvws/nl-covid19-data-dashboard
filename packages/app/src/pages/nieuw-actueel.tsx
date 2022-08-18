@@ -18,6 +18,7 @@ import {
 } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors } from '@corona-dashboard/common';
+import { SubjectsList } from '~/domain/topical/components/subjects-list';
 import { MeasurementTile } from '~/domain/topical/components/measurement-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -68,32 +69,35 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               .sort((a, b) => a.index - b.index)
               .map((theme) => {
                 return (
-                  <Box
-                    py={4}
-                    display="grid"
-                    gridTemplateColumns={{
-                      _: 'repeat(1, 1fr)',
-                      xs: 'repeat(3, 1fr)',
-                    }}
-                    gridColumnGap={{ _: 4, md: 5 }}
-                    gridRowGap={{ _: 4, md: 5 }}
-                    key={theme.index}
-                  >
-                    {theme.themeTiles
-                      .sort((a, b) => a.index - b.index)
-                      .map((themeTile) => {
-                        return (
-                          <TopicalTile
-                            trendIcon={themeTile.trendIcon}
-                            title={themeTile.title}
-                            tileIcon={themeTile.tileIcon}
-                            dynamicDescription={themeTile.dynamicDescription}
-                            cta={themeTile.cta}
-                            key={themeTile.index}
-                          />
-                        );
-                      })}
-                  </Box>
+                  <>
+                    <Box
+                      py={4}
+                      display="grid"
+                      gridTemplateColumns={{
+                        _: 'repeat(1, 1fr)',
+                        xs: 'repeat(3, 1fr)',
+                      }}
+                      gridColumnGap={{ _: 4, md: 5 }}
+                      gridRowGap={{ _: 4, md: 5 }}
+                      key={theme.index}
+                    >
+                      {theme.themeTiles
+                        .sort((a, b) => a.index - b.index)
+                        .map((themeTile) => {
+                          return (
+                            <TopicalTile
+                              trendIcon={themeTile.trendIcon}
+                              title={themeTile.title}
+                              tileIcon={themeTile.tileIcon}
+                              dynamicDescription={themeTile.dynamicDescription}
+                              cta={themeTile.cta}
+                              key={themeTile.index}
+                            />
+                          );
+                        })}
+                    </Box>
+                    <SubjectsList moreLinks={theme.moreLinks} />
+                  </>
                 );
               })}
             <Box
