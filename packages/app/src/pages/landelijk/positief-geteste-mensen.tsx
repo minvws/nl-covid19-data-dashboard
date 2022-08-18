@@ -238,10 +238,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected',
                     label: textShared.labels.infected,
                     color: colors.data.primary,
+                    yAxisExceptionValues: [1644318000],
                   },
                 ]}
                 dataOptions={{
-                  forcedMaximumValue: 150000,
                   outOfBoundsConfig: {
                     label: textShared.labels.infected_out_of_bounds,
                     tooltipLabel: textShared.tooltip_labels.annotations,

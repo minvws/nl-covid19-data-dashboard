@@ -243,6 +243,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected',
                     label: textShared.labels.infected,
                     color: colors.data.primary,
+                    yAxisExceptionValues: [1644318000],
                   },
                 ]}
                 dataOptions={{
