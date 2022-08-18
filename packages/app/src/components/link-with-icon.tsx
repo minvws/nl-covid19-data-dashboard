@@ -7,7 +7,7 @@ import { UrlObject } from 'url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { Anchor } from './typography';
-import { isDefined } from 'ts-is-present';
+import { asResponsiveArray } from '~/style/utils';
 
 interface LinkWithIconProps {
   href: UrlObject | string;
@@ -16,7 +16,7 @@ interface LinkWithIconProps {
   iconPlacement?: 'left' | 'right';
   underline?: boolean;
   fontWeight?: 'normal' | 'bold';
-  hasButtonStyling?: boolean;
+  showAsButton?: boolean;
 }
 
 interface IconProps {
@@ -37,13 +37,13 @@ export function LinkWithIcon({
   children,
   iconPlacement = 'left',
   fontWeight,
-  hasButtonStyling = false,
+  showAsButton = false,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
   return (
-    <ButtonBox showAsButton={hasButtonStyling}>
+    <ButtonBox showAsButton={showAsButton}>
       <Link href={href} passHref locale={false}>
         <Anchor
           underline="hover"
@@ -150,9 +150,12 @@ const ButtonBox = styled.span((x: buttonBoxProps) =>
   css({
     display: 'inline-block',
     position: 'relative',
-    a:
-      isDefined(x.showAsButton) && x.showAsButton
-        ? {
+    a: x.showAsButton
+      ? asResponsiveArray({
+          _: {
+            color: colors.blue,
+          },
+          sm: {
             backgroundColor: colors.lightBlue,
             color: colors.blue,
             px: 12,
@@ -167,9 +170,10 @@ const ButtonBox = styled.span((x: buttonBoxProps) =>
             '&:hover, &:focus': {
               textDecoration: 'none',
             },
-          }
-        : {
-            color: 'inherit',
           },
+        })
+      : {
+          color: 'inherit',
+        },
   })
 );

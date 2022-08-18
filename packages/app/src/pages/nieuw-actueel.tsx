@@ -96,31 +96,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           );
                         })}
                     </Box>
-                    <Box
-                      spacing={{ _: 4, md: 5 }}
-                      pt={{ _: 3, md: 5 }}
-                      px={{ _: 3, sm: 4 }}
-                      display="flex"
-                    >
-                      <SubjectsList
-                        labelLong="Meer onderwerpen over 'Ontwikkeling van het virus':"
-                        labelShort="Meer onderwerpen:"
-                        subjects={[
-                          {
-                            text: 'Reproductiegetal',
-                            url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
-                          },
-                          {
-                            text: 'Kwetsbare groepen',
-                            url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
-                          },
-                          {
-                            text: 'Sterfte',
-                            url: 'https://coronadashboard.rijksoverheid.nl/landelijk/reproductiegetal',
-                          },
-                        ]}
-                      />
-                    </Box>
+                    <SubjectsList moreLinks={theme.moreLinks} />
                   </>
                 );
               })}
