@@ -1,4 +1,3 @@
-import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
@@ -54,7 +53,6 @@ export function Search({
                 sm: '42rem',
               }}
               px={{ sm: 4 }}
-              bg={colors.white}
               position="relative"
               zIndex={1}
             >
