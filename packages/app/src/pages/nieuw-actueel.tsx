@@ -18,6 +18,7 @@ import {
 } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors } from '@corona-dashboard/common';
+import { MeasurementTile } from '~/domain/topical/components/measurement-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -57,7 +58,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg={colors.white}>
-        {selectedTopicalData.title}
         <MaxWidth id="content">
           <Box
             spacing={{ _: 4, md: 5 }}
@@ -96,6 +96,28 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   </Box>
                 );
               })}
+                  <Box
+                  py={4}
+                  display="grid"
+                  gridTemplateColumns={{
+                    _: 'repeat(1, 1fr)',
+                    xs: 'repeat(3, 1fr)',
+                  }}
+                  gridColumnGap={{ _: 4, md: 5 }}
+                  gridRowGap={{ _: 4, md: 5 }}
+                >
+                    {selectedTopicalData.measures.measureTiles
+                      .sort((a, b) => a.index - b.index)
+                      .map((measureTile) => {
+                        return (
+                          <MeasurementTile
+                            icon={measureTile.icon}
+                            title={measureTile.title}
+                            key={measureTile.index}
+                          />
+                        );
+                      })}
+                  </Box>
             <Box py={4}>
               <Search title={textShared.secties.search.title.nl} />
             </Box>
