@@ -6,7 +6,7 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { Chevron, Down, Up } from '@corona-dashboard/icons';
+import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { isDefined } from 'ts-is-present';
@@ -101,7 +101,7 @@ export function TopicalTile({
         {isDefined(cta) && cta !== null && (
           <LinkWithIcon
             href={cta.href}
-            icon={<Chevron />}
+            icon={<ChevronRight />}
             iconPlacement="right"
           >
             {cta.label}
