@@ -297,11 +297,13 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
     series: SingleSeries
   ): SingleSeries => {
     const yAxisExceptionValues = seriesConfig.yAxisExceptionValues;
-    if (!yAxisExceptionValues || yAxisExceptionValues.length === 0)
+    if (!yAxisExceptionValues || yAxisExceptionValues.length === 0) {
       return series;
+    }
 
     return [...series].filter(
-      (seriesItem) => yAxisExceptionValues.indexOf(seriesItem.__date_unix) < 0
+      (seriesItem) =>
+        yAxisExceptionValues.indexOf(seriesItem.__date_unix) === -1
     );
   };
 
