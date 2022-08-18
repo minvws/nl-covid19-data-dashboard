@@ -1,8 +1,8 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
-  GehandicaptenZorg,
-  Locatie,
+  Gehandicaptenzorg,
+  Location,
 } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -136,7 +136,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 safetyRegion: vrName,
               }
             )}
-            icon={<GehandicaptenZorg />}
+            icon={<Gehandicaptenzorg />}
             description={replaceVariablesInText(
               textVr.positief_geteste_personen.pagina_toelichting,
               {
@@ -238,7 +238,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textVr.besmette_locaties.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Locatie />}
+            icon={<Location />}
             description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
               datumsText: textVr.besmette_locaties.datums,

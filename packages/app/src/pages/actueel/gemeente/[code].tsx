@@ -9,10 +9,10 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
-  Chevron,
+  ChevronRight,
   Vaccinaties,
   Ziekenhuis,
-  RioolwaterMonitoring,
+  Rioolvirus,
 } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -314,7 +314,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {
@@ -385,14 +385,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.gm.rioolwater(gmCode)}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {textGm.mini_trend_tiles.sewer.read_more_link}
                       </LinkWithIcon>
                     </>
                   }
-                  icon={<RioolwaterMonitoring />}
+                  icon={<Rioolvirus />}
                   values={dataSewerTotal.values}
                   seriesConfig={[
                     {
@@ -433,7 +433,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         </Text>
                         <LinkWithIcon
                           href={reverseRouter.gm.vaccinaties(gmCode)}
-                          icon={<Chevron />}
+                          icon={<ChevronRight />}
                           iconPlacement="right"
                         >
                           {

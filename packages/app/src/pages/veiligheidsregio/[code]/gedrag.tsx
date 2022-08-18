@@ -1,5 +1,5 @@
 import { VrBehaviorValue } from '@corona-dashboard/common';
-import { Gedrag } from '@corona-dashboard/icons';
+import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRef, useState } from 'react';
 import { Markdown } from '~/components/markdown';
@@ -113,7 +113,7 @@ export default function BehaviorPageVr(
           <PageInformationBlock
             category={commonTexts.nationaal_layout.headings.gedrag}
             title={text.vr.pagina.titel}
-            icon={<Gedrag />}
+            icon={<Bevolking />}
             description={text.vr.pagina.toelichting}
             metadata={{
               datumsText: text.vr.datums,

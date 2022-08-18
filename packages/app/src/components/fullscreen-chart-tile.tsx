@@ -79,7 +79,7 @@ export function FullscreenChartTile({
               ref={isFullscreen ? undefined : buttonRef}
               title={label}
               onClick={() => setIsFullscreen((x) => !x)}
-              size={36}
+              size={16}
             >
               {isFullscreen ? <Close /> : <Expand />}
             </IconButton>

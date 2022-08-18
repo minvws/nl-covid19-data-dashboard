@@ -1,5 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import { Down, Gelijk, Up } from '@corona-dashboard/icons';
+import { Down, Dot, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -46,7 +46,7 @@ export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   if (trend === 'equal') {
     return (
       <Trend color={colors.data.neutral}>
-        <Gelijk />
+        <Dot />
         {text.basisregels.trend_gelijk}
       </Trend>
     );

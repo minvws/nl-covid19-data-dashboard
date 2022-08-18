@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Down, Gelijk, Up } from '@corona-dashboard/icons';
+import { Down, Dot, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -50,7 +50,7 @@ export function TileDifference({
     content = text.waarde_gelijk;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Gelijk />} color="data.neutral" />
+      <ContainerWithIcon icon={<Dot />} color="data.neutral" />
     );
   }
 
@@ -64,9 +64,7 @@ export function TileDifference({
       <Markdown
         renderersOverrides={{
           paragraph: 'span',
-          strong: (props) => (
-            <BoldText>{props.children}</BoldText>
-          ),
+          strong: (props) => <BoldText>{props.children}</BoldText>,
         }}
         content={replaceVariablesInText(
           `${content} ${

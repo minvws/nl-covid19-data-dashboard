@@ -9,10 +9,10 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
-  Chevron,
+  ChevronRight,
   Vaccinaties,
   Ziekenhuis,
-  RioolwaterMonitoring,
+  Rioolvirus,
 } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -320,7 +320,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {
@@ -388,14 +388,14 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.vr.rioolwater(vrCode)}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {textVr.mini_trend_tiles.sewer.read_more_link}
                       </LinkWithIcon>
                     </>
                   }
-                  icon={<RioolwaterMonitoring />}
+                  icon={<Rioolvirus />}
                   values={dataSewerTotal.values}
                   seriesConfig={[
                     {
@@ -436,7 +436,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                         </Text>
                         <LinkWithIcon
                           href={reverseRouter.vr.vaccinaties(vrCode)}
-                          icon={<Chevron />}
+                          icon={<ChevronRight />}
                           iconPlacement="right"
                         >
                           {
