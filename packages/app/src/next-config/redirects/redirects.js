@@ -63,6 +63,19 @@ async function redirects() {
       destination: '/veiligheidsregio/:code',
       permanent: true,
     },
+    
+    // Redirects for former topical pages GM/VR -> dedicated GM/VR page
+    {
+      source: '/actueel/gemeente/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
+      destination: '/gemeente/GM:nr',
+      permanent: false,
+    },
+    {
+      source: '/actueel/veiligheidsregio/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
+      destination: '/veiligheidsregio/VR:nr',
+      permanent: false,
+    },
+    // Redirects for municipal reorganizations
     ...gmRedirects.map(({ from, to }) => ({
       source: `/gemeente/:gm(gm|GM|gM|Gm):nr(${from.join('|')})/:page*`,
       destination: `/gemeente/GM${to}/:page*`,
