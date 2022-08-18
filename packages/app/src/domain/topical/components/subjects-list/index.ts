@@ -1,0 +1,1 @@
+export * from './subjects-list';
