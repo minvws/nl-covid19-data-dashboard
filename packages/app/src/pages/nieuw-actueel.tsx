@@ -6,6 +6,7 @@ import { isPresent } from 'ts-is-present';
 import { Search } from '~/domain/topical/components/search';
 import { TopicalTile } from '~/domain/topical/components/topical-tile';
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
+import { ThemeHeader } from '~/domain/topical/components/theme-header';
 import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
@@ -76,7 +77,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               .sort((a, b) => a.index - b.index)
               .map((theme) => {
                 return (
-                  <Box spacing={{ _: 4, md: 5 }} key={theme.index}>
+                  <Box key={theme.index}>
+                    <Box marginBottom={4}>
+                      <ThemeHeader
+                        title={theme.title}
+                        dynamicSubtitle={theme.dynamicSubtitle}
+                        icon={theme.icon}
+                      />
+                    </Box>
                     <Box
                       display="grid"
                       gridTemplateColumns={{
@@ -86,6 +94,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       }}
                       gridColumnGap={{ _: 4, md: 5 }}
                       gridRowGap={{ _: 4, md: 5 }}
+                      marginBottom={5}
                     >
                       {theme.themeTiles
                         .sort((a, b) => a.index - b.index)
@@ -106,6 +115,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   </Box>
                 );
               })}
+
+            <Box marginBottom={4}>
+              <ThemeHeader
+                title={selectedTopicalData.measures.title}
+                dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
+                icon={selectedTopicalData.measures.icon}
+              />
+            </Box>
             <Box
               py={4}
               display="grid"

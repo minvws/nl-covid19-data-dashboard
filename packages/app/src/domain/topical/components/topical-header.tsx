@@ -2,10 +2,10 @@ import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { Markdown } from '~/components/markdown';
 
-export interface TopicalDynamicDescription {
+type TopicalDynamicDescription = {
   index: number;
   content: string;
-}
+};
 
 interface TopicalHeaderProps {
   title: string;
