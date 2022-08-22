@@ -29,7 +29,7 @@ import {
   VaccineCoverageToggleTile,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getLinkParts,
@@ -53,8 +53,8 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'vaccine_coverage_per_age_group',
@@ -62,17 +62,18 @@ const pageMetrics = [
   'booster_coverage',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textNl: siteText.pages.vaccinations_page.nl,
+  textVr: siteText.pages.vaccinations_page.vr,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textNl: siteText.pages.vaccinations_page.nl,
-        textVr: siteText.pages.vaccinations_page.vr,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(
     'vaccine_coverage_per_age_group',
@@ -134,7 +135,10 @@ export const VaccinationsVrPage = (
 
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
-  const { textNl, textVr } = pageText;
+  const { textNl, textVr } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const metadata = {
     ...textVr.metadata,

@@ -5,7 +5,7 @@ import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -16,21 +16,23 @@ import {
   getLokalizeTexts,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
 };
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.measures_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.measures_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetContent<MaatregelenData>((context) => {
     const { locale } = context;
@@ -60,7 +62,10 @@ export const getStaticProps = createGetStaticProps(
 
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
-  const { metadataTexts, textNl } = pageText;
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const { lockdown } = content;
 

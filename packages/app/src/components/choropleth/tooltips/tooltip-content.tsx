@@ -1,4 +1,4 @@
-import { Locatie } from '@corona-dashboard/icons';
+import { Location } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -25,7 +25,7 @@ export function TooltipContent(props: IProps) {
       <TooltipHeader href={link}>
         <Text variant="choroplethTooltipHeader">
           <StyledLocationIcon>
-            <Locatie />
+            <Location />
           </StyledLocationIcon>
           {title}
         </Text>

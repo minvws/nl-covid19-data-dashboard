@@ -1,4 +1,4 @@
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowIconLeft } from '~/components/arrow-icon';
@@ -73,7 +73,7 @@ export function TopicalSectionHeader({
               <Box mb={'2px'}>
                 <LinkWithIcon
                   href={link.href}
-                  icon={<Chevron />}
+                  icon={<ChevronRight />}
                   iconPlacement="right"
                 >
                   {link.text}

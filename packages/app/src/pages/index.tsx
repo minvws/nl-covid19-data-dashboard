@@ -10,11 +10,11 @@ import {
 } from '@corona-dashboard/common';
 import {
   Arts,
-  Chart,
-  Chevron,
+  BarChart,
+  ChevronRight,
   Vaccinaties,
   Ziekenhuis,
-  RioolwaterMonitoring,
+  Rioolvirus,
 } from '@corona-dashboard/icons';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
@@ -171,7 +171,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    choropleth,
+    content,
+    lastGenerated,
+  } = props;
 
   const dataSewerTotal = data.sewer;
   const dataICTotal = data.intensive_care_nice;
@@ -182,7 +188,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
 
   const { hospitalText, intensiveCareText, textNl, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
 
@@ -362,7 +368,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.intensiveCareOpnames()}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {textNl.mini_trend_tiles.ic_opnames.read_more_link}
@@ -442,7 +448,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.ziekenhuisopnames()}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {
@@ -510,14 +516,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.nl.rioolwater()}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {textNl.mini_trend_tiles.sewer.read_more_link}
                       </LinkWithIcon>
                     </>
                   }
-                  icon={<RioolwaterMonitoring />}
+                  icon={<Rioolvirus />}
                   values={dataSewerTotal.values}
                   seriesConfig={[
                     {
@@ -574,7 +580,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       </Text>
                       <LinkWithIcon
                         href={reverseRouter.nl.vaccinaties()}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {textNl.mini_trend_tiles.vaccinatiegraad.read_more_link}
@@ -604,7 +610,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <CollapsibleButton
               label={textShared.overview_links_header}
-              icon={<Chart />}
+              icon={<BarChart />}
             >
               <Sitemap
                 quickLinksHeader={textNl.quick_links.header}

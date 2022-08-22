@@ -3,7 +3,7 @@ import {
   NlTestedOverallValue,
   TimeframeOptionsList,
 } from '@corona-dashboard/common';
-import { Test } from '@corona-dashboard/icons';
+import { Stap1Thuisbezoek } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -26,7 +26,7 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Layout, NlLayout } from '~/domain/layout';
 import { GNumberBarChartTile, InfectedPerAgeGroup } from '~/domain/tested';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -54,6 +54,7 @@ import {
   useReverseRouter,
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'g_number',
@@ -62,16 +63,17 @@ const pageMetrics = [
   'tested_per_age_group',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.positive_tests_page.nl,
+  textShared: siteText.pages.positive_tests_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.positive_tests_page.nl,
-        textShared: siteText.pages.positive_tests_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.tested_ggd__infected_percentage_moving_average',
@@ -159,7 +161,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
 
-  const { metadataTexts, textNl, textShared } = pageText;
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedGgdGraph, setSelectedGgdGraph] = useState<string>(
@@ -187,7 +190,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               commonTexts.sidebar.metrics.positive_tests.title
             }
             title={textNl.titel}
-            icon={<Test />}
+            icon={<Stap1Thuisbezoek />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
@@ -235,10 +238,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected',
                     label: textShared.labels.infected,
                     color: colors.data.primary,
+                    yAxisExceptionValues: [1644318000],
                   },
                 ]}
                 dataOptions={{
-                  forcedMaximumValue: 150000,
                   outOfBoundsConfig: {
                     label: textShared.labels.infected_out_of_bounds,
                     tooltipLabel: textShared.tooltip_labels.annotations,

@@ -1,8 +1,8 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
-  GehandicaptenZorg,
-  Locatie,
+  Gehandicaptenzorg,
+  Location,
 } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -20,7 +20,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -45,23 +45,24 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['disability_care'];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  caterogyTexts: {
+    category: siteText.common.nationaal_layout.headings.kwetsbare_groepen,
+    screenReaderCategory: siteText.common.sidebar.metrics.disabled_care.title,
+  },
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.disability_care_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        caterogyTexts: {
-          category: siteText.common.nationaal_layout.headings.kwetsbare_groepen,
-          screenReaderCategory:
-            siteText.common.sidebar.metrics.disabled_care.title,
-        },
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        textNl: siteText.pages.disability_care_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.disability_care__newly_infected_people',
@@ -109,7 +110,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { caterogyTexts, metadataTexts, textNl } = pageText;
+  const { caterogyTexts, metadataTexts, textNl } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -127,7 +129,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             category={caterogyTexts.category}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.positief_geteste_personen.titel}
-            icon={<GehandicaptenZorg />}
+            icon={<Gehandicaptenzorg />}
             description={textNl.positief_geteste_personen.pagina_toelichting}
             metadata={{
               datumsText: textNl.positief_geteste_personen.datums,
@@ -222,7 +224,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             id="besmette-locaties"
             title={textNl.besmette_locaties.titel}
-            icon={<Locatie />}
+            icon={<Location />}
             description={textNl.besmette_locaties.pagina_toelichting}
             metadata={{
               datumsText: textNl.besmette_locaties.datums,

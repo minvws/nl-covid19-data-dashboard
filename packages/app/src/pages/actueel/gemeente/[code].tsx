@@ -9,10 +9,10 @@ import {
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
 import {
-  Chevron,
+  ChevronRight,
   Vaccinaties,
   Ziekenhuis,
-  RioolwaterMonitoring,
+  Rioolvirus,
 } from '@corona-dashboard/icons';
 import { useRouter } from 'next/router';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -39,7 +39,7 @@ import { useAgegroupLabels } from '~/domain/vaccine/logic/use-agegroup-labels';
 import { useIntl } from '~/intl';
 import { getWarning } from '~/queries/get-elements-query';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -62,21 +62,23 @@ import {
   replaceComponentsInText,
   getAverageSplitPoints,
 } from '~/utils';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  hospitalText: siteText.pages.hospital_page.nl,
+  positiveTestsText: siteText.pages.positive_tests_page.shared,
+  textGm: siteText.pages.topical_page.gm,
+  textShared: siteText.pages.topical_page.shared,
+  sewerText: siteText.pages.sewer_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        hospitalText: siteText.pages.hospital_page.nl,
-        positiveTestsText: siteText.pages.positive_tests_page.shared,
-        textGm: siteText.pages.topical_page.gm,
-        textShared: siteText.pages.topical_page.shared,
-        sewerText: siteText.pages.sewer_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   (context) => {
     const data = selectGmData(
@@ -158,7 +160,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { commonTexts, ...formatters } = useIntl();
-  const { hospitalText, textGm, sewerText, textShared } = pageText;
+  const { hospitalText, textGm, sewerText, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const gmCode = router.query.code as string;
 
@@ -311,7 +314,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {
@@ -382,14 +385,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       />
                       <LinkWithIcon
                         href={reverseRouter.gm.rioolwater(gmCode)}
-                        icon={<Chevron />}
+                        icon={<ChevronRight />}
                         iconPlacement="right"
                       >
                         {textGm.mini_trend_tiles.sewer.read_more_link}
                       </LinkWithIcon>
                     </>
                   }
-                  icon={<RioolwaterMonitoring />}
+                  icon={<Rioolvirus />}
                   values={dataSewerTotal.values}
                   seriesConfig={[
                     {
@@ -430,7 +433,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         </Text>
                         <LinkWithIcon
                           href={reverseRouter.gm.vaccinaties(gmCode)}
-                          icon={<Chevron />}
+                          icon={<ChevronRight />}
                           iconPlacement="right"
                         >
                           {

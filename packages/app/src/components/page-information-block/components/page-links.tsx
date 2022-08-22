@@ -1,5 +1,5 @@
 import {
-  ChevronLarge,
+  ChevronRight,
   External as ExternalIcon,
 } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
@@ -44,7 +44,7 @@ export function PageLinks({ links }: pageLinksProps) {
             ) : (
               <Link href={link.href} passHref>
                 <Anchor underline="hover" ariaLabel={link.title}>
-                  <TitleWithIcon title={link.title} icon={<ChevronLarge />} />
+                  <TitleWithIcon title={link.title} icon={<ChevronRight />} />
                 </Anchor>
               </Link>
             )}
@@ -94,12 +94,12 @@ const ListItem = styled.li(
 const IconContainer = styled.span(
   css({
     position: 'absolute',
-    right: -20,
+    right: -13,
     top: 0,
 
     svg: {
-      width: 24,
-      height: 24,
+      width: 11,
+      height: 11,
     },
   })
 );

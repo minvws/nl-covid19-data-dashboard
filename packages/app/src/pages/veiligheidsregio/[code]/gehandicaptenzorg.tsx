@@ -1,8 +1,8 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
 import {
   Coronavirus,
-  GehandicaptenZorg,
-  Locatie,
+  Gehandicaptenzorg,
+  Location,
 } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -16,7 +16,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -39,20 +39,22 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-export { getStaticPaths } from '~/static-paths/vr';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textVr: siteText.pages.disability_care_page.vr,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
+export { getStaticPaths } from '~/static-paths/vr';
 
 const pageMetrics = ['disability_care'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textVr: siteText.pages.disability_care_page.vr,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(
     'disability_care',
@@ -93,7 +95,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { commonTexts } = useIntl();
-  const { textVr } = pageText;
+  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
@@ -131,7 +136,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 safetyRegion: vrName,
               }
             )}
-            icon={<GehandicaptenZorg />}
+            icon={<Gehandicaptenzorg />}
             description={replaceVariablesInText(
               textVr.positief_geteste_personen.pagina_toelichting,
               {
@@ -233,7 +238,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textVr.besmette_locaties.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Locatie />}
+            icon={<Location />}
             description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
               datumsText: textVr.besmette_locaties.datums,

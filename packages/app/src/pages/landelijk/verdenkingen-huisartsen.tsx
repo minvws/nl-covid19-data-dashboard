@@ -14,7 +14,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -24,15 +24,17 @@ import {
   getLokalizeTexts,
   selectNlData,
 } from '~/static-props/get-data';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
     'difference.doctor__covid_symptoms_per_100k',
@@ -44,7 +46,10 @@ export const getStaticProps = createGetStaticProps(
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, lastGenerated } = props;
   const lastValue = data.doctor.last_value;
-  const { metadataTexts } = pageText;
+  const { metadataTexts } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
   const { commonTexts } = useIntl();
   const text = commonTexts.verdenkingen_huisartsen;
 

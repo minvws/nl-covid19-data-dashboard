@@ -1,5 +1,5 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Test } from '@corona-dashboard/icons';
+import { Stap1Thuisbezoek } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -23,7 +23,7 @@ import { gmCodesByVrCode } from '~/data';
 import { Layout, VrLayout } from '~/domain/layout';
 import { GNumberBarChartTile } from '~/domain/tested';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -50,22 +50,23 @@ import {
   replaceVariablesInText,
   useReverseRouter,
 } from '~/utils';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textVr: siteText.pages.positive_tests_page.vr,
+  textShared: siteText.pages.positive_tests_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textVr: siteText.pages.positive_tests_page.vr,
-        textShared: siteText.pages.positive_tests_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(
     'difference.tested_ggd__infected_percentage_moving_average',
@@ -157,7 +158,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     'GGD_infected_percentage_over_time_chart'
   );
 
-  const { textVr, textShared } = pageText;
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
@@ -189,7 +193,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Test />}
+            icon={<Stap1Thuisbezoek />}
             description={textVr.pagina_toelichting}
             metadata={{
               datumsText: textVr.datums,
@@ -239,6 +243,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'infected',
                     label: textShared.labels.infected,
                     color: colors.data.primary,
+                    yAxisExceptionValues: [1644318000],
                   },
                 ]}
                 dataOptions={{

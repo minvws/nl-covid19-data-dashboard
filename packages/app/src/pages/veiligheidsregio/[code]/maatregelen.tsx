@@ -8,7 +8,7 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -21,6 +21,13 @@ import {
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textVr: siteText.pages.measures_page.vr,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -31,12 +38,7 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textVr: siteText.pages.measures_page.vr,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(),
   createGetContent<MaatregelenData>((context) => {
@@ -70,7 +72,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, vrName, lastGenerated } = props;
 
   const { commonTexts } = useIntl();
-  const { textVr } = pageText;
+  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
   type VRCode = keyof typeof textVr.urls;
 
   const { lockdown } = content;

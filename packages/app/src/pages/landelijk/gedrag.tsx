@@ -1,4 +1,4 @@
-import { Gedrag } from '@corona-dashboard/icons';
+import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
@@ -18,7 +18,7 @@ import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-look
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -37,6 +37,7 @@ import {
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'behavior',
@@ -44,16 +45,17 @@ const pageMetrics = [
   'behavior_per_age_group',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  text: siteText.pages.behavior_page,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
-        metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-        text: siteText.pages.behavior_page,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
   createGetChoroplethData({
@@ -86,7 +88,8 @@ export default function BehaviorPage(
 
   const { formatNumber, formatDateFromSeconds, formatPercentage, locale } =
     useIntl();
-  const { caterogyTexts, metadataTexts, text } = pageText;
+  const { caterogyTexts, metadataTexts, text } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -142,7 +145,7 @@ export default function BehaviorPage(
           <PageInformationBlock
             category={caterogyTexts}
             title={text.nl.pagina.titel}
-            icon={<Gedrag />}
+            icon={<Bevolking />}
             description={text.nl.pagina.toelichting}
             metadata={{
               datumsText: text.nl.datums,

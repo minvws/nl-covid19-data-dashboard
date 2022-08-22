@@ -16,7 +16,7 @@ import {
 import { thresholds } from '~/components/choropleth/logic';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
 import { Layout, GmLayout } from '~/domain/layout';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   AgeGroup,
   AgeGroupSelect,
@@ -52,8 +52,8 @@ import {
   useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = [
   'vaccine_coverage_per_age_group',
@@ -61,17 +61,18 @@ const pageMetrics = [
   'booster_coverage',
 ];
 
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textGm: siteText.pages.vaccinations_page.gm,
+  textNl: siteText.pages.vaccinations_page.nl,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (commonTexts) => ({
-        textGm: commonTexts.pages.vaccinations_page.gm,
-        textNl: commonTexts.pages.vaccinations_page.nl,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectGmData(
     'code',
@@ -137,7 +138,10 @@ export const VaccinationsGmPage = (
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
 
-  const { textGm, textNl } = pageText;
+  const { textGm, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const metadata = {
     ...textGm.metadata,
