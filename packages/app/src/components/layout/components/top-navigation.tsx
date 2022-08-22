@@ -65,7 +65,7 @@ export function TopNavigation() {
                   router.pathname.startsWith('/actueel')
                 }
               >
-                {commonTexts.nav.links.Maatregelen}
+                {commonTexts.nav.links.maatregelen}
               </NavItem>
               <NavItem
                 href={reverseRouter.nl.index()}
