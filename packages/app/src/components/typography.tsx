@@ -73,7 +73,7 @@ export const Anchor = styled.a<AnchorProps>(
   (props) =>
     props.display &&
     css({
-      display: 'inline-flex',
+      display: props.display,
     }),
   (props) => props.width && css({ width: props.width })
 );

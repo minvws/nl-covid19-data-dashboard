@@ -39,7 +39,7 @@ import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 import {
-  Chevron,
+  ChevronRight,
   Download,
   External as ExternalLinkIcon,
 } from '@corona-dashboard/icons';
@@ -324,17 +324,17 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   return isAbsoluteUrl(mark.href) ? (
     <ExternalLink
       href={mark.href}
-      display={'inline-flex'}
-      width={'max-content'}
+      width="max-content"
+      display="inline-block"
       underline
     >
       {children}
-      <ExternalLinkIcon width={24} height={24} />
+      <ExternalLinkIcon width={20} height={11} />
     </ExternalLink>
   ) : (
     <Link href={mark.href} passHref locale={locale}>
       <a css={css({ textDecoration: 'underline' })}>
-        {children} <Chevron width={10} height={10} />
+        {children} <ChevronRight width={10} height={10} />
       </a>
     </Link>
   );

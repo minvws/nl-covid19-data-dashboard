@@ -31,13 +31,7 @@ export function AnchorTile({
       </Content>
 
       <LinkContainer>
-        {!external ? (
-          <Link href={href} passHref>
-            <StyledAnchor>
-              <span>{label}</span>
-            </StyledAnchor>
-          </Link>
-        ) : (
+        {external ? (
           <ExternalLink href={href}>
             <ExternalLinkIconContainer>
               <IconContainer>
@@ -46,6 +40,12 @@ export function AnchorTile({
               {label}
             </ExternalLinkIconContainer>
           </ExternalLink>
+        ) : (
+          <Link href={href} passHref>
+            <StyledAnchor>
+              <span>{label}</span>
+            </StyledAnchor>
+          </Link>
         )}
       </LinkContainer>
     </Container>
