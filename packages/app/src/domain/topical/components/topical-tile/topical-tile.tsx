@@ -9,7 +9,6 @@ import DynamicIcon from '~/components/get-icon-by-name';
 import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
-import { isDefined } from 'ts-is-present';
 
 interface IconWrapperProps {
   iconColor: string;
@@ -42,7 +41,7 @@ export function TopicalTile({
 }: TopicalTileProps) {
   return (
     <Box
-      as={cta ? 'a' : 'div'}
+      as="a"
       href={cta?.href}
       spacing={3}
       borderColor={colors.gray}
@@ -95,7 +94,7 @@ export function TopicalTile({
                 })}
               >
                 {title}
-                {isDefined(trendIcon) && trendIcon !== null && (
+                {trendIcon && (
                   <IconWrapper iconColor={trendIcon.color}>
                     {trendIcon.direction === 'DOWN' && <Down />}
                     {trendIcon.direction === 'UP' && <Up />}
@@ -117,7 +116,7 @@ export function TopicalTile({
           </Box>
         </Box>
 
-        {isDefined(cta) && cta !== null && (
+        {cta ? (
           <Box
             display="flex"
             justifyContent={'center'}
@@ -137,7 +136,7 @@ export function TopicalTile({
               {cta.label}
             </LinkWithIcon>
           </Box>
-        )}
+        ) : null}
       </>
     </Box>
   );
