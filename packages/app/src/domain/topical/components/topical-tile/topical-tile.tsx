@@ -40,19 +40,27 @@ export function TopicalTile({
   dynamicDescription,
   cta,
 }: TopicalTileProps) {
+  const containtsLink =
+    isDefined(cta) && cta !== null ? { as: 'a', href: cta.href } : {};
   return (
-    <a href={isDefined(cta) && cta !== null ? cta.href : '#'}>
-      <Box
-        as="a"
-        spacing={3}
-        borderColor={colors.gray}
-        borderWidth="1px"
-        borderStyle="solid"
-        position="relative"
-        display="flex"
-        flexDirection={'column'}
-        justifyContent={'space-between'}
-      >
+    <Box
+      {...containtsLink}
+      spacing={3}
+      borderColor={colors.gray}
+      borderWidth="1px"
+      borderStyle="solid"
+      position="relative"
+      display="flex"
+      flexDirection={'column'}
+      justifyContent={'space-between'}
+      css={css({
+        '&:hover .topipical-tile': {
+          bg: colors.blue,
+          color: colors.white,
+        },
+      })}
+    >
+      <>
         <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
           <Box
             display="flex"
@@ -110,12 +118,9 @@ export function TopicalTile({
             bg={colors.lightBlue}
             color={colors.blue}
             padding={3}
+            className="topipical-tile"
             css={css({
               transition: 'background .1s ease-in-out',
-              '&:hover': {
-                bg: colors.blue,
-                color: colors.white,
-              },
             })}
           >
             <LinkWithIcon
@@ -127,8 +132,8 @@ export function TopicalTile({
             </LinkWithIcon>
           </Box>
         )}
-      </Box>
-    </a>
+      </>
+    </Box>
   );
 }
 
