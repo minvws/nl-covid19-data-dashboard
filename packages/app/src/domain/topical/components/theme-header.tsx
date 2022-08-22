@@ -19,14 +19,14 @@ export function ThemeHeader({
 }: TopicalHeaderProps) {
   return (
     <Box spacing={3}>
-      <Heading level={2}>
+      <Box display="flex" justifyContent="start" alignItems="center">
         {icon !== null && (
           <ThemaIcon>
             <DynamicIcon name={icon} />
           </ThemaIcon>
         )}
-        {title}
-      </Heading>
+        <Heading level={2}>{title}</Heading>
+      </Box>
       <Markdown content={dynamicSubtitle} />
     </Box>
   );
@@ -34,9 +34,9 @@ export function ThemeHeader({
 
 const ThemaIcon = styled.span(
   css({
-    display: 'inline',
-    width: '20px',
-    minWidth: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    width: '30px',
     marginRight: '15px;',
   })
 );
