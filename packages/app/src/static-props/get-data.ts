@@ -27,6 +27,7 @@ import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
 import { languages } from '~/locale';
+import { colors } from '@corona-dashboard/common';
 
 // This type takes an object and merges unions that sit at its keys into a single object.
 // Only has support for one level deep.
@@ -238,7 +239,10 @@ export function selectTopicalData(locale: keyof Languages) {
         index: tile.index,
         title: tile.title[localeKey],
         dynamicDescription: tile.dynamicDescription[localeKey],
-        trendIcon: tile.trendIcon,
+        trendIcon: tile.trendIcon && {
+          direction: tile.trendIcon.direction,
+          color: tile.trendIcon.color === 'GREEN' ? colors.data.multiseries.turquoise : tile.trendIcon.color === 'RED' ? colors.data.gradient.red : 'currentColor'
+        },
         tileIcon: tile.tileIcon,
         cta: tile.cta
           ? {
