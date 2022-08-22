@@ -6,6 +6,7 @@ import {
   TwoKpiSection,
   Metadata,
   Message,
+  MetadataProps,
 } from '~/components';
 import { Box } from '~/components/base';
 
@@ -24,31 +25,23 @@ type TextTypes = {
 
 interface VaccinationsShotKpiSectionProps {
   text: TextTypes;
-  dateUnix: number;
   value: number;
+  metadata: MetadataProps;
 }
 
 export function VaccinationsShotKpiSection({
   text,
-  dateUnix,
   value,
+  metadata,
 }: VaccinationsShotKpiSectionProps) {
   const { formatNumber } = useIntl();
-
   return (
     <TwoKpiSection hasBorder hasPadding>
       <KpiTile title={text.title} hasNoBorder>
         <KpiValue text={formatNumber(value)} />
         <Markdown content={text.description} />
         {text.warning && <Message variant="warning">{text.warning}</Message>}
-        <Metadata
-          date={dateUnix}
-          datumsText={text.datums}
-          source={{
-            href: text.sources.href ? text.sources.href : '',
-            text: text.sources.text,
-          }}
-        />
+        <Metadata {...metadata} isTileFooter />
       </KpiTile>
       <Box />
     </TwoKpiSection>
