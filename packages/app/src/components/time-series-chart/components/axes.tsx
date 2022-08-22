@@ -282,6 +282,17 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
   /**
+   * Returns the dx value (indicates a shift along the x-axis on the position of
+   * an element or its content) for a tick value label. Within the current logic,
+   * graphs with a single tick value render the tick's label out of the bounds of
+   * the graph (hence -50% places the tick's label back in the absolute center)
+   * of the graph.
+   */
+  const getDx = () => {
+    return tickValues.length === 1 ? '-50%' : undefined;
+  };
+
+  /**
    * Using anchor middle the line marker label will fall nicely on top
    * of the axis label.
    *
@@ -290,7 +301,9 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
    */
   const getAnchor = (x: NumberValue) => {
     return x === tickValues[0] && isLongStartLabel
-      ? 'start'
+      ? tickValues.length === 1
+        ? 'middle'
+        : 'start'
       : x === tickValues[tickValues.length - 1] && isLongEndLabel
       ? 'end'
       : 'middle';
@@ -339,6 +352,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         tickLabelProps={(x) => ({
           fill: colors.data.axisLabels,
           fontSize: 12,
+          dx: getDx(),
           dy: '-0.5px',
           textAnchor: getAnchor(x),
         })}
