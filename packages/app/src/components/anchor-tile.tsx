@@ -31,25 +31,33 @@ export function AnchorTile({
       </Content>
 
       <LinkContainer>
-        {!external && (
+        {!external ? (
           <Link href={href} passHref>
             <StyledAnchor>
               <span>{label}</span>
             </StyledAnchor>
           </Link>
-        )}
-        {external && (
-          <>
-            <IconContainer>
-              <ExternalLinkIcon />
-            </IconContainer>
-            <ExternalLink href={href}>{label}</ExternalLink>
-          </>
+        ) : (
+          <ExternalLink href={href}>
+            <ExternalLinkIconContainer>
+              <IconContainer>
+                <ExternalLinkIcon />
+              </IconContainer>
+              {label}
+            </ExternalLinkIconContainer>
+          </ExternalLink>
         )}
       </LinkContainer>
     </Container>
   );
 }
+
+const ExternalLinkIconContainer = styled.div(
+  css({
+    display: 'flex',
+    alignItems: 'center',
+  })
+);
 
 const Container = styled.article(
   css({
