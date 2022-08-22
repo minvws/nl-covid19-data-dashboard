@@ -116,34 +116,37 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 );
               })}
 
-            <Box marginBottom={4}>
-              <ThemeHeader
-                title={selectedTopicalData.measures.title}
-                dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
-                icon={selectedTopicalData.measures.icon}
-              />
-            </Box>
-            <Box
-              py={4}
-              display="grid"
-              gridTemplateColumns={{
-                _: 'repeat(1, 1fr)',
-                xs: 'repeat(3, 1fr)',
-              }}
-              gridColumnGap={{ _: 4, md: 5 }}
-              gridRowGap={{ _: 4, md: 5 }}
-            >
-              {selectedTopicalData.measures.measureTiles
-                .sort((a, b) => a.index - b.index)
-                .map((measureTile) => {
-                  return (
-                    <MeasurementTile
-                      icon={measureTile.icon}
-                      title={measureTile.title}
-                      key={measureTile.index}
-                    />
-                  );
-                })}
+            <Box>
+              <Box marginBottom={4}>
+                <ThemeHeader
+                  title={selectedTopicalData.measures.title}
+                  dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
+                  icon={selectedTopicalData.measures.icon}
+                />
+              </Box>
+              <Box
+                display="grid"
+                gridTemplateColumns={{
+                  _: 'repeat(1, 1fr)',
+                  xs: 'repeat(2, 1fr)',
+                  md: 'repeat(3, 1fr)',
+                }}
+                gridColumnGap={{ _: 4, md: 5 }}
+                gridRowGap={{ _: 4, md: 5 }}
+                marginBottom={5}
+              >
+                {selectedTopicalData.measures.measureTiles
+                  .sort((a, b) => a.index - b.index)
+                  .map((measureTile) => {
+                    return (
+                      <MeasurementTile
+                        icon={measureTile.icon}
+                        title={measureTile.title}
+                        key={measureTile.index}
+                      />
+                    );
+                  })}
+              </Box>
             </Box>
           </Box>
         </MaxWidth>
