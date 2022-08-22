@@ -27,6 +27,7 @@ export function MeasurementTile({ icon, title }: MeasurementTileProps) {
       <Box
         display="flex"
         justifyContent={'flex-start'}
+        alignItems="center"
         textAlign={'left'}
         p={'1.5rem'}
       >
