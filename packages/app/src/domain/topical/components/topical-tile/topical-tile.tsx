@@ -10,6 +10,7 @@ import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { isDefined } from 'ts-is-present';
+import { Link } from '~/utils/link';
 
 interface IconWrapperProps {
   iconColor: string;
@@ -17,7 +18,7 @@ interface IconWrapperProps {
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN';
-  color: 'GREEN' | 'RED';
+  color: string;
 } | null;
 
 type Cta = {
@@ -40,100 +41,101 @@ export function TopicalTile({
   dynamicDescription,
   cta,
 }: TopicalTileProps) {
-  const containtsLink =
-    isDefined(cta) && cta !== null ? { as: 'a', href: cta.href } : {};
   return (
-    <Box
-      {...containtsLink}
-      spacing={3}
-      borderColor={colors.gray}
-      borderWidth="1px"
-      borderStyle="solid"
-      position="relative"
-      display="flex"
-      flexDirection={'column'}
-      justifyContent={'space-between'}
-      css={css({
-        '&:hover .topipical-tile': {
-          bg: colors.blue,
-          color: colors.white,
-        },
-      })}
-    >
-      <>
-        <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
-          <Box
-            display="flex"
-            flexDirection={{
-              _: 'row-reverse',
-              xs: 'column',
-              sm: 'row-reverse',
-            }}
-            justifyContent={'space-between'}
-          >
-            <KpiIcon>
-              <DynamicIcon name={tileIcon} />
-            </KpiIcon>
-
-            <Box display="block" fontSize={{ _: 6, xs: 7 }} flexShrink={0}>
-              <Heading
-                level={3}
-                color={colors.blue}
-                css={css({
-                  display: 'flex',
-                  justifyContent: 'start',
-                  paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
-                  paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
-                  paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
-                  marginBottom: 3,
-                })}
-              >
-                {title}
-                {isDefined(trendIcon) && trendIcon !== null && (
-                  <IconWrapper iconColor={trendIcon.color}>
-                    {trendIcon.direction === 'DOWN' && <Down />}
-                    {trendIcon.direction === 'UP' && <Up />}
-                  </IconWrapper>
-                )}
-              </Heading>
-            </Box>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection={'column'}
-            justifyContent={'start'}
-            textAlign={'left'}
-            p={{ _: 3, xs: 4 }}
-          >
-            <Box display="flex" alignItems={'center'}>
-              <Markdown content={dynamicDescription} />
-            </Box>
-          </Box>
-        </Box>
-
-        {isDefined(cta) && cta !== null && (
-          <Box
-            display="flex"
-            justifyContent={'center'}
-            bg={colors.lightBlue}
-            color={colors.blue}
-            padding={3}
-            className="topipical-tile"
-            css={css({
-              transition: 'background .1s ease-in-out',
-            })}
-          >
-            <LinkWithIcon
-              href={cta.href}
-              icon={<ChevronRight />}
-              iconPlacement="right"
+    <Link href={cta ? cta.href : '#'} passHref>
+      <Box
+        as={cta ? 'a' : 'div'}
+        spacing={3}
+        borderColor={colors.gray}
+        borderWidth="1px"
+        borderStyle="solid"
+        position="relative"
+        display="flex"
+        flexDirection={'column'}
+        justifyContent={'space-between'}
+        color="#000000"
+        css={css({
+          '&:hover .topipical-tile': {
+            bg: colors.blue,
+            color: colors.white,
+          },
+        })}
+      >
+        <>
+          <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
+            <Box
+              display="flex"
+              flexDirection={{
+                _: 'row-reverse',
+                xs: 'column',
+                sm: 'row-reverse',
+              }}
+              justifyContent={'space-between'}
             >
-              {cta.label}
-            </LinkWithIcon>
+              <KpiIcon>
+                <DynamicIcon name={tileIcon} />
+              </KpiIcon>
+
+              <Box display="block" fontSize={{ _: 6, xs: 7 }} flexShrink={0}>
+                <Heading
+                  level={3}
+                  color={colors.blue}
+                  css={css({
+                    display: 'flex',
+                    justifyContent: 'start',
+                    paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
+                    paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
+                    paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
+                    marginBottom: 3,
+                  })}
+                >
+                  {title}
+                  {isDefined(trendIcon) && trendIcon !== null && (
+                    <IconWrapper iconColor={trendIcon.color}>
+                      {trendIcon.direction === 'DOWN' && <Down />}
+                      {trendIcon.direction === 'UP' && <Up />}
+                    </IconWrapper>
+                  )}
+                </Heading>
+              </Box>
+            </Box>
+            <Box
+              display="flex"
+              flexDirection={'column'}
+              justifyContent={'start'}
+              textAlign={'left'}
+              p={{ _: 3, xs: 4 }}
+            >
+              <Box display="flex" alignItems={'center'}>
+                <Markdown content={dynamicDescription} />
+              </Box>
+            </Box>
           </Box>
-        )}
-      </>
-    </Box>
+
+          {isDefined(cta) && cta !== null && (
+            <Box
+              display="flex"
+              justifyContent={'center'}
+              bg={colors.lightBlue}
+              color={colors.blue}
+              padding={3}
+              className="topipical-tile"
+              css={css({
+                transition: 'background .1s ease-in-out',
+              })}
+            >
+              <LinkWithIcon
+                href={cta.href}
+                icon={<ChevronRight />}
+                iconPlacement="right"
+              >
+                {cta.label}
+              </LinkWithIcon>
+            </Box>
+          )}
+        </>
+      </Box>
+    </Link>
   );
 }
 

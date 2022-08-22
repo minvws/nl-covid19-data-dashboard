@@ -172,8 +172,6 @@ const ButtonBox = styled.span((x: buttonBoxProps) =>
             },
           },
         })
-      : {
-          color: 'inherit',
-        },
+      : {},
   })
 );
