@@ -1,7 +1,6 @@
 import { Box } from '~/components/base';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
 import { Markdown } from '~/components/markdown';
@@ -52,7 +51,8 @@ const KpiIcon = styled.div(
   css({
     color: colors.blue,
     display: 'flex',
-    minWidth: asResponsiveArray(40),
+    minWidth: 40,
+    width: 40,
     marginRight: 3,
   })
 );
