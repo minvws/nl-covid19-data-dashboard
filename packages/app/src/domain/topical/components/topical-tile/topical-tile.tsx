@@ -55,8 +55,11 @@ export function TopicalTile({
         justifyContent={'space-between'}
         color="#000000"
         css={css({
-          '&:hover .topipical-tile': {
+          '&:hover .topical-tile-cta': {
             bg: colors.blue,
+          },
+          '&:hover .topical-tile-cta a': {
+            textDecoration: 'underline',
             color: colors.white,
           },
         })}
@@ -119,7 +122,7 @@ export function TopicalTile({
               bg={colors.lightBlue}
               color={colors.blue}
               padding={3}
-              className="topipical-tile"
+              className="topical-tile-cta"
               css={css({
                 transition: 'background .1s ease-in-out',
               })}
