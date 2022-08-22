@@ -168,7 +168,7 @@ const ButtonBox = styled.span((x: buttonBoxProps) =>
               outline: '#000000 dotted 2px',
             },
             '&:hover, &:focus': {
-              textDecoration: 'none',
+              textDecoration: 'underline',
             },
           },
         })

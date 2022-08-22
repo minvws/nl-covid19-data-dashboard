@@ -58,6 +58,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const tileGridTemplate = {
+    _: 'repeat(1, 1fr)',
+    sm: 'repeat(2, 1fr)',
+    md: 'repeat(3, 1fr)',
+  };
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg={colors.white}>
@@ -87,11 +93,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     </Box>
                     <Box
                       display="grid"
-                      gridTemplateColumns={{
-                        _: 'repeat(1, 1fr)',
-                        xs: 'repeat(2, 1fr)',
-                        md: 'repeat(3, 1fr)',
-                      }}
+                      gridTemplateColumns={tileGridTemplate}
                       gridColumnGap={{ _: 4, md: 5 }}
                       gridRowGap={{ _: 4, md: 5 }}
                       marginBottom={{ _: 4, sm: 5 }}
@@ -126,11 +128,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
               <Box
                 display="grid"
-                gridTemplateColumns={{
-                  _: 'repeat(1, 1fr)',
-                  xs: 'repeat(2, 1fr)',
-                  md: 'repeat(3, 1fr)',
-                }}
+                gridTemplateColumns={tileGridTemplate}
                 gridColumnGap={{ _: 4, md: 5 }}
                 gridRowGap={{ _: 4, md: 5 }}
                 marginBottom={5}
