@@ -74,6 +74,9 @@ export function TopicalTile({
                 sm: 'row-reverse',
               }}
               justifyContent={'space-between'}
+              css={css({
+                gap: 2,
+              })}
             >
               <KpiIcon>
                 <DynamicIcon name={tileIcon} />
@@ -145,10 +148,10 @@ export function TopicalTile({
 const IconWrapper = styled.span<IconWrapperProps>((x) =>
   css({
     color: x.iconColor,
-    display: 'inline',
+    display: 'inline-flex',
     width: '20px',
     minWidth: '20px',
-    marginLeft: '15px;',
+    marginLeft: 2,
   })
 );
 
