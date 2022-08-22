@@ -41,11 +41,7 @@ export function TopicalTile({
   cta,
 }: TopicalTileProps) {
   return (
-    <a
-      href={isDefined(cta) && cta !== null ? cta.href : '#'}
-      passHref
-      locale={false}
-    >
+    <a href={isDefined(cta) && cta !== null ? cta.href : '#'}>
       <Box
         as="a"
         spacing={3}
