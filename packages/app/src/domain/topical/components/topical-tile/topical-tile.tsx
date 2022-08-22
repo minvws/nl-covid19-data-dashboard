@@ -41,80 +41,98 @@ export function TopicalTile({
   cta,
 }: TopicalTileProps) {
   return (
-    <Box
-      spacing={3}
-      borderColor={colors.gray}
-      borderWidth="1px"
-      borderStyle="solid"
-      position="relative"
-      display="flex"
-      flexDirection={'column'}
-      justifyContent={'space-between'}
+    <a
+      href={isDefined(cta) && cta !== null ? cta.href : '#'}
+      passHref
+      locale={false}
     >
-      <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
-        <Box
-          display="flex"
-          flexDirection={{ _: 'row-reverse', xs: 'column', sm: 'row-reverse' }}
-          justifyContent={'space-between'}
-        >
-          <KpiIcon>
-            <DynamicIcon name={tileIcon} />
-          </KpiIcon>
-
-          <Box display="block" fontSize={{ _: 6, xs: 7 }} flexShrink={0}>
-            <Heading
-              level={3}
-              color={colors.blue}
-              css={css({
-                display: 'flex',
-                justifyContent: 'start',
-                paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
-                paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
-                paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
-                marginBottom: 3,
-              })}
-            >
-              {title}
-              {isDefined(trendIcon) && trendIcon !== null && (
-                <IconWrapper iconColor={trendIcon.color}>
-                  {trendIcon.direction === 'DOWN' && <Down />}
-                  {trendIcon.direction === 'UP' && <Up />}
-                </IconWrapper>
-              )}
-            </Heading>
-          </Box>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection={'column'}
-          justifyContent={'start'}
-          textAlign={'left'}
-          p={{ _: 3, xs: 4 }}
-        >
-          <Box display="flex" alignItems={'center'}>
-            <Markdown content={dynamicDescription} />
-          </Box>
-        </Box>
-      </Box>
-
-      {isDefined(cta) && cta !== null && (
-        <Box
-          display="flex"
-          justifyContent={'center'}
-          bg={colors.lightBlue}
-          color={colors.blue}
-          padding={3}
-        >
-          <LinkWithIcon
-            href={cta.href}
-            icon={<ChevronRight />}
-            iconPlacement="right"
+      <Box
+        as="a"
+        spacing={3}
+        borderColor={colors.gray}
+        borderWidth="1px"
+        borderStyle="solid"
+        position="relative"
+        display="flex"
+        flexDirection={'column'}
+        justifyContent={'space-between'}
+      >
+        <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
+          <Box
+            display="flex"
+            flexDirection={{
+              _: 'row-reverse',
+              xs: 'column',
+              sm: 'row-reverse',
+            }}
+            justifyContent={'space-between'}
           >
-            {cta.label}
-          </LinkWithIcon>
+            <KpiIcon>
+              <DynamicIcon name={tileIcon} />
+            </KpiIcon>
+
+            <Box display="block" fontSize={{ _: 6, xs: 7 }} flexShrink={0}>
+              <Heading
+                level={3}
+                color={colors.blue}
+                css={css({
+                  display: 'flex',
+                  justifyContent: 'start',
+                  paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
+                  paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
+                  paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
+                  marginBottom: 3,
+                })}
+              >
+                {title}
+                {isDefined(trendIcon) && trendIcon !== null && (
+                  <IconWrapper iconColor={trendIcon.color}>
+                    {trendIcon.direction === 'DOWN' && <Down />}
+                    {trendIcon.direction === 'UP' && <Up />}
+                  </IconWrapper>
+                )}
+              </Heading>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection={'column'}
+            justifyContent={'start'}
+            textAlign={'left'}
+            p={{ _: 3, xs: 4 }}
+          >
+            <Box display="flex" alignItems={'center'}>
+              <Markdown content={dynamicDescription} />
+            </Box>
+          </Box>
         </Box>
-      )}
-    </Box>
+
+        {isDefined(cta) && cta !== null && (
+          <Box
+            display="flex"
+            justifyContent={'center'}
+            bg={colors.lightBlue}
+            color={colors.blue}
+            padding={3}
+            css={css({
+              transition: 'background .1s ease-in-out',
+              '&:hover': {
+                bg: colors.blue,
+                color: colors.white,
+              },
+            })}
+          >
+            <LinkWithIcon
+              href={cta.href}
+              icon={<ChevronRight />}
+              iconPlacement="right"
+            >
+              {cta.label}
+            </LinkWithIcon>
+          </Box>
+        )}
+      </Box>
+    </a>
   );
 }
 
