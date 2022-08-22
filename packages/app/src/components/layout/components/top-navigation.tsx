@@ -32,9 +32,11 @@ export function TopNavigation() {
       >
         {collapsible.button(
           <NavToggle>
-            {collapsible.isOpen
-              ? <CloseThick heigth="36px" width="36px"/>
-              : <Menu  heigth="36px" width="36px"/>}
+            {collapsible.isOpen ? (
+              <CloseThick heigth="36px" width="36px" />
+            ) : (
+              <Menu heigth="36px" width="36px" />
+            )}
             <VisuallyHidden>
               {collapsible.isOpen
                 ? commonTexts.nav.menu.close_menu
@@ -63,7 +65,7 @@ export function TopNavigation() {
                   router.pathname.startsWith('/actueel')
                 }
               >
-                {commonTexts.nav.links.actueel}
+                {commonTexts.nav.links.Maatregelen}
               </NavItem>
               <NavItem
                 href={reverseRouter.nl.index()}
