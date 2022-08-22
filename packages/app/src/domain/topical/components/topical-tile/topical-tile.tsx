@@ -1,4 +1,5 @@
 import { Box } from '~/components/base';
+import { space } from '~/style/theme';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Heading } from '~/components/typography';
@@ -43,7 +44,7 @@ export function TopicalTile({
     <Box
       as="a"
       href={cta?.href}
-      spacing={3}
+      spacing={4}
       borderColor={colors.gray}
       borderWidth="1px"
       borderStyle="solid"
@@ -68,8 +69,6 @@ export function TopicalTile({
             display="flex"
             flexDirection={{
               _: 'row-reverse',
-              xs: 'column',
-              sm: 'row-reverse',
             }}
             justifyContent={'space-between'}
             css={css({
@@ -109,6 +108,7 @@ export function TopicalTile({
             justifyContent={'start'}
             textAlign={'left'}
             p={{ _: 3, xs: 4 }}
+            paddingBottom={{ _: 0, xs: 0 }}
           >
             <Box display="flex" alignItems={'center'}>
               <Markdown content={dynamicDescription} />
@@ -160,6 +160,6 @@ const KpiIcon = styled.span(
     minWidth: asResponsiveArray({ _: 40, sm: 50 }),
     height: asResponsiveArray({ _: 40, sm: 50 }),
     padding: 2,
-    alignSelf: asResponsiveArray({ _: 'inherit', xs: 'end', sm: 'inherit' }),
+    borderBottomLeftRadius: space[1],
   })
 );
