@@ -72,7 +72,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               dynamicDescription={selectedTopicalData.dynamicDescription}
             />
           </Box>
-          <Box spacing={{ _: 4, md: 6 }} px={{ _: 3, sm: 4 }}>
+          <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
             {selectedTopicalData.themes
               .sort((a, b) => a.index - b.index)
               .map((theme) => {
@@ -94,7 +94,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       }}
                       gridColumnGap={{ _: 4, md: 5 }}
                       gridRowGap={{ _: 4, md: 5 }}
-                      marginBottom={5}
+                      marginBottom={{ _: 4, sm: 5 }}
                     >
                       {theme.themeTiles
                         .sort((a, b) => a.index - b.index)
@@ -149,17 +149,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
             </Box>
           </Box>
-        </MaxWidth>
 
-        <Spacer mb={5} />
+          <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="offWhite" py={5}>
-          <Box py={4}>
-            <Search title={textShared.secties.search.title.nl} />
+          <Box width="100%" backgroundColor="offWhite" py={5}>
+            <Box py={4} px={{ _: 3, sm: 4 }}>
+              <Search title={textShared.secties.search.title.nl} />
+            </Box>
           </Box>
-        </Box>
 
-        <Spacer mb={5} />
+          <Spacer mb={5} />
+        </MaxWidth>
 
         <Box width="100%" pb={5}>
           <MaxWidth
