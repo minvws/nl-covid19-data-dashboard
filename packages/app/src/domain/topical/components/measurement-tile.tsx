@@ -51,8 +51,8 @@ const KpiIcon = styled.div(
   css({
     color: colors.blue,
     display: 'flex',
-    minWidth: 40,
     width: 40,
+    height: 40,
     marginRight: 3,
   })
 );
