@@ -190,7 +190,7 @@ export const iconName2filename: Record<IconName, string> = {
   HorecaEvenementen: 'horeca_evenementen.svg',
   Hospitality: 'hospitality.svg',
   Information: 'information.svg',
-  IntensiveCareOpnames: 'intensive care-opnames.svg',
+  IntensiveCareOpnames: 'intensive_care_opnames.svg',
   Klachten: 'klachten.svg',
   Klok210001: 'klok_2100-01.svg',
   KunstCultuur: 'kunst_cultuur.svg',

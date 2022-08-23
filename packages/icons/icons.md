@@ -64,7 +64,7 @@ See below an overview of all the available icons in this package. This file is g
 | HorecaEvenementen                      | <img src="./src/svg/horeca_evenementen.svg" alt="HorecaEvenementen" />                                             |
 | Hospitality                            | <img src="./src/svg/hospitality.svg" alt="Hospitality" />                                                          |
 | Information                            | <img src="./src/svg/information.svg" alt="Information" />                                                          |
-| IntensiveCareOpnames                   | <img src="./src/svg/intensive care-opnames.svg" alt="IntensiveCareOpnames" />                                      |
+| IntensiveCareOpnames                   | <img src="./src/svg/intensive_care_opnames.svg" alt="IntensiveCareOpnames" />                                      |
 | Klachten                               | <img src="./src/svg/klachten.svg" alt="Klachten" />                                                                |
 | Klok210001                             | <img src="./src/svg/klok_2100-01.svg" alt="Klok210001" />                                                          |
 | KunstCultuur                           | <img src="./src/svg/kunst_cultuur.svg" alt="KunstCultuur" />                                                       |
