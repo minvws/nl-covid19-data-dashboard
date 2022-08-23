@@ -64,6 +64,13 @@ interface SeriesCommonDefinition {
    * legend, for example)
    */
   hideInLegend?: boolean;
+  /**
+   * Specifies different exception values (in either data_unix or date_start_unix & date_end_unix)
+   * notitation to be ignored when scaling the Y-axis based on the maximum values
+   * of a series. Values matching with the passed in date(s) will be ignored and
+   * are therefore not eligible as maximum values.
+   */
+  yAxisExceptionValues?: number[];
 }
 
 export interface GappedLineSeriesDefinition<T extends TimestampedValue>
@@ -285,11 +292,32 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
 ) {
-  const values = seriesList
+  const filterSeries = (
+    seriesConfig: SeriesConfigSingle<T>,
+    series: SingleSeries
+  ): SingleSeries => {
+    const yAxisExceptionValues = seriesConfig.yAxisExceptionValues;
+    if (!yAxisExceptionValues || yAxisExceptionValues.length === 0) {
+      return series;
+    }
+
+    return [...series].filter(
+      (seriesItem) =>
+        yAxisExceptionValues.indexOf(seriesItem.__date_unix) === -1
+    );
+  };
+
+  const filteredSeriesList = seriesList.map((_, index) =>
+    filterSeries(seriesConfig[index], seriesList[index])
+  );
+
+  const values = filteredSeriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
     .flatMap((series) =>
-      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      series.flatMap((seriesItem: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(seriesItem)
+          ? seriesItem.__value
+          : [seriesItem.__value_a, seriesItem.__value_b]
       )
     )
     .filter(isDefined);
