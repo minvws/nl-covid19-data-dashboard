@@ -32,11 +32,9 @@ export function ThemeHeader({
   );
 }
 
-const ThemaIcon = styled.span(
-  css({
-    display: 'flex',
-    alignItems: 'center',
-    width: '30px',
-    marginRight: '15px;',
-  })
-);
+const ThemaIcon = styled.span`
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+`;
