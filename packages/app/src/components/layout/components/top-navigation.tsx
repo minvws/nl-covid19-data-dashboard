@@ -33,9 +33,9 @@ export function TopNavigation() {
         {collapsible.button(
           <NavToggle>
             {collapsible.isOpen ? (
-              <CloseThick heigth="36px" width="36px" />
+              <CloseThick heigth="24px" width="24px" />
             ) : (
-              <Menu heigth="36px" width="36px" />
+              <Menu heigth="24px" width="24px" />
             )}
             <VisuallyHidden>
               {collapsible.isOpen
@@ -121,7 +121,7 @@ const NavToggle = styled.button(
     ml: 'auto',
     color: 'white',
     bg: 'transparent',
-    p: 0,
+    p: '6px',
     m: 0,
     border: 'none',
     '&:focus': {
