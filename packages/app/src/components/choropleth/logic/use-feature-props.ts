@@ -7,7 +7,8 @@ import { ChoroplethDataItem } from './types';
 type GetFeatureProp<T = string> = (code: string) => T;
 type GetHoverFeatureProp<T = string> = (
   code: string,
-  isActivated?: boolean
+  isActivated?: boolean,
+  isKeyboardActive?: boolean
 ) => T;
 
 export type FeatureProps = {
@@ -86,9 +87,16 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
             isHover ? dataConfig.hoverFill : 'none',
           stroke:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? (_code: string, isActivated?: boolean) => {
-                  return isActivated ? dataConfig.hoverStroke : 'none';
-                }
+              ? (
+                  _code: string,
+                  isActivated?: boolean,
+                  isKeyboardActive?: boolean
+                ) =>
+                  isActivated
+                    ? isKeyboardActive
+                      ? dataConfig.highlightStroke
+                      : dataConfig.hoverStroke
+                    : 'none'
               : (code: string, isActivated?: boolean) =>
                   code === dataOptions.selectedCode
                     ? isActivated
@@ -126,8 +134,16 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
         },
         hover: {
           fill: () => 'none',
-          stroke: (_code: string, isActivated?: boolean) =>
-            isActivated ? dataConfig.hoverStroke : 'none',
+          stroke: (
+            _code: string,
+            isActivated?: boolean,
+            isKeyboardActive?: boolean
+          ) =>
+            isActivated
+              ? isKeyboardActive
+                ? dataConfig.highlightStroke
+                : dataConfig.hoverStroke
+              : 'none',
           strokeWidth: (_code: string, isActivated?: boolean) =>
             isActivated ? dataConfig.hoverStrokeWidth : 0,
         },
