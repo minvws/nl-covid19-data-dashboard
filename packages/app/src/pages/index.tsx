@@ -1,7 +1,7 @@
 import { Box, Spacer } from '~/components/base';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
-import { space } from 
+import { space } from '~/style/theme';
 import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import {
   Search,
@@ -62,7 +62,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const tileGridTemplate = {
-    _: 'auto-fit, minmax(250px,',
+    _: `repeat(auto-fit, minmax(${space[7]}, 1fr))`,
   };
 
   return (
