@@ -121,7 +121,7 @@ const iconsMd = [
   lookup.map((entry) => {
     const [iconName, fileName] = entry.split(':');
     const path = `./src/svg/${fileName.replace(/'/g, '').trim()}`;
-    return `| ${iconName} | <img src="${path}" alt="${iconName}" />`;
+    return `| ${iconName} | <img src="${path}" alt="${iconName}" style="background-color: white;" />`;
   })
 );
 
