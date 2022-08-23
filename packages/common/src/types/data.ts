@@ -1089,6 +1089,7 @@ export type TopicalIcon =
   | "HorecaEvenementen"
   | "Hospitality"
   | "Information"
+  | "IntensiveCareOpnames"
   | "Klachten"
   | "Klok210001"
   | "KunstCultuur"
