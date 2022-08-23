@@ -343,7 +343,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
           fontSize: 12,
           /**
            * Applying a dx of -50%, when there's only a single tick value, prevents
-           * the tick to go out of bounds centers the tick value relative to the graph.
+           * the tick to go out of bounds and centers the tick value relative to the graph.
            */
           dx: tickValues.length === 1 ? '-50%' : undefined,
           dy: '-0.5px',
