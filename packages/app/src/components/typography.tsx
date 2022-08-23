@@ -16,6 +16,8 @@ export interface TextProps {
 export interface AnchorProps extends TextProps {
   underline?: boolean | 'hover';
   hoverColor?: TextProps['color'];
+  display?: string;
+  width?: string | number;
 }
 
 export interface HeadingProps extends TextProps {
@@ -24,9 +26,9 @@ export interface HeadingProps extends TextProps {
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5;
 
-function textStyle(x: TextProps & { as?: string }) {
+function textStyle(props: TextProps & { as?: string }) {
   return css({
-    ...(x.as === 'button'
+    ...(props.as === 'button'
       ? {
           m: 0,
           p: 0,
@@ -37,13 +39,15 @@ function textStyle(x: TextProps & { as?: string }) {
         }
       : undefined),
 
-    ...(x.variant ? preset.typography[x.variant] : undefined),
+    ...(props.variant ? preset.typography[props.variant] : undefined),
 
-    ...(x.fontWeight ? { fontWeight: x.fontWeight } : undefined),
-    ...(x.color ? { color: x.color } : undefined),
-    ...(x.textTransform ? { textTransform: x.textTransform } : undefined),
-    ...(x.textAlign ? { textAlign: x.textAlign } : undefined),
-    ...(x.hyphens ? { hyphens: x.hyphens } : undefined),
+    ...(props.fontWeight ? { fontWeight: props.fontWeight } : undefined),
+    ...(props.color ? { color: props.color } : undefined),
+    ...(props.textTransform
+      ? { textTransform: props.textTransform }
+      : undefined),
+    ...(props.textAlign ? { textAlign: props.textAlign } : undefined),
+    ...(props.hyphens ? { hyphens: props.hyphens } : undefined),
   });
 }
 
@@ -55,23 +59,31 @@ export const BoldText = styled.strong<TextProps>(textStyle);
 
 export const Anchor = styled.a<AnchorProps>(
   textStyle,
-  (x) =>
-    x.underline &&
+  (props) =>
+    props.underline &&
     css({
-      textDecoration: x.underline === 'hover' ? 'none' : 'underline',
+      textDecoration: props.underline === 'hover' ? 'none' : 'underline',
       '&:hover, &:focus': { textDecoration: 'underline' },
     }),
-  (x) =>
-    x.hoverColor &&
+  (props) =>
+    props.hoverColor &&
     css({
       '&:hover,&:focus': { color: 'blue' },
-    })
+    }),
+  (props) =>
+    props.display &&
+    css({
+      display: props.display,
+    }),
+  (props) => props.width && css({ width: props.width })
 );
 
-export const Heading = styled.h1.attrs((x: HeadingProps & { as?: string }) => ({
-  as: x.as ?? (`h${x.level}` as const),
-  variant: x.variant ?? (`h${x.level}` as const),
-}))<HeadingProps>(textStyle);
+export const Heading = styled.h1.attrs(
+  (props: HeadingProps & { as?: string }) => ({
+    as: props.as ?? (`h${props.level}` as const),
+    variant: props.variant ?? (`h${props.level}` as const),
+  })
+)<HeadingProps>(textStyle);
 
 export function styledTextVariant(variant: string, as?: string) {
   return styled.p.attrs(() => ({

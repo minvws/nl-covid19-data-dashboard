@@ -377,10 +377,18 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
               <VaccinationsShotKpiSection
                 text={textNl.repeating_shot_kpi}
-                dateUnix={repeatingShotAdministeredLastValue.date_unix}
                 value={
                   repeatingShotAdministeredLastValue.ggd_administered_total
                 }
+                metadata={{
+                  datumsText: textNl.repeating_shot_kpi.datums,
+                  date: repeatingShotAdministeredLastValue.date_unix,
+                  source: {
+                    href: textNl.repeating_shot_kpi.sources.href,
+                    text: textNl.repeating_shot_kpi.sources.text,
+                  }
+
+                }}
               />
 
               <VaccinationsOverTimeTile

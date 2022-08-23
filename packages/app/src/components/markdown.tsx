@@ -10,6 +10,10 @@ import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
+import {
+  ChevronRight,
+  External as ExternalLinkIcon,
+} from '@corona-dashboard/icons';
 
 interface MarkdownProps {
   content: string;
@@ -23,13 +27,17 @@ interface LinkProps {
 const renderers = {
   link: (props: LinkProps) =>
     isAbsoluteUrl(props.href) ? (
-      <ExternalLink href={props.href}>{props.children}</ExternalLink>
+      <ExternalLink href={props.href} display="inline-block">
+        {props.children}
+        <ExternalLinkIcon width={20} height={11} />
+      </ExternalLink>
     ) : (
       <Link href={props.href} passHref>
-        <Anchor underline>{props.children}</Anchor>
+        <Anchor underline>
+          {props.children} <ChevronRight width={10} height={10} />
+        </Anchor>
       </Link>
     ),
-
   /**
    * The code element is hijacked to display context-aware pieces of content.
    * usage:

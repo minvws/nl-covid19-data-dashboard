@@ -38,6 +38,11 @@ import { InlineChoropleth } from './inline-choropleth';
 import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
+import {
+  ChevronRight,
+  Download,
+  External as ExternalLinkIcon,
+} from '@corona-dashboard/icons';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
@@ -56,7 +61,11 @@ interface AgeDemographicConfigNode {
   title: string;
   startDate?: string;
   endDate?: string;
-  config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>, AccessibilityDefinition['key']>;
+  config: AgeDemographicConfiguration<
+    DataScopeKey,
+    MetricKeys<DataScope>,
+    AccessibilityDefinition['key']
+  >;
 }
 
 interface ChoroplethConfigNode {
@@ -295,8 +304,12 @@ function InlineAttachmentMark(props: {
   if (!props.mark.asset) return <>{props.children}</>;
 
   return (
-    <a download href={getFileSrc(props.mark.asset)}>
-      {props.children}
+    <a
+      css={css({ textDecoration: 'underline' })}
+      download
+      href={getFileSrc(props.mark.asset)}
+    >
+      {props.children} <Download width={15} height={11} />
     </a>
   );
 }
@@ -309,10 +322,20 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   if (!mark.href) return <>{children}</>;
 
   return isAbsoluteUrl(mark.href) ? (
-    <ExternalLink href={mark.href}>{children}</ExternalLink>
+    <ExternalLink
+      href={mark.href}
+      width="max-content"
+      display="inline-block"
+      underline
+    >
+      {children}
+      <ExternalLinkIcon width={20} height={11} />
+    </ExternalLink>
   ) : (
     <Link href={mark.href} passHref locale={locale}>
-      <a>{children}</a>
+      <a css={css({ textDecoration: 'underline' })}>
+        {children} <ChevronRight width={10} height={10} />
+      </a>
     </Link>
   );
 }
