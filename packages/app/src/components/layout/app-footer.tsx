@@ -40,7 +40,7 @@ export function AppFooter() {
             </Heading>
             <nav aria-label={text.aria_labels.pagina_keuze} role="navigation">
               <Box as="ul" spacing={2}>
-                <Item href="/">{text.nav.links.actueel}</Item>
+                <Item href="/">{text.nav.links.samenvatting}</Item>
                 <Item href={reverseRouter.nl.index()}>
                   {text.nav.links.index}
                 </Item>

@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "topical_theme_tile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "index",
+    "title",
+    "dynamicDescription",
+    "trendIcon",
+    "tileIcon",
+    "cta"
+  ],
+  "properties": {
+    "index": {
+      "type": "number"
+    },
+    "title": {
+      "$ref": "multilanguage_string.json"
+    },
+    "dynamicDescription": {
+      "$ref": "multilanguage_string.json"
+    },
+    "trendIcon": {
+      "type": ["object", "null"],
+      "required": ["direction", "color"],
+      "additionalProperties": false,
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": ["UP", "DOWN"]
+        },
+        "color": {
+          "type": "string",
+          "enum": ["GREEN", "RED"]
+        }
+      }
+    },
+    "tileIcon": {
+      "$ref": "icon.json"
+    },
+    "cta": {
+      "type": ["object", "null"],
+      "required": ["label", "href"],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "$ref": "multilanguage_string.json"
+        },
+        "href": {
+          "$ref": "multilanguage_string.json"
+        }
+      }
+    }
+  }
+}
