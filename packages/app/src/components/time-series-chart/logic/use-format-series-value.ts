@@ -1,6 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isFilled, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SeriesConfig } from './series';
 import { MetricPropertyFormatters } from './use-metric-property-formatters';
@@ -22,7 +22,9 @@ export function useFormatSeriesValue<T extends TimestampedValue>(
       const formattedValue =
         isPresent(numberValue) && typeof numberValue === 'number'
           ? formatter(numberValue)
-          : String(numberValue);
+          : isDefined(numberValue) && isFilled(numberValue)
+          ? String(numberValue)
+          : '-';
 
       return isPresent(formattedValue)
         ? isPercentage

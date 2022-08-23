@@ -120,7 +120,6 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
-  console.log("Test");
   const {
     pageText,
     selectedNlData: data,
