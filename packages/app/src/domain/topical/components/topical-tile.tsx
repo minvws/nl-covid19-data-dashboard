@@ -66,19 +66,12 @@ export function TopicalTile({
         <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
           <Box
             display="flex"
-            flexDirection={{
-              _: 'row-reverse',
-            }}
             justifyContent={'space-between'}
             css={css({
               gap: 2,
             })}
           >
-            <KpiIcon>
-              <DynamicIcon name={tileIcon} />
-            </KpiIcon>
-
-            <Box display="block" fontSize={{ _: 6, xs: 7 }} flexShrink={0}>
+            <Box display="block" fontSize={{ _: 6, xs: 7 }}>
               <Heading
                 level={3}
                 color={colors.blue}
@@ -86,8 +79,11 @@ export function TopicalTile({
                   display: 'flex',
                   justifyContent: 'start',
                   paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
-                  paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
+                  paddingRight: 0,
                   paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
+                  overflowWrap: 'break-word',
+                  wordWrap: 'break-word',
+                  hyphens: 'auto',
                 })}
               >
                 {title}
@@ -99,6 +95,10 @@ export function TopicalTile({
                 )}
               </Heading>
             </Box>
+
+            <KpiIcon>
+              <DynamicIcon name={tileIcon} />
+            </KpiIcon>
           </Box>
           <Box
             display="flex"

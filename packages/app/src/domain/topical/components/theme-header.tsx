@@ -5,6 +5,7 @@ import { Heading } from '~/components/typography';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import DynamicIcon from '~/components/get-icon-by-name';
+import { asResponsiveArray } from '~/style/utils';
 
 interface TopicalHeaderProps {
   title: string;
@@ -32,9 +33,11 @@ export function ThemeHeader({
   );
 }
 
-const ThemaIcon = styled.span`
-  display: block;
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-`;
+const ThemaIcon = styled.span(
+  css({
+    display: 'block',
+    width: asResponsiveArray({ _: '25px', sm: '30px' }),
+    height: asResponsiveArray({ _: '25px', sm: '30px' }),
+    marginRight: asResponsiveArray({ _: '10px', sm: '15px' }),
+  })
+);
