@@ -37,6 +37,7 @@ const ThemaIcon = styled.span(
   css({
     display: 'block',
     width: asResponsiveArray({ _: '25px', sm: '30px' }),
+    minWidth: asResponsiveArray({ _: '25px', sm: '30px' }),
     height: asResponsiveArray({ _: '25px', sm: '30px' }),
     marginRight: asResponsiveArray({ _: '10px', sm: '15px' }),
   })
