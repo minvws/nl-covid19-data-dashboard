@@ -44,7 +44,6 @@ export function TopicalTile({
     <Box
       as="a"
       href={cta?.href}
-      spacing={4}
       borderColor={colors.gray}
       borderWidth="1px"
       borderStyle="solid"
@@ -89,7 +88,6 @@ export function TopicalTile({
                   paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
                   paddingRight: asResponsiveArray({ _: 0, xs: 4, sm: 0 }),
                   paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
-                  marginBottom: 3,
                 })}
               >
                 {title}
@@ -108,7 +106,6 @@ export function TopicalTile({
             justifyContent={'start'}
             textAlign={'left'}
             p={{ _: 3, xs: 4 }}
-            paddingBottom={{ _: 0, xs: 0 }}
           >
             <Box display="flex" alignItems={'center'}>
               <Markdown content={dynamicDescription} />
