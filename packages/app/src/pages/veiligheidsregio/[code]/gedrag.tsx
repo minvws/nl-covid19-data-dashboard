@@ -111,7 +111,7 @@ export default function BehaviorPageVr(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.gedrag}
+            category={commonTexts.sidebar.categories.actions_to_take.title}
             title={text.vr.pagina.titel}
             icon={<Bevolking />}
             description={text.vr.pagina.toelichting}

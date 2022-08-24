@@ -194,7 +194,7 @@ export const VaccinationsVrPage = (
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.veiligheidsregio_layout.headings.vaccinaties}
+            category={commonTexts.sidebar.categories.actions_to_take.title}
             title={replaceVariablesInText(textVr.informatie_blok.titel, {
               safetyRegionName: vrName,
             })}

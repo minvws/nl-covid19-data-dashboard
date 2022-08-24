@@ -43,7 +43,8 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['deceased_cbs', 'deceased_rivm'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  categoryTexts: siteText.common.veiligheidsregio_layout.headings.besmettingen,
+  categoryTexts:
+    siteText.common.sidebar.categories.development_of_the_virus.title,
   textVr: siteText.pages.deceased_page.vr,
   textShared: siteText.pages.deceased_page.shared,
 });

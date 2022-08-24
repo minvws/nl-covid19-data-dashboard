@@ -175,7 +175,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
         />
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.ziekenhuizen}
+            category={
+              commonTexts.sidebar.categories.consequences_for_healthcare.title
+            }
             screenReaderCategory={
               commonTexts.sidebar.metrics.hospital_admissions.title
             }

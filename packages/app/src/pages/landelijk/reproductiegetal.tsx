@@ -97,7 +97,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.besmettingen}
+            category={
+              commonTexts.sidebar.categories.development_of_the_virus.title
+            }
             screenReaderCategory={
               commonTexts.sidebar.metrics.reproduction_number.title
             }

@@ -27,7 +27,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   caterogyTexts: {
-    category: siteText.common.nationaal_layout.headings.besmettingen,
+    category: siteText.common.sidebar.categories.archived_metrics.title,
     screenReaderCategory:
       siteText.common.sidebar.metrics.source_investigation.title,
   },
@@ -81,7 +81,7 @@ export default function BrononderzoekPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.archief}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textShared.titel}
             icon={<Bevolking />}

@@ -1,5 +1,5 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Stap1Thuisbezoek } from '@corona-dashboard/icons';
+import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
 import { Text, InlineText, BoldText } from '~/components/typography';
@@ -143,11 +143,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.gemeente_layout.headings.besmettingen}
+            category={
+              commonTexts.sidebar.categories.development_of_the_virus.title
+            }
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
-            icon={<Stap1Thuisbezoek />}
+            icon={<GgdTesten />}
             description={textGm.pagina_toelichting}
             metadata={{
               datumsText: textGm.datums,

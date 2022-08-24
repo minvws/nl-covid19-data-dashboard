@@ -115,7 +115,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.gemeente_layout.headings.vroege_signalen}
+            category={
+              commonTexts.sidebar.categories.development_of_the_virus.title
+            }
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}

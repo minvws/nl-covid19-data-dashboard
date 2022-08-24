@@ -194,7 +194,7 @@ export const VaccinationsGmPage = (
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.gemeente_layout.headings.vaccinaties}
+            category={commonTexts.sidebar.categories.actions_to_take.title}
             title={replaceVariablesInText(textGm.informatie_blok.titel, {
               municipalityName: municipalityName,
             })}

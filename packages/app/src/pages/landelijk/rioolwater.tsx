@@ -46,7 +46,7 @@ const pageMetrics = ['sewer'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   caterogyTexts: {
-    category: siteText.common.nationaal_layout.headings.vroege_signalen,
+    category: siteText.common.sidebar.categories.development_of_the_virus.title,
     screenReaderCategory:
       siteText.common.sidebar.metrics.sewage_measurement.title,
   },

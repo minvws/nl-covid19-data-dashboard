@@ -114,7 +114,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.gemeente_layout.headings.besmettingen}
+            category={
+              commonTexts.sidebar.categories.development_of_the_virus.title
+            }
             title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}

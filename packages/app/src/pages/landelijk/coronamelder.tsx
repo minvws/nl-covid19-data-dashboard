@@ -74,7 +74,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.archief}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             title={corona_melder_app.header.title}
             icon={<Phone />}
             description={corona_melder_app.header.description}
