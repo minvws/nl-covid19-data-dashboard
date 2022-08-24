@@ -1,13 +1,13 @@
 import { colors } from '@corona-dashboard/common';
 import {
-  Chevron,
+  ChevronRight,
   Clock,
   Database,
   MeerInformatie,
 } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Fragment } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';
@@ -236,7 +236,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
                   })}
                 >
                   {word}&nbsp;
-                  <Chevron width={10} height={10} />
+                  <ChevronRight width={10} height={10} />
                 </span>
               ) : (
                 <span>{`${word} `}</span>

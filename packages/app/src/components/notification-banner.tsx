@@ -5,6 +5,7 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { InlineText, BoldText } from './typography';
+import { colors } from '@corona-dashboard/common';
 
 interface NotificationBannerProps {
   title: string;
@@ -22,15 +23,15 @@ export function NotificationBanner({
   const hasDescription = description.length !== 0;
 
   return (
-    <Box width="100%" backgroundColor="warningYellow">
+    <Box width="100%" backgroundColor={colors.lightGray}>
       <MaxWidth
         px={{ _: 3, sm: 4 }}
         py={3}
         display="flex"
         spacingHorizontal={3}
       >
-        <Box display="flex" minWidth="1.6rem">
-          <Warning fill="black" />
+        <Box display="flex" width="1.6rem">
+          <Warning />
         </Box>
 
         <Box maxWidth="maxWidthText">

@@ -3,7 +3,7 @@ import {
   NlTestedOverallValue,
   TimeframeOptionsList,
 } from '@corona-dashboard/common';
-import { Test } from '@corona-dashboard/icons';
+import { Stap1Thuisbezoek } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -190,7 +190,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               commonTexts.sidebar.metrics.positive_tests.title
             }
             title={textNl.titel}
-            icon={<Test />}
+            icon={<Stap1Thuisbezoek />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

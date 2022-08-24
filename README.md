@@ -6,7 +6,7 @@ give a broad perspective on the subject.
 
 ## Contact
 
-If you want to contact the dashboard team, feel free to open an issue for 
+If you want to contact the dashboard team, feel free to open an issue for
 technical questions, bug reports or security findings. If you have a generic question or remark about the
 corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.
 
@@ -31,7 +31,7 @@ multiple packages.
 - `common`: Commonly shared code that multiple packages are using, like types
   and utils.
 - `e2e`: End-to-end tests using Cypress
-- `icons`: A React icon component library, used by the CMS and by app
+- `icons`: A React icon component library, used by the CMS and by app. [README](/packages/icons/README.md)
 
 ## Getting started (quickly)
 

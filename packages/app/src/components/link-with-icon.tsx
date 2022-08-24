@@ -1,3 +1,5 @@
+import { colors } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -5,6 +7,7 @@ import { UrlObject } from 'url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { Anchor } from './typography';
+import { asResponsiveArray } from '~/style/utils';
 
 interface LinkWithIconProps {
   href: UrlObject | string;
@@ -13,6 +16,7 @@ interface LinkWithIconProps {
   iconPlacement?: 'left' | 'right';
   underline?: boolean;
   fontWeight?: 'normal' | 'bold';
+  showAsButton?: boolean;
 }
 
 interface IconProps {
@@ -23,18 +27,23 @@ interface IconProps {
   mr?: number | string;
 }
 
+interface buttonBoxProps {
+  showAsButton: boolean;
+}
+
 export function LinkWithIcon({
   href,
   icon,
   children,
   iconPlacement = 'left',
   fontWeight,
+  showAsButton = false,
 }: LinkWithIconProps) {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
   return (
-    <Box as="span" display="inline-block" position="relative">
+    <ButtonBox showAsButton={showAsButton}>
       <Link href={href} passHref locale={false}>
         <Anchor
           underline="hover"
@@ -59,7 +68,7 @@ export function LinkWithIcon({
           )}
         </Anchor>
       </Link>
-    </Box>
+    </ButtonBox>
   );
 }
 
@@ -134,5 +143,35 @@ const IconWrapper = styled.span(
   css({
     display: 'inline-block',
     textDecoration: 'inherit',
+  })
+);
+
+const ButtonBox = styled.span((x: buttonBoxProps) =>
+  css({
+    display: 'inline-block',
+    position: 'relative',
+    a: x.showAsButton
+      ? asResponsiveArray({
+          _: {
+            color: colors.blue,
+          },
+          sm: {
+            backgroundColor: colors.lightBlue,
+            color: colors.blue,
+            px: 12,
+            py: space[3],
+            '&:hover': {
+              backgroundColor: colors.blue,
+              color: colors.offWhite,
+            },
+            '&:focus': {
+              outline: '#000000 dotted 2px',
+            },
+            '&:hover, &:focus': {
+              textDecoration: 'underline',
+            },
+          },
+        })
+      : {},
   })
 );

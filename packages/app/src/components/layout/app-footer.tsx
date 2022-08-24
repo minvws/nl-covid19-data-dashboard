@@ -40,7 +40,7 @@ export function AppFooter() {
             </Heading>
             <nav aria-label={text.aria_labels.pagina_keuze} role="navigation">
               <Box as="ul" spacing={2}>
-                <Item href="/">{text.nav.links.actueel}</Item>
+                <Item href="/">{text.nav.links.samenvatting}</Item>
                 <Item href={reverseRouter.nl.index()}>
                   {text.nav.links.index}
                 </Item>
@@ -112,7 +112,7 @@ function Item({
       {isExternal ? (
         <>
           <IconContainer>
-            <External />
+            <External aria-hidden="true" />
           </IconContainer>
           <ExternalLink color="white" href={href} underline="hover">
             {children}
@@ -149,12 +149,12 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
 const IconContainer = styled.div(
   css({
     position: 'absolute',
-    left: '-10px',
+    left: '-3px',
     top: 0,
 
     svg: {
-      width: 24,
-      height: 24,
+      width: 10,
+      height: 10,
     },
   })
 );

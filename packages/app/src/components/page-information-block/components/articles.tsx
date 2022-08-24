@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
-import { Chevron } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
@@ -68,7 +68,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                     })}
                   >
                     {word}
-                    <Chevron />
+                    <ChevronRight />
                   </InlineText>
                 ) : (
                   <InlineText>{`${word} `}</InlineText>

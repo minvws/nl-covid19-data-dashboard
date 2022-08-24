@@ -1,9 +1,5 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import {
-  Coronavirus,
-  Locatie,
-  Verpleeghuiszorg,
-} from '@corona-dashboard/icons';
+import { Coronavirus, Location, Verpleeghuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -134,7 +130,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               commonTexts.sidebar.metrics.nursing_home_care.title
             }
             title={positiveTestedPeopleText.titel}
-            icon={<Verpleeghuiszorg />}
+            icon={<Verpleeghuis />}
             description={
               <Markdown content={positiveTestedPeopleText.pagina_toelichting} />
             }
@@ -230,7 +226,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             id="besmette-locaties"
             title={infectedLocationsText.titel}
-            icon={<Locatie />}
+            icon={<Location />}
             description={infectedLocationsText.pagina_toelichting}
             metadata={{
               datumsText: infectedLocationsText.datums,

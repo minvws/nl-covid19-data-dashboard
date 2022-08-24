@@ -39,8 +39,8 @@ export function useSearchResults(term: string, activeResult?: string) {
     const hits: Hit<Option>[] = search(termTrimmed).map((x) => {
       const link =
         x.data.type === 'gm'
-          ? reverseRouter.actueel.gm(x.data.code)
-          : reverseRouter.actueel.vr(x.data.code);
+          ? reverseRouter.gm.index(x.data.code)
+          : reverseRouter.vr.index(x.data.code);
 
       return {
         ...x,

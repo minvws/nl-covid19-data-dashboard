@@ -1,186 +1,261 @@
-export const iconName2filename: Record<string, string> = {
-  Afstand: 'afstand.svg',
-  AfstandSporten: 'afstand-sporten.svg',
-  AlcoholVerkoop: 'alcohol-verkoop.svg',
+export type IconName =
+  | 'AfstandSporten'
+  | 'AlcoholVerkoop'
+  | 'Arrow'
+  | 'Arts'
+  | 'Avondklok'
+  | 'BarChart'
+  | 'BasisregelsAfstand'
+  | 'BasisregelsDrukte'
+  | 'BasisregelsElleboog'
+  | 'BasisregelsGeenBezoek'
+  | 'BasisregelsHandenwassen'
+  | 'BasisregelsMondkapje'
+  | 'BasisregelsTesten'
+  | 'Bevolking'
+  | 'Bezoek'
+  | 'Bibliotheek'
+  | 'BinnenMetZitplaats'
+  | 'BinnenZonderZitplaats'
+  | 'Binnensporten'
+  | 'Binnensportlocaties'
+  | 'Boosterprik'
+  | 'Calendar'
+  | 'Check'
+  | 'Checked'
+  | 'ChevronDown'
+  | 'ChevronRight'
+  | 'Clock'
+  | 'Close'
+  | 'CloseThick'
+  | 'ContactBeroepen'
+  | 'Coronavirus'
+  | 'Cross'
+  | 'Database'
+  | 'DoorstroomEvenementen'
+  | 'Dot'
+  | 'Down'
+  | 'Download'
+  | 'EenPersoonDoorgestreept'
+  | 'Elderly'
+  | 'Expand'
+  | 'Experimenteel'
+  | 'External'
+  | 'Eye'
+  | 'FrisseLucht'
+  | 'GedeeltelijkOpenRugzak'
+  | 'GeenEntertainment'
+  | 'GeenMaxAantalBezoekers'
+  | 'GeenWedstrijden'
+  | 'Gehandicaptenzorg'
+  | 'GeorganiseerdeKunstEnCultuurbeoefening'
+  | 'GgdTesten'
+  | 'Groepen'
+  | 'HealthCare'
+  | 'HomeAndVisits'
+  | 'HorecaEnEvenementenBestellen'
+  | 'HorecaEnEvenementenEtendrinken'
+  | 'HorecaEnEvenementenEvenementen'
+  | 'HorecaEvenementen'
+  | 'Hospitality'
+  | 'Information'
+  | 'IntensiveCareOpnames'
+  | 'Klachten'
+  | 'Klok210001'
+  | 'KunstCultuur'
+  | 'KunstcultuurMusea'
+  | 'Line'
+  | 'Locaties'
+  | 'Location'
+  | 'Lopend'
+  | 'Maatregelen'
+  | 'MaxAantalBezoekers'
+  | 'MaxVisitors'
+  | 'MedischeScreening'
+  | 'MeerInformatie'
+  | 'MeerdaagseEvenementen'
+  | 'Menu'
+  | 'Mondkapje'
+  | 'Nederland'
+  | 'Notification'
+  | 'OnderwijsEnKinderopvangNoodopvang'
+  | 'OnderwijsEnKinderopvangOpAfstand'
+  | 'OntmoetingenBezoek'
+  | 'OpenbaarVervoer'
+  | 'Openingstijden'
+  | 'Other'
+  | 'Overige'
+  | 'Phone'
+  | 'Recreatie'
+  | 'Reizen'
+  | 'ReproductieGraf'
+  | 'Reproductiegetal'
+  | 'Rioolvirus'
+  | 'SearchIcon'
+  | 'SearchIconBold'
+  | 'SportBuiten'
+  | 'SportMetZweetband'
+  | 'SportWedstrijden'
+  | 'Stap1HorecaMax'
+  | 'Stap1HorecaPertafel'
+  | 'Stap1HorecaVerplaatsen'
+  | 'Stap1OnderwijsBibliotheek'
+  | 'Stap1OnderwijsOpen'
+  | 'Stap1Theorie'
+  | 'Stap1Thuisbezoek'
+  | 'Stap1Uitvaarten'
+  | 'Stap1WinkelsAlleen'
+  | 'Stap1WinkelsMarkten'
+  | 'Stap1WinkelsOpen'
+  | 'Stopwatch'
+  | 'Taxi'
+  | 'Testbewijs'
+  | 'Toegangsbewijzen'
+  | 'Travel'
+  | 'Unchecked'
+  | 'Up'
+  | 'Vaccinaties'
+  | 'Varianten'
+  | 'Verpleeghuis'
+  | 'VervoerEnReizenBuitenland'
+  | 'VervoerEnReizenOv'
+  | 'Vliegen'
+  | 'Warn'
+  | 'Warning'
+  | 'WinkelenEnBoodschappenAlcohol'
+  | 'WinkelenEnBoodschappenOpen'
+  | 'Work'
+  | 'Ziekenhuis'
+  | 'Ziektegolf';
+
+export const iconName2filename: Record<IconName, string> = {
+  AfstandSporten: 'afstand_sporten.svg',
+  AlcoholVerkoop: 'alcohol_verkoop.svg',
   Arrow: 'arrow.svg',
   Arts: 'arts.svg',
-  ArtsSmall: 'arts-small.svg',
-  AvoidCrowds: 'avoid_crowds.svg',
   Avondklok: 'avondklok.svg',
-  BarChart: 'bar-chart.svg',
+  BarChart: 'bar_chart.svg',
   BasisregelsAfstand: 'basisregels_afstand.svg',
-  BasisregelsBlijfThuis: 'basisregels_blijf-thuis.svg',
   BasisregelsDrukte: 'basisregels_drukte.svg',
   BasisregelsElleboog: 'basisregels_elleboog.svg',
-  BasisregelsGeenBezoek: 'basisregels_geen-bezoek.svg',
+  BasisregelsGeenBezoek: 'basisregels_geen_bezoek.svg',
   BasisregelsHandenwassen: 'basisregels_handenwassen.svg',
   BasisregelsMondkapje: 'basisregels_mondkapje.svg',
   BasisregelsTesten: 'basisregels_testen.svg',
   Bevolking: 'bevolking.svg',
   Bezoek: 'bezoek.svg',
-  Bibliotheken: 'bibliotheken.svg',
-  BinnenMetZitplaats: 'binnen-met-zitplaats.svg',
-  BinnenZonderZitplaats: 'binnen-zonder-zitplaats.svg',
+  Bibliotheek: 'bibliotheek.svg',
+  BinnenMetZitplaats: 'binnen_met_zitplaats.svg',
+  BinnenZonderZitplaats: 'binnen_zonder_zitplaats.svg',
   Binnensporten: 'binnensporten.svg',
   Binnensportlocaties: 'binnensportlocaties.svg',
   Boosterprik: 'boosterprik.svg',
   Calendar: 'calendar.svg',
-  Chart: 'chart.svg',
   Check: 'check.svg',
-  CheckSmall: 'check-small.svg',
   Checked: 'checked.svg',
-  Chevron: 'chevron.svg',
-  ChevronDown: 'chevron-down.svg',
-  ChevronDownMagenta: 'chevron-down-magenta.svg',
-  ChevronLarge: 'chevron-large.svg',
+  ChevronDown: 'chevron_down.svg',
+  ChevronRight: 'chevron_right.svg',
   Clock: 'clock.svg',
   Close: 'close.svg',
-  CloseThick: 'close-thick.svg',
-  Contactberoepen: 'contactberoepen.svg',
+  CloseThick: 'close_thick.svg',
+  ContactBeroepen: 'contact_beroepen.svg',
   Coronavirus: 'coronavirus.svg',
   Cross: 'cross.svg',
-  CrossSmall: 'cross-small.svg',
-  Curfew: 'curfew.svg',
   Database: 'database.svg',
-  Doorstroomevenementen: 'doorstroomevenementen.svg',
+  DoorstroomEvenementen: 'doorstroom_evenementen.svg',
   Dot: 'dot.svg',
   Down: 'down.svg',
   Download: 'download.svg',
-  EenPersoonDoorgestreept: 'een-persoon-doorgestreept.svg',
+  EenPersoonDoorgestreept: 'een_persoon_doorgestreept.svg',
   Elderly: 'elderly.svg',
-  Elleboog: 'elleboog.svg',
   Expand: 'expand.svg',
   Experimenteel: 'experimenteel.svg',
   External: 'external.svg',
-  Frame2: 'frame_2.svg',
+  Eye: 'eye.svg',
   FrisseLucht: 'frisse_lucht.svg',
-  Gathering: 'gathering.svg',
-  GedeeltelijkOpenRugzak: 'gedeeltelijk-open-rugzak.svg',
-  Gedrag: 'gedrag.svg',
-  GeenEntertainment: 'geen-entertainment.svg',
-  GeenMaxAantalBezoekers: 'geen-max-aantal-bezoekers.svg',
-  GeenWedstrijden: 'geen-wedstrijden.svg',
-  GehandicaptenZorg: 'gehandicapten-zorg.svg',
+  GedeeltelijkOpenRugzak: 'gedeeltelijk_open_rugzak.svg',
+  GeenEntertainment: 'geen_entertainment.svg',
+  GeenMaxAantalBezoekers: 'geen_max_aantal_bezoekers.svg',
+  GeenWedstrijden: 'geen_wedstrijden.svg',
   Gehandicaptenzorg: 'gehandicaptenzorg.svg',
-  Gelijk: 'gelijk.svg',
   GeorganiseerdeKunstEnCultuurbeoefening:
-    'georganiseerde-kunst-en-cultuurbeoefening.svg',
-  GgdTesten: 'ggd-testen.svg',
+    'georganiseerde_kunst_en_cultuurbeoefening.svg',
+  GgdTesten: 'ggd_testen.svg',
   Groepen: 'groepen.svg',
-  Handenwassen: 'handenwassen.svg',
   HealthCare: 'health_care.svg',
   HomeAndVisits: 'home_and_visits.svg',
-  HorecaEnEvenementenBestellen: 'horeca-en-evenementen_bestellen.svg',
-  HorecaEnEvenementenEtendrinken: 'horeca-en-evenementen_etendrinken.svg',
-  HorecaEnEvenementenEvenementen: 'horeca-en-evenementen_evenementen.svg',
+  HorecaEnEvenementenBestellen: 'horeca_en_evenementen_bestellen.svg',
+  HorecaEnEvenementenEtendrinken: 'horeca_en_evenementen_etendrinken.svg',
+  HorecaEnEvenementenEvenementen: 'horeca_en_evenementen_evenementen.svg',
   HorecaEvenementen: 'horeca_evenementen.svg',
   Hospitality: 'hospitality.svg',
   Information: 'information.svg',
-  KeepDistance: 'keep_distance.svg',
+  IntensiveCareOpnames: 'intensive_care_opnames.svg',
   Klachten: 'klachten.svg',
-  Klok2100: 'klok-2100.svg',
-  KunstCultuur: 'kunst-cultuur.svg',
+  Klok210001: 'klok_2100-01.svg',
+  KunstCultuur: 'kunst_cultuur.svg',
   KunstcultuurMusea: 'kunstcultuur_musea.svg',
   Line: 'line.svg',
-  Locatie: 'locatie.svg',
   Locaties: 'locaties.svg',
+  Location: 'location.svg',
   Lopend: 'lopend.svg',
   Maatregelen: 'maatregelen.svg',
-  MaxAantalBezoekers: 'max-aantal-bezoekers.svg',
+  MaxAantalBezoekers: 'max_aantal_bezoekers.svg',
   MaxVisitors: 'max_visitors.svg',
-  MedischeScreening: 'medische-screening.svg',
-  MeerInformatie: 'meer-informatie.svg',
-  MeerdaagseEvenementen: 'meerdaagse-evenementen.svg',
+  MedischeScreening: 'medische_screening.svg',
+  MeerInformatie: 'meer_informatie.svg',
+  MeerdaagseEvenementen: 'meerdaagse_evenementen.svg',
   Menu: 'menu.svg',
   Mondkapje: 'mondkapje.svg',
   Nederland: 'nederland.svg',
-  NederlandGroot: 'nederland_groot.svg',
   Notification: 'notification.svg',
-  OnderwijsEnKinderopvangKinderopvang:
-    'onderwijs-en-kinderopvang_kinderopvang.svg',
-  OnderwijsEnKinderopvangNoodopvang: 'onderwijs-en-kinderopvang_noodopvang.svg',
-  OnderwijsEnKinderopvangOpAfstand: 'onderwijs-en-kinderopvang_op-afstand.svg',
+  OnderwijsEnKinderopvangNoodopvang: 'onderwijs_en_kinderopvang_noodopvang.svg',
+  OnderwijsEnKinderopvangOpAfstand: 'onderwijs_en_kinderopvang_op_afstand.svg',
   OntmoetingenBezoek: 'ontmoetingen_bezoek.svg',
-  OpenbaarVervoer: 'openbaar-vervoer.svg',
+  OpenbaarVervoer: 'openbaar_vervoer.svg',
   Openingstijden: 'openingstijden.svg',
   Other: 'other.svg',
-  Overig: 'overig.svg',
-  Oversterfte: 'oversterfte.svg',
+  Overige: 'overige.svg',
   Phone: 'phone.svg',
-  PositiefGetesteMensen: 'positief_geteste_mensen.svg',
-  PubliekToegankelijkeLocaties: 'publiek-toegankelijke-locaties.svg',
   Recreatie: 'recreatie.svg',
   Reizen: 'reizen.svg',
   ReproductieGraf: 'reproductie_graf.svg',
   Reproductiegetal: 'reproductiegetal.svg',
-  ReproductiegetalSmall: 'reproductiegetal-small.svg',
-  Reset: 'reset.svg',
   Rioolvirus: 'rioolvirus.svg',
-  RioolwaterMonitoring: 'rioolwater-monitoring.svg',
-  SchoolAndDayCare: 'school_and_day_care.svg',
-  Search: 'search.svg',
   SearchIcon: 'search-icon.svg',
-  SearchIconBold: 'search-icon-bold.svg',
-  SneezeCoughElbow: 'sneeze_cough_elbow.svg',
-  SportBinnensportlocaties: 'sport_binnensportlocaties.svg',
+  SearchIconBold: 'search_icon_bold.svg',
   SportBuiten: 'sport_buiten.svg',
+  SportMetZweetband: 'sport_met_zweetband.svg',
   SportWedstrijden: 'sport_wedstrijden.svg',
-  SporterMetZweetband: 'sporter-met-zweetband.svg',
-  Stap1Avondklok: 'stap-1_avondklok.svg',
-  Stap1HorecaMax: 'stap_1-horeca_max.svg',
-  Stap1HorecaPertafel: 'stap_1-horeca_pertafel.svg',
-  Stap1HorecaReserveren: 'stap_1-horeca_reserveren.svg',
-  Stap1HorecaSportaccomodaties: 'stap_1-horeca_sportaccomodaties.svg',
-  Stap1HorecaTerras: 'stap_1-horeca_terras.svg',
-  Stap1HorecaVerplaatsen: 'stap_1-horeca_verplaatsen.svg',
-  Stap1OnderwijsBibliotheek: 'stap_1-onderwijs_bibliotheek.svg',
-  Stap1OnderwijsOpen: 'stap_1-onderwijs_open.svg',
-  Stap1Theorie: 'stap_1-theorie.svg',
-  Stap1Thuisbezoek: 'stap_1-thuisbezoek.svg',
-  Stap1Uitvaarten: 'stap_1-uitvaarten.svg',
-  Stap1WinkelsAlleen: 'stap_1-winkels_alleen.svg',
-  Stap1WinkelsMarkten: 'stap_1-winkels_markten.svg',
-  Stap1WinkelsMax: 'stap_1-winkels_max.svg',
-  Stap1WinkelsOpen: 'stap_1-winkels_open.svg',
-  Sterfte: 'sterfte.svg',
+  Stap1HorecaMax: 'stap_1_horeca_max.svg',
+  Stap1HorecaPertafel: 'stap_1_horeca_pertafel.svg',
+  Stap1HorecaVerplaatsen: 'stap_1_horeca_verplaatsen.svg',
+  Stap1OnderwijsBibliotheek: 'stap_1_onderwijs_bibliotheek.svg',
+  Stap1OnderwijsOpen: 'stap_1_onderwijs_open.svg',
+  Stap1Theorie: 'stap_1_theorie.svg',
+  Stap1Thuisbezoek: 'stap_1_thuisbezoek.svg',
+  Stap1Uitvaarten: 'stap_1_uitvaarten.svg',
+  Stap1WinkelsAlleen: 'stap_1_winkels_alleen.svg',
+  Stap1WinkelsMarkten: 'stap_1_winkels_markten.svg',
+  Stap1WinkelsOpen: 'stap_1_winkels_open.svg',
   Stopwatch: 'stopwatch.svg',
-  SymptomsGetTested: 'symptoms_get_tested.svg',
-  SymptomsStayHome: 'symptoms_stay_home.svg',
   Taxi: 'taxi.svg',
-  Test: 'test.svg',
   Testbewijs: 'testbewijs.svg',
-  Testen: 'testen.svg',
-  Teststraat: 'teststraat.svg',
-  Thuis: 'thuis.svg',
-  Thuisblijven: 'thuisblijven.svg',
-  Thuiswerken: 'thuiswerken.svg',
   Toegangsbewijzen: 'toegangsbewijzen.svg',
   Travel: 'travel.svg',
   Unchecked: 'unchecked.svg',
   Up: 'up.svg',
   Vaccinaties: 'vaccinaties.svg',
-  Vaccine: 'vaccine.svg',
-  VaccineBoosterThird: 'vaccine_booster_third.svg',
   Varianten: 'varianten.svg',
-  Vermijd: 'vermijd.svg',
   Verpleeghuis: 'verpleeghuis.svg',
-  Verpleeghuiszorg: 'verpleeghuiszorg.svg',
-  VervoerEnReizenBlijfthuis: 'vervoer-en-reizen_blijfthuis.svg',
-  VervoerEnReizenBuitenland: 'vervoer-en-reizen_buitenland.svg',
-  VervoerEnReizenOv: 'vervoer-en-reizen_ov.svg',
+  VervoerEnReizenBuitenland: 'vervoer_en_reizen_buitenland.svg',
+  VervoerEnReizenOv: 'vervoer_en_reizen_ov.svg',
   Vliegen: 'vliegen.svg',
   Warn: 'warn.svg',
   Warning: 'warning.svg',
-  WashHands: 'wash_hands.svg',
-  WearMaskPublicIndoors: 'wear_mask_public_indoors.svg',
-  WearMaskPublicTransport: 'wear_mask_public_transport.svg',
-  WhiteArrow: 'white-arrow.svg',
-  WhiteArrowLg: 'white-arrow-lg.svg',
-  WinkelenEnBoodschappenAlcohol: 'winkelen-en-boodschappen_alcohol.svg',
-  WinkelenEnBoodschappenOpen: 'winkelen-en-boodschappen_open.svg',
+  WinkelenEnBoodschappenAlcohol: 'winkelen_en_boodschappen_alcohol.svg',
+  WinkelenEnBoodschappenOpen: 'winkelen_en_boodschappen_open.svg',
   Work: 'work.svg',
-  WorkFromHome: 'work_from_home.svg',
   Ziekenhuis: 'ziekenhuis.svg',
-  ZiekenhuisSmall: 'ziekenhuis-small.svg',
   Ziektegolf: 'ziektegolf.svg',
 };

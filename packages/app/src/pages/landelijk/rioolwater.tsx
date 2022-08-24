@@ -1,4 +1,4 @@
-import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -118,7 +118,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             category={caterogyTexts.category}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.titel}
-            icon={<RioolwaterMonitoring />}
+            icon={<Rioolvirus />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
