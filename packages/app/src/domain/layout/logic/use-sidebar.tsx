@@ -34,7 +34,7 @@ const mapKeysToReverseRouter = {
   hospital_admissions: 'ziekenhuisopnames',
   infectious_people: 'besmettelijkeMensen',
   intensive_care_admissions: 'intensiveCareOpnames',
-  measures: 'maatregelen',
+  current_advices: 'geldendeAdviezen',
   mortality: 'sterfte',
   nursing_home_care: 'verpleeghuiszorg',
   positive_tests: 'positiefGetesteMensen',

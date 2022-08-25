@@ -75,7 +75,7 @@ export function VrLayout(props: VrLayoutProps) {
           'elderly_at_home',
         ],
       ],
-      ['actions_to_take', ['vaccinations', 'measures', 'compliance']],
+      ['actions_to_take', ['vaccinations', 'current_advices', 'compliance']],
       ['archived_metrics', ['source_investigation']],
     ],
   });

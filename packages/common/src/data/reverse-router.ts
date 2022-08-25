@@ -35,7 +35,7 @@ export function getReverseRouter(isMobile: boolean) {
       rioolwater: () => `/landelijk/rioolwater`,
       verdenkingenHuisartsen: () => `/landelijk/verdenkingen-huisartsen`,
       gedrag: () => `/landelijk/gedrag`,
-      maatregelen: () => `/landelijk/maatregelen`,
+      geldendeAdviezen: () => `/landelijk/geldende-adviezen`,
       coronamelder: () => `/landelijk/coronamelder`,
       brononderzoek: () => `/landelijk/brononderzoek`,
       varianten: () => `/landelijk/varianten`,
@@ -48,7 +48,8 @@ export function getReverseRouter(isMobile: boolean) {
             ? `/veiligheidsregio/${code}`
             : reverseRouter.vr.rioolwater(code)
           : '/veiligheidsregio',
-      maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
+      geldendeAdviezen: (code: string) =>
+        `/veiligheidsregio/${code}/geldende-adviezen`,
       vaccinaties: (code: string) => `/veiligheidsregio/${code}/vaccinaties`,
       positiefGetesteMensen: (code: string) =>
         `/veiligheidsregio/${code}/positief-geteste-mensen`,
