@@ -1,3 +1,6 @@
 timestamp,action,key,document_id,move_to
 2022-08-22T15:52:53.607Z,add,common.nav.links.maatregelen,vLW56y4Lep4YEw1swAHFjH,__
+2022-08-23T09:44:53.675Z,add,common.sidebar.categories.development_of_the_virus.title,GI5WvTMBzw9uJicFb1hiOL,__
+2022-08-23T09:44:54.674Z,add,common.sidebar.categories.consequences_for_healthcare.title,FV3RVBTRePmu89JK5VA4ti,__
+2022-08-23T09:44:55.689Z,add,common.sidebar.categories.actions_to_take.title,FV3RVBTRePmu89JK5VA592,__
 2022-08-23T11:59:52.631Z,move,common.nav.links.maatregelen,vLW56y4Lep4YEw1swAHFjH,common.nav.links.samenvatting

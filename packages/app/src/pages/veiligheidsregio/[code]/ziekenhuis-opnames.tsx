@@ -154,7 +154,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.veiligheidsregio_layout.headings.ziekenhuizen}
+            category={
+              commonTexts.sidebar.categories.consequences_for_healthcare.title
+            }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}

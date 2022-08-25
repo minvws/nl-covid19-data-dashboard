@@ -65,10 +65,12 @@ export function GmLayout(props: GmLayoutProps) {
     layout: 'gm',
     code: code,
     map: [
-      ['vaccinations', ['vaccinations']],
-      ['hospitals', ['hospital_admissions']],
-      ['infections', ['positive_tests', 'mortality']],
-      ['early_indicators', ['sewage_measurement']],
+      [
+        'development_of_the_virus',
+        ['sewage_measurement', 'positive_tests', 'mortality'],
+      ],
+      ['consequences_for_healthcare', ['hospital_admissions']],
+      ['actions_to_take', ['vaccinations']],
     ],
   });
 
@@ -124,12 +126,6 @@ export function GmLayout(props: GmLayoutProps) {
                       </Link>
                     </Text>
                   )}
-                </Box>
-
-                <Box px={3}>
-                  <Heading level={3}>
-                    {commonTexts.sidebar.shared.metrics_title}
-                  </Heading>
                 </Box>
 
                 <Menu spacing={2}>

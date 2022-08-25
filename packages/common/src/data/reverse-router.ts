@@ -21,7 +21,7 @@ export function getReverseRouter(isMobile: boolean) {
     },
 
     nl: {
-      index: () => (isMobile ? `/landelijk` : reverseRouter.nl.vaccinaties()),
+      index: () => (isMobile ? `/landelijk` : reverseRouter.nl.rioolwater()),
       vaccinaties: () => `/landelijk/vaccinaties`,
       positiefGetesteMensen: () => `/landelijk/positief-geteste-mensen`,
       besmettelijkeMensen: () => `/landelijk/besmettelijke-mensen`,
@@ -46,7 +46,7 @@ export function getReverseRouter(isMobile: boolean) {
         code
           ? isMobile
             ? `/veiligheidsregio/${code}`
-            : reverseRouter.vr.vaccinaties(code)
+            : reverseRouter.vr.rioolwater(code)
           : '/veiligheidsregio',
       maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
       vaccinaties: (code: string) => `/veiligheidsregio/${code}/vaccinaties`,
@@ -72,7 +72,7 @@ export function getReverseRouter(isMobile: boolean) {
         code
           ? isMobile
             ? `/gemeente/${code}`
-            : reverseRouter.gm.vaccinaties(code)
+            : reverseRouter.gm.rioolwater(code)
           : '/gemeente',
       positiefGetesteMensen: (code: string) =>
         `/gemeente/${code}/positief-geteste-mensen`,

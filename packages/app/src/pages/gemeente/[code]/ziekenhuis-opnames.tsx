@@ -153,7 +153,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.gemeente_layout.headings.ziekenhuizen}
+            category={
+              commonTexts.sidebar.categories.consequences_for_healthcare.title
+            }
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}

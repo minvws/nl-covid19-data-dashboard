@@ -243,7 +243,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           )}
           <PageInformationBlock
             title={textNl.title}
-            category={textNl.category}
+            category={commonTexts.sidebar.categories.actions_to_take.title}
             icon={<VaccinatieIcon />}
             description={content.pageDescription}
             metadata={{
@@ -386,8 +386,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   source: {
                     href: textNl.repeating_shot_kpi.sources.href,
                     text: textNl.repeating_shot_kpi.sources.text,
-                  }
-
+                  },
                 }}
               />
 

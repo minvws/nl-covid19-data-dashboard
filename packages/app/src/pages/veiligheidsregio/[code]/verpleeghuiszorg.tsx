@@ -127,7 +127,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={
-              commonTexts.veiligheidsregio_layout.headings.kwetsbare_groepen
+              commonTexts.sidebar.categories.consequences_for_healthcare.title
             }
             screenReaderCategory={
               commonTexts.sidebar.metrics.nursing_home_care.title

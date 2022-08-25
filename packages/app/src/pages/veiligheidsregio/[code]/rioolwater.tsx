@@ -92,7 +92,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={
-              commonTexts.veiligheidsregio_layout.headings.vroege_signalen
+              commonTexts.sidebar.categories.development_of_the_virus.title
             }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,

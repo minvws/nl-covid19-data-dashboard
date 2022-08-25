@@ -46,7 +46,7 @@ const pageMetrics = [
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  caterogyTexts: siteText.common.nationaal_layout.headings.gedrag,
+  caterogyTexts: siteText.common.sidebar.categories.actions_to_take.title,
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   text: siteText.pages.behavior_page,
 });

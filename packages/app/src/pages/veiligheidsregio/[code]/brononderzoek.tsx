@@ -119,7 +119,7 @@ export default function BrononderzoekPage(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.archief}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={
               commonTexts.sidebar.metrics.source_investigation.title
             }
