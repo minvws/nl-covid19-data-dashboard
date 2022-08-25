@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { resolveHref } from 'next/dist/shared/lib/router/router';
 import { NextRouter, useRouter } from 'next/router';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
 import chevronUrl from '~/assets/chevron.svg';
@@ -127,17 +127,19 @@ const Unavailable = styled.span(
   })
 );
 
-const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
+const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
   css({
     p: 2,
     pl: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
-    color: x.isActive ? 'blue' : 'black',
-    fontWeight: x.isActive ? 'bold' : 'normal',
+    color: anchorProps.isActive ? 'blue' : 'black',
+    fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
-    bg: x.isActive ? 'lightBlue' : 'transparent',
-    borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
+    bg: anchorProps.isActive ? 'lightBlue' : 'transparent',
+    borderRightColor: anchorProps.isActive
+      ? 'sidebarLinkBorder'
+      : 'transparent',
 
     '&:hover, &:focus': {
       bg: 'blue',
@@ -146,7 +148,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
     },
 
     '&::after': {
-      content: x.isActive
+      content: anchorProps.isActive
         ? 'none'
         : asResponsiveArray({ _: 'none', xs: undefined }),
       backgroundImage: `url('${chevronUrl}')`,
