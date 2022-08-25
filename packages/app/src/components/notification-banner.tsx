@@ -43,6 +43,7 @@ export function NotificationBanner({
                 alignItems="center"
                 as="button"
                 css={css({
+                  color: colors.body,
                   cursor: 'pointer',
                   border: 0,
                   borderRadius: '5px',
