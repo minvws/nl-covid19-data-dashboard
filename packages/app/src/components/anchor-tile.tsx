@@ -85,7 +85,7 @@ const StyledAnchor = styled(Anchor)(
 const IconContainer = styled.span(
   css({
     mr: 2,
-    svg: { width: 24, height: 24, display: 'block', maxWidth: 'initial' },
+    svg: { width: 24, height: 11, display: 'block', maxWidth: 'initial' },
   })
 );
 
