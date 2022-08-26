@@ -111,7 +111,7 @@ export function TopicalTile({
           </Box>
         </Box>
 
-        {cta ? <TextWithChevron label={cta.label}></TextWithChevron> : null}
+        {cta && <TextWithChevron label={cta.label}></TextWithChevron>}
       </>
     </Box>
   );
