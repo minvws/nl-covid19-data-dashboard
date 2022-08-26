@@ -9,11 +9,11 @@ type TextWithChevronProps = {
   label: string;
 };
 
-export function TextWithChevron({ label }: TextWithChevronProps) {
+export const TextWithChevron = ({ label }: TextWithChevronProps) => {
   return (
     <Box
       display="flex"
-      justifyContent={'center'}
+      justifyContent="center"
       alignItems="center"
       bg={colors.lightBlue}
       color={colors.blue}
