@@ -74,8 +74,7 @@ export const Anchor = styled.a<AnchorProps>(
     props.display &&
     css({
       display: props.display,
-    }),
-  (props) => props.width && css({ width: props.width })
+    })
 );
 
 export const Heading = styled.h1.attrs(

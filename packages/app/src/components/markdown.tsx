@@ -33,7 +33,7 @@ const renderers = {
       </ExternalLink>
     ) : (
       <Link href={props.href} passHref>
-        <Anchor underline>
+        <Anchor underline display="inline-block">
           {props.children} <ChevronRight width={10} height={10} />
         </Anchor>
       </Link>
