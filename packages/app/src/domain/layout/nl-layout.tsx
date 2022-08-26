@@ -56,7 +56,7 @@ export function NlLayout(props: NlLayoutProps) {
           'elderly_at_home',
         ],
       ],
-      ['actions_to_take', ['vaccinations', 'measures', 'compliance']],
+      ['actions_to_take', ['vaccinations', 'current_advices', 'compliance']],
       [
         'archived_metrics',
         [
