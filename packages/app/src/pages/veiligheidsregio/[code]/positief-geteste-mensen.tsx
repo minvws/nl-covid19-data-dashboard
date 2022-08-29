@@ -1,5 +1,5 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Stap1Thuisbezoek } from '@corona-dashboard/icons';
+import { GgdTesten } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -189,7 +189,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Stap1Thuisbezoek />}
+            icon={<GgdTesten />}
             description={textVr.pagina_toelichting}
             metadata={{
               datumsText: textVr.datums,

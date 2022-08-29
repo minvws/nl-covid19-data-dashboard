@@ -1,5 +1,5 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Stap1Thuisbezoek } from '@corona-dashboard/icons';
+import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
 import { Text, InlineText, BoldText } from '~/components/typography';
@@ -142,7 +142,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
-            icon={<Stap1Thuisbezoek />}
+            icon={<GgdTesten />}
             description={textGm.pagina_toelichting}
             metadata={{
               datumsText: textGm.datums,
