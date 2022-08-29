@@ -3,7 +3,7 @@ import {
   NlTestedOverallValue,
   TimeframeOptionsList,
 } from '@corona-dashboard/common';
-import { GgdTesten, Stap1Thuisbezoek } from '@corona-dashboard/icons';
+import { GgdTesten } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
