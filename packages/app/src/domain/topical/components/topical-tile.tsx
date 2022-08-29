@@ -3,11 +3,11 @@ import { space } from '~/style/theme';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Heading } from '~/components/typography';
-import { LinkWithIcon } from '~/components/link-with-icon';
+import { TextWithChevron } from './text-with-chevron';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
+import { Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 
@@ -55,8 +55,6 @@ export function TopicalTile({
       css={css({
         '&:hover .topical-tile-cta': {
           bg: colors.blue,
-        },
-        '&:hover .topical-tile-cta a': {
           textDecoration: 'underline',
           color: colors.white,
         },
@@ -113,27 +111,7 @@ export function TopicalTile({
           </Box>
         </Box>
 
-        {cta ? (
-          <Box
-            display="flex"
-            justifyContent={'center'}
-            bg={colors.lightBlue}
-            color={colors.blue}
-            padding={3}
-            className="topical-tile-cta"
-            css={css({
-              transition: 'background .1s ease-in-out',
-            })}
-          >
-            <LinkWithIcon
-              href={cta.href}
-              icon={<ChevronRight />}
-              iconPlacement="right"
-            >
-              {cta.label}
-            </LinkWithIcon>
-          </Box>
-        ) : null}
+        {cta && <TextWithChevron label={cta.label}></TextWithChevron>}
       </>
     </Box>
   );
