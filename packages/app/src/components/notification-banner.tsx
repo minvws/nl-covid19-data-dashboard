@@ -30,7 +30,7 @@ export function NotificationBanner({
         display="flex"
         spacingHorizontal={3}
       >
-        <Box display="flex" width="1.6rem">
+        <Box display="flex" width="1.6rem" height="1.6rem">
           <Warning />
         </Box>
 
@@ -43,6 +43,7 @@ export function NotificationBanner({
                 alignItems="center"
                 as="button"
                 css={css({
+                  color: colors.body,
                   cursor: 'pointer',
                   border: 0,
                   borderRadius: '5px',
