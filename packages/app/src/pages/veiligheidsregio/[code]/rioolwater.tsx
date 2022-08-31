@@ -9,7 +9,7 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   getArticleParts,
   getPagePartsQuery,
@@ -26,22 +26,23 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['sewer', 'sewer_per_installation'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textVr: siteText.pages.sewer_page.vr,
+  textShared: siteText.pages.sewer_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textVr: siteText.pages.sewer_page.vr,
-        textShared: siteText.pages.sewer_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData('sewer', 'sewer_per_installation', 'difference.sewer__average'),
   async (context: GetStaticPropsContext) => {
@@ -67,7 +68,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { commonTexts } = useIntl();
-  const { textVr, textShared } = pageText;
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
   const sewerAverages = data.sewer;
 
   const metadata = {
@@ -88,7 +92,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={
-              commonTexts.veiligheidsregio_layout.headings.vroege_signalen
+              commonTexts.sidebar.categories.development_of_the_virus.title
             }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,

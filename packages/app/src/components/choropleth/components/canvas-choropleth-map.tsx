@@ -83,7 +83,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
 
   const [hover, setHover] = useState<[number, number][][]>();
   const [hoverCode, setHoverCode] = useState<CodeProp>();
-  const [keyboardActive, setKeyboardActive] = useState(false);
+  const [isKeyboardActive, setIsKeyboardActive] = useState(false);
 
   const [geoInfo, geoInfoLookup] = useProjectedCoordinates(
     choroplethFeatures.hover,
@@ -101,7 +101,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
 
   const selectFeature = useCallback(
     (code: CodeProp | undefined, isKeyboardAction = false) => {
-      setKeyboardActive(isKeyboardAction);
+      setIsKeyboardActive(isKeyboardAction);
       if (!isDefined(code)) {
         return;
       }
@@ -132,7 +132,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   const stageRef = useRef<Konva.Stage>(null);
 
   useEffect(() => {
-    if (!keyboardActive) {
+    if (!isKeyboardActive) {
       return;
     }
 
@@ -150,7 +150,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
       const y = Math.round(box.y + box.height / 2);
       tooltipTrigger({ code: hoverCode, x, y });
     }
-  }, [hoverCode, hoveredRef, tooltipTrigger, keyboardActive]);
+  }, [hoverCode, hoveredRef, tooltipTrigger, isKeyboardActive]);
 
   const { getLink } = dataOptions;
 
@@ -209,6 +209,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
             hover={hover}
             hoverCode={hoverCode}
             featureProps={featureProps}
+            isKeyboardActive={isKeyboardActive}
           />
         </Stage>
         <div style={{ position: 'absolute', left: 0, right: 0 }}>
@@ -261,10 +262,12 @@ type HoveredFeatureProps = {
   hover: [number, number][][] | undefined;
   hoverCode: string | undefined;
   featureProps: FeatureProps;
+  isKeyboardActive?: boolean;
 };
 
 const HoveredFeature = memo((props: HoveredFeatureProps) => {
-  const { hoveredRef, hover, hoverCode, featureProps } = props;
+  const { hoveredRef, hover, hoverCode, featureProps, isKeyboardActive } =
+    props;
 
   if (!isDefined(hoverCode) || !isDefined(hover)) {
     return null;
@@ -282,7 +285,11 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
             points={x.flat()}
             strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
             closed
-            stroke={featureProps.hover.stroke(hoverCode, true)}
+            stroke={featureProps.hover.stroke(
+              hoverCode,
+              true,
+              isKeyboardActive
+            )}
           />
         ))}
       </Group>
@@ -395,6 +402,11 @@ type AreaMapProps = {
   width: number;
 };
 
+type GeoInfoGroup = {
+  code: string;
+  coordinatesList: [number, number][][];
+};
+
 function AreaMap(props: AreaMapProps) {
   const {
     isTabInteractive,
@@ -409,6 +421,27 @@ function AreaMap(props: AreaMapProps) {
     width,
   } = props;
 
+  const geoInfoGroups: GeoInfoGroup[] = geoInfo
+    .reduce((geoInfoGroups, geoItem) => {
+      const index = geoInfoGroups.findIndex(
+        (geoInfoGroup) => geoInfoGroup.code === geoItem.code
+      );
+      if (index === -1) {
+        geoInfoGroups.push({
+          code: geoItem.code,
+          coordinatesList: [geoItem.coordinates],
+        });
+      } else {
+        geoInfoGroups[index].coordinatesList.push(geoItem.coordinates);
+      }
+      return geoInfoGroups;
+    }, [] as GeoInfoGroup[])
+    .sort((geoInfoGroupA, geoInfoGroupB) => {
+      return getFeatureName(geoInfoGroupA.code).localeCompare(
+        getFeatureName(geoInfoGroupB.code)
+      );
+    });
+
   const isTouch = useIsTouchDevice();
 
   return (
@@ -417,28 +450,34 @@ function AreaMap(props: AreaMapProps) {
       tabIndex={isTabInteractive ? 0 : -1}
       onMouseMove={!isTouch || isIOSDevice() ? handleMouseOver : undefined}
     >
-      {geoInfo.map((x, i) => (
-        <area
-          style={{
-            cursor: isDefined(getLink) ? 'pointer' : undefined,
-          }}
-          tabIndex={2}
-          aria-label={getFeatureName(x.code)}
-          key={`${x.code}_${i}`}
-          data-id={x.code}
-          shape="poly"
-          coords={x.coordinates.flat().join(',')}
-          href={!isTouch && isDefined(getLink) ? getLink(x.code) : undefined}
-          onFocus={(event) => {
-            anchorEventHandlers.onFocus(event);
-            selectFeature(x.code as CodeProp, true);
-          }}
-          onBlur={(event) => {
-            anchorEventHandlers.onBlur(event);
-            selectFeature(undefined, true);
-          }}
-        />
-      ))}
+      {geoInfoGroups.map((geoInfoGroup) =>
+        geoInfoGroup.coordinatesList.map((geoInfoCoordinates, index) => (
+          <area
+            style={{
+              cursor: isDefined(getLink) ? 'pointer' : undefined,
+            }}
+            tabIndex={index === 0 ? 2 : -1}
+            aria-label={getFeatureName(geoInfoGroup.code)}
+            key={`${geoInfoGroup.code}_${index}`}
+            data-id={geoInfoGroup.code}
+            shape="poly"
+            coords={geoInfoCoordinates.flat().join(',')}
+            href={
+              !isTouch && isDefined(getLink)
+                ? getLink(geoInfoGroup.code)
+                : undefined
+            }
+            onFocus={(event) => {
+              anchorEventHandlers.onFocus(event);
+              selectFeature(geoInfoGroup.code as CodeProp, true);
+            }}
+            onBlur={(event) => {
+              anchorEventHandlers.onBlur(event);
+              selectFeature(undefined, true);
+            }}
+          />
+        ))
+      )}
       <area
         shape="rect"
         coords={`0,0,${width},${height}`}

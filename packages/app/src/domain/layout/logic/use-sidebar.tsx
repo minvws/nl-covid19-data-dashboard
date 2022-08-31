@@ -1,19 +1,8 @@
 import {
-  Arts,
-  Coronavirus,
-  Elderly,
-  Bevolking,
-  Gehandicaptenzorg,
   Maatregelen,
-  Phone,
-  Reproductiegetal,
-  Rioolvirus,
-  GgdTesten,
-  Vaccinaties,
-  Varianten,
-  Verpleeghuis,
-  Ziekenhuis,
-  Ziektegolf,
+  Archive,
+  Eye,
+  MedischeScreening,
 } from '@corona-dashboard/icons';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -29,24 +18,11 @@ import {
   SidebarMap,
 } from './types';
 
-const mapKeysToIcons = {
-  hospital_admissions: <Ziekenhuis />,
-  positive_tests: <GgdTesten />,
-  mortality: <Coronavirus />,
-  sewage_measurement: <Rioolvirus />,
-  source_investigation: <Bevolking />,
-  nursing_home_care: <Verpleeghuis />,
-  compliance: <Bevolking />,
-  disabled_care: <Gehandicaptenzorg />,
-  elderly_at_home: <Elderly />,
-  infectious_people: <Ziektegolf />,
-  measures: <Maatregelen />,
-  reproduction_number: <Reproductiegetal />,
-  general_practitioner_suspicions: <Arts />,
-  coronamelder_app: <Phone />,
-  variants: <Varianten />,
-  intensive_care_admissions: <Arts />,
-  vaccinations: <Vaccinaties />,
+const mapCategoriesToIcons = {
+  development_of_the_virus: <Eye />,
+  consequences_for_healthcare: <MedischeScreening />,
+  actions_to_take: <Maatregelen />,
+  archived_metrics: <Archive />,
 } as const;
 
 const mapKeysToReverseRouter = {
@@ -58,7 +34,7 @@ const mapKeysToReverseRouter = {
   hospital_admissions: 'ziekenhuisopnames',
   infectious_people: 'besmettelijkeMensen',
   intensive_care_admissions: 'intensiveCareOpnames',
-  measures: 'maatregelen',
+  current_advices: 'geldendeAdviezen',
   mortality: 'sterfte',
   nursing_home_care: 'verpleeghuiszorg',
   positive_tests: 'positiefGetesteMensen',
@@ -77,7 +53,6 @@ type UseSidebarArgs<T extends Layout> = {
 
 type Content = {
   title: string;
-  description?: string;
 };
 
 export function useSidebar<T extends Layout>({
@@ -105,12 +80,9 @@ export function useSidebar<T extends Layout>({
     };
 
     const getItem = (key: ItemKeys<T>): SidebarItem<T> => {
-      const icon = mapKeysToIcons[key];
-
       return {
         key,
         title: commonTexts.sidebar.metrics[key].title,
-        icon,
         href: getHref(key),
       };
     };
@@ -118,13 +90,12 @@ export function useSidebar<T extends Layout>({
     const getCategory = (category: SidebarElement<T>): SidebarCategory<T> => {
       const [key, items] = category;
       const content: Content = commonTexts.sidebar.categories[key];
+      const icon = mapCategoriesToIcons[key];
 
       return {
         key,
         title: content.title,
-        description: isPresent(content?.description)
-          ? content.description
-          : undefined,
+        icon,
         items: items.map(getItem),
       };
     };

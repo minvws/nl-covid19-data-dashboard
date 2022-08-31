@@ -290,7 +290,9 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
    */
   const getAnchor = (x: NumberValue) => {
     return x === tickValues[0] && isLongStartLabel
-      ? 'start'
+      ? tickValues.length === 1
+        ? 'middle'
+        : 'start'
       : x === tickValues[tickValues.length - 1] && isLongEndLabel
       ? 'end'
       : 'middle';
@@ -339,6 +341,11 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         tickLabelProps={(x) => ({
           fill: colors.data.axisLabels,
           fontSize: 12,
+          /**
+           * Applying a dx of -50%, when there's only a single tick value, prevents
+           * the tick to go out of bounds and centers the tick value relative to the graph.
+           */
+          dx: tickValues.length === 1 ? '-50%' : undefined,
           dy: '-0.5px',
           textAnchor: getAnchor(x),
         })}

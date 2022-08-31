@@ -18,7 +18,7 @@ import {
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-type MaatregelenData = {
+type GeldendeAdviezenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
 };
@@ -34,7 +34,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
     getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  createGetContent<MaatregelenData>((context) => {
+  createGetContent<GeldendeAdviezenData>((context) => {
     const { locale } = context;
     return `
     {

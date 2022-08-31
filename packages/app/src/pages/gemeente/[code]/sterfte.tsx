@@ -14,7 +14,7 @@ import {
 import { Text } from '~/components/typography';
 import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -36,19 +36,22 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['deceased_rivm'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textGm: siteText.pages.deceased_page.gm,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({ textGm: siteText.pages.deceased_page.gm }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectGmData(
     'difference.deceased_rivm__covid_daily',
@@ -89,7 +92,10 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { commonTexts } = useIntl();
-  const { textGm } = pageText;
+  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -108,7 +114,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.gemeente_layout.headings.besmettingen}
+            category={
+              commonTexts.sidebar.categories.development_of_the_virus.title
+            }
             title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}

@@ -23,7 +23,7 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { gmCodesByVrCode } from '~/data';
 import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -52,22 +52,23 @@ import {
   replaceVariablesInText,
   useReverseRouter,
 } from '~/utils';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['hospital_nice'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textVr: siteText.pages.hospital_page.vr,
+  textShared: siteText.pages.hospital_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textVr: siteText.pages.hospital_page.vr,
-        textShared: siteText.pages.hospital_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData('hospital_nice'),
   createGetChoroplethData({
@@ -110,7 +111,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
-  const { textVr, textShared } = pageText;
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
   const lastValue = data.hospital_nice.last_value;
 
   const lastValueChoropleth =
@@ -150,7 +154,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.veiligheidsregio_layout.headings.ziekenhuizen}
+            category={
+              commonTexts.sidebar.categories.consequences_for_healthcare.title
+            }
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}

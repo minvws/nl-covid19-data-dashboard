@@ -19,6 +19,8 @@ export function useFormatSeriesValue<T extends TimestampedValue>(
       const formatter =
         metricPropertyFormatters[metricProperty] || intl.formatNumber;
       const numberValue = value[metricProperty];
+      if (!isPresent(numberValue)) return '-';
+
       const formattedValue =
         isPresent(numberValue) && typeof numberValue === 'number'
           ? formatter(numberValue)

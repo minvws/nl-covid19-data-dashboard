@@ -4,7 +4,7 @@ import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
 import { getClient, getImageSrc } from '~/lib/sanity';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   createGetStaticProps,
   StaticProps,
@@ -16,6 +16,13 @@ import {
 } from '~/static-props/get-data';
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  textTopicalPageShared: siteText.pages.topical_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
@@ -42,12 +49,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        textTopicalPgaeShared: siteText.pages.topical_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
     const { locale } = context;
@@ -83,8 +85,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, lastGenerated } = props;
+  const { content, lastGenerated, pageText } = props;
   const { locale = 'nl' } = useRouter();
+
+  const { textTopicalPageShared } = useDynamicLokalizeTexts<LokalizeTexts>(
+    pageText,
+    selectLokalizeTexts
+  );
 
   const { cover } = content;
   const { asset } = cover;
@@ -110,10 +117,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
       {...metadata}
     >
       <Box backgroundColor="white">
-        <ArticleDetail
-          article={content}
-          text={pageText.textTopicalPgaeShared}
-        />
+        <ArticleDetail article={content} text={textTopicalPageShared} />
       </Box>
     </Layout>
   );

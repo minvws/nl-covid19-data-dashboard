@@ -1,6 +1,7 @@
 export type IconName =
   | 'AfstandSporten'
   | 'AlcoholVerkoop'
+  | 'Archive'
   | 'Arrow'
   | 'Arts'
   | 'Avondklok'
@@ -131,6 +132,7 @@ export type IconName =
 export const iconName2filename: Record<IconName, string> = {
   AfstandSporten: 'afstand_sporten.svg',
   AlcoholVerkoop: 'alcohol_verkoop.svg',
+  Archive: 'archive.svg',
   Arrow: 'arrow.svg',
   Arts: 'arts.svg',
   Avondklok: 'avondklok.svg',

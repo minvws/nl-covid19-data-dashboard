@@ -1,8 +1,7 @@
 import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
-import { External, Phone } from '@corona-dashboard/icons';
+import { External as ExternalLinkIcon, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { isEmpty } from 'lodash';
-import styled from 'styled-components';
 import { WarningTile } from '~/components';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -14,6 +13,8 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, Text, BoldText } from '~/components/typography';
+import { Box } from '~/components/base';
+import { IconWrapper } from '~/components/anchor-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -74,7 +75,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.archief}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             title={corona_melder_app.header.title}
             icon={<Phone />}
             description={corona_melder_app.header.description}
@@ -134,10 +135,12 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               <Text>{corona_melder_app.rapport.description}</Text>
 
               <Link href={corona_melder_app.rapport.link.href} passHref>
-                <a target="_blank" css={css({ display: 'flex' })}>
-                  <IconContainer>
-                    <External aria-hidden="true" />
-                  </IconContainer>
+                <a target="_blank" css={css({ display: 'flex', mt: 2 })}>
+                  <Box display="flex" alignItems="center">
+                    <IconWrapper>
+                      <ExternalLinkIcon aria-hidden="true" />
+                    </IconWrapper>
+                  </Box>
                   <span css={css({ maxWidth: 200 })}>
                     {corona_melder_app.rapport.link.text}
                   </span>
@@ -189,12 +192,3 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default CoronamelderPage;
-
-const IconContainer = styled.span(
-  css({
-    marginRight: 3,
-    color: 'gray',
-    height: 25,
-    width: 25,
-  })
-);

@@ -65,7 +65,7 @@ function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
       <Box display="inline-flex" position="relative">
         <InlineText>
           {lastWord}
-          <IconContainer>{icon}</IconContainer>
+          <IconWrapper>{icon}</IconWrapper>
         </InlineText>
       </Box>
     </InlineText>
@@ -91,12 +91,9 @@ const ListItem = styled.li(
   })
 );
 
-const IconContainer = styled.span(
+const IconWrapper = styled.span(
   css({
-    position: 'absolute',
-    right: -13,
-    top: 0,
-
+    ml: 1,
     svg: {
       width: 11,
       height: 11,

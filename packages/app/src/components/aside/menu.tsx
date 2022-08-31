@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { UrlObject } from 'url';
 import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
-import { Anchor, Heading, Text } from '~/components/typography';
+import { Anchor, Heading } from '~/components/typography';
 import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -52,33 +52,19 @@ export function Menu({
 
 export function CategoryMenu({
   title,
-  description,
   children,
+  icon,
 }: {
   children: ReactNode;
   title?: string;
-  description?: string;
+  icon: ReactNode;
 }) {
   return (
     <Box as="li" spacing={2}>
-      {title && (
-        <Box px={3} pt={3}>
-          <Heading
-            level={4}
-            variant="subtitle2"
-            css={css({
-              fontSize: 1,
-            })}
-          >
-            {title}
-          </Heading>
-        </Box>
-      )}
-      {description && (
-        <Box px={3}>
-          <Text css={css({ fontSize: 1, color: 'bodyLight' })}>
-            {description}
-          </Text>
+      {title && icon && (
+        <Box px={2} pt={3} display="flex" alignItems="center">
+          <Icon>{icon}</Icon>
+          <Heading level={5}>{title}</Heading>
         </Box>
       )}
       <Menu>{children}</Menu>
@@ -93,7 +79,7 @@ interface MenuItemLinkProps {
   showArrow?: boolean;
 }
 
-export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
+export function MenuItemLink({ href, title }: MenuItemLinkProps) {
   const router = useRouter();
   const breakpoints = useBreakpoints(true);
 
@@ -101,7 +87,7 @@ export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
     return (
       <li>
         <Unavailable>
-          <AsideTitle icon={icon} title={title} />
+          <AsideTitle title={title} />
         </Unavailable>
       </li>
     );
@@ -116,11 +102,7 @@ export function MenuItemLink({ href, icon, title }: MenuItemLinkProps) {
           isActive={breakpoints.md && isActive}
           aria-current={isActive ? 'page' : undefined}
         >
-          <AsideTitle
-            icon={icon}
-            title={title}
-            showArrow={!breakpoints.md || !isActive}
-          />
+          <AsideTitle title={title} showArrow={!breakpoints.md || !isActive} />
         </StyledAnchor>
       </Link>
     </li>
@@ -145,26 +127,28 @@ const Unavailable = styled.span(
   })
 );
 
-const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
+const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
   css({
     p: 2,
+    pl: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
-    color: x.isActive ? 'blue' : 'black',
+    color: anchorProps.isActive ? 'blue' : 'black',
+    fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
-    bg: x.isActive ? 'lightBlue' : 'transparent',
-    borderRightColor: x.isActive ? 'sidebarLinkBorder' : 'transparent',
+    bg: anchorProps.isActive ? 'lightBlue' : 'transparent',
+    borderRightColor: anchorProps.isActive
+      ? 'sidebarLinkBorder'
+      : 'transparent',
 
-    '&:hover': {
-      bg: 'offWhite',
-    },
-
-    '&:focus': {
-      bg: '#ebebeb',
+    '&:hover, &:focus': {
+      bg: 'blue',
+      color: 'white',
+      fontWeight: 'bold',
     },
 
     '&::after': {
-      content: x.isActive
+      content: anchorProps.isActive
         ? 'none'
         : asResponsiveArray({ _: 'none', xs: undefined }),
       backgroundImage: `url('${chevronUrl}')`,
@@ -179,3 +163,31 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((x) =>
     },
   })
 );
+
+const Icon = ({ children }: { children: ReactNode }) => {
+  return (
+    <Box
+      role="img"
+      aria-hidden="true"
+      flex="0 0 auto"
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      justifyContent="center"
+      alignItems="center"
+      padding={0}
+      mr={0}
+      mt="-3px"
+      css={css({
+        width: '2.5rem',
+        height: '2.5rem',
+        svg: {
+          height: '2.25rem',
+          fill: 'currentColor',
+        },
+      })}
+    >
+      {children}
+    </Box>
+  );
+};

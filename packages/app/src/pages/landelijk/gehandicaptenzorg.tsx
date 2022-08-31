@@ -51,7 +51,8 @@ const pageMetrics = ['disability_care'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   caterogyTexts: {
-    category: siteText.common.nationaal_layout.headings.kwetsbare_groepen,
+    category:
+      siteText.common.sidebar.categories.consequences_for_healthcare.title,
     screenReaderCategory: siteText.common.sidebar.metrics.disabled_care.title,
   },
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,

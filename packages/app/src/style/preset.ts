@@ -39,8 +39,6 @@ export const preset = {
       fontSize: 2,
       lineHeight: 2,
       fontWeight: 'bold',
-      textTransform: 'uppercase',
-      letterSpacing: '0.05em',
       color: 'category',
     },
     body1: {
