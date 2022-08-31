@@ -145,6 +145,9 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
       bg: 'blue',
       color: 'white',
       fontWeight: 'bold',
+      svg: {
+        color: 'white',
+      },
     },
 
     '&::after': {
