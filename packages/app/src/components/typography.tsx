@@ -63,7 +63,11 @@ export const Anchor = styled.a<AnchorProps>(
     props.underline &&
     css({
       textDecoration: props.underline === 'hover' ? 'none' : 'underline',
-      '&:hover, &:focus': { textDecoration: 'underline' },
+      '&:hover, &:focus': {
+        span: {
+          textDecoration: 'underline',
+        },
+      },
     }),
   (props) =>
     props.hoverColor &&

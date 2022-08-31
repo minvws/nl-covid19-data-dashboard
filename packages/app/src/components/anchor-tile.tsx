@@ -3,6 +3,7 @@ import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Anchor, Heading } from '~/components/typography';
+import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
@@ -33,12 +34,12 @@ export function AnchorTile({
       <LinkContainer>
         {external ? (
           <ExternalLink href={href}>
-            <ExternalLinkIconContainer>
-              <IconContainer>
+            <Box display="flex" alignItems="center">
+              <IconWrapper>
                 <ExternalLinkIcon />
-              </IconContainer>
+              </IconWrapper>
               {label}
-            </ExternalLinkIconContainer>
+            </Box>
           </ExternalLink>
         ) : (
           <Link href={href} passHref>
@@ -52,10 +53,10 @@ export function AnchorTile({
   );
 }
 
-const ExternalLinkIconContainer = styled.div(
+export const IconWrapper = styled.span(
   css({
-    display: 'flex',
-    alignItems: 'center',
+    mr: 2,
+    svg: { width: 24, height: 11, display: 'block', maxWidth: 'initial' },
   })
 );
 
@@ -79,13 +80,6 @@ const Content = styled.div(
 const StyledAnchor = styled(Anchor)(
   css({
     display: 'flex',
-  })
-);
-
-const IconContainer = styled.span(
-  css({
-    mr: 2,
-    svg: { width: 24, height: 11, display: 'block', maxWidth: 'initial' },
   })
 );
 
