@@ -421,8 +421,8 @@ function AreaMap(props: AreaMapProps) {
     width,
   } = props;
 
-  const geoInfoGroups: GeoInfoGroup[] = geoInfo
-    .reduce((geoInfoGroups, geoItem) => {
+  const geoInfoGroups: GeoInfoGroup[] = geoInfo.reduce(
+    (geoInfoGroups, geoItem) => {
       const index = geoInfoGroups.findIndex(
         (geoInfoGroup) => geoInfoGroup.code === geoItem.code
       );
@@ -435,12 +435,9 @@ function AreaMap(props: AreaMapProps) {
         geoInfoGroups[index].coordinatesList.push(geoItem.coordinates);
       }
       return geoInfoGroups;
-    }, [] as GeoInfoGroup[])
-    .sort((geoInfoGroupA, geoInfoGroupB) => {
-      return getFeatureName(geoInfoGroupA.code).localeCompare(
-        getFeatureName(geoInfoGroupB.code)
-      );
-    });
+    },
+    [] as GeoInfoGroup[]
+  );
 
   const isTouch = useIsTouchDevice();
 

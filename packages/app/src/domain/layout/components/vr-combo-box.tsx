@@ -27,6 +27,7 @@ export function VrComboBox(props: VrComboBoxProps) {
             : reverseRouter.vr.index(region.code)
         )
       }
+      sorter={(a, b) => a.name.localeCompare(b.name)}
       selectedOption={vrData.find((vr) => vr.code === selectedVrCode)}
     />
   );
