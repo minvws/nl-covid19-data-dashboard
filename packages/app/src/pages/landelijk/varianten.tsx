@@ -111,7 +111,9 @@ export default function CovidVariantenPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.besmettingen}
+            category={
+              commonTexts.sidebar.categories.development_of_the_virus.title
+            }
             screenReaderCategory={commonTexts.sidebar.metrics.variants.title}
             title={textNl.titel}
             icon={<Varianten />}

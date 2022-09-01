@@ -15,7 +15,7 @@ import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { Languages } from '~/locale';
+import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
   getElementsQuery,
@@ -37,24 +37,25 @@ import {
 } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
-
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['deceased_cbs', 'deceased_rivm'];
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  categoryTexts:
+    siteText.common.sidebar.categories.development_of_the_virus.title,
+  textVr: siteText.pages.deceased_page.vr,
+  textShared: siteText.pages.deceased_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(
-      (siteText) => ({
-        caterogyTexts:
-          siteText.common.veiligheidsregio_layout.headings.besmettingen,
-        textVr: siteText.pages.deceased_page.vr,
-        textShared: siteText.pages.deceased_page.shared,
-      }),
-      locale
-    ),
+    getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(
     'deceased_cbs',
@@ -101,7 +102,8 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { caterogyTexts, textVr, textShared } = pageText;
+  const { categoryTexts, textVr, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -120,7 +122,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts}
+            category={categoryTexts}
             title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
               safetyRegion: vrName,
             })}

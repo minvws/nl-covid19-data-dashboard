@@ -58,32 +58,26 @@ export function VrLayout(props: VrLayoutProps) {
     router.route !== '/veiligheidsregio' &&
     router.route !== '/actueel/veiligheidsregio';
 
-  const topItems = useSidebar({
-    layout: 'vr',
-    code: code,
-    map: ['measures'],
-  });
-
   const items = useSidebar({
     layout: 'vr',
     code: code,
     map: [
-      ['vaccinations', ['vaccinations']],
-      ['hospitals', ['hospital_admissions']],
-      ['infections', ['positive_tests', 'mortality']],
-      ['behaviour', ['compliance']],
       [
-        'vulnerable_groups',
-        ['nursing_home_care', 'disabled_care', 'elderly_at_home'],
+        'development_of_the_virus',
+        ['sewage_measurement', 'positive_tests', 'mortality'],
       ],
-      ['early_indicators', ['sewage_measurement']],
+      [
+        'consequences_for_healthcare',
+        [
+          'hospital_admissions',
+          'nursing_home_care',
+          'disabled_care',
+          'elderly_at_home',
+        ],
+      ],
+      ['actions_to_take', ['vaccinations', 'current_advices', 'compliance']],
+      ['archived_metrics', ['source_investigation']],
     ],
-  });
-
-  const archivedItems = useSidebar({
-    layout: 'vr',
-    code: code,
-    map: [['archived_metrics', ['source_investigation']]],
   });
 
   return (
@@ -135,32 +129,9 @@ export function VrLayout(props: VrLayoutProps) {
                   </Heading>
                 </Box>
 
-                <Box pb={4}>
-                  <Menu>
-                    <MenuRenderer items={topItems} />
-                  </Menu>
-                </Box>
-
-                <Box px={3}>
-                  <Heading level={3}>
-                    {commonTexts.sidebar.shared.metrics_title}
-                  </Heading>
-                </Box>
-
                 <Menu spacing={2}>
                   <MenuRenderer items={items} />
                 </Menu>
-
-                <Box
-                  borderTopColor="border"
-                  borderTopStyle="solid"
-                  borderTopWidth={1}
-                  pt={3}
-                >
-                  <Menu>
-                    <MenuRenderer items={archivedItems} />
-                  </Menu>
-                </Box>
               </Box>
             )}
           </>

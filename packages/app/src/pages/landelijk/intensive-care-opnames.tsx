@@ -6,7 +6,7 @@ import {
   TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
-import { Arts } from '@corona-dashboard/icons';
+import { IntensiveCareOpnames } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import {
   TwoKpiSection,
@@ -141,12 +141,14 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.nationaal_layout.headings.ziekenhuizen}
+            category={
+              commonTexts.sidebar.categories.consequences_for_healthcare.title
+            }
             screenReaderCategory={
               commonTexts.sidebar.metrics.intensive_care_admissions.title
             }
             title={textNl.titel}
-            icon={<Arts />}
+            icon={<IntensiveCareOpnames />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

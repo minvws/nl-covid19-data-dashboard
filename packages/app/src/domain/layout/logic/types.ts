@@ -1,5 +1,10 @@
 export type Layout = 'nl' | 'vr' | 'gm';
 
+type SharedCategoryKeys =
+  | 'development_of_the_virus'
+  | 'consequences_for_healthcare'
+  | 'actions_to_take';
+
 export type GmItemKeys =
   | 'hospital_admissions'
   | 'mortality'
@@ -7,18 +12,14 @@ export type GmItemKeys =
   | 'sewage_measurement'
   | 'vaccinations';
 
-export type GmCategoryKeys =
-  | 'early_indicators'
-  | 'hospitals'
-  | 'infections'
-  | 'vaccinations';
+export type GmCategoryKeys = SharedCategoryKeys;
 
 export type VrItemKeys =
   | 'compliance'
   | 'disabled_care'
   | 'elderly_at_home'
   | 'hospital_admissions'
-  | 'measures'
+  | 'current_advices'
   | 'mortality'
   | 'nursing_home_care'
   | 'positive_tests'
@@ -26,14 +27,7 @@ export type VrItemKeys =
   | 'source_investigation'
   | 'vaccinations';
 
-export type VrCategoryKeys =
-  | 'archived_metrics'
-  | 'behaviour'
-  | 'early_indicators'
-  | 'hospitals'
-  | 'infections'
-  | 'vaccinations'
-  | 'vulnerable_groups';
+export type VrCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
 export type NlItemKeys =
   | 'compliance'
@@ -44,7 +38,7 @@ export type NlItemKeys =
   | 'hospital_admissions'
   | 'intensive_care_admissions'
   | 'infectious_people'
-  | 'measures'
+  | 'current_advices'
   | 'mortality'
   | 'nursing_home_care'
   | 'positive_tests'
@@ -54,15 +48,7 @@ export type NlItemKeys =
   | 'vaccinations'
   | 'variants';
 
-export type NlCategoryKeys =
-  | 'archived_metrics'
-  | 'behaviour'
-  | 'early_indicators'
-  | 'hospitals'
-  | 'infections'
-  | 'other'
-  | 'vaccinations'
-  | 'vulnerable_groups';
+export type NlCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
 export type CategoryKeys<T extends Layout> = T extends 'nl'
   ? NlCategoryKeys
@@ -92,14 +78,13 @@ export type SidebarElement<T extends Layout> = [
 export type SidebarCategory<T extends Layout> = {
   key: CategoryKeys<T>;
   title: string;
-  description?: string;
+  icon: React.ReactElement;
   items: SidebarItem<T>[];
 };
 
 export type SidebarItem<T extends Layout> = {
   key: ItemKeys<T>;
   title: string;
-  icon: React.ReactElement;
   href: string | undefined;
 };
 

@@ -6,6 +6,7 @@ See below an overview of all the available icons in this package. This file is g
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | AfstandSporten                         | <div style="background-color: white;"><img src="./src/svg/afstand_sporten.svg" alt="AfstandSporten" /></div>                                                   |
 | AlcoholVerkoop                         | <div style="background-color: white;"><img src="./src/svg/alcohol_verkoop.svg" alt="AlcoholVerkoop" /></div>                                                   |
+| Archive                                | <div style="background-color: white;"><img src="./src/svg/archive.svg" alt="Archive" /></div>                                                                  |
 | Arrow                                  | <div style="background-color: white;"><img src="./src/svg/arrow.svg" alt="Arrow" /></div>                                                                      |
 | Arts                                   | <div style="background-color: white;"><img src="./src/svg/arts.svg" alt="Arts" /></div>                                                                        |
 | Avondklok                              | <div style="background-color: white;"><img src="./src/svg/avondklok.svg" alt="Avondklok" /></div>                                                              |

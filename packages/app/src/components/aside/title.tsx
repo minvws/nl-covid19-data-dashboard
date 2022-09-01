@@ -18,7 +18,7 @@ type TitleProps = {
  * @param props
  */
 export function AsideTitle(props: TitleProps) {
-  const { icon, title, subtitle, showArrow } = props;
+  const { title, subtitle, showArrow } = props;
 
   return (
     <Box
@@ -28,10 +28,8 @@ export function AsideTitle(props: TitleProps) {
       flexWrap="nowrap"
       alignItems="center"
     >
-      {icon && <Icon>{icon}</Icon>}
-
       <Box width="100%">
-        <Text variant="h5">
+        <Text>
           <span
             css={css({
               display: 'flex',
@@ -43,8 +41,8 @@ export function AsideTitle(props: TitleProps) {
             {title}
             {showArrow && (
               <ChevronRight
-                width={10}
-                height={14}
+                width={16}
+                height={20}
                 css={css({ color: 'blue' })}
               />
             )}
@@ -52,34 +50,6 @@ export function AsideTitle(props: TitleProps) {
         </Text>
         <Text>{subtitle}</Text>
       </Box>
-    </Box>
-  );
-}
-
-function Icon({ children }: { children: ReactNode }) {
-  return (
-    <Box
-      role="img"
-      aria-hidden="true"
-      flex="0 0 auto"
-      display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      justifyContent="center"
-      alignItems="center"
-      padding={0}
-      mr={0}
-      mt="-3px"
-      css={css({
-        width: '2.5rem',
-        height: '2.5rem',
-        svg: {
-          height: '2.25rem',
-          fill: 'currentColor',
-        },
-      })}
-    >
-      {children}
     </Box>
   );
 }

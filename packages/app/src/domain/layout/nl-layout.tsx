@@ -33,32 +33,30 @@ export function NlLayout(props: NlLayoutProps) {
 
   const { commonTexts } = useIntl();
 
-  const topItems = useSidebar({
-    layout: 'nl',
-    map: ['measures'],
-  });
-
   const items = useSidebar({
     layout: 'nl',
     map: [
-      ['vaccinations', ['vaccinations']],
-      ['hospitals', ['hospital_admissions', 'intensive_care_admissions']],
       [
-        'infections',
-        ['positive_tests', 'reproduction_number', 'mortality', 'variants'],
+        'development_of_the_virus',
+        [
+          'sewage_measurement',
+          'positive_tests',
+          'reproduction_number',
+          'variants',
+          'mortality',
+        ],
       ],
-      ['behaviour', ['compliance']],
       [
-        'vulnerable_groups',
-        ['nursing_home_care', 'disabled_care', 'elderly_at_home'],
+        'consequences_for_healthcare',
+        [
+          'hospital_admissions',
+          'intensive_care_admissions',
+          'nursing_home_care',
+          'disabled_care',
+          'elderly_at_home',
+        ],
       ],
-      ['early_indicators', ['sewage_measurement']],
-    ],
-  });
-
-  const archivedItems = useSidebar({
-    layout: 'nl',
-    map: [
+      ['actions_to_take', ['vaccinations', 'current_advices', 'compliance']],
       [
         'archived_metrics',
         [
@@ -110,32 +108,9 @@ export function NlLayout(props: NlLayoutProps) {
               </Heading>
             </Box>
 
-            <Box pb={4}>
-              <Menu>
-                <MenuRenderer items={topItems} />
-              </Menu>
-            </Box>
-
-            <Box px={3}>
-              <Heading level={3}>
-                {commonTexts.sidebar.shared.metrics_title}
-              </Heading>
-            </Box>
-
             <Box pb={3}>
               <Menu spacing={2}>
                 <MenuRenderer items={items} />
-              </Menu>
-            </Box>
-
-            <Box
-              borderTopColor="border"
-              borderTopStyle="solid"
-              borderTopWidth={1}
-              pt={3}
-            >
-              <Menu>
-                <MenuRenderer items={archivedItems} />
               </Menu>
             </Box>
           </Box>
