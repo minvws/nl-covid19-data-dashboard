@@ -54,7 +54,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLUListElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
-  const results = useSearchedOptions<Option>(inputValue, options);
+  const results = useSearchedAndSortedOptions<Option>(inputValue, options);
   const breakpoints = useBreakpoints();
   const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
@@ -150,7 +150,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   );
 };
 
-const useSearchedOptions = <Option extends TOption>(
+const useSearchedAndSortedOptions = <Option extends TOption>(
   term: string,
   options: Option[]
 ): Option[] => {
@@ -158,11 +158,9 @@ const useSearchedOptions = <Option extends TOption>(
 
   return useMemo(
     () =>
-      throttledTerm.trim() === ''
-        ? options
-        : matchSorter(options, throttledTerm.trim(), {
-            keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
-          }),
+      matchSorter(options, throttledTerm.trim(), {
+        keys: ['displayName', (item: Option) => item.name, 'searchTerms'],
+      }),
     [throttledTerm, options]
   );
 };
