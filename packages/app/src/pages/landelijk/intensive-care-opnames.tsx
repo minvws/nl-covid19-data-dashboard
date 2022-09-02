@@ -151,7 +151,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             icon={<IntensiveCareOpnames />}
             description={textNl.pagina_toelichting}
             metadata={{
-              datumsText: textNl.datums,
+              datumsText: textNl.date,
               dateOrRange: dataIntake.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.nice, textNl.bronnen.lnaz],
