@@ -18,7 +18,7 @@ const PropsReportContext = createContext<
 >(() => undefined);
 
 type ErrorBoundaryProps = {
-  children: ReactNode;
+  children?: ReactNode;
   extraComponentInfoReport?:
     | Record<string, unknown>
     | (() => Record<string, unknown> | undefined);
