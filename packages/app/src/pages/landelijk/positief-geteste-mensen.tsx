@@ -166,8 +166,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   ] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [
-    confirmedCasesTestedOverTimeframe,
-    setConfirmedCasesTestedOverTimeframe,
+    confirmedCasesTestedOverTimeTimeframe,
+    setConfirmedCasesTestedOverTimeTimeframe,
   ] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [
@@ -353,7 +353,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   date: getLastInsertionDateOfPage(data, ['tested_ggd']),
                 }}
                 onSelectTimeframe={(timeframe) =>
-                  setConfirmedCasesTestedOverTimeframe(timeframe)
+                  setConfirmedCasesTestedOverTimeTimeframe(timeframe)
                 }
               >
                 <>
@@ -365,7 +365,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     accessibility={{
                       key: 'confirmed_cases_tested_over_time_chart',
                     }}
-                    timeframe={confirmedCasesTestedOverTimeframe}
+                    timeframe={confirmedCasesTestedOverTimeTimeframe}
                     values={data.tested_ggd.values}
                     seriesConfig={[
                       {
