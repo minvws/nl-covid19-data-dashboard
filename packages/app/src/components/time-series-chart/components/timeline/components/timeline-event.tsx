@@ -55,7 +55,7 @@ export function TimelineEvent({
       {timespanWidth > 0 && (
         <TimespanBar
           height={size}
-          disableBorderRadius={x1IsOutOfBounds}
+          $disableBorderRadius={x1IsOutOfBounds}
           initial={false}
           animate={{
             background: transparentize(
@@ -148,13 +148,13 @@ const StyledEvent = styled.div(
 
 const TimespanBar = styled(m.div)<{
   height: number;
-  disableBorderRadius?: boolean;
+  $disableBorderRadius?: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
 }>((x) =>
   css({
     position: 'absolute',
     width: '100%',
     height: x.height,
-    borderRadius: x.disableBorderRadius
+    borderRadius: x.$disableBorderRadius
       ? undefined
       : `0 ${x.height / 2}px ${x.height / 2}px 0`,
   })
