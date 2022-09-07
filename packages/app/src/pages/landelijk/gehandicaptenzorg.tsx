@@ -102,7 +102,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
+function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedNlData: data,
@@ -435,6 +435,6 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default DisabilityCare;

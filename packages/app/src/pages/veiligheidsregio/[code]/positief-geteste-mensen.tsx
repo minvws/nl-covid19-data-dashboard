@@ -142,7 +142,7 @@ const GgdGraphToggle = ({
   );
 };
 
-const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
+function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -468,6 +468,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default PositivelyTestedPeople;

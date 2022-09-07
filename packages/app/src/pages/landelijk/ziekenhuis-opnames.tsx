@@ -119,7 +119,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
+function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedNlData: data,
@@ -438,6 +438,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default IntakeHospital;

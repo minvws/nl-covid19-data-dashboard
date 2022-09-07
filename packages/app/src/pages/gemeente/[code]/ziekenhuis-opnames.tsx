@@ -104,7 +104,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
+function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedGmData: data,
@@ -294,6 +294,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       </GmLayout>
     </Layout>
   );
-};
+}
 
 export default IntakeHospital;

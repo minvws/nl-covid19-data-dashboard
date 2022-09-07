@@ -106,7 +106,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
+function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
   const [
     intensiveCareAdmissionsTimeframe,
     setIntensiveCareAdmissionsTimeframe,
@@ -361,6 +361,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default IntakeIntensiveCare;

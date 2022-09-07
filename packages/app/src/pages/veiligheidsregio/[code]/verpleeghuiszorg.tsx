@@ -89,7 +89,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
+function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -429,6 +429,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default NursingHomeCare;

@@ -98,7 +98,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
+function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
   const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] =
     useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -280,6 +280,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default DeceasedNationalPage;

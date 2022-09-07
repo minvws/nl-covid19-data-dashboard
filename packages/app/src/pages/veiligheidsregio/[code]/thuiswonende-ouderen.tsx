@@ -86,9 +86,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const ElderlyAtHomeRegionalPage = (
-  props: StaticProps<typeof getStaticProps>
-) => {
+function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     vrName,
@@ -369,6 +367,6 @@ const ElderlyAtHomeRegionalPage = (
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default ElderlyAtHomeRegionalPage;

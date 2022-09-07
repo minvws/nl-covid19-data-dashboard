@@ -95,7 +95,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
+function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -262,6 +262,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default DeceasedRegionalPage;

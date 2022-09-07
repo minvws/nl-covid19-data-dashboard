@@ -93,9 +93,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const ElderlyAtHomeNationalPage = (
-  props: StaticProps<typeof getStaticProps>
-) => {
+function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedNlData: data,
@@ -390,6 +388,6 @@ const ElderlyAtHomeNationalPage = (
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default ElderlyAtHomeNationalPage;

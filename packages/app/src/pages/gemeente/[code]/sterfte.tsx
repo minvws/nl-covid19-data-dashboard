@@ -87,7 +87,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
+function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     municipalityName,
@@ -232,6 +232,6 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
       </GmLayout>
     </Layout>
   );
-};
+}
 
 export default DeceasedMunicipalPage;

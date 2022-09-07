@@ -90,7 +90,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
+function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -417,6 +417,6 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default DisabilityCare;

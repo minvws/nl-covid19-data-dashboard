@@ -108,7 +108,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
+function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedGmData: data,
@@ -365,6 +365,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       </GmLayout>
     </Layout>
   );
-};
+}
 
 export default PositivelyTestedPeople;
