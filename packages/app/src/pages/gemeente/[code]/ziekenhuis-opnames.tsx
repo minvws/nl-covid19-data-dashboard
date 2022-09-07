@@ -114,8 +114,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const [intakeHospitalTimeframe, setIntakeHospitalTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [
+    hospitalAdmissionsOverTimeTimeframe,
+    setHospitalAdmissionsOverTimeTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -209,7 +211,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: textGm.bronnen.rivm }}
             timeframeOptions={TimeframeOptionsList}
             onSelectTimeframe={(timeframe) =>
-              setIntakeHospitalTimeframe(timeframe)
+              setHospitalAdmissionsOverTimeTimeframe(timeframe)
             }
           >
             <TimeSeriesChart
@@ -217,7 +219,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 key: 'hospital_admissions_over_time_chart',
               }}
               values={data.hospital_nice.values}
-              timeframe={intakeHospitalTimeframe}
+              timeframe={hospitalAdmissionsOverTimeTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
