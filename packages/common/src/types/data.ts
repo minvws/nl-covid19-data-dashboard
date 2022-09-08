@@ -110,14 +110,14 @@ export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -184,12 +184,12 @@ export interface GmCollectionSewer {
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
   age_group_range: "12+" | "18+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -927,12 +927,12 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_range: "5-11" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "60-69" | "70-79" | "80+";
   age_group_percentage: number;
   age_group_total: number;
+  autumn_2022_vaccinated: number;
   fully_vaccinated: number;
   booster_shot: number | null;
-  has_one_shot: number;
+  autumn_2022_vaccinated_percentage: number;
   fully_vaccinated_percentage: number;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -959,11 +959,14 @@ export interface NlVaccineCoveragePerAgeGroupEstimatedValue {
   last_value: NlVaccineCoveragePerAgeGroupEstimated;
 }
 export interface NlVaccineCoveragePerAgeGroupEstimated {
+  age_60_plus_autumn_2022_vaccinated: number;
+  age_60_plus_birthyear: string;
   age_18_plus_fully_vaccinated: number;
-  age_18_plus_has_one_shot: number;
+  age_18_plus_has_one_shot?: number;
   age_18_plus_birthyear: string;
+  age_12_plus_autumn_2022_vaccinated: number;
   age_12_plus_fully_vaccinated: number;
-  age_12_plus_has_one_shot: number;
+  age_12_plus_has_one_shot?: number;
   age_12_plus_birthyear: string;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1527,14 +1530,14 @@ export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1690,12 +1693,12 @@ export interface VrCollectionSituations {
 export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
   age_group_range: "12+" | "18+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
