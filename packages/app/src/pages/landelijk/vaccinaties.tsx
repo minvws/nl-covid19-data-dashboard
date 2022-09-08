@@ -22,6 +22,7 @@ import {
   VaccinationsKpiHeader,
   VaccineCoverageChoroplethPerGm,
   VaccineCoveragePerAgeGroup,
+  VaccineCoverageTile,
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
@@ -256,7 +257,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
-          <VaccineCoverageToggleTile
+          <VaccineCoverageTile
             labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
             title={textNl.vaccination_grade_toggle_tile.title}
             source={textNl.vaccination_grade_toggle_tile.source}
@@ -367,6 +368,46 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           />
           {hasHideArchivedCharts && (
             <>
+              <VaccineCoverageToggleTile
+                labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
+                title={textNl.vaccination_grade_toggle_tile.title}
+                source={textNl.vaccination_grade_toggle_tile.source}
+                descriptionFooter={
+                  textNl.vaccination_grade_toggle_tile.description_footer
+                }
+                dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
+                age18Plus={{
+                  fully_vaccinated:
+                    vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
+                  has_one_shot:
+                    vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+                  boostered: formatPercentageAsNumber(
+                    `${boosterCoverage18PlusValue.percentage}`
+                  ),
+                  birthyear:
+                    vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
+                  dateUnixBoostered: boosterCoverage18PlusValue.date_unix,
+                }}
+                age12Plus={{
+                  fully_vaccinated:
+                    vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
+                  has_one_shot:
+                    vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+                  boostered: formatPercentageAsNumber(
+                    `${boosterCoverage12PlusValue.percentage}`
+                  ),
+                  birthyear:
+                    vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
+                  dateUnixBoostered: boosterCoverage12PlusValue.date_unix,
+                }}
+                numFractionDigits={1}
+                age12PlusToggleText={
+                  textNl.vaccination_grade_toggle_tile.age_12_plus
+                }
+                age18PlusToggleText={
+                  textNl.vaccination_grade_toggle_tile.age_18_plus
+                }
+              />
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredLastValue.date_unix}
