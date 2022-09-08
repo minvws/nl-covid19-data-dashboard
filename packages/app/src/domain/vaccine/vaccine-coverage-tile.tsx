@@ -74,7 +74,7 @@ export function VaccineCoverageTile({
   };
 
   return (
-    <KpiTile title={title}>
+    <KpiTile title="Vaccinatiegraad Najaarsprik">
       <TwoKpiSection spacing={5}>
         <Box
           borderColor="#CCCCCC"
@@ -100,14 +100,11 @@ export function VaccineCoverageTile({
             })}
           >
             <AgeGroupBlock
-              title={labelTexts.vaccination_grade}
+              title="60 jaar en ouder"
               data={age18Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
               description={age18PlusToggleText.description_vaccination_grade}
-              secondDescription={
-                age18PlusToggleText.description_vaccination_one_shot_with_percentage
-              }
               numFractionDigits={numFractionDigits}
             >
               <Box spacing={1}>
@@ -120,7 +117,7 @@ export function VaccineCoverageTile({
               display: 'flex',
               justifyContent: 'start',
               paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
-              paddingRight: 0,
+              paddingRight: 24,
               paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
               paddingBottom: asResponsiveArray({ _: 3, xs: 4 }),
               overflowWrap: 'break-word',
@@ -129,14 +126,11 @@ export function VaccineCoverageTile({
             })}
           >
             <AgeGroupBlock
-              title={labelTexts.vaccination_grade}
+              title="12 jaar en ouder"
               data={age12Plus}
               property="fully_vaccinated"
               secondProperty="has_one_shot"
               description={age12PlusToggleText.description_vaccination_grade}
-              secondDescription={
-                age12PlusToggleText.description_vaccination_one_shot_with_percentage
-              }
               numFractionDigits={numFractionDigits}
             >
               <Box spacing={1}>
