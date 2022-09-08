@@ -82,7 +82,7 @@ export function VaccineCoverageTile({
           borderStyle="solid"
           position="relative"
           display="flex"
-          flexDirection={'row'}
+          flexDirection={{ _: 'column', sm: 'row' }}
           justifyContent={'space-between'}
           color="#000000"
         >
@@ -108,7 +108,7 @@ export function VaccineCoverageTile({
               numFractionDigits={numFractionDigits}
             >
               <Box spacing={1}>
-                <Bar value="80" color="#002F5F" />
+                <Bar value="80" color="#002F5F" height={12} />
               </Box>
             </AgeGroupBlock>
           </Box>
@@ -134,7 +134,7 @@ export function VaccineCoverageTile({
               numFractionDigits={numFractionDigits}
             >
               <Box spacing={1}>
-                <Bar value="80" color="#002F5F" />
+                <Bar value="80" color="#002F5F" height={12} />
               </Box>
             </AgeGroupBlock>
           </Box>
