@@ -9,6 +9,7 @@ interface KpiTileProps {
   children?: React.ReactNode;
   metadata?: MetadataProps;
   hasNoBorder?: boolean;
+  hasNoSpace?: boolean;
 }
 
 /**
@@ -21,9 +22,10 @@ export function KpiTile({
   children,
   metadata,
   hasNoBorder,
+  hasNoSpace,
 }: KpiTileProps) {
   return (
-    <Tile noBorder={hasNoBorder} noPadding={hasNoBorder}>
+    <Tile hasNoBorder={hasNoBorder} hasNoSpace={hasNoSpace}>
       <Box spacing={3}>
         <Heading level={3}>{title}</Heading>
         {children && <Box spacing={3}>{children}</Box>}
