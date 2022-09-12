@@ -89,19 +89,17 @@ export function FullscreenChartTile({
     </Tile>
   );
 
-  return (
-    <>
-      <div>{tile}</div>
+  if (!disabled && breakpoints.md && isFullscreen) {
+    return (
+      <Modal
+        id="chart-tile-container"
+        onClose={() => setIsFullscreen(false)}
+        isFullheight
+      >
+        {tile}
+      </Modal>
+    );
+  }
 
-      {!disabled && breakpoints.md && isFullscreen && (
-        <Modal
-          id="chart-tile-container"
-          onClose={() => setIsFullscreen(false)}
-          isFullheight
-        >
-          {tile}
-        </Modal>
-      )}
-    </>
-  );
+  return <div>{tile}</div>;
 }
