@@ -54,7 +54,7 @@ export const colors = {
   link: '#01689b',
   shadow: '#e5e5e5',
   gray: '#808080',
-  gray3: 'CCCCCC',
+  gray3: '#cccccc',
   silver: '#c4c4c4',
   lightGray: '#dfdfdf',
   tileGray: '#f8f8f8',
