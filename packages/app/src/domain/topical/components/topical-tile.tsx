@@ -120,8 +120,8 @@ export function TopicalTile({
 const IconWrapper = styled.span<IconWrapperProps>((x) =>
   css({
     color: x.iconColor,
-    display: 'inline-flex',
-    minWidth: '20px',
+    flexShrink: 0,
+    width: '20px',
     height: '20px',
     marginLeft: 2,
   })
