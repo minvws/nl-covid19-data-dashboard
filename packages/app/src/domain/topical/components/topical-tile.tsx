@@ -121,7 +121,7 @@ const IconWrapper = styled.span<IconWrapperProps>((x) =>
   css({
     color: x.iconColor,
     display: 'inline-flex',
-    width: '20px',
+    minWidth: '20px',
     height: '20px',
     marginLeft: 2,
   })
