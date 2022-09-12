@@ -19,7 +19,7 @@ export function TopicalHeader({
   return (
     <Box spacing={4}>
       <Heading level={1}>{title}</Heading>
-      <Box spacing={3} fontSize={{ _: 2, sm: 5 }}>
+      <Box spacing={3} fontSize={2}>
         {dynamicDescription.map((description) => (
           <Markdown key={description.index} content={description.content} />
         ))}
