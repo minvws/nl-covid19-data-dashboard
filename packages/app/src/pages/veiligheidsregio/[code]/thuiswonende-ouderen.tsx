@@ -214,9 +214,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             description={
               textVr.section_positive_tested.line_chart_daily_description
             }
-            onSelectTimeframe={(timeframe) =>
-              setElderlyAtHomeConfirmedCasesTimeframe(timeframe)
-            }
+            onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -312,9 +310,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             title={textVr.section_deceased.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={textVr.section_deceased.line_chart_daily_description}
-            onSelectTimeframe={(timeframe) =>
-              setElderlyAtHomeConfirmedCasesOverTimeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setElderlyAtHomeConfirmedCasesOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

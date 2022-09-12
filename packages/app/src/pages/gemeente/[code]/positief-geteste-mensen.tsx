@@ -263,9 +263,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textGm.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={(timeframe) =>
-              setpositivelyTestedPeopleTimeframe(timeframe)
-            }
+            onSelectTimeframe={setpositivelyTestedPeopleTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

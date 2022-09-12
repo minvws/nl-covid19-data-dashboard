@@ -186,9 +186,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               source: textNl.section_deceased_rivm.bronnen.rivm,
             }}
-            onSelectTimeframe={(timeframe) =>
-              setDeceasedOverTimeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setDeceasedOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

@@ -244,9 +244,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{ source: textNl.bronnen.nice }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={(timeframe) =>
-              setIntensiveCareAdmissionsTimeframe(timeframe)
-            }
+            onSelectTimeframe={setIntensiveCareAdmissionsTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -295,9 +293,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{ source: textNl.bronnen.lnaz }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={(timeframe) =>
-              setIntensiveCareBedsTimeframe(timeframe)
-            }
+            onSelectTimeframe={setIntensiveCareBedsTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -341,9 +337,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
-            onSelectTimeframe={(timeframe) =>
-              setAdmissionsPerAgeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setAdmissionsPerAgeTimeframe}
           >
             <AdmissionsPerAgeGroup
               accessibility={{

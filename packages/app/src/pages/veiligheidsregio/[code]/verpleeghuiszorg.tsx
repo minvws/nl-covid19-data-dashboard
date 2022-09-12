@@ -198,9 +198,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             title={textVr.positief_geteste_personen.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textVr.positief_geteste_personen.linechart_description}
-            onSelectTimeframe={(timeframe) =>
-              setNursingHomeConfirmedCasesTimeframe(timeframe)
-            }
+            onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -314,9 +312,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             title={textVr.besmette_locaties.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textVr.besmette_locaties.linechart_description}
-            onSelectTimeframe={(timeframe) =>
-              setNursingHomeInfectedLocationsTimeframe(timeframe)
-            }
+            onSelectTimeframe={setNursingHomeInfectedLocationsTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -378,9 +374,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             title={textVr.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textVr.linechart_description}
-            onSelectTimeframe={(timeframe) =>
-              setNursingHomeDeceasedTimeframe(timeframe)
-            }
+            onSelectTimeframe={setNursingHomeDeceasedTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

@@ -211,9 +211,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             title={textVr.linechart_titel}
             description={textVr.linechart_description}
             timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={(timeframe) =>
-              setHospitalAdmissionsOverTimeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

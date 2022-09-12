@@ -54,7 +54,7 @@ export function GNumberBarChartTile({
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
       }}
-      onSelectTimeframe={(timeframe) => setGnumberTimeframe(timeframe)}
+      onSelectTimeframe={setGnumberTimeframe}
     >
       <TimeSeriesChart
         accessibility={{

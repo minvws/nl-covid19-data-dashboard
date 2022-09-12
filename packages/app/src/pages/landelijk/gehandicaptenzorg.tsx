@@ -186,9 +186,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.positief_geteste_personen.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.positief_geteste_personen.linechart_description}
-            onSelectTimeframe={(timeframe) =>
-              setDisabilityCareConfirmedCasesTimeframe(timeframe)
-            }
+            onSelectTimeframe={setDisabilityCareConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -329,9 +327,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             }}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.besmette_locaties.linechart_description}
-            onSelectTimeframe={(timeframe) =>
-              setDisabilityCareInfectedLocationsTimeframe(timeframe)
-            }
+            onSelectTimeframe={setDisabilityCareInfectedLocationsTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -387,9 +383,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.oversterfte.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.oversterfte.linechart_description}
-            onSelectTimeframe={(timeframe) =>
-              setDisabilityCareDeceasedTimeframe(timeframe)
-            }
+            onSelectTimeframe={setDisabilityCareDeceasedTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

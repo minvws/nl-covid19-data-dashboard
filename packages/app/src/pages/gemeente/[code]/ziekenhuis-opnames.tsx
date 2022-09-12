@@ -210,9 +210,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             description={textGm.linechart_description}
             metadata={{ source: textGm.bronnen.rivm }}
             timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={(timeframe) =>
-              setHospitalAdmissionsOverTimeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

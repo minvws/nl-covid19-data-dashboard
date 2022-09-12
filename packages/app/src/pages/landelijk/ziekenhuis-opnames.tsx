@@ -259,9 +259,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={(timeframe) =>
-              setHospitalAdmissionsOverTimeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -311,9 +309,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={(timeframe) =>
-              setHospitalBedsOccupiedOverTimeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setHospitalBedsOccupiedOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -418,9 +414,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
-            onSelectTimeframe={(timeframe) =>
-              setHospitalAdmissionsPerAgeTimeframe(timeframe)
-            }
+            onSelectTimeframe={setHospitalAdmissionsPerAgeTimeframe}
           >
             <AdmissionsPerAgeGroup
               accessibility={{

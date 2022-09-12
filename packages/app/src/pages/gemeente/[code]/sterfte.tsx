@@ -186,9 +186,7 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
               textGm.section_deceased_rivm.line_chart_covid_daily_description
             }
             metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm }}
-            onSelectTimeframe={(timeframe) =>
-              setDeceasedMunicipalTimeframe(timeframe)
-            }
+            onSelectTimeframe={setDeceasedMunicipalTimeframe}
           >
             <TimeSeriesChart
               accessibility={{

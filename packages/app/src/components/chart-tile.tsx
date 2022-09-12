@@ -36,7 +36,7 @@ export function ChartTile({
   );
 
   useEffect(() => {
-    if (typeof onSelectTimeframe !== 'undefined') {
+    if (onSelectTimeframe) {
       onSelectTimeframe(timeframe);
     }
   }, [timeframe, onSelectTimeframe]);

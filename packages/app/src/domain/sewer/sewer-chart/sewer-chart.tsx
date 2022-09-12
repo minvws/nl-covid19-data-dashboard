@@ -142,7 +142,7 @@ export function SewerChart({
         source: text.source,
       }}
       description={text.description}
-      onSelectTimeframe={(timeframe) => setSewerTimeframe(timeframe)}
+      onSelectTimeframe={setSewerTimeframe}
     >
       {dataPerInstallation && (
         <Box alignSelf="flex-start" mb={3} minWidth={207}>

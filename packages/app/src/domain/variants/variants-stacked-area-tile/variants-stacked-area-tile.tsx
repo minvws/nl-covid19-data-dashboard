@@ -125,7 +125,7 @@ function VariantStackedAreaTileWithData({
       metadata={metadata}
       timeframeOptions={TimeframeOptionsList}
       timeframeInitialValue={TimeframeOption.SIX_MONTHS}
-      onSelectTimeframe={(timeframe) => setVariantTimeframe(timeframe)}
+      onSelectTimeframe={setVariantTimeframe}
     >
       <>
         {children}

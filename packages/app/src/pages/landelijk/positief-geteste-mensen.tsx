@@ -239,9 +239,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textNl.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={(timeframe) =>
-              setConfirmedCasesInfectedTimeframe(timeframe)
-            }
+            onSelectTimeframe={setConfirmedCasesInfectedTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
@@ -299,9 +297,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   date: getLastInsertionDateOfPage(data, ['tested_ggd']),
                   source: textNl.ggd.bronnen.rivm,
                 }}
-                onSelectTimeframe={(timeframe) =>
-                  setConfirmedCasesInfectedPercentageTimeframe(timeframe)
-                }
+                onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
               >
                 <>
                   <GgdGraphToggle
@@ -352,9 +348,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   source: textNl.ggd.bronnen.rivm,
                   date: getLastInsertionDateOfPage(data, ['tested_ggd']),
                 }}
-                onSelectTimeframe={(timeframe) =>
-                  setConfirmedCasesTestedOverTimeTimeframe(timeframe)
-                }
+                onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
               >
                 <>
                   <GgdGraphToggle
@@ -404,9 +398,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               metadata={{
                 source: textNl.bronnen.rivm,
               }}
-              onSelectTimeframe={(timeframe) =>
-                setConfirmedCasesInfectedPerAgeTimeframe(timeframe)
-              }
+              onSelectTimeframe={setConfirmedCasesInfectedPerAgeTimeframe}
             >
               <InfectedPerAgeGroup
                 accessibility={{

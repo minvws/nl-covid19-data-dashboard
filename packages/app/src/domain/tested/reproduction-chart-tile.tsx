@@ -54,7 +54,7 @@ export function ReproductionChartTile({
         date: last_value.date_of_insertion_unix,
         source: text.bronnen.rivm,
       }}
-      onSelectTimeframe={(timeframe) => setReproductionTimeframe(timeframe)}
+      onSelectTimeframe={setReproductionTimeframe}
     >
       <TimeSeriesChart
         accessibility={{
@@ -75,7 +75,7 @@ export function ReproductionChartTile({
         dataOptions={{
           timelineEvents,
         }}
-        numGridLines={reproductionTimeframe === 'all' ? 4 : 3}
+        numGridLines={reproductionTimeframe === TimeframeOption.ALL ? 4 : 3}
       />
     </ChartTile>
   );

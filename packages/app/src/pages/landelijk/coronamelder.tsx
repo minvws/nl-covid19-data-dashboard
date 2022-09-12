@@ -167,9 +167,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               corona_melder_app.waarschuwingen_over_tijd_grafiek.description
             }
             timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={(timeframe) =>
-              setCoronamelderTimeframe(timeframe)
-            }
+            onSelectTimeframe={setCoronamelderTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
