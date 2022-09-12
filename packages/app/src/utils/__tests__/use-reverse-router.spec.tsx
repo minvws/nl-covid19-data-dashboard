@@ -103,7 +103,7 @@ UseReverseRouter('VR routes should have the VR code in them', () => {
     assert.equal(route.indexOf(vrCode) > -1, true);
   });
 
-  const route = result.current.actueel.vr(vrCode);
+  const route = result.current.vr.rioolwater(vrCode);
   assert.equal(route.indexOf(vrCode) > -1, true);
 });
 
@@ -116,7 +116,7 @@ UseReverseRouter('GM routes should have the GM code in them', () => {
     assert.equal(route.indexOf(gmCode) > -1, true);
   });
 
-  const route = result.current.actueel.gm(gmCode);
+  const route = result.current.gm.rioolwater(gmCode);
   assert.equal(route.indexOf(gmCode) > -1, true);
 });
 

@@ -199,7 +199,7 @@ export function VaccinationCoverageChoropleth(
               }}
               dataOptions={{
                 isPercentage: true,
-                getLink: (vrcode) => reverseRouter.actueel.vr(vrcode),
+                getLink: (vrcode) => reverseRouter.vr.rioolwater(vrcode),
                 tooltipVariables: {
                   age_group: commonTexts.common.age_groups[selectedAgeGroup],
                 },

@@ -63,6 +63,7 @@ export function AppContent({
         {backButtonUrl && (
           <>
             <BackButtonContainer
+              isMenuOpen={isMenuOpen}
               isVisible={!hideBackButton}
               css={css({
                 background: 'white',
@@ -94,7 +95,11 @@ export function AppContent({
             {children}
           </ResponsiveVisible>
           {backButtonUrl && (
-            <BackButtonContainer isVisible={!hideBackButton} mt={4}>
+            <BackButtonContainer
+              isVisible={!hideBackButton}
+              mt={4}
+              isMenuOpen={isMenuOpen}
+            >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
                 {backButtonText}
               </LinkWithIcon>
@@ -106,10 +111,17 @@ export function AppContent({
   );
 }
 
-const BackButtonContainer = styled(Box)<{ isVisible: boolean }>((x) =>
+const BackButtonContainer = styled(Box)<{
+  isVisible: boolean;
+  isMenuOpen: boolean;
+}>((x) =>
   css({
-    mx: [3, null, 0],
+    mx: x.isMenuOpen
+      ? asResponsiveArray({ _: 1, xs: 'auto' })
+      : asResponsiveArray({ _: 1, sm: 5 }),
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
+    px: asResponsiveArray({ _: 1, sm: 1 }),
+    maxWidth: x.isMenuOpen ? '38rem' : undefined,
   })
 );
 
