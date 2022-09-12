@@ -35,21 +35,25 @@ export function AppContent({
     router.query.menu === '1';
 
   const currentPageScope = getCurrentPageScope(router);
-
   const currentCode = router.query.code as string | undefined;
+  const isNational = currentPageScope === 'nl';
 
   /**
    * @TODO Open the menu purely client side without loading a new page
    */
   const backButtonUrl = currentPageScope
     ? isMenuOpen
-      ? reverseRouter.actueel[currentPageScope](currentCode)
+      ? isNational
+        ? reverseRouter.topical.nl
+        : undefined
       : reverseRouter[currentPageScope].index(currentCode)
     : undefined;
 
   const backButtonText = currentPageScope
     ? isMenuOpen
-      ? commonTexts.nav.back_topical[currentPageScope]
+      ? isNational
+        ? commonTexts.nav.back_topical.nl
+        : ''
       : commonTexts.nav.back_all_metrics[currentPageScope]
     : '';
 
