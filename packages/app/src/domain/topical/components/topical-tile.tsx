@@ -44,7 +44,7 @@ export function TopicalTile({
     <Box
       as="a"
       href={cta?.href}
-      borderColor={colors.gray}
+      borderColor={colors.gray3}
       borderWidth="1px"
       borderStyle="solid"
       position="relative"
