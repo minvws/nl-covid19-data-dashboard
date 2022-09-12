@@ -1,4 +1,9 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
+import { useState } from 'react';
 import { External as ExternalLinkIcon, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import { isEmpty } from 'lodash';
@@ -52,6 +57,8 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
+  const [coronamelderTimeframe, setCoronamelderTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber } = useIntl();
 
   const { pageText, selectedNlData: data, lastGenerated } = props;
@@ -160,30 +167,29 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               corona_melder_app.waarschuwingen_over_tijd_grafiek.description
             }
             timeframeOptions={TimeframeOptionsList}
+            onSelectTimeframe={setCoronamelderTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'coronamelder_warned_daily_over_time_chart',
-                }}
-                tooltipTitle={
-                  corona_melder_app.waarschuwingen_over_tijd_grafiek.title
-                }
-                timeframe={timeframe}
-                values={data.corona_melder_app_warning.values}
-                endDate={endDate}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'count',
-                    label:
-                      corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
-                        .warnings,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'coronamelder_warned_daily_over_time_chart',
+              }}
+              tooltipTitle={
+                corona_melder_app.waarschuwingen_over_tijd_grafiek.title
+              }
+              timeframe={coronamelderTimeframe}
+              values={data.corona_melder_app_warning.values}
+              endDate={endDate}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'count',
+                  label:
+                    corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
+                      .warnings,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>

@@ -1,4 +1,9 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
+import { useState } from 'react';
 import {
   Coronavirus,
   Gehandicaptenzorg,
@@ -85,7 +90,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
+function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -93,6 +98,19 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     content,
   } = props;
+
+  const [
+    disabilityCareConfirmedCasesTimeframe,
+    setDisabilityCareConfirmedCasesTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [
+    disabilityCareInfectedLocationsTimeframe,
+    setDisabilityCareInfectedLocationsTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
   const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(
@@ -180,57 +198,56 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textVr.positief_geteste_personen.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textVr.positief_geteste_personen.linechart_description}
+            onSelectTimeframe={setDisabilityCareConfirmedCasesTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'disability_care_confirmed_cases_over_time_chart',
-                }}
-                values={values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'disability_care_confirmed_cases_over_time_chart',
+              }}
+              values={values}
+              timeframe={disabilityCareConfirmedCasesTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'newly_infected_people_moving_average',
+                  label:
+                    textVr.positief_geteste_personen
+                      .line_chart_newly_infected_people_moving_average,
+                  shortLabel:
+                    textVr.positief_geteste_personen
+                      .line_chart_newly_infected_people_moving_average_short_label,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'newly_infected_people',
+                  label:
+                    textVr.positief_geteste_personen
+                      .line_chart_legend_trend_label,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'newly_infected_people_moving_average',
+                    start: underReportedDateStart,
+                    end: Infinity,
                     label:
                       textVr.positief_geteste_personen
-                        .line_chart_newly_infected_people_moving_average,
-                    shortLabel:
-                      textVr.positief_geteste_personen
-                        .line_chart_newly_infected_people_moving_average_short_label,
-                    color: colors.data.primary,
+                        .line_chart_legend_inaccurate_label,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
+                      'newly_infected_people_moving_average',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'newly_infected_people',
-                    label:
-                      textVr.positief_geteste_personen
-                        .line_chart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedDateStart,
-                      end: Infinity,
-                      label:
-                        textVr.positief_geteste_personen
-                          .line_chart_legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'newly_infected_people_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'disability_care',
-                    'newly_infected_people'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'disability_care',
+                  'newly_infected_people'
+                ),
+              }}
+            />
           </ChartTile>
 
           <PageInformationBlock
@@ -291,24 +308,23 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               }}
               timeframeOptions={TimeframeOptionsList}
               description={textVr.besmette_locaties.linechart_description}
+              onSelectTimeframe={setDisabilityCareInfectedLocationsTimeframe}
             >
-              {(timeframe) => (
-                <TimeSeriesChart
-                  accessibility={{
-                    key: 'disability_care_infected_locations_over_time_chart',
-                  }}
-                  values={values}
-                  timeframe={timeframe}
-                  seriesConfig={[
-                    {
-                      type: 'area',
-                      metricProperty: 'infected_locations_total',
-                      label: textVr.besmette_locaties.linechart_metric_label,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                />
-              )}
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'disability_care_infected_locations_over_time_chart',
+                }}
+                values={values}
+                timeframe={disabilityCareInfectedLocationsTimeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'infected_locations_total',
+                    label: textVr.besmette_locaties.linechart_metric_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
             </ChartTile>
           )}
 
@@ -349,54 +365,52 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textVr.oversterfte.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textVr.oversterfte.linechart_description}
+            onSelectTimeframe={setDisabilityCareDeceasedTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'disability_care_deceased_over_time_chart',
-                }}
-                values={values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'disability_care_deceased_over_time_chart',
+              }}
+              values={values}
+              timeframe={disabilityCareDeceasedTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'deceased_daily_moving_average',
+                  label:
+                    textVr.oversterfte.line_chart_deceased_daily_moving_average,
+                  shortLabel:
+                    textVr.oversterfte
+                      .line_chart_deceased_daily_moving_average_short_label,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'deceased_daily',
+                  label: textVr.oversterfte.line_chart_legend_trend_label,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'deceased_daily_moving_average',
+                    start: underReportedDateStart,
+                    end: Infinity,
                     label:
-                      textVr.oversterfte
-                        .line_chart_deceased_daily_moving_average,
-                    shortLabel:
-                      textVr.oversterfte
-                        .line_chart_deceased_daily_moving_average_short_label,
-                    color: colors.data.primary,
+                      textVr.oversterfte.line_chart_legend_inaccurate_label,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
+                      'deceased_daily_moving_average',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label: textVr.oversterfte.line_chart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedDateStart,
-                      end: Infinity,
-                      label:
-                        textVr.oversterfte.line_chart_legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'deceased_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
-              />
-            )}
+                ],
+              }}
+            />
           </ChartTile>
         </TileList>
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default DisabilityCare;
