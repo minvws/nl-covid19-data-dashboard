@@ -136,7 +136,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
                 <StyledComboboxOption
                   key={`${index}-${option.name}`}
                   value={option.displayName || option.name}
-                  isSelectedOption={selectedOption?.name === option.name}
+                  $isSelectedOption={selectedOption?.name === option.name}
                 />
               ))}
             </ComboboxList>
@@ -166,14 +166,14 @@ const useSearchedAndSortedOptions = <Option extends TOption>(
 };
 
 const StyledComboboxOption = styled(ComboboxOption)<{
-  isSelectedOption: boolean;
+  $isSelectedOption: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
 }>`
   border-left: ${(x) =>
-    x.isSelectedOption ? `5px solid ${x.theme.colors.blue}` : '0'};
+    x.$isSelectedOption ? `5px solid ${x.theme.colors.blue}` : '0'};
 
   span:first-child {
     display: inline-block;
-    padding-left: ${(x) => (x.isSelectedOption ? '0' : '5px')};
+    padding-left: ${(x) => (x.$isSelectedOption ? '0' : '5px')};
   }
 `;
 
