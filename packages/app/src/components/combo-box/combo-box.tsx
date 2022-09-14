@@ -46,7 +46,7 @@ type TProps<Option extends TOption> = {
  * ```
  */
 export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
-  const { options, placeholder, sorter, selectedOption } = props;
+  const { options, placeholder, selectedOption } = props;
 
   const { commonTexts } = useIntl();
 
@@ -153,8 +153,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
 
 const useSearchedAndSortedOptions = <Option extends TOption>(
   term: string,
-  options: Option[],
-  sorter?: (a: Option, b: Option) => number
+  options: Option[]
 ): Option[] => {
   const throttledTerm = useThrottle(term, 100);
 
