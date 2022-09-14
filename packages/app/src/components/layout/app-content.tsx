@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, ScopedData } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -18,6 +18,11 @@ interface AppContentProps {
   hideBackButton?: boolean;
 }
 
+interface BackButtonProps {
+  text: string;
+  url?: string;
+}
+
 export function AppContent({
   children,
   sidebarComponent,
@@ -35,23 +40,48 @@ export function AppContent({
     router.query.menu === '1';
 
   const currentPageScope = getCurrentPageScope(router);
-
   const currentCode = router.query.code as string | undefined;
+
+  const getBackButtonProps = (
+    pageScope: keyof ScopedData | undefined,
+    menuOpen: boolean
+  ): BackButtonProps => {
+    if (!pageScope) {
+      return {
+        text: '',
+      };
+    }
+
+    if (!menuOpen) {
+      return {
+        text: commonTexts.nav.back_all_metrics[pageScope],
+        url: reverseRouter[pageScope].index(currentCode),
+      };
+    }
+
+    if (pageScope !== 'nl') {
+      return {
+        text: '',
+      };
+    }
+
+    return {
+      text: commonTexts.nav.back_topical.nl,
+      url: reverseRouter.topical.nl,
+    };
+  };
 
   /**
    * @TODO Open the menu purely client side without loading a new page
    */
-  const backButtonUrl = currentPageScope
-    ? isMenuOpen
-      ? reverseRouter.actueel[currentPageScope](currentCode)
-      : reverseRouter[currentPageScope].index(currentCode)
-    : undefined;
+  const { url: backButtonUrl, text: backButtonText } = getBackButtonProps(
+    currentPageScope,
+    isMenuOpen
+  );
 
-  const backButtonText = currentPageScope
-    ? isMenuOpen
-      ? commonTexts.nav.back_topical[currentPageScope]
-      : commonTexts.nav.back_all_metrics[currentPageScope]
-    : '';
+  const menuOpenBackButtonStyles = isMenuOpen && {
+    maxWidth: '38rem',
+  };
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
@@ -66,6 +96,7 @@ export function AppContent({
                 position: 'relative',
                 borderBottom: 'solid 1px',
                 borderColor: 'border',
+                ...menuOpenBackButtonStyles,
               })}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
@@ -90,7 +121,13 @@ export function AppContent({
             {children}
           </ResponsiveVisible>
           {backButtonUrl && (
-            <BackButtonContainer isVisible={!hideBackButton} mt={4}>
+            <BackButtonContainer
+              isVisible={!hideBackButton}
+              mt={4}
+              css={css({
+                ...menuOpenBackButtonStyles,
+              })}
+            >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
                 {backButtonText}
               </LinkWithIcon>
@@ -102,10 +139,13 @@ export function AppContent({
   );
 }
 
-const BackButtonContainer = styled(Box)<{ isVisible: boolean }>((x) =>
+const BackButtonContainer = styled(Box)<{
+  isVisible: boolean;
+}>((x) =>
   css({
-    mx: [3, null, 0],
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
+    px: asResponsiveArray({ _: 1, sm: 1 }),
+    mx: asResponsiveArray({ _: 1, sm: 5 }),
   })
 );
 

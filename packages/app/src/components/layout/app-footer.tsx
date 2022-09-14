@@ -59,19 +59,19 @@ export function AppFooter() {
             </Heading>
             <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
               <Box as="ul" spacing={2}>
-                <Item href={reverseRouter.algemeen.over()}>
+                <Item href={reverseRouter.general.over()}>
                   {text.nav.links.over}
                 </Item>
-                <Item href={reverseRouter.algemeen.artikelen()}>
+                <Item href={reverseRouter.general.artikelen()}>
                   {text.nav.links.artikelen}
                 </Item>
-                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
+                <Item href={reverseRouter.general.toegankelijkheid()}>
                   {text.nav.links.toegankelijkheid}
                 </Item>
-                <Item href={reverseRouter.algemeen.veelgesteldeVragen()}>
+                <Item href={reverseRouter.general.veelgesteldeVragen()}>
                   {text.nav.links.veelgestelde_vragen}
                 </Item>
-                <Item href={reverseRouter.algemeen.verantwoording()}>
+                <Item href={reverseRouter.general.verantwoording()}>
                   {text.nav.links.verantwoording}
                 </Item>
                 <Item href={text.nav.links.meer_href} isExternal>

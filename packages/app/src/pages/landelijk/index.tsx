@@ -34,7 +34,7 @@ const National = (props: StaticProps<typeof getStaticProps>) => {
 
   useEffect(() => {
     if (breakpoints.md) {
-      router.replace(reverseRouter.nl.vaccinaties());
+      router.replace(reverseRouter.nl.rioolwater());
     }
   }, [breakpoints.md, reverseRouter.nl, router]);
 

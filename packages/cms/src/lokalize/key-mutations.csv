@@ -1,3 +1,5 @@
 timestamp,action,key,document_id,move_to
 2022-09-02T13:13:53.021Z,add,pages.intensive_care_page.nl.date,7EKxxfTjh8AzLlMIVYX3qF,__
 2022-09-02T13:13:53.023Z,delete,pages.intensive_care_page.nl.datums,jF33EuwumlGuwav2FD3Vrw,__
+2022-09-12T11:42:43.520Z,delete,common.nav.back_topical.gm,vlhYWEAgyN27KxCATPJ5jO,__
+2022-09-12T11:42:43.524Z,delete,common.nav.back_topical.vr,c3zQAq6gN39dqhcQq6dCWr,__
