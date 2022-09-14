@@ -108,6 +108,8 @@ export interface Article {
   };
   categories?: CategoriesTypes[];
   cover: ImageBlock;
+  imageMobile?: ImageBlock;
+  imageDesktop?: ImageBlock;
   summary: Block;
   intro: RichContentBlock[];
   content: RichContentBlock[];
