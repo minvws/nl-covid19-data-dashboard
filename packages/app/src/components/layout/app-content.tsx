@@ -1,4 +1,4 @@
-import { colors, ScopedData } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -16,11 +16,6 @@ interface AppContentProps {
   sidebarComponent: React.ReactNode;
   searchComponent?: React.ReactNode;
   hideBackButton?: boolean;
-}
-
-interface BackButtonProps {
-  text: string;
-  url?: string;
 }
 
 export function AppContent({
@@ -41,47 +36,26 @@ export function AppContent({
 
   const currentPageScope = getCurrentPageScope(router);
   const currentCode = router.query.code as string | undefined;
-
-  const getBackButtonProps = (
-    pageScope: keyof ScopedData | undefined,
-    menuOpen: boolean
-  ): BackButtonProps => {
-    if (!pageScope) {
-      return {
-        text: '',
-      };
-    }
-
-    if (!menuOpen) {
-      return {
-        text: commonTexts.nav.back_all_metrics[pageScope],
-        url: reverseRouter[pageScope].index(currentCode),
-      };
-    }
-
-    if (pageScope !== 'nl') {
-      return {
-        text: '',
-      };
-    }
-
-    return {
-      text: commonTexts.nav.back_topical.nl,
-      url: reverseRouter.topical.nl,
-    };
-  };
+  const isNational = currentPageScope === 'nl';
 
   /**
    * @TODO Open the menu purely client side without loading a new page
    */
-  const { url: backButtonUrl, text: backButtonText } = getBackButtonProps(
-    currentPageScope,
-    isMenuOpen
-  );
+  const backButtonUrl = currentPageScope
+    ? isMenuOpen
+      ? isNational
+        ? reverseRouter.topical.nl
+        : undefined
+      : reverseRouter[currentPageScope].index(currentCode)
+    : undefined;
 
-  const menuOpenBackButtonStyles = isMenuOpen && {
-    maxWidth: '38rem',
-  };
+  const backButtonText = currentPageScope
+    ? isMenuOpen
+      ? isNational
+        ? commonTexts.nav.back_topical.nl
+        : ''
+      : commonTexts.nav.back_all_metrics[currentPageScope]
+    : '';
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
@@ -89,6 +63,7 @@ export function AppContent({
         {backButtonUrl && (
           <>
             <BackButtonContainer
+              isMenuOpen={isMenuOpen}
               isVisible={!hideBackButton}
               css={css({
                 background: 'white',
@@ -96,7 +71,6 @@ export function AppContent({
                 position: 'relative',
                 borderBottom: 'solid 1px',
                 borderColor: 'border',
-                ...menuOpenBackButtonStyles,
               })}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
@@ -124,9 +98,7 @@ export function AppContent({
             <BackButtonContainer
               isVisible={!hideBackButton}
               mt={4}
-              css={css({
-                ...menuOpenBackButtonStyles,
-              })}
+              isMenuOpen={isMenuOpen}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
                 {backButtonText}
@@ -141,11 +113,15 @@ export function AppContent({
 
 const BackButtonContainer = styled(Box)<{
   isVisible: boolean;
+  isMenuOpen: boolean;
 }>((x) =>
   css({
+    mx: x.isMenuOpen
+      ? asResponsiveArray({ _: 1, xs: 'auto' })
+      : asResponsiveArray({ _: 1, sm: 5 }),
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
     px: asResponsiveArray({ _: 1, sm: 1 }),
-    mx: asResponsiveArray({ _: 1, sm: 5 }),
+    maxWidth: x.isMenuOpen ? '38rem' : undefined,
   })
 );
 
