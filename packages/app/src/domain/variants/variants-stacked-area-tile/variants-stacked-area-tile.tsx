@@ -4,7 +4,7 @@ import {
   TimeframeOptionsList,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Spacer } from '~/components/base';
@@ -83,6 +83,10 @@ function VariantStackedAreaTileWithData({
   metadata,
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
+  const [variantTimeframe, setVariantTimeframe] = useState<TimeframeOption>(
+    TimeframeOption.ALL
+  );
+
   const { list, toggle, clear } =
     useList<keyof VariantChartValue>(alwaysEnabled);
 
@@ -121,89 +125,88 @@ function VariantStackedAreaTileWithData({
       metadata={metadata}
       timeframeOptions={TimeframeOptionsList}
       timeframeInitialValue={TimeframeOption.SIX_MONTHS}
+      onSelectTimeframe={setVariantTimeframe}
     >
-      {(timeframe) => (
-        <>
-          {children}
-          {children && <Spacer mb={3} />}
-          <InteractiveLegend
-            helpText={text.legend_help_tekst}
-            selectOptions={selectOptions}
-            selection={list}
-            onToggleItem={toggle}
-            onReset={clear}
-          />
-          <Spacer mb={2} />
-          <TimeSeriesChart
-            accessibility={{
-              key: 'variants_stacked_area_over_time_chart',
-            }}
-            values={values}
-            timeframe={timeframe}
-            seriesConfig={filteredConfig}
-            disableLegend
-            dataOptions={{
-              isPercentage: true,
-              forcedMaximumValue: 100,
-              timespanAnnotations,
-              renderNullAsZero: true,
-            }}
-            formatTooltip={(context) => {
-              /**
-               * Filter out zero values in value object, so it will be invisible in the tooltip.
-               * When a selection has been made, the zero values will be shown in the tooltip.
-               */
-              const metricAmount = context.config.length;
-              const totalMetricAmount = seriesConfig.length;
-              const hasSelectedMetrics = metricAmount !== totalMetricAmount;
+      <>
+        {children}
+        {children && <Spacer mb={3} />}
+        <InteractiveLegend
+          helpText={text.legend_help_tekst}
+          selectOptions={selectOptions}
+          selection={list}
+          onToggleItem={toggle}
+          onReset={clear}
+        />
+        <Spacer mb={2} />
+        <TimeSeriesChart
+          accessibility={{
+            key: 'variants_stacked_area_over_time_chart',
+          }}
+          values={values}
+          timeframe={variantTimeframe}
+          seriesConfig={filteredConfig}
+          disableLegend
+          dataOptions={{
+            isPercentage: true,
+            forcedMaximumValue: 100,
+            timespanAnnotations,
+            renderNullAsZero: true,
+          }}
+          formatTooltip={(context) => {
+            /**
+             * Filter out zero values in value object, so it will be invisible in the tooltip.
+             * When a selection has been made, the zero values will be shown in the tooltip.
+             */
+            const metricAmount = context.config.length;
+            const totalMetricAmount = seriesConfig.length;
+            const hasSelectedMetrics = metricAmount !== totalMetricAmount;
 
-              const filteredValues = Object.fromEntries(
-                Object.entries(context.value).filter(([key, value]) =>
-                  key.includes('percentage')
-                    ? value !== 0 && isPresent(value) && !isNaN(Number(value))
-                    : value
-                )
-              ) as VariantChartValue;
+            const filteredValues = Object.fromEntries(
+              Object.entries(context.value).filter(([key, value]) =>
+                key.includes('percentage')
+                  ? value !== 0 && isPresent(value) && !isNaN(Number(value))
+                  : value
+              )
+            ) as VariantChartValue;
 
-              const reorderContext = {
-                ...context,
-                config: [
-                  ...context.config.filter(
-                    (value) =>
-                      !hasMetricProperty(value) ||
-                      filteredValues[value.metricProperty] ||
-                      hasSelectedMetrics
-                  ),
-                  context.config.find(
-                    (value) =>
-                      hasMetricProperty(value) &&
-                      value.metricProperty === 'other_graph_percentage'
-                  ),
-                ].filter(isDefined),
-                value: !hasSelectedMetrics ? filteredValues : context.value,
-              };
+            const reorderContext = {
+              ...context,
+              config: [
+                ...context.config.filter(
+                  (value) =>
+                    !hasMetricProperty(value) ||
+                    filteredValues[value.metricProperty] ||
+                    hasSelectedMetrics
+                ),
+                context.config.find(
+                  (value) =>
+                    hasMetricProperty(value) &&
+                    value.metricProperty === 'other_graph_percentage'
+                ),
+              ].filter(isDefined),
+              value: !hasSelectedMetrics ? filteredValues : context.value,
+            };
 
-              const percentageValuesAmount = Object.keys(
-                reorderContext.value
-              ).filter((key) => key.includes('percentage')).length;
+            const percentageValuesAmount = Object.keys(
+              reorderContext.value
+            ).filter((key) => key.includes('percentage')).length;
 
-              const hasTwoColumns = !hasSelectedMetrics
-                ? percentageValuesAmount > 4
-                : metricAmount > 4;
+            const hasTwoColumns = !hasSelectedMetrics
+              ? percentageValuesAmount > 4
+              : metricAmount > 4;
 
-              return (
-                <TooltipSeriesList
-                  data={reorderContext}
-                  hasTwoColumns={hasTwoColumns}
-                />
-              );
-            }}
-            numGridLines={0}
-            tickValues={[0, 25, 50, 75, 100]}
-          />
-          <Legend items={staticLegendItems} />
-        </>
-      )}
+            return (
+              <TooltipSeriesList
+                data={reorderContext}
+                hasTwoColumns={hasTwoColumns}
+              />
+            );
+          }}
+          numGridLines={0}
+          tickValues={[0, 25, 50, 75, 100]}
+        />
+        <Legend items={staticLegendItems} />
+      </>
     </ChartTile>
   );
 }

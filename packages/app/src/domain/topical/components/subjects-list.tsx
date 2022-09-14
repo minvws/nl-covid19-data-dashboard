@@ -55,7 +55,6 @@ export const SubjectsList = ({ moreLinks }: SubjectsListProps) => {
       </Text>
       <ul
         aria-labelledby={labelledById}
-        tabIndex={0}
         css={css({
           display: 'flex',
           flexDirection: asResponsiveArray({ _: 'column', sm: 'row' }),

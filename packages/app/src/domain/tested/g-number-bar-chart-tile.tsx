@@ -4,6 +4,7 @@ import {
   TimeframeOption,
   VrGNumber,
 } from '@corona-dashboard/common';
+import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
@@ -20,6 +21,10 @@ export function GNumberBarChartTile({
   data: __data,
   timeframeInitialValue = TimeframeOption.ALL,
 }: GNumberBarChartTileProps) {
+  const [gnumberTimeframe, setGnumberTimeframe] = useState<TimeframeOption>(
+    TimeframeOption.ALL
+  );
+
   const { formatPercentage, commonTexts } = useIntl();
 
   const text = commonTexts.g_number.bar_chart;
@@ -49,51 +54,50 @@ export function GNumberBarChartTile({
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
       }}
+      onSelectTimeframe={setGnumberTimeframe}
     >
-      {(timeframe) => (
-        <TimeSeriesChart
-          accessibility={{
-            key: 'g_number',
-            features: ['keyboard_bar_chart'],
-          }}
-          values={values}
-          endDate={endDate}
-          timeframe={timeframe}
-          dataOptions={{
-            isPercentage: true,
-          }}
-          seriesConfig={[
-            {
-              type: 'split-bar',
-              metricProperty: 'g_number',
-              label: '',
-              fillOpacity: 1,
-              splitPoints: [
-                {
-                  color: colors.data.primary,
-                  value: 0,
-                  label: text.legend.negative_label,
-                },
-                {
-                  color: colors.red,
-                  value: Infinity,
-                  label: text.legend.positive_label,
-                },
-              ],
-            },
-          ]}
-          formatTooltip={(data) => (
-            <TooltipSeriesListContainer {...data}>
-              <BoldText>
-                {`${formatPercentage(Math.abs(data.value.g_number))}% `}
-              </BoldText>
-              {data.value.g_number > 0
-                ? text.positive_descriptor
-                : text.negative_descriptor}
-            </TooltipSeriesListContainer>
-          )}
-        />
-      )}
+      <TimeSeriesChart
+        accessibility={{
+          key: 'g_number',
+          features: ['keyboard_bar_chart'],
+        }}
+        values={values}
+        endDate={endDate}
+        timeframe={gnumberTimeframe}
+        dataOptions={{
+          isPercentage: true,
+        }}
+        seriesConfig={[
+          {
+            type: 'split-bar',
+            metricProperty: 'g_number',
+            label: '',
+            fillOpacity: 1,
+            splitPoints: [
+              {
+                color: colors.data.primary,
+                value: 0,
+                label: text.legend.negative_label,
+              },
+              {
+                color: colors.red,
+                value: Infinity,
+                label: text.legend.positive_label,
+              },
+            ],
+          },
+        ]}
+        formatTooltip={(data) => (
+          <TooltipSeriesListContainer {...data}>
+            <BoldText>
+              {`${formatPercentage(Math.abs(data.value.g_number))}% `}
+            </BoldText>
+            {data.value.g_number > 0
+              ? text.positive_descriptor
+              : text.negative_descriptor}
+          </TooltipSeriesListContainer>
+        )}
+      />
     </ChartTile>
   );
 }
