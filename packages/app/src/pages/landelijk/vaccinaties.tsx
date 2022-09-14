@@ -27,6 +27,7 @@ import {
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
   BoosterShotCoveragePerAgeGroup,
+  Autumn2022ShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
@@ -408,10 +409,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           />
 
           <VaccineCoverageChoroplethPerGm data={choropleth} />
-          <BoosterShotCoveragePerAgeGroup
+          <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
-            description={textNl.vaccination_coverage.description}
+            description="Deze tabel toond per leeftijdsgroep hoeveel mensen volledig zijn gevaccineerd."
             sortingOrder={[
               '80+',
               '70-79',
@@ -441,6 +442,28 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           />
           {hasHideArchivedCharts && (
             <>
+              <BoosterShotCoveragePerAgeGroup
+                text={textNl.vaccination_coverage}
+                title={textNl.vaccination_coverage.title}
+                description={textNl.vaccination_coverage.description}
+                sortingOrder={[
+                  '80+',
+                  '70-79',
+                  '60-69',
+                  '50-59',
+                  '40-49',
+                  '30-39',
+                  '18-29',
+                  '12-17',
+                  '5-11',
+                ]}
+                metadata={{
+                  datumsText: textNl.datums,
+                  date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                  source: textNl.vaccination_coverage.bronnen.rivm,
+                }}
+                values={data.vaccine_coverage_per_age_group.values}
+              />
               <VaccineCoverageToggleTile
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
                 title={textNl.vaccination_grade_toggle_tile.title}
