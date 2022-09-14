@@ -1,4 +1,4 @@
-import { colors, ScopedData } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -16,11 +16,6 @@ interface AppContentProps {
   sidebarComponent: React.ReactNode;
   searchComponent?: React.ReactNode;
   hideBackButton?: boolean;
-}
-
-interface BackButtonProps {
-  text: string;
-  url?: string;
 }
 
 export function AppContent({
@@ -76,7 +71,6 @@ export function AppContent({
                 position: 'relative',
                 borderBottom: 'solid 1px',
                 borderColor: 'border',
-                ...menuOpenBackButtonStyles,
               })}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
