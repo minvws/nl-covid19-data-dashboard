@@ -56,6 +56,25 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           sizes={imageSizes}
         />
       </ContentBlock>
+      {!breakpoints.xs
+        ? article.imageMobile && (
+            <Box mt={4}>
+              <ContentImage
+                node={article.imageMobile}
+                contentWrapper={ContentBlock}
+                sizes={imageSizes}
+              />
+            </Box>
+          )
+        : article.imageDesktop && (
+            <Box mt={4}>
+              <ContentImage
+                node={article.imageDesktop}
+                contentWrapper={ContentBlock}
+                sizes={imageSizes}
+              />
+            </Box>
+          )}
       {!!article.content?.length && (
         <Box
           // Since you can't serialize unordered lists we have to position them here in the container
@@ -71,21 +90,6 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           <RichContent blocks={article.content} contentWrapper={ContentBlock} />
         </Box>
       )}
-      {!breakpoints.xs
-        ? article.imageMobile && (
-            <ContentImage
-              node={article.imageMobile}
-              contentWrapper={ContentBlock}
-              sizes={imageSizes}
-            />
-          )
-        : article.imageDesktop && (
-            <ContentImage
-              node={article.imageDesktop}
-              contentWrapper={ContentBlock}
-              sizes={imageSizes}
-            />
-          )}
       {article.categories && (
         <ContentBlock>
           <Box pb={2} pt={4}>
