@@ -5,6 +5,7 @@ import {
   TimeframeOption,
   TimeframeOptionsList,
 } from '@corona-dashboard/common';
+import { useState } from 'react';
 import { last } from 'lodash';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
@@ -33,6 +34,10 @@ export function ReproductionChartTile({
    * of all the values before the first datapoint with a null value to
    * display in the chart
    */
+
+  const [reproductionTimeframe, setReproductionTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
+
   const values = data.values.slice(
     0,
     data.values.findIndex((x) => !isPresent(x.index_average))
@@ -49,30 +54,29 @@ export function ReproductionChartTile({
         date: last_value.date_of_insertion_unix,
         source: text.bronnen.rivm,
       }}
+      onSelectTimeframe={setReproductionTimeframe}
     >
-      {(timeframe) => (
-        <TimeSeriesChart
-          accessibility={{
-            key: 'reproduction_line_chart',
-          }}
-          values={values}
-          timeframe={timeframe}
-          seriesConfig={[
-            {
-              type: 'line',
-              metricProperty: 'index_average',
-              label: text.lineLegendLabel,
-              color: colors.data.primary,
-              minimumRange:
-                metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
-            },
-          ]}
-          dataOptions={{
-            timelineEvents,
-          }}
-          numGridLines={timeframe === 'all' ? 4 : 3}
-        />
-      )}
+      <TimeSeriesChart
+        accessibility={{
+          key: 'reproduction_line_chart',
+        }}
+        values={values}
+        timeframe={reproductionTimeframe}
+        seriesConfig={[
+          {
+            type: 'line',
+            metricProperty: 'index_average',
+            label: text.lineLegendLabel,
+            color: colors.data.primary,
+            minimumRange:
+              metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
+          },
+        ]}
+        dataOptions={{
+          timelineEvents,
+        }}
+        numGridLines={reproductionTimeframe === TimeframeOption.ALL ? 4 : 3}
+      />
     </ChartTile>
   );
 }

@@ -27,7 +27,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   useEffect(() => {
     if (breakpoints.md) {
-      router.replace(reverseRouter.gm.vaccinaties(router.query.code as string));
+      router.replace(reverseRouter.gm.rioolwater(router.query.code as string));
     }
   }, [breakpoints.md, reverseRouter.gm, router]);
 

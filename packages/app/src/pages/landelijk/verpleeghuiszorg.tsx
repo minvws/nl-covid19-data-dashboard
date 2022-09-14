@@ -1,4 +1,9 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
+import { useState } from 'react';
 import { Coronavirus, Location, Verpleeghuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -90,7 +95,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
+function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedNlData: data,
@@ -98,6 +103,20 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     content,
   } = props;
+
+  const [
+    nursingHomeConfirmedCasesTimeframe,
+    setNursingHomeConfirmedCasesTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [
+    nursingHomeInfectedLocationsTimeframe,
+    setNursingHomeInfectedLocationsTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
+
   const nursinghomeDataLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
     data.nursing_home.values,
@@ -169,58 +188,56 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={positiveTestedPeopleText.linechart_titel}
             description={positiveTestedPeopleText.linechart_description}
             timeframeOptions={TimeframeOptionsList}
+            onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'nursing_home_confirmed_cases_over_time_chart',
-                }}
-                values={data.nursing_home.values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'nursing_home_confirmed_cases_over_time_chart',
+              }}
+              values={data.nursing_home.values}
+              timeframe={nursingHomeConfirmedCasesTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'newly_infected_people_moving_average',
+                  color: colors.data.primary,
+                  label:
+                    positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
+                  shortLabel:
+                    positiveTestedPeopleText.tooltip_labels
+                      .newly_infected_people_moving_average,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'newly_infected_people',
+                  color: colors.data.primary,
+                  label: positiveTestedPeopleText.line_chart_legend_trend_label,
+                  shortLabel:
+                    positiveTestedPeopleText.tooltip_labels
+                      .newly_infected_people,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'newly_infected_people_moving_average',
-                    color: colors.data.primary,
+                    start: underReportedDateStart,
+                    end: Infinity,
                     label:
-                      positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
+                      positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                     shortLabel:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people_moving_average,
+                      positiveTestedPeopleText.tooltip_labels.inaccurate,
+                    cutValuesForMetricProperties: [
+                      'newly_infected_people_moving_average',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'newly_infected_people',
-                    color: colors.data.primary,
-                    label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
-                    shortLabel:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedDateStart,
-                      end: Infinity,
-                      label:
-                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-                      shortLabel:
-                        positiveTestedPeopleText.tooltip_labels.inaccurate,
-                      cutValuesForMetricProperties: [
-                        'newly_infected_people_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'nursing_home',
-                    'newly_infected_people'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'nursing_home',
+                  'newly_infected_people'
+                ),
+              }}
+            />
           </ChartTile>
 
           <Divider />
@@ -314,26 +331,25 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={infectedLocationsText.linechart_description}
+            onSelectTimeframe={setNursingHomeInfectedLocationsTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'nursing_home_infected_locations_over_time_chart',
-                }}
-                values={data.nursing_home.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'infected_locations_total',
-                    label:
-                      textShared.verpleeghuis_besmette_locaties
-                        .linechart_tooltip_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'nursing_home_infected_locations_over_time_chart',
+              }}
+              values={data.nursing_home.values}
+              timeframe={nursingHomeInfectedLocationsTimeframe}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'infected_locations_total',
+                  label:
+                    textShared.verpleeghuis_besmette_locaties
+                      .linechart_tooltip_label,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           </ChartTile>
 
           <Divider />
@@ -374,56 +390,55 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.linechart_description}
+            onSelectTimeframe={setNursingHomeDeceasedTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'nursing_home_deceased_over_time_chart',
-                }}
-                values={data.nursing_home.values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'nursing_home_deceased_over_time_chart',
+              }}
+              values={data.nursing_home.values}
+              timeframe={nursingHomeDeceasedTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'deceased_daily_moving_average',
+                  label: textNl.line_chart_legend_trend_moving_average_label,
+                  shortLabel:
+                    textNl.tooltip_labels.deceased_daily_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'deceased_daily',
+                  label: textNl.line_chart_legend_trend_label,
+                  shortLabel: textNl.tooltip_labels.deceased_daily,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'deceased_daily_moving_average',
-                    label: textNl.line_chart_legend_trend_moving_average_label,
-                    shortLabel:
-                      textNl.tooltip_labels.deceased_daily_moving_average,
-                    color: colors.data.primary,
+                    start: underReportedDateStart,
+                    end: Infinity,
+                    label: textNl.line_chart_legend_inaccurate_label,
+                    shortLabel: textNl.tooltip_labels.inaccurate,
+                    cutValuesForMetricProperties: [
+                      'deceased_daily_moving_average',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label: textNl.line_chart_legend_trend_label,
-                    shortLabel: textNl.tooltip_labels.deceased_daily,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedDateStart,
-                      end: Infinity,
-                      label: textNl.line_chart_legend_inaccurate_label,
-                      shortLabel: textNl.tooltip_labels.inaccurate,
-                      cutValuesForMetricProperties: [
-                        'deceased_daily_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'nursing_home',
-                    'deceased_daily'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'nursing_home',
+                  'deceased_daily'
+                ),
+              }}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default NursingHomeCare;

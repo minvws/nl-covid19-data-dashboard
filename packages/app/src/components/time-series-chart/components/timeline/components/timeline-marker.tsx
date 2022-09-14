@@ -25,7 +25,7 @@ export function TimelineMarker({
           size={innerPointSize}
           color={colors.data.primary}
           initial={false}
-          borderWidth={borderWidth}
+          $borderWidth={borderWidth}
           transition={{ ease: 'easeOut' }}
           animate={{
             boxShadow: `0 0 0 ${highlightBorderWidth}px ${colors.data.primary}`,
@@ -39,12 +39,12 @@ export function TimelineMarker({
 const StyledPointMarker = styled(m.div)<{
   color: string;
   size: number;
-  borderWidth: number;
+  $borderWidth: number; // Prevent prop to be rendered to the DOM by using Transient prop
 }>((x) =>
   css({
     position: 'relative',
-    left: `${x.borderWidth}px`,
-    top: `${x.borderWidth}px`,
+    left: `${x.$borderWidth}px`,
+    top: `${x.$borderWidth}px`,
     width: `${x.size}px`,
     height: `${x.size}px`,
     borderRadius: `${x.size / 2}px`,

@@ -1,4 +1,9 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
+import { useState } from 'react';
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
@@ -103,7 +108,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
+function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedGmData: data,
@@ -112,7 +117,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-
+  const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
@@ -257,37 +263,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: textGm.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
+            onSelectTimeframe={setpositivelyTestedPeopleTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'confirmed_cases_infected_over_time_chart',
-                }}
-                values={data.tested_overall.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'infected_moving_average',
-                    label: textShared.labels.infected_moving_average,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'infected',
-                    label: textShared.labels.infected,
-                    color: colors.data.primary,
-                    yAxisExceptionValues: [1644318000],
-                  },
-                ]}
-                dataOptions={{
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'tested_overall'
-                  ),
-                }}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'confirmed_cases_infected_over_time_chart',
+              }}
+              values={data.tested_overall.values}
+              timeframe={positivelyTestedPeopleTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'infected_moving_average',
+                  label: textShared.labels.infected_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'infected',
+                  label: textShared.labels.infected,
+                  color: colors.data.primary,
+                  yAxisExceptionValues: [1644318000],
+                },
+              ]}
+              dataOptions={{
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'tested_overall'
+                ),
+              }}
+            />
           </ChartTile>
 
           <InView rootMargin="400px">
@@ -358,6 +363,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       </GmLayout>
     </Layout>
   );
-};
+}
 
 export default PositivelyTestedPeople;

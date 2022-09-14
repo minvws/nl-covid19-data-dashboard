@@ -44,7 +44,7 @@ export function TopicalTile({
     <Box
       as="a"
       href={cta?.href}
-      borderColor={colors.gray}
+      borderColor={colors.gray3}
       borderWidth="1px"
       borderStyle="solid"
       position="relative"
@@ -120,7 +120,7 @@ export function TopicalTile({
 const IconWrapper = styled.span<IconWrapperProps>((x) =>
   css({
     color: x.iconColor,
-    display: 'inline-flex',
+    flexShrink: 0,
     width: '20px',
     height: '20px',
     marginLeft: 2,

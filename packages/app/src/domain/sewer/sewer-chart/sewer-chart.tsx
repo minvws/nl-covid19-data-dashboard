@@ -2,10 +2,11 @@ import {
   colors,
   NlSewer,
   SewerPerInstallationData,
+  TimeframeOption,
   TimeframeOptionsList,
   VrSewer,
 } from '@corona-dashboard/common';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Warning } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
@@ -87,6 +88,10 @@ export function SewerChart({
       } as SewerPerInstallationData)
   );
 
+  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(
+    TimeframeOption.ALL
+  );
+
   const { commonTexts } = useIntl();
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
@@ -137,91 +142,86 @@ export function SewerChart({
         source: text.source,
       }}
       description={text.description}
+      onSelectTimeframe={setSewerTimeframe}
     >
-      {(timeframe) => (
-        <>
-          {dataPerInstallation && (
-            <Box alignSelf="flex-start" mb={3} minWidth={207}>
-              <RichContentSelect
-                label={text.selectPlaceholder}
-                visuallyHiddenLabel
-                initialValue={selectedInstallation}
-                options={optionsWithContent}
-                onChange={(option) => onChange(option.value)}
-              />
-            </Box>
-          )}
-          {scopedWarning &&
-            scopedGmName.toUpperCase() === selectedInstallation && (
-              <Box mt={2} mb={4}>
-                <WarningTile
-                  variant="emphasis"
-                  message={scopedWarning}
-                  icon={Warning}
-                  isFullWidth
-                />
-              </Box>
-            )}
-
-          {
-            /**
-             * If there is installation data, and an installation was selected we need to
-             * convert the data to combine the two.
-             */
-            dataPerInstallation && selectedInstallation ? (
-              <TimeSeriesChart
-                accessibility={accessibility}
-                values={mergeData(
-                  dataAverages,
-                  dataPerInstallation,
-                  selectedInstallation
-                )}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'selected_installation_rna_normalized',
-                    label: selectedInstallation,
-                    color: 'black',
-                    style: 'dashed',
-                  },
-                  {
-                    type: 'area',
-                    metricProperty: 'average',
-                    label: text.averagesDataLabel,
-                    color: colors.data.scale.blue[3],
-                    nonInteractive: true,
-                  },
-                ]}
-                formatTooltip={(data) => {
-                  /**
-                   * Silently fail when unable to find line configuration in location tooltip
-                   */
-                  if (data.config.find((x) => x.type === 'line')) {
-                    return <LocationTooltip data={data} />;
-                  }
-                }}
-                dataOptions={dataOptions}
-              />
-            ) : (
-              <TimeSeriesChart
-                accessibility={accessibility}
-                values={dataAverages.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'average',
-                    label: text.averagesDataLabel,
-                    color: colors.data.scale.blue[3],
-                  },
-                ]}
-                dataOptions={dataOptions}
-              />
-            )
-          }
-        </>
+      {dataPerInstallation && (
+        <Box alignSelf="flex-start" mb={3} minWidth={207}>
+          <RichContentSelect
+            label={text.selectPlaceholder}
+            visuallyHiddenLabel
+            initialValue={selectedInstallation}
+            options={optionsWithContent}
+            onChange={(option) => onChange(option.value)}
+          />
+        </Box>
       )}
+      {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (
+        <Box mt={2} mb={4}>
+          <WarningTile
+            variant="emphasis"
+            message={scopedWarning}
+            icon={Warning}
+            isFullWidth
+          />
+        </Box>
+      )}
+      {
+        /**
+         * If there is installation data, and an installation was selected we need to
+         * convert the data to combine the two.
+         */
+        dataPerInstallation && selectedInstallation ? (
+          <TimeSeriesChart
+            accessibility={accessibility}
+            values={mergeData(
+              dataAverages,
+              dataPerInstallation,
+              selectedInstallation
+            )}
+            timeframe={sewerTimeframe}
+            seriesConfig={[
+              {
+                type: 'line',
+                metricProperty: 'selected_installation_rna_normalized',
+                label: selectedInstallation,
+                color: 'black',
+                style: 'dashed',
+              },
+              {
+                type: 'area',
+                metricProperty: 'average',
+                label: text.averagesDataLabel,
+                color: colors.data.scale.blue[3],
+                nonInteractive: true,
+              },
+            ]}
+            formatTooltip={(data) => {
+              /**
+               * Silently fail when unable to find line configuration in location tooltip
+               */
+              if (data.config.find((x) => x.type === 'line')) {
+                return <LocationTooltip data={data} />;
+              }
+            }}
+            dataOptions={dataOptions}
+          />
+        ) : (
+          <TimeSeriesChart
+            accessibility={accessibility}
+            values={dataAverages.values}
+            timeframe={sewerTimeframe}
+            seriesConfig={[
+              {
+                type: 'area',
+                metricProperty: 'average',
+                label: text.averagesDataLabel,
+                color: colors.data.scale.blue[3],
+              },
+            ]}
+            dataOptions={dataOptions}
+          />
+        )
+      }
     </ChartTile>
   );
 }

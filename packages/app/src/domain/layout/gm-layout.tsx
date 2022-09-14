@@ -54,8 +54,7 @@ export function GmLayout(props: GmLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
 
-  const showMetricLinks =
-    router.route !== '/gemeente' && router.route !== '/actueel/gemeente';
+  const showMetricLinks = router.route !== '/gemeente';
 
   const isMainRoute = router.route === '/gemeente';
 

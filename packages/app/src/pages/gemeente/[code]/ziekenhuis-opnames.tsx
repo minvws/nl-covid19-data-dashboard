@@ -1,6 +1,7 @@
 import {
   colors,
   DAY_IN_SECONDS,
+  TimeframeOption,
   TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
@@ -53,6 +54,7 @@ import {
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useState } from 'react';
 
 const pageMetrics = ['hospital_nice'];
 
@@ -102,7 +104,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
+function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedGmData: data,
@@ -111,6 +113,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
+
+  const [
+    hospitalAdmissionsOverTimeTimeframe,
+    setHospitalAdmissionsOverTimeTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -202,48 +210,47 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={textGm.linechart_description}
             metadata={{ source: textGm.bronnen.rivm }}
             timeframeOptions={TimeframeOptionsList}
+            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'hospital_admissions_over_time_chart',
-                }}
-                values={data.hospital_nice.values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'hospital_admissions_over_time_chart',
+              }}
+              values={data.hospital_nice.values}
+              timeframe={hospitalAdmissionsOverTimeTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty:
+                    'admissions_on_date_of_admission_moving_average',
+                  label: textGm.linechart_legend_titel_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'admissions_on_date_of_admission',
+                  label: textGm.linechart_legend_titel,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty:
-                      'admissions_on_date_of_admission_moving_average',
-                    label: textGm.linechart_legend_titel_moving_average,
-                    color: colors.data.primary,
+                    start: underReportedRange,
+                    end: Infinity,
+                    label: textGm.linechart_legend_underreported_titel,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
+                      'admissions_on_date_of_admission_moving_average_rounded',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label: textGm.linechart_legend_titel,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedRange,
-                      end: Infinity,
-                      label: textGm.linechart_legend_underreported_titel,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average_rounded',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'hospital_nice'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'hospital_nice'
+                ),
+              }}
+            />
           </ChartTile>
 
           <ChoroplethTile
@@ -285,6 +292,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       </GmLayout>
     </Layout>
   );
-};
+}
 
 export default IntakeHospital;
