@@ -14,7 +14,6 @@ import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-strin
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
-  COLOR_FULLY_BOOSTERED,
   COLOR_AUTUMN_2022_SHOT,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
@@ -87,7 +86,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {'Verschil opkomst basisserie en najaarsprik'}
+                {'Najaarsprik en basisserie'}
               </InlineText>
             </HeaderCell>
           </Row>
@@ -114,12 +113,16 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               <Cell>
                 <WidePercentage
                   value={
-                    'fully_vaccinated_percentage_label' in item
+                    'autumn_2022_vaccinated_percentage_label' in item
                       ? formatCoveragePercentage(
                           item,
-                          'fully_vaccinated_percentage'
+                          'autumn_2022_vaccinated_percentage'
                         )
-                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
+                      : item.autumn_2022_vaccinated_percentage === null
+                      ? text.no_data
+                      : `${formatPercentage(
+                          item.autumn_2022_vaccinated_percentage
+                        )}%`
                   }
                   color={COLOR_AUTUMN_2022_SHOT}
                   justifyContent="flex-end"
@@ -128,16 +131,14 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               <Cell>
                 <WidePercentage
                   value={
-                    'booster_shot_percentage_label' in item
+                    'fully_vaccinated_percentage_label' in item
                       ? formatCoveragePercentage(
                           item,
-                          'booster_shot_percentage'
+                          'fully_vaccinated_percentage'
                         )
-                      : item.booster_shot_percentage === null
-                      ? text.no_data
-                      : `${formatPercentage(item.booster_shot_percentage)}%`
+                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
                   }
-                  color={COLOR_FULLY_BOOSTERED}
+                  color={COLOR_FULLY_VACCINATED}
                   justifyContent="flex-end"
                 />
               </Cell>
@@ -145,19 +146,19 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 <Box spacing={1}>
                   <Bar
                     value={item.fully_vaccinated_percentage}
-                    color={COLOR_FULLY_VACCINATED}
+                    color={COLOR_AUTUMN_2022_SHOT}
                     label={
-                      'fully_vaccinated_percentage_label' in item
-                        ? item.fully_vaccinated_percentage_label
+                      'booster_shot_percentage_label' in item
+                        ? item.booster_shot_percentage_label
                         : undefined
                     }
                   />
                   <Bar
                     value={item.booster_shot_percentage}
-                    color={COLOR_FULLY_BOOSTERED}
+                    color={COLOR_FULLY_VACCINATED}
                     label={
-                      'booster_shot_percentage_label' in item
-                        ? item.booster_shot_percentage_label
+                      'fully_vaccinated_percentage_label' in item
+                        ? item.fully_vaccinated_percentage_label
                         : undefined
                     }
                   />
