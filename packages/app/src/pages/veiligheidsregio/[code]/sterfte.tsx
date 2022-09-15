@@ -1,4 +1,8 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import {
@@ -11,6 +15,7 @@ import {
   TimeSeriesChart,
   TwoKpiSection,
 } from '~/components';
+import { useState } from 'react';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, VrLayout } from '~/domain/layout';
@@ -90,7 +95,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
+function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -98,6 +103,9 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
+
+  const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference } = data;
 
@@ -186,46 +194,45 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textVr.section_deceased_rivm.bronnen.rivm,
             }}
+            onSelectTimeframe={setDeceasedMunicipalTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'deceased_over_time_chart',
-                }}
-                values={dataRivm.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'covid_daily_moving_average',
-                    label:
-                      textVr.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_label_moving_average,
-                    shortLabel:
-                      textVr.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_short_label_moving_average,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'covid_daily',
-                    label:
-                      textVr.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_label,
-                    shortLabel:
-                      textVr.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_short_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'deceased_rivm'
-                  ),
-                }}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'deceased_over_time_chart',
+              }}
+              values={dataRivm.values}
+              timeframe={deceasedMunicipalTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'covid_daily_moving_average',
+                  label:
+                    textVr.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_label_moving_average,
+                  shortLabel:
+                    textVr.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'covid_daily',
+                  label:
+                    textVr.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_label,
+                  shortLabel:
+                    textVr.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_short_label,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'deceased_rivm'
+                ),
+              }}
+            />
           </ChartTile>
 
           <PageInformationBlock
@@ -253,6 +260,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default DeceasedRegionalPage;

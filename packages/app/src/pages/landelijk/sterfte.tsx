@@ -1,4 +1,9 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
+import { useState } from 'react';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import {
@@ -93,7 +98,10 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
+function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
+  const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
+
   const { pageText, selectedNlData: data, lastGenerated, content } = props;
   const dataCbs = data.deceased_cbs;
   const dataRivm = data.deceased_rivm;
@@ -178,46 +186,45 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.section_deceased_rivm.bronnen.rivm,
             }}
+            onSelectTimeframe={setDeceasedOverTimeTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'deceased_over_time_chart',
-                }}
-                values={dataRivm.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'covid_daily_moving_average',
-                    label:
-                      textNl.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_label_moving_average,
-                    shortLabel:
-                      textNl.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_short_label_moving_average,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'bar',
-                    metricProperty: 'covid_daily',
-                    label:
-                      textNl.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_label,
-                    shortLabel:
-                      textNl.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_short_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'deceased_rivm'
-                  ),
-                }}
-              />
-            )}
+            <TimeSeriesChart
+              accessibility={{
+                key: 'deceased_over_time_chart',
+              }}
+              values={dataRivm.values}
+              timeframe={deceasedOverTimeTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'covid_daily_moving_average',
+                  label:
+                    textNl.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_label_moving_average,
+                  shortLabel:
+                    textNl.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'covid_daily',
+                  label:
+                    textNl.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_label,
+                  shortLabel:
+                    textNl.section_deceased_rivm
+                      .line_chart_covid_daily_legend_trend_short_label,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'deceased_rivm'
+                ),
+              }}
+            />
           </ChartTile>
 
           <ChartTile
@@ -271,6 +278,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default DeceasedNationalPage;

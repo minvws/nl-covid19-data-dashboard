@@ -96,6 +96,36 @@ export const ARTICLE_FIELDS = [
         .required(),
   },
   {
+    title: 'Afbeelding voor grote schermen',
+    name: 'imageDesktop',
+    type: 'image',
+    options: {
+      hotspot: true,
+    },
+    fields: [
+      {
+        title: 'Alternatieve tekst (toegankelijkheid)',
+        name: 'alt',
+        type: 'localeString',
+      },
+    ],
+  },
+  {
+    title: 'Afbeelding voor kleine schermen',
+    name: 'imageMobile',
+    type: 'image',
+    options: {
+      hotspot: true,
+    },
+    fields: [
+      {
+        title: 'Alternatieve tekst (toegankelijkheid)',
+        name: 'alt',
+        type: 'localeString',
+      },
+    ],
+  },
+  {
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',

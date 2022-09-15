@@ -1,4 +1,9 @@
-import { colors, TimeframeOptionsList } from '@corona-dashboard/common';
+import {
+  colors,
+  TimeframeOption,
+  TimeframeOptionsList,
+} from '@corona-dashboard/common';
+import { useState } from 'react';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -81,9 +86,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const ElderlyAtHomeRegionalPage = (
-  props: StaticProps<typeof getStaticProps>
-) => {
+function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     vrName,
@@ -91,6 +94,17 @@ const ElderlyAtHomeRegionalPage = (
     lastGenerated,
     content,
   } = props;
+
+  const [
+    elderlyAtHomeConfirmedCasesTimeframe,
+    setElderlyAtHomeConfirmedCasesTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [
+    elderlyAtHomeConfirmedCasesOverTimeTimeframe,
+    setElderlyAtHomeConfirmedCasesOverTimeTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
   const { elderly_at_home, difference } = data;
 
   const { commonTexts } = useIntl();
@@ -200,57 +214,56 @@ const ElderlyAtHomeRegionalPage = (
             description={
               textVr.section_positive_tested.line_chart_daily_description
             }
+            onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
-                }}
-                timeframe={timeframe}
-                values={elderly_at_home.values}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'elderly_at_home_confirmed_cases_over_time_chart',
+              }}
+              timeframe={elderlyAtHomeConfirmedCasesTimeframe}
+              values={elderly_at_home.values}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'positive_tested_daily_moving_average',
+                  label:
+                    textVr.section_positive_tested
+                      .line_chart_positive_tested_daily_moving_average,
+                  shortLabel:
+                    textVr.section_positive_tested
+                      .line_chart_positive_tested_daily_moving_average_short_label,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'positive_tested_daily',
+                  label:
+                    textVr.section_positive_tested
+                      .line_chart_legend_trend_label,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'positive_tested_daily_moving_average',
+                    start: elderlyAtHomeUnderReportedRange,
+                    end: Infinity,
                     label:
-                      textVr.section_positive_tested
-                        .line_chart_positive_tested_daily_moving_average,
-                    shortLabel:
-                      textVr.section_positive_tested
-                        .line_chart_positive_tested_daily_moving_average_short_label,
-                    color: colors.data.primary,
+                      textVr.section_deceased
+                        .line_chart_legend_inaccurate_label,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
+                      'positive_tested_daily_moving_average',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'positive_tested_daily',
-                    label:
-                      textVr.section_positive_tested
-                        .line_chart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: elderlyAtHomeUnderReportedRange,
-                      end: Infinity,
-                      label:
-                        textVr.section_deceased
-                          .line_chart_legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'positive_tested_daily_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'elderly_at_home',
-                    'positive_tested_daily'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'elderly_at_home',
+                  'positive_tested_daily'
+                ),
+              }}
+            />
           </ChartTile>
 
           <Divider />
@@ -297,61 +310,59 @@ const ElderlyAtHomeRegionalPage = (
             title={textVr.section_deceased.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
             description={textVr.section_deceased.line_chart_daily_description}
+            onSelectTimeframe={setElderlyAtHomeConfirmedCasesOverTimeTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'elderly_at_home_deceased_over_time_chart',
-                }}
-                timeframe={timeframe}
-                values={elderly_at_home.values}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'elderly_at_home_deceased_over_time_chart',
+              }}
+              timeframe={elderlyAtHomeConfirmedCasesOverTimeTimeframe}
+              values={elderly_at_home.values}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'deceased_daily_moving_average',
+                  label:
+                    textVr.section_deceased
+                      .line_chart_deceased_daily_moving_average,
+                  shortLabel:
+                    textVr.section_deceased
+                      .line_chart_deceased_daily_moving_average_short_label,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'deceased_daily',
+                  label: textVr.section_deceased.line_chart_legend_trend_label,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'deceased_daily_moving_average',
+                    start: elderlyAtHomeDeceasedUnderReportedRange,
+                    end: Infinity,
                     label:
                       textVr.section_deceased
-                        .line_chart_deceased_daily_moving_average,
-                    shortLabel:
-                      textVr.section_deceased
-                        .line_chart_deceased_daily_moving_average_short_label,
-                    color: colors.data.primary,
+                        .line_chart_legend_inaccurate_label,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
+                      'deceased_daily_moving_average',
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label:
-                      textVr.section_deceased.line_chart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: elderlyAtHomeDeceasedUnderReportedRange,
-                      end: Infinity,
-                      label:
-                        textVr.section_deceased
-                          .line_chart_legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'deceased_daily_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'elderly_at_home',
-                    'deceased_daily'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'elderly_at_home',
+                  'deceased_daily'
+                ),
+              }}
+            />
           </ChartTile>
         </TileList>
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default ElderlyAtHomeRegionalPage;

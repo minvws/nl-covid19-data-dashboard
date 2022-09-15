@@ -80,7 +80,7 @@ export function TopNavigation() {
                 {commonTexts.nav.links.gemeente}
               </NavItem>
 
-              <NavItem href={reverseRouter.algemeen.over()}>
+              <NavItem href={reverseRouter.general.over()}>
                 {commonTexts.nav.links.over}
               </NavItem>
             </NavList>

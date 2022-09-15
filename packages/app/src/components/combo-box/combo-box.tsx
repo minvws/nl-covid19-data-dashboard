@@ -46,7 +46,7 @@ type TProps<Option extends TOption> = {
  * ```
  */
 export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
-  const { options, placeholder, sorter, selectedOption } = props;
+  const { options, placeholder, selectedOption } = props;
 
   const { commonTexts } = useIntl();
 
@@ -55,7 +55,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLUListElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
-  const results = useSearchedOptions<Option>(inputValue, options, sorter);
+  const results = useSearchedAndSortedOptions<Option>(inputValue, options);
   const breakpoints = useBreakpoints();
   const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
@@ -137,7 +137,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
                 <StyledComboboxOption
                   key={`${index}-${option.name}`}
                   value={option.displayName || option.name}
-                  isSelectedOption={selectedOption?.name === option.name}
+                  $isSelectedOption={selectedOption?.name === option.name}
                 />
               ))}
             </ComboboxList>
@@ -151,33 +151,30 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   );
 };
 
-const useSearchedOptions = <Option extends TOption>(
+const useSearchedAndSortedOptions = <Option extends TOption>(
   term: string,
-  options: Option[],
-  sorter?: (a: Option, b: Option) => number
+  options: Option[]
 ): Option[] => {
   const throttledTerm = useThrottle(term, 100);
 
   return useMemo(
     () =>
-      throttledTerm.trim() === ''
-        ? options.sort(sorter)
-        : matchSorter(options, throttledTerm.trim(), {
-            keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
-          }),
-    [throttledTerm, options, sorter]
+      matchSorter(options, throttledTerm.trim(), {
+        keys: ['displayName', (item: Option) => item.name, 'searchTerms'],
+      }),
+    [throttledTerm, options]
   );
 };
 
 const StyledComboboxOption = styled(ComboboxOption)<{
-  isSelectedOption: boolean;
+  $isSelectedOption: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
 }>`
   border-left: ${(x) =>
-    x.isSelectedOption ? `5px solid ${x.theme.colors.blue}` : '0'};
+    x.$isSelectedOption ? `5px solid ${x.theme.colors.blue}` : '0'};
 
   span:first-child {
     display: inline-block;
-    padding-left: ${(x) => (x.isSelectedOption ? '0' : '5px')};
+    padding-left: ${(x) => (x.$isSelectedOption ? '0' : '5px')};
   }
 `;
 

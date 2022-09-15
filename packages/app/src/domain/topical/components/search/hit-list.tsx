@@ -83,7 +83,7 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
           role="option"
           id={id}
           aria-selected={hasFocus ? 'true' : 'false'}
-          aria-active={isActiveResult ? 'true' : 'false'}
+          aria-current={isActiveResult ? 'true' : 'false'}
           onClick={onClick}
         >
           {children}
@@ -120,7 +120,7 @@ const StyledHitLink = styled(Anchor)(
       transformOrigin: 'left',
       transition: '0.2s transform',
     },
-    '&[aria-active="true"]': {
+    '&[aria-current="true"]': {
       color: 'blue',
       fontWeight: 'bold',
       '&:before': {

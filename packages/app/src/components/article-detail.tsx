@@ -14,6 +14,7 @@ import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 interface ArticleDetailProps {
   article: Article;
   text: SiteText['pages']['topical_page']['shared'];
@@ -21,11 +22,12 @@ interface ArticleDetailProps {
 
 const imageSizes = [
   // viewport min-width 700px display images at max. 636px wide
-  [700, 636],
+  [400, 700, 636],
 ];
 
 export function ArticleDetail({ article, text }: ArticleDetailProps) {
   const { commonTexts } = useIntl();
+  const breakpoints = useBreakpoints();
 
   article.intro = mergeAdjacentKpiBlocks(article.intro);
   article.content = mergeAdjacentKpiBlocks(article.content);
@@ -54,6 +56,25 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           sizes={imageSizes}
         />
       </ContentBlock>
+      {!breakpoints.xs
+        ? article.imageMobile && (
+            <Box mt={4}>
+              <ContentImage
+                node={article.imageMobile}
+                contentWrapper={ContentBlock}
+                sizes={imageSizes}
+              />
+            </Box>
+          )
+        : article.imageDesktop && (
+            <Box mt={4}>
+              <ContentImage
+                node={article.imageDesktop}
+                contentWrapper={ContentBlock}
+                sizes={imageSizes}
+              />
+            </Box>
+          )}
       {!!article.content?.length && (
         <Box
           // Since you can't serialize unordered lists we have to position them here in the container
@@ -69,7 +90,6 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           <RichContent blocks={article.content} contentWrapper={ContentBlock} />
         </Box>
       )}
-
       {article.categories && (
         <ContentBlock>
           <Box pb={2} pt={4}>

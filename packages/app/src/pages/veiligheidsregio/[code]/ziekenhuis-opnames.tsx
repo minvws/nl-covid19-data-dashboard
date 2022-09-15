@@ -1,9 +1,11 @@
 import {
   colors,
   DAY_IN_SECONDS,
+  TimeframeOption,
   TimeframeOptionsList,
   WEEK_IN_SECONDS,
 } from '@corona-dashboard/common';
+import { useState } from 'react';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { GetStaticPropsContext } from 'next';
@@ -98,7 +100,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
+function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const {
     pageText,
     selectedVrData: data,
@@ -107,6 +109,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
+
+  const [
+    hospitalAdmissionsOverTimeTimeframe,
+    setHospitalAdmissionsOverTimeTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
@@ -203,48 +211,47 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             title={textVr.linechart_titel}
             description={textVr.linechart_description}
             timeframeOptions={TimeframeOptionsList}
+            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'hospital_admissions_over_time_chart',
-                }}
-                values={data.hospital_nice.values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'hospital_admissions_over_time_chart',
+              }}
+              values={data.hospital_nice.values}
+              timeframe={hospitalAdmissionsOverTimeTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty:
+                    'admissions_on_date_of_admission_moving_average',
+                  label: textVr.linechart_legend_titel_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'admissions_on_date_of_admission',
+                  label: textVr.linechart_legend_titel,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty:
+                    start: underReportedRange,
+                    end: Infinity,
+                    label: textVr.linechart_legend_underreported_titel,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
                       'admissions_on_date_of_admission_moving_average',
-                    label: textVr.linechart_legend_titel_moving_average,
-                    color: colors.data.primary,
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label: textVr.linechart_legend_titel,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedRange,
-                      end: Infinity,
-                      label: textVr.linechart_legend_underreported_titel,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'hospital_nice'
-                  ),
-                }}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'hospital_nice'
+                ),
+              }}
+            />
           </ChartTile>
 
           <ChoroplethTile
@@ -285,6 +292,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
       </VrLayout>
     </Layout>
   );
-};
+}
 
 export default IntakeHospital;

@@ -176,7 +176,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
+function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const {
     content,
     choropleth,
@@ -573,6 +573,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default VaccinationPage;

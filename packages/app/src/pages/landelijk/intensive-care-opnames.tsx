@@ -19,6 +19,7 @@ import {
   PageInformationBlock,
   PageBarScale,
 } from '~/components';
+import { useState } from 'react';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
@@ -105,7 +106,18 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
+function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
+  const [
+    intensiveCareAdmissionsTimeframe,
+    setIntensiveCareAdmissionsTimeframe,
+  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const [admissionsPerAgeTimeframe, setAdmissionsPerAgeTimeframe] =
+    useState<TimeframeOption>(TimeframeOption.ALL);
+
   const { commonTexts, formatPercentage, formatDateFromSeconds } = useIntl();
 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
@@ -232,48 +244,47 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: textNl.bronnen.nice }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+            onSelectTimeframe={setIntensiveCareAdmissionsTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'intensive_care_admissions_over_time_chart',
-                }}
-                values={dataIntake.values}
-                timeframe={timeframe}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: intakeUnderReportedRange,
-                      end: Infinity,
-                      label: textNl.linechart_legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'admissions_on_date_of_admission_moving_average',
-                      ],
-                    },
-                  ],
-                  timelineEvents: getTimelineEvents(
-                    content.elements.timeSeries,
-                    'intensive_care_nice'
-                  ),
-                }}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'intensive_care_admissions_over_time_chart',
+              }}
+              values={dataIntake.values}
+              timeframe={intensiveCareAdmissionsTimeframe}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty:
+                    start: intakeUnderReportedRange,
+                    end: Infinity,
+                    label: textNl.linechart_legend_inaccurate_label,
+                    shortLabel: commonTexts.common.incomplete,
+                    cutValuesForMetricProperties: [
                       'admissions_on_date_of_admission_moving_average',
-                    label: textNl.linechart_legend_trend_label_moving_average,
-                    color: colors.data.primary,
+                    ],
                   },
-                  {
-                    type: 'bar',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label: textNl.linechart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
+                ],
+                timelineEvents: getTimelineEvents(
+                  content.elements.timeSeries,
+                  'intensive_care_nice'
+                ),
+              }}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty:
+                    'admissions_on_date_of_admission_moving_average',
+                  label: textNl.linechart_legend_trend_label_moving_average,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'bar',
+                  metricProperty: 'admissions_on_date_of_admission',
+                  label: textNl.linechart_legend_trend_label,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           </ChartTile>
 
           <ChartTile
@@ -282,43 +293,42 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: textNl.bronnen.lnaz }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+            onSelectTimeframe={setIntensiveCareBedsTimeframe}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'intensive_care_beds_occupied_over_time_chart',
-                }}
-                values={data.intensive_care_lcps.values}
-                timeframe={timeframe}
-                forceLegend
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: data.intensive_care_lcps.values[0].date_unix,
-                      end: new Date('1 June 2020').getTime() / 1000,
-                      label: textNl.chart_bedbezetting.legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                    },
-                  ],
-                }}
-                seriesConfig={[
+            <TimeSeriesChart
+              accessibility={{
+                key: 'intensive_care_beds_occupied_over_time_chart',
+              }}
+              values={data.intensive_care_lcps.values}
+              timeframe={intensiveCareBedsTimeframe}
+              forceLegend
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'line',
-                    metricProperty: 'beds_occupied_covid',
-                    nonInteractive: true,
-                    hideInLegend: true,
-                    label: textNl.chart_bedbezetting.legend_trend_label,
-                    color: colors.data.primary,
+                    start: data.intensive_care_lcps.values[0].date_unix,
+                    end: new Date('1 June 2020').getTime() / 1000,
+                    label: textNl.chart_bedbezetting.legend_inaccurate_label,
+                    shortLabel: commonTexts.common.incomplete,
                   },
-                  {
-                    type: 'scatter-plot',
-                    metricProperty: 'beds_occupied_covid',
-                    label: textNl.chart_bedbezetting.legend_dot_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
+                ],
+              }}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'beds_occupied_covid',
+                  nonInteractive: true,
+                  hideInLegend: true,
+                  label: textNl.chart_bedbezetting.legend_trend_label,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'scatter-plot',
+                  metricProperty: 'beds_occupied_covid',
+                  label: textNl.chart_bedbezetting.legend_dot_label,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           </ChartTile>
 
           <ChartTile
@@ -327,25 +337,24 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
+            onSelectTimeframe={setAdmissionsPerAgeTimeframe}
           >
-            {(timeframe) => (
-              <AdmissionsPerAgeGroup
-                accessibility={{
-                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
-                }}
-                values={data.intensive_care_nice_per_age_group.values}
-                timeframe={timeframe}
-                timelineEvents={getTimelineEvents(
-                  content.elements.timeSeries,
-                  'intensive_care_nice_per_age_group'
-                )}
-              />
-            )}
+            <AdmissionsPerAgeGroup
+              accessibility={{
+                key: 'intensive_care_admissions_per_age_group_over_time_chart',
+              }}
+              values={data.intensive_care_nice_per_age_group.values}
+              timeframe={admissionsPerAgeTimeframe}
+              timelineEvents={getTimelineEvents(
+                content.elements.timeSeries,
+                'intensive_care_nice_per_age_group'
+              )}
+            />
           </ChartTile>
         </TileList>
       </NlLayout>
     </Layout>
   );
-};
+}
 
 export default IntakeIntensiveCare;

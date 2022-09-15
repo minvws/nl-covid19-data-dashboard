@@ -54,9 +54,7 @@ export function VrLayout(props: VrLayoutProps) {
 
   const isMainRoute = router.route === '/veiligheidsregio';
 
-  const showMetricLinks =
-    router.route !== '/veiligheidsregio' &&
-    router.route !== '/actueel/veiligheidsregio';
+  const showMetricLinks = router.route !== '/veiligheidsregio';
 
   const items = useSidebar({
     layout: 'vr',

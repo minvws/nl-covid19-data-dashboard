@@ -164,9 +164,6 @@ const ButtonBox = styled.span((x: buttonBoxProps) =>
               backgroundColor: colors.blue,
               color: colors.offWhite,
             },
-            '&:focus': {
-              outline: '#000000 dotted 2px',
-            },
             '&:hover, &:focus': {
               textDecoration: 'underline',
             },
