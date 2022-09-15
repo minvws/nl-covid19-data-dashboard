@@ -63,6 +63,8 @@ import {
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-dummy-data';
+import { useFeature } from '~/lib/features';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -200,6 +202,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
     description: textNl.metadata.description,
   };
 
+  const vaccinationsCampaignsFeature = useFeature('vaccinationCampaigns');
+  const campaignsDummyData = DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED;
+
   const vaccineCoverageEstimatedLastValue =
     data.vaccine_coverage_per_age_group_estimated.last_value;
 
@@ -297,24 +302,28 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }
           />
 
-          <VaccineCampaignsTile
-            title={textNl.vaccine_campaigns.title}
-            description={replaceVariablesInText(
-              textNl.vaccine_campaigns.description,
-              {
-                vaccinePlanned: formatNumber(data.vaccine_planned.doses),
-              }
-            )}
-            descriptionFooter={textNl.vaccine_campaigns.description_footer}
-            headers={textNl.vaccine_campaigns.headers}
-            campaigns={data.vaccine_campaigns.vaccine_campaigns}
-            campaignDescriptions={textNl.vaccine_campaigns.campaigns}
-            metadata={{
-              datumsText: textNl.datums,
-              date: data.vaccine_campaigns.date_unix,
-              source: textNl.vaccine_campaigns.bronnen.rivm,
-            }}
-          />
+          {vaccinationsCampaignsFeature && (
+            <VaccineCampaignsTile
+              title={textNl.vaccine_campaigns.title}
+              description={replaceVariablesInText(
+                textNl.vaccine_campaigns.description,
+                {
+                  vaccinePlanned: formatNumber(
+                    campaignsDummyData.vaccine_planned.doses
+                  ),
+                }
+              )}
+              descriptionFooter={textNl.vaccine_campaigns.description_footer}
+              headers={textNl.vaccine_campaigns.headers}
+              campaigns={campaignsDummyData.vaccine_campaigns.vaccine_campaigns}
+              campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+              metadata={{
+                datumsText: textNl.datums,
+                date: campaignsDummyData.vaccine_campaigns.date_unix,
+                source: textNl.vaccine_campaigns.bronnen.rivm,
+              }}
+            />
+          )}
 
           <VaccinationsPerSupplierOverLastWeekTile
             title={textNl.vaccinations_per_supplier_over_last_week.title}
@@ -367,6 +376,24 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           />
           {hasHideArchivedCharts && (
             <>
+              <VaccineCampaignsTile
+                title={textNl.vaccine_campaigns.title}
+                description={replaceVariablesInText(
+                  textNl.vaccine_campaigns.description_archived,
+                  {
+                    vaccinePlanned: formatNumber(data.vaccine_planned.doses),
+                  }
+                )}
+                descriptionFooter={textNl.vaccine_campaigns.description_footer}
+                headers={textNl.vaccine_campaigns.headers}
+                campaigns={data.vaccine_campaigns.vaccine_campaigns}
+                campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+                metadata={{
+                  datumsText: textNl.datums,
+                  date: data.vaccine_campaigns.date_unix,
+                  source: textNl.vaccine_campaigns.bronnen.rivm,
+                }}
+              />
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredLastValue.date_unix}

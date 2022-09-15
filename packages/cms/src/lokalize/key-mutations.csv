@@ -3,3 +3,5 @@ timestamp,action,key,document_id,move_to
 2022-09-02T13:13:53.023Z,delete,pages.intensive_care_page.nl.datums,jF33EuwumlGuwav2FD3Vrw,__
 2022-09-12T11:42:43.520Z,delete,common.nav.back_topical.gm,vlhYWEAgyN27KxCATPJ5jO,__
 2022-09-12T11:42:43.524Z,delete,common.nav.back_topical.vr,c3zQAq6gN39dqhcQq6dCWr,__
+2022-09-15T10:16:05.400Z,add,pages.vaccinations_page.nl.vaccine_campaigns.description_archived,9P8A8sYTX3Ht4z1AMBfXsq,__
+2022-09-15T10:17:12.069Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.autumn_vaccination_description,DtIaVTvHarpWIXbTy9jsV1,__
