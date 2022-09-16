@@ -23,7 +23,7 @@
     },
     "age_group_range": {
       "type": "string",
-      "enum": ["12+", "18+"]
+      "enum": ["12+", "18+", "60+"]
     },
     "autumn_2022_vaccinated_percentage": {
       "type": ["integer", "null"]
