@@ -53,7 +53,7 @@ export const VaccineCoverageTile = ({
   };
 
   return (
-    <KpiTile title={title} hasNoSpace>
+    <KpiTile title={title} hasNoPaddingBottom>
       <Text>{description}</Text>
       <TwoKpiSection spacing={5}>
         <KpiContent>
