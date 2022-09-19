@@ -37,7 +37,7 @@ export function VaccinationsShotKpiSection({
   const { formatNumber } = useIntl();
   return (
     <TwoKpiSection hasBorder hasPadding>
-      <KpiTile title={text.title} hasNoBorder>
+      <KpiTile title={text.title} hasNoBorder hasNoPaddingBottom>
         <KpiValue text={formatNumber(value)} />
         <Markdown content={text.description} />
         {text.warning && <Message variant="warning">{text.warning}</Message>}
