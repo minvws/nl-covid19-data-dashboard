@@ -64,9 +64,7 @@ import {
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { DUMMY_DATA_VACCINE_COVERAGE } from '~/domain/vaccine/vaccine-coverage-tile/vaccine-coverage-dummy-data';
 import { useFeature } from '~/lib/features';
-import { DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-dummy-data';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -206,10 +204,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   };
 
   const vaccinationsCoverageFeature = useFeature('vaccinationsCoverage');
-  const coverageDummyData = DUMMY_DATA_VACCINE_COVERAGE.last_value;
+  const vaccineCoverageEstimated =
+    data.vaccine_coverage_per_age_group_estimated.last_value;
 
   const vaccinationsCampaignsFeature = useFeature('vaccinationCampaigns');
-  const campaignsDummyData = DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED;
 
   const vaccineCoverageEstimatedArchivedLastValue =
     data.vaccine_coverage_per_age_group_estimated_archived_20220908.last_value;
@@ -281,8 +279,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 }
                 coverageData={[
                   {
-                    value: coverageDummyData.age_60_plus_autumn_2022_vaccinated,
-                    birthyear: coverageDummyData.age_60_plus_birthyear,
+                    value:
+                      vaccineCoverageEstimated.age_60_plus_autumn_2022_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_60_plus_birthyear,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_60_plus,
@@ -291,13 +290,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         .description_60_plus,
                     bar: {
                       value:
-                        coverageDummyData.age_60_plus_autumn_2022_vaccinated,
+                        vaccineCoverageEstimated.age_60_plus_autumn_2022_vaccinated,
                       color: colors.data.scale.blueDetailed[8],
                     },
                   },
                   {
-                    value: coverageDummyData.age_12_plus_autumn_2022_vaccinated,
-                    birthyear: coverageDummyData.age_12_plus_birthyear,
+                    value:
+                      vaccineCoverageEstimated.age_12_plus_autumn_2022_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_12_plus_birthyear,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_12_plus,
@@ -306,12 +306,12 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         .description_12_plus,
                     bar: {
                       value:
-                        coverageDummyData.age_12_plus_autumn_2022_vaccinated,
+                        vaccineCoverageEstimated.age_12_plus_autumn_2022_vaccinated,
                       color: colors.data.scale.blueDetailed[8],
                     },
                   },
                 ]}
-                dateUnix={coverageDummyData.date_unix}
+                dateUnix={vaccineCoverageEstimated.date_unix}
               />
               <VaccineCoverageTile
                 title={
@@ -332,8 +332,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 }
                 coverageData={[
                   {
-                    value: coverageDummyData.age_18_plus_fully_vaccinated,
-                    birthyear: coverageDummyData.age_18_plus_birthyear,
+                    value:
+                      vaccineCoverageEstimated.age_18_plus_fully_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_18_plus_birthyear,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_18_plus,
@@ -341,13 +342,15 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                       textShared.vaccination_grade_tile.fully_vaccinated_labels
                         .description_18_plus,
                     bar: {
-                      value: coverageDummyData.age_18_plus_fully_vaccinated,
+                      value:
+                        vaccineCoverageEstimated.age_18_plus_fully_vaccinated,
                       color: colors.data.scale.blueDetailed[3],
                     },
                   },
                   {
-                    value: coverageDummyData.age_12_plus_fully_vaccinated,
-                    birthyear: coverageDummyData.age_12_plus_birthyear,
+                    value:
+                      vaccineCoverageEstimated.age_12_plus_fully_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_12_plus_birthyear,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_12_plus,
@@ -355,12 +358,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                       textShared.vaccination_grade_tile.fully_vaccinated_labels
                         .description_12_plus,
                     bar: {
-                      value: coverageDummyData.age_12_plus_fully_vaccinated,
+                      value:
+                        vaccineCoverageEstimated.age_12_plus_fully_vaccinated,
                       color: colors.data.scale.blueDetailed[3],
                     },
                   },
                 ]}
-                dateUnix={coverageDummyData.date_unix}
+                dateUnix={vaccineCoverageEstimated.date_unix}
               />
             </>
           )}
@@ -371,18 +375,16 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               description={replaceVariablesInText(
                 textNl.vaccine_campaigns.description,
                 {
-                  vaccinePlanned: formatNumber(
-                    campaignsDummyData.vaccine_planned.doses
-                  ),
+                  vaccinePlanned: formatNumber(data.vaccine_planned.doses),
                 }
               )}
               descriptionFooter={textNl.vaccine_campaigns.description_footer}
               headers={textNl.vaccine_campaigns.headers}
-              campaigns={campaignsDummyData.vaccine_campaigns.vaccine_campaigns}
+              campaigns={data.vaccine_campaigns.vaccine_campaigns}
               campaignDescriptions={textNl.vaccine_campaigns.campaigns}
               metadata={{
                 datumsText: textNl.datums,
-                date: campaignsDummyData.vaccine_campaigns.date_unix,
+                date: data.vaccine_campaigns.date_unix,
                 source: textNl.vaccine_campaigns.bronnen.rivm,
               }}
             />

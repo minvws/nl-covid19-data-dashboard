@@ -58,7 +58,6 @@ import {
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useFeature } from '~/lib/features';
-import { DUMMY_DATA_VACCINE_COVERAGE } from '~/domain/vaccine/vaccine-coverage-tile/vaccine-coverage-dummy-data';
 
 const pageMetrics = [
   'vaccine_coverage_per_age_group',
@@ -161,11 +160,15 @@ export const VaccinationsGmPage = (
   };
 
   const vaccinationsCoverageFeature = useFeature('vaccinationsCoverage');
-  const coverageDummyData = DUMMY_DATA_VACCINE_COVERAGE.last_value;
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
    */
+  const filteredAgeGroup60Plus =
+    data.vaccine_coverage_per_age_group.values.find(
+      (x) => x.age_group_range === '60+'
+    );
+
   const filteredAgeGroup18Plus =
     data.vaccine_coverage_per_age_group.values.find(
       (x) => x.age_group_range === '18+'
@@ -194,6 +197,11 @@ export const VaccinationsGmPage = (
   );
   const boosterCoverage12PlusValue = data.booster_coverage?.values?.find(
     (v) => v.age_group === '12+'
+  );
+
+  assert(
+    filteredAgeGroup60Plus,
+    `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the age 60+`
   );
 
   assert(
@@ -259,8 +267,9 @@ export const VaccinationsGmPage = (
                 }
                 coverageData={[
                   {
-                    value: coverageDummyData.age_60_plus_autumn_2022_vaccinated,
-                    birthyear: coverageDummyData.age_60_plus_birthyear,
+                    value:
+                      filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage,
+                    birthyear: filteredAgeGroup60Plus.birthyear_range,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_60_plus,
@@ -269,13 +278,15 @@ export const VaccinationsGmPage = (
                         .description_60_plus,
                     bar: {
                       value:
-                        coverageDummyData.age_60_plus_autumn_2022_vaccinated,
+                        filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage ||
+                        0,
                       color: colors.data.scale.blueDetailed[8],
                     },
                   },
                   {
-                    value: coverageDummyData.age_12_plus_autumn_2022_vaccinated,
-                    birthyear: coverageDummyData.age_12_plus_birthyear,
+                    value:
+                      filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage,
+                    birthyear: filteredAgeGroup12Plus.birthyear_range,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_12_plus,
@@ -284,12 +295,13 @@ export const VaccinationsGmPage = (
                         .description_12_plus,
                     bar: {
                       value:
-                        coverageDummyData.age_12_plus_autumn_2022_vaccinated,
+                        filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage ||
+                        0,
                       color: colors.data.scale.blueDetailed[8],
                     },
                   },
                 ]}
-                dateUnix={coverageDummyData.date_unix}
+                dateUnix={filteredArchivedAgeGroup12Plus.date_unix}
               />
               <VaccineCoverageTile
                 title={
@@ -310,8 +322,8 @@ export const VaccinationsGmPage = (
                 }
                 coverageData={[
                   {
-                    value: coverageDummyData.age_18_plus_fully_vaccinated,
-                    birthyear: coverageDummyData.age_18_plus_birthyear,
+                    value: filteredAgeGroup18Plus.fully_vaccinated_percentage,
+                    birthyear: filteredAgeGroup18Plus.birthyear_range,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_18_plus,
@@ -319,13 +331,14 @@ export const VaccinationsGmPage = (
                       textShared.vaccination_grade_tile.fully_vaccinated_labels
                         .description_18_plus,
                     bar: {
-                      value: coverageDummyData.age_18_plus_fully_vaccinated,
+                      value:
+                        filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
                       color: colors.data.scale.blueDetailed[3],
                     },
                   },
                   {
-                    value: coverageDummyData.age_12_plus_fully_vaccinated,
-                    birthyear: coverageDummyData.age_12_plus_birthyear,
+                    value: filteredAgeGroup12Plus.fully_vaccinated_percentage,
+                    birthyear: filteredAgeGroup12Plus.birthyear_range,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
                         .age_12_plus,
@@ -333,12 +346,13 @@ export const VaccinationsGmPage = (
                       textShared.vaccination_grade_tile.fully_vaccinated_labels
                         .description_12_plus,
                     bar: {
-                      value: coverageDummyData.age_12_plus_fully_vaccinated,
+                      value:
+                        filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
                       color: colors.data.scale.blueDetailed[3],
                     },
                   },
                 ]}
-                dateUnix={coverageDummyData.date_unix}
+                dateUnix={filteredAgeGroup12Plus.date_unix}
               />
             </>
           )}
@@ -348,7 +362,7 @@ export const VaccinationsGmPage = (
               textGm.vaccination_coverage
                 .description_booster_and_fully_vaccinated
             }
-            sortingOrder={['18+', '12+']}
+            sortingOrder={['60+', '18+', '12+']}
             metadata={{
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
               source: textGm.vaccination_coverage.bronnen.rivm,
