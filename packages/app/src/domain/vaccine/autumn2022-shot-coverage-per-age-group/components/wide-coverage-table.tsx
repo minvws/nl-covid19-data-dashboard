@@ -63,7 +63,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{'Najaarsprik'}</InlineText>
+              <InlineText variant="label1">
+                {text.headers.autumn_2022_shot}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -75,7 +77,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{'Basisserie'}</InlineText>
+              <InlineText variant="label1">
+                {text.headers.fully_vaccinated}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -86,7 +90,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {'Najaarsprik en basisserie'}
+                {text.headers.difference_autumn_2022_shot_and_fully_vaccinated}
               </InlineText>
             </HeaderCell>
           </Row>
@@ -145,16 +149,16 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               <Cell>
                 <Box spacing={1}>
                   <Bar
-                    value={item.fully_vaccinated_percentage}
+                    value={item.autumn_2022_vaccinated_percentage}
                     color={COLOR_AUTUMN_2022_SHOT}
                     label={
-                      'booster_shot_percentage_label' in item
-                        ? item.booster_shot_percentage_label
+                      'autumn_2022_vaccinated_percentage_label' in item
+                        ? item.autumn_2022_vaccinated_percentage_label
                         : undefined
                     }
                   />
                   <Bar
-                    value={item.booster_shot_percentage}
+                    value={item.fully_vaccinated_percentage}
                     color={COLOR_FULLY_VACCINATED}
                     label={
                       'fully_vaccinated_percentage_label' in item

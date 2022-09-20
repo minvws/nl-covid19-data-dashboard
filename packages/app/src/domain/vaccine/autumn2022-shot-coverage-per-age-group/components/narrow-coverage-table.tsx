@@ -6,7 +6,7 @@ import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-strin
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
-  COLOR_FULLY_BOOSTERED,
+  COLOR_AUTUMN_2022_SHOT,
 } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
@@ -64,6 +64,37 @@ export function NarrowCoverageTable({
           <Box spacing={1}>
             <NarrowPercentage
               value={
+                'autumn_2022_vaccinated_percentage_label' in item
+                  ? formatCoveragePercentage(
+                      item,
+                      'autumn_2022_vaccinated_percentage'
+                    )
+                  : item.autumn_2022_vaccinated_percentage === null
+                  ? text.no_data
+                  : `${formatPercentage(
+                      item.autumn_2022_vaccinated_percentage
+                    )}%`
+              }
+              color={COLOR_AUTUMN_2022_SHOT}
+              textLabel={'Najaarsprik'}
+            />
+
+            <Bar
+              value={item.autumn_2022_vaccinated_percentage}
+              color={COLOR_AUTUMN_2022_SHOT}
+              label={
+                'autumn_2022_vaccinated_percentage_label' in item
+                  ? item.autumn_2022_vaccinated_percentage_label
+                  : undefined
+              }
+            />
+          </Box>
+
+          <Spacer mb={3} />
+
+          <Box spacing={1}>
+            <NarrowPercentage
+              value={
                 'fully_vaccinated_percentage_label' in item
                   ? formatCoveragePercentage(
                       item,
@@ -81,32 +112,6 @@ export function NarrowCoverageTable({
               label={
                 'fully_vaccinated_percentage_label' in item
                   ? item.fully_vaccinated_percentage_label
-                  : undefined
-              }
-            />
-          </Box>
-
-          <Spacer mb={3} />
-
-          <Box spacing={1}>
-            <NarrowPercentage
-              value={
-                'booster_shot_percentage_label' in item
-                  ? formatCoveragePercentage(item, 'booster_shot_percentage')
-                  : item.booster_shot_percentage === null
-                  ? text.no_data
-                  : `${formatPercentage(item.booster_shot_percentage)}%`
-              }
-              color={COLOR_FULLY_BOOSTERED}
-              textLabel={text.headers.booster_shot}
-            />
-
-            <Bar
-              value={item.booster_shot_percentage}
-              color={COLOR_FULLY_BOOSTERED}
-              label={
-                'booster_shot_percentage_label' in item
-                  ? item.booster_shot_percentage_label
                   : undefined
               }
             />

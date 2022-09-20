@@ -18,7 +18,7 @@ import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
 interface WideCoverageTable {
-  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
   values:
     | NlVaccineCoveragePerAgeGroupArchivedValue[]
     | VrVaccineCoveragePerAgeGroupArchivedValue[]
@@ -48,20 +48,8 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{text.headers.agegroup}</InlineText>
-            </HeaderCell>
-            <HeaderCell
-              css={css({
-                textAlign: 'right',
-                pr: asResponsiveArray({ _: 3, xl: 4 }),
-                width: asResponsiveArray({
-                  _: '25%',
-                  lg: '20%',
-                }),
-              })}
-            >
               <InlineText variant="label1">
-                {text.headers.first_shot}
+                {text.vaccination_coverage.headers.agegroup}
               </InlineText>
             </HeaderCell>
             <HeaderCell
@@ -74,7 +62,23 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">{text.headers.coverage}</InlineText>
+              <InlineText variant="label1">
+                {text.archived.vaccination_coverage.headers.first_shot}
+              </InlineText>
+            </HeaderCell>
+            <HeaderCell
+              css={css({
+                textAlign: 'right',
+                pr: asResponsiveArray({ _: 3, xl: 4 }),
+                width: asResponsiveArray({
+                  _: '25%',
+                  lg: '20%',
+                }),
+              })}
+            >
+              <InlineText variant="label1">
+                {text.archived.vaccination_coverage.headers.coverage}
+              </InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -85,7 +89,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               })}
             >
               <InlineText variant="label1">
-                {text.headers.difference}
+                {text.archived.vaccination_coverage.headers.difference}
               </InlineText>
             </HeaderCell>
           </Row>

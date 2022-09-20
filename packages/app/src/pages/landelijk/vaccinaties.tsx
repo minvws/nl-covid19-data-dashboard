@@ -412,7 +412,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
-            description="Deze tabel toond per leeftijdsgroep hoeveel mensen volledig zijn gevaccineerd."
+            description={
+              textNl.vaccination_coverage.description_autumn_2022_shot
+            }
             sortingOrder={[
               '80+',
               '70-79',
@@ -445,7 +447,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <BoosterShotCoveragePerAgeGroup
                 text={textNl.vaccination_coverage}
                 title={textNl.vaccination_coverage.title}
-                description={textNl.vaccination_coverage.description}
+                description={
+                  textNl.archived.vaccination_coverage.description_booster_shot
+                }
                 sortingOrder={[
                   '80+',
                   '70-79',
