@@ -29,6 +29,7 @@ type Join<T extends string[], D extends string> = T extends []
 type ColorsWithoutRanges = O.Omit<typeof colors, 'scale'>;
 export type Color = Join<PathsToStringProps<ColorsWithoutRanges>, '.'>;
 
+//Based on https://www.rijkshuisstijl.nl/basiselementen/basiselementen-online/online-kleuren
 const colorsDefenition = {
   //Gray scales  
   white: '#ffffff', 
@@ -82,7 +83,6 @@ const colorsDefenition = {
   magenta4: '#aa004b',
 
 }
-//Based on https://www.rijkshuisstijl.nl/basiselementen/basiselementen-online/online-kleuren
 export const colors = {
   ...colorsDefenition,
   scale: {
