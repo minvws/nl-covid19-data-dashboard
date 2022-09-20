@@ -216,12 +216,12 @@ export const VaccinationsGmPage = (
 
   assert(
     filteredArchivedAgeGroup18Plus,
-    `[${VaccinationsGmPage.name}] Could not find archived data for the vaccine coverage per age group for the age 18+`
+    `[${VaccinationsGmPage.name}] Could not find data for the archived vaccine coverage per age group for the age 18+`
   );
 
   assert(
     filteredArchivedAgeGroup12Plus,
-    `[${VaccinationsGmPage.name}] Could not find archived data for the vaccine coverage per age group for the age 12+`
+    `[${VaccinationsGmPage.name}] Could not find data for the archived vaccine coverage per age group for the age 12+`
   );
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
