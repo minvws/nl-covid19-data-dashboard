@@ -64,11 +64,9 @@ import {
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import {
-  DUMMY_DATA_VACCINE_COVERAGE,
-  DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED,
-} from '~/domain/vaccine/vaccine-coverage-tile/vaccine-coverage-dummy-data';
+import { DUMMY_DATA_VACCINE_COVERAGE } from '~/domain/vaccine/vaccine-coverage-tile/vaccine-coverage-dummy-data';
 import { useFeature } from '~/lib/features';
+import { DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-dummy-data';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
