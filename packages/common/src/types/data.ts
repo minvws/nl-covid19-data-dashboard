@@ -199,7 +199,7 @@ export interface GmCollectionSewer {
 }
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
@@ -1781,7 +1781,7 @@ export interface VrCollectionSituations {
 }
 export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
