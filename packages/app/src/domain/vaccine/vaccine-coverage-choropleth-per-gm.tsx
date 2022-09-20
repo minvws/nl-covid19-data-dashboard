@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import { hasValueAtKey, isDefined } from 'ts-is-present';
+import { hasValueAtKey } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
