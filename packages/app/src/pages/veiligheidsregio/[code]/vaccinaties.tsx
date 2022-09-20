@@ -366,7 +366,7 @@ export const VaccinationsVrPage = (
               textVr.vaccination_coverage
                 .description_booster_and_fully_vaccinated
             }
-            sortingOrder={['18+', '12+']}
+            sortingOrder={['60+', '18+', '12+']}
             metadata={{
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
               source:
