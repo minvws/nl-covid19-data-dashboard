@@ -38,7 +38,9 @@
     "tested_overall",
     "tested_per_age_group",
     "vaccine_campaigns",
+    "vaccine_campaigns_archived_20220908",
     "vaccine_planned",
+    "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support",
     "vaccine_delivery_estimate",
     "vaccine_administered",
@@ -53,7 +55,9 @@
     "vaccine_delivery_per_supplier",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
-    "vaccine_coverage_per_age_group_estimated"
+    "vaccine_coverage_per_age_group_archived_20220908",
+    "vaccine_coverage_per_age_group_estimated",
+    "vaccine_coverage_per_age_group_estimated_archived_20220908"
   ],
   "additionalProperties": false,
   "properties": {
@@ -204,8 +208,14 @@
     "vaccine_campaigns": {
       "$ref": "vaccine_campaigns.json"
     },
+    "vaccine_campaigns_archived_20220908": {
+      "$ref": "vaccine_campaigns_archived_20220908.json"
+    },
     "vaccine_planned": {
       "$ref": "vaccine_planned.json"
+    },
+    "vaccine_planned_archived_20220908": {
+      "$ref": "vaccine_planned_archived_20220908.json"
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
@@ -213,8 +223,14 @@
     "vaccine_coverage_per_age_group_archived": {
       "$ref": "vaccine_coverage_per_age_group_archived.json"
     },
+    "vaccine_coverage_per_age_group_archived_20220908": {
+      "$ref": "vaccine_coverage_per_age_group_archived_20220908.json"
+    },
     "vaccine_coverage_per_age_group_estimated": {
       "$ref": "vaccine_coverage_per_age_group_estimated.json"
+    },
+    "vaccine_coverage_per_age_group_estimated_archived_20220908": {
+      "$ref": "vaccine_coverage_per_age_group_estimated_archived_20220908.json"
     },
     "vaccine_stock": {
       "$ref": "vaccine_stock.json"
