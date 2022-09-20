@@ -29,8 +29,8 @@ export function useAgegroupLabels(
       : '0';
     const oneShotLabel = isDefined(dataValue)
       ? getRenderedVaccinatedLabel(
-          dataValue.has_one_shot_percentage_label,
-          dataValue.has_one_shot_percentage,
+          dataValue.autumn_2022_vaccinated_percentage_label,
+          dataValue.autumn_2022_vaccinated_percentage,
           labelsText.meer_dan,
           labelsText.minder_dan,
           formatPercentage
@@ -41,7 +41,7 @@ export function useAgegroupLabels(
       fully_vaccinated_percentage: lowerCased
         ? fullyVaccinatedLabel.toLocaleLowerCase()
         : fullyVaccinatedLabel,
-      has_one_shot_percentage: lowerCased
+      autumn_2022_vaccinated_percentage: lowerCased
         ? oneShotLabel.toLocaleLowerCase()
         : oneShotLabel,
     };
