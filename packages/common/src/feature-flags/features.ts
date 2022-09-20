@@ -6,4 +6,10 @@ export const features: Feature[] = [
     isEnabled: true,
     metricName: 'vaccine_coverage_per_age_group',
   },
+
+  {
+    name: 'vaccinationCampaigns',
+    isEnabled: true,
+    metricName: 'vaccine_campaigns',
+  },
 ];

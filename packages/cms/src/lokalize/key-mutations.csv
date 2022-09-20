@@ -21,3 +21,5 @@ timestamp,action,key,document_id,move_to
 2022-09-12T09:15:24.720Z,add,pages.vaccinations_page.shared.vaccination_grade_tile.age_group_labels.age_12_plus,772MCeNIooHnNdtyUIs9X8,__
 2022-09-12T09:15:25.725Z,add,pages.vaccinations_page.shared.vaccination_grade_tile.age_group_labels.age_18_plus,u6z14vWwH5lzTVbDpRg21J,__
 2022-09-12T09:15:26.749Z,add,pages.vaccinations_page.shared.vaccination_grade_tile.age_group_labels.age_60_plus,u6z14vWwH5lzTVbDpRg28H,__
+2022-09-15T10:16:05.400Z,add,pages.vaccinations_page.nl.vaccine_campaigns.description_archived,9P8A8sYTX3Ht4z1AMBfXsq,__
+2022-09-15T10:17:12.069Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.autumn_vaccination_description,DtIaVTvHarpWIXbTy9jsV1,__
