@@ -1,11 +1,10 @@
 import {
-  assert,
   colors,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -27,10 +26,7 @@ import {
   CoverageKindProperty,
   VaccinationCoverageKindSelect,
 } from './components/vaccination-coverage-kind-select';
-import {
-  KeyWithLabel,
-  useVaccineCoveragePercentageFormatter,
-} from './logic/use-vaccine-coverage-percentage-formatter';
+import { useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
 
 interface VaccineCoverageChoroplethPerGmProps {
   data: {
@@ -39,15 +35,33 @@ interface VaccineCoverageChoroplethPerGmProps {
   };
 }
 
+type FullyVaccinatedAges = '12+' | '18+';
+type Autumn2022Vaccinated = '12+' | '60+';
+
+interface MatchingVaccineCoverageAgeGroupsType {
+  autumn_2022_vaccinated_percentage: Autumn2022Vaccinated[];
+  fully_vaccinated_percentage: FullyVaccinatedAges[];
+}
+
 export function VaccineCoverageChoroplethPerGm({
   data,
 }: VaccineCoverageChoroplethPerGmProps) {
   const { commonTexts } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('60+');
   const [selectedCoverageKind, setSelectedCoverageKind] =
-    useState<CoverageKindProperty>('fully_vaccinated_percentage');
+    useState<CoverageKindProperty>('autumn_2022_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
+
+  const setSelectedCoverageKindAndAge = (
+    coverageKind: CoverageKindProperty
+  ) => {
+    // When changing between covarage kinds with non mathcing age groups set the non matching age group to a default one.
+    if (selectedAgeGroup !== '12+') {
+      setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
+    }
+    setSelectedCoverageKind(coverageKind);
+  };
 
   const variables = {
     regio:
@@ -60,6 +74,11 @@ export function VaccineCoverageChoroplethPerGm({
     data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
   const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
     data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+
+  const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
+    autumn_2022_vaccinated_percentage: ['12+', '60+'],
+    fully_vaccinated_percentage: ['12+', '18+'],
+  };
 
   return (
     <ChoroplethTile
@@ -104,13 +123,15 @@ export function VaccineCoverageChoroplethPerGm({
               flexDirection={{ _: 'column', xs: 'row' }}
             >
               <Box flex="1">
-                <AgeGroupSelect onChange={setSelectedAgeGroup} />
-              </Box>
-
-              <Box flex="1">
                 <VaccinationCoverageKindSelect
-                  onChange={setSelectedCoverageKind}
+                  onChange={setSelectedCoverageKindAndAge}
                   initialValue={selectedCoverageKind}
+                />
+              </Box>
+              <Box flex="1">
+                <AgeGroupSelect
+                  onChange={setSelectedAgeGroup}
+                  initialValue={selectedAgeGroup}
                 />
               </Box>
             </Box>
@@ -142,17 +163,15 @@ export function VaccineCoverageChoroplethPerGm({
           dataOptions={{
             isPercentage: true,
             getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
-            tooltipVariables: {
-              age_group: commonTexts.common.age_groups[selectedAgeGroup],
-            },
           }}
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              percentageProps={[
-                'booster_shot_percentage',
-                'fully_vaccinated_percentage',
-              ]}
+              mapData={data.gm.filter(
+                (singleGM) => singleGM.gmcode === context.code
+              )}
+              ageGroups={matchingAgeGroups[selectedCoverageKind]}
+              selectedCoverageKind={selectedCoverageKind}
             />
           )}
         />
@@ -170,17 +189,15 @@ export function VaccineCoverageChoroplethPerGm({
           dataOptions={{
             isPercentage: true,
             getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
-            tooltipVariables: {
-              age_group: commonTexts.common.age_groups[selectedAgeGroup],
-            },
           }}
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              percentageProps={[
-                'booster_shot_percentage',
-                'fully_vaccinated_percentage',
-              ]}
+              mapData={data.vr.filter(
+                (singleVR) => singleVR.vrcode === context.code
+              )}
+              ageGroups={matchingAgeGroups[selectedCoverageKind]}
+              selectedCoverageKind={selectedCoverageKind}
             />
           )}
         />
@@ -189,100 +206,45 @@ export function VaccineCoverageChoroplethPerGm({
   );
 }
 
-type VaccineCoverageData =
-  | GmCollectionVaccineCoveragePerAgeGroup
-  | VrCollectionVaccineCoveragePerAgeGroup;
-
-type ChoroplethTooltipProps<T extends VaccineCoverageData> = {
-  data: TooltipData<T>;
-  percentageProps: KeyWithLabel<VaccineCoverageData>[];
+type VaccineCoverageData = {
+  ageGroups: AgeGroup[];
+  selectedCoverageKind: CoverageKindProperty;
+  data: ChoroplethTooltipProps;
+  mapData:
+    | GmCollectionVaccineCoveragePerAgeGroup[]
+    | VrCollectionVaccineCoveragePerAgeGroup[];
 };
 
-export function ChoroplethTooltip<T extends VaccineCoverageData>(
-  props: ChoroplethTooltipProps<T>
-) {
-  const { data, percentageProps } = props;
+type ChoroplethTooltipProps = {
+  data: TooltipData<T>;
+};
 
-  assert(
-    percentageProps.indexOf(
-      data.dataConfig
-        .metricProperty as unknown as KeyWithLabel<VaccineCoverageData>
-    ) >= 0,
-    `[${ChoroplethTooltip.name}] The given metricProperty ${data.dataConfig.metricProperty.toString()} is not found in percentageProps`
-  );
-
+export function ChoroplethTooltip({
+  data,
+  selectedCoverageKind,
+  mapData,
+}: VaccineCoverageData) {
   const { commonTexts } = useIntl();
-  const text = commonTexts.choropleth_tooltip;
+  const coverageKindsText = commonTexts.vaccinations.coverage_kinds;
+  const ageGroupsText = commonTexts.common.age_groups;
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
-  const coverageData = data.dataItem as VaccineCoverageData;
 
-  const formattedValues = useMemo(
-    () =>
-      Object.fromEntries(
-        percentageProps.map((prop) => [
-          prop,
-          formatCoveragePercentage(coverageData, prop),
-        ])
-      ),
-    [coverageData, percentageProps, formatCoveragePercentage]
-  );
-
-  const { [data.dataConfig.metricProperty]: mainValue, ...secondaryValues } =
-    formattedValues;
-
-  const subject = (
-    text as unknown as Record<string, Record<string, Record<string, string>>>
-  )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
-  assert(
-    isDefined(subject),
-    `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
-  );
-
-  const tooltipVars = {
-    ...data.dataItem,
-    ...data.dataOptions.tooltipVariables,
-  } as Record<string, string | number>;
-
-  const dataItemKey = data.dataConfig.metricProperty as keyof VaccineCoverageData;
-  const filterBelow =
-    (dataItemKey === undefined ? null : data.dataItem[dataItemKey]) || null;
-
-  const mainContent = (
-    text as unknown as Record<string, Record<string, Record<string, string>>>
-  )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
-  assert(
-    isDefined(mainContent),
-    `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
-  );
-
-  const secondaryContent = Object.entries(secondaryValues).map(
-    ([property, formattedValue]) => {
-      const content = (
-        text as unknown as Record<
-          string,
-          Record<string, Record<string, string>>
-        >
-      )[data.map]?.[property as string]?.content;
-      assert(
-        isDefined(content),
-        `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${property}`
-      );
-      return (
-        <Box
-          spacingHorizontal={2}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mr={13}
-          pr={2}
-          key={property}
-        >
-          <Markdown content={replaceVariablesInText(content, tooltipVars)} />
-          <InlineText>{formattedValue as string}</InlineText>
-        </Box>
-      );
-    }
-  );
+  const secondaryContent = mapData.map((vrOrGmData) => {
+    <Box
+      spacingHorizontal={2}
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      mr={13}
+      pr={2}
+      key={vrOrGmData.age_group_range}
+    >
+      <Markdown content={ageGroupsText[vrOrGmData.age_group_range]} />
+      <InlineText>
+        {formatCoveragePercentage(vrOrGmData[selectedCoverageKind], vrOrGmData)}
+      </InlineText>
+    </Box>;
+  });
 
   return (
     <TooltipContent
@@ -294,7 +256,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
       }
     >
       <TooltipSubject
-        subject={replaceVariablesInText(subject, tooltipVars)}
+        subject={selectedCoverageKind}
         thresholdValues={data.thresholdValues}
         filterBelow={filterBelow as number | null}
         noDataFillColor={colors.choroplethNoData}
@@ -306,10 +268,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>(
           alignItems="center"
           justifyContent="space-between"
         >
-          <Markdown
-            content={replaceVariablesInText(mainContent, tooltipVars)}
-          />
-          <BoldText>{mainValue}</BoldText>
+          <BoldText>{coverageKindsText[selectedCoverageKind]}</BoldText>
         </Box>
       </TooltipSubject>
       {secondaryContent}
