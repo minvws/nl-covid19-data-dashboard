@@ -84,6 +84,7 @@ export const getStaticProps = createGetStaticProps(
   selectVrData(
     'vaccine_coverage_per_age_group',
     'vaccine_coverage_per_age_group_archived',
+    'vaccine_coverage_per_age_group_archived_20220908',
     'booster_coverage'
   ),
   createGetChoroplethData({
@@ -175,6 +176,19 @@ export const VaccinationsVrPage = (
       (item) => item.age_group_range === '12+'
     );
 
+  /**
+   * Archived -  Filter out only the the 12+ and 18+ for the toggle component.
+   */
+  const filteredAgeGroup18PlusArchived =
+    data.vaccine_coverage_per_age_group_archived_20220908.values.find(
+      (item) => item.age_group_range === '18+'
+    );
+
+  const filteredAgeGroup12PlusArchived =
+    data.vaccine_coverage_per_age_group_archived_20220908.values.find(
+      (item) => item.age_group_range === '12+'
+    );
+
   const boosterCoverage18PlusValue = data.booster_coverage.values.find(
     (v) => v.age_group === '18+'
   );
@@ -190,6 +204,16 @@ export const VaccinationsVrPage = (
   assert(
     filteredAgeGroup12Plus,
     `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`
+  );
+
+  assert(
+    filteredAgeGroup18PlusArchived,
+    `[${VaccinationsVrPage.name}] Could not find archived data for the vaccine coverage per age group for the age 18+`
+  );
+
+  assert(
+    filteredAgeGroup12PlusArchived,
+    `[${VaccinationsVrPage.name}] Could not find archived data for the vaccine coverage per age group for the age 12+`
   );
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
@@ -407,16 +431,17 @@ export const VaccinationsVrPage = (
                 descriptionFooter={
                   textVr.vaccination_grade_toggle_tile.description_footer
                 }
-                dateUnix={filteredAgeGroup18Plus.date_unix}
+                dateUnix={filteredAgeGroup18PlusArchived.date_unix}
                 age18Plus={{
                   fully_vaccinated:
-                    filteredAgeGroup18Plus.fully_vaccinated_percentage,
-                  has_one_shot: filteredAgeGroup18Plus.has_one_shot_percentage,
-                  birthyear: filteredAgeGroup18Plus.birthyear_range,
+                    filteredAgeGroup18PlusArchived.fully_vaccinated_percentage,
+                  has_one_shot:
+                    filteredAgeGroup18PlusArchived.has_one_shot_percentage,
+                  birthyear: filteredAgeGroup18PlusArchived.birthyear_range,
                   fully_vaccinated_label:
-                    filteredAgeGroup18Plus.fully_vaccinated_percentage_label,
+                    filteredAgeGroup18PlusArchived.fully_vaccinated_percentage_label,
                   has_one_shot_label:
-                    filteredAgeGroup18Plus.has_one_shot_percentage_label,
+                    filteredAgeGroup18PlusArchived.has_one_shot_percentage_label,
                   boostered: formatPercentageAsNumber(
                     `${boosterCoverage18PlusValue?.percentage}`
                   ),
@@ -425,13 +450,14 @@ export const VaccinationsVrPage = (
                 }}
                 age12Plus={{
                   fully_vaccinated:
-                    filteredAgeGroup12Plus.fully_vaccinated_percentage,
-                  has_one_shot: filteredAgeGroup12Plus.has_one_shot_percentage,
-                  birthyear: filteredAgeGroup12Plus.birthyear_range,
+                    filteredAgeGroup12PlusArchived.fully_vaccinated_percentage,
+                  has_one_shot:
+                    filteredAgeGroup12PlusArchived.has_one_shot_percentage,
+                  birthyear: filteredAgeGroup12PlusArchived.birthyear_range,
                   fully_vaccinated_label:
-                    filteredAgeGroup12Plus.fully_vaccinated_percentage_label,
+                    filteredAgeGroup12PlusArchived.fully_vaccinated_percentage_label,
                   has_one_shot_label:
-                    filteredAgeGroup12Plus.has_one_shot_percentage_label,
+                    filteredAgeGroup12PlusArchived.has_one_shot_percentage_label,
                   boostered: formatPercentageAsNumber(
                     `${boosterCoverage12PlusValue?.percentage}`
                   ),
