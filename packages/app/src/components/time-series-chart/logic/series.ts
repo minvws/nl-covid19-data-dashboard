@@ -294,21 +294,31 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
 ) {
   const filterSeries = (
     seriesConfig: SeriesConfigSingle<T>,
-    series: SingleSeries
-  ): SingleSeries => {
+    series: SeriesValue[]
+  ): SeriesValue[] => {
     const yAxisExceptionValues = seriesConfig.yAxisExceptionValues;
     if (!yAxisExceptionValues || yAxisExceptionValues.length === 0) {
       return series;
     }
 
-    return [...series].filter(
-      (seriesItem) =>
-        yAxisExceptionValues.indexOf(seriesItem.__date_unix) === -1
-    );
+    return series.filter((value) => {
+      return !yAxisExceptionValues.some((exceptionValue) => {
+        // It makes sense to use the x-axis value as exceptionValue, because we plot on a "for this x-axis value, use this y-axis value" basis.
+        // However, the backend data is altered as soon as it comes in the frontend application.
+        // Upon loading the data, the dates are changed to 'the middle of the day' for the sake of centering in graphs.
+        // Because the frontend application is serverside rendered, 'the middle of the day' depends on the locale settings of the server.
+        // Despite having the actual backend data, we can't reliably know what the middle of the day will be. (don't start on daylight saving time)
+        // This is circumvented by only looking at the day itself, ignoring the time-part, and assuming that will not match too broadly.
+        return (
+          new Date(exceptionValue * 1000).toDateString() ===
+          new Date(value.__date_unix * 1000).toDateString()
+        );
+      });
+    });
   };
 
-  const filteredSeriesList = seriesList.map((_, index) =>
-    filterSeries(seriesConfig[index], seriesList[index])
+  const filteredSeriesList = seriesList.map((series, index) =>
+    filterSeries(seriesConfig[index], series)
   );
 
   const values = filteredSeriesList
@@ -389,13 +399,13 @@ export function isBarOutOfBounds<T extends TimestampedValue>(
 }
 
 export function isSeriesSingleValue(
-  value: SeriesSingleValue | SeriesDoubleValue | SeriesMissingValue
+  value: SeriesValue
 ): value is SeriesSingleValue {
   return isDefined((value as any).__value);
 }
 
 export function isSeriesMissingValue(
-  value: SeriesSingleValue | SeriesDoubleValue | SeriesMissingValue
+  value: SeriesValue
 ): value is SeriesMissingValue {
   return isDefined(value) && isDefined((value as any).__hasMissing);
 }
@@ -406,11 +416,11 @@ export function isSeriesMissingValue(
  * with TimestampedValue as the LineChart because types got simplified in other
  * places.
  */
-export type SingleSeries =
-  | SeriesSingleValue[]
-  | SeriesDoubleValue[]
-  | SeriesMissingValue[];
-export type SeriesList = SingleSeries[];
+export type SeriesValue =
+  | SeriesSingleValue
+  | SeriesDoubleValue
+  | SeriesMissingValue;
+export type SeriesList = SeriesValue[][];
 
 function getSeriesList<T extends TimestampedValue>(
   values: T[],
