@@ -333,14 +333,12 @@ export const VaccinationsVrPage = (
                         .description_18_plus,
                     bar: {
                       value:
-                        filteredAgeGroup18Plus.autumn_2022_vaccinated_percentage ||
-                        0,
+                        filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
                       color: colors.data.scale.blueDetailed[3],
                     },
                   },
                   {
-                    value:
-                      filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage,
+                    value: filteredAgeGroup12Plus.fully_vaccinated_percentage,
                     birthyear: filteredAgeGroup12Plus.birthyear_range,
                     title:
                       textShared.vaccination_grade_tile.age_group_labels
@@ -350,8 +348,7 @@ export const VaccinationsVrPage = (
                         .description_12_plus,
                     bar: {
                       value:
-                        filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage ||
-                        0,
+                        filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
                       color: colors.data.scale.blueDetailed[3],
                     },
                   },
