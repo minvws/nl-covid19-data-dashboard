@@ -112,7 +112,9 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_stock',
     'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated',
+    'vaccine_coverage_per_age_group_estimated_archived_20220908',
     'vaccine_campaigns',
+    'vaccine_campaigns_archived_20220908',
     'vaccine_planned',
     'booster_coverage',
     'booster_shot_administered',
@@ -209,8 +211,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const vaccinationsCampaignsFeature = useFeature('vaccinationCampaigns');
   const campaignsDummyData = DUMMY_DATA_VACCINE_CAMPAIGNS_PLANNED;
 
-  const vaccineCoverageEstimatedLastValue =
-    data.vaccine_coverage_per_age_group_estimated.last_value;
+  const vaccineCoverageEstimatedArchivedLastValue =
+    data.vaccine_coverage_per_age_group_estimated_archived_20220908.last_value;
 
   const boosterShotAdministeredLastValue =
     data.booster_shot_administered.last_value;
@@ -444,29 +446,29 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 descriptionFooter={
                   textNl.vaccination_grade_toggle_tile.description_footer
                 }
-                dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
+                dateUnix={vaccineCoverageEstimatedArchivedLastValue.date_unix}
                 age18Plus={{
                   fully_vaccinated:
-                    vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
+                    vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,
                   has_one_shot:
-                    vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
+                    vaccineCoverageEstimatedArchivedLastValue.age_18_plus_has_one_shot,
                   boostered: formatPercentageAsNumber(
                     `${boosterCoverage18PlusValue.percentage}`
                   ),
                   birthyear:
-                    vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
+                    vaccineCoverageEstimatedArchivedLastValue.age_18_plus_birthyear,
                   dateUnixBoostered: boosterCoverage18PlusValue.date_unix,
                 }}
                 age12Plus={{
                   fully_vaccinated:
-                    vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
+                    vaccineCoverageEstimatedArchivedLastValue.age_12_plus_fully_vaccinated,
                   has_one_shot:
-                    vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
+                    vaccineCoverageEstimatedArchivedLastValue.age_12_plus_has_one_shot,
                   boostered: formatPercentageAsNumber(
                     `${boosterCoverage12PlusValue.percentage}`
                   ),
                   birthyear:
-                    vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
+                    vaccineCoverageEstimatedArchivedLastValue.age_12_plus_birthyear,
                   dateUnixBoostered: boosterCoverage12PlusValue.date_unix,
                 }}
                 numFractionDigits={1}
@@ -487,11 +489,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 )}
                 descriptionFooter={textNl.vaccine_campaigns.description_footer}
                 headers={textNl.vaccine_campaigns.headers}
-                campaigns={data.vaccine_campaigns.vaccine_campaigns}
+                campaigns={
+                  data.vaccine_campaigns_archived_20220908.vaccine_campaigns
+                }
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
                 metadata={{
                   datumsText: textNl.datums,
-                  date: data.vaccine_campaigns.date_unix,
+                  date: data.vaccine_campaigns_archived_20220908.date_unix,
                   source: textNl.vaccine_campaigns.bronnen.rivm,
                 }}
               />
