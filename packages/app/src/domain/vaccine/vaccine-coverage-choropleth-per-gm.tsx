@@ -242,10 +242,7 @@ export function ChoroplethTooltip({
     >
       <Markdown content={ageGroupsText[vrOrGmData.age_group_range]} />
       <InlineText>
-        {formatCoveragePercentage(
-          vrOrGmData[selectedCoverageKind],
-          selectedCoverageKind
-        )}
+        {formatCoveragePercentage(vrOrGmData, selectedCoverageKind)}
       </InlineText>
     </Box>;
   });
