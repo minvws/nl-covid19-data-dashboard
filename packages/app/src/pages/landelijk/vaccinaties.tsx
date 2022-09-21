@@ -105,6 +105,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_total',
     'vaccine_administered_last_week',
     'vaccine_coverage_per_age_group',
+    'vaccine_coverage_per_age_group_archived_20220908',
     'vaccine_coverage_per_age_group_archived',
     'vaccine_coverage',
     'vaccine_delivery_per_supplier',
@@ -445,7 +446,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           {hasHideArchivedCharts && (
             <>
               <BoosterShotCoveragePerAgeGroup
-                text={textNl.vaccination_coverage}
+                text={textNl}
                 title={textNl.vaccination_coverage.title}
                 description={
                   textNl.archived.vaccination_coverage.description_booster_shot
@@ -463,10 +464,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 ]}
                 metadata={{
                   datumsText: textNl.datums,
-                  date: data.vaccine_coverage_per_age_group.values[0].date_unix,
+                  date: data.vaccine_coverage_per_age_group_archived_20220908
+                    .values[0].date_unix,
                   source: textNl.vaccination_coverage.bronnen.rivm,
                 }}
-                values={data.vaccine_coverage_per_age_group.values}
+                values={
+                  data.vaccine_coverage_per_age_group_archived_20220908.values
+                }
               />
               <VaccineCoverageToggleTile
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
@@ -616,7 +620,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               />
 
               <VaccineCoveragePerAgeGroup
-                text={textNl.vaccination_coverage}
+                text={textNl}
                 title={textNl.archived.vaccination_coverage.title}
                 description={textNl.archived.vaccination_coverage.description}
                 sortingOrder={[

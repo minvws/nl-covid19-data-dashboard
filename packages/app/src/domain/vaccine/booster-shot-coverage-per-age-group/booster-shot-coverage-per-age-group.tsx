@@ -1,8 +1,8 @@
 import {
   assert,
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupArchived_20220908Value,
+  VrVaccineCoveragePerAgeGroupArchived_20220908Value,
+  GmVaccineCoveragePerAgeGroupArchived_20220908Value,
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
@@ -16,9 +16,9 @@ interface BoosterCoveragePerAgeGroupProps {
   metadata: MetadataProps;
   sortingOrder: string[];
   values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+    | NlVaccineCoveragePerAgeGroupArchived_20220908Value[]
+    | VrVaccineCoveragePerAgeGroupArchived_20220908Value[]
+    | GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
