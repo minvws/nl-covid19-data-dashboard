@@ -9,6 +9,7 @@ import { hasValueAtKey } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
+import { ChoroplethDataItem } from '~/components/choropleth/logic';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
 import {
@@ -206,16 +207,16 @@ export function VaccineCoverageChoroplethPerGm({
   );
 }
 
-type VaccineCoverageData = {
+type VaccineCoverageData<T extends ChoroplethDataItem> = {
   ageGroups: AgeGroup[];
   selectedCoverageKind: CoverageKindProperty;
-  data: ChoroplethTooltipProps;
+  data: ChoroplethTooltipProps<T>;
   mapData:
     | GmCollectionVaccineCoveragePerAgeGroup[]
     | VrCollectionVaccineCoveragePerAgeGroup[];
 };
 
-type ChoroplethTooltipProps = {
+type ChoroplethTooltipProps<T extends ChoroplethDataItem> = {
   data: TooltipData<T>;
 };
 
@@ -241,7 +242,10 @@ export function ChoroplethTooltip({
     >
       <Markdown content={ageGroupsText[vrOrGmData.age_group_range]} />
       <InlineText>
-        {formatCoveragePercentage(vrOrGmData[selectedCoverageKind], vrOrGmData)}
+        {formatCoveragePercentage(
+          vrOrGmData[selectedCoverageKind],
+          selectedCoverageKind
+        )}
       </InlineText>
     </Box>;
   });
