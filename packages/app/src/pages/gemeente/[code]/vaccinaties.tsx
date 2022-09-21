@@ -28,7 +28,6 @@ import {
   VaccineCoverageToggleTile,
   ChoroplethTooltip,
   VaccineCoveragePerAgeGroup,
-  BoosterShotCoveragePerAgeGroup,
   VaccineCoverageTile,
 } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
@@ -356,20 +355,6 @@ export const VaccinationsGmPage = (
               />
             </>
           )}
-          <BoosterShotCoveragePerAgeGroup
-            title={textGm.vaccination_coverage.title}
-            description={
-              textGm.vaccination_coverage
-                .description_booster_and_fully_vaccinated
-            }
-            sortingOrder={['60+', '18+', '12+']}
-            metadata={{
-              date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-              source: textGm.vaccination_coverage.bronnen.rivm,
-            }}
-            values={data.vaccine_coverage_per_age_group.values}
-            text={textNl.vaccination_coverage}
-          />
 
           <ChoroplethTile
             title={replaceVariablesInText(
