@@ -19,7 +19,7 @@ interface BoosterCoveragePerAgeGroupProps {
     | NlVaccineCoveragePerAgeGroupValue[]
     | VrVaccineCoveragePerAgeGroupValue[]
     | GmVaccineCoveragePerAgeGroupValue[];
-  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
 export function BoosterShotCoveragePerAgeGroup({
