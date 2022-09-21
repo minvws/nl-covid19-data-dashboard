@@ -1,8 +1,6 @@
 import {
   assert,
-  GmVaccineCoveragePerAgeGroupValue,
   NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
@@ -16,10 +14,7 @@ interface Autumn2022CoveragePerAgeGroupProps {
   description: string;
   metadata: MetadataProps;
   sortingOrder: string[];
-  values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+  values: NlVaccineCoveragePerAgeGroupValue[];
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
 }
 

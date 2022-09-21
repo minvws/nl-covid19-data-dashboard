@@ -1,8 +1,4 @@
-import {
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
-} from '@corona-dashboard/common';
+import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -11,7 +7,6 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
 import {
   COLOR_FULLY_VACCINATED,
   COLOR_AUTUMN_2022_SHOT,
@@ -22,15 +17,11 @@ import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
 interface WideCoverageTable {
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
-  values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+  values: NlVaccineCoveragePerAgeGroupValue[];
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
   const { commonTexts, formatPercentage } = useIntl();
-  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
 
   return (
     <Box overflow="auto">
@@ -117,12 +108,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               <Cell>
                 <WidePercentage
                   value={
-                    'autumn_2022_vaccinated_percentage_label' in item
-                      ? formatCoveragePercentage(
-                          item,
-                          'autumn_2022_vaccinated_percentage'
-                        )
-                      : item.autumn_2022_vaccinated_percentage === null
+                    item.autumn_2022_vaccinated_percentage === null
                       ? text.no_data
                       : `${formatPercentage(
                           item.autumn_2022_vaccinated_percentage
@@ -134,14 +120,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
               </Cell>
               <Cell>
                 <WidePercentage
-                  value={
-                    'fully_vaccinated_percentage_label' in item
-                      ? formatCoveragePercentage(
-                          item,
-                          'fully_vaccinated_percentage'
-                        )
-                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
-                  }
+                  value={`${formatPercentage(
+                    item.fully_vaccinated_percentage
+                  )}%`}
                   color={COLOR_FULLY_VACCINATED}
                   justifyContent="flex-end"
                 />
@@ -151,20 +132,10 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   <Bar
                     value={item.autumn_2022_vaccinated_percentage}
                     color={COLOR_AUTUMN_2022_SHOT}
-                    label={
-                      'autumn_2022_vaccinated_percentage_label' in item
-                        ? item.autumn_2022_vaccinated_percentage_label
-                        : undefined
-                    }
                   />
                   <Bar
                     value={item.fully_vaccinated_percentage}
                     color={COLOR_FULLY_VACCINATED}
-                    label={
-                      'fully_vaccinated_percentage_label' in item
-                        ? item.fully_vaccinated_percentage_label
-                        : undefined
-                    }
                   />
                 </Box>
               </Cell>
