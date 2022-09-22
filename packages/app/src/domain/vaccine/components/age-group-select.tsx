@@ -28,10 +28,11 @@ const AGE_GROUPS = [
 type AgeGroupSelectProps = {
   onChange: (value: AgeGroup) => void;
   initialValue?: AgeGroup;
+  shownAgeGroups?: AgeGroup[];
 };
 
 export function AgeGroupSelect(props: AgeGroupSelectProps) {
-  const { onChange, initialValue = '18+' } = props;
+  const { onChange, initialValue = '18+', shownAgeGroups } = props;
 
   const { commonTexts } = useIntl();
 
@@ -39,26 +40,31 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
     () =>
       AGE_GROUPS.map((el) => {
         const birthyearRange = parseBirthyearRange(el.birthyearRange);
-
         if (isPresent(birthyearRange)) {
-          return {
-            value: el.ageGroup,
-            label: commonTexts.common.age_groups[el.ageGroup],
-            content: (
-              <Box>
-                <Text>{commonTexts.common.age_groups[el.ageGroup]}</Text>
-                <Text variant="label1">
-                  {replaceVariablesInText(
-                    commonTexts.common.birthyear_ranges[birthyearRange.type],
-                    birthyearRange
-                  )}
-                </Text>
-              </Box>
-            ),
-          };
+          if (shownAgeGroups && shownAgeGroups.includes(el.ageGroup)) {
+            return {
+              value: el.ageGroup,
+              label: commonTexts.common.age_groups[el.ageGroup],
+              content: (
+                <Box>
+                  <Text>{commonTexts.common.age_groups[el.ageGroup]}</Text>
+                  <Text variant="label1">
+                    {replaceVariablesInText(
+                      commonTexts.common.birthyear_ranges[birthyearRange.type],
+                      birthyearRange
+                    )}
+                  </Text>
+                </Box>
+              ),
+            };
+          }
         }
       }).filter(isPresent),
-    [commonTexts.common.age_groups, commonTexts.common.birthyear_ranges]
+    [
+      commonTexts.common.age_groups,
+      commonTexts.common.birthyear_ranges,
+      shownAgeGroups,
+    ]
   );
 
   return (
