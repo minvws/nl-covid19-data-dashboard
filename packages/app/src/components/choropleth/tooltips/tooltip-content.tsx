@@ -110,7 +110,7 @@ const StyledLocationIcon = styled.span(
     svg: {
       pt: '3px',
       color: 'black',
-      width: 9,
+      width: 16,
       height: 17,
     },
   })
