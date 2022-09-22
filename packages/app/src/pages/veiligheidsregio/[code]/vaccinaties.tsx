@@ -484,7 +484,7 @@ export const VaccinationsVrPage = (
                     commonTexts.choropleth.vaccination_coverage.vr.bronnen.rivm,
                 }}
                 values={data.vaccine_coverage_per_age_group_archived.values}
-                text={textNl.vaccination_coverage}
+                text={textNl}
               />
             </>
           )}

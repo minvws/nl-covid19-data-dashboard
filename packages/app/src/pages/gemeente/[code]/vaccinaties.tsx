@@ -483,7 +483,7 @@ export const VaccinationsGmPage = (
                   source: textGm.vaccination_coverage.bronnen.rivm,
                 }}
                 values={data.vaccine_coverage_per_age_group_archived.values}
-                text={textNl.vaccination_coverage}
+                text={textNl}
               />
             </>
           )}
