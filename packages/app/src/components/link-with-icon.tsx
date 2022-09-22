@@ -1,5 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import theme, { space } from '~/style/theme';
+import { space } from '~/style/theme';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
