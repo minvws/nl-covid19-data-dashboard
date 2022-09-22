@@ -1,35 +1,31 @@
 import {
   assert,
-  GmVaccineCoveragePerAgeGroupArchivedValue,
-  NlVaccineCoveragePerAgeGroupArchivedValue,
-  VrVaccineCoveragePerAgeGroupArchivedValue,
+  NlVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
-import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
+import { NarrowCoverageTable } from './components/narrow-coverage-table';
+import { WideCoverageTable } from './components/wide-coverage-table';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-interface VaccineCoveragePerAgeGroupProps {
+
+interface Autumn2022CoveragePerAgeGroupProps {
   title: string;
   description: string;
   metadata: MetadataProps;
   sortingOrder: string[];
-  values:
-    | NlVaccineCoveragePerAgeGroupArchivedValue[]
-    | VrVaccineCoveragePerAgeGroupArchivedValue[]
-    | GmVaccineCoveragePerAgeGroupArchivedValue[];
-  text: SiteText['pages']['vaccinations_page']['nl'];
+  values: NlVaccineCoveragePerAgeGroupValue[];
+  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
 }
 
-export function VaccineCoveragePerAgeGroup({
+export function Autumn2022ShotCoveragePerAgeGroup({
   title,
   description,
   metadata,
   values,
   sortingOrder,
   text,
-}: VaccineCoveragePerAgeGroupProps) {
+}: Autumn2022CoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
 
   const getSortingOrder = (ageGroup: string) => {
@@ -37,7 +33,7 @@ export function VaccineCoveragePerAgeGroup({
 
     assert(
       index >= 0,
-      `[${VaccineCoveragePerAgeGroup.name}] No sorting order defined for age group ${ageGroup}`
+      `[${Autumn2022ShotCoveragePerAgeGroup.name}] No sorting order defined for age group ${ageGroup}`
     );
 
     return index;
