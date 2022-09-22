@@ -1,14 +1,15 @@
 import { Box, Spacer } from '~/components/base';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
-import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import {
   Search,
-  TopicalTile,
+  TopicalArticlesList,
   TopicalHeader,
-  ThemeHeader,
-  MeasureTile,
   TopicalLinksList,
+  TopicalMeasureTile,
+  TopicalSectionHeader,
+  TopicalThemeHeader,
+  TopicalTile,
 } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
@@ -77,7 +78,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           >
             <TopicalHeader
               title={selectedTopicalData.title}
-              // TODO: change this to `selectedTopicalData.dynamicDescriptions` (plural)
               dynamicDescriptions={selectedTopicalData.dynamicDescription}
             />
           </Box>
@@ -88,7 +88,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 return (
                   <Box key={theme.index}>
                     <Box marginBottom={4}>
-                      <ThemeHeader
+                      <TopicalThemeHeader
                         title={theme.title}
                         dynamicSubtitle={theme.dynamicSubtitle}
                         icon={theme.icon}
@@ -129,7 +129,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <Box>
               <Box marginBottom={4}>
-                <ThemeHeader
+                <TopicalThemeHeader
                   title={selectedTopicalData.measures.title}
                   dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
                   icon={selectedTopicalData.measures.icon}
@@ -146,7 +146,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   .sort((a, b) => a.index - b.index)
                   .map((measureTile) => {
                     return (
-                      <MeasureTile
+                      <TopicalMeasureTile
                         icon={measureTile.icon}
                         title={measureTile.title}
                         key={measureTile.index}
@@ -183,7 +183,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} text={textShared} />
+              <TopicalArticlesList
+                articles={content.articles}
+                text={textShared}
+              />
             )}
           </MaxWidth>
         </Box>

@@ -67,7 +67,7 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
                 href={link.href}
                 icon={<ChevronRight />}
                 iconPlacement="right"
-                showAsButton
+                showAsButton={breakpoints.sm}
               >
                 {link.label}
               </LinkWithIcon>

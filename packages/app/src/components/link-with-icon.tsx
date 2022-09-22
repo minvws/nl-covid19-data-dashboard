@@ -148,10 +148,9 @@ const LinkContainer = styled.span`
   a {
     color: ${colors.blue};
 
-    @media ${theme.mediaQueries.sm} {
-      ${({ showAsButton }: LinkContainerProps) =>
-        showAsButton &&
-        `
+    ${({ showAsButton }: LinkContainerProps) =>
+      showAsButton &&
+      `
           background-color: ${colors.lightBlue};
           color: ${colors.blue};
           padding: 12px ${space[3]};
@@ -165,6 +164,5 @@ const LinkContainer = styled.span`
             text-decoration: underline;
           }
         `}
-    }
   }
 `;

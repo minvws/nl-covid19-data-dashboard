@@ -17,6 +17,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface TopicalSectionHeaderProps {
   title: ReactNode;
+  text: SiteText['pages']['topical_page']['shared'];
   description?: string;
   lastGenerated?: number;
   showBackLink?: boolean;
@@ -26,7 +27,6 @@ interface TopicalSectionHeaderProps {
     href: string;
     text: string;
   };
-  text: SiteText['pages']['topical_page']['shared'];
 }
 
 export const TopicalSectionHeader = ({
