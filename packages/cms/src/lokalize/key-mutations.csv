@@ -22,3 +22,13 @@ timestamp,action,key,document_id,move_to
 2022-09-12T09:15:26.749Z,add,pages.vaccinations_page.shared.vaccination_grade_tile.age_group_labels.age_60_plus,u6z14vWwH5lzTVbDpRg28H,__
 2022-09-15T10:16:05.400Z,add,pages.vaccinations_page.nl.vaccine_campaigns.description_archived,9P8A8sYTX3Ht4z1AMBfXsq,__
 2022-09-15T10:17:12.069Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.autumn_vaccination_description,DtIaVTvHarpWIXbTy9jsV1,__
+2022-09-20T13:58:16.031Z,add,pages.vaccinations_page.nl.vaccination_coverage.description_autumn_2022_shot,Xm6fLivW5GNqS19B9UwiZd,__
+2022-09-20T13:58:17.092Z,add,pages.vaccinations_page.nl.vaccination_coverage.headers.autumn_2022_shot,Xm6fLivW5GNqS19B9UwilU,__
+2022-09-20T13:58:18.424Z,add,pages.vaccinations_page.nl.vaccination_coverage.headers.difference_autumn_2022_shot_and_fully_vaccinated,yHBovXHoI3iPzg181DzaQi,__
+2022-09-20T13:58:18.424Z,delete,pages.vaccinations_page.nl.vaccination_coverage.description,jF33EuwumlGuwav2FD4660,__
+2022-09-20T13:58:18.426Z,move,pages.vaccinations_page.nl.vaccination_coverage.description_booster_shot,hqivmGf8UPzCLjKFjHrGgv,pages.vaccinations_page.nl.archived.vaccination_coverage.description_booster_shot
+2022-09-20T13:58:18.427Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.booster_shot,xNELI4GNAeXqkWZzsHMprg,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.booster_shot
+2022-09-20T13:58:18.427Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.coverage,jF33EuwumlGuwav2FD469M,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.coverage
+2022-09-20T13:58:18.429Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.difference,X8Z1HTDxqJ9pM59361KMk4,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.difference
+2022-09-20T13:58:18.430Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated,xNELI4GNAeXqkWZzsHMnYw,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated
+2022-09-20T13:58:18.430Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.first_shot,TfQKtohu9HBbEmilvF8j6l,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.first_shot
