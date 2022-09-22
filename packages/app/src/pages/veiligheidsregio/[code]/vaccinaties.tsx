@@ -235,19 +235,19 @@ export const VaccinationsVrPage = (
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.actions_to_take.title}
-            title={replaceVariablesInText(textVr.informatie_blok.titel, {
+            title={replaceVariablesInText(textVr.information_block.title, {
               safetyRegionName: vrName,
             })}
-            description={textVr.informatie_blok.beschrijving}
+            description={textVr.information_block.description}
             icon={<VaccinatieIcon />}
             metadata={{
-              datumsText: textVr.informatie_blok.datums,
+              datumsText: textVr.information_block.dates,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
-            referenceLink={textVr.informatie_blok.reference.href}
+            referenceLink={textVr.information_block.reference.href}
             articles={content.articles}
             vrNameOrGmName={vrName}
             warning={textVr.warning}
