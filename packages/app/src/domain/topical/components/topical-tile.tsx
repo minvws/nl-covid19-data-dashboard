@@ -3,11 +3,11 @@ import theme, { space } from '~/style/theme';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Heading } from '~/components/typography';
-import { TextWithChevron } from './text-with-chevron';
+import { TextWithIcon } from '~/components/text-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { Down, Up } from '@corona-dashboard/icons';
+import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 
@@ -107,7 +107,22 @@ export function TopicalTile({
           </Box>
         </Box>
 
-        {cta && <TextWithChevron label={cta.label}></TextWithChevron>}
+        {cta && (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            bg={colors.lightBlue}
+            color={colors.blue}
+            padding={3}
+            className="topical-tile-cta"
+            css={css({
+              transition: 'background .1s ease-in-out',
+            })}
+          >
+            <TextWithIcon text={cta.label} icon={<ChevronRight />} />
+          </Box>
+        )}
       </>
     </Box>
   );

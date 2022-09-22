@@ -6,24 +6,24 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import DynamicIcon from '~/components/get-icon-by-name';
 import theme from '~/style/theme';
 
-interface TopicalHeaderProps {
+interface TopicalThemeHeaderProps {
   title: string;
   dynamicSubtitle: string;
   icon: TopicalIcon;
 }
 
-export const ThemeHeader = ({
+export const TopicalThemeHeader = ({
   title,
   dynamicSubtitle,
   icon,
-}: TopicalHeaderProps) => {
+}: TopicalThemeHeaderProps) => {
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
         {icon && (
-          <ThemeHeaderIcon>
+          <TopicalThemeHeaderIcon>
             <DynamicIcon name={icon} />
-          </ThemeHeaderIcon>
+          </TopicalThemeHeaderIcon>
         )}
         <Heading level={2}>{title}</Heading>
       </Box>
@@ -33,7 +33,7 @@ export const ThemeHeader = ({
   );
 };
 
-const ThemeHeaderIcon = styled.span`
+const TopicalThemeHeaderIcon = styled.span`
   display: block;
   height: 25px;
   margin-right: 10px;

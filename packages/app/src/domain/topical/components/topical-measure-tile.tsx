@@ -1,5 +1,4 @@
 import { Box } from '~/components/base';
-import css from '@styled-system/css';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
@@ -7,12 +6,15 @@ import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { space } from '~/style/theme';
 
-interface MeasureTileProps {
+interface TopicalMeasureTileProps {
   icon: TopicalIcon;
   title: string;
 }
 
-export const MeasureTile = ({ icon, title }: MeasureTileProps) => {
+export const TopicalMeasureTile = ({
+  icon,
+  title,
+}: TopicalMeasureTileProps) => {
   return (
     <Box
       spacing={3}

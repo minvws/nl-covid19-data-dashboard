@@ -3,12 +3,15 @@ import { Box } from '~/components/base';
 import { ContentTeaser } from '~/components/content-teaser';
 import { SiteText } from '~/locale';
 
-interface ArticleListProps {
+interface TopicalArticlesListProps {
   articles: ArticleSummary[];
   text: SiteText['pages']['topical_page']['shared'];
 }
 
-export const ArticleList = ({ articles, text }: ArticleListProps) => {
+export const TopicalArticlesList = ({
+  articles,
+  text,
+}: TopicalArticlesListProps) => {
   return (
     <Box
       display="grid"
