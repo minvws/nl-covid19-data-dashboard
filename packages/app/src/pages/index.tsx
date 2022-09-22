@@ -7,8 +7,8 @@ import {
   TopicalTile,
   TopicalHeader,
   ThemeHeader,
-  MeasurementTile,
-  SubjectsList,
+  MeasureTile,
+  TopicalLinksList,
 } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
@@ -77,7 +77,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           >
             <TopicalHeader
               title={selectedTopicalData.title}
-              dynamicDescription={selectedTopicalData.dynamicDescription}
+              // TODO: change this to `selectedTopicalData.dynamicDescriptions` (plural)
+              dynamicDescriptions={selectedTopicalData.dynamicDescription}
             />
           </Box>
           <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
@@ -115,7 +116,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           );
                         })}
                     </Box>
-                    <SubjectsList moreLinks={theme.moreLinks} />
+                    <TopicalLinksList
+                      labels={{
+                        DESKTOP: theme.moreLinks.label.DESKTOP,
+                        MOBILE: theme.moreLinks.label.MOBILE,
+                      }}
+                      links={theme.moreLinks.links}
+                    />
                   </Box>
                 );
               })}
@@ -139,7 +146,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   .sort((a, b) => a.index - b.index)
                   .map((measureTile) => {
                     return (
-                      <MeasurementTile
+                      <MeasureTile
                         icon={measureTile.icon}
                         title={measureTile.title}
                         key={measureTile.index}

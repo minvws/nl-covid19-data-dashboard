@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { colors } from '@corona-dashboard/common';
 import { Text } from '~/components/typography';
+import { space } from '~/style/theme';
 
 type TextWithChevronProps = {
   label: string;
@@ -29,16 +30,14 @@ export const TextWithChevron = ({ label }: TextWithChevronProps) => {
       </IconSmall>
     </Box>
   );
-}
+};
 
-const IconSmall = styled.div(
-  css({
-    display: 'inline',
-    textDecoration: 'inherit',
-    svg: {
-      width: 11,
-      height: 10,
-    },
-    marginLeft: 1,
-  })
-);
+const IconSmall = styled.div`
+  display: inline;
+  text-decoration: inherit;
+  margin-left: ${space[1]};
+  svg {
+    width: 11px;
+    height: 10px;
+  }
+`;
