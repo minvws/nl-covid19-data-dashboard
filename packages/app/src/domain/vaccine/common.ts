@@ -16,4 +16,3 @@ export type MatchingVaccineCoverageAgeGroupsType = {
   autumn_2022_vaccinated_percentage: Autumn2022Vaccinated[];
   fully_vaccinated_percentage: FullyVaccinatedAges[];
 }
-}

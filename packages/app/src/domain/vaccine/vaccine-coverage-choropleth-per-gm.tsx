@@ -258,14 +258,34 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
             display="flex"
             alignItems="center"
             justifyContent="space-between"
+            flexGrow={1}
             mr={13}
             pr={2}
             key={vrOrGmData.age_group_range}
           >
-            <Markdown content={ageGroupsText[vrOrGmData.age_group_range]} />
-            <InlineText>
+            <Box
+              display="inline"
+              minWidth={
+                vrOrGmData[`${selectedCoverageKind}_label`] !== null
+                  ? '150px'
+                  : 'false'
+              }
+            >
+              <Markdown
+                minWidth={'150px'}
+                content={ageGroupsText[vrOrGmData.age_group_range]}
+              />
+            </Box>
+            <Box
+              display="inline"
+              minWidth={
+                vrOrGmData[`${selectedCoverageKind}_label`] !== null
+                  ? '100px'
+                  : 'false'
+              }
+            >
               {formatCoveragePercentage(vrOrGmData, selectedCoverageKind)}
-            </InlineText>
+            </Box>
           </Box>
         </TooltipSubject>
       );
