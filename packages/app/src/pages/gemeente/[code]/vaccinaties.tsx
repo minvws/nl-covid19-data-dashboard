@@ -5,28 +5,14 @@ import {
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
-import { Box } from '~/components/base';
-import {
-  DynamicChoropleth,
-  ChoroplethTile,
-  Markdown,
-  PageInformationBlock,
-  TileList,
-  Divider,
-} from '~/components';
-import { thresholds } from '~/components/choropleth/logic';
+import { isDefined, isPresent } from 'ts-is-present';
+import { PageInformationBlock, TileList, Divider } from '~/components';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
 import { Layout, GmLayout } from '~/domain/layout';
 import { Languages, SiteText } from '~/locale';
 import {
-  AgeGroup,
-  AgeGroupSelect,
-} from '~/domain/vaccine/components/age-group-select';
-import {
   selectVaccineCoverageData,
   VaccineCoverageToggleTile,
-  ChoroplethTooltip,
   VaccineCoveragePerAgeGroup,
   VaccineCoverageTile,
 } from '~/domain/vaccine';
@@ -51,7 +37,6 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import {
   assert,
   replaceVariablesInText,
-  useReverseRouter,
   useFormatLokalizePercentage,
 } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -130,15 +115,12 @@ export const VaccinationsGmPage = (
 ) => {
   const {
     pageText,
-    choropleth,
     municipalityName,
     selectedGmData: data,
     content,
     lastGenerated,
   } = props;
   const { commonTexts } = useIntl();
-  const reverseRouter = useReverseRouter();
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
@@ -224,10 +206,6 @@ export const VaccinationsGmPage = (
   );
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] =
-    choropleth.gm.vaccine_coverage_per_age_group.filter(
-      hasValueAtKey('age_group_range', selectedAgeGroup)
-    );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -355,66 +333,7 @@ export const VaccinationsGmPage = (
               />
             </>
           )}
-
-          <ChoroplethTile
-            title={replaceVariablesInText(
-              commonTexts.choropleth.choropleth_vaccination_coverage.gm.title,
-              { municipalityName: municipalityName }
-            )}
-            description={
-              <>
-                <Markdown
-                  content={replaceVariablesInText(
-                    commonTexts.choropleth.choropleth_vaccination_coverage.gm
-                      .description,
-                    { municipalityName: municipalityName }
-                  )}
-                />
-
-                <Box maxWidth="20rem">
-                  <AgeGroupSelect onChange={setSelectedAgeGroup} />
-                </Box>
-              </>
-            }
-            legend={{
-              thresholds: thresholds.gm.fully_vaccinated_percentage,
-              title:
-                commonTexts.choropleth.choropleth_vaccination_coverage.shared
-                  .legend_title,
-            }}
-            metadata={{
-              source:
-                commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-              date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
-            }}
-          >
-            <DynamicChoropleth
-              accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-              map="gm"
-              data={choroplethData}
-              dataConfig={{
-                metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'fully_vaccinated_percentage',
-              }}
-              dataOptions={{
-                getLink: reverseRouter.gm.vaccinaties,
-                highlightSelection: true,
-                selectedCode: data.code,
-                tooltipVariables: {
-                  age_group: commonTexts.common.age_groups[selectedAgeGroup],
-                },
-              }}
-              formatTooltip={(context) => (
-                <ChoroplethTooltip
-                  data={context}
-                  percentageProps={[
-                    'booster_shot_percentage',
-                    'fully_vaccinated_percentage',
-                  ]}
-                />
-              )}
-            />
-          </ChoroplethTile>
+          z
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}

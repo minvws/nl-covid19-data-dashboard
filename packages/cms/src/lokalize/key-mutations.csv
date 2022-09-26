@@ -47,3 +47,6 @@ timestamp,action,key,document_id,move_to
 2022-09-22T08:34:02.065Z,move,pages.vaccinations_page.vr.informatie_blok.datums,DWLUotrm23arH2ViSPEVme,pages.vaccinations_page.vr.information_block.dates
 2022-09-22T08:34:02.066Z,move,pages.vaccinations_page.vr.informatie_blok.reference.href,DWLUotrm23arH2ViSPEVqK,pages.vaccinations_page.vr.information_block.reference.href
 2022-09-22T08:34:02.067Z,move,pages.vaccinations_page.vr.informatie_blok.titel,4wy7f8NuwuLne309uMwkHM,pages.vaccinations_page.vr.information_block.title
+2022-09-22T16:12:23.436Z,add,common.common.age_groups.60+,W6UmOXZCFlGlqhEwOIFqSc,__
+2022-09-22T16:12:24.748Z,add,common.vaccinations.coverage_kinds.autumn_2022_vaccinated_percentage,NGAoa2ArqEakZsIxnSDBhz,__
+2022-09-22T16:12:24.830Z,delete,common.common.age_groups.12-17,DWLUotrm23arH2ViSPB3O0,__
