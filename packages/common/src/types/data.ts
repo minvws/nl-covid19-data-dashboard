@@ -1004,10 +1004,10 @@ export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
   age_group_total: number;
   fully_vaccinated: number;
   booster_shot: number | null;
-  has_one_shot: number;
+  has_one_shot: number | null;
   fully_vaccinated_percentage: number;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number;
+  has_one_shot_percentage: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -1036,11 +1036,10 @@ export interface NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value {
 }
 export interface NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908 {
   age_18_plus_fully_vaccinated: number;
-  age_18_plus_has_one_shot?: number;
+  age_18_plus_has_one_shot: number;
   age_18_plus_birthyear: string;
-  age_12_plus_autumn_2022_vaccinated: number;
   age_12_plus_fully_vaccinated: number;
-  age_12_plus_has_one_shot?: number;
+  age_12_plus_has_one_shot: number;
   age_12_plus_birthyear: string;
   date_unix: number;
   date_of_insertion_unix: number;
