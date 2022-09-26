@@ -7,7 +7,6 @@ import { UrlObject } from 'url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { Anchor } from './typography';
-import { asResponsiveArray } from '~/style/utils';
 
 interface LinkWithIconProps {
   href: UrlObject | string;
@@ -27,23 +26,23 @@ interface IconProps {
   mr?: number | string;
 }
 
-interface buttonBoxProps {
+interface LinkContainerProps {
   showAsButton: boolean;
 }
 
-export function LinkWithIcon({
+export const LinkWithIcon = ({
   href,
   icon,
   children,
   iconPlacement = 'left',
   fontWeight,
   showAsButton = false,
-}: LinkWithIconProps) {
+}: LinkWithIconProps) => {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
   return (
-    <ButtonBox showAsButton={showAsButton}>
+    <LinkContainer showAsButton={showAsButton}>
       <Link href={href} passHref locale={false}>
         <Anchor
           underline="hover"
@@ -68,16 +67,16 @@ export function LinkWithIcon({
           )}
         </Anchor>
       </Link>
-    </ButtonBox>
+    </LinkContainer>
   );
-}
+};
 
-export function HeadingLinkWithIcon({
+export const HeadingLinkWithIcon = ({
   href,
   icon,
   children,
   underline,
-}: LinkWithIconProps) {
+}: LinkWithIconProps) => {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
   const isSingleWord = words.length === 1;
@@ -109,17 +108,17 @@ export function HeadingLinkWithIcon({
       </Link>
     </Box>
   );
-}
+};
 
-function IconSmall({ icon, width, height, mr }: IconProps) {
+const IconSmall = ({ icon, width, height, mr }: IconProps) => {
   return (
     <span css={css({ marginRight: mr, svg: { height, width, mx: '3px' } })}>
       {icon}
     </span>
   );
-}
+};
 
-function IconLarge({ icon, isSingleWord, width, height }: IconProps) {
+const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
   return (
     <span
       css={css({
@@ -137,38 +136,33 @@ function IconLarge({ icon, isSingleWord, width, height }: IconProps) {
       {icon}
     </span>
   );
-}
+};
 
-const IconWrapper = styled.span(
-  css({
-    display: 'inline-block',
-    textDecoration: 'inherit',
-  })
-);
+const IconWrapper = styled.span`
+  display: inline-block;
+  text-decoration: inherit;
+`;
 
-const ButtonBox = styled.span((x: buttonBoxProps) =>
-  css({
-    display: 'inline-block',
-    position: 'relative',
-    a: x.showAsButton
-      ? asResponsiveArray({
-          _: {
-            color: colors.blue,
-          },
-          sm: {
-            backgroundColor: colors.lightBlue,
-            color: colors.blue,
-            px: 12,
-            py: space[3],
-            '&:hover': {
-              backgroundColor: colors.blue,
-              color: colors.offWhite,
-            },
-            '&:hover, &:focus': {
-              textDecoration: 'underline',
-            },
-          },
-        })
-      : {},
-  })
-);
+const LinkContainer = styled.span`
+  display: inline-block;
+  a {
+    color: ${colors.blue};
+
+    ${({ showAsButton }: LinkContainerProps) =>
+      showAsButton &&
+      `
+          background-color: ${colors.lightBlue};
+          color: ${colors.blue};
+          padding: 12px ${space[3]};
+  
+          &:hover {
+            background-color: ${colors.blue};
+            color: ${colors.white};
+          }
+  
+          &:hover, &:focus {
+            text-decoration: underline;
+          }
+        `}
+  }
+`;

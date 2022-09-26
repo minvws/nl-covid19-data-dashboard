@@ -1,36 +1,32 @@
 import { Box } from '~/components/base';
-import { space } from '~/style/theme';
+import theme, { space } from '~/style/theme';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Heading } from '~/components/typography';
-import { TextWithChevron } from './text-with-chevron';
+import { TextWithIcon } from '~/components/text-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { Down, Up } from '@corona-dashboard/icons';
+import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
-
-interface IconWrapperProps {
-  iconColor: string;
-}
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN';
   color: string;
-} | null;
+};
 
 type Cta = {
   label: string;
   href: string;
-} | null;
+};
 
 interface TopicalTileProps {
   title: string;
   tileIcon: TopicalIcon;
-  trendIcon?: TrendIcon;
+  trendIcon: TrendIcon | null;
   dynamicDescription: string;
-  cta?: Cta;
+  cta: Cta | null;
 }
 
 export function TopicalTile({
@@ -49,8 +45,8 @@ export function TopicalTile({
       borderStyle="solid"
       position="relative"
       display="flex"
-      flexDirection={'column'}
-      justifyContent={'space-between'}
+      flexDirection="column"
+      justifyContent="space-between"
       color="#000000"
       css={css({
         '&:hover .topical-tile-cta': {
@@ -61,10 +57,10 @@ export function TopicalTile({
       })}
     >
       <>
-        <Box display="flex" flexDirection={'column'} justifyContent={'start'}>
+        <Box display="flex" flexDirection="column" justifyContent="start">
           <Box
             display="flex"
-            justifyContent={'space-between'}
+            justifyContent="space-between"
             css={css({
               gap: 2,
             })}
@@ -86,55 +82,70 @@ export function TopicalTile({
               >
                 {title}
                 {trendIcon && (
-                  <IconWrapper iconColor={trendIcon.color}>
+                  <TrendIconWrapper color={trendIcon.color}>
                     {trendIcon.direction === 'DOWN' && <Down />}
                     {trendIcon.direction === 'UP' && <Up />}
-                  </IconWrapper>
+                  </TrendIconWrapper>
                 )}
               </Heading>
             </Box>
 
-            <KpiIcon>
+            <TileIcon>
               <DynamicIcon name={tileIcon} />
-            </KpiIcon>
+            </TileIcon>
           </Box>
           <Box
             display="flex"
-            flexDirection={'column'}
-            justifyContent={'start'}
-            textAlign={'left'}
+            flexDirection="column"
+            justifyContent="start"
+            textAlign="left"
             p={{ _: 3, xs: 4 }}
           >
-            <Box display="flex" alignItems={'center'}>
+            <Box display="flex" alignItems="center">
               <Markdown content={dynamicDescription} />
             </Box>
           </Box>
         </Box>
 
-        {cta && <TextWithChevron label={cta.label}></TextWithChevron>}
+        {cta && (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            bg={colors.lightBlue}
+            color={colors.blue}
+            padding={3}
+            className="topical-tile-cta"
+            css={css({
+              transition: 'background .1s ease-in-out',
+            })}
+          >
+            <TextWithIcon text={cta.label} icon={<ChevronRight />} />
+          </Box>
+        )}
       </>
     </Box>
   );
 }
 
-const IconWrapper = styled.span<IconWrapperProps>((x) =>
-  css({
-    color: x.iconColor,
-    flexShrink: 0,
-    width: '20px',
-    height: '20px',
-    marginLeft: 2,
-  })
-);
+const TrendIconWrapper = styled.span`
+  color: ${({ color }) => color};
+  flex-shrink: 0;
+  height: 20px;
+  margin-left: ${space[2]};
+  width: 20px;
+`;
 
-const KpiIcon = styled.span(
-  css({
-    color: colors.white,
-    backgroundColor: colors.blue,
-    width: asResponsiveArray({ _: 40, sm: 50 }),
-    minWidth: asResponsiveArray({ _: 40, sm: 50 }),
-    height: asResponsiveArray({ _: 40, sm: 50 }),
-    padding: 2,
-    borderBottomLeftRadius: space[1],
-  })
-);
+const TileIcon = styled.span`
+  background-color: ${colors.blue};
+  border-bottom-left-radius: ${space[1]};
+  color: ${colors.white};
+  height: 40px;
+  padding: ${space[2]};
+  width: 40px;
+
+  @media ${theme.mediaQueries.sm} {
+    height: 50px;
+    width: 50px;
+  }
+`;

@@ -17,6 +17,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface TopicalSectionHeaderProps {
   title: ReactNode;
+  text: SiteText['pages']['topical_page']['shared'];
   description?: string;
   lastGenerated?: number;
   showBackLink?: boolean;
@@ -26,10 +27,9 @@ interface TopicalSectionHeaderProps {
     href: string;
     text: string;
   };
-  text: SiteText['pages']['topical_page']['shared'];
 }
 
-export function TopicalSectionHeader({
+export const TopicalSectionHeader = ({
   title,
   lastGenerated,
   showBackLink,
@@ -38,7 +38,7 @@ export function TopicalSectionHeader({
   headingLevel = 2,
   headerVariant = 'h1',
   text,
-}: TopicalSectionHeaderProps) {
+}: TopicalSectionHeaderProps) => {
   const { formatDateFromSeconds } = useIntl();
 
   return (
@@ -69,7 +69,7 @@ export function TopicalSectionHeader({
              * Check also for empty link text, so that clearing it in Lokalize
              * actually removes the link altogether
              */
-            link && !isEmpty(link.text) ? (
+            link && !isEmpty(link.text) && (
               <Box mb={'2px'}>
                 <LinkWithIcon
                   href={link.href}
@@ -79,7 +79,7 @@ export function TopicalSectionHeader({
                   {link.text}
                 </LinkWithIcon>
               </Box>
-            ) : null
+            )
           }
         </Box>
 
@@ -100,4 +100,4 @@ export function TopicalSectionHeader({
       </Box>
     </Box>
   );
-}
+};
