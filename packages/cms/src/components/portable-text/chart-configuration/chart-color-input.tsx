@@ -69,7 +69,7 @@ export const ChartColorInput = forwardRef((props: any) => {
                 height: '25px',
                 borderRadius: '4px',
                 backgroundColor: flatDataColors[colorProperty],
-                border: '1px solid' +  colors.gray2,
+                border: `1px solid ${colors.gray2}`,
               }}
             ></Box>
           )}
@@ -100,7 +100,7 @@ export const ChartColorInput = forwardRef((props: any) => {
                         height: '25px',
                         backgroundColor: color,
                         borderRadius: '4px',
-                        border: '1px solid' +  colors.gray2,
+                        border: `1px solid ${colors.gray2}`,
                       }}
                     />
                     <Radio checked={colorProperty === id} readOnly />

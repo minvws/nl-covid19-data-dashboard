@@ -8,7 +8,6 @@ export function getColor(colorPath: string | undefined) {
 
   return get(
     colors,
-    // ['data'].concat(colorPath.split('.')),
     colors.primary
   ) as Color;
 }

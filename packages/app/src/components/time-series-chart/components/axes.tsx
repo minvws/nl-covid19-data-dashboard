@@ -308,7 +308,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         scale={yScale}
         width={bounds.width}
         numTicks={numGridLines}
-        stroke="gray2"
+        stroke={colors.gray2}
       />
       <GridRows
         /**

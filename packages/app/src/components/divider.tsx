@@ -13,7 +13,7 @@ import styled from 'styled-components/';
 export const Divider = styled.div(
   css({
     width: '100%',
-    borderTop: 'solid 2px' + colors.gray2,
+    borderTop: `solid 2px ${colors.gray2}`,
     mt: 2,
     py: 2,
   })

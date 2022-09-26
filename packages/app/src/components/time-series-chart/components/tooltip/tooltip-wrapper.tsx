@@ -130,7 +130,7 @@ const StyledTriangle = styled.div<{ width: number }>((x) => {
     borderColor: 'transparent transparent white white',
     transformOrigin: '0 0',
     transform: 'rotate(-45deg)',
-    boxShadow: '-3px 3px 3px 0' + colors.blackOpacity,
+    boxShadow: `-3px 3px 3px 0 ${colors.blackOpacity}`,
   });
 });
 

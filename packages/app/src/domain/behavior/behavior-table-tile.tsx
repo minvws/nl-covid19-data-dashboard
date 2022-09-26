@@ -313,9 +313,9 @@ const Cell = styled.td(
     '&:first-child': {
       borderBottom: asResponsiveArray({
         _: 'none',
-        sm: '1px solid' + colors.gray2,
+        sm: `1px solid ${colors.gray2}`,
         md: 'none',
-        lg: '1px solid' + colors.gray2,
+        lg: `1px solid ${colors.gray2}`,
       }),
     },
   })

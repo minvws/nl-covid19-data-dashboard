@@ -22,7 +22,7 @@ export function TwoKpiSection({
       display="flex"
       flexDirection={{ _: 'column', lg: 'row' }}
       css={css({
-        borderTop: hasBorder ? 'solid 2px' + colors.gray2 : undefined,
+        borderTop: hasBorder ? `solid 2px ${colors.gray2}` : undefined,
         pt: hasPadding ? 4 : undefined,
         pb: hasPadding ? asResponsiveArray({ _: 3, sm: 4 }) : undefined,
         '& > *': {
