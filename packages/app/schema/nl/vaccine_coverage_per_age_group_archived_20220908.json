@@ -60,7 +60,7 @@
           "type": ["integer", "null"]
         },
         "has_one_shot": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "fully_vaccinated_percentage": {
           "type": "number"
@@ -69,7 +69,7 @@
           "type": ["number", "null"]
         },
         "has_one_shot_percentage": {
-          "type": "number"
+          "type": ["integer", "null"]
         },
         "date_unix": {
           "type": "integer"
