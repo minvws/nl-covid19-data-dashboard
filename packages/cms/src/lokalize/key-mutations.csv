@@ -37,7 +37,6 @@ timestamp,action,key,document_id,move_to
 2022-09-22T08:33:59.702Z,add,pages.vaccinations_page.nl.information_block.reference.href,WtoYo1f1gXCFVJOLnmc24S,__
 2022-09-22T08:34:01.059Z,add,pages.vaccinations_page.nl.information_block.title,yHBovXHoI3iPzg181OsCSV,__
 2022-09-22T08:34:02.057Z,add,pages.vaccinations_page.nl.dates,WtoYo1f1gXCFVJOLnmc2SK,__
-2022-09-22T08:34:02.058Z,delete,pages.vaccinations_page.nl.datums,jF33EuwumlGuwav2FD45vw,__
 2022-09-22T08:34:02.059Z,delete,pages.vaccinations_page.nl.reference.href,UAObXFLRz2Xgg95bOTGaT4,__
 2022-09-22T08:34:02.060Z,delete,pages.vaccinations_page.nl.title,jF33EuwumlGuwav2FD45sa,__
 2022-09-22T08:34:02.061Z,move,pages.vaccinations_page.gm.informatie_blok.beschrijving,4wy7f8NuwuLne309uNBmLw,pages.vaccinations_page.gm.information_block.description
