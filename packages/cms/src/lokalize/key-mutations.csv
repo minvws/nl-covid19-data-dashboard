@@ -32,3 +32,6 @@ timestamp,action,key,document_id,move_to
 2022-09-20T13:58:18.429Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.difference,X8Z1HTDxqJ9pM59361KMk4,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.difference
 2022-09-20T13:58:18.430Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated,xNELI4GNAeXqkWZzsHMnYw,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated
 2022-09-20T13:58:18.430Z,move,pages.vaccinations_page.nl.vaccination_coverage.headers.first_shot,TfQKtohu9HBbEmilvF8j6l,pages.vaccinations_page.nl.archived.vaccination_coverage.headers.first_shot
+2022-09-22T16:12:23.436Z,add,common.common.age_groups.60+,W6UmOXZCFlGlqhEwOIFqSc,__
+2022-09-22T16:12:24.748Z,add,common.vaccinations.coverage_kinds.autumn_2022_vaccinated_percentage,NGAoa2ArqEakZsIxnSDBhz,__
+2022-09-22T16:12:24.830Z,delete,common.common.age_groups.12-17,DWLUotrm23arH2ViSPB3O0,__
