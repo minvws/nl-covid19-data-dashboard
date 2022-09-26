@@ -333,7 +333,6 @@ export const VaccinationsGmPage = (
               />
             </>
           )}
-          z
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}
