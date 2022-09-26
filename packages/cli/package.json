@@ -18,7 +18,7 @@
     "simple-git": "^2.48.0",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.2",
-    "ts-node": "^10.8.1"
+    "ts-node": "^10.9.1"
   },
   "scripts": {
     "prepare-release": "ts-node src/release/prepare-release.ts",
