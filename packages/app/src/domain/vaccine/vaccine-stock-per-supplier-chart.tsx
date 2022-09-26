@@ -107,7 +107,7 @@ export function VaccineStockPerSupplierChart({
 
   return (
     <ChartTile
-      title={text.title}
+      title={text.information_block.title}
       description={text.stock_per_supplier_chart.description}
       metadata={{
         source: text.bronnen.rivm,

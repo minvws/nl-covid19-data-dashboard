@@ -253,18 +253,18 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             />
           )}
           <PageInformationBlock
-            title={textNl.title}
+            title={textNl.information_block.title}
             category={commonTexts.sidebar.categories.actions_to_take.title}
             icon={<VaccinatieIcon />}
-            description={content.pageDescription}
+            description={textNl.information_block.description}
             metadata={{
-              datumsText: textNl.datums,
+              datumsText: textNl.dates,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
-            referenceLink={textNl.reference.href}
+            referenceLink={textNl.information_block.reference.href}
             articles={content.articles}
           />
           {vaccinationsCoverageFeature.isEnabled && (
@@ -385,7 +385,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               campaigns={data.vaccine_campaigns.vaccine_campaigns}
               campaignDescriptions={textNl.vaccine_campaigns.campaigns}
               metadata={{
-                datumsText: textNl.datums,
+                datumsText: textNl.dates,
                 date: data.vaccine_campaigns.date_unix,
                 source: textNl.vaccine_campaigns.bronnen.rivm,
               }}
@@ -428,7 +428,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               '5-11',
             ]}
             metadata={{
-              datumsText: textNl.datums,
+              datumsText: textNl.dates,
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
@@ -527,7 +527,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 }
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
                 metadata={{
-                  datumsText: textNl.datums,
+                  datumsText: textNl.dates,
                   date: data.vaccine_campaigns_archived_20220908.date_unix,
                   source: textNl.vaccine_campaigns.bronnen.rivm,
                 }}
@@ -635,7 +635,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   '5-11',
                 ]}
                 metadata={{
-                  datumsText: textNl.datums,
+                  datumsText: textNl.dates,
                   date: data.vaccine_coverage_per_age_group_archived.values[0]
                     .date_unix,
                   source: textNl.vaccination_coverage.bronnen.rivm,

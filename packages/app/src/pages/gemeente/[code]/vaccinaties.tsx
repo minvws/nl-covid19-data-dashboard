@@ -213,19 +213,19 @@ export const VaccinationsGmPage = (
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.actions_to_take.title}
-            title={replaceVariablesInText(textGm.informatie_blok.titel, {
+            title={replaceVariablesInText(textGm.information_block.title, {
               municipalityName: municipalityName,
             })}
-            description={textGm.informatie_blok.beschrijving}
+            description={textGm.information_block.description}
             icon={<VaccinatieIcon />}
             metadata={{
-              datumsText: textGm.informatie_blok.datums,
+              datumsText: textGm.information_block.dates,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
-            referenceLink={textGm.informatie_blok.reference.href}
+            referenceLink={textGm.information_block.reference.href}
             articles={content.articles}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
