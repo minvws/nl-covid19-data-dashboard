@@ -271,10 +271,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
                   : 'false'
               }
             >
-              <Markdown
-                minWidth={'150px'}
-                content={ageGroupsText[vrOrGmData.age_group_range]}
-              />
+              <Markdown content={ageGroupsText[vrOrGmData.age_group_range]} />
             </Box>
             <Box
               display="inline"
