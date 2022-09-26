@@ -384,6 +384,7 @@ export const thresholds: Thresholds = {
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
     has_one_shot_percentage: vaccineCoveragePercentageThresholds,
     booster_shot_percentage: vaccineCoveragePercentageThresholds,
+    autumn_2022_vaccinated_percentage: vaccineCoveragePercentageThresholds,
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,
@@ -405,6 +406,7 @@ export const thresholds: Thresholds = {
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
     has_one_shot_percentage: vaccineCoveragePercentageThresholds,
     booster_shot_percentage: vaccineCoveragePercentageThresholds,
+    autumn_2022_vaccinated_percentage: vaccineCoveragePercentageThresholds,
     other: situationsThreshold,
     ...(Object.fromEntries(
       behaviorIdentifiers.map((key) => [
