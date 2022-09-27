@@ -298,6 +298,7 @@ export interface NamedDifferenceDecimal {
     | "BA_1"
     | "BA_2"
     | "BA_4"
+    | "BA_4_6"
     | "BA_5"
     | "BA_2+S:L452X"
     | "BA_2_12_1"
@@ -999,6 +1000,7 @@ export interface NlVariantsVariant {
     | "BA_1"
     | "BA_2"
     | "BA_4"
+    | "BA_4_6"
     | "BA_5"
     | "BA_2+S:L452X"
     | "BA_2_12_1"
@@ -1031,6 +1033,7 @@ export interface NlVariantsVariantValue {
 export type TopicalIcon =
   | "AfstandSporten"
   | "AlcoholVerkoop"
+  | "Archive"
   | "Arrow"
   | "Arts"
   | "Avondklok"
