@@ -42,9 +42,9 @@ export function VaccineCoverageChoroplethPerGm({
 }: VaccineCoverageChoroplethPerGmProps) {
   const { commonTexts } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('60+');
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
   const [selectedCoverageKind, setSelectedCoverageKind] =
-    useState<CoverageKindProperty>('autumn_2022_vaccinated_percentage');
+    useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
 
   const setSelectedCoverageKindAndAge = (
