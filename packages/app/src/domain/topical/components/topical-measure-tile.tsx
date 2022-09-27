@@ -18,7 +18,7 @@ export const TopicalMeasureTile = ({
   return (
     <Box
       spacing={3}
-      borderColor={colors.gray}
+      borderColor={colors.gray5}
       borderWidth="1px"
       borderStyle="solid"
       p="1.5rem"
@@ -37,7 +37,7 @@ export const TopicalMeasureTile = ({
 };
 
 const KpiIcon = styled.div`
-  color: ${colors.blue};
+  color: ${colors.blue8};
   display: flex;
   width: 40px;
   height: 40px;
