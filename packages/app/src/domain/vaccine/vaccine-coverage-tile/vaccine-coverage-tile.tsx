@@ -13,6 +13,7 @@ import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Bar } from '../components/bar';
 import styled from 'styled-components';
+import { colors } from '@corona-dashboard/common';
 
 type BarType = {
   value: number;
@@ -98,13 +99,11 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
     <Box>
       <BoldText>{data.title}</BoldText>
       <Box pt={3} pb={1}>
-        <KpiValue text={parsedAgePercentage} />
+        <KpiValue text={parsedAgePercentage} color={bar.color} />
       </Box>
-      {bar && (
-        <Box pt={2} pb={3}>
-          <Bar value={bar.value} color={bar.color} height={12} />
-        </Box>
-      )}
+      <Box pt={2} pb={3}>
+        <Bar value={bar.value} color={bar.color} height={12} />
+      </Box>
       <Markdown
         content={replaceVariablesInText(data.description, {
           birthyear: replaceVariablesInText(
@@ -132,9 +131,7 @@ const AgeGroupWrapper = styled.div(
 
 const KpiContent = styled.div(
   css({
-    borderColor: 'gray3',
-    borderWidth: '1px',
-    borderStyle: 'solid',
+    border: `1px solid ${colors.gray3}`,
     position: 'relative',
     display: 'flex',
     flexDirection: asResponsiveArray({ _: 'column', sm: 'row' }),
