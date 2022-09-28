@@ -9,7 +9,7 @@ import { WideCoverageTable } from './components/wide-coverage-table';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-interface Autumn2022CoveragePerAgeGroupProps {
+interface Autumn2022ShotCoveragePerAgeGroupProps {
   title: string;
   description: string;
   metadata: MetadataProps;
@@ -18,18 +18,20 @@ interface Autumn2022CoveragePerAgeGroupProps {
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
 }
 
-export function Autumn2022ShotCoveragePerAgeGroup({
+export const Autumn2022ShotCoveragePerAgeGroup = ({
   title,
   description,
   metadata,
   values,
   sortingOrder,
   text,
-}: Autumn2022CoveragePerAgeGroupProps) {
+}: Autumn2022ShotCoveragePerAgeGroupProps) => {
   const breakpoints = useBreakpoints(true);
 
   const getSortingOrder = (ageGroup: string) => {
-    const index = sortingOrder.findIndex((x) => x === ageGroup);
+    const index = sortingOrder.findIndex(
+      (sortingIndex) => sortingIndex === ageGroup
+    );
 
     assert(
       index >= 0,
@@ -52,4 +54,4 @@ export function Autumn2022ShotCoveragePerAgeGroup({
       )}
     </ChartTile>
   );
-}
+};

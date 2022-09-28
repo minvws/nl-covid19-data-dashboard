@@ -30,15 +30,17 @@ const StyledTile = styled.article<{
   height?: number | string;
   hasNoBorder: boolean;
   hasNoPaddingBottom: boolean;
-}>((x) =>
+}>((styledTileProps) =>
   css({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     pt: 4,
-    pb: x.hasNoPaddingBottom ? undefined : asResponsiveArray({ _: 3, sm: 4 }),
-    height: x.height,
+    pb: styledTileProps.hasNoPaddingBottom
+      ? undefined
+      : asResponsiveArray({ _: 3, sm: 4 }),
+    height: styledTileProps.height,
     backgroundColor: 'white',
-    borderTop: x.hasNoBorder ? undefined : 'solid 2px lightGray',
+    borderTop: styledTileProps.hasNoBorder ? undefined : 'solid 2px lightGray',
   })
 );

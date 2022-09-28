@@ -50,7 +50,8 @@ export function VaccineCoverageChoroplethPerGm({
   const setSelectedCoverageKindAndAge = (
     coverageKind: CoverageKindProperty
   ) => {
-    // When changing between covarage kinds with non mathcing age groups set the non matching age group to a default one.
+    // When changing between coverage kinds where the selected age group isn't available,
+    // the other coverage kind set the non-matching age group to a default one.
     if (selectedAgeGroup !== '12+') {
       setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
     }

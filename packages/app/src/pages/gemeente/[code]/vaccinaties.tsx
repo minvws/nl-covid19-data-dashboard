@@ -147,17 +147,17 @@ export const VaccinationsGmPage = (
    */
   const filteredAgeGroup60Plus =
     data.vaccine_coverage_per_age_group.values.find(
-      (x) => x.age_group_range === '60+'
+      (singelVaccineCoverage) => singelVaccineCoverage.age_group_range === '60+'
     );
 
   const filteredAgeGroup18Plus =
     data.vaccine_coverage_per_age_group.values.find(
-      (x) => x.age_group_range === '18+'
+      (singelVaccineCoverage) => singelVaccineCoverage.age_group_range === '18+'
     );
 
   const filteredAgeGroup12Plus =
     data.vaccine_coverage_per_age_group.values.find(
-      (x) => x.age_group_range === '12+'
+      (singelVaccineCoverage) => singelVaccineCoverage.age_group_range === '12+'
     );
 
   /**
@@ -165,19 +165,21 @@ export const VaccinationsGmPage = (
    */
   const filteredArchivedAgeGroup18Plus =
     data.vaccine_coverage_per_age_group_archived_20220908.values.find(
-      (x) => x.age_group_range === '18+'
+      (singelVaccineCoverage) => singelVaccineCoverage.age_group_range === '18+'
     );
 
   const filteredArchivedAgeGroup12Plus =
     data.vaccine_coverage_per_age_group_archived_20220908.values.find(
-      (x) => x.age_group_range === '12+'
+      (singelVaccineCoverage) => singelVaccineCoverage.age_group_range === '12+'
     );
 
   const boosterCoverage18PlusValue = data.booster_coverage?.values?.find(
-    (v) => v.age_group === '18+'
+    (singelBoosterCoverageValue) =>
+      singelBoosterCoverageValue.age_group === '18+'
   );
   const boosterCoverage12PlusValue = data.booster_coverage?.values?.find(
-    (v) => v.age_group === '12+'
+    (singelBoosterCoverageValue) =>
+      singelBoosterCoverageValue.age_group === '12+'
   );
 
   assert(
