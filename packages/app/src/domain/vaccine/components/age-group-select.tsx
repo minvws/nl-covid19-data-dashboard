@@ -38,16 +38,23 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
 
   const options: Option<AgeGroup>[] = useMemo(
     () =>
-      AGE_GROUPS.map((el) => {
-        const birthyearRange = parseBirthyearRange(el.birthyearRange);
+      AGE_GROUPS.map((ageGroupAndRange) => {
+        const birthyearRange = parseBirthyearRange(
+          ageGroupAndRange.birthyearRange
+        );
         if (isPresent(birthyearRange)) {
-          if (shownAgeGroups && shownAgeGroups.includes(el.ageGroup)) {
+          if (
+            shownAgeGroups &&
+            shownAgeGroups.includes(ageGroupAndRange.ageGroup)
+          ) {
             return {
-              value: el.ageGroup,
-              label: commonTexts.common.age_groups[el.ageGroup],
+              value: ageGroupAndRange.ageGroup,
+              label: commonTexts.common.age_groups[ageGroupAndRange.ageGroup],
               content: (
                 <Box>
-                  <Text>{commonTexts.common.age_groups[el.ageGroup]}</Text>
+                  <Text>
+                    {commonTexts.common.age_groups[ageGroupAndRange.ageGroup]}
+                  </Text>
                   <Text variant="label1">
                     {replaceVariablesInText(
                       commonTexts.common.birthyear_ranges[birthyearRange.type],

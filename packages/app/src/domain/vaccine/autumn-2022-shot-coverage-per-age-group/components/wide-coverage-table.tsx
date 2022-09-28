@@ -15,12 +15,12 @@ import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
-interface WideCoverageTable {
+interface WideCoverageTableProps {
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 
-export function WideCoverageTable({ values, text }: WideCoverageTable) {
+export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
   const { commonTexts, formatPercentage } = useIntl();
 
   return (
@@ -145,7 +145,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
       </StyledTable>
     </Box>
   );
-}
+};
 
 const StyledTable = styled.table(
   css({
@@ -161,13 +161,13 @@ const Row = styled.tr(
   })
 );
 
-const HeaderCell = styled.th<{ isColumn?: boolean }>((x) =>
+const HeaderCell = styled.th<{ isColumn?: boolean }>((headerCellProps) =>
   css({
     textAlign: 'left',
-    fontWeight: x.isColumn ? 'normal' : 'bold',
+    fontWeight: headerCellProps.isColumn ? 'normal' : 'bold',
     verticalAlign: 'middle',
-    pb: x.isColumn ? undefined : 2,
-    py: x.isColumn ? 3 : undefined,
+    pb: headerCellProps.isColumn ? undefined : 2,
+    py: headerCellProps.isColumn ? 3 : undefined,
   })
 );
 

@@ -13,13 +13,15 @@ import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 
-export function NarrowCoverageTable({
-  values,
-  text,
-}: {
+interface NarrowCoverageTableProps {
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
   values: NlVaccineCoveragePerAgeGroupValue[];
-}) {
+}
+
+export const NarrowCoverageTable = ({
+  values,
+  text,
+}: NarrowCoverageTableProps) => {
   const { commonTexts, formatPercentage } = useIntl();
 
   return (
@@ -55,11 +57,11 @@ export function NarrowCoverageTable({
           <Box spacing={1}>
             <NarrowPercentage
               value={
-                item.autumn_2022_vaccinated_percentage === null
-                  ? text.no_data
-                  : `${formatPercentage(
+                item.autumn_2022_vaccinated_percentage
+                  ? `${formatPercentage(
                       item.autumn_2022_vaccinated_percentage
                     )}%`
+                  : text.no_data
               }
               color={COLOR_AUTUMN_2022_SHOT}
               textLabel={text.headers.autumn_2022_shot}
@@ -89,4 +91,4 @@ export function NarrowCoverageTable({
       ))}
     </Box>
   );
-}
+};
