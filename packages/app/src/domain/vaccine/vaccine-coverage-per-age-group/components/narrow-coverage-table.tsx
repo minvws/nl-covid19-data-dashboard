@@ -19,7 +19,7 @@ export function NarrowCoverageTable({
   values,
   text,
 }: {
-  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
   values:
     | NlVaccineCoveragePerAgeGroupArchivedValue[]
     | VrVaccineCoveragePerAgeGroupArchivedValue[]
@@ -31,7 +31,9 @@ export function NarrowCoverageTable({
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="silver" pb={2}>
-        <BoldText variant="label1">{text.headers.agegroup}</BoldText>
+        <BoldText variant="label1">
+          {text.vaccination_coverage.headers.agegroup}
+        </BoldText>
       </Box>
 
       {values.map((item, index) => (
@@ -66,7 +68,7 @@ export function NarrowCoverageTable({
                   : `${formatPercentage(item.has_one_shot_percentage)}%`
               }
               color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
-              textLabel={text.headers.first_shot}
+              textLabel={text.archived.vaccination_coverage.headers.first_shot}
             />
 
             <Bar
@@ -93,7 +95,7 @@ export function NarrowCoverageTable({
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
               color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
-              textLabel={text.headers.coverage}
+              textLabel={text.archived.vaccination_coverage.headers.coverage}
             />
 
             <Bar

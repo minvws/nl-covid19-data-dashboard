@@ -7,11 +7,11 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 export type CoverageKindProperty =
-  | 'booster_shot_percentage'
+  | 'autumn_2022_vaccinated_percentage'
   | 'fully_vaccinated_percentage';
 
 const COVERAGE_KINDS: CoverageKindProperty[] = [
-  'booster_shot_percentage',
+  'autumn_2022_vaccinated_percentage',
   'fully_vaccinated_percentage',
 ];
 

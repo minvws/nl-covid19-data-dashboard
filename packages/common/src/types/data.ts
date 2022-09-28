@@ -20,6 +20,7 @@ export interface Gm {
   sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: GmVaccineCoveragePerAgeGroupArchived;
+  vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupArchived_20220908;
   booster_coverage: GmBoosterCoverage;
 }
 export interface GmStaticValues {
@@ -110,14 +111,14 @@ export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -130,6 +131,21 @@ export interface GmVaccineCoveragePerAgeGroupArchivedValue {
   has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface GmVaccineCoveragePerAgeGroupArchived_20220908 {
+  values: GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
+}
+export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
+  age_group_range: "12+" | "18+";
+  fully_vaccinated_percentage: number | null;
+  booster_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
+  birthyear_range: string;
+  fully_vaccinated_percentage_label: string | null;
+  booster_shot_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -183,13 +199,13 @@ export interface GmCollectionSewer {
 }
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -247,10 +263,14 @@ export interface Nl {
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_administered_last_week: NlVaccineAdministeredLastWeek;
   vaccine_campaigns: NlVaccineCampaigns;
+  vaccine_campaigns_archived_20220908: NlVaccineCampaignsArchived_20220908;
   vaccine_planned: NlVaccinePlanned;
+  vaccine_planned_archived_20220908: NlVaccinePlannedArchived_20220908;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: NlVaccineCoveragePerAgeGroupArchived;
+  vaccine_coverage_per_age_group_archived_20220908: NlVaccineCoveragePerAgeGroupArchived_20220908;
   vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
+  vaccine_coverage_per_age_group_estimated_archived_20220908: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value;
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
 }
@@ -914,7 +934,28 @@ export interface NlVaccineCampaign {
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
 }
+export interface NlVaccineCampaignsArchived_20220908 {
+  vaccine_campaigns: NlVaccineCampaignsArchived_202209081[];
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCampaignsArchived_202209081 {
+  vaccine_campaign_order: number;
+  vaccine_campaign_name_nl: string;
+  vaccine_campaign_name_en: string;
+  vaccine_administered_total: number;
+  vaccine_administered_last_week: number;
+}
 export interface NlVaccinePlanned {
+  doses: number;
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccinePlannedArchived_20220908 {
   doses: number;
   date_unix: number;
   date_start_unix: number;
@@ -928,12 +969,12 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_range: "5-11" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "60-69" | "70-79" | "80+";
   age_group_percentage: number;
   age_group_total: number;
+  autumn_2022_vaccinated: number;
   fully_vaccinated: number;
   booster_shot: number | null;
-  has_one_shot: number;
+  autumn_2022_vaccinated_percentage: number;
   fully_vaccinated_percentage: number;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -955,11 +996,46 @@ export interface NlVaccineCoveragePerAgeGroupArchivedValue {
   date_of_report_unix: number;
   birthyear_range: string;
 }
+export interface NlVaccineCoveragePerAgeGroupArchived_20220908 {
+  values: NlVaccineCoveragePerAgeGroupArchived_20220908Value[];
+}
+export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
+  age_group_range: "5-11" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "60-69" | "70-79" | "80+";
+  age_group_percentage: number;
+  age_group_total: number;
+  fully_vaccinated: number;
+  booster_shot: number | null;
+  has_one_shot: number | null;
+  fully_vaccinated_percentage: number;
+  booster_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+  birthyear_range: string;
+}
 export interface NlVaccineCoveragePerAgeGroupEstimatedValue {
   values: NlVaccineCoveragePerAgeGroupEstimated[];
   last_value: NlVaccineCoveragePerAgeGroupEstimated;
 }
 export interface NlVaccineCoveragePerAgeGroupEstimated {
+  age_60_plus_autumn_2022_vaccinated: number;
+  age_60_plus_birthyear: string;
+  age_18_plus_fully_vaccinated: number;
+  age_18_plus_has_one_shot?: number;
+  age_18_plus_birthyear: string;
+  age_12_plus_autumn_2022_vaccinated: number;
+  age_12_plus_fully_vaccinated: number;
+  age_12_plus_has_one_shot?: number;
+  age_12_plus_birthyear: string;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value {
+  values: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908 {
   age_18_plus_fully_vaccinated: number;
   age_18_plus_has_one_shot: number;
   age_18_plus_birthyear: string;
@@ -1248,6 +1324,7 @@ export interface Vr {
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: VrVaccineCoveragePerAgeGroupArchived;
+  vaccine_coverage_per_age_group_archived_20220908: VrVaccineCoveragePerAgeGroupArchived_20220908;
   booster_coverage: VrBoosterCoverage;
 }
 export interface VrStaticValues {
@@ -1530,14 +1607,14 @@ export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
-  has_one_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1550,6 +1627,21 @@ export interface VrVaccineCoveragePerAgeGroupArchivedValue {
   has_one_shot_percentage: number | null;
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
+  has_one_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrVaccineCoveragePerAgeGroupArchived_20220908 {
+  values: VrVaccineCoveragePerAgeGroupArchived_20220908Value[];
+}
+export interface VrVaccineCoveragePerAgeGroupArchived_20220908Value {
+  age_group_range: "12+" | "18+";
+  fully_vaccinated_percentage: number | null;
+  booster_shot_percentage: number | null;
+  has_one_shot_percentage: number | null;
+  birthyear_range: string;
+  fully_vaccinated_percentage_label: string | null;
+  booster_shot_percentage_label: string | null;
   has_one_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1692,13 +1784,13 @@ export interface VrCollectionSituations {
 }
 export interface VrCollectionVaccineCoveragePerAgeGroup {
   vrcode: string;
-  age_group_range: "12+" | "18+";
+  age_group_range: "12+" | "18+" | "60+";
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  has_one_shot_percentage: number | null;
   booster_shot_percentage: number | null;
   birthyear_range: string;
+  autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  has_one_shot_percentage_label: string | null;
   booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;

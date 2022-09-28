@@ -26,6 +26,7 @@
     "situations",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
+    "vaccine_coverage_per_age_group_archived_20220908",
     "booster_coverage"
   ],
   "additionalProperties": false,
@@ -101,6 +102,9 @@
     },
     "vaccine_coverage_per_age_group_archived": {
       "$ref": "vaccine_coverage_per_age_group_archived.json"
+    },
+    "vaccine_coverage_per_age_group_archived_20220908": {
+      "$ref": "vaccine_coverage_per_age_group_archived_20220908.json"
     },
     "booster_coverage": {
       "$ref": "booster_coverage.json"
