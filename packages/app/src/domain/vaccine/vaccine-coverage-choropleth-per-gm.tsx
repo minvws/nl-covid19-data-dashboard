@@ -227,11 +227,6 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
     commonTexts.common.age_groups;
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
 
-  const dataItemKey = data.dataConfig
-    .metricProperty as keyof VaccineCoverageData;
-  const filterBelow =
-    (dataItemKey === undefined ? null : data.dataItem[dataItemKey]) || null;
-
   const secondaryContent = mapData
     .sort((a, b) => {
       const age1 = Number(a.age_group_range.replace(/\D/g, ''));
@@ -246,6 +241,8 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
       if (!selectionMatchesAgeGroup) {
         return;
       }
+
+      const filterBelow = vrOrGmData[selectedCoverageKind];
 
       return (
         <TooltipSubject
