@@ -108,11 +108,11 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
               <Cell>
                 <WidePercentage
                   value={
-                    item.autumn_2022_vaccinated_percentage === null
-                      ? text.no_data
-                      : `${formatPercentage(
+                    item.autumn_2022_vaccinated_percentage
+                      ? `${formatPercentage(
                           item.autumn_2022_vaccinated_percentage
                         )}%`
+                      : text.no_data
                   }
                   color={COLOR_AUTUMN_2022_SHOT}
                   justifyContent="flex-end"
