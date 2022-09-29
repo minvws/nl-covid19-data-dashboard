@@ -341,7 +341,7 @@ const gmCollectionSchema = {
   properties: {
     testCollection: {
       type: 'array',
-      maxItems: 355,
+      maxItems: 344,
       items: {
         $ref: 'testCollection.json',
       },
@@ -437,7 +437,7 @@ const vrCollectionSchema = {
   properties: {
     testCollection: {
       type: 'array',
-      maxItems: 355,
+      maxItems: 344,
       items: {
         $ref: 'testCollection.json',
       },

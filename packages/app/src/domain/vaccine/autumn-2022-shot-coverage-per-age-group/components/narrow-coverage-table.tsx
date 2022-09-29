@@ -57,7 +57,7 @@ export const NarrowCoverageTable = ({
           <Box spacing={1}>
             <NarrowPercentage
               value={
-                item.autumn_2022_vaccinated_percentage
+                item.autumn_2022_vaccinated_percentage !== null
                   ? `${formatPercentage(
                       item.autumn_2022_vaccinated_percentage
                     )}%`

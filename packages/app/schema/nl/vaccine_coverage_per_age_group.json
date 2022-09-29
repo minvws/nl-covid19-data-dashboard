@@ -54,7 +54,7 @@
           "type": "integer"
         },
         "autumn_2022_vaccinated": {
-          "type": "integer"
+          "type":["integer", "null"]
         },
         "fully_vaccinated": {
           "type": "integer"
@@ -63,7 +63,7 @@
           "type": ["integer", "null"]
         },
         "autumn_2022_vaccinated_percentage": {
-          "type": "number"
+          "type": ["integer", "null"]
         },
         "fully_vaccinated_percentage": {
           "type": "number"

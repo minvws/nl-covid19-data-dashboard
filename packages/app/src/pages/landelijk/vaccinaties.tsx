@@ -69,20 +69,20 @@ import { useFeature } from '~/lib/features';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
-  'vaccine_administered_ggd_ghor',
-  'vaccine_administered_ggd',
   'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_planned',
   'vaccine_administered_total',
+  'vaccine_administered_last_week',
   'vaccine_coverage_per_age_group',
-  'vaccine_coverage_per_age_group_archived',
   'vaccine_coverage',
   'vaccine_delivery_per_supplier',
   'vaccine_stock',
   'vaccine_vaccinated_or_support',
   'vaccine_coverage_per_age_group_estimated',
-  'booster_shot_administered',
+  'vaccine_campaigns',
+  'vaccine_planned',
   'booster_coverage',
+  'booster_shot_administered',
   'repeating_shot_administered',
 ];
 
@@ -116,6 +116,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_campaigns',
     'vaccine_campaigns_archived_20220908',
     'vaccine_planned',
+    'vaccine_planned_archived_20220908',
     'booster_coverage',
     'booster_shot_administered',
     'repeating_shot_administered'
@@ -517,7 +518,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 description={replaceVariablesInText(
                   textNl.vaccine_campaigns.description_archived,
                   {
-                    vaccinePlanned: formatNumber(data.vaccine_planned.doses),
+                    vaccinePlanned: formatNumber(
+                      data.vaccine_planned_archived_20220908.doses
+                    ),
                   }
                 )}
                 descriptionFooter={textNl.vaccine_campaigns.description_footer}
