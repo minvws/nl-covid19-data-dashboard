@@ -293,7 +293,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     bar: {
                       value:
                         vaccineCoverageEstimated.age_60_plus_autumn_2022_vaccinated,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                   {
@@ -309,7 +309,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     bar: {
                       value:
                         vaccineCoverageEstimated.age_12_plus_autumn_2022_vaccinated,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                 ]}
@@ -346,7 +346,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     bar: {
                       value:
                         vaccineCoverageEstimated.age_18_plus_fully_vaccinated,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                   {
@@ -362,7 +362,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     bar: {
                       value:
                         vaccineCoverageEstimated.age_12_plus_fully_vaccinated,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                 ]}
