@@ -83,7 +83,7 @@
     "fast-csv": "^4.3.6",
     "lint-staged": "^11.2.6",
     "meow": "^9.0.0",
-    "ts-node": "^10.8.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.7.3"
   },
   "lint-staged": {

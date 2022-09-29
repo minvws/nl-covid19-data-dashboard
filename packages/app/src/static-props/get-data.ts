@@ -224,12 +224,10 @@ export function selectTopicalData(locale: keyof Languages) {
   return {
     version: topicalData.version,
     title: topicalData.title[localeKey],
-    dynamicDescription: topicalData.dynamicDescription.map(
-      (description) => {
-        return {
-          index: description.index,
-          content: description.content[localeKey] }}
-    ),
+    dynamicDescription: topicalData.dynamicDescription.map((description) => ({
+      index: description.index,
+      content: description.content[localeKey],
+    })),
     themes: topicalData.themes.map((theme) => ({
       index: theme.index,
       title: theme.title[localeKey],
@@ -241,15 +239,18 @@ export function selectTopicalData(locale: keyof Languages) {
         dynamicDescription: tile.dynamicDescription[localeKey],
         trendIcon: tile.trendIcon && {
           direction: tile.trendIcon.direction,
-          color: tile.trendIcon.color === 'GREEN' ? colors.data.multiseries.turquoise : tile.trendIcon.color === 'RED' ? colors.data.gradient.red : 'currentColor'
+          color:
+            tile.trendIcon.color === 'GREEN'
+              ? colors.data.multiseries.turquoise
+              : tile.trendIcon.color === 'RED'
+              ? colors.data.gradient.red
+              : 'currentColor',
         },
         tileIcon: tile.tileIcon,
-        cta: tile.cta
-          ? {
-              label: tile.cta.label[localeKey],
-              href: tile.cta.href[localeKey],
-            }
-          : null,
+        cta: tile.cta && {
+          label: tile.cta.label[localeKey],
+          href: tile.cta.href[localeKey],
+        },
       })),
       moreLinks: {
         label: {

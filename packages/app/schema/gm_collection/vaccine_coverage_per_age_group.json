@@ -6,12 +6,12 @@
   "required": [
     "gmcode",
     "age_group_range",
-    "fully_vaccinated_percentage",
-    "has_one_shot_percentage",
-    "booster_shot_percentage",
     "birthyear_range",
+    "autumn_2022_vaccinated_percentage",
+    "autumn_2022_vaccinated_percentage_label",
+    "fully_vaccinated_percentage",
     "fully_vaccinated_percentage_label",
-    "has_one_shot_percentage_label",
+    "booster_shot_percentage",
     "booster_shot_percentage_label",
     "date_of_insertion_unix",
     "date_unix"
@@ -23,12 +23,12 @@
     },
     "age_group_range": {
       "type": "string",
-      "enum": ["12+", "18+"]
+      "enum": ["12+", "18+", "60+"]
     },
-    "fully_vaccinated_percentage": {
+    "autumn_2022_vaccinated_percentage": {
       "type": ["integer", "null"]
     },
-    "has_one_shot_percentage": {
+    "fully_vaccinated_percentage": {
       "type": ["integer", "null"]
     },
     "booster_shot_percentage": {
@@ -38,11 +38,11 @@
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
     },
-    "fully_vaccinated_percentage_label": {
+    "autumn_2022_vaccinated_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },
-    "has_one_shot_percentage_label": {
+    "fully_vaccinated_percentage_label": {
       "type": ["string", "null"],
       "pattern": "^([><][=][0-9]{1,2})$"
     },

@@ -8,31 +8,25 @@ import { Text } from '~/components/typography';
 import { asResponsiveArray } from '~/style/utils';
 import { v4 as uuidv4 } from 'uuid';
 
-type TopicalThemeLink = {
+interface TopicalLink {
   index: number;
   label: string;
   href: string;
-};
+}
 
-type MoreLinks = {
-  label: {
+interface TopicalLinksListProps {
+  labels: {
     DESKTOP: string;
     MOBILE: string;
   };
-  links: TopicalThemeLink[];
-};
-
-interface SubjectsListProps {
-  moreLinks: MoreLinks;
+  links: TopicalLink[];
 }
 
-export const SubjectsList = ({ moreLinks }: SubjectsListProps) => {
+export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
   const breakpoints = useBreakpointsAsync();
 
   // Prevents flickering; don't show anything until breakpoints are loaded
-  if (!breakpoints) {
-    return null;
-  }
+  if (!breakpoints) return null;
 
   const labelledById = uuidv4();
 
@@ -51,7 +45,7 @@ export const SubjectsList = ({ moreLinks }: SubjectsListProps) => {
           marginRight: asResponsiveArray({ _: 0, sm: 4 }),
         })}
       >
-        {breakpoints.sm ? moreLinks.label.DESKTOP : moreLinks.label.MOBILE}
+        {breakpoints.sm ? labels.DESKTOP : labels.MOBILE}
       </Text>
       <ul
         aria-labelledby={labelledById}
@@ -65,15 +59,15 @@ export const SubjectsList = ({ moreLinks }: SubjectsListProps) => {
           padding: 0,
         })}
       >
-        {moreLinks.links
-          .sort((a, b) => a.index - b.index)
+        {links
+          .sort((linkA, linkB) => linkA.index - linkB.index)
           .map((link) => (
             <li key={link.label}>
               <LinkWithIcon
                 href={link.href}
                 icon={<ChevronRight />}
                 iconPlacement="right"
-                showAsButton={true}
+                showAsButton={breakpoints.sm}
               >
                 {link.label}
               </LinkWithIcon>

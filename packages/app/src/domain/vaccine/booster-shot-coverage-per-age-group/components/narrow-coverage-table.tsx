@@ -12,9 +12,9 @@ import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import {
-  GmVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoveragePerAgeGroupArchived_20220908Value,
+  VrVaccineCoveragePerAgeGroupArchived_20220908Value,
+  GmVaccineCoveragePerAgeGroupArchived_20220908Value,
 } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 
@@ -22,11 +22,11 @@ export function NarrowCoverageTable({
   values,
   text,
 }: {
-  text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
+  text: SiteText['pages']['vaccinations_page']['nl'];
   values:
-    | NlVaccineCoveragePerAgeGroupValue[]
-    | VrVaccineCoveragePerAgeGroupValue[]
-    | GmVaccineCoveragePerAgeGroupValue[];
+    | NlVaccineCoveragePerAgeGroupArchived_20220908Value[]
+    | VrVaccineCoveragePerAgeGroupArchived_20220908Value[]
+    | GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
 }) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
@@ -34,7 +34,9 @@ export function NarrowCoverageTable({
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="silver" pb={2}>
-        <BoldText variant="label1">{text.headers.agegroup}</BoldText>
+        <BoldText variant="label1">
+          {text.vaccination_coverage.headers.agegroup}
+        </BoldText>
       </Box>
 
       {values.map((item, index) => (
@@ -72,7 +74,7 @@ export function NarrowCoverageTable({
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
               color={COLOR_FULLY_VACCINATED}
-              textLabel={text.headers.fully_vaccinated}
+              textLabel={text.vaccination_coverage.headers.fully_vaccinated}
             />
 
             <Bar
@@ -94,11 +96,13 @@ export function NarrowCoverageTable({
                 'booster_shot_percentage_label' in item
                   ? formatCoveragePercentage(item, 'booster_shot_percentage')
                   : item.booster_shot_percentage === null
-                  ? text.no_data
+                  ? text.vaccination_coverage.no_data
                   : `${formatPercentage(item.booster_shot_percentage)}%`
               }
               color={COLOR_FULLY_BOOSTERED}
-              textLabel={text.headers.booster_shot}
+              textLabel={
+                text.archived.vaccination_coverage.headers.booster_shot
+              }
             />
 
             <Bar

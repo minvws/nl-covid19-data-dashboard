@@ -1,28 +1,20 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_coverage_per_age_group_estimated",
+      "title": "nl_vaccine_coverage_per_age_group_estimated_archived_20220908",
       "type": "object",
       "required": [
-        "age_60_plus_autumn_2022_vaccinated",
-        "age_60_plus_birthyear",
         "age_18_plus_fully_vaccinated",
+        "age_18_plus_has_one_shot",
         "age_18_plus_birthyear",
-        "age_12_plus_autumn_2022_vaccinated",
         "age_12_plus_fully_vaccinated",
+        "age_12_plus_has_one_shot",
         "age_12_plus_birthyear",
         "date_of_insertion_unix",
         "date_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "age_60_plus_autumn_2022_vaccinated": {
-          "type": "number"
-        },
-        "age_60_plus_birthyear": {
-          "type": "string",
-          "pattern": "^-[0-9]{4}"
-        },
         "age_18_plus_fully_vaccinated": {
           "type": "number"
         },
@@ -32,9 +24,6 @@
         "age_18_plus_birthyear": {
           "type": "string",
           "pattern": "^-[0-9]{4}"
-        },
-        "age_12_plus_autumn_2022_vaccinated": {
-          "type": "number"
         },
         "age_12_plus_fully_vaccinated": {
           "type": "number"
@@ -56,7 +45,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_coverage_per_age_group_estimated_value",
+  "title": "nl_vaccine_coverage_per_age_group_estimated_archived_20220908_value",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

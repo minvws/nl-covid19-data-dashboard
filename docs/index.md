@@ -26,3 +26,4 @@
 ## Miscelaneous
 
 - [Developer notes](developers.md)
+- [Choropleth data](choropleth-data.md)
