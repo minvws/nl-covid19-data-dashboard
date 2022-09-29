@@ -108,7 +108,7 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
               <Cell>
                 <WidePercentage
                   value={
-                    item.autumn_2022_vaccinated_percentage
+                    item.autumn_2022_vaccinated_percentage !== null
                       ? `${formatPercentage(
                           item.autumn_2022_vaccinated_percentage
                         )}%`

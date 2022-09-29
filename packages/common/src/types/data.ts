@@ -972,7 +972,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   autumn_2022_vaccinated: number;
   fully_vaccinated: number;
   booster_shot: number | null;
-  autumn_2022_vaccinated_percentage: number;
+  autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number;
   booster_shot_percentage: number | null;
   date_unix: number;
