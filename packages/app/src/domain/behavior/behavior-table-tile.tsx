@@ -305,7 +305,7 @@ const HeaderCell = styled.th(
 
 const Cell = styled.td(
   css({
-    borderBottom: '1px solid' + colors.gray2,
+    borderBottom: `1px solid ${colors.gray2}`,
     p: 0,
     py: 2,
     verticalAlign: 'middle',

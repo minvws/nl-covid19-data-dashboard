@@ -125,7 +125,7 @@ const StyledLabel = styled.label<{
     py: 1,
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${
-      isActive ? '3px ' + borderColor : '1px ' + colors.gray4
+      isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`
     }`,
     fontWeight: 'normal',
     fontFamily: 'inherit',

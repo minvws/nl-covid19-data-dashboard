@@ -66,7 +66,7 @@ const Container = styled.article(
     pt: asResponsiveArray({ _: 2, sm: 3 }),
     pb: asResponsiveArray({ _: 3, sm: 4 }),
     flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
-    borderTop: 'solid 2px' + colors.gray2,
+    borderTop: `solid 2px ${colors.gray2}`,
   })
 );
 

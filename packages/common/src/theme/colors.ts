@@ -24,7 +24,7 @@ type Join<T extends string[], D extends string> = T extends []
   ? F extends string
     ? `${F}${D}${Join<Extract<R, string[]>, D>}`
     : never
-  : string; 
+  : string;
 
 type ColorsWithoutRanges = O.Omit<typeof colors, 'scale'>;
 export type Color = Join<PathsToStringProps<ColorsWithoutRanges>, '.'>;

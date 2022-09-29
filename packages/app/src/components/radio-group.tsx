@@ -23,7 +23,7 @@ const StyledInput = styled.input(
       borderColor: 'blue8',
     },
     '&:focus-visible + label': {
-      outline: '2px dotted' + colors.magenta3,
+      outline: `2px dotted ${colors.magenta3}`,
     },
   })
 );
@@ -35,7 +35,7 @@ const StyledLabel = styled.label(
     textAlign: 'center',
     p: asResponsiveArray({ _: '0.25rem 0.5rem', xs: '0.3rem 1rem' }),
     borderRadius: '5px 0 0 5px',
-    border: '1px solid' + colors.gray3,
+    border: `1px solid ${colors.gray3}`,
     borderRightWidth: 0,
     whiteSpace: 'nowrap',
     cursor: 'pointer',
