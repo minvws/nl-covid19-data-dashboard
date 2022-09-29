@@ -156,6 +156,6 @@ const MotionChevron = styled(m(ChevronRight))(
     height: '0.9em',
     width: '1.5em',
     display: 'inline-block',
-    color: 'blue',
+    color: 'blue8',
   })
 );

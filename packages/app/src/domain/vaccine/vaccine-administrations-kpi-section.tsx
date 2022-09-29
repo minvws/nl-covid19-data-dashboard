@@ -147,7 +147,7 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
         {' ' + description}
       </BoldText>
 
-      <Text variant="label1" color="annotation">
+      <Text variant="label1" color="gray7">
         {replaceVariablesInText(
           isReported ? text.reported_until : text.estimated_until,
           {

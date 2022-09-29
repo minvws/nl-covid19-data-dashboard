@@ -91,7 +91,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                   areaStrokeWidth: 1,
                   hoverFill: colors.white,
                   hoverStrokeWidth: 3,
-                  noDataFillColor: colors.lightGray,
+                  noDataFillColor: colors.gray2,
                 }}
                 dataOptions={{
                   getLink: reverseRouter.gm.index,

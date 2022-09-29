@@ -33,14 +33,14 @@ export function DeceasedMonitorSection({
               metricProperty: 'expected',
               label: text.deceased_monitor_chart_legenda_expected,
               shortLabel: text.deceased_monitor_chart_legenda_expected_short,
-              color: colors.data.primary,
+              color: colors.primary,
             },
             {
               type: 'line',
               metricProperty: 'registered',
               label: text.deceased_monitor_chart_legenda_registered,
               shortLabel: text.deceased_monitor_chart_legenda_registered_short,
-              color: colors.data.secondary,
+              color: colors.secondary,
               strokeWidth: 4,
             },
             {
@@ -50,7 +50,7 @@ export function DeceasedMonitorSection({
               label: text.deceased_monitor_chart_legenda_expected_margin,
               shortLabel:
                 text.deceased_monitor_chart_legenda_expected_margin_short,
-              color: colors.data.margin,
+              color: colors.blue2,
             },
           ]}
         />

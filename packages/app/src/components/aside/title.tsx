@@ -43,7 +43,7 @@ export function AsideTitle(props: TitleProps) {
               <ChevronRight
                 width={16}
                 height={20}
-                css={css({ color: 'blue' })}
+                css={css({ color: 'blue8' })}
               />
             )}
           </span>

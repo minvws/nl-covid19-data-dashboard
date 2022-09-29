@@ -119,7 +119,7 @@ const Unavailable = styled.span(
   css({
     display: 'block',
     padding: 2,
-    color: 'gray',
+    color: 'gray5',
 
     svg: {
       fill: 'currentColor',
@@ -133,16 +133,16 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
     pl: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
-    color: anchorProps.isActive ? 'blue' : 'black',
+    color: anchorProps.isActive ? 'blue8' : 'black',
     fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
-    bg: anchorProps.isActive ? 'lightBlue' : 'transparent',
+    bg: anchorProps.isActive ? 'blue1' : 'transparent',
     borderRightColor: anchorProps.isActive
-      ? 'sidebarLinkBorder'
+      ? 'blue8'
       : 'transparent',
 
     '&:hover, &:focus': {
-      bg: 'blue',
+      bg: 'blue8',
       color: 'white',
       fontWeight: 'bold',
       svg: {

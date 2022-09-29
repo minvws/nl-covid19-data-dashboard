@@ -169,7 +169,7 @@ const StyledComboboxOption = styled(ComboboxOption)<{
   $isSelectedOption: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
 }>`
   border-left: ${(x) =>
-    x.$isSelectedOption ? `5px solid ${x.theme.colors.blue}` : '0'};
+    x.$isSelectedOption ? `5px solid ${x.theme.colors.blue8}` : '0'};
 
   span:first-child {
     display: inline-block;
@@ -200,7 +200,7 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-popover] {
-  border: 1px solid ${(x) => x.theme.colors.icon};
+  border: 1px solid ${(x) => x.theme.colors.blue8};
   border-top: none;
   border-radius: 0 0 5px 5px;
   z-index: 100;
@@ -227,14 +227,14 @@ const ComboBoxStyles = createGlobalStyle`
   padding-left: 2.5em;
   font-family: inherit;
   font-size: ${(x) => x.theme.fontSizes[2]} ;
-  border: 1px solid ${(x) => x.theme.colors.silver};
+  border: 1px solid ${(x) => x.theme.colors.gray3};
   border-radius: 5px;
 }
 
 [data-reach-combobox-input]:focus,
 [data-reach-combobox-input][data-state="interacting"] {
-  border-color: ${(x) => x.theme.colors.icon};
-  border-bottom: 1px solid ${(x) => x.theme.colors.silver};
+  border-color: ${(x) => x.theme.colors.blue8};
+  border-bottom: 1px solid ${(x) => x.theme.colors.gray3};
   border-radius: 5px 5px 0 0;
   outline: none;
 }
@@ -245,7 +245,7 @@ const ComboBoxStyles = createGlobalStyle`
 
 [data-reach-combobox-option]:hover, [data-reach-combobox-option]:focus {
   color: ${(x) => x.theme.colors.white};
-  background: ${(x) => x.theme.colors.blue};
+  background: ${(x) => x.theme.colors.blue8};
 }
 
 [data-reach-combobox-option] span {

@@ -92,7 +92,7 @@ export function WeekNumbers({
           scale={xScale}
           numTicks={weekGridLines.length}
           tickValues={weekGridLines}
-          stroke={colors.lightGray}
+          stroke={colors.gray2}
           width={bounds.width}
           strokeDasharray="4 2"
         />
@@ -101,10 +101,10 @@ export function WeekNumbers({
           scale={xScale}
           tickValues={weekNumberLabels}
           tickFormat={formatWeekNumberAxis}
-          stroke={colors.silver}
+          stroke={colors.gray3}
           hideTicks
           tickLabelProps={() => ({
-            fill: colors.data.axisLabels,
+            fill: colors.gray6,
             fontSize: 12,
             textAnchor: 'middle',
             transform: `translate(${weekRenderWidth / 2} 0)`,

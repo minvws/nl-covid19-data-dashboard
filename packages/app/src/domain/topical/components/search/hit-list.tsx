@@ -51,7 +51,7 @@ export function HitList({ scope }: HitListProps) {
         </StyledHitList>
       ) : (
         <NoResultMessage>
-          <Text color="gray">{noHitsMessage}</Text>
+          <Text color="gray5">{noHitsMessage}</Text>
         </NoResultMessage>
       )}
     </Box>
@@ -115,20 +115,20 @@ const StyledHitLink = styled(Anchor)(
       top: 0,
       height: '100%',
       width: '5px',
-      backgroundColor: 'blue',
+      backgroundColor: 'blue8',
       transform: 'scaleX(0)',
       transformOrigin: 'left',
       transition: '0.2s transform',
     },
     '&[aria-current="true"]': {
-      color: 'blue',
+      color: 'blue8',
       fontWeight: 'bold',
       '&:before': {
         transform: 'scaleX(1)',
       },
     },
     '&:hover': {
-      bg: 'blue',
+      bg: 'blue8',
       color: 'white',
       fontWeight: 'normal',
     },

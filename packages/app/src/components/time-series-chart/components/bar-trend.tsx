@@ -85,7 +85,7 @@ export function BarTrend({
                   id="diagonal-pattern"
                   height={6}
                   width={6}
-                  stroke={colors.data.neutral}
+                  stroke={colors.neutral}
                   strokeWidth={2}
                   orientation={['diagonal']}
                 />

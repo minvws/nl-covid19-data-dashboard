@@ -67,7 +67,7 @@ export function ReproductionChartTile({
             type: 'line',
             metricProperty: 'index_average',
             label: text.lineLegendLabel,
-            color: colors.data.primary,
+            color: colors.primary,
             minimumRange:
               metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
           },

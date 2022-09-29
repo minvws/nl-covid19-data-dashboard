@@ -7,6 +7,7 @@ import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useUniqueId } from '~/utils/use-unique-id';
+import { colors } from '@corona-dashboard/common';
 
 interface searchInputProps {
   value: string;
@@ -75,7 +76,7 @@ const StyledSearchInput = styled.input(
     display: 'block',
 
     width: '100%',
-    border: `1px solid silver`,
+    border: `1px solid ${colors.gray3}`,
     py: 2,
     pl: '36px',
 
@@ -112,6 +113,6 @@ const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
 
     background: 'none',
 
-    color: x.align === 'left' ? 'labelGray' : 'icon',
+    color: x.align === 'left' ? 'gray6' : 'gray8',
   })
 );

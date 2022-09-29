@@ -32,7 +32,7 @@ export function VaccinationsKpiHeader({
   dateOfInsertionUnix,
 }: VaccineKpiHeaderProps) {
   return (
-    <Box pt={40} borderTopWidth={2} borderColor="silver" borderStyle="solid">
+    <Box pt={40} borderTopWidth={2} borderColor="gray3" borderStyle="solid">
       <PageInformationBlock
         icon={<BoosterIcon />}
         title={text.title}

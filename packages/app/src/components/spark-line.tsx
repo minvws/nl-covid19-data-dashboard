@@ -79,7 +79,7 @@ export function SparkLine<T extends TimestampedValue>(
         data={nonNullValues}
         x={getX}
         y={getY}
-        stroke={colors.data.primary}
+        stroke={colors.primary}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -88,7 +88,7 @@ export function SparkLine<T extends TimestampedValue>(
         data={nonNullValues}
         x={getX}
         y={getY}
-        fill={colors.data.primary}
+        fill={colors.primary}
         fillOpacity={0.3}
         yScale={yScale}
       />
@@ -97,7 +97,7 @@ export function SparkLine<T extends TimestampedValue>(
           cx={getX(lastValue)}
           cy={getY(lastValue)}
           r={MARKER_RADIUS}
-          fill={colors.data.primary}
+          fill={colors.primary}
         />
       )}
     </svg>

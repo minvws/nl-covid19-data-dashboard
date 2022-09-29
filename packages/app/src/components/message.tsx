@@ -14,12 +14,12 @@ interface MessageProps {
 const theme: Record<Variant, { backgroundColor: string; borderColor: string }> =
   {
     warning: {
-      backgroundColor: '#FFFADE',
-      borderColor: '#FFE766',
+      backgroundColor: 'yellow1',
+      borderColor: 'yellow2',
     },
     message: {
-      backgroundColor: 'lightGray',
-      borderColor: '#555555',
+      backgroundColor: 'gray2',
+      borderColor: 'gray7',
     },
   };
 

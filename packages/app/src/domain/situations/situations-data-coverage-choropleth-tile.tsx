@@ -60,7 +60,7 @@ export function SituationsDataCoverageChoroplethTile({
           <Spacer mb={4} />
           <Box spacing={3}>
             <LegendItem
-              color="data.primary"
+              color="primary"
               icon={<Check />}
               title={
                 text.situaties_kaarten_uitkomsten.legenda.voldoende_data.titel
@@ -71,7 +71,7 @@ export function SituationsDataCoverageChoroplethTile({
               }
             />
             <LegendItem
-              color="gray"
+              color="gray5"
               icon={<Cross />}
               title={
                 text.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.titel

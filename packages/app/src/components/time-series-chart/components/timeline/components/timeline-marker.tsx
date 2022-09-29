@@ -23,12 +23,12 @@ export function TimelineMarker({
       <div style={{ width: size, height: size }}>
         <StyledPointMarker
           size={innerPointSize}
-          color={colors.data.primary}
+          color={colors.primary}
           initial={false}
           $borderWidth={borderWidth}
           transition={{ ease: 'easeOut' }}
           animate={{
-            boxShadow: `0 0 0 ${highlightBorderWidth}px ${colors.data.primary}`,
+            boxShadow: `0 0 0 ${highlightBorderWidth}px ${colors.primary}`,
           }}
         />
       </div>

@@ -75,12 +75,12 @@ export function GNumberBarChartTile({
             fillOpacity: 1,
             splitPoints: [
               {
-                color: colors.data.primary,
+                color: colors.primary,
                 value: 0,
                 label: text.legend.negative_label,
               },
               {
-                color: colors.red,
+                color: colors.red2,
                 value: Infinity,
                 label: text.legend.positive_label,
               },

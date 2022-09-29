@@ -160,7 +160,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <Spacer mb={5} />
 
-        <Box width="100%" backgroundColor="offWhite" py={5}>
+        <Box width="100%" backgroundColor="gray1" py={5}>
           <Box py={4} px={{ _: 3, sm: 4 }}>
             <Search title={textShared.secties.search.title.nl} />
           </Box>

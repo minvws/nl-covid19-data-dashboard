@@ -13,7 +13,7 @@ export function TimelineBar({ children, width, height }: TimelineBarProps) {
   return (
     <Box
       position="relative"
-      bg={transparentize(0.8, colors.data.primary)}
+      bg={transparentize(0.8, colors.primary)}
       style={{ width, height }}
       display="flex"
       alignItems="center"
@@ -21,7 +21,7 @@ export function TimelineBar({ children, width, height }: TimelineBarProps) {
       <Box
         style={{ width }}
         borderTop="1px solid"
-        borderTopColor={colors.data.primary}
+        borderTopColor={colors.primary}
       />
       <Box position="absolute" top={0} right={0} bottom={0} left={0}>
         {children}
@@ -45,7 +45,7 @@ export function DottedTimelineBar({
       <Box
         style={{ width }}
         borderTop="1px dotted"
-        borderTopColor={colors.data.primary}
+        borderTopColor={colors.primary}
       />
       <Box position="absolute" top={0} right={0} bottom={0} left={0}>
         {children}

@@ -212,7 +212,7 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textVr.section_deceased_rivm
                       .line_chart_covid_daily_legend_trend_short_label_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
@@ -223,7 +223,7 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textVr.section_deceased_rivm
                       .line_chart_covid_daily_legend_trend_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

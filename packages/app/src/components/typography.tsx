@@ -72,7 +72,7 @@ export const Anchor = styled.a<AnchorProps>(
   (props) =>
     props.hoverColor &&
     css({
-      '&:hover,&:focus': { color: 'blue' },
+      '&:hover,&:focus': { color: 'blue8' },
     }),
   (props) =>
     props.display &&

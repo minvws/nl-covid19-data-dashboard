@@ -685,7 +685,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         textNl.grafiek_draagvlak.leeftijd_jaar,
                         { ageGroup: '70+' }
                       ),
-                      color: colors.data.multiseries.magenta,
+                      color: colors.magenta1,
                     },
                     {
                       type: 'line',
@@ -694,7 +694,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         textNl.grafiek_draagvlak.leeftijd_jaar,
                         { ageGroup: '55 - 69' }
                       ),
-                      color: colors.data.multiseries.orange,
+                      color: colors.orange1,
                     },
                     {
                       type: 'line',
@@ -703,7 +703,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         textNl.grafiek_draagvlak.leeftijd_jaar,
                         { ageGroup: '40 - 54' }
                       ),
-                      color: colors.data.multiseries.turquoise,
+                      color: colors.green2,
                     },
                     {
                       type: 'line',
@@ -712,7 +712,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         textNl.grafiek_draagvlak.leeftijd_jaar,
                         { ageGroup: '25 - 39' }
                       ),
-                      color: colors.data.multiseries.yellow,
+                      color: colors.yellow3,
                     },
                     {
                       type: 'line',
@@ -721,7 +721,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                         textNl.grafiek_draagvlak.leeftijd_jaar,
                         { ageGroup: '16 - 24' }
                       ),
-                      color: colors.data.multiseries.cyan,
+                      color: colors.blue6,
                     },
                     {
                       type: 'invisible',

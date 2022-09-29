@@ -39,7 +39,7 @@ export function SituationsOverTimeChart({
   const staticLegendItems: LegendItem[] = [
     {
       shape: 'square',
-      color: colors.data.underReported,
+      color: colors.gray2,
       label: text.situaties_over_tijd_grafiek.legenda.onvoldoende_gegevens,
     },
   ];
@@ -100,23 +100,23 @@ export function SituationsOverTimeChart({
 }
 
 const {
-  cyan,
-  turquoise,
-  turquoise_dark,
-  yellow,
-  yellow_dark,
-  orange,
-  orange_dark,
-  magenta,
-} = colors.data.multiseries;
+  blue6,
+  green2,
+  green3,
+  yellow3,
+  yellow5,
+  orange1,
+  orange2,
+  magenta1,
+} = colors;
 
 const seriesColors: Record<SituationKey, string> = {
-  home_and_visits: cyan,
-  work: turquoise,
-  school_and_day_care: turquoise_dark,
-  health_care: yellow,
-  gathering: yellow_dark,
-  travel: orange,
-  hospitality: orange_dark,
-  other: magenta,
+  home_and_visits: blue6,
+  work: green2,
+  school_and_day_care: green3,
+  health_care: yellow3,
+  gathering: yellow5,
+  travel: orange1,
+  hospitality: orange2,
+  other: magenta1,
 };

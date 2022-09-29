@@ -47,10 +47,10 @@ export function TopicalTile({
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
-      color="#000000"
+      color="black"
       css={css({
         '&:hover .topical-tile-cta': {
-          bg: colors.blue,
+          bg: colors.blue8,
           textDecoration: 'underline',
           color: colors.white,
         },
@@ -68,7 +68,7 @@ export function TopicalTile({
             <Box display="block" fontSize={{ _: 6, xs: 7 }}>
               <Heading
                 level={3}
-                color={colors.blue}
+                color={colors.blue8}
                 css={css({
                   display: 'flex',
                   justifyContent: 'start',
@@ -112,8 +112,8 @@ export function TopicalTile({
             display="flex"
             justifyContent="center"
             alignItems="center"
-            bg={colors.lightBlue}
-            color={colors.blue}
+            bg={colors.blue1}
+            color={colors.blue8}
             padding={3}
             className="topical-tile-cta"
             css={css({
@@ -137,7 +137,7 @@ const TrendIconWrapper = styled.span`
 `;
 
 const TileIcon = styled.span`
-  background-color: ${colors.blue};
+  background-color: ${colors.blue8};
   border-bottom-left-radius: ${space[1]};
   color: ${colors.white};
   height: 40px;

@@ -45,25 +45,25 @@ export function VaccineStockPerSupplierChart({
   const optionsConfig: SelectOption[] = [
     {
       metricProperty: 'bio_n_tech_pfizer',
-      color: colors.data.vaccines.bio_n_tech_pfizer,
+      color: colors.vaccines.bio_n_tech_pfizer,
       label: productNames.pfizer,
       shape: 'circle',
     },
     {
       metricProperty: 'moderna',
-      color: colors.data.vaccines.moderna,
+      color: colors.vaccines.moderna,
       label: productNames.moderna,
       shape: 'circle',
     },
     {
       metricProperty: 'astra_zeneca',
-      color: colors.data.vaccines.astra_zeneca,
+      color: colors.vaccines.astra_zeneca,
       label: productNames.astra_zeneca,
       shape: 'circle',
     },
     {
       metricProperty: 'janssen',
-      color: colors.data.vaccines.janssen,
+      color: colors.vaccines.janssen,
       label: productNames.janssen,
       shape: 'circle',
     },
@@ -100,7 +100,7 @@ export function VaccineStockPerSupplierChart({
         }
       ),
       shortLabel: text.stock_per_supplier_chart.tooltip_labels.total,
-      color: colors.lightGray,
+      color: colors.gray2,
       curve: 'step',
     },
   ];

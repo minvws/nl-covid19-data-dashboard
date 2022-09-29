@@ -9,7 +9,7 @@ export function NoPercentageData({ text }: NoPercentageDataProps) {
   return (
     <InlineTooltip
       content={text.geen_percentage_cijfer_tooltip}
-      color="bodyLight"
+      color="gray7"
       fontSize={1}
     >
       {text.geen_percentage_cijfer}

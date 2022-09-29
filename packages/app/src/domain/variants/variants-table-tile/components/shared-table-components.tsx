@@ -13,7 +13,7 @@ export const HeaderCell = styled.th(
     textAlign: 'left',
     fontWeight: 'normal',
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGray',
+    borderBottomColor: 'gray2',
     verticalAlign: 'top',
   })
 );
@@ -30,7 +30,7 @@ export const Cell = styled.td<{
     float: x.alignRight ? 'right' : undefined,
     maxWidth: x.narrow ? '2rem' : undefined,
     borderBottom: x.border || !x.mobile ? '1px solid' : undefined,
-    borderBottomColor: x.border || !x.mobile ? 'lightGray' : undefined,
+    borderBottomColor: x.border || !x.mobile ? 'gray2' : undefined,
     verticalAlign: 'top',
   })
 );

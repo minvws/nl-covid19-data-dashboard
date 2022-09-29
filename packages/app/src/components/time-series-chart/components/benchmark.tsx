@@ -21,7 +21,7 @@ interface BenchmarkProps {
   xRangePadding?: number;
 }
 
-const color = colors.data.benchmark;
+const color = colors.gray8;
 
 export function Benchmark({
   top,

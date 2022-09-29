@@ -153,7 +153,7 @@ function ChoroplethBlock({
             dataConfig={{
               metricName: 'behavior',
               metricProperty,
-              noDataFillColor: colors.offWhite,
+              noDataFillColor: colors.gray1,
             }}
             dataOptions={{
               getLink: reverseRouter.vr.gedrag,

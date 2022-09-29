@@ -153,7 +153,7 @@ const NavWrapper = styled.nav(
 
 const NavList = styled.ul(
   css({
-    borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+    borderTop: '1px solid white',
     listStyle: 'none',
     padding: 0,
     margin: 0,
@@ -172,7 +172,7 @@ const NavList = styled.ul(
 const StyledListItem = styled.li(
   css({
     '&:not(:first-child)': {
-      borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+      borderTop: '1px solid white',
       borderTopWidth: '1px',
 
       [`@media ${wideNavBreakpoint}`]: {

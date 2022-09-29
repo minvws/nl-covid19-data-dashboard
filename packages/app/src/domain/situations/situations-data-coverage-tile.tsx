@@ -65,7 +65,7 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
     fontWeight: 600,
     lineHeight: 1,
     fontVariantNumeric: 'tabular-nums',
-    color: x.hasSufficientData ? 'data.primary' : 'gray',
+    color: x.hasSufficientData ? 'primary' : 'gray5',
   })
 );
 

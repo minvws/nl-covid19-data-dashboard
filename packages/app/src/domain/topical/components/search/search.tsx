@@ -64,10 +64,10 @@ export function Search({
 
                   <Box
                     display={context.showResults ? 'block' : 'none'}
-                    borderColor="blue"
+                    borderColor="blue8"
                     borderStyle="solid"
                     borderWidth="1px"
-                    borderTopColor="border"
+                    borderTopColor="gray3"
                     borderRadius={1}
                     borderTopLeftRadius={0}
                     borderTopRightRadius={0}

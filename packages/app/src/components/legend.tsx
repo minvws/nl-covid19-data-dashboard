@@ -67,7 +67,7 @@ const List = styled.ul<{ columns?: number }>(({ columns }) =>
     px: 0,
     m: 0,
     fontSize: 1,
-    color: 'annotation',
+    color: 'gray7',
     columns,
     ...(columns === 1 && { display: 'flex', flexDirection: 'column' }),
   })
@@ -145,7 +145,7 @@ const OutlinedSquare = styled(Shape)(
     top: '3px',
     width: '15px',
     height: '15px',
-    borderColor: colors.labelGray,
+    borderColor: colors.gray6,
     borderWidth: '1px',
     borderStyle: 'solid',
     borderRadius: '2px',

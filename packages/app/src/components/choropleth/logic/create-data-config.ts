@@ -23,10 +23,10 @@ export function createDataConfig<T extends ChoroplethDataItem>(
       areaStroke: colors.white,
       areaStrokeWidth: 1,
       hoverFill: colors.white,
-      hoverStroke: colors.choroplethFeatureStroke,
+      hoverStroke: colors.white,
       hoverStrokeWidth: 3,
-      noDataFillColor: colors.lightGray,
-      highlightStroke: colors.choroplethHighlightStroke,
+      noDataFillColor: colors.gray2,
+      highlightStroke: colors.black,
       highlightStrokeWidth: DEFAULT_HOVER_STROKE_WIDTH,
     } as DataConfig<T>;
   }
@@ -34,17 +34,17 @@ export function createDataConfig<T extends ChoroplethDataItem>(
     metricName: partialDataConfig.metricName ?? '',
     metricProperty: partialDataConfig.metricProperty,
     noDataFillColor:
-      partialDataConfig.noDataFillColor ?? colors.choroplethNoData,
+      partialDataConfig.noDataFillColor ?? colors.white,
     hoverFill: partialDataConfig.hoverFill ?? 'none',
     hoverStroke:
-      partialDataConfig.hoverStroke ?? colors.choroplethFeatureStroke,
+      partialDataConfig.hoverStroke ?? colors.white,
     hoverStrokeWidth:
       partialDataConfig.hoverStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
     highlightStroke:
-      partialDataConfig.highlightStroke ?? colors.choroplethHighlightStroke,
+      partialDataConfig.highlightStroke ?? colors.white,
     highlightStrokeWidth:
       partialDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
-    areaStroke: partialDataConfig.areaStroke ?? colors.choroplethFeatureStroke,
+    areaStroke: partialDataConfig.areaStroke ?? colors.white,
     areaStrokeWidth: partialDataConfig.areaStrokeWidth ?? DEFAULT_STROKE_WIDTH,
   } as DataConfig<T>;
 }

@@ -14,7 +14,7 @@ export const SelectBox = styled(Box)(
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderColor: 'silver',
+    borderColor: 'gray3',
     borderStyle: 'solid',
     borderRadius: (theme) => theme.radii[1],
     minHeight: '36px',
@@ -25,9 +25,9 @@ export const SelectBox = styled(Box)(
     px: 3,
     '&[aria-expanded="true"]': {
       bg: 'white',
-      color: 'body',
+      color: 'black',
       borderRadius: '5px 5px 0 0',
-      borderColor: 'blue',
+      borderColor: 'blue8',
       '&:after': {
         content: 'attr(data-color)',
         position: 'absolute',
@@ -35,19 +35,19 @@ export const SelectBox = styled(Box)(
         right: '1px',
         bottom: 0,
         borderBottom: '1px solid',
-        borderColor: 'silver',
+        borderColor: 'gray3',
       },
     },
     '&:hover, &:focus': {
-      bg: 'tileGray',
+      bg: 'gray1',
     },
     '&:hover': {
-      color: 'blue',
-      borderColor: 'blue',
+      color: 'blue8',
+      borderColor: 'blue8',
     },
     '&:focus': {
       bg: 'white',
-      color: 'body',
+      color: 'black',
     },
   })
 );
@@ -61,7 +61,7 @@ export const ListBox = styled(Box)(
     width: '100%',
     overflowY: 'auto',
     maxHeight: '20rem',
-    borderColor: 'blue',
+    borderColor: 'blue8',
     borderStyle: 'solid',
     borderWidth: 1,
     borderTopWidth: 0,
@@ -70,7 +70,7 @@ export const ListBox = styled(Box)(
     [`${SelectBox}[aria-expanded="true"] + &`]: {
       display: 'block',
       borderRadius: '0 0 5px 5px',
-      borderTopColor: 'silver',
+      borderTopColor: 'gray3',
     },
   })
 );
@@ -88,20 +88,20 @@ export const ListBoxOption = styled(Box)(
       top: 0,
       height: '100%',
       width: '5px',
-      backgroundColor: 'blue',
+      backgroundColor: 'blue8',
       transform: 'scaleX(0)',
       transformOrigin: 'left',
       transition: '0.2s transform',
     },
     '&[aria-selected="true"]': {
-      color: 'blue',
+      color: 'blue8',
       fontWeight: 'bold',
       '&:before': {
         transform: 'scaleX(1)',
       },
     },
     '&:hover': {
-      backgroundColor: 'blue',
+      backgroundColor: 'blue8',
       color: 'white',
       fontWeight: 'normal',
     },

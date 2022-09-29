@@ -35,7 +35,7 @@ export function TileAverageDifference({
       ? text.zeven_daags_gemiddelde_waarde_meer
       : text.zeven_daags_gemiddelde_waarde_hoger;
 
-    containerWithIcon = <ContainerWithIcon icon={<Up />} color="red" />;
+    containerWithIcon = <ContainerWithIcon icon={<Up />} color="red2" />;
   }
 
   if (difference < 0) {
@@ -44,7 +44,7 @@ export function TileAverageDifference({
       : text.zeven_daags_gemiddelde_waarde_lager;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Down />} color="data.primary" />
+      <ContainerWithIcon icon={<Down />} color="primary" />
     );
   }
 
@@ -52,7 +52,7 @@ export function TileAverageDifference({
     content = text.zeven_daags_gemiddelde_waarde_gelijk;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Dot />} color="data.neutral" />
+      <ContainerWithIcon icon={<Dot />} color="neutral" />
     );
   }
 

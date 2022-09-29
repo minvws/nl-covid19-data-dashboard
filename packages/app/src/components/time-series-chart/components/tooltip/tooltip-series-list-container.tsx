@@ -64,7 +64,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
               <AppearTransition key="1">
                 <Text
                   variant="label2"
-                  color={colors.annotation}
+                  color={colors.gray7}
                   textAlign={timespanAnnotation.textAlign || 'center'}
                 >
                   {timespanAnnotation.shortLabel || timespanAnnotation.label}
@@ -75,7 +75,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
               <AppearTransition key="1">
                 <Text
                   variant="label2"
-                  color={colors.annotation}
+                  color={colors.gray7}
                   textAlign={'left'}
                 >
                   {options.outOfBoundsConfig?.tooltipLabel}
@@ -90,7 +90,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
                   pb={2}
                   mb={2}
                   borderBottom="1px solid"
-                  borderBottomColor="lightGray"
+                  borderBottomColor="gray2"
                 >
                   <IconRow icon={<TimelineMarker isHighlighted size={10} />}>
                     {timelineEvent.title}

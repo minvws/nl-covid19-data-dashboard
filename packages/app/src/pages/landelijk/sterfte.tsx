@@ -204,7 +204,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textNl.section_deceased_rivm
                       .line_chart_covid_daily_legend_trend_short_label_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
@@ -215,7 +215,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textNl.section_deceased_rivm
                       .line_chart_covid_daily_legend_trend_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{
@@ -242,8 +242,8 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
               data={dataDeceasedPerAgeGroup}
               rightMetricProperty="covid_percentage"
               leftMetricProperty="age_group_percentage"
-              rightColor={'data.primary'}
-              leftColor={'data.neutral'}
+              rightColor={'primary'}
+              leftColor={'neutral'}
               maxDisplayValue={60}
               text={textShared.age_groups.graph}
               formatValue={(a: number) => `${formatPercentage(a * 100)}%`}

@@ -210,7 +210,7 @@ interface TooltipListProps {
 const TooltipList = styled.ol<TooltipListProps>((x) =>
   css({
     columns: x.hasTwoColumns && useBreakpoints().md ? 2 : 1,
-    columnRule: x.hasTwoColumns ? `1px solid ${colors.lightGray}` : 'unset',
+    columnRule: x.hasTwoColumns ? `1px solid ${colors.gray2}` : 'unset',
     columnGap: x.hasTwoColumns ? '2em' : 'unset',
     m: 0,
     p: 0,

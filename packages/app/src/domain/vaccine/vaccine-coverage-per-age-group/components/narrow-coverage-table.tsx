@@ -30,7 +30,7 @@ export function NarrowCoverageTable({
 
   return (
     <Box>
-      <Box borderBottom="1px solid" borderColor="silver" pb={2}>
+      <Box borderBottom="1px solid" borderColor="gray3" pb={2}>
         <BoldText variant="label1">
           {text.vaccination_coverage.headers.agegroup}
         </BoldText>
@@ -43,7 +43,7 @@ export function NarrowCoverageTable({
           pb={3}
           spacing={3}
           borderBottom="1px solid"
-          borderColor="silver"
+          borderColor="gray3"
         >
           <AgeGroup
             range={formatAgeGroupString(

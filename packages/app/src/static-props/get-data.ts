@@ -241,9 +241,9 @@ export function selectTopicalData(locale: keyof Languages) {
           direction: tile.trendIcon.direction,
           color:
             tile.trendIcon.color === 'GREEN'
-              ? colors.data.multiseries.turquoise
+              ? colors.green2
               : tile.trendIcon.color === 'RED'
-              ? colors.data.gradient.red
+              ? colors.red2
               : 'currentColor',
         },
         tileIcon: tile.tileIcon,

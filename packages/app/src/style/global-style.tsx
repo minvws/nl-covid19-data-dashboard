@@ -44,11 +44,11 @@ html {
 */
  body {
   font-family: ${(x) => x.theme.fonts.body};
-  color: ${(x) => x.theme.colors.body};
+  color: ${(x) => x.theme.colors.black};
   ${css(preset.typography.body2)}
 
   margin: 0;
-  background: #fff;
+  background: white;
   overflow-anchor: none;
 }
 
@@ -70,7 +70,7 @@ svg {
 }
 
 a {
-  color: ${(x) => x.theme.colors.link};
+  color: ${(x) => x.theme.colors.blue8};
   text-decoration: none;
 }
 
