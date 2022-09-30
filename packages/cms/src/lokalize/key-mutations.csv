@@ -51,3 +51,4 @@ timestamp,action,key,document_id,move_to
 2022-09-22T16:12:24.748Z,add,common.vaccinations.coverage_kinds.autumn_2022_vaccinated_percentage,NGAoa2ArqEakZsIxnSDBhz,__
 2022-09-22T16:12:24.830Z,delete,common.common.age_groups.12-17,DWLUotrm23arH2ViSPB3O0,__
 2022-09-29T12:34:31.994Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.autumn_2022_description,xkamGLBy7JI1BY5kYruybw,__
+2022-09-30T11:28:31.994Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.repeat_vaccination_against_corona_description,DNO5adeD4mWNc516AbctlW,__
