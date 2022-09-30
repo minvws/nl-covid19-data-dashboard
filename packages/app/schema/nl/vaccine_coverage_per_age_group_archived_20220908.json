@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_coverage_per_age_group",
+  "title": "nl_vaccine_coverage_per_age_group_archived_20220908",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -14,18 +14,18 @@
   },
   "definitions": {
     "value": {
-      "title": "nl_vaccine_coverage_per_age_group_value",
+      "title": "nl_vaccine_coverage_per_age_group_archived_20220908_value",
       "additionalProperties": false,
       "type": "object",
       "required": [
         "age_group_percentage",
         "age_group_range",
         "age_group_total",
-        "autumn_2022_vaccinated",
         "booster_shot",
-        "autumn_2022_vaccinated_percentage",
+        "has_one_shot",
         "fully_vaccinated_percentage",
         "booster_shot_percentage",
+        "has_one_shot_percentage",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",
@@ -53,16 +53,13 @@
         "age_group_total": {
           "type": "integer"
         },
-        "autumn_2022_vaccinated": {
-          "type":["integer", "null"]
-        },
         "fully_vaccinated": {
           "type": "integer"
         },
         "booster_shot": {
           "type": ["integer", "null"]
         },
-        "autumn_2022_vaccinated_percentage": {
+        "has_one_shot": {
           "type": ["integer", "null"]
         },
         "fully_vaccinated_percentage": {
@@ -70,6 +67,9 @@
         },
         "booster_shot_percentage": {
           "type": ["number", "null"]
+        },
+        "has_one_shot_percentage": {
+          "type": ["integer", "null"]
         },
         "date_unix": {
           "type": "integer"

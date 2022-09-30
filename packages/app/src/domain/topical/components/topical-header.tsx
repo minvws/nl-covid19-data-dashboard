@@ -9,21 +9,21 @@ type TopicalDynamicDescription = {
 
 interface TopicalHeaderProps {
   title: string;
-  dynamicDescription: TopicalDynamicDescription[];
+  dynamicDescriptions: TopicalDynamicDescription[];
 }
 
-export function TopicalHeader({
+export const TopicalHeader = ({
   title,
-  dynamicDescription,
-}: TopicalHeaderProps) {
+  dynamicDescriptions,
+}: TopicalHeaderProps) => {
   return (
     <Box spacing={4}>
       <Heading level={1}>{title}</Heading>
       <Box spacing={3} fontSize={2}>
-        {dynamicDescription.map((description) => (
+        {dynamicDescriptions.map((description) => (
           <Markdown key={description.index} content={description.content} />
         ))}
       </Box>
     </Box>
   );
-}
+};

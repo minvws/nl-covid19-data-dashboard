@@ -1,23 +1,22 @@
-import css from '@styled-system/css';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ContentTeaser } from '~/components/content-teaser';
 import { SiteText } from '~/locale';
-import { asResponsiveArray } from '~/style/utils';
-interface ArticleListProps {
+
+interface TopicalArticlesListProps {
   articles: ArticleSummary[];
   text: SiteText['pages']['topical_page']['shared'];
 }
 
-export function ArticleList({ articles, text }: ArticleListProps) {
+export const TopicalArticlesList = ({
+  articles,
+  text,
+}: TopicalArticlesListProps) => {
   return (
     <Box
       display="grid"
+      gridColumnGap={{ md: '48px' }}
       gridTemplateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
-      css={css({
-        // Same value to be aligned with the footer grid
-        columnGap: asResponsiveArray({ md: '48px' }),
-      })}
       spacing={{ _: 3, md: 0 }}
     >
       {articles.map((item) => (
@@ -34,4 +33,4 @@ export function ArticleList({ articles, text }: ArticleListProps) {
       ))}
     </Box>
   );
-}
+};

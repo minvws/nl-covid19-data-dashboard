@@ -2600,7 +2600,7 @@ __metadata:
     babel-plugin-lodash: ^3.3.4
     babel-plugin-module-resolver: ^4.1.0
     babel-plugin-styled-components: ^2.0.7
-    c8: ^7.10.0
+    c8: ^7.12.0
     chokidar-cli: ^3.0.0
     cross-env: ^7.0.3
     d3-array: ^3.1.1
@@ -2662,12 +2662,12 @@ __metadata:
     tippy.js: ^6.3.7
     topojson-client: ^3.1.0
     ts-is-present: ^1.2.2
-    ts-node: ^10.8.1
+    ts-node: ^10.9.1
     ts-toolbelt: ^9.6.0
     tsconfig-paths: ^3.12.0
     typescript: ^4.7.3
     use-callback-ref: ^1.2.5
-    uvu: ^0.5.2
+    uvu: ^0.5.6
     walkjs: ^3.2.4
     webpack: ^5.64.4
     xss: ^1.0.10
@@ -2699,7 +2699,7 @@ __metadata:
     simple-git: ^2.48.0
     topojson-client: ^3.1.0
     ts-is-present: ^1.2.2
-    ts-node: ^10.8.1
+    ts-node: ^10.9.1
     typescript: ^4.7.3
   languageName: unknown
   linkType: soft
@@ -2761,7 +2761,7 @@ __metadata:
     styled-components: ^5.3.3
     ts-is-present: ^1.2.2
     ts-morph: ^12.2.0
-    ts-node: ^10.8.1
+    ts-node: ^10.9.1
     typescript: ^4.7.3
     uuid: ^8.3.2
   languageName: unknown
@@ -2783,11 +2783,11 @@ __metadata:
     geojson: ^0.5.0
     prettier: ^2.5.0
     ts-is-present: ^1.2.2
-    ts-node: ^10.8.1
+    ts-node: ^10.9.1
     tsconfig-paths: ^3.12.0
     tsconfig-replace-paths: ^0.0.11
     typescript: ^4.7.3
-    uvu: ^0.5.2
+    uvu: ^0.5.6
   languageName: unknown
   linkType: soft
 
@@ -2835,7 +2835,7 @@ __metadata:
     rimraf: ^3.0.2
     rollup: ^2.60.2
     svgson: ^5.2.1
-    ts-node: ^10.8.1
+    ts-node: ^10.9.1
     tsconfig-replace-paths: ^0.0.11
     typescript: ^4.7.3
     uppercamelcase: ^3.0.0
@@ -3236,7 +3236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@istanbuljs/schema@npm:^0.1.2":
+"@istanbuljs/schema@npm:^0.1.2, @istanbuljs/schema@npm:^0.1.3":
   version: 0.1.3
   resolution: "@istanbuljs/schema@npm:0.1.3"
   checksum: 5282759d961d61350f33d9118d16bcaed914ebf8061a52f4fa474b2cb08720c9c81d165e13b82f2e5a8a212cc5af482f0c6fc1ac27b9e067e5394c9a6ed186c9
@@ -3277,6 +3277,16 @@ __metadata:
     "@jridgewell/resolve-uri": ^3.0.3
     "@jridgewell/sourcemap-codec": ^1.4.10
   checksum: d89597752fd88d3f3480845691a05a44bd21faac18e2185b6f436c3b0fd0c5a859fbbd9aaa92050c4052caf325ad3e10e2e1d1b64327517471b7d51babc0ddef
+  languageName: node
+  linkType: hard
+
+"@jridgewell/trace-mapping@npm:^0.3.12":
+  version: 0.3.15
+  resolution: "@jridgewell/trace-mapping@npm:0.3.15"
+  dependencies:
+    "@jridgewell/resolve-uri": ^3.0.3
+    "@jridgewell/sourcemap-codec": ^1.4.10
+  checksum: 38917e9c2b014d469a9f51c016ed506acbe44dd16ec2f6f99b553ebf3764d22abadbf992f2367b6d2b3511f3eae8ed3a8963f6c1030093fda23efd35ecab2bae
   languageName: node
   linkType: hard
 
@@ -10373,25 +10383,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c8@npm:^7.10.0":
-  version: 7.10.0
-  resolution: "c8@npm:7.10.0"
+"c8@npm:^7.12.0":
+  version: 7.12.0
+  resolution: "c8@npm:7.12.0"
   dependencies:
     "@bcoe/v8-coverage": ^0.2.3
-    "@istanbuljs/schema": ^0.1.2
+    "@istanbuljs/schema": ^0.1.3
     find-up: ^5.0.0
     foreground-child: ^2.0.0
-    istanbul-lib-coverage: ^3.0.1
+    istanbul-lib-coverage: ^3.2.0
     istanbul-lib-report: ^3.0.0
-    istanbul-reports: ^3.0.2
-    rimraf: ^3.0.0
+    istanbul-reports: ^3.1.4
+    rimraf: ^3.0.2
     test-exclude: ^6.0.0
-    v8-to-istanbul: ^8.0.0
+    v8-to-istanbul: ^9.0.0
     yargs: ^16.2.0
-    yargs-parser: ^20.2.7
+    yargs-parser: ^20.2.9
   bin:
     c8: bin/c8.js
-  checksum: 38c9372dcbfd2b6675059f93764f9fe33694627568b70236b0c3b924d1b871edbc15d819b5f4eea39d1f83ce2f6288e127ecfc5f62a37d7aee178b7a15f3a654
+  checksum: 3b7fa9ad7cff2cb0bb579467e6b544498fbd46e9353a809ad3b8cf749df4beadd074cde277356b0552f3c8055b1b3ec3ebaf2209e9ad4bdefed92dbf64d283ab
   languageName: node
   linkType: hard
 
@@ -17133,7 +17143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.0.1":
+"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.2.0":
   version: 3.2.0
   resolution: "istanbul-lib-coverage@npm:3.2.0"
   checksum: a2a545033b9d56da04a8571ed05c8120bf10e9bce01cf8633a3a2b0d1d83dff4ac4fe78d6d5673c27fc29b7f21a41d75f83a36be09f82a61c367b56aa73c1ff9
@@ -17151,13 +17161,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"istanbul-reports@npm:^3.0.2":
-  version: 3.0.5
-  resolution: "istanbul-reports@npm:3.0.5"
+"istanbul-reports@npm:^3.1.4":
+  version: 3.1.5
+  resolution: "istanbul-reports@npm:3.1.5"
   dependencies:
     html-escaper: ^2.0.0
     istanbul-lib-report: ^3.0.0
-  checksum: b167411c4cd551aec39c8275ef42f25e7083caa5a467c1b35f33b19f37211656ebf03f1cbe5c55d691b44398314dcc73be52dc6b7afb13b7a1a02eb65d702a75
+  checksum: 7867228f83ed39477b188ea07e7ccb9b4f5320b6f73d1db93a0981b7414fa4ef72d3f80c4692c442f90fc250d9406e71d8d7ab65bb615cb334e6292b73192b89
   languageName: node
   linkType: hard
 
@@ -25917,13 +25927,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"totalist@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "totalist@npm:2.0.0"
-  checksum: 9cc5aa15c78374e50ea90a93fd0137dfec68c2139db6767f0707951681fa931343ae9a71ed257da80bc5deb994cf841f14a1512cb6708c4806617eb4513cd965
-  languageName: node
-  linkType: hard
-
 "tough-cookie@npm:^2.3.3, tough-cookie@npm:^2.4.3, tough-cookie@npm:~2.5.0":
   version: 2.5.0
   resolution: "tough-cookie@npm:2.5.0"
@@ -26068,6 +26071,44 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: 7d1aa7aa3ae1c0459c4922ed0dbfbade442cfe0c25aebaf620cdf1774f112c8d7a9b14934cb6719274917f35b2c503ba87bcaf5e16a0d39ba0f68ce3e7728363
+  languageName: node
+  linkType: hard
+
+"ts-node@npm:^10.9.1":
+  version: 10.9.1
+  resolution: "ts-node@npm:10.9.1"
+  dependencies:
+    "@cspotcode/source-map-support": ^0.8.0
+    "@tsconfig/node10": ^1.0.7
+    "@tsconfig/node12": ^1.0.7
+    "@tsconfig/node14": ^1.0.0
+    "@tsconfig/node16": ^1.0.2
+    acorn: ^8.4.1
+    acorn-walk: ^8.1.1
+    arg: ^4.1.0
+    create-require: ^1.1.0
+    diff: ^4.0.1
+    make-error: ^1.1.1
+    v8-compile-cache-lib: ^3.0.1
+    yn: 3.1.1
+  peerDependencies:
+    "@swc/core": ">=1.2.50"
+    "@swc/wasm": ">=1.2.50"
+    "@types/node": "*"
+    typescript: ">=2.7"
+  peerDependenciesMeta:
+    "@swc/core":
+      optional: true
+    "@swc/wasm":
+      optional: true
+  bin:
+    ts-node: dist/bin.js
+    ts-node-cwd: dist/bin-cwd.js
+    ts-node-esm: dist/bin-esm.js
+    ts-node-script: dist/bin-script.js
+    ts-node-transpile-only: dist/bin-transpile.js
+    ts-script: dist/bin-script-deprecated.js
+  checksum: 090adff1302ab20bd3486e6b4799e90f97726ed39e02b39e566f8ab674fd5bd5f727f43615debbfc580d33c6d9d1c6b1b3ce7d8e3cca3e20530a145ffa232c35
   languageName: node
   linkType: hard
 
@@ -26894,18 +26935,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uvu@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "uvu@npm:0.5.2"
+"uvu@npm:^0.5.6":
+  version: 0.5.6
+  resolution: "uvu@npm:0.5.6"
   dependencies:
     dequal: ^2.0.0
     diff: ^5.0.0
     kleur: ^4.0.3
     sade: ^1.7.3
-    totalist: ^2.0.0
   bin:
     uvu: bin.js
-  checksum: 369135a16dc454121681a83fbfe0a5d7733d3758403e921f4911eab8355235a1a5aeb59046f842046fbd4695d5267c463ca2b0ceb6787d6772d67e2f377bcf1f
+  checksum: 09460a37975627de9fcad396e5078fb844d01aaf64a6399ebfcfd9e55f1c2037539b47611e8631f89be07656962af0cf48c334993db82b9ae9c3d25ce3862168
   languageName: node
   linkType: hard
 
@@ -26923,14 +26963,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"v8-to-istanbul@npm:^8.0.0":
-  version: 8.1.0
-  resolution: "v8-to-istanbul@npm:8.1.0"
+"v8-to-istanbul@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "v8-to-istanbul@npm:9.0.1"
   dependencies:
+    "@jridgewell/trace-mapping": ^0.3.12
     "@types/istanbul-lib-coverage": ^2.0.1
     convert-source-map: ^1.6.0
-    source-map: ^0.7.3
-  checksum: c7dabf9567e0c210b24d0720e553803cbe1ff81edb1ec7f2080eb4be01ed081a40286cc9f4aaa86d1bf8d57840cefae8fdf326b7cb8faa316ba50c7b948030d4
+  checksum: a49c34bf0a3af0c11041a3952a2600913904a983bd1bc87148b5c033bc5c1d02d5a13620fcdbfa2c60bc582a2e2970185780f0c844b4c3a220abf405f8af6311
   languageName: node
   linkType: hard
 
@@ -27681,7 +27721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.3, yargs-parser@npm:^20.2.7":
+"yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.3, yargs-parser@npm:^20.2.9":
   version: 20.2.9
   resolution: "yargs-parser@npm:20.2.9"
   checksum: 8bb69015f2b0ff9e17b2c8e6bfe224ab463dd00ca211eece72a4cd8a906224d2703fb8a326d36fdd0e68701e201b2a60ed7cf81ce0fd9b3799f9fe7745977ae3

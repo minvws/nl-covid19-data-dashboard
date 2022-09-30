@@ -22,10 +22,12 @@ import {
   VaccinationsKpiHeader,
   VaccineCoverageChoroplethPerGm,
   VaccineCoveragePerAgeGroup,
+  VaccineCoverageTile,
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
   BoosterShotCoveragePerAgeGroup,
+  Autumn2022ShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
@@ -63,29 +65,31 @@ import {
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { useFeature } from '~/lib/features';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
-  'vaccine_administered_ggd_ghor',
-  'vaccine_administered_ggd',
   'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_planned',
   'vaccine_administered_total',
+  'vaccine_administered_last_week',
   'vaccine_coverage_per_age_group',
-  'vaccine_coverage_per_age_group_archived',
   'vaccine_coverage',
   'vaccine_delivery_per_supplier',
   'vaccine_stock',
   'vaccine_vaccinated_or_support',
   'vaccine_coverage_per_age_group_estimated',
-  'booster_shot_administered',
+  'vaccine_campaigns',
+  'vaccine_planned',
   'booster_coverage',
+  'booster_shot_administered',
   'repeating_shot_administered',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.vaccinations_page.nl,
+  textShared: siteText.pages.vaccinations_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -101,14 +105,18 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_total',
     'vaccine_administered_last_week',
     'vaccine_coverage_per_age_group',
+    'vaccine_coverage_per_age_group_archived_20220908',
     'vaccine_coverage_per_age_group_archived',
     'vaccine_coverage',
     'vaccine_delivery_per_supplier',
     'vaccine_stock',
     'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated',
+    'vaccine_coverage_per_age_group_estimated_archived_20220908',
     'vaccine_campaigns',
+    'vaccine_campaigns_archived_20220908',
     'vaccine_planned',
+    'vaccine_planned_archived_20220908',
     'booster_coverage',
     'booster_shot_administered',
     'repeating_shot_administered'
@@ -186,10 +194,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   } = props;
   const { commonTexts, formatNumber } = useIntl();
 
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
-    props.pageText,
-    selectLokalizeTexts
-  );
+  const { metadataTexts, textNl, textShared } =
+    useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
@@ -200,8 +206,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
     description: textNl.metadata.description,
   };
 
-  const vaccineCoverageEstimatedLastValue =
+  const vaccinationsCoverageFeature = useFeature('vaccinationsCoverage');
+  const vaccineCoverageEstimated =
     data.vaccine_coverage_per_age_group_estimated.last_value;
+
+  const vaccinationsCampaignsFeature = useFeature('vaccinationCampaigns');
+
+  const vaccineCoverageEstimatedArchivedLastValue =
+    data.vaccine_coverage_per_age_group_estimated_archived_20220908.last_value;
 
   const boosterShotAdministeredLastValue =
     data.booster_shot_administered.last_value;
@@ -242,79 +254,144 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             />
           )}
           <PageInformationBlock
-            title={textNl.title}
+            title={textNl.information_block.title}
             category={commonTexts.sidebar.categories.actions_to_take.title}
             icon={<VaccinatieIcon />}
-            description={content.pageDescription}
+            description={textNl.information_block.description}
             metadata={{
-              datumsText: textNl.datums,
+              datumsText: textNl.dates,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
             pageLinks={content.links}
-            referenceLink={textNl.reference.href}
+            referenceLink={textNl.information_block.reference.href}
             articles={content.articles}
           />
-          <VaccineCoverageToggleTile
-            labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
-            title={textNl.vaccination_grade_toggle_tile.title}
-            source={textNl.vaccination_grade_toggle_tile.source}
-            descriptionFooter={
-              textNl.vaccination_grade_toggle_tile.description_footer
-            }
-            dateUnix={vaccineCoverageEstimatedLastValue.date_unix}
-            age18Plus={{
-              fully_vaccinated:
-                vaccineCoverageEstimatedLastValue.age_18_plus_fully_vaccinated,
-              has_one_shot:
-                vaccineCoverageEstimatedLastValue.age_18_plus_has_one_shot,
-              boostered: formatPercentageAsNumber(
-                `${boosterCoverage18PlusValue.percentage}`
-              ),
-              birthyear:
-                vaccineCoverageEstimatedLastValue.age_18_plus_birthyear,
-              dateUnixBoostered: boosterCoverage18PlusValue.date_unix,
-            }}
-            age12Plus={{
-              fully_vaccinated:
-                vaccineCoverageEstimatedLastValue.age_12_plus_fully_vaccinated,
-              has_one_shot:
-                vaccineCoverageEstimatedLastValue.age_12_plus_has_one_shot,
-              boostered: formatPercentageAsNumber(
-                `${boosterCoverage12PlusValue.percentage}`
-              ),
-              birthyear:
-                vaccineCoverageEstimatedLastValue.age_12_plus_birthyear,
-              dateUnixBoostered: boosterCoverage12PlusValue.date_unix,
-            }}
-            numFractionDigits={1}
-            age12PlusToggleText={
-              textNl.vaccination_grade_toggle_tile.age_12_plus
-            }
-            age18PlusToggleText={
-              textNl.vaccination_grade_toggle_tile.age_18_plus
-            }
-          />
+          {vaccinationsCoverageFeature.isEnabled && (
+            <>
+              <VaccineCoverageTile
+                title={textShared.vaccination_grade_tile.autumn_labels.title}
+                description={
+                  textShared.vaccination_grade_tile.autumn_labels.description
+                }
+                source={textShared.vaccination_grade_tile.autumn_labels.source}
+                descriptionFooter={
+                  textShared.vaccination_grade_tile.autumn_labels
+                    .description_footer
+                }
+                coverageData={[
+                  {
+                    value:
+                      vaccineCoverageEstimated.age_60_plus_autumn_2022_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_60_plus_birthyear,
+                    title:
+                      textShared.vaccination_grade_tile.age_group_labels
+                        .age_60_plus,
+                    description:
+                      textShared.vaccination_grade_tile.autumn_labels
+                        .description_60_plus,
+                    bar: {
+                      value:
+                        vaccineCoverageEstimated.age_60_plus_autumn_2022_vaccinated,
+                      color: colors.data.scale.blueDetailed[8],
+                    },
+                  },
+                  {
+                    value:
+                      vaccineCoverageEstimated.age_12_plus_autumn_2022_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_12_plus_birthyear,
+                    title:
+                      textShared.vaccination_grade_tile.age_group_labels
+                        .age_12_plus,
+                    description:
+                      textShared.vaccination_grade_tile.autumn_labels
+                        .description_12_plus,
+                    bar: {
+                      value:
+                        vaccineCoverageEstimated.age_12_plus_autumn_2022_vaccinated,
+                      color: colors.data.scale.blueDetailed[8],
+                    },
+                  },
+                ]}
+                dateUnix={vaccineCoverageEstimated.date_unix}
+              />
+              <VaccineCoverageTile
+                title={
+                  textShared.vaccination_grade_tile.fully_vaccinated_labels
+                    .title
+                }
+                description={
+                  textShared.vaccination_grade_tile.fully_vaccinated_labels
+                    .description
+                }
+                source={
+                  textShared.vaccination_grade_tile.fully_vaccinated_labels
+                    .source
+                }
+                descriptionFooter={
+                  textShared.vaccination_grade_tile.fully_vaccinated_labels
+                    .description_footer
+                }
+                coverageData={[
+                  {
+                    value:
+                      vaccineCoverageEstimated.age_18_plus_fully_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_18_plus_birthyear,
+                    title:
+                      textShared.vaccination_grade_tile.age_group_labels
+                        .age_18_plus,
+                    description:
+                      textShared.vaccination_grade_tile.fully_vaccinated_labels
+                        .description_18_plus,
+                    bar: {
+                      value:
+                        vaccineCoverageEstimated.age_18_plus_fully_vaccinated,
+                      color: colors.data.scale.blueDetailed[3],
+                    },
+                  },
+                  {
+                    value:
+                      vaccineCoverageEstimated.age_12_plus_fully_vaccinated,
+                    birthyear: vaccineCoverageEstimated.age_12_plus_birthyear,
+                    title:
+                      textShared.vaccination_grade_tile.age_group_labels
+                        .age_12_plus,
+                    description:
+                      textShared.vaccination_grade_tile.fully_vaccinated_labels
+                        .description_12_plus,
+                    bar: {
+                      value:
+                        vaccineCoverageEstimated.age_12_plus_fully_vaccinated,
+                      color: colors.data.scale.blueDetailed[3],
+                    },
+                  },
+                ]}
+                dateUnix={vaccineCoverageEstimated.date_unix}
+              />
+            </>
+          )}
 
-          <VaccineCampaignsTile
-            title={textNl.vaccine_campaigns.title}
-            description={replaceVariablesInText(
-              textNl.vaccine_campaigns.description,
-              {
-                vaccinePlanned: formatNumber(data.vaccine_planned.doses),
-              }
-            )}
-            descriptionFooter={textNl.vaccine_campaigns.description_footer}
-            headers={textNl.vaccine_campaigns.headers}
-            campaigns={data.vaccine_campaigns.vaccine_campaigns}
-            campaignDescriptions={textNl.vaccine_campaigns.campaigns}
-            metadata={{
-              datumsText: textNl.datums,
-              date: data.vaccine_campaigns.date_unix,
-              source: textNl.vaccine_campaigns.bronnen.rivm,
-            }}
-          />
+          {vaccinationsCampaignsFeature && (
+            <VaccineCampaignsTile
+              title={textNl.vaccine_campaigns.title}
+              description={replaceVariablesInText(
+                textNl.vaccine_campaigns.description,
+                {
+                  vaccinePlanned: formatNumber(data.vaccine_planned.doses),
+                }
+              )}
+              descriptionFooter={textNl.vaccine_campaigns.description_footer}
+              headers={textNl.vaccine_campaigns.headers}
+              campaigns={data.vaccine_campaigns.vaccine_campaigns}
+              campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+              metadata={{
+                datumsText: textNl.dates,
+                date: data.vaccine_campaigns.date_unix,
+                source: textNl.vaccine_campaigns.bronnen.rivm,
+              }}
+            />
+          )}
 
           <VaccinationsPerSupplierOverLastWeekTile
             title={textNl.vaccinations_per_supplier_over_last_week.title}
@@ -334,10 +411,12 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           />
 
           <VaccineCoverageChoroplethPerGm data={choropleth} />
-          <BoosterShotCoveragePerAgeGroup
+          <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
-            description={textNl.vaccination_coverage.description}
+            description={
+              textNl.vaccination_coverage.description_autumn_2022_shot
+            }
             sortingOrder={[
               '80+',
               '70-79',
@@ -350,7 +429,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               '5-11',
             ]}
             metadata={{
-              datumsText: textNl.datums,
+              datumsText: textNl.dates,
               date: data.vaccine_coverage_per_age_group.values[0].date_unix,
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
@@ -367,6 +446,95 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           />
           {hasHideArchivedCharts && (
             <>
+              <BoosterShotCoveragePerAgeGroup
+                text={textNl}
+                title={textNl.vaccination_coverage.title}
+                description={
+                  textNl.archived.vaccination_coverage.description_booster_shot
+                }
+                sortingOrder={[
+                  '80+',
+                  '70-79',
+                  '60-69',
+                  '50-59',
+                  '40-49',
+                  '30-39',
+                  '18-29',
+                  '12-17',
+                  '5-11',
+                ]}
+                metadata={{
+                  datumsText: textNl.datums,
+                  date: data.vaccine_coverage_per_age_group_archived_20220908
+                    .values[0].date_unix,
+                  source: textNl.vaccination_coverage.bronnen.rivm,
+                }}
+                values={
+                  data.vaccine_coverage_per_age_group_archived_20220908.values
+                }
+              />
+              <VaccineCoverageToggleTile
+                labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
+                title={textNl.vaccination_grade_toggle_tile.title}
+                source={textNl.vaccination_grade_toggle_tile.source}
+                descriptionFooter={
+                  textNl.vaccination_grade_toggle_tile.description_footer
+                }
+                dateUnix={vaccineCoverageEstimatedArchivedLastValue.date_unix}
+                age18Plus={{
+                  fully_vaccinated:
+                    vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,
+                  has_one_shot:
+                    vaccineCoverageEstimatedArchivedLastValue.age_18_plus_has_one_shot,
+                  boostered: formatPercentageAsNumber(
+                    `${boosterCoverage18PlusValue.percentage}`
+                  ),
+                  birthyear:
+                    vaccineCoverageEstimatedArchivedLastValue.age_18_plus_birthyear,
+                  dateUnixBoostered: boosterCoverage18PlusValue.date_unix,
+                }}
+                age12Plus={{
+                  fully_vaccinated:
+                    vaccineCoverageEstimatedArchivedLastValue.age_12_plus_fully_vaccinated,
+                  has_one_shot:
+                    vaccineCoverageEstimatedArchivedLastValue.age_12_plus_has_one_shot,
+                  boostered: formatPercentageAsNumber(
+                    `${boosterCoverage12PlusValue.percentage}`
+                  ),
+                  birthyear:
+                    vaccineCoverageEstimatedArchivedLastValue.age_12_plus_birthyear,
+                  dateUnixBoostered: boosterCoverage12PlusValue.date_unix,
+                }}
+                numFractionDigits={1}
+                age12PlusToggleText={
+                  textNl.vaccination_grade_toggle_tile.age_12_plus
+                }
+                age18PlusToggleText={
+                  textNl.vaccination_grade_toggle_tile.age_18_plus
+                }
+              />
+              <VaccineCampaignsTile
+                title={textNl.vaccine_campaigns.title}
+                description={replaceVariablesInText(
+                  textNl.vaccine_campaigns.description_archived,
+                  {
+                    vaccinePlanned: formatNumber(
+                      data.vaccine_planned_archived_20220908.doses
+                    ),
+                  }
+                )}
+                descriptionFooter={textNl.vaccine_campaigns.description_footer}
+                headers={textNl.vaccine_campaigns.headers}
+                campaigns={
+                  data.vaccine_campaigns_archived_20220908.vaccine_campaigns
+                }
+                campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+                metadata={{
+                  datumsText: textNl.dates,
+                  date: data.vaccine_campaigns_archived_20220908.date_unix,
+                  source: textNl.vaccine_campaigns.bronnen.rivm,
+                }}
+              />
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredLastValue.date_unix}
@@ -455,7 +623,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               />
 
               <VaccineCoveragePerAgeGroup
-                text={textNl.vaccination_coverage}
+                text={textNl}
                 title={textNl.archived.vaccination_coverage.title}
                 description={textNl.archived.vaccination_coverage.description}
                 sortingOrder={[
@@ -470,7 +638,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   '5-11',
                 ]}
                 metadata={{
-                  datumsText: textNl.datums,
+                  datumsText: textNl.dates,
                   date: data.vaccine_coverage_per_age_group_archived.values[0]
                     .date_unix,
                   source: textNl.vaccination_coverage.bronnen.rivm,

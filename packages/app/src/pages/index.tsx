@@ -1,14 +1,15 @@
 import { Box, Spacer } from '~/components/base';
 import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
-import { ArticleList, TopicalSectionHeader } from '~/domain/topical';
 import {
   Search,
-  TopicalTile,
+  TopicalArticlesList,
   TopicalHeader,
-  ThemeHeader,
-  MeasurementTile,
-  SubjectsList,
+  TopicalLinksList,
+  TopicalMeasureTile,
+  TopicalSectionHeader,
+  TopicalThemeHeader,
+  TopicalTile,
 } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
@@ -77,7 +78,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           >
             <TopicalHeader
               title={selectedTopicalData.title}
-              dynamicDescription={selectedTopicalData.dynamicDescription}
+              dynamicDescriptions={selectedTopicalData.dynamicDescription}
             />
           </Box>
           <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
@@ -87,7 +88,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 return (
                   <Box key={theme.index}>
                     <Box marginBottom={4}>
-                      <ThemeHeader
+                      <TopicalThemeHeader
                         title={theme.title}
                         dynamicSubtitle={theme.dynamicSubtitle}
                         icon={theme.icon}
@@ -115,14 +116,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           );
                         })}
                     </Box>
-                    <SubjectsList moreLinks={theme.moreLinks} />
+                    <TopicalLinksList
+                      labels={{
+                        DESKTOP: theme.moreLinks.label.DESKTOP,
+                        MOBILE: theme.moreLinks.label.MOBILE,
+                      }}
+                      links={theme.moreLinks.links}
+                    />
                   </Box>
                 );
               })}
 
             <Box>
               <Box marginBottom={4}>
-                <ThemeHeader
+                <TopicalThemeHeader
                   title={selectedTopicalData.measures.title}
                   dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
                   icon={selectedTopicalData.measures.icon}
@@ -139,7 +146,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   .sort((a, b) => a.index - b.index)
                   .map((measureTile) => {
                     return (
-                      <MeasurementTile
+                      <TopicalMeasureTile
                         icon={measureTile.icon}
                         title={measureTile.title}
                         key={measureTile.index}
@@ -176,7 +183,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             />
 
             {isPresent(content.articles) && (
-              <ArticleList articles={content.articles} text={textShared} />
+              <TopicalArticlesList
+                articles={content.articles}
+                text={textShared}
+              />
             )}
           </MaxWidth>
         </Box>

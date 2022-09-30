@@ -12,15 +12,15 @@ export function selectVaccineCoverageData<
     | VrCollectionVaccineCoveragePerAgeGroup
     | VrVaccineCoveragePerAgeGroupValue
 >(data: T[]) {
-  return data.map((el) => {
+  return data.map((vaccineCoveragePerAgeGroup) => {
     const parsedLabels: {
       fully_vaccinated_percentage?: number;
-      has_one_shot_percentage?: number;
+      autumn_2022_vaccinated_percentage?: number;
     } = {};
 
-    if (isPresent(el.fully_vaccinated_percentage_label)) {
+    if (isPresent(vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label)) {
       const result = parseVaccinatedPercentageLabel(
-        el.fully_vaccinated_percentage_label
+        vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label
       );
 
       if (isPresent(result)) {
@@ -29,16 +29,17 @@ export function selectVaccineCoverageData<
       }
     }
 
-    if (isPresent(el.has_one_shot_percentage_label)) {
+    if (isPresent(vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label)) {
       const result = parseVaccinatedPercentageLabel(
-        el.has_one_shot_percentage_label
+        vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label
       );
 
       if (isPresent(result)) {
-        parsedLabels.has_one_shot_percentage = result.sign === '>' ? 100 : 0;
+        parsedLabels.autumn_2022_vaccinated_percentage =
+          result.sign === '>' ? 100 : 0;
       }
     }
 
-    return { ...el, ...parsedLabels };
+    return { ...vaccineCoveragePerAgeGroup, ...parsedLabels };
   });
 }
