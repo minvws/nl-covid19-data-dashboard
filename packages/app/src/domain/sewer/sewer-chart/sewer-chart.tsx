@@ -191,7 +191,7 @@ export function SewerChart({
                 type: 'area',
                 metricProperty: 'average',
                 label: text.averagesDataLabel,
-                color: colors.data.scale.blue[3],
+                color: colors.scale.blue[3],
                 nonInteractive: true,
               },
             ]}
@@ -215,7 +215,7 @@ export function SewerChart({
                 type: 'area',
                 metricProperty: 'average',
                 label: text.averagesDataLabel,
-                color: colors.data.scale.blue[3],
+                color: colors.scale.blue[3],
               },
             ]}
             dataOptions={dataOptions}

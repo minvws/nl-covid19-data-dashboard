@@ -51,7 +51,7 @@ export function PieChart<T>({
   padAngle = 0.03,
   minimumPercentage = 0.5,
   icon,
-  iconFill = 'silver',
+  iconFill = 'gray3',
   verticalLayout,
   title,
   link,

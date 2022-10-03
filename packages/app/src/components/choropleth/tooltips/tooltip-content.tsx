@@ -38,7 +38,7 @@ export function TooltipContent(props: IProps) {
 
 const StyledTooltipContent = styled.div<{ isInteractive: boolean }>((x) =>
   css({
-    color: 'body',
+    color: 'black',
     width: '100%',
     minWidth: 250,
     borderRadius: 1,
@@ -68,7 +68,7 @@ function TooltipHeader({
 const StyledTooltipHeader = styled.div(
   css({
     whiteSpace: 'nowrap',
-    color: 'body',
+    color: 'black',
     py: 2,
     px: 3,
     display: 'flex',
@@ -95,7 +95,7 @@ const TooltipInfo = styled.div(
   css({
     cursor: 'pointer',
     borderTop: '1px solid',
-    borderTopColor: 'border',
+    borderTopColor: 'gray3',
     py: 2,
     px: 3,
   })

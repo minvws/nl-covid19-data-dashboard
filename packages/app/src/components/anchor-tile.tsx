@@ -66,7 +66,7 @@ const Container = styled.article(
     pt: asResponsiveArray({ _: 2, sm: 3 }),
     pb: asResponsiveArray({ _: 3, sm: 4 }),
     flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
-    borderTop: 'solid 2px lightGray',
+    borderTop: `solid 2px ${colors.gray2}`,
   })
 );
 
@@ -92,11 +92,11 @@ const LinkContainer = styled.div(
     justifyContent: asResponsiveArray({ _: 'center', md: undefined }),
     border: 0,
     borderTop: asResponsiveArray({
-      _: `1px solid ${colors.silver}`,
+      _: `1px solid ${colors.gray3}`,
       lg: 'none',
     }),
     borderLeft: asResponsiveArray({ lg: '1px solid' }),
-    borderLeftColor: asResponsiveArray({ lg: colors.silver }),
+    borderLeftColor: asResponsiveArray({ lg: colors.gray3 }),
     pt: asResponsiveArray({ _: 3, lg: 0 }),
     pl: asResponsiveArray({ lg: 4 }),
     ml: asResponsiveArray({ lg: 4 }),

@@ -9,7 +9,7 @@ import {
   SeriesSingleValue,
 } from '../logic';
 
-const DEFAULT_COLOR = colors.data.underReported;
+const DEFAULT_COLOR = colors.gray2;
 
 export function TimespanAnnotation({
   domain,
@@ -90,7 +90,7 @@ export function TimespanAnnotation({
         x={x0}
         width={width}
         fill={
-          fill === 'solid' ? colors.data.underReported : `url(#${patternId})`
+          fill === 'solid' ? colors.gray2 : `url(#${patternId})`
         }
         style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
       />
@@ -139,7 +139,7 @@ export function OutOfBoundsIcon({
         id="diagonal-pattern"
         height={6}
         width={6}
-        stroke={colors.data.neutral}
+        stroke={colors.neutral}
         strokeWidth={2}
         orientation={['diagonal']}
       />
@@ -179,7 +179,7 @@ export function HatchedTimespanAnnotationIcon({
             y1="0"
             x2="0"
             y2="5"
-            style={{ stroke: colors.gray, strokeWidth: 3 }}
+            style={{ stroke: colors.gray5, strokeWidth: 3 }}
           />
         </pattern>
       </defs>

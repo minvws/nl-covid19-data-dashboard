@@ -92,7 +92,7 @@ function ErrorFallback({ error }: { error: Error }) {
           </InlineText>
         )}
         {clipboardState === 'error' && (
-          <InlineText color="red">
+          <InlineText color="red2">
             {commonTexts.common.foutmelding_kon_niet_gekopieerd_worden}
           </InlineText>
         )}
@@ -138,7 +138,7 @@ const ErrorBox = styled.div.attrs({
   css({
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'red',
+    borderColor: 'red2',
     padding: 2,
     borderRadius: '8px',
     maxHeight: asResponsiveArray({ _: '200px', md: '600px' }),
@@ -151,13 +151,13 @@ const Button = styled.button(
   css({
     bg: 'transparent',
     border: '1px solid',
-    borderColor: 'silver',
+    borderColor: 'gray3',
     borderRadius: '5px',
     padding: 3,
     mr: 3,
     cursor: 'pointer',
     '&: hover': {
-      borderColor: 'blue',
+      borderColor: 'blue8',
     },
   })
 );
@@ -165,7 +165,7 @@ const Button = styled.button(
 const ErrorReport = styled.pre(
   css({
     border: '1px solid',
-    borderColor: 'silver',
+    borderColor: 'gray3',
     overflow: 'auto',
     padding: 2,
     fontSize: 0,

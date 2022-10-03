@@ -25,7 +25,7 @@ export function Sitemap({
         flexBasis={{ _: '33%', lg: '25%' }}
         pb={{ _: 4, md: 0 }}
         pr={{ _: 0, md: 3 }}
-        borderColor="border"
+        borderColor="gray3"
         borderStyle="solid"
         borderRightWidth={{ md: '1px' }}
         spacing={3}

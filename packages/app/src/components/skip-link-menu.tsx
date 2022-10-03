@@ -40,7 +40,7 @@ const SkipLink = styled(Anchor)(
     py: 3,
     cursor: 'pointer',
     color: 'white',
-    bg: 'blue',
+    bg: 'blue8',
     textDecoration: 'none',
     top: -9999,
     left: -9999,

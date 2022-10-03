@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -126,10 +127,10 @@ const StyledTriangle = styled.div<{ width: number }>((x) => {
     boxSizing: 'border-box',
     borderWidth,
     borderStyle: 'solid',
-    borderColor: 'transparent transparent #fff #fff',
+    borderColor: 'transparent transparent white white',
     transformOrigin: '0 0',
     transform: 'rotate(-45deg)',
-    boxShadow: '-3px 3px 3px 0 rgba(0, 0, 0, 0.05)',
+    boxShadow: `-3px 3px 3px 0 ${colors.blackOpacity}`,
   });
 });
 
@@ -172,7 +173,7 @@ function TooltipHeading({ title }: { title: string }) {
     <div
       css={css({
         whiteSpace: 'nowrap',
-        color: 'body',
+        color: 'black',
         py: 2,
         px: 3,
         display: 'flex',
@@ -190,7 +191,7 @@ function TooltipHeading({ title }: { title: string }) {
 const TooltipChildren = styled.div<{ hasTitle?: boolean }>(({ hasTitle }) =>
   css({
     borderTop: hasTitle ? '1px solid' : '',
-    borderTopColor: hasTitle ? 'border' : '',
+    borderTopColor: hasTitle ? 'gray3' : '',
     py: 2,
     px: 3,
   })
@@ -198,7 +199,7 @@ const TooltipChildren = styled.div<{ hasTitle?: boolean }>(({ hasTitle }) =>
 
 const StyledTooltipContent = styled.div((x) =>
   css({
-    color: 'body',
+    color: 'black',
     maxWidth: 425,
     borderRadius: 1,
     cursor: x.onClick ? 'pointer' : 'default',

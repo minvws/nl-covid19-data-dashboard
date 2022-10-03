@@ -62,7 +62,7 @@ export function KpiValue({
   valueAnnotation,
   difference,
   text,
-  color = 'data.primary',
+  color = 'primary',
   isMovingAverageDifference,
   isAmount,
   differenceFractionDigits,

@@ -251,7 +251,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
         <TooltipSubject
           thresholdValues={data.thresholdValues}
           filterBelow={filterBelow as number | null}
-          noDataFillColor={colors.choroplethNoData}
+          noDataFillColor={colors.white}
           key={vrOrGmData.age_group_range}
         >
           <Box

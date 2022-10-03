@@ -14,10 +14,10 @@ import FormField from 'part:@sanity/components/formfields/default';
 import { PatchEvent, set } from 'part:@sanity/form-builder/patch-event';
 import React, { forwardRef, useCallback, useState } from 'react';
 
-export const flatDataColors = Object.keys(colors.data).reduce<
+export const flatDataColors = Object.keys(colors).reduce<
   Record<string, string>
 >((aggr: Record<string, string>, key: string) => {
-  const colorValue = colors.data[key as keyof typeof colors.data];
+  const colorValue = colors[key as keyof typeof colors];
   if (typeof colorValue === 'string') {
     aggr[key] = colorValue;
   } else if (typeof colorValue === 'object') {
@@ -69,7 +69,7 @@ export const ChartColorInput = forwardRef((props: any) => {
                 height: '25px',
                 borderRadius: '4px',
                 backgroundColor: flatDataColors[colorProperty],
-                border: '1px solid lightGray',
+                border: `1px solid ${colors.gray2}`,
               }}
             ></Box>
           )}
@@ -100,7 +100,7 @@ export const ChartColorInput = forwardRef((props: any) => {
                         height: '25px',
                         backgroundColor: color,
                         borderRadius: '4px',
-                        border: '1px solid lightGray',
+                        border: `1px solid ${colors.gray2}`,
                       }}
                     />
                     <Radio checked={colorProperty === id} readOnly />

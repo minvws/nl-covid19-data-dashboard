@@ -70,7 +70,7 @@ export function AppContent({
                 py: 3,
                 position: 'relative',
                 borderBottom: 'solid 1px',
-                borderColor: 'border',
+                borderColor: 'gray3',
               })}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
@@ -156,7 +156,7 @@ const StyledSidebar = styled.aside(
     flexGrow: 0,
     borderRight: asResponsiveArray({
       _: 'none',
-      md: `solid 1px ${colors.lightGray}`,
+      md: `solid 1px ${colors.gray2}`,
     }),
   })
 );

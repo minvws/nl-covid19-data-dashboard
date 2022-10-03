@@ -84,7 +84,7 @@ export const HeadingLinkWithIcon = ({
   return (
     <Box display="inline-block" position="relative">
       <Link href={href} passHref locale={false}>
-        <Anchor variant="h5" color="blue" hoverColor="blue">
+        <Anchor variant="h5" color="blue8" hoverColor="blue8">
           <Box
             paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}
             css={css({
@@ -146,17 +146,17 @@ const IconWrapper = styled.span`
 const LinkContainer = styled.span`
   display: inline-block;
   a {
-    color: ${colors.blue};
+    color: ${colors.blue8};
 
     ${({ showAsButton }: LinkContainerProps) =>
       showAsButton &&
       `
-          background-color: ${colors.lightBlue};
-          color: ${colors.blue};
+          background-color: ${colors.blue1};
+          color: ${colors.blue8};
           padding: 12px ${space[3]};
   
           &:hover {
-            background-color: ${colors.blue};
+            background-color: ${colors.blue8};
             color: ${colors.white};
           }
   

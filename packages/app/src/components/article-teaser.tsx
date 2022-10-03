@@ -41,7 +41,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
         </Heading>
         <Text>{summary}</Text>
 
-        <BoldText aria-hidden="true" color="link">
+        <BoldText aria-hidden="true" color="blue8">
           {commonTexts.common.read_more}
           <Arrow />
         </BoldText>
@@ -73,7 +73,7 @@ const StyledArticleTeaser = styled(Anchor)(
     minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',
-    color: 'body',
+    color: 'black',
     ...spacingStyle(3),
 
     [`${ZoomContainer}, ${Heading}`]: {
@@ -89,7 +89,7 @@ const StyledArticleTeaser = styled(Anchor)(
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
-      [Heading]: { color: 'link' },
+      [Heading]: { color: 'blue8' },
     },
   })
 );

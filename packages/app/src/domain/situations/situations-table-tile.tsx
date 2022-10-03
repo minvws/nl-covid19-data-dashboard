@@ -72,7 +72,7 @@ export function SituationsTableTile({
           <tbody
             css={css({
               borderTop: '1px solid',
-              borderTopColor: 'lightGray',
+              borderTopColor: 'gray2',
             })}
           >
             {situations.map((situation, index) => (
@@ -90,11 +90,11 @@ export function SituationsTableTile({
                   {isPresent(data[situation.id]) ? (
                     <PercentageBar
                       amount={data[situation.id] as number}
-                      color={colors.data.primary}
+                      color={colors.primary}
                     />
                   ) : (
                     <Box display="flex" alignSelf="center">
-                      <InlineText color="data.axisLabels">
+                      <InlineText color="gray6">
                         {text.veiligheidsregio_tabel.niet_genoeg_gegevens}
                       </InlineText>
                     </Box>
@@ -129,7 +129,7 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGray',
+    borderBottomColor: 'gray2',
     p: 0,
     py: 2,
   })

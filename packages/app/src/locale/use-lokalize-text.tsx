@@ -166,7 +166,7 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   return (
     <Box
       border="1px solid"
-      borderColor="silver"
+      borderColor="gray3"
       mx={2}
       borderRadius={1}
       overflow="hidden"
@@ -177,13 +177,13 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
           css={css({
             px: 2,
             borderRight: values[i + 1] ? '1px solid' : undefined,
-            borderColor: 'silver',
+            borderColor: 'gray3',
             display: 'inline-block',
-            bg: x === value ? 'blue' : 'white',
+            bg: x === value ? 'blue8' : 'white',
             color: x === value ? 'white' : 'inherit',
             cursor: x === value ? 'default' : 'pointer',
             transition: 'background 100ms linear',
-            '&:hover': { bg: x === value ? 'blue' : 'tileGray' },
+            '&:hover': { bg: x === value ? 'blue8' : 'gray1' },
           })}
         >
           <VisuallyHidden>
@@ -209,7 +209,7 @@ function ToggleButton({
   isActive: boolean;
   onClick: () => void;
   children: ReactNode;
-  color?: 'green' | 'blue';
+  color?: 'green1' | 'blue8';
 }) {
   return (
     <Container isActive={isActive}>
@@ -261,7 +261,7 @@ const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>(
       cursor: 'pointer',
       borderRadius: 1,
       color: x.isActive ? 'white' : 'black',
-      bg: x.isActive ? 'blue' : 'transparent',
+      bg: x.isActive ? 'blue8' : 'transparent',
       transition: 'all 100ms linear',
       p: 1,
       display: 'inline-block',

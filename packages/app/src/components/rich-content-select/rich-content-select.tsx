@@ -83,7 +83,7 @@ export function RichContentSelect<T extends string>(
           {selectedOptionView}
           <ArrowIcon
             css={css({
-              color: 'blue',
+              color: 'blue8',
               width: '1rem',
               '&[aria-expanded="true"]': {
                 transform: 'rotate(180deg)',

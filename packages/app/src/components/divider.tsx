@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components/';
 
@@ -12,7 +13,7 @@ import styled from 'styled-components/';
 export const Divider = styled.div(
   css({
     width: '100%',
-    borderTop: 'solid 2px lightGray',
+    borderTop: `solid 2px ${colors.gray2}`,
     mt: 2,
     py: 2,
   })

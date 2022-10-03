@@ -37,7 +37,7 @@ const vaccines = [
 ] as const;
 vaccines.forEach((vaccine) =>
   assert(
-    colors.data.vaccines[vaccine],
+    colors.vaccines[vaccine],
     `[${VaccinationsPerSupplierOverLastWeekTile.name}] missing vaccine color for vaccine ${vaccine}`
   )
 );
@@ -69,8 +69,8 @@ export function VaccinationsPerSupplierOverLastWeekTile({
       return {
         metricProperty: vaccineType.vaccine_type_name,
         color:
-          colors.data.vaccines[
-            vaccineType.vaccine_type_name as keyof typeof colors.data.vaccines
+          colors.vaccines[
+            vaccineType.vaccine_type_name as keyof typeof colors.vaccines
           ],
         label: formatLabel(
           vaccineType.vaccine_type_name,
@@ -95,7 +95,7 @@ export function VaccinationsPerSupplierOverLastWeekTile({
         dataConfig={dataConfig}
         donutWidth={25}
         icon={<VaccinationIcon />}
-        iconFill={colors.body}
+        iconFill={colors.black}
         innerSize={180}
         marginLeft={32}
         marginRight={32}

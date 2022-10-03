@@ -252,13 +252,13 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   type: 'line',
                   metricProperty: 'infected_moving_average',
                   label: textShared.labels.infected_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'infected',
                   label: textShared.labels.infected,
-                  color: colors.data.primary,
+                  color: colors.primary,
                   yAxisExceptionValues: [1644318000],
                 },
               ]}
@@ -315,7 +315,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       {
                         type: 'line',
                         metricProperty: 'infected_percentage_moving_average',
-                        color: colors.data.primary,
+                        color: colors.primary,
                         label: textNl.ggd.linechart_percentage_legend_label,
                         shortLabel:
                           textShared.tooltip_labels
@@ -365,7 +365,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       {
                         type: 'line',
                         metricProperty: 'tested_total_moving_average',
-                        color: colors.data.secondary,
+                        color: colors.secondary,
                         label:
                           textNl.ggd
                             .linechart_totaltests_legend_label_moving_average,
@@ -376,7 +376,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       {
                         type: 'line',
                         metricProperty: 'infected_moving_average',
-                        color: colors.data.primary,
+                        color: colors.primary,
                         label:
                           textNl.ggd
                             .linechart_positivetests_legend_label_moving_average,

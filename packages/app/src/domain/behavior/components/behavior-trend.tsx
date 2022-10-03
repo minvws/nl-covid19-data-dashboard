@@ -17,7 +17,7 @@ const Trend = styled.span((a) =>
     display: 'inline-block',
 
     svg: {
-      color: a.color ?? '#0090DB',
+      color: a.color ?? colors.blue6,
       mr: 1,
       width: '12px',
       height: '12px',
@@ -45,7 +45,7 @@ export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   }
   if (trend === 'equal') {
     return (
-      <Trend color={colors.data.neutral}>
+      <Trend color={colors.neutral}>
         <Dot />
         {text.basisregels.trend_gelijk}
       </Trend>

@@ -37,7 +37,7 @@ export function ContentImage({
   const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
-    <Box bg="offWhite" p={4} width="100%">
+    <Box bg="gray1" p={4} width="100%">
       <Box
         as="figure"
         role="group"

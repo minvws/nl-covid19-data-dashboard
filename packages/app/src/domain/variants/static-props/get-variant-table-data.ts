@@ -72,7 +72,7 @@ export function getVariantTableData(
       const color =
         variantColors.find(
           (variantColor) => variantColor.variant === variant.variant_code
-        )?.color || colors.data.variants.fallbackColor;
+        )?.color || colors.gray5;
 
       return {
         variantCode: variant.variant_code,

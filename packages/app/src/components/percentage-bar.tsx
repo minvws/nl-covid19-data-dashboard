@@ -15,7 +15,7 @@ export function PercentageBar({
   percentage,
   height,
   color,
-  backgroundColor = colors.data.underReported,
+  backgroundColor = colors.gray2,
   backgroundStyle = 'normal',
 }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
@@ -24,7 +24,7 @@ export function PercentageBar({
     backgroundStyle === 'normal'
       ? backgroundColor
         ? backgroundColor
-        : 'data.underReported'
+        : 'gray2'
       : backgroundColor;
 
   return (

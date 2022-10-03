@@ -280,7 +280,7 @@ export const VaccinationsVrPage = (
                       value:
                         filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage ||
                         0,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                   {
@@ -297,7 +297,7 @@ export const VaccinationsVrPage = (
                       value:
                         filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage ||
                         0,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                 ]}
@@ -333,7 +333,7 @@ export const VaccinationsVrPage = (
                     bar: {
                       value:
                         filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                   {
@@ -348,7 +348,7 @@ export const VaccinationsVrPage = (
                     bar: {
                       value:
                         filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                 ]}

@@ -50,7 +50,7 @@ const Separator = styled.span(
 const LanguageLink = styled(Anchor)<{ isActive: boolean }>((x) =>
   css({
     borderBottom: '2px solid',
-    borderBottomColor: x.isActive ? 'button' : 'transparent',
+    borderBottomColor: x.isActive ? 'blue8' : 'transparent',
     color: 'inherit',
     display: 'inline-block',
     textAlign: 'center',
@@ -59,7 +59,7 @@ const LanguageLink = styled(Anchor)<{ isActive: boolean }>((x) =>
     fontWeight: x.isActive ? 'heavy' : 'normal',
 
     '&:hover, &:focus': {
-      borderBottomColor: 'button',
+      borderBottomColor: 'blue8',
     },
   })
 );

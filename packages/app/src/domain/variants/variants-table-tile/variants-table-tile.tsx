@@ -124,7 +124,7 @@ const NoDataBox = styled.div(
     width: '100%',
     display: 'flex',
     height: '8em',
-    color: 'gray',
+    color: 'gray5',
     justifyContent: 'center',
     alignItems: 'center',
   })

@@ -67,7 +67,7 @@ export function AgeDemographicTooltipContent<
 const Legend = styled.ul(
   css({
     borderTop: '1px solid',
-    borderTopColor: 'lightGray',
+    borderTopColor: 'gray2',
     m: 0,
     px: 0,
     py: 2,

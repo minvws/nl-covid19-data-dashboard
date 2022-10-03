@@ -40,10 +40,10 @@ export const Row = styled.tr<{
   isOpen?: boolean;
 }>((x) =>
   css({
-    background: x.isOpen ? colors.data.fill : undefined,
+    background: x.isOpen ? colors.primaryOpacity : undefined,
     borderTop: '1px solid',
     borderBottom: x.isOpen || x.isLast ? '1px solid' : undefined,
-    borderColor: x.isOpen ? colors.blue : colors.lightGray,
+    borderColor: x.isOpen ? colors.blue8 : colors.gray2,
     cursor: 'pointer',
   })
 );

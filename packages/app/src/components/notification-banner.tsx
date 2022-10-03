@@ -23,7 +23,7 @@ export function NotificationBanner({
   const hasDescription = description.length !== 0;
 
   return (
-    <Box width="100%" backgroundColor={colors.lightGray}>
+    <Box width="100%" backgroundColor={colors.gray2}>
       <MaxWidth
         px={{ _: 3, sm: 4 }}
         py={3}
@@ -43,7 +43,7 @@ export function NotificationBanner({
                 alignItems="center"
                 as="button"
                 css={css({
-                  color: colors.body,
+                  color: colors.black,
                   cursor: 'pointer',
                   border: 0,
                   borderRadius: '5px',

@@ -86,9 +86,9 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
     left: 0,
 
     border: '1px solid',
-    borderColor: 'blue',
-    bg: x.isActive ? 'blue' : 'white',
-    color: x.isActive ? 'white' : 'blue',
+    borderColor: 'blue8',
+    bg: x.isActive ? 'blue8' : 'white',
+    color: x.isActive ? 'white' : 'blue8',
 
     '&:focus': {
       opacity: 1,

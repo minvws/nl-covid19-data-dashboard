@@ -61,9 +61,9 @@ export function Metadata({
 
   return (
     <Box spacing={2}>
-      <Box display="flex" alignItems="flex-start" color="annotation">
+      <Box display="flex" alignItems="flex-start" color="gray7">
         <Icon>
-          <Clock aria-hidden color={colors.annotation} />
+          <Clock aria-hidden color={colors.gray7} />
         </Icon>
         <Text variant="label1">{dateText}</Text>
       </Box>
@@ -157,7 +157,7 @@ function MetadataItem({
   const { commonTexts } = useIntl();
 
   return (
-    <Box display="flex" alignItems="flex-start" color="annotation">
+    <Box display="flex" alignItems="flex-start" color="gray7">
       <Icon>{icon}</Icon>
 
       <Text variant="label1">
@@ -221,7 +221,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
   const words = commonTexts.informatie_header.meer_informatie_link.split(' ');
 
   return (
-    <Box display="flex" alignItems="flex-start" color="annotation">
+    <Box display="flex" alignItems="flex-start" color="gray7">
       <Icon>{icon}</Icon>
 
       <Link href={referenceLink} passHref>
