@@ -39,14 +39,14 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [locale, setLocale] = useState(initialLocale);
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
-  const showSanityDebugToggle = enableHotReload || IS_STAGING_ENV;
+  const showSanityDebugToggle = true || enableHotReload || IS_STAGING_ENV;
 
   const [dataset, setDataset] = useState<Dataset>(
     (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
       'development'
   );
 
-  const toggleButton = showSanityDebugToggle ? (
+  const toggleHotReloadButton = showSanityDebugToggle ? (
     <ToggleButton isActive={isActive} onClick={() => setIsActive((x) => !x)}>
       <Toggle values={[...datasets]} onToggle={setDataset} value={dataset} />
       <Toggle
@@ -133,7 +133,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
     }
   }, [initialLocale, dataset, isActive, locale]);
 
-  return [text, toggleButton, dataset] as const;
+  return { text, toggleHotReloadButton, dataset, locale } as const;
 }
 
 /**
