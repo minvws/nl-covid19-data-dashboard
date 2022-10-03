@@ -30,9 +30,9 @@ type ColorsWithoutRanges = O.Omit<typeof colors, 'scale'>;
 export type Color = Join<PathsToStringProps<ColorsWithoutRanges>, '.'>;
 
 //Based on https://www.rijkshuisstijl.nl/basiselementen/basiselementen-online/online-kleuren
-const colorsDefenition = {
-  //Gray scales  
-  white: '#ffffff', 
+const colorDefinitions = {
+  //Gray scales
+  white: '#ffffff',
   gray1: '#f3f3f3',
   gray2: '#e6e6e6',
   gray3: '#cccccc',
@@ -41,22 +41,22 @@ const colorsDefenition = {
   gray6: '#696969',
   gray7: '#535353',
   gray8: '#4f5458',
-  black: '#000000', 
+  black: '#000000',
   neutral: '#C6C8CA',
   blackOpacity: '#0000000d',
   //Red scales
   red1: '#f7e8e7',
-  red2: '#F35065', 
+  red2: '#F35065',
   red3: '#9f3430',
   //Orange scales
   orange1: '#E37321',
   orange2: '#A14E00',
   //Yellow scales
-  yellow1: '#FFF4C1', 
+  yellow1: '#FFF4C1',
   yellow2: '#fee670',
   yellow3: '#FFC000',
-  yellow4: '#D3A500', 
-  yellow5: '#CF9C00', 
+  yellow4: '#D3A500',
+  yellow5: '#CF9C00',
   //Green scales
   green1: '#69c253',
   green2: '#69c253',
@@ -67,24 +67,23 @@ const colorsDefenition = {
   secondary: '#154273',
   primaryOpacity: '#007bc70d',
   blue1: '#e5eff8',
-  blue2: '#D0EDFF', 
+  blue2: '#D0EDFF',
   blue3: '#aeddf3',
   blue4: '#8bc7e8',
   blue5: '#67b1dc',
-  blue6: '#219BE5', 
-  blue7: '#0053FD', 
+  blue6: '#219BE5',
+  blue7: '#0053FD',
   blue8: '#01689b',
   blue9: '#005082',
   blue10: '#003580',
   //Magenta scales
   magenta1: '#D360E5',
-  magenta2: '#9515AA', 
+  magenta2: '#9515AA',
   magenta3: '#cd005a',
   magenta4: '#aa004b',
-
-}
+};
 export const colors = {
-  ...colorsDefenition,
+  ...colorDefinitions,
   scale: {
     blue: [
       '#8FCAE7',
@@ -107,13 +106,7 @@ export const colors = {
       '#002f5f',
       '#001d45',
     ],
-    magenta: [
-      '#F291BC', 
-      '#D95790', 
-      '#A11050', 
-      '#68032F', 
-      '#000000'
-    ],
+    magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
     yellow: [
       '#FFF2CC',
       '#FFE699',
@@ -146,16 +139,16 @@ export const colors = {
   },
 
   vaccines: {
-    bio_n_tech_pfizer: colorsDefenition.blue6,
-    moderna: colorsDefenition.yellow3,
-    astra_zeneca: colorsDefenition.green2,
-    cure_vac: colorsDefenition.magenta1,
-    janssen: colorsDefenition.orange1,
-    sanofi: colorsDefenition.blue9,
-    novavax: colorsDefenition.magenta2,
+    bio_n_tech_pfizer: colorDefinitions.blue6,
+    moderna: colorDefinitions.yellow3,
+    astra_zeneca: colorDefinitions.green2,
+    cure_vac: colorDefinitions.magenta1,
+    janssen: colorDefinitions.orange1,
+    sanofi: colorDefinitions.blue9,
+    novavax: colorDefinitions.magenta2,
 
     // @TODO remove when data is updated to new name
-    pfizer: colorsDefenition.blue6,
+    pfizer: colorDefinitions.blue6,
 
     /**
      * The below list are duplicates of the above entries, because BE is
@@ -163,10 +156,10 @@ export const colors = {
      * data entry IDs. This has been introduced as part of COR-938.
      * @TODO - remove duplicates when/if BE is able to provide IDs.
      */
-    'BioNTech/Pfizer': colorsDefenition.blue6,
-    Moderna: colorsDefenition.yellow3,
-    AstraZeneca: colorsDefenition.green2,
-    Janssen: colorsDefenition.orange1,
-    Novavax: colorsDefenition.magenta2,
+    'BioNTech/Pfizer': colorDefinitions.blue6,
+    Moderna: colorDefinitions.yellow3,
+    AstraZeneca: colorDefinitions.green2,
+    Janssen: colorDefinitions.orange1,
+    Novavax: colorDefinitions.magenta2,
   },
 } as const;
