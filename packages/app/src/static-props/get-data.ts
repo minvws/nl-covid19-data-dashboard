@@ -221,22 +221,28 @@ export function selectTopicalData(locale: keyof Languages) {
   const topicalData = getTopicalData().data;
   const localeKey = locale === 'nl' ? 'NL' : 'EN';
 
+  const rewriteAbsoluteUrls = (text: string) => {
+    return text.replaceAll('https://coronadashboard.rijksoverheid.nl', '');
+  };
+
   return {
     version: topicalData.version,
     title: topicalData.title[localeKey],
     dynamicDescription: topicalData.dynamicDescription.map((description) => ({
       index: description.index,
-      content: description.content[localeKey],
+      content: rewriteAbsoluteUrls(description.content[localeKey]),
     })),
     themes: topicalData.themes.map((theme) => ({
       index: theme.index,
       title: theme.title[localeKey],
-      dynamicSubtitle: theme.dynamicSubtitle[localeKey],
+      dynamicSubtitle: rewriteAbsoluteUrls(theme.dynamicSubtitle[localeKey]),
       icon: theme.icon,
       themeTiles: theme.themeTiles.map((tile) => ({
         index: tile.index,
         title: tile.title[localeKey],
-        dynamicDescription: tile.dynamicDescription[localeKey],
+        dynamicDescription: rewriteAbsoluteUrls(
+          tile.dynamicDescription[localeKey]
+        ),
         trendIcon: tile.trendIcon && {
           direction: tile.trendIcon.direction,
           color:
@@ -249,7 +255,7 @@ export function selectTopicalData(locale: keyof Languages) {
         tileIcon: tile.tileIcon,
         cta: tile.cta && {
           label: tile.cta.label[localeKey],
-          href: tile.cta.href[localeKey],
+          href: rewriteAbsoluteUrls(tile.cta.href[localeKey]),
         },
       })),
       moreLinks: {
@@ -260,13 +266,15 @@ export function selectTopicalData(locale: keyof Languages) {
         links: theme.moreLinks.links.map((link) => ({
           index: link.index,
           label: link.label[localeKey],
-          href: link.href[localeKey],
+          href: rewriteAbsoluteUrls(link.href[localeKey]),
         })),
       },
     })),
     measures: {
       title: topicalData.measures.title[localeKey],
-      dynamicSubtitle: topicalData.measures.dynamicSubtitle[localeKey],
+      dynamicSubtitle: rewriteAbsoluteUrls(
+        topicalData.measures.dynamicSubtitle[localeKey]
+      ),
       icon: topicalData.measures.icon,
       measureTiles: topicalData.measures.measureTiles.map((tile) => ({
         index: tile.index,
