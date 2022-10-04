@@ -83,17 +83,22 @@ noting:
 - We avoid using `boolean && doSomething();` inside the component's JavaScript logic, but do use it inside the component's JSX (`{boolean && ( ... )}`) to conditionally render (parts of) the component.
 - We avoid unnecessary short-hand variable names like
   `arr` for array or `i` for index or `acc` for a `reduce` accumulator.
+- We use the following branch names:
+  - `feature/COR-XXX-descriptive-name-of-ticket-branch` for features
+  - `bugfix/COR-XXX-descriptive-name-of-ticket-branch` for bug fixes
+  - `hotfix/COR-XXX-descriptive-name-of-ticket-branch` for hotfixes
+  - `task/COR-XXX-descriptive-name-of-ticket-branch` for bigger features that are best reviewed in smaller chunks
+- We use commit messages according to: https://www.conventionalcommits.org/en/v1.0.0/
+  - `feat(optional-scope): commit description example` for features
+  - `fix(optional-scope): commit description example` for fixes
+  - `chore(optional-scope): commit description example` for cleanups
 
 ### Under discussion
 
-- What should branch names look like?
-  - `feature/COR-XXX-descriptive-name-of-ticket-branch`
-  - `bugfix/COR-XXX-descriptive-name-of-ticket-branch`
-  - `hotfix/COR-XXX-descriptive-name-of-ticket-branch` (update release docs)
-  - ~~`task/COR-XXX-descriptive-name-of-ticket-branch`~~
-  - `epic/descriptive-name-of-epic`?
-- What should commit messages look like? Is there a certain style to follow?
 - What should we do with a multitude of commits? Squash and combine or leave as is?
+- Should we use rebase instead of merge?
+- How do we write styled components
+- Where do we draw the line if we create a pull-request with x number of files changed?
 
 ### Yet to discuss
 
