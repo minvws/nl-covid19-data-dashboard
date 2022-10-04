@@ -26,8 +26,8 @@ export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(
         .then((texts) => mapSiteTextValuesToKeys(texts))
         .then((texts) => setTexts(selector(texts)));
     }
-    // when locale is set to 'en' with the debug toggle we fetch the en texts and show them instead of the default nl texts
-    else if (locale === 'en') {
+    // when selected locale is not the default we fetch the texts again and show those instead
+    else if (locale !== 'nl') {
       fetchLokalizeTexts(environment)
         .catch(handleSanityError)
         .then((texts) => texts[locale] as unknown as SiteText)
