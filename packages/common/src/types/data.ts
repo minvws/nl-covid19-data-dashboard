@@ -330,6 +330,8 @@ export interface NamedDifferenceDecimal {
     | "B_1_621"
     | "C_37"
     | "BA_2_75"
+    | "BA_2_75_2"
+    | "BF_7"
     | "other_table"
     | "other_graph";
   old_value: number;
@@ -969,7 +971,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_range: "5-11" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "60-69" | "70-79" | "80+";
   age_group_percentage: number;
   age_group_total: number;
-  autumn_2022_vaccinated: number;
+  autumn_2022_vaccinated: number | null;
   fully_vaccinated: number;
   booster_shot: number | null;
   autumn_2022_vaccinated_percentage: number | null;
@@ -1088,6 +1090,8 @@ export interface NlVariantsVariant {
     | "B_1_621"
     | "C_37"
     | "BA_2_75"
+    | "BA_2_75_2"
+    | "BF_7"
     | "other_table"
     | "other_graph";
   values: NlVariantsVariantValue[];
