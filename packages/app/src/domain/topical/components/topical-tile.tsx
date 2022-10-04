@@ -116,9 +116,6 @@ export function TopicalTile({
             color={colors.blue8}
             padding={3}
             className="topical-tile-cta"
-            css={css({
-              transition: 'background .1s ease-in-out',
-            })}
           >
             <TextWithIcon text={cta.label} icon={<ChevronRight />} />
           </Box>
