@@ -4,7 +4,7 @@ import { space, fontWeights } from '~/style/theme';
 import { Text } from '~/components/typography';
 import { SeverityLevel } from '../types';
 
-interface SeverityIndicatorLevelProps {
+interface SeverityIndicatorLabelProps {
   color: string;
   label: string;
   level: SeverityLevel;
@@ -14,19 +14,17 @@ export const SeverityIndicatorLabel = ({
   color,
   label,
   level,
-}: SeverityIndicatorLevelProps) => {
+}: SeverityIndicatorLabelProps) => {
   return (
     <>
-      <SeverityIndicatorLevelContainer color={color}>
-        {level}
-      </SeverityIndicatorLevelContainer>
+      <SeverityIndicatorLevel color={color}>{level}</SeverityIndicatorLevel>
 
       <Text variant="h3">{label}</Text>
     </>
   );
 };
 
-const SeverityIndicatorLevelContainer = styled.div`
+const SeverityIndicatorLevel = styled.div`
   align-items: center;
   background-color: ${({ color }: { color: string }) => color};
   border-radius: 50%;
