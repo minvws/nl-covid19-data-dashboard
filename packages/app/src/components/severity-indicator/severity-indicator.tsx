@@ -40,9 +40,9 @@ export const SeverityIndicator = ({
     >
       <Box
         flexGrow={1}
-        minWidth="250px"
+        minWidth="200px"
         position="relative"
-        width="min(50%, 250px)"
+        width="min(50%, 200px)"
       >
         <Text>{title}</Text>
 
@@ -76,7 +76,7 @@ export const SeverityIndicator = ({
         </Box>
       </Box>
 
-      <Box flexGrow={1} minWidth="250px" width="min(50%, 250px)">
+      <Box flexGrow={1} minWidth="200px" width="min(50%, 200px)">
         <Markdown content={description} />
 
         <Metadata {...metadata} isTileFooter />
