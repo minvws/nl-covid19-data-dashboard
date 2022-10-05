@@ -56,7 +56,6 @@
     "ts-node": "^10.8.1"
   },
   "lint-staged": {
-    "*.format": "prettier --write",
-    "*.@(ts|tsx)": "eslint --fix"
+    "*.@(ts|tsx|js)": ["eslint --fix", "prettier --write"]
   }
 }
