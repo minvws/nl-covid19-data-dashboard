@@ -2611,7 +2611,6 @@ __metadata:
     download: ^8.0.0
     eslint: ^7.32.0
     eslint-config-next: ^12.0.4
-    eslint-config-prettier: ^8.5.0
     eslint-plugin-react: ^7.27.1
     eslint-plugin-react-hooks: ^4.3.0
     eslint-plugin-risxss: ^2.1.0
@@ -2644,7 +2643,6 @@ __metadata:
     postcss: ^8.4.4
     postcss-flexbugs-fixes: ^5.0.2
     postcss-preset-env: ^6.7.0
-    prettier: ^2.7.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-error-boundary: ^3.1.4
@@ -2689,7 +2687,6 @@ __metadata:
     chalk: ^4.1.2
     dotenv: ^10.0.0
     eslint: ^7.32.0
-    eslint-config-prettier: ^8.3.0
     flat: ^5.0.2
     json-schema-to-typescript: ^10.1.5
     lodash: ^4.17.21
@@ -2736,7 +2733,6 @@ __metadata:
     download: ^8.0.0
     eslint: ^7.32.0
     eslint-config-next: ^12.0.4
-    eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.27.1
     eslint-plugin-react-hooks: ^4.3.0
     eslint-plugin-risxss: ^2.1.0
@@ -2777,11 +2773,8 @@ __metadata:
     chokidar-cli: ^3.0.0
     cross-env: ^7.0.3
     eslint: ^8.3.0
-    eslint-config-prettier: ^8.3.0
-    eslint-plugin-prettier: ^4.0.0
     eslint-plugin-react: ^7.27.1
     geojson: ^0.5.0
-    prettier: ^2.5.0
     ts-is-present: ^1.2.2
     ts-node: ^10.9.1
     tsconfig-paths: ^3.12.0
@@ -2800,10 +2793,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.5.0
     cypress: ^8.7.0
     eslint: ^8.3.0
-    eslint-config-prettier: ^8.3.0
-    eslint-plugin-prettier: ^4.0.0
     eslint-plugin-react: ^7.27.1
-    prettier: ^2.5.0
     typescript: ^4.4.4
   languageName: unknown
   linkType: soft
@@ -2824,7 +2814,6 @@ __metadata:
     babel-preset-env: ^1.7.0
     camelcase: ^6.2.1
     eslint: ^8.3.0
-    eslint-config-prettier: ^8.3.0
     eslint-plugin-import: ^2.25.3
     eslint-plugin-jsx-a11y: ^6.5.1
     eslint-plugin-react: ^7.27.1
@@ -7240,10 +7229,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.3, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.6, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
+"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.6, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
   version: 7.0.9
   resolution: "@types/json-schema@npm:7.0.9"
   checksum: 259d0e25f11a21ba5c708f7ea47196bd396e379fddb79c76f9f4f62c945879dc21657904914313ec2754e443c5018ea8372362f323f30e0792897fdb2098a705
+  languageName: node
+  linkType: hard
+
+"@types/json-schema@npm:^7.0.3":
+  version: 7.0.11
+  resolution: "@types/json-schema@npm:7.0.11"
+  checksum: 527bddfe62db9012fccd7627794bd4c71beb77601861055d87e3ee464f2217c85fca7a4b56ae677478367bbd248dbde13553312b7d4dbc702a2f2bbf60c4018d
   languageName: node
   linkType: hard
 
@@ -7362,6 +7358,13 @@ __metadata:
   version: 1.0.1
   resolution: "@types/pascalcase@npm:1.0.1"
   checksum: 7d8955e6ab0a5d6a07cd1ee374392f9b9cc95b5682806bf1bd4f61be3d8432e6c4976e51b1ca362896571a81a84c90e6aa99b9dbbb586f0e3860b20caa7b93ad
+  languageName: node
+  linkType: hard
+
+"@types/prettier@npm:^2":
+  version: 2.7.1
+  resolution: "@types/prettier@npm:2.7.1"
+  checksum: 5e3f58e229d6c73b5f5cae2e8f96c1c4a5b5805f83459e17a045ba8e96152b1d38e86b63e3172fb159dac923388699660862b75b2d37e54220805f0e691e26f1
   languageName: node
   linkType: hard
 
@@ -11525,6 +11528,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "corona-dashboard@workspace:."
   dependencies:
+    "@types/prettier": ^2
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-prettier: ^4.2.1
+    husky: ">=6"
+    lint-staged: ">=10"
+    prettier: ^2.7.1
     ts-node: ^10.8.1
   languageName: unknown
   linkType: soft
@@ -13519,17 +13528,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "eslint-config-prettier@npm:8.3.0"
-  peerDependencies:
-    eslint: ">=7.0.0"
-  bin:
-    eslint-config-prettier: bin/cli.js
-  checksum: df4cea3032671995bb5ab07e016169072f7fa59f44a53251664d9ca60951b66cdc872683b5c6a3729c91497c11490ca44a79654b395dd6756beb0c3903a37196
-  languageName: node
-  linkType: hard
-
 "eslint-config-prettier@npm:^8.5.0":
   version: 8.5.0
   resolution: "eslint-config-prettier@npm:8.5.0"
@@ -13667,9 +13665,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "eslint-plugin-prettier@npm:4.0.0"
+"eslint-plugin-prettier@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "eslint-plugin-prettier@npm:4.2.1"
   dependencies:
     prettier-linter-helpers: ^1.0.0
   peerDependencies:
@@ -13678,7 +13676,7 @@ __metadata:
   peerDependenciesMeta:
     eslint-config-prettier:
       optional: true
-  checksum: 03d69177a3c21fa2229c7e427ce604429f0b20ab7f411e2e824912f572a207c7f5a41fd1f0a95b9b8afe121e291c1b1f1dc1d44c7aad4b0837487f9c19f5210d
+  checksum: b9e839d2334ad8ec7a5589c5cb0f219bded260839a857d7a486997f9870e95106aa59b8756ff3f37202085ebab658de382b0267cae44c3a7f0eb0bcc03a4f6d6
   languageName: node
   linkType: hard
 
@@ -16242,6 +16240,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"husky@npm:>=6":
+  version: 8.0.1
+  resolution: "husky@npm:8.0.1"
+  bin:
+    husky: lib/bin.js
+  checksum: 943a73a13d0201318fd30e83d299bb81d866bd245b69e6277804c3b462638dc1921694cb94c2b8c920a4a187060f7d6058d3365152865406352e934c5fff70dc
+  languageName: node
+  linkType: hard
+
 "hyperscript@npm:^2.0.2":
   version: 2.0.2
   resolution: "hyperscript@npm:2.0.2"
@@ -17826,6 +17833,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lint-staged@npm:>=10, lint-staged@npm:^13.0.3":
+  version: 13.0.3
+  resolution: "lint-staged@npm:13.0.3"
+  dependencies:
+    cli-truncate: ^3.1.0
+    colorette: ^2.0.17
+    commander: ^9.3.0
+    debug: ^4.3.4
+    execa: ^6.1.0
+    lilconfig: 2.0.5
+    listr2: ^4.0.5
+    micromatch: ^4.0.5
+    normalize-path: ^3.0.0
+    object-inspect: ^1.12.2
+    pidtree: ^0.6.0
+    string-argv: ^0.3.1
+    yaml: ^2.1.1
+  bin:
+    lint-staged: bin/lint-staged.js
+  checksum: 53d585007df06e162febab6b0836b55016d902586a267823c8a1158529d8c742dc7297e523f7023dff02250bef3eb0d6934f4ec4f9961adfc2ebbed5f54162d0
+  languageName: node
+  linkType: hard
+
 "lint-staged@npm:^11.2.6":
   version: 11.2.6
   resolution: "lint-staged@npm:11.2.6"
@@ -17847,29 +17877,6 @@ __metadata:
   bin:
     lint-staged: bin/lint-staged.js
   checksum: b9071621db351c553579bd18df3d80fb753f851c4f1f72db0aaf12e713eab25b6d8a044dab2957817de7da02054a63f7725a49c763aee09295133f0d554f4d3f
-  languageName: node
-  linkType: hard
-
-"lint-staged@npm:^13.0.3":
-  version: 13.0.3
-  resolution: "lint-staged@npm:13.0.3"
-  dependencies:
-    cli-truncate: ^3.1.0
-    colorette: ^2.0.17
-    commander: ^9.3.0
-    debug: ^4.3.4
-    execa: ^6.1.0
-    lilconfig: 2.0.5
-    listr2: ^4.0.5
-    micromatch: ^4.0.5
-    normalize-path: ^3.0.0
-    object-inspect: ^1.12.2
-    pidtree: ^0.6.0
-    string-argv: ^0.3.1
-    yaml: ^2.1.1
-  bin:
-    lint-staged: bin/lint-staged.js
-  checksum: 53d585007df06e162febab6b0836b55016d902586a267823c8a1158529d8c742dc7297e523f7023dff02250bef3eb0d6934f4ec4f9961adfc2ebbed5f54162d0
   languageName: node
   linkType: hard
 
@@ -22090,30 +22097,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.0.0, prettier@npm:^2.2.0":
-  version: 2.4.1
-  resolution: "prettier@npm:2.4.1"
-  bin:
-    prettier: bin-prettier.js
-  checksum: cc6830588b401b0d742862fe9c46bc9118204fb307c3abe0e49e95b35ed23629573807ffdf9cdd65289c252a0bb51fc0171437f6626ee36378dea80f0ee80b91
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "prettier@npm:2.5.0"
-  bin:
-    prettier: bin-prettier.js
-  checksum: aad1b35b73e7c14596d389d90977a83dad0db689ba5802a0ef319c357b7867f55b885db197972aa6a56c30f53088c9f8e0d7f7930ae074c275a4e9cbe091d21d
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^2.7.1":
+"prettier@npm:^2.0.0, prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
     prettier: bin-prettier.js
   checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.2.0":
+  version: 2.4.1
+  resolution: "prettier@npm:2.4.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: cc6830588b401b0d742862fe9c46bc9118204fb307c3abe0e49e95b35ed23629573807ffdf9cdd65289c252a0bb51fc0171437f6626ee36378dea80f0ee80b91
   languageName: node
   linkType: hard
 
@@ -24407,7 +24405,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5":
+"semver@npm:^7.2.1, semver@npm:^7.3.4, semver@npm:^7.3.5":
   version: 7.3.5
   resolution: "semver@npm:7.3.5"
   dependencies:
@@ -24415,6 +24413,17 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 5eafe6102bea2a7439897c1856362e31cc348ccf96efd455c8b5bc2c61e6f7e7b8250dc26b8828c1d76a56f818a7ee907a36ae9fb37a599d3d24609207001d60
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.3.2":
+  version: 7.3.8
+  resolution: "semver@npm:7.3.8"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: ba9c7cbbf2b7884696523450a61fee1a09930d888b7a8d7579025ad93d459b2d1949ee5bbfeb188b2be5f4ac163544c5e98491ad6152df34154feebc2cc337c1
   languageName: node
   linkType: hard
 
