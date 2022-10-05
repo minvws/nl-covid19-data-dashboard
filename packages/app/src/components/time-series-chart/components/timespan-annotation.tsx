@@ -89,9 +89,7 @@ export function TimespanAnnotation({
         height={height}
         x={x0}
         width={width}
-        fill={
-          fill === 'solid' ? colors.gray2 : `url(#${patternId})`
-        }
+        fill={fill === 'solid' ? colors.gray2 : `url(#${patternId})`}
         style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
       />
     </>

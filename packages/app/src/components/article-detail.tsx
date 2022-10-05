@@ -93,9 +93,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       {article.categories && (
         <ContentBlock>
           <Box pb={2} pt={4}>
-            <InlineText color="gray7">
-              {text.secties.artikelen.tags}
-            </InlineText>
+            <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
             as="ul"

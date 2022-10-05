@@ -18,7 +18,9 @@ export function selectVaccineCoverageData<
       autumn_2022_vaccinated_percentage?: number;
     } = {};
 
-    if (isPresent(vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label)) {
+    if (
+      isPresent(vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label)
+    ) {
       const result = parseVaccinatedPercentageLabel(
         vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label
       );
@@ -29,7 +31,11 @@ export function selectVaccineCoverageData<
       }
     }
 
-    if (isPresent(vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label)) {
+    if (
+      isPresent(
+        vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label
+      )
+    ) {
       const result = parseVaccinatedPercentageLabel(
         vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label
       );

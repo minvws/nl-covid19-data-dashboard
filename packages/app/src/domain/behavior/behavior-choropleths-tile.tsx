@@ -1,7 +1,4 @@
-import {
-  colors,
-  VrCollectionBehavior,
-} from '@corona-dashboard/common';
+import { colors, VrCollectionBehavior } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isNumber } from 'lodash';
 import { useMemo } from 'react';
@@ -118,7 +115,8 @@ function ChoroplethBlock({
   const breakpoints = useBreakpoints();
 
   const isSmallScreen = breakpoints.sm;
-  const metricProperty = `${currentId}_${behaviorType}` as keyof VrCollectionBehavior;
+  const metricProperty =
+    `${currentId}_${behaviorType}` as keyof VrCollectionBehavior;
 
   return (
     <Box width={{ _: '100%', lg: '50%' }} spacing={3}>

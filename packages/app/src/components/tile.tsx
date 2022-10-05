@@ -42,6 +42,8 @@ const StyledTile = styled.article<{
       : asResponsiveArray({ _: 3, sm: 4 }),
     height: styledTileProps.height,
     backgroundColor: 'white',
-    borderTop: styledTileProps.hasNoBorder ? undefined : `solid 2px ${colors.gray2}`,
+    borderTop: styledTileProps.hasNoBorder
+      ? undefined
+      : `solid 2px ${colors.gray2}`,
   })
 );

@@ -73,11 +73,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
             )}
             {isOutOfBounds && (
               <AppearTransition key="1">
-                <Text
-                  variant="label2"
-                  color={colors.gray7}
-                  textAlign={'left'}
-                >
+                <Text variant="label2" color={colors.gray7} textAlign={'left'}>
                   {options.outOfBoundsConfig?.tooltipLabel}
                 </Text>
               </AppearTransition>

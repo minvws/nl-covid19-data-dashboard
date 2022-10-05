@@ -137,9 +137,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
     fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
     bg: anchorProps.isActive ? 'blue1' : 'transparent',
-    borderRightColor: anchorProps.isActive
-      ? 'blue8'
-      : 'transparent',
+    borderRightColor: anchorProps.isActive ? 'blue8' : 'transparent',
 
     '&:hover, &:focus': {
       bg: 'blue8',

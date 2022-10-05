@@ -65,7 +65,8 @@ export function getVariantTableData(
   const variantTable = variants.values
     .filter(
       (variant) =>
-        variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance
+        variant.variant_code !== 'other_graph' &&
+        !variant.last_value.has_historical_significance
     )
     .sort((a, b) => b.last_value.order - a.last_value.order)
     .map<VariantRow>((variant) => {

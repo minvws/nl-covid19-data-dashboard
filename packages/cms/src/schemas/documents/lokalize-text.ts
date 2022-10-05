@@ -83,12 +83,12 @@ export const lokalizeText = {
       key: 'key',
       subtitle: 'text.nl',
     },
-    prepare({ key, subtitle}: { key: string, subtitle: string}) {
+    prepare({ key, subtitle }: { key: string; subtitle: string }) {
       const title = key.split('.').slice(3).join('.');
       return {
         title,
-        subtitle
-      }
+        subtitle,
+      };
     },
   },
 };

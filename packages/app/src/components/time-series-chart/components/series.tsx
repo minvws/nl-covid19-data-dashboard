@@ -61,7 +61,9 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           const config = seriesConfig[index];
           const id =
             config.type === 'range'
-              ? `${chartId}_${String(config.metricPropertyLow)}_${String(config.metricPropertyHigh)}_${config.type}`
+              ? `${chartId}_${String(config.metricPropertyLow)}_${String(
+                  config.metricPropertyHigh
+                )}_${config.type}`
               : `${chartId}_${String(config.metricProperty)}_${config.type}`;
 
           switch (config.type) {

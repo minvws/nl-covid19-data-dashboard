@@ -6,8 +6,5 @@ export function getColor(colorPath: string | undefined) {
     return colors.primary as Color;
   }
 
-  return get(
-    colors,
-    colors.primary
-  ) as Color;
+  return get(colors, colors.primary) as Color;
 }

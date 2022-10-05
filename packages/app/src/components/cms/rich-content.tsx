@@ -322,10 +322,7 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   if (!mark.href) return <>{children}</>;
 
   return isAbsoluteUrl(mark.href) ? (
-    <ExternalLink
-      href={mark.href}
-      underline
-    >
+    <ExternalLink href={mark.href} underline>
       {children}
       <ExternalLinkIcon width={20} height={11} />
     </ExternalLink>

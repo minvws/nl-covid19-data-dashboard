@@ -33,15 +33,12 @@ export function createDataConfig<T extends ChoroplethDataItem>(
   return {
     metricName: partialDataConfig.metricName ?? '',
     metricProperty: partialDataConfig.metricProperty,
-    noDataFillColor:
-      partialDataConfig.noDataFillColor ?? colors.white,
+    noDataFillColor: partialDataConfig.noDataFillColor ?? colors.white,
     hoverFill: partialDataConfig.hoverFill ?? 'none',
-    hoverStroke:
-      partialDataConfig.hoverStroke ?? colors.white,
+    hoverStroke: partialDataConfig.hoverStroke ?? colors.white,
     hoverStrokeWidth:
       partialDataConfig.hoverStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
-    highlightStroke:
-      partialDataConfig.highlightStroke ?? colors.white,
+    highlightStroke: partialDataConfig.highlightStroke ?? colors.white,
     highlightStrokeWidth:
       partialDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
     areaStroke: partialDataConfig.areaStroke ?? colors.white,

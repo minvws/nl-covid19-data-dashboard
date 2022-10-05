@@ -43,17 +43,13 @@ export function TileAverageDifference({
       ? text.zeven_daags_gemiddelde_waarde_minder
       : text.zeven_daags_gemiddelde_waarde_lager;
 
-    containerWithIcon = (
-      <ContainerWithIcon icon={<Down />} color="primary" />
-    );
+    containerWithIcon = <ContainerWithIcon icon={<Down />} color="primary" />;
   }
 
   if (!content) {
     content = text.zeven_daags_gemiddelde_waarde_gelijk;
 
-    containerWithIcon = (
-      <ContainerWithIcon icon={<Dot />} color="neutral" />
-    );
+    containerWithIcon = <ContainerWithIcon icon={<Dot />} color="neutral" />;
   }
 
   return (

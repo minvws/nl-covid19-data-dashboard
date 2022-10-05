@@ -5,5 +5,5 @@
  */
 
 export function formatPercentageAsNumber(percentage: string) {
-  return parseFloat(percentage.replace(',', '.'))
+  return parseFloat(percentage.replace(',', '.'));
 }

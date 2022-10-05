@@ -99,16 +99,8 @@ export function SituationsOverTimeChart({
   );
 }
 
-const {
-  blue6,
-  green2,
-  green3,
-  yellow3,
-  yellow5,
-  orange1,
-  orange2,
-  magenta1,
-} = colors;
+const { blue6, green2, green3, yellow3, yellow5, orange1, orange2, magenta1 } =
+  colors;
 
 const seriesColors: Record<SituationKey, string> = {
   home_and_visits: blue6,

@@ -45,16 +45,17 @@ export function BehaviorLineChartTile({
   useDatesAsRange,
   text,
 }: BehaviorLineChartTileProps) {
-  const selectedComplianceValueKey =
-    `${currentId}_compliance` as ValueKey;
-  const selectedSupportValueKey =
-    `${currentId}_support` as ValueKey;
+  const selectedComplianceValueKey = `${currentId}_compliance` as ValueKey;
+  const selectedSupportValueKey = `${currentId}_support` as ValueKey;
 
   const complianceValuesHasGap = useDataHasGaps<ValueType>(
     values,
     selectedComplianceValueKey
   );
-  const supportValuesHasGap = useDataHasGaps<ValueType>(values, selectedSupportValueKey);
+  const supportValuesHasGap = useDataHasGaps<ValueType>(
+    values,
+    selectedSupportValueKey
+  );
 
   const breakpoints = useBreakpoints();
 
