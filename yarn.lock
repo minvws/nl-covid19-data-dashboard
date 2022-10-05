@@ -2629,7 +2629,6 @@ __metadata:
     jsdom: ^18.1.1
     jsdom-global: ^3.0.2
     konva: ^7.2.5
-    lint-staged: ^13.0.3
     lodash: ^4.17.21
     lodash-webpack-plugin: ^0.11.6
     match-sorter: ^6.3.1
@@ -17833,7 +17832,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:>=10, lint-staged@npm:^13.0.3":
+"lint-staged@npm:>=10":
   version: 13.0.3
   resolution: "lint-staged@npm:13.0.3"
   dependencies:
