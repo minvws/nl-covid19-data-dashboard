@@ -23,11 +23,5 @@
     "e2e:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\"",
     "type-check": "tsc --pretty --noEmit"
-  },
-  "lint-staged": {
-    "*.@(ts|tsx|js)": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }

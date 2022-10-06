@@ -159,11 +159,5 @@
   "browserslist": [
     "defaults",
     "not ie < 11"
-  ],
-  "lint-staged": {
-    "*.@(ts|tsx|js)": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  }
+  ]
 }

@@ -56,11 +56,5 @@
   "dependencies": {
     "pascalcase": "^1.0.0",
     "prop-types": "^15.7.2"
-  },
-  "lint-staged": {
-    "*.@(ts|tsx|js)": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }
