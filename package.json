@@ -57,7 +57,7 @@
   },
   "lint-staged": {
     "*.@(ts|tsx|js)": [
-      "eslint --fix",
+      "yarn lint --fix",
       "prettier --write"
     ]
   }
