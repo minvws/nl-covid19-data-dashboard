@@ -10,6 +10,17 @@ interface SeverityIndicatorProps {
   level: SeverityLevel;
 }
 
+const SeverityIndicatorArrow = () => (
+  <Box left="50%" position="absolute" top="100%" transform="translateX(-50%)">
+    <Box
+      borderBottom={`${space[2]} solid ${colors.black}`}
+      borderLeft={`${space[1]} solid transparent`}
+      borderRight={`${space[1]} solid transparent`}
+      m={2}
+    />
+  </Box>
+);
+
 export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
   const severityLevels = Object.entries(SeverityLevels);
 
@@ -19,7 +30,6 @@ export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
       css={css({ gap: `0 ${space[1]}` })}
       display="flex"
       height={space[4]}
-      justifyContent="space-between"
       mb={space[4]}
       mt={space[3]}
     >
@@ -27,30 +37,16 @@ export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
         <Box
           key={key}
           backgroundColor={
-            level >= value
+            Number(level) >= Number(value)
               ? getSeverityColor(level as SeverityLevels)
               : colors.gray3
           }
           borderRadius={4}
-          height={getSeverityHeight(value)}
+          height={`${getSeverityHeight(value)}%`}
           position="relative"
           width={`${100 / severityLevels.length}%`}
         >
-          {level === value && (
-            <Box
-              left="50%"
-              position="absolute"
-              top="100%"
-              transform="translateX(-50%)"
-            >
-              <Box
-                borderBottom={`${space[2]} solid ${colors.black}`}
-                borderLeft={`${space[1]} solid transparent`}
-                borderRight={`${space[1]} solid transparent`}
-                m={2}
-              />
-            </Box>
-          )}
+          {level === value && <SeverityIndicatorArrow />}
         </Box>
       ))}
     </Box>
