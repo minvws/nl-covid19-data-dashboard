@@ -453,6 +453,7 @@ export const VaccinationsGmPage = (
                 commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
+            hasPadding
           >
             <DynamicChoropleth
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
