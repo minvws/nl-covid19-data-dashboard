@@ -1,13 +1,5 @@
 import { useRouter } from 'next/router';
-import {
-  ChangeEvent,
-  createContext,
-  ReactNode,
-  RefObject,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, createContext, ReactNode, RefObject, useContext, useEffect, useState } from 'react';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -26,19 +18,10 @@ interface SearchContextProviderProps<T extends Element> {
 
 const searchContext = createContext<SearchContext | undefined>(undefined);
 
-export function SearchContextProvider<T extends Element>({
-  children,
-  containerRef,
-  initialValue = '',
-  activeResult,
-}: SearchContextProviderProps<T>) {
+export function SearchContextProvider<T extends Element>({ children, containerRef, initialValue = '', activeResult }: SearchContextProviderProps<T>) {
   const value = useSearchContextValue(initialValue, containerRef, activeResult);
 
-  return (
-    <searchContext.Provider value={value}>
-      {children(value)}
-    </searchContext.Provider>
-  );
+  return <searchContext.Provider value={value}>{children(value)}</searchContext.Provider>;
 }
 
 export function useSearchContext() {
@@ -49,11 +32,7 @@ export function useSearchContext() {
   return context;
 }
 
-function useSearchContextValue<T extends Element>(
-  initialValue: string,
-  containerRef: RefObject<T>,
-  activeResult?: string
-) {
+function useSearchContextValue<T extends Element>(initialValue: string, containerRef: RefObject<T>, activeResult?: string) {
   const router = useRouter();
   const breakpoints = useBreakpoints();
   const { commonTexts } = useIntl();
@@ -95,8 +74,7 @@ function useSearchContextValue<T extends Element>(
    */
   const { hits, vrHits, gmHits } = useSearchResults(term, activeResult);
 
-  const showResults =
-    hasHadInputFocus && (hasInputFocus || hasHitFocus || !breakpoints.md);
+  const showResults = hasHadInputFocus && (hasInputFocus || hasHitFocus || !breakpoints.md);
 
   const { focusRef, focusIndex, setFocusIndex } = useHitSelection({
     numberOfHits: hits.length,
@@ -104,9 +82,7 @@ function useSearchContextValue<T extends Element>(
       const option = hits[index];
       setTermSubmitted(option.data.name);
 
-      return openInNewWindow
-        ? window.open(option.data.link, '_blank')
-        : router.push(option.data.link);
+      return openInNewWindow ? window.open(option.data.link, '_blank') : router.push(option.data.link);
     },
     /**
      * Only enable keyboard navigation when we show results
@@ -148,8 +124,7 @@ function useSearchContextValue<T extends Element>(
 
     inputProps: {
       value: termSubmitted || term,
-      onChange: (evt: ChangeEvent<HTMLInputElement>) =>
-        setTerm(evt.target.value),
+      onChange: (evt: ChangeEvent<HTMLInputElement>) => setTerm(evt.target.value),
       onFocus: () => setHasInputFocus(true),
       /**
        * Usually search-results will disappear when the input loses focus,

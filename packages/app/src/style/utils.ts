@@ -11,9 +11,7 @@ const responsiveKeys = ['_', 'xs', 'sm', 'md', 'lg', 'xl'] as const;
  * output: `[2, undefined, undefined, 4, undefined, 6]`
  *
  */
-export function asResponsiveArray<T>(
-  value: ResponsiveValue<T>
-): ResponsiveValue<T> {
+export function asResponsiveArray<T>(value: ResponsiveValue<T>): ResponsiveValue<T> {
   return isStyleObject(value) ? createArrayValue(value) : value;
 }
 

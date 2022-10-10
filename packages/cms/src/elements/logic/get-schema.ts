@@ -12,27 +12,17 @@ export function getSchemaMetrics(scope: DataScopeKey) {
     .map(([key]) => key);
 }
 
-export function getSchemaMetricProperties(
-  scope: DataScopeKey,
-  metricName: string
-) {
-  const schema = loadJsonFromFile(
-    path.join(schemaPath, scope, `${metricName}.json`)
-  );
+export function getSchemaMetricProperties(scope: DataScopeKey, metricName: string) {
+  const schema = loadJsonFromFile(path.join(schemaPath, scope, `${metricName}.json`));
 
-  return Object.keys(schema.definitions.value.properties).filter(
-    pickMetricProperties
-  );
+  return Object.keys(schema.definitions.value.properties).filter(pickMetricProperties);
 }
 
 function pickMetricProperties(key: string) {
   return !key.startsWith('date_');
 }
 
-function pickMetricNames([, value]: [
-  string,
-  { type: string } | { $ref: string }
-]) {
+function pickMetricNames([, value]: [string, { type: string } | { $ref: string }]) {
   if ('type' in value) {
     return false;
   } else {

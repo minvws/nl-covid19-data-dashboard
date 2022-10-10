@@ -6,17 +6,7 @@ import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { GetX, TimeAnnotationConfig } from '../logic';
 
-export function TimeAnnotation({
-  domain,
-  getX,
-  height,
-  config,
-}: {
-  domain: [number, number];
-  height: number;
-  getX: GetX;
-  config: TimeAnnotationConfig;
-}) {
+export function TimeAnnotation({ domain, getX, height, config }: { domain: [number, number]; height: number; getX: GetX; config: TimeAnnotationConfig }) {
   const [min, max] = domain;
   const { position } = config;
 
@@ -34,33 +24,14 @@ export function TimeAnnotation({
     case 'divider':
       return (
         <Group>
-          <Text
-            fontSize={fontSize}
-            x={x - 15}
-            y={15}
-            textAnchor="end"
-            fill={colors.gray5}
-          >
+          <Text fontSize={fontSize} x={x - 15} y={15} textAnchor="end" fill={colors.gray5}>
             {config.leftLabel}
           </Text>
-          <Text
-            fontSize={fontSize}
-            x={x + 15}
-            y={15}
-            textAnchor="start"
-            fill={colors.gray5}
-          >
+          <Text fontSize={fontSize} x={x + 15} y={15} textAnchor="start" fill={colors.gray5}>
             {config.rightLabel}
           </Text>
 
-          <Line
-            x1={x}
-            x2={x}
-            y1={height}
-            y2={0}
-            stroke={colors.gray5}
-            strokeWidth="2"
-          />
+          <Line x1={x} x2={x} y1={height} y2={0} stroke={colors.gray5} strokeWidth="2" />
         </Group>
       );
   }

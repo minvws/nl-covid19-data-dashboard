@@ -17,13 +17,7 @@ interface AnchorTileProps {
   shadow?: boolean;
 }
 
-export function AnchorTile({
-  title,
-  href,
-  label,
-  children,
-  external = false,
-}: AnchorTileProps) {
+export function AnchorTile({ title, href, label, children, external = false }: AnchorTileProps) {
   return (
     <Container>
       <Content>

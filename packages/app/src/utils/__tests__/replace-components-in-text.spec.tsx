@@ -21,45 +21,32 @@ ReplaceComponentsInText.after.each(() => {
   sinon.restore();
 });
 
-ReplaceComponentsInText(
-  'should replace variables in double curly braces with passed components',
-  () => {
-    const { queryByTestId } = render(
-      <>
-        {replaceComponentsInText('{{greeting}}, {{name}}!', {
-          greeting: <span data-testid="greeting">Hello</span>,
-          name: <span data-testid="name">world</span>,
-        })}
-      </>
-    );
+ReplaceComponentsInText('should replace variables in double curly braces with passed components', () => {
+  const { queryByTestId } = render(
+    <>
+      {replaceComponentsInText('{{greeting}}, {{name}}!', {
+        greeting: <span data-testid="greeting">Hello</span>,
+        name: <span data-testid="name">world</span>,
+      })}
+    </>
+  );
 
-    assert.ok(queryByTestId('greeting'));
-    assert.ok(queryByTestId('name'));
-    assert.equal(queryByTestId('greeting')?.textContent, 'Hello');
-    assert.equal(queryByTestId('name')?.textContent, 'world');
-  }
-);
+  assert.ok(queryByTestId('greeting'));
+  assert.ok(queryByTestId('name'));
+  assert.equal(queryByTestId('greeting')?.textContent, 'Hello');
+  assert.equal(queryByTestId('name')?.textContent, 'world');
+});
 
-ReplaceComponentsInText(
-  'should throw when undefined variables are passed and validation is enabled',
-  () => {
-    assert.throws(() =>
-      render(<>{replaceComponentsInText('Hello, {{name}}!', {})}</>)
-    );
-  }
-);
+ReplaceComponentsInText('should throw when undefined variables are passed and validation is enabled', () => {
+  assert.throws(() => render(<>{replaceComponentsInText('Hello, {{name}}!', {})}</>));
+});
 
-ReplaceComponentsInText(
-  'should replace variables with an error string when undefined and validation is disabled',
-  () => {
-    sinon.replace(M, 'shouldValidate', false);
+ReplaceComponentsInText('should replace variables with an error string when undefined and validation is disabled', () => {
+  sinon.replace(M, 'shouldValidate', false);
 
-    const { container } = render(
-      <>{replaceComponentsInText('Hello, {{name}}!', {})}</>
-    );
+  const { container } = render(<>{replaceComponentsInText('Hello, {{name}}!', {})}</>);
 
-    assert.ok(container.textContent?.includes('[#ERROR {{name}}]'));
-  }
-);
+  assert.ok(container.textContent?.includes('[#ERROR {{name}}]'));
+});
 
 ReplaceComponentsInText.run();

@@ -1,17 +1,5 @@
 import { Icon as TIcon } from '@corona-dashboard/icons';
-import {
-  Box,
-  Button,
-  Dialog,
-  Flex,
-  Grid,
-  Heading,
-  Radio,
-  Stack,
-  studioTheme,
-  Text,
-  ThemeProvider,
-} from '@sanity/ui';
+import { Box, Button, Dialog, Flex, Grid, Heading, Radio, Stack, studioTheme, Text, ThemeProvider } from '@sanity/ui';
 import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import React, { useCallback, useState } from 'react';
 import { RestrictionIconKey, restrictionIcons } from './restriction-icons';
@@ -59,31 +47,17 @@ export function RestrictionIconInput(props: RestrictionIconInputProps) {
         </Box>
       </Stack>
       {isOpen && (
-        <Dialog
-          header="Kies een icoon"
-          id="dialog-example"
-          onClose={onClose}
-          zOffset={1000}
-        >
+        <Dialog header="Kies een icoon" id="dialog-example" onClose={onClose} zOffset={1000}>
           <Box padding={4}>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
               {allIcons.map(([id, GridIcon]) => (
-                <Flex
-                  key={id}
-                  direction="column"
-                  align="center"
-                  onClick={() => onChange(createPatchFrom(id))}
-                >
+                <Flex key={id} direction="column" align="center" onClick={() => onChange(createPatchFrom(id))}>
                   <GridIcon />
                   <Radio checked={value === id} readOnly />
                 </Flex>
               ))}
 
-              <Flex
-                direction="column"
-                align="center"
-                onClick={() => onChange(createPatchFrom(''))}
-              >
+              <Flex direction="column" align="center" onClick={() => onChange(createPatchFrom(''))}>
                 <span>Geen icoon</span>
                 <Radio checked={value === undefined} readOnly />
               </Flex>

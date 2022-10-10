@@ -5,11 +5,7 @@ import { useIntl } from '~/intl';
 import { Cell, HeaderCell, Row, StyledTable } from '.';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components';
-import {
-  VaccineCampaign,
-  VaccineCampaignDescriptions,
-  VaccineCampaignHeaders,
-} from '../types';
+import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders } from '../types';
 
 interface WideVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
@@ -17,11 +13,7 @@ interface WideVaccineCampaignTableProps {
   headers: VaccineCampaignHeaders;
 }
 
-export const WideVaccineCampaignTable = ({
-  campaigns,
-  campaignDescriptions,
-  headers,
-}: WideVaccineCampaignTableProps) => {
+export const WideVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers }: WideVaccineCampaignTableProps) => {
   return (
     <StyledTable>
       <thead>
@@ -34,13 +26,7 @@ export const WideVaccineCampaignTable = ({
 
       <tbody>
         {campaigns.map((campaign, index) => (
-          <VaccineCampaignRow
-            key={index}
-            campaign={campaign}
-            campaignDescriptions={campaignDescriptions}
-            isFirst={index === 0}
-            isLast={index + 1 === campaigns.length}
-          />
+          <VaccineCampaignRow key={index} campaign={campaign} campaignDescriptions={campaignDescriptions} isFirst={index === 0} isLast={index + 1 === campaigns.length} />
         ))}
       </tbody>
     </StyledTable>
@@ -54,12 +40,7 @@ interface VaccineCampaignRowProps {
   isLast: boolean;
 }
 
-const VaccineCampaignRow = ({
-  campaign,
-  campaignDescriptions,
-  isFirst,
-  isLast,
-}: VaccineCampaignRowProps) => {
+const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst, isLast }: VaccineCampaignRowProps) => {
   const { formatNumber } = useIntl();
   const collapsible = useCollapsible({ isOpen: isFirst });
   const isOpen = collapsible.isOpen;
@@ -72,36 +53,14 @@ const VaccineCampaignRow = ({
           <tbody>
             <tr>
               <Cell>
-                <strong>
-                  {locale === 'nl'
-                    ? campaign.vaccine_campaign_name_nl
-                    : campaign.vaccine_campaign_name_en}
-                </strong>
+                <strong>{locale === 'nl' ? campaign.vaccine_campaign_name_nl : campaign.vaccine_campaign_name_en}</strong>
               </Cell>
 
-              <Cell>
-                {isOpen ? (
-                  <strong>
-                    {formatNumber(campaign.vaccine_administered_last_week)}
-                  </strong>
-                ) : (
-                  <>{formatNumber(campaign.vaccine_administered_last_week)}</>
-                )}
-              </Cell>
+              <Cell>{isOpen ? <strong>{formatNumber(campaign.vaccine_administered_last_week)}</strong> : <>{formatNumber(campaign.vaccine_administered_last_week)}</>}</Cell>
 
               <Cell>
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  {isOpen ? (
-                    <strong>
-                      {formatNumber(campaign.vaccine_administered_total)}
-                    </strong>
-                  ) : (
-                    <>{formatNumber(campaign.vaccine_administered_total)}</>
-                  )}
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  {isOpen ? <strong>{formatNumber(campaign.vaccine_administered_total)}</strong> : <>{formatNumber(campaign.vaccine_administered_total)}</>}
 
                   {collapsible.button()}
                 </Box>
@@ -110,17 +69,7 @@ const VaccineCampaignRow = ({
 
             <tr>
               <Cell colSpan={4} css={css({ pb: isOpen ? 4 : 0, pt: 0 })}>
-                {collapsible.content(
-                  <Markdown
-                    content={
-                      campaignDescriptions[
-                        `${campaign.vaccine_campaign_name_en
-                          .toLowerCase()
-                          .replace(/ /g, '_')}_description`
-                      ]
-                    }
-                  />
-                )}
+                {collapsible.content(<Markdown content={campaignDescriptions[`${campaign.vaccine_campaign_name_en.toLowerCase().replace(/ /g, '_')}_description`]} />)}
               </Cell>
             </tr>
           </tbody>

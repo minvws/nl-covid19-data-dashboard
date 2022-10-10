@@ -29,9 +29,7 @@ UseMediaQuery.before.each((context) => {
     removeListener: sinon.spy(),
   };
 
-  context.matchMediaSpy = sinon
-    .stub(window, 'matchMedia')
-    .callsFake(() => context.mockMqList);
+  context.matchMediaSpy = sinon.stub(window, 'matchMedia').callsFake(() => context.mockMqList);
 });
 
 UseMediaQuery('Should initialize the mediaquerylist', (context) => {

@@ -28,8 +28,7 @@ const git = simpleGit();
     {
       type: 'confirm',
       name: 'isConfirmed',
-      message:
-        'This will prepare a new Corona Dashboard release, do you want to continue?',
+      message: 'This will prepare a new Corona Dashboard release, do you want to continue?',
       initial: false,
     },
   ]);
@@ -59,9 +58,7 @@ async function prepareRelease() {
   const branches = await git.branchLocal();
 
   if (hasChanges(status)) {
-    console.log(
-      `Current branch '${branches.current}' has local changes, submit them first and start over...`
-    );
+    console.log(`Current branch '${branches.current}' has local changes, submit them first and start over...`);
     return false;
   }
 
@@ -108,22 +105,17 @@ async function draftRelease(releaseName: string) {
     tag_name = releaseName,
     draft = true;
 
-  const response = await octokit.request(
-    'POST /repos/{owner}/{repo}/releases',
-    {
-      owner,
-      repo,
-      target_commitish,
-      tag_name,
-      draft,
-      body: 'This is an automatically generated draft release, please update this description with a summary of the release.',
-    }
-  );
+  const response = await octokit.request('POST /repos/{owner}/{repo}/releases', {
+    owner,
+    repo,
+    target_commitish,
+    tag_name,
+    draft,
+    body: 'This is an automatically generated draft release, please update this description with a summary of the release.',
+  });
 
   if (response.status === 201) {
-    console.log(
-      chalk.yellow(`Generated draft release: ${response.data.html_url}`)
-    );
+    console.log(chalk.yellow(`Generated draft release: ${response.data.html_url}`));
     return true;
   }
   return false;
@@ -136,8 +128,7 @@ async function createPullRequest(branchName: string) {
     owner = 'minvws',
     repo = 'nl-covid19-data-dashboard',
     title = branchName,
-    body =
-      'This is an automatically generated PR, please update this description with a summary of the release.',
+    body = 'This is an automatically generated PR, please update this description with a summary of the release.',
     head = branchName,
     base = 'master';
 
@@ -151,9 +142,7 @@ async function createPullRequest(branchName: string) {
   });
 
   if (response.status === 201) {
-    console.log(
-      chalk.yellow(`Generated pullrequest: ${response.data.html_url}`)
-    );
+    console.log(chalk.yellow(`Generated pullrequest: ${response.data.html_url}`));
     return true;
   }
   return false;
@@ -182,10 +171,7 @@ async function checkForConflicts(): Promise<true> {
   return true;
 }
 
-async function promptForReleaseName(
-  tags: TagResult,
-  message = `Provide the new version number for this release (previous release: ${tags.latest}):`
-): Promise<string> {
+async function promptForReleaseName(tags: TagResult, message = `Provide the new version number for this release (previous release: ${tags.latest}):`): Promise<string> {
   const latest = tags.latest ?? '0.0.0';
 
   const major = semverInc(latest, 'major') ?? '0';

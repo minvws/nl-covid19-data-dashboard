@@ -1,10 +1,4 @@
-import {
-  assert,
-  DataScopeKey,
-  MetricKeys,
-  MetricProperty,
-  ScopedData,
-} from '@corona-dashboard/common';
+import { assert, DataScopeKey, MetricKeys, MetricProperty, ScopedData } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScaleConfig, ScopedMetricConfigs } from './common';
@@ -38,26 +32,10 @@ export const metricConfigs: MetricConfigs = {
  * there seems to be no way of enforcing the structure of the config and
  * strictly typing it to the actual supplied config at the same time.
  */
-export function getBarScaleConfig<
-  S extends DataScopeKey,
-  K extends MetricKeys<ScopedData[S]>
->(scope: S, metricName: K, metricProperty?: MetricProperty<ScopedData[S], K>) {
-  const config = get(
-    metricConfigs,
-    metricProperty ? [scope, metricName, metricProperty] : [scope, metricName]
-  );
+export function getBarScaleConfig<S extends DataScopeKey, K extends MetricKeys<ScopedData[S]>>(scope: S, metricName: K, metricProperty?: MetricProperty<ScopedData[S], K>) {
+  const config = get(metricConfigs, metricProperty ? [scope, metricName, metricProperty] : [scope, metricName]);
 
-  assert(
-    config.barScale,
-    `[${getBarScaleConfig.name}] Missing metric configuration at ${[
-      scope,
-      metricName,
-      metricProperty,
-      'barScale',
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
+  assert(config.barScale, `[${getBarScaleConfig.name}] Missing metric configuration at ${[scope, metricName, metricProperty, 'barScale'].filter(isDefined).join(':')}`);
 
   return config.barScale as BarScaleConfig;
 }

@@ -31,13 +31,7 @@ export const localeReferenceDirectory = path.resolve(
   '.lokalize-reference'
 );
 
-export async function importLokalizeTexts({
-  dataset,
-  appendDocumentIdToKey = false,
-}: {
-  dataset?: string;
-  appendDocumentIdToKey?: boolean;
-}) {
+export async function importLokalizeTexts({ dataset, appendDocumentIdToKey = false }: { dataset?: string; appendDocumentIdToKey?: boolean }) {
   /**
    * Make sure the reference directory exists
    */
@@ -45,9 +39,7 @@ export async function importLokalizeTexts({
 
   const client = getClient(dataset);
 
-  const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' && (defined(key)) && !(_id in path('drafts.**'))] | order(key asc)`
-  );
+  const documents: LokalizeText[] = await client.fetch(`*[_type == 'lokalizeText' && (defined(key)) && !(_id in path('drafts.**'))] | order(key asc)`);
 
   const mutations = await readTextMutations();
 
@@ -60,43 +52,24 @@ export async function importLokalizeTexts({
    * Moves are applied before deletions, to prevent losing documents in edge
    * cases.
    */
-  const mutatedDocuments = simulateDeleteMutations(
-    simulateMoveMutations(documents, mutations),
-    mutations
-  );
+  const mutatedDocuments = simulateDeleteMutations(simulateMoveMutations(documents, mutations), mutations);
 
   const flatTexts = createFlatTexts(mutatedDocuments, appendDocumentIdToKey);
 
-  await writePrettyJson(
-    unflatten(flatTexts.nl, { object: true }),
-    path.join(localeDirectory, 'nl_export.json')
-  );
+  await writePrettyJson(unflatten(flatTexts.nl, { object: true }), path.join(localeDirectory, 'nl_export.json'));
 
-  await writePrettyJson(
-    unflatten(flatTexts.en, { object: true }),
-    path.join(localeDirectory, 'en_export.json')
-  );
+  await writePrettyJson(unflatten(flatTexts.en, { object: true }), path.join(localeDirectory, 'en_export.json'));
 
-  await writePrettyJson(
-    unflatten(flatTexts.nl, { object: true }),
-    path.join(localeReferenceDirectory, 'nl_export.json')
-  );
+  await writePrettyJson(unflatten(flatTexts.nl, { object: true }), path.join(localeReferenceDirectory, 'nl_export.json'));
 
-  await writePrettyJson(
-    unflatten(flatTexts.en, { object: true }),
-    path.join(localeReferenceDirectory, 'en_export.json')
-  );
+  await writePrettyJson(unflatten(flatTexts.en, { object: true }), path.join(localeReferenceDirectory, 'en_export.json'));
 
   await generateTypes();
 }
 
 async function writePrettyJson(data: Record<string, unknown>, path: string) {
   const json = prettier.format(JSON.stringify(data), { parser: 'json' });
-  return new Promise<void>((resolve, reject) =>
-    fs.writeFile(path, json, { encoding: 'utf8' }, (err) =>
-      err ? reject(err) : resolve()
-    )
-  );
+  return new Promise<void>((resolve, reject) => fs.writeFile(path, json, { encoding: 'utf8' }, (err) => (err ? reject(err) : resolve())));
 }
 
 export async function generateTypes() {
@@ -112,10 +85,7 @@ export async function generateTypes() {
 
   const textsObject = unflatten(textsFlat, { object: true });
 
-  const textsTypeString = JSON.stringify(textsObject, null, 2).replace(
-    /\"\@string\"/g,
-    'string'
-  );
+  const textsTypeString = JSON.stringify(textsObject, null, 2).replace(/\"\@string\"/g, 'string');
 
   const body = prettier.format(
     `
@@ -127,12 +97,5 @@ export async function generateTypes() {
     { parser: 'typescript' }
   );
 
-  return new Promise<void>((resolve, reject) =>
-    fs.writeFile(
-      path.join(localeDirectory, 'site-text.d.ts'),
-      body,
-      { encoding: 'utf8' },
-      (err) => (err ? reject(err) : resolve())
-    )
-  );
+  return new Promise<void>((resolve, reject) => fs.writeFile(path.join(localeDirectory, 'site-text.d.ts'), body, { encoding: 'utf8' }, (err) => (err ? reject(err) : resolve())));
 }

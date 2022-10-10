@@ -8,9 +8,7 @@ export type TooltipSettings<T extends ChoroplethDataItem> = {
   data: TooltipData<T>;
 };
 
-export type TooltipFormatter<T extends ChoroplethDataItem> = (
-  tooltipData: TooltipData<T>
-) => React.ReactNode;
+export type TooltipFormatter<T extends ChoroplethDataItem> = (tooltipData: TooltipData<T>) => React.ReactNode;
 
 export type TooltipData<T extends ChoroplethDataItem> = {
   dataItem: T;

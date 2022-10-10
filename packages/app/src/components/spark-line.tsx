@@ -26,9 +26,7 @@ function getDate<T extends TimestampedValue>(value?: T) {
   return value.date_start_unix;
 }
 
-export function SparkLine<T extends TimestampedValue>(
-  props: SparkLineProps<T>
-) {
+export function SparkLine<T extends TimestampedValue>(props: SparkLineProps<T>) {
   const { data, averageProperty } = props;
 
   const getNumberValue = (data: T, key: keyof T): number => {
@@ -37,14 +35,8 @@ export function SparkLine<T extends TimestampedValue>(
   };
 
   const numberOfPoints = data.length;
-  const min = Math.min(
-    0,
-    ...data.map((d) => getNumberValue(d, averageProperty))
-  );
-  const max = Math.max(
-    0.1,
-    ...data.map((d) => getNumberValue(d, averageProperty))
-  );
+  const min = Math.min(0, ...data.map((d) => getNumberValue(d, averageProperty)));
+  const max = Math.max(0.1, ...data.map((d) => getNumberValue(d, averageProperty)));
   const xScale = scaleLinear({
     domain: [getDate(first(data)), getDate(last(data))],
     range: [0, STEP_WIDTH * numberOfPoints - MARKER_RADIUS],
@@ -67,39 +59,10 @@ export function SparkLine<T extends TimestampedValue>(
   const lastValue = last(nonNullValues);
 
   return (
-    <svg
-      width="100%"
-      height={HEIGHT}
-      role="img"
-      aria-hidden="true"
-      focusable="false"
-      viewBox={`0 0 ${STEP_WIDTH * numberOfPoints} ${HEIGHT}`}
-    >
-      <LinePath
-        data={nonNullValues}
-        x={getX}
-        y={getY}
-        stroke={colors.primary}
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <AreaClosed
-        data={nonNullValues}
-        x={getX}
-        y={getY}
-        fill={colors.primary}
-        fillOpacity={0.3}
-        yScale={yScale}
-      />
-      {lastValue && (
-        <circle
-          cx={getX(lastValue)}
-          cy={getY(lastValue)}
-          r={MARKER_RADIUS}
-          fill={colors.primary}
-        />
-      )}
+    <svg width="100%" height={HEIGHT} role="img" aria-hidden="true" focusable="false" viewBox={`0 0 ${STEP_WIDTH * numberOfPoints} ${HEIGHT}`}>
+      <LinePath data={nonNullValues} x={getX} y={getY} stroke={colors.primary} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+      <AreaClosed data={nonNullValues} x={getX} y={getY} fill={colors.primary} fillOpacity={0.3} yScale={yScale} />
+      {lastValue && <circle cx={getX(lastValue)} cy={getY(lastValue)} r={MARKER_RADIUS} fill={colors.primary} />}
     </svg>
   );
 }

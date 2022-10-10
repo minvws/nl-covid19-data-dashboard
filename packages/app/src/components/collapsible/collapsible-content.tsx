@@ -9,10 +9,7 @@ interface CollapsibleContentProps extends BoxProps {
   children: ReactNode;
 }
 
-export function CollapsibleContent({
-  label,
-  children,
-}: CollapsibleContentProps) {
+export function CollapsibleContent({ label, children }: CollapsibleContentProps) {
   const collapsible = useCollapsible();
 
   return (

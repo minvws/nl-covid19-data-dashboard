@@ -10,10 +10,7 @@ import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
-import {
-  ChevronRight,
-  External as ExternalLinkIcon,
-} from '@corona-dashboard/icons';
+import { ChevronRight, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 
 interface MarkdownProps {
   content: string;
@@ -67,10 +64,7 @@ const renderers = {
     const hasChildBlockquote = props.node.children[0].type === 'blockquote';
 
     return (
-      <Message
-        variant={hasChildBlockquote ? 'message' : 'warning'}
-        resetParentStyles={hasChildBlockquote}
-      >
+      <Message variant={hasChildBlockquote ? 'message' : 'warning'} resetParentStyles={hasChildBlockquote}>
         {props.children}
       </Message>
     );

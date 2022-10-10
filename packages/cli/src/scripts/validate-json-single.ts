@@ -4,13 +4,7 @@ import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { schemaDirectory } from '../config';
-import {
-  createValidateFunction,
-  executeValidations,
-  getSchemaInfo,
-  loadRootSchema,
-  SchemaInfo,
-} from '../schema';
+import { createValidateFunction, executeValidations, getSchemaInfo, loadRootSchema, SchemaInfo } from '../schema';
 import { JSONObject } from '../schema/custom-validations';
 import { logError, logSuccess } from '../utils';
 
@@ -23,15 +17,10 @@ import { logError, logSuccess } from '../utils';
  *
  */
 function loadStrippedSchema(metricName: string, basePath: string) {
-  const strippedSchema = loadRootSchema(
-    path.join(basePath, `__index.json`),
-    true
-  );
+  const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`), true);
 
   if (!isDefined(strippedSchema.properties[metricName])) {
-    logError(
-      `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
-    );
+    logError(`  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`);
     process.exit(1);
   }
 
@@ -80,68 +69,52 @@ const jsonFileName = cliArgs[1];
 const metricName = cliArgs[2];
 
 if (!validSchemaNames.includes(schemaName)) {
-  console.error(
-    `Invalid schema name argument '${schemaName}', must be one of the following values: ${validSchemaNames.join(
-      ', '
-    )}.`
-  );
+  console.error(`Invalid schema name argument '${schemaName}', must be one of the following values: ${validSchemaNames.join(', ')}.`);
   process.exit(1);
 }
 
 const jsonBasePath = schemaInformation[schemaName].basePath;
 
 if (!schemaInformation[schemaName].files.includes(jsonFileName)) {
-  console.error(
-    `Invalid json filename argument '${jsonFileName}', this file is not associated with the '${schemaName}' schema.`
-  );
+  console.error(`Invalid json filename argument '${jsonFileName}', this file is not associated with the '${schemaName}' schema.`);
   process.exit(1);
 }
 
 if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
-  console.error(
-    `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${jsonBasePath}.`
-  );
+  console.error(`Invalid json filename argument '${jsonFileName}', file does not exist in directory ${jsonBasePath}.`);
   process.exit(1);
 }
 
 const schemaBasePath = path.join(schemaDirectory, schemaName);
-const rootSchema = metricName
-  ? loadStrippedSchema(metricName, schemaBasePath)
-  : '__index.json';
+const rootSchema = metricName ? loadStrippedSchema(metricName, schemaBasePath) : '__index.json';
 
-createValidateFunction(rootSchema, schemaBasePath, true).then(
-  (validateFunction) => {
-    const fileName = path.join(jsonBasePath, jsonFileName);
-    const schemaInfo = schemaInformation[schemaName];
+createValidateFunction(rootSchema, schemaBasePath, true).then((validateFunction) => {
+  const fileName = path.join(jsonBasePath, jsonFileName);
+  const schemaInfo = schemaInformation[schemaName];
 
-    const contentAsString = fs.readFileSync(fileName, {
-      encoding: 'utf8',
-    });
+  const contentAsString = fs.readFileSync(fileName, {
+    encoding: 'utf8',
+  });
 
-    try {
-      const jsonData: JSONObject = JSON.parse(contentAsString);
+  try {
+    const jsonData: JSONObject = JSON.parse(contentAsString);
 
-      sortTimeSeriesInDataInPlace(jsonData);
+    sortTimeSeriesInDataInPlace(jsonData);
 
-      const { isValid, schemaErrors } = executeValidations(
-        validateFunction,
-        jsonData,
-        schemaInfo
-      );
+    const { isValid, schemaErrors } = executeValidations(validateFunction, jsonData, schemaInfo);
 
-      if (!isValid) {
-        console.error(schemaErrors);
-        logError(`  ${jsonFileName} is invalid  \n`);
-        process.exit(1);
-      }
-    } catch (e) {
-      console.group();
-      console.error(e);
-      logError(`  ${fileName} cannot be parsed  \n`);
-      console.groupEnd();
+    if (!isValid) {
+      console.error(schemaErrors);
+      logError(`  ${jsonFileName} is invalid  \n`);
       process.exit(1);
     }
-
-    logSuccess(`  ${jsonFileName} is valid  \n`);
+  } catch (e) {
+    console.group();
+    console.error(e);
+    logError(`  ${fileName} cannot be parsed  \n`);
+    console.groupEnd();
+    process.exit(1);
   }
-);
+
+  logSuccess(`  ${jsonFileName} is valid  \n`);
+});

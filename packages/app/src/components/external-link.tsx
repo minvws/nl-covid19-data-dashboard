@@ -8,22 +8,9 @@ type ExternalLinkProps = {
   ariaLabel?: string;
 } & AnchorProps;
 
-export function ExternalLink({
-  href,
-  children,
-  className,
-  ariaLabel,
-  ...anchorProps
-}: ExternalLinkProps) {
+export function ExternalLink({ href, children, className, ariaLabel, ...anchorProps }: ExternalLinkProps) {
   return (
-    <Anchor
-      href={href}
-      rel="noopener noreferrer"
-      target="_blank"
-      className={className}
-      aria-label={ariaLabel}
-      {...anchorProps}
-    >
+    <Anchor href={href} rel="noopener noreferrer" target="_blank" className={className} aria-label={ariaLabel} {...anchorProps}>
       {children}
     </Anchor>
   );

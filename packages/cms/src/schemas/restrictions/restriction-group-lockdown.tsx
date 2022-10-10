@@ -1,10 +1,6 @@
 import { Icon as TIcon } from '@corona-dashboard/icons';
 import React from 'react';
-import {
-  RestrictionIconInput,
-  RestrictionIconKey,
-  restrictionIcons,
-} from '../../components/restriction-icon';
+import { RestrictionIconInput, RestrictionIconKey, restrictionIcons } from '../../components/restriction-icon';
 
 export const restrictionGroupLockdown = {
   title: 'Lockdown groep',

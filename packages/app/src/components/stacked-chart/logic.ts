@@ -1,8 +1,4 @@
-import {
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { isDateSpanValue, isDateValue, TimestampedValue } from '@corona-dashboard/common';
 import { mapValues, omit, pick } from 'lodash';
 
 /**
@@ -13,10 +9,7 @@ import { mapValues, omit, pick } from 'lodash';
  */
 export function calculateSeriesMaximum(series: SeriesValue[]) {
   function sumTrendPointValue(point: SeriesValue) {
-    return Object.values(omit(point, ['__date'])).reduce(
-      (sum, v) => sum + v,
-      0
-    );
+    return Object.values(omit(point, ['__date'])).reduce((sum, v) => sum + v, 0);
   }
 
   const stackedSumValues = series.map(sumTrendPointValue);
@@ -45,10 +38,7 @@ function timestampToDate(d: number) {
  * This function converts the passed in data to the generic SeriesValue
  * container.
  */
-export function getSeriesData<T extends TimestampedValue>(
-  metricValues: TimestampedValue[],
-  metricProperties: (keyof T)[]
-): SeriesValue[] {
+export function getSeriesData<T extends TimestampedValue>(metricValues: TimestampedValue[], metricProperties: (keyof T)[]): SeriesValue[] {
   return metricValues.map(
     (x) =>
       ({
@@ -70,10 +60,7 @@ function getDateFromValue<T extends TimestampedValue>(value: T) {
   throw new Error(`Incompatible timestamps are used in value ${value}`);
 }
 
-export function getTotalSumForMetricProperty(
-  values: Record<string, number>[],
-  metricProperty: string
-) {
+export function getTotalSumForMetricProperty(values: Record<string, number>[], metricProperty: string) {
   return values.reduce((acc, v) => acc + v[metricProperty] || 0, 0);
 }
 
@@ -106,9 +93,7 @@ export function getWeekInfo(d: Date) {
   // Get first day of year
   const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
   // Calculate full weeks to nearest Thursday
-  const weekNumber = Math.ceil(
-    ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
-  );
+  const weekNumber = Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
 
   const weekStartDate = new Date(d.getTime());
   weekStartDate.setUTCDate(weekStartDate.getUTCDate() - 3);

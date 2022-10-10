@@ -2,10 +2,7 @@ import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 import { localeStringValidation } from '../../../language/locale-validation';
 import { whenNotAdministrator } from '../../../roles/when-not-administrator';
-import {
-  PAGE_IDENTIFIER_REFERENCE_FIELDS,
-  PAGE_IDENTIFIER_REFERENCE_FIELDSET,
-} from '../../fields/page-identifier-reference-fields';
+import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-identifier-reference-fields';
 
 export const pageHighlightedItems = {
   title: 'Uitgelichte items',
@@ -99,15 +96,9 @@ export const pageHighlightedItems = {
         Rule.custom((value: any, context: any) => {
           const max = context.parent?.maxNumber ?? 2;
           if (context.document.showWeeklyHighlight) {
-            return value.length === max - 1
-              ? true
-              : `Als er een weekbericht geselecteerd is moet er ${
-                  max - 1
-                } uitgelicht item(s) toegevoegd zijn.`;
+            return value.length === max - 1 ? true : `Als er een weekbericht geselecteerd is moet er ${max - 1} uitgelicht item(s) toegevoegd zijn.`;
           } else {
-            return value.length === max
-              ? true
-              : `Als er geen weekbericht geselecteerd is moeten er ${max} uitgelichte item(s) toegevoegd zijn.`;
+            return value.length === max ? true : `Als er geen weekbericht geselecteerd is moeten er ${max} uitgelichte item(s) toegevoegd zijn.`;
           }
         }).warning(),
         Rule.required()

@@ -23,24 +23,15 @@ const schemaInfo = [
 type SchemaInfo = typeof schemaInfo[number];
 
 function createQuery(schemaInfos: SchemaInfo[]) {
-  return `*[${schemaInfos
-    .map((x) => `(_type == '${x.schemaName}' && ${whereClause(x.fields)})`)
-    .join(' || \n')}]{\n${schemaInfos.map(selectField).join(',\n')}}`;
+  return `*[${schemaInfos.map((x) => `(_type == '${x.schemaName}' && ${whereClause(x.fields)})`).join(' || \n')}]{\n${schemaInfos.map(selectField).join(',\n')}}`;
 }
 
 function whereClause(fields: string[]) {
-  return fields
-    .map(
-      (x) =>
-        `${x}.en[]._type match 'collapsible' || ${x}.nl[]._type match 'collapsible'`
-    )
-    .join(' || ');
+  return fields.map((x) => `${x}.en[]._type match 'collapsible' || ${x}.nl[]._type match 'collapsible'`).join(' || ');
 }
 
 function selectField(info: SchemaInfo) {
-  return `_type == "${info.schemaName}" => {_type,_id,${info.fields.join(
-    ','
-  )}}`;
+  return `_type == "${info.schemaName}" => {_type,_id,${info.fields.join(',')}}`;
 }
 
 (async function run() {
@@ -52,9 +43,7 @@ function selectField(info: SchemaInfo) {
 
   const transaction = client.transaction();
 
-  documents
-    .map(createPatch)
-    .forEach((patchInfo) => transaction.patch(patchInfo.id, patchInfo.patch));
+  documents.map(createPatch).forEach((patchInfo) => transaction.patch(patchInfo.id, patchInfo.patch));
 
   await transaction.commit();
 })().catch((err) => {
@@ -125,9 +114,7 @@ function createPatch(document: any) {
 
 function findCollapsibles(document: any) {
   const keys = Object.keys(document).filter((x) => !system.includes(x));
-  return keys.some((x) =>
-    hasCollapsibles(document[x].nl || hasCollapsibles(document[x].en))
-  );
+  return keys.some((x) => hasCollapsibles(document[x].nl || hasCollapsibles(document[x].en)));
 }
 
 function hasCollapsibles(portableText: any[]) {

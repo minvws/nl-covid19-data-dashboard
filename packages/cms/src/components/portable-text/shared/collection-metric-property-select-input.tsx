@@ -38,12 +38,7 @@ export const CollectionMetricPropertySelectInput = withDocument(
     };
 
     return (
-      <FormField
-        compareValue={compareValue}
-        label={type.title}
-        description={type.description}
-        markers={markers}
-      >
+      <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
         <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
           <option value="" disabled hidden>
             Selecteer een metriek waarde

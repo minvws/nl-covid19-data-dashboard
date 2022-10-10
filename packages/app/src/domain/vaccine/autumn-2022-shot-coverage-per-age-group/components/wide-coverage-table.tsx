@@ -7,10 +7,7 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import {
-  COLOR_FULLY_VACCINATED,
-  COLOR_AUTUMN_2022_SHOT,
-} from '~/domain/vaccine/common';
+import { COLOR_FULLY_VACCINATED, COLOR_AUTUMN_2022_SHOT } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
@@ -54,9 +51,7 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.headers.autumn_2022_shot}
-              </InlineText>
+              <InlineText variant="label1">{text.headers.autumn_2022_shot}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -68,9 +63,7 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.headers.fully_vaccinated}
-              </InlineText>
+              <InlineText variant="label1">{text.headers.fully_vaccinated}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -80,9 +73,7 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.headers.difference_autumn_2022_shot_and_fully_vaccinated}
-              </InlineText>
+              <InlineText variant="label1">{text.headers.difference_autumn_2022_shot_and_fully_vaccinated}</InlineText>
             </HeaderCell>
           </Row>
         </thead>
@@ -91,52 +82,26 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
             <Row key={index}>
               <HeaderCell isColumn>
                 <AgeGroup
-                  range={formatAgeGroupString(
-                    item.age_group_range,
-                    commonTexts.common.agegroup
-                  )}
-                  ageGroupTotal={
-                    'age_group_total' in item ? item.age_group_total : undefined
-                  }
-                  birthyear_range={formatBirthyearRangeString(
-                    item.birthyear_range,
-                    commonTexts.common.birthyears
-                  )}
+                  range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
+                  ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
+                  birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
                   text={commonTexts.common.agegroup.total_people}
                 />
               </HeaderCell>
               <Cell>
                 <WidePercentage
-                  value={
-                    item.autumn_2022_vaccinated_percentage !== null
-                      ? `${formatPercentage(
-                          item.autumn_2022_vaccinated_percentage
-                        )}%`
-                      : text.no_data
-                  }
+                  value={item.autumn_2022_vaccinated_percentage !== null ? `${formatPercentage(item.autumn_2022_vaccinated_percentage)}%` : text.no_data}
                   color={COLOR_AUTUMN_2022_SHOT}
                   justifyContent="flex-end"
                 />
               </Cell>
               <Cell>
-                <WidePercentage
-                  value={`${formatPercentage(
-                    item.fully_vaccinated_percentage
-                  )}%`}
-                  color={COLOR_FULLY_VACCINATED}
-                  justifyContent="flex-end"
-                />
+                <WidePercentage value={`${formatPercentage(item.fully_vaccinated_percentage)}%`} color={COLOR_FULLY_VACCINATED} justifyContent="flex-end" />
               </Cell>
               <Cell>
                 <Box spacing={1}>
-                  <Bar
-                    value={item.autumn_2022_vaccinated_percentage}
-                    color={COLOR_AUTUMN_2022_SHOT}
-                  />
-                  <Bar
-                    value={item.fully_vaccinated_percentage}
-                    color={COLOR_FULLY_VACCINATED}
-                  />
+                  <Bar value={item.autumn_2022_vaccinated_percentage} color={COLOR_AUTUMN_2022_SHOT} />
+                  <Bar value={item.fully_vaccinated_percentage} color={COLOR_FULLY_VACCINATED} />
                 </Box>
               </Cell>
             </Row>

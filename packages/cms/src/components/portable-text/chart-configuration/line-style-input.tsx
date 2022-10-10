@@ -14,8 +14,7 @@ export const LineStyleInput = withDocument(
     const { value, onChange, compareValue, type, markers } = props;
 
     const onChangeProp = (event: any) => {
-      const setValue =
-        event.target.value === 'none' ? unset() : set(event.target.value);
+      const setValue = event.target.value === 'none' ? unset() : set(event.target.value);
       onChange(PatchEvent.from(setValue));
     };
 
@@ -23,38 +22,18 @@ export const LineStyleInput = withDocument(
       <>
         <TextInput ref={ref} style={{ display: 'none' }} value={value ?? ''} />
         {hasTypeWithCurve() ? (
-          <FormField
-            compareValue={compareValue}
-            label={type.title}
-            description={type.description}
-            markers={markers}
-          >
+          <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
             <Stack space={2}>
               <Flex style={{ alignItems: 'center', gap: 10 }}>
-                <Radio
-                  checked={value === 'linear'}
-                  name="curve"
-                  value="linear"
-                  onChange={onChangeProp}
-                />
+                <Radio checked={value === 'linear'} name="curve" value="linear" onChange={onChangeProp} />
                 <Label>Linear</Label>
               </Flex>
               <Flex style={{ alignItems: 'center', gap: 10 }}>
-                <Radio
-                  checked={value === 'step'}
-                  name="curve"
-                  value="step"
-                  onChange={onChangeProp}
-                />
+                <Radio checked={value === 'step'} name="curve" value="step" onChange={onChangeProp} />
                 <Label>Step</Label>
               </Flex>
               <Flex style={{ alignItems: 'center', gap: 10 }}>
-                <Radio
-                  checked={!isDefined(value)}
-                  name="curve"
-                  value="none"
-                  onChange={onChangeProp}
-                />
+                <Radio checked={!isDefined(value)} name="curve" value="none" onChange={onChangeProp} />
                 <Label>None</Label>
               </Flex>
             </Stack>

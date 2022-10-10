@@ -35,10 +35,7 @@ UseBoundingBox.after((context) => {
 });
 
 UseBoundingBox.before.each((context) => {
-  context.getBoundingClientRect = sinon.stub(
-    window.HTMLElement.prototype,
-    'getBoundingClientRect'
-  );
+  context.getBoundingClientRect = sinon.stub(window.HTMLElement.prototype, 'getBoundingClientRect');
   context.getBoundingClientRect.returns(testBoundingBox);
 });
 
@@ -47,77 +44,57 @@ UseBoundingBox.after.each(() => {
   cleanup();
 });
 
-UseBoundingBox(
-  'should return the bounding box of the element when the ref is applied',
-  (context) => {
-    render(<TestCase context={context} />);
+UseBoundingBox('should return the bounding box of the element when the ref is applied', (context) => {
+  render(<TestCase context={context} />);
 
-    assert.equal(context.boundingBox, testBoundingBox);
-  }
-);
+  assert.equal(context.boundingBox, testBoundingBox);
+});
 
-UseBoundingBox(
-  'should update the bounding box on scroll, throttled',
-  async (context) => {
-    render(<TestCase context={context} />);
+UseBoundingBox('should update the bounding box on scroll, throttled', async (context) => {
+  render(<TestCase context={context} />);
 
-    assert.equal(context.boundingBox, testBoundingBox);
+  assert.equal(context.boundingBox, testBoundingBox);
 
-    const updatedBoundingBox = { ...testBoundingBox, x: 1234 };
+  const updatedBoundingBox = { ...testBoundingBox, x: 1234 };
 
-    context.getBoundingClientRect.returns(updatedBoundingBox);
+  context.getBoundingClientRect.returns(updatedBoundingBox);
 
-    fireEvent.scroll(window);
+  fireEvent.scroll(window);
 
-    assert.equal(
-      context.boundingBox,
-      testBoundingBox,
-      'onScroll is not throttled'
-    );
+  assert.equal(context.boundingBox, testBoundingBox, 'onScroll is not throttled');
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 200));
 
-    assert.equal(context.boundingBox, updatedBoundingBox);
-  }
-);
+  assert.equal(context.boundingBox, updatedBoundingBox);
+});
 
-UseBoundingBox(
-  'should update the bounding box on resize, throttled',
-  async (context) => {
-    render(<TestCase context={context} />);
+UseBoundingBox('should update the bounding box on resize, throttled', async (context) => {
+  render(<TestCase context={context} />);
 
-    assert.equal(context.boundingBox, testBoundingBox);
+  assert.equal(context.boundingBox, testBoundingBox);
 
-    const updatedBoundingBox = { ...testBoundingBox, x: 1234 };
+  const updatedBoundingBox = { ...testBoundingBox, x: 1234 };
 
-    context.getBoundingClientRect.returns(updatedBoundingBox);
+  context.getBoundingClientRect.returns(updatedBoundingBox);
 
-    fireEvent.resize(window);
+  fireEvent.resize(window);
 
-    assert.equal(
-      context.boundingBox,
-      testBoundingBox,
-      'onResize is not throttled'
-    );
+  assert.equal(context.boundingBox, testBoundingBox, 'onResize is not throttled');
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 200));
 
-    assert.equal(context.boundingBox, updatedBoundingBox);
-  }
-);
+  assert.equal(context.boundingBox, updatedBoundingBox);
+});
 
-UseBoundingBox(
-  'should stop listening to scroll & resize events when unmounted',
-  async (context) => {
-    render(<TestCase context={context} />);
+UseBoundingBox('should stop listening to scroll & resize events when unmounted', async (context) => {
+  render(<TestCase context={context} />);
 
-    const removeEventListenerSpy = sinon.spy(window, 'removeEventListener');
+  const removeEventListenerSpy = sinon.spy(window, 'removeEventListener');
 
-    cleanup();
+  cleanup();
 
-    assert.ok(removeEventListenerSpy.calledWith('scroll'));
-    assert.ok(removeEventListenerSpy.calledWith('resize'));
-  }
-);
+  assert.ok(removeEventListenerSpy.calledWith('scroll'));
+  assert.ok(removeEventListenerSpy.calledWith('resize'));
+});
 
 UseBoundingBox.run();

@@ -1,9 +1,4 @@
-import {
-  AgeDemographicConfiguration,
-  DataScope,
-  DataScopeKey,
-  MetricKeys,
-} from '@corona-dashboard/common';
+import { AgeDemographicConfiguration, DataScope, DataScopeKey, MetricKeys } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
@@ -17,11 +12,7 @@ import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
 
 interface InlineAgeDemographicProps {
-  configuration: AgeDemographicConfiguration<
-    DataScopeKey,
-    MetricKeys<DataScope>,
-    AccessibilityDefinition['key']
-  >;
+  configuration: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>, AccessibilityDefinition['key']>;
   startDate?: string;
   endDate?: string;
 }
@@ -33,9 +24,7 @@ export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
 
   const dateUrl = getDataUrl(startDate, endDate, configuration);
 
-  const { data } = useSWRImmutable(dateUrl, (url: string) =>
-    fetch(url).then((_) => _.json())
-  );
+  const { data } = useSWRImmutable(dateUrl, (url: string) => fetch(url).then((_) => _.json()));
 
   if (!isDefined(data)) {
     return <InlineLoader />;

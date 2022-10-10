@@ -10,18 +10,9 @@ interface TileProps {
   hasNoPaddingBottom?: boolean;
 }
 
-export function Tile({
-  children,
-  height,
-  hasNoBorder = false,
-  hasNoPaddingBottom = false,
-}: TileProps) {
+export function Tile({ children, height, hasNoBorder = false, hasNoPaddingBottom = false }: TileProps) {
   return (
-    <StyledTile
-      height={height}
-      hasNoBorder={hasNoBorder}
-      hasNoPaddingBottom={hasNoPaddingBottom}
-    >
+    <StyledTile height={height} hasNoBorder={hasNoBorder} hasNoPaddingBottom={hasNoPaddingBottom}>
       {children}
     </StyledTile>
   );
@@ -37,9 +28,7 @@ const StyledTile = styled.article<{
     display: 'flex',
     flexDirection: 'column',
     pt: 4,
-    pb: styledTileProps.hasNoPaddingBottom
-      ? undefined
-      : asResponsiveArray({ _: 3, sm: 4 }),
+    pb: styledTileProps.hasNoPaddingBottom ? undefined : asResponsiveArray({ _: 3, sm: 4 }),
     height: styledTileProps.height,
     backgroundColor: 'white',
     borderTop: styledTileProps.hasNoBorder ? undefined : `solid 2px ${colors.gray2}`,

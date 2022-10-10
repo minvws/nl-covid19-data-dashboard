@@ -23,28 +23,12 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   const lastValue = get(data, [metricName, 'last_value']);
   const propertyValue = metricProperty && lastValue[metricProperty];
 
-  assert(
-    isDefined(propertyValue),
-    `[${Metric.name}] Missing value for metric property ${[
-      metricName,
-      'last_value',
-      metricProperty,
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
+  assert(isDefined(propertyValue), `[${Metric.name}] Missing value for metric property ${[metricName, 'last_value', metricProperty].filter(isDefined).join(':')}`);
 
-  const differenceValue = differenceKey
-    ? (get(data, ['difference', differenceKey]) as
-        | DifferenceInteger
-        | DifferenceDecimal)
-    : undefined;
+  const differenceValue = differenceKey ? (get(data, ['difference', differenceKey]) as DifferenceInteger | DifferenceDecimal) : undefined;
 
   if (isDefined(differenceKey)) {
-    assert(
-      isDefined(differenceValue),
-      `[${Metric.name}] Missing value for difference:${differenceKey}`
-    );
+    assert(isDefined(differenceValue), `[${Metric.name}] Missing value for difference:${differenceKey}`);
   }
 
   const baseText = getPluralizedText(text, propertyValue);
@@ -59,11 +43,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
             absoluteDateTemplate={commonTexts.common.absolute_date_template}
           />
         ),
-        propertyValue: (
-          <BoldText>
-            {`${formatNumber(propertyValue)}${isPercentage ? '%' : ''}`}
-          </BoldText>
-        ),
+        propertyValue: <BoldText>{`${formatNumber(propertyValue)}${isPercentage ? '%' : ''}`}</BoldText>,
         ...(additionalData || {}),
       })}
     </>

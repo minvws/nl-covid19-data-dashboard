@@ -9,9 +9,7 @@ context('Gemeente - Positief geteste mensen', () => {
     const lastValue = this.municipalData.tested_overall.last_value;
 
     const kpiTestInfo = {
-      infected_per_100k: cy.formatters.formatNumber(
-        lastValue.infected_per_100k
-      ),
+      infected_per_100k: cy.formatters.formatNumber(lastValue.infected_per_100k),
       infected: cy.formatters.formatNumber(lastValue.infected),
     };
 

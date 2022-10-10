@@ -7,22 +7,21 @@ const onSelect$ = new BehaviorSubject(['nl']);
 
 export const setLangs = (languages: string[]) => onSelect$.next(languages);
 
-const persistOn =
-  (key: string, defaultValue: any) => (input$: Observable<any>) => {
-    let persisted;
-    try {
-      persisted = JSON.parse(window.localStorage.getItem(key) || '');
-    } catch (err) {
-      console.error(err);
-    } // eslint-disable-line no-empty
+const persistOn = (key: string, defaultValue: any) => (input$: Observable<any>) => {
+  let persisted;
+  try {
+    persisted = JSON.parse(window.localStorage.getItem(key) || '');
+  } catch (err) {
+    console.error(err);
+  } // eslint-disable-line no-empty
 
-    return input$.pipe(
-      startWith(persisted || defaultValue),
-      tap((value) => {
-        window.localStorage.setItem(key, JSON.stringify(value));
-      })
-    );
-  };
+  return input$.pipe(
+    startWith(persisted || defaultValue),
+    tap((value) => {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    })
+  );
+};
 
 const SUPPORTED_LANG_IDS = supportedLanguages.map((lang) => lang.id);
 
@@ -35,7 +34,6 @@ export const selectedLanguages$ = onSelect$.pipe(
 
 export const filterFn$ = selectedLanguages$.pipe(
   map((langs) => {
-    return (enclosingType: any, field: any) =>
-      filterField(enclosingType, field, langs);
+    return (enclosingType: any, field: any) => filterField(enclosingType, field, langs);
   })
 );

@@ -15,18 +15,12 @@ type ValidationResult = {
  * The validation result along with any possible error messages are returned.
  *
  */
-export function executeValidations(
-  validateFunction: ValidateFunction,
-  data: JSONObject,
-  schemaInfo: SchemaInfoItem
-): ValidationResult {
+export function executeValidations(validateFunction: ValidateFunction, data: JSONObject, schemaInfo: SchemaInfoItem): ValidationResult {
   let isValid = validateFunction(data) as boolean;
   let schemaErrors: (ErrorObject | string)[] = validateFunction.errors ?? [];
 
   if (schemaInfo.customValidations) {
-    const errors = schemaInfo.customValidations
-      .flatMap((validationFunc) => validationFunc(data))
-      .filter(isDefined);
+    const errors = schemaInfo.customValidations.flatMap((validationFunc) => validationFunc(data)).filter(isDefined);
 
     if (errors !== undefined) {
       schemaErrors = schemaErrors.concat(errors);

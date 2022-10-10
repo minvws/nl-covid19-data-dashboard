@@ -5,13 +5,7 @@ import styled from 'styled-components';
 import { useIntl } from '~/intl';
 import { TableText } from '../types';
 
-export function VariantDifference({
-  value,
-  text,
-}: {
-  value: DifferenceDecimal;
-  text: TableText;
-}) {
+export function VariantDifference({ value, text }: { value: DifferenceDecimal; text: TableText }) {
   const { formatPercentage } = useIntl();
 
   const options = {

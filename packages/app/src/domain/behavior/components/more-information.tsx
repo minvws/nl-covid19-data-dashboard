@@ -8,12 +8,7 @@ interface MoreInformationProps {
 
 export function MoreInformation({ text }: MoreInformationProps) {
   return (
-    <AnchorTile
-      title={text.title}
-      href={text.link_href}
-      label={text.link_label}
-      external
-    >
+    <AnchorTile title={text.title} href={text.link_href} label={text.link_label} external>
       <Text>{text.description}</Text>
     </AnchorTile>
   );

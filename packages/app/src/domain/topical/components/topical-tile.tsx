@@ -29,13 +29,7 @@ interface TopicalTileProps {
   cta: Cta | null;
 }
 
-export function TopicalTile({
-  title,
-  tileIcon,
-  trendIcon,
-  dynamicDescription,
-  cta,
-}: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, cta }: TopicalTileProps) {
   return (
     <Box
       as="a"
@@ -94,13 +88,7 @@ export function TopicalTile({
               <DynamicIcon name={tileIcon} />
             </TileIcon>
           </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="start"
-            textAlign="left"
-            p={{ _: 3, xs: 4 }}
-          >
+          <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }}>
             <Box display="flex" alignItems="center">
               <Markdown content={dynamicDescription} />
             </Box>
@@ -108,15 +96,7 @@ export function TopicalTile({
         </Box>
 
         {cta && (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            bg={colors.blue1}
-            color={colors.blue8}
-            padding={3}
-            className="topical-tile-cta"
-          >
+          <Box display="flex" justifyContent="center" alignItems="center" bg={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
             <TextWithIcon text={cta.label} icon={<ChevronRight />} />
           </Box>
         )}

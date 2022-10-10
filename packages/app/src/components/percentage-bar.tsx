@@ -11,30 +11,14 @@ interface PercentageProps {
   backgroundColor?: string;
 }
 
-export function PercentageBar({
-  percentage,
-  height,
-  color,
-  backgroundColor = colors.gray2,
-  backgroundStyle = 'normal',
-}: PercentageProps) {
+export function PercentageBar({ percentage, height, color, backgroundColor = colors.gray2, backgroundStyle = 'normal' }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
 
-  backgroundColor =
-    backgroundStyle === 'normal'
-      ? backgroundColor
-        ? backgroundColor
-        : 'gray2'
-      : backgroundColor;
+  backgroundColor = backgroundStyle === 'normal' ? (backgroundColor ? backgroundColor : 'gray2') : backgroundColor;
 
   return (
     <Wrapper>
-      <Bar
-        style={{ width: `${percentage}%` }}
-        height={height}
-        minWidth={minWidth}
-        color={color}
-      />
+      <Bar style={{ width: `${percentage}%` }} height={height} minWidth={minWidth} color={color} />
 
       <Box
         // Created by https://stripesgenerator.com/

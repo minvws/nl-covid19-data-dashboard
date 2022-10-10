@@ -43,12 +43,9 @@ UseThrottle('should clear timeout on unmount', (context) => {
 });
 
 UseThrottle('should not set new value immediately', async () => {
-  const { rerender, result, waitForNextUpdate } = renderHook(
-    ([newValue, newDelay]: [string, number]) => useThrottle(newValue, newDelay),
-    {
-      initialProps: ['test', 100],
-    }
-  );
+  const { rerender, result, waitForNextUpdate } = renderHook(([newValue, newDelay]: [string, number]) => useThrottle(newValue, newDelay), {
+    initialProps: ['test', 100],
+  });
 
   const firstResult = result.all[0];
 

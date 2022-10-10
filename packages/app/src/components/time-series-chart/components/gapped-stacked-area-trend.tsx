@@ -17,18 +17,7 @@ type GappedStackedAreaTrendProps = {
 };
 
 export function GappedStackedAreaTrend(props: GappedStackedAreaTrendProps) {
-  const {
-    series,
-    getX,
-    getY0,
-    getY1,
-    bounds,
-    color,
-    fillOpacity,
-    strokeWidth = 2,
-    mixBlendMode,
-    id,
-  } = props;
+  const { series, getX, getY0, getY1, bounds, color, fillOpacity, strokeWidth = 2, mixBlendMode, id } = props;
 
   /**
    * Here we loop through the series and each time a null value is encountered a

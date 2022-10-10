@@ -1,11 +1,5 @@
 import { isArray, isObject } from 'lodash';
-import {
-  MutableRefObject,
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useRef,
-} from 'react';
+import { MutableRefObject, ReactElement, ReactNode, useCallback, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
 import type { ChoroplethComponent } from '~/components/choropleth';
 import { StackedChart } from '~/components/stacked-chart';
@@ -30,15 +24,9 @@ type FunctionComponentProps<T extends (...args: any) => any> = Parameters<T>[0];
  * imported somewhere else.
  */
 const relevantComponentPathProps: Record<string, string[]> = {
-  [require.resolveWeak('~/components/choropleth')]: keyCheck<
-    FunctionComponentProps<ChoroplethComponent>
-  >(['map', 'data', 'dataConfig', 'dataOptions']),
-  [require.resolveWeak('~/components/stacked-chart')]: keyCheck<
-    FunctionComponentProps<typeof StackedChart>
-  >(['values', 'config', 'timeframe']),
-  [require.resolveWeak('~/components/time-series-chart')]: keyCheck<
-    FunctionComponentProps<typeof TimeSeriesChart>
-  >(['values', 'dataOptions', 'seriesConfig', 'timeframe']),
+  [require.resolveWeak('~/components/choropleth')]: keyCheck<FunctionComponentProps<ChoroplethComponent>>(['map', 'data', 'dataConfig', 'dataOptions']),
+  [require.resolveWeak('~/components/stacked-chart')]: keyCheck<FunctionComponentProps<typeof StackedChart>>(['values', 'config', 'timeframe']),
+  [require.resolveWeak('~/components/time-series-chart')]: keyCheck<FunctionComponentProps<typeof TimeSeriesChart>>(['values', 'dataOptions', 'seriesConfig', 'timeframe']),
 };
 
 /**
@@ -53,9 +41,7 @@ const relevantComponentPathProps: Record<string, string[]> = {
  * at the time of the crash will be reported as well.
  *
  */
-export function useComponentPropsReport(
-  additionalProps?: Record<string, unknown> | string | number | boolean
-) {
+export function useComponentPropsReport(additionalProps?: Record<string, unknown> | string | number | boolean) {
   const propsReportRef = useRef<Record<string, unknown> | undefined>();
 
   const propsReportCallback = useCallback(() => {
@@ -67,9 +53,7 @@ export function useComponentPropsReport(
     return { ...propsReportRef.current };
   }, [additionalProps, propsReportRef]);
 
-  const extractPropsFromChildren = (
-    children: ReactNode | RenderPropsFunction
-  ) => {
+  const extractPropsFromChildren = (children: ReactNode | RenderPropsFunction) => {
     try {
       return extractPropsAndFillReport(children, propsReportRef);
     } catch (e) {
@@ -88,10 +72,7 @@ function isReactElementArray(value: ReactNode): value is ReactNode[] {
   return Array.isArray(value);
 }
 
-function extractPropsAndFillReport(
-  children: ReactNode | RenderPropsFunction,
-  propsReportRef: MutableRefObject<Record<string, unknown> | undefined>
-) {
+function extractPropsAndFillReport(children: ReactNode | RenderPropsFunction, propsReportRef: MutableRefObject<Record<string, unknown> | undefined>) {
   if (isReactElement(children)) {
     propsReportRef.current = extractComponentProps(children);
   } else if (isReactElementArray(children)) {
@@ -100,21 +81,12 @@ function extractPropsAndFillReport(
   return children;
 }
 
-function extractComponentProps(
-  reactNode: ReactElement | ReactNode[]
-): Record<string, unknown> | undefined {
+function extractComponentProps(reactNode: ReactElement | ReactNode[]): Record<string, unknown> | undefined {
   const [element, type, path] = findComponentNode(reactNode);
   if (element && type && path) {
     const propNames = relevantComponentPathProps[path];
     return propNames
-      ? Object.assign(
-          Object.fromEntries(
-            propNames
-              .filter((x) => isDefined(element.props[x]))
-              .map((x) => [x, element.props[x]])
-          ),
-          { componentName: type.name }
-        )
+      ? Object.assign(Object.fromEntries(propNames.filter((x) => isDefined(element.props[x])).map((x) => [x, element.props[x]])), { componentName: type.name })
       : undefined;
   }
 }
@@ -130,9 +102,7 @@ function findComponentPath(componentName: string) {
   }
 }
 
-function findComponentNode(
-  node: ReactNode | ReactNode[]
-): [ReactElement | undefined, any, string | undefined] {
+function findComponentNode(node: ReactNode | ReactNode[]): [ReactElement | undefined, any, string | undefined] {
   if (isReactElement(node)) {
     if (isObject(node.type) && 'name' in node.type) {
       const path = findComponentPath(node.type.name);
@@ -149,12 +119,7 @@ function findComponentNode(
     }
   } else if (isReactElementArray(node)) {
     const elementArray = node as ReactNode[];
-    const element = elementArray
-      .filter(isReactElement)
-      .find(
-        (x) =>
-          isObject(x.type) && 'name' in x.type && findComponentPath(x.type.name)
-      );
+    const element = elementArray.filter(isReactElement).find((x) => isObject(x.type) && 'name' in x.type && findComponentPath(x.type.name));
     if (isDefined(element)) {
       return findComponentNode(element);
     }

@@ -4,11 +4,11 @@ import { colors } from '@corona-dashboard/common';
  * This method gets the split labels for the sewerchart
  *
  */
- type labelType = {
-    segment_0: string;
-    segment_1: string;
-    segment_2: string;
-    segment_3: string;
+type labelType = {
+  segment_0: string;
+  segment_1: string;
+  segment_2: string;
+  segment_3: string;
 };
 
 export function getAverageSplitPoints(labels: labelType) {

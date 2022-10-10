@@ -39,9 +39,7 @@ UseViewport('should remove window listener', () => {
 
   unmount();
 
-  const removeListenerArgs = (window.removeEventListener as any).getCall(
-    0
-  ).args;
+  const removeListenerArgs = (window.removeEventListener as any).getCall(0).args;
 
   assert.equal(removeListenerArgs[0], 'resize');
 });

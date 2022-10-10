@@ -1,7 +1,4 @@
-import {
-  sortTimeSeriesValues,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { sortTimeSeriesValues, TimestampedValue } from '@corona-dashboard/common';
 import { last } from 'lodash';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
@@ -47,19 +44,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       data.values = sortTimeSeriesValues(data.values);
 
       if (isDefined(start) || isDefined(end)) {
-        data.values = filterByDateSpan(
-          data.values,
-          start as string,
-          end as string
-        );
+        data.values = filterByDateSpan(data.values, start as string, end as string);
         data.last_value = last(data.values);
       }
 
-      const strippedData = stripTrailingNullValues(
-        data,
-        metric,
-        metricProperty as keyof TimestampedValue
-      );
+      const strippedData = stripTrailingNullValues(data, metric, metricProperty as keyof TimestampedValue);
 
       res.status(200).json(strippedData.last_value);
     } else {

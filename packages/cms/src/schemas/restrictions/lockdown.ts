@@ -12,8 +12,7 @@ export const lockdown = {
     {
       title: 'Lockdown boodschap',
       name: 'message',
-      description:
-        'Als de knop aanstaat tonen wij deze waarschuwing op de landingspagina',
+      description: 'Als de knop aanstaat tonen wij deze waarschuwing op de landingspagina',
       type: 'object',
       fields: [
         { title: 'Titel', name: 'title', type: 'localeString' },

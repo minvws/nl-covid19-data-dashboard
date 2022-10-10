@@ -22,14 +22,12 @@ export function useResizeObserver<T extends HTMLElement | SVGElement>() {
   const disconnect = useCallback(() => observer.current?.disconnect(), []);
   const connect = useCallback(
     () =>
-      (observer.current = new ResizeObserver(
-        ([entry]: ResizeObserverEntry[]) => {
-          setSize({
-            width: Math.round(entry.contentRect.width),
-            height: Math.round(entry.contentRect.height),
-          });
-        }
-      )),
+      (observer.current = new ResizeObserver(([entry]: ResizeObserverEntry[]) => {
+        setSize({
+          width: Math.round(entry.contentRect.width),
+          height: Math.round(entry.contentRect.height),
+        });
+      })),
     []
   );
 

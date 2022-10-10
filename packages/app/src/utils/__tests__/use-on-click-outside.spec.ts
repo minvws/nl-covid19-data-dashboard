@@ -59,92 +59,80 @@ UseOnClickOutside('should remove document listeners on unmount', (context) => {
   sinon.assert.calledTwice(context.removeEventListenerSpy);
 });
 
-UseOnClickOutside(
-  'should call handler when click is outside specified element',
-  () => {
-    const mockElement = {
-      contains: () => false,
-    };
+UseOnClickOutside('should call handler when click is outside specified element', () => {
+  const mockElement = {
+    contains: () => false,
+  };
 
-    const mockRef = {
-      current: mockElement,
-    } as unknown as RefObject<Element>;
+  const mockRef = {
+    current: mockElement,
+  } as unknown as RefObject<Element>;
 
-    const handler = sinon.spy();
+  const handler = sinon.spy();
 
-    renderHook(() => useOnClickOutside([mockRef], handler));
+  renderHook(() => useOnClickOutside([mockRef], handler));
 
-    var event = new Event('mousedown');
-    document.dispatchEvent(event);
+  var event = new Event('mousedown');
+  document.dispatchEvent(event);
 
-    sinon.assert.calledOnce(handler);
-  }
-);
+  sinon.assert.calledOnce(handler);
+});
 
-UseOnClickOutside(
-  'should call handler when touch is outside specified element',
-  () => {
-    const mockElement = {
-      contains: () => false,
-    };
+UseOnClickOutside('should call handler when touch is outside specified element', () => {
+  const mockElement = {
+    contains: () => false,
+  };
 
-    const mockRef = {
-      current: mockElement,
-    } as unknown as RefObject<Element>;
+  const mockRef = {
+    current: mockElement,
+  } as unknown as RefObject<Element>;
 
-    const handler = sinon.spy();
+  const handler = sinon.spy();
 
-    renderHook(() => useOnClickOutside([mockRef], handler));
+  renderHook(() => useOnClickOutside([mockRef], handler));
 
-    var event = new Event('touchstart');
-    document.dispatchEvent(event);
+  var event = new Event('touchstart');
+  document.dispatchEvent(event);
 
-    sinon.assert.calledOnce(handler);
-  }
-);
+  sinon.assert.calledOnce(handler);
+});
 
-UseOnClickOutside(
-  'should not call handler when click is inside specified element',
-  () => {
-    const mockElement = {
-      contains: () => true,
-    };
+UseOnClickOutside('should not call handler when click is inside specified element', () => {
+  const mockElement = {
+    contains: () => true,
+  };
 
-    const mockRef = {
-      current: mockElement,
-    } as unknown as RefObject<Element>;
+  const mockRef = {
+    current: mockElement,
+  } as unknown as RefObject<Element>;
 
-    const handler = sinon.spy();
+  const handler = sinon.spy();
 
-    renderHook(() => useOnClickOutside([mockRef], handler));
+  renderHook(() => useOnClickOutside([mockRef], handler));
 
-    var event = new Event('mousedown');
-    document.dispatchEvent(event);
+  var event = new Event('mousedown');
+  document.dispatchEvent(event);
 
-    sinon.assert.notCalled(handler);
-  }
-);
+  sinon.assert.notCalled(handler);
+});
 
-UseOnClickOutside(
-  'should not call handler when touch is inside specified element',
-  () => {
-    const mockElement = {
-      contains: () => true,
-    };
+UseOnClickOutside('should not call handler when touch is inside specified element', () => {
+  const mockElement = {
+    contains: () => true,
+  };
 
-    const mockRef = {
-      current: mockElement,
-    } as unknown as RefObject<Element>;
+  const mockRef = {
+    current: mockElement,
+  } as unknown as RefObject<Element>;
 
-    const handler = sinon.spy();
+  const handler = sinon.spy();
 
-    renderHook(() => useOnClickOutside([mockRef], handler));
+  renderHook(() => useOnClickOutside([mockRef], handler));
 
-    var event = new Event('touchstart');
-    document.dispatchEvent(event);
+  var event = new Event('touchstart');
+  document.dispatchEvent(event);
 
-    sinon.assert.notCalled(handler);
-  }
-);
+  sinon.assert.notCalled(handler);
+});
 
 UseOnClickOutside.run();

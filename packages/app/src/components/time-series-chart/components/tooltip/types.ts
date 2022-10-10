@@ -1,10 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import {
-  DataOptions,
-  MetricPropertyFormatters,
-  SeriesConfig,
-  TimespanAnnotationConfig,
-} from '../../logic';
+import { DataOptions, MetricPropertyFormatters, SeriesConfig, TimespanAnnotationConfig } from '../../logic';
 import { TimelineEventConfig } from '../timeline';
 
 export type TooltipData<T extends TimestampedValue> = {
@@ -73,6 +68,4 @@ export type TooltipData<T extends TimestampedValue> = {
   isOutOfBounds?: boolean;
 };
 
-export type TooltipFormatter<T extends TimestampedValue> = (
-  tooltipData: TooltipData<T>
-) => React.ReactNode;
+export type TooltipFormatter<T extends TimestampedValue> = (tooltipData: TooltipData<T>) => React.ReactNode;

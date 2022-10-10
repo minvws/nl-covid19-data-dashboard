@@ -28,14 +28,7 @@ const VIEWPORT_PADDING = 10;
  *
  * @TODO clean up calculations in Tooltip component
  */
-export function TooltipWrapper({
-  title,
-  children,
-  left,
-  top: _top,
-  bounds,
-  padding,
-}: TooltipWrapperProps) {
+export function TooltipWrapper({ title, children, left, top: _top, bounds, padding }: TooltipWrapperProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
@@ -44,10 +37,7 @@ export function TooltipWrapper({
   const targetY = -height;
   const targetX = left + padding.left;
 
-  const maxWidth = Math.min(
-    bounds.width + padding.left + padding.right,
-    viewportSize.width - VIEWPORT_PADDING * 2
-  );
+  const maxWidth = Math.min(bounds.width + padding.left + padding.right, viewportSize.width - VIEWPORT_PADDING * 2);
 
   const relativeLeft = boundingBox?.left ?? 0;
 
@@ -159,11 +149,7 @@ function TooltipContent(props: TooltipContentProps) {
   return (
     <StyledTooltipContent onClick={onSelect} aria-live="polite">
       {title && <TooltipHeading title={title} />}
-      {children && (
-        <TooltipChildren hasTitle={isDefined(title)}>
-          {children}
-        </TooltipChildren>
-      )}
+      {children && <TooltipChildren hasTitle={isDefined(title)}>{children}</TooltipChildren>}
     </StyledTooltipContent>
   );
 }

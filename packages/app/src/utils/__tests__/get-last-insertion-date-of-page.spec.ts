@@ -10,10 +10,7 @@ GetLastDateOfInsertion('returns zero when data is empty', () => {
 });
 
 GetLastDateOfInsertion('returns zero when metrics are empty', () => {
-  const result = getLastInsertionDateOfPage(
-    { key1: { last_value: { date_of_insertion_unix: 123 } } },
-    []
-  );
+  const result = getLastInsertionDateOfPage({ key1: { last_value: { date_of_insertion_unix: 123 } } }, []);
   assert.is(result, 0);
 });
 
@@ -39,26 +36,24 @@ GetLastDateOfInsertion('returns the max date_of_insertion_unix without last_valu
 });
 
 GetLastDateOfInsertion('works with nested values', () => {
-    const result = getLastInsertionDateOfPage(
-      {
-        key1: { last_value: { date_of_insertion_unix: 1 } },
-        key2: { values: [{last_value: { date_of_insertion_unix: 123 }}]},
-      },
-      ['key1', 'key2']
-    );
-    assert.is(result, 123);
-  }
-);
+  const result = getLastInsertionDateOfPage(
+    {
+      key1: { last_value: { date_of_insertion_unix: 1 } },
+      key2: { values: [{ last_value: { date_of_insertion_unix: 123 } }] },
+    },
+    ['key1', 'key2']
+  );
+  assert.is(result, 123);
+});
 
 GetLastDateOfInsertion('works with a direct date_of_insertion_unix', () => {
-    const result = getLastInsertionDateOfPage(
-      {
-        key1: { date_of_insertion_unix: 123 }
-      },
-      ['key1']
-    );
-    assert.is(result, 123);
-  }
-);
+  const result = getLastInsertionDateOfPage(
+    {
+      key1: { date_of_insertion_unix: 123 },
+    },
+    ['key1']
+  );
+  assert.is(result, 123);
+});
 
 GetLastDateOfInsertion.run();

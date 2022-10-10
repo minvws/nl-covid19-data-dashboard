@@ -47,23 +47,13 @@ GetFilteredValues.before.each((context) => {
 });
 
 GetFilteredValues('should filter the list by 5weeks', (context) => {
-  const result = getFilteredValues(
-    context._testList,
-    '5weeks',
-    new Date(),
-    testCallback
-  );
+  const result = getFilteredValues(context._testList, '5weeks', new Date(), testCallback);
 
   assert.is(result.length, 4);
 });
 
 GetFilteredValues('should filter the list by all', (context) => {
-  const result = getFilteredValues(
-    context._testList,
-    'all',
-    new Date(),
-    testCallback
-  );
+  const result = getFilteredValues(context._testList, 'all', new Date(), testCallback);
 
   assert.is(result.length, 5);
 });

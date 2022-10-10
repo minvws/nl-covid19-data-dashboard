@@ -7,21 +7,13 @@ context('Landelijk - Positief geteste mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: NlContext) {
-    const infectedTotalLastValue = getLastFilledValue(
-      this.nationalData.tested_overall
-    );
+    const infectedTotalLastValue = getLastFilledValue(this.nationalData.tested_overall);
     const ggdLastValue = getLastFilledValue(this.nationalData.tested_ggd);
 
     const kpiTestInfo = {
-      infected_moving_average: cy.formatters.formatNumber(
-        infectedTotalLastValue.infected_moving_average
-      ),
-      infected_percentage_moving_average: cy.formatters.formatPercentage(
-        ggdLastValue.infected_percentage_moving_average
-      ),
-      tested_total_moving_average: cy.formatters.formatNumber(
-        ggdLastValue.tested_total_moving_average
-      ),
+      infected_moving_average: cy.formatters.formatNumber(infectedTotalLastValue.infected_moving_average),
+      infected_percentage_moving_average: cy.formatters.formatPercentage(ggdLastValue.infected_percentage_moving_average),
+      tested_total_moving_average: cy.formatters.formatNumber(ggdLastValue.tested_total_moving_average),
     };
 
     cy.checkKpiValues(kpiTestInfo);
@@ -32,15 +24,11 @@ context('Landelijk - Positief geteste mensen', () => {
 
     const testMunicipalCode = 'GM1970';
 
-    const aPath = cy.get(
-      `[data-cy=choropleths] path[data-id=${testMunicipalCode}]`
-    );
+    const aPath = cy.get(`[data-cy=choropleths] path[data-id=${testMunicipalCode}]`);
 
     aPath.click({ force: true }).then(() => {
       cy.location().should((newLocation) => {
-        expect(newLocation.pathname).to.eq(
-          `/gemeente/${testMunicipalCode}/positief-geteste-mensen`
-        );
+        expect(newLocation.pathname).to.eq(`/gemeente/${testMunicipalCode}/positief-geteste-mensen`);
       });
     });
   });
@@ -58,9 +46,7 @@ context('Landelijk - Positief geteste mensen', () => {
 
     aPath.click({ force: true }).then(() => {
       cy.location().should((newLocation) => {
-        expect(newLocation.pathname).to.eq(
-          `/veiligheidsregio/${testVRCode}/positief-geteste-mensen`
-        );
+        expect(newLocation.pathname).to.eq(`/veiligheidsregio/${testVRCode}/positief-geteste-mensen`);
       });
     });
   });

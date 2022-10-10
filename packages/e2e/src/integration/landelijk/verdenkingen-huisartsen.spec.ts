@@ -10,9 +10,7 @@ context('Landelijk - Verdenkingen huisartsen', () => {
 
     const kpiTestInfo = {
       covid_symptoms: cy.formatters.formatNumber(lastValue.covid_symptoms),
-      covid_symptoms_per_100k: cy.formatters.formatNumber(
-        lastValue.covid_symptoms_per_100k
-      ),
+      covid_symptoms_per_100k: cy.formatters.formatNumber(lastValue.covid_symptoms_per_100k),
     };
 
     cy.checkKpiValues(kpiTestInfo);

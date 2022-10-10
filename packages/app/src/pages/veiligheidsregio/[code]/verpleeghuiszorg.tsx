@@ -1,8 +1,4 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { Coronavirus, Location, Verpleeghuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
@@ -19,25 +15,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { Languages, SiteText } from '~/locale';
 import { useIntl } from '~/intl';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectVrData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectVrData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -56,15 +37,9 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectVrData(
-    'difference.nursing_home__deceased_daily',
-    'difference.nursing_home__infected_locations_total',
-    'difference.nursing_home__newly_infected_people',
-    'nursing_home'
-  ),
+  selectVrData('difference.nursing_home__deceased_daily', 'difference.nursing_home__infected_locations_total', 'difference.nursing_home__newly_infected_people', 'nursing_home'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -79,10 +54,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'nursingHomePageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'nursingHomePageArticles'),
         elements: content.elements,
       },
     };
@@ -90,51 +62,29 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    selectedVrData: data,
-    vrName,
-    lastGenerated,
-    content,
-  } = props;
+  const { pageText, selectedVrData: data, vrName, lastGenerated, content } = props;
 
-  const [
-    nursingHomeConfirmedCasesTimeframe,
-    setNursingHomeConfirmedCasesTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [
-    nursingHomeInfectedLocationsTimeframe,
-    setNursingHomeInfectedLocationsTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [nursingHomeInfectedLocationsTimeframe, setNursingHomeInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
 
-  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const nursinghomeLastValue = data.nursing_home.last_value;
-  const underReportedDateStart = getBoundaryDateStartUnix(
-    data.nursing_home.values,
-    7
-  );
+  const underReportedDateStart = getBoundaryDateStartUnix(data.nursing_home.values, 7);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(textVr.besmette_locaties.metadata.title, {
       safetyRegionName: vrName,
     }),
-    description: replaceVariablesInText(
-      textVr.besmette_locaties.metadata.description,
-      {
-        safetyRegionName: vrName,
-      }
-    ),
+    description: replaceVariablesInText(textVr.besmette_locaties.metadata.description, {
+      safetyRegionName: vrName,
+    }),
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
@@ -144,25 +94,15 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.consequences_for_healthcare.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.nursing_home_care.title
-            }
-            title={replaceVariablesInText(
-              textVr.positief_geteste_personen.titel,
-              {
-                safetyRegion: vrName,
-              }
-            )}
+            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.nursing_home_care.title}
+            title={replaceVariablesInText(textVr.positief_geteste_personen.titel, {
+              safetyRegion: vrName,
+            })}
             icon={<Verpleeghuis />}
-            description={replaceVariablesInText(
-              textVr.positief_geteste_personen.pagina_toelichting,
-              {
-                safetyRegion: vrName,
-              }
-            )}
+            description={replaceVariablesInText(textVr.positief_geteste_personen.pagina_toelichting, {
+              safetyRegion: vrName,
+            })}
             metadata={{
               datumsText: textVr.positief_geteste_personen.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
@@ -211,23 +151,15 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   type: 'line',
                   metricProperty: 'newly_infected_people_moving_average',
                   color: colors.primary,
-                  label:
-                    textVr.positief_geteste_personen
-                      .line_chart_legend_trend_moving_average_label,
-                  shortLabel:
-                    textVr.positief_geteste_personen.tooltip_labels
-                      .newly_infected_people_moving_average,
+                  label: textVr.positief_geteste_personen.line_chart_legend_trend_moving_average_label,
+                  shortLabel: textVr.positief_geteste_personen.tooltip_labels.newly_infected_people_moving_average,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'newly_infected_people',
                   color: colors.primary,
-                  label:
-                    textVr.positief_geteste_personen
-                      .line_chart_legend_trend_label,
-                  shortLabel:
-                    textVr.positief_geteste_personen.tooltip_labels
-                      .newly_infected_people,
+                  label: textVr.positief_geteste_personen.line_chart_legend_trend_label,
+                  shortLabel: textVr.positief_geteste_personen.tooltip_labels.newly_infected_people,
                 },
               ]}
               dataOptions={{
@@ -235,22 +167,12 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: underReportedDateStart,
                     end: Infinity,
-                    label:
-                      textVr.positief_geteste_personen
-                        .line_chart_legend_inaccurate_label,
-                    shortLabel:
-                      textVr.positief_geteste_personen.tooltip_labels
-                        .inaccurate,
-                    cutValuesForMetricProperties: [
-                      'newly_infected_people_moving_average',
-                    ],
+                    label: textVr.positief_geteste_personen.line_chart_legend_inaccurate_label,
+                    shortLabel: textVr.positief_geteste_personen.tooltip_labels.inaccurate,
+                    cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'nursing_home',
-                  'newly_infected_people'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home', 'newly_infected_people'),
               }}
             />
           </ChartTile>
@@ -285,9 +207,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 data-cy="infected_locations_total"
                 absolute={nursinghomeLastValue.infected_locations_total}
                 percentage={nursinghomeLastValue.infected_locations_percentage}
-                difference={
-                  data.difference.nursing_home__infected_locations_total
-                }
+                difference={data.difference.nursing_home__infected_locations_total}
                 isAmount
               />
               <Text>{textVr.besmette_locaties.kpi_toelichting}</Text>
@@ -299,10 +219,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="newly_infected_locations"
-                absolute={nursinghomeLastValue.newly_infected_locations}
-              />
+              <KpiValue data-cy="newly_infected_locations" absolute={nursinghomeLastValue.newly_infected_locations} />
               <Text>{textVr.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -324,9 +241,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'area',
                   metricProperty: 'infected_locations_total',
-                  label:
-                    textShared.verpleeghuis_besmette_locaties
-                      .linechart_tooltip_label,
+                  label: textShared.verpleeghuis_besmette_locaties.linechart_tooltip_label,
                   color: colors.primary,
                 },
               ]}
@@ -360,12 +275,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="deceased_daily"
-                absolute={nursinghomeLastValue.deceased_daily}
-                difference={data.difference.nursing_home__deceased_daily}
-                isAmount
-              />
+              <KpiValue data-cy="deceased_daily" absolute={nursinghomeLastValue.deceased_daily} difference={data.difference.nursing_home__deceased_daily} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -387,8 +297,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   type: 'line',
                   metricProperty: 'deceased_daily_moving_average',
                   label: textVr.line_chart_legend_trend_moving_average_label,
-                  shortLabel:
-                    textVr.tooltip_labels.deceased_daily_moving_average,
+                  shortLabel: textVr.tooltip_labels.deceased_daily_moving_average,
                   color: colors.primary,
                 },
                 {
@@ -406,16 +315,10 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                     end: Infinity,
                     label: textVr.line_chart_legend_inaccurate_label,
                     shortLabel: textVr.tooltip_labels.inaccurate,
-                    cutValuesForMetricProperties: [
-                      'deceased_daily_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['deceased_daily_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'nursing_home',
-                  'deceased_daily'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home', 'deceased_daily'),
               }}
             />
           </ChartTile>

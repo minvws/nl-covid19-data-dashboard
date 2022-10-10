@@ -18,12 +18,7 @@ type HeaderProps = {
   screenReaderCategory?: string;
 };
 
-export function Header({
-  icon,
-  title,
-  category,
-  screenReaderCategory,
-}: HeaderProps) {
+export function Header({ icon, title, category, screenReaderCategory }: HeaderProps) {
   const breakpoints = useBreakpoints();
   const isMediumScreen = breakpoints.md;
 
@@ -34,9 +29,7 @@ export function Header({
         <Box gridArea="category">
           <Heading level={2} variant="subtitle2">
             {category}
-            {screenReaderCategory && (
-              <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
-            )}
+            {screenReaderCategory && <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>}
           </Heading>
         </Box>
       )}

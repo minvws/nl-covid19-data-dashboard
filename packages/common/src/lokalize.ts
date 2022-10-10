@@ -10,10 +10,7 @@ export const ID_PREFIX = '__@__';
 /**
  * Creates a flat structure from which both language JSON files are built.
  */
-export function createFlatTexts(
-  documents: LokalizeText[],
-  appendDocumentIdToKey = false
-) {
+export function createFlatTexts(documents: LokalizeText[], appendDocumentIdToKey = false) {
   const nl: Record<string, string> = {};
   const en: Record<string, string> = {};
 
@@ -24,10 +21,7 @@ export function createFlatTexts(
    * First write all published document texts
    */
   for (const document of published) {
-    const { jsonKey, localeText } = parseLocaleTextDocument(
-      document,
-      appendDocumentIdToKey
-    );
+    const { jsonKey, localeText } = parseLocaleTextDocument(document, appendDocumentIdToKey);
 
     nl[jsonKey] = localeText.nl;
     en[jsonKey] = localeText.en;
@@ -38,10 +32,7 @@ export function createFlatTexts(
    * draft version.
    */
   for (const document of drafts) {
-    const { jsonKey, localeText } = parseLocaleTextDocument(
-      document,
-      appendDocumentIdToKey
-    );
+    const { jsonKey, localeText } = parseLocaleTextDocument(document, appendDocumentIdToKey);
 
     nl[jsonKey] = localeText.nl;
     en[jsonKey] = localeText.en;
@@ -50,28 +41,19 @@ export function createFlatTexts(
   return { nl, en };
 }
 
-export function parseLocaleTextDocument(
-  document: LokalizeText,
-  appendDocumentIdToKey = false
-) {
+export function parseLocaleTextDocument(document: LokalizeText, appendDocumentIdToKey = false) {
   /**
    * Paths inside the `__root` subject should be placed in the
    * root of the exported json.
    */
-  const jsonKey =
-    document.key.replace('__root.', '') +
-    (appendDocumentIdToKey ? ID_PREFIX + document._id : '');
+  const jsonKey = document.key.replace('__root.', '') + (appendDocumentIdToKey ? ID_PREFIX + document._id : '');
 
-  const nl = document.should_display_empty
-    ? ''
-    : document.text?.nl?.trim() || '';
+  const nl = document.should_display_empty ? '' : document.text?.nl?.trim() || '';
 
   /**
    * Fall back to Dutch texts if English is missing.
    */
-  const en = document.should_display_empty
-    ? ''
-    : document.text?.en?.trim() || nl;
+  const en = document.should_display_empty ? '' : document.text?.en?.trim() || nl;
 
   return { jsonKey, localeText: { nl, en } };
 }

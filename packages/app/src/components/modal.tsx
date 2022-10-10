@@ -25,12 +25,7 @@ export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
     <ModalPortal id={id}>
       <DisablePageScroll />
       <StyledFullscreenModal ref={focusRef}>
-        <div
-          css={css({ p: 5, height: isFullheight ? '100%' : undefined })}
-          onClick={(evt) => evt.target === clickRef.current && onClose()}
-          ref={clickRef}
-          id={focusId}
-        >
+        <div css={css({ p: 5, height: isFullheight ? '100%' : undefined })} onClick={(evt) => evt.target === clickRef.current && onClose()} ref={clickRef} id={focusId}>
           {children}
         </div>
       </StyledFullscreenModal>

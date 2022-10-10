@@ -19,10 +19,7 @@ function getIconByName(name: IconName) {
   const icons: IconCollection = allIcons;
   const DynamicIcon = icons[name];
 
-  assert(
-    isDefined(DynamicIcon),
-    `[${getIconByName.name}] Icon with name "${name}" does not exist`
-  );
+  assert(isDefined(DynamicIcon), `[${getIconByName.name}] Icon with name "${name}" does not exist`);
 
   return DynamicIcon;
 }

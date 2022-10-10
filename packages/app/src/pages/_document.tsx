@@ -1,10 +1,4 @@
-import Document, {
-  DocumentContext,
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import xss from 'xss';
 
@@ -19,8 +13,7 @@ class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -50,11 +43,7 @@ class MyDocument extends Document {
           <Main />
 
           <noscript>
-            <img
-              src="https://statistiek.rijksoverheid.nl/piwik/piwik.php?idsite=7939&rec=1"
-              style={{ border: 0 }}
-              alt=""
-            />
+            <img src="https://statistiek.rijksoverheid.nl/piwik/piwik.php?idsite=7939&rec=1" style={{ border: 0 }} alt="" />
           </noscript>
 
           <NextScript />

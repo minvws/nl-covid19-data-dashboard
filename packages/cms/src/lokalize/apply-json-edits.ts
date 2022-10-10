@@ -2,12 +2,7 @@ import { assert } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import { getClient } from '../client';
-import {
-  appendTextMutation,
-  importLokalizeTexts,
-  getLocalMutations,
-  readReferenceTexts,
-} from './logic';
+import { appendTextMutation, importLokalizeTexts, getLocalMutations, readReferenceTexts } from './logic';
 import { createTextDocument } from './logic/create-text-document';
 
 /**
@@ -19,10 +14,7 @@ import { createTextDocument } from './logic/create-text-document';
 (async function run() {
   const referenceTexts = await readReferenceTexts();
 
-  assert(
-    referenceTexts,
-    `Failed to read reference texts. Please run lokalize:import first.`
-  );
+  assert(referenceTexts, `Failed to read reference texts. Please run lokalize:import first.`);
 
   const mutations = await getLocalMutations(referenceTexts);
 
@@ -83,9 +75,7 @@ import { createTextDocument } from './logic/create-text-document';
        *
        * If a document with the given key already exists we log a warning.
        */
-      const count = await devClient.fetch(
-        `count(*[_type == 'lokalizeText' && key == '${key}'])`
-      );
+      const count = await devClient.fetch(`count(*[_type == 'lokalizeText' && key == '${key}'])`);
       if (count === 0) {
         const document = await devClient.create(createTextDocument(key, text));
 
@@ -95,9 +85,7 @@ import { createTextDocument } from './logic/create-text-document';
           documentId: document._id,
         });
       } else {
-        console.warn(
-          `A lokalize document with key ${key} already exists. Skipped adding a new one.`
-        );
+        console.warn(`A lokalize document with key ${key} already exists. Skipped adding a new one.`);
       }
     }
 
@@ -115,10 +103,7 @@ import { createTextDocument } from './logic/create-text-document';
     appendDocumentIdToKey: true,
   });
 
-  console.log(
-    'Successfully applied the following mutations:\n',
-    JSON.stringify(response.keys, null, 2)
-  );
+  console.log('Successfully applied the following mutations:\n', JSON.stringify(response.keys, null, 2));
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);

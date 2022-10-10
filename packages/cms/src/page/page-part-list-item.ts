@@ -17,29 +17,17 @@ interface PagePartChildPage {
 }
 
 export function pagePartListItem() {
-  return S.listItem()
-    .id('dashboard-paginas')
-    .title("Dashboard Pagina's")
-    .icon(BsBook)
-    .child(pageIdentifierListemItem);
+  return S.listItem().id('dashboard-paginas').title("Dashboard Pagina's").icon(BsBook).child(pageIdentifierListemItem);
 }
 
 function pageIdentifierListemItem() {
-  return documentStore
-    .listenQuery(
-      `*[_type == 'pageIdentifier' && !(_id in path("drafts.**"))]{ _id, identifier, title }`
-    )
-    .pipe(
-      map((pages: PagePartPage[]) => {
-        return S.list()
-          .title('Pagina')
-          .items(
-            pages
-              .sort((a, b) => a.title.localeCompare(b.title))
-              .map(pageDataListItem)
-          );
-      })
-    );
+  return documentStore.listenQuery(`*[_type == 'pageIdentifier' && !(_id in path("drafts.**"))]{ _id, identifier, title }`).pipe(
+    map((pages: PagePartPage[]) => {
+      return S.list()
+        .title('Pagina')
+        .items(pages.sort((a, b) => a.title.localeCompare(b.title)).map(pageDataListItem));
+    })
+  );
 }
 
 function pageDataListItem(page: PagePartPage) {
@@ -48,45 +36,38 @@ function pageDataListItem(page: PagePartPage) {
     .id(page._id)
     .icon(BsBookHalf)
     .child(
-      documentStore
-        .listenQuery(
-          `*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]{ _id, _type, title }`,
-          { id: page._id }
-        )
-        .pipe(
-          map((childPages: PagePartChildPage[]) =>
-            S.list()
-              .title('Pagina onderdelen')
-              .items(
-                childPages
-                  .sort((a, b) => a.title.localeCompare(b.title))
-                  .map(pageDataItem)
-                  .concat(
-                    [
-                      { scope: 'nl', title: 'Landelijk lokalize' },
-                      { scope: 'gm', title: 'Gemeente lokalize' },
-                      { scope: 'vr', title: 'Regio lokalize' },
-                      { scope: 'shared', title: 'Gedeelde lokalize' },
-                    ].map((item) =>
-                      S.listItem()
-                        .id(item.scope)
-                        .title(item.scope)
-                        .icon(FaLanguage)
-                        .child(
-                          S.documentList()
-                            .title(item.title)
-                            .filter(
-                              '_type == "lokalizeText" && key match $subject'
-                            )
-                            .params({
-                              subject: `pages.${page.identifier}.${item.scope}.**`,
-                            })
-                        )
-                    )
+      documentStore.listenQuery(`*[pageIdentifier._ref == $id && !(_id in path("drafts.**"))]{ _id, _type, title }`, { id: page._id }).pipe(
+        map((childPages: PagePartChildPage[]) =>
+          S.list()
+            .title('Pagina onderdelen')
+            .items(
+              childPages
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .map(pageDataItem)
+                .concat(
+                  [
+                    { scope: 'nl', title: 'Landelijk lokalize' },
+                    { scope: 'gm', title: 'Gemeente lokalize' },
+                    { scope: 'vr', title: 'Regio lokalize' },
+                    { scope: 'shared', title: 'Gedeelde lokalize' },
+                  ].map((item) =>
+                    S.listItem()
+                      .id(item.scope)
+                      .title(item.scope)
+                      .icon(FaLanguage)
+                      .child(
+                        S.documentList()
+                          .title(item.title)
+                          .filter('_type == "lokalizeText" && key match $subject')
+                          .params({
+                            subject: `pages.${page.identifier}.${item.scope}.**`,
+                          })
+                      )
                   )
-              )
-          )
+                )
+            )
         )
+      )
     );
 }
 
@@ -95,11 +76,5 @@ function pageDataItem(pageData: PagePartChildPage) {
     .title(pageData.title)
     .id(pageData._id)
     .icon(BsFillPuzzleFill)
-    .child(
-      S.editor()
-        .id(pageData._id)
-        .schemaType(pageData._type)
-        .documentId(pageData._id)
-        .views([S.view.form()])
-    );
+    .child(S.editor().id(pageData._id).schemaType(pageData._type).documentId(pageData._id).views([S.view.form()]));
 }

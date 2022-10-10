@@ -11,18 +11,9 @@ interface TopicalMeasureTileProps {
   title: string;
 }
 
-export const TopicalMeasureTile = ({
-  icon,
-  title,
-}: TopicalMeasureTileProps) => {
+export const TopicalMeasureTile = ({ icon, title }: TopicalMeasureTileProps) => {
   return (
-    <Box
-      spacing={3}
-      borderColor={colors.gray5}
-      borderWidth="1px"
-      borderStyle="solid"
-      p="1.5rem"
-    >
+    <Box spacing={3} borderColor={colors.gray5} borderWidth="1px" borderStyle="solid" p="1.5rem">
       <Box display="flex" justifyContent="flex-start" alignItems="center">
         <KpiIcon>
           <DynamicIcon name={icon} />

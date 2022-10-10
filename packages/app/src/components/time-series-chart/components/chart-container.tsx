@@ -11,10 +11,7 @@
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
-import {
-  AccessibilityDefinition,
-  useAccessibilityAnnotations,
-} from '~/utils/use-accessibility-annotations';
+import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
@@ -38,18 +35,7 @@ interface ChartContainerProps {
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-export function ChartContainer({
-  accessibility,
-  width,
-  height,
-  padding,
-  children,
-  onHover,
-  onClick,
-  onFocus,
-  onBlur,
-  isTabInteractive,
-}: ChartContainerProps) {
+export function ChartContainer({ accessibility, width, height, padding, children, onHover, onClick, onFocus, onBlur, isTabInteractive }: ChartContainerProps) {
   const isTouch = useIsTouchDevice();
 
   const annotations = useAccessibilityAnnotations(accessibility);
@@ -90,11 +76,7 @@ export function ChartContainer({
         onClick={onClick}
         tabIndex={isTabInteractive ? 0 : -1}
       >
-        <Group
-          left={padding.left}
-          top={padding.top}
-          style={{ pointerEvents: 'none' }}
-        >
+        <Group left={padding.left} top={padding.top} style={{ pointerEvents: 'none' }}>
           {children}
         </Group>
       </svg>

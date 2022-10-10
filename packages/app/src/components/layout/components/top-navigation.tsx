@@ -32,57 +32,29 @@ export function TopNavigation() {
       >
         {collapsible.button(
           <NavToggle>
-            {collapsible.isOpen ? (
-              <CloseThick heigth="24px" width="24px" />
-            ) : (
-              <Menu heigth="24px" width="24px" />
-            )}
-            <VisuallyHidden>
-              {collapsible.isOpen
-                ? commonTexts.nav.menu.close_menu
-                : commonTexts.nav.menu.open_menu}
-            </VisuallyHidden>
+            {collapsible.isOpen ? <CloseThick heigth="24px" width="24px" /> : <Menu heigth="24px" width="24px" />}
+            <VisuallyHidden>{collapsible.isOpen ? commonTexts.nav.menu.close_menu : commonTexts.nav.menu.open_menu}</VisuallyHidden>
           </NavToggle>
         )}
       </div>
 
-      <NavWrapper
-        key={isWideNav ? 1 : 0}
-        role="navigation"
-        aria-labelledby="top-nav-title"
-        id="main-navigation"
-      >
+      <NavWrapper key={isWideNav ? 1 : 0} role="navigation" aria-labelledby="top-nav-title" id="main-navigation">
         <VisuallyHidden id="top-nav-title" as="h2">
           {commonTexts.nav.menu.title}
         </VisuallyHidden>
         {collapsible.content(
           <MaxWidth>
             <NavList>
-              <NavItem
-                href="/"
-                isActive={
-                  router.pathname === '/' ||
-                  router.pathname.startsWith('/actueel')
-                }
-              >
+              <NavItem href="/" isActive={router.pathname === '/' || router.pathname.startsWith('/actueel')}>
                 {commonTexts.nav.links.samenvatting}
               </NavItem>
-              <NavItem
-                href={reverseRouter.nl.index()}
-                isActive={router.pathname.startsWith('/landelijk')}
-              >
+              <NavItem href={reverseRouter.nl.index()} isActive={router.pathname.startsWith('/landelijk')}>
                 {commonTexts.nav.links.index}
               </NavItem>
-              <NavItem href={reverseRouter.vr.index()}>
-                {commonTexts.nav.links.veiligheidsregio}
-              </NavItem>
-              <NavItem href={reverseRouter.gm.index()}>
-                {commonTexts.nav.links.gemeente}
-              </NavItem>
+              <NavItem href={reverseRouter.vr.index()}>{commonTexts.nav.links.veiligheidsregio}</NavItem>
+              <NavItem href={reverseRouter.gm.index()}>{commonTexts.nav.links.gemeente}</NavItem>
 
-              <NavItem href={reverseRouter.general.over()}>
-                {commonTexts.nav.links.over}
-              </NavItem>
+              <NavItem href={reverseRouter.general.over()}>{commonTexts.nav.links.over}</NavItem>
             </NavList>
           </MaxWidth>
         )}
@@ -91,24 +63,13 @@ export function TopNavigation() {
   );
 }
 
-function NavItem({
-  href,
-  children,
-  isActive,
-}: {
-  href: string;
-  children: string;
-  isActive?: boolean;
-}) {
+function NavItem({ href, children, isActive }: { href: string; children: string; isActive?: boolean }) {
   const { pathname } = useRouter();
   isActive = isActive ?? (pathname === href || pathname.startsWith(`${href}/`));
   return (
     <StyledListItem>
       <Link passHref href={href}>
-        <NavLink
-          isActive={isActive}
-          aria-current={isActive ? 'page' : undefined}
-        >
+        <NavLink isActive={isActive} aria-current={isActive ? 'page' : undefined}>
           <NavLinkSpan data-text={children}>{children}</NavLinkSpan>
         </NavLink>
       </Link>

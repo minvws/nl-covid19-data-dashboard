@@ -35,13 +35,9 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
   const prdClient = getClient('production');
   const devClient = getClient('development');
 
-  const prdDocuments = (await prdClient.fetch(
-    `*[_type == 'lokalizeText' && ${NO_DRAFTS}]`
-  )) as LokalizeText[];
+  const prdDocuments = (await prdClient.fetch(`*[_type == 'lokalizeText' && ${NO_DRAFTS}]`)) as LokalizeText[];
 
-  const devDocuments = (await devClient.fetch(
-    `*[_type == 'lokalizeText' && ${NO_DRAFTS}]`
-  )) as LokalizeText[];
+  const devDocuments = (await devClient.fetch(`*[_type == 'lokalizeText' && ${NO_DRAFTS}]`)) as LokalizeText[];
 
   const devDocumentIds = devDocuments.map((x) => x._id);
 
@@ -51,17 +47,13 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
    * Only sync the documents that are still existing in the development set,
    * because some might have been deleted in the meantime.
    */
-  const documentsToSync = prdDocuments.filter((x) =>
-    devDocumentIds.includes(x._id)
-  );
+  const documentsToSync = prdDocuments.filter((x) => devDocumentIds.includes(x._id));
 
   const CHUNK_SIZE = 500;
   const chunks = chunk(documentsToSync, CHUNK_SIZE);
 
   for (const [index, documents] of chunks.entries()) {
-    console.log(
-      `Syncing ${(index + 1) * CHUNK_SIZE}/${documentsToSync.length}`
-    );
+    console.log(`Syncing ${(index + 1) * CHUNK_SIZE}/${documentsToSync.length}`);
     documents.forEach((doc) => {
       transaction.patch(doc._id, {
         set: {

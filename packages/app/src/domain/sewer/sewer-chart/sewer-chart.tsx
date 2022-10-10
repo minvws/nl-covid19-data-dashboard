@@ -1,11 +1,4 @@
-import {
-  colors,
-  NlSewer,
-  SewerPerInstallationData,
-  TimeframeOption,
-  TimeframeOptionsList,
-  VrSewer,
-} from '@corona-dashboard/common';
+import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList, VrSewer } from '@corona-dashboard/common';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Warning } from '@corona-dashboard/icons';
@@ -58,16 +51,7 @@ type SewerChartProps = {
   timelineEvents?: TimelineEventConfig[];
 };
 
-export function SewerChart({
-  accessibility,
-  dataAverages,
-  dataPerInstallation,
-  text,
-  vrNameOrGmName,
-  incompleteDatesAndTexts,
-  warning,
-  timelineEvents,
-}: SewerChartProps) {
+export function SewerChart({ accessibility, dataAverages, dataPerInstallation, text, vrNameOrGmName, incompleteDatesAndTexts, warning, timelineEvents }: SewerChartProps) {
   const {
     options,
     value: selectedInstallation,
@@ -88,9 +72,7 @@ export function SewerChart({
       } as SewerPerInstallationData)
   );
 
-  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(
-    TimeframeOption.ALL
-  );
+  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
@@ -103,12 +85,8 @@ export function SewerChart({
           valueAnnotation: text.valueAnnotation,
           timespanAnnotations: [
             {
-              start: parseInt(
-                incompleteDatesAndTexts.zeewolde_date_start_in_unix_time
-              ),
-              end: parseInt(
-                incompleteDatesAndTexts.zeewolde_date_end_in_unix_time
-              ),
+              start: parseInt(incompleteDatesAndTexts.zeewolde_date_start_in_unix_time),
+              end: parseInt(incompleteDatesAndTexts.zeewolde_date_end_in_unix_time),
               label: incompleteDatesAndTexts.zeewolde_label,
               shortLabel: incompleteDatesAndTexts.zeewolde_short_label,
             },
@@ -157,12 +135,7 @@ export function SewerChart({
       )}
       {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (
         <Box mt={2} mb={4}>
-          <WarningTile
-            variant="emphasis"
-            message={scopedWarning}
-            icon={Warning}
-            isFullWidth
-          />
+          <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />
         </Box>
       )}
       {
@@ -173,11 +146,7 @@ export function SewerChart({
         dataPerInstallation && selectedInstallation ? (
           <TimeSeriesChart
             accessibility={accessibility}
-            values={mergeData(
-              dataAverages,
-              dataPerInstallation,
-              selectedInstallation
-            )}
+            values={mergeData(dataAverages, dataPerInstallation, selectedInstallation)}
             timeframe={sewerTimeframe}
             seriesConfig={[
               {

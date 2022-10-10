@@ -5,9 +5,7 @@ import { gmData, vrData } from '@corona-dashboard/common';
  * municipality.
  *
  */
-export function getVrForMunicipalityCode(
-  code: string
-): { name: string; code: string; id: number } | undefined {
+export function getVrForMunicipalityCode(code: string): { name: string; code: string; id: number } | undefined {
   const municipality = gmData.find((x) => x.gemcode === code);
 
   if (!municipality) return;

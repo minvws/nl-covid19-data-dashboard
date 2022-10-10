@@ -34,9 +34,7 @@ UseKeyboardNavigation('should add 1 to the current index', () => {
 
   const dummyHandler = sinon.spy();
 
-  const { result } = renderHook(() =>
-    useKeyboardNavigation(spy, 10, dummyHandler)
-  );
+  const { result } = renderHook(() => useKeyboardNavigation(spy, 10, dummyHandler));
 
   act(() => {
     result.current.enable();
@@ -65,9 +63,7 @@ UseKeyboardNavigation('should substract 1 of the index', () => {
 
   const dummyHandler = sinon.spy();
 
-  const { result } = renderHook(() =>
-    useKeyboardNavigation(spy, maxItems, dummyHandler)
-  );
+  const { result } = renderHook(() => useKeyboardNavigation(spy, maxItems, dummyHandler));
 
   act(() => {
     result.current.enable();
@@ -95,9 +91,7 @@ UseKeyboardNavigation('should move the index to the start', () => {
 
   const dummyHandler = sinon.spy();
 
-  const { result } = renderHook(() =>
-    useKeyboardNavigation(spy, maxItems, dummyHandler)
-  );
+  const { result } = renderHook(() => useKeyboardNavigation(spy, maxItems, dummyHandler));
 
   act(() => {
     result.current.enable();
@@ -125,9 +119,7 @@ UseKeyboardNavigation('should move the index to the end', () => {
 
   const dummyHandler = sinon.spy();
 
-  const { result } = renderHook(() =>
-    useKeyboardNavigation(spy, maxItems, dummyHandler)
-  );
+  const { result } = renderHook(() => useKeyboardNavigation(spy, maxItems, dummyHandler));
 
   act(() => {
     result.current.enable();
@@ -149,9 +141,7 @@ UseKeyboardNavigation('should disable the keyboard navigation', () => {
   const spy = sinon.spy();
   const dummyHandlerHandler = sinon.spy();
 
-  const { result } = renderHook(() =>
-    useKeyboardNavigation(dummyHandlerHandler, 10, spy)
-  );
+  const { result } = renderHook(() => useKeyboardNavigation(dummyHandlerHandler, 10, spy));
 
   act(() => {
     result.current.enable();

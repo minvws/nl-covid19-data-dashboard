@@ -22,24 +22,14 @@ interface HighlightsTileProps {
   text: SiteText['pages']['topical_page']['shared'];
 }
 
-export function HighlightsTile({
-  hiddenTitle,
-  weeklyHighlight,
-  highlights,
-  showWeeklyHighlight,
-  text,
-}: HighlightsTileProps) {
+export function HighlightsTile({ hiddenTitle, weeklyHighlight, highlights, showWeeklyHighlight, text }: HighlightsTileProps) {
   return (
     <article>
       <VisuallyHidden>
         <h2>{hiddenTitle}</h2>
       </VisuallyHidden>
 
-      <Box
-        display="flex"
-        flexDirection={{ _: 'column', md: 'row' }}
-        spacing={{ _: 4, md: 0 }}
-      >
+      <Box display="flex" flexDirection={{ _: 'column', md: 'row' }} spacing={{ _: 4, md: 0 }}>
         {showWeeklyHighlight && weeklyHighlight && (
           <ContentTeaser
             title={weeklyHighlight.title}
@@ -51,16 +41,7 @@ export function HighlightsTile({
           />
         )}
         {highlights
-          .map((item) => (
-            <ContentTeaser
-              key={item.slug.current}
-              title={item.title}
-              slug={item.slug.current}
-              cover={item.cover}
-              category={item.category}
-              text={text}
-            />
-          ))
+          .map((item) => <ContentTeaser key={item.slug.current} title={item.title} slug={item.slug.current} cover={item.cover} category={item.category} text={text} />)
           .slice(0, showWeeklyHighlight ? 1 : 2)}
       </Box>
     </article>

@@ -20,13 +20,7 @@ import { useIntl } from '~/intl';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import { nestedHtml } from '~/style/preset';
 import { asResponsiveArray } from '~/style/utils';
-import {
-  ImageBlock,
-  InlineAttachment,
-  InlineCollapsibleList,
-  InlineLink,
-  RichContentImageBlock,
-} from '~/types/cms';
+import { ImageBlock, InlineAttachment, InlineCollapsibleList, InlineLink, RichContentImageBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
@@ -38,11 +32,7 @@ import { InlineChoropleth } from './inline-choropleth';
 import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
-import {
-  ChevronRight,
-  Download,
-  External as ExternalLinkIcon,
-} from '@corona-dashboard/icons';
+import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
@@ -61,11 +51,7 @@ interface AgeDemographicConfigNode {
   title: string;
   startDate?: string;
   endDate?: string;
-  config: AgeDemographicConfiguration<
-    DataScopeKey,
-    MetricKeys<DataScope>,
-    AccessibilityDefinition['key']
-  >;
+  config: AgeDemographicConfiguration<DataScopeKey, MetricKeys<DataScope>, AccessibilityDefinition['key']>;
 }
 
 interface ChoroplethConfigNode {
@@ -90,43 +76,19 @@ interface KpisConfigNode {
   kpis: KpiConfigNode[];
 }
 
-export function RichContent({
-  contentWrapper,
-  blocks,
-  imageSizes,
-}: RichContentProps) {
+export function RichContent({ contentWrapper, blocks, imageSizes }: RichContentProps) {
   const ContentWrapper = contentWrapper ?? Fragment;
   const serializers = {
     types: {
       inlineBlock: (props: unknown) => {
-        assert(
-          PortableText.defaultSerializers.types?.inlineBlock,
-          `[${RichContent.name}] PortableText needs to provide a serializer for inlineBlock content`
-        );
-        return (
-          <ContentWrapper>
-            {PortableText.defaultSerializers.types.inlineBlock(props)}
-          </ContentWrapper>
-        );
+        assert(PortableText.defaultSerializers.types?.inlineBlock, `[${RichContent.name}] PortableText needs to provide a serializer for inlineBlock content`);
+        return <ContentWrapper>{PortableText.defaultSerializers.types.inlineBlock(props)}</ContentWrapper>;
       },
       block: (props: unknown) => {
-        assert(
-          PortableText.defaultSerializers.types?.block,
-          `[${RichContent.name}] PortableText needs to provide a serializer for block content`
-        );
-        return (
-          <ContentWrapper>
-            {PortableText.defaultSerializers.types.block(props)}
-          </ContentWrapper>
-        );
+        assert(PortableText.defaultSerializers.types?.block, `[${RichContent.name}] PortableText needs to provide a serializer for block content`);
+        return <ContentWrapper>{PortableText.defaultSerializers.types.block(props)}</ContentWrapper>;
       },
-      image: (props: { node: ImageBlock | RichContentImageBlock }) => (
-        <ContentImage
-          contentWrapper={contentWrapper}
-          sizes={imageSizes}
-          {...props}
-        />
-      ),
+      image: (props: { node: ImageBlock | RichContentImageBlock }) => <ContentImage contentWrapper={contentWrapper} sizes={imageSizes} {...props} />,
 
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
@@ -172,17 +134,11 @@ export function RichContent({
                 {node.title}
               </Heading>
             </Box>
-            <InlineTimeSeriesCharts
-              configuration={node.config}
-              startDate={node.startDate}
-              endDate={node.endDate}
-            />
+            <InlineTimeSeriesCharts configuration={node.config} startDate={node.startDate} endDate={node.endDate} />
           </Box>
         );
       },
-      dashboardAgeDemographicChart: (props: {
-        node: AgeDemographicConfigNode;
-      }) => {
+      dashboardAgeDemographicChart: (props: { node: AgeDemographicConfigNode }) => {
         const node = props.node;
 
         return (
@@ -200,11 +156,7 @@ export function RichContent({
                   {node.title}
                 </Heading>
               </Box>
-              <InlineAgeDemographic
-                configuration={node.config}
-                startDate={node.startDate}
-                endDate={node.endDate}
-              />
+              <InlineAgeDemographic configuration={node.config} startDate={node.startDate} endDate={node.endDate} />
             </Box>
           </Box>
         );
@@ -221,10 +173,7 @@ export function RichContent({
                 </Heading>
               </Box>
 
-              <InlineChoropleth
-                configuration={node.config}
-                title={node.title}
-              />
+              <InlineChoropleth configuration={node.config} title={node.title} />
             </Box>
           </ContentWrapper>
         );
@@ -241,11 +190,7 @@ export function RichContent({
                 </Heading>
               </Box>
 
-              <InlineDonutChart
-                configuration={node.config}
-                startDate={node.startDate}
-                endDate={node.endDate}
-              />
+              <InlineDonutChart configuration={node.config} startDate={node.startDate} endDate={node.endDate} />
             </Box>
           </ContentWrapper>
         );
@@ -265,20 +210,9 @@ export function RichContent({
 
         return (
           <ContentWrapper>
-            <Box
-              spacing={{ _: 4, md: 2 }}
-              display="flex"
-              py={3}
-              flexDirection={{ _: 'column', md: 'row' }}
-            >
-              <InlineKpi
-                configuration={kpiLeft.config}
-                date={kpiLeft.endDate}
-              />
-              <InlineKpi
-                configuration={kpiRight.config}
-                date={kpiRight.endDate}
-              />
+            <Box spacing={{ _: 4, md: 2 }} display="flex" py={3} flexDirection={{ _: 'column', md: 'row' }}>
+              <InlineKpi configuration={kpiLeft.config} date={kpiLeft.endDate} />
+              <InlineKpi configuration={kpiRight.config} date={kpiRight.endDate} />
             </Box>
           </ContentWrapper>
         );
@@ -297,18 +231,11 @@ export function RichContent({
   );
 }
 
-function InlineAttachmentMark(props: {
-  children: ReactNode;
-  mark: InlineAttachment;
-}) {
+function InlineAttachmentMark(props: { children: ReactNode; mark: InlineAttachment }) {
   if (!props.mark.asset) return <>{props.children}</>;
 
   return (
-    <a
-      css={css({ textDecoration: 'underline' })}
-      download
-      href={getFileSrc(props.mark.asset)}
-    >
+    <a css={css({ textDecoration: 'underline' })} download href={getFileSrc(props.mark.asset)}>
       {props.children} <Download width={15} height={11} />
     </a>
   );
@@ -322,10 +249,7 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   if (!mark.href) return <>{children}</>;
 
   return isAbsoluteUrl(mark.href) ? (
-    <ExternalLink
-      href={mark.href}
-      underline
-    >
+    <ExternalLink href={mark.href} underline>
       {children}
       <ExternalLinkIcon width={20} height={11} />
     </ExternalLink>

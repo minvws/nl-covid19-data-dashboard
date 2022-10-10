@@ -31,11 +31,7 @@ export function getLastFilledValue<T>(metric: Metric<T>) {
     }
   }
 
-  throw new Error(
-    `Failed to find full non-null object for data shaped like ${JSON.stringify(
-      lastValue
-    )}`
-  );
+  throw new Error(`Failed to find full non-null object for data shaped like ${JSON.stringify(lastValue)}`);
 }
 
 function hasAllPropertiesFilled(x: Record<string, unknown>) {

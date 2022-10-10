@@ -39,11 +39,7 @@ export function useTimelineHoverHandler(
         return;
       }
 
-      const closest = voronoiLayout.find(
-        mousePoint.x - padding.left,
-        mousePoint.y,
-        distance
-      );
+      const closest = voronoiLayout.find(mousePoint.x - padding.left, mousePoint.y, distance);
 
       onHover(closest?.index);
     },

@@ -11,10 +11,7 @@ interface NotificationBannerProps {
   title: string;
   description: string;
 }
-export function NotificationBanner({
-  title,
-  description,
-}: NotificationBannerProps) {
+export function NotificationBanner({ title, description }: NotificationBannerProps) {
   const [lastWord, ...splittedWords] = title.split(' ').reverse();
   const titleWithoutLastWord = splittedWords.reverse().join(' ');
 
@@ -24,12 +21,7 @@ export function NotificationBanner({
 
   return (
     <Box width="100%" backgroundColor={colors.gray2}>
-      <MaxWidth
-        px={{ _: 3, sm: 4 }}
-        py={3}
-        display="flex"
-        spacingHorizontal={3}
-      >
+      <MaxWidth px={{ _: 3, sm: 4 }} py={3} display="flex" spacingHorizontal={3}>
         <Box display="flex" width="1.6rem" height="1.6rem">
           <Warning />
         </Box>

@@ -12,13 +12,7 @@ export function LanguageSwitcher() {
 
   return (
     <Box height={55} mt={-55} textAlign="right" position="absolute" right={3}>
-      <LanguageLink
-        href={`https://coronadashboard.rijksoverheid.nl${currentPath}`}
-        lang="nl"
-        hrefLang="nl"
-        isActive={locale === 'nl'}
-        title="Website in het Nederlands"
-      >
+      <LanguageLink href={`https://coronadashboard.rijksoverheid.nl${currentPath}`} lang="nl" hrefLang="nl" isActive={locale === 'nl'} title="Website in het Nederlands">
         NL
       </LanguageLink>
 

@@ -51,28 +51,18 @@ interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   content: Content<T>[];
 }
 
-export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
-  data,
-  content,
-}: DataDrivenTextProps<T, K>) {
+export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({ data, content }: DataDrivenTextProps<T, K>) {
   return (
     <Text variant="datadriven">
-      {React.Children.toArray(
-        content.map((x) => renderContent(x, data))
-      ).reduce((children: ReactNode[], child: ReactNode, index, arr) => {
+      {React.Children.toArray(content.map((x) => renderContent(x, data))).reduce((children: ReactNode[], child: ReactNode, index, arr) => {
         // inject spaces between content
-        return index < arr.length - 1
-          ? children.concat(child, ' ')
-          : children.concat(child);
+        return index < arr.length - 1 ? children.concat(child, ' ') : children.concat(child);
       }, [])}
     </Text>
   );
 }
 
-function renderContent<T extends DataKeys, K = DataFile<T>>(
-  content: Content<T>,
-  data: K
-) {
+function renderContent<T extends DataKeys, K = DataFile<T>>(content: Content<T>, data: K) {
   switch (content.type) {
     case 'metric':
       return <Metric data={data} {...content} />;

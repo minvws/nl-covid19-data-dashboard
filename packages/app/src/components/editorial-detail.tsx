@@ -36,9 +36,7 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
         <ContentImage node={editorial.cover} contentWrapper={ContentBlock} />
       </ContentBlock>
 
-      {!!editorial.content?.length && (
-        <RichContent blocks={editorial.content} contentWrapper={ContentBlock} />
-      )}
+      {!!editorial.content?.length && <RichContent blocks={editorial.content} contentWrapper={ContentBlock} />}
     </Box>
   );
 }

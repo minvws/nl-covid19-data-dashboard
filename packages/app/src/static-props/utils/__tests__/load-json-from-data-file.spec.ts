@@ -10,9 +10,7 @@ const LoadJsonFromDataFile = suite('loadJsonFromDataFile');
 
 LoadJsonFromDataFile('Should return data from read file', (context) => {
   sinon.stub(path, 'join').returns('foo.txt');
-  const readFileSyncStub = sinon
-    .stub(fs, 'readFileSync')
-    .returns('{"foo": "bar"}');
+  const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('{"foo": "bar"}');
 
   assert.equal(loadJsonFromDataFile('foo'), { foo: 'bar' });
   sinon.assert.calledWith(readFileSyncStub, 'foo.txt', 'utf8');
@@ -23,13 +21,10 @@ LoadJsonFromDataFile('Should throw an error when file not found', () => {
   assert.throws(() => loadJsonFromDataFile('foo'), Error);
 });
 
-LoadJsonFromDataFile(
-  'Should return an empty array when dontFailOnNotFound is true',
-  () => {
-    sinon.stub(fs, 'readFileSync').throws(Error);
-    assert.equal(loadJsonFromDataFile('foo', 'json', true), {});
-  }
-);
+LoadJsonFromDataFile('Should return an empty array when dontFailOnNotFound is true', () => {
+  sinon.stub(fs, 'readFileSync').throws(Error);
+  assert.equal(loadJsonFromDataFile('foo', 'json', true), {});
+});
 
 LoadJsonFromDataFile('Should construct the correct filepath ', () => {
   const pathStub = sinon.stub(path, 'join');

@@ -1,8 +1,4 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo, useState } from 'react';
 import styled from 'styled-components';
@@ -34,33 +30,17 @@ type VariantsStackedAreaTileProps = {
   noDataMessage?: ReactNode;
 };
 
-export function VariantsStackedAreaTile({
-  values,
-  variantColors,
-  metadata,
-  children = null,
-  noDataMessage = '',
-  text,
-}: VariantsStackedAreaTileProps) {
+export function VariantsStackedAreaTile({ values, variantColors, metadata, children = null, noDataMessage = '', text }: VariantsStackedAreaTileProps) {
   if (!isPresent(values)) {
     return (
-      <ChartTile
-        title={text.titel}
-        description={text.toelichting}
-        metadata={metadata}
-      >
+      <ChartTile title={text.titel} description={text.toelichting} metadata={metadata}>
         {children}
         <NoDataBox>{noDataMessage}</NoDataBox>
       </ChartTile>
     );
   }
   return (
-    <VariantStackedAreaTileWithData
-      text={text}
-      values={values}
-      metadata={metadata}
-      variantColors={variantColors}
-    >
+    <VariantStackedAreaTileWithData text={text} values={values} metadata={metadata} variantColors={variantColors}>
       {children}
     </VariantStackedAreaTileWithData>
   );
@@ -76,39 +56,19 @@ type VariantStackedAreaTileWithDataProps = {
   children?: ReactNode;
 };
 
-function VariantStackedAreaTileWithData({
-  text,
-  values,
-  variantColors,
-  metadata,
-  children = null,
-}: VariantStackedAreaTileWithDataProps) {
-  const [variantTimeframe, setVariantTimeframe] = useState<TimeframeOption>(
-    TimeframeOption.ALL
-  );
+function VariantStackedAreaTileWithData({ text, values, variantColors, metadata, children = null }: VariantStackedAreaTileWithDataProps) {
+  const [variantTimeframe, setVariantTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const { list, toggle, clear } =
-    useList<keyof VariantChartValue>(alwaysEnabled);
+  const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
-  const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
-    text,
-    values,
-    variantColors
-  );
+  const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(text, values, variantColors);
 
-  const filteredConfig = useFilteredSeriesConfig(
-    seriesConfig,
-    otherConfig,
-    list
-  );
+  const filteredConfig = useFilteredSeriesConfig(seriesConfig, otherConfig, list);
 
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [];
 
-  const timespanAnnotations = useUnreliableDataAnnotations(
-    values,
-    text.lagere_betrouwbaarheid
-  );
+  const timespanAnnotations = useUnreliableDataAnnotations(values, text.lagere_betrouwbaarheid);
 
   if (timespanAnnotations.length) {
     staticLegendItems.push({
@@ -130,13 +90,7 @@ function VariantStackedAreaTileWithData({
       <>
         {children}
         {children && <Spacer mb={3} />}
-        <InteractiveLegend
-          helpText={text.legend_help_tekst}
-          selectOptions={selectOptions}
-          selection={list}
-          onToggleItem={toggle}
-          onReset={clear}
-        />
+        <InteractiveLegend helpText={text.legend_help_tekst} selectOptions={selectOptions} selection={list} onToggleItem={toggle} onReset={clear} />
         <Spacer mb={2} />
         <TimeSeriesChart
           accessibility={{
@@ -162,45 +116,23 @@ function VariantStackedAreaTileWithData({
             const hasSelectedMetrics = metricAmount !== totalMetricAmount;
 
             const filteredValues = Object.fromEntries(
-              Object.entries(context.value).filter(([key, value]) =>
-                key.includes('percentage')
-                  ? value !== 0 && isPresent(value) && !isNaN(Number(value))
-                  : value
-              )
+              Object.entries(context.value).filter(([key, value]) => (key.includes('percentage') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
             ) as VariantChartValue;
 
             const reorderContext = {
               ...context,
               config: [
-                ...context.config.filter(
-                  (value) =>
-                    !hasMetricProperty(value) ||
-                    filteredValues[value.metricProperty] ||
-                    hasSelectedMetrics
-                ),
-                context.config.find(
-                  (value) =>
-                    hasMetricProperty(value) &&
-                    value.metricProperty === 'other_graph_percentage'
-                ),
+                ...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics),
+                context.config.find((value) => hasMetricProperty(value) && value.metricProperty === 'other_graph_percentage'),
               ].filter(isDefined),
               value: !hasSelectedMetrics ? filteredValues : context.value,
             };
 
-            const percentageValuesAmount = Object.keys(
-              reorderContext.value
-            ).filter((key) => key.includes('percentage')).length;
+            const percentageValuesAmount = Object.keys(reorderContext.value).filter((key) => key.includes('percentage')).length;
 
-            const hasTwoColumns = !hasSelectedMetrics
-              ? percentageValuesAmount > 4
-              : metricAmount > 4;
+            const hasTwoColumns = !hasSelectedMetrics ? percentageValuesAmount > 4 : metricAmount > 4;
 
-            return (
-              <TooltipSeriesList
-                data={reorderContext}
-                hasTwoColumns={hasTwoColumns}
-              />
-            );
+            return <TooltipSeriesList data={reorderContext} hasTwoColumns={hasTwoColumns} />;
           }}
           numGridLines={0}
           tickValues={[0, 25, 50, 75, 100]}
@@ -222,51 +154,38 @@ function useFilteredSeriesConfig(
 ) {
   return useMemo(() => {
     return [otherConfig, ...seriesConfig].filter(
-      (item) =>
-        item.metricProperty !== 'other_graph_percentage' &&
-        (compareList.includes(item.metricProperty) ||
-          compareList.length === alwaysEnabled.length)
+      (item) => item.metricProperty !== 'other_graph_percentage' && (compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length)
     );
   }, [seriesConfig, otherConfig, compareList]);
 }
 
-function useSeriesConfig(
-  text: VariantsStackedAreaTileText,
-  values: VariantChartValue[],
-  variantColors: ColorMatch[]
-) {
+function useSeriesConfig(text: VariantsStackedAreaTileText, values: VariantChartValue[], variantColors: ColorMatch[]) {
   return useMemo(() => {
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
       .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
-      .filter(
-        (x) => x.endsWith('_percentage') && x !== 'other_graph_percentage'
-      )
+      .filter((x) => x.endsWith('_percentage') && x !== 'other_graph_percentage')
       .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
-    const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] =
-      baseVariantsFiltered.map((variantKey) => {
-        const variantCodeFragments = variantKey.split('_');
-        variantCodeFragments.pop();
-        const variantCode = variantCodeFragments.join('_') as VariantCode;
+    const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] = baseVariantsFiltered.map((variantKey) => {
+      const variantCodeFragments = variantKey.split('_');
+      variantCodeFragments.pop();
+      const variantCode = variantCodeFragments.join('_') as VariantCode;
 
-        const color =
-          variantColors.find(
-            (variantColors) => variantColors.variant === variantCode
-          )?.color || colors.gray5;
+      const color = variantColors.find((variantColors) => variantColors.variant === variantCode)?.color || colors.gray5;
 
-        return {
-          type: 'gapped-area',
-          metricProperty: variantKey as keyof VariantChartValue,
-          color,
-          label: text.variantCodes[variantCode],
-          shape: 'gapped-area',
-          strokeWidth: 2,
-          fillOpacity: 0.2,
-          mixBlendMode: 'multiply',
-        };
-      });
+      return {
+        type: 'gapped-area',
+        metricProperty: variantKey as keyof VariantChartValue,
+        color,
+        label: text.variantCodes[variantCode],
+        shape: 'gapped-area',
+        strokeWidth: 2,
+        fillOpacity: 0.2,
+        mixBlendMode: 'multiply',
+      };
+    });
 
     const otherConfig = {
       type: 'gapped-area',
@@ -282,12 +201,7 @@ function useSeriesConfig(
     const selectOptions = [...seriesConfig];
 
     return [seriesConfig, otherConfig, selectOptions] as const;
-  }, [
-    values,
-    text.tooltip_labels.other_percentage,
-    text.variantCodes,
-    variantColors,
-  ]);
+  }, [values, text.tooltip_labels.other_percentage, text.variantCodes, variantColors]);
 }
 
 const NoDataBox = styled.div(

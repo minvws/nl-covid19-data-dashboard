@@ -19,9 +19,7 @@ export function BackgroundImage({
   sizes,
   className,
   objectFit = 'cover',
-  objectPosition = image.hotspot
-    ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
-    : undefined,
+  objectPosition = image.hotspot ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%` : undefined,
 }: BackgroundImageProps) {
   return (
     <div

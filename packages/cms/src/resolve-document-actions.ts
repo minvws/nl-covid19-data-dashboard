@@ -1,10 +1,4 @@
-import defaultResolve, {
-  DeleteAction,
-  DiscardChangesAction,
-  DuplicateAction,
-  PublishAction,
-  UnpublishAction,
-} from 'part:@sanity/base/document-actions';
+import defaultResolve, { DeleteAction, DiscardChangesAction, DuplicateAction, PublishAction, UnpublishAction } from 'part:@sanity/base/document-actions';
 import { DocumentActionProps, PublishOrAcceptAction } from './actions';
 import { onDocument$ } from './hooks/helper/document-subject';
 import * as documents from './schemas/documents';
@@ -12,101 +6,29 @@ import * as documents from './schemas/documents';
 /**
  * Actions are shown in this order, so the Publish button is the default
  */
-const defaultPublishingActions = [
-  PublishAction,
-  DiscardChangesAction,
-  UnpublishAction,
-];
+const defaultPublishingActions = [PublishAction, DiscardChangesAction, UnpublishAction];
 
 /**
  * Here we set the default actions on all documents
  */
-const documentsWithDefaultActions = Object.values(documents).reduce(
-  (pages, schema) => ({ ...pages, [schema.name]: defaultPublishingActions }),
-  {}
-);
+const documentsWithDefaultActions = Object.values(documents).reduce((pages, schema) => ({ ...pages, [schema.name]: defaultPublishingActions }), {});
 
 /**
  * And here we override some of them while constructing the actual lookup
  */
 const actionsByDocumentType = {
   ...documentsWithDefaultActions,
-  article: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  lokalizeText: [
-    PublishOrAcceptAction,
-    DiscardChangesAction,
-    PublishAction,
-    UnpublishAction,
-  ],
-  faqQuestion: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  cijferVerantwoordingItem: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  chartConfiguration: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  kpiConfiguration: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  pageIdentifier: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  pageArticles: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  pageHighlightedItems: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  pageLinks: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
-  pageRichText: [
-    PublishAction,
-    DiscardChangesAction,
-    UnpublishAction,
-    DuplicateAction,
-    DeleteAction,
-  ],
+  article: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  lokalizeText: [PublishOrAcceptAction, DiscardChangesAction, PublishAction, UnpublishAction],
+  faqQuestion: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  cijferVerantwoordingItem: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  chartConfiguration: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  kpiConfiguration: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  pageIdentifier: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  pageArticles: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  pageHighlightedItems: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  pageLinks: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
+  pageRichText: [PublishAction, DiscardChangesAction, UnpublishAction, DuplicateAction, DeleteAction],
 };
 
 type DocumentType = keyof typeof actionsByDocumentType;

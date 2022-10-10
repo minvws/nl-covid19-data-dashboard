@@ -64,10 +64,7 @@ export function GmLayout(props: GmLayoutProps) {
     layout: 'gm',
     code: code,
     map: [
-      [
-        'development_of_the_virus',
-        ['sewage_measurement', 'positive_tests', 'mortality'],
-      ],
+      ['development_of_the_virus', ['sewage_measurement', 'positive_tests', 'mortality']],
       ['consequences_for_healthcare', ['hospital_admissions']],
       ['actions_to_take', ['vaccinations']],
     ],
@@ -76,17 +73,8 @@ export function GmLayout(props: GmLayoutProps) {
   return (
     <>
       <Head>
-        <link
-          key="dc-spatial"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-        />
-        <link
-          key="dc-spatial-title"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-          title="Nederland"
-        />
+        <link key="dc-spatial" rel="dcterms:spatial" href="https://standaarden.overheid.nl/owms/terms/Nederland" />
+        <link key="dc-spatial-title" rel="dcterms:spatial" href="https://standaarden.overheid.nl/owms/terms/Nederland" title="Nederland" />
       </Head>
 
       <AppContent
@@ -112,9 +100,7 @@ export function GmLayout(props: GmLayoutProps) {
               >
                 <Box px={3} pb={4} spacing={1}>
                   <Heading id="sidebar-title" level={2} variant="h3">
-                    <VisuallyHidden as="span">
-                      {commonTexts.gemeente_layout.headings.sidebar}
-                    </VisuallyHidden>
+                    <VisuallyHidden as="span">{commonTexts.gemeente_layout.headings.sidebar}</VisuallyHidden>
                     {municipalityName}
                   </Heading>
                   {vr && (

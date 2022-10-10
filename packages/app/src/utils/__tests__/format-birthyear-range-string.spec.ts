@@ -43,18 +43,15 @@ FormatBirthyearRangeString('Should format birthyear with full range', () => {
   assert.is(result, '2003 until 2010');
 });
 
-FormatBirthyearRangeString(
-  'Should throw error when invalid birthyear range is passed in',
-  () => {
-    const birthyearRange = '2003';
-    const templates = {
-      earlier: '',
-      later: '',
-      range: '',
-    };
+FormatBirthyearRangeString('Should throw error when invalid birthyear range is passed in', () => {
+  const birthyearRange = '2003';
+  const templates = {
+    earlier: '',
+    later: '',
+    range: '',
+  };
 
-    assert.throws(() => formatBirthyearRangeString(birthyearRange, templates));
-  }
-);
+  assert.throws(() => formatBirthyearRangeString(birthyearRange, templates));
+});
 
 FormatBirthyearRangeString.run();

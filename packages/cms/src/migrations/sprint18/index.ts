@@ -17,8 +17,7 @@ import client from 'part:@sanity/base/client';
  */
 
 const fetchFAQ = () => client.fetch(`*[_type == 'veelgesteldeVragen']`);
-const fetchDefaultGroup = () =>
-  client.fetch(`*[_type == 'veelgesteldeVragenGroups'][0]`);
+const fetchDefaultGroup = () => client.fetch(`*[_type == 'veelgesteldeVragenGroups'][0]`);
 
 const buildPatches = (docs: any[], group: any) =>
   docs
@@ -42,11 +41,7 @@ const buildPatches = (docs: any[], group: any) =>
     }))
     .filter((x) => x !== undefined);
 
-const createTransaction = (patches: any[]) =>
-  patches.reduce(
-    (tx, patch) => tx.patch(patch.id, patch.patch),
-    client.transaction()
-  );
+const createTransaction = (patches: any[]) => patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), client.transaction());
 
 const commitTransaction = (tx: any) => tx.commit();
 
@@ -69,9 +64,7 @@ const migrateNextBatch = async (): Promise<any> => {
     group = await createDefaultGroup();
   }
 
-  const documents = (await fetchFAQ()).filter((x: any) =>
-    x.questions.some((x: any) => x._type === 'collapsible')
-  );
+  const documents = (await fetchFAQ()).filter((x: any) => x.questions.some((x: any) => x._type === 'collapsible'));
 
   const patches = buildPatches(documents, group);
 
@@ -80,12 +73,7 @@ const migrateNextBatch = async (): Promise<any> => {
     return null;
   }
 
-  console.log(
-    `Migrating batch:\n %s`,
-    patches
-      .map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
-      .join('\n')
-  );
+  console.log(`Migrating batch:\n %s`, patches.map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'));
   const transaction = createTransaction(patches);
 
   await commitTransaction(transaction);

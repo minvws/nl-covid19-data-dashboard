@@ -16,11 +16,7 @@ export function DeceasedMonitorSection({
 }) {
   return (
     <>
-      <ChartTile
-        metadata={{ source: text.bronnen.cbs }}
-        title={text.deceased_monitor_chart_title}
-        description={text.deceased_monitor_chart_description}
-      >
+      <ChartTile metadata={{ source: text.bronnen.cbs }} title={text.deceased_monitor_chart_title} description={text.deceased_monitor_chart_description}>
         <TimeSeriesChart
           accessibility={{
             key: 'deceased_monitor',
@@ -48,20 +44,14 @@ export function DeceasedMonitorSection({
               metricPropertyLow: 'expected_min',
               metricPropertyHigh: 'expected_max',
               label: text.deceased_monitor_chart_legenda_expected_margin,
-              shortLabel:
-                text.deceased_monitor_chart_legenda_expected_margin_short,
+              shortLabel: text.deceased_monitor_chart_legenda_expected_margin_short,
               color: colors.blue2,
             },
           ]}
         />
       </ChartTile>
       {showCauseMessage && (
-        <AnchorTile
-          title={text.cause_message.title}
-          label={text.cause_message.link.text}
-          href={text.cause_message.link.url}
-          external
-        >
+        <AnchorTile title={text.cause_message.title} label={text.cause_message.link.text} href={text.cause_message.link.url} external>
           <Markdown content={text.cause_message.message}></Markdown>
         </AnchorTile>
       )}

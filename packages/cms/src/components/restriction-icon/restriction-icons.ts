@@ -95,8 +95,7 @@ export const restrictionIcons = {
   vliegen: Icons.Vliegen,
   doorstroomevenementen: Icons.DoorstroomEvenementen,
   afstand_sporten: Icons.AfstandSporten,
-  georganiseerdeKunstEnCultuurbeoefeningen:
-    Icons.GeorganiseerdeKunstEnCultuurbeoefening,
+  georganiseerdeKunstEnCultuurbeoefeningen: Icons.GeorganiseerdeKunstEnCultuurbeoefening,
   openbaarVervoer: Icons.OpenbaarVervoer,
   binnensportlocaties: Icons.Binnensportlocaties,
 } as const;

@@ -7,61 +7,41 @@ import * as assert from 'uvu/assert';
 const FilterByRegionMunicipalities = suite('filterByRegionMunicipalities');
 
 FilterByRegionMunicipalities('should filter municipalities by region', () => {
-  sinon
-    .stub(File, 'getVrGmCodesForGmCode')
-    .returns(['AMS', 'HRLM', 'ALKM', 'VLDM']);
+  sinon.stub(File, 'getVrGmCodesForGmCode').returns(['AMS', 'HRLM', 'ALKM', 'VLDM']);
   const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
   const context = { params: { code: 'NH' } };
 
-  assert.equal(filterByRegionMunicipalities(data, context), [
-    { gmcode: 'AMS' },
-    { gmcode: 'VLDM' },
-  ]);
+  assert.equal(filterByRegionMunicipalities(data, context), [{ gmcode: 'AMS' }, { gmcode: 'VLDM' }]);
 });
 
-FilterByRegionMunicipalities(
-  'should throw an error if municipalCode is not in context params',
-  () => {
-    const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
-    const context = { params: { code: undefined } };
+FilterByRegionMunicipalities('should throw an error if municipalCode is not in context params', () => {
+  const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
+  const context = { params: { code: undefined } };
 
-    assert.throws(
-      () => filterByRegionMunicipalities(data, context),
-      (err: Error) =>
-        err.message ===
-        '[filterByRegionMunicipalities] No municipalCode in context params'
-    );
-  }
-);
+  assert.throws(
+    () => filterByRegionMunicipalities(data, context),
+    (err: Error) => err.message === '[filterByRegionMunicipalities] No municipalCode in context params'
+  );
+});
 
-FilterByRegionMunicipalities(
-  'should throw an error if no regionCodes are found for municipalCode',
-  () => {
-    sinon.stub(File, 'getVrGmCodesForGmCode').returns(undefined);
-    const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
-    const context = { params: { code: 'NH' } };
+FilterByRegionMunicipalities('should throw an error if no regionCodes are found for municipalCode', () => {
+  sinon.stub(File, 'getVrGmCodesForGmCode').returns(undefined);
+  const data = [{ gmcode: 'AMS' }, { gmcode: 'GR' }, { gmcode: 'VLDM' }];
+  const context = { params: { code: 'NH' } };
 
-    assert.throws(
-      () => filterByRegionMunicipalities(data, context),
-      (err: Error) =>
-        err.message ===
-        `[filterByRegionMunicipalities] No regionCodes found for NH`
-    );
-  }
-);
+  assert.throws(
+    () => filterByRegionMunicipalities(data, context),
+    (err: Error) => err.message === `[filterByRegionMunicipalities] No regionCodes found for NH`
+  );
+});
 
-FilterByRegionMunicipalities(
-  'should return an empty array if data is empty',
-  () => {
-    sinon
-      .stub(File, 'getVrGmCodesForGmCode')
-      .returns(['AMS', 'HRLM', 'ALKM', 'VLDM']);
-    const data: any[] = [];
-    const context = { params: { code: 'NH' } };
+FilterByRegionMunicipalities('should return an empty array if data is empty', () => {
+  sinon.stub(File, 'getVrGmCodesForGmCode').returns(['AMS', 'HRLM', 'ALKM', 'VLDM']);
+  const data: any[] = [];
+  const context = { params: { code: 'NH' } };
 
-    assert.equal(filterByRegionMunicipalities(data, context), []);
-  }
-);
+  assert.equal(filterByRegionMunicipalities(data, context), []);
+});
 
 FilterByRegionMunicipalities.after.each(() => {
   sinon.restore();

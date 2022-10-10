@@ -52,24 +52,21 @@ CreateContext('should trigger the specified handler after registration', () => {
   assert.is(callBack.callCount, 1);
 });
 
-CreateContext(
-  'should not trigger the specified handler after unregistration',
-  () => {
-    const registration = createContext();
-    const callBack = sinon.spy();
+CreateContext('should not trigger the specified handler after unregistration', () => {
+  const registration = createContext();
+  const callBack = sinon.spy();
 
-    registration.register('a', callBack);
-    registration.unregister('a', callBack);
+  registration.register('a', callBack);
+  registration.unregister('a', callBack);
 
-    const kbEvent = new KeyboardEvent('keydown', {
-      code: '123',
-      key: 'a',
-    });
+  const kbEvent = new KeyboardEvent('keydown', {
+    code: '123',
+    key: 'a',
+  });
 
-    document.dispatchEvent(kbEvent);
+  document.dispatchEvent(kbEvent);
 
-    assert.is(callBack.callCount, 0);
-  }
-);
+  assert.is(callBack.callCount, 0);
+});
 
 CreateContext.run();

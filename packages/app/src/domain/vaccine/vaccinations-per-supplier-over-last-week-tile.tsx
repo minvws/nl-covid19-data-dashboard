@@ -35,71 +35,30 @@ const vaccines = [
   'cure_vac',
   'sanofi',
 ] as const;
-vaccines.forEach((vaccine) =>
-  assert(
-    colors.vaccines[vaccine],
-    `[${VaccinationsPerSupplierOverLastWeekTile.name}] missing vaccine color for vaccine ${vaccine}`
-  )
-);
+vaccines.forEach((vaccine) => assert(colors.vaccines[vaccine], `[${VaccinationsPerSupplierOverLastWeekTile.name}] missing vaccine color for vaccine ${vaccine}`));
 
-export function VaccinationsPerSupplierOverLastWeekTile({
-  title,
-  description,
-  data,
-  metadata,
-}: VaccinationsPerSupplierOverLastWeekTileProps) {
+export function VaccinationsPerSupplierOverLastWeekTile({ title, description, data, metadata }: VaccinationsPerSupplierOverLastWeekTileProps) {
   const { formatNumber } = useIntl();
 
-  const formatLabel = (label: string, value: number) =>
-    `${label}: **${formatNumber(value)}**`;
+  const formatLabel = (label: string, value: number) => `${label}: **${formatNumber(value)}**`;
 
   const mappedData: Record<string, number> = {};
-  data.forEach(
-    (vaccineType) =>
-      (mappedData[vaccineType.vaccine_type_name] =
-        vaccineType.vaccine_type_value)
-  );
+  data.forEach((vaccineType) => (mappedData[vaccineType.vaccine_type_name] = vaccineType.vaccine_type_value));
   const dataConfig = data
     .filter((vaccineType) => !!vaccineType.vaccine_type_value)
-    .sort(
-      (vaccineTypeA, vaccineTypeB) =>
-        vaccineTypeB.vaccine_type_value - vaccineTypeA.vaccine_type_value
-    )
+    .sort((vaccineTypeA, vaccineTypeB) => vaccineTypeB.vaccine_type_value - vaccineTypeA.vaccine_type_value)
     .map<PiePartConfig<typeof mappedData>>((vaccineType) => {
       return {
         metricProperty: vaccineType.vaccine_type_name,
-        color:
-          colors.vaccines[
-            vaccineType.vaccine_type_name as keyof typeof colors.vaccines
-          ],
-        label: formatLabel(
-          vaccineType.vaccine_type_name,
-          vaccineType.vaccine_type_value
-        ),
-        tooltipLabel: formatLabel(
-          vaccineType.vaccine_type_name,
-          vaccineType.vaccine_type_value
-        ),
+        color: colors.vaccines[vaccineType.vaccine_type_name as keyof typeof colors.vaccines],
+        label: formatLabel(vaccineType.vaccine_type_name, vaccineType.vaccine_type_value),
+        tooltipLabel: formatLabel(vaccineType.vaccine_type_name, vaccineType.vaccine_type_value),
       };
     });
 
   return (
-    <ChartTileDoubleColumn
-      title={title}
-      description={description}
-      metadata={metadata}
-      disableFullscreen
-    >
-      <PieChart
-        data={mappedData}
-        dataConfig={dataConfig}
-        donutWidth={25}
-        icon={<VaccinationIcon />}
-        iconFill={colors.black}
-        innerSize={180}
-        marginLeft={32}
-        marginRight={32}
-      />
+    <ChartTileDoubleColumn title={title} description={description} metadata={metadata} disableFullscreen>
+      <PieChart data={mappedData} dataConfig={dataConfig} donutWidth={25} icon={<VaccinationIcon />} iconFill={colors.black} innerSize={180} marginLeft={32} marginRight={32} />
     </ChartTileDoubleColumn>
   );
 }

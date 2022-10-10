@@ -3,12 +3,7 @@ import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-type LegendShape =
-  | 'line'
-  | 'square'
-  | 'circle'
-  | 'dotted-square'
-  | 'outlined-square';
+type LegendShape = 'line' | 'square' | 'circle' | 'dotted-square' | 'outlined-square';
 type LegendLineStyle = 'solid' | 'dashed';
 
 export type LegendItem = {
@@ -44,15 +39,9 @@ export function Legend({ items, columns }: LegendProps) {
           <Item key={i}>
             {item.label}
             {item.shape === 'square' && <Square color={item.color} />}
-            {item.shape === 'outlined-square' && (
-              <OutlinedSquare color={item.color} />
-            )}
-            {item.shape === 'dotted-square' && (
-              <DottedSquare color={item.color} />
-            )}
-            {item.shape === 'line' && (
-              <Line color={item.color} lineStyle={item.style ?? 'solid'} />
-            )}
+            {item.shape === 'outlined-square' && <OutlinedSquare color={item.color} />}
+            {item.shape === 'dotted-square' && <DottedSquare color={item.color} />}
+            {item.shape === 'line' && <Line color={item.color} lineStyle={item.style ?? 'solid'} />}
             {item.shape === 'circle' && <Circle color={item.color} />}
           </Item>
         );
@@ -111,29 +100,12 @@ function DottedSquare({ color }: { color: string }) {
     <Shape color="white" css={css({ top: '3px' })}>
       <svg width={16} height={16} viewBox={`0 0 ${16} ${16}`}>
         <defs>
-          <pattern
-            id="dotted_legend"
-            width="4"
-            height="4"
-            patternUnits="userSpaceOnUse"
-          >
-            <line
-              x1="0"
-              y1="4"
-              x2="0"
-              y2="0"
-              style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }}
-            />
+          <pattern id="dotted_legend" width="4" height="4" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="4" x2="0" y2="0" style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }} />
           </pattern>
         </defs>
         <g>
-          <rect
-            x={0}
-            y={0}
-            fill={`url(#dotted_legend)`}
-            width={16}
-            height={16}
-          />
+          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={16} height={16} />
         </g>
       </svg>
     </Shape>
@@ -170,18 +142,17 @@ const Circle = styled(Shape)(
   })
 );
 
-const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(
-  ({ color, lineStyle }) =>
-    css({
-      display: 'block',
-      position: 'absolute',
-      borderTopColor: color as SystemStyleObject,
-      borderTopStyle: lineStyle,
-      borderTopWidth: '3px',
-      top: '10px',
-      width: '15px',
-      height: 0,
-      borderRadius: '2px',
-      left: 0,
-    })
+const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
+  css({
+    display: 'block',
+    position: 'absolute',
+    borderTopColor: color as SystemStyleObject,
+    borderTopStyle: lineStyle,
+    borderTopWidth: '3px',
+    top: '10px',
+    width: '15px',
+    height: 0,
+    borderRadius: '2px',
+    left: 0,
+  })
 );

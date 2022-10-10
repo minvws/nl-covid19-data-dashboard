@@ -1,64 +1,23 @@
-import {
-  colors,
-  DAY_IN_SECONDS,
-  getLastFilledValue,
-  TimeframeOption,
-  TimeframeOptionsList,
-  WEEK_IN_SECONDS,
-} from '@corona-dashboard/common';
+import { colors, DAY_IN_SECONDS, getLastFilledValue, TimeframeOption, TimeframeOptionsList, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { IntensiveCareOpnames } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import {
-  TwoKpiSection,
-  TimeSeriesChart,
-  TileList,
-  PageKpi,
-  ChartTile,
-  KpiTile,
-  Markdown,
-  PageInformationBlock,
-  PageBarScale,
-} from '~/components';
+import { TwoKpiSection, TimeSeriesChart, TileList, PageKpi, ChartTile, KpiTile, Markdown, PageInformationBlock, PageBarScale } from '~/components';
 import { useState } from 'react';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { getBarScaleConfig } from '~/metric-config';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getLinkParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  selectNlData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import type { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import {
-  countTrailingNullValues,
-  getBoundaryDateStartUnix,
-  replaceVariablesInText,
-} from '~/utils';
+import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = [
-  'intensive_care_lcps',
-  'intensive_care_nice',
-  'intensive_care_nice_per_age_group',
-];
+const pageMetrics = ['intensive_care_lcps', 'intensive_care_nice', 'intensive_care_nice_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -69,15 +28,9 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'intensive_care_lcps',
-    'intensive_care_nice',
-    'intensive_care_nice_per_age_group',
-    'difference.intensive_care_lcps__beds_occupied_covid'
-  ),
+  selectNlData('intensive_care_lcps', 'intensive_care_nice', 'intensive_care_nice_per_age_group', 'difference.intensive_care_lcps__beds_occupied_covid'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts>;
@@ -85,20 +38,13 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('intensive_care_page')},
-        "elements": ${getElementsQuery(
-          'nl',
-          ['intensive_care_nice', 'intensive_care_nice_per_age_group'],
-          context.locale
-        )}
+        "elements": ${getElementsQuery('nl', ['intensive_care_nice', 'intensive_care_nice_per_age_group'], context.locale)}
       }`;
     })(context);
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'intensiveCarePageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'intensiveCarePageArticles'),
         links: getLinkParts(content.parts.pageParts, 'intensiveCarePageLinks'),
         elements: content.elements,
       },
@@ -107,38 +53,23 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
-  const [
-    intensiveCareAdmissionsTimeframe,
-    setIntensiveCareAdmissionsTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCareAdmissionsTimeframe, setIntensiveCareAdmissionsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [admissionsPerAgeTimeframe, setAdmissionsPerAgeTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [admissionsPerAgeTimeframe, setAdmissionsPerAgeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts, formatPercentage, formatDateFromSeconds } = useIntl();
 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
-  const { metadataTexts, textNl, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
   const dataIntake = data.intensive_care_nice;
-  const intakeUnderReportedRange = getBoundaryDateStartUnix(
-    dataIntake.values,
-    countTrailingNullValues(
-      dataIntake.values,
-      'admissions_on_date_of_admission_moving_average'
-    )
-  );
+  const intakeUnderReportedRange = getBoundaryDateStartUnix(dataIntake.values, countTrailingNullValues(dataIntake.values, 'admissions_on_date_of_admission_moving_average'));
 
-  const sevenDayAverageDates: [number, number] = [
-    intakeUnderReportedRange - WEEK_IN_SECONDS,
-    intakeUnderReportedRange - DAY_IN_SECONDS,
-  ];
+  const sevenDayAverageDates: [number, number] = [intakeUnderReportedRange - WEEK_IN_SECONDS, intakeUnderReportedRange - DAY_IN_SECONDS];
 
   const metadata = {
     ...metadataTexts,
@@ -153,12 +84,8 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.consequences_for_healthcare.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.intensive_care_admissions.title
-            }
+            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.intensive_care_admissions.title}
             title={textNl.titel}
             icon={<IntensiveCareOpnames />}
             description={textNl.pagina_toelichting}
@@ -181,13 +108,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.bronnen.nice,
               }}
             >
-              <PageKpi
-                data={data}
-                metricName="intensive_care_nice"
-                metricProperty="admissions_on_date_of_admission_moving_average_rounded"
-                isAmount
-                isMovingAverageDifference
-              />
+              <PageKpi data={data} metricName="intensive_care_nice" metricProperty="admissions_on_date_of_admission_moving_average_rounded" isAmount isMovingAverageDifference />
               <Markdown
                 content={replaceVariablesInText(textNl.extra_uitleg, {
                   dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
@@ -203,38 +124,23 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.bronnen.lnaz,
               }}
             >
-              {bedsLastValue.beds_occupied_covid !== null &&
-                bedsLastValue.beds_occupied_covid_percentage !== null && (
-                  <>
-                    <PageBarScale
-                      value={bedsLastValue.beds_occupied_covid}
-                      config={getBarScaleConfig(
-                        'nl',
-                        'intensive_care_lcps',
-                        'beds_occupied_covid'
-                      )}
-                      difference={
-                        data.difference.intensive_care_lcps__beds_occupied_covid
-                      }
-                      screenReaderText={
-                        textNl.kpi_bedbezetting.barscale_screenreader_text
-                      }
-                      isAmount
-                    />
+              {bedsLastValue.beds_occupied_covid !== null && bedsLastValue.beds_occupied_covid_percentage !== null && (
+                <>
+                  <PageBarScale
+                    value={bedsLastValue.beds_occupied_covid}
+                    config={getBarScaleConfig('nl', 'intensive_care_lcps', 'beds_occupied_covid')}
+                    difference={data.difference.intensive_care_lcps__beds_occupied_covid}
+                    screenReaderText={textNl.kpi_bedbezetting.barscale_screenreader_text}
+                    isAmount
+                  />
 
-                    <Markdown
-                      content={replaceVariablesInText(
-                        textNl.kpi_bedbezetting.description,
-                        {
-                          percentage: formatPercentage(
-                            bedsLastValue.beds_occupied_covid_percentage,
-                            { maximumFractionDigits: 1 }
-                          ),
-                        }
-                      )}
-                    />
-                  </>
-                )}
+                  <Markdown
+                    content={replaceVariablesInText(textNl.kpi_bedbezetting.description, {
+                      percentage: formatPercentage(bedsLastValue.beds_occupied_covid_percentage, { maximumFractionDigits: 1 }),
+                    })}
+                  />
+                </>
+              )}
             </KpiTile>
           </TwoKpiSection>
 
@@ -259,21 +165,15 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
                     end: Infinity,
                     label: textNl.linechart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'admissions_on_date_of_admission_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'intensive_care_nice'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice'),
               }}
               seriesConfig={[
                 {
                   type: 'line',
-                  metricProperty:
-                    'admissions_on_date_of_admission_moving_average',
+                  metricProperty: 'admissions_on_date_of_admission_moving_average',
                   label: textNl.linechart_legend_trend_label_moving_average,
                   color: colors.primary,
                 },
@@ -345,10 +245,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
               }}
               values={data.intensive_care_nice_per_age_group.values}
               timeframe={admissionsPerAgeTimeframe}
-              timelineEvents={getTimelineEvents(
-                content.elements.timeSeries,
-                'intensive_care_nice_per_age_group'
-              )}
+              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice_per_age_group')}
             />
           </ChartTile>
         </TileList>

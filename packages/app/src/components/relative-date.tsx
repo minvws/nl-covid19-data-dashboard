@@ -33,11 +33,7 @@ interface RelativeDateProps {
   absoluteDateTemplate?: string;
 }
 
-export function RelativeDate({
-  dateInSeconds,
-  isCapitalized,
-  absoluteDateTemplate,
-}: RelativeDateProps) {
+export function RelativeDate({ dateInSeconds, isCapitalized, absoluteDateTemplate }: RelativeDateProps) {
   const { formatDateFromSeconds, formatRelativeDate } = useIntl();
 
   const isMounted = useIsMounted();
@@ -45,15 +41,9 @@ export function RelativeDate({
   const dayMonthDate = formatDateFromSeconds(dateInSeconds, 'day-month');
 
   if (!isMounted) {
-    const formattedDate = absoluteDateTemplate
-      ? replaceVariablesInText(absoluteDateTemplate, { date: dayMonthDate })
-      : dayMonthDate;
+    const formattedDate = absoluteDateTemplate ? replaceVariablesInText(absoluteDateTemplate, { date: dayMonthDate }) : dayMonthDate;
 
-    return (
-      <time dateTime={isoDate}>
-        {isCapitalized ? capitalize(formattedDate) : formattedDate}
-      </time>
-    );
+    return <time dateTime={isoDate}>{isCapitalized ? capitalize(formattedDate) : formattedDate}</time>;
   }
 
   /**
@@ -67,8 +57,7 @@ export function RelativeDate({
   if (relativeDate) {
     return (
       <time dateTime={isoDate} title={dayMonthYearDate}>
-        {isCapitalized ? capitalize(relativeDate) : relativeDate} (
-        {dayMonthDate})
+        {isCapitalized ? capitalize(relativeDate) : relativeDate} ({dayMonthDate})
       </time>
     );
   }

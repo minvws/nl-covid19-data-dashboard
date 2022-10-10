@@ -45,9 +45,7 @@ const pageInfo = [
   {
     type: 'hospital_page',
     title: 'Ziekenhuisopnames',
-    articles: [
-      { title: 'Ziekenhuisopnames artikelen', kind: 'hospitalPageArticles' },
-    ],
+    articles: [{ title: 'Ziekenhuisopnames artikelen', kind: 'hospitalPageArticles' }],
     links: [{ title: 'Ziekenhuisopnames links', kind: 'hospitalPageLinks' }],
   },
   {
@@ -74,9 +72,7 @@ const pageInfo = [
   {
     type: 'nursing_home_page',
     title: 'Verpleeghuiszorg',
-    articles: [
-      { title: 'Verpleeghuiszorg artikelen', kind: 'nursingHomePageArticles' },
-    ],
+    articles: [{ title: 'Verpleeghuiszorg artikelen', kind: 'nursingHomePageArticles' }],
   },
   {
     type: 'positive_tests_page',
@@ -151,9 +147,7 @@ const pageInfo = [
       },
     ],
     links: [{ title: 'Vaccinatie links', kind: 'vaccinationsPageLinks' }],
-    richText: [
-      { title: 'Vaccinatie omschrijving', kind: 'vaccinationsPageDescription' },
-    ],
+    richText: [{ title: 'Vaccinatie omschrijving', kind: 'vaccinationsPageDescription' }],
   },
   {
     type: 'variants_page',
@@ -169,11 +163,7 @@ const pageInfo = [
 ];
 
 function fetchDocuments() {
-  return client.fetch(
-    /* groq */ `*[_type in [${pageInfo
-      .map((x) => `'${x.type}'`)
-      .join(',')}] && !(_id in path("drafts.**"))]`
-  );
+  return client.fetch(/* groq */ `*[_type in [${pageInfo.map((x) => `'${x.type}'`).join(',')}] && !(_id in path("drafts.**"))]`);
 }
 
 function fetchPageIdentifiers() {
@@ -203,10 +193,7 @@ interface PageIdentifier {
   identifier: string;
 }
 
-async function createPagePartsForPages(
-  documents: any[],
-  pageIdentifiers: PageIdentifier[]
-) {
+async function createPagePartsForPages(documents: any[], pageIdentifiers: PageIdentifier[]) {
   return pageInfo.flatMap(createParts(pageIdentifiers, documents));
 }
 
@@ -214,9 +201,7 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
   return (info: any) => {
     const document = documents.find((x) => x._type === info.type);
 
-    const pageIdentifier = pageIdentifiers.find(
-      (x) => x.identifier === info.type
-    );
+    const pageIdentifier = pageIdentifiers.find((x) => x.identifier === info.type);
 
     if (!isDefined(document)) {
       throw new Error(`No document found with type ${info.type}`);
@@ -232,13 +217,11 @@ function createParts(pageIdentifiers: PageIdentifier[], documents: any[]) {
         title: articleInfo.title,
         pageIdentifier: { _type: 'reference', _ref: pageIdentifier._id },
         pageDataKind: articleInfo.kind,
-        articles: document[(articleInfo as any).fieldName ?? 'articles'].map(
-          (x: { _ref: string }) => ({
-            _ref: x._ref,
-            _type: 'reference',
-            _key: uuidv4(),
-          })
-        ),
+        articles: document[(articleInfo as any).fieldName ?? 'articles'].map((x: { _ref: string }) => ({
+          _ref: x._ref,
+          _type: 'reference',
+          _key: uuidv4(),
+        })),
       })
     );
     if (isDefined(info.links)) {
@@ -293,10 +276,7 @@ async function createDocuments(): Promise<any> {
 
   const pageIdentifiers = await fetchPageIdentifiers();
 
-  return createPagePartsForPages(
-    documents,
-    pageIdentifiers as PageIdentifier[]
-  );
+  return createPagePartsForPages(documents, pageIdentifiers as PageIdentifier[]);
 }
 
 createDocuments().catch((err) => {

@@ -23,12 +23,7 @@ export function Articles({ articles }: ArticlesProps) {
       <Text variant="subtitle1">{commonTexts.informatie_header.artikelen}</Text>
       <Box spacing={3}>
         {articles.map((article, index) => (
-          <ArticleItem
-            key={index}
-            title={article.title}
-            cover={article.cover}
-            slug={article.slug.current}
-          />
+          <ArticleItem key={index} title={article.title} cover={article.cover} slug={article.slug.current} />
         ))}
       </Box>
     </Box>

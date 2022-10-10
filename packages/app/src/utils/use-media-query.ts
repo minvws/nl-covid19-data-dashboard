@@ -7,10 +7,7 @@ import { useEffect, useState } from 'react';
  * @param initialMatches Indicates the default for the result
  * @returns a boolean indicating whether the given media query matches
  */
-export function useMediaQuery(
-  breakpoint: string,
-  initialMatches = false
-): boolean {
+export function useMediaQuery(breakpoint: string, initialMatches = false): boolean {
   const [matches, setMatches] = useState(initialMatches);
 
   useEffect(() => {

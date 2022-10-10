@@ -14,12 +14,7 @@ interface CollapsibleSectionProps extends BoxProps {
   hideBorder?: boolean;
 }
 
-export const CollapsibleSection = ({
-  summary,
-  children,
-  id,
-  hideBorder,
-}: CollapsibleSectionProps) => {
+export const CollapsibleSection = ({ summary, children, id, hideBorder }: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
   const collapsible = useCollapsible();
@@ -53,24 +48,13 @@ export const CollapsibleSection = ({
   }, [toggle, id]);
 
   return (
-    <Box
-      as="section"
-      borderTop={hideBorder ? undefined : '1px solid'}
-      borderTopColor={hideBorder ? undefined : 'gray2'}
-      id={id}
-      ref={section}
-    >
+    <Box as="section" borderTop={hideBorder ? undefined : '1px solid'} borderTopColor={hideBorder ? undefined : 'gray2'} id={id} ref={section}>
       {collapsible.button(
         <Summary>
           <Box width="100%">
             {summary}
             {id && (
-              <StyledAnchor
-                aria-hidden="true"
-                tabIndex={-1}
-                onClick={(e) => e.stopPropagation()}
-                href={`#${id}`}
-              >
+              <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(e) => e.stopPropagation()} href={`#${id}`}>
                 #
               </StyledAnchor>
             )}

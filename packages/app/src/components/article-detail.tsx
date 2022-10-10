@@ -50,29 +50,17 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <ContentImage
-          node={article.cover}
-          contentWrapper={ContentBlock}
-          sizes={imageSizes}
-        />
+        <ContentImage node={article.cover} contentWrapper={ContentBlock} sizes={imageSizes} />
       </ContentBlock>
       {!breakpoints.xs
         ? article.imageMobile && (
             <Box mt={4}>
-              <ContentImage
-                node={article.imageMobile}
-                contentWrapper={ContentBlock}
-                sizes={imageSizes}
-              />
+              <ContentImage node={article.imageMobile} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )
         : article.imageDesktop && (
             <Box mt={4}>
-              <ContentImage
-                node={article.imageDesktop}
-                contentWrapper={ContentBlock}
-                sizes={imageSizes}
-              />
+              <ContentImage node={article.imageDesktop} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )}
       {!!article.content?.length && (
@@ -93,9 +81,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       {article.categories && (
         <ContentBlock>
           <Box pb={2} pt={4}>
-            <InlineText color="gray7">
-              {text.secties.artikelen.tags}
-            </InlineText>
+            <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
             as="ul"
@@ -117,13 +103,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
                   }}
                   passHref={true}
                 >
-                  <TagAnchor>
-                    {
-                      text.secties.artikelen.categorie_filters[
-                        item as ArticleCategoryType
-                      ]
-                    }
-                  </TagAnchor>
+                  <TagAnchor>{text.secties.artikelen.categorie_filters[item as ArticleCategoryType]}</TagAnchor>
                 </Link>
               </li>
             ))}

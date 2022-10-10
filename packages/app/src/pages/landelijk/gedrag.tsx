@@ -19,31 +19,15 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  selectNlData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = [
-  'behavior',
-  'behavior_annotations',
-  'behavior_per_age_group',
-];
+const pageMetrics = ['behavior', 'behavior_annotations', 'behavior_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   caterogyTexts: siteText.common.sidebar.categories.actions_to_take.title,
@@ -54,17 +38,14 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('behavior_page'))(context);
+    const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('behavior_page'))(context);
 
     return {
       content: {
@@ -74,22 +55,12 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-export default function BehaviorPage(
-  props: StaticProps<typeof getStaticProps>
-) {
-  const {
-    pageText,
-    selectedNlData: data,
-    choropleth,
-    content,
-    lastGenerated,
-  } = props;
+export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) {
+  const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } =
-    useIntl();
-  const { caterogyTexts, metadataTexts, text } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
+  const { caterogyTexts, metadataTexts, text } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -109,13 +80,9 @@ export default function BehaviorPage(
       supportPercentage: behaviorLastValue[x.supportKey] as number,
     }));
 
-    const highestCompliance = list.sort(
-      (a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0)
-    )[0];
+    const highestCompliance = list.sort((a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0))[0];
 
-    const highestSupport = list.sort(
-      (a, b) => (b.supportPercentage ?? 0) - (a.supportPercentage ?? 0)
-    )[0];
+    const highestSupport = list.sort((a, b) => (b.supportPercentage ?? 0) - (a.supportPercentage ?? 0))[0];
 
     return { highestCompliance, highestSupport };
   }, [behaviorLastValue, behaviorLookupKeys]);
@@ -170,43 +137,22 @@ export default function BehaviorPage(
 
             <Tile>
               <Box spacing={3}>
-                <Heading level={3}>
-                  {text.nl.kpi_recente_inzichten.titel}
-                </Heading>
+                <Heading level={3}>{text.nl.kpi_recente_inzichten.titel}</Heading>
 
                 <Markdown
-                  content={replaceVariablesInText(
-                    text.nl.kpi_recente_inzichten.tekst,
-                    {
-                      number_of_participants: formatNumber(
-                        behaviorLastValue.number_of_participants
-                      ),
-                      date_start: formatDateFromSeconds(
-                        behaviorLastValue.date_start_unix
-                      ),
-                      date_end: formatDateFromSeconds(
-                        behaviorLastValue.date_end_unix
-                      ),
+                  content={replaceVariablesInText(text.nl.kpi_recente_inzichten.tekst, {
+                    number_of_participants: formatNumber(behaviorLastValue.number_of_participants),
+                    date_start: formatDateFromSeconds(behaviorLastValue.date_start_unix),
+                    date_end: formatDateFromSeconds(behaviorLastValue.date_end_unix),
 
-                      highest_compliance_description:
-                        highestCompliance.description,
-                      highest_compliance_compliance_percentage:
-                        formatPercentage(
-                          highestCompliance.compliancePercentage
-                        ),
-                      highest_compliance_support_percentage: formatPercentage(
-                        highestCompliance.supportPercentage
-                      ),
+                    highest_compliance_description: highestCompliance.description,
+                    highest_compliance_compliance_percentage: formatPercentage(highestCompliance.compliancePercentage),
+                    highest_compliance_support_percentage: formatPercentage(highestCompliance.supportPercentage),
 
-                      highest_support_description: highestSupport.description,
-                      highest_support_compliance_percentage: formatPercentage(
-                        highestSupport.compliancePercentage
-                      ),
-                      highest_support_support_percentage: formatPercentage(
-                        highestSupport.supportPercentage
-                      ),
-                    }
-                  )}
+                    highest_support_description: highestSupport.description,
+                    highest_support_compliance_percentage: formatPercentage(highestSupport.compliancePercentage),
+                    highest_support_support_percentage: formatPercentage(highestSupport.supportPercentage),
+                  })}
                 />
               </Box>
             </Tile>
@@ -229,10 +175,7 @@ export default function BehaviorPage(
           <BehaviorLineChartTile
             values={data.behavior.values}
             metadata={{
-              date: [
-                behaviorLastValue.date_start_unix,
-                behaviorLastValue.date_end_unix,
-              ],
+              date: [behaviorLastValue.date_start_unix, behaviorLastValue.date_end_unix],
               source: text.nl.bronnen.rivm,
             }}
             {...timelineProp}
@@ -254,12 +197,8 @@ export default function BehaviorPage(
             <BehaviorPerAgeGroup
               title={text.nl.tabel_per_leeftijdsgroep.title}
               description={text.nl.tabel_per_leeftijdsgroep.description}
-              complianceExplanation={
-                text.nl.tabel_per_leeftijdsgroep.explanation.compliance
-              }
-              supportExplanation={
-                text.nl.tabel_per_leeftijdsgroep.explanation.support
-              }
+              complianceExplanation={text.nl.tabel_per_leeftijdsgroep.explanation.compliance}
+              supportExplanation={text.nl.tabel_per_leeftijdsgroep.explanation.support}
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}

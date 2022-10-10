@@ -1,8 +1,4 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
@@ -19,25 +15,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  selectVrData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, selectVrData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -55,13 +36,9 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectVrData(
-    'elderly_at_home',
-    'difference.elderly_at_home__positive_tested_daily'
-  ),
+  selectVrData('elderly_at_home', 'difference.elderly_at_home__positive_tested_daily'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -76,10 +53,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'elderlyAtHomePageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'elderlyAtHomePageArticles'),
         elements: content.elements,
       },
     };
@@ -87,40 +61,19 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    vrName,
-    selectedVrData: data,
-    lastGenerated,
-    content,
-  } = props;
+  const { pageText, vrName, selectedVrData: data, lastGenerated, content } = props;
 
-  const [
-    elderlyAtHomeConfirmedCasesTimeframe,
-    setElderlyAtHomeConfirmedCasesTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [elderlyAtHomeConfirmedCasesTimeframe, setElderlyAtHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [
-    elderlyAtHomeConfirmedCasesOverTimeTimeframe,
-    setElderlyAtHomeConfirmedCasesOverTimeTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [elderlyAtHomeConfirmedCasesOverTimeTimeframe, setElderlyAtHomeConfirmedCasesOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { elderly_at_home, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
-  const elderlyAtHomeUnderReportedRange = getBoundaryDateStartUnix(
-    elderly_at_home.values,
-    4
-  );
+  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const elderlyAtHomeUnderReportedRange = getBoundaryDateStartUnix(elderly_at_home.values, 4);
 
-  const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(
-    elderly_at_home.values,
-    7
-  );
+  const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderly_at_home.values, 7);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -139,25 +92,15 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.consequences_for_healthcare.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.elderly_at_home.title
-            }
-            title={replaceVariablesInText(
-              textVr.section_positive_tested.title,
-              {
-                safetyRegion: vrName,
-              }
-            )}
+            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.elderly_at_home.title}
+            title={replaceVariablesInText(textVr.section_positive_tested.title, {
+              safetyRegion: vrName,
+            })}
             icon={<Elderly />}
-            description={replaceVariablesInText(
-              textVr.section_positive_tested.description,
-              {
-                safetyRegion: vrName,
-              }
-            )}
+            description={replaceVariablesInText(textVr.section_positive_tested.description, {
+              safetyRegion: vrName,
+            })}
             metadata={{
               datumsText: textVr.section_positive_tested.datums,
               dateOrRange: elderly_at_home.last_value.date_unix,
@@ -184,9 +127,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 difference={difference.elderly_at_home__positive_tested_daily}
                 isAmount
               />
-              <Text>
-                {textVr.section_positive_tested.kpi_daily_description}
-              </Text>
+              <Text>{textVr.section_positive_tested.kpi_daily_description}</Text>
             </KpiTile>
             <KpiTile
               title={textVr.section_positive_tested.kpi_daily_per_100k_title}
@@ -195,15 +136,8 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.section_positive_tested.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="positive_tested_daily_per_100k"
-                absolute={
-                  elderly_at_home.last_value.positive_tested_daily_per_100k
-                }
-              />
-              <Text>
-                {textVr.section_positive_tested.kpi_daily_per_100k_description}
-              </Text>
+              <KpiValue data-cy="positive_tested_daily_per_100k" absolute={elderly_at_home.last_value.positive_tested_daily_per_100k} />
+              <Text>{textVr.section_positive_tested.kpi_daily_per_100k_description}</Text>
             </KpiTile>
           </TwoKpiSection>
 
@@ -211,9 +145,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             timeframeOptions={TimeframeOptionsList}
             title={textVr.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
-            description={
-              textVr.section_positive_tested.line_chart_daily_description
-            }
+            description={textVr.section_positive_tested.line_chart_daily_description}
             onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
@@ -226,20 +158,14 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'positive_tested_daily_moving_average',
-                  label:
-                    textVr.section_positive_tested
-                      .line_chart_positive_tested_daily_moving_average,
-                  shortLabel:
-                    textVr.section_positive_tested
-                      .line_chart_positive_tested_daily_moving_average_short_label,
+                  label: textVr.section_positive_tested.line_chart_positive_tested_daily_moving_average,
+                  shortLabel: textVr.section_positive_tested.line_chart_positive_tested_daily_moving_average_short_label,
                   color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'positive_tested_daily',
-                  label:
-                    textVr.section_positive_tested
-                      .line_chart_legend_trend_label,
+                  label: textVr.section_positive_tested.line_chart_legend_trend_label,
                   color: colors.primary,
                 },
               ]}
@@ -248,20 +174,12 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: elderlyAtHomeUnderReportedRange,
                     end: Infinity,
-                    label:
-                      textVr.section_deceased
-                        .line_chart_legend_inaccurate_label,
+                    label: textVr.section_deceased.line_chart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'positive_tested_daily_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['positive_tested_daily_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'elderly_at_home',
-                  'positive_tested_daily'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'elderly_at_home', 'positive_tested_daily'),
               }}
             />
           </ChartTile>
@@ -273,17 +191,13 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
               safetyRegion: vrName,
             })}
             icon={<Elderly />}
-            description={replaceVariablesInText(
-              textVr.section_deceased.description,
-              {
-                safetyRegion: vrName,
-              }
-            )}
+            description={replaceVariablesInText(textVr.section_deceased.description, {
+              safetyRegion: vrName,
+            })}
             metadata={{
               datumsText: textVr.section_deceased.datums,
               dateOrRange: elderly_at_home.last_value.date_unix,
-              dateOfInsertionUnix:
-                elderly_at_home.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: elderly_at_home.last_value.date_of_insertion_unix,
               dataSources: [textVr.section_deceased.bronnen.rivm],
             }}
             referenceLink={textVr.section_deceased.reference.href}
@@ -298,10 +212,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.section_deceased.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="deceased_daily"
-                absolute={elderly_at_home.last_value.deceased_daily}
-              />
+              <KpiValue data-cy="deceased_daily" absolute={elderly_at_home.last_value.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
 
@@ -322,12 +233,8 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'deceased_daily_moving_average',
-                  label:
-                    textVr.section_deceased
-                      .line_chart_deceased_daily_moving_average,
-                  shortLabel:
-                    textVr.section_deceased
-                      .line_chart_deceased_daily_moving_average_short_label,
+                  label: textVr.section_deceased.line_chart_deceased_daily_moving_average,
+                  shortLabel: textVr.section_deceased.line_chart_deceased_daily_moving_average_short_label,
                   color: colors.primary,
                 },
                 {
@@ -342,20 +249,12 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: elderlyAtHomeDeceasedUnderReportedRange,
                     end: Infinity,
-                    label:
-                      textVr.section_deceased
-                        .line_chart_legend_inaccurate_label,
+                    label: textVr.section_deceased.line_chart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'deceased_daily_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['deceased_daily_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'elderly_at_home',
-                  'deceased_daily'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'elderly_at_home', 'deceased_daily'),
               }}
             />
           </ChartTile>

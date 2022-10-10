@@ -21,19 +21,16 @@ Handler.after.each(() => {
   sinon.restore();
 });
 
-Handler(
-  'should return 400 Bad Request for undefined root and/or metric',
-  (context) => {
-    context.fileExists = false;
-    const { req, res } = createMocks({
-      method: 'GET',
-      query: {},
-    });
+Handler('should return 400 Bad Request for undefined root and/or metric', (context) => {
+  context.fileExists = false;
+  const { req, res } = createMocks({
+    method: 'GET',
+    query: {},
+  });
 
-    handler(req, res);
-    assert.is(res._getStatusCode(), 400);
-  }
-);
+  handler(req, res);
+  assert.is(res._getStatusCode(), 400);
+});
 
 Handler("should return 404 Not Found when file doesn't exist", (context) => {
   context.fileExists = false;

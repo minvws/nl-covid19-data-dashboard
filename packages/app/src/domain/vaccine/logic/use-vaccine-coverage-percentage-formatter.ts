@@ -18,10 +18,7 @@ type PropertiesWithLabel<T> = {
 
 // All ${property}_label in T
 type Labels<T> = {
-  [P in keyof T as `${string & P}_label`]?: `${string &
-    P}_label` extends keyof T
-    ? string | null
-    : never;
+  [P in keyof T as `${string & P}_label`]?: `${string & P}_label` extends keyof T ? string | null : never;
 };
 
 // All properties with labels and those labels in T
@@ -30,11 +27,7 @@ type DataWithLabels<T> = PropertiesWithLabel<T> & Labels<T>;
 export function useVaccineCoveragePercentageFormatter(numFractionDigits = 0) {
   const { commonTexts, formatPercentage } = useIntl();
 
-  return getVaccineCoveragePercentageFormatter(
-    commonTexts.common,
-    formatPercentage,
-    numFractionDigits
-  );
+  return getVaccineCoveragePercentageFormatter(commonTexts.common, formatPercentage, numFractionDigits);
 }
 
 function getVaccineCoveragePercentageFormatter(
@@ -45,17 +38,10 @@ function getVaccineCoveragePercentageFormatter(
   return <T extends DataWithLabels<T>>(data: T, property: KeyWithLabel<T>) => {
     const labelKey = `${property.toString()}_label` as keyof T;
 
-    if (
-      labelKey in data &&
-      isPresent(data[labelKey]) &&
-      typeof data[labelKey] === 'string'
-    ) {
-      const parsedLabel = parseVaccinatedPercentageLabel(
-        data[labelKey] as unknown as string
-      );
+    if (labelKey in data && isPresent(data[labelKey]) && typeof data[labelKey] === 'string') {
+      const parsedLabel = parseVaccinatedPercentageLabel(data[labelKey] as unknown as string);
       if (isPresent(parsedLabel)) {
-        const content =
-          parsedLabel.sign === '>' ? text.meer_dan : text.minder_dan;
+        const content = parsedLabel.sign === '>' ? text.meer_dan : text.minder_dan;
         return replaceVariablesInText(content, {
           value:
             formatPercentage(parsedLabel.value, {

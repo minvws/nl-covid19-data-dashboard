@@ -23,14 +23,7 @@ export default function SelectLanguageProvider() {
 
   return (
     <>
-      {currentDocument && (
-        <SelectLanguage
-          languages={supportedLanguages}
-          selected={selected}
-          onChange={setLangs}
-          document={currentDocument}
-        />
-      )}
+      {currentDocument && <SelectLanguage languages={supportedLanguages} selected={selected} onChange={setLangs} document={currentDocument} />}
       {!currentDocument && <div></div>}
     </>
   );

@@ -17,11 +17,5 @@ export default createSchema({
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat(
-    ...Object.values(documents),
-    ...Object.values(restrictions),
-    ...Object.values(objects),
-    ...Object.values(locale),
-    ...Object.values(elements)
-  ),
+  types: schemaTypes.concat(...Object.values(documents), ...Object.values(restrictions), ...Object.values(objects), ...Object.values(locale), ...Object.values(elements)),
 });

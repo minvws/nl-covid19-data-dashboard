@@ -3,9 +3,7 @@ import set from 'lodash/set';
 import { isDefined } from 'ts-is-present';
 import { JSONObject, JSONValue } from './types';
 
-function hasValuesProperty(
-  input: [string, JSONValue]
-): input is [string, { values: Record<string, JSONValue>[] }] {
+function hasValuesProperty(input: [string, JSONValue]): input is [string, { values: Record<string, JSONValue>[] }] {
   const value = input[1];
   return !Array.isArray(value) && isObject(value) && 'values' in value;
 }
@@ -25,28 +23,19 @@ export function validateMovingAverages(input: JSONObject) {
     .map(([propertyName, value]) => ({
       [propertyName]: value.values.map((x: Record<string, unknown>) => {
         const movingAverageProperties = findMovingAverages(x);
-        return movingAverageProperties.reduce(
-          (aggr, p) => set(aggr, p, x[p]),
-          {} as Record<string, unknown>
-        );
+        return movingAverageProperties.reduce((aggr, p) => set(aggr, p, x[p]), {} as Record<string, unknown>);
       }),
     }))
     // Perform the validations on those moving averages (make sure the first six items have explicit NULL values and check if there are no non-consecutive values in the rest of the array)
     .map((x) =>
       Object.entries(x).map(([propertyName, values]) => {
-        const propsWithValuesInFirstSixEntries =
-          findPropertiesWithValuesInFirstSixEntries(values);
+        const propsWithValuesInFirstSixEntries = findPropertiesWithValuesInFirstSixEntries(values);
         if (propsWithValuesInFirstSixEntries.length) {
-          return `${propertyName} has non NULL values in the first six items of metric ${propsWithValuesInFirstSixEntries.join(
-            ' and '
-          )}`;
+          return `${propertyName} has non NULL values in the first six items of metric ${propsWithValuesInFirstSixEntries.join(' and ')}`;
         }
-        const propsWithNonConsecutiveValues =
-          findPropertiesWithNonConsecutiveValues(values);
+        const propsWithNonConsecutiveValues = findPropertiesWithNonConsecutiveValues(values);
         if (propsWithNonConsecutiveValues.length) {
-          return `${propertyName} has non consecutive values in metric ${propsWithNonConsecutiveValues.join(
-            ' and '
-          )}`;
+          return `${propertyName} has non consecutive values in metric ${propsWithNonConsecutiveValues.join(' and ')}`;
         }
         return;
       })
@@ -57,19 +46,12 @@ export function validateMovingAverages(input: JSONObject) {
   return result.length ? result : undefined;
 }
 
-function findPropertiesWithNonConsecutiveValues(
-  values: Record<string, unknown>[]
-) {
+function findPropertiesWithNonConsecutiveValues(values: Record<string, unknown>[]) {
   const propertyNames = Object.keys(values[0]);
-  return propertyNames.filter((propertyName) =>
-    hasNonConsecutiveValuesInMetric(propertyName, values)
-  );
+  return propertyNames.filter((propertyName) => hasNonConsecutiveValuesInMetric(propertyName, values));
 }
 
-function hasNonConsecutiveValuesInMetric(
-  propertyName: string,
-  collection: Record<string, unknown>[]
-) {
+function hasNonConsecutiveValuesInMetric(propertyName: string, collection: Record<string, unknown>[]) {
   const values = collection.slice(6).map((x) => x[propertyName]);
   let lastValue;
 
@@ -84,16 +66,10 @@ function hasNonConsecutiveValuesInMetric(
   return false;
 }
 
-function findPropertiesWithValuesInFirstSixEntries(
-  values: Record<string, unknown>[]
-) {
+function findPropertiesWithValuesInFirstSixEntries(values: Record<string, unknown>[]) {
   return values
     .slice(0, 5)
-    .flatMap((x) =>
-      Object.entries(x).map(([propertyName, value]) =>
-        value !== null ? propertyName : undefined
-      )
-    )
+    .flatMap((x) => Object.entries(x).map(([propertyName, value]) => (value !== null ? propertyName : undefined)))
     .filter((x, index, arr) => isDefined(x) && index === arr.indexOf(x));
 }
 

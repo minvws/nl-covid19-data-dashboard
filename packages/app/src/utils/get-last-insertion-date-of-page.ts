@@ -6,8 +6,7 @@ function hasLastValue(metric: any): boolean {
 }
 
 function hasValues(metric: any): boolean {
-  return Array.isArray(metric?.values) &&
-    typeof metric?.values[metric.values.length - 1]?.date_of_insertion_unix !== 'undefined';
+  return Array.isArray(metric?.values) && typeof metric?.values[metric.values.length - 1]?.date_of_insertion_unix !== 'undefined';
 }
 
 function hasInsertionDate(metric: any): boolean {
@@ -15,8 +14,7 @@ function hasInsertionDate(metric: any): boolean {
 }
 
 function hasNestedLastValue(metric: any): boolean {
-  return Array.isArray(metric?.values) &&
-    typeof metric?.values[0]?.last_value?.date_of_insertion_unix !== 'undefined';
+  return Array.isArray(metric?.values) && typeof metric?.values[0]?.last_value?.date_of_insertion_unix !== 'undefined';
 }
 
 // functions for getting values
@@ -33,7 +31,7 @@ function getDateFromInsertionDate(metric: any): number {
 }
 
 function getDateFromNestedLastValue(metric: any): number {
-  return metric?.values.reduce((lastDate :number, innerValue: any) => {
+  return metric?.values.reduce((lastDate: number, innerValue: any) => {
     const metricDate = getMetricDate(innerValue);
     return Math.max(metricDate, lastDate);
   }, 0);
@@ -55,14 +53,11 @@ function getMetricDate(metricOrUnixDate: any): number {
   return 0;
 }
 
-export function getLastInsertionDateOfPage(
-  data: unknown,
-  pageMetrics: string[]
-) {
+export function getLastInsertionDateOfPage(data: unknown, pageMetrics: string[]) {
   return pageMetrics.reduce((lastDate, metricProperty) => {
     const metric: any = get(data, metricProperty);
     const metricDate = getMetricDate(metric);
-    
+
     return Math.max(metricDate, lastDate);
   }, 0);
-};
+}

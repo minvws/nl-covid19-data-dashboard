@@ -3,8 +3,5 @@
  * @returns boolean
  */
 export function isTouchDevice() {
-  return (
-    typeof window !== 'undefined' &&
-    window.matchMedia('(pointer: coarse)').matches
-  );
+  return typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 }

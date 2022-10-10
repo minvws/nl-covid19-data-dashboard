@@ -3,9 +3,7 @@ import { getClient } from '../../client';
 const client = getClient('production');
 
 function fetchPartIds() {
-  return client.fetch(
-    /* groq */ `*[_type in ['pageArticles', 'pageHighlightedItems', 'pageLinks', 'pageRichText']]{_id}`
-  );
+  return client.fetch(/* groq */ `*[_type in ['pageArticles', 'pageHighlightedItems', 'pageLinks', 'pageRichText']]{_id}`);
 }
 
 function fetchPageIds() {

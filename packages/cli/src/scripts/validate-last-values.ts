@@ -2,24 +2,13 @@
  * This script checks if all last_value values correspond to the actual last
  * value in the values array for that same metric.
  */
-import {
-  SewerPerInstallationData,
-  sortTimeSeriesInDataInPlace,
-  TimeSeriesMetric,
-  VariantsData,
-} from '@corona-dashboard/common';
+import { SewerPerInstallationData, sortTimeSeriesInDataInPlace, TimeSeriesMetric, VariantsData } from '@corona-dashboard/common';
 import { chain, isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { defaultJsonDirectory } from '../config';
-import {
-  getFilesWithTimeSeries,
-  getTimeSeriesMetricNames,
-  logError,
-  logSuccess,
-  readObjectFromJsonFile,
-} from '../utils';
+import { getFilesWithTimeSeries, getTimeSeriesMetricNames, logError, logSuccess, readObjectFromJsonFile } from '../utils';
 
 const cli = meow(
   `
@@ -71,10 +60,7 @@ async function main() {
     }
 
     {
-      const timeSeriesData = pick(data, metricNames) as Record<
-        string,
-        TimeSeriesMetric
-      >;
+      const timeSeriesData = pick(data, metricNames) as Record<string, TimeSeriesMetric>;
 
       const results = metricNames.map((metricName) => {
         const metricData = timeSeriesData[metricName];
@@ -82,13 +68,9 @@ async function main() {
         return { success, metricName };
       });
 
-      const failedMetrics = results
-        .filter((x) => x.success === false)
-        .map((x) => x.metricName);
+      const failedMetrics = results.filter((x) => x.success === false).map((x) => x.metricName);
 
-      allFailures.push(
-        ...failedMetrics.map((x) => ({ metricName: x, fileName: file }))
-      );
+      allFailures.push(...failedMetrics.map((x) => ({ metricName: x, fileName: file })));
     }
 
     /**
@@ -96,8 +78,7 @@ async function main() {
      * data so we validate it separately.
      */
     if (isDefined(data.sewer_per_installation)) {
-      const perInstallationData =
-        data.sewer_per_installation as SewerPerInstallationData;
+      const perInstallationData = data.sewer_per_installation as SewerPerInstallationData;
 
       const results = perInstallationData.values.map((x) => {
         const installationName = x.rwzi_awzi_name;
@@ -109,13 +90,9 @@ async function main() {
         };
       });
 
-      const failedMetrics = results
-        .filter((x) => x.success === false)
-        .map((x) => x.metricName);
+      const failedMetrics = results.filter((x) => x.success === false).map((x) => x.metricName);
 
-      allFailures.push(
-        ...failedMetrics.map((x) => ({ metricName: x, fileName: file }))
-      );
+      allFailures.push(...failedMetrics.map((x) => ({ metricName: x, fileName: file })));
     }
 
     /**
@@ -135,28 +112,20 @@ async function main() {
         };
       });
 
-      const failedMetrics = results
-        .filter((x) => x.success === false)
-        .map((x) => x.metricName);
+      const failedMetrics = results.filter((x) => x.success === false).map((x) => x.metricName);
 
-      allFailures.push(
-        ...failedMetrics.map((x) => ({ metricName: x, fileName: file }))
-      );
+      allFailures.push(...failedMetrics.map((x) => ({ metricName: x, fileName: file })));
     }
 
     if (cli.flags.failEarly && !isEmpty(allFailures)) {
-      console.log(
-        'Found failures with --fail-early enabled, so skipping the rest...'
-      );
+      console.log('Found failures with --fail-early enabled, so skipping the rest...');
       break;
     }
   }
 
   if (!isEmpty(allFailures)) {
     console.error(allFailures);
-    logError(
-      `There were ${allFailures.length} instances that failed to validate their last_value data.`
-    );
+    logError(`There were ${allFailures.length} instances that failed to validate their last_value data.`);
     process.exit(1);
   } else {
     logSuccess('All last_value data was validated!');
@@ -177,10 +146,7 @@ export function validateLastValue(metric: TimeSeriesMetric): boolean {
 
   const success = chain(assumedLastValue)
     .entries()
-    .every(
-      ([key, value]) =>
-        actualLastValue[key as keyof typeof actualLastValue] === value
-    )
+    .every(([key, value]) => actualLastValue[key as keyof typeof actualLastValue] === value)
     .value();
 
   return success;

@@ -16,10 +16,7 @@ import { MapType } from './types';
  * @param customGetFeatureName
  * @returns
  */
-export function useFeatureName(
-  map: MapType,
-  customGetFeatureName?: (code: string) => string
-) {
+export function useFeatureName(map: MapType, customGetFeatureName?: (code: string) => string) {
   return useMemo(() => {
     if (isDefined(customGetFeatureName)) {
       return customGetFeatureName;
@@ -28,20 +25,14 @@ export function useFeatureName(
       case 'gm': {
         return (code: string) => {
           const item = gmData.find((x) => x.gemcode === code);
-          assert(
-            isDefined(item),
-            `[${useFeatureName.name}] No gm data found for gmcode ${code}`
-          );
+          assert(isDefined(item), `[${useFeatureName.name}] No gm data found for gmcode ${code}`);
           return item.displayName ?? item.name;
         };
       }
       case 'vr': {
         return (code: string) => {
           const item = vrData.find((x) => x.code === code);
-          assert(
-            isDefined(item),
-            `[${useFeatureName.name}] No vr data found for vrcode ${code}`
-          );
+          assert(isDefined(item), `[${useFeatureName.name}] No vr data found for vrcode ${code}`);
           return item.name;
         };
       }

@@ -14,19 +14,13 @@ export type SplitPoint = {
  * null and what icon/color do you want to show in something like the tooltip. I
  * went for the first split point.
  */
-export function findSplitPointForValue(
-  splitPoints: SplitPoint[],
-  value?: number | null
-) {
+export function findSplitPointForValue(splitPoints: SplitPoint[], value?: number | null) {
   const index = findSplitIndexForValue(splitPoints, value);
 
   return splitPoints[index];
 }
 
-function findSplitIndexForValue(
-  splitPoints: SplitPoint[],
-  value?: number | null
-) {
+function findSplitIndexForValue(splitPoints: SplitPoint[], value?: number | null) {
   /**
    * If the value is 0 or null we return the first split
    */

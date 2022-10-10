@@ -1,11 +1,4 @@
-import {
-  assert,
-  DateSpanValue,
-  DAY_IN_SECONDS,
-  isDateSeries,
-  isDateSpanSeries,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { assert, DateSpanValue, DAY_IN_SECONDS, isDateSeries, isDateSpanSeries, TimestampedValue } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { ScaleLinear } from 'd3-scale';
 import { first, isEmpty, last } from 'lodash';
@@ -40,14 +33,7 @@ export function useScales<T extends TimestampedValue>(args: {
   minimumRange?: number;
 }): UseScalesResult {
   const today = useCurrentDate();
-  const {
-    maximumValue,
-    minimumValue,
-    bounds,
-    numTicks,
-    values,
-    minimumRange = 10,
-  } = args;
+  const { maximumValue, minimumValue, bounds, numTicks, values, minimumRange = 10 } = args;
 
   return useMemo(() => {
     const [start, end] = getTimeDomain({ values, today, withPadding: true });
@@ -104,16 +90,7 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [
-    values,
-    today,
-    minimumValue,
-    maximumValue,
-    bounds.width,
-    bounds.height,
-    numTicks,
-    minimumRange,
-  ]);
+  }, [values, today, minimumValue, maximumValue, bounds.width, bounds.height, numTicks, minimumRange]);
 }
 
 /**
@@ -126,15 +103,7 @@ export function useScales<T extends TimestampedValue>(args: {
  * series starts and where the last series ends, and that would remove all
  * "empty" space on both ends of the chart.
  */
-export function getTimeDomain<T extends TimestampedValue>({
-  values,
-  today,
-  withPadding,
-}: {
-  values: T[];
-  today: Date;
-  withPadding: boolean;
-}): [start: number, end: number] {
+export function getTimeDomain<T extends TimestampedValue>({ values, today, withPadding }: { values: T[]; today: Date; withPadding: boolean }): [start: number, end: number] {
   /**
    * Return a sensible default when no values fall within the selected timeframe
    */
@@ -150,34 +119,24 @@ export function getTimeDomain<T extends TimestampedValue>({
   if (isDateSeries(values)) {
     const start = first(values)?.date_unix;
     const end = last(values)?.date_unix;
-    assert(
-      isDefined(start) && isDefined(end),
-      `[${getTimeDomain.name}] Missing start or end timestamp in [${start}, ${end}]`
-    );
+    assert(isDefined(start) && isDefined(end), `[${getTimeDomain.name}] Missing start or end timestamp in [${start}, ${end}]`);
 
     /**
      * In cases where we render daily data, it is probably good to add a bit of
      * time scale "padding" so that the markers and their date span fall nicely
      * within the "stretched" domain on both ends of the graph.
      */
-    return withPadding
-      ? [start - DAY_IN_SECONDS / 2, end + DAY_IN_SECONDS / 2]
-      : [start, end];
+    return withPadding ? [start - DAY_IN_SECONDS / 2, end + DAY_IN_SECONDS / 2] : [start, end];
   }
 
   if (isDateSpanSeries(values)) {
     const start = first(values)?.date_start_unix;
     const end = last(values)?.date_end_unix;
-    assert(
-      isDefined(start) && isDefined(end),
-      `[${getTimeDomain.name}] Missing start or end timestamp in [${start}, ${end}]`
-    );
+    assert(isDefined(start) && isDefined(end), `[${getTimeDomain.name}] Missing start or end timestamp in [${start}, ${end}]`);
     return [start, end];
   }
 
-  throw new Error(
-    `Invalid timestamped values, shaped like: ${JSON.stringify(values[0])}`
-  );
+  throw new Error(`Invalid timestamped values, shaped like: ${JSON.stringify(values[0])}`);
 }
 
 /**
@@ -188,22 +147,14 @@ export function getTimeDomain<T extends TimestampedValue>({
  * It also assumes that if we use date_unix it always means one day worth of
  * data.
  */
-function getDateSpanWidth<T extends TimestampedValue>(
-  values: T[],
-  xScale: ScaleLinear<number, number>
-) {
+function getDateSpanWidth<T extends TimestampedValue>(values: T[], xScale: ScaleLinear<number, number>) {
   if (isDateSeries(values)) {
     return xScale(DAY_IN_SECONDS) - xScale(0);
   }
 
   if (isDateSpanSeries(values)) {
-    return (
-      xScale((values[0] as DateSpanValue).date_end_unix) -
-      xScale((values[0] as DateSpanValue).date_start_unix)
-    );
+    return xScale((values[0] as DateSpanValue).date_end_unix) - xScale((values[0] as DateSpanValue).date_start_unix);
   }
 
-  throw new Error(
-    `Invalid timestamped values, shaped like: ${JSON.stringify(values[0])}`
-  );
+  throw new Error(`Invalid timestamped values, shaped like: ${JSON.stringify(values[0])}`);
 }

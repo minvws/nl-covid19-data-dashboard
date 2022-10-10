@@ -2,30 +2,18 @@ import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { wrapAroundLength } from '~/utils/wrap-around-length';
 
-export function useKeyboardNavigation(
-  setPosition: Dispatch<SetStateAction<number>>,
-  length: number,
-  setIsTabInteractive: Dispatch<SetStateAction<boolean>>
-) {
+export function useKeyboardNavigation(setPosition: Dispatch<SetStateAction<number>>, length: number, setIsTabInteractive: Dispatch<SetStateAction<boolean>>) {
   const [isEnabled, setIsEnabled] = useState(false);
 
-  useHotkey(
-    ['right', 'shift+>'],
-    () => setPosition((x) => wrapAroundLength(x + 1, length)),
-    {
-      isDisabled: !isEnabled,
-      allowRepeat: true,
-    }
-  );
+  useHotkey(['right', 'shift+>'], () => setPosition((x) => wrapAroundLength(x + 1, length)), {
+    isDisabled: !isEnabled,
+    allowRepeat: true,
+  });
 
-  useHotkey(
-    ['left', 'shift+<'],
-    () => setPosition((x) => wrapAroundLength(x - 1, length)),
-    {
-      isDisabled: !isEnabled,
-      allowRepeat: true,
-    }
-  );
+  useHotkey(['left', 'shift+<'], () => setPosition((x) => wrapAroundLength(x - 1, length)), {
+    isDisabled: !isEnabled,
+    allowRepeat: true,
+  });
 
   useHotkey('home', () => setPosition(0), {
     isDisabled: !isEnabled,
@@ -56,9 +44,7 @@ export function useKeyboardNavigation(
   useHotkey(
     ['pagedown', 'shift+right'],
     () => {
-      setPosition((x) =>
-        x + largeStep >= length ? length - 1 : x + largeStep
-      );
+      setPosition((x) => (x + largeStep >= length ? length - 1 : x + largeStep));
     },
     {
       isDisabled: !isEnabled,

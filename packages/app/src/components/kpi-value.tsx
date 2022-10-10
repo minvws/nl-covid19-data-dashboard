@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import { color } from 'styled-system';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import {
-  TileAverageDifference,
-  TileDifference,
-} from '~/components/difference-indicator';
+import { TileAverageDifference, TileDifference } from '~/components/difference-indicator';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 
@@ -114,12 +111,7 @@ export function KpiValue({
           </Box>
         ) : isDefined(difference) ? (
           <Box pt={2}>
-            <TileDifference
-              value={difference}
-              isPercentage={isDefined(percentage) && !isDefined(absolute)}
-              isAmount={isAmount}
-              maximumFractionDigits={differenceFractionDigits}
-            />
+            <TileDifference value={difference} isPercentage={isDefined(percentage) && !isDefined(absolute)} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : null)}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

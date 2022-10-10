@@ -9,19 +9,10 @@ type ValuesWithLastValue<T> = {
 /**
  *
  */
-export function adjustDataToLastAccurateValue<T>(
-  data: ValuesWithLastValue<T>,
-  metricProperty?: keyof T
-) {
-  const numberOfTrailingNullValues = countTrailingNullValues(
-    data.values,
-    metricProperty
-  );
+export function adjustDataToLastAccurateValue<T>(data: ValuesWithLastValue<T>, metricProperty?: keyof T) {
+  const numberOfTrailingNullValues = countTrailingNullValues(data.values, metricProperty);
 
-  if (
-    numberOfTrailingNullValues >= data.values.length ||
-    numberOfTrailingNullValues === 0
-  ) {
+  if (numberOfTrailingNullValues >= data.values.length || numberOfTrailingNullValues === 0) {
     return data;
   }
 
@@ -30,24 +21,18 @@ export function adjustDataToLastAccurateValue<T>(
       ...data,
       last_value: {
         ...data.last_value,
-        [metricProperty]:
-          data.values[data.values.length - numberOfTrailingNullValues - 1][
-            metricProperty as keyof T
-          ],
+        [metricProperty]: data.values[data.values.length - numberOfTrailingNullValues - 1][metricProperty as keyof T],
       },
     };
   }
 
   return {
     ...data,
-    last_value:
-      data.values[data.values.length - numberOfTrailingNullValues - 1],
+    last_value: data.values[data.values.length - numberOfTrailingNullValues - 1],
   };
 }
 
-export function isValuesWithLastValue<T>(
-  data: any
-): data is ValuesWithLastValue<T> {
+export function isValuesWithLastValue<T>(data: any): data is ValuesWithLastValue<T> {
   if (isPresent(data) && typeof data === 'object') {
     return 'values' in data && 'last_value' in data;
   }

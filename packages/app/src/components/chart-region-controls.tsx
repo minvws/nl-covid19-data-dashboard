@@ -18,22 +18,16 @@ export function ChartRegionControls(props: ChartRegionControlsProps) {
     {
       label: commonTexts.charts.region_controls.municipal,
       value: 'gm',
-      ariaLabel: replaceVariablesInText(
-        commonTexts.aria_labels.map_toggle_label,
-        {
-          label: commonTexts.charts.region_controls.municipal,
-        }
-      ),
+      ariaLabel: replaceVariablesInText(commonTexts.aria_labels.map_toggle_label, {
+        label: commonTexts.charts.region_controls.municipal,
+      }),
     },
     {
       label: commonTexts.charts.region_controls.region,
       value: 'vr',
-      ariaLabel: replaceVariablesInText(
-        commonTexts.aria_labels.map_toggle_label,
-        {
-          label: commonTexts.charts.region_controls.region,
-        }
-      ),
+      ariaLabel: replaceVariablesInText(commonTexts.aria_labels.map_toggle_label, {
+        label: commonTexts.charts.region_controls.region,
+      }),
     },
   ];
 

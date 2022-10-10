@@ -6,22 +6,10 @@ export type CodedGeoProperties = {
   code: string;
 };
 
-export type CodedGeoJSON = FeatureCollection<
-  MultiPolygon | Polygon,
-  CodedGeoProperties
->;
+export type CodedGeoJSON = FeatureCollection<MultiPolygon | Polygon, CodedGeoProperties>;
 
-export const nlGeo = topojson.feature(
-  nlTopology,
-  nlTopology.objects.nl_features
-) as CodedGeoJSON;
+export const nlGeo = topojson.feature(nlTopology, nlTopology.objects.nl_features) as CodedGeoJSON;
 
-export const vrGeo = topojson.feature(
-  nlTopology,
-  nlTopology.objects.vr_features
-) as CodedGeoJSON;
+export const vrGeo = topojson.feature(nlTopology, nlTopology.objects.vr_features) as CodedGeoJSON;
 
-export const gmGeo = topojson.feature(
-  nlTopology,
-  nlTopology.objects.gm_features
-) as CodedGeoJSON;
+export const gmGeo = topojson.feature(nlTopology, nlTopology.objects.gm_features) as CodedGeoJSON;

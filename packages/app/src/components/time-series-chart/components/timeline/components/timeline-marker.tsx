@@ -3,23 +3,13 @@ import css from '@styled-system/css';
 import { m } from 'framer-motion';
 import styled from 'styled-components';
 
-export function TimelineMarker({
-  isHighlighted,
-  size = 10,
-}: {
-  isHighlighted?: boolean;
-  size?: number;
-}) {
+export function TimelineMarker({ isHighlighted, size = 10 }: { isHighlighted?: boolean; size?: number }) {
   const borderWidth = Math.round(size * 0.2);
   const highlightBorderWidth = isHighlighted ? 2 * borderWidth : borderWidth;
   const innerPointSize = size - 2 * borderWidth;
 
   return (
-    <div
-      role="img"
-      style={{ padding: highlightBorderWidth }}
-      aria-hidden={true}
-    >
+    <div role="img" style={{ padding: highlightBorderWidth }} aria-hidden={true}>
       <div style={{ width: size, height: size }}>
         <StyledPointMarker
           size={innerPointSize}

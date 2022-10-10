@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "../../eslint-config"
-  ],
+  "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "../../eslint-config"],
   "settings": {
     "react": {
       "version": "detect"
@@ -26,11 +22,7 @@
   },
   "overrides": [
     {
-      "extends": [
-        "../../eslint-overrides",
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended"
-      ],
+      "extends": ["../../eslint-overrides", "plugin:react/recommended", "plugin:react-hooks/recommended"],
       "files": ["*.ts", "*.tsx"],
       "rules": {
         "risxss/catch-potential-xss-react": [

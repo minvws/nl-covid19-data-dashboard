@@ -5,8 +5,7 @@ import { ReactNode, Fragment } from 'react';
  * When lokalize hot reload is enabled we will render "[#ERROR {{key}}]"
  * instead of throwing an error when there's a validation error.
  */
-export const shouldValidate =
-  typeof window === 'undefined' || process.env.NEXT_PUBLIC_PHASE !== 'develop';
+export const shouldValidate = typeof window === 'undefined' || process.env.NEXT_PUBLIC_PHASE !== 'develop';
 
 /**
  * Provided text can be filled with placeholders such as
@@ -14,10 +13,7 @@ export const shouldValidate =
  * can be replaced with whatever ReactNode
  * is provided in `replacementMap.exampleName`.
  */
-export function replaceComponentsInText(
-  text: string,
-  replacementMap: Record<string, ReactNode>
-): ReactNode {
+export function replaceComponentsInText(text: string, replacementMap: Record<string, ReactNode>): ReactNode {
   // Regex captures eg "name" in "Hello {{name}}" for all placeholders
   // and parts becomes ["Hello", "name", ""]
   const parts = text.split(/\{\{([^}]+)\}\}/g);
@@ -27,17 +23,12 @@ export function replaceComponentsInText(
         const isVariable = index % 2 === 1;
 
         if (isVariable && shouldValidate) {
-          assert(
-            replacementMap[part],
-            `[${replaceComponentsInText.name}] Replacement text or component ${part} is not provided in text: "${text}".`
-          );
+          assert(replacementMap[part], `[${replaceComponentsInText.name}] Replacement text or component ${part} is not provided in text: "${text}".`);
         }
 
         const replacement = replacementMap[part] ?? `[#ERROR {{${part}}}]`;
 
-        return (
-          <Fragment key={index}>{isVariable ? replacement : part}</Fragment>
-        );
+        return <Fragment key={index}>{isVariable ? replacement : part}</Fragment>;
       })}
     </>
   );

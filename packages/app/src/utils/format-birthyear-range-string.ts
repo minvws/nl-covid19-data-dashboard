@@ -21,9 +21,7 @@ export function formatBirthyearRangeString(
   }
 ) {
   if (birthyearRange.indexOf('-') < 0) {
-    throw new Error(
-      'Invalid birthyearRange received. Valid values are: -<year>, <year>- or <year>-<year>'
-    );
+    throw new Error('Invalid birthyearRange received. Valid values are: -<year>, <year>- or <year>-<year>');
   }
 
   const splittedBirthyear = birthyearRange.split('-');

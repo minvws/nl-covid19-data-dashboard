@@ -1,13 +1,5 @@
 import styled from 'styled-components';
-import {
-  ColorProps,
-  compose,
-  SpaceProps,
-  TypographyProps,
-  color,
-  space,
-  typography,
-} from 'styled-system';
+import { ColorProps, compose, SpaceProps, TypographyProps, color, space, typography } from 'styled-system';
 
 type SpanProps = SpaceProps & ColorProps & TypographyProps;
 

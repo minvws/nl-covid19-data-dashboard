@@ -18,11 +18,7 @@ export function LinkGroup(props: LinkGroupProps) {
       {header && <StyledHeader>{header}</StyledHeader>}
       <List>
         {links.map((link) => (
-          <LinkItem
-            key={`${header}-${link.text}-link`}
-            href={link.href}
-            text={link.text}
-          />
+          <LinkItem key={`${header}-${link.text}-link`} href={link.href} text={link.text} />
         ))}
       </List>
     </Box>
@@ -53,11 +49,7 @@ function LinkItem(props: LinkItemProps) {
   return (
     <Item>
       <InlineText>
-        <LinkWithIcon
-          href={href}
-          icon={<ArrowIconThinRight />}
-          iconPlacement="right"
-        >
+        <LinkWithIcon href={href} icon={<ArrowIconThinRight />} iconPlacement="right">
           {text}
         </LinkWithIcon>
       </InlineText>

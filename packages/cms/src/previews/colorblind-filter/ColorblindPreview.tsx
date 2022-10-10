@@ -48,9 +48,7 @@ class ColorblindPreview extends React.PureComponent<any> {
 
     const { activeFilter } = this.state;
     const filterStyle = {
-      filter: activeFilter.value
-        ? `url('${filters}#${activeFilter.value}')`
-        : 'none',
+      filter: activeFilter.value ? `url('${filters}#${activeFilter.value}')` : 'none',
     };
 
     const url = assemblePreviewUrl({ options });
@@ -69,11 +67,7 @@ class ColorblindPreview extends React.PureComponent<any> {
           <label className={styles.dropdownLabel} htmlFor={'select-filter'}>
             Select a filter:
           </label>
-          <DefaultSelect
-            items={FILTER_ITEMS}
-            value={activeFilter}
-            onChange={(value: any) => this.handleFilterChange(value)}
-          />
+          <DefaultSelect items={FILTER_ITEMS} value={activeFilter} onChange={(value: any) => this.handleFilterChange(value)} />
         </div>
         <div className={styles.iframeContainer} style={filterStyle}>
           <iframe src={url} frameBorder={'0'} />

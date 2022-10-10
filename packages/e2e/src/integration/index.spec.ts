@@ -20,9 +20,7 @@ context('Index (Actueel)', () => {
     const hospitalNiceLastValue = this.nationalData.hospital_nice.last_value;
 
     const kpiTestInfo = {
-      admissions_on_date_of_reporting: cy.formatters.formatNumber(
-        hospitalNiceLastValue.admissions_on_date_of_reporting
-      ),
+      admissions_on_date_of_reporting: cy.formatters.formatNumber(hospitalNiceLastValue.admissions_on_date_of_reporting),
       infected: cy.formatters.formatNumber(testedOverallLastValue.infected),
     };
 

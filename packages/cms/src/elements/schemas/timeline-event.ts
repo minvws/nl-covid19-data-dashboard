@@ -14,12 +14,7 @@ export const timelineEvent = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: localeStringValidation((rule) =>
-        rule
-          .required()
-          .max(60)
-          .error('Titels zijn gelimiteerd tot maximaal 60 tekens')
-      ),
+      validation: localeStringValidation((rule) => rule.required().max(60).error('Titels zijn gelimiteerd tot maximaal 60 tekens')),
       options: {
         ignoreLanguageSwitcher: true,
       },

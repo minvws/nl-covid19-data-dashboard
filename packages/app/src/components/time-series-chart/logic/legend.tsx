@@ -4,12 +4,7 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components/legend';
 import { useIntl } from '~/intl';
-import {
-  HatchedTimespanAnnotationIcon,
-  OutOfBoundsIcon,
-  SeriesIcon,
-  SolidTimespanAnnotationIcon,
-} from '../components';
+import { HatchedTimespanAnnotationIcon, OutOfBoundsIcon, SeriesIcon, SolidTimespanAnnotationIcon } from '../components';
 import { TimelineMarker } from '../components/timeline';
 import { isVisibleEvent } from '../components/timeline/logic';
 import { DataOptions } from './common';
@@ -17,15 +12,8 @@ import { isVisible, SeriesConfig } from './series';
 
 type SplitLegendGroup = { label: string; items: LegendItem[] };
 
-export function useLegendItems<T extends TimestampedValue>(
-  domain: number[],
-  config: SeriesConfig<T>,
-  dataOptions?: DataOptions,
-  hasOutofBoudsValues = false,
-  forceLegend = false
-) {
-  const { timelineEvents, timespanAnnotations, outOfBoundsConfig } =
-    dataOptions || {};
+export function useLegendItems<T extends TimestampedValue>(domain: number[], config: SeriesConfig<T>, dataOptions?: DataOptions, hasOutofBoudsValues = false, forceLegend = false) {
+  const { timelineEvents, timespanAnnotations, outOfBoundsConfig } = dataOptions || {};
   const { commonTexts } = useIntl();
 
   return useMemo(() => {
@@ -66,20 +54,13 @@ export function useLegendItems<T extends TimestampedValue>(
      */
     if (timespanAnnotations) {
       for (const annotation of timespanAnnotations) {
-        const isAnnotationVisible =
-          (first(domain) as number) <= annotation.end &&
-          annotation.start <= (last(domain) as number);
+        const isAnnotationVisible = (first(domain) as number) <= annotation.end && annotation.start <= (last(domain) as number);
 
         if (isAnnotationVisible) {
           legendItems.push({
             label: annotation.label,
             shape: 'custom',
-            shapeComponent:
-              annotation.fill === 'solid' || !isDefined(annotation.fill) ? (
-                <SolidTimespanAnnotationIcon />
-              ) : (
-                <HatchedTimespanAnnotationIcon />
-              ),
+            shapeComponent: annotation.fill === 'solid' || !isDefined(annotation.fill) ? <SolidTimespanAnnotationIcon /> : <HatchedTimespanAnnotationIcon />,
           } as LegendItem);
         }
       }
@@ -89,9 +70,7 @@ export function useLegendItems<T extends TimestampedValue>(
      * Add timeline events to the legend
      */
     if (timelineEvents) {
-      const hasVisibleEvents = timelineEvents.some((x) =>
-        isVisibleEvent(x, domain)
-      );
+      const hasVisibleEvents = timelineEvents.some((x) => isVisibleEvent(x, domain));
 
       if (hasVisibleEvents) {
         legendItems.push({
@@ -125,22 +104,11 @@ export function useLegendItems<T extends TimestampedValue>(
      * one) to determine if a legend is required. We only have to render a
      * legend when there's at least two items.
      */
-    const isLegendRequired =
-      forceLegend || legendItems.length + splitLegendGroups.length > 1;
+    const isLegendRequired = forceLegend || legendItems.length + splitLegendGroups.length > 1;
 
     return {
       legendItems: isLegendRequired ? legendItems : undefined,
-      splitLegendGroups:
-        splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
+      splitLegendGroups: splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
     };
-  }, [
-    config,
-    domain,
-    commonTexts,
-    timelineEvents,
-    timespanAnnotations,
-    outOfBoundsConfig,
-    hasOutofBoudsValues,
-    forceLegend,
-  ]);
+  }, [config, domain, commonTexts, timelineEvents, timespanAnnotations, outOfBoundsConfig, hasOutofBoudsValues, forceLegend]);
 }

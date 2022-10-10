@@ -20,17 +20,10 @@ export function getRenderedVaccinatedLabel(
 
   const parsedLabel = parseVaccinatedPercentageLabel(unparsedLabel);
 
-  return renderVaccinatedLabel(
-    parsedLabel,
-    higherLabel,
-    lowerLabel,
-    formatPercentage
-  );
+  return renderVaccinatedLabel(parsedLabel, higherLabel, lowerLabel, formatPercentage);
 }
 
-export function parseVaccinatedPercentageLabel(
-  label: string
-): ParsedFullyVaccinatedPercentageLabel | null {
+export function parseVaccinatedPercentageLabel(label: string): ParsedFullyVaccinatedPercentageLabel | null {
   const regex = /(<|>)=([0-9]{1,2})/;
   const match = label.match(regex);
 

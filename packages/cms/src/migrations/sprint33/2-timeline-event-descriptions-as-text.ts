@@ -32,19 +32,14 @@ function buildPatches(collections: any[]) {
     id: collection._id,
     patch: {
       set: {
-        timelineEvents: changeEventDescriptionsToLocaleText(
-          collection.timelineEvents
-        ),
+        timelineEvents: changeEventDescriptionsToLocaleText(collection.timelineEvents),
       },
     },
   }));
 }
 
 function createTransaction(patches: any[]) {
-  return patches.reduce(
-    (tx, patch) => tx.patch(patch.id, patch.patch),
-    client.transaction()
-  );
+  return patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), client.transaction());
 }
 
 function changeEventDescriptionsToLocaleText(events: any) {
@@ -61,12 +56,7 @@ async function migrateNextBatch(): Promise<any> {
     console.log('No more documents to migrate!');
     return null;
   }
-  console.log(
-    `Migrating batch:\n %s`,
-    patches
-      .map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
-      .join('\n')
-  );
+  console.log(`Migrating batch:\n %s`, patches.map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'));
   const transaction = createTransaction(patches);
   await transaction.commit();
   return migrateNextBatch();

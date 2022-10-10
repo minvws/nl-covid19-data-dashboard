@@ -15,32 +15,26 @@ GetCountryNames.before.each((context) => {
   });
 });
 
-GetCountryNames(
-  'Should return country names is the correct object structure',
-  () => {
-    const staticPropsContext = { locale: 'nl' };
+GetCountryNames('Should return country names is the correct object structure', () => {
+  const staticPropsContext = { locale: 'nl' };
 
-    assert.equal(getCountryNames(staticPropsContext), {
-      countryNames: {
-        afg: 'Afghanistan',
-        alb: 'Albanië',
-        ala: 'Ålandseilanden',
-        dza: 'Algerije',
-      },
-    });
-  }
-);
+  assert.equal(getCountryNames(staticPropsContext), {
+    countryNames: {
+      afg: 'Afghanistan',
+      alb: 'Albanië',
+      ala: 'Ålandseilanden',
+      dza: 'Algerije',
+    },
+  });
+});
 
-GetCountryNames(
-  ' Should call load function with correct parameters',
-  (context) => {
-    const { loadStub } = context;
-    const staticPropsContext = { locale: 'nl' };
+GetCountryNames(' Should call load function with correct parameters', (context) => {
+  const { loadStub } = context;
+  const staticPropsContext = { locale: 'nl' };
 
-    getCountryNames(staticPropsContext);
-    sinon.assert.calledWith(loadStub, `nl-country-names.json`, 'static-json');
-  }
-);
+  getCountryNames(staticPropsContext);
+  sinon.assert.calledWith(loadStub, `nl-country-names.json`, 'static-json');
+});
 
 GetCountryNames.after.each(() => {
   sinon.restore();

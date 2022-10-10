@@ -16,10 +16,7 @@ export function useIsMounted({ delayMs }: { delayMs?: number } = {}) {
       return () => setIsMounted(false);
     }
 
-    const timeoutId = setTimeout(
-      () => isMountedRef.current && setIsMounted(true),
-      delayMs
-    );
+    const timeoutId = setTimeout(() => isMountedRef.current && setIsMounted(true), delayMs);
 
     return () => {
       clearTimeout(timeoutId);

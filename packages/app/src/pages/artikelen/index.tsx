@@ -10,21 +10,11 @@ import { RichContentSelect } from '~/components/rich-content-select';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { ArticlesOverviewList } from '~/domain/articles/articles-overview-list';
 import { Layout } from '~/domain/layout/layout';
-import {
-  articleCategory,
-  ArticleCategoryType,
-} from '~/domain/topical/common/categories';
+import { articleCategory, ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -36,8 +26,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>((context) => {
     const { locale } = context;
@@ -61,20 +50,14 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  const { textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const articleCategories = useMemo(() => {
     /**
      * Find all the categories that are currently being used in articles,
      * to later check if we still need it for the menu items.
      */
-    const availableCategories: string[] = [
-      '__alles',
-      ...new Set(content.map((item) => item.categories).flat()),
-    ].filter(isPresent);
+    const availableCategories: string[] = ['__alles', ...new Set(content.map((item) => item.categories).flat())].filter(isPresent);
 
     return articleCategory
       .map((id) => {
@@ -115,11 +98,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
     [router]
   );
 
-  const currentCategory = (
-    articleCategory.includes(router.query.categorie as ArticleCategoryType)
-      ? router.query.categorie
-      : articleCategory[0]
-  ) as ArticleCategoryType;
+  const currentCategory = (articleCategory.includes(router.query.categorie as ArticleCategoryType) ? router.query.categorie : articleCategory[0]) as ArticleCategoryType;
 
   return (
     <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
@@ -136,11 +115,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
           {breakpoints.lg ? (
             <OrderedList>
               {articleCategories.map((category, index) => (
-                <ListItem
-                  key={index}
-                  isActive={currentCategory === category.value}
-                  onClick={() => handleCategoryFilter(category.value)}
-                >
+                <ListItem key={index} isActive={currentCategory === category.value} onClick={() => handleCategoryFilter(category.value)}>
                   <StyledButton>
                     <InlineText>{category.label}</InlineText>
                     <BoldText aria-hidden="true">{category.label}</BoldText>
@@ -161,9 +136,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
               })}
             >
               <RichContentSelect
-                label={
-                  textShared.secties.artikelen.categorie_select_placeholder
-                }
+                label={textShared.secties.artikelen.categorie_select_placeholder}
                 visuallyHiddenLabel
                 initialValue={currentCategory}
                 options={selectOptions}
@@ -172,11 +145,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
 
-          <ArticlesOverviewList
-            articleSummaries={content}
-            hideLink={true}
-            currentCategory={currentCategory}
-          />
+          <ArticlesOverviewList articleSummaries={content} hideLink={true} currentCategory={currentCategory} />
         </MaxWidth>
       </Box>
     </Layout>

@@ -60,9 +60,7 @@ function createCollections(docs: any[]) {
   );
 }
 
-function buildPatches(
-  collections: { collection: any; timeSeriesId: string }[]
-) {
+function buildPatches(collections: { collection: any; timeSeriesId: string }[]) {
   return collections.map((collection) => ({
     id: collection.timeSeriesId,
     patch: {
@@ -80,10 +78,7 @@ function buildPatches(
 }
 
 function createTransaction(patches: any[]) {
-  return patches.reduce(
-    (tx, patch) => tx.patch(patch.id, patch.patch),
-    client.transaction()
-  );
+  return patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), client.transaction());
 }
 
 async function migrateNextBatch(): Promise<any> {
@@ -94,12 +89,7 @@ async function migrateNextBatch(): Promise<any> {
     console.log('No more documents to migrate!');
     return null;
   }
-  console.log(
-    `Migrating batch:\n %s`,
-    patches
-      .map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
-      .join('\n')
-  );
+  console.log(`Migrating batch:\n %s`, patches.map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'));
   const transaction = createTransaction(patches);
   await transaction.commit();
   return migrateNextBatch();

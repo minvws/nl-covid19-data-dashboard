@@ -55,12 +55,7 @@ export function VariantsTableTile({
   }
 
   return (
-    <VariantsTableTileWithData
-      text={text}
-      source={source}
-      data={data}
-      dates={dates}
-    >
+    <VariantsTableTileWithData text={text} source={source} data={data} dates={dates}>
       {children}
     </VariantsTableTileWithData>
   );
@@ -95,10 +90,7 @@ function VariantsTableTileWithData({
     obtainedAt: dates.date_of_report_unix,
   };
 
-  const [date_start, date_end] = formatDateSpan(
-    { seconds: dates.date_start_unix },
-    { seconds: dates.date_end_unix }
-  );
+  const [date_start, date_end] = formatDateSpan({ seconds: dates.date_start_unix }, { seconds: dates.date_end_unix });
 
   const descriptionText = replaceVariablesInText(text.omschrijving, {
     date_start,
@@ -106,11 +98,7 @@ function VariantsTableTileWithData({
   });
 
   return (
-    <ChartTile
-      metadata={metadata}
-      title={text.titel}
-      description={descriptionText}
-    >
+    <ChartTile metadata={metadata} title={text.titel} description={descriptionText}>
       {children}
       <Box overflow="auto" mb={3} mt={4}>
         <VariantsTable rows={data} text={text} />

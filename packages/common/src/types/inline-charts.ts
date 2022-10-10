@@ -1,10 +1,4 @@
-import {
-  DataScope,
-  DataScopeKey,
-  MetricKeys,
-  MetricProperty,
-  ScopedData,
-} from '.';
+import { DataScope, DataScopeKey, MetricKeys, MetricProperty, ScopedData } from '.';
 import { TimeframeOption } from '..';
 
 export const areaTitles = {
@@ -22,10 +16,7 @@ export type TimespanAnnotationConfiguration = {
   cutValuesForMetricProperties?: string[];
 };
 
-export type ChoroplethConfiguration<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
-> = {
+export type ChoroplethConfiguration<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>> = {
   metricProperty: MetricProperty<ScopedData[S], MetricKeys<ScopedData[S]>>;
   map: 'vr' | 'gm';
   accessibilityKey: string;
@@ -45,19 +36,13 @@ export type ChoroplethConfiguration<
   tooltipVariables?: string;
 } & MetricConfiguration<S, M>;
 
-export type MetricConfiguration<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
-> = {
+export type MetricConfiguration<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>> = {
   area: S;
   metricName: M;
   code?: string;
 };
 
-export type DonutChartConfiguration<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
-> = {
+export type DonutChartConfiguration<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>> = {
   icon: string;
   labelKey: string;
   sourceKey: string;
@@ -71,21 +56,14 @@ export type DonutChartConfiguration<
   verticalLayout?: boolean;
 } & MetricConfiguration<S, M>;
 
-export type DonutMetricPropertyConfig<
-  S extends DataScope,
-  M extends MetricKeys<S>
-> = {
+export type DonutMetricPropertyConfig<S extends DataScope, M extends MetricKeys<S>> = {
   propertyName: MetricProperty<S, M>;
   color: string;
   labelKey: string;
   tooltipLabelKey: string;
 };
 
-export type AgeDemographicConfiguration<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>,
-  K extends string
-> = {
+export type AgeDemographicConfiguration<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>, K extends string> = {
   accessibilityKey: K;
   sourceKey: string;
   text: string;
@@ -96,10 +74,7 @@ export type AgeDemographicConfiguration<
   maxDisplayValue?: number;
 } & MetricConfiguration<S, M>;
 
-export type ChartConfiguration<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
-> = {
+export type ChartConfiguration<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>> = {
   metricProperties: MetricPropertyConfig<ScopedData[S], M>[];
   timeframe: TimeframeOption;
   accessibilityKey: string;
@@ -111,20 +86,9 @@ export type ChartConfiguration<
   timespanAnnotations?: TimespanAnnotationConfiguration[];
 } & MetricConfiguration<S, M>;
 
-export type MetricPropertyConfig<
-  S extends DataScope,
-  M extends MetricKeys<S>
-> = {
+export type MetricPropertyConfig<S extends DataScope, M extends MetricKeys<S>> = {
   propertyName: MetricProperty<S, M>;
-  type:
-    | 'line'
-    | 'gapped-line'
-    | 'area'
-    | 'bar'
-    | 'range'
-    | 'stacked-area'
-    | 'gapped-stacked-area'
-    | 'invisible';
+  type: 'line' | 'gapped-line' | 'area' | 'bar' | 'range' | 'stacked-area' | 'gapped-stacked-area' | 'invisible';
   labelKey: string;
   curve?: 'linear' | 'step';
   color?: string;
@@ -134,10 +98,7 @@ export type MetricPropertyConfig<
   mixBlendMode?: string;
 };
 
-export type KpiConfiguration = Omit<
-  Required<PartialKpiConfiguration>,
-  'code' | 'differenceKey'
-> & { code?: string; differenceKey?: string };
+export type KpiConfiguration = Omit<Required<PartialKpiConfiguration>, 'code' | 'differenceKey'> & { code?: string; differenceKey?: string };
 
 export type PartialKpiConfiguration = {
   icon?: string;

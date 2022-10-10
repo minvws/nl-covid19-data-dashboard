@@ -9,9 +9,7 @@ context('Landelijk - Ziekenhuis opnames', () => {
     const lastValue = this.nationalData.hospital_lcps.last_value;
 
     const kpiTestInfo = {
-      beds_occupied_covid: cy.formatters.formatNumber(
-        lastValue.beds_occupied_covid
-      ),
+      beds_occupied_covid: cy.formatters.formatNumber(lastValue.beds_occupied_covid),
     };
 
     cy.checkKpiValues(kpiTestInfo);

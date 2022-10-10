@@ -5,12 +5,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const withTranspileModules = require('next-transpile-modules')([
-  'd3-geo',
-  'd3-array',
-  'globby',
-  'internmap',
-]);
+const withTranspileModules = require('next-transpile-modules')(['d3-geo', 'd3-array', 'globby', 'internmap']);
 const path = require('path');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 
@@ -83,15 +78,9 @@ const nextConfig = {
       ['d3-array', '../../node_modules/d3-array'],
       ['d3-color', '../../node_modules/d3-scale/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
-      [
-        'd3-interpolate',
-        '../../node_modules/d3-scale/node_modules/d3-interpolate',
-      ],
+      ['d3-interpolate', '../../node_modules/d3-scale/node_modules/d3-interpolate'],
       ['react-is', '../../node_modules/react-is'],
-      [
-        'unist-util-visit-parents',
-        '../../node_modules/unist-util-visit-parents',
-      ],
+      ['unist-util-visit-parents', '../../node_modules/unist-util-visit-parents'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {

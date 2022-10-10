@@ -7,14 +7,8 @@ import { Heading } from '~/components/typography';
 import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
 import { RichContentBlock } from '~/types/cms';
 interface OverData {
   title: string | null;
@@ -50,28 +44,14 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...commonTexts.over_metadata} lastGenerated={lastGenerated}>
       <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-          title="webpagina"
-        />
+        <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
+        <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
       </Head>
 
       <Content>
         <Box spacing={4}>
           {content.title && <Heading level={1}>{content.title}</Heading>}
-          {content.description && (
-            <RichContent
-              blocks={content.description}
-              contentWrapper={RichContentWrapper}
-            />
-          )}
+          {content.description && <RichContent blocks={content.description} contentWrapper={RichContentWrapper} />}
         </Box>
       </Content>
     </Layout>

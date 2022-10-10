@@ -1,14 +1,10 @@
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 
-export function getCoveragePerAgeGroupLatestValues(
-  values: NlVaccineCoveragePerAgeGroupValue[]
-) {
+export function getCoveragePerAgeGroupLatestValues(values: NlVaccineCoveragePerAgeGroupValue[]) {
   /**
    * Get all the unique age groups in the data.
    */
-  const uniqueAgeKeys = [
-    ...new Set(values.map((item) => item.age_group_range).flat()),
-  ];
+  const uniqueAgeKeys = [...new Set(values.map((item) => item.age_group_range).flat())];
 
   /**
    * Per unique age group get the latest value available.

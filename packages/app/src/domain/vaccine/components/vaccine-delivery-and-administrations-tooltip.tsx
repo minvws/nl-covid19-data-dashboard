@@ -5,15 +5,10 @@ import { TooltipSeriesListItems } from '~/components/time-series-chart/component
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic/series';
 import { VaccineAdministrationsValue } from '../data-selection/select-administration-data';
 
-export function VaccineDeliveryAndAdministrationsTooltip<
-  T extends VaccineAdministrationsValue
->({ data }: { data: TooltipData<T> }) {
-  const { value, configIndex, config, options, metricPropertyFormatters } =
-    data;
+export function VaccineDeliveryAndAdministrationsTooltip<T extends VaccineAdministrationsValue>({ data }: { data: TooltipData<T> }) {
+  const { value, configIndex, config, options, metricPropertyFormatters } = data;
 
-  const firstConfig = config
-    .filter((x): x is LineSeriesDefinition<T> => x.type === 'invisible')
-    .find((x) => x.metricProperty === 'total');
+  const firstConfig = config.filter((x): x is LineSeriesDefinition<T> => x.type === 'invisible').find((x) => x.metricProperty === 'total');
 
   const otherConfigs = config.filter((x) => x !== firstConfig);
 
@@ -24,18 +19,9 @@ export function VaccineDeliveryAndAdministrationsTooltip<
   const configs = [...otherConfigs, firstConfig];
 
   return (
-    <TooltipSeriesListContainer
-      {...data}
-      timespanAnnotation={data.timespanAnnotation}
-    >
+    <TooltipSeriesListContainer {...data} timespanAnnotation={data.timespanAnnotation}>
       <Box spacing={1}>
-        <TooltipSeriesListItems
-          value={value}
-          config={configs}
-          configIndex={configIndex}
-          options={options}
-          metricPropertyFormatters={metricPropertyFormatters}
-        />
+        <TooltipSeriesListItems value={value} config={configs} configIndex={configIndex} options={options} metricPropertyFormatters={metricPropertyFormatters} />
       </Box>
     </TooltipSeriesListContainer>
   );

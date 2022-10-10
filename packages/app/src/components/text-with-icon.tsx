@@ -9,11 +9,7 @@ interface TextWithIconProps {
   iconPlacement?: 'left' | 'right';
 }
 
-export const TextWithIcon = ({
-  icon,
-  iconPlacement = 'right',
-  text,
-}: TextWithIconProps) => {
+export const TextWithIcon = ({ icon, iconPlacement = 'right', text }: TextWithIconProps) => {
   return (
     <>
       {iconPlacement === 'left' && <Icon icon={icon} />}

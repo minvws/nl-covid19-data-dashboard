@@ -7,10 +7,7 @@ import * as assert from 'uvu/assert';
 import { IntlContext } from '~/intl';
 import { IntlContextProps } from '~/intl/hooks/use-intl';
 import type { SiteText } from '~/locale';
-import {
-  AccessibilityDefinition,
-  useAccessibilityAnnotations,
-} from '../use-accessibility-annotations';
+import { AccessibilityDefinition, useAccessibilityAnnotations } from '../use-accessibility-annotations';
 import { useUniqueId } from '../use-unique-id';
 
 const UseAccessibilityAnnotations = suite('useAccessibilityAnnotations');
@@ -38,85 +35,71 @@ UseAccessibilityAnnotations.after.each(() => {
   cleanup();
 });
 
-UseAccessibilityAnnotations(
-  'should return a visually hidden description element and props',
-  () => {
-    const { result } = renderHook(
-      () =>
-        useAccessibilityAnnotations({
-          key: 'testKey',
-        } as unknown as AccessibilityDefinition),
-      {
-        wrapper,
-      }
-    );
+UseAccessibilityAnnotations('should return a visually hidden description element and props', () => {
+  const { result } = renderHook(
+    () =>
+      useAccessibilityAnnotations({
+        key: 'testKey',
+      } as unknown as AccessibilityDefinition),
+    {
+      wrapper,
+    }
+  );
 
-    assert.equal(result.current.descriptionElement.type.name, 'VisuallyHidden');
-    assert.equal(result.current.descriptionElement.props, {
-      id: 'testKey_uniqueId',
-      children: 'test description',
-    });
-    assert.equal(result.current.props, {
-      'aria-label': 'test label',
-      'aria-describedby': 'testKey_uniqueId',
-    });
-  }
-);
+  assert.equal(result.current.descriptionElement.type.name, 'VisuallyHidden');
+  assert.equal(result.current.descriptionElement.props, {
+    id: 'testKey_uniqueId',
+    children: 'test description',
+  });
+  assert.equal(result.current.props, {
+    'aria-label': 'test label',
+    'aria-describedby': 'testKey_uniqueId',
+  });
+});
 
-UseAccessibilityAnnotations(
-  'should concatenate description & features texts',
-  () => {
-    const { result } = renderHook(
-      () =>
-        useAccessibilityAnnotations({
-          key: 'testKey',
-          features: [
-            'keyboard_time_series_chart',
-            'keyboard_bar_chart',
-            'keyboard_choropleth',
-          ],
-        } as unknown as AccessibilityDefinition),
-      {
-        wrapper,
-      }
-    );
+UseAccessibilityAnnotations('should concatenate description & features texts', () => {
+  const { result } = renderHook(
+    () =>
+      useAccessibilityAnnotations({
+        key: 'testKey',
+        features: ['keyboard_time_series_chart', 'keyboard_bar_chart', 'keyboard_choropleth'],
+      } as unknown as AccessibilityDefinition),
+    {
+      wrapper,
+    }
+  );
 
-    assert.equal(result.current.descriptionElement.props, {
-      id: 'testKey_uniqueId',
-      children:
-        'test description test keyboard series feature test keyboard bar feature test keyboard choropleth feature',
-    });
-  }
-);
+  assert.equal(result.current.descriptionElement.props, {
+    id: 'testKey_uniqueId',
+    children: 'test description test keyboard series feature test keyboard bar feature test keyboard choropleth feature',
+  });
+});
 
-UseAccessibilityAnnotations(
-  'should throw an error when no label or description is defined',
-  () => {
-    const { result: resultNoLabel } = renderHook(
-      () =>
-        useAccessibilityAnnotations({
-          key: 'testKeyNoLabel',
-        } as unknown as AccessibilityDefinition),
-      {
-        wrapper,
-      }
-    );
+UseAccessibilityAnnotations('should throw an error when no label or description is defined', () => {
+  const { result: resultNoLabel } = renderHook(
+    () =>
+      useAccessibilityAnnotations({
+        key: 'testKeyNoLabel',
+      } as unknown as AccessibilityDefinition),
+    {
+      wrapper,
+    }
+  );
 
-    assert.ok(resultNoLabel.error);
+  assert.ok(resultNoLabel.error);
 
-    const { result: resultNoDescription } = renderHook(
-      () =>
-        useAccessibilityAnnotations({
-          key: 'testKeyNoDescription',
-        } as unknown as AccessibilityDefinition),
-      {
-        wrapper,
-      }
-    );
+  const { result: resultNoDescription } = renderHook(
+    () =>
+      useAccessibilityAnnotations({
+        key: 'testKeyNoDescription',
+      } as unknown as AccessibilityDefinition),
+    {
+      wrapper,
+    }
+  );
 
-    assert.ok(resultNoDescription.error);
-  }
-);
+  assert.ok(resultNoDescription.error);
+});
 
 function wrapper({ children }: { children: any }) {
   const formatters = createFormatting('nl-NL', {
@@ -153,9 +136,7 @@ function wrapper({ children }: { children: any }) {
     ...formatters,
   };
 
-  return (
-    <IntlContext.Provider value={contextValue}>{children}</IntlContext.Provider>
-  );
+  return <IntlContext.Provider value={contextValue}>{children}</IntlContext.Provider>;
 }
 
 UseAccessibilityAnnotations.run();

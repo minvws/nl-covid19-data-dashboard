@@ -16,14 +16,7 @@ interface KpiTileProps {
  * A generic KPI tile which composes its value content using the children prop.
  * Description can be both plain text and html strings.
  */
-export function KpiTile({
-  title,
-  description,
-  children,
-  metadata,
-  hasNoBorder,
-  hasNoPaddingBottom,
-}: KpiTileProps) {
+export function KpiTile({ title, description, children, metadata, hasNoBorder, hasNoPaddingBottom }: KpiTileProps) {
   return (
     <Tile hasNoBorder={hasNoBorder} hasNoPaddingBottom={hasNoPaddingBottom}>
       <Box spacing={3}>

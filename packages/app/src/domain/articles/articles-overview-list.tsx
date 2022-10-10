@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
-import {
-  articleCategory,
-  ArticleCategoryType,
-} from '~/domain/topical/common/categories';
+import { articleCategory, ArticleCategoryType } from '~/domain/topical/common/categories';
 import { asResponsiveArray } from '~/style/utils';
 
 type ArticlesOverviewListProps = {
@@ -15,26 +12,16 @@ type ArticlesOverviewListProps = {
   currentCategory?: ArticleCategoryType;
 };
 
-export function ArticlesOverviewList({
-  articleSummaries,
-  currentCategory,
-}: ArticlesOverviewListProps) {
+export function ArticlesOverviewList({ articleSummaries, currentCategory }: ArticlesOverviewListProps) {
   if (!articleSummaries || articleSummaries.length === 0) {
     return null;
   }
 
   return (
-    <Box
-      display="flex"
-      alignItems="stretch"
-      margin={0}
-      maxWidth="100%"
-      flexWrap="wrap"
-    >
+    <Box display="flex" alignItems="stretch" margin={0} maxWidth="100%" flexWrap="wrap">
       {articleSummaries
         .filter(({ categories }) => {
-          if (!isDefined(categories) || currentCategory === articleCategory[0])
-            return true;
+          if (!isDefined(categories) || currentCategory === articleCategory[0]) return true;
 
           return categories.includes(currentCategory);
         })

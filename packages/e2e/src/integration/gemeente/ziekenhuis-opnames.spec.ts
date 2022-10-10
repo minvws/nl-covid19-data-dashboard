@@ -9,9 +9,7 @@ context('Gemeente - Ziekenhuis opnames', () => {
     const lastValue = this.municipalData.hospital_nice.last_value;
 
     const kpiTestInfo = {
-      admissions_on_date_of_reporting: cy.formatters.formatNumber(
-        lastValue.admissions_on_date_of_reporting
-      ),
+      admissions_on_date_of_reporting: cy.formatters.formatNumber(lastValue.admissions_on_date_of_reporting),
     };
 
     cy.checkKpiValues(kpiTestInfo);

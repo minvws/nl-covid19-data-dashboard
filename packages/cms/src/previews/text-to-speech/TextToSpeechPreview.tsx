@@ -16,9 +16,7 @@ const blocksToText = (blocks: Block<any>[], opts = {}) => {
   return blocks
     .map((block) => {
       if (block._type !== 'block' || !block.children) {
-        return options.nonTextBehavior === 'remove'
-          ? ''
-          : `[${block._type} block]`;
+        return options.nonTextBehavior === 'remove' ? '' : `[${block._type} block]`;
       }
       return block.children.map((child) => child.text).join('');
     })
@@ -47,9 +45,7 @@ class TextToSpeechPreview extends React.Component<any> {
   fieldsAvailableForUtterance = () => {
     const { fields } = this.props.options;
     const { displayed } = this.props.document;
-    return (fields || defaultFields).filter(
-      (field: string) => !!displayed[field]
-    );
+    return (fields || defaultFields).filter((field: string) => !!displayed[field]);
   };
 
   textToSpeak() {
@@ -103,44 +99,26 @@ class TextToSpeechPreview extends React.Component<any> {
 
   render() {
     if (!speechSynth) {
-      return (
-        <div className={styles.wrapper}>
-          Unfortunately your browser does not support the Web Speech API.
-        </div>
-      );
+      return <div className={styles.wrapper}>Unfortunately your browser does not support the Web Speech API.</div>;
     }
 
     const { activeField } = this.state;
 
     // DefaultSelect wants objects, let's make some of those
-    const fieldObjects = this.fieldsAvailableForUtterance().map(
-      (field: string) => ({
-        title: field,
-      })
-    );
-    const activeFieldObject = fieldObjects.find(
-      (obj: any) => obj.title === activeField
-    );
+    const fieldObjects = this.fieldsAvailableForUtterance().map((field: string) => ({
+      title: field,
+    }));
+    const activeFieldObject = fieldObjects.find((obj: any) => obj.title === activeField);
 
     if (fieldObjects) {
       return (
         <div className={styles.wrapper}>
           <div className={styles.selectionWrapper}>
-            <DefaultSelect
-              items={fieldObjects}
-              value={activeFieldObject}
-              onChange={this.handleFieldChange}
-            />
-            <DefaultButton
-              color={'primary'}
-              onClick={() => this.handleStartSpeaking()}
-            >
+            <DefaultSelect items={fieldObjects} value={activeFieldObject} onChange={this.handleFieldChange} />
+            <DefaultButton color={'primary'} onClick={() => this.handleStartSpeaking()}>
               Play
             </DefaultButton>
-            <DefaultButton
-              color={'danger'}
-              onClick={() => this.handleStopSpeaking()}
-            >
+            <DefaultButton color={'danger'} onClick={() => this.handleStopSpeaking()}>
               Stop
             </DefaultButton>
           </div>
@@ -152,8 +130,7 @@ class TextToSpeechPreview extends React.Component<any> {
 
     return (
       <div className={styles.wrapper}>
-        The <code>options</code> constant defines which fields can be uttered.
-        Make sure the current document has a value for these fields.
+        The <code>options</code> constant defines which fields can be uttered. Make sure the current document has a value for these fields.
       </div>
     );
   }

@@ -11,12 +11,7 @@ export const MetricPropertySelectInput = withDocument(
     const { type, value, onChange, document, compareValue, markers } = props;
 
     const metricProperties = useMemo(
-      () =>
-        document.area && document.metricName
-          ? ((dataStructure as any)[document.area][
-              document.metricName
-            ] as string[])
-          : undefined,
+      () => (document.area && document.metricName ? ((dataStructure as any)[document.area][document.metricName] as string[]) : undefined),
       [document.area, document.metricName]
     );
 
@@ -27,12 +22,7 @@ export const MetricPropertySelectInput = withDocument(
     return (
       <>
         {isDefined(metricProperties) ? (
-          <FormField
-            label={type.title}
-            description={type.description}
-            compareValue={compareValue}
-            markers={markers}
-          >
+          <FormField label={type.title} description={type.description} compareValue={compareValue} markers={markers}>
             <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
               <option value="" disabled hidden>
                 Selecteer een metriek waarde

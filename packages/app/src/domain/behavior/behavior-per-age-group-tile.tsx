@@ -27,49 +27,23 @@ interface BehaviorPerAgeGroupProps {
   text: Pick<SiteText['pages']['behavior_page'], 'nl' | 'shared'>;
 }
 
-export function BehaviorPerAgeGroup({
-  title,
-  description,
-  data,
-  complianceExplanation,
-  supportExplanation,
-  currentId,
-  setCurrentId,
-  text,
-}: BehaviorPerAgeGroupProps) {
+export function BehaviorPerAgeGroup({ title, description, data, complianceExplanation, supportExplanation, currentId, setCurrentId, text }: BehaviorPerAgeGroupProps) {
   const breakpoints = useBreakpoints();
 
-  const complianceValue =
-    data[`${currentId}_compliance` as keyof typeof data] || undefined;
-  const supportValue =
-    data[`${currentId}_support` as keyof typeof data] || undefined;
+  const complianceValue = data[`${currentId}_compliance` as keyof typeof data] || undefined;
+  const supportValue = data[`${currentId}_support` as keyof typeof data] || undefined;
 
-  assert(
-    typeof complianceValue !== 'number',
-    `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (complianceValue)`
-  );
-  assert(
-    typeof supportValue !== 'number',
-    `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (supportValue)`
-  );
+  assert(typeof complianceValue !== 'number', `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (complianceValue)`);
+  assert(typeof supportValue !== 'number', `[${BehaviorPerAgeGroup.name}] There is a problem by filtering the numbers out (supportValue)`);
 
-  const hasComplianceValues =
-    complianceValue &&
-    keys(complianceValue).every((key) => complianceValue[key] === null) ===
-      false;
-  const hasSupportValues =
-    supportValue &&
-    keys(supportValue).every((key) => supportValue[key] === null) === false;
+  const hasComplianceValues = complianceValue && keys(complianceValue).every((key) => complianceValue[key] === null) === false;
+  const hasSupportValues = supportValue && keys(supportValue).every((key) => supportValue[key] === null) === false;
   const dataAvailable = hasComplianceValues || hasSupportValues;
 
   return (
     <ChartTile title={title} description={description}>
       <Box spacing={4} width={breakpoints.lg ? '50%' : '100%'}>
-        <SelectBehavior
-          label={text.nl.select_behaviour_label}
-          value={currentId}
-          onChange={setCurrentId}
-        />
+        <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} />
         <Box overflow="auto">
           {dataAvailable ? (
             <Box overflow="auto">
@@ -83,9 +57,7 @@ export function BehaviorPerAgeGroup({
                     >
                       {text.shared.leeftijden.tabel.age_group}
                     </HeaderCell>
-                    <HeaderCell>
-                      {text.shared.leeftijden.tabel.recent_research}
-                    </HeaderCell>
+                    <HeaderCell>{text.shared.leeftijden.tabel.recent_research}</HeaderCell>
                   </tr>
                 </thead>
                 <tbody>
@@ -101,38 +73,15 @@ export function BehaviorPerAgeGroup({
                       <tr key={index}>
                         <Cell>{text.shared.leeftijden.tabel[age]}</Cell>
                         <Cell>
-                          {ageValueCompliance ? (
-                            <PercentageBar
-                              color={colors.blue6}
-                              amount={ageValueCompliance}
-                            />
-                          ) : (
-                            <Text>
-                              {text.shared.leeftijden.tabel.compliance_no_data}
-                            </Text>
-                          )}
-                          {ageValueSupport ? (
-                            <PercentageBar
-                              color={colors.yellow3}
-                              amount={ageValueSupport}
-                            />
-                          ) : (
-                            <Text>
-                              {text.shared.leeftijden.tabel.support_no_data}
-                            </Text>
-                          )}
+                          {ageValueCompliance ? <PercentageBar color={colors.blue6} amount={ageValueCompliance} /> : <Text>{text.shared.leeftijden.tabel.compliance_no_data}</Text>}
+                          {ageValueSupport ? <PercentageBar color={colors.yellow3} amount={ageValueSupport} /> : <Text>{text.shared.leeftijden.tabel.support_no_data}</Text>}
                         </Cell>
                       </tr>
                     );
                   })}
                 </tbody>
               </StyledTable>
-              <Box
-                display="flex"
-                flexWrap="wrap"
-                spacing={2}
-                spacingHorizontal={3}
-              >
+              <Box display="flex" flexWrap="wrap" spacing={2} spacingHorizontal={3}>
                 <Box>
                   <ExplanationBox background={colors.blue6} />
                   {complianceExplanation}
@@ -144,17 +93,8 @@ export function BehaviorPerAgeGroup({
               </Box>
             </Box>
           ) : (
-            <Box
-              display="flex"
-              alignItems="center"
-              minHeight={325}
-              maxWidth={300}
-              width="100%"
-              mx="auto"
-            >
-              <Text textAlign="center">
-                {text.shared.leeftijden.tabel.error}
-              </Text>
+            <Box display="flex" alignItems="center" minHeight={325} maxWidth={300} width="100%" mx="auto">
+              <Text textAlign="center">{text.shared.leeftijden.tabel.error}</Text>
             </Box>
           )}
         </Box>
@@ -177,12 +117,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
     <Box display="flex" alignItems="center">
       <BoldText css={css({ minWidth: 50 })}>{`${amount}%`}</BoldText>
       <Box maxWidth={100} width="100%">
-        <Box
-          width={`${amount}%`}
-          height={8}
-          backgroundColor={color}
-          css={css({ transition: 'width .3s' })}
-        />
+        <Box width={`${amount}%`} height={8} backgroundColor={color} css={css({ transition: 'width .3s' })} />
       </Box>
     </Box>
   );

@@ -21,21 +21,8 @@ type BarTrendProps = {
   id: string;
 };
 
-export function SplitBarTrend({
-  series,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  splitPoints,
-  getX,
-  getY,
-  bounds,
-  bandPadding = 0.2,
-  yScale,
-  id,
-}: BarTrendProps) {
-  const nonNullSeries = useMemo(
-    () => series.filter((x) => isPresent(x.__value)),
-    [series]
-  );
+export function SplitBarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, splitPoints, getX, getY, bounds, bandPadding = 0.2, yScale, id }: BarTrendProps) {
+  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value)), [series]);
 
   const xScale = useMemo(
     () =>
@@ -59,29 +46,14 @@ export function SplitBarTrend({
 
   return (
     <>
-      <SplitPointGradient
-        id={gradientId}
-        yScale={yScale}
-        splitPoints={splitPoints}
-      />
+      <SplitPointGradient id={gradientId} yScale={yScale} splitPoints={splitPoints} />
 
       {nonNullSeries.map((item, index) => {
         const x = getX(item) - barWidth / 2;
         const y = Math.min(zeroPosition, getY(item));
         const barHeight = Math.abs(zeroPosition - getY(item));
 
-        return (
-          <rect
-            key={index}
-            id={`${id}_${index}`}
-            x={x}
-            y={y}
-            height={barHeight}
-            width={barWidth}
-            fill={`url(#${gradientId})`}
-            opacity={fillOpacity}
-          />
-        );
+        return <rect key={index} id={`${id}_${index}`} x={x} y={y} height={barHeight} width={barWidth} fill={`url(#${gradientId})`} opacity={fillOpacity} />;
       })}
     </>
   );

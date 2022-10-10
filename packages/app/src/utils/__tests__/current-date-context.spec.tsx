@@ -20,16 +20,10 @@ UseCurrentDate.after((context) => {
 });
 
 UseCurrentDate('should return the passed date initially', () => {
-  const yesterday = endOfDayInSeconds(
-    new Date().setDate(new Date().getDate() - 1) / 1000
-  );
+  const yesterday = endOfDayInSeconds(new Date().setDate(new Date().getDate() - 1) / 1000);
 
   const { result } = renderHook(() => useCurrentDate(), {
-    wrapper: ({ children }) => (
-      <CurrentDateProvider dateInSeconds={yesterday}>
-        {children}
-      </CurrentDateProvider>
-    ),
+    wrapper: ({ children }) => <CurrentDateProvider dateInSeconds={yesterday}>{children}</CurrentDateProvider>,
   });
 
   assert.instance(result.current, Date);
@@ -37,18 +31,12 @@ UseCurrentDate('should return the passed date initially', () => {
 });
 
 UseCurrentDate('should return the current date after hydration', () => {
-  const yesterday = endOfDayInSeconds(
-    new Date().setDate(new Date().getDate() - 1) / 1000
-  );
+  const yesterday = endOfDayInSeconds(new Date().setDate(new Date().getDate() - 1) / 1000);
 
   const now = endOfDayInSeconds(Date.now() / 1000);
 
   const { result, hydrate } = renderHook(() => useCurrentDate(), {
-    wrapper: ({ children }) => (
-      <CurrentDateProvider dateInSeconds={yesterday}>
-        {children}
-      </CurrentDateProvider>
-    ),
+    wrapper: ({ children }) => <CurrentDateProvider dateInSeconds={yesterday}>{children}</CurrentDateProvider>,
   });
 
   assert.instance(result.current, Date);
@@ -60,12 +48,9 @@ UseCurrentDate('should return the current date after hydration', () => {
   assert.equal(result.current, new Date(now * 1000));
 });
 
-UseCurrentDate(
-  'should throw when CurrentDateProvider is not in the tree',
-  () => {
-    const { result } = renderHook(() => useCurrentDate());
-    assert.throws(() => result.current, 'CurrentDateContext is not available');
-  }
-);
+UseCurrentDate('should throw when CurrentDateProvider is not in the tree', () => {
+  const { result } = renderHook(() => useCurrentDate());
+  assert.throws(() => result.current, 'CurrentDateContext is not available');
+});
 
 UseCurrentDate.run();

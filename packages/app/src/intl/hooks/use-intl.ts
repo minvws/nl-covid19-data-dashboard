@@ -30,23 +30,14 @@ const localeLanguageTagMap: Record<LanguageKey, string> = {
   en: 'en-GB',
 };
 
-export function useIntlHelperContext(
-  locale: LanguageKey,
-  commonTexts: SiteText['common'],
-  dataset: Dataset
-) {
+export function useIntlHelperContext(locale: LanguageKey, commonTexts: SiteText['common'], dataset: Dataset) {
   return useMemo(() => {
     const languageTag = localeLanguageTagMap[locale];
 
-    const {
-      formatNumber,
-      formatPercentage,
-      formatDate,
-      formatDateFromSeconds,
-      formatDateFromMilliseconds,
-      formatRelativeDate,
-      formatDateSpan,
-    } = createFormatting(languageTag, commonTexts.utils);
+    const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = createFormatting(
+      languageTag,
+      commonTexts.utils
+    );
 
     return {
       dataset,

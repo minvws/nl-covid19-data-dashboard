@@ -7,10 +7,7 @@ import { RefObject, useEffect, useRef } from 'react';
  * @param refs
  * @param handler
  */
-export function useOnClickOutside<T extends RefObject<Element>>(
-  refs: T[],
-  handler: (event: MouseEvent | TouchEvent) => void
-) {
+export function useOnClickOutside<T extends RefObject<Element>>(refs: T[], handler: (event: MouseEvent | TouchEvent) => void) {
   const handlerRef = useRef(handler);
   handlerRef.current = handler;
 

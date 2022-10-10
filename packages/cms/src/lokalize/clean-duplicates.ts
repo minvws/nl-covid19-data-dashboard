@@ -47,20 +47,15 @@ const cli = meow(
   const dataset = cli.flags.dataset;
   const sanityClient = getClient(dataset);
 
-  const texts = await sanityClient.fetch<LokalizeText[]>(
-    "*[_type == 'lokalizeText' && !(_id in path('drafts.**'))]{_id, key, text}"
-  );
+  const texts = await sanityClient.fetch<LokalizeText[]>("*[_type == 'lokalizeText' && !(_id in path('drafts.**'))]{_id, key, text}");
 
-  const duplicates = texts.reduce<Record<string, LokalizeText[]>>(
-    (aggr: any, text: any) => {
-      if (!aggr[text.key]) {
-        aggr[text.key] = [];
-      }
-      aggr[text.key].push(text);
-      return aggr;
-    },
-    {} as Record<string, LokalizeText[]>
-  );
+  const duplicates = texts.reduce<Record<string, LokalizeText[]>>((aggr: any, text: any) => {
+    if (!aggr[text.key]) {
+      aggr[text.key] = [];
+    }
+    aggr[text.key].push(text);
+    return aggr;
+  }, {} as Record<string, LokalizeText[]>);
 
   Object.keys(duplicates).forEach((key) => {
     if (duplicates[key].length < 2) {
@@ -93,19 +88,14 @@ const cli = meow(
     onState,
   })) as { keys: typeof choices[number]['value'][] };
 
-  const completeDeletions = findCompleteDeletions(
-    duplicateResponse.keys,
-    duplicates
-  );
+  const completeDeletions = findCompleteDeletions(duplicateResponse.keys, duplicates);
 
   if (completeDeletions.size > 0) {
     const response = await prompts([
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message: `The following keys will be deleted completely (all documents were selected): ${Array.from(
-          completeDeletions
-        ).join(', ')}.\nAre you sure?`,
+        message: `The following keys will be deleted completely (all documents were selected): ${Array.from(completeDeletions).join(', ')}.\nAre you sure?`,
         initial: false,
       },
     ]);
@@ -115,9 +105,7 @@ const cli = meow(
     }
   }
 
-  await Promise.all(
-    duplicateResponse.keys.map((x) => sanityClient.delete(x._id))
-  );
+  await Promise.all(duplicateResponse.keys.map((x) => sanityClient.delete(x._id)));
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);
@@ -136,13 +124,8 @@ function onState(state: { aborted: boolean }) {
   }
 }
 
-function findCompleteDeletions(
-  responseTexts: LokalizeText[],
-  duplicates: Record<string, LokalizeText[]>
-) {
-  const responseDuplicates = responseTexts.reduce<
-    Record<string, LokalizeText[]>
-  >((aggr: any, text: any) => {
+function findCompleteDeletions(responseTexts: LokalizeText[], duplicates: Record<string, LokalizeText[]>) {
+  const responseDuplicates = responseTexts.reduce<Record<string, LokalizeText[]>>((aggr: any, text: any) => {
     if (!aggr[text.key]) {
       aggr[text.key] = [];
     }

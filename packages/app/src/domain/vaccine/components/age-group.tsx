@@ -9,12 +9,7 @@ interface AgeGroupProps {
   text: string;
 }
 
-export function AgeGroup({
-  range,
-  ageGroupTotal,
-  birthyear_range,
-  text,
-}: AgeGroupProps) {
+export function AgeGroup({ range, ageGroupTotal, birthyear_range, text }: AgeGroupProps) {
   const { formatNumber } = useIntl();
 
   const totalText = replaceVariablesInText(text, {
@@ -24,9 +19,7 @@ export function AgeGroup({
   return (
     <Box display="flex" flexDirection="column">
       <BoldText>{range}</BoldText>
-      <InlineText variant="label1">
-        {`${birthyear_range}${ageGroupTotal ? `: ${totalText}` : ''}`}
-      </InlineText>
+      <InlineText variant="label1">{`${birthyear_range}${ageGroupTotal ? `: ${totalText}` : ''}`}</InlineText>
     </Box>
   );
 }

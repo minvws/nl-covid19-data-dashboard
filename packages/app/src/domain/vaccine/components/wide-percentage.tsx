@@ -9,11 +9,7 @@ interface PercentageWideNumberProps {
   justifyContent: string;
 }
 
-export function WidePercentage({
-  value,
-  color,
-  justifyContent,
-}: PercentageWideNumberProps) {
+export function WidePercentage({ value, color, justifyContent }: PercentageWideNumberProps) {
   return (
     <InlineText
       variant="body2"
@@ -25,13 +21,7 @@ export function WidePercentage({
         pr: asResponsiveArray({ _: 3, xl: 4 }),
       })}
     >
-      <Box
-        width={10}
-        height={10}
-        backgroundColor={color}
-        borderRadius="50%"
-        mr={2}
-      />
+      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" mr={2} />
       {value}
     </InlineText>
   );

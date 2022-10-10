@@ -8,16 +8,8 @@ const isTouchDeviceContext = createContext(false);
  * if the current device supports a touch interface
  *
  */
-export function IsTouchDeviceContextProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return (
-    <isTouchDeviceContext.Provider value={isTouchDevice()}>
-      {children}
-    </isTouchDeviceContext.Provider>
-  );
+export function IsTouchDeviceContextProvider({ children }: { children: ReactNode }) {
+  return <isTouchDeviceContext.Provider value={isTouchDevice()}>{children}</isTouchDeviceContext.Provider>;
 }
 
 /**

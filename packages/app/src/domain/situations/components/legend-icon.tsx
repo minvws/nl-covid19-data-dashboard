@@ -2,13 +2,7 @@ import css from '@styled-system/css';
 import { Children, cloneElement } from 'react';
 import { Box } from '~/components/base';
 
-export function LegendIcon({
-  color,
-  children,
-}: {
-  color: string;
-  children: JSX.Element;
-}) {
+export function LegendIcon({ color, children }: { color: string; children: JSX.Element }) {
   return (
     <Box
       css={css({

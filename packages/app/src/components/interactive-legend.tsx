@@ -22,13 +22,7 @@ interface InteractiveLegendProps<T = string> {
   onReset?: () => void;
 }
 
-export function InteractiveLegend<T = string>({
-  helpText,
-  selectOptions,
-  selection,
-  onToggleItem,
-  onReset,
-}: InteractiveLegendProps<T>) {
+export function InteractiveLegend<T = string>({ helpText, selectOptions, selection, onToggleItem, onReset }: InteractiveLegendProps<T>) {
   const { commonTexts } = useIntl();
 
   const hasSelection = selection.length !== 0;
@@ -42,19 +36,12 @@ export function InteractiveLegend<T = string>({
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
-                <StyledLabel
-                  htmlFor={`checkboxgroup-${item.label}`}
-                  isActive={hasSelection && isSelected}
-                  borderColor={item.color}
-                  data-text={item.label}
-                >
+                <StyledLabel htmlFor={`checkboxgroup-${item.label}`} isActive={hasSelection && isSelected} borderColor={item.color} data-text={item.label}>
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
                   {item.shape === 'square' && <Square color={item.color} />}
-                  {item.shape === 'gapped-area' && (
-                    <GappedArea color={item.color} />
-                  )}
+                  {item.shape === 'gapped-area' && <GappedArea color={item.color} />}
                 </StyledLabel>
                 <StyledInput
                   type="checkbox"
@@ -124,9 +111,7 @@ const StyledLabel = styled.label<{
     pl: 33,
     py: 1,
     borderRadius: '5px',
-    boxShadow: `inset 0px 0px 0px ${
-      isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`
-    }`,
+    boxShadow: `inset 0px 0px 0px ${isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`}`,
     fontWeight: 'normal',
     fontFamily: 'inherit',
     fontSize: 1,

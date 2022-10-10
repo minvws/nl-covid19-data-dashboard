@@ -9,17 +9,7 @@ const createPatchFrom = (value: string) => {
   return PatchEvent.from(value === '' ? unset() : set(value));
 };
 
-const lineTypes = [
-  'line',
-  'gapped-line',
-  'area',
-  'bar',
-  'range',
-  'stacked-area',
-  'gapped-stacked-area',
-  'gapped-area',
-  'invisible',
-];
+const lineTypes = ['line', 'gapped-line', 'area', 'bar', 'range', 'stacked-area', 'gapped-stacked-area', 'gapped-area', 'invisible'];
 
 export const LineTypeSelectInput = withDocument(
   forwardRef((props: any, ref: any) => {
@@ -38,12 +28,7 @@ export const LineTypeSelectInput = withDocument(
     };
 
     return (
-      <FormField
-        compareValue={compareValue}
-        label={type.title}
-        description={type.description}
-        markers={markers}
-      >
+      <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
         <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
           <option value="" disabled hidden>
             Selecteer een lijn type

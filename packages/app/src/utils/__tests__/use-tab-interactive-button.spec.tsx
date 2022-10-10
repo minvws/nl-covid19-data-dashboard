@@ -18,48 +18,40 @@ UseTabInteractiveButton.after.each(() => {
   cleanup();
 });
 
-UseTabInteractiveButton(
-  'should render the button and set isTabInteractive after click',
-  (context) => {
-    function TestCase() {
-      const { tabInteractiveButton, isTabInteractive } =
-        useTabInteractiveButton('test');
-      context.isTabInteractive = isTabInteractive;
-      return <>{tabInteractiveButton}</>;
-    }
-
-    const result = render(<TestCase />);
-
-    assert.equal(context.isTabInteractive, false);
-
-    fireEvent.click(result.getByText('test'));
-
-    assert.equal(context.isTabInteractive, true);
+UseTabInteractiveButton('should render the button and set isTabInteractive after click', (context) => {
+  function TestCase() {
+    const { tabInteractiveButton, isTabInteractive } = useTabInteractiveButton('test');
+    context.isTabInteractive = isTabInteractive;
+    return <>{tabInteractiveButton}</>;
   }
-);
 
-UseTabInteractiveButton(
-  'should set isTabInteractive to false after blur',
-  async (context) => {
-    function TestCase() {
-      const { tabInteractiveButton, isTabInteractive } =
-        useTabInteractiveButton('test');
-      context.isTabInteractive = isTabInteractive;
-      return <>{tabInteractiveButton}</>;
-    }
+  const result = render(<TestCase />);
 
-    const result = render(<TestCase />);
+  assert.equal(context.isTabInteractive, false);
 
-    fireEvent.click(result.getByText('test'));
+  fireEvent.click(result.getByText('test'));
 
-    assert.equal(context.isTabInteractive, true);
+  assert.equal(context.isTabInteractive, true);
+});
 
-    fireEvent.blur(result.getByText('test'));
-
-    await new Promise((resolve) => setTimeout(resolve, 10));
-
-    assert.equal(context.isTabInteractive, false);
+UseTabInteractiveButton('should set isTabInteractive to false after blur', async (context) => {
+  function TestCase() {
+    const { tabInteractiveButton, isTabInteractive } = useTabInteractiveButton('test');
+    context.isTabInteractive = isTabInteractive;
+    return <>{tabInteractiveButton}</>;
   }
-);
+
+  const result = render(<TestCase />);
+
+  fireEvent.click(result.getByText('test'));
+
+  assert.equal(context.isTabInteractive, true);
+
+  fireEvent.blur(result.getByText('test'));
+
+  await new Promise((resolve) => setTimeout(resolve, 10));
+
+  assert.equal(context.isTabInteractive, false);
+});
 
 UseTabInteractiveButton.run();

@@ -22,27 +22,13 @@ export type ProjectedGeoInfo = {
  * and their corresponding cartesian coordinates tuples which can be used to draw onto a canvas.
  *
  */
-export function useProjectedCoordinates(
-  geoJson: CodedGeoJSON | undefined,
-  geoProjection: () => GeoProjection,
-  fitExtent: FitExtent
-) {
-  return useMemo(
-    () => getProjectedCoordinates(geoJson, geoProjection, fitExtent),
-    [geoJson, fitExtent, geoProjection]
-  );
+export function useProjectedCoordinates(geoJson: CodedGeoJSON | undefined, geoProjection: () => GeoProjection, fitExtent: FitExtent) {
+  return useMemo(() => getProjectedCoordinates(geoJson, geoProjection, fitExtent), [geoJson, fitExtent, geoProjection]);
 }
 
-export function getProjectedCoordinates(
-  geoJson: CodedGeoJSON | undefined,
-  geoProjection: () => GeoProjection,
-  fitExtent: FitExtent
-) {
+export function getProjectedCoordinates(geoJson: CodedGeoJSON | undefined, geoProjection: () => GeoProjection, fitExtent: FitExtent) {
   if (!isDefined(geoJson)) {
-    return [
-      [] as ProjectedGeoInfo[],
-      {} as Record<string, [number, number][][]>,
-    ] as const;
+    return [[] as ProjectedGeoInfo[], {} as Record<string, [number, number][][]>] as const;
   }
 
   /**
@@ -101,9 +87,7 @@ export function getProjectedCoordinates(
    */
   const projectedCoordinates = geoInfo
     .map((x) => x.geometry.coordinates.flat())
-    .map<[number, number][]>(
-      (c) => cleanCoords(multiPoint(c)).geometry.coordinates
-    )
+    .map<[number, number][]>((c) => cleanCoords(multiPoint(c)).geometry.coordinates)
     .map<[number, number][]>((coords) =>
       coords
         .map((c: [number, number]) => projection(c))

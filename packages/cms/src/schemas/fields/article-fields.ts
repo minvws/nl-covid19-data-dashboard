@@ -1,8 +1,5 @@
 import { Rule } from '~/sanity';
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../language/locale-validation';
+import { localeStringValidation, localeValidation } from '../../language/locale-validation';
 
 export const ARTICLE_FIELDS = [
   {
@@ -62,8 +59,7 @@ export const ARTICLE_FIELDS = [
   },
   {
     title: 'Samenvatting',
-    description:
-      'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina. Maximaal 120 karakters toegestaan.',
+    description: 'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina. Maximaal 120 karakters toegestaan.',
     name: 'summary',
     type: 'localeText',
     validation: localeValidation((rule) => rule.required().max(120)),

@@ -26,14 +26,8 @@ export type ChoroplethFeatures = {
  * @param selectedCode An optional selected code, this will be used to determine the bounding box
  * @returns The GEOJson data
  */
-export function useChoroplethFeatures<T extends ChoroplethDataItem>(
-  map: MapType,
-  data: T[],
-  selectedCode?: string
-): ChoroplethFeatures | undefined {
-  const { data: geoJson } = useSWRImmutable<
-    readonly [CodedGeoJSON, CodedGeoJSON | undefined]
-  >(`/api/topo-json/${map}`, (url: string) =>
+export function useChoroplethFeatures<T extends ChoroplethDataItem>(map: MapType, data: T[], selectedCode?: string): ChoroplethFeatures | undefined {
+  const { data: geoJson } = useSWRImmutable<readonly [CodedGeoJSON, CodedGeoJSON | undefined]>(`/api/topo-json/${map}`, (url: string) =>
     fetch(url)
       .then((_) => _.json())
       .then((_) => createGeoJson(map, _))
@@ -48,24 +42,13 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   }, [map, selectedCode, data, geoJson]);
 }
 
-export function getChoroplethFeatures<T extends ChoroplethDataItem>(
-  map: MapType,
-  data: T[],
-  geoJson: readonly [CodedGeoJSON, CodedGeoJSON | undefined],
-  selectedCode?: string
-) {
+export function getChoroplethFeatures<T extends ChoroplethDataItem>(map: MapType, data: T[], geoJson: readonly [CodedGeoJSON, CodedGeoJSON | undefined], selectedCode?: string) {
   const [featureGeo, outlineGeo] = geoJson;
 
   switch (map) {
     case 'gm': {
-      assert(
-        isDefined(outlineGeo),
-        `[${getChoroplethFeatures.name}] outlineGeo is required for map type gm`
-      );
-      const surroundingGeo = filterSurroundingFeaturesBySelectedGmCode(
-        featureGeo,
-        selectedCode
-      );
+      assert(isDefined(outlineGeo), `[${getChoroplethFeatures.name}] outlineGeo is required for map type gm`);
+      const surroundingGeo = filterSurroundingFeaturesBySelectedGmCode(featureGeo, selectedCode);
       const hoverGeo = filterVrBySelectedGmCode(featureGeo, selectedCode);
       return {
         outline: outlineGeo,
@@ -75,10 +58,7 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
       };
     }
     case 'vr': {
-      assert(
-        isDefined(outlineGeo),
-        `[${getChoroplethFeatures.name}] outlineGeo is required for map type vr`
-      );
+      assert(isDefined(outlineGeo), `[${getChoroplethFeatures.name}] outlineGeo is required for map type vr`);
       return {
         outline: outlineGeo,
         hover: featureGeo,
@@ -89,70 +69,42 @@ export function getChoroplethFeatures<T extends ChoroplethDataItem>(
   }
 }
 
-function filterSurroundingFeaturesBySelectedGmCode(
-  geoJson: CodedGeoJSON,
-  selectedGmCode?: string
-) {
+function filterSurroundingFeaturesBySelectedGmCode(geoJson: CodedGeoJSON, selectedGmCode?: string) {
   if (!isDefined(selectedGmCode)) {
     return geoJson;
   }
-  assert(
-    selectedGmCode.startsWith('GM'),
-    `[${filterSurroundingFeaturesBySelectedGmCode.name}] gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
-  );
+  assert(selectedGmCode.startsWith('GM'), `[${filterSurroundingFeaturesBySelectedGmCode.name}] gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`);
 
   const vrInfo = getVrForMunicipalityCode(selectedGmCode);
-  assert(
-    vrInfo,
-    `[${filterSurroundingFeaturesBySelectedGmCode.name}] No VR found for GM code ${selectedGmCode}`
-  );
+  assert(vrInfo, `[${filterSurroundingFeaturesBySelectedGmCode.name}] No VR found for GM code ${selectedGmCode}`);
 
   const viewBoxMunicipalCodes = vrBoundingBoxGmCodes[vrInfo.code];
 
   return {
     ...geoJson,
-    features: geoJson.features.filter((x) =>
-      viewBoxMunicipalCodes.includes(x.properties.code)
-    ),
+    features: geoJson.features.filter((x) => viewBoxMunicipalCodes.includes(x.properties.code)),
   };
 }
 
-function filterVrBySelectedGmCode(
-  geoJson: CodedGeoJSON,
-  selectedGmCode?: string
-) {
+function filterVrBySelectedGmCode(geoJson: CodedGeoJSON, selectedGmCode?: string) {
   if (!isDefined(selectedGmCode)) {
     return geoJson;
   }
-  assert(
-    selectedGmCode.startsWith('GM'),
-    `[${filterVrBySelectedGmCode.name}] gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
-  );
+  assert(selectedGmCode.startsWith('GM'), `[${filterVrBySelectedGmCode.name}] gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`);
 
   const gmCodes = getVrGmCodesForGmCode(selectedGmCode);
-  assert(
-    isDefined(gmCodes),
-    `[${filterVrBySelectedGmCode.name}] No associated municipal codes found for ${selectedGmCode}`
-  );
+  assert(isDefined(gmCodes), `[${filterVrBySelectedGmCode.name}] No associated municipal codes found for ${selectedGmCode}`);
 
   return {
     ...geoJson,
-    features: geoJson.features.filter((x) =>
-      gmCodes.includes(x.properties.code)
-    ),
+    features: geoJson.features.filter((x) => gmCodes.includes(x.properties.code)),
   };
 }
 
 function createGeoJson(map: MapType, topoJson: any) {
-  const outlineGeo = topojsonFeature(
-    topoJson,
-    topoJson.objects.nl_features
-  ) as CodedGeoJSON;
+  const outlineGeo = topojsonFeature(topoJson, topoJson.objects.nl_features) as CodedGeoJSON;
 
-  const featureGeo = topojsonFeature(
-    topoJson,
-    topoJson.objects[`${map}_features`]
-  ) as CodedGeoJSON;
+  const featureGeo = topojsonFeature(topoJson, topoJson.objects[`${map}_features`]) as CodedGeoJSON;
 
   return [featureGeo, outlineGeo] as const;
 }

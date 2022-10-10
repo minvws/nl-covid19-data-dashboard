@@ -1,8 +1,4 @@
-import {
-  colors,
-  isDateSpanValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { colors, isDateSpanValue, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
@@ -22,11 +18,7 @@ interface DateLineMarkerProps<T extends TimestampedValue> {
   value: T;
 }
 
-export function DateLineMarker<T extends TimestampedValue>({
-  lineColor = colors.primary,
-  point,
-  value,
-}: DateLineMarkerProps<T>) {
+export function DateLineMarker<T extends TimestampedValue>({ lineColor = colors.primary, point, value }: DateLineMarkerProps<T>) {
   const { formatDateFromSeconds } = useIntl();
   return (
     <Container style={{ transform: `translateX(${point.x}px)` }}>

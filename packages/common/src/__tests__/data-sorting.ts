@@ -6,122 +6,101 @@ const SortTimeSeriesInDataInPlace = suite('sortTimeSeriesInDataInPlace');
 
 // Testing to make sure the test data and sorted test data are not referencing the
 // same array of values causing the starting time series data to get sorted as well
-SortTimeSeriesInDataInPlace(
-  'sorted values in test data should not match starting values',
-  () => {
-    assert.not.equal(dateSeriesValues, sortedData.dateSeries.values);
-    assert.not.equal(dateSpanSeriesValues, sortedData.dateSpanSeries.values);
-  }
-);
+SortTimeSeriesInDataInPlace('sorted values in test data should not match starting values', () => {
+  assert.not.equal(dateSeriesValues, sortedData.dateSeries.values);
+  assert.not.equal(dateSpanSeriesValues, sortedData.dateSpanSeries.values);
+});
 
-SortTimeSeriesInDataInPlace(
-  'should sort valid date and date span series data when all required fields are available',
-  () => {
-    const testData = {
-      ...filler,
-      dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
-      dateSpanSeries: {
-        ...dateSpanSeriesRest,
-        values: [...dateSpanSeriesValues],
-      },
-    };
-
-    // Date series values should begin the same
-    assert.equal(dateSeriesValues, testData.dateSeries.values);
-    assert.equal(dateSpanSeriesValues, testData.dateSpanSeries.values);
-
-    // Sorting in place
-    sortTimeSeriesInDataInPlace(testData);
-    assert.equal(sortedData, testData);
-
-    // Sorted series values should not equal the original date series values
-    // Testing to make sure they are not referencing the same array of values
-    assert.not.equal(dateSeriesValues, testData.dateSeries.values);
-    assert.not.equal(dateSpanSeriesValues, testData.dateSpanSeries.values);
-  }
-);
-
-SortTimeSeriesInDataInPlace(
-  'should throw an error when there are no date_unix in a date series',
-  () => {
-    const invalidDateSeries = {
-      ...dateSeriesRest,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      values: [...dateSeriesValues].map(({ date_unix, ...rest }) => ({
-        ...rest,
-      })),
-    };
-
-    const invalidTestData = {
-      ...filler,
-      dateSeries: invalidDateSeries,
-      dateSpanSeries: {
-        ...dateSpanSeriesRest,
-        values: [...dateSpanSeriesValues],
-      },
-    };
-
-    // Date series values should be different
-    assert.not.equal(dateSeriesValues, invalidTestData.dateSeries.values);
-
-    // Sorting in place
-    assert.throws(() => sortTimeSeriesInDataInPlace(invalidTestData));
-  }
-);
-
-SortTimeSeriesInDataInPlace(
-  'should throw an error when there are no date_end_unix in a date span series',
-  () => {
-    const invalidDateSpanSeries = {
+SortTimeSeriesInDataInPlace('should sort valid date and date span series data when all required fields are available', () => {
+  const testData = {
+    ...filler,
+    dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
+    dateSpanSeries: {
       ...dateSpanSeriesRest,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      values: [...dateSpanSeriesValues].map(({ date_end_unix, ...rest }) => ({
-        ...rest,
-      })),
-    };
-    const invalidTestData = {
-      ...filler,
-      dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
-      dateSpanSeries: invalidDateSpanSeries,
-    };
+      values: [...dateSpanSeriesValues],
+    },
+  };
 
-    // Date span series values should be different
-    assert.not.equal(
-      dateSpanSeriesValues,
-      invalidTestData.dateSpanSeries.values
-    );
+  // Date series values should begin the same
+  assert.equal(dateSeriesValues, testData.dateSeries.values);
+  assert.equal(dateSpanSeriesValues, testData.dateSpanSeries.values);
 
-    // Sorting in place
-    assert.throws(() => sortTimeSeriesInDataInPlace(invalidTestData));
-  }
-);
+  // Sorting in place
+  sortTimeSeriesInDataInPlace(testData);
+  assert.equal(sortedData, testData);
 
-SortTimeSeriesInDataInPlace(
-  'should throw an error when there are no date_start_unix in a date span series',
-  () => {
-    const invalidDateSpanSeries = {
+  // Sorted series values should not equal the original date series values
+  // Testing to make sure they are not referencing the same array of values
+  assert.not.equal(dateSeriesValues, testData.dateSeries.values);
+  assert.not.equal(dateSpanSeriesValues, testData.dateSpanSeries.values);
+});
+
+SortTimeSeriesInDataInPlace('should throw an error when there are no date_unix in a date series', () => {
+  const invalidDateSeries = {
+    ...dateSeriesRest,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    values: [...dateSeriesValues].map(({ date_unix, ...rest }) => ({
+      ...rest,
+    })),
+  };
+
+  const invalidTestData = {
+    ...filler,
+    dateSeries: invalidDateSeries,
+    dateSpanSeries: {
       ...dateSpanSeriesRest,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      values: [...dateSpanSeriesValues].map(({ date_start_unix, ...rest }) => ({
-        ...rest,
-      })),
-    };
-    const invalidTestData = {
-      ...filler,
-      dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
-      dateSpanSeries: invalidDateSpanSeries,
-    };
+      values: [...dateSpanSeriesValues],
+    },
+  };
 
-    // Date span series values should be different
-    assert.not.equal(
-      dateSpanSeriesValues,
-      invalidTestData.dateSpanSeries.values
-    );
+  // Date series values should be different
+  assert.not.equal(dateSeriesValues, invalidTestData.dateSeries.values);
 
-    // Sorting in place
-    assert.throws(() => sortTimeSeriesInDataInPlace(invalidTestData));
-  }
-);
+  // Sorting in place
+  assert.throws(() => sortTimeSeriesInDataInPlace(invalidTestData));
+});
+
+SortTimeSeriesInDataInPlace('should throw an error when there are no date_end_unix in a date span series', () => {
+  const invalidDateSpanSeries = {
+    ...dateSpanSeriesRest,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    values: [...dateSpanSeriesValues].map(({ date_end_unix, ...rest }) => ({
+      ...rest,
+    })),
+  };
+  const invalidTestData = {
+    ...filler,
+    dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
+    dateSpanSeries: invalidDateSpanSeries,
+  };
+
+  // Date span series values should be different
+  assert.not.equal(dateSpanSeriesValues, invalidTestData.dateSpanSeries.values);
+
+  // Sorting in place
+  assert.throws(() => sortTimeSeriesInDataInPlace(invalidTestData));
+});
+
+SortTimeSeriesInDataInPlace('should throw an error when there are no date_start_unix in a date span series', () => {
+  const invalidDateSpanSeries = {
+    ...dateSpanSeriesRest,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    values: [...dateSpanSeriesValues].map(({ date_start_unix, ...rest }) => ({
+      ...rest,
+    })),
+  };
+  const invalidTestData = {
+    ...filler,
+    dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
+    dateSpanSeries: invalidDateSpanSeries,
+  };
+
+  // Date span series values should be different
+  assert.not.equal(dateSpanSeriesValues, invalidTestData.dateSpanSeries.values);
+
+  // Sorting in place
+  assert.throws(() => sortTimeSeriesInDataInPlace(invalidTestData));
+});
 
 SortTimeSeriesInDataInPlace.run();
 
@@ -213,8 +192,6 @@ const sortedData = {
   },
   dateSpanSeries: {
     ...dateSpanSeriesRest,
-    values: [...dateSpanSeriesValues].sort(
-      (a, b) => a.date_end_unix - b.date_end_unix
-    ),
+    values: [...dateSpanSeriesValues].sort((a, b) => a.date_end_unix - b.date_end_unix),
   },
 };

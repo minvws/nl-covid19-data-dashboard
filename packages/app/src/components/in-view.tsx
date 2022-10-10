@@ -7,11 +7,7 @@ interface InViewProps {
   triggerOnce?: boolean;
 }
 
-export function InView({
-  rootMargin,
-  children,
-  triggerOnce = true,
-}: InViewProps) {
+export function InView({ rootMargin, children, triggerOnce = true }: InViewProps) {
   const ref = useRef(null);
   const viewState = useViewState(ref, rootMargin);
   const hasChanged = useRef(viewState === 'inView');
@@ -24,10 +20,5 @@ export function InView({
     }
   }, [isInView]);
 
-  return (
-    <div ref={ref}>
-      {(isInView || (triggerOnce && hasChanged.current) || alwaysShow) &&
-        children}
-    </div>
-  );
+  return <div ref={ref}>{(isInView || (triggerOnce && hasChanged.current) || alwaysShow) && children}</div>;
 }

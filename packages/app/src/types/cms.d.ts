@@ -47,11 +47,7 @@ export type RichTextParts = {
   text: RichContentBlock[];
 } & PageBasePart;
 
-export type PagePart =
-  | ArticleParts
-  | LinkParts
-  | HighlightedItemParts
-  | RichTextParts;
+export type PagePart = ArticleParts | LinkParts | HighlightedItemParts | RichTextParts;
 
 export type PagePartQueryResult<T extends PagePart = PagePart> = {
   pageParts: T[];

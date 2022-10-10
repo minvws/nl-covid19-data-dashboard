@@ -12,8 +12,7 @@ export const PAGE_IDENTIFIER_REFERENCE_FIELDSET = {
 
 export const PAGE_IDENTIFIER_REFERENCE_FIELDS = [
   {
-    title:
-      'Menu titel (This value is only used in the Sanity UI, not anywhere on the dashboard)',
+    title: 'Menu titel (This value is only used in the Sanity UI, not anywhere on the dashboard)',
     name: 'title',
     type: 'string',
     hidden: whenNotAdministrator,

@@ -1,18 +1,10 @@
-import {
-  colors,
-  getValuesInTimeframe,
-  NlVaccineStockValue,
-  TimeframeOption,
-} from '@corona-dashboard/common';
+import { colors, getValuesInTimeframe, NlVaccineStockValue, TimeframeOption } from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import {
-  InteractiveLegend,
-  SelectOption,
-} from '~/components/interactive-legend';
+import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { SiteText } from '~/locale';
 import { useCurrentDate } from '~/utils/current-date-context';
@@ -23,21 +15,14 @@ interface VaccineStockPerSupplierChartProps {
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
-export function VaccineStockPerSupplierChart({
-  values,
-  text,
-}: VaccineStockPerSupplierChartProps) {
+export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSupplierChartProps) {
   const productNames = text.data.vaccination_chart.product_names;
 
   const today = useCurrentDate();
   const maximumValuesPerTimeframeOption = useMemo(
     () =>
       ({
-        all: getMaximumPropertyValueInTimeframe(
-          values,
-          TimeframeOption.ALL,
-          today
-        ),
+        all: getMaximumPropertyValueInTimeframe(values, TimeframeOption.ALL, today),
       } as Record<TimeframeOption, number>),
     [values, today]
   );
@@ -72,20 +57,15 @@ export function VaccineStockPerSupplierChart({
   const allOptions = optionsConfig.map((x) => x.metricProperty);
   const [selected, setSelected] = useState<string>(allOptions[0]);
 
-  const selectedConfig =
-    optionsConfig.find((x) => x.metricProperty === selected) ??
-    optionsConfig[0];
+  const selectedConfig = optionsConfig.find((x) => x.metricProperty === selected) ?? optionsConfig[0];
 
   const seriesConfig: SeriesConfig<NlVaccineStockValue> = [
     {
       type: 'area',
       metricProperty: `${selected}_available` as keyof NlVaccineStockValue,
-      label: replaceVariablesInText(
-        text.stock_per_supplier_chart.legend.available,
-        {
-          vaccineName: selectedConfig.label,
-        }
-      ),
+      label: replaceVariablesInText(text.stock_per_supplier_chart.legend.available, {
+        vaccineName: selectedConfig.label,
+      }),
       shortLabel: text.stock_per_supplier_chart.tooltip_labels.available,
       color: selectedConfig.color,
       curve: 'step',
@@ -93,12 +73,9 @@ export function VaccineStockPerSupplierChart({
     {
       type: 'line',
       metricProperty: `${selected}_total` as keyof NlVaccineStockValue,
-      label: replaceVariablesInText(
-        text.stock_per_supplier_chart.legend.total,
-        {
-          vaccineName: selectedConfig.label,
-        }
-      ),
+      label: replaceVariablesInText(text.stock_per_supplier_chart.legend.total, {
+        vaccineName: selectedConfig.label,
+      }),
       shortLabel: text.stock_per_supplier_chart.tooltip_labels.total,
       color: colors.gray2,
       curve: 'step',
@@ -113,12 +90,7 @@ export function VaccineStockPerSupplierChart({
         source: text.bronnen.rivm,
       }}
     >
-      <InteractiveLegend
-        helpText={text.stock_per_supplier_chart.select_help_text}
-        selectOptions={optionsConfig}
-        selection={[selected]}
-        onToggleItem={setSelected}
-      />
+      <InteractiveLegend helpText={text.stock_per_supplier_chart.select_help_text} selectOptions={optionsConfig} selection={[selected]} onToggleItem={setSelected} />
 
       <Spacer mb={2} />
 
@@ -138,25 +110,11 @@ export function VaccineStockPerSupplierChart({
   );
 }
 
-function getMaximumPropertyValueInTimeframe(
-  values: NlVaccineStockValue[],
-  timeframe: TimeframeOption,
-  today: Date
-) {
+function getMaximumPropertyValueInTimeframe(values: NlVaccineStockValue[], timeframe: TimeframeOption, today: Date) {
   const valuesInTimeframe = getValuesInTimeframe(values, timeframe, today);
 
   return valuesInTimeframe.reduce(
-    (acc, value) =>
-      Math.max(
-        acc,
-        ...Object.values(
-          pick(value, [
-            'bio_n_tech_pfizer_total',
-            'moderna_total',
-            'astra_zeneca_total',
-          ])
-        ).filter(isPresent)
-      ),
+    (acc, value) => Math.max(acc, ...Object.values(pick(value, ['bio_n_tech_pfizer_total', 'moderna_total', 'astra_zeneca_total'])).filter(isPresent)),
     0
   );
 }

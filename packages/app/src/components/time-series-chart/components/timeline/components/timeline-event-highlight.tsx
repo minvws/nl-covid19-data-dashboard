@@ -6,13 +6,7 @@ import { TimelineState } from '../logic';
 const activeColor = transparentize(0.7, colors.primary);
 const inactiveColor = transparentize(1, colors.primary);
 
-export function TimelineEventHighlight({
-  height,
-  timelineState,
-}: {
-  height: number;
-  timelineState: TimelineState;
-}) {
+export function TimelineEventHighlight({ height, timelineState }: { height: number; timelineState: TimelineState }) {
   const { xOffset, event } = timelineState.current || {};
   const { x0 = 0, x1 = 0 } = xOffset?.highlight || {};
 

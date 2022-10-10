@@ -20,14 +20,10 @@ export function HitList({ scope }: HitListProps) {
   const isScopeVr = scope === 'vr';
 
   const hits = isScopeVr ? vrHits : gmHits;
-  const title = isScopeVr
-    ? commonTexts.common.vr_plural
-    : commonTexts.common.gm_plural;
+  const title = isScopeVr ? commonTexts.common.vr_plural : commonTexts.common.gm_plural;
   const noHitsMessage = replaceVariablesInText(commonTexts.search.no_hits, {
     search: term,
-    subject: isScopeVr
-      ? commonTexts.common.vr_plural
-      : commonTexts.common.gm_plural,
+    subject: isScopeVr ? commonTexts.common.vr_plural : commonTexts.common.gm_plural,
   });
 
   return (
@@ -39,11 +35,7 @@ export function HitList({ scope }: HitListProps) {
           {hits.map((x) => (
             <li key={x.id}>
               <HitLink {...getOptionProps(x)}>
-                <VisuallyHidden>
-                  {x.data.type === 'gm'
-                    ? commonTexts.common.gm_singular
-                    : commonTexts.common.vr_singular}{' '}
-                </VisuallyHidden>
+                <VisuallyHidden>{x.data.type === 'gm' ? commonTexts.common.gm_singular : commonTexts.common.vr_singular} </VisuallyHidden>
                 {x.data.name}
               </HitLink>
             </li>
@@ -69,29 +61,24 @@ interface HitLinkProps {
   isActiveResult: boolean;
 }
 
-const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
-  (
-    { href, children, hasFocus, onClick, onHover, onFocus, id, isActiveResult },
-    ref
-  ) => {
-    return (
-      <Link passHref href={href}>
-        <StyledHitLink
-          ref={ref}
-          onFocus={onFocus}
-          onMouseMove={onHover}
-          role="option"
-          id={id}
-          aria-selected={hasFocus ? 'true' : 'false'}
-          aria-current={isActiveResult ? 'true' : 'false'}
-          onClick={onClick}
-        >
-          {children}
-        </StyledHitLink>
-      </Link>
-    );
-  }
-);
+const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(({ href, children, hasFocus, onClick, onHover, onFocus, id, isActiveResult }, ref) => {
+  return (
+    <Link passHref href={href}>
+      <StyledHitLink
+        ref={ref}
+        onFocus={onFocus}
+        onMouseMove={onHover}
+        role="option"
+        id={id}
+        aria-selected={hasFocus ? 'true' : 'false'}
+        aria-current={isActiveResult ? 'true' : 'false'}
+        onClick={onClick}
+      >
+        {children}
+      </StyledHitLink>
+    </Link>
+  );
+});
 
 const paddedStyle = {
   pl: [50, null, null, 5],

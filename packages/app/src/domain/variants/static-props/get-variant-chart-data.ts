@@ -27,17 +27,9 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   }
 
   const variantsOfConcern = variants.values
-    .filter(
-      (variant) =>
-        variant.last_value.is_variant_of_concern ||
-        variant.last_value.has_historical_significance
-    ).filter(
-      (variant) =>
-        variant.variant_code !== 'other_graph' && variant.variant_code !== 'other_table'
-    )
+    .filter((variant) => variant.last_value.is_variant_of_concern || variant.last_value.has_historical_significance)
+    .filter((variant) => variant.variant_code !== 'other_graph' && variant.variant_code !== 'other_table')
     .sort((a, b) => b.last_value.order - a.last_value.order);
-
-  
 
   const firstVariant = variantsOfConcern.shift();
 
@@ -54,9 +46,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
     };
 
     variantsOfConcern.forEach((variant) => {
-      (item as unknown as Record<string, number>)[
-        `${variant.variant_code}_percentage`
-      ] = variant.values[index].percentage;
+      (item as unknown as Record<string, number>)[`${variant.variant_code}_percentage`] = variant.values[index].percentage;
     });
 
     return item;

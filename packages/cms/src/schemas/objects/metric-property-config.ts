@@ -41,22 +41,17 @@ export const metricPropertyConfig = {
       title: 'Kleur',
       inputComponent: ChartColorInput,
       validation: (rule: Rule) => rule.required(),
-      hidden: ({ parent }: { parent: any }) =>
-        !isDefined(parent?.type) || parent?.type === 'invisible',
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.type) || parent?.type === 'invisible',
     },
     {
       name: 'curve',
       type: 'string',
       title: 'Lijn stijl',
       inputComponent: LineStyleInput,
-      hidden: ({ parent }: { parent: any }) =>
-        parent?.type !== 'line' && parent?.type !== 'gapped-line',
+      hidden: ({ parent }: { parent: any }) => parent?.type !== 'line' && parent?.type !== 'gapped-line',
       validation: (rule: Rule) =>
         rule.custom((value: any, context: any) => {
-          if (
-            context?.parent?.type === 'line' ||
-            context?.parent?.type === 'gapped-line'
-          ) {
+          if (context?.parent?.type === 'line' || context?.parent?.type === 'gapped-line') {
             if (!value?.length) {
               return 'Lijn stijl is required';
             }
@@ -69,16 +64,14 @@ export const metricPropertyConfig = {
       type: 'number',
       title: 'Fill opacity',
       validation: (rule: Rule) => rule.min(0).max(1),
-      hidden: ({ parent }: { parent: any }) =>
-        !isDefined(parent?.type) || parent?.type === 'invisible',
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.type) || parent?.type === 'invisible',
     },
     {
       name: 'strokeWidth',
       type: 'number',
       title: 'Stroke width',
       validation: (rule: Rule) => rule.min(0).max(50),
-      hidden: ({ parent }: { parent: any }) =>
-        !isDefined(parent?.type) || parent?.type === 'invisible',
+      hidden: ({ parent }: { parent: any }) => !isDefined(parent?.type) || parent?.type === 'invisible',
     },
   ],
 };

@@ -17,8 +17,7 @@ export const cijferVerantwoording = {
       name: 'collapsibleList',
       type: 'array',
       title: 'Verantwoordingen',
-      description:
-        'Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
+      description: 'Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
       of: [{ type: 'reference', to: { type: 'cijferVerantwoordingItem' } }],
     },
   ],

@@ -12,11 +12,7 @@ type OptionsWithDisabled = Options & { isDisabled?: boolean };
  * @param callback The callback which will be called after the key(s) have been pressed
  * @param options Options to tweak the behavior of the key press handling
  */
-export function useHotkey(
-  hotkey: string | string[],
-  callback: Callback,
-  options: OptionsWithDisabled = {}
-) {
+export function useHotkey(hotkey: string | string[], callback: Callback, options: OptionsWithDisabled = {}) {
   /**
    * We'll serialize the incoming arguments for our effects dependencies
    * shallow comparison.
@@ -36,8 +32,7 @@ export function useHotkey(
      * We'll parse the serialized arguments to recreate the argument objects.
      */
     const hotkeyParsed: string | string[] = JSON.parse(hotkeySerialized);
-    const { isDisabled, ...options }: OptionsWithDisabled =
-      JSON.parse(optionsSerialized);
+    const { isDisabled, ...options }: OptionsWithDisabled = JSON.parse(optionsSerialized);
 
     hotkeyContextRef.current?.destroy();
     hotkeyContextRef.current = undefined;

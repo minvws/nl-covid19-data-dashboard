@@ -43,9 +43,7 @@ function textStyle(props: TextProps & { as?: string }) {
 
     ...(props.fontWeight ? { fontWeight: props.fontWeight } : undefined),
     ...(props.color ? { color: props.color } : undefined),
-    ...(props.textTransform
-      ? { textTransform: props.textTransform }
-      : undefined),
+    ...(props.textTransform ? { textTransform: props.textTransform } : undefined),
     ...(props.textAlign ? { textAlign: props.textAlign } : undefined),
     ...(props.hyphens ? { hyphens: props.hyphens } : undefined),
   });
@@ -81,12 +79,10 @@ export const Anchor = styled.a<AnchorProps>(
     })
 );
 
-export const Heading = styled.h1.attrs(
-  (props: HeadingProps & { as?: string }) => ({
-    as: props.as ?? (`h${props.level}` as const),
-    variant: props.variant ?? (`h${props.level}` as const),
-  })
-)<HeadingProps>(textStyle);
+export const Heading = styled.h1.attrs((props: HeadingProps & { as?: string }) => ({
+  as: props.as ?? (`h${props.level}` as const),
+  variant: props.variant ?? (`h${props.level}` as const),
+}))<HeadingProps>(textStyle);
 
 export function styledTextVariant(variant: string, as?: string) {
   return styled.p.attrs(() => ({

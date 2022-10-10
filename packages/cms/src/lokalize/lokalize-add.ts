@@ -46,13 +46,9 @@ const cli = meow(
     console.error(chalk.red('Please provide a valid name'));
     process.exit(1);
   }
-  const count = await sanityClient.fetch(
-    `count(*[_type == 'lokalizeText' && key == '${newKeyResponse.newKey}'])`
-  );
+  const count = await sanityClient.fetch(`count(*[_type == 'lokalizeText' && key == '${newKeyResponse.newKey}'])`);
   if (count > 0) {
-    console.error(
-      chalk.red(`A document with key '${newKeyResponse.newKey}' already exists`)
-    );
+    console.error(chalk.red(`A document with key '${newKeyResponse.newKey}' already exists`));
     process.exit(1);
   }
 
@@ -68,15 +64,9 @@ const cli = meow(
     process.exit(1);
   }
 
-  await sanityClient.create(
-    createTextDocument(newKeyResponse.newKey, newValueResponse.newValue)
-  );
+  await sanityClient.create(createTextDocument(newKeyResponse.newKey, newValueResponse.newValue));
 
-  console.log(
-    chalk.green(
-      `New lokalize document with key '${newKeyResponse.newKey}' and value '${newValueResponse.newValue}' was created`
-    )
-  );
+  console.log(chalk.green(`New lokalize document with key '${newKeyResponse.newKey}' and value '${newValueResponse.newValue}' was created`));
 })().catch((err) => {
   console.error(chalk.red('An error occurred:'), err.message);
   process.exit(1);

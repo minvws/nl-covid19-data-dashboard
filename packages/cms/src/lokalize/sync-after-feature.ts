@@ -17,14 +17,7 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { hasValueAtKey } from 'ts-is-present';
 import { getClient } from '../client';
-import {
-  AddMutation,
-  DeleteMutation,
-  finalizeMoveMutations,
-  getCollapsedAddDeleteMutations,
-  getCollapsedMoveMutations,
-  readTextMutations,
-} from './logic';
+import { AddMutation, DeleteMutation, finalizeMoveMutations, getCollapsedAddDeleteMutations, getCollapsedMoveMutations, readTextMutations } from './logic';
 
 (async function run() {
   const mutations = await readTextMutations();
@@ -45,15 +38,11 @@ import {
    */
   await finalizeMoveMutations('development', moveMutations);
 
-  const deletions = addDeleteMutations.filter(
-    hasValueAtKey('action', 'delete' as const)
-  );
+  const deletions = addDeleteMutations.filter(hasValueAtKey('action', 'delete' as const));
 
   await applyDeletionsToDevelopment(deletions);
 
-  const additions = addDeleteMutations.filter(
-    hasValueAtKey('action', 'add' as const)
-  );
+  const additions = addDeleteMutations.filter(hasValueAtKey('action', 'add' as const));
 
   await syncAdditionsToProduction(additions);
 })().catch((err) => {
@@ -71,8 +60,7 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
    * Workaround for add mutations that have no document id yet, so that we can
    * lookup the document by key.
    */
-  const allPublishedTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
+  const allPublishedTexts = (await getClient('development').fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
    order(subject asc)`)) as LokalizeText[];
 
   const devClient = await getClient('development');
@@ -88,9 +76,7 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
      * yet, we need to workaround this with a find.
      */
     const document = mutation.document_id
-      ? ((await devClient.getDocument(mutation.document_id)) as
-          | LokalizeText
-          | undefined)
+      ? ((await devClient.getDocument(mutation.document_id)) as LokalizeText | undefined)
       : allPublishedTexts.find((x) => x.key === mutation.key);
 
     if (document) {
@@ -112,9 +98,7 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
       /**
        * Double check to see if the given key doesn't already exist on production
        */
-      const count = await prdClient.fetch(
-        `count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`
-      );
+      const count = await prdClient.fetch(`count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`);
 
       if (count === 0) {
         /**
@@ -125,18 +109,14 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
         prdTransaction.createIfNotExists(documentToInject);
         successCount++;
       } else {
-        console.warn(
-          `A lokalize document with key ${documentToInject.key} already exists. Skipped adding a new one.`
-        );
+        console.warn(`A lokalize document with key ${documentToInject.key} already exists. Skipped adding a new one.`);
       }
     } else {
       /**
        * This should never happen, but it is also not severe enough to
        * completely halt the script
        */
-      console.warn(
-        `An addition for key ${mutation.key} was requested, but the document can not be found in the development dataset`
-      );
+      console.warn(`An addition for key ${mutation.key} was requested, but the document can not be found in the development dataset`);
 
       failureCount++;
     }
@@ -145,13 +125,9 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
   await prdTransaction.commit();
 
   if (failureCount === 0) {
-    console.log(
-      `Successfully injected all ${successCount} text keys (if they didn't exist already)`
-    );
+    console.log(`Successfully injected all ${successCount} text keys (if they didn't exist already)`);
   } else {
-    console.log(
-      `Injected ${successCount} text keys. Failed to add ${failureCount}`
-    );
+    console.log(`Injected ${successCount} text keys. Failed to add ${failureCount}`);
   }
 }
 
@@ -174,16 +150,13 @@ async function applyDeletionsToDevelopment(deletions: DeleteMutation[]) {
    * Query both published and draft documents, because we want to delete both
    * from development.
    */
-  const allTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText'] |
+  const allTexts = (await getClient('development').fetch(`*[_type == 'lokalizeText'] |
  order(subject asc)`)) as LokalizeText[];
 
   /**
    * We need to find both draft and published versions of the document
    */
-  const documentIdsToDelete = deletions
-    .flatMap(({ key }) => allTexts.filter((x) => x.key === key))
-    .map((x) => x._id);
+  const documentIdsToDelete = deletions.flatMap(({ key }) => allTexts.filter((x) => x.key === key)).map((x) => x._id);
 
   const devTransaction = getClient('development').transaction();
 
@@ -191,7 +164,5 @@ async function applyDeletionsToDevelopment(deletions: DeleteMutation[]) {
 
   await devTransaction.commit();
 
-  console.log(
-    `Deleted ${documentIdsToDelete.length} text documents (including draft versions)`
-  );
+  console.log(`Deleted ${documentIdsToDelete.length} text documents (including draft versions)`);
 }

@@ -20,11 +20,7 @@ export interface DataOptions {
 export type OutOfBoundsConfig = {
   label: string;
   tooltipLabel: string;
-  checkIsOutofBounds: (
-    a: any,
-    b: number,
-    c: [start: number, end: number]
-  ) => boolean;
+  checkIsOutofBounds: (a: any, b: number, c: [start: number, end: number]) => boolean;
 };
 
 export interface BenchmarkConfig {

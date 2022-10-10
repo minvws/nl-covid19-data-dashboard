@@ -26,17 +26,7 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
   return (
     <>
       {gappedSeries.map((series, index) => (
-        <LineTrend
-          key={index}
-          series={series}
-          color={color}
-          style={style}
-          strokeWidth={strokeWidth}
-          curve={curve}
-          getX={getX}
-          getY={getY}
-          id={`${id}_${index}`}
-        />
+        <LineTrend key={index} series={series} color={color} style={style} strokeWidth={strokeWidth} curve={curve} getX={getX} getY={getY} id={`${id}_${index}`} />
       ))}
     </>
   );

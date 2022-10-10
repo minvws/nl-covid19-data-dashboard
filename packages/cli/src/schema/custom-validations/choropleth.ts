@@ -4,33 +4,16 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { JSONObject, JSONValue } from './types';
 
-export function createChoroplethValidation(
-  choroplethCollectionPath: string,
-  codeProperty: string,
-  excludedProperties: string[] = []
-) {
+export function createChoroplethValidation(choroplethCollectionPath: string, codeProperty: string, excludedProperties: string[] = []) {
   if (!fs.existsSync(choroplethCollectionPath)) {
-    console.warn(
-      `${choroplethCollectionPath} does not exist, unable to create Choropleth validation`
-    );
+    console.warn(`${choroplethCollectionPath} does not exist, unable to create Choropleth validation`);
     return () => {
-      throw new Error(
-        `${choroplethCollectionPath} does not exist, unable to to validate!`
-      );
+      throw new Error(`${choroplethCollectionPath} does not exist, unable to to validate!`);
     };
   }
-  const collectionJson = JSON.parse(
-    fs.readFileSync(choroplethCollectionPath, { encoding: 'utf8' })
-  );
+  const collectionJson = JSON.parse(fs.readFileSync(choroplethCollectionPath, { encoding: 'utf8' }));
 
-  return (input: JSONObject) =>
-    validateChoroplethValues(
-      path.basename(choroplethCollectionPath),
-      collectionJson,
-      codeProperty,
-      input,
-      excludedProperties
-    );
+  return (input: JSONObject) => validateChoroplethValues(path.basename(choroplethCollectionPath), collectionJson, codeProperty, input, excludedProperties);
 }
 
 /**
@@ -53,11 +36,7 @@ export const validateChoroplethValues = (
   input: JSONObject, // contents of a GM***.json or VR***.json or IN_***.json file
   excludedProperties: string[] //List of properties on the collectionJson that need to be skipped
 ): string[] | undefined => {
-  const commonDataProperties = getCommonDataProperties(
-    input,
-    collectionJson,
-    excludedProperties
-  );
+  const commonDataProperties = getCommonDataProperties(input, collectionJson, excludedProperties);
   const filePrefix = collectionJsonFilename.startsWith('IN_') ? 'IN_' : '';
 
   const code = input.code;
@@ -65,46 +44,28 @@ export const validateChoroplethValues = (
   const results = commonDataProperties
     .map((propertyName) => {
       if (!Array.isArray(collectionJson[propertyName])) {
-        throw new Error(
-          `${propertyName} in ${collectionJsonFilename} is not an array property!`
-        );
+        throw new Error(`${propertyName} in ${collectionJsonFilename} is not an array property!`);
       }
 
-      const collectionValue = (
-        collectionJson[propertyName] as JSONValue[]
-      )?.find((x: any) => x[codeProperty] === code) as UnknownObject;
+      const collectionValue = (collectionJson[propertyName] as JSONValue[])?.find((x: any) => x[codeProperty] === code) as UnknownObject;
 
       if (!collectionValue) {
         return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
       }
 
-      const lastValue = (input[propertyName] as { last_value: UnknownObject })
-        .last_value;
+      const lastValue = (input[propertyName] as { last_value: UnknownObject }).last_value;
       if (!isDefined(lastValue)) {
         return `No last_value property exists on ${propertyName}`;
       }
 
-      return validateCommonPropertyEquality(
-        lastValue,
-        collectionValue,
-        propertyName
-      );
+      return validateCommonPropertyEquality(lastValue, collectionValue, propertyName);
     })
     .filter(isDefined);
 
-  return results.length
-    ? [
-        `Data in the last_value properties of ${filePrefix}${code}.json was not equal to its counterpart in ${collectionJsonFilename}:`,
-        ...results,
-      ]
-    : undefined;
+  return results.length ? [`Data in the last_value properties of ${filePrefix}${code}.json was not equal to its counterpart in ${collectionJsonFilename}:`, ...results] : undefined;
 };
 
-function validateCommonPropertyEquality(
-  lastValue: UnknownObject,
-  collectionValue: UnknownObject,
-  propertyName: string
-) {
+function validateCommonPropertyEquality(lastValue: UnknownObject, collectionValue: UnknownObject, propertyName: string) {
   const commonProperties = getCommonProperties(collectionValue, lastValue);
 
   const result = commonProperties
@@ -118,22 +79,12 @@ function validateCommonPropertyEquality(
 }
 
 function getCommonProperties(left: UnknownObject, right: UnknownObject) {
-  return Object.keys(left).filter((key) =>
-    Object.prototype.hasOwnProperty.call(right, key)
-  );
+  return Object.keys(left).filter((key) => Object.prototype.hasOwnProperty.call(right, key));
 }
 
-function getCommonDataProperties(
-  left: UnknownObject,
-  right: UnknownObject,
-  excludedProperties: string[]
-) {
+function getCommonDataProperties(left: UnknownObject, right: UnknownObject, excludedProperties: string[]) {
   return Object.entries(left)
     .filter(([, values]) => typeof values === 'object')
     .map(([key]) => key)
-    .filter(
-      (key) =>
-        Object.prototype.hasOwnProperty.call(right, key) &&
-        !excludedProperties.includes(key)
-    );
+    .filter((key) => Object.prototype.hasOwnProperty.call(right, key) && !excludedProperties.includes(key));
 }

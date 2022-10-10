@@ -11,11 +11,7 @@ export function SearchResults() {
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
   return (
-    <StyledSearchResults
-      id={id}
-      role="listbox"
-      onPointerDown={() => setHasHitFocus(true)}
-    >
+    <StyledSearchResults id={id} role="listbox" onPointerDown={() => setHasHitFocus(true)}>
       <HitList key="vr" scope="vr" />
       <HitList key="gm" scope="gm" />
     </StyledSearchResults>

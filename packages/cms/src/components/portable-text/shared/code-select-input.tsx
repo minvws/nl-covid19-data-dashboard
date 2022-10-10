@@ -28,17 +28,11 @@ export const CodeSelectInput = withDocument(
     }, [document.area]);
 
     return (
-      <FormField
-        compareValue={compareValue}
-        label={type.title}
-        description={type.description}
-        markers={markers}
-      >
+      <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
         {isDefined(values) ? (
           <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
             <option value="" disabled hidden>
-              Selecteer een{' '}
-              {document.area === 'gm' ? 'gemeente' : 'veiligheidsregio'}
+              Selecteer een {document.area === 'gm' ? 'gemeente' : 'veiligheidsregio'}
             </option>
             {values.map((x) => (
               <option key={x.value} value={x.value}>

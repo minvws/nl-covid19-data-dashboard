@@ -28,17 +28,14 @@ FormatAgeGroupString('should format oldest', () => {
   assert.is(result, '18 and older');
 });
 
-FormatAgeGroupString(
-  'should throw error when invalid params are passed in',
-  () => {
-    const templates = {
-      oldest: '{{age}} and older',
-      group: '',
-    };
-    const ageGroup = '18';
+FormatAgeGroupString('should throw error when invalid params are passed in', () => {
+  const templates = {
+    oldest: '{{age}} and older',
+    group: '',
+  };
+  const ageGroup = '18';
 
-    assert.throws(() => formatAgeGroupString(ageGroup, templates));
-  }
-);
+  assert.throws(() => formatAgeGroupString(ageGroup, templates));
+});
 
 FormatAgeGroupString.run();

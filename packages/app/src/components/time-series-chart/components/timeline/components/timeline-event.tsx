@@ -24,17 +24,7 @@ interface TimelineEventProps {
   timelineContainerRef: RefObject<HTMLDivElement>;
 }
 
-export function TimelineEvent({
-  timelineContainerRef,
-  range,
-  size,
-  onShow,
-  onHide,
-  isSelected,
-  isHighlighted,
-  tooltipContent,
-  historyEventOffset,
-}: TimelineEventProps) {
+export function TimelineEvent({ timelineContainerRef, range, size, onShow, onHide, isSelected, isHighlighted, tooltipContent, historyEventOffset }: TimelineEventProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   useOnClickOutside([timelineContainerRef, contentRef], onHide);
 
@@ -58,10 +48,7 @@ export function TimelineEvent({
           $disableBorderRadius={x1IsOutOfBounds}
           initial={false}
           animate={{
-            background: transparentize(
-              isHighlightedEvent ? 0.4 : 0.7,
-              colors.primary
-            ),
+            background: transparentize(isHighlightedEvent ? 0.4 : 0.7, colors.primary),
           }}
         />
       )}
@@ -72,13 +59,7 @@ export function TimelineEvent({
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>
-          <TooltipTrigger
-            content={tooltipContent}
-            isSelected={isSelected}
-            contentRef={contentRef}
-            onFocus={onShow}
-            onBlur={onHide}
-          >
+          <TooltipTrigger content={tooltipContent} isSelected={isSelected} contentRef={contentRef} onFocus={onShow} onBlur={onHide}>
             <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
           </TooltipTrigger>
         </div>
@@ -113,13 +94,7 @@ function TooltipTrigger({
   );
 
   return (
-    <WithTooltip
-      content={contentWithRef}
-      placement="bottom"
-      interactive={isTouch}
-      visible={isSelected}
-      maxWidth={breakpoints.sm ? '360px' : '100%'}
-    >
+    <WithTooltip content={contentWithRef} placement="bottom" interactive={isTouch} visible={isSelected} maxWidth={breakpoints.sm ? '360px' : '100%'}>
       <div
         tabIndex={0}
         onFocus={onFocus}
@@ -154,8 +129,6 @@ const TimespanBar = styled(m.div)<{
     position: 'absolute',
     width: '100%',
     height: x.height,
-    borderRadius: x.$disableBorderRadius
-      ? undefined
-      : `0 ${x.height / 2}px ${x.height / 2}px 0`,
+    borderRadius: x.$disableBorderRadius ? undefined : `0 ${x.height / 2}px ${x.height / 2}px 0`,
   })
 );

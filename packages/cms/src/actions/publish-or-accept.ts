@@ -28,10 +28,7 @@ export function PublishOrAcceptAction(props: DocumentActionProps) {
     publish: Operation;
   };
 
-  assert(
-    props.type === 'lokalizeText',
-    `The PublishOrAcceptAction should only be made available for LokalizeText documents, and not: ${props.type}`
-  );
+  assert(props.type === 'lokalizeText', `The PublishOrAcceptAction should only be made available for LokalizeText documents, and not: ${props.type}`);
 
   const document = (props.draft || props.published) as LokalizeText | null;
 
@@ -59,11 +56,7 @@ export function PublishOrAcceptAction(props: DocumentActionProps) {
    */
   const isNewlyAddedWithoutDraft = document.is_newly_added;
 
-  const label = isPublishing
-    ? 'Publishing…'
-    : isNewlyAddedWithoutDraft
-    ? 'Accept'
-    : 'Publish';
+  const label = isPublishing ? 'Publishing…' : isNewlyAddedWithoutDraft ? 'Accept' : 'Publish';
 
   /**
    * Normally disabled state is tied directly to publish.disabled, but in case

@@ -24,13 +24,7 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
    * this will lead to countless runtime classes being generated.
    */
   const ResponsiveContainer = useCallback(
-    ({
-      children,
-      height = '100%',
-    }: {
-      children: ReactNode;
-      height?: string | number;
-    }) => (
+    ({ children, height = '100%' }: { children: ReactNode; height?: string | number }) => (
       <Box ref={ref} height="100%" minHeight={minHeight} position="relative">
         <Box position="absolute" width="100%" style={{ height }}>
           {children}

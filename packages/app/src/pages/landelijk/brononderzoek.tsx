@@ -8,28 +8,16 @@ import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situat
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   caterogyTexts: {
     category: siteText.common.sidebar.categories.archived_metrics.title,
-    screenReaderCategory:
-      siteText.common.sidebar.metrics.source_investigation.title,
+    screenReaderCategory: siteText.common.sidebar.metrics.source_investigation.title,
   },
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textShared: siteText.pages.situations_page.shared,
@@ -39,8 +27,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetChoroplethData({
     vr: ({ situations }) => ({
@@ -48,9 +35,7 @@ export const getStaticProps = createGetStaticProps(
     }),
   }),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('situations_page'))(context);
+    const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('situations_page'))(context);
 
     return {
       content: {
@@ -60,12 +45,9 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-export default function BrononderzoekPage(
-  props: StaticProps<typeof getStaticProps>
-) {
+export default function BrononderzoekPage(props: StaticProps<typeof getStaticProps>) {
   const { pageText, choropleth, lastGenerated, content } = props;
-  const { caterogyTexts, metadataTexts, textShared, textChoroplethTooltips } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { caterogyTexts, metadataTexts, textShared, textChoroplethTooltips } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
 
   const metadata = {
@@ -99,25 +81,11 @@ export default function BrononderzoekPage(
             articles={content.articles}
           />
 
-          {textShared.belangrijk_bericht &&
-            !isEmpty(textShared.belangrijk_bericht) && (
-              <WarningTile
-                isFullWidth
-                message={textShared.belangrijk_bericht}
-                variant="emphasis"
-              />
-            )}
+          {textShared.belangrijk_bericht && !isEmpty(textShared.belangrijk_bericht) && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
-          <SituationsDataCoverageChoroplethTile
-            data={choropleth.vr}
-            text={textShared}
-            tooltipText={textChoroplethTooltips}
-          />
+          <SituationsDataCoverageChoroplethTile data={choropleth.vr} text={textShared} tooltipText={textChoroplethTooltips} />
 
-          <SituationsOverviewChoroplethTile
-            data={choropleth.vr.situations}
-            text={textShared}
-          />
+          <SituationsOverviewChoroplethTile data={choropleth.vr.situations} text={textShared} />
         </TileList>
       </NlLayout>
     </Layout>

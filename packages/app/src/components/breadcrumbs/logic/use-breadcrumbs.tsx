@@ -19,23 +19,11 @@ export const BreadcrumbsDataContext = createContext<Record<string, string>>({});
   You should provide the pageTitle with the query parameter as the key, eg:
   { 'some-page-slug': 'Some Page Title' } as the breadcrumbsData prop to Layout. 
  */
-export const BreadcrumbsDataProvider = ({
-  value,
-  children,
-}: {
-  value?: Record<string, string>;
-  children: ReactNode;
-}) => {
+export const BreadcrumbsDataProvider = ({ value, children }: { value?: Record<string, string>; children: ReactNode }) => {
   const mergedValue = useMemo(() => {
-    const gmMap = gmData.reduce(
-      (acc, curr) => ({ [curr.gemcode]: curr.name, ...acc }),
-      {}
-    );
+    const gmMap = gmData.reduce((acc, curr) => ({ [curr.gemcode]: curr.name, ...acc }), {});
 
-    const vrMap = vrData.reduce(
-      (acc, curr) => ({ [curr.code]: curr.name, ...acc }),
-      {}
-    );
+    const vrMap = vrData.reduce((acc, curr) => ({ [curr.code]: curr.name, ...acc }), {});
 
     return {
       ...(value ? value : {}),
@@ -44,11 +32,7 @@ export const BreadcrumbsDataProvider = ({
     };
   }, [value]);
 
-  return (
-    <BreadcrumbsDataContext.Provider value={mergedValue}>
-      {children}
-    </BreadcrumbsDataContext.Provider>
-  );
+  return <BreadcrumbsDataContext.Provider value={mergedValue}>{children}</BreadcrumbsDataContext.Provider>;
 };
 
 // VR/GM pages that are NOT in Actueel should have a redirect label
@@ -84,9 +68,7 @@ export function useBreadcrumbs(): Breadcrumb[] {
         return pageTitle ? pageTitle : str;
       }
 
-      return commonTexts.breadcrumbs.paths[
-        str as keyof typeof commonTexts.breadcrumbs.paths
-      ];
+      return commonTexts.breadcrumbs.paths[str as keyof typeof commonTexts.breadcrumbs.paths];
     };
 
     const getRedirectLabel = (str: string): string | undefined => {
@@ -95,14 +77,9 @@ export function useBreadcrumbs(): Breadcrumb[] {
       switch (str) {
         case 'landelijk':
         case 'actueel': {
-          return replaceVariablesInText(
-            commonTexts.breadcrumbs.redirects.template,
-            {
-              page: commonTexts.breadcrumbs.redirects[
-                str as keyof typeof commonTexts.breadcrumbs.redirects
-              ],
-            }
-          );
+          return replaceVariablesInText(commonTexts.breadcrumbs.redirects.template, {
+            page: commonTexts.breadcrumbs.redirects[str as keyof typeof commonTexts.breadcrumbs.redirects],
+          });
         }
         case 'veiligheidsregio':
         case 'gemeente': {
@@ -115,21 +92,13 @@ export function useBreadcrumbs(): Breadcrumb[] {
 
           // this is the more complex case where we have a str with a gm/vr code
           if (str.includes('GM') || str.includes('VR')) {
-            const pageTemplate = replaceVariablesInText(
-              commonTexts.breadcrumbs.redirects[
-                str.includes('GM') ? 'gemeente' : 'veiligheidsregio'
-              ],
-              {
-                name: ctx[str],
-              }
-            );
+            const pageTemplate = replaceVariablesInText(commonTexts.breadcrumbs.redirects[str.includes('GM') ? 'gemeente' : 'veiligheidsregio'], {
+              name: ctx[str],
+            });
 
-            return replaceVariablesInText(
-              commonTexts.breadcrumbs.redirects.template,
-              {
-                page: pageTemplate,
-              }
-            );
+            return replaceVariablesInText(commonTexts.breadcrumbs.redirects.template, {
+              page: pageTemplate,
+            });
           }
         }
       }
@@ -142,9 +111,7 @@ export function useBreadcrumbs(): Breadcrumb[] {
 
     const breadcrumbs = arr
       .map((x, index, arr) => {
-        const href = [...arr.slice(0, index), x]
-          .map(convertQueryParameter)
-          .join('/');
+        const href = [...arr.slice(0, index), x].map(convertQueryParameter).join('/');
 
         return {
           href: href.startsWith('/') ? href : `/${href}`,

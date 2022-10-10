@@ -1,8 +1,4 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
@@ -23,26 +19,10 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  selectNlData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -59,13 +39,9 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.elderly_at_home__positive_tested_daily',
-    'elderly_at_home'
-  ),
+  selectNlData('difference.elderly_at_home__positive_tested_daily', 'elderly_at_home'),
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),
@@ -83,10 +59,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'elderlyAtHomePageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'elderlyAtHomePageArticles'),
         elements: content.elements,
       },
     };
@@ -94,40 +67,19 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    selectedNlData: data,
-    choropleth,
-    lastGenerated,
-    content,
-  } = props;
-  const [
-    elderlyAtHomeConfirmedCasesTimeframe,
-    setElderlyAtHomeConfirmedCasesTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const [elderlyAtHomeConfirmedCasesTimeframe, setElderlyAtHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [
-    elderlyAtHomeConfirmedCasesOverTimeTimeframe,
-    setElderlyAtHomeConfirmedCasesOverTimeTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [elderlyAtHomeConfirmedCasesOverTimeTimeframe, setElderlyAtHomeConfirmedCasesOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const elderlyAtHomeData = data.elderly_at_home;
 
-  const elderlyAtHomeInfectedUnderReportedRange = getBoundaryDateStartUnix(
-    elderlyAtHomeData.values,
-    4
-  );
+  const elderlyAtHomeInfectedUnderReportedRange = getBoundaryDateStartUnix(elderlyAtHomeData.values, 4);
 
-  const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(
-    elderlyAtHomeData.values,
-    7
-  );
+  const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderlyAtHomeData.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const reverseRouter = useReverseRouter();
 
@@ -144,12 +96,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.consequences_for_healthcare.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.elderly_at_home.title
-            }
+            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.elderly_at_home.title}
             title={textNl.section_positive_tested.title}
             icon={<Elderly />}
             description={textNl.section_positive_tested.description}
@@ -174,14 +122,10 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               <KpiValue
                 data-cy="positive_tested_daily"
                 absolute={elderlyAtHomeData.last_value.positive_tested_daily}
-                difference={
-                  data.difference.elderly_at_home__positive_tested_daily
-                }
+                difference={data.difference.elderly_at_home__positive_tested_daily}
                 isAmount
               />
-              <Markdown
-                content={textNl.section_positive_tested.kpi_daily_description}
-              />
+              <Markdown content={textNl.section_positive_tested.kpi_daily_description} />
             </KpiTile>
             <KpiTile
               title={textNl.section_positive_tested.kpi_daily_per_100k_title}
@@ -190,15 +134,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_positive_tested.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="positive_tested_daily_per_100k"
-                absolute={
-                  elderlyAtHomeData.last_value.positive_tested_daily_per_100k
-                }
-              />
-              <Text>
-                {textNl.section_positive_tested.kpi_daily_per_100k_description}
-              </Text>
+              <KpiValue data-cy="positive_tested_daily_per_100k" absolute={elderlyAtHomeData.last_value.positive_tested_daily_per_100k} />
+              <Text>{textNl.section_positive_tested.kpi_daily_per_100k_description}</Text>
             </KpiTile>
           </TwoKpiSection>
 
@@ -206,9 +143,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
             metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
-            description={
-              textNl.section_positive_tested.line_chart_daily_description
-            }
+            description={textNl.section_positive_tested.line_chart_daily_description}
             onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
@@ -221,20 +156,14 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'positive_tested_daily_moving_average',
-                  label:
-                    textNl.section_positive_tested
-                      .line_chart_positive_tested_daily_moving_average,
-                  shortLabel:
-                    textNl.section_positive_tested
-                      .line_chart_positive_tested_daily_moving_average_short_label,
+                  label: textNl.section_positive_tested.line_chart_positive_tested_daily_moving_average,
+                  shortLabel: textNl.section_positive_tested.line_chart_positive_tested_daily_moving_average_short_label,
                   color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'positive_tested_daily',
-                  label:
-                    textNl.section_positive_tested
-                      .line_chart_legend_trend_label,
+                  label: textNl.section_positive_tested.line_chart_legend_trend_label,
                   color: colors.primary,
                 },
               ]}
@@ -243,29 +172,19 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: elderlyAtHomeInfectedUnderReportedRange,
                     end: Infinity,
-                    label:
-                      textNl.section_deceased
-                        .line_chart_legend_inaccurate_label,
+                    label: textNl.section_deceased.line_chart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'positive_tested_daily_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['positive_tested_daily_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'elderly_at_home',
-                  'positive_tested_daily'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'elderly_at_home', 'positive_tested_daily'),
               }}
             />
           </ChartTile>
 
           <ChoroplethTile
             title={textNl.section_positive_tested.choropleth_daily_title}
-            description={
-              textNl.section_positive_tested.choropleth_daily_description
-            }
+            description={textNl.section_positive_tested.choropleth_daily_description}
             metadata={{
               date: elderlyAtHomeData.last_value.date_unix,
               source: textNl.section_positive_tested.bronnen.rivm,
@@ -303,8 +222,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.section_deceased.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix:
-                elderlyAtHomeData.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: elderlyAtHomeData.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_deceased.bronnen.rivm],
             }}
             referenceLink={textNl.section_deceased.reference.href}
@@ -319,10 +237,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_deceased.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="deceased_daily"
-                absolute={elderlyAtHomeData.last_value.deceased_daily}
-              />
+              <KpiValue data-cy="deceased_daily" absolute={elderlyAtHomeData.last_value.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
 
@@ -343,12 +258,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'deceased_daily_moving_average',
-                  label:
-                    textNl.section_deceased
-                      .line_chart_deceased_daily_moving_average,
-                  shortLabel:
-                    textNl.section_deceased
-                      .line_chart_deceased_daily_moving_average_short_label,
+                  label: textNl.section_deceased.line_chart_deceased_daily_moving_average,
+                  shortLabel: textNl.section_deceased.line_chart_deceased_daily_moving_average_short_label,
                   color: colors.primary,
                 },
                 {
@@ -363,20 +274,12 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: elderlyAtHomeDeceasedUnderReportedRange,
                     end: Infinity,
-                    label:
-                      textNl.section_deceased
-                        .line_chart_legend_inaccurate_label,
+                    label: textNl.section_deceased.line_chart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'deceased_daily_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['deceased_daily_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'elderly_at_home',
-                  'deceased_daily'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'elderly_at_home', 'deceased_daily'),
               }}
             />
           </ChartTile>

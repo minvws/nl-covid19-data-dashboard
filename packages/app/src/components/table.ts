@@ -21,20 +21,13 @@ import { styledShouldForwardProp } from '~/lib/styled-should-forward-prop';
 
 type TableProps = TableCellProps & PositionProps;
 
-type TableCellProps = TableBodyProps &
-  WidthProps &
-  ColorProps &
-  BorderProps &
-  VerticalAlignProps;
+type TableCellProps = TableBodyProps & WidthProps & ColorProps & BorderProps & VerticalAlignProps;
 
 type TableBodyProps = SpaceProps & LayoutProps;
 
 export const Table = styled.table.withConfig({
   shouldForwardProp: styledShouldForwardProp,
-})<TableProps>(
-  { borderCollapse: 'collapse', borderSpacing: 0, tableLayout: 'fixed' },
-  compose(margin, padding, color, space, position)
-);
+})<TableProps>({ borderCollapse: 'collapse', borderSpacing: 0, tableLayout: 'fixed' }, compose(margin, padding, color, space, position));
 
 export const TableBody = styled.tbody.withConfig({
   shouldForwardProp: styledShouldForwardProp,
@@ -46,6 +39,4 @@ export const Row = styled.tr.withConfig({
 
 export const Cell = styled.td.withConfig({
   shouldForwardProp: styledShouldForwardProp,
-})<TableCellProps>(
-  compose(margin, padding, color, space, border, verticalAlign, width)
-);
+})<TableCellProps>(compose(margin, padding, color, space, border, verticalAlign, width));

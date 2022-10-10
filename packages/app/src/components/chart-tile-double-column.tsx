@@ -16,13 +16,7 @@ interface ChartTileDoubleColumnProps {
   children: ReactNode;
 }
 
-export const ChartTileDoubleColumn = ({
-  title,
-  description,
-  children,
-  metadata,
-  disableFullscreen,
-}: ChartTileDoubleColumnProps) => {
+export const ChartTileDoubleColumn = ({ title, description, children, metadata, disableFullscreen }: ChartTileDoubleColumnProps) => {
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
@@ -30,12 +24,7 @@ export const ChartTileDoubleColumn = ({
         {title}
       </Heading>
 
-      <Box
-        display="flex"
-        flexDirection={{ _: 'column', lg: 'row' }}
-        justifyContent={{ _: 'flex-start', lg: 'space-between' }}
-        alignItems={{ _: 'flex-start', lg: 'normal' }}
-      >
+      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} justifyContent={{ _: 'flex-start', lg: 'space-between' }} alignItems={{ _: 'flex-start', lg: 'normal' }}>
         {description && (
           <Box width={{ _: '100%', lg: '50%' }}>
             <Box maxWidth="maxWidthText">

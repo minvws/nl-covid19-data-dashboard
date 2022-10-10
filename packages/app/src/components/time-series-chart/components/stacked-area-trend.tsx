@@ -19,23 +19,8 @@ type StackedAreaTrendProps = {
   mixBlendMode?: Property.MixBlendMode;
 };
 
-export function StackedAreaTrend({
-  series,
-  getX,
-  getY0,
-  getY1,
-  bounds,
-  color,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  strokeWidth = 2,
-  id,
-  mixBlendMode,
-}: StackedAreaTrendProps) {
-  const nonNullSeries = useMemo(
-    () =>
-      series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)),
-    [series]
-  );
+export function StackedAreaTrend({ series, getX, getY0, getY1, bounds, color, fillOpacity = DEFAULT_FILL_OPACITY, strokeWidth = 2, id, mixBlendMode }: StackedAreaTrendProps) {
+  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)), [series]);
 
   const isBottomSeries = series.map(getY0).every((x) => x === bounds.height);
 
@@ -74,15 +59,7 @@ export function StackedAreaTrend({
        * because that would overlap with the X-axis.
        */}
       {!isBottomSeries && strokeWidth > 0 && (
-        <LinePath
-          data={nonNullSeries}
-          x={getX}
-          y={getY0}
-          stroke="white"
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <LinePath data={nonNullSeries} x={getX} y={getY0} stroke="white" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
       )}
     </g>
   );
@@ -95,23 +72,10 @@ interface StackedAreaTrendIconProps {
   height?: number;
 }
 
-export function StackedAreaTrendIcon({
-  color,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  width = 15,
-  height = 15,
-}: StackedAreaTrendIconProps) {
+export function StackedAreaTrendIcon({ color, fillOpacity = DEFAULT_FILL_OPACITY, width = 15, height = 15 }: StackedAreaTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <rect
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill={color}
-        opacity={fillOpacity}
-        rx={2}
-      />
+      <rect x={0} y={0} width={width} height={height} fill={color} opacity={fillOpacity} rx={2} />
     </svg>
   );
 }

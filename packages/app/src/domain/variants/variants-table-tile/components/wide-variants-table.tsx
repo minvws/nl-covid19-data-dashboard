@@ -5,14 +5,7 @@ import { Box } from '~/components/base';
 import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
-import {
-  Cell,
-  HeaderCell,
-  PercentageBarWithNumber,
-  StyledTable,
-  VariantDifference,
-  VariantNameCell,
-} from '.';
+import { Cell, HeaderCell, PercentageBarWithNumber, StyledTable, VariantDifference, VariantNameCell } from '.';
 import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
@@ -28,9 +21,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
   const intl = useIntl();
 
   const formatValue = useMemo(() => {
-    const numberOfDecimals = getMaximumNumberOfDecimals(
-      rows.map((x) => x.percentage ?? 0)
-    );
+    const numberOfDecimals = getMaximumNumberOfDecimals(rows.map((x) => x.percentage ?? 0));
     return (value: number) =>
       intl.formatPercentage(value, {
         minimumFractionDigits: numberOfDecimals,
@@ -54,24 +45,15 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
             <Cell>
               {isPresent(row.percentage) ? (
                 <Box maxWidth="20em">
-                  <PercentageBarWithNumber
-                    percentage={row.percentage}
-                    color={row.color}
-                    formatValue={formatValue}
-                  />
+                  <PercentageBarWithNumber percentage={row.percentage} color={row.color} formatValue={formatValue} />
                 </Box>
               ) : (
                 <NoPercentageData text={text} />
               )}
             </Cell>
             <Cell>
-              {isPresent(row.difference) &&
-              isPresent(row.difference.difference) &&
-              isPresent(row.difference.old_value) ? (
-                <VariantDifference
-                  value={row.difference as DifferenceDecimal}
-                  text={text}
-                />
+              {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? (
+                <VariantDifference value={row.difference as DifferenceDecimal} text={text} />
               ) : (
                 '-'
               )}

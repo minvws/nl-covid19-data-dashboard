@@ -16,21 +16,8 @@ type RangeTrendProps = {
   id: string;
 };
 
-export function RangeTrend({
-  series,
-  getX,
-  getY0,
-  getY1,
-  bounds,
-  color,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  id,
-}: RangeTrendProps) {
-  const nonNullSeries = useMemo(
-    () =>
-      series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)),
-    [series]
-  );
+export function RangeTrend({ series, getX, getY0, getY1, bounds, color, fillOpacity = DEFAULT_FILL_OPACITY, id }: RangeTrendProps) {
+  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)), [series]);
 
   return (
     /**
@@ -70,23 +57,10 @@ interface RangeTrendIconProps {
   height?: number;
 }
 
-export function RangeTrendIcon({
-  color,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  width = 15,
-  height = 15,
-}: RangeTrendIconProps) {
+export function RangeTrendIcon({ color, fillOpacity = DEFAULT_FILL_OPACITY, width = 15, height = 15 }: RangeTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <rect
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill={color}
-        opacity={fillOpacity}
-        rx={2}
-      />
+      <rect x={0} y={0} width={width} height={height} fill={color} opacity={fillOpacity} rx={2} />
     </svg>
   );
 }

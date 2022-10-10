@@ -4,14 +4,8 @@ import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
 import { Layout } from '~/domain/layout/layout';
 import { getClient, getImageSrc } from '~/lib/sanity';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
 import { Block, Editorial, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
@@ -43,10 +37,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<Editorial>((context) => {
     const { locale } = context;
 
-    assert(
-      context.params?.slug,
-      `[${getStaticProps.name}:weekberichten] Slug required to retrieve article`
-    );
+    assert(context.params?.slug, `[${getStaticProps.name}:weekberichten] Slug required to retrieve article`);
     return `
       *[_type == 'editorial' && slug.current == '${context.params.slug}'][0]{
         ...,
@@ -81,9 +72,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-export default function EditorialDetailPage(
-  props: StaticProps<typeof getStaticProps>
-) {
+export default function EditorialDetailPage(props: StaticProps<typeof getStaticProps>) {
   const { content, lastGenerated } = props;
   const { cover } = props.content;
   const { asset } = cover;
@@ -98,17 +87,10 @@ export default function EditorialDetailPage(
     twitterImage: imgPath,
   };
 
-  const breadcrumbsData = useMemo(
-    () => ({ [props.content.slug.current]: props.content.title }),
-    [props.content.slug, props.content.title]
-  );
+  const breadcrumbsData = useMemo(() => ({ [props.content.slug.current]: props.content.title }), [props.content.slug, props.content.title]);
 
   return (
-    <Layout
-      breadcrumbsData={breadcrumbsData}
-      lastGenerated={lastGenerated}
-      {...metadata}
-    >
+    <Layout breadcrumbsData={breadcrumbsData} lastGenerated={lastGenerated} {...metadata}>
       <Box backgroundColor="white">
         <EditorialDetail editorial={content} />
       </Box>
@@ -117,10 +99,7 @@ export default function EditorialDetailPage(
 }
 
 function getTitle(title: string, locale: string) {
-  const suffix =
-    locale === 'nl'
-      ? 'Dashboard Coronavirus | Rijksoverheid.nl'
-      : 'Dashboard Coronavirus | Government.nl';
+  const suffix = locale === 'nl' ? 'Dashboard Coronavirus | Rijksoverheid.nl' : 'Dashboard Coronavirus | Government.nl';
 
   return `${title} | ${suffix}`;
 }

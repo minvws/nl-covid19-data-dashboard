@@ -30,9 +30,7 @@ const config: ClientConfig = {
 export const PortableText = BlockContent;
 
 // Set up the client for fetching data
-export async function getClient(
-  dataset = config.dataset as 'production' | 'development'
-) {
+export async function getClient(dataset = config.dataset as 'production' | 'development') {
   return (await import('@sanity/client')).default({
     ...config,
     dataset,
@@ -106,15 +104,11 @@ type ImageProps = {
   sizes?: number[][];
 };
 
-export function getImageProps<T extends ImageBlock>(
-  node: T,
-  options: ImageProps
-) {
+export function getImageProps<T extends ImageBlock>(node: T, options: ImageProps) {
   const { asset, alt = '' } = node;
   const { metadata } = asset;
 
-  const { defaultWidth = metadata.dimensions.width, sizes: sizesOption } =
-    options;
+  const { defaultWidth = metadata.dimensions.width, sizes: sizesOption } = options;
 
   const width = findClosestSize(defaultWidth, imageResizeTargets);
   const height = width / metadata.dimensions.aspectRatio;
@@ -129,22 +123,14 @@ export function getImageProps<T extends ImageBlock>(
      * The following srcset attribute will tell the browser which image-widths
      * are available.
      */
-    srcSet = imageResizeTargets
-      .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-      .join(', ');
+    srcSet = imageResizeTargets.map((size) => `${getImageSrc(asset, size)} ${size}w`).join(', ');
   }
 
   /**
    * The sizes attribute will tell the browser which image-width to use on given
    * viewport-widths.
    */
-  const sizes = sizesOption
-    ?.map(([viewportOrSize, size]) =>
-      isPresent(size)
-        ? `(min-width: ${viewportOrSize}px) ${size}px`
-        : `${viewportOrSize}px`
-    )
-    .join(', ');
+  const sizes = sizesOption?.map(([viewportOrSize, size]) => (isPresent(size) ? `(min-width: ${viewportOrSize}px) ${size}px` : `${viewportOrSize}px`)).join(', ');
 
   return {
     src,
@@ -161,10 +147,7 @@ export function getFileSrc(asset: SanityFileProps) {
   return `/cms-files/${asset.assetId}.${asset.extension}`;
 }
 
-export function getImageSrc(
-  asset: SanityImageProps,
-  defaultWidth = asset.metadata.dimensions.width
-) {
+export function getImageSrc(asset: SanityImageProps, defaultWidth = asset.metadata.dimensions.width) {
   const filename = `${asset.assetId}-${asset.metadata.dimensions.width}x${asset.metadata.dimensions.height}.${asset.extension}`;
   if (asset.extension === 'svg') {
     return `/cms-images/${filename}`;

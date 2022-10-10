@@ -12,10 +12,7 @@ interface TopicalHeaderProps {
   dynamicDescriptions: TopicalDynamicDescription[];
 }
 
-export const TopicalHeader = ({
-  title,
-  dynamicDescriptions,
-}: TopicalHeaderProps) => {
+export const TopicalHeader = ({ title, dynamicDescriptions }: TopicalHeaderProps) => {
   return (
     <Box spacing={4}>
       <Heading level={1}>{title}</Heading>

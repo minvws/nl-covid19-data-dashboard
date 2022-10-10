@@ -23,10 +23,7 @@ function buildPatches(docs: any[], figureExplanationItems: any[]) {
 }
 
 function createTransaction(patches: any[]) {
-  return patches.reduce(
-    (tx, patch) => tx.patch(patch.id, patch.patch),
-    client.transaction()
-  );
+  return patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), client.transaction());
 }
 
 function saveCollapsiblesAsDocuments(collapsibleObjects: any[]) {
@@ -46,28 +43,18 @@ function saveCollapsiblesAsDocuments(collapsibleObjects: any[]) {
 async function migrateNextBatch(): Promise<any> {
   const pages = await client.fetch(`*[_type == 'cijferVerantwoording']`);
 
-  const collapsibles =
-    pages.length === 1
-      ? pages[0].collapsibleList
-      : pages.find((x: any) => x._id.startsWith('drafts.'))?.collapsibleList;
+  const collapsibles = pages.length === 1 ? pages[0].collapsibleList : pages.find((x: any) => x._id.startsWith('drafts.'))?.collapsibleList;
 
   const collapsibleDocuments = await saveCollapsiblesAsDocuments(collapsibles);
 
-  const patches = collapsibleDocuments.length
-    ? buildPatches(pages, collapsibleDocuments)
-    : [];
+  const patches = collapsibleDocuments.length ? buildPatches(pages, collapsibleDocuments) : [];
 
   if (patches.length === 0) {
     console.log('No more documents to migrate!');
     return null;
   }
 
-  console.log(
-    `Migrating batch:\n %s`,
-    patches
-      .map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
-      .join('\n')
-  );
+  console.log(`Migrating batch:\n %s`, patches.map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'));
 
   const transaction = createTransaction(patches);
   await transaction.commit();

@@ -54,12 +54,7 @@ export class Rule {
   lowercase(): Rule;
   regex(pattern: any, name: any, opts: any): Rule;
   email(options: any): Rule;
-  uri(opts?: {
-    scheme?: (string | RegExp)[];
-    allowCredentials?: boolean;
-    relativeOnly?: boolean;
-    allowRelative?: boolean;
-  }): Rule;
+  uri(opts?: { scheme?: (string | RegExp)[]; allowCredentials?: boolean; relativeOnly?: boolean; allowRelative?: boolean }): Rule;
   unique(comparator?: any): Rule;
   reference(): Rule;
   block(fn: any): Rule;

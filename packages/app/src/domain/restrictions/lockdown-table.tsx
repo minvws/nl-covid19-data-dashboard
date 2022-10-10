@@ -63,14 +63,7 @@ function MobileLockdownTable(props: LockdownTableData) {
           return (
             <Fragment key={group._key}>
               <Row>
-                <Cell
-                  role="rowheader"
-                  borderTop={'1px solid black'}
-                  px={2}
-                  py={3}
-                  verticalAlign="center"
-                  backgroundColor="gray1"
-                >
+                <Cell role="rowheader" borderTop={'1px solid black'} px={2} py={3} verticalAlign="center" backgroundColor="gray1">
                   <BoldText>{group.title}</BoldText>
                 </Cell>
               </Row>
@@ -79,13 +72,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                   <Box display="flex" flexDirection="column">
                     {group.restrictions.map((restriction) => {
                       return (
-                        <Box
-                          key={restriction._key}
-                          display="flex"
-                          flexDirection="row"
-                          alignItems="flex-start"
-                          mb="1"
-                        >
+                        <Box key={restriction._key} display="flex" flexDirection="row" alignItems="flex-start" mb="1">
                           <Box
                             as="span"
                             flexShrink={0}
@@ -97,15 +84,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                             })}
                           >
                             {restriction.icon ? (
-                              <img
-                                src={`/icons/restrictions/${
-                                  restrictionIcons[restriction.icon]
-                                }`}
-                                width="36"
-                                height="36"
-                                alt=""
-                                css={css({ filter })}
-                              />
+                              <img src={`/icons/restrictions/${restrictionIcons[restriction.icon]}`} width="36" height="36" alt="" css={css({ filter })} />
                             ) : (
                               <img
                                 src={`/icons/app/dot.svg`}
@@ -152,34 +131,14 @@ function DesktopLockdownTable(props: LockdownTableData) {
                 },
               })}
             >
-              <Cell
-                role="rowheader"
-                borderTop={'1px solid black'}
-                backgroundColor="gray1"
-                width="12em"
-                py={3}
-                px={2}
-                verticalAlign="top"
-              >
+              <Cell role="rowheader" borderTop={'1px solid black'} backgroundColor="gray1" width="12em" py={3} px={2} verticalAlign="top">
                 <BoldText>{group.title}</BoldText>
               </Cell>
-              <Cell
-                borderTop={'1px solid black'}
-                pt={3}
-                pb={3}
-                pl={2}
-                verticalAlign="top"
-              >
+              <Cell borderTop={'1px solid black'} pt={3} pb={3} pl={2} verticalAlign="top">
                 <Box display="flex" flexDirection="column">
                   {group.restrictions.map((restriction) => {
                     return (
-                      <Box
-                        key={restriction._key}
-                        display="flex"
-                        flexDirection="row"
-                        alignItems="flex-start"
-                        mb="1"
-                      >
+                      <Box key={restriction._key} display="flex" flexDirection="row" alignItems="flex-start" mb="1">
                         <Box
                           as="span"
                           flexShrink={0}
@@ -190,12 +149,9 @@ function DesktopLockdownTable(props: LockdownTableData) {
                             },
                           })}
                         >
-                          {restriction.icon &&
-                          restrictionIcons[restriction.icon] ? (
+                          {restriction.icon && restrictionIcons[restriction.icon] ? (
                             <img
-                              src={`/icons/restrictions/${
-                                restrictionIcons[restriction.icon]
-                              }`}
+                              src={`/icons/restrictions/${restrictionIcons[restriction.icon]}`}
                               width="36"
                               height="36"
                               alt=""

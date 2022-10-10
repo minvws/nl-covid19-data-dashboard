@@ -4,11 +4,7 @@ import { useCollapsible } from '~/utils/use-collapsible';
 import { useIntl } from '~/intl';
 import { Cell, HeaderCell, Row, StyledTable } from '.';
 import { Markdown } from '~/components';
-import {
-  VaccineCampaign,
-  VaccineCampaignDescriptions,
-  VaccineCampaignHeaders,
-} from '../types';
+import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders } from '../types';
 
 interface NarrowVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
@@ -16,11 +12,7 @@ interface NarrowVaccineCampaignTableProps {
   headers: VaccineCampaignHeaders;
 }
 
-export const NarrowVaccineCampaignTable = ({
-  campaigns,
-  campaignDescriptions,
-  headers,
-}: NarrowVaccineCampaignTableProps) => {
+export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers }: NarrowVaccineCampaignTableProps) => {
   return (
     <StyledTable>
       <thead>
@@ -53,13 +45,7 @@ interface VaccineCampaignRowProps {
   isLast: boolean;
 }
 
-const VaccineCampaignRow = ({
-  campaign,
-  campaignDescriptions,
-  headers,
-  isFirst,
-  isLast,
-}: VaccineCampaignRowProps) => {
+const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, isLast }: VaccineCampaignRowProps) => {
   const { formatNumber } = useIntl();
   const collapsible = useCollapsible({ isOpen: isFirst });
   const isOpen = collapsible.isOpen;
@@ -72,11 +58,7 @@ const VaccineCampaignRow = ({
           <tbody>
             <tr>
               <Cell css={css({ pt: 3 })} mobile>
-                <strong>
-                  {locale === 'nl'
-                    ? campaign.vaccine_campaign_name_nl
-                    : campaign.vaccine_campaign_name_en}
-                </strong>
+                <strong>{locale === 'nl' ? campaign.vaccine_campaign_name_nl : campaign.vaccine_campaign_name_en}</strong>
               </Cell>
 
               <Cell css={css({ pt: 3 })} alignRight mobile>
@@ -87,46 +69,19 @@ const VaccineCampaignRow = ({
             <tr>
               <Cell css={css({ py: 0 })} mobile>
                 {headers.last_week}:{' '}
-                {isOpen ? (
-                  <strong>
-                    {formatNumber(campaign.vaccine_administered_last_week)}
-                  </strong>
-                ) : (
-                  <>{formatNumber(campaign.vaccine_administered_last_week)}</>
-                )}
+                {isOpen ? <strong>{formatNumber(campaign.vaccine_administered_last_week)}</strong> : <>{formatNumber(campaign.vaccine_administered_last_week)}</>}
               </Cell>
             </tr>
 
             <tr>
               <Cell css={css({ py: 0 })} mobile>
-                {headers.total}:{' '}
-                {isOpen ? (
-                  <strong>
-                    {formatNumber(campaign.vaccine_administered_total)}
-                  </strong>
-                ) : (
-                  <>{formatNumber(campaign.vaccine_administered_total)}</>
-                )}
+                {headers.total}: {isOpen ? <strong>{formatNumber(campaign.vaccine_administered_total)}</strong> : <>{formatNumber(campaign.vaccine_administered_total)}</>}
               </Cell>
             </tr>
 
             <tr>
-              <Cell
-                css={css({ pb: collapsible.isOpen ? 3 : 2 })}
-                colSpan={2}
-                mobile
-              >
-                {collapsible.content(
-                  <Markdown
-                    content={
-                      campaignDescriptions[
-                        `${campaign.vaccine_campaign_name_en
-                          .toLowerCase()
-                          .replace(/ /g, '_')}_description`
-                      ]
-                    }
-                  />
-                )}
+              <Cell css={css({ pb: collapsible.isOpen ? 3 : 2 })} colSpan={2} mobile>
+                {collapsible.content(<Markdown content={campaignDescriptions[`${campaign.vaccine_campaign_name_en.toLowerCase().replace(/ /g, '_')}_description`]} />)}
               </Cell>
             </tr>
           </tbody>

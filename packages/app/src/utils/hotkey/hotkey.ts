@@ -72,10 +72,7 @@ const defaultOptions: Options = {
  */
 export function createContext(options: Options = {}) {
   const listeners: Listener[] = [];
-  const keydownHandler = createKeyListener(
-    listeners,
-    defaults({}, options, defaultOptions)
-  );
+  const keydownHandler = createKeyListener(listeners, defaults({}, options, defaultOptions));
 
   /**
    * must be keydown event, a keyup event won't work with keycombinations like
@@ -90,37 +87,24 @@ export function createContext(options: Options = {}) {
   };
 }
 
-function createListenersFn(
-  listeners: Listener[],
-  fn: typeof registerListener | typeof unregisterListener
-) {
+function createListenersFn(listeners: Listener[], fn: typeof registerListener | typeof unregisterListener) {
   return (hotkey: string | string[], callback: Callback) => {
     const hotkeys: string[] = [];
     hotkeys.concat(hotkey).forEach((x) => fn(listeners, x, callback));
   };
 }
 
-function unregisterListener(
-  listeners: Listener[],
-  hotkeyStr: string,
-  callback: Callback
-) {
+function unregisterListener(listeners: Listener[], hotkeyStr: string, callback: Callback) {
   const hotkey = normalizeHotkey(hotkeyStr);
 
-  const index = listeners.findIndex(
-    (x) => x.callback === callback && isEqual(hotkey, x.hotkey)
-  );
+  const index = listeners.findIndex((x) => x.callback === callback && isEqual(hotkey, x.hotkey));
 
   if (index !== -1) {
     listeners.splice(index, 1);
   }
 }
 
-function registerListener(
-  listeners: Listener[],
-  hotkey: string,
-  callback: Callback
-) {
+function registerListener(listeners: Listener[], hotkey: string, callback: Callback) {
   listeners.push({ hotkey: normalizeHotkey(hotkey), callback });
 }
 
@@ -202,10 +186,7 @@ function normalizeHotkey(hotkey: string) {
     const keys = part.split('+').filter(isDefined).map(getMappedKey);
     const result = createHotkey(keys);
 
-    assert(
-      Object.keys(result).length >= keys.length,
-      `[${normalizeHotkey.name}] Hotkey combination has duplicates "${hotkey}"`
-    );
+    assert(Object.keys(result).length >= keys.length, `[${normalizeHotkey.name}] Hotkey combination has duplicates "${hotkey}"`);
 
     return result;
   });
@@ -220,9 +201,7 @@ function hasFocusOnTextInput() {
   }
 
   if (tagName === 'input') {
-    return ['text', 'email', 'password', 'search', 'tel', 'url'].includes(
-      (element as HTMLInputElement).type
-    );
+    return ['text', 'email', 'password', 'search', 'tel', 'url'].includes((element as HTMLInputElement).type);
   }
 
   return false;

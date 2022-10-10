@@ -23,11 +23,7 @@ const SanityImageTile = styled(SanityImage)(
 
 const IMAGE_MAX_WIDTH = 980;
 
-export function ContentImage({
-  node,
-  contentWrapper,
-  sizes,
-}: ContentImageProps) {
+export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Text as="figcaption" variant="body2" textAlign="left">
       {node.caption}
@@ -38,15 +34,7 @@ export function ContentImage({
 
   return 'isFullWidth' in node && node.isFullWidth ? (
     <Box bg="gray1" p={4} width="100%">
-      <Box
-        as="figure"
-        role="group"
-        spacing={3}
-        display="flex"
-        maxWidth={IMAGE_MAX_WIDTH}
-        textAlign="center"
-        mx="auto"
-      >
+      <Box as="figure" role="group" spacing={3} display="flex" maxWidth={IMAGE_MAX_WIDTH} textAlign="center" mx="auto">
         <ContentBlock>
           {node.asset && (
             <SanityImageTile
@@ -63,9 +51,7 @@ export function ContentImage({
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <Box mb={3}>
-          {node.asset && <SanityImage {...getImageProps(node, { sizes })} />}
-        </Box>
+        <Box mb={3}>{node.asset && <SanityImage {...getImageProps(node, { sizes })} />}</Box>
         {caption}
       </Box>
     </ContentWrapper>

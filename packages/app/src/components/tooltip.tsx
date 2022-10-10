@@ -1,13 +1,5 @@
 import css from '@styled-system/css';
-import {
-  MouseEvent,
-  KeyboardEvent,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { MouseEvent, KeyboardEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 
 export interface TooltipCoordinates {
@@ -15,10 +7,7 @@ export interface TooltipCoordinates {
   top: number;
 }
 
-export type GetTooltipCoordinates<T> = (
-  value: T,
-  event?: MouseEvent<SVGElement>
-) => TooltipCoordinates;
+export type GetTooltipCoordinates<T> = (value: T, event?: MouseEvent<SVGElement>) => TooltipCoordinates;
 
 interface TooltipProps<T> {
   children: ReactNode;
@@ -42,10 +31,7 @@ interface UseTooltipStateArguments<T> {
  * getTooltipCoordinates is provided by the specific graph to retrieve the
  * coordinates based on the mouse event and/or the value.
  */
-export function useTooltip<T>({
-  values,
-  getTooltipCoordinates,
-}: UseTooltipStateArguments<T>) {
+export function useTooltip<T>({ values, getTooltipCoordinates }: UseTooltipStateArguments<T>) {
   const [isVisible, setIsVisible] = useState(false);
   const [coordinates, setCoordinates] = useState<TooltipCoordinates>();
   const [value, setValue] = useState<T>();
@@ -102,10 +88,7 @@ export function useTooltip<T>({
       const direction = event.key === 'ArrowLeft' ? -1 : 1;
 
       // The new index overflows from zero to the last and vice versa
-      const newIndex =
-        keyboardValueIndex === undefined
-          ? 0
-          : (keyboardValueIndex + direction + values.length) % values.length;
+      const newIndex = keyboardValueIndex === undefined ? 0 : (keyboardValueIndex + direction + values.length) % values.length;
 
       const newValue = values[newIndex];
 
@@ -127,12 +110,7 @@ export function useTooltip<T>({
   return { openTooltip, closeTooltip, keyboardNavigateTooltip, tooltipState };
 }
 
-export function Tooltip<T>({
-  children,
-  tooltipState,
-  width,
-  tooltipArrow,
-}: TooltipProps<T>) {
+export function Tooltip<T>({ children, tooltipState, width, tooltipArrow }: TooltipProps<T>) {
   return (
     <Box
       aria-live="assertive"

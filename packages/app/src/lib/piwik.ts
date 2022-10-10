@@ -33,14 +33,7 @@ export function event(eventOptions: EventTypes): void {
   const { category, action, name, value, dimensions } = eventOptions;
   if (isBrowser) {
     if (window?._paq?.push) {
-      window._paq.push([
-        'trackEvent',
-        category,
-        action,
-        name,
-        value,
-        dimensions,
-      ]);
+      window._paq.push(['trackEvent', category, action, name, value, dimensions]);
     } else {
       console.log('no window object found');
     }

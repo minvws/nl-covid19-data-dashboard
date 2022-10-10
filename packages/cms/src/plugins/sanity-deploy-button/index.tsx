@@ -37,9 +37,7 @@ function Deploy() {
         mode: 'no-cors',
       });
     } else {
-      console.error(
-        'The studio is missing the webhookUrl secret. Check your configuration'
-      );
+      console.error('The studio is missing the webhookUrl secret. Check your configuration');
     }
   }
 

@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import { SiteText } from '~/locale';
 
-export type SituationTexts =
-  SiteText['pages']['situations_page']['shared']['situaties'];
+export type SituationTexts = SiteText['pages']['situations_page']['shared']['situaties'];
 export type SituationKey = keyof SituationTexts;
 
 interface Situation {
@@ -11,16 +10,7 @@ interface Situation {
   description: string;
 }
 
-const situations: SituationKey[] = [
-  'home_and_visits',
-  'work',
-  'school_and_day_care',
-  'health_care',
-  'gathering',
-  'travel',
-  'hospitality',
-  'other',
-];
+const situations: SituationKey[] = ['home_and_visits', 'work', 'school_and_day_care', 'health_care', 'gathering', 'travel', 'hospitality', 'other'];
 
 export function useSituations(situationTexts: SituationTexts) {
   return useMemo(

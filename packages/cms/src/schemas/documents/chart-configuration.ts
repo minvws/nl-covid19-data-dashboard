@@ -110,15 +110,7 @@ export const chartConfiguration = {
       area: 'area',
       metricName: 'metricName',
     },
-    prepare({
-      title,
-      area,
-      metricName,
-    }: {
-      title: string;
-      area: string;
-      metricName: string;
-    }) {
+    prepare({ title, area, metricName }: { title: string; area: string; metricName: string }) {
       return {
         title,
         subtitle: `${area} -> ${metricName}`,

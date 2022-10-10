@@ -10,9 +10,7 @@ context('Gemeente - Rioolwater', () => {
 
     const kpiTestInfo = {
       average: cy.formatters.formatNumber(lastValue?.average),
-      total_number_of_samples: cy.formatters.formatNumber(
-        lastValue?.total_number_of_samples
-      ),
+      total_number_of_samples: cy.formatters.formatNumber(lastValue?.total_number_of_samples),
     };
 
     cy.checkKpiValues(kpiTestInfo);

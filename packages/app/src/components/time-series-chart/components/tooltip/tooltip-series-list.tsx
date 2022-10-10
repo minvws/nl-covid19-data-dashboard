@@ -8,10 +8,7 @@ interface TooltipSeriesListProps<T extends TimestampedValue> {
   hasTwoColumns?: boolean;
 }
 
-export function TooltipSeriesList<T extends TimestampedValue>({
-  data,
-  hasTwoColumns,
-}: TooltipSeriesListProps<T>) {
+export function TooltipSeriesList<T extends TimestampedValue>({ data, hasTwoColumns }: TooltipSeriesListProps<T>) {
   return (
     <TooltipSeriesListContainer {...data}>
       <TooltipSeriesListItems hasTwoColumns={hasTwoColumns} {...data} />

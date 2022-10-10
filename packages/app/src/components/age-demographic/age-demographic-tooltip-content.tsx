@@ -7,9 +7,7 @@ import { Box } from '../base';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 
-interface AgeDemographicTooltipContentProps<
-  T extends AgeDemographicDefaultValue
-> {
+interface AgeDemographicTooltipContentProps<T extends AgeDemographicDefaultValue> {
   value: T;
   rightMetricProperty: keyof T;
   leftMetricProperty: keyof T;
@@ -19,9 +17,7 @@ interface AgeDemographicTooltipContentProps<
   formatValue: (n: number) => string;
 }
 
-export function AgeDemographicTooltipContent<
-  T extends AgeDemographicDefaultValue
->({
+export function AgeDemographicTooltipContent<T extends AgeDemographicDefaultValue>({
   value,
   rightMetricProperty,
   leftMetricProperty,
@@ -31,8 +27,7 @@ export function AgeDemographicTooltipContent<
   formatValue,
 }: AgeDemographicTooltipContentProps<T>) {
   const valueRight = value[rightMetricProperty];
-  const rightMetricPropertyValue =
-    typeof valueRight === 'number' ? valueRight : 0;
+  const rightMetricPropertyValue = typeof valueRight === 'number' ? valueRight : 0;
 
   const valueLeft = value[leftMetricProperty];
   const leftMetricPropertyValue = typeof valueLeft === 'number' ? valueLeft : 0;

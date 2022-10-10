@@ -2,13 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Anchor } from './typography';
 
-export function SkipLinkMenu({
-  ariaLabel,
-  links,
-}: {
-  ariaLabel: string;
-  links: Array<{ href: string; label: string }>;
-}) {
+export function SkipLinkMenu({ ariaLabel, links }: { ariaLabel: string; links: Array<{ href: string; label: string }> }) {
   return (
     <StyledSkipLinkMenu role="navigation" aria-label={ariaLabel}>
       {links.map((x) => (

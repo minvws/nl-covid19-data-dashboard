@@ -25,12 +25,7 @@ import { assert } from '@corona-dashboard/common';
 import { difference } from 'lodash';
 import prompts from 'prompts';
 import { getClient } from '../client';
-import {
-  clearMutationsLogFile,
-  finalizeMoveMutations,
-  getCollapsedMoveMutations,
-  readTextMutations,
-} from './logic';
+import { clearMutationsLogFile, finalizeMoveMutations, getCollapsedMoveMutations, readTextMutations } from './logic';
 
 (async function run() {
   {
@@ -38,8 +33,7 @@ import {
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message:
-          'This script should typically be run only right after a release, as it deletes keys from the production dataset. Are you aware of this?',
+        message: 'This script should typically be run only right after a release, as it deletes keys from the production dataset. Are you aware of this?',
         initial: false,
       },
     ]);
@@ -58,12 +52,10 @@ import {
    * Only query published documents, we do not want to inject drafts from
    * development as drafts into production.
    */
-  const allDevTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
+  const allDevTexts = (await getClient('development').fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
     order(subject asc)`)) as LokalizeText[];
 
-  const allPrdTexts = (await getClient('production')
-    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
+  const allPrdTexts = (await getClient('production').fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
     order(subject asc)`)) as LokalizeText[];
 
   await syncMissingTextsToPrd(allDevTexts, allPrdTexts);
@@ -75,10 +67,7 @@ import {
   process.exit(1);
 });
 
-async function syncMissingTextsToPrd(
-  allDevTexts: LokalizeText[],
-  allPrdTexts: LokalizeText[]
-) {
+async function syncMissingTextsToPrd(allDevTexts: LokalizeText[], allPrdTexts: LokalizeText[]) {
   const allDevKeys = allDevTexts.map((x) => x.key);
   const allPrdKeys = allPrdTexts.map((x) => x.key);
   /**
@@ -114,32 +103,22 @@ async function syncMissingTextsToPrd(
         publish_count: 0,
       };
 
-      const count = await prdClient.fetch(
-        `count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`
-      );
+      const count = await prdClient.fetch(`count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`);
 
       if (count === 0) {
         prdTransaction.createOrReplace(documentToInject);
       } else {
-        console.warn(
-          `A lokalize document with key ${documentToInject.key} already exists. Skipped adding a new one.`
-        );
+        console.warn(`A lokalize document with key ${documentToInject.key} already exists. Skipped adding a new one.`);
       }
     }
 
     await prdTransaction.commit();
 
-    console.log(
-      'Successfully injected missing lokalize texts for keys:',
-      devKeysMissingInPrd
-    );
+    console.log('Successfully injected missing lokalize texts for keys:', devKeysMissingInPrd);
   }
 }
 
-async function syncDeletionsToProd(
-  allDevTexts: LokalizeText[],
-  allPrdTexts: LokalizeText[]
-) {
+async function syncDeletionsToProd(allDevTexts: LokalizeText[], allPrdTexts: LokalizeText[]) {
   const allDevKeys = allDevTexts.map((x) => x.key);
   const allPrdKeys = allPrdTexts.map((x) => x.key);
 
@@ -150,9 +129,7 @@ async function syncDeletionsToProd(
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message: `The following keys will be deleted from production:\n\n${prdKeysMissingInDev.join(
-          '\n'
-        )}\n\nAre you absolutely sure you want this to happen?`,
+        message: `The following keys will be deleted from production:\n\n${prdKeysMissingInDev.join('\n')}\n\nAre you absolutely sure you want this to happen?`,
         initial: false,
       },
     ]);
@@ -173,8 +150,6 @@ async function syncDeletionsToProd(
 
     await prdTransaction.commit();
 
-    console.log(
-      `Successfully deleted ${prdKeysMissingInDev.length} lokalize keys`
-    );
+    console.log(`Successfully deleted ${prdKeysMissingInDev.length} lokalize keys`);
   }
 }

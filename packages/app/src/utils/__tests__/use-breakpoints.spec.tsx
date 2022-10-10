@@ -20,9 +20,7 @@ type ContextWithMediaQueries = Context &
   };
 
 function getMqKey(mediaQuery: string) {
-  return findKey(theme.mediaQueries, (mq) => mq === mediaQuery) as
-    | keyof typeof theme.mediaQueries
-    | undefined;
+  return findKey(theme.mediaQueries, (mq) => mq === mediaQuery) as keyof typeof theme.mediaQueries | undefined;
 }
 
 function addListenerStub(context: ContextWithMediaQueries, mediaQuery: string) {
@@ -99,36 +97,33 @@ UseBreakpoints('should return the given initial value by default', () => {
   });
 });
 
-UseBreakpoints(
-  'should return the match for each breakpoint after hydrating',
-  (context) => {
-    const { result, hydrate } = renderHook(() => useBreakpoints(false), {
-      wrapper: WrappingContext,
-    });
+UseBreakpoints('should return the match for each breakpoint after hydrating', (context) => {
+  const { result, hydrate } = renderHook(() => useBreakpoints(false), {
+    wrapper: WrappingContext,
+  });
 
-    assert.equal(result.current, {
-      xs: false,
-      sm: false,
-      md: false,
-      lg: false,
-      xl: false,
-    });
+  assert.equal(result.current, {
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false,
+  });
 
-    const matches = {
-      xs: true,
-      sm: false,
-      md: true,
-      lg: false,
-      xl: true,
-    };
+  const matches = {
+    xs: true,
+    sm: false,
+    md: true,
+    lg: false,
+    xl: true,
+  };
 
-    context.matches = matches;
+  context.matches = matches;
 
-    hydrate();
+  hydrate();
 
-    assert.equal(result.current, matches);
-  }
-);
+  assert.equal(result.current, matches);
+});
 
 UseBreakpoints('should update the breakpoints on change', (context) => {
   const { result, hydrate } = renderHook(() => useBreakpoints(false), {
@@ -137,20 +132,15 @@ UseBreakpoints('should update the breakpoints on change', (context) => {
 
   hydrate();
 
-  assert.equal(
-    Object.keys(context.mediaQueryCallback),
-    Object.keys(theme.mediaQueries),
-    'Did not add change listeners for all media queries'
-  );
+  assert.equal(Object.keys(context.mediaQueryCallback), Object.keys(theme.mediaQueries), 'Did not add change listeners for all media queries');
 
-  const expectedBreakpoints: Record<keyof typeof theme.mediaQueries, boolean> =
-    {
-      xs: false,
-      sm: false,
-      md: false,
-      lg: false,
-      xl: false,
-    };
+  const expectedBreakpoints: Record<keyof typeof theme.mediaQueries, boolean> = {
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false,
+  };
 
   Object.keys(theme.mediaQueries).forEach((mqKey) => {
     context.mediaQueryCallback[mqKey]({ matches: true });

@@ -3,10 +3,7 @@ import { snakeCase } from 'change-case';
 import prompts from 'prompts';
 import { isDefined } from 'ts-is-present';
 import { getClient } from '../client';
-import {
-  getSchemaMetricProperties,
-  getSchemaMetrics,
-} from './logic/get-schema';
+import { getSchemaMetricProperties, getSchemaMetrics } from './logic/get-schema';
 
 type Element = {
   scope: DataScopeKey;
@@ -102,10 +99,7 @@ async function promptForElement(): Promise<Element | undefined> {
       type: 'select',
       name: 'metricProperty',
       message: 'Select a metric property for this element:',
-      choices: getSchemaMetricProperties(
-        scopeResponse.scope,
-        metricNameResponse.metricName
-      )
+      choices: getSchemaMetricProperties(scopeResponse.scope, metricNameResponse.metricName)
         .sort()
         .map((x) => ({
           title: x,
@@ -126,9 +120,7 @@ async function promptForElement(): Promise<Element | undefined> {
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message: `The element ${elementToId(
-          element
-        )} already exists, do you want to start over?\nChoosing no will exit this prompt.`,
+        message: `The element ${elementToId(element)} already exists, do you want to start over?\nChoosing no will exit this prompt.`,
         initial: false,
       },
     ]);
@@ -145,9 +137,7 @@ async function promptForElement(): Promise<Element | undefined> {
     {
       type: 'confirm',
       name: 'isConfirmed',
-      message: `Is this correct?\n${elementToId(
-        element
-      )}\nWhen choosing 'yes' this element will be saved to both development and production.`,
+      message: `Is this correct?\n${elementToId(element)}\nWhen choosing 'yes' this element will be saved to both development and production.`,
       initial: false,
     },
   ]);
@@ -169,13 +159,9 @@ async function isNewElement(element: Element) {
 
 function elementToId(element: Element) {
   if (!isDefined(element.metricProperty)) {
-    return `${element.scope}__${element.metricName}__${snakeCase(
-      element._type
-    )}`;
+    return `${element.scope}__${element.metricName}__${snakeCase(element._type)}`;
   }
-  return `${element.scope}__${element.metricName}__${snakeCase(
-    element._type
-  )}__${element.metricProperty}`;
+  return `${element.scope}__${element.metricName}__${snakeCase(element._type)}__${element.metricProperty}`;
 }
 
 async function saveElement(element: Element) {

@@ -4,13 +4,7 @@ import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
 
-export function InlineDifference({
-  value,
-  isAmount,
-}: {
-  value: DifferenceDecimal | DifferenceInteger;
-  isAmount: boolean;
-}) {
+export function InlineDifference({ value, isAmount }: { value: DifferenceDecimal | DifferenceInteger; isAmount: boolean }) {
   const { commonTexts } = useIntl();
   const text = commonTexts.trend;
 

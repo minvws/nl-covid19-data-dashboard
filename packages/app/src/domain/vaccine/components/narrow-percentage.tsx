@@ -9,11 +9,7 @@ interface NarrowPercentageProps {
   textLabel: string;
 }
 
-export function NarrowPercentage({
-  value,
-  color,
-  textLabel,
-}: NarrowPercentageProps) {
+export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
   return (
     <Box
       css={css({
@@ -25,13 +21,7 @@ export function NarrowPercentage({
       <Box pr={3} minWidth="8.5rem" textAlign="left">
         <InlineText>{`${textLabel}:`}</InlineText>
       </Box>
-      <Box
-        width={10}
-        height={10}
-        backgroundColor={color}
-        borderRadius="50%"
-        mr={2}
-      />
+      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" mr={2} />
       {value}
     </Box>
   );

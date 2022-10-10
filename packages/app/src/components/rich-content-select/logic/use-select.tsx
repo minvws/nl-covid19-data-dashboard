@@ -1,13 +1,5 @@
 import { Unpack } from '@corona-dashboard/common';
-import {
-  KeyboardEventHandler,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { KeyboardEventHandler, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -27,10 +19,7 @@ enum Actions {
   Type,
 }
 
-function getActiveIndexForValue<T extends string>(
-  options: Option<T>[],
-  value?: Unpack<T>
-) {
+function getActiveIndexForValue<T extends string>(options: Option<T>[], value?: Unpack<T>) {
   if (!value) {
     return 0;
   }
@@ -38,25 +27,17 @@ function getActiveIndexForValue<T extends string>(
   return options.findIndex((el) => el.value === value);
 }
 
-export function useRichContentSelect<T extends string>(
-  options: Option<T>[],
-  onChange: (option: Option<T>) => void,
-  initialValue?: Unpack<T>
-) {
+export function useRichContentSelect<T extends string>(options: Option<T>[], onChange: (option: Option<T>) => void, initialValue?: Unpack<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
   const listBoxRef = useRef<HTMLDivElement>(null);
 
   const [expanded, setExpanded] = useState(false);
 
-  const [activeIndex, setActiveIndex] = useState(
-    getActiveIndexForValue(options, initialValue)
-  );
+  const [activeIndex, setActiveIndex] = useState(getActiveIndexForValue(options, initialValue));
 
   // make sure activeIndex and selectedOption are in sync at component mount
-  const [selectedOption, setSelectedOption] = useState(
-    () => options[activeIndex]
-  );
+  const [selectedOption, setSelectedOption] = useState(() => options[activeIndex]);
 
   // close the combobox when a click outside of the component occurs
   useOnClickOutside([containerRef], () => {
@@ -70,23 +51,17 @@ export function useRichContentSelect<T extends string>(
   }, [options, initialValue]);
 
   const searchString = useRef('');
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const labelId = useUniqueId();
   const listBoxId = useUniqueId();
 
-  const filterOptions = useCallback(
-    (options: Option<T>[], filter: string, exclude: T[] = []) => {
-      return options.filter((option) => {
-        const matches =
-          option.value.toLowerCase().indexOf(filter.toLowerCase()) === 0;
-        return matches && exclude.indexOf(option.value) < 0;
-      });
-    },
-    []
-  );
+  const filterOptions = useCallback((options: Option<T>[], filter: string, exclude: T[] = []) => {
+    return options.filter((option) => {
+      const matches = option.value.toLowerCase().indexOf(filter.toLowerCase()) === 0;
+      return matches && exclude.indexOf(option.value) < 0;
+    });
+  }, []);
 
   const getActionFromKey = useCallback(
     (event) => {
@@ -107,11 +82,7 @@ export function useRichContentSelect<T extends string>(
       if (key === 'End') return Actions.Last;
 
       // handle typing characters when open or closed
-      if (
-        key === 'Backspace' ||
-        key === 'Clear' ||
-        (key.length === 1 && key !== ' ' && noModifiers)
-      ) {
+      if (key === 'Backspace' || key === 'Clear' || (key.length === 1 && key !== ' ' && noModifiers)) {
         return Actions.Type;
       }
 
@@ -141,15 +112,11 @@ export function useRichContentSelect<T extends string>(
   // if the filter is multiple iterations of the same letter (e.g "aaa"), then cycle through first-letter matches
   const getIndexByLetter = useCallback(
     (options: Option<T>[], filter: string, startIndex = 0) => {
-      const orderedOptions = [
-        ...options.slice(startIndex),
-        ...options.slice(0, startIndex),
-      ];
+      const orderedOptions = [...options.slice(startIndex), ...options.slice(0, startIndex)];
 
       const firstMatch = filterOptions(orderedOptions, filter)[0];
 
-      const allSameLetter = (arr: string[]) =>
-        arr.every((letter) => letter === arr[0]);
+      const allSameLetter = (arr: string[]) => arr.every((letter) => letter === arr[0]);
 
       if (firstMatch) {
         return options.indexOf(firstMatch);
@@ -169,29 +136,26 @@ export function useRichContentSelect<T extends string>(
   );
 
   // get an updated option index after performing an action
-  const getUpdatedIndex = useCallback(
-    (currentIndex: number, maxIndex: number, action: Actions) => {
-      const pageSize = 10; // used for pageup/down
+  const getUpdatedIndex = useCallback((currentIndex: number, maxIndex: number, action: Actions) => {
+    const pageSize = 10; // used for pageup/down
 
-      switch (action) {
-        case Actions.First:
-          return 0;
-        case Actions.Last:
-          return maxIndex;
-        case Actions.Previous:
-          return Math.max(0, currentIndex - 1);
-        case Actions.Next:
-          return Math.min(maxIndex, currentIndex + 1);
-        case Actions.PageUp:
-          return Math.max(0, currentIndex - pageSize);
-        case Actions.PageDown:
-          return Math.min(maxIndex, currentIndex + pageSize);
-        default:
-          return currentIndex;
-      }
-    },
-    []
-  );
+    switch (action) {
+      case Actions.First:
+        return 0;
+      case Actions.Last:
+        return maxIndex;
+      case Actions.Previous:
+        return Math.max(0, currentIndex - 1);
+      case Actions.Next:
+        return Math.min(maxIndex, currentIndex + 1);
+      case Actions.PageUp:
+        return Math.max(0, currentIndex - pageSize);
+      case Actions.PageDown:
+        return Math.min(maxIndex, currentIndex + pageSize);
+      default:
+        return currentIndex;
+    }
+  }, []);
 
   const updateExpandedState = useCallback(
     (nextExpanded, callFocus = true) => {
@@ -210,28 +174,21 @@ export function useRichContentSelect<T extends string>(
     return false;
   }, []);
 
-  const maintainScrollVisibility = useCallback(
-    (activeElement: HTMLElement | null, scrollParent: HTMLElement | null) => {
-      if (isPresent(scrollParent) && isPresent(activeElement)) {
-        const { offsetHeight, offsetTop } = activeElement;
-        const { offsetHeight: parentOffsetHeight, scrollTop } = scrollParent;
+  const maintainScrollVisibility = useCallback((activeElement: HTMLElement | null, scrollParent: HTMLElement | null) => {
+    if (isPresent(scrollParent) && isPresent(activeElement)) {
+      const { offsetHeight, offsetTop } = activeElement;
+      const { offsetHeight: parentOffsetHeight, scrollTop } = scrollParent;
 
-        const isAbove = offsetTop < scrollTop;
-        const isBelow =
-          offsetTop + offsetHeight > scrollTop + parentOffsetHeight;
+      const isAbove = offsetTop < scrollTop;
+      const isBelow = offsetTop + offsetHeight > scrollTop + parentOffsetHeight;
 
-        if (isAbove) {
-          scrollParent.scrollTo(0, offsetTop);
-        } else if (isBelow) {
-          scrollParent.scrollTo(
-            0,
-            offsetTop + offsetHeight - parentOffsetHeight
-          );
-        }
+      if (isAbove) {
+        scrollParent.scrollTo(0, offsetTop);
+      } else if (isBelow) {
+        scrollParent.scrollTo(0, offsetTop + offsetHeight - parentOffsetHeight);
       }
-    },
-    []
-  );
+    }
+  }, []);
 
   const selectOption = useCallback(
     (index: number) => {
@@ -243,11 +200,7 @@ export function useRichContentSelect<T extends string>(
   );
 
   const findSearchStringMatch = useCallback(() => {
-    const searchIndex = getIndexByLetter(
-      options,
-      searchString.current,
-      activeIndex + 1
-    );
+    const searchIndex = getIndexByLetter(options, searchString.current, activeIndex + 1);
 
     // if a match was found, go to it
     if (searchIndex >= 0) {
@@ -319,23 +272,12 @@ export function useRichContentSelect<T extends string>(
           return updateExpandedState(true);
       }
     },
-    [
-      activeIndex,
-      getActionFromKey,
-      getUpdatedIndex,
-      onComboType,
-      options.length,
-      selectOption,
-      updateExpandedState,
-    ]
+    [activeIndex, getActionFromKey, getUpdatedIndex, onComboType, options.length, selectOption, updateExpandedState]
   );
 
   // if the activeIndex changes, make sure the selected element is in view
   useEffect(() => {
-    if (
-      isPresent(listBoxRef.current) &&
-      isPresent(listBoxRef.current.childNodes)
-    ) {
+    if (isPresent(listBoxRef.current) && isPresent(listBoxRef.current.childNodes)) {
       const el = Array.from(listBoxRef.current.childNodes)[activeIndex];
       if (isPresent(el) && isScrollable(listBoxRef.current)) {
         maintainScrollVisibility(el as HTMLElement, listBoxRef.current);
@@ -384,15 +326,6 @@ export function useRichContentSelect<T extends string>(
         };
       },
     }),
-    [
-      activeIndex,
-      expanded,
-      handleKeyDown,
-      labelId,
-      listBoxId,
-      selectOption,
-      selectedOption,
-      updateExpandedState,
-    ]
+    [activeIndex, expanded, handleKeyDown, labelId, listBoxId, selectOption, selectedOption, updateExpandedState]
   );
 }

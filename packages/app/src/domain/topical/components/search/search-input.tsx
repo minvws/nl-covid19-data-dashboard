@@ -40,14 +40,7 @@ export function SearchInput() {
         <label htmlFor={`${id}-input`}>{commonTexts.search.placeholder}</label>
       </VisuallyHidden>
 
-      <StyledSearchInput
-        ref={inputRef}
-        type="search"
-        id={`${id}-input`}
-        placeholder={commonTexts.search.placeholder}
-        autoComplete="off"
-        {...inputProps}
-      />
+      <StyledSearchInput ref={inputRef} type="search" id={`${id}-input`} placeholder={commonTexts.search.placeholder} autoComplete="off" {...inputProps} />
     </Box>
   );
 }

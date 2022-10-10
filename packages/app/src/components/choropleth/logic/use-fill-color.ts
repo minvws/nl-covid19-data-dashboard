@@ -17,63 +17,33 @@ import { isCodedValueType } from './utils';
  * @param dataConfig
  * @returns
  */
-export function useFillColor<T extends ChoroplethDataItem>(
-  data: T[],
-  map: MapType,
-  dataConfig: DataConfig<T>,
-  thresholdMap?: MapType
-) {
+export function useFillColor<T extends ChoroplethDataItem>(data: T[], map: MapType, dataConfig: DataConfig<T>, thresholdMap?: MapType) {
   const codeType = mapToCodeType[map];
   const { metricProperty, noDataFillColor } = dataConfig;
 
-  const getValueByCode = useMemo(
-    () => createGetValueByCode(metricProperty, codeType, data),
-    [metricProperty, codeType, data]
-  );
+  const getValueByCode = useMemo(() => createGetValueByCode(metricProperty, codeType, data), [metricProperty, codeType, data]);
 
   const threshold = thresholds[thresholdMap || map][metricProperty as string];
-  assert(
-    isDefined(threshold),
-    `[${
-      useFillColor.name
-    }] No threshold configured for map type ${map} and metric property ${metricProperty.toString()}`
-  );
+  assert(isDefined(threshold), `[${useFillColor.name}] No threshold configured for map type ${map} and metric property ${metricProperty.toString()}`);
 
   const colorScale = useMemo(() => createColorScale(threshold), [threshold]);
 
-  return useMemo(
-    () => createGetFillColor(getValueByCode, colorScale, noDataFillColor),
-    [getValueByCode, colorScale, noDataFillColor]
-  );
+  return useMemo(() => createGetFillColor(getValueByCode, colorScale, noDataFillColor), [getValueByCode, colorScale, noDataFillColor]);
 }
 
-export function getFillColor<T extends ChoroplethDataItem>(
-  data: T[],
-  map: MapType,
-  dataConfig: DataConfig<T>,
-  thresholdMap?: MapType
-) {
+export function getFillColor<T extends ChoroplethDataItem>(data: T[], map: MapType, dataConfig: DataConfig<T>, thresholdMap?: MapType) {
   const codeType = mapToCodeType[map];
   const { metricProperty, noDataFillColor } = dataConfig;
 
   const getValueByCode = createGetValueByCode(metricProperty, codeType, data);
   const threshold = thresholds[thresholdMap || map][metricProperty as string];
-  assert(
-    isDefined(threshold),
-    `[${
-      getFillColor.name
-    }] No threshold configured for map type ${map} and metric property ${metricProperty.toString()}`
-  );
+  assert(isDefined(threshold), `[${getFillColor.name}] No threshold configured for map type ${map} and metric property ${metricProperty.toString()}`);
   const colorScale = createColorScale(threshold);
 
   return createGetFillColor(getValueByCode, colorScale, noDataFillColor);
 }
 
-function createGetFillColor(
-  getValueByCode: ReturnType<typeof createGetValueByCode>,
-  colorScale: ReturnType<typeof createColorScale>,
-  noDataFillColor: string
-) {
+function createGetFillColor(getValueByCode: ReturnType<typeof createGetValueByCode>, colorScale: ReturnType<typeof createColorScale>, noDataFillColor: string) {
   return (code: string) => {
     const value = getValueByCode(code);
     const result = isPresent(value) ? colorScale(value) : noDataFillColor;
@@ -91,11 +61,7 @@ function createColorScale(threshold: ChoroplethThresholdsValue<number>[]) {
   return color;
 }
 
-function createGetValueByCode<T extends ChoroplethDataItem>(
-  metricProperty: keyof T,
-  codeType: CodeProp,
-  data: T[]
-) {
+function createGetValueByCode<T extends ChoroplethDataItem>(metricProperty: keyof T, codeType: CodeProp, data: T[]) {
   return (code: string) => {
     const item = data
       .filter((x) => {
@@ -104,8 +70,6 @@ function createGetValueByCode<T extends ChoroplethDataItem>(
       })
       .find((x) => (x as unknown as Record<string, string>)[codeType] === code);
 
-    return isDefined(item) && isPresent(item[metricProperty])
-      ? Number(item[metricProperty])
-      : undefined;
+    return isDefined(item) && isPresent(item[metricProperty]) ? Number(item[metricProperty]) : undefined;
   };
 }

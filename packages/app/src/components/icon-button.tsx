@@ -12,36 +12,14 @@ interface IconButtonProps {
   padding?: number | string;
 }
 
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  (
-    {
-      children,
-      size,
-      title,
-      color = 'currentColor',
-      onClick,
-      padding,
-      ...ariaProps
-    },
-    ref
-  ) => {
-    return (
-      <StyledIconButton
-        ref={ref}
-        title={title}
-        type="button"
-        onClick={onClick}
-        size={size}
-        color={color}
-        padding={padding}
-        {...ariaProps}
-      >
-        <VisuallyHidden>{title}</VisuallyHidden>
-        {cloneElement(children, { 'aria-hidden': 'true' })}
-      </StyledIconButton>
-    );
-  }
-);
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ children, size, title, color = 'currentColor', onClick, padding, ...ariaProps }, ref) => {
+  return (
+    <StyledIconButton ref={ref} title={title} type="button" onClick={onClick} size={size} color={color} padding={padding} {...ariaProps}>
+      <VisuallyHidden>{title}</VisuallyHidden>
+      {cloneElement(children, { 'aria-hidden': 'true' })}
+    </StyledIconButton>
+  );
+});
 
 const StyledIconButton = styled.button<{
   color: string;

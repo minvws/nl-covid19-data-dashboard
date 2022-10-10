@@ -27,15 +27,7 @@ type DifferenceProps =
 type PageBarScaleProps = PageBarScaleBaseProps & DifferenceProps;
 
 export function PageBarScale(props: PageBarScaleProps) {
-  const {
-    value,
-    config,
-    screenReaderText,
-    difference,
-    isMovingAverageDifference,
-    showOldDateUnix,
-    isAmount,
-  } = props;
+  const { value, config, screenReaderText, difference, isMovingAverageDifference, showOldDateUnix, isAmount } = props;
   /**
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
@@ -61,11 +53,7 @@ export function PageBarScale(props: PageBarScaleProps) {
         (isMovingAverageDifference ? (
           <TileAverageDifference value={difference} isAmount={isAmount} />
         ) : (
-          <TileDifference
-            value={difference}
-            showOldDateUnix={showOldDateUnix}
-            isAmount={isAmount}
-          />
+          <TileDifference value={difference} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />
         ))}
     </Box>
   );

@@ -1,9 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@reach/disclosure';
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@reach/disclosure';
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
@@ -20,11 +16,7 @@ interface CollapsibleButtonProps {
   icon?: React.ReactNode;
 }
 
-export const CollapsibleButton = ({
-  label,
-  children,
-  icon,
-}: CollapsibleButtonProps) => {
+export const CollapsibleButton = ({ label, children, icon }: CollapsibleButtonProps) => {
   const [contentRef, contentSize] = useResizeObserver<HTMLDivElement>();
   const [buttonRef, buttonSize] = useResizeObserver<HTMLDivElement>();
 
@@ -55,9 +47,7 @@ export const CollapsibleButton = ({
    * fallback to `undefined` to prevent an initial animation from `0` to
    * measured height
    */
-  const height =
-    (buttonSize.height ?? 0) + (isOpen ? contentSize.height ?? 0 : 0) ||
-    undefined;
+  const height = (buttonSize.height ?? 0) + (isOpen ? contentSize.height ?? 0 : 0) || undefined;
 
   return (
     <Container
@@ -72,15 +62,7 @@ export const CollapsibleButton = ({
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <Box
-            position="absolute"
-            top="50%"
-            left="0"
-            height="1px"
-            width="100%"
-            transform="translate(0, -50%)"
-            bg={'gray3'}
-          />
+          <Box position="absolute" top="50%" left="0" height="1px" width="100%" transform="translate(0, -50%)" bg={'gray3'} />
           <Box ref={buttonRef} bg={colors.white} zIndex={1}>
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
@@ -196,9 +178,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       transition: 'clip-path 0.4s',
       pointerEvents: x.isOpen ? 'auto' : 'none',
       willChange: 'clip-path',
-      clipPath: x.isOpen
-        ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
-        : `polygon(${x.clipPathCalculation})`,
+      clipPath: x.isOpen ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' : `polygon(${x.clipPathCalculation})`,
 
       '.has-no-js &': {
         maxHeight: 0,

@@ -16,40 +16,25 @@ interface SituationsDataCoverageTileProps {
   text: SiteText['pages']['situations_page']['shared']['veiligheidsregio_dekking'];
 }
 
-export function SituationsDataCoverageTile({
-  data,
-  text,
-}: SituationsDataCoverageTileProps) {
+export function SituationsDataCoverageTile({ data, text }: SituationsDataCoverageTileProps) {
   const { formatDateSpan } = useIntl();
 
-  const [date_from, date_to] = formatDateSpan(
-    { seconds: data.date_start_unix },
-    { seconds: data.date_end_unix }
-  );
+  const [date_from, date_to] = formatDateSpan({ seconds: data.date_start_unix }, { seconds: data.date_end_unix });
 
   return (
     <Tile>
       <Box spacing={2}>
         <Heading level={3}>{text.titel}</Heading>
         <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
-          <IndicatorCircle>
-            {data.has_sufficient_data ? <Check /> : <Cross />}
-          </IndicatorCircle>
-          {data.has_sufficient_data
-            ? text.titel_genoeg_dekking
-            : text.titel_niet_genoeg_dekking}
+          <IndicatorCircle>{data.has_sufficient_data ? <Check /> : <Cross />}</IndicatorCircle>
+          {data.has_sufficient_data ? text.titel_genoeg_dekking : text.titel_niet_genoeg_dekking}
         </CoverageIndicator>
         <Box maxWidth="maxWidthText">
           <Markdown
-            content={replaceVariablesInText(
-              data.has_sufficient_data
-                ? text.beschrijving_genoeg_dekking
-                : text.beschrijving_niet_genoeg_dekking,
-              {
-                date_from,
-                date_to,
-              }
-            )}
+            content={replaceVariablesInText(data.has_sufficient_data ? text.beschrijving_genoeg_dekking : text.beschrijving_niet_genoeg_dekking, {
+              date_from,
+              date_to,
+            })}
           />
         </Box>
       </Box>

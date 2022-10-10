@@ -11,12 +11,7 @@ interface TwoKpiSectionProps {
   hasPadding?: boolean;
 }
 
-export function TwoKpiSection({
-  children,
-  spacing,
-  hasBorder = false,
-  hasPadding = false,
-}: TwoKpiSectionProps) {
+export function TwoKpiSection({ children, spacing, hasBorder = false, hasPadding = false }: TwoKpiSectionProps) {
   return (
     <Box
       display="flex"

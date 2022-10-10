@@ -30,14 +30,7 @@ interface LinkContainerProps {
   showAsButton: boolean;
 }
 
-export const LinkWithIcon = ({
-  href,
-  icon,
-  children,
-  iconPlacement = 'left',
-  fontWeight,
-  showAsButton = false,
-}: LinkWithIconProps) => {
+export const LinkWithIcon = ({ href, icon, children, iconPlacement = 'left', fontWeight, showAsButton = false }: LinkWithIconProps) => {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
@@ -71,12 +64,7 @@ export const LinkWithIcon = ({
   );
 };
 
-export const HeadingLinkWithIcon = ({
-  href,
-  icon,
-  children,
-  underline,
-}: LinkWithIconProps) => {
+export const HeadingLinkWithIcon = ({ href, icon, children, underline }: LinkWithIconProps) => {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
   const isSingleWord = words.length === 1;
@@ -96,12 +84,7 @@ export const HeadingLinkWithIcon = ({
             {!words.length ? children : firstWords}
             <IconWrapper>
               {words[words.length - 1]}
-              <IconLarge
-                icon={icon}
-                isSingleWord={isSingleWord}
-                width={16}
-                height={13}
-              />
+              <IconLarge icon={icon} isSingleWord={isSingleWord} width={16} height={13} />
             </IconWrapper>
           </Box>
         </Anchor>
@@ -111,11 +94,7 @@ export const HeadingLinkWithIcon = ({
 };
 
 const IconSmall = ({ icon, width, height, mr }: IconProps) => {
-  return (
-    <span css={css({ marginRight: mr, svg: { height, width, mx: '3px' } })}>
-      {icon}
-    </span>
-  );
+  return <span css={css({ marginRight: mr, svg: { height, width, mx: '3px' } })}>{icon}</span>;
 };
 
 const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {

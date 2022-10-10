@@ -10,11 +10,7 @@ interface InformationTileProps {
   isFullWidth?: boolean;
 }
 
-export function InformationTile({
-  message,
-  icon = Information,
-  isFullWidth = true,
-}: InformationTileProps) {
+export function InformationTile({ message, icon = Information, isFullWidth = true }: InformationTileProps) {
   const Icon = icon;
   return (
     <Box css={css({ boxShadow: 'tile' })}>

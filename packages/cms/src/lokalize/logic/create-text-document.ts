@@ -13,11 +13,7 @@ type LokalizeText = {
   };
 };
 
-export function createTextDocument(
-  key: string,
-  nl: string,
-  en = ''
-): LokalizeText {
+export function createTextDocument(key: string, nl: string, en = ''): LokalizeText {
   /**
    * Subject is extracted from the key, because we use that to query/group texts
    * in the Sanity UI.

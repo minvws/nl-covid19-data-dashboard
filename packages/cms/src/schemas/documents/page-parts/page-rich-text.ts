@@ -1,8 +1,5 @@
 import { localeValidation } from '../../../language/locale-validation';
-import {
-  PAGE_IDENTIFIER_REFERENCE_FIELDS,
-  PAGE_IDENTIFIER_REFERENCE_FIELDSET,
-} from '../../fields/page-identifier-reference-fields';
+import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-identifier-reference-fields';
 
 export const pageRichText = {
   title: 'Pagina tekst blok',

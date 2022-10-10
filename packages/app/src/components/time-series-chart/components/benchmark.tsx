@@ -23,14 +23,7 @@ interface BenchmarkProps {
 
 const color = colors.gray8;
 
-export function Benchmark({
-  top,
-  value,
-  label,
-  width,
-  textRef,
-  xRangePadding = 0,
-}: BenchmarkProps) {
+export function Benchmark({ top, value, label, width, textRef, xRangePadding = 0 }: BenchmarkProps) {
   return (
     <Group top={top} left={-xRangePadding}>
       <g ref={textRef}>

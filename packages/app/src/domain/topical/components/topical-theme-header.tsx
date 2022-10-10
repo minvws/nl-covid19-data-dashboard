@@ -12,11 +12,7 @@ interface TopicalThemeHeaderProps {
   icon: TopicalIcon;
 }
 
-export const TopicalThemeHeader = ({
-  title,
-  dynamicSubtitle,
-  icon,
-}: TopicalThemeHeaderProps) => {
+export const TopicalThemeHeader = ({ title, dynamicSubtitle, icon }: TopicalThemeHeaderProps) => {
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">

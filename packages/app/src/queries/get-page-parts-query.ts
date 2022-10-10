@@ -1,12 +1,5 @@
 import { isDefined } from 'ts-is-present';
-import {
-  ArticleParts,
-  HighlightedItemParts,
-  LinkParts,
-  PageIdentifier,
-  PagePart,
-  RichTextParts,
-} from '~/types/cms';
+import { ArticleParts, HighlightedItemParts, LinkParts, PageIdentifier, PagePart, RichTextParts } from '~/types/cms';
 
 export function isArticleParts(value: PagePart): value is ArticleParts {
   return value._type === 'pageArticles';
@@ -16,9 +9,7 @@ export function isLinkParts(value: PagePart): value is LinkParts {
   return value._type === 'pageLinks';
 }
 
-export function isHighlightedItemParts(
-  value: PagePart
-): value is HighlightedItemParts {
+export function isHighlightedItemParts(value: PagePart): value is HighlightedItemParts {
   return value._type === 'pageHighlightedItems';
 }
 
@@ -54,26 +45,17 @@ export function getPagePartsQuery(pageIdentifier: PageIdentifier) {
 }
 
 export function getArticleParts(pageParts: PagePart[], pageDataKind: string) {
-  const parts = pageParts
-    .filter(isArticleParts)
-    .find((x) => x.pageDataKind === pageDataKind)?.articles;
+  const parts = pageParts.filter(isArticleParts).find((x) => x.pageDataKind === pageDataKind)?.articles;
   return isDefined(parts) ? parts : null;
 }
 
 export function getLinkParts(pageParts: PagePart[], pageDataKind: string) {
-  const parts = pageParts
-    .filter(isLinkParts)
-    .find((x) => x.pageDataKind === pageDataKind)?.links;
+  const parts = pageParts.filter(isLinkParts).find((x) => x.pageDataKind === pageDataKind)?.links;
   return isDefined(parts) ? parts : null;
 }
 
-export function getHighlightedItemParts(
-  pageParts: PagePart[],
-  pageDataKind: string
-) {
-  const parts = pageParts
-    .filter(isHighlightedItemParts)
-    .find((x) => x.pageDataKind === pageDataKind);
+export function getHighlightedItemParts(pageParts: PagePart[], pageDataKind: string) {
+  const parts = pageParts.filter(isHighlightedItemParts).find((x) => x.pageDataKind === pageDataKind);
   return isDefined(parts)
     ? {
         highlights: parts.highlights,
@@ -83,8 +65,6 @@ export function getHighlightedItemParts(
 }
 
 export function getRichTextParts(pageParts: PagePart[], pageDataKind: string) {
-  const parts = pageParts
-    .filter(isRichTextParts)
-    .find((x) => x.pageDataKind === pageDataKind)?.text;
+  const parts = pageParts.filter(isRichTextParts).find((x) => x.pageDataKind === pageDataKind)?.text;
   return isDefined(parts) ? parts : null;
 }

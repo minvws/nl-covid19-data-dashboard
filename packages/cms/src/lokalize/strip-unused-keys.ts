@@ -37,8 +37,7 @@ const APP_LOCALE_DIR = path.join(__dirname, '../../../app/src/locale');
 
   const sourceFile = project.getSourceFile('nl_export.json');
 
-  const allDevTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
+  const allDevTexts = (await getClient('development').fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
     order(subject asc)`)) as LokalizeText[];
 
   const flatStrippedTexts = sourceFile
@@ -52,12 +51,7 @@ const APP_LOCALE_DIR = path.join(__dirname, '../../../app/src/locale');
     .map((x) => createFullPropertyChain(x))
     .concat(whitelist)
     // Only keep the deepest paths:
-    .filter(
-      (subject, _i, list) =>
-        list.findIndex(
-          (y) => y.startsWith(`${subject}.`) && y.length > subject.length + 1
-        ) === -1
-    )
+    .filter((subject, _i, list) => list.findIndex((y) => y.startsWith(`${subject}.`) && y.length > subject.length + 1) === -1)
     .sort()
     .reduce<Record<string, unknown>>((acc, propertyPath) => {
       const text = get(texts, propertyPath);
@@ -69,10 +63,7 @@ const APP_LOCALE_DIR = path.join(__dirname, '../../../app/src/locale');
 
   const newTexts = unflatten(flatStrippedTexts, { object: true });
 
-  const obsoleteKeys = difference(
-    Object.keys(flatten(texts)),
-    Object.keys(flatten(newTexts))
-  ).sort();
+  const obsoleteKeys = difference(Object.keys(flatten(texts)), Object.keys(flatten(newTexts))).sort();
 
   for (const key of obsoleteKeys) {
     const text = texts[key];

@@ -23,10 +23,7 @@ function buildPatches(docs: any[], faqDocuments: any[]) {
 }
 
 function createTransaction(patches: any[]) {
-  return patches.reduce(
-    (tx, patch) => tx.patch(patch.id, patch.patch),
-    client.transaction()
-  );
+  return patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), client.transaction());
 }
 
 function saveFaqQuestionsAsDocuments(questionObjects: any[]) {
@@ -45,10 +42,7 @@ function saveFaqQuestionsAsDocuments(questionObjects: any[]) {
 async function migrateNextBatch(): Promise<any> {
   const faqs = await client.fetch(`*[_type == 'veelgesteldeVragen']`);
 
-  const questions =
-    faqs.length === 1
-      ? faqs[0].questions
-      : faqs.find((x: any) => x._id.startsWith('drafts.'))?.questions;
+  const questions = faqs.length === 1 ? faqs[0].questions : faqs.find((x: any) => x._id.startsWith('drafts.'))?.questions;
 
   const faqDocuments = await saveFaqQuestionsAsDocuments(questions);
 
@@ -59,12 +53,7 @@ async function migrateNextBatch(): Promise<any> {
     return null;
   }
 
-  console.log(
-    `Migrating batch:\n %s`,
-    patches
-      .map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
-      .join('\n')
-  );
+  console.log(`Migrating batch:\n %s`, patches.map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'));
 
   const transaction = createTransaction(patches);
   await transaction.commit();

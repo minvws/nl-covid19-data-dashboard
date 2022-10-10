@@ -12,9 +12,7 @@ import { getClient } from '../../client';
 (async function run() {
   const client = getClient('development');
 
-  const documents = (await client.fetch(
-    `*[_type == 'lokalizeText']`
-  )) as LokalizeText[];
+  const documents = (await client.fetch(`*[_type == 'lokalizeText']`)) as LokalizeText[];
 
   const transaction = client.transaction();
 

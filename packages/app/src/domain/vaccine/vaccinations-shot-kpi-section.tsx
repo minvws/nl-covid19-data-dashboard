@@ -1,13 +1,5 @@
 import { useIntl } from '~/intl';
-import {
-  KpiTile,
-  KpiValue,
-  Markdown,
-  TwoKpiSection,
-  Metadata,
-  Message,
-  MetadataProps,
-} from '~/components';
+import { KpiTile, KpiValue, Markdown, TwoKpiSection, Metadata, Message, MetadataProps } from '~/components';
 import { Box } from '~/components/base';
 
 type SourceType = {
@@ -29,11 +21,7 @@ interface VaccinationsShotKpiSectionProps {
   metadata: MetadataProps;
 }
 
-export function VaccinationsShotKpiSection({
-  text,
-  value,
-  metadata,
-}: VaccinationsShotKpiSectionProps) {
+export function VaccinationsShotKpiSection({ text, value, metadata }: VaccinationsShotKpiSectionProps) {
   const { formatNumber } = useIntl();
   return (
     <TwoKpiSection hasBorder hasPadding>

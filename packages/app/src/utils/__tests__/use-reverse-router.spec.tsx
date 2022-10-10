@@ -1,8 +1,5 @@
 import { cleanup, render } from '@testing-library/react';
-import {
-  cleanup as cleanupHooks,
-  renderHook,
-} from '@testing-library/react-hooks';
+import { cleanup as cleanupHooks, renderHook } from '@testing-library/react-hooks';
 import injectJsDom from 'jsdom-global';
 import * as sinon from 'sinon';
 import { ThemeProvider } from 'styled-components';
@@ -67,20 +64,17 @@ const TestBed = () => {
   );
 };
 
-UseReverseRouter(
-  'indexes should link to the actual index on small screens',
-  () => {
-    largeScreen = false;
-    const result = render(<TestContainer />);
-    const nlDiv = result.getByTestId('nl');
-    const vrDiv = result.getByTestId('vr');
-    const gmDiv = result.getByTestId('gm');
+UseReverseRouter('indexes should link to the actual index on small screens', () => {
+  largeScreen = false;
+  const result = render(<TestContainer />);
+  const nlDiv = result.getByTestId('nl');
+  const vrDiv = result.getByTestId('vr');
+  const gmDiv = result.getByTestId('gm');
 
-    assert.equal(nlDiv.textContent?.endsWith('/landelijk'), true);
-    assert.equal(vrDiv.textContent?.endsWith(vrCode), true);
-    assert.equal(gmDiv.textContent?.endsWith(gmCode), true);
-  }
-);
+  assert.equal(nlDiv.textContent?.endsWith('/landelijk'), true);
+  assert.equal(vrDiv.textContent?.endsWith(vrCode), true);
+  assert.equal(gmDiv.textContent?.endsWith(gmCode), true);
+});
 
 UseReverseRouter("indexes should 'redirect' to child pages", () => {
   largeScreen = true;

@@ -21,12 +21,7 @@ export const ReverseRouterInput = forwardRef((props: any, ref: any) => {
   };
 
   return (
-    <FormField
-      compareValue={compareValue}
-      label={type.title}
-      description={type.description}
-      markers={markers}
-    >
+    <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
       <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
         <option value="" disabled hidden>
           Selecteer een route

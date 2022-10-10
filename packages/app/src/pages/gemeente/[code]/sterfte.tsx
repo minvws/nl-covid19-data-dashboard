@@ -1,44 +1,16 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import {
-  KpiValue,
-  KpiTile,
-  ChartTile,
-  PageInformationBlock,
-  Markdown,
-  TimeSeriesChart,
-  TwoKpiSection,
-  TileList,
-} from '~/components';
+import { KpiValue, KpiTile, ChartTile, PageInformationBlock, Markdown, TimeSeriesChart, TwoKpiSection, TileList } from '~/components';
 import { useState } from 'react';
 import { Text } from '~/components/typography';
 import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectGmData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -55,14 +27,9 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData(
-    'difference.deceased_rivm__covid_daily',
-    'deceased_rivm',
-    'code'
-  ),
+  selectGmData('difference.deceased_rivm__covid_daily', 'deceased_rivm', 'code'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -77,10 +44,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'deceasedPageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'deceasedPageArticles'),
         elements: content.elements,
       },
     };
@@ -88,22 +52,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    municipalityName,
-    selectedGmData: data,
-    content,
-    lastGenerated,
-  } = props;
+  const { pageText, municipalityName, selectedGmData: data, content, lastGenerated } = props;
 
-  const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
-  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -122,9 +76,7 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
             title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}
@@ -150,17 +102,8 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_daily"
-                absolute={data.deceased_rivm.last_value.covid_daily}
-                difference={data.difference.deceased_rivm__covid_daily}
-                isAmount
-              />
-              <Markdown
-                content={
-                  textGm.section_deceased_rivm.kpi_covid_daily_description
-                }
-              />
+              <KpiValue data-cy="covid_daily" absolute={data.deceased_rivm.last_value.covid_daily} difference={data.difference.deceased_rivm__covid_daily} isAmount />
+              <Markdown content={textGm.section_deceased_rivm.kpi_covid_daily_description} />
             </KpiTile>
             <KpiTile
               title={textGm.section_deceased_rivm.kpi_covid_total_title}
@@ -169,22 +112,15 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_total"
-                absolute={data.deceased_rivm.last_value.covid_total}
-              />
-              <Text>
-                {textGm.section_deceased_rivm.kpi_covid_total_description}
-              </Text>
+              <KpiValue data-cy="covid_total" absolute={data.deceased_rivm.last_value.covid_total} />
+              <Text>{textGm.section_deceased_rivm.kpi_covid_total_description}</Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
-            description={
-              textGm.section_deceased_rivm.line_chart_covid_daily_description
-            }
+            description={textGm.section_deceased_rivm.line_chart_covid_daily_description}
             metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm }}
             onSelectTimeframe={setDeceasedMunicipalTimeframe}
           >
@@ -198,31 +134,20 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'covid_daily_moving_average',
-                  label:
-                    textGm.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_label_moving_average,
-                  shortLabel:
-                    textGm.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                  label: textGm.section_deceased_rivm.line_chart_covid_daily_legend_trend_label_moving_average,
+                  shortLabel: textGm.section_deceased_rivm.line_chart_covid_daily_legend_trend_short_label_moving_average,
                   color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'covid_daily',
-                  label:
-                    textGm.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_label,
-                  shortLabel:
-                    textGm.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_short_label,
+                  label: textGm.section_deceased_rivm.line_chart_covid_daily_legend_trend_label,
+                  shortLabel: textGm.section_deceased_rivm.line_chart_covid_daily_legend_trend_short_label,
                   color: colors.primary,
                 },
               ]}
               dataOptions={{
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'deceased_rivm'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'deceased_rivm'),
               }}
             />
           </ChartTile>

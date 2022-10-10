@@ -62,33 +62,20 @@ export function clearMutationsLogFile() {
   try {
     fs.writeFileSync(MUTATIONS_LOG_FILE, CSV_HEADER);
   } catch (err) {
-    if (err instanceof Error)
-      console.error(
-        `Failed to clear mutations log file ${MUTATIONS_LOG_FILE}: ${err.message}`
-      );
+    if (err instanceof Error) console.error(`Failed to clear mutations log file ${MUTATIONS_LOG_FILE}: ${err.message}`);
   }
 }
 
-export function appendTextMutation(args: {
-  action: Action;
-  key: string;
-  documentId: string;
-  moveTo?: string;
-}) {
+export function appendTextMutation(args: { action: Action; key: string; documentId: string; moveTo?: string }) {
   const { action, key, documentId, moveTo } = args;
   const timestamp = new Date().toISOString();
 
   try {
-    const line = `${timestamp},${action},${key},${documentId},${
-      moveTo ?? NO_VALUE
-    }${EOL}`;
+    const line = `${timestamp},${action},${key},${documentId},${moveTo ?? NO_VALUE}${EOL}`;
 
     fs.appendFileSync(MUTATIONS_LOG_FILE, line);
   } catch (err) {
-    if (err instanceof Error)
-      console.error(
-        `Failed to write mutation to file ${MUTATIONS_LOG_FILE}: ${err.message}`
-      );
+    if (err instanceof Error) console.error(`Failed to write mutation to file ${MUTATIONS_LOG_FILE}: ${err.message}`);
   }
 }
 
@@ -131,9 +118,7 @@ export function readTextMutations() {
  * much more harmful since valuable text documents and their history might get
  * lost.
  */
-export function getCollapsedAddDeleteMutations(
-  mutations: TextMutation[]
-): (AddMutation | DeleteMutation)[] {
+export function getCollapsedAddDeleteMutations(mutations: TextMutation[]): (AddMutation | DeleteMutation)[] {
   const weightByAction = {
     add: 1,
     delete: -1,
@@ -223,39 +208,31 @@ export function getCollapsedAddDeleteMutations(
 }
 
 export function getCollapsedMoveMutations(mutations: TextMutation[]) {
-  const sortedMoveMutations = sortBy(mutations, (x) => x.timestamp).filter(
-    hasValueAtKey('action', 'move' as const)
-  );
+  const sortedMoveMutations = sortBy(mutations, (x) => x.timestamp).filter(hasValueAtKey('action', 'move' as const));
 
-  const finalDestinationPerId = sortedMoveMutations.reduce(
-    (acc, { document_id, move_to }) => {
-      acc[document_id] = move_to;
+  const finalDestinationPerId = sortedMoveMutations.reduce((acc, { document_id, move_to }) => {
+    acc[document_id] = move_to;
+    return acc;
+  }, {} as Record<string, string>);
+
+  const result = sortedMoveMutations.reduce((acc, { timestamp, key, action, document_id }) => {
+    /**
+     * Only store a move mutation for the first time it occurred for a certain
+     * key/document_id, and then use final destination calculated earlier.
+     */
+    if (acc[key]) {
       return acc;
-    },
-    {} as Record<string, string>
-  );
+    }
 
-  const result = sortedMoveMutations.reduce(
-    (acc, { timestamp, key, action, document_id }) => {
-      /**
-       * Only store a move mutation for the first time it occurred for a certain
-       * key/document_id, and then use final destination calculated earlier.
-       */
-      if (acc[key]) {
-        return acc;
-      }
-
-      acc[key] = {
-        timestamp,
-        action,
-        key,
-        document_id,
-        move_to: finalDestinationPerId[document_id],
-      };
-      return acc;
-    },
-    {} as Record<string, MoveMutation>
-  );
+    acc[key] = {
+      timestamp,
+      action,
+      key,
+      document_id,
+      move_to: finalDestinationPerId[document_id],
+    };
+    return acc;
+  }, {} as Record<string, MoveMutation>);
 
   return Object.values(result);
 }
@@ -265,21 +242,15 @@ export function getCollapsedMoveMutations(mutations: TextMutation[]) {
  * that was last exported from Sanity to figure out what mutations have been
  * made.
  */
-export async function getLocalMutations(
-  referenceTexts: Record<string, string>
-) {
+export async function getLocalMutations(referenceTexts: Record<string, string>) {
   const newTexts = await readLocalTexts();
   const newTextsWithPlainKeys = removeIdsFromKeys(newTexts);
   const oldKeys = Object.keys(referenceTexts);
   const newKeys = Object.keys(newTexts);
 
-  const removals = oldKeys
-    .filter((key) => !newKeys.includes(key))
-    .map(parseKeyWithId);
+  const removals = oldKeys.filter((key) => !newKeys.includes(key)).map(parseKeyWithId);
 
-  const additions = newKeys
-    .filter((key) => !oldKeys.includes(key))
-    .map(parseKeyWithId);
+  const additions = newKeys.filter((key) => !oldKeys.includes(key)).map(parseKeyWithId);
 
   const mutations = {
     add: [] as { key: string; text: string }[],
@@ -337,10 +308,7 @@ function parseKeyWithId(keyWithId: string) {
  * Apply the moves by deleting the placeholder document and mutating the key of
  * the original document to set it to the new moveTo key.
  */
-export async function finalizeMoveMutations(
-  dataset: 'development' | 'production',
-  moves: MoveMutation[]
-) {
+export async function finalizeMoveMutations(dataset: 'development' | 'production', moves: MoveMutation[]) {
   const client = getClient(dataset);
   const transaction = client.transaction();
 
@@ -348,10 +316,7 @@ export async function finalizeMoveMutations(
     try {
       const originalDocument = await client.getDocument(document_id);
 
-      assert(
-        originalDocument,
-        `Failed to locate move original document in dataset ${dataset}`
-      );
+      assert(originalDocument, `Failed to locate move original document in dataset ${dataset}`);
 
       if (originalDocument.key === move_to) {
         console.log(`Document ${document_id} was already moved`);
@@ -364,20 +329,14 @@ export async function finalizeMoveMutations(
         },
       });
     } catch (err) {
-      if (err instanceof Error)
-        console.error(
-          `Move failed for document ${document_id}: ${err.message}`
-        );
+      if (err instanceof Error) console.error(`Move failed for document ${document_id}: ${err.message}`);
     }
   }
 
   await transaction.commit();
 }
 
-export function simulateDeleteMutations(
-  documents: LokalizeText[],
-  mutations: TextMutation[]
-) {
+export function simulateDeleteMutations(documents: LokalizeText[], mutations: TextMutation[]) {
   const deletedKeys = getCollapsedAddDeleteMutations(mutations)
     .filter(hasValueAtKey('action', 'delete' as const))
     .map((x) => x.key);
@@ -385,10 +344,7 @@ export function simulateDeleteMutations(
   return documents.filter((x) => !deletedKeys.includes(x.key));
 }
 
-export function simulateMoveMutations(
-  documents: LokalizeText[],
-  mutations: TextMutation[]
-) {
+export function simulateMoveMutations(documents: LokalizeText[], mutations: TextMutation[]) {
   const moveMutations = getCollapsedMoveMutations(mutations);
 
   return [...documents].map((doc) => {

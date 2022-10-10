@@ -3,5 +3,4 @@
  * @param element - the element to get the position for
  * @returns boolean
  */
-export const isElementAtTopOfViewport = (element: HTMLElement): boolean =>
-  element.getBoundingClientRect().top <= 1;
+export const isElementAtTopOfViewport = (element: HTMLElement): boolean => element.getBoundingClientRect().top <= 1;

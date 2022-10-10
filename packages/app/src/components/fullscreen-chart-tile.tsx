@@ -12,15 +12,7 @@ import { IconButton } from './icon-button';
 import { Metadata, MetadataProps } from './metadata';
 import { Modal } from './modal';
 
-export function FullscreenChartTile({
-  children,
-  metadata,
-  disabled,
-}: {
-  children: React.ReactNode;
-  metadata?: MetadataProps;
-  disabled?: boolean;
-}) {
+export function FullscreenChartTile({ children, metadata, disabled }: { children: React.ReactNode; metadata?: MetadataProps; disabled?: boolean }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wasFullscreen = usePrevious(isFullscreen);
   const breakpoints = useBreakpoints();
@@ -33,22 +25,11 @@ export function FullscreenChartTile({
     }
   }, [wasFullscreen, isFullscreen]);
 
-  const label = replaceVariablesInText(
-    isFullscreen
-      ? commonTexts.common.modal_close
-      : commonTexts.common.modal_open,
-    { subject: commonTexts.common.grafiek_singular }
-  );
+  const label = replaceVariablesInText(isFullscreen ? commonTexts.common.modal_close : commonTexts.common.modal_open, { subject: commonTexts.common.grafiek_singular });
 
   const tile = (
     <Tile hasNoBorder={isFullscreen} height="100%">
-      <Box
-        px={isFullscreen ? { _: 3, sm: 4 } : undefined}
-        py={isFullscreen ? { _: 2, sm: 3 } : undefined}
-        height="100%"
-        display="flex"
-        flexDirection="column"
-      >
+      <Box px={isFullscreen ? { _: 3, sm: 4 } : undefined} py={isFullscreen ? { _: 2, sm: 3 } : undefined} height="100%" display="flex" flexDirection="column">
         {children}
 
         {metadata && (
@@ -75,12 +56,7 @@ export function FullscreenChartTile({
               '&:hover': { color: 'gray5' },
             })}
           >
-            <IconButton
-              ref={isFullscreen ? undefined : buttonRef}
-              title={label}
-              onClick={() => setIsFullscreen((x) => !x)}
-              size={16}
-            >
+            <IconButton ref={isFullscreen ? undefined : buttonRef} title={label} onClick={() => setIsFullscreen((x) => !x)} size={16}>
               {isFullscreen ? <Close /> : <Expand />}
             </IconButton>
           </div>
@@ -91,11 +67,7 @@ export function FullscreenChartTile({
 
   if (!disabled && breakpoints.md && isFullscreen) {
     return (
-      <Modal
-        id="chart-tile-container"
-        onClose={() => setIsFullscreen(false)}
-        isFullheight
-      >
+      <Modal id="chart-tile-container" onClose={() => setIsFullscreen(false)} isFullheight>
         {tile}
       </Modal>
     );

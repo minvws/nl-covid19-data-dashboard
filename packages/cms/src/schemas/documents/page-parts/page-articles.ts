@@ -1,10 +1,7 @@
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
 import { whenNotAdministrator } from '../../../roles/when-not-administrator';
-import {
-  PAGE_IDENTIFIER_REFERENCE_FIELDS,
-  PAGE_IDENTIFIER_REFERENCE_FIELDSET,
-} from '../../fields/page-identifier-reference-fields';
+import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-identifier-reference-fields';
 
 export const pageArticles = {
   title: 'Pagina Artikelen',

@@ -11,9 +11,7 @@ export const MetricSelectInput = withDocument(
     const { value, onChange, document, compareValue, type, markers } = props;
 
     const metricNames = useMemo(() => {
-      const areas = document.area
-        ? (dataStructure as any)[document.area]
-        : undefined;
+      const areas = document.area ? (dataStructure as any)[document.area] : undefined;
       return areas ? Object.keys(areas) : undefined;
     }, [document.area]);
 
@@ -24,12 +22,7 @@ export const MetricSelectInput = withDocument(
     return (
       <>
         {
-          <FormField
-            compareValue={compareValue}
-            label={type.title}
-            description={type.description}
-            markers={markers}
-          >
+          <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
             {isDefined(metricNames) ? (
               <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
                 <option value="" disabled hidden>

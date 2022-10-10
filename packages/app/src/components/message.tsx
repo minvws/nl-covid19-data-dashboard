@@ -11,29 +11,20 @@ interface MessageProps {
   resetParentStyles?: boolean;
 }
 
-const theme: Record<Variant, { backgroundColor: string; borderColor: string }> =
-  {
-    warning: {
-      backgroundColor: 'yellow1',
-      borderColor: 'yellow2',
-    },
-    message: {
-      backgroundColor: 'gray2',
-      borderColor: 'gray7',
-    },
-  };
+const theme: Record<Variant, { backgroundColor: string; borderColor: string }> = {
+  warning: {
+    backgroundColor: 'yellow1',
+    borderColor: 'yellow2',
+  },
+  message: {
+    backgroundColor: 'gray2',
+    borderColor: 'gray7',
+  },
+};
 
-export function Message({
-  children,
-  variant,
-  resetParentStyles,
-}: MessageProps) {
+export function Message({ children, variant, resetParentStyles }: MessageProps) {
   return (
-    <StyledMessage
-      variant={variant}
-      styledComponentId={StyledMessage.styledComponentId}
-      resetParentStyles={resetParentStyles}
-    >
+    <StyledMessage variant={variant} styledComponentId={StyledMessage.styledComponentId} resetParentStyles={resetParentStyles}>
       {children}
     </StyledMessage>
   );

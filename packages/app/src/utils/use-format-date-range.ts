@@ -20,9 +20,7 @@ export function useFormatDateRange(dateStartUnix: number, dateEndUnix: number) {
 
   const isSameMonth = dateFrom.getMonth() === dateTo.getMonth();
 
-  const dateFromText = isSameMonth
-    ? dateFrom.getDate().toString()
-    : formatDate(dateFrom);
+  const dateFromText = isSameMonth ? dateFrom.getDate().toString() : formatDate(dateFrom);
   const dateToText = formatDate(dateTo);
 
   return [dateFromText, dateToText] as const;

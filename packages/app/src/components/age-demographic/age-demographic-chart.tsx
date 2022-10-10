@@ -11,10 +11,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { replaceVariablesInText } from '~/utils';
-import {
-  AccessibilityDefinition,
-  useAccessibilityAnnotations,
-} from '~/utils/use-accessibility-annotations';
+import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
@@ -42,13 +39,7 @@ interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   return (
-    <VisxText
-      x={x}
-      y={y}
-      fill={colors.gray7}
-      fontSize="1rem"
-      textAnchor="middle"
-    >
+    <VisxText x={x} y={y} fill={colors.gray7} fontSize="1rem" textAnchor="middle">
       {formattedValue}
     </VisxText>
   );
@@ -68,23 +59,8 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
   maxDisplayValue,
   formatValue,
 }: AgeDemographicChartProps<T>) {
-  const {
-    width,
-    height,
-    singleBarHeight,
-    numTicks,
-    xMax,
-    yMax,
-    axisWidth,
-    leftScale,
-    leftPoint,
-    rightScale,
-    rightPoint,
-    ageGroupRangePoint,
-    ageGroupRange,
-    margin,
-    values,
-  } = coordinates;
+  const { width, height, singleBarHeight, numTicks, xMax, yMax, axisWidth, leftScale, leftPoint, rightScale, rightPoint, ageGroupRangePoint, ageGroupRange, margin, values } =
+    coordinates;
 
   const annotations = useAccessibilityAnnotations(accessibility);
 
@@ -94,12 +70,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
   };
 
   const hasClippedValue = !!values.find(
-    (value) =>
-      getIsClipped(
-        getNumberValue(value, leftMetricProperty),
-        maxDisplayValue
-      ) ||
-      getIsClipped(getNumberValue(value, rightMetricProperty), maxDisplayValue)
+    (value) => getIsClipped(getNumberValue(value, leftMetricProperty), maxDisplayValue) || getIsClipped(getNumberValue(value, rightMetricProperty), maxDisplayValue)
   );
 
   return (
@@ -124,123 +95,48 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           },
         })}
       >
-        <VisxText
-          textAnchor="end"
-          verticalAnchor="start"
-          y={0}
-          x={width / 2 - axisWidth / 2}
-          fill="black"
-          fontWeight="bold"
-          fontSize="1rem"
-          width={xMax - 10}
-        >
+        <VisxText textAnchor="end" verticalAnchor="start" y={0} x={width / 2 - axisWidth / 2} fill="black" fontWeight="bold" fontSize="1rem" width={xMax - 10}>
           {text.left_title}
         </VisxText>
-        <VisxText
-          textAnchor="start"
-          verticalAnchor="start"
-          y={0}
-          x={width / 2 + axisWidth / 2}
-          fill="black"
-          fontWeight="bold"
-          fontSize="1rem"
-          width={xMax - 10}
-        >
+        <VisxText textAnchor="start" verticalAnchor="start" y={0} x={width / 2 + axisWidth / 2} fill="black" fontWeight="bold" fontSize="1rem" width={xMax - 10}>
           {text.right_title}
         </VisxText>
 
         {/* Vertical lines */}
-        <GridColumns
-          scale={leftScale}
-          width={xMax}
-          height={yMax}
-          left={margin.left}
-          top={margin.top}
-          numTicks={numTicks}
-          stroke={colors.gray3}
-        />
+        <GridColumns scale={leftScale} width={xMax} height={yMax} left={margin.left} top={margin.top} numTicks={numTicks} stroke={colors.gray3} />
 
-        <GridColumns
-          scale={rightScale}
-          width={xMax}
-          height={yMax}
-          left={width / 2 + axisWidth / 2}
-          top={margin.top}
-          numTicks={numTicks}
-          stroke={colors.gray3}
-        />
+        <GridColumns scale={rightScale} width={xMax} height={yMax} left={width / 2 + axisWidth / 2} top={margin.top} numTicks={numTicks} stroke={colors.gray3} />
 
-        <StyledPatternLines
-          id="is-clipped-pattern-left"
-          height={6}
-          width={6}
-          stroke={leftColor}
-          strokeWidth={2}
-          orientation={['diagonalRightToLeft']}
-        />
+        <StyledPatternLines id="is-clipped-pattern-left" height={6} width={6} stroke={leftColor} strokeWidth={2} orientation={['diagonalRightToLeft']} />
 
-        <StyledPatternLines
-          id="is-clipped-pattern-right"
-          height={6}
-          width={6}
-          stroke={rightColor}
-          strokeWidth={2}
-          orientation={['diagonal']}
-        />
+        <StyledPatternLines id="is-clipped-pattern-right" height={6} width={6} stroke={rightColor} strokeWidth={2} orientation={['diagonal']} />
 
         {values.map((value, index) => {
           const leftBarWidth = xMax - leftPoint(value);
           const rightBarWidth = rightPoint(value);
 
-          const isClippedLeftGroup = getIsClipped(
-            getNumberValue(value, leftMetricProperty),
-            maxDisplayValue
-          );
+          const isClippedLeftGroup = getIsClipped(getNumberValue(value, leftMetricProperty), maxDisplayValue);
 
-          const isClippedRightGroup = getIsClipped(
-            getNumberValue(value, rightMetricProperty),
-            maxDisplayValue
-          );
+          const isClippedRightGroup = getIsClipped(getNumberValue(value, rightMetricProperty), maxDisplayValue);
 
           const isClippedValue = isClippedLeftGroup || isClippedRightGroup;
 
           return (
-            <StyledGroup
-              key={index}
-              onMouseMove={(event) => onMouseMoveBar(value, event)}
-              onMouseLeave={onMouseLeaveBar}
-            >
+            <StyledGroup key={index} onMouseMove={(event) => onMouseMoveBar(value, event)} onMouseLeave={onMouseLeaveBar}>
               {/* This bar takes all width to display the background color on hover */}
-              <StyledHoverBar
-                x={margin.left}
-                y={ageGroupRangePoint(value)}
-                height={singleBarHeight}
-                width={width - margin.left - margin.right}
-              />
+              <StyledHoverBar x={margin.left} y={ageGroupRangePoint(value)} height={singleBarHeight} width={width - margin.left - margin.right} />
               <Bar
                 x={width / 2 - axisWidth / 2 - leftBarWidth}
                 y={ageGroupRangePoint(value)}
                 height={singleBarHeight}
                 width={leftBarWidth}
                 css={css({
-                  fill: isClippedLeftGroup
-                    ? `url(#is-clipped-pattern-left)`
-                    : leftColor,
+                  fill: isClippedLeftGroup ? `url(#is-clipped-pattern-left)` : leftColor,
                 })}
               />
-              <VisxText
-                textAnchor="middle"
-                verticalAnchor="middle"
-                fontSize="12"
-                fontWeight="bold"
-                y={ageGroupRangePoint(value) + singleBarHeight / 2}
-                x={width / 2}
-                fill="black"
-              >
+              <VisxText textAnchor="middle" verticalAnchor="middle" fontSize="12" fontWeight="bold" y={ageGroupRangePoint(value) + singleBarHeight / 2} x={width / 2} fill="black">
                 {replaceVariablesInText(text.age_group_range_tooltip, {
-                  ageGroupRange:
-                    formatAgeGroupRange(ageGroupRange(value)) +
-                    (isClippedValue ? ' *' : ''),
+                  ageGroupRange: formatAgeGroupRange(ageGroupRange(value)) + (isClippedValue ? ' *' : ''),
                 })}
               </VisxText>
               <Bar
@@ -249,9 +145,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
                 height={singleBarHeight}
                 width={rightBarWidth}
                 css={css({
-                  fill: isClippedRightGroup
-                    ? `url(#is-clipped-pattern-right)`
-                    : rightColor,
+                  fill: isClippedRightGroup ? `url(#is-clipped-pattern-right)` : rightColor,
                 })}
               />
             </StyledGroup>
@@ -293,9 +187,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
   );
 }
 
-const StyledPatternLines = styled(PatternLines)<{ stroke: Color }>((p) =>
-  css({ stroke: p.stroke })
-);
+const StyledPatternLines = styled(PatternLines)<{ stroke: Color }>((p) => css({ stroke: p.stroke }));
 
 const StyledGroup = styled(Group)({});
 const StyledHoverBar = styled(Bar)(

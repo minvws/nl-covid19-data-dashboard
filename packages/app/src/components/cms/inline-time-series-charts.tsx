@@ -1,21 +1,11 @@
-import {
-  ChartConfiguration,
-  DataScopeKey,
-  MetricKeys,
-  ScopedData,
-  TimespanAnnotationConfiguration,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { ChartConfiguration, DataScopeKey, MetricKeys, ScopedData, TimespanAnnotationConfiguration, TimestampedValue } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import {
-  DataOptions,
-  TimespanAnnotationConfig,
-} from '~/components/time-series-chart/logic/common';
+import { DataOptions, TimespanAnnotationConfig } from '~/components/time-series-chart/logic/common';
 import { useIntl } from '~/intl';
 import { metricConfigs } from '~/metric-config';
 import { ScopedMetricConfigs } from '~/metric-config/common';
@@ -26,36 +16,25 @@ import { InlineLoader } from './inline-loader';
 import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
 
-interface InlineTimeSeriesChartsProps<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
-> {
+interface InlineTimeSeriesChartsProps<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>> {
   startDate?: string;
   endDate?: string;
   configuration: ChartConfiguration<S, M>;
 }
 
-export function InlineTimeSeriesCharts<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
->(props: InlineTimeSeriesChartsProps<S, M>) {
+export function InlineTimeSeriesCharts<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>>(props: InlineTimeSeriesChartsProps<S, M>) {
   const { configuration, startDate, endDate } = props;
   const { commonTexts } = useIntl();
 
   const dateUrl = getDataUrl(startDate, endDate, configuration);
 
-  const { data } = useSWRImmutable(dateUrl, (url: string) =>
-    fetch(url).then((_) => _.json())
-  );
+  const { data } = useSWRImmutable(dateUrl, (url: string) => fetch(url).then((_) => _.json()));
 
-  const scopedMetricConfigs = metricConfigs[configuration.area] as
-    | ScopedMetricConfigs<ScopedData[S]>
-    | undefined;
+  const scopedMetricConfigs = metricConfigs[configuration.area] as ScopedMetricConfigs<ScopedData[S]> | undefined;
 
   const seriesConfig = useMemo(() => {
     return configuration.metricProperties.map((x) => {
-      const seriesMetricConfig =
-        scopedMetricConfigs?.[configuration.metricName]?.[x.propertyName];
+      const seriesMetricConfig = scopedMetricConfigs?.[configuration.metricName]?.[x.propertyName];
       const config: any = {
         type: x.type,
         metricProperty: x.propertyName,
@@ -70,11 +49,7 @@ export function InlineTimeSeriesCharts<
         config.fillOpacity = x.fillOpacity;
       }
       if (isDefined(x.shortLabelKey) && x.shortLabelKey.length) {
-        config.shortLabelKey = get(
-          commonTexts,
-          x.shortLabelKey.split('.'),
-          null
-        );
+        config.shortLabelKey = get(commonTexts, x.shortLabelKey.split('.'), null);
       }
       if (isDefined(x.strokeWidth)) {
         config.strokeWidth = x.strokeWidth;
@@ -84,12 +59,7 @@ export function InlineTimeSeriesCharts<
       }
       return config;
     });
-  }, [
-    scopedMetricConfigs,
-    configuration.metricName,
-    configuration.metricProperties,
-    commonTexts,
-  ]);
+  }, [scopedMetricConfigs, configuration.metricName, configuration.metricProperties, commonTexts]);
 
   const dataOptions = useMemo(() => {
     if (!isDefined(configuration) || !isDefined(data)) {
@@ -97,31 +67,19 @@ export function InlineTimeSeriesCharts<
     }
 
     const annotations = configuration.timespanAnnotations ?? [];
-    const timespanAnnotations = annotations.map<TimespanAnnotationConfig>(
-      (x: TimespanAnnotationConfiguration) => ({
-        fill: x.fill,
-        start: calculateStart(x.start, data.values),
-        end: calculateEnd(x.end, x.start, data.values),
-        label: isDefined(x.labelKey)
-          ? get(commonTexts, x.labelKey.split('.'), null)
-          : undefined,
-        shortLabel: isDefined(x.shortLabelKey)
-          ? get(commonTexts, x.shortLabelKey.split('.'), null)
-          : undefined,
-      })
-    );
+    const timespanAnnotations = annotations.map<TimespanAnnotationConfig>((x: TimespanAnnotationConfiguration) => ({
+      fill: x.fill,
+      start: calculateStart(x.start, data.values),
+      end: calculateEnd(x.end, x.start, data.values),
+      label: isDefined(x.labelKey) ? get(commonTexts, x.labelKey.split('.'), null) : undefined,
+      shortLabel: isDefined(x.shortLabelKey) ? get(commonTexts, x.shortLabelKey.split('.'), null) : undefined,
+    }));
 
     return {
       forcedMaximumValue: configuration.forcedMaximumValue,
       isPercentage: configuration.isPercentage,
       renderNullAsZero: configuration.renderNullAsZero,
-      valueAnnotation: configuration.valueAnnotationKey?.length
-        ? get(
-            commonTexts,
-            configuration.valueAnnotationKey.split('.'),
-            undefined
-          )
-        : undefined,
+      valueAnnotation: configuration.valueAnnotationKey?.length ? get(commonTexts, configuration.valueAnnotationKey.split('.'), undefined) : undefined,
       timespanAnnotations,
     } as DataOptions;
   }, [configuration, commonTexts, data]);

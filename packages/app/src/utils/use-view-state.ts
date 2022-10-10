@@ -9,16 +9,9 @@ type InViewState = 'inView' | 'outView' | 'notSupported';
  * @param rootMargin - Optional. An IntersectionObserver rootMargin string.
  * @returns inView, outView or not supported.
  */
-export function useViewState(
-  element: MutableRefObject<HTMLElement | null>,
-  rootMargin?: string
-) {
+export function useViewState(element: MutableRefObject<HTMLElement | null>, rootMargin?: string) {
   const [isInView, setIsInView] = useState<InViewState>('outView');
-  const connect = useCallback(
-    (observer: IntersectionObserver, htmlElement: HTMLElement) =>
-      observer.observe(htmlElement),
-    []
-  );
+  const connect = useCallback((observer: IntersectionObserver, htmlElement: HTMLElement) => observer.observe(htmlElement), []);
   const disconnect = useCallback((observer, el) => observer.unobserve(el), []);
 
   useEffect(() => {
@@ -31,10 +24,7 @@ export function useViewState(
 
     const currentElement = element.current;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting ? 'inView' : 'outView'),
-      { rootMargin }
-    );
+    const observer = new IntersectionObserver(([entry]) => setIsInView(entry.isIntersecting ? 'inView' : 'outView'), { rootMargin });
 
     connect(observer, currentElement);
     return () => currentElement && disconnect(observer, currentElement);

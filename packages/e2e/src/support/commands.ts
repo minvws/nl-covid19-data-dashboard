@@ -1,9 +1,4 @@
-import {
-  Gm,
-  Nl,
-  sortTimeSeriesInDataInPlace,
-  Vr,
-} from '@corona-dashboard/common';
+import { Gm, Nl, sortTimeSeriesInDataInPlace, Vr } from '@corona-dashboard/common';
 import { Formatters } from './formatters';
 
 // Must be declared global to be detected by typescript (allows import/export)
@@ -42,11 +37,7 @@ declare global {
        * @param pageName
        * @param vrcode
        */
-      beforeRegionTests(
-        pageName: string,
-        vrcode?: string,
-        prefix?: string
-      ): void;
+      beforeRegionTests(pageName: string, vrcode?: string, prefix?: string): void;
       /**
        * Ignores any errors coming out of the ResizeObserver
        */
@@ -85,18 +76,13 @@ Cypress.Commands.add('beforeGeneralTests', (pageName: string) => {
   cy.checkHeadings();
 });
 
-Cypress.Commands.add(
-  'beforeGmTests',
-  (pageName: string, gmcode = 'GM0363', prefix = '') => {
-    cy.swallowResizeObserverError();
+Cypress.Commands.add('beforeGmTests', (pageName: string, gmcode = 'GM0363', prefix = '') => {
+  cy.swallowResizeObserverError();
 
-    cy.fixture<Gm>(`${gmcode}.json`)
-      .as('municipalData')
-      .visit(`${prefix}/gemeente/${gmcode}/${pageName}`);
+  cy.fixture<Gm>(`${gmcode}.json`).as('municipalData').visit(`${prefix}/gemeente/${gmcode}/${pageName}`);
 
-    cy.checkHeadings();
-  }
-);
+  cy.checkHeadings();
+});
 
 Cypress.Commands.add('beforeNlTests', (pageName: string) => {
   cy.swallowResizeObserverError();
@@ -111,18 +97,13 @@ Cypress.Commands.add('beforeNlTests', (pageName: string) => {
   cy.checkHeadings();
 });
 
-Cypress.Commands.add(
-  'beforeRegionTests',
-  (pageName: string, vrcode = 'VR13', prefix = '') => {
-    cy.swallowResizeObserverError();
+Cypress.Commands.add('beforeRegionTests', (pageName: string, vrcode = 'VR13', prefix = '') => {
+  cy.swallowResizeObserverError();
 
-    cy.fixture<Vr>(`${vrcode}.json`)
-      .as('regionData')
-      .visit(`${prefix}/veiligheidsregio/${vrcode}/${pageName}`);
+  cy.fixture<Vr>(`${vrcode}.json`).as('regionData').visit(`${prefix}/veiligheidsregio/${vrcode}/${pageName}`);
 
-    cy.checkHeadings();
-  }
-);
+  cy.checkHeadings();
+});
 
 Cypress.Commands.add('swallowResizeObserverError', () => {
   Cypress.on('uncaught:exception', (err, _runnable) => {
@@ -137,19 +118,16 @@ Cypress.Commands.add('swallowResizeObserverError', () => {
   });
 });
 
-Cypress.Commands.add(
-  'checkKpiValues',
-  (kpiTestInfo: Record<string, string | string[]>) => {
-    Object.entries(kpiTestInfo).forEach(([key, value]) => {
-      const element = cy.dataCy(key);
-      if (Array.isArray(value)) {
-        value.forEach((val) => element.contains(val));
-      } else {
-        element.contains(value);
-      }
-    });
-  }
-);
+Cypress.Commands.add('checkKpiValues', (kpiTestInfo: Record<string, string | string[]>) => {
+  Object.entries(kpiTestInfo).forEach(([key, value]) => {
+    const element = cy.dataCy(key);
+    if (Array.isArray(value)) {
+      value.forEach((val) => element.contains(val));
+    } else {
+      element.contains(value);
+    }
+  });
+});
 
 Cypress.Commands.add('dataCy', (value) => {
   return cy.get(`[data-cy=${value}]`);

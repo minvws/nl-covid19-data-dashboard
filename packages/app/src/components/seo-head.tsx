@@ -5,10 +5,7 @@ import { assert } from '~/utils/assert';
 const version = process.env.NEXT_PUBLIC_COMMIT_ID;
 
 if (process.env.NODE_ENV === 'production') {
-  assert(
-    version,
-    `[${SEOHead.name}] Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID`
-  );
+  assert(version, `[${SEOHead.name}] Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID`);
 }
 
 type SEOHeadProps = {
@@ -35,137 +32,51 @@ export function SEOHead(props: SEOHeadProps) {
       <title key="title">{title}</title>
       <meta name="version" key="version" content={version} />
 
-      <meta
-        key="dc-title"
-        property="dcterms:title"
-        content={title}
-        xml-lang="nl"
-      />
-      <meta
-        key="dc-identifier"
-        property="dcterms:identifier"
-        content={url}
-        datatype="xsd:anyURI"
-      />
-      <meta
-        key="dc-lang"
-        property="dcterms:language"
-        content="nl-NL"
-        datatype="xsd:language"
-      />
-      <meta
-        key="dc-authority"
-        property="overheid:authority"
-        datatype="overheid:Ministerie"
-        content="Ministerie van Volksgezondheid, Welzijn en Sport"
-      />
+      <meta key="dc-title" property="dcterms:title" content={title} xml-lang="nl" />
+      <meta key="dc-identifier" property="dcterms:identifier" content={url} datatype="xsd:anyURI" />
+      <meta key="dc-lang" property="dcterms:language" content="nl-NL" datatype="xsd:language" />
+      <meta key="dc-authority" property="overheid:authority" datatype="overheid:Ministerie" content="Ministerie van Volksgezondheid, Welzijn en Sport" />
       <link
         key="dc-authority-title"
         rel="overheid:authority"
         href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
-      <meta
-        key="dc-creator"
-        property="dcterms:creator"
-        datatype="overheid:Ministerie"
-        content="Ministerie van Volksgezondheid, Welzijn en Sport"
-      />
+      <meta key="dc-creator" property="dcterms:creator" datatype="overheid:Ministerie" content="Ministerie van Volksgezondheid, Welzijn en Sport" />
       <link
         key="dc-creator-title"
         rel="dcterms:creator"
         href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
-      <link
-        key="dc-type"
-        rel="dcterms:type"
-        href="https://standaarden.overheid.nl/owms/terms/statistieken"
-      />
-      <link
-        key="dc-type-title"
-        rel="dcterms:type"
-        href="https://standaarden.overheid.nl/owms/terms/statistieken"
-        title="statistieken"
-      />
+      <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/statistieken" />
+      <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/statistieken" title="statistieken" />
 
-      <link
-        rel="preload"
-        crossOrigin="anonymous"
-        href="/webfonts/RO-SansWebText-Regular.woff2"
-        as="font"
-        type="font/woff2"
-      />
-      <link
-        rel="preload"
-        crossOrigin="anonymous"
-        href="/webfonts/RO-SansWebText-Regular.woff"
-        as="font"
-        type="font/woff"
-      />
+      <link rel="preload" crossOrigin="anonymous" href="/webfonts/RO-SansWebText-Regular.woff2" as="font" type="font/woff2" />
+      <link rel="preload" crossOrigin="anonymous" href="/webfonts/RO-SansWebText-Regular.woff" as="font" type="font/woff" />
 
-      <link
-        rel="preload"
-        crossOrigin="anonymous"
-        href="/webfonts/RO-SansWebText-Italic.woff2"
-        as="font"
-        type="font/woff2"
-      />
-      <link
-        rel="preload"
-        crossOrigin="anonymous"
-        href="/webfonts/RO-SansWebText-Italic.woff"
-        as="font"
-        type="font/woff"
-      />
+      <link rel="preload" crossOrigin="anonymous" href="/webfonts/RO-SansWebText-Italic.woff2" as="font" type="font/woff2" />
+      <link rel="preload" crossOrigin="anonymous" href="/webfonts/RO-SansWebText-Italic.woff" as="font" type="font/woff" />
 
-      <link
-        rel="preload"
-        crossOrigin="anonymous"
-        href="/webfonts/RO-SansWebText-Bold.woff2"
-        as="font"
-        type="font/woff2"
-      />
-      <link
-        rel="preload"
-        crossOrigin="anonymous"
-        href="/webfonts/RO-SansWebText-Bold.woff"
-        as="font"
-        type="font/woff"
-      />
+      <link rel="preload" crossOrigin="anonymous" href="/webfonts/RO-SansWebText-Bold.woff2" as="font" type="font/woff2" />
+      <link rel="preload" crossOrigin="anonymous" href="/webfonts/RO-SansWebText-Bold.woff" as="font" type="font/woff" />
 
       <link rel="apple-touch-icon" href="/images/touch-icon.png" />
 
       <meta key="description" name="description" content={description} />
-      <meta
-        key="image"
-        name="image"
-        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
-      />
+      <meta key="image" name="image" content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`} />
 
       <meta key="ogLocale" name="og:locale" content="nl_NL" />
       <meta key="ogTitle" property="og:title" content={title} />
       <meta key="ogDesc" property="og:description" content={description} />
-      <meta
-        key="ogImage"
-        name="og:image:url"
-        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
-      />
-      <meta
-        key="ogImageSecureUrl"
-        name="og:image:secure_url"
-        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
-      />
+      <meta key="ogImage" name="og:image:url" content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`} />
+      <meta key="ogImageSecureUrl" name="og:image:secure_url" content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`} />
       <meta key="ogUrl" name="og:url" content={url} />
       <meta key="ogType" property="og:type" content="website" />
 
       <meta key="twTitle" name="twitter:title" content={title} />
       <meta key="twDesc" name="twitter:description" content={description} />
-      <meta
-        key="twImg"
-        name="twitter:image"
-        content={`https://coronadashboard.rijksoverheid.nl${twitterImage}`}
-      />
+      <meta key="twImg" name="twitter:image" content={`https://coronadashboard.rijksoverheid.nl${twitterImage}`} />
       <meta key="twCard" name="twitter:card" content="summary_large_image" />
     </Head>
   );

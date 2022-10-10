@@ -5,11 +5,7 @@ const NEW_TYPE = 'cijferVerantwoordingItem';
 
 const client = getClient('production');
 
-const fetchDocuments = () =>
-  client.fetch(
-    `*[_type == $oldType] {..., "incomingReferences": *[references(^._id)]{...}}`,
-    { oldType: OLD_TYPE }
-  );
+const fetchDocuments = () => client.fetch(`*[_type == $oldType] {..., "incomingReferences": *[references(^._id)]{...}}`, { oldType: OLD_TYPE });
 
 const buildMutations = (docs: any[]) => {
   const mutations: any[] = [];
@@ -54,9 +50,7 @@ const migrateNextBatch: any = async () => {
   const creations = mutations.filter((x) => x.create);
   const patches = mutations.filter((x) => x.patch);
   const deletions = mutations.filter((x) => x.delete);
-  const transaction = createTransaction(
-    creations.concat(patches).concat(deletions)
-  );
+  const transaction = createTransaction(creations.concat(patches).concat(deletions));
 
   await transaction.commit();
   return migrateNextBatch();

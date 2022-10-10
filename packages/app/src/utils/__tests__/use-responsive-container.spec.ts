@@ -11,14 +11,11 @@ UseResponsiveContainer.after.each(() => {
 
 UseResponsiveContainer.before.each((context) => {});
 
-UseResponsiveContainer(
-  'should return initialize with the given width and height',
-  (context) => {
-    const { result } = renderHook(() => useResponsiveContainer(100, 200));
+UseResponsiveContainer('should return initialize with the given width and height', (context) => {
+  const { result } = renderHook(() => useResponsiveContainer(100, 200));
 
-    assert.equal(result.current.width, 100);
-    assert.equal(result.current.height, 200);
-  }
-);
+  assert.equal(result.current.width, 100);
+  assert.equal(result.current.height, 200);
+});
 
 UseResponsiveContainer.run();

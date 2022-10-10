@@ -18,32 +18,13 @@ interface TooltipProps<T extends TimestampedValue> {
   formatTooltip?: TooltipFormatter<T>;
 }
 
-export function Tooltip<T extends TimestampedValue>({
-  title,
-  data: tooltipData,
-  left,
-  top,
-  formatTooltip,
-  bounds,
-  padding,
-}: TooltipProps<T>) {
-  const content =
-    typeof formatTooltip === 'function' ? (
-      formatTooltip(tooltipData)
-    ) : (
-      <TooltipSeriesList data={tooltipData} />
-    );
+export function Tooltip<T extends TimestampedValue>({ title, data: tooltipData, left, top, formatTooltip, bounds, padding }: TooltipProps<T>) {
+  const content = typeof formatTooltip === 'function' ? formatTooltip(tooltipData) : <TooltipSeriesList data={tooltipData} />;
 
   if (!content) return null;
 
   return (
-    <TooltipWrapper
-      title={title}
-      left={left}
-      top={top}
-      bounds={bounds}
-      padding={padding}
-    >
+    <TooltipWrapper title={title} left={left} top={top} bounds={bounds} padding={padding}>
       {content}
     </TooltipWrapper>
   );

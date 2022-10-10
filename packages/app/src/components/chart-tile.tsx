@@ -21,19 +21,8 @@ interface ChartTileProps {
   children: ReactNode;
 }
 
-export function ChartTile({
-  title,
-  metadata,
-  description,
-  timeframeInitialValue,
-  disableFullscreen,
-  timeframeOptions,
-  onSelectTimeframe,
-  children,
-}: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue || TimeframeOption.ALL
-  );
+export function ChartTile({ title, metadata, description, timeframeInitialValue, disableFullscreen, timeframeOptions, onSelectTimeframe, children }: ChartTileProps) {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || TimeframeOption.ALL);
 
   useEffect(() => {
     if (onSelectTimeframe) {
@@ -54,11 +43,7 @@ export function ChartTile({
               }),
             })}
           >
-            <ChartTimeControls
-              timeframeOptions={timeframeOptions}
-              timeframe={timeframe}
-              onChange={setTimeframe}
-            />
+            <ChartTimeControls timeframeOptions={timeframeOptions} timeframe={timeframe} onChange={setTimeframe} />
           </Box>
         )}
       </ChartTileHeader>
@@ -76,11 +61,7 @@ interface ChartTileHeaderProps {
   children?: ReactNode;
 }
 
-function ChartTileHeader({
-  title,
-  description,
-  children,
-}: ChartTileHeaderProps) {
+function ChartTileHeader({ title, description, children }: ChartTileHeaderProps) {
   return (
     <Box spacing={3}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}

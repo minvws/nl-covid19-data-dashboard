@@ -9,8 +9,7 @@ import prompts from 'prompts';
     {
       type: 'confirm',
       name: 'isConfirmed',
-      message:
-        'This script should typically only be executed at the end of a release cycle. It is also part of the sync-after-release script. Are you aware of this?',
+      message: 'This script should typically only be executed at the end of a release cycle. It is also part of the sync-after-release script. Are you aware of this?',
       initial: false,
     },
   ]);

@@ -1,20 +1,11 @@
-import {
-  ChoroplethConfiguration,
-  DataScope,
-  DataScopeKey,
-  MetricKeys,
-} from '@corona-dashboard/common';
+import { ChoroplethConfiguration, DataScope, DataScopeKey, MetricKeys } from '@corona-dashboard/common';
 import { get, isString } from 'lodash';
 import useSWRImmutable from 'swr/immutable';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import {
-  DataOptions,
-  DynamicChoropleth,
-  OptionalDataConfig,
-} from '../choropleth';
+import { DataOptions, DynamicChoropleth, OptionalDataConfig } from '../choropleth';
 import { ChoroplethDataItem, InferedDataCollection } from '../choropleth/logic';
 import { ErrorBoundary } from '../error-boundary';
 import { Metadata } from '../metadata';
@@ -36,30 +27,22 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
 
   const reverseRouter = useReverseRouter();
 
-  const { data } = useSWRImmutable(dateUrl, (url: string) =>
-    fetch(url).then((_) => _.json())
-  );
+  const { data } = useSWRImmutable(dateUrl, (url: string) => fetch(url).then((_) => _.json()));
 
   if (!isDefined(data)) {
     return <InlineLoader />;
   }
 
   const dataOptions: DataOptions = {
-    getLink: isDefined(configuration.link)
-      ? get(reverseRouter, configuration.link, undefined)
-      : undefined,
-    tooltipVariables: parseTooltipVariables(
-      configuration.tooltipVariables,
-      commonTexts
-    ),
+    getLink: isDefined(configuration.link) ? get(reverseRouter, configuration.link, undefined) : undefined,
+    tooltipVariables: parseTooltipVariables(configuration.tooltipVariables, commonTexts),
     highlightSelection: configuration.highlightSelection,
     isPercentage: configuration.isPercentage,
     selectedCode: configuration.selectedCode,
   };
 
   const dataConfig: OptionalDataConfig<ChoroplethDataItem> = {
-    metricName:
-      configuration.metricName as keyof InferedDataCollection<ChoroplethDataItem>,
+    metricName: configuration.metricName as keyof InferedDataCollection<ChoroplethDataItem>,
     metricProperty: configuration.metricProperty as keyof ChoroplethDataItem,
     areaStroke: getColor(configuration.areaStroke),
     areaStrokeWidth: configuration.areaStrokeWidth,
@@ -89,10 +72,7 @@ export function InlineChoropleth(props: InlineChoroplethProps) {
   );
 }
 
-function parseTooltipVariables(
-  tooltipVarsJson: string | undefined,
-  commonTexts: SiteText['common']
-) {
+function parseTooltipVariables(tooltipVarsJson: string | undefined, commonTexts: SiteText['common']) {
   if (!tooltipVarsJson?.length) {
     return undefined;
   }
@@ -101,10 +81,7 @@ function parseTooltipVariables(
     return Object.fromEntries(
       Object.entries(varsObject).map(([name, value]) => {
         if (isString(value) && value.startsWith('commonTexts')) {
-          return [
-            name,
-            get(commonTexts, value.replace('commonTexts.', ''), undefined),
-          ];
+          return [name, get(commonTexts, value.replace('commonTexts.', ''), undefined)];
         }
         return [name, value];
       })

@@ -16,16 +16,9 @@ UseFormatDateRange.after.each(() => {
 UseFormatDateRange('Should format separate months', () => {
   const intlContext = createContext();
 
-  const { result } = renderHook(
-    () => useFormatDateRange(1635807600, 1638399600),
-    {
-      wrapper: ({ children }) => (
-        <IntlContext.Provider value={intlContext}>
-          {children}
-        </IntlContext.Provider>
-      ),
-    }
-  );
+  const { result } = renderHook(() => useFormatDateRange(1635807600, 1638399600), {
+    wrapper: ({ children }) => <IntlContext.Provider value={intlContext}>{children}</IntlContext.Provider>,
+  });
   const [dateFromText, dateToText] = result.current;
 
   assert.is(dateFromText, '2 november');
@@ -37,16 +30,9 @@ UseFormatDateRange('Should format separate months', () => {
 UseFormatDateRange.skip('Should format the same months', () => {
   const intlContext = createContext();
 
-  const { result } = renderHook(
-    () => useFormatDateRange(1638313200, 1638399600),
-    {
-      wrapper: ({ children }) => (
-        <IntlContext.Provider value={intlContext}>
-          {children}
-        </IntlContext.Provider>
-      ),
-    }
-  );
+  const { result } = renderHook(() => useFormatDateRange(1638313200, 1638399600), {
+    wrapper: ({ children }) => <IntlContext.Provider value={intlContext}>{children}</IntlContext.Provider>,
+  });
   const [dateFromText, dateToText] = result.current;
 
   assert.is(dateFromText, '1');
@@ -56,15 +42,10 @@ UseFormatDateRange.skip('Should format the same months', () => {
 UseFormatDateRange.run();
 
 function createContext() {
-  const {
-    formatNumber,
-    formatPercentage,
-    formatDate,
-    formatDateFromSeconds,
-    formatDateFromMilliseconds,
-    formatRelativeDate,
-    formatDateSpan,
-  } = createFormatting('nl-NL', {} as SiteText['common']['utils']);
+  const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = createFormatting(
+    'nl-NL',
+    {} as SiteText['common']['utils']
+  );
 
   return {
     dataset: 'production' as Dataset,

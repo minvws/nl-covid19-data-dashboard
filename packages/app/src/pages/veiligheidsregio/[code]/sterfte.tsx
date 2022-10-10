@@ -1,45 +1,17 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import {
-  ChartTile,
-  KpiTile,
-  KpiValue,
-  Markdown,
-  PageInformationBlock,
-  TileList,
-  TimeSeriesChart,
-  TwoKpiSection,
-} from '~/components';
+import { ChartTile, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection } from '~/components';
 import { useState } from 'react';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectVrData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectVrData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -48,8 +20,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['deceased_cbs', 'deceased_rivm'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  categoryTexts:
-    siteText.common.sidebar.categories.development_of_the_virus.title,
+  categoryTexts: siteText.common.sidebar.categories.development_of_the_virus.title,
   textVr: siteText.pages.deceased_page.vr,
   textShared: siteText.pages.deceased_page.shared,
 });
@@ -59,14 +30,9 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectVrData(
-    'deceased_cbs',
-    'deceased_rivm',
-    'difference.deceased_rivm__covid_daily'
-  ),
+  selectVrData('deceased_cbs', 'deceased_rivm', 'difference.deceased_rivm__covid_daily'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -81,14 +47,8 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        mainArticles: getArticleParts(
-          content.parts.pageParts,
-          'deceasedPageArticles'
-        ),
-        monitorArticles: getArticleParts(
-          content.parts.pageParts,
-          'deceasedMonitorArticles'
-        ),
+        mainArticles: getArticleParts(content.parts.pageParts, 'deceasedPageArticles'),
+        monitorArticles: getArticleParts(content.parts.pageParts, 'deceasedMonitorArticles'),
         elements: content.elements,
       },
     };
@@ -96,22 +56,14 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    selectedVrData: data,
-    vrName,
-    content,
-    lastGenerated,
-  } = props;
+  const { pageText, selectedVrData: data, vrName, content, lastGenerated } = props;
 
-  const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { categoryTexts, textVr, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { categoryTexts, textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -156,17 +108,8 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_daily"
-                absolute={dataRivm.last_value.covid_daily}
-                difference={difference.deceased_rivm__covid_daily}
-                isAmount
-              />
-              <Markdown
-                content={
-                  textVr.section_deceased_rivm.kpi_covid_daily_description
-                }
-              />
+              <KpiValue data-cy="covid_daily" absolute={dataRivm.last_value.covid_daily} difference={difference.deceased_rivm__covid_daily} isAmount />
+              <Markdown content={textVr.section_deceased_rivm.kpi_covid_daily_description} />
             </KpiTile>
             <KpiTile
               title={textVr.section_deceased_rivm.kpi_covid_total_title}
@@ -175,22 +118,15 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_total"
-                absolute={dataRivm.last_value.covid_total}
-              />
-              <Text>
-                {textVr.section_deceased_rivm.kpi_covid_total_description}
-              </Text>
+              <KpiValue data-cy="covid_total" absolute={dataRivm.last_value.covid_total} />
+              <Text>{textVr.section_deceased_rivm.kpi_covid_total_description}</Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textVr.section_deceased_rivm.line_chart_covid_daily_title}
-            description={
-              textVr.section_deceased_rivm.line_chart_covid_daily_description
-            }
+            description={textVr.section_deceased_rivm.line_chart_covid_daily_description}
             metadata={{
               source: textVr.section_deceased_rivm.bronnen.rivm,
             }}
@@ -206,31 +142,20 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'covid_daily_moving_average',
-                  label:
-                    textVr.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_label_moving_average,
-                  shortLabel:
-                    textVr.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                  label: textVr.section_deceased_rivm.line_chart_covid_daily_legend_trend_label_moving_average,
+                  shortLabel: textVr.section_deceased_rivm.line_chart_covid_daily_legend_trend_short_label_moving_average,
                   color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'covid_daily',
-                  label:
-                    textVr.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_label,
-                  shortLabel:
-                    textVr.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_short_label,
+                  label: textVr.section_deceased_rivm.line_chart_covid_daily_legend_trend_label,
+                  shortLabel: textVr.section_deceased_rivm.line_chart_covid_daily_legend_trend_short_label,
                   color: colors.primary,
                 },
               ]}
               dataOptions={{
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'deceased_rivm'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'deceased_rivm'),
               }}
             />
           </ChartTile>
@@ -252,10 +177,7 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
             articles={content.monitorArticles}
           />
 
-          <DeceasedMonitorSection
-            text={textShared.section_sterftemonitor}
-            data={dataCbs}
-          />
+          <DeceasedMonitorSection text={textShared.section_sterftemonitor} data={dataCbs} />
         </TileList>
       </VrLayout>
     </Layout>

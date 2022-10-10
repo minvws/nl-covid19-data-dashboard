@@ -23,15 +23,12 @@ export const METRIC_DATA_FIELDS = [
         const { parent } = context;
         if (parent?.area === 'gm' || parent?.area === 'vr') {
           if (!value?.length) {
-            return parent?.area === 'gm'
-              ? 'Gemeente is verplicht'
-              : 'Veiligheidsregio is verplicht';
+            return parent?.area === 'gm' ? 'Gemeente is verplicht' : 'Veiligheidsregio is verplicht';
           }
         }
         return true;
       }),
-    hidden: ({ parent }: { parent: any }) =>
-      parent?.area !== 'gm' && parent?.area !== 'vr',
+    hidden: ({ parent }: { parent: any }) => parent?.area !== 'gm' && parent?.area !== 'vr',
     fieldset: 'configuration',
   },
   {

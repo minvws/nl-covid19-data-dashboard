@@ -1,8 +1,5 @@
 import { Rule } from '~/sanity';
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../language/locale-validation';
+import { localeStringValidation, localeValidation } from '../../language/locale-validation';
 
 export const cijferVerantwoordingItem = {
   title: 'Cijferverantwoordingen',

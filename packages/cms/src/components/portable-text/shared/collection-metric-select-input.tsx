@@ -21,10 +21,7 @@ function getDropdownValues(map: 'gm' | 'vr') {
 export const CollectionMetricSelectInput = withDocument(
   forwardRef((props: any, ref: any) => {
     const { type, value, onChange, document, compareValue, markers } = props;
-    const { patch } = useDocumentOperation(
-      document._id?.replace('drafts.', '') ?? uuidv4(),
-      document._type
-    ) as any;
+    const { patch } = useDocumentOperation(document._id?.replace('drafts.', '') ?? uuidv4(), document._type) as any;
 
     const area = document?.area;
 
@@ -43,12 +40,7 @@ export const CollectionMetricSelectInput = withDocument(
     };
 
     return (
-      <FormField
-        compareValue={compareValue}
-        label={type.title}
-        description={type.description}
-        markers={markers}
-      >
+      <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
         <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
           <option value="" disabled hidden>
             Selecteer een metriek

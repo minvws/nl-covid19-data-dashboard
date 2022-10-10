@@ -12,13 +12,5 @@ type VariantsTableProps = {
 export function VariantsTable({ rows, text }: VariantsTableProps) {
   const breakpoints = useBreakpoints();
 
-  return (
-    <>
-      {breakpoints.sm ? (
-        <WideVariantsTable rows={rows} text={text} />
-      ) : (
-        <NarrowVariantsTable rows={rows} text={text} />
-      )}
-    </>
-  );
+  return <>{breakpoints.sm ? <WideVariantsTable rows={rows} text={text} /> : <NarrowVariantsTable rows={rows} text={text} />}</>;
 }

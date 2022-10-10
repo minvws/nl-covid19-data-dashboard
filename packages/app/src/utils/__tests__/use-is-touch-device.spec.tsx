@@ -3,10 +3,7 @@ import * as sinon from 'sinon';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import injectJsDom from 'jsdom-global';
-import {
-  IsTouchDeviceContextProvider,
-  useIsTouchDevice,
-} from '../use-is-touch-device';
+import { IsTouchDeviceContextProvider, useIsTouchDevice } from '../use-is-touch-device';
 
 const UseIsTouchDevice = suite('useIsTouchDevice');
 
@@ -47,27 +44,20 @@ UseIsTouchDevice.after((context) => {
 
 UseIsTouchDevice('it should return false when there is no touch device', () => {
   const { result } = renderHook(() => useIsTouchDevice(), {
-    wrapper: ({ children }) => (
-      <IsTouchDeviceContextProvider>{children}</IsTouchDeviceContextProvider>
-    ),
+    wrapper: ({ children }) => <IsTouchDeviceContextProvider>{children}</IsTouchDeviceContextProvider>,
   });
 
   assert.equal(result.current, false);
 });
 
-UseIsTouchDevice(
-  'it should return true when there is a touch device',
-  (context) => {
-    context.isTouchDevice = true;
+UseIsTouchDevice('it should return true when there is a touch device', (context) => {
+  context.isTouchDevice = true;
 
-    const { result } = renderHook(() => useIsTouchDevice(), {
-      wrapper: ({ children }) => (
-        <IsTouchDeviceContextProvider>{children}</IsTouchDeviceContextProvider>
-      ),
-    });
+  const { result } = renderHook(() => useIsTouchDevice(), {
+    wrapper: ({ children }) => <IsTouchDeviceContextProvider>{children}</IsTouchDeviceContextProvider>,
+  });
 
-    assert.equal(result.current, true);
-  }
-);
+  assert.equal(result.current, true);
+});
 
 UseIsTouchDevice.run();

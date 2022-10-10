@@ -1,8 +1,5 @@
 import { Rule } from '~/sanity';
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../language/locale-validation';
+import { localeStringValidation, localeValidation } from '../../language/locale-validation';
 import { selectedLanguages$ } from '../../plugins/translate/datastore';
 import { prepareLocalized } from '../../plugins/translate/prepare-localized';
 

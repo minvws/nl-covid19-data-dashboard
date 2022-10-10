@@ -1,7 +1,4 @@
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../../language/locale-validation';
+import { localeStringValidation, localeValidation } from '../../../language/locale-validation';
 
 export const overRisiconiveaus = {
   name: 'overRisicoNiveaus',
@@ -42,8 +39,7 @@ export const overRisiconiveaus = {
       name: 'collapsibleList',
       type: 'array',
       title: 'Uitklapbare informatie',
-      description:
-        'Je kan uitklapbare informatie toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
+      description: 'Je kan uitklapbare informatie toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
       of: [{ type: 'collapsible' }],
     },
   ],

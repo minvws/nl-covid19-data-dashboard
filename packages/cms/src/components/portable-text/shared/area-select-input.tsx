@@ -28,10 +28,7 @@ const areaValues = Object.keys(dataStructure)
 export const AreaSelectInput = withDocument(
   forwardRef((props: any, ref: any) => {
     const { value, onChange, document, compareValue, type, markers } = props;
-    const { patch } = useDocumentOperation(
-      document._id?.replace('drafts.', '') ?? uuidv4(),
-      document._type
-    ) as any;
+    const { patch } = useDocumentOperation(document._id?.replace('drafts.', '') ?? uuidv4(), document._type) as any;
 
     const onChangeSelect = (event: any) => {
       const value = event.target.value;
@@ -42,12 +39,7 @@ export const AreaSelectInput = withDocument(
     };
 
     return (
-      <FormField
-        compareValue={compareValue}
-        label={type.title}
-        description={type.description}
-        markers={markers}
-      >
+      <FormField compareValue={compareValue} label={type.title} description={type.description} markers={markers}>
         <Select ref={ref} value={value ?? ''} onChange={onChangeSelect}>
           <option value="" disabled hidden>
             Selecteer een gebied

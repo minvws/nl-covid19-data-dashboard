@@ -37,10 +37,7 @@ export function useSearchResults(term: string, activeResult?: string) {
 
   const { hits, vrHits, gmHits } = useMemo(() => {
     const hits: Hit<Option>[] = search(termTrimmed).map((x) => {
-      const link =
-        x.data.type === 'gm'
-          ? reverseRouter.gm.index(x.data.code)
-          : reverseRouter.vr.index(x.data.code);
+      const link = x.data.type === 'gm' ? reverseRouter.gm.index(x.data.code) : reverseRouter.vr.index(x.data.code);
 
       return {
         ...x,
@@ -70,10 +67,7 @@ function search(term: string, limit = 10) {
     });
   }
 
-  const hits = [
-    ...options.filter((x) => x.type === 'gm').slice(0, limit),
-    ...options.filter((x) => x.type === 'vr').slice(0, limit),
-  ].map(
+  const hits = [...options.filter((x) => x.type === 'gm').slice(0, limit), ...options.filter((x) => x.type === 'vr').slice(0, limit)].map(
     (data, index) =>
       ({
         id: data.code,
@@ -96,9 +90,7 @@ const ALL_HITS: Omit<Option, 'link'>[] = [
     type: 'gm' as const,
     code: x.gemcode,
     name: x.displayName || x.name,
-    searchTerms: [x.name, x.displayName]
-      .concat(x.searchTerms)
-      .filter(isPresent),
+    searchTerms: [x.name, x.displayName].concat(x.searchTerms).filter(isPresent),
   })),
   ...vrData.map((x) => ({
     type: 'vr' as const,
@@ -106,6 +98,4 @@ const ALL_HITS: Omit<Option, 'link'>[] = [
     name: x.name,
     searchTerms: [x.name, ...(x.searchTerms || [])].filter(isPresent),
   })),
-].sort((a, b) =>
-  a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, ''))
-);
+].sort((a, b) => a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, '')));

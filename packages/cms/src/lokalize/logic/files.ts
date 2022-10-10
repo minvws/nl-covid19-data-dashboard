@@ -11,10 +11,7 @@ export async function readLocalTexts() {
     })
   );
 
-  const flatTexts = mapKeys(
-    flatten<unknown, Record<string, string>>(texts),
-    (_value, key) => (key.includes('.') ? key : `__root.${key}`)
-  );
+  const flatTexts = mapKeys(flatten<unknown, Record<string, string>>(texts), (_value, key) => (key.includes('.') ? key : `__root.${key}`));
 
   return flatTexts as Record<string, string>;
 }
@@ -32,10 +29,7 @@ export async function readReferenceTexts() {
       })
     );
 
-    const flatTexts = mapKeys(
-      flatten<unknown, Record<string, string>>(texts),
-      (_value, key) => (key.includes('.') ? key : `__root.${key}`)
-    );
+    const flatTexts = mapKeys(flatten<unknown, Record<string, string>>(texts), (_value, key) => (key.includes('.') ? key : `__root.${key}`));
     return flatTexts as Record<string, string>;
   } catch (err) {
     return;

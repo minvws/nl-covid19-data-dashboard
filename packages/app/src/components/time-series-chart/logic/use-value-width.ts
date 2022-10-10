@@ -14,13 +14,7 @@ export function useValueWidth<T extends TimestampedValue>(
   const valueMaxWidth = useMemo(() => {
     const valueLengths: number[] = [];
     seriesConfig.forEach((config) => {
-      return valueLengths.push(
-        Math.max(
-          ...values.map(
-            (value) => formatSeriesValue(value, config, isPercentage).length
-          )
-        )
-      );
+      return valueLengths.push(Math.max(...values.map((value) => formatSeriesValue(value, config, isPercentage).length)));
     });
 
     return `${Math.max(...valueLengths)}ch`;

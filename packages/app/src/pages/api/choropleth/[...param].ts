@@ -8,15 +8,7 @@ import path from 'path';
 import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
-import {
-  ChoroplethDataItem,
-  CHOROPLETH_ASPECT_RATIO,
-  FitExtent,
-  getChoroplethFeatures,
-  getFeatureProps,
-  getFillColor,
-  MapType,
-} from '~/components/choropleth/logic';
+import { ChoroplethDataItem, CHOROPLETH_ASPECT_RATIO, FitExtent, getChoroplethFeatures, getFeatureProps, getFillColor, MapType } from '~/components/choropleth/logic';
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
@@ -27,8 +19,7 @@ import { gmGeo, nlGeo, vrGeo } from './topology';
  * ENV variable disables compression. By conditionally importing the sharp lib we
  * avoid a runtime crash.
  */
-const sharp =
-  process.env.DISABLE_COMPRESSION !== '1' ? require('sharp') : undefined;
+const sharp = process.env.DISABLE_COMPRESSION !== '1' ? require('sharp') : undefined;
 
 const publicPath = resolvePublicFolder(path.resolve(__dirname));
 const publicJsonPath = path.resolve(publicPath, 'json');
@@ -38,18 +29,9 @@ if (!fs.existsSync(publicImgPath)) {
   fs.mkdirSync(publicImgPath, { recursive: true });
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { param } = req.query;
-  const [map, metric, property, heightStr, selectedCode] = param as [
-    MapType,
-    string,
-    string,
-    number,
-    string | undefined
-  ];
+  const [map, metric, property, heightStr, selectedCode] = param as [MapType, string, string, number, string | undefined];
 
   const height = Number(heightStr);
 
@@ -60,9 +42,7 @@ export default async function handler(
   }
 
   const suffix = isDefined(selectedCode) ? `_${selectedCode}` : '';
-  const filename = sanitize(
-    `${metric}_${property}_${map}_${height}${suffix}.png`
-  );
+  const filename = sanitize(`${metric}_${property}_${map}_${height}${suffix}.png`);
 
   const fullImageFilePath = path.join(publicImgPath, filename);
   if (fs.existsSync(fullImageFilePath)) {
@@ -77,14 +57,7 @@ export default async function handler(
   }
 
   try {
-    const [blob, eTag] = await generateChoroplethImage(
-      metric,
-      property,
-      map,
-      height,
-      filename,
-      selectedCode
-    );
+    const [blob, eTag] = await generateChoroplethImage(metric, property, map, height, filename, selectedCode);
 
     res.setHeader('ETag', eTag);
     res.setHeader('Content-Type', 'image/png');
@@ -99,10 +72,7 @@ export default async function handler(
 }
 
 function createGeoJson(map: MapType) {
-  assert(
-    map === 'vr' || map === 'gm',
-    `[${createGeoJson.name}] Unknown maptype: ${map}`
-  );
+  assert(map === 'vr' || map === 'gm', `[${createGeoJson.name}] Unknown maptype: ${map}`);
 
   const featureGeo = map === 'vr' ? vrGeo : gmGeo;
 
@@ -116,9 +86,7 @@ function loadChoroplethData(map: MapType, metric: string) {
   }
 
   const filename = sanitize(`${map.toUpperCase()}_COLLECTION.json`);
-  const content = JSON.parse(
-    fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
-  );
+  const content = JSON.parse(fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' }));
 
   if (metric !== 'gemeente' && metric !== 'veiligheidsregio') {
     return content[metric] as ChoroplethDataItem[];
@@ -138,14 +106,7 @@ function loadChoroplethData(map: MapType, metric: string) {
   })) as ChoroplethDataItem[];
 }
 
-async function generateChoroplethImage(
-  metric: string,
-  property: string,
-  map: MapType,
-  height: number,
-  filename: string,
-  selectedCode?: string
-) {
+async function generateChoroplethImage(metric: string, property: string, map: MapType, height: number, filename: string, selectedCode?: string) {
   const dataConfig: DataConfig<any> = createDataConfig<any>({
     metricName: metric as any,
     metricProperty: property,
@@ -171,11 +132,7 @@ async function generateChoroplethImage(
     features.boundingBox,
   ];
 
-  const [projectedGeoInfo] = getProjectedCoordinates(
-    features.hover,
-    mapProjection,
-    fitExtent
-  );
+  const [projectedGeoInfo] = getProjectedCoordinates(features.hover, mapProjection, fitExtent);
 
   const fColor = getFillColor(data, map, dataConfig);
   const fillColor = (code: string, index: number) => {

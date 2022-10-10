@@ -18,10 +18,8 @@ import { getClient } from '../../client';
 
 const client = getClient('development');
 
-const fetchFigureExplanations = () =>
-  client.fetch(`*[_type == 'cijferVerantwoordingItem' && group == null]`);
-const fetchDefaultGroup = () =>
-  client.fetch(`*[_type == 'cijferVerantwoordingGroups'][0]`);
+const fetchFigureExplanations = () => client.fetch(`*[_type == 'cijferVerantwoordingItem' && group == null]`);
+const fetchDefaultGroup = () => client.fetch(`*[_type == 'cijferVerantwoordingGroups'][0]`);
 
 const buildPatches = (docs: any[], group: any) =>
   docs
@@ -43,11 +41,7 @@ const buildPatches = (docs: any[], group: any) =>
     }))
     .filter((x) => x !== undefined);
 
-const createTransaction = (patches: any[]) =>
-  patches.reduce(
-    (tx, patch) => tx.patch(patch.id, patch.patch),
-    client.transaction()
-  );
+const createTransaction = (patches: any[]) => patches.reduce((tx, patch) => tx.patch(patch.id, patch.patch), client.transaction());
 
 const commitTransaction = (tx: any) => tx.commit();
 
@@ -79,12 +73,7 @@ const migrateNextBatch = async (): Promise<any> => {
     return null;
   }
 
-  console.log(
-    `Migrating batch:\n %s`,
-    patches
-      .map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
-      .join('\n')
-  );
+  console.log(`Migrating batch:\n %s`, patches.map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'));
   const transaction = createTransaction(patches);
 
   await commitTransaction(transaction);

@@ -10,8 +10,7 @@ export const warning = {
       title: 'Waarschuwing',
       name: 'warning',
       type: 'string',
-      description:
-        'De hier ingevulde tekst als waarschuwing voor bijv. tijdelijke inaccuraatheid van de data. Laat leeg om de waarschuwing te verbergen.',
+      description: 'De hier ingevulde tekst als waarschuwing voor bijv. tijdelijke inaccuraatheid van de data. Laat leeg om de waarschuwing te verbergen.',
     },
   ],
   preview: commonPreview,

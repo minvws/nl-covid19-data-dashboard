@@ -36,13 +36,7 @@ export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
   );
 }
 
-export function Menu({
-  children,
-  spacing,
-}: {
-  children: ReactNode;
-  spacing?: SpaceValue;
-}) {
+export function Menu({ children, spacing }: { children: ReactNode; spacing?: SpaceValue }) {
   return (
     <Box as="ul" css={css({ listStyle: 'none' })} spacing={spacing}>
       {children}
@@ -50,15 +44,7 @@ export function Menu({
   );
 }
 
-export function CategoryMenu({
-  title,
-  children,
-  icon,
-}: {
-  children: ReactNode;
-  title?: string;
-  icon: ReactNode;
-}) {
+export function CategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode }) {
   return (
     <Box as="li" spacing={2}>
       {title && icon && (
@@ -98,10 +84,7 @@ export function MenuItemLink({ href, title }: MenuItemLinkProps) {
   return (
     <li>
       <Link href={href} passHref>
-        <StyledAnchor
-          isActive={breakpoints.md && isActive}
-          aria-current={isActive ? 'page' : undefined}
-        >
+        <StyledAnchor isActive={breakpoints.md && isActive} aria-current={isActive ? 'page' : undefined}>
           <AsideTitle title={title} showArrow={!breakpoints.md || !isActive} />
         </StyledAnchor>
       </Link>
@@ -137,9 +120,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
     fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
     bg: anchorProps.isActive ? 'blue1' : 'transparent',
-    borderRightColor: anchorProps.isActive
-      ? 'blue8'
-      : 'transparent',
+    borderRightColor: anchorProps.isActive ? 'blue8' : 'transparent',
 
     '&:hover, &:focus': {
       bg: 'blue8',
@@ -151,9 +132,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
     },
 
     '&::after': {
-      content: anchorProps.isActive
-        ? 'none'
-        : asResponsiveArray({ _: 'none', xs: undefined }),
+      content: anchorProps.isActive ? 'none' : asResponsiveArray({ _: 'none', xs: undefined }),
       backgroundImage: `url('${chevronUrl}')`,
       // match aspect ratio of chevron.svg
       backgroundSize: '0.6em 1.2em',

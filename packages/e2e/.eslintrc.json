@@ -6,13 +6,8 @@
   },
   "overrides": [
     {
-      "extends": [
-        "../../eslint-overrides"
-      ],
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ]
+      "extends": ["../../eslint-overrides"],
+      "files": ["*.ts", "*.tsx"]
     }
   ]
 }

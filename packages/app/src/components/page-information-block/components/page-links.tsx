@@ -1,7 +1,4 @@
-import {
-  ChevronRight,
-  External as ExternalIcon,
-} from '@corona-dashboard/icons';
+import { ChevronRight, External as ExternalIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -24,8 +21,7 @@ interface pageLinksProps {
 export function PageLinks({ links }: pageLinksProps) {
   const { commonTexts } = useIntl();
 
-  const combinedAriaLabel = (title: string) =>
-    `${commonTexts.informatie_header.external_link}. ${title}`;
+  const combinedAriaLabel = (title: string) => `${commonTexts.informatie_header.external_link}. ${title}`;
 
   return (
     <Box spacing={2} pt={3}>
@@ -34,11 +30,7 @@ export function PageLinks({ links }: pageLinksProps) {
         {links.map((link, index) => (
           <ListItem key={index}>
             {isAbsoluteUrl(link.href) ? (
-              <ExternalLink
-                href={link.href}
-                underline="hover"
-                ariaLabel={combinedAriaLabel(link.title)}
-              >
+              <ExternalLink href={link.href} underline="hover" ariaLabel={combinedAriaLabel(link.title)}>
                 <TitleWithIcon title={link.title} icon={<ExternalIcon />} />
               </ExternalLink>
             ) : (

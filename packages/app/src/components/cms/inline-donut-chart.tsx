@@ -1,9 +1,4 @@
-import {
-  DataScopeKey,
-  DonutChartConfiguration,
-  MetricKeys,
-  ScopedData,
-} from '@corona-dashboard/common';
+import { DataScopeKey, DonutChartConfiguration, MetricKeys, ScopedData } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { get } from 'lodash';
 import useSWRImmutable from 'swr/immutable';
@@ -15,40 +10,30 @@ import { Metadata } from '../metadata';
 import { InlineLoader } from './inline-loader';
 import { getColor } from './logic/get-color';
 import { getDataUrl } from './logic/get-data-url';
-interface InlineDonutChartProps<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
-> {
+interface InlineDonutChartProps<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>> {
   startDate?: string;
   endDate?: string;
   configuration: DonutChartConfiguration<S, M>;
 }
 
-export function InlineDonutChart<
-  S extends DataScopeKey,
-  M extends MetricKeys<ScopedData[S]>
->(props: InlineDonutChartProps<S, M>) {
+export function InlineDonutChart<S extends DataScopeKey, M extends MetricKeys<ScopedData[S]>>(props: InlineDonutChartProps<S, M>) {
   const { startDate, endDate, configuration } = props;
   const { commonTexts } = useIntl();
 
   const dateUrl = getDataUrl(startDate, endDate, configuration, 'donut');
 
-  const { data } = useSWRImmutable(dateUrl, (url: string) =>
-    fetch(url).then((_) => _.json())
-  );
+  const { data } = useSWRImmutable(dateUrl, (url: string) => fetch(url).then((_) => _.json()));
 
   if (!isDefined(data)) {
     return <InlineLoader />;
   }
 
-  const dataConfig = configuration.metricProperties.map<PiePartConfig<any>>(
-    (x) => ({
-      metricProperty: x.propertyName as any,
-      color: getColor(x.color),
-      label: get(commonTexts, x.labelKey.split('.'), null),
-      tooltipLabel: get(commonTexts, x.tooltipLabelKey.split('.'), null),
-    })
-  );
+  const dataConfig = configuration.metricProperties.map<PiePartConfig<any>>((x) => ({
+    metricProperty: x.propertyName as any,
+    color: getColor(x.color),
+    label: get(commonTexts, x.labelKey.split('.'), null),
+    tooltipLabel: get(commonTexts, x.tooltipLabelKey.split('.'), null),
+  }));
 
   const title = get(commonTexts, configuration.labelKey.split('.'), '');
   const source = get(commonTexts, configuration.sourceKey.split('.'), '');
@@ -92,11 +77,7 @@ export function InlineDonutChart<
           </>
         }
       />
-      <Metadata
-        date={[data.date_start_unix, data.date_end_unix]}
-        source={source}
-        isTileFooter
-      />
+      <Metadata date={[data.date_start_unix, data.date_end_unix]} source={source} isTileFooter />
     </ErrorBoundary>
   );
 }

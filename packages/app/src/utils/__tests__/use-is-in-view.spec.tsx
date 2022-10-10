@@ -20,10 +20,7 @@ UseIsInView.before.each((context) => {
   cleanup();
 
   class IntersectionObserverStub {
-    constructor(
-      callback: IntersectionObserverCallback,
-      options?: IntersectionObserverInit
-    ) {
+    constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
       context.callback = callback;
       context.options = options;
       context.observe = this.observe;
@@ -58,16 +55,13 @@ function TestComponent({ context }: { context: Context & uvu.Crumbs }) {
   return <div ref={ref}></div>;
 }
 
-UseIsInView(
-  'should create an intersection observer with a callback and the given rootMargin',
-  (context) => {
-    render(<TestComponent context={context} />);
+UseIsInView('should create an intersection observer with a callback and the given rootMargin', (context) => {
+  render(<TestComponent context={context} />);
 
-    assert.ok(context.callback);
+  assert.ok(context.callback);
 
-    assert.equal(context.options, { rootMargin: '100px' });
-  }
-);
+  assert.equal(context.options, { rootMargin: '100px' });
+});
 
 UseIsInView('should have a default state of false', (context) => {
   render(<TestComponent context={context} />);

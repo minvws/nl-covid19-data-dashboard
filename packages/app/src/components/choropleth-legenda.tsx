@@ -17,12 +17,7 @@ interface ChoroplethLegendaProps {
   type?: 'default' | 'bar';
 }
 
-export function ChoroplethLegenda({
-  title,
-  thresholds,
-  valueAnnotation,
-  type = 'bar',
-}: ChoroplethLegendaProps) {
+export function ChoroplethLegenda({ title, thresholds, valueAnnotation, type = 'bar' }: ChoroplethLegendaProps) {
   const [itemRef, itemSize] = useResizeObserver<HTMLLIElement>();
   const [endLabelRef, endLabelSize] = useResizeObserver<HTMLSpanElement>();
   const { commonTexts, formatNumber } = useIntl();
@@ -44,12 +39,7 @@ export function ChoroplethLegenda({
   );
 
   return (
-    <Box
-      width="100%"
-      pr={`${endLabelSize.width ?? 0 / 2}px`}
-      spacing={2}
-      aria-hidden="true"
-    >
+    <Box width="100%" pr={`${endLabelSize.width ?? 0 / 2}px`} spacing={2} aria-hidden="true">
       {title && <Text variant="subtitle1">{title}</Text>}
       {'bar' === type ? (
         <List>
@@ -60,20 +50,11 @@ export function ChoroplethLegenda({
             const formattedTreshold = formatNumber(threshold);
 
             return (
-              <Item
-                key={color + threshold}
-                ref={index === 0 ? itemRef : undefined}
-              >
+              <Item key={color + threshold} ref={index === 0 ? itemRef : undefined}>
                 <LegendaColor color={color} first={isFirst} last={isLast} />
-                {isFirst ? (
-                  <StartLabel>{label ?? formattedTreshold}</StartLabel>
-                ) : (
-                  displayLabel && <Label>{label ?? formattedTreshold}</Label>
-                )}
+                {isFirst ? <StartLabel>{label ?? formattedTreshold}</StartLabel> : displayLabel && <Label>{label ?? formattedTreshold}</Label>}
 
-                {isLast && endLabel && (
-                  <EndLabel ref={endLabelRef}>{endLabel}</EndLabel>
-                )}
+                {isLast && endLabel && <EndLabel ref={endLabelRef}>{endLabel}</EndLabel>}
               </Item>
             );
           })}

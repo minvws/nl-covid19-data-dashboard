@@ -57,18 +57,12 @@ export function PageInformationBlock({
   onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
-  const showArchivedToggleButton =
-    typeof isArchivedHidden !== 'undefined' &&
-    typeof onToggleArchived !== 'undefined';
+  const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
-      <Metadata
-        {...metadata}
-        accessibilitySubject={title}
-        referenceLink={referenceLink}
-      />
+      <Metadata {...metadata} accessibilitySubject={title} referenceLink={referenceLink} />
     </MetadataBox>
   ) : null;
 
@@ -86,22 +80,8 @@ export function PageInformationBlock({
 
   return (
     <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
-      {title && (
-        <Header
-          icon={icon}
-          title={title}
-          category={category}
-          screenReaderCategory={screenReaderCategory}
-        />
-      )}
-      {scopedWarning && (
-        <WarningTile
-          variant="emphasis"
-          message={scopedWarning}
-          icon={Warning}
-          isFullWidth
-        />
-      )}
+      {title && <Header icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
+      {scopedWarning && <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />}
 
       {description && (
         <Tile hasTitle={!!title}>
@@ -139,14 +119,8 @@ export function PageInformationBlock({
           </Box>
           <Box my={3}>
             {showArchivedToggleButton && (
-              <Button
-                type="button"
-                onClick={onToggleArchived}
-                isActive={isArchivedHidden}
-              >
-                {!isArchivedHidden
-                  ? commonTexts.common.show_archived
-                  : commonTexts.common.hide_archived}
+              <Button type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
+                {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
               </Button>
             )}
           </Box>

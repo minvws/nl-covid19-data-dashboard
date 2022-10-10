@@ -7,20 +7,17 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 
 const GetVrGmCodesForGmCode = suite('getVrGmCodesForGmCode');
 
-GetVrGmCodesForGmCode(
-  'should return the right gm codes for a given gm code',
-  () => {
-    const gmCode = gmData[0].gemcode;
-    const vrCode = vrCodeByGmCode[gmCode];
-    const gmCodes = gmCodesByVrCode[vrCode];
+GetVrGmCodesForGmCode('should return the right gm codes for a given gm code', () => {
+  const gmCode = gmData[0].gemcode;
+  const vrCode = vrCodeByGmCode[gmCode];
+  const gmCodes = gmCodesByVrCode[vrCode];
 
-    const result = getVrGmCodesForGmCode(gmCode);
+  const result = getVrGmCodesForGmCode(gmCode);
 
-    assert.ok(result);
-    assert.is(result.length, gmCodes.length);
-    assert.equal(result, gmCodes);
-  }
-);
+  assert.ok(result);
+  assert.is(result.length, gmCodes.length);
+  assert.equal(result, gmCodes);
+});
 
 GetVrGmCodesForGmCode('should return undefined for a fault gm code', () => {
   const result = getVrGmCodesForGmCode('blub');

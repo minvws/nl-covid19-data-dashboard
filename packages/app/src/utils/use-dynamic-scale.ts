@@ -16,11 +16,7 @@ export const STRETCH_FACTOR = 1.05;
  * This is a simplified version which should give us the same results, and can
  * later be enhanced if we choose re-introduce the use of calculated ranges.
  */
-export function useDynamicScale(
-  value: number,
-  min: number,
-  max: number
-): ScaleLinear<number, number> {
+export function useDynamicScale(value: number, min: number, max: number): ScaleLinear<number, number> {
   const scaleMax = value < max ? max : value * STRETCH_FACTOR;
   const scaleMin = value > min ? min : value / STRETCH_FACTOR;
 

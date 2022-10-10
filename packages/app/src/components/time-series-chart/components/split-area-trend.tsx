@@ -20,51 +20,18 @@ type SplitAreaTrendProps = {
   id: string;
 };
 
-export function SplitAreaTrend({
-  series,
-  splitPoints,
-  getX,
-  getY,
-  yScale,
-  id,
-  strokeWidth = DEFAULT_STROKE_WIDTH,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-}: SplitAreaTrendProps) {
-  const nonNullSeries = useMemo(
-    () => series.filter((x) => isPresent(x.__value)),
-    [series]
-  );
+export function SplitAreaTrend({ series, splitPoints, getX, getY, yScale, id, strokeWidth = DEFAULT_STROKE_WIDTH, fillOpacity = DEFAULT_FILL_OPACITY }: SplitAreaTrendProps) {
+  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value)), [series]);
 
   const gradientId = useUniqueId();
 
   return (
     <g>
-      <SplitPointGradient
-        id={gradientId}
-        splitPoints={splitPoints}
-        yScale={yScale}
-      />
+      <SplitPointGradient id={gradientId} splitPoints={splitPoints} yScale={yScale} />
 
-      <LinePath
-        data={nonNullSeries}
-        x={getX}
-        y={getY}
-        fill="transparent"
-        strokeWidth={strokeWidth}
-        stroke={`url(#${gradientId})`}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <LinePath data={nonNullSeries} x={getX} y={getY} fill="transparent" strokeWidth={strokeWidth} stroke={`url(#${gradientId})`} strokeLinecap="round" strokeLinejoin="round" />
 
-      <AreaClosed
-        id={id}
-        data={nonNullSeries}
-        x={getX}
-        y={getY}
-        fill={`url(#${gradientId})`}
-        fillOpacity={fillOpacity}
-        yScale={yScale}
-      />
+      <AreaClosed id={id} data={nonNullSeries} x={getX} y={getY} fill={`url(#${gradientId})`} fillOpacity={fillOpacity} yScale={yScale} />
     </g>
   );
 }
@@ -77,13 +44,7 @@ interface SplitAreaTrendIconProps {
   height?: number;
 }
 
-export function SplitAreaTrendIcon({
-  color,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  strokeWidth = DEFAULT_STROKE_WIDTH,
-  width = 15,
-  height = 15,
-}: SplitAreaTrendIconProps) {
+export function SplitAreaTrendIcon({ color, fillOpacity = DEFAULT_FILL_OPACITY, strokeWidth = DEFAULT_STROKE_WIDTH, width = 15, height = 15 }: SplitAreaTrendIconProps) {
   const maskId = useUniqueId();
 
   return (
@@ -92,23 +53,8 @@ export function SplitAreaTrendIcon({
         <rect rx={2} x={0} y={0} width={width} height={height} fill={'white'} />
       </mask>
       <g mask={`url(#${maskId})`}>
-        <rect
-          rx={2}
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          fill={color}
-          opacity={fillOpacity}
-        />
-        <line
-          stroke={color}
-          strokeWidth={strokeWidth}
-          x1={0}
-          y1={strokeWidth / 2}
-          x2={width}
-          y2={strokeWidth / 2}
-        />
+        <rect rx={2} x={0} y={0} width={width} height={height} fill={color} opacity={fillOpacity} />
+        <line stroke={color} strokeWidth={strokeWidth} x1={0} y1={strokeWidth / 2} x2={width} y2={strokeWidth / 2} />
       </g>
     </svg>
   );

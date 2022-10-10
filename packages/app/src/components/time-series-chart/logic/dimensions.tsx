@@ -35,17 +35,10 @@ interface DimensionProps {
   applySymmetricalPadding?: boolean;
 }
 
-export function useDimensions({
-  width,
-  height,
-  paddingLeft,
-  paddingTop,
-  applySymmetricalPadding,
-}: DimensionProps) {
+export function useDimensions({ width, height, paddingLeft, paddingTop, applySymmetricalPadding }: DimensionProps) {
   const isMounted = useIsMounted();
 
-  const [leftPaddingRef, { width: measuredLeftPadding = 0 }] =
-    useResizeObserver<SVGGElement>();
+  const [leftPaddingRef, { width: measuredLeftPadding = 0 }] = useResizeObserver<SVGGElement>();
 
   return useMemo(() => {
     const calculatedPaddingLeft =
@@ -58,9 +51,7 @@ export function useDimensions({
           measuredLeftPadding + 5
         : measuredLeftPadding;
 
-    const left = isMounted
-      ? paddingLeft ?? calculatedPaddingLeft ?? defaultPadding.left
-      : defaultPadding.left;
+    const left = isMounted ? paddingLeft ?? calculatedPaddingLeft ?? defaultPadding.left : defaultPadding.left;
 
     const padding: Padding = {
       ...defaultPadding,
@@ -75,14 +66,5 @@ export function useDimensions({
     };
 
     return { padding, bounds, leftPaddingRef };
-  }, [
-    paddingLeft,
-    paddingTop,
-    measuredLeftPadding,
-    isMounted,
-    applySymmetricalPadding,
-    width,
-    height,
-    leftPaddingRef,
-  ]);
+  }, [paddingLeft, paddingTop, measuredLeftPadding, isMounted, applySymmetricalPadding, width, height, leftPaddingRef]);
 }

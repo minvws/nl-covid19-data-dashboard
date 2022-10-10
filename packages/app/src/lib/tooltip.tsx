@@ -32,14 +32,7 @@ export function WithTooltip(props: TippyProps) {
     return <>{props.children}</>;
   }
 
-  return (
-    <StyledTippy
-      appendTo={getBody}
-      maxWidth={breakpoints.sm ? '260px' : '285px'}
-      {...(handleMount ? { onMount: handleMount } : {})}
-      {...props}
-    />
-  );
+  return <StyledTippy appendTo={getBody} maxWidth={breakpoints.sm ? '260px' : '285px'} {...(handleMount ? { onMount: handleMount } : {})} {...props} />;
 }
 
 function getBody() {
@@ -58,9 +51,7 @@ if (process.env.NODE_ENV !== 'production') {
 
     if (!reference.matches(isFocusableSelector)) {
       console.error({ tippyInstance, reference });
-      throw new Error(
-        `A tooltip has been wrapped around an element which cannot receive focus state. Please make it focusable for a11y by setting tabIndex={0}`
-      );
+      throw new Error(`A tooltip has been wrapped around an element which cannot receive focus state. Please make it focusable for a11y by setting tabIndex={0}`);
     }
   };
 }

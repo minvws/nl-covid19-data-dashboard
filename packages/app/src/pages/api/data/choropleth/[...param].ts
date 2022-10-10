@@ -40,11 +40,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    let values = loadMetricData(
-      choroplethScopes[scope],
-      metric,
-      publicJsonPath
-    );
+    let values = loadMetricData(choroplethScopes[scope], metric, publicJsonPath);
     if (isDefined(values)) {
       values.values = sortTimeSeriesValues(values);
 

@@ -2,16 +2,10 @@ import { unflatten } from 'flat';
 import { useEffect, useState } from 'react';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import {
-  IS_STAGING_ENV,
-  mapSiteTextValuesToKeys,
-} from '~/locale/use-lokalize-text';
+import { IS_STAGING_ENV, mapSiteTextValuesToKeys } from '~/locale/use-lokalize-text';
 import { fetchLokalizeTexts } from './fetch-lokalize-texts';
 
-export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(
-  initialTexts: T,
-  selector: (text: SiteText) => T
-) => {
+export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(initialTexts: T, selector: (text: SiteText) => T) => {
   const [texts, setTexts] = useState<T>(initialTexts);
   const { dataset, locale } = useIntl();
 
@@ -44,7 +38,5 @@ export const useDynamicLokalizeTexts = <T extends Record<string, unknown>>(
 };
 
 const handleSanityError = (error: any) => {
-  throw new Error(
-    `[${useDynamicLokalizeTexts.name}] Error while fetching Sanity content: "${error}"`
-  );
+  throw new Error(`[${useDynamicLokalizeTexts.name}] Error while fetching Sanity content: "${error}"`);
 };

@@ -1,7 +1,4 @@
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../language/locale-validation';
+import { localeStringValidation, localeValidation } from '../../language/locale-validation';
 
 export const collapsible = {
   title: 'Inklapbare titel en inhoud',

@@ -27,37 +27,16 @@ type RichContentSelectProps<T extends string> = {
  * Implementation adapted from:
  * https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
  */
-export function RichContentSelect<T extends string>(
-  props: RichContentSelectProps<T>
-) {
-  const {
-    label,
-    options,
-    onChange,
-    initialValue,
-    visuallyHiddenLabel,
-    useContentForSelectedOption: richContentForSelectedValue,
-  } = props;
+export function RichContentSelect<T extends string>(props: RichContentSelectProps<T>) {
+  const { label, options, onChange, initialValue, visuallyHiddenLabel, useContentForSelectedOption: richContentForSelectedValue } = props;
 
-  const {
-    labelId,
-    selectedOption,
-    getComboboxProps,
-    getListBoxProps,
-    getListBoxOptionsProps,
-  } = useRichContentSelect(options, onChange, initialValue);
+  const { labelId, selectedOption, getComboboxProps, getListBoxProps, getListBoxOptionsProps } = useRichContentSelect(options, onChange, initialValue);
 
   const { commonTexts } = useIntl();
 
   const { containerRef, ...selectBoxProps } = getComboboxProps();
 
-  const selectedOptionView =
-    isPresent(selectedOption) &&
-    (richContentForSelectedValue ? (
-      selectedOption?.content
-    ) : (
-      <Text>{selectedOption.label}</Text>
-    ));
+  const selectedOptionView = isPresent(selectedOption) && (richContentForSelectedValue ? selectedOption?.content : <Text>{selectedOption.label}</Text>);
 
   return (
     <Box ref={containerRef}>
@@ -98,19 +77,13 @@ export function RichContentSelect<T extends string>(
         <ListBox {...getListBoxProps()}>
           {options &&
             options.map((option, index) => (
-              <ListBoxOption
-                key={option.value}
-                {...getListBoxOptionsProps(index)}
-              >
+              <ListBoxOption key={option.value} {...getListBoxOptionsProps(index)}>
                 <VisuallyHidden>
                   {
                     <InlineText>
-                      {replaceVariablesInText(
-                        commonTexts.aria_labels.map_select_label,
-                        {
-                          label: option.label,
-                        }
-                      )}
+                      {replaceVariablesInText(commonTexts.aria_labels.map_select_label, {
+                        label: option.label,
+                      })}
                     </InlineText>
                   }
                 </VisuallyHidden>
