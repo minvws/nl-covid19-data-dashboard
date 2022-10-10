@@ -40,7 +40,5 @@ export function SelectBehavior({ label, value, onChange, options = behaviorIdent
     })
     .sort((a, b) => a.label.localeCompare(b.label));
 
-  return (
-    <RichContentSelect label={label} visuallyHiddenLabel initialValue={value} options={selectOptions} onChange={(option) => onChange(option.value)} useContentForSelectedOption />
-  );
+  return <RichContentSelect label={label} visuallyHiddenLabel initialValue={value} options={selectOptions} onChange={(option) => onChange(option.value)} useContentForSelectedOption />;
 }

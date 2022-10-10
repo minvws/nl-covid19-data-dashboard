@@ -122,22 +122,11 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 source: positiveTestedPeopleText.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="newly_infected_people"
-                absolute={nursinghomeDataLastValue.newly_infected_people}
-                difference={data.difference.nursing_home__newly_infected_people}
-                isAmount
-              />
+              <KpiValue data-cy="newly_infected_people" absolute={nursinghomeDataLastValue.newly_infected_people} difference={data.difference.nursing_home__newly_infected_people} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
-            title={positiveTestedPeopleText.linechart_titel}
-            description={positiveTestedPeopleText.linechart_description}
-            timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
-          >
+          <ChartTile metadata={{ source: positiveTestedPeopleText.bronnen.rivm }} title={positiveTestedPeopleText.linechart_titel} description={positiveTestedPeopleText.linechart_description} timeframeOptions={TimeframeOptionsList} onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'nursing_home_confirmed_cases_over_time_chart',
@@ -199,13 +188,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 source: infectedLocationsText.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="infected_locations_total"
-                absolute={nursinghomeDataLastValue.infected_locations_total}
-                percentage={nursinghomeDataLastValue.infected_locations_percentage}
-                difference={data.difference.nursing_home__infected_locations_total}
-                isAmount
-              />
+              <KpiValue data-cy="infected_locations_total" absolute={nursinghomeDataLastValue.infected_locations_total} percentage={nursinghomeDataLastValue.infected_locations_percentage} difference={data.difference.nursing_home__infected_locations_total} isAmount />
               <Text>{infectedLocationsText.kpi_toelichting}</Text>
             </KpiTile>
 
@@ -253,13 +236,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             />
           </ChoroplethTile>
 
-          <ChartTile
-            metadata={{ source: infectedLocationsText.bronnen.rivm }}
-            title={infectedLocationsText.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
-            description={infectedLocationsText.linechart_description}
-            onSelectTimeframe={setNursingHomeInfectedLocationsTimeframe}
-          >
+          <ChartTile metadata={{ source: infectedLocationsText.bronnen.rivm }} title={infectedLocationsText.linechart_titel} timeframeOptions={TimeframeOptionsList} description={infectedLocationsText.linechart_description} onSelectTimeframe={setNursingHomeInfectedLocationsTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'nursing_home_infected_locations_over_time_chart',
@@ -306,13 +283,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            metadata={{ source: textNl.bronnen.rivm }}
-            title={textNl.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
-            description={textNl.linechart_description}
-            onSelectTimeframe={setNursingHomeDeceasedTimeframe}
-          >
+          <ChartTile metadata={{ source: textNl.bronnen.rivm }} title={textNl.linechart_titel} timeframeOptions={TimeframeOptionsList} description={textNl.linechart_description} onSelectTimeframe={setNursingHomeDeceasedTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'nursing_home_deceased_over_time_chart',

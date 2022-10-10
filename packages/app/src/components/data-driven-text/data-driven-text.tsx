@@ -20,13 +20,7 @@ export type DataKeys = keyof Nl | keyof Vr | keyof Gm;
  * forgiving because it will work on any data structure.
  *
  */
-export type DataFile<T> = T extends keyof Nl
-  ? Pick<Nl, 'difference' | T>
-  : T extends keyof Vr
-  ? Pick<Vr, 'difference' | T>
-  : T extends keyof Gm
-  ? Pick<Gm, 'difference' | T>
-  : never;
+export type DataFile<T> = T extends keyof Nl ? Pick<Nl, 'difference' | T> : T extends keyof Vr ? Pick<Vr, 'difference' | T> : T extends keyof Gm ? Pick<Gm, 'difference' | T> : never;
 
 export type Content<T extends DataKeys> =
   | {

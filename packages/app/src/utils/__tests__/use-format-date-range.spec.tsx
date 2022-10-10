@@ -42,10 +42,7 @@ UseFormatDateRange.skip('Should format the same months', () => {
 UseFormatDateRange.run();
 
 function createContext() {
-  const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = createFormatting(
-    'nl-NL',
-    {} as SiteText['common']['utils']
-  );
+  const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = createFormatting('nl-NL', {} as SiteText['common']['utils']);
 
   return {
     dataset: 'production' as Dataset,

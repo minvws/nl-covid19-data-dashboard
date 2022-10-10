@@ -24,17 +24,7 @@ export interface AgeDemographicProps<T extends AgeDemographicDefaultValue> {
   formatValue: (n: number) => string;
 }
 
-export function AgeDemographic<T extends AgeDemographicDefaultValue>({
-  accessibility,
-  data,
-  formatValue,
-  leftMetricProperty,
-  rightMetricProperty,
-  leftColor,
-  rightColor,
-  maxDisplayValue,
-  text,
-}: AgeDemographicProps<T>) {
+export function AgeDemographic<T extends AgeDemographicDefaultValue>({ accessibility, data, formatValue, leftMetricProperty, rightMetricProperty, leftColor, rightColor, maxDisplayValue, text }: AgeDemographicProps<T>) {
   const [ref, coordinates] = useAgeDemographicCoordinates(data, rightMetricProperty, leftMetricProperty, maxDisplayValue);
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
@@ -49,34 +39,11 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
     <Box position="relative">
       <ErrorBoundary>
         <div ref={ref}>
-          <AgeDemographicChart
-            accessibility={ageDemographicAccessibility}
-            coordinates={coordinates}
-            onMouseMoveBar={openTooltip}
-            onMouseLeaveBar={closeTooltip}
-            onKeyInput={keyboardNavigateTooltip}
-            maxDisplayValue={maxDisplayValue}
-            rightMetricProperty={rightMetricProperty}
-            leftMetricProperty={leftMetricProperty}
-            rightColor={rightColor}
-            leftColor={leftColor}
-            text={text}
-            formatValue={formatValue}
-          />
+          <AgeDemographicChart accessibility={ageDemographicAccessibility} coordinates={coordinates} onMouseMoveBar={openTooltip} onMouseLeaveBar={closeTooltip} onKeyInput={keyboardNavigateTooltip} maxDisplayValue={maxDisplayValue} rightMetricProperty={rightMetricProperty} leftMetricProperty={leftMetricProperty} rightColor={rightColor} leftColor={leftColor} text={text} formatValue={formatValue} />
         </div>
 
         <Tooltip tooltipState={tooltipState} width={AGE_GROUP_TOOLTIP_WIDTH}>
-          {tooltipState.value && (
-            <AgeDemographicTooltipContent
-              value={tooltipState.value}
-              rightMetricProperty={rightMetricProperty}
-              leftMetricProperty={leftMetricProperty}
-              rightColor={rightColor}
-              leftColor={leftColor}
-              text={text}
-              formatValue={formatValue}
-            />
-          )}
+          {tooltipState.value && <AgeDemographicTooltipContent value={tooltipState.value} rightMetricProperty={rightMetricProperty} leftMetricProperty={leftMetricProperty} rightColor={rightColor} leftColor={leftColor} text={text} formatValue={formatValue} />}
         </Tooltip>
       </ErrorBoundary>
     </Box>

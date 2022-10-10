@@ -104,15 +104,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 description: textNl.extra_uitleg,
               }}
             >
-              <PageKpi
-                data={data}
-                metricName="reproduction"
-                metricProperty="index_average"
-                differenceKey="reproduction__index_average"
-                differenceFractionDigits={2}
-                showOldDateUnix
-                isAmount={false}
-              />
+              <PageKpi data={data} metricName="reproduction" metricProperty="index_average" differenceKey="reproduction__index_average" differenceFractionDigits={2} showOldDateUnix isAmount={false} />
               <Markdown content={textNl.barscale_toelichting} />
             </KpiWithIllustrationTile>
           </TwoKpiSection>

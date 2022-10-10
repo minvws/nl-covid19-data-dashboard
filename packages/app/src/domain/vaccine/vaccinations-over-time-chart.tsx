@@ -136,17 +136,7 @@ export function VaccinationsOverTimeChart(props: VaccinationsOverTimeChartProps)
         },
       ],
     } as TimeSeriesChartProps<VaccineAdministrationsValue, SeriesConfig<VaccineAdministrationsValue>>;
-  }, [
-    administrationData,
-    commonTexts.waarde_annotaties.x_miljoen,
-    text.data.vaccination_chart.legend_label,
-    text.data.vaccination_chart.doses_administered,
-    breakpoints.md,
-    text.data.vaccination_chart.product_names,
-    vaccineNames,
-    formatNumber,
-    timelineEvents.deliveryAndAdministration,
-  ]);
+  }, [administrationData, commonTexts.waarde_annotaties.x_miljoen, text.data.vaccination_chart.legend_label, text.data.vaccination_chart.doses_administered, breakpoints.md, text.data.vaccination_chart.product_names, vaccineNames, formatNumber, timelineEvents.deliveryAndAdministration]);
 
   const chartProps = activeChart === 'coverage' ? coverageChartConfiguration : deliveryAndAdministrationChartConfiguration;
 

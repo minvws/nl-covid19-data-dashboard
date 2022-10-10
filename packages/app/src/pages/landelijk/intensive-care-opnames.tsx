@@ -126,13 +126,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             >
               {bedsLastValue.beds_occupied_covid !== null && bedsLastValue.beds_occupied_covid_percentage !== null && (
                 <>
-                  <PageBarScale
-                    value={bedsLastValue.beds_occupied_covid}
-                    config={getBarScaleConfig('nl', 'intensive_care_lcps', 'beds_occupied_covid')}
-                    difference={data.difference.intensive_care_lcps__beds_occupied_covid}
-                    screenReaderText={textNl.kpi_bedbezetting.barscale_screenreader_text}
-                    isAmount
-                  />
+                  <PageBarScale value={bedsLastValue.beds_occupied_covid} config={getBarScaleConfig('nl', 'intensive_care_lcps', 'beds_occupied_covid')} difference={data.difference.intensive_care_lcps__beds_occupied_covid} screenReaderText={textNl.kpi_bedbezetting.barscale_screenreader_text} isAmount />
 
                   <Markdown
                     content={replaceVariablesInText(textNl.kpi_bedbezetting.description, {
@@ -144,14 +138,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={textNl.linechart_titel}
-            description={textNl.linechart_description}
-            metadata={{ source: textNl.bronnen.nice }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={setIntensiveCareAdmissionsTimeframe}
-          >
+          <ChartTile title={textNl.linechart_titel} description={textNl.linechart_description} metadata={{ source: textNl.bronnen.nice }} timeframeOptions={TimeframeOptionsList} timeframeInitialValue={TimeframeOption.THIRTY_DAYS} onSelectTimeframe={setIntensiveCareAdmissionsTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'intensive_care_admissions_over_time_chart',
@@ -187,14 +174,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             />
           </ChartTile>
 
-          <ChartTile
-            title={textNl.chart_bedbezetting.title}
-            description={textNl.chart_bedbezetting.description}
-            metadata={{ source: textNl.bronnen.lnaz }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={setIntensiveCareBedsTimeframe}
-          >
+          <ChartTile title={textNl.chart_bedbezetting.title} description={textNl.chart_bedbezetting.description} metadata={{ source: textNl.bronnen.lnaz }} timeframeOptions={TimeframeOptionsList} timeframeInitialValue={TimeframeOption.THIRTY_DAYS} onSelectTimeframe={setIntensiveCareBedsTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'intensive_care_beds_occupied_over_time_chart',
@@ -231,14 +211,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
             />
           </ChartTile>
 
-          <ChartTile
-            title={textShared.admissions_per_age_group.chart_title}
-            description={textShared.admissions_per_age_group.chart_description}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            metadata={{ source: textNl.bronnen.nice }}
-            onSelectTimeframe={setAdmissionsPerAgeTimeframe}
-          >
+          <ChartTile title={textShared.admissions_per_age_group.chart_title} description={textShared.admissions_per_age_group.chart_description} timeframeOptions={TimeframeOptionsList} timeframeInitialValue={TimeframeOption.THIRTY_DAYS} metadata={{ source: textNl.bronnen.nice }} onSelectTimeframe={setAdmissionsPerAgeTimeframe}>
             <AdmissionsPerAgeGroup
               accessibility={{
                 key: 'intensive_care_admissions_per_age_group_over_time_chart',

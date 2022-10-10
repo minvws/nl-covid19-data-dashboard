@@ -10,10 +10,7 @@ export const MetricPropertySelectInput = withDocument(
   forwardRef((props: any, ref: any) => {
     const { type, value, onChange, document, compareValue, markers } = props;
 
-    const metricProperties = useMemo(
-      () => (document.area && document.metricName ? ((dataStructure as any)[document.area][document.metricName] as string[]) : undefined),
-      [document.area, document.metricName]
-    );
+    const metricProperties = useMemo(() => (document.area && document.metricName ? ((dataStructure as any)[document.area][document.metricName] as string[]) : undefined), [document.area, document.metricName]);
 
     const onChangeSelect = (event: any) => {
       onChange(PatchEvent.from(set(event.target.value)));

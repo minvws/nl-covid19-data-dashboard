@@ -81,19 +81,10 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
           {values.map((item, index) => (
             <Row key={index}>
               <HeaderCell isColumn>
-                <AgeGroup
-                  range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-                  ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
-                  birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
-                  text={commonTexts.common.agegroup.total_people}
-                />
+                <AgeGroup range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)} ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined} birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)} text={commonTexts.common.agegroup.total_people} />
               </HeaderCell>
               <Cell>
-                <WidePercentage
-                  value={item.autumn_2022_vaccinated_percentage !== null ? `${formatPercentage(item.autumn_2022_vaccinated_percentage)}%` : text.no_data}
-                  color={COLOR_AUTUMN_2022_SHOT}
-                  justifyContent="flex-end"
-                />
+                <WidePercentage value={item.autumn_2022_vaccinated_percentage !== null ? `${formatPercentage(item.autumn_2022_vaccinated_percentage)}%` : text.no_data} color={COLOR_AUTUMN_2022_SHOT} justifyContent="flex-end" />
               </Cell>
               <Cell>
                 <WidePercentage value={`${formatPercentage(item.fully_vaccinated_percentage)}%`} color={COLOR_FULLY_VACCINATED} justifyContent="flex-end" />

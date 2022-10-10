@@ -58,9 +58,7 @@ export function StackedAreaTrend({ series, getX, getY0, getY1, bounds, color, fi
        * serie, which should touch the X-axis, shouldn't render its linePath
        * because that would overlap with the X-axis.
        */}
-      {!isBottomSeries && strokeWidth > 0 && (
-        <LinePath data={nonNullSeries} x={getX} y={getY0} stroke="white" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      )}
+      {!isBottomSeries && strokeWidth > 0 && <LinePath data={nonNullSeries} x={getX} y={getY0} stroke="white" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />}
     </g>
   );
 }

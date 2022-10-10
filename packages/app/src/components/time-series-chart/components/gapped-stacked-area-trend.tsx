@@ -29,19 +29,7 @@ export function GappedStackedAreaTrend(props: GappedStackedAreaTrendProps) {
   return (
     <>
       {gappedSeries.map((series, index) => (
-        <StackedAreaTrend
-          key={index}
-          series={series}
-          color={color}
-          strokeWidth={strokeWidth}
-          getX={getX}
-          getY0={getY0}
-          getY1={getY1}
-          bounds={bounds}
-          fillOpacity={fillOpacity}
-          mixBlendMode={mixBlendMode}
-          id={`${id}_${index}`}
-        />
+        <StackedAreaTrend key={index} series={series} color={color} strokeWidth={strokeWidth} getX={getX} getY0={getY0} getY1={getY1} bounds={bounds} fillOpacity={fillOpacity} mixBlendMode={mixBlendMode} id={`${id}_${index}`} />
       ))}
     </>
   );

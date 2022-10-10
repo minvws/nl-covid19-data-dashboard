@@ -34,10 +34,7 @@ export function useIntlHelperContext(locale: LanguageKey, commonTexts: SiteText[
   return useMemo(() => {
     const languageTag = localeLanguageTagMap[locale];
 
-    const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = createFormatting(
-      languageTag,
-      commonTexts.utils
-    );
+    const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = createFormatting(languageTag, commonTexts.utils);
 
     return {
       dataset,

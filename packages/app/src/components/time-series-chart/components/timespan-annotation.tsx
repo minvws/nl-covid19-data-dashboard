@@ -6,19 +6,7 @@ import { GetX, TimespanAnnotationConfig, Bounds, SeriesSingleValue } from '../lo
 
 const DEFAULT_COLOR = colors.gray2;
 
-export function TimespanAnnotation({
-  domain,
-  getX,
-  height,
-  config,
-}: {
-  domain: [number, number];
-  height: number;
-  getX: GetX;
-  config: TimespanAnnotationConfig;
-  bounds: Bounds;
-  series: SeriesSingleValue[];
-}) {
+export function TimespanAnnotation({ domain, getX, height, config }: { domain: [number, number]; height: number; getX: GetX; config: TimespanAnnotationConfig; bounds: Bounds; series: SeriesSingleValue[] }) {
   const [min, max] = domain;
   const { start, end } = config;
   const fill = config.fill ?? 'solid';
@@ -56,14 +44,7 @@ export function TimespanAnnotation({
         </pattern>
       )}
 
-      <Bar
-        pointerEvents="none"
-        height={height}
-        x={x0}
-        width={width}
-        fill={fill === 'solid' ? colors.gray2 : `url(#${patternId})`}
-        style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
-      />
+      <Bar pointerEvents="none" height={height} x={x0} width={width} fill={fill === 'solid' ? colors.gray2 : `url(#${patternId})`} style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined} />
     </>
   );
 }

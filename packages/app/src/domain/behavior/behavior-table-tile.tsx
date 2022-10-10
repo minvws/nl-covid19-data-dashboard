@@ -145,17 +145,7 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
  * Render every word in a span and add the chevron to the last word.
  * this is for the word wrapping when the screen gets smaller.
  */
-function DescriptionWithIcon({
-  description,
-  id,
-  setCurrentId,
-  scrollRef,
-}: {
-  description: string;
-  id: BehaviorIdentifier;
-  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
-  scrollRef: { current: HTMLDivElement | null };
-}) {
+function DescriptionWithIcon({ description, id, setCurrentId, scrollRef }: { description: string; id: BehaviorIdentifier; setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>; scrollRef: { current: HTMLDivElement | null } }) {
   const splittedWords = description.split(' ');
 
   const buttonClickHandler = () => {

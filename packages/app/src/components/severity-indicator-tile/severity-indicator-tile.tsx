@@ -21,18 +21,7 @@ export const SeverityIndicatorTile = ({ description, label, level, metadata, tit
   const SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH = 250;
 
   return (
-    <Box
-      alignItems="flex-start"
-      border={`1px solid ${colors.gray3}`}
-      borderLeft={`${space[2]} solid ${getSeverityColor(level as SeverityLevels)}`}
-      css={css({ gap: `0 ${space[4]}` })}
-      display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      justifyContent="space-between"
-      p={space[4]}
-      as="figure"
-    >
+    <Box alignItems="flex-start" border={`1px solid ${colors.gray3}`} borderLeft={`${space[2]} solid ${getSeverityColor(level as SeverityLevels)}`} css={css({ gap: `0 ${space[4]}` })} display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-between" p={space[4]} as="figure">
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`}>
         <Markdown content={title} />
 

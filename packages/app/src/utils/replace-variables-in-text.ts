@@ -32,11 +32,7 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  * @param variables - An object with keys representing any variable available for replacement.
  * @param formatters - Optional list of formatters that can be referenced by commands
  */
-export function replaceVariablesInText(
-  translation: string,
-  variables: Record<string, string | number | undefined | Record<string, string | number | undefined>>,
-  formatters?: DataFormatters
-) {
+export function replaceVariablesInText(translation: string, variables: Record<string, string | number | undefined | Record<string, string | number | undefined>>, formatters?: DataFormatters) {
   if (shouldValidate) {
     assert(isDefined(translation), `[${replaceVariablesInText.name}] Missing a locale text with placeholders for: ${Object.keys(variables).join(',')} in: "${translation}"`);
   }
@@ -71,12 +67,7 @@ export function replaceVariablesInText(
   });
 }
 
-function executeFormat(
-  variables: Record<string, string | number | Record<string, string | number | undefined> | undefined>,
-  trimmedName: string,
-  translation: string,
-  formatter: (value: unknown) => string
-) {
+function executeFormat(variables: Record<string, string | number | Record<string, string | number | undefined> | undefined>, trimmedName: string, translation: string, formatter: (value: unknown) => string) {
   if (!isDefined(variables[trimmedName])) {
     throw new Error(`No value was supplied for command number value ${trimmedName} in ${Object.keys(variables).join(',')}. Text: ${translation}`);
   }
@@ -84,12 +75,7 @@ function executeFormat(
   return formatter(variables[trimmedName]);
 }
 
-function executePluralize(
-  variables: Record<string, string | number | Record<string, string | number | undefined> | undefined>,
-  trimmedName: string,
-  translation: string,
-  commandArgument: string
-) {
+function executePluralize(variables: Record<string, string | number | Record<string, string | number | undefined> | undefined>, trimmedName: string, translation: string, commandArgument: string) {
   if (!isDefined(variables[trimmedName])) {
     throw new Error(`No value was supplied for command count value ${trimmedName} in ${Object.keys(variables).join(',')}. Text: ${translation}`);
   }

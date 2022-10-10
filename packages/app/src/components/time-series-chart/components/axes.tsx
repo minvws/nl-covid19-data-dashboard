@@ -86,24 +86,7 @@ function createTimeTicks(startTick: number, endTick: number, count: number, valu
   return ticks;
 }
 
-export const Axes = memo(function Axes<T extends TimestampedValue>({
-  numGridLines,
-  showWeekNumbers,
-  bounds,
-  isPercentage,
-  xScale,
-  yScale,
-  timeframe,
-  yTickValues,
-  timeDomain,
-  xTickNumber,
-  values,
-  formatYTickValue,
-  yAxisRef,
-  isYAxisCollapsed,
-  xRangePadding,
-  hasAllZeroValues: allZeroValues,
-}: AxesProps<T>) {
+export const Axes = memo(function Axes<T extends TimestampedValue>({ numGridLines, showWeekNumbers, bounds, isPercentage, xScale, yScale, timeframe, yTickValues, timeDomain, xTickNumber, values, formatYTickValue, yAxisRef, isYAxisCollapsed, xRangePadding, hasAllZeroValues: allZeroValues }: AxesProps<T>) {
   const [startUnix, endUnix] = timeDomain;
   const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
   const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
@@ -128,8 +111,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const getSmallestDiff = (start: number, end: number, current: number) => Math.min(Math.abs(start - current), Math.abs(end - current));
 
-  const getXTickStyle = (isFirstOrLast: boolean, startYear: number, endYear: number, previousYear: number, currentYear: number) =>
-    (isFirstOrLast && startYear !== endYear) || previousYear !== currentYear ? 'axis-with-year' : 'axis';
+  const getXTickStyle = (isFirstOrLast: boolean, startYear: number, endYear: number, previousYear: number, currentYear: number) => ((isFirstOrLast && startYear !== endYear) || previousYear !== currentYear ? 'axis-with-year' : 'axis');
   const tickValues = createTimeTicks(startUnix, endUnix, xTickNumber, values?.length);
 
   const DateSpanTick = useCallback(
@@ -169,10 +151,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
     [endUnix, endYear, formatDateFromSeconds, startUnix, startYear, tickValues]
   );
 
-  const xTicks = useMemo(
-    () => tickValues.map((tickValue, index) => (isDateSpanValues(values) ? DateSpanTick(tickValue, values, index) : TimeStampTick(tickValue, index))),
-    [values, DateSpanTick, TimeStampTick, isDateSpanValues, tickValues]
-  );
+  const xTicks = useMemo(() => tickValues.map((tickValue, index) => (isDateSpanValues(values) ? DateSpanTick(tickValue, values, index) : TimeStampTick(tickValue, index))), [values, DateSpanTick, TimeStampTick, isDateSpanValues, tickValues]);
 
   /**
    * Long labels (like the ones including a year, are too long to be positioned

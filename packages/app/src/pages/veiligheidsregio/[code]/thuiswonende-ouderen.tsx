@@ -121,12 +121,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.section_positive_tested.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="positive_tested_daily"
-                absolute={elderly_at_home.last_value.positive_tested_daily}
-                difference={difference.elderly_at_home__positive_tested_daily}
-                isAmount
-              />
+              <KpiValue data-cy="positive_tested_daily" absolute={elderly_at_home.last_value.positive_tested_daily} difference={difference.elderly_at_home__positive_tested_daily} isAmount />
               <Text>{textVr.section_positive_tested.kpi_daily_description}</Text>
             </KpiTile>
             <KpiTile
@@ -141,13 +136,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            timeframeOptions={TimeframeOptionsList}
-            title={textVr.section_positive_tested.line_chart_daily_title}
-            metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
-            description={textVr.section_positive_tested.line_chart_daily_description}
-            onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
-          >
+          <ChartTile timeframeOptions={TimeframeOptionsList} title={textVr.section_positive_tested.line_chart_daily_title} metadata={{ source: textVr.section_positive_tested.bronnen.rivm }} description={textVr.section_positive_tested.line_chart_daily_description} onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'elderly_at_home_confirmed_cases_over_time_chart',
@@ -216,13 +205,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            timeframeOptions={TimeframeOptionsList}
-            title={textVr.section_deceased.line_chart_daily_title}
-            metadata={{ source: textVr.section_positive_tested.bronnen.rivm }}
-            description={textVr.section_deceased.line_chart_daily_description}
-            onSelectTimeframe={setElderlyAtHomeConfirmedCasesOverTimeTimeframe}
-          >
+          <ChartTile timeframeOptions={TimeframeOptionsList} title={textVr.section_deceased.line_chart_daily_title} metadata={{ source: textVr.section_positive_tested.bronnen.rivm }} description={textVr.section_deceased.line_chart_daily_description} onSelectTimeframe={setElderlyAtHomeConfirmedCasesOverTimeTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'elderly_at_home_deceased_over_time_chart',

@@ -70,9 +70,7 @@ function validateCommonPropertyEquality(lastValue: UnknownObject, collectionValu
 
   const result = commonProperties
     .map((key) => {
-      return lastValue[key] !== collectionValue[key]
-        ? `property ${propertyName}.${key} is not equal: (last_value) ${lastValue[key]} !== (choropleth data) ${collectionValue[key]}`
-        : undefined;
+      return lastValue[key] !== collectionValue[key] ? `property ${propertyName}.${key} is not equal: (last_value) ${lastValue[key]} !== (choropleth data) ${collectionValue[key]}` : undefined;
     })
     .filter(isDefined);
   return result.length ? result.join(', ') : undefined;

@@ -43,13 +43,7 @@ export function InteractiveLegend<T = string>({ helpText, selectOptions, selecti
                   {item.shape === 'square' && <Square color={item.color} />}
                   {item.shape === 'gapped-area' && <GappedArea color={item.color} />}
                 </StyledLabel>
-                <StyledInput
-                  type="checkbox"
-                  id={`checkboxgroup-${item.label}`}
-                  value={item.label}
-                  onClick={() => onToggleItem(item.metricProperty)}
-                  aria-label={item.legendAriaLabel}
-                />
+                <StyledInput type="checkbox" id={`checkboxgroup-${item.label}`} value={item.label} onClick={() => onToggleItem(item.metricProperty)} aria-label={item.legendAriaLabel} />
               </Item>
             );
           })}

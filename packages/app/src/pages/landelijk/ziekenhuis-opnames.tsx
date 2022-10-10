@@ -1,13 +1,4 @@
-import {
-  colors,
-  DAY_IN_SECONDS,
-  getLastFilledValue,
-  GmCollectionHospitalNice,
-  TimeframeOption,
-  TimeframeOptionsList,
-  VrCollectionHospitalNice,
-  WEEK_IN_SECONDS,
-} from '@corona-dashboard/common';
+import { colors, DAY_IN_SECONDS, getLastFilledValue, GmCollectionHospitalNice, TimeframeOption, TimeframeOptionsList, VrCollectionHospitalNice, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -144,9 +135,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.bronnen.lnaz,
               }}
             >
-              {bedsLastValue.beds_occupied_covid !== null && (
-                <KpiValue data-cy="beds_occupied_covid" absolute={bedsLastValue.beds_occupied_covid} difference={data.difference.hospital_lcps__beds_occupied_covid} isAmount />
-              )}
+              {bedsLastValue.beds_occupied_covid !== null && <KpiValue data-cy="beds_occupied_covid" absolute={bedsLastValue.beds_occupied_covid} difference={data.difference.hospital_lcps__beds_occupied_covid} isAmount />}
             </KpiTile>
           </TwoKpiSection>
           <ChartTile
@@ -295,14 +284,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             )}
           </ChoroplethTile>
 
-          <ChartTile
-            title={commonTexts.hospital_admissions_per_age_group.chart_title}
-            description={commonTexts.hospital_admissions_per_age_group.chart_description}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            metadata={{ source: textNl.bronnen.nice }}
-            onSelectTimeframe={setHospitalAdmissionsPerAgeTimeframe}
-          >
+          <ChartTile title={commonTexts.hospital_admissions_per_age_group.chart_title} description={commonTexts.hospital_admissions_per_age_group.chart_description} timeframeOptions={TimeframeOptionsList} timeframeInitialValue={TimeframeOption.THIRTY_DAYS} metadata={{ source: textNl.bronnen.nice }} onSelectTimeframe={setHospitalAdmissionsPerAgeTimeframe}>
             <AdmissionsPerAgeGroup
               accessibility={{
                 key: 'hospital_admissions_per_age_group_over_time_chart',

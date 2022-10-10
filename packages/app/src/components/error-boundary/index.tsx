@@ -77,16 +77,7 @@ function ErrorFallback({ error }: { error: Error }) {
 }
 
 function formatErrorReport(error: Error, componentProps?: Record<string, unknown>) {
-  const report = [
-    `url: ${window.location.href}`,
-    `platform: ${navigator.platform}`,
-    `user agent: ${navigator.userAgent}`,
-    `browser dimensions: ${window.innerWidth}x${window.innerHeight}`,
-    `screen resolution: ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}`,
-    `message: ${error.message}`,
-    `stacktrace:`,
-    error.stack ?? 'No stack trace available',
-  ];
+  const report = [`url: ${window.location.href}`, `platform: ${navigator.platform}`, `user agent: ${navigator.userAgent}`, `browser dimensions: ${window.innerWidth}x${window.innerHeight}`, `screen resolution: ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}`, `message: ${error.message}`, `stacktrace:`, error.stack ?? 'No stack trace available'];
 
   if (isDefined(componentProps)) {
     report.push('component props:');

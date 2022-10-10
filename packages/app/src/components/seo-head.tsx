@@ -19,13 +19,7 @@ type SEOHeadProps = {
 export function SEOHead(props: SEOHeadProps) {
   const { commonTexts } = useIntl();
 
-  const {
-    description = commonTexts.seo_head.default_description,
-    openGraphImage = '/banner.png',
-    title = commonTexts.seo_head.default_title,
-    twitterImage = '/banner-twitter.png',
-    url = commonTexts.seo_head.default_url,
-  } = props;
+  const { description = commonTexts.seo_head.default_description, openGraphImage = '/banner.png', title = commonTexts.seo_head.default_title, twitterImage = '/banner-twitter.png', url = commonTexts.seo_head.default_url } = props;
 
   return (
     <Head>
@@ -36,19 +30,9 @@ export function SEOHead(props: SEOHeadProps) {
       <meta key="dc-identifier" property="dcterms:identifier" content={url} datatype="xsd:anyURI" />
       <meta key="dc-lang" property="dcterms:language" content="nl-NL" datatype="xsd:language" />
       <meta key="dc-authority" property="overheid:authority" datatype="overheid:Ministerie" content="Ministerie van Volksgezondheid, Welzijn en Sport" />
-      <link
-        key="dc-authority-title"
-        rel="overheid:authority"
-        href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
-        title="Ministerie van Volksgezondheid, Welzijn en Sport"
-      />
+      <link key="dc-authority-title" rel="overheid:authority" href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport" title="Ministerie van Volksgezondheid, Welzijn en Sport" />
       <meta key="dc-creator" property="dcterms:creator" datatype="overheid:Ministerie" content="Ministerie van Volksgezondheid, Welzijn en Sport" />
-      <link
-        key="dc-creator-title"
-        rel="dcterms:creator"
-        href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
-        title="Ministerie van Volksgezondheid, Welzijn en Sport"
-      />
+      <link key="dc-creator-title" rel="dcterms:creator" href="https://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport" title="Ministerie van Volksgezondheid, Welzijn en Sport" />
       <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/statistieken" />
       <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/statistieken" title="statistieken" />
 

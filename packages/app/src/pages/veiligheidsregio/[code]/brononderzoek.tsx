@@ -140,17 +140,8 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
           />
 
           {values && (
-            <ChartTile
-              title={textShared.situaties_over_tijd_grafiek.titel}
-              description={textShared.situaties_over_tijd_grafiek.omschrijving}
-              metadata={{ source: textShared.bronnen.rivm }}
-            >
-              <SituationsOverTimeChart
-                timeframe={TimeframeOption.ALL}
-                values={values}
-                timelineEvents={getTimelineEvents(content.elements.timeSeries, 'situations')}
-                text={textShared}
-              />
+            <ChartTile title={textShared.situaties_over_tijd_grafiek.titel} description={textShared.situaties_over_tijd_grafiek.omschrijving} metadata={{ source: textShared.bronnen.rivm }}>
+              <SituationsOverTimeChart timeframe={TimeframeOption.ALL} values={values} timelineEvents={getTimelineEvents(content.elements.timeSeries, 'situations')} text={textShared} />
             </ChartTile>
           )}
         </TileList>

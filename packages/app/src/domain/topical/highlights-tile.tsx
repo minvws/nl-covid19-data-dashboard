@@ -30,19 +30,8 @@ export function HighlightsTile({ hiddenTitle, weeklyHighlight, highlights, showW
       </VisuallyHidden>
 
       <Box display="flex" flexDirection={{ _: 'column', md: 'row' }} spacing={{ _: 4, md: 0 }}>
-        {showWeeklyHighlight && weeklyHighlight && (
-          <ContentTeaser
-            title={weeklyHighlight.title}
-            slug={weeklyHighlight.slug.current}
-            cover={weeklyHighlight.cover}
-            publicationDate={weeklyHighlight.publicationDate}
-            isWeeklyHighlight
-            text={text}
-          />
-        )}
-        {highlights
-          .map((item) => <ContentTeaser key={item.slug.current} title={item.title} slug={item.slug.current} cover={item.cover} category={item.category} text={text} />)
-          .slice(0, showWeeklyHighlight ? 1 : 2)}
+        {showWeeklyHighlight && weeklyHighlight && <ContentTeaser title={weeklyHighlight.title} slug={weeklyHighlight.slug.current} cover={weeklyHighlight.cover} publicationDate={weeklyHighlight.publicationDate} isWeeklyHighlight text={text} />}
+        {highlights.map((item) => <ContentTeaser key={item.slug.current} title={item.title} slug={item.slug.current} cover={item.cover} category={item.category} text={text} />).slice(0, showWeeklyHighlight ? 1 : 2)}
       </Box>
     </article>
   );

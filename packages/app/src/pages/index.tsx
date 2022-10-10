@@ -67,16 +67,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       {theme.themeTiles
                         .sort((a, b) => a.index - b.index)
                         .map((themeTile) => {
-                          return (
-                            <TopicalTile
-                              trendIcon={themeTile.trendIcon}
-                              title={themeTile.title}
-                              tileIcon={themeTile.tileIcon}
-                              dynamicDescription={themeTile.dynamicDescription}
-                              cta={themeTile.cta}
-                              key={themeTile.index}
-                            />
-                          );
+                          return <TopicalTile trendIcon={themeTile.trendIcon} title={themeTile.title} tileIcon={themeTile.tileIcon} dynamicDescription={themeTile.dynamicDescription} cta={themeTile.cta} key={themeTile.index} />;
                         })}
                     </Box>
                     <TopicalLinksList
@@ -92,11 +83,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <Box>
               <Box marginBottom={4}>
-                <TopicalThemeHeader
-                  title={selectedTopicalData.measures.title}
-                  dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
-                  icon={selectedTopicalData.measures.icon}
-                />
+                <TopicalThemeHeader title={selectedTopicalData.measures.title} dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle} icon={selectedTopicalData.measures.icon} />
               </Box>
               <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={5}>
                 {selectedTopicalData.measures.measureTiles
@@ -121,13 +108,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box width="100%" pb={5}>
           <MaxWidth spacing={4} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4, md: 3, lg: 4 }}>
-            <TopicalSectionHeader
-              title={textShared.secties.meer_lezen.titel}
-              description={textShared.secties.meer_lezen.omschrijving}
-              link={textShared.secties.meer_lezen.link}
-              headerVariant="h2"
-              text={textShared}
-            />
+            <TopicalSectionHeader title={textShared.secties.meer_lezen.titel} description={textShared.secties.meer_lezen.omschrijving} link={textShared.secties.meer_lezen.link} headerVariant="h2" text={textShared} />
 
             {isPresent(content.articles) && <TopicalArticlesList articles={content.articles} text={textShared} />}
           </MaxWidth>

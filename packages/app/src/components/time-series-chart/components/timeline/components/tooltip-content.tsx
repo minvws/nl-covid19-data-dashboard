@@ -22,18 +22,7 @@ export function TimelineTooltipContent({ config, onNext, onPrev, onClose, hasMul
   const dateStr = [formatDateFromSeconds(config.start, 'medium'), config.end && formatDateFromSeconds(config.end, 'medium')].filter(isDefined).join(' – ');
 
   return (
-    <Box
-      color="black"
-      px={18}
-      py={15}
-      spacing={3}
-      onTouchStart={stopEventPropagation}
-      onTouchMove={stopEventPropagation}
-      onMouseMove={stopEventPropagation}
-      onMouseLeave={stopEventPropagation}
-      width={{ _: '100vw', sm: '100%' }}
-      maxWidth="100%"
-    >
+    <Box color="black" px={18} py={15} spacing={3} onTouchStart={stopEventPropagation} onTouchMove={stopEventPropagation} onMouseMove={stopEventPropagation} onMouseLeave={stopEventPropagation} width={{ _: '100vw', sm: '100%' }} maxWidth="100%">
       {isTouch && (
         <Box display="flex" justifyContent={hasMultipleEvents ? 'space-between' : 'center'} alignItems="center" ml={-2} mr={-2}>
           {hasMultipleEvents && <ChevronButton onClick={onPrev} rotate title={commonTexts.charts.timeline.prev} />}

@@ -10,21 +10,11 @@ import { TimelineMarker } from '../timeline';
 import { IconRow } from './tooltip-icon-row';
 import { TooltipData } from './types';
 
-export function TooltipSeriesListContainer<T extends TimestampedValue>({
-  value,
-  displayTooltipValueOnly,
-  timespanAnnotation,
-  timelineEvent,
-  isOutOfBounds,
-  options,
-  children,
-}: TooltipData<T> & { children: ReactNode }) {
+export function TooltipSeriesListContainer<T extends TimestampedValue>({ value, displayTooltipValueOnly, timespanAnnotation, timelineEvent, isOutOfBounds, options, children }: TooltipData<T> & { children: ReactNode }) {
   const isMounted = useIsMounted();
   const intl = useIntl();
 
-  const dateString = isDateValue(value)
-    ? intl.formatDateFromSeconds(value.date_unix)
-    : [intl.formatDateFromSeconds(value.date_start_unix), intl.formatDateFromSeconds(value.date_end_unix)].join(' – ');
+  const dateString = isDateValue(value) ? intl.formatDateFromSeconds(value.date_unix) : [intl.formatDateFromSeconds(value.date_start_unix), intl.formatDateFromSeconds(value.date_end_unix)].join(' – ');
 
   /**
    * The listRef is used to apply the width of the list to the tooltip

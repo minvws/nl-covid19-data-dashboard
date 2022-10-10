@@ -117,13 +117,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="average"
-                absolute={sewerAverages.last_value.average}
-                valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
-                difference={data.difference.sewer__average}
-                isAmount
-              />
+              <KpiValue data-cy="average" absolute={sewerAverages.last_value.average} valueAnnotation={commonTexts.waarde_annotaties.riool_normalized} difference={data.difference.sewer__average} isAmount />
               <Text>
                 {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
                   municipalityName: municipalityName,

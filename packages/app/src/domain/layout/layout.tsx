@@ -42,9 +42,7 @@ export function Layout(props: LayoutProps & { lastGenerated: string; children: R
       />
       <AppHeader />
 
-      {commonTexts.dashboard_wide_notification.title.length !== 0 && (
-        <NotificationBanner title={commonTexts.dashboard_wide_notification.title} description={commonTexts.dashboard_wide_notification.description} />
-      )}
+      {commonTexts.dashboard_wide_notification.title.length !== 0 && <NotificationBanner title={commonTexts.dashboard_wide_notification.title} description={commonTexts.dashboard_wide_notification.description} />}
 
       <BreadcrumbsDataProvider value={breadcrumbsData}>
         <Breadcrumbs />

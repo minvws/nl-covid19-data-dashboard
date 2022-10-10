@@ -85,9 +85,7 @@ function extractComponentProps(reactNode: ReactElement | ReactNode[]): Record<st
   const [element, type, path] = findComponentNode(reactNode);
   if (element && type && path) {
     const propNames = relevantComponentPathProps[path];
-    return propNames
-      ? Object.assign(Object.fromEntries(propNames.filter((x) => isDefined(element.props[x])).map((x) => [x, element.props[x]])), { componentName: type.name })
-      : undefined;
+    return propNames ? Object.assign(Object.fromEntries(propNames.filter((x) => isDefined(element.props[x])).map((x) => [x, element.props[x]])), { componentName: type.name }) : undefined;
   }
 }
 

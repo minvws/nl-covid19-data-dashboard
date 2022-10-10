@@ -66,15 +66,7 @@ export function WeekNumbers({ startUnix, endUnix, xScale, bounds }: WeekNumberPr
           clipPath: `url(#${id})`,
         })}
       >
-        <GridColumns
-          height={bounds.height}
-          scale={xScale}
-          numTicks={weekGridLines.length}
-          tickValues={weekGridLines}
-          stroke={colors.gray2}
-          width={bounds.width}
-          strokeDasharray="4 2"
-        />
+        <GridColumns height={bounds.height} scale={xScale} numTicks={weekGridLines.length} tickValues={weekGridLines} stroke={colors.gray2} width={bounds.width} strokeDasharray="4 2" />
 
         <AxisTop
           scale={xScale}

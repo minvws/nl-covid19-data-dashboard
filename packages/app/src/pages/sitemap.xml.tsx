@@ -63,14 +63,7 @@ async function getAllPathsWithPriorities() {
   };
 
   // Ignore Next.js specific files and API routes.
-  const pages = await globby([
-    '../app/src/pages/**/*{.tsx,.mdx}',
-    '!../app/src/pages/sitemap.xml.tsx',
-    '!../app/src/pages/404.tsx',
-    '!../app/src/pages/500.tsx',
-    '!../app/src/pages/_*.tsx',
-    '!../app/src/pages/api',
-  ]);
+  const pages = await globby(['../app/src/pages/**/*{.tsx,.mdx}', '!../app/src/pages/sitemap.xml.tsx', '!../app/src/pages/404.tsx', '!../app/src/pages/500.tsx', '!../app/src/pages/_*.tsx', '!../app/src/pages/api']);
 
   const pathsFromPages = pages.map((x) => x.replace('../app/src/pages', '').replace('.tsx', '').replace('/index.tsx', '').replace('/index', ''));
 

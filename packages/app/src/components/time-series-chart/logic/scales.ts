@@ -24,14 +24,7 @@ interface UseScalesResult {
   hasAllZeroValues: boolean;
 }
 
-export function useScales<T extends TimestampedValue>(args: {
-  values: T[];
-  maximumValue: number;
-  minimumValue: number;
-  bounds: Bounds;
-  numTicks: number;
-  minimumRange?: number;
-}): UseScalesResult {
+export function useScales<T extends TimestampedValue>(args: { values: T[]; maximumValue: number; minimumValue: number; bounds: Bounds; numTicks: number; minimumRange?: number }): UseScalesResult {
   const today = useCurrentDate();
   const { maximumValue, minimumValue, bounds, numTicks, values, minimumRange = 10 } = args;
 

@@ -7,20 +7,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { DataOptions, TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 
-type SeriesConfigSingle<T extends TimestampedValue> =
-  | LineSeriesDefinition<T>
-  | ScatterPlotSeriesDefinition<T>
-  | RangeSeriesDefinition<T>
-  | AreaSeriesDefinition<T>
-  | StackedAreaSeriesDefinition<T>
-  | BarSeriesDefinition<T>
-  | BarOutOfBoundsSeriesDefinition<T>
-  | SplitBarSeriesDefinition<T>
-  | InvisibleSeriesDefinition<T>
-  | SplitAreaSeriesDefinition<T>
-  | GappedLineSeriesDefinition<T>
-  | GappedAreaSeriesDefinition<T>
-  | GappedStackedAreaSeriesDefinition<T>;
+type SeriesConfigSingle<T extends TimestampedValue> = LineSeriesDefinition<T> | ScatterPlotSeriesDefinition<T> | RangeSeriesDefinition<T> | AreaSeriesDefinition<T> | StackedAreaSeriesDefinition<T> | BarSeriesDefinition<T> | BarOutOfBoundsSeriesDefinition<T> | SplitBarSeriesDefinition<T> | InvisibleSeriesDefinition<T> | SplitAreaSeriesDefinition<T> | GappedLineSeriesDefinition<T> | GappedAreaSeriesDefinition<T> | GappedStackedAreaSeriesDefinition<T>;
 
 export type SeriesConfig<T extends TimestampedValue> = SeriesConfigSingle<T>[];
 
@@ -275,9 +262,7 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(seriesList: S
 
   const values = filteredSeriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
-    .flatMap((series) =>
-      series.flatMap((seriesItem: SeriesSingleValue | SeriesDoubleValue) => (isSeriesSingleValue(seriesItem) ? seriesItem.__value : [seriesItem.__value_a, seriesItem.__value_b]))
-    )
+    .flatMap((series) => series.flatMap((seriesItem: SeriesSingleValue | SeriesDoubleValue) => (isSeriesSingleValue(seriesItem) ? seriesItem.__value : [seriesItem.__value_a, seriesItem.__value_b])))
     .filter(isDefined);
 
   const overallMaximum = Math.max(...values);

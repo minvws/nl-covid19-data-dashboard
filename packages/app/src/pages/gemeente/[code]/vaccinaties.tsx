@@ -47,9 +47,7 @@ export const getStaticProps = createGetStaticProps(
       const vrCode = isPresent(ctx.params?.code) ? vrCodeByGmCode[ctx.params?.code as 'string'] : undefined;
 
       return {
-        vaccine_coverage_per_age_group: selectVaccineCoverageData(
-          isDefined(vrCode) ? vaccine_coverage_per_age_group.filter((el) => gmCodesByVrCode[vrCode].includes(el.gmcode)) : vaccine_coverage_per_age_group
-        ),
+        vaccine_coverage_per_age_group: selectVaccineCoverageData(isDefined(vrCode) ? vaccine_coverage_per_age_group.filter((el) => gmCodesByVrCode[vrCode].includes(el.gmcode)) : vaccine_coverage_per_age_group),
       };
     },
   }),
@@ -241,23 +239,11 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                   age_group: commonTexts.common.age_groups[selectedAgeGroup],
                 },
               }}
-              formatTooltip={(context) => (
-                <ChoroplethTooltip
-                  data={context}
-                  mapData={choropleth.gm.vaccine_coverage_per_age_group.filter((singleGm) => singleGm.gmcode === context.code)}
-                  ageGroups={['12+', '18+']}
-                  selectedCoverageKind={'fully_vaccinated_percentage'}
-                />
-              )}
+              formatTooltip={(context) => <ChoroplethTooltip data={context} mapData={choropleth.gm.vaccine_coverage_per_age_group.filter((singleGm) => singleGm.gmcode === context.code)} ageGroups={['12+', '18+']} selectedCoverageKind={'fully_vaccinated_percentage'} />}
             />
           </ChoroplethTile>
           <Divider />
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
+          <PageInformationBlock title={textNl.section_archived.title} description={textNl.section_archived.description} isArchivedHidden={hasHideArchivedCharts} onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)} />
           {hasHideArchivedCharts && (
             <>
               <VaccineCoverageToggleTile

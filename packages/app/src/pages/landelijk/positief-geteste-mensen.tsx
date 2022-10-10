@@ -35,16 +35,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.tested_ggd__infected_percentage_moving_average',
-    'difference.tested_ggd__tested_total_moving_average',
-    'difference.tested_overall__infected_moving_average',
-    'difference.tested_overall__infected_per_100k_moving_average',
-    'g_number',
-    'tested_ggd',
-    'tested_overall',
-    'tested_per_age_group'
-  ),
+  selectNlData('difference.tested_ggd__infected_percentage_moving_average', 'difference.tested_ggd__tested_total_moving_average', 'difference.tested_overall__infected_moving_average', 'difference.tested_overall__infected_per_100k_moving_average', 'g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
@@ -375,12 +366,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
           <Divider />
 
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
+          <PageInformationBlock title={textNl.section_archived.title} description={textNl.section_archived.description} isArchivedHidden={hasHideArchivedCharts} onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)} />
 
           {hasHideArchivedCharts && (
             <InView rootMargin="400px">

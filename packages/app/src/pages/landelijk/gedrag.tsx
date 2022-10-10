@@ -158,17 +158,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             </Tile>
           </TwoKpiSection>
 
-          <BehaviorTableTile
-            title={text.nl.basisregels.title}
-            description={text.nl.basisregels.description}
-            complianceExplanation={text.nl.basisregels.volgen_beschrijving}
-            supportExplanation={text.nl.basisregels.steunen_beschrijving}
-            value={behaviorLastValue}
-            annotation={text.nl.basisregels.annotatie}
-            setCurrentId={setCurrentId}
-            scrollRef={scrollToRef}
-            text={text.shared}
-          />
+          <BehaviorTableTile title={text.nl.basisregels.title} description={text.nl.basisregels.description} complianceExplanation={text.nl.basisregels.volgen_beschrijving} supportExplanation={text.nl.basisregels.steunen_beschrijving} value={behaviorLastValue} annotation={text.nl.basisregels.annotatie} setCurrentId={setCurrentId} scrollRef={scrollToRef} text={text.shared} />
 
           <span ref={scrollToRef} />
 
@@ -184,27 +174,9 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             text={text}
           />
 
-          <BehaviorChoroplethsTile
-            title={text.nl.verdeling_in_nederland.titel}
-            description={text.nl.verdeling_in_nederland.description}
-            data={choropleth.vr}
-            currentId={currentId}
-            setCurrentId={setCurrentId}
-            text={text}
-          />
+          <BehaviorChoroplethsTile title={text.nl.verdeling_in_nederland.titel} description={text.nl.verdeling_in_nederland.description} data={choropleth.vr} currentId={currentId} setCurrentId={setCurrentId} text={text} />
 
-          {data.behavior_per_age_group && (
-            <BehaviorPerAgeGroup
-              title={text.nl.tabel_per_leeftijdsgroep.title}
-              description={text.nl.tabel_per_leeftijdsgroep.description}
-              complianceExplanation={text.nl.tabel_per_leeftijdsgroep.explanation.compliance}
-              supportExplanation={text.nl.tabel_per_leeftijdsgroep.explanation.support}
-              data={data.behavior_per_age_group}
-              currentId={currentId}
-              setCurrentId={setCurrentId}
-              text={text}
-            />
-          )}
+          {data.behavior_per_age_group && <BehaviorPerAgeGroup title={text.nl.tabel_per_leeftijdsgroep.title} description={text.nl.tabel_per_leeftijdsgroep.description} complianceExplanation={text.nl.tabel_per_leeftijdsgroep.explanation.compliance} supportExplanation={text.nl.tabel_per_leeftijdsgroep.explanation.support} data={data.behavior_per_age_group} currentId={currentId} setCurrentId={setCurrentId} text={text} />}
 
           <MoreInformation text={text.shared.meer_onderzoeksresultaten} />
         </TileList>

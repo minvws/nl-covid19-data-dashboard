@@ -46,18 +46,7 @@ export const Timeline = memo(function Timeline({ width, padding, highlightIndex,
   if (!width) return null;
 
   return (
-    <Box
-      ref={ref}
-      position="relative"
-      spacing={2}
-      pb={4}
-      css={css({ userSelect: 'none', touchAction: 'pan-y' })}
-      width={width}
-      onTouchStart={handleHover}
-      onTouchMove={handleHover}
-      onMouseMove={handleHover}
-      onMouseLeave={handleHover}
-    >
+    <Box ref={ref} position="relative" spacing={2} pb={4} css={css({ userSelect: 'none', touchAction: 'pan-y' })} width={width} onTouchStart={handleHover} onTouchMove={handleHover} onMouseMove={handleHover} onMouseLeave={handleHover}>
       <Box pl={padding.left}>
         <BoldText variant="label1">{commonTexts.charts.timeline.title}</BoldText>
       </Box>
@@ -79,15 +68,7 @@ export const Timeline = memo(function Timeline({ width, padding, highlightIndex,
               onHide={() => hideTooltip(i)}
               isSelected={i === index}
               isHighlighted={isDefined(highlightIndex) && i === highlightIndex}
-              tooltipContent={
-                <TimelineTooltipContent
-                  config={x}
-                  onNext={() => setIndex(i + 1)}
-                  onPrev={() => setIndex(i - 1)}
-                  onClose={() => hideTooltip(i)}
-                  hasMultipleEvents={timelineState.events.length > 1}
-                />
-              }
+              tooltipContent={<TimelineTooltipContent config={x} onNext={() => setIndex(i + 1)} onPrev={() => setIndex(i - 1)} onClose={() => hideTooltip(i)} hasMultipleEvents={timelineState.events.length > 1} />}
             />
           ))}
         </TimelineBar>

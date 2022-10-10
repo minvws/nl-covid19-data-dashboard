@@ -6,22 +6,7 @@ import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
 import { Layout, NlLayout } from '~/domain/layout';
-import {
-  selectAdministrationData,
-  selectVaccineCoverageData,
-  VaccinationsOverTimeTile,
-  VaccineBoosterAdministrationsKpiSection,
-  VaccinationsShotKpiSection,
-  VaccinationsKpiHeader,
-  VaccineCoverageChoroplethPerGm,
-  VaccineCoveragePerAgeGroup,
-  VaccineCoverageTile,
-  VaccineCoverageToggleTile,
-  VaccineDeliveryBarChart,
-  VaccineStockPerSupplierChart,
-  BoosterShotCoveragePerAgeGroup,
-  Autumn2022ShotCoveragePerAgeGroup,
-} from '~/domain/vaccine';
+import { selectAdministrationData, selectVaccineCoverageData, VaccinationsOverTimeTile, VaccineBoosterAdministrationsKpiSection, VaccinationsShotKpiSection, VaccinationsKpiHeader, VaccineCoverageChoroplethPerGm, VaccineCoveragePerAgeGroup, VaccineCoverageTile, VaccineCoverageToggleTile, VaccineDeliveryBarChart, VaccineStockPerSupplierChart, BoosterShotCoveragePerAgeGroup, Autumn2022ShotCoveragePerAgeGroup } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
@@ -291,12 +276,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             values={data.vaccine_coverage_per_age_group.values}
           />
           <Divider />
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
+          <PageInformationBlock title={textNl.section_archived.title} description={textNl.section_archived.description} isArchivedHidden={hasHideArchivedCharts} onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)} />
           {hasHideArchivedCharts && (
             <>
               <BoosterShotCoveragePerAgeGroup
@@ -350,11 +330,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   source: textNl.vaccine_campaigns.bronnen.rivm,
                 }}
               />
-              <VaccinationsKpiHeader
-                text={textNl.repeating_shot_information_block}
-                dateUnix={boosterShotAdministeredLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredLastValue.date_of_insertion_unix}
-              />
+              <VaccinationsKpiHeader text={textNl.repeating_shot_information_block} dateUnix={boosterShotAdministeredLastValue.date_unix} dateOfInsertionUnix={boosterShotAdministeredLastValue.date_of_insertion_unix} />
 
               <VaccinationsShotKpiSection
                 text={textNl.repeating_shot_kpi}
@@ -380,11 +356,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 }}
               />
 
-              <VaccinationsKpiHeader
-                text={textNl.booster_information_block}
-                dateUnix={boosterShotAdministeredLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredLastValue.date_of_insertion_unix}
-              />
+              <VaccinationsKpiHeader text={textNl.booster_information_block} dateUnix={boosterShotAdministeredLastValue.date_unix} dateOfInsertionUnix={boosterShotAdministeredLastValue.date_of_insertion_unix} />
 
               <VaccineBoosterAdministrationsKpiSection
                 text={textNl.booster_kpi}

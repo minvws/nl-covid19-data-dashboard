@@ -53,19 +53,7 @@ const StyledValue = styled.div(
 /**
  * Display a blue KPI value with optionally a percentage behind it.
  */
-export function KpiValue({
-  absolute,
-  percentage,
-  valueAnnotation,
-  difference,
-  text,
-  color = 'primary',
-  isMovingAverageDifference,
-  isAmount,
-  differenceFractionDigits,
-  numFractionDigits,
-  ...otherProps
-}: KpiValueProps) {
+export function KpiValue({ absolute, percentage, valueAnnotation, difference, text, color = 'primary', isMovingAverageDifference, isAmount, differenceFractionDigits, numFractionDigits, ...otherProps }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
 
   return (
@@ -102,12 +90,7 @@ export function KpiValue({
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
           <Box pt={2}>
-            <TileAverageDifference
-              value={difference}
-              isPercentage={isDefined(percentage) && !isDefined(absolute)}
-              isAmount={isAmount}
-              maximumFractionDigits={differenceFractionDigits}
-            />
+            <TileAverageDifference value={difference} isPercentage={isDefined(percentage) && !isDefined(absolute)} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : isDefined(difference) ? (
           <Box pt={2}>

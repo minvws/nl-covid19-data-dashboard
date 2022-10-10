@@ -75,9 +75,7 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
      * Because not all mutation have written a document_id in the mutations file
      * yet, we need to workaround this with a find.
      */
-    const document = mutation.document_id
-      ? ((await devClient.getDocument(mutation.document_id)) as LokalizeText | undefined)
-      : allPublishedTexts.find((x) => x.key === mutation.key);
+    const document = mutation.document_id ? ((await devClient.getDocument(mutation.document_id)) as LokalizeText | undefined) : allPublishedTexts.find((x) => x.key === mutation.key);
 
     if (document) {
       const documentToInject: LokalizeText = {

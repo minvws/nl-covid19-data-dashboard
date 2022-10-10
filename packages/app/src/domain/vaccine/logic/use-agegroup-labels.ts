@@ -9,18 +9,8 @@ export function useAgegroupLabels(dataValue: VrVaccineCoveragePerAgeGroupValue |
   const labelsText = commonTexts.common;
 
   return useMemo(() => {
-    const fullyVaccinatedLabel = isDefined(dataValue)
-      ? getRenderedVaccinatedLabel(dataValue.fully_vaccinated_percentage_label, dataValue.fully_vaccinated_percentage, labelsText.meer_dan, labelsText.minder_dan, formatPercentage)
-      : '0';
-    const oneShotLabel = isDefined(dataValue)
-      ? getRenderedVaccinatedLabel(
-          dataValue.autumn_2022_vaccinated_percentage_label,
-          dataValue.autumn_2022_vaccinated_percentage,
-          labelsText.meer_dan,
-          labelsText.minder_dan,
-          formatPercentage
-        )
-      : '0';
+    const fullyVaccinatedLabel = isDefined(dataValue) ? getRenderedVaccinatedLabel(dataValue.fully_vaccinated_percentage_label, dataValue.fully_vaccinated_percentage, labelsText.meer_dan, labelsText.minder_dan, formatPercentage) : '0';
+    const oneShotLabel = isDefined(dataValue) ? getRenderedVaccinatedLabel(dataValue.autumn_2022_vaccinated_percentage_label, dataValue.autumn_2022_vaccinated_percentage, labelsText.meer_dan, labelsText.minder_dan, formatPercentage) : '0';
 
     return {
       fully_vaccinated_percentage: lowerCased ? fullyVaccinatedLabel.toLocaleLowerCase() : fullyVaccinatedLabel,

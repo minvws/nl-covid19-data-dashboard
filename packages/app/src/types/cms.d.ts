@@ -2,22 +2,7 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { ArticleSummary } from '~/components/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
 
-export type PageIdentifier =
-  | 'hospital_page'
-  | 'behavior_page'
-  | 'situations_page'
-  | 'reproduction_page'
-  | 'infectious_people_page'
-  | 'topical_page'
-  | 'elderly_at_home_page'
-  | 'disability_care_page'
-  | 'positive_tests_page'
-  | 'variants_page'
-  | 'sewer_page'
-  | 'intensive_care_page'
-  | 'vaccinations_page'
-  | 'nursing_home_page'
-  | 'deceased_page';
+export type PageIdentifier = 'hospital_page' | 'behavior_page' | 'situations_page' | 'reproduction_page' | 'infectious_people_page' | 'topical_page' | 'elderly_at_home_page' | 'disability_care_page' | 'positive_tests_page' | 'variants_page' | 'sewer_page' | 'intensive_care_page' | 'vaccinations_page' | 'nursing_home_page' | 'deceased_page';
 
 export type PageBasePart = {
   pageDataKind: string;

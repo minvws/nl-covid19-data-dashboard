@@ -58,13 +58,5 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
     [commonTexts.common.age_groups, commonTexts.common.birthyear_ranges, shownAgeGroups]
   );
 
-  return (
-    <RichContentSelect
-      label={commonTexts.common.age_group_dropdown.label}
-      visuallyHiddenLabel
-      initialValue={initialValue}
-      options={options}
-      onChange={(option) => onChange(option.value)}
-    />
-  );
+  return <RichContentSelect label={commonTexts.common.age_group_dropdown.label} visuallyHiddenLabel initialValue={initialValue} options={options} onChange={(option) => onChange(option.value)} />;
 }

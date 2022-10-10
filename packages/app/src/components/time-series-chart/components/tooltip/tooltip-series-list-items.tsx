@@ -17,18 +17,7 @@ type TooltipListOfSeriesProps<T extends TimestampedValue> = TooltipData<T> & {
   hasTwoColumns?: boolean;
 };
 
-export function TooltipSeriesListItems<T extends TimestampedValue>({
-  hasTwoColumns,
-  value,
-  configIndex,
-  config,
-  options,
-  markNearestPointOnly,
-  displayTooltipValueOnly,
-  valueMinWidth,
-  metricPropertyFormatters,
-  seriesMax,
-}: TooltipListOfSeriesProps<T>) {
+export function TooltipSeriesListItems<T extends TimestampedValue>({ hasTwoColumns, value, configIndex, config, options, markNearestPointOnly, displayTooltipValueOnly, valueMinWidth, metricPropertyFormatters, seriesMax }: TooltipListOfSeriesProps<T>) {
   const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
 
   const seriesConfig: SeriesConfig<T> = markNearestPointOnly ? [config[configIndex]] : [...config];
@@ -51,14 +40,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
         switch (serie.type) {
           case 'range':
             return (
-              <TooltipListItem
-                key={key}
-                icon={<SeriesIcon config={serie} />}
-                label={serie.shortLabel ?? serie.label}
-                ariaLabel={serie.ariaLabel}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={serie.nonInteractive}
-              >
+              <TooltipListItem key={key} icon={<SeriesIcon config={serie} />} label={serie.shortLabel ?? serie.label} ariaLabel={serie.ariaLabel} displayTooltipValueOnly={displayTooltipValueOnly} isVisuallyHidden={serie.nonInteractive}>
                 <span css={css({ whiteSpace: 'nowrap' })}>{formatSeriesValue(value, serie, options.isPercentage)}</span>
               </TooltipListItem>
             );
@@ -73,28 +55,14 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
           case 'split-area':
           case 'split-bar':
             return (
-              <TooltipListItem
-                key={key}
-                icon={<SeriesIcon config={serie} value={tooltipValue} />}
-                label={serie.shortLabel ?? serie.label}
-                ariaLabel={serie.ariaLabel}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={serie.nonInteractive}
-              >
+              <TooltipListItem key={key} icon={<SeriesIcon config={serie} value={tooltipValue} />} label={serie.shortLabel ?? serie.label} ariaLabel={serie.ariaLabel} displayTooltipValueOnly={displayTooltipValueOnly} isVisuallyHidden={serie.nonInteractive}>
                 {formatSeriesValue(value, serie, options.isPercentage)}
               </TooltipListItem>
             );
 
           default:
             return (
-              <TooltipListItem
-                key={key}
-                icon={typeof tooltipValue === 'number' && typeof seriesMax === 'number' && seriesMax < tooltipValue ? <OutOfBoundsIcon /> : <SeriesIcon config={serie} />}
-                label={serie.shortLabel ?? serie.label}
-                ariaLabel={serie.ariaLabel}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={serie.nonInteractive}
-              >
+              <TooltipListItem key={key} icon={typeof tooltipValue === 'number' && typeof seriesMax === 'number' && seriesMax < tooltipValue ? <OutOfBoundsIcon /> : <SeriesIcon config={serie} />} label={serie.shortLabel ?? serie.label} ariaLabel={serie.ariaLabel} displayTooltipValueOnly={displayTooltipValueOnly} isVisuallyHidden={serie.nonInteractive}>
                 {formatSeriesValue(value, serie, options.isPercentage)}
               </TooltipListItem>
             );

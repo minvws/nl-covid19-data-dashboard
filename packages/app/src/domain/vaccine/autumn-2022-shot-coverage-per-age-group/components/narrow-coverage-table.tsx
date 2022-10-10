@@ -26,19 +26,10 @@ export const NarrowCoverageTable = ({ values, text }: NarrowCoverageTableProps) 
 
       {values.map((item, index) => (
         <Box key={index} pt={2} pb={3} spacing={3} borderBottom="1px solid" borderColor="silver">
-          <AgeGroup
-            range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-            ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
-            birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
-            text={commonTexts.common.agegroup.total_people}
-          />
+          <AgeGroup range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)} ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined} birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)} text={commonTexts.common.agegroup.total_people} />
 
           <Box spacing={1}>
-            <NarrowPercentage
-              value={item.autumn_2022_vaccinated_percentage !== null ? `${formatPercentage(item.autumn_2022_vaccinated_percentage)}%` : text.no_data}
-              color={COLOR_AUTUMN_2022_SHOT}
-              textLabel={text.headers.autumn_2022_shot}
-            />
+            <NarrowPercentage value={item.autumn_2022_vaccinated_percentage !== null ? `${formatPercentage(item.autumn_2022_vaccinated_percentage)}%` : text.no_data} color={COLOR_AUTUMN_2022_SHOT} textLabel={text.headers.autumn_2022_shot} />
 
             <Bar value={item.autumn_2022_vaccinated_percentage} color={COLOR_AUTUMN_2022_SHOT} />
           </Box>

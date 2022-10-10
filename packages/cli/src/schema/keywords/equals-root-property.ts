@@ -13,15 +13,7 @@ export const equalsRootProperty: FuncKeywordDefinition = {
   keyword: 'equalsRootProperty',
   type: 'string',
   errors: true,
-  validate: function validateRootPropertyEquality(
-    schema: any,
-    data: any,
-    _parentSchema?: any,
-    _dataPath?: string,
-    _parentData?: any | any[],
-    _parentDataProperty?: string | number,
-    rootData?: any | any[]
-  ): boolean {
+  validate: function validateRootPropertyEquality(schema: any, data: any, _parentSchema?: any, _dataPath?: string, _parentData?: any | any[], _parentDataProperty?: string | number, rootData?: any | any[]): boolean {
     if (rootData) {
       const rootValue = (rootData as any)[schema as string];
       const validated = data === rootValue;

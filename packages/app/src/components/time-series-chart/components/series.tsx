@@ -38,162 +38,31 @@ function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList
       {seriesList
         .map((series, index) => {
           const config = seriesConfig[index];
-          const id =
-            config.type === 'range'
-              ? `${chartId}_${String(config.metricPropertyLow)}_${String(config.metricPropertyHigh)}_${config.type}`
-              : `${chartId}_${String(config.metricProperty)}_${config.type}`;
+          const id = config.type === 'range' ? `${chartId}_${String(config.metricPropertyLow)}_${String(config.metricPropertyHigh)}_${config.type}` : `${chartId}_${String(config.metricProperty)}_${config.type}`;
 
           switch (config.type) {
             case 'gapped-line':
-              return (
-                <GappedLinedTrend
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  color={config.color}
-                  style={config.style}
-                  strokeWidth={config.strokeWidth}
-                  curve={config.curve}
-                  getX={getX}
-                  getY={getY}
-                  id={id}
-                />
-              );
+              return <GappedLinedTrend key={index} series={series as SeriesSingleValue[]} color={config.color} style={config.style} strokeWidth={config.strokeWidth} curve={config.curve} getX={getX} getY={getY} id={id} />;
             case 'line':
-              return (
-                <LineTrend
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  color={config.color}
-                  style={config.style}
-                  strokeWidth={config.strokeWidth}
-                  curve={config.curve}
-                  getX={getX}
-                  getY={getY}
-                  id={id}
-                />
-              );
+              return <LineTrend key={index} series={series as SeriesSingleValue[]} color={config.color} style={config.style} strokeWidth={config.strokeWidth} curve={config.curve} getX={getX} getY={getY} id={id} />;
             case 'scatter-plot':
               return <ScatterPlot key={index} series={series as SeriesSingleValue[]} color={config.color} getX={getX} getY={getY} id={id} />;
             case 'area':
-              return (
-                <AreaTrend
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  color={config.color}
-                  fillOpacity={config.fillOpacity}
-                  strokeWidth={config.strokeWidth}
-                  curve={config.curve}
-                  getX={getX}
-                  getY={getY}
-                  yScale={yScale}
-                  id={id}
-                />
-              );
+              return <AreaTrend key={index} series={series as SeriesSingleValue[]} color={config.color} fillOpacity={config.fillOpacity} strokeWidth={config.strokeWidth} curve={config.curve} getX={getX} getY={getY} yScale={yScale} id={id} />;
             case 'gapped-area':
-              return (
-                <GappedAreaTrend
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  color={config.color}
-                  fillOpacity={config.fillOpacity}
-                  strokeWidth={config.strokeWidth}
-                  curve={config.curve}
-                  getX={getX}
-                  getY={getY}
-                  yScale={yScale}
-                  id={id}
-                  isMissing={config.metricProperty === 'beds_occupied_covid'}
-                />
-              );
+              return <GappedAreaTrend key={index} series={series as SeriesSingleValue[]} color={config.color} fillOpacity={config.fillOpacity} strokeWidth={config.strokeWidth} curve={config.curve} getX={getX} getY={getY} yScale={yScale} id={id} isMissing={config.metricProperty === 'beds_occupied_covid'} />;
             case 'bar':
-              return (
-                <BarTrend
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  color={config.color}
-                  fillOpacity={config.fillOpacity}
-                  getX={getX}
-                  getY={getY}
-                  bounds={bounds}
-                  yScale={yScale}
-                  id={id}
-                  seriesMax={seriesMax}
-                />
-              );
+              return <BarTrend key={index} series={series as SeriesSingleValue[]} color={config.color} fillOpacity={config.fillOpacity} getX={getX} getY={getY} bounds={bounds} yScale={yScale} id={id} seriesMax={seriesMax} />;
             case 'split-bar':
-              return (
-                <SplitBarTrend
-                  key={index}
-                  yScale={yScale}
-                  series={series as SeriesSingleValue[]}
-                  splitPoints={config.splitPoints}
-                  fillOpacity={config.fillOpacity}
-                  getX={getX}
-                  getY={getY}
-                  bounds={bounds}
-                  id={id}
-                />
-              );
+              return <SplitBarTrend key={index} yScale={yScale} series={series as SeriesSingleValue[]} splitPoints={config.splitPoints} fillOpacity={config.fillOpacity} getX={getX} getY={getY} bounds={bounds} id={id} />;
             case 'range':
-              return (
-                <RangeTrend
-                  key={index}
-                  series={series as SeriesDoubleValue[]}
-                  color={config.color}
-                  fillOpacity={config.fillOpacity}
-                  getX={getX}
-                  getY0={getY0}
-                  getY1={getY1}
-                  bounds={bounds}
-                  id={id}
-                />
-              );
+              return <RangeTrend key={index} series={series as SeriesDoubleValue[]} color={config.color} fillOpacity={config.fillOpacity} getX={getX} getY0={getY0} getY1={getY1} bounds={bounds} id={id} />;
             case 'gapped-stacked-area':
-              return (
-                <GappedStackedAreaTrend
-                  key={index}
-                  series={series as SeriesDoubleValue[]}
-                  color={config.color}
-                  fillOpacity={config.fillOpacity}
-                  strokeWidth={config.strokeWidth}
-                  mixBlendMode={config.mixBlendMode}
-                  getX={getX}
-                  getY0={getY0}
-                  getY1={getY1}
-                  bounds={bounds}
-                  id={id}
-                />
-              );
+              return <GappedStackedAreaTrend key={index} series={series as SeriesDoubleValue[]} color={config.color} fillOpacity={config.fillOpacity} strokeWidth={config.strokeWidth} mixBlendMode={config.mixBlendMode} getX={getX} getY0={getY0} getY1={getY1} bounds={bounds} id={id} />;
             case 'stacked-area':
-              return (
-                <StackedAreaTrend
-                  key={index}
-                  series={series as SeriesDoubleValue[]}
-                  color={config.color}
-                  fillOpacity={config.fillOpacity}
-                  strokeWidth={config.strokeWidth}
-                  mixBlendMode={config.mixBlendMode}
-                  getX={getX}
-                  getY0={getY0}
-                  getY1={getY1}
-                  bounds={bounds}
-                  id={id}
-                />
-              );
+              return <StackedAreaTrend key={index} series={series as SeriesDoubleValue[]} color={config.color} fillOpacity={config.fillOpacity} strokeWidth={config.strokeWidth} mixBlendMode={config.mixBlendMode} getX={getX} getY0={getY0} getY1={getY1} bounds={bounds} id={id} />;
             case 'split-area':
-              return (
-                <SplitAreaTrend
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  splitPoints={config.splitPoints}
-                  strokeWidth={config.strokeWidth}
-                  fillOpacity={config.fillOpacity}
-                  getX={getX}
-                  getY={getY}
-                  yScale={yScale}
-                  id={id}
-                />
-              );
+              return <SplitAreaTrend key={index} series={series as SeriesSingleValue[]} splitPoints={config.splitPoints} strokeWidth={config.strokeWidth} fillOpacity={config.fillOpacity} getX={getX} getY={getY} yScale={yScale} id={id} />;
           }
         })
         /**

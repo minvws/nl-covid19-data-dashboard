@@ -74,15 +74,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
     <Box bg="white" display="flex" justifyContent="center" data-cy="radiogroup">
       {items.map((item, index) => (
         <Fragment key={`radiogroup-${id}-input-${index}`}>
-          <StyledInput
-            onChange={() => onChange(item.value)}
-            id={`radiogroup-${item.value}-${id}-${index}`}
-            type="radio"
-            name={`radiogroup-${id}-item`}
-            value={item.value}
-            checked={value === item.value}
-            aria-label={value === item.value ? item.ariaLabel : undefined}
-          />
+          <StyledInput onChange={() => onChange(item.value)} id={`radiogroup-${item.value}-${id}-${index}`} type="radio" name={`radiogroup-${id}-item`} value={item.value} checked={value === item.value} aria-label={value === item.value ? item.ariaLabel : undefined} />
           <StyledLabel htmlFor={`radiogroup-${item.value}-${id}-${index}`}>
             <InlineText variant="button2">{item.label}</InlineText>
           </StyledLabel>

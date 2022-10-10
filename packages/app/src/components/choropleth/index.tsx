@@ -224,15 +224,7 @@ export function Choropleth<T extends ChoroplethDataItem>({ formatTooltip, toolti
 
         {tooltip && (
           <div ref={tooltipRef} style={{ pointerEvents: 'none' }}>
-            <Tooltip
-              placement={tooltipPlacement}
-              left={tooltip.left}
-              top={tooltip.top}
-              setTooltip={setTooltip}
-              formatTooltip={formatTooltip}
-              data={tooltip.data}
-              dataFormatters={props.dataConfig.dataFormatters}
-            />
+            <Tooltip placement={tooltipPlacement} left={tooltip.left} top={tooltip.top} setTooltip={setTooltip} formatTooltip={formatTooltip} data={tooltip.data} dataFormatters={props.dataConfig.dataFormatters} />
           </div>
         )}
       </div>

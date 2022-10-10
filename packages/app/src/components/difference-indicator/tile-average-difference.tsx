@@ -7,17 +7,7 @@ import { Container, IconContainer } from './containers';
 import { Markdown } from '~/components/markdown';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-export function TileAverageDifference({
-  value,
-  isPercentage,
-  isAmount,
-  maximumFractionDigits,
-}: {
-  value: DifferenceDecimal | DifferenceInteger;
-  isPercentage?: boolean;
-  isAmount: boolean;
-  maximumFractionDigits?: number;
-}) {
+export function TileAverageDifference({ value, isPercentage, isAmount, maximumFractionDigits }: { value: DifferenceDecimal | DifferenceInteger; isPercentage?: boolean; isAmount: boolean; maximumFractionDigits?: number }) {
   const { commonTexts, formatNumber } = useIntl();
   const { difference, old_value } = value;
   const text = commonTexts.toe_en_afname;

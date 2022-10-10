@@ -36,25 +36,9 @@ export function PageBarScale(props: PageBarScaleProps) {
 
   return (
     <Box spacing={2} mb={3}>
-      <BarScale
-        min={config.min}
-        max={config.max}
-        limit={config.limit}
-        screenReaderText={screenReaderText}
-        value={value}
-        id={uniqueId}
-        gradient={config.gradient}
-        showValue
-        showAxis
-      />
+      <BarScale min={config.min} max={config.max} limit={config.limit} screenReaderText={screenReaderText} value={value} id={uniqueId} gradient={config.gradient} showValue showAxis />
 
-      {isDefined(difference) &&
-        isDefined(isAmount) &&
-        (isMovingAverageDifference ? (
-          <TileAverageDifference value={difference} isAmount={isAmount} />
-        ) : (
-          <TileDifference value={difference} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />
-        ))}
+      {isDefined(difference) && isDefined(isAmount) && (isMovingAverageDifference ? <TileAverageDifference value={difference} isAmount={isAmount} /> : <TileDifference value={difference} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />)}
     </Box>
   );
 }

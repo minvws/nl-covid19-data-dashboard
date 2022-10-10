@@ -29,13 +29,5 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
     [commonTexts.charts.time_controls, timeframeOptions]
   );
 
-  return (
-    <RichContentSelect
-      label={commonTexts.common.age_group_dropdown.label}
-      visuallyHiddenLabel
-      initialValue={timeframe}
-      options={selectOptions}
-      onChange={(option) => onChange(option.value)}
-    />
-  );
+  return <RichContentSelect label={commonTexts.common.age_group_dropdown.label} visuallyHiddenLabel initialValue={timeframe} options={selectOptions} onChange={(option) => onChange(option.value)} />;
 }

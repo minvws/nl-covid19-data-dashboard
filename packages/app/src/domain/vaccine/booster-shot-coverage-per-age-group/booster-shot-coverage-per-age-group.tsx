@@ -1,9 +1,4 @@
-import {
-  assert,
-  NlVaccineCoveragePerAgeGroupArchived_20220908Value,
-  VrVaccineCoveragePerAgeGroupArchived_20220908Value,
-  GmVaccineCoveragePerAgeGroupArchived_20220908Value,
-} from '@corona-dashboard/common';
+import { assert, NlVaccineCoveragePerAgeGroupArchived_20220908Value, VrVaccineCoveragePerAgeGroupArchived_20220908Value, GmVaccineCoveragePerAgeGroupArchived_20220908Value } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { NarrowCoverageTable } from './components/narrow-coverage-table';

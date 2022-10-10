@@ -84,17 +84,7 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
         </>
       ) : (
         <>
-          <AreaTrend
-            series={series.filter((x) => undefined !== seriesMax && undefined !== x.__value && x.__value < seriesMax)}
-            color={color}
-            fillOpacity={fillOpacity}
-            strokeWidth={0}
-            curve="step"
-            getX={getX}
-            getY={getY}
-            yScale={yScale}
-            id={id}
-          />
+          <AreaTrend series={series.filter((x) => undefined !== seriesMax && undefined !== x.__value && x.__value < seriesMax)} color={color} fillOpacity={fillOpacity} strokeWidth={0} curve="step" getX={getX} getY={getY} yScale={yScale} id={id} />
         </>
       )}
     </>

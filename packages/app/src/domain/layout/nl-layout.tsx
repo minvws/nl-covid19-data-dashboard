@@ -52,17 +52,7 @@ export function NlLayout(props: NlLayoutProps) {
 
       <AppContent
         sidebarComponent={
-          <Box
-            as="nav"
-            id="metric-navigation"
-            aria-labelledby="sidebar-title"
-            role="navigation"
-            pt={4}
-            backgroundColor="white"
-            maxWidth={{ _: '38rem', md: undefined }}
-            mx="auto"
-            spacing={1}
-          >
+          <Box as="nav" id="metric-navigation" aria-labelledby="sidebar-title" role="navigation" pt={4} backgroundColor="white" maxWidth={{ _: '38rem', md: undefined }} mx="auto" spacing={1}>
             <VisuallyHidden as="h2" id="sidebar-title">
               {commonTexts.nationaal_layout.headings.sidebar}
             </VisuallyHidden>

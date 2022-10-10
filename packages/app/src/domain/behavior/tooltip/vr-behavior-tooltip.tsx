@@ -31,21 +31,9 @@ export function VrBehaviorTooltip({ context, currentMetric, currentComplianceVal
 
   const supportFilteredThreshold = getThresholdValue(thresholds.vr[supportThresholdKey], currentSupportValue ?? 0);
 
-  const complianceTooltipInfo = (
-    <TooltipInfo
-      title={text.nl.tooltip_labels.compliance}
-      value={currentComplianceValue !== null ? `${formatPercentage(currentComplianceValue)}%` : '-'}
-      background={complianceFilteredThreshold.color}
-    />
-  );
+  const complianceTooltipInfo = <TooltipInfo title={text.nl.tooltip_labels.compliance} value={currentComplianceValue !== null ? `${formatPercentage(currentComplianceValue)}%` : '-'} background={complianceFilteredThreshold.color} />;
 
-  const supportTooltipInfo = (
-    <TooltipInfo
-      title={text.nl.tooltip_labels.support}
-      value={currentSupportValue !== null ? `${formatPercentage(currentSupportValue)}%` : '-'}
-      background={supportFilteredThreshold.color}
-    />
-  );
+  const supportTooltipInfo = <TooltipInfo title={text.nl.tooltip_labels.support} value={currentSupportValue !== null ? `${formatPercentage(currentSupportValue)}%` : '-'} background={supportFilteredThreshold.color} />;
 
   return (
     <TooltipContent title={context.featureName} link={reverseRouter.vr.gedrag(context.dataItem.vrcode)}>

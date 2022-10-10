@@ -124,13 +124,7 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
     >
       {dataPerInstallation && (
         <Box alignSelf="flex-start" mb={3} minWidth={207}>
-          <RichContentSelect
-            label={text.selectPlaceholder}
-            visuallyHiddenLabel
-            initialValue={selectedInstallation}
-            options={optionsWithContent}
-            onChange={(option) => onChange(option.value)}
-          />
+          <RichContentSelect label={text.selectPlaceholder} visuallyHiddenLabel initialValue={selectedInstallation} options={optionsWithContent} onChange={(option) => onChange(option.value)} />
         </Box>
       )}
       {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (

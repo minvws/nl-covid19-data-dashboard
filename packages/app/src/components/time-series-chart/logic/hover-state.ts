@@ -48,19 +48,7 @@ interface HoverState<T> {
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-export function useHoverState<T extends TimestampedValue>({
-  values,
-  seriesList,
-  seriesConfig,
-  padding,
-  xScale,
-  yScale,
-  timespanAnnotations,
-  timelineEvents,
-  markNearestPointOnly,
-  isTabInteractive,
-  setIsTabInteractive,
-}: UseHoverStateArgs<T>) {
+export function useHoverState<T extends TimestampedValue>({ values, seriesList, seriesConfig, padding, xScale, yScale, timespanAnnotations, timelineEvents, markNearestPointOnly, isTabInteractive, setIsTabInteractive }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
   const [valuesIndex, setValuesIndex] = useState<number>(0);
   const keyboard = useKeyboardNavigation(setValuesIndex, values.length, setIsTabInteractive);

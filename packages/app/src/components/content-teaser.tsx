@@ -41,12 +41,7 @@ export function ContentTeaser({ title, slug, cover, category, publicationDate, v
             category
           )}
         </Text>
-        <HeadingLinkWithIcon
-          href={isAbsoluteUrl(slug) ? slug : isWeeklyHighlight ? `/weekberichten/${slug}` : isArticle ? `/artikelen/${slug}` : slug}
-          icon={<ArrowIconRight />}
-          iconPlacement="right"
-          underline
-        >
+        <HeadingLinkWithIcon href={isAbsoluteUrl(slug) ? slug : isWeeklyHighlight ? `/weekberichten/${slug}` : isArticle ? `/artikelen/${slug}` : slug} icon={<ArrowIconRight />} iconPlacement="right" underline>
           {title}
         </HeadingLinkWithIcon>
       </Box>

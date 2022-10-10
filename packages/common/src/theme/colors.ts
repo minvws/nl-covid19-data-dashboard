@@ -16,15 +16,7 @@ type PathsToStringProps<T> = T extends string
  * And then we can use template string types to join a tuple of string literals into a dotted path
  * (or any delimiter)
  */
-type Join<T extends string[], D extends string> = T extends []
-  ? never
-  : T extends [infer F]
-  ? F
-  : T extends [infer F, ...infer R]
-  ? F extends string
-    ? `${F}${D}${Join<Extract<R, string[]>, D>}`
-    : never
-  : string;
+type Join<T extends string[], D extends string> = T extends [] ? never : T extends [infer F] ? F : T extends [infer F, ...infer R] ? (F extends string ? `${F}${D}${Join<Extract<R, string[]>, D>}` : never) : string;
 
 type ColorsWithoutRanges = O.Omit<typeof colors, 'scale'>;
 export type Color = Join<PathsToStringProps<ColorsWithoutRanges>, '.'>;
@@ -92,23 +84,7 @@ export const colors = {
   },
 
   variants: {
-    colorList: [
-      '#FFC000',
-      '#219BE5',
-      '#00BB95',
-      '#E37321',
-      '#D360E5',
-      '#CF9C00',
-      '#005082',
-      '#008372',
-      '#A14E00',
-      '#9515AA',
-      '#0053FD',
-      '#FFE500',
-      '#02C238',
-      '#F65234',
-      '#D7019B',
-    ],
+    colorList: ['#FFC000', '#219BE5', '#00BB95', '#E37321', '#D360E5', '#CF9C00', '#005082', '#008372', '#A14E00', '#9515AA', '#0053FD', '#FFE500', '#02C238', '#F65234', '#D7019B'],
   },
 
   vaccines: {

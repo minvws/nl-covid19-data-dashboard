@@ -49,9 +49,7 @@ function Braille({ document, fields }: { document: any; fields: string[] }) {
       <p className={styles.transcriptBody}>{textToBraille()}</p>
       <p className={styles.disclaimer}>
         <small>
-          This is of course only a visual representation of <a href="https://en.wikipedia.org/wiki/Braille">six-point Braille</a>, and only useful for sighted people to get an
-          impression of it will look like. For this to be actually useful for people who can read it, the component has to be connected to a Braille tablet. There are efforts
-          bringing JavaScript, IoT, and accessibility together, <a href="https://www.youtube.com/watch?v=to_055yx3Rc">such as this talk</a>.
+          This is of course only a visual representation of <a href="https://en.wikipedia.org/wiki/Braille">six-point Braille</a>, and only useful for sighted people to get an impression of it will look like. For this to be actually useful for people who can read it, the component has to be connected to a Braille tablet. There are efforts bringing JavaScript, IoT, and accessibility together, <a href="https://www.youtube.com/watch?v=to_055yx3Rc">such as this talk</a>.
         </small>
       </p>
     </div>

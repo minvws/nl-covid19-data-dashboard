@@ -17,41 +17,11 @@ import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useTabInteractiveButton } from '~/utils/use-tab-interactive-button';
 import { useUniqueId } from '../../utils/use-unique-id';
 import { InlineText } from '../typography';
-import {
-  Axes,
-  Benchmark,
-  ChartContainer,
-  DateLineMarker,
-  DateSpanMarker,
-  Overlay,
-  PointMarkers,
-  Series,
-  TimespanAnnotation,
-  Tooltip,
-  TooltipData,
-  TooltipFormatter,
-} from './components';
+import { Axes, Benchmark, ChartContainer, DateLineMarker, DateSpanMarker, Overlay, PointMarkers, Series, TimespanAnnotation, Tooltip, TooltipData, TooltipFormatter } from './components';
 import { TimeAnnotation } from './components/time-annotation';
 import { Timeline, TimelineEventHighlight } from './components/timeline';
 import { useTimelineState } from './components/timeline/logic';
-import {
-  calculateSeriesMaximum,
-  calculateSeriesMinimum,
-  COLLAPSE_Y_AXIS_THRESHOLD,
-  DataOptions,
-  extractCutValuesConfig,
-  getTimeDomain,
-  omitValuePropertiesForAnnotation,
-  SeriesConfig,
-  useDimensions,
-  useHoverState,
-  useLegendItems,
-  useMetricPropertyFormatters,
-  useScales,
-  useSeriesList,
-  useValuesInTimeframe,
-  useValueWidth,
-} from './logic';
+import { calculateSeriesMaximum, calculateSeriesMinimum, COLLAPSE_Y_AXIS_THRESHOLD, DataOptions, extractCutValuesConfig, getTimeDomain, omitValuePropertiesForAnnotation, SeriesConfig, useDimensions, useHoverState, useLegendItems, useMetricPropertyFormatters, useScales, useSeriesList, useValuesInTimeframe, useValueWidth } from './logic';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -200,10 +170,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
    * The maximum is calculated over all values, because you don't want the
    * y-axis scaling to change when toggling the timeframe setting.
    */
-  const [calculatedSeriesMin, calculatedSeriesMax] = useMemo(
-    () => [calculateSeriesMinimum(seriesList, seriesConfig, benchmark?.value), calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value)],
-    [seriesList, seriesConfig, benchmark?.value]
-  );
+  const [calculatedSeriesMin, calculatedSeriesMax] = useMemo(() => [calculateSeriesMinimum(seriesList, seriesConfig, benchmark?.value), calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value)], [seriesList, seriesConfig, benchmark?.value]);
 
   const calculatedForcedMaximumValue = isFunction(forcedMaximumValue) ? forcedMaximumValue(calculatedSeriesMax) : forcedMaximumValue;
 
@@ -221,13 +188,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
     minimumRange,
   });
 
-  const { legendItems, splitLegendGroups } = useLegendItems(
-    xScale.domain(),
-    seriesConfig,
-    dataOptions,
-    dataOptions?.outOfBoundsConfig && seriesMax < calculatedSeriesMax,
-    forceLegend
-  );
+  const { legendItems, splitLegendGroups } = useLegendItems(xScale.domain(), seriesConfig, dataOptions, dataOptions?.outOfBoundsConfig && seriesMax < calculatedSeriesMax, forceLegend);
 
   const timeDomain = useMemo(() => getTimeDomain({ values, today: endDate ?? today, withPadding: false }), [values, endDate, today]);
 
@@ -267,10 +228,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
            * If we are hovering a timespanAnnotation, we use that data to cut
            * out any property values that should be blocked from the tooltip.
            */
-          value:
-            timespanAnnotations && isDefined(timespanAnnotationIndex)
-              ? omitValuePropertiesForAnnotation(values[valuesIndex], timespanAnnotations[timespanAnnotationIndex])
-              : values[valuesIndex],
+          value: timespanAnnotations && isDefined(timespanAnnotationIndex) ? omitValuePropertiesForAnnotation(values[valuesIndex], timespanAnnotations[timespanAnnotationIndex]) : values[valuesIndex],
           config: seriesConfig,
           configIndex: nearestPoint.seriesConfigIndex,
           markNearestPointOnly,
@@ -295,23 +253,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
     } else {
       hideTooltip();
     }
-  }, [
-    hoverState,
-    seriesConfig,
-    values,
-    hideTooltip,
-    showTooltip,
-    dataOptions,
-    timespanAnnotations,
-    markNearestPointOnly,
-    displayTooltipValueOnly,
-    valueMinWidth,
-    timelineEvents,
-    timelineState.events,
-    metricPropertyFormatters,
-    seriesMax,
-    timeDomain,
-  ]);
+  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions, timespanAnnotations, markNearestPointOnly, displayTooltipValueOnly, valueMinWidth, timelineEvents, timelineState.events, metricPropertyFormatters, seriesMax, timeDomain]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
 
@@ -329,12 +271,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
   return (
     <>
       {valueAnnotation && (
-        <Box
-          position={isYAxisCollapsed ? 'relative' : undefined}
-          top={isYAxisCollapsed ? '-6px' : undefined}
-          left={isYAxisCollapsed ? 25 : undefined}
-          css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}
-        >
+        <Box position={isYAxisCollapsed ? 'relative' : undefined} top={isYAxisCollapsed ? '-6px' : undefined} left={isYAxisCollapsed ? 25 : undefined} css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}>
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
           <Spacer mb={{ _: 2, sm: 0 }} />
         </Box>
@@ -344,33 +281,8 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         <Box position="relative" css={css({ userSelect: 'none' })}>
           {tabInteractiveButton}
 
-          <ChartContainer
-            accessibility={timeSeriesAccessibility}
-            width={width}
-            height={height}
-            padding={padding}
-            onClick={handleClick}
-            onHover={chartEventHandlers.handleHover}
-            isTabInteractive={isTabInteractive}
-            {...anchorEventHandlers}
-          >
-            <Axes
-              bounds={bounds}
-              numGridLines={numGridLines}
-              timeframe={timeframe}
-              yTickValues={yTickValues}
-              timeDomain={timeDomain}
-              xTickNumber={xTickNumber}
-              values={values}
-              formatYTickValue={formatYTickValue}
-              xScale={xScale}
-              yScale={yScale}
-              isPercentage={isPercentage}
-              yAxisRef={leftPaddingRef}
-              isYAxisCollapsed={isYAxisCollapsed}
-              hasAllZeroValues={hasAllZeroValues}
-              showWeekNumbers={showWeekNumbers}
-            />
+          <ChartContainer accessibility={timeSeriesAccessibility} width={width} height={height} padding={padding} onClick={handleClick} onHover={chartEventHandlers.handleHover} isTabInteractive={isTabInteractive} {...anchorEventHandlers}>
+            <Axes bounds={bounds} numGridLines={numGridLines} timeframe={timeframe} yTickValues={yTickValues} timeDomain={timeDomain} xTickNumber={xTickNumber} values={values} formatYTickValue={formatYTickValue} xScale={xScale} yScale={yScale} isPercentage={isPercentage} yAxisRef={leftPaddingRef} isYAxisCollapsed={isYAxisCollapsed} hasAllZeroValues={hasAllZeroValues} showWeekNumbers={showWeekNumbers} />
 
             {/**
              * The renderSeries() callback has been replaced by this component. As
@@ -382,18 +294,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
              * abstraction, but I still think it's an improvement over
              * having it mixed in with the main component.
              */}
-            <Series
-              seriesConfig={seriesConfig}
-              seriesList={seriesList}
-              getX={getX}
-              getY={getY}
-              getY0={getY0}
-              getY1={getY1}
-              bounds={bounds}
-              yScale={yScale}
-              chartId={chartId}
-              seriesMax={seriesMax}
-            />
+            <Series seriesConfig={seriesConfig} seriesList={seriesList} getX={getX} getY={getY} getY0={getY0} getY1={getY1} bounds={bounds} yScale={yScale} chartId={chartId} seriesMax={seriesMax} />
 
             {/**
              * Highlight 0 on the y-axis when there are positive and
@@ -419,9 +320,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
             <TimelineEventHighlight height={bounds.height} timelineState={timelineState} />
           </ChartContainer>
 
-          {tooltipOpen && tooltipData && (
-            <Tooltip title={tooltipTitle} data={tooltipData} left={tooltipLeft} top={tooltipTop} formatTooltip={formatTooltip} bounds={bounds} padding={padding} />
-          )}
+          {tooltipOpen && tooltipData && <Tooltip title={tooltipTitle} data={tooltipData} left={tooltipLeft} top={tooltipTop} formatTooltip={formatTooltip} bounds={bounds} padding={padding} />}
 
           {hoverState && (
             <Overlay bounds={bounds} padding={padding}>
@@ -445,16 +344,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         </Box>
       </ResponsiveContainer>
 
-      {timelineState.events.length > 0 && (
-        <Timeline
-          padding={padding}
-          bounds={bounds}
-          width={width}
-          timelineState={timelineState}
-          highlightIndex={hoverState?.timelineEventIndex}
-          isYAxisCollapsed={isYAxisCollapsed}
-        />
-      )}
+      {timelineState.events.length > 0 && <Timeline padding={padding} bounds={bounds} width={width} timelineState={timelineState} highlightIndex={hoverState?.timelineEventIndex} isYAxisCollapsed={isYAxisCollapsed} />}
 
       {!disableLegend && splitLegendGroups && (
         <>

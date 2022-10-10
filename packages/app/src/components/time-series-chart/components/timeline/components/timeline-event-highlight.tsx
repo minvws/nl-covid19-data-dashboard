@@ -12,21 +12,5 @@ export function TimelineEventHighlight({ height, timelineState }: { height: numb
 
   const width = Math.max(1, x1 - x0);
 
-  return (
-    <AnimatePresence>
-      {timelineState.current && (
-        <m.rect
-          key={`${event?.start}-${event?.end}`}
-          pointerEvents="none"
-          height={height}
-          x={x0}
-          width={width}
-          style={{ mixBlendMode: 'multiply' }}
-          initial={{ fill: inactiveColor }}
-          exit={{ fill: inactiveColor }}
-          animate={{ fill: activeColor }}
-        />
-      )}
-    </AnimatePresence>
-  );
+  return <AnimatePresence>{timelineState.current && <m.rect key={`${event?.start}-${event?.end}`} pointerEvents="none" height={height} x={x0} width={width} style={{ mixBlendMode: 'multiply' }} initial={{ fill: inactiveColor }} exit={{ fill: inactiveColor }} animate={{ fill: activeColor }} />}</AnimatePresence>;
 }

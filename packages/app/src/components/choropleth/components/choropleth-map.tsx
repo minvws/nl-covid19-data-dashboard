@@ -5,17 +5,7 @@ import { Box } from '~/components/base';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { ChoroplethProps } from '..';
-import {
-  ChoroplethDataItem,
-  FitExtent,
-  useChoroplethData,
-  useChoroplethFeatures,
-  useChoroplethTooltip,
-  useFeatureName,
-  useFeatureProps,
-  useFillColor,
-  useResponsiveSize,
-} from '../logic';
+import { ChoroplethDataItem, FitExtent, useChoroplethData, useChoroplethFeatures, useChoroplethTooltip, useFeatureName, useFeatureProps, useFillColor, useResponsiveSize } from '../logic';
 import { createDataConfig } from '../logic/create-data-config';
 import { TooltipSettings } from '../tooltips/types';
 import { CanvasChoroplethMap } from './canvas-choropleth-map';
@@ -32,20 +22,7 @@ type ChoroplethMapProps<T extends ChoroplethDataItem> = Omit<ChoroplethProps<T>,
 };
 
 export const ChoroplethMap: <T extends ChoroplethDataItem>(props: ChoroplethMapProps<T>) => JSX.Element | null = memo((props) => {
-  const {
-    data: originalData,
-    dataConfig: partialDataConfig,
-    dataOptions,
-    map,
-    thresholdMap = map,
-    minHeight = 500,
-    boundingBoxPadding = {},
-    setTooltip,
-    accessibility,
-    isTabInteractive,
-    anchorEventHandlers,
-    responsiveSizeConfiguration,
-  } = props;
+  const { data: originalData, dataConfig: partialDataConfig, dataOptions, map, thresholdMap = map, minHeight = 500, boundingBoxPadding = {}, setTooltip, accessibility, isTabInteractive, anchorEventHandlers, responsiveSizeConfiguration } = props;
 
   const dataConfig = createDataConfig(partialDataConfig);
 

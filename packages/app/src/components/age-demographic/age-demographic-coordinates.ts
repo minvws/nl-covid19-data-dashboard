@@ -32,12 +32,7 @@ export interface AgeDemographicCoordinates<T extends AgeDemographicDefaultValue>
   axisWidth: number;
 }
 
-export function useAgeDemographicCoordinates<T extends AgeDemographicDefaultValue>(
-  data: { values: T[] },
-  rightMetricProperty: keyof T,
-  leftMetricProperty: keyof T,
-  maxDisplayValue?: number
-) {
+export function useAgeDemographicCoordinates<T extends AgeDemographicDefaultValue>(data: { values: T[] }, rightMetricProperty: keyof T, leftMetricProperty: keyof T, maxDisplayValue?: number) {
   const [ref, { width = 840 }] = useResizeObserver<HTMLDivElement>();
 
   const { xs, xl } = useBreakpoints();
@@ -51,15 +46,7 @@ export function useAgeDemographicCoordinates<T extends AgeDemographicDefaultValu
   return [ref, coordinates] as const;
 }
 
-function calculateAgeDemographicCoordinates<T extends AgeDemographicDefaultValue>(
-  data: { values: T[] },
-  rightMetricProperty: keyof T,
-  leftMetricProperty: keyof T,
-  isSmallScreen: boolean,
-  parentWidth: number,
-  isExtraSmallScreen: boolean,
-  maxDisplayValue?: number
-): AgeDemographicCoordinates<T> {
+function calculateAgeDemographicCoordinates<T extends AgeDemographicDefaultValue>(data: { values: T[] }, rightMetricProperty: keyof T, leftMetricProperty: keyof T, isSmallScreen: boolean, parentWidth: number, isExtraSmallScreen: boolean, maxDisplayValue?: number): AgeDemographicCoordinates<T> {
   const values = data.values.sort((a, b) => {
     return b.age_group_range.localeCompare(a.age_group_range);
   });

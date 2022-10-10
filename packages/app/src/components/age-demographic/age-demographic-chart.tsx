@@ -45,22 +45,8 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   );
 };
 
-export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
-  accessibility,
-  coordinates,
-  text,
-  onKeyInput,
-  onMouseMoveBar,
-  onMouseLeaveBar,
-  rightMetricProperty,
-  leftMetricProperty,
-  rightColor,
-  leftColor,
-  maxDisplayValue,
-  formatValue,
-}: AgeDemographicChartProps<T>) {
-  const { width, height, singleBarHeight, numTicks, xMax, yMax, axisWidth, leftScale, leftPoint, rightScale, rightPoint, ageGroupRangePoint, ageGroupRange, margin, values } =
-    coordinates;
+export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({ accessibility, coordinates, text, onKeyInput, onMouseMoveBar, onMouseLeaveBar, rightMetricProperty, leftMetricProperty, rightColor, leftColor, maxDisplayValue, formatValue }: AgeDemographicChartProps<T>) {
+  const { width, height, singleBarHeight, numTicks, xMax, yMax, axisWidth, leftScale, leftPoint, rightScale, rightPoint, ageGroupRangePoint, ageGroupRange, margin, values } = coordinates;
 
   const annotations = useAccessibilityAnnotations(accessibility);
 
@@ -69,9 +55,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
     return typeof value === 'number' ? value : 0;
   };
 
-  const hasClippedValue = !!values.find(
-    (value) => getIsClipped(getNumberValue(value, leftMetricProperty), maxDisplayValue) || getIsClipped(getNumberValue(value, rightMetricProperty), maxDisplayValue)
-  );
+  const hasClippedValue = !!values.find((value) => getIsClipped(getNumberValue(value, leftMetricProperty), maxDisplayValue) || getIsClipped(getNumberValue(value, rightMetricProperty), maxDisplayValue));
 
   return (
     <Box>
@@ -153,27 +137,9 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
         })}
 
         {/* Axis lines, match up with the vertical lines */}
-        <AxisBottom
-          scale={leftScale}
-          left={margin.left}
-          top={height - margin.bottom}
-          numTicks={numTicks}
-          hideTicks={true}
-          hideAxisLine={true}
-          tickFormat={formatValue}
-          tickComponent={TickValue}
-        />
+        <AxisBottom scale={leftScale} left={margin.left} top={height - margin.bottom} numTicks={numTicks} hideTicks={true} hideAxisLine={true} tickFormat={formatValue} tickComponent={TickValue} />
 
-        <AxisBottom
-          scale={rightScale}
-          left={width / 2 + axisWidth / 2}
-          top={height - margin.bottom}
-          numTicks={numTicks}
-          hideTicks={true}
-          hideAxisLine={true}
-          tickFormat={formatValue}
-          tickComponent={TickValue}
-        />
+        <AxisBottom scale={rightScale} left={width / 2 + axisWidth / 2} top={height - margin.bottom} numTicks={numTicks} hideTicks={true} hideAxisLine={true} tickFormat={formatValue} tickComponent={TickValue} />
       </svg>
 
       {hasClippedValue && (

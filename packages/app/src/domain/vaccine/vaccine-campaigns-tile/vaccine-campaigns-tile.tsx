@@ -24,11 +24,7 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
   return (
     <>
       <ChartTile title={title} description={description} metadata={metadata}>
-        {breakpoints.sm ? (
-          <WideVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} />
-        ) : (
-          <NarrowVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} />
-        )}
+        {breakpoints.sm ? <WideVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} /> : <NarrowVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} />}
         <Box mt={3}>
           <Text variant="label1" color="gray7">
             <Markdown content={descriptionFooter} />

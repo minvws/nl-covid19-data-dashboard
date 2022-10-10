@@ -59,9 +59,7 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
 
   const lastValue = getLastValue(data, configuration.metricName);
 
-  const metadataDate = isDateSpanValue(lastValue)
-    ? formatDateSpanString(lastValue.date_start_unix, lastValue.date_end_unix, formatDateFromSeconds)
-    : formatDateValueString(lastValue.date_unix, formatDateFromSeconds);
+  const metadataDate = isDateSpanValue(lastValue) ? formatDateSpanString(lastValue.date_start_unix, lastValue.date_end_unix, formatDateFromSeconds) : formatDateValueString(lastValue.date_unix, formatDateFromSeconds);
 
   return (
     <ErrorBoundary>
@@ -74,19 +72,8 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
             date: metadataDate,
           }}
         >
-          {isPresent(differenceData) && (
-            <PageKpi
-              data={allData}
-              metricName={configuration.metricName}
-              metricProperty={configuration.metricProperty}
-              differenceKey={configuration.differenceKey}
-              isMovingAverageDifference={configuration.isMovingAverageDifference}
-              isAmount={configuration.isAmount}
-            />
-          )}
-          {!isPresent(differenceData) && (
-            <PageKpi data={allData} metricName={configuration.metricName} metricProperty={configuration.metricProperty} isAmount={configuration.isAmount} />
-          )}
+          {isPresent(differenceData) && <PageKpi data={allData} metricName={configuration.metricName} metricProperty={configuration.metricProperty} differenceKey={configuration.differenceKey} isMovingAverageDifference={configuration.isMovingAverageDifference} isAmount={configuration.isAmount} />}
+          {!isPresent(differenceData) && <PageKpi data={allData} metricName={configuration.metricName} metricProperty={configuration.metricProperty} isAmount={configuration.isAmount} />}
         </KpiTile>
       </Box>
     </ErrorBoundary>

@@ -1,16 +1,4 @@
-import {
-  BasisregelsDrukte,
-  Avondklok,
-  FrisseLucht,
-  BasisregelsAfstand,
-  MaxVisitors,
-  BasisregelsElleboog,
-  BasisregelsTesten,
-  Klachten,
-  BasisregelsHandenwassen,
-  BasisregelsMondkapje,
-  OnderwijsEnKinderopvangOpAfstand,
-} from '@corona-dashboard/icons';
+import { BasisregelsDrukte, Avondklok, FrisseLucht, BasisregelsAfstand, MaxVisitors, BasisregelsElleboog, BasisregelsTesten, Klachten, BasisregelsHandenwassen, BasisregelsMondkapje, OnderwijsEnKinderopvangOpAfstand } from '@corona-dashboard/icons';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 
 const icons: Record<BehaviorIdentifier, typeof Avondklok> = {

@@ -135,13 +135,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
                 },
               })}
             >
-              <RichContentSelect
-                label={textShared.secties.artikelen.categorie_select_placeholder}
-                visuallyHiddenLabel
-                initialValue={currentCategory}
-                options={selectOptions}
-                onChange={(item) => handleCategoryFilter(item.value)}
-              />
+              <RichContentSelect label={textShared.secties.artikelen.categorie_select_placeholder} visuallyHiddenLabel initialValue={currentCategory} options={selectOptions} onChange={(item) => handleCategoryFilter(item.value)} />
             </Box>
           )}
 

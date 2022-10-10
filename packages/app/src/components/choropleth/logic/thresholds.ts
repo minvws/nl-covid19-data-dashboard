@@ -403,14 +403,8 @@ export const thresholds: Thresholds = {
     booster_shot_percentage: vaccineCoveragePercentageThresholds,
     autumn_2022_vaccinated_percentage: vaccineCoveragePercentageThresholds,
     other: situationsThreshold,
-    ...(Object.fromEntries(behaviorIdentifiers.map((key) => [`${key}_support`, behaviorSupportThresholds])) as Record<
-      `${BehaviorIdentifier}_support`,
-      ChoroplethThresholdsValue[]
-    >),
-    ...(Object.fromEntries(behaviorIdentifiers.map((key) => [`${key}_compliance`, behaviorComplianceThresholds])) as Record<
-      `${BehaviorIdentifier}_compliance`,
-      ChoroplethThresholdsValue[]
-    >),
+    ...(Object.fromEntries(behaviorIdentifiers.map((key) => [`${key}_support`, behaviorSupportThresholds])) as Record<`${BehaviorIdentifier}_support`, ChoroplethThresholdsValue[]>),
+    ...(Object.fromEntries(behaviorIdentifiers.map((key) => [`${key}_compliance`, behaviorComplianceThresholds])) as Record<`${BehaviorIdentifier}_compliance`, ChoroplethThresholdsValue[]>),
   },
 };
 

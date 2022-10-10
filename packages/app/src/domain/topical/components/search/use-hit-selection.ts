@@ -10,15 +10,7 @@ import { useHotkey } from '~/utils/hotkey/use-hotkey';
  * - it will set focus on the corresponding DOM element while navigating with
  *   the arrow-keys.
  */
-export function useHitSelection({
-  numberOfHits,
-  onSelectHit,
-  isEnabled = false,
-}: {
-  numberOfHits: number;
-  onSelectHit: (index: number, openInNewWindow: boolean) => void;
-  isEnabled: boolean;
-}) {
+export function useHitSelection({ numberOfHits, onSelectHit, isEnabled = false }: { numberOfHits: number; onSelectHit: (index: number, openInNewWindow: boolean) => void; isEnabled: boolean }) {
   const [focusIndex, setFocusIndex] = useState(0);
   const focusRef = useRef<HTMLAnchorElement>(null);
 

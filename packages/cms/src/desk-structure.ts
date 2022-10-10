@@ -65,11 +65,7 @@ export default () =>
         .child(
           S.list()
             .title('Groepen en Vragen')
-            .items([
-              addListItem(MdQuestionAnswer, 'Veelgestelde vragen pagina', 'veelgesteldeVragen'),
-              ...S.documentTypeListItems().filter((item) => item.getId() === 'veelgesteldeVragenGroups'),
-              ...S.documentTypeListItems().filter((item) => item.getId() === 'faqQuestion'),
-            ])
+            .items([addListItem(MdQuestionAnswer, 'Veelgestelde vragen pagina', 'veelgesteldeVragen'), ...S.documentTypeListItems().filter((item) => item.getId() === 'veelgesteldeVragenGroups'), ...S.documentTypeListItems().filter((item) => item.getId() === 'faqQuestion')])
         ),
       S.listItem()
         .id('cijferverantwoording')
@@ -78,11 +74,7 @@ export default () =>
         .child(
           S.list()
             .title('Groepen en Vragen')
-            .items([
-              addListItem(MdQuestionAnswer, 'CijferVerantwoording pagina', 'cijferVerantwoording'),
-              ...S.documentTypeListItems().filter((item) => item.getId() === 'cijferVerantwoordingGroups'),
-              ...S.documentTypeListItems().filter((item) => item.getId() === 'cijferVerantwoordingItem'),
-            ])
+            .items([addListItem(MdQuestionAnswer, 'CijferVerantwoording pagina', 'cijferVerantwoording'), ...S.documentTypeListItems().filter((item) => item.getId() === 'cijferVerantwoordingGroups'), ...S.documentTypeListItems().filter((item) => item.getId() === 'cijferVerantwoordingItem')])
         ),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
       addListItem(RiPagesFill, 'Contact', 'contact'),
@@ -96,11 +88,7 @@ export default () =>
         .child(
           S.list()
             .title('Configuraties')
-            .items(
-              S.documentTypeListItems().filter((item) =>
-                ['kpiConfiguration', 'chartConfiguration', 'ageDemographicChartConfiguration', 'donutChartConfiguration', 'choroplethConfiguration'].includes(item.getId() ?? '')
-              )
-            )
+            .items(S.documentTypeListItems().filter((item) => ['kpiConfiguration', 'chartConfiguration', 'ageDemographicChartConfiguration', 'donutChartConfiguration', 'choroplethConfiguration'].includes(item.getId() ?? '')))
         ),
 
       S.listItem()
@@ -110,11 +98,7 @@ export default () =>
         .child(
           S.list()
             .title("Pagina's en onderdelen")
-            .items([
-              ...S.documentTypeListItems().filter((item) => item.getId() === 'pageIdentifier'),
-              S.divider(),
-              ...S.documentTypeListItems().filter((item) => ['pageArticles', 'pageLinks', 'pageHighlightedItems', 'pageRichText'].includes(item.getId() ?? '')),
-            ])
+            .items([...S.documentTypeListItems().filter((item) => item.getId() === 'pageIdentifier'), S.divider(), ...S.documentTypeListItems().filter((item) => ['pageArticles', 'pageLinks', 'pageHighlightedItems', 'pageRichText'].includes(item.getId() ?? ''))])
         ),
 
       S.divider(),

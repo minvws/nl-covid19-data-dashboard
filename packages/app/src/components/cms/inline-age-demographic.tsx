@@ -35,17 +35,7 @@ export function InlineAgeDemographic(props: InlineAgeDemographicProps) {
 
   return (
     <ErrorBoundary>
-      <AgeDemographic
-        accessibility={{ key: configuration.accessibilityKey }}
-        data={data as { values: any[] }}
-        text={text}
-        leftMetricProperty={configuration.leftMetricProperty}
-        rightMetricProperty={configuration.rightMetricProperty}
-        leftColor={getColor(configuration.leftColor)}
-        rightColor={getColor(configuration.rightColor)}
-        formatValue={(n) => `${n}`}
-        maxDisplayValue={configuration.maxDisplayValue}
-      />
+      <AgeDemographic accessibility={{ key: configuration.accessibilityKey }} data={data as { values: any[] }} text={text} leftMetricProperty={configuration.leftMetricProperty} rightMetricProperty={configuration.rightMetricProperty} leftColor={getColor(configuration.leftColor)} rightColor={getColor(configuration.rightColor)} formatValue={(n) => `${n}`} maxDisplayValue={configuration.maxDisplayValue} />
       <Metadata source={source} isTileFooter />
     </ErrorBoundary>
   );

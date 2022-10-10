@@ -17,15 +17,7 @@ interface AgeDemographicTooltipContentProps<T extends AgeDemographicDefaultValue
   formatValue: (n: number) => string;
 }
 
-export function AgeDemographicTooltipContent<T extends AgeDemographicDefaultValue>({
-  value,
-  rightMetricProperty,
-  leftMetricProperty,
-  rightColor,
-  leftColor,
-  text,
-  formatValue,
-}: AgeDemographicTooltipContentProps<T>) {
+export function AgeDemographicTooltipContent<T extends AgeDemographicDefaultValue>({ value, rightMetricProperty, leftMetricProperty, rightColor, leftColor, text, formatValue }: AgeDemographicTooltipContentProps<T>) {
   const valueRight = value[rightMetricProperty];
   const rightMetricPropertyValue = typeof valueRight === 'number' ? valueRight : 0;
 

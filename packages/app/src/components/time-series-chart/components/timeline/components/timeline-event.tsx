@@ -68,21 +68,7 @@ export function TimelineEvent({ timelineContainerRef, range, size, onShow, onHid
   );
 }
 
-function TooltipTrigger({
-  isSelected,
-  content,
-  contentRef,
-  children,
-  onFocus,
-  onBlur,
-}: {
-  content: ReactNode;
-  isSelected: boolean;
-  contentRef: RefObject<HTMLDivElement>;
-  children: ReactNode;
-  onFocus: () => void;
-  onBlur: () => void;
-}) {
+function TooltipTrigger({ isSelected, content, contentRef, children, onFocus, onBlur }: { content: ReactNode; isSelected: boolean; contentRef: RefObject<HTMLDivElement>; children: ReactNode; onFocus: () => void; onBlur: () => void }) {
   const breakpoints = useBreakpoints();
   const isTouch = useIsTouchDevice();
   const uniqueId = useUniqueId();

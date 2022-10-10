@@ -3,12 +3,7 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { BoundingBoxPadding, HeightAndPadding, OptionalBoundingBoxPadding, ResponsiveSizeConfiguration, ResponsiveSizeSettings } from '~/components/choropleth';
 
-export function useResponsiveSize(
-  containerWidth: number,
-  containerDefaultHeight: number,
-  boundingBoxPadding: OptionalBoundingBoxPadding,
-  responsiveSizeConfiguration?: ResponsiveSizeConfiguration
-) {
+export function useResponsiveSize(containerWidth: number, containerDefaultHeight: number, boundingBoxPadding: OptionalBoundingBoxPadding, responsiveSizeConfiguration?: ResponsiveSizeConfiguration) {
   return useMemo(() => {
     if (!isDefined(responsiveSizeConfiguration)) {
       return [containerDefaultHeight, addDefaultPaddingValues(boundingBoxPadding)] as const;
@@ -35,9 +30,7 @@ export function useResponsiveSize(
      */
     assert(isDefined(result), `[${useResponsiveSize.name}] Cannot find valid size`);
 
-    return isResponsiveConfiguration(result)
-      ? ([result.heightAndPadding.mapHeight, addDefaultPaddingValues(result.heightAndPadding.padding)] as const)
-      : ([result.mapHeight, addDefaultPaddingValues(result.padding)] as const);
+    return isResponsiveConfiguration(result) ? ([result.heightAndPadding.mapHeight, addDefaultPaddingValues(result.heightAndPadding.padding)] as const) : ([result.mapHeight, addDefaultPaddingValues(result.padding)] as const);
   }, [responsiveSizeConfiguration, boundingBoxPadding, containerDefaultHeight, containerWidth]);
 }
 

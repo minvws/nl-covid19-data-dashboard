@@ -5,15 +5,7 @@ import { Markdown } from '~/components/markdown';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { SiteText } from '~/locale';
 
-export function DeceasedMonitorSection({
-  data,
-  text,
-  showCauseMessage,
-}: {
-  data: NlDeceasedCbs | VrDeceasedCbs;
-  text: SiteText['pages']['deceased_page']['shared']['section_sterftemonitor'];
-  showCauseMessage?: boolean;
-}) {
+export function DeceasedMonitorSection({ data, text, showCauseMessage }: { data: NlDeceasedCbs | VrDeceasedCbs; text: SiteText['pages']['deceased_page']['shared']['section_sterftemonitor']; showCauseMessage?: boolean }) {
   return (
     <>
       <ChartTile metadata={{ source: text.bronnen.cbs }} title={text.deceased_monitor_chart_title} description={text.deceased_monitor_chart_description}>

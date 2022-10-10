@@ -64,16 +64,7 @@ interface HitLinkProps {
 const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(({ href, children, hasFocus, onClick, onHover, onFocus, id, isActiveResult }, ref) => {
   return (
     <Link passHref href={href}>
-      <StyledHitLink
-        ref={ref}
-        onFocus={onFocus}
-        onMouseMove={onHover}
-        role="option"
-        id={id}
-        aria-selected={hasFocus ? 'true' : 'false'}
-        aria-current={isActiveResult ? 'true' : 'false'}
-        onClick={onClick}
-      >
+      <StyledHitLink ref={ref} onFocus={onFocus} onMouseMove={onHover} role="option" id={id} aria-selected={hasFocus ? 'true' : 'false'} aria-current={isActiveResult ? 'true' : 'false'} onClick={onClick}>
         {children}
       </StyledHitLink>
     </Link>

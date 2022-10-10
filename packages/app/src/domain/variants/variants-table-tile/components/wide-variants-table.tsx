@@ -51,13 +51,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
                 <NoPercentageData text={text} />
               )}
             </Cell>
-            <Cell>
-              {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? (
-                <VariantDifference value={row.difference as DifferenceDecimal} text={text} />
-              ) : (
-                '-'
-              )}
-            </Cell>
+            <Cell>{isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? <VariantDifference value={row.difference as DifferenceDecimal} text={text} /> : '-'}</Cell>
           </tr>
         ))}
       </tbody>

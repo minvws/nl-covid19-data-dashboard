@@ -18,11 +18,7 @@ import { isCodedValueType } from './utils';
  */
 const DEFAULT_TOOLTIP_OFFSET = 5;
 
-export type ChoroplethTooltipHandlers = [
-  ReturnType<typeof createFeatureMouseOverHandler>,
-  ReturnType<typeof createFeatureMouseOutHandler>,
-  ReturnType<typeof createTooltipTrigger>
-];
+export type ChoroplethTooltipHandlers = [ReturnType<typeof createFeatureMouseOverHandler>, ReturnType<typeof createFeatureMouseOutHandler>, ReturnType<typeof createTooltipTrigger>];
 
 /**
  * This hooks returns a toolset of functions that are used to display
@@ -38,15 +34,7 @@ export type ChoroplethTooltipHandlers = [
  * @param containerRef
  * @returns
  */
-export function useChoroplethTooltip<T extends ChoroplethDataItem>(
-  map: MapType,
-  data: T[],
-  dataConfig: DataConfig<T>,
-  dataOptions: DataOptions,
-  showTooltipOnFocus: boolean | undefined,
-  setTooltip: (tooltip: TooltipSettings<T> | undefined) => void,
-  containerRef: React.RefObject<HTMLDivElement>
-) {
+export function useChoroplethTooltip<T extends ChoroplethDataItem>(map: MapType, data: T[], dataConfig: DataConfig<T>, dataOptions: DataOptions, showTooltipOnFocus: boolean | undefined, setTooltip: (tooltip: TooltipSettings<T> | undefined) => void, containerRef: React.RefObject<HTMLDivElement>) {
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
   const intl = useIntl();
@@ -133,25 +121,12 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     };
   }, [containerRef, setTooltip, showTooltipOnFocus, isTouch, getFeatureName, dataConfig, dataOptions, getItemByCode, threshold, map, metricPropertyFormatter]);
 
-  return [
-    createFeatureMouseOverHandler(timeout, setTooltip, containerRef, getItemByCode, dataConfig, dataOptions, threshold, getFeatureName, map, metricPropertyFormatter),
-    createFeatureMouseOutHandler(timeout, setTooltip, isTouch),
-    createTooltipTrigger(setTooltip, getItemByCode, dataConfig, dataOptions, threshold, getFeatureName, map, metricPropertyFormatter),
-  ] as ChoroplethTooltipHandlers;
+  return [createFeatureMouseOverHandler(timeout, setTooltip, containerRef, getItemByCode, dataConfig, dataOptions, threshold, getFeatureName, map, metricPropertyFormatter), createFeatureMouseOutHandler(timeout, setTooltip, isTouch), createTooltipTrigger(setTooltip, getItemByCode, dataConfig, dataOptions, threshold, getFeatureName, map, metricPropertyFormatter)] as ChoroplethTooltipHandlers;
 }
 
 type HoverInfo = { code: CodeProp; x: number; y: number };
 
-const createTooltipTrigger = <T extends ChoroplethDataItem>(
-  setTooltip: (settings: TooltipSettings<T> | undefined) => void,
-  getItemByCode: (code: CodeProp) => T,
-  dataConfig: DataConfig<T>,
-  dataOptions: DataOptions,
-  threshold: ChoroplethThresholdsValue[],
-  getFeatureName: (code: string) => string,
-  map: MapType,
-  metricPropertyFormatter: (value: number) => string
-) => {
+const createTooltipTrigger = <T extends ChoroplethDataItem>(setTooltip: (settings: TooltipSettings<T> | undefined) => void, getItemByCode: (code: CodeProp) => T, dataConfig: DataConfig<T>, dataOptions: DataOptions, threshold: ChoroplethThresholdsValue[], getFeatureName: (code: string) => string, map: MapType, metricPropertyFormatter: (value: number) => string) => {
   return (hoverInfo?: HoverInfo) => {
     if (!isDefined(hoverInfo)) {
       return setTooltip(undefined);
@@ -175,18 +150,7 @@ const createTooltipTrigger = <T extends ChoroplethDataItem>(
   };
 };
 
-const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
-  timeout: MutableRefObject<number>,
-  setTooltip: (settings: TooltipSettings<T> | undefined) => void,
-  ref: RefObject<HTMLElement>,
-  getItemByCode: (code: CodeProp) => T,
-  dataConfig: DataConfig<T>,
-  dataOptions: DataOptions,
-  threshold: ChoroplethThresholdsValue[],
-  getFeatureName: (code: string) => string,
-  map: MapType,
-  metricPropertyFormatter: (value: number) => string
-) => {
+const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(timeout: MutableRefObject<number>, setTooltip: (settings: TooltipSettings<T> | undefined) => void, ref: RefObject<HTMLElement>, getItemByCode: (code: CodeProp) => T, dataConfig: DataConfig<T>, dataOptions: DataOptions, threshold: ChoroplethThresholdsValue[], getFeatureName: (code: string) => string, map: MapType, metricPropertyFormatter: (value: number) => string) => {
   return (event: React.MouseEvent<HTMLElement>) => {
     const elm = event.target as HTMLElement;
     const code = elm.getAttribute('data-id') as CodeProp;
@@ -222,11 +186,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   };
 };
 
-const createFeatureMouseOutHandler = <T extends ChoroplethDataItem>(
-  timeout: MutableRefObject<number>,
-  setTooltip: (settings: TooltipSettings<T> | undefined) => void,
-  isTouch: boolean
-) => {
+const createFeatureMouseOutHandler = <T extends ChoroplethDataItem>(timeout: MutableRefObject<number>, setTooltip: (settings: TooltipSettings<T> | undefined) => void, isTouch: boolean) => {
   return isTouch
     ? undefined
     : () => {

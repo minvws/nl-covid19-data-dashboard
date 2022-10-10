@@ -84,16 +84,7 @@ export function VrLayout(props: VrLayoutProps) {
         sidebarComponent={
           <>
             {!isLandingPage && showMetricLinks && (
-              <Box
-                as="nav"
-                id="metric-navigation"
-                aria-labelledby="sidebar-title"
-                role="navigation"
-                backgroundColor="white"
-                maxWidth={{ _: '38rem', md: undefined }}
-                mx="auto"
-                spacing={1}
-              >
+              <Box as="nav" id="metric-navigation" aria-labelledby="sidebar-title" role="navigation" backgroundColor="white" maxWidth={{ _: '38rem', md: undefined }} mx="auto" spacing={1}>
                 <Box px={3}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">{commonTexts.veiligheidsregio_layout.headings.sidebar}</VisuallyHidden>

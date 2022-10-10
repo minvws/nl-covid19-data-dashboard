@@ -70,15 +70,7 @@ export function SituationsOverviewChoroplethTile({ data, text }: SmallMultiplesC
                 }}
                 minHeight={breakpoints.sm ? 280 : 260}
                 tooltipPlacement="top-center"
-                formatTooltip={(context) => (
-                  <ChoroplethTooltip
-                    isPercentage
-                    value={context.dataItem[situation.id]}
-                    regionName={context.featureName}
-                    thresholds={thresholds.vr[situation.id]}
-                    noDataFillColor={colors.gray2}
-                  />
-                )}
+                formatTooltip={(context) => <ChoroplethTooltip isPercentage value={context.dataItem[situation.id]} regionName={context.featureName} thresholds={thresholds.vr[situation.id]} noDataFillColor={colors.gray2} />}
               />
             </ChoroplethGridItem>
           ))}

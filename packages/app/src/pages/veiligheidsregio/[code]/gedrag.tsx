@@ -114,17 +114,7 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
             </Tile>
           </TwoKpiSection>
 
-          <BehaviorTableTile
-            title={text.vr.basisregels.title}
-            description={text.vr.basisregels.description}
-            complianceExplanation={text.vr.basisregels.volgen_beschrijving}
-            supportExplanation={text.vr.basisregels.steunen_beschrijving}
-            value={behaviorLastValue}
-            annotation={text.vr.basisregels.annotatie}
-            setCurrentId={setCurrentId}
-            scrollRef={scrollToRef}
-            text={text.shared}
-          />
+          <BehaviorTableTile title={text.vr.basisregels.title} description={text.vr.basisregels.description} complianceExplanation={text.vr.basisregels.volgen_beschrijving} supportExplanation={text.vr.basisregels.steunen_beschrijving} value={behaviorLastValue} annotation={text.vr.basisregels.annotatie} setCurrentId={setCurrentId} scrollRef={scrollToRef} text={text.shared} />
 
           <span ref={scrollToRef} />
           <BehaviorLineChartTile

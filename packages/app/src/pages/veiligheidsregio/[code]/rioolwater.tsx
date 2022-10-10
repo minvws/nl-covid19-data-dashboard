@@ -95,13 +95,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 source: textVr.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="average"
-                absolute={data.sewer.last_value.average}
-                valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
-                difference={data.difference.sewer__average}
-                isAmount
-              />
+              <KpiValue data-cy="average" absolute={data.sewer.last_value.average} valueAnnotation={commonTexts.waarde_annotaties.riool_normalized} difference={data.difference.sewer__average} isAmount />
             </KpiTile>
 
             <KpiTile title={textVr.tile_explanation_title} description={textVr.tile_explanation_description} />

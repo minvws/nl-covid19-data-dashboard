@@ -2,9 +2,7 @@ import { GmCollectionVaccineCoveragePerAgeGroup, VrCollectionVaccineCoveragePerA
 import { isPresent } from 'ts-is-present';
 import { parseVaccinatedPercentageLabel } from '../logic/parse-vaccinated-percentage-label';
 
-export function selectVaccineCoverageData<T extends GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup | VrVaccineCoveragePerAgeGroupValue>(
-  data: T[]
-) {
+export function selectVaccineCoverageData<T extends GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup | VrVaccineCoveragePerAgeGroupValue>(data: T[]) {
   return data.map((vaccineCoveragePerAgeGroup) => {
     const parsedLabels: {
       fully_vaccinated_percentage?: number;

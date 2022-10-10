@@ -42,24 +42,7 @@ export type CanvasChoroplethMapProps = {
 const oneTransparentPixelImage = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC';
 
 export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
-  const {
-    anchorEventHandlers,
-    annotations,
-    choroplethFeatures,
-    containerRef,
-    dataOptions,
-    featureOutHandler,
-    featureOverHandler,
-    featureProps,
-    fitExtent,
-    getFeatureName,
-    height,
-    minHeight,
-    isTabInteractive,
-    mapProjection,
-    tooltipTrigger,
-    width,
-  } = props;
+  const { anchorEventHandlers, annotations, choroplethFeatures, containerRef, dataOptions, featureOutHandler, featureOverHandler, featureProps, fitExtent, getFeatureName, height, minHeight, isTabInteractive, mapProjection, tooltipTrigger, width } = props;
 
   const [hover, setHover] = useState<[number, number][][]>();
   const [hoverCode, setHoverCode] = useState<CodeProp>();
@@ -130,18 +113,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
 
   return (
     <>
-      <AreaMap
-        width={width}
-        height={height}
-        isTabInteractive={isTabInteractive}
-        geoInfo={geoInfo}
-        getLink={getLink}
-        getFeatureName={getFeatureName}
-        anchorEventHandlers={anchorEventHandlers}
-        selectFeature={selectFeature}
-        id={mapId}
-        handleMouseOver={handleMouseOver}
-      />
+      <AreaMap width={width} height={height} isTabInteractive={isTabInteractive} geoInfo={geoInfo} getLink={getLink} getFeatureName={getFeatureName} anchorEventHandlers={anchorEventHandlers} selectFeature={selectFeature} id={mapId} handleMouseOver={handleMouseOver} />
       <div
         ref={containerRef}
         style={{
@@ -197,16 +169,7 @@ const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
   return (
     <Group listening={false}>
       {feature.map((x, i) => (
-        <Line
-          listening={false}
-          key={i}
-          x={0}
-          y={0}
-          points={x.flat()}
-          strokeWidth={featureProps.hover.strokeWidth(code, true)}
-          closed
-          stroke={featureProps.hover.stroke(code, false)}
-        />
+        <Line listening={false} key={i} x={0} y={0} points={x.flat()} strokeWidth={featureProps.hover.strokeWidth(code, true)} closed stroke={featureProps.hover.stroke(code, false)} />
       ))}
     </Group>
   );
@@ -231,16 +194,7 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
     <Layer listening={false}>
       <Group ref={hoveredRef} listening={false}>
         {hover.map((x, i) => (
-          <Line
-            listening={false}
-            key={i}
-            x={0}
-            y={0}
-            points={x.flat()}
-            strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
-            closed
-            stroke={featureProps.hover.stroke(hoverCode, true, isKeyboardActive)}
-          />
+          <Line listening={false} key={i} x={0} y={0} points={x.flat()} strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)} closed stroke={featureProps.hover.stroke(hoverCode, true, isKeyboardActive)} />
         ))}
       </Group>
     </Layer>
@@ -260,17 +214,7 @@ const Outlines = memo((props: OutlinesProps) => {
   return (
     <Layer listening={false}>
       {geoInfo.map((x, i) => (
-        <Line
-          listening={false}
-          perfectDrawEnabled={false}
-          closed
-          key={`${x.code}_${i}`}
-          x={0}
-          y={0}
-          strokeWidth={featureProps.outline.strokeWidth('')}
-          points={x.coordinates.flat()}
-          stroke={featureProps.outline.stroke('')}
-        />
+        <Line listening={false} perfectDrawEnabled={false} closed key={`${x.code}_${i}`} x={0} y={0} strokeWidth={featureProps.outline.strokeWidth('')} points={x.coordinates.flat()} stroke={featureProps.outline.stroke('')} />
       ))}
     </Layer>
   );
@@ -315,19 +259,7 @@ const Features = memo((props: FeaturesProps) => {
       <Layer listening={false}>
         <Group listening={false}>
           {geoInfo.map((x, i) => (
-            <Line
-              key={`${x.code}_${i}`}
-              listening={false}
-              perfectDrawEnabled={false}
-              closed
-              id={x.code}
-              x={0}
-              y={0}
-              strokeWidth={featureProps.area.strokeWidth(x.code)}
-              points={x.coordinates.flat()}
-              fill={getFillColor(x.code, i)}
-              stroke={featureProps.area.stroke(x.code)}
-            />
+            <Line key={`${x.code}_${i}`} listening={false} perfectDrawEnabled={false} closed id={x.code} x={0} y={0} strokeWidth={featureProps.area.strokeWidth(x.code)} points={x.coordinates.flat()} fill={getFillColor(x.code, i)} stroke={featureProps.area.stroke(x.code)} />
           ))}
         </Group>
         {children}

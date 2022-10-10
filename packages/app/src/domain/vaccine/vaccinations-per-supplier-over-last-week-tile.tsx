@@ -20,21 +20,7 @@ interface VaccinationsPerSupplierOverLastWeekTileProps {
  * This has been introduced as part of COR-938.
  * @TODO - remove duplicates when/if BE is able to provide IDs.
  */
-const vaccines = [
-  'bio_n_tech_pfizer',
-  'pfizer',
-  'BioNTech/Pfizer',
-  'moderna',
-  'Moderna',
-  'astra_zeneca',
-  'AstraZeneca',
-  'janssen',
-  'Janssen',
-  'novavax',
-  'Novavax',
-  'cure_vac',
-  'sanofi',
-] as const;
+const vaccines = ['bio_n_tech_pfizer', 'pfizer', 'BioNTech/Pfizer', 'moderna', 'Moderna', 'astra_zeneca', 'AstraZeneca', 'janssen', 'Janssen', 'novavax', 'Novavax', 'cure_vac', 'sanofi'] as const;
 vaccines.forEach((vaccine) => assert(colors.vaccines[vaccine], `[${VaccinationsPerSupplierOverLastWeekTile.name}] missing vaccine color for vaccine ${vaccine}`));
 
 export function VaccinationsPerSupplierOverLastWeekTile({ title, description, data, metadata }: VaccinationsPerSupplierOverLastWeekTileProps) {

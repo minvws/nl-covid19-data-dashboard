@@ -1,20 +1,4 @@
-import type {
-  GmCollection,
-  GmCollectionHospitalNice,
-  GmCollectionSewer,
-  GmCollectionTestedOverall,
-  GmCollectionVaccineCoveragePerAgeGroup,
-  VrCollection,
-  VrCollectionBehavior,
-  VrCollectionDisabilityCare,
-  VrCollectionElderlyAtHome,
-  VrCollectionHospitalNice,
-  VrCollectionNursingHome,
-  VrCollectionSewer,
-  VrCollectionSituations,
-  VrCollectionTestedOverall,
-  VrCollectionVaccineCoveragePerAgeGroup,
-} from '@corona-dashboard/common';
+import type { GmCollection, GmCollectionHospitalNice, GmCollectionSewer, GmCollectionTestedOverall, GmCollectionVaccineCoveragePerAgeGroup, VrCollection, VrCollectionBehavior, VrCollectionDisabilityCare, VrCollectionElderlyAtHome, VrCollectionHospitalNice, VrCollectionNursingHome, VrCollectionSewer, VrCollectionSituations, VrCollectionTestedOverall, VrCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 
@@ -55,17 +39,7 @@ export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem 
 
 export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
 
-export type VrDataCollection =
-  | VrCollectionHospitalNice[]
-  | VrCollectionHospitalNice[]
-  | VrCollectionTestedOverall[]
-  | VrCollectionNursingHome[]
-  | VrCollectionSewer[]
-  | VrCollectionBehavior[]
-  | VrCollectionDisabilityCare[]
-  | VrCollectionElderlyAtHome[]
-  | VrCollectionSituations[]
-  | VrCollectionVaccineCoveragePerAgeGroup[];
+export type VrDataCollection = VrCollectionHospitalNice[] | VrCollectionHospitalNice[] | VrCollectionTestedOverall[] | VrCollectionNursingHome[] | VrCollectionSewer[] | VrCollectionBehavior[] | VrCollectionDisabilityCare[] | VrCollectionElderlyAtHome[] | VrCollectionSituations[] | VrCollectionVaccineCoveragePerAgeGroup[];
 export type VrDataItem = VrDataCollection[number];
 
 export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];

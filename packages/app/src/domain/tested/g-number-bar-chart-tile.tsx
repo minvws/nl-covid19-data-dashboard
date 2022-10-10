@@ -31,14 +31,7 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
       title={text.title}
       description={text.description}
       timeframeInitialValue={timeframeInitialValue}
-      timeframeOptions={[
-        TimeframeOption.ALL,
-        TimeframeOption.ONE_WEEK,
-        TimeframeOption.THIRTY_DAYS,
-        TimeframeOption.THREE_MONTHS,
-        TimeframeOption.SIX_MONTHS,
-        TimeframeOption.LAST_YEAR,
-      ]}
+      timeframeOptions={[TimeframeOption.ALL, TimeframeOption.ONE_WEEK, TimeframeOption.THIRTY_DAYS, TimeframeOption.THREE_MONTHS, TimeframeOption.SIX_MONTHS, TimeframeOption.LAST_YEAR]}
       metadata={{
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,

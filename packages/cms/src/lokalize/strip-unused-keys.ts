@@ -11,16 +11,7 @@ import { getClient } from '../client';
 import { appendTextMutation } from './logic/mutations';
 
 // These keys aren't directly referenced in the code base, so we add them manually here
-const whitelist = [
-  'choropleth.tested_overall',
-  'choropleth.escalation_levels',
-  'choropleth.hospital_nice',
-  'choropleth.nursing_home',
-  'choropleth.disability_care',
-  'choropleth.elderly_at_home',
-  'choropleth.sewer',
-  'choropleth.behavior',
-];
+const whitelist = ['choropleth.tested_overall', 'choropleth.escalation_levels', 'choropleth.hospital_nice', 'choropleth.nursing_home', 'choropleth.disability_care', 'choropleth.elderly_at_home', 'choropleth.sewer', 'choropleth.behavior'];
 
 const APP_LOCALE_DIR = path.join(__dirname, '../../../app/src/locale');
 

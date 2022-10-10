@@ -14,29 +14,8 @@ type MiniTrendChartProps<T extends TimestampedValue = TimestampedValue> = {
   displayTooltipValueOnly?: boolean;
 };
 
-export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
-  accessibility,
-  seriesConfig,
-  dataOptions,
-  timeframe = TimeframeOption.FIVE_WEEKS,
-  values,
-  displayTooltipValueOnly,
-}: MiniTrendChartProps<T>) {
+export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({ accessibility, seriesConfig, dataOptions, timeframe = TimeframeOption.FIVE_WEEKS, values, displayTooltipValueOnly }: MiniTrendChartProps<T>) {
   const { sm } = useBreakpoints(true);
 
-  return (
-    <TimeSeriesChart
-      accessibility={accessibility}
-      initialWidth={400}
-      minHeight={sm ? 180 : 140}
-      timeframe={timeframe}
-      displayTooltipValueOnly={displayTooltipValueOnly}
-      xTickNumber={2}
-      values={values}
-      numGridLines={3}
-      seriesConfig={seriesConfig}
-      dataOptions={dataOptions}
-      isYAxisCollapsed
-    />
-  );
+  return <TimeSeriesChart accessibility={accessibility} initialWidth={400} minHeight={sm ? 180 : 140} timeframe={timeframe} displayTooltipValueOnly={displayTooltipValueOnly} xTickNumber={2} values={values} numGridLines={3} seriesConfig={seriesConfig} dataOptions={dataOptions} isYAxisCollapsed />;
 }

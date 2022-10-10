@@ -15,11 +15,7 @@ const git = simpleGit();
 (async function run() {
   if (!isDefined(process.env.GITHUB_PERSONAL_ACCESS_TOKEN)) {
     console.group(chalk.red('Missing environment:'));
-    console.error(
-      chalk.red(
-        'No GITHUB_PERSONAL_ACCESS_TOKEN env var available, create a .env.local file in the root of the packages/cli directory and add it there.\nFind out how to generate an access token by following this URL:\nhttps://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token\nOr check docs/release-procedure for more pointers.'
-      )
-    );
+    console.error(chalk.red('No GITHUB_PERSONAL_ACCESS_TOKEN env var available, create a .env.local file in the root of the packages/cli directory and add it there.\nFind out how to generate an access token by following this URL:\nhttps://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token\nOr check docs/release-procedure for more pointers.'));
     console.groupEnd();
     process.exit(0);
   }
@@ -155,8 +151,7 @@ async function checkForConflicts(): Promise<true> {
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message:
-          "There are conflicts in the release branch, fix those manually and choose 'Y', otherwise the process will be aborted.\n(You will have to delete the release branch manually if you want to start this process again)",
+        message: "There are conflicts in the release branch, fix those manually and choose 'Y', otherwise the process will be aborted.\n(You will have to delete the release branch manually if you want to start this process again)",
         initial: false,
       },
     ]);
@@ -201,16 +196,7 @@ function hasConficts(status: StatusResult) {
 }
 
 function hasChanges(status: StatusResult) {
-  return (
-    status.not_added.length ||
-    status.conflicted.length ||
-    status.created.length ||
-    status.deleted.length ||
-    status.modified.length ||
-    status.renamed.length ||
-    status.files.length ||
-    status.staged.length
-  );
+  return status.not_added.length || status.conflicted.length || status.created.length || status.deleted.length || status.modified.length || status.renamed.length || status.files.length || status.staged.length;
 }
 
 function onState(state: { aborted: boolean }) {

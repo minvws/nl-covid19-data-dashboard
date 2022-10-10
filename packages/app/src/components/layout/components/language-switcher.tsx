@@ -18,13 +18,7 @@ export function LanguageSwitcher() {
 
       <Separator aria-hidden="true" />
 
-      <LanguageLink
-        href={`https://coronadashboard.government.nl${currentPath}`}
-        lang="en-GB"
-        hrefLang="en-GB"
-        isActive={locale?.startsWith('en') ?? false}
-        title="Website in English"
-      >
+      <LanguageLink href={`https://coronadashboard.government.nl${currentPath}`} lang="en-GB" hrefLang="en-GB" isActive={locale?.startsWith('en') ?? false} title="Website in English">
         EN
       </LanguageLink>
     </Box>

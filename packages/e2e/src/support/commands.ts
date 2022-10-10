@@ -64,10 +64,7 @@ declare global {
 
 Cypress.Commands.add('checkHeadings', () => {
   const headings = Cypress.$('h1');
-  expect(headings.length).to.equal(
-    1,
-    'More than one <H1> element was found on the page, only one is allowed. This might be because there are multiple <ContentHeader> components on the page that all have a category prop assigned. This prop is rendered as an <H1> element. Remove one of those props to fix this error.'
-  );
+  expect(headings.length).to.equal(1, 'More than one <H1> element was found on the page, only one is allowed. This might be because there are multiple <ContentHeader> components on the page that all have a category prop assigned. This prop is rendered as an <H1> element. Remove one of those props to fix this error.');
 });
 
 Cypress.Commands.add('beforeGeneralTests', (pageName: string) => {

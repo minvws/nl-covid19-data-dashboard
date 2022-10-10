@@ -34,11 +34,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
-export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
-  getLastGeneratedDate,
-  selectNlData('difference.corona_melder_app_warning__count', 'corona_melder_app_warning', 'corona_melder_app_download')
-);
+export const getStaticProps = createGetStaticProps(({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale), getLastGeneratedDate, selectNlData('difference.corona_melder_app_warning__count', 'corona_melder_app_warning', 'corona_melder_app_download'));
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
   const [coronamelderTimeframe, setCoronamelderTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -75,9 +71,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={corona_melder_app.header.reference.href}
           />
 
-          {corona_melder_app.belangrijk_bericht && !isEmpty(corona_melder_app.belangrijk_bericht) && (
-            <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="emphasis" />
-          )}
+          {corona_melder_app.belangrijk_bericht && !isEmpty(corona_melder_app.belangrijk_bericht) && <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile

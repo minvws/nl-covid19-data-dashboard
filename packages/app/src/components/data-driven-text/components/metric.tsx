@@ -9,15 +9,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Content, DataFile, DataKeys } from '..';
 import { getPluralizedText } from '../logic/get-pluralized-text';
 
-export function Metric<T extends DataKeys, K = DataFile<T>>({
-  data,
-  metricName,
-  metricProperty,
-  differenceKey,
-  text,
-  additionalData,
-  isPercentage,
-}: Extract<Content<T>, { type: 'metric' }> & { data: K }) {
+export function Metric<T extends DataKeys, K = DataFile<T>>({ data, metricName, metricProperty, differenceKey, text, additionalData, isPercentage }: Extract<Content<T>, { type: 'metric' }> & { data: K }) {
   const { commonTexts, formatNumber } = useIntl();
 
   const lastValue = get(data, [metricName, 'last_value']);
@@ -36,13 +28,7 @@ export function Metric<T extends DataKeys, K = DataFile<T>>({
   return (
     <>
       {replaceComponentsInText(baseText, {
-        newDate: differenceValue && (
-          <RelativeDate
-            dateInSeconds={differenceValue.new_date_unix}
-            isCapitalized={baseText.indexOf('{{newDate}}') === 0}
-            absoluteDateTemplate={commonTexts.common.absolute_date_template}
-          />
-        ),
+        newDate: differenceValue && <RelativeDate dateInSeconds={differenceValue.new_date_unix} isCapitalized={baseText.indexOf('{{newDate}}') === 0} absoluteDateTemplate={commonTexts.common.absolute_date_template} />,
         propertyValue: <BoldText>{`${formatNumber(propertyValue)}${isPercentage ? '%' : ''}`}</BoldText>,
         ...(additionalData || {}),
       })}

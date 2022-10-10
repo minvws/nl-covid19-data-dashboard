@@ -23,14 +23,7 @@ export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, he
 
       <tbody>
         {campaigns.map((campaign, index) => (
-          <VaccineCampaignRow
-            key={campaign.vaccine_campaign_order}
-            campaign={campaign}
-            campaignDescriptions={campaignDescriptions}
-            headers={headers}
-            isFirst={index === 0}
-            isLast={index + 1 === campaigns.length}
-          />
+          <VaccineCampaignRow key={campaign.vaccine_campaign_order} campaign={campaign} campaignDescriptions={campaignDescriptions} headers={headers} isFirst={index === 0} isLast={index + 1 === campaigns.length} />
         ))}
       </tbody>
     </StyledTable>
@@ -68,8 +61,7 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, 
 
             <tr>
               <Cell css={css({ py: 0 })} mobile>
-                {headers.last_week}:{' '}
-                {isOpen ? <strong>{formatNumber(campaign.vaccine_administered_last_week)}</strong> : <>{formatNumber(campaign.vaccine_administered_last_week)}</>}
+                {headers.last_week}: {isOpen ? <strong>{formatNumber(campaign.vaccine_administered_last_week)}</strong> : <>{formatNumber(campaign.vaccine_administered_last_week)}</>}
               </Cell>
             </tr>
 

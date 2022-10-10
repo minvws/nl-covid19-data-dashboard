@@ -12,20 +12,7 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-export function VaccineAdministrationsKpiSection({
-  data,
-  text,
-}: {
-  data: Pick<
-    Nl,
-    | 'vaccine_administered_total'
-    | 'vaccine_administered_ggd'
-    | 'vaccine_administered_hospitals_and_care_institutions'
-    | 'vaccine_administered_doctors'
-    | 'vaccine_administered_ggd_ghor'
-  >;
-  text: SiteText['pages']['vaccinations_page']['nl'];
-}) {
+export function VaccineAdministrationsKpiSection({ data, text }: { data: Pick<Nl, 'vaccine_administered_total' | 'vaccine_administered_ggd' | 'vaccine_administered_hospitals_and_care_institutions' | 'vaccine_administered_doctors' | 'vaccine_administered_ggd_ghor'>; text: SiteText['pages']['vaccinations_page']['nl'] }) {
   const [selectedTab, setSelectedTab] = useState(text.gezette_prikken.tab_first.title);
 
   return (
@@ -60,26 +47,11 @@ export function VaccineAdministrationsKpiSection({
                 <Markdown content={text.gezette_prikken.tab_first.description} />
               </Box>
               <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }} spacing={3}>
-                <VaccineAdministeredItem
-                  value={data.vaccine_administered_ggd.last_value.estimated}
-                  description={text.gezette_prikken.estimated.ggd}
-                  date={data.vaccine_administered_ggd.last_value.date_unix}
-                  text={text.gezette_prikken}
-                />
+                <VaccineAdministeredItem value={data.vaccine_administered_ggd.last_value.estimated} description={text.gezette_prikken.estimated.ggd} date={data.vaccine_administered_ggd.last_value.date_unix} text={text.gezette_prikken} />
 
-                <VaccineAdministeredItem
-                  value={data.vaccine_administered_hospitals_and_care_institutions.last_value.estimated}
-                  description={text.gezette_prikken.estimated.hospitals_and_care_institutions}
-                  date={data.vaccine_administered_hospitals_and_care_institutions.last_value.date_unix}
-                  text={text.gezette_prikken}
-                />
+                <VaccineAdministeredItem value={data.vaccine_administered_hospitals_and_care_institutions.last_value.estimated} description={text.gezette_prikken.estimated.hospitals_and_care_institutions} date={data.vaccine_administered_hospitals_and_care_institutions.last_value.date_unix} text={text.gezette_prikken} />
 
-                <VaccineAdministeredItem
-                  value={data.vaccine_administered_doctors.last_value.estimated}
-                  description={text.gezette_prikken.estimated.doctors}
-                  date={data.vaccine_administered_doctors.last_value.date_unix}
-                  text={text.gezette_prikken}
-                />
+                <VaccineAdministeredItem value={data.vaccine_administered_doctors.last_value.estimated} description={text.gezette_prikken.estimated.doctors} date={data.vaccine_administered_doctors.last_value.date_unix} text={text.gezette_prikken} />
               </Box>
             </Box>
           </>
@@ -92,13 +64,7 @@ export function VaccineAdministrationsKpiSection({
                 <Markdown content={text.gezette_prikken.tab_second.description} />
               </Box>
               <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                <VaccineAdministeredItem
-                  value={data.vaccine_administered_ggd_ghor.last_value.reported}
-                  description={text.gezette_prikken.reported.ggd_ghor}
-                  date={data.vaccine_administered_ggd_ghor.last_value.date_unix}
-                  isReported
-                  text={text.gezette_prikken}
-                />
+                <VaccineAdministeredItem value={data.vaccine_administered_ggd_ghor.last_value.reported} description={text.gezette_prikken.reported.ggd_ghor} date={data.vaccine_administered_ggd_ghor.last_value.date_unix} isReported text={text.gezette_prikken} />
               </Box>
             </Box>
           </>

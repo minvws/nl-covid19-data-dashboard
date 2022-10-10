@@ -6,39 +6,11 @@ export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' 
 
 export type GmCategoryKeys = SharedCategoryKeys;
 
-export type VrItemKeys =
-  | 'compliance'
-  | 'disabled_care'
-  | 'elderly_at_home'
-  | 'hospital_admissions'
-  | 'current_advices'
-  | 'mortality'
-  | 'nursing_home_care'
-  | 'positive_tests'
-  | 'sewage_measurement'
-  | 'source_investigation'
-  | 'vaccinations';
+export type VrItemKeys = 'compliance' | 'disabled_care' | 'elderly_at_home' | 'hospital_admissions' | 'current_advices' | 'mortality' | 'nursing_home_care' | 'positive_tests' | 'sewage_measurement' | 'source_investigation' | 'vaccinations';
 
 export type VrCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
-export type NlItemKeys =
-  | 'compliance'
-  | 'coronamelder_app'
-  | 'disabled_care'
-  | 'elderly_at_home'
-  | 'general_practitioner_suspicions'
-  | 'hospital_admissions'
-  | 'intensive_care_admissions'
-  | 'infectious_people'
-  | 'current_advices'
-  | 'mortality'
-  | 'nursing_home_care'
-  | 'positive_tests'
-  | 'reproduction_number'
-  | 'sewage_measurement'
-  | 'source_investigation'
-  | 'vaccinations'
-  | 'variants';
+export type NlItemKeys = 'compliance' | 'coronamelder_app' | 'disabled_care' | 'elderly_at_home' | 'general_practitioner_suspicions' | 'hospital_admissions' | 'intensive_care_admissions' | 'infectious_people' | 'current_advices' | 'mortality' | 'nursing_home_care' | 'positive_tests' | 'reproduction_number' | 'sewage_measurement' | 'source_investigation' | 'vaccinations' | 'variants';
 
 export type NlCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 

@@ -7,13 +7,7 @@ export function placeholderizeLabel(renderedLabel: string) {
   return renderedLabel.toLocaleLowerCase();
 }
 
-export function getRenderedVaccinatedLabel(
-  unparsedLabel: string | null,
-  value: number | null,
-  higherLabel: string,
-  lowerLabel: string,
-  formatPercentage: (value: number) => string
-) {
+export function getRenderedVaccinatedLabel(unparsedLabel: string | null, value: number | null, higherLabel: string, lowerLabel: string, formatPercentage: (value: number) => string) {
   if (!isPresent(unparsedLabel)) {
     return value?.toString() ?? '';
   }
@@ -38,12 +32,7 @@ export function parseVaccinatedPercentageLabel(label: string): ParsedFullyVaccin
   return null;
 }
 
-export function renderVaccinatedLabel(
-  parsedVaccinatedLabel: ParsedFullyVaccinatedPercentageLabel | null,
-  higherLabel: string,
-  lowerLabel: string,
-  formatPercentage: (value: number) => string
-) {
+export function renderVaccinatedLabel(parsedVaccinatedLabel: ParsedFullyVaccinatedPercentageLabel | null, higherLabel: string, lowerLabel: string, formatPercentage: (value: number) => string) {
   return isPresent(parsedVaccinatedLabel)
     ? parsedVaccinatedLabel.sign === '>'
       ? replaceVariablesInText(higherLabel, {

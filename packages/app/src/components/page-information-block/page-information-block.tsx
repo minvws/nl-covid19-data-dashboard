@@ -40,22 +40,7 @@ interface InformationBlockProps {
   onToggleArchived?: () => void;
 }
 
-export function PageInformationBlock({
-  title,
-  icon,
-  description,
-  articles,
-  pageLinks,
-  metadata,
-  referenceLink,
-  id,
-  category,
-  screenReaderCategory,
-  vrNameOrGmName,
-  warning,
-  isArchivedHidden,
-  onToggleArchived,
-}: InformationBlockProps) {
+export function PageInformationBlock({ title, icon, description, articles, pageLinks, metadata, referenceLink, id, category, screenReaderCategory, vrNameOrGmName, warning, isArchivedHidden, onToggleArchived }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
   const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
@@ -66,17 +51,7 @@ export function PageInformationBlock({
     </MetadataBox>
   ) : null;
 
-  const DescriptionBlock = description ? (
-    <Box maxWidth="maxWidthText">
-      {isValidElement(description) ? (
-        description
-      ) : typeof description === 'string' ? (
-        <Markdown content={description} />
-      ) : (
-        <RichContent blocks={description as RichContentBlock[]} />
-      )}
-    </Box>
-  ) : null;
+  const DescriptionBlock = description ? <Box maxWidth="maxWidthText">{isValidElement(description) ? description : typeof description === 'string' ? <Markdown content={description} /> : <RichContent blocks={description as RichContentBlock[]} />}</Box> : null;
 
   return (
     <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>

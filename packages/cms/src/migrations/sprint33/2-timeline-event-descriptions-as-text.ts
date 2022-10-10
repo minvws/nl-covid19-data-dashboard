@@ -22,9 +22,7 @@ const client = getClient('migration');
 // NOTE: This query should eventually return an empty set of documents to mark the migration
 // as complete
 function fetchDocuments() {
-  return client.fetch(
-    /* groq */ `*[_type == 'timelineEventCollection' && defined(timelineEvents) && timelineEvents[0].description._type == 'localeString'][0...100]{_id, timelineEvents}`
-  );
+  return client.fetch(/* groq */ `*[_type == 'timelineEventCollection' && defined(timelineEvents) && timelineEvents[0].description._type == 'localeString'][0...100]{_id, timelineEvents}`);
 }
 
 function buildPatches(collections: any[]) {

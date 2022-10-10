@@ -12,17 +12,7 @@
 import { getClient } from '../../client';
 const client = getClient('production');
 
-const types = [
-  '"article_page_article"',
-  '"behavior_page"',
-  '"deceased_page"',
-  '"disability_care_page"',
-  '"elderly_at_home_page"',
-  '"nursing_home_page"',
-  '"sewerPage"',
-  '"topical_page"',
-  '"vaccinations_page"',
-];
+const types = ['"article_page_article"', '"behavior_page"', '"deceased_page"', '"disability_care_page"', '"elderly_at_home_page"', '"nursing_home_page"', '"sewerPage"', '"topical_page"', '"vaccinations_page"'];
 
 client
   .delete({

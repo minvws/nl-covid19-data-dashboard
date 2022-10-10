@@ -43,8 +43,7 @@ if (process.env.NODE_ENV !== 'production') {
   /**
    * This entire block won't be part of a production build
    */
-  const isFocusableSelector =
-    'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled]), details:not([disabled]), summary:not(:disabled)';
+  const isFocusableSelector = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled]), details:not([disabled]), summary:not(:disabled)';
 
   handleMount = function reportIsFocusable(tippyInstance: Instance) {
     const { reference } = tippyInstance;

@@ -25,11 +25,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
-export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
-  getLastGeneratedDate,
-  selectNlData('difference.doctor__covid_symptoms_per_100k', 'difference.doctor__covid_symptoms', 'doctor')
-);
+export const getStaticProps = createGetStaticProps(({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale), getLastGeneratedDate, selectNlData('difference.doctor__covid_symptoms_per_100k', 'difference.doctor__covid_symptoms', 'doctor'));
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, lastGenerated } = props;

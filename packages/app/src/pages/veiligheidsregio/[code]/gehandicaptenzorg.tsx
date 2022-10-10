@@ -126,13 +126,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
-            title={textVr.positief_geteste_personen.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
-            description={textVr.positief_geteste_personen.linechart_description}
-            onSelectTimeframe={setDisabilityCareConfirmedCasesTimeframe}
-          >
+          <ChartTile metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }} title={textVr.positief_geteste_personen.linechart_titel} timeframeOptions={TimeframeOptionsList} description={textVr.positief_geteste_personen.linechart_description} onSelectTimeframe={setDisabilityCareConfirmedCasesTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'disability_care_confirmed_cases_over_time_chart',
@@ -193,13 +187,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="infected_locations_total"
-                absolute={lastValue.infected_locations_total}
-                percentage={lastValue.infected_locations_percentage}
-                difference={data.difference.disability_care__infected_locations_total}
-                isAmount
-              />
+              <KpiValue data-cy="infected_locations_total" absolute={lastValue.infected_locations_total} percentage={lastValue.infected_locations_percentage} difference={data.difference.disability_care__infected_locations_total} isAmount />
               <Text>{textVr.besmette_locaties.kpi_toelichting}</Text>
             </KpiTile>
             <KpiTile
@@ -271,13 +259,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            metadata={{ source: textVr.oversterfte.bronnen.rivm }}
-            title={textVr.oversterfte.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
-            description={textVr.oversterfte.linechart_description}
-            onSelectTimeframe={setDisabilityCareDeceasedTimeframe}
-          >
+          <ChartTile metadata={{ source: textVr.oversterfte.bronnen.rivm }} title={textVr.oversterfte.linechart_titel} timeframeOptions={TimeframeOptionsList} description={textVr.oversterfte.linechart_description} onSelectTimeframe={setDisabilityCareDeceasedTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'disability_care_deceased_over_time_chart',

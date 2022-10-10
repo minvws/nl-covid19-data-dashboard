@@ -13,14 +13,7 @@ interface BackgroundImageProps {
   className?: string;
 }
 
-export function BackgroundImage({
-  height,
-  image,
-  sizes,
-  className,
-  objectFit = 'cover',
-  objectPosition = image.hotspot ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%` : undefined,
-}: BackgroundImageProps) {
+export function BackgroundImage({ height, image, sizes, className, objectFit = 'cover', objectPosition = image.hotspot ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%` : undefined }: BackgroundImageProps) {
   return (
     <div
       css={css({

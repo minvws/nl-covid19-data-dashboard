@@ -50,16 +50,7 @@ export const CollapsibleButton = ({ label, children, icon }: CollapsibleButtonPr
   const height = (buttonSize.height ?? 0) + (isOpen ? contentSize.height ?? 0 : 0) || undefined;
 
   return (
-    <Container
-      style={{ height }}
-      isOpen={isOpen}
-      buttonWidth={buttonSize.width ?? 0}
-      buttonHeight={buttonSize.height ?? 0}
-      contentWidth={contentSize.width ?? 0}
-      contentHeight={contentSize.height ?? 0}
-      clipPathCalculation={clipPathCalculation ?? 0}
-      isMounted={isMounted}
-    >
+    <Container style={{ height }} isOpen={isOpen} buttonWidth={buttonSize.width ?? 0} buttonHeight={buttonSize.height ?? 0} contentWidth={contentSize.width ?? 0} contentHeight={contentSize.height ?? 0} clipPathCalculation={clipPathCalculation ?? 0} isMounted={isMounted}>
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
           <Box position="absolute" top="50%" left="0" height="1px" width="100%" transform="translate(0, -50%)" bg={'gray3'} />

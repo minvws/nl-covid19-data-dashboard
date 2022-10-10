@@ -7,19 +7,7 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Container, IconContainer } from './containers';
 
-export function TileDifference({
-  value,
-  maximumFractionDigits,
-  isPercentage,
-  showOldDateUnix,
-  isAmount,
-}: {
-  value: DifferenceDecimal | DifferenceInteger;
-  maximumFractionDigits?: number;
-  isPercentage?: boolean;
-  showOldDateUnix?: boolean;
-  isAmount: boolean;
-}) {
+export function TileDifference({ value, maximumFractionDigits, isPercentage, showOldDateUnix, isAmount }: { value: DifferenceDecimal | DifferenceInteger; maximumFractionDigits?: number; isPercentage?: boolean; showOldDateUnix?: boolean; isAmount: boolean }) {
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const text = commonTexts.toe_en_afname;
   const { difference } = value;
@@ -59,13 +47,10 @@ export function TileDifference({
           paragraph: 'span',
           strong: (props) => <BoldText>{props.children}</BoldText>,
         }}
-        content={replaceVariablesInText(
-          `${content} ${showOldDateUnix ? (content === text.waarde_gelijk ? text.vorige_waarde_geljk_datum : text.vorige_waarde_datum) : text.vorige_waarde}`,
-          {
-            amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
-            date: showOldDateUnix ? formatDateFromSeconds(value.old_date_unix) : '',
-          }
-        )}
+        content={replaceVariablesInText(`${content} ${showOldDateUnix ? (content === text.waarde_gelijk ? text.vorige_waarde_geljk_datum : text.vorige_waarde_datum) : text.vorige_waarde}`, {
+          amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
+          date: showOldDateUnix ? formatDateFromSeconds(value.old_date_unix) : '',
+        })}
       />
     </Container>
   );

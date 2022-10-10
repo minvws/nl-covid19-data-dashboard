@@ -15,16 +15,7 @@ type SitemapProps = {
 export function Sitemap({ quickLinksHeader, quickLinks, dataSitemapHeader, dataSitemap }: SitemapProps) {
   return (
     <Box display="flex" py={4} flexDirection={{ _: 'column', md: 'row' }}>
-      <Box
-        position="relative"
-        flexBasis={{ _: '33%', lg: '25%' }}
-        pb={{ _: 4, md: 0 }}
-        pr={{ _: 0, md: 3 }}
-        borderColor="gray3"
-        borderStyle="solid"
-        borderRightWidth={{ md: '1px' }}
-        spacing={3}
-      >
+      <Box position="relative" flexBasis={{ _: '33%', lg: '25%' }} pb={{ _: 4, md: 0 }} pr={{ _: 0, md: 3 }} borderColor="gray3" borderStyle="solid" borderRightWidth={{ md: '1px' }} spacing={3}>
         <Heading level={3}>{quickLinksHeader}</Heading>
         <LinkGroup links={quickLinks} />
       </Box>

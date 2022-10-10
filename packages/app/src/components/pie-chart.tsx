@@ -41,22 +41,7 @@ export interface PieChartProps<T> {
   hasHoverState?: boolean;
 }
 
-export function PieChart<T>({
-  data,
-  dataConfig,
-  marginLeft = 40,
-  marginRight = 40,
-  innerSize = 200,
-  donutWidth = 35,
-  padAngle = 0.03,
-  minimumPercentage = 0.5,
-  icon,
-  iconFill = 'gray3',
-  verticalLayout,
-  title,
-  link,
-  hasHoverState,
-}: PieChartProps<T>) {
+export function PieChart<T>({ data, dataConfig, marginLeft = 40, marginRight = 40, innerSize = 200, donutWidth = 35, padAngle = 0.03, minimumPercentage = 0.5, icon, iconFill = 'gray3', verticalLayout, title, link, hasHoverState }: PieChartProps<T>) {
   const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = useIntl();
 
   const formatters = {
@@ -92,15 +77,7 @@ export function PieChart<T>({
   return (
     <Box width="100%">
       <ErrorBoundary>
-        <Box
-          display="flex"
-          spacingHorizontal={4}
-          spacing={verticalLayout ? 4 : { _: 4, xs: 0 }}
-          alignItems={verticalLayout ? 'flex-start' : { xs: 'center' }}
-          flexDirection={verticalLayout ? 'column' : { _: 'column', xs: 'row' }}
-          justifyContent={{ _: 'flex-start', xl: 'flex-end' }}
-          marginTop={{ _: 3, lg: 0 }}
-        >
+        <Box display="flex" spacingHorizontal={4} spacing={verticalLayout ? 4 : { _: 4, xs: 0 }} alignItems={verticalLayout ? 'flex-start' : { xs: 'center' }} flexDirection={verticalLayout ? 'column' : { _: 'column', xs: 'row' }} justifyContent={{ _: 'flex-start', xl: 'flex-end' }} marginTop={{ _: 3, lg: 0 }}>
           <Box alignSelf={{ _: 'center', md: 'self-start' }} height={innerSize} position="relative" css={css({ marginLeft, marginRight })} spacingHorizontal={2}>
             {icon && (
               <Box

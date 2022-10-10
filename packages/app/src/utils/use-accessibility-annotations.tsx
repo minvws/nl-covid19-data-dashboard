@@ -39,10 +39,7 @@ export function useAccessibilityAnnotations(definition: AccessibilityDefinition)
    * There needs to be a description, either constructed by a Lokalize text
    * or by providing interactive features
    */
-  assert(
-    isDefined(chartDescription) || definition.features?.length,
-    `[${useAccessibilityAnnotations.name}] An accessibility description or interaction features need to be provided for ${definition.key}`
-  );
+  assert(isDefined(chartDescription) || definition.features?.length, `[${useAccessibilityAnnotations.name}] An accessibility description or interaction features need to be provided for ${definition.key}`);
 
   const description = [chartDescription].filter(isPresent);
 

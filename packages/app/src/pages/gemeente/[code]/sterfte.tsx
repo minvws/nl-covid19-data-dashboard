@@ -117,13 +117,7 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            timeframeOptions={TimeframeOptionsList}
-            title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
-            description={textGm.section_deceased_rivm.line_chart_covid_daily_description}
-            metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm }}
-            onSelectTimeframe={setDeceasedMunicipalTimeframe}
-          >
+          <ChartTile timeframeOptions={TimeframeOptionsList} title={textGm.section_deceased_rivm.line_chart_covid_daily_title} description={textGm.section_deceased_rivm.line_chart_covid_daily_description} metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm }} onSelectTimeframe={setDeceasedMunicipalTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'deceased_over_time_chart',

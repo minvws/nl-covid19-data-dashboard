@@ -9,10 +9,7 @@ export function LokalizeTextDescription() {
         <>
           <p style={{ fontWeight: 'bold' }}>Lokalize teksten en Markdown</p>
           <p>Lokalize teksten zijn over het algemeen "domme" teksten zonder opmaak. Echter zijn er ook "slimme" teksten die opgemaakt kunnen worden met Markdown.</p>
-          <p>
-            Als op de cdb-dev-omgeving de "keys"-modus wordt aangezet (om de lokalize-keys te kunnen lezen), wordt bij elk veld wat Markdown ondersteunt een emoji ( ✅ )
-            weergegeven. Deze velden zijn dus met markdown op te maken.
-          </p>
+          <p>Als op de cdb-dev-omgeving de "keys"-modus wordt aangezet (om de lokalize-keys te kunnen lezen), wordt bij elk veld wat Markdown ondersteunt een emoji ( ✅ ) weergegeven. Deze velden zijn dus met markdown op te maken.</p>
 
           <p style={{ marginTop: 30, fontWeight: 'bold' }}>Markdown syntax</p>
 
@@ -40,8 +37,7 @@ export function LokalizeTextDescription() {
 
           <p style={{ marginTop: 30, fontWeight: 'bold' }}>Context-afhankelijke tekst in Markdown</p>
           <p>
-            Met onze Markdown-implementatie is het mogelijk om tekst voor een enkele veiligheidsregio of gemeente weer te geven. Hiervoor hebben we de "codeblock" syntax gekaapt.
-            Deze syntax werkt met drie tildes (~~~) of drie back-ticks/accent grave (```).
+            Met onze Markdown-implementatie is het mogelijk om tekst voor een enkele veiligheidsregio of gemeente weer te geven. Hiervoor hebben we de "codeblock" syntax gekaapt. Deze syntax werkt met drie tildes (~~~) of drie back-ticks/accent grave (```).
             <pre
               style={{
                 padding: 10,

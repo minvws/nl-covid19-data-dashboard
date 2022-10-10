@@ -36,13 +36,5 @@ export function VaccinationCoverageKindSelect(props: VaccinationCoverageKindSele
     [commonTexts.vaccinations.coverage_kinds]
   );
 
-  return (
-    <RichContentSelect
-      label={commonTexts.vaccinations.coverage_kind_dropdown.label}
-      visuallyHiddenLabel
-      initialValue={initialValue}
-      options={options}
-      onChange={(option) => onChange(option.value)}
-    />
-  );
+  return <RichContentSelect label={commonTexts.vaccinations.coverage_kind_dropdown.label} visuallyHiddenLabel initialValue={initialValue} options={options} onChange={(option) => onChange(option.value)} />;
 }

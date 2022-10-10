@@ -4,20 +4,7 @@ import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
 import { Text, InlineText, BoldText } from '~/components/typography';
-import {
-  ChartTile,
-  DynamicChoropleth,
-  TwoKpiSection,
-  ChoroplethTile,
-  TimeSeriesChart,
-  TileList,
-  InView,
-  CollapsibleContent,
-  KpiTile,
-  KpiValue,
-  Markdown,
-  PageInformationBlock,
-} from '~/components';
+import { ChartTile, DynamicChoropleth, TwoKpiSection, ChoroplethTile, TimeSeriesChart, TileList, InView, CollapsibleContent, KpiTile, KpiValue, Markdown, PageInformationBlock } from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Layout, GmLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
@@ -46,13 +33,7 @@ const pageMetrics = ['tested_overall'];
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData(
-    'code',
-    'difference.tested_overall__infected_moving_average',
-    'difference.tested_overall__infected_per_100k_moving_average',
-    'static_values.population_count',
-    'tested_overall'
-  ),
+  selectGmData('code', 'difference.tested_overall__infected_moving_average', 'difference.tested_overall__infected_per_100k_moving_average', 'static_values.population_count', 'tested_overall'),
   createGetChoroplethData({
     gm: ({ tested_overall }, context) => ({
       tested_overall: filterByRegionMunicipalities(tested_overall, context),

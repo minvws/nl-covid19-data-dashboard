@@ -79,14 +79,7 @@ function VariantStackedAreaTileWithData({ text, values, variantColors, metadata,
   }
 
   return (
-    <ChartTile
-      title={text.titel}
-      description={text.toelichting}
-      metadata={metadata}
-      timeframeOptions={TimeframeOptionsList}
-      timeframeInitialValue={TimeframeOption.SIX_MONTHS}
-      onSelectTimeframe={setVariantTimeframe}
-    >
+    <ChartTile title={text.titel} description={text.toelichting} metadata={metadata} timeframeOptions={TimeframeOptionsList} timeframeInitialValue={TimeframeOption.SIX_MONTHS} onSelectTimeframe={setVariantTimeframe}>
       <>
         {children}
         {children && <Spacer mb={3} />}
@@ -115,16 +108,11 @@ function VariantStackedAreaTileWithData({ text, values, variantColors, metadata,
             const totalMetricAmount = seriesConfig.length;
             const hasSelectedMetrics = metricAmount !== totalMetricAmount;
 
-            const filteredValues = Object.fromEntries(
-              Object.entries(context.value).filter(([key, value]) => (key.includes('percentage') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
-            ) as VariantChartValue;
+            const filteredValues = Object.fromEntries(Object.entries(context.value).filter(([key, value]) => (key.includes('percentage') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))) as VariantChartValue;
 
             const reorderContext = {
               ...context,
-              config: [
-                ...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics),
-                context.config.find((value) => hasMetricProperty(value) && value.metricProperty === 'other_graph_percentage'),
-              ].filter(isDefined),
+              config: [...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics), context.config.find((value) => hasMetricProperty(value) && value.metricProperty === 'other_graph_percentage')].filter(isDefined),
               value: !hasSelectedMetrics ? filteredValues : context.value,
             };
 
@@ -147,15 +135,9 @@ function hasMetricProperty(config: any): config is { metricProperty: string } {
   return 'metricProperty' in config;
 }
 
-function useFilteredSeriesConfig(
-  seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[],
-  otherConfig: GappedAreaSeriesDefinition<VariantChartValue>,
-  compareList: (keyof VariantChartValue)[]
-) {
+function useFilteredSeriesConfig(seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[], otherConfig: GappedAreaSeriesDefinition<VariantChartValue>, compareList: (keyof VariantChartValue)[]) {
   return useMemo(() => {
-    return [otherConfig, ...seriesConfig].filter(
-      (item) => item.metricProperty !== 'other_graph_percentage' && (compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length)
-    );
+    return [otherConfig, ...seriesConfig].filter((item) => item.metricProperty !== 'other_graph_percentage' && (compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length));
   }, [seriesConfig, otherConfig, compareList]);
 }
 

@@ -110,14 +110,7 @@ export function VaccineCoverageChoroplethPerGm({ data }: VaccineCoverageChorople
             isPercentage: true,
             getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
           }}
-          formatTooltip={(context) => (
-            <ChoroplethTooltip
-              data={context}
-              mapData={data.gm.filter((singleGM) => singleGM.gmcode === context.code)}
-              ageGroups={matchingAgeGroups[selectedCoverageKind]}
-              selectedCoverageKind={selectedCoverageKind}
-            />
-          )}
+          formatTooltip={(context) => <ChoroplethTooltip data={context} mapData={data.gm.filter((singleGM) => singleGM.gmcode === context.code)} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
         />
       )}
 
@@ -134,14 +127,7 @@ export function VaccineCoverageChoroplethPerGm({ data }: VaccineCoverageChorople
             isPercentage: true,
             getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
           }}
-          formatTooltip={(context) => (
-            <ChoroplethTooltip
-              data={context}
-              mapData={data.vr.filter((singleVR) => singleVR.vrcode === context.code)}
-              ageGroups={matchingAgeGroups[selectedCoverageKind]}
-              selectedCoverageKind={selectedCoverageKind}
-            />
-          )}
+          formatTooltip={(context) => <ChoroplethTooltip data={context} mapData={data.vr.filter((singleVR) => singleVR.vrcode === context.code)} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
         />
       )}
     </ChoroplethTile>

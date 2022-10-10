@@ -15,15 +15,7 @@ interface VaccineBoosterAdministrationsKpiSectionProps {
   text: SiteText['pages']['vaccinations_page']['nl']['booster_kpi'];
 }
 
-export function VaccineBoosterAdministrationsKpiSection({
-  totalBoosterShots,
-  metadateBoosterShots,
-  boosterGgdValue,
-  metadateBoosterGgd,
-  boosterEstimatedValue,
-  metadateBoosterEstimated,
-  text,
-}: VaccineBoosterAdministrationsKpiSectionProps) {
+export function VaccineBoosterAdministrationsKpiSection({ totalBoosterShots, metadateBoosterShots, boosterGgdValue, metadateBoosterGgd, boosterEstimatedValue, metadateBoosterEstimated, text }: VaccineBoosterAdministrationsKpiSectionProps) {
   return (
     <Tile>
       <Box mb={20}>

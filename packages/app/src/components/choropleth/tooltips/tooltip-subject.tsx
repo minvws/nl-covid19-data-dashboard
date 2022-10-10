@@ -15,12 +15,7 @@ interface TooltipSubjectProps {
 }
 
 export function TooltipSubject({ subject, thresholdValues, filterBelow, children, noDataFillColor }: TooltipSubjectProps) {
-  const color =
-    !isPresent(filterBelow) && isDefined(thresholdValues)
-      ? noDataFillColor || getThresholdValue(thresholdValues, 0).color
-      : isPresent(filterBelow) && isDefined(thresholdValues)
-      ? getThresholdValue(thresholdValues, filterBelow).color
-      : noDataFillColor;
+  const color = !isPresent(filterBelow) && isDefined(thresholdValues) ? noDataFillColor || getThresholdValue(thresholdValues, 0).color : isPresent(filterBelow) && isDefined(thresholdValues) ? getThresholdValue(thresholdValues, filterBelow).color : noDataFillColor;
 
   return (
     <Box spacing={1}>

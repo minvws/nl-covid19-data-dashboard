@@ -43,15 +43,7 @@ export function useTabInteractiveButton(label: string) {
   );
 
   const tabInteractiveButton = (
-    <SkipButton
-      type="button"
-      role="switch"
-      isActive={isTabInteractive}
-      aria-checked={isTabInteractive ? 'true' : 'false'}
-      ref={toggleButtonRef}
-      onClick={() => setIsTabInteractive((x) => !x)}
-      {...anchorEventHandlers}
-    >
+    <SkipButton type="button" role="switch" isActive={isTabInteractive} aria-checked={isTabInteractive ? 'true' : 'false'} ref={toggleButtonRef} onClick={() => setIsTabInteractive((x) => !x)} {...anchorEventHandlers}>
       {label}
     </SkipButton>
   );

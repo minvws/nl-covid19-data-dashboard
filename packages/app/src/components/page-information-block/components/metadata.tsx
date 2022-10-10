@@ -35,16 +35,7 @@ export interface MetadataProps {
   referenceLink?: string;
 }
 
-export function Metadata({
-  dataSources = [],
-  datumsText,
-  dateOrRange,
-  dateOfInsertionUnix,
-  accessibilitySubject,
-  moreInformationLabel,
-  moreInformationLink,
-  referenceLink,
-}: MetadataProps) {
+export function Metadata({ dataSources = [], datumsText, dateOrRange, dateOfInsertionUnix, accessibilitySubject, moreInformationLabel, moreInformationLink, referenceLink }: MetadataProps) {
   const { commonTexts } = useIntl();
   const text = commonTexts.common.metadata;
 
@@ -59,16 +50,7 @@ export function Metadata({
         <Text variant="label1">{dateText}</Text>
       </Box>
 
-      {dataSources.length > 0 && (
-        <MetadataItem
-          icon={<Database aria-hidden />}
-          items={dataSources}
-          label={referenceLink ? commonTexts.informatie_header.bron : text.source}
-          accessibilityText={commonTexts.accessibility.text_source}
-          accessibilitySubject={accessibilitySubject}
-          referenceLink={referenceLink}
-        />
-      )}
+      {dataSources.length > 0 && <MetadataItem icon={<Database aria-hidden />} items={dataSources} label={referenceLink ? commonTexts.informatie_header.bron : text.source} accessibilityText={commonTexts.accessibility.text_source} accessibilitySubject={accessibilitySubject} referenceLink={referenceLink} />}
 
       {referenceLink && <MetadataReference icon={<MeerInformatie aria-hidden />} referenceLink={referenceLink} />}
 

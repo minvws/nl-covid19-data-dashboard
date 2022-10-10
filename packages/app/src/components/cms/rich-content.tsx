@@ -1,13 +1,4 @@
-import {
-  AgeDemographicConfiguration,
-  ChartConfiguration,
-  ChoroplethConfiguration,
-  DataScope,
-  DataScopeKey,
-  DonutChartConfiguration,
-  KpiConfiguration,
-  MetricKeys,
-} from '@corona-dashboard/common';
+import { AgeDemographicConfiguration, ChartConfiguration, ChoroplethConfiguration, DataScope, DataScopeKey, DonutChartConfiguration, KpiConfiguration, MetricKeys } from '@corona-dashboard/common';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';

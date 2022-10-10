@@ -83,43 +83,18 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
           {values.map((item, index) => (
             <Row key={index}>
               <HeaderCell isColumn>
-                <AgeGroup
-                  range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-                  ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
-                  birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
-                  text={commonTexts.common.agegroup.total_people}
-                />
+                <AgeGroup range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)} ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined} birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)} text={commonTexts.common.agegroup.total_people} />
               </HeaderCell>
               <Cell>
-                <WidePercentage
-                  value={'has_one_shot_percentage_label' in item ? formatCoveragePercentage(item, 'has_one_shot_percentage') : `${formatPercentage(item.has_one_shot_percentage)}%`}
-                  color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
-                  justifyContent="flex-end"
-                />
+                <WidePercentage value={'has_one_shot_percentage_label' in item ? formatCoveragePercentage(item, 'has_one_shot_percentage') : `${formatPercentage(item.has_one_shot_percentage)}%`} color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT} justifyContent="flex-end" />
               </Cell>
               <Cell>
-                <WidePercentage
-                  value={
-                    'fully_vaccinated_percentage_label' in item
-                      ? formatCoveragePercentage(item, 'fully_vaccinated_percentage')
-                      : `${formatPercentage(item.fully_vaccinated_percentage)}%`
-                  }
-                  color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
-                  justifyContent="flex-end"
-                />
+                <WidePercentage value={'fully_vaccinated_percentage_label' in item ? formatCoveragePercentage(item, 'fully_vaccinated_percentage') : `${formatPercentage(item.fully_vaccinated_percentage)}%`} color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED} justifyContent="flex-end" />
               </Cell>
               <Cell>
                 <Box spacing={1}>
-                  <Bar
-                    value={item.has_one_shot_percentage}
-                    color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
-                    label={'has_one_shot_percentage_label' in item ? item.has_one_shot_percentage_label : undefined}
-                  />
-                  <Bar
-                    value={item.fully_vaccinated_percentage}
-                    color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
-                    label={'fully_vaccinated_percentage_label' in item ? item.fully_vaccinated_percentage_label : undefined}
-                  />
+                  <Bar value={item.has_one_shot_percentage} color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT} label={'has_one_shot_percentage_label' in item ? item.has_one_shot_percentage_label : undefined} />
+                  <Bar value={item.fully_vaccinated_percentage} color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED} label={'fully_vaccinated_percentage_label' in item ? item.fully_vaccinated_percentage_label : undefined} />
                 </Box>
               </Cell>
             </Row>

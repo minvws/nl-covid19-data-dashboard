@@ -113,8 +113,5 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
 function getMaximumPropertyValueInTimeframe(values: NlVaccineStockValue[], timeframe: TimeframeOption, today: Date) {
   const valuesInTimeframe = getValuesInTimeframe(values, timeframe, today);
 
-  return valuesInTimeframe.reduce(
-    (acc, value) => Math.max(acc, ...Object.values(pick(value, ['bio_n_tech_pfizer_total', 'moderna_total', 'astra_zeneca_total'])).filter(isPresent)),
-    0
-  );
+  return valuesInTimeframe.reduce((acc, value) => Math.max(acc, ...Object.values(pick(value, ['bio_n_tech_pfizer_total', 'moderna_total', 'astra_zeneca_total'])).filter(isPresent)), 0);
 }

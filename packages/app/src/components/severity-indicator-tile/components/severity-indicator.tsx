@@ -22,14 +22,7 @@ export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
   return (
     <Box alignItems="flex-end" css={css({ gap: `0 ${space[1]}` })} display="flex" height={space[4]} mb={space[4]} mt={space[3]}>
       {severityLevels.map(([key, value]) => (
-        <Box
-          key={key}
-          backgroundColor={Number(level) >= Number(value) ? getSeverityColor(level as SeverityLevels) : colors.gray3}
-          borderRadius={4}
-          height={`${getSeverityHeight(value)}%`}
-          position="relative"
-          width={`${100 / severityLevels.length}%`}
-        >
+        <Box key={key} backgroundColor={Number(level) >= Number(value) ? getSeverityColor(level as SeverityLevels) : colors.gray3} borderRadius={4} height={`${getSeverityHeight(value)}%`} position="relative" width={`${100 / severityLevels.length}%`}>
           {level === value && <SeverityIndicatorArrow />}
         </Box>
       ))}

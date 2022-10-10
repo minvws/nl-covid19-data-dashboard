@@ -108,10 +108,7 @@ ReplaceVariablesInText('should throw when a formatter is passed but the value is
     date_day_before_yesterday: 'eergisteren',
   });
 
-  assert.throws(
-    () => replaceVariablesInText('{{test, formatNumber}}', { test: undefined }, formatters),
-    'No value was supplied for command number value test in test. Text: {{test, formatNumber}}'
-  );
+  assert.throws(() => replaceVariablesInText('{{test, formatNumber}}', { test: undefined }, formatters), 'No value was supplied for command number value test in test. Text: {{test, formatNumber}}');
 });
 
 ReplaceVariablesInText.run();

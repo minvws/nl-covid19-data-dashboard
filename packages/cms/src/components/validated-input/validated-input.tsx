@@ -55,31 +55,7 @@ export const ValidatedInput = React.forwardRef((props: ValidatedInputProps, ref:
 
   return (
     <FormField description={type.description} title={type.title} __unstable_markers={markers} __unstable_presence={presence}>
-      {multiline ? (
-        <StyledTextArea
-          value={value}
-          readOnly={readOnly}
-          placeholder={placeholder}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onChange={handleChange}
-          hasError={!!markers.length}
-          border
-          rows={10}
-        />
-      ) : (
-        <StyledText
-          value={value}
-          readOnly={readOnly}
-          placeholder={placeholder}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onChange={handleChange}
-          ref={ref}
-          hasError={!!markers.length}
-          border
-        />
-      )}
+      {multiline ? <StyledTextArea value={value} readOnly={readOnly} placeholder={placeholder} onFocus={onFocus} onBlur={onBlur} onChange={handleChange} hasError={!!markers.length} border rows={10} /> : <StyledText value={value} readOnly={readOnly} placeholder={placeholder} onFocus={onFocus} onBlur={onBlur} onChange={handleChange} ref={ref} hasError={!!markers.length} border />}
 
       {markers.length ? (
         <Markers>

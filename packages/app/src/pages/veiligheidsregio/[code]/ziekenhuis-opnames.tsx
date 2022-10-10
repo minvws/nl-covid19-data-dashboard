@@ -75,10 +75,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const municipalCodes = gmCodesByVrCode[router.query.code as string];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
-  const underReportedRange = getBoundaryDateStartUnix(
-    data.hospital_nice.values,
-    countTrailingNullValues(data.hospital_nice.values, 'admissions_on_date_of_admission_moving_average')
-  );
+  const underReportedRange = getBoundaryDateStartUnix(data.hospital_nice.values, countTrailingNullValues(data.hospital_nice.values, 'admissions_on_date_of_admission_moving_average'));
 
   const sevenDayAverageDates: [number, number] = [underReportedRange - WEEK_IN_SECONDS, underReportedRange - DAY_IN_SECONDS];
 
@@ -135,13 +132,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            metadata={{ source: textVr.bronnen.rivm }}
-            title={textVr.linechart_titel}
-            description={textVr.linechart_description}
-            timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
-          >
+          <ChartTile metadata={{ source: textVr.bronnen.rivm }} title={textVr.linechart_titel} description={textVr.linechart_description} timeframeOptions={TimeframeOptionsList} onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}>
             <TimeSeriesChart
               accessibility={{
                 key: 'hospital_admissions_over_time_chart',

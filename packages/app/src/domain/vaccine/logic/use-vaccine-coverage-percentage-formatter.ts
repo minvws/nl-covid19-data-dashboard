@@ -30,11 +30,7 @@ export function useVaccineCoveragePercentageFormatter(numFractionDigits = 0) {
   return getVaccineCoveragePercentageFormatter(commonTexts.common, formatPercentage, numFractionDigits);
 }
 
-function getVaccineCoveragePercentageFormatter(
-  text: SiteText['common']['common'],
-  formatPercentage: ReturnType<typeof createFormatting>['formatPercentage'],
-  numFractionDigits: number
-) {
+function getVaccineCoveragePercentageFormatter(text: SiteText['common']['common'], formatPercentage: ReturnType<typeof createFormatting>['formatPercentage'], numFractionDigits: number) {
   return <T extends DataWithLabels<T>>(data: T, property: KeyWithLabel<T>) => {
     const labelKey = `${property.toString()}_label` as keyof T;
 

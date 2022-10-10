@@ -6,8 +6,7 @@ import { isDefined } from 'ts-is-present';
 import * as ts from 'typescript';
 import { schemaDirectory } from '../config';
 
-const header =
-  "/**\n * DO NOT MANUALLY CHANGE THE CONTENTS OF THIS FILE!\n * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.\n*/\n";
+const header = "/**\n * DO NOT MANUALLY CHANGE THE CONTENTS OF THIS FILE!\n * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.\n*/\n";
 
 const skippedProperties = ['code', 'vrcode', 'gmcode', 'country_code', 'date_unix', 'date_of_insertion_unix', 'date_start_unix', 'date_end_unix', 'sewer_per_installation'];
 

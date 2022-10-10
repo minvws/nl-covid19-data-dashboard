@@ -1,22 +1,5 @@
 import styled from 'styled-components';
-import {
-  border,
-  BorderProps,
-  color,
-  ColorProps,
-  compose,
-  LayoutProps,
-  margin,
-  padding,
-  position,
-  PositionProps,
-  space,
-  SpaceProps,
-  verticalAlign,
-  VerticalAlignProps,
-  width,
-  WidthProps,
-} from 'styled-system';
+import { border, BorderProps, color, ColorProps, compose, LayoutProps, margin, padding, position, PositionProps, space, SpaceProps, verticalAlign, VerticalAlignProps, width, WidthProps } from 'styled-system';
 import { styledShouldForwardProp } from '~/lib/styled-should-forward-prop';
 
 type TableProps = TableCellProps & PositionProps;

@@ -98,18 +98,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
    * passed-in formatter functions or their default counterparts that have the
    * same name.
    */
-  const {
-    accessibility,
-    values,
-    config,
-    initialWidth = 840,
-    isPercentage,
-    expectedLabel,
-    formatTickValue: formatYTickValue,
-    formatTooltip,
-    valueAnnotation,
-    timeframe = TimeframeOption.ALL,
-  } = props;
+  const { accessibility, values, config, initialWidth = 840, isPercentage, expectedLabel, formatTickValue: formatYTickValue, formatTooltip, valueAnnotation, timeframe = TimeframeOption.ALL } = props;
 
   const breakpoints = useBreakpoints();
   const isExtraSmallScreen = !breakpoints.sm;
@@ -379,9 +368,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
                     hideTicks
                     hideAxisLine
                     stroke={colors.gray3}
-                    tickFormat={
-                      formatYTickValue ? (formatYTickValue as AnyTickFormatter) : isPercentage ? (formatYAxisPercentage as AnyTickFormatter) : (formatYAxis as AnyTickFormatter)
-                    }
+                    tickFormat={formatYTickValue ? (formatYTickValue as AnyTickFormatter) : isPercentage ? (formatYAxisPercentage as AnyTickFormatter) : (formatYAxis as AnyTickFormatter)}
                     tickLabelProps={() => ({
                       fill: colors.gray6,
                       fontSize: 12,

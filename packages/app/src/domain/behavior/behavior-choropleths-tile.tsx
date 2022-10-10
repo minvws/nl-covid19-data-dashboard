@@ -52,23 +52,9 @@ export function BehaviorChoroplethsTile({ title, description, data, currentId, s
           <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} />
         </Box>
         <Box display="flex" flexWrap="wrap" spacing={{ _: 4, md: 0 }}>
-          <ChoroplethBlock
-            title={text.nl.verdeling_in_nederland.compliance_title}
-            data={data}
-            behaviorType="compliance"
-            currentId={currentId}
-            keysWithoutData={keysWithoutData}
-            text={text}
-          />
+          <ChoroplethBlock title={text.nl.verdeling_in_nederland.compliance_title} data={data} behaviorType="compliance" currentId={currentId} keysWithoutData={keysWithoutData} text={text} />
 
-          <ChoroplethBlock
-            title={text.nl.verdeling_in_nederland.support_title}
-            data={data}
-            behaviorType="support"
-            currentId={currentId}
-            keysWithoutData={keysWithoutData}
-            text={text}
-          />
+          <ChoroplethBlock title={text.nl.verdeling_in_nederland.support_title} data={data} behaviorType="support" currentId={currentId} keysWithoutData={keysWithoutData} text={text} />
         </Box>
       </Box>
     </ChartTile>
@@ -131,16 +117,7 @@ function ChoroplethBlock({ data, keysWithoutData, behaviorType, currentId, title
               const complianceValue = context.dataItem[currentComplianceValueKey];
               const supportValue = context.dataItem[currentSupportValueKey];
 
-              return (
-                <VrBehaviorTooltip
-                  behaviorType={behaviorType}
-                  context={context}
-                  currentMetric={currentId}
-                  currentComplianceValue={isNumber(complianceValue) ? complianceValue : null}
-                  currentSupportValue={isNumber(supportValue) ? supportValue : null}
-                  text={text}
-                />
-              );
+              return <VrBehaviorTooltip behaviorType={behaviorType} context={context} currentMetric={currentId} currentComplianceValue={isNumber(complianceValue) ? complianceValue : null} currentSupportValue={isNumber(supportValue) ? supportValue : null} text={text} />;
             }}
           />
         </ErrorBoundary>

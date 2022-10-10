@@ -42,18 +42,8 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
           <Markdown content={replaceVariablesInText(text.situaties_kaarten_uitkomsten.beschrijving, { date_from, date_to })} />
           <Spacer mb={4} />
           <Box spacing={3}>
-            <LegendItem
-              color="primary"
-              icon={<Check />}
-              title={text.situaties_kaarten_uitkomsten.legenda.voldoende_data.titel}
-              description={text.situaties_kaarten_uitkomsten.legenda.voldoende_data.omschrijving}
-            />
-            <LegendItem
-              color="gray5"
-              icon={<Cross />}
-              title={text.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.titel}
-              description={text.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.omschrijving}
-            />
+            <LegendItem color="primary" icon={<Check />} title={text.situaties_kaarten_uitkomsten.legenda.voldoende_data.titel} description={text.situaties_kaarten_uitkomsten.legenda.voldoende_data.omschrijving} />
+            <LegendItem color="gray5" icon={<Cross />} title={text.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.titel} description={text.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.omschrijving} />
           </Box>
         </Box>
         <Box flex={{ lg: 1 }} ml={[0, 0, 3]} display="flex" flexDirection="column" height="100%">

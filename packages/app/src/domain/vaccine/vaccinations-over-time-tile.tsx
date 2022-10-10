@@ -45,10 +45,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
 
   const [activeVaccinationChart, setActiveVaccinationChart] = useState<ActiveVaccinationChart>('coverage');
 
-  const lastDate = useMemo<number>(
-    () => (activeVaccinationChart === 'coverage' && isDefined(coverageData) ? coverageData.last_value.date_unix : administrationData.last_value.date_end_unix),
-    [activeVaccinationChart, coverageData, administrationData.last_value.date_end_unix]
-  );
+  const lastDate = useMemo<number>(() => (activeVaccinationChart === 'coverage' && isDefined(coverageData) ? coverageData.last_value.date_unix : administrationData.last_value.date_end_unix), [activeVaccinationChart, coverageData, administrationData.last_value.date_end_unix]);
 
   const [metadata, description] = useTileData(activeVaccinationChart, text, lastDate);
 
@@ -69,13 +66,7 @@ export function VaccinationsOverTimeTile(props: VaccinationsOverTimeTileProps) {
         activeVaccinationChart={activeVaccinationChart}
         setActiveVaccinationChart={setActiveVaccinationChart}
       />
-      <VaccinationsOverTimeChart
-        coverageData={coverageData}
-        administrationData={administrationData}
-        activeChart={activeVaccinationChart}
-        timelineEvents={timelineEvents}
-        text={text}
-      />
+      <VaccinationsOverTimeChart coverageData={coverageData} administrationData={administrationData} activeChart={activeVaccinationChart} timelineEvents={timelineEvents} text={text} />
     </FullscreenChartTile>
   );
 }

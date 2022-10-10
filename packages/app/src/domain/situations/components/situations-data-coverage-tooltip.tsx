@@ -10,13 +10,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './legend-icon';
 import { SiteText } from '~/locale';
 
-export function SituationsDataCoverageTooltip({
-  context,
-  text,
-}: {
-  context: TooltipData<VrCollectionSituations>;
-  text: SiteText['pages']['situations_page']['shared']['situaties_kaarten_uitkomsten'];
-}) {
+export function SituationsDataCoverageTooltip({ context, text }: { context: TooltipData<VrCollectionSituations>; text: SiteText['pages']['situations_page']['shared']['situaties_kaarten_uitkomsten'] }) {
   const reverseRouter = useReverseRouter();
 
   const { has_sufficient_data } = context.dataItem;

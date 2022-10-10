@@ -65,9 +65,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
         <VariantNameCell variantCode={row.variantCode} text={text} mobile narrow />
-        <Cell mobile>
-          {isPresent(row.percentage) ? <PercentageBarWithNumber percentage={row.percentage} color={row.color} formatValue={formatValue} /> : <NoPercentageData text={text} />}
-        </Cell>
+        <Cell mobile>{isPresent(row.percentage) ? <PercentageBarWithNumber percentage={row.percentage} color={row.color} formatValue={formatValue} /> : <NoPercentageData text={text} />}</Cell>
         <Cell mobile alignRight>
           {collapsible.button()}
         </Cell>
@@ -78,11 +76,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             <Box spacing={2} css={css({ pb: 3 })}>
               <Box display="flex" flexDirection="row" spacingHorizontal={2}>
                 <InlineText>{columnNames.vorige_meting}:</InlineText>
-                {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? (
-                  <VariantDifference value={row.difference as DifferenceDecimal} text={text} />
-                ) : (
-                  '-'
-                )}
+                {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? <VariantDifference value={row.difference as DifferenceDecimal} text={text} /> : '-'}
               </Box>
             </Box>
           )}

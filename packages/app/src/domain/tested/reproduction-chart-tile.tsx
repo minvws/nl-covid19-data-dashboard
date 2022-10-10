@@ -16,13 +16,7 @@ interface ReproductionChartTileProps {
   text: SiteText['pages']['reproduction_page']['nl'];
 }
 
-export function ReproductionChartTile({
-  data,
-  timeframeOptions = TimeframeOptionsList,
-  timeframeInitialValue = TimeframeOption.ALL,
-  timelineEvents,
-  text,
-}: ReproductionChartTileProps) {
+export function ReproductionChartTile({ data, timeframeOptions = TimeframeOptionsList, timeframeInitialValue = TimeframeOption.ALL, timelineEvents, text }: ReproductionChartTileProps) {
   /**
    * There is no data for the last 2 weeks so we are getting a slice
    * of all the values before the first datapoint with a null value to

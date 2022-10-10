@@ -15,9 +15,7 @@ export function VaccineDeliveryBarChart({ data, text }: { data: NlVaccineDeliver
 
   const productNames = text.data.vaccination_chart.product_names;
 
-  const formatTooltip: TooltipFormatter<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData> = (
-    context: TooltipData<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData>
-  ) => {
+  const formatTooltip: TooltipFormatter<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData> = (context: TooltipData<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData>) => {
     return <TooltipSeriesList data={context} />;
   };
 

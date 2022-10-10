@@ -23,49 +23,18 @@ type GappedAreaTrendProps = {
   isMissing: boolean;
 };
 
-export function GappedAreaTrend({
-  series,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  strokeWidth = DEFAULT_STROKE_WIDTH,
-  color,
-  getX,
-  getY,
-  yScale,
-  curve = 'linear',
-  id,
-  isMissing = false,
-}: GappedAreaTrendProps) {
+export function GappedAreaTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, strokeWidth = DEFAULT_STROKE_WIDTH, color, getX, getY, yScale, curve = 'linear', id, isMissing = false }: GappedAreaTrendProps) {
   const gappedSeriesMissing: T[][] = useGappedSeries(series, isMissing /*isMissing data (For example: the weekends and holidays)*/);
 
   return (
     <>
       {gappedSeriesMissing.map((gappedSeries: T[], index) => (
         <React.Fragment key={index}>
-          {isSeriesMissingValue(gappedSeries[0]) && gappedSeries[0].__hasMissing ? (
-            <LinePath
-              data={[gappedSeries[0], gappedSeries[gappedSeries.length - 1]]}
-              x={getX}
-              y={getY}
-              stroke={color}
-              strokeWidth={strokeWidth}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="5,5"
-              curve={curves[curve]}
-            />
-          ) : (
-            <LinePath data={gappedSeries} x={getX} y={getY} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" curve={curves[curve]} />
-          )}
+          {isSeriesMissingValue(gappedSeries[0]) && gappedSeries[0].__hasMissing ? <LinePath data={[gappedSeries[0], gappedSeries[gappedSeries.length - 1]]} x={getX} y={getY} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" strokeDasharray="5,5" curve={curves[curve]} /> : <LinePath data={gappedSeries} x={getX} y={getY} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" curve={curves[curve]} />}
         </React.Fragment>
       ))}
       {gappedSeriesMissing.map((gappedSeries, index) => (
-        <React.Fragment key={index}>
-          {isSeriesMissingValue(gappedSeries[0]) && gappedSeries[0].__hasMissing ? (
-            <AreaClosed data={gappedSeries} x={getX} y={getY} fillOpacity={0} curve={curves[curve]} yScale={yScale} id={`${id}_${index}`} />
-          ) : (
-            <AreaClosed data={gappedSeries} x={getX} y={getY} fill={color} fillOpacity={fillOpacity} curve={curves[curve]} yScale={yScale} id={`${id}_${index}`} />
-          )}
-        </React.Fragment>
+        <React.Fragment key={index}>{isSeriesMissingValue(gappedSeries[0]) && gappedSeries[0].__hasMissing ? <AreaClosed data={gappedSeries} x={getX} y={getY} fillOpacity={0} curve={curves[curve]} yScale={yScale} id={`${id}_${index}`} /> : <AreaClosed data={gappedSeries} x={getX} y={getY} fill={color} fillOpacity={fillOpacity} curve={curves[curve]} yScale={yScale} id={`${id}_${index}`} />}</React.Fragment>
       ))}
     </>
   );

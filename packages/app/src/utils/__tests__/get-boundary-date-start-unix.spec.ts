@@ -6,13 +6,7 @@ import { getBoundaryDateStartUnix } from '../get-boundary-date-start-unix';
 const GetBoundaryDateStartUnix = suite('getBoundaryDateStartUnix');
 
 GetBoundaryDateStartUnix('should return the start date for a timespan numberOfItems from the end of a range of date values', () => {
-  const values = [
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-  ];
+  const values = [{ date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }];
 
   const numberOfItems = 3;
 
@@ -38,13 +32,7 @@ GetBoundaryDateStartUnix('should return the start date for a timespan numberOfIt
 });
 
 GetBoundaryDateStartUnix('should return Infinity when numberOfItems is larger then values.length', () => {
-  const values = [
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-  ];
+  const values = [{ date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }];
 
   const numberOfItems = values.length + 1;
 
@@ -54,13 +42,7 @@ GetBoundaryDateStartUnix('should return Infinity when numberOfItems is larger th
 });
 
 GetBoundaryDateStartUnix('should return the last date_unix when numberOfItems is zero', () => {
-  const values = [
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-    { date_unix: Date.now() / 1000 },
-  ];
+  const values = [{ date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }, { date_unix: Date.now() / 1000 }];
 
   const numberOfItems = 0;
 

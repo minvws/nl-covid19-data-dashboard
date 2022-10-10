@@ -46,14 +46,7 @@ export function Breadcrumbs() {
               typeof="ListItem"
             >
               <Link href={href} passHref>
-                <Anchor
-                  underline="hover"
-                  property="item"
-                  typeof="WebPage"
-                  css={css({ outlineOffset: 2 })}
-                  aria-label={redirectLabel}
-                  aria-current={href === pathname ? 'location' : undefined}
-                >
+                <Anchor underline="hover" property="item" typeof="WebPage" css={css({ outlineOffset: 2 })} aria-label={redirectLabel} aria-current={href === pathname ? 'location' : undefined}>
                   <span property="name">{title}</span>
                 </Anchor>
               </Link>
