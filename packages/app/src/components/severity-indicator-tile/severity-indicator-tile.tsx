@@ -8,6 +8,7 @@ import { SeverityIndicator } from './components/severity-indicator';
 import { getSeverityColor } from './logic/get-severity-color';
 import { SeverityLevel, SeverityLevels } from './types';
 import { InlineText } from '../typography';
+import { SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH } from '~/components/severity-indicator-tile/constants';
 
 interface SeverityIndicatorTileProps {
   description: string;
@@ -18,8 +19,6 @@ interface SeverityIndicatorTileProps {
 }
 
 export const SeverityIndicatorTile = ({ description, label, level, title, footerText }: SeverityIndicatorTileProps) => {
-  const SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH = 250;
-
   return (
     <Box
       alignItems="flex-start"

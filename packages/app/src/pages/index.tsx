@@ -14,6 +14,7 @@ import { replaceVariablesInText } from '~/utils';
 import { getSeverityLabel } from '~/components/severity-indicator-tile/logic/get-severity-label';
 import { SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -54,27 +55,24 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     md: `repeat(3, 1fr)`,
   };
 
-  const TOPICAL_TILE_MAX_WIDTH = 930;
-  const THERMOMETER_ICON = 'Stopwatch';
-  const severityLevelsList = ['1', '2', '3', '4'];
   const currentSeverityLevel = textNl.thermometer.indicator.level as SeverityLevels;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg={colors.white}>
         <MaxWidth id="content">
-          <Box marginBottom={{ _: 4, md: 5 }} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_TILE_MAX_WIDTH}>
+          <Box marginBottom={{ _: 4, md: 5 }} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
             <TopicalHeader title={selectedTopicalData.title} dynamicDescriptions={selectedTopicalData.dynamicDescription} />
           </Box>
-          {severityLevelsList.includes(currentSeverityLevel) && (
-            <Box my={5} px={breakpoints.sm ? 4 : 3} maxWidth={TOPICAL_TILE_MAX_WIDTH}>
+          {SEVERITY_LEVELS_LIST.includes(currentSeverityLevel) && (
+            <Box my={5} px={breakpoints.sm ? 4 : 3} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
                 title={textNl.thermometer.title}
                 dynamicSubtitle={replaceVariablesInText(textNl.thermometer.description, {
                   level: currentSeverityLevel,
                   label: getSeverityLabel(currentSeverityLevel),
                 })}
-                icon={THERMOMETER_ICON}
+                icon={THERMOMETER_ICON_NAME}
               />
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
