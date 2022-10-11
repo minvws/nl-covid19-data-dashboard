@@ -1,3 +1,10 @@
 timestamp,action,key,document_id,move_to
 2022-10-04T07:54:52.567Z,add,common.variant_codes.BA_2_75_2,nsh0V1jFaQLVBtBJeMaVe8,__
 2022-10-04T07:54:53.573Z,add,common.variant_codes.BF_7,nsh0V1jFaQLVBtBJeMaVig,__
+2022-10-10T13:03:09.587Z,add,pages.topical_page.nl.thermometer.title,HGRlaxydJ6CFBj9zrvVCYB,__
+2022-10-10T13:03:10.604Z,add,pages.topical_page.nl.thermometer.description,7OLL6UA2lzERNM4xv1bLLe,__
+2022-10-10T13:03:11.602Z,add,pages.topical_page.nl.thermometer.indicator.title,7OLL6UA2lzERNM4xv1bLOt,__
+2022-10-10T13:03:13.161Z,add,pages.topical_page.nl.thermometer.indicator.description,HGRlaxydJ6CFBj9zrvVDpr,__
+2022-10-10T13:03:14.524Z,add,pages.topical_page.nl.thermometer.indicator.level,HGRlaxydJ6CFBj9zrvVENP,__
+2022-10-10T13:03:15.629Z,add,pages.topical_page.nl.thermometer.indicator.footerText,yWf5NF9ZnuFvbcgji0hw3P,__
+2022-10-11T13:27:56.980Z,add,pages.topical_page.nl.thermometer.indicator.label,7OLL6UA2lzERNM4xv33W7O,__
