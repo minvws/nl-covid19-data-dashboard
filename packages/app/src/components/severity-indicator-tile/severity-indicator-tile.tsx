@@ -6,14 +6,14 @@ import { Markdown } from '~/components/markdown';
 import { SeverityIndicatorLabel } from './components/severity-indicator-label';
 import { SeverityIndicator } from './components/severity-indicator';
 import { getSeverityColor } from './logic/get-severity-color';
-import { SeverityLevel, SeverityLevels } from './types';
+import { SeverityLevels } from './types';
 import { InlineText } from '../typography';
 import { SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH } from '~/components/severity-indicator-tile/constants';
 
 interface SeverityIndicatorTileProps {
   description: string;
   label: string;
-  level: SeverityLevel;
+  level: SeverityLevels;
   footerText: string;
   title: string;
 }
@@ -23,7 +23,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, footer
     <Box
       alignItems="flex-start"
       border={`1px solid ${colors.gray3}`}
-      borderLeft={`${space[2]} solid ${getSeverityColor(level as SeverityLevels)}`}
+      borderLeft={`${space[2]} solid ${getSeverityColor(level)}`}
       css={css({ gap: `0 ${space[5]}` })}
       display="flex"
       flexDirection="row"

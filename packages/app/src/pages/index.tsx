@@ -11,7 +11,6 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { colors } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText } from '~/utils';
-import { getSeverityLabel } from '~/components/severity-indicator-tile/logic/get-severity-label';
 import { SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
@@ -70,17 +69,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 title={textNl.thermometer.title}
                 dynamicSubtitle={replaceVariablesInText(textNl.thermometer.description, {
                   level: currentSeverityLevel,
-                  label: getSeverityLabel(currentSeverityLevel),
+                  label: textNl.thermometer.indicator.label,
                 })}
                 icon={THERMOMETER_ICON_NAME}
               />
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
                 description={replaceVariablesInText(textNl.thermometer.indicator.description, {
-                  label: getSeverityLabel(currentSeverityLevel).toLowerCase(),
+                  label: textNl.thermometer.indicator.label.toLowerCase(),
                 })}
                 title={textNl.thermometer.indicator.title}
-                label={getSeverityLabel(currentSeverityLevel)}
+                label={textNl.thermometer.indicator.label}
                 footerText={textNl.thermometer.indicator.footerText}
               />
             </Box>
