@@ -233,7 +233,7 @@ Currently basic audit logging for Sanity mutations is implemented. Every create,
 
 ### Slack app
 
-A custom Slack app `InSanity` was set up to receive the audit logging from Sanity. It accepts a POST request with a JSON body and supports limited Markdown formatting. You can read more about this Slack Block Kit syntax here: https://api.slack.com/block-kit/building.
+A custom Slack app was set up to receive the audit logging from Sanity. It accepts a POST request with a JSON body and supports limited Markdown formatting. You can read more about this Slack Block Kit syntax here: https://api.slack.com/block-kit/building.
 ### GROQ-powered Webhooks
 
 The logging implementation is done by using two "GROQ-powered Webhooks". One for the production dataset and one for the development dataset. In the Sanity [project management dashboard](https://www.sanity.io/organizations/oK4uv1D35/project/5mog5ask/api) you can edit this configuration. Currently it's using a basic [GROQ Projection](https://www.sanity.io/guides/projections-in-groq-powered-webhooks):
@@ -250,7 +250,7 @@ The logging implementation is done by using two "GROQ-powered Webhooks". One for
 }
 ```
 
-Above results in a JSON blob which is POSTed to the InSanity Slack app. Example JSON result where `USER_ID` is filled in with the user id who did the mutation. When logged in into Sanity the link can be clicked to see the full user name.
+Above results in a JSON blob which is POSTed to the Slack app. Example JSON result where `USER_ID` is filled in with the user id who did the mutation. When logged in into Sanity the link can be clicked to see the full user name.
 
 ```json
 {
