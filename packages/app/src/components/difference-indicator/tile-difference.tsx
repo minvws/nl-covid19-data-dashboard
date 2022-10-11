@@ -35,14 +35,14 @@ export function TileDifference({
   if (difference > 0) {
     content = isAmount ? text.waarde_meer : text.waarde_hoger;
 
-    containerWithIcon = <ContainerWithIcon icon={<Up />} color="red2" />;
+    containerWithIcon = <ContainerWithIcon icon={<Up aria-hidden="true" />} color="red2" />;
   }
 
   if (difference < 0) {
     content = isAmount ? text.waarde_minder : text.waarde_lager;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Down />} color="primary" />
+      <ContainerWithIcon icon={<Down aria-hidden="true" />} color="primary" />
     );
   }
 
@@ -50,7 +50,7 @@ export function TileDifference({
     content = text.waarde_gelijk;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Dot />} color="neutral" />
+      <ContainerWithIcon icon={<Dot aria-hidden="true" />} color="neutral" />
     );
   }
 

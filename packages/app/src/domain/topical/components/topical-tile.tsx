@@ -99,7 +99,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
             </Box>
 
             <TileIcon>
-              <DynamicIcon name={tileIcon} />
+              <DynamicIcon name={tileIcon} aria-hidden="true" />
             </TileIcon>
           </Box>
           <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formatedKpiValue ? { _: 2, xs: 2 } : undefined}>

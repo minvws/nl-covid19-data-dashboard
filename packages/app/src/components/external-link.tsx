@@ -1,5 +1,6 @@
 import React from 'react';
 import { Anchor, AnchorProps } from './typography';
+import { useIntl } from '~/intl';
 
 type ExternalLinkProps = {
   href: string;
@@ -15,13 +16,16 @@ export function ExternalLink({
   ariaLabel,
   ...anchorProps
 }: ExternalLinkProps) {
+  const { commonTexts } = useIntl();
+  const ExternalLinkAriaLabel = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.external_link
+
   return (
     <Anchor
       href={href}
       rel="noopener noreferrer"
       target="_blank"
       className={className}
-      aria-label={ariaLabel}
+      aria-label={ExternalLinkAriaLabel}
       {...anchorProps}
     >
       {children}

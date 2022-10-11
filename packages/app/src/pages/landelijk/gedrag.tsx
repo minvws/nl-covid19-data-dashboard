@@ -145,7 +145,7 @@ export default function BehaviorPage(
           <PageInformationBlock
             category={caterogyTexts}
             title={text.nl.pagina.titel}
-            icon={<Bevolking />}
+            icon={<Bevolking aria-hidden="true" />}
             description={text.nl.pagina.toelichting}
             metadata={{
               datumsText: text.nl.datums,

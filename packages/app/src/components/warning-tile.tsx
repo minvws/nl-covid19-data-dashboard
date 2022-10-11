@@ -6,6 +6,7 @@ import { isDefined } from 'ts-is-present';
 import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
+import { useIntl } from '~/intl';
 
 type WarningMessageVariant = 'emphasis' | 'default' | 'archived';
 
@@ -15,6 +16,7 @@ interface WarningMessageProps {
   icon?: ComponentType;
   isFullWidth?: boolean;
   tooltipText?: string;
+  ariaLabel?: string;
 }
 
 // WarningMessage
@@ -24,14 +26,17 @@ export function WarningTile({
   icon = Warning,
   isFullWidth,
   tooltipText,
+  ariaLabel,
 }: WarningMessageProps) {
   const Icon = icon;
+  const { commonTexts } = useIntl();
+  const WarningIconAriaLabel = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.warning_icon
 
   return (
     <StyledArticle isFullWidth={isFullWidth}>
       <WarningBox variant={variant}>
         <IconWrapper>
-          <Icon />
+          <Icon aria-label={WarningIconAriaLabel} />
         </IconWrapper>
       </WarningBox>
       <WarningMessageBox variant={variant}>

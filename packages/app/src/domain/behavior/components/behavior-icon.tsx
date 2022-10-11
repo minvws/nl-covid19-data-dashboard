@@ -36,5 +36,5 @@ interface BehaviorIconProps {
 
 export function BehaviorIcon({ name, size = 32 }: BehaviorIconProps) {
   const Icon = icons[name];
-  return <Icon width={size} height={size} />;
+  return <Icon width={size} height={size} aria-hidden="true" />;
 }

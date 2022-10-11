@@ -30,7 +30,7 @@ export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   if (trend === 'up') {
     return (
       <Trend color={color}>
-        <Up />
+        <Up aria-hidden="true" />
         {text.basisregels.trend_hoger}
       </Trend>
     );
@@ -38,7 +38,7 @@ export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   if (trend === 'down') {
     return (
       <Trend color={color}>
-        <Down />
+        <Down aria-hidden="true" />
         {text.basisregels.trend_lager}
       </Trend>
     );
@@ -46,7 +46,7 @@ export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   if (trend === 'equal') {
     return (
       <Trend color={colors.neutral}>
-        <Dot />
+        <Dot aria-hidden="true" />
         {text.basisregels.trend_gelijk}
       </Trend>
     );
