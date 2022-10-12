@@ -10,6 +10,8 @@ import DynamicIcon from '~/components/get-icon-by-name';
 import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { KpiValue } from '~/components';
+import { useIntl } from '~/intl';
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN';
@@ -26,16 +28,14 @@ interface TopicalTileProps {
   tileIcon: TopicalIcon;
   trendIcon: TrendIcon | null;
   dynamicDescription: string;
+  kpiValue: number | undefined | string;
   cta: Cta | null;
 }
 
-export function TopicalTile({
-  title,
-  tileIcon,
-  trendIcon,
-  dynamicDescription,
-  cta,
-}: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
+  const { formatNumber } = useIntl();
+
+  const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
   return (
     <Box
       as="a"
@@ -65,42 +65,44 @@ export function TopicalTile({
               gap: 2,
             })}
           >
-            <Box display="block" fontSize={{ _: 6, xs: 7 }}>
+            <Box display="block" fontSize={{ _: 6, xs: 7 }} pl={asResponsiveArray({ _: 3, xs: 4 })} pt={asResponsiveArray({ _: 3, xs: 4 })}>
               <Heading
                 level={3}
                 color={colors.blue8}
                 css={css({
                   display: 'flex',
                   justifyContent: 'start',
-                  paddingLeft: asResponsiveArray({ _: 3, xs: 4 }),
-                  paddingRight: 0,
-                  paddingTop: asResponsiveArray({ _: 3, xs: 4 }),
                   overflowWrap: 'break-word',
                   wordWrap: 'break-word',
                   hyphens: 'auto',
                 })}
               >
                 {title}
-                {trendIcon && (
+                {!formatedKpiValue && trendIcon && (
                   <TrendIconWrapper color={trendIcon.color}>
                     {trendIcon.direction === 'DOWN' && <Down />}
                     {trendIcon.direction === 'UP' && <Up />}
                   </TrendIconWrapper>
                 )}
               </Heading>
+              {formatedKpiValue && (
+                <Box display="flex" justifyContent="start" alignItems="center" mt={2}>
+                  <KpiValue color={colors.black} text={formatedKpiValue} />
+                  {trendIcon && (
+                    <TrendIconWrapper color={trendIcon.color}>
+                      {trendIcon.direction === 'DOWN' && <Down />}
+                      {trendIcon.direction === 'UP' && <Up />}
+                    </TrendIconWrapper>
+                  )}
+                </Box>
+              )}
             </Box>
 
             <TileIcon>
               <DynamicIcon name={tileIcon} />
             </TileIcon>
           </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="start"
-            textAlign="left"
-            p={{ _: 3, xs: 4 }}
-          >
+          <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formatedKpiValue ? { _: 2, xs: 2 } : undefined}>
             <Box display="flex" alignItems="center">
               <Markdown content={dynamicDescription} />
             </Box>
@@ -108,15 +110,7 @@ export function TopicalTile({
         </Box>
 
         {cta && (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            bg={colors.blue1}
-            color={colors.blue8}
-            padding={3}
-            className="topical-tile-cta"
-          >
+          <Box display="flex" justifyContent="center" alignItems="center" bg={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
             <TextWithIcon text={cta.label} icon={<ChevronRight />} />
           </Box>
         )}
@@ -128,7 +122,6 @@ export function TopicalTile({
 const TrendIconWrapper = styled.span`
   color: ${({ color }) => color};
   flex-shrink: 0;
-  height: 20px;
   margin-left: ${space[2]};
   width: 20px;
 `;

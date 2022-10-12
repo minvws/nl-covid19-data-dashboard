@@ -105,6 +105,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                               dynamicDescription={themeTile.dynamicDescription}
                               cta={themeTile.cta}
                               key={themeTile.index}
+                              kpiValue={themeTile.kpiValue}
                             />
                           );
                         })}
