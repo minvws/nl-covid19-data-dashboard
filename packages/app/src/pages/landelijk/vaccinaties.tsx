@@ -20,7 +20,7 @@ import {
   VaccineBoosterAdministrationsKpiSection,
   VaccinationsShotKpiSection,
   VaccinationsKpiHeader,
-  VaccineCoverageChoroplethPerGm,
+  VaccineCoverageChoropleth,
   VaccineCoveragePerAgeGroup,
   VaccineCoverageTile,
   VaccineCoverageToggleTile,
@@ -410,7 +410,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <VaccineCoverageChoroplethPerGm data={choropleth} />
+          <VaccineCoverageChoropleth data={choropleth} />
           <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}

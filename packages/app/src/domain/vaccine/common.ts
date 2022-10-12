@@ -12,7 +12,12 @@ export const ARCHIVED_COLORS = {
 type FullyVaccinatedAges = '12+' | '18+';
 type Autumn2022Vaccinated = '12+' | '60+';
 
-export type MatchingVaccineCoverageAgeGroupsType = {
+type MatchingVaccineCoverageAgeGroupsType = {
   autumn_2022_vaccinated_percentage: Autumn2022Vaccinated[];
   fully_vaccinated_percentage: FullyVaccinatedAges[];
+};
+
+export const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
+  autumn_2022_vaccinated_percentage: ['12+', '60+'],
+  fully_vaccinated_percentage: ['12+', '18+'],
 };
