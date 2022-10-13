@@ -127,6 +127,6 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 const MobileCell = styled.td(
   css({
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGray',
+    borderBottomColor: 'gray2',
   })
 );

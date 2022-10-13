@@ -254,7 +254,7 @@ function useSeriesConfig(
         const color =
           variantColors.find(
             (variantColors) => variantColors.variant === variantCode
-          )?.color || colors.data.variants.fallbackColor;
+          )?.color || colors.gray5;
 
         return {
           type: 'gapped-area',
@@ -274,7 +274,7 @@ function useSeriesConfig(
       label: text.tooltip_labels.other_percentage,
       fillOpacity: 0.2,
       shape: 'square',
-      color: colors.data.variants.other_graph,
+      color: colors.gray5,
       strokeWidth: 2,
       mixBlendMode: 'multiply',
     } as GappedAreaSeriesDefinition<VariantChartValue>;
@@ -295,7 +295,7 @@ const NoDataBox = styled.div(
     width: '100%',
     display: 'flex',
     height: '8em',
-    color: 'gray',
+    color: 'gray5',
     justifyContent: 'center',
     alignItems: 'center',
   })

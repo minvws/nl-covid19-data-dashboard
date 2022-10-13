@@ -24,7 +24,7 @@ export function VariantDifference({
   }
   if (value.difference > 0) {
     return (
-      <Difference color={colors.body}>
+      <Difference color={colors.black}>
         <Up />
         {formatPercentage(value.difference, options)} {text.verschil.meer}
       </Difference>
@@ -32,15 +32,15 @@ export function VariantDifference({
   }
   if (value.difference < 0) {
     return (
-      <Difference color={colors.body}>
+      <Difference color={colors.black}>
         <Down />
         {formatPercentage(-value.difference, options)} {text.verschil.minder}
       </Difference>
     );
   }
   return (
-    <Difference color={colors.data.neutral}>
-      <Dot color={colors.data.neutral} />
+    <Difference color={colors.neutral}>
+      <Dot color={colors.neutral} />
       {text.verschil.gelijk}
     </Difference>
   );

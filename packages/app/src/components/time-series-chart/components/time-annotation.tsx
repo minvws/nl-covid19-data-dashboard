@@ -39,7 +39,7 @@ export function TimeAnnotation({
             x={x - 15}
             y={15}
             textAnchor="end"
-            fill={colors.gray}
+            fill={colors.gray5}
           >
             {config.leftLabel}
           </Text>
@@ -48,7 +48,7 @@ export function TimeAnnotation({
             x={x + 15}
             y={15}
             textAnchor="start"
-            fill={colors.gray}
+            fill={colors.gray5}
           >
             {config.rightLabel}
           </Text>
@@ -58,7 +58,7 @@ export function TimeAnnotation({
             x2={x}
             y1={height}
             y2={0}
-            stroke={colors.gray}
+            stroke={colors.gray5}
             strokeWidth="2"
           />
         </Group>

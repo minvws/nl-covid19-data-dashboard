@@ -7,353 +7,353 @@ import {
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 0.1,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 4,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 7,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 10,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 20,
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.scale.blue[5],
     threshold: 30,
   },
 ];
 
 const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 1,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 2,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 3,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 4,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 5,
   },
 ];
 
 const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 1,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 5,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 8,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 11,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 21,
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.scale.blue[5],
     threshold: 31,
   },
 ];
 
 const sewerThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 0.01,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 50,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 250,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 500,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 750,
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.scale.blue[5],
     threshold: 1000,
   },
 ];
 
 const vrHospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 1,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 5,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 10,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 15,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 20,
   },
 ];
 
 const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 0.1,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 0.3,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 0.5,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 0.9,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 1.5,
   },
 ];
 
 const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.underReported,
+    color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 0.1,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 10,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 20,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 30,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 40,
   },
 ];
 
 const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 40,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 50,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 60,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 70,
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.scale.blue[5],
     threshold: 80,
   },
   {
-    color: colors.data.scale.blue[6],
+    color: colors.scale.blue[6],
     threshold: 90,
   },
 ];
 
 const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.yellow[0],
+    color: colors.scale.yellow[0],
     threshold: 0,
   },
   {
-    color: colors.data.scale.yellow[1],
+    color: colors.scale.yellow[1],
     threshold: 40,
   },
   {
-    color: colors.data.scale.yellow[2],
+    color: colors.scale.yellow[2],
     threshold: 50,
   },
   {
-    color: colors.data.scale.yellow[3],
+    color: colors.scale.yellow[3],
     threshold: 60,
   },
   {
-    color: colors.data.scale.yellow[4],
+    color: colors.scale.yellow[4],
     threshold: 70,
   },
   {
-    color: colors.data.scale.yellow[5],
+    color: colors.scale.yellow[5],
     threshold: 80,
   },
   {
-    color: colors.data.scale.yellow[6],
+    color: colors.scale.yellow[6],
     threshold: 90,
   },
 ];
 
 const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.scale.blue[0],
     threshold: 0,
     label: '',
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.scale.blue[1],
     threshold: 10,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.scale.blue[2],
     threshold: 30,
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.scale.blue[3],
     threshold: 40,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.scale.blue[4],
     threshold: 50,
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.scale.blue[5],
     threshold: 70,
     label: '70+',
   },
 ];
 
 const vaccineCoveragePercentageThresholds: ChoroplethThresholdsValue[] = [
-  { color: colors.data.scale.blueDetailed[0], threshold: 0, label: '0%' },
-  { color: colors.data.scale.blueDetailed[1], threshold: 50, label: '50%' },
-  { color: colors.data.scale.blueDetailed[2], threshold: 60, label: '60%' },
-  { color: colors.data.scale.blueDetailed[4], threshold: 70, label: '70%' },
-  { color: colors.data.scale.blueDetailed[6], threshold: 80, label: '80%' },
-  { color: colors.data.scale.blueDetailed[8], threshold: 90, label: '90%' },
+  { color: colors.scale.blueDetailed[0], threshold: 0, label: '0%' },
+  { color: colors.scale.blueDetailed[1], threshold: 50, label: '50%' },
+  { color: colors.scale.blueDetailed[2], threshold: 60, label: '60%' },
+  { color: colors.scale.blueDetailed[4], threshold: 70, label: '70%' },
+  { color: colors.scale.blueDetailed[6], threshold: 80, label: '80%' },
+  { color: colors.scale.blueDetailed[8], threshold: 90, label: '90%' },
 ];
 
 const situationsThreshold: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blueDetailed[0],
+    color: colors.scale.blueDetailed[0],
     threshold: 0,
     label: '0%',
   },
   {
-    color: colors.data.scale.blueDetailed[1],
+    color: colors.scale.blueDetailed[1],
     threshold: 10,
     label: '10%',
   },
   {
-    color: colors.data.scale.blueDetailed[2],
+    color: colors.scale.blueDetailed[2],
     threshold: 20,
     label: '20%',
   },
   {
-    color: colors.data.scale.blueDetailed[3],
+    color: colors.scale.blueDetailed[3],
     threshold: 30,
     label: '30%',
   },
   {
-    color: colors.data.scale.blueDetailed[4],
+    color: colors.scale.blueDetailed[4],
     threshold: 40,
     label: '40%',
   },
   {
-    color: colors.data.scale.blueDetailed[5],
+    color: colors.scale.blueDetailed[5],
     threshold: 50,
     label: '50%',
   },
   {
-    color: colors.data.scale.blueDetailed[6],
+    color: colors.scale.blueDetailed[6],
     threshold: 60,
     label: '60%',
   },
   {
-    color: colors.data.scale.blueDetailed[7],
+    color: colors.scale.blueDetailed[7],
     threshold: 70,
     label: '70%',
   },
   {
-    color: colors.data.scale.blueDetailed[8],
+    color: colors.scale.blueDetailed[8],
     threshold: 80,
     label: '80%',
   },
   {
-    color: colors.data.scale.blueDetailed[9],
+    color: colors.scale.blueDetailed[9],
     threshold: 90,
     label: '90%',
     endLabel: '100%',
@@ -362,11 +362,11 @@ const situationsThreshold: ChoroplethThresholdsValue[] = [
 
 const hasSufficientDataThresholds = [
   {
-    color: colors.silver,
+    color: colors.gray3,
     threshold: 0,
   },
   {
-    color: colors.data.primary,
+    color: colors.primary,
     threshold: 1,
   },
 ];

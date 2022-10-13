@@ -420,18 +420,18 @@ export function StackedChart<T extends TimestampedValue>(
                 <GridRows
                   scale={yScale}
                   width={bounds.width}
-                  stroke={colors.data.axis}
+                  stroke={colors.gray3}
                 />
                 <AxisBottom
                   scale={xScale}
                   tickValues={xScale.domain()}
                   top={bounds.height}
-                  stroke={colors.data.axis}
+                  stroke={colors.gray3}
                   tickFormat={props.formatXAxis ?? formatDateString}
                   tickLabelProps={() => {
                     return {
                       textAnchor: 'middle',
-                      fill: colors.data.axisLabels,
+                      fill: colors.gray6,
                       fontSize: 12,
                     };
                   }}
@@ -441,7 +441,7 @@ export function StackedChart<T extends TimestampedValue>(
                         <Line
                           from={{ x, y: y - 20 }}
                           to={{ x, y: y - 13 }}
-                          stroke={colors.data.axis}
+                          stroke={colors.gray3}
                           strokeWidth={1}
                           strokeLinecap="square"
                         />
@@ -458,7 +458,7 @@ export function StackedChart<T extends TimestampedValue>(
                     scale={yScale}
                     hideTicks
                     hideAxisLine
-                    stroke={colors.data.axis}
+                    stroke={colors.gray3}
                     tickFormat={
                       formatYTickValue
                         ? (formatYTickValue as AnyTickFormatter)
@@ -467,7 +467,7 @@ export function StackedChart<T extends TimestampedValue>(
                         : (formatYAxis as AnyTickFormatter)
                     }
                     tickLabelProps={() => ({
-                      fill: colors.data.axisLabels,
+                      fill: colors.gray6,
                       fontSize: 12,
                       dx: 0,
                       textAnchor: 'end',
@@ -592,7 +592,7 @@ function getDate(x: SeriesValue) {
 function HatchedSquare() {
   return (
     <svg height="15" width="15">
-      <rect height="15" width="15" fill={colors.gray} />
+      <rect height="15" width="15" fill={colors.gray5} />
       <rect height="15" width="15" fill="url(#pattern-hatched-small)" />
     </svg>
   );

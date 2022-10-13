@@ -18,7 +18,7 @@ export function InlineDifference({
     return (
       <Container>
         <BoldText>{isAmount ? text.trend_meer : text.trend_hoger}</BoldText>
-        <IconContainer color="red">
+        <IconContainer color="red2">
           <Up />
         </IconContainer>
       </Container>
@@ -27,7 +27,7 @@ export function InlineDifference({
     return (
       <Container>
         <BoldText>{isAmount ? text.trend_minder : text.trend_lager}</BoldText>
-        <IconContainer color="data.primary">
+        <IconContainer color="primary">
           <Down />
         </IconContainer>
       </Container>

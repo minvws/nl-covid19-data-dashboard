@@ -308,7 +308,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         scale={yScale}
         width={bounds.width}
         numTicks={numGridLines}
-        stroke="#E4E4E4"
+        stroke={colors.gray2}
       />
       <GridRows
         /**
@@ -319,7 +319,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         width={bounds.width}
         numTicks={yTickValues?.length || numDarkGridLines}
         tickValues={yTickValues}
-        stroke={colors.silver}
+        stroke={colors.gray3}
       />
 
       {showWeekNumbers && (
@@ -336,10 +336,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         tickValues={tickValues}
         tickFormat={(_x, i) => xTicks[i]}
         top={bounds.height}
-        stroke={colors.silver}
+        stroke={colors.gray3}
         rangePadding={xRangePadding}
         tickLabelProps={(x) => ({
-          fill: colors.data.axisLabels,
+          fill: colors.gray6,
           fontSize: 12,
           /**
            * Applying a dx of -50%, when there's only a single tick value, prevents
@@ -369,7 +369,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
               numTicks={yTickValues?.length || numGridLines}
               hideTicks
               hideAxisLine
-              stroke={colors.silver}
+              stroke={colors.gray3}
               tickFormat={
                 formatYTickValue
                   ? formatYTickValue
@@ -378,7 +378,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
                   : formatYAxis
               }
               tickLabelProps={() => ({
-                fill: colors.data.axisLabels,
+                fill: colors.gray6,
                 fontSize: 12,
                 textAnchor: 'end',
                 verticalAnchor: 'middle',
@@ -401,7 +401,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
             numTicks={numGridLines}
             hideTicks
             hideAxisLine
-            stroke={colors.silver}
+            stroke={colors.gray3}
             tickFormat={
               formatYTickValue
                 ? formatYTickValue
@@ -410,7 +410,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
                 : formatYAxis
             }
             tickLabelProps={() => ({
-              fill: colors.data.axisLabels,
+              fill: colors.gray6,
               fontSize: 12,
               textAnchor: 'start',
               // position the label above the chart

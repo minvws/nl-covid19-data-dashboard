@@ -232,7 +232,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textVr.section_positive_tested
                       .line_chart_positive_tested_daily_moving_average_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
@@ -240,7 +240,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   label:
                     textVr.section_positive_tested
                       .line_chart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{
@@ -328,13 +328,13 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textVr.section_deceased
                       .line_chart_deceased_daily_moving_average_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'deceased_daily',
                   label: textVr.section_deceased.line_chart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

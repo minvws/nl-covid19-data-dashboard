@@ -71,23 +71,23 @@ export function VaccineDeliveryBarChart({
         config={[
           {
             metricProperty: 'bio_n_tech_pfizer' as const,
-            color: colors.data.vaccines.bio_n_tech_pfizer,
+            color: colors.vaccines.bio_n_tech_pfizer,
             label: productNames.pfizer,
           },
           {
             metricProperty: 'moderna' as const,
-            color: colors.data.vaccines.moderna,
+            color: colors.vaccines.moderna,
             label: productNames.moderna,
           },
           {
             metricProperty: 'astra_zeneca' as const,
-            color: colors.data.vaccines.astra_zeneca,
+            color: colors.vaccines.astra_zeneca,
             label: productNames.astra_zeneca,
           },
           'janssen' in data.last_value
             ? {
                 metricProperty: 'janssen' as const,
-                color: colors.data.vaccines.janssen,
+                color: colors.vaccines.janssen,
                 label: productNames.janssen,
               }
             : undefined,

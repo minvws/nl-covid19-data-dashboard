@@ -186,7 +186,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                   label:
                     corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
                       .warnings,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
             />

@@ -12,20 +12,14 @@ import { asResponsiveArray } from '~/style/utils';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
 import { useVaccineCoveragePercentageFormatter } from '~/domain/vaccine/logic/use-vaccine-coverage-percentage-formatter';
-import {
-  COLOR_FULLY_VACCINATED,
-  COLOR_FULLY_BOOSTERED,
-} from '~/domain/vaccine/common';
+import { COLOR_FULLY_VACCINATED, COLOR_FULLY_BOOSTERED } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
 interface WideCoverageTable {
   text: SiteText['pages']['vaccinations_page']['nl'];
-  values:
-    | NlVaccineCoveragePerAgeGroupArchived_20220908Value[]
-    | VrVaccineCoveragePerAgeGroupArchived_20220908Value[]
-    | GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
+  values: NlVaccineCoveragePerAgeGroupArchived_20220908Value[] | VrVaccineCoveragePerAgeGroupArchived_20220908Value[] | GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
 }
 
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
@@ -38,7 +32,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
         <thead
           css={css({
             borderBottom: '1px solid',
-            borderColor: 'silver',
+            borderColor: 'gray3',
           })}
         >
           <Row>
@@ -51,9 +45,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.vaccination_coverage.headers.agegroup}
-              </InlineText>
+              <InlineText variant="label1">{text.vaccination_coverage.headers.agegroup}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -65,9 +57,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.vaccination_coverage.headers.fully_vaccinated}
-              </InlineText>
+              <InlineText variant="label1">{text.vaccination_coverage.headers.fully_vaccinated}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -79,9 +69,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {text.archived.vaccination_coverage.headers.booster_shot}
-              </InlineText>
+              <InlineText variant="label1">{text.archived.vaccination_coverage.campaign_headers.booster_shot}</InlineText>
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -91,12 +79,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 }),
               })}
             >
-              <InlineText variant="label1">
-                {
-                  text.archived.vaccination_coverage.headers
-                    .difference_booster_shot_and_fully_vaccinated
-                }
-              </InlineText>
+              <InlineText variant="label1">{text.archived.vaccination_coverage.campaign_headers.difference_booster_shot_and_fully_vaccinated}</InlineText>
             </HeaderCell>
           </Row>
         </thead>
@@ -105,17 +88,9 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
             <Row key={index}>
               <HeaderCell isColumn>
                 <AgeGroup
-                  range={formatAgeGroupString(
-                    item.age_group_range,
-                    commonTexts.common.agegroup
-                  )}
-                  ageGroupTotal={
-                    'age_group_total' in item ? item.age_group_total : undefined
-                  }
-                  birthyear_range={formatBirthyearRangeString(
-                    item.birthyear_range,
-                    commonTexts.common.birthyears
-                  )}
+                  range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
+                  ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
+                  birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
                   text={commonTexts.common.agegroup.total_people}
                 />
               </HeaderCell>
@@ -123,10 +98,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 <WidePercentage
                   value={
                     'fully_vaccinated_percentage_label' in item
-                      ? formatCoveragePercentage(
-                          item,
-                          'fully_vaccinated_percentage'
-                        )
+                      ? formatCoveragePercentage(item, 'fully_vaccinated_percentage')
                       : `${formatPercentage(item.fully_vaccinated_percentage)}%`
                   }
                   color={COLOR_FULLY_VACCINATED}
@@ -137,10 +109,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                 <WidePercentage
                   value={
                     'booster_shot_percentage_label' in item
-                      ? formatCoveragePercentage(
-                          item,
-                          'booster_shot_percentage'
-                        )
+                      ? formatCoveragePercentage(item, 'booster_shot_percentage')
                       : item.booster_shot_percentage === null
                       ? text.vaccination_coverage.no_data
                       : `${formatPercentage(item.booster_shot_percentage)}%`
@@ -154,20 +123,12 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
                   <Bar
                     value={item.fully_vaccinated_percentage}
                     color={COLOR_FULLY_VACCINATED}
-                    label={
-                      'fully_vaccinated_percentage_label' in item
-                        ? item.fully_vaccinated_percentage_label
-                        : undefined
-                    }
+                    label={'fully_vaccinated_percentage_label' in item ? item.fully_vaccinated_percentage_label : undefined}
                   />
                   <Bar
                     value={item.booster_shot_percentage}
                     color={COLOR_FULLY_BOOSTERED}
-                    label={
-                      'booster_shot_percentage_label' in item
-                        ? item.booster_shot_percentage_label
-                        : undefined
-                    }
+                    label={'booster_shot_percentage_label' in item ? item.booster_shot_percentage_label : undefined}
                   />
                 </Box>
               </Cell>
@@ -189,7 +150,7 @@ const StyledTable = styled.table(
 const Row = styled.tr(
   css({
     borderBottom: '1px solid',
-    borderColor: 'silver',
+    borderColor: 'gray3',
   })
 );
 

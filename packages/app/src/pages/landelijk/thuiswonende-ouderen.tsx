@@ -227,7 +227,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textNl.section_positive_tested
                       .line_chart_positive_tested_daily_moving_average_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
@@ -235,7 +235,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   label:
                     textNl.section_positive_tested
                       .line_chart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{
@@ -349,13 +349,13 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textNl.section_deceased
                       .line_chart_deceased_daily_moving_average_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'deceased_daily',
                   label: textNl.section_deceased.line_chart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

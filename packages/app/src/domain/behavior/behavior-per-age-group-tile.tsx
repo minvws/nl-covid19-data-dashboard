@@ -103,7 +103,7 @@ export function BehaviorPerAgeGroup({
                         <Cell>
                           {ageValueCompliance ? (
                             <PercentageBar
-                              color={colors.data.cyan}
+                              color={colors.blue6}
                               amount={ageValueCompliance}
                             />
                           ) : (
@@ -113,7 +113,7 @@ export function BehaviorPerAgeGroup({
                           )}
                           {ageValueSupport ? (
                             <PercentageBar
-                              color={colors.data.yellow}
+                              color={colors.yellow3}
                               amount={ageValueSupport}
                             />
                           ) : (
@@ -134,11 +134,11 @@ export function BehaviorPerAgeGroup({
                 spacingHorizontal={3}
               >
                 <Box>
-                  <ExplanationBox background={colors.data.cyan} />
+                  <ExplanationBox background={colors.blue6} />
                   {complianceExplanation}
                 </Box>
                 <Box>
-                  <ExplanationBox background={colors.data.yellow} />
+                  <ExplanationBox background={colors.yellow3} />
                   {supportExplanation}
                 </Box>
               </Box>
@@ -208,7 +208,7 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGray',
+    borderBottomColor: 'gray2',
     p: 0,
     py: 2,
     minHeight: 100,

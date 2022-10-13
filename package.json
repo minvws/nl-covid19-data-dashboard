@@ -32,7 +32,8 @@
     "cms:deploy": "yarn workspace @corona-dashboard/cms deploy",
     "build:app": "yarn workspace @corona-dashboard/app build",
     "build:common": "yarn workspace @corona-dashboard/common build",
-    "build:icons": "yarn workspace @corona-dashboard/icons build"
+    "build:icons": "yarn workspace @corona-dashboard/icons build",
+    "postinstall": "husky install"
   },
   "workspaces": {
     "packages": [
@@ -46,6 +47,18 @@
   },
   "packageManager": "yarn@3.1.0",
   "devDependencies": {
+    "@types/prettier": "^2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "^2.7.1",
     "ts-node": "^10.8.1"
+  },
+  "lint-staged": {
+    "./packages/**/*.@(ts|tsx|js)": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

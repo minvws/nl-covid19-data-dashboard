@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
@@ -41,6 +42,6 @@ const StyledTile = styled.article<{
       : asResponsiveArray({ _: 3, sm: 4 }),
     height: styledTileProps.height,
     backgroundColor: 'white',
-    borderTop: styledTileProps.hasNoBorder ? undefined : 'solid 2px lightGray',
+    borderTop: styledTileProps.hasNoBorder ? undefined : `solid 2px ${colors.gray2}`,
   })
 );

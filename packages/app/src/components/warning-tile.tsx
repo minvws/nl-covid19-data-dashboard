@@ -75,7 +75,7 @@ const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
       alignItems: 'center',
       justifyContent: 'center',
       flex: '0 0 auto',
-      backgroundColor: variant === 'emphasis' ? 'warningYellow' : 'white',
+      backgroundColor: variant === 'emphasis' ? 'yellow2' : 'white',
       borderBottomLeftRadius: 1,
       borderTopLeftRadius: 1,
     });
@@ -102,7 +102,7 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
       flex: '1 1 auto',
       py: 2,
       pl: variant === 'emphasis' ? 3 : 0,
-      backgroundColor: variant === 'emphasis' ? '#FFF4C1' : 'white',
+      backgroundColor: variant === 'emphasis' ? 'yellow1' : 'white',
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
     });

@@ -19,7 +19,7 @@ export function AppFooter() {
   return (
     <footer>
       <Box
-        bg="blue"
+        bg="blue8"
         color="white"
         py={5}
         position="relative"

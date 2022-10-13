@@ -275,13 +275,13 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
                   metricProperty:
                     'admissions_on_date_of_admission_moving_average',
                   label: textNl.linechart_legend_trend_label_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'admissions_on_date_of_admission',
                   label: textNl.linechart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
             />
@@ -319,13 +319,13 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
                   nonInteractive: true,
                   hideInLegend: true,
                   label: textNl.chart_bedbezetting.legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'scatter-plot',
                   metricProperty: 'beds_occupied_covid',
                   label: textNl.chart_bedbezetting.legend_dot_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
             />

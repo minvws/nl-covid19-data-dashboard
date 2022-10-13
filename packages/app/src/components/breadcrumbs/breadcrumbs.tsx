@@ -16,7 +16,7 @@ export function Breadcrumbs() {
   return (
     <Box
       css={css({
-        borderBottom: `1px solid ${colors.border}`,
+        borderBottom: `1px solid ${colors.gray3}`,
         position: 'absolute',
         top: -9999,
         left: -9999,

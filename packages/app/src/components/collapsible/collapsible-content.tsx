@@ -39,7 +39,7 @@ const Label = styled.button(
     width: '100%',
     bg: 'transparent',
     border: 'none',
-    color: 'blue',
+    color: 'blue8',
     fontFamily: 'body',
     fontWeight: 'bold',
     fontSize: '1rem',
@@ -50,7 +50,7 @@ const Label = styled.button(
     '&:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: 'blue',
+      outlineColor: 'blue8',
     },
   })
 );

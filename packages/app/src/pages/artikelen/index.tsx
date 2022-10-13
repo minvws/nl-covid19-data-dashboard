@@ -193,7 +193,7 @@ const OrderedList = styled.ol(
     justifyContent: 'space-around',
     borderTop: '1px solid',
     borderBottom: '1px solid',
-    borderColor: 'silver',
+    borderColor: 'gray3',
     m: 0,
     my: 4,
     p: 0,
@@ -217,7 +217,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       bottom: 0,
       height: '5px',
       width: `calc(100%)`,
-      backgroundColor: 'blue',
+      backgroundColor: 'blue8',
       transform: `translateY(${x.isActive ? 0 : '6px'})`,
       transition: 'transform 0.2s',
     },
@@ -269,7 +269,7 @@ const StyledButton = styled.button(
     '&:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: 'blue',
+      outlineColor: 'blue8',
     },
   })
 );

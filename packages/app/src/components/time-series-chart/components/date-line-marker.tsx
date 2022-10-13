@@ -23,7 +23,7 @@ interface DateLineMarkerProps<T extends TimestampedValue> {
 }
 
 export function DateLineMarker<T extends TimestampedValue>({
-  lineColor = colors.data.primary,
+  lineColor = colors.primary,
   point,
   value,
 }: DateLineMarkerProps<T>) {
