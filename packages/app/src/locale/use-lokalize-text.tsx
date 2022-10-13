@@ -21,7 +21,9 @@ export type Dataset = typeof datasets[number];
 const query = `*[_type == 'lokalizeText']`;
 const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
 
-export const IS_STAGING_ENV = typeof window !== 'undefined' && window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
+export const IS_STAGING_ENV =
+  typeof window !== 'undefined' &&
+  window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
 
 /**
  * This hook will return an object which contains all lokalize translations.
@@ -39,12 +41,19 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
   const showSanityDebugToggle = enableHotReload || IS_STAGING_ENV;
 
-  const [dataset, setDataset] = useState<Dataset>((process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ?? 'development');
+  const [dataset, setDataset] = useState<Dataset>(
+    (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
+      'development'
+  );
 
-  const toggleButton = showSanityDebugToggle ? (
+  const toggleHotReloadButton = showSanityDebugToggle ? (
     <ToggleButton isActive={isActive} onClick={() => setIsActive((x) => !x)}>
       <Toggle values={[...datasets]} onToggle={setDataset} value={dataset} />
-      <Toggle values={Object.keys(languages) as LanguageKey[]} onToggle={setLocale} value={locale} />
+      <Toggle
+        values={Object.keys(languages) as LanguageKey[]}
+        onToggle={setLocale}
+        value={locale}
+      />
     </ToggleButton>
   ) : null;
 
@@ -77,38 +86,44 @@ export function useLokalizeText(initialLocale: LanguageKey) {
 
         updateSiteText();
 
-        subscription = client.listen(query).subscribe((update: MutationEvent<LokalizeText>) => {
-          /**
-           * `appear`-transition is emitted for newly created documents/drafts
-           */
-          if (update.transition === 'appear' && update.result) {
-            lokalizeTextsRef.current.push(update.result);
-            updateSiteTextDebounced();
-          }
-
-          /**
-           * `update`-transition is emitted for updated documents/drafts
-           */
-          if (update.transition === 'update' && update.result) {
-            const index = lokalizeTextsRef.current.findIndex((x) => x._id === update.documentId);
-
-            if (index > -1) {
-              lokalizeTextsRef.current[index] = update.result;
+        subscription = client
+          .listen(query)
+          .subscribe((update: MutationEvent<LokalizeText>) => {
+            /**
+             * `appear`-transition is emitted for newly created documents/drafts
+             */
+            if (update.transition === 'appear' && update.result) {
+              lokalizeTextsRef.current.push(update.result);
               updateSiteTextDebounced();
             }
-          }
 
-          /**
-           * `disappear`-transition is emitted for deleted documents/drafts
-           */
-          if (update.transition === 'disappear') {
-            const index = lokalizeTextsRef.current.findIndex((x) => x._id === update.documentId);
-            if (index > -1) {
-              lokalizeTextsRef.current.splice(index, 1);
-              updateSiteTextDebounced();
+            /**
+             * `update`-transition is emitted for updated documents/drafts
+             */
+            if (update.transition === 'update' && update.result) {
+              const index = lokalizeTextsRef.current.findIndex(
+                (x) => x._id === update.documentId
+              );
+
+              if (index > -1) {
+                lokalizeTextsRef.current[index] = update.result;
+                updateSiteTextDebounced();
+              }
             }
-          }
-        });
+
+            /**
+             * `disappear`-transition is emitted for deleted documents/drafts
+             */
+            if (update.transition === 'disappear') {
+              const index = lokalizeTextsRef.current.findIndex(
+                (x) => x._id === update.documentId
+              );
+              if (index > -1) {
+                lokalizeTextsRef.current.splice(index, 1);
+                updateSiteTextDebounced();
+              }
+            }
+          });
       });
 
       return () => {
@@ -118,7 +133,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
     }
   }, [initialLocale, dataset, isActive, locale]);
 
-  return [text, toggleButton, dataset] as const;
+  return { text, toggleHotReloadButton, dataset, locale } as const;
 }
 
 /**
@@ -133,7 +148,10 @@ export function useLokalizeText(initialLocale: LanguageKey) {
 export function mapSiteTextValuesToKeys(siteText: SiteText) {
   const keys = Object.keys(flatten(siteText));
 
-  const obj = keys.reduce((result, key) => set(result, key, key), {} as Record<string, string>);
+  const obj = keys.reduce(
+    (result, key) => set(result, key, key),
+    {} as Record<string, string>
+  );
 
   return unflatten(obj, { object: true }) as SiteText;
 }
@@ -146,7 +164,13 @@ interface ToggleProps<T extends string> {
 
 function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   return (
-    <Box border="1px solid" borderColor="gray3" mx={2} borderRadius={1} overflow="hidden">
+    <Box
+      border="1px solid"
+      borderColor="gray3"
+      mx={2}
+      borderRadius={1}
+      overflow="hidden"
+    >
       {values.map((x, i) => (
         <label
           key={x}
@@ -163,7 +187,11 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
           })}
         >
           <VisuallyHidden>
-            <input type="radio" checked={x === value} onChange={() => onToggle(x)} />
+            <input
+              type="radio"
+              checked={x === value}
+              onChange={() => onToggle(x)}
+            />
           </VisuallyHidden>
           {x}
         </label>
@@ -172,7 +200,17 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   );
 }
 
-function ToggleButton({ isActive, onClick, color, children }: { isActive: boolean; onClick: () => void; children: ReactNode; color?: 'green1' | 'blue8' }) {
+function ToggleButton({
+  isActive,
+  onClick,
+  color,
+  children,
+}: {
+  isActive: boolean;
+  onClick: () => void;
+  children: ReactNode;
+  color?: 'green1' | 'blue8';
+}) {
   return (
     <Container isActive={isActive}>
       <DisplayOnHover>{isActive && children}</DisplayOnHover>
@@ -217,14 +255,15 @@ const Container = styled.div<{ isActive: boolean }>((x) =>
     zIndex: 9999,
   })
 );
-const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>((x) =>
-  css({
-    cursor: 'pointer',
-    borderRadius: 1,
-    color: x.isActive ? 'white' : 'black',
-    bg: x.isActive ? 'blue8' : 'transparent',
-    transition: 'all 100ms linear',
-    p: 1,
-    display: 'inline-block',
-  })
+const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>(
+  (x) =>
+    css({
+      cursor: 'pointer',
+      borderRadius: 1,
+      color: x.isActive ? 'white' : 'black',
+      bg: x.isActive ? 'blue8' : 'transparent',
+      transition: 'all 100ms linear',
+      p: 1,
+      display: 'inline-block',
+    })
 );

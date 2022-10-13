@@ -4,7 +4,7 @@ import { LazyMotion } from 'framer-motion';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
@@ -16,20 +16,37 @@ import theme from '~/style/theme';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
 import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 
-const pagesWithSmoothScroll = ['landelijk', 'veiligheidsregio', 'gemeente'] as const;
+const pagesWithSmoothScroll = [
+  'landelijk',
+  'veiligheidsregio',
+  'gemeente',
+] as const;
 
-const loadAnimationFeatures = () => import('~/style/animations').then((mod) => mod.default);
+const loadAnimationFeatures = () =>
+  import('~/style/animations').then((mod) => mod.default);
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
-  const { locale = 'nl' } = router;
+  const [locale, setLocale] = useState((router.locale as LanguageKey) || 'nl');
 
-  const [text, toggleHotReloadButton, dataset] = useLokalizeText(locale as LanguageKey);
+  const {
+    text,
+    toggleHotReloadButton,
+    dataset,
+    locale: debugToggleLocale,
+  } = useLokalizeText(locale);
 
-  assert(text, `[${loadAnimationFeatures.name}] Encountered unknown language: ${locale}`);
+  useEffect(() => {
+    setLocale(debugToggleLocale);
+  }, [debugToggleLocale]);
 
-  const intlContext = useIntlHelperContext(locale as LanguageKey, text.common, dataset);
+  assert(
+    text,
+    `[${loadAnimationFeatures.name}] Encountered unknown language: ${locale}`
+  );
+
+  const intlContext = useIntlHelperContext(locale, text.common, dataset);
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {
@@ -41,7 +58,9 @@ export default function App(props: AppProps) {
 
       // For any page that should not smooth scroll after load, we should
       // disable smooth scroll during the page transition
-      if (!pagesWithSmoothScroll.some((fragment) => pathname.includes(fragment))) {
+      if (
+        !pagesWithSmoothScroll.some((fragment) => pathname.includes(fragment))
+      ) {
         document.documentElement.style.scrollBehavior = 'auto';
       }
 
@@ -59,7 +78,11 @@ export default function App(props: AppProps) {
   return (
     <>
       <Head>
-        <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+        <meta
+          key="viewport"
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5"
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <IntlContext.Provider value={intlContext}>
@@ -79,7 +102,9 @@ export default function App(props: AppProps) {
 }
 
 function scrollToTop() {
-  const navigationBar = document.querySelector('#main-navigation') as HTMLElement | null;
+  const navigationBar = document.querySelector(
+    '#main-navigation'
+  ) as HTMLElement | null;
   const offset = navigationBar?.offsetTop ?? 0;
 
   window.scrollTo(0, window.scrollY >= offset ? offset : 0);
