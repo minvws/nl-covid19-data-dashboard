@@ -1272,7 +1272,7 @@ export interface TopicalTheme {
 }
 export interface TopicalThemeTile {
   index: number;
-  kpiValue?: number;
+  kpiValue?: number | null | string;
   title: MultilanguageString;
   dynamicDescription: MultilanguageString;
   trendIcon: {
