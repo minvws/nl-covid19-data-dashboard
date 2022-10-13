@@ -28,7 +28,7 @@ interface TopicalTileProps {
   tileIcon: TopicalIcon;
   trendIcon: TrendIcon | null;
   dynamicDescription: string;
-  kpiValue: number | undefined | string;
+  kpiValue: number | null | string;
   cta: Cta | null;
 }
 

@@ -9,7 +9,8 @@
     "dynamicDescription",
     "trendIcon",
     "tileIcon",
-    "cta"
+    "cta",
+    "kpiValue"
   ],
   "properties": {
     "index": {
