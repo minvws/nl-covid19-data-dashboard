@@ -224,13 +224,13 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   metricProperty:
                     'admissions_on_date_of_admission_moving_average',
                   label: textGm.linechart_legend_titel_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'admissions_on_date_of_admission',
                   label: textGm.linechart_legend_titel,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

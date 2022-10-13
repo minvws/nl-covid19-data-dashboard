@@ -69,7 +69,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                   px={2}
                   py={3}
                   verticalAlign="center"
-                  backgroundColor="#F9F9F9"
+                  backgroundColor="gray1"
                 >
                   <BoldText>{group.title}</BoldText>
                 </Cell>
@@ -155,7 +155,7 @@ function DesktopLockdownTable(props: LockdownTableData) {
               <Cell
                 role="rowheader"
                 borderTop={'1px solid black'}
-                backgroundColor="#F9F9F9"
+                backgroundColor="gray1"
                 width="12em"
                 py={3}
                 px={2}

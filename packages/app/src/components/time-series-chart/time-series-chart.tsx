@@ -575,7 +575,7 @@ export function TimeSeriesChart<
                    * Bar-series have no markers, which defeats the need of a line.
                    */
                   hoverState.rangePoints.length || hoverState.linePoints.length
-                    ? '#5B5B5B'
+                    ? 'gray7'
                     : 'transparent'
                 }
                 value={values[hoverState.valuesIndex]}

@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
@@ -17,12 +18,12 @@ const StyledInput = styled.input(
     position: 'absolute',
     clip: 'rect(0, 0, 0, 0)',
     '&:checked + label': {
-      bg: 'button',
+      bg: 'blue8',
       color: 'white',
-      borderColor: 'blue',
+      borderColor: 'blue8',
     },
     '&:focus-visible + label': {
-      outline: '2px dotted #cc005a',
+      outline: `2px dotted ${colors.magenta3}`,
     },
   })
 );
@@ -30,11 +31,11 @@ const StyledInput = styled.input(
 const StyledLabel = styled.label(
   css({
     flex: '0 1 auto',
-    color: 'button',
+    color: 'blue8',
     textAlign: 'center',
     p: asResponsiveArray({ _: '0.25rem 0.5rem', xs: '0.3rem 1rem' }),
     borderRadius: '5px 0 0 5px',
-    border: '1px solid silver',
+    border: `1px solid ${colors.gray3}`,
     borderRightWidth: 0,
     whiteSpace: 'nowrap',
     cursor: 'pointer',
@@ -48,9 +49,9 @@ const StyledLabel = styled.label(
     },
 
     '&:hover, &:focus': {
-      bg: 'tileGray',
-      color: 'blue',
-      borderColor: 'blue',
+      bg: 'gray1',
+      color: 'blue8',
+      borderColor: 'blue8',
     },
   })
 );

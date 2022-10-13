@@ -72,7 +72,7 @@ export function SituationsOverviewChoroplethTile({
               <Box
                 size={15}
                 mr={2}
-                bg={colors.data.underReported}
+                bg={colors.gray2}
                 position="relative"
                 top={'3px'}
               />
@@ -97,7 +97,7 @@ export function SituationsOverviewChoroplethTile({
                 dataConfig={{
                   metricName: 'situations',
                   metricProperty: situation.id,
-                  noDataFillColor: colors.data.underReported,
+                  noDataFillColor: colors.gray2,
                 }}
                 dataOptions={{
                   isPercentage: true,
@@ -110,7 +110,7 @@ export function SituationsOverviewChoroplethTile({
                     value={context.dataItem[situation.id]}
                     regionName={context.featureName}
                     thresholds={thresholds.vr[situation.id]}
-                    noDataFillColor={colors.data.underReported}
+                    noDataFillColor={colors.gray2}
                   />
                 )}
               />

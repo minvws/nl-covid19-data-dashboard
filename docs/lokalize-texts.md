@@ -1,4 +1,4 @@
-# Lokalize Texts
+# Sanity & Lokalize Texts
 
 This section describes some of the ins and outs around locale texts that we use
 to translate short-copy. These strings used to be managed by a tool called
@@ -226,6 +226,10 @@ in use in production, then copying the text from production will overwrite these
 changes. This should be a rare case and if it happens the development build will
 break. It shouldn't be much work to then re-apply the variable changes to the text,
 but this is something to be aware of.
+
+## Audit logging
+
+Currently basic audit logging for Sanity mutations is implemented. [See this document for more information.](./sanity-audit-logging.md).
 
 ## When things break
 

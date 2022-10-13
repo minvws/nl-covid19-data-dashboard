@@ -19,7 +19,7 @@ export function AppHeader() {
           <LanguageSwitcher />
         </Box>
       </MaxWidth>
-      <Box backgroundColor="header" py={3} color="white">
+      <Box backgroundColor="magenta3" py={3} color="white">
         <MaxWidth
           display="flex"
           flexWrap="wrap"

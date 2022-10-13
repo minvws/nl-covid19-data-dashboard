@@ -22,7 +22,7 @@ export function SituationsDataCoverageTooltip({
   const { has_sufficient_data } = context.dataItem;
 
   const Icon = has_sufficient_data ? Check : Cross;
-  const color = has_sufficient_data ? 'data.primary' : 'gray';
+  const color = has_sufficient_data ? 'primary' : 'gray5';
   const label = has_sufficient_data
     ? text.tooltip.voldoende_data
     : text.tooltip.onvoldoende_data;

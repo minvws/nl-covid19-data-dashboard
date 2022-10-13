@@ -118,7 +118,7 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
         },
         outline: {
           fill: () => 'transparent',
-          stroke: () => colors.choroplethOutlineStroke,
+          stroke: () => colors.gray3,
           strokeWidth: () => DEFAULT_STROKE_WIDTH,
         },
       };
@@ -149,7 +149,7 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
         },
         outline: {
           fill: () => 'none',
-          stroke: () => colors.choroplethOutlineStroke,
+          stroke: () => colors.gray3,
           strokeWidth: () => DEFAULT_STROKE_WIDTH,
         },
       };

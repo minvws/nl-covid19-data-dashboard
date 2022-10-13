@@ -216,7 +216,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textVr.positief_geteste_personen
                       .line_chart_newly_infected_people_moving_average_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
@@ -224,7 +224,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   label:
                     textVr.positief_geteste_personen
                       .line_chart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{
@@ -321,7 +321,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                     type: 'area',
                     metricProperty: 'infected_locations_total',
                     label: textVr.besmette_locaties.linechart_metric_label,
-                    color: colors.data.primary,
+                    color: colors.primary,
                   },
                 ]}
               />
@@ -382,13 +382,13 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   shortLabel:
                     textVr.oversterfte
                       .line_chart_deceased_daily_moving_average_short_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'deceased_daily',
                   label: textVr.oversterfte.line_chart_legend_trend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

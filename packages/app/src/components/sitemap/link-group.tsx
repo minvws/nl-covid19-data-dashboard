@@ -40,7 +40,7 @@ function LinkItem(props: LinkItemProps) {
   if (!href) {
     return (
       <Item>
-        <InlineText color="gray">
+        <InlineText color="gray5">
           {text}
           <span css={css({ svg: { height: 10, width: 11, mx: '3px' } })}>
             <ArrowIconThinRight />

@@ -79,7 +79,7 @@ export const CollapsibleButton = ({
             height="1px"
             width="100%"
             transform="translate(0, -50%)"
-            bg={'border'}
+            bg={'gray3'}
           />
           <Box ref={buttonRef} bg={colors.white} zIndex={1}>
             <DisclosureButton>
@@ -154,10 +154,10 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       minWidth: x.isOpen ? undefined : x.buttonWidth,
 
       '&:hover': {
-        color: 'blue',
+        color: 'blue8',
 
         svg: {
-          fill: 'blue',
+          fill: 'blue8',
         },
       },
 
@@ -183,7 +183,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     '[data-reach-disclosure-button]:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: x.isOpen ? 'transparent' : 'blue',
+      outlineColor: x.isOpen ? 'transparent' : 'blue8',
     },
 
     //panel

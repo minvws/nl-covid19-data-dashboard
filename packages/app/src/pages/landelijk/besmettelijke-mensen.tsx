@@ -119,7 +119,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                   metricProperty: 'estimate',
                   label: textNl.legenda_line,
                   shortLabel: textNl.line_legend_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'range',
@@ -127,7 +127,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                   metricPropertyHigh: 'margin_high',
                   label: textNl.legenda_marge,
                   shortLabel: textNl.range_legend_label,
-                  color: colors.data.margin,
+                  color: colors.blue2,
                 },
               ]}
             />

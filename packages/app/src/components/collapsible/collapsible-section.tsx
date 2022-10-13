@@ -56,7 +56,7 @@ export const CollapsibleSection = ({
     <Box
       as="section"
       borderTop={hideBorder ? undefined : '1px solid'}
-      borderTopColor={hideBorder ? undefined : 'lightGray'}
+      borderTopColor={hideBorder ? undefined : 'gray2'}
       id={id}
       ref={section}
     >
@@ -86,7 +86,7 @@ export const CollapsibleSection = ({
 
 const StyledAnchor = styled(Anchor)(
   css({
-    color: 'lightGray',
+    color: 'gray2',
     px: 3,
     py: 1,
     width: 0,
@@ -110,7 +110,7 @@ const Summary = styled.button(
     p: 3,
     bg: 'transparent',
     border: 'none',
-    color: 'blue',
+    color: 'blue8',
     fontFamily: 'body',
     fontWeight: 'bold',
     fontSize: '1.25rem',
@@ -121,7 +121,7 @@ const Summary = styled.button(
     '&:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: 'blue',
+      outlineColor: 'blue8',
     },
 
     [StyledAnchor]: { opacity: 0 },

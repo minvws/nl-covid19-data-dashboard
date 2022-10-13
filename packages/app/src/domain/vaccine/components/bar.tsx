@@ -18,7 +18,7 @@ interface BarProps {
 export function Bar({
   value,
   color,
-  backgroundColor = colors.data.underReported,
+  backgroundColor = colors.gray2,
   label,
   height = 8,
   showAxisValues,
@@ -60,7 +60,7 @@ export function Bar({
       )}
       {showAxisValues && (
         <Box display="flex" flexDirection="row" position="relative" pt={1}>
-          <InlineText variant="label1" color="bodyLight">
+          <InlineText variant="label1" color="gray7">
             0%
           </InlineText>
           <InlineText
@@ -81,7 +81,7 @@ export function Bar({
           <InlineText
             css={css({ ml: 'auto' })}
             variant="label1"
-            color="bodyLight"
+            color="gray7"
           >
             100%
           </InlineText>

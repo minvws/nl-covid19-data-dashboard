@@ -64,15 +64,15 @@ export function FullscreenChartTile({
               position: 'absolute',
               top: '1.85rem',
               right: isFullscreen ? '10px' : '-10px',
-              color: 'silver',
+              color: 'gray3',
 
               '&:focus': {
                 outlineWidth: '1px',
                 outlineStyle: 'dashed',
-                outlineColor: 'blue',
+                outlineColor: 'blue8',
               },
 
-              '&:hover': { color: 'gray' },
+              '&:hover': { color: 'gray5' },
             })}
           >
             <IconButton

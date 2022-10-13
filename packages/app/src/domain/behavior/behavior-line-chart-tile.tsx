@@ -104,7 +104,7 @@ export function BehaviorLineChartTile({
               label: text.shared.line_chart.compliance_label,
               shortLabel: text.shared.line_chart.compliance_short_label,
               strokeWidth: 3,
-              color: colors.data.cyan,
+              color: colors.blue6,
             },
             {
               type: 'gapped-line',
@@ -112,7 +112,7 @@ export function BehaviorLineChartTile({
               label: text.shared.line_chart.support_label,
               shortLabel: text.shared.line_chart.support_short_label,
               strokeWidth: 3,
-              color: colors.data.yellow,
+              color: colors.yellow3,
             },
           ]}
           dataOptions={{

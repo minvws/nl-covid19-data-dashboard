@@ -26,162 +26,140 @@ type Join<T extends string[], D extends string> = T extends []
     : never
   : string;
 
-type ColorsWithoutRanges = O.Omit<typeof colors, 'data.scale'>;
+type ColorsWithoutRanges = O.Omit<typeof colors, 'scale'>;
 export type Color = Join<PathsToStringProps<ColorsWithoutRanges>, '.'>;
-export type DataColor = keyof Omit<typeof colors['data'], 'scale'>;
 
-const multiseries = {
-  cyan: '#219BE5',
-  cyan_dark: '#005082',
-  yellow: '#FFC000',
-  yellow_dark: '#CF9C00',
-  turquoise: '#00BB95',
-  turquoise_dark: '#008372',
-  orange: '#E37321',
-  orange_dark: '#A14E00',
-  magenta: '#D360E5',
-  magenta_dark: '#9515AA',
-};
-
-export const colors = {
-  white: '#fff',
-  body: '#000000',
-  bodyLight: '#555555',
-  offWhite: '#f3f3f3',
-  blue: '#01689b',
-  icon: '#01689b',
-  button: '#01689b',
-  link: '#01689b',
-  shadow: '#e5e5e5',
-  gray: '#808080',
+//Based on https://www.rijkshuisstijl.nl/basiselementen/basiselementen-online/online-kleuren
+const colorDefinitions = {
+  //Gray scales
+  white: '#ffffff',
+  gray1: '#f3f3f3',
+  gray2: '#e6e6e6',
   gray3: '#cccccc',
-  silver: '#c4c4c4',
-  lightGray: '#dfdfdf',
-  tileGray: '#f8f8f8',
-  labelGray: '#666666',
-  annotation: '#595959',
-  header: '#cd005a',
-  notification: '#cd005a',
-  red: '#F35065',
-  sidebarLinkBorder: '#01689b',
-  category: '#6b6b6b',
-  border: '#c4c4c4',
-  lightBlue: '#E0EEF6',
-  restrictions: '#CD0059',
-  contextualContent: '#e5eff8',
-  cerulean: '#0390D6',
-  tooltipIndicator: '#000000',
-  buttonLightBlue: '#C2E4F4',
-  choroplethFeatureStroke: '#fff',
-  choroplethOutlineStroke: '#c4c4c4',
-  choroplethHighlightStroke: '#000000',
-  choroplethNoData: '#fff',
-  warningYellow: '#fee670',
+  gray4: '#b4b4b4',
+  gray5: '#999999',
+  gray6: '#696969',
+  gray7: '#535353',
+  gray8: '#4f5458',
+  black: '#000000',
+  neutral: '#C6C8CA',
+  blackOpacity: '#0000000d',
+  //Red scales
+  red1: '#f7e8e7',
+  red2: '#F35065',
+  red3: '#9f3430',
+  //Orange scales
+  orange1: '#E37321',
+  orange2: '#A14E00',
+  //Yellow scales
+  yellow1: '#FFF4C1',
+  yellow2: '#fee670',
+  yellow3: '#FFC000',
+  yellow4: '#D3A500',
+  yellow5: '#CF9C00',
+  //Green scales
+  green1: '#69c253',
+  green2: '#69c253',
+  green3: '#00BB95',
+  green4: '#008372',
+  //Blue scales
+  primary: '#007BC7',
+  secondary: '#154273',
+  primaryOpacity: '#007bc70d',
+  blue1: '#e5eff8',
+  blue2: '#D0EDFF',
+  blue3: '#aeddf3',
+  blue4: '#8bc7e8',
+  blue5: '#67b1dc',
+  blue6: '#219BE5',
+  blue7: '#0053FD',
+  blue8: '#01689b',
+  blue9: '#005082',
+  blue10: '#003580',
+  //Magenta scales
+  magenta1: '#D360E5',
+  magenta2: '#9515AA',
+  magenta3: '#cd005a',
+  magenta4: '#aa004b',
+};
+export const colors = {
+  ...colorDefinitions,
+  scale: {
+    blue: [
+      '#8FCAE7',
+      '#5BADDB',
+      '#248FCF',
+      '#0070BB',
+      '#00529D',
+      '#003580',
+      '#001D45',
+    ],
+    blueDetailed: [
+      '#aeddf3',
+      '#8bc7e8',
+      '#67b1dc',
+      '#449ad1',
+      '#1f83c5',
+      '#006cb5',
+      '#005797',
+      '#00437b',
+      '#002f5f',
+      '#001d45',
+    ],
+    magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
+    yellow: [
+      '#FFF2CC',
+      '#FFE699',
+      '#FFD34D',
+      '#FABC00',
+      '#E5A400',
+      '#C98600',
+      '#9E6900',
+    ],
+  },
 
-  data: {
-    primary: '#007BC7',
-    secondary: '#154273',
-    neutral: '#C6C8CA',
-    underReported: '#E6E6E6',
-    axis: '#C4C4C4',
-    axisLabels: '#666666',
-    benchmark: '#4f5458',
-    emphasis: '#F8E435',
-    fill: 'rgba(0, 123, 199, .05)',
-    margin: '#D0EDFF',
-    positive: '#5BADDB',
-    partial_vaccination: '#8FCAE7',
-    negative: '#F35065',
-    cyan: '#219BE6',
-    yellow: '#FFC000',
-    darkBlue: '#003580',
-    scale: {
-      blue: [
-        '#8FCAE7',
-        '#5BADDB',
-        '#248FCF',
-        '#0070BB',
-        '#00529D',
-        '#003580',
-        '#001D45',
-      ],
-      blueDetailed: [
-        '#aeddf3',
-        '#8bc7e8',
-        '#67b1dc',
-        '#449ad1',
-        '#1f83c5',
-        '#006cb5',
-        '#005797',
-        '#00437b',
-        '#002f5f',
-        '#001d45',
-      ],
-      magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
-      yellow: [
-        '#FFF2CC',
-        '#FFE699',
-        '#FFD34D',
-        '#FABC00',
-        '#E5A400',
-        '#C98600',
-        '#9E6900',
-      ],
-    },
-    gradient: {
-      green: '#69c253',
-      yellow: '#D3A500',
-      red: '#f35065',
-    },
+  variants: {
+    colorList: [
+      '#FFC000',
+      '#219BE5',
+      '#00BB95',
+      '#E37321',
+      '#D360E5',
+      '#CF9C00',
+      '#005082',
+      '#008372',
+      '#A14E00',
+      '#9515AA',
+      '#0053FD',
+      '#FFE500',
+      '#02C238',
+      '#F65234',
+      '#D7019B',
+    ],
+  },
 
-    multiseries,
+  vaccines: {
+    bio_n_tech_pfizer: colorDefinitions.blue6,
+    moderna: colorDefinitions.yellow3,
+    astra_zeneca: colorDefinitions.green2,
+    cure_vac: colorDefinitions.magenta1,
+    janssen: colorDefinitions.orange1,
+    sanofi: colorDefinitions.blue9,
+    novavax: colorDefinitions.magenta2,
 
-    variants: {
-      colorList: [
-        '#FFC000',
-        '#219BE5',
-        '#00BB95',
-        '#E37321',
-        '#D360E5',
-        '#CF9C00',
-        '#005082',
-        '#008372',
-        '#A14E00',
-        '#9515AA',
-        '#0053FD',
-        '#FFE500',
-        '#02C238',
-        '#F65234',
-        '#D7019B',
-      ],
-      other_table: '#808080',
-      other_graph: '#808080',
-      fallbackColor: '#808080',
-    },
+    // @TODO remove when data is updated to new name
+    pfizer: colorDefinitions.blue6,
 
-    vaccines: {
-      bio_n_tech_pfizer: multiseries.cyan,
-      moderna: multiseries.yellow,
-      astra_zeneca: multiseries.turquoise,
-      cure_vac: multiseries.magenta,
-      janssen: multiseries.orange,
-      sanofi: multiseries.cyan_dark,
-      novavax: multiseries.magenta_dark,
-
-      // @TODO remove when data is updated to new name
-      pfizer: multiseries.cyan,
-
-      /**
-       * The below list are duplicates of the above entries, because BE is
-       * unabled to deliver specific IDs that match with previously delivered
-       * data entry IDs. This has been introduced as part of COR-938.
-       * @TODO - remove duplicates when/if BE is able to provide IDs.
-       */
-      'BioNTech/Pfizer': multiseries.cyan,
-      Moderna: multiseries.yellow,
-      AstraZeneca: multiseries.turquoise,
-      Janssen: multiseries.orange,
-      Novavax: multiseries.magenta_dark,
-    },
+    /**
+     * The below list are duplicates of the above entries, because BE is
+     * unabled to deliver specific IDs that match with previously delivered
+     * data entry IDs. This has been introduced as part of COR-938.
+     * @TODO - remove duplicates when/if BE is able to provide IDs.
+     */
+    'BioNTech/Pfizer': colorDefinitions.blue6,
+    Moderna: colorDefinitions.yellow3,
+    AstraZeneca: colorDefinitions.green2,
+    Janssen: colorDefinitions.orange1,
+    Novavax: colorDefinitions.magenta2,
   },
 } as const;

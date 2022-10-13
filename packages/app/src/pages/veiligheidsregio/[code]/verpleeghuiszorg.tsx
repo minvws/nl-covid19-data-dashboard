@@ -210,7 +210,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'newly_infected_people_moving_average',
-                  color: colors.data.primary,
+                  color: colors.primary,
                   label:
                     textVr.positief_geteste_personen
                       .line_chart_legend_trend_moving_average_label,
@@ -221,7 +221,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'bar',
                   metricProperty: 'newly_infected_people',
-                  color: colors.data.primary,
+                  color: colors.primary,
                   label:
                     textVr.positief_geteste_personen
                       .line_chart_legend_trend_label,
@@ -327,7 +327,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   label:
                     textShared.verpleeghuis_besmette_locaties
                       .linechart_tooltip_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
             />
@@ -389,14 +389,14 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   label: textVr.line_chart_legend_trend_moving_average_label,
                   shortLabel:
                     textVr.tooltip_labels.deceased_daily_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'deceased_daily',
                   label: textVr.line_chart_legend_trend_label,
                   shortLabel: textVr.tooltip_labels.deceased_daily,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

@@ -24,7 +24,7 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
 
         <Box spacing={2}>
           <Heading level={1}>{editorial.title}</Heading>
-          <InlineText color="annotation">
+          <InlineText color="gray7">
             <PublicationDate date={editorial.publicationDate} />
           </InlineText>
         </Box>

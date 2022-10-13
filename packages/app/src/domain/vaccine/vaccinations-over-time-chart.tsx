@@ -51,7 +51,7 @@ const vaccines = [
 ] as const;
 vaccines.forEach((x) =>
   assert(
-    colors.data.vaccines[x],
+    colors.vaccines[x],
     `[${VaccinationsOverTimeChart.name}] missing vaccine color for vaccine ${x}`
   )
 );
@@ -101,7 +101,7 @@ export function VaccinationsOverTimeChart(
                   .tooltip_label_gedeeltelijk,
               type: 'stacked-area',
               metricProperty: 'partially_vaccinated',
-              color: colors.data.partial_vaccination,
+              color: colors.blue4,
               mixBlendMode: 'multiply',
               fillOpacity: 1,
             },
@@ -112,7 +112,7 @@ export function VaccinationsOverTimeChart(
                   .tooltip_label_volledig,
               type: 'stacked-area',
               metricProperty: 'fully_vaccinated',
-              color: colors.data.primary,
+              color: colors.primary,
               mixBlendMode: 'multiply',
               fillOpacity: 1,
             },
@@ -125,7 +125,7 @@ export function VaccinationsOverTimeChart(
                   .tooltip_label_booster_vaccinated,
               type: 'stacked-area',
               metricProperty: 'booster_vaccinated',
-              color: colors.data.darkBlue,
+              color: colors.blue10,
               mixBlendMode: 'multiply',
               fillOpacity: 1,
             },
@@ -192,7 +192,7 @@ export function VaccinationsOverTimeChart(
             }
           ),
           shortLabel: text.data.vaccination_chart.product_names[x],
-          color: colors.data.vaccines[x],
+          color: colors.vaccines[x],
           mixBlendMode: 'multiply',
           fillOpacity: 1,
           strokeWidth: 0,

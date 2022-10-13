@@ -8,11 +8,11 @@ GetThresholdValue('should retrieve the threshold for n', () => {
   const n = 20;
 
   const thresholds = [
-    { threshold: 10, color: 'blue' },
-    { threshold: 20, color: 'blue' },
-    { threshold: 30, color: 'blue' },
-    { threshold: 40, color: 'blue' },
-    { threshold: 50, color: 'blue' },
+    { threshold: 10, color: 'blue8' },
+    { threshold: 20, color: 'blue8' },
+    { threshold: 30, color: 'blue8' },
+    { threshold: 40, color: 'blue8' },
+    { threshold: 50, color: 'blue8' },
   ];
 
   const result = getThresholdValue(thresholds, n);

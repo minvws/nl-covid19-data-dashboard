@@ -200,7 +200,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'newly_infected_people_moving_average',
-                  color: colors.data.primary,
+                  color: colors.primary,
                   label:
                     positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
                   shortLabel:
@@ -210,7 +210,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'bar',
                   metricProperty: 'newly_infected_people',
-                  color: colors.data.primary,
+                  color: colors.primary,
                   label: positiveTestedPeopleText.line_chart_legend_trend_label,
                   shortLabel:
                     positiveTestedPeopleText.tooltip_labels
@@ -346,7 +346,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   label:
                     textShared.verpleeghuis_besmette_locaties
                       .linechart_tooltip_label,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
             />
@@ -405,14 +405,14 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   label: textNl.line_chart_legend_trend_moving_average_label,
                   shortLabel:
                     textNl.tooltip_labels.deceased_daily_moving_average,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'deceased_daily',
                   label: textNl.line_chart_legend_trend_label,
                   shortLabel: textNl.tooltip_labels.deceased_daily,
-                  color: colors.data.primary,
+                  color: colors.primary,
                 },
               ]}
               dataOptions={{

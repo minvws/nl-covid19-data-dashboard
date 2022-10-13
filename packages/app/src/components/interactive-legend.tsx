@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
@@ -124,23 +125,23 @@ const StyledLabel = styled.label<{
     py: 1,
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${
-      isActive ? '3px ' + borderColor : '1px #c4c4c4'
+      isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`
     }`,
     fontWeight: 'normal',
     fontFamily: 'inherit',
     fontSize: 1,
-    color: isActive ? 'transparent' : 'body',
+    color: isActive ? 'transparent' : 'black',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
     '&:hover,&:focus': {
-      bg: 'tileGray',
+      bg: 'gray1',
       borderColor: borderColor,
       borderWidth: isActive ? '3px' : '1px',
       boxShadow: `inset 0px 0px 0px ${isActive ? '3px' : '2px'} ${borderColor}`,
     },
     '&:focus': {
-      borderColor: 'silver',
+      borderColor: 'gray3',
       borderWidth: '1px',
     },
     '&:focus:focus-visible': {
@@ -164,7 +165,7 @@ const StyledLabel = styled.label<{
       userSelect: 'none',
       pointerEvents: 'none',
       fontWeight: 'bold',
-      color: 'body',
+      color: 'black',
     },
   })
 );
@@ -187,7 +188,7 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   css({
     backgroundColor: 'transparent',
     cursor: 'pointer',
-    color: 'blue',
+    color: 'blue8',
     py: '6px',
     border: 'none',
     fontFamily: 'inherit',
