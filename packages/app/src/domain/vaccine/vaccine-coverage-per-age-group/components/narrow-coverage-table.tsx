@@ -8,11 +8,7 @@ import { ARCHIVED_COLORS } from '~/domain/vaccine/common';
 import { Bar } from '~/domain/vaccine/components/bar';
 import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
-import {
-  GmVaccineCoveragePerAgeGroupArchivedValue,
-  NlVaccineCoveragePerAgeGroupArchivedValue,
-  VrVaccineCoveragePerAgeGroupArchivedValue,
-} from '@corona-dashboard/common';
+import { GmVaccineCoveragePerAgeGroupArchivedValue, NlVaccineCoveragePerAgeGroupArchivedValue, VrVaccineCoveragePerAgeGroupArchivedValue } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 
 export function NarrowCoverageTable({
@@ -20,10 +16,7 @@ export function NarrowCoverageTable({
   text,
 }: {
   text: SiteText['pages']['vaccinations_page']['nl'];
-  values:
-    | NlVaccineCoveragePerAgeGroupArchivedValue[]
-    | VrVaccineCoveragePerAgeGroupArchivedValue[]
-    | GmVaccineCoveragePerAgeGroupArchivedValue[];
+  values: NlVaccineCoveragePerAgeGroupArchivedValue[] | VrVaccineCoveragePerAgeGroupArchivedValue[] | GmVaccineCoveragePerAgeGroupArchivedValue[];
 }) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
@@ -31,54 +24,29 @@ export function NarrowCoverageTable({
   return (
     <Box>
       <Box borderBottom="1px solid" borderColor="gray3" pb={2}>
-        <BoldText variant="label1">
-          {text.vaccination_coverage.headers.agegroup}
-        </BoldText>
+        <BoldText variant="label1">{text.vaccination_coverage.headers.agegroup}</BoldText>
       </Box>
 
       {values.map((item, index) => (
-        <Box
-          key={index}
-          pt={2}
-          pb={3}
-          spacing={3}
-          borderBottom="1px solid"
-          borderColor="gray3"
-        >
+        <Box key={index} pt={2} pb={3} spacing={3} borderBottom="1px solid" borderColor="gray3">
           <AgeGroup
-            range={formatAgeGroupString(
-              item.age_group_range,
-              commonTexts.common.agegroup
-            )}
-            ageGroupTotal={
-              'age_group_total' in item ? item.age_group_total : undefined
-            }
-            birthyear_range={formatBirthyearRangeString(
-              item.birthyear_range,
-              commonTexts.common.birthyears
-            )}
+            range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
+            ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
+            birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
             text={commonTexts.common.agegroup.total_people}
           />
 
           <Box spacing={1}>
             <NarrowPercentage
-              value={
-                'has_one_shot_percentage_label' in item
-                  ? formatCoveragePercentage(item, 'has_one_shot_percentage')
-                  : `${formatPercentage(item.has_one_shot_percentage)}%`
-              }
+              value={'has_one_shot_percentage_label' in item ? formatCoveragePercentage(item, 'has_one_shot_percentage') : `${formatPercentage(item.has_one_shot_percentage)}%`}
               color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
-              textLabel={text.archived.vaccination_coverage.headers.first_shot}
+              textLabel={text.archived.vaccination_coverage.campaign_headers.first_shot}
             />
 
             <Bar
               value={item.has_one_shot_percentage}
               color={ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT}
-              label={
-                'has_one_shot_percentage_label' in item
-                  ? item.has_one_shot_percentage_label
-                  : undefined
-              }
+              label={'has_one_shot_percentage_label' in item ? item.has_one_shot_percentage_label : undefined}
             />
           </Box>
 
@@ -88,24 +56,17 @@ export function NarrowCoverageTable({
             <NarrowPercentage
               value={
                 'fully_vaccinated_percentage_label' in item
-                  ? formatCoveragePercentage(
-                      item,
-                      'fully_vaccinated_percentage'
-                    )
+                  ? formatCoveragePercentage(item, 'fully_vaccinated_percentage')
                   : `${formatPercentage(item.fully_vaccinated_percentage)}%`
               }
               color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
-              textLabel={text.archived.vaccination_coverage.headers.coverage}
+              textLabel={text.archived.vaccination_coverage.campaign_headers.coverage}
             />
 
             <Bar
               value={item.fully_vaccinated_percentage}
               color={ARCHIVED_COLORS.COLOR_FULLY_VACCINATED}
-              label={
-                'fully_vaccinated_percentage_label' in item
-                  ? item.fully_vaccinated_percentage_label
-                  : undefined
-              }
+              label={'fully_vaccinated_percentage_label' in item ? item.fully_vaccinated_percentage_label : undefined}
             />
           </Box>
         </Box>
