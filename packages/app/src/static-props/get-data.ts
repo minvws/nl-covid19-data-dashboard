@@ -187,7 +187,7 @@ export function selectTopicalData(locale: keyof Languages) {
       themeTiles: theme.themeTiles.map((tile) => ({
         index: tile.index,
         title: tile.title[localeKey],
-        kpiValue: tile?.kpiValue,
+        kpiValue: tile?.kpiValue === null ? undefined : tile.kpiValue,
         dynamicDescription: tile.dynamicDescription[localeKey],
         trendIcon: tile.trendIcon && {
           direction: tile.trendIcon.direction,
