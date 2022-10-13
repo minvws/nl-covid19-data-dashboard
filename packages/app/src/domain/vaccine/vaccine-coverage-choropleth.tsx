@@ -4,7 +4,7 @@ import {
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
-import { MatchingVaccineCoverageAgeGroupsType } from './common';
+import { matchingAgeGroups } from './common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import { hasValueAtKey } from 'ts-is-present';
@@ -30,16 +30,16 @@ import {
 } from './components/vaccination-coverage-kind-select';
 import { useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
 
-interface VaccineCoverageChoroplethPerGmProps {
+interface VaccineCoverageChoroplethProps {
   data: {
     gm: GmCollectionVaccineCoveragePerAgeGroup[];
     vr: VrCollectionVaccineCoveragePerAgeGroup[];
   };
 }
 
-export function VaccineCoverageChoroplethPerGm({
+export const VaccineCoverageChoropleth = ({
   data,
-}: VaccineCoverageChoroplethPerGmProps) {
+}: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
@@ -47,14 +47,14 @@ export function VaccineCoverageChoroplethPerGm({
     useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
 
+  /**
+   * When changing between coverage kinds where the selected age group isn't available,
+   * the other coverage kind set the non-matching age group to a default one.
+   */
   const setSelectedCoverageKindAndAge = (
     coverageKind: CoverageKindProperty
   ) => {
-    if (coverageKind === selectedCoverageKind) {
-      return;
-    }
-    // When changing between coverage kinds where the selected age group isn't available,
-    // the other coverage kind set the non-matching age group to a default one.
+    if (coverageKind === selectedCoverageKind) return;
     if (selectedAgeGroup !== '12+') {
       setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
     }
@@ -72,11 +72,6 @@ export function VaccineCoverageChoroplethPerGm({
     data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
   const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
     data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
-
-  const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
-    autumn_2022_vaccinated_percentage: ['12+', '60+'],
-    fully_vaccinated_percentage: ['12+', '18+'],
-  };
 
   return (
     <ChoroplethTile
@@ -203,7 +198,7 @@ export function VaccineCoverageChoroplethPerGm({
       )}
     </ChoroplethTile>
   );
-}
+};
 
 type VaccineCoverageData =
   | GmCollectionVaccineCoveragePerAgeGroup
@@ -251,7 +246,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
         <TooltipSubject
           thresholdValues={data.thresholdValues}
           filterBelow={filterBelow as number | null}
-          noDataFillColor={colors.choroplethNoData}
+          noDataFillColor={colors.white}
           key={vrOrGmData.age_group_range}
         >
           <Box

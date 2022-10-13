@@ -67,7 +67,7 @@ const StyledSearchInput = styled.input(
     borderRadius: 1,
     border: `solid`,
     borderWidth: '1px',
-    borderColor: 'border',
+    borderColor: 'gray3',
     fontSize: 2,
     appearance: 'none',
     m: 0,
@@ -89,8 +89,8 @@ const StyledSearchInput = styled.input(
     },
 
     '[aria-expanded="true"] &': {
-      borderColor: 'blue',
-      borderBottomColor: 'border',
+      borderColor: 'blue8',
+      borderBottomColor: 'gray3',
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
       '&:focus': {

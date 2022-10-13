@@ -24,6 +24,11 @@ import {
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
 import {
+  VaccinationCoverageKindSelect,
+  CoverageKindProperty,
+} from '~/domain/vaccine/components/vaccination-coverage-kind-select';
+import { matchingAgeGroups } from '~/domain/vaccine/common';
+import {
   selectVaccineCoverageData,
   ChoroplethTooltip,
   VaccineCoveragePerAgeGroup,
@@ -58,6 +63,8 @@ import {
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useFeature } from '~/lib/features';
+import { BoldText } from '~/components/typography';
+import css from '@styled-system/css';
 
 const pageMetrics = [
   'vaccine_coverage_per_age_group',
@@ -137,15 +144,30 @@ export const VaccinationsVrPage = (
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedCoverageKind, setSelectedCoverageKind] =
+    useState<CoverageKindProperty>('fully_vaccinated_percentage');
 
   const vaccinationsCoverageFeature = useFeature('vaccinationsCoverage');
-
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
   const { textNl, textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
     pageText,
     selectLokalizeTexts
   );
+
+  /**
+   * When changing between coverage kinds where the selected age group isn't available,
+   * the other coverage kind set the non-matching age group to a default one.
+   */
+  const setSelectedCoverageKindAndAge = (
+    coverageKind: CoverageKindProperty
+  ) => {
+    if (coverageKind === selectedCoverageKind) return;
+    if (selectedAgeGroup !== '12+') {
+      setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
+    }
+    setSelectedCoverageKind(coverageKind);
+  };
 
   const metadata = {
     ...textVr.metadata,
@@ -160,8 +182,14 @@ export const VaccinationsVrPage = (
   const gmCodes = gmCodesByVrCode[router.query.code as string];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] =
+    choropleth.gm.vaccine_coverage_per_age_group.filter(
+      hasValueAtKey('age_group_range', selectedAgeGroup)
+    );
+
   /**
-   * Filter out only the the 12+ and 18+ for the toggle component.
+   * Filter out only the 12+ and 18+ for the toggle component.
    */
   const filteredAgeGroup60Plus =
     data.vaccine_coverage_per_age_group.values.find(
@@ -223,12 +251,6 @@ export const VaccinationsVrPage = (
     `[${VaccinationsVrPage.name}] Could not find archived data for the vaccine coverage per age group for the age 12+`
   );
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] =
-    choropleth.gm.vaccine_coverage_per_age_group.filter(
-      hasValueAtKey('age_group_range', selectedAgeGroup)
-    );
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -280,7 +302,7 @@ export const VaccinationsVrPage = (
                       value:
                         filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage ||
                         0,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                   {
@@ -297,7 +319,7 @@ export const VaccinationsVrPage = (
                       value:
                         filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage ||
                         0,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                 ]}
@@ -333,7 +355,7 @@ export const VaccinationsVrPage = (
                     bar: {
                       value:
                         filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                   {
@@ -348,7 +370,7 @@ export const VaccinationsVrPage = (
                     bar: {
                       value:
                         filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                 ]}
@@ -370,12 +392,51 @@ export const VaccinationsVrPage = (
                     { safetyRegionName: vrName }
                   )}
                 />
-                <Box maxWidth="20rem">
-                  <AgeGroupSelect
-                    onChange={setSelectedAgeGroup}
-                    initialValue={selectedAgeGroup}
-                    shownAgeGroups={['12+', '18+']}
-                  />
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="flex-start"
+                  spacingHorizontal={2}
+                  as={'fieldset'}
+                >
+                  <BoldText
+                    as="legend"
+                    css={css({
+                      flexBasis: '100%',
+                      mb: 2,
+                    })}
+                  >
+                    {
+                      commonTexts.choropleth.vaccination_coverage.shared
+                        .dropdowns_title
+                    }
+                  </BoldText>
+
+                  <Box
+                    display="flex"
+                    width="100%"
+                    spacingHorizontal={{ xs: 2 }}
+                    flexWrap="wrap"
+                    flexDirection={{ _: 'column', xs: 'row' }}
+                  >
+                    <Box flex="1">
+                      <VaccinationCoverageKindSelect
+                        onChange={setSelectedCoverageKindAndAge}
+                        initialValue={selectedCoverageKind}
+                      />
+                    </Box>
+                    <Box flex="1">
+                      <Box maxWidth="20rem">
+                        <AgeGroupSelect
+                          onChange={setSelectedAgeGroup}
+                          initialValue={selectedAgeGroup}
+                          shownAgeGroups={
+                            matchingAgeGroups[selectedCoverageKind]
+                          }
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
               </>
             }
@@ -390,6 +451,7 @@ export const VaccinationsVrPage = (
                 commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
+            hasPadding
           >
             <DynamicChoropleth
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
@@ -397,7 +459,7 @@ export const VaccinationsVrPage = (
               data={choroplethData}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'fully_vaccinated_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,
@@ -412,8 +474,8 @@ export const VaccinationsVrPage = (
                   mapData={choropleth.gm.vaccine_coverage_per_age_group.filter(
                     (singleGm) => singleGm.gmcode === context.code
                   )}
-                  ageGroups={['12+', '18+']}
-                  selectedCoverageKind={'fully_vaccinated_percentage'}
+                  ageGroups={matchingAgeGroups[selectedCoverageKind]}
+                  selectedCoverageKind={selectedCoverageKind}
                 />
               )}
             />

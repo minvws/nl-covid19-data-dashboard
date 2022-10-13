@@ -44,7 +44,7 @@ export const TopicalSectionHeader = ({
   return (
     <Box spacing={3}>
       {showBackLink && (
-        <Box py={3} borderBottom={'solid 1px'} borderColor={'border'}>
+        <Box py={3} borderBottom={'solid 1px'} borderColor={'gray3'}>
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
             {text.terug_naar_landelijk}
           </LinkWithIcon>
@@ -84,7 +84,7 @@ export const TopicalSectionHeader = ({
         </Box>
 
         {lastGenerated && (
-          <InlineText variant="label1" color="bodyLight">
+          <InlineText variant="label1" color="gray7">
             {replaceComponentsInText(text.laatst_bijgewerkt, {
               date: <RelativeDate dateInSeconds={lastGenerated} />,
               time: formatDateFromSeconds(lastGenerated, 'time'),

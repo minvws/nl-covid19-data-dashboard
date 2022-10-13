@@ -39,7 +39,7 @@ export const preset = {
       fontSize: 2,
       lineHeight: 2,
       fontWeight: 'bold',
-      color: 'category',
+      color: 'gray6',
     },
     body1: {
       fontSize: 3,

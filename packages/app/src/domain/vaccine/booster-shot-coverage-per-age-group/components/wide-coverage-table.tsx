@@ -38,7 +38,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
         <thead
           css={css({
             borderBottom: '1px solid',
-            borderColor: 'silver',
+            borderColor: 'gray3',
           })}
         >
           <Row>
@@ -189,7 +189,7 @@ const StyledTable = styled.table(
 const Row = styled.tr(
   css({
     borderBottom: '1px solid',
-    borderColor: 'silver',
+    borderColor: 'gray3',
   })
 );
 

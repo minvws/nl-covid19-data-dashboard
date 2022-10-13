@@ -1,15 +1,4 @@
-import {
-  assert,
-  Gm,
-  GmCollection,
-  gmData,
-  Nl,
-  sortTimeSeriesInDataInPlace,
-  Topical,
-  Vr,
-  VrCollection,
-  vrData,
-} from '@corona-dashboard/common';
+import { assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, Topical, Vr, VrCollection, vrData } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
@@ -19,10 +8,7 @@ import type { F, O, S, U } from 'ts-toolbelt';
 import { AsyncWalkBuilder } from 'walkjs';
 import { getClient, localize } from '~/lib/sanity';
 import { Languages, SiteText } from '~/locale';
-import {
-  adjustDataToLastAccurateValue,
-  isValuesWithLastValue,
-} from '~/utils/adjust-data-to-last-accurate-value';
+import { adjustDataToLastAccurateValue, isValuesWithLastValue } from '~/utils/adjust-data-to-last-accurate-value';
 import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latest-values';
@@ -43,9 +29,7 @@ type UnionDeepMerge<T extends Record<string, unknown>> = {
  * 3. Merge picked data object union into a single object
  * 4. Merge nested properties unions
  */
-type DataShape<T extends string, D extends Nl | Vr | Gm> = UnionDeepMerge<
-  U.Merge<O.P.Pick<D, S.Split<T, '.'>>>
->;
+type DataShape<T extends string, D extends Nl | Vr | Gm> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
 
 /**
  * Usage:
@@ -60,22 +44,10 @@ type DataShape<T extends string, D extends Nl | Vr | Gm> = UnionDeepMerge<
  */
 
 const json = {
-  nl: initializeFeatureFlaggedData<Nl>(
-    loadJsonFromDataFile<Nl>('NL.json'),
-    'nl'
-  ),
-  vrCollection: initializeFeatureFlaggedData<VrCollection>(
-    loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
-    'vr_collection'
-  ),
-  gmCollection: initializeFeatureFlaggedData<GmCollection>(
-    loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
-    'gm_collection'
-  ),
-  topical: initializeFeatureFlaggedData<Topical>(
-    loadJsonFromDataFile<Topical>('TOPICAL.json'),
-    'topical'
-  ),
+  nl: initializeFeatureFlaggedData<Nl>(loadJsonFromDataFile<Nl>('NL.json'), 'nl'),
+  vrCollection: initializeFeatureFlaggedData<VrCollection>(loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'), 'vr_collection'),
+  gmCollection: initializeFeatureFlaggedData<GmCollection>(loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'), 'gm_collection'),
+  topical: initializeFeatureFlaggedData<Topical>(loadJsonFromDataFile<Topical>('TOPICAL.json'), 'topical'),
 };
 
 export function getLastGeneratedDate() {
@@ -89,18 +61,11 @@ export function getLastGeneratedDate() {
  * and subsequently resolves all of the references found in the query result.
  * Lastly it reduces the query result to the given locale, using the localize method.
  */
-export function createGetContent<T>(
-  queryOrQueryGetter:
-    | string
-    | ((context: GetStaticPropsContext & { locale: string }) => string)
-) {
+export function createGetContent<T>(queryOrQueryGetter: string | ((context: GetStaticPropsContext & { locale: string }) => string)) {
   return async (context: GetStaticPropsContext) => {
     const { locale = 'nl' } = context;
     const client = await getClient();
-    const query =
-      typeof queryOrQueryGetter === 'function'
-        ? queryOrQueryGetter({ locale, ...context })
-        : queryOrQueryGetter;
+    const query = typeof queryOrQueryGetter === 'function' ? queryOrQueryGetter({ locale, ...context }) : queryOrQueryGetter;
 
     const rawContent = (await client.fetch<T>(query)) ?? {};
 
@@ -121,26 +86,17 @@ export function createGetContent<T>(
  * becomes:
  * { _type: 'document', id: 'abc', title: 'foo', body: 'bar' }
  */
-async function replaceReferencesInContent(
-  input: unknown,
-  client: SanityClient,
-  resolvedIds: string[] = []
-) {
+async function replaceReferencesInContent(input: unknown, client: SanityClient, resolvedIds: string[] = []) {
   await new AsyncWalkBuilder()
     .withGlobalFilter((x) => x.val?._type === 'reference')
     .withSimpleCallback(async (node) => {
       const refId = node.val._ref;
 
-      assert(
-        typeof refId === 'string',
-        `[${replaceReferencesInContent.name}] node.val._ref is not set`
-      );
+      assert(typeof refId === 'string', `[${replaceReferencesInContent.name}] node.val._ref is not set`);
 
       if (resolvedIds.includes(refId)) {
         const ids = `[${resolvedIds.concat(refId).join(',')}]`;
-        throw new Error(
-          `Ran into an infinite loop of references, please investigate the following sanity document order: ${ids}`
-        );
+        throw new Error(`Ran into an infinite loop of references, please investigate the following sanity document order: ${ids}`);
       }
 
       const doc = await client.fetch(`*[_id == '${refId}'][0]`);
@@ -162,9 +118,7 @@ async function replaceReferencesInContent(
  * (public/json/nl.json)
  *
  */
-export function selectNlData<
-  T extends keyof Nl | F.AutoPath<Nl, keyof Nl, '.'>
->(...metrics: T[]) {
+export function selectNlData<T extends keyof Nl | F.AutoPath<Nl, keyof Nl, '.'>>(...metrics: T[]) {
   return () => {
     const { data } = getNlData();
 
@@ -172,10 +126,7 @@ export function selectNlData<
      * Instead of getting the full timeseries we are getting the latest value only per age group.
      */
     if (isDefined(data.vaccine_coverage_per_age_group)) {
-      data.vaccine_coverage_per_age_group.values =
-        getCoveragePerAgeGroupLatestValues(
-          data.vaccine_coverage_per_age_group.values
-        );
+      data.vaccine_coverage_per_age_group.values = getCoveragePerAgeGroupLatestValues(data.vaccine_coverage_per_age_group.values);
     }
 
     const selectedNlData = metrics.reduce(
@@ -236,15 +187,11 @@ export function selectTopicalData(locale: keyof Languages) {
       themeTiles: theme.themeTiles.map((tile) => ({
         index: tile.index,
         title: tile.title[localeKey],
+        kpiValue: tile?.kpiValue,
         dynamicDescription: tile.dynamicDescription[localeKey],
         trendIcon: tile.trendIcon && {
           direction: tile.trendIcon.direction,
-          color:
-            tile.trendIcon.color === 'GREEN'
-              ? colors.data.multiseries.turquoise
-              : tile.trendIcon.color === 'RED'
-              ? colors.data.gradient.red
-              : 'currentColor',
+          color: tile.trendIcon.color === 'GREEN' ? colors.green2 : tile.trendIcon.color === 'RED' ? colors.red2 : 'currentColor',
         },
         tileIcon: tile.tileIcon,
         cta: tile.cta && {
@@ -283,16 +230,11 @@ export type TopicalData = ReturnType<typeof selectTopicalData>;
  * This method selects the specified metric properties from the region data
  *
  */
-export function selectVrData<
-  T extends keyof Vr | F.AutoPath<Vr, keyof Vr, '.'>
->(...metrics: T[]) {
+export function selectVrData<T extends keyof Vr | F.AutoPath<Vr, keyof Vr, '.'>>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const { data, vrName } = getVrData(context);
 
-    const selectedVrData = metrics.reduce(
-      (acc, p) => set(acc, p, get(data, p) ?? null),
-      {} as DataShape<T, Vr>
-    );
+    const selectedVrData = metrics.reduce((acc, p) => set(acc, p, get(data, p) ?? null), {} as DataShape<T, Vr>);
 
     replaceInaccurateLastValue(selectedVrData);
 
@@ -323,10 +265,7 @@ export function getVrName(code: string) {
 }
 
 export function loadAndSortVrData(vrcode: string) {
-  const data = initializeFeatureFlaggedData<Vr>(
-    loadJsonFromDataFile<Vr>(`${vrcode}.json`),
-    'vr'
-  );
+  const data = initializeFeatureFlaggedData<Vr>(loadJsonFromDataFile<Vr>(`${vrcode}.json`), 'vr');
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
@@ -337,16 +276,11 @@ export function loadAndSortVrData(vrcode: string) {
  * This method selects the specified metric properties from the municipal data
  *
  */
-export function selectGmData<
-  T extends keyof Gm | F.AutoPath<Gm, keyof Gm, '.'>
->(...metrics: T[]) {
+export function selectGmData<T extends keyof Gm | F.AutoPath<Gm, keyof Gm, '.'>>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const selectedGmData = metrics.reduce(
-      (acc, p) => set(acc, p, get(gmData.data, p)),
-      {} as DataShape<T, Gm>
-    );
+    const selectedGmData = metrics.reduce((acc, p) => set(acc, p, get(gmData.data, p)), {} as DataShape<T, Gm>);
 
     replaceInaccurateLastValue(selectedGmData);
 
@@ -364,10 +298,7 @@ function getGmData(context: GetStaticPropsContext) {
     throw Error('No valid gmcode found in context');
   }
 
-  const data = initializeFeatureFlaggedData<Gm>(
-    loadJsonFromDataFile<Gm>(`${code}.json`),
-    'gm'
-  );
+  const data = initializeFeatureFlaggedData<Gm>(loadJsonFromDataFile<Gm>(`${code}.json`), 'gm');
 
   const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
@@ -406,19 +337,13 @@ export function createGetChoroplethData<T1, T2>(settings?: {
 function replaceInaccurateLastValue(data: any) {
   const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice'];
 
-  const inaccurateMetricProperty =
-    'admissions_on_date_of_admission_moving_average_rounded';
+  const inaccurateMetricProperty = 'admissions_on_date_of_admission_moving_average_rounded';
 
-  const metricsWithInaccurateData = metricsInaccurateItems.filter(
-    (m) => m in data
-  ) as (keyof typeof data & keyof typeof metricsInaccurateItems)[];
+  const metricsWithInaccurateData = metricsInaccurateItems.filter((m) => m in data) as (keyof typeof data & keyof typeof metricsInaccurateItems)[];
 
   metricsWithInaccurateData.forEach((m) => {
     if (isValuesWithLastValue(data[m])) {
-      data[m] = adjustDataToLastAccurateValue(
-        data[m],
-        inaccurateMetricProperty
-      );
+      data[m] = adjustDataToLastAccurateValue(data[m], inaccurateMetricProperty);
     }
   });
 }
@@ -431,9 +356,6 @@ function replaceInaccurateLastValue(data: any) {
  * @param locale The locale of the page to be generated.
  * @returns a subset of a lokalize export file
  */
-export function getLokalizeTexts<T extends object>(
-  callback: (a: SiteText) => T,
-  locale: keyof Languages
-) {
+export function getLokalizeTexts<T extends object>(callback: (a: SiteText) => T, locale: keyof Languages) {
   return { pageText: callback(languages[locale]) };
 }

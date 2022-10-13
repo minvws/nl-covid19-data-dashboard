@@ -161,7 +161,7 @@ const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
     pt: x.hasTitle ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
     display: 'flex',
     flexWrap: 'wrap',
-    borderTop: x.hasTitle ? undefined : 'solid 2px lightGray',
+    borderTop: x.hasTitle ? undefined : 'solid 2px gray2',
   })
 );
 
@@ -174,10 +174,10 @@ const MetadataBox = styled.div(
 
 const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
   css({
-    bg: !isActive ? 'button' : 'transparent',
+    bg: !isActive ? 'blue8' : 'transparent',
     border: 'none',
     borderRadius: '5px',
-    color: !isActive ? 'white' : 'blue',
+    color: !isActive ? 'white' : 'blue8',
     px: !isActive ? 3 : 0,
     py: !isActive ? 12 : 0,
     cursor: 'pointer',

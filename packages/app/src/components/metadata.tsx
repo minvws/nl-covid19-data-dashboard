@@ -55,7 +55,7 @@ export function Metadata({
   return (
     <>
       {!isTileFooter && source && (
-        <Text color="annotation" variant="label1">
+        <Text color="gray7" variant="label1">
           {`${dateString} - ${commonTexts.common.metadata.source}: `}
           <ExternalLink ariaLabel={source.aria_text} href={source.href}>
             {source.text}
@@ -71,7 +71,7 @@ export function Metadata({
          * should be separate components.
          */
         <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
-          <Text color="annotation" variant="label1">
+          <Text color="gray7" variant="label1">
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
                 weekStart: formatDateFromSeconds(date[0], 'weekday-medium'),

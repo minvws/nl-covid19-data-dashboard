@@ -23,6 +23,7 @@ type ChoroplethTileProps = DataProps & {
   };
   metadata?: MetadataProps;
   valueAnnotation?: string;
+  hasPadding?: boolean;
 } & (
     | {
         onChartRegionChange: (v: RegionControlOption) => void;
@@ -43,6 +44,7 @@ export function ChoroplethTile({
   children,
   metadata,
   valueAnnotation,
+  hasPadding,
   ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
@@ -104,7 +106,11 @@ export function ChoroplethTile({
           height="100%"
           spacing={3}
         >
-          <Box height="100%" marginTop={4}>
+          <Box
+            height="100%"
+            mt={4}
+            pl={hasPadding && breakpoints.lg ? 4 : undefined}
+          >
             <ErrorBoundary>{children}</ErrorBoundary>
           </Box>
 

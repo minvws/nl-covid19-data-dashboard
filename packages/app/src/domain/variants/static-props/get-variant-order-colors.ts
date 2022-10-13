@@ -8,10 +8,10 @@ export type ColorMatch = {
 };
 
 const getColorForVariant = (variantCode: VariantCode, index: number): string => {
-  if (variantCode === 'other_table') return colors.data.variants.other_table;
-  if (variantCode === 'other_graph') return colors.data.variants.other_graph;
+  if (variantCode === 'other_table') return colors.gray5;
+  if (variantCode === 'other_graph') return colors.gray5;
 
-  return colors.data.variants.colorList[index];
+  return colors.variants.colorList[index];
 }
 
 export function getVariantOrderColors(

@@ -7,10 +7,10 @@ export { VaccineBoosterAdministrationsKpiSection } from './vaccine-booster-admin
 export { VaccineAdministrationsKpiSection } from './vaccine-administrations-kpi-section';
 export { VaccinationsShotKpiSection } from './vaccinations-shot-kpi-section';
 export { VaccinationsKpiHeader } from './vaccinations-kpi-header';
-export { VaccineCoverageChoroplethPerGm } from './vaccine-coverage-choropleth-per-gm';
+export { VaccineCoverageChoropleth } from './vaccine-coverage-choropleth';
 export { VaccineCoveragePerAgeGroup } from './vaccine-coverage-per-age-group';
 export { VaccineCoverageTile } from './vaccine-coverage-tile/vaccine-coverage-tile';
 export { VaccineCoverageToggleTile } from './vaccine-coverage-toggle-tile';
 export { VaccineDeliveryBarChart } from './vaccine-delivery-bar-chart';
 export { VaccineStockPerSupplierChart } from './vaccine-stock-per-supplier-chart';
-export { ChoroplethTooltip } from './vaccine-coverage-choropleth-per-gm';
+export { ChoroplethTooltip } from './vaccine-coverage-choropleth';

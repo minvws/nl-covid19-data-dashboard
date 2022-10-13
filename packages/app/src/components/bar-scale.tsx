@@ -121,7 +121,7 @@ export function BarScale({
               y1={46}
               y2={26}
               strokeWidth="3"
-              stroke="#000"
+              stroke="black"
             />
 
             {showValue && (
@@ -132,7 +132,7 @@ export function BarScale({
                 css={css({
                   fontSize: '1.25rem',
                   fontWeight: 'bold',
-                  fill: 'body',
+                  fill: 'black',
                 })}
               >
                 {`${formatNumber(value)}`}
@@ -149,14 +149,14 @@ export function BarScale({
                   y1={56}
                   y2={46}
                   strokeWidth="3"
-                  stroke="#595959"
+                  stroke="gray7"
                 />
               )}
               <text
                 x={`${scale(limit)}%`}
                 y={scale(limit) < 100 ? 72 : 64}
                 textAnchor={textAlign(scale(limit) ?? 0)}
-                css={css({ fill: 'annotation', fontSize: '0.875rem' })}
+                css={css({ fill: 'gray7', fontSize: '0.875rem' })}
               >
                 {`${formatNumber(limit)}`}
               </text>
@@ -168,7 +168,7 @@ export function BarScale({
               <text
                 x={`${scale(xMin)}%`}
                 y={64}
-                css={css({ fill: 'annotation', fontSize: '0.875rem' })}
+                css={css({ fill: 'gray7', fontSize: '0.875rem' })}
               >
                 {`${formatNumber(xMin)}`}
               </text>

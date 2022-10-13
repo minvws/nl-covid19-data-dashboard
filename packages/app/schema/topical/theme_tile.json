@@ -15,6 +15,9 @@
     "index": {
       "type": "number"
     },
+    "kpiValue": {
+      "type": ["number", "null", "string"]
+    },
     "title": {
       "$ref": "multilanguage_string.json"
     },

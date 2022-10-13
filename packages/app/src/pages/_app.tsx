@@ -4,7 +4,7 @@ import { LazyMotion } from 'framer-motion';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
@@ -28,22 +28,25 @@ const loadAnimationFeatures = () =>
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
-  const { locale = 'nl' } = router;
+  const [locale, setLocale] = useState((router.locale as LanguageKey) || 'nl');
 
-  const [text, toggleHotReloadButton, dataset] = useLokalizeText(
-    locale as LanguageKey
-  );
+  const {
+    text,
+    toggleHotReloadButton,
+    dataset,
+    locale: debugToggleLocale,
+  } = useLokalizeText(locale);
+
+  useEffect(() => {
+    setLocale(debugToggleLocale);
+  }, [debugToggleLocale]);
 
   assert(
     text,
     `[${loadAnimationFeatures.name}] Encountered unknown language: ${locale}`
   );
 
-  const intlContext = useIntlHelperContext(
-    locale as LanguageKey,
-    text.common,
-    dataset
-  );
+  const intlContext = useIntlHelperContext(locale, text.common, dataset);
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {

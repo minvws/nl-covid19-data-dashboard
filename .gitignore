@@ -35,3 +35,6 @@ exports
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# custom json folders
+/packages/app/public/json*

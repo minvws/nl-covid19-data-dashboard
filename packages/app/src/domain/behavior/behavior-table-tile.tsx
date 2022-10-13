@@ -52,11 +52,11 @@ export function BehaviorTableTile({
     <ChartTile title={title} description={description}>
       <Box display="flex" flexWrap="wrap" spacing={2} spacingHorizontal={3}>
         <Box>
-          <ExplanationBox background={colors.data.cyan} />
+          <ExplanationBox background={colors.blue6} />
           {complianceExplanation}
         </Box>
         <Box>
-          <ExplanationBox background={colors.data.yellow} />
+          <ExplanationBox background={colors.yellow3} />
           {supportExplanation}
         </Box>
       </Box>
@@ -139,23 +139,23 @@ export function BehaviorTableTile({
                 >
                   <PercentageBarWithNumber
                     percentage={behavior.compliancePercentage}
-                    color={colors.data.cyan}
+                    color={colors.blue6}
                   />
                   <PercentageBarWithNumber
                     percentage={behavior.supportPercentage}
-                    color={colors.data.yellow}
+                    color={colors.yellow3}
                   />
                 </Cell>
                 <Cell css={css({ minWidth: trendColumnWidth })}>
                   <Box display="flex" flexDirection="column">
                     <BehaviorTrend
                       trend={behavior.complianceTrend}
-                      color={colors.body}
+                      color={colors.black}
                       text={text}
                     />
                     <BehaviorTrend
                       trend={behavior.supportTrend}
-                      color={colors.body}
+                      color={colors.black}
                       text={text}
                     />
                   </Box>
@@ -166,7 +166,7 @@ export function BehaviorTableTile({
         </StyledTable>
       </Box>
       <Box mt={2} maxWidth="maxWidthText">
-        <Text variant="label1" color="annotation">
+        <Text variant="label1" color="gray7">
           {annotation}
         </Text>
       </Box>
@@ -200,9 +200,9 @@ function DescriptionWithIcon({
     <Anchor
       as="button"
       underline="hover"
-      color="body"
+      color="black"
       onClick={buttonClickHandler}
-      css={css({ '&:hover': { color: 'blue' } })}
+      css={css({ '&:hover': { color: 'blue8' } })}
     >
       <span
         css={css({
@@ -305,7 +305,7 @@ const HeaderCell = styled.th(
 
 const Cell = styled.td(
   css({
-    borderBottom: '1px solid lightGray',
+    borderBottom: `1px solid ${colors.gray2}`,
     p: 0,
     py: 2,
     verticalAlign: 'middle',
@@ -313,9 +313,9 @@ const Cell = styled.td(
     '&:first-child': {
       borderBottom: asResponsiveArray({
         _: 'none',
-        sm: '1px solid lightGray',
+        sm: `1px solid ${colors.gray2}`,
         md: 'none',
-        lg: '1px solid lightGray',
+        lg: `1px solid ${colors.gray2}`,
       }),
     },
   })

@@ -1,9 +1,9 @@
 import { colors, Nl } from '@corona-dashboard/common';
 import { ScopedMetricConfigs } from './common';
 
-const GREEN = colors.data.gradient.green;
-const YELLOW = colors.data.gradient.yellow;
-const RED = colors.data.gradient.red;
+const GREEN = colors.green1;
+const YELLOW = colors.yellow4;
+const RED = colors.red2;
 
 export const nl: ScopedMetricConfigs<Nl> = {
   intensive_care_lcps: {

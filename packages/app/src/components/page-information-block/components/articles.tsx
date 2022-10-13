@@ -84,7 +84,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
 
 const StyledAnchor = styled(Anchor)(
   css({
-    color: 'blue',
+    color: 'blue8',
     textDecoration: 'none',
     display: 'flex',
     fontWeight: 'bold',

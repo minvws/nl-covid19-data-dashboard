@@ -61,7 +61,7 @@ export function TimelineTooltipContent({
             />
           )}
 
-          <InlineText variant="label1" color="labelGray">
+          <InlineText variant="label1" color="gray6">
             {dateStr}
           </InlineText>
 
@@ -75,7 +75,7 @@ export function TimelineTooltipContent({
       )}
       <Box spacing={2}>
         {!isTouch && (
-          <Text variant="label1" color="labelGray">
+          <Text variant="label1" color="gray6">
             {dateStr}
           </Text>
         )}
@@ -89,12 +89,12 @@ export function TimelineTooltipContent({
           pt={3}
           mx={-27}
           borderTop="1px solid"
-          borderTopColor="lightGray"
+          borderTopColor="gray2"
           display="flex"
           justifyContent="center"
           textVariant="label1"
         >
-          <Anchor as="button" onClick={onClose} color="blue" underline>
+          <Anchor as="button" onClick={onClose} color="blue8" underline>
             {commonTexts.common.sluiten}
           </Anchor>
         </Box>
@@ -114,7 +114,7 @@ function ChevronButton({
 }) {
   return (
     <Box
-      color="blue"
+      color="blue8"
       style={{ transform: rotate ? 'rotate(180deg)' : undefined }}
     >
       <IconButton title={title} onClick={onClick} size={13} padding={2}>

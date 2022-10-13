@@ -53,7 +53,7 @@ export const VaccineCampaignsTile = ({
           />
         )}
         <Box mt={3}>
-          <Text variant="label1" color="annotation">
+          <Text variant="label1" color="gray7">
             <Markdown content={descriptionFooter} />
           </Text>
         </Box>

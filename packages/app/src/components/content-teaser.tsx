@@ -51,7 +51,7 @@ export function ContentTeaser({
         />
       </Box>
       <Box maxWidth="25rem" spacing={publicationDate || category ? 2 : 0}>
-        <Text variant="overline2" color="bodyLight">
+        <Text variant="overline2" color="gray7">
           {publicationDate ? (
             <>
               {`${text.secties.meer_lezen.weekly_category} -`}

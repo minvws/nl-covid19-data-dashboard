@@ -60,7 +60,7 @@ export function TimelineEvent({
           animate={{
             background: transparentize(
               isHighlightedEvent ? 0.4 : 0.7,
-              colors.data.primary
+              colors.primary
             ),
           }}
         />

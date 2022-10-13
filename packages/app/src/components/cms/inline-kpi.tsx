@@ -172,7 +172,7 @@ function KpiTile({
               background: `url(/icons/app/${iconName}) no-repeat top left`,
               width: '30px',
               height: '40px',
-              color: '#000',
+              color: 'black',
             })}
           />
 

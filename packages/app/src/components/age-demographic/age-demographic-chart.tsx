@@ -45,7 +45,7 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
     <VisxText
       x={x}
       y={y}
-      fill={colors.annotation}
+      fill={colors.gray7}
       fontSize="1rem"
       textAnchor="middle"
     >
@@ -157,7 +157,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           left={margin.left}
           top={margin.top}
           numTicks={numTicks}
-          stroke={colors.silver}
+          stroke={colors.gray3}
         />
 
         <GridColumns
@@ -167,7 +167,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           left={width / 2 + axisWidth / 2}
           top={margin.top}
           numTicks={numTicks}
-          stroke={colors.silver}
+          stroke={colors.gray3}
         />
 
         <StyledPatternLines
@@ -284,7 +284,7 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
 
       {hasClippedValue && (
         <Box mt={2}>
-          <Text variant="label1" color="annotation">
+          <Text variant="label1" color="gray7">
             {text.clipped_value_message}
           </Text>
         </Box>
@@ -306,7 +306,7 @@ const StyledHoverBar = styled(Bar)(
     strokeWidth: 12,
 
     [`${StyledGroup}:hover &`]: {
-      fill: 'lightBlue',
+      fill: colors.blue1,
     },
   })
 );

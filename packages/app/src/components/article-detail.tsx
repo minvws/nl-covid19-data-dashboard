@@ -41,7 +41,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
 
         <Box spacing={2}>
           <Heading level={1}>{article.title}</Heading>
-          <InlineText color="annotation">
+          <InlineText color="gray7">
             <PublicationDate date={article.publicationDate} />
           </InlineText>
         </Box>
@@ -93,7 +93,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       {article.categories && (
         <ContentBlock>
           <Box pb={2} pt={4}>
-            <InlineText color="annotation">
+            <InlineText color="gray7">
               {text.secties.artikelen.tags}
             </InlineText>
           </Box>
@@ -141,18 +141,18 @@ const TagAnchor = styled.a(
     mb: 3,
     px: 3,
     py: 2,
-    backgroundColor: 'buttonLightBlue',
-    color: 'blue',
+    backgroundColor: 'blue3',
+    color: 'blue8',
     textDecoration: 'none',
     transition: '0.1s border-color',
 
     '&:hover': {
-      borderColor: 'blue',
+      borderColor: 'blue8',
     },
 
     '&:focus': {
       outline: '2px dotted',
-      outlineColor: 'blue',
+      outlineColor: 'blue8',
     },
   })
 );

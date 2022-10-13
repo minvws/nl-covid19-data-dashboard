@@ -2,6 +2,7 @@ import {
   colors,
   GmCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -19,10 +20,16 @@ import { thresholds } from '~/components/choropleth/logic';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
 import { Layout, GmLayout } from '~/domain/layout';
 import { Languages, SiteText } from '~/locale';
+import { BoldText } from '~/components/typography';
+import { matchingAgeGroups } from '~/domain/vaccine/common';
 import {
   AgeGroup,
   AgeGroupSelect,
 } from '~/domain/vaccine/components/age-group-select';
+import {
+  VaccinationCoverageKindSelect,
+  CoverageKindProperty,
+} from '~/domain/vaccine/components/vaccination-coverage-kind-select';
 import {
   selectVaccineCoverageData,
   VaccineCoverageToggleTile,
@@ -139,6 +146,8 @@ export const VaccinationsGmPage = (
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
+  const [selectedCoverageKind, setSelectedCoverageKind] =
+    useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] =
     useState<boolean>(false);
@@ -159,6 +168,20 @@ export const VaccinationsGmPage = (
   };
 
   const vaccinationsCoverageFeature = useFeature('vaccinationsCoverage');
+
+  /**
+   * When changing between coverage kinds where the selected age group isn't available,
+   * the other coverage kind set the non-matching age group to a default one.
+   */
+  const setSelectedCoverageKindAndAge = (
+    coverageKind: CoverageKindProperty
+  ) => {
+    if (coverageKind === selectedCoverageKind) return;
+    if (selectedAgeGroup !== '12+') {
+      setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
+    }
+    setSelectedCoverageKind(coverageKind);
+  };
 
   /**
    * Filter out only the the 12+ and 18+ for the toggle component.
@@ -279,7 +302,7 @@ export const VaccinationsGmPage = (
                       value:
                         filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage ||
                         0,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                   {
@@ -296,7 +319,7 @@ export const VaccinationsGmPage = (
                       value:
                         filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage ||
                         0,
-                      color: colors.data.scale.blueDetailed[8],
+                      color: colors.scale.blueDetailed[8],
                     },
                   },
                 ]}
@@ -332,7 +355,7 @@ export const VaccinationsGmPage = (
                     bar: {
                       value:
                         filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                   {
@@ -347,7 +370,7 @@ export const VaccinationsGmPage = (
                     bar: {
                       value:
                         filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
-                      color: colors.data.scale.blueDetailed[3],
+                      color: colors.scale.blueDetailed[3],
                     },
                   },
                 ]}
@@ -371,12 +394,51 @@ export const VaccinationsGmPage = (
                   )}
                 />
 
-                <Box maxWidth="20rem">
-                  <AgeGroupSelect
-                    onChange={setSelectedAgeGroup}
-                    initialValue={selectedAgeGroup}
-                    shownAgeGroups={['12+', '18+']}
-                  />
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="flex-start"
+                  spacingHorizontal={2}
+                  as={'fieldset'}
+                >
+                  <BoldText
+                    as="legend"
+                    css={css({
+                      flexBasis: '100%',
+                      mb: 2,
+                    })}
+                  >
+                    {
+                      commonTexts.choropleth.vaccination_coverage.shared
+                        .dropdowns_title
+                    }
+                  </BoldText>
+
+                  <Box
+                    display="flex"
+                    width="100%"
+                    spacingHorizontal={{ xs: 2 }}
+                    flexWrap="wrap"
+                    flexDirection={{ _: 'column', xs: 'row' }}
+                  >
+                    <Box flex="1">
+                      <VaccinationCoverageKindSelect
+                        onChange={setSelectedCoverageKindAndAge}
+                        initialValue={selectedCoverageKind}
+                      />
+                    </Box>
+                    <Box flex="1">
+                      <Box maxWidth="20rem">
+                        <AgeGroupSelect
+                          onChange={setSelectedAgeGroup}
+                          initialValue={selectedAgeGroup}
+                          shownAgeGroups={
+                            matchingAgeGroups[selectedCoverageKind]
+                          }
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
               </>
             }
@@ -391,6 +453,7 @@ export const VaccinationsGmPage = (
                 commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
               date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
             }}
+            hasPadding
           >
             <DynamicChoropleth
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
@@ -398,7 +461,7 @@ export const VaccinationsGmPage = (
               data={choroplethData}
               dataConfig={{
                 metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: 'fully_vaccinated_percentage',
+                metricProperty: selectedCoverageKind,
               }}
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,
@@ -414,8 +477,8 @@ export const VaccinationsGmPage = (
                   mapData={choropleth.gm.vaccine_coverage_per_age_group.filter(
                     (singleGm) => singleGm.gmcode === context.code
                   )}
-                  ageGroups={['12+', '18+']}
-                  selectedCoverageKind={'fully_vaccinated_percentage'}
+                  ageGroups={matchingAgeGroups[selectedCoverageKind]}
+                  selectedCoverageKind={selectedCoverageKind}
                 />
               )}
             />
