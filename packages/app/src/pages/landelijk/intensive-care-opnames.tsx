@@ -159,7 +159,7 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
               commonTexts.sidebar.metrics.intensive_care_admissions.title
             }
             title={textNl.titel}
-            icon={<IntensiveCareOpnames aria-hidden='true' />}
+            icon={<IntensiveCareOpnames aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.date,
