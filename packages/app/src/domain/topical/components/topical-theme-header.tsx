@@ -27,8 +27,9 @@ export const TopicalThemeHeader = ({
         )}
         <Heading level={2}>{title}</Heading>
       </Box>
-
+      <Box fontSize={3}>
       <Markdown content={dynamicSubtitle} />
+      </Box>
     </Box>
   );
 };
