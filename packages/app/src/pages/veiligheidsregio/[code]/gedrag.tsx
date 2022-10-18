@@ -113,7 +113,7 @@ export default function BehaviorPageVr(
           <PageInformationBlock
             category={commonTexts.sidebar.categories.actions_to_take.title}
             title={text.vr.pagina.titel}
-            icon={<Bevolking />}
+            icon={<Bevolking aria-hidden="true" />}
             description={text.vr.pagina.toelichting}
             metadata={{
               datumsText: text.vr.datums,

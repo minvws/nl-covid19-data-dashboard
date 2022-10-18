@@ -134,7 +134,7 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
               safetyRegion: vrName,
             })}
-            icon={<Coronavirus />}
+            icon={<Coronavirus aria-hidden="true" />}
             description={textVr.section_deceased_rivm.description}
             referenceLink={textVr.section_deceased_rivm.reference.href}
             metadata={{
@@ -237,7 +237,7 @@ function DeceasedRegionalPage(props: StaticProps<typeof getStaticProps>) {
 
           <PageInformationBlock
             title={textVr.section_sterftemonitor.title}
-            icon={<Coronavirus />}
+            icon={<Coronavirus aria-hidden="true" />}
             description={textVr.section_sterftemonitor.description}
             referenceLink={textVr.section_sterftemonitor.reference.href}
             metadata={{

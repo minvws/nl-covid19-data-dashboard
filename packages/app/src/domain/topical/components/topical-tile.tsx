@@ -30,12 +30,15 @@ interface TopicalTileProps {
   dynamicDescription: string;
   kpiValue: number | null | string;
   cta: Cta | null;
+  ariaLabel?: string;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
-  const { formatNumber } = useIntl();
+export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta, ariaLabel }: TopicalTileProps) {
+  const { formatNumber, commonTexts } = useIntl();
 
   const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
+  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
+  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
   return (
     <Box
       as="a"
@@ -80,8 +83,8 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 {title}
                 {!formatedKpiValue && trendIcon && (
                   <TrendIconWrapper color={trendIcon.color}>
-                    {trendIcon.direction === 'DOWN' && <Down />}
-                    {trendIcon.direction === 'UP' && <Up />}
+                    {trendIcon.direction === 'DOWN' && <Down aria-label={TrendLabelDown} />}
+                    {trendIcon.direction === 'UP' && <Up aria-label={TrendLabelUp} />}
                   </TrendIconWrapper>
                 )}
               </Heading>

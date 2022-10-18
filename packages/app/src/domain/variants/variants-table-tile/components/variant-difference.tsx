@@ -8,16 +8,21 @@ import { TableText } from '../types';
 export function VariantDifference({
   value,
   text,
+  ariaLabel,
 }: {
   value: DifferenceDecimal;
   text: TableText;
+  ariaLabel?: string;
 }) {
-  const { formatPercentage } = useIntl();
+  const { formatPercentage, commonTexts } = useIntl();
 
   const options = {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
   };
+  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.up_trend_label
+  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.down_trend_label
+  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.neutral_trend_label
 
   if (value === undefined) {
     return <>-</>;
@@ -25,7 +30,7 @@ export function VariantDifference({
   if (value.difference > 0) {
     return (
       <Difference color={colors.black}>
-        <Up aria-hidden="true" />
+        <Up aria-label={TrendLabelUp} />
         {formatPercentage(value.difference, options)} {text.verschil.meer}
       </Difference>
     );
@@ -33,14 +38,14 @@ export function VariantDifference({
   if (value.difference < 0) {
     return (
       <Difference color={colors.black}>
-        <Down aria-hidden="true" />
+        <Down aria-label={TrendLabelDown} />
         {formatPercentage(-value.difference, options)} {text.verschil.minder}
       </Difference>
     );
   }
   return (
     <Difference color={colors.neutral}>
-      <Dot color={colors.neutral} aria-hidden="true" />
+      <Dot color={colors.neutral} aria-label={TrendLabelNeutral} />
       {text.verschil.gelijk}
     </Difference>
   );

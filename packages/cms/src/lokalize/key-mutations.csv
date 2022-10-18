@@ -33,3 +33,11 @@ timestamp,action,key,document_id,move_to
 2022-10-20T08:52:25.474Z,delete,pages.intensive_care_page.nl.kpi_bedbezetting.barscale_screenreader_text,jDbv30Y7XYH5kl8ZaovZD6,__
 2022-10-11T13:19:27.200Z,add,common.accessibility.visual_context_accessibility_labels.external_link,7OLL6UA2lzERNM4xv32yfd,__
 2022-10-11T13:19:28.147Z,add,common.accessibility.visual_context_accessibility_labels.warning_icon,yWf5NF9ZnuFvbcgji6Y6Cq,__
+2022-10-17T13:24:25.402Z,add,common.accessibility.viusal_contaext_accessibility_labels.up_trend_label,ibZWLQHfYl2AyCZBOYOJwe,__
+2022-10-17T13:24:26.125Z,add,common.accessibility.viusal_contaext_accessibility_labels.down_trend_label,o1NvowMyQv05WF4s6dWCcz,__
+2022-10-17T13:24:27.112Z,add,common.accessibility.viusal_contaext_accessibility_labels.neutral_trend_label,Z4981ecxxAauoAYZ8DvJ23,__
+2022-10-18T11:09:23.313Z,delete,common.accessibility.viusal_contaext_accessibility_labels.external_link,7OLL6UA2lzERNM4xv31tPQ,__
+2022-10-18T11:09:23.314Z,delete,common.accessibility.viusal_contaext_accessibility_labels.warning_icon,yWf5NF9ZnuFvbcgji6SLWR,__
+2022-10-18T11:09:23.316Z,move,common.accessibility.viusal_contaext_accessibility_labels.down_trend_label,o1NvowMyQv05WF4s6dWCcz,common.accessibility.visual_context_accessibility_labels.down_trend_label
+2022-10-18T11:09:23.318Z,move,common.accessibility.viusal_contaext_accessibility_labels.neutral_trend_label,Z4981ecxxAauoAYZ8DvJ23,common.accessibility.visual_context_accessibility_labels.neutral_trend_label
+2022-10-18T11:09:23.320Z,move,common.accessibility.viusal_contaext_accessibility_labels.up_trend_label,ibZWLQHfYl2AyCZBOYOJwe,common.accessibility.visual_context_accessibility_labels.up_trend_label

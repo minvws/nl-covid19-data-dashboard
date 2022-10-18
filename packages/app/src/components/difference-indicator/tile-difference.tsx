@@ -13,16 +13,21 @@ export function TileDifference({
   isPercentage,
   showOldDateUnix,
   isAmount,
+  ariaLabel,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   maximumFractionDigits?: number;
   isPercentage?: boolean;
   showOldDateUnix?: boolean;
   isAmount: boolean;
+  ariaLabel?: string;
 }) {
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const text = commonTexts.toe_en_afname;
   const { difference } = value;
+  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.up_trend_label
+  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.down_trend_label
+  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.neutral_trend_label
 
   const formattedDifference = formatNumber(
     Math.abs(difference),
@@ -35,14 +40,14 @@ export function TileDifference({
   if (difference > 0) {
     content = isAmount ? text.waarde_meer : text.waarde_hoger;
 
-    containerWithIcon = <ContainerWithIcon icon={<Up aria-hidden="true" />} color="red2" />;
+    containerWithIcon = <ContainerWithIcon icon={<Up aria-label={TrendLabelUp} />} color="red2" />;
   }
 
   if (difference < 0) {
     content = isAmount ? text.waarde_minder : text.waarde_lager;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Down aria-hidden="true" />} color="primary" />
+      <ContainerWithIcon icon={<Down aria-label={TrendLabelDown} />} color="primary" />
     );
   }
 
@@ -50,7 +55,7 @@ export function TileDifference({
     content = text.waarde_gelijk;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Dot aria-hidden="true" />} color="neutral" />
+      <ContainerWithIcon icon={<Dot aria-label={TrendLabelNeutral} />} color="neutral" />
     );
   }
 
