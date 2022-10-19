@@ -5,7 +5,7 @@ import type {
   GmCollectionTestedOverall,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
-  VrCollectionBehavior,
+  VrCollectionBehaviorArchived_20221019,
   VrCollectionDisabilityCare,
   VrCollectionElderlyAtHome,
   VrCollectionHospitalNice,
@@ -75,7 +75,7 @@ export type VrDataCollection =
   | VrCollectionTestedOverall[]
   | VrCollectionNursingHome[]
   | VrCollectionSewer[]
-  | VrCollectionBehavior[]
+  | VrCollectionBehaviorArchived_20221019[]
   | VrCollectionDisabilityCare[]
   | VrCollectionElderlyAtHome[]
   | VrCollectionSituations[]

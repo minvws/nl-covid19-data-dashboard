@@ -10,7 +10,7 @@
     "code",
     "tested_overall",
     "nursing_home",
-    "behavior",
+    "behavior_archived_20221019",
     "hospital_nice",
     "hospital_nice_choropleth",
     "elderly_at_home",
@@ -71,12 +71,12 @@
         "$ref": "sewer.json"
       }
     },
-    "behavior": {
+    "behavior_archived_20221019": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "behavior.json"
+        "$ref": "behavior_archived_20221019.json"
       }
     },
     "disability_care": {
