@@ -80,7 +80,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 })}
                 title={textNl.thermometer.indicator.title}
                 label={textNl.thermometer.indicator.label}
-                footerText={textNl.thermometer.indicator.footerText}
+                source_label={textNl.thermometer.indicator.source_label}
+                dates_label={textNl.thermometer.indicator.dates_label}
+                level_description={textNl.thermometer.indicator.level_description}
+                trend_icon={textNl.thermometer.indicator.trend_icon}
               />
             </Box>
           )}

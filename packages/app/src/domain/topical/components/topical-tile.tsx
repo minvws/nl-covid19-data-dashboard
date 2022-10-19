@@ -12,11 +12,7 @@ import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
-
-type TrendIcon = {
-  direction: 'UP' | 'DOWN';
-  color: string;
-};
+import { TrendIcon } from '../types';
 
 type Cta = {
   label: string;
