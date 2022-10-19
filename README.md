@@ -93,20 +93,6 @@ noting:
   - `fix(optional-scope): commit description example` for fixes
   - `chore(optional-scope): commit description example` for cleanups
 
-### Under discussion
-
-- What should we do with a multitude of commits? Squash and combine or leave as is?
-- Should we use rebase instead of merge?
-- How do we write styled components
-- Where do we draw the line if we create a pull-request with x number of files changed?
-
-### Yet to discuss
-
-- What about early returns? Readability is key, maybe always put a return on its own line?
-- What about max line length? Clean code advocates to use vertical space for code structure, horizontal space for code details. What problems would arise when we stop using a max line length and developers start using _soft wrap_ in their editors instead?
-- All Unix timestamps are defined in seconds, not milliseconds like you would
-  expect in JavaScript. This is because our data sources are using seconds.
-
 ## Developer Documentation
 
 For developers actively working on the platform we recommend reading [the
