@@ -605,13 +605,17 @@ export interface NlBehaviorValue {
   avoid_crowds_compliance?: number | null;
   avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
   symptoms_stay_home_if_mandatory_compliance?: number | null;
-  symptoms_stay_home_if_mandatory_compliance_trend?: ('up' | 'down' | 'equal') | null;
+  symptoms_stay_home_if_mandatory_compliance_trend?:
+    | ('up' | 'down' | 'equal')
+    | null;
   symptoms_get_tested_compliance?: number | null;
   symptoms_get_tested_compliance_trend?: ('up' | 'down' | 'equal') | null;
   wear_mask_public_indoors_compliance?: number | null;
   wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
   wear_mask_public_transport_compliance?: number | null;
-  wear_mask_public_transport_compliance_trend?: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_transport_compliance_trend?:
+    | ('up' | 'down' | 'equal')
+    | null;
   sneeze_cough_elbow_compliance?: number | null;
   sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
   max_visitors_compliance?: number | null;
@@ -631,7 +635,9 @@ export interface NlBehaviorValue {
   avoid_crowds_support?: number | null;
   avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
   symptoms_stay_home_if_mandatory_support?: number | null;
-  symptoms_stay_home_if_mandatory_support_trend?: ('up' | 'down' | 'equal') | null;
+  symptoms_stay_home_if_mandatory_support_trend?:
+    | ('up' | 'down' | 'equal')
+    | null;
   symptoms_get_tested_support?: number | null;
   symptoms_get_tested_support_trend?: ('up' | 'down' | 'equal') | null;
   wear_mask_public_indoors_support?: number | null;
@@ -968,7 +974,16 @@ export interface NlVaccineCoveragePerAgeGroup {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
-  age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
+  age_group_range:
+    | '5-11'
+    | '12-17'
+    | '18-29'
+    | '30-39'
+    | '40-49'
+    | '50-59'
+    | '60-69'
+    | '70-79'
+    | '80+';
   age_group_percentage: number;
   age_group_total: number;
   autumn_2022_vaccinated: number | null;
@@ -986,7 +1001,16 @@ export interface NlVaccineCoveragePerAgeGroupArchived {
   values: NlVaccineCoveragePerAgeGroupArchivedValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupArchivedValue {
-  age_group_range: '5-11' | '12-17' | '18-30' | '31-40' | '41-50' | '51-60' | '61-70' | '71-80' | '81+';
+  age_group_range:
+    | '5-11'
+    | '12-17'
+    | '18-30'
+    | '31-40'
+    | '41-50'
+    | '51-60'
+    | '61-70'
+    | '71-80'
+    | '81+';
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -1002,7 +1026,16 @@ export interface NlVaccineCoveragePerAgeGroupArchived_20220908 {
   values: NlVaccineCoveragePerAgeGroupArchived_20220908Value[];
 }
 export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
-  age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
+  age_group_range:
+    | '5-11'
+    | '12-17'
+    | '18-29'
+    | '30-39'
+    | '40-49'
+    | '50-59'
+    | '60-69'
+    | '70-79'
+    | '80+';
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -1272,7 +1305,7 @@ export interface TopicalTheme {
 }
 export interface TopicalThemeTile {
   index: number;
-  kpiValue?: number | null | string;
+  kpiValue: number | null | string;
   title: MultilanguageString;
   dynamicDescription: MultilanguageString;
   trendIcon: {
@@ -1320,7 +1353,7 @@ export interface Vr {
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
   disability_care: VrDisabilityCare;
-  behavior: VrBehavior;
+  behavior_archived_20221019: VrBehaviorArchived_20221019;
   deceased_rivm: VrDeceasedRivm;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
@@ -1476,11 +1509,11 @@ export interface VrDisabilityCareValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrBehavior {
-  values: VrBehaviorValue[];
-  last_value: VrBehaviorValue;
+export interface VrBehaviorArchived_20221019 {
+  values: VrBehaviorArchived_20221019Value[];
+  last_value: VrBehaviorArchived_20221019Value;
 }
-export interface VrBehaviorValue {
+export interface VrBehaviorArchived_20221019Value {
   number_of_participants: number;
   curfew_compliance?: number | null;
   curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
