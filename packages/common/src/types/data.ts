@@ -620,6 +620,8 @@ export interface NlBehaviorValue {
   ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_compliance?: number | null;
   selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_compliance?: number | null;
+  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
   curfew_support?: number | null;
   curfew_support_trend: ('up' | 'down' | 'equal') | null;
   wash_hands_support?: number | null;
@@ -646,6 +648,8 @@ export interface NlBehaviorValue {
   ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_support?: number | null;
   selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_support?: number | null;
+  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -663,6 +667,8 @@ export interface NlBehaviorPerAgeGroup {
   ventilate_home_support?: NlBehaviorPerAgeGroupValue;
   selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
   selftest_visit_support?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -706,7 +712,8 @@ export interface NlBehaviorAnnotations1 {
     | 'sneeze_cough_elbow'
     | 'max_visitors'
     | 'ventilate_home'
-    | 'selftest_visit';
+    | 'selftest_visit'
+    | 'posttest_isolation';
   message_title_nl: string;
   message_title_en: string;
   message_desc_nl: string;
@@ -1272,7 +1279,7 @@ export interface TopicalTheme {
 }
 export interface TopicalThemeTile {
   index: number;
-  kpiValue?: number | null | string;
+  kpiValue: number | null | string;
   title: MultilanguageString;
   dynamicDescription: MultilanguageString;
   trendIcon: {
@@ -1502,6 +1509,8 @@ export interface VrBehaviorValue {
   ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_compliance?: number | null;
   selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_compliance?: number | null;
+  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
   curfew_support?: number | null;
   curfew_support_trend: ('up' | 'down' | 'equal') | null;
   wash_hands_support?: number | null;
@@ -1522,6 +1531,8 @@ export interface VrBehaviorValue {
   ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_support?: number | null;
   selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_support?: number | null;
+  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

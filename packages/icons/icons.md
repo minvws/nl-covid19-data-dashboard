@@ -12,6 +12,7 @@ See below an overview of all the available icons in this package. This file is g
 | Avondklok                              | <div style="background-color: white;"><img src="./src/svg/avondklok.svg" alt="Avondklok" /></div>                                                              |
 | BarChart                               | <div style="background-color: white;"><img src="./src/svg/bar_chart.svg" alt="BarChart" /></div>                                                               |
 | BasisregelsAfstand                     | <div style="background-color: white;"><img src="./src/svg/basisregels_afstand.svg" alt="BasisregelsAfstand" /></div>                                           |
+| BasisregelsBlijfThuis                  | <div style="background-color: white;"><img src="./src/svg/basisregels_blijf-thuis.svg" alt="BasisregelsBlijfThuis" /></div>                                    |
 | BasisregelsDrukte                      | <div style="background-color: white;"><img src="./src/svg/basisregels_drukte.svg" alt="BasisregelsDrukte" /></div>                                             |
 | BasisregelsElleboog                    | <div style="background-color: white;"><img src="./src/svg/basisregels_elleboog.svg" alt="BasisregelsElleboog" /></div>                                         |
 | BasisregelsGeenBezoek                  | <div style="background-color: white;"><img src="./src/svg/basisregels_geen_bezoek.svg" alt="BasisregelsGeenBezoek" /></div>                                    |

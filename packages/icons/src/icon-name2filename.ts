@@ -7,6 +7,7 @@ export type IconName =
   | 'Avondklok'
   | 'BarChart'
   | 'BasisregelsAfstand'
+  | 'BasisregelsBlijfThuis'
   | 'BasisregelsDrukte'
   | 'BasisregelsElleboog'
   | 'BasisregelsGeenBezoek'
@@ -138,6 +139,7 @@ export const iconName2filename: Record<IconName, string> = {
   Avondklok: 'avondklok.svg',
   BarChart: 'bar_chart.svg',
   BasisregelsAfstand: 'basisregels_afstand.svg',
+  BasisregelsBlijfThuis: 'basisregels_blijf-thuis.svg',
   BasisregelsDrukte: 'basisregels_drukte.svg',
   BasisregelsElleboog: 'basisregels_elleboog.svg',
   BasisregelsGeenBezoek: 'basisregels_geen_bezoek.svg',
