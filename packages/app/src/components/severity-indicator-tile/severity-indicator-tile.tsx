@@ -1,31 +1,36 @@
 import { colors } from '@corona-dashboard/common';
+import { Down, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
+import styled from 'styled-components';
 import { space } from '~/style/theme';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
+import { BoldText, InlineText } from '~/components/typography';
+import { TrendIcon } from '~/domain/topical/types';
 import { SeverityIndicatorLabel } from './components/severity-indicator-label';
 import { SeverityIndicator } from './components/severity-indicator';
+import { SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH } from './constants';
 import { getSeverityColor } from './logic/get-severity-color';
 import { SeverityLevels } from './types';
-import { InlineText } from '../typography';
-import { SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH } from '~/components/severity-indicator-tile/constants';
-import { BoldText } from '~/components/typography';
-import { Down, Up } from '@corona-dashboard/icons';
-import styled from 'styled-components';
-import { TrendIcon } from '~/domain/topical/types';
+import { ICON_DIRECTION_DOWN, ICON_DIRECTION_UP } from '~/domain/topical/common';
+import { mapStringToColors } from './logic/map-string-to-colors';
 
 interface SeverityIndicatorTileProps {
   description: string;
   label: string;
   level: SeverityLevels;
   title: string;
-  dates_label: string;
-  source_label: string;
-  level_description: string;
-  trend_icon: TrendIcon | null;
+  sourceLabel: string;
+  datesLabel: string;
+  levelDescription: string;
+  trendIcon: TrendIcon | null;
 }
 
-export const SeverityIndicatorTile = ({ description, label, level, title, dates_label, source_label, level_description, trend_icon }: SeverityIndicatorTileProps) => {
+export const SeverityIndicatorTile = ({ description, label, level, title, datesLabel, sourceLabel, levelDescription, trendIcon }: SeverityIndicatorTileProps) => {
+  const hasIconProps = trendIcon?.direction && trendIcon?.color;
+  const iconDirection = trendIcon?.direction.toUpperCase();
+  const iconColor = trendIcon?.color.toUpperCase();
+
   return (
     <Box
       alignItems="flex-start"
@@ -36,7 +41,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, dates_
       flexDirection="row"
       flexWrap="wrap"
       justifyContent="space-between"
-      p={space[4]}
+      p={4}
       mt={4}
       as="figure"
     >
@@ -44,7 +49,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, dates_
         <BoldText>
           <Markdown content={title} />
         </BoldText>
-        <InlineText>{dates_label}</InlineText>
+        <InlineText>{datesLabel}</InlineText>
 
         <SeverityIndicatorLabel label={label} level={level} />
 
@@ -53,25 +58,18 @@ export const SeverityIndicatorTile = ({ description, label, level, title, dates_
 
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`} as="figcaption">
         <Markdown content={description} />
-        <Box
-          display="flex"
-          alignItems="center"
-          mt={3}
-          css={css({
-            gap: 2,
-          })}
-        >
-          {trend_icon && (
-            <TrendIconWrapper color={trend_icon.color}>
-              {trend_icon.direction === 'DOWN' && <Down />}
-              {trend_icon.direction === 'UP' && <Up />}
+        <Box display={hasIconProps ? 'flex' : 'block'} alignItems="center" mt={3} css={css({ gap: 2 })}>
+          {hasIconProps && (
+            <TrendIconWrapper color={mapStringToColors(iconColor)}>
+              {iconDirection === ICON_DIRECTION_DOWN && <Down />}
+              {iconDirection === ICON_DIRECTION_UP && <Up />}
             </TrendIconWrapper>
           )}
 
-          <Markdown content={level_description} />
+          <Markdown content={levelDescription} />
         </Box>
         <Box my={3}>
-          <InlineText color="gray7">{source_label}</InlineText>
+          <InlineText color="gray7">{sourceLabel}</InlineText>
         </Box>
       </Box>
     </Box>

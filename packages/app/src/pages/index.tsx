@@ -14,6 +14,7 @@ import { replaceVariablesInText } from '~/utils';
 import { SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
+import { TrendIcon } from '~/domain/topical/types';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -80,10 +81,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 })}
                 title={textNl.thermometer.indicator.title}
                 label={textNl.thermometer.indicator.label}
-                source_label={textNl.thermometer.indicator.source_label}
-                dates_label={textNl.thermometer.indicator.dates_label}
-                level_description={textNl.thermometer.indicator.level_description}
-                trend_icon={textNl.thermometer.indicator.trend_icon}
+                sourceLabel={textNl.thermometer.indicator.source_label}
+                datesLabel={textNl.thermometer.indicator.dates_label}
+                levelDescription={textNl.thermometer.indicator.level_description}
+                trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
             </Box>
           )}
