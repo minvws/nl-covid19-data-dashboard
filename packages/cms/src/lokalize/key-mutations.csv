@@ -30,3 +30,4 @@ timestamp,action,key,document_id,move_to
 2022-10-13T12:16:30.506Z,add,pages.vaccinations_page.vr.vaccination_coverage.top_level_information_block.dates,Hbf18OLBqHEYSTRqYPuVtR,__
 2022-10-13T12:16:31.512Z,add,pages.vaccinations_page.vr.vaccination_coverage.top_level_information_block.reference.href,Hbf18OLBqHEYSTRqYPuWBB,__
 2022-10-13T12:16:32.533Z,add,pages.vaccinations_page.vr.vaccination_coverage.top_level_information_block.title,hisQZuyoPo60cR6z1YNuqw,__
+2022-10-20T08:52:25.474Z,delete,pages.intensive_care_page.nl.kpi_bedbezetting.barscale_screenreader_text,jDbv30Y7XYH5kl8ZaovZD6,__
