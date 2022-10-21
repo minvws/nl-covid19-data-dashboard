@@ -1126,6 +1126,7 @@ export type TopicalIcon =
   | 'Avondklok'
   | 'BarChart'
   | 'BasisregelsAfstand'
+  | 'BasisregelsBlijfThuis'
   | 'BasisregelsDrukte'
   | 'BasisregelsElleboog'
   | 'BasisregelsGeenBezoek'
@@ -1509,8 +1510,6 @@ export interface VrBehaviorValue {
   ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_compliance?: number | null;
   selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
-  posttest_isolation_compliance?: number | null;
-  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
   curfew_support?: number | null;
   curfew_support_trend: ('up' | 'down' | 'equal') | null;
   wash_hands_support?: number | null;
@@ -1531,8 +1530,6 @@ export interface VrBehaviorValue {
   ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_support?: number | null;
   selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
-  posttest_isolation_support?: number | null;
-  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
