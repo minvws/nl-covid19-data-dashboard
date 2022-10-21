@@ -79,8 +79,8 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_administered: 'Gezette prikken',
   vaccine_coverage: 'Vaccinatiegraad',
-  vaccine_coverage_per_age_group_estimated:
-    'Vaccinatiegraad berekend (per leeftijd)',
+  vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',
+  vaccine_coverage_per_age_group_estimated_autumn_2022: 'Vaccinatiegraad herfst 2022 booster berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',
   nursing_home: 'Verpleeghuizen',
   disability_care: 'Gehandicaptenzorg',

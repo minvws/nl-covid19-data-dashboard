@@ -1,0 +1,55 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_coverage_per_age_group_estimated_fully_vaccinated",
+      "type": "object",
+      "required": [
+        "age_12_plus_birthyear",
+        "age_12_plus_vaccinated",
+        "age_18_plus_birthyear",
+        "age_18_plus_vaccinated",
+        "date_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "age_12_plus_birthyear": {
+          "type": "string",
+          "pattern": "^-[0-9]{4}"
+        },
+        "age_12_plus_vaccinated": {
+          "type": "number"
+        },
+        "age_18_plus_birthyear": {
+          "type": "string",
+          "pattern": "^-[0-9]{4}"
+        },
+        "age_18_plus_vaccinated": {
+          "type": "number"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_coverage_per_age_group_estimated_fully_vaccinated_value",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

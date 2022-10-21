@@ -269,7 +269,8 @@ export interface Nl {
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: NlVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_archived_20220908: NlVaccineCoveragePerAgeGroupArchived_20220908;
-  vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
+  vaccine_coverage_per_age_group_estimated_fully_vaccinated: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
+  vaccine_coverage_per_age_group_estimated_autumn_2022: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value;
   vaccine_coverage_per_age_group_estimated_archived_20220908: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value;
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
@@ -1019,20 +1020,27 @@ export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_of_report_unix: number;
   birthyear_range: string;
 }
-export interface NlVaccineCoveragePerAgeGroupEstimatedValue {
-  values: NlVaccineCoveragePerAgeGroupEstimated[];
-  last_value: NlVaccineCoveragePerAgeGroupEstimated;
+export interface NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue {
+  values: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinated[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinated;
 }
-export interface NlVaccineCoveragePerAgeGroupEstimated {
-  age_60_plus_autumn_2022_vaccinated: number;
-  age_60_plus_birthyear: string;
-  age_18_plus_fully_vaccinated: number;
-  age_18_plus_has_one_shot?: number;
-  age_18_plus_birthyear: string;
-  age_12_plus_autumn_2022_vaccinated: number;
-  age_12_plus_fully_vaccinated: number;
-  age_12_plus_has_one_shot?: number;
+export interface NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinated {
   age_12_plus_birthyear: string;
+  age_12_plus_vaccinated: number;
+  age_18_plus_birthyear: string;
+  age_18_plus_vaccinated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value {
+  values: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022 {
+  age_12_plus_birthyear: string;
+  age_12_plus_vaccinated: number;
+  age_60_plus_birthyear: string;
+  age_60_plus_vaccinated: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
