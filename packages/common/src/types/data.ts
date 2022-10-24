@@ -605,17 +605,13 @@ export interface NlBehaviorValue {
   avoid_crowds_compliance?: number | null;
   avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
   symptoms_stay_home_if_mandatory_compliance?: number | null;
-  symptoms_stay_home_if_mandatory_compliance_trend?:
-    | ('up' | 'down' | 'equal')
-    | null;
+  symptoms_stay_home_if_mandatory_compliance_trend?: ('up' | 'down' | 'equal') | null;
   symptoms_get_tested_compliance?: number | null;
   symptoms_get_tested_compliance_trend?: ('up' | 'down' | 'equal') | null;
   wear_mask_public_indoors_compliance?: number | null;
   wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
   wear_mask_public_transport_compliance?: number | null;
-  wear_mask_public_transport_compliance_trend?:
-    | ('up' | 'down' | 'equal')
-    | null;
+  wear_mask_public_transport_compliance_trend?: ('up' | 'down' | 'equal') | null;
   sneeze_cough_elbow_compliance?: number | null;
   sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
   max_visitors_compliance?: number | null;
@@ -624,6 +620,8 @@ export interface NlBehaviorValue {
   ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_compliance?: number | null;
   selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_compliance?: number | null;
+  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
   curfew_support?: number | null;
   curfew_support_trend: ('up' | 'down' | 'equal') | null;
   wash_hands_support?: number | null;
@@ -635,9 +633,7 @@ export interface NlBehaviorValue {
   avoid_crowds_support?: number | null;
   avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
   symptoms_stay_home_if_mandatory_support?: number | null;
-  symptoms_stay_home_if_mandatory_support_trend?:
-    | ('up' | 'down' | 'equal')
-    | null;
+  symptoms_stay_home_if_mandatory_support_trend?: ('up' | 'down' | 'equal') | null;
   symptoms_get_tested_support?: number | null;
   symptoms_get_tested_support_trend?: ('up' | 'down' | 'equal') | null;
   wear_mask_public_indoors_support?: number | null;
@@ -652,6 +648,8 @@ export interface NlBehaviorValue {
   ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_support?: number | null;
   selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_support?: number | null;
+  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -669,6 +667,8 @@ export interface NlBehaviorPerAgeGroup {
   ventilate_home_support?: NlBehaviorPerAgeGroupValue;
   selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
   selftest_visit_support?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -712,7 +712,8 @@ export interface NlBehaviorAnnotations1 {
     | 'sneeze_cough_elbow'
     | 'max_visitors'
     | 'ventilate_home'
-    | 'selftest_visit';
+    | 'selftest_visit'
+    | 'posttest_isolation';
   message_title_nl: string;
   message_title_en: string;
   message_desc_nl: string;
@@ -974,16 +975,7 @@ export interface NlVaccineCoveragePerAgeGroup {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
-  age_group_range:
-    | '5-11'
-    | '12-17'
-    | '18-29'
-    | '30-39'
-    | '40-49'
-    | '50-59'
-    | '60-69'
-    | '70-79'
-    | '80+';
+  age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
   age_group_percentage: number;
   age_group_total: number;
   autumn_2022_vaccinated: number | null;
@@ -1001,16 +993,7 @@ export interface NlVaccineCoveragePerAgeGroupArchived {
   values: NlVaccineCoveragePerAgeGroupArchivedValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupArchivedValue {
-  age_group_range:
-    | '5-11'
-    | '12-17'
-    | '18-30'
-    | '31-40'
-    | '41-50'
-    | '51-60'
-    | '61-70'
-    | '71-80'
-    | '81+';
+  age_group_range: '5-11' | '12-17' | '18-30' | '31-40' | '41-50' | '51-60' | '61-70' | '71-80' | '81+';
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -1026,16 +1009,7 @@ export interface NlVaccineCoveragePerAgeGroupArchived_20220908 {
   values: NlVaccineCoveragePerAgeGroupArchived_20220908Value[];
 }
 export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
-  age_group_range:
-    | '5-11'
-    | '12-17'
-    | '18-29'
-    | '30-39'
-    | '40-49'
-    | '50-59'
-    | '60-69'
-    | '70-79'
-    | '80+';
+  age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -1707,7 +1681,7 @@ export interface VrCollection {
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];
-  behavior: VrCollectionBehavior[];
+  behavior_archived_20221019: VrCollectionBehaviorArchived_20221019[];
   disability_care: VrCollectionDisabilityCare[];
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
@@ -1744,7 +1718,7 @@ export interface VrCollectionSewer {
   average: number | null;
   date_of_insertion_unix: number;
 }
-export interface VrCollectionBehavior {
+export interface VrCollectionBehaviorArchived_20221019 {
   vrcode: string;
   number_of_participants: number;
   curfew_compliance?: number | null;

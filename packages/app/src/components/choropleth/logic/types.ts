@@ -5,7 +5,7 @@ import type {
   GmCollectionTestedOverall,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
-  VrCollectionBehavior,
+  VrCollectionBehaviorArchived_20221019,
   VrCollectionDisabilityCare,
   VrCollectionElderlyAtHome,
   VrCollectionHospitalNice,
@@ -16,12 +16,7 @@ import type {
   VrCollectionVaccineCoveragePerAgeGroup,
 } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
-import type {
-  Feature,
-  FeatureCollection,
-  MultiPolygon,
-  Polygon,
-} from 'geojson';
+import type { Feature, FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 
 /**
  * Infers the given type of T, if possible
@@ -56,18 +51,9 @@ export const mapToCodeType: Record<MapType, CodeProp> = {
 
 export type ChoroplethCollection = GmCollection | VrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem
-  ? 'gm'
-  : T extends VrDataItem
-  ? 'vr'
-  : never;
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : never;
 
-export type InferedDataCollection<T extends ChoroplethDataItem> =
-  T extends GmDataItem
-    ? GmCollection
-    : T extends VrDataItem
-    ? VrCollection
-    : never;
+export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
 
 export type VrDataCollection =
   | VrCollectionHospitalNice[]
@@ -75,37 +61,25 @@ export type VrDataCollection =
   | VrCollectionTestedOverall[]
   | VrCollectionNursingHome[]
   | VrCollectionSewer[]
-  | VrCollectionBehavior[]
+  | VrCollectionBehaviorArchived_20221019[]
   | VrCollectionDisabilityCare[]
   | VrCollectionElderlyAtHome[]
   | VrCollectionSituations[]
   | VrCollectionVaccineCoveragePerAgeGroup[];
 export type VrDataItem = VrDataCollection[number];
 
-export type GmDataCollection =
-  | GmCollectionHospitalNice[]
-  | GmCollectionTestedOverall[]
-  | GmCollectionSewer[]
-  | GmCollectionVaccineCoveragePerAgeGroup[];
+export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
 /**
  * Here we map a MapType to a corresponding DataCollection type
  */
-export type MappedDataCollection<T extends MapType> = T extends 'gm'
-  ? GmCollection
-  : T extends 'vr'
-  ? VrCollection
-  : never;
+export type MappedDataCollection<T extends MapType> = T extends 'gm' ? GmCollection : T extends 'vr' ? VrCollection : never;
 
 /**
  * Here we map a MapType to a corresponding DataItem type
  */
-export type MappedDataItem<T extends MapType> = T extends 'gm'
-  ? GmDataItem
-  : T extends 'vr'
-  ? VrDataItem
-  : never;
+export type MappedDataItem<T extends MapType> = T extends 'gm' ? GmDataItem : T extends 'vr' ? VrDataItem : never;
 
 export type ChoroplethDataItem = GmDataItem | VrDataItem;
 
@@ -113,12 +87,6 @@ export type CodedGeoProperties = {
   code: string;
 };
 
-export type CodedGeoJSON = FeatureCollection<
-  MultiPolygon | Polygon,
-  CodedGeoProperties
->;
+export type CodedGeoJSON = FeatureCollection<MultiPolygon | Polygon, CodedGeoProperties>;
 
-export type ParsedFeatureWithPath = Omit<
-  ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>,
-  'path'
-> & { path: string };
+export type ParsedFeatureWithPath = Omit<ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>, 'path'> & { path: string };

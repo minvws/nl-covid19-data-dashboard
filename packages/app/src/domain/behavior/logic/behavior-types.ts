@@ -12,6 +12,7 @@ export const behaviorIdentifiers = [
   'max_visitors',
   'ventilate_home',
   'selftest_visit',
+  'posttest_isolation',
 ] as const;
 
 export type BehaviorIdentifier = typeof behaviorIdentifiers[number];
