@@ -57,7 +57,7 @@ export const CollapsibleSection = ({ summary, children, id, hideBorder, textColo
           <Box width="100%">
             {summary}
             {id && (
-              <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(e) => e.stopPropagation()} href={`#${id}`}>
+              <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(event) => event.stopPropagation()} href={`#${id}`}>
                 #
               </StyledAnchor>
             )}
