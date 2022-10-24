@@ -1,4 +1,6 @@
 import { Box, Spacer } from '~/components/base';
+import styled from 'styled-components';
+import { css } from '@styled-system/css';
 import { Markdown, MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
 import {
@@ -98,12 +100,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
               <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
-                <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColorOverride={colors.black} borderColorOverride={colors.gray3}>
+                <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColor={colors.black} borderColor={colors.gray3}>
                   <Box my={3}>
-                    {Object.values(SeverityLevels).map((severityLevel, index) => {
-                      const indicatorTexts = textNl.thermometer[`indicator_for_level_${severityLevel}`];
-                      return <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />;
-                    })}
+                    <OrderedList>
+                      {Object.values(SeverityLevels).map((severityLevel, index) => {
+                        const indicatorTexts = textNl.thermometer[`indicator_for_level_${severityLevel}`];
+                        return (
+                          <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                        );
+                      })}
+                    </OrderedList>
                     <Markdown content={textNl.thermometer.article_reference} />
                   </Box>
                 </CollapsibleSection>
@@ -193,5 +199,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     </Layout>
   );
 };
+
+const OrderedList = styled.ol(
+  css({
+    listStyleType: 'none',
+    margin: 0,
+    padding: 0,
+  })
+);
 
 export default Home;

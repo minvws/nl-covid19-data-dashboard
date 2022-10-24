@@ -13,11 +13,11 @@ interface CollapsibleSectionProps extends BoxProps {
   children: ReactNode;
   id?: string;
   hideBorder?: boolean;
-  textColorOverride?: string;
-  borderColorOverride?: string;
+  textColor?: string;
+  borderColor?: string;
 }
 
-export const CollapsibleSection = ({ summary, children, id, hideBorder, textColorOverride = colors.blue8, borderColorOverride = colors.gray2 }: CollapsibleSectionProps) => {
+export const CollapsibleSection = ({ summary, children, id, hideBorder, textColor = colors.blue8, borderColor = colors.gray2 }: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
   const collapsible = useCollapsible();
@@ -51,9 +51,9 @@ export const CollapsibleSection = ({ summary, children, id, hideBorder, textColo
   }, [toggle, id]);
 
   return (
-    <Box as="section" borderTop={hideBorder ? undefined : '1px solid'} borderTopColor={hideBorder ? undefined : borderColorOverride} id={id} ref={section}>
+    <Box as="section" borderTop={hideBorder ? undefined : '1px solid'} borderTopColor={hideBorder ? undefined : borderColor} id={id} ref={section}>
       {collapsible.button(
-        <Summary textColor={textColorOverride}>
+        <Summary textColor={textColor}>
           <Box width="100%">
             {summary}
             {id && (
@@ -89,15 +89,15 @@ const StyledAnchor = styled(Anchor)(
 interface SummaryProps {
   textColor: string;
 }
-const Summary = styled.button((summaryProps: SummaryPropsType) =>
+const Summary = styled.button((summaryProps: SummaryProps) =>
   css({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     overflow: 'visible',
     width: '100%',
-    m: 0,
-    p: 3,
+    margin: 0,
+    padding: 3,
     bg: 'transparent',
     border: 'none',
     color: summaryProps.textColor,
