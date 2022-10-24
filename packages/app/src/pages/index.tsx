@@ -1,7 +1,19 @@
 import { Box, Spacer } from '~/components/base';
-import { MaxWidth } from '~/components';
+import styled from 'styled-components';
+import { css } from '@styled-system/css';
+import { Markdown, MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
-import { Search, TopicalArticlesList, TopicalHeader, TopicalLinksList, TopicalMeasureTile, TopicalSectionHeader, TopicalThemeHeader, TopicalTile } from '~/domain/topical';
+import {
+  Search,
+  TopicalArticlesList,
+  TopicalHeader,
+  TopicalLinksList,
+  TopicalMeasureTile,
+  TopicalSectionHeader,
+  TopicalThemeHeader,
+  TopicalTile,
+  IndicatorLevelDescription,
+} from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -11,10 +23,11 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { colors } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText } from '~/utils';
-import { SeverityLevels } from '~/components/severity-indicator-tile/types';
+import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { TrendIcon } from '~/domain/topical/types';
+import { CollapsibleSection } from '~/components/collapsible';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -86,6 +99,21 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 levelDescription={textNl.thermometer.indicator.level_description}
                 trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
+              <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
+                <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColor={colors.black} borderColor={colors.gray3}>
+                  <Box my={3}>
+                    <OrderedList>
+                      {Object.values(SeverityLevels).map((severityLevel, index) => {
+                        const indicatorTexts = textNl.thermometer[`indicator_for_level_${severityLevel}`];
+                        return (
+                          <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                        );
+                      })}
+                    </OrderedList>
+                    <Markdown content={textNl.thermometer.article_reference} />
+                  </Box>
+                </CollapsibleSection>
+              </Box>
             </Box>
           )}
           <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
@@ -171,5 +199,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     </Layout>
   );
 };
+
+const OrderedList = styled.ol(
+  css({
+    listStyleType: 'none',
+    margin: 0,
+    padding: 0,
+  })
+);
 
 export default Home;
