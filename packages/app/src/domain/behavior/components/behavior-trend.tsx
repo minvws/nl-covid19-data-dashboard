@@ -10,7 +10,7 @@ interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
   color?: string;
   text: SiteText['pages']['behavior_page']['shared'];
-  ariaLabel?: string; 
+  ariaLabel?: string;
 }
 
 const Trend = styled.span((a) =>
@@ -29,11 +29,10 @@ const Trend = styled.span((a) =>
 );
 
 export function BehaviorTrend({ trend, color, text, ariaLabel }: BehaviorTrendProps) {
-
-const { commonTexts } = useIntl();
-const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.up_trend_label
-const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.down_trend_label
-const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.neutral_trend_label
+  const { commonTexts } = useIntl();
+  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
+  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
+  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_labels.neutral_trend_label;
 
   if (trend === 'up') {
     return (

@@ -5,24 +5,16 @@ import styled from 'styled-components';
 import { useIntl } from '~/intl';
 import { TableText } from '../types';
 
-export function VariantDifference({
-  value,
-  text,
-  ariaLabel,
-}: {
-  value: DifferenceDecimal;
-  text: TableText;
-  ariaLabel?: string;
-}) {
+export function VariantDifference({ value, text, ariaLabel }: { value: DifferenceDecimal; text: TableText; ariaLabel?: string }) {
   const { formatPercentage, commonTexts } = useIntl();
 
   const options = {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
   };
-  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.up_trend_label
-  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.down_trend_label
-  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.neutral_trend_label
+  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
+  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
+  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_labels.neutral_trend_label;
 
   if (value === undefined) {
     return <>-</>;

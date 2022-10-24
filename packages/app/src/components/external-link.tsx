@@ -9,25 +9,12 @@ type ExternalLinkProps = {
   ariaLabel?: string;
 } & AnchorProps;
 
-export function ExternalLink({
-  href,
-  children,
-  className,
-  ariaLabel,
-  ...anchorProps
-}: ExternalLinkProps) {
+export function ExternalLink({ href, children, className, ariaLabel, ...anchorProps }: ExternalLinkProps) {
   const { commonTexts } = useIntl();
-  const ExternalLinkAriaLabel = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.external_link
+  const ExternalLinkAriaLabel = ariaLabel || commonTexts.accessibility.visual_context_labels.external_link;
 
   return (
-    <Anchor
-      href={href}
-      rel="noopener noreferrer"
-      target="_blank"
-      className={className}
-      aria-label={ExternalLinkAriaLabel}
-      {...anchorProps}
-    >
+    <Anchor href={href} rel="noopener noreferrer" target="_blank" className={className} aria-label={ExternalLinkAriaLabel} {...anchorProps}>
       {children}
     </Anchor>
   );

@@ -20,17 +20,10 @@ interface WarningMessageProps {
 }
 
 // WarningMessage
-export function WarningTile({
-  message,
-  variant = 'default',
-  icon = Warning,
-  isFullWidth,
-  tooltipText,
-  ariaLabel,
-}: WarningMessageProps) {
+export function WarningTile({ message, variant = 'default', icon = Warning, isFullWidth, tooltipText, ariaLabel }: WarningMessageProps) {
   const Icon = icon;
   const { commonTexts } = useIntl();
-  const WarningIconAriaLabel = ariaLabel || commonTexts.accessibility.visual_context_accessibility_labels.warning_icon
+  const WarningIconAriaLabel = ariaLabel || commonTexts.accessibility.visual_context_labels.warning_icon;
 
   return (
     <StyledArticle isFullWidth={isFullWidth}>
@@ -42,11 +35,7 @@ export function WarningTile({
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
           <WithTooltip content={tooltipText}>
-            <Content
-              variant={variant}
-              tabIndex={isDefined(tooltipText) ? 1 : undefined}
-              hasTooltip={isDefined(tooltipText)}
-            >
+            <Content variant={variant} tabIndex={isDefined(tooltipText) ? 1 : undefined} hasTooltip={isDefined(tooltipText)}>
               <Markdown content={message} />
             </Content>
           </WithTooltip>
@@ -73,19 +62,17 @@ const StyledArticle = styled.article<{ isFullWidth?: boolean }>((x) =>
   })
 );
 
-const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
-  ({ variant }) => {
-    return css({
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: '0 0 auto',
-      backgroundColor: variant === 'emphasis' ? 'yellow2' : 'white',
-      borderBottomLeftRadius: 1,
-      borderTopLeftRadius: 1,
-    });
-  }
-);
+const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(({ variant }) => {
+  return css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: '0 0 auto',
+    backgroundColor: variant === 'emphasis' ? 'yellow2' : 'white',
+    borderBottomLeftRadius: 1,
+    borderTopLeftRadius: 1,
+  });
+});
 
 const IconWrapper = styled(Box)(
   css({
@@ -99,20 +86,18 @@ const IconWrapper = styled(Box)(
   })
 );
 
-const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
-  ({ variant }) => {
-    return css({
-      display: 'flex',
-      alignItems: 'center',
-      flex: '1 1 auto',
-      py: 2,
-      pl: variant === 'emphasis' ? 3 : 0,
-      backgroundColor: variant === 'emphasis' ? 'yellow1' : 'white',
-      borderBottomRightRadius: 1,
-      borderTopRightRadius: 1,
-    });
-  }
-);
+const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(({ variant }) => {
+  return css({
+    display: 'flex',
+    alignItems: 'center',
+    flex: '1 1 auto',
+    py: 2,
+    pl: variant === 'emphasis' ? 3 : 0,
+    backgroundColor: variant === 'emphasis' ? 'yellow1' : 'white',
+    borderBottomRightRadius: 1,
+    borderTopRightRadius: 1,
+  });
+});
 
 const Content = styled.div<{
   variant: WarningMessageVariant;
