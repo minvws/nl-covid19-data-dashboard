@@ -619,7 +619,9 @@ export interface NlBehaviorValue {
   ventilate_home_compliance?: number | null;
   ventilate_home_compliance_trend: ("up" | "down" | "equal") | null;
   selftest_visit_compliance?: number | null;
-  selftest_visit_compliance_trend: ("up" | "down" | "equal") | null;
+  selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_compliance?: number | null;
+  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
   curfew_support?: number | null;
   curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support?: number | null;
@@ -645,7 +647,9 @@ export interface NlBehaviorValue {
   ventilate_home_support?: number | null;
   ventilate_home_support_trend: ("up" | "down" | "equal") | null;
   selftest_visit_support?: number | null;
-  selftest_visit_support_trend: ("up" | "down" | "equal") | null;
+  selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_support?: number | null;
+  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -663,6 +667,8 @@ export interface NlBehaviorPerAgeGroup {
   ventilate_home_support?: NlBehaviorPerAgeGroupValue;
   selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
   selftest_visit_support?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -694,19 +700,20 @@ export interface NlBehaviorAnnotations {
 }
 export interface NlBehaviorAnnotations1 {
   behavior_indicator:
-    | "wash_hands"
-    | "curfew"
-    | "keep_distance"
-    | "work_from_home"
-    | "avoid_crowds"
-    | "symptoms_stay_home_if_mandatory"
-    | "symptoms_get_tested"
-    | "wear_mask_public_indoors"
-    | "wear_mask_public_transport"
-    | "sneeze_cough_elbow"
-    | "max_visitors"
-    | "ventilate_home"
-    | "selftest_visit";
+    | 'wash_hands'
+    | 'curfew'
+    | 'keep_distance'
+    | 'work_from_home'
+    | 'avoid_crowds'
+    | 'symptoms_stay_home_if_mandatory'
+    | 'symptoms_get_tested'
+    | 'wear_mask_public_indoors'
+    | 'wear_mask_public_transport'
+    | 'sneeze_cough_elbow'
+    | 'max_visitors'
+    | 'ventilate_home'
+    | 'selftest_visit'
+    | 'posttest_isolation';
   message_title_nl: string;
   message_title_en: string;
   message_desc_nl: string;

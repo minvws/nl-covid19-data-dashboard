@@ -21,6 +21,9 @@
     "selftest_visit_compliance": { "$ref": "#/definitions/value" },
     "selftest_visit_support": { "$ref": "#/definitions/value" },
 
+    "posttest_isolation_compliance": { "$ref": "#/definitions/value" },
+    "posttest_isolation_support": { "$ref": "#/definitions/value" },
+
     "date_of_insertion_unix": { "type": "integer" },
     "date_start_unix": { "type": "integer" },
     "date_end_unix": { "type": "integer" }

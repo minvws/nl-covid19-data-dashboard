@@ -32,3 +32,5 @@ timestamp,action,key,document_id,move_to
 2022-10-13T12:16:32.533Z,add,pages.vaccinations_page.vr.vaccination_coverage.top_level_information_block.title,hisQZuyoPo60cR6z1YNuqw,__
 2022-10-19T12:59:20.133Z,add,pages.behavior_page.nl.section_archived.description,ibZWLQHfYl2AyCZBOq5lUb,__
 2022-10-19T12:59:21.053Z,add,pages.behavior_page.nl.section_archived.title,rSoN2URF0rxEHQvXsrmWoN,__
+2022-10-20T12:37:16.287Z,add,common.behavior.subjects.posttest_isolation,ibZWLQHfYl2AyCZBOySw6K,__
+2022-10-20T08:52:25.474Z,delete,pages.intensive_care_page.nl.kpi_bedbezetting.barscale_screenreader_text,jDbv30Y7XYH5kl8ZaovZD6,__
