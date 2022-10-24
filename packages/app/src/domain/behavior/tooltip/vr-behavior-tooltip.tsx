@@ -1,4 +1,4 @@
-import { VrCollectionBehavior } from '@corona-dashboard/common';
+import { VrCollectionBehaviorArchived_20221019 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -13,7 +13,7 @@ import { getThresholdValue } from '~/utils/get-threshold-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrBehaviorTooltipProps {
-  context: TooltipData<VrCollectionBehavior>;
+  context: TooltipData<VrCollectionBehaviorArchived_20221019>;
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number | null;
   currentSupportValue: number | null;
@@ -21,37 +21,20 @@ interface VrBehaviorTooltipProps {
   text: SiteText['pages']['behavior_page'];
 }
 
-export function VrBehaviorTooltip({
-  context,
-  currentMetric,
-  currentComplianceValue,
-  currentSupportValue,
-  behaviorType,
-  text,
-}: VrBehaviorTooltipProps) {
+export function VrBehaviorTooltip({ context, currentMetric, currentComplianceValue, currentSupportValue, behaviorType, text }: VrBehaviorTooltipProps) {
   const { commonTexts, formatPercentage } = useIntl();
   const reverseRouter = useReverseRouter();
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
 
-  const complianceFilteredThreshold = getThresholdValue(
-    thresholds.vr[complianceThresholdKey],
-    currentComplianceValue ?? 0
-  );
+  const complianceFilteredThreshold = getThresholdValue(thresholds.vr[complianceThresholdKey], currentComplianceValue ?? 0);
 
-  const supportFilteredThreshold = getThresholdValue(
-    thresholds.vr[supportThresholdKey],
-    currentSupportValue ?? 0
-  );
+  const supportFilteredThreshold = getThresholdValue(thresholds.vr[supportThresholdKey], currentSupportValue ?? 0);
 
   const complianceTooltipInfo = (
     <TooltipInfo
       title={text.nl.tooltip_labels.compliance}
-      value={
-        currentComplianceValue !== null
-          ? `${formatPercentage(currentComplianceValue)}%`
-          : '-'
-      }
+      value={currentComplianceValue !== null ? `${formatPercentage(currentComplianceValue)}%` : '-'}
       background={complianceFilteredThreshold.color}
     />
   );
@@ -59,24 +42,15 @@ export function VrBehaviorTooltip({
   const supportTooltipInfo = (
     <TooltipInfo
       title={text.nl.tooltip_labels.support}
-      value={
-        currentSupportValue !== null
-          ? `${formatPercentage(currentSupportValue)}%`
-          : '-'
-      }
+      value={currentSupportValue !== null ? `${formatPercentage(currentSupportValue)}%` : '-'}
       background={supportFilteredThreshold.color}
     />
   );
 
   return (
-    <TooltipContent
-      title={context.featureName}
-      link={reverseRouter.vr.gedrag(context.dataItem.vrcode)}
-    >
+    <TooltipContent title={context.featureName} link={reverseRouter.vr.gedrag(context.dataItem.vrcode)}>
       <Box maxWidth="15rem" spacing={2}>
-        <BoldText css={css({ marginBottom: 2 })}>
-          {commonTexts.behavior.subjects[currentMetric]}
-        </BoldText>
+        <BoldText css={css({ marginBottom: 2 })}>{commonTexts.behavior.subjects[currentMetric]}</BoldText>
 
         {/* Change order of the info based on the metric name */}
         {behaviorType === 'compliance' ? (
