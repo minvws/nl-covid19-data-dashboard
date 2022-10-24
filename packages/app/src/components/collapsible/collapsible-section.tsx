@@ -86,7 +86,7 @@ const StyledAnchor = styled(Anchor)(
   })
 );
 
-interface SummaryPropsType {
+interface SummaryProps {
   textColor: string;
 }
 const Summary = styled.button((summaryProps: SummaryPropsType) =>
