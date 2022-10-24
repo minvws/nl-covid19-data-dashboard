@@ -1689,7 +1689,7 @@ export interface VrCollection {
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];
-  behavior: VrCollectionBehavior[];
+  behavior_archived_20221019: VrCollectionBehaviorArchived_20221019[];
   disability_care: VrCollectionDisabilityCare[];
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
@@ -1726,7 +1726,7 @@ export interface VrCollectionSewer {
   average: number | null;
   date_of_insertion_unix: number;
 }
-export interface VrCollectionBehavior {
+export interface VrCollectionBehaviorArchived_20221019 {
   vrcode: string;
   number_of_participants: number;
   curfew_compliance?: number | null;

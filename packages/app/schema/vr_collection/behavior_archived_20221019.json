@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_collection_behavior",
+  "title": "vr_collection_behavior_archived_20221019",
   "type": "object",
   "definitions": {
     "value_trend": {

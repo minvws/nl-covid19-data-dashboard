@@ -77,3 +77,5 @@ timestamp,action,key,document_id,move_to
 2022-11-01T13:08:13.208Z,add,common.variant_codes.BQ_1,YyKAMdtTUUtpI3N1EArANF,__
 2022-11-01T13:08:14.162Z,add,common.variant_codes.BQ_1_1,YyKAMdtTUUtpI3N1EArArO,__
 2022-11-01T13:08:15.181Z,add,common.variant_codes.XBB,YyKAMdtTUUtpI3N1EArBHE,__
+2022-10-19T12:59:20.133Z,add,pages.behavior_page.nl.section_archived.description,ibZWLQHfYl2AyCZBOq5lUb,__
+2022-10-19T12:59:21.053Z,add,pages.behavior_page.nl.section_archived.title,rSoN2URF0rxEHQvXsrmWoN,__
