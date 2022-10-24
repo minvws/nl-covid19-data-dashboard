@@ -7,7 +7,7 @@ import { Box } from '~/components/base';
 import css from '@styled-system/css';
 import { space } from '~/style/theme';
 
-interface indicatorLevelDescriptionProps {
+interface IndicatorLevelDescriptionProps {
   level: SeverityLevel;
   label: string;
   description: string;
