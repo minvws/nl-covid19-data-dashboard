@@ -97,8 +97,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 levelDescription={textNl.thermometer.indicator.level_description}
                 trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
-              <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={'gray2'}>
-                <CollapsibleSection summary={textNl.thermometer.collapsible_title}>
+              <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
+                <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColorOverride={colors.black} borderColorOverride={colors.gray3}>
                   <Box my={3}>
                     {Object.values(SeverityLevels).map((severityLevel, index) => {
                       const indicatorTexts = textNl.thermometer[`indicator_for_level_${severityLevel}`];

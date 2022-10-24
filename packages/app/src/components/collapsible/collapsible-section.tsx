@@ -6,20 +6,18 @@ import { isAtBottomOfPage } from '~/utils/is-at-bottom-of-page';
 import { isElementAtTopOfViewport } from '~/utils/is-element-at-top-of-viewport';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Anchor } from '../typography';
+import { colors } from '@corona-dashboard/common';
 
 interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
   id?: string;
   hideBorder?: boolean;
+  textColorOverride?: string;
+  borderColorOverride?: string;
 }
 
-export const CollapsibleSection = ({
-  summary,
-  children,
-  id,
-  hideBorder,
-}: CollapsibleSectionProps) => {
+export const CollapsibleSection = ({ summary, children, id, hideBorder, textColorOverride = colors.blue8, borderColorOverride = colors.gray2 }: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
   const collapsible = useCollapsible();
@@ -53,24 +51,13 @@ export const CollapsibleSection = ({
   }, [toggle, id]);
 
   return (
-    <Box
-      as="section"
-      borderTop={hideBorder ? undefined : '1px solid'}
-      borderTopColor={hideBorder ? undefined : 'gray2'}
-      id={id}
-      ref={section}
-    >
+    <Box as="section" borderTop={hideBorder ? undefined : '1px solid'} borderTopColor={hideBorder ? undefined : borderColorOverride} id={id} ref={section}>
       {collapsible.button(
-        <Summary>
+        <Summary textColor={textColorOverride}>
           <Box width="100%">
             {summary}
             {id && (
-              <StyledAnchor
-                aria-hidden="true"
-                tabIndex={-1}
-                onClick={(e) => e.stopPropagation()}
-                href={`#${id}`}
-              >
+              <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(e) => e.stopPropagation()} href={`#${id}`}>
                 #
               </StyledAnchor>
             )}
@@ -86,7 +73,7 @@ export const CollapsibleSection = ({
 
 const StyledAnchor = styled(Anchor)(
   css({
-    color: 'gray2',
+    color: colors.gray2,
     px: 3,
     py: 1,
     width: 0,
@@ -94,12 +81,15 @@ const StyledAnchor = styled(Anchor)(
     position: 'absolute',
     right: '100%',
     '&:hover, &:focus': {
-      color: 'blue',
+      color: colors.blue1,
     },
   })
 );
 
-const Summary = styled.button(
+interface SummaryPropsType {
+  textColor: string;
+}
+const Summary = styled.button((summaryProps: SummaryPropsType) =>
   css({
     display: 'flex',
     alignItems: 'flex-start',
@@ -110,7 +100,7 @@ const Summary = styled.button(
     p: 3,
     bg: 'transparent',
     border: 'none',
-    color: 'blue8',
+    color: summaryProps.textColor,
     fontFamily: 'body',
     fontWeight: 'bold',
     fontSize: '1.25rem',
@@ -121,7 +111,7 @@ const Summary = styled.button(
     '&:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: 'blue8',
+      outlineColor: colors.blue8,
     },
 
     [StyledAnchor]: { opacity: 0 },
