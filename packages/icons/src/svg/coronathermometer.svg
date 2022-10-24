@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="currentColor"><g id="coronathermometer">
+<rect width="56" height="56" fill="white"/>
+<rect x="7" y="28" width="20" height="10" rx="2" fill="black"/>
+<rect x="30" y="18" width="20" height="20" rx="2" fill="black"/>
+</g>
+</svg>
