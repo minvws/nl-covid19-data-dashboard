@@ -1126,7 +1126,6 @@ export type TopicalIcon =
   | 'Avondklok'
   | 'BarChart'
   | 'BasisregelsAfstand'
-  | 'BasisregelsBlijfThuis'
   | 'BasisregelsDrukte'
   | 'BasisregelsElleboog'
   | 'BasisregelsGeenBezoek'

@@ -1,7 +1,6 @@
 import {
   Avondklok,
   BasisregelsAfstand,
-  BasisregelsBlijfThuis,
   BasisregelsDrukte,
   BasisregelsElleboog,
   BasisregelsHandenwassen,
@@ -28,7 +27,7 @@ const icons: Record<BehaviorIdentifier, typeof Avondklok> = {
   max_visitors: MaxVisitors,
   ventilate_home: FrisseLucht,
   selftest_visit: BasisregelsTesten,
-  posttest_isolation: BasisregelsBlijfThuis,
+  posttest_isolation: Klachten,
 };
 
 interface BehaviorIconProps {
