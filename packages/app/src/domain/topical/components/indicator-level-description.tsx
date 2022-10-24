@@ -25,7 +25,7 @@ export const IndicatorLevelDescription = ({ level, label, description }: Indicat
         css={css({ columnGap: 3, rowGap: asResponsiveArray({ _: 3, sm: 1 }) })}
       >
         <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
-        <BoldText fontWeight="bold">{label}</BoldText>
+        <BoldText>{label}</BoldText>
         <Text css={css({ gridColumnStart: asResponsiveArray({ _: 1, sm: 2 }), gridColumnEnd: 3 })}>
           {replaceVariablesInText(description.split('**').join(''), {
             label: label.toLowerCase(),
