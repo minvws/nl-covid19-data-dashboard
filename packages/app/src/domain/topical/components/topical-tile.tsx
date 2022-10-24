@@ -7,13 +7,13 @@ import { TextWithIcon } from '~/components/text-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { TrendIcon } from '../types';
-import { ICON_DIRECTION_DOWN, ICON_DIRECTION_UP } from '../common';
+import { setTrendIcon } from '~/components/severity-indicator-tile/logic/set-trend-icon';
 
 type Cta = {
   label: string;
@@ -33,6 +33,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
   const { formatNumber } = useIntl();
 
   const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
+
   return (
     <Box
       as="a"
@@ -75,22 +76,12 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 })}
               >
                 {title}
-                {!formatedKpiValue && trendIcon && (
-                  <TrendIconWrapper color={trendIcon.color}>
-                    {trendIcon.direction === ICON_DIRECTION_DOWN && <Down />}
-                    {trendIcon.direction === ICON_DIRECTION_UP && <Up />}
-                  </TrendIconWrapper>
-                )}
+                {!formatedKpiValue && trendIcon && <TrendIconWrapper color={trendIcon.color}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
               </Heading>
               {formatedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" mt={2}>
                   <KpiValue color={colors.black} text={formatedKpiValue} />
-                  {trendIcon && (
-                    <TrendIconWrapper color={trendIcon.color}>
-                      {trendIcon.direction === ICON_DIRECTION_DOWN && <Down />}
-                      {trendIcon.direction === ICON_DIRECTION_UP && <Up />}
-                    </TrendIconWrapper>
-                  )}
+                  {trendIcon && <TrendIconWrapper color={trendIcon.color}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
                 </Box>
               )}
             </Box>
