@@ -1342,7 +1342,7 @@ export interface Vr {
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
   disability_care: VrDisabilityCare;
-  behavior: VrBehavior;
+  behavior_archived_20221019: VrBehaviorArchived_20221019;
   deceased_rivm: VrDeceasedRivm;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
@@ -1498,11 +1498,11 @@ export interface VrDisabilityCareValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrBehavior {
-  values: VrBehaviorValue[];
-  last_value: VrBehaviorValue;
+export interface VrBehaviorArchived_20221019 {
+  values: VrBehaviorArchived_20221019Value[];
+  last_value: VrBehaviorArchived_20221019Value;
 }
-export interface VrBehaviorValue {
+export interface VrBehaviorArchived_20221019Value {
   number_of_participants: number;
   curfew_compliance?: number | null;
   curfew_compliance_trend: ('up' | 'down' | 'equal') | null;

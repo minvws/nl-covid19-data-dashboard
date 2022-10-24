@@ -1,4 +1,4 @@
-import { colors, NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
+import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { useMemo } from 'react';
@@ -22,7 +22,7 @@ interface BehaviorTableTileProps {
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  value: NlBehaviorValue | VrBehaviorValue;
+  value: NlBehaviorValue | VrBehaviorArchived_20221019Value;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };

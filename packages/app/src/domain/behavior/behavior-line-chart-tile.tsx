@@ -1,7 +1,7 @@
 import {
   colors,
   NlBehaviorValue,
-  VrBehaviorValue,
+  VrBehaviorArchived_20221019Value,
 } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
@@ -21,7 +21,7 @@ import {
   behaviorIdentifiers,
 } from './logic/behavior-types';
 
-type ValueType = NlBehaviorValue | VrBehaviorValue;
+type ValueType = NlBehaviorValue | VrBehaviorArchived_20221019Value;
 type ValueKey = keyof ValueType;
 
 interface BehaviorLineChartTileProps {
@@ -45,16 +45,17 @@ export function BehaviorLineChartTile({
   useDatesAsRange,
   text,
 }: BehaviorLineChartTileProps) {
-  const selectedComplianceValueKey =
-    `${currentId}_compliance` as ValueKey;
-  const selectedSupportValueKey =
-    `${currentId}_support` as ValueKey;
+  const selectedComplianceValueKey = `${currentId}_compliance` as ValueKey;
+  const selectedSupportValueKey = `${currentId}_support` as ValueKey;
 
   const complianceValuesHasGap = useDataHasGaps<ValueType>(
     values,
     selectedComplianceValueKey
   );
-  const supportValuesHasGap = useDataHasGaps<ValueType>(values, selectedSupportValueKey);
+  const supportValuesHasGap = useDataHasGaps<ValueType>(
+    values,
+    selectedSupportValueKey
+  );
 
   const breakpoints = useBreakpoints();
 

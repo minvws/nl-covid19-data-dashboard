@@ -1,4 +1,4 @@
-import { VrBehaviorValue } from '@corona-dashboard/common';
+import { VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRef, useState } from 'react';
@@ -53,10 +53,11 @@ export const getStaticProps = createGetStaticProps(
     getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   (context) => {
-    const data = selectVrData('behavior')(context);
-    const chartBehaviorOptions = getBehaviorChartOptions<VrBehaviorValue>(
-      data.selectedVrData.behavior.values[0]
-    );
+    const data = selectVrData('behavior_archived_20221019')(context);
+    const chartBehaviorOptions =
+      getBehaviorChartOptions<VrBehaviorArchived_20221019Value>(
+        data.selectedVrData.behavior_archived_20221019.values[0]
+      );
 
     return { ...data, chartBehaviorOptions };
   },
@@ -97,7 +98,7 @@ export default function BehaviorPageVr(
     description: text.vr.metadata.description,
   };
 
-  const behaviorLastValue = data.behavior.last_value;
+  const behaviorLastValue = data.behavior_archived_20221019.last_value;
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
     chartBehaviorOptions[0]
@@ -111,7 +112,7 @@ export default function BehaviorPageVr(
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.actions_to_take.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             title={text.vr.pagina.titel}
             icon={<Bevolking />}
             description={text.vr.pagina.toelichting}
@@ -173,7 +174,7 @@ export default function BehaviorPageVr(
 
           <span ref={scrollToRef} />
           <BehaviorLineChartTile
-            values={data.behavior.values}
+            values={data.behavior_archived_20221019.values}
             metadata={{
               date: [
                 behaviorLastValue.date_start_unix,
