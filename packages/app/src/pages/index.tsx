@@ -68,7 +68,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     md: `repeat(3, 1fr)`,
   };
 
-  const currentSeverityLevel = textNl.thermometer.indicator.level as SeverityLevels;
+  const currentSeverityLevel = textNl.thermometer.current_indicator_level as SeverityLevels;
+  const currentSeverityLevelTexts = textNl.thermometer.indicator[`level_${currentSeverityLevel}`];
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -83,17 +84,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 title={textNl.thermometer.title}
                 dynamicSubtitle={replaceVariablesInText(textNl.thermometer.description, {
                   level: currentSeverityLevel,
-                  label: textNl.thermometer.indicator.label,
+                  label: currentSeverityLevelTexts.label,
                 })}
                 icon={THERMOMETER_ICON_NAME}
               />
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
-                description={replaceVariablesInText(textNl.thermometer.indicator.description, {
-                  label: textNl.thermometer.indicator.label.toLowerCase(),
+                description={replaceVariablesInText(currentSeverityLevelTexts.description, {
+                  label: currentSeverityLevelTexts.label.toLowerCase(),
                 })}
-                title={textNl.thermometer.indicator.title}
-                label={textNl.thermometer.indicator.label}
+                title={currentSeverityLevelTexts.title}
+                label={currentSeverityLevelTexts.label}
                 sourceLabel={textNl.thermometer.indicator.source_label}
                 datesLabel={textNl.thermometer.indicator.dates_label}
                 levelDescription={textNl.thermometer.indicator.level_description}
@@ -104,7 +105,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <Box my={3}>
                     <OrderedList>
                       {Object.values(SeverityLevels).map((severityLevel, index) => {
-                        const indicatorTexts = textNl.thermometer[`indicator_for_level_${severityLevel}`];
+                        const indicatorTexts = textNl.thermometer.indicator[`level_${severityLevel}`];
                         return (
                           <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
                         );
