@@ -24,7 +24,6 @@ import { colors } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText } from '~/utils';
 import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { TrendIcon } from '~/domain/topical/types';
 import { CollapsibleSection } from '~/components/collapsible';
@@ -54,8 +53,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const breakpoints = useBreakpoints();
-
   const metadata = {
     ...textNl.nationaal_metadata,
     title: textNl.metadata.title,
@@ -79,7 +76,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <TopicalHeader title={selectedTopicalData.title} dynamicDescriptions={selectedTopicalData.dynamicDescription} />
           </Box>
           {SEVERITY_LEVELS_LIST.includes(currentSeverityLevel) && (
-            <Box my={5} px={breakpoints.sm ? 4 : 3} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
+            <Box my={5} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
                 title={textNl.thermometer.title}
                 dynamicSubtitle={replaceVariablesInText(textNl.thermometer.description, {
