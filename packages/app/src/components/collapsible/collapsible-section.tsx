@@ -52,20 +52,17 @@ export const CollapsibleSection = ({ summary, children, id, hideBorder, textColo
 
   return (
     <Box as="section" borderTop={hideBorder ? undefined : '1px solid'} borderTopColor={hideBorder ? undefined : borderColor} id={id} ref={section}>
-      {collapsible.button(
-        <Summary textColor={textColor}>
-          <Box width="100%">
-            {summary}
-            {id && (
-              <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(event) => event.stopPropagation()} href={`#${id}`}>
-                #
-              </StyledAnchor>
-            )}
-          </Box>
-          {collapsible.chevron}
-        </Summary>
-      )}
-
+      <Summary textColor={textColor} onClick={() => collapsible.toggle()}>
+        <Box width="100%">
+          {summary}
+          {id && (
+            <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(event) => event.stopPropagation()} href={`#${id}`}>
+              #
+            </StyledAnchor>
+          )}
+        </Box>
+        {collapsible.button()}
+      </Summary>
       {collapsible.content(<Box px={3}>{children}</Box>)}
     </Box>
   );
@@ -89,10 +86,10 @@ const StyledAnchor = styled(Anchor)(
 interface SummaryProps {
   textColor: string;
 }
-const Summary = styled.button((summaryProps: SummaryProps) =>
+const Summary = styled.div((summaryProps: SummaryProps) =>
   css({
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     overflow: 'visible',
     width: '100%',
