@@ -108,10 +108,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         );
                       })}
                     </OrderedList>
-                    <Markdown content={textNl.thermometer.article_reference} />
                   </Box>
                 </CollapsibleSection>
               </Box>
+              <Markdown content={textNl.thermometer.article_reference} />
             </Box>
           )}
           <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
