@@ -104,6 +104,7 @@ const Summary = styled.div((summaryProps: SummaryProps) =>
     textAlign: 'left',
     position: 'relative',
     cursor: 'pointer',
+    userSelect: 'none',
 
     '&:focus': {
       outlineWidth: '1px',
