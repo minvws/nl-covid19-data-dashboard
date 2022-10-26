@@ -1,16 +1,19 @@
 import { colors } from '@corona-dashboard/common';
-import { Down, Dot, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { SiteText } from '~/locale';
 import { BehaviorTrendType } from '../logic/behavior-types';
-import { useIntl } from '~/intl';
+import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+
+type TrendIcon = {
+  direction: 'UP' | 'DOWN' | ' NEUTRAL';
+  color: string;
+};
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
   color?: string;
   text: SiteText['pages']['behavior_page']['shared'];
-  ariaLabel?: string;
 }
 
 const Trend = styled.span((a) =>
@@ -28,16 +31,11 @@ const Trend = styled.span((a) =>
   })
 );
 
-export function BehaviorTrend({ trend, color, text, ariaLabel }: BehaviorTrendProps) {
-  const { commonTexts } = useIntl();
-  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
-  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
-  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_labels.neutral_trend_label;
-
+export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
   if (trend === 'up') {
     return (
       <Trend color={color}>
-        <Up aaria-label={TrendLabelUp} />
+        <TrendIcon trendDirection={TrendDirection.UP} />
         {text.basisregels.trend_hoger}
       </Trend>
     );
@@ -45,7 +43,7 @@ export function BehaviorTrend({ trend, color, text, ariaLabel }: BehaviorTrendPr
   if (trend === 'down') {
     return (
       <Trend color={color}>
-        <Down aria-label={TrendLabelDown} />
+        <TrendIcon trendDirection={TrendDirection.DOWN} />
         {text.basisregels.trend_lager}
       </Trend>
     );
@@ -53,7 +51,7 @@ export function BehaviorTrend({ trend, color, text, ariaLabel }: BehaviorTrendPr
   if (trend === 'equal') {
     return (
       <Trend color={colors.neutral}>
-        <Dot aria-label={TrendLabelNeutral} />
+        <TrendIcon trendDirection={TrendDirection.NEUTRAL} />
         {text.basisregels.trend_gelijk}
       </Trend>
     );

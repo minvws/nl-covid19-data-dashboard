@@ -1,11 +1,16 @@
 import css from '@styled-system/css';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Down, Dot, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Container, IconContainer } from './containers';
+import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+
+type TrendIcon = {
+  direction: 'UP' | 'DOWN' | ' NEUTRAL';
+  color: string;
+};
 
 export function TileDifference({
   value,
@@ -13,21 +18,16 @@ export function TileDifference({
   isPercentage,
   showOldDateUnix,
   isAmount,
-  ariaLabel,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   maximumFractionDigits?: number;
   isPercentage?: boolean;
   showOldDateUnix?: boolean;
   isAmount: boolean;
-  ariaLabel?: string;
 }) {
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const text = commonTexts.toe_en_afname;
   const { difference } = value;
-  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
-  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
-  const TrendLabelNeutral = ariaLabel || commonTexts.accessibility.visual_context_labels.neutral_trend_label;
 
   const formattedDifference = formatNumber(Math.abs(difference), maximumFractionDigits ? maximumFractionDigits : undefined);
 
@@ -37,19 +37,19 @@ export function TileDifference({
   if (difference > 0) {
     content = isAmount ? text.waarde_meer : text.waarde_hoger;
 
-    containerWithIcon = <ContainerWithIcon icon={<Up aria-label={TrendLabelUp} />} color="red2" />;
+    containerWithIcon = <ContainerWithIcon icon={<TrendIcon trendDirection={TrendDirection.UP} />} color="red2" />;
   }
 
   if (difference < 0) {
     content = isAmount ? text.waarde_minder : text.waarde_lager;
 
-    containerWithIcon = <ContainerWithIcon icon={<Down aria-label={TrendLabelDown} />} color="primary" />;
+    containerWithIcon = <ContainerWithIcon icon={<TrendIcon trendDirection={TrendDirection.DOWN} />} color="primary" />;
   }
 
   if (!content) {
     content = text.waarde_gelijk;
 
-    containerWithIcon = <ContainerWithIcon icon={<Dot aria-label={TrendLabelNeutral} />} color="neutral" />;
+    containerWithIcon = <ContainerWithIcon icon={<TrendIcon trendDirection={TrendDirection.NEUTRAL} />} color="neutral" />;
   }
 
   return (

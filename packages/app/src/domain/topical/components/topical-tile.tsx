@@ -7,11 +7,12 @@ import { TextWithIcon } from '~/components/text-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
+import { TrendDirection, TrendIcon } from '~/components/trend-icon';
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN';
@@ -30,15 +31,19 @@ interface TopicalTileProps {
   dynamicDescription: string;
   kpiValue: number | null | string;
   cta: Cta | null;
-  ariaLabel?: string;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta, ariaLabel }: TopicalTileProps) {
-  const { formatNumber, commonTexts } = useIntl();
+export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
+  const { formatNumber } = useIntl();
 
   const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
-  const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
-  const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
+  // const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
+  // const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
+
+  const getTrendDiretion = (trendIcon: TrendIcon): TrendDirection => {
+    return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
+  };
+
   return (
     <Box
       as="a"
@@ -83,8 +88,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 {title}
                 {!formatedKpiValue && trendIcon && (
                   <TrendIconWrapper color={trendIcon.color}>
-                    {trendIcon.direction === 'DOWN' && <Down aria-label={TrendLabelDown} />}
-                    {trendIcon.direction === 'UP' && <Up aria-label={TrendLabelUp} />}
+                    <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
                   </TrendIconWrapper>
                 )}
               </Heading>
@@ -93,8 +97,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                   <KpiValue color={colors.black} text={formatedKpiValue} />
                   {trendIcon && (
                     <TrendIconWrapper color={trendIcon.color}>
-                      {trendIcon.direction === 'DOWN' && <Down />}
-                      {trendIcon.direction === 'UP' && <Up />}
+                      <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
                     </TrendIconWrapper>
                   )}
                 </Box>
