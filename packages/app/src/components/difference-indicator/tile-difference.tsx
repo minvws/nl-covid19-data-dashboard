@@ -24,10 +24,7 @@ export function TileDifference({
   const text = commonTexts.toe_en_afname;
   const { difference } = value;
 
-  const formattedDifference = formatNumber(
-    Math.abs(difference),
-    maximumFractionDigits ? maximumFractionDigits : undefined
-  );
+  const formattedDifference = formatNumber(Math.abs(difference), maximumFractionDigits ? maximumFractionDigits : undefined);
 
   let content;
   let containerWithIcon;
@@ -41,17 +38,13 @@ export function TileDifference({
   if (difference < 0) {
     content = isAmount ? text.waarde_minder : text.waarde_lager;
 
-    containerWithIcon = (
-      <ContainerWithIcon icon={<Down />} color="primary" />
-    );
+    containerWithIcon = <ContainerWithIcon icon={<Down />} color="primary" />;
   }
 
   if (!content) {
     content = text.waarde_gelijk;
 
-    containerWithIcon = (
-      <ContainerWithIcon icon={<Dot />} color="neutral" />
-    );
+    containerWithIcon = <ContainerWithIcon icon={<Dot />} color="neutral" />;
   }
 
   return (
@@ -67,18 +60,10 @@ export function TileDifference({
           strong: (props) => <BoldText>{props.children}</BoldText>,
         }}
         content={replaceVariablesInText(
-          `${content} ${
-            showOldDateUnix
-              ? content === text.waarde_gelijk
-                ? text.vorige_waarde_geljk_datum
-                : text.vorige_waarde_datum
-              : text.vorige_waarde
-          }`,
+          `${content} ${showOldDateUnix ? (content === text.waarde_gelijk ? text.vorige_waarde_geljk_datum : text.vorige_waarde_datum) : text.vorige_waarde}`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
-            date: showOldDateUnix
-              ? formatDateFromSeconds(value.old_date_unix)
-              : '',
+            date: showOldDateUnix ? formatDateFromSeconds(value.old_date_unix) : '',
           }
         )}
       />

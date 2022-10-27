@@ -30,6 +30,7 @@ export type IconName =
   | 'Close'
   | 'CloseThick'
   | 'ContactBeroepen'
+  | 'Coronathermometer'
   | 'Coronavirus'
   | 'Cross'
   | 'Database'
@@ -161,6 +162,7 @@ export const iconName2filename: Record<IconName, string> = {
   Close: 'close.svg',
   CloseThick: 'close_thick.svg',
   ContactBeroepen: 'contact_beroepen.svg',
+  Coronathermometer: 'coronathermometer.svg',
   Coronavirus: 'coronavirus.svg',
   Cross: 'cross.svg',
   Database: 'database.svg',
