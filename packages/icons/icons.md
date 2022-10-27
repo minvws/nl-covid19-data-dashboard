@@ -35,6 +35,7 @@ See below an overview of all the available icons in this package. This file is g
 | Close                                  | <div style="background-color: white;"><img src="./src/svg/close.svg" alt="Close" /></div>                                                                      |
 | CloseThick                             | <div style="background-color: white;"><img src="./src/svg/close_thick.svg" alt="CloseThick" /></div>                                                           |
 | ContactBeroepen                        | <div style="background-color: white;"><img src="./src/svg/contact_beroepen.svg" alt="ContactBeroepen" /></div>                                                 |
+| Coronathermometer                      | <div style="background-color: white;"><img src="./src/svg/coronathermometer.svg" alt="Coronathermometer" /></div>                                              |
 | Coronavirus                            | <div style="background-color: white;"><img src="./src/svg/coronavirus.svg" alt="Coronavirus" /></div>                                                          |
 | Cross                                  | <div style="background-color: white;"><img src="./src/svg/cross.svg" alt="Cross" /></div>                                                                      |
 | Database                               | <div style="background-color: white;"><img src="./src/svg/database.svg" alt="Database" /></div>                                                                |

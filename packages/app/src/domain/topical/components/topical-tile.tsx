@@ -7,16 +7,13 @@ import { TextWithIcon } from '~/components/text-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { ChevronRight, Down, Up } from '@corona-dashboard/icons';
+import { ChevronRight } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
-
-type TrendIcon = {
-  direction: 'UP' | 'DOWN';
-  color: string;
-};
+import { TrendIcon } from '../types';
+import { setTrendIcon } from '~/components/severity-indicator-tile/logic/set-trend-icon';
 
 type Cta = {
   label: string;
@@ -35,7 +32,8 @@ interface TopicalTileProps {
 export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
-  const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
+  const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
+
   return (
     <Box
       as="a"
@@ -78,22 +76,12 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 })}
               >
                 {title}
-                {!formatedKpiValue && trendIcon && (
-                  <TrendIconWrapper color={trendIcon.color}>
-                    {trendIcon.direction === 'DOWN' && <Down />}
-                    {trendIcon.direction === 'UP' && <Up />}
-                  </TrendIconWrapper>
-                )}
+                {!formattedKpiValue && trendIcon && <TrendIconWrapper color={trendIcon.color}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
               </Heading>
-              {formatedKpiValue && (
+              {formattedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" mt={2}>
-                  <KpiValue color={colors.black} text={formatedKpiValue} />
-                  {trendIcon && (
-                    <TrendIconWrapper color={trendIcon.color}>
-                      {trendIcon.direction === 'DOWN' && <Down />}
-                      {trendIcon.direction === 'UP' && <Up />}
-                    </TrendIconWrapper>
-                  )}
+                  <KpiValue color={colors.black} text={formattedKpiValue} />
+                  {trendIcon && <TrendIconWrapper color={trendIcon.color}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
                 </Box>
               )}
             </Box>
@@ -102,7 +90,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
               <DynamicIcon name={tileIcon} />
             </TileIcon>
           </Box>
-          <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formatedKpiValue ? { _: 2, xs: 2 } : undefined}>
+          <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formattedKpiValue ? { _: 2, xs: 2 } : undefined}>
             <Box display="flex" alignItems="center">
               <Markdown content={dynamicDescription} />
             </Box>

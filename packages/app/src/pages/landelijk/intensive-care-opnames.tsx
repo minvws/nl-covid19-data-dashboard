@@ -17,13 +17,12 @@ import {
   KpiTile,
   Markdown,
   PageInformationBlock,
-  PageBarScale,
+  KpiValue,
 } from '~/components';
 import { useState } from 'react';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
-import { getBarScaleConfig } from '~/metric-config';
 import { Languages, SiteText } from '~/locale';
 import {
   ElementsQueryResult,
@@ -206,18 +205,10 @@ function IntakeIntensiveCare(props: StaticProps<typeof getStaticProps>) {
               {bedsLastValue.beds_occupied_covid !== null &&
                 bedsLastValue.beds_occupied_covid_percentage !== null && (
                   <>
-                    <PageBarScale
-                      value={bedsLastValue.beds_occupied_covid}
-                      config={getBarScaleConfig(
-                        'nl',
-                        'intensive_care_lcps',
-                        'beds_occupied_covid'
-                      )}
+                    <KpiValue
+                      absolute={bedsLastValue.beds_occupied_covid}
                       difference={
                         data.difference.intensive_care_lcps__beds_occupied_covid
-                      }
-                      screenReaderText={
-                        textNl.kpi_bedbezetting.barscale_screenreader_text
                       }
                       isAmount
                     />
