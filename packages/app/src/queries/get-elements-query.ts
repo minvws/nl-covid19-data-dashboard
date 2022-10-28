@@ -5,7 +5,11 @@ function formatStringArray(array: string[]) {
   return `[${array.map((x) => `'${x}'`).join(',')}]`;
 }
 
-export function getElementsQuery<K extends DataScopeKey>(scope: K, metricNames: MetricName[], locale: string) {
+export function getElementsQuery<K extends DataScopeKey>(
+  scope: K,
+  metricNames: MetricName[],
+  locale: string
+) {
   const query = `// groq
     {
       'timeSeries': *[
@@ -99,6 +103,8 @@ type CmsTimelineEventCollection = {
 };
 
 type CmsThermometerEventConfig = CmsTimelineEventConfig & {
+  start: number;
+  end: number;
   level: number;
 };
 
@@ -128,8 +134,16 @@ export type ElementsQueryResult = {
  * Get the timeline configuration from the correct element and convert it to the
  * right format.
  */
-export function getTimelineEvents(elements: CmsTimeSeriesElement[], metricName: MetricName, metricProperty?: string) {
-  const timelineEventCollections = elements.find((x) => x.metricName === metricName && (!metricProperty || x.metricProperty === metricProperty))?.timelineEventCollections;
+export function getTimelineEvents(
+  elements: CmsTimeSeriesElement[],
+  metricName: MetricName,
+  metricProperty?: string
+) {
+  const timelineEventCollections = elements.find(
+    (x) =>
+      x.metricName === metricName &&
+      (!metricProperty || x.metricProperty === metricProperty)
+  )?.timelineEventCollections;
 
   return timelineEventCollections
     ? timelineEventCollections.flatMap<TimelineEventConfig>((collection) =>
@@ -143,8 +157,16 @@ export function getTimelineEvents(elements: CmsTimeSeriesElement[], metricName: 
     : undefined;
 }
 
-export const getThermometerEvents = (elements: CmsThermometerElement[], name: string) => elements.find((element) => element.name === name)?.thermometerEvents;
+export const getThermometerEvents = (
+  elements: CmsThermometerElement[],
+  name: string
+) => elements.find((element) => element.name === name)?.thermometerEvents;
 
-export function getWarning(elements: CmsWarningElement[], metricName: MetricName) {
-  return elements.find((x) => x.metricName === metricName)?.warning || undefined;
+export function getWarning(
+  elements: CmsWarningElement[],
+  metricName: MetricName
+) {
+  return (
+    elements.find((x) => x.metricName === metricName)?.warning || undefined
+  );
 }

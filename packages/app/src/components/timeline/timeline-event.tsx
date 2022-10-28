@@ -9,20 +9,10 @@ import {
 interface TimelineEventProps {
   level: SeverityLevel;
   size: number;
-  isLast?: boolean;
+  isFirst?: boolean;
 }
 
-export const TimelineEvent = ({ level, size, isLast }: TimelineEventProps) => {
-  if (isLast)
-    return (
-      <Box
-        backgroundColor={getSeverityColor(level as SeverityLevels)}
-        height={size}
-        marginLeft="auto"
-        width={size / 2}
-      />
-    );
-
+export const TimelineEvent = ({ level, size, isFirst }: TimelineEventProps) => {
   return (
     <Box
       backgroundColor={colors.white}
@@ -30,6 +20,8 @@ export const TimelineEvent = ({ level, size, isLast }: TimelineEventProps) => {
       borderRadius={`${size / 2}px`}
       height={size}
       width={size}
+      position="absolute"
+      left={!isFirst ? `-${size / 2}px` : null}
     />
   );
 };
