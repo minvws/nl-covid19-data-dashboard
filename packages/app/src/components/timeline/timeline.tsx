@@ -28,6 +28,7 @@ export const Timeline = ({ timelineEvents, size = 10 }: TimelineProps) => {
             <TimelineBarPart
               key={timelineEvent.level}
               level={timelineEvent.level.toString() as SeverityLevels}
+              isFirst={index === 0}
               isLast={index + 1 === timelineEvents.length}
               size={size}
               width={`${100 / timelineEvents.length}%`}

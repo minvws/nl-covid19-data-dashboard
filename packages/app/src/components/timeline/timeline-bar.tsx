@@ -1,5 +1,5 @@
-import { colors } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { Box } from '../base';
 
 interface TimelineBarProps {
@@ -11,15 +11,28 @@ export const TimelineBar = ({ children, height }: TimelineBarProps) => {
   return (
     <Box
       position="relative"
-      // bg={transparentize(0.8, colors.primary)}
       style={{ height }}
       display="flex"
       alignItems="center"
     >
-      <Box borderTop="1px solid" borderTopColor={colors.primary} />
-      <Box position="absolute" top={0} right={0} bottom={0} left={0} display="flex" justifyContent="space-between">
+      <StyledTimelineBar
+        position="absolute"
+        top={0}
+        right={0}
+        bottom={0}
+        left={0}
+        display="flex"
+        justifyContent="space-between"
+        as="ol"
+      >
         {children}
-      </Box>
+      </StyledTimelineBar>
     </Box>
   );
 };
+
+const StyledTimelineBar = styled(Box)`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
