@@ -5,11 +5,6 @@ import { useIntl } from '~/intl';
 import { TableText } from '../types';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
 
-type TrendIcon = {
-  direction: 'UP' | 'DOWN' | ' NEUTRAL';
-  color: string;
-};
-
 export function VariantDifference({ value, text }: { value: DifferenceDecimal; text: TableText }) {
   const { formatPercentage } = useIntl();
 

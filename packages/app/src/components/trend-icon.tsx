@@ -6,7 +6,6 @@ export enum TrendDirection {
   DOWN,
   NEUTRAL,
 }
-
 interface TrendIconProps {
   trendDirection: TrendDirection;
   ariaLabel?: string;

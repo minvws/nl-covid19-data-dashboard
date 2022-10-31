@@ -5,12 +5,7 @@ import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Container, IconContainer } from './containers';
-import { TrendDirection, TrendIcon } from '~/components/trend-icon';
-
-type TrendIcon = {
-  direction: 'UP' | 'DOWN' | ' NEUTRAL';
-  color: string;
-};
+import { TrendDirection, TrendIcon } from '../trend-icon';
 
 export function TileDifference({
   value,

@@ -37,8 +37,6 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
   const { formatNumber } = useIntl();
 
   const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
-  // const TrendLabelUp = ariaLabel || commonTexts.accessibility.visual_context_labels.up_trend_label;
-  // const TrendLabelDown = ariaLabel || commonTexts.accessibility.visual_context_labels.down_trend_label;
 
   const getTrendDiretion = (trendIcon: TrendIcon): TrendDirection => {
     return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
