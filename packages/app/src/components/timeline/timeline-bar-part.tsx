@@ -1,15 +1,11 @@
 import { transparentize } from 'polished';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '../base';
-import { getSeverityColor } from '../severity-indicator-tile/logic/get-severity-color';
-import {
-  SeverityLevel,
-  SeverityLevels,
-} from '../severity-indicator-tile/types';
-import { TimelineEvent } from './timeline-event';
 
 interface TimelineBarPartsProps {
-  level: SeverityLevel;
+  children: ReactNode;
+  color: string;
   size: number;
   width: string;
   isFirst?: boolean;
@@ -17,29 +13,29 @@ interface TimelineBarPartsProps {
 }
 
 export const TimelineBarPart = ({
-  level,
+  children,
+  color,
   size = 10,
   width,
   isFirst = false,
   isLast = false,
 }: TimelineBarPartsProps) => {
   const borderRadius = isFirst ? `${size / 2}px 0 0 ${size / 2}px` : null;
-  const severityColor = getSeverityColor(level as SeverityLevels);
 
   return (
     <Box
       as="li"
       alignItems="center"
-      backgroundColor={transparentize(0.7, severityColor)}
+      backgroundColor={transparentize(0.7, color)}
       borderRadius={borderRadius}
-      borderRight={isLast ? `2px solid ${severityColor}` : null}
+      borderRight={isLast ? `2px solid ${color}` : null}
       display="flex"
       width={width}
       position="relative"
     >
-      <TimelineEvent level={level} isFirst={isFirst} size={size} />
+      {children}
 
-      <TimelineBarPartLine color={severityColor} />
+      <TimelineBarPartLine color={color} />
     </Box>
   );
 };

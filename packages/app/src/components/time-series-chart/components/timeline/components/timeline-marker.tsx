@@ -4,10 +4,14 @@ import { m } from 'framer-motion';
 import styled from 'styled-components';
 
 export function TimelineMarker({
+  color = colors.primary,
   isHighlighted,
+  hasPadding = true,
   size = 10,
 }: {
+  color?: string;
   isHighlighted?: boolean;
+  hasPadding?: boolean;
   size?: number;
 }) {
   const borderWidth = Math.round(size * 0.2);
@@ -17,18 +21,18 @@ export function TimelineMarker({
   return (
     <div
       role="img"
-      style={{ padding: highlightBorderWidth }}
+      style={{ padding: hasPadding ? highlightBorderWidth : 0 }}
       aria-hidden={true}
     >
       <div style={{ width: size, height: size }}>
         <StyledPointMarker
           size={innerPointSize}
-          color={colors.primary}
+          color={color}
           initial={false}
           $borderWidth={borderWidth}
           transition={{ ease: 'easeOut' }}
           animate={{
-            boxShadow: `0 0 0 ${highlightBorderWidth}px ${colors.primary}`,
+            boxShadow: `0 0 0 ${highlightBorderWidth}px ${color}`,
           }}
         />
       </div>

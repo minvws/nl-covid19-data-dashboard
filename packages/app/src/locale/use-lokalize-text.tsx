@@ -39,7 +39,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [locale, setLocale] = useState(initialLocale);
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
-  const showSanityDebugToggle = enableHotReload || IS_STAGING_ENV;
+  const showSanityDebugToggle = true || enableHotReload || IS_STAGING_ENV;
 
   const [dataset, setDataset] = useState<Dataset>(
     (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??

@@ -13,15 +13,16 @@ import { TimelineEventXOffset } from '../logic';
 import { TimelineMarker } from './timeline-marker';
 
 interface TimelineEventProps {
-  range: TimelineEventXOffset;
-  size: number;
-  onShow: () => void;
-  onHide: () => void;
   isSelected: boolean;
-  tooltipContent: ReactNode;
-  historyEventOffset: number;
-  isHighlighted?: boolean;
+  onHide: () => void;
+  onShow: () => void;
+  size: number;
   timelineContainerRef: RefObject<HTMLDivElement>;
+  tooltipContent: ReactNode;
+  color?: string;
+  historyEventOffset?: number;
+  isHighlighted?: boolean;
+  range?: TimelineEventXOffset;
 }
 
 export function TimelineEvent({
@@ -34,15 +35,16 @@ export function TimelineEvent({
   isHighlighted,
   tooltipContent,
   historyEventOffset,
+  color = colors.primary,
 }: TimelineEventProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   useOnClickOutside([timelineContainerRef, contentRef], onHide);
 
   const isHighlightedEvent = isHighlighted || isSelected;
 
-  const { x0, x1, x0IsOutOfBounds, x1IsOutOfBounds } = range.timeline;
+  const { x0, x1, x0IsOutOfBounds, x1IsOutOfBounds } = range?.timeline ?? {};
 
-  const timespanWidth = x1 - x0;
+  const timespanWidth = x0 && x1 ? x1 - x0 : 0;
 
   return (
     <StyledEvent
@@ -79,7 +81,11 @@ export function TimelineEvent({
             onFocus={onShow}
             onBlur={onHide}
           >
-            <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
+            <TimelineMarker
+              size={size}
+              isHighlighted={isHighlightedEvent}
+              color={color}
+            />
           </TooltipTrigger>
         </div>
       </div>

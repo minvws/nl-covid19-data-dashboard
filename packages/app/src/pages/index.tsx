@@ -50,6 +50,8 @@ import {
 } from '~/queries/get-elements-query';
 import { GetStaticPropsContext } from 'next';
 import { getTimelineRangeDates } from '~/components/timeline/logic/get-timeline-range-dates';
+import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
+import { getSeverityColor } from '~/components/severity-indicator-tile/logic/get-severity-color';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -175,6 +177,21 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   startDate={startDate}
                   endDate={endDate}
                   timelineEvents={thermometerEvents}
+                  // TODO: change the below Sanity keys
+                  labels={{
+                    heading: textNl.thermometer.title,
+                  }}
+                  legendItems={[
+                    {
+                      label: textNl.thermometer.indicator.level_1.description,
+                      shape: 'custom',
+                      shapeComponent: <TimelineMarker color={colors.gray6} />,
+                    },
+                  ]}
+                  disableTimelineArrow
+                  colorLookupMethod={(level: SeverityLevels) =>
+                    getSeverityColor(level.toString() as SeverityLevels)
+                  }
                 />
               )}
 

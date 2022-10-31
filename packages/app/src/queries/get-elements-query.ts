@@ -160,7 +160,21 @@ export function getTimelineEvents(
 export const getThermometerEvents = (
   elements: CmsThermometerElement[],
   name: string
-) => elements.find((element) => element.name === name)?.thermometerEvents;
+) => {
+  const thermometerEvents = elements.find(
+    (element) => element.name === name
+  )?.thermometerEvents;
+
+  return thermometerEvents
+    ? thermometerEvents.map((thermometerEvent) => ({
+        title: thermometerEvent.title,
+        description: thermometerEvent.description,
+        level: thermometerEvent.level,
+        start: new Date(thermometerEvent.date).getTime() / 1000,
+        end: new Date(thermometerEvent.dateEnd).getTime() / 1000,
+      }))
+    : undefined;
+};
 
 export function getWarning(
   elements: CmsWarningElement[],

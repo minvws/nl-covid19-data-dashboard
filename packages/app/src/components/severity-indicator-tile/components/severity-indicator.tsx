@@ -14,8 +14,8 @@ const SeverityIndicatorArrow = () => (
   <Box left="50%" position="absolute" top="100%" transform="translateX(-50%)">
     <Box
       borderBottom={`${space[2]} solid ${colors.black}`}
-      borderLeft={`${space[1]} solid transparent`}
-      borderRight={`${space[1]} solid transparent`}
+      borderLeft={`${space[2]} solid transparent`}
+      borderRight={`${space[2]} solid transparent`}
       m={2}
     />
   </Box>
