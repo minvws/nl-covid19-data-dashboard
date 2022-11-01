@@ -1,7 +1,7 @@
 import { transparentize } from 'polished';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Box } from '../../../../base';
+import { Box } from '~/components/base';
 
 interface TimelineBarPartsProps {
   children: ReactNode;
@@ -12,14 +12,7 @@ interface TimelineBarPartsProps {
   isLast?: boolean;
 }
 
-export const TimelineBarPart = ({
-  children,
-  color,
-  size = 10,
-  width,
-  isFirst = false,
-  isLast = false,
-}: TimelineBarPartsProps) => {
+export const TimelineBarPart = ({ children, color, size = 10, width, isFirst = false, isLast = false }: TimelineBarPartsProps) => {
   const borderRadius = isFirst ? `${size / 2}px 0 0 ${size / 2}px` : null;
 
   return (

@@ -8,12 +8,12 @@ import { Box } from '~/components/base';
 import { LegendItem, Legend } from '~/components/legend';
 import { TimelineEvent } from '~/components/time-series-chart/components/timeline/components/timeline-event';
 import { Heading } from '~/components/typography';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { TimelineBar } from './components/timeline-bar';
 import { TimelineBarPart } from './components/timeline-bar-part';
 import { TimelineTooltipContent } from './components/tooltip-content';
 import { getSeverityColor } from '../../logic/get-severity-color';
 import { SeverityLevels } from '../../types';
-import { useCurrentDate } from '~/utils/current-date-context';
 
 export interface TimelineEventConfig {
   title: string;
