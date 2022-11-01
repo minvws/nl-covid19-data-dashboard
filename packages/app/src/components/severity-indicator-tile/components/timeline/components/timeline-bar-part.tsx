@@ -1,7 +1,7 @@
 import { transparentize } from 'polished';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Box } from '../base';
+import { Box } from '../../../../base';
 
 interface TimelineBarPartsProps {
   children: ReactNode;

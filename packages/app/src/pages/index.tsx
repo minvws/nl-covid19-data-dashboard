@@ -42,16 +42,15 @@ import {
 } from '~/components/severity-indicator-tile/constants';
 import { TrendIcon } from '~/domain/topical/types';
 import { CollapsibleSection } from '~/components/collapsible';
-import { Timeline } from '~/components/timeline/timeline';
+import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
 import {
   ElementsQueryResult,
   getElementsQuery,
   getThermometerEvents,
 } from '~/queries/get-elements-query';
 import { GetStaticPropsContext } from 'next';
-import { getTimelineRangeDates } from '~/components/timeline/logic/get-timeline-range-dates';
+import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
-import { getSeverityColor } from '~/components/severity-indicator-tile/logic/get-severity-color';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -177,21 +176,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   startDate={startDate}
                   endDate={endDate}
                   timelineEvents={thermometerEvents}
-                  // TODO: change the below Sanity keys
                   labels={{
-                    heading: textNl.thermometer.title,
+                    heading: textNl.thermometer.timeline.title,
+                    today: textNl.thermometer.timeline.today_label,
                   }}
                   legendItems={[
                     {
-                      label: textNl.thermometer.indicator.level_1.description,
+                      label: textNl.thermometer.timeline.legend_label,
                       shape: 'custom',
                       shapeComponent: <TimelineMarker color={colors.gray6} />,
                     },
                   ]}
-                  disableTimelineArrow
-                  colorLookupMethod={(level: SeverityLevels) =>
-                    getSeverityColor(level.toString() as SeverityLevels)
-                  }
                 />
               )}
 

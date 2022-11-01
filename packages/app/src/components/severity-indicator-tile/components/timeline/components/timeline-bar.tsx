@@ -1,6 +1,7 @@
+import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Box } from '../base';
+import { Box } from '~/components/base';
 
 interface TimelineBarProps {
   height: number;
@@ -11,9 +12,10 @@ export const TimelineBar = ({ children, height }: TimelineBarProps) => {
   return (
     <Box
       position="relative"
-      style={{ height }}
+      height={height}
       display="flex"
       alignItems="center"
+      css={css({ userSelect: 'none', touchAction: 'pan-y' })}
     >
       <StyledTimelineBar
         position="absolute"
