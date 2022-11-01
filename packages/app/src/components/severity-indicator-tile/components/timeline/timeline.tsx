@@ -58,10 +58,7 @@ export const Timeline = ({
   const indexRef = useRef(index);
   indexRef.current = index;
 
-  const hideTooltip = useCallback(
-    (index: number) => indexRef.current === index && setIndex(undefined),
-    [setIndex]
-  );
+  const hideTooltip = useCallback((index: number) => indexRef.current === index && setIndex(undefined), [setIndex]);
 
   if (!timelineEvents) return null;
 
@@ -73,20 +70,14 @@ export const Timeline = ({
         {timelineEvents.map((timelineEvent, i) => (
           <TimelineBarPart
             key={i}
-            color={getSeverityColor(
-              timelineEvent.level?.toString() as SeverityLevels
-            )}
+            color={getSeverityColor(timelineEvent.level?.toString() as SeverityLevels)}
             isFirst={i === 0}
             isLast={i + 1 === timelineEvents.length}
             size={size}
             width={`${100 / timelineEvents.length}%`}
           >
             {!disableTimelineArrow && i + 1 === timelineEvents.length && (
-              <TimelineBarArrow
-                today={today}
-                startDate={timelineEvents[timelineEvents.length - 1].start}
-                endDate={timelineEvents[timelineEvents.length - 1].end}
-              >
+              <TimelineBarArrow today={today} startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
                 {labels.today}
               </TimelineBarArrow>
             )}
@@ -98,9 +89,7 @@ export const Timeline = ({
               onHide={() => hideTooltip(i)}
               onShow={() => setIndex(i)}
               timelineContainerRef={ref}
-              color={getSeverityColor(
-                timelineEvent.level?.toString() as SeverityLevels
-              )}
+              color={getSeverityColor(timelineEvent.level?.toString() as SeverityLevels)}
               tooltipContent={
                 <TimelineTooltipContent
                   config={timelineEvent}
@@ -108,6 +97,7 @@ export const Timeline = ({
                   onPrev={() => setIndex(i - 1)}
                   onClose={() => hideTooltip(i)}
                   hasMultipleEvents={timelineEvents.length > 1}
+                  currentEstimationLabel={i + 1 === timelineEvents.length ? labels.tooltipCurrentEstimation : undefined}
                 />
               }
             />
@@ -116,19 +106,10 @@ export const Timeline = ({
       </TimelineBar>
 
       {!disableTimelineTimestamps && (
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          my={space[3]}
-        >
-          <TimelineTimestamp dateTime={formatDate(startDate, 'iso')}>
-            {formatDate(startDate, 'axis-with-year')}
-          </TimelineTimestamp>
+        <Box display="flex" alignItems="center" justifyContent="space-between" my={space[3]}>
+          <TimelineTimestamp dateTime={formatDate(startDate, 'iso')}>{formatDate(startDate, 'axis-with-year')}</TimelineTimestamp>
 
-          <TimelineTimestamp dateTime={formatDate(endDate, 'iso')}>
-            {formatDate(endDate, 'axis-with-year')}
-          </TimelineTimestamp>
+          <TimelineTimestamp dateTime={formatDate(endDate, 'iso')}>{formatDate(endDate, 'axis-with-year')}</TimelineTimestamp>
         </Box>
       )}
 
@@ -137,26 +118,12 @@ export const Timeline = ({
   );
 };
 
-const getTimelineBarArrowOffset = (
-  today: Date,
-  startDate: number,
-  endDate: number
-) => {
+const getTimelineBarArrowOffset = (today: Date, startDate: number, endDate: number) => {
   const todayInSeconds = middleOfDayInSeconds(today.getTime() / 1000);
   return todayInSeconds / (endDate - startDate) / 100;
 };
 
-const TimelineBarArrow = ({
-  children,
-  today,
-  startDate,
-  endDate,
-}: {
-  children: ReactNode;
-  today: Date;
-  startDate: number;
-  endDate: number;
-}) => (
+const TimelineBarArrow = ({ children, today, startDate, endDate }: { children: ReactNode; today: Date; startDate: number; endDate: number }) => (
   <>
     <Box
       position="absolute"

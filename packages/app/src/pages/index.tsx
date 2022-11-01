@@ -16,38 +16,19 @@ import {
 } from '~/domain/topical';
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectTopicalData,
-} from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectTopicalData } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors, MetricName } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText } from '~/utils';
-import {
-  SeverityLevel,
-  SeverityLevels,
-} from '~/components/severity-indicator-tile/types';
-import {
-  THERMOMETER_ICON_NAME,
-  TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH,
-  SEVERITY_LEVELS_LIST,
-} from '~/components/severity-indicator-tile/constants';
+import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
+import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { TrendIcon } from '~/domain/topical/types';
 import { CollapsibleSection } from '~/components/collapsible';
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getThermometerEvents,
-} from '~/queries/get-elements-query';
+import { ElementsQueryResult, getElementsQuery, getThermometerEvents } from '~/queries/get-elements-query';
 import { GetStaticPropsContext } from 'next';
 import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
@@ -64,8 +45,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   getTopicalPageData('nl', []),
   ({ locale }: { locale: keyof Languages }) => ({
@@ -91,10 +71,7 @@ export const getStaticProps = createGetStaticProps(
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated, selectedTopicalData } = props;
 
-  const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...textNl.nationaal_metadata,
@@ -108,66 +85,41 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     md: `repeat(3, 1fr)`,
   };
 
-  const currentSeverityLevel = textNl.thermometer
-    .current_indicator_level as SeverityLevels;
-  const currentSeverityLevelTexts =
-    textNl.thermometer.indicator[`level_${currentSeverityLevel}`];
+  const currentSeverityLevel = textNl.thermometer.current_indicator_level as SeverityLevels;
+  const currentSeverityLevelTexts = textNl.thermometer.indicator[`level_${currentSeverityLevel}`];
 
-  const thermometerEvents = getThermometerEvents(
-    content.elements.thermometer,
-    'coronathermometer'
-  );
+  const thermometerEvents = getThermometerEvents(content.elements.thermometer, 'coronathermometer');
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg={colors.white}>
         <MaxWidth id="content">
-          <Box
-            marginBottom={{ _: 4, md: 5 }}
-            pt={{ _: 3, md: 5 }}
-            px={{ _: 3, sm: 4 }}
-            maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
-          >
-            <TopicalHeader
-              title={selectedTopicalData.title}
-              dynamicDescriptions={selectedTopicalData.dynamicDescription}
-            />
+          <Box marginBottom={{ _: 4, md: 5 }} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
+            <TopicalHeader title={selectedTopicalData.title} dynamicDescriptions={selectedTopicalData.dynamicDescription} />
           </Box>
 
           {SEVERITY_LEVELS_LIST.includes(currentSeverityLevel) && (
-            <Box
-              my={5}
-              px={{ _: 3, sm: 4 }}
-              maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
-            >
+            <Box my={5} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
                 title={textNl.thermometer.title}
-                dynamicSubtitle={replaceVariablesInText(
-                  textNl.thermometer.description,
-                  {
-                    level: currentSeverityLevel,
-                    label: currentSeverityLevelTexts.label,
-                  }
-                )}
+                dynamicSubtitle={replaceVariablesInText(textNl.thermometer.description, {
+                  level: currentSeverityLevel,
+                  label: currentSeverityLevelTexts.label,
+                })}
                 icon={THERMOMETER_ICON_NAME}
               />
 
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
-                description={replaceVariablesInText(
-                  currentSeverityLevelTexts.description,
-                  {
-                    label: currentSeverityLevelTexts.label.toLowerCase(),
-                  }
-                )}
+                description={replaceVariablesInText(currentSeverityLevelTexts.description, {
+                  label: currentSeverityLevelTexts.label.toLowerCase(),
+                })}
                 title={currentSeverityLevelTexts.title}
                 label={currentSeverityLevelTexts.label}
                 sourceLabel={textNl.thermometer.indicator.source_label}
                 datesLabel={textNl.thermometer.indicator.dates_label}
-                levelDescription={
-                  textNl.thermometer.indicator.level_description
-                }
+                levelDescription={textNl.thermometer.indicator.level_description}
                 trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
 
@@ -179,6 +131,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   labels={{
                     heading: textNl.thermometer.timeline.title,
                     today: textNl.thermometer.timeline.today_label,
+                    tooltipCurrentEstimation: textNl.thermometer.timeline.tooltip_current_estimation_label,
                   }}
                   legendItems={[
                     {
@@ -190,34 +143,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 />
               )}
 
-              <Box
-                my={{ _: 3, md: 4 }}
-                borderBottom={'1px solid'}
-                borderBottomColor={colors.gray3}
-              >
-                <CollapsibleSection
-                  summary={textNl.thermometer.collapsible_title}
-                  textColor={colors.black}
-                  borderColor={colors.gray3}
-                >
+              <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
+                <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColor={colors.black} borderColor={colors.gray3}>
                   <Box my={3}>
                     <OrderedList>
-                      {Object.values(SeverityLevels).map(
-                        (severityLevel, index) => {
-                          const indicatorTexts =
-                            textNl.thermometer.indicator[
-                              `level_${severityLevel}`
-                            ];
-                          return (
-                            <IndicatorLevelDescription
-                              key={index}
-                              level={severityLevel as SeverityLevel}
-                              label={indicatorTexts.label}
-                              description={indicatorTexts.description}
-                            />
-                          );
-                        }
-                      )}
+                      {Object.values(SeverityLevels).map((severityLevel, index) => {
+                        const indicatorTexts = textNl.thermometer.indicator[`level_${severityLevel}`];
+                        return (
+                          <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                        );
+                      })}
                     </OrderedList>
                   </Box>
                 </CollapsibleSection>
@@ -233,19 +168,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 return (
                   <Box key={theme.index}>
                     <Box marginBottom={4}>
-                      <TopicalThemeHeader
-                        title={theme.title}
-                        dynamicSubtitle={theme.dynamicSubtitle}
-                        icon={theme.icon}
-                      />
+                      <TopicalThemeHeader title={theme.title} dynamicSubtitle={theme.dynamicSubtitle} icon={theme.icon} />
                     </Box>
-                    <Box
-                      display="grid"
-                      gridTemplateColumns={tileGridTemplate}
-                      gridColumnGap={{ _: 4, md: 5 }}
-                      gridRowGap={{ _: 4, md: 5 }}
-                      marginBottom={{ _: 4, sm: 5 }}
-                    >
+                    <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={{ _: 4, sm: 5 }}>
                       {theme.themeTiles
                         .sort((a, b) => a.index - b.index)
                         .map((themeTile) => {
@@ -281,23 +206,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   icon={selectedTopicalData.measures.icon}
                 />
               </Box>
-              <Box
-                display="grid"
-                gridTemplateColumns={tileGridTemplate}
-                gridColumnGap={{ _: 4, md: 5 }}
-                gridRowGap={{ _: 4, md: 5 }}
-                marginBottom={5}
-              >
+              <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={5}>
                 {selectedTopicalData.measures.measureTiles
                   .sort((a, b) => a.index - b.index)
                   .map((measureTile) => {
-                    return (
-                      <TopicalMeasureTile
-                        icon={measureTile.icon}
-                        title={measureTile.title}
-                        key={measureTile.index}
-                      />
-                    );
+                    return <TopicalMeasureTile icon={measureTile.icon} title={measureTile.title} key={measureTile.index} />;
                   })}
               </Box>
             </Box>
@@ -315,11 +228,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
         <Spacer mb={5} />
 
         <Box width="100%" pb={5}>
-          <MaxWidth
-            spacing={4}
-            pt={{ _: 3, md: 5 }}
-            px={{ _: 3, sm: 4, md: 3, lg: 4 }}
-          >
+          <MaxWidth spacing={4} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4, md: 3, lg: 4 }}>
             <TopicalSectionHeader
               title={textShared.secties.meer_lezen.titel}
               description={textShared.secties.meer_lezen.omschrijving}
@@ -328,12 +237,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               text={textShared}
             />
 
-            {isPresent(content.articles) && (
-              <TopicalArticlesList
-                articles={content.articles}
-                text={textShared}
-              />
-            )}
+            {isPresent(content.articles) && <TopicalArticlesList articles={content.articles} text={textShared} />}
           </MaxWidth>
         </Box>
       </Box>

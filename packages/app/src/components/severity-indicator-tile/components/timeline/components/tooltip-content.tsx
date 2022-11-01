@@ -5,10 +5,12 @@ import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
+import { Markdown } from '~/components/markdown';
 import { SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { Anchor, BoldText, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { SeverityIndicatorLevel } from '../../severity-indicator-label';
 import { TimelineEventConfig } from '../timeline';
@@ -19,23 +21,13 @@ interface TimelineTooltipContentProps {
   onPrev: () => void;
   onClose: () => void;
   hasMultipleEvents: boolean;
+  currentEstimationLabel?: string;
 }
 
-export const TimelineTooltipContent = ({
-  config,
-  onNext,
-  onPrev,
-  onClose,
-  hasMultipleEvents,
-}: TimelineTooltipContentProps) => {
+export const TimelineTooltipContent = ({ config, onNext, onPrev, onClose, hasMultipleEvents, currentEstimationLabel }: TimelineTooltipContentProps) => {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const isTouch = useIsTouchDevice();
-  const dateStr = [
-    formatDateFromSeconds(config.start, 'medium'),
-    config.end && formatDateFromSeconds(config.end, 'medium'),
-  ]
-    .filter(isDefined)
-    .join(' - ');
+  const dateStr = [formatDateFromSeconds(config.start, 'medium'), config.end && formatDateFromSeconds(config.end, 'medium')].filter(isDefined).join(' - ');
 
   return (
     <Box
@@ -51,31 +43,14 @@ export const TimelineTooltipContent = ({
       maxWidth="100%"
     >
       {isTouch && (
-        <Box
-          display="flex"
-          justifyContent={hasMultipleEvents ? 'space-between' : 'center'}
-          alignItems="center"
-          ml={-2}
-          mr={-2}
-        >
-          {hasMultipleEvents && (
-            <ChevronButton
-              onClick={onPrev}
-              rotate
-              title={commonTexts.charts.timeline.prev}
-            />
-          )}
+        <Box display="flex" justifyContent={hasMultipleEvents ? 'space-between' : 'center'} alignItems="center" ml={-2} mr={-2}>
+          {hasMultipleEvents && <ChevronButton onClick={onPrev} rotate title={commonTexts.charts.timeline.prev} />}
 
           <InlineText variant="label1" color={colors.gray6}>
             {dateStr}
           </InlineText>
 
-          {hasMultipleEvents && (
-            <ChevronButton
-              onClick={onNext}
-              title={commonTexts.charts.timeline.next}
-            />
-          )}
+          {hasMultipleEvents && <ChevronButton onClick={onNext} title={commonTexts.charts.timeline.next} />}
         </Box>
       )}
       <Box spacing={2}>
@@ -94,25 +69,23 @@ export const TimelineTooltipContent = ({
             columnGap: space[2],
           })}
         >
-          <SeverityIndicatorLevel
-            level={config.level.toString() as SeverityLevels}
-          >
-            {config.level}
-          </SeverityIndicatorLevel>
+          <SeverityIndicatorLevel level={config.level.toString() as SeverityLevels}>{config.level}</SeverityIndicatorLevel>
           <BoldText>{config.title}</BoldText>
         </Box>
         <Text variant="label1">{config.description}</Text>
+        {currentEstimationLabel && (
+          <Box textVariant="label1">
+            <Markdown
+              content={replaceVariablesInText(currentEstimationLabel, {
+                date: formatDateFromSeconds(config.end, 'medium'),
+              })}
+            />
+          </Box>
+        )}
       </Box>
 
       {isTouch && (
-        <Box
-          pt={3}
-          mx={-27}
-          borderTop={`1px solid ${colors.gray2}`}
-          display="flex"
-          justifyContent="center"
-          textVariant="label1"
-        >
+        <Box pt={3} mx={-27} borderTop={`1px solid ${colors.gray2}`} display="flex" justifyContent="center" textVariant="label1">
           <Anchor as="button" onClick={onClose} color={colors.blue8} underline>
             {commonTexts.common.sluiten}
           </Anchor>
@@ -122,20 +95,9 @@ export const TimelineTooltipContent = ({
   );
 };
 
-const ChevronButton = ({
-  onClick,
-  title,
-  rotate,
-}: {
-  onClick: () => void;
-  title: string;
-  rotate?: boolean;
-}) => {
+const ChevronButton = ({ onClick, title, rotate }: { onClick: () => void; title: string; rotate?: boolean }) => {
   return (
-    <Box
-      color={colors.blue8}
-      style={{ transform: rotate ? 'rotate(180deg)' : undefined }}
-    >
+    <Box color={colors.blue8} style={{ transform: rotate ? 'rotate(180deg)' : undefined }}>
       <IconButton title={title} onClick={onClick} size={13} padding={2}>
         <ChevronRight aria-hidden={true} />
       </IconButton>
