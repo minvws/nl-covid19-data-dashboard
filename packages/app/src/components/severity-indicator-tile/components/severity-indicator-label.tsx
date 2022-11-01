@@ -12,18 +12,9 @@ interface SeverityIndicatorLabelProps {
   level: SeverityLevel;
 }
 
-export const SeverityIndicatorLabel = ({
-  label,
-  level,
-}: SeverityIndicatorLabelProps) => {
+export const SeverityIndicatorLabel = ({ label, level }: SeverityIndicatorLabelProps) => {
   return (
-    <Box
-      alignItems="center"
-      display="flex"
-      justifyContent="flex-start"
-      my={space[3]}
-      css={css({ gap: `0 ${space[2]}` })}
-    >
+    <Box alignItems="center" display="flex" justifyContent="flex-start" my={space[3]} css={css({ gap: `0 ${space[2]}` })}>
       <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
 
       <Text variant="h3">{label}</Text>
@@ -31,10 +22,9 @@ export const SeverityIndicatorLabel = ({
   );
 };
 
-const SeverityIndicatorLevel = styled.div`
+export const SeverityIndicatorLevel = styled.div`
   align-items: center;
-  background-color: ${({ level }: { level: SeverityLevel }) =>
-    getSeverityColor(level as SeverityLevels)};
+  background-color: ${({ level }: { level: SeverityLevel }) => getSeverityColor(level as SeverityLevels)};
   border-radius: 50%;
   color: ${colors.white};
   display: flex;

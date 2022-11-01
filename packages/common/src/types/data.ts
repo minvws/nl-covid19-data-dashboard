@@ -1142,6 +1142,7 @@ export type TopicalIcon =
   | 'Close'
   | 'CloseThick'
   | 'ContactBeroepen'
+  | 'Coronathermometer'
   | 'Coronavirus'
   | 'Cross'
   | 'Database'
@@ -1272,7 +1273,7 @@ export interface TopicalTheme {
 }
 export interface TopicalThemeTile {
   index: number;
-  kpiValue?: number | null | string;
+  kpiValue: number | null | string;
   title: MultilanguageString;
   dynamicDescription: MultilanguageString;
   trendIcon: {

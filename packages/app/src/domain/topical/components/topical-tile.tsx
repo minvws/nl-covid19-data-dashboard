@@ -36,7 +36,7 @@ interface TopicalTileProps {
 export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
-  const formatedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
+  const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
 
   const getTrendDiretion = (trendIcon: TrendIcon): TrendDirection => {
     return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
@@ -84,15 +84,15 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 })}
               >
                 {title}
-                {!formatedKpiValue && trendIcon && (
+                {!formattedKpiValue && trendIcon && (
                   <TrendIconWrapper color={trendIcon.color}>
                     <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
                   </TrendIconWrapper>
                 )}
               </Heading>
-              {formatedKpiValue && (
+              {formattedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" mt={2}>
-                  <KpiValue color={colors.black} text={formatedKpiValue} />
+                  <KpiValue color={colors.black} text={formattedKpiValue} />
                   {trendIcon && (
                     <TrendIconWrapper color={trendIcon.color}>
                       <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
@@ -106,7 +106,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
               <DynamicIcon name={tileIcon} aria-hidden="true" />
             </TileIcon>
           </Box>
-          <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formatedKpiValue ? { _: 2, xs: 2 } : undefined}>
+          <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formattedKpiValue ? { _: 2, xs: 2 } : undefined}>
             <Box display="flex" alignItems="center">
               <Markdown content={dynamicDescription} />
             </Box>
