@@ -53,6 +53,8 @@ export function TimelineEvent({
         left: x0,
         zIndex: isHighlightedEvent ? 1 : undefined,
       }}
+      onMouseEnter={onShow}
+      onMouseLeave={onHide}
     >
       {timespanWidth > 0 && (
         <TimespanBar
@@ -60,10 +62,7 @@ export function TimelineEvent({
           $disableBorderRadius={x1IsOutOfBounds}
           initial={false}
           animate={{
-            background: transparentize(
-              isHighlightedEvent ? 0.4 : 0.7,
-              colors.primary
-            ),
+            background: transparentize(isHighlightedEvent ? 0.4 : 0.7, color),
           }}
         />
       )}
@@ -74,18 +73,8 @@ export function TimelineEvent({
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>
-          <TooltipTrigger
-            content={tooltipContent}
-            isSelected={isSelected}
-            contentRef={contentRef}
-            onFocus={onShow}
-            onBlur={onHide}
-          >
-            <TimelineMarker
-              size={size}
-              isHighlighted={isHighlightedEvent}
-              color={color}
-            />
+          <TooltipTrigger content={tooltipContent} isSelected={isSelected} contentRef={contentRef} onFocus={onShow} onBlur={onHide}>
+            <TimelineMarker size={size} isHighlighted={isHighlightedEvent} color={color} />
           </TooltipTrigger>
         </div>
       </div>
@@ -119,13 +108,7 @@ function TooltipTrigger({
   );
 
   return (
-    <WithTooltip
-      content={contentWithRef}
-      placement="bottom"
-      interactive={isTouch}
-      visible={isSelected}
-      maxWidth={breakpoints.sm ? '360px' : '100%'}
-    >
+    <WithTooltip content={contentWithRef} placement="bottom" interactive={isTouch} visible={isSelected} maxWidth={breakpoints.sm ? '360px' : '100%'}>
       <div
         tabIndex={0}
         onFocus={onFocus}
@@ -160,8 +143,6 @@ const TimespanBar = styled(m.div)<{
     position: 'absolute',
     width: '100%',
     height: x.height,
-    borderRadius: x.$disableBorderRadius
-      ? undefined
-      : `0 ${x.height / 2}px ${x.height / 2}px 0`,
+    borderRadius: x.$disableBorderRadius ? undefined : `0 ${x.height / 2}px ${x.height / 2}px 0`,
   })
 );
