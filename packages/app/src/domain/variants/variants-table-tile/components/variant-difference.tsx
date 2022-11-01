@@ -13,31 +13,46 @@ export function VariantDifference({ value, text }: { value: DifferenceDecimal; t
     maximumFractionDigits: 1,
   };
 
-  if (value === undefined) {
-    return <>-</>;
-  }
-  if (value.difference > 0) {
-    return (
-      <Difference color={colors.black}>
-        <TrendIcon trendDirection={TrendDirection.UP} />
-        {formatPercentage(value.difference, options)} {text.verschil.meer}
-      </Difference>
-    );
-  }
-  if (value.difference < 0) {
-    return (
-      <Difference color={colors.black}>
-        <TrendIcon trendDirection={TrendDirection.DOWN} />
-        {formatPercentage(-value.difference, options)} {text.verschil.minder}
-      </Difference>
-    );
-  }
-  return (
+  let returnValue: React.ReactNode = (
     <Difference color={colors.neutral}>
       <TrendIcon trendDirection={TrendDirection.NEUTRAL} />
       {text.verschil.gelijk}
     </Difference>
   );
+
+  const renderingConditionMapping = [
+    {
+      condition: value === undefined,
+      renderingValue: <>-</>,
+    },
+    {
+      condition: value?.difference > 0,
+      renderingValue: (
+        <Difference color={colors.black}>
+          <TrendIcon trendDirection={TrendDirection.UP} />
+          {formatPercentage(value.difference, options)} {text.verschil.meer}
+        </Difference>
+      ),
+    },
+    {
+      condition: value?.difference < 0,
+      renderingValue: (
+        <Difference color={colors.black}>
+          <TrendIcon trendDirection={TrendDirection.DOWN} />
+          {formatPercentage(-value.difference, options)} {text.verschil.minder}
+        </Difference>
+      ),
+    },
+  ];
+
+  renderingConditionMapping.forEach((mapping) => {
+    const { condition, renderingValue } = mapping;
+    if (condition) {
+      returnValue = renderingValue;
+    }
+  });
+
+  return <>{returnValue}</>;
 }
 
 const Difference = styled.div<{ color: string }>((x) =>
