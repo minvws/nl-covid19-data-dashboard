@@ -1,8 +1,16 @@
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
+import { SeverityIndicatorTimelineEventConfig } from '../timeline';
 
-export const getTimelineRangeDates = (timelineEvents: any) => {
+export const getTimelineRangeDates = (timelineEvents: SeverityIndicatorTimelineEventConfig[] | undefined) => {
+  if (!timelineEvents) {
+    return {
+      startDate: null,
+      endDate: null,
+    };
+  }
+
   const timelineEventDates = timelineEvents
-    .flatMap((timelineEvent: any) => [timelineEvent.start, timelineEvent.end])
+    .flatMap((timelineEvent: SeverityIndicatorTimelineEventConfig) => [timelineEvent.start, timelineEvent.end])
     .map((timelineEventDate: number) => {
       return createDateFromUnixTimestamp(timelineEventDate).getTime();
     });

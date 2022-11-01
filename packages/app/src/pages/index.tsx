@@ -123,7 +123,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
 
-              {thermometerEvents && thermometerEvents.length > 0 && (
+              {thermometerEvents && thermometerEvents.length !== 0 && startDate && endDate && (
                 <Timeline
                   startDate={startDate}
                   endDate={endDate}

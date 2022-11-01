@@ -17,14 +17,14 @@ export const TimelineBarPart = ({ children, color, size = 10, width, isFirst = f
 
   return (
     <Box
-      as="li"
       alignItems="center"
+      as="li"
       backgroundColor={transparentize(0.7, color)}
       borderRadius={borderRadius}
       borderRight={isLast ? `2px solid ${color}` : null}
       display="flex"
-      width={width}
       position="relative"
+      width={width}
     >
       {children}
 

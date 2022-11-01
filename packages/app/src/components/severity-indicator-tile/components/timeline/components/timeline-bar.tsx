@@ -4,29 +4,14 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 
 interface TimelineBarProps {
+  children: ReactNode;
   height: number;
-  children?: ReactNode;
 }
 
 export const TimelineBar = ({ children, height }: TimelineBarProps) => {
   return (
-    <Box
-      position="relative"
-      height={height}
-      display="flex"
-      alignItems="center"
-      css={css({ userSelect: 'none', touchAction: 'pan-y' })}
-    >
-      <StyledTimelineBar
-        position="absolute"
-        top={0}
-        right={0}
-        bottom={0}
-        left={0}
-        display="flex"
-        justifyContent="space-between"
-        as="ol"
-      >
+    <Box alignItems="center" css={css({ userSelect: 'none', touchAction: 'pan-y' })} display="flex" height={height}>
+      <StyledTimelineBar as="ol" display="flex" height={height} justifyContent="space-between" width="100%">
         {children}
       </StyledTimelineBar>
     </Box>

@@ -3,27 +3,20 @@ import css from '@styled-system/css';
 import { m } from 'framer-motion';
 import styled from 'styled-components';
 
-export function TimelineMarker({
-  color = colors.primary,
-  isHighlighted,
-  hasPadding = true,
-  size = 10,
-}: {
+interface TimelineMarkerProps {
   color?: string;
-  isHighlighted?: boolean;
   hasPadding?: boolean;
+  isHighlighted?: boolean;
   size?: number;
-}) {
+}
+
+export const TimelineMarker = ({ color = colors.primary, isHighlighted, hasPadding = true, size = 10 }: TimelineMarkerProps) => {
   const borderWidth = Math.round(size * 0.2);
   const highlightBorderWidth = isHighlighted ? 2 * borderWidth : borderWidth;
   const innerPointSize = size - 2 * borderWidth;
 
   return (
-    <div
-      role="img"
-      style={{ padding: hasPadding ? highlightBorderWidth : 0 }}
-      aria-hidden={true}
-    >
+    <div role="img" style={{ padding: hasPadding ? highlightBorderWidth : 0 }} aria-hidden={true}>
       <div style={{ width: size, height: size }}>
         <StyledPointMarker
           size={innerPointSize}
@@ -38,7 +31,7 @@ export function TimelineMarker({
       </div>
     </div>
   );
-}
+};
 
 const StyledPointMarker = styled(m.div)<{
   color: string;
