@@ -15,10 +15,8 @@ export const getTimelineRangeDates = (timelineEvents: SeverityIndicatorTimelineE
       return createDateFromUnixTimestamp(timelineEventDate).getTime();
     });
 
-  const sortedTimelineEventDates = timelineEventDates.sort();
-
   return {
-    startDate: Math.min(...sortedTimelineEventDates),
-    endDate: Math.max(...sortedTimelineEventDates),
+    startDate: Math.min(...timelineEventDates),
+    endDate: Math.max(...timelineEventDates),
   };
 };

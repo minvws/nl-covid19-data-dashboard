@@ -138,11 +138,11 @@ const StyledEvent = styled.div(
 const TimespanBar = styled(m.div)<{
   height: number;
   $disableBorderRadius?: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
-}>((x) =>
+}>((props) =>
   css({
     position: 'absolute',
     width: '100%',
-    height: x.height,
-    borderRadius: x.$disableBorderRadius ? undefined : `0 ${x.height / 2}px ${x.height / 2}px 0`,
+    height: props.height,
+    borderRadius: props.$disableBorderRadius ? undefined : `0 ${props.height / 2}px ${props.height / 2}px 0`,
   })
 );
