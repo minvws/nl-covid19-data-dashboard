@@ -18,15 +18,20 @@ import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getTopicalPageData } from '~/queries/get-topical-page-data';
-import { getLastGeneratedDate, getLokalizeTexts, selectTopicalData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectTopicalData } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { colors } from '@corona-dashboard/common';
+import { colors, MetricName } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText } from '~/utils';
 import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { TrendIcon } from '~/domain/topical/types';
 import { CollapsibleSection } from '~/components/collapsible';
+import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
+import { ElementsQueryResult, getElementsQuery, getThermometerEvents } from '~/queries/get-elements-query';
+import { GetStaticPropsContext } from 'next';
+import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
+import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -45,7 +50,22 @@ export const getStaticProps = createGetStaticProps(
   getTopicalPageData('nl', []),
   ({ locale }: { locale: keyof Languages }) => ({
     selectedTopicalData: selectTopicalData(locale),
-  })
+  }),
+  async (context: GetStaticPropsContext) => {
+    const { content } = await createGetContent<{
+      elements: ElementsQueryResult;
+    }>((context) => {
+      const { locale } = context;
+      return `{
+       "elements": ${getElementsQuery('nl', ['' as MetricName], locale)}
+      }`;
+    })(context);
+    return {
+      content: {
+        elements: content.elements,
+      },
+    };
+  }
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
@@ -68,6 +88,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const currentSeverityLevel = textNl.thermometer.current_indicator_level as SeverityLevels;
   const currentSeverityLevelTexts = textNl.thermometer.indicator[`level_${currentSeverityLevel}`];
 
+  const thermometerEvents = getThermometerEvents(content.elements.thermometer, 'coronathermometer');
+  const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg={colors.white}>
@@ -75,6 +98,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           <Box marginBottom={{ _: 4, md: 5 }} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
             <TopicalHeader title={selectedTopicalData.title} dynamicDescriptions={selectedTopicalData.dynamicDescription} />
           </Box>
+
           {SEVERITY_LEVELS_LIST.includes(currentSeverityLevel) && (
             <Box my={5} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
@@ -85,6 +109,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 })}
                 icon={THERMOMETER_ICON_NAME}
               />
+
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
                 description={replaceVariablesInText(currentSeverityLevelTexts.description, {
@@ -97,6 +122,27 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 levelDescription={textNl.thermometer.indicator.level_description}
                 trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
               />
+
+              {thermometerEvents && thermometerEvents.length !== 0 && startDate && endDate && (
+                <Timeline
+                  startDate={startDate}
+                  endDate={endDate}
+                  timelineEvents={thermometerEvents}
+                  labels={{
+                    heading: textNl.thermometer.timeline.title,
+                    today: textNl.thermometer.timeline.today_label,
+                    tooltipCurrentEstimation: textNl.thermometer.timeline.tooltip_current_estimation_label,
+                  }}
+                  legendItems={[
+                    {
+                      label: textNl.thermometer.timeline.legend_label,
+                      shape: 'custom',
+                      shapeComponent: <TimelineMarker color={colors.gray6} />,
+                    },
+                  ]}
+                />
+              )}
+
               <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
                 <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColor={colors.black} borderColor={colors.gray3}>
                   <Box my={3}>
@@ -114,6 +160,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Markdown content={textNl.thermometer.article_reference} />
             </Box>
           )}
+
           <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
             {selectedTopicalData.themes
               .sort((a, b) => a.index - b.index)
