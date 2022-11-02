@@ -624,6 +624,8 @@ export interface NlBehaviorValue {
   ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_compliance?: number | null;
   selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_compliance?: number | null;
+  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
   curfew_support?: number | null;
   curfew_support_trend: ('up' | 'down' | 'equal') | null;
   wash_hands_support?: number | null;
@@ -650,6 +652,8 @@ export interface NlBehaviorValue {
   ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
   selftest_visit_support?: number | null;
   selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_support?: number | null;
+  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -667,6 +671,8 @@ export interface NlBehaviorPerAgeGroup {
   ventilate_home_support?: NlBehaviorPerAgeGroupValue;
   selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
   selftest_visit_support?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -710,7 +716,8 @@ export interface NlBehaviorAnnotations1 {
     | 'sneeze_cough_elbow'
     | 'max_visitors'
     | 'ventilate_home'
-    | 'selftest_visit';
+    | 'selftest_visit'
+    | 'posttest_isolation';
   message_title_nl: string;
   message_title_en: string;
   message_desc_nl: string;
@@ -1335,7 +1342,7 @@ export interface Vr {
   tested_ggd_archived: VrTestedGgdArchived;
   nursing_home: VrNursingHome;
   disability_care: VrDisabilityCare;
-  behavior: VrBehavior;
+  behavior_archived_20221019: VrBehaviorArchived_20221019;
   deceased_rivm: VrDeceasedRivm;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
@@ -1491,11 +1498,11 @@ export interface VrDisabilityCareValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrBehavior {
-  values: VrBehaviorValue[];
-  last_value: VrBehaviorValue;
+export interface VrBehaviorArchived_20221019 {
+  values: VrBehaviorArchived_20221019Value[];
+  last_value: VrBehaviorArchived_20221019Value;
 }
-export interface VrBehaviorValue {
+export interface VrBehaviorArchived_20221019Value {
   number_of_participants: number;
   curfew_compliance?: number | null;
   curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
@@ -1689,7 +1696,7 @@ export interface VrCollection {
   tested_overall: VrCollectionTestedOverall[];
   nursing_home: VrCollectionNursingHome[];
   sewer: VrCollectionSewer[];
-  behavior: VrCollectionBehavior[];
+  behavior_archived_20221019: VrCollectionBehaviorArchived_20221019[];
   disability_care: VrCollectionDisabilityCare[];
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
@@ -1726,7 +1733,7 @@ export interface VrCollectionSewer {
   average: number | null;
   date_of_insertion_unix: number;
 }
-export interface VrCollectionBehavior {
+export interface VrCollectionBehaviorArchived_20221019 {
   vrcode: string;
   number_of_participants: number;
   curfew_compliance?: number | null;
