@@ -13,15 +13,16 @@ import { TimelineEventXOffset } from '../logic';
 import { TimelineMarker } from './timeline-marker';
 
 interface TimelineEventProps {
-  range: TimelineEventXOffset;
-  size: number;
-  onShow: () => void;
-  onHide: () => void;
   isSelected: boolean;
-  tooltipContent: ReactNode;
-  historyEventOffset: number;
-  isHighlighted?: boolean;
+  onHide: () => void;
+  onShow: () => void;
+  size: number;
   timelineContainerRef: RefObject<HTMLDivElement>;
+  tooltipContent: ReactNode;
+  color?: string;
+  historyEventOffset?: number;
+  isHighlighted?: boolean;
+  range?: TimelineEventXOffset;
 }
 
 export function TimelineEvent({
@@ -34,15 +35,16 @@ export function TimelineEvent({
   isHighlighted,
   tooltipContent,
   historyEventOffset,
+  color = colors.primary,
 }: TimelineEventProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   useOnClickOutside([timelineContainerRef, contentRef], onHide);
 
   const isHighlightedEvent = isHighlighted || isSelected;
 
-  const { x0, x1, x0IsOutOfBounds, x1IsOutOfBounds } = range.timeline;
+  const { x0, x1, x0IsOutOfBounds, x1IsOutOfBounds } = range?.timeline ?? {};
 
-  const timespanWidth = x1 - x0;
+  const timespanWidth = x0 && x1 ? x1 - x0 : 0;
 
   return (
     <StyledEvent
@@ -51,6 +53,8 @@ export function TimelineEvent({
         left: x0,
         zIndex: isHighlightedEvent ? 1 : undefined,
       }}
+      onMouseEnter={onShow}
+      onMouseLeave={onHide}
     >
       {timespanWidth > 0 && (
         <TimespanBar
@@ -58,10 +62,7 @@ export function TimelineEvent({
           $disableBorderRadius={x1IsOutOfBounds}
           initial={false}
           animate={{
-            background: transparentize(
-              isHighlightedEvent ? 0.4 : 0.7,
-              colors.primary
-            ),
+            background: transparentize(isHighlightedEvent ? 0.4 : 0.7, color),
           }}
         />
       )}
@@ -72,14 +73,8 @@ export function TimelineEvent({
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>
-          <TooltipTrigger
-            content={tooltipContent}
-            isSelected={isSelected}
-            contentRef={contentRef}
-            onFocus={onShow}
-            onBlur={onHide}
-          >
-            <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
+          <TooltipTrigger content={tooltipContent} isSelected={isSelected} contentRef={contentRef} onFocus={onShow} onBlur={onHide}>
+            <TimelineMarker size={size} isHighlighted={isHighlightedEvent} color={color} />
           </TooltipTrigger>
         </div>
       </div>
@@ -113,13 +108,7 @@ function TooltipTrigger({
   );
 
   return (
-    <WithTooltip
-      content={contentWithRef}
-      placement="bottom"
-      interactive={isTouch}
-      visible={isSelected}
-      maxWidth={breakpoints.sm ? '360px' : '100%'}
-    >
+    <WithTooltip content={contentWithRef} placement="bottom" interactive={isTouch} visible={isSelected} maxWidth={breakpoints.sm ? '360px' : '100%'}>
       <div
         tabIndex={0}
         onFocus={onFocus}
@@ -149,13 +138,11 @@ const StyledEvent = styled.div(
 const TimespanBar = styled(m.div)<{
   height: number;
   $disableBorderRadius?: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
-}>((x) =>
+}>((props) =>
   css({
     position: 'absolute',
     width: '100%',
-    height: x.height,
-    borderRadius: x.$disableBorderRadius
-      ? undefined
-      : `0 ${x.height / 2}px ${x.height / 2}px 0`,
+    height: props.height,
+    borderRadius: props.$disableBorderRadius ? undefined : `0 ${props.height / 2}px ${props.height / 2}px 0`,
   })
 );

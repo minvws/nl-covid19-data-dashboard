@@ -70,6 +70,10 @@ timestamp,action,key,document_id,move_to
 2022-10-25T08:15:14.503Z,move,pages.topical_page.nl.thermometer.indicator_for_level_4.description,i1eZmWfHjT5bLGKFlhIGb1,pages.topical_page.nl.thermometer.indicator.level_4.description
 2022-10-25T08:15:14.503Z,move,pages.topical_page.nl.thermometer.indicator_for_level_4.label,i1eZmWfHjT5bLGKFlhIGlW,pages.topical_page.nl.thermometer.indicator.level_4.label
 2022-10-25T08:15:14.503Z,move,pages.topical_page.nl.thermometer.indicator_for_level_4.title,i1eZmWfHjT5bLGKFlhIGQW,pages.topical_page.nl.thermometer.indicator.level_4.title
+2022-11-01T11:23:24.415Z,add,pages.topical_page.nl.thermometer.timeline.title,yvSvcGpBL4sPXQGieCfamy,__
+2022-11-01T11:23:25.516Z,add,pages.topical_page.nl.thermometer.timeline.legend_label,yvSvcGpBL4sPXQGieCfaqK,__
+2022-11-01T11:23:26.508Z,add,pages.topical_page.nl.thermometer.timeline.today_label,yvSvcGpBL4sPXQGieCfayi,__
+2022-11-01T11:23:27.547Z,add,pages.topical_page.nl.thermometer.timeline.tooltip_current_estimation_label,yvSvcGpBL4sPXQGieCfb1E,__
 2022-11-01T13:08:13.208Z,add,common.variant_codes.BQ_1,YyKAMdtTUUtpI3N1EArANF,__
 2022-11-01T13:08:14.162Z,add,common.variant_codes.BQ_1_1,YyKAMdtTUUtpI3N1EArArO,__
 2022-11-01T13:08:15.181Z,add,common.variant_codes.XBB,YyKAMdtTUUtpI3N1EArBHE,__
