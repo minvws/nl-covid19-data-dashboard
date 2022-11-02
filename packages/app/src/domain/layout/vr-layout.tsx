@@ -60,48 +60,24 @@ export function VrLayout(props: VrLayoutProps) {
     layout: 'vr',
     code: code,
     map: [
-      [
-        'development_of_the_virus',
-        ['sewage_measurement', 'positive_tests', 'mortality'],
-      ],
-      [
-        'consequences_for_healthcare',
-        [
-          'hospital_admissions',
-          'nursing_home_care',
-          'disabled_care',
-          'elderly_at_home',
-        ],
-      ],
-      ['actions_to_take', ['vaccinations', 'current_advices', 'compliance']],
-      ['archived_metrics', ['source_investigation']],
+      ['development_of_the_virus', ['sewage_measurement', 'positive_tests', 'mortality']],
+      ['consequences_for_healthcare', ['hospital_admissions', 'nursing_home_care', 'disabled_care', 'elderly_at_home']],
+      ['actions_to_take', ['vaccinations', 'current_advices']],
+      ['archived_metrics', ['compliance', 'source_investigation']],
     ],
   });
 
   return (
     <>
       <Head>
-        <link
-          key="dc-spatial"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-        />
-        <link
-          key="dc-spatial-title"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-          title="Nederland"
-        />
+        <link key="dc-spatial" rel="dcterms:spatial" href="https://standaarden.overheid.nl/owms/terms/Nederland" />
+        <link key="dc-spatial-title" rel="dcterms:spatial" href="https://standaarden.overheid.nl/owms/terms/Nederland" title="Nederland" />
       </Head>
 
       <AppContent
         hideBackButton={isMainRoute}
         searchComponent={
-          <Box
-            backgroundColor="white"
-            maxWidth={{ _: '38rem', md: undefined }}
-            mx="auto"
-          >
+          <Box backgroundColor="white" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
             <VrComboBox getLink={getLink} selectedVrCode={code} />
           </Box>
         }
@@ -120,9 +96,7 @@ export function VrLayout(props: VrLayoutProps) {
               >
                 <Box px={3}>
                   <Heading id="sidebar-title" level={2} variant="h3">
-                    <VisuallyHidden as="span">
-                      {commonTexts.veiligheidsregio_layout.headings.sidebar}
-                    </VisuallyHidden>
+                    <VisuallyHidden as="span">{commonTexts.veiligheidsregio_layout.headings.sidebar}</VisuallyHidden>
                     {vrName}
                   </Heading>
                 </Box>

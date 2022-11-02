@@ -1,14 +1,14 @@
 import {
-  BasisregelsDrukte,
   Avondklok,
-  FrisseLucht,
   BasisregelsAfstand,
-  MaxVisitors,
+  BasisregelsDrukte,
   BasisregelsElleboog,
-  BasisregelsTesten,
-  Klachten,
   BasisregelsHandenwassen,
   BasisregelsMondkapje,
+  BasisregelsTesten,
+  FrisseLucht,
+  Klachten,
+  MaxVisitors,
   OnderwijsEnKinderopvangOpAfstand,
 } from '@corona-dashboard/icons';
 import { BehaviorIdentifier } from '../logic/behavior-types';
@@ -27,6 +27,7 @@ const icons: Record<BehaviorIdentifier, typeof Avondklok> = {
   max_visitors: MaxVisitors,
   ventilate_home: FrisseLucht,
   selftest_visit: BasisregelsTesten,
+  posttest_isolation: Klachten,
 };
 
 interface BehaviorIconProps {

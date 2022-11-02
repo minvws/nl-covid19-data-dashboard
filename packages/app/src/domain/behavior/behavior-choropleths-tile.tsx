@@ -1,7 +1,4 @@
-import {
-  colors,
-  VrCollectionBehavior,
-} from '@corona-dashboard/common';
+import { colors, VrCollectionBehaviorArchived_20221019 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isNumber } from 'lodash';
 import { useMemo } from 'react';
@@ -17,43 +14,30 @@ import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SelectBehavior } from './components/select-behavior';
-import {
-  BehaviorIdentifier,
-  behaviorIdentifiers,
-} from './logic/behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from './logic/behavior-types';
 
 interface BehaviorChoroplethsTileProps {
   title: string;
   description: string;
-  data: { behavior: VrCollectionBehavior[] };
+  data: { behavior_archived_20221019: VrCollectionBehaviorArchived_20221019[] };
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   text: SiteText['pages']['behavior_page'];
 }
 
-export function BehaviorChoroplethsTile({
-  title,
-  description,
-  data,
-  currentId,
-  setCurrentId,
-  text,
-}: BehaviorChoroplethsTileProps) {
+export function BehaviorChoroplethsTile({ title, description, data, currentId, setCurrentId, text }: BehaviorChoroplethsTileProps) {
   const breakpoints = useBreakpoints();
 
   const keysWithoutData = useMemo(() => {
-    const firstRegionData = data.behavior[0];
+    const firstRegionData = data.behavior_archived_20221019[0];
 
     // Find all the keys that don't exist on VR level but do on NL
-    const keysWithoutData = behaviorIdentifiers.filter(
-      (item) => !Object.keys(firstRegionData).find((a) => a.includes(item))
-    );
+    const keysWithoutData = behaviorIdentifiers.filter((item) => !Object.keys(firstRegionData).find((a) => a.includes(item)));
 
     const keysThatAreAllNull = behaviorIdentifiers.filter((key) => {
-      return data.behavior.every((region) => {
+      return data.behavior_archived_20221019.every((region) => {
         return (
-          region[`${key}_compliance` as keyof VrCollectionBehavior] === null &&
-          region[`${key}_support` as keyof VrCollectionBehavior] === null
+          region[`${key}_compliance` as keyof VrCollectionBehaviorArchived_20221019] === null && region[`${key}_support` as keyof VrCollectionBehaviorArchived_20221019] === null
         );
       });
     });
@@ -61,17 +45,13 @@ export function BehaviorChoroplethsTile({
     keysWithoutData.push(...keysThatAreAllNull);
 
     return keysWithoutData;
-  }, [data.behavior]);
+  }, [data.behavior_archived_20221019]);
 
   return (
     <ChartTile title={title} description={description}>
       <Box spacing={4} height="100%">
         <Box width={breakpoints.lg ? '50%' : '100%'}>
-          <SelectBehavior
-            label={text.nl.select_behaviour_label}
-            value={currentId}
-            onChange={setCurrentId}
-          />
+          <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} />
         </Box>
         <Box display="flex" flexWrap="wrap" spacing={{ _: 4, md: 0 }}>
           <ChoroplethBlock
@@ -98,7 +78,7 @@ export function BehaviorChoroplethsTile({
 }
 
 interface ChoroplethBlockProps {
-  data: { behavior: VrCollectionBehavior[] };
+  data: { behavior_archived_20221019: VrCollectionBehaviorArchived_20221019[] };
   keysWithoutData: BehaviorIdentifier[];
   behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
@@ -106,19 +86,12 @@ interface ChoroplethBlockProps {
   text: SiteText['pages']['behavior_page'];
 }
 
-function ChoroplethBlock({
-  data,
-  keysWithoutData,
-  behaviorType,
-  currentId,
-  title,
-  text,
-}: ChoroplethBlockProps) {
+function ChoroplethBlock({ data, keysWithoutData, behaviorType, currentId, title, text }: ChoroplethBlockProps) {
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
 
   const isSmallScreen = breakpoints.sm;
-  const metricProperty = `${currentId}_${behaviorType}` as keyof VrCollectionBehavior;
+  const metricProperty = `${currentId}_${behaviorType}` as keyof VrCollectionBehaviorArchived_20221019;
 
   return (
     <Box width={{ _: '100%', lg: '50%' }} spacing={3}>
@@ -128,16 +101,7 @@ function ChoroplethBlock({
 
       <Box position="relative">
         {keysWithoutData.includes(currentId) && (
-          <Box
-            position="absolute"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            top={0}
-            width="100%"
-            height="100%"
-            css={css({ zIndex: 9 })}
-          >
+          <Box position="absolute" display="flex" alignItems="center" justifyContent="center" top={0} width="100%" height="100%" css={css({ zIndex: 9 })}>
             <Text textAlign="center" css={css({ maxWidth: '300px' })}>
               {text.nl.verdeling_in_nederland.geen_beschikbare_data}
             </Text>
@@ -149,9 +113,9 @@ function ChoroplethBlock({
               key: 'behavior_choropleths',
             }}
             map="vr"
-            data={data.behavior}
+            data={data.behavior_archived_20221019}
             dataConfig={{
-              metricName: 'behavior',
+              metricName: 'behavior_archived_20221019',
               metricProperty,
               noDataFillColor: colors.gray1,
             }}
@@ -160,16 +124,13 @@ function ChoroplethBlock({
             }}
             minHeight={!isSmallScreen ? 350 : 400}
             formatTooltip={(context) => {
-              const currentComplianceValueKey =
-                `${currentId}_compliance` as keyof VrCollectionBehavior;
-              const currentSupportValueKey =
-                `${currentId}_support` as keyof VrCollectionBehavior;
+              const currentComplianceValueKey = `${currentId}_compliance` as keyof VrCollectionBehaviorArchived_20221019;
+              const currentSupportValueKey = `${currentId}_support` as keyof VrCollectionBehaviorArchived_20221019;
 
               // Return null when there is no data available to prevent breaking the application when using tab
               if (keysWithoutData.includes(currentId)) return null;
 
-              const complianceValue =
-                context.dataItem[currentComplianceValueKey];
+              const complianceValue = context.dataItem[currentComplianceValueKey];
               const supportValue = context.dataItem[currentSupportValueKey];
 
               return (
@@ -177,12 +138,8 @@ function ChoroplethBlock({
                   behaviorType={behaviorType}
                   context={context}
                   currentMetric={currentId}
-                  currentComplianceValue={
-                    isNumber(complianceValue) ? complianceValue : null
-                  }
-                  currentSupportValue={
-                    isNumber(supportValue) ? supportValue : null
-                  }
+                  currentComplianceValue={isNumber(complianceValue) ? complianceValue : null}
+                  currentSupportValue={isNumber(supportValue) ? supportValue : null}
                   text={text}
                 />
               );
@@ -190,15 +147,8 @@ function ChoroplethBlock({
           />
         </ErrorBoundary>
       </Box>
-      <Box
-        display="flex"
-        justifyContent={{ _: 'center', lg: 'flex-start' }}
-        maxWidth={300}
-      >
-        <ChoroplethLegenda
-          thresholds={thresholds.vr[metricProperty]}
-          title={text.shared.basisregels.header_percentage}
-        />
+      <Box display="flex" justifyContent={{ _: 'center', lg: 'flex-start' }} maxWidth={300}>
+        <ChoroplethLegenda thresholds={thresholds.vr[metricProperty]} title={text.shared.basisregels.header_percentage} />
       </Box>
     </Box>
   );
