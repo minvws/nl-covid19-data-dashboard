@@ -1,17 +1,11 @@
 import { colors, DifferenceDecimal } from '@corona-dashboard/common';
-import { Down, Dot, Up } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
 import { TableText } from '../types';
+import { TrendDirection, TrendIcon } from '~/components/trend-icon';
 
-export function VariantDifference({
-  value,
-  text,
-}: {
-  value: DifferenceDecimal;
-  text: TableText;
-}) {
+export function VariantDifference({ value, text }: { value: DifferenceDecimal; text: TableText }) {
   const { formatPercentage } = useIntl();
 
   const options = {
@@ -19,31 +13,46 @@ export function VariantDifference({
     maximumFractionDigits: 1,
   };
 
-  if (value === undefined) {
-    return <>-</>;
-  }
-  if (value.difference > 0) {
-    return (
-      <Difference color={colors.black}>
-        <Up />
-        {formatPercentage(value.difference, options)} {text.verschil.meer}
-      </Difference>
-    );
-  }
-  if (value.difference < 0) {
-    return (
-      <Difference color={colors.black}>
-        <Down />
-        {formatPercentage(-value.difference, options)} {text.verschil.minder}
-      </Difference>
-    );
-  }
-  return (
+  let returnValue: React.ReactNode = (
     <Difference color={colors.neutral}>
-      <Dot color={colors.neutral} />
+      <TrendIcon trendDirection={TrendDirection.NEUTRAL} />
       {text.verschil.gelijk}
     </Difference>
   );
+
+  const renderingConditionMapping = [
+    {
+      condition: value === undefined,
+      renderingValue: <>-</>,
+    },
+    {
+      condition: value?.difference > 0,
+      renderingValue: (
+        <Difference color={colors.black}>
+          <TrendIcon trendDirection={TrendDirection.UP} />
+          {formatPercentage(value.difference, options)} {text.verschil.meer}
+        </Difference>
+      ),
+    },
+    {
+      condition: value?.difference < 0,
+      renderingValue: (
+        <Difference color={colors.black}>
+          <TrendIcon trendDirection={TrendDirection.DOWN} />
+          {formatPercentage(-value.difference, options)} {text.verschil.minder}
+        </Difference>
+      ),
+    },
+  ];
+
+  renderingConditionMapping.forEach((mapping) => {
+    const { condition, renderingValue } = mapping;
+    if (condition) {
+      returnValue = renderingValue;
+    }
+  });
+
+  return <>{returnValue}</>;
 }
 
 const Difference = styled.div<{ color: string }>((x) =>

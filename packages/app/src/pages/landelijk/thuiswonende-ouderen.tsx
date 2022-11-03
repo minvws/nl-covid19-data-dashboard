@@ -151,7 +151,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               commonTexts.sidebar.metrics.elderly_at_home.title
             }
             title={textNl.section_positive_tested.title}
-            icon={<Elderly />}
+            icon={<Elderly aria-hidden="true" />}
             description={textNl.section_positive_tested.description}
             metadata={{
               datumsText: textNl.section_positive_tested.datums,

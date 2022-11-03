@@ -116,7 +116,7 @@ export default function CovidVariantenPage(
             }
             screenReaderCategory={commonTexts.sidebar.metrics.variants.title}
             title={textNl.titel}
-            icon={<Varianten />}
+            icon={<Varianten aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

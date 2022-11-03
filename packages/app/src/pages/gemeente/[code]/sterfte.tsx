@@ -128,7 +128,7 @@ function DeceasedMunicipalPage(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textGm.section_deceased_rivm.title, {
               municipalityName,
             })}
-            icon={<Coronavirus />}
+            icon={<Coronavirus aria-hidden="true" />}
             description={textGm.section_deceased_rivm.description}
             referenceLink={textGm.section_deceased_rivm.reference.href}
             metadata={{

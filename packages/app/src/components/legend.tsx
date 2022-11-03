@@ -35,7 +35,7 @@ export function Legend({ items, columns }: LegendProps) {
           return (
             <Item key={i}>
               {item.label}
-              <CustomShape>{item.shapeComponent}</CustomShape>
+              <CustomShape aria-hidden="true">{item.shapeComponent}</CustomShape>
             </Item>
           );
         }

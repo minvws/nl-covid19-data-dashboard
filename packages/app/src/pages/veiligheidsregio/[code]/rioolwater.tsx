@@ -97,7 +97,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Rioolvirus />}
+            icon={<Rioolvirus aria-hidden="true" />}
             description={textVr.pagina_toelichting}
             metadata={{
               datumsText: textVr.datums,

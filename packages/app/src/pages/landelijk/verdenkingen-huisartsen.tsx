@@ -69,7 +69,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
               commonTexts.sidebar.metrics.general_practitioner_suspicions.title
             }
             title={text.titel}
-            icon={<Arts />}
+            icon={<Arts aria-hidden="true" />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

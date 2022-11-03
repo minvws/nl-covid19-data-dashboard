@@ -1,9 +1,4 @@
-import {
-  DataScopeKey,
-  MetricKeys,
-  MetricName,
-  ScopedData,
-} from '@corona-dashboard/common';
+import { DataScopeKey, MetricKeys, MetricName, ScopedData } from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
@@ -43,23 +38,10 @@ export const commonPreview = {
     metricName: 'metricName',
     metricProperty: 'metricProperty',
   },
-  prepare<K extends DataScopeKey>(x: {
-    scope: K;
-    type: string;
-    metricName: MetricKeys<ScopedData[K]>;
-    metricProperty?: string;
-  }) {
+  prepare<K extends DataScopeKey>(x: { scope: K; type: string; metricName: MetricKeys<ScopedData[K]>; metricProperty?: string }) {
     return {
-      title: [
-        getTitleForMetricName(x.metricName as MetricName),
-        getTitleForElementType(x.type),
-        x.metricProperty,
-      ]
-        .filter(isDefined)
-        .join(' - '),
-      subtitle: [x.scope, x.metricName, snakeCase(x.type), x.metricProperty]
-        .filter(isDefined)
-        .join('.'),
+      title: [getTitleForMetricName(x.metricName as MetricName), getTitleForElementType(x.type), x.metricProperty].filter(isDefined).join(' - '),
+      subtitle: [x.scope, x.metricName, snakeCase(x.type), x.metricProperty].filter(isDefined).join('.'),
     };
   },
 };
@@ -79,8 +61,8 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_administered: 'Gezette prikken',
   vaccine_coverage: 'Vaccinatiegraad',
-  vaccine_coverage_per_age_group_estimated:
-    'Vaccinatiegraad berekend (per leeftijd)',
+  vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',
+  vaccine_coverage_per_age_group_estimated_autumn_2022: 'Vaccinatiegraad herfst 2022 booster berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',
   nursing_home: 'Verpleeghuizen',
   disability_care: 'Gehandicaptenzorg',

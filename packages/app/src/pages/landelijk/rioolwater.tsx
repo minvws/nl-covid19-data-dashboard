@@ -118,7 +118,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             category={caterogyTexts.category}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.titel}
-            icon={<Rioolvirus />}
+            icon={<Rioolvirus aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

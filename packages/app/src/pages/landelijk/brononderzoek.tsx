@@ -84,7 +84,7 @@ export default function BrononderzoekPage(
             category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textShared.titel}
-            icon={<Bevolking />}
+            icon={<Bevolking aria-hidden="true" />}
             description={textShared.pagina_toelichting}
             metadata={{
               datumsText: textShared.datums,

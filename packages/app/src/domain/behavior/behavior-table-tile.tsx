@@ -1,8 +1,4 @@
-import {
-  colors,
-  NlBehaviorValue,
-  VrBehaviorValue,
-} from '@corona-dashboard/common';
+import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { useMemo } from 'react';
@@ -26,7 +22,7 @@ interface BehaviorTableTileProps {
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  value: NlBehaviorValue | VrBehaviorValue;
+  value: NlBehaviorValue | VrBehaviorArchived_20221019Value;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
@@ -35,18 +31,8 @@ interface BehaviorTableTileProps {
 
 const trendColumnWidth = 125;
 
-export function BehaviorTableTile({
-  title,
-  description,
-  complianceExplanation,
-  supportExplanation,
-  value,
-  annotation,
-  setCurrentId,
-  scrollRef,
-  text,
-}: BehaviorTableTileProps) {
-  const behaviorsTableData = useBehaviorTableData(value);
+export function BehaviorTableTile({ title, description, complianceExplanation, supportExplanation, value, annotation, setCurrentId, scrollRef, text }: BehaviorTableTileProps) {
+  const behaviorsTableData = useBehaviorTableData(value as NlBehaviorValue);
 
   return (
     <ChartTile title={title} description={description}>
@@ -119,12 +105,7 @@ export function BehaviorTableTile({
                     <Box minWidth={32} color="black" pr={2} display="flex">
                       <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
-                    <DescriptionWithIcon
-                      description={behavior.description}
-                      id={behavior.id}
-                      setCurrentId={setCurrentId}
-                      scrollRef={scrollRef}
-                    />
+                    <DescriptionWithIcon description={behavior.description} id={behavior.id} setCurrentId={setCurrentId} scrollRef={scrollRef} />
                   </Box>
                 </Cell>
                 <Cell
@@ -137,27 +118,13 @@ export function BehaviorTableTile({
                     }),
                   })}
                 >
-                  <PercentageBarWithNumber
-                    percentage={behavior.compliancePercentage}
-                    color={colors.blue6}
-                  />
-                  <PercentageBarWithNumber
-                    percentage={behavior.supportPercentage}
-                    color={colors.yellow3}
-                  />
+                  <PercentageBarWithNumber percentage={behavior.compliancePercentage} color={colors.blue6} />
+                  <PercentageBarWithNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
                 </Cell>
                 <Cell css={css({ minWidth: trendColumnWidth })}>
                   <Box display="flex" flexDirection="column">
-                    <BehaviorTrend
-                      trend={behavior.complianceTrend}
-                      color={colors.black}
-                      text={text}
-                    />
-                    <BehaviorTrend
-                      trend={behavior.supportTrend}
-                      color={colors.black}
-                      text={text}
-                    />
+                    <BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={text} />
+                    <BehaviorTrend trend={behavior.supportTrend} color={colors.black} text={text} />
                   </Box>
                 </Cell>
               </Row>
@@ -197,13 +164,7 @@ function DescriptionWithIcon({
   };
 
   return (
-    <Anchor
-      as="button"
-      underline="hover"
-      color="black"
-      onClick={buttonClickHandler}
-      css={css({ '&:hover': { color: 'blue8' } })}
-    >
+    <Anchor as="button" underline="hover" color="black" onClick={buttonClickHandler} css={css({ '&:hover': { color: 'blue8' } })}>
       <span
         css={css({
           display: 'flex',
@@ -238,21 +199,10 @@ function DescriptionWithIcon({
   );
 }
 
-function PercentageBarWithNumber({
-  percentage,
-  color,
-}: {
-  percentage: number;
-  color: string;
-}) {
+function PercentageBarWithNumber({ percentage, color }: { percentage: number; color: string }) {
   const { formatPercentage } = useIntl();
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      spacingHorizontal={2}
-      pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}
-    >
+    <Box display="flex" alignItems="center" spacingHorizontal={2} pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}>
       <Box as="span" minWidth={40} textAlign="right">
         <BoldText>{`${formatPercentage(percentage)}%`}</BoldText>
       </Box>
@@ -333,12 +283,7 @@ function useBehaviorTableData(value: NlBehaviorValue) {
         const supportPercentage = value[x.supportKey];
         const supportTrend = value[`${x.supportKey}_trend` as const];
 
-        if (
-          isPresent(supportPercentage) &&
-          isDefined(supportTrend) &&
-          isPresent(compliancePercentage) &&
-          isDefined(complianceTrend)
-        ) {
+        if (isPresent(supportPercentage) && isDefined(supportTrend) && isPresent(compliancePercentage) && isDefined(complianceTrend)) {
           return {
             id: x.key,
             description: x.description,
@@ -350,8 +295,6 @@ function useBehaviorTableData(value: NlBehaviorValue) {
         }
       })
       .filter(isDefined)
-      .sort(
-        (a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0)
-      );
+      .sort((a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0));
   }, [value, behaviorLookupKeys]);
 }

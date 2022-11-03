@@ -25,7 +25,7 @@ export const TopicalMeasureTile = ({
     >
       <Box display="flex" justifyContent="flex-start" alignItems="center">
         <KpiIcon>
-          <DynamicIcon name={icon} />
+          <DynamicIcon name={icon} aria-hidden="true" />
         </KpiIcon>
 
         <Box display="flex" justifyContent="flex-start">
