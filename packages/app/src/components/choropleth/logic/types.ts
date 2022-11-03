@@ -42,7 +42,7 @@ export enum CHOROPLETH_ASPECT_RATIO {
  */
 export type MapType = 'gm' | 'vr';
 
-export type CodeProp = keyof VrDataItem | keyof GmDataItem;
+export type CodeProp = 'vrcode' | 'gmcode';
 
 export const mapToCodeType: Record<MapType, CodeProp> = {
   gm: 'gmcode',
@@ -56,7 +56,6 @@ export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem 
 export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
 
 export type VrDataCollection =
-  | VrCollectionHospitalNice[]
   | VrCollectionHospitalNice[]
   | VrCollectionTestedOverall[]
   | VrCollectionNursingHome[]
