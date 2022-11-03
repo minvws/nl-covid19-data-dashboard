@@ -19,7 +19,7 @@
     "deceased_cbs",
     "elderly_at_home",
     "disability_care",
-    "behavior",
+    "behavior_archived_20221019",
     "tested_overall_sum",
     "hospital_nice_sum",
     "g_number",
@@ -76,8 +76,8 @@
     "disability_care": {
       "$ref": "disability_care.json"
     },
-    "behavior": {
-      "$ref": "behavior.json"
+    "behavior_archived_20221019": {
+      "$ref": "behavior_archived_20221019.json"
     },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"

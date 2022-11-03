@@ -167,7 +167,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
-            icon={<Ziekenhuis />}
+            icon={<Ziekenhuis aria-hidden="true" />}
             description={textGm.pagina_toelichting}
             metadata={{
               datumsText: textGm.datums,

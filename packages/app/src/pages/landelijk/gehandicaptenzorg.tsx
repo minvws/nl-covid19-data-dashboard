@@ -149,7 +149,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             category={caterogyTexts.category}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.positief_geteste_personen.titel}
-            icon={<Gehandicaptenzorg />}
+            icon={<Gehandicaptenzorg aria-hidden="true" />}
             description={textNl.positief_geteste_personen.pagina_toelichting}
             metadata={{
               datumsText: textNl.positief_geteste_personen.datums,

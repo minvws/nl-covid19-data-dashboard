@@ -156,7 +156,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 safetyRegion: vrName,
               }
             )}
-            icon={<Verpleeghuis />}
+            icon={<Verpleeghuis aria-hidden="true" />}
             description={replaceVariablesInText(
               textVr.positief_geteste_personen.pagina_toelichting,
               {
@@ -262,7 +262,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.besmette_locaties.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Location />}
+            icon={<Location aria-hidden="true" />}
             description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
               datumsText: textVr.besmette_locaties.datums,
@@ -340,7 +340,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Coronavirus />}
+            icon={<Coronavirus aria-hidden="true" />}
             description={textVr.pagina_toelichting}
             metadata={{
               datumsText: textVr.datums,

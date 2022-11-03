@@ -154,7 +154,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 safetyRegion: vrName,
               }
             )}
-            icon={<Gehandicaptenzorg />}
+            icon={<Gehandicaptenzorg aria-hidden="true" />}
             description={replaceVariablesInText(
               textVr.positief_geteste_personen.pagina_toelichting,
               {
@@ -255,7 +255,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.besmette_locaties.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Location />}
+            icon={<Location aria-hidden="true" />}
             description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
               datumsText: textVr.besmette_locaties.datums,
@@ -333,7 +333,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.oversterfte.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Coronavirus />}
+            icon={<Coronavirus aria-hidden="true" />}
             description={textVr.oversterfte.pagina_toelichting}
             metadata={{
               datumsText: textVr.oversterfte.datums,

@@ -212,7 +212,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
-            icon={<GgdTesten />}
+            icon={<GgdTesten aria-hidden="true" />}
             description={textVr.pagina_toelichting}
             metadata={{
               datumsText: textVr.datums,

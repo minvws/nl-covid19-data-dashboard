@@ -33,7 +33,7 @@ export function SituationsDataCoverageTile({
         <Heading level={3}>{text.titel}</Heading>
         <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
           <IndicatorCircle>
-            {data.has_sufficient_data ? <Check /> : <Cross />}
+            {data.has_sufficient_data ? <Check aria-hidden="true" /> : <Cross aria-hidden="true" />}
           </IndicatorCircle>
           {data.has_sufficient_data
             ? text.titel_genoeg_dekking

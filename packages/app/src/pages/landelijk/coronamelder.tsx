@@ -84,7 +84,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={commonTexts.sidebar.categories.archived_metrics.title}
             title={corona_melder_app.header.title}
-            icon={<Phone />}
+            icon={<Phone aria-hidden="true" />}
             description={corona_melder_app.header.description}
             metadata={{
               datumsText: corona_melder_app.header.datums,

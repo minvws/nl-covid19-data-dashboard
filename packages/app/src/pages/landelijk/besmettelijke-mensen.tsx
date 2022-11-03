@@ -82,7 +82,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
               commonTexts.sidebar.metrics.infectious_people.title
             }
             title={textNl.title}
-            icon={<Ziektegolf />}
+            icon={<Ziektegolf aria-hidden="true" />}
             description={textNl.toelichting_pagina}
             metadata={{
               datumsText: textNl.datums,

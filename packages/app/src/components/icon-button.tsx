@@ -37,7 +37,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         {...ariaProps}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
-        {cloneElement(children, { 'aria-hidden': 'true' })}
+        {cloneElement(children, { 'aria-hidden': "true" })}
       </StyledIconButton>
     );
   }

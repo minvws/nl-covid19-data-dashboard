@@ -12,8 +12,12 @@ import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
-import { TrendIcon } from '../types';
-import { setTrendIcon } from '~/components/severity-indicator-tile/logic/set-trend-icon';
+import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+
+type TrendIcon = {
+  direction: 'UP' | 'DOWN';
+  color: string;
+};
 
 type Cta = {
   label: string;
@@ -33,6 +37,10 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
+
+  const getTrendDiretion = (trendIcon: TrendIcon): TrendDirection => {
+    return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
+  };
 
   return (
     <Box
@@ -76,18 +84,26 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 })}
               >
                 {title}
-                {!formattedKpiValue && trendIcon && <TrendIconWrapper color={trendIcon.color}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
+                {!formattedKpiValue && trendIcon && (
+                  <TrendIconWrapper color={trendIcon.color}>
+                    <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
+                  </TrendIconWrapper>
+                )}
               </Heading>
               {formattedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" mt={2}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
-                  {trendIcon && <TrendIconWrapper color={trendIcon.color}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
+                  {trendIcon && (
+                    <TrendIconWrapper color={trendIcon.color}>
+                      <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
+                    </TrendIconWrapper>
+                  )}
                 </Box>
               )}
             </Box>
 
             <TileIcon>
-              <DynamicIcon name={tileIcon} />
+              <DynamicIcon name={tileIcon} aria-hidden="true" />
             </TileIcon>
           </Box>
           <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formattedKpiValue ? { _: 2, xs: 2 } : undefined}>

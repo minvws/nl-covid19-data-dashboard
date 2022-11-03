@@ -31,7 +31,8 @@
             "sneeze_cough_elbow",
             "max_visitors",
             "ventilate_home",
-            "selftest_visit"
+            "selftest_visit",
+            "posttest_isolation"
           ]
         },
         "message_title_nl": {

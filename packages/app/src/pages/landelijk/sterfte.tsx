@@ -128,7 +128,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
               commonTexts.sidebar.categories.development_of_the_virus.title
             }
             title={textNl.section_deceased_rivm.title}
-            icon={<Coronavirus />}
+            icon={<Coronavirus aria-hidden="true" />}
             description={textNl.section_deceased_rivm.description}
             referenceLink={textNl.section_deceased_rivm.reference.href}
             metadata={{

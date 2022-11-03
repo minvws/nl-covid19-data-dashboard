@@ -23,7 +23,6 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert, replaceVariablesInText, useReverseRouter, useFormatLokalizePercentage } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { useFeature } from '~/lib/features';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage'];
 
@@ -90,8 +89,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
     }),
   };
 
-  const vaccinationsCoverageFeature = useFeature('vaccinationsCoverage');
-
   /**
    * When changing between coverage kinds where the selected age group isn't available,
    * the other coverage kind set the non-matching age group to a default one.
@@ -146,7 +143,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               municipalityName: municipalityName,
             })}
             description={textGm.vaccination_coverage.top_level_information_block.description}
-            icon={<VaccinatieIcon />}
+            icon={<VaccinatieIcon aria-hidden="true" />}
             metadata={{
               datumsText: textGm.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredAgeGroup18Plus.date_unix,
@@ -159,68 +156,64 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
           />
-          {vaccinationsCoverageFeature.isEnabled && (
-            <>
-              <VaccineCoverageTile
-                title={textShared.vaccination_grade_tile.autumn_labels.title}
-                description={textShared.vaccination_grade_tile.autumn_labels.description}
-                source={textShared.vaccination_grade_tile.autumn_labels.source}
-                descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
-                coverageData={[
-                  {
-                    value: filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage,
-                    birthyear: filteredAgeGroup60Plus.birthyear_range,
-                    title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
-                    description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
-                    bar: {
-                      value: filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage || 0,
-                      color: colors.scale.blueDetailed[8],
-                    },
-                  },
-                  {
-                    value: filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage,
-                    birthyear: filteredAgeGroup12Plus.birthyear_range,
-                    title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
-                    description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
-                    bar: {
-                      value: filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage || 0,
-                      color: colors.scale.blueDetailed[8],
-                    },
-                  },
-                ]}
-                dateUnix={filteredArchivedAgeGroup12Plus.date_unix}
-              />
-              <VaccineCoverageTile
-                title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
-                description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
-                source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-                descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
-                coverageData={[
-                  {
-                    value: filteredAgeGroup18Plus.fully_vaccinated_percentage,
-                    birthyear: filteredAgeGroup18Plus.birthyear_range,
-                    title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
-                    description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
-                    bar: {
-                      value: filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
-                      color: colors.scale.blueDetailed[3],
-                    },
-                  },
-                  {
-                    value: filteredAgeGroup12Plus.fully_vaccinated_percentage,
-                    birthyear: filteredAgeGroup12Plus.birthyear_range,
-                    title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
-                    description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,
-                    bar: {
-                      value: filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
-                      color: colors.scale.blueDetailed[3],
-                    },
-                  },
-                ]}
-                dateUnix={filteredAgeGroup12Plus.date_unix}
-              />
-            </>
-          )}
+          <VaccineCoverageTile
+            title={textShared.vaccination_grade_tile.autumn_labels.title}
+            description={textShared.vaccination_grade_tile.autumn_labels.description}
+            source={textShared.vaccination_grade_tile.autumn_labels.source}
+            descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
+            coverageData={[
+              {
+                value: filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage,
+                birthyear: filteredAgeGroup60Plus.birthyear_range,
+                title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
+                description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
+                bar: {
+                  value: filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage || 0,
+                  color: colors.scale.blueDetailed[8],
+                },
+              },
+              {
+                value: filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage,
+                birthyear: filteredAgeGroup12Plus.birthyear_range,
+                title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
+                description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
+                bar: {
+                  value: filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage || 0,
+                  color: colors.scale.blueDetailed[8],
+                },
+              },
+            ]}
+            dateUnix={filteredArchivedAgeGroup12Plus.date_unix}
+          />
+          <VaccineCoverageTile
+            title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
+            description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
+            source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
+            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
+            coverageData={[
+              {
+                value: filteredAgeGroup18Plus.fully_vaccinated_percentage,
+                birthyear: filteredAgeGroup18Plus.birthyear_range,
+                title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
+                description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
+                bar: {
+                  value: filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
+                  color: colors.scale.blueDetailed[3],
+                },
+              },
+              {
+                value: filteredAgeGroup12Plus.fully_vaccinated_percentage,
+                birthyear: filteredAgeGroup12Plus.birthyear_range,
+                title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
+                description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,
+                bar: {
+                  value: filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
+                  color: colors.scale.blueDetailed[3],
+                },
+              },
+            ]}
+            dateUnix={filteredAgeGroup12Plus.date_unix}
+          />
 
           <ChoroplethTile
             title={replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName })}

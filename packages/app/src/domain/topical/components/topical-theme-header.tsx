@@ -22,7 +22,7 @@ export const TopicalThemeHeader = ({
       <Box display="flex" justifyContent="start" alignItems="center">
         {icon && (
           <TopicalThemeHeaderIcon>
-            <DynamicIcon name={icon} />
+            <DynamicIcon name={icon} aria-hidden="true"  />
           </TopicalThemeHeaderIcon>
         )}
         <Heading level={2}>{title}</Heading>

@@ -151,7 +151,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
                 safetyRegion: vrName,
               }
             )}
-            icon={<Elderly />}
+            icon={<Elderly aria-hidden="true" />}
             description={replaceVariablesInText(
               textVr.section_positive_tested.description,
               {
@@ -272,7 +272,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.section_deceased.title, {
               safetyRegion: vrName,
             })}
-            icon={<Elderly />}
+            icon={<Elderly aria-hidden="true" />}
             description={replaceVariablesInText(
               textVr.section_deceased.description,
               {

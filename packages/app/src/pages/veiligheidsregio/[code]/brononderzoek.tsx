@@ -130,7 +130,7 @@ export default function BrononderzoekPage(
                 location: vrName,
               }
             )}
-            icon={<Bevolking />}
+            icon={<Bevolking aria-hidden="true" />}
             description={textShared.pagina_toelichting}
             metadata={{
               datumsText: textShared.datums,
