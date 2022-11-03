@@ -198,7 +198,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               commonTexts.sidebar.metrics.hospital_admissions.title
             }
             title={textNl.titel}
-            icon={<Ziekenhuis />}
+            icon={<Ziekenhuis aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

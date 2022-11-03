@@ -148,7 +148,7 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
               safetyRegionName: vrName,
             })}
             description={textVr.vaccination_coverage.top_level_information_block.description}
-            icon={<VaccinatieIcon />}
+            icon={<VaccinatieIcon aria-hidden="true" />}
             metadata={{
               datumsText: textVr.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredAgeGroup18Plus.date_unix,

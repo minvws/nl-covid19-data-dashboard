@@ -104,7 +104,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               commonTexts.sidebar.metrics.reproduction_number.title
             }
             title={textNl.titel}
-            icon={<Reproductiegetal />}
+            icon={<Reproductiegetal aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

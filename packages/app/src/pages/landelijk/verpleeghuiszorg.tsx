@@ -151,7 +151,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               commonTexts.sidebar.metrics.nursing_home_care.title
             }
             title={positiveTestedPeopleText.titel}
-            icon={<Verpleeghuis />}
+            icon={<Verpleeghuis aria-hidden="true" />}
             description={
               <Markdown content={positiveTestedPeopleText.pagina_toelichting} />
             }

@@ -1,8 +1,4 @@
-import {
-  colors,
-  NlBehaviorValue,
-  VrBehaviorArchived_20221019Value,
-} from '@corona-dashboard/common';
+import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -16,10 +12,7 @@ import { BoldText } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
-import {
-  BehaviorIdentifier,
-  behaviorIdentifiers,
-} from './logic/behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from './logic/behavior-types';
 
 type ValueType = NlBehaviorValue | VrBehaviorArchived_20221019Value;
 type ValueKey = keyof ValueType;
@@ -35,60 +28,26 @@ interface BehaviorLineChartTileProps {
   text: SiteText['pages']['behavior_page'];
 }
 
-export function BehaviorLineChartTile({
-  values,
-  metadata,
-  currentId,
-  setCurrentId,
-  behaviorOptions,
-  timelineEvents,
-  useDatesAsRange,
-  text,
-}: BehaviorLineChartTileProps) {
+export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentId, behaviorOptions, timelineEvents, useDatesAsRange, text }: BehaviorLineChartTileProps) {
   const selectedComplianceValueKey = `${currentId}_compliance` as ValueKey;
   const selectedSupportValueKey = `${currentId}_support` as ValueKey;
 
-  const complianceValuesHasGap = useDataHasGaps<ValueType>(
-    values,
-    selectedComplianceValueKey
-  );
-  const supportValuesHasGap = useDataHasGaps<ValueType>(
-    values,
-    selectedSupportValueKey
-  );
+  const complianceValuesHasGap = useDataHasGaps<ValueType>(values, selectedComplianceValueKey);
+  const supportValuesHasGap = useDataHasGaps<ValueType>(values, selectedSupportValueKey);
 
   const breakpoints = useBreakpoints();
 
   return (
-    <ChartTile
-      title={text.shared.line_chart.title}
-      metadata={metadata}
-      description={text.shared.line_chart.description}
-    >
+    <ChartTile title={text.shared.line_chart.title} metadata={metadata} description={text.shared.line_chart.description}>
       <Box spacing={4}>
-        <Box
-          display="flex"
-          alignItems={{ lg: 'center' }}
-          spacing={{ _: 3, lg: 0 }}
-          flexDirection={{ _: 'column', lg: 'row' }}
-          pb={3}
-        >
+        <Box display="flex" alignItems={{ lg: 'center' }} spacing={{ _: 3, lg: 0 }} flexDirection={{ _: 'column', lg: 'row' }} pb={3}>
           <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
-            <SelectBehavior
-              label={text.nl.select_behaviour_label}
-              value={currentId}
-              onChange={setCurrentId}
-              options={behaviorOptions}
-            />
+            <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} options={behaviorOptions} />
           </Box>
 
           {(complianceValuesHasGap || supportValuesHasGap) && (
-            <InlineTooltip
-              content={text.shared.line_chart.tooltip_witte_gaten_beschrijving}
-            >
-              <BoldText>
-                {text.shared.line_chart.tooltip_witte_gaten_label}
-              </BoldText>
+            <InlineTooltip content={text.shared.line_chart.tooltip_witte_gaten_beschrijving}>
+              <BoldText>{text.shared.line_chart.tooltip_witte_gaten_label}</BoldText>
             </InlineTooltip>
           )}
         </Box>
@@ -146,10 +105,7 @@ export function getBehaviorChartOptions<T>(value: T) {
 export function useDataHasGaps<T>(values: T[], key: keyof T) {
   return useMemo(() => {
     const trimmedLeftValues = dropWhile(values, (i) => !isPresent(i[key]));
-    const trimmedLeftAndRightValues = dropRightWhile(
-      trimmedLeftValues,
-      (i) => !isPresent(i[key])
-    );
+    const trimmedLeftAndRightValues = dropRightWhile(trimmedLeftValues, (i) => !isPresent(i[key]));
 
     return trimmedLeftAndRightValues.some((i) => !isPresent(i[key]));
   }, [key, values]);

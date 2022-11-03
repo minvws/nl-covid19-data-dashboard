@@ -172,7 +172,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           <PageInformationBlock
             title={textNl.information_block.title}
             category={commonTexts.sidebar.categories.actions_to_take.title}
-            icon={<VaccinatieIcon />}
+            icon={<VaccinatieIcon aria-hidden="true" />}
             description={textNl.information_block.description}
             metadata={{
               datumsText: textNl.dates,

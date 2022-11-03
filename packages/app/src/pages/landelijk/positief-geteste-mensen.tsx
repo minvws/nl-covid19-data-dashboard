@@ -211,7 +211,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               commonTexts.sidebar.metrics.positive_tests.title
             }
             title={textNl.titel}
-            icon={<GgdTesten />}
+            icon={<GgdTesten aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,

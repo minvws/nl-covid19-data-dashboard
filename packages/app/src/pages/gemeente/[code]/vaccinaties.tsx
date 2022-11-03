@@ -143,7 +143,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               municipalityName: municipalityName,
             })}
             description={textGm.vaccination_coverage.top_level_information_block.description}
-            icon={<VaccinatieIcon />}
+            icon={<VaccinatieIcon aria-hidden="true" />}
             metadata={{
               datumsText: textGm.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredAgeGroup18Plus.date_unix,

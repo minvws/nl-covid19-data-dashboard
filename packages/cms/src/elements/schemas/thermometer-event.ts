@@ -5,12 +5,9 @@ import { localeStringValidation } from '../../language/locale-validation';
 import { SeverityLevels } from '@corona-dashboard/app/src/components/severity-indicator-tile/types';
 
 const REQUIRED = (rule: Rule) => rule.required();
-const REQUIRED_MIN_MAX = (rule: Rule, min: number, max: number) =>
-  rule.required().min(min).max(max);
+const REQUIRED_MIN_MAX = (rule: Rule, min: number, max: number) => rule.required().min(min).max(max);
 
-const SEVERITY_LEVELS = Object.values(SeverityLevels).map((severityLevel) =>
-  parseInt(severityLevel, 10)
-);
+const SEVERITY_LEVELS = Object.values(SeverityLevels).map((severityLevel) => parseInt(severityLevel, 10));
 
 const THERMOMETER_MIN_VALUE = Math.min(...SEVERITY_LEVELS);
 const THERMOMETER_MAX_VALUE = Math.max(...SEVERITY_LEVELS);
@@ -26,12 +23,7 @@ export const thermometerEvent = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: localeStringValidation((rule) =>
-        rule
-          .required()
-          .max(60)
-          .error('Titels zijn gelimiteerd tot maximaal 60 tekens')
-      ),
+      validation: localeStringValidation((rule) => rule.required().max(60).error('Titels zijn gelimiteerd tot maximaal 60 tekens')),
       options: {
         ignoreLanguageSwitcher: true,
       },
@@ -49,8 +41,7 @@ export const thermometerEvent = {
       title: 'Level',
       name: 'level',
       type: 'number',
-      validation: (rule: Rule) =>
-        REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
+      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
       options: {
         ignoreLanguageSwitcher: true,
       },

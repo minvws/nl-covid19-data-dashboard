@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Down, Dot, Up } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Container, IconContainer } from './containers';
+import { TrendDirection, TrendIcon } from '../trend-icon';
 
 export function TileDifference({
   value,
@@ -26,27 +26,29 @@ export function TileDifference({
 
   const formattedDifference = formatNumber(Math.abs(difference), maximumFractionDigits ? maximumFractionDigits : undefined);
 
-  let content;
-  let containerWithIcon;
+  let content: string = text.waarde_gelijk;
+  let containerWithIcon: React.ReactNode = <ContainerWithIcon icon={<TrendIcon trendDirection={TrendDirection.NEUTRAL} />} color="neutral" />;
 
-  if (difference > 0) {
-    content = isAmount ? text.waarde_meer : text.waarde_hoger;
+  const containerWithIconMapping = [
+    {
+      condition: difference > 0,
+      content: isAmount ? text.waarde_meer : text.waarde_hoger,
+      icon: <ContainerWithIcon icon={<TrendIcon trendDirection={TrendDirection.UP} />} color="red2" />,
+    },
+    {
+      condition: difference < 0,
+      content: isAmount ? text.waarde_minder : text.waarde_lager,
+      icon: <ContainerWithIcon icon={<TrendIcon trendDirection={TrendDirection.DOWN} />} color="primary" />,
+    },
+  ];
 
-    containerWithIcon = <ContainerWithIcon icon={<Up />} color="red2" />;
-  }
-
-  if (difference < 0) {
-    content = isAmount ? text.waarde_minder : text.waarde_lager;
-
-    containerWithIcon = <ContainerWithIcon icon={<Down />} color="primary" />;
-  }
-
-  if (!content) {
-    content = text.waarde_gelijk;
-
-    containerWithIcon = <ContainerWithIcon icon={<Dot />} color="neutral" />;
-  }
-
+  containerWithIconMapping.forEach((mapping) => {
+    const { condition, content: mappingContent, icon } = mapping;
+    if (condition) {
+      content = mappingContent;
+      containerWithIcon = icon;
+    }
+  });
   return (
     <Container
       css={css({

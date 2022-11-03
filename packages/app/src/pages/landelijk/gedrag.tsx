@@ -116,9 +116,9 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
         <TileList>
           <PageInformationBlock
             category={caterogyTexts}
-            title={textNl.pagina.titel}
-            icon={<Bevolking />}
-            description={textNl.pagina.toelichting}
+            title={text.nl.pagina.titel}
+            icon={<Bevolking aria-hidden="true" />}
+            description={text.nl.pagina.toelichting}
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: {
