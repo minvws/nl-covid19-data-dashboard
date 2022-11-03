@@ -32,6 +32,8 @@ import { ElementsQueryResult, getElementsQuery, getThermometerEvents } from '~/q
 import { GetStaticPropsContext } from 'next';
 import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -54,15 +56,18 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       elements: ElementsQueryResult;
+      parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
     }>((context) => {
       const { locale } = context;
       return `{
-       "elements": ${getElementsQuery('nl', ['' as MetricName], locale)}
+        "parts": ${getPagePartsQuery('topical_page')},
+        "elements": ${getElementsQuery('nl', ['' as MetricName], locale)}
       }`;
     })(context);
     return {
       content: {
         elements: content.elements,
+        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
       },
     };
   }
