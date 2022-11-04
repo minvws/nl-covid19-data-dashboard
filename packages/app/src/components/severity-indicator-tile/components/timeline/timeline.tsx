@@ -1,4 +1,4 @@
-import { colors, middleOfDayInSeconds } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { ReactNode, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
@@ -13,6 +13,7 @@ import { TimelineBar } from './components/timeline-bar';
 import { TimelineBarPart } from './components/timeline-bar-part';
 import { TimelineTooltipContent } from './components/tooltip-content';
 import { getSeverityColor } from '../../logic/get-severity-color';
+import { getTimelineBarArrowOffset } from './logic/get-timeline-bar-arrow-offset';
 import { SeverityLevels } from '../../types';
 
 export interface SeverityIndicatorTimelineEventConfig {
@@ -103,31 +104,22 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
   );
 };
 
-const getTimelineBarArrowOffset = (today: Date, startDate: number, endDate: number) => {
-  const todayInSeconds = middleOfDayInSeconds(today.getTime() / 1000);
-  return todayInSeconds / (endDate - startDate) / 100;
-};
+const TimelineBarArrow = ({ children, today, startDate, endDate }: { children: ReactNode; today: Date; startDate: number; endDate: number }) => {
+  const arrowLeftOffset = getTimelineBarArrowOffset(today, startDate, endDate) ?? 0;
 
-const TimelineBarArrow = ({ children, today, startDate, endDate }: { children: ReactNode; today: Date; startDate: number; endDate: number }) => (
-  <Box
-    alignItems="center"
-    display="flex"
-    flexDirection="column"
-    left={`${getTimelineBarArrowOffset(today, startDate, endDate) ?? 0}%`}
-    position="absolute"
-    top="-40px"
-    transform="translateX(-50%)"
-  >
-    {children}
-    <Box
-      borderLeft={`${space[2]} solid transparent`}
-      borderRight={`${space[2]} solid transparent`}
-      borderTop={`${space[2]} solid ${colors.black}`}
-      height={space[2]}
-      width={space[2]}
-    />
-  </Box>
-);
+  return (
+    <Box alignItems="center" display="flex" flexDirection="column" left={`${arrowLeftOffset}%`} position="absolute" top="-40px" transform="translateX(-50%)">
+      {children}
+      <Box
+        borderLeft={`${space[2]} solid transparent`}
+        borderRight={`${space[2]} solid transparent`}
+        borderTop={`${space[2]} solid ${colors.black}`}
+        height={space[2]}
+        width={space[2]}
+      />
+    </Box>
+  );
+};
 
 const TimelineHeading = styled(Heading)`
   margin-bottom: ${space[3]};
