@@ -105,7 +105,9 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
 };
 
 const TimelineBarArrow = ({ children, today, startDate, endDate }: { children: ReactNode; today: Date; startDate: number; endDate: number }) => {
-  const arrowLeftOffset = getTimelineBarArrowOffset(today, startDate, endDate) ?? 0;
+  const arrowLeftOffset = getTimelineBarArrowOffset(today, startDate, endDate) || null;
+
+  if (!arrowLeftOffset) return null;
 
   return (
     <Box alignItems="center" display="flex" flexDirection="column" left={`${arrowLeftOffset}%`} position="absolute" top="-40px" transform="translateX(-50%)">

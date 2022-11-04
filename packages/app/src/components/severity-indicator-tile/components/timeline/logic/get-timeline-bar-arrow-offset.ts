@@ -1,6 +1,6 @@
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
-// Returns the difference betweeen two dates in days.
+// Returns the difference between two dates in days.
 const getDifferenceInDays = (start: Date, end: Date): number => {
   return Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
 };
