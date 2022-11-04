@@ -1,3 +1,5 @@
+import { Rule } from '~/sanity';
+
 export const themeTileCollection = {
   type: 'object',
   title: 'Thema tegel collectie',
@@ -5,10 +7,10 @@ export const themeTileCollection = {
   fields: [
     {
       title: 'Tegels',
-      description: 'De tegels',
       name: 'tiles',
       type: 'array',
-      of: [{ type: 'themeTile' }],
+      of: [{ type: 'reference', to: { type: 'themeTile' } }],
+      validation: (rule: Rule) => rule.required(),
     },
   ],
 };

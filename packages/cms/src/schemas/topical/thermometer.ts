@@ -8,14 +8,12 @@ export const thermometer = {
   fields: [
     {
       title: 'De titel van de thermometer',
-      description: 'Dit is de titel boven aan de sectie op de pagina',
       name: 'title',
       type: 'localeString',
       validation: (rule: Rule) => rule.required(),
     },
     {
       title: 'Huidige stand',
-      description: 'Wat is de huidige stand',
       name: 'currentLevel',
       type: 'number',
       options: {
@@ -26,7 +24,6 @@ export const thermometer = {
     },
     {
       title: 'Standen',
-      description: 'De thermometer standen',
       name: 'thermometerLevels',
       type: 'array',
       of: [{ type: 'thermometerLevel' }],
@@ -46,31 +43,21 @@ export const thermometer = {
     },
     {
       title: 'Bron tekst',
-      description: 'Wat',
       name: 'sourceLabel',
       type: 'localeString',
     },
     {
       title: 'Artikel referentie',
-      description: 'Wat',
       name: 'articleReference',
       type: 'localeString',
     },
     {
-      title: 'Titel van standen informatie',
-      description: 'Wat',
+      title: 'Titel van uitklapbare sectie',
       name: 'collapsibleTitle',
       type: 'localeString',
     },
     {
       title: 'Titel van standen informatie',
-      description: 'Wat',
-      name: 'timeline',
-      type: 'thermometerTimeline',
-    },
-    {
-      title: 'Titel van standen informatie',
-      description: 'Wat',
       name: 'trendIcon',
       type: 'trendIcon',
     },
