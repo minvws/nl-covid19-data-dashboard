@@ -38,6 +38,7 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
+import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/TopicalWeeklySummaryTile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -113,7 +114,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           >
             <TopicalHeader title={topicalConfig.title} description={topicalConfig.description} />
           </Box>
-
+          <TopicalWeeklySummaryTile level={currentSeverityLevel} label={currentSeverityLevelTexts?.label} />
           {currentSeverityLevelTexts && (
             <Box marginY={space[5]} paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} icon={THERMOMETER_ICON_NAME} />
