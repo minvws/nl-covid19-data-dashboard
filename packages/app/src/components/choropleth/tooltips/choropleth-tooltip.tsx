@@ -7,6 +7,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { ChoroplethDataItem } from '../logic';
 import { TooltipContent } from './tooltip-content';
 import { TooltipSubject } from './tooltip-subject';
+import { TooltipNotification } from './tooltip-notification';
 import { TooltipData } from './types';
 
 type ChoroplethDataItemProps<T extends ChoroplethDataItem> = {
@@ -14,61 +15,29 @@ type ChoroplethDataItemProps<T extends ChoroplethDataItem> = {
   dataFormatters?: Partial<Record<keyof T, (input: string | number) => string>>;
 };
 
-export function ChoroplethTooltip<T extends ChoroplethDataItem>(
-  props: ChoroplethDataItemProps<T>
-) {
+export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: ChoroplethDataItemProps<T>) {
   const { data, dataFormatters } = props;
-  const {
-    commonTexts,
-    formatNumber,
-    formatPercentage,
-    formatDate,
-    formatDateFromSeconds,
-    formatDateFromMilliseconds,
-    formatRelativeDate,
-    formatDateSpan,
-  } = useIntl();
+  const { commonTexts, formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = useIntl();
 
   const text = commonTexts.choropleth_tooltip;
 
-  const subject = (
-    text as unknown as Record<string, Record<string, Record<string, string>>>
-  )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
-  assert(
-    isDefined(subject),
-    `[${
-      ChoroplethTooltip.name
-    }] No tooltip subject found in siteText.choropleth_tooltip.${
-      data.map
-    }.${data.dataConfig.metricProperty.toString()}`
-  );
+  const subject = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
+  assert(isDefined(subject), `[${ChoroplethTooltip.name}] No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`);
 
-  const tooltipContent = (
-    text as unknown as Record<string, Record<string, Record<string, string>>>
-  )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
-  assert(
-    isDefined(tooltipContent),
-    `[${
-      ChoroplethTooltip.name
-    }] No tooltip content found in siteText.choropleth_tooltip.${
-      data.map
-    }.${data.dataConfig.metricProperty.toString()}`
-  );
+  const tooltipContent = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]?.content;
+  assert(isDefined(tooltipContent), `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`);
 
   const tooltipVars = {
     ...data.dataItem,
     ...data.dataOptions.tooltipVariables,
   } as Record<string, string | number>;
 
-  const formattedTooltipVars = Object.entries(dataFormatters || {}).reduce(
-    (acc, [key, formatter]) => {
-      return {
-        ...acc,
-        [key]: formatter(tooltipVars[key]),
-      };
-    },
-    tooltipVars
-  );
+  const formattedTooltipVars = Object.entries(dataFormatters || {}).reduce((acc, [key, formatter]) => {
+    return {
+      ...acc,
+      [key]: formatter(tooltipVars[key]),
+    };
+  }, tooltipVars);
 
   const content = replaceVariablesInText(tooltipContent, formattedTooltipVars, {
     formatNumber,
@@ -86,24 +55,20 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   const filterBelow = typeof dataItem === 'number' ? dataItem : null;
 
   return (
-    <TooltipContent
-      title={data.featureName}
-      link={
-        data.dataOptions.getLink
-          ? data.dataOptions.getLink(data.code)
-          : undefined
-      }
-    >
-      <TooltipSubject
-        subject={replaceVariablesInText(subject, tooltipVars)}
-        thresholdValues={data.thresholdValues}
-        filterBelow={filterBelow}
-      >
+    <TooltipContent title={data.featureName} link={data.dataOptions.getLink ? data.dataOptions.getLink(data.code) : undefined}>
+      <TooltipSubject subject={replaceVariablesInText(subject, tooltipVars)} thresholdValues={data.thresholdValues} filterBelow={filterBelow}>
         <VisuallyHidden>{ariaContent}</VisuallyHidden>
         <Box aria-hidden>
           <Markdown content={content} />
         </Box>
       </TooltipSubject>
+
+      {/* Setting to true for the timebeing, it should eventually come from tooltip.data.dataItem (see index.tsx -> ToolTip), can get rid of the isOutDated Prop */}
+      {true && (
+        <TooltipNotification>
+          <Markdown content={'**Some** dummy content about old data.'} />
+        </TooltipNotification>
+      )}
     </TooltipContent>
   );
 }

@@ -5,6 +5,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { BoldText } from '~/components/typography';
 import { getThresholdValue } from '~/utils/get-threshold-value';
+import styled from 'styled-components';
 
 interface TooltipSubjectProps {
   subject?: string;
@@ -14,13 +15,7 @@ interface TooltipSubjectProps {
   noDataFillColor?: string;
 }
 
-export function TooltipSubject({
-  subject,
-  thresholdValues,
-  filterBelow,
-  children,
-  noDataFillColor,
-}: TooltipSubjectProps) {
+export function TooltipSubject({ subject, thresholdValues, filterBelow, children, noDataFillColor }: TooltipSubjectProps) {
   const color =
     !isPresent(filterBelow) && isDefined(thresholdValues)
       ? noDataFillColor || getThresholdValue(thresholdValues, 0).color
@@ -29,30 +24,31 @@ export function TooltipSubject({
       : noDataFillColor;
 
   return (
-    <Box spacing={1}>
-      {subject && <BoldText>{subject}</BoldText>}
-      <Box
-        m={0}
-        spacingHorizontal={2}
-        css={css({
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'nowrap',
-          whiteSpace: 'pre-wrap',
-        })}
-      >
-        {children}
+    <StyledTooltipSubject>
+      <Box spacing={1}>
+        <p>HELLO</p>
+        {subject && <BoldText>{subject}</BoldText>}
         <Box
-          flexShrink={0}
-          height={13}
-          width={13}
-          borderRadius={'2px'}
-          ml={'auto'}
-          mb={'auto'}
-          mt={'5px'}
-          backgroundColor={color}
-        />
+          m={0}
+          spacingHorizontal={2}
+          css={css({
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'nowrap',
+            whiteSpace: 'pre-wrap',
+          })}
+        >
+          {children}
+          <Box flexShrink={0} height={13} width={13} borderRadius={'2px'} ml={'auto'} mb={'auto'} mt={'5px'} backgroundColor={color} />
+        </Box>
       </Box>
-    </Box>
+    </StyledTooltipSubject>
   );
 }
+
+const StyledTooltipSubject = styled.div(
+  css({
+    py: 2,
+    px: 3,
+  })
+);

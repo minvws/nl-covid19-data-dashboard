@@ -17,11 +17,7 @@ export function TooltipContent(props: IProps) {
   const isTouch = useIsTouchDevice();
 
   return (
-    <StyledTooltipContent
-      isInteractive={isTouch}
-      onClick={onSelect}
-      aria-live="polite"
-    >
+    <StyledTooltipContent isInteractive={isTouch} onClick={onSelect} aria-live="polite">
       <TooltipHeader href={link}>
         <Text variant="choroplethTooltipHeader">
           <StyledLocationIcon>
@@ -47,13 +43,7 @@ const StyledTooltipContent = styled.div<{ isInteractive: boolean }>((x) =>
   })
 );
 
-function TooltipHeader({
-  href,
-  children,
-}: {
-  href?: string;
-  children: ReactNode;
-}) {
+function TooltipHeader({ href, children }: { href?: string; children: ReactNode }) {
   if (href) {
     return (
       <StyledTooltipHeader href={href} as="a">
@@ -96,8 +86,6 @@ const TooltipInfo = styled.div(
     cursor: 'pointer',
     borderTop: '1px solid',
     borderTopColor: 'gray3',
-    py: 2,
-    px: 3,
   })
 );
 
