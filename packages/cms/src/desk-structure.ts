@@ -192,6 +192,16 @@ export default () =>
               ),
               addListItem(
                 MdQuestionAnswer,
+                'Maatregelen sectie',
+                'measurementTheme',
+              ),
+              addListItem(
+                MdQuestionAnswer,
+                'Maatregelen tegels',
+                'measurementTileCollection',
+              ),
+              addListItem(
+                MdQuestionAnswer,
                 'Thermometer',
                 'thermometer',
               ),
