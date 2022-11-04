@@ -5,7 +5,6 @@ import {
   BsFillPuzzleFill,
   BsLockFill,
   BsMap,
-  BsTable,
 } from 'react-icons/bs';
 import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
@@ -31,6 +30,13 @@ const hiddenDocTypes = [
   'overRisicoNiveaus',
   'overRisicoNiveausNew',
   'lockdown',
+  'themeCollection',
+  'theme',
+  'themeTileCollection',
+  'themeTile',
+  'thermometerLevel',
+  'thermometer',
+  'topicalPageConfig',
   'toegankelijkheid',
   'lokalizeSubject',
   'lokalizeString',
@@ -155,6 +161,39 @@ export default () =>
                   'pageHighlightedItems',
                   'pageRichText',
                 ].includes(item.getId() ?? '')
+              ),
+            ])
+        ),
+
+      S.divider(),
+
+      S.listItem()
+        .id('topicalPage',)
+        .title('Topical pagina')
+        .icon(BsFillFileBarGraphFill)
+        .child(
+          S.list()
+            .title('Pagina configuratie')
+            .items([
+              addListItem(
+                MdQuestionAnswer,
+                'Topical pagina configuratie',
+                'topicalPageConfig',
+              ),
+              addListItem(
+                MdQuestionAnswer,
+                'Thema\'s',
+                'themeCollection',
+              ),
+              addListItem(
+                MdQuestionAnswer,
+                'Thema tegels',
+                'themeTileCollection',
+              ),
+              addListItem(
+                MdQuestionAnswer,
+                'Thermometer',
+                'thermometer',
               ),
             ])
         ),
