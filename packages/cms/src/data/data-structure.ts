@@ -176,8 +176,6 @@ export const dataStructure = {
       'ventilate_home_compliance_trend',
       'selftest_visit_compliance',
       'selftest_visit_compliance_trend',
-      'posttest_isolation_compliance',
-      'posttest_isolation_compliance_trend',
       'curfew_support',
       'curfew_support_trend',
       'wash_hands_support',
@@ -204,8 +202,6 @@ export const dataStructure = {
       'ventilate_home_support_trend',
       'selftest_visit_support',
       'selftest_visit_support_trend',
-      'posttest_isolation_support',
-      'posttest_isolation_support_trend',
     ],
     behavior_get_tested_support_per_age_group: ['percentage_average', 'percentage_70_plus', 'percentage_55_69', 'percentage_40_54', 'percentage_25_39', 'percentage_16_24'],
     behavior_annotations: ['behavior_indicator', 'message_title_nl', 'message_title_en', 'message_desc_nl', 'message_desc_en'],
@@ -263,8 +259,17 @@ export const dataStructure = {
       'date_of_report_unix',
       'birthyear_range',
     ],
-    vaccine_coverage_per_age_group_estimated_fully_vaccinated: ['age_12_plus_birthyear', 'age_12_plus_vaccinated', 'age_18_plus_birthyear', 'age_18_plus_vaccinated'],
-    vaccine_coverage_per_age_group_estimated_autumn_2022: ['age_12_plus_birthyear', 'age_12_plus_vaccinated', 'age_60_plus_birthyear', 'age_60_plus_vaccinated'],
+    vaccine_coverage_per_age_group_estimated: [
+      'age_60_plus_autumn_2022_vaccinated',
+      'age_60_plus_birthyear',
+      'age_18_plus_fully_vaccinated',
+      'age_18_plus_has_one_shot',
+      'age_18_plus_birthyear',
+      'age_12_plus_autumn_2022_vaccinated',
+      'age_12_plus_fully_vaccinated',
+      'age_12_plus_has_one_shot',
+      'age_12_plus_birthyear',
+    ],
     vaccine_coverage_per_age_group_estimated_archived_20220908: [
       'age_18_plus_fully_vaccinated',
       'age_18_plus_has_one_shot',
@@ -330,7 +335,7 @@ export const dataStructure = {
       'deceased_daily',
       'deceased_daily_moving_average',
     ],
-    behavior_archived_20221019: [
+    behavior: [
       'number_of_participants',
       'curfew_compliance',
       'curfew_compliance_trend',
@@ -428,7 +433,7 @@ export const dataStructure = {
     tested_overall: ['infected_per_100k', 'infected'],
     nursing_home: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
     sewer: ['average'],
-    behavior_archived_20221019: [
+    behavior: [
       'number_of_participants',
       'curfew_compliance',
       'curfew_compliance_trend',
