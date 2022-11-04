@@ -1,9 +1,9 @@
-
 import { Rule } from '~/sanity';
+import { SanityDocument } from '@sanity/types'
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 
 export const themeTile = {
-  type: 'object',
+  type: 'document',
   title: 'Thema tegel',
   name: 'themeTile',
   fields: [
@@ -17,16 +17,7 @@ export const themeTile = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-    },
-    {
-      title: 'Trend icon',
-      name: 'trendIcon',
-      type: 'trendIcon',
-    },
-    {
-      title: 'KPI waarde',
-      name: 'kpiValue',
-      type: 'localeString',
+      validation: (rule: Rule) => rule.required(),
     },
     {
       title: 'Tegel icoon',
@@ -38,7 +29,18 @@ export const themeTile = {
     {
       title: 'Omschrijving',
       name: 'description',
+      type: 'localeRichContentBlock',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      title: 'KPI waarde',
+      name: 'kpiValue',
       type: 'localeString',
+    },
+    {
+      title: 'Trend icon',
+      name: 'trendIcon',
+      type: 'trendIcon',
     },
     {
       title: 'Call to action',

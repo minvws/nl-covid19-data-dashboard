@@ -16,6 +16,12 @@ export const theme = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      title: 'Ondertitel',
+      name: 'subTitle',
+      type: 'localeString',
     },
     {
       title: 'Thema icoon',
@@ -26,20 +32,10 @@ export const theme = {
     },
     {
       title: 'Tegels',
-      description: 'De tegels',
       name: 'tiles',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'themeTile' } }],
-      options: {
-        layout: 'dropdown',
-      }
+      validation: (rule: Rule) => rule.required(),
     },
   ],
 };
-
-
-
-// "index"
-// "title"
-// "icon"
-// "dynamicSubtitle"

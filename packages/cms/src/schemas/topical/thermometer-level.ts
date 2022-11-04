@@ -22,23 +22,20 @@ export const thermometerLevel = {
     },
     {
       title: 'Stand naam',
-      description: 'De naam van deze stand',
       name: 'label',
       type: 'localeString',
       validation: (rule: Rule) => rule.required(),
     },
     {
       title: 'Titel',
-      description: 'De titel voor deze stand',
       name: 'title',
       type: 'localeString',
       validation: (rule: Rule) => rule.required(),
     },
     {
       title: 'Omschrijving',
-      description: 'De omschrijving voor deze stand',
       name: 'description',
-      type: 'localeString',
+      type: 'localeRichContentBlock',
     },
   ],
 };
