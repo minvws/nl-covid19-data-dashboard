@@ -22,7 +22,7 @@ export const measurementTile = {
   ],
   preview: {
     select: {
-      title: 'title.nl',
+      title: 'description.nl',
     },
   },
 };

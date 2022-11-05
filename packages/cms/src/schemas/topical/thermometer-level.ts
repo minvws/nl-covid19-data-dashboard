@@ -38,4 +38,17 @@ export const thermometerLevel = {
       type: 'localeRichContentBlock',
     },
   ],
+  preview: {
+    select: {
+      title: 'label.nl',
+      subtitle: 'level'
+    },
+    prepare(selection: { title: string; subtitle: string; }) {
+      const {title, subtitle} = selection
+      return {
+        title: title,
+        subtitle: `Stand ${subtitle}`
+      }
+    }
+  },
 };
