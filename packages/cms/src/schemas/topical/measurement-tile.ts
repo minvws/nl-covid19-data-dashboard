@@ -1,5 +1,5 @@
 import { Rule } from '~/sanity';
-import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { KpiIconInput, KpiIconKey } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 
 export const measurementTile = {
   type: 'document',
@@ -20,4 +20,9 @@ export const measurementTile = {
       validation: (rule: Rule) => rule.required(),
     },
   ],
+  preview: {
+    select: {
+      title: 'title.nl',
+    },
+  },
 };

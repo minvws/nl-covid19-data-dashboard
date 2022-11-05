@@ -48,4 +48,17 @@ export const themeTile = {
       type: 'link',
     },
   ],
+  preview: {
+    select: {
+      title: 'title.nl',
+      subtitle: 'index'
+    },
+    prepare(selection: { title: string; subtitle: string; }) {
+      const {title, subtitle} = selection
+      return {
+        title: title,
+        subtitle: `${subtitle} is de index van dit thema`
+      }
+    }
+  },
 };

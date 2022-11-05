@@ -5,7 +5,7 @@ export const THERMOMETER_LEVELS = [
 ]
 
 export const thermometerLevel = {
-  type: 'object',
+  type: 'document',
   title: 'Thermometer stand',
   name: 'thermometerLevel',
   fields: [

@@ -26,7 +26,7 @@ export const thermometer = {
       title: 'Standen',
       name: 'thermometerLevels',
       type: 'array',
-      of: [{ type: 'thermometerLevel' }],
+      of: [{ type: 'reference', to: { type: 'thermometerLevel' } }],
       validation: (rule: Rule) => rule.required(),
     },
     {

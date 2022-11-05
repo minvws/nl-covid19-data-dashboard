@@ -8,10 +8,9 @@ export const measurementTileCollection = {
   fields: [
     {
       title: 'Tegels',
-      description: 'De tegels',
       name: 'tiles',
       type: 'array',
-      of: [{ type: 'measurementTile' }],
+      of: [{ type: 'reference', to: { type: 'measurementTile' } }],
       validation: (rule: Rule) => rule.required(),
     },
   ],

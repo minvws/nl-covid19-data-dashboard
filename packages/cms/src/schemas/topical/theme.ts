@@ -2,7 +2,7 @@ import { Rule } from '~/sanity';
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 
 export const theme = {
-  type: 'object',
+  type: 'document',
   title: 'Thema',
   name: 'theme',
   fields: [
@@ -38,4 +38,17 @@ export const theme = {
       validation: (rule: Rule) => rule.required(),
     },
   ],
+  preview: {
+    select: {
+      title: 'title.nl',
+      subtitle: 'index'
+    },
+    prepare(selection: { title: string; subtitle: string; }) {
+      const {title, subtitle} = selection
+      return {
+        title: title,
+        subtitle: `${subtitle} is de index van dit thema`
+      }
+    }
+  },
 };
