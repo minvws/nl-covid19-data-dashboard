@@ -213,7 +213,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           cta={themeTile.cta}
                           key={themeTile.title}
                           kpiValue={themeTile.kpiValue}
-                          metadataText={{
+                          metadata={{
                             date: 'Waarde van dinsdag 1 november',
                             source: {
                               text: 'RIVM',
