@@ -2,7 +2,7 @@ import { Box } from '~/components/base';
 import theme, { space } from '~/style/theme';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Heading } from '~/components/typography';
+import { Heading, InlineText } from '~/components/typography';
 import { TextWithIcon } from '~/components/text-with-icon';
 import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
@@ -17,7 +17,6 @@ import { Cta } from '~/queries/query-types';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
 import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
-import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface TopicalTileProps {
   title: string;
@@ -26,10 +25,10 @@ interface TopicalTileProps {
   description: PortableTextEntry[];
   kpiValue: string | null;
   cta: Cta;
-  metadata: MetadataProps;
+  sourceLabel: string;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, metadata }: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
@@ -106,7 +105,9 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             <Box display="flex" alignItems="center">
               <RichContent blocks={description} elementAlignment="start" />
             </Box>
-            {metadata && <Metadata {...metadata} isTileFooter />}
+            <Box display="inline-block" align-self="flex-end">
+              <InlineText color="gray7">{sourceLabel}</InlineText>
+            </Box>
           </Box>
         </Box>
 
