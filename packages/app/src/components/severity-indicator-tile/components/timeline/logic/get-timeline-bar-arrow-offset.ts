@@ -20,9 +20,9 @@ const getMiddleOfDayDates = (today: Date, startDate: number, endDate: number): R
 // Determines where to position the 'Vandaag' label on the timeline.
 export const getTimelineBarArrowOffset = (today: Date, startDate: number, endDate: number): number => {
   const { startOfIntervalDate, endOfIntervalDate, todayMiddleOfDayDate } = getMiddleOfDayDates(today, startDate, endDate);
-  const noOfDaysInInterval = getDifferenceInDays(startOfIntervalDate, endOfIntervalDate);
-  const noOfDaysFromStartToToday = getDifferenceInDays(startOfIntervalDate, todayMiddleOfDayDate);
-  const arrowOffset = (noOfDaysFromStartToToday / noOfDaysInInterval) * 100;
+  const numberOfDaysInInterval = getDifferenceInDays(startOfIntervalDate, endOfIntervalDate);
+  const numberOfDaysFromStartToToday = getDifferenceInDays(startOfIntervalDate, todayMiddleOfDayDate);
+  const arrowOffset = (numberOfDaysFromStartToToday / numberOfDaysInInterval) * 100;
 
   return arrowOffset;
 };
