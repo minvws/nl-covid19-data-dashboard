@@ -37,7 +37,6 @@ interface TimelineProps {
 
 export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, timelineEvents }: TimelineProps) => {
   const { formatDate } = useIntl();
-  const today = useCurrentDate();
 
   const [ref] = useResizeObserver<HTMLDivElement>();
 
@@ -65,7 +64,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
             width={`${100 / timelineEvents.length}%`}
           >
             {i + 1 === timelineEvents.length && (
-              <TimelineBarArrow today={today} startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
+              <TimelineBarArrow startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
                 {labels.today}
               </TimelineBarArrow>
             )}
@@ -104,7 +103,14 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
   );
 };
 
-const TimelineBarArrow = ({ children, today, startDate, endDate }: { children: ReactNode; today: Date; startDate: number; endDate: number }) => {
+interface TimelineBarArrowProps {
+  children: ReactNode;
+  startDate: number;
+  endDate: number;
+}
+
+const TimelineBarArrow = ({ children, startDate, endDate }: TimelineBarArrowProps) => {
+  const today = useCurrentDate();
   const arrowLeftOffset = getTimelineBarArrowOffset(today, startDate, endDate) || null;
 
   if (!arrowLeftOffset) return null;
