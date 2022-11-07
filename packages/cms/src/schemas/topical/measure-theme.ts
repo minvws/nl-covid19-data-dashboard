@@ -1,16 +1,16 @@
-import { Rule } from '~/sanity';
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { REQUIRED } from '../../validation';
 
-export const measurementTheme = {
+export const measureTheme = {
   type: 'object',
   title: 'Thema',
-  name: 'measurementTheme',
+  name: 'measureTheme',
   fields: [
     {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Ondertitel',
@@ -22,14 +22,14 @@ export const measurementTheme = {
       name: 'tileIcon',
       type: 'string',
       inputComponent: KpiIconInput,
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Tegels',
       name: 'tiles',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'measurementTile' } }],
-      validation: (rule: Rule) => rule.required(),
+      of: [{ type: 'reference', to: { type: 'measureTile' } }],
+      validation: REQUIRED,
     },
   ],
 };

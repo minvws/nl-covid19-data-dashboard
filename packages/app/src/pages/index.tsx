@@ -17,7 +17,7 @@ import {
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
+import { getTopicalStructureQuery, getThermometerEvents } from '~/queries/get-topical-structure-query';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors, MetricName } from '@corona-dashboard/common';
@@ -28,12 +28,13 @@ import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH, SEVER
 import { TrendIcon } from '~/domain/topical/types';
 import { CollapsibleSection } from '~/components/collapsible';
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
-import { ElementsQueryResult, getElementsQuery, getThermometerEvents } from '~/queries/get-elements-query';
+import { ElementsQueryResult, getElementsQuery } from '~/queries/get-elements-query';
 import { GetStaticPropsContext } from 'next';
 import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
+import { TopicalSanityData } from '~/queries/query-types';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -49,31 +50,35 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  ({ locale }: { locale: keyof Languages }) => ({
-    selectedTopicalData: getTopicalStructureQuery(locale),
-  }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       elements: ElementsQueryResult;
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
+      topicalStructure: TopicalSanityData;
     }>((context) => {
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('topical_page')},
         "elements": ${getElementsQuery('nl', ['' as MetricName], locale)}
+        "topicalStructure": ${getTopicalStructureQuery(locale)}
       }`;
     })(context);
     return {
       content: {
-        elements: content.elements,
-        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
+        elements: content.elements, //Todo check if is removable
+        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'), //Todo check if is movable to line 62
+        topicalStructure: content.topicalStructure,
       },
     };
   }
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, lastGenerated, selectedTopicalData } = props;
+  const { pageText, content, lastGenerated } = props;
+
+  const { topicalStructure } = content;
+
+  const { topicalConfig, measureTheme, thermometer } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -89,10 +94,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     md: `repeat(3, 1fr)`,
   };
 
-  const currentSeverityLevel = textNl.thermometer.current_indicator_level as SeverityLevels;
-  const currentSeverityLevelTexts = textNl.thermometer.indicator[`level_${currentSeverityLevel}`];
+  const currentSeverityLevel = thermometer.config.currentLevel as unknown as SeverityLevels;
+  const currentSeverityLevelTexts = thermometer.config.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
 
-  const thermometerEvents = getThermometerEvents(content.elements.thermometer, 'coronathermometer');
+  const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerEvents);
+
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 
   return (
@@ -100,14 +106,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       <Box bg={colors.white}>
         <MaxWidth id="content">
           <Box marginBottom={{ _: 4, md: 5 }} pt={{ _: 3, md: 5 }} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
-            <TopicalHeader title={selectedTopicalData.title} dynamicDescriptions={selectedTopicalData.dynamicDescription} />
+            <TopicalHeader title={topicalConfig.title} description={topicalConfig.description} />
           </Box>
 
-          {SEVERITY_LEVELS_LIST.includes(currentSeverityLevel) && (
+          {SEVERITY_LEVELS_LIST.includes(currentSeverityLevel) && currentSeverityLevelTexts && (
             <Box my={5} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
-                title={textNl.thermometer.title}
-                dynamicSubtitle={replaceVariablesInText(textNl.thermometer.description, {
+                title={thermometer.config.title}
+                dynamicSubtitle={replaceVariablesInText(thermometer.config.levelDescription, {
                   level: currentSeverityLevel,
                   label: currentSeverityLevelTexts.label,
                 })}
@@ -121,10 +127,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 })}
                 title={currentSeverityLevelTexts.title}
                 label={currentSeverityLevelTexts.label}
-                sourceLabel={textNl.thermometer.indicator.source_label}
-                datesLabel={textNl.thermometer.indicator.dates_label}
-                levelDescription={textNl.thermometer.indicator.level_description}
-                trendIcon={textNl.thermometer.indicator.trend_icon as TrendIcon}
+                sourceLabel={thermometer.config.sourceLabel}
+                datesLabel={thermometer.config.datesLabel}
+                levelDescription={thermometer.config.levelDescription}
+                trendIcon={thermometer.config.trendIcon as TrendIcon}
               />
 
               {thermometerEvents && thermometerEvents.length !== 0 && startDate && endDate && (
@@ -133,13 +139,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   endDate={endDate}
                   timelineEvents={thermometerEvents}
                   labels={{
-                    heading: textNl.thermometer.timeline.title,
-                    today: textNl.thermometer.timeline.today_label,
-                    tooltipCurrentEstimation: textNl.thermometer.timeline.tooltip_current_estimation_label,
+                    heading: thermometer.config.title,
+                    today: thermometer.timeline.legendLabel,
+                    tooltipCurrentEstimation: thermometer.timeline.tooltipLabel,
                   }}
                   legendItems={[
                     {
-                      label: textNl.thermometer.timeline.legend_label,
+                      label: thermometer.timeline.legendLabel,
                       shape: 'custom',
                       shapeComponent: <TimelineMarker color={colors.gray6} />,
                     },
@@ -148,76 +154,70 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               )}
 
               <Box my={{ _: 3, md: 4 }} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
-                <CollapsibleSection summary={textNl.thermometer.collapsible_title} textColor={colors.black} borderColor={colors.gray3}>
+                <CollapsibleSection summary={thermometer.config.collapsibleTitle} textColor={colors.black} borderColor={colors.gray3}>
                   <Box my={3}>
                     <OrderedList>
                       {Object.values(SeverityLevels).map((severityLevel, index) => {
-                        const indicatorTexts = textNl.thermometer.indicator[`level_${severityLevel}`];
+                        const indicatorTexts = thermometer.config.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
                         return (
-                          <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                          indicatorTexts && (
+                            <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                          )
                         );
                       })}
                     </OrderedList>
                   </Box>
                 </CollapsibleSection>
               </Box>
-              <Markdown content={textNl.thermometer.article_reference} />
+              <Markdown content={thermometer.config.articleReference} />
             </Box>
           )}
 
           <Box spacing={{ _: 5, md: 6 }} px={{ _: 3, sm: 4 }}>
-            {selectedTopicalData.themes
-              .sort((a, b) => a.index - b.index)
-              .map((theme) => {
-                return (
-                  <Box key={theme.index}>
-                    <Box marginBottom={4}>
-                      <TopicalThemeHeader title={theme.title} dynamicSubtitle={theme.dynamicSubtitle} icon={theme.icon} />
-                    </Box>
-                    <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={{ _: 4, sm: 5 }}>
-                      {theme.themeTiles
-                        .sort((a, b) => a.index - b.index)
-                        .map((themeTile) => {
-                          return (
-                            <TopicalTile
-                              trendIcon={themeTile.trendIcon}
-                              title={themeTile.title}
-                              tileIcon={themeTile.tileIcon}
-                              dynamicDescription={themeTile.dynamicDescription}
-                              cta={themeTile.cta}
-                              key={themeTile.index}
-                              kpiValue={themeTile.kpiValue}
-                            />
-                          );
-                        })}
-                    </Box>
-                    <TopicalLinksList
-                      labels={{
-                        DESKTOP: theme.moreLinks.label.DESKTOP,
-                        MOBILE: theme.moreLinks.label.MOBILE,
-                      }}
-                      links={theme.moreLinks.links}
-                    />
+            {topicalStructure.topicalConfig.themes.map((theme) => {
+              return (
+                <Box key={theme.title}>
+                  <Box marginBottom={4}>
+                    <TopicalThemeHeader title={theme.title} dynamicSubtitle={theme.subTitle} icon={theme.themeIcon} />
                   </Box>
-                );
-              })}
+                  <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={{ _: 4, sm: 5 }}>
+                    {theme.tiles.map((themeTile) => {
+                      return (
+                        <TopicalTile
+                          trendIcon={themeTile.trendIcon}
+                          title={themeTile.title}
+                          tileIcon={themeTile.tileIcon}
+                          dynamicDescription={themeTile.description}
+                          cta={themeTile.cta}
+                          key={themeTile.title}
+                          kpiValue={themeTile.kpiValue}
+                        />
+                      );
+                    })}
+                  </Box>
+                  {/* <TopicalLinksList
+                    labels={{
+                      DESKTOP: theme.moreLinks.label.DESKTOP,
+                      MOBILE: theme.moreLinks.label.MOBILE,
+                    }}
+                    links={theme.moreLinks.links}
+                  /> */}
+                </Box>
+              );
+            })}
 
-            <Box>
+            {/* <Box>
               <Box marginBottom={4}>
-                <TopicalThemeHeader
-                  title={selectedTopicalData.measures.title}
-                  dynamicSubtitle={selectedTopicalData.measures.dynamicSubtitle}
-                  icon={selectedTopicalData.measures.icon}
-                />
+                <TopicalThemeHeader title={topicalStructure.measures.title} dynamicSubtitle={topicalStructure.measures.dynamicSubtitle} icon={topicalStructure.measures.icon} />
               </Box>
               <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={5}>
-                {selectedTopicalData.measures.measureTiles
+                {topicalStructure.measures.measureTiles
                   .sort((a, b) => a.index - b.index)
                   .map((measureTile) => {
                     return <TopicalMeasureTile icon={measureTile.icon} title={measureTile.title} key={measureTile.index} />;
                   })}
               </Box>
-            </Box>
+            </Box> */}
           </Box>
         </MaxWidth>
 

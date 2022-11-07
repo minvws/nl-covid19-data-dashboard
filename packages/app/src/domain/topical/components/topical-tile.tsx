@@ -13,24 +13,19 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+import { Cta } from '~/queries/query-types';
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN';
   color: string;
 };
-
-type Cta = {
-  label: string;
-  href: string;
-};
-
 interface TopicalTileProps {
   title: string;
   tileIcon: TopicalIcon;
   trendIcon: TrendIcon | null;
   dynamicDescription: string;
   kpiValue: number | null | string;
-  cta: Cta | null;
+  cta: Cta;
 }
 
 export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
@@ -115,7 +110,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
 
         {cta && (
           <Box display="flex" justifyContent="center" alignItems="center" bg={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
-            <TextWithIcon text={cta.label} icon={<ChevronRight />} />
+            <TextWithIcon text={cta.title} icon={<ChevronRight />} />
           </Box>
         )}
       </>

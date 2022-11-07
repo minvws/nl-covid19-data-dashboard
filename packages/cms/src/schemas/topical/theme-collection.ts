@@ -1,4 +1,5 @@
 import { Rule } from '~/sanity';
+import { REQUIRED } from '../../validation';
 
 export const themeCollection = {
   type: 'document',
@@ -6,11 +7,11 @@ export const themeCollection = {
   name: 'themeCollection',
   fields: [
     {
-      title: 'Thema\'s',
+      title: "Thema's",
       name: 'themes',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'theme' } }],
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
   ],
 };

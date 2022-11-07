@@ -1,5 +1,4 @@
-
-import { Rule } from '~/sanity';
+import { REQUIRED } from '../../validation';
 
 export const topicalPageConfig = {
   name: 'topicalPageConfig',
@@ -11,21 +10,21 @@ export const topicalPageConfig = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Omschrijving',
       name: 'description',
       type: 'localeRichContentBlock',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
-      title: 'Thema\'s',
-      description: 'De themas onderverdeeld in tegels',
+      title: "Thema's",
+      description: 'De themas onderverdeeld in tegels en links',
       name: 'themes',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'theme' } }],
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
   ],
 };

@@ -1,23 +1,23 @@
-import { Rule } from '~/sanity';
-import { KpiIconInput, KpiIconKey } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { REQUIRED } from '../../validation';
 
-export const measurementTile = {
+export const measureTile = {
   type: 'document',
   title: 'Maatregelen tegel',
-  name: 'measurementTile',
+  name: 'measureTile',
   fields: [
     {
       title: 'Tegel icoon',
       name: 'tileIcon',
       type: 'string',
       inputComponent: KpiIconInput,
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Omschrijving',
       name: 'description',
       type: 'localeRichContentBlock',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
   ],
   preview: {

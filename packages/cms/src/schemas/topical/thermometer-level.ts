@@ -1,8 +1,7 @@
 import { Rule } from '~/sanity';
 
-export const THERMOMETER_LEVELS = [
-  1,2,3,4
-]
+import { THERMOMETER_LEVELS, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
+import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
 
 export const thermometerLevel = {
   type: 'document',
@@ -18,19 +17,19 @@ export const thermometerLevel = {
         list: THERMOMETER_LEVELS,
         layout: 'dropdown',
       },
-      validation: (rule: Rule) => rule.required().integer().max(4).min(1),
+      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
     },
     {
       title: 'Stand naam',
       name: 'label',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Omschrijving',

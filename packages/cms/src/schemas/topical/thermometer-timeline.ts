@@ -1,5 +1,4 @@
-
-import { Rule } from '~/sanity';
+import { REQUIRED } from '../../validation';
 
 export const thermometerTimeline = {
   name: 'thermometerTimeline',
@@ -11,27 +10,33 @@ export const thermometerTimeline = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
-      title: 'Lagenda label',
-      description: 'Het label bij de lagenda',
+      title: 'Legenda label',
+      description: 'Het label bij de legenda',
       name: 'legendLabel',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Tijdsindicator',
       description: 'Het label bij de huidige dag',
       name: 'todayLabel',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Tooltip label',
       name: 'tooltipCurrentEstimationLabel',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
+    },
+    {
+      title: 'Tijdlijn gebeurtenissen',
+      name: 'thermometerTimelineEvents',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'thermometerTimelineEvent' } }],
     },
   ],
 };
