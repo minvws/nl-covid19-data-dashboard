@@ -17,6 +17,7 @@ import { Cta } from '~/queries/query-types';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
 import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
+import { Metadata, MetadataProps } from '~/components/metadata';
 
 interface TopicalTileProps {
   title: string;
@@ -25,9 +26,10 @@ interface TopicalTileProps {
   description: PortableTextEntry[];
   kpiValue: string | null;
   cta: Cta;
+  metadataText: MetadataProps;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta }: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, metadataText }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
@@ -104,6 +106,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             <Box display="flex" alignItems="center">
               <RichContent blocks={description} elementAlignment="start" />
             </Box>
+            {metadataText && <Metadata {...metadataText} isTileFooter />}
           </Box>
         </Box>
 
