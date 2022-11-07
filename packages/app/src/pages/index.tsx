@@ -17,8 +17,8 @@ import {
 import { isPresent } from 'ts-is-present';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getTopicalPageData } from '~/queries/get-topical-page-data';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectTopicalData } from '~/static-props/get-data';
+import { getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors, MetricName } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
@@ -49,9 +49,8 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  getTopicalPageData('nl', []),
   ({ locale }: { locale: keyof Languages }) => ({
-    selectedTopicalData: selectTopicalData(locale),
+    selectedTopicalData: getTopicalStructureQuery(locale),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
