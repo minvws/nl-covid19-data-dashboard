@@ -36,6 +36,7 @@ import { TimelineMarker } from '~/components/time-series-chart/components/timeli
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { TopicalSanityData } from '~/queries/query-types';
+import { TopicalIcon } from '@corona-dashboard/common/src/types';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -102,15 +103,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 
-  console.log(currentSeverityLevelTexts);
-
-  const filename2IconName = (filename: string) =>
-    Object.keys(iconName2filename).filter((iconName: IconName) => {
-      console.log(iconName2filename[iconName] === filename);
-      return iconName2filename[iconName] === filename;
-    });
-
-  console.log(filename2IconName('bar_chart.svg'));
+  const filename2IconName = (filename: string) => Object.keys(iconName2filename).find((iconName: IconName) => iconName2filename[iconName] === filename);
 
   // return <Box>Working...</Box>;
 
@@ -202,7 +195,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         <TopicalTile
                           trendIcon={themeTile.trendIcon}
                           title={themeTile.title}
-                          tileIcon={filename2IconName(themeTile.tileIcon)}
+                          tileIcon={filename2IconName(themeTile.tileIcon) as TopicalIcon}
                           dynamicDescription={themeTile.description}
                           cta={themeTile.cta}
                           key={themeTile.title}
@@ -211,13 +204,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       );
                     })}
                   </Box>
-                  {/* <TopicalLinksList
-                    labels={{
-                      DESKTOP: theme.moreLinks.label.DESKTOP,
-                      MOBILE: theme.moreLinks.label.MOBILE,
-                    }}
-                    links={theme.moreLinks.links}
-                  /> */}
+                  {theme.links && (
+                    <TopicalLinksList
+                      labels={{
+                        DESKTOP: theme.linksLabelDesktop,
+                        MOBILE: theme.linksLabelMobile,
+                      }}
+                      links={theme.links}
+                    />
+                  )}
                 </Box>
               );
             })}

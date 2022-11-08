@@ -9,8 +9,7 @@ import { asResponsiveArray } from '~/style/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 interface TopicalLink {
-  index: number;
-  label: string;
+  title: string;
   href: string;
 }
 
@@ -31,13 +30,7 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
   const labelledById = uuidv4();
 
   return (
-    <Box
-      display="flex"
-      flexDirection={{ _: 'column', sm: 'row' }}
-      alignItems="flex-start"
-      spacing={{ _: 3, sm: 0 }}
-      width="100%"
-    >
+    <Box display="flex" flexDirection={{ _: 'column', sm: 'row' }} alignItems="flex-start" spacing={{ _: 3, sm: 0 }} width="100%">
       <Text
         id={labelledById}
         css={css({
@@ -63,12 +56,7 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
           .sort((linkA, linkB) => linkA.index - linkB.index)
           .map((link) => (
             <li key={link.label}>
-              <LinkWithIcon
-                href={link.href}
-                icon={<ChevronRight />}
-                iconPlacement="right"
-                showAsButton={breakpoints.sm}
-              >
+              <LinkWithIcon href={link.href} icon={<ChevronRight />} iconPlacement="right" showAsButton={breakpoints.sm}>
                 {link.label}
               </LinkWithIcon>
             </li>
