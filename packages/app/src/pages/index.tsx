@@ -21,6 +21,7 @@ import { getTopicalStructureQuery, getThermometerEvents } from '~/queries/get-to
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors, MetricName } from '@corona-dashboard/common';
+import { iconName2filename, IconName } from '@corona-dashboard/icons';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText } from '~/utils';
 import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
@@ -102,6 +103,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 
   console.log(currentSeverityLevelTexts);
+
+  const filename2IconName = (filename: string) =>
+    Object.keys(iconName2filename).filter((iconName: IconName) => {
+      console.log(iconName2filename[iconName] === filename);
+      return iconName2filename[iconName] === filename;
+    });
+
+  console.log(filename2IconName('bar_chart.svg'));
 
   // return <Box>Working...</Box>;
 
@@ -193,7 +202,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         <TopicalTile
                           trendIcon={themeTile.trendIcon}
                           title={themeTile.title}
-                          tileIcon={themeTile.tileIcon}
+                          tileIcon={filename2IconName(themeTile.tileIcon)}
                           dynamicDescription={themeTile.description}
                           cta={themeTile.cta}
                           key={themeTile.title}
