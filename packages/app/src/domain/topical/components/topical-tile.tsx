@@ -67,7 +67,6 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             })}
           >
             <Box
-              display="block"
               fontSize={{ _: fontSizes[6], xs: fontSizes[7] }}
               paddingLeft={asResponsiveArray({ _: space[3], xs: space[4] })}
               paddingTop={asResponsiveArray({ _: space[3], xs: space[4] })}
