@@ -30,10 +30,10 @@ interface ThermometerTimeLine {
   tooltipLabel: string;
   todayLabel: string;
   legendLabel: string;
-  ThermometerEvents: ThermometerEvent[];
+  ThermometerTimelineEvents: ThermometerTimelineEvent[];
 }
 
-export interface ThermometerEvent {
+export interface ThermometerTimelineEvent {
   title: string;
   description: string;
   level: number;
@@ -45,7 +45,7 @@ interface ThermometerLevel {
   level: SeverityLevel;
   label: string;
   title: string;
-  description: string;
+  description: string | null;
 }
 
 interface TopicalConfig {
@@ -56,8 +56,8 @@ interface TopicalConfig {
 
 interface Theme {
   title: string;
+  subTitle: string | null;
   themeIcon: TopicalIcon;
-  subTitle: string;
 }
 
 interface MeasureTheme extends Theme {
@@ -66,6 +66,8 @@ interface MeasureTheme extends Theme {
 
 interface TopicalTheme extends Theme {
   tiles: TopicalTile[];
+  linksLabel: string | null;
+  links: ThemeLink[] | null;
 }
 
 interface BaseTile {
@@ -78,6 +80,10 @@ interface TopicalTile extends BaseTile {
   kpiValue: string;
   cta: Cta;
   trendIcon: TrendIcon;
+}
+
+interface ThemeLink {
+  cta: Cta;
 }
 
 export interface Cta {

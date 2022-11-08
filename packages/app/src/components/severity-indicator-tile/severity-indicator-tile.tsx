@@ -15,7 +15,7 @@ import { mapStringToColors } from './logic/map-string-to-colors';
 import { setTrendIcon } from '~/components/severity-indicator-tile/logic/set-trend-icon';
 
 interface SeverityIndicatorTileProps {
-  description: string;
+  description: string | null;
   label: string;
   level: SeverityLevels;
   title: string;
@@ -55,11 +55,10 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
       </Box>
 
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`} as="figcaption">
-        <Markdown content={description} />
+        {description && <Markdown content={description} />}``
         <Box display={hasIconProps ? 'flex' : 'block'} alignItems="center" mt={3} css={css({ gap: 2 })}>
           {hasIconProps && <TrendIconWrapper color={mapStringToColors(iconColor)}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
-
-          <Markdown content={levelDescription} />
+          {levelDescription && <Markdown content={levelDescription} />}
         </Box>
         <Box my={3}>
           <InlineText color="gray7">{sourceLabel}</InlineText>

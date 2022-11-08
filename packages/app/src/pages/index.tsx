@@ -59,8 +59,8 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('topical_page')},
-        "elements": ${getElementsQuery('nl', ['' as MetricName], locale)}
-        "topicalStructure": ${getTopicalStructureQuery(locale)}
+        "elements": ${getElementsQuery('nl', ['' as MetricName], locale)},
+        "topicalStructure": ${getTopicalStructureQuery('nl')}
       }`;
     })(context);
     return {
@@ -97,9 +97,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const currentSeverityLevel = thermometer.config.currentLevel as unknown as SeverityLevels;
   const currentSeverityLevelTexts = thermometer.config.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
 
-  const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerEvents);
+  const thermometerEvents = thermometer.timeline?.ThermometerTimelineEvents.length ? getThermometerEvents(thermometer.timeline.ThermometerTimelineEvents) : undefined;
 
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
+
+  console.log(currentSeverityLevelTexts);
+
+  // return <Box>Working...</Box>;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -113,7 +117,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <Box my={5} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
                 title={thermometer.config.title}
-                dynamicSubtitle={replaceVariablesInText(thermometer.config.levelDescription, {
+                subtitle={replaceVariablesInText(thermometer.config.levelDescription, {
                   level: currentSeverityLevel,
                   label: currentSeverityLevelTexts.label,
                 })}
@@ -122,9 +126,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
-                description={replaceVariablesInText(currentSeverityLevelTexts.description, {
-                  label: currentSeverityLevelTexts.label.toLowerCase(),
-                })}
+                description={
+                  currentSeverityLevelTexts.description &&
+                  replaceVariablesInText(currentSeverityLevelTexts.description, {
+                    label: currentSeverityLevelTexts.label.toLowerCase(),
+                  })
+                }
                 title={currentSeverityLevelTexts.title}
                 label={currentSeverityLevelTexts.label}
                 sourceLabel={thermometer.config.sourceLabel}
@@ -178,7 +185,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               return (
                 <Box key={theme.title}>
                   <Box marginBottom={4}>
-                    <TopicalThemeHeader title={theme.title} dynamicSubtitle={theme.subTitle} icon={theme.themeIcon} />
+                    <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={theme.themeIcon} />
                   </Box>
                   <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={{ _: 4, sm: 5 }}>
                     {theme.tiles.map((themeTile) => {

@@ -1,12 +1,12 @@
-import { ThermometerEvent } from './query-types';
+import { ThermometerTimelineEvent } from './query-types';
 import { SeverityIndicatorTimelineEventConfig } from '~/components/severity-indicator-tile/components/timeline/timeline';
 
 export function getTopicalStructureQuery(locale: string) {
   const query = `// groq
   {
-    'TopicalConfig': *[
-        _type == 'topicalPageConfig'
-    ]{
+    'topicalConfig': *[
+        _type == 'topicalPageConfig' && !(_id in path("drafts.**"))
+    ][0]{
       'title': title.${locale},
       'description': description.${locale},
       'themes': themes[]->{
@@ -30,8 +30,8 @@ export function getTopicalStructureQuery(locale: string) {
       },
     },
     'measureTheme': *[
-      _type == 'measureTheme'
-    ]{
+      _type == 'measureTheme' && !(_id in path("drafts.**"))
+    ][0]{
       'title': title.${locale},
       tileIcon,
       'subTitle': subTitle.${locale},
@@ -42,8 +42,8 @@ export function getTopicalStructureQuery(locale: string) {
     },
     'thermometer': {
       'config': *[
-        _type == 'thermometer'
-      ]{
+        _type == 'thermometer' && !(_id in path("drafts.**"))
+      ][0]{
         'title': title.${locale},
         currentLevel,
         'thermometerLevels': thermometerLevels[]->{
@@ -63,8 +63,8 @@ export function getTopicalStructureQuery(locale: string) {
         },
       },
       'timeline': *[
-        _type == 'thermometerTimeline'
-      ]{
+        _type == 'thermometerTimeline' && !(_id in path("drafts.**"))
+      ][0]{
         'title': title.${locale},
         'tooltipLabel': tooltipCurrentEstimationLabel.${locale},
         'todayLabel': todayLabel.${locale},
@@ -84,7 +84,7 @@ export function getTopicalStructureQuery(locale: string) {
   return query;
 }
 
-export const getThermometerEvents = (thermometerEvents: ThermometerEvent[]) =>
+export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[]) =>
   thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => ({
     title: thermometerEvent.title,
     description: thermometerEvent.description,

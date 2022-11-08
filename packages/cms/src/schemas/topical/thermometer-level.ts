@@ -40,14 +40,14 @@ export const thermometerLevel = {
   preview: {
     select: {
       title: 'label.nl',
-      subtitle: 'level'
+      subtitle: 'level',
     },
-    prepare(selection: { title: string; subtitle: string; }) {
-      const {title, subtitle} = selection
+    prepare(selection: { title: string; subtitle: string }) {
+      const { title, subtitle } = selection;
       return {
         title: title,
-        subtitle: `Stand ${subtitle}`
-      }
-    }
+        subtitle: `Stand ${subtitle}`,
+      };
+    },
   },
 };

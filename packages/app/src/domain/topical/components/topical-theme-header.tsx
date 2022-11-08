@@ -8,28 +8,26 @@ import theme from '~/style/theme';
 
 interface TopicalThemeHeaderProps {
   title: string;
-  dynamicSubtitle: string;
+  subtitle: string | null;
   icon: TopicalIcon;
 }
 
-export const TopicalThemeHeader = ({
-  title,
-  dynamicSubtitle,
-  icon,
-}: TopicalThemeHeaderProps) => {
+export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeaderProps) => {
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
         {icon && (
           <TopicalThemeHeaderIcon>
-            <DynamicIcon name={icon} aria-hidden="true"  />
+            <DynamicIcon name={icon} aria-hidden="true" />
           </TopicalThemeHeaderIcon>
         )}
         <Heading level={2}>{title}</Heading>
       </Box>
-      <Box fontSize={3}>
-      <Markdown content={dynamicSubtitle} />
-      </Box>
+      {subtitle && (
+        <Box fontSize={3}>
+          <Markdown content={subtitle} />
+        </Box>
+      )}
     </Box>
   );
 };
