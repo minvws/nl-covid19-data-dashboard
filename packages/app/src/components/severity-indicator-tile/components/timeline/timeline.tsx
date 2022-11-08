@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common';
+import { colors, middleOfDayInSeconds } from '@corona-dashboard/common';
 import { ReactNode, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
@@ -110,10 +110,12 @@ interface TimelineBarArrowProps {
 }
 
 const TimelineBarArrow = ({ children, startDate, endDate }: TimelineBarArrowProps) => {
-  const today = useCurrentDate();
-  const arrowLeftOffset = getTimelineBarArrowOffset(today, startDate, endDate) || null;
+  const todayDate = useCurrentDate();
+  const middleOfTodaysDateInSeconds = middleOfDayInSeconds(todayDate.getTime() / 1000);
 
-  if (!arrowLeftOffset) return null;
+  if (middleOfTodaysDateInSeconds > middleOfDayInSeconds(endDate)) return null;
+
+  const arrowLeftOffset = getTimelineBarArrowOffset(todayDate, startDate, endDate);
 
   return (
     <Box alignItems="center" display="flex" flexDirection="column" left={`${arrowLeftOffset}%`} position="absolute" top="-40px" transform="translateX(-50%)">
