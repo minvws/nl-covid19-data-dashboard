@@ -12,10 +12,6 @@ interface TimelineBarPartsProps {
   isLast?: boolean;
 }
 
-/**
- * TODO: An improvement would be to divide this bar part further into parts
- * where each part refers to a day in the date range this bar part represents.
- */
 export const TimelineBarPart = ({ children, color, size = 10, width, isFirst = false, isLast = false }: TimelineBarPartsProps) => {
   const borderRadius = isFirst ? `${size / 2}px 0 0 ${size / 2}px` : null;
 
