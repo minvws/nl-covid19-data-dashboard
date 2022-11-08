@@ -1,5 +1,6 @@
 import { Rule } from '~/sanity';
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { REQUIRED } from '../../validation';
 
 export const theme = {
   type: 'document',
@@ -7,16 +8,10 @@ export const theme = {
   name: 'theme',
   fields: [
     {
-      title: 'Index',
-      name: 'index',
-      type: 'number',
-      validation: (rule: Rule) => rule.required(),
-    },
-    {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Ondertitel',
@@ -25,30 +20,33 @@ export const theme = {
     },
     {
       title: 'Thema icoon',
-      name: 'tileIcon',
+      name: 'themeIcon',
       type: 'string',
       inputComponent: KpiIconInput,
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Tegels',
       name: 'tiles',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'themeTile' } }],
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
+    },
+    {
+      title: 'Links label',
+      name: 'linksLabel',
+      type: 'localeString',
+    },
+    {
+      title: 'Links',
+      name: 'links',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'themeLink' } }],
     },
   ],
   preview: {
     select: {
       title: 'title.nl',
-      subtitle: 'index'
     },
-    prepare(selection: { title: string; subtitle: string; }) {
-      const {title, subtitle} = selection
-      return {
-        title: title,
-        subtitle: `${subtitle} is de index van dit thema`
-      }
-    }
   },
 };

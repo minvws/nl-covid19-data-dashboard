@@ -1,15 +1,16 @@
+
 import { REQUIRED } from '../../validation';
 
-export const themeTileCollection = {
+export const measureTileCollection = {
   type: 'object',
   title: 'Thema tegel collectie',
-  name: 'themeTileCollection',
+  name: 'measureTileCollection',
   fields: [
     {
       title: 'Tegels',
       name: 'tiles',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'themeTile' } }],
+      of: [{ type: 'reference', to: { type: 'measureTile' } }],
       validation: REQUIRED,
     },
   ],

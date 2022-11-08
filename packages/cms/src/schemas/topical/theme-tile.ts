@@ -1,6 +1,5 @@
-import { Rule } from '~/sanity';
-import { SanityDocument } from '@sanity/types'
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { REQUIRED } from '../../validation';
 
 export const themeTile = {
   type: 'document',
@@ -8,29 +7,23 @@ export const themeTile = {
   name: 'themeTile',
   fields: [
     {
-      title: 'Index',
-      name: 'index',
-      type: 'number',
-      validation: (rule: Rule) => rule.required(),
-    },
-    {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Tegel icoon',
       name: 'tileIcon',
       type: 'string',
       inputComponent: KpiIconInput,
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Omschrijving',
       name: 'description',
       type: 'localeRichContentBlock',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'KPI waarde',
@@ -51,14 +44,6 @@ export const themeTile = {
   preview: {
     select: {
       title: 'title.nl',
-      subtitle: 'index'
     },
-    prepare(selection: { title: string; subtitle: string; }) {
-      const {title, subtitle} = selection
-      return {
-        title: title,
-        subtitle: `${subtitle} is de index van dit thema`
-      }
-    }
   },
 };

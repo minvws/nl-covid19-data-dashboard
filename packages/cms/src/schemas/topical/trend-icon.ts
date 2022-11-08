@@ -1,4 +1,4 @@
-import { Rule } from '~/sanity';
+import { REQUIRED } from '../../validation';
 
 export const trendIcon = {
   name: 'trendIcon',
@@ -15,7 +15,7 @@ export const trendIcon = {
         list: [{value: 'RED', title: 'Rood'}, {value: 'GREEN', title: 'Groen'}],
         layout: 'dropdown',
       },
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Richting',
@@ -26,7 +26,7 @@ export const trendIcon = {
         list: [{value: 'UP', title: 'Omhoog'}, {value: 'UP', title: 'Omlaag'}],
         layout: 'dropdown',
       },
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
   ],
 };

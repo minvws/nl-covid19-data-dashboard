@@ -1,5 +1,10 @@
 import { Rule } from '~/sanity';
-import {THERMOMETER_LEVELS} from './thermometer-level';
+import { SeverityLevels } from '@corona-dashboard/app/src/components/severity-indicator-tile/types';
+import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
+
+export const THERMOMETER_LEVELS = Object.values(SeverityLevels).map((severityLevel) => parseInt(severityLevel, 10));
+export const THERMOMETER_MIN_VALUE = Math.min(...THERMOMETER_LEVELS);
+export const THERMOMETER_MAX_VALUE = Math.max(...THERMOMETER_LEVELS);
 
 export const thermometer = {
   type: 'object',
@@ -10,7 +15,7 @@ export const thermometer = {
       title: 'De titel van de thermometer',
       name: 'title',
       type: 'localeString',
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED,
     },
     {
       title: 'Huidige stand',
@@ -20,14 +25,14 @@ export const thermometer = {
         list: THERMOMETER_LEVELS,
         layout: 'dropdown',
       },
-      validation: (rule: Rule) => rule.required().integer().max(4).min(1),
+      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
     },
     {
       title: 'Standen',
       name: 'thermometerLevels',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'thermometerLevel' } }],
-      validation: (rule: Rule) => rule.required(),
+      validation: REQUIRED
     },
     {
       title: 'Datum tekst',
@@ -61,5 +66,10 @@ export const thermometer = {
       name: 'trendIcon',
       type: 'trendIcon',
     },
+    {
+      title: 'Tijdlijn',
+      name: 'timeline',
+      type: 'thermometerTimeline'
+    }
   ],
 };
