@@ -51,13 +51,17 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
       >
         {links &&
           links.length &&
-          links.map((link) => (
-            <li key={link.cta.title}>
-              <LinkWithIcon href={link.cta.href} icon={<ChevronRight />} iconPlacement="right" showAsButton={breakpoints.sm}>
-                {link.cta.title}
-              </LinkWithIcon>
-            </li>
-          ))}
+          links.map((link) => {
+            {
+              link.cta.href && link.cta.title && (
+                <li key={link.cta.title}>
+                  <LinkWithIcon href={link.cta.href} icon={<ChevronRight />} iconPlacement="right" showAsButton={breakpoints.sm}>
+                    {link.cta.title}
+                  </LinkWithIcon>
+                </li>
+              );
+            }
+          })}
       </ul>
     </Box>
   );

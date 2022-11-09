@@ -57,7 +57,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
         {timelineEvents.map((timelineEvent, i) => (
           <TimelineBarPart
             key={i}
-            color={getSeverityColor(timelineEvent.level?.toString() as SeverityLevels)}
+            color={getSeverityColor(timelineEvent.level as SeverityLevels)}
             isFirst={i === 0}
             isLast={i + 1 === timelineEvents.length}
             size={size}
@@ -70,7 +70,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
             )}
 
             <TimelineEvent
-              color={getSeverityColor(timelineEvent.level?.toString() as SeverityLevels)}
+              color={getSeverityColor(timelineEvent.level as SeverityLevels)}
               isHighlighted={i === index}
               isSelected={i === index}
               onHide={() => hideTooltip(i)}

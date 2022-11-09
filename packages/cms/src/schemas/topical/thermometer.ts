@@ -1,10 +1,9 @@
 import { Rule } from '~/sanity';
-import { SeverityLevels } from '@corona-dashboard/app/src/components/severity-indicator-tile/types';
+import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
 import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
 
-export const THERMOMETER_LEVELS = Object.values(SeverityLevels).map((severityLevel) => parseInt(severityLevel, 10));
-export const THERMOMETER_MIN_VALUE = Math.min(...THERMOMETER_LEVELS);
-export const THERMOMETER_MAX_VALUE = Math.max(...THERMOMETER_LEVELS);
+export const THERMOMETER_MIN_VALUE = Math.min(...SEVERITY_LEVELS_LIST);
+export const THERMOMETER_MAX_VALUE = Math.max(...SEVERITY_LEVELS_LIST);
 
 export const thermometer = {
   type: 'object',
@@ -22,7 +21,7 @@ export const thermometer = {
       name: 'currentLevel',
       type: 'number',
       options: {
-        list: THERMOMETER_LEVELS,
+        list: SEVERITY_LEVELS_LIST,
         layout: 'dropdown',
       },
       validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
@@ -32,7 +31,7 @@ export const thermometer = {
       name: 'thermometerLevels',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'thermometerLevel' } }],
-      validation: REQUIRED
+      validation: REQUIRED,
     },
     {
       title: 'Datum tekst',
@@ -45,6 +44,7 @@ export const thermometer = {
       description: 'De omschrijving spcifiek voor de huidige themrmometer stand bij de trendIcon',
       name: 'levelDescription',
       type: 'localeString',
+      validation: REQUIRED,
     },
     {
       title: 'Bron tekst',
@@ -60,6 +60,7 @@ export const thermometer = {
       title: 'Titel van uitklapbare sectie',
       name: 'collapsibleTitle',
       type: 'localeString',
+      validation: REQUIRED,
     },
     {
       title: 'Titel van standen informatie',
@@ -69,7 +70,8 @@ export const thermometer = {
     {
       title: 'Tijdlijn',
       name: 'timeline',
-      type: 'thermometerTimeline'
-    }
+      type: 'thermometerTimeline',
+      validation: REQUIRED,
+    },
   ],
 };

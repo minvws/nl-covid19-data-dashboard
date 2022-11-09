@@ -8,22 +8,26 @@ export const trendIcon = {
   fields: [
     {
       title: 'Kleur',
-      description: 'De themas onderverdeeld in tegels',
       name: 'color',
       type: 'string',
       options: {
-        list: [{value: 'RED', title: 'Rood'}, {value: 'GREEN', title: 'Groen'}],
+        list: [
+          { value: 'RED', title: 'Rood' },
+          { value: 'GREEN', title: 'Groen' },
+        ],
         layout: 'dropdown',
       },
       validation: REQUIRED,
     },
     {
       title: 'Richting',
-      description: 'De themas onderverdeeld in tegels',
       name: 'direction',
       type: 'string',
       options: {
-        list: [{value: 'UP', title: 'Omhoog'}, {value: 'UP', title: 'Omlaag'}],
+        list: [
+          { value: 'UP', title: 'Omhoog' },
+          { value: 'DOWN', title: 'Omlaag' },
+        ],
         layout: 'dropdown',
       },
       validation: REQUIRED,

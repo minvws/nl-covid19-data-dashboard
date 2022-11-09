@@ -10,7 +10,7 @@ import { Box } from '~/components/base';
 interface IndicatorLevelDescriptionProps {
   level: SeverityLevel;
   label: string;
-  description: string | null;
+  description: string;
 }
 
 export const IndicatorLevelDescription = ({ level, label, description }: IndicatorLevelDescriptionProps) => {
@@ -26,13 +26,11 @@ export const IndicatorLevelDescription = ({ level, label, description }: Indicat
       >
         <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
         <BoldText>{label}</BoldText>
-        {description && (
-          <Text css={css({ gridColumnStart: asResponsiveArray({ _: 1, sm: 2 }), gridColumnEnd: 3 })}>
-            {replaceVariablesInText(description.split('**').join(''), {
-              label: label.toLowerCase(),
-            })}
-          </Text>
-        )}
+        <Text css={css({ gridColumnStart: asResponsiveArray({ _: 1, sm: 2 }), gridColumnEnd: 3 })}>
+          {replaceVariablesInText(description.split('**').join(''), {
+            label: label.toLowerCase(),
+          })}
+        </Text>
       </Box>
     </li>
   );

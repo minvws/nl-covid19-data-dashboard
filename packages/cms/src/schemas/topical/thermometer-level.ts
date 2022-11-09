@@ -1,6 +1,6 @@
 import { Rule } from '~/sanity';
-
-import { THERMOMETER_LEVELS, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
+import { THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
+import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
 import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
 
 export const thermometerLevel = {
@@ -14,7 +14,7 @@ export const thermometerLevel = {
       name: 'level',
       type: 'number',
       options: {
-        list: THERMOMETER_LEVELS,
+        list: SEVERITY_LEVELS_LIST,
         layout: 'dropdown',
       },
       validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
@@ -26,15 +26,10 @@ export const thermometerLevel = {
       validation: REQUIRED,
     },
     {
-      title: 'Titel',
-      name: 'title',
-      type: 'localeString',
-      validation: REQUIRED,
-    },
-    {
       title: 'Omschrijving',
       name: 'description',
       type: 'localeString',
+      validation: REQUIRED,
     },
   ],
   preview: {

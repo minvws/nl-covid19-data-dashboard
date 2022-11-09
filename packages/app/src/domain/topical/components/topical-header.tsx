@@ -13,7 +13,7 @@ export const TopicalHeader = ({ title, description }: TopicalHeaderProps) => {
     <Box spacing={4}>
       <Heading level={1}>{title}</Heading>
       <Box spacing={3} fontSize={3}>
-        <RichContent blocks={description} />
+        <RichContent blocks={description} elementAlignment="start" />
       </Box>
     </Box>
   );

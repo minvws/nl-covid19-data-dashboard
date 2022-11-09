@@ -39,7 +39,7 @@ export const theme = {
     },
     {
       title: 'Label voor desktop',
-      name: 'labelDesptop',
+      name: 'labelDesktop',
       type: 'localeString',
       validation: REQUIRED,
     },

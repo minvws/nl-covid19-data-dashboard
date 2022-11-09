@@ -1,15 +1,11 @@
-import { SeverityLevels } from '../types';
+import { SeverityLevel } from '../types';
+import { SEVERITY_LEVELS_LIST } from '../constants';
 
 const MIN_SEVERITY_HEIGHT = 50; // 50% of the total height of the severity indicator.
 
-export const getSeverityHeight = (level: SeverityLevels) => {
-  const maxSeverityLevel = Object.values(SeverityLevels)
-    .map((level) => Number(level))
-    .sort((numberA, numberB) => numberA - numberB)[
-    Object.keys(SeverityLevels).length - 1
-  ];
-
+export const getSeverityHeight = (level: SeverityLevel) => {
+  const maxSeverityLevel = Math.max(...SEVERITY_LEVELS_LIST);
   const heightStep = MIN_SEVERITY_HEIGHT / maxSeverityLevel;
 
-  return MIN_SEVERITY_HEIGHT + heightStep * (Number(level) - 1);
+  return MIN_SEVERITY_HEIGHT + heightStep * (level - 1);
 };

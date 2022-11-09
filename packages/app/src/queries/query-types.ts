@@ -6,12 +6,7 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
   measureTheme: MeasureTheme;
-  thermometer: Thermometer;
-}
-
-interface Thermometer {
-  config: ThermometerConfig;
-  timeline: ThermometerTimeLine;
+  thermometer: ThermometerConfig;
 }
 
 interface ThermometerConfig {
@@ -24,6 +19,7 @@ interface ThermometerConfig {
   collapsibleTitle: string;
   trendIcon: TrendIcon;
   thermometerLevels: ThermometerLevel[];
+  timeline: ThermometerTimeLine;
 }
 
 interface ThermometerTimeLine {
@@ -45,8 +41,7 @@ export interface ThermometerTimelineEvent {
 interface ThermometerLevel {
   level: SeverityLevel;
   label: string;
-  title: string;
-  description: string | null;
+  description: string;
 }
 
 interface TopicalConfig {
@@ -79,7 +74,7 @@ interface BaseTile {
 
 interface TopicalTile extends BaseTile {
   title: string;
-  kpiValue: string;
+  kpiValue: string | null;
   cta: Cta;
   trendIcon: TrendIcon;
 }
@@ -89,6 +84,6 @@ export interface ThemeLink {
 }
 
 export interface Cta {
-  title: string;
-  href: string;
+  title: string | null;
+  href: string | null;
 }
