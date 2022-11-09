@@ -1,4 +1,5 @@
 import { DataScopeKey, MetricName } from '@corona-dashboard/common';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 function formatStringArray(array: string[]) {
   return `[${array.map((x) => `'${x}'`).join(',')}]`;
@@ -64,12 +65,24 @@ type ElementBase = {
   metricProperty: string | null;
 };
 
+type CmsTimelineEventConfig = {
+  title: string;
+  description: string;
+  date: string;
+  dateEnd: string;
+};
+
 type CmsTimeSeriesElement = {
   _id: string;
   scope: DataScopeKey;
   metricName: string;
   metricProperty: string | null;
+  timelineEventCollections: CmsTimelineEventCollection[];
   warning: string | null;
+};
+
+type CmsTimelineEventCollection = {
+  timelineEvents: CmsTimelineEventConfig[];
 };
 
 type CmsKpiElement = ElementBase;
@@ -91,6 +104,23 @@ export type ElementsQueryResult = {
  * Get the timeline configuration from the correct element and convert it to the
  * right format.
  */
-export function getWarning(elements: CmsWarningElement[], metricName: MetricName) {
-  return elements.find((x) => x.metricName === metricName)?.warning || undefined;
-}
+export const getTimelineEvents = (elements: CmsTimeSeriesElement[], metricName: MetricName, metricProperty?: string) => {
+  const timelineEventCollections = elements.find((x) => x.metricName === metricName && (!metricProperty || x.metricProperty === metricProperty))?.timelineEventCollections;
+
+  return timelineEventCollections
+    ? timelineEventCollections.flatMap<TimelineEventConfig>((collection) =>
+        collection.timelineEvents.map((x) => ({
+          title: x.title,
+          description: x.description,
+          start: new Date(x.date).getTime() / 1000,
+          end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
+        }))
+      )
+    : undefined;
+};
+
+/**
+ * Get the timeline configuration from the correct element and convert it to the
+ * right format.
+ */
+export const getWarning = (elements: CmsWarningElement[], metricName: MetricName) => elements.find((x) => x.metricName === metricName)?.warning || undefined;
