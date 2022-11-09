@@ -1,24 +1,22 @@
 import css from '@styled-system/css';
 import { colors } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
-import styled from 'styled-components';
-// import DynamicIcon from '~/components/get-icon-by-name';
-import theme from '~/style/theme';
+import DynamicIcon from '~/components/get-icon-by-name';
 import { Markdown } from '~/components/markdown';
 import { space } from '~/style/theme';
-import { BoldText } from '~/components/typography';
-// import { ICONS_LIST } from '../severity-indicator-tile/constants';
+import { BoldText, InlineText } from '~/components/typography';
 import { SeverityIndicatorLabel } from '../severity-indicator-tile/components/severity-indicator-label';
+import { IconName } from '@corona-dashboard/icons/src/icon-name2filename';
 import { SeverityLevels } from '../severity-indicator-tile/types';
-
+import theme from '~/style/theme';
+import styled from 'styled-components';
 interface TopicalWeeklySummaryProps {
   label: string | undefined;
   level: SeverityLevels;
-  // name: IconName;
-
-  // title: string;
-  // dynamicSubtitle: string;
-  // icon: TopicalIcon;
+  text: string;
+  icon: IconName;
+  iconWithText: any;
+  name: IconName;
 }
 
 export const TopicalWeeklySummaryTile = ({ label, level }: TopicalWeeklySummaryProps) => {
@@ -46,24 +44,33 @@ export const TopicalWeeklySummaryTile = ({ label, level }: TopicalWeeklySummaryP
   // const element = WeeklySummaryDescription.map((iconWithText, index) => {
 
   return (
-    <Box border={`1px solid ${colors.gray3}`} p={3} m={3}>
-      <Box>
-        <BoldText css={css({ fontSize: [3] })}>
-          <Markdown content={HeadText} />
-        </BoldText>
+    <Box px={3} maxWidth={930}>
+      <Box border={`1px solid ${colors.gray3}`} p={4} m={3}>
+        <Box>
+          <BoldText css={css({ fontSize: [3] })}>
+            <Markdown content={HeadText} />
+          </BoldText>
 
-        <Box alignItems="flex-start" css={css({ gap: `0 ${space[2]}` })} display="flex" flexDirection="row">
-          <Box>
+          <Box pt={2} display="flex" flexWrap="wrap" css={css({ gap: `0 ${space[2]}` })}>
             {WeeklySummaryDescription.map((iconWithText, index) => {
-              iconWithText && (
-                // <Box>{iconWithText?.icon}</Box>
-                <TopicalThemeHeaderIcon key={index}>
-                  {/* <DynamicIcon name={iconWithText.icon} /> */}
-                  {/* <InlineText text={iconWithText.text} /> */}
-                </TopicalThemeHeaderIcon>
+              return (
+                <>
+                  <Box display="flex" css={css({ gap: `0 ${space[3]}` })} alignItems="center">
+                    {/* <Box key={index} width={25} height={25} maxWidth="none"> */}
+                    <TopicalThemeHeaderIcon key={index}>
+                      <DynamicIcon width={25} name={iconWithText.icon} />
+                    </TopicalThemeHeaderIcon>
+                    {/* </Box> */}
+                    <Box>
+                      <InlineText>{iconWithText.text}</InlineText>
+                    </Box>
+                  </Box>
+                </>
               );
             })}
-            {label && level && <SeverityIndicatorLabel label={label} level={level} />}
+            <Box>
+              <SeverityIndicatorLabel label={label} level={level} />
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -72,10 +79,10 @@ export const TopicalWeeklySummaryTile = ({ label, level }: TopicalWeeklySummaryP
 };
 
 const TopicalThemeHeaderIcon = styled.span`
-  // display: block;
-  // height: 25px;
+  display: block;
+  height: 25px;
   // margin-right: 10px;
-  // width: 25px;
+  width: 25px;
 
   @media ${theme.mediaQueries.sm} {
     height: 30px;
@@ -83,31 +90,3 @@ const TopicalThemeHeaderIcon = styled.span`
     width: 30px;
   }
 `;
-
-{
-  /* <Box width={25}> */
-}
-{
-  /* {ICONS_LIST.map(
-              (icon, index) =>
-                icon && (
-                  <TopicalThemeHeaderIcon key={index}>
-                    <DynamicIcon name={icon} />
-                  </TopicalThemeHeaderIcon>
-                )
-            )} */
-}
-{
-  /* </Box> */
-}
-{
-  /* <Box width={'80%'}> */
-}
-{
-  /* {SummaryText.map((text, index) => (
-              <InlineText key={index}>{text}</InlineText>
-            ))} */
-}
-{
-  /* </Box> */
-}
