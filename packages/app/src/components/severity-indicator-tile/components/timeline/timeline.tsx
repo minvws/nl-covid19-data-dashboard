@@ -13,6 +13,7 @@ import { TimelineBar } from './components/timeline-bar';
 import { TimelineBarPart } from './components/timeline-bar-part';
 import { TimelineTooltipContent } from './components/tooltip-content';
 import { getSeverityColor } from '../../logic/get-severity-color';
+import { getTimelineBarArrowOffset } from './logic/get-timeline-bar-arrow-offset';
 import { SeverityLevels } from '../../types';
 
 export interface SeverityIndicatorTimelineEventConfig {
@@ -36,7 +37,6 @@ interface TimelineProps {
 
 export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, timelineEvents }: TimelineProps) => {
   const { formatDate } = useIntl();
-  const today = useCurrentDate();
 
   const [ref] = useResizeObserver<HTMLDivElement>();
 
@@ -64,7 +64,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
             width={`${100 / timelineEvents.length}%`}
           >
             {i + 1 === timelineEvents.length && (
-              <TimelineBarArrow today={today} startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
+              <TimelineBarArrow startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
                 {labels.today}
               </TimelineBarArrow>
             )}
@@ -103,31 +103,33 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
   );
 };
 
-const getTimelineBarArrowOffset = (today: Date, startDate: number, endDate: number) => {
-  const todayInSeconds = middleOfDayInSeconds(today.getTime() / 1000);
-  return todayInSeconds / (endDate - startDate) / 100;
-};
+interface TimelineBarArrowProps {
+  children: ReactNode;
+  startDate: number;
+  endDate: number;
+}
 
-const TimelineBarArrow = ({ children, today, startDate, endDate }: { children: ReactNode; today: Date; startDate: number; endDate: number }) => (
-  <Box
-    alignItems="center"
-    display="flex"
-    flexDirection="column"
-    left={`${getTimelineBarArrowOffset(today, startDate, endDate) ?? 0}%`}
-    position="absolute"
-    top="-40px"
-    transform="translateX(-50%)"
-  >
-    {children}
-    <Box
-      borderLeft={`${space[2]} solid transparent`}
-      borderRight={`${space[2]} solid transparent`}
-      borderTop={`${space[2]} solid ${colors.black}`}
-      height={space[2]}
-      width={space[2]}
-    />
-  </Box>
-);
+const TimelineBarArrow = ({ children, startDate, endDate }: TimelineBarArrowProps) => {
+  const todayDate = useCurrentDate();
+  const middleOfTodaysDateInSeconds = middleOfDayInSeconds(todayDate.getTime() / 1000);
+
+  if (middleOfTodaysDateInSeconds > middleOfDayInSeconds(endDate)) return null;
+
+  const arrowLeftOffset = getTimelineBarArrowOffset(todayDate, startDate, endDate);
+
+  return (
+    <Box alignItems="center" display="flex" flexDirection="column" left={`${arrowLeftOffset}%`} position="absolute" top="-40px" transform="translateX(-50%)">
+      {children}
+      <Box
+        borderLeft={`${space[2]} solid transparent`}
+        borderRight={`${space[2]} solid transparent`}
+        borderTop={`${space[2]} solid ${colors.black}`}
+        height={space[2]}
+        width={space[2]}
+      />
+    </Box>
+  );
+};
 
 const TimelineHeading = styled(Heading)`
   margin-bottom: ${space[3]};
