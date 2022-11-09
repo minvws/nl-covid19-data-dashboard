@@ -2,6 +2,7 @@ import { Rule } from '~/sanity';
 import { THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
 import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
 import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
+import { BsFillFileBarGraphFill } from 'react-icons/bs';
 
 export const thermometerLevel = {
   type: 'document',
@@ -41,8 +42,9 @@ export const thermometerLevel = {
     prepare(selection: { title: string; subtitle: string }) {
       const { title, subtitle } = selection;
       return {
-        title: title,
+        title,
         subtitle: `Stand ${subtitle}`,
+        media: BsFillFileBarGraphFill,
       };
     },
   },

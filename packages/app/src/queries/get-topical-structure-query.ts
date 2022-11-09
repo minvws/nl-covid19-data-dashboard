@@ -42,7 +42,7 @@ export function getTopicalStructureQuery(locale: string) {
         _type == 'measureTheme' && !(_id in path("drafts.**"))
       ][0]{
         'title': title.${locale},
-        tileIcon,
+        themeIcon,
         'subTitle': subTitle.${locale},
         'tiles': tiles[]->{
           tileIcon,

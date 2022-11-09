@@ -7,6 +7,7 @@ import DynamicIcon from '~/components/get-icon-by-name';
 import theme from '~/style/theme';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Markdown } from '~/components';
+import { fontSizes } from '~/style/theme';
 
 interface TopicalThemeHeaderProps {
   title: string;
@@ -27,7 +28,7 @@ export const TopicalThemeHeader = ({ title, subtitle, subtitleThermometer, icon 
         <Heading level={2}>{title}</Heading>
       </Box>
       {subtitle && (
-        <Box fontSize={3}>
+        <Box fontSize={fontSizes[3]}>
           <RichContent blocks={subtitle} />
         </Box>
       )}

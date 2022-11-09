@@ -13,7 +13,7 @@ interface TopicalLinksListProps {
     DESKTOP: string | null;
     MOBILE: string | null;
   };
-  links: ThemeLink[] | null;
+  links: ThemeLink[];
 }
 
 export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
@@ -49,23 +49,17 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
           padding: 0,
         })}
       >
-        {links &&
-          links.length &&
-          links.map((link, index) => {
-            {
-              console.log(link.cta.href);
-              console.log(link.cta.title);
-            }
-            {
-              link.cta.href && link.cta.title && (
-                <li key={index}>
-                  <LinkWithIcon href={link.cta.href} icon={<ChevronRight />} iconPlacement="right" showAsButton={breakpoints.sm}>
-                    {link.cta.title}
-                  </LinkWithIcon>
-                </li>
-              );
-            }
-          })}
+        {links.map(
+          (link, index) =>
+            link.cta.title &&
+            link.cta.href && (
+              <li key={index}>
+                <LinkWithIcon href={link.cta.href} icon={<ChevronRight />} iconPlacement="right" showAsButton={breakpoints.sm}>
+                  {link.cta.title}
+                </LinkWithIcon>
+              </li>
+            )
+        )}
       </ul>
     </Box>
   );

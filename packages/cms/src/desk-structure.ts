@@ -1,5 +1,5 @@
 import { StructureBuilder as S } from '@sanity/structure';
-import { BsCardChecklist, BsFillFileBarGraphFill, BsFillPuzzleFill, BsLockFill, BsMap } from 'react-icons/bs';
+import { BsCardChecklist, BsFillFileBarGraphFill, BsFillPuzzleFill, BsLockFill, BsMap, BsHouseFill, BsThermometer, BsGearFill } from 'react-icons/bs';
 import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
@@ -13,53 +13,53 @@ import { pagePartListItem } from './page/page-part-list-item';
  * others will appear automatically at the bottom.
  */
 const hiddenDocTypes = [
-  'siteSettings',
-  'topicalPage',
-  'veelgesteldeVragen',
-  'veelgesteldeVragenGroups',
-  'faqQuestion',
+  'ageDemographicChartConfiguration',
+  'chartConfiguration',
+  'choropleth',
+  'choroplethConfiguration',
   'cijferVerantwoording',
   'cijferVerantwoordingGroups',
+  'cijferVerantwoordingItem',
+  'contact',
+  'donutChartConfiguration',
+  'faqQuestion',
+  'kpi',
+  'kpiConfiguration',
+  'lockdown',
+  'lokalizeString',
+  'lokalizeSubject',
+  'lokalizeText',
+  'measureTheme',
+  'measureTile',
+  'measureTileCollection',
   'overDitDashboard',
   'overRisicoNiveaus',
   'overRisicoNiveausNew',
-  'lockdown',
-  'themeCollection',
+  'pageArticles',
+  'pageHighlightedItems',
+  'pageIdentifier',
+  'pageLinks',
+  'pageRichText',
+  'siteSettings',
   'theme',
-  'themeLinkCollection',
+  'themeCollection',
   'themeLink',
-  'themeTileCollection',
+  'themeLinkCollection',
   'themeTile',
-  'thermometerLevel',
+  'themeTileCollection',
   'thermometer',
+  'thermometerLevel',
   'thermometerTimeline',
   'thermometerTimelineEvent',
-  'measureTheme',
-  'measureTileCollection',
-  'measureTile',
-  'trendIcon',
-  'topicalPageConfig',
-  'toegankelijkheid',
-  'lokalizeSubject',
-  'lokalizeString',
-  'lokalizeText',
-  'timeSeries',
   'timelineEvent',
-  'contact',
-  'cijferVerantwoordingItem',
-  'kpi',
-  'choropleth',
+  'timeSeries',
+  'toegankelijkheid',
+  'topicalPage',
+  'topicalPageConfig',
+  'trendIcon',
+  'veelgesteldeVragen',
+  'veelgesteldeVragenGroups',
   'warning',
-  'chartConfiguration',
-  'kpiConfiguration',
-  'donutChartConfiguration',
-  'choroplethConfiguration',
-  'ageDemographicChartConfiguration',
-  'pageArticles',
-  'pageLinks',
-  'pageHighlightedItems',
-  'pageRichText',
-  'pageIdentifier',
 ];
 
 export default () =>
@@ -136,15 +136,15 @@ export default () =>
 
       S.listItem()
         .id('topicalPage')
-        .title('Topical pagina')
-        .icon(BsFillFileBarGraphFill)
+        .title('Samenvattingspagina')
+        .icon(BsHouseFill)
         .child(
           S.list()
             .title('Pagina configuratie')
             .items([
-              addListItem(MdQuestionAnswer, 'Topical pagina configuratie', 'topicalPageConfig'),
-              addListItem(MdQuestionAnswer, 'Maatregelen sectie', 'measureTheme'),
-              addListItem(MdQuestionAnswer, 'Thermometer', 'thermometer'),
+              addListItem(BsGearFill, 'Samenvattingspagina configuratie', 'topicalPageConfig'),
+              addListItem(BsGearFill, 'Maatregelen sectie', 'measureTheme'),
+              addListItem(BsThermometer, 'Thermometer', 'thermometer'),
             ])
         ),
 

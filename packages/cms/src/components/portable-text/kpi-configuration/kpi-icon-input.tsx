@@ -25,7 +25,7 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
   const { value, onChange, compareValue, type, markers } = props;
   const iconName = value?.length ? filename2IconName[value as any] : undefined;
 
-  const TheIcon = isDefined(iconName) ? (allIcons[iconName as KpiIconKey] as allIcons.Icon) : undefined;
+  const KpiIcon = isDefined(iconName) ? (allIcons[iconName as KpiIconKey] as allIcons.Icon) : undefined;
 
   const iconInfoCollection = Object.entries(allIcons)
     .filter((entry) => entry[0] !== 'iconName2filename')
@@ -43,14 +43,13 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
       <TextInput value={value ?? ''} ref={ref} style={{ display: 'none' }} />
       <ThemeProvider theme={studioTheme}>
         <Stack space={3}>
-          {TheIcon === undefined ? (
+          {KpiIcon === undefined ? (
             <Text>Er is geen icoon geselecteerd</Text>
           ) : (
             <Box style={{ width: '50px', height: '50px' }}>
-              <TheIcon width="50" height="50" />
+              <KpiIcon width="50" height="50" />
             </Box>
           )}
-
           <Box>
             <Button onClick={onOpen} text="Verander icoon" />
           </Box>
@@ -61,12 +60,7 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
               <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
                 {iconInfoCollection.map(([id, GridIcon]) => (
                   <Flex key={id} direction="column" align="center" onClick={() => onChangeIcon(id)} title={id}>
-                    <GridIcon
-                      width="35"
-                      height="35"
-                      color="black"
-                      style={selectedIcon === id ? { border: `2px solid ${colors.green1}` } : { border: '2px solid rgba(0,0,0,.0)' }}
-                    />
+                    <GridIcon width="35" height="35" color="black" style={{ border: `2px solid ${selectedIcon === id ? colors.green1 : colors.transparent}` }} />
                     <Radio checked={value === allIconsToFilename[id]} readOnly style={{ display: 'none' }} />
                   </Flex>
                 ))}

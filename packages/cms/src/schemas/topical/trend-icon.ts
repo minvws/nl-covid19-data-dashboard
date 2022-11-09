@@ -4,7 +4,6 @@ export const trendIcon = {
   name: 'trendIcon',
   type: 'document',
   title: 'Trend icon',
-  __experimental_actions: ['create', 'update', 'publish'],
   fields: [
     {
       title: 'Kleur',

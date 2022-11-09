@@ -38,8 +38,8 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
 
   return (
     <Box
-      as="a"
-      href={cta?.href}
+      as={cta.href ? 'a' : 'div'}
+      href={cta.href ?? undefined}
       borderColor={colors.gray3}
       borderWidth="1px"
       borderStyle="solid"
@@ -107,7 +107,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
           </Box>
         </Box>
 
-        {cta.href && cta.title && (
+        {cta.title && (
           <Box display="flex" justifyContent="center" alignItems="center" bg={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
             <TextWithIcon text={cta.title} icon={<ChevronRight />} />
           </Box>

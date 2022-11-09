@@ -19,7 +19,7 @@ export const measureTheme = {
     },
     {
       title: 'Thema icoon',
-      name: 'tileIcon',
+      name: 'themeIcon',
       type: 'string',
       inputComponent: KpiIconInput,
       validation: REQUIRED,

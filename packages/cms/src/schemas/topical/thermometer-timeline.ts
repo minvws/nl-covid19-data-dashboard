@@ -4,7 +4,6 @@ export const thermometerTimeline = {
   name: 'thermometerTimeline',
   type: 'document',
   title: 'Thermometer tijdslijn',
-  __experimental_actions: ['create', 'update', 'publish'],
   fields: [
     {
       title: 'Titel',

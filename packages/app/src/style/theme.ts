@@ -28,7 +28,7 @@ const fonts = {
 } as const;
 
 // prettier-ignore
-const fontSizes = [
+export const fontSizes = [
   '0.75rem',    // 0 -> 12px
   '0.875rem',   // 1 -> 14px
   '1rem',       // 2 -> 16px
