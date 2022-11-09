@@ -15,7 +15,7 @@ export const measureTheme = {
     {
       title: 'Ondertitel',
       name: 'subTitle',
-      type: 'localeString',
+      type: 'localeRichContentBlock',
     },
     {
       title: 'Thema icoon',

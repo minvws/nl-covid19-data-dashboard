@@ -1,10 +1,11 @@
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
-import { Markdown } from '~/components/markdown';
+import { RichContent } from '~/components/cms/rich-content';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface TopicalHeaderProps {
   title: string;
-  description: string;
+  description: PortableTextEntry[];
 }
 
 export const TopicalHeader = ({ title, description }: TopicalHeaderProps) => {
@@ -12,7 +13,7 @@ export const TopicalHeader = ({ title, description }: TopicalHeaderProps) => {
     <Box spacing={4}>
       <Heading level={1}>{title}</Heading>
       <Box spacing={3} fontSize={3}>
-        <Markdown content={description} />
+        <RichContent blocks={description} />
       </Box>
     </Box>
   );

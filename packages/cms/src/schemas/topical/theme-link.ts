@@ -6,18 +6,6 @@ export const themeLink = {
   name: 'themeLink',
   fields: [
     {
-      title: 'Label voor mobiel',
-      name: 'labelMobile',
-      type: 'localeString',
-      validation: REQUIRED,
-    }, // ToDo add to frontend query
-    {
-      title: 'Label voor desktop',
-      name: 'labelDesptop',
-      type: 'localeString',
-      validation: REQUIRED,
-    }, // ToDo add to frontend query
-    {
       title: 'Call to action',
       name: 'cta',
       type: 'link',
@@ -26,7 +14,7 @@ export const themeLink = {
   ],
   preview: {
     select: {
-      title: 'cta',
+      title: 'cta.title.nl',
     },
   },
 };

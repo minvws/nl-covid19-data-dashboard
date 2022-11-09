@@ -8,12 +8,13 @@ import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
 import { ChevronRight } from '@corona-dashboard/icons';
-import { Markdown } from '~/components/markdown';
+import { RichContent } from '~/components/cms/rich-content';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
 import { Cta } from '~/queries/query-types';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN';
@@ -23,12 +24,12 @@ interface TopicalTileProps {
   title: string;
   tileIcon: TopicalIcon;
   trendIcon: TrendIcon | null;
-  dynamicDescription: string;
+  description: PortableTextEntry[];
   kpiValue: number | null | string;
   cta: Cta;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
@@ -103,7 +104,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
           </Box>
           <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formattedKpiValue ? { _: 2, xs: 2 } : undefined}>
             <Box display="flex" alignItems="center">
-              <Markdown content={dynamicDescription} />
+              <RichContent blocks={description} />
             </Box>
           </Box>
         </Box>

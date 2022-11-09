@@ -15,7 +15,7 @@ export const theme = {
     {
       title: 'Ondertitel',
       name: 'subTitle',
-      type: 'localeString',
+      type: 'localeRichContentBlock',
     },
     {
       title: 'Thema icoon',
@@ -32,9 +32,16 @@ export const theme = {
       validation: REQUIRED,
     },
     {
-      title: 'Links label',
-      name: 'linksLabel',
+      title: 'Label voor mobiel',
+      name: 'labelMobile',
       type: 'localeString',
+      validation: REQUIRED,
+    },
+    {
+      title: 'Label voor desktop',
+      name: 'labelDesptop',
+      type: 'localeString',
+      validation: REQUIRED,
     },
     {
       title: 'Links',

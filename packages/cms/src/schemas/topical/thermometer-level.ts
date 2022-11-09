@@ -34,7 +34,7 @@ export const thermometerLevel = {
     {
       title: 'Omschrijving',
       name: 'description',
-      type: 'localeRichContentBlock',
+      type: 'localeString',
     },
   ],
   preview: {

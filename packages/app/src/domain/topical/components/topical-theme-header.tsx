@@ -1,18 +1,21 @@
 import { Box } from '~/components/base';
 import styled from 'styled-components';
 import { Heading } from '~/components/typography';
-import { Markdown } from '~/components/markdown';
+import { RichContent } from '~/components/cms/rich-content';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import DynamicIcon from '~/components/get-icon-by-name';
 import theme from '~/style/theme';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { Markdown } from '~/components';
 
 interface TopicalThemeHeaderProps {
   title: string;
-  subtitle: string | null;
+  subtitle?: PortableTextEntry[] | null;
+  subtitleThermometer?: string | null;
   icon: TopicalIcon;
 }
 
-export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeaderProps) => {
+export const TopicalThemeHeader = ({ title, subtitle, subtitleThermometer, icon }: TopicalThemeHeaderProps) => {
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
@@ -25,7 +28,12 @@ export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeader
       </Box>
       {subtitle && (
         <Box fontSize={3}>
-          <Markdown content={subtitle} />
+          <RichContent blocks={subtitle} />
+        </Box>
+      )}
+      {subtitleThermometer && (
+        <Box fontSize={3}>
+          <Markdown content={subtitleThermometer} />
         </Box>
       )}
     </Box>

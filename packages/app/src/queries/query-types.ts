@@ -1,6 +1,7 @@
 import { TrendIcon } from '@corona-dashboard/app/src/domain/topical/types';
 import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
@@ -50,13 +51,13 @@ interface ThermometerLevel {
 
 interface TopicalConfig {
   title: string;
-  description: string;
+  description: PortableTextEntry[];
   themes: TopicalTheme[];
 }
 
 interface Theme {
   title: string;
-  subTitle: string | null;
+  subTitle: PortableTextEntry[] | null;
   themeIcon: TopicalIcon;
 }
 
@@ -66,13 +67,14 @@ interface MeasureTheme extends Theme {
 
 interface TopicalTheme extends Theme {
   tiles: TopicalTile[];
-  linksLabel: string | null;
+  linksLabelDesktop: string | null;
+  linksLabelMobile: string | null;
   links: ThemeLink[] | null;
 }
 
 interface BaseTile {
   tileIcon: TopicalIcon;
-  description: string;
+  description: PortableTextEntry[];
 }
 
 interface TopicalTile extends BaseTile {
@@ -82,7 +84,7 @@ interface TopicalTile extends BaseTile {
   trendIcon: TrendIcon;
 }
 
-interface ThemeLink {
+export interface ThemeLink {
   cta: Cta;
 }
 

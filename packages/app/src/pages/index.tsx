@@ -119,7 +119,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <Box my={5} px={{ _: 3, sm: 4 }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader
                 title={thermometer.config.title}
-                subtitle={replaceVariablesInText(thermometer.config.levelDescription, {
+                subtitleThermometer={replaceVariablesInText(thermometer.config.levelDescription, {
                   level: currentSeverityLevel,
                   label: currentSeverityLevelTexts.label,
                 })}
@@ -187,7 +187,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               return (
                 <Box key={theme.title}>
                   <Box marginBottom={4}>
-                    <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={theme.themeIcon} />
+                    <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={filename2IconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
                   <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={{ _: 4, sm: 5 }}>
                     {theme.tiles.map((themeTile) => {
@@ -196,7 +196,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           trendIcon={themeTile.trendIcon}
                           title={themeTile.title}
                           tileIcon={filename2IconName(themeTile.tileIcon) as TopicalIcon}
-                          dynamicDescription={themeTile.description}
+                          description={themeTile.description}
                           cta={themeTile.cta}
                           key={themeTile.title}
                           kpiValue={themeTile.kpiValue}
