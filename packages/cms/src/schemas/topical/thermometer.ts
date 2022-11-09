@@ -54,7 +54,7 @@ export const thermometer = {
     {
       title: 'Artikel referentie',
       name: 'articleReference',
-      type: 'localeString',
+      type: 'localeRichContentBlock',
     },
     {
       title: 'Titel van uitklapbare sectie',

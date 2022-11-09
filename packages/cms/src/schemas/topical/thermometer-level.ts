@@ -28,6 +28,7 @@ export const thermometerLevel = {
     {
       title: 'Omschrijving',
       name: 'description',
+      description: 'Dit is een markdown veld. De thermometer level kan gebruikt worden door **{{label}}** in de tekst te zetten.',
       type: 'localeString',
       validation: REQUIRED,
     },

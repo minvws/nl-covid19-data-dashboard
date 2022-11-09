@@ -15,7 +15,7 @@ interface ThermometerConfig {
   datesLabel: string;
   levelDescription: string;
   sourceLabel: string;
-  articleReference: string;
+  articleReference: PortableTextEntry[];
   collapsibleTitle: string;
   trendIcon: TrendIcon;
   thermometerLevels: ThermometerLevel[];

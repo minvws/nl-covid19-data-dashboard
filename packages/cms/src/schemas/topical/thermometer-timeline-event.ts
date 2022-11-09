@@ -18,27 +18,18 @@ export const thermometerTimelineEvent = {
       name: 'title',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required().max(60).error('Titels zijn gelimiteerd tot maximaal 60 tekens')),
-      options: {
-        ignoreLanguageSwitcher: true,
-      },
     },
     {
       title: 'Omschrijving',
       name: 'description',
       type: 'localeText',
       validation: REQUIRED,
-      options: {
-        ignoreLanguageSwitcher: true,
-      },
     },
     {
       title: 'Level',
       name: 'level',
       type: 'number',
       validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
-      options: {
-        ignoreLanguageSwitcher: true,
-      },
     },
     {
       title: 'Datum',

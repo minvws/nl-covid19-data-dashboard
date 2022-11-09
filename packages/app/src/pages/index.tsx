@@ -1,7 +1,7 @@
 import { Box, Spacer } from '~/components/base';
 import styled from 'styled-components';
 import { css } from '@styled-system/css';
-import { Markdown, MaxWidth } from '~/components';
+import { MaxWidth } from '~/components';
 import { Layout } from '~/domain/layout';
 import {
   Search,
@@ -39,6 +39,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/t
 import { TopicalSanityData } from '~/queries/query-types';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
+import { RichContent } from '~/components/cms/rich-content';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -171,10 +172,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <Box my={3}>
                     <OrderedList>
                       {SEVERITY_LEVELS_LIST.map((severityLevel, index) => {
-                        const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
+                        const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
                         return (
                           indicatorTexts && (
-                            <IndicatorLevelDescription key={index} level={severityLevel as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                            <IndicatorLevelDescription
+                              key={index}
+                              level={indicatorTexts.level as SeverityLevel}
+                              label={indicatorTexts.label}
+                              description={indicatorTexts.description}
+                            />
                           )
                         );
                       })}
@@ -182,7 +188,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   </Box>
                 </CollapsibleSection>
               </Box>
-              <Markdown content={thermometer.articleReference} />
+              <RichContent blocks={thermometer.articleReference} />
             </Box>
           )}
 
@@ -223,7 +229,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <Box>
               <Box marginBottom={4}>
-                <TopicalThemeHeader title={measureTheme.title} subtitle={measureTheme.subTitle} icon={measureTheme.themeIcon} />
+                <TopicalThemeHeader title={measureTheme.title} subtitle={measureTheme.subTitle} icon={filename2IconName(measureTheme.themeIcon) as TopicalIcon} />
               </Box>
               <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: 4, md: 5 }} gridRowGap={{ _: 4, md: 5 }} marginBottom={5}>
                 {measureTheme.tiles.map((measureTile, index) => {
