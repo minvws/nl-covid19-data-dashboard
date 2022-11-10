@@ -10,6 +10,7 @@ import * as documents from './documents';
 import * as locale from './locale';
 import * as objects from './objects';
 import * as restrictions from './restrictions';
+import * as topicalPageConfig from './topical';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -22,6 +23,7 @@ export default createSchema({
     ...Object.values(restrictions),
     ...Object.values(objects),
     ...Object.values(locale),
-    ...Object.values(elements)
-  ),
+    ...Object.values(elements),
+    ...Object.values(topicalPageConfig),
+    ),
 });

@@ -69,7 +69,7 @@ export const TimelineTooltipContent = ({ config, hasMultipleEvents, onNext, onPr
           gridTemplateColumns={`${space[4]} auto`}
           gridTemplateRows="auto"
         >
-          <SeverityIndicatorLevel level={config.level.toString() as SeverityLevels}>{config.level}</SeverityIndicatorLevel>
+          <SeverityIndicatorLevel level={config.level as SeverityLevels}>{config.level}</SeverityIndicatorLevel>
           <BoldText>{config.title}</BoldText>
         </Box>
 

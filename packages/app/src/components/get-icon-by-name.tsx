@@ -4,7 +4,7 @@ import React from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 
-type IconName = keyof typeof iconName2filename;
+export type IconName = keyof typeof iconName2filename;
 type IconCollection = Record<IconName, React.ComponentType>;
 
 interface DynamicIconProps extends IconProps {
@@ -19,10 +19,7 @@ function getIconByName(name: IconName) {
   const icons: IconCollection = allIcons;
   const DynamicIcon = icons[name];
 
-  assert(
-    isDefined(DynamicIcon),
-    `[${getIconByName.name}] Icon with name "${name}" does not exist`
-  );
+  assert(isDefined(DynamicIcon), `[${getIconByName.name}] Icon with name "${name}" does not exist`);
 
   return DynamicIcon;
 }

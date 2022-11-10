@@ -81,41 +81,16 @@ const colorDefinitions = {
   magenta2: '#9515AA',
   magenta3: '#cd005a',
   magenta4: '#aa004b',
+  //transparent
+  transparent: 'transparent',
 };
 export const colors = {
   ...colorDefinitions,
   scale: {
-    blue: [
-      '#8FCAE7',
-      '#5BADDB',
-      '#248FCF',
-      '#0070BB',
-      '#00529D',
-      '#003580',
-      '#001D45',
-    ],
-    blueDetailed: [
-      '#aeddf3',
-      '#8bc7e8',
-      '#67b1dc',
-      '#449ad1',
-      '#1f83c5',
-      '#006cb5',
-      '#005797',
-      '#00437b',
-      '#002f5f',
-      '#001d45',
-    ],
+    blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580', '#001D45'],
+    blueDetailed: ['#aeddf3', '#8bc7e8', '#67b1dc', '#449ad1', '#1f83c5', '#006cb5', '#005797', '#00437b', '#002f5f', '#001d45'],
     magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
-    yellow: [
-      '#FFF2CC',
-      '#FFE699',
-      '#FFD34D',
-      '#FABC00',
-      '#E5A400',
-      '#C98600',
-      '#9E6900',
-    ],
+    yellow: ['#FFF2CC', '#FFE699', '#FFD34D', '#FABC00', '#E5A400', '#C98600', '#9E6900'],
   },
 
   variants: {

@@ -1,0 +1,101 @@
+import { ThermometerTimelineEvent } from './query-types';
+import { SeverityIndicatorTimelineEventConfig } from '~/components/severity-indicator-tile/components/timeline/timeline';
+
+export function getTopicalStructureQuery(locale: string) {
+  const query = `// groq
+    {
+      'topicalConfig': *[
+          _type == 'topicalPageConfig' && !(_id in path("drafts.**"))
+      ][0]{
+        'title': title.${locale},
+        'description': description.${locale},
+        'themes': themes[]->{
+          "title":title.${locale},
+          "subTitle":subTitle.${locale},
+          themeIcon,
+          'linksLabelMobile': labelMobile.${locale},
+          'linksLabelDesktop': labelDesktop.${locale},
+
+          "links":links[]->{
+            'cta': {
+              'title': cta.title.${locale},
+              'href': cta.href
+            },
+          },
+          "tiles":tiles[]->{
+            "description":description.${locale},
+            tileIcon,
+            "title":title.${locale},
+            "sourceLabel":sourceLabel.${locale},
+            'kpiValue': kpiValue.${locale},
+            'trendIcon': {
+              'color': trendIcon.color,
+              'direction': trendIcon.direction,
+            },
+            'cta': {
+              'title': cta.title.${locale},
+              'href': cta.href
+            },
+          },
+        },
+      },
+      'measureTheme': *[
+        _type == 'measureTheme' && !(_id in path("drafts.**"))
+      ][0]{
+        'title': title.${locale},
+        themeIcon,
+        'subTitle': subTitle.${locale},
+        'tiles': tiles[]->{
+          tileIcon,
+          'description': description.${locale}
+        },
+      },
+      'thermometer': *[
+        _type == 'thermometer' && !(_id in path("drafts.**"))
+      ][0]{
+        'title': title.${locale},
+        currentLevel,
+        'thermometerLevels': thermometerLevels[]->{
+          'level': level,
+          'label': label.${locale},
+          'description': description.${locale},
+        },
+        'datesLabel': datesLabel.${locale},
+        'levelDescription': levelDescription.${locale},
+        'sourceLabel': sourceLabel.${locale},
+        'articleReference': articleReference.${locale},
+        'collapsibleTitle': collapsibleTitle.${locale},
+        'trendIcon': {
+          'color': trendIcon.color,
+          'direction': trendIcon.direction,
+        },
+        'timeline': {
+          'title': timeline.title.${locale},
+          'tooltipLabel': timeline.tooltipCurrentEstimationLabel.${locale},
+          'todayLabel': timeline.todayLabel.${locale},
+          'legendLabel': timeline.legendLabel.${locale},
+          'ThermometerTimelineEvents': timeline.thermometerTimelineEvents[]->{
+            'title': title.${locale},
+            'description': description.${locale},
+            level,
+            date,
+            dateEnd
+          },
+      },
+    }
+  }`;
+
+  return query;
+}
+
+export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[]) => {
+  return thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => {
+    return {
+      title: thermometerEvent.title,
+      description: thermometerEvent.description,
+      level: thermometerEvent.level,
+      start: new Date(thermometerEvent.date).getTime() / 1000,
+      end: new Date(thermometerEvent.dateEnd).getTime() / 1000,
+    };
+  });
+};
