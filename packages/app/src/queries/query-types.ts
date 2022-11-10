@@ -11,7 +11,7 @@ export interface TopicalSanityData {
 
 interface ThermometerConfig {
   title: string;
-  subTitle: PortableTextEntry[];
+  subTitle: PortableTextEntry[] | null;
   currentLevel: SeverityLevel;
   datesLabel: string;
   levelDescription: string;
