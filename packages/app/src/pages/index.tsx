@@ -213,6 +213,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           cta={themeTile.cta}
                           key={themeTile.title}
                           kpiValue={themeTile.kpiValue}
+                          sourceLabel={themeTile.sourceLabel}
                         />
                       );
                     })}

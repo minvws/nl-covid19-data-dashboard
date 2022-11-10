@@ -26,6 +26,7 @@ export function getTopicalStructureQuery(locale: string) {
             "description":description.${locale},
             tileIcon,
             "title":title.${locale},
+            "sourceLabel":sourceLabel.${locale},
             'kpiValue': kpiValue.${locale},
             'trendIcon': {
               'color': trendIcon.color,
