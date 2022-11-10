@@ -5,6 +5,7 @@ import { space } from '~/style/theme';
 import { getSeverityColor } from '../logic/get-severity-color';
 import { getSeverityHeight } from '../logic/get-severity-height';
 import { SeverityLevel, SeverityLevels } from '../types';
+import { SEVERITY_LEVELS_LIST } from '../constants';
 
 interface SeverityIndicatorProps {
   level: SeverityLevel;
@@ -17,18 +18,16 @@ const SeverityIndicatorArrow = () => (
 );
 
 export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
-  const severityLevels = Object.entries(SeverityLevels);
-
   return (
     <Box alignItems="flex-end" css={css({ gap: `0 ${space[1]}` })} display="flex" height={space[4]} mb={space[4]} mt={space[3]}>
-      {severityLevels.map(([key, value]) => (
+      {SEVERITY_LEVELS_LIST.map((value, index) => (
         <Box
-          key={key}
-          backgroundColor={Number(level) >= Number(value) ? getSeverityColor(level as SeverityLevels) : colors.gray3}
+          key={index}
+          backgroundColor={level >= value ? getSeverityColor(level as SeverityLevels) : colors.gray3}
           borderRadius={4}
-          height={`${getSeverityHeight(value)}%`}
+          height={`${getSeverityHeight(value as SeverityLevel)}%`}
           position="relative"
-          width={`${100 / severityLevels.length}%`}
+          width={`${100 / SEVERITY_LEVELS_LIST.length}%`}
         >
           {level === value && <SeverityIndicatorArrow />}
         </Box>

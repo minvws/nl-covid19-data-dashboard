@@ -1,28 +1,20 @@
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
-import { Markdown } from '~/components/markdown';
-
-type TopicalDynamicDescription = {
-  index: number;
-  content: string;
-};
+import { RichContent } from '~/components/cms/rich-content';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { fontSizes } from '~/style/theme';
 
 interface TopicalHeaderProps {
   title: string;
-  dynamicDescriptions: TopicalDynamicDescription[];
+  description: PortableTextEntry[];
 }
 
-export const TopicalHeader = ({
-  title,
-  dynamicDescriptions,
-}: TopicalHeaderProps) => {
+export const TopicalHeader = ({ title, description }: TopicalHeaderProps) => {
   return (
     <Box spacing={4}>
       <Heading level={1}>{title}</Heading>
-      <Box spacing={3} fontSize={3}>
-        {dynamicDescriptions.map((description) => (
-          <Markdown key={description.index} content={description.content} />
-        ))}
+      <Box spacing={3} fontSize={fontSizes[3]}>
+        <RichContent blocks={description} elementAlignment="start" />
       </Box>
     </Box>
   );

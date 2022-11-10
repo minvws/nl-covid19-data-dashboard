@@ -7,19 +7,13 @@ import { LinkWithIcon } from '~/components/link-with-icon';
 import { Text } from '~/components/typography';
 import { asResponsiveArray } from '~/style/utils';
 import { v4 as uuidv4 } from 'uuid';
-
-interface TopicalLink {
-  index: number;
-  label: string;
-  href: string;
-}
-
+import { ThemeLink } from '~/queries/query-types';
 interface TopicalLinksListProps {
   labels: {
-    DESKTOP: string;
-    MOBILE: string;
+    DESKTOP: string | null;
+    MOBILE: string | null;
   };
-  links: TopicalLink[];
+  links: ThemeLink[];
 }
 
 export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
@@ -31,22 +25,18 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
   const labelledById = uuidv4();
 
   return (
-    <Box
-      display="flex"
-      flexDirection={{ _: 'column', sm: 'row' }}
-      alignItems="flex-start"
-      spacing={{ _: 3, sm: 0 }}
-      width="100%"
-    >
-      <Text
-        id={labelledById}
-        css={css({
-          flex: '0 0 auto',
-          marginRight: asResponsiveArray({ _: 0, sm: 4 }),
-        })}
-      >
-        {breakpoints.sm ? labels.DESKTOP : labels.MOBILE}
-      </Text>
+    <Box display="flex" flexDirection={{ _: 'column', sm: 'row' }} alignItems="flex-start" spacing={{ _: 3, sm: 0 }} width="100%">
+      {labels.DESKTOP && labels.MOBILE && (
+        <Text
+          id={labelledById}
+          css={css({
+            flex: '0 0 auto',
+            marginRight: asResponsiveArray({ _: 0, sm: 4 }),
+          })}
+        >
+          {breakpoints.sm ? labels.DESKTOP : labels.MOBILE}
+        </Text>
+      )}
       <ul
         aria-labelledby={labelledById}
         css={css({
@@ -59,20 +49,17 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
           padding: 0,
         })}
       >
-        {links
-          .sort((linkA, linkB) => linkA.index - linkB.index)
-          .map((link) => (
-            <li key={link.label}>
-              <LinkWithIcon
-                href={link.href}
-                icon={<ChevronRight />}
-                iconPlacement="right"
-                showAsButton={breakpoints.sm}
-              >
-                {link.label}
-              </LinkWithIcon>
-            </li>
-          ))}
+        {links.map(
+          (link, index) =>
+            link.cta.title &&
+            link.cta.href && (
+              <li key={index}>
+                <LinkWithIcon href={link.cta.href} icon={<ChevronRight />} iconPlacement="right" showAsButton={breakpoints.sm}>
+                  {link.cta.title}
+                </LinkWithIcon>
+              </li>
+            )
+        )}
       </ul>
     </Box>
   );
