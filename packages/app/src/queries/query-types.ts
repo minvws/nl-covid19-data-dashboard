@@ -5,6 +5,7 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
+  kpiThemes: KpiThemes;
   measureTheme: MeasureTheme;
   thermometer: ThermometerConfig;
 }
@@ -48,9 +49,11 @@ interface ThermometerLevel {
 interface TopicalConfig {
   title: string;
   description: PortableTextEntry[];
-  themes: TopicalTheme[];
 }
 
+interface KpiThemes {
+  themes: TopicalTheme[];
+}
 interface Theme {
   title: string;
   subTitle: PortableTextEntry[] | null;

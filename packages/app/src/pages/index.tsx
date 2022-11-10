@@ -78,7 +78,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { topicalStructure } = content;
 
-  const { topicalConfig, measureTheme, thermometer } = topicalStructure;
+  const { topicalConfig, measureTheme, thermometer, kpiThemes } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -180,7 +180,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           )}
 
           <Box spacing={{ _: 5, md: 6 }} paddingX={{ _: space[3], sm: space[4] }}>
-            {topicalStructure.topicalConfig.themes.map((theme) => {
+            {kpiThemes.themes.map((theme) => {
               return (
                 <Box key={theme.title}>
                   <Box marginBottom={4}>
