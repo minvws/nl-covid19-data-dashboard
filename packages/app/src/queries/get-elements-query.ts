@@ -1,5 +1,4 @@
 import { DataScopeKey, MetricName } from '@corona-dashboard/common';
-import { SeverityIndicatorTimelineEventConfig } from '~/components/severity-indicator-tile/components/timeline/timeline';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 function formatStringArray(array: string[]) {
@@ -24,19 +23,6 @@ export function getElementsQuery<K extends DataScopeKey>(scope: K, metricNames: 
           dateEnd
         }},
         warning
-      },
-      'thermometer': *[
-        _type == 'thermometerEventCollection'
-      ]{
-        _id,
-        name,
-        thermometerEvents[]{
-          'title': title.${locale},
-          'description': description.${locale},
-          'level': level,
-          date,
-          dateEnd
-        }
       },
       'kpi': *[
         _type == 'kpi'
@@ -99,18 +85,6 @@ type CmsTimelineEventCollection = {
   timelineEvents: CmsTimelineEventConfig[];
 };
 
-type CmsThermometerEventConfig = CmsTimelineEventConfig & {
-  start: number;
-  end: number;
-  level: number;
-};
-
-type CmsThermometerElement = {
-  _id: string;
-  name: string;
-  thermometerEvents: CmsThermometerEventConfig[];
-};
-
 type CmsKpiElement = ElementBase;
 
 type CmsChoroplethElement = ElementBase;
@@ -121,7 +95,6 @@ type CmsWarningElement = {
 
 export type ElementsQueryResult = {
   timeSeries: CmsTimeSeriesElement[];
-  thermometer: CmsThermometerElement[];
   kpi: CmsKpiElement[];
   choropleth: CmsChoroplethElement[];
   warning: CmsWarningElement[];
@@ -131,7 +104,7 @@ export type ElementsQueryResult = {
  * Get the timeline configuration from the correct element and convert it to the
  * right format.
  */
-export function getTimelineEvents(elements: CmsTimeSeriesElement[], metricName: MetricName, metricProperty?: string) {
+export const getTimelineEvents = (elements: CmsTimeSeriesElement[], metricName: MetricName, metricProperty?: string) => {
   const timelineEventCollections = elements.find((x) => x.metricName === metricName && (!metricProperty || x.metricProperty === metricProperty))?.timelineEventCollections;
 
   return timelineEventCollections
@@ -144,22 +117,10 @@ export function getTimelineEvents(elements: CmsTimeSeriesElement[], metricName: 
         }))
       )
     : undefined;
-}
-
-export const getThermometerEvents = (elements: CmsThermometerElement[], name: string) => {
-  const thermometerEvents = elements.find((element) => element.name === name)?.thermometerEvents;
-
-  return thermometerEvents
-    ? thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => ({
-        title: thermometerEvent.title,
-        description: thermometerEvent.description,
-        level: thermometerEvent.level,
-        start: new Date(thermometerEvent.date).getTime() / 1000,
-        end: new Date(thermometerEvent.dateEnd).getTime() / 1000,
-      }))
-    : undefined;
 };
 
-export function getWarning(elements: CmsWarningElement[], metricName: MetricName) {
-  return elements.find((x) => x.metricName === metricName)?.warning || undefined;
-}
+/**
+ * Get the timeline configuration from the correct element and convert it to the
+ * right format.
+ */
+export const getWarning = (elements: CmsWarningElement[], metricName: MetricName) => elements.find((x) => x.metricName === metricName)?.warning || undefined;

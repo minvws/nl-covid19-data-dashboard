@@ -2,34 +2,26 @@ import { Box } from '~/components/base';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { Markdown } from '~/components/markdown';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { space } from '~/style/theme';
+import { RichContent } from '~/components/cms/rich-content';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface TopicalMeasureTileProps {
   icon: TopicalIcon;
-  title: string;
+  title: PortableTextEntry[];
 }
 
-export const TopicalMeasureTile = ({
-  icon,
-  title,
-}: TopicalMeasureTileProps) => {
+export const TopicalMeasureTile = ({ icon, title }: TopicalMeasureTileProps) => {
   return (
-    <Box
-      spacing={3}
-      borderColor={colors.gray5}
-      borderWidth="1px"
-      borderStyle="solid"
-      p="1.5rem"
-    >
+    <Box spacing={3} borderColor={colors.gray5} borderWidth="1px" borderStyle="solid" p="1.5rem">
       <Box display="flex" justifyContent="flex-start" alignItems="center">
         <KpiIcon>
           <DynamicIcon name={icon} aria-hidden="true" />
         </KpiIcon>
 
         <Box display="flex" justifyContent="flex-start">
-          <Markdown content={title} />
+          <RichContent blocks={title} elementAlignment="start" />
         </Box>
       </Box>
     </Box>

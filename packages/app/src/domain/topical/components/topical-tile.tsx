@@ -8,44 +8,38 @@ import { asResponsiveArray } from '~/style/utils';
 import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
 import { ChevronRight } from '@corona-dashboard/icons';
-import { Markdown } from '~/components/markdown';
+import { RichContent } from '~/components/cms/rich-content';
 import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
-
-type TrendIcon = {
-  direction: 'UP' | 'DOWN';
-  color: string;
-};
-
-type Cta = {
-  label: string;
-  href: string;
-};
+import { Cta } from '~/queries/query-types';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
+import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
 
 interface TopicalTileProps {
   title: string;
   tileIcon: TopicalIcon;
-  trendIcon: TrendIcon | null;
-  dynamicDescription: string;
-  kpiValue: number | null | string;
-  cta: Cta | null;
+  trendIcon: TrendIconType;
+  description: PortableTextEntry[];
+  kpiValue: string | null;
+  cta: Cta;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kpiValue, cta }: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
 
-  const getTrendDiretion = (trendIcon: TrendIcon): TrendDirection => {
+  const getTrendDirection = (trendIcon: TrendIconType): TrendDirection => {
     return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
   };
 
   return (
     <Box
-      as="a"
-      href={cta?.href}
+      as={cta.href ? 'a' : 'div'}
+      href={cta.href ?? undefined}
       borderColor={colors.gray3}
       borderWidth="1px"
       borderStyle="solid"
@@ -84,18 +78,18 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
                 })}
               >
                 {title}
-                {!formattedKpiValue && trendIcon && (
-                  <TrendIconWrapper color={trendIcon.color}>
-                    <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
+                {!formattedKpiValue && trendIcon.direction && trendIcon.color && (
+                  <TrendIconWrapper color={mapStringToColors(trendIcon.color)}>
+                    <TrendIcon trendDirection={getTrendDirection(trendIcon)} />
                   </TrendIconWrapper>
                 )}
               </Heading>
               {formattedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" mt={2}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
-                  {trendIcon && (
-                    <TrendIconWrapper color={trendIcon.color}>
-                      <TrendIcon trendDirection={getTrendDiretion(trendIcon)} />
+                  {trendIcon.direction && trendIcon.color && (
+                    <TrendIconWrapper color={mapStringToColors(trendIcon.color)}>
+                      <TrendIcon trendDirection={getTrendDirection(trendIcon)} />
                     </TrendIconWrapper>
                   )}
                 </Box>
@@ -108,14 +102,14 @@ export function TopicalTile({ title, tileIcon, trendIcon, dynamicDescription, kp
           </Box>
           <Box display="flex" flexDirection="column" justifyContent="start" textAlign="left" p={{ _: 3, xs: 4 }} pt={formattedKpiValue ? { _: 2, xs: 2 } : undefined}>
             <Box display="flex" alignItems="center">
-              <Markdown content={dynamicDescription} />
+              <RichContent blocks={description} elementAlignment="start" />
             </Box>
           </Box>
         </Box>
 
-        {cta && (
+        {cta.title && (
           <Box display="flex" justifyContent="center" alignItems="center" bg={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
-            <TextWithIcon text={cta.label} icon={<ChevronRight />} />
+            <TextWithIcon text={cta.title} icon={<ChevronRight />} />
           </Box>
         )}
       </>
