@@ -59,6 +59,7 @@ export function getTopicalStructureQuery(locale: string) {
       ][0]{
         'title': title.${locale},
         'subTitle': subTitle.${locale},
+        "tileTitle":tileTitle.${locale},
         currentLevel,
         'thermometerLevels': thermometerLevels[]->{
           'level': level,

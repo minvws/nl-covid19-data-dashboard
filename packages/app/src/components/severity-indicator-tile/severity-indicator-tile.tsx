@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { space } from '~/style/theme';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
-import { BoldText, InlineText } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { TrendIcon, TrendIconColor } from '~/domain/topical/types';
 import { SeverityIndicatorLabel } from './components/severity-indicator-label';
 import { SeverityIndicator } from './components/severity-indicator';
@@ -18,7 +18,7 @@ interface SeverityIndicatorTileProps {
   description: string;
   label: string;
   level: SeverityLevel;
-  title: string;
+  title: string | null;
   sourceLabel: string;
   datesLabel: string;
   levelDescription: string;
@@ -44,9 +44,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
       as="figure"
     >
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`}>
-        <BoldText>
-          <Markdown content={title} />
-        </BoldText>
+        {title && <Markdown content={title} />}
         <InlineText>{datesLabel}</InlineText>
 
         <SeverityIndicatorLabel label={label} level={level} />

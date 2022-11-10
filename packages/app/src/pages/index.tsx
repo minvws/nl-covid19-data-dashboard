@@ -126,7 +126,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     label: currentSeverityLevelTexts.label.toLowerCase(),
                   })
                 }
-                title={thermometer.title}
+                title={thermometer.tileTitle}
                 label={currentSeverityLevelTexts.label}
                 sourceLabel={thermometer.sourceLabel}
                 datesLabel={thermometer.datesLabel}
@@ -140,7 +140,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   endDate={endDate}
                   timelineEvents={thermometerEvents}
                   labels={{
-                    heading: thermometer.title,
+                    heading: thermometer.timeline.title,
                     today: thermometer.timeline.todayLabel,
                     tooltipCurrentEstimation: thermometer.timeline.tooltipLabel,
                   }}
