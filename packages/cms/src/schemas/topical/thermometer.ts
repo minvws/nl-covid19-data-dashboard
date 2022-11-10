@@ -11,15 +11,20 @@ export const thermometer = {
   name: 'thermometer',
   fields: [
     {
-      title: 'De titel van de thermometer',
+      title: 'De titel boven de thermometer',
       name: 'title',
       type: 'localeString',
       validation: REQUIRED,
     },
     {
-      title: 'De beschrijving van de thermometer',
+      title: 'De beschrijving boven de thermometer',
       name: 'subTitle',
       type: 'localeRichContentBlock'
+    },
+    {
+      title: 'De titel binnen de thermometer tegel',
+      name: 'tileTitle',
+      type: 'localeString'
     },
     {
       title: 'Huidige stand',
