@@ -17,6 +17,11 @@ export const thermometer = {
       validation: REQUIRED,
     },
     {
+      title: 'De beschrijving van de thermometer',
+      name: 'subTitle',
+      type: 'localeRichContentBlock'
+    },
+    {
       title: 'Huidige stand',
       name: 'currentLevel',
       type: 'number',
