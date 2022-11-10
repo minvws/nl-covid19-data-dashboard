@@ -8,6 +8,7 @@ export const themeCollection = {
   fields: [
     {
       title: "Thema's",
+      description: 'De themas onderverdeeld in tegels en links',
       name: 'themes',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'theme' } }],
