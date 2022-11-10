@@ -25,7 +25,7 @@ interface TopicalTileProps {
   description: PortableTextEntry[];
   kpiValue: string | null;
   cta: Cta;
-  sourceLabel: string;
+  sourceLabel: string | null;
 }
 
 export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel }: TopicalTileProps) {
@@ -119,11 +119,13 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
           </Box>
         </Box>
         <Box>
-          <Box padding={{ _: space[3], xs: space[4] }}>
-            <InlineText color="gray7">{sourceLabel}</InlineText>
-          </Box>
+          {sourceLabel && (
+            <Box padding={{ _: space[3], xs: space[4] }} paddingTop={{ _: space[0], xs: space[0] }}>
+              <InlineText color="gray7">{sourceLabel}</InlineText>
+            </Box>
+          )}
           {cta.title && (
-            <Box display="flex" justifyContent="center" alignItems="center" bg={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
+            <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
               <TextWithIcon text={cta.title} icon={<ChevronRight />} />
             </Box>
           )}

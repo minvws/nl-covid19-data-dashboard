@@ -31,6 +31,11 @@ export const themeTile = {
       type: 'localeString',
     },
     {
+      title: 'Metadata label',
+      name: 'sourceLabel',
+      type: 'localeString',
+    },
+    {
       title: 'Trend icon',
       name: 'trendIcon',
       type: 'trendIcon',

@@ -74,6 +74,7 @@ interface BaseTile {
 
 interface TopicalTile extends BaseTile {
   title: string;
+  sourceLabel: string | null;
   kpiValue: string | null;
   cta: Cta;
   trendIcon: TrendIcon;
