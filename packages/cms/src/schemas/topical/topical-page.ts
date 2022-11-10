@@ -17,13 +17,5 @@ export const topicalPageConfig = {
       type: 'localeRichContentBlock',
       validation: REQUIRED,
     },
-    {
-      title: "Thema's",
-      description: 'De themas onderverdeeld in tegels en links',
-      name: 'themes',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'theme' } }],
-      validation: REQUIRED,
-    },
   ],
 };

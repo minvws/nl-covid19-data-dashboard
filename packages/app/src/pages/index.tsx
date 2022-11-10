@@ -116,17 +116,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
           {currentSeverityLevelTexts && (
             <Box marginY={space[5]} paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
-              <TopicalThemeHeader
-                title={thermometer.title}
-                subtitleThermometer={
-                  thermometer.levelDescription &&
-                  replaceVariablesInText(thermometer.levelDescription, {
-                    level: currentSeverityLevel,
-                    label: currentSeverityLevelTexts.label,
-                  })
-                }
-                icon={THERMOMETER_ICON_NAME}
-              />
+              <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} icon={THERMOMETER_ICON_NAME} />
 
               <SeverityIndicatorTile
                 level={currentSeverityLevel}

@@ -6,35 +6,26 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import DynamicIcon from '~/components/get-icon-by-name';
 import theme from '~/style/theme';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { Markdown } from '~/components';
 import { fontSizes } from '~/style/theme';
 
 interface TopicalThemeHeaderProps {
   title: string;
   subtitle?: PortableTextEntry[] | null;
-  subtitleThermometer?: string | null;
   icon: TopicalIcon;
 }
 
-export const TopicalThemeHeader = ({ title, subtitle, subtitleThermometer, icon }: TopicalThemeHeaderProps) => {
+export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeaderProps) => {
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
-        {icon && (
-          <TopicalThemeHeaderIcon>
-            <DynamicIcon name={icon} aria-hidden="true" />
-          </TopicalThemeHeaderIcon>
-        )}
+        <TopicalThemeHeaderIcon>
+          <DynamicIcon name={icon} aria-hidden="true" />
+        </TopicalThemeHeaderIcon>
         <Heading level={2}>{title}</Heading>
       </Box>
       {subtitle && (
         <Box fontSize={fontSizes[3]}>
           <RichContent blocks={subtitle} />
-        </Box>
-      )}
-      {subtitleThermometer && (
-        <Box fontSize={3}>
-          <Markdown content={subtitleThermometer} />
         </Box>
       )}
     </Box>

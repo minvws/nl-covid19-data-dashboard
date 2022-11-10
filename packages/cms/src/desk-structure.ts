@@ -143,8 +143,9 @@ export default () =>
             .title('Pagina configuratie')
             .items([
               addListItem(BsGearFill, 'Samenvattingspagina configuratie', 'topicalPageConfig'),
-              addListItem(BsGearFill, 'Maatregelen sectie', 'measureTheme'),
               addListItem(BsThermometer, 'Thermometer', 'thermometer'),
+              addListItem(BsGearFill, "KPI thema's", 'themeCollection'),
+              addListItem(BsGearFill, 'Advies thema', 'measureTheme'),
             ])
         ),
 

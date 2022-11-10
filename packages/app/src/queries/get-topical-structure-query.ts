@@ -54,6 +54,7 @@ export function getTopicalStructureQuery(locale: string) {
         _type == 'thermometer' && !(_id in path("drafts.**"))
       ][0]{
         'title': title.${locale},
+        'subTitle': subTitle.${locale},
         currentLevel,
         'thermometerLevels': thermometerLevels[]->{
           'level': level,
