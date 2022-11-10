@@ -3,12 +3,16 @@ import { SeverityIndicatorTimelineEventConfig } from '~/components/severity-indi
 
 export function getTopicalStructureQuery(locale: string) {
   const query = `// groq
-    {
+  {
       'topicalConfig': *[
           _type == 'topicalPageConfig' && !(_id in path("drafts.**"))
       ][0]{
         'title': title.${locale},
-        'description': description.${locale},
+        'description': description.${locale}
+      },
+      'kpiThemes': *[
+          _type == 'themeCollection' && !(_id in path("drafts.**"))
+      ][0]{
         'themes': themes[]->{
           "title":title.${locale},
           "subTitle":subTitle.${locale},
