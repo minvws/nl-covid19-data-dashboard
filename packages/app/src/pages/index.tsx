@@ -38,6 +38,8 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
+import { useState, useEffect, SetStateAction } from 'react';
+import { getClient } from '~/lib/sanity';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -56,31 +58,54 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
-      topicalStructure: TopicalSanityData;
-    }>((context) => {
-      const { locale } = context;
+    }>(() => {
       return `{
         "parts": ${getPagePartsQuery('topical_page')},
-        "topicalStructure": ${getTopicalStructureQuery(locale)}
       }`;
     })(context);
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
-        topicalStructure: content.topicalStructure,
       },
     };
   }
 );
 
-const Home = (props: StaticProps<typeof getStaticProps>) => {
+const sanityQuery = getTopicalStructureQuery('nl');
+
+export async function getTopicalPageData(
+  setData: { (value: SetStateAction<TopicalSanityData | null>): void; (arg0: TopicalSanityData): void },
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
+) {
+  getClient().then(async (client) => {
+    client.fetch(sanityQuery).then((data: TopicalSanityData) => {
+      setData(data);
+      setLoading(false);
+    });
+  });
+}
+
+const Home = async (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
-
-  const { topicalStructure } = content;
-
-  const { topicalConfig, measureTheme, thermometer, kpiThemes } = topicalStructure;
+  const [topicalStructure, setData] = useState<TopicalSanityData | null>(null);
+  const [isLoading, setLoading] = useState(false);
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+
+  await getTopicalPageData(setData, setLoading);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [topicalStructure]);
+
+  setInterval(() => {
+    console.log(topicalStructure);
+  }, 500);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!topicalStructure) return <p>No profile data</p>;
+
+  const { topicalConfig, measureTheme, thermometer, kpiThemes } = topicalStructure;
 
   const metadata = {
     ...textNl.nationaal_metadata,
