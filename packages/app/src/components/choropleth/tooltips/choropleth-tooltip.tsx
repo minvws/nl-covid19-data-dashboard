@@ -4,7 +4,7 @@ import { Markdown, VisuallyHidden } from '~/components';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { ChoroplethDataItem } from '../logic';
+import { ChoroplethDataItem, isVrData } from '../logic';
 import { TooltipContent } from './tooltip-content';
 import { TooltipSubject } from './tooltip-subject';
 import { TooltipNotification } from './tooltip-notification';
@@ -69,7 +69,9 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
   let outdatedDataDate;
   if (isSewerMap) {
     showNotification = tooltipVars.data_is_outdated;
-    outdatedDataDate = formatDateFromSeconds(tooltipVars['date_end_unix'] as number, 'medium');
+
+    // VRData does not contain the property 'date_end_unix' so 'date_unix' is used instead.
+    outdatedDataDate = formatDateFromSeconds(tooltipVars[!isVrData(tooltipVars) ? 'date_end_unix' : 'date_unix'] as number, 'medium');
   }
 
   return (
