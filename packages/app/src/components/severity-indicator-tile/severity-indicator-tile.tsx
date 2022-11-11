@@ -4,30 +4,30 @@ import styled from 'styled-components';
 import { space } from '~/style/theme';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
-import { BoldText, InlineText } from '~/components/typography';
-import { TrendIcon } from '~/domain/topical/types';
+import { InlineText } from '~/components/typography';
+import { TrendIcon, TrendIconColor } from '~/domain/topical/types';
 import { SeverityIndicatorLabel } from './components/severity-indicator-label';
 import { SeverityIndicator } from './components/severity-indicator';
 import { SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH } from './constants';
 import { getSeverityColor } from './logic/get-severity-color';
-import { SeverityLevels } from './types';
+import { SeverityLevel } from './types';
 import { mapStringToColors } from './logic/map-string-to-colors';
 import { setTrendIcon } from '~/components/severity-indicator-tile/logic/set-trend-icon';
 
 interface SeverityIndicatorTileProps {
   description: string;
   label: string;
-  level: SeverityLevels;
-  title: string;
+  level: SeverityLevel;
+  title: string | null;
   sourceLabel: string;
   datesLabel: string;
   levelDescription: string;
-  trendIcon: TrendIcon | null;
+  trendIcon: TrendIcon;
 }
 
 export const SeverityIndicatorTile = ({ description, label, level, title, datesLabel, sourceLabel, levelDescription, trendIcon }: SeverityIndicatorTileProps) => {
   const hasIconProps = trendIcon?.direction && trendIcon?.color;
-  const iconColor = trendIcon?.color.toUpperCase();
+  const iconColor = trendIcon?.color?.toUpperCase() as TrendIconColor;
 
   return (
     <Box
@@ -44,9 +44,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
       as="figure"
     >
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`}>
-        <BoldText>
-          <Markdown content={title} />
-        </BoldText>
+        {title && <Markdown content={title} />}
         <InlineText>{datesLabel}</InlineText>
 
         <SeverityIndicatorLabel label={label} level={level} />
@@ -55,11 +53,10 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
       </Box>
 
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`} as="figcaption">
-        <Markdown content={description} />
+        {description && <Markdown content={description} />}
         <Box display={hasIconProps ? 'flex' : 'block'} alignItems="center" mt={3} css={css({ gap: 2 })}>
-          {hasIconProps && <TrendIconWrapper color={mapStringToColors(iconColor)}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
-
-          <Markdown content={levelDescription} />
+          {trendIcon?.direction && iconColor && hasIconProps && <TrendIconWrapper color={mapStringToColors(iconColor)}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
+          {levelDescription && <Markdown content={levelDescription} />}
         </Box>
         <Box my={3}>
           <InlineText color="gray7">{sourceLabel}</InlineText>
