@@ -10,6 +10,16 @@ export function getTopicalStructureQuery(locale: string) {
         'title': title.${locale},
         'description': description.${locale}
       },
+      'weeklySummary': *[
+        _type == 'weeklySummary' && !(_id in path("drafts.**"))
+      ][0]{
+        'title': title.${locale},
+        'items': items[]->{
+          tileIcon,
+          'description': description.${locale},
+          isThermometerMetric
+        },
+      },
       'kpiThemes': *[
           _type == 'themeCollection' && !(_id in path("drafts.**"))
       ][0]{
@@ -57,6 +67,7 @@ export function getTopicalStructureQuery(locale: string) {
       'thermometer': *[
         _type == 'thermometer' && !(_id in path("drafts.**"))
       ][0]{
+        icon,
         'title': title.${locale},
         'subTitle': subTitle.${locale},
         "tileTitle":tileTitle.${locale},
