@@ -19,9 +19,6 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
   const { data, dataFormatters } = props;
   const { commonTexts, formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = useIntl();
   const isSewerMap = data.dataConfig.metricName === 'sewer';
-  let tooltipNotification;
-  let showNotification;
-  let outdatedDataDate;
 
   const text = commonTexts.choropleth_tooltip;
 
@@ -31,6 +28,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
   const tooltipContent = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(isDefined(tooltipContent), `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`);
 
+  let tooltipNotification;
   if (isSewerMap) {
     tooltipNotification = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]
       ?.outdated_data_notification;
@@ -67,10 +65,11 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
   const dataItem = data.dataItem[data.dataConfig.metricProperty];
   const filterBelow = typeof dataItem === 'number' ? dataItem : null;
 
+  let showNotification;
+  let outdatedDataDate;
   if (isSewerMap) {
-    // TODO:Arjun -  Setting to true for the timebeing, it should eventually come from tooltip.data.dataItem (see index.tsx -> ToolTip)
-    showNotification = true || tooltipVars.hasOutDatedData;
-    outdatedDataDate = formatDateFromSeconds(tooltipVars['date_of_insertion_unix'] as number, 'medium'); // TODO:Arjun - Not sure which date to use yet
+    showNotification = tooltipVars.data_is_outdated;
+    outdatedDataDate = formatDateFromSeconds(tooltipVars['date_end_unix'] as number, 'medium');
   }
 
   return (
