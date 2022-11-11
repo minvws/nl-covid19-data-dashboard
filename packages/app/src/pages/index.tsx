@@ -38,7 +38,7 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
-import { useState, useEffect, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import { getClient } from '~/lib/sanity';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -71,36 +71,32 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const sanityQuery = getTopicalStructureQuery('nl');
-
-export async function getTopicalPageData(
-  setData: { (value: SetStateAction<TopicalSanityData | null>): void; (arg0: TopicalSanityData): void },
-  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
-) {
-  getClient().then(async (client) => {
-    client.fetch(sanityQuery).then((data: TopicalSanityData) => {
-      setData(data);
-      setLoading(false);
-    });
-  });
-}
-
-const Home = async (props: StaticProps<typeof getStaticProps>) => {
+const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
-  const [topicalStructure, setData] = useState<TopicalSanityData | null>(null);
+  const [topicalStructure, setTopicalStructure] = useState<TopicalSanityData | null>(null);
   const [isLoading, setLoading] = useState(false);
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const sanityQuery = getTopicalStructureQuery('nl');
+  // const getTopicalPageData = async () => getClient().then(async (client) => client.fetch(sanityQuery).then((data: TopicalSanityData) => data));
+  // const topicalStructure: TopicalSanityData | null = getTopicalPageData().then((data: TopicalSanityData) => data);
+  // getTopicalPageData().then((data: TopicalSanityData) => {
+  //   setLoading(true);
+  //   setTopicalStructure(data);
+  // });
 
-  await getTopicalPageData(setData, setLoading);
+  // useEffect(() => {
+  //   topicalStructure ?? setLoading(true);
+  // }, [topicalStructure]);
 
   useEffect(() => {
     setLoading(true);
-  }, [topicalStructure]);
-
-  setInterval(() => {
-    console.log(topicalStructure);
-  }, 500);
+    const getTopicalPageData = async () => getClient().then(async (client) => client.fetch(sanityQuery).then((data: TopicalSanityData) => data));
+    getTopicalPageData().then((data: TopicalSanityData) => {
+      setTopicalStructure(data);
+      setLoading(false);
+    });
+  }, [sanityQuery]);
 
   if (isLoading) return <p>Loading...</p>;
   if (!topicalStructure) return <p>No profile data</p>;
