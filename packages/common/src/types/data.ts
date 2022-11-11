@@ -196,6 +196,7 @@ export interface GmCollectionSewer {
   average: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
+  data_is_outdated: boolean;
 }
 export interface GmCollectionVaccineCoveragePerAgeGroup {
   gmcode: string;
@@ -1732,6 +1733,7 @@ export interface VrCollectionSewer {
   vrcode: string;
   average: number | null;
   date_of_insertion_unix: number;
+  data_is_outdated: boolean;
 }
 export interface VrCollectionBehaviorArchived_20221019 {
   vrcode: string;
