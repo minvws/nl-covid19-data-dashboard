@@ -78,16 +78,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const sanityQuery = getTopicalStructureQuery('nl');
-  // const getTopicalPageData = async () => getClient().then(async (client) => client.fetch(sanityQuery).then((data: TopicalSanityData) => data));
-  // const topicalStructure: TopicalSanityData | null = getTopicalPageData().then((data: TopicalSanityData) => data);
-  // getTopicalPageData().then((data: TopicalSanityData) => {
-  //   setLoading(true);
-  //   setTopicalStructure(data);
-  // });
-
-  // useEffect(() => {
-  //   topicalStructure ?? setLoading(true);
-  // }, [topicalStructure]);
 
   useEffect(() => {
     setLoading(true);

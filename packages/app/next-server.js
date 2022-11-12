@@ -1,10 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const next = require('next');
-const {
-  createProxyMiddleware,
-  responseInterceptor,
-} = require('http-proxy-middleware');
+const { createProxyMiddleware, responseInterceptor } = require('http-proxy-middleware');
 const dotenv = require('dotenv');
 const path = require('path');
 const { imageResizeTargets } = require('@corona-dashboard/common');
@@ -39,20 +36,13 @@ const PORT = process.env.EXPRESS_PORT || (IS_PRODUCTION_BUILD ? 8080 : 3000);
 const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
 
 const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
-const STATIC_ASSET_HTTP_DATE = new Date(
-  Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000
-).toUTCString();
+const STATIC_ASSET_HTTP_DATE = new Date(Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000).toUTCString();
 
 (async function () {
   await app.prepare().then(async () => {
     // in front of all other code
     intercept((text) => {
-      if (
-        text.indexOf(
-          'Anonymous arrow functions cause Fast Refresh to not preserve local component state'
-        ) > -1
-      )
-        return '';
+      if (text.indexOf('Anonymous arrow functions cause Fast Refresh to not preserve local component state') > -1) return '';
       return text;
     });
   });
@@ -99,19 +89,11 @@ const STATIC_ASSET_HTTP_DATE = new Date(
          * to
          * /images/NEXT_PUBLIC_SANITY_PROJECT_ID/NEXT_PUBLIC_SANITY_DATASET/filename.ext
          */
-        const newPath = path.replace(
-          /^\/cms-(images|files)/,
-          `/$1/${SANITY_PATH}`
-        );
+        const newPath = path.replace(/^\/cms-(images|files)/, `/$1/${SANITY_PATH}`);
 
         return newPath;
       },
-      onProxyRes: responseInterceptor(async function (
-        responseBuffer,
-        proxyRes,
-        req,
-        res
-      ) {
+      onProxyRes: responseInterceptor(async function (responseBuffer, proxyRes, req, res) {
         setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, false);
         return responseBuffer;
       }),
@@ -151,24 +133,17 @@ const STATIC_ASSET_HTTP_DATE = new Date(
   /**
    * Set headers for a response
    */
-  function setResponseHeaders(
-    res,
-    maxAge = SIX_MONTHS_IN_SECONDS,
-    noCache = false
-  ) {
+  function setResponseHeaders(res, maxAge = SIX_MONTHS_IN_SECONDS, noCache = false) {
     const contentSecurityPolicy =
       IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
-        ? "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none';"
+        ? "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none'; connect-src 'self' 5mog5ask.api.sanity.io * ws: wss:;"
         : "default-src 'self'; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline' statistiek.rijksoverheid.nl; font-src 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'none'; connect-src 'self' 5mog5ask.api.sanity.io * ws: wss:;";
     res.set('Content-Security-Policy', contentSecurityPolicy);
     res.set('Referrer-Policy', 'no-referrer');
     res.set('X-Content-Type-Options', 'nosniff');
     res.set('X-Frame-Options', 'DENY');
     res.set('X-XSS-Protection', '1; mode=block');
-    res.set(
-      'Strict-Transport-Security',
-      `max-age=${maxAge}; includeSubdomains; preload`
-    );
+    res.set('Strict-Transport-Security', `max-age=${maxAge}; includeSubdomains; preload`);
     res.set('Permissions-Policy', 'interest-cohort=()');
 
     if (noCache) {
@@ -181,10 +156,7 @@ const STATIC_ASSET_HTTP_DATE = new Date(
        * Non-HTML requests are are cached indefinitely and are provided with a hash to be able to cache-bust them.
        * These are not applied to assets in the public folder. (See headers() in next.config.js for that.)
        */
-      res.setHeader(
-        'Cache-Control',
-        `public, max-age=${STATIC_ASSET_MAX_AGE_IN_SECONDS}`
-      );
+      res.setHeader('Cache-Control', `public, max-age=${STATIC_ASSET_MAX_AGE_IN_SECONDS}`);
       res.setHeader('Vary', 'content-type');
       res.setHeader('Expires', STATIC_ASSET_HTTP_DATE);
     }
