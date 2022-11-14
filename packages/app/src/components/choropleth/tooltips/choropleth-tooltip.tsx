@@ -72,6 +72,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
 
     // VRData does not contain the property 'date_end_unix' so 'date_unix' is used instead.
     outdatedDataDate = formatDateFromSeconds(tooltipVars[!isVrData(tooltipVars) ? 'date_end_unix' : 'date_unix'] as number, 'medium');
+    tooltipNotification = replaceVariablesInText(tooltipNotification as string, { date: outdatedDataDate });
   }
 
   return (
@@ -84,8 +85,8 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
       </TooltipSubject>
 
       {showNotification && outdatedDataDate && tooltipNotification && (
-        <TooltipNotification>
-          <Markdown content={replaceVariablesInText(tooltipNotification, { date: outdatedDataDate })} />
+        <TooltipNotification ariaContent={tooltipNotification}>
+          <Markdown content={tooltipNotification} />
         </TooltipNotification>
       )}
     </TooltipContent>

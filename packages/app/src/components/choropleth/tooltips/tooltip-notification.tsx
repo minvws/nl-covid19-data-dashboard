@@ -1,15 +1,23 @@
 import { colors } from '@corona-dashboard/common';
+import { VisuallyHidden } from '~/components';
 import { space } from '~/style/theme';
 import styled from 'styled-components';
 
 interface TooltipNotificationProps {
   children: React.ReactNode;
+  ariaContent?: string;
 }
 
 export const TooltipNotification = (props: TooltipNotificationProps) => {
-  const { children } = props;
+  const { children, ariaContent } = props;
 
-  return <StyledTooltipNotification>{children}</StyledTooltipNotification>;
+  return (
+    <StyledTooltipNotification>
+      {ariaContent && <VisuallyHidden>{ariaContent.replace(/(\n|\*)/g, '')}</VisuallyHidden>}
+
+      {children}
+    </StyledTooltipNotification>
+  );
 };
 
 // Negative margin is used her to offset the padding from the parent component and to not alter styles for tooltips without a notification.
