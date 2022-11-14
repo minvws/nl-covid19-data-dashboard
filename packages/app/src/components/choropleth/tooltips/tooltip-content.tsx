@@ -3,6 +3,7 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Text } from '~/components/typography';
+import { space } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface IProps {
@@ -86,6 +87,7 @@ const TooltipInfo = styled.div(
     cursor: 'pointer',
     borderTop: '1px solid',
     borderTopColor: 'gray3',
+    padding: `${space[2]} ${space[3]}`,
   })
 );
 

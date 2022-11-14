@@ -5,7 +5,6 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { BoldText } from '~/components/typography';
 import { getThresholdValue } from '~/utils/get-threshold-value';
-import styled from 'styled-components';
 
 interface TooltipSubjectProps {
   subject?: string;
@@ -24,30 +23,21 @@ export function TooltipSubject({ subject, thresholdValues, filterBelow, children
       : noDataFillColor;
 
   return (
-    <StyledTooltipSubject>
-      <Box spacing={1}>
-        {subject && <BoldText>{subject}</BoldText>}
-        <Box
-          m={0}
-          spacingHorizontal={2}
-          css={css({
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'nowrap',
-            whiteSpace: 'pre-wrap',
-          })}
-        >
-          {children}
-          <Box flexShrink={0} height={13} width={13} borderRadius={'2px'} ml={'auto'} mb={'auto'} mt={'5px'} backgroundColor={color} />
-        </Box>
+    <Box spacing={1}>
+      {subject && <BoldText>{subject}</BoldText>}
+      <Box
+        margin={0}
+        spacingHorizontal={2}
+        css={css({
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'nowrap',
+          whiteSpace: 'pre-wrap',
+        })}
+      >
+        {children}
+        <Box flexShrink={0} height="13px" width="13px" borderRadius="2px" ml="auto" mb="auto" mt="5px" backgroundColor={color} />
       </Box>
-    </StyledTooltipSubject>
+    </Box>
   );
 }
-
-const StyledTooltipSubject = styled.div(
-  css({
-    py: 2,
-    px: 3,
-  })
-);

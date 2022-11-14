@@ -43,9 +43,9 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
     ...data.dataOptions.tooltipVariables,
   } as Record<string, string | number>;
 
-  const formattedTooltipVars = Object.entries(dataFormatters || {}).reduce((acc, [key, formatter]) => {
+  const formattedTooltipVars = Object.entries(dataFormatters || {}).reduce((accumulator, [key, formatter]) => {
     return {
-      ...acc,
+      ...accumulator,
       [key]: formatter(tooltipVars[key]),
     };
   }, tooltipVars);

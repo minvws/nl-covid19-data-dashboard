@@ -42,7 +42,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, type = '
   );
 
   return (
-    <Box width="100%" pr={`${endLabelSize.width ?? 0 / 2}px`} spacing={2} aria-hidden="true">
+    <Box width="100%" paddingRight={`${endLabelSize.width ?? 0 / 2}px`} spacing={2} aria-hidden="true">
       {title && <Text variant="subtitle1">{title}</Text>}
 
       {pageType === 'sewer' && (
@@ -63,7 +63,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, type = '
             const formattedTreshold = formatNumber(threshold);
 
             return (
-              <Item key={color + threshold} ref={index === 0 ? itemRef : undefined} width={100 / thresholds.length}>
+              <Item key={color + threshold} ref={index === 0 ? itemRef : undefined} width={`${100 / thresholds.length}%`}>
                 <LegendaColor color={color} first={isFirst} last={isLast} />
                 {isFirst ? <StartLabel>{label ?? formattedTreshold}</StartLabel> : displayLabel && <Label>{label ?? formattedTreshold}</Label>}
 
@@ -92,11 +92,11 @@ const List = styled.ul(
 
 // Assigning a flex-basis based on number of items in threshold so that legend items outside of the threshold array can be displayed using the same measurement.
 const Item = styled.li<{
-  width: number;
+  width: string;
 }>(({ width }) =>
   css({
     flex: 1,
-    flexBasis: `${width}%`,
+    flexBasis: width,
     position: 'relative',
   })
 );

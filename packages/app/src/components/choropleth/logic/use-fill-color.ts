@@ -68,7 +68,7 @@ function createGetFillColor(
 }
 
 // Returns a function which returns a boolean when the datapoint (matching the code passed in) contains outdated data.
-function createIsOutdatedByCode<T extends ChoroplethDataItem>(codeType: CodeProp, data: T[]): (code: string) => boolean | undefined {
+function createIsOutdatedByCode<T extends ChoroplethDataItem>(codeType: CodeProp, data: T[]): (code: string) => boolean {
   return (code: string) => {
     const dataPointByCode = data.find((dataPoint) => {
       if ((dataPoint as unknown as Record<string, string>)[codeType] === code) {
