@@ -11,43 +11,40 @@ import { getSeverityColor } from '../severity-indicator-tile/logic/get-severity-
 import { asResponsiveArray } from '~/style/utils';
 import { BaseTile } from '~/queries/query-types';
 import { getFilenameToIconName } from '~/utils';
+import { TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '../severity-indicator-tile/constants';
 
-interface TopicalWeeklySummaryProps {
+interface TopicalWeeklySummaryTileProps {
   label: string | undefined;
   level: SeverityLevels;
   title: string;
   summaryItems: BaseTile[];
 }
 
-export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: TopicalWeeklySummaryProps) => {
+export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: TopicalWeeklySummaryTileProps) => {
   return (
-    <Box px={3} maxWidth={930}>
-      <Box border={`1px solid ${colors.gray3}`} p={4} m={asResponsiveArray({ _: undefined, sm: 3 })}>
+    <Box paddingX={space[3]} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
+      <Box border={`1px solid ${colors.gray3}`} padding={space[4]} margin={asResponsiveArray({ sm: space[3] })}>
         <BoldText css={css({ fontSize: [3] })}>
           <Markdown content={title} />
         </BoldText>
 
         <Box as="ul">
-          {summaryItems.map((summaryItem, index) => {
-            return (
-              <>
-                <Box key={index} display="flex" pt={2} css={css({ gap: `0 ${space[3]}` })} alignItems="center" as="li">
-                  <Box minWidth={25} height={25}>
-                    <DynamicIcon width={25} name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
-                  </Box>
-                  <Box>
-                    <InlineText>{summaryItem.description}</InlineText>
-                    {summaryItem.isThermometerMetric && label && (
-                      <InlineText css={css({ whiteSpace: 'nowrap' })}>
-                        <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
-                        <BoldText>{label}</BoldText>
-                      </InlineText>
-                    )}
-                  </Box>
-                </Box>
-              </>
-            );
-          })}
+          {summaryItems.map((summaryItem, index) => (
+            <Box key={index} display="flex" pt={2} css={css({ gap: `0 ${space[3]}` })} alignItems={asResponsiveArray({ sm: 'center' })}>
+              <Box minWidth={'25px'} height={'25px'}>
+                <DynamicIcon width={'25px'} name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
+              </Box>
+              <Box>
+                <InlineText>{summaryItem.description}</InlineText>
+                {summaryItem.isThermometerMetric && label && (
+                  <InlineText css={css({ whiteSpace: 'nowrap' })}>
+                    <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
+                    <BoldText>{label}</BoldText>
+                  </InlineText>
+                )}
+              </Box>
+            </Box>
+          ))}
         </Box>
       </Box>
     </Box>

@@ -38,7 +38,7 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
-import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/TopicalWeeklySummaryTile';
+import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -107,7 +107,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       <Box bg={colors.white}>
         <MaxWidth id="content">
           <Box
-            marginBottom={{ _: space[4], md: space[5] }}
+            marginBottom={{ _: space[4] }}
             paddingTop={{ _: space[3], md: space[5] }}
             paddingX={{ _: space[3], sm: space[4] }}
             maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
