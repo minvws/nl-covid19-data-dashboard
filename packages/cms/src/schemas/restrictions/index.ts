@@ -1,3 +1,3 @@
-export * from './lockdown';
+export * from './measures';
 export * from './restriction';
-export * from './restriction-group-lockdown';
+export * from './restriction-group-measures';

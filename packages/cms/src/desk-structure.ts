@@ -25,7 +25,7 @@ const hiddenDocTypes = [
   'faqQuestion',
   'kpi',
   'kpiConfiguration',
-  'lockdown',
+  'measures',
   'lokalizeString',
   'lokalizeSubject',
   'lokalizeText',
@@ -70,7 +70,7 @@ export default () =>
       pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
-      addListItem(BsLockFill, 'Lockdown', 'lockdown'),
+      addListItem(BsLockFill, 'Maatregelen', 'measures'),
       addListItem(GrCircleInformation, 'Over dit dashboard', 'overDitDashboard'),
       addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()

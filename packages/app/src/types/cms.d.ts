@@ -154,16 +154,6 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-export type RoadmapData = {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: 'roadmap';
-  _updatedAt: string;
-  categories: [];
-  title: string;
-};
-
 type Restriction = {
   icon?: string;
   _key: string;
@@ -171,7 +161,9 @@ type Restriction = {
   text: string;
 };
 
-type LockdownDataGroup = {
+type MeasuresGroup = {
+  groups: any;
+  map(arg0: (group: any) => JSX.Element): import("react").ReactNode;
   icon?: string;
   title: string;
   restrictions: Restriction[];
@@ -179,18 +171,16 @@ type LockdownDataGroup = {
   _type: string;
 };
 
-export type LockdownData = {
+export type Measures = {
   _createdAt: string;
   _id: string;
   _rev: string;
-  _type: 'lockdown';
+  _type: 'measures';
   _updatedAt: string;
-  groups: LockdownDataGroup[];
-  message: {
-    title: string;
-    description: RichContentBlock[] | null;
-  };
+  icon: string ;
   title: string;
+  description: RichContentBlock[] | null
+  groups: MeasuresGroup[];
 };
 declare module 'picosanity' {
   type QueryParams = { [key: string]: unknown };

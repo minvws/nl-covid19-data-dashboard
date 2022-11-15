@@ -6,9 +6,9 @@ import {
   restrictionIcons,
 } from '../../components/restriction-icon';
 
-export const restrictionGroupLockdown = {
-  title: 'Lockdown groep',
-  name: 'restrictionGroupLockdown',
+export const restrictionGroupMeasures = {
+  title: 'Maatregelen groep',
+  name: 'restrictionGroupMeasures',
   type: 'object',
   fields: [
     {
