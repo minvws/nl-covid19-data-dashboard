@@ -21,8 +21,6 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.measures_page.nl,
 });
 
-// type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
-
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,

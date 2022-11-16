@@ -23,7 +23,6 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   textVr: siteText.pages.measures_page.vr,
 });
 
-
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
