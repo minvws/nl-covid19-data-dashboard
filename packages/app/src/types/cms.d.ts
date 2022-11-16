@@ -157,7 +157,7 @@ interface RichContentImageBlock extends ImageBlock {
 type MeasuresItems = {
   icon?: string;
   _key: string;
-  _type: 'restriction';
+  _type: 'measuresItems';
   title: string;
 };
 
@@ -166,7 +166,7 @@ type MeasuresCollection = {
   title: string;
   measuresItems: MeasuresItems[];
   _key: string;
-  _type: string;
+  _type: 'measuresCollection';
 };
 
 export type Measures = {

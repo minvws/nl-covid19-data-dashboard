@@ -35,9 +35,9 @@ const MobileMeasuresTable = (props: MeasuresTableProps) => {
   return (
     <Table width="100%">
       <TableBody>
-        {data.measuresCollection.map((collection) => {
+        {data.measuresCollection.map((collection, index) => {
           return (
-            <Fragment key={collection._key}>
+            <Fragment key={index}>
               <Row>
                 <Cell role="rowheader" borderTop={'1px solid black'} paddingX={space[2]} paddingY={space[3]} verticalAlign="center" backgroundColor="gray1">
                   <BoldText>{collection.title}</BoldText>
@@ -46,9 +46,9 @@ const MobileMeasuresTable = (props: MeasuresTableProps) => {
               <Row>
                 <Cell paddingBottom={space[3]} verticalAlign="top" paddingTop={space[2]}>
                   <Box display="flex" flexDirection="column">
-                    {collection.measuresItems.map((measuresItem) => {
+                    {collection.measuresItems.map((measuresItem, index) => {
                       return (
-                        <Box key={measuresItem._key} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={2}>
+                        <Box key={index} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={2}>
                           <StyledIconWrapper>{measuresItem.icon ? <DynamicIcon name={getFilenameToIconName(measuresItem.icon) as MeasuresIcon} /> : <Dot />}</StyledIconWrapper>
 
                           <Box marginTop={space[2]}>{measuresItem.title}</Box>
@@ -72,38 +72,36 @@ const DesktopMeasuresTable = (props: MeasuresTableProps) => {
   return (
     <Table width="100%">
       <TableBody>
-        <TableBody>
-          {data.measuresCollection.map((collection) => {
-            return (
-              <Row
-                key={collection._key}
-                css={css({
-                  '&:last-of-type': {
-                    borderBottom: '1px solid black',
-                  },
-                })}
-              >
-                <Cell role="rowheader" borderTop="1px solid black" backgroundColor="gray1" width="12em" paddingY={space[3]} paddingX={space[2]} verticalAlign="top">
-                  <BoldText>{collection.title}</BoldText>
-                </Cell>
-                <Cell borderTop="1px solid black" paddingY={space[3]} paddingLeft={space[2]} verticalAlign="top">
-                  <Box display="flex" flexDirection="column">
-                    {collection.measuresItems.map((measuresItem) => {
-                      return (
-                        <Box key={measuresItem._key} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={space[2]}>
-                          <StyledIconWrapper>{measuresItem.icon ? <DynamicIcon name={getFilenameToIconName(measuresItem.icon) as MeasuresIcon} /> : <Dot />}</StyledIconWrapper>
-                          <Box as="span" marginLeft={space[1]} marginTop={space[2]}>
-                            {measuresItem.title}
-                          </Box>
+        {data.measuresCollection.map((collection, index) => {
+          return (
+            <Row
+              key={index}
+              css={css({
+                '&:last-of-type': {
+                  borderBottom: '1px solid black',
+                },
+              })}
+            >
+              <Cell role="rowheader" borderTop="1px solid black" backgroundColor="gray1" width="12em" paddingY={space[3]} paddingX={space[2]} verticalAlign="top">
+                <BoldText>{collection.title}</BoldText>
+              </Cell>
+              <Cell borderTop="1px solid black" paddingY={space[3]} paddingLeft={space[2]} verticalAlign="top">
+                <Box display="flex" flexDirection="column">
+                  {collection.measuresItems.map((measuresItem, index) => {
+                    return (
+                      <Box key={index} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={space[2]}>
+                        <StyledIconWrapper>{measuresItem.icon ? <DynamicIcon name={getFilenameToIconName(measuresItem.icon) as MeasuresIcon} /> : <Dot />}</StyledIconWrapper>
+                        <Box as="span" marginLeft={space[1]} marginTop={space[2]}>
+                          {measuresItem.title}
                         </Box>
-                      );
-                    })}
-                  </Box>
-                </Cell>
-              </Row>
-            );
-          })}
-        </TableBody>
+                      </Box>
+                    );
+                  })}
+                </Box>
+              </Cell>
+            </Row>
+          );
+        })}
       </TableBody>
     </Table>
   );

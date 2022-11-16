@@ -41,7 +41,7 @@ export const getStaticProps = createGetStaticProps(
         'measuresCollection': measuresCollection[]->{
             'title': title.${locale},
             icon,
-            'measuresItems': measuresItem[]->{
+            'measuresItems': measuresItems[]->{
               'title': title.${locale},
               icon
             }
