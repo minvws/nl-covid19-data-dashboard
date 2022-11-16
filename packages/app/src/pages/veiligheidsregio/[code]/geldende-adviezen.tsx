@@ -9,7 +9,7 @@ import { Header } from '~/components/page-information-block/components/header';
 import DynamicIcon from '~/components/get-icon-by-name';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
-import { MeasuresTable } from '~/domain/restrictions/measures-table';
+import { MeasuresTable } from '~/domain/measures/measures-table';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -44,7 +44,14 @@ export const getStaticProps = createGetStaticProps(
         _type == 'measures' && !(_id in path("drafts.**"))
       ][0] {
         icon,
-        groups,
+        'measuresCollection': measuresCollection[]->{
+            'title': title.${locale},
+            icon,
+            'measuresItems': measuresItems[]->{
+              'title': title.${locale},
+              icon
+            }
+          },
         'title':title.${locale},
         'description': description.${locale}
       },
@@ -95,7 +102,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
           <Box as="article" spacing={3}>
             <Heading level={3}>{measures.title}</Heading>
-            <MeasuresTable data={measures} level={1} />
+            <MeasuresTable data={measures} />
           </Box>
 
           <AnchorTile

@@ -6,7 +6,7 @@ import { Heading } from '~/components/typography';
 import { Header } from '~/components/page-information-block/components/header';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { MeasuresTable } from '~/domain/restrictions/measures-table';
+import { MeasuresTable } from '~/domain/measures/measures-table';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
@@ -38,7 +38,14 @@ export const getStaticProps = createGetStaticProps(
         _type == 'measures' && !(_id in path("drafts.**"))
       ][0] {
         icon,
-        groups,
+        'measuresCollection': measuresCollection[]->{
+            'title': title.${locale},
+            icon,
+            'measuresItems': measuresItems[]->{
+              'title': title.${locale},
+              icon
+            }
+          },
         'title':title.${locale},
         'description': description.${locale}
       },
@@ -70,7 +77,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
           <Box as="article" spacing={3}>
             <Heading level={3}>{measures.title}</Heading>
-            <MeasuresTable data={measures} level={1} />
+            <MeasuresTable data={measures} />
           </Box>
         </TileList>
       </NlLayout>
