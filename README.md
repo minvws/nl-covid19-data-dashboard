@@ -71,7 +71,7 @@ noting:
   circular dependencies.
 - We leverage interfaces to define component property structures rather than types. The name of the interface should follow the name of the component followed by a `Props` suffix. An example would be as below.
 
-  ```TSX
+  ```jsx
   interface RowProps { ... }
 
   const Row = ({ myProp }: RowProps) => { ... };
