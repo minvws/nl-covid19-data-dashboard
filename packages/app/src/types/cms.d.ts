@@ -154,19 +154,17 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-type MeasuresItem = {
+type MeasuresItems = {
   icon?: string;
   _key: string;
   _type: 'restriction';
   title: string;
 };
 
-type MeasuresGroup = {
-  groups: any;
-  map(arg0: (group: any) => JSX.Element): import("react").ReactNode;
+type MeasuresCollection = {
   icon?: string;
   title: string;
-  measuresItems: MeasuresItem[];
+  measuresItems: MeasuresItems[];
   _key: string;
   _type: string;
 };
@@ -180,7 +178,7 @@ export type Measures = {
   icon: string ;
   title: string;
   description: RichContentBlock[] | null
-  measuresCollection: MeasuresGroup[];
+  measuresCollection: MeasuresCollection[];
 };
 declare module 'picosanity' {
   type QueryParams = { [key: string]: unknown };

@@ -21,7 +21,7 @@ export const measuresCollection = {
     },
     {
       title: 'Maatregel',
-      name: 'measuresItem',
+      name: 'measuresItems',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'measuresItem' } }],
     },

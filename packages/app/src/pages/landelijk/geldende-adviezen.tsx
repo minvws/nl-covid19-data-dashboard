@@ -10,22 +10,18 @@ import { MeasuresTable } from '~/domain/measures/measures-table';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
-import { Measures } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getFilenameToIconName } from '~/utils';
 import { useIntl } from '~/intl';
 import DynamicIcon from '~/components/get-icon-by-name';
-
-type GeldendeAdviezenData = {
-  measures: Measures;
-};
+import { GeldendeAdviezenData } from '~/domain/measures/types';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.measures_page.nl,
 });
 
-type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+// type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
@@ -41,7 +37,7 @@ export const getStaticProps = createGetStaticProps(
         'measuresCollection': measuresCollection[]->{
             'title': title.${locale},
             icon,
-            'measuresItems': measuresItems[]->{
+            'measuresItems': measuresItem[]->{
               'title': title.${locale},
               icon
             }
@@ -55,10 +51,10 @@ export const getStaticProps = createGetStaticProps(
 
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
-  const { metadataTexts } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts } = useDynamicLokalizeTexts(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
-
   const { measures } = content;
+
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>

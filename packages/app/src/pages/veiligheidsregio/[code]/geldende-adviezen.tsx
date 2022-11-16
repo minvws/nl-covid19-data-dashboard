@@ -14,20 +14,15 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, selectVrData, getLokalizeTexts } from '~/static-props/get-data';
-import { Measures } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getFilenameToIconName } from '~/utils';
+import { GeldendeAdviezenData } from '~/domain/measures/types';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textVr: siteText.pages.measures_page.vr,
 });
 
-type GeldendeAdviezenData = {
-  measures: Measures;
-};
-
-type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -47,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
         'measuresCollection': measuresCollection[]->{
             'title': title.${locale},
             icon,
-            'measuresItems': measuresItems[]->{
+            'measuresItems': measuresItem[]->{
               'title': title.${locale},
               icon
             }
@@ -63,7 +58,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, vrName, lastGenerated } = props;
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textVr } = useDynamicLokalizeTexts(pageText, selectLokalizeTexts);
   type VRCode = keyof typeof textVr.urls;
 
   const { measures } = content;

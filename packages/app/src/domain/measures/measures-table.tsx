@@ -73,32 +73,36 @@ const DesktopMeasuresTable = (props: MeasuresTableProps) => {
     <Table width="100%">
       <TableBody>
         <TableBody>
-          {data.measuresCollection.map((collection) => (
-            <Row
-              key={collection._key}
-              css={css({
-                '&:last-of-type': {
-                  borderBottom: '1px solid black',
-                },
-              })}
-            >
-              <Cell role="rowheader" borderTop="1px solid black" backgroundColor="gray1" width="12em" paddingY={space[3]} paddingX={space[2]} verticalAlign="top">
-                <BoldText>{collection.title}</BoldText>
-              </Cell>
-              <Cell borderTop="1px solid black" paddingY={space[3]} paddingLeft={space[2]} verticalAlign="top">
-                <Box display="flex" flexDirection="column">
-                  {collection.measuresItems.map((measuresItem) => (
-                    <Box key={measuresItem._key} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={space[2]}>
-                      <StyledIconWrapper>{measuresItem.icon ? <DynamicIcon name={getFilenameToIconName(measuresItem.icon) as MeasuresIcon} /> : <Dot />}</StyledIconWrapper>
-                      <Box as="span" marginLeft={space[1]} marginTop={space[2]}>
-                        {measuresItem.title}
-                      </Box>
-                    </Box>
-                  ))}
-                </Box>
-              </Cell>
-            </Row>
-          ))}
+          {data.measuresCollection.map((collection) => {
+            return (
+              <Row
+                key={collection._key}
+                css={css({
+                  '&:last-of-type': {
+                    borderBottom: '1px solid black',
+                  },
+                })}
+              >
+                <Cell role="rowheader" borderTop="1px solid black" backgroundColor="gray1" width="12em" paddingY={space[3]} paddingX={space[2]} verticalAlign="top">
+                  <BoldText>{collection.title}</BoldText>
+                </Cell>
+                <Cell borderTop="1px solid black" paddingY={space[3]} paddingLeft={space[2]} verticalAlign="top">
+                  <Box display="flex" flexDirection="column">
+                    {collection.measuresItems.map((measuresItem) => {
+                      return (
+                        <Box key={measuresItem._key} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={space[2]}>
+                          <StyledIconWrapper>{measuresItem.icon ? <DynamicIcon name={getFilenameToIconName(measuresItem.icon) as MeasuresIcon} /> : <Dot />}</StyledIconWrapper>
+                          <Box as="span" marginLeft={space[1]} marginTop={space[2]}>
+                            {measuresItem.title}
+                          </Box>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+                </Cell>
+              </Row>
+            );
+          })}
         </TableBody>
       </TableBody>
     </Table>
