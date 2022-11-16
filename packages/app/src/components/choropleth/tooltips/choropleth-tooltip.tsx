@@ -18,7 +18,6 @@ type ChoroplethDataItemProps<T extends ChoroplethDataItem> = {
 export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: ChoroplethDataItemProps<T>) {
   const { data, dataFormatters } = props;
   const { commonTexts, formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = useIntl();
-  const isSewerMap = data.dataConfig.metricName === 'sewer';
 
   const text = commonTexts.choropleth_tooltip;
 
@@ -27,16 +26,6 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
 
   const tooltipContent = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(isDefined(tooltipContent), `[${ChoroplethTooltip.name}] No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`);
-
-  let tooltipNotification;
-  if (isSewerMap) {
-    tooltipNotification = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]
-      ?.outdated_data_notification;
-    assert(
-      isDefined(tooltipNotification),
-      `[${ChoroplethTooltip.name}] No tooltip notification found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
-    );
-  }
 
   const tooltipVars = {
     ...data.dataItem,
@@ -65,10 +54,16 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
   const dataItem = data.dataItem[data.dataConfig.metricProperty];
   const filterBelow = typeof dataItem === 'number' ? dataItem : null;
 
-  let showNotification;
+  const showNotification = tooltipVars?.data_is_outdated;
   let outdatedDataDate;
-  if (isSewerMap) {
-    showNotification = tooltipVars.data_is_outdated;
+  let tooltipNotification;
+  if (showNotification) {
+    tooltipNotification = (text as unknown as Record<string, Record<string, Record<string, string>>>)[data.map]?.[data.dataConfig.metricProperty as string]
+      ?.outdated_data_notification;
+    assert(
+      isDefined(tooltipNotification),
+      `[${ChoroplethTooltip.name}] No tooltip notification found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty.toString()}`
+    );
 
     // VRData does not contain the property 'date_end_unix' so 'date_unix' is used instead.
     outdatedDataDate = formatDateFromSeconds(tooltipVars[!isVrData(tooltipVars) ? 'date_end_unix' : 'date_unix'] as number, 'medium');
