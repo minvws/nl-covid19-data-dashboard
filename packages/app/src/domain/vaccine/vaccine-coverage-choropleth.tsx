@@ -162,7 +162,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, ageGrou
     .sort((a, b) => {
       const age1 = Number(a.age_group_range.replace(/\D/g, ''));
       const age2 = Number(b.age_group_range.replace(/\D/g, ''));
-      return age1 - age2;
+      return age2 - age1;
     })
     .map((vrOrGmData) => {
       const selectionMatchesAgeGroup = ageGroups.includes(vrOrGmData.age_group_range);
