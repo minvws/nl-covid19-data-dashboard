@@ -154,43 +154,31 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-export type RoadmapData = {
+type MeasuresItems = {
+  icon?: string;
+  _key: string;
+  _type: 'measuresItems';
+  title: string;
+};
+
+type MeasuresCollection = {
+  icon?: string;
+  title: string;
+  measuresItems: MeasuresItems[];
+  _key: string;
+  _type: 'measuresCollection';
+};
+
+export type Measures = {
   _createdAt: string;
   _id: string;
   _rev: string;
-  _type: 'roadmap';
+  _type: 'measures';
   _updatedAt: string;
-  categories: [];
+  icon: string ;
   title: string;
-};
-
-type Restriction = {
-  icon?: string;
-  _key: string;
-  _type: 'restriction';
-  text: string;
-};
-
-type LockdownDataGroup = {
-  icon?: string;
-  title: string;
-  restrictions: Restriction[];
-  _key: string;
-  _type: string;
-};
-
-export type LockdownData = {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: 'lockdown';
-  _updatedAt: string;
-  groups: LockdownDataGroup[];
-  message: {
-    title: string;
-    description: RichContentBlock[] | null;
-  };
-  title: string;
+  description: RichContentBlock[] | null
+  measuresCollection: MeasuresCollection[];
 };
 declare module 'picosanity' {
   type QueryParams = { [key: string]: unknown };
