@@ -108,16 +108,16 @@ const DesktopMeasuresTable = (props: MeasuresTableProps) => {
 };
 
 const StyledIconWrapper = styled.span`
-  display:flex;
+  display: flex;
   flex-shrink: 0;
   margin-right: ${space[2]};
   width: 36px;
   height: 36px;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
   color: ${colors.blue8};
   svg {
     height: ${space[4]};
     width: ${space[4]};
-  },
+  }
 `;
