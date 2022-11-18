@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_booster_coverage",
+  "title": "vr_booster_coverage_archived_20220904",
   "type": "object",
   "properties": {
     "values": {
@@ -16,7 +16,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_booster_coverage_value",
+      "title": "vr_booster_coverage_archived_20220904_value",
       "type": "object",
       "properties": {
         "age_group": {
