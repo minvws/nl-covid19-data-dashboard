@@ -162,7 +162,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, ageGrou
     .sort((a, b) => {
       const age1 = Number(a.age_group_range.replace(/\D/g, ''));
       const age2 = Number(b.age_group_range.replace(/\D/g, ''));
-      return age2 - age1;
+      return age2 - age1; // This logic does not reflect the business logic properly.It matches the business logic right now because for both campaigns the older age group happens to be the primary focus group. This might not be the case for a new campaign.
     })
     .map((vrOrGmData) => {
       const selectionMatchesAgeGroup = ageGroups.includes(vrOrGmData.age_group_range);

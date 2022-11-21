@@ -8,7 +8,7 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseBirthyearRange } from '../logic/parse-birthyear-range';
 
-export type AgeGroup = '60+' | '18+' | '12+';
+export type AgeGroup = '12+' | '18+' | '60+';
 
 const AGE_GROUPS = [
   {
