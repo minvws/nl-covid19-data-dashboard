@@ -45,6 +45,8 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
 
   const isOpen = collapsible.isOpen;
 
+  const campaignDescription = campaignDescriptions[`${campaign.vaccine_campaign_name_en.toLowerCase().replace(/ /g, '_')}_description`];
+
   return (
     <Row isFirst={isFirst} onClick={() => collapsible.toggle()}>
       <Cell padding={space[0]}>
@@ -74,7 +76,7 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
 
             <tr>
               <Cell paddingBottom={collapsible.isOpen ? space[3] : space[2]} colSpan={2} isMobile>
-                {collapsible.content(<Markdown content={campaignDescriptions[`${campaign.vaccine_campaign_name_en.toLowerCase().replace(/ /g, '_')}_description`]} />)}
+                {collapsible.content(<Markdown content={campaignDescription} />)}
               </Cell>
             </tr>
           </tbody>
