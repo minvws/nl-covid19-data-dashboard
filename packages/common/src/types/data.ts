@@ -112,14 +112,16 @@ export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
-  age_group_range: '12+' | '18+' | '60+';
-  autumn_2022_vaccinated_percentage: number | null;
-  fully_vaccinated_percentage: number | null;
-  booster_shot_percentage?: number | null;
-  birthyear_range: string;
-  autumn_2022_vaccinated_percentage_label: string | null;
-  fully_vaccinated_percentage_label: string | null;
-  booster_shot_percentage_label?: string | null;
+  vaccination_type: string;
+  birthyear_range_12_plus: string;
+  birthyear_range_18_plus: string;
+  birthyear_range_60_plus: string;
+  vaccinated_percentage_12_plus: number | null;
+  vaccinated_percentage_12_plus_label: string | null;
+  vaccinated_percentage_18_plus: number | null;
+  vaccinated_percentage_18_plus_label: string | null;
+  vaccinated_percentage_60_plus: number | null;
+  vaccinated_percentage_60_plus_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -208,9 +210,9 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   vaccinated_percentage_12_plus: number | null;
   vaccinated_percentage_12_plus_label: string | null;
   vaccinated_percentage_18_plus: number | null;
-  vaccinated_percentage_18_plus_label?: string | null;
+  vaccinated_percentage_18_plus_label: string | null;
   vaccinated_percentage_60_plus: number | null;
-  vaccinated_percentage_60_plus_label?: string | null;
+  vaccinated_percentage_60_plus_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1637,14 +1639,16 @@ export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
-  age_group_range: '12+' | '18+' | '60+';
-  autumn_2022_vaccinated_percentage: number | null;
-  fully_vaccinated_percentage: number | null;
-  booster_shot_percentage?: number | null;
-  birthyear_range: string;
-  autumn_2022_vaccinated_percentage_label: string | null;
-  fully_vaccinated_percentage_label: string | null;
-  booster_shot_percentage_label?: string | null;
+  vaccination_type: string;
+  birthyear_range_12_plus: string;
+  birthyear_range_18_plus: string;
+  birthyear_range_60_plus: string;
+  vaccinated_percentage_12_plus: number | null;
+  vaccinated_percentage_12_plus_label: string | null;
+  vaccinated_percentage_18_plus: number | null;
+  vaccinated_percentage_18_plus_label: string | null;
+  vaccinated_percentage_60_plus: number | null;
+  vaccinated_percentage_60_plus_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1822,9 +1826,9 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   vaccinated_percentage_12_plus: number | null;
   vaccinated_percentage_12_plus_label: string | null;
   vaccinated_percentage_18_plus: number | null;
-  vaccinated_percentage_18_plus_label?: string | null;
+  vaccinated_percentage_18_plus_label: string | null;
   vaccinated_percentage_60_plus: number | null;
-  vaccinated_percentage_60_plus_label?: string | null;
+  vaccinated_percentage_60_plus_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
