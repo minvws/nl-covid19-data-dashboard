@@ -24,6 +24,8 @@ export const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
   fully_basisserie: ['18', '12'],
 };
 
+export const ageGroups = ['12', '18', '60']
+
 export type PercentageKeysOfAgeGroups = Pick<VaccineCoverageData, 'vaccinated_percentage_12_plus' | 'vaccinated_percentage_18_plus' | 'vaccinated_percentage_60_plus'>;
 
 export type PercentageLabelKeysOfAgeGroups = Pick<
