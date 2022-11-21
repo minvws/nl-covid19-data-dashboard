@@ -1,6 +1,6 @@
 import { colors, GmCollectionVaccineCoveragePerAgeGroup, VrCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
-import { matchingAgeGroups } from './common';
+import { matchingAgeGroups, VaccineCoverageData, DataPerAgeGroup, BirthyearRangeKeysOfAgeGroups, PercentageKeysOfAgeGroups, PercentageLabelKeysOfAgeGroups } from './common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box } from '~/components/base';
@@ -25,12 +25,6 @@ interface VaccineCoverageChoroplethProps {
     vr: VrCollectionVaccineCoveragePerAgeGroup[];
   };
 }
-
-type dataPerAgeGroup = {
-  birthyear_range_plus: keyof VaccineCoverageData;
-  vaccinated_percentage_plus: keyof VaccineCoverageData;
-  vaccinated_percentage_plus_label: keyof VaccineCoverageData;
-};
 
 export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
@@ -134,8 +128,6 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
   );
 };
 
-type VaccineCoverageData = GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup;
-
 type ChoroplethTooltipProps<T extends VaccineCoverageData> = {
   data: TooltipData<T>;
   selectedCoverageKind: CoverageKindProperty;
@@ -148,16 +140,16 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
   const ageGroupsText: SiteText['common']['common']['age_groups'] = commonTexts.common.age_groups;
 
   const secondaryContent = ageGroups.map((ageGroup) => {
-    const ageGroupKeys: dataPerAgeGroup = {
-      birthyear_range_plus: `birthyear_range_${ageGroup}_plus`,
-      vaccinated_percentage_plus: `vaccinated_percentage_${ageGroup}_plus`,
-      vaccinated_percentage_plus_label: `vaccinated_percentage_${ageGroup}_plus_label`,
+    const ageGroupKeys: DataPerAgeGroup = {
+      birthyear_range_plus: `birthyear_range_${ageGroup}_plus` as unknown as BirthyearRangeKeysOfAgeGroups,
+      vaccinated_percentage_plus: `vaccinated_percentage_${ageGroup}_plus` as unknown as PercentageKeysOfAgeGroups,
+      vaccinated_percentage_plus_label: `vaccinated_percentage_${ageGroup}_plus_label` as unknown as PercentageLabelKeysOfAgeGroups,
     };
 
     return (
       <TooltipSubject
         thresholdValues={data.thresholdValues}
-        filterBelow={data.dataItem[ageGroupKeys.vaccinated_percentage_plus] as number}
+        filterBelow={data.dataItem[ageGroupKeys.vaccinated_percentage_plus as unknown as keyof VaccineCoverageData] as number}
         noDataFillColor={colors.white}
         key={ageGroup}
       >
@@ -165,9 +157,9 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
           <Box display="inline" minWidth={ageGroupKeys.vaccinated_percentage_plus_label !== null ? '150px' : 'false'}>
             <Markdown content={ageGroupsText[ageGroup]} />
           </Box>
-          {typeof data.dataItem[ageGroupKeys.vaccinated_percentage_plus] === 'number' && (
+          {typeof data.dataItem[ageGroupKeys.vaccinated_percentage_plus as unknown as keyof VaccineCoverageData] === 'number' && (
             <Box display="inline" minWidth={ageGroupKeys.vaccinated_percentage_plus_label !== null ? '100px' : 'false'}>
-              {formatPercentageAsNumber(data.dataItem[ageGroupKeys.vaccinated_percentage_plus] as string)}
+              {formatPercentageAsNumber(data.dataItem[ageGroupKeys.vaccinated_percentage_plus as unknown as keyof VaccineCoverageData] as string)}
             </Box>
           )}
         </Box>
