@@ -25,7 +25,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { BoldText } from '~/components/typography';
 import css from '@styled-system/css';
 
-const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage'];
+const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.vaccinations_page.nl,
@@ -40,7 +40,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectVrData('vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'vaccine_coverage_per_age_group_archived_20220908', 'booster_coverage'),
+  selectVrData('vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'vaccine_coverage_per_age_group_archived_20220908', 'booster_coverage_archived_20220904'),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -125,8 +125,8 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
 
   const filteredAgeGroup12PlusArchived = data.vaccine_coverage_per_age_group_archived_20220908.values.find((item) => item.age_group_range === '12+');
 
-  const boosterCoverage18PlusValue = data.booster_coverage.values.find((v) => v.age_group === '18+');
-  const boosterCoverage12PlusValue = data.booster_coverage.values.find((v) => v.age_group === '12+');
+  const boosterCoverage18PlusArchivedValue = data.booster_coverage_archived_20220904.values.find((v) => v.age_group === '18+');
+  const boosterCoverage12PlusArchivedValue = data.booster_coverage_archived_20220904.values.find((v) => v.age_group === '12+');
 
   assert(filteredAgeGroup60Plus, `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`);
 
@@ -305,9 +305,9 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
                   birthyear: filteredAgeGroup18PlusArchived.birthyear_range,
                   fully_vaccinated_label: filteredAgeGroup18PlusArchived.fully_vaccinated_percentage_label,
                   has_one_shot_label: filteredAgeGroup18PlusArchived.has_one_shot_percentage_label,
-                  boostered: formatPercentageAsNumber(`${boosterCoverage18PlusValue?.percentage}`),
-                  boostered_label: boosterCoverage18PlusValue?.percentage_label,
-                  dateUnixBoostered: boosterCoverage18PlusValue?.date_unix,
+                  boostered: formatPercentageAsNumber(`${boosterCoverage18PlusArchivedValue?.percentage}`),
+                  boostered_label: boosterCoverage18PlusArchivedValue?.percentage_label,
+                  dateUnixBoostered: boosterCoverage18PlusArchivedValue?.date_unix,
                 }}
                 age12Plus={{
                   fully_vaccinated: filteredAgeGroup12PlusArchived.fully_vaccinated_percentage,
@@ -315,9 +315,9 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
                   birthyear: filteredAgeGroup12PlusArchived.birthyear_range,
                   fully_vaccinated_label: filteredAgeGroup12PlusArchived.fully_vaccinated_percentage_label,
                   has_one_shot_label: filteredAgeGroup12PlusArchived.has_one_shot_percentage_label,
-                  boostered: formatPercentageAsNumber(`${boosterCoverage12PlusValue?.percentage}`),
-                  boostered_label: boosterCoverage12PlusValue?.percentage_label,
-                  dateUnixBoostered: boosterCoverage12PlusValue?.date_unix,
+                  boostered: formatPercentageAsNumber(`${boosterCoverage12PlusArchivedValue?.percentage}`),
+                  boostered_label: boosterCoverage12PlusArchivedValue?.percentage_label,
+                  dateUnixBoostered: boosterCoverage12PlusArchivedValue?.date_unix,
                 }}
                 age12PlusToggleText={textVr.vaccination_grade_toggle_tile.age_12_plus}
                 age18PlusToggleText={textVr.vaccination_grade_toggle_tile.age_18_plus}
