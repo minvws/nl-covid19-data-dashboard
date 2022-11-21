@@ -93,6 +93,7 @@ export interface GmSewerValue {
   sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
+  data_is_outdated: boolean;
 }
 export interface GmSewerPerInstallation {
   values: MunicipalSewerPerInstallationInstallation[];
@@ -1402,6 +1403,7 @@ export interface VrSewerValue {
   date_unix: number;
   average: number | null;
   date_of_insertion_unix: number;
+  data_is_outdated: boolean;
 }
 export interface VrSewerPerInstallation {
   values: VrSewerPerInstallationInstallation[];
