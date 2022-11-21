@@ -1,32 +1,37 @@
 import { GmCollectionVaccineCoveragePerAgeGroup, VrCollectionVaccineCoveragePerAgeGroup, VrVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
+import { ageGroups, PercentageKeysOfAgeGroups, PercentageLabelKeysOfAgeGroups } from '../common';
 import { parseVaccinatedPercentageLabel } from '../logic/parse-vaccinated-percentage-label';
 
-export function selectVaccineCoverageData<T extends GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup | VrVaccineCoveragePerAgeGroupValue>(
+type VaccineCoveragePerAgeGroups = GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup
+
+export function selectVaccineCoverageData<T extends VaccineCoveragePerAgeGroups>(
   data: T[]
 ) {
   return data.map((vaccineCoveragePerAgeGroup) => {
     const parsedLabels: {
-      fully_vaccinated_percentage?: number;
-      autumn_2022_vaccinated_percentage?: number;
+      vaccinated_percentage_12_plus?: number | null;
+      vaccinated_percentage_18_plus?: number | null;
+      vaccinated_percentage_60_plus?: number | null;
     } = {};
 
-    if (isPresent(vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label)) {
-      const result = parseVaccinatedPercentageLabel(vaccineCoveragePerAgeGroup.fully_vaccinated_percentage_label);
+    ageGroups.forEach(ageGroup => {
+      const ageGroupKey = `vaccinated_percentage_${ageGroup}_plus` as keyof PercentageKeysOfAgeGroups
+      const ageGroupLabel = `vaccinated_percentage_${ageGroup}_plus_label` as keyof PercentageLabelKeysOfAgeGroups
+      const coveragePercentage = vaccineCoveragePerAgeGroup[ageGroupLabel]
 
-      if (isPresent(result)) {
-        parsedLabels.fully_vaccinated_percentage = result.sign === '>' ? 100 : 0;
+      if (isPresent(coveragePercentage)) {
+        const result = parseVaccinatedPercentageLabel(
+          coveragePercentage
+        );
+  
+        if (isPresent(result)) {
+          parsedLabels[ageGroupKey] =
+            result.sign === '>' ? 100 : 0;
+        }
       }
-    }
-
-    if (isPresent(vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label)) {
-      const result = parseVaccinatedPercentageLabel(vaccineCoveragePerAgeGroup.autumn_2022_vaccinated_percentage_label);
-
-      if (isPresent(result)) {
-        parsedLabels.autumn_2022_vaccinated_percentage = result.sign === '>' ? 100 : 0;
-      }
-    }
-
+    });
+    
     return { ...vaccineCoveragePerAgeGroup, ...parsedLabels };
   });
 }
