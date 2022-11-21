@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 import { BoldText } from '~/components/typography';
 import { space } from '~/style/theme';
 import { useCollapsible } from '~/utils/use-collapsible';
-import { StyledCell as Cell, StyledHeaderCell as HeaderCell, StyledRow as Row, StyledTable } from '.';
+import { StyledCell, StyledHeaderCell, StyledRow, StyledTable } from '.';
 import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders } from '../types';
 
 interface WideVaccineCampaignTableProps {
@@ -19,9 +19,9 @@ export const WideVaccineCampaignTable = ({ campaigns, campaignDescriptions, head
     <StyledTable>
       <thead>
         <tr>
-          <HeaderCell>{headers.vaccine}</HeaderCell>
-          <HeaderCell>{headers.last_week}</HeaderCell>
-          <HeaderCell>{headers.total}</HeaderCell>
+          <StyledHeaderCell>{headers.vaccine}</StyledHeaderCell>
+          <StyledHeaderCell>{headers.last_week}</StyledHeaderCell>
+          <StyledHeaderCell>{headers.total}</StyledHeaderCell>
         </tr>
       </thead>
 
@@ -50,34 +50,36 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst }: Vaccine
   const campaignDescription = campaignDescriptions[`${campaign.vaccine_campaign_name_en.toLowerCase().replace(/ /g, '_')}_description`];
 
   return (
-    <Row isFirst={isFirst} onClick={() => collapsible.toggle()}>
-      <Cell colSpan={4} padding={space[0]}>
+    <StyledRow isFirst={isFirst} onClick={() => collapsible.toggle()}>
+      <StyledCell colSpan={4} padding={space[0]}>
         <StyledTable>
           <tbody>
             <tr>
-              <Cell>
+              <StyledCell>
                 <BoldText>{locale === 'nl' ? campaign.vaccine_campaign_name_nl : campaign.vaccine_campaign_name_en}</BoldText>
-              </Cell>
+              </StyledCell>
 
-              <Cell>{isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_last_week)}</BoldText> : formatNumber(campaign.vaccine_administered_last_week)}</Cell>
+              <StyledCell>
+                {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_last_week)}</BoldText> : formatNumber(campaign.vaccine_administered_last_week)}
+              </StyledCell>
 
-              <Cell>
+              <StyledCell>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
 
                   {collapsible.button()}
                 </Box>
-              </Cell>
+              </StyledCell>
             </tr>
 
             <tr>
-              <Cell colSpan={4} paddingBottom={isOpen ? space[4] : space[0]} paddingTop={space[0]}>
+              <StyledCell colSpan={4} paddingBottom={isOpen ? space[4] : space[0]} paddingTop={space[0]}>
                 {collapsible.content(<Markdown content={campaignDescription} />)}
-              </Cell>
+              </StyledCell>
             </tr>
           </tbody>
         </StyledTable>
-      </Cell>
-    </Row>
+      </StyledCell>
+    </StyledRow>
   );
 };
