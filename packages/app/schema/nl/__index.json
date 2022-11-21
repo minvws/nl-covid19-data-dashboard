@@ -5,9 +5,9 @@
   "required": [
     "behavior",
     "behavior_annotations",
-    "booster_shot_administered",
+    "booster_shot_administered_archived_20220904",
     "repeating_shot_administered",
-    "booster_coverage",
+    "booster_coverage_archived_20220904",
     "code",
     "corona_melder_app_download",
     "corona_melder_app_warning",
@@ -80,14 +80,14 @@
     "named_difference": {
       "$ref": "__named_difference.json"
     },
-    "booster_shot_administered": {
-      "$ref": "booster_shot_administered.json"
+    "booster_shot_administered_archived_20220904": {
+      "$ref": "booster_shot_administered_archived_20220904.json"
     },
     "repeating_shot_administered": {
       "$ref": "repeating_shot_administered.json"
     },
-    "booster_coverage": {
-      "$ref": "booster_coverage.json"
+    "booster_coverage_archived_20220904": {
+      "$ref": "booster_coverage_archived_20220904.json"
     },
     "doctor": {
       "$ref": "doctor.json"
