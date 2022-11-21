@@ -9,15 +9,15 @@ export const ARCHIVED_COLORS = {
   COLOR_FULLY_VACCINATED: colors.primary,
 };
 
-type FullyVaccinatedAges = '12+' | '18+';
-type Autumn2022Vaccinated = '12+' | '60+';
+type FullyBasisserieVaccinatedAges = '18' | '12';
+type Autumn2022Vaccinated = '60' | '12';
 
 type MatchingVaccineCoverageAgeGroupsType = {
-  autumn_2022_vaccinated_percentage: Autumn2022Vaccinated[];
-  fully_vaccinated_percentage: FullyVaccinatedAges[];
+  autumn_2022: Autumn2022Vaccinated[];
+  fully_basisserie: FullyBasisserieVaccinatedAges[];
 };
 
 export const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
-  autumn_2022_vaccinated_percentage: ['12+', '60+'],
-  fully_vaccinated_percentage: ['12+', '18+'],
+  autumn_2022: ['60', '12'],
+  fully_basisserie: ['18', '12'],
 };
