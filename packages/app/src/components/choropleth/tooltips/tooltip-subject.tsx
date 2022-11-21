@@ -36,7 +36,7 @@ export function TooltipSubject({ subject, thresholdValues, filterBelow, children
         })}
       >
         {children}
-        <Box flexShrink={0} height="13px" width="13px" borderRadius="2px" ml="auto" mb="auto" mt="5px" backgroundColor={color} />
+        <Box flexShrink={0} height={13} width={13} borderRadius={'2px'} ml={'auto'} mb={'auto'} mt={'5px'} backgroundColor={color} />
       </Box>
     </Box>
   );
