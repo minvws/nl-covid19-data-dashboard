@@ -152,23 +152,35 @@ const Button = styled.button<{
   isActive?: boolean;
 }>`
   cursor: pointer;
-  background: ${({ isActive }) => (isActive ? colors.blue8 : colors.white)};
+  background: ${({ isActive }) => (isActive ? colors.blue1 : colors.white)};
   border: ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
   border-radius: 5px;
-  color: ${({ isActive }) => (isActive ? colors.white : colors.blue8)};
-  padding: ${space[3]} 12px;
+  color: ${({ isActive }) => (isActive ? colors.blue8 : colors.blue8)};
+  padding: 12px ${space[3]};
   border-style: solid;
   min-height: 36px;
   border-width: 1px;
   transition: 0.1s background-color;
 
   ${({ isActive }) =>
+    isActive &&
+    `
+    '&:focus': {
+      position: 'absolute',
+      outline: '2px dotted white',
+      outlineOffset: '-2px',
+      top: 2,
+      left: 2,
+    }
+  `}
+
+  ${({ isActive }) =>
     !isActive &&
     `
     &:hover {
-      background: ${colors.gray1};
-      color: ${colors.blue8};
-      border-color: ${colors.blue8};
+      background: ${colors.blue8};
+      color: ${colors.white};
+      border-color: ${colors.transparent};
     }
   `}
 `;
