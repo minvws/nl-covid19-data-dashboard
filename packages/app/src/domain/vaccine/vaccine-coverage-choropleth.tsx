@@ -1,8 +1,4 @@
-import {
-  colors,
-  GmCollectionVaccineCoveragePerAgeGroup,
-  VrCollectionVaccineCoveragePerAgeGroup,
-} from '@corona-dashboard/common';
+import { colors, GmCollectionVaccineCoveragePerAgeGroup, VrCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 import { matchingAgeGroups } from './common';
 import css from '@styled-system/css';
@@ -13,10 +9,7 @@ import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
-import {
-  TooltipContent,
-  TooltipSubject,
-} from '~/components/choropleth/tooltips';
+import { TooltipContent, TooltipSubject } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
@@ -24,10 +17,7 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
-import {
-  CoverageKindProperty,
-  VaccinationCoverageKindSelect,
-} from './components/vaccination-coverage-kind-select';
+import { CoverageKindProperty, VaccinationCoverageKindSelect } from './components/vaccination-coverage-kind-select';
 import { useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
 
 interface VaccineCoverageChoroplethProps {
@@ -37,23 +27,18 @@ interface VaccineCoverageChoroplethProps {
   };
 }
 
-export const VaccineCoverageChoropleth = ({
-  data,
-}: VaccineCoverageChoroplethProps) => {
+export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
-  const [selectedCoverageKind, setSelectedCoverageKind] =
-    useState<CoverageKindProperty>('fully_vaccinated_percentage');
+  const [selectedCoverageKind, setSelectedCoverageKind] = useState<CoverageKindProperty>('fully_vaccinated_percentage');
   const reverseRouter = useReverseRouter();
 
   /**
    * When changing between coverage kinds where the selected age group isn't available,
    * the other coverage kind set the non-matching age group to a default one.
    */
-  const setSelectedCoverageKindAndAge = (
-    coverageKind: CoverageKindProperty
-  ) => {
+  const setSelectedCoverageKindAndAge = (coverageKind: CoverageKindProperty) => {
     if (coverageKind === selectedCoverageKind) return;
     if (selectedAgeGroup !== '12+') {
       setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
@@ -62,39 +47,19 @@ export const VaccineCoverageChoropleth = ({
   };
 
   const variables = {
-    regio:
-      commonTexts.choropleth.choropleth_vaccination_coverage.shared[
-        selectedMap
-      ],
+    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared[selectedMap],
   };
 
-  const choroplethDataVr: VrCollectionVaccineCoveragePerAgeGroup[] =
-    data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
-  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] =
-    data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+  const choroplethDataVr: VrCollectionVaccineCoveragePerAgeGroup[] = data.vr.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
+  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] = data.gm.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
 
   return (
     <ChoroplethTile
-      title={replaceVariablesInText(
-        commonTexts.choropleth.choropleth_vaccination_coverage.nl.title,
-        variables
-      )}
+      title={replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.title, variables)}
       description={
         <>
-          <Markdown
-            content={replaceVariablesInText(
-              commonTexts.choropleth.choropleth_vaccination_coverage.nl
-                .description,
-              variables
-            )}
-          />
-          <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="flex-start"
-            spacingHorizontal={2}
-            as={'fieldset'}
-          >
+          <Markdown content={replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.description, variables)} />
+          <Box display="flex" flexDirection="row" justifyContent="flex-start" spacingHorizontal={2} as={'fieldset'}>
             <BoldText
               as="legend"
               css={css({
@@ -102,31 +67,15 @@ export const VaccineCoverageChoropleth = ({
                 mb: 2,
               })}
             >
-              {
-                commonTexts.choropleth.vaccination_coverage.shared
-                  .dropdowns_title
-              }
+              {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <Box
-              display="flex"
-              width="100%"
-              spacingHorizontal={{ xs: 2 }}
-              flexWrap="wrap"
-              flexDirection={{ _: 'column', xs: 'row' }}
-            >
+            <Box display="flex" width="100%" spacingHorizontal={{ xs: 2 }} flexWrap="wrap" flexDirection={{ _: 'column', xs: 'row' }}>
               <Box flex="1">
-                <VaccinationCoverageKindSelect
-                  onChange={setSelectedCoverageKindAndAge}
-                  initialValue={selectedCoverageKind}
-                />
+                <VaccinationCoverageKindSelect onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
               </Box>
               <Box flex="1">
-                <AgeGroupSelect
-                  onChange={setSelectedAgeGroup}
-                  initialValue={selectedAgeGroup}
-                  shownAgeGroups={matchingAgeGroups[selectedCoverageKind]}
-                />
+                <AgeGroupSelect onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
               </Box>
             </Box>
           </Box>
@@ -134,9 +83,7 @@ export const VaccineCoverageChoropleth = ({
       }
       legend={{
         thresholds: thresholds.gm.fully_vaccinated_percentage,
-        title:
-          commonTexts.choropleth.choropleth_vaccination_coverage.shared
-            .legend_title,
+        title: commonTexts.choropleth.choropleth_vaccination_coverage.shared.legend_title,
       }}
       metadata={{
         source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
@@ -161,9 +108,7 @@ export const VaccineCoverageChoropleth = ({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              mapData={data.gm.filter(
-                (singleGM) => singleGM.gmcode === context.code
-              )}
+              mapData={data.gm.filter((singleGM) => singleGM.gmcode === context.code)}
               ageGroups={matchingAgeGroups[selectedCoverageKind]}
               selectedCoverageKind={selectedCoverageKind}
             />
@@ -187,9 +132,7 @@ export const VaccineCoverageChoropleth = ({
           formatTooltip={(context) => (
             <ChoroplethTooltip
               data={context}
-              mapData={data.vr.filter(
-                (singleVR) => singleVR.vrcode === context.code
-              )}
+              mapData={data.vr.filter((singleVR) => singleVR.vrcode === context.code)}
               ageGroups={matchingAgeGroups[selectedCoverageKind]}
               selectedCoverageKind={selectedCoverageKind}
             />
@@ -200,41 +143,29 @@ export const VaccineCoverageChoropleth = ({
   );
 };
 
-type VaccineCoverageData =
-  | GmCollectionVaccineCoveragePerAgeGroup
-  | VrCollectionVaccineCoveragePerAgeGroup;
+type VaccineCoverageData = GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup;
 
 type ChoroplethTooltipProps<T extends VaccineCoverageData> = {
   data: TooltipData<T>;
   selectedCoverageKind: CoverageKindProperty;
   ageGroups: AgeGroup[];
-  mapData:
-    | GmCollectionVaccineCoveragePerAgeGroup[]
-    | VrCollectionVaccineCoveragePerAgeGroup[];
+  mapData: GmCollectionVaccineCoveragePerAgeGroup[] | VrCollectionVaccineCoveragePerAgeGroup[];
 };
 
-export function ChoroplethTooltip<T extends VaccineCoverageData>({
-  data,
-  ageGroups,
-  selectedCoverageKind,
-  mapData,
-}: ChoroplethTooltipProps<T>) {
+export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, ageGroups, selectedCoverageKind, mapData }: ChoroplethTooltipProps<T>) {
   const { commonTexts } = useIntl();
   const coverageKindsText = commonTexts.vaccinations.coverage_kinds;
-  const ageGroupsText: SiteText['common']['common']['age_groups'] =
-    commonTexts.common.age_groups;
+  const ageGroupsText: SiteText['common']['common']['age_groups'] = commonTexts.common.age_groups;
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();
 
   const secondaryContent = mapData
     .sort((a, b) => {
       const age1 = Number(a.age_group_range.replace(/\D/g, ''));
       const age2 = Number(b.age_group_range.replace(/\D/g, ''));
-      return age1 - age2;
+      return age2 - age1; // This logic does not reflect the business logic properly.It matches the business logic right now because for both campaigns the older age group happens to be the primary focus group. This might not be the case for a new campaign.
     })
     .map((vrOrGmData) => {
-      const selectionMatchesAgeGroup = ageGroups.includes(
-        vrOrGmData.age_group_range
-      );
+      const selectionMatchesAgeGroup = ageGroups.includes(vrOrGmData.age_group_range);
 
       if (!selectionMatchesAgeGroup) {
         return;
@@ -243,40 +174,12 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
       const filterBelow = vrOrGmData[selectedCoverageKind];
 
       return (
-        <TooltipSubject
-          thresholdValues={data.thresholdValues}
-          filterBelow={filterBelow as number | null}
-          noDataFillColor={colors.white}
-          key={vrOrGmData.age_group_range}
-        >
-          <Box
-            spacingHorizontal={2}
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            flexGrow={1}
-            mr={13}
-            pr={2}
-            key={vrOrGmData.age_group_range}
-          >
-            <Box
-              display="inline"
-              minWidth={
-                vrOrGmData[`${selectedCoverageKind}_label`] !== null
-                  ? '150px'
-                  : 'false'
-              }
-            >
+        <TooltipSubject thresholdValues={data.thresholdValues} filterBelow={filterBelow as number | null} noDataFillColor={colors.white} key={vrOrGmData.age_group_range}>
+          <Box spacingHorizontal={2} display="flex" alignItems="center" justifyContent="space-between" flexGrow={1} mr={13} pr={2} key={vrOrGmData.age_group_range}>
+            <Box display="inline" minWidth={vrOrGmData[`${selectedCoverageKind}_label`] !== null ? '150px' : 'false'}>
               <Markdown content={ageGroupsText[vrOrGmData.age_group_range]} />
             </Box>
-            <Box
-              display="inline"
-              minWidth={
-                vrOrGmData[`${selectedCoverageKind}_label`] !== null
-                  ? '100px'
-                  : 'false'
-              }
-            >
+            <Box display="inline" minWidth={vrOrGmData[`${selectedCoverageKind}_label`] !== null ? '100px' : 'false'}>
               {formatCoveragePercentage(vrOrGmData, selectedCoverageKind)}
             </Box>
           </Box>
@@ -285,14 +188,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({
     });
 
   return (
-    <TooltipContent
-      title={data.featureName}
-      link={
-        data.dataOptions.getLink
-          ? data.dataOptions.getLink(data.code)
-          : undefined
-      }
-    >
+    <TooltipContent title={data.featureName} link={data.dataOptions.getLink ? data.dataOptions.getLink(data.code) : undefined}>
       <BoldText>{coverageKindsText[selectedCoverageKind]}</BoldText>
       {secondaryContent}
     </TooltipContent>

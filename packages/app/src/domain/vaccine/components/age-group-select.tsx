@@ -12,16 +12,16 @@ export type AgeGroup = '12+' | '18+' | '60+';
 
 const AGE_GROUPS = [
   {
-    ageGroup: '12+',
-    birthyearRange: '-2009',
+    ageGroup: '60+',
+    birthyearRange: '-1961',
   },
   {
     ageGroup: '18+',
     birthyearRange: '-2003',
   },
   {
-    ageGroup: '60+',
-    birthyearRange: '-1961',
+    ageGroup: '12+',
+    birthyearRange: '-2009',
   },
 ] as const;
 
