@@ -1,1 +1,8 @@
 timestamp,action,key,document_id,move_to
+2022-11-07T15:09:11.939Z,add,common.choropleth_tooltip.gm.outdated_data_notification,TrUIlGMFRR6fBR627mmYKT,__
+2022-11-07T15:41:35.054Z,delete,common.choropleth_tooltip.gm.outdated_data_notification,TrUIlGMFRR6fBR627mmYKT,__
+2022-11-07T15:57:14.611Z,add,common.choropleth_tooltip.outdated_data_notification,Fgb5SAAswLDPRQ9KRzHRc8,__
+2022-11-07T16:00:34.118Z,delete,common.choropleth_tooltip.outdated_data_notification,Fgb5SAAswLDPRQ9KRzHRc8,__
+2022-11-07T16:01:10.105Z,add,common.choropleth_tooltip.gm.average.outdated_data_notification,Fgb5SAAswLDPRQ9KRzIAnG,__
+2022-11-07T16:01:11.103Z,add,common.choropleth_tooltip.vr.average.outdated_data_notification,BBCOmHCrMQzaQKV1wWKvZ9,__
+2022-11-11T08:49:48.826Z,add,pages.sewer_page.nl.choropleth_legend_outdated_data_label,TrUIlGMFRR6fBR628D5VMd,__

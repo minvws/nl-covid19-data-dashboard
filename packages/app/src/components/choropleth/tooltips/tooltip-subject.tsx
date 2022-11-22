@@ -14,13 +14,7 @@ interface TooltipSubjectProps {
   noDataFillColor?: string;
 }
 
-export function TooltipSubject({
-  subject,
-  thresholdValues,
-  filterBelow,
-  children,
-  noDataFillColor,
-}: TooltipSubjectProps) {
+export function TooltipSubject({ subject, thresholdValues, filterBelow, children, noDataFillColor }: TooltipSubjectProps) {
   const color =
     !isPresent(filterBelow) && isDefined(thresholdValues)
       ? noDataFillColor || getThresholdValue(thresholdValues, 0).color
@@ -32,7 +26,7 @@ export function TooltipSubject({
     <Box spacing={1}>
       {subject && <BoldText>{subject}</BoldText>}
       <Box
-        m={0}
+        margin={0}
         spacingHorizontal={2}
         css={css({
           display: 'flex',
@@ -42,16 +36,7 @@ export function TooltipSubject({
         })}
       >
         {children}
-        <Box
-          flexShrink={0}
-          height={13}
-          width={13}
-          borderRadius={'2px'}
-          ml={'auto'}
-          mb={'auto'}
-          mt={'5px'}
-          backgroundColor={color}
-        />
+        <Box flexShrink={0} height="13px" width="13px" borderRadius="2px" ml="auto" mb="auto" mt="5px" backgroundColor={color} />
       </Box>
     </Box>
   );

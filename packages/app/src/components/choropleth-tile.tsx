@@ -3,10 +3,7 @@ import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
-import {
-  ChartRegionControls,
-  RegionControlOption,
-} from './chart-region-controls';
+import { ChartRegionControls, RegionControlOption } from './chart-region-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
@@ -20,10 +17,12 @@ type ChoroplethTileProps = DataProps & {
     title: string;
     thresholds: ChoroplethThresholdsValue[];
     type?: 'default' | 'bar';
+    outdatedDataLabel?: string;
   };
   metadata?: MetadataProps;
   valueAnnotation?: string;
   hasPadding?: boolean;
+  pageType?: string;
 } & (
     | {
         onChartRegionChange: (v: RegionControlOption) => void;
@@ -45,6 +44,7 @@ export function ChoroplethTile({
   metadata,
   valueAnnotation,
   hasPadding,
+  pageType,
   ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
@@ -55,40 +55,23 @@ export function ChoroplethTile({
         title={legend.title}
         valueAnnotation={valueAnnotation}
         type={legend.type}
+        pageType={pageType}
+        outdatedDataLabel={legend.outdatedDataLabel}
       />
     </Box>
   );
 
   return (
     <FullscreenChartTile metadata={metadata}>
-      <Box
-        display="flex"
-        flexDirection={{ _: 'column', lg: 'row' }}
-        m={0}
-        as="figure"
-        {...dataProps}
-        height="100%"
-        spacing={3}
-      >
+      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} m={0} as="figure" {...dataProps} height="100%" spacing={3}>
         <Box flex={{ lg: 1 }} as="figcaption" spacing={3}>
           <Heading level={3}>{title}</Heading>
 
-          {typeof description === 'string' ? (
-            <Text>{description}</Text>
-          ) : (
-            description
-          )}
+          {typeof description === 'string' ? <Text>{description}</Text> : description}
 
           {onChartRegionChange && chartRegion && (
-            <Box
-              display="flex"
-              justifyContent={{ _: 'center', lg: 'flex-start' }}
-              pt={4}
-            >
-              <ChartRegionControls
-                value={chartRegion}
-                onChange={onChartRegionChange}
-              />
+            <Box display="flex" justifyContent={{ _: 'center', lg: 'flex-start' }} pt={4}>
+              <ChartRegionControls value={chartRegion} onChange={onChartRegionChange} />
             </Box>
           )}
 
@@ -99,18 +82,8 @@ export function ChoroplethTile({
           )}
         </Box>
 
-        <Box
-          flex={{ lg: 1 }}
-          display="flex"
-          flexDirection="column"
-          height="100%"
-          spacing={3}
-        >
-          <Box
-            height="100%"
-            mt={4}
-            pl={hasPadding && breakpoints.lg ? 4 : undefined}
-          >
+        <Box flex={{ lg: 1 }} display="flex" flexDirection="column" height="100%" spacing={3}>
+          <Box height="100%" mt={4} pl={hasPadding && breakpoints.lg ? 4 : undefined}>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Box>
 

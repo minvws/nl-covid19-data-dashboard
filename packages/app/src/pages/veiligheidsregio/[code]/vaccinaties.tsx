@@ -40,7 +40,12 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectVrData('vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'vaccine_coverage_per_age_group_archived_20220908', 'booster_coverage_archived_20220904'),
+  selectVrData(
+    'vaccine_coverage_per_age_group',
+    'vaccine_coverage_per_age_group_archived',
+    'vaccine_coverage_per_age_group_archived_20220908',
+    'booster_coverage_archived_20220904'
+  ),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {

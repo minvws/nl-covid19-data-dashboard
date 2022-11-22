@@ -47,11 +47,7 @@ export type RichTextParts = {
   text: RichContentBlock[];
 } & PageBasePart;
 
-export type PagePart =
-  | ArticleParts
-  | LinkParts
-  | HighlightedItemParts
-  | RichTextParts;
+export type PagePart = ArticleParts | LinkParts | HighlightedItemParts | RichTextParts;
 
 export type PagePartQueryResult<T extends PagePart = PagePart> = {
   pageParts: T[];
@@ -175,9 +171,9 @@ export type Measures = {
   _rev: string;
   _type: 'measures';
   _updatedAt: string;
-  icon: string ;
+  icon: string;
   title: string;
-  description: RichContentBlock[] | null
+  description: RichContentBlock[] | null;
   measuresCollection: MeasuresCollection[];
 };
 declare module 'picosanity' {
