@@ -1,6 +1,7 @@
 import { Rule } from '~/sanity';
 import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
 import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
+import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 
 export const THERMOMETER_MIN_VALUE = Math.min(...SEVERITY_LEVELS_LIST);
 export const THERMOMETER_MAX_VALUE = Math.max(...SEVERITY_LEVELS_LIST);
@@ -10,6 +11,13 @@ export const thermometer = {
   title: 'Thermometer',
   name: 'thermometer',
   fields: [
+    {
+      title: 'Thermometer icoon',
+      name: 'icon',
+      type: 'string',
+      inputComponent: KpiIconInput,
+      validation: REQUIRED,
+    },
     {
       title: 'De titel boven de thermometer',
       name: 'title',

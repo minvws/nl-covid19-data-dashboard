@@ -21,7 +21,7 @@ export interface Gm {
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: GmVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupArchived_20220908;
-  booster_coverage: GmBoosterCoverage;
+  booster_coverage_archived_20220904: GmBoosterCoverageArchived_20220904;
 }
 export interface GmStaticValues {
   population_count: number;
@@ -115,11 +115,11 @@ export interface GmVaccineCoveragePerAgeGroupValue {
   age_group_range: '12+' | '18+' | '60+';
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  booster_shot_percentage: number | null;
+  booster_shot_percentage?: number | null;
   birthyear_range: string;
   autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  booster_shot_percentage_label: string | null;
+  booster_shot_percentage_label?: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -151,10 +151,10 @@ export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmBoosterCoverage {
-  values: GmBoosterCoverageValue[];
+export interface GmBoosterCoverageArchived_20220904 {
+  values: GmBoosterCoverageArchived_20220904Value[];
 }
-export interface GmBoosterCoverageValue {
+export interface GmBoosterCoverageArchived_20220904Value {
   age_group?: '12+' | '18+';
   percentage: number;
   percentage_label: string | null;
@@ -204,11 +204,9 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   age_group_range: '12+' | '18+' | '60+';
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  booster_shot_percentage: number | null;
   birthyear_range: string;
   autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -222,9 +220,9 @@ export interface Nl {
   code: NlId;
   difference: NlDifference;
   named_difference: NlNamedDifference;
-  booster_shot_administered: NlBoosterShotAdministered;
+  booster_shot_administered_archived_20220904: NlBoosterShotAdministeredArchived_20220904;
   repeating_shot_administered: NlRepeatingShotAdministered;
-  booster_coverage: NlBoosterCoverage;
+  booster_coverage_archived_20220904: NlBoosterCoverageArchived_20220904;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -345,11 +343,11 @@ export interface NamedDifferenceDecimal {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface NlBoosterShotAdministered {
-  values: NlBoosterShotAdministeredValue[];
-  last_value: NlBoosterShotAdministeredValue;
+export interface NlBoosterShotAdministeredArchived_20220904 {
+  values: NlBoosterShotAdministeredArchived_20220904Value[];
+  last_value: NlBoosterShotAdministeredArchived_20220904Value;
 }
-export interface NlBoosterShotAdministeredValue {
+export interface NlBoosterShotAdministeredArchived_20220904Value {
   administered_total: number;
   ggd_administered_total: number;
   others_administered_total: number;
@@ -365,10 +363,10 @@ export interface NlRepeatingShotAdministeredValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlBoosterCoverage {
-  values: NlBoosterCoverageValue[];
+export interface NlBoosterCoverageArchived_20220904 {
+  values: NlBoosterCoverageArchived_20220904Value[];
 }
-export interface NlBoosterCoverageValue {
+export interface NlBoosterCoverageArchived_20220904Value {
   age_group?: '12+' | '18+';
   percentage: number;
   date_unix: number;
@@ -986,10 +984,8 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_total: number;
   autumn_2022_vaccinated: number | null;
   fully_vaccinated: number;
-  booster_shot: number | null;
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number;
-  booster_shot_percentage: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -1354,7 +1350,7 @@ export interface Vr {
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: VrVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_archived_20220908: VrVaccineCoveragePerAgeGroupArchived_20220908;
-  booster_coverage: VrBoosterCoverage;
+  booster_coverage_archived_20220904: VrBoosterCoverageArchived_20220904;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1640,11 +1636,11 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   age_group_range: '12+' | '18+' | '60+';
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  booster_shot_percentage: number | null;
+  booster_shot_percentage?: number | null;
   birthyear_range: string;
   autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  booster_shot_percentage_label: string | null;
+  booster_shot_percentage_label?: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1676,10 +1672,10 @@ export interface VrVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface VrBoosterCoverage {
-  values: VrBoosterCoverageValue[];
+export interface VrBoosterCoverageArchived_20220904 {
+  values: VrBoosterCoverageArchived_20220904Value[];
 }
-export interface VrBoosterCoverageValue {
+export interface VrBoosterCoverageArchived_20220904Value {
   age_group?: '12+' | '18+';
   percentage: number;
   percentage_label: string | null;
@@ -1818,11 +1814,9 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   age_group_range: '12+' | '18+' | '60+';
   autumn_2022_vaccinated_percentage: number | null;
   fully_vaccinated_percentage: number | null;
-  booster_shot_percentage: number | null;
   birthyear_range: string;
   autumn_2022_vaccinated_percentage_label: string | null;
   fully_vaccinated_percentage_label: string | null;
-  booster_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }

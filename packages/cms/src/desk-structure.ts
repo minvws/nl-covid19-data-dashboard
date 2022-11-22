@@ -1,5 +1,5 @@
 import { StructureBuilder as S } from '@sanity/structure';
-import { BsCardChecklist, BsFillFileBarGraphFill, BsFillPuzzleFill, BsLockFill, BsMap, BsHouseFill, BsThermometer, BsGearFill } from 'react-icons/bs';
+import { BsCardChecklist, BsCardList, BsFillFileBarGraphFill, BsFillPuzzleFill, BsMap, BsHouseFill, BsThermometer, BsGearFill } from 'react-icons/bs';
 import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
@@ -25,7 +25,7 @@ const hiddenDocTypes = [
   'faqQuestion',
   'kpi',
   'kpiConfiguration',
-  'lockdown',
+  'measures',
   'lokalizeString',
   'lokalizeSubject',
   'lokalizeText',
@@ -70,7 +70,7 @@ export default () =>
       pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
-      addListItem(BsLockFill, 'Lockdown', 'lockdown'),
+      addListItem(BsCardChecklist, 'Maatregelen', 'measures'),
       addListItem(GrCircleInformation, 'Over dit dashboard', 'overDitDashboard'),
       addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()
@@ -89,7 +89,7 @@ export default () =>
       S.listItem()
         .id('cijferverantwoording')
         .title('Cijferverantwoording')
-        .icon(BsCardChecklist)
+        .icon(BsCardList)
         .child(
           S.list()
             .title('Groepen en Vragen')
@@ -143,6 +143,7 @@ export default () =>
             .title('Pagina configuratie')
             .items([
               addListItem(BsGearFill, 'Samenvattingspagina configuratie', 'topicalPageConfig'),
+              addListItem(BsGearFill, 'Weeksamenvatting', 'weeklySummary'),
               addListItem(BsThermometer, 'Thermometer', 'thermometer'),
               addListItem(BsGearFill, "KPI thema's", 'themeCollection'),
               addListItem(BsGearFill, 'Advies thema', 'measureTheme'),

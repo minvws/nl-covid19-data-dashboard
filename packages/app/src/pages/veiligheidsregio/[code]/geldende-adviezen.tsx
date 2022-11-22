@@ -1,44 +1,32 @@
 import { useRouter } from 'next/router';
+import { TopicalIcon as PageIcon } from '@corona-dashboard/common/src/types';
 import { AnchorTile } from '~/components/anchor-tile';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
+import { Header } from '~/components/page-information-block/components/header';
+import DynamicIcon from '~/components/get-icon-by-name';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
-import { LockdownTable } from '~/domain/restrictions/lockdown-table';
+import { MeasuresTable } from '~/domain/measures/measures-table';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  selectVrData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
-import { LockdownData, RoadmapData } from '~/types/cms';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, selectVrData, getLokalizeTexts } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getFilenameToIconName } from '~/utils';
+import { GeldendeAdviezenData } from '~/domain/measures/types';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textVr: siteText.pages.measures_page.vr,
 });
 
-type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
-
 export { getStaticPaths } from '~/static-paths/vr';
 
-type GeldendeAdviezenData = {
-  lockdown: LockdownData;
-  roadmap?: RoadmapData;
-};
-
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(),
   createGetContent<GeldendeAdviezenData>((context) => {
@@ -46,24 +34,21 @@ export const getStaticProps = createGetStaticProps(
 
     return `
     {
-      'lockdown': *[_type == 'lockdown']{
-        ...,
-        "message": {
-          ...message,
-          "description": {
-            ...message.description,
-            "${locale}": [
-              ...message.description.${locale}[]
-              {
-                ...,
-                "asset": asset->
-              },
-            ]
+      'measures': *[
+        _type == 'measures' && !(_id in path("drafts.**"))
+      ][0] {
+        icon,
+        'measuresCollection': measuresCollection[]->{
+            'title': title.${locale},
+            icon,
+            'measuresItems': measuresItems[]->{
+              'title': title.${locale},
+              icon
+            }
           },
-        }
-      }[0],
-      // We will need the roadmap when lockdown is disabled in the CMS.
-      // 'roadmap': *[_type == 'roadmap'][0]
+        'title':title.${locale},
+        'description': description.${locale}
+      },
     }`;
   })
 );
@@ -72,13 +57,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, vrName, lastGenerated } = props;
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textVr } = useDynamicLokalizeTexts(pageText, selectLokalizeTexts);
   type VRCode = keyof typeof textVr.urls;
 
-  const { lockdown } = content;
+  const { measures } = content;
 
   const router = useRouter();
   const code = router.query.code as unknown as VRCode;
@@ -100,21 +82,21 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <Box as="header" spacing={4}>
-            <Heading level={1}>
-              {replaceVariablesInText(textVr.titel, {
-                safetyRegionName: vrName,
-              })}
-            </Heading>
-            {lockdown.message.description ? (
+            <Header
+              icon={<DynamicIcon name={getFilenameToIconName(measures.icon) as PageIcon} />}
+              title={measures.title}
+              category={commonTexts.sidebar.categories.actions_to_take.title}
+            />
+            {measures.description && (
               <Box maxWidth="maxWidthText">
-                <RichContent blocks={lockdown.message.description} />
+                <RichContent blocks={measures.description} />
               </Box>
-            ) : null}
+            )}
           </Box>
 
           <Box as="article" spacing={3}>
-            <Heading level={3}>{lockdown.title}</Heading>
-            <LockdownTable data={lockdown} level={1} />
+            <Heading level={3}>{measures.title}</Heading>
+            <MeasuresTable data={measures} />
           </Box>
 
           <AnchorTile
