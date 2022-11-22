@@ -1,14 +1,11 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import { useCollapsible } from '~/utils/use-collapsible';
 import { useIntl } from '~/intl';
-import { Cell, HeaderCell, Row, StyledTable } from '.';
 import { Markdown } from '~/components';
-import {
-  VaccineCampaign,
-  VaccineCampaignDescriptions,
-  VaccineCampaignHeaders,
-} from '../types';
+import { BoldText } from '~/components/typography';
+import { space } from '~/style/theme';
+import { useCollapsible } from '~/utils/use-collapsible';
+import { StyledCell, StyledHeaderCell, StyledRow, StyledTable } from '.';
+import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders } from '../types';
 
 interface NarrowVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
@@ -16,29 +13,18 @@ interface NarrowVaccineCampaignTableProps {
   headers: VaccineCampaignHeaders;
 }
 
-export const NarrowVaccineCampaignTable = ({
-  campaigns,
-  campaignDescriptions,
-  headers,
-}: NarrowVaccineCampaignTableProps) => {
+export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers }: NarrowVaccineCampaignTableProps) => {
   return (
     <StyledTable>
       <thead>
         <tr>
-          <HeaderCell mobile>{headers.vaccine}</HeaderCell>
+          <StyledHeaderCell isMobile>{headers.vaccine}</StyledHeaderCell>
         </tr>
       </thead>
 
       <tbody>
         {campaigns.map((campaign, index) => (
-          <VaccineCampaignRow
-            key={campaign.vaccine_campaign_order}
-            campaign={campaign}
-            campaignDescriptions={campaignDescriptions}
-            headers={headers}
-            isFirst={index === 0}
-            isLast={index + 1 === campaigns.length}
-          />
+          <VaccineCampaignRow key={campaign.vaccine_campaign_order} campaign={campaign} campaignDescriptions={campaignDescriptions} headers={headers} isFirst={index === 0} />
         ))}
       </tbody>
     </StyledTable>
@@ -50,88 +36,52 @@ interface VaccineCampaignRowProps {
   campaignDescriptions: VaccineCampaignDescriptions;
   headers: VaccineCampaignHeaders;
   isFirst: boolean;
-  isLast: boolean;
 }
 
-const VaccineCampaignRow = ({
-  campaign,
-  campaignDescriptions,
-  headers,
-  isFirst,
-  isLast,
-}: VaccineCampaignRowProps) => {
+const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }: VaccineCampaignRowProps) => {
   const { formatNumber } = useIntl();
   const collapsible = useCollapsible({ isOpen: isFirst });
-  const isOpen = collapsible.isOpen;
   const { locale = 'nl' } = useRouter();
 
+  const isOpen = collapsible.isOpen;
+
+  const campaignDescription = campaignDescriptions[`${campaign.vaccine_campaign_name_en.toLowerCase().replace(/ /g, '_')}_description`];
+
   return (
-    <Row isLast={isLast} isOpen={isOpen} onClick={() => collapsible.toggle()}>
-      <Cell css={css({ p: 0 })}>
+    <StyledRow isFirst={isFirst} onClick={() => collapsible.toggle()}>
+      <StyledCell padding={space[0]}>
         <StyledTable>
           <tbody>
             <tr>
-              <Cell css={css({ pt: 3 })} mobile>
-                <strong>
-                  {locale === 'nl'
-                    ? campaign.vaccine_campaign_name_nl
-                    : campaign.vaccine_campaign_name_en}
-                </strong>
-              </Cell>
+              <StyledCell paddingTop={space[3]} isMobile>
+                <BoldText>{locale === 'nl' ? campaign.vaccine_campaign_name_nl : campaign.vaccine_campaign_name_en}</BoldText>
+              </StyledCell>
 
-              <Cell css={css({ pt: 3 })} alignRight mobile>
+              <StyledCell paddingTop={space[3]} alignRight isMobile>
                 {collapsible.button()}
-              </Cell>
+              </StyledCell>
             </tr>
 
             <tr>
-              <Cell css={css({ py: 0 })} mobile>
-                {headers.last_week}:{' '}
-                {isOpen ? (
-                  <strong>
-                    {formatNumber(campaign.vaccine_administered_last_week)}
-                  </strong>
-                ) : (
-                  <>{formatNumber(campaign.vaccine_administered_last_week)}</>
-                )}
-              </Cell>
+              <StyledCell paddingY={space[0]} isMobile>
+                {headers.last_week}: {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_last_week)}</BoldText> : formatNumber(campaign.vaccine_administered_last_week)}
+              </StyledCell>
             </tr>
 
             <tr>
-              <Cell css={css({ py: 0 })} mobile>
-                {headers.total}:{' '}
-                {isOpen ? (
-                  <strong>
-                    {formatNumber(campaign.vaccine_administered_total)}
-                  </strong>
-                ) : (
-                  <>{formatNumber(campaign.vaccine_administered_total)}</>
-                )}
-              </Cell>
+              <StyledCell paddingY={space[0]} isMobile>
+                {headers.total}: {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
+              </StyledCell>
             </tr>
 
             <tr>
-              <Cell
-                css={css({ pb: collapsible.isOpen ? 3 : 2 })}
-                colSpan={2}
-                mobile
-              >
-                {collapsible.content(
-                  <Markdown
-                    content={
-                      campaignDescriptions[
-                        `${campaign.vaccine_campaign_name_en
-                          .toLowerCase()
-                          .replace(/ /g, '_')}_description`
-                      ]
-                    }
-                  />
-                )}
-              </Cell>
+              <StyledCell paddingBottom={collapsible.isOpen ? space[3] : space[2]} colSpan={2} isMobile>
+                {collapsible.content(<Markdown content={campaignDescription} />)}
+              </StyledCell>
             </tr>
           </tbody>
         </StyledTable>
-      </Cell>
-    </Row>
+      </StyledCell>
+    </StyledRow>
   );
 };
