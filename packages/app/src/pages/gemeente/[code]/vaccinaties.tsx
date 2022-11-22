@@ -39,7 +39,13 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('code', 'vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'vaccine_coverage_per_age_group_archived_20220908', 'booster_coverage_archived_20220904'),
+  selectGmData(
+    'code',
+    'vaccine_coverage_per_age_group',
+    'vaccine_coverage_per_age_group_archived',
+    'vaccine_coverage_per_age_group_archived_20220908',
+    'booster_coverage_archived_20220904'
+  ),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {

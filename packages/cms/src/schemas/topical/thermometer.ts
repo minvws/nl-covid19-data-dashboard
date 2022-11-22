@@ -27,12 +27,12 @@ export const thermometer = {
     {
       title: 'De beschrijving boven de thermometer',
       name: 'subTitle',
-      type: 'localeRichContentBlock'
+      type: 'localeRichContentBlock',
     },
     {
       title: 'De titel binnen de thermometer tegel',
       name: 'tileTitle',
-      type: 'localeString'
+      type: 'localeString',
     },
     {
       title: 'Huidige stand',

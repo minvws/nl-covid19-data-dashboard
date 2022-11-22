@@ -28,25 +28,14 @@ const padding = {
   top: 12,
 };
 
-export function Tooltip<T extends ChoroplethDataItem>({
-  left,
-  top,
-  formatTooltip,
-  data,
-  dataFormatters,
-  placement = 'bottom-right',
-}: TTooltipProps<T>) {
+export function Tooltip<T extends ChoroplethDataItem>({ left, top, formatTooltip, data, dataFormatters, placement = 'bottom-right' }: TTooltipProps<T>) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const [ref, { height = 0 }] = useResizeObserver<HTMLDivElement>();
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
   const isTouch = useIsTouchDevice();
 
-  const content = isDefined(formatTooltip) ? (
-    formatTooltip(data)
-  ) : (
-    <ChoroplethTooltip data={data} dataFormatters={dataFormatters} />
-  );
+  const content = isDefined(formatTooltip) ? formatTooltip(data) : <ChoroplethTooltip data={data} dataFormatters={dataFormatters} />;
 
   if (!content) return null;
 
@@ -56,25 +45,16 @@ export function Tooltip<T extends ChoroplethDataItem>({
   const maxx = boundingBox?.width ?? 400;
   const maxy = viewportSize.height ?? 480;
 
-  const t = (
-    placement: ChoroplethTooltipPlacement,
-    top: number,
-    left: number
-  ): string => {
+  const t = (placement: ChoroplethTooltipPlacement, top: number, left: number): string => {
     switch (placement) {
       case 'top-center': {
-        const xt = (current: number) =>
-          Math.round((100 * (current - minx)) / (maxx - minx));
+        const xt = (current: number) => Math.round((100 * (current - minx)) / (maxx - minx));
         return `translateX(-${xt(left)}%)`;
       }
       case 'bottom-right':
       default: {
-        const xt = (current: number) =>
-          Math.round((100 * (current - minx)) / (maxx - minx));
-        const yt = (current: number) =>
-          Math.round(
-            current > maxy / 2 ? -(height + padding.top) : padding.top
-          );
+        const xt = (current: number) => Math.round((100 * (current - minx)) / (maxx - minx));
+        const yt = (current: number) => Math.round(current > maxy / 2 ? -(height + padding.top) : padding.top);
         const bboxTop = boundingBox?.top ?? 0;
         return `translate(-${xt(left)}%, ${yt(bboxTop + top)}px)`;
       }
@@ -82,18 +62,8 @@ export function Tooltip<T extends ChoroplethDataItem>({
   };
 
   return (
-    <Box
-      ref={boundingBoxRef}
-      position="absolute"
-      top="0"
-      left="0"
-      width="100%"
-      height="100%"
-    >
-      <Box
-        position="absolute"
-        style={{ top, left, width: '1px', height: '1px' }}
-      >
+    <Box ref={boundingBoxRef} position="absolute" top="0" left="0" width="100%" height="100%">
+      <Box position="absolute" style={{ top, left, width: '1px', height: '1px' }}>
         <Box
           bg="white"
           ref={ref}
