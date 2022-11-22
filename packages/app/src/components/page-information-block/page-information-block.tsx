@@ -162,25 +162,15 @@ const Button = styled.button<{
   border-width: 1px;
   transition: 0.1s background-color;
 
-  ${({ isActive }) =>
-    isActive &&
-    `
-    '&:focus': {
-      position: 'absolute',
-      outline: '2px dotted white',
-      outlineOffset: '-2px',
-      top: 2,
-      left: 2,
-    }
-  `}
+  &:hover {
+    background: ${colors.blue8};
+    color: ${colors.white};
+    border-color: ${colors.transparent};
+  }
 
-  ${({ isActive }) =>
-    !isActive &&
-    `
-    &:hover {
-      background: ${colors.blue8};
-      color: ${colors.white};
-      border-color: ${colors.transparent};
-    }
-  `}
+  &:focus {
+    outline: 2px dotted white;
+    top: 2;
+    left: 2;
+  }
 `;
