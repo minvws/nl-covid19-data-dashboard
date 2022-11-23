@@ -1,4 +1,3 @@
-
 import { REQUIRED } from '../../validation';
 
 export const weeklySummaryCollection = {

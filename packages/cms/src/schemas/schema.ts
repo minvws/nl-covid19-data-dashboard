@@ -24,6 +24,6 @@ export default createSchema({
     ...Object.values(objects),
     ...Object.values(locale),
     ...Object.values(elements),
-    ...Object.values(topicalPageConfig),
-    ),
+    ...Object.values(topicalPageConfig)
+  ),
 });
