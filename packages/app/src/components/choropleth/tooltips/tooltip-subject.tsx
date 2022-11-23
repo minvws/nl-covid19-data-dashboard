@@ -29,15 +29,15 @@ export function TooltipSubject({ subject, thresholdValues, filterBelow, children
       <Box
         margin={space[0]}
         spacingHorizontal={2}
+        display="flex"
+        alignItems="center"
+        flexWrap="nowrap"
         css={css({
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'nowrap',
           whiteSpace: 'pre-wrap',
         })}
       >
         {children}
-        <Box flexShrink={0} height="13px" width="13px" borderRadius={'2px'} marginLeft="auto" marginBottom="auto" marginTop="5px" backgroundColor={color} />
+        <Box flexShrink={0} height="13px" width="13px" borderRadius='2px' marginLeft="auto" marginBottom="auto" marginTop="5px" backgroundColor={color} />
       </Box>
     </Box>
   );

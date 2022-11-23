@@ -143,7 +143,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
   const coverageKindsText = commonTexts.vaccinations.coverage_kinds;
   const ageGroupsText: SiteText['common']['common']['age_groups'] = commonTexts.common.age_groups;
 
-  const secondaryContent = ageGroups.map((ageGroup) => {
+  const tooltipContentValues = ageGroups.map((ageGroup) => {
     const ageGroupKeys: DataPerAgeGroup = {
       birthyear_range_plus: `birthyear_range_${ageGroup}_plus` as unknown as BirthyearRangeKeysOfAgeGroups,
       vaccinated_percentage_plus: `vaccinated_percentage_${ageGroup}_plus` as unknown as PercentageKeysOfAgeGroups,
@@ -193,7 +193,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
   return (
     <TooltipContent title={data.featureName} link={data.dataOptions.getLink ? data.dataOptions.getLink(data.code) : undefined}>
       <BoldText>{coverageKindsText[selectedCoverageKind]}</BoldText>
-      {secondaryContent}
+      {tooltipContentValues}
     </TooltipContent>
   );
 }
