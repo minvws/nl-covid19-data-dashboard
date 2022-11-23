@@ -13,3 +13,5 @@ timestamp,action,key,document_id,move_to
 2022-11-21T09:11:50.358Z,add,common.vaccinations.coverage_kinds.fully_basisserie,cMBWaVHxQUmXKxLgJyJ8aT,__
 2022-11-21T09:11:50.359Z,delete,common.vaccinations.coverage_kinds.autumn_2022_vaccinated_percentage,NGAoa2ArqEakZsIxnSDBhz,__
 2022-11-21T09:11:50.360Z,delete,common.vaccinations.coverage_kinds.fully_vaccinated_percentage,jDbv30Y7XYH5kl8ZaoSZwv,__
+2022-11-23T09:37:10.394Z,add,common.vaccinations.coverage_kinds.primary_series,cMBWaVHxQUmXKxLgKD55A5,__
+2022-11-23T09:37:10.395Z,delete,common.vaccinations.coverage_kinds.fully_basisserie,cMBWaVHxQUmXKxLgJyJ8aT,__
