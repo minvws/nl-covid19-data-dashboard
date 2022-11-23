@@ -35,7 +35,7 @@
       "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
     },
     "birthyear_range_60_plus": {
-      "type": "string",
+      "type": ["string", "null"],
       "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
     },
     "vaccinated_percentage_12_plus": {
