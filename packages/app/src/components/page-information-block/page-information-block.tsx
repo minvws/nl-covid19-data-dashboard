@@ -162,7 +162,6 @@ const StyledArchiveButton = styled.button<StyledArchiveButtonProps>`
   cursor: pointer;
   min-height: 36px;
   padding: 12px ${space[3]};
-  transition: 0.1s background-color;
 
   &:hover {
     background: ${colors.blue8};
