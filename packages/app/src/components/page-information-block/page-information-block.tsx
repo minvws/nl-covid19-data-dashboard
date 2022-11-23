@@ -169,6 +169,6 @@ const StyledButton = styled.button<{
   }
 
   &:focus {
-    outline: 2px dotted white;
+    outline: 2px dotted ${colors.white};
   }
 `;
