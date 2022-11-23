@@ -9,7 +9,11 @@ export const ARCHIVED_COLORS = {
   COLOR_FULLY_VACCINATED: colors.primary,
 };
 
-export type AgeGroups = '12' | '18' | '60';
+// set Age groups once inside AllAgeGroups and use them on the AgeGroups type and variable
+const AllAgeGroups = ['12', '18', '60'] as const;
+type AgeGroupsCombined = typeof AllAgeGroups;
+export type AgeGroups = AgeGroupsCombined[number];
+export const ageGroups = Object.values(AllAgeGroups);
 
 type PrimarySeriesVaccinatedAges = Extract<AgeGroups, '18' | '12'>;
 type Autumn2022Vaccinated = Extract<AgeGroups, '60' | '12'>;
@@ -25,8 +29,6 @@ export const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
   autumn_2022: ['60', '12'],
   primary_series: ['18', '12'],
 };
-
-export const ageGroups = ['12', '18', '60']
 
 export type PercentageKeysOfAgeGroups = Pick<VaccineCoverageData, 'vaccinated_percentage_12_plus' | 'vaccinated_percentage_18_plus' | 'vaccinated_percentage_60_plus'>;
 

@@ -115,7 +115,7 @@ export interface GmVaccineCoveragePerAgeGroupValue {
   vaccination_type: string;
   birthyear_range_12_plus: string;
   birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string;
+  birthyear_range_60_plus: string | null;
   vaccinated_percentage_12_plus: number | null;
   vaccinated_percentage_12_plus_label: string | null;
   vaccinated_percentage_18_plus: number | null;
@@ -206,7 +206,7 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   vaccination_type: string;
   birthyear_range_12_plus: string;
   birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string;
+  birthyear_range_60_plus: string | null;
   vaccinated_percentage_12_plus: number | null;
   vaccinated_percentage_12_plus_label: string | null;
   vaccinated_percentage_18_plus: number | null;
@@ -1642,7 +1642,7 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   vaccination_type: string;
   birthyear_range_12_plus: string;
   birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string;
+  birthyear_range_60_plus: string | null;
   vaccinated_percentage_12_plus: number | null;
   vaccinated_percentage_12_plus_label: string | null;
   vaccinated_percentage_18_plus: number | null;
@@ -1822,7 +1822,7 @@ export interface VrCollectionVaccineCoveragePerAgeGroup {
   vaccination_type: string;
   birthyear_range_12_plus: string;
   birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string;
+  birthyear_range_60_plus: string | null;
   vaccinated_percentage_12_plus: number | null;
   vaccinated_percentage_12_plus_label: string | null;
   vaccinated_percentage_18_plus: number | null;
