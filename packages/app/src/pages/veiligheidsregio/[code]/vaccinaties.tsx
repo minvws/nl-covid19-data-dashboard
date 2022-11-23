@@ -49,7 +49,7 @@ export const getStaticProps = createGetStaticProps(
       }
       return {
         vaccine_coverage_per_age_group: isPresent(ctx.params?.code)
-          ? vaccine_coverage_per_age_group.filter((el) => gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode))
+          ? vaccine_coverage_per_age_group.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[ctx.params?.code as string].includes(vaccineCoveragePerAgeGroup.gmcode))
           : vaccine_coverage_per_age_group,
       };
     },

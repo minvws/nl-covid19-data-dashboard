@@ -51,7 +51,7 @@ export const getStaticProps = createGetStaticProps(
 
       return {
         vaccine_coverage_per_age_group: isDefined(vrCode)
-          ? vaccine_coverage_per_age_group.filter((el) => gmCodesByVrCode[vrCode].includes(el.gmcode))
+          ? vaccine_coverage_per_age_group.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
           : vaccine_coverage_per_age_group,
       };
     },
