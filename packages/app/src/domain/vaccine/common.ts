@@ -9,19 +9,21 @@ export const ARCHIVED_COLORS = {
   COLOR_FULLY_VACCINATED: colors.primary,
 };
 
-type FullyBasisserieVaccinatedAges = '18' | '12';
-type Autumn2022Vaccinated = '60' | '12';
+export type AgeGroups = '12' | '18' | '60';
+
+type PrimarySeriesVaccinatedAges = Extract<AgeGroups, '18' | '12'>;
+type Autumn2022Vaccinated = Extract<AgeGroups, '60' | '12'>;
 
 type MatchingVaccineCoverageAgeGroupsType = {
   autumn_2022: Autumn2022Vaccinated[];
-  fully_basisserie: FullyBasisserieVaccinatedAges[];
+  primary_series: PrimarySeriesVaccinatedAges[];
 };
 
 export type VaccineCoverageData = GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup;
 
 export const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
   autumn_2022: ['60', '12'],
-  fully_basisserie: ['18', '12'],
+  primary_series: ['18', '12'],
 };
 
 export const ageGroups = ['12', '18', '60']

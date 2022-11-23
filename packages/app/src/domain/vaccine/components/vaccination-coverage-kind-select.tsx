@@ -6,9 +6,9 @@ import { Option } from '~/components/rich-content-select/types';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
-export type CoverageKindProperty = 'autumn_2022' | 'fully_basisserie';
+export type CoverageKindProperty = 'autumn_2022' | 'primary_series';
 
-const COVERAGE_KINDS: CoverageKindProperty[] = ['autumn_2022', 'fully_basisserie'];
+const COVERAGE_KINDS: CoverageKindProperty[] = ['autumn_2022', 'primary_series'];
 
 type VaccinationCoverageKindSelectProps = {
   onChange: (value: CoverageKindProperty) => void;
@@ -16,7 +16,7 @@ type VaccinationCoverageKindSelectProps = {
 };
 
 export function VaccinationCoverageKindSelect(props: VaccinationCoverageKindSelectProps) {
-  const { onChange, initialValue = 'fully_basisserie' } = props;
+  const { onChange, initialValue = 'primary_series' } = props;
 
   const { commonTexts } = useIntl();
 

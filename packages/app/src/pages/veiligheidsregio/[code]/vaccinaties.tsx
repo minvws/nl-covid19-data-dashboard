@@ -1,18 +1,13 @@
-import { colors, GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
-import { Box } from '~/components/base';
-import { thresholds } from '~/components/choropleth/logic';
-import { TileList, PageInformationBlock, Markdown, ChoroplethTile, DynamicChoropleth, Divider } from '~/components';
+import { isDefined, isPresent } from 'ts-is-present';
+import { TileList, PageInformationBlock, Divider } from '~/components';
 import { gmCodesByVrCode } from '~/data';
 import { Layout, VrLayout } from '~/domain/layout';
-import { AgeGroup, AgeGroupSelect } from '~/domain/vaccine/components/age-group-select';
-import { VaccinationCoverageKindSelect, CoverageKindProperty } from '~/domain/vaccine/components/vaccination-coverage-kind-select';
-import { matchingAgeGroups } from '~/domain/vaccine/common';
-import { selectVaccineCoverageData, ChoroplethTooltip, VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile, VaccineCoverageTile } from '~/domain/vaccine';
+import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile, VaccineCoverageTile } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
@@ -22,8 +17,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert, replaceVariablesInText, useReverseRouter, useFormatLokalizePercentage } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { BoldText } from '~/components/typography';
-import css from '@styled-system/css';
+import { VaccineCoverageChoroplethVrAndGm } from '~/domain/vaccine/vaccine-coverage-choropleth_vr_and_gm';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
 
@@ -54,11 +48,9 @@ export const getStaticProps = createGetStaticProps(
         };
       }
       return {
-        vaccine_coverage_per_age_group: selectVaccineCoverageData(
-          isPresent(ctx.params?.code)
-            ? vaccine_coverage_per_age_group.filter((el) => gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode))
-            : vaccine_coverage_per_age_group
-        ),
+        vaccine_coverage_per_age_group: isPresent(ctx.params?.code)
+          ? vaccine_coverage_per_age_group.filter((el) => gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode))
+          : vaccine_coverage_per_age_group,
       };
     },
   }),
@@ -81,22 +73,8 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
   const router = useRouter();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
-  const [selectedCoverageKind, setSelectedCoverageKind] = useState<CoverageKindProperty>('fully_vaccinated_percentage');
 
   const { textNl, textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
-  /**
-   * When changing between coverage kinds where the selected age group isn't available,
-   * the other coverage kind set the non-matching age group to a default one.
-   */
-  const setSelectedCoverageKindAndAge = (coverageKind: CoverageKindProperty) => {
-    if (coverageKind === selectedCoverageKind) return;
-    if (selectedAgeGroup !== '12+') {
-      setSelectedAgeGroup(selectedAgeGroup === '18+' ? '60+' : '18+');
-    }
-    setSelectedCoverageKind(coverageKind);
-  };
 
   const metadata = {
     ...textVr.metadata,
@@ -112,35 +90,22 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-  const choroplethData: GmCollectionVaccineCoveragePerAgeGroup[] = choropleth.gm.vaccine_coverage_per_age_group.filter(hasValueAtKey('age_group_range', selectedAgeGroup));
 
-  /**
-   * Filter out only the 12+ and 18+ for the toggle component.
-   */
-  const filteredAgeGroup60Plus = data.vaccine_coverage_per_age_group.values.find((item) => item.age_group_range === '60+');
+  const filteredVaccination = {
+    primarySeries: data.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'primary_series'),
+    autumn2022: data.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
+  };
 
-  const filteredAgeGroup18Plus = data.vaccine_coverage_per_age_group.values.find((item) => item.age_group_range === '18+');
-
-  const filteredAgeGroup12Plus = data.vaccine_coverage_per_age_group.values.find((item) => item.age_group_range === '12+');
-
-  /**
-   * Archived -  Filter out only the the 12+ and 18+ for the toggle component.
-   */
-  const filteredAgeGroup18PlusArchived = data.vaccine_coverage_per_age_group_archived_20220908.values.find((item) => item.age_group_range === '18+');
-
-  const filteredAgeGroup12PlusArchived = data.vaccine_coverage_per_age_group_archived_20220908.values.find((item) => item.age_group_range === '12+');
+  assert(filteredVaccination.primarySeries, `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the primary series`);
+  assert(filteredVaccination.autumn2022, `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the autumn 2022 series`);
 
   const boosterCoverage18PlusArchivedValue = data.booster_coverage_archived_20220904.values.find((v) => v.age_group === '18+');
   const boosterCoverage12PlusArchivedValue = data.booster_coverage_archived_20220904.values.find((v) => v.age_group === '12+');
 
-  assert(filteredAgeGroup60Plus, `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`);
-
-  assert(filteredAgeGroup18Plus, `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 18+`);
-
-  assert(filteredAgeGroup12Plus, `[${VaccinationsVrPage.name}] Could not find data for the vaccine coverage per age group for the age 12+`);
+  const filteredAgeGroup18PlusArchived = data.vaccine_coverage_per_age_group_archived_20220908.values.find((item) => item.age_group_range === '18+');
+  const filteredAgeGroup12PlusArchived = data.vaccine_coverage_per_age_group_archived_20220908.values.find((item) => item.age_group_range === '12+');
 
   assert(filteredAgeGroup18PlusArchived, `[${VaccinationsVrPage.name}] Could not find archived data for the vaccine coverage per age group for the age 18+`);
-
   assert(filteredAgeGroup12PlusArchived, `[${VaccinationsVrPage.name}] Could not find archived data for the vaccine coverage per age group for the age 12+`);
 
   return (
@@ -156,7 +121,7 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
             icon={<VaccinatieIcon aria-hidden="true" />}
             metadata={{
               datumsText: textVr.vaccination_coverage.top_level_information_block.dates,
-              dateOrRange: filteredAgeGroup18Plus.date_unix,
+              dateOrRange: filteredVaccination.primarySeries.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [],
             }}
@@ -174,27 +139,27 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
             descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
             coverageData={[
               {
-                value: filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage,
-                birthyear: filteredAgeGroup60Plus.birthyear_range,
+                value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus,
+                birthyear: filteredVaccination.autumn2022.birthyear_range_60_plus,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
                 bar: {
-                  value: filteredAgeGroup60Plus.autumn_2022_vaccinated_percentage || 0,
+                  value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus || 0,
                   color: colors.scale.blueDetailed[8],
                 },
               },
               {
-                value: filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage,
-                birthyear: filteredAgeGroup12Plus.birthyear_range,
+                value: filteredVaccination.autumn2022.vaccinated_percentage_12_plus,
+                birthyear: filteredVaccination.autumn2022.birthyear_range_12_plus,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
                 bar: {
-                  value: filteredAgeGroup12Plus.autumn_2022_vaccinated_percentage || 0,
+                  value: filteredVaccination.autumn2022.vaccinated_percentage_12_plus || 0,
                   color: colors.scale.blueDetailed[8],
                 },
               },
             ]}
-            dateUnix={filteredAgeGroup12Plus.date_unix}
+            dateUnix={filteredVaccination.autumn2022.date_unix}
           />
           <VaccineCoverageTile
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
@@ -203,93 +168,42 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
             descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={[
               {
-                value: filteredAgeGroup18Plus.fully_vaccinated_percentage,
-                birthyear: filteredAgeGroup18Plus.birthyear_range,
+                value: filteredVaccination.primarySeries.vaccinated_percentage_18_plus,
+                birthyear: filteredVaccination.primarySeries.birthyear_range_18_plus,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
                 bar: {
-                  value: filteredAgeGroup18Plus.fully_vaccinated_percentage || 0,
+                  value: filteredVaccination.primarySeries.vaccinated_percentage_18_plus || 0,
                   color: colors.scale.blueDetailed[3],
                 },
               },
               {
-                value: filteredAgeGroup12Plus.fully_vaccinated_percentage,
-                birthyear: filteredAgeGroup12Plus.birthyear_range,
+                value: filteredVaccination.primarySeries.vaccinated_percentage_12_plus,
+                birthyear: filteredVaccination.primarySeries.birthyear_range_12_plus,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,
                 bar: {
-                  value: filteredAgeGroup12Plus.fully_vaccinated_percentage || 0,
+                  value: filteredVaccination.primarySeries.vaccinated_percentage_12_plus || 0,
                   color: colors.scale.blueDetailed[3],
                 },
               },
             ]}
-            dateUnix={filteredAgeGroup12Plus.date_unix}
+            dateUnix={filteredVaccination.primarySeries.date_unix}
           />
-
-          <ChoroplethTile
-            title={replaceVariablesInText(commonTexts.choropleth.vaccination_coverage.vr.title, { safetyRegionName: vrName })}
-            description={
-              <>
-                <Markdown content={replaceVariablesInText(commonTexts.choropleth.vaccination_coverage.vr.description, { safetyRegionName: vrName })} />
-                <Box display="flex" flexDirection="row" justifyContent="flex-start" spacingHorizontal={2} as={'fieldset'}>
-                  <BoldText
-                    as="legend"
-                    css={css({
-                      flexBasis: '100%',
-                      mb: 2,
-                    })}
-                  >
-                    {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
-                  </BoldText>
-
-                  <Box display="flex" width="100%" spacingHorizontal={{ xs: 2 }} flexWrap="wrap" flexDirection={{ _: 'column', xs: 'row' }}>
-                    <Box flex="1">
-                      <VaccinationCoverageKindSelect onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
-                    </Box>
-                    <Box flex="1">
-                      <Box maxWidth="20rem">
-                        <AgeGroupSelect onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-              </>
-            }
-            legend={{
-              thresholds: thresholds.gm.fully_vaccinated_percentage,
-              title: commonTexts.choropleth.choropleth_vaccination_coverage.shared.legend_title,
-            }}
-            metadata={{
-              source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-              date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
-            }}
-            hasPadding
-          >
-            <DynamicChoropleth
-              accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-              map="gm"
-              data={choroplethData}
-              dataConfig={{
-                metricName: 'vaccine_coverage_per_age_group',
-                metricProperty: selectedCoverageKind,
-              }}
-              dataOptions={{
+          <VaccineCoverageChoroplethVrAndGm
+            data={choropleth.gm.vaccine_coverage_per_age_group}
+            vrOrGmOptions={{
+              dataOptions: {
                 getLink: reverseRouter.gm.vaccinaties,
                 selectedCode: selectedGmCode,
-                tooltipVariables: {
-                  age_group: commonTexts.common.age_groups[selectedAgeGroup],
-                },
-              }}
-              formatTooltip={(context) => (
-                <ChoroplethTooltip
-                  data={context}
-                  mapData={choropleth.gm.vaccine_coverage_per_age_group.filter((singleGm) => singleGm.gmcode === context.code)}
-                  ageGroups={matchingAgeGroups[selectedCoverageKind]}
-                  selectedCoverageKind={selectedCoverageKind}
-                />
-              )}
-            />
-          </ChoroplethTile>
+                isPercentage: true,
+              },
+              text: {
+                title: replaceVariablesInText(commonTexts.choropleth.vaccination_coverage.vr.title, { safetyRegionName: vrName }),
+                description: replaceVariablesInText(commonTexts.choropleth.vaccination_coverage.vr.description, { safetyRegionName: vrName }),
+              },
+            }}
+          />
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}
