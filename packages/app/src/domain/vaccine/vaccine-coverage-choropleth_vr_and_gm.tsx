@@ -3,6 +3,7 @@ import { SiteText } from '~/locale';
 import { matchingAgeGroups, VaccineCoverageData, DataPerAgeGroup, BirthyearRangeKeysOfAgeGroups, PercentageKeysOfAgeGroups, PercentageLabelKeysOfAgeGroups } from './common';
 import css from '@styled-system/css';
 import { useState } from 'react';
+import { space } from '~/style/theme';
 import { Box } from '~/components/base';
 import { DataOptions, DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -54,7 +55,7 @@ export const VaccineCoverageChoroplethVrAndGm = ({ data, vrOrGmOptions }: Vaccin
               as="legend"
               css={css({
                 flexBasis: '100%',
-                mb: 2,
+                marginBottom: space[2],
               })}
             >
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
@@ -137,7 +138,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
 
     return (
       <TooltipSubject thresholdValues={data.thresholdValues} filterBelow={ageGroupPercentage as number} noDataFillColor={colors.white} key={ageGroup}>
-        <Box spacingHorizontal={2} display="flex" alignItems="center" justifyContent="space-between" flexGrow={1} mr={13} pr={2}>
+        <Box spacingHorizontal={2} display="flex" alignItems="center" justifyContent="space-between" flexGrow={1} marginRight={'13px'} paddingRight={space[2]}>
           <Box display="inline" minWidth={minWidthOfLabel} textAlign="left">
             <Markdown content={ageGroupsText[ageGroup]} />
           </Box>
