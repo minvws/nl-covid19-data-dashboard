@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Tile } from '~/components/tile';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { usePrevious } from '~/utils/use-previous';
@@ -36,19 +37,25 @@ export function FullscreenChartTile({ children, metadata, disabled }: Fullscreen
 
   const tile = (
     <Tile hasNoBorder={isFullscreen} height="100%">
-      <Box px={isFullscreen ? { _: 3, sm: 4 } : undefined} py={isFullscreen ? { _: 2, sm: 3 } : undefined} height="100%" display="flex" flexDirection="column">
+      <Box
+        paddingX={isFullscreen ? { _: space[3], sm: space[4] } : undefined}
+        paddingY={isFullscreen ? { _: space[2], sm: space[3] } : undefined}
+        height="100%"
+        display="flex"
+        flexDirection="column"
+      >
         {children}
 
         {metadata && (
           <>
-            <Spacer m="auto" />
+            <Spacer margin="auto" />
             <Metadata {...metadata} isTileFooter />
           </>
         )}
 
         {!disabled && breakpoints.md && (
           <StyledModalCloseButtonWrapper isFullscreen={isFullscreen}>
-            <IconButton ref={isFullscreen ? undefined : buttonRef} title={label} onClick={() => setIsFullscreen((x) => !x)} size={16}>
+            <IconButton ref={isFullscreen ? undefined : buttonRef} title={label} onClick={() => setIsFullscreen((previousValue) => !previousValue)} size={16}>
               {isFullscreen ? <Close /> : <Expand />}
             </IconButton>
           </StyledModalCloseButtonWrapper>
