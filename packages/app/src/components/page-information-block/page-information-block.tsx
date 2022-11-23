@@ -121,9 +121,9 @@ export function PageInformationBlock({
           </Box>
           <Box my={3}>
             {showArchivedToggleButton && (
-              <StyledButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
+              <StyledArchiveButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
                 {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
-              </StyledButton>
+              </StyledArchiveButton>
             )}
           </Box>
         </Tile>
@@ -148,9 +148,11 @@ const MetadataBox = styled.div(
   })
 );
 
-const StyledButton = styled.button<{
+interface StyledArchiveButtonProps {
   isActive?: boolean;
-}>`
+}
+
+const StyledArchiveButton = styled.button<StyledArchiveButtonProps>`
   background: ${({ isActive }) => (isActive ? colors.blue1 : colors.white)};
   border: ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
   border-radius: 5px;
@@ -168,7 +170,7 @@ const StyledButton = styled.button<{
     border-color: ${colors.transparent};
   }
 
-  &:focus {
-    outline: 2px dotted ${colors.white};
+  &:hover:focus-visible {
+    outline: 2px dotted ${colors.magenta3};
   }
 `;
