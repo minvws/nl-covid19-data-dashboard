@@ -74,7 +74,7 @@ export const VaccineCoverageChoroplethVrAndGm = ({ data, vrOrGmOptions }: Vaccin
         </>
       }
       legend={{
-        thresholds: thresholds.gm.fully_vaccinated_percentage,
+        thresholds: thresholds.gm.primary_series_percentage,
         title: commonTexts.choropleth.choropleth_vaccination_coverage.shared.legend_title,
       }}
       metadata={{
