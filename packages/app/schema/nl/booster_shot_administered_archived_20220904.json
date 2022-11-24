@@ -1,34 +1,35 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_booster_coverage",
+  "title": "nl_booster_shot_administered_archived_20220904",
   "type": "object",
   "properties": {
     "values": {
       "type": "array",
       "minItems": 1,
-      "maxItems": 2,
+      "maxItems": 1,
       "items": {
         "$ref": "#/definitions/value"
       }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values"],
+  "required": ["values", "last_value"],
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "gm_booster_coverage_value",
+      "title": "nl_booster_shot_administered_archived_20220904_value",
       "type": "object",
       "properties": {
-        "age_group": {
-          "type": "string",
-          "enum": ["12+", "18+"]
-        },
-        "percentage": {
+        "administered_total": {
           "type": "number"
         },
-        "percentage_label": {
-          "type": ["string", "null"],
-          "pattern": "^([><][=][0-9]{1,2})$"
+        "ggd_administered_total": {
+          "type": "number"
+        },
+        "others_administered_total": {
+          "type": "number"
         },
         "date_unix": {
           "type": "integer"
@@ -38,8 +39,9 @@
         }
       },
       "required": [
-        "percentage",
-        "percentage_label",
+        "administered_total",
+        "ggd_administered_total",
+        "others_administered_total",
         "date_unix",
         "date_of_insertion_unix"
       ],

@@ -9,7 +9,8 @@
     "gmcode",
     "average",
     "total_installation_count",
-    "date_of_insertion_unix"
+    "date_of_insertion_unix",
+    "data_is_outdated"
   ],
   "properties": {
     "date_start_unix": {
@@ -30,6 +31,9 @@
     },
     "date_of_insertion_unix": {
       "type": "integer"
+    },
+    "data_is_outdated": {
+      "type": "boolean"
     }
   }
 }
