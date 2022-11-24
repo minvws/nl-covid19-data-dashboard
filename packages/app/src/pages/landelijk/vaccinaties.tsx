@@ -3,12 +3,10 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { isDefined } from 'ts-is-present';
 import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
   selectAdministrationData,
-  selectVaccineCoverageData,
   VaccinationsOverTimeTile,
   VaccineBoosterAdministrationsKpiSection,
   VaccinationsShotKpiSection,
@@ -116,18 +114,8 @@ export const getStaticProps = createGetStaticProps(
     };
   },
   createGetChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group }) => {
-      if (isDefined(vaccine_coverage_per_age_group)) {
-        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
-      }
-      return vaccine_coverage_per_age_group ?? null;
-    },
-    vr: ({ vaccine_coverage_per_age_group }) => {
-      if (isDefined(vaccine_coverage_per_age_group)) {
-        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
-      }
-      return vaccine_coverage_per_age_group ?? null;
-    },
+    gm: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
+    vr: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
   })
 );
 

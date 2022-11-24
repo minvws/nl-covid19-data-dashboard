@@ -8,19 +8,19 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseBirthyearRange } from '../logic/parse-birthyear-range';
 
-export type AgeGroup = '12+' | '18+' | '60+';
+export type AgeGroup = '12' | '18' | '60';
 
 const AGE_GROUPS = [
   {
-    ageGroup: '60+',
+    ageGroup: '60',
     birthyearRange: '-1961',
   },
   {
-    ageGroup: '18+',
+    ageGroup: '18',
     birthyearRange: '-2003',
   },
   {
-    ageGroup: '12+',
+    ageGroup: '12',
     birthyearRange: '-2009',
   },
 ] as const;
@@ -32,7 +32,7 @@ type AgeGroupSelectProps = {
 };
 
 export function AgeGroupSelect(props: AgeGroupSelectProps) {
-  const { onChange, initialValue = '18+', shownAgeGroups } = props;
+  const { onChange, initialValue = '18', shownAgeGroups } = props;
 
   const { commonTexts } = useIntl();
 
