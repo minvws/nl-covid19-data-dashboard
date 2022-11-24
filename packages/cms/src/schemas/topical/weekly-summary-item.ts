@@ -1,10 +1,10 @@
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../validation';
 
-export const measureTile = {
+export const weeklySummaryItem = {
   type: 'document',
   title: 'Maatregelen tegel',
-  name: 'measureTile',
+  name: 'weeklySummaryItem',
   fields: [
     {
       title: 'Tegel icoon',
@@ -16,8 +16,13 @@ export const measureTile = {
     {
       title: 'Omschrijving',
       name: 'description',
-      type: 'localeRichContentBlock',
+      type: 'localeString',
       validation: REQUIRED,
+    },
+    {
+      title: 'Bevat thermometer niveau',
+      name: 'isThermometerMetric',
+      type: 'boolean',
     },
   ],
   preview: {

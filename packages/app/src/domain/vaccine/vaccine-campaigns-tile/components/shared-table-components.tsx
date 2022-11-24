@@ -1,49 +1,49 @@
 import { colors } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import styled from 'styled-components';
+import { compose, padding, PaddingProps } from 'styled-system';
+import { fontSizes, fontWeights, space } from '~/style/theme';
 
-export const StyledTable = styled.table(
-  css({
-    borderCollapse: 'collapse',
-    width: '100%',
-  })
-);
+export const StyledTable = styled.table`
+  border-collapse: collapse;
+  width: 100%;
+`;
 
-export const HeaderCell = styled.th<{ mobile?: boolean }>((x) =>
-  css({
-    textAlign: 'left',
-    fontSize: 14,
-    fontWeight: 'bold',
-    px: 3,
-    py: x.mobile ? 3 : 2,
-    verticalAlign: 'top',
-    width: !x.mobile ? '33%' : undefined,
-  })
-);
+interface StyledHeaderCellProps {
+  isMobile?: boolean;
+}
 
-export const Cell = styled.td<{
+export const StyledHeaderCell = styled.th<StyledHeaderCellProps>`
+  font-size: ${fontSizes[1]};
+  fontweight: ${fontWeights.bold};
+  padding: ${({ isMobile }) => (isMobile ? space[3] : space[2])} ${space[3]};
+  text-align: left;
+  vertical-align: top;
+  width: ${({ isMobile }) => (!isMobile ? '33%' : undefined)};
+`;
+
+interface StyledCellProps extends PaddingProps {
   alignRight?: boolean;
+  isMobile?: boolean;
   isOpen?: boolean;
-  mobile?: boolean;
-}>((x) =>
-  css({
-    float: x.alignRight ? 'right' : undefined,
-    px: 3,
-    py: x.mobile ? 2 : 4,
-    verticalAlign: 'top',
-    width: !x.mobile ? '33%' : undefined,
-  })
-);
+}
 
-export const Row = styled.tr<{
-  isLast: boolean;
-  isOpen?: boolean;
-}>((x) =>
-  css({
-    background: x.isOpen ? colors.primaryOpacity : undefined,
-    borderTop: '1px solid',
-    borderBottom: x.isOpen || x.isLast ? '1px solid' : undefined,
-    borderColor: x.isOpen ? colors.blue8 : colors.gray2,
-    cursor: 'pointer',
-  })
-);
+export const StyledCell = styled.td<StyledCellProps>`
+  float: ${({ alignRight }) => (alignRight ? 'right' : undefined)};
+  padding: ${({ isMobile }) => (isMobile ? space[2] : space[4])} ${space[3]};
+  vertical-align: top;
+  width: ${({ isMobile }) => (!isMobile ? '33%' : undefined)};
+  ${compose(padding)}
+`;
+
+interface StyledRowProps {
+  isFirst: boolean;
+}
+
+const getBorderColor = (isFirst: boolean) => (isFirst ? colors.blue8 : colors.gray2);
+
+export const StyledRow = styled.tr<StyledRowProps>`
+  background: ${({ isFirst }) => (isFirst ? colors.primaryOpacity : undefined)};
+  border-top: 1px solid ${({ isFirst }) => getBorderColor(isFirst)};
+  border-bottom: 1px solid ${({ isFirst }) => getBorderColor(isFirst)};
+  cursor: pointer;
+`;

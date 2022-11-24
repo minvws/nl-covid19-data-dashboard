@@ -8,20 +8,20 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseBirthyearRange } from '../logic/parse-birthyear-range';
 
-export type AgeGroup = '12+' | '18+' | '60+';
+export type AgeGroup = '12' | '18' | '60';
 
 const AGE_GROUPS = [
   {
-    ageGroup: '12+',
-    birthyearRange: '-2009',
+    ageGroup: '60',
+    birthyearRange: '-1961',
   },
   {
-    ageGroup: '18+',
+    ageGroup: '18',
     birthyearRange: '-2003',
   },
   {
-    ageGroup: '60+',
-    birthyearRange: '-1961',
+    ageGroup: '12',
+    birthyearRange: '-2009',
   },
 ] as const;
 
@@ -32,46 +32,30 @@ type AgeGroupSelectProps = {
 };
 
 export function AgeGroupSelect(props: AgeGroupSelectProps) {
-  const { onChange, initialValue = '18+', shownAgeGroups } = props;
+  const { onChange, initialValue = '18', shownAgeGroups } = props;
 
   const { commonTexts } = useIntl();
 
   const options: Option<AgeGroup>[] = useMemo(
     () =>
       AGE_GROUPS.map((ageGroupAndRange) => {
-        const birthyearRange = parseBirthyearRange(
-          ageGroupAndRange.birthyearRange
-        );
+        const birthyearRange = parseBirthyearRange(ageGroupAndRange.birthyearRange);
         if (isPresent(birthyearRange)) {
-          if (
-            shownAgeGroups &&
-            shownAgeGroups.includes(ageGroupAndRange.ageGroup)
-          ) {
+          if (shownAgeGroups && shownAgeGroups.includes(ageGroupAndRange.ageGroup)) {
             return {
               value: ageGroupAndRange.ageGroup,
               label: commonTexts.common.age_groups[ageGroupAndRange.ageGroup],
               content: (
                 <Box>
-                  <Text>
-                    {commonTexts.common.age_groups[ageGroupAndRange.ageGroup]}
-                  </Text>
-                  <Text variant="label1">
-                    {replaceVariablesInText(
-                      commonTexts.common.birthyear_ranges[birthyearRange.type],
-                      birthyearRange
-                    )}
-                  </Text>
+                  <Text>{commonTexts.common.age_groups[ageGroupAndRange.ageGroup]}</Text>
+                  <Text variant="label1">{replaceVariablesInText(commonTexts.common.birthyear_ranges[birthyearRange.type], birthyearRange)}</Text>
                 </Box>
               ),
             };
           }
         }
       }).filter(isPresent),
-    [
-      commonTexts.common.age_groups,
-      commonTexts.common.birthyear_ranges,
-      shownAgeGroups,
-    ]
+    [commonTexts.common.age_groups, commonTexts.common.birthyear_ranges, shownAgeGroups]
   );
 
   return (

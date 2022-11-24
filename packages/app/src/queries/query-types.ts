@@ -5,12 +5,14 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
+  weeklySummary: WeeklySummary;
   kpiThemes: KpiThemes;
   measureTheme: MeasureTheme;
   thermometer: ThermometerConfig;
 }
 
 interface ThermometerConfig {
+  icon: TopicalIcon;
   title: string;
   subTitle: PortableTextEntry[] | null;
   tileTitle: string | null;
@@ -61,6 +63,9 @@ interface Theme {
   themeIcon: TopicalIcon;
 }
 
+interface WeeklySummary extends Theme {
+  items: BaseTile[];
+}
 interface MeasureTheme extends Theme {
   tiles: BaseTile[];
 }
@@ -72,9 +77,10 @@ interface TopicalTheme extends Theme {
   links: ThemeLink[] | null;
 }
 
-interface BaseTile {
+export interface BaseTile {
   tileIcon: TopicalIcon;
   description: PortableTextEntry[];
+  isThermometerMetric?: boolean;
 }
 
 interface TopicalTile extends BaseTile {

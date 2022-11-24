@@ -1,16 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import type { GeoProjection } from 'd3-geo';
 import Konva from 'konva';
-import {
-  memo,
-  MouseEvent,
-  MutableRefObject,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { memo, MouseEvent, MutableRefObject, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
 import { isIOSDevice } from '~/utils/is-ios-device';
@@ -18,22 +9,12 @@ import { AccessibilityAnnotations } from '~/utils/use-accessibility-annotations'
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useUniqueId } from '~/utils/use-unique-id';
 import type { DataOptions } from '..';
-import type {
-  ChoroplethFeatures,
-  ChoroplethTooltipHandlers,
-  CodeProp,
-  FeatureProps,
-  FitExtent,
-} from '../logic';
+import type { ChoroplethFeatures, ChoroplethTooltipHandlers, CodeProp, FeatureProps, FitExtent } from '../logic';
 import { useHighlightedFeature } from '../logic/use-highlighted-feature';
-import {
-  ProjectedGeoInfo,
-  useProjectedCoordinates,
-} from '../logic/use-projected-coordinates';
+import { ProjectedGeoInfo, useProjectedCoordinates } from '../logic/use-projected-coordinates';
 import type { AnchorEventHandler } from './choropleth-map';
 
-Konva.pixelRatio =
-  typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1;
+Konva.pixelRatio = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1;
 
 export type CanvasChoroplethMapProps = {
   anchorEventHandlers: AnchorEventHandler;
@@ -58,8 +39,7 @@ export type CanvasChoroplethMapProps = {
  * This is one transparent pixel encoded in a dataUrl. This is used for the image overlay on top of the canvas that
  * uses the area map to detect feature mouse overs
  */
-const oneTransparentPixelImage =
-  'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC';
+const oneTransparentPixelImage = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC';
 
 export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   const {
@@ -85,17 +65,9 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   const [hoverCode, setHoverCode] = useState<CodeProp>();
   const [isKeyboardActive, setIsKeyboardActive] = useState(false);
 
-  const [geoInfo, geoInfoLookup] = useProjectedCoordinates(
-    choroplethFeatures.hover,
-    mapProjection,
-    fitExtent
-  );
+  const [geoInfo, geoInfoLookup] = useProjectedCoordinates(choroplethFeatures.hover, mapProjection, fitExtent);
 
-  const [outlineGeoInfo] = useProjectedCoordinates(
-    choroplethFeatures.outline,
-    mapProjection,
-    fitExtent
-  );
+  const [outlineGeoInfo] = useProjectedCoordinates(choroplethFeatures.outline, mapProjection, fitExtent);
 
   const highlightedFeature = useHighlightedFeature(geoInfo, dataOptions);
 
@@ -197,29 +169,12 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
         >
           <Outlines geoInfo={outlineGeoInfo} featureProps={featureProps} />
           <Features geoInfo={geoInfo} featureProps={featureProps}>
-            <HighlightedFeature
-              feature={highlightedFeature}
-              featureProps={featureProps}
-              code={dataOptions.selectedCode}
-              hoverCode={hoverCode}
-            />
+            <HighlightedFeature feature={highlightedFeature} featureProps={featureProps} code={dataOptions.selectedCode} hoverCode={hoverCode} />
           </Features>
-          <HoveredFeature
-            hoveredRef={hoveredRef}
-            hover={hover}
-            hoverCode={hoverCode}
-            featureProps={featureProps}
-            isKeyboardActive={isKeyboardActive}
-          />
+          <HoveredFeature hoveredRef={hoveredRef} hover={hover} hoverCode={hoverCode} featureProps={featureProps} isKeyboardActive={isKeyboardActive} />
         </Stage>
         <div style={{ position: 'absolute', left: 0, right: 0 }}>
-          <img
-            aria-hidden="true"
-            src={oneTransparentPixelImage}
-            width={width}
-            height={height}
-            useMap={`#${mapId}`}
-          />
+          <img aria-hidden="true" src={oneTransparentPixelImage} width={width} height={height} useMap={`#${mapId}`} />
         </div>
       </div>
     </>
@@ -266,8 +221,7 @@ type HoveredFeatureProps = {
 };
 
 const HoveredFeature = memo((props: HoveredFeatureProps) => {
-  const { hoveredRef, hover, hoverCode, featureProps, isKeyboardActive } =
-    props;
+  const { hoveredRef, hover, hoverCode, featureProps, isKeyboardActive } = props;
 
   if (!isDefined(hoverCode) || !isDefined(hover)) {
     return null;
@@ -285,11 +239,7 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
             points={x.flat()}
             strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
             closed
-            stroke={featureProps.hover.stroke(
-              hoverCode,
-              true,
-              isKeyboardActive
-            )}
+            stroke={featureProps.hover.stroke(hoverCode, true, isKeyboardActive)}
           />
         ))}
       </Group>
@@ -392,10 +342,7 @@ type AreaMapProps = {
   getLink?: (code: string) => string;
   getFeatureName: (code: string) => string;
   anchorEventHandlers: AnchorEventHandler;
-  selectFeature: (
-    code: CodeProp | undefined,
-    isKeyboardAction?: boolean
-  ) => void;
+  selectFeature: (code: CodeProp | undefined, isKeyboardAction?: boolean) => void;
   id: string;
   handleMouseOver: (event: MouseEvent<HTMLElement>) => void;
   height: number;
@@ -408,24 +355,11 @@ type GeoInfoGroup = {
 };
 
 function AreaMap(props: AreaMapProps) {
-  const {
-    isTabInteractive,
-    geoInfo,
-    getLink,
-    getFeatureName,
-    selectFeature,
-    anchorEventHandlers,
-    id,
-    handleMouseOver,
-    height,
-    width,
-  } = props;
+  const { isTabInteractive, geoInfo, getLink, getFeatureName, selectFeature, anchorEventHandlers, id, handleMouseOver, height, width } = props;
 
-  const geoInfoGroups: GeoInfoGroup[] = geoInfo.reduce(
-    (geoInfoGroups, geoItem) => {
-      const index = geoInfoGroups.findIndex(
-        (geoInfoGroup) => geoInfoGroup.code === geoItem.code
-      );
+  const geoInfoGroups: GeoInfoGroup[] = geoInfo
+    .reduce((geoInfoGroups, geoItem) => {
+      const index = geoInfoGroups.findIndex((geoInfoGroup) => geoInfoGroup.code === geoItem.code);
       if (index === -1) {
         geoInfoGroups.push({
           code: geoItem.code,
@@ -435,18 +369,15 @@ function AreaMap(props: AreaMapProps) {
         geoInfoGroups[index].coordinatesList.push(geoItem.coordinates);
       }
       return geoInfoGroups;
-    },
-    [] as GeoInfoGroup[]
-  );
+    }, [] as GeoInfoGroup[])
+    .sort((geoInfoGroupA, geoInfoGroupB) => {
+      return getFeatureName(geoInfoGroupA.code).localeCompare(getFeatureName(geoInfoGroupB.code));
+    });
 
   const isTouch = useIsTouchDevice();
 
   return (
-    <map
-      name={id}
-      tabIndex={isTabInteractive ? 0 : -1}
-      onMouseMove={!isTouch || isIOSDevice() ? handleMouseOver : undefined}
-    >
+    <map name={id} tabIndex={isTabInteractive ? 0 : -1} onMouseMove={!isTouch || isIOSDevice() ? handleMouseOver : undefined}>
       {geoInfoGroups.map((geoInfoGroup) =>
         geoInfoGroup.coordinatesList.map((geoInfoCoordinates, index) => (
           <area
@@ -459,11 +390,7 @@ function AreaMap(props: AreaMapProps) {
             data-id={geoInfoGroup.code}
             shape="poly"
             coords={geoInfoCoordinates.flat().join(',')}
-            href={
-              !isTouch && isDefined(getLink)
-                ? getLink(geoInfoGroup.code)
-                : undefined
-            }
+            href={!isTouch && isDefined(getLink) ? getLink(geoInfoGroup.code) : undefined}
             onFocus={(event) => {
               anchorEventHandlers.onFocus(event);
               selectFeature(geoInfoGroup.code as CodeProp, true);
@@ -475,11 +402,7 @@ function AreaMap(props: AreaMapProps) {
           />
         ))
       )}
-      <area
-        shape="rect"
-        coords={`0,0,${width},${height}`}
-        onMouseEnter={handleMouseOver}
-      />
+      <area shape="rect" coords={`0,0,${width},${height}`} onMouseEnter={handleMouseOver} />
     </map>
   );
 }

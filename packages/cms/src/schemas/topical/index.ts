@@ -13,3 +13,6 @@ export * from './thermometer-level';
 export * from './thermometer-timeline';
 export * from './thermometer-timeline-event';
 export * from './trend-icon';
+export * from './weekly-summary';
+export * from './weekly-summary-item';
+export * from './weekly-summary-collection';

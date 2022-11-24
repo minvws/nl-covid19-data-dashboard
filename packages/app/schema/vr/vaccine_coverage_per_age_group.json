@@ -18,44 +18,53 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "age_group_range",
-        "autumn_2022_vaccinated_percentage",
-        "fully_vaccinated_percentage",
-        "booster_shot_percentage",
-        "autumn_2022_vaccinated_percentage_label",
-        "fully_vaccinated_percentage_label",
-        "booster_shot_percentage_label",
-        "birthyear_range",
+        "vaccination_type",
+        "birthyear_range_12_plus",
+        "birthyear_range_18_plus",
+        "birthyear_range_60_plus",
+        "vaccinated_percentage_12_plus",
+        "vaccinated_percentage_12_plus_label",
+        "vaccinated_percentage_18_plus",
+        "vaccinated_percentage_18_plus_label",
+        "vaccinated_percentage_60_plus",
+        "vaccinated_percentage_60_plus_label",
         "date_of_insertion_unix",
         "date_unix"
       ],
       "properties": {
-        "age_group_range": {
-          "type": "string",
-          "enum": ["12+", "18+", "60+"]
+        "vaccination_type": {
+          "type": "string"
         },
-        "autumn_2022_vaccinated_percentage": {
-          "type": ["integer", "null"]
-        },
-        "fully_vaccinated_percentage": {
-          "type": ["integer", "null"]
-        },
-        "booster_shot_percentage": {
-          "type": ["integer", "null"]
-        },
-        "birthyear_range": {
+        "birthyear_range_12_plus": {
           "type": "string",
           "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
         },
-        "autumn_2022_vaccinated_percentage_label": {
+        "birthyear_range_18_plus": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
+        },
+        "birthyear_range_60_plus": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
+        },
+        "vaccinated_percentage_12_plus": {
+          "type": ["number", "null"]
+        },
+        "vaccinated_percentage_12_plus_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
-        "fully_vaccinated_percentage_label": {
+        "vaccinated_percentage_18_plus": {
+          "type": ["number", "null"]
+        },
+        "vaccinated_percentage_18_plus_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },
-        "booster_shot_percentage_label": {
+        "vaccinated_percentage_60_plus": {
+          "type": ["number", "null"]
+        },
+        "vaccinated_percentage_60_plus_label": {
           "type": ["string", "null"],
           "pattern": "^([><][=][0-9]{1,2})$"
         },

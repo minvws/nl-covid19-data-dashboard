@@ -24,7 +24,7 @@ import { colors } from '@corona-dashboard/common';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { replaceVariablesInText, getFilenameToIconName } from '~/utils';
 import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
-import { THERMOMETER_ICON_NAME, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
+import { TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
 import { TrendIcon } from '~/domain/topical/types';
 import { CollapsibleSection } from '~/components/collapsible';
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
@@ -38,6 +38,7 @@ import { TopicalIcon } from '@corona-dashboard/common/src/types';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
+import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   hospitalText: siteText.pages.hospital_page.nl,
@@ -78,7 +79,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { topicalStructure } = content;
 
-  const { topicalConfig, measureTheme, thermometer, kpiThemes } = topicalStructure;
+  const { topicalConfig, measureTheme, thermometer, kpiThemes, weeklySummary } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -106,17 +107,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
       <Box bg={colors.white}>
         <MaxWidth id="content">
           <Box
-            marginBottom={{ _: space[4], md: space[5] }}
+            marginBottom={{ _: space[4] }}
             paddingTop={{ _: space[3], md: space[5] }}
             paddingX={{ _: space[3], sm: space[4] }}
             maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
           >
             <TopicalHeader title={topicalConfig.title} description={topicalConfig.description} />
           </Box>
-
+          <TopicalWeeklySummaryTile title={weeklySummary.title} summaryItems={weeklySummary.items} level={currentSeverityLevel} label={currentSeverityLevelTexts?.label} />
           {currentSeverityLevelTexts && (
             <Box marginY={space[5]} paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
-              <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} icon={THERMOMETER_ICON_NAME} />
+              <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} icon={getFilenameToIconName(thermometer.icon) as TopicalIcon} />
 
               <SeverityIndicatorTile
                 level={currentSeverityLevel}
