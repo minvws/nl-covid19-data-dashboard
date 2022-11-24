@@ -29,7 +29,7 @@ export const measures = {
       description: 'De maatregelen zijn onderverdeeld in groepen',
       name: 'measuresCollection',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'measuresCollection'} }],
+      of: [{ type: 'reference', to: { type: 'measuresCollection' } }],
     },
   ],
 };

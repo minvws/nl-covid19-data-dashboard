@@ -1,9 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { MapType } from '~/components/choropleth/logic';
-import {
-  BehaviorIdentifier,
-  behaviorIdentifiers,
-} from '~/domain/behavior/logic/behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from '~/domain/behavior/logic/behavior-types';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
@@ -376,21 +373,21 @@ type Thresholds = Record<MapType, Record<string, ChoroplethThresholdsValue[]>>;
 export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
-    admissions_on_date_of_admission_per_100000:
-      hospitalAdmissionsPer100000Thresholds,
+    admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
-    has_one_shot_percentage: vaccineCoveragePercentageThresholds,
-    booster_shot_percentage: vaccineCoveragePercentageThresholds,
+    primary_series_percentage: vaccineCoveragePercentageThresholds,
     autumn_2022_vaccinated_percentage: vaccineCoveragePercentageThresholds,
+    vaccinated_percentage_12_plus: vaccineCoveragePercentageThresholds,
+    vaccinated_percentage_18_plus: vaccineCoveragePercentageThresholds,
+    vaccinated_percentage_60_plus: vaccineCoveragePercentageThresholds,
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission: vrHospitalAdmissionsThresholds,
-    admissions_on_date_of_admission_per_100000:
-      hospitalAdmissionsPer100000Thresholds,
+    admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
     average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
@@ -404,22 +401,17 @@ export const thresholds: Thresholds = {
     travel: situationsThreshold,
     hospitality: situationsThreshold,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
-    has_one_shot_percentage: vaccineCoveragePercentageThresholds,
-    booster_shot_percentage: vaccineCoveragePercentageThresholds,
+    primary_series_percentage: vaccineCoveragePercentageThresholds,
     autumn_2022_vaccinated_percentage: vaccineCoveragePercentageThresholds,
+    vaccinated_percentage_12_plus: vaccineCoveragePercentageThresholds,
+    vaccinated_percentage_18_plus: vaccineCoveragePercentageThresholds,
+    vaccinated_percentage_60_plus: vaccineCoveragePercentageThresholds,
     other: situationsThreshold,
-    ...(Object.fromEntries(
-      behaviorIdentifiers.map((key) => [
-        `${key}_support`,
-        behaviorSupportThresholds,
-      ])
-    ) as Record<`${BehaviorIdentifier}_support`, ChoroplethThresholdsValue[]>),
-    ...(Object.fromEntries(
-      behaviorIdentifiers.map((key) => [
-        `${key}_compliance`,
-        behaviorComplianceThresholds,
-      ])
-    ) as Record<
+    ...(Object.fromEntries(behaviorIdentifiers.map((key) => [`${key}_support`, behaviorSupportThresholds])) as Record<
+      `${BehaviorIdentifier}_support`,
+      ChoroplethThresholdsValue[]
+    >),
+    ...(Object.fromEntries(behaviorIdentifiers.map((key) => [`${key}_compliance`, behaviorComplianceThresholds])) as Record<
       `${BehaviorIdentifier}_compliance`,
       ChoroplethThresholdsValue[]
     >),
