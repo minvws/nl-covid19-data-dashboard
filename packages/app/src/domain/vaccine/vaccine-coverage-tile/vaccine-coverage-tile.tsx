@@ -20,9 +20,9 @@ type BarType = {
   color: string;
 };
 
-type AgeDataType = {
+export type AgeDataType = {
   value: number | null;
-  birthyear: string;
+  birthyear: string | null;
   title: string;
   description: string;
   bar: BarType;
@@ -40,14 +40,7 @@ interface VaccineCoverageTileProps {
   dateUnix: number;
 }
 
-export const VaccineCoverageTile = ({
-  title,
-  description,
-  source,
-  descriptionFooter,
-  dateUnix,
-  coverageData,
-}: VaccineCoverageTileProps) => {
+export const VaccineCoverageTile = ({ title, description, source, descriptionFooter, dateUnix, coverageData }: VaccineCoverageTileProps) => {
   const metadata: MetadataProps = {
     date: dateUnix,
     source: source,
@@ -84,16 +77,11 @@ interface AgeGroupBlockProps {
 const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
   const { commonTexts, formatPercentage } = useIntl();
 
-  const parsedAgePercentage = data.value
-    ? `${formatPercentage(data.value)}%`
-    : '-';
+  const parsedAgePercentage = data.value ? `${formatPercentage(data.value)}%` : '-';
 
-  const parsedBirthyearRange = parseBirthyearRange(data.birthyear);
+  const parsedBirthyearRange = data.birthyear ? parseBirthyearRange(data.birthyear) : null;
 
-  assert(
-    parsedBirthyearRange,
-    `[${AgeGroupBlock.name}] Something went wrong with parsing the birthyear: ${data.birthyear}`
-  );
+  assert(parsedBirthyearRange, `[${AgeGroupBlock.name}] Something went wrong with parsing the birthyear: ${data.birthyear}`);
 
   return (
     <Box>
@@ -106,10 +94,7 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
       </Box>
       <Markdown
         content={replaceVariablesInText(data.description, {
-          birthyear: replaceVariablesInText(
-            commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
-            parsedBirthyearRange
-          ),
+          birthyear: replaceVariablesInText(commonTexts.common.birthyear_ranges[parsedBirthyearRange.type], parsedBirthyearRange),
         })}
       />
       {children}
