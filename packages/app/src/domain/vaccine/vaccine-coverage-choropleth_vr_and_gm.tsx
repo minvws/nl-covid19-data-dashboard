@@ -125,15 +125,13 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
     const coveragePercentageLabel = data.dataItem[ageGroupKeys.vaccinated_percentage_plus_label as unknown as keyof VaccineCoverageData] as string;
     const minWidthOfLabel = coveragePercentageLabel !== null ? '120px' : undefined;
 
-    if (coveragePercentageLabel) {
-      const result = parseVaccinatedPercentageLabel(coveragePercentageLabel);
+    const result = coveragePercentageLabel ? parseVaccinatedPercentageLabel(coveragePercentageLabel) : null;
 
-      if (result) {
-        const content = result.sign === '>' ? commonTexts.common.meer_dan : commonTexts.common.minder_dan;
-        parsedLabel.vaccinated_percentage_plus_label = replaceVariablesInText(content, {
-          value: `${formatPercentage(ageGroupPercentage)}%`,
-        });
-      }
+    if (result) {
+      const content = result.sign === '>' ? commonTexts.common.meer_dan : commonTexts.common.minder_dan;
+      parsedLabel.vaccinated_percentage_plus_label = replaceVariablesInText(content, {
+        value: `${formatPercentage(ageGroupPercentage)}%`,
+      });
     }
 
     return (
