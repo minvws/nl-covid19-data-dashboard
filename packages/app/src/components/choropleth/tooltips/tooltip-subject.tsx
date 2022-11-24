@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { BoldText } from '~/components/typography';
+import { space } from '~/style/theme';
 import { getThresholdValue } from '~/utils/get-threshold-value';
 
 interface TooltipSubjectProps {
@@ -26,17 +27,17 @@ export function TooltipSubject({ subject, thresholdValues, filterBelow, children
     <Box spacing={1}>
       {subject && <BoldText>{subject}</BoldText>}
       <Box
-        margin={0}
+        margin={space[0]}
         spacingHorizontal={2}
+        display="flex"
+        alignItems="center"
+        flexWrap="nowrap"
         css={css({
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'nowrap',
           whiteSpace: 'pre-wrap',
         })}
       >
         {children}
-        <Box flexShrink={0} height="13px" width="13px" borderRadius="2px" ml="auto" mb="auto" mt="5px" backgroundColor={color} />
+        <Box flexShrink={0} height="13px" width="13px" borderRadius="2px" marginLeft="auto" marginBottom="auto" marginTop="5px" backgroundColor={color} />
       </Box>
     </Box>
   );
