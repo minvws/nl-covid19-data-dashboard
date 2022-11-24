@@ -25,6 +25,6 @@ jobs:
         uses: Azure/pipelines@v1
         with:
           azure-devops-project-url: https://dev.azure.com/${{ secrets.VWS_AZURE_ORGANIZATION_NAME }}/${{ secrets.VWS_AZURE_PROJECT_NAME }}
-          azure-pipeline-name: ${{ secrets.VWS_AZURE_PIPELINE_NAME }}
+          azure-pipeline-name: ${{ secrets.VWS_AZURE_PIPELINE_NAME_DEV }}
           azure-devops-token: ${{ secrets.VWS_AZURE_DEVOPS_TOKEN }}
 
