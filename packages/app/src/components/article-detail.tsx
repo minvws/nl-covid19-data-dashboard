@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
-import { Heading, InlineText } from '~/components/typography';
+import { Heading, InlineText, Anchor } from '~/components/typography';
 import { ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -105,7 +105,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
                   }}
                   passHref={true}
                 >
-                  <TagAnchor>{text.secties.artikelen.categorie_filters[item as ArticleCategoryType]}</TagAnchor>
+                  <StyledTagAnchor>{text.secties.artikelen.categorie_filters[item as ArticleCategoryType]}</StyledTagAnchor>
                 </Link>
               </li>
             ))}
@@ -116,25 +116,25 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
   );
 }
 
-const TagAnchor = styled.a`
-  display: block;
-  border: 2px solid ${colors.gray4};
+const StyledTagAnchor = styled(Anchor)`
   border-radius: 5px;
+  border: 2px solid ${colors.gray4};
   color: ${colors.black};
+  display: block;
   margin-bottom: ${space[3]};
   padding: ${space[2]} ${space[3]};
 
   &:hover {
-    border: 2px solid ${colors.blue8};
     background: ${colors.blue8};
+    border: 2px solid ${colors.blue8};
     color: ${colors.white};
-    text-shadow: 0.5px 0px 0px #fff, -0.5px 0px 0px #fff;
+    text-shadow: 0.5px 0px 0px ${colors.white}, -0.5px 0px 0px ${colors.white};
   }
 
   &:focus {
-    border: 2px solid ${colors.blue8};
     background: ${colors.blue8};
+    border: 2px solid ${colors.blue8};
     color: ${colors.white};
-    text-shadow: 0.5px 0px 0px #fff, -0.5px 0px 0px #fff;
+    text-shadow: 0.5px 0px 0px ${colors.white}, -0.5px 0px 0px ${colors.white};
   }
 `;
