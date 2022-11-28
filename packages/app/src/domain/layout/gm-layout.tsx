@@ -4,9 +4,10 @@ import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
-import { Heading, Text } from '~/components/typography';
+import { Anchor, Heading, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -64,10 +65,7 @@ export function GmLayout(props: GmLayoutProps) {
     layout: 'gm',
     code: code,
     map: [
-      [
-        'development_of_the_virus',
-        ['sewage_measurement', 'positive_tests', 'mortality'],
-      ],
+      ['development_of_the_virus', ['sewage_measurement', 'positive_tests', 'mortality']],
       ['consequences_for_healthcare', ['hospital_admissions']],
       ['actions_to_take', ['vaccinations']],
     ],
@@ -76,23 +74,14 @@ export function GmLayout(props: GmLayoutProps) {
   return (
     <>
       <Head>
-        <link
-          key="dc-spatial"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-        />
-        <link
-          key="dc-spatial-title"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-          title="Nederland"
-        />
+        <link key="dc-spatial" rel="dcterms:spatial" href="https://standaarden.overheid.nl/owms/terms/Nederland" />
+        <link key="dc-spatial-title" rel="dcterms:spatial" href="https://standaarden.overheid.nl/owms/terms/Nederland" title="Nederland" />
       </Head>
 
       <AppContent
         hideBackButton={isMainRoute}
         searchComponent={
-          <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
+          <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} marginX="auto">
             <GmComboBox getLink={getLink} selectedGmCode={code} />
           </Box>
         }
@@ -107,21 +96,19 @@ export function GmLayout(props: GmLayoutProps) {
                 aria-labelledby="sidebar-title"
                 role="navigation"
                 maxWidth={{ _: '38rem', md: undefined }}
-                mx="auto"
+                marginX="auto"
                 spacing={1}
               >
-                <Box px={3} pb={4} spacing={1}>
+                <Box paddingX={space[3]} paddingBottom={space[4]} spacing={1}>
                   <Heading id="sidebar-title" level={2} variant="h3">
-                    <VisuallyHidden as="span">
-                      {commonTexts.gemeente_layout.headings.sidebar}
-                    </VisuallyHidden>
+                    <VisuallyHidden as="span">{commonTexts.gemeente_layout.headings.sidebar}</VisuallyHidden>
                     {municipalityName}
                   </Heading>
                   {vr && (
                     <Text>
                       {commonTexts.common.veiligheidsregio_label}{' '}
                       <Link href={reverseRouter.vr.index(vr.code)}>
-                        <a>{vr.name}</a>
+                        <Anchor underline="hover">{vr.name}</Anchor>
                       </Link>
                     </Text>
                   )}
