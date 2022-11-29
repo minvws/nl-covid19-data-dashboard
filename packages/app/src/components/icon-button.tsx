@@ -33,7 +33,7 @@ const StyledIconButton = styled.button<StyledIconButtonProps>`
   cursor: pointer;
   display: block;
   margin: 0;
-  padding: ${({ padding }) => (padding ? `${padding}px` : '0')};
+  padding: ${({ padding }) => (padding ? `${padding}px` : 0)};
 
   & svg {
     display: block;
