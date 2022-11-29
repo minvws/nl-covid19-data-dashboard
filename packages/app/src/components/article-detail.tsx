@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
-import { Heading, InlineText, Anchor } from '~/components/typography';
+import { Heading, InlineText, AnchorProps } from '~/components/typography';
 import { ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -116,7 +116,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
   );
 }
 
-const StyledTagAnchor = styled(Anchor)`
+const StyledTagAnchor = styled.a<AnchorProps>`
   border-radius: 5px;
   border: 2px solid ${colors.gray4};
   color: ${colors.black};
@@ -131,10 +131,7 @@ const StyledTagAnchor = styled(Anchor)`
     text-shadow: 0.5px 0px 0px ${colors.white}, -0.5px 0px 0px ${colors.white};
   }
 
-  &:focus {
-    background: ${colors.blue8};
-    border: 2px solid ${colors.blue8};
-    color: ${colors.white};
-    text-shadow: 0.5px 0px 0px ${colors.white}, -0.5px 0px 0px ${colors.white};
+  &:hover:focus-visible {
+    outline: 2px dotted ${colors.magenta3};
   }
 `;
