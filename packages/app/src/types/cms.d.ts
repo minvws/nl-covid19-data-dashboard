@@ -174,6 +174,7 @@ export type Measures = {
   icon: string;
   title: string;
   description: RichContentBlock[] | null;
+  collectionTitle: string;
   measuresCollection: MeasuresCollection[];
 };
 declare module 'picosanity' {
