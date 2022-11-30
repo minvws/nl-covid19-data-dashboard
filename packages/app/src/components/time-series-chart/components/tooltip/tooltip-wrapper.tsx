@@ -2,6 +2,7 @@ import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { space, fontSizes, shadows } from '~/style/theme';
 import { isDefined } from 'ts-is-present';
 import { BoldText } from '~/components/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
@@ -28,14 +29,7 @@ const VIEWPORT_PADDING = 10;
  *
  * @TODO clean up calculations in Tooltip component
  */
-export function TooltipWrapper({
-  title,
-  children,
-  left,
-  top: _top,
-  bounds,
-  padding,
-}: TooltipWrapperProps) {
+export function TooltipWrapper({ title, children, left, top: _top, bounds, padding }: TooltipWrapperProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
@@ -44,10 +38,7 @@ export function TooltipWrapper({
   const targetY = -height;
   const targetX = left + padding.left;
 
-  const maxWidth = Math.min(
-    bounds.width + padding.left + padding.right,
-    viewportSize.width - VIEWPORT_PADDING * 2
-  );
+  const maxWidth = Math.min(bounds.width + padding.left + padding.right, viewportSize.width - VIEWPORT_PADDING * 2);
 
   const relativeLeft = boundingBox?.left ?? 0;
 
@@ -66,7 +57,7 @@ export function TooltipWrapper({
   return (
     <>
       <div ref={boundingBoxRef}>
-        <TooltipContainer
+        <StyledTooltipContainer
           ref={ref}
           style={{
             opacity: isMounted ? 1 : 0,
@@ -79,7 +70,7 @@ export function TooltipWrapper({
           }}
         >
           <TooltipContent title={title}>{children}</TooltipContent>
-        </TooltipContainer>
+        </StyledTooltipContainer>
       </div>
       <Triangle left={targetX} top={targetY + height} isMounted={isMounted} />
     </>
@@ -134,18 +125,16 @@ const StyledTriangle = styled.div<{ width: number }>((x) => {
   });
 });
 
-const TooltipContainer = styled.div(
-  css({
-    position: 'absolute',
-    bg: 'white',
-    boxShadow: 'tooltip',
-    pointerEvents: 'none',
-    zIndex: 1000,
-    borderRadius: 1,
-    top: 0,
-    willChange: 'transform',
-  })
-);
+const StyledTooltipContainer = styled.div`
+  position: absolute;
+  background: ${colors.white};
+  box-shadow: ${shadows.tooltip};
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: 1px;
+  top: 0;
+  will-change: transform;
+`;
 
 interface TooltipContentProps {
   title?: string;
@@ -159,11 +148,7 @@ function TooltipContent(props: TooltipContentProps) {
   return (
     <StyledTooltipContent onClick={onSelect} aria-live="polite">
       {title && <TooltipHeading title={title} />}
-      {children && (
-        <TooltipChildren hasTitle={isDefined(title)}>
-          {children}
-        </TooltipChildren>
-      )}
+      {children && <StyledTooltipChildren hasTitle={isDefined(title)}>{children}</StyledTooltipChildren>}
     </StyledTooltipContent>
   );
 }
@@ -188,21 +173,24 @@ function TooltipHeading({ title }: { title: string }) {
   );
 }
 
-const TooltipChildren = styled.div<{ hasTitle?: boolean }>(({ hasTitle }) =>
-  css({
-    borderTop: hasTitle ? '1px solid' : '',
-    borderTopColor: hasTitle ? 'gray3' : '',
-    py: 2,
-    px: 3,
-  })
-);
+interface StyledTooltipChildrenProps {
+  hasTitle?: boolean;
+}
 
-const StyledTooltipContent = styled.div((x) =>
-  css({
-    color: 'black',
-    maxWidth: 425,
-    borderRadius: 1,
-    cursor: x.onClick ? 'pointer' : 'default',
-    fontSize: 1,
-  })
-);
+const StyledTooltipChildren = styled.div<StyledTooltipChildrenProps>`
+  border-top: ${(props) => (props.hasTitle ? '1px solid' : '')};
+  border-top-color: ${(props) => (props.hasTitle ? colors.gray3 : '')};
+  padding: ${space[2]} ${space[3]};
+`;
+
+interface StyledTooltipContentProps {
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+}
+
+const StyledTooltipContent = styled.div<StyledTooltipContentProps>`
+  color: ${colors.black};
+  max-width: 440px;
+  border-radius: 1px;
+  cursor: ${(x) => (x.onClick ? 'pointer' : 'default')};
+  font-size: ${fontSizes[1]};
+`;
