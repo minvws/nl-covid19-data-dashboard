@@ -123,6 +123,7 @@ const StyledTagAnchor = styled.a<AnchorProps>`
   display: block;
   margin-bottom: ${space[3]};
   padding: ${space[2]} ${space[3]};
+  outline-color: ${colors.blue8}!important;
 
   &:hover {
     background: ${colors.blue8};
@@ -132,6 +133,6 @@ const StyledTagAnchor = styled.a<AnchorProps>`
   }
 
   &:hover:focus-visible {
-    outline: 2px dotted ${colors.magenta3};
+    outline: 2px dotted ${colors.magenta3}!important;
   }
 `;
