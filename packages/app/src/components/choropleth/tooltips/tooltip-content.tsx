@@ -19,7 +19,7 @@ export const TooltipContent = (props: TooltipContentProps) => {
   const isTouch = useIsTouchDevice();
 
   return (
-    <StyledTooltipContent as={link ? 'a' : 'div'} href={link} isInteractive={isTouch} onClick={onSelect} aria-live="polite">
+    <StyledTooltipContent as={link ? 'a' : 'div'} href={link ? link : undefined} isInteractive={isTouch} onClick={onSelect} aria-live="polite">
       <StyledTooltipHeader>
         <Text variant="choroplethTooltipHeader">
           <StyledLocationIcon>
