@@ -98,12 +98,10 @@ function Triangle({ left, top, isMounted }: TriangleProps) {
   return (
     <StyledTriangleWrapper
       isMounted={isMounted}
-      left={left}
-      top={top}
       /**
        * No idea why, but we need 1.5px extra to center the arrow 🤷‍♂️
        */
-      style={transform}
+      style={{ transform: `translate(calc(${left + 1.5}px - 50%), ${top}px)` }}
     >
       <StyledTriangle width={16} />
     </StyledTriangleWrapper>
@@ -111,25 +109,19 @@ function Triangle({ left, top, isMounted }: TriangleProps) {
 }
 
 interface StyledTriangleWrapperProps {
-  left: number;
-  top: number;
   isMounted: boolean;
 }
 
 const StyledTriangleWrapper = styled.div<StyledTriangleWrapperProps>`
   opacity: ${(props) => (props.isMounted ? 1 : 0)};
-  position: 'absolute';
-  left: ${(props) => props.left};
-  top: ${(props) => props.top};
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 1010;
-  pointer-events: 'none';
-  transform: ${(props) => translate(calc(props.left + 1.5 + 'px' - '50%'), props.top + 'px')};
+  pointer-events: none;
 `;
 
-interface StyledTriangleProps {
-  width: number;
-}
-const StyledTriangle = styled.div<StyledTriangleProps>((x) => {
+const StyledTriangle = styled.div<{ width: number }>((x) => {
   /**
    *  🙏  pythagoras
    */
@@ -149,6 +141,26 @@ const StyledTriangle = styled.div<StyledTriangleProps>((x) => {
     boxShadow: `-3px 3px 3px 0 ${colors.blackOpacity}`,
   });
 });
+
+/*
+interface StyledTriangleProps {
+  width: number;
+}
+
+const StyledTriangle = styled.div<StyledTriangleProps>`
+  border-color: 'transparent transparent white white';
+  border-style: 'solid';
+  border-width: ${(x) => Math.sqrt(Math.pow(x.width, 2) / 2) / 2};
+  box-shadow: -3px 3px 3px 0 ${colors.blackOpacity};
+  box-sizing: 'border-box';
+  height: 0px;
+  margin-left: -border-width;
+  position: 'relative';
+  transform-origin: '0 0';
+  transform: 'rotate(-45deg)';
+  width: 0px;
+`;
+*/
 
 interface TooltipContentProps {
   title?: string;
