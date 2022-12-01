@@ -227,10 +227,23 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
     return null;
   }
 
+  /**
+   * The code in the condition below is a workaround.
+   *
+   * This is required as for some reason, the water bodies Also get rendered as a Feature (you can see another fix for this in the
+   * Features component below). As a consequence, when making the fix introduced in COR-1149 which required adding an additional
+   * line to the HoveredFeature, the water bodies ended up receiving the same fill colour as the land around them and thereby masking
+   * the white water body.
+   *
+   * To fix this, there are now two maps iterating over two arrays for Zeeland. One represents land and the other, water.
+   */
   let landCoords = hover;
   let waterCoords;
   if (hoverCode === 'VR19') {
+    // Represents the coordinates to create the shape of landmasses in Zeeland
     landCoords = hover.filter((_, index) => index === 0 || index === 5);
+
+    // Represents the coordinates to create the shape of water bodies in Zeeland
     waterCoords = hover.filter((_, index) => !(index === 0 || index === 5));
   }
 
