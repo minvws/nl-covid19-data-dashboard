@@ -9,17 +9,15 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface TooltipContentProps {
   title: string;
-  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
   link?: string;
   children?: ReactNode;
 }
 
-export const TooltipContent = (props: TooltipContentProps) => {
-  const { title, onSelect, link, children } = props;
+export const TooltipContent = ({ title, link, children }: TooltipContentProps) => {
   const isTouch = useIsTouchDevice();
 
   return (
-    <StyledTooltipContent as={link ? 'a' : 'div'} href={link ? link : undefined} isInteractive={isTouch} onClick={onSelect} aria-live="polite">
+    <StyledTooltipContent as={link ? 'a' : 'div'} href={link ? link : undefined} isInteractive={isTouch} aria-live="polite">
       <StyledTooltipHeader>
         <Text variant="choroplethTooltipHeader">
           <StyledLocationIcon>
@@ -27,7 +25,7 @@ export const TooltipContent = (props: TooltipContentProps) => {
           </StyledLocationIcon>
           {title}
         </Text>
-        {(onSelect || link) && <StyledChevronRight />}
+        {link && <StyledChevronRight />}
       </StyledTooltipHeader>
 
       {children && <StyledTooltipInfo>{children}</StyledTooltipInfo>}
@@ -42,7 +40,6 @@ interface StyledTooltipContentProps {
 
 const StyledTooltipContent = styled(Box)<StyledTooltipContentProps>`
   color: ${colors.black};
-  cursor: ${({ onClick }) => (onClick ? 'pointer' : 'default')};
   display: flex;
   flex-direction: column;
   min-width: 250px;
