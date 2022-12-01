@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
-import { Heading, InlineText } from '~/components/typography';
+import { Heading, InlineText, Anchor } from '~/components/typography';
 import { ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -15,6 +15,8 @@ import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { colors } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 interface ArticleDetailProps {
   article: Article;
   text: SiteText['pages']['topical_page']['shared'];
@@ -50,29 +52,17 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <ContentImage
-          node={article.cover}
-          contentWrapper={ContentBlock}
-          sizes={imageSizes}
-        />
+        <ContentImage node={article.cover} contentWrapper={ContentBlock} sizes={imageSizes} />
       </ContentBlock>
       {!breakpoints.xs
         ? article.imageMobile && (
             <Box mt={4}>
-              <ContentImage
-                node={article.imageMobile}
-                contentWrapper={ContentBlock}
-                sizes={imageSizes}
-              />
+              <ContentImage node={article.imageMobile} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )
         : article.imageDesktop && (
             <Box mt={4}>
-              <ContentImage
-                node={article.imageDesktop}
-                contentWrapper={ContentBlock}
-                sizes={imageSizes}
-              />
+              <ContentImage node={article.imageDesktop} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )}
       {!!article.content?.length && (
@@ -93,9 +83,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       {article.categories && (
         <ContentBlock>
           <Box pb={2} pt={4}>
-            <InlineText color="gray7">
-              {text.secties.artikelen.tags}
-            </InlineText>
+            <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
             as="ul"
@@ -117,13 +105,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
                   }}
                   passHref={true}
                 >
-                  <TagAnchor>
-                    {
-                      text.secties.artikelen.categorie_filters[
-                        item as ArticleCategoryType
-                      ]
-                    }
-                  </TagAnchor>
+                  <StyledTagAnchor>{text.secties.artikelen.categorie_filters[item as ArticleCategoryType]}</StyledTagAnchor>
                 </Link>
               </li>
             ))}
@@ -134,25 +116,26 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
   );
 }
 
-const TagAnchor = styled.a(
-  css({
-    display: 'block',
-    border: '2px solid transparent',
-    mb: 3,
-    px: 3,
-    py: 2,
-    backgroundColor: 'blue3',
-    color: 'blue8',
-    textDecoration: 'none',
-    transition: '0.1s border-color',
+const StyledTagAnchor = styled(Anchor)`
+  border-radius: 5px;
+  border: 2px solid ${colors.gray4};
+  color: ${colors.black};
+  display: block;
+  margin-bottom: ${space[3]};
+  padding: ${space[2]} ${space[3]};
 
-    '&:hover': {
-      borderColor: 'blue8',
-    },
+  &:focus:focus-visible {
+    outline: 2px dotted ${colors.blue8};
+  }
 
-    '&:focus': {
-      outline: '2px dotted',
-      outlineColor: 'blue8',
-    },
-  })
-);
+  &:hover {
+    background: ${colors.blue8};
+    border: 2px solid ${colors.blue8};
+    color: ${colors.white};
+    text-shadow: 0.5px 0px 0px ${colors.white}, -0.5px 0px 0px ${colors.white};
+
+    &:focus-visible {
+      outline: 2px dotted ${colors.magenta3};
+    }
+  }
+`;
