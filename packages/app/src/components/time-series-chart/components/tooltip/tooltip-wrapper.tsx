@@ -96,26 +96,40 @@ interface TriangleProps {
 
 function Triangle({ left, top, isMounted }: TriangleProps) {
   return (
-    <div
-      css={css({
-        opacity: isMounted ? 1 : 0,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        zIndex: 1010,
-        pointerEvents: 'none',
-      })}
+    <StyledTriangleWrapper
+      isMounted={isMounted}
+      left={left}
+      top={top}
       /**
        * No idea why, but we need 1.5px extra to center the arrow 🤷‍♂️
        */
-      style={{ transform: `translate(calc(${left + 1.5}px - 50%), ${top}px)` }}
+      style={transform}
     >
       <StyledTriangle width={16} />
-    </div>
+    </StyledTriangleWrapper>
   );
 }
 
-const StyledTriangle = styled.div<{ width: number }>((x) => {
+interface StyledTriangleWrapperProps {
+  left: number;
+  top: number;
+  isMounted: boolean;
+}
+
+const StyledTriangleWrapper = styled.div<StyledTriangleWrapperProps>`
+  opacity: ${(props) => (props.isMounted ? 1 : 0)};
+  position: 'absolute';
+  left: ${(props) => props.left};
+  top: ${(props) => props.top};
+  z-index: 1010;
+  pointer-events: 'none';
+  transform: ${(props) => translate(calc(props.left + 1.5 + 'px' - '50%'), props.top + 'px')};
+`;
+
+interface StyledTriangleProps {
+  width: number;
+}
+const StyledTriangle = styled.div<StyledTriangleProps>((x) => {
   /**
    *  🙏  pythagoras
    */
@@ -173,16 +187,6 @@ const StyledTooltipContent = styled.div<StyledTooltipContentProps>`
   max-width: 440px;
 `;
 
-interface StyledTooltipChildrenProps {
-  hasTitle?: boolean;
-}
-
-const StyledTooltipChildren = styled.div<StyledTooltipChildrenProps>`
-  border-top: ${(props) => (props.hasTitle ? '1px solid' : '')};
-  border-top-color: ${(props) => (props.hasTitle ? colors.gray3 : '')};
-  padding: ${space[2]} ${space[3]};
-`;
-
 interface StyledTooltipHeadingWrapperProps {
   title?: string;
 }
@@ -196,4 +200,14 @@ const StyledTooltipHeadingWrapper = styled.div<StyledTooltipHeadingWrapperProps>
   padding: ${space[2]} ${space[3]};
   text-overflow: 'ellipsis';
   white-space: 'nowrap';
+`;
+
+interface StyledTooltipChildrenProps {
+  hasTitle?: boolean;
+}
+
+const StyledTooltipChildren = styled.div<StyledTooltipChildrenProps>`
+  border-top: ${(props) => (props.hasTitle ? '1px solid' : '')};
+  border-top-color: ${(props) => (props.hasTitle ? colors.gray3 : '')};
+  padding: ${space[2]} ${space[3]};
 `;
