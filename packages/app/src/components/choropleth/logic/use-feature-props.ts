@@ -35,7 +35,7 @@ type FeaturePropFunctions = {
 
 export const DEFAULT_STROKE_WIDTH = 0.5;
 
-export const DEFAULT_HOVER_STROKE_WIDTH = 3;
+export const DEFAULT_HOVER_STROKE_WIDTH = 6;
 
 /**
  * This hook returns the visual props for the map features based on the specified map type.
