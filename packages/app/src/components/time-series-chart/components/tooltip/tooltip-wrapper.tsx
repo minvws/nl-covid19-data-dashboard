@@ -77,6 +77,17 @@ export function TooltipWrapper({ title, children, left, top: _top, bounds, paddi
   );
 }
 
+const StyledTooltipContainer = styled.div`
+  position: absolute;
+  background: ${colors.white};
+  box-shadow: ${shadows.tooltip};
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: 1px;
+  top: 0;
+  will-change: transform;
+`;
+
 interface TriangleProps {
   left: number;
   top: number;
@@ -125,17 +136,6 @@ const StyledTriangle = styled.div<{ width: number }>((x) => {
   });
 });
 
-const StyledTooltipContainer = styled.div`
-  position: absolute;
-  background: ${colors.white};
-  box-shadow: ${shadows.tooltip};
-  pointer-events: none;
-  z-index: 1000;
-  border-radius: 1px;
-  top: 0;
-  will-change: transform;
-`;
-
 interface TooltipContentProps {
   title?: string;
   onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
@@ -155,23 +155,23 @@ function TooltipContent(props: TooltipContentProps) {
 
 function TooltipHeading({ title }: { title: string }) {
   return (
-    <div
-      css={css({
-        whiteSpace: 'nowrap',
-        color: 'black',
-        py: 2,
-        px: 3,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      })}
-    >
+    <StyledTooltipHeadingWrapper>
       <BoldText variant="label1">{title}</BoldText>
-    </div>
+    </StyledTooltipHeadingWrapper>
   );
 }
+
+interface StyledTooltipContentProps {
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+}
+
+const StyledTooltipContent = styled.div<StyledTooltipContentProps>`
+  border-radius: 1px;
+  color: ${colors.black};
+  cursor: ${(x) => (x.onClick ? 'pointer' : 'default')};
+  font-size: ${fontSizes[1]};
+  max-width: 440px;
+`;
 
 interface StyledTooltipChildrenProps {
   hasTitle?: boolean;
@@ -183,14 +183,17 @@ const StyledTooltipChildren = styled.div<StyledTooltipChildrenProps>`
   padding: ${space[2]} ${space[3]};
 `;
 
-interface StyledTooltipContentProps {
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+interface StyledTooltipHeadingWrapperProps {
+  title?: string;
 }
 
-const StyledTooltipContent = styled.div<StyledTooltipContentProps>`
+const StyledTooltipHeadingWrapper = styled.div<StyledTooltipHeadingWrapperProps>`
+  align-items: 'center';
   color: ${colors.black};
-  max-width: 440px;
-  border-radius: 1px;
-  cursor: ${(x) => (x.onClick ? 'pointer' : 'default')};
-  font-size: ${fontSizes[1]};
+  display: 'flex';
+  justify-content: 'space-between';
+  overflow: 'hidden';
+  padding: ${space[2]} ${space[3]};
+  text-overflow: 'ellipsis';
+  white-space: 'nowrap';
 `;
