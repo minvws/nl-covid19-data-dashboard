@@ -5,13 +5,13 @@ export function getTopicalStructureQuery(locale: string) {
   const query = `// groq
   {
       'topicalConfig': *[
-          _type == 'topicalPageConfig' && !(_id in path("drafts.**"))
+          _type == 'topicalPageConfig' && !(_id in path('drafts.**'))
       ][0]{
         'title': title.${locale},
         'description': description.${locale}
       },
       'weeklySummary': *[
-        _type == 'weeklySummary' && !(_id in path("drafts.**"))
+        _type == 'weeklySummary' && !(_id in path('drafts.**'))
       ][0]{
         'title': title.${locale},
         'items': items[]->{
@@ -21,26 +21,26 @@ export function getTopicalStructureQuery(locale: string) {
         },
       },
       'kpiThemes': *[
-          _type == 'themeCollection' && !(_id in path("drafts.**"))
+          _type == 'themeCollection' && !(_id in path('drafts.**'))
       ][0]{
         'themes': themes[]->{
-          "title":title.${locale},
-          "subTitle":subTitle.${locale},
+          'title':title.${locale},
+          'subTitle':subTitle.${locale},
           themeIcon,
           'linksLabelMobile': labelMobile.${locale},
           'linksLabelDesktop': labelDesktop.${locale},
 
-          "links":links[]->{
+          'links':links[]->{
             'cta': {
               'title': cta.title.${locale},
               'href': cta.href
             },
           },
-          "tiles":tiles[]->{
-            "description":description.${locale},
+          'tiles':tiles[]->{
+            'description':description.${locale},
             tileIcon,
-            "title":title.${locale},
-            "sourceLabel":sourceLabel.${locale},
+            'title':title.${locale},
+            'sourceLabel':sourceLabel.${locale},
             'kpiValue': kpiValue.${locale},
             'trendIcon': {
               'color': trendIcon.color,
@@ -54,7 +54,7 @@ export function getTopicalStructureQuery(locale: string) {
         },
       },
       'measureTheme': *[
-        _type == 'measureTheme' && !(_id in path("drafts.**"))
+        _type == 'measureTheme' && !(_id in path('drafts.**'))
       ][0]{
         'title': title.${locale},
         themeIcon,
@@ -65,12 +65,12 @@ export function getTopicalStructureQuery(locale: string) {
         },
       },
       'thermometer': *[
-        _type == 'thermometer' && !(_id in path("drafts.**"))
+        _type == 'thermometer' && !(_id in path('drafts.**'))
       ][0]{
         icon,
         'title': title.${locale},
         'subTitle': subTitle.${locale},
-        "tileTitle":tileTitle.${locale},
+        'tileTitle':tileTitle.${locale},
         currentLevel,
         'thermometerLevels': thermometerLevels[]->{
           'level': level,
@@ -85,6 +85,7 @@ export function getTopicalStructureQuery(locale: string) {
         'trendIcon': {
           'color': trendIcon.color,
           'direction': trendIcon.direction,
+          'intensity': trendIcon.intensity,
         },
         'timeline': {
           'title': timeline.title.${locale},
