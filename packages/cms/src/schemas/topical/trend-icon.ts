@@ -31,5 +31,20 @@ export const trendIcon = {
       },
       validation: REQUIRED,
     },
+    {
+      title: 'Intensiteit',
+      name: 'intensity',
+      description: 'Beschrijft de intensiteit van relatieve verandering ten opzichte van de vorige meeting.',
+      type: 'number',
+      options: {
+        list: [
+          { value: 1, title: '1' },
+          { value: 2, title: '2' },
+          { value: 3, title: '3' },
+        ],
+        layout: 'dropdown',
+      },
+      validation: REQUIRED,
+    },
   ],
 };
