@@ -1,5 +1,4 @@
 import { colors } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { space, fontSizes, shadows } from '~/style/theme';
@@ -59,8 +58,8 @@ export function TooltipWrapper({ title, children, left, top: _top, bounds, paddi
       <div ref={boundingBoxRef}>
         <StyledTooltipContainer
           ref={ref}
+          isMounted={isMounted}
           style={{
-            opacity: isMounted ? 1 : 0,
             /**
              * No idea why, but we need to align the div at half pixels to avoid
              * blurry text 🤷‍♂️ (non-retina screen)
@@ -77,21 +76,26 @@ export function TooltipWrapper({ title, children, left, top: _top, bounds, paddi
   );
 }
 
-const StyledTooltipContainer = styled.div`
-  position: absolute;
+interface StyledTooltipContainerProps {
+  isMounted: boolean;
+}
+
+const StyledTooltipContainer = styled.div<StyledTooltipContainerProps>`
   background: ${colors.white};
-  box-shadow: ${shadows.tooltip};
-  pointer-events: none;
-  z-index: 1000;
   border-radius: 1px;
+  box-shadow: ${shadows.tooltip};
+  opacity: ${(props) => (props.isMounted ? 1 : 0)};
+  pointer-events: none;
+  position: absolute;
   top: 0;
   will-change: transform;
+  z-index: 1000;
 `;
 
 interface TriangleProps {
+  isMounted: boolean;
   left: number;
   top: number;
-  isMounted: boolean;
 }
 
 function Triangle({ left, top, isMounted }: TriangleProps) {
@@ -113,59 +117,38 @@ interface StyledTriangleWrapperProps {
 }
 
 const StyledTriangleWrapper = styled.div<StyledTriangleWrapperProps>`
-  opacity: ${(props) => (props.isMounted ? 1 : 0)};
-  position: absolute;
   left: 0;
+  opacity: ${(props) => (props.isMounted ? 1 : 0)};
+  pointer-events: none;
+  position: absolute;
   top: 0;
   z-index: 1010;
-  pointer-events: none;
 `;
 
-const StyledTriangle = styled.div<{ width: number }>((x) => {
-  /**
-   *  🙏  pythagoras
-   */
-  const borderWidth = Math.sqrt(Math.pow(x.width, 2) / 2) / 2;
-
-  return css({
-    position: 'relative',
-    width: 0,
-    height: 0,
-    marginLeft: -borderWidth,
-    boxSizing: 'border-box',
-    borderWidth,
-    borderStyle: 'solid',
-    borderColor: 'transparent transparent white white',
-    transformOrigin: '0 0',
-    transform: 'rotate(-45deg)',
-    boxShadow: `-3px 3px 3px 0 ${colors.blackOpacity}`,
-  });
-});
-
-/*
 interface StyledTriangleProps {
   width: number;
 }
 
+const calcPythagoras = (width: number) => Math.sqrt(Math.pow(width, 2) / 2) / 2;
+
 const StyledTriangle = styled.div<StyledTriangleProps>`
-  border-color: 'transparent transparent white white';
-  border-style: 'solid';
-  border-width: ${(x) => Math.sqrt(Math.pow(x.width, 2) / 2) / 2};
+  border-color: ${colors.transparent} ${colors.transparent} ${colors.white} ${colors.white};
+  border-style: solid;
+  border-width: ${(props) => calcPythagoras(props.width)}px;
   box-shadow: -3px 3px 3px 0 ${colors.blackOpacity};
-  box-sizing: 'border-box';
-  height: 0px;
-  margin-left: -border-width;
-  position: 'relative';
-  transform-origin: '0 0';
-  transform: 'rotate(-45deg)';
-  width: 0px;
+  box-sizing: border-box;
+  height: 0;
+  margin-left: -${(props) => calcPythagoras(props.width)}px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(-45deg);
+  width: 0;
 `;
-*/
 
 interface TooltipContentProps {
-  title?: string;
-  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: ReactNode;
+  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
+  title?: string;
 }
 
 function TooltipContent(props: TooltipContentProps) {
@@ -194,7 +177,7 @@ interface StyledTooltipContentProps {
 const StyledTooltipContent = styled.div<StyledTooltipContentProps>`
   border-radius: 1px;
   color: ${colors.black};
-  cursor: ${(x) => (x.onClick ? 'pointer' : 'default')};
+  cursor: ${(props) => (props.onClick ? 'pointer' : 'default')};
   font-size: ${fontSizes[1]};
   max-width: 440px;
 `;
@@ -204,14 +187,14 @@ interface StyledTooltipHeadingWrapperProps {
 }
 
 const StyledTooltipHeadingWrapper = styled.div<StyledTooltipHeadingWrapperProps>`
-  align-items: 'center';
+  align-items: center;
   color: ${colors.black};
-  display: 'flex';
-  justify-content: 'space-between';
-  overflow: 'hidden';
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
   padding: ${space[2]} ${space[3]};
-  text-overflow: 'ellipsis';
-  white-space: 'nowrap';
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 interface StyledTooltipChildrenProps {
