@@ -5,15 +5,12 @@ import styled from 'styled-components';
 import { ExternalLink } from '~/components/external-link';
 import { useIntl } from '~/intl';
 import { nestedHtml } from '~/style/preset';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
-import {
-  ChevronRight,
-  External as ExternalLinkIcon,
-} from '@corona-dashboard/icons';
+import { ChevronRight, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 
 interface MarkdownProps {
   content: string;
@@ -26,17 +23,17 @@ interface LinkProps {
 
 const renderers = {
   link: (props: LinkProps) =>
-    isAbsoluteUrl(props.href) ? (
-      <ExternalLink href={props.href} display="inline-block">
-        {props.children}
-        <ExternalLinkIcon width={20} height={11} />
-      </ExternalLink>
-    ) : (
+    isInternalUrl(props.href) ? (
       <Link href={props.href} passHref>
         <Anchor underline display="inline-block">
           {props.children} <ChevronRight width={10} height={10} />
         </Anchor>
       </Link>
+    ) : (
+      <ExternalLink href={props.href} display="inline-block">
+        {props.children}
+        <ExternalLinkIcon width={20} height={11} />
+      </ExternalLink>
     ),
   /**
    * The code element is hijacked to display context-aware pieces of content.
@@ -67,10 +64,7 @@ const renderers = {
     const hasChildBlockquote = props.node.children[0].type === 'blockquote';
 
     return (
-      <Message
-        variant={hasChildBlockquote ? 'message' : 'warning'}
-        resetParentStyles={hasChildBlockquote}
-      >
+      <Message variant={hasChildBlockquote ? 'message' : 'warning'} resetParentStyles={hasChildBlockquote}>
         {props.children}
       </Message>
     );
