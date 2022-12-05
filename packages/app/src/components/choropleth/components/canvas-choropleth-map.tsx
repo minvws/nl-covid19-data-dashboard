@@ -230,7 +230,7 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
   /**
    * The code in the condition below is a workaround.
    *
-   * This is required as for some reason, the water bodies Also get rendered as a Feature (you can see another fix for this in the
+   * This is required as for some reason, the water bodies also get rendered as a Feature (you can see another fix for this in the
    * Features component below). As a consequence, when making the fix introduced in COR-1149 which required adding an additional
    * line to the HoveredFeature, the water bodies ended up receiving the same fill colour as the land around them and thereby masking
    * the white water body.
