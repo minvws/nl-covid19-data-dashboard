@@ -84,18 +84,14 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
               >
                 {title}
                 {!formattedKpiValue && trendIcon.direction && trendIcon.color && (
-                  <TrendIconWrapper color={mapStringToColors(trendIcon.color)}>
-                    <TrendIcon trendDirection={getTrendDirection(trendIcon)} />
-                  </TrendIconWrapper>
+                  <TrendIcon trendDirection={getTrendDirection(trendIcon)} color={mapStringToColors(trendIcon.color)} intensity={trendIcon.intensity} />
                 )}
               </Heading>
               {formattedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
                   {trendIcon.direction && trendIcon.color && (
-                    <TrendIconWrapper color={mapStringToColors(trendIcon.color)}>
-                      <TrendIcon trendDirection={getTrendDirection(trendIcon)} />
-                    </TrendIconWrapper>
+                    <TrendIcon trendDirection={getTrendDirection(trendIcon)} color={mapStringToColors(trendIcon.color)} intensity={trendIcon.intensity} />
                   )}
                 </Box>
               )}
@@ -134,13 +130,6 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
     </Box>
   );
 }
-
-const TrendIconWrapper = styled.span`
-  color: ${({ color }) => color};
-  flex-shrink: 0;
-  margin-left: ${space[2]};
-  width: 20px;
-`;
 
 const TileIcon = styled.span`
   background-color: ${colors.blue8};

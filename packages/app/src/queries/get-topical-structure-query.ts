@@ -45,6 +45,7 @@ export function getTopicalStructureQuery(locale: string) {
             'trendIcon': {
               'color': trendIcon.color,
               'direction': trendIcon.direction,
+              'intensity': trendIcon.intensity,
             },
             'cta': {
               'title': cta.title.${locale},
@@ -85,7 +86,6 @@ export function getTopicalStructureQuery(locale: string) {
         'trendIcon': {
           'color': trendIcon.color,
           'direction': trendIcon.direction,
-          'intensity': trendIcon.intensity,
         },
         'timeline': {
           'title': timeline.title.${locale},
