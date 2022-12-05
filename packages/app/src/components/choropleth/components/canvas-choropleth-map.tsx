@@ -237,27 +237,24 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
    *
    * To fix this, there are now two maps iterating over two arrays for Zeeland. One represents land and the other, water.
    */
-  let landCoords = hover;
-  let waterCoords;
+  let landCoords: [number, number][][] = [...hover];
+  let waterCoords: [number, number][][] | undefined;
   if (hoverCode === 'VR19') {
-    // Represents the coordinates to create the shape of landmasses in Zeeland
     landCoords = hover.filter((_, index) => index === 0 || index === 5);
-
-    // Represents the coordinates to create the shape of water bodies in Zeeland
     waterCoords = hover.filter((_, index) => !(index === 0 || index === 5));
   }
 
   return (
     <Layer listening={false}>
       <Group ref={hoveredRef} listening={false}>
-        {landCoords.map((x, i) => (
+        {landCoords.map((coordinates, index) => (
           <>
             <Line
               listening={false}
-              key={i}
+              key={index}
               x={0}
               y={0}
-              points={x.flat()}
+              points={coordinates.flat()}
               strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
               closed
               stroke={featureProps.hover.stroke(hoverCode, true, isKeyboardActive)}
@@ -267,13 +264,11 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
               shadowOffset={{ x: 0, y: 3 }}
             />
             {/* The additional line is used as an overlay on the original to make it seem like the stroke on the original line is on the outside */}
-            <Line key={`hover-${i}`} x={0} y={0} points={x.flat()} closed fill={featureProps.hover.fill(hoverCode, true)} />
+            <Line key={`hover-${index}`} x={0} y={0} points={coordinates.flat()} closed fill={featureProps.hover.fill(hoverCode, true)} />
           </>
         ))}
-        {waterCoords?.map((x, i) => (
-          <>
-            <Line listening={false} key={i} x={0} y={0} points={x.flat()} closed stroke={colors.transparent} fill={colors.white} />
-          </>
+        {waterCoords?.map((coordinates, index) => (
+          <Line listening={false} key={index} x={0} y={0} points={coordinates.flat()} closed stroke={colors.transparent} fill={colors.white} />
         ))}
       </Group>
     </Layer>
