@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { space, fontSizes, shadows } from '~/style/theme';
 import { isDefined } from 'ts-is-present';
 import { BoldText } from '~/components/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
@@ -28,14 +28,7 @@ const VIEWPORT_PADDING = 10;
  *
  * @TODO clean up calculations in Tooltip component
  */
-export function TooltipWrapper({
-  title,
-  children,
-  left,
-  top: _top,
-  bounds,
-  padding,
-}: TooltipWrapperProps) {
+export function TooltipWrapper({ title, children, left, top: _top, bounds, padding }: TooltipWrapperProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
@@ -44,10 +37,7 @@ export function TooltipWrapper({
   const targetY = -height;
   const targetX = left + padding.left;
 
-  const maxWidth = Math.min(
-    bounds.width + padding.left + padding.right,
-    viewportSize.width - VIEWPORT_PADDING * 2
-  );
+  const maxWidth = Math.min(bounds.width + padding.left + padding.right, viewportSize.width - VIEWPORT_PADDING * 2);
 
   const relativeLeft = boundingBox?.left ?? 0;
 
@@ -66,10 +56,10 @@ export function TooltipWrapper({
   return (
     <>
       <div ref={boundingBoxRef}>
-        <TooltipContainer
+        <StyledTooltipContainer
           ref={ref}
+          isMounted={isMounted}
           style={{
-            opacity: isMounted ? 1 : 0,
             /**
              * No idea why, but we need to align the div at half pixels to avoid
              * blurry text 🤷‍♂️ (non-retina screen)
@@ -79,78 +69,86 @@ export function TooltipWrapper({
           }}
         >
           <TooltipContent title={title}>{children}</TooltipContent>
-        </TooltipContainer>
+        </StyledTooltipContainer>
       </div>
       <Triangle left={targetX} top={targetY + height} isMounted={isMounted} />
     </>
   );
 }
 
+interface StyledTooltipContainerProps {
+  isMounted: boolean;
+}
+
+const StyledTooltipContainer = styled.div<StyledTooltipContainerProps>`
+  background: ${colors.white};
+  border-radius: 1px;
+  box-shadow: ${shadows.tooltip};
+  opacity: ${(props) => (props.isMounted ? 1 : 0)};
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  will-change: transform;
+  z-index: 1000;
+`;
+
 interface TriangleProps {
+  isMounted: boolean;
   left: number;
   top: number;
-  isMounted: boolean;
 }
 
 function Triangle({ left, top, isMounted }: TriangleProps) {
   return (
-    <div
-      css={css({
-        opacity: isMounted ? 1 : 0,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        zIndex: 1010,
-        pointerEvents: 'none',
-      })}
+    <StyledTriangleWrapper
+      isMounted={isMounted}
       /**
        * No idea why, but we need 1.5px extra to center the arrow 🤷‍♂️
        */
       style={{ transform: `translate(calc(${left + 1.5}px - 50%), ${top}px)` }}
     >
       <StyledTriangle width={16} />
-    </div>
+    </StyledTriangleWrapper>
   );
 }
 
-const StyledTriangle = styled.div<{ width: number }>((x) => {
-  /**
-   *  🙏  pythagoras
-   */
-  const borderWidth = Math.sqrt(Math.pow(x.width, 2) / 2) / 2;
+interface StyledTriangleWrapperProps {
+  isMounted: boolean;
+}
 
-  return css({
-    position: 'relative',
-    width: 0,
-    height: 0,
-    marginLeft: -borderWidth,
-    boxSizing: 'border-box',
-    borderWidth,
-    borderStyle: 'solid',
-    borderColor: 'transparent transparent white white',
-    transformOrigin: '0 0',
-    transform: 'rotate(-45deg)',
-    boxShadow: `-3px 3px 3px 0 ${colors.blackOpacity}`,
-  });
-});
+const StyledTriangleWrapper = styled.div<StyledTriangleWrapperProps>`
+  left: 0;
+  opacity: ${(props) => (props.isMounted ? 1 : 0)};
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 1010;
+`;
 
-const TooltipContainer = styled.div(
-  css({
-    position: 'absolute',
-    bg: 'white',
-    boxShadow: 'tooltip',
-    pointerEvents: 'none',
-    zIndex: 1000,
-    borderRadius: 1,
-    top: 0,
-    willChange: 'transform',
-  })
-);
+interface StyledTriangleProps {
+  width: number;
+}
+
+const calcPythagoras = (width: number) => Math.sqrt(Math.pow(width, 2) / 2) / 2;
+
+const StyledTriangle = styled.div<StyledTriangleProps>`
+  border-color: ${colors.transparent} ${colors.transparent} ${colors.white} ${colors.white};
+  border-style: solid;
+  border-width: ${(props) => calcPythagoras(props.width)}px;
+  box-shadow: -3px 3px 3px 0 ${colors.blackOpacity};
+  box-sizing: border-box;
+  height: 0;
+  margin-left: -${(props) => calcPythagoras(props.width)}px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(-45deg);
+  width: 0;
+`;
 
 interface TooltipContentProps {
-  title?: string;
-  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: ReactNode;
+  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
+  title?: string;
 }
 
 function TooltipContent(props: TooltipContentProps) {
@@ -159,50 +157,52 @@ function TooltipContent(props: TooltipContentProps) {
   return (
     <StyledTooltipContent onClick={onSelect} aria-live="polite">
       {title && <TooltipHeading title={title} />}
-      {children && (
-        <TooltipChildren hasTitle={isDefined(title)}>
-          {children}
-        </TooltipChildren>
-      )}
+      {children && <StyledTooltipChildren hasTitle={isDefined(title)}>{children}</StyledTooltipChildren>}
     </StyledTooltipContent>
   );
 }
 
 function TooltipHeading({ title }: { title: string }) {
   return (
-    <div
-      css={css({
-        whiteSpace: 'nowrap',
-        color: 'black',
-        py: 2,
-        px: 3,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      })}
-    >
+    <StyledTooltipHeadingWrapper>
       <BoldText variant="label1">{title}</BoldText>
-    </div>
+    </StyledTooltipHeadingWrapper>
   );
 }
 
-const TooltipChildren = styled.div<{ hasTitle?: boolean }>(({ hasTitle }) =>
-  css({
-    borderTop: hasTitle ? '1px solid' : '',
-    borderTopColor: hasTitle ? 'gray3' : '',
-    py: 2,
-    px: 3,
-  })
-);
+interface StyledTooltipContentProps {
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+}
 
-const StyledTooltipContent = styled.div((x) =>
-  css({
-    color: 'black',
-    maxWidth: 425,
-    borderRadius: 1,
-    cursor: x.onClick ? 'pointer' : 'default',
-    fontSize: 1,
-  })
-);
+const StyledTooltipContent = styled.div<StyledTooltipContentProps>`
+  border-radius: 1px;
+  color: ${colors.black};
+  cursor: ${(props) => (props.onClick ? 'pointer' : 'default')};
+  font-size: ${fontSizes[1]};
+  max-width: 440px;
+`;
+
+interface StyledTooltipHeadingWrapperProps {
+  title?: string;
+}
+
+const StyledTooltipHeadingWrapper = styled.div<StyledTooltipHeadingWrapperProps>`
+  align-items: center;
+  color: ${colors.black};
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: ${space[2]} ${space[3]};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+interface StyledTooltipChildrenProps {
+  hasTitle?: boolean;
+}
+
+const StyledTooltipChildren = styled.div<StyledTooltipChildrenProps>`
+  border-top: ${(props) => (props.hasTitle ? '1px solid' : '')};
+  border-top-color: ${(props) => (props.hasTitle ? colors.gray3 : '')};
+  padding: ${space[2]} ${space[3]};
+`;
