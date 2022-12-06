@@ -22,10 +22,8 @@
         "age_group_range",
         "age_group_total",
         "autumn_2022_vaccinated",
-        "booster_shot",
         "autumn_2022_vaccinated_percentage",
         "fully_vaccinated_percentage",
-        "booster_shot_percentage",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",
@@ -59,17 +57,11 @@
         "fully_vaccinated": {
           "type": "integer"
         },
-        "booster_shot": {
-          "type": ["integer", "null"]
-        },
         "autumn_2022_vaccinated_percentage": {
           "type": ["integer", "null"]
         },
         "fully_vaccinated_percentage": {
           "type": "number"
-        },
-        "booster_shot_percentage": {
-          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"

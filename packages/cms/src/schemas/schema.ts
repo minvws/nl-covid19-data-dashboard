@@ -9,7 +9,7 @@ import * as elements from '../elements/schemas';
 import * as documents from './documents';
 import * as locale from './locale';
 import * as objects from './objects';
-import * as restrictions from './restrictions';
+import * as measures from './measures';
 import * as topicalPageConfig from './topical';
 
 // Then we give our schema to the builder and provide the result to Sanity
@@ -20,10 +20,10 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat(
     ...Object.values(documents),
-    ...Object.values(restrictions),
+    ...Object.values(measures),
     ...Object.values(objects),
     ...Object.values(locale),
     ...Object.values(elements),
-    ...Object.values(topicalPageConfig),
-    ),
+    ...Object.values(topicalPageConfig)
+  ),
 });

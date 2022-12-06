@@ -3,12 +3,10 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { isDefined } from 'ts-is-present';
 import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
   selectAdministrationData,
-  selectVaccineCoverageData,
   VaccinationsOverTimeTile,
   VaccineBoosterAdministrationsKpiSection,
   VaccinationsShotKpiSection,
@@ -50,8 +48,8 @@ const pageMetrics = [
   'vaccine_coverage_per_age_group_estimated_autumn_2022',
   'vaccine_campaigns',
   'vaccine_planned',
-  'booster_coverage',
-  'booster_shot_administered',
+  'booster_coverage_archived_20220904',
+  'booster_shot_administered_archived_20220904',
   'repeating_shot_administered',
 ];
 
@@ -86,8 +84,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_campaigns_archived_20220908',
     'vaccine_planned',
     'vaccine_planned_archived_20220908',
-    'booster_coverage',
-    'booster_shot_administered',
+    'booster_coverage_archived_20220904',
+    'booster_shot_administered_archived_20220904',
     'repeating_shot_administered'
   ),
   () => selectAdministrationData(getNlData().data.vaccine_administered),
@@ -116,18 +114,8 @@ export const getStaticProps = createGetStaticProps(
     };
   },
   createGetChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group }) => {
-      if (isDefined(vaccine_coverage_per_age_group)) {
-        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
-      }
-      return vaccine_coverage_per_age_group ?? null;
-    },
-    vr: ({ vaccine_coverage_per_age_group }) => {
-      if (isDefined(vaccine_coverage_per_age_group)) {
-        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
-      }
-      return vaccine_coverage_per_age_group ?? null;
-    },
+    gm: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
+    vr: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
   })
 );
 
@@ -150,13 +138,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const vaccineCoverageEstimatedArchivedLastValue = data.vaccine_coverage_per_age_group_estimated_archived_20220908.last_value;
 
-  const boosterShotAdministeredLastValue = data.booster_shot_administered.last_value;
+  const boosterShotAdministeredArchivedLastValue = data.booster_shot_administered_archived_20220904.last_value;
 
-  const boosterCoverage18PlusValue = data.booster_coverage.values.find((v) => v.age_group === '18+');
-  const boosterCoverage12PlusValue = data.booster_coverage.values.find((v) => v.age_group === '12+');
+  const boosterCoverage18PlusArchivedValue = data.booster_coverage_archived_20220904.values.find((v) => v.age_group === '18+');
+  const boosterCoverage12PlusArchivedValue = data.booster_coverage_archived_20220904.values.find((v) => v.age_group === '12+');
 
-  assert(boosterCoverage18PlusValue, `[${VaccinationPage.name}] Missing value for booster_coverage 18+`);
-  assert(boosterCoverage12PlusValue, `[${VaccinationPage.name}] Missing value for booster_coverage 12+`);
+  assert(boosterCoverage18PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 18+`);
+  assert(boosterCoverage12PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 12+`);
 
   const repeatingShotAdministeredLastValue = data.repeating_shot_administered?.last_value;
 
@@ -313,16 +301,16 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 age18Plus={{
                   fully_vaccinated: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,
                   has_one_shot: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_has_one_shot,
-                  boostered: formatPercentageAsNumber(`${boosterCoverage18PlusValue.percentage}`),
+                  boostered: formatPercentageAsNumber(`${boosterCoverage18PlusArchivedValue.percentage}`),
                   birthyear: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_birthyear,
-                  dateUnixBoostered: boosterCoverage18PlusValue.date_unix,
+                  dateUnixBoostered: boosterCoverage18PlusArchivedValue.date_unix,
                 }}
                 age12Plus={{
                   fully_vaccinated: vaccineCoverageEstimatedArchivedLastValue.age_12_plus_fully_vaccinated,
                   has_one_shot: vaccineCoverageEstimatedArchivedLastValue.age_12_plus_has_one_shot,
-                  boostered: formatPercentageAsNumber(`${boosterCoverage12PlusValue.percentage}`),
+                  boostered: formatPercentageAsNumber(`${boosterCoverage12PlusArchivedValue.percentage}`),
                   birthyear: vaccineCoverageEstimatedArchivedLastValue.age_12_plus_birthyear,
-                  dateUnixBoostered: boosterCoverage12PlusValue.date_unix,
+                  dateUnixBoostered: boosterCoverage12PlusArchivedValue.date_unix,
                 }}
                 numFractionDigits={1}
                 age12PlusToggleText={textNl.vaccination_grade_toggle_tile.age_12_plus}
@@ -345,8 +333,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               />
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
-                dateUnix={boosterShotAdministeredLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredLastValue.date_of_insertion_unix}
+                dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
+                dateOfInsertionUnix={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
               />
 
               <VaccinationsShotKpiSection
@@ -375,34 +363,34 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <VaccinationsKpiHeader
                 text={textNl.booster_information_block}
-                dateUnix={boosterShotAdministeredLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredLastValue.date_of_insertion_unix}
+                dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
+                dateOfInsertionUnix={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
               />
 
               <VaccineBoosterAdministrationsKpiSection
                 text={textNl.booster_kpi}
-                totalBoosterShots={boosterShotAdministeredLastValue.administered_total}
+                totalBoosterShots={boosterShotAdministeredArchivedLastValue.administered_total}
                 metadateBoosterShots={{
                   datumsText: textNl.booster_kpi.datums,
-                  date: boosterShotAdministeredLastValue.date_unix,
+                  date: boosterShotAdministeredArchivedLastValue.date_unix,
                   source: {
                     href: textNl.booster_kpi.sources.href,
                     text: textNl.booster_kpi.sources.text,
                   },
                 }}
-                boosterGgdValue={boosterShotAdministeredLastValue.ggd_administered_total}
+                boosterGgdValue={boosterShotAdministeredArchivedLastValue.ggd_administered_total}
                 metadateBoosterGgd={{
                   datumsText: textNl.booster_kpi.datums,
-                  date: boosterShotAdministeredLastValue.date_unix,
+                  date: boosterShotAdministeredArchivedLastValue.date_unix,
                   source: {
                     href: textNl.booster_kpi.sources.href,
                     text: textNl.booster_kpi.sources.text,
                   },
                 }}
-                boosterEstimatedValue={boosterShotAdministeredLastValue.others_administered_total}
+                boosterEstimatedValue={boosterShotAdministeredArchivedLastValue.others_administered_total}
                 metadateBoosterEstimated={{
                   datumsText: textNl.booster_kpi.datums,
-                  date: boosterShotAdministeredLastValue.date_unix,
+                  date: boosterShotAdministeredArchivedLastValue.date_unix,
                   source: {
                     href: textNl.booster_kpi.sources.href,
                     text: textNl.booster_kpi.sources.text,
