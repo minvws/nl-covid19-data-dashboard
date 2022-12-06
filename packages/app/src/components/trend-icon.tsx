@@ -28,8 +28,9 @@ export const TrendIcon = ({ trendDirection, ariaLabel, intensity = null, color =
 
   const ariaLabelText = trendLabels[TrendDirection[trendDirection].toLowerCase()];
 
+  // Icon with intensity is used only on the homepage at the moment, for all other trend icons the default (below) are used.
   if (intensity && color && TrendDirection[trendDirection]) {
-    return <StyledTrendIcon color={color} direction={trendDirection} intensity={intensity} />;
+    return <TrendIconWithIntensity color={color} direction={trendDirection} intensity={intensity} />;
   }
 
   switch (trendDirection) {
@@ -46,12 +47,6 @@ export const TrendIcon = ({ trendDirection, ariaLabel, intensity = null, color =
   }
 };
 
-interface StyledTrendIconProps {
-  color: string;
-  direction: TrendDirection;
-  intensity: number;
-}
-
 const intensitySelectors: { [key: number]: { fill: string; stroke: string } } = {
   1: {
     fill: '.one-arrow',
@@ -67,10 +62,16 @@ const intensitySelectors: { [key: number]: { fill: string; stroke: string } } = 
   },
 };
 
-const StyledTrendIcon = styled(ArrowWithIntensity)<StyledTrendIconProps>`
+interface TrendIconWithIntensityProps {
+  color: string;
+  direction: TrendDirection;
+  intensity: number;
+}
+
+const TrendIconWithIntensity = styled(ArrowWithIntensity)<TrendIconWithIntensityProps>`
   flex-shrink: 0;
   margin-left: ${space[2]};
-  transform: ${({ direction }) => (direction === TrendDirection.DOWN ? 'rotate(180deg) scaleX(-1)' : undefined)};
+  transform: ${({ direction }) => (direction === TrendDirection.DOWN ? 'scaleY(-1)' : undefined)};
 
   ${({ intensity }) => intensitySelectors[intensity].fill} {
     fill: ${({ color }) => color};
