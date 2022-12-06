@@ -58,6 +58,11 @@ const intensitySelectors: { [key: number]: { fill: string; stroke: string } } = 
   },
   3: {
     fill: '.one-arrow, .two-arrows, .three-arrows',
+    /**
+     * The .no-stroke class does not actually exist on the ArrowWithIntensity component, however, because
+     * of the way we are using these classes in the styled TrendIconWithIntensity, it cannot be empty ('')
+     * or undefined, as this breaks all the icons on the page.
+     */
     stroke: '.no-stroke',
   },
 };
@@ -73,11 +78,11 @@ const TrendIconWithIntensity = styled(ArrowWithIntensity)<TrendIconWithIntensity
   margin-left: ${space[2]};
   transform: ${({ direction }) => (direction === TrendDirection.DOWN ? 'scaleY(-1)' : undefined)};
 
-  ${({ intensity }) => intensitySelectors[intensity].fill} {
-    fill: ${({ color }) => color};
-  }
-
-  ${({ intensity }) => intensitySelectors[intensity].stroke} {
-    stroke: ${colors.gray7};
-  }
+  ${({ intensity, color }): string =>
+    `${intensitySelectors[intensity].fill} {
+      fill: ${color};
+    }
+    ${intensitySelectors[intensity].stroke} {
+      stroke: ${colors.gray7};
+    }`}
 `;
