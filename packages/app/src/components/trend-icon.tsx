@@ -47,7 +47,7 @@ export const TrendIcon = ({ trendDirection, ariaLabel, intensity = null, color =
   }
 };
 
-const intensitySelectors: { [key: number]: { fill: string; stroke: string } } = {
+const intensitySelectors: { [key: number]: { fill: string; stroke?: string } } = {
   1: {
     fill: '.one-arrow',
     stroke: '.two-stroke, .three-stroke',
@@ -58,12 +58,6 @@ const intensitySelectors: { [key: number]: { fill: string; stroke: string } } = 
   },
   3: {
     fill: '.one-arrow, .two-arrows, .three-arrows',
-    /**
-     * The .no-stroke class does not actually exist on the ArrowWithIntensity component, however, because
-     * of the way we are using these classes in the styled TrendIconWithIntensity, it cannot be empty ('')
-     * or undefined, as this breaks all the icons on the page.
-     */
-    stroke: '.no-stroke',
   },
 };
 
