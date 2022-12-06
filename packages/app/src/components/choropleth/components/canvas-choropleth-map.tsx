@@ -16,7 +16,7 @@ import type { AnchorEventHandler } from './choropleth-map';
 
 Konva.pixelRatio = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1;
 
-export type CanvasChoroplethMapProps = {
+export interface CanvasChoroplethMapProps {
   anchorEventHandlers: AnchorEventHandler;
   annotations: AccessibilityAnnotations;
   choroplethFeatures: ChoroplethFeatures;
@@ -33,7 +33,7 @@ export type CanvasChoroplethMapProps = {
   mapProjection: () => GeoProjection;
   tooltipTrigger: ChoroplethTooltipHandlers[2];
   width: number;
-};
+}
 
 /**
  * This is one transparent pixel encoded in a dataUrl. This is used for the image overlay on top of the canvas that
@@ -181,12 +181,12 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
   );
 };
 
-type HighlightedFeatureProps = {
+interface HighlightedFeatureProps {
   feature: [number, number][][] | undefined;
   featureProps: FeatureProps;
   code: string | undefined;
   hoverCode: string | undefined;
-};
+}
 
 const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
   const { feature, featureProps, code, hoverCode } = props;
@@ -212,13 +212,13 @@ const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
   );
 });
 
-type HoveredFeatureProps = {
+interface HoveredFeatureProps {
   hoveredRef: RefObject<Konva.Group>;
   hover: [number, number][][] | undefined;
   hoverCode: string | undefined;
   featureProps: FeatureProps;
   isKeyboardActive?: boolean;
-};
+}
 
 const HoveredFeature = memo((props: HoveredFeatureProps) => {
   const { hoveredRef, hover, hoverCode, featureProps, isKeyboardActive } = props;
@@ -227,30 +227,58 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
     return null;
   }
 
+  /**
+   * The code in the condition below is a workaround.
+   *
+   * This is required as for some reason, the water bodies also get rendered as a Feature (you can see another fix for this in the
+   * Features component below). As a consequence, when making the fix introduced in COR-1149 which required adding an additional
+   * line to the HoveredFeature, the water bodies ended up receiving the same fill colour as the land around them and thereby masking
+   * the white water body.
+   *
+   * To fix this, there are now two maps iterating over two arrays for Zeeland. One represents land and the other, water.
+   */
+  let landCoords: [number, number][][] = [...hover];
+  let waterCoords: [number, number][][] | undefined;
+  if (hoverCode === 'VR19') {
+    landCoords = hover.filter((_, index) => index === 0 || index === 5);
+    waterCoords = hover.filter((_, index) => !(index === 0 || index === 5));
+  }
+
   return (
     <Layer listening={false}>
       <Group ref={hoveredRef} listening={false}>
-        {hover.map((x, i) => (
-          <Line
-            listening={false}
-            key={i}
-            x={0}
-            y={0}
-            points={x.flat()}
-            strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
-            closed
-            stroke={featureProps.hover.stroke(hoverCode, true, isKeyboardActive)}
-          />
+        {landCoords.map((coordinates, index) => (
+          <>
+            <Line
+              listening={false}
+              key={index}
+              x={0}
+              y={0}
+              points={coordinates.flat()}
+              strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
+              closed
+              stroke={featureProps.hover.stroke(hoverCode, true, isKeyboardActive)}
+              shadowColor={colors.black}
+              shadowOpacity={0.5}
+              shadowBlur={6}
+              shadowOffset={{ x: 0, y: 3 }}
+            />
+            {/* The additional line is used as an overlay on the original to make it seem like the stroke on the original line is on the outside */}
+            <Line key={`hover-${index}`} x={0} y={0} points={coordinates.flat()} closed fill={featureProps.hover.fill(hoverCode, true)} />
+          </>
+        ))}
+        {waterCoords?.map((coordinates, index) => (
+          <Line listening={false} key={index} x={0} y={0} points={coordinates.flat()} closed stroke={colors.transparent} fill={colors.white} />
         ))}
       </Group>
     </Layer>
   );
 });
 
-type OutlinesProps = {
+interface OutlinesProps {
   geoInfo: ProjectedGeoInfo[];
   featureProps: FeatureProps;
-};
+}
 
 const Outlines = memo((props: OutlinesProps) => {
   const { geoInfo, featureProps } = props;
@@ -276,11 +304,11 @@ const Outlines = memo((props: OutlinesProps) => {
   );
 });
 
-type FeaturesProps = {
+interface FeaturesProps {
   geoInfo: ProjectedGeoInfo[];
   featureProps: FeatureProps;
   children: React.ReactNode;
-};
+}
 
 const Features = memo((props: FeaturesProps) => {
   const { geoInfo, featureProps, children } = props;
@@ -336,7 +364,7 @@ const Features = memo((props: FeaturesProps) => {
   );
 });
 
-type AreaMapProps = {
+interface AreaMapProps {
   isTabInteractive: boolean;
   geoInfo: ProjectedGeoInfo[];
   getLink?: (code: string) => string;
@@ -347,7 +375,7 @@ type AreaMapProps = {
   handleMouseOver: (event: MouseEvent<HTMLElement>) => void;
   height: number;
   width: number;
-};
+}
 
 type GeoInfoGroup = {
   code: string;
@@ -383,6 +411,7 @@ function AreaMap(props: AreaMapProps) {
           <area
             style={{
               cursor: isDefined(getLink) ? 'pointer' : undefined,
+              outline: 'none',
             }}
             tabIndex={index === 0 ? 2 : -1}
             aria-label={getFeatureName(geoInfoGroup.code)}
