@@ -6,4 +6,5 @@ export type TrendIconDirection = typeof ICON_DIRECTION_UP | typeof ICON_DIRECTIO
 export type TrendIcon = {
   direction: TrendIconDirection | null;
   color: TrendIconColor | null;
+  intensity: 1 | 2 | 3 | null;
 };
