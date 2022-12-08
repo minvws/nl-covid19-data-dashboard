@@ -7,5 +7,5 @@ export function isInternalUrl(url: string, href: string) {
   const regExExternal = new RegExp('^(https?://coronadashboard.)');
   const regExInternal = new RegExp('^(https?:)?//');
 
-  return (regExAnchor.test(href) && regExExternal.test(url)) || !regExInternal.test(url);
+  return regExAnchor.test(href) || regExExternal.test(url) || !regExInternal.test(url);
 }
