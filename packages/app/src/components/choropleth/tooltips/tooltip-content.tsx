@@ -1,107 +1,79 @@
-import { Location } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import { colors } from '@corona-dashboard/common';
+import { ChevronRight, Location } from '@corona-dashboard/icons';
+import { MouseEventHandler, ReactNode } from 'react';
 import styled from 'styled-components';
-import { Text } from '~/components/typography';
+import { Box } from '~/components/base';
+import { InlineText, Text } from '~/components/typography';
 import { space } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
-interface IProps {
+interface TooltipContentProps {
   title: string;
-  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
   link?: string;
   children?: ReactNode;
 }
 
-export function TooltipContent(props: IProps) {
-  const { title, onSelect, link, children } = props;
+export const TooltipContent = ({ title, link, children }: TooltipContentProps) => {
   const isTouch = useIsTouchDevice();
 
   return (
-    <StyledTooltipContent isInteractive={isTouch} onClick={onSelect} aria-live="polite">
-      <TooltipHeader href={link}>
+    <StyledTooltipContent as={link ? 'a' : 'div'} href={link ? link : undefined} isInteractive={isTouch} aria-live="polite">
+      <StyledTooltipHeader>
         <Text variant="choroplethTooltipHeader">
           <StyledLocationIcon>
             <Location />
           </StyledLocationIcon>
           {title}
         </Text>
-        {(onSelect || link) && <Chevron />}
-      </TooltipHeader>
-      {children && <TooltipInfo>{children}</TooltipInfo>}
+        {link && <StyledChevronRight />}
+      </StyledTooltipHeader>
+
+      {children && <StyledTooltipInfo>{children}</StyledTooltipInfo>}
     </StyledTooltipContent>
   );
+};
+
+interface StyledTooltipContentProps {
+  isInteractive: boolean;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-const StyledTooltipContent = styled.div<{ isInteractive: boolean }>((x) =>
-  css({
-    color: 'black',
-    width: '100%',
-    minWidth: 250,
-    borderRadius: 1,
-    cursor: x.onClick ? 'pointer' : 'default',
-    pointerEvents: x.isInteractive ? undefined : 'none',
-  })
-);
+const StyledTooltipContent = styled(Box)<StyledTooltipContentProps>`
+  color: ${colors.black};
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  pointer-events: ${({ isInteractive }) => (isInteractive ? undefined : 'none')};
+  width: 100%;
+`;
 
-function TooltipHeader({ href, children }: { href?: string; children: ReactNode }) {
-  if (href) {
-    return (
-      <StyledTooltipHeader href={href} as="a">
-        {children}
-      </StyledTooltipHeader>
-    );
+const StyledTooltipHeader = styled(Box)`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: ${space[2]} ${space[3]};
+  white-space: nowrap;
+`;
+
+const StyledChevronRight = styled(ChevronRight)`
+  color: ${colors.black};
+  height: ${space[3]};
+`;
+
+const StyledTooltipInfo = styled(Box)`
+  border-top: 1px solid ${colors.gray3};
+  cursor: pointer;
+  padding: ${space[2]} ${space[3]};
+`;
+
+const StyledLocationIcon = styled(InlineText)`
+  color: ${colors.black};
+  margin-right: ${space[2]};
+  white-space: nowrap;
+
+  svg {
+    height: 18px;
+    padding-top: 3px;
+    width: 18px;
   }
-
-  return <StyledTooltipHeader>{children}</StyledTooltipHeader>;
-}
-
-const StyledTooltipHeader = styled.div(
-  css({
-    whiteSpace: 'nowrap',
-    color: 'black',
-    py: 2,
-    px: 3,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    textDecoration: 'none!important',
-  })
-);
-
-const Chevron = styled.div(
-  css({
-    ml: 3,
-    backgroundImage: 'url("/icons/chevron-black.svg")',
-    backgroundSize: '0.5em 0.9em',
-    backgroundPosition: '0 50%',
-    backgroundRepeat: 'no-repeat',
-    width: '0.5em',
-    height: '1em',
-    display: 'block',
-  })
-);
-
-const TooltipInfo = styled.div(
-  css({
-    cursor: 'pointer',
-    borderTop: '1px solid',
-    borderTopColor: 'gray3',
-    padding: `${space[2]} ${space[3]}`,
-  })
-);
-
-const StyledLocationIcon = styled.span(
-  css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-    mr: 2,
-
-    svg: {
-      pt: '3px',
-      color: 'black',
-      width: 16,
-      height: 17,
-    },
-  })
-);
+`;

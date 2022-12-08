@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { cloneElement, forwardRef, ReactElement } from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from './visually-hidden';
@@ -12,54 +11,33 @@ interface IconButtonProps {
   padding?: number | string;
 }
 
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  (
-    {
-      children,
-      size,
-      title,
-      color = 'currentColor',
-      onClick,
-      padding,
-      ...ariaProps
-    },
-    ref
-  ) => {
-    return (
-      <StyledIconButton
-        ref={ref}
-        title={title}
-        type="button"
-        onClick={onClick}
-        size={size}
-        color={color}
-        padding={padding}
-        {...ariaProps}
-      >
-        <VisuallyHidden>{title}</VisuallyHidden>
-        {cloneElement(children, { 'aria-hidden': "true" })}
-      </StyledIconButton>
-    );
-  }
-);
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ children, size, title, color = 'currentColor', onClick, padding, ...ariaProps }, ref) => {
+  return (
+    <StyledIconButton ref={ref} title={title} type="button" onClick={onClick} size={size} color={color} padding={padding} {...ariaProps}>
+      <VisuallyHidden>{title}</VisuallyHidden>
+      {cloneElement(children, { 'aria-hidden': 'true' })}
+    </StyledIconButton>
+  );
+});
 
-const StyledIconButton = styled.button<{
+interface StyledIconButtonProps {
   color: string;
   size: number;
   padding?: number | string;
-}>((x) =>
-  css({
-    p: x.padding ?? 0,
-    m: 0,
-    bg: 'transparent',
-    border: 'none',
-    display: 'block',
-    cursor: 'pointer',
-    color: x.color,
-    '& svg': {
-      display: 'block',
-      width: x.size,
-      height: x.size,
-    },
-  })
-);
+}
+
+const StyledIconButton = styled.button<StyledIconButtonProps>`
+  background: transparent;
+  border: none;
+  color: ${({ color }) => color};
+  cursor: pointer;
+  display: block;
+  margin: 0;
+  padding: ${({ padding }) => (padding ? `${padding}px` : 0)};
+
+  & svg {
+    display: block;
+    height: ${({ size }) => size}px;
+    width: ${({ size }) => size}px;
+  }
+`;

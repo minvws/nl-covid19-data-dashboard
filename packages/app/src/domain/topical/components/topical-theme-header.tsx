@@ -18,9 +18,9 @@ export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeader
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
-        <TopicalThemeHeaderIcon>
+        <StyledTopicalThemeHeaderIcon>
           <DynamicIcon name={icon} aria-hidden="true" />
-        </TopicalThemeHeaderIcon>
+        </StyledTopicalThemeHeaderIcon>
         <Heading level={2}>{title}</Heading>
       </Box>
       {subtitle && (
@@ -32,11 +32,11 @@ export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeader
   );
 };
 
-const TopicalThemeHeaderIcon = styled.span`
+const StyledTopicalThemeHeaderIcon = styled.span`
   display: block;
   height: 25px;
   margin-right: 10px;
-  width: 25px;
+  min-width: 25px;
 
   @media ${theme.mediaQueries.sm} {
     height: 30px;

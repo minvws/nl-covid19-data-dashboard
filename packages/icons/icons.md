@@ -8,6 +8,7 @@ See below an overview of all the available icons in this package. This file is g
 | AlcoholVerkoop                         | <div style="background-color: white;"><img src="./src/svg/alcohol_verkoop.svg" alt="AlcoholVerkoop" /></div>                                                   |
 | Archive                                | <div style="background-color: white;"><img src="./src/svg/archive.svg" alt="Archive" /></div>                                                                  |
 | Arrow                                  | <div style="background-color: white;"><img src="./src/svg/arrow.svg" alt="Arrow" /></div>                                                                      |
+| ArrowWithIntensity                     | <div style="background-color: white;"><img src="./src/svg/arrow_with_intensity.svg" alt="ArrowWithIntensity" /></div>                                          |
 | Arts                                   | <div style="background-color: white;"><img src="./src/svg/arts.svg" alt="Arts" /></div>                                                                        |
 | Avondklok                              | <div style="background-color: white;"><img src="./src/svg/avondklok.svg" alt="Avondklok" /></div>                                                              |
 | BarChart                               | <div style="background-color: white;"><img src="./src/svg/bar_chart.svg" alt="BarChart" /></div>                                                               |

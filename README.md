@@ -57,6 +57,8 @@ documentation of the [app](/packages/app/README.md) and (optionally the)
 Without describing in detail all the rules we tend to follow here are some worth
 noting:
 
+#### General
+
 - All filenames are written in kebab-case.
 - We use named exports where possible. They improve typing and help refactoring.
 - We aim to stop using barrel files (using an index file in a folder to bundle exports for the consuming code).
@@ -91,12 +93,21 @@ noting:
 - We avoid using `boolean && doSomething();` inside the component's JavaScript logic, but do use it inside the component's JSX (`{boolean && ( ... )}`) to conditionally render (parts of) the component.
 - We avoid unnecessary short-hand variable names like
   `arr` for array or `i` for index or `acc` for a `reduce` accumulator.
+
+- Completely separate Javascript logic from HTML/JSX. This means also remove maps from the JSX. Additionally, if you have nested maps extract them into components passing the required data to map to the component.
+- We prefer early returns. If statements should be on multiple lines, so no single line if statements.
+
+#### Styling
 - We write Styled Components using its OOTB tagged template literal functions instead of using an additional layer of the Styled System's `css()` method. This method improves readability, makes code easier to understand and sticks to the fundamentals of CSS. This method still allows for usage of Styled System's theme definitions, yet removes a dependency on the actual package.
 - We included a `Styled`-prefix when creating Styled Components. This makes them easily distinguishable from other components. Examples would be `StyledInput` or `StyledTile`.
 - We avoid using magic numbers in code, be it logic, JSX or styles. Magic numbers are often derived from the theme defined by Styled System and resolve to properties such as spacing and font-sizes, but are unclear on its own. Instead, we import the desired property and refer to the index in that properties array. An example would be `padding: 3` (undesired) vs `padding: space[3]` (desired).
+
+#### GIT
+
 - We do not have a hard preference or requirement for using `git rebase` or `git merge`. Developers should follow what works best for them, but it should be noted that both methods are allowed and actively used in this project.
 - We do not have a hard preference or requirement for squashing a multitude of git commits, but it can be useful to apply this when creating a pull request. This action should be used on an 'as-needed basis': if a pull request grows large due to a large amount of commits, it might improve reviewability when multiple commits are squashed. It should be noted that pull requests are squashed when merged, aside from pull requests to `master`. This is to keep a clear view of features and fixes that were merged as part of a release.
 - Continuing on the above: we should write a comprehensive commit message when squash merging a pull request. This message should be a (filtered) summary of the commits on the branch.
+
 - We use the following branch names:
   - `feature/COR-XXX-descriptive-name-of-ticket-branch` for features
   - `bugfix/COR-XXX-descriptive-name-of-ticket-branch` for bug fixes

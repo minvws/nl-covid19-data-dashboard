@@ -25,6 +25,12 @@ export const measures = {
       type: 'localeRichContentBlock',
     },
     {
+      title: 'Titel van de groepen',
+      name: 'collectionTitle',
+      type: 'localeString',
+      validation: REQUIRED,
+    },
+    {
       title: 'Groepen',
       description: 'De maatregelen zijn onderverdeeld in groepen',
       name: 'measuresCollection',

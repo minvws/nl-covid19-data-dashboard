@@ -89,7 +89,7 @@ const mediaQueries = {
 
 const radii = [0, 5, 10];
 
-const shadows = {
+export const shadows = {
   tile: '0px 4px 8px rgba(0, 0, 0, 0.1)',
   tooltip: '0px 2px 12px rgba(0, 0, 0, 0.1)',
 } as const;

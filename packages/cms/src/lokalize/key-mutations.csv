@@ -1,17 +1,1 @@
 timestamp,action,key,document_id,move_to
-2022-11-07T15:09:11.939Z,add,common.choropleth_tooltip.gm.outdated_data_notification,TrUIlGMFRR6fBR627mmYKT,__
-2022-11-07T15:41:35.054Z,delete,common.choropleth_tooltip.gm.outdated_data_notification,TrUIlGMFRR6fBR627mmYKT,__
-2022-11-07T15:57:14.611Z,add,common.choropleth_tooltip.outdated_data_notification,Fgb5SAAswLDPRQ9KRzHRc8,__
-2022-11-07T16:00:34.118Z,delete,common.choropleth_tooltip.outdated_data_notification,Fgb5SAAswLDPRQ9KRzHRc8,__
-2022-11-07T16:01:10.105Z,add,common.choropleth_tooltip.gm.average.outdated_data_notification,Fgb5SAAswLDPRQ9KRzIAnG,__
-2022-11-07T16:01:11.103Z,add,common.choropleth_tooltip.vr.average.outdated_data_notification,BBCOmHCrMQzaQKV1wWKvZ9,__
-2022-11-11T08:49:48.826Z,add,pages.sewer_page.nl.choropleth_legend_outdated_data_label,TrUIlGMFRR6fBR628D5VMd,__
-2022-11-21T09:11:46.413Z,add,common.common.age_groups.12,UE7TbOA80ovT85nyy1gcYy,__
-2022-11-21T09:11:47.332Z,add,common.common.age_groups.18,UE7TbOA80ovT85nyy1gcqO,__
-2022-11-21T09:11:48.400Z,add,common.common.age_groups.60,Tg1qSQfR7l8JBUWv7hoA0J,__
-2022-11-21T09:11:49.412Z,add,common.vaccinations.coverage_kinds.autumn_2022,cMBWaVHxQUmXKxLgJyJ8LF,__
-2022-11-21T09:11:50.358Z,add,common.vaccinations.coverage_kinds.fully_basisserie,cMBWaVHxQUmXKxLgJyJ8aT,__
-2022-11-21T09:11:50.359Z,delete,common.vaccinations.coverage_kinds.autumn_2022_vaccinated_percentage,NGAoa2ArqEakZsIxnSDBhz,__
-2022-11-21T09:11:50.360Z,delete,common.vaccinations.coverage_kinds.fully_vaccinated_percentage,jDbv30Y7XYH5kl8ZaoSZwv,__
-2022-11-23T09:37:10.394Z,add,common.vaccinations.coverage_kinds.primary_series,cMBWaVHxQUmXKxLgKD55A5,__
-2022-11-23T09:37:10.395Z,delete,common.vaccinations.coverage_kinds.fully_basisserie,cMBWaVHxQUmXKxLgJyJ8aT,__

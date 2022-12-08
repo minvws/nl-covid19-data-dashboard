@@ -1,5 +1,6 @@
 import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import { middleOfDayInSeconds } from '@corona-dashboard/common';
 import { useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
@@ -99,8 +100,8 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
       .map((event) => ({
         title: event[`message_title_${locale}`],
         description: event[`message_desc_${locale}`],
-        start: event.date_start_unix,
-        end: event.date_end_unix,
+        start: middleOfDayInSeconds(event.date_start_unix),
+        end: middleOfDayInSeconds(event.date_end_unix),
       }));
 
     return { currentTimelineEvents };
