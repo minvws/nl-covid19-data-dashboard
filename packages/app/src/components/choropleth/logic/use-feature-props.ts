@@ -5,11 +5,7 @@ import { DataConfig, DataOptions } from '..';
 import { ChoroplethDataItem } from './types';
 
 type GetFeatureProp<T = string> = (code: string) => T;
-type GetHoverFeatureProp<T = string> = (
-  code: string,
-  isActivated?: boolean,
-  isKeyboardActive?: boolean
-) => T;
+type GetHoverFeatureProp<T = string> = (code: string, isActivated?: boolean, isKeyboardActive?: boolean) => T;
 
 export type FeatureProps = {
   /**
@@ -39,7 +35,7 @@ type FeaturePropFunctions = {
 
 export const DEFAULT_STROKE_WIDTH = 0.5;
 
-export const DEFAULT_HOVER_STROKE_WIDTH = 3;
+export const DEFAULT_HOVER_STROKE_WIDTH = 6;
 
 /**
  * This hook returns the visual props for the map features based on the specified map type.
@@ -60,10 +56,7 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
   dataOptions: DataOptions,
   dataConfig: DataConfig<T>
 ): FeatureProps {
-  return useMemo(
-    () => getFeatureProps(map, getFillColor, dataOptions, dataConfig),
-    [map, getFillColor, dataOptions, dataConfig]
-  );
+  return useMemo(() => getFeatureProps(map, getFillColor, dataOptions, dataConfig), [map, getFillColor, dataOptions, dataConfig]);
 }
 
 export function getFeatureProps<T extends ChoroplethDataItem>(
@@ -83,38 +76,17 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
           strokeWidth: () => dataConfig.areaStrokeWidth,
         },
         hover: {
-          fill: (_code: string, isHover?: boolean) =>
-            isHover ? dataConfig.hoverFill : 'none',
+          fill: (_code: string) => getFillColor(_code),
           stroke:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? (
-                  _code: string,
-                  isActivated?: boolean,
-                  isKeyboardActive?: boolean
-                ) =>
-                  isActivated
-                    ? isKeyboardActive
-                      ? dataConfig.highlightStroke
-                      : dataConfig.hoverStroke
-                    : 'none'
+              ? (_code: string, isActivated?: boolean, isKeyboardActive?: boolean) =>
+                  isActivated ? (isKeyboardActive ? dataConfig.highlightStroke : dataConfig.hoverStroke) : 'none'
               : (code: string, isActivated?: boolean) =>
-                  code === dataOptions.selectedCode
-                    ? isActivated
-                      ? dataConfig.hoverStroke
-                      : dataConfig.highlightStroke
-                    : isActivated
-                    ? dataConfig.hoverStroke
-                    : 'none',
+                  code === dataOptions.selectedCode ? (isActivated ? dataConfig.hoverStroke : dataConfig.highlightStroke) : isActivated ? dataConfig.hoverStroke : 'none',
           strokeWidth:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? (_code: string, isActivated?: boolean) =>
-                  isActivated ? dataConfig.hoverStrokeWidth : 0
-              : (code: string, isActivated?: boolean) =>
-                  code === dataOptions.selectedCode
-                    ? dataConfig.highlightStrokeWidth
-                    : isActivated
-                    ? dataConfig.hoverStrokeWidth
-                    : 0,
+              ? (_code: string, isActivated?: boolean) => (isActivated ? dataConfig.hoverStrokeWidth : 0)
+              : (code: string, isActivated?: boolean) => (code === dataOptions.selectedCode ? dataConfig.highlightStrokeWidth : isActivated ? dataConfig.hoverStrokeWidth : 0),
         },
         outline: {
           fill: () => 'transparent',
@@ -133,19 +105,10 @@ export function getFeatureProps<T extends ChoroplethDataItem>(
           strokeWidth: () => dataConfig.areaStrokeWidth,
         },
         hover: {
-          fill: () => 'none',
-          stroke: (
-            _code: string,
-            isActivated?: boolean,
-            isKeyboardActive?: boolean
-          ) =>
-            isActivated
-              ? isKeyboardActive
-                ? dataConfig.highlightStroke
-                : dataConfig.hoverStroke
-              : 'none',
-          strokeWidth: (_code: string, isActivated?: boolean) =>
-            isActivated ? dataConfig.hoverStrokeWidth : 0,
+          fill: (_code: string) => getFillColor(_code),
+          stroke: (_code: string, isActivated?: boolean, isKeyboardActive?: boolean) =>
+            isActivated ? (isKeyboardActive ? dataConfig.highlightStroke : dataConfig.hoverStroke) : 'none',
+          strokeWidth: (_code: string, isActivated?: boolean) => (isActivated ? dataConfig.hoverStrokeWidth : 0),
         },
         outline: {
           fill: () => 'none',

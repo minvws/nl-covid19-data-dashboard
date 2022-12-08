@@ -16,6 +16,8 @@ import { PageLinks } from './components/page-links';
 import { WarningTile } from '~/components/warning-tile';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { useIntl } from '~/intl';
+import { colors } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 
 interface InformationBlockProps {
   title?: string;
@@ -57,18 +59,12 @@ export function PageInformationBlock({
   onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
-  const showArchivedToggleButton =
-    typeof isArchivedHidden !== 'undefined' &&
-    typeof onToggleArchived !== 'undefined';
+  const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
-      <Metadata
-        {...metadata}
-        accessibilitySubject={title}
-        referenceLink={referenceLink}
-      />
+      <Metadata {...metadata} accessibilitySubject={title} referenceLink={referenceLink} />
     </MetadataBox>
   ) : null;
 
@@ -86,22 +82,8 @@ export function PageInformationBlock({
 
   return (
     <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
-      {title && (
-        <Header
-          icon={icon}
-          title={title}
-          category={category}
-          screenReaderCategory={screenReaderCategory}
-        />
-      )}
-      {scopedWarning && (
-        <WarningTile
-          variant="emphasis"
-          message={scopedWarning}
-          icon={Warning}
-          isFullWidth
-        />
-      )}
+      {title && <Header icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
+      {scopedWarning && <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />}
 
       {description && (
         <Tile hasTitle={!!title}>
@@ -139,15 +121,9 @@ export function PageInformationBlock({
           </Box>
           <Box my={3}>
             {showArchivedToggleButton && (
-              <Button
-                type="button"
-                onClick={onToggleArchived}
-                isActive={isArchivedHidden}
-              >
-                {!isArchivedHidden
-                  ? commonTexts.common.show_archived
-                  : commonTexts.common.hide_archived}
-              </Button>
+              <StyledArchiveButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
+                {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
+              </StyledArchiveButton>
             )}
           </Box>
         </Tile>
@@ -172,14 +148,28 @@ const MetadataBox = styled.div(
   })
 );
 
-const Button = styled.button<{ isActive?: boolean }>(({ isActive }) =>
-  css({
-    bg: !isActive ? 'blue8' : 'transparent',
-    border: 'none',
-    borderRadius: '5px',
-    color: !isActive ? 'white' : 'blue8',
-    px: !isActive ? 3 : 0,
-    py: !isActive ? 12 : 0,
-    cursor: 'pointer',
-  })
-);
+interface StyledArchiveButtonProps {
+  isActive?: boolean;
+}
+
+const StyledArchiveButton = styled.button<StyledArchiveButtonProps>`
+  background: ${({ isActive }) => (isActive ? colors.blue1 : colors.white)};
+  border: ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  color: ${({ isActive }) => (isActive ? colors.blue8 : colors.blue8)};
+  cursor: pointer;
+  min-height: 36px;
+  padding: 12px ${space[3]};
+
+  &:hover {
+    background: ${colors.blue8};
+    color: ${colors.white};
+    border-color: ${colors.transparent};
+  }
+
+  &:hover:focus-visible {
+    outline: 2px dotted ${colors.magenta3};
+  }
+`;
