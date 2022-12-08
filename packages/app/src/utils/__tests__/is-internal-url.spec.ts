@@ -20,7 +20,7 @@ IsInternalUrl('returns true for Corona Dashboard absolute urls', () => {
 });
 
 IsInternalUrl('returns true for Corona Dashboard anchor links', () => {
-  const href = '#';
-  assert.ok(isInternalUrl(href));
+  const url = '#';
+  assert.ok(isInternalUrl(url));
 });
 IsInternalUrl.run();
