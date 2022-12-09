@@ -3,8 +3,5 @@
  * @returns boolean
  */
 export function isTouchDevice() {
-  return (
-    typeof window !== 'undefined' &&
-    window.matchMedia('(pointer: coarse)').matches
-  );
+  return typeof window !== 'undefined' && ('ontouchstart' in window || window.navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches);
 }
