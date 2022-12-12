@@ -33,7 +33,7 @@
     "d3-geo": "^3.0.1",
     "d3-scale": "3.3.0",
     "date-fns": "^2.27.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "flat": "^5.0.2",
     "framer-motion": "^5.3.3",
     "geojson": "^0.5.0",
