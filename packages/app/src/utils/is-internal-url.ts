@@ -4,7 +4,7 @@
  */
 export function isInternalUrl(url: string) {
   const regExAnchor = new RegExp('^(#)');
-  const regExInternal = new RegExp('^(/)[^/]');
+  const regExInternal = new RegExp('^(/)[^/]|^(/)$');
   const regExInternalBaseDomain = new RegExp('^((https?://)?coronadashboard.rijskoverheid.nl)');
   const regExInternalEnglishDomain = new RegExp('^((https?://)?coronadashboard.government.nl)');
   const regExInternalShortDomain = new RegExp('^(((https?://(www.)?)?|www.)coronadashboard.nl)');
