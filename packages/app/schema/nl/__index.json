@@ -32,7 +32,7 @@
     "nursing_home",
     "proto_name",
     "reproduction",
-    "selftest_overall",
+    "self_test_overall",
     "sewer",
     "tested_ggd",
     "tested_ggd_archived",
@@ -242,6 +242,9 @@
     },
     "variants": {
       "$ref": "variants.json"
+    },
+    "self_test_overall": {
+      "$ref": "self_test_overall.json"
     }
   },
   "$defs": {
