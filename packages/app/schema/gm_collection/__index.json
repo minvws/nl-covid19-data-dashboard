@@ -29,36 +29,40 @@
     },
     "hospital_nice": {
       "type": "array",
-      "maxItems": 344,
+      "minItems": 342,
+      "maxItems": 342,
       "items": {
         "$ref": "hospital_nice.json"
       }
     },
     "hospital_nice_choropleth": {
       "type": "array",
-      "maxItems": 344,
+      "minItems": 342,
+      "maxItems": 342,
       "items": {
         "$ref": "hospital_nice.json"
       }
     },
     "tested_overall": {
       "type": "array",
-      "maxItems": 344,
+      "minItems": 342,
+      "maxItems": 342,
       "items": {
         "$ref": "tested_overall.json"
       }
     },
     "sewer": {
       "type": "array",
-      "maxItems": 344,
+      "minItems": 342,
+      "maxItems": 342,
       "items": {
         "$ref": "sewer.json"
       }
     },
     "vaccine_coverage_per_age_group": {
       "type": "array",
-      "minItems": 688,
-      "maxItems": 688,
+      "minItems": 684,
+      "maxItems": 684,
       "items": {
         "$ref": "vaccine_coverage_per_age_group.json"
       }
