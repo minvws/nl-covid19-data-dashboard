@@ -14,6 +14,7 @@ import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, Ref, useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { fontSizes } from '~/style/theme';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../logic';
@@ -197,10 +198,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   /**
    * Using anchor middle the line marker label will fall nicely on top
-   * of the axis label.
-   *
-   * The only times at which we can not use middle is if we are
-   * rendering a year in the label, because it becomes too long.
+   * of the axis label. This will only happen for labels which are not the first or last label.
    */
   const getAnchor = (x: NumberValue) => {
     return x === tickValues[0] && isLongStartLabel ? (tickValues.length === 1 ? 'middle' : 'start') : x === tickValues[tickValues.length - 1] ? 'end' : 'middle';
@@ -241,7 +239,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         rangePadding={xRangePadding}
         tickLabelProps={(x) => ({
           fill: colors.gray6,
-          fontSize: 12,
+          fontSize: fontSizes[0],
           /**
            * Applying a dx of -50%, when there's only a single tick value, prevents
            * the tick to go out of bounds and centers the tick value relative to the graph.
@@ -274,7 +272,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
               tickFormat={formatYTickValue ? formatYTickValue : isPercentage ? formatYAxisPercentage : formatYAxis}
               tickLabelProps={() => ({
                 fill: colors.gray6,
-                fontSize: 12,
+                fontSize: fontSizes[0],
                 textAnchor: 'end',
                 verticalAnchor: 'middle',
               })}
@@ -300,7 +298,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
             tickFormat={formatYTickValue ? formatYTickValue : isPercentage ? formatYAxisPercentage : formatYAxis}
             tickLabelProps={() => ({
               fill: colors.gray6,
-              fontSize: 12,
+              fontSize: fontSizes[0],
               textAnchor: 'start',
               // position the label above the chart
               dx: 10,
