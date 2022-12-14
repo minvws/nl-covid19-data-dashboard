@@ -113,13 +113,12 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
     [options]
   );
 
-  const timeframeOptionsWithoutOneWeek = TimeframeOptionsList.filter((option) => option !== TimeframeOption.ONE_WEEK);
-
-  const timeframeOptionsToUse = !vrNameOrGmName ? TimeframeOptionsList : timeframeOptionsWithoutOneWeek;
+  const timeframeOptionsVrOrGm = TimeframeOptionsList.filter((timeframeOption) => timeframeOption !== TimeframeOption.ONE_WEEK);
+  const timeframeOptions = vrNameOrGmName ? timeframeOptionsVrOrGm : TimeframeOptionsList;
 
   return (
     <ChartTile
-      timeframeOptions={timeframeOptionsToUse}
+      timeframeOptions={timeframeOptions}
       title={text.title}
       metadata={{
         source: text.source,
