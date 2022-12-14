@@ -1,7 +1,5 @@
-import { Rule } from '~/sanity';
-import { THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
 import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
-import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
+import { REQUIRED } from '../../validation';
 import { BsFillFileBarGraphFill } from 'react-icons/bs';
 
 export const thermometerLevel = {
@@ -18,7 +16,7 @@ export const thermometerLevel = {
         list: SEVERITY_LEVELS_LIST,
         layout: 'dropdown',
       },
-      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
+      validation: REQUIRED,
     },
     {
       title: 'Stand naam',

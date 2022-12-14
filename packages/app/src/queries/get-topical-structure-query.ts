@@ -1,5 +1,6 @@
-import { ThermometerTimelineEvent } from './query-types';
+import { ThermometerLevel, ThermometerTimelineEvent } from './query-types';
 import { SeverityIndicatorTimelineEventConfig } from '~/components/severity-indicator-tile/components/timeline/timeline';
+import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 
 export function getTopicalStructureQuery(locale: string) {
   const query = `// groq
@@ -106,11 +107,17 @@ export function getTopicalStructureQuery(locale: string) {
   return query;
 }
 
-export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[]) => {
+export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[], thermometerLevels: ThermometerLevel[]) => {
+  // 1. USE thermometerEvent.level TO FIND level IN thermometerLevels
+  // 2. USE level TO REFERENCE level.title AND level.description
+
   return thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => {
+    // STEP 1 GOES HERE
+    const currentLevel = thermometerLevels?.find((thermometerLevel) => thermometerLevel.level === (thermometerEvent.level as SeverityLevel));
+
     return {
-      title: thermometerEvent.title,
-      description: thermometerEvent.description,
+      title: currentLevel?.label ?? thermometerEvent.title, // STEP 2.1 - title
+      description: currentLevel?.description ?? thermometerEvent.description, // STEP 2.2 - description
       level: thermometerEvent.level,
       start: new Date(thermometerEvent.date).getTime() / 1000,
       end: new Date(thermometerEvent.dateEnd).getTime() / 1000,

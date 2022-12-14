@@ -1,10 +1,6 @@
+import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
 import { isDefined } from 'ts-is-present';
-import { Rule } from '~/sanity';
-import { localeStringValidation } from '../../language/locale-validation';
-
-import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
-
-import { THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
+import { REQUIRED } from '../../validation';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -14,22 +10,14 @@ export const thermometerTimelineEvent = {
   title: 'Thermometer tijdlijn gebeurtenis',
   fields: [
     {
-      title: 'Titel',
-      name: 'title',
-      type: 'localeString',
-      validation: localeStringValidation((rule) => rule.required().max(60).error('Titels zijn gelimiteerd tot maximaal 60 tekens')),
-    },
-    {
-      title: 'Omschrijving',
-      name: 'description',
-      type: 'localeText',
-      validation: REQUIRED,
-    },
-    {
       title: 'Level',
       name: 'level',
       type: 'number',
-      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
+      options: {
+        list: SEVERITY_LEVELS_LIST,
+        layout: 'dropdown',
+      },
+      validation: REQUIRED,
     },
     {
       title: 'Datum',
