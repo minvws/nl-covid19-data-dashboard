@@ -12,6 +12,7 @@ import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
@@ -103,7 +104,7 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
         .map((option) => ({
           ...option,
           content: (
-            <Box pr={2}>
+            <Box paddingRight={space[2]}>
               <Text>{option.label}</Text>
             </Box>
           ),
@@ -127,7 +128,7 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
       onSelectTimeframe={setSewerTimeframe}
     >
       {dataPerInstallation && (
-        <Box alignSelf="flex-start" mb={3} minWidth={207}>
+        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth={207}>
           <RichContentSelect
             label={text.selectPlaceholder}
             visuallyHiddenLabel
@@ -138,7 +139,7 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
         </Box>
       )}
       {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (
-        <Box mt={2} mb={4}>
+        <Box marginTop={space[2]} marginBottom={space[4]}>
           <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />
         </Box>
       )}
