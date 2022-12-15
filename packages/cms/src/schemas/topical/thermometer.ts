@@ -58,8 +58,8 @@ export const thermometer = {
       type: 'localeString',
     },
     {
-      title: 'Huidige stand omschrijvig',
-      description: 'De omschrijving spcifiek voor de huidige thermometer stand bij de trendIcon',
+      title: 'Huidige stand omschrijving',
+      description: 'De omschrijving specifiek voor de huidige thermometer stand bij de trendIcon',
       name: 'levelDescription',
       type: 'localeText',
       validation: REQUIRED,
