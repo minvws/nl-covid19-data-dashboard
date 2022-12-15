@@ -1141,7 +1141,8 @@ export interface NlSelfTestOverall {
 }
 export interface NlSelfTestOverallValue {
   infected_percentage_moving_average: number | null;
-  date_unix: number;
+  date_range_start_unix: number;
+  date_range_end_unix: number;
   date_of_insertion_unix: number;
 }
 

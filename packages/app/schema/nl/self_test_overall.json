@@ -23,14 +23,17 @@
         "infected_percentage_moving_average": {
           "type": ["number", "null"]
         },
-        "date_unix": {
+        "date_range_start_unix": {
+          "type": "integer"
+        },
+        "date_range_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
         }
       },
-      "required": ["infected_percentage_moving_average", "date_unix", "date_of_insertion_unix"],
+      "required": ["infected_percentage_moving_average", "date_range_start_unix", "date_range_end_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }
