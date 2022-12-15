@@ -21,43 +21,18 @@ type VariantsStackedAreaTileText = {
   variantCodes: SiteText['common']['variant_codes'];
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
-interface VariantsStackedAreaTileProps {
-  text: VariantsStackedAreaTileText;
-  values?: VariantChartValue[] | null;
-  variantColors: ColorMatch[];
-  metadata: MetadataProps;
-  children?: ReactNode;
-  noDataMessage?: ReactNode;
-}
-
-export const VariantsStackedAreaTile = ({ values, variantColors, metadata, children = null, noDataMessage = '', text }: VariantsStackedAreaTileProps) => {
-  if (!isPresent(values)) {
-    return (
-      <ChartTile title={text.titel} description={text.toelichting} metadata={metadata}>
-        {children}
-        <NoDataBox>{noDataMessage}</NoDataBox>
-      </ChartTile>
-    );
-  }
-
-  return (
-    <VariantStackedAreaTileWithData text={text} values={values} metadata={metadata} variantColors={variantColors}>
-      {children}
-    </VariantStackedAreaTileWithData>
-  );
-};
-
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
-interface VariantStackedAreaTileWithDataProps {
+interface VariantsStackedAreaTileProps {
   text: VariantsStackedAreaTileText;
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
   children?: ReactNode;
+  noDataMessage?: ReactNode;
 }
 
-const VariantStackedAreaTileWithData = ({ text, values, variantColors, metadata, children = null }: VariantStackedAreaTileWithDataProps) => {
+export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, children = null, noDataMessage = '' }: VariantsStackedAreaTileProps) => {
   const [variantTimeframe, setVariantTimeframe] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
@@ -77,6 +52,15 @@ const VariantStackedAreaTileWithData = ({ text, values, variantColors, metadata,
       color: 'black',
       label: text.lagere_betrouwbaarheid,
     });
+  }
+
+  if (!isPresent(values)) {
+    return (
+      <ChartTile title={text.titel} description={text.toelichting} metadata={metadata}>
+        {children}
+        <NoDataBox>{noDataMessage}</NoDataBox>
+      </ChartTile>
+    );
   }
 
   return (
