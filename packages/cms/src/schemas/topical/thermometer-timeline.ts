@@ -28,7 +28,7 @@ export const thermometerTimeline = {
     {
       title: 'Tooltip label',
       name: 'tooltipCurrentEstimationLabel',
-      type: 'localeString',
+      type: 'localeText',
       validation: REQUIRED,
     },
     {
