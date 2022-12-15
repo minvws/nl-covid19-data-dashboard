@@ -24,7 +24,7 @@ export function PageLinks({ links }: pageLinksProps) {
   const combinedAriaLabel = (title: string) => `${commonTexts.informatie_header.external_link}. ${title}`;
 
   return (
-    <Box spacing={2} pt={3}>
+    <Box spacing={2} pt={space[3]}>
       <BoldText>{commonTexts.informatie_header.handige_links}</BoldText>
       <OrderedList>
         {links.map((link, index) => (
