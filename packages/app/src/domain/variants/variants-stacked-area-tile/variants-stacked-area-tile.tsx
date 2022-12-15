@@ -21,14 +21,14 @@ type VariantsStackedAreaTileText = {
   variantCodes: SiteText['common']['variant_codes'];
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
-type VariantsStackedAreaTileProps = {
+interface VariantsStackedAreaTileProps {
   text: VariantsStackedAreaTileText;
   values?: VariantChartValue[] | null;
   variantColors: ColorMatch[];
   metadata: MetadataProps;
   children?: ReactNode;
   noDataMessage?: ReactNode;
-};
+}
 
 export const VariantsStackedAreaTile = ({ values, variantColors, metadata, children = null, noDataMessage = '', text }: VariantsStackedAreaTileProps) => {
   if (!isPresent(values)) {
@@ -49,13 +49,13 @@ export const VariantsStackedAreaTile = ({ values, variantColors, metadata, child
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
-type VariantStackedAreaTileWithDataProps = {
+interface VariantStackedAreaTileWithDataProps {
   text: VariantsStackedAreaTileText;
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
   children?: ReactNode;
-};
+}
 
 const VariantStackedAreaTileWithData = ({ text, values, variantColors, metadata, children = null }: VariantStackedAreaTileWithDataProps) => {
   const [variantTimeframe, setVariantTimeframe] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
