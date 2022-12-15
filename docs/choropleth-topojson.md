@@ -114,7 +114,7 @@ Simplifying:
 2. Do for each layer:
    - Select the layer and open the console; simplify using the following command: $ -simplify 27.5%
 3. When all the layers are simplified export to TopoJSON > `nl-vr-gm.topo.json`
-4. Add the new data file to the project at `packages/app/pages/api/topo-json`.
+4. Add the new data file to the project at `packages/app/src/pages/api/topo-json`.
 5. Update the file `topology.ts`, if necessary. (located at `packages/app/src/pages/api/choropleth`)
 
 ### Example of the topology.ts file
