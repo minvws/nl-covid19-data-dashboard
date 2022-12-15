@@ -108,17 +108,13 @@ export function getTopicalStructureQuery(locale: string) {
 }
 
 export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[], thermometerLevels: ThermometerLevel[]) => {
-  // 1. USE thermometerEvent.level TO FIND level IN thermometerLevels
-  // 2. USE level TO REFERENCE level.title AND level.description
-
   return thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => {
-    // STEP 1 GOES HERE
-    const currentLevel = thermometerLevels?.find((thermometerLevel) => thermometerLevel.level === (thermometerEvent.level as SeverityLevel));
+    const levelDetails = thermometerLevels.find((thermometerLevel) => thermometerLevel.level === (thermometerEvent.level as SeverityLevel)) as ThermometerLevel;
 
     return {
-      title: currentLevel?.label ?? thermometerEvent.title, // STEP 2.1 - title
-      description: currentLevel?.description ?? thermometerEvent.description, // STEP 2.2 - description
-      level: thermometerEvent.level,
+      title: levelDetails.label,
+      description: levelDetails.description,
+      level: levelDetails.level,
       start: new Date(thermometerEvent.date).getTime() / 1000,
       end: new Date(thermometerEvent.dateEnd).getTime() / 1000,
     };
