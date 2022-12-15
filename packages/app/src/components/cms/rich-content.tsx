@@ -22,7 +22,7 @@ import { nestedHtml } from '~/style/preset';
 import { asResponsiveArray } from '~/style/utils';
 import { ImageBlock, InlineAttachment, InlineCollapsibleList, InlineLink, RichContentImageBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { Heading } from '../typography';
@@ -251,17 +251,17 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
 
   if (!mark.href) return <>{children}</>;
 
-  return isAbsoluteUrl(mark.href) ? (
-    <ExternalLink href={mark.href} underline>
-      {children}
-      <ExternalLinkIcon width={20} height={11} />
-    </ExternalLink>
-  ) : (
+  return isInternalUrl(mark.href) ? (
     <Link href={mark.href} passHref locale={locale}>
       <a css={css({ textDecoration: 'underline' })}>
         {children} <ChevronRight width={10} height={10} />
       </a>
     </Link>
+  ) : (
+    <ExternalLink href={mark.href} underline>
+      {children}
+      <ExternalLinkIcon width={20} height={11} />
+    </ExternalLink>
   );
 }
 

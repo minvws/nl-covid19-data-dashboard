@@ -6,7 +6,7 @@ import { PublicationDate } from '~/components/publication-date';
 import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { ImageBlock } from '~/types/cms';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { isInternalUrl } from '~/utils/is-internal-url';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export interface ContentTeaserProps {
@@ -21,34 +21,14 @@ export interface ContentTeaserProps {
   text: SiteText['pages']['topical_page']['shared'];
 }
 
-export function ContentTeaser({
-  title,
-  slug,
-  cover,
-  category,
-  publicationDate,
-  variant = 'normal',
-  isWeeklyHighlight,
-  isArticle,
-  text,
-}: ContentTeaserProps) {
+export function ContentTeaser({ title, slug, cover, category, publicationDate, variant = 'normal', isWeeklyHighlight, isArticle, text }: ContentTeaserProps) {
   const breakpoints = useBreakpoints(true);
   const imageWidth = variant === 'normal' ? (breakpoints.sm ? 186 : 90) : 90;
 
   return (
-    <Box
-      display="flex"
-      spacingHorizontal={3}
-      width="100%"
-      alignItems="center"
-      pr={3}
-    >
+    <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" pr={3}>
       <Box maxWidth={imageWidth} width="100%">
-        <BackgroundImage
-          image={cover}
-          height={variant === 'normal' ? (breakpoints.sm ? 108 : 66) : 66}
-          sizes={[[imageWidth]]}
-        />
+        <BackgroundImage image={cover} height={variant === 'normal' ? (breakpoints.sm ? 108 : 66) : 66} sizes={[[imageWidth]]} />
       </Box>
       <Box maxWidth="25rem" spacing={publicationDate || category ? 2 : 0}>
         <Text variant="overline2" color="gray7">
@@ -62,15 +42,7 @@ export function ContentTeaser({
           )}
         </Text>
         <HeadingLinkWithIcon
-          href={
-            isAbsoluteUrl(slug)
-              ? slug
-              : isWeeklyHighlight
-              ? `/weekberichten/${slug}`
-              : isArticle
-              ? `/artikelen/${slug}`
-              : slug
-          }
+          href={!isInternalUrl(slug) ? slug : isWeeklyHighlight ? `/weekberichten/${slug}` : isArticle ? `/artikelen/${slug}` : slug}
           icon={<ArrowIconRight />}
           iconPlacement="right"
           underline
