@@ -5,7 +5,7 @@
  */
 
 export function isInternalUrl(url: string) {
-  const totalRegEx = new RegExp('(^(#))|(^(/)[^/]|^(/)$)|(^(((https?://(www.)?)?|www.)coronadashboard(.rijskoverheid|.government)?.nl))');
+  const totalRegEx = new RegExp('(^(#))|(^(/)[^/]|^(/)$)|(^(((https?://(www.)?)?|www.)coronadashboard(.rijksoverheid|.government)?.nl))');
 
   return totalRegEx.test(url);
 }
