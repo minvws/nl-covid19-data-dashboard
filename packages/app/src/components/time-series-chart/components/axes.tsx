@@ -121,7 +121,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   const formatYAxisPercentage: TickFormatter<NumberValue> = useCallback((y: NumberValue) => `${formatPercentage(y as number)}%`, [formatPercentage]);
 
   if (!isPresent(xTickNumber)) {
-    const preferredDateTicks = breakpoints.sm ? (timeframe === 'all' ? (hasDatesAsRange ? 6 : 4) : hasDatesAsRange ? 5 : 3) : hasDatesAsRange ? 3 : 2;
+    const preferredDateTicks: number = breakpoints.sm ? (timeframe === 'all' ? (hasDatesAsRange ? 6 : 4) : hasDatesAsRange ? 5 : 3) : hasDatesAsRange ? 3 : 2;
     const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
     xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
   }
@@ -176,13 +176,6 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   );
 
   /**
-   * Long labels (like the ones including a year, are too long to be positioned
-   * centered on the x-axis tick. Usually a short date has a 2 digit number plus
-   * a space plus a three character month, which makes 6.
-   */
-  const isLongStartLabel = xTicks[0].length > 6;
-
-  /**
    * We make an exception for the situation where all the values in the chart are zero.
    * In that case the top range has been set to zero, but we want to draw exactly
    * two gridlines in this case (at the top and bottom of the chart). So therefore we
@@ -201,7 +194,19 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
    * of the axis label. This will only happen for labels which are not the first or last label.
    */
   const getAnchor = (x: NumberValue) => {
-    return x === tickValues[0] && isLongStartLabel ? (tickValues.length === 1 ? 'middle' : 'start') : x === tickValues[tickValues.length - 1] ? 'end' : 'middle';
+    const isLongStartLabel = xTicks[0].length > 6;
+    const isFirstTick = x === tickValues[0];
+    const isLastTick = x === tickValues[tickValues.length - 1];
+
+    if (isFirstTick && isLongStartLabel && tickValues.length !== 1) {
+      return 'start';
+    }
+
+    if (isLastTick) {
+      return 'end';
+    }
+
+    return 'middle';
   };
 
   return (
