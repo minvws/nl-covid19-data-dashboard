@@ -1,10 +1,4 @@
-import {
-  colors,
-  NlReproduction,
-  NlReproductionValue,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, NlReproduction, NlReproductionValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { last } from 'lodash';
 import { isPresent } from 'ts-is-present';
@@ -35,8 +29,7 @@ export function ReproductionChartTile({
    * display in the chart
    */
 
-  const [reproductionTimeframe, setReproductionTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [reproductionTimeframe, setReproductionTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const values = data.values.slice(
     0,
@@ -68,14 +61,14 @@ export function ReproductionChartTile({
             metricProperty: 'index_average',
             label: text.lineLegendLabel,
             color: colors.primary,
-            minimumRange:
-              metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
+            minimumRange: metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
           },
         ]}
         dataOptions={{
           timelineEvents,
         }}
         numGridLines={reproductionTimeframe === TimeframeOption.ALL ? 4 : 3}
+        forceLegend
       />
     </ChartTile>
   );
