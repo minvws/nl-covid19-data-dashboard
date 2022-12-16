@@ -4,30 +4,14 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import {
-  getVariantChartData,
-  getVariantOrderColors,
-  getVariantTableData,
-} from '~/domain/variants/static-props';
+import { getVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  getArticleParts,
-  getLinkParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  selectNlData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -43,8 +27,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   selectNlData('variants', 'named_difference'),
   getLastGeneratedDate,
   () => {
@@ -57,19 +40,13 @@ export const getStaticProps = createGetStaticProps(
     const variantColors = getVariantOrderColors(variants);
 
     return {
-      ...getVariantTableData(
-        variants,
-        data.selectedNlData.named_difference,
-        variantColors
-      ),
+      ...getVariantTableData(variants, data.selectedNlData.named_difference, variantColors),
       ...getVariantChartData(variants),
       variantColors,
     };
   },
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts | LinkParts>
-    >(() => getPagePartsQuery('variants_page'))(context);
+    const { content } = await createGetContent<PagePartQueryResult<ArticleParts | LinkParts>>(() => getPagePartsQuery('variants_page'))(context);
 
     return {
       content: {
@@ -80,23 +57,11 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-export default function CovidVariantenPage(
-  props: StaticProps<typeof getStaticProps>
-) {
-  const {
-    pageText,
-    selectedNlData: data,
-    lastGenerated,
-    content,
-    variantTable,
-    variantChart,
-    variantColors,
-    dates,
-  } = props;
+export default function CovidVariantenPage(props: StaticProps<typeof getStaticProps>) {
+  const { pageText, selectedNlData: data, lastGenerated, content, variantTable, variantChart, variantColors, dates } = props;
 
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -111,9 +76,7 @@ export default function CovidVariantenPage(
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
             screenReaderCategory={commonTexts.sidebar.metrics.variants.title}
             title={textNl.titel}
             icon={<Varianten aria-hidden="true" />}
@@ -132,19 +95,21 @@ export default function CovidVariantenPage(
             articles={content.articles}
           />
 
-          <VariantsStackedAreaTile
-            text={{
-              ...textNl.varianten_over_tijd_grafiek,
-              variantCodes: commonTexts.variant_codes,
-            }}
-            values={variantChart}
-            variantColors={variantColors}
-            metadata={{
-              datumsText: textNl.datums,
-              date: getLastInsertionDateOfPage(data, ['variants']),
-              source: textNl.bronnen.rivm,
-            }}
-          />
+          {variantChart && (
+            <VariantsStackedAreaTile
+              text={{
+                ...textNl.varianten_over_tijd_grafiek,
+                variantCodes: commonTexts.variant_codes,
+              }}
+              values={variantChart}
+              variantColors={variantColors}
+              metadata={{
+                datumsText: textNl.datums,
+                date: getLastInsertionDateOfPage(data, ['variants']),
+                source: textNl.bronnen.rivm,
+              }}
+            />
+          )}
 
           <VariantsTableTile
             data={variantTable}
