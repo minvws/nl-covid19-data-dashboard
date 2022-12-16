@@ -1,10 +1,4 @@
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxPopover,
-} from '@reach/combobox';
+import { Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 import css from '@styled-system/css';
 import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
@@ -26,7 +20,6 @@ type TProps<Option extends TOption> = {
   options: Option[];
   placeholder: string;
   onSelect: (option: Option) => void;
-  sorter?: (a: Option, b: Option) => number;
   selectedOption?: Option;
 };
 
@@ -69,15 +62,10 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
     if (event.isDefaultPrevented() || !container) return;
 
     window.requestAnimationFrame(() => {
-      const element: HTMLInputElement | null = container.querySelector(
-        '[aria-selected=true]'
-      );
+      const element: HTMLInputElement | null = container.querySelector('[aria-selected=true]');
       if (element) {
         const top = element.offsetTop - container.scrollTop; // Calculate the space between active element and top of the list
-        const bottom =
-          container.scrollTop +
-          container.clientHeight -
-          (element.offsetTop + element.clientHeight); // Calculate the space between active element and bottom of the list
+        const bottom = container.scrollTop + container.clientHeight - (element.offsetTop + element.clientHeight); // Calculate the space between active element and bottom of the list
 
         if (bottom < 0) container.scrollTop -= bottom;
         if (top < 0) container.scrollTop += top;
@@ -85,9 +73,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
     });
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
   };
 
@@ -96,14 +82,9 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
       return;
     }
 
-    const option = options.find(
-      (option) => option.name === name || option.displayName === name
-    );
+    const option = options.find((option) => option.name === name || option.displayName === name);
 
-    assert(
-      option,
-      `[${ComboBox.name}:${handleSelect.name}] Failed to find option for name ${name}`
-    );
+    assert(option, `[${ComboBox.name}:${handleSelect.name}] Failed to find option for name ${name}`);
 
     props.onSelect(option);
 
@@ -124,21 +105,12 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   return (
     <Box role="search" css={css({ '[data-reach-combobox]': { px: 3, py: 4 } })}>
       <Combobox openOnFocus onSelect={handleSelect}>
-        <ComboboxInput
-          ref={inputRef}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-        />
+        <ComboboxInput ref={inputRef} onChange={handleInputChange} onKeyDown={handleKeyDown} placeholder={placeholder} />
         <ComboboxPopover>
           {results.length > 0 ? (
             <ComboboxList ref={containerRef}>
               {results.map((option, index) => (
-                <StyledComboboxOption
-                  key={`${index}-${option.name}`}
-                  value={option.displayName || option.name}
-                  $isSelectedOption={selectedOption?.name === option.name}
-                />
+                <StyledComboboxOption key={`${index}-${option.name}`} value={option.displayName || option.name} $isSelectedOption={selectedOption?.name === option.name} />
               ))}
             </ComboboxList>
           ) : (
@@ -151,10 +123,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   );
 };
 
-const useSearchedAndSortedOptions = <Option extends TOption>(
-  term: string,
-  options: Option[]
-): Option[] => {
+const useSearchedAndSortedOptions = <Option extends TOption>(term: string, options: Option[]): Option[] => {
   const throttledTerm = useThrottle(term, 100);
 
   return useMemo(
@@ -169,8 +138,7 @@ const useSearchedAndSortedOptions = <Option extends TOption>(
 const StyledComboboxOption = styled(ComboboxOption)<{
   $isSelectedOption: boolean; // Prevent prop to be rendered to the DOM by using Transient prop
 }>`
-  border-left: ${(x) =>
-    x.$isSelectedOption ? `5px solid ${x.theme.colors.blue8}` : '0'};
+  border-left: ${(x) => (x.$isSelectedOption ? `5px solid ${x.theme.colors.blue8}` : '0')};
 
   span:first-child {
     display: inline-block;
