@@ -1,18 +1,13 @@
 import { localPoint } from '@visx/event';
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { MouseEvent, useMemo } from 'react';
-import {
-  GetTooltipCoordinates,
-  TooltipCoordinates,
-} from '~/components/tooltip';
+import { GetTooltipCoordinates, TooltipCoordinates } from '~/components/tooltip';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
 import { AgeDemographicDefaultValue } from './types';
 
-export interface AgeDemographicCoordinates<
-  T extends AgeDemographicDefaultValue
-> {
+export interface AgeDemographicCoordinates<T extends AgeDemographicDefaultValue> {
   width: number;
   height: number;
   singleBarHeight: number;
@@ -37,9 +32,7 @@ export interface AgeDemographicCoordinates<
   axisWidth: number;
 }
 
-export function useAgeDemographicCoordinates<
-  T extends AgeDemographicDefaultValue
->(
+export function useAgeDemographicCoordinates<T extends AgeDemographicDefaultValue>(
   data: { values: T[] },
   rightMetricProperty: keyof T,
   leftMetricProperty: keyof T,
@@ -52,31 +45,13 @@ export function useAgeDemographicCoordinates<
   const isExtraSmallScreen = xs;
 
   const coordinates = useMemo(() => {
-    return calculateAgeDemographicCoordinates(
-      data,
-      rightMetricProperty,
-      leftMetricProperty,
-      isSmallScreen,
-      width,
-      isExtraSmallScreen,
-      maxDisplayValue
-    );
-  }, [
-    data,
-    rightMetricProperty,
-    leftMetricProperty,
-    isSmallScreen,
-    width,
-    isExtraSmallScreen,
-    maxDisplayValue,
-  ]);
+    return calculateAgeDemographicCoordinates(data, rightMetricProperty, leftMetricProperty, isSmallScreen, width, isExtraSmallScreen, maxDisplayValue);
+  }, [data, rightMetricProperty, leftMetricProperty, isSmallScreen, width, isExtraSmallScreen, maxDisplayValue]);
 
   return [ref, coordinates] as const;
 }
 
-function calculateAgeDemographicCoordinates<
-  T extends AgeDemographicDefaultValue
->(
+function calculateAgeDemographicCoordinates<T extends AgeDemographicDefaultValue>(
   data: { values: T[] },
   rightMetricProperty: keyof T,
   leftMetricProperty: keyof T,
@@ -93,15 +68,15 @@ function calculateAgeDemographicCoordinates<
   const singleBarHeight = 25;
 
   // Define the graph dimensions and margins
-  const axisWidth = isSmallScreen ? 60 : 100;
+  const axisWidth = 100;
   const width = parentWidth;
 
   // Height and top margin are higher for small screens to fit the heading texts
   const isNarrowScreen = parentWidth < 400;
   // Set height height according to amount of bars in chart.
-  const height = isNarrowScreen
-    ? 234 + singleBarHeight * barCount
-    : 214 + singleBarHeight * barCount;
+  const narrowScreenHeight = 234 + singleBarHeight * barCount;
+  const normalScreenHeight = 214 + singleBarHeight * barCount;
+  const height = isNarrowScreen ? narrowScreenHeight : normalScreenHeight;
   const marginX = isSmallScreen ? 10 : 40;
   const margin = {
     top: isNarrowScreen ? 55 : 35,
@@ -130,14 +105,7 @@ function calculateAgeDemographicCoordinates<
   // Scales to map between values and coordinates
 
   // The scales for bar sizing will use the same domain
-  const domainValues = [
-    0,
-    Math.max(
-      ...values.map((value) =>
-        Math.max(getLeftValue(value), getRightValue(value))
-      )
-    ),
-  ];
+  const domainValues = [0, Math.max(...values.map((value) => Math.max(getLeftValue(value), getRightValue(value))))];
 
   /**
    * If there's a `displayMaxPercentage`-prop we'll clip the domain to that value
@@ -171,18 +139,14 @@ function calculateAgeDemographicCoordinates<
 
   // Compose together the scale and accessor functions to get point functions
   // The any/any is needed as typing would be a-flexible; and without it Typescript would complain
-  const createPoint = (scale: any, accessor: any) => (value: T) =>
-    scale(accessor(value));
+  const createPoint = (scale: any, accessor: any) => (value: T) => scale(accessor(value));
   const leftPoint = createPoint(leftScale, getLeftValue);
   const rightPoint = createPoint(rightScale, getRightValue);
   const ageGroupRangePoint = createPoint(ageGroupRangeScale, ageGroupRange);
 
   // Method for the tooltip to retrieve coordinates based on
   // The event and/or the value
-  const getTooltipCoordinates: GetTooltipCoordinates<T> = (
-    value: T,
-    event?: MouseEvent<any>
-  ): TooltipCoordinates => {
+  const getTooltipCoordinates: GetTooltipCoordinates<T> = (value: T, event?: MouseEvent<any>): TooltipCoordinates => {
     const point = event ? localPoint(event) || { x: width } : { x: 0 };
 
     // On small screens and when using keyboard
@@ -198,11 +162,7 @@ function calculateAgeDemographicCoordinates<
         left = width / 2 + axisWidth / 2 + rightPoint(value) / 2;
       } else {
         // Align the top right of the tooltip with the middle of the age group percentage bar
-        left =
-          width / 2 -
-          axisWidth / 2 -
-          (xMax - leftPoint(value)) / 2 -
-          AGE_GROUP_TOOLTIP_WIDTH;
+        left = width / 2 - axisWidth / 2 - (xMax - leftPoint(value)) / 2 - AGE_GROUP_TOOLTIP_WIDTH;
       }
     }
 
