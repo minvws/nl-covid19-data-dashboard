@@ -1,13 +1,5 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
-import {
-  Coronavirus,
-  Gehandicaptenzorg,
-  Location,
-} from '@corona-dashboard/icons';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { Coronavirus, Gehandicaptenzorg, Location } from '@corona-dashboard/icons';
 import { useState } from 'react';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
@@ -26,26 +18,10 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  selectNlData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -56,8 +32,7 @@ const pageMetrics = ['disability_care'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   caterogyTexts: {
-    category:
-      siteText.common.sidebar.categories.consequences_for_healthcare.title,
+    category: siteText.common.sidebar.categories.consequences_for_healthcare.title,
     screenReaderCategory: siteText.common.sidebar.metrics.disabled_care.title,
   },
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -67,14 +42,9 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.disability_care__newly_infected_people',
-    'difference.disability_care__infected_locations_total',
-    'disability_care'
-  ),
+  selectNlData('difference.disability_care__newly_infected_people', 'difference.disability_care__infected_locations_total', 'disability_care'),
   createGetChoroplethData({
     vr: ({ disability_care }) => ({ disability_care }),
   }),
@@ -92,10 +62,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'disabilityCarePageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'disabilityCarePageArticles'),
         elements: content.elements,
       },
     };
@@ -103,26 +70,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    selectedNlData: data,
-    choropleth,
-    lastGenerated,
-    content,
-  } = props;
+  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
 
-  const [
-    disabilityCareConfirmedCasesTimeframe,
-    setDisabilityCareConfirmedCasesTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [
-    disabilityCareInfectedLocationsTimeframe,
-    setDisabilityCareInfectedLocationsTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
@@ -130,8 +84,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { caterogyTexts, metadataTexts, textNl } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { caterogyTexts, metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -170,14 +123,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.positief_geteste_personen.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="newly_infected_people"
-                absolute={lastValue.newly_infected_people}
-                difference={
-                  data.difference.disability_care__newly_infected_people
-                }
-                isAmount
-              />
+              <KpiValue data-cy="newly_infected_people" absolute={lastValue.newly_infected_people} difference={data.difference.disability_care__newly_infected_people} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -199,19 +145,13 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   type: 'line',
                   metricProperty: 'newly_infected_people_moving_average',
                   color: colors.primary,
-                  label:
-                    textNl.positief_geteste_personen
-                      .line_chart_newly_infected_people_moving_average,
-                  shortLabel:
-                    textNl.positief_geteste_personen
-                      .line_chart_newly_infected_people_moving_average_short_label,
+                  label: textNl.positief_geteste_personen.line_chart_newly_infected_people_moving_average,
+                  shortLabel: textNl.positief_geteste_personen.line_chart_newly_infected_people_moving_average_short_label,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'newly_infected_people',
-                  label:
-                    textNl.positief_geteste_personen
-                      .line_chart_legend_trend_label,
+                  label: textNl.positief_geteste_personen.line_chart_legend_trend_label,
                   color: colors.primary,
                 },
               ]}
@@ -220,20 +160,12 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: underReportedDateStart,
                     end: Infinity,
-                    label:
-                      textNl.positief_geteste_personen
-                        .line_chart_legend_inaccurate_label,
+                    label: textNl.positief_geteste_personen.line_chart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'newly_infected_people_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'disability_care',
-                  'newly_infected_people'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'disability_care', 'newly_infected_people'),
               }}
             />
           </ChartTile>
@@ -266,9 +198,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 data-cy="infected_locations_total"
                 absolute={lastValue.infected_locations_total}
                 percentage={lastValue.infected_locations_percentage}
-                difference={
-                  data.difference.disability_care__infected_locations_total
-                }
+                difference={data.difference.disability_care__infected_locations_total}
                 isAmount
               />
               <Text>{textNl.besmette_locaties.kpi_toelichting}</Text>
@@ -281,10 +211,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="newly_infected_locations"
-                absolute={lastValue.newly_infected_locations}
-              />
+              <KpiValue data-cy="newly_infected_locations" absolute={lastValue.newly_infected_locations} />
               <Text>{textNl.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -337,12 +264,13 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               timeframe={disabilityCareInfectedLocationsTimeframe}
               seriesConfig={[
                 {
-                  type: 'area',
+                  type: 'line',
                   metricProperty: 'infected_locations_total',
                   label: textNl.besmette_locaties.linechart_metric_label,
                   color: colors.primary,
                 },
               ]}
+              forceLegend
             />
           </ChartTile>
 
@@ -371,10 +299,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.oversterfte.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="deceased_daily"
-                absolute={lastValue.deceased_daily}
-              />
+              <KpiValue data-cy="deceased_daily" absolute={lastValue.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
 
@@ -395,11 +320,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'deceased_daily_moving_average',
-                  label:
-                    textNl.oversterfte.line_chart_deceased_daily_moving_average,
-                  shortLabel:
-                    textNl.oversterfte
-                      .line_chart_deceased_daily_moving_average_short_label,
+                  label: textNl.oversterfte.line_chart_deceased_daily_moving_average,
+                  shortLabel: textNl.oversterfte.line_chart_deceased_daily_moving_average_short_label,
                   color: colors.primary,
                 },
                 {
@@ -414,12 +336,9 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: underReportedDateStart,
                     end: Infinity,
-                    label:
-                      textNl.oversterfte.line_chart_legend_inaccurate_label,
+                    label: textNl.oversterfte.line_chart_legend_inaccurate_label,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'deceased_daily_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['deceased_daily_moving_average'],
                   },
                 ],
               }}

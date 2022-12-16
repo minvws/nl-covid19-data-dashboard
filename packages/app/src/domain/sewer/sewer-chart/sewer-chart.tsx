@@ -161,7 +161,7 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
                 style: 'dashed',
               },
               {
-                type: 'area',
+                type: 'line',
                 metricProperty: 'average',
                 label: text.averagesDataLabel,
                 color: colors.scale.blue[3],
@@ -185,13 +185,14 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
             timeframe={sewerTimeframe}
             seriesConfig={[
               {
-                type: 'area',
+                type: 'line',
                 metricProperty: 'average',
                 label: text.averagesDataLabel,
                 color: colors.scale.blue[3],
               },
             ]}
             dataOptions={dataOptions}
+            forceLegend
           />
         )
       }
