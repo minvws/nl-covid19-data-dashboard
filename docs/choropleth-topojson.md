@@ -19,9 +19,9 @@ This section describes how to generate this data with the correct projection app
 To create the data files we need, we will be using `cbsgebiedsindelingen_2022.gpkg` as the
 data source. This package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen). Download the XML file and find the link to the latest `*.gpkg` file in it. The URL looks like this: https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/extract/cbsgebiedsindelingen_2022_v1.gpkg.
 
-ATTENTION: At the time of writing, the `cbsgebiedsindelingen_2022.gpkg` file is the latest version.
+> ⚠️ **ATTENTION**: At the time of writing, the `cbsgebiedsindelingen_2022.gpkg` file is the latest version.
 It is of course very likely that by the time new data needs to be generated that a newer file is available.
-Pay attention to download the very latest version.
+Pay attention to download the very latest version. If there may be a case that the latest CBS data is still not available and some manual work needs to be done, use the current TopoJson file and proceed to [Generate TopoJson](#generate-topojson).
 
 After downloading, import the package into QGIS (the easiest way of doing this is by simply dragging the package into
 the main QGIS window) and select the following layers to be added:
@@ -29,8 +29,6 @@ the main QGIS window) and select the following layers to be added:
 - `gemeente_gegeneraliseerd_2022`
 - `veiligheidsregio_gegeneraliseerd_2022`
 - `landsdeel_gegeneraliseerd_2022`
-
-NOTE: The year indicator will differ when dealing with newer data. Find the layer with the most recent year.
 
 Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection which should the default while importing.
 
@@ -40,7 +38,7 @@ Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection wh
 
 To clean up the data we have to perform the following steps:
 
-Create the municipalities data file (**cbs_gemeente_2022_gegeneraliseerd**):
+Create the municipalities data file (**gemeente_gegeneraliseerd_2022**):
 
 1. Right-click on the **layer > Properties > Fields**
 2. Rename (click the pencil to active edit mode):
@@ -52,7 +50,7 @@ Create the municipalities data file (**cbs_gemeente_2022_gegeneraliseerd**):
    - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `gemeente_gegeneraliseerd_2022.geojson`
    - CRS: `Project CRS: EPSG:28992 - Amersfoort / RD New`
    - Open **"Select fields to export..."**
-     - Select: `code`
+     - Deselect all and only select: `code`
 6. Export by clicking **"Ok"**
 
 Create the safety regions data file (**veiligheidsregio_gegeneraliseerd_2022**):
@@ -67,10 +65,10 @@ Create the safety regions data file (**veiligheidsregio_gegeneraliseerd_2022**):
    - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `veiligheidsregio_gegeneraliseerd_2022.geojson`
    - CRS: `Project CRS: EPSG:28992 - Amersfoort / RD New`
    - Open **"Select fields to export..."**
-     - Select: `code`
+     - Deselect all and only select: `code`
 6. Export by clicking **"Ok"**
 
-Create the Netherlands data file (**cbs_landsdeel_2022_gegeneraliseerd**):
+Create the Netherlands data file (**landsdeel_gegeneraliseerd_2022**):
 
 1. Select the layer and go to **Vector > Geoprocessing Tools > Dissolve > Run**, this will merge the different areas
 2. Select the new layer and right-click on the **layer > Export > Save Features As..**
@@ -98,17 +96,15 @@ To make sure the coordinate system is correct we have to convert the exported fi
 
 ### Generate TopoJson:
 
+> ⚠️ **ATTENTION**: To make custom changes on the TopoJson using mapshaper, please take a look at [this link](https://handsondataviz.org/mapshaper.html) for tips and tricks.
+> It's possible that the map looks a little streched on MapShaper. This is most likely not an issue and it will display correctly once it's integrated in the Dashboard again.
+
 1. Upload the three different `*_WGS84.geojson` files to: [mapshaper.org](https://mapshaper.org)
 2. Rename the layers by clicking on the name in the dropdown:
    - Change: `gemeente_gegeneraliseerd_2022_WGS84` to `gm_features`
    - Change: `landsdeel_gegeneraliseerd_2022_WGS84` to `nl_features`
    - Change: `veiligheidsregio_gegeneraliseerd_2022_WGS84` to `vr_features`
 3. Export to TopoJSON > `nl-vr-gm-high-detail.topo.json`;
-
-> Note: It's possible that the map looks a little streched on MapShaper. This is most likely not an issue and it will display correctly once it's integrated in the Dashboard again.
-
-Simplifying:
-(NB: this needs to be separate step; when doing this in the step above the output will not be correct**!!**):
 
 1. Upload the output `nl-vr-gm-high-detail.topo.json` to a new instance of [mapshaper.org](https://mapshaper.org/)
 2. Do for each layer:
