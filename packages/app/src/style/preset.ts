@@ -1,4 +1,5 @@
 import { spacingStyle } from './functions/spacing';
+import { space } from './theme';
 import { asResponsiveArray } from './utils';
 
 export type Preset = typeof preset;
@@ -79,12 +80,12 @@ export const preset = {
       fontSize: asResponsiveArray({ _: 3, md: 5 }),
     },
     choroplethTooltipHeader: {
+      flex: 1,
       fontSize: asResponsiveArray({ _: 5, md: 6 }),
       lineHeight: 1,
       fontWeight: 'bold',
+      marginInline: space[2],
       overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      mt: 0,
     },
     loaderText: {
       lineHeight: 1,
