@@ -1,1 +1,16 @@
 timestamp,action,key,document_id,move_to
+2022-12-19T14:39:56.456Z,add,common.common.charts.averages_legend_label,ueiwAnFgRtwqq5DuKq6ppr,__
+2022-12-19T14:39:57.475Z,add,common.common.charts.daily_averages_label,ueiwAnFgRtwqq5DuKq6qW3,__
+2022-12-19T14:39:58.504Z,add,common.common.charts.weekly_averages_label,eeK9bBjYyIu30xxsxm2GyY,__
+2022-12-19T14:39:59.421Z,add,pages.disability_care_page.nl.besmette_locaties.charts.linechart_description,eeK9bBjYyIu30xxsxm2H3i,__
+2022-12-19T14:40:00.487Z,add,pages.disability_care_page.nl.besmette_locaties.charts.linechart_tooltip_label,fDAzrOqlMCu6ASFGUdBZoN,__
+2022-12-19T14:40:01.574Z,add,pages.disability_care_page.nl.besmette_locaties.charts.linechart_legend_label,ueiwAnFgRtwqq5DuKq6sDX,__
+2022-12-19T14:40:02.596Z,add,pages.disability_care_page.nl.besmette_locaties.charts.linechart_title,fDAzrOqlMCu6ASFGUdBaNn,__
+2022-12-19T14:40:03.520Z,add,pages.reproduction_page.nl.linechart_legend_label,ueiwAnFgRtwqq5DuKq6soS,__
+2022-12-19T14:40:04.523Z,add,pages.reproduction_page.nl.linechart_tooltip_label,ueiwAnFgRtwqq5DuKq6tZv,__
+2022-12-19T14:40:04.525Z,delete,common.common.daggemiddelde,qNGd4zPbpj47IuPd89IJPP,__
+2022-12-19T14:40:04.528Z,delete,common.common.weekgemiddelde,lJrmoPoRnpF3E0PvH1XyF7,__
+2022-12-19T14:40:04.531Z,delete,pages.disability_care_page.nl.besmette_locaties.linechart_description,EN7zYfnqIlnfGd7xBhUFb6,__
+2022-12-19T14:40:04.536Z,delete,pages.disability_care_page.nl.besmette_locaties.linechart_metric_label,jF33EuwumlGuwav2FD3vZU,__
+2022-12-19T14:40:04.543Z,delete,pages.disability_care_page.nl.besmette_locaties.linechart_titel,jF33EuwumlGuwav2FD3vAK,__
+2022-12-19T14:40:04.552Z,delete,pages.reproduction_page.nl.lineLegendLabel,jF33EuwumlGuwav2FD3aUm,__

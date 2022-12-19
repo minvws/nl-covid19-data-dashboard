@@ -248,12 +248,12 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           </ChoroplethTile>
 
           <ChartTile
-            title={textNl.besmette_locaties.linechart_titel}
+            title={textNl.besmette_locaties.charts.linechart_title}
             metadata={{
               source: textNl.besmette_locaties.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            description={textNl.besmette_locaties.linechart_description}
+            description={textNl.besmette_locaties.charts.linechart_description}
             onSelectTimeframe={setDisabilityCareInfectedLocationsTimeframe}
           >
             <TimeSeriesChart
@@ -266,7 +266,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'infected_locations_total',
-                  label: textNl.besmette_locaties.linechart_metric_label,
+                  label: textNl.besmette_locaties.charts.linechart_legend_label,
+                  shortLabel: textNl.besmette_locaties.charts.linechart_tooltip_label,
                   color: colors.primary,
                 },
               ]}

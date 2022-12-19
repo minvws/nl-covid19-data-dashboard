@@ -16,7 +16,7 @@ import { space } from '~/style/theme';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
-type SewerChartProps = {
+interface SewerChartProps {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -38,7 +38,8 @@ type SewerChartProps = {
       segment_2: string;
       segment_3: string;
     };
-    averagesDataLabel: string;
+    averagesLegendLabel: string;
+    averagesTooltipLabel: string;
     valueAnnotation: string;
   };
   vrNameOrGmName?: string;
@@ -50,9 +51,9 @@ type SewerChartProps = {
   };
   warning?: string;
   timelineEvents?: TimelineEventConfig[];
-};
+}
 
-export function SewerChart({ accessibility, dataAverages, dataPerInstallation, text, vrNameOrGmName, incompleteDatesAndTexts, warning, timelineEvents }: SewerChartProps) {
+export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, text, vrNameOrGmName, incompleteDatesAndTexts, warning, timelineEvents }: SewerChartProps) => {
   const {
     options,
     value: selectedInstallation,
@@ -163,7 +164,8 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
               {
                 type: 'line',
                 metricProperty: 'average',
-                label: text.averagesDataLabel,
+                label: text.averagesLegendLabel,
+                shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
                 nonInteractive: true,
               },
@@ -187,7 +189,8 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
               {
                 type: 'line',
                 metricProperty: 'average',
-                label: text.averagesDataLabel,
+                label: text.averagesLegendLabel,
+                shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
               },
             ]}
@@ -198,4 +201,4 @@ export function SewerChart({ accessibility, dataAverages, dataPerInstallation, t
       }
     </ChartTile>
   );
-}
+};
