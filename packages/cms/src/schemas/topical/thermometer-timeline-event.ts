@@ -40,14 +40,18 @@ export const thermometerTimelineEvent = {
   ],
   preview: {
     select: {
-      title: 'title.nl',
+      title: 'level',
       date: 'date',
       dateEnd: 'dateEnd',
     },
-    prepare(x: { title: string; date: string; dateEnd?: string }) {
+    prepare(selection: { title: number; date: string; dateEnd?: string }) {
+      // Construct a custom start date
+      const day = selection.date.slice(8);
+      const month = selection.date.slice(5, -3);
+
       return {
-        title: x.title,
-        subtitle: [x.date, x.dateEnd].filter(isDefined).join(' tot '),
+        title: `${day}/${month}: level ${selection.title}`,
+        subtitle: [selection.date, selection.dateEnd].filter(isDefined).join(' tot '),
       };
     },
   },

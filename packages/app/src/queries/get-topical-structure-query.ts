@@ -107,8 +107,8 @@ export function getTopicalStructureQuery(locale: string) {
   return query;
 }
 
-export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[], thermometerLevels: ThermometerLevel[]) => {
-  return thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => {
+export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent[], thermometerLevels: ThermometerLevel[]) =>
+  thermometerEvents.map<SeverityIndicatorTimelineEventConfig>((thermometerEvent) => {
     const levelDetails = thermometerLevels.find((thermometerLevel) => thermometerLevel.level === (thermometerEvent.level as SeverityLevel)) as ThermometerLevel;
 
     return {
@@ -119,4 +119,3 @@ export const getThermometerEvents = (thermometerEvents: ThermometerTimelineEvent
       end: new Date(thermometerEvent.dateEnd).getTime() / 1000,
     };
   });
-};
