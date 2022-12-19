@@ -16,13 +16,13 @@ interface ReproductionChartTileProps {
   text: SiteText['pages']['reproduction_page']['nl'];
 }
 
-export function ReproductionChartTile({
+export const ReproductionChartTile = ({
   data,
   timeframeOptions = TimeframeOptionsList,
   timeframeInitialValue = TimeframeOption.ALL,
   timelineEvents,
   text,
-}: ReproductionChartTileProps) {
+}: ReproductionChartTileProps) => {
   /**
    * There is no data for the last 2 weeks so we are getting a slice
    * of all the values before the first datapoint with a null value to
@@ -59,7 +59,8 @@ export function ReproductionChartTile({
           {
             type: 'line',
             metricProperty: 'index_average',
-            label: text.lineLegendLabel,
+            label: text.linechart_legend_label,
+            shortLabel: text.linechart_tooltip_label,
             color: colors.primary,
             minimumRange: metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
           },
@@ -72,4 +73,4 @@ export function ReproductionChartTile({
       />
     </ChartTile>
   );
-}
+};

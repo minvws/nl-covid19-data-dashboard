@@ -16,20 +16,9 @@ import { Layout } from '~/domain/layout/layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  selectGmData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, selectGmData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -48,20 +37,11 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData(
-    'difference.sewer__average',
-    'sewer_per_installation',
-    'static_values.population_count',
-    'sewer',
-    'code'
-  ),
+  selectGmData('difference.sewer__average', 'sewer_per_installation', 'static_values.population_count', 'sewer', 'code'),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('sewer_page'))(context);
+    const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
     return {
       content: {
@@ -72,19 +52,10 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    pageText,
-    selectedGmData: data,
-    municipalityName,
-    content,
-    lastGenerated,
-  } = props;
+  const { pageText, selectedGmData: data, municipalityName, content, lastGenerated } = props;
 
   const { commonTexts, formatNumber } = useIntl();
-  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const sewerAverages = data.sewer;
   const populationCount = data.static_values.population_count;
@@ -115,9 +86,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -138,18 +107,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             warning={textGm.warning}
           />
 
-          {!isEmpty(textGm.warning_method) && (
-            <WarningTile message={textGm.warning_method} icon={Experimenteel} />
-          )}
+          {!isEmpty(textGm.warning_method) && <WarningTile message={textGm.warning_method} icon={Experimenteel} />}
 
           <TwoKpiSection>
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
+                date: [sewerAverages.last_value.date_start_unix, sewerAverages.last_value.date_end_unix],
                 source: textGm.bronnen.rivm,
               }}
             >
@@ -161,36 +125,20 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
               <Text>
-                {replaceComponentsInText(
-                  commonTexts.gemeente_index.population_count,
-                  {
-                    municipalityName: municipalityName,
-                    populationCount: (
-                      <strong>{formatNumber(populationCount)}</strong>
-                    ),
-                  }
-                )}
+                {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
+                  municipalityName: municipalityName,
+                  populationCount: <strong>{formatNumber(populationCount)}</strong>,
+                })}
               </Text>
 
               <Markdown content={textGm.extra_uitleg} />
 
-              <CollapsibleContent
-                label={
-                  commonTexts.gemeente_index.population_count_explanation_title
-                }
-              >
+              <CollapsibleContent label={commonTexts.gemeente_index.population_count_explanation_title}>
                 <Text>
-                  {replaceComponentsInText(
-                    textGm.population_count_explanation,
-                    {
-                      municipalityName: <strong>{municipalityName}</strong>,
-                      value: (
-                        <strong>
-                          {formatNumber(sewerAverages.last_value.average)}
-                        </strong>
-                      ),
-                    }
-                  )}
+                  {replaceComponentsInText(textGm.population_count_explanation, {
+                    municipalityName: <strong>{municipalityName}</strong>,
+                    value: <strong>{formatNumber(sewerAverages.last_value.average)}</strong>,
+                  })}
                 </Text>
               </CollapsibleContent>
             </KpiTile>
@@ -199,29 +147,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={textGm.total_measurements_title}
               description={textGm.total_measurements_description}
               metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
+                date: [sewerAverages.last_value.date_start_unix, sewerAverages.last_value.date_end_unix],
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="total_number_of_samples"
-                absolute={sewerAverages.last_value.total_number_of_samples}
-              />
+              <KpiValue data-cy="total_number_of_samples" absolute={sewerAverages.last_value.total_number_of_samples} />
               <Text>
                 {replaceComponentsInText(textGm.total_measurements_locations, {
-                  sampled_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.sampled_installation_count}
-                    </strong>
-                  ),
-                  total_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.total_installation_count}
-                    </strong>
-                  ),
+                  sampled_installation_count: <strong>{sewerAverages.last_value.sampled_installation_count}</strong>,
+                  total_installation_count: <strong>{sewerAverages.last_value.total_installation_count}</strong>,
                 })}
               </Text>
             </KpiTile>
@@ -237,13 +171,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: textGm.linechart_description,
               selectPlaceholder: textGm.graph_selected_rwzi_placeholder,
               splitLabels: textShared.split_labels,
-              averagesDataLabel: commonTexts.common.weekgemiddelde,
+              averagesLegendLabel: commonTexts.common.charts.averages_legend_label,
+              averagesTooltipLabel: commonTexts.common.charts.weekly_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
             vrNameOrGmName={municipalityName}
-            incompleteDatesAndTexts={
-              textShared.zeewolde_incomplete_manualy_override
-            }
+            incompleteDatesAndTexts={textShared.zeewolde_incomplete_manualy_override}
             warning={textGm.warning_chart}
           />
         </TileList>
