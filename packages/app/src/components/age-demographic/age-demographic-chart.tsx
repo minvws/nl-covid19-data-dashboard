@@ -219,8 +219,8 @@ const StyledPatternLines = styled(PatternLines)<StyledPatternLinesProps>`
 
 const StyledGroup = styled(Group)({});
 const StyledHoverBar = styled(Bar)`
-  fill: transparent;
-  stroke: transparent;
+  fill: ${colors.transparent};
+  stroke: ${colors.transparent};
   stroke-width: 12px;
 
   ${StyledGroup}:hover & {
