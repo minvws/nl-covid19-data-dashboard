@@ -87,7 +87,7 @@ const mediaQueries = {
   xl: `screen and (min-width: ${breakpoints[4]})`,
 } as const;
 
-const radii = [0, 5, 10];
+export const radii = [0, 5, 10];
 
 export const shadows = {
   tile: '0px 4px 8px rgba(0, 0, 0, 0.1)',

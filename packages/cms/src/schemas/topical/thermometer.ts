@@ -10,6 +10,35 @@ export const thermometer = {
   type: 'object',
   title: 'Thermometer',
   name: 'thermometer',
+  fieldsets: [
+    {
+      title: 'De beschrijving boven de thermometer',
+      name: 'description',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+    {
+      title: 'Artikel referentie',
+      name: 'artikel-referentie',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+    {
+      title: 'Titel van standen informatie',
+      name: 'level-information',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+  ],
   fields: [
     {
       title: 'Thermometer icoon',
@@ -28,6 +57,7 @@ export const thermometer = {
       title: 'De beschrijving boven de thermometer',
       name: 'subTitle',
       type: 'localeRichContentBlock',
+      fieldset: 'description',
     },
     {
       title: 'De titel binnen de thermometer tegel',
@@ -58,10 +88,10 @@ export const thermometer = {
       type: 'localeString',
     },
     {
-      title: 'Huidige stand omschrijvig',
-      description: 'De omschrijving spcifiek voor de huidige themrmometer stand bij de trendIcon',
+      title: 'Huidige stand omschrijving',
+      description: 'De omschrijving specifiek voor de huidige thermometer stand bij de trendIcon',
       name: 'levelDescription',
-      type: 'localeString',
+      type: 'localeText',
       validation: REQUIRED,
     },
     {
@@ -73,6 +103,7 @@ export const thermometer = {
       title: 'Artikel referentie',
       name: 'articleReference',
       type: 'localeRichContentBlock',
+      fieldset: 'artikel-referentie',
     },
     {
       title: 'Titel van uitklapbare sectie',
@@ -84,6 +115,7 @@ export const thermometer = {
       title: 'Titel van standen informatie',
       name: 'trendIcon',
       type: 'trendIcon',
+      fieldset: 'level-information',
     },
     {
       title: 'Tijdlijn',

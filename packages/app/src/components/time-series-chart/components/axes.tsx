@@ -5,13 +5,7 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import {
-  colors,
-  middleOfDayInSeconds,
-  TimeframeOption,
-  TimestampedValue,
-  DateSpanValue,
-} from '@corona-dashboard/common';
+import { colors, middleOfDayInSeconds, TimeframeOption, TimestampedValue, DateSpanValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -20,6 +14,7 @@ import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, Ref, useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { fontSizes } from '~/style/theme';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../logic';
@@ -71,12 +66,7 @@ export type AxesProps<T extends TimestampedValue> = {
   hasAllZeroValues?: boolean;
 };
 
-function createTimeTicks(
-  startTick: number,
-  endTick: number,
-  count: number,
-  valuesCount: number | undefined
-) {
+function createTimeTicks(startTick: number, endTick: number, count: number, valuesCount: number | undefined) {
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);
 
@@ -85,8 +75,7 @@ function createTimeTicks(
   }
 
   const ticks: number[] = [];
-  const stepCount =
-    (valuesCount && valuesCount <= count ? valuesCount : count) - 1;
+  const stepCount = (valuesCount && valuesCount <= count ? valuesCount : count) - 1;
   const step = Math.floor((end - start) / stepCount);
 
   for (let i = 0; i < stepCount; i++) {
@@ -119,65 +108,30 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   const [startUnix, endUnix] = timeDomain;
   const startYear = createDateFromUnixTimestamp(startUnix).getFullYear();
   const endYear = createDateFromUnixTimestamp(endUnix).getFullYear();
-
   const breakpoints = useBreakpoints();
 
-  const isDateSpanValue = (value: any): value is DateSpanValue =>
-    value.date_start_unix !== undefined && value.date_end_unix !== undefined;
-  const isDateSpanValues = useCallback(
-    (values: any): values is DateSpanValue[] =>
-      values.every((x: DateSpanValue) => isDateSpanValue(x)),
-    []
-  );
+  const isDateSpanValue = (value: any): value is DateSpanValue => value.date_start_unix !== undefined && value.date_end_unix !== undefined;
+  const isDateSpanValues = useCallback((values: any): values is DateSpanValue[] => values.every((x: DateSpanValue) => isDateSpanValue(x)), []);
   const hasDatesAsRange = isDateSpanValues(values);
 
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
-  const formatYAxis: TickFormatter<NumberValue> = useCallback(
-    (y: NumberValue) => formatNumber(y as number),
-    [formatNumber]
-  );
+  const formatYAxis: TickFormatter<NumberValue> = useCallback((y: NumberValue) => formatNumber(y as number), [formatNumber]);
 
-  const formatYAxisPercentage: TickFormatter<NumberValue> = useCallback(
-    (y: NumberValue) => `${formatPercentage(y as number)}%`,
-    [formatPercentage]
-  );
+  const formatYAxisPercentage: TickFormatter<NumberValue> = useCallback((y: NumberValue) => `${formatPercentage(y as number)}%`, [formatPercentage]);
 
   if (!isPresent(xTickNumber)) {
-    const preferredDateTicks = breakpoints.sm
-      ? timeframe === 'all'
-        ? hasDatesAsRange
-          ? 6
-          : 4
-        : hasDatesAsRange
-        ? 5
-        : 3
-      : hasDatesAsRange
-      ? 3
-      : 2;
+    const preferredDateTicks: number = breakpoints.sm ? (timeframe === 'all' ? (hasDatesAsRange ? 6 : 4) : hasDatesAsRange ? 5 : 3) : hasDatesAsRange ? 3 : 2;
     const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
     xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
   }
 
-  const getSmallestDiff = (start: number, end: number, current: number) =>
-    Math.min(Math.abs(start - current), Math.abs(end - current));
+  const getSmallestDiff = (start: number, end: number, current: number) => Math.min(Math.abs(start - current), Math.abs(end - current));
 
-  const getXTickStyle = (
-    isFirstOrLast: boolean,
-    startYear: number,
-    endYear: number,
-    previousYear: number,
-    currentYear: number
-  ) =>
-    (isFirstOrLast && startYear !== endYear) || previousYear !== currentYear
-      ? 'axis-with-year'
-      : 'axis';
-  const tickValues = createTimeTicks(
-    startUnix,
-    endUnix,
-    xTickNumber,
-    values?.length
-  );
+  const getXTickStyle = (isFirstOrLast: boolean, startYear: number, endYear: number, previousYear: number, currentYear: number) =>
+    (isFirstOrLast && startYear !== endYear) || previousYear !== currentYear ? 'axis-with-year' : 'axis';
+
+  const tickValues = createTimeTicks(startUnix, endUnix, xTickNumber, values?.length);
 
   const DateSpanTick = useCallback(
     (dateUnix: number, values: DateSpanValue[], index: number) => {
@@ -185,64 +139,31 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         return '';
       }
 
-      const previousYear = createDateFromUnixTimestamp(
-        tickValues[index - 1]
-      ).getFullYear();
+      const previousYear = createDateFromUnixTimestamp(tickValues[index - 1]).getFullYear();
 
       const currentYear = createDateFromUnixTimestamp(dateUnix).getFullYear();
       const tickValue = values.reduce((acc, value) => {
-        const smallestDifferenceAcc = getSmallestDiff(
-          acc.date_start_unix,
-          acc.date_end_unix,
-          dateUnix
-        );
-        const smallestDifferenceVal = getSmallestDiff(
-          value.date_start_unix,
-          value.date_end_unix,
-          dateUnix
-        );
+        const smallestDifferenceAcc = getSmallestDiff(acc.date_start_unix, acc.date_end_unix, dateUnix);
+        const smallestDifferenceVal = getSmallestDiff(value.date_start_unix, value.date_end_unix, dateUnix);
 
-        return (value.date_start_unix <= dateUnix &&
-          value.date_end_unix >= dateUnix) ||
-          smallestDifferenceVal < smallestDifferenceAcc
-          ? value
-          : acc;
+        return (value.date_start_unix <= dateUnix && value.date_end_unix >= dateUnix) || smallestDifferenceVal < smallestDifferenceAcc ? value : acc;
       });
 
-      const isFirstOrLast =
-        startUnix === tickValue.date_start_unix ||
-        endUnix === tickValue.date_end_unix;
-      const style = getXTickStyle(
-        isFirstOrLast,
-        startYear,
-        endYear,
-        previousYear,
-        currentYear
-      );
+      const isFirstOrLast = startUnix === tickValue.date_start_unix || endUnix === tickValue.date_end_unix;
+      const style = getXTickStyle(isFirstOrLast, startYear, endYear, previousYear, currentYear);
 
-      return `${formatDateFromSeconds(
-        tickValue.date_start_unix,
-        'axis'
-      )} - ${formatDateFromSeconds(tickValue.date_end_unix, style)}`;
+      return `${formatDateFromSeconds(tickValue.date_start_unix, 'axis')} - ${formatDateFromSeconds(tickValue.date_end_unix, style)}`;
     },
     [endUnix, endYear, formatDateFromSeconds, startUnix, startYear, tickValues]
   );
 
   const TimeStampTick = useCallback(
     (tickValue: number, index: number) => {
-      const previousYear = createDateFromUnixTimestamp(
-        tickValues[index - 1]
-      ).getFullYear();
+      const previousYear = createDateFromUnixTimestamp(tickValues[index - 1]).getFullYear();
       const currentYear = createDateFromUnixTimestamp(tickValue).getFullYear();
 
       const isFirstOrLast = [startUnix, endUnix].includes(tickValue);
-      const style = getXTickStyle(
-        isFirstOrLast,
-        startYear,
-        endYear,
-        previousYear,
-        currentYear
-      );
+      const style = getXTickStyle(isFirstOrLast, startYear, endYear, previousYear, currentYear);
 
       return formatDateFromSeconds(tickValue, style);
     },
@@ -250,22 +171,9 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   );
 
   const xTicks = useMemo(
-    () =>
-      tickValues.map((tickValue, index) =>
-        isDateSpanValues(values)
-          ? DateSpanTick(tickValue, values, index)
-          : TimeStampTick(tickValue, index)
-      ),
+    () => tickValues.map((tickValue, index) => (isDateSpanValues(values) ? DateSpanTick(tickValue, values, index) : TimeStampTick(tickValue, index))),
     [values, DateSpanTick, TimeStampTick, isDateSpanValues, tickValues]
   );
-
-  /**
-   * Long labels (like the ones including a year, are too long to be positioned
-   * centered on the x-axis tick. Usually a short date has a 2 digit number plus
-   * a space plus a three character month, which makes 6.
-   */
-  const isLongStartLabel = xTicks[0].length > 6;
-  const isLongEndLabel = xTicks[xTicks.length - 1].length > 6;
 
   /**
    * We make an exception for the situation where all the values in the chart are zero.
@@ -283,19 +191,22 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   /**
    * Using anchor middle the line marker label will fall nicely on top
-   * of the axis label.
-   *
-   * The only times at which we can not use middle is if we are
-   * rendering a year in the label, because it becomes too long.
+   * of the axis label. This will only happen for labels which are not the first or last label.
    */
   const getAnchor = (x: NumberValue) => {
-    return x === tickValues[0] && isLongStartLabel
-      ? tickValues.length === 1
-        ? 'middle'
-        : 'start'
-      : x === tickValues[tickValues.length - 1] && isLongEndLabel
-      ? 'end'
-      : 'middle';
+    const isLongStartLabel = xTicks[0].length > 6;
+    const isFirstTick = x === tickValues[0];
+    const isLastTick = x === tickValues[tickValues.length - 1];
+
+    if (isFirstTick && isLongStartLabel && tickValues.length !== 1) {
+      return 'start';
+    }
+
+    if (isLastTick) {
+      return 'end';
+    }
+
+    return 'middle';
   };
 
   return (
@@ -322,14 +233,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         stroke={colors.gray3}
       />
 
-      {showWeekNumbers && (
-        <WeekNumbers
-          startUnix={startUnix}
-          endUnix={endUnix}
-          bounds={bounds}
-          xScale={xScale}
-        />
-      )}
+      {showWeekNumbers && <WeekNumbers startUnix={startUnix} endUnix={endUnix} bounds={bounds} xScale={xScale} />}
 
       <AxisBottom
         scale={xScale}
@@ -340,7 +244,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         rangePadding={xRangePadding}
         tickLabelProps={(x) => ({
           fill: colors.gray6,
-          fontSize: 12,
+          fontSize: fontSizes[0],
           /**
            * Applying a dx of -50%, when there's only a single tick value, prevents
            * the tick to go out of bounds and centers the tick value relative to the graph.
@@ -370,16 +274,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
               hideTicks
               hideAxisLine
               stroke={colors.gray3}
-              tickFormat={
-                formatYTickValue
-                  ? formatYTickValue
-                  : isPercentage
-                  ? formatYAxisPercentage
-                  : formatYAxis
-              }
+              tickFormat={formatYTickValue ? formatYTickValue : isPercentage ? formatYAxisPercentage : formatYAxis}
               tickLabelProps={() => ({
                 fill: colors.gray6,
-                fontSize: 12,
+                fontSize: fontSizes[0],
                 textAnchor: 'end',
                 verticalAnchor: 'middle',
               })}
@@ -402,16 +300,10 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
             hideTicks
             hideAxisLine
             stroke={colors.gray3}
-            tickFormat={
-              formatYTickValue
-                ? formatYTickValue
-                : isPercentage
-                ? formatYAxisPercentage
-                : formatYAxis
-            }
+            tickFormat={formatYTickValue ? formatYTickValue : isPercentage ? formatYAxisPercentage : formatYAxis}
             tickLabelProps={() => ({
               fill: colors.gray6,
-              fontSize: 12,
+              fontSize: fontSizes[0],
               textAnchor: 'start',
               // position the label above the chart
               dx: 10,
