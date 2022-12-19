@@ -26,6 +26,7 @@ type TProps<Option extends TOption> = {
   options: Option[];
   placeholder: string;
   onSelect: (option: Option) => void;
+  sorter?: (a: Option, b: Option) => number;
   selectedOption?: Option;
 };
 

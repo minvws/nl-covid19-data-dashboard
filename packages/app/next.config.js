@@ -59,7 +59,7 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
 
   webpack(config) {
-    config.optimization.chunkIds = 'named';
+    config.optimization.chunkIds = 'size';
     config.module.rules.push({
       test: /\.svg$/,
       type: 'asset',

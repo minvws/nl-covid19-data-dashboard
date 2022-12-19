@@ -30,7 +30,7 @@ export const TrendIcon = ({ trendDirection, ariaLabel, intensity = null, color =
 
   // Icon with intensity is used only on the homepage at the moment, for all other trend icons the default (below) are used.
   if (intensity && color && TrendDirection[trendDirection]) {
-    return <TrendIconWithIntensity color={color} direction={trendDirection} intensity={intensity} />;
+    return <TrendIconWithIntensity color={color} direction={trendDirection} intensity={intensity} aria-label={ariaLabelText} />;
   }
 
   switch (trendDirection) {
