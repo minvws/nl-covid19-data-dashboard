@@ -121,7 +121,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   const formatYAxisPercentage: TickFormatter<NumberValue> = useCallback((y: NumberValue) => `${formatPercentage(y as number)}%`, [formatPercentage]);
 
   if (!isPresent(xTickNumber)) {
-    const preferredDateTicks: number = breakpoints.sm ? (timeframe === 'all' ? (hasDatesAsRange ? 6 : 4) : hasDatesAsRange ? 5 : 3) : hasDatesAsRange ? 3 : 2;
+    const preferredDateTicks: number = breakpoints.sm ? (timeframe === 'all' ? (hasDatesAsRange ? 4 : 6) : hasDatesAsRange ? 3 : 5) : hasDatesAsRange ? 2 : 3;
     const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
     xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
   }
