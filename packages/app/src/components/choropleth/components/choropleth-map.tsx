@@ -1,5 +1,5 @@
 import { geoConicConformal, geoMercator } from 'd3-geo';
-import { FocusEvent, memo, useMemo } from 'react';
+import { FocusEvent, MouseEvent, memo, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
@@ -21,22 +21,17 @@ import { TooltipSettings } from '../tooltips/types';
 import { CanvasChoroplethMap } from './canvas-choropleth-map';
 
 export type AnchorEventHandler = {
-  onFocus: (evt: FocusEvent<HTMLElement>) => void;
+  onFocus: (evt: FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) => void;
   onBlur: (evt: FocusEvent<HTMLElement>) => void;
 };
 
-type ChoroplethMapProps<T extends ChoroplethDataItem> = Omit<
-  ChoroplethProps<T>,
-  'formatTooltip' | 'tooltipPlacement' | 'dataFormatters'
-> & {
+type ChoroplethMapProps<T extends ChoroplethDataItem> = Omit<ChoroplethProps<T>, 'formatTooltip' | 'tooltipPlacement' | 'dataFormatters'> & {
   setTooltip: (tooltip: TooltipSettings<T> | undefined) => void;
   isTabInteractive: boolean;
   anchorEventHandlers: AnchorEventHandler;
 };
 
-export const ChoroplethMap: <T extends ChoroplethDataItem>(
-  props: ChoroplethMapProps<T>
-) => JSX.Element | null = memo((props) => {
+export const ChoroplethMap: <T extends ChoroplethDataItem>(props: ChoroplethMapProps<T>) => JSX.Element | null = memo((props) => {
   const {
     data: originalData,
     dataConfig: partialDataConfig,
@@ -54,48 +49,22 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
 
   const dataConfig = createDataConfig(partialDataConfig);
 
-  const mapProjection = isDefined(dataOptions.projection)
-    ? geoConicConformal
-    : geoMercator;
+  const mapProjection = isDefined(dataOptions.projection) ? geoConicConformal : geoMercator;
 
   const annotations = useAccessibilityAnnotations(accessibility);
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
 
-  const [containerRef, { width = 0, height = minHeight }] =
-    useResizeObserver<HTMLDivElement>();
+  const [containerRef, { width = 0, height = minHeight }] = useResizeObserver<HTMLDivElement>();
 
-  const [mapHeight, padding] = useResponsiveSize(
-    width,
-    height,
-    boundingBoxPadding,
-    responsiveSizeConfiguration
-  );
+  const [mapHeight, padding] = useResponsiveSize(width, height, boundingBoxPadding, responsiveSizeConfiguration);
 
-  const choroplethFeatures = useChoroplethFeatures(
-    map,
-    data,
-    dataOptions.selectedCode
-  );
+  const choroplethFeatures = useChoroplethFeatures(map, data, dataOptions.selectedCode);
 
   const getFillColor = useFillColor(data, map, dataConfig, thresholdMap);
 
-  const featureProps = useFeatureProps(
-    map,
-    getFillColor,
-    dataOptions,
-    dataConfig
-  );
+  const featureProps = useFeatureProps(map, getFillColor, dataOptions, dataConfig);
 
-  const [featureOverHandler, featureOutHandler, tooltipTrigger] =
-    useChoroplethTooltip(
-      map,
-      data,
-      dataConfig,
-      dataOptions,
-      isTabInteractive,
-      setTooltip,
-      containerRef
-    );
+  const [featureOverHandler, featureOutHandler, tooltipTrigger] = useChoroplethTooltip(map, data, dataConfig, dataOptions, isTabInteractive, setTooltip, containerRef);
 
   const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
 
@@ -107,15 +76,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
       ],
       choroplethFeatures?.boundingBox,
     ],
-    [
-      width,
-      mapHeight,
-      padding.left,
-      padding.right,
-      padding.top,
-      padding.bottom,
-      choroplethFeatures?.boundingBox,
-    ]
+    [width, mapHeight, padding.left, padding.right, padding.top, padding.bottom, choroplethFeatures?.boundingBox]
   );
 
   const correctedHeight = Math.max(height, minHeight);
@@ -123,10 +84,7 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(
   return (
     <Box ref={containerRef} width="100%" height="100%">
       {!isDefined(choroplethFeatures) ? (
-        <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${dataConfig.metricProperty.toString()}/${minHeight}`}
-          loading="lazy"
-        />
+        <img src={`/api/choropleth/${map}/${dataConfig.metricName.toString()}/${dataConfig.metricProperty.toString()}/${minHeight}`} loading="lazy" />
       ) : (
         <>
           {annotations.descriptionElement}

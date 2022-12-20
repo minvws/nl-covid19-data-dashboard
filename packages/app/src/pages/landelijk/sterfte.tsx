@@ -1,56 +1,22 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import {
-  TwoKpiSection,
-  TimeSeriesChart,
-  TileList,
-  PageInformationBlock,
-  AgeDemographic,
-  ChartTile,
-  Divider,
-  KpiTile,
-  KpiValue,
-  Markdown,
-} from '~/components';
+import { TwoKpiSection, TimeSeriesChart, TileList, PageInformationBlock, AgeDemographic, ChartTile, Divider, KpiTile, KpiValue, Markdown } from '~/components';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectNlData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = [
-  'deceased_cbs',
-  'deceased_rivm_per_age_group',
-  'deceased_rivm',
-];
+const pageMetrics = ['deceased_cbs', 'deceased_rivm_per_age_group', 'deceased_rivm'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -61,15 +27,9 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'deceased_cbs',
-    'deceased_rivm_per_age_group',
-    'deceased_rivm',
-    'difference.deceased_rivm__covid_daily'
-  ),
+  selectNlData('deceased_cbs', 'deceased_rivm_per_age_group', 'deceased_rivm', 'difference.deceased_rivm__covid_daily'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -84,14 +44,8 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        mainArticles: getArticleParts(
-          content.parts.pageParts,
-          'deceasedPageArticles'
-        ),
-        monitorArticles: getArticleParts(
-          content.parts.pageParts,
-          'deceasedMonitorArticles'
-        ),
+        mainArticles: getArticleParts(content.parts.pageParts, 'deceasedPageArticles'),
+        monitorArticles: getArticleParts(content.parts.pageParts, 'deceasedMonitorArticles'),
         elements: content.elements,
       },
     };
@@ -99,8 +53,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
-  const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { pageText, selectedNlData: data, lastGenerated, content } = props;
   const dataCbs = data.deceased_cbs;
@@ -108,8 +61,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
 
   const { commonTexts, formatPercentage } = useIntl();
-  const { metadataTexts, textNl, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -124,9 +76,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
             title={textNl.section_deceased_rivm.title}
             icon={<Coronavirus aria-hidden="true" />}
             description={textNl.section_deceased_rivm.description}
@@ -148,17 +98,8 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_daily"
-                absolute={dataRivm.last_value.covid_daily}
-                difference={data.difference.deceased_rivm__covid_daily}
-                isAmount
-              />
-              <Markdown
-                content={
-                  textNl.section_deceased_rivm.kpi_covid_daily_description
-                }
-              />
+              <KpiValue data-cy="covid_daily" absolute={dataRivm.last_value.covid_daily} difference={data.difference.deceased_rivm__covid_daily} isAmount />
+              <Markdown content={textNl.section_deceased_rivm.kpi_covid_daily_description} />
             </KpiTile>
             <KpiTile
               title={textNl.section_deceased_rivm.kpi_covid_total_title}
@@ -167,22 +108,15 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_total"
-                absolute={dataRivm.last_value.covid_total}
-              />
-              <Text>
-                {textNl.section_deceased_rivm.kpi_covid_total_description}
-              </Text>
+              <KpiValue data-cy="covid_total" absolute={dataRivm.last_value.covid_total} />
+              <Text>{textNl.section_deceased_rivm.kpi_covid_total_description}</Text>
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased_rivm.line_chart_covid_daily_title}
-            description={
-              textNl.section_deceased_rivm.line_chart_covid_daily_description
-            }
+            description={textNl.section_deceased_rivm.line_chart_covid_daily_description}
             metadata={{
               source: textNl.section_deceased_rivm.bronnen.rivm,
             }}
@@ -198,31 +132,20 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'covid_daily_moving_average',
-                  label:
-                    textNl.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_label_moving_average,
-                  shortLabel:
-                    textNl.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                  label: textNl.section_deceased_rivm.line_chart_covid_daily_legend_trend_label_moving_average,
+                  shortLabel: textNl.section_deceased_rivm.line_chart_covid_daily_legend_trend_short_label_moving_average,
                   color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'covid_daily',
-                  label:
-                    textNl.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_label,
-                  shortLabel:
-                    textNl.section_deceased_rivm
-                      .line_chart_covid_daily_legend_trend_short_label,
+                  label: textNl.section_deceased_rivm.line_chart_covid_daily_legend_trend_label,
+                  shortLabel: textNl.section_deceased_rivm.line_chart_covid_daily_legend_trend_short_label,
                   color: colors.primary,
                 },
               ]}
               dataOptions={{
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'deceased_rivm'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'deceased_rivm'),
               }}
             />
           </ChartTile>
@@ -242,8 +165,8 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
               data={dataDeceasedPerAgeGroup}
               rightMetricProperty="covid_percentage"
               leftMetricProperty="age_group_percentage"
-              rightColor={'primary'}
-              leftColor={'neutral'}
+              rightColor={colors.primary}
+              leftColor={colors.neutral}
               maxDisplayValue={60}
               text={textShared.age_groups.graph}
               formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
@@ -269,11 +192,7 @@ function DeceasedNationalPage(props: StaticProps<typeof getStaticProps>) {
             articles={content.monitorArticles}
           />
 
-          <DeceasedMonitorSection
-            data={dataCbs}
-            text={textShared.section_sterftemonitor}
-            showCauseMessage
-          />
+          <DeceasedMonitorSection data={dataCbs} text={textShared.section_sterftemonitor} showCauseMessage />
         </TileList>
       </NlLayout>
     </Layout>

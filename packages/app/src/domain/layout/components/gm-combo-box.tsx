@@ -21,11 +21,7 @@ export function GmComboBox(props: GmComboBoxProps) {
       placeholder={commonTexts.common.zoekveld_placeholder_gemeente}
       options={gmData}
       onSelect={({ gemcode }) => {
-        router.push(
-          typeof getLink === 'function'
-            ? getLink(gemcode)
-            : reverseRouter.gm.index(gemcode)
-        );
+        router.push(typeof getLink === 'function' ? getLink(gemcode) : reverseRouter.gm.index(gemcode));
       }}
       selectedOption={gmData.find((gm) => gm.gemcode === selectedGmCode)}
     />

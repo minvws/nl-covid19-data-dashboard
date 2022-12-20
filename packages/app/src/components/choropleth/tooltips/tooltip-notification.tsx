@@ -1,6 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { VisuallyHidden } from '~/components';
-import { space } from '~/style/theme';
+import { radii, space } from '~/style/theme';
 import styled from 'styled-components';
 
 interface TooltipNotificationProps {
@@ -23,6 +23,7 @@ export const TooltipNotification = (props: TooltipNotificationProps) => {
 // Negative margin is used her to offset the padding from the parent component and to not alter styles for tooltips without a notification.
 const StyledTooltipNotification = styled.div`
   background-color: ${colors.yellow1};
+  border-radius: 0 0 ${radii[1]}px ${radii[1]}px;
   margin: ${space[2]} -${space[3]} -${space[2]};
   padding: ${space[2]} ${space[3]};
 `;
