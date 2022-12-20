@@ -114,8 +114,8 @@ export const nestedHtml = {
    * Apply some special margin styles to "stick" headings to their content.
    */
   'h1, h2, h3, h4, h5, h6': {
-    mt: space[4],
-    mb: -space[2],
+    marginTop: space[4],
+    marginBottom: -space[2],
   },
 };
 
