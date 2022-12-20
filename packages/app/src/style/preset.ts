@@ -106,8 +106,8 @@ export const nestedHtml = {
 
   strong: { fontWeight: fontWeights.bold },
   em: { fontStyle: 'italic' },
-  ul: { ml: space[4] },
-  ol: { ml: space[4] },
+  ul: { marginLeft: space[4] },
+  ol: { marginLeft: space[4] },
   a: { textDecoration: 'underline' },
 
   /**
