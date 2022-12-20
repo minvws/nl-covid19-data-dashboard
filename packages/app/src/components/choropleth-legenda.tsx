@@ -5,6 +5,7 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { space, fontSizes } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { Legend, LegendItem } from './legend';
 import { InlineText, Text } from './typography';
@@ -13,13 +14,14 @@ interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
   valueAnnotation?: string;
-  type?: 'default' | 'bar';
   pageType?: string;
   outdatedDataLabel?: string;
 }
 
 export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType, outdatedDataLabel }: ChoroplethLegendaProps) {
   const { commonTexts } = useIntl();
+  const breakpoints = useBreakpoints(true);
+
   const legendItems = thresholds.map(
     (x: ChoroplethThresholdsValue, i) =>
       ({
@@ -40,7 +42,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
     <Box width="100%" spacing={2} aria-hidden="true">
       {title && <Text variant="subtitle1">{title}</Text>}
 
-      <Legend items={legendItems} columns={2} />
+      <Legend items={legendItems} columns={breakpoints.lg ? 1 : 2} />
 
       {pageType === 'sewer' && (
         <Box display="flex" alignItems="center" paddingBottom={space[2]}>
