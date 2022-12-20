@@ -115,7 +115,7 @@ export const nestedHtml = {
    */
   'h1, h2, h3, h4, h5, h6': {
     mt: space[4],
-    mb: -2,
+    mb: -space[2],
   },
 };
 
