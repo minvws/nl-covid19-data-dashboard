@@ -88,7 +88,7 @@ export function ChoroplethTile({
           </Box>
 
           {legendaComponent && !breakpoints.lg && (
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="flex-start">
               {legendaComponent}
             </Box>
           )}
