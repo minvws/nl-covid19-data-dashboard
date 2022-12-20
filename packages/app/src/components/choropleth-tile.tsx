@@ -63,7 +63,7 @@ export function ChoroplethTile({
           {typeof description === 'string' ? <Text>{description}</Text> : description}
 
           {onChartRegionChange && chartRegion && (
-            <Box display="flex" justifyContent={'flex-start'} pt={4}>
+<Box display="flex" justifyContent="flex-start" paddingTop={space[4]}>
               <ChartRegionControls value={chartRegion} onChange={onChartRegionChange} />
             </Box>
           )}
