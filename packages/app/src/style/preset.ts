@@ -1,4 +1,6 @@
+import { colors } from '@corona-dashboard/common';
 import { spacingStyle } from './functions/spacing';
+import { fontSizes, fontWeights, lineHeights, space } from './theme';
 import { asResponsiveArray } from './utils';
 
 export type Preset = typeof preset;
@@ -6,88 +8,88 @@ export type Preset = typeof preset;
 export const preset = {
   typography: {
     h1: {
-      fontSize: asResponsiveArray({ _: 8, md: 9 }),
-      lineHeight: 0,
-      fontWeight: 'bold',
+      fontSize: asResponsiveArray({ _: fontSizes[8], md: fontSizes[9] }),
+      lineHeight: lineHeights[0],
+      fontWeight: fontWeights.bold,
     },
     h2: {
-      fontSize: asResponsiveArray({ _: 6, md: 7 }),
-      lineHeight: 1,
-      fontWeight: 'bold',
+      fontSize: asResponsiveArray({ _: fontSizes[6], md: fontSizes[7] }),
+      lineHeight: lineHeights[1],
+      fontWeight: fontWeights.bold,
     },
     h3: {
-      fontSize: asResponsiveArray({ _: 5, md: 6 }),
-      lineHeight: 1,
-      fontWeight: 'bold',
+      fontSize: asResponsiveArray({ _: fontSizes[5], md: fontSizes[6] }),
+      lineHeight: lineHeights[1],
+      fontWeight: fontWeights.bold,
     },
     h4: {
-      fontSize: asResponsiveArray({ _: 3, md: 4 }),
-      lineHeight: 1,
-      fontWeight: 'bold',
+      fontSize: asResponsiveArray({ _: fontSizes[3], md: fontSizes[4] }),
+      lineHeight: lineHeights[1],
+      fontWeight: fontWeights.bold,
     },
     h5: {
-      fontSize: 2,
-      lineHeight: 1,
-      fontWeight: 'bold',
+      fontSize: fontSizes[2],
+      lineHeight: lineHeights[1],
+      fontWeight: fontWeights.bold,
     },
     subtitle1: {
-      fontSize: 2,
-      lineHeight: 2,
-      fontWeight: 'bold',
+      fontSize: fontSizes[2],
+      lineHeight: lineHeights[2],
+      fontWeight: fontWeights.bold,
     },
     subtitle2: {
-      fontSize: 2,
-      lineHeight: 2,
-      fontWeight: 'bold',
-      color: 'gray6',
+      fontSize: fontSizes[2],
+      lineHeight: lineHeights[2],
+      fontWeight: fontWeights.bold,
+      color: colors.gray6,
     },
     body1: {
-      fontSize: 3,
+      fontSize: fontSizes[3],
     },
     body2: {
       /** body2 is the default body styling */
-      fontSize: 2,
-      lineHeight: 2,
+      fontSize: fontSizes[2],
+      lineHeight: lineHeights[2],
     },
     button1: {
-      fontSize: 3,
+      fontSize: fontSizes[3],
     },
     button2: {
-      fontSize: 2,
+      fontSize: fontSizes[2],
     },
     button3: {
-      fontSize: 1,
+      fontSize: fontSizes[1],
     },
     overline1: {
-      fontSize: asResponsiveArray({ _: 3, md: 6 }),
+      fontSize: asResponsiveArray({ _: fontSizes[3], md: fontSizes[6] }),
     },
     overline2: {
-      fontSize: 0,
-      fontWeight: 'bold',
+      fontSize: fontSizes[0],
+      fontWeight: fontWeights.bold,
       textTransform: 'uppercase',
       letterSpacing: '0.05em',
     },
     label1: {
-      fontSize: 1,
-      lineHeight: 1,
+      fontSize: fontSizes[1],
+      lineHeight: lineHeights[1],
     },
     label2: {
-      fontSize: 0,
-      lineHeight: 1,
+      fontSize: fontSizes[0],
+      lineHeight: lineHeights[1],
     },
     datadriven: {
-      fontSize: asResponsiveArray({ _: 3, md: 5 }),
+      fontSize: asResponsiveArray({ _: fontSizes[3], md: fontSizes[5] }),
     },
     choroplethTooltipHeader: {
-      fontSize: asResponsiveArray({ _: 5, md: 6 }),
-      lineHeight: 1,
-      fontWeight: 'bold',
+      flex: 1,
+      fontSize: asResponsiveArray({ _: fontSizes[5], md: fontSizes[6] }),
+      lineHeight: lineHeights[1],
+      fontWeight: fontWeights.bold,
+      marginInline: space[2],
       overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      mt: 0,
     },
     loaderText: {
-      lineHeight: 1,
+      lineHeight: lineHeights[1],
     },
   },
 } as const;
@@ -102,18 +104,17 @@ export const nestedHtml = {
   h4: preset.typography.h4,
   h5: preset.typography.h5,
 
-  strong: { fontWeight: 'bold' },
+  strong: { fontWeight: fontWeights.bold },
   em: { fontStyle: 'italic' },
-  ul: { ml: 4 },
-  ol: { ml: 4 },
+  ul: { marginLeft: space[4] },
+  ol: { marginLeft: space[4] },
   a: { textDecoration: 'underline' },
 
   /**
    * Apply some special margin styles to "stick" headings to their content.
    */
   'h1, h2, h3, h4, h5, h6': {
-    mt: 4,
-    mb: -2,
+    margin: `${space[4]} 0 ${-space[2]}`,
   },
 };
 
