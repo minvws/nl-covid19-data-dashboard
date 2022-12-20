@@ -50,14 +50,7 @@ export function ChoroplethTile({
   const breakpoints = useBreakpoints(true);
   const legendaComponent = legend && (
     <Box maxWidth={300} width="100%">
-      <ChoroplethLegenda
-        thresholds={legend.thresholds}
-        title={legend.title}
-        valueAnnotation={valueAnnotation}
-        type={legend.type}
-        pageType={pageType}
-        outdatedDataLabel={legend.outdatedDataLabel}
-      />
+      <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} valueAnnotation={valueAnnotation} pageType={pageType} outdatedDataLabel={legend.outdatedDataLabel} />
     </Box>
   );
 
