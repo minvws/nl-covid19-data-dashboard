@@ -91,7 +91,7 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
 export function getBehaviorChartOptions<VrBehaviorArchived_20221019Value>(value: VrBehaviorArchived_20221019Value) {
   return behaviorIdentifiers
     .map((key) => {
-      if (`${key}_compliance` in value || `${key}_support` in value) {
+      if (Object.keys(value as object).includes(`${key}_compliance`) || Object.keys(value as object).includes(`${key}_support`)) {
         return key;
       }
     })
