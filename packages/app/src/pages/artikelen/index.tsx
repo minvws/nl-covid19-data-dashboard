@@ -77,7 +77,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
       articleCategories.map((category) => ({
         ...category,
         content: (
-          <Box paddingRight={2}>
+          <Box paddingRight={space[2]}>
             <Text>{category.label}</Text>
           </Box>
         ),
@@ -103,9 +103,9 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
-      <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
-        <MaxWidth px={{ _: 3, lg: 4 }}>
-          <Box paddingBottom={2}>
+      <Box backgroundColor="white" paddingY={{ _: space[4], md: space[5] }}>
+        <MaxWidth paddingX={{ _: space[3], lg: space[4] }}>
+          <Box paddingBottom={space[2]}>
             <Heading level={2} as="h1">
               {textShared.secties.artikelen.titel}
             </Heading>

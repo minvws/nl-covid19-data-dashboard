@@ -7,14 +7,9 @@ import { Heading } from '~/components/typography';
 import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
 
@@ -66,28 +61,13 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { commonTexts } = useIntl();
 
-  const groups = groupBy<FAQuestionAndAnswer>(
-    content.questions,
-    (x) => x.group
-  );
+  const groups = groupBy<FAQuestionAndAnswer>(content.questions, (x) => x.group);
 
   return (
-    <Layout
-      {...commonTexts.veelgestelde_vragen_metadata}
-      lastGenerated={lastGenerated}
-    >
+    <Layout {...commonTexts.veelgestelde_vragen_metadata} lastGenerated={lastGenerated}>
       <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-          title="webpagina"
-        />
+        <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
+        <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
       </Head>
 
       <Content>
@@ -106,7 +86,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                   return (
                     <CollapsibleSection key={id} id={id} summary={item.title}>
                       {item.content && (
-                        <Box py={3}>
+                        <Box paddingY={space[3]}>
                           <RichContent blocks={item.content} />
                         </Box>
                       )}

@@ -12,6 +12,7 @@ import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { DynamicChoropleth } from '../../components/choropleth';
@@ -50,7 +51,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         )}
 
-        <Box as="article" padding={4}>
+        <Box as="article" padding={space[4]}>
           <Heading level={2} as="h1">
             {commonTexts.gemeente_index.selecteer_titel}
           </Heading>

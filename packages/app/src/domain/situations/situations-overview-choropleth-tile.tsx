@@ -101,7 +101,7 @@ function ChoroplethTooltip({ value, isPercentage, regionName, thresholds, noData
   const intl = useIntl();
 
   return (
-    <Box px={3} py={2} aria-live="polite">
+    <Box paddingX={space[3]} paddingY={space[2]} aria-live="polite">
       <TooltipSubject thresholdValues={thresholds} filterBelow={value} noDataFillColor={noDataFillColor}>
         <Box
           as="span"
@@ -111,7 +111,7 @@ function ChoroplethTooltip({ value, isPercentage, regionName, thresholds, noData
         >
           {regionName + ': '}
         </Box>
-        <Box as="span" display="inline-block" fontWeight="bold" textAlign="right" px={1} flexShrink={0}>
+        <Box as="span" display="inline-block" fontWeight="bold" textAlign="right" paddingX={space[1]} flexShrink={0}>
           {typeof value === 'number' ? (isPercentage ? intl.formatPercentage(value) + '%' : value) : '–'}
         </Box>
       </TooltipSubject>
@@ -131,7 +131,7 @@ function ChoroplethGridItem({ icon, title, description, children }: { icon: Reac
   return (
     <Box
       /** add a little bit of bottom-padding to match whitespace from design */
-      paddingBottom={2}
+      paddingBottom={space[2]}
     >
       <Box display="flex" justifyContent="center" alignItems="center" spacingHorizontal={2} marginBottom={space[3]}>
         {icon}

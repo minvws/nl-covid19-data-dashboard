@@ -30,7 +30,7 @@ export function Search({ initialValue, title, activeResult }: { initialValue?: s
                 xs: '20rem',
                 sm: '42rem',
               }}
-              px={{ sm: 4 }}
+              paddingX={{ sm: space[4] }}
               position="relative"
               zIndex={1}
             >
@@ -50,7 +50,7 @@ export function Search({ initialValue, title, activeResult }: { initialValue?: s
                     borderTopLeftRadius={0}
                     borderTopRightRadius={0}
                     // make sure the input and results bottom and top borders overlap
-                    my={`-${space[1]}`}
+                    marginY={`-${space[1]}`}
                   >
                     <SearchResults />
                   </Box>

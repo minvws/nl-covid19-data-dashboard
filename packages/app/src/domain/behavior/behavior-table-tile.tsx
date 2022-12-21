@@ -103,7 +103,7 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
                   })}
                 >
                   <Box display="flex" marginRight={space[2]}>
-                    <Box minWidth={32} color="black" paddingRight={2} display="flex">
+                    <Box minWidth={32} color="black" paddingRight={space[2]} display="flex">
                       <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
                     <DescriptionWithIcon description={behavior.description} id={behavior.id} setCurrentId={setCurrentId} scrollRef={scrollRef} />
@@ -203,7 +203,7 @@ function DescriptionWithIcon({
 function PercentageBarWithNumber({ percentage, color }: { percentage: number; color: string }) {
   const { formatPercentage } = useIntl();
   return (
-    <Box display="flex" alignItems="center" spacingHorizontal={2} paddingRight={{ _: 2, sm: 2, lg: 4, xl: 5 }}>
+    <Box display="flex" alignItems="center" spacingHorizontal={2} paddingRight={{ _: space[2], sm: space[2], lg: space[4], xl: space[5] }}>
       <Box as="span" minWidth={40} textAlign="right">
         <BoldText>{`${formatPercentage(percentage)}%`}</BoldText>
       </Box>
