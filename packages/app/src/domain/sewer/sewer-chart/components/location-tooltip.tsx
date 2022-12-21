@@ -31,7 +31,7 @@ export function LocationTooltip({ data }: { data: TooltipData<MergedSewerType> }
           <Location />
         </StyledLocationIcon>
         <BoldText>{config.label}</BoldText>
-        <Box mx={space[2]}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>
+        <Box marginX={space[2]}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>
 
         <BoldText>{formatNumber(data.value.selected_installation_rna_normalized)}</BoldText>
       </Box>

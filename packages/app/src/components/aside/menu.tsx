@@ -48,7 +48,7 @@ export function CategoryMenu({ title, children, icon }: { children: ReactNode; t
   return (
     <Box as="li" spacing={2}>
       {title && icon && (
-        <Box px={2} paddingTop={3} display="flex" alignItems="center">
+        <Box paddingX={space[2]} paddingTop={space[3]} display="flex" alignItems="center">
           <Icon>{icon}</Icon>
           <Heading level={5}>{title}</Heading>
         </Box>
@@ -157,7 +157,7 @@ const Icon = ({ children }: { children: ReactNode }) => {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={0}
+      padding={space[0]}
       marginRight={space[0]}
       mt="-3px"
       css={css({

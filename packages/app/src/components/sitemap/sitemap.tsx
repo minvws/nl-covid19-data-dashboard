@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { LinkGroup, LinkGroupProps, LinkItemProps } from './link-group';
 
@@ -14,12 +15,12 @@ type SitemapProps = {
 
 export function Sitemap({ quickLinksHeader, quickLinks, dataSitemapHeader, dataSitemap }: SitemapProps) {
   return (
-    <Box display="flex" py={4} flexDirection={{ _: 'column', md: 'row' }}>
+    <Box display="flex" paddingY={space[4]} flexDirection={{ _: 'column', md: 'row' }}>
       <Box
         position="relative"
         flexBasis={{ _: '33%', lg: '25%' }}
-        paddingBottom={{ _: 4, md: 0 }}
-        paddingRight={{ _: 0, md: 3 }}
+        paddingBottom={{ _: space[4], md: space[0] }}
+        paddingRight={{ _: space[0], md: space[3] }}
         borderColor="gray3"
         borderStyle="solid"
         borderRightWidth={{ md: '1px' }}
@@ -29,7 +30,7 @@ export function Sitemap({ quickLinksHeader, quickLinks, dataSitemapHeader, dataS
         <LinkGroup links={quickLinks} />
       </Box>
 
-      <Box flexBasis={{ _: '66%', lg: '75%' }} paddingTop={{ _: 4, md: 0 }} paddingLeft={{ _: 0, md: 4 }} spacing={3}>
+      <Box flexBasis={{ _: '66%', lg: '75%' }} paddingTop={{ _: space[4], md: space[0] }} paddingLeft={{ _: space[0], md: space[4] }} spacing={3}>
         <Heading level={3}>{dataSitemapHeader}</Heading>
         <Box display="flex" flexWrap="wrap">
           {dataSitemap.map((group: LinkGroupProps) => (

@@ -63,8 +63,8 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
               </AppearTransition>
             )}
             {timelineEvent && (
-              <AppearTransition mx={`-${space[3]}`} key="2">
-                <Box fontWeight="bold" px={space[3]} paddingBottom={space[2]} marginBottom={space[2]} borderBottom="1px solid" borderBottomColor="gray2">
+              <AppearTransition marginX={`-${space[3]}`} key="2">
+                <Box fontWeight="bold" paddingX={space[3]} paddingBottom={space[2]} marginBottom={space[2]} borderBottom="1px solid" borderBottomColor="gray2">
                   <IconRow icon={<TimelineMarker isHighlighted size={10} />}>{timelineEvent.title}</IconRow>
                 </Box>
               </AppearTransition>

@@ -63,11 +63,11 @@ export function PageKpi<T>({ data, metricName, metricProperty, differenceKey, di
       {isDefined(differenceKey) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <Box paddingTop={2}>
+          <Box paddingTop={space[2]}>
             <TileAverageDifference value={differenceValue} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : isDefined(differenceValue) ? (
-          <Box paddingTop={2}>
+          <Box paddingTop={space[2]}>
             <TileDifference value={differenceValue} maximumFractionDigits={differenceFractionDigits} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />
           </Box>
         ) : null)}

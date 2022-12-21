@@ -147,7 +147,7 @@ interface ToggleProps<T extends string> {
 
 function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   return (
-    <Box border="1px solid" borderColor="gray3" mx={space[2]} borderRadius={1} overflow="hidden">
+    <Box border="1px solid" borderColor="gray3" marginX={space[2]} borderRadius={1} overflow="hidden">
       {values.map((x, i) => (
         <label
           key={x}

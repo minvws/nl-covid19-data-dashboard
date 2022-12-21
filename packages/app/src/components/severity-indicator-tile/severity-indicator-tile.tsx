@@ -58,7 +58,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
           {trendIcon?.direction && iconColor && hasIconProps && <TrendIconWrapper color={mapStringToColors(iconColor)}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
           {levelDescription && <Markdown content={levelDescription} />}
         </Box>
-        <Box my={space[3]}>
+        <Box marginY={space[3]}>
           <InlineText color="gray7">{sourceLabel}</InlineText>
         </Box>
       </Box>

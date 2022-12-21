@@ -14,7 +14,7 @@ interface SeverityIndicatorLabelProps {
 
 export const SeverityIndicatorLabel = ({ label, level }: SeverityIndicatorLabelProps) => {
   return (
-    <Box alignItems="center" display="flex" justifyContent="flex-start" my={space[3]} css={css({ gap: `0 ${space[2]}` })}>
+    <Box alignItems="center" display="flex" justifyContent="flex-start" marginY={space[3]} css={css({ gap: `0 ${space[2]}` })}>
       <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
 
       <Text variant="h3">{label}</Text>

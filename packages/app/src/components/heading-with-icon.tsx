@@ -40,7 +40,7 @@ function Icon({ children, size }: { children: React.ReactNode; size: string }) {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={0}
+      padding={space[0]}
       marginRight={space[0]}
       css={css({
         width: size,
