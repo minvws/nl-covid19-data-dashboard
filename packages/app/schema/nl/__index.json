@@ -9,17 +9,17 @@
     "repeating_shot_administered",
     "booster_coverage_archived_20220904",
     "code",
-    "corona_melder_app_download",
-    "corona_melder_app_warning",
+    "corona_melder_app_download_archived_20220420",
+    "corona_melder_app_warning_archived_20220420",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
     "named_difference",
     "disability_care",
-    "doctor",
+    "doctor_archived_20220823",
     "elderly_at_home",
-    "g_number",
+    "g_number_archived_20220607",
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
@@ -42,12 +42,12 @@
     "vaccine_planned",
     "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support",
-    "vaccine_administered",
+    "vaccine_administered_archived_20220518",
     "vaccine_administered_total",
     "vaccine_administered_planned",
     "vaccine_administered_last_week",
-    "vaccine_stock",
-    "vaccine_delivery_per_supplier",
+    "vaccine_stock_archived_20211027",
+    "vaccine_delivery_per_supplier_archived_20211027",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
     "vaccine_coverage_per_age_group_archived_20220908",
@@ -84,11 +84,11 @@
     "booster_coverage_archived_20220904": {
       "$ref": "booster_coverage_archived_20220904.json"
     },
-    "doctor": {
-      "$ref": "doctor.json"
+    "doctor_archived_20220823": {
+      "$ref": "doctor_archived_20220823.json"
     },
-    "g_number": {
-      "$ref": "g_number.json"
+    "g_number_archived_20220607": {
+      "$ref": "g_number_archived_20220607.json"
     },
     "infectious_people": {
       "$ref": "infectious_people.json"
@@ -162,20 +162,20 @@
     "vaccine_vaccinated_or_support": {
       "$ref": "vaccine_vaccinated_or_support.json"
     },
-    "corona_melder_app_download": {
-      "$ref": "corona_melder_app_download.json"
+    "corona_melder_app_download_archived_20220420": {
+      "$ref": "corona_melder_app_download_archived_20220420.json"
     },
-    "corona_melder_app_warning": {
-      "$ref": "corona_melder_app_warning.json"
+    "corona_melder_app_warning_archived_20220420": {
+      "$ref": "corona_melder_app_warning_archived_20220420.json"
     },
-    "vaccine_coverage": {
-      "$ref": "vaccine_coverage.json"
+    "vaccine_coverage_archived_20220518": {
+      "$ref": "vaccine_coverage_archived_20220518.json"
     },
-    "vaccine_delivery_per_supplier": {
-      "$ref": "vaccine_delivery_per_supplier.json"
+    "vaccine_delivery_per_supplier_archived_20211027": {
+      "$ref": "vaccine_delivery_per_supplier_archived_20211027.json"
     },
-    "vaccine_administered": {
-      "$ref": "vaccine_administered.json"
+    "vaccine_administered_archived_20220518": {
+      "$ref": "vaccine_administered_archived_20220518.json"
     },
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
@@ -216,8 +216,8 @@
     "vaccine_coverage_per_age_group_estimated_archived_20220908": {
       "$ref": "vaccine_coverage_per_age_group_estimated_archived_20220908.json"
     },
-    "vaccine_stock": {
-      "$ref": "vaccine_stock.json"
+    "vaccine_stock_archived_20211027": {
+      "$ref": "vaccine_stock_archived_20211027.json"
     },
     "variants": {
       "$ref": "variants.json"

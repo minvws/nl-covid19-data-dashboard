@@ -38,9 +38,9 @@ const pageMetrics = [
   'vaccine_administered_total',
   'vaccine_administered_last_week',
   'vaccine_coverage_per_age_group',
-  'vaccine_coverage',
-  'vaccine_delivery_per_supplier',
-  'vaccine_stock',
+  'vaccine_coverage_archived_20220518',
+  'vaccine_delivery_per_supplier_archived_20211027',
+  'vaccine_stock_archived_20211027',
   'vaccine_vaccinated_or_support',
   'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
   'vaccine_coverage_per_age_group_estimated_autumn_2022',
@@ -69,9 +69,9 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group',
     'vaccine_coverage_per_age_group_archived_20220908',
     'vaccine_coverage_per_age_group_archived',
-    'vaccine_coverage',
-    'vaccine_delivery_per_supplier',
-    'vaccine_stock',
+    'vaccine_coverage_archived_20220518',
+    'vaccine_delivery_per_supplier_archived_20211027',
+    'vaccine_stock_archived_20211027',
     'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated_archived_20220908',
     'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
@@ -84,7 +84,7 @@ export const getStaticProps = createGetStaticProps(
     'booster_shot_administered_archived_20220904',
     'repeating_shot_administered'
   ),
-  () => selectAdministrationData(getNlData().data.vaccine_administered),
+  () => selectAdministrationData(getNlData().data.vaccine_administered_archived_20220518),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
@@ -92,7 +92,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('vaccinations_page')},
-        "elements": ${getElementsQuery('nl', ['vaccine_coverage', 'vaccine_administered'], context.locale)}
+        "elements": ${getElementsQuery('nl', ['vaccine_coverage_archived_20220518', 'vaccine_administered_archived_20220518'], context.locale)}
       }`;
     })(context);
 
@@ -348,12 +348,12 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <VaccinationsOverTimeTile
                 text={textNl}
-                coverageData={data.vaccine_coverage}
+                coverageData={data.vaccine_coverage_archived_20220518}
                 administrationData={administrationData}
                 vaccineAdministeredPlannedLastValue={data.vaccine_administered_planned.last_value}
                 timelineEvents={{
-                  coverage: getTimelineEvents(content.elements.timeSeries, 'vaccine_coverage'),
-                  deliveryAndAdministration: getTimelineEvents(content.elements.timeSeries, 'vaccine_administered'),
+                  coverage: getTimelineEvents(content.elements.timeSeries, 'vaccine_coverage_archived_20220518'),
+                  deliveryAndAdministration: getTimelineEvents(content.elements.timeSeries, 'vaccine_administered_archived_20220518'),
                 }}
               />
 
@@ -407,9 +407,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 values={data.vaccine_coverage_per_age_group_archived.values}
               />
 
-              <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} text={textNl} />
+              <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier_archived_20211027} text={textNl} />
 
-              <VaccineStockPerSupplierChart values={data.vaccine_stock.values} text={textNl} />
+              <VaccineStockPerSupplierChart values={data.vaccine_stock_archived_20211027.values} text={textNl} />
 
               <ChartTile
                 title={textNl.grafiek_draagvlak.titel}

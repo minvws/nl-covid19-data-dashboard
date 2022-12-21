@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_doctor",
+  "title": "nl_g_number_archived_20220607",
   "type": "object",
   "properties": {
     "values": {
@@ -17,32 +17,20 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_doctor_value",
+      "title": "nl_g_number_archived_20220607_value",
       "type": "object",
       "properties": {
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
-          "type": "integer"
-        },
-        "covid_symptoms_per_100k": {
+        "g_number": {
           "type": "number"
         },
-        "covid_symptoms": {
-          "type": "number"
+        "date_unix": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "date_start_unix",
-        "date_end_unix",
-        "covid_symptoms_per_100k",
-        "covid_symptoms",
-        "date_of_insertion_unix"
-      ],
+      "required": ["g_number", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_g_number",
+  "title": "vr_g_number_archived_20220607",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_g_number_value",
+      "title": "vr_g_number_archived_20220607_value",
       "type": "object",
       "properties": {
         "g_number": {

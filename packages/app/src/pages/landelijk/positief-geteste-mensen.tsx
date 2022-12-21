@@ -22,7 +22,7 @@ import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } fro
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
+const pageMetrics = ['g_number_archived_20220607', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -40,7 +40,7 @@ export const getStaticProps = createGetStaticProps(
     'difference.tested_ggd__tested_total_moving_average',
     'difference.tested_overall__infected_moving_average',
     'difference.tested_overall__infected_per_100k_moving_average',
-    'g_number',
+    'g_number_archived_20220607',
     'tested_ggd',
     'tested_overall',
     'tested_per_age_group'
@@ -384,7 +384,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
           {hasHideArchivedCharts && (
             <InView rootMargin="400px">
-              <GNumberBarChartTile data={data.g_number} />
+              <GNumberBarChartTile data={data.g_number_archived_20220607} />
             </InView>
           )}
         </TileList>

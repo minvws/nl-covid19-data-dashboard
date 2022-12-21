@@ -22,7 +22,7 @@
     "behavior_archived_20221019",
     "tested_overall_sum",
     "hospital_nice_sum",
-    "g_number",
+    "g_number_archived_20220607",
     "situations",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
@@ -49,8 +49,8 @@
     "difference": {
       "$ref": "__difference.json"
     },
-    "g_number": {
-      "$ref": "g_number.json"
+    "g_number_archived_20220607": {
+      "$ref": "g_number_archived_20220607.json"
     },
     "sewer": {
       "$ref": "sewer.json"

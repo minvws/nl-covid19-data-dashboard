@@ -1,45 +1,30 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_administered_value",
+      "title": "nl_vaccine_coverage_archived_20220518_value",
       "type": "object",
       "required": [
-        "pfizer",
-        "moderna",
-        "astra_zeneca",
-        "novavax",
-        "total",
-        "date_of_insertion_unix",
+        "booster_vaccinated",
+        "partially_vaccinated",
+        "fully_vaccinated",
+        "partially_or_fully_vaccinated",
         "date_start_unix",
-        "date_end_unix"
+        "date_end_unix",
+        "date_unix",
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "pfizer": {
+        "booster_vaccinated": {
           "type": "integer"
         },
-        "moderna": {
+        "partially_vaccinated": {
           "type": "integer"
         },
-        "astra_zeneca": {
+        "fully_vaccinated": {
           "type": "integer"
         },
-        "cure_vac": {
-          "type": "integer"
-        },
-        "janssen": {
-          "type": "integer"
-        },
-        "sanofi": {
-          "type": "integer"
-        },
-        "novavax": {
-          "type": "integer"
-        },
-        "total": {
-          "type": "integer"
-        },
-        "date_of_insertion_unix": {
+        "partially_or_fully_vaccinated": {
           "type": "integer"
         },
         "date_start_unix": {
@@ -47,12 +32,18 @@
         },
         "date_end_unix": {
           "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
         }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_administered",
+  "title": "nl_vaccine_coverage_archived_20220518",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
