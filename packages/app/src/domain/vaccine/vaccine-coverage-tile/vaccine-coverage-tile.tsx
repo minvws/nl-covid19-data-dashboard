@@ -61,7 +61,7 @@ export const VaccineCoverageTile = ({ title, description, source, descriptionFoo
         </KpiContent>
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
-      <Box maxWidth="maxWidthText" mt={36}>
+      <Box maxWidth="maxWidthText" marginTop={36}>
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>
@@ -86,10 +86,10 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
   return (
     <Box>
       <BoldText>{data.title}</BoldText>
-      <Box pt={3} pb={1}>
+      <Box paddingTop={3} paddingBottom={1}>
         <KpiValue text={parsedAgePercentage} color={bar.color} />
       </Box>
-      <Box pt={2} pb={3}>
+      <Box paddingTop={2} paddingBottom={3}>
         <Bar value={bar.value} color={bar.color} height={12} />
       </Box>
       <Markdown

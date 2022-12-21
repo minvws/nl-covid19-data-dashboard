@@ -1,6 +1,7 @@
 import { MarginBottomProps } from 'styled-system';
 import { ExternalLink } from '~/components/external-link';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { InlineText, Text } from './typography';
@@ -20,16 +21,7 @@ export interface MetadataProps extends MarginBottomProps {
   intervalCount?: string;
 }
 
-export function Metadata({
-  date,
-  source,
-  obtainedAt,
-  isTileFooter,
-  datumsText,
-  mb,
-  dataSources,
-  intervalCount,
-}: MetadataProps) {
+export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, mb, dataSources, intervalCount }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dateString =
@@ -70,7 +62,7 @@ export function Metadata({
          * @TODO split up the `isTileFooter` vs non `isTileFooter` implementations,
          * should be separate components.
          */
-        <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
+        <Box as="footer" marginTop={space[3]} marginBottom={mb || { _: space[0], sm: '-3px' }} gridArea="metadata">
           <Text color="gray7" variant="label1">
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
@@ -81,12 +73,9 @@ export function Metadata({
               <>
                 {dateString}
                 {obtainedAt &&
-                  ` ${replaceVariablesInText(
-                    commonTexts.common.metadata.obtained,
-                    {
-                      date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
-                    }
-                  )}`}
+                  ` ${replaceVariablesInText(commonTexts.common.metadata.obtained, {
+                    date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
+                  })}`}
                 {intervalString && `. ${intervalString}`}
                 {dateString && source ? ' · ' : null}
 
@@ -97,8 +86,7 @@ export function Metadata({
                     {`${commonTexts.common.metadata.source}: `}
                     {dataSources.map((item, index) => (
                       <InlineText key={index}>
-                        {index > 0 &&
-                          (index !== dataSources.length - 1 ? ' , ' : ' & ')}
+                        {index > 0 && (index !== dataSources.length - 1 ? ' , ' : ' & ')}
                         {item.text}
                       </InlineText>
                     ))}

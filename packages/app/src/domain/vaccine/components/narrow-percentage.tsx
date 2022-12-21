@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 
 interface NarrowPercentageProps {
@@ -9,11 +10,7 @@ interface NarrowPercentageProps {
   textLabel: string;
 }
 
-export function NarrowPercentage({
-  value,
-  color,
-  textLabel,
-}: NarrowPercentageProps) {
+export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
   return (
     <Box
       css={css({
@@ -22,16 +19,10 @@ export function NarrowPercentage({
         pr: asResponsiveArray({ _: 3, xl: 4 }),
       })}
     >
-      <Box pr={3} minWidth="8.5rem" textAlign="left">
+      <Box paddingRight={3} minWidth="8.5rem" textAlign="left">
         <InlineText>{`${textLabel}:`}</InlineText>
       </Box>
-      <Box
-        width={10}
-        height={10}
-        backgroundColor={color}
-        borderRadius="50%"
-        mr={2}
-      />
+      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
       {value}
     </Box>
   );
