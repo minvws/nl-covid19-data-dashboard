@@ -530,6 +530,9 @@ export interface NlHospitalLcps {
 }
 export interface NlHospitalLcpsValue {
   beds_occupied_covid: number | null;
+  influx_covid_patients: number | null;
+  influxes_on_date_of_influx: number;
+  influxes_on_date_of_influx_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -539,8 +542,11 @@ export interface NlIntensiveCareLcps {
 }
 export interface NlIntensiveCareLcpsValue {
   beds_occupied_covid: number | null;
-  beds_occupied_non_covid: number | null;
+  beds_occupied_non_covid?: number | null;
   beds_occupied_covid_percentage: number | null;
+  influx_covid_patients: number | null;
+  influxes_on_date_of_influx: number;
+  influxes_on_date_of_influx_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
