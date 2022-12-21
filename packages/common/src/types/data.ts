@@ -258,13 +258,8 @@ export interface Nl {
   corona_melder_app_download: NlCoronaMelderAppDownload;
   corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
-  vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
-  vaccine_administered_doctors: NlVaccineAdministeredDoctors;
-  vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
-  vaccine_administered_ggd: NlVaccineAdministeredGgd;
-  vaccine_administered_hospitals_and_care_institutions: NlVaccineAdministeredHospitalsAndCareInstitutions;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_administered_last_week: NlVaccineAdministeredLastWeek;
@@ -826,16 +821,6 @@ export interface NlVaccineCoverageValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineDeliveryEstimate {
-  values: NlVaccineDeliveryEstimateValue[];
-  last_value: NlVaccineDeliveryEstimateValue;
-}
-export interface NlVaccineDeliveryEstimateValue {
-  total: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
 export interface NlVaccineDeliveryPerSupplier {
   values: NlVaccineDeliveryPerSupplierValue[];
   last_value: NlVaccineDeliveryPerSupplierValue;
@@ -871,42 +856,6 @@ export interface NlVaccineAdministeredValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
-}
-export interface NlVaccineAdministeredDoctors {
-  values: NlVaccineAdministeredDoctorsValue[];
-  last_value: NlVaccineAdministeredDoctorsValue;
-}
-export interface NlVaccineAdministeredDoctorsValue {
-  estimated: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineAdministeredGgdGhor {
-  values: NlVaccineAdministeredGgdGhorValue[];
-  last_value: NlVaccineAdministeredGgdGhorValue;
-}
-export interface NlVaccineAdministeredGgdGhorValue {
-  reported: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineAdministeredGgd {
-  values: NlVaccineAdministeredGgdValue[];
-  last_value: NlVaccineAdministeredGgdValue;
-}
-export interface NlVaccineAdministeredGgdValue {
-  estimated: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineAdministeredHospitalsAndCareInstitutions {
-  values: NlVaccineAdministeredHospitalsAndCareInstitutionsValue[];
-  last_value: NlVaccineAdministeredHospitalsAndCareInstitutionsValue;
-}
-export interface NlVaccineAdministeredHospitalsAndCareInstitutionsValue {
-  estimated: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
 }
 export interface NlVaccineAdministeredTotal {
   values: NlVaccineAdministeredTotalValue[];
@@ -1140,6 +1089,7 @@ export type TopicalIcon =
   | 'AlcoholVerkoop'
   | 'Archive'
   | 'Arrow'
+  | 'ArrowWithIntensity'
   | 'Arts'
   | 'Avondklok'
   | 'BarChart'

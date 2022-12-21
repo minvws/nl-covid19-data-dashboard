@@ -34,8 +34,6 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
-  'vaccine_administered_doctors',
-  'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_planned',
   'vaccine_administered_total',
   'vaccine_administered_last_week',
@@ -65,8 +63,6 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
-    'vaccine_administered_doctors',
-    'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_planned',
     'vaccine_administered_total',
     'vaccine_administered_last_week',

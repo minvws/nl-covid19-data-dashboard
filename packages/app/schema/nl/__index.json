@@ -42,12 +42,7 @@
     "vaccine_planned",
     "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support",
-    "vaccine_delivery_estimate",
     "vaccine_administered",
-    "vaccine_administered_doctors",
-    "vaccine_administered_ggd_ghor",
-    "vaccine_administered_ggd",
-    "vaccine_administered_hospitals_and_care_institutions",
     "vaccine_administered_total",
     "vaccine_administered_planned",
     "vaccine_administered_last_week",
@@ -176,26 +171,11 @@
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
     },
-    "vaccine_delivery_estimate": {
-      "$ref": "vaccine_delivery_estimate.json"
-    },
     "vaccine_delivery_per_supplier": {
       "$ref": "vaccine_delivery_per_supplier.json"
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
-    },
-    "vaccine_administered_doctors": {
-      "$ref": "vaccine_administered_doctors.json"
-    },
-    "vaccine_administered_ggd_ghor": {
-      "$ref": "vaccine_administered_ggd_ghor.json"
-    },
-    "vaccine_administered_ggd": {
-      "$ref": "vaccine_administered_ggd.json"
-    },
-    "vaccine_administered_hospitals_and_care_institutions": {
-      "$ref": "vaccine_administered_hospitals_and_care_institutions.json"
     },
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
