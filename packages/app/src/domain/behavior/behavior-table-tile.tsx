@@ -11,6 +11,7 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
@@ -101,8 +102,8 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
                     }),
                   })}
                 >
-                  <Box display="flex" mr={2}>
-                    <Box minWidth={32} color="black" pr={2} display="flex">
+                  <Box display="flex" marginRight={space[2]}>
+                    <Box minWidth={32} color="black" paddingRight={2} display="flex">
                       <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
                     <DescriptionWithIcon description={behavior.description} id={behavior.id} setCurrentId={setCurrentId} scrollRef={scrollRef} />
@@ -132,7 +133,7 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
           </tbody>
         </StyledTable>
       </Box>
-      <Box mt={2} maxWidth="maxWidthText">
+      <Box marginTop={space[2]} maxWidth="maxWidthText">
         <Text variant="label1" color="gray7">
           {annotation}
         </Text>
@@ -202,7 +203,7 @@ function DescriptionWithIcon({
 function PercentageBarWithNumber({ percentage, color }: { percentage: number; color: string }) {
   const { formatPercentage } = useIntl();
   return (
-    <Box display="flex" alignItems="center" spacingHorizontal={2} pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}>
+    <Box display="flex" alignItems="center" spacingHorizontal={2} paddingRight={{ _: 2, sm: 2, lg: 4, xl: 5 }}>
       <Box as="span" minWidth={40} textAlign="right">
         <BoldText>{`${formatPercentage(percentage)}%`}</BoldText>
       </Box>

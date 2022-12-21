@@ -3,6 +3,7 @@ import hash from 'hash-sum';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
 import { BarScaleConfig } from '~/metric-config/common';
+import { space } from '~/style/theme';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
 
@@ -27,15 +28,7 @@ type DifferenceProps =
 type PageBarScaleProps = PageBarScaleBaseProps & DifferenceProps;
 
 export function PageBarScale(props: PageBarScaleProps) {
-  const {
-    value,
-    config,
-    screenReaderText,
-    difference,
-    isMovingAverageDifference,
-    showOldDateUnix,
-    isAmount,
-  } = props;
+  const { value, config, screenReaderText, difference, isMovingAverageDifference, showOldDateUnix, isAmount } = props;
   /**
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
@@ -43,7 +36,7 @@ export function PageBarScale(props: PageBarScaleProps) {
   const uniqueId = hash(props);
 
   return (
-    <Box spacing={2} mb={3}>
+    <Box spacing={2} marginBottom={space[3]}>
       <BarScale
         min={config.min}
         max={config.max}
@@ -61,11 +54,7 @@ export function PageBarScale(props: PageBarScaleProps) {
         (isMovingAverageDifference ? (
           <TileAverageDifference value={difference} isAmount={isAmount} />
         ) : (
-          <TileDifference
-            value={difference}
-            showOldDateUnix={showOldDateUnix}
-            isAmount={isAmount}
-          />
+          <TileDifference value={difference} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />
         ))}
     </Box>
   );

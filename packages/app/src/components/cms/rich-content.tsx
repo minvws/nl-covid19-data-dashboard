@@ -132,7 +132,7 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
               pb: 4,
             })}
           >
-            <Box pb={4}>
+            <Box paddingBottom={4}>
               <Heading level={3} as="h4">
                 {node.title}
               </Heading>
@@ -153,8 +153,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
               pb: 4,
             })}
           >
-            <Box pb={4}>
-              <Box pb={4}>
+            <Box paddingBottom={4}>
+              <Box paddingBottom={4}>
                 <Heading level={3} as="h4">
                   {node.title}
                 </Heading>
@@ -169,8 +169,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
 
         return (
           <ContentWrapper>
-            <Box pb={4}>
-              <Box pb={4}>
+            <Box paddingBottom={4}>
+              <Box paddingBottom={4}>
                 <Heading level={3} as="h4">
                   {node.title}
                 </Heading>
@@ -186,8 +186,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
 
         return (
           <ContentWrapper>
-            <Box pb={4}>
-              <Box pb={4}>
+            <Box paddingBottom={4}>
+              <Box paddingBottom={4}>
                 <Heading level={3} as="h4">
                   {node.title}
                 </Heading>

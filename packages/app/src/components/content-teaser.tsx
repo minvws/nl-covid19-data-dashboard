@@ -26,7 +26,7 @@ export function ContentTeaser({ title, slug, cover, category, publicationDate, v
   const imageWidth = variant === 'normal' ? (breakpoints.sm ? 186 : 90) : 90;
 
   return (
-    <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" pr={3}>
+    <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" paddingRight={3}>
       <Box maxWidth={imageWidth} width="100%">
         <BackgroundImage image={cover} height={variant === 'normal' ? (breakpoints.sm ? 108 : 66) : 66} sizes={[[imageWidth]]} />
       </Box>

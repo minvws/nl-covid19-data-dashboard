@@ -14,6 +14,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';
 import { LanguageKey, languages, SiteText } from '~/locale';
 import { LokalizeText } from '~/types/cms';
+import { space } from '~/style/theme';
 
 const datasets = ['development', 'production', 'keys'] as const;
 export type Dataset = typeof datasets[number];
@@ -146,7 +147,7 @@ interface ToggleProps<T extends string> {
 
 function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   return (
-    <Box border="1px solid" borderColor="gray3" mx={2} borderRadius={1} overflow="hidden">
+    <Box border="1px solid" borderColor="gray3" mx={space[2]} borderRadius={1} overflow="hidden">
       {values.map((x, i) => (
         <label
           key={x}

@@ -11,12 +11,10 @@ import { BoldText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import {
-  KeyWithLabel,
-  useVaccineCoveragePercentageFormatter,
-} from './logic/use-vaccine-coverage-percentage-formatter';
+import { KeyWithLabel, useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
 
 type AgeTypes = {
   fully_vaccinated: number | null;
@@ -77,7 +75,7 @@ export function VaccineCoverageToggleTile({
 
   return (
     <KpiTile title={title}>
-      <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
+      <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
         <RadioGroup
           value={selectedTab}
           onChange={(value) => setSelectedTab(value)}
@@ -104,21 +102,10 @@ export function VaccineCoverageToggleTile({
                 description={age18PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {age18Plus.dateUnixBoostered && (
-                  <Metadata
-                    source={source}
-                    date={age18Plus.dateUnixBoostered}
-                    isTileFooter
-                  />
-                )}
+                {age18Plus.dateUnixBoostered && <Metadata source={source} date={age18Plus.dateUnixBoostered} isTileFooter />}
               </AgeGroupBlock>
             ) : (
-              <NoBoosterBlock
-                title={labelTexts.booster_grade}
-                description={
-                  age18PlusToggleText.description_booster_grade_not_available
-                }
-              />
+              <NoBoosterBlock title={labelTexts.booster_grade} description={age18PlusToggleText.description_booster_grade_not_available} />
             )}
             <AgeGroupBlock
               title={labelTexts.vaccination_grade}
@@ -126,9 +113,7 @@ export function VaccineCoverageToggleTile({
               property="fully_vaccinated"
               secondProperty="has_one_shot"
               description={age18PlusToggleText.description_vaccination_grade}
-              secondDescription={
-                age18PlusToggleText.description_vaccination_one_shot_with_percentage
-              }
+              secondDescription={age18PlusToggleText.description_vaccination_one_shot_with_percentage}
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
@@ -145,21 +130,10 @@ export function VaccineCoverageToggleTile({
                 description={age12PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {age12Plus.dateUnixBoostered && (
-                  <Metadata
-                    source={source}
-                    date={age12Plus.dateUnixBoostered}
-                    isTileFooter
-                  />
-                )}
+                {age12Plus.dateUnixBoostered && <Metadata source={source} date={age12Plus.dateUnixBoostered} isTileFooter />}
               </AgeGroupBlock>
             ) : (
-              <NoBoosterBlock
-                title={labelTexts.booster_grade}
-                description={
-                  age12PlusToggleText.description_booster_grade_not_available
-                }
-              />
+              <NoBoosterBlock title={labelTexts.booster_grade} description={age12PlusToggleText.description_booster_grade_not_available} />
             )}
             <AgeGroupBlock
               title={labelTexts.vaccination_grade}
@@ -167,9 +141,7 @@ export function VaccineCoverageToggleTile({
               property="fully_vaccinated"
               secondProperty="has_one_shot"
               description={age12PlusToggleText.description_vaccination_grade}
-              secondDescription={
-                age12PlusToggleText.description_vaccination_one_shot_with_percentage
-              }
+              secondDescription={age12PlusToggleText.description_vaccination_one_shot_with_percentage}
               numFractionDigits={numFractionDigits}
             >
               {metadata && <Metadata {...metadata} isTileFooter />}
@@ -177,7 +149,7 @@ export function VaccineCoverageToggleTile({
           </>
         )}
       </TwoKpiSection>
-      <Box maxWidth="maxWidthText" mt={36}>
+      <Box maxWidth="maxWidthText" marginTop={'36px'}>
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>
@@ -195,26 +167,13 @@ interface AgeGroupBlockProps {
   children?: React.ReactNode;
 }
 
-function AgeGroupBlock({
-  title,
-  data,
-  property,
-  secondProperty,
-  description,
-  secondDescription,
-  numFractionDigits,
-  children,
-}: AgeGroupBlockProps) {
+function AgeGroupBlock({ title, data, property, secondProperty, description, secondDescription, numFractionDigits, children }: AgeGroupBlockProps) {
   const { commonTexts } = useIntl();
-  const formatCoveragePercentage =
-    useVaccineCoveragePercentageFormatter(numFractionDigits);
+  const formatCoveragePercentage = useVaccineCoveragePercentageFormatter(numFractionDigits);
 
   const parsedBirthyearRange = parseBirthyearRange(data.birthyear);
 
-  assert(
-    parsedBirthyearRange,
-    `[${AgeGroupBlock.name}] Something went wrong with parsing the birthyear: ${data.birthyear}`
-  );
+  assert(parsedBirthyearRange, `[${AgeGroupBlock.name}] Something went wrong with parsing the birthyear: ${data.birthyear}`);
 
   return (
     <Box spacing={2}>
@@ -228,19 +187,13 @@ function AgeGroupBlock({
       <KpiValue text={formatCoveragePercentage(data, property)} />
       <Markdown
         content={replaceVariablesInText(description, {
-          birthyear: replaceVariablesInText(
-            commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
-            parsedBirthyearRange
-          ),
+          birthyear: replaceVariablesInText(commonTexts.common.birthyear_ranges[parsedBirthyearRange.type], parsedBirthyearRange),
         })}
       />
       {secondDescription && secondProperty && (
         <Markdown
           content={replaceVariablesInText(secondDescription, {
-            birthyear: replaceVariablesInText(
-              commonTexts.common.birthyear_ranges[parsedBirthyearRange.type],
-              parsedBirthyearRange
-            ),
+            birthyear: replaceVariablesInText(commonTexts.common.birthyear_ranges[parsedBirthyearRange.type], parsedBirthyearRange),
             percentage: formatCoveragePercentage(data, secondProperty),
           })}
         />

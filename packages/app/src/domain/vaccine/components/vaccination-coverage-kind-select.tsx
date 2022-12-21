@@ -27,7 +27,7 @@ export function VaccinationCoverageKindSelect(props: VaccinationCoverageKindSele
           value: kind,
           label: commonTexts.vaccinations.coverage_kinds[kind],
           content: (
-            <Box pr={2}>
+            <Box paddingRight={2}>
               <Text>{commonTexts.vaccinations.coverage_kinds[kind]}</Text>
             </Box>
           ),

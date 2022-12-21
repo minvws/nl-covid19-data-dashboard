@@ -10,6 +10,7 @@ import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { AccessibilityDefinition, addAccessibilityFeatures } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
@@ -332,7 +333,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
           css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}
         >
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer mb={{ _: 2, sm: 0 }} />
+          <Spacer marginBottom={{ _: space[2], sm: space[0] }} />
         </Box>
       )}
 
@@ -455,7 +456,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
       {!disableLegend && splitLegendGroups && (
         <>
           {splitLegendGroups.map((x) => (
-            <Box key={x.label} pl={paddingLeft} display="flex" flexDirection={['column', 'row']} alignItems="baseline" spacingHorizontal={3}>
+            <Box key={x.label} paddingLeft={paddingLeft} display="flex" flexDirection={['column', 'row']} alignItems="baseline" spacingHorizontal={3}>
               {x.label && <InlineText>{x.label}:</InlineText>}
               <Legend items={x.items} />
             </Box>
@@ -463,7 +464,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         </>
       )}
       {!disableLegend && legendItems && (
-        <Box pl={paddingLeft}>
+        <Box paddingLeft={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
       )}
