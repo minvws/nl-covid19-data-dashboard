@@ -91,7 +91,7 @@ export const TimelineTooltipContent = ({ config, hasMultipleEvents, onNext, onPr
       </Box>
 
       {isTouch && (
-        <Box borderTop={`1px solid ${colors.gray2}`} display="flex" justifyContent="center" mx="-27px" pt={space[3]} textVariant="label1">
+        <Box borderTop={`1px solid ${colors.gray2}`} display="flex" justifyContent="center" mx="-27px" paddingTop={space[3]} textVariant="label1">
           <Anchor as="button" color={colors.blue8} underline onClick={onClose}>
             {commonTexts.common.sluiten}
           </Anchor>

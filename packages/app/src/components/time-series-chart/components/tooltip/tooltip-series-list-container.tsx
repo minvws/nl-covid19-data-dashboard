@@ -1,20 +1,11 @@
-import {
-  colors,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { colors, isDateValue, TimestampedValue } from '@corona-dashboard/common';
 import { AnimatePresence } from 'framer-motion';
-import {
-  ComponentProps,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ComponentProps, ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { Box, MotionBox } from '~/components/base';
 import { Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { TimelineMarker } from '../timeline';
 import { IconRow } from './tooltip-icon-row';
@@ -34,10 +25,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
 
   const dateString = isDateValue(value)
     ? intl.formatDateFromSeconds(value.date_unix)
-    : [
-        intl.formatDateFromSeconds(value.date_start_unix),
-        intl.formatDateFromSeconds(value.date_end_unix),
-      ].join(' – ');
+    : [intl.formatDateFromSeconds(value.date_start_unix), intl.formatDateFromSeconds(value.date_end_unix)].join(' – ');
 
   /**
    * The listRef is used to apply the width of the list to the tooltip
@@ -62,39 +50,22 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
           <AnimatePresence>
             {timespanAnnotation && (
               <AppearTransition key="1">
-                <Text
-                  variant="label2"
-                  color={colors.gray7}
-                  textAlign={timespanAnnotation.textAlign || 'center'}
-                >
+                <Text variant="label2" color={colors.gray7} textAlign={timespanAnnotation.textAlign || 'center'}>
                   {timespanAnnotation.shortLabel || timespanAnnotation.label}
                 </Text>
               </AppearTransition>
             )}
             {isOutOfBounds && (
               <AppearTransition key="1">
-                <Text
-                  variant="label2"
-                  color={colors.gray7}
-                  textAlign={'left'}
-                >
+                <Text variant="label2" color={colors.gray7} textAlign={'left'}>
                   {options.outOfBoundsConfig?.tooltipLabel}
                 </Text>
               </AppearTransition>
             )}
             {timelineEvent && (
-              <AppearTransition mx={-3} key="2">
-                <Box
-                  fontWeight="bold"
-                  px={3}
-                  pb={2}
-                  mb={2}
-                  borderBottom="1px solid"
-                  borderBottomColor="gray2"
-                >
-                  <IconRow icon={<TimelineMarker isHighlighted size={10} />}>
-                    {timelineEvent.title}
-                  </IconRow>
+              <AppearTransition mx={`-${space[3]}`} key="2">
+                <Box fontWeight="bold" px={space[3]} paddingBottom={space[2]} marginBottom={space[2]} borderBottom="1px solid" borderBottomColor="gray2">
+                  <IconRow icon={<TimelineMarker isHighlighted size={10} />}>{timelineEvent.title}</IconRow>
                 </Box>
               </AppearTransition>
             )}
@@ -107,15 +78,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
 }
 
 function AppearTransition(props: ComponentProps<typeof MotionBox>) {
-  return (
-    <MotionBox
-      {...props}
-      initial={{ height: 0, opacity: 0 }}
-      exit={{ height: 0, opacity: 0 }}
-      animate={{ height: 'auto', opacity: 1 }}
-      overflow="hidden"
-    />
-  );
+  return <MotionBox {...props} initial={{ height: 0, opacity: 0 }} exit={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} overflow="hidden" />;
 }
 
 function useInitialWidth<T extends HTMLElement>() {

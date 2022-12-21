@@ -56,12 +56,12 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       </ContentBlock>
       {!breakpoints.xs
         ? article.imageMobile && (
-            <Box mt={4}>
+            <Box marginTop={space[4]}>
               <ContentImage node={article.imageMobile} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )
         : article.imageDesktop && (
-            <Box mt={4}>
+            <Box marginTop={space[4]}>
               <ContentImage node={article.imageDesktop} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )}
@@ -82,7 +82,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       )}
       {article.categories && (
         <ContentBlock>
-          <Box pb={2} pt={4}>
+          <Box paddingBottom={2} paddingTop={4}>
             <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
@@ -90,8 +90,8 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
             spacingHorizontal={3}
             display="flex"
             flexWrap="wrap"
-            m={0}
-            p={0}
+            margin={space[0]}
+            padding={0}
             css={css({
               listStyleType: 'none',
             })}

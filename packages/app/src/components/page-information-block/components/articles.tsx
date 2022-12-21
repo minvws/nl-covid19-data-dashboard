@@ -23,12 +23,7 @@ export function Articles({ articles }: ArticlesProps) {
       <Text variant="subtitle1">{commonTexts.informatie_header.artikelen}</Text>
       <Box spacing={3}>
         {articles.map((article, index) => (
-          <ArticleItem
-            key={index}
-            title={article.title}
-            cover={article.cover}
-            slug={article.slug.current}
-          />
+          <ArticleItem key={index} title={article.title} cover={article.cover} slug={article.slug.current} />
         ))}
       </Box>
     </Box>
@@ -54,7 +49,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
             })}
           />
         </Box>
-        <Box pl={3} display="flex" alignItems="center">
+        <Box paddingLeft={3} display="flex" alignItems="center">
           <StyledText>
             {words.map((word, index) => (
               <Fragment key={index}>

@@ -12,19 +12,14 @@ type SitemapProps = {
   dataSitemap: LinkGroupProps[];
 };
 
-export function Sitemap({
-  quickLinksHeader,
-  quickLinks,
-  dataSitemapHeader,
-  dataSitemap,
-}: SitemapProps) {
+export function Sitemap({ quickLinksHeader, quickLinks, dataSitemapHeader, dataSitemap }: SitemapProps) {
   return (
     <Box display="flex" py={4} flexDirection={{ _: 'column', md: 'row' }}>
       <Box
         position="relative"
         flexBasis={{ _: '33%', lg: '25%' }}
-        pb={{ _: 4, md: 0 }}
-        pr={{ _: 0, md: 3 }}
+        paddingBottom={{ _: 4, md: 0 }}
+        paddingRight={{ _: 0, md: 3 }}
         borderColor="gray3"
         borderStyle="solid"
         borderRightWidth={{ md: '1px' }}
@@ -34,21 +29,12 @@ export function Sitemap({
         <LinkGroup links={quickLinks} />
       </Box>
 
-      <Box
-        flexBasis={{ _: '66%', lg: '75%' }}
-        pt={{ _: 4, md: 0 }}
-        pl={{ _: 0, md: 4 }}
-        spacing={3}
-      >
+      <Box flexBasis={{ _: '66%', lg: '75%' }} paddingTop={{ _: 4, md: 0 }} paddingLeft={{ _: 0, md: 4 }} spacing={3}>
         <Heading level={3}>{dataSitemapHeader}</Heading>
         <Box display="flex" flexWrap="wrap">
           {dataSitemap.map((group: LinkGroupProps) => (
             <LinkGroupContainer key={group.header}>
-              <LinkGroup
-                key={group.header}
-                header={group.header}
-                links={group.links}
-              />
+              <LinkGroup key={group.header} header={group.header} links={group.links} />
             </LinkGroupContainer>
           ))}
         </Box>

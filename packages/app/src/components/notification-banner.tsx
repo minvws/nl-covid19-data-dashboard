@@ -6,15 +6,13 @@ import { MaxWidth } from '~/components/max-width';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { InlineText, BoldText } from './typography';
 import { colors } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 
 interface NotificationBannerProps {
   title: string;
   description: string;
 }
-export function NotificationBanner({
-  title,
-  description,
-}: NotificationBannerProps) {
+export function NotificationBanner({ title, description }: NotificationBannerProps) {
   const [lastWord, ...splittedWords] = title.split(' ').reverse();
   const titleWithoutLastWord = splittedWords.reverse().join(' ');
 
@@ -24,12 +22,7 @@ export function NotificationBanner({
 
   return (
     <Box width="100%" backgroundColor={colors.gray2}>
-      <MaxWidth
-        px={{ _: 3, sm: 4 }}
-        py={3}
-        display="flex"
-        spacingHorizontal={3}
-      >
+      <MaxWidth px={{ _: 3, sm: 4 }} py={3} display="flex" spacingHorizontal={3}>
         <Box display="flex" width="1.6rem" height="1.6rem">
           <Warning />
         </Box>
@@ -71,8 +64,8 @@ export function NotificationBanner({
 
           {hasDescription &&
             collapsible.content(
-              <Box pb={2}>
-                <Spacer mt={3} />
+              <Box paddingBottom={space[2]}>
+                <Spacer marginTop={space[3]} />
                 <Markdown content={description} />
               </Box>
             )}

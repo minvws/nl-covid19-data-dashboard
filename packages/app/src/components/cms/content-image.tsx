@@ -5,6 +5,7 @@ import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { getImageProps } from '~/lib/sanity';
+import { space } from '~/style/theme';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 import { Text } from '../typography';
 
@@ -23,11 +24,7 @@ const SanityImageTile = styled(SanityImage)(
 
 const IMAGE_MAX_WIDTH = 980;
 
-export function ContentImage({
-  node,
-  contentWrapper,
-  sizes,
-}: ContentImageProps) {
+export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Text as="figcaption" variant="body2" textAlign="left">
       {node.caption}
@@ -37,16 +34,8 @@ export function ContentImage({
   const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
-    <Box bg="gray1" p={4} width="100%">
-      <Box
-        as="figure"
-        role="group"
-        spacing={3}
-        display="flex"
-        maxWidth={IMAGE_MAX_WIDTH}
-        textAlign="center"
-        mx="auto"
-      >
+    <Box bg="gray1" padding={4} width="100%">
+      <Box as="figure" role="group" spacing={3} display="flex" maxWidth={IMAGE_MAX_WIDTH} textAlign="center" mx="auto">
         <ContentBlock>
           {node.asset && (
             <SanityImageTile
@@ -62,10 +51,8 @@ export function ContentImage({
     </Box>
   ) : (
     <ContentWrapper>
-      <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <Box mb={3}>
-          {node.asset && <SanityImage {...getImageProps(node, { sizes })} />}
-        </Box>
+      <Box as="figure" role="group" spacing={3} my={space[2]} textAlign="center">
+        <Box marginBottom={space[3]}>{node.asset && <SanityImage {...getImageProps(node, { sizes })} />}</Box>
         {caption}
       </Box>
     </ContentWrapper>

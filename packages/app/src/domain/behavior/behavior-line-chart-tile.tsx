@@ -40,8 +40,8 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
   return (
     <ChartTile title={text.shared.line_chart.title} metadata={metadata} description={text.shared.line_chart.description}>
       <Box spacing={4}>
-        <Box display="flex" alignItems={{ lg: 'center' }} spacing={{ _: 3, lg: 0 }} flexDirection={{ _: 'column', lg: 'row' }} pb={3}>
-          <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
+        <Box display="flex" alignItems={{ lg: 'center' }} spacing={{ _: 3, lg: 0 }} flexDirection={{ _: 'column', lg: 'row' }} paddingBottom={3}>
+          <Box paddingRight={3} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} options={behaviorOptions} />
           </Box>
 

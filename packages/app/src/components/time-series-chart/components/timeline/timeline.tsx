@@ -21,14 +21,7 @@ interface TimelineProps {
   isYAxisCollapsed?: boolean;
 }
 
-export const Timeline = memo(function Timeline({
-  width,
-  padding,
-  highlightIndex,
-  size = 10,
-  timelineState,
-  isYAxisCollapsed,
-}: TimelineProps) {
+export const Timeline = memo(function Timeline({ width, padding, highlightIndex, size = 10, timelineState, isYAxisCollapsed }: TimelineProps) {
   const { commonTexts } = useIntl();
   const { index, setIndex } = timelineState;
   const [ref, { height = 0 }] = useResizeObserver<HTMLDivElement>();
@@ -43,10 +36,7 @@ export const Timeline = memo(function Timeline({
     height,
   });
 
-  const hideTooltip = useCallback(
-    (index: number) => indexRef.current === index && setIndex(undefined),
-    [setIndex]
-  );
+  const hideTooltip = useCallback((index: number) => indexRef.current === index && setIndex(undefined), [setIndex]);
 
   const barHeight = size;
   const historyLineWidth = isYAxisCollapsed ? 15 : Math.min(padding.left, 23);
@@ -60,7 +50,7 @@ export const Timeline = memo(function Timeline({
       ref={ref}
       position="relative"
       spacing={2}
-      pb={4}
+      paddingBottom={4}
       css={css({ userSelect: 'none', touchAction: 'pan-y' })}
       width={width}
       onTouchStart={handleHover}
@@ -68,12 +58,10 @@ export const Timeline = memo(function Timeline({
       onMouseMove={handleHover}
       onMouseLeave={handleHover}
     >
-      <Box pl={padding.left}>
-        <BoldText variant="label1">
-          {commonTexts.charts.timeline.title}
-        </BoldText>
+      <Box paddingLeft={padding.left}>
+        <BoldText variant="label1">{commonTexts.charts.timeline.title}</BoldText>
       </Box>
-      <Box display="flex" pl={padding.left}>
+      <Box display="flex" paddingLeft={padding.left}>
         {showHistoryLine && (
           <Box position="absolute" left={padding.left - historyLineWidth}>
             <DottedTimelineBar width={historyLineWidth} height={barHeight} />

@@ -9,6 +9,7 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
+import { space } from '~/style/theme';
 
 interface ChartTileProps {
   title: string;
@@ -21,19 +22,8 @@ interface ChartTileProps {
   children: ReactNode;
 }
 
-export function ChartTile({
-  title,
-  metadata,
-  description,
-  timeframeInitialValue,
-  disableFullscreen,
-  timeframeOptions,
-  onSelectTimeframe,
-  children,
-}: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue || TimeframeOption.ALL
-  );
+export function ChartTile({ title, metadata, description, timeframeInitialValue, disableFullscreen, timeframeOptions, onSelectTimeframe, children }: ChartTileProps) {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || TimeframeOption.ALL);
 
   useEffect(() => {
     if (onSelectTimeframe) {
@@ -54,16 +44,12 @@ export function ChartTile({
               }),
             })}
           >
-            <ChartTimeControls
-              timeframeOptions={timeframeOptions}
-              timeframe={timeframe}
-              onChange={setTimeframe}
-            />
+            <ChartTimeControls timeframeOptions={timeframeOptions} timeframe={timeframe} onChange={setTimeframe} />
           </Box>
         )}
       </ChartTileHeader>
 
-      <Spacer mb={description || timeframeOptions ? 4 : 3} />
+      <Spacer marginBottom={description || timeframeOptions ? space[4] : space[3]} />
 
       <ErrorBoundary>{children}</ErrorBoundary>
     </FullscreenChartTile>
@@ -76,11 +62,7 @@ interface ChartTileHeaderProps {
   children?: ReactNode;
 }
 
-function ChartTileHeader({
-  title,
-  description,
-  children,
-}: ChartTileHeaderProps) {
+function ChartTileHeader({ title, description, children }: ChartTileHeaderProps) {
   return (
     <Box spacing={3}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
