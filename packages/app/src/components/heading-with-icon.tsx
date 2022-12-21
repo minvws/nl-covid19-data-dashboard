@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import React from 'react';
+import { space } from '~/style/theme';
 import { Box } from './base';
 import { Heading, HeadingLevel } from './typography';
 
