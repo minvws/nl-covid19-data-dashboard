@@ -3,7 +3,7 @@ import { ChevronRight, Location } from '@corona-dashboard/icons';
 import { MouseEventHandler, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { InlineText, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { space } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
@@ -19,12 +19,8 @@ export const TooltipContent = ({ title, link, children }: TooltipContentProps) =
   return (
     <StyledTooltipContent as={link ? 'a' : 'div'} href={link ? link : undefined} isInteractive={isTouch} aria-live="polite">
       <StyledTooltipHeader>
-        <Text variant="choroplethTooltipHeader">
-          <StyledLocationIcon>
-            <Location />
-          </StyledLocationIcon>
-          {title}
-        </Text>
+        <LocationIcon />
+        <Text variant="choroplethTooltipHeader">{title}</Text>
         {link && <StyledChevronRight />}
       </StyledTooltipHeader>
 
@@ -52,7 +48,6 @@ const StyledTooltipHeader = styled(Box)`
   display: flex;
   justify-content: space-between;
   padding: ${space[2]} ${space[3]};
-  white-space: nowrap;
 `;
 
 const StyledChevronRight = styled(ChevronRight)`
@@ -66,14 +61,9 @@ const StyledTooltipInfo = styled(Box)`
   padding: ${space[2]} ${space[3]};
 `;
 
-const StyledLocationIcon = styled(InlineText)`
-  color: ${colors.black};
-  margin-right: ${space[2]};
-  white-space: nowrap;
-
-  svg {
-    height: 18px;
-    padding-top: 3px;
-    width: 18px;
-  }
+const LocationIcon = styled(Location)`
+  fill: ${colors.black};
+  height: 18px;
+  max-width: 18px;
+  min-width: 18px;
 `;
