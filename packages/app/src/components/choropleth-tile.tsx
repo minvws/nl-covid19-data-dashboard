@@ -1,4 +1,5 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -16,7 +17,6 @@ type ChoroplethTileProps = DataProps & {
   legend?: {
     title: string;
     thresholds: ChoroplethThresholdsValue[];
-    type?: 'default' | 'bar';
     outdatedDataLabel?: string;
   };
   metadata?: MetadataProps;
@@ -56,14 +56,14 @@ export function ChoroplethTile({
 
   return (
     <FullscreenChartTile metadata={metadata}>
-      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} m={0} as="figure" {...dataProps} height="100%" spacing={3}>
+      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} margin={space[0]} as="figure" {...dataProps} height="100%" spacing={3}>
         <Box flex={{ lg: 1 }} as="figcaption" spacing={3}>
           <Heading level={3}>{title}</Heading>
 
           {typeof description === 'string' ? <Text>{description}</Text> : description}
 
           {onChartRegionChange && chartRegion && (
-<Box display="flex" justifyContent="flex-start" paddingTop={space[4]}>
+            <Box display="flex" justifyContent="flex-start" paddingTop={space[4]}>
               <ChartRegionControls value={chartRegion} onChange={onChartRegionChange} />
             </Box>
           )}
@@ -76,7 +76,7 @@ export function ChoroplethTile({
         </Box>
 
         <Box flex={{ lg: 1 }} display="flex" flexDirection="column" height="100%" spacing={3}>
-          <Box height="100%" mt={4} pl={hasPadding && breakpoints.lg ? 4 : undefined}>
+          <Box height="100%" marginTop={space[4]} pl={hasPadding && breakpoints.lg ? 4 : undefined}>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Box>
 
