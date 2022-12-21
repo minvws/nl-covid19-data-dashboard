@@ -1,5 +1,4 @@
 import { ChoroplethThresholdsValue, colors } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
@@ -57,19 +56,19 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
   );
 }
 
-const LegendaColor = styled.div<{
+type LegendaColorProps = {
   first?: boolean;
   last?: boolean;
   width?: string;
   color: string;
-}>((x) =>
-  css({
-    width: '100%',
-    height: '10px',
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: x.width,
-    borderRadius: x.first ? '2px 0 0 2px' : x.last ? '0 2px 2px 0' : 0,
-    backgroundColor: x.color,
-  })
-);
+};
+
+const LegendaColor = styled.div<LegendaColorProps>`
+  width: 100%;
+  height: 10px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: ${({ width }) => (width ? width : 'inherit')};
+  border-radius: ${({ first, last }) => (first ? '2px 0 0 2px' : last ? '0 2px 2px 0' : 0)};
+  background-color: ${({ color }) => (color ? color : 'inherit')};
+`;
