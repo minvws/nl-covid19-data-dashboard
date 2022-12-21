@@ -33,6 +33,7 @@ import { InlineDonutChart } from './inline-donut-chart';
 import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-dashboard/icons';
+import { space } from '~/style/theme';
 
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
@@ -100,7 +101,7 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
           <ContentWrapper>
             <CollapsibleSection summary={props.node.title}>
               <Box
-                py={3}
+                paddingY={space[3]}
                 css={css({
                   '> div > p': { width: '100%' },
 
@@ -132,7 +133,7 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
               pb: 4,
             })}
           >
-            <Box paddingBottom={4}>
+            <Box paddingBottom={space[4]}>
               <Heading level={3} as="h4">
                 {node.title}
               </Heading>
@@ -153,8 +154,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
               pb: 4,
             })}
           >
-            <Box paddingBottom={4}>
-              <Box paddingBottom={4}>
+            <Box paddingBottom={space[4]}>
+              <Box paddingBottom={space[4]}>
                 <Heading level={3} as="h4">
                   {node.title}
                 </Heading>
@@ -169,8 +170,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
 
         return (
           <ContentWrapper>
-            <Box paddingBottom={4}>
-              <Box paddingBottom={4}>
+            <Box paddingBottom={space[4]}>
+              <Box paddingBottom={space[4]}>
                 <Heading level={3} as="h4">
                   {node.title}
                 </Heading>
@@ -186,8 +187,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
 
         return (
           <ContentWrapper>
-            <Box paddingBottom={4}>
-              <Box paddingBottom={4}>
+            <Box paddingBottom={space[4]}>
+              <Box paddingBottom={space[4]}>
                 <Heading level={3} as="h4">
                   {node.title}
                 </Heading>
@@ -213,7 +214,7 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
 
         return (
           <ContentWrapper>
-            <Box spacing={{ _: 4, md: 2 }} display="flex" py={3} flexDirection={{ _: 'column', md: 'row' }}>
+            <Box spacing={{ _: 4, md: 2 }} display="flex" paddingY={space[3]} flexDirection={{ _: 'column', md: 'row' }}>
               <InlineKpi configuration={kpiLeft.config} date={kpiLeft.endDate} />
               <InlineKpi configuration={kpiRight.config} date={kpiRight.endDate} />
             </Box>

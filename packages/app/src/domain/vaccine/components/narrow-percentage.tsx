@@ -19,7 +19,7 @@ export function NarrowPercentage({ value, color, textLabel }: NarrowPercentagePr
         pr: asResponsiveArray({ _: 3, xl: 4 }),
       })}
     >
-      <Box paddingRight={3} minWidth="8.5rem" textAlign="left">
+      <Box paddingRight={space[3]} minWidth="8.5rem" textAlign="left">
         <InlineText>{`${textLabel}:`}</InlineText>
       </Box>
       <Box width={10} height={10} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />

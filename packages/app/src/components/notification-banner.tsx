@@ -22,7 +22,7 @@ export function NotificationBanner({ title, description }: NotificationBannerPro
 
   return (
     <Box width="100%" backgroundColor={colors.gray2}>
-      <MaxWidth px={{ _: 3, sm: 4 }} py={3} display="flex" spacingHorizontal={3}>
+      <MaxWidth paddingX={{ _: space[3], sm: space[4] }} paddingY={space[3]} display="flex" spacingHorizontal={3}>
         <Box display="flex" width="1.6rem" height="1.6rem">
           <Warning />
         </Box>

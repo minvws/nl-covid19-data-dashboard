@@ -12,6 +12,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useFormatDateRange } from '~/utils/use-format-date-range';
 import { AdministrationData } from './data-selection/select-administration-data';
 import { ActiveVaccinationChart, VaccinationChartControls, VaccinationsOverTimeChart } from './vaccinations-over-time-chart';
+import { space } from '~/style/theme';
 
 function useTileData(activeChart: ActiveVaccinationChart, text: SiteText['pages']['vaccinations_page']['nl'], insertionDate: number) {
   if (activeChart === 'coverage') {
@@ -90,7 +91,7 @@ interface ChartTileHeaderProps {
 function ChartTileHeader(props: ChartTileHeaderProps) {
   const { title, description, activeVaccinationChart, setActiveVaccinationChart } = props;
   return (
-    <Box spacing={3} paddingBottom={3}>
+    <Box spacing={3} paddingBottom={space[3]}>
       <Heading level={3}>{title}</Heading>
       <Box display="inline-table" alignSelf="flex-start">
         <VaccinationChartControls onChange={setActiveVaccinationChart} initialChart={activeVaccinationChart} />{' '}

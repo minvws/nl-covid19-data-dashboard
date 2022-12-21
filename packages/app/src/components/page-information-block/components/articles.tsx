@@ -10,6 +10,7 @@ import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
+import { space } from '~/style/theme';
 
 interface ArticlesProps {
   articles: ArticleSummary[];
@@ -49,7 +50,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
             })}
           />
         </Box>
-        <Box paddingLeft={3} display="flex" alignItems="center">
+        <Box paddingLeft={space[3]} display="flex" alignItems="center">
           <StyledText>
             {words.map((word, index) => (
               <Fragment key={index}>

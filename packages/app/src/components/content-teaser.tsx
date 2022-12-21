@@ -5,6 +5,7 @@ import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { PublicationDate } from '~/components/publication-date';
 import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { isInternalUrl } from '~/utils/is-internal-url';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -26,7 +27,7 @@ export function ContentTeaser({ title, slug, cover, category, publicationDate, v
   const imageWidth = variant === 'normal' ? (breakpoints.sm ? 186 : 90) : 90;
 
   return (
-    <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" paddingRight={3}>
+    <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" paddingRight={space[3]}>
       <Box maxWidth={imageWidth} width="100%">
         <BackgroundImage image={cover} height={variant === 'normal' ? (breakpoints.sm ? 108 : 66) : 66} sizes={[[imageWidth]]} />
       </Box>

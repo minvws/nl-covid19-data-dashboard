@@ -35,7 +35,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
   article.content = mergeAdjacentKpiBlocks(article.content);
 
   return (
-    <Box bg="white" py={{ _: 4, md: 5 }}>
+    <Box bg="white" paddingY={{ _: space[4], md: space[5] }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon href="/artikelen" icon={<ArrowIconLeft />}>
           {commonTexts.article_detail.back_link.text}
@@ -82,7 +82,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       )}
       {article.categories && (
         <ContentBlock>
-          <Box paddingBottom={2} paddingTop={4}>
+          <Box paddingBottom={space[2]} paddingTop={space[4]}>
             <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
@@ -91,7 +91,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
             display="flex"
             flexWrap="wrap"
             margin={space[0]}
-            padding={0}
+            padding={space[0]}
             css={css({
               listStyleType: 'none',
             })}

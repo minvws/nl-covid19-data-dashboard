@@ -102,7 +102,7 @@ export function KpiValue({
       {isDefined(difference) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <Box paddingTop={2}>
+          <Box paddingTop={space[2]}>
             <TileAverageDifference
               value={difference}
               isPercentage={isDefined(percentage) && !isDefined(absolute)}
@@ -111,7 +111,7 @@ export function KpiValue({
             />
           </Box>
         ) : isDefined(difference) ? (
-          <Box paddingTop={2}>
+          <Box paddingTop={space[2]}>
             <TileDifference value={difference} isPercentage={isDefined(percentage) && !isDefined(absolute)} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : null)}

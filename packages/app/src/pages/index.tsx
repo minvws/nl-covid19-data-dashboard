@@ -244,7 +244,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
         <Spacer marginBottom={space[5]} />
 
         <Box width="100%" backgroundColor="gray1" paddingY={space[5]}>
-          <Box paddingY={4} paddingX={{ _: space[3], sm: space[4] }}>
+          <Box paddingY={space[4]} paddingX={{ _: space[3], sm: space[4] }}>
             <Search title={textShared.secties.search.title.nl} />
           </Box>
         </Box>

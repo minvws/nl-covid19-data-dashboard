@@ -14,6 +14,7 @@ import {
   GmVaccineCoveragePerAgeGroupArchived_20220908Value,
 } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 
 export function NarrowCoverageTable({
   values,
@@ -27,12 +28,12 @@ export function NarrowCoverageTable({
 
   return (
     <Box>
-      <Box borderBottom="1px solid" borderColor="gray3" paddingBottom={2}>
+      <Box borderBottom="1px solid" borderColor="gray3" paddingBottom={space[2]}>
         <BoldText variant="label1">{text.vaccination_coverage.headers.agegroup}</BoldText>
       </Box>
 
       {values.map((item, index) => (
-        <Box key={index} paddingTop={2} paddingBottom={3} spacing={3} borderBottom="1px solid" borderColor="gray3">
+        <Box key={index} paddingTop={space[2]} paddingBottom={space[3]} spacing={3} borderBottom="1px solid" borderColor="gray3">
           <AgeGroup
             range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
             ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}

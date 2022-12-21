@@ -34,7 +34,7 @@ export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps)
   const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
-    <Box bg="gray1" padding={4} width="100%">
+    <Box bg="gray1" padding={space[4]} width="100%">
       <Box as="figure" role="group" spacing={3} display="flex" maxWidth={IMAGE_MAX_WIDTH} textAlign="center" mx="auto">
         <ContentBlock>
           {node.asset && (
@@ -51,7 +51,7 @@ export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps)
     </Box>
   ) : (
     <ContentWrapper>
-      <Box as="figure" role="group" spacing={3} my={space[2]} textAlign="center">
+      <Box as="figure" role="group" spacing={3} marginY={space[2]} textAlign="center">
         <Box marginBottom={space[3]}>{node.asset && <SanityImage {...getImageProps(node, { sizes })} />}</Box>
         {caption}
       </Box>

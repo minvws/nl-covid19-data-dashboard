@@ -130,7 +130,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
       <InlineText textAlign="right" css={css({ minWidth: 40 })}>{`${formatPercentage(amount, {
         minimumFractionDigits: 1,
       })}%`}</InlineText>
-      <Box width="100%" paddingRight={4}>
+      <Box width="100%" paddingRight={space[4]}>
         <Box width={`${amount}%`} height={12} backgroundColor={color} />
       </Box>
     </Box>

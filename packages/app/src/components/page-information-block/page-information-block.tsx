@@ -119,7 +119,7 @@ export function PageInformationBlock({
 
             {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
           </Box>
-          <Box my={space[3]}>
+          <Box marginY={space[3]}>
             {showArchivedToggleButton && (
               <StyledArchiveButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
                 {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
