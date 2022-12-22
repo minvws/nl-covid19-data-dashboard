@@ -4,6 +4,7 @@ import Konva from 'konva';
 import { memo, FocusEvent, MouseEvent, MutableRefObject, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
+import { space } from '~/style/theme';
 import { isIOSDevice } from '~/utils/is-ios-device';
 import { AccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';

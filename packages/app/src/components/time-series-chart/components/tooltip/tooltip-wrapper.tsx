@@ -87,7 +87,7 @@ const StyledTooltipContainer = styled.div<StyledTooltipContainerProps>`
   opacity: ${(props) => (props.isMounted ? 1 : 0)};
   pointer-events: none;
   position: absolute;
-  top: 0;
+  top: ${space[0]};
   will-change: transform;
   z-index: 1000;
 `;
@@ -117,11 +117,11 @@ interface StyledTriangleWrapperProps {
 }
 
 const StyledTriangleWrapper = styled.div<StyledTriangleWrapperProps>`
-  left: 0;
+  left: ${space[0]};
   opacity: ${(props) => (props.isMounted ? 1 : 0)};
   pointer-events: none;
   position: absolute;
-  top: 0;
+  top: ${space[0]};
   z-index: 1010;
 `;
 
