@@ -57,8 +57,8 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('positive_tests_page')},
-       "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group'], locale)}
+        "parts": ${getPagePartsQuery('positive_tests_page')},
+        "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group', 'self_test_overall'], locale)}
       }`;
     })(context);
     return {
@@ -172,7 +172,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               ]}
               dataOptions={{
                 isPercentage: true,
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'self_test_overall'),
               }}
               forceLegend
             />
