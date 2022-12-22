@@ -188,7 +188,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
     width,
     height,
     paddingLeft,
-    paddingTop: showWeekNumbers ? 20 : undefined,
+    paddingTop: showWeekNumbers ? 20 : undefined, // Still a magic number, but this is not easaly possible without refactoring the useDimensions function
   });
 
   const values = useValuesInTimeframe(allValues, timeframe, endDate);

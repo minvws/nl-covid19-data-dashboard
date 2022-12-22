@@ -220,8 +220,8 @@ const ExplanationBox = styled.div<{ background: string }>((x) =>
     width: '17px',
     background: x.background,
     float: 'left',
-    mt: '3px',
-    mr: 1,
+    marginTop: '3px',
+    marginRight: space[1],
     borderRadius: '3px',
   })
 );
@@ -257,8 +257,8 @@ const HeaderCell = styled.th(
 const Cell = styled.td(
   css({
     borderBottom: `1px solid ${colors.gray2}`,
-    p: 0,
-    py: 2,
+    padding: space[0],
+    paddingY: space[2],
     verticalAlign: 'middle',
 
     '&:first-child': {

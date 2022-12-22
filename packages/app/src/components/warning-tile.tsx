@@ -7,6 +7,7 @@ import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 
 type WarningMessageVariant = 'emphasis' | 'default' | 'archived';
 
@@ -55,7 +56,7 @@ const StyledArticle = styled.article<{ isFullWidth?: boolean }>((x) =>
   css({
     backgroundColor: 'white',
     flexDirection: 'row',
-    padding: 0,
+    padding: space[0],
     boxShadow: 'none',
     display: x.isFullWidth ? 'flex' : 'inline-flex',
     borderRadius: 1,
@@ -81,7 +82,7 @@ const IconWrapper = styled(Box)(
       display: 'block',
       width: 24,
       height: 24,
-      mx: '10px',
+      marginX: '10px',
     },
   })
 );
@@ -91,8 +92,8 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(({ var
     display: 'flex',
     alignItems: 'center',
     flex: '1 1 auto',
-    py: 2,
-    pl: variant === 'emphasis' ? 3 : 0,
+    paddingY: space[2],
+    paddingLeft: variant === 'emphasis' ? space[3] : space[0],
     backgroundColor: variant === 'emphasis' ? 'yellow1' : 'white',
     borderBottomRightRadius: 1,
     borderTopRightRadius: 1,
@@ -108,12 +109,12 @@ const Content = styled.div<{
     fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
     borderBottomRightRadius: 1,
     borderTopRightRadius: 1,
-    pr: 4,
+    paddingRight: space[4],
     '> *': {
-      mt: 0,
-      mb: 3,
+      marginTop: space[0],
+      marginBottom: space[3],
       ':last-child': {
-        mb: 0,
+        marginBottom: space[0],
       },
     },
     '& *': {

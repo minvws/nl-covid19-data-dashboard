@@ -19,7 +19,7 @@ const SeverityIndicatorArrow = () => (
 
 export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
   return (
-    <Box alignItems="flex-end" css={css({ gap: `0 ${space[1]}` })} display="flex" height={space[4]} marginBottom={space[4]} marginTop={space[3]}>
+    <Box alignItems="flex-end" css={css({ gap: `${space[0]} ${space[1]}` })} display="flex" height={space[4]} marginBottom={space[4]} marginTop={space[3]}>
       {SEVERITY_LEVELS_LIST.map((value, index) => (
         <Box
           key={index}

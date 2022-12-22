@@ -101,7 +101,7 @@ function isActivePath(router: NextRouter, href: Url) {
 const Unavailable = styled.span(
   css({
     display: 'block',
-    padding: 2,
+    padding: space[2],
     color: 'gray5',
 
     svg: {
@@ -112,8 +112,8 @@ const Unavailable = styled.span(
 
 const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
   css({
-    p: 2,
-    pl: '3rem',
+    padding: space[2],
+    paddingLeft: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
     color: anchorProps.isActive ? 'blue8' : 'black',

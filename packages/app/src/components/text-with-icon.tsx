@@ -9,11 +9,7 @@ interface TextWithIconProps {
   iconPlacement?: 'left' | 'right';
 }
 
-export const TextWithIcon = ({
-  icon,
-  iconPlacement = 'right',
-  text,
-}: TextWithIconProps) => {
+export const TextWithIcon = ({ icon, iconPlacement = 'right', text }: TextWithIconProps) => {
   return (
     <>
       {iconPlacement === 'left' && <Icon icon={icon} />}
@@ -30,7 +26,7 @@ const Icon = ({ icon }: { icon: ReactNode }) => <IconSmall>{icon}</IconSmall>;
 const IconSmall = styled.div`
   display: inline;
   text-decoration: inherit;
-  margin: 0 ${space[1]};
+  margin: ${space[0]} ${space[1]};
   svg {
     width: 11px;
     height: 10px;

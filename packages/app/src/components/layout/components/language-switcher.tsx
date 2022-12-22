@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Anchor } from '~/components/typography';
+import { space } from '~/style/theme';
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export function LanguageSwitcher() {
 }
 const Separator = styled.span(
   css({
-    mx: 2,
+    marginX: space[2],
     display: 'inline-block',
 
     '&:after': {

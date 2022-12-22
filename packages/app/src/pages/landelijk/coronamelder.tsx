@@ -1,8 +1,4 @@
-import {
-  colors,
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { External as ExternalLinkIcon, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
@@ -24,19 +20,13 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectNlData,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { space } from '~/style/theme';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -46,27 +36,18 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.corona_melder_app_warning__count',
-    'corona_melder_app_warning',
-    'corona_melder_app_download'
-  )
+  selectNlData('difference.corona_melder_app_warning__count', 'corona_melder_app_warning', 'corona_melder_app_download')
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
-  const [coronamelderTimeframe, setCoronamelderTimeframe] =
-    useState<TimeframeOption>(TimeframeOption.ALL);
+  const [coronamelderTimeframe, setCoronamelderTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber } = useIntl();
 
   const { pageText, selectedNlData: data, lastGenerated } = props;
   const { corona_melder_app } = commonTexts;
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const warningLastValue = data.corona_melder_app_warning.last_value;
   const endDate = createDateFromUnixTimestamp(warningLastValue.date_unix);
@@ -95,14 +76,9 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={corona_melder_app.header.reference.href}
           />
 
-          {corona_melder_app.belangrijk_bericht &&
-            !isEmpty(corona_melder_app.belangrijk_bericht) && (
-              <WarningTile
-                isFullWidth
-                message={corona_melder_app.belangrijk_bericht}
-                variant="emphasis"
-              />
-            )}
+          {corona_melder_app.belangrijk_bericht && !isEmpty(corona_melder_app.belangrijk_bericht) && (
+            <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="emphasis" />
+          )}
 
           <TwoKpiSection>
             <KpiTile
@@ -112,28 +88,13 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: corona_melder_app.header.bronnen.rivm,
               }}
             >
-              <KpiValue
-                absolute={warningLastValue.count}
-                difference={data.difference.corona_melder_app_warning__count}
-                isAmount
-              />
+              <KpiValue absolute={warningLastValue.count} difference={data.difference.corona_melder_app_warning__count} isAmount />
 
-              <Markdown
-                content={corona_melder_app.waarschuwingen.description}
-              />
+              <Markdown content={corona_melder_app.waarschuwingen.description} />
               <Text>
-                {replaceComponentsInText(
-                  corona_melder_app.waarschuwingen.total,
-                  {
-                    totalDownloads: (
-                      <BoldText color="primary">
-                        {formatNumber(
-                          data.corona_melder_app_download.last_value.count
-                        )}
-                      </BoldText>
-                    ),
-                  }
-                )}
+                {replaceComponentsInText(corona_melder_app.waarschuwingen.total, {
+                  totalDownloads: <BoldText color="primary">{formatNumber(data.corona_melder_app_download.last_value.count)}</BoldText>,
+                })}
               </Text>
             </KpiTile>
 
@@ -142,15 +103,13 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               <Text>{corona_melder_app.rapport.description}</Text>
 
               <Link href={corona_melder_app.rapport.link.href} passHref>
-                <a target="_blank" css={css({ display: 'flex', mt: 2 })}>
+                <a target="_blank" css={css({ display: 'flex', marginTop: space[2] })}>
                   <Box display="flex" alignItems="center">
                     <IconWrapper>
                       <ExternalLinkIcon aria-hidden="true" />
                     </IconWrapper>
                   </Box>
-                  <span css={css({ maxWidth: 200 })}>
-                    {corona_melder_app.rapport.link.text}
-                  </span>
+                  <span css={css({ maxWidth: 200 })}>{corona_melder_app.rapport.link.text}</span>
                 </a>
               </Link>
             </Tile>
@@ -158,14 +117,10 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             metadata={{
-              source:
-                corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
-                  .coronamelder,
+              source: corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen.coronamelder,
             }}
             title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
-            description={
-              corona_melder_app.waarschuwingen_over_tijd_grafiek.description
-            }
+            description={corona_melder_app.waarschuwingen_over_tijd_grafiek.description}
             timeframeOptions={TimeframeOptionsList}
             onSelectTimeframe={setCoronamelderTimeframe}
           >
@@ -173,9 +128,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               accessibility={{
                 key: 'coronamelder_warned_daily_over_time_chart',
               }}
-              tooltipTitle={
-                corona_melder_app.waarschuwingen_over_tijd_grafiek.title
-              }
+              tooltipTitle={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
               timeframe={coronamelderTimeframe}
               values={data.corona_melder_app_warning.values}
               endDate={endDate}
@@ -183,9 +136,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 {
                   type: 'area',
                   metricProperty: 'count',
-                  label:
-                    corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
-                      .warnings,
+                  label: corona_melder_app.waarschuwingen_over_tijd_grafiek.labels.warnings,
                   color: colors.primary,
                 },
               ]}

@@ -272,8 +272,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 const OrderedList = styled.ol(
   css({
     listStyleType: 'none',
-    margin: 0,
-    padding: 0,
+    margin: space[0],
+    padding: space[0],
   })
 );
 

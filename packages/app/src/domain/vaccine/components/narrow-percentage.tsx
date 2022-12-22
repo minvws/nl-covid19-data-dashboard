@@ -16,7 +16,7 @@ export function NarrowPercentage({ value, color, textLabel }: NarrowPercentagePr
       css={css({
         display: 'flex',
         alignItems: 'center',
-        pr: asResponsiveArray({ _: 3, xl: 4 }),
+        paddingRight: asResponsiveArray({ _: space[3], xl: space[4] }),
       })}
     >
       <Box paddingRight={space[3]} minWidth="8.5rem" textAlign="left">

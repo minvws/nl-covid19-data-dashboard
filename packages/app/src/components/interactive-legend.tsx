@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
@@ -22,13 +23,7 @@ interface InteractiveLegendProps<T = string> {
   onReset?: () => void;
 }
 
-export function InteractiveLegend<T = string>({
-  helpText,
-  selectOptions,
-  selection,
-  onToggleItem,
-  onReset,
-}: InteractiveLegendProps<T>) {
+export function InteractiveLegend<T = string>({ helpText, selectOptions, selection, onToggleItem, onReset }: InteractiveLegendProps<T>) {
   const { commonTexts } = useIntl();
 
   const hasSelection = selection.length !== 0;
@@ -42,19 +37,12 @@ export function InteractiveLegend<T = string>({
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
-                <StyledLabel
-                  htmlFor={`checkboxgroup-${item.label}`}
-                  isActive={hasSelection && isSelected}
-                  borderColor={item.color}
-                  data-text={item.label}
-                >
+                <StyledLabel htmlFor={`checkboxgroup-${item.label}`} isActive={hasSelection && isSelected} borderColor={item.color} data-text={item.label}>
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
                   {item.shape === 'square' && <Square color={item.color} />}
-                  {item.shape === 'gapped-area' && (
-                    <GappedArea color={item.color} />
-                  )}
+                  {item.shape === 'gapped-area' && <GappedArea color={item.color} />}
                 </StyledLabel>
                 <StyledInput
                   type="checkbox"
@@ -89,16 +77,16 @@ const Legend = styled.div(
 const List = styled.ul(
   css({
     listStyle: 'none',
-    px: 0,
-    m: 0,
-    mt: 2,
+    paddingX: space[0],
+    margin: space[0],
+    marginTop: space[2],
   })
 );
 
 const Item = styled.li(
   css({
-    mb: 2,
-    mr: 2,
+    marginBottom: space[2],
+    marginRight: space[2],
     position: 'relative',
     display: 'inline-block',
   })
@@ -120,13 +108,11 @@ const StyledLabel = styled.label<{
     cursor: 'pointer',
     position: 'relative',
     display: 'inline-flex',
-    pr: 13,
-    pl: 33,
-    py: 1,
+    paddingRight: '13px',
+    paddingLeft: '33px',
+    paddingY: space[1],
     borderRadius: '5px',
-    boxShadow: `inset 0px 0px 0px ${
-      isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`
-    }`,
+    boxShadow: `inset 0px 0px 0px ${isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`}`,
     fontWeight: 'normal',
     fontFamily: 'inherit',
     fontSize: 1,
@@ -189,7 +175,7 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
     backgroundColor: 'transparent',
     cursor: 'pointer',
     color: 'blue8',
-    py: '6px',
+    paddingY: '6px',
     border: 'none',
     fontFamily: 'inherit',
     visibility: isVisible ? 'visible' : 'hidden',

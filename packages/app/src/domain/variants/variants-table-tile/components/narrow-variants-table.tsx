@@ -7,16 +7,10 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { useCollapsible } from '~/utils/use-collapsible';
-import {
-  Cell,
-  HeaderCell,
-  PercentageBarWithNumber,
-  StyledTable,
-  VariantDifference,
-  VariantNameCell,
-} from '.';
+import { Cell, HeaderCell, PercentageBarWithNumber, StyledTable, VariantDifference, VariantNameCell } from '.';
 import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
@@ -31,9 +25,7 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
   const columnNames = text.kolommen;
 
   const formatValue = useMemo(() => {
-    const numberOfDecimals = getMaximumNumberOfDecimals(
-      rows.map((x) => x.percentage ?? 0)
-    );
+    const numberOfDecimals = getMaximumNumberOfDecimals(rows.map((x) => x.percentage ?? 0));
     return (value: number) =>
       intl.formatPercentage(value, {
         minimumFractionDigits: numberOfDecimals,
@@ -51,12 +43,7 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <MobileVariantRow
-            row={row}
-            formatValue={formatValue}
-            text={text}
-            key={row.variantCode}
-          />
+          <MobileVariantRow row={row} formatValue={formatValue} text={text} key={row.variantCode} />
         ))}
       </tbody>
     </StyledTable>
@@ -78,22 +65,9 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   return (
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
-        <VariantNameCell
-          variantCode={row.variantCode}
-          text={text}
-          mobile
-          narrow
-        />
+        <VariantNameCell variantCode={row.variantCode} text={text} mobile narrow />
         <Cell mobile>
-          {isPresent(row.percentage) ? (
-            <PercentageBarWithNumber
-              percentage={row.percentage}
-              color={row.color}
-              formatValue={formatValue}
-            />
-          ) : (
-            <NoPercentageData text={text} />
-          )}
+          {isPresent(row.percentage) ? <PercentageBarWithNumber percentage={row.percentage} color={row.color} formatValue={formatValue} /> : <NoPercentageData text={text} />}
         </Cell>
         <Cell mobile alignRight>
           {collapsible.button()}
@@ -102,16 +76,11 @@ function MobileVariantRow(props: MobileVariantRowProps) {
       <tr>
         <MobileCell colSpan={3}>
           {collapsible.content(
-            <Box spacing={2} css={css({ pb: 3 })}>
+            <Box spacing={2} css={css({ paddingBottom: space[3] })}>
               <Box display="flex" flexDirection="row" spacingHorizontal={2}>
                 <InlineText>{columnNames.vorige_meting}:</InlineText>
-                {isPresent(row.difference) &&
-                isPresent(row.difference.difference) &&
-                isPresent(row.difference.old_value) ? (
-                  <VariantDifference
-                    value={row.difference as DifferenceDecimal}
-                    text={text}
-                  />
+                {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? (
+                  <VariantDifference value={row.difference as DifferenceDecimal} text={text} />
                 ) : (
                   '-'
                 )}

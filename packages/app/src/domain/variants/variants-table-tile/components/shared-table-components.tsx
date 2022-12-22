@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { space } from '~/style/theme';
 
 export const StyledTable = styled.table(
   css({
@@ -25,8 +26,8 @@ export const Cell = styled.td<{
   alignRight?: boolean;
 }>((x) =>
   css({
-    p: 0,
-    py: 3,
+    padding: space[0],
+    paddingY: space[3],
     float: x.alignRight ? 'right' : undefined,
     maxWidth: x.narrow ? '2rem' : undefined,
     borderBottom: x.border || !x.mobile ? '1px solid' : undefined,
