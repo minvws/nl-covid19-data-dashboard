@@ -80,7 +80,7 @@ const CustomShape = styled.div(
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    left: 0,
+    left: space[0],
     top: '3px',
     width: '15px',
     height: '15px',
@@ -91,7 +91,7 @@ const Shape = styled.div<{ color: string }>((x) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: 0,
+    left: space[0],
     backgroundColor: x.color,
   })
 );
@@ -154,6 +154,6 @@ const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color,
     width: '15px',
     height: 0,
     borderRadius: '2px',
-    left: 0,
+    left: space[0],
   })
 );

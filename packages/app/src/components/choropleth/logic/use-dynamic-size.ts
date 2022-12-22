@@ -1,13 +1,8 @@
 import { assert } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import {
-  BoundingBoxPadding,
-  HeightAndPadding,
-  OptionalBoundingBoxPadding,
-  ResponsiveSizeConfiguration,
-  ResponsiveSizeSettings,
-} from '~/components/choropleth';
+import { BoundingBoxPadding, HeightAndPadding, OptionalBoundingBoxPadding, ResponsiveSizeConfiguration, ResponsiveSizeSettings } from '~/components/choropleth';
+import { space } from '~/style/theme';
 
 export function useResponsiveSize(
   containerWidth: number,
@@ -17,20 +12,14 @@ export function useResponsiveSize(
 ) {
   return useMemo(() => {
     if (!isDefined(responsiveSizeConfiguration)) {
-      return [
-        containerDefaultHeight,
-        addDefaultPaddingValues(boundingBoxPadding),
-      ] as const;
+      return [containerDefaultHeight, addDefaultPaddingValues(boundingBoxPadding)] as const;
     }
 
     const result = responsiveSizeConfiguration
       .sort((a, b) => {
         if (isResponsiveConfiguration(a) && isResponsiveConfiguration(b)) {
           return b.containerWidth - a.containerWidth;
-        } else if (
-          isResponsiveConfiguration(a) &&
-          !isResponsiveConfiguration(b)
-        ) {
+        } else if (isResponsiveConfiguration(a) && !isResponsiveConfiguration(b)) {
           return -1;
         }
         return 1;
@@ -45,38 +34,23 @@ export function useResponsiveSize(
     /**
      * This assert cannot ever trigger, since the Tuple will always return the last item, but the compiler doesn't understand this...
      */
-    assert(
-      isDefined(result),
-      `[${useResponsiveSize.name}] Cannot find valid size`
-    );
+    assert(isDefined(result), `[${useResponsiveSize.name}] Cannot find valid size`);
 
     return isResponsiveConfiguration(result)
-      ? ([
-          result.heightAndPadding.mapHeight,
-          addDefaultPaddingValues(result.heightAndPadding.padding),
-        ] as const)
+      ? ([result.heightAndPadding.mapHeight, addDefaultPaddingValues(result.heightAndPadding.padding)] as const)
       : ([result.mapHeight, addDefaultPaddingValues(result.padding)] as const);
-  }, [
-    responsiveSizeConfiguration,
-    boundingBoxPadding,
-    containerDefaultHeight,
-    containerWidth,
-  ]);
+  }, [responsiveSizeConfiguration, boundingBoxPadding, containerDefaultHeight, containerWidth]);
 }
 
-function isResponsiveConfiguration(
-  value: ResponsiveSizeSettings | HeightAndPadding
-): value is ResponsiveSizeSettings {
+function isResponsiveConfiguration(value: ResponsiveSizeSettings | HeightAndPadding): value is ResponsiveSizeSettings {
   return 'containerWidth' in value;
 }
 
-function addDefaultPaddingValues(
-  optionalPadding: OptionalBoundingBoxPadding
-): BoundingBoxPadding {
+function addDefaultPaddingValues(optionalPadding: OptionalBoundingBoxPadding): BoundingBoxPadding {
   return {
-    left: optionalPadding.left ?? 0,
-    right: optionalPadding.right ?? 0,
-    top: optionalPadding.top ?? 0,
-    bottom: optionalPadding.bottom ?? 0,
+    left: optionalPadding.left ?? space[0],
+    right: optionalPadding.right ?? space[0],
+    top: optionalPadding.top ?? space[0],
+    bottom: optionalPadding.bottom ?? space[0],
   };
 }

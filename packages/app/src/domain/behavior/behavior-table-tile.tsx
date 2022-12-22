@@ -186,7 +186,7 @@ function DescriptionWithIcon({
             {splittedWords.length - 1 === index ? (
               <InlineText css={css({ display: 'flex', position: 'relative' })}>
                 {word}
-                <Box position="absolute" right={-14} top={0}>
+                <Box position="absolute" right={'-14px'} top={space[0]}>
                   <ChevronRight width="7px" />
                 </Box>
               </InlineText>

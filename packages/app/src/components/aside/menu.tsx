@@ -140,7 +140,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
       width: '0.6em',
       display: 'block',
       position: 'absolute',
-      right: 3,
+      right: space[3],
       top: '1.35em',
     },
   })

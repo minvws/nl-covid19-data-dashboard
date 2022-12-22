@@ -2,6 +2,7 @@ import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { colors } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 
 interface PercentageProps {
   percentage: number;
@@ -11,30 +12,14 @@ interface PercentageProps {
   backgroundColor?: string;
 }
 
-export function PercentageBar({
-  percentage,
-  height,
-  color,
-  backgroundColor = colors.gray2,
-  backgroundStyle = 'normal',
-}: PercentageProps) {
+export function PercentageBar({ percentage, height, color, backgroundColor = colors.gray2, backgroundStyle = 'normal' }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
 
-  backgroundColor =
-    backgroundStyle === 'normal'
-      ? backgroundColor
-        ? backgroundColor
-        : 'gray2'
-      : backgroundColor;
+  backgroundColor = backgroundStyle === 'normal' ? (backgroundColor ? backgroundColor : 'gray2') : backgroundColor;
 
   return (
     <Wrapper>
-      <Bar
-        style={{ width: `${percentage}%` }}
-        height={height}
-        minWidth={minWidth}
-        color={color}
-      />
+      <Bar style={{ width: `${percentage}%` }} height={height} minWidth={minWidth} color={color} />
 
       <Box
         // Created by https://stripesgenerator.com/
@@ -50,8 +35,8 @@ export function PercentageBar({
         )}
         flex={1}
         height={height}
-        top={0}
-        left={0}
+        top={space[0]}
+        left={space[0]}
       />
     </Wrapper>
   );
