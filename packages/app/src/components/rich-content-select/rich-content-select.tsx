@@ -10,6 +10,7 @@ import { useRichContentSelect } from './logic/use-select';
 import { Option } from './types';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 
 type RichContentSelectProps<T extends string> = {
   initialValue?: Unpack<T>;
@@ -27,37 +28,16 @@ type RichContentSelectProps<T extends string> = {
  * Implementation adapted from:
  * https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
  */
-export function RichContentSelect<T extends string>(
-  props: RichContentSelectProps<T>
-) {
-  const {
-    label,
-    options,
-    onChange,
-    initialValue,
-    visuallyHiddenLabel,
-    useContentForSelectedOption: richContentForSelectedValue,
-  } = props;
+export function RichContentSelect<T extends string>(props: RichContentSelectProps<T>) {
+  const { label, options, onChange, initialValue, visuallyHiddenLabel, useContentForSelectedOption: richContentForSelectedValue } = props;
 
-  const {
-    labelId,
-    selectedOption,
-    getComboboxProps,
-    getListBoxProps,
-    getListBoxOptionsProps,
-  } = useRichContentSelect(options, onChange, initialValue);
+  const { labelId, selectedOption, getComboboxProps, getListBoxProps, getListBoxOptionsProps } = useRichContentSelect(options, onChange, initialValue);
 
   const { commonTexts } = useIntl();
 
   const { containerRef, ...selectBoxProps } = getComboboxProps();
 
-  const selectedOptionView =
-    isPresent(selectedOption) &&
-    (richContentForSelectedValue ? (
-      selectedOption?.content
-    ) : (
-      <Text>{selectedOption.label}</Text>
-    ));
+  const selectedOptionView = isPresent(selectedOption) && (richContentForSelectedValue ? selectedOption?.content : <Text>{selectedOption.label}</Text>);
 
   return (
     <Box ref={containerRef}>
@@ -71,7 +51,7 @@ export function RichContentSelect<T extends string>(
           css={css({
             display: 'block',
             fontWeight: 'bold',
-            mb: 2,
+            marginBottom: space[2],
           })}
         >
           <InlineText>{label}</InlineText>
@@ -88,7 +68,7 @@ export function RichContentSelect<T extends string>(
               '&[aria-expanded="true"]': {
                 transform: 'rotate(180deg)',
               },
-              marginLeft: '0.5rem',
+              marginLeft: space[2],
             })}
             aria-hidden={true}
             aria-expanded={getComboboxProps()['aria-expanded']}
@@ -98,19 +78,13 @@ export function RichContentSelect<T extends string>(
         <ListBox {...getListBoxProps()}>
           {options &&
             options.map((option, index) => (
-              <ListBoxOption
-                key={option.value}
-                {...getListBoxOptionsProps(index)}
-              >
+              <ListBoxOption key={option.value} {...getListBoxOptionsProps(index)}>
                 <VisuallyHidden>
                   {
                     <InlineText>
-                      {replaceVariablesInText(
-                        commonTexts.aria_labels.map_select_label,
-                        {
-                          label: option.label,
-                        }
-                      )}
+                      {replaceVariablesInText(commonTexts.aria_labels.map_select_label, {
+                        label: option.label,
+                      })}
                     </InlineText>
                   }
                 </VisuallyHidden>

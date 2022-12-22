@@ -164,9 +164,9 @@ const OrderedList = styled.ol(
     borderTop: '1px solid',
     borderBottom: '1px solid',
     borderColor: 'gray3',
-    m: 0,
-    my: 4,
-    p: 0,
+    margin: space[0],
+    marginY: space[4],
+    padding: space[0],
     listStyleType: 'none',
   })
 );
@@ -174,7 +174,7 @@ const OrderedList = styled.ol(
 const ListItem = styled.li<{ isActive: boolean }>((x) =>
   css({
     position: 'relative',
-    py: 3,
+    paddingY: space[3],
     height: '100%',
     transition: 'transform 0.2s',
     cursor: 'pointer',
@@ -234,7 +234,7 @@ const StyledButton = styled.button(
   css({
     all: 'unset',
     position: 'relative',
-    px: 3,
+    paddingX: space[3],
 
     '&:focus': {
       outlineWidth: '1px',

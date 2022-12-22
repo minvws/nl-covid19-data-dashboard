@@ -54,10 +54,10 @@ export const ArticleBox = styled.div(
       lg: 'calc(1 / 3 * 100% - 32px)',
     }),
     '&:nth-child(even)': {
-      ml: asResponsiveArray({ sm: '32px', md: 0, lg: 0, xl: 0 }),
+      marginLeft: asResponsiveArray({ sm: space[4], md: space[0], lg: space[0], xl: space[0] }),
     },
     '&:nth-child(3n+2)': {
-      mx: asResponsiveArray({ md: '48px', lg: '48px', xl: '48px' }),
+      marginX: asResponsiveArray({ md: '48px', lg: '48px', xl: '48px' }),
     },
     '& > *': {
       height: '100%',

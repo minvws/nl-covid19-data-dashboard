@@ -5,6 +5,7 @@ import { Box } from '~/components/base';
 import { SiteText } from '~/locale';
 import { BehaviorTrendType } from '../logic/behavior-types';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+import { space } from '~/style/theme';
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN' | ' NEUTRAL';
@@ -23,7 +24,7 @@ const Trend = styled.span((a) =>
 
     svg: {
       color: a.color ?? colors.blue6,
-      mr: 1,
+      marginRight: space[1],
       width: '12px',
       height: '12px',
       verticalAlign: 'middle',

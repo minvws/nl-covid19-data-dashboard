@@ -109,7 +109,7 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
                    * and aligning the KPI's at the start of the flow
                    */
                   '> div > div': {
-                    px: 0,
+                    paddingX: space[0],
                     alignSelf: 'flex-start',
                     width: '100%',
                   },
@@ -129,8 +129,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
             css={css({
               maxWidth: 'infoWidth',
               width: '100%',
-              px: asResponsiveArray({ _: 4, md: undefined }),
-              pb: 4,
+              paddingX: asResponsiveArray({ _: space[4], md: undefined }),
+              paddingBottom: space[4],
             })}
           >
             <Box paddingBottom={space[4]}>
@@ -150,8 +150,8 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
             css={css({
               maxWidth: 'infoWidth',
               width: '100%',
-              px: asResponsiveArray({ _: 4, md: undefined }),
-              pb: 4,
+              paddingX: asResponsiveArray({ _: space[4], md: undefined }),
+              paddingBottom: space[4],
             })}
           >
             <Box paddingBottom={space[4]}>

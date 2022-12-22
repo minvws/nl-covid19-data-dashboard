@@ -63,7 +63,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             display="flex"
             justifyContent="space-between"
             css={css({
-              gap: 2,
+              gap: space[2],
             })}
           >
             <Box

@@ -88,7 +88,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
 
 function LegendItem({ color, icon, title, description }: { color: Color; icon: JSX.Element; title: string; description: string }) {
   return (
-    <Box display="flex" css={css({ gap: '.5rem' })}>
+    <Box display="flex" css={css({ gap: space[2] })}>
       <LegendIcon color={color}>{icon}</LegendIcon>
       <Box spacing={1}>
         <BoldText color={color}>{title}</BoldText>

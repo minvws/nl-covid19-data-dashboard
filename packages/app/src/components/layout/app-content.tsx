@@ -47,7 +47,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
               isVisible={!hideBackButton}
               css={css({
                 background: 'white',
-                py: 3,
+                paddingY: space[3],
                 position: 'relative',
                 borderBottom: 'solid 1px',
                 borderColor: 'gray3',
@@ -90,9 +90,9 @@ const BackButtonContainer = styled(Box)<{
   isMenuOpen: boolean;
 }>((x) =>
   css({
-    mx: x.isMenuOpen ? asResponsiveArray({ _: 1, xs: 'auto' }) : asResponsiveArray({ _: 1, sm: 5 }),
+    marginX: x.isMenuOpen ? asResponsiveArray({ _: space[1], xs: 'auto' }) : asResponsiveArray({ _: space[1], sm: space[5] }),
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
-    px: asResponsiveArray({ _: 1, sm: 1 }),
+    paddingX: asResponsiveArray({ _: space[1], sm: space[1] }),
     maxWidth: x.isMenuOpen ? '38rem' : undefined,
   })
 );
@@ -101,9 +101,9 @@ const AppContentContainer = styled.div(
   css({
     display: ['block', null, null, 'flex'],
     flexDirection: ['column', null, null, 'row'],
-    marginBottom: '2rem',
-    margin: '0 auto',
-    pb: 4,
+    marginBottom: space[4],
+    margin: `${space[0]} auto`,
+    paddingBottom: space[4],
     minHeight: '50vh',
   })
 );

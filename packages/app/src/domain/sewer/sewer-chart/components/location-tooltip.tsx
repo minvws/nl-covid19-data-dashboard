@@ -43,10 +43,10 @@ const StyledLocationIcon = styled.span(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
-    mr: 2,
+    marginRight: space[2],
 
     svg: {
-      pt: '3px',
+      paddingTop: '3px',
       color: 'black',
       width: '1em',
     },

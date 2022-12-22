@@ -70,10 +70,10 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           // Since you can't serialize unordered lists we have to position them here in the container
           css={css({
             ul: {
-              mx: 'auto',
+              marginX: 'auto',
               maxWidth: 'contentWidth',
-              pr: 4,
-              pl: 5,
+              paddingRight: space[4],
+              paddingLeft: space[5],
             },
           })}
         >

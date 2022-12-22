@@ -48,15 +48,15 @@ const LinkGroupContainer = styled.div(
   css({
     flexGrow: 0,
     flexBasis: asResponsiveArray({ _: '100%', sm: '50%', lg: '33%' }),
-    mb: 3,
+    marginBottom: space[3],
 
     // Remove margin bottom of the last 2 or 3 items depending on the breakpoints
     ':nth-last-child(-n+2)': {
-      mb: asResponsiveArray({ sm: 0, lg: 3 }),
+      marginBottom: asResponsiveArray({ sm: space[0], lg: space[3] }),
     },
 
     ':nth-last-child(-n+3)': {
-      mb: asResponsiveArray({ lg: 0 }),
+      marginBottom: asResponsiveArray({ lg: space[0] }),
     },
   })
 );

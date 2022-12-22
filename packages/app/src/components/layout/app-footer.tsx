@@ -103,7 +103,7 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'baseline',
-    pl: 3,
+    paddingLeft: space[3],
 
     '&:before': {
       position: 'absolute',

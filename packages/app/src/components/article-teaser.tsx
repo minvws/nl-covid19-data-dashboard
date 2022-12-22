@@ -10,10 +10,7 @@ import { BackgroundImage } from './background-image';
 import { Box } from './base';
 import { Anchor, Heading, Text, BoldText } from './typography';
 
-export type ArticleSummary = Pick<
-  Article,
-  'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories'
->;
+export type ArticleSummary = Pick<Article, 'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories'>;
 
 type ArticleTeaserProps = {
   title: string;
@@ -52,15 +49,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
 
 const ZoomContainer = styled(ZoomContainerUnstyled)``;
 
-function ZoomContainerUnstyled({
-  children,
-  height,
-  className,
-}: {
-  height: number;
-  children: ReactNode;
-  className?: string;
-}) {
+function ZoomContainerUnstyled({ children, height, className }: { height: number; children: ReactNode; className?: string }) {
   return (
     <Box overflow="hidden" height={height} position="relative">
       <Box className={className}>{children}</Box>
@@ -96,7 +85,7 @@ const StyledArticleTeaser = styled(Anchor)(
 
 function Arrow() {
   return (
-    <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
+    <span css={css({ svg: { height: '11px', width: '13px', marginX: '3px' } })}>
       <ArrowIconRight />
     </span>
   );

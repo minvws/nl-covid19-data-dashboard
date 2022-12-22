@@ -152,7 +152,7 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
         <label
           key={x}
           css={css({
-            px: 2,
+            paddingX: space[2],
             borderRight: values[i + 1] ? '1px solid' : undefined,
             borderColor: 'gray3',
             display: 'inline-block',
@@ -211,7 +211,7 @@ const Container = styled.div<{ isActive: boolean }>((x) =>
     position: 'fixed',
     bottom: 0,
     right: 0,
-    p: 3,
+    padding: space[3],
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
@@ -225,7 +225,7 @@ const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>((x)
     color: x.isActive ? 'white' : 'black',
     bg: x.isActive ? 'blue8' : 'transparent',
     transition: 'all 100ms linear',
-    p: 1,
+    padding: space[1],
     display: 'inline-block',
   })
 );
