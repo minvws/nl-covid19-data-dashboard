@@ -149,7 +149,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         display: 'block',
         transition: 'width 0.4s',
         position: 'absolute',
-        top: 0,
+        top: space[0],
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
         zIndex: -1,

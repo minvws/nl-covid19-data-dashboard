@@ -183,8 +183,8 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       content: '""',
       display: 'block',
       position: 'absolute',
-      left: 0,
-      bottom: 0,
+      left: space[0],
+      bottom: space[0],
       height: '5px',
       width: `calc(100%)`,
       backgroundColor: 'blue8',
@@ -221,7 +221,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 const BoldText = styled.span(
   css({
     position: 'absolute',
-    top: 0,
+    top: space[0],
     left: '50%',
     fontWeight: 'bold',
     opacity: 0,

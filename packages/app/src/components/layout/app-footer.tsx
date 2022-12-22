@@ -107,8 +107,8 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
 
     '&:before': {
       position: 'absolute',
-      top: 0,
-      left: 0,
+      top: space[0],
+      left: space[0],
       content: x.isExternal ? null : '"›"',
     },
   })
@@ -118,11 +118,11 @@ const IconContainer = styled.div(
   css({
     position: 'absolute',
     left: '-3px',
-    top: 0,
+    top: space[0],
 
     svg: {
-      width: 10,
-      height: 10,
+      width: '10px',
+      height: '10px',
     },
   })
 );

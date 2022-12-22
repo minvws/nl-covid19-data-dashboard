@@ -138,10 +138,10 @@ const StyledLabel = styled.label<{
       opacity: '.1',
       content: 'attr(data-color)',
       position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
+      left: space[0],
+      right: space[0],
+      top: space[0],
+      bottom: space[0],
       borderRadius: '5px',
     },
     '&:after': {
@@ -161,10 +161,10 @@ const StyledInput = styled.input(
     appearance: 'none',
     '&:focus:focus-visible': {
       position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
+      top: space[0],
+      left: space[0],
+      bottom: space[0],
+      right: space[0],
       width: '100%',
     },
   })
@@ -195,7 +195,7 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     borderRadius: '2px',
     display: 'block',
     position: 'absolute',
-    left: 13,
+    left: '13px',
     backgroundColor: color,
   })
 );
@@ -204,7 +204,7 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: 13,
+    left: '13px',
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
@@ -218,7 +218,7 @@ const Square = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: 13,
+    left: '13px',
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
@@ -232,7 +232,7 @@ const GappedArea = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: 13,
+    left: '13px',
     backgroundColor: `${color}30`,
     borderTop: `2px solid ${color}`,
     top: '50%',
