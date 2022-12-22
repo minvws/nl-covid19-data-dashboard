@@ -99,8 +99,8 @@ const StyledHitLink = styled(Anchor)(
     '&:before': {
       content: 'attr(data-text)',
       position: 'absolute',
-      left: 0,
-      top: 0,
+      left: space[0],
+      top: space[0],
       height: '100%',
       width: '5px',
       backgroundColor: 'blue8',

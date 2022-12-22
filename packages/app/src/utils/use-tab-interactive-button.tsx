@@ -83,8 +83,8 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
      */
     opacity: 0,
     pointerEvents: 'none',
-    top: 0,
-    left: 0,
+    top: space[0],
+    left: space[0],
 
     border: '1px solid',
     borderColor: 'blue8',

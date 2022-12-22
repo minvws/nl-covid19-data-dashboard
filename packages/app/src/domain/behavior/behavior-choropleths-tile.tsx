@@ -11,6 +11,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
 import { VrBehaviorTooltip } from '~/domain/behavior/tooltip/vr-behavior-tooltip';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SelectBehavior } from './components/select-behavior';
@@ -101,7 +102,7 @@ function ChoroplethBlock({ data, keysWithoutData, behaviorType, currentId, title
 
       <Box position="relative">
         {keysWithoutData.includes(currentId) && (
-          <Box position="absolute" display="flex" alignItems="center" justifyContent="center" top={0} width="100%" height="100%" css={css({ zIndex: 9 })}>
+          <Box position="absolute" display="flex" alignItems="center" justifyContent="center" top={space[0]} width="100%" height="100%" css={css({ zIndex: 9 })}>
             <Text textAlign="center" css={css({ maxWidth: '300px' })}>
               {text.nl.verdeling_in_nederland.geen_beschikbare_data}
             </Text>

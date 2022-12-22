@@ -44,8 +44,8 @@ const SkipLink = styled(Anchor)(
       position: 'absolute',
       outline: '2px dotted white',
       outlineOffset: '-2px',
-      top: 2,
-      left: 2,
+      top: space[2],
+      left: space[2],
     },
   })
 );

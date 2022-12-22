@@ -329,7 +329,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         <Box
           position={isYAxisCollapsed ? 'relative' : undefined}
           top={isYAxisCollapsed ? '-6px' : undefined}
-          left={isYAxisCollapsed ? 25 : undefined}
+          left={isYAxisCollapsed ? '25px' : undefined}
           css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}
         >
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>

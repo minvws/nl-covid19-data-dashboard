@@ -198,8 +198,8 @@ const NavLinkSpan = styled.span(
     // Styled underline
     '&::after': {
       bg: 'white',
-      right: 2,
-      left: 2,
+      right: space[2],
+      left: space[2],
       bottom: '0.6rem',
       height: '0.15rem',
       position: 'absolute',

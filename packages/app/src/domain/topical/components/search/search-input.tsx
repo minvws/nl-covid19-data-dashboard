@@ -106,9 +106,9 @@ const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
     width: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
     pointerEvents: x.onClick ? 'all' : 'none',
 
-    top: 0,
-    left: x.align === 'left' ? 0 : undefined,
-    right: x.align === 'right' ? 0 : undefined,
+    top: space[0],
+    left: x.align === 'left' ? space[0] : undefined,
+    right: x.align === 'right' ? space[0] : undefined,
 
     background: 'none',
     border: space[0],
