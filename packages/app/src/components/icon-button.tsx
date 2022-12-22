@@ -1,5 +1,6 @@
 import { cloneElement, forwardRef, ReactElement } from 'react';
 import styled from 'styled-components';
+import { space } from '~/style/theme';
 import { VisuallyHidden } from './visually-hidden';
 
 interface IconButtonProps {
@@ -32,8 +33,8 @@ const StyledIconButton = styled.button<StyledIconButtonProps>`
   color: ${({ color }) => color};
   cursor: pointer;
   display: block;
-  margin: 0;
-  padding: ${({ padding }) => (padding ? `${padding}px` : 0)};
+  margin: ${space[0]};
+  padding: ${({ padding }) => (padding ? `${padding}px` : space[0])};
 
   & svg {
     display: block;

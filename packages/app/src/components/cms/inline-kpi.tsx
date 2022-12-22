@@ -135,7 +135,7 @@ function KpiTile({ title, description, children, metadata, iconName }: KpiTilePr
             })}
           />
 
-          <Heading level={3} as="h4" hyphens="auto" style={{ margin: 0 }}>
+          <Heading level={3} as="h4" hyphens="auto" style={{ margin: space[0] }}>
             {title}
           </Heading>
         </Box>

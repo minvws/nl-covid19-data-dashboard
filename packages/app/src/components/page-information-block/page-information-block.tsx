@@ -134,7 +134,7 @@ export function PageInformationBlock({
 
 const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
   css({
-    pt: x.hasTitle ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
+    paddingTop: x.hasTitle ? undefined : asResponsiveArray({ _: space[2], sm: space[3] }),
     display: 'flex',
     flexWrap: 'wrap',
     borderTop: x.hasTitle ? undefined : 'solid 2px gray2',
@@ -144,7 +144,7 @@ const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
 const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
-    mb: asResponsiveArray({ _: 3, md: 0 }),
+    marginBottom: asResponsiveArray({ _: space[3], md: space[0] }),
   })
 );
 

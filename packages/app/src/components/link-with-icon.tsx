@@ -94,7 +94,7 @@ export const HeadingLinkWithIcon = ({ href, icon, children, underline }: LinkWit
 };
 
 const IconSmall = ({ icon, width, height, marginRight }: IconProps) => {
-  return <span css={css({ marginRight: marginRight, svg: { height, width, mx: '3px' } })}>{icon}</span>;
+  return <span css={css({ marginRight: marginRight, svg: { height, width, marginX: '3px' } })}>{icon}</span>;
 };
 
 const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
@@ -104,7 +104,7 @@ const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
         svg: {
           width,
           height,
-          marginLeft: 2,
+          marginLeft: space[2],
           position: isSingleWord ? 'absolute' : 'relative',
           minHeight: '100%',
           right: 0,

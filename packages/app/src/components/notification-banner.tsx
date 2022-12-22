@@ -41,10 +41,10 @@ export function NotificationBanner({ title, description }: NotificationBannerPro
                   border: 0,
                   borderRadius: '5px',
                   backgroundColor: 'transparent',
-                  padding: 0,
-                  margin: 0,
+                  padding: space[0],
+                  margin: space[0],
                   textAlign: 'left',
-                  mt: 1,
+                  marginTop: space[1],
                 })}
               >
                 <BoldText>

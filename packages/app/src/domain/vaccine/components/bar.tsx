@@ -56,7 +56,7 @@ export function Bar({ value, color, backgroundColor = colors.gray2, label, heigh
             {barValueSign}
             {formatPercentage(barValue)}%
           </InlineText>
-          <InlineText css={css({ ml: 'auto' })} variant="label1" color="gray7">
+          <InlineText css={css({ marginLeft: 'auto' })} variant="label1" color="gray7">
             100%
           </InlineText>
         </Box>

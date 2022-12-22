@@ -19,7 +19,7 @@ export function WidePercentage({ value, color, justifyContent }: PercentageWideN
         display: 'flex',
         alignItems: 'center',
         justifyContent,
-        pr: asResponsiveArray({ _: 3, xl: 4 }),
+        paddingRight: asResponsiveArray({ _: space[3], xl: space[4] }),
       })}
     >
       <Box width={10} height={10} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />

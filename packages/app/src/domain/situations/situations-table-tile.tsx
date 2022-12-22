@@ -97,14 +97,14 @@ const StyledTable = styled.table(
   css({
     borderCollapse: 'collapse',
     width: '100%',
-    pb: 3,
+    paddingBottom: space[3],
   })
 );
 
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
-    pb: '12px',
+    paddingBottom: '12px',
   })
 );
 
@@ -113,8 +113,8 @@ const Cell = styled.td((x) =>
     color: x.color,
     borderBottom: '1px solid',
     borderBottomColor: 'gray2',
-    p: 0,
-    py: 2,
+    padding: space[0],
+    paddingY: space[2],
   })
 );
 interface PercentageBarProps {

@@ -2,6 +2,7 @@ import { Color, colors } from '@corona-dashboard/common';
 import css, { CSSProperties } from '@styled-system/css';
 import styled, { DefaultTheme } from 'styled-components';
 import { Preset, preset } from '~/style/preset';
+import { space } from '~/style/theme';
 
 export interface TextProps {
   variant?: keyof Preset['typography'];
@@ -17,8 +18,8 @@ export const textStyle = (props: TextProps & { as?: string }) => {
   return css({
     ...(props.as === 'button'
       ? {
-          m: 0,
-          p: 0,
+          margin: space[0],
+          padding: space[0],
           bg: 'transparent',
           border: 0,
           fontSize: 'inherit',

@@ -60,7 +60,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
-                      pr: 1,
+                      paddingRight: space[1],
                     })}
                   >
                     {word}
@@ -91,7 +91,7 @@ const StyledText = styled.p(
   css({
     display: 'flex',
     flexWrap: 'wrap',
-    margin: 0,
+    margin: space[0],
     whiteSpace: 'pre-wrap',
 
     '&:hover': {
@@ -99,7 +99,7 @@ const StyledText = styled.p(
     },
 
     svg: {
-      marginLeft: 1,
+      marginLeft: space[1],
       width: 12,
       height: 12,
     },

@@ -66,7 +66,7 @@ function ChartTileHeader({ title, description, children }: ChartTileHeaderProps)
   return (
     <Box spacing={3}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
-      <Heading level={3} css={css({ pr: asResponsiveArray({ md: 5 }) })}>
+      <Heading level={3} css={css({ paddingRight: asResponsiveArray({ md: space[5] }) })}>
         {title}
       </Heading>
 

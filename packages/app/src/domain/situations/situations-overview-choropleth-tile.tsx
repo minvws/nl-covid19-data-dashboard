@@ -43,7 +43,7 @@ export function SituationsOverviewChoroplethTile({ data, text }: SmallMultiplesC
       }}
     >
       <Box spacing={4}>
-        <Box display="grid" gridTemplateColumns="repeat(auto-fit, minmax(256px,1fr))" marginBottom={space[3]} css={css({ gap: 20 })}>
+        <Box display="grid" gridTemplateColumns="repeat(auto-fit, minmax(256px,1fr))" marginBottom={space[3]} css={css({ gap: '20px' })}>
           <Box>
             <ChoroplethLegenda title={text.situaties_kaarten_overzicht.legenda.titel} thresholds={thresholds.vr.gathering} />
           </Box>
@@ -123,7 +123,7 @@ const ChoroplethGrid = styled.div(
   css({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(205px, 1fr))',
-    gap: 4,
+    gap: space[4],
   })
 );
 

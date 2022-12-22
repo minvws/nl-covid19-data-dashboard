@@ -3,6 +3,7 @@ import css from '@styled-system/css';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { createGlobalStyle } from 'styled-components';
+import { space } from '~/style/theme';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { useUniqueId } from '~/utils/use-unique-id';
 
@@ -26,7 +27,7 @@ export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
       <DisablePageScroll />
       <StyledFullscreenModal ref={focusRef}>
         <div
-          css={css({ p: 5, height: isFullheight ? '100%' : undefined })}
+          css={css({ padding: space[5], height: isFullheight ? '100%' : undefined })}
           onClick={(evt) => evt.target === clickRef.current && onClose()}
           ref={clickRef}
           id={focusId}
