@@ -118,7 +118,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
     <Box display="flex" alignItems="center">
       <BoldText css={css({ minWidth: 50 })}>{`${amount}%`}</BoldText>
       <Box maxWidth={100} width="100%">
-        <Box width={`${amount}%`} height={8} backgroundColor={color} css={css({ transition: 'width .3s' })} />
+        <Box width={`${amount}%`} height={'8px'} backgroundColor={color} css={css({ transition: 'width .3s' })} />
       </Box>
     </Box>
   );

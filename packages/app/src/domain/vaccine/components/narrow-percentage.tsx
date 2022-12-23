@@ -22,7 +22,7 @@ export function NarrowPercentage({ value, color, textLabel }: NarrowPercentagePr
       <Box paddingRight={space[3]} minWidth="8.5rem" textAlign="left">
         <InlineText>{`${textLabel}:`}</InlineText>
       </Box>
-      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
+      <Box width={'10px'} height={'10px'} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
       {value}
     </Box>
   );

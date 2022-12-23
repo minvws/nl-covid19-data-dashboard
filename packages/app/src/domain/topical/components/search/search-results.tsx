@@ -24,6 +24,6 @@ const StyledSearchResults = styled.div`
   display: flex;
   flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
   & > :not(:last-child): {
-    margin-bottom: ${asResponsiveArray([space[5], space[0]])};
+    margin-bottom: ${asResponsiveArray({ _: space[5], xs: space[0] })};
   }
 `;
