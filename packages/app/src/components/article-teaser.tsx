@@ -29,7 +29,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
       <StyledArticleTeaser>
         {cover.asset && (
           <ZoomContainer height={200}>
-            <BackgroundImage image={cover} height={200} sizes={coverSizes} />
+            <BackgroundImage image={cover} height={'200px'} sizes={coverSizes} />
           </ZoomContainer>
         )}
 

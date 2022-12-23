@@ -80,8 +80,8 @@ const IconWrapper = styled(Box)(
     svg: {
       borderRadius: 1,
       display: 'block',
-      width: 24,
-      height: 24,
+      width: '24px',
+      height: '24px',
       marginX: '10px',
     },
   })

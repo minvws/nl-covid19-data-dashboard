@@ -212,7 +212,7 @@ export function PieChart<T>({
             >
               {dataConfig.map((item, index) => (
                 <Box as="li" key={`${item.color}-${index}`} display="flex" alignItems="center" spacingHorizontal={2}>
-                  <Box width={12} height={12} backgroundColor={item.color} borderRadius="50%" />
+                  <Box width={'12px'} height={'12px'} backgroundColor={item.color} borderRadius="50%" />
                   <Markdown content={replaceVariablesInText(item.label, data as any, formatters)} />
                 </Box>
               ))}

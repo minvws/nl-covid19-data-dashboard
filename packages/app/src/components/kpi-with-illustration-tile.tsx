@@ -34,7 +34,7 @@ export function KpiWithIllustrationTile({ title, description, children, metadata
         </Box>
 
         <Box flex={{ _: '0 0 100%', lg: '1' }} paddingLeft={{ lg: space[4] }}>
-          <img width={315} height={100} loading="lazy" src={illustration.image} alt={illustration.alt} css={css({ marginBottom: space[3] })} />
+          <img width={'315px'} height={'100px'} loading="lazy" src={illustration.image} alt={illustration.alt} css={css({ marginBottom: space[3] })} />
           <p>{illustration.description}</p>
         </Box>
       </Box>

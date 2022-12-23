@@ -90,8 +90,8 @@ function TooltipInfo({ title, value, background }: TooltipInfoProps) {
 
 const LegendaColorBox = styled.div<{ backgroundColor: string }>((x) =>
   css({
-    height: 13,
-    width: 13,
+    height: '13px',
+    width: '13px',
     borderRadius: '2px',
     marginLeft: '1px',
     backgroundColor: x.backgroundColor,

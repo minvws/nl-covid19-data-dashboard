@@ -43,7 +43,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledAnchor>
-        <Box width={100} minWidth={100} maxHeight={66} overflow="hidden">
+        <Box width={'100px'} minWidth={100} maxHeight={66} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
               defaultWidth: 122,
@@ -100,8 +100,8 @@ const StyledText = styled.p(
 
     svg: {
       marginLeft: space[1],
-      width: 12,
-      height: 12,
+      width: '12px',
+      height: '12px',
     },
   })
 );

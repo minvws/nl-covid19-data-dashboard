@@ -131,7 +131,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
         minimumFractionDigits: 1,
       })}%`}</InlineText>
       <Box width="100%" paddingRight={space[4]}>
-        <Box width={`${amount}%`} height={12} backgroundColor={color} />
+        <Box width={`${amount}%`} height={'12px'} backgroundColor={color} />
       </Box>
     </Box>
   );

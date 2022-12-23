@@ -192,7 +192,7 @@ const NavLinkSpan = styled.span(
       fontWeight: 'bold',
       overflow: 'hidden',
       visibility: 'hidden',
-      height: 0,
+      height: '0px',
     },
 
     // Styled underline

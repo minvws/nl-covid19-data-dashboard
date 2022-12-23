@@ -99,14 +99,14 @@ const Shape = styled.div<{ color: string }>((x) =>
 function DottedSquare({ color }: { color: string }) {
   return (
     <Shape color="white" css={css({ top: '3px' })}>
-      <svg width={16} height={16} viewBox={`0 0 ${16} ${16}`}>
+      <svg width={'16px'} height={'16px'} viewBox={`0 0 ${16} ${16}`}>
         <defs>
           <pattern id="dotted_legend" width="4" height="4" patternUnits="userSpaceOnUse">
             <line x1="0" y1="4" x2="0" y2="0" style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }} />
           </pattern>
         </defs>
         <g>
-          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={16} height={16} />
+          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={'16px'} height={'16px'} />
         </g>
       </svg>
     </Shape>
@@ -152,7 +152,7 @@ const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color,
     borderTopWidth: '3px',
     top: '10px',
     width: '15px',
-    height: 0,
+    height: '0px',
     borderRadius: '2px',
     left: space[0],
   })
