@@ -16,7 +16,7 @@ export function useLegendItems<T extends TimestampedValue>(
   domain: number[],
   config: SeriesConfig<T>,
   dataOptions?: DataOptions,
-  hasOutofBoundsValues = false,
+  hasOutOfBoundsValues = false,
   forceLegend = false
 ) {
   const { timelineEvents, timespanAnnotations, outOfBoundsConfig } = dataOptions || {};
@@ -47,7 +47,7 @@ export function useLegendItems<T extends TimestampedValue>(
       })
       .filter(isDefined);
 
-    if (hasOutofBoundsValues) {
+    if (hasOutOfBoundsValues) {
       legendItems.push({
         label: outOfBoundsConfig?.label,
         shape: 'custom',
@@ -116,5 +116,5 @@ export function useLegendItems<T extends TimestampedValue>(
       legendItems: isLegendRequired ? legendItems : undefined,
       splitLegendGroups: splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
     };
-  }, [config, domain, commonTexts, timelineEvents, timespanAnnotations, outOfBoundsConfig, hasOutofBoundsValues, forceLegend]);
+  }, [config, domain, commonTexts, timelineEvents, timespanAnnotations, outOfBoundsConfig, hasOutOfBoundsValues, forceLegend]);
 }
