@@ -22,7 +22,7 @@ export function WidePercentage({ value, color, justifyContent }: PercentageWideN
         paddingRight: asResponsiveArray({ _: space[3], xl: space[4] }),
       })}
     >
-      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
+      <Box width={'10px'} height={'10px'} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
       {value}
     </InlineText>
   );

@@ -117,8 +117,8 @@ const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
     cursor: 'pointer',
 
     svg: {
-      width: 24,
-      height: 24,
+      width: '24px',
+      height: '24px',
     },
   })
 );

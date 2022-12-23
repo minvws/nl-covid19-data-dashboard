@@ -396,7 +396,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
              * Highlight 0 on the y-axis when there are positive and
              * negative values
              */}
-            {highlightZero && <rect x={0} y={yScale(0)} width={bounds.width} height={1} fill="black" />}
+            {highlightZero && <rect x={0} y={yScale(0)} width={bounds.width} height={'1px'} fill="black" />}
 
             {benchmark && <Benchmark value={benchmark.value} label={benchmark.label} top={yScale(benchmark.value)} width={bounds.width} />}
 

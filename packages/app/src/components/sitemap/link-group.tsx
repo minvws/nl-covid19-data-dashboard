@@ -39,7 +39,7 @@ function LinkItem(props: LinkItemProps) {
       <Item>
         <InlineText color="gray5">
           {text}
-          <span css={css({ svg: { height: 10, width: 11, marginX: '3px' } })}>
+          <span css={css({ svg: { height: '10px', width: '11px', marginX: '3px' } })}>
             <ArrowIconThinRight />
           </span>
         </InlineText>

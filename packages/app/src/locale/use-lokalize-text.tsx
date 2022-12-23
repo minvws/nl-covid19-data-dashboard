@@ -180,8 +180,8 @@ function ToggleButton({ isActive, onClick, color, children }: { isActive: boolea
       <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
         <Database
           style={{
-            width: 20,
-            height: 20,
+            width: '20px',
+            height: '20px',
             display: 'block',
           }}
         />

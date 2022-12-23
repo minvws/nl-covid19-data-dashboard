@@ -38,7 +38,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
 
   return (
-    <MaxWidth paddingX={[space[0], space[0], space[0], space[0], space[3]]}>
+    <MaxWidth paddingX={{ _: space[0], xs: space[0], sm: space[0], md: space[0], lg: space[3] }}>
       <AppContentContainer>
         {backButtonUrl && (
           <>

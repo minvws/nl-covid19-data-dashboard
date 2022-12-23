@@ -46,7 +46,7 @@ const LabelContainer = styled.div({
   justifyContent: 'center',
   marginTop: '7px',
   transform: 'translate(-50%, 0)',
-  width: 100,
+  width: '100px',
 });
 
 const Label = styled.span(

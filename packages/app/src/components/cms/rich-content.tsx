@@ -240,7 +240,7 @@ function InlineAttachmentMark(props: { children: ReactNode; mark: InlineAttachme
 
   return (
     <a css={css({ textDecoration: 'underline' })} download href={getFileSrc(props.mark.asset)}>
-      {props.children} <Download width={15} height={11} />
+      {props.children} <Download width={'15px'} height={'11px'} />
     </a>
   );
 }
@@ -255,13 +255,13 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   return isInternalUrl(mark.href) ? (
     <Link href={mark.href} passHref locale={locale}>
       <a css={css({ textDecoration: 'underline' })}>
-        {children} <ChevronRight width={10} height={10} />
+        {children} <ChevronRight width={'10px'} height={'10px'} />
       </a>
     </Link>
   ) : (
     <ExternalLink href={mark.href} underline>
       {children}
-      <ExternalLinkIcon width={20} height={11} />
+      <ExternalLinkIcon width={'20px'} height={'11px'} />
     </ExternalLink>
   );
 }

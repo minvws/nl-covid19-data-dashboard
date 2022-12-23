@@ -87,8 +87,8 @@ const IconWrapper = styled.span(
   css({
     marginLeft: space[1],
     svg: {
-      width: 11,
-      height: 11,
+      width: '11px',
+      height: '11px',
     },
   })
 );

@@ -147,7 +147,7 @@ const StyledLabel = styled.label<{
     '&:after': {
       content: isActive ? 'attr(data-text)' : '',
       position: 'absolute',
-      height: 0,
+      height: '0px',
       userSelect: 'none',
       pointerEvents: 'none',
       fontWeight: 'bold',
