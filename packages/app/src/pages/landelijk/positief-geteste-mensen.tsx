@@ -41,6 +41,7 @@ export const getStaticProps = createGetStaticProps(
     'difference.tested_overall__infected_moving_average',
     'difference.tested_overall__infected_per_100k_moving_average',
     'g_number',
+    'self_test_overall',
     'tested_ggd',
     'tested_overall',
     'tested_per_age_group'
@@ -56,8 +57,8 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('positive_tests_page')},
-       "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group'], locale)}
+        "parts": ${getPagePartsQuery('positive_tests_page')},
+        "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group', 'self_test_overall'], locale)}
       }`;
     })(context);
     return {
@@ -94,7 +95,9 @@ const GgdGraphToggle = ({ selectedGgdGraph, onChange }: { selectedGgdGraph: stri
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+
+  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
   const [confirmedCasesInfectedPercentageTimeframe, setConfirmedCasesInfectedPercentageTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -142,6 +145,40 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
+          {/* Infection radar */}
+          <ChartTile
+            title={textNl.linechart_self_test_titel}
+            description={textNl.linechart_self_test_toelichting}
+            metadata={{
+              source: textNl.bronnen.rivm,
+            }}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.SIX_MONTHS}
+            onSelectTimeframe={setConfirmedCasesSelfTestedTimeframe}
+          >
+            <TimeSeriesChart
+              accessibility={{
+                key: 'confirmed_cases_self_tested_over_time_chart',
+              }}
+              values={data.self_test_overall.values}
+              timeframe={confirmedCasesSelfTestedTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'infected_percentage',
+                  label: textNl.linechart_self_test_tooltip_label,
+                  color: colors.primary,
+                },
+              ]}
+              dataOptions={{
+                isPercentage: true,
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'self_test_overall'),
+              }}
+              forceLegend
+            />
+          </ChartTile>
+          {/* Infection radar end */}
+
           <ChartTile
             title={textNl.linechart_titel}
             description={replaceVariablesInText(textNl.linechart_toelichting, {
@@ -153,6 +190,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textNl.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.SIX_MONTHS}
             onSelectTimeframe={setConfirmedCasesInfectedTimeframe}
           >
             <TimeSeriesChart

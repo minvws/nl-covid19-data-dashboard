@@ -71,6 +71,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
   tested_per_age_group: 'Positief getest (per leeftijd)',
   elderly_at_home: '70-plussers',
+  self_test_overall: 'Zelfgerapporteerde positieve coronatestuitslagen',
 };
 
 function getTitleForMetricName(metricName: MetricName) {
