@@ -6,7 +6,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { SiteText } from '~/locale';
-import { metricConfigs } from '~/metric-config';
 
 interface ReproductionChartTileProps {
   data: NlReproduction;
@@ -62,7 +61,6 @@ export const ReproductionChartTile = ({
             label: text.linechart_legend_label,
             shortLabel: text.linechart_tooltip_label,
             color: colors.primary,
-            minimumRange: metricConfigs?.nl?.reproduction?.index_average?.minimumRange,
           },
         ]}
         dataOptions={{
