@@ -1,15 +1,40 @@
-import { Rule } from '~/sanity';
 import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
-import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
+import { REQUIRED } from '../../validation';
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
-
-export const THERMOMETER_MIN_VALUE = Math.min(...SEVERITY_LEVELS_LIST);
-export const THERMOMETER_MAX_VALUE = Math.max(...SEVERITY_LEVELS_LIST);
 
 export const thermometer = {
   type: 'object',
   title: 'Thermometer',
   name: 'thermometer',
+  fieldsets: [
+    {
+      title: 'De beschrijving boven de thermometer',
+      name: 'description',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+    {
+      title: 'Artikel referentie',
+      name: 'artikel-referentie',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+    {
+      title: 'Titel van standen informatie',
+      name: 'level-information',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+  ],
   fields: [
     {
       title: 'Thermometer icoon',
@@ -28,6 +53,7 @@ export const thermometer = {
       title: 'De beschrijving boven de thermometer',
       name: 'subTitle',
       type: 'localeRichContentBlock',
+      fieldset: 'description',
     },
     {
       title: 'De titel binnen de thermometer tegel',
@@ -42,7 +68,7 @@ export const thermometer = {
         list: SEVERITY_LEVELS_LIST,
         layout: 'dropdown',
       },
-      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
+      validation: REQUIRED,
     },
     {
       title: 'Standen',
@@ -58,10 +84,10 @@ export const thermometer = {
       type: 'localeString',
     },
     {
-      title: 'Huidige stand omschrijvig',
-      description: 'De omschrijving spcifiek voor de huidige themrmometer stand bij de trendIcon',
+      title: 'Huidige stand omschrijving',
+      description: 'De omschrijving specifiek voor de huidige thermometer stand bij de trendIcon',
       name: 'levelDescription',
-      type: 'localeString',
+      type: 'localeText',
       validation: REQUIRED,
     },
     {
@@ -73,6 +99,7 @@ export const thermometer = {
       title: 'Artikel referentie',
       name: 'articleReference',
       type: 'localeRichContentBlock',
+      fieldset: 'artikel-referentie',
     },
     {
       title: 'Titel van uitklapbare sectie',
@@ -84,6 +111,7 @@ export const thermometer = {
       title: 'Titel van standen informatie',
       name: 'trendIcon',
       type: 'trendIcon',
+      fieldset: 'level-information',
     },
     {
       title: 'Tijdlijn',

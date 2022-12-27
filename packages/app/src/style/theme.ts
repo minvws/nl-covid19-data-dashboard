@@ -47,7 +47,7 @@ export const fontWeights = {
   heavy: 700,
 } as const;
 
-const lineHeights = [1.2, 1.3, 1.5] as const;
+export const lineHeights = [1.2, 1.3, 1.5] as const;
 
 /**
  * Breakpoints used in original code and their em equivalent
@@ -87,7 +87,7 @@ const mediaQueries = {
   xl: `screen and (min-width: ${breakpoints[4]})`,
 } as const;
 
-const radii = [0, 5, 10];
+export const radii = [0, 5, 10];
 
 export const shadows = {
   tile: '0px 4px 8px rgba(0, 0, 0, 0.1)',

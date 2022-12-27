@@ -1,11 +1,4 @@
-import {
-  colors,
-  NlSewer,
-  SewerPerInstallationData,
-  TimeframeOption,
-  TimeframeOptionsList,
-  VrSewer,
-} from '@corona-dashboard/common';
+import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList, VrSewer } from '@corona-dashboard/common';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Warning } from '@corona-dashboard/icons';
@@ -19,10 +12,11 @@ import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
-type SewerChartProps = {
+interface SewerChartProps {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -44,7 +38,8 @@ type SewerChartProps = {
       segment_2: string;
       segment_3: string;
     };
-    averagesDataLabel: string;
+    averagesLegendLabel: string;
+    averagesTooltipLabel: string;
     valueAnnotation: string;
   };
   vrNameOrGmName?: string;
@@ -56,18 +51,9 @@ type SewerChartProps = {
   };
   warning?: string;
   timelineEvents?: TimelineEventConfig[];
-};
+}
 
-export function SewerChart({
-  accessibility,
-  dataAverages,
-  dataPerInstallation,
-  text,
-  vrNameOrGmName,
-  incompleteDatesAndTexts,
-  warning,
-  timelineEvents,
-}: SewerChartProps) {
+export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, text, vrNameOrGmName, incompleteDatesAndTexts, warning, timelineEvents }: SewerChartProps) => {
   const {
     options,
     value: selectedInstallation,
@@ -88,9 +74,7 @@ export function SewerChart({
       } as SewerPerInstallationData)
   );
 
-  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(
-    TimeframeOption.ALL
-  );
+  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
@@ -103,12 +87,8 @@ export function SewerChart({
           valueAnnotation: text.valueAnnotation,
           timespanAnnotations: [
             {
-              start: parseInt(
-                incompleteDatesAndTexts.zeewolde_date_start_in_unix_time
-              ),
-              end: parseInt(
-                incompleteDatesAndTexts.zeewolde_date_end_in_unix_time
-              ),
+              start: parseInt(incompleteDatesAndTexts.zeewolde_date_start_in_unix_time),
+              end: parseInt(incompleteDatesAndTexts.zeewolde_date_end_in_unix_time),
               label: incompleteDatesAndTexts.zeewolde_label,
               shortLabel: incompleteDatesAndTexts.zeewolde_short_label,
             },
@@ -125,7 +105,7 @@ export function SewerChart({
         .map((option) => ({
           ...option,
           content: (
-            <Box pr={2}>
+            <Box paddingRight={space[2]}>
               <Text>{option.label}</Text>
             </Box>
           ),
@@ -134,9 +114,12 @@ export function SewerChart({
     [options]
   );
 
+  const timeframeOptionsVrOrGm = TimeframeOptionsList.filter((timeframeOption) => timeframeOption !== TimeframeOption.ONE_WEEK);
+  const timeframeOptions = vrNameOrGmName ? timeframeOptionsVrOrGm : TimeframeOptionsList;
+
   return (
     <ChartTile
-      timeframeOptions={TimeframeOptionsList}
+      timeframeOptions={timeframeOptions}
       title={text.title}
       metadata={{
         source: text.source,
@@ -145,7 +128,7 @@ export function SewerChart({
       onSelectTimeframe={setSewerTimeframe}
     >
       {dataPerInstallation && (
-        <Box alignSelf="flex-start" mb={3} minWidth={207}>
+        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth={207}>
           <RichContentSelect
             label={text.selectPlaceholder}
             visuallyHiddenLabel
@@ -156,13 +139,8 @@ export function SewerChart({
         </Box>
       )}
       {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (
-        <Box mt={2} mb={4}>
-          <WarningTile
-            variant="emphasis"
-            message={scopedWarning}
-            icon={Warning}
-            isFullWidth
-          />
+        <Box marginTop={space[2]} marginBottom={space[4]}>
+          <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />
         </Box>
       )}
       {
@@ -173,11 +151,7 @@ export function SewerChart({
         dataPerInstallation && selectedInstallation ? (
           <TimeSeriesChart
             accessibility={accessibility}
-            values={mergeData(
-              dataAverages,
-              dataPerInstallation,
-              selectedInstallation
-            )}
+            values={mergeData(dataAverages, dataPerInstallation, selectedInstallation)}
             timeframe={sewerTimeframe}
             seriesConfig={[
               {
@@ -188,9 +162,10 @@ export function SewerChart({
                 style: 'dashed',
               },
               {
-                type: 'area',
+                type: 'line',
                 metricProperty: 'average',
-                label: text.averagesDataLabel,
+                label: text.averagesLegendLabel,
+                shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
                 nonInteractive: true,
               },
@@ -212,16 +187,18 @@ export function SewerChart({
             timeframe={sewerTimeframe}
             seriesConfig={[
               {
-                type: 'area',
+                type: 'line',
                 metricProperty: 'average',
-                label: text.averagesDataLabel,
+                label: text.averagesLegendLabel,
+                shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
               },
             ]}
             dataOptions={dataOptions}
+            forceLegend
           />
         )
       }
     </ChartTile>
   );
-}
+};

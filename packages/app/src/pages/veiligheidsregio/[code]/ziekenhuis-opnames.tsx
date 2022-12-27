@@ -1,59 +1,21 @@
-import {
-  colors,
-  DAY_IN_SECONDS,
-  TimeframeOption,
-  TimeframeOptionsList,
-  WEEK_IN_SECONDS,
-} from '@corona-dashboard/common';
+import { colors, DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import {
-  ChartTile,
-  DynamicChoropleth,
-  ChoroplethTile,
-  KpiTile,
-  KpiValue,
-  PageInformationBlock,
-  TileList,
-  TimeSeriesChart,
-  TwoKpiSection,
-} from '~/components';
+import { ChartTile, DynamicChoropleth, ChoroplethTile, KpiTile, KpiValue, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection } from '~/components';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { gmCodesByVrCode } from '~/data';
 import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getLinkParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectVrData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectVrData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import {
-  countTrailingNullValues,
-  getBoundaryDateStartUnix,
-  replaceVariablesInText,
-  useReverseRouter,
-} from '~/utils';
+import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -69,8 +31,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData('hospital_nice'),
   createGetChoroplethData({
@@ -89,10 +50,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'hospitalPageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'hospitalPageArticles'),
         links: getLinkParts(content.parts.pageParts, 'hospitalPageLinks'),
         elements: content.elements,
       },
@@ -101,48 +59,28 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    selectedVrData: data,
-    vrName,
-    choropleth,
-    content,
-    lastGenerated,
-  } = props;
+  const { pageText, selectedVrData: data, vrName, choropleth, content, lastGenerated } = props;
 
-  const [
-    hospitalAdmissionsOverTimeTimeframe,
-    setHospitalAdmissionsOverTimeTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
 
-  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const lastValue = data.hospital_nice.last_value;
 
-  const lastValueChoropleth =
-    last(choropleth.gm.hospital_nice_choropleth) || lastValue;
+  const lastValueChoropleth = last(choropleth.gm.hospital_nice_choropleth) || lastValue;
 
   const municipalCodes = gmCodesByVrCode[router.query.code as string];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
-    countTrailingNullValues(
-      data.hospital_nice.values,
-      'admissions_on_date_of_admission_moving_average'
-    )
+    countTrailingNullValues(data.hospital_nice.values, 'admissions_on_date_of_admission_moving_average')
   );
 
-  const sevenDayAverageDates: [number, number] = [
-    underReportedRange - WEEK_IN_SECONDS,
-    underReportedRange - DAY_IN_SECONDS,
-  ];
+  const sevenDayAverageDates: [number, number] = [underReportedRange - WEEK_IN_SECONDS, underReportedRange - DAY_IN_SECONDS];
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -162,9 +100,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.consequences_for_healthcare.title
-            }
+            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -195,14 +131,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="hospital_moving_avg_per_region"
-                absolute={
-                  lastValue.admissions_on_date_of_admission_moving_average_rounded
-                }
-                isMovingAverageDifference
-                isAmount
-              />
+              <KpiValue data-cy="hospital_moving_avg_per_region" absolute={lastValue.admissions_on_date_of_admission_moving_average_rounded} isMovingAverageDifference isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -222,8 +151,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               seriesConfig={[
                 {
                   type: 'line',
-                  metricProperty:
-                    'admissions_on_date_of_admission_moving_average',
+                  metricProperty: 'admissions_on_date_of_admission_moving_average',
                   label: textVr.linechart_legend_titel_moving_average,
                   color: colors.primary,
                 },
@@ -241,15 +169,10 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                     end: Infinity,
                     label: textVr.linechart_legend_underreported_titel,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'admissions_on_date_of_admission_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'hospital_nice'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_nice'),
               }}
             />
           </ChartTile>
@@ -262,7 +185,6 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             legend={{
               thresholds: thresholds.gm.admissions_on_date_of_admission,
               title: textShared.chloropleth_legenda.titel,
-              type: 'default',
             }}
             metadata={{
               date: lastValueChoropleth.date_unix,
