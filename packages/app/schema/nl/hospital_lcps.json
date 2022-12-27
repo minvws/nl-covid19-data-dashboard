@@ -26,10 +26,7 @@
         "influx_covid_patients": {
           "type": ["integer", "null"]
         },
-        "influxes_on_date_of_influx": {
-          "type": "integer"
-        },
-        "influxes_on_date_of_influx_moving_average": {
+        "influx_covid_patients_moving_average": {
           "type": ["number", "null"]
         },
         "date_unix": {
@@ -42,8 +39,7 @@
       "required": [
         "beds_occupied_covid",
         "influx_covid_patients",
-        "influxes_on_date_of_influx",
-        "influxes_on_date_of_influx_moving_average",
+        "influx_covid_patients_moving_average",
         "date_unix",
         "date_of_insertion_unix"
       ],
