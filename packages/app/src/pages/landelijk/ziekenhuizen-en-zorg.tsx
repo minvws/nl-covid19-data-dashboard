@@ -32,8 +32,8 @@ const pageMetrics = ['difference.hospital_lcps__beds_occupied_covid.new_date_uni
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textNl: siteText.pages.hospital_page.nl,
-  textShared: siteText.pages.hospital_page.shared,
+  textNl: siteText.pages.hospitals_and_care_page.nl,
+  textShared: siteText.pages.hospitals_and_care_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -52,9 +52,9 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-        "parts": ${getPagePartsQuery('hospital_page')},
-        "elements": ${getElementsQuery('nl', ['hospital_nice', 'hospital_nice_per_age_group'], context.locale)}
-      }`;
+          "parts": ${getPagePartsQuery('hospital_page')},
+          "elements": ${getElementsQuery('nl', ['hospital_nice', 'hospital_nice_per_age_group'], context.locale)}
+        }`;
     })(context);
 
     return {
@@ -67,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
+const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -107,7 +107,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
-            screenReaderCategory={commonTexts.sidebar.metrics.hospital_admissions.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.hospitals_and_care.title}
             title={textNl.titel}
             icon={<Ziekenhuis aria-hidden="true" />}
             description={textNl.pagina_toelichting}
@@ -315,6 +315,6 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
       </NlLayout>
     </Layout>
   );
-}
+};
 
-export default IntakeHospital;
+export default HospitalsAndCarePage;

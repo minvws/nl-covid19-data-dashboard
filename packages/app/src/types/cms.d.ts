@@ -14,7 +14,7 @@ export type PageIdentifier =
   | 'positive_tests_page'
   | 'variants_page'
   | 'sewer_page'
-  | 'intensive_care_page'
+  | 'patients_page'
   | 'vaccinations_page'
   | 'nursing_home_page'
   | 'deceased_page';
