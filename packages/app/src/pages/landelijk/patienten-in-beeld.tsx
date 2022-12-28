@@ -2,7 +2,7 @@ import { colors, GmCollectionHospitalNice, TimeframeOption, TimeframeOptionsList
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { TileList, SEOHead, ChartTile, DynamicChoropleth, ChoroplethTile, PageInformationBlock, TimeSeriesChart } from '~/components';
+import { TileList, SEOHead, ChartTile, DynamicChoropleth, ChoroplethTile, PageInformationBlock, TimeSeriesChart, InView } from '~/components';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
@@ -18,6 +18,7 @@ import { countTrailingNullValues, getBoundaryDateStartUnix, useReverseRouter } f
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { last } from 'lodash';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 
 const pageMetrics = ['hospital_nice_per_age_group', 'hospital_nice'];
 
@@ -59,11 +60,38 @@ export const getStaticProps = createGetStaticProps(
 
 const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const { commonTexts } = useIntl();
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const [hospitalAdmissionsPerAgeTimeframe, setHospitalAdmissionsPerAgeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const [IcuAdmissionsPerAgeTimeframe, setIcuAdmissionsPerAgeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [selectedAdmissionsPerAgeGroupOverTimeChart, setSelectedAdmissionsPerAgeGroupOverTimeChart] = useState<string>('admissions_per_age_group_over_time_hospital'); // other option is 'admissions_per_age_group_over_time_icu'
+  const [hospitalAdmissionsPerAgeGroupOverTimeTimeframe, setHospitalAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCareAdmissionsPerAgeGroupOverTimeTimeframe, setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const admissionsPerAgeGroupOverTimeToggleItems: ChartTileToggleItem[] = [
+    {
+      label: textNl.hospitals.admissions_per_age_group_chart.toggle_label,
+      value: 'admissions_per_age_group_over_time_hospital',
+    },
+    {
+      label: textNl.icu.admissions_per_age_group_chart.toggle_label,
+      value: 'admissions_per_age_group_over_time_icu',
+    },
+  ];
+
+  const [selectedAdmissionsOverTimeChart, setSelectedAdmissionsOverTimeChart] = useState<string>('admissions_over_time_hospital'); // other option is 'admissions_over_time_icu'
   const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const [intensiveCareAdmissionsTimeframe, setIntensiveCareAdmissionsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCareAdmissionsOverTimeTimeframe, setIntensiveCareAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const admissionsOverTimeToggleItems: ChartTileToggleItem[] = [
+    {
+      label: textNl.hospitals.admissions_chart.toggle_label,
+      value: 'admissions_over_time_hospital',
+    },
+    {
+      label: textNl.icu.admissions_chart.toggle_label,
+      value: 'admissions_over_time_icu',
+    },
+  ];
 
   const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('vr');
@@ -79,9 +107,6 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
     data.intensive_care_nice.values,
     countTrailingNullValues(data.intensive_care_nice.values, 'admissions_on_date_of_admission_moving_average')
   );
-
-  const { commonTexts } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -103,7 +128,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               datumsText: textNl.datums,
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [textNl.bronnen.nice, textNl.bronnen.lnaz],
+              dataSources: [textNl.sources.nice, textNl.sources.lnaz],
             }}
             referenceLink={textNl.reference.href}
             pageLinks={content.links}
@@ -121,7 +146,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             metadata={{
               date: lastValueNiceChoropleth.date_unix,
-              source: textNl.bronnen.nice,
+              source: textNl.sources.nice,
             }}
           >
             {selectedMap === 'gm' && (
@@ -165,127 +190,160 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChoroplethTile>
 
-          <ChartTile
-            title={textNl.icu.age_group_chart.title}
-            description={textNl.icu.age_group_chart.description}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            metadata={{ source: textNl.bronnen.nice }}
-            onSelectTimeframe={setIcuAdmissionsPerAgeTimeframe}
-          >
-            <AdmissionsPerAgeGroup
-              accessibility={{
-                key: 'intensive_care_admissions_per_age_group_over_time_chart',
-              }}
-              values={data.intensive_care_nice_per_age_group.values}
-              timeframe={IcuAdmissionsPerAgeTimeframe}
-              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice_per_age_group')}
-            />
-          </ChartTile>
+          <InView rootMargin="400px">
+            {selectedAdmissionsOverTimeChart === 'admissions_over_time_hospital' && (
+              <ChartTile
+                title={textNl.hospitals.admissions_chart.title}
+                description={textNl.hospitals.admissions_chart.description}
+                metadata={{
+                  source: textNl.sources.nice,
+                }}
+                timeframeOptions={TimeframeOptionsList}
+                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
+                toggle={{
+                  initialValue: selectedAdmissionsOverTimeChart,
+                  items: admissionsOverTimeToggleItems,
+                  onChange: (value) => setSelectedAdmissionsOverTimeChart(value),
+                }}
+              >
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'hospital_admissions_over_time_chart',
+                  }}
+                  values={data.hospital_nice.values}
+                  timeframe={hospitalAdmissionsOverTimeTimeframe}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'admissions_on_date_of_admission_moving_average',
+                      label: textNl.hospitals.admissions_chart.legend_title_moving_average,
+                      color: colors.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: textNl.hospitals.admissions_chart.legend_title,
+                      color: colors.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRange,
+                        end: Infinity,
+                        label: textNl.hospitals.admissions_chart.legend_underreported_title,
+                        shortLabel: commonTexts.common.incomplete,
+                        cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
+                      },
+                    ],
+                    timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_nice'),
+                  }}
+                />
+              </ChartTile>
+            )}
 
-          <ChartTile
-            title={textNl.hospital.age_group_chart.title}
-            description={textNl.hospital.age_group_chart.description}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            metadata={{ source: textNl.bronnen.nice }}
-            onSelectTimeframe={setHospitalAdmissionsPerAgeTimeframe}
-          >
-            <AdmissionsPerAgeGroup
-              accessibility={{
-                key: 'hospital_admissions_per_age_group_over_time_chart',
-              }}
-              values={data.hospital_nice_per_age_group.values}
-              timeframe={hospitalAdmissionsPerAgeTimeframe}
-              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'hospital_nice_per_age_group')}
-            />
-          </ChartTile>
-          <ChartTile
-            title={textNl.hospital.line_chart.title}
-            description={textNl.hospital.line_chart.description}
-            metadata={{
-              source: textNl.bronnen.nice,
-            }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
-          >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'hospital_admissions_over_time_chart',
-              }}
-              values={data.hospital_nice.values}
-              timeframe={hospitalAdmissionsOverTimeTimeframe}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'admissions_on_date_of_admission_moving_average',
-                  label: textNl.hospital.line_chart.legend_title_moving_average,
-                  color: colors.primary,
-                },
-                {
-                  type: 'bar',
-                  metricProperty: 'admissions_on_date_of_admission',
-                  label: textNl.hospital.line_chart.legend_title,
-                  color: colors.primary,
-                },
-              ]}
-              dataOptions={{
-                timespanAnnotations: [
-                  {
-                    start: underReportedRange,
-                    end: Infinity,
-                    label: textNl.hospital.line_chart.legend_underreported_title,
-                    shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
-                  },
-                ],
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_nice'),
-              }}
-            />
-          </ChartTile>
-          <ChartTile
-            title={textNl.icu.line_chart.title}
-            description={textNl.icu.line_chart.description}
-            metadata={{ source: textNl.bronnen.nice }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={setIntensiveCareAdmissionsTimeframe}
-          >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'intensive_care_admissions_over_time_chart',
-              }}
-              values={data.intensive_care_nice.values}
-              timeframe={intensiveCareAdmissionsTimeframe}
-              dataOptions={{
-                timespanAnnotations: [
-                  {
-                    start: intakeUnderReportedRange,
-                    end: Infinity,
-                    label: textNl.icu.line_chart.legend_underreported_title,
-                    shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
-                  },
-                ],
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice'),
-              }}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'admissions_on_date_of_admission_moving_average',
-                  label: textNl.icu.line_chart.legend_title_moving_average,
-                  color: colors.primary,
-                },
-                {
-                  type: 'bar',
-                  metricProperty: 'admissions_on_date_of_admission',
-                  label: textNl.icu.line_chart.legend_title_trend_label,
-                  color: colors.primary,
-                },
-              ]}
-            />
-          </ChartTile>
+            {selectedAdmissionsOverTimeChart === 'admissions_over_time_icu' && (
+              <ChartTile
+                title={textNl.icu.admissions_chart.title}
+                description={textNl.icu.admissions_chart.description}
+                metadata={{ source: textNl.sources.nice }}
+                timeframeOptions={TimeframeOptionsList}
+                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                onSelectTimeframe={setIntensiveCareAdmissionsOverTimeTimeframe}
+                toggle={{
+                  initialValue: selectedAdmissionsOverTimeChart,
+                  items: admissionsOverTimeToggleItems,
+                  onChange: (value) => setSelectedAdmissionsOverTimeChart(value),
+                }}
+              >
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'intensive_care_admissions_over_time_chart',
+                  }}
+                  values={data.intensive_care_nice.values}
+                  timeframe={intensiveCareAdmissionsOverTimeTimeframe}
+                  dataOptions={{
+                    timespanAnnotations: [
+                      {
+                        start: intakeUnderReportedRange,
+                        end: Infinity,
+                        label: textNl.icu.admissions_chart.legend_underreported_title,
+                        shortLabel: commonTexts.common.incomplete,
+                        cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
+                      },
+                    ],
+                    timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice'),
+                  }}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'admissions_on_date_of_admission_moving_average',
+                      label: textNl.icu.admissions_chart.legend_title_moving_average,
+                      color: colors.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: textNl.icu.admissions_chart.legend_title_trend_label,
+                      color: colors.primary,
+                    },
+                  ]}
+                />
+              </ChartTile>
+            )}
+          </InView>
+          <InView rootMargin="400px">
+            {selectedAdmissionsPerAgeGroupOverTimeChart === 'admissions_per_age_group_over_time_hospital' && (
+              <ChartTile
+                title={textNl.hospitals.admissions_per_age_group_chart.title}
+                description={textNl.hospitals.admissions_per_age_group_chart.description}
+                timeframeOptions={TimeframeOptionsList}
+                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                metadata={{ source: textNl.sources.nice }}
+                onSelectTimeframe={setHospitalAdmissionsPerAgeGroupOverTimeTimeframe}
+                toggle={{
+                  initialValue: selectedAdmissionsPerAgeGroupOverTimeChart,
+                  items: admissionsPerAgeGroupOverTimeToggleItems,
+                  onChange: (value) => setSelectedAdmissionsPerAgeGroupOverTimeChart(value),
+                }}
+              >
+                <AdmissionsPerAgeGroup
+                  accessibility={{
+                    key: 'hospital_admissions_per_age_group_over_time_chart',
+                  }}
+                  values={data.hospital_nice_per_age_group.values}
+                  timeframe={hospitalAdmissionsPerAgeGroupOverTimeTimeframe}
+                  timelineEvents={getTimelineEvents(content.elements.timeSeries, 'hospital_nice_per_age_group')}
+                />
+              </ChartTile>
+            )}
+
+            {selectedAdmissionsPerAgeGroupOverTimeChart === 'admissions_per_age_group_over_time_icu' && (
+              <ChartTile
+                title={textNl.icu.admissions_per_age_group_chart.title}
+                description={textNl.icu.admissions_per_age_group_chart.description}
+                timeframeOptions={TimeframeOptionsList}
+                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                metadata={{ source: textNl.sources.nice }}
+                onSelectTimeframe={setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeframe}
+                toggle={{
+                  initialValue: selectedAdmissionsPerAgeGroupOverTimeChart,
+                  items: admissionsPerAgeGroupOverTimeToggleItems,
+                  onChange: (value) => setSelectedAdmissionsPerAgeGroupOverTimeChart(value),
+                }}
+              >
+                <AdmissionsPerAgeGroup
+                  accessibility={{
+                    key: 'intensive_care_admissions_per_age_group_over_time_chart',
+                  }}
+                  values={data.intensive_care_nice_per_age_group.values}
+                  timeframe={intensiveCareAdmissionsPerAgeGroupOverTimeTimeframe}
+                  timelineEvents={getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice_per_age_group')}
+                />
+              </ChartTile>
+            )}
+          </InView>
         </TileList>
       </NlLayout>
     </Layout>

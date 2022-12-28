@@ -14,8 +14,9 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 
-const pageMetrics = ['difference.hospital_lcps__beds_occupied_covid.new_date_unix', 'hospital_lcps', 'hospital_nice_per_age_group'];
+const pageMetrics = ['difference.hospital_lcps__beds_occupied_covid.new_date_unix', 'hospital_lcps', 'intensive_care_lcps'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -28,7 +29,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('difference.hospital_lcps__beds_occupied_covid', 'hospital_lcps', 'hospital_nice_per_age_group'),
+  selectNlData('difference.hospital_lcps__beds_occupied_covid', 'hospital_lcps', 'intensive_care_lcps'),
   createGetChoroplethData({
     vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
     gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
@@ -39,8 +40,8 @@ export const getStaticProps = createGetStaticProps(
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
-          "parts": ${getPagePartsQuery('hospital_page')},
-          "elements": ${getElementsQuery('nl', ['hospital_nice', 'hospital_nice_per_age_group'], context.locale)}
+          "parts": ${getPagePartsQuery('hospitals_and_care_page')},
+          "elements": ${getElementsQuery('nl', ['hospital_lcps', 'intensive_care_lcps'], context.locale)}
         }`;
     })(context);
 
@@ -56,22 +57,33 @@ export const getStaticProps = createGetStaticProps(
 
 const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
-
-  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dataHospitalLcps = data.hospital_lcps;
   /**
    * Can be replaced with corrent property once data / schema changes are available
-   * Temporary workaround by adding `beds_occupied_covid` to the following line
+   * Temporary workaround by adding `beds_occupied_covid` to the following line instead of `influx_on_date`
    * */
   const underReportedRange = getBoundaryDateStartUnix(data.hospital_lcps.values, countTrailingNullValues(data.hospital_lcps.values, 'beds_occupied_covid'));
   const sevenDayAverageDates: [number, number] = [underReportedRange - WEEK_IN_SECONDS, underReportedRange - DAY_IN_SECONDS];
 
+  const [selectedBedsOccupiedOverTimeChart, setSelectedBedsOccupiedOverTimeChart] = useState<string>('beds_occupied_covid_hospital'); // other option is 'beds_occupied_covid_icu'
+  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  const bedsOccupiedOverTimeToggleItems: ChartTileToggleItem[] = [
+    {
+      label: textNl.hospitals.chart_beds_occupied.toggle_label,
+      value: 'beds_occupied_covid_hospital',
+    },
+    {
+      label: textNl.icu.chart_beds_occupied.toggle_label,
+      value: 'beds_occupied_covid_icu',
+    },
+  ];
+
   const bedsLastValue = getLastFilledValue(dataHospitalLcps);
-
-  const { commonTexts, formatDateFromSeconds } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
@@ -82,14 +94,14 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
             screenReaderCategory={commonTexts.sidebar.metrics.hospitals_and_care.title}
-            title={textNl.titel}
+            title={textNl.title}
             icon={<Ziekenhuis aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: dataHospitalLcps.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [textNl.bronnen.nice, textNl.bronnen.lnaz],
+              dataSources: [textNl.sources.nice, textNl.sources.lnaz],
             }}
             referenceLink={textNl.reference.href}
             pageLinks={content.links}
@@ -104,7 +116,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               })}
               metadata={{
                 date: sevenDayAverageDates,
-                source: textNl.bronnen.nice,
+                source: textNl.sources.nice,
               }}
             >
               <PageKpi data={data} metricName="hospital_lcps" metricProperty="beds_occupied_covid" isMovingAverageDifference isAmount />
@@ -115,7 +127,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               description={textNl.kpi_bedbezetting.description}
               metadata={{
                 date: dataHospitalLcps.last_value.date_unix,
-                source: textNl.bronnen.lnaz,
+                source: textNl.sources.lnaz,
               }}
             >
               {bedsLastValue.beds_occupied_covid !== null && (
@@ -123,51 +135,107 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               )}
             </KpiTile>
           </TwoKpiSection>
-          <ChartTile
-            title={textNl.chart_bedbezetting.title}
-            description={textNl.chart_bedbezetting.description}
-            metadata={{
-              source: textNl.bronnen.lnaz,
-            }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
-            onSelectTimeframe={setHospitalBedsOccupiedOverTimeTimeframe}
-          >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'hospital_beds_occupied_over_time_chart',
+          {selectedBedsOccupiedOverTimeChart === 'beds_occupied_covid_hospital' && (
+            <ChartTile
+              timeframeOptions={TimeframeOptionsList}
+              title={textNl.hospitals.chart_beds_occupied.title}
+              description={textNl.hospitals.chart_beds_occupied.description}
+              metadata={{ source: textNl.sources.lnaz }}
+              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              onSelectTimeframe={setHospitalBedsOccupiedOverTimeTimeframe}
+              toggle={{
+                initialValue: selectedBedsOccupiedOverTimeChart,
+                items: bedsOccupiedOverTimeToggleItems,
+                onChange: (value) => setSelectedBedsOccupiedOverTimeChart(value),
               }}
-              values={dataHospitalLcps.values}
-              timeframe={hospitalBedsOccupiedOverTimeTimeframe}
-              forceLegend
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'beds_occupied_covid',
-                  nonInteractive: true,
-                  hideInLegend: true,
-                  label: textNl.chart_bedbezetting.legend_trend_label,
-                  color: colors.primary,
-                },
-                {
-                  type: 'scatter-plot',
-                  metricProperty: 'beds_occupied_covid',
-                  label: textNl.chart_bedbezetting.legend_dot_label,
-                  color: colors.primary,
-                },
-              ]}
-              dataOptions={{
-                timespanAnnotations: [
+            >
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_beds_occupied_over_time_chart',
+                }}
+                values={dataHospitalLcps.values}
+                timeframe={hospitalBedsOccupiedOverTimeTimeframe}
+                forceLegend
+                seriesConfig={[
                   {
-                    start: dataHospitalLcps.values[0].date_unix,
-                    end: new Date('1 June 2020').getTime() / 1000,
-                    label: textNl.chart_bedbezetting.legend_inaccurate_label,
-                    shortLabel: commonTexts.common.incomplete,
+                    type: 'line',
+                    metricProperty: 'beds_occupied_covid',
+                    nonInteractive: true,
+                    hideInLegend: true,
+                    label: textNl.hospitals.chart_beds_occupied.legend_trend_label,
+                    color: colors.primary,
                   },
-                ],
+                  {
+                    type: 'scatter-plot',
+                    metricProperty: 'beds_occupied_covid',
+                    label: textNl.hospitals.chart_beds_occupied.legend_dot_label,
+                    color: colors.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataHospitalLcps.values[0].date_unix,
+                      end: new Date('1 June 2020').getTime() / 1000,
+                      label: textNl.hospitals.chart_beds_occupied.legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
+                    },
+                  ],
+                }}
+              />
+            </ChartTile>
+          )}
+
+          {selectedBedsOccupiedOverTimeChart === 'beds_occupied_covid_icu' && (
+            <ChartTile
+              title={textNl.icu.chart_beds_occupied.title}
+              description={textNl.icu.chart_beds_occupied.description}
+              metadata={{ source: textNl.sources.lnaz }}
+              timeframeOptions={TimeframeOptionsList}
+              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              onSelectTimeframe={setIntensiveCareBedsTimeframe}
+              toggle={{
+                initialValue: selectedBedsOccupiedOverTimeChart,
+                items: bedsOccupiedOverTimeToggleItems,
+                onChange: (value) => setSelectedBedsOccupiedOverTimeChart(value),
               }}
-            />
-          </ChartTile>
+            >
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'intensive_care_beds_occupied_over_time_chart',
+                }}
+                values={data.intensive_care_lcps.values}
+                timeframe={intensiveCareBedsTimeframe}
+                forceLegend
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: data.intensive_care_lcps.values[0].date_unix,
+                      end: new Date('1 June 2020').getTime() / 1000,
+                      label: textNl.icu.chart_beds_occupied.legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
+                    },
+                  ],
+                }}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'beds_occupied_covid',
+                    nonInteractive: true,
+                    hideInLegend: true,
+                    label: textNl.icu.chart_beds_occupied.legend_trend_label,
+                    color: colors.primary,
+                  },
+                  {
+                    type: 'scatter-plot',
+                    metricProperty: 'beds_occupied_covid',
+                    label: textNl.icu.chart_beds_occupied.legend_dot_label,
+                    color: colors.primary,
+                  },
+                ]}
+              />
+            </ChartTile>
+          )}
         </TileList>
       </NlLayout>
     </Layout>
