@@ -1,13 +1,7 @@
-import {
-  NlTestedPerAgeGroupValue,
-  TimeframeOption,
-} from '@corona-dashboard/common';
+import { NlTestedPerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import {
-  InteractiveLegend,
-  SelectOption,
-} from '~/components/interactive-legend';
+import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
@@ -33,13 +27,7 @@ interface InfectedPerAgeGroup {
   text: SiteText['pages']['positive_tests_page']['shared'];
 }
 
-export function InfectedPerAgeGroup({
-  values,
-  timeframe,
-  accessibility,
-  timelineEvents,
-  text,
-}: InfectedPerAgeGroup) {
+export function InfectedPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectedPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -48,29 +36,22 @@ export function InfectedPerAgeGroup({
   const alwaysEnabled = ['infected_overall_per_100k'];
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] =
-    BASE_SERIES_CONFIG.map((baseAgeGroup) => {
-      const label =
-        baseAgeGroup.metricProperty in text.infected_per_age_group.legend
-          ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty]
-          : baseAgeGroup.metricProperty;
+  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+    const label = baseAgeGroup.metricProperty in text.infected_per_age_group.legend ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty] : baseAgeGroup.metricProperty;
 
-      const ariaLabel = replaceVariablesInText(
-        commonTexts.aria_labels.age_old,
-        {
-          age: label,
-        }
-      );
-
-      return {
-        ...baseAgeGroup,
-        type: 'line',
-        shape: 'line',
-        label,
-        ariaLabel,
-        legendAriaLabel: ariaLabel,
-      };
+    const ariaLabel = replaceVariablesInText(commonTexts.aria_labels.age_old, {
+      age: label,
     });
+
+    return {
+      ...baseAgeGroup,
+      type: 'line',
+      shape: 'line',
+      label,
+      ariaLabel,
+      legendAriaLabel: ariaLabel,
+    };
+  });
 
   /**
    * Chart:
@@ -78,46 +59,33 @@ export function InfectedPerAgeGroup({
    * - otherwise: selected items + always enabled items
    */
   const compareList = list.concat(...alwaysEnabled);
-  const chartConfig = seriesConfig.filter(
-    (item) =>
-      compareList.includes(item.metricProperty) ||
-      compareList.length === alwaysEnabled.length
-  );
+  const chartConfig = seriesConfig.filter((item) => compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length);
 
-  const interactiveLegendOptions: SelectOption[] = seriesConfig.filter(
-    (item) => !alwaysEnabled.includes(item.metricProperty)
-  );
+  const interactiveLegendOptions: SelectOption[] = seriesConfig;
+  // .filter((item) => !alwaysEnabled.includes(item.metricProperty));
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
     <ErrorBoundary>
-      <InteractiveLegend
-        helpText={text.infected_per_age_group.legend_help_text}
-        selectOptions={interactiveLegendOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
-      />
+      <InteractiveLegend helpText={text.infected_per_age_group.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer mb={2} />
       <TimeSeriesChart
+        disableLegend
         accessibility={accessibility}
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}
         minHeight={breakpoints.md ? 300 : 250}
-        formatTooltip={(data) => (
-          <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
-        )}
+        formatTooltip={(data) => <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />}
         dataOptions={{
           valueAnnotation: text.infected_per_age_group.value_annotation,
           timespanAnnotations: [
             {
               start: underReportedDateStart,
               end: Infinity,
-              label:
-                text.infected_per_age_group.line_chart_legend_inaccurate_label,
+              label: text.infected_per_age_group.line_chart_legend_inaccurate_label,
               shortLabel: text.infected_per_age_group.tooltip_labels.inaccurate,
             },
           ],

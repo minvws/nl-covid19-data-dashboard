@@ -6,12 +6,15 @@ import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Box } from './base';
 
+type LegendLineStyle = 'solid' | 'dashed';
+
 export interface SelectOption<T = string> {
   metricProperty: T;
   label: string;
   color: string;
   shape?: 'line' | 'circle' | 'square' | 'gapped-area';
   legendAriaLabel?: string;
+  style?: LegendLineStyle;
 }
 
 interface InteractiveLegendProps<T = string> {
@@ -22,13 +25,7 @@ interface InteractiveLegendProps<T = string> {
   onReset?: () => void;
 }
 
-export function InteractiveLegend<T = string>({
-  helpText,
-  selectOptions,
-  selection,
-  onToggleItem,
-  onReset,
-}: InteractiveLegendProps<T>) {
+export function InteractiveLegend<T = string>({ helpText, selectOptions, selection, onToggleItem, onReset }: InteractiveLegendProps<T>) {
   const { commonTexts } = useIntl();
 
   const hasSelection = selection.length !== 0;
@@ -42,19 +39,13 @@ export function InteractiveLegend<T = string>({
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
-                <StyledLabel
-                  htmlFor={`checkboxgroup-${item.label}`}
-                  isActive={hasSelection && isSelected}
-                  borderColor={item.color}
-                  data-text={item.label}
-                >
+                <StyledLabel htmlFor={`checkboxgroup-${item.label}`} isActive={hasSelection && isSelected} borderColor={item.color} data-text={item.label}>
                   {item.label}
-                  {item.shape === 'line' && <Line color={item.color} />}
+                  {/* {item.shape === 'line' && <Line color={item.color} />} */}
+                  {item.shape === 'line' && <Line color={item.color} lineStyle={item.style ?? 'solid'} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
                   {item.shape === 'square' && <Square color={item.color} />}
-                  {item.shape === 'gapped-area' && (
-                    <GappedArea color={item.color} />
-                  )}
+                  {item.shape === 'gapped-area' && <GappedArea color={item.color} />}
                 </StyledLabel>
                 <StyledInput
                   type="checkbox"
@@ -124,9 +115,7 @@ const StyledLabel = styled.label<{
     pl: 33,
     py: 1,
     borderRadius: '5px',
-    boxShadow: `inset 0px 0px 0px ${
-      isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`
-    }`,
+    boxShadow: `inset 0px 0px 0px ${isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`}`,
     fontWeight: 'normal',
     fontFamily: 'inherit',
     fontSize: 1,
@@ -200,7 +189,23 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   })
 );
 
-const Line = styled.div<{ color: string }>(({ color }) =>
+// const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
+//   css({
+//     display: 'block',
+//     position: 'absolute',
+//     borderTopColor: color as SystemStyleObject,
+//     borderTopStyle: lineStyle,
+//     borderTopWidth: '3px',
+//     top: '10px',
+//     width: '15px',
+//     height: 0,
+//     borderRadius: '2px',
+//     left: 0,
+//   })
+// );
+
+const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
+  // const Line = styled.div<{ color: string }>(({ color }) =>
   css({
     top: '50%',
     transform: 'translateY(-50%)',
@@ -209,6 +214,7 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     borderRadius: '2px',
     display: 'block',
     position: 'absolute',
+    borderTopStyle: lineStyle, //added
     left: 13,
     backgroundColor: color,
   })

@@ -1,5 +1,11 @@
 import { colors } from '@corona-dashboard/common';
 
+// type BaseSeriesConfigItem = {
+//   metricProperty: string;
+//   color: string;
+//   style?: string;
+// };
+
 export const BASE_SERIES_CONFIG = [
   {
     metricProperty: 'admissions_age_0_19_per_million',
