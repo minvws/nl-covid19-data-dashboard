@@ -43,7 +43,7 @@ export interface ThermometerTimelineEvent {
   dateEnd: number;
 }
 
-interface ThermometerLevel {
+export interface ThermometerLevel {
   level: SeverityLevel;
   label: string;
   description: string;

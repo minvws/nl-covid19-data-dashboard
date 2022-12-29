@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import type { GeoProjection } from 'd3-geo';
 import Konva from 'konva';
-import { memo, MouseEvent, MutableRefObject, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, FocusEvent, MouseEvent, MutableRefObject, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
 import { isIOSDevice } from '~/utils/is-ios-device';
@@ -404,6 +404,11 @@ function AreaMap(props: AreaMapProps) {
 
   const isTouch = useIsTouchDevice();
 
+  const handleAreaInteraction = (event: FocusEvent<HTMLElement> | MouseEvent<HTMLElement>, geoInfoGroup: GeoInfoGroup) => {
+    anchorEventHandlers.onFocus(event);
+    selectFeature(geoInfoGroup.code as CodeProp, true);
+  };
+
   return (
     <map name={id} tabIndex={isTabInteractive ? 0 : -1} onMouseMove={!isTouch || isIOSDevice() ? handleMouseOver : undefined}>
       {geoInfoGroups.map((geoInfoGroup) =>
@@ -420,10 +425,8 @@ function AreaMap(props: AreaMapProps) {
             shape="poly"
             coords={geoInfoCoordinates.flat().join(',')}
             href={!isTouch && isDefined(getLink) ? getLink(geoInfoGroup.code) : undefined}
-            onFocus={(event) => {
-              anchorEventHandlers.onFocus(event);
-              selectFeature(geoInfoGroup.code as CodeProp, true);
-            }}
+            onClick={(event) => (isTouch ? handleAreaInteraction(event, geoInfoGroup) : undefined)}
+            onFocus={(event) => handleAreaInteraction(event, geoInfoGroup)}
             onBlur={(event) => {
               anchorEventHandlers.onBlur(event);
               selectFeature(undefined, true);

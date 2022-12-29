@@ -11,63 +11,24 @@ import {
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import {
-  TwoKpiSection,
-  TimeSeriesChart,
-  TileList,
-  SEOHead,
-  ChartTile,
-  DynamicChoropleth,
-  ChoroplethTile,
-  KpiTile,
-  KpiValue,
-  PageInformationBlock,
-  PageKpi,
-} from '~/components';
+import { TwoKpiSection, TimeSeriesChart, TileList, SEOHead, ChartTile, DynamicChoropleth, ChoroplethTile, KpiTile, KpiValue, PageInformationBlock, PageKpi } from '~/components';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getLinkParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectNlData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import {
-  countTrailingNullValues,
-  getBoundaryDateStartUnix,
-  replaceVariablesInText,
-  useReverseRouter,
-} from '~/utils';
+import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { last } from 'lodash';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = [
-  'difference.hospital_lcps__beds_occupied_covid.new_date_unix',
-  'hospital_lcps',
-  'hospital_nice_per_age_group',
-  'hospital_nice',
-];
+const pageMetrics = ['difference.hospital_lcps__beds_occupied_covid.new_date_unix', 'hospital_lcps', 'hospital_nice_per_age_group', 'hospital_nice'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -78,15 +39,9 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.hospital_lcps__beds_occupied_covid',
-    'hospital_lcps',
-    'hospital_nice_per_age_group',
-    'hospital_nice'
-  ),
+  selectNlData('difference.hospital_lcps__beds_occupied_covid', 'hospital_lcps', 'hospital_nice_per_age_group', 'hospital_nice'),
   createGetChoroplethData({
     vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
     gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
@@ -98,20 +53,13 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('hospital_page')},
-        "elements": ${getElementsQuery(
-          'nl',
-          ['hospital_nice', 'hospital_nice_per_age_group'],
-          context.locale
-        )}
+        "elements": ${getElementsQuery('nl', ['hospital_nice', 'hospital_nice_per_age_group'], context.locale)}
       }`;
     })(context);
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'hospitalPageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'hospitalPageArticles'),
         links: getLinkParts(content.parts.pageParts, 'hospitalPageLinks'),
         elements: content.elements,
       },
@@ -120,28 +68,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
-  const {
-    pageText,
-    selectedNlData: data,
-    choropleth,
-    content,
-    lastGenerated,
-  } = props;
+  const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const [
-    hospitalAdmissionsOverTimeTimeframe,
-    setHospitalAdmissionsOverTimeTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [
-    hospitalBedsOccupiedOverTimeTimeframe,
-    setHospitalBedsOccupiedOverTimeTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [
-    hospitalAdmissionsPerAgeTimeframe,
-    setHospitalAdmissionsPerAgeTimeframe,
-  ] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [hospitalAdmissionsPerAgeTimeframe, setHospitalAdmissionsPerAgeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('vr');
@@ -151,52 +84,30 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const lastValueLcps = data.hospital_lcps.last_value;
 
   const lastValueNice = data.hospital_nice.last_value;
-  const lastValueNiceChoropleth =
-    (selectedMap === 'gm'
-      ? last(choropleth.gm.hospital_nice_choropleth)
-      : last(choropleth.vr.hospital_nice_choropleth)) || lastValueNice;
+  const lastValueNiceChoropleth = (selectedMap === 'gm' ? last(choropleth.gm.hospital_nice_choropleth) : last(choropleth.vr.hospital_nice_choropleth)) || lastValueNice;
 
-  const underReportedRange = getBoundaryDateStartUnix(
-    dataHospitalNice.values,
-    countTrailingNullValues(
-      dataHospitalNice.values,
-      'admissions_on_date_of_admission_moving_average'
-    )
-  );
+  const underReportedRange = getBoundaryDateStartUnix(dataHospitalNice.values, countTrailingNullValues(dataHospitalNice.values, 'admissions_on_date_of_admission_moving_average'));
 
-  const sevenDayAverageDates: [number, number] = [
-    underReportedRange - WEEK_IN_SECONDS,
-    underReportedRange - DAY_IN_SECONDS,
-  ];
+  const sevenDayAverageDates: [number, number] = [underReportedRange - WEEK_IN_SECONDS, underReportedRange - DAY_IN_SECONDS];
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
   const { commonTexts, formatDateFromSeconds } = useIntl();
-  const { metadataTexts, textNl, textShared } =
-    useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const choroplethDataGm: GmCollectionHospitalNice[] =
-    choropleth.gm.hospital_nice_choropleth;
-  const choroplethDataVr: VrCollectionHospitalNice[] =
-    choropleth.vr.hospital_nice_choropleth;
+  const choroplethDataGm: GmCollectionHospitalNice[] = choropleth.gm.hospital_nice_choropleth;
+  const choroplethDataVr: VrCollectionHospitalNice[] = choropleth.vr.hospital_nice_choropleth;
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
       <NlLayout>
-        <SEOHead
-          title={textNl.metadata.title}
-          description={textNl.metadata.description}
-        />
+        <SEOHead title={textNl.metadata.title} description={textNl.metadata.description} />
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.consequences_for_healthcare.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.hospital_admissions.title
-            }
+            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.hospital_admissions.title}
             title={textNl.titel}
             icon={<Ziekenhuis aria-hidden="true" />}
             description={textNl.pagina_toelichting}
@@ -222,13 +133,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.bronnen.nice,
               }}
             >
-              <PageKpi
-                data={data}
-                metricName="hospital_nice"
-                metricProperty="admissions_on_date_of_admission_moving_average_rounded"
-                isMovingAverageDifference
-                isAmount
-              />
+              <PageKpi data={data} metricName="hospital_nice" metricProperty="admissions_on_date_of_admission_moving_average_rounded" isMovingAverageDifference isAmount />
             </KpiTile>
 
             <KpiTile
@@ -240,14 +145,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               {bedsLastValue.beds_occupied_covid !== null && (
-                <KpiValue
-                  data-cy="beds_occupied_covid"
-                  absolute={bedsLastValue.beds_occupied_covid}
-                  difference={
-                    data.difference.hospital_lcps__beds_occupied_covid
-                  }
-                  isAmount
-                />
+                <KpiValue data-cy="beds_occupied_covid" absolute={bedsLastValue.beds_occupied_covid} difference={data.difference.hospital_lcps__beds_occupied_covid} isAmount />
               )}
             </KpiTile>
           </TwoKpiSection>
@@ -270,8 +168,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               seriesConfig={[
                 {
                   type: 'line',
-                  metricProperty:
-                    'admissions_on_date_of_admission_moving_average',
+                  metricProperty: 'admissions_on_date_of_admission_moving_average',
                   label: textNl.linechart_legend_titel_moving_average,
                   color: colors.primary,
                 },
@@ -289,15 +186,10 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                     end: Infinity,
                     label: textNl.linechart_legend_underreported_titel,
                     shortLabel: commonTexts.common.incomplete,
-                    cutValuesForMetricProperties: [
-                      'admissions_on_date_of_admission_moving_average',
-                    ],
+                    cutValuesForMetricProperties: ['admissions_on_date_of_admission_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(
-                  content.elements.timeSeries,
-                  'hospital_nice'
-                ),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_nice'),
               }}
             />
           </ChartTile>
@@ -353,12 +245,8 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
             legend={{
-              thresholds:
-                selectedMap === 'gm'
-                  ? thresholds.gm.admissions_on_date_of_admission_per_100000
-                  : thresholds.gm.admissions_on_date_of_admission_per_100000,
+              thresholds: selectedMap === 'gm' ? thresholds.gm.admissions_on_date_of_admission_per_100000 : thresholds.gm.admissions_on_date_of_admission_per_100000,
               title: textShared.chloropleth_legenda.titel,
-              type: 'default',
             }}
             metadata={{
               date: lastValueNiceChoropleth.date_unix,
@@ -408,9 +296,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
 
           <ChartTile
             title={commonTexts.hospital_admissions_per_age_group.chart_title}
-            description={
-              commonTexts.hospital_admissions_per_age_group.chart_description
-            }
+            description={commonTexts.hospital_admissions_per_age_group.chart_description}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
             metadata={{ source: textNl.bronnen.nice }}
@@ -422,10 +308,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               }}
               values={data.hospital_nice_per_age_group.values}
               timeframe={hospitalAdmissionsPerAgeTimeframe}
-              timelineEvents={getTimelineEvents(
-                content.elements.timeSeries,
-                'hospital_nice_per_age_group'
-              )}
+              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'hospital_nice_per_age_group')}
             />
           </ChartTile>
         </TileList>

@@ -280,6 +280,7 @@ export interface Nl {
   vaccine_coverage_per_age_group_estimated_archived_20220908: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value;
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
+  self_test_overall: NlSelfTestOverall;
 }
 export interface NlDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -1134,12 +1135,23 @@ export interface NlVariantsVariantValue {
   date_of_insertion_unix: number;
   date_of_report_unix: number;
 }
+export interface NlSelfTestOverall {
+  values: NlSelfTestOverallValue[];
+  last_value: NlSelfTestOverallValue;
+}
+export interface NlSelfTestOverallValue {
+  infected_percentage: number | null;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export type TopicalIcon =
   | 'AfstandSporten'
   | 'AlcoholVerkoop'
   | 'Archive'
   | 'Arrow'
+  | 'ArrowWithIntensity'
   | 'Arts'
   | 'Avondklok'
   | 'BarChart'

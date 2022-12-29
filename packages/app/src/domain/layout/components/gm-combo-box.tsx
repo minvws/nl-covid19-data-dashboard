@@ -22,15 +22,9 @@ export function GmComboBox(props: GmComboBoxProps) {
       placeholder={commonTexts.common.zoekveld_placeholder_gemeente}
       options={gmData}
       onSelect={({ gemcode }) => {
-        router.push(
-          typeof getLink === 'function'
-            ? getLink(gemcode)
-            : reverseRouter.gm.index(gemcode)
-        );
+        router.push(typeof getLink === 'function' ? getLink(gemcode) : reverseRouter.gm.index(gemcode));
       }}
-      sorter={(a, b) =>
-        a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, ''))
-      }
+      sorter={(a, b) => a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, ''))}
       selectedOption={gmData.find((gm) => gm.gemcode === selectedGmCode)}
     />
   );

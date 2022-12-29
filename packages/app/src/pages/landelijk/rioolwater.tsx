@@ -137,7 +137,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: textNl.linechart_description,
               selectPlaceholder: textNl.graph_selected_rwzi_placeholder,
               splitLabels: textShared.split_labels,
-              averagesDataLabel: commonTexts.common.daggemiddelde,
+              averagesLegendLabel: commonTexts.common.charts.averages_legend_label,
+              averagesTooltipLabel: commonTexts.common.charts.daily_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
             timelineEvents={getTimelineEvents(content.elements.timeSeries, 'sewer')}

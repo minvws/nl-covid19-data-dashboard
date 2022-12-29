@@ -1,7 +1,4 @@
-import {
-  ChevronRight,
-  External as ExternalIcon,
-} from '@corona-dashboard/icons';
+import { ChevronRight, External as ExternalIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -11,7 +8,7 @@ import { useIntl } from '~/intl';
 import { spacingStyle } from '~/style/functions/spacing';
 import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 
 interface pageLinksProps {
@@ -24,29 +21,24 @@ interface pageLinksProps {
 export function PageLinks({ links }: pageLinksProps) {
   const { commonTexts } = useIntl();
 
-  const combinedAriaLabel = (title: string) =>
-    `${commonTexts.informatie_header.external_link}. ${title}`;
+  const combinedAriaLabel = (title: string) => `${commonTexts.informatie_header.external_link}. ${title}`;
 
   return (
-    <Box spacing={2} pt={3}>
+    <Box spacing={2} paddingTop={space[3]}>
       <BoldText>{commonTexts.informatie_header.handige_links}</BoldText>
       <OrderedList>
         {links.map((link, index) => (
           <ListItem key={index}>
-            {isAbsoluteUrl(link.href) ? (
-              <ExternalLink
-                href={link.href}
-                underline="hover"
-                ariaLabel={combinedAriaLabel(link.title)}
-              >
-                <TitleWithIcon title={link.title} icon={<ExternalIcon />} />
-              </ExternalLink>
-            ) : (
+            {isInternalUrl(link.href) ? (
               <Link href={link.href} passHref>
                 <Anchor underline="hover" ariaLabel={link.title}>
                   <TitleWithIcon title={link.title} icon={<ChevronRight />} />
                 </Anchor>
               </Link>
+            ) : (
+              <ExternalLink href={link.href} underline="hover" ariaLabel={combinedAriaLabel(link.title)}>
+                <TitleWithIcon title={link.title} icon={<ExternalIcon />} />
+              </ExternalLink>
             )}
           </ListItem>
         ))}

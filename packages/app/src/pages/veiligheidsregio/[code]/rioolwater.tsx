@@ -10,20 +10,9 @@ import { VrLayout } from '~/domain/layout/vr-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  selectVrData,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, selectVrData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -41,14 +30,11 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData('sewer', 'sewer_per_installation', 'difference.sewer__average'),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<
-      PagePartQueryResult<ArticleParts>
-    >(() => getPagePartsQuery('sewer_page'))(context);
+    const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
     return {
       content: {
@@ -59,19 +45,10 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    pageText,
-    selectedVrData: data,
-    vrName,
-    content,
-    lastGenerated,
-  } = props;
+  const { pageText, selectedVrData: data, vrName, content, lastGenerated } = props;
 
   const { commonTexts } = useIntl();
-  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const sewerAverages = data.sewer;
 
   const metadata = {
@@ -91,9 +68,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
             title={replaceVariablesInText(textVr.titel, {
               safetyRegion: vrName,
             })}
@@ -129,10 +104,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               />
             </KpiTile>
 
-            <KpiTile
-              title={textVr.tile_explanation_title}
-              description={textVr.tile_explanation_description}
-            />
+            <KpiTile title={textVr.tile_explanation_title} description={textVr.tile_explanation_description} />
           </TwoKpiSection>
 
           <SewerChart
@@ -145,13 +117,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               description: textVr.linechart_description,
               selectPlaceholder: textVr.graph_selected_rwzi_placeholder,
               splitLabels: textShared.split_labels,
-              averagesDataLabel: commonTexts.common.daggemiddelde,
+              averagesLegendLabel: commonTexts.common.charts.averages_legend_label,
+              averagesTooltipLabel: commonTexts.common.charts.daily_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
             }}
             vrNameOrGmName={vrName}
-            incompleteDatesAndTexts={
-              textShared.zeewolde_incomplete_manualy_override
-            }
+            incompleteDatesAndTexts={textShared.zeewolde_incomplete_manualy_override}
             warning={textVr.warning_chart}
           />
         </TileList>

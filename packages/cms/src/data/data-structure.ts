@@ -292,6 +292,7 @@ export const dataStructure = {
       'janssen_total',
     ],
     variants: ['variant_code', 'values', 'last_value'],
+    self_test_overall: ['infected_percentage'],
   },
   topical: {},
   vr: {
@@ -304,10 +305,7 @@ export const dataStructure = {
       'admissions_on_date_of_admission_moving_average_rounded',
       'admissions_on_date_of_reporting',
     ],
-    hospital_nice_choropleth: [
-      "admissions_on_date_of_admission",
-      "admissions_on_date_of_reporting",
-    ],
+    hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_reporting'],
     tested_ggd: [
       'infected',
       'infected_moving_average',
