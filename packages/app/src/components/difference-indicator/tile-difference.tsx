@@ -6,7 +6,6 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Container, IconContainer } from './containers';
 import { TrendDirection, TrendIcon } from '../trend-icon';
-import { space } from '~/style/theme';
 
 export function TileDifference({
   value,
@@ -81,7 +80,7 @@ interface ContainerWithIconsProps {
 
 function ContainerWithIcon({ icon, color }: ContainerWithIconsProps) {
   return (
-    <IconContainer color={color} marginRight={space[1]}>
+    <IconContainer color={color} mr={1}>
       {icon}
     </IconContainer>
   );

@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { spacingStyle } from '~/style/functions/spacing';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
@@ -106,7 +105,7 @@ const ErrorBox = styled.div.attrs({
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'red2',
-    padding: space[2],
+    padding: 2,
     borderRadius: '8px',
     maxHeight: asResponsiveArray({ _: '200px', md: '600px' }),
     overflow: 'auto',
@@ -120,8 +119,8 @@ const Button = styled.button(
     border: '1px solid',
     borderColor: 'gray3',
     borderRadius: '5px',
-    padding: space[3],
-    marginRight: space[3],
+    padding: 3,
+    mr: 3,
     cursor: 'pointer',
     '&: hover': {
       borderColor: 'blue8',
@@ -134,7 +133,7 @@ const ErrorReport = styled.pre(
     border: '1px solid',
     borderColor: 'gray3',
     overflow: 'auto',
-    padding: space[2],
+    padding: 2,
     fontSize: 0,
   })
 );

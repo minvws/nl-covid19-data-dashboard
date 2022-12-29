@@ -71,7 +71,7 @@ export const CollapsibleSection = ({ summary, children, id, hideBorder, textColo
 const StyledAnchor = styled(Anchor)`
   color: ${colors.gray2};
   left: -48px;
-  padding: ${space[0]} ${space[3]};
+  padding: 0 ${space[3]};
   position: absolute;
   text-decoration: none;
   top: 50%;

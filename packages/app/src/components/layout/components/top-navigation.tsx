@@ -7,7 +7,6 @@ import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { useMediaQuery } from '~/utils/use-media-query';
@@ -80,11 +79,11 @@ function NavItem({ href, children, isActive }: { href: string; children: string;
 
 const NavToggle = styled.button(
   css({
-    marginLeft: 'auto',
+    ml: 'auto',
     color: 'white',
     bg: 'transparent',
-    padding: '6px',
-    margin: space[0],
+    p: '6px',
+    m: 0,
     border: 'none',
     '&:focus': {
       bg: 'rgba(0, 0, 0, 0.1)',
@@ -97,7 +96,7 @@ const NavWrapper = styled.nav(
     display: 'block',
     width: '100%',
     borderTopWidth: '1px',
-    padding: space[0],
+    p: 0,
     overflow: 'hidden',
 
     [`@media ${wideNavBreakpoint}`]: {
@@ -105,9 +104,9 @@ const NavWrapper = styled.nav(
       display: 'inline',
       width: 'auto',
       borderTopWidth: 0,
-      marginLeft: 'auto',
-      marginTop: space[0],
-      paddingY: space[1],
+      ml: 'auto',
+      mt: 0,
+      py: 1,
       flex: '0 0 auto',
     },
   })
@@ -117,14 +116,14 @@ const NavList = styled.ul(
   css({
     borderTop: '1px solid white',
     listStyle: 'none',
-    padding: space[0],
-    margin: space[0],
-    marginTop: '1.25rem',
+    padding: 0,
+    margin: 0,
+    mt: '1.25rem',
     display: 'block',
 
     [`@media ${wideNavBreakpoint}`]: {
       borderTop: 'none',
-      marginTop: space[0],
+      mt: 0,
       display: 'flex',
     },
   })
@@ -182,8 +181,8 @@ const NavLink = styled(Anchor)<{ isActive: boolean }>((x) =>
 const NavLinkSpan = styled.span(
   css({
     display: 'inline-block',
-    paddingX: space[2],
-    paddingY: '0.7rem',
+    px: 2,
+    py: '0.7rem',
     position: 'relative',
 
     '&::before': {
@@ -192,14 +191,14 @@ const NavLinkSpan = styled.span(
       fontWeight: 'bold',
       overflow: 'hidden',
       visibility: 'hidden',
-      height: '0px',
+      height: 0,
     },
 
     // Styled underline
     '&::after': {
       bg: 'white',
-      right: space[2],
-      left: space[2],
+      right: 2,
+      left: 2,
       bottom: '0.6rem',
       height: '0.15rem',
       position: 'absolute',

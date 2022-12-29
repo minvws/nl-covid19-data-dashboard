@@ -6,7 +6,6 @@ import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
 import { Markdown } from '~/components/markdown';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { space } from '~/style/theme';
 
 export function TileAverageDifference({
   value,
@@ -73,7 +72,7 @@ export function TileAverageDifference({
 
   function ContainerWithIcon({ icon, color }: ContainerWithIconsProps) {
     return (
-      <IconContainer color={color} marginRight={space[1]}>
+      <IconContainer color={color} mr={1}>
         {icon}
       </IconContainer>
     );

@@ -5,7 +5,6 @@ import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import chevronDownUrl from '~/assets/chevron-down.svg';
 import { Box } from '~/components/base';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
@@ -89,7 +88,7 @@ const ButtonContainer = styled.div(
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginX: 'auto',
+    mx: 'auto',
     zIndex: 0,
   })
 );
@@ -105,22 +104,22 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 }>((x) =>
   css({
     position: 'relative',
-    padding: space[0],
+    padding: 0,
     transitionProperty: 'height',
     transitionDuration: '0.4s',
     willChange: 'height',
 
     // Button
     '[data-reach-disclosure-button]': {
-      margin: space[0],
+      m: 0,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 1,
       width: x.isOpen ? '100%' : 'fit-content',
       border: 'none',
-      paddingX: asResponsiveArray({ _: space[3], sm: space[4] }),
-      paddingY: space[3],
+      px: asResponsiveArray({ _: 3, sm: 4 }),
+      py: 3,
       background: 'none',
       color: 'black',
       font: 'inherit',
@@ -149,7 +148,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         display: 'block',
         transition: 'width 0.4s',
         position: 'absolute',
-        top: space[0],
+        top: 0,
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
         zIndex: -1,
@@ -203,7 +202,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 
 const IconContainer = styled.div(
   css({
-    marginRight: space[2],
+    mr: 2,
     display: 'flex',
     alignItems: 'center',
 
@@ -219,7 +218,7 @@ const Chevron = styled.div<{
   open: boolean;
 }>((x) =>
   css({
-    marginLeft: space[2],
+    ml: 2,
     backgroundImage: `url('${chevronDownUrl}')`,
     backgroundSize: '0.9em 0.5em',
     backgroundPosition: '0 50%',

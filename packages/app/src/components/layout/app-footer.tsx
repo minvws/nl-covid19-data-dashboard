@@ -7,7 +7,6 @@ import { ExternalLink } from '~/components/external-link';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -19,7 +18,7 @@ export function AppFooter() {
 
   return (
     <footer>
-      <Box bg="blue8" color="white" paddingY={space[5]} position="relative" id="footer-navigation">
+      <Box bg="blue8" color="white" py={5} position="relative" id="footer-navigation">
         <MaxWidth
           display="grid"
           gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }}
@@ -27,7 +26,7 @@ export function AppFooter() {
             columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
             rowGap: asResponsiveArray({ _: 4, md: null }),
           })}
-          paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}
+          px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
           <Box spacing={3}>
             <Heading as="div" level={3}>
@@ -103,12 +102,12 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'baseline',
-    paddingLeft: space[3],
+    pl: 3,
 
     '&:before': {
       position: 'absolute',
-      top: space[0],
-      left: space[0],
+      top: 0,
+      left: 0,
       content: x.isExternal ? null : '"›"',
     },
   })
@@ -118,11 +117,11 @@ const IconContainer = styled.div(
   css({
     position: 'absolute',
     left: '-3px',
-    top: space[0],
+    top: 0,
 
     svg: {
-      width: '10px',
-      height: '10px',
+      width: 10,
+      height: 10,
     },
   })
 );

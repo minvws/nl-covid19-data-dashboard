@@ -6,7 +6,6 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getCurrentPageScope } from '~/utils/get-current-page-scope';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -38,7 +37,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
 
   return (
-    <MaxWidth paddingX={{ _: space[0], xs: space[0], sm: space[0], md: space[0], lg: space[3] }}>
+    <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>
         {backButtonUrl && (
           <>
@@ -47,7 +46,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
               isVisible={!hideBackButton}
               css={css({
                 background: 'white',
-                paddingY: space[3],
+                py: 3,
                 position: 'relative',
                 borderBottom: 'solid 1px',
                 borderColor: 'gray3',
@@ -73,7 +72,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
         >
           <ResponsiveVisible isVisible={!isMenuOpen}>{children}</ResponsiveVisible>
           {backButtonUrl && (
-            <BackButtonContainer isVisible={!hideBackButton} marginTop={space[4]} isMenuOpen={isMenuOpen}>
+            <BackButtonContainer isVisible={!hideBackButton} mt={4} isMenuOpen={isMenuOpen}>
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
                 {backButtonText}
               </LinkWithIcon>
@@ -90,9 +89,9 @@ const BackButtonContainer = styled(Box)<{
   isMenuOpen: boolean;
 }>((x) =>
   css({
-    marginX: x.isMenuOpen ? asResponsiveArray({ _: space[1], xs: 'auto' }) : asResponsiveArray({ _: space[1], sm: space[5] }),
+    mx: x.isMenuOpen ? asResponsiveArray({ _: 1, xs: 'auto' }) : asResponsiveArray({ _: 1, sm: 5 }),
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
-    paddingX: asResponsiveArray({ _: space[1], sm: space[1] }),
+    px: asResponsiveArray({ _: 1, sm: 1 }),
     maxWidth: x.isMenuOpen ? '38rem' : undefined,
   })
 );
@@ -101,9 +100,9 @@ const AppContentContainer = styled.div(
   css({
     display: ['block', null, null, 'flex'],
     flexDirection: ['column', null, null, 'row'],
-    marginBottom: space[4],
-    margin: `${space[0]} auto`,
-    paddingBottom: space[4],
+    marginBottom: '2rem',
+    margin: '0 auto',
+    pb: 4,
     minHeight: '50vh',
   })
 );

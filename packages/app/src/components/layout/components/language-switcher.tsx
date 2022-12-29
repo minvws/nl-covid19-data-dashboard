@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Anchor } from '~/components/typography';
-import { space } from '~/style/theme';
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -12,7 +11,7 @@ export function LanguageSwitcher() {
   const [currentPath] = router.asPath.split('?');
 
   return (
-    <Box height={'55px'} marginTop={'-55px'} textAlign="right" position="absolute" right={space[3]}>
+    <Box height={55} mt={-55} textAlign="right" position="absolute" right={3}>
       <LanguageLink href={`https://coronadashboard.rijksoverheid.nl${currentPath}`} lang="nl" hrefLang="nl" isActive={locale === 'nl'} title="Website in het Nederlands">
         NL
       </LanguageLink>
@@ -33,7 +32,7 @@ export function LanguageSwitcher() {
 }
 const Separator = styled.span(
   css({
-    marginX: space[2],
+    mx: 2,
     display: 'inline-block',
 
     '&:after': {
