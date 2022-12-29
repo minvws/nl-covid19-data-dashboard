@@ -10,7 +10,6 @@ import { useRichContentSelect } from './logic/use-select';
 import { Option } from './types';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 
 type RichContentSelectProps<T extends string> = {
   initialValue?: Unpack<T>;
@@ -51,7 +50,7 @@ export function RichContentSelect<T extends string>(props: RichContentSelectProp
           css={css({
             display: 'block',
             fontWeight: 'bold',
-            marginBottom: space[2],
+            mb: 2,
           })}
         >
           <InlineText>{label}</InlineText>
@@ -68,7 +67,7 @@ export function RichContentSelect<T extends string>(props: RichContentSelectProp
               '&[aria-expanded="true"]': {
                 transform: 'rotate(180deg)',
               },
-              marginLeft: space[2],
+              marginLeft: '0.5rem',
             })}
             aria-hidden={true}
             aria-expanded={getComboboxProps()['aria-expanded']}

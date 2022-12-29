@@ -194,7 +194,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
                   })}
                 >
                   {word}&nbsp;
-                  <ChevronRight width={'10px'} height={'10px'} />
+                  <ChevronRight width={10} height={10} />
                 </span>
               ) : (
                 <span>{`${word} `}</span>

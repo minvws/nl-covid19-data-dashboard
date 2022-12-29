@@ -119,7 +119,7 @@ export function PageInformationBlock({
 
             {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
           </Box>
-          <Box marginY={space[3]}>
+          <Box my={3}>
             {showArchivedToggleButton && (
               <StyledArchiveButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
                 {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
@@ -134,7 +134,7 @@ export function PageInformationBlock({
 
 const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
   css({
-    paddingTop: x.hasTitle ? undefined : asResponsiveArray({ _: space[2], sm: space[3] }),
+    pt: x.hasTitle ? undefined : asResponsiveArray({ _: 2, sm: 3 }),
     display: 'flex',
     flexWrap: 'wrap',
     borderTop: x.hasTitle ? undefined : 'solid 2px gray2',
@@ -144,7 +144,7 @@ const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
 const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
-    marginBottom: asResponsiveArray({ _: space[3], md: space[0] }),
+    mb: asResponsiveArray({ _: 3, md: 0 }),
   })
 );
 

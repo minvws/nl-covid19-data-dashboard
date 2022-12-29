@@ -10,7 +10,6 @@ import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
-import { space } from '~/style/theme';
 
 interface ArticlesProps {
   articles: ArticleSummary[];
@@ -43,14 +42,14 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledAnchor>
-        <Box width={'100px'} minWidth={100} maxHeight={66} overflow="hidden">
+        <Box width={100} minWidth={100} maxHeight={66} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
               defaultWidth: 122,
             })}
           />
         </Box>
-        <Box paddingLeft={space[3]} display="flex" alignItems="center">
+        <Box pl={3} display="flex" alignItems="center">
           <StyledText>
             {words.map((word, index) => (
               <Fragment key={index}>
@@ -60,7 +59,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
-                      paddingRight: space[1],
+                      pr: 1,
                     })}
                   >
                     {word}
@@ -91,7 +90,7 @@ const StyledText = styled.p(
   css({
     display: 'flex',
     flexWrap: 'wrap',
-    margin: space[0],
+    margin: 0,
     whiteSpace: 'pre-wrap',
 
     '&:hover': {
@@ -99,9 +98,9 @@ const StyledText = styled.p(
     },
 
     svg: {
-      marginLeft: space[1],
-      width: '12px',
-      height: '12px',
+      marginLeft: 1,
+      width: 12,
+      height: 12,
     },
   })
 );

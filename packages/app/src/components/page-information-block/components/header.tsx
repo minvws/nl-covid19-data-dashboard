@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 /** We use the screenreaderCategory so when it reads the first H1 on the page.
@@ -53,8 +52,8 @@ const GridLayout = styled(Box)`
 
 const Icon = styled.span<{ gridArea: 'topIcon' | 'sideIcon' }>((x) =>
   css({
-    marginTop: '-0.6rem',
-    marginRight: space[3],
+    mt: '-0.6rem',
+    mr: 3,
     gridArea: x.gridArea,
     height: '3.5rem',
 
