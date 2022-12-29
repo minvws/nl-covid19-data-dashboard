@@ -2,7 +2,6 @@ import { colors, isDateSpanValue, TimestampedValue } from '@corona-dashboard/com
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { HoveredPoint } from '../logic';
 
 type LineProps = {
@@ -46,13 +45,13 @@ const LabelContainer = styled.div({
   justifyContent: 'center',
   marginTop: '7px',
   transform: 'translate(-50%, 0)',
-  width: '100px',
+  width: 100,
 });
 
 const Label = styled.span(
   css({
     backgroundColor: 'white',
-    paddingX: space[2],
+    px: '0.5em',
     fontSize: 12,
     fontWeight: 'bold',
   })
@@ -72,7 +71,7 @@ const Container = styled.div(
   css({
     position: 'absolute',
     pointerEvents: 'none',
-    top: space[0],
-    bottom: space[0],
+    top: 0,
+    bottom: 0,
   })
 );

@@ -5,7 +5,6 @@ import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { TimelineEventConfig } from '../logic';
 
@@ -25,8 +24,8 @@ export function TimelineTooltipContent({ config, onNext, onPrev, onClose, hasMul
   return (
     <Box
       color="black"
-      px="18p"
-      py="15px"
+      px={18}
+      py={15}
       spacing={3}
       onTouchStart={stopEventPropagation}
       onTouchMove={stopEventPropagation}
@@ -36,7 +35,7 @@ export function TimelineTooltipContent({ config, onNext, onPrev, onClose, hasMul
       maxWidth="100%"
     >
       {isTouch && (
-        <Box display="flex" justifyContent={hasMultipleEvents ? 'space-between' : 'center'} alignItems="center" marginLeft={`-${space[2]}`} marginRight={`-${space[2]}`}>
+        <Box display="flex" justifyContent={hasMultipleEvents ? 'space-between' : 'center'} alignItems="center" ml={-2} mr={-2}>
           {hasMultipleEvents && <ChevronButton onClick={onPrev} rotate title={commonTexts.charts.timeline.prev} />}
 
           <InlineText variant="label1" color="gray6">
@@ -58,7 +57,7 @@ export function TimelineTooltipContent({ config, onNext, onPrev, onClose, hasMul
       </Box>
 
       {isTouch && (
-        <Box paddingTop={space[3]} marginX={'-27px'} borderTop="1px solid" borderTopColor="gray2" display="flex" justifyContent="center" textVariant="label1">
+        <Box pt={3} mx={-27} borderTop="1px solid" borderTopColor="gray2" display="flex" justifyContent="center" textVariant="label1">
           <Anchor as="button" onClick={onClose} color="blue8" underline>
             {commonTexts.common.sluiten}
           </Anchor>
@@ -71,7 +70,7 @@ export function TimelineTooltipContent({ config, onNext, onPrev, onClose, hasMul
 function ChevronButton({ onClick, title, rotate }: { onClick: () => void; title: string; rotate?: boolean }) {
   return (
     <Box color="blue8" style={{ transform: rotate ? 'rotate(180deg)' : undefined }}>
-      <IconButton title={title} onClick={onClick} size={13} padding={space[2]}>
+      <IconButton title={title} onClick={onClick} size={13} padding={2}>
         <ChevronRight aria-hidden={true} />
       </IconButton>
     </Box>

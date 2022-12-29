@@ -22,7 +22,6 @@ import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -337,7 +336,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
       {valueAnnotation && (
         <>
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer marginBottom={{ _: space[2], sm: space[0] }} />
+          <Spacer mb={{ _: 2, sm: 0 }} />
         </>
       )}
       <Box height="100%">
@@ -461,7 +460,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
           )}
         </ResponsiveContainer>
       </Box>
-      <Box paddingLeft={`${padding.left}px`}>
+      <Box pl={`${padding.left}px`}>
         <Legend items={legendItems} />
       </Box>
     </>

@@ -10,7 +10,6 @@ import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { AccessibilityDefinition, addAccessibilityFeatures } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
@@ -188,7 +187,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
     width,
     height,
     paddingLeft,
-    paddingTop: showWeekNumbers ? 20 : undefined, // Still a magic number, but this is not easaly possible without refactoring the useDimensions function
+    paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
   const values = useValuesInTimeframe(allValues, timeframe, endDate);
@@ -329,11 +328,11 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         <Box
           position={isYAxisCollapsed ? 'relative' : undefined}
           top={isYAxisCollapsed ? '-6px' : undefined}
-          left={isYAxisCollapsed ? '25px' : undefined}
+          left={isYAxisCollapsed ? 25 : undefined}
           css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}
         >
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer marginBottom={{ _: space[2], sm: space[0] }} />
+          <Spacer mb={{ _: 2, sm: 0 }} />
         </Box>
       )}
 
@@ -396,7 +395,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
              * Highlight 0 on the y-axis when there are positive and
              * negative values
              */}
-            {highlightZero && <rect x={0} y={yScale(0)} width={bounds.width} height={'1px'} fill="black" />}
+            {highlightZero && <rect x={0} y={yScale(0)} width={bounds.width} height={1} fill="black" />}
 
             {benchmark && <Benchmark value={benchmark.value} label={benchmark.label} top={yScale(benchmark.value)} width={bounds.width} />}
 
@@ -456,7 +455,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
       {!disableLegend && splitLegendGroups && (
         <>
           {splitLegendGroups.map((x) => (
-            <Box key={x.label} paddingLeft={paddingLeft} display="flex" flexDirection={['column', 'row']} alignItems="baseline" spacingHorizontal={3}>
+            <Box key={x.label} pl={paddingLeft} display="flex" flexDirection={['column', 'row']} alignItems="baseline" spacingHorizontal={3}>
               {x.label && <InlineText>{x.label}:</InlineText>}
               <Legend items={x.items} />
             </Box>
@@ -464,7 +463,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         </>
       )}
       {!disableLegend && legendItems && (
-        <Box paddingLeft={paddingLeft}>
+        <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
       )}

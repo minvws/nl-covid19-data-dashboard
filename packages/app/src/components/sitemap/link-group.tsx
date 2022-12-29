@@ -4,7 +4,6 @@ import { ArrowIconThinRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { InlineText } from '~/components/typography';
-import { space } from '~/style/theme';
 
 export type LinkGroupProps = {
   header?: string;
@@ -39,7 +38,7 @@ function LinkItem(props: LinkItemProps) {
       <Item>
         <InlineText color="gray5">
           {text}
-          <span css={css({ svg: { height: '10px', width: '11px', marginX: '3px' } })}>
+          <span css={css({ svg: { height: 10, width: 11, mx: '3px' } })}>
             <ArrowIconThinRight />
           </span>
         </InlineText>
@@ -62,24 +61,24 @@ const StyledHeader = styled(InlineText)(
   css({
     fontWeight: 'bold',
     display: 'block',
-    marginBottom: space[2],
+    mb: 2,
   })
 );
 
 const List = styled.ul(
   css({
-    margin: space[0],
-    padding: space[0],
+    m: 0,
+    p: 0,
   })
 );
 
 const Item = styled.li(
   css({
     listStyle: 'none',
-    marginBottom: space[2],
+    mb: 2,
 
     ':last-child': {
-      marginBottom: space[0],
+      mb: 0,
     },
   })
 );

@@ -4,7 +4,6 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from '../../logic';
 import { DottedTimelineBar, TimelineBar } from './components/timeline-bar';
@@ -51,7 +50,7 @@ export const Timeline = memo(function Timeline({ width, padding, highlightIndex,
       ref={ref}
       position="relative"
       spacing={2}
-      paddingBottom={space[4]}
+      pb={4}
       css={css({ userSelect: 'none', touchAction: 'pan-y' })}
       width={width}
       onTouchStart={handleHover}
@@ -59,10 +58,10 @@ export const Timeline = memo(function Timeline({ width, padding, highlightIndex,
       onMouseMove={handleHover}
       onMouseLeave={handleHover}
     >
-      <Box paddingLeft={padding.left}>
+      <Box pl={padding.left}>
         <BoldText variant="label1">{commonTexts.charts.timeline.title}</BoldText>
       </Box>
-      <Box display="flex" paddingLeft={padding.left}>
+      <Box display="flex" pl={padding.left}>
         {showHistoryLine && (
           <Box position="absolute" left={padding.left - historyLineWidth}>
             <DottedTimelineBar width={historyLineWidth} height={barHeight} />
