@@ -150,7 +150,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             title={textNl.linechart_self_test_titel}
             description={textNl.linechart_self_test_toelichting}
             metadata={{
-              source: textNl.bronnen.rivm,
+              source: textNl.bronnen.self_test,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
