@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
@@ -77,16 +76,16 @@ const Legend = styled.div(
 const List = styled.ul(
   css({
     listStyle: 'none',
-    paddingX: space[0],
-    margin: space[0],
-    marginTop: space[2],
+    px: 0,
+    m: 0,
+    mt: 2,
   })
 );
 
 const Item = styled.li(
   css({
-    marginBottom: space[2],
-    marginRight: space[2],
+    mb: 2,
+    mr: 2,
     position: 'relative',
     display: 'inline-block',
   })
@@ -108,9 +107,9 @@ const StyledLabel = styled.label<{
     cursor: 'pointer',
     position: 'relative',
     display: 'inline-flex',
-    paddingRight: '13px',
-    paddingLeft: '33px',
-    paddingY: space[1],
+    pr: 13,
+    pl: 33,
+    py: 1,
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`}`,
     fontWeight: 'normal',
@@ -138,16 +137,16 @@ const StyledLabel = styled.label<{
       opacity: '.1',
       content: 'attr(data-color)',
       position: 'absolute',
-      left: space[0],
-      right: space[0],
-      top: space[0],
-      bottom: space[0],
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
       borderRadius: '5px',
     },
     '&:after': {
       content: isActive ? 'attr(data-text)' : '',
       position: 'absolute',
-      height: '0px',
+      height: 0,
       userSelect: 'none',
       pointerEvents: 'none',
       fontWeight: 'bold',
@@ -161,10 +160,10 @@ const StyledInput = styled.input(
     appearance: 'none',
     '&:focus:focus-visible': {
       position: 'absolute',
-      top: space[0],
-      left: space[0],
-      bottom: space[0],
-      right: space[0],
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
       width: '100%',
     },
   })
@@ -175,7 +174,7 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
     backgroundColor: 'transparent',
     cursor: 'pointer',
     color: 'blue8',
-    paddingY: '6px',
+    py: '6px',
     border: 'none',
     fontFamily: 'inherit',
     visibility: isVisible ? 'visible' : 'hidden',
@@ -195,7 +194,7 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     borderRadius: '2px',
     display: 'block',
     position: 'absolute',
-    left: '13px',
+    left: 13,
     backgroundColor: color,
   })
 );
@@ -204,7 +203,7 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: '13px',
+    left: 13,
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
@@ -218,7 +217,7 @@ const Square = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: '13px',
+    left: 13,
     backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
@@ -232,7 +231,7 @@ const GappedArea = styled.div<{ color: string }>(({ color }) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: '13px',
+    left: 13,
     backgroundColor: `${color}30`,
     borderTop: `2px solid ${color}`,
     top: '50%',

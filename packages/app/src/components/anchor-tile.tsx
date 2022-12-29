@@ -7,7 +7,6 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
-import { space } from '~/style/theme';
 
 interface AnchorTileProps {
   title: string;
@@ -50,18 +49,20 @@ export function AnchorTile({ title, href, label, children, external = false }: A
 
 export const IconWrapper = styled.span(
   css({
-    marginRight: space[2],
-    svg: { width: '24px', height: '11px', display: 'block', maxWidth: 'initial' },
+    mr: 2,
+    svg: { width: 24, height: 11, display: 'block', maxWidth: 'initial' },
   })
 );
 
-const Container = styled.article`
-  display: flex;
-  padding-top: ${asResponsiveArray({ _: space[2], sm: space[3] })};
-  padding-bottom: ${asResponsiveArray({ _: space[3], sm: space[4] })};
-  flex-direction: ${asResponsiveArray({ _: 'column', lg: 'row' })};
-  border-top: solid 2px ${colors.gray2};
-`;
+const Container = styled.article(
+  css({
+    display: 'flex',
+    pt: asResponsiveArray({ _: 2, sm: 3 }),
+    pb: asResponsiveArray({ _: 3, sm: 4 }),
+    flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
+    borderTop: `solid 2px ${colors.gray2}`,
+  })
+);
 
 const Content = styled.div(
   css({
@@ -90,9 +91,9 @@ const LinkContainer = styled.div(
     }),
     borderLeft: asResponsiveArray({ lg: '1px solid' }),
     borderLeftColor: asResponsiveArray({ lg: colors.gray3 }),
-    paddingTop: asResponsiveArray({ _: space[3], lg: space[0] }),
-    paddingLeft: asResponsiveArray({ lg: space[4] }),
-    marginLeft: asResponsiveArray({ lg: space[4] }),
-    marginTop: asResponsiveArray({ _: space[3], md: space[0] }),
+    pt: asResponsiveArray({ _: 3, lg: 0 }),
+    pl: asResponsiveArray({ lg: 4 }),
+    ml: asResponsiveArray({ lg: 4 }),
+    mt: asResponsiveArray({ _: 3, md: 0 }),
   })
 );

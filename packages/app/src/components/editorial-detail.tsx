@@ -4,7 +4,6 @@ import { ContentBlock } from '~/components/cms/content-block';
 import { ContentImage } from '~/components/cms/content-image';
 import { Heading, InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { Editorial } from '~/types/cms';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
@@ -17,7 +16,7 @@ interface EditorialDetailProps {
 export function EditorialDetail({ editorial }: EditorialDetailProps) {
   const { commonTexts } = useIntl();
   return (
-    <Box bg="white" paddingY={{ _: space[4], md: space[5] }}>
+    <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
           {commonTexts.editorial_detail.back_link.text}

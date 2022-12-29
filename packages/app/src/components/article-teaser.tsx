@@ -29,7 +29,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
       <StyledArticleTeaser>
         {cover.asset && (
           <ZoomContainer height={200}>
-            <BackgroundImage image={cover} height={'200px'} sizes={coverSizes} />
+            <BackgroundImage image={cover} height={200} sizes={coverSizes} />
           </ZoomContainer>
         )}
 
@@ -85,7 +85,7 @@ const StyledArticleTeaser = styled(Anchor)(
 
 function Arrow() {
   return (
-    <span css={css({ svg: { height: '11px', width: '13px', marginX: '3px' } })}>
+    <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
       <ArrowIconRight />
     </span>
   );

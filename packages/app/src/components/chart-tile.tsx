@@ -9,7 +9,6 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { space } from '~/style/theme';
 
 interface ChartTileProps {
   title: string;
@@ -49,7 +48,7 @@ export function ChartTile({ title, metadata, description, timeframeInitialValue,
         )}
       </ChartTileHeader>
 
-      <Spacer marginBottom={description || timeframeOptions ? space[4] : space[3]} />
+      <Spacer mb={description || timeframeOptions ? 4 : 3} />
 
       <ErrorBoundary>{children}</ErrorBoundary>
     </FullscreenChartTile>
@@ -66,7 +65,7 @@ function ChartTileHeader({ title, description, children }: ChartTileHeaderProps)
   return (
     <Box spacing={3}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
-      <Heading level={3} css={css({ paddingRight: asResponsiveArray({ md: space[5] }) })}>
+      <Heading level={3} css={css({ pr: asResponsiveArray({ md: 5 }) })}>
         {title}
       </Heading>
 

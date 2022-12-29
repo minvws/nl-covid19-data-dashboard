@@ -7,7 +7,6 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { space } from '~/style/theme';
 
 interface ChartTileDoubleColumnProps {
   title: string;
@@ -21,7 +20,7 @@ export const ChartTileDoubleColumn = ({ title, description, children, metadata, 
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
-      <Heading level={3} css={css({ paddingRight: asResponsiveArray({ md: space[5] }), marginBottom: space[3] })}>
+      <Heading level={3} css={css({ pr: asResponsiveArray({ md: 5 }), mb: 3 })}>
         {title}
       </Heading>
 

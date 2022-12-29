@@ -1,7 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components/';
-import { space } from '~/style/theme';
 
 /**
  * This divider is exclusively used (for now) to separate a page information block
@@ -15,7 +14,7 @@ export const Divider = styled.div(
   css({
     width: '100%',
     borderTop: `solid 2px ${colors.gray2}`,
-    marginTop: space[2],
-    paddingY: space[2],
+    mt: 2,
+    py: 2,
   })
 );

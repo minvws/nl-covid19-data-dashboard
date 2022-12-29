@@ -35,7 +35,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
   article.content = mergeAdjacentKpiBlocks(article.content);
 
   return (
-    <Box bg="white" paddingY={{ _: space[4], md: space[5] }}>
+    <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon href="/artikelen" icon={<ArrowIconLeft />}>
           {commonTexts.article_detail.back_link.text}
@@ -56,12 +56,12 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       </ContentBlock>
       {!breakpoints.xs
         ? article.imageMobile && (
-            <Box marginTop={space[4]}>
+            <Box mt={4}>
               <ContentImage node={article.imageMobile} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )
         : article.imageDesktop && (
-            <Box marginTop={space[4]}>
+            <Box mt={4}>
               <ContentImage node={article.imageDesktop} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )}
@@ -70,10 +70,10 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           // Since you can't serialize unordered lists we have to position them here in the container
           css={css({
             ul: {
-              marginX: 'auto',
+              mx: 'auto',
               maxWidth: 'contentWidth',
-              paddingRight: space[4],
-              paddingLeft: space[5],
+              pr: 4,
+              pl: 5,
             },
           })}
         >
@@ -82,7 +82,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       )}
       {article.categories && (
         <ContentBlock>
-          <Box paddingBottom={space[2]} paddingTop={space[4]}>
+          <Box pb={2} pt={4}>
             <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
@@ -90,8 +90,8 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
             spacingHorizontal={3}
             display="flex"
             flexWrap="wrap"
-            margin={space[0]}
-            padding={space[0]}
+            m={0}
+            p={0}
             css={css({
               listStyleType: 'none',
             })}

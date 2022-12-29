@@ -4,7 +4,6 @@ import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
 import { css } from '@styled-system/css';
 import { Markdown } from '~/components/markdown';
-import { space } from '~/style/theme';
 interface Illustration {
   image: string;
   alt: string;
@@ -27,14 +26,14 @@ export function KpiWithIllustrationTile({ title, description, children, metadata
   return (
     <Tile>
       <Box display="flex" flexWrap="wrap">
-        <Box marginBottom={space[4]} flex={{ _: '0 0 100%', lg: '1' }} paddingRight={{ lg: space[4] }} spacing={3}>
+        <Box mb={4} flex={{ _: '0 0 100%', lg: '1' }} pr={{ lg: 4 }} spacing={3}>
           <Heading level={3}>{title}</Heading>
           {children}
           {description && <Markdown content={description} />}
         </Box>
 
-        <Box flex={{ _: '0 0 100%', lg: '1' }} paddingLeft={{ lg: space[4] }}>
-          <img width={'315px'} height={'100px'} loading="lazy" src={illustration.image} alt={illustration.alt} css={css({ marginBottom: space[3] })} />
+        <Box flex={{ _: '0 0 100%', lg: '1' }} pl={{ lg: 4 }}>
+          <img width={315} height={100} loading="lazy" src={illustration.image} alt={illustration.alt} css={css({ mb: 3 })} />
           <p>{illustration.description}</p>
         </Box>
       </Box>

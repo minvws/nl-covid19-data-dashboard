@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import React from 'react';
-import { space } from '~/style/theme';
 import { Box } from './base';
 import { Heading, HeadingLevel } from './typography';
 
@@ -40,8 +39,8 @@ function Icon({ children, size }: { children: React.ReactNode; size: string }) {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={space[0]}
-      marginRight={space[0]}
+      padding={0}
+      marginRight={0}
       css={css({
         width: size,
         height: size,
