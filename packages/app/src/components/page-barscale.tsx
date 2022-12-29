@@ -3,7 +3,6 @@ import hash from 'hash-sum';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
 import { BarScaleConfig } from '~/metric-config/common';
-import { space } from '~/style/theme';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
 
@@ -36,7 +35,7 @@ export function PageBarScale(props: PageBarScaleProps) {
   const uniqueId = hash(props);
 
   return (
-    <Box spacing={2} marginBottom={space[3]}>
+    <Box spacing={2} mb={3}>
       <BarScale
         min={config.min}
         max={config.max}

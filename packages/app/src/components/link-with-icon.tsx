@@ -23,7 +23,7 @@ interface IconProps {
   isSingleWord?: boolean;
   width: number;
   height: number;
-  marginRight?: number | string;
+  mr?: number | string;
 }
 
 interface LinkContainerProps {
@@ -54,7 +54,7 @@ export const LinkWithIcon = ({ href, icon, children, iconPlacement = 'left', fon
           )}
           {iconPlacement === 'left' && (
             <>
-              <IconSmall icon={icon} width={11} height={10} marginRight={space[1]} />
+              <IconSmall icon={icon} width={11} height={10} mr={1} />
               {children}
             </>
           )}
@@ -93,8 +93,8 @@ export const HeadingLinkWithIcon = ({ href, icon, children, underline }: LinkWit
   );
 };
 
-const IconSmall = ({ icon, width, height, marginRight }: IconProps) => {
-  return <span css={css({ marginRight: marginRight, svg: { height, width, marginX: '3px' } })}>{icon}</span>;
+const IconSmall = ({ icon, width, height, mr }: IconProps) => {
+  return <span css={css({ marginRight: mr, svg: { height, width, mx: '3px' } })}>{icon}</span>;
 };
 
 const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
@@ -104,11 +104,11 @@ const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
         svg: {
           width,
           height,
-          marginLeft: space[2],
+          marginLeft: 2,
           position: isSingleWord ? 'absolute' : 'relative',
           minHeight: '100%',
-          right: space[0],
-          top: space[0],
+          right: 0,
+          top: 0,
         },
       })}
     >

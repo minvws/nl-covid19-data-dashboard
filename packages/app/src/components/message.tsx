@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { spacingStyle } from '~/style/functions/spacing';
-import { space } from '~/style/theme';
 
 type Variant = 'warning' | 'message';
 
@@ -42,15 +41,15 @@ const StyledMessage = styled.div<{
      * so we can use the styling from the second one.
      */
     position: 'relative',
-    paddingY: x.resetParentStyles ? space[0] : space[2],
-    paddingX: x.resetParentStyles ? space[0] : space[3],
+    py: x.resetParentStyles ? 0 : 2,
+    px: x.resetParentStyles ? 0 : 3,
     borderLeft: x.resetParentStyles ? 0 : '7px solid',
     backgroundColor: theme[x.variant].backgroundColor,
     borderLeftColor: theme[x.variant].borderColor,
     borderRadius: '5px',
 
     '& > *': {
-      margin: space[0],
+      m: 0,
     },
     ...spacingStyle(2),
 

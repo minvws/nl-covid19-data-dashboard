@@ -2,7 +2,6 @@ import { getLastFilledValue, Metric, MetricKeys } from '@corona-dashboard/common
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { KpiValue } from '~/components/kpi-value';
-import { space } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
@@ -57,17 +56,17 @@ export function PageKpi<T>({ data, metricName, metricProperty, differenceKey, di
   const hasDifference = isDefined(differenceKey) || isDefined(differenceValue);
 
   return (
-    <Box spacing={0} marginBottom={hasDifference ? space[3] : space[0]}>
+    <Box spacing={0} mb={hasDifference ? 3 : 0}>
       <KpiValue absolute={propertyValue} />
 
       {isDefined(differenceKey) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <Box paddingTop={space[2]}>
+          <Box pt={2}>
             <TileAverageDifference value={differenceValue} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : isDefined(differenceValue) ? (
-          <Box paddingTop={space[2]}>
+          <Box pt={2}>
             <TileDifference value={differenceValue} maximumFractionDigits={differenceFractionDigits} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />
           </Box>
         ) : null)}

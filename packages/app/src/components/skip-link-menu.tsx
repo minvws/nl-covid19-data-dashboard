@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 import { Anchor } from './typography';
 
 export function SkipLinkMenu({ ariaLabel, links }: { ariaLabel: string; links: Array<{ href: string; label: string }> }) {
@@ -31,8 +30,8 @@ const SkipLink = styled(Anchor)(
     position: 'absolute',
     fontWeight: 'bold',
     width: 'auto',
-    paddingX: space[4],
-    paddingY: space[3],
+    px: 4,
+    py: 3,
     cursor: 'pointer',
     color: 'white',
     bg: 'blue8',
@@ -44,8 +43,8 @@ const SkipLink = styled(Anchor)(
       position: 'absolute',
       outline: '2px dotted white',
       outlineOffset: '-2px',
-      top: space[2],
-      left: space[2],
+      top: 2,
+      left: 2,
     },
   })
 );

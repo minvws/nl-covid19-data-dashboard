@@ -6,7 +6,6 @@ import { MaxWidth } from '~/components/max-width';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { InlineText, BoldText } from './typography';
 import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
 
 interface NotificationBannerProps {
   title: string;
@@ -22,7 +21,7 @@ export function NotificationBanner({ title, description }: NotificationBannerPro
 
   return (
     <Box width="100%" backgroundColor={colors.gray2}>
-      <MaxWidth paddingX={{ _: space[3], sm: space[4] }} paddingY={space[3]} display="flex" spacingHorizontal={3}>
+      <MaxWidth px={{ _: 3, sm: 4 }} py={3} display="flex" spacingHorizontal={3}>
         <Box display="flex" width="1.6rem" height="1.6rem">
           <Warning />
         </Box>
@@ -41,10 +40,10 @@ export function NotificationBanner({ title, description }: NotificationBannerPro
                   border: 0,
                   borderRadius: '5px',
                   backgroundColor: 'transparent',
-                  padding: space[0],
-                  margin: space[0],
+                  padding: 0,
+                  margin: 0,
                   textAlign: 'left',
-                  marginTop: space[1],
+                  mt: 1,
                 })}
               >
                 <BoldText>
@@ -64,8 +63,8 @@ export function NotificationBanner({ title, description }: NotificationBannerPro
 
           {hasDescription &&
             collapsible.content(
-              <Box paddingBottom={space[2]}>
-                <Spacer marginTop={space[3]} />
+              <Box pb={2}>
+                <Spacer mt={3} />
                 <Markdown content={description} />
               </Box>
             )}

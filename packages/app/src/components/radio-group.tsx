@@ -2,7 +2,6 @@ import { colors } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Box } from './base';
@@ -34,7 +33,7 @@ const StyledLabel = styled.label(
     flex: '0 1 auto',
     color: 'blue8',
     textAlign: 'center',
-    padding: asResponsiveArray({ _: `${space[1]} ${space[2]}`, xs: `0.3rem ${space[3]}` }),
+    p: asResponsiveArray({ _: '0.25rem 0.5rem', xs: '0.3rem 1rem' }),
     borderRadius: '5px 0 0 5px',
     border: `1px solid ${colors.gray3}`,
     borderRightWidth: 0,

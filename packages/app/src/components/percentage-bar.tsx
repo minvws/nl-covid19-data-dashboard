@@ -2,7 +2,6 @@ import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
 
 interface PercentageProps {
   percentage: number;
@@ -35,8 +34,8 @@ export function PercentageBar({ percentage, height, color, backgroundColor = col
         )}
         flex={1}
         height={height}
-        top={space[0]}
-        left={space[0]}
+        top={0}
+        left={0}
       />
     </Wrapper>
   );

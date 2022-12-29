@@ -11,7 +11,6 @@ import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { WithTooltip } from '~/lib/tooltip';
-import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 const ICON_SIZE = 55;
 
@@ -100,7 +99,7 @@ export function PieChart<T>({
           alignItems={verticalLayout ? 'flex-start' : { xs: 'center' }}
           flexDirection={verticalLayout ? 'column' : { _: 'column', xs: 'row' }}
           justifyContent={{ _: 'flex-start', xl: 'flex-end' }}
-          marginTop={{ _: space[3], lg: space[0] }}
+          marginTop={{ _: 3, lg: 0 }}
         >
           <Box alignSelf={{ _: 'center', md: 'self-start' }} height={innerSize} position="relative" css={css({ marginLeft, marginRight })} spacingHorizontal={2}>
             {icon && (
@@ -212,7 +211,7 @@ export function PieChart<T>({
             >
               {dataConfig.map((item, index) => (
                 <Box as="li" key={`${item.color}-${index}`} display="flex" alignItems="center" spacingHorizontal={2}>
-                  <Box width={'12px'} height={'12px'} backgroundColor={item.color} borderRadius="50%" />
+                  <Box width={12} height={12} backgroundColor={item.color} borderRadius="50%" />
                   <Markdown content={replaceVariablesInText(item.label, data as any, formatters)} />
                 </Box>
               ))}

@@ -1,7 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 
 interface TileProps {
@@ -28,8 +27,8 @@ const StyledTile = styled.article<{
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    paddingTop: space[4],
-    paddingBottom: styledTileProps.hasNoPaddingBottom ? undefined : asResponsiveArray({ _: space[3], sm: space[4] }),
+    pt: 4,
+    pb: styledTileProps.hasNoPaddingBottom ? undefined : asResponsiveArray({ _: 3, sm: 4 }),
     height: styledTileProps.height,
     backgroundColor: 'white',
     borderTop: styledTileProps.hasNoBorder ? undefined : `solid 2px ${colors.gray2}`,
