@@ -8,7 +8,7 @@ import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { Anchor, Heading } from '~/components/typography';
 import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
-import { space, SpaceValue } from '~/style/theme';
+import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -48,7 +48,7 @@ export function CategoryMenu({ title, children, icon }: { children: ReactNode; t
   return (
     <Box as="li" spacing={2}>
       {title && icon && (
-        <Box paddingX={space[2]} paddingTop={space[3]} display="flex" alignItems="center">
+        <Box px={2} pt={3} display="flex" alignItems="center">
           <Icon>{icon}</Icon>
           <Heading level={5}>{title}</Heading>
         </Box>
@@ -101,7 +101,7 @@ function isActivePath(router: NextRouter, href: Url) {
 const Unavailable = styled.span(
   css({
     display: 'block',
-    padding: space[2],
+    padding: 2,
     color: 'gray5',
 
     svg: {
@@ -112,8 +112,8 @@ const Unavailable = styled.span(
 
 const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
   css({
-    padding: space[2],
-    paddingLeft: '3rem',
+    p: 2,
+    pl: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
     color: anchorProps.isActive ? 'blue8' : 'black',
@@ -140,7 +140,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
       width: '0.6em',
       display: 'block',
       position: 'absolute',
-      right: space[3],
+      right: 3,
       top: '1.35em',
     },
   })
@@ -157,8 +157,8 @@ const Icon = ({ children }: { children: ReactNode }) => {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={space[0]}
-      marginRight={space[0]}
+      padding={0}
+      mr={0}
       mt="-3px"
       css={css({
         width: '2.5rem',

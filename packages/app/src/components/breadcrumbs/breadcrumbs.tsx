@@ -2,7 +2,6 @@ import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { MaxWidth } from '../max-width';
@@ -28,8 +27,8 @@ export function Breadcrumbs() {
     >
       <MaxWidth
         css={css({
-          paddingY: space[3],
-          paddingX: space[4],
+          py: 3,
+          px: 4,
         })}
         as={'nav'}
         aria-label={commonTexts.breadcrumbs.label}
@@ -40,7 +39,7 @@ export function Breadcrumbs() {
               key={href}
               css={css({
                 display: 'inline-block',
-                '&::after': { content: '">"', marginX: space[2] },
+                '&::after': { content: '">"', mx: 2 },
                 '&:last-of-type': { '&::after': { content: '""' } },
               })}
               property="itemListElement"

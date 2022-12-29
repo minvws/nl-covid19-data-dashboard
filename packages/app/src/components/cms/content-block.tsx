@@ -1,15 +1,14 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { space } from '~/style/theme';
 
 export const ContentBlock = styled(Box)(
   css({
-    marginX: 'auto',
+    mx: 'auto',
     width: '100%',
     maxWidth: 'contentWidth',
-    paddingX: space[4],
+    px: 4,
     /** remove padding of nested ContentBlock instances */
-    [`& &`]: { paddingX: space[0] },
+    [`& &`]: { px: 0 },
   })
 );
