@@ -19,3 +19,7 @@ timestamp,action,key,document_id,move_to
 2022-12-21T16:15:20.048Z,add,pages.positive_tests_page.nl.linechart_self_test_titel,PKXdxxxKAnTg0F1ZCghMkN,__
 2022-12-21T16:15:20.949Z,add,pages.positive_tests_page.nl.linechart_self_test_toelichting,PKXdxxxKAnTg0F1ZCghMnz,__
 2022-12-21T16:15:22.001Z,add,pages.positive_tests_page.nl.linechart_self_test_tooltip_label,KoLyCpXIGU95m7jfEHZKIf,__
+2022-12-29T12:39:50.414Z,add,pages.positive_tests_page.nl.bronnen.self_test.aria_text,PKXdxxxKAnTg0F1ZCsSm7v,__
+2022-12-29T12:39:51.337Z,add,pages.positive_tests_page.nl.bronnen.self_test.download,KoLyCpXIGU95m7jfEPMPhh,__
+2022-12-29T12:39:52.357Z,add,pages.positive_tests_page.nl.bronnen.self_test.href,KoLyCpXIGU95m7jfEPMPlH,__
+2022-12-29T12:39:53.419Z,add,pages.positive_tests_page.nl.bronnen.self_test.text,0iJeil5hiqRr6jTKtbFGx7,__
