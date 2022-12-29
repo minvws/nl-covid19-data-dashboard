@@ -114,8 +114,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     [options]
   );
 
-  const timeframeOptionsVrOrGm = TimeframeOptionsList.filter((timeframeOption) => timeframeOption !== TimeframeOption.ONE_WEEK);
-  const timeframeOptions = vrNameOrGmName ? timeframeOptionsVrOrGm : TimeframeOptionsList;
+  const timeframeOptions = TimeframeOptionsList.filter((timeframeOption) => timeframeOption !== TimeframeOption.ONE_WEEK);
 
   return (
     <ChartTile
