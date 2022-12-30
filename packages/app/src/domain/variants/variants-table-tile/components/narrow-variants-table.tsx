@@ -7,6 +7,7 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { Cell, HeaderCell, PercentageBarWithNumber, StyledTable, VariantDifference, VariantNameCell } from '.';
@@ -75,7 +76,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
       <tr>
         <MobileCell colSpan={3}>
           {collapsible.content(
-            <Box spacing={2} css={css({ pb: 3 })}>
+            <Box spacing={2} css={css({ paddingBottom: space[3] })}>
               <Box display="flex" flexDirection="row" spacingHorizontal={2}>
                 <InlineText>{columnNames.vorige_meting}:</InlineText>
                 {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? (
