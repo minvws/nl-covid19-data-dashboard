@@ -53,7 +53,7 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
 };
 
 const SeverityIndicatorLevel = styled.span`
-  margin: 0 ${space[1]};
+  margin: ${space[0]} ${space[1]};
   background-color: ${({ level }: { level: SeverityLevel }) => getSeverityColor(level as SeverityLevels)};
   border-radius: 50%;
   color: ${colors.white};
