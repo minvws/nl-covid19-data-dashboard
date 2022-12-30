@@ -7,7 +7,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
@@ -93,7 +92,7 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
     >
       <InteractiveLegend helpText={text.stock_per_supplier_chart.select_help_text} selectOptions={optionsConfig} selection={[selected]} onToggleItem={setSelected} />
 
-      <Spacer marginBottom={space[2]} />
+      <Spacer mb={2} />
 
       <TimeSeriesChart
         accessibility={{

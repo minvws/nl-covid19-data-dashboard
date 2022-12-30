@@ -26,7 +26,7 @@ export function VaccineBoosterAdministrationsKpiSection({
 }: VaccineBoosterAdministrationsKpiSectionProps) {
   return (
     <Tile>
-      <Box marginBottom={20}>
+      <Box mb={20}>
         <TwoKpiSection>
           <Heading level={3}>{text.title}</Heading>
           <Box />

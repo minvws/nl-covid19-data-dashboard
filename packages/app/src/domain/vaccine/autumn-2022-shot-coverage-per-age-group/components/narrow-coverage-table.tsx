@@ -9,7 +9,6 @@ import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage'
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 
 interface NarrowCoverageTableProps {
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
@@ -21,12 +20,12 @@ export const NarrowCoverageTable = ({ values, text }: NarrowCoverageTableProps) 
 
   return (
     <Box>
-      <Box borderBottom="1px solid" borderColor="silver" paddingBottom={space[2]}>
+      <Box borderBottom="1px solid" borderColor="silver" pb={2}>
         <BoldText variant="label1">{text.headers.agegroup}</BoldText>
       </Box>
 
       {values.map((item, index) => (
-        <Box key={index} paddingTop={space[2]} paddingBottom={space[3]} spacing={3} borderBottom="1px solid" borderColor="silver">
+        <Box key={index} pt={2} pb={3} spacing={3} borderBottom="1px solid" borderColor="silver">
           <AgeGroup
             range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
             ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
@@ -44,7 +43,7 @@ export const NarrowCoverageTable = ({ values, text }: NarrowCoverageTableProps) 
             <Bar value={item.autumn_2022_vaccinated_percentage} color={COLOR_AUTUMN_2022_SHOT} />
           </Box>
 
-          <Spacer marginBottom={space[3]} />
+          <Spacer mb={3} />
 
           <Box spacing={1}>
             <NarrowPercentage value={`${formatPercentage(item.fully_vaccinated_percentage)}%`} color={COLOR_FULLY_VACCINATED} textLabel={text.headers.fully_vaccinated} />

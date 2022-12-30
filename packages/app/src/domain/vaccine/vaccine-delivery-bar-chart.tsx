@@ -8,7 +8,6 @@ import { TooltipData, TooltipFormatter } from '~/components/time-series-chart/co
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 
 export function VaccineDeliveryBarChart({ data, text }: { data: NlVaccineDeliveryPerSupplier; text: SiteText['pages']['vaccinations_page']['nl'] }) {
   const { commonTexts } = useIntl();
@@ -29,7 +28,7 @@ export function VaccineDeliveryBarChart({ data, text }: { data: NlVaccineDeliver
         source: text.bronnen.rivm,
       }}
     >
-      <Box marginBottom={space[3]} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>
+      <Box mb={3} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>
         <Box maxWidth={560}>
           <Markdown content={text.grafiek_leveringen.omschrijving} />
         </Box>

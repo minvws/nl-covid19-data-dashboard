@@ -6,7 +6,6 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { parseVaccinatedPercentageLabel } from '~/domain/vaccine/logic/parse-vaccinated-percentage-label';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 interface BarProps {
   value: number | null;
   color: string;
@@ -38,7 +37,7 @@ export function Bar({ value, color, backgroundColor = colors.gray2, label, heigh
         <PercentageBar percentage={barValue} height={height} color={color} backgroundColor={backgroundColor} />
       )}
       {showAxisValues && (
-        <Box display="flex" flexDirection="row" position="relative" paddingTop={space[1]}>
+        <Box display="flex" flexDirection="row" position="relative" pt={1}>
           <InlineText variant="label1" color="gray7">
             0%
           </InlineText>
@@ -56,7 +55,7 @@ export function Bar({ value, color, backgroundColor = colors.gray2, label, heigh
             {barValueSign}
             {formatPercentage(barValue)}%
           </InlineText>
-          <InlineText css={css({ marginLeft: 'auto' })} variant="label1" color="gray7">
+          <InlineText css={css({ ml: 'auto' })} variant="label1" color="gray7">
             100%
           </InlineText>
         </Box>

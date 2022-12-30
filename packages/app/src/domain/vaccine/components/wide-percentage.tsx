@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 
 interface PercentageWideNumberProps {
@@ -19,10 +18,10 @@ export function WidePercentage({ value, color, justifyContent }: PercentageWideN
         display: 'flex',
         alignItems: 'center',
         justifyContent,
-        paddingRight: asResponsiveArray({ _: space[3], xl: space[4] }),
+        pr: asResponsiveArray({ _: 3, xl: 4 }),
       })}
     >
-      <Box width={'10px'} height={'10px'} backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
+      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" mr={2} />
       {value}
     </InlineText>
   );

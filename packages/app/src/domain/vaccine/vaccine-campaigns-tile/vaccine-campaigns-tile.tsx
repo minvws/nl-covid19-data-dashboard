@@ -5,7 +5,6 @@ import { NarrowVaccineCampaignTable } from './components/narrow-vaccine-campaign
 import { WideVaccineCampaignTable } from './components/wide-vaccine-campaign-table';
 import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders } from './types';
 import { Box } from '~/components/base';
-import { space } from '~/style/theme';
 
 interface VaccineCampaignsTileProps {
   title: string;
@@ -30,7 +29,7 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
         ) : (
           <NarrowVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} />
         )}
-        <Box marginTop={space[3]}>
+        <Box mt={3}>
           <Text variant="label1" color="gray7">
             <Markdown content={descriptionFooter} />
           </Text>
