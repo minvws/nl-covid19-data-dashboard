@@ -26,7 +26,7 @@ const Icon = ({ icon }: { icon: ReactNode }) => <IconSmall>{icon}</IconSmall>;
 const IconSmall = styled.div`
   display: inline;
   text-decoration: inherit;
-  margin: 0 ${space[1]};
+  margin: ${space[0]} ${space[1]};
   svg {
     width: 11px;
     height: 10px;
