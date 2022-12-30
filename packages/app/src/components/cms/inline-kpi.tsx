@@ -8,6 +8,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { metricNamesHoldingPartialData, PageKpi } from '~/components/page-kpi';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { Metadata, MetadataProps } from '../metadata';
@@ -123,7 +124,7 @@ function KpiTile({ title, description, children, metadata, iconName }: KpiTilePr
   return (
     <>
       <Box spacing={3}>
-        <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center" spacingHorizontal={{ md: 2 }} pr={{ md: 2 }}>
+        <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center" spacingHorizontal={{ md: 2 }} paddingRight={{ md: space[2] }}>
           <div
             aria-hidden={true}
             css={css({
@@ -134,7 +135,7 @@ function KpiTile({ title, description, children, metadata, iconName }: KpiTilePr
             })}
           />
 
-          <Heading level={3} as="h4" hyphens="auto" style={{ margin: 0 }}>
+          <Heading level={3} as="h4" hyphens="auto" style={{ margin: space[0] }}>
             {title}
           </Heading>
         </Box>
@@ -148,7 +149,7 @@ function KpiTile({ title, description, children, metadata, iconName }: KpiTilePr
       </Box>
 
       {metadata && (
-        <Box pt={2}>
+        <Box paddingTop={space[2]}>
           <Metadata {...metadata} />
         </Box>
       )}
