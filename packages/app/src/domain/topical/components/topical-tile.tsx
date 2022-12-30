@@ -63,7 +63,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             display="flex"
             justifyContent="space-between"
             css={css({
-              gap: 2,
+              gap: space[2],
             })}
           >
             <Box
@@ -121,7 +121,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             </Box>
           )}
           {cta.title && (
-            <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={3} className="topical-tile-cta">
+            <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={space[3]} className="topical-tile-cta">
               <TextWithIcon text={cta.title} icon={<ChevronRight />} />
             </Box>
           )}

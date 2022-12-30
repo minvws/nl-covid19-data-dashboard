@@ -21,7 +21,7 @@ export const IndicatorLevelDescription = ({ level, label, description }: Indicat
         gridTemplateRows="auto"
         gridTemplateColumns={`${space[4]} auto`}
         alignItems="center"
-        marginBottom={4}
+        marginBottom={space[4]}
         css={css({ columnGap: 3, rowGap: asResponsiveArray({ _: 3, sm: 1 }) })}
       >
         <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
