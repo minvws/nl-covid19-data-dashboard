@@ -151,10 +151,10 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             title={textNl.linechart_self_test_titel}
             description={textNl.linechart_self_test_toelichting}
             metadata={{
-              source: textNl.bronnen.self_test,
+              source: textNl.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
+            timeframeInitialValue={TimeframeOption.SIX_MONTHS}
             onSelectTimeframe={setConfirmedCasesSelfTestedTimeframe}
           >
             <TimeSeriesChart
@@ -191,7 +191,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textNl.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={confirmedCasesInfectedTimeframe}
+            timeframeInitialValue={TimeframeOption.SIX_MONTHS}
             onSelectTimeframe={setConfirmedCasesInfectedTimeframe}
           >
             <TimeSeriesChart
