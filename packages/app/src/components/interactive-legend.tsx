@@ -82,8 +82,8 @@ const Legend = styled.div(
 const List = styled.ul(
   css({
     listStyle: 'none',
-    paddingX: 0,
-    margin: 0,
+    paddingX: space[0],
+    margin: space[0],
     marginTop: space[2],
   })
 );
@@ -143,16 +143,16 @@ const StyledLabel = styled.label<{
       opacity: '.1',
       content: 'attr(data-color)',
       position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
+      left: space[0],
+      right: space[0],
+      top: space[0],
+      bottom: space[0],
       borderRadius: '5px',
     },
     '&:after': {
       content: isActive ? 'attr(data-text)' : '',
       position: 'absolute',
-      height: 0,
+      height: '0px',
       userSelect: 'none',
       pointerEvents: 'none',
       fontWeight: 'bold',
@@ -166,10 +166,10 @@ const StyledInput = styled.input(
     appearance: 'none',
     '&:focus:focus-visible': {
       position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
+      top: space[0],
+      left: space[0],
+      bottom: space[0],
+      right: space[0],
       width: '100%',
     },
   })

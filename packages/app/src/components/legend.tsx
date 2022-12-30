@@ -54,8 +54,8 @@ export function Legend({ items, columns }: LegendProps) {
 const List = styled.ul<{ columns?: number }>(({ columns }) =>
   css({
     listStyle: 'none',
-    paddingX: 0,
-    margin: 0,
+    paddingX: space[0],
+    margin: space[0],
     fontSize: 1,
     color: 'gray7',
     columns,
@@ -80,7 +80,7 @@ const CustomShape = styled.div(
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    left: 0,
+    left: space[0],
     top: '3px',
     width: '15px',
     height: '15px',
@@ -91,7 +91,7 @@ const Shape = styled.div<{ color: string }>((x) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: 0,
+    left: space[0],
     backgroundColor: x.color,
   })
 );

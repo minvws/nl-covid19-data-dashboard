@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import { color } from 'styled-system';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import {
-  TileAverageDifference,
-  TileDifference,
-} from '~/components/difference-indicator';
+import { TileAverageDifference, TileDifference } from '~/components/difference-indicator';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 
 interface KpiValueBaseProps {
   absolute?: number | null;
@@ -72,7 +70,7 @@ export function KpiValue({
   const { formatPercentage, formatNumber } = useIntl();
 
   return (
-    <Box mb={isDefined(difference) ? 3 : 0}>
+    <Box marginBottom={isDefined(difference) ? space[3] : space[0]}>
       {isPresent(percentage) && isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage, {
@@ -104,7 +102,7 @@ export function KpiValue({
       {isDefined(difference) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <Box pt={2}>
+          <Box paddingTop={space[2]}>
             <TileAverageDifference
               value={difference}
               isPercentage={isDefined(percentage) && !isDefined(absolute)}
@@ -113,13 +111,8 @@ export function KpiValue({
             />
           </Box>
         ) : isDefined(difference) ? (
-          <Box pt={2}>
-            <TileDifference
-              value={difference}
-              isPercentage={isDefined(percentage) && !isDefined(absolute)}
-              isAmount={isAmount}
-              maximumFractionDigits={differenceFractionDigits}
-            />
+          <Box paddingTop={space[2]}>
+            <TileDifference value={difference} isPercentage={isDefined(percentage) && !isDefined(absolute)} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : null)}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
