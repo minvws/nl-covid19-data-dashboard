@@ -21,6 +21,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { space } from '~/style/theme';
 
 const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
 
@@ -73,7 +74,7 @@ export const getStaticProps = createGetStaticProps(
 
 const GgdGraphToggle = ({ selectedGgdGraph, onChange }: { selectedGgdGraph: string; onChange: (value: string) => void }) => {
   return (
-    <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
+    <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
       <RadioGroup
         value={selectedGgdGraph}
         onChange={onChange}
@@ -150,10 +151,10 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             title={textNl.linechart_self_test_titel}
             description={textNl.linechart_self_test_toelichting}
             metadata={{
-              source: textNl.bronnen.self_test,
+              source: textNl.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
+            timeframeInitialValue={TimeframeOption.SIX_MONTHS}
             onSelectTimeframe={setConfirmedCasesSelfTestedTimeframe}
           >
             <TimeSeriesChart
@@ -190,7 +191,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textNl.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={confirmedCasesInfectedTimeframe}
+            timeframeInitialValue={TimeframeOption.SIX_MONTHS}
             onSelectTimeframe={setConfirmedCasesInfectedTimeframe}
           >
             <TimeSeriesChart

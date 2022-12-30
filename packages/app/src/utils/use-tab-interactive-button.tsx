@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { space } from '~/style/theme';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 
 /**
@@ -70,8 +71,8 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
     fontSize: 1,
     fontWeight: 'bold',
     width: 'auto',
-    px: 3,
-    py: 2,
+    paddingX: space[3],
+    paddingY: space[2],
     cursor: 'pointer',
     textDecoration: 'none',
     zIndex: 9,
@@ -82,8 +83,8 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
      */
     opacity: 0,
     pointerEvents: 'none',
-    top: 0,
-    left: 0,
+    top: space[0],
+    left: space[0],
 
     border: '1px solid',
     borderColor: 'blue8',

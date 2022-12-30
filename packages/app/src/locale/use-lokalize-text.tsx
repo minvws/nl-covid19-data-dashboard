@@ -14,6 +14,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';
 import { LanguageKey, languages, SiteText } from '~/locale';
 import { LokalizeText } from '~/types/cms';
+import { space } from '~/style/theme';
 
 const datasets = ['development', 'production', 'keys'] as const;
 export type Dataset = typeof datasets[number];
@@ -146,12 +147,12 @@ interface ToggleProps<T extends string> {
 
 function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   return (
-    <Box border="1px solid" borderColor="gray3" mx={2} borderRadius={1} overflow="hidden">
+    <Box border="1px solid" borderColor="gray3" marginX={space[2]} borderRadius={1} overflow="hidden">
       {values.map((x, i) => (
         <label
           key={x}
           css={css({
-            px: 2,
+            paddingX: space[2],
             borderRight: values[i + 1] ? '1px solid' : undefined,
             borderColor: 'gray3',
             display: 'inline-block',
@@ -179,8 +180,8 @@ function ToggleButton({ isActive, onClick, color, children }: { isActive: boolea
       <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
         <Database
           style={{
-            width: 20,
-            height: 20,
+            width: '20px',
+            height: '20px',
             display: 'block',
           }}
         />
@@ -208,9 +209,9 @@ const Container = styled.div<{ isActive: boolean }>((x) =>
     },
     transition: 'opacity 100ms linear',
     position: 'fixed',
-    bottom: 0,
-    right: 0,
-    p: 3,
+    bottom: space[0],
+    right: space[0],
+    padding: space[3],
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
@@ -224,7 +225,7 @@ const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>((x)
     color: x.isActive ? 'white' : 'black',
     bg: x.isActive ? 'blue8' : 'transparent',
     transition: 'all 100ms linear',
-    p: 1,
+    padding: space[1],
     display: 'inline-block',
   })
 );

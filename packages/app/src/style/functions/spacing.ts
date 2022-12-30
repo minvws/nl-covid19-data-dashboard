@@ -15,10 +15,7 @@ export const spacing: styleFn = (x: SpacingProps) => {
   }
 };
 
-export function spacingStyle(
-  spacing?: ResponsiveValue<SpaceValue>,
-  spacingHorizontal?: ResponsiveValue<SpaceValue>
-) {
+export function spacingStyle(spacing?: ResponsiveValue<SpaceValue>, spacingHorizontal?: ResponsiveValue<SpaceValue>) {
   return {
     '& > *:not(:last-child)': {
       ...(isDefined(spacingHorizontal) && {
