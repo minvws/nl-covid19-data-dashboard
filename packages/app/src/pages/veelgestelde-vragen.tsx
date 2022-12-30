@@ -9,7 +9,6 @@ import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
-import { space } from '~/style/theme';
 import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
 
@@ -86,7 +85,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                   return (
                     <CollapsibleSection key={id} id={id} summary={item.title}>
                       {item.content && (
-                        <Box paddingY={space[3]}>
+                        <Box py={3}>
                           <RichContent blocks={item.content} />
                         </Box>
                       )}

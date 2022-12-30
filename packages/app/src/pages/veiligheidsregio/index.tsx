@@ -13,7 +13,6 @@ import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { DynamicChoropleth } from '../../components/choropleth';
@@ -55,7 +54,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         )}
 
-        <Box as="article" padding={space[4]} spacing={3}>
+        <Box as="article" p={4} spacing={3}>
           {commonTexts.regionaal_index.belangrijk_bericht && <WarningTile message={commonTexts.regionaal_index.belangrijk_bericht} variant="emphasis" />}
 
           <Heading level={2} as="h1">

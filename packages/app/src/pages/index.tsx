@@ -184,7 +184,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             {kpiThemes.themes.map((theme) => {
               return (
                 <Box key={theme.title}>
-                  <Box marginBottom={space[4]}>
+                  <Box marginBottom={4}>
                     <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
                   <Box
@@ -223,16 +223,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             })}
 
             <Box>
-              <Box marginBottom={space[4]}>
+              <Box marginBottom={4}>
                 <TopicalThemeHeader title={measureTheme.title} subtitle={measureTheme.subTitle} icon={getFilenameToIconName(measureTheme.themeIcon) as TopicalIcon} />
               </Box>
-              <Box
-                display="grid"
-                gridTemplateColumns={tileGridTemplate}
-                gridColumnGap={{ _: space[4], md: space[5] }}
-                gridRowGap={{ _: space[4], md: space[5] }}
-                marginBottom={space[5]}
-              >
+              <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: space[4], md: space[5] }} gridRowGap={{ _: space[4], md: space[5] }} marginBottom={5}>
                 {measureTheme.tiles.map((measureTile, index) => {
                   return <TopicalMeasureTile icon={getFilenameToIconName(measureTile.tileIcon) as TopicalIcon} title={measureTile.description} key={index} />;
                 })}
@@ -244,14 +238,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
         <Spacer marginBottom={space[5]} />
 
         <Box width="100%" backgroundColor="gray1" paddingY={space[5]}>
-          <Box paddingY={space[4]} paddingX={{ _: space[3], sm: space[4] }}>
+          <Box paddingY={4} paddingX={{ _: space[3], sm: space[4] }}>
             <Search title={textShared.secties.search.title.nl} />
           </Box>
         </Box>
 
-        <Spacer marginBottom={space[5]} />
+        <Spacer marginBottom={5} />
 
-        <Box width="100%" paddingBottom={space[5]}>
+        <Box width="100%" paddingBottom={5}>
           <MaxWidth spacing={4} paddingTop={{ _: space[3], md: space[5] }} paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}>
             <TopicalSectionHeader
               title={textShared.secties.meer_lezen.titel}
@@ -272,8 +266,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 const OrderedList = styled.ol(
   css({
     listStyleType: 'none',
-    margin: space[0],
-    padding: space[0],
+    margin: 0,
+    padding: 0,
   })
 );
 

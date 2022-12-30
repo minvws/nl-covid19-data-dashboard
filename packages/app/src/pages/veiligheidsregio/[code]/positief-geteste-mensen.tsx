@@ -22,7 +22,6 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { space } from '~/style/theme';
 
 const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall'];
 
@@ -73,7 +72,7 @@ export const getStaticProps = createGetStaticProps(
 
 const GgdGraphToggle = ({ selectedGgdGraph, onChange }: { selectedGgdGraph: string; onChange: (value: string) => void }) => {
   return (
-    <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
+    <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
       <RadioGroup
         value={selectedGgdGraph}
         onChange={onChange}
@@ -95,7 +94,7 @@ const GgdGraphToggle = ({ selectedGgdGraph, onChange }: { selectedGgdGraph: stri
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedVrData: data, choropleth, vrName, content, lastGenerated } = props;
 
-  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
   const [confirmedCasesInfectedPercentageTimeframe, setConfirmedCasesInfectedPercentageTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -163,6 +162,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textVr.bronnen.rivm,
             }}
             timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={confirmedCasesInfectedTimeframe}
             onSelectTimeframe={setConfirmedCasesInfectedTimeframe}
           >
             <TimeSeriesChart
