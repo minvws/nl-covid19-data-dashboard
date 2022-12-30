@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
+import { space } from '~/style/theme';
 import { HoveredPoint } from '../logic';
 
 const MARKER_POINT_SIZE = 9;
@@ -52,9 +53,9 @@ export function PointMarkers<T extends TimestampedValue>(props: PointMarkerProps
 
 const Container = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  top: ${space[0]};
+  left: ${space[0]};
+  bottom: ${space[0]};
   display: flex;
   justify-content: center;
 `;

@@ -1,5 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
+import { space } from '~/style/theme';
 import { HoveredPoint } from '../logic';
 
 const DateSpan = styled.div`
@@ -10,8 +11,8 @@ const DateSpan = styled.div`
 
 const Container = styled.div`
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: ${space[0]};
+  bottom: ${space[0]};
   transform: translate(-50%, 0);
 `;
 
