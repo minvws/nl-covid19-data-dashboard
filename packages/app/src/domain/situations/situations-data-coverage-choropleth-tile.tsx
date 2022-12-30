@@ -9,7 +9,6 @@ import { Markdown } from '~/components/markdown';
 import { Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';
@@ -41,7 +40,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} as="figure" height="100%">
         <Box flex={{ lg: 1 }} as="figcaption">
           <Markdown content={replaceVariablesInText(text.situaties_kaarten_uitkomsten.beschrijving, { date_from, date_to })} />
-          <Spacer marginBottom={space[4]} />
+          <Spacer mb={4} />
           <Box spacing={3}>
             <LegendItem
               color="primary"
@@ -57,7 +56,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
             />
           </Box>
         </Box>
-        <Box flex={{ lg: 1 }} marginLeft={[0, 0, 3]} display="flex" flexDirection="column" height="100%">
+        <Box flex={{ lg: 1 }} ml={[0, 0, 3]} display="flex" flexDirection="column" height="100%">
           <Box height="100%">
             <ErrorBoundary>
               <DynamicChoropleth
@@ -88,7 +87,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
 
 function LegendItem({ color, icon, title, description }: { color: Color; icon: JSX.Element; title: string; description: string }) {
   return (
-    <Box display="flex" css={css({ gap: space[2] })}>
+    <Box display="flex" css={css({ gap: '.5rem' })}>
       <LegendIcon color={color}>{icon}</LegendIcon>
       <Box spacing={1}>
         <BoldText color={color}>{title}</BoldText>

@@ -13,7 +13,6 @@ import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
@@ -43,13 +42,13 @@ export function SituationsOverviewChoroplethTile({ data, text }: SmallMultiplesC
       }}
     >
       <Box spacing={4}>
-        <Box display="grid" gridTemplateColumns="repeat(auto-fit, minmax(256px,1fr))" marginBottom={space[3]} css={css({ gap: '20px' })}>
+        <Box display="grid" gridTemplateColumns="repeat(auto-fit, minmax(256px,1fr))" mb={3} css={css({ gap: 20 })}>
           <Box>
             <ChoroplethLegenda title={text.situaties_kaarten_overzicht.legenda.titel} thresholds={thresholds.vr.gathering} />
           </Box>
           <Box display="flex" alignItems="flex-end">
-            <Box display="flex" alignItems="baseline" height={'42px'}>
-              <Box size={15} marginRight={space[2]} bg={colors.gray2} position="relative" top={'3px'} />
+            <Box display="flex" alignItems="baseline" height={42}>
+              <Box size={15} mr={2} bg={colors.gray2} position="relative" top={'3px'} />
               <InlineText variant="label1">{text.situaties_kaarten_overzicht.legenda.onvoldoende_data}</InlineText>
             </Box>
           </Box>
@@ -101,7 +100,7 @@ function ChoroplethTooltip({ value, isPercentage, regionName, thresholds, noData
   const intl = useIntl();
 
   return (
-    <Box paddingX={space[3]} paddingY={space[2]} aria-live="polite">
+    <Box px={3} py={2} aria-live="polite">
       <TooltipSubject thresholdValues={thresholds} filterBelow={value} noDataFillColor={noDataFillColor}>
         <Box
           as="span"
@@ -111,7 +110,7 @@ function ChoroplethTooltip({ value, isPercentage, regionName, thresholds, noData
         >
           {regionName + ': '}
         </Box>
-        <Box as="span" display="inline-block" fontWeight="bold" textAlign="right" paddingX={space[1]} flexShrink={0}>
+        <Box as="span" display="inline-block" fontWeight="bold" textAlign="right" px={1} flexShrink={0}>
           {typeof value === 'number' ? (isPercentage ? intl.formatPercentage(value) + '%' : value) : '–'}
         </Box>
       </TooltipSubject>
@@ -123,7 +122,7 @@ const ChoroplethGrid = styled.div(
   css({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(205px, 1fr))',
-    gap: space[4],
+    gap: 4,
   })
 );
 
@@ -131,9 +130,9 @@ function ChoroplethGridItem({ icon, title, description, children }: { icon: Reac
   return (
     <Box
       /** add a little bit of bottom-padding to match whitespace from design */
-      paddingBottom={space[2]}
+      pb={2}
     >
-      <Box display="flex" justifyContent="center" alignItems="center" spacingHorizontal={2} marginBottom={space[3]}>
+      <Box display="flex" justifyContent="center" alignItems="center" spacingHorizontal={2} mb={3}>
         {icon}
         <InlineTooltip content={description} css={css({ fontWeight: 'heavy', fontSize: 2 })}>
           {title}

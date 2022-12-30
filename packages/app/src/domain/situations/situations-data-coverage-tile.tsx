@@ -10,7 +10,6 @@ import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 
 interface SituationsDataCoverageTileProps {
   data: VrSituationsValue;
@@ -57,10 +56,10 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
 
 const IndicatorCircle = styled.div(
   css({
-    width: '24px',
-    height: '24px',
-    marginRight: space[2],
-    marginBottom: '3px',
+    width: 24,
+    height: 24,
+    mr: 2,
+    mb: '3px',
     borderRadius: '50%',
     backgroundColor: 'currentColor',
     display: 'flex',

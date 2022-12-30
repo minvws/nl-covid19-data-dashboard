@@ -11,7 +11,6 @@ import { Heading, InlineText } from '~/components/typography';
 import { useSituations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
@@ -39,7 +38,7 @@ export function SituationsTableTile({ metadata, data, text }: SituationsTableTil
         />
       </Box>
 
-      <Box overflow="auto" marginBottom={space[3]}>
+      <Box overflow="auto" mb={3}>
         <StyledTable>
           <thead>
             <tr>
@@ -97,14 +96,14 @@ const StyledTable = styled.table(
   css({
     borderCollapse: 'collapse',
     width: '100%',
-    paddingBottom: space[3],
+    pb: 3,
   })
 );
 
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
-    paddingBottom: '12px',
+    pb: '12px',
   })
 );
 
@@ -113,8 +112,8 @@ const Cell = styled.td((x) =>
     color: x.color,
     borderBottom: '1px solid',
     borderBottomColor: 'gray2',
-    padding: space[0],
-    paddingY: space[2],
+    p: 0,
+    py: 2,
   })
 );
 interface PercentageBarProps {
@@ -130,8 +129,8 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
       <InlineText textAlign="right" css={css({ minWidth: 40 })}>{`${formatPercentage(amount, {
         minimumFractionDigits: 1,
       })}%`}</InlineText>
-      <Box width="100%" paddingRight={space[4]}>
-        <Box width={`${amount}%`} height={'12px'} backgroundColor={color} />
+      <Box width="100%" pr={4}>
+        <Box width={`${amount}%`} height={12} backgroundColor={color} />
       </Box>
     </Box>
   );

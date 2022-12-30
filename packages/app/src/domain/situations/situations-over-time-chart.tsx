@@ -9,7 +9,6 @@ import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { useList } from '~/utils/use-list';
 import { SituationKey, useSituations } from './logic/situations';
 
@@ -56,7 +55,7 @@ export function SituationsOverTimeChart({ values, timeframe, timelineEvents, tex
   return (
     <ErrorBoundary extraComponentInfoReport={{ timeframe }}>
       <InteractiveLegend helpText={text.situaties_over_tijd_grafiek.legenda.help_text} selectOptions={seriesConfig} selection={list} onToggleItem={toggle} onReset={clear} />
-      <Spacer marginBottom={space[2]} />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={{ key: 'situations_over_time_chart' }}
         values={values}

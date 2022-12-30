@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { TooltipContent } from '~/components/choropleth/tooltips';
-import { space } from '~/style/theme';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 
 type Bounds = {
@@ -60,7 +59,7 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
     <TooltipContainer
       ref={ref}
       style={{
-        top: space[0],
+        top: 0,
         transform: `translate(${left}px,${top}px)`,
         maxWidth: bounds.right - bounds.left,
       }}

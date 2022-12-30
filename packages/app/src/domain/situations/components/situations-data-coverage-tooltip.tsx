@@ -9,7 +9,6 @@ import { BoldText } from '~/components/typography';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './legend-icon';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 
 export function SituationsDataCoverageTooltip({
   context,
@@ -29,7 +28,7 @@ export function SituationsDataCoverageTooltip({
   return (
     <TooltipContent title={context.featureName} link={reverseRouter.vr.brononderzoek(context.dataItem.vrcode)}>
       <Box
-        margin={space[0]}
+        m={0}
         spacingHorizontal={2}
         css={css({
           display: 'flex',
