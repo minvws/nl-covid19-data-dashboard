@@ -5,6 +5,7 @@ import { RichContentSelect } from '~/components/rich-content-select';
 import { Option } from '~/components/rich-content-select/types';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 
 export type CoverageKindProperty = 'autumn_2022' | 'primary_series';
 
@@ -27,7 +28,7 @@ export function VaccinationCoverageKindSelect(props: VaccinationCoverageKindSele
           value: kind,
           label: commonTexts.vaccinations.coverage_kinds[kind],
           content: (
-            <Box pr={2}>
+            <Box paddingRight={space[2]}>
               <Text>{commonTexts.vaccinations.coverage_kinds[kind]}</Text>
             </Box>
           ),

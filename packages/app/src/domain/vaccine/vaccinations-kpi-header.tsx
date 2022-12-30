@@ -26,13 +26,9 @@ interface VaccineKpiHeaderProps {
   dateOfInsertionUnix: number;
 }
 
-export function VaccinationsKpiHeader({
-  text,
-  dateUnix,
-  dateOfInsertionUnix,
-}: VaccineKpiHeaderProps) {
+export function VaccinationsKpiHeader({ text, dateUnix, dateOfInsertionUnix }: VaccineKpiHeaderProps) {
   return (
-    <Box pt={40} borderTopWidth={2} borderColor="gray3" borderStyle="solid">
+    <Box paddingTop="40px" borderTopWidth={2} borderColor="gray3" borderStyle="solid">
       <PageInformationBlock
         icon={<BoosterIcon />}
         title={text.title}
