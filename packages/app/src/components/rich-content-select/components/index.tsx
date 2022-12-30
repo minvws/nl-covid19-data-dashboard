@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { space } from '~/style/theme';
 
 export const SelectBoxRoot = styled(Box)(
   css({
@@ -21,8 +22,8 @@ export const SelectBox = styled(Box)(
     borderWidth: 1,
     transition: '0.1s background-color',
     userSelect: 'none',
-    py: 2,
-    px: 3,
+    paddingY: space[2],
+    paddingX: space[3],
     '&[aria-expanded="true"]': {
       bg: 'white',
       color: 'black',
@@ -33,7 +34,7 @@ export const SelectBox = styled(Box)(
         position: 'absolute',
         left: '1px',
         right: '1px',
-        bottom: 0,
+        bottom: space[0],
         borderBottom: '1px solid',
         borderColor: 'gray3',
       },
@@ -57,7 +58,7 @@ export const ListBox = styled(Box)(
     bg: 'white',
     position: 'absolute',
     top: '100%',
-    left: 0,
+    left: space[0],
     width: '100%',
     overflowY: 'auto',
     maxHeight: '20rem',
@@ -78,14 +79,14 @@ export const ListBox = styled(Box)(
 export const ListBoxOption = styled(Box)(
   css({
     cursor: 'default',
-    px: 3,
-    py: 2,
+    paddingX: space[3],
+    paddingY: space[2],
     position: 'relative',
     '&:before': {
       content: 'attr(data-text)',
       position: 'absolute',
-      left: 0,
-      top: 0,
+      left: space[0],
+      top: space[0],
       height: '100%',
       width: '5px',
       backgroundColor: 'blue8',

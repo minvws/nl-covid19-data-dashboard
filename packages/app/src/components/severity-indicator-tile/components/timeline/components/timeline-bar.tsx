@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { space } from '~/style/theme';
 
 interface TimelineBarProps {
   children: ReactNode;
@@ -20,6 +21,6 @@ export const TimelineBar = ({ children, height }: TimelineBarProps) => {
 
 const StyledTimelineBar = styled(Box)`
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: ${space[0]};
+  padding: ${space[0]};
 `;
