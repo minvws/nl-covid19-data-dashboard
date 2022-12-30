@@ -6,7 +6,6 @@ import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { useSidebar } from './logic/use-sidebar';
 
 interface NlLayoutProps {
@@ -58,7 +57,7 @@ export function NlLayout(props: NlLayoutProps) {
             id="metric-navigation"
             aria-labelledby="sidebar-title"
             role="navigation"
-            paddingTop={space[4]}
+            pt={4}
             backgroundColor="white"
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
@@ -68,13 +67,13 @@ export function NlLayout(props: NlLayoutProps) {
               {commonTexts.nationaal_layout.headings.sidebar}
             </VisuallyHidden>
 
-            <Box paddingX={space[3]}>
+            <Box px={3}>
               <Heading level={2} variant={'h3'}>
                 {commonTexts.sidebar.shared.nl_title}
               </Heading>
             </Box>
 
-            <Box paddingBottom={space[3]}>
+            <Box pb={3}>
               <Menu spacing={2}>
                 <MenuRenderer items={items} />
               </Menu>

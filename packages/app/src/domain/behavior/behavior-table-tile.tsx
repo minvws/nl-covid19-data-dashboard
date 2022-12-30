@@ -11,7 +11,6 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
@@ -102,8 +101,8 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
                     }),
                   })}
                 >
-                  <Box display="flex" marginRight={space[2]}>
-                    <Box minWidth={32} color="black" paddingRight={space[2]} display="flex">
+                  <Box display="flex" mr={2}>
+                    <Box minWidth={32} color="black" pr={2} display="flex">
                       <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
                     <DescriptionWithIcon description={behavior.description} id={behavior.id} setCurrentId={setCurrentId} scrollRef={scrollRef} />
@@ -133,7 +132,7 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
           </tbody>
         </StyledTable>
       </Box>
-      <Box marginTop={space[2]} maxWidth="maxWidthText">
+      <Box mt={2} maxWidth="maxWidthText">
         <Text variant="label1" color="gray7">
           {annotation}
         </Text>
@@ -186,7 +185,7 @@ function DescriptionWithIcon({
             {splittedWords.length - 1 === index ? (
               <InlineText css={css({ display: 'flex', position: 'relative' })}>
                 {word}
-                <Box position="absolute" right={'-14px'} top={space[0]}>
+                <Box position="absolute" right={-14} top={0}>
                   <ChevronRight width="7px" />
                 </Box>
               </InlineText>
@@ -203,7 +202,7 @@ function DescriptionWithIcon({
 function PercentageBarWithNumber({ percentage, color }: { percentage: number; color: string }) {
   const { formatPercentage } = useIntl();
   return (
-    <Box display="flex" alignItems="center" spacingHorizontal={2} paddingRight={{ _: space[2], sm: space[2], lg: space[4], xl: space[5] }}>
+    <Box display="flex" alignItems="center" spacingHorizontal={2} pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}>
       <Box as="span" minWidth={40} textAlign="right">
         <BoldText>{`${formatPercentage(percentage)}%`}</BoldText>
       </Box>
@@ -220,8 +219,8 @@ const ExplanationBox = styled.div<{ background: string }>((x) =>
     width: '17px',
     background: x.background,
     float: 'left',
-    marginTop: '3px',
-    marginRight: space[1],
+    mt: '3px',
+    mr: 1,
     borderRadius: '3px',
   })
 );
@@ -257,8 +256,8 @@ const HeaderCell = styled.th(
 const Cell = styled.td(
   css({
     borderBottom: `1px solid ${colors.gray2}`,
-    padding: space[0],
-    paddingY: space[2],
+    p: 0,
+    py: 2,
     verticalAlign: 'middle',
 
     '&:first-child': {

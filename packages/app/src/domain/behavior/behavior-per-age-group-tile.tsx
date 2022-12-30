@@ -7,7 +7,6 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { BoldText, Text } from '~/components/typography';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { keys } from '~/utils';
 import { assert } from '~/utils/assert';
@@ -118,7 +117,7 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
     <Box display="flex" alignItems="center">
       <BoldText css={css({ minWidth: 50 })}>{`${amount}%`}</BoldText>
       <Box maxWidth={100} width="100%">
-        <Box width={`${amount}%`} height={'8px'} backgroundColor={color} css={css({ transition: 'width .3s' })} />
+        <Box width={`${amount}%`} height={8} backgroundColor={color} css={css({ transition: 'width .3s' })} />
       </Box>
     </Box>
   );
@@ -128,7 +127,7 @@ const StyledTable = styled.table(
   css({
     borderCollapse: 'collapse',
     width: '100%',
-    marginBottom: space[4],
+    mb: 4,
   })
 );
 
@@ -145,8 +144,8 @@ const Cell = styled.td((x) =>
     color: x.color,
     borderBottom: '1px solid',
     borderBottomColor: 'gray2',
-    padding: space[0],
-    paddingY: space[2],
+    p: 0,
+    py: 2,
     minHeight: 100,
     verticalAlign: 'middle',
   })
@@ -158,8 +157,8 @@ const ExplanationBox = styled.div<{ background: string }>((x) =>
     width: '17px',
     background: x.background,
     float: 'left',
-    marginTop: '3px',
-    marginRight: space[1],
+    mt: '3px',
+    mr: 1,
     borderRadius: '3px',
   })
 );

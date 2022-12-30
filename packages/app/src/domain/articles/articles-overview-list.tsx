@@ -4,7 +4,6 @@ import { isDefined } from 'ts-is-present';
 import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import { articleCategory, ArticleCategoryType } from '~/domain/topical/common/categories';
-import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 
 type ArticlesOverviewListProps = {
@@ -19,7 +18,7 @@ export function ArticlesOverviewList({ articleSummaries, currentCategory }: Arti
   }
 
   return (
-    <Box display="flex" alignItems="stretch" margin={space[0]} maxWidth="100%" flexWrap="wrap">
+    <Box display="flex" alignItems="stretch" margin={0} maxWidth="100%" flexWrap="wrap">
       {articleSummaries
         .filter(({ categories }) => {
           if (!isDefined(categories) || currentCategory === articleCategory[0]) return true;
@@ -38,7 +37,7 @@ export function ArticlesOverviewList({ articleSummaries, currentCategory }: Arti
                 [768, 445],
               ]}
             />
-            <Spacer marginBottom={{ _: space[4], md: space[5] }} />
+            <Spacer mb={{ _: 4, md: 5 }} />
           </ArticleBox>
         ))}
     </Box>
@@ -54,10 +53,10 @@ export const ArticleBox = styled.div(
       lg: 'calc(1 / 3 * 100% - 32px)',
     }),
     '&:nth-child(even)': {
-      marginLeft: asResponsiveArray({ sm: space[4], md: space[0], lg: space[0], xl: space[0] }),
+      ml: asResponsiveArray({ sm: '32px', md: 0, lg: 0, xl: 0 }),
     },
     '&:nth-child(3n+2)': {
-      marginX: asResponsiveArray({ md: '48px', lg: '48px', xl: '48px' }),
+      mx: asResponsiveArray({ md: '48px', lg: '48px', xl: '48px' }),
     },
     '& > *': {
       height: '100%',

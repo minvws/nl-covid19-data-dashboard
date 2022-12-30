@@ -3,7 +3,6 @@ import { Box } from '~/components/base';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { BehaviorIdentifier, behaviorIdentifiers } from '../logic/behavior-types';
 import { BehaviorIcon } from './behavior-icon';
 
@@ -25,7 +24,7 @@ export function SelectBehavior({ label, value, onChange, options = behaviorIdent
         label,
         content: (
           <Box display="flex" alignItems="flex-start">
-            <Box paddingRight={space[1]} width={iconSize} height={iconSize}>
+            <Box pr={1} width={iconSize} height={iconSize}>
               <BehaviorIcon name={id} size={iconSize} aria-hidden={true} />
             </Box>
             <Text
