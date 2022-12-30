@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useIntl } from '~/intl';
 import { TableText } from '../types';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
-import { space } from '~/style/theme';
 
 export function VariantDifference({ value, text }: { value: DifferenceDecimal; text: TableText }) {
   const { formatPercentage } = useIntl();
@@ -60,7 +59,7 @@ const Difference = styled.div<{ color: string }>((x) =>
   css({
     svg: {
       color: x.color,
-      marginRight: space[1],
+      mr: 1,
       width: '12px',
       height: '12px',
       verticalAlign: 'middle',

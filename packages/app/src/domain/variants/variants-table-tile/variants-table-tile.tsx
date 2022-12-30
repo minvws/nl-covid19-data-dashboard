@@ -10,7 +10,6 @@ import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
 import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VariantsTable } from './components/variants-table';
 import { TableText } from './types';
@@ -48,7 +47,7 @@ export function VariantsTableTile({
 
         {children}
 
-        <Box overflow="auto" marginBottom={space[3]} marginTop={space[4]}>
+        <Box overflow="auto" mb={3} mt={4}>
           <NoDataBox>{noDataMessage}</NoDataBox>
         </Box>
       </FullscreenChartTile>
@@ -101,7 +100,7 @@ function VariantsTableTileWithData({
   return (
     <ChartTile metadata={metadata} title={text.titel} description={descriptionText}>
       {children}
-      <Box overflow="auto" marginBottom={space[3]} marginTop={space[4]}>
+      <Box overflow="auto" mb={3} mt={4}>
         <VariantsTable rows={data} text={text} />
       </Box>
     </ChartTile>

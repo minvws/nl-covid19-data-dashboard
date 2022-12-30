@@ -18,7 +18,6 @@ import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/stat
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { space } from '~/style/theme';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textShared: siteText.pages.topical_page.shared,
@@ -77,7 +76,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
       articleCategories.map((category) => ({
         ...category,
         content: (
-          <Box paddingRight={space[2]}>
+          <Box pr={2}>
             <Text>{category.label}</Text>
           </Box>
         ),
@@ -103,9 +102,9 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
-      <Box backgroundColor="white" paddingY={{ _: space[4], md: space[5] }}>
-        <MaxWidth paddingX={{ _: space[3], lg: space[4] }}>
-          <Box paddingBottom={space[2]}>
+      <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
+        <MaxWidth px={{ _: 3, lg: 4 }}>
+          <Box pb={2}>
             <Heading level={2} as="h1">
               {textShared.secties.artikelen.titel}
             </Heading>
@@ -126,8 +125,8 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             </OrderedList>
           ) : (
             <Box
-              marginTop={space[4]}
-              marginBottom={space[4]}
+              mt={3}
+              mb={4}
               width="100%"
               css={css({
                 select: {
@@ -164,9 +163,9 @@ const OrderedList = styled.ol(
     borderTop: '1px solid',
     borderBottom: '1px solid',
     borderColor: 'gray3',
-    margin: space[0],
-    marginY: space[4],
-    padding: space[0],
+    m: 0,
+    my: 4,
+    p: 0,
     listStyleType: 'none',
   })
 );
@@ -174,7 +173,7 @@ const OrderedList = styled.ol(
 const ListItem = styled.li<{ isActive: boolean }>((x) =>
   css({
     position: 'relative',
-    paddingY: space[3],
+    py: 3,
     height: '100%',
     transition: 'transform 0.2s',
     cursor: 'pointer',
@@ -183,8 +182,8 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       content: '""',
       display: 'block',
       position: 'absolute',
-      left: space[0],
-      bottom: space[0],
+      left: 0,
+      bottom: 0,
       height: '5px',
       width: `calc(100%)`,
       backgroundColor: 'blue8',
@@ -221,7 +220,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 const BoldText = styled.span(
   css({
     position: 'absolute',
-    top: space[0],
+    top: 0,
     left: '50%',
     fontWeight: 'bold',
     opacity: 0,
@@ -234,7 +233,7 @@ const StyledButton = styled.button(
   css({
     all: 'unset',
     position: 'relative',
-    paddingX: space[3],
+    px: 3,
 
     '&:focus': {
       outlineWidth: '1px',
