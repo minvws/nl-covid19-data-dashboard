@@ -8,7 +8,6 @@ import { RelativeDate } from '~/components/relative-date';
 import { Heading, HeadingLevel, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface TopicalSectionHeaderProps {
@@ -31,7 +30,7 @@ export const TopicalSectionHeader = ({ title, lastGenerated, showBackLink, link,
   return (
     <Box spacing={3}>
       {showBackLink && (
-        <Box paddingY={space[3]} borderBottom={'solid 1px'} borderColor={'gray3'}>
+        <Box py={3} borderBottom={'solid 1px'} borderColor={'gray3'}>
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
             {text.terug_naar_landelijk}
           </LinkWithIcon>
@@ -50,7 +49,7 @@ export const TopicalSectionHeader = ({ title, lastGenerated, showBackLink, link,
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) && (
-              <Box marginBottom={'2px'}>
+              <Box mb={'2px'}>
                 <LinkWithIcon href={link.href} icon={<ChevronRight />} iconPlacement="right">
                   {link.text}
                 </LinkWithIcon>

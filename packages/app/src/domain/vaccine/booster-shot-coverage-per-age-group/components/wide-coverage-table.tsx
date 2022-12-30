@@ -17,7 +17,6 @@ import { Bar } from '~/domain/vaccine/components/bar';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 interface WideCoverageTable {
   text: SiteText['pages']['vaccinations_page']['nl'];
   values: NlVaccineCoveragePerAgeGroupArchived_20220908Value[] | VrVaccineCoveragePerAgeGroupArchived_20220908Value[] | GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
@@ -51,7 +50,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
             <HeaderCell
               css={css({
                 textAlign: 'right',
-                paddingRight: asResponsiveArray({ _: space[3], xl: space[4] }),
+                pr: asResponsiveArray({ _: 3, xl: 4 }),
                 width: asResponsiveArray({
                   _: '25%',
                   lg: '20%',
@@ -63,7 +62,7 @@ export function WideCoverageTable({ values, text }: WideCoverageTable) {
             <HeaderCell
               css={css({
                 textAlign: 'right',
-                paddingRight: asResponsiveArray({ _: space[3], xl: space[4] }),
+                pr: asResponsiveArray({ _: 3, xl: 4 }),
                 width: asResponsiveArray({
                   _: '25%',
                   lg: '20%',
@@ -160,14 +159,14 @@ const HeaderCell = styled.th<{ isColumn?: boolean }>((x) =>
     textAlign: 'left',
     fontWeight: x.isColumn ? 'normal' : 'bold',
     verticalAlign: 'middle',
-    paddingBottom: x.isColumn ? undefined : space[2],
-    paddingY: x.isColumn ? space[3] : undefined,
+    pb: x.isColumn ? undefined : 2,
+    py: x.isColumn ? 3 : undefined,
   })
 );
 
 const Cell = styled.td(
   css({
-    paddingY: space[3],
+    py: 3,
     verticalAlign: 'middle',
   })
 );

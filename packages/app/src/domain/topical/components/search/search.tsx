@@ -3,7 +3,6 @@ import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
-import { space } from '~/style/theme';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
@@ -30,7 +29,7 @@ export function Search({ initialValue, title, activeResult }: { initialValue?: s
                 xs: '20rem',
                 sm: '42rem',
               }}
-              paddingX={{ sm: space[4] }}
+              px={{ sm: 4 }}
               position="relative"
               zIndex={1}
             >
@@ -50,7 +49,7 @@ export function Search({ initialValue, title, activeResult }: { initialValue?: s
                     borderTopLeftRadius={0}
                     borderTopRightRadius={0}
                     // make sure the input and results bottom and top borders overlap
-                    marginY={`-${space[1]}`}
+                    my={'-1px'}
                   >
                     <SearchResults />
                   </Box>

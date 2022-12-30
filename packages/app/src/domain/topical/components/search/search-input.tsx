@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { useSearchContext } from './context';
 
 const ICON_SPACE = 50;
@@ -47,8 +46,8 @@ export function SearchInput() {
 }
 
 export const paddedStyle = css({
-  padding: space[3],
-  paddingX: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
+  p: '1rem',
+  px: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
 });
 
 const StyledSearchInput = styled.input(
@@ -64,7 +63,7 @@ const StyledSearchInput = styled.input(
     borderColor: 'gray3',
     fontSize: 2,
     appearance: 'none',
-    margin: space[0],
+    m: 0,
 
     '&::-webkit-search-cancel-button': {
       display: 'none',
@@ -75,7 +74,7 @@ const StyledSearchInput = styled.input(
     },
 
     '&:placeholder-shown': {
-      paddingRight: space[2],
+      pr: 2,
     },
 
     '&:focus, &:focus:focus-visible': {
@@ -106,19 +105,19 @@ const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
     width: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
     pointerEvents: x.onClick ? 'all' : 'none',
 
-    top: space[0],
-    left: x.align === 'left' ? space[0] : undefined,
-    right: x.align === 'right' ? space[0] : undefined,
+    top: 0,
+    left: x.align === 'left' ? 0 : undefined,
+    right: x.align === 'right' ? 0 : undefined,
 
     background: 'none',
-    border: space[0],
-    padding: space[0],
-    margin: space[0],
+    border: 0,
+    p: 0,
+    m: 0,
     cursor: 'pointer',
 
     svg: {
-      width: '24px',
-      height: '24px',
+      width: 24,
+      height: 24,
     },
   })
 );
