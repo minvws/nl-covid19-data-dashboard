@@ -23,10 +23,13 @@
         "beds_occupied_covid": {
           "type": ["integer", "null"]
         },
-        "beds_occupied_non_covid": {
+        "beds_occupied_covid_percentage": {
+          "type": ["number", "null"]
+        },
+        "influx_covid_patients": {
           "type": ["integer", "null"]
         },
-        "beds_occupied_covid_percentage": {
+        "influx_covid_patients_moving_average": {
           "type": ["number", "null"]
         },
         "date_unix": {
@@ -38,8 +41,9 @@
       },
       "required": [
         "beds_occupied_covid",
-        "beds_occupied_non_covid",
         "beds_occupied_covid_percentage",
+        "influx_covid_patients",
+        "influx_covid_patients_moving_average",
         "date_unix",
         "date_of_insertion_unix"
       ],
