@@ -3,11 +3,7 @@ import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
 
-export function useDataSitemap(
-  base: 'nl' | 'vr' | 'gm',
-  code?: string,
-  data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>
-): LinkGroupProps[] {
+export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>): LinkGroupProps[] {
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -135,10 +131,6 @@ export function useDataSitemap(
           text: commonTexts.sidebar.metrics.hospital_admissions.title,
           href: reverseRouter.nl.ziekenhuisopnames(),
         },
-        {
-          text: commonTexts.sidebar.metrics.intensive_care_admissions.title,
-          href: reverseRouter.nl.intensiveCareOpnames(),
-        },
       ],
     },
     {
@@ -205,8 +197,7 @@ export function useDataSitemap(
           href: reverseRouter.nl.besmettelijkeMensen(),
         },
         {
-          text: commonTexts.sidebar.metrics.general_practitioner_suspicions
-            .title,
+          text: commonTexts.sidebar.metrics.general_practitioner_suspicions.title,
           href: reverseRouter.nl.verdenkingenHuisartsen(),
         },
         {

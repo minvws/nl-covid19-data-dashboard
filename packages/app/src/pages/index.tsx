@@ -41,10 +41,6 @@ import { space } from '~/style/theme';
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  hospitalText: siteText.pages.hospital_page.nl,
-  intensiveCareText: siteText.pages.intensive_care_page.nl,
-  sewerText: siteText.pages.sewer_page.shared,
-  positiveTestsText: siteText.pages.positive_tests_page.shared,
   textNl: siteText.pages.topical_page.nl,
   textShared: siteText.pages.topical_page.shared,
 });

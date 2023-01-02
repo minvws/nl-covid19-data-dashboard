@@ -4,6 +4,7 @@ import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type PageIdentifier =
   | 'hospital_page'
+  | 'hospitals_and_care_page'
   | 'behavior_page'
   | 'situations_page'
   | 'reproduction_page'
@@ -14,7 +15,7 @@ export type PageIdentifier =
   | 'positive_tests_page'
   | 'variants_page'
   | 'sewer_page'
-  | 'intensive_care_page'
+  | 'patients_page'
   | 'vaccinations_page'
   | 'nursing_home_page'
   | 'deceased_page';
