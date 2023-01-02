@@ -290,8 +290,10 @@ export interface NlDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
+  hospital_lcps__influx_covid_patients: DifferenceInteger;
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
+  intensive_care_lcps__influx_covid_patients: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
   sewer__average: DifferenceInteger;

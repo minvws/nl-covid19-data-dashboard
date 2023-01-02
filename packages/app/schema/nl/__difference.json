@@ -24,10 +24,16 @@
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
+    "hospital_lcps__influx_covid_patients": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "intensive_care_lcps__beds_occupied_covid": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "intensive_care_lcps__influx_covid_patients": {
       "$ref": "#/definitions/diff_integer"
     },
     "doctor__covid_symptoms_per_100k": {
@@ -72,12 +78,14 @@
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "hospital_lcps__beds_occupied_covid",
+    "hospital_lcps__influx_covid_patients",
     "tested_ggd__tested_total_moving_average",
     "tested_ggd__infected_percentage_moving_average",
     "reproduction__index_average",
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
+    "intensive_care_lcps__influx_covid_patients",
     "doctor__covid_symptoms_per_100k",
     "doctor__covid_symptoms",
     "sewer__average",
