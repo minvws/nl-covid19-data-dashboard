@@ -43,11 +43,6 @@ async function redirects() {
       permanent: false,
     },
     {
-      source: '/landelijk/maatregelen',
-      destination: '/landelijk/geldende-adviezen',
-      permanent: true,
-    },
-    {
       source: '/veiligheidsregio/:code/maatregelen',
       destination: '/veiligheidsregio/:code/geldende-adviezen',
       permanent: true,
@@ -63,8 +58,7 @@ async function redirects() {
       permanent: false,
     },
     {
-      source:
-        '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
+      source: '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
       destination: '/gemeente/GM:nr',
       permanent: false,
     },
@@ -73,17 +67,14 @@ async function redirects() {
       destination: '/veiligheidsregio/:code',
       permanent: true,
     },
-
     // Redirects for former topical pages GM/VR -> dedicated GM/VR page
     {
-      source:
-        '/actueel/gemeente/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
+      source: '/actueel/gemeente/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
       destination: '/gemeente/GM:nr',
       permanent: false,
     },
     {
-      source:
-        '/actueel/veiligheidsregio/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
+      source: '/actueel/veiligheidsregio/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
       destination: '/veiligheidsregio/VR:nr',
       permanent: false,
     },
@@ -93,6 +84,22 @@ async function redirects() {
       destination: `/gemeente/GM${to}/:page*`,
       permanent: true,
     })),
+    // Redirects for the NL pages
+    {
+      source: '/landelijk/maatregelen',
+      destination: '/landelijk/geldende-adviezen',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/ziekenhuis-opnames',
+      destination: `/landelijk/ziekenhuizen-en-zorg`,
+      permanent: true,
+    },
+    {
+      source: '/landelijk/intensive-care-opnames',
+      destination: `/landelijk/ziekenhuizen-en-zorg`,
+      permanent: true,
+    },
   ];
 }
 
