@@ -46,7 +46,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
     return {
       ...baseAgeGroup,
       type: 'line',
-      shape: 'line',
+      shape: 'style' in baseAgeGroup ? baseAgeGroup.style : 'line',
       label,
       ariaLabel,
       legendAriaLabel: ariaLabel,
@@ -62,7 +62,6 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
   const chartConfig = seriesConfig.filter((item) => compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length);
 
   const interactiveLegendOptions: SelectOption[] = seriesConfig;
-  // .filter((item) => !alwaysEnabled.includes(item.metricProperty));
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;

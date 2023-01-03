@@ -48,10 +48,7 @@ export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timeli
     return {
       ...baseAgeGroup,
       type: 'line',
-      // shape: 'style' in baseAgeGroup ? baseAgeGroup.style : 'line',
-      // shape: baseAgeGroup.style ? 'dashed' : 'line',
-      shape: 'line',
-      // shapeComponent: annotation.fill === 'solid' || !isDefined(annotation.fill) ? <SolidTimespanAnnotationIcon /> : <HatchedTimespanAnnotationIcon />,
+      shape: 'style' in baseAgeGroup ? baseAgeGroup.style : 'line',
       label,
       ariaLabel,
       legendAriaLabel: ariaLabel,
@@ -67,7 +64,6 @@ export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timeli
   const chartConfig = seriesConfig.filter((item) => compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length);
 
   const interactiveLegendOptions: SelectOption[] = seriesConfig;
-  // .filter((item) => !alwaysEnabled.includes(item.metricProperty));
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;

@@ -6,15 +6,12 @@ import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Box } from './base';
 
-type LegendLineStyle = 'solid' | 'dashed';
-
 export interface SelectOption<T = string> {
   metricProperty: T;
   label: string;
   color: string;
-  shape?: 'line' | 'circle' | 'square' | 'gapped-area';
+  shape?: 'line' | 'circle' | 'square' | 'gapped-area' | 'dashed';
   legendAriaLabel?: string;
-  style?: LegendLineStyle;
 }
 
 interface InteractiveLegendProps<T = string> {
@@ -41,8 +38,12 @@ export function InteractiveLegend<T = string>({ helpText, selectOptions, selecti
               <Item key={item.label}>
                 <StyledLabel htmlFor={`checkboxgroup-${item.label}`} isActive={hasSelection && isSelected} borderColor={item.color} data-text={item.label}>
                   {item.label}
-                  {/* {item.shape === 'line' && <Line color={item.color} />} */}
-                  {item.shape === 'line' && <Line color={item.color} lineStyle={item.style ?? 'solid'} />}
+                  {item.shape === 'line' && <Line color={item.color} />}
+                  {item.shape === 'dashed' && (
+                    <DashedContainer>
+                      <Dashed color={item.color} />
+                    </DashedContainer>
+                  )}
                   {item.shape === 'circle' && <Circle color={item.color} />}
                   {item.shape === 'square' && <Square color={item.color} />}
                   {item.shape === 'gapped-area' && <GappedArea color={item.color} />}
@@ -189,23 +190,29 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   })
 );
 
-// const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
-//   css({
-//     display: 'block',
-//     position: 'absolute',
-//     borderTopColor: color as SystemStyleObject,
-//     borderTopStyle: lineStyle,
-//     borderTopWidth: '3px',
-//     top: '10px',
-//     width: '15px',
-//     height: 0,
-//     borderRadius: '2px',
-//     left: 0,
-//   })
-// );
+const DashedContainer = styled(Box)`
+  svg {
+    display: block;
+    left: 13px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+`;
 
-const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
-  // const Line = styled.div<{ color: string }>(({ color }) =>
+interface DashedProps {
+  color: string;
+}
+
+export const Dashed = ({ color }: DashedProps) => {
+  return (
+    <svg width={15} height={15} viewBox={`0 0 ${15} ${15}`}>
+      <line stroke={color} strokeWidth={3} strokeDasharray={4} strokeLinecap="round" strokeLinejoin="round" x1={2} y1={15 / 2} x2={15 - 2} y2={15 / 2} />
+    </svg>
+  );
+};
+
+const Line = styled.div<{ color: string }>(({ color }) =>
   css({
     top: '50%',
     transform: 'translateY(-50%)',
@@ -214,7 +221,6 @@ const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color,
     borderRadius: '2px',
     display: 'block',
     position: 'absolute',
-    borderTopStyle: lineStyle, //added
     left: 13,
     backgroundColor: color,
   })

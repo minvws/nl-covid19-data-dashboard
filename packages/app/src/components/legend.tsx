@@ -42,7 +42,6 @@ export function Legend({ items, columns }: LegendProps) {
             {item.shape === 'outlined-square' && <OutlinedSquare color={item.color} />}
             {item.shape === 'dotted-square' && <DottedSquare color={item.color} />}
             {item.shape === 'line' && <Line color={item.color} lineStyle={item.style ?? 'solid'} />}
-            {/* {item.shape === 'dashed' && <Dashed color={item.color} lineStyle={item.style ?? 'dashed'} />} */}
             {item.shape === 'circle' && <Circle color={item.color} />}
           </Item>
         );
