@@ -6,15 +6,13 @@ import { MaxWidth } from '~/components/max-width';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { InlineText, BoldText } from './typography';
 import { colors } from '@corona-dashboard/common';
+import theme, { space } from '~/style/theme';
 
 interface NotificationBannerProps {
   title: string;
   description: string;
 }
-export function NotificationBanner({
-  title,
-  description,
-}: NotificationBannerProps) {
+export function NotificationBanner({ title, description }: NotificationBannerProps) {
   const [lastWord, ...splittedWords] = title.split(' ').reverse();
   const titleWithoutLastWord = splittedWords.reverse().join(' ');
 
@@ -24,17 +22,12 @@ export function NotificationBanner({
 
   return (
     <Box width="100%" backgroundColor={colors.gray2}>
-      <MaxWidth
-        px={{ _: 3, sm: 4 }}
-        py={3}
-        display="flex"
-        spacingHorizontal={3}
-      >
-        <Box display="flex" width="1.6rem" height="1.6rem">
-          <Warning />
-        </Box>
+      <MaxWidth paddingY={space[3]}>
+        <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={theme.sizes.maxWidthSiteWarning} display="flex" alignItems="flex-start" spacingHorizontal={3}>
+          <Box display="flex" minWidth="1.6rem" minHeight="1.6rem">
+            <Warning />
+          </Box>
 
-        <Box maxWidth="maxWidthText">
           {hasDescription ? (
             collapsible.button(
               <Box
@@ -48,10 +41,10 @@ export function NotificationBanner({
                   border: 0,
                   borderRadius: '5px',
                   backgroundColor: 'transparent',
-                  padding: 0,
-                  margin: 0,
+                  padding: space[0],
+                  margin: space[0],
                   textAlign: 'left',
-                  mt: 1,
+                  marginTop: space[1],
                 })}
               >
                 <BoldText>
@@ -71,8 +64,8 @@ export function NotificationBanner({
 
           {hasDescription &&
             collapsible.content(
-              <Box pb={2}>
-                <Spacer mt={3} />
+              <Box paddingBottom={space[2]}>
+                <Spacer marginTop={space[3]} />
                 <Markdown content={description} />
               </Box>
             )}
