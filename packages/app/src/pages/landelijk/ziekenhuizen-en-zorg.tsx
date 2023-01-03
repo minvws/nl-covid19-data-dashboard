@@ -295,7 +295,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.hospital_lcps.values}
                 timeframe={hospitalPatientInfluxOverTimeTimeframe}
-                forceLegend
                 seriesConfig={[
                   {
                     type: 'line',
@@ -346,7 +345,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 values={data.intensive_care_lcps.values}
                 timeframe={intensiveCarePatientInfluxOverTimeTimeframe}
-                forceLegend
                 seriesConfig={[
                   {
                     type: 'line',
