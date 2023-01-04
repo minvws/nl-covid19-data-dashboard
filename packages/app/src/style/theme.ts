@@ -97,6 +97,7 @@ export const shadows = {
 const sizes = {
   maxWidth: 1400,
   infoWidth: 1000,
+  maxWidthSiteWarning: 930,
   contentWidth: 700,
   maxWidthText: 600,
 } as const;
