@@ -35,21 +35,19 @@ export const HospitalsTile = ({ title, description, source, dateUnix, tilesData 
 
   return (
     <Box marginBottom={space[5]}>
-      <KpiTile title={title} hasNoPaddingBottom>
+      <KpiTile title={title}>
         <Text>{description}</Text>
         <TwoKpiSection spacing={5}>
           <KpiContent>
-            {tilesData.map((tile, index) => {
-              return (
-                <Box key={index} width="100%">
-                  <BoldText>{tile.title}</BoldText>
-                  <Box paddingTop={space[3]} paddingBottom={tile.differenceValue ? space[1] : space[3]}>
-                    <KpiValue absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
-                  </Box>
-                  <Markdown content={tile.description} />
+            {tilesData.map((tile, index) => (
+              <Box key={index} width="100%">
+                <BoldText>{tile.title}</BoldText>
+                <Box paddingTop={space[3]} paddingBottom={tile.differenceValue ? space[1] : space[3]}>
+                  <KpiValue absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
                 </Box>
-              );
-            })}
+                <Markdown content={tile.description} />
+              </Box>
+            ))}
           </KpiContent>
         </TwoKpiSection>
         <Metadata {...metadata} isTileFooter />
