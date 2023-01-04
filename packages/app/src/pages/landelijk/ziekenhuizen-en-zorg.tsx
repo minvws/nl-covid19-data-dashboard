@@ -36,14 +36,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.hospital_lcps__beds_occupied_covid',
-    'difference.hospital_lcps__influx_covid_patients',
-    'difference.intensive_care_lcps__beds_occupied_covid',
-    'difference.intensive_care_lcps__influx_covid_patients',
-    'hospital_lcps',
-    'intensive_care_lcps'
-  ),
+  selectNlData('difference.hospital_lcps__beds_occupied_covid', 'difference.intensive_care_lcps__beds_occupied_covid', 'hospital_lcps', 'intensive_care_lcps'),
   createGetChoroplethData({
     vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
     gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
@@ -93,6 +86,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const mostRecentDateUnix = Math.max(hospitalLastValue.date_unix, icuLastValue.date_unix);
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -120,10 +114,9 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
-            dateUnix={hospitalLastValue.date_unix}
+            dateUnix={mostRecentDateUnix}
             tilesData={[
               {
-                dataProperty: 'beds_occupied_covid',
                 absoluteValue: hospitalLastValue.beds_occupied_covid,
                 differenceValue: data.difference.hospital_lcps__beds_occupied_covid,
                 title: textNl.kpi_tiles.occupancies.hospital.title,
@@ -244,18 +237,15 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
-            dateUnix={hospitalLastValue.date_unix}
+            dateUnix={mostRecentDateUnix}
             tilesData={[
               {
-                dataProperty: 'beds_occupied_covid',
                 absoluteValue: hospitalLastValue.influx_covid_patients,
-                differenceValue: data.difference.hospital_lcps__influx_covid_patients,
                 title: textNl.kpi_tiles.influxes.hospital.title,
                 description: textNl.kpi_tiles.influxes.hospital.description,
               },
               {
                 absoluteValue: icuLastValue.influx_covid_patients,
-                differenceValue: data.difference.intensive_care_lcps__influx_covid_patients,
                 title: textNl.kpi_tiles.influxes.icu.title,
                 description: textNl.kpi_tiles.influxes.icu.description,
               },

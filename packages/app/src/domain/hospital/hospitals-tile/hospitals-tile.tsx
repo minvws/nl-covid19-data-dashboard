@@ -24,8 +24,7 @@ export type TileData = {
   title: string;
   description: string;
   absoluteValue: number | null;
-  differenceValue: DifferenceInteger;
-  dataProperty?: string;
+  differenceValue?: DifferenceInteger;
 };
 
 export const HospitalsTile = ({ title, description, source, dateUnix, tilesData }: HospitalsTileProps) => {
@@ -35,37 +34,38 @@ export const HospitalsTile = ({ title, description, source, dateUnix, tilesData 
   };
 
   return (
-    <KpiTile title={title} hasNoPaddingBottom>
-      <Text>{description}</Text>
-      <TwoKpiSection spacing={5}>
-        <KpiContent>
-          {tilesData.map((tile, index) => {
-            return (
-              <Box key={index}>
-                <BoldText>{tile.title}</BoldText>
-                <Box paddingTop={space[3]} paddingBottom={space[1]}>
-                  <KpiValue data-cy={tile.dataProperty} absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
+    <Box marginBottom={space[5]}>
+      <KpiTile title={title} hasNoPaddingBottom>
+        <Text>{description}</Text>
+        <TwoKpiSection spacing={5}>
+          <KpiContent>
+            {tilesData.map((tile, index) => {
+              return (
+                <Box key={index}>
+                  <BoldText>{tile.title}</BoldText>
+                  <Box paddingTop={space[3]} paddingBottom={tile.differenceValue ? space[1] : space[3]}>
+                    <KpiValue absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
+                  </Box>
+                  <Markdown content={tile.description} />
                 </Box>
-                <Markdown content={tile.description} />
-              </Box>
-            );
-          })}
-        </KpiContent>
-      </TwoKpiSection>
-      <Metadata {...metadata} isTileFooter />
-    </KpiTile>
+              );
+            })}
+          </KpiContent>
+        </TwoKpiSection>
+        <Metadata {...metadata} isTileFooter />
+      </KpiTile>
+    </Box>
   );
 };
 
 export const KpiContent = styled(Box)`
   border: 1px solid ${colors.gray3};
-  position: relative;
+  color: ${colors.black};
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  color: ${colors.black};
-  padding: 24px ${space[3]};
   gap: ${space[5]};
+  justify-content: space-between;
+  padding: 24px ${space[3]};
 
   @media ${theme.mediaQueries.sm} {
     flex-direction: row;
