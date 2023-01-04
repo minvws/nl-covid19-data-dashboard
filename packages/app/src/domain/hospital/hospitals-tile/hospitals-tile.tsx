@@ -41,7 +41,7 @@ export const HospitalsTile = ({ title, description, source, dateUnix, tilesData 
           <KpiContent>
             {tilesData.map((tile, index) => {
               return (
-                <Box key={index}>
+                <Box key={index} width="100%">
                   <BoldText>{tile.title}</BoldText>
                   <Box paddingTop={space[3]} paddingBottom={tile.differenceValue ? space[1] : space[3]}>
                     <KpiValue absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
