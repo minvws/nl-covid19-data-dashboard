@@ -221,3 +221,17 @@ timestamp,action,key,document_id,move_to
 2022-12-28T14:13:14.615Z,delete,pages.intensive_care_page.shared.admissions_incidence_age_demographic_chart.title,Pei0Nqv2MstfonnkJAkhjS,__
 2022-12-28T14:13:14.618Z,delete,pages.intensive_care_page.shared.admissions_per_age_group.chart_description,jF33EuwumlGuwav2FD4JXg,__
 2022-12-28T14:13:14.620Z,delete,pages.intensive_care_page.shared.admissions_per_age_group.chart_title,jF33EuwumlGuwav2FD4JW0,__
+2023-01-02T17:07:16.823Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.occupancies.title,KoLyCpXIGU95m7jfETAwTc,__
+2023-01-02T17:07:17.752Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.occupancies.description,KoLyCpXIGU95m7jfETAwXC,__
+2023-01-02T17:07:18.749Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.occupancies.hospital.title,0iJeil5hiqRr6jTKtfAdIz,__
+2023-01-02T17:07:19.835Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.occupancies.hospital.description,0iJeil5hiqRr6jTKtfAdQx,__
+2023-01-02T17:07:20.798Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.occupancies.icu.title,KoLyCpXIGU95m7jfETAwnJ,__
+2023-01-02T17:07:21.823Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.occupancies.icu.description,PKXdxxxKAnTg0F1ZCyHPKt,__
+2023-01-02T17:07:22.811Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.influxes.title,0iJeil5hiqRr6jTKtfAdn1,__
+2023-01-02T17:07:23.868Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.influxes.description,KoLyCpXIGU95m7jfETAx8C,__
+2023-01-02T17:07:24.863Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.influxes.hospital.title,PKXdxxxKAnTg0F1ZCyHPlz,__
+2023-01-02T17:07:25.961Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.influxes.hospital.description,0iJeil5hiqRr6jTKtfAe5P,__
+2023-01-02T17:07:26.889Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.influxes.icu.title,KoLyCpXIGU95m7jfETAxT5,__
+2023-01-02T17:07:28.007Z,add,pages.hospitals_and_care_page.nl.kpi_tiles.influxes.icu.description,KoLyCpXIGU95m7jfETAxaq,__
+2023-01-02T17:07:28.008Z,delete,pages.hospitals_and_care_page.nl.kpi_bedbezetting.description,KoLyCpXIGU95m7jfENTcMK,__
+2023-01-02T17:07:28.015Z,delete,pages.hospitals_and_care_page.nl.kpi_bedbezetting.title,PKXdxxxKAnTg0F1ZCpciGR,__
