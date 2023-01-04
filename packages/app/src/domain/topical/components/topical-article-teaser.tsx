@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { BackgroundImage } from '~/components/background-image';
 import { Box } from '~/components/base';
@@ -19,11 +20,11 @@ export const TopicalArticleTeaser = ({ title, slug, cover, category }: TopicalAr
   return (
     <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" paddingRight={space[3]}>
       <Box maxWidth={imageWidth} width="100%">
-        <BackgroundImage image={cover} height={66} sizes={[[imageWidth]]} />
+        <BackgroundImage image={cover} height="66px" sizes={[[imageWidth]]} />
       </Box>
 
       <Box maxWidth="25rem" spacing={2}>
-        <Text variant="overline2" color="gray7">
+        <Text variant="overline2" color={colors.gray7}>
           {category}
         </Text>
 
