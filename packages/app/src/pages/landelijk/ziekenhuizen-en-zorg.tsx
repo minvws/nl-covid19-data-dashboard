@@ -6,7 +6,7 @@ import { TimeSeriesChart, TileList, SEOHead, ChartTile, PageInformationBlock } f
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery } from '~/queries/get-elements-query';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
@@ -15,6 +15,7 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { HospitalsTile } from '~/domain/hospital';
+import { getBoundaryDateStartUnix, countTrailingNullValues } from '~/utils';
 
 const pageMetrics = [
   'difference.hospital_lcps__beds_occupied_covid',
@@ -67,9 +68,9 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
 
-  const [selectedBedsOccupiedOverTimeChart, setSelectedBedsOccupiedOverTimeChart] = useState<string>('beds_occupied_covid_hospital'); // other option is 'beds_occupied_covid_icu'
-  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [selectedBedsOccupiedOverTimeChart, setSelectedBedsOccupiedOverTimeChart] = useState<string>('beds_occupied_covid_hospital');
+  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
 
   const bedsOccupiedOverTimeToggleItems: ChartTileToggleItem[] = [
     {
@@ -81,6 +82,28 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
       value: 'beds_occupied_covid_icu',
     },
   ];
+
+  const [selectedPatientInfluxOverTimeChart, setSelectedPatientInfluxOverTimeChart] = useState<string>('patients_influx_hospital');
+  const [hospitalPatientInfluxOverTimeTimeframe, setHospitalPatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+  const [intensiveCarePatientInfluxOverTimeTimeframe, setIntensiveCarePatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+
+  const patientInfluxOverTimeToggleItems: ChartTileToggleItem[] = [
+    {
+      label: textNl.hospitals.chart_patient_influx.toggle_label,
+      value: 'patients_influx_hospital',
+    },
+    {
+      label: textNl.icu.chart_patient_influx.toggle_label,
+      value: 'patients_influx_icu',
+    },
+  ];
+
+  const hospitalPatientInfluxUnderReportedRange = getBoundaryDateStartUnix(data.hospital_lcps.values, countTrailingNullValues(data.hospital_lcps.values, 'influx_covid_patients'));
+
+  const intensiveCarePatientInfluxUnderReportedRange = getBoundaryDateStartUnix(
+    data.intensive_care_lcps.values,
+    countTrailingNullValues(data.intensive_care_lcps.values, 'influx_covid_patients')
+  );
 
   const hospitalLastValue = getLastFilledValue(data.hospital_lcps);
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
@@ -251,6 +274,106 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               },
             ]}
           />
+
+          {selectedPatientInfluxOverTimeChart === 'patients_influx_hospital' && (
+            <ChartTile
+              timeframeOptions={TimeframeOptionsList}
+              title={textNl.hospitals.chart_patient_influx.title}
+              description={textNl.hospitals.chart_patient_influx.description}
+              metadata={{ source: textNl.sources.lnaz }}
+              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              onSelectTimeframe={setHospitalPatientInfluxOverTimeTimeframe}
+              toggle={{
+                initialValue: selectedPatientInfluxOverTimeChart,
+                items: patientInfluxOverTimeToggleItems,
+                onChange: (value) => setSelectedPatientInfluxOverTimeChart(value),
+              }}
+            >
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_patient_influx_over_time_chart',
+                }}
+                values={data.hospital_lcps.values}
+                timeframe={hospitalPatientInfluxOverTimeTimeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'influx_covid_patients_moving_average',
+                    label: textNl.hospitals.chart_patient_influx.legend_title_moving_average,
+                    color: colors.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'influx_covid_patients',
+                    label: textNl.hospitals.chart_patient_influx.legend_title_trend_label,
+                    color: colors.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: hospitalPatientInfluxUnderReportedRange,
+                      end: Infinity,
+                      label: textNl.hospitals.chart_patient_influx.legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
+                      cutValuesForMetricProperties: ['influx_covid_patients_moving_average'],
+                    },
+                  ],
+                  timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_lcps'),
+                }}
+              />
+            </ChartTile>
+          )}
+
+          {selectedPatientInfluxOverTimeChart === 'patients_influx_icu' && (
+            <ChartTile
+              timeframeOptions={TimeframeOptionsList}
+              title={textNl.icu.chart_patient_influx.title}
+              description={textNl.icu.chart_patient_influx.description}
+              metadata={{ source: textNl.sources.lnaz }}
+              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              onSelectTimeframe={setIntensiveCarePatientInfluxOverTimeTimeframe}
+              toggle={{
+                initialValue: selectedPatientInfluxOverTimeChart,
+                items: patientInfluxOverTimeToggleItems,
+                onChange: (value) => setSelectedPatientInfluxOverTimeChart(value),
+              }}
+            >
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'intensive_care_patient_influx_over_time_chart',
+                }}
+                values={data.intensive_care_lcps.values}
+                timeframe={intensiveCarePatientInfluxOverTimeTimeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'influx_covid_patients_moving_average',
+                    label: textNl.icu.chart_patient_influx.legend_title_moving_average,
+                    color: colors.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'influx_covid_patients',
+                    label: textNl.icu.chart_patient_influx.legend_title_trend_label,
+                    color: colors.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: intensiveCarePatientInfluxUnderReportedRange,
+                      end: Infinity,
+                      label: textNl.icu.chart_patient_influx.legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
+                      cutValuesForMetricProperties: ['influx_covid_patients_moving_average'],
+                    },
+                  ],
+                  timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps'),
+                }}
+              />
+            </ChartTile>
+          )}
         </TileList>
       </NlLayout>
     </Layout>
