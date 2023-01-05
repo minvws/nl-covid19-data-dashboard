@@ -16,19 +16,19 @@ This section describes how to generate this data with the correct projection app
 
 ### Importing the source data
 
-To create the data files we need, we will be using `cbsgebiedsindelingen_2022.gpkg` as the
-data source. This package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen). Download the XML file and find the link to the latest `*.gpkg` file in it. The URL looks like this: https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/extract/cbsgebiedsindelingen_2022_v1.gpkg.
+To create the data files we need, we will be using `cbsgebiedsindelingen_2023.gpkg` as the
+data source. This package can be downloaded from: [www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen](https://www.pdok.nl/downloads/-/article/cbs-gebiedsindelingen). Download the XML file and find the link to the latest `*.gpkg` file in it. The URL looks like this: https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/extract/cbsgebiedsindelingen_2023_v1.gpkg.
 
-> ⚠️ **ATTENTION**: At the time of writing, the `cbsgebiedsindelingen_2022.gpkg` file is the latest version.
+> ⚠️ **ATTENTION**: At the time of writing, the `cbsgebiedsindelingen_2023.gpkg` file is the latest version.
 It is of course very likely that by the time new data needs to be generated that a newer file is available.
 Pay attention to download the very latest version. If there may be a case that the latest CBS data is still not available and some manual work needs to be done, use the current TopoJson file and proceed to [Generate TopoJson](#generate-topojson).
 
 After downloading, import the package into QGIS (the easiest way of doing this is by simply dragging the package into
 the main QGIS window) and select the following layers to be added:
 
-- `gemeente_gegeneraliseerd_2022`
-- `veiligheidsregio_gegeneraliseerd_2022`
-- `landsdeel_gegeneraliseerd_2022`
+- `gemeente_gegeneraliseerd_2023`
+- `veiligheidsregio_gegeneraliseerd_2023`
+- `landsdeel_gegeneraliseerd_2023`
 
 Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection which should the default while importing.
 
@@ -38,7 +38,7 @@ Import with the CRS:`EPSG:28992 - Amersfoort / RD New - Projected` projection wh
 
 To clean up the data we have to perform the following steps:
 
-Create the municipalities data file (**gemeente_gegeneraliseerd_2022**):
+Create the municipalities data file (**gemeente_gegeneraliseerd_2023**):
 
 1. Right-click on the **layer > Properties > Fields**
 2. Rename (click the pencil to active edit mode):
@@ -47,13 +47,13 @@ Create the municipalities data file (**gemeente_gegeneraliseerd_2022**):
 4. Right-click on the **layer > Export > Save Features As..**
 5. Use the following settings:
    - Format: `GeoJSON`
-   - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `gemeente_gegeneraliseerd_2022.geojson`
+   - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `gemeente_gegeneraliseerd_2023.geojson`
    - CRS: `Project CRS: EPSG:28992 - Amersfoort / RD New`
    - Open **"Select fields to export..."**
      - Deselect all and only select: `code`
 6. Export by clicking **"Ok"**
 
-Create the safety regions data file (**veiligheidsregio_gegeneraliseerd_2022**):
+Create the safety regions data file (**veiligheidsregio_gegeneraliseerd_2023**):
 
 1. Right-click on the **layer > Properties > fields**
 2. Rename (click the pencil to active edit mode):
@@ -62,19 +62,19 @@ Create the safety regions data file (**veiligheidsregio_gegeneraliseerd_2022**):
 4. Right-click on the **layer > Export > Save Features As..**
 5. Use the following settings:
    - Format: `GeoJSON`
-   - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `veiligheidsregio_gegeneraliseerd_2022.geojson`
+   - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `veiligheidsregio_gegeneraliseerd_2023.geojson`
    - CRS: `Project CRS: EPSG:28992 - Amersfoort / RD New`
    - Open **"Select fields to export..."**
      - Deselect all and only select: `code`
 6. Export by clicking **"Ok"**
 
-Create the Netherlands data file (**landsdeel_gegeneraliseerd_2022**):
+Create the Netherlands data file (**landsdeel_gegeneraliseerd_2023**):
 
 1. Select the layer and go to **Vector > Geoprocessing Tools > Dissolve > Run**, this will merge the different areas
 2. Select the new layer and right-click on the **layer > Export > Save Features As..**
 3. Use the following settings:
    - Format: `GeoJSON`
-   - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `landsdeel_gegeneraliseerd_2022.geojson`
+   - File Name: Click on the three dots next to the file name on Step 5 of creating data files and choose a directory and save it as following: `landsdeel_gegeneraliseerd_2023.geojson`
    - CRS: `Project CRS: EPSG:28992 - Amersfoort / RD New`
    - Open **"Select fields to export..."**
      - Deselect all
@@ -83,13 +83,13 @@ Create the Netherlands data file (**landsdeel_gegeneraliseerd_2022**):
 To make sure the coordinate system is correct we have to convert the exported files to lat and lon coordinates:
 
 1. Create a new project and add the three files:
-   - `landsdeel_gegeneraliseerd_2022.geojson`
-   - `veiligheidsregio_gegeneraliseerd_2022.geojson`
-   - `gemeente_gegeneraliseerd_2022.geojson`
+   - `landsdeel_gegeneraliseerd_2023.geojson`
+   - `veiligheidsregio_gegeneraliseerd_2023.geojson`
+   - `gemeente_gegeneraliseerd_2023.geojson`
 2. For each layer:
    - Select the new layer and right-click on the **layer > Export > Save Features As..**
    - Format: `GeoJSON`
-   - File Name: `veiligheidsregio_gegeneraliseerd_2022_WGS84.geojson`
+   - File Name: `veiligheidsregio_gegeneraliseerd_2023_WGS84.geojson`
    - CRS: `(Default CRS:) EPSG:4326 - WGS 84`
    - Export by clicking **"Ok"**
    * Make sure the output files contain longitude and latitude coordinates by opening the file and manually checking this by hovering over the map and looking for `coordinate` on the bottom toolbar, otherwise the next step will not work.
@@ -101,9 +101,9 @@ To make sure the coordinate system is correct we have to convert the exported fi
 
 1. Upload the three different `*_WGS84.geojson` files to: [mapshaper.org](https://mapshaper.org)
 2. Rename the layers by clicking on the name in the dropdown:
-   - Change: `gemeente_gegeneraliseerd_2022_WGS84` to `gm_features`
-   - Change: `landsdeel_gegeneraliseerd_2022_WGS84` to `nl_features`
-   - Change: `veiligheidsregio_gegeneraliseerd_2022_WGS84` to `vr_features`
+   - Change: `gemeente_gegeneraliseerd_2023_WGS84` to `gm_features`
+   - Change: `landsdeel_gegeneraliseerd_2023_WGS84` to `nl_features`
+   - Change: `veiligheidsregio_gegeneraliseerd_2023_WGS84` to `vr_features`
 3. Export to TopoJSON > `nl-vr-gm-high-detail.topo.json`;
 
 1. Upload the output `nl-vr-gm-high-detail.topo.json` to a new instance of [mapshaper.org](https://mapshaper.org/)
