@@ -117,42 +117,20 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
   const emptyArchivedData = {
     booster_coverage_archived_20220904: {
       values: [
-        {
-          age_group: '12+',
-          ...emptyBoosterCoverageValue,
-        },
-        {
-          age_group: '18+',
-          ...emptyBoosterCoverageValue,
-        },
+        { age_group: '12+', ...emptyBoosterCoverageValue },
+        { age_group: '18+', ...emptyBoosterCoverageValue },
       ],
     },
     vaccine_coverage_per_age_group_archived: {
       values: [
-        {
-          age_group_range: '18+',
-          birthyear_range: '-2003',
-          ...emptyVaccineCoveragePerAgeGroupValue,
-        },
-        {
-          age_group_range: '12+',
-          birthyear_range: '-2009',
-          ...emptyVaccineCoveragePerAgeGroupValue,
-        },
+        { age_group_range: '18+', birthyear_range: '-2003', ...emptyVaccineCoveragePerAgeGroupValue },
+        { age_group_range: '12+', birthyear_range: '-2009', ...emptyVaccineCoveragePerAgeGroupValue },
       ],
     },
     vaccine_coverage_per_age_group_archived_20220908: {
       values: [
-        {
-          age_group_range: '18+',
-          birthyear_range: '-2004',
-          ...emptyVaccineCoveragePerAgeGroupValue,
-        },
-        {
-          age_group_range: '12+',
-          birthyear_range: '-2010',
-          ...emptyVaccineCoveragePerAgeGroupValue,
-        },
+        { age_group_range: '18+', birthyear_range: '-2004', ...emptyVaccineCoveragePerAgeGroupValue },
+        { age_group_range: '12+', birthyear_range: '-2010', ...emptyVaccineCoveragePerAgeGroupValue },
       ],
     },
   };
@@ -315,6 +293,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                 description={textGm.vaccination_coverage.description}
                 sortingOrder={['18+', '12+']}
                 metadata={{
+                  date: data.vaccine_coverage_per_age_group_archived.values.length ? data.vaccine_coverage_per_age_group_archived.values[0].date_unix : undefined,
                   source: textGm.vaccination_coverage.bronnen.rivm,
                 }}
                 values={data.vaccine_coverage_per_age_group_archived.values}
