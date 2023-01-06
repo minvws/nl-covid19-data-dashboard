@@ -107,8 +107,8 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
   const filteredArchivedAgeGroup18Plus = data.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '18+');
   const filteredArchivedAgeGroup12Plus = data.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+');
 
-  assert(filteredArchivedAgeGroup18Plus, `[${VaccinationsGmPage.name}] Could not find data for the archived vaccine coverage per age group for the age 18+`);
-  assert(filteredArchivedAgeGroup12Plus, `[${VaccinationsGmPage.name}] Could not find data for the archived vaccine coverage per age group for the age 12+`);
+  const hasArchivedAgeGroupData = !!(filteredArchivedAgeGroup12Plus && filteredArchivedAgeGroup18Plus);
+  const hasArchivedBoosterData = !!(boosterCoverage18PlusArchivedValue && boosterCoverage12PlusArchivedValue);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -210,55 +210,63 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               },
             }}
           />
-          <Divider />
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
-          {hasHideArchivedCharts && (
+          {hasArchivedAgeGroupData && hasArchivedBoosterData && (
             <>
-              <VaccineCoverageToggleTile
-                title={textGm.vaccination_grade_toggle_tile.title}
-                source={textGm.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textGm.vaccination_grade_toggle_tile.description_footer}
-                dateUnix={filteredArchivedAgeGroup18Plus.date_unix}
-                age18Plus={{
-                  fully_vaccinated: filteredArchivedAgeGroup18Plus.fully_vaccinated_percentage,
-                  has_one_shot: filteredArchivedAgeGroup18Plus.has_one_shot_percentage,
-                  birthyear: filteredArchivedAgeGroup18Plus.birthyear_range,
-                  fully_vaccinated_label: filteredArchivedAgeGroup18Plus.fully_vaccinated_percentage_label,
-                  has_one_shot_label: filteredArchivedAgeGroup18Plus.has_one_shot_percentage_label,
-                  boostered: formatPercentageAsNumber(`${boosterCoverage18PlusArchivedValue?.percentage}`),
-                  boostered_label: boosterCoverage18PlusArchivedValue?.percentage_label,
-                  dateUnixBoostered: boosterCoverage18PlusArchivedValue?.date_unix,
-                }}
-                age12Plus={{
-                  fully_vaccinated: filteredArchivedAgeGroup12Plus.fully_vaccinated_percentage,
-                  has_one_shot: filteredArchivedAgeGroup12Plus.has_one_shot_percentage,
-                  birthyear: filteredArchivedAgeGroup12Plus.birthyear_range,
-                  fully_vaccinated_label: filteredArchivedAgeGroup12Plus.fully_vaccinated_percentage_label,
-                  has_one_shot_label: filteredArchivedAgeGroup12Plus.has_one_shot_percentage_label,
-                  boostered: formatPercentageAsNumber(`${boosterCoverage12PlusArchivedValue?.percentage}`),
-                  boostered_label: boosterCoverage12PlusArchivedValue?.percentage_label,
-                  dateUnixBoostered: boosterCoverage12PlusArchivedValue?.date_unix,
-                }}
-                age12PlusToggleText={textGm.vaccination_grade_toggle_tile.age_12_plus}
-                age18PlusToggleText={textGm.vaccination_grade_toggle_tile.age_18_plus}
-                labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
+              <Divider />
+              <PageInformationBlock
+                title={textNl.section_archived.title}
+                description={textNl.section_archived.description}
+                isArchivedHidden={hasHideArchivedCharts}
+                onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
               />
-              <VaccineCoveragePerAgeGroup
-                title={textGm.vaccination_coverage.title}
-                description={textGm.vaccination_coverage.description}
-                sortingOrder={['18+', '12+']}
-                metadata={{
-                  date: data.vaccine_coverage_per_age_group_archived.values[0].date_unix,
-                  source: textGm.vaccination_coverage.bronnen.rivm,
-                }}
-                values={data.vaccine_coverage_per_age_group_archived.values}
-                text={textNl}
-              />
+              {hasHideArchivedCharts && (
+                <>
+                  {hasArchivedAgeGroupData && hasArchivedBoosterData && (
+                    <VaccineCoverageToggleTile
+                      title={textGm.vaccination_grade_toggle_tile.title}
+                      source={textGm.vaccination_grade_toggle_tile.source}
+                      descriptionFooter={textGm.vaccination_grade_toggle_tile.description_footer}
+                      dateUnix={filteredArchivedAgeGroup18Plus.date_unix}
+                      age18Plus={{
+                        fully_vaccinated: filteredArchivedAgeGroup18Plus.fully_vaccinated_percentage,
+                        has_one_shot: filteredArchivedAgeGroup18Plus.has_one_shot_percentage,
+                        birthyear: filteredArchivedAgeGroup18Plus.birthyear_range,
+                        fully_vaccinated_label: filteredArchivedAgeGroup18Plus.fully_vaccinated_percentage_label,
+                        has_one_shot_label: filteredArchivedAgeGroup18Plus.has_one_shot_percentage_label,
+                        boostered: formatPercentageAsNumber(`${boosterCoverage18PlusArchivedValue?.percentage}`),
+                        boostered_label: boosterCoverage18PlusArchivedValue?.percentage_label,
+                        dateUnixBoostered: boosterCoverage18PlusArchivedValue?.date_unix,
+                      }}
+                      age12Plus={{
+                        fully_vaccinated: filteredArchivedAgeGroup12Plus.fully_vaccinated_percentage,
+                        has_one_shot: filteredArchivedAgeGroup12Plus.has_one_shot_percentage,
+                        birthyear: filteredArchivedAgeGroup12Plus.birthyear_range,
+                        fully_vaccinated_label: filteredArchivedAgeGroup12Plus.fully_vaccinated_percentage_label,
+                        has_one_shot_label: filteredArchivedAgeGroup12Plus.has_one_shot_percentage_label,
+                        boostered: formatPercentageAsNumber(`${boosterCoverage12PlusArchivedValue?.percentage}`),
+                        boostered_label: boosterCoverage12PlusArchivedValue?.percentage_label,
+                        dateUnixBoostered: boosterCoverage12PlusArchivedValue?.date_unix,
+                      }}
+                      age12PlusToggleText={textGm.vaccination_grade_toggle_tile.age_12_plus}
+                      age18PlusToggleText={textGm.vaccination_grade_toggle_tile.age_18_plus}
+                      labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
+                    />
+                  )}
+                  {hasArchivedBoosterData && (
+                    <VaccineCoveragePerAgeGroup
+                      title={textGm.vaccination_coverage.title}
+                      description={textGm.vaccination_coverage.description}
+                      sortingOrder={['18+', '12+']}
+                      metadata={{
+                        date: data.vaccine_coverage_per_age_group_archived.values[0].date_unix,
+                        source: textGm.vaccination_coverage.bronnen.rivm,
+                      }}
+                      values={data.vaccine_coverage_per_age_group_archived.values}
+                      text={textNl}
+                    />
+                  )}
+                </>
+              )}
             </>
           )}
         </TileList>
