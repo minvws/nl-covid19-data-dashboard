@@ -18,6 +18,7 @@ import { assert, replaceVariablesInText, useReverseRouter, useFormatLokalizePerc
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { VaccineCoverageChoroplethVrAndGm } from '~/domain/vaccine/vaccine-coverage-choropleth_vr_and_gm';
+import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
 
@@ -98,57 +99,20 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
     autumn2022: data.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
   };
 
-  const emptyBoosterCoverageValue = {
-    percentage: null,
-    percentage_label: null,
-    date_of_insertion_unix: null,
-    date_unix: undefined,
-  };
-
-  const emptyVaccineCoveragePerAgeGroupValue = {
-    date_unix: null,
-    has_one_shot_percentage: null,
-    has_one_shot_percentage_label: null,
-    fully_vaccinated_percentage: null,
-    fully_vaccinated_percentage_label: null,
-    date_of_insertion_unix: null,
-  };
-
-  const emptyArchivedData = {
-    booster_coverage_archived_20220904: {
-      values: [
-        { age_group: '12+', ...emptyBoosterCoverageValue },
-        { age_group: '18+', ...emptyBoosterCoverageValue },
-      ],
-    },
-    vaccine_coverage_per_age_group_archived: {
-      values: [
-        { age_group_range: '18+', birthyear_range: '-2003', ...emptyVaccineCoveragePerAgeGroupValue },
-        { age_group_range: '12+', birthyear_range: '-2009', ...emptyVaccineCoveragePerAgeGroupValue },
-      ],
-    },
-    vaccine_coverage_per_age_group_archived_20220908: {
-      values: [
-        { age_group_range: '18+', birthyear_range: '-2004', ...emptyVaccineCoveragePerAgeGroupValue },
-        { age_group_range: '12+', birthyear_range: '-2010', ...emptyVaccineCoveragePerAgeGroupValue },
-      ],
-    },
-  };
-
   assert(filteredVaccination.primarySeries, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the primary series`);
   assert(filteredVaccination.autumn2022, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the autumn 2022 series`);
 
   const boosterCoverage18PlusArchivedValue =
-    data.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '18+') || emptyArchivedData.booster_coverage_archived_20220904.values[1];
+    data.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '18+') || emptyCoverageData.booster_coverage_archived_20220904.values[1];
   const boosterCoverage12PlusArchivedValue =
-    data.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '12+') || emptyArchivedData.booster_coverage_archived_20220904.values[0];
+    data.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '12+') || emptyCoverageData.booster_coverage_archived_20220904.values[0];
 
   const filteredArchivedAgeGroup18Plus =
     data.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '18+') ||
-    emptyArchivedData.vaccine_coverage_per_age_group_archived_20220908.values[0];
+    emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[0];
   const filteredArchivedAgeGroup12Plus =
     data.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+') ||
-    emptyArchivedData.vaccine_coverage_per_age_group_archived_20220908.values[1];
+    emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[1];
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
