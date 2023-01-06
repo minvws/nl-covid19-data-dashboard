@@ -47,7 +47,8 @@ export const getStaticProps = createGetStaticProps(
             }
           },
         'title':title.${locale},
-        'description': description.${locale}
+        'description': description.${locale},
+        'collectionTitle': collectionTitle.${locale}
       },
     }`;
   })
@@ -95,7 +96,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
 
           <Box as="article" spacing={3}>
-            <Heading level={3}>{measures.title}</Heading>
+            <Heading level={3}>{measures.collectionTitle}</Heading>
             <MeasuresTable data={measures} />
           </Box>
 

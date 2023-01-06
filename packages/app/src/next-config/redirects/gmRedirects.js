@@ -24,6 +24,10 @@ const gmRedirects = [
     from: ['0457'],
     to: '0363',
   },
+  {
+    from: ['0501', '0530', '0614'],
+    to: '1992',
+  },
 ];
 
 module.exports = {
