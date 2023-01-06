@@ -248,11 +248,6 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0758',
   },
   {
-    name: 'Brielle',
-    vrCode: 'VR17',
-    gemcode: 'GM0501',
-  },
-  {
     name: 'Bronckhorst',
     vrCode: 'VR06',
     gemcode: 'GM1876',
@@ -634,11 +629,6 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Hellendoorn',
     vrCode: 'VR05',
     gemcode: 'GM0163',
-  },
-  {
-    name: 'Hellevoetsluis',
-    vrCode: 'VR17',
-    gemcode: 'GM0530',
   },
   {
     name: 'Helmond',
@@ -1611,9 +1601,9 @@ export const gmData: MunicipalityInfo[] = [
     gemcode: 'GM0098',
   },
   {
-    name: 'Westvoorne',
+    name: 'Voorne aan Zee',
     vrCode: 'VR17',
-    gemcode: 'GM0614',
+    gemcode: 'GM1992',
   },
   {
     name: 'Wierden',
