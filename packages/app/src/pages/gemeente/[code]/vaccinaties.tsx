@@ -98,74 +98,60 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
     autumn2022: data.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
   };
 
+  const emptyBoosterCoverageValue = {
+    percentage: null,
+    percentage_label: null,
+    date_of_insertion_unix: null,
+    date_unix: undefined,
+  };
+
+  const emptyVaccineCoveragePerAgeGroupValue = {
+    date_unix: null,
+    has_one_shot_percentage: null,
+    has_one_shot_percentage_label: null,
+    fully_vaccinated_percentage: null,
+    fully_vaccinated_percentage_label: null,
+    date_of_insertion_unix: null,
+  };
+
   const emptyArchivedData = {
     booster_coverage_archived_20220904: {
       values: [
         {
           age_group: '12+',
-          percentage: null,
-          percentage_label: null,
-          date_of_insertion_unix: null,
-          date_unix: null,
+          ...emptyBoosterCoverageValue,
         },
         {
           age_group: '18+',
-          percentage: null,
-          percentage_label: null,
-          date_of_insertion_unix: null,
-          date_unix: null,
+          ...emptyBoosterCoverageValue,
         },
       ],
     },
     vaccine_coverage_per_age_group_archived: {
       values: [
         {
-          date_unix: null,
           age_group_range: '18+',
           birthyear_range: '-2003',
-          has_one_shot_percentage: null,
-          has_one_shot_percentage_label: null,
-          fully_vaccinated_percentage: null,
-          fully_vaccinated_percentage_label: null,
-          date_of_insertion_unix: null,
+          ...emptyVaccineCoveragePerAgeGroupValue,
         },
         {
-          date_unix: null,
           age_group_range: '12+',
           birthyear_range: '-2009',
-          has_one_shot_percentage: null,
-          has_one_shot_percentage_label: null,
-          fully_vaccinated_percentage: null,
-          fully_vaccinated_percentage_label: null,
-          date_of_insertion_unix: null,
+          ...emptyVaccineCoveragePerAgeGroupValue,
         },
       ],
     },
     vaccine_coverage_per_age_group_archived_20220908: {
       values: [
         {
-          date_unix: null,
           age_group_range: '18+',
           birthyear_range: '-2004',
-          has_one_shot_percentage: null,
-          has_one_shot_percentage_label: null,
-          fully_vaccinated_percentage: null,
-          fully_vaccinated_percentage_label: null,
-          booster_shot_percentage: null,
-          booster_shot_percentage_label: null,
-          date_of_insertion_unix: null,
+          ...emptyVaccineCoveragePerAgeGroupValue,
         },
         {
-          date_unix: null,
           age_group_range: '12+',
           birthyear_range: '-2010',
-          has_one_shot_percentage: null,
-          has_one_shot_percentage_label: null,
-          fully_vaccinated_percentage: null,
-          fully_vaccinated_percentage_label: null,
-          booster_shot_percentage: null,
-          booster_shot_percentage_label: null,
-          date_of_insertion_unix: null,
+          ...emptyVaccineCoveragePerAgeGroupValue,
         },
       ],
     },
