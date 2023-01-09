@@ -1,4 +1,3 @@
-import { colors } from '@corona-dashboard/common/src/theme';
 import css from '@styled-system/css';
 import { resolveHref } from 'next/dist/shared/lib/router/router';
 import { NextRouter, useRouter } from 'next/router';
