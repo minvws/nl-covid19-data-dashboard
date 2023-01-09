@@ -212,26 +212,27 @@ export const Dashed = ({ color }: DashedProps) => {
   );
 };
 
-const Line = styled.div<{ color: string }>(({ color }) =>
+const Shape = styled.div<{ color: string }>((x) =>
+  css({
+    display: 'block',
+    position: 'absolute',
+    left: 13,
+    backgroundColor: x.color,
+  })
+);
+
+const Line = styled(Shape)(
   css({
     top: '50%',
     transform: 'translateY(-50%)',
     width: '15px',
     height: '3px',
     borderRadius: '2px',
-    display: 'block',
-    position: 'absolute',
-    left: 13,
-    backgroundColor: color,
   })
 );
 
-const Circle = styled.div<{ color: string }>(({ color }) =>
+const Circle = styled(Shape)(
   css({
-    display: 'block',
-    position: 'absolute',
-    left: 13,
-    backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
     width: '10px',
@@ -240,12 +241,8 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
   })
 );
 
-const Square = styled.div<{ color: string }>(({ color }) =>
+const Square = styled(Shape)(
   css({
-    display: 'block',
-    position: 'absolute',
-    left: 13,
-    backgroundColor: color,
     top: '50%',
     transform: 'translateY(-50%)',
     width: '11px',
@@ -254,11 +251,8 @@ const Square = styled.div<{ color: string }>(({ color }) =>
   })
 );
 
-const GappedArea = styled.div<{ color: string }>(({ color }) =>
+const GappedArea = styled(Shape)<{ color: string }>(({ color }) =>
   css({
-    display: 'block',
-    position: 'absolute',
-    left: 13,
     backgroundColor: `${color}30`,
     borderTop: `2px solid ${color}`,
     top: '50%',

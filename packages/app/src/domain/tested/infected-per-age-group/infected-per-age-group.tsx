@@ -33,7 +33,6 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
   const breakpoints = useBreakpoints(true);
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
-  const alwaysEnabled = ['infected_overall_per_100k'];
 
   /* Enrich config with dynamic data / locale */
   const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
@@ -45,6 +44,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
 
     return {
       ...baseAgeGroup,
+      hideInLegend: true,
       type: 'line',
       shape: 'style' in baseAgeGroup ? baseAgeGroup.style : 'line',
       label,
@@ -58,8 +58,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
    * - when nothing selected: all items
    * - otherwise: selected items + always enabled items
    */
-  const compareList = list.concat(...alwaysEnabled);
-  const chartConfig = seriesConfig.filter((item) => compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length);
+  const chartConfig = seriesConfig.filter((item) => list.includes(item.metricProperty) || list.length === 0);
 
   const interactiveLegendOptions: SelectOption[] = seriesConfig;
 
@@ -71,7 +70,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
       <InteractiveLegend helpText={text.infected_per_age_group.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer mb={2} />
       <TimeSeriesChart
-        disableLegend
+        forceLegend
         accessibility={accessibility}
         values={values}
         timeframe={timeframe}

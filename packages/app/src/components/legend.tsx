@@ -142,10 +142,8 @@ const Circle = styled(Shape)(
   })
 );
 
-const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
+const Line = styled(Shape)<{ color: string; lineStyle: LegendLineStyle }>(({ color, lineStyle }) =>
   css({
-    display: 'block',
-    position: 'absolute',
     borderTopColor: color as SystemStyleObject,
     borderTopStyle: lineStyle,
     borderTopWidth: '3px',
@@ -153,6 +151,5 @@ const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(({ color,
     width: '15px',
     height: 0,
     borderRadius: '2px',
-    left: 0,
   })
 );
