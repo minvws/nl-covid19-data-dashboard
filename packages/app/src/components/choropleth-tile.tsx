@@ -75,7 +75,7 @@ export function ChoroplethTile({
           )}
         </Box>
 
-        <Box flex={{ lg: 1 }} display="flex" flexDirection="column" height="100%" spacing={3}>
+        <Box flex={{ lg: '1' }} display="flex" flexDirection="column" height="100%" spacing={3}>
           <Box height="100%" marginTop={space[4]} paddingLeft={hasPadding && breakpoints.lg ? space[4] : undefined}>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Box>
