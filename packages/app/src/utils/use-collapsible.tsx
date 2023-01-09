@@ -6,6 +6,7 @@ import { cloneElement, MouseEvent, ReactElement, ReactNode, useCallback, useEffe
 import styled from 'styled-components';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
+import { space } from '~/style/theme';
 import { useUniqueId } from '~/utils/use-unique-id';
 
 /**
@@ -86,7 +87,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
       }}
       initial={options.isOpen ? 'open' : undefined}
       css={css({
-        height: '0px',
+        height: space[0],
         opacity: 0,
         '.has-no-js &': {
           height: 'auto !important',
@@ -108,7 +109,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
       variants={{
         rest: {
           opacity: 0,
-          height: '0px',
+          height: space[0],
           transitionEnd: { display: 'none' },
         },
         open: {
