@@ -11,6 +11,7 @@ import { SiteText } from '~/locale';
 import { useIntl } from '~/intl';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
 import styled from 'styled-components';
+
 interface WideCoverageTableProps {
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
   values: NlVaccineCoveragePerAgeGroupValue[];
@@ -33,9 +34,7 @@ export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
             <HeaderCell hasPaddingRight width="20%">
               <InlineText variant="label1">{text.headers.fully_vaccinated}</InlineText>
             </HeaderCell>
-            <HeaderCell width="30%">
-              <InlineText variant="label1">{text.headers.difference_autumn_2022_shot_and_fully_vaccinated}</InlineText>
-            </HeaderCell>
+            <HeaderCell width="30%"></HeaderCell>
           </Row>
         </TableHead>
 
