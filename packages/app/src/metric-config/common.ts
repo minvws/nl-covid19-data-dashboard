@@ -1,8 +1,4 @@
-import {
-  DataScope,
-  MetricKeys,
-  MetricProperty,
-} from '@corona-dashboard/common';
+import { DataScope, MetricKeys, MetricProperty } from '@corona-dashboard/common';
 
 /**
  * These types are placed here to avoid a circular dependency. The nl/vr/gm
@@ -19,7 +15,6 @@ export type BarScaleConfig = {
 
 export type MetricConfig = {
   barScale?: BarScaleConfig;
-  minimumRange?: number;
 };
 
 /**

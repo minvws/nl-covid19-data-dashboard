@@ -21,7 +21,7 @@ export type Dataset = typeof datasets[number];
 const query = `*[_type == 'lokalizeText']`;
 const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
 
-export const IS_STAGING_ENV = typeof window !== 'undefined' && window.location.host === 'staging.coronadashboard.rijksoverheid.nl';
+export const IS_STAGING_ENV = typeof window !== 'undefined' && window.location.host === process.env.NEXT_HOST_URL_STG;
 
 /**
  * This hook will return an object which contains all lokalize translations.

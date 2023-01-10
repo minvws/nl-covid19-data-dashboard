@@ -1,10 +1,6 @@
+import { SEVERITY_LEVELS_LIST } from '@corona-dashboard/app/src/components/severity-indicator-tile/constants';
 import { isDefined } from 'ts-is-present';
-import { Rule } from '~/sanity';
-import { localeStringValidation } from '../../language/locale-validation';
-
-import { REQUIRED, REQUIRED_MIN_MAX } from '../../validation';
-
-import { THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE } from './thermometer';
+import { REQUIRED } from '../../validation';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -14,22 +10,14 @@ export const thermometerTimelineEvent = {
   title: 'Thermometer tijdlijn gebeurtenis',
   fields: [
     {
-      title: 'Titel',
-      name: 'title',
-      type: 'localeString',
-      validation: localeStringValidation((rule) => rule.required().max(60).error('Titels zijn gelimiteerd tot maximaal 60 tekens')),
-    },
-    {
-      title: 'Omschrijving',
-      name: 'description',
-      type: 'localeText',
-      validation: REQUIRED,
-    },
-    {
       title: 'Level',
       name: 'level',
       type: 'number',
-      validation: (rule: Rule) => REQUIRED_MIN_MAX(rule, THERMOMETER_MIN_VALUE, THERMOMETER_MAX_VALUE),
+      options: {
+        list: SEVERITY_LEVELS_LIST,
+        layout: 'dropdown',
+      },
+      validation: REQUIRED,
     },
     {
       title: 'Datum',
@@ -52,14 +40,18 @@ export const thermometerTimelineEvent = {
   ],
   preview: {
     select: {
-      title: 'title.nl',
+      title: 'level',
       date: 'date',
       dateEnd: 'dateEnd',
     },
-    prepare(x: { title: string; date: string; dateEnd?: string }) {
+    prepare(selection: { title: number; date: string; dateEnd?: string }) {
+      // Construct a custom start date
+      const day = selection.date.slice(8);
+      const month = selection.date.slice(5, -3);
+
       return {
-        title: x.title,
-        subtitle: [x.date, x.dateEnd].filter(isDefined).join(' tot '),
+        title: `${day}/${month}: level ${selection.title}`,
+        subtitle: [selection.date, selection.dateEnd].filter(isDefined).join(' tot '),
       };
     },
   },

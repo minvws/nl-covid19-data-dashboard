@@ -73,7 +73,11 @@ export const TimelineTooltipContent = ({ config, hasMultipleEvents, onNext, onPr
           <BoldText>{config.title}</BoldText>
         </Box>
 
-        <Text variant="label1">{config.description}</Text>
+        <Text variant="label1">
+          {replaceVariablesInText(config.description.split('**').join(''), {
+            label: config.title.toLowerCase(),
+          })}
+        </Text>
 
         {currentEstimationLabel && (
           <Box textVariant="label1">

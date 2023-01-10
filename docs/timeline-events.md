@@ -1,4 +1,4 @@
-# Timeline Events
+# Timelines && Timeline Events
 
 All time-series charts can optionally render events on a timeline to illustrate
 and describe certain parts of the data.
@@ -6,13 +6,13 @@ and describe certain parts of the data.
 These events are managed via the CMS.
 
 To enable and configure events for a chart, two things need to
-happen. First we need to add the chart instance as an "element" to the CMS
+happen. First we need to add the chart instance as an `element` to the CMS
 dataset, and secondly we need to query the element data in the page where the
 chart is used, and pass the results to the component.
 
 ## CMS Data Elements
 
-The "elements" section in the CMS provides a flexible way to connect any sort of
+The `elements` section in the CMS provides a flexible way to connect any sort of
 configuration to a data element on one of the pages. Unlike the various pages
 defined in the CMS, the elements works as a flat collection of objects that each
 point to a unique data element in the app via a combination of `scope`, `element type`, `metric name` and optionally a `metric property`.
@@ -27,12 +27,15 @@ we have an element with id `nl__tested_overall__time_series`.
 
 ## Adding An Element
 
-Adding a new element is only possible via a command-line interface.
+Adding a new element is **only** possible via a command-line interface.
 
 This script can be run using `packages/cms/yarn elements:add`.
 
 The script is self-explanatory as it allows the user to select the data item
 using a series of selection lists that are generated from the schema's.
+
+NOTE: When you use this script, the element will be created in both development
+and production datasets.
 
 ## Query Elements Data
 

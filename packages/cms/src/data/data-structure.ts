@@ -292,6 +292,7 @@ export const dataStructure = {
       'janssen_total',
     ],
     variants: ['variant_code', 'values', 'last_value'],
+    self_test_overall: ['infected_percentage'],
   },
   topical: {},
   vr: {

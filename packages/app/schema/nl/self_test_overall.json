@@ -1,0 +1,40 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_self_test_overall_value",
+      "type": "object",
+      "required": ["infected_percentage", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
+      "additionalProperties": false,
+      "properties": {
+        "infected_percentage": {
+          "type": ["number", "null"]
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_self_test_overall",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

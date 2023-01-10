@@ -1,27 +1,23 @@
-import type { Color } from '@corona-dashboard/common';
-import css from '@styled-system/css';
+import { Color, colors } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { BoldText } from '~/components/typography';
+import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 
-interface AgeDemographicTooltipContentProps<
-  T extends AgeDemographicDefaultValue
-> {
+interface AgeDemographicTooltipContentProps<T extends AgeDemographicDefaultValue> {
   value: T;
   rightMetricProperty: keyof T;
   leftMetricProperty: keyof T;
-  rightColor: Color;
-  leftColor: Color;
+  rightColor: Color | string;
+  leftColor: Color | string;
   text: AgeDemographicChartText;
   formatValue: (n: number) => string;
 }
 
-export function AgeDemographicTooltipContent<
-  T extends AgeDemographicDefaultValue
->({
+export function AgeDemographicTooltipContent<T extends AgeDemographicDefaultValue>({
   value,
   rightMetricProperty,
   leftMetricProperty,
@@ -31,15 +27,14 @@ export function AgeDemographicTooltipContent<
   formatValue,
 }: AgeDemographicTooltipContentProps<T>) {
   const valueRight = value[rightMetricProperty];
-  const rightMetricPropertyValue =
-    typeof valueRight === 'number' ? valueRight : 0;
+  const rightMetricPropertyValue = typeof valueRight === 'number' ? valueRight : 0;
 
   const valueLeft = value[leftMetricProperty];
   const leftMetricPropertyValue = typeof valueLeft === 'number' ? valueLeft : 0;
 
   return (
     <>
-      <Box px={3} py={2}>
+      <Box paddingX={space[3]} paddingY={space[2]}>
         <BoldText variant="h3">
           {replaceVariablesInText(text.age_group_range_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
@@ -64,33 +59,30 @@ export function AgeDemographicTooltipContent<
   );
 }
 
-const Legend = styled.ul(
-  css({
-    borderTop: '1px solid',
-    borderTopColor: 'gray2',
-    m: 0,
-    px: 0,
-    py: 2,
-  })
-);
+const Legend = styled.ul`
+  border-top: 1px solid ${colors.gray2};
+  margin: 0;
+  padding: ${space[2]} 0;
+`;
 
-const LegendItem = styled.li<{ color: string }>((x) =>
-  css({
-    listStyle: 'none',
-    m: 0,
-    pl: '2.75rem',
-    pr: 3,
-    py: 1,
-    position: 'relative',
-    '&:before': {
-      content: '""',
-      display: 'block',
-      width: '1rem',
-      height: '1rem',
-      backgroundColor: x.color,
-      position: 'absolute',
-      left: 3,
-      top: '0.5rem',
-    },
-  })
-);
+interface LegendItemProps {
+  color: string;
+}
+
+const LegendItem = styled.li<LegendItemProps>`
+  list-style: none;
+  margin: 0;
+  padding: ${space[1]} ${space[3]} ${space[1]} 2.75rem;
+  position: relative;
+
+  &:before {
+    background-color: ${({ color }) => color};
+    content: '';
+    display: block;
+    height: ${space[3]};
+    left: ${space[3]};
+    position: absolute;
+    top: ${space[2]};
+    width: ${space[3]};
+  }
+`;

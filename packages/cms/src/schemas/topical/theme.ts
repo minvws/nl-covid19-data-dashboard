@@ -5,6 +5,17 @@ export const theme = {
   type: 'document',
   title: 'Thema',
   name: 'theme',
+  fieldsets: [
+    {
+      title: 'Ondertitel',
+      description: 'Klik op het label om de velden te tonen.',
+      name: 'ondertitel',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+  ],
   fields: [
     {
       title: 'Titel',
@@ -16,6 +27,7 @@ export const theme = {
       title: 'Ondertitel',
       name: 'subTitle',
       type: 'localeRichContentBlock',
+      fieldset: 'ondertitel',
     },
     {
       title: 'Thema icoon',

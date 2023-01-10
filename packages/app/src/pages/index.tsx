@@ -98,7 +98,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const currentSeverityLevel = thermometer.currentLevel as unknown as SeverityLevels;
   const currentSeverityLevelTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
 
-  const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerTimelineEvents);
+  const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerTimelineEvents, thermometer.thermometerLevels);
 
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 

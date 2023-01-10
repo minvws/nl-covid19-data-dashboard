@@ -12,7 +12,13 @@ import { isVisible, SeriesConfig } from './series';
 
 type SplitLegendGroup = { label: string; items: LegendItem[] };
 
-export function useLegendItems<T extends TimestampedValue>(domain: number[], config: SeriesConfig<T>, dataOptions?: DataOptions, hasOutofBoudsValues = false, forceLegend = false) {
+export function useLegendItems<T extends TimestampedValue>(
+  domain: number[],
+  config: SeriesConfig<T>,
+  dataOptions?: DataOptions,
+  hasOutOfBoundsValues = false,
+  forceLegend = false
+) {
   const { timelineEvents, timespanAnnotations, outOfBoundsConfig } = dataOptions || {};
   const { commonTexts } = useIntl();
 
@@ -42,7 +48,7 @@ export function useLegendItems<T extends TimestampedValue>(domain: number[], con
       })
       .filter(isDefined);
 
-    if (hasOutofBoudsValues) {
+    if (hasOutOfBoundsValues) {
       legendItems.push({
         label: outOfBoundsConfig?.label,
         shape: 'custom',
@@ -110,5 +116,5 @@ export function useLegendItems<T extends TimestampedValue>(domain: number[], con
       legendItems: isLegendRequired ? legendItems : undefined,
       splitLegendGroups: splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
     };
-  }, [config, domain, commonTexts, timelineEvents, timespanAnnotations, outOfBoundsConfig, hasOutofBoudsValues, forceLegend]);
+  }, [config, domain, commonTexts, timelineEvents, timespanAnnotations, outOfBoundsConfig, hasOutOfBoundsValues, forceLegend]);
 }
