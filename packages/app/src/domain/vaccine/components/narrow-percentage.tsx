@@ -1,38 +1,31 @@
-import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { asResponsiveArray } from '~/style/utils';
+import { space } from '~/style/theme';
+
 
 interface NarrowPercentageProps {
-  value: string;
+  value: number | React.ReactNode;
   color: string;
   textLabel: string;
 }
 
-export function NarrowPercentage({
-  value,
-  color,
-  textLabel,
-}: NarrowPercentageProps) {
+export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
   return (
-    <Box
-      css={css({
-        display: 'flex',
-        alignItems: 'center',
-        pr: asResponsiveArray({ _: 3, xl: 4 }),
-      })}
-    >
-      <Box pr={3} minWidth="8.5rem" textAlign="left">
+    <Box display="flex" alignItems="center" justifyContent="space-between" paddingRight={{ _: space[3], xl: space[4]}}>
+      <Box paddingRight={space[3]} minWidth="8.5rem" textAlign="left">
         <InlineText>{`${textLabel}:`}</InlineText>
       </Box>
-      <Box
-        width={10}
-        height={10}
-        backgroundColor={color}
-        borderRadius="50%"
-        mr={2}
-      />
-      {value}
+
+      <Box display="flex" alignItems="center">
+        <Box
+          width="10px"
+          height="10px"
+          backgroundColor={color}
+          borderRadius="50%"
+          marginRight={space[2]}
+        />
+        {value}
+      </Box>
     </Box>
   );
 }
