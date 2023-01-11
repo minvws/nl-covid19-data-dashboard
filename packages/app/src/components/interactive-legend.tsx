@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
@@ -81,16 +82,16 @@ const Legend = styled.div(
 const List = styled.ul(
   css({
     listStyle: 'none',
-    px: 0,
-    m: 0,
-    mt: 2,
+    paddingX: 0,
+    margin: 0,
+    marginTop: space[2],
   })
 );
 
 const Item = styled.li(
   css({
-    mb: 2,
-    mr: 2,
+    marginBottom: space[2],
+    marginRight: space[2],
     position: 'relative',
     display: 'inline-block',
   })
@@ -112,9 +113,9 @@ const StyledLabel = styled.label<{
     cursor: 'pointer',
     position: 'relative',
     display: 'inline-flex',
-    pr: 13,
-    pl: 33,
-    py: 1,
+    paddingRight: '13px',
+    paddingLeft: '33px',
+    paddingY: space[1],
     borderRadius: '5px',
     boxShadow: `inset 0px 0px 0px ${isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`}`,
     fontWeight: 'normal',
@@ -179,7 +180,7 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
     backgroundColor: 'transparent',
     cursor: 'pointer',
     color: 'blue8',
-    py: '6px',
+    paddingY: '6px',
     border: 'none',
     fontFamily: 'inherit',
     visibility: isVisible ? 'visible' : 'hidden',

@@ -2,6 +2,7 @@ import { colors } from '@corona-dashboard/common';
 import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { space } from '~/style/theme';
 
 type LegendShape = 'line' | 'square' | 'circle' | 'dotted-square' | 'outlined-square';
 type LegendLineStyle = 'solid' | 'dashed';
@@ -53,8 +54,8 @@ export function Legend({ items, columns }: LegendProps) {
 const List = styled.ul<{ columns?: number }>(({ columns }) =>
   css({
     listStyle: 'none',
-    px: 0,
-    m: 0,
+    paddingX: 0,
+    margin: 0,
     fontSize: 1,
     color: 'gray7',
     columns,
@@ -64,11 +65,11 @@ const List = styled.ul<{ columns?: number }>(({ columns }) =>
 
 const Item = styled.li(
   css({
-    my: 1,
-    mr: 3,
+    marginY: space[1],
+    marginRight: space[3],
     position: 'relative',
     display: 'inline-block',
-    pl: '25px', // alignment with shape
+    paddingLeft: '25px', // alignment with shape
   })
 );
 
@@ -98,14 +99,14 @@ const Shape = styled.div<{ color: string }>((x) =>
 function DottedSquare({ color }: { color: string }) {
   return (
     <Shape color="white" css={css({ top: '3px' })}>
-      <svg width={16} height={16} viewBox={`0 0 ${16} ${16}`}>
+      <svg width={'16px'} height={'16px'} viewBox={`0 0 ${16} ${16}`}>
         <defs>
           <pattern id="dotted_legend" width="4" height="4" patternUnits="userSpaceOnUse">
             <line x1="0" y1="4" x2="0" y2="0" style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }} />
           </pattern>
         </defs>
         <g>
-          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={16} height={16} />
+          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={'16px'} height={'16px'} />
         </g>
       </svg>
     </Shape>
@@ -149,7 +150,7 @@ const Line = styled(Shape)<{ color: string; lineStyle: LegendLineStyle }>(({ col
     borderTopWidth: '3px',
     top: '10px',
     width: '15px',
-    height: 0,
+    height: '0',
     borderRadius: '2px',
   })
 );
