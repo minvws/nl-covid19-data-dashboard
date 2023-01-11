@@ -1,21 +1,20 @@
+import { Anchor, InlineText, Text } from '~/components/typography';
+import { BehaviorIcon } from './components/behavior-icon';
+import { BehaviorIdentifier } from './logic/behavior-types';
+import { BehaviorTrend } from './components/behavior-trend';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
-import { ChevronRight } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
+import { compose, display, DisplayProps, width, WidthProps, minWidth, MinWidthProps, border, BorderProps } from 'styled-system';
+import { fontWeights, space } from '~/style/theme';
+import { isDefined, isPresent } from 'ts-is-present';
+import { PercentageBar } from '~/components/percentage-bar';
+import { SiteText } from '~/locale';
+import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
+import { WidePercentage } from '../vaccine/components/wide-percentage';
 import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
-import { isDefined, isPresent } from 'ts-is-present';
-import { Box } from '~/components/base';
-import { ChartTile } from '~/components/chart-tile';
-import { PercentageBar } from '~/components/percentage-bar';
-import { Anchor, InlineText, Text, BoldText } from '~/components/typography';
-import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
-import { asResponsiveArray } from '~/style/utils';
-import { BehaviorIcon } from './components/behavior-icon';
-import { BehaviorTrend } from './components/behavior-trend';
-import { BehaviorIdentifier } from './logic/behavior-types';
-import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
 
 interface BehaviorTableTileProps {
   title: string;
@@ -31,108 +30,146 @@ interface BehaviorTableTileProps {
 
 const trendColumnWidth = 125;
 
-export function BehaviorTableTile({ title, description, complianceExplanation, supportExplanation, value, annotation, setCurrentId, scrollRef, text }: BehaviorTableTileProps) {
+export function BehaviorTableTile({ title, description, value, annotation, setCurrentId, scrollRef, text }: BehaviorTableTileProps) {
   const behaviorsTableData = useBehaviorTableData(value as NlBehaviorValue);
+
+  const anchorButtonClickHandler = (id: BehaviorIdentifier, scrollRef: { current: HTMLDivElement | null }) => {
+    scrollIntoView(scrollRef.current as Element);
+    setCurrentId(id);
+  };
 
   return (
     <ChartTile title={title} description={description}>
-      <Box display="flex" flexWrap="wrap" spacing={2} spacingHorizontal={3}>
-        <Box>
-          <ExplanationBox background={colors.blue6} />
-          {complianceExplanation}
-        </Box>
-        <Box>
-          <ExplanationBox background={colors.yellow3} />
-          {supportExplanation}
-        </Box>
-      </Box>
       <Box overflow="auto">
         <StyledTable>
           <thead>
             <Row>
-              <HeaderCell
-                css={css({
-                  width: asResponsiveArray({
-                    _: 'auto',
-                    sm: 300,
-                    md: 'auto',
-                    lg: 300,
-                    xl: 400,
-                  }),
-                })}
-              >
-                {text.basisregels.header_basisregel}
+              <HeaderCell width={{ _: '100%', md: 'auto', lg: '300px', xl: '400px' }}>{text.basisregels.header_basisregel}</HeaderCell>
+              <HeaderCell width={{ md: '150px' }} display={{ _: 'none', md: 'table-cell' }}>
+                Coronaregel volgen
               </HeaderCell>
-              <HeaderCell
-                css={css({
-                  display: asResponsiveArray({
-                    _: 'none',
-                    sm: 'table-cell',
-                    md: 'none',
-                    lg: 'table-cell',
-                  }),
-                  width: asResponsiveArray({
-                    _: 100,
-                    xl: 150,
-                  }),
-                })}
-              >
-                {text.basisregels.header_percentage}
+              <HeaderCell width={{ md: trendColumnWidth }} display={{ _: 'none', md: 'table-cell' }}>
+                Coronaregel steunen
               </HeaderCell>
-              <HeaderCell
-                css={css({
-                  width: trendColumnWidth,
-                })}
-              >
-                {text.basisregels.header_trend}
-              </HeaderCell>
+
+              {/* Empty header cell to respect design */}
+              <HeaderCell display={{ _: 'none', md: 'table-cell' }}></HeaderCell>
             </Row>
           </thead>
           <tbody>
             {behaviorsTableData.map((behavior) => (
-              <Row key={behavior.id}>
-                <Cell
-                  css={css({
-                    minWidth: asResponsiveArray({
-                      _: '100%',
-                      sm: 300,
-                      md: '100%',
-                      lg: 300,
-                    }),
-                  })}
-                >
-                  <Box display="flex" mr={2}>
-                    <Box minWidth={32} color="black" pr={2} display="flex">
-                      <BehaviorIcon name={behavior.id} size={25} />
+              // Mobile/narrow screens
+              <>
+                {/* Mobile/narrow screens */}
+                <Row key={behavior.id} display={{ _: 'flex', md: 'none' }}>
+                  <Cell minWidth={{ _: '100%' }}>
+                    <Box display="flex" margin={`0 ${space[2]} ${space[2]}`}>
+                      <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
+                        <BehaviorIcon name={behavior.id} size={25} />
+                      </Box>
+
+                      <StyledAnchor as="button" underline="hover" color="black" onClick={() => anchorButtonClickHandler(behavior.id, scrollRef)}>
+                        <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
+                          <InlineText>{behavior.description}</InlineText>
+                        </Box>
+                      </StyledAnchor>
                     </Box>
-                    <DescriptionWithIcon description={behavior.description} id={behavior.id} setCurrentId={setCurrentId} scrollRef={scrollRef} />
-                  </Box>
-                </Cell>
-                <Cell
-                  css={css({
-                    minWidth: asResponsiveArray({
-                      _: `calc(100% - ${trendColumnWidth}px)`,
-                      sm: 200,
-                      md: `calc(100% - ${trendColumnWidth}px)`,
-                      lg: 200,
-                    }),
-                  })}
-                >
-                  <PercentageBarWithNumber percentage={behavior.compliancePercentage} color={colors.blue6} />
-                  <PercentageBarWithNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
-                </Cell>
-                <Cell css={css({ minWidth: trendColumnWidth })}>
-                  <Box display="flex" flexDirection="column">
-                    <BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={text} />
-                    <BehaviorTrend trend={behavior.supportTrend} color={colors.black} text={text} />
-                  </Box>
-                </Cell>
-              </Row>
+
+                    <Box display="flex" flexDirection="column">
+                      <Box display="flex" flexDirection="column" marginBottom={space[2]}>
+                        <Box display="flex" marginBottom={space[1]}>
+                          <Box marginRight={space[3]}>Coronaregel volgen:</Box>
+                          <WidePercentage
+                            value={<BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={`${behavior.supportPercentage}%`} />}
+                            color={colors.yellow3}
+                            justifyContent="flex-start"
+                          />
+                        </Box>
+                        <PercentageBarWithoutNumber percentage={behavior.compliancePercentage} color={colors.blue6} />
+                      </Box>
+
+                      <Box display="flex" flexDirection="column">
+                        <Box display="flex" marginBottom={space[1]}>
+                          <Box marginRight={space[3]}>Coronaregel steunen:</Box>
+                          <WidePercentage
+                            value={<BehaviorTrend trend={behavior.supportTrend} color={colors.black} text={`${behavior.supportPercentage}%`} />}
+                            color={colors.blue6}
+                            justifyContent="flex-start"
+                          />
+                        </Box>
+                        <PercentageBarWithoutNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
+                      </Box>
+                    </Box>
+                  </Cell>
+
+                  {/* <Cell minWidth={{ _: trendColumnWidth }}>
+                    <WidePercentage
+                      value={<BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={`${behavior.compliancePercentage}%`} />}
+                      color={colors.blue6}
+                      justifyContent="flex-start" />
+                  </Cell>
+
+                  <Cell minWidth={{ _: trendColumnWidth }}>
+                    <WidePercentage
+                      value={<BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={`${behavior.supportPercentage}%`} />}
+                      color={colors.yellow3}
+                      justifyContent="flex-start" />
+                  </Cell>
+
+                  <Cell minWidth={{ _: '100%', sm: '200px' }}>
+                    <Box display="flex" flexDirection="column">
+                      <PercentageBarWithoutNumber percentage={behavior.compliancePercentage} color={colors.blue6} marginBottom={space[1]} />
+                      <PercentageBarWithoutNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
+                    </Box>
+                  </Cell> */}
+                </Row>
+
+                {/* Desktop/wide screens */}
+                <Row key={behavior.id} display={{ _: 'none', md: 'table-row' }}>
+                  <Cell minWidth={{ _: '100%', sm: '300px', md: '100%', lg: '300px' }}>
+                    <Box display="flex" marginRight={space[2]}>
+                      <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
+                        <BehaviorIcon name={behavior.id} size={25} />
+                      </Box>
+
+                      <StyledAnchor as="button" underline="hover" color="black" onClick={() => anchorButtonClickHandler(behavior.id, scrollRef)}>
+                        <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
+                          <InlineText>{behavior.description}</InlineText>
+                        </Box>
+                      </StyledAnchor>
+                    </Box>
+                  </Cell>
+
+                  <Cell minWidth={{ _: trendColumnWidth }}>
+                    <WidePercentage
+                      value={<BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={`${behavior.compliancePercentage}%`} />}
+                      color={colors.blue6}
+                      justifyContent="flex-start"
+                    />
+                  </Cell>
+
+                  <Cell minWidth={{ _: trendColumnWidth }}>
+                    <WidePercentage
+                      value={<BehaviorTrend trend={behavior.supportTrend} color={colors.black} text={`${behavior.supportPercentage}%`} />}
+                      color={colors.yellow3}
+                      justifyContent="flex-start"
+                    />
+                  </Cell>
+
+                  <Cell minWidth={{ _: '100%', sm: '200px' }}>
+                    <Box display="flex" flexDirection="column">
+                      <PercentageBarWithoutNumber percentage={behavior.compliancePercentage} color={colors.blue6} marginBottom={space[1]} />
+                      <PercentageBarWithoutNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
+                    </Box>
+                  </Cell>
+                </Row>
+              </>
             ))}
           </tbody>
         </StyledTable>
       </Box>
-      <Box mt={2} maxWidth="maxWidthText">
+
+      <Box marginTop={space[2]} maxWidth="maxWidthText">
         <Text variant="label1" color="gray7">
           {annotation}
         </Text>
@@ -141,135 +178,21 @@ export function BehaviorTableTile({ title, description, complianceExplanation, s
   );
 }
 
-/**
- * Render every word in a span and add the chevron to the last word.
- * this is for the word wrapping when the screen gets smaller.
- */
-function DescriptionWithIcon({
-  description,
-  id,
-  setCurrentId,
-  scrollRef,
-}: {
-  description: string;
-  id: BehaviorIdentifier;
-  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
-  scrollRef: { current: HTMLDivElement | null };
-}) {
-  const splittedWords = description.split(' ');
-
-  const buttonClickHandler = () => {
-    scrollIntoView(scrollRef.current as Element);
-    setCurrentId(id);
-  };
-
-  return (
-    <Anchor as="button" underline="hover" color="black" onClick={buttonClickHandler} css={css({ '&:hover': { color: 'blue8' } })}>
-      <span
-        css={css({
-          display: 'flex',
-          alignItems: 'center',
-          textAlign: 'left',
-          flexWrap: 'wrap',
-        })}
-      >
-        {splittedWords.map((word, index) => (
-          <InlineText
-            key={index}
-            css={css({
-              whiteSpace: 'pre-wrap',
-              fontFamily: 'body',
-              fontSize: '1rem',
-            })}
-          >
-            {splittedWords.length - 1 === index ? (
-              <InlineText css={css({ display: 'flex', position: 'relative' })}>
-                {word}
-                <Box position="absolute" right={-14} top={0}>
-                  <ChevronRight width="7px" />
-                </Box>
-              </InlineText>
-            ) : (
-              `${word} `
-            )}
-          </InlineText>
-        ))}
-      </span>
-    </Anchor>
-  );
+interface PercentageBarWithoutNumberProps {
+  percentage: number;
+  color: string;
+  marginBottom?: string;
 }
 
-function PercentageBarWithNumber({ percentage, color }: { percentage: number; color: string }) {
-  const { formatPercentage } = useIntl();
+function PercentageBarWithoutNumber({ percentage, color, marginBottom }: PercentageBarWithoutNumberProps) {
   return (
-    <Box display="flex" alignItems="center" spacingHorizontal={2} pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}>
-      <Box as="span" minWidth={40} textAlign="right">
-        <BoldText>{`${formatPercentage(percentage)}%`}</BoldText>
-      </Box>
+    <Box display="flex" alignItems="center" spacingHorizontal={2} marginBottom={marginBottom}>
       <Box color={color} flexGrow={1}>
         <PercentageBar percentage={percentage} height="8px" />
       </Box>
     </Box>
   );
 }
-
-const ExplanationBox = styled.div<{ background: string }>((x) =>
-  css({
-    height: '17px',
-    width: '17px',
-    background: x.background,
-    float: 'left',
-    mt: '3px',
-    mr: 1,
-    borderRadius: '3px',
-  })
-);
-
-const StyledTable = styled.table(
-  css({
-    borderCollapse: 'collapse',
-    width: '100%',
-  })
-);
-
-const Row = styled.tr(
-  css({
-    display: asResponsiveArray({
-      _: 'flex',
-      sm: 'table-row',
-      md: 'flex',
-      lg: 'table-row',
-    }),
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  })
-);
-
-const HeaderCell = styled.th(
-  css({
-    textAlign: 'left',
-    fontWeight: 'bold',
-    verticalAlign: 'middle',
-  })
-);
-
-const Cell = styled.td(
-  css({
-    borderBottom: `1px solid ${colors.gray2}`,
-    p: 0,
-    py: 2,
-    verticalAlign: 'middle',
-
-    '&:first-child': {
-      borderBottom: asResponsiveArray({
-        _: 'none',
-        sm: `1px solid ${colors.gray2}`,
-        md: 'none',
-        lg: `1px solid ${colors.gray2}`,
-      }),
-    },
-  })
-);
 
 function useBehaviorTableData(value: NlBehaviorValue) {
   const behaviorLookupKeys = useBehaviorLookupKeys();
@@ -298,3 +221,44 @@ function useBehaviorTableData(value: NlBehaviorValue) {
       .sort((a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0));
   }, [value, behaviorLookupKeys]);
 }
+
+const StyledTable = styled.table`
+  border-collapse: collapse;
+  width: 100%;
+`;
+
+type RowProps = DisplayProps;
+
+const Row = styled.tr<RowProps>`
+  flex-wrap: wrap;
+  justify-content: space-between;
+  ${compose(display)};
+`;
+
+type HeaderCellProps = WidthProps & DisplayProps;
+
+const HeaderCell = styled.th<HeaderCellProps>`
+  border-bottom: 1px solid ${colors.gray2};
+  text-align: left;
+  font-weight: ${fontWeights.bold};
+  vertical-align: middle;
+  padding-bottom: ${space[2]};
+  ${compose(width)};
+  ${compose(display)};
+`;
+
+type CellProps = MinWidthProps & BorderProps;
+
+const Cell = styled.td<CellProps>`
+  border-bottom: 1px solid ${colors.gray2};
+  padding: ${space[3]} ${space[0]};
+  vertical-align: middle;
+  ${compose(minWidth)};
+  ${compose(border)};
+`;
+
+const StyledAnchor = styled(Anchor)`
+  &:hover {
+    color: ${colors.blue8};
+  }
+`;
