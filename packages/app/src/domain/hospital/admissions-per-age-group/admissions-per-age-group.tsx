@@ -1,15 +1,7 @@
-import {
-  DAY_IN_SECONDS,
-  NlHospitalNicePerAgeGroupValue,
-  NlIntensiveCareNicePerAgeGroupValue,
-  TimeframeOption,
-} from '@corona-dashboard/common';
+import { DAY_IN_SECONDS, NlHospitalNicePerAgeGroupValue, NlIntensiveCareNicePerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import {
-  InteractiveLegend,
-  SelectOption,
-} from '~/components/interactive-legend';
+import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
@@ -22,9 +14,7 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
-type NLHospitalAdmissionPerAgeGroupValue =
-  | NlIntensiveCareNicePerAgeGroupValue
-  | NlHospitalNicePerAgeGroupValue;
+type NLHospitalAdmissionPerAgeGroupValue = NlIntensiveCareNicePerAgeGroupValue | NlHospitalNicePerAgeGroupValue;
 
 interface AdmissionsPerAgeGroup {
   values: NLHospitalAdmissionPerAgeGroupValue[];
@@ -37,12 +27,7 @@ interface AdmissionsPerAgeGroup {
   timelineEvents?: TimelineEventConfig[];
 }
 
-export function AdmissionsPerAgeGroup({
-  values,
-  timeframe,
-  accessibility,
-  timelineEvents,
-}: AdmissionsPerAgeGroup) {
+export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timelineEvents }: AdmissionsPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -50,71 +35,50 @@ export function AdmissionsPerAgeGroup({
   const text = commonTexts.admissions_per_age_group_chart;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
-  const alwaysEnabled = ['admissions_overall_per_million'];
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] =
-    BASE_SERIES_CONFIG.map((baseAgeGroup) => {
-      const label =
-        baseAgeGroup.metricProperty in text.legend
-          ? text.legend[baseAgeGroup.metricProperty]
-          : baseAgeGroup.metricProperty;
+  const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+    const label = baseAgeGroup.metricProperty in text.legend ? text.legend[baseAgeGroup.metricProperty] : baseAgeGroup.metricProperty;
 
-      const ariaLabel = replaceVariablesInText(
-        commonTexts.aria_labels.age_old,
-        {
-          age: label,
-        }
-      );
-
-      return {
-        ...baseAgeGroup,
-        type: 'line',
-        shape: 'line',
-        label,
-        ariaLabel,
-        legendAriaLabel: ariaLabel,
-      };
+    const ariaLabel = replaceVariablesInText(commonTexts.aria_labels.age_old, {
+      age: label,
     });
+
+    return {
+      ...baseAgeGroup,
+      hideInLegend: true,
+      type: 'line',
+      shape: 'style' in baseAgeGroup ? baseAgeGroup.style : 'line',
+      label,
+      ariaLabel,
+      legendAriaLabel: ariaLabel,
+    };
+  });
 
   /**
    * Chart:
    * - when nothing selected: all items
    * - otherwise: selected items + always enabled items
    */
-  const compareList = list.concat(...alwaysEnabled);
-  const chartConfig = seriesConfig.filter(
-    (item) =>
-      compareList.includes(item.metricProperty) ||
-      compareList.length === alwaysEnabled.length
-  );
+  const chartConfig = seriesConfig.filter((item) => list.includes(item.metricProperty) || list.length === 0);
 
-  const interactiveLegendOptions: SelectOption[] = seriesConfig.filter(
-    (item) => !alwaysEnabled.includes(item.metricProperty)
-  );
+  const interactiveLegendOptions: SelectOption[] = seriesConfig;
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
     <ErrorBoundary>
-      <InteractiveLegend
-        helpText={text.legend_help_text}
-        selectOptions={interactiveLegendOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
-      />
+      <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer mb={2} />
       <TimeSeriesChart
+        forceLegend
         accessibility={accessibility}
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}
         minHeight={breakpoints.md ? 300 : 250}
-        formatTooltip={(data) => (
-          <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
-        )}
+        formatTooltip={(data) => <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />}
         dataOptions={{
           timespanAnnotations: [
             {
