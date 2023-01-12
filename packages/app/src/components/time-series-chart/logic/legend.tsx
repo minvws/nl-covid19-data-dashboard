@@ -26,6 +26,7 @@ export function useLegendItems<T extends TimestampedValue>(
     const legendItems = config
       .filter(isVisible)
       .filter((configItem) => !configItem?.hideInLegend)
+
       .map<LegendItem | undefined>((x) => {
         switch (x.type) {
           case 'split-area':
@@ -111,7 +112,6 @@ export function useLegendItems<T extends TimestampedValue>(
      * legend when there's at least two items.
      */
     const isLegendRequired = forceLegend || legendItems.length + splitLegendGroups.length > 1;
-
     return {
       legendItems: isLegendRequired ? legendItems : undefined,
       splitLegendGroups: splitLegendGroups.length > 0 ? splitLegendGroups : undefined,
