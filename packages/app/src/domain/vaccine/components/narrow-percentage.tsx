@@ -9,11 +9,12 @@ interface NarrowPercentageProps {
   textLabel: string;
 }
 
+// TODO: AP: Move to tables directory
 export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" paddingRight={{ _: space[3], xl: space[4]}}>
-      <Box paddingRight={space[3]} minWidth="8.5rem" textAlign="left">
-        <InlineText>{`${textLabel}:`}</InlineText>
+    <Box display="grid" gridTemplateColumns="auto 2fr" width="100%">
+      <Box paddingRight={space[3]} minWidth="180px" textAlign="left">
+        <InlineText>{textLabel}:</InlineText>
       </Box>
 
       <Box display="flex" alignItems="center">

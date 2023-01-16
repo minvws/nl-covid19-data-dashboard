@@ -17,6 +17,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
 import { MobileTable } from '~/components/tables/mobile-table';
 import { PercentageDataPoint } from '~/components/tables/components/percentage-data';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 interface BehaviorTableTileProps {
   title: string;
@@ -33,6 +34,7 @@ interface BehaviorTableTileProps {
 const trendColumnWidth = 125;
 
 export function BehaviorTableTile({ title, description, value, annotation, setCurrentId, scrollRef, text }: BehaviorTableTileProps) {
+  const breakpoints = useBreakpoints(true);
   const behaviorsTableData = useBehaviorTableData(value as NlBehaviorValue);
   const percentageData: PercentageDataPoint[][] = behaviorsTableData.map(behavior => {
     return [
@@ -62,78 +64,80 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
 
   return (
     <ChartTile title={title} description={description}>
-      <MobileTable
-        tableData={behaviorsTableData}
-        percentageData={percentageData}
-        headerText={text.basisregels.header_basisregel}
-        onClickConfig={{
-          handler: anchorButtonClickHandler,
-          scrollRef: scrollRef
-        }}
-        isBehaviourTable
-      />
-
-      {/* <Box overflow="auto">
-        <StyledTable>
-          <thead>
-            <Row>
-              <HeaderCell width={{ _: '100%', md: 'auto', lg: '300px', xl: '400px' }}>{text.basisregels.header_basisregel}</HeaderCell>
-              <HeaderCell width={{ md: '150px' }} display={{ _: 'none', md: 'table-cell' }}>
-                Coronaregel volgen
-              </HeaderCell>
-              <HeaderCell width={{ md: trendColumnWidth }} display={{ _: 'none', md: 'table-cell' }}>
-                Coronaregel steunen
-              </HeaderCell>
-              <HeaderCell display={{ _: 'none', md: 'table-cell' }}></HeaderCell>
-            </Row>
-          </thead>
-          <tbody>
-            {behaviorsTableData.map((behavior) => (
-              <>
-                Desktop/wide screens
-                {/* <Row key={behavior.id} display={{ _: 'none', lg: 'table-row' }}>
-                  <Cell minWidth={{ _: '100%', sm: '300px', md: '100%', lg: '300px' }}>
-                    <Box display="flex" marginRight={space[2]}>
-                      <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
-                        <BehaviorIcon name={behavior.id} size={25} />
-                      </Box>
-
-                      <StyledAnchor as="button" underline="hover" color="black" onClick={() => anchorButtonClickHandler(behavior.id, scrollRef)}>
-                        <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
-                          <InlineText>{behavior.description}</InlineText>
+      {breakpoints.lg ? (
+        <Box overflow="auto">
+          <StyledTable>
+            <thead>
+              <Row>
+                <HeaderCell width={{ _: '100%', md: 'auto', lg: '300px', xl: '400px' }} display={{ _: 'none', md: 'table-cell' }}>{text.basisregels.header_basisregel}</HeaderCell>
+                <HeaderCell width={{ md: '150px' }} display={{ _: 'none', md: 'table-cell' }}>
+                  Coronaregel volgen
+                </HeaderCell>
+                <HeaderCell width={{ md: trendColumnWidth }} display={{ _: 'none', md: 'table-cell' }}>
+                  Coronaregel steunen
+                </HeaderCell>
+                <HeaderCell display={{ _: 'none', md: 'table-cell' }}></HeaderCell>
+              </Row>
+            </thead>
+            <tbody>
+              {behaviorsTableData.map((behavior) => (
+                <>
+                  {/* Desktop/wide screens */}
+                  <Row key={behavior.id}>
+                    <Cell minWidth="300px">
+                      <Box display="flex" marginRight={space[2]}>
+                        <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
+                          <BehaviorIcon name={behavior.id} size={25} />
                         </Box>
-                      </StyledAnchor>
-                    </Box>
-                  </Cell>
 
-                  <Cell minWidth={{ _: trendColumnWidth }}>
-                    <WidePercentage
-                      value={<BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={`${behavior.compliancePercentage}%`} />}
-                      color={colors.blue6}
-                      justifyContent="flex-start"
-                    />
-                  </Cell>
+                        <StyledAnchor as="button" underline="hover" color="black" onClick={() => anchorButtonClickHandler(behavior.id, scrollRef)}>
+                          <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
+                            <InlineText>{behavior.description}</InlineText>
+                          </Box>
+                        </StyledAnchor>
+                      </Box>
+                    </Cell>
 
-                  <Cell minWidth={{ _: trendColumnWidth }}>
-                    <WidePercentage
-                      value={<BehaviorTrend trend={behavior.supportTrend} color={colors.black} text={`${behavior.supportPercentage}%`} />}
-                      color={colors.yellow3}
-                      justifyContent="flex-start"
-                    />
-                  </Cell>
+                    <Cell minWidth={trendColumnWidth}>
+                      <WidePercentage
+                        value={<BehaviorTrend trend={behavior.complianceTrend} color={colors.black} text={`${behavior.compliancePercentage}%`} />}
+                        color={colors.blue6}
+                        justifyContent="flex-start"
+                      />
+                    </Cell>
 
-                  <Cell minWidth={{ _: '100%', sm: '200px' }}>
-                    <Box display="flex" flexDirection="column">
-                      <PercentageBarWithoutNumber percentage={behavior.compliancePercentage} color={colors.blue6} marginBottom={space[1]} />
-                      <PercentageBarWithoutNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
-                    </Box>
-                  </Cell>
-                </Row>
-                </>
-              ))}
-            </tbody>
-          </StyledTable>
-       </Box> } */}
+                    <Cell minWidth={trendColumnWidth}>
+                      <WidePercentage
+                        value={<BehaviorTrend trend={behavior.supportTrend} color={colors.black} text={`${behavior.supportPercentage}%`} />}
+                        color={colors.yellow3}
+                        justifyContent="flex-start"
+                      />
+                    </Cell>
+
+                    <Cell minWidth="200px">
+                      <Box display="flex" flexDirection="column">
+                        <PercentageBarWithoutNumber percentage={behavior.compliancePercentage} color={colors.blue6} marginBottom={space[1]} />
+                        <PercentageBarWithoutNumber percentage={behavior.supportPercentage} color={colors.yellow3} />
+                      </Box>
+                    </Cell>
+                  </Row>
+                  </>
+                ))}
+              </tbody>
+            </StyledTable>
+        </Box>
+      ) : (
+        <MobileTable
+          tableData={behaviorsTableData}
+          percentageData={percentageData}
+          headerText={text.basisregels.header_basisregel}
+          onClickConfig={{
+            handler: anchorButtonClickHandler,
+            scrollRef: scrollRef
+          }}
+          isBehaviourTable
+        />
+      )}
 
       <Box marginTop={space[2]} maxWidth="maxWidthText">
         <Text variant="label1" color="gray7">

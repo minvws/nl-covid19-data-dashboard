@@ -9,6 +9,7 @@ interface PercentageWideNumberProps {
   justifyContent: string;
 }
 
+// TODO: AP: Move to tables directory
 export function WidePercentage({ value, color, justifyContent }: PercentageWideNumberProps) {
   return (
     <InlineText
