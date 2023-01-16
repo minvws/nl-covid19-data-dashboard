@@ -5,7 +5,7 @@ import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Box } from '~/components/base';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { InlineText } from '~/components/typography';
+import { BoldText } from '~/components/typography';
 import { NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { PercentageData, PercentageDataPoint } from './components/percentage-data';
 import { SiteText } from '~/locale';
@@ -45,7 +45,7 @@ export const MobileTable = ({ tableData, headerText, hasAgeGroups, isBehaviourTa
             {tableData.map((item, tableDataIndex) => (
               <Row key={item.id} display="flex">
                 <Cell minWidth="100%">
-                  <Box display="flex" margin={`0 ${space[2]} ${space[2]}`}>
+                  <Box display="flex" alignItems="center" marginBottom={space[2]}>
                     {isBehaviourTable && (
                       <>
                         <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
@@ -53,9 +53,9 @@ export const MobileTable = ({ tableData, headerText, hasAgeGroups, isBehaviourTa
                         </Box>
 
                         <BehaviorAnchor as="button" underline="hover" color="black" onClick={onClickConfig ? () => onClickConfig.handler(item.id, onClickConfig.scrollRef) : undefined}>
-                          <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
-                            <InlineText>{item.description}</InlineText>
-                          </Box>
+                            <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
+                              <BoldText>{item.description}</BoldText>
+                            </Box>
                         </BehaviorAnchor>
                       </>
                     )}

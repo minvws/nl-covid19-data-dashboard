@@ -10,7 +10,7 @@ export type PercentageDataPoint = {
   trendDirection?: 'up' | 'down' | 'equal' | null;
   percentage: {
     color: string;
-    value: number;
+    value: number | string;
   };
 };
 
@@ -34,8 +34,9 @@ export const PercentageData = ({percentageDataPoints}: PercentageDataProps) => {
               textLabel={percentageDataPoint.title}
             />
           </Box>
-
-          <PercentageBarWithoutNumber percentage={percentageDataPoint.percentage.value} color={percentageDataPoint.percentage.color} />
+          
+          {/* In some cases, the percentage value is a string so it needs to be parsed for the progress bar to be filled properly. */}
+          <PercentageBarWithoutNumber percentage={typeof percentageDataPoint.percentage.value === 'number' ? percentageDataPoint.percentage.value : parseFloat(percentageDataPoint.percentage.value)} color={percentageDataPoint.percentage.color} />
         </Box>
       ))}
     </>

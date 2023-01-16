@@ -13,7 +13,7 @@ interface NarrowPercentageProps {
 export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
   return (
     <Box display="grid" gridTemplateColumns="auto 2fr" width="100%">
-      <Box paddingRight={space[3]} minWidth="180px" textAlign="left">
+      <Box paddingRight={space[3]} minWidth="190px" textAlign="left">
         <InlineText>{textLabel}:</InlineText>
       </Box>
 
