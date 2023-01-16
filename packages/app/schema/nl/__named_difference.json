@@ -41,6 +41,8 @@
             "BQ_1",
             "BQ_1_1",
             "XBB",
+            "XBB_1_5",
+            "CH_1_1",
             "other_table",
             "other_graph"
           ]
@@ -58,13 +60,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "variant_code",
-        "old_value",
-        "difference",
-        "old_date_unix",
-        "new_date_unix"
-      ],
+      "required": ["variant_code", "old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

@@ -343,6 +343,8 @@ export interface NamedDifferenceDecimal {
     | 'BQ_1'
     | 'BQ_1_1'
     | 'XBB'
+    | 'XBB_1_5'
+    | 'CH_1_1'
     | 'other_table'
     | 'other_graph';
   old_value: number;
@@ -1118,6 +1120,8 @@ export interface NlVariantsVariant {
     | 'BQ_1'
     | 'BQ_1_1'
     | 'XBB'
+    | 'XBB_1_5'
+    | 'CH_1_1'
     | 'other_table'
     | 'other_graph';
   values: NlVariantsVariantValue[];
