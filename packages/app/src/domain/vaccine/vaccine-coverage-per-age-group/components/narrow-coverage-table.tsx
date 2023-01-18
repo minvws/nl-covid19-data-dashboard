@@ -11,6 +11,7 @@ import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { GmVaccineCoveragePerAgeGroupArchivedValue, NlVaccineCoveragePerAgeGroupArchivedValue, VrVaccineCoveragePerAgeGroupArchivedValue } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 
+// TODO:AP - delete before merging branch
 export function NarrowCoverageTable({
   values,
   text,

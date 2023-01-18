@@ -15,6 +15,7 @@ import {
 } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 
+// TODO:AP - delete before merging branch
 export function NarrowCoverageTable({
   values,
   text,

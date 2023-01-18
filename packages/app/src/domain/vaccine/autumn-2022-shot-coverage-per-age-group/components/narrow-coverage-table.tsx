@@ -17,6 +17,7 @@ interface NarrowCoverageTableProps {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 
+// TODO:AP - delete before merging branch
 export const NarrowCoverageTable = ({ values, text }: NarrowCoverageTableProps) => {
   const { commonTexts, formatPercentage } = useIntl();
 

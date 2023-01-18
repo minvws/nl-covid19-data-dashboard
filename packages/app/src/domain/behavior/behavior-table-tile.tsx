@@ -7,17 +7,18 @@ import { ChartTile } from '~/components/chart-tile';
 import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { compose, display, DisplayProps, width, WidthProps, minWidth, MinWidthProps, border, BorderProps } from 'styled-system';
 import { fontWeights, space } from '~/style/theme';
+import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
 import { isDefined, isPresent } from 'ts-is-present';
+import { MobileTable } from '~/components/tables/mobile-table';
 import { PercentageBar } from '~/components/percentage-bar';
+import { PercentageDataPoint } from '~/components/tables/components/percentage-data';
 import { SiteText } from '~/locale';
 import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { WidePercentage } from '../vaccine/components/wide-percentage';
 import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
-import { MobileTable } from '~/components/tables/mobile-table';
-import { PercentageDataPoint } from '~/components/tables/components/percentage-data';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 
 interface BehaviorTableTileProps {
   title: string;
@@ -36,27 +37,18 @@ const trendColumnWidth = 125;
 export function BehaviorTableTile({ title, description, value, annotation, setCurrentId, scrollRef, text }: BehaviorTableTileProps) {
   const breakpoints = useBreakpoints(true);
   const behaviorsTableData = useBehaviorTableData(value as NlBehaviorValue);
-  const percentageData: PercentageDataPoint[][] = behaviorsTableData.map(behavior => {
-    return [
-      {
-        title: 'Coronaregel volgen',
-        trendDirection: behavior.complianceTrend,
-        percentage: {
-          color: colors.blue6,
-          value: behavior.compliancePercentage
-        }
-      },
-      {
-        title: 'Coronaregel steunen',
-        trendDirection: behavior.supportTrend,
-        percentage: {
-          color: colors.yellow3,
-          value: behavior.supportPercentage
-        }
-      }
-    ] 
-  });
-
+  const titles = { first: 'Coronaregel volgen', second: 'Coronaregel steunen' };
+  const colorValues = { first: colors.blue6, second: colors.yellow3 };
+  const percentageKeys = { 
+    first: { propertyKey: 'compliancePercentage', shouldFormat: false },
+    second: { propertyKey: 'supportPercentage', shouldFormat: false }
+  }
+  const trendDirectionKeys = {
+    first: { propertyKey: 'complianceTrend' },
+    second: { propertyKey: 'supportTrend' }
+  }
+  const percentageData: PercentageDataPoint[][] = getPercentageData(behaviorsTableData, titles, colorValues, percentageKeys, trendDirectionKeys);
+  
   const anchorButtonClickHandler = (id: BehaviorIdentifier, scrollRef: { current: HTMLDivElement | null }) => {
     scrollIntoView(scrollRef.current as Element);
     setCurrentId(id);
@@ -154,6 +146,7 @@ interface PercentageBarWithoutNumberProps {
   marginBottom?: string;
 }
 
+// TODO:AP - Can be deleted after desktop-table is implemented
 function PercentageBarWithoutNumber({ percentage, color, marginBottom }: PercentageBarWithoutNumberProps) {
   return (
     <Box display="flex" alignItems="center" spacingHorizontal={2} marginBottom={marginBottom}>
@@ -192,6 +185,7 @@ function useBehaviorTableData(value: NlBehaviorValue) {
   }, [value, behaviorLookupKeys]);
 }
 
+// TODO:AP - All of the styled components could be deleted after implementing desktop table - see shared-styled-components
 const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;

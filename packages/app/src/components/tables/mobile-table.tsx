@@ -2,10 +2,10 @@ import { AgeGroup } from '~/domain/vaccine/components/age-group';
 import { BehaviorAnchor, Cell, HeaderCell, Row, Table } from './components/shared-styled-components';
 import { BehaviorIcon } from '~/domain/behavior/components/behavior-icon';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
+import { BoldText } from '~/components/typography';
 import { Box } from '~/components/base';
 import { formatAgeGroupString } from '~/utils/format-age-group-string';
 import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-string';
-import { BoldText } from '~/components/typography';
 import { NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { PercentageData, PercentageDataPoint } from './components/percentage-data';
 import { SiteText } from '~/locale';
@@ -19,7 +19,7 @@ type ScrollRef = { current: HTMLDivElement | null };
 interface MobileTableProps {
   headerText: string;
   // tableData: NlBehaviorValue | VrBehaviorArchived_20221019Value;
-  tableData: any[];
+  tableData: any[]; // TODO:AP - figure out how to properly type this.
   percentageData: PercentageData;
   hasAgeGroups?: boolean;
   isBehaviourTable?: boolean;
@@ -37,7 +37,7 @@ export const MobileTable = ({ tableData, headerText, hasAgeGroups, isBehaviourTa
       <Table>
           <thead>
             <Row>
-              <HeaderCell width="100%">{headerText}</HeaderCell>
+              <HeaderCell width="100%">{headerText} - Mobile table</HeaderCell>
             </Row>
           </thead>
 

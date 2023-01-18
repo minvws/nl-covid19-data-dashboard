@@ -1,15 +1,16 @@
-import {
-  assert,
-  NlVaccineCoveragePerAgeGroupArchived_20220908Value,
-  VrVaccineCoveragePerAgeGroupArchived_20220908Value,
-  GmVaccineCoveragePerAgeGroupArchived_20220908Value,
-} from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
+import { COLOR_FULLY_BOOSTERED, COLOR_FULLY_VACCINATED } from '../common';
+import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { getSortingOrder } from '../logic/get-sorting-order';
 import { MetadataProps } from '~/components/metadata';
-import { NarrowCoverageTable } from './components/narrow-coverage-table';
-import { WideCoverageTable } from './components/wide-coverage-table';
+import { MobileTable } from '~/components/tables/mobile-table';
+import { NlVaccineCoveragePerAgeGroupArchived_20220908Value, VrVaccineCoveragePerAgeGroupArchived_20220908Value, GmVaccineCoveragePerAgeGroupArchived_20220908Value } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIntl } from '~/intl';
+import { WideCoverageTable } from './components/wide-coverage-table';
+import { PercentageDataPoint } from '~/components/tables/components/percentage-data';
+
 interface BoosterCoveragePerAgeGroupProps {
   title: string;
   description: string;
@@ -22,37 +23,30 @@ interface BoosterCoveragePerAgeGroupProps {
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
-export function BoosterShotCoveragePerAgeGroup({
-  title,
-  description,
-  metadata,
-  values,
-  sortingOrder,
-  text,
-}: BoosterCoveragePerAgeGroupProps) {
+export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, values, sortingOrder, text}: BoosterCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
-
-  const getSortingOrder = (ageGroup: string) => {
-    const index = sortingOrder.findIndex((x) => x === ageGroup);
-
-    assert(
-      index >= 0,
-      `[${BoosterShotCoveragePerAgeGroup.name}] No sorting order defined for age group ${ageGroup}`
-    );
-
-    return index;
+  const { formatPercentage } = useIntl();
+  const componentName = BoosterShotCoveragePerAgeGroup.name;
+  const sortedValues = values.sort((a, b) => getSortingOrder(a.age_group_range, sortingOrder, componentName) - getSortingOrder(b.age_group_range, sortingOrder, componentName));
+  const titles = { first: text.vaccination_coverage.headers.fully_vaccinated, second: text.archived.vaccination_coverage.campaign_headers.booster_shot };
+  const colors = { first: COLOR_FULLY_VACCINATED, second: COLOR_FULLY_BOOSTERED};
+  const percentageKeys = {
+    first: { propertyKey: 'fully_vaccinated_percentage', shouldFormat: true},
+    second: { propertyKey: 'booster_shot_percentage', shouldFormat: true}
   };
+  const percentageData: PercentageDataPoint[][] = getPercentageData(sortedValues, titles, colors, percentageKeys, undefined, text.vaccination_coverage.no_data, formatPercentage);
 
-  const sortedValues = values.sort(
-    (a, b) =>
-      getSortingOrder(a.age_group_range) - getSortingOrder(b.age_group_range)
-  );
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
-      {breakpoints.md ? (
+      {breakpoints.lg ? (
         <WideCoverageTable values={sortedValues} text={text} />
       ) : (
-        <NarrowCoverageTable values={sortedValues} text={text} />
+        <MobileTable 
+          headerText={text.vaccination_coverage.headers.agegroup}
+          tableData={sortedValues}
+          percentageData={percentageData}
+          hasAgeGroups
+        />
       )}
     </ChartTile>
   );
