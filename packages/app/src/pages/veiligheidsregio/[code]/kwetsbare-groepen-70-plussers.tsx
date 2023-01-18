@@ -1,15 +1,8 @@
 import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { Coronavirus, Location, Verpleeghuis } from '@corona-dashboard/icons';
+import { Coronavirus, Location, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { ChartTile } from '~/components/chart-tile';
-import { Divider } from '~/components/divider';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Markdown, ChartTile, Divider, KpiTile, KpiValue, PageInformationBlock, TwoKpiSection, TimeSeriesChart, TileList } from '~/components';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -39,7 +32,14 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectVrData('difference.nursing_home__deceased_daily', 'difference.nursing_home__infected_locations_total', 'difference.nursing_home__newly_infected_people', 'nursing_home'),
+  selectVrData(
+    'difference.nursing_home__deceased_daily',
+    'difference.vulnerable_nursing_home__infected_locations_total',
+    'difference.nursing_home__newly_infected_people',
+    'difference.vulnerable_groups__positive_tested',
+    'difference.vulnerable_groups__hospital_admissions',
+    'vulnerable_nursing_home'
+  ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -99,7 +99,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             title={replaceVariablesInText(textVr.positief_geteste_personen.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Verpleeghuis aria-hidden="true" />}
+            icon={<VulnerableGroupsIcon aria-hidden="true" />}
             description={replaceVariablesInText(textVr.positief_geteste_personen.pagina_toelichting, {
               safetyRegion: vrName,
             })}
@@ -114,6 +114,8 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             vrNameOrGmName={vrName}
             warning={textVr.positief_geteste_personen.warning}
           />
+
+          {textShared.osiris_archiving_notification && textShared.osiris_archiving_notification !== '' && <Markdown content={`> > ${textShared.osiris_archiving_notification}`} />}
 
           <TwoKpiSection>
             <KpiTile
