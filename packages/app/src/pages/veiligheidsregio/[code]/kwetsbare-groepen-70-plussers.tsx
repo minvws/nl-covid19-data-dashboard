@@ -3,49 +3,43 @@ import { useState } from 'react';
 import { Coronavirus, Location, Verpleeghuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
-import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { Languages, SiteText } from '~/locale';
 import { useIntl } from '~/intl';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectVrData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['nursing_home'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textNl: siteText.pages.nursing_home_page.nl,
+  textVr: siteText.pages.nursing_home_page.vr,
   textShared: siteText.pages.nursing_home_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
+export { getStaticPaths } from '~/static-paths/vr';
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('difference.nursing_home__infected_locations_total', 'difference.nursing_home__newly_infected_people', 'nursing_home'),
-  createGetChoroplethData({
-    vr: ({ nursing_home }) => ({ nursing_home }),
-  }),
+  selectVrData('difference.nursing_home__deceased_daily', 'difference.nursing_home__infected_locations_total', 'difference.nursing_home__newly_infected_people', 'nursing_home'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -54,7 +48,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('nursing_home_page')},
-      "elements": ${getElementsQuery('nl', ['nursing_home'], locale)}
+      "elements": ${getElementsQuery('vr', ['nursing_home'], locale)}
      }`;
     })(context);
 
@@ -68,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedVrData: data, vrName, lastGenerated, content } = props;
 
   const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -76,55 +70,63 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
 
   const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const nursinghomeDataLastValue = data.nursing_home.last_value;
+  const { commonTexts } = useIntl();
+
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+
+  const nursinghomeLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(data.nursing_home.values, 7);
 
-  const { commonTexts, formatNumber } = useIntl();
-  const reverseRouter = useReverseRouter();
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-  const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
-  const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
-
   const metadata = {
-    ...metadataTexts,
-    title: infectedLocationsText.metadata.title,
-    description: infectedLocationsText.metadata.description,
+    ...commonTexts.veiligheidsregio_index.metadata,
+    title: replaceVariablesInText(textVr.besmette_locaties.metadata.title, {
+      safetyRegionName: vrName,
+    }),
+    description: replaceVariablesInText(textVr.besmette_locaties.metadata.description, {
+      safetyRegionName: vrName,
+    }),
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NlLayout>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
             screenReaderCategory={commonTexts.sidebar.metrics.nursing_home_care.title}
-            title={positiveTestedPeopleText.titel}
+            title={replaceVariablesInText(textVr.positief_geteste_personen.titel, {
+              safetyRegion: vrName,
+            })}
             icon={<Verpleeghuis aria-hidden="true" />}
-            description={<Markdown content={positiveTestedPeopleText.pagina_toelichting} />}
+            description={replaceVariablesInText(textVr.positief_geteste_personen.pagina_toelichting, {
+              safetyRegion: vrName,
+            })}
             metadata={{
-              datumsText: positiveTestedPeopleText.datums,
-              dateOrRange: nursinghomeDataLastValue.date_unix,
+              datumsText: textVr.positief_geteste_personen.datums,
+              dateOrRange: nursinghomeLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [positiveTestedPeopleText.bronnen.rivm],
+              dataSources: [textVr.positief_geteste_personen.bronnen.rivm],
             }}
-            referenceLink={positiveTestedPeopleText.reference.href}
+            referenceLink={textVr.positief_geteste_personen.reference.href}
             articles={content.articles}
+            vrNameOrGmName={vrName}
+            warning={textVr.positief_geteste_personen.warning}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={positiveTestedPeopleText.barscale_titel}
-              description={positiveTestedPeopleText.extra_uitleg}
+              title={textVr.positief_geteste_personen.barscale_titel}
+              description={textVr.positief_geteste_personen.extra_uitleg}
               metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: positiveTestedPeopleText.bronnen.rivm,
+                date: nursinghomeLastValue.date_unix,
+                source: textVr.positief_geteste_personen.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="newly_infected_people"
-                absolute={nursinghomeDataLastValue.newly_infected_people}
+                absolute={nursinghomeLastValue.newly_infected_people}
                 difference={data.difference.nursing_home__newly_infected_people}
                 isAmount
               />
@@ -132,10 +134,10 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
-            title={positiveTestedPeopleText.linechart_titel}
-            description={positiveTestedPeopleText.linechart_description}
+            metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
+            title={textVr.positief_geteste_personen.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
+            description={textVr.positief_geteste_personen.linechart_description}
             onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
@@ -149,15 +151,15 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   type: 'line',
                   metricProperty: 'newly_infected_people_moving_average',
                   color: colors.primary,
-                  label: positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
-                  shortLabel: positiveTestedPeopleText.tooltip_labels.newly_infected_people_moving_average,
+                  label: textVr.positief_geteste_personen.line_chart_legend_trend_moving_average_label,
+                  shortLabel: textVr.positief_geteste_personen.tooltip_labels.newly_infected_people_moving_average,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'newly_infected_people',
                   color: colors.primary,
-                  label: positiveTestedPeopleText.line_chart_legend_trend_label,
-                  shortLabel: positiveTestedPeopleText.tooltip_labels.newly_infected_people,
+                  label: textVr.positief_geteste_personen.line_chart_legend_trend_label,
+                  shortLabel: textVr.positief_geteste_personen.tooltip_labels.newly_infected_people,
                 },
               ]}
               dataOptions={{
@@ -165,8 +167,8 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: underReportedDateStart,
                     end: Infinity,
-                    label: positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-                    shortLabel: positiveTestedPeopleText.tooltip_labels.inaccurate,
+                    label: textVr.positief_geteste_personen.line_chart_legend_inaccurate_label,
+                    shortLabel: textVr.positief_geteste_personen.tooltip_labels.inaccurate,
                     cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
                   },
                 ],
@@ -179,85 +181,54 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
 
           <PageInformationBlock
             id="besmette-locaties"
-            title={infectedLocationsText.titel}
-            icon={<Location />}
-            description={infectedLocationsText.pagina_toelichting}
+            title={replaceVariablesInText(textVr.besmette_locaties.titel, {
+              safetyRegion: vrName,
+            })}
+            icon={<Location aria-hidden="true" />}
+            description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
-              datumsText: infectedLocationsText.datums,
-              dateOrRange: nursinghomeDataLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
-              dataSources: [infectedLocationsText.bronnen.rivm],
+              datumsText: textVr.besmette_locaties.datums,
+              dateOrRange: nursinghomeLastValue.date_unix,
+              dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+              dataSources: [textVr.besmette_locaties.bronnen.rivm],
             }}
-            referenceLink={infectedLocationsText.reference.href}
+            referenceLink={textVr.besmette_locaties.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={infectedLocationsText.kpi_titel}
+              title={textVr.besmette_locaties.kpi_titel}
               metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
+                date: nursinghomeLastValue.date_unix,
+                source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="infected_locations_total"
-                absolute={nursinghomeDataLastValue.infected_locations_total}
-                percentage={nursinghomeDataLastValue.infected_locations_percentage}
+                absolute={nursinghomeLastValue.infected_locations_total}
+                percentage={nursinghomeLastValue.infected_locations_percentage}
                 difference={data.difference.nursing_home__infected_locations_total}
                 isAmount
               />
-              <Text>{infectedLocationsText.kpi_toelichting}</Text>
+              <Text>{textVr.besmette_locaties.kpi_toelichting}</Text>
             </KpiTile>
-
             <KpiTile
-              title={infectedLocationsText.barscale_titel}
+              title={textVr.besmette_locaties.barscale_titel}
               metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
+                date: nursinghomeLastValue.date_unix,
+                source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_locations" absolute={nursinghomeDataLastValue.newly_infected_locations} />
-              <Text>{infectedLocationsText.barscale_toelichting}</Text>
+              <KpiValue data-cy="newly_infected_locations" absolute={nursinghomeLastValue.newly_infected_locations} />
+              <Text>{textVr.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
 
-          <ChoroplethTile
-            title={infectedLocationsText.map_titel}
-            description={infectedLocationsText.map_toelichting}
-            metadata={{
-              date: nursinghomeDataLastValue.date_unix,
-              source: infectedLocationsText.bronnen.rivm,
-            }}
-            legend={{
-              thresholds: thresholds.vr.infected_locations_percentage,
-              title: infectedLocationsText.chloropleth_legenda.titel,
-            }}
-          >
-            <DynamicChoropleth
-              map="vr"
-              accessibility={{
-                key: 'nursing_home_infected_people_choropleth',
-              }}
-              data={choropleth.vr.nursing_home}
-              dataConfig={{
-                metricName: 'nursing_home',
-                metricProperty: 'infected_locations_percentage',
-                dataFormatters: {
-                  infected_locations_percentage: formatNumber,
-                },
-              }}
-              dataOptions={{
-                isPercentage: true,
-                getLink: reverseRouter.vr.verpleeghuiszorg,
-              }}
-            />
-          </ChoroplethTile>
-
           <ChartTile
-            metadata={{ source: infectedLocationsText.bronnen.rivm }}
-            title={infectedLocationsText.linechart_titel}
+            metadata={{ source: textVr.besmette_locaties.bronnen.rivm }}
+            title={textVr.besmette_locaties.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
-            description={infectedLocationsText.linechart_description}
+            description={textVr.besmette_locaties.linechart_description}
             onSelectTimeframe={setNursingHomeInfectedLocationsTimeframe}
           >
             <TimeSeriesChart
@@ -268,13 +239,12 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               timeframe={nursingHomeInfectedLocationsTimeframe}
               seriesConfig={[
                 {
-                  type: 'line',
+                  type: 'area',
                   metricProperty: 'infected_locations_total',
                   label: textShared.verpleeghuis_besmette_locaties.linechart_tooltip_label,
                   color: colors.primary,
                 },
               ]}
-              forceLegend
             />
           </ChartTile>
 
@@ -282,36 +252,38 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
 
           <PageInformationBlock
             id="sterfte"
-            title={textNl.titel}
-            icon={<Coronavirus />}
-            description={textNl.pagina_toelichting}
+            title={replaceVariablesInText(textVr.titel, {
+              safetyRegion: vrName,
+            })}
+            icon={<Coronavirus aria-hidden="true" />}
+            description={textVr.pagina_toelichting}
             metadata={{
-              datumsText: textNl.datums,
-              dateOrRange: nursinghomeDataLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
-              dataSources: [textNl.bronnen.rivm],
+              datumsText: textVr.datums,
+              dateOrRange: nursinghomeLastValue.date_unix,
+              dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+              dataSources: [textVr.bronnen.rivm],
             }}
-            referenceLink={textNl.reference.href}
+            referenceLink={textVr.reference.href}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={textNl.barscale_titel}
-              description={textNl.extra_uitleg}
+              title={textVr.barscale_titel}
+              description={textVr.extra_uitleg}
               metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: textNl.bronnen.rivm,
+                date: nursinghomeLastValue.date_unix,
+                source: textVr.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="deceased_daily" absolute={nursinghomeDataLastValue.deceased_daily} />
+              <KpiValue data-cy="deceased_daily" absolute={nursinghomeLastValue.deceased_daily} difference={data.difference.nursing_home__deceased_daily} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
           <ChartTile
-            metadata={{ source: textNl.bronnen.rivm }}
-            title={textNl.linechart_titel}
+            metadata={{ source: textVr.bronnen.rivm }}
+            title={textVr.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
-            description={textNl.linechart_description}
+            description={textVr.linechart_description}
             onSelectTimeframe={setNursingHomeDeceasedTimeframe}
           >
             <TimeSeriesChart
@@ -324,15 +296,15 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'deceased_daily_moving_average',
-                  label: textNl.line_chart_legend_trend_moving_average_label,
-                  shortLabel: textNl.tooltip_labels.deceased_daily_moving_average,
+                  label: textVr.line_chart_legend_trend_moving_average_label,
+                  shortLabel: textVr.tooltip_labels.deceased_daily_moving_average,
                   color: colors.primary,
                 },
                 {
                   type: 'bar',
                   metricProperty: 'deceased_daily',
-                  label: textNl.line_chart_legend_trend_label,
-                  shortLabel: textNl.tooltip_labels.deceased_daily,
+                  label: textVr.line_chart_legend_trend_label,
+                  shortLabel: textVr.tooltip_labels.deceased_daily,
                   color: colors.primary,
                 },
               ]}
@@ -341,8 +313,8 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                   {
                     start: underReportedDateStart,
                     end: Infinity,
-                    label: textNl.line_chart_legend_inaccurate_label,
-                    shortLabel: textNl.tooltip_labels.inaccurate,
+                    label: textVr.line_chart_legend_inaccurate_label,
+                    shortLabel: textVr.tooltip_labels.inaccurate,
                     cutValuesForMetricProperties: ['deceased_daily_moving_average'],
                   },
                 ],
@@ -351,7 +323,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             />
           </ChartTile>
         </TileList>
-      </NlLayout>
+      </VrLayout>
     </Layout>
   );
 }
