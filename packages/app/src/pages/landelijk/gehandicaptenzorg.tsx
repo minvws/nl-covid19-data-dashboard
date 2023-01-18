@@ -9,8 +9,7 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
+import { PageInformationBlock, TileList, WarningTile } from '~/components';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -36,6 +35,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
     screenReaderCategory: siteText.common.sidebar.metrics.disabled_care.title,
   },
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textShared: siteText.pages.disability_care_page.shared,
   textNl: siteText.pages.disability_care_page.nl,
 });
 
@@ -88,7 +88,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { caterogyTexts, metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { caterogyTexts, metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -103,7 +103,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts.category}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={caterogyTexts.screenReaderCategory}
             title={textNl.positief_geteste_personen.titel}
             icon={<Gehandicaptenzorg aria-hidden="true" />}
@@ -117,6 +117,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.positief_geteste_personen.reference.href}
             articles={content.articles}
           />
+
+          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -135,7 +137,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               />
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm }}
             title={textNl.positief_geteste_personen.linechart_titel}
@@ -178,9 +179,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChartTile>
-
           <Divider />
-
           <PageInformationBlock
             id="besmette-locaties"
             title={textNl.besmette_locaties.titel}
@@ -194,7 +193,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             }}
             referenceLink={textNl.besmette_locaties.reference.href}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={textNl.besmette_locaties.kpi_titel}
@@ -224,7 +222,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               <Text>{textNl.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChoroplethTile
             title={textNl.besmette_locaties.map_titel}
             description={textNl.besmette_locaties.map_toelichting}
@@ -255,7 +252,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChoroplethTile>
-
           <ChartTile
             title={textNl.besmette_locaties.charts.linechart_title}
             metadata={{
@@ -283,9 +279,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               forceLegend
             />
           </ChartTile>
-
           <Divider />
-
           <PageInformationBlock
             id="sterfte"
             title={textNl.oversterfte.titel}
@@ -299,7 +293,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             }}
             referenceLink={textNl.oversterfte.reference.href}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={textNl.oversterfte.barscale_titel}
@@ -312,7 +305,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               <KpiValue data-cy="deceased_daily" absolute={lastValue.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             metadata={{ source: textNl.oversterfte.bronnen.rivm }}
             title={textNl.oversterfte.linechart_titel}

@@ -5,8 +5,7 @@ import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
+import { PageInformationBlock, TileList, WarningTile } from '~/components';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -26,6 +25,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textVr: siteText.pages.disability_care_page.vr,
+  textShared: siteText.pages.disability_care_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -116,6 +116,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             vrNameOrGmName={vrName}
             warning={textVr.besmette_locaties.warning}
           />
+
+          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile

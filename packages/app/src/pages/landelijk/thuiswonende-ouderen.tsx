@@ -10,8 +10,7 @@ import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
+import { PageInformationBlock, TileList, WarningTile } from '~/components';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -110,6 +109,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.section_positive_tested.reference.href}
             articles={content.articles}
           />
+
+          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
