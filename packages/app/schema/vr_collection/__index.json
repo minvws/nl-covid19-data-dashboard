@@ -9,7 +9,7 @@
     "name",
     "code",
     "tested_overall",
-    "nursing_home",
+    "vulnerable_nursing_home",
     "behavior_archived_20221019",
     "hospital_nice",
     "hospital_nice_choropleth",
@@ -55,12 +55,12 @@
         "$ref": "tested_overall.json"
       }
     },
-    "nursing_home": {
+    "vulnerable_nursing_home": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "nursing_home.json"
+        "$ref": "vulnerable_nursing_home.json"
       }
     },
     "sewer": {

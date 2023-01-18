@@ -39,13 +39,19 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
+    "vulnerable_nursing_home__infected_locations_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "nursing_home__newly_infected_people": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__infected_locations_total": {
+    "nursing_home__deceased_daily": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__deceased_daily": {
+    "vulnerable_tested_per_age_group": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
     },
     "reproduction__index_average": {
@@ -82,8 +88,10 @@
     "doctor__covid_symptoms",
     "sewer__average",
     "nursing_home__newly_infected_people",
-    "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
+    "vulnerable_nursing_home__infected_locations_total",
+    "vulnerable_tested_per_age_group",
+    "vulnerable_hospital_admissions",
     "corona_melder_app_warning__count",
     "disability_care__newly_infected_people",
     "disability_care__infected_locations_total",

@@ -21,10 +21,10 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__newly_infected_people": {
+    "vulnerable_nursing_home__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__infected_locations_total": {
+    "nursing_home__newly_infected_people": {
       "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__deceased_daily": {
@@ -51,8 +51,8 @@
     "tested_ggd__infected_percentage_moving_average",
     "sewer__average",
     "nursing_home__newly_infected_people",
-    "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
+    "vulnerable_nursing_home__infected_locations_total",
     "disability_care__newly_infected_people",
     "disability_care__infected_locations_total",
     "elderly_at_home__positive_tested_daily",

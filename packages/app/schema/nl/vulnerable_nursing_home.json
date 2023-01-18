@@ -20,18 +20,6 @@
       "title": "nl_nursing_home_value",
       "type": "object",
       "properties": {
-        "newly_infected_people": {
-          "type": "integer"
-        },
-        "newly_infected_people_moving_average": {
-          "type": ["number", "null"]
-        },
-        "deceased_daily": {
-          "type": "integer"
-        },
-        "deceased_daily_moving_average": {
-          "type": ["number", "null"]
-        },
         "newly_infected_locations": {
           "type": "integer"
         },
@@ -49,10 +37,6 @@
         }
       },
       "required": [
-        "newly_infected_people",
-        "newly_infected_people_moving_average",
-        "deceased_daily",
-        "deceased_daily_moving_average",
         "newly_infected_locations",
         "infected_locations_total",
         "infected_locations_percentage",

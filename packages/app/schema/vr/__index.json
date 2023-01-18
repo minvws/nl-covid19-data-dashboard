@@ -11,7 +11,7 @@
     "hospital_nice",
     "tested_ggd",
     "tested_ggd_archived",
-    "nursing_home",
+    "vulnerable_nursing_home",
     "sewer",
     "sewer_per_installation",
     "difference",
@@ -70,8 +70,8 @@
     "tested_ggd_archived": {
       "$ref": "tested_ggd_archived.json"
     },
-    "nursing_home": {
-      "$ref": "nursing_home.json"
+    "vulnerable_nursing_home": {
+      "$ref": "vulnerable_nursing_home.json"
     },
     "disability_care": {
       "$ref": "disability_care.json"
