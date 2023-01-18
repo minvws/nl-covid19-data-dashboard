@@ -8,7 +8,7 @@ import { Box } from './base';
 import { Markdown } from './markdown';
 import { useIntl } from '~/intl';
 
-type WarningMessageVariant = 'emphasis' | 'default' | 'archived';
+type WarningMessageVariant = 'emphasis' | 'default' | 'informational';
 
 interface WarningMessageProps {
   message: ReactNode;

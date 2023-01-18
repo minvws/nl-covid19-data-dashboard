@@ -6,8 +6,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
+import { PageInformationBlock, TileList, WarningTile } from '~/components';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -28,6 +27,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['elderly_at_home'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
+  textShared: siteText.pages.elderly_at_home_page.shared,
   textVr: siteText.pages.elderly_at_home_page.vr,
 });
 
@@ -112,6 +112,8 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             vrNameOrGmName={vrName}
             warning={textVr.warning}
           />
+
+          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
