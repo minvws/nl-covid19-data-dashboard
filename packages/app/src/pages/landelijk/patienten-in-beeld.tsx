@@ -63,7 +63,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const [selectedAdmissionsPerAgeGroupOverTimeChart, setSelectedAdmissionsPerAgeGroupOverTimeChart] = useState<string>('admissions_per_age_group_over_time_hospital'); // other option is 'admissions_per_age_group_over_time_icu'
+  const [selectedAdmissionsPerAgeGroupOverTimeChart, setSelectedAdmissionsPerAgeGroupOverTimeChart] = useState<string>('admissions_per_age_group_over_time_hospital');
   const [hospitalAdmissionsPerAgeGroupOverTimeTimeframe, setHospitalAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [intensiveCareAdmissionsPerAgeGroupOverTimeTimeframe, setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -78,7 +78,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
     },
   ];
 
-  const [selectedAdmissionsOverTimeChart, setSelectedAdmissionsOverTimeChart] = useState<string>('admissions_over_time_hospital'); // other option is 'admissions_over_time_icu'
+  const [selectedAdmissionsOverTimeChart, setSelectedAdmissionsOverTimeChart] = useState<string>('admissions_over_time_hospital');
   const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [intensiveCareAdmissionsOverTimeTimeframe, setIntensiveCareAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
