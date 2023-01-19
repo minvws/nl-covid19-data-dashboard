@@ -1,6 +1,5 @@
 import { colors, getLastFilledValue } from '@corona-dashboard/common';
 import { Ziektegolf } from '@corona-dashboard/icons';
-import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -73,7 +72,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          {textShared.belangrijk_bericht && !isEmpty(textShared.belangrijk_bericht) && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
+          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <ChartTile metadata={{ source: textNl.bronnen.rivm }} title={textNl.linechart_titel} description={textNl.linechart_description}>
             <TimeSeriesChart
