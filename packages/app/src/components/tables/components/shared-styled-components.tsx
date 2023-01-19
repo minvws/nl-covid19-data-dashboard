@@ -1,12 +1,16 @@
-import { Anchor } from '~/components/typography';
 import { colors } from '@corona-dashboard/common';
-import { DisplayProps, compose, display, WidthProps, width, MinWidthProps, BorderProps, minWidth, border } from 'styled-system';
-import { fontWeights, space } from '~/style/theme';
 import styled from 'styled-components';
+import { border, BorderProps, compose, display, DisplayProps, minWidth, MinWidthProps, width, WidthProps } from 'styled-system';
+import { Anchor } from '~/components/typography';
+import { fontWeights, mediaQueries, space } from '~/style/theme';
 
 export const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
+`;
+
+export const TableHead = styled.thead`
+  border-bottom: 1px solid ${colors.gray2};
 `;
 
 type RowProps = DisplayProps;
@@ -25,18 +29,20 @@ export const HeaderCell = styled.th<HeaderCellProps>`
   padding-bottom: ${space[2]};
   text-align: left;
   vertical-align: middle;
-  ${compose(width)};
-  ${compose(display)};
+  ${compose(display, width)};
+
+  @media ${mediaQueries.lg} {
+    padding-right: ${space[2]};
+  }
 `;
 
 type CellProps = MinWidthProps & BorderProps;
 
 export const Cell = styled.td<CellProps>`
   border-bottom: 1px solid ${colors.gray2};
-  padding: ${space[3]} ${space[0]};
+  padding-block: ${space[3]};
   vertical-align: middle;
-  ${compose(minWidth)};
-  ${compose(border)};
+  ${compose(border, minWidth)};
 `;
 
 export const BehaviorAnchor = styled(Anchor)`

@@ -1,5 +1,5 @@
 import { createFormatting } from "@corona-dashboard/common";
-import { PercentageDataPoint } from "../components/percentage-data";
+import { PercentageDataPoint } from "../types";
 
 type percentageParam = { propertyKey: string, shouldFormat?: boolean };
 type percentageParams = { first: percentageParam, second: percentageParam };

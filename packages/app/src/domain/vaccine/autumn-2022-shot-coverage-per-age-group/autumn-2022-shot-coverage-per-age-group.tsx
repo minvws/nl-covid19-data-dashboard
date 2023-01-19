@@ -3,13 +3,12 @@ import { COLOR_FULLY_VACCINATED, COLOR_AUTUMN_2022_SHOT } from '~/domain/vaccine
 import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
 import { getSortingOrder } from '../logic/get-sorting-order';
 import { MetadataProps } from '~/components/metadata';
-import { MobileTable } from '~/components/tables/mobile-table';
+import { NarrowTable } from '~/components/tables/narrow-table';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIntl } from '~/intl';
 import { WideCoverageTable } from './components/wide-coverage-table';
-import { PercentageDataPoint } from '~/components/tables/components/percentage-data';
 
 interface Autumn2022ShotCoveragePerAgeGroupProps {
   title: string;
@@ -31,14 +30,14 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
     first: { propertyKey: 'autumn_2022_vaccinated_percentage', shouldFormat: true },
     second: { propertyKey: 'fully_vaccinated_percentage', shouldFormat: true }
   }
-  const percentageData: PercentageDataPoint[][] = getPercentageData(sortedValues, titles, colors, percentageKeys, undefined, text.no_data, formatPercentage);
+  const percentageData = getPercentageData(sortedValues, titles, colors, percentageKeys, undefined, text.no_data, formatPercentage);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.lg ? (
         <WideCoverageTable values={sortedValues} text={text} />
       ) : (
-        <MobileTable 
+        <NarrowTable 
           headerText={text.headers.agegroup}
           tableData={sortedValues}
           percentageData={percentageData}

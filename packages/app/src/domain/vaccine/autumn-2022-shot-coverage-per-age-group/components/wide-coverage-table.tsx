@@ -17,6 +17,7 @@ interface WideCoverageTableProps {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 
+// TODO:AP - Delete before merging
 export const WideCoverageTable = ({ values, text }: WideCoverageTableProps) => {
   const { commonTexts, formatPercentage } = useIntl();
 
