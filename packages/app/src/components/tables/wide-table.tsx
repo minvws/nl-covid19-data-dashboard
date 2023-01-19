@@ -13,9 +13,9 @@ import { BehaviorAnchor, Cell, HeaderCell, Table, TableHead } from './components
 import { CommonTableProps } from './types';
 
 export const tableColumnWidths = {
-  labelColumn: '300px',
-  percentageColumn: '150px',
-  percentageBarColumn: '20%'
+  labelColumn: '30%',
+  percentageColumn: '20%',
+  percentageBarColumn: '30%'
 }
 
 interface WideTableProps extends CommonTableProps {
@@ -32,9 +32,9 @@ export const WideTable = ({ tableData, headerText, hasAgeGroups, hasIcon, percen
       <Table>
         <TableHead>
           <Row>
-            <HeaderCell width={tableColumnWidths.labelColumn}>{headerText.firstColumn} - Desktop table</HeaderCell>
-            <HeaderCell width={tableColumnWidths.percentageColumn}>{headerText.secondColumn}</HeaderCell>
-            <HeaderCell width={tableColumnWidths.percentageColumn}>{headerText.thirdColumn}</HeaderCell>
+            <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>{headerText.firstColumn} - Desktop table</HeaderCell>
+            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>{headerText.secondColumn}</HeaderCell>
+            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>{headerText.thirdColumn}</HeaderCell>
             <HeaderCell width={tableColumnWidths.percentageBarColumn}>{headerText.fourthColumn}</HeaderCell>
           </Row>
         </TableHead>

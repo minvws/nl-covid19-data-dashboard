@@ -45,6 +45,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
     scrollIntoView(scrollRef.current as Element);
     setCurrentId(id);
   };
+  const onClickConfig = { handler: anchorButtonClickHandler, scrollRef: scrollRef }
 
   return (
     <ChartTile title={title} description={description}>
@@ -58,10 +59,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}
-          onClickConfig={{
-            handler: anchorButtonClickHandler,
-            scrollRef: scrollRef
-          }}
+          onClickConfig={onClickConfig}
           hasIcon
         />
       ) : (
@@ -69,10 +67,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
           tableData={behaviorsTableData}
           percentageData={percentageData}
           headerText={text.basisregels.header_basisregel}
-          onClickConfig={{
-            handler: anchorButtonClickHandler,
-            scrollRef: scrollRef
-          }}
+          onClickConfig={onClickConfig}
           hasIcon
         />
       )}

@@ -1,14 +1,14 @@
-import { ARCHIVED_COLORS } from '../common';
-import { ChartTile } from '~/components/chart-tile';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
-import { getSortingOrder } from '../logic/get-sorting-order';
 import { GmVaccineCoveragePerAgeGroupArchivedValue, NlVaccineCoveragePerAgeGroupArchivedValue, VrVaccineCoveragePerAgeGroupArchivedValue } from '@corona-dashboard/common';
+import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
+import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
+import { WideTable } from '~/components/tables/wide-table';
+import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useIntl } from '~/intl';
-import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
+import { ARCHIVED_COLORS } from '../common';
+import { getSortingOrder } from '../logic/get-sorting-order';
 
 interface VaccineCoveragePerAgeGroupProps {
   title: string;
@@ -38,7 +38,17 @@ export function VaccineCoveragePerAgeGroup({ title, description, metadata, value
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.lg ? (
-        <WideCoverageTable values={sortedValues} text={text} />
+        <WideTable 
+          headerText={{
+            firstColumn: text.vaccination_coverage.headers.agegroup,
+            secondColumn: text.archived.vaccination_coverage.campaign_headers.first_shot,
+            thirdColumn: text.archived.vaccination_coverage.campaign_headers.coverage,
+            fourthColumn: ''
+          }}
+          tableData={sortedValues}
+          percentageData={percentageData}
+          hasAgeGroups
+        />
       ) : (
         <NarrowTable 
           headerText={text.vaccination_coverage.headers.agegroup}

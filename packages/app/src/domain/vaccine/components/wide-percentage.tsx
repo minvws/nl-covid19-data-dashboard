@@ -1,7 +1,7 @@
-import css from '@styled-system/css';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { asResponsiveArray } from '~/style/utils';
+import { fontSizes, lineHeights, space } from '~/style/theme';
 
 interface PercentageWideNumberProps {
   value: string | React.ReactNode;
@@ -12,18 +12,23 @@ interface PercentageWideNumberProps {
 // TODO: AP: Move to tables directory
 export function WidePercentage({ value, color, justifyContent }: PercentageWideNumberProps) {
   return (
-    <InlineText
-      variant="body2"
-      textAlign="right"
-      css={css({
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent,
-        pr: asResponsiveArray({ _: 3, xl: 4 }),
-      })}
-    >
-      <Box width={10} height={10} backgroundColor={color} borderRadius="50%" mr={2} />
-      {value}
-    </InlineText>
+    <StyledInlineText justifyContent={justifyContent}>
+      <Box minWidth="10px" width="10px" height="10px" backgroundColor={color} borderRadius="50%" mr={2} />
+      <span>{value}</span>
+    </StyledInlineText>
   );
 }
+
+interface StyledInlineTextProps {
+  justifyContent: string
+}
+
+const StyledInlineText = styled(InlineText)<StyledInlineTextProps>`
+  align-items: center;
+  display: flex;
+  font-size: ${fontSizes[2]};
+  justify-content: ${({justifyContent}) => justifyContent};
+  line-height: ${lineHeights[2]};
+  padding-right: ${space[4]};
+  text-align: left;
+`

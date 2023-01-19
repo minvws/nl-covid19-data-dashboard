@@ -1,14 +1,14 @@
-import { ChartTile } from '~/components/chart-tile';
-import { COLOR_FULLY_VACCINATED, COLOR_AUTUMN_2022_SHOT } from '~/domain/vaccine/common';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
-import { getSortingOrder } from '../logic/get-sorting-order';
-import { MetadataProps } from '~/components/metadata';
-import { NarrowTable } from '~/components/tables/narrow-table';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import { ChartTile } from '~/components/chart-tile';
+import { MetadataProps } from '~/components/metadata';
+import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { NarrowTable } from '~/components/tables/narrow-table';
+import { WideTable } from '~/components/tables/wide-table';
+import { COLOR_AUTUMN_2022_SHOT, COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
+import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useIntl } from '~/intl';
-import { WideCoverageTable } from './components/wide-coverage-table';
+import { getSortingOrder } from '../logic/get-sorting-order';
 
 interface Autumn2022ShotCoveragePerAgeGroupProps {
   title: string;
@@ -35,7 +35,17 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.lg ? (
-        <WideCoverageTable values={sortedValues} text={text} />
+        <WideTable 
+          headerText={{
+            firstColumn: text.headers.agegroup,
+            secondColumn: text.headers.autumn_2022_shot,
+            thirdColumn: text.headers.fully_vaccinated,
+            fourthColumn: ''
+          }}
+          tableData={sortedValues}
+          percentageData={percentageData}
+          hasAgeGroups
+        />
       ) : (
         <NarrowTable 
           headerText={text.headers.agegroup}

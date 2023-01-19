@@ -18,6 +18,7 @@ interface WideCoverageTable {
   values: NlVaccineCoveragePerAgeGroupArchivedValue[] | VrVaccineCoveragePerAgeGroupArchivedValue[] | GmVaccineCoveragePerAgeGroupArchivedValue[];
 }
 
+// TODO:AP - delete before merging
 export function WideCoverageTable({ values, text }: WideCoverageTable) {
   const { commonTexts, formatPercentage } = useIntl();
   const formatCoveragePercentage = useVaccineCoveragePercentageFormatter();

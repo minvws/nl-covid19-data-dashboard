@@ -21,7 +21,7 @@ export const Row = styled.tr<RowProps>`
   ${compose(display)};
 `;
 
-type HeaderCellProps = WidthProps & DisplayProps;
+type HeaderCellProps = WidthProps & DisplayProps & MinWidthProps;
 
 export const HeaderCell = styled.th<HeaderCellProps>`
   border-bottom: 1px solid ${colors.gray2};
@@ -29,7 +29,7 @@ export const HeaderCell = styled.th<HeaderCellProps>`
   padding-bottom: ${space[2]};
   text-align: left;
   vertical-align: middle;
-  ${compose(display, width)};
+  ${compose(display, width, minWidth)};
 
   @media ${mediaQueries.lg} {
     padding-right: ${space[2]};

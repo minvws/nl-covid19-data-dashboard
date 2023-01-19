@@ -29,7 +29,7 @@ export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) =>
         </Cell>
       ))}
 
-      <Cell border="0">
+      <Cell minWidth={tableColumnWidths.percentageBarColumn} border="0">
         <Box display="flex" flexDirection="column">
           {percentageDataPoints.map((percentageDataPoint, index) => (
             <PercentageBarWithoutNumber 
